@@ -1,0 +1,299 @@
+{
+  "id": 3230,
+  "slug": "cambridge",
+  "name": "Cambridge",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3230/cambridge",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 65,
+      "name": "Structuri de date arborescente",
+      "slug": "structuri-de-date-arborescente",
+      "href": "/?pagina=probleme-lista&tag=65"
+    },
+    {
+      "id": 154,
+      "name": "Arbori de intervale",
+      "slug": "arbori-de-intervale",
+      "href": "/?pagina=probleme-lista&tag=154"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Ajutați-l pe Alex să răspundă corect la cele <code>M</code> întrebări pentru a nu intra panicat la interviu.</p>",
+      "text": "Ajutați-l pe Alex să răspundă corect la cele M întrebări pentru a nu intra panicat la interviu."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie se vor citi de la tastatura <code>N</code> și <code>M</code>, separate prin câte un spațiu. <code>N</code> – numărul de probleme, <code>M</code> – numărul de întrebări.</p><p>Pe următoarele <code>N</code> linii se vor citi de la tastatura <code>T</code><sub><code>i</code></sub> și <code>D</code><sub><code>i</code></sub>, separate prin câte un spațiu. <code>T</code><sub><code>i</code></sub> – timpul necesar lui Alex sa rezolve problema <code>i</code>. <code>D</code><sub><code>i</code></sub> – timpul (de la începerea interviului) după care Takahiro Wong rezolv[ problema <code>i</code>.</p><p>Pe următoarele <code>M</code> linii se vor citi de la tastatură <code>x</code> și <code>y</code>, separate prin câte un spațiu. <code>x</code> – capătul din stânga al intervalului. <code>y</code> – capătul din dreapta al intervalului.</p>",
+      "text": "Pe prima linie se vor citi de la tastatura N și M, separate prin câte un spațiu. N – numărul de probleme, M – numărul de întrebări.Pe următoarele N linii se vor citi de la tastatura Ti și Di, separate prin câte un spațiu. Ti – timpul necesar lui Alex sa rezolve problema i. Di – timpul (de la începerea interviului) după care Takahiro Wong rezolv[ problema i.Pe următoarele M linii se vor citi de la tastatură x și y, separate prin câte un spațiu. x – capătul din stânga al intervalului. y – capătul din dreapta al intervalului."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Se vor afișa pe ecran <code>M</code> linii – răspunsurile la cele <code>M</code> întrebări. Linia cu numărul <code>i</code> va conține răspunsul pentru întrebarea cu numărul <code>i</code>: <code>1</code>, dacă Alex poate găsi o ordine în care să rezolve toate problemele din intervalul <code>[x;y]</code>, astfel încât să termine fiecare problema înaintea lui Takahiro Wong, sau <code>0</code>, altfel.</p>",
+      "text": "Se vor afișa pe ecran M linii – răspunsurile la cele M întrebări. Linia cu numărul i va conține răspunsul pentru întrebarea cu numărul i: 1, dacă Alex poate găsi o ordine în care să rezolve toate problemele din intervalul [x;y], astfel încât să termine fiecare problema înaintea lui Takahiro Wong, sau 0, altfel."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N, M ≤ 100.000</code></li>\n\t<li><code>1 ≤ T</code><sub><code>i</code></sub>, <code>D</code><sub><code>i</code></sub> <code>≤ 1.000.000.000</code></li>\n\t<li>Valorile <code>D</code><sub><code>i</code></sub> <strong>nu sunt</strong> distincte două câte două (o valoarea poate apărea de mai multe ori)</li>\n\t<li>Alex nu poate rezolva două probleme în același timp, însă Takahiro Wong poate (valorile <code>D</code><sub><code>i</code></sub> nu sunt distincte două câte două).</li>\n</ul>",
+      "text": "1 ≤ N, M ≤ 100.000 1 ≤ Ti, Di ≤ 1.000.000.000 Valorile Di nu sunt distincte două câte două (o valoarea poate apărea de mai multe ori) Alex nu poate rezolva două probleme în același timp, însă Takahiro Wong poate (valorile Di nu sunt distincte două câte două)."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><strong>Intrare</strong></p><pre>4 3\n1 10\n14 18\n2 7\n10 12\n3 4\n2 4\n1 3</pre><p><strong>Ieșire</strong></p><pre>0\n0\n1</pre><h3>Explicație</h3><p>Sunt <code>4</code> probleme, numerotate de la <code>1</code> la <code>4</code>:</p><ul>\n\t<li>problema numărul 1: <code>T1 = 1</code>, <code>D1 = 10</code>;</li>\n\t<li>problema numărul 2: <code>T2 = 14</code>, <code>D2 = 18</code>;</li>\n\t<li>problema numărul 3: <code>T3 = 2</code>, <code>D3 = 7</code>;</li>\n\t<li>problema numărul 4: <code>T4 = 10</code>, <code>D4 = 12</code>;</li>\n\t<li>Prima întrebare se referă la intervalul <code>[3,4]</code>:\n  – Dacă rezolvăm problemele în ordinea <code>(3,4)</code> trebuie să avem <code>T3 &lt; D3</code> și <code>T3 + T4 &lt; D4</code>. Observăm că a doua relație este falsă.\n  – Dacă rezolvăm problemele în ordinea <code>(4,3)</code> trebuie să avem <code>T4 &lt; D4</code> și <code>T4 + T3 &lt; D3</code>. Observăm, din nou, că a doua relație este falsă.\n  –  Nu există nicio altă ordine în care putem rezolva problemele, deci răspunsul este <code>0</code>.</li>\n\t<li>A doua întrebare se referă la intervalul <code>[2,4]</code>:\n  – Exista șase modalități de a rezolva problemele: <code>(2, 3, 4)</code>, <code>(2, 4, 3)</code>, <code>(3, 2, 4)</code>, <code>(3, 4, 2)</code>, <code>(4, 2, 3)</code>, <code>(4, 3, 2)</code>.\n  – În niciuna din cele șase modalități nu sunt toate relațiile respectate, deci răspunsul este <code>0</code>.</li>\n\t<li>A treia întrebare se referă la intervalul <code>[1,3]</code>:\n –  Exista șase modalități de a rezolva problemele: <code>(1,2,3)</code>, <code>(1, 3, 2)</code>, <code>(2, 1, 3)</code>, <code>(2, 3, 1)</code>, <code>(3, 1, 2)</code>, <code>(3, 2, 1)</code>.\n –  Dacă rezolvăm problemele în ordinea <code>(1,3,2)</code> trebuie să avem <code>T1 &lt; D1</code>, <code>T1 + T3 &lt; D3</code> și <code>T1 + T3 + T2 &lt; D2</code>. Observăm că toate sunt adevărate.\n  – Deoarece am găsit o ordine de a rezolva problemele, pentru care toate relațiile sunt adevărate, răspunsul este <code>1</code>.</li>\n</ul>",
+      "text": "Intrare4 3 1 10 14 18 2 7 10 12 3 4 2 4 1 3Ieșire0 0 1ExplicațieSunt 4 probleme, numerotate de la 1 la 4: problema numărul 1: T1 = 1, D1 = 10; problema numărul 2: T2 = 14, D2 = 18; problema numărul 3: T3 = 2, D3 = 7; problema numărul 4: T4 = 10, D4 = 12; Prima întrebare se referă la intervalul [3,4]: – Dacă rezolvăm problemele în ordinea (3,4) trebuie să avem T3 < D3 și T3 + T4 < D4. Observăm că a doua relație este falsă. – Dacă rezolvăm problemele în ordinea (4,3) trebuie să avem T4 < D4 și T4 + T3 < D3. Observăm, din nou, că a doua relație este falsă. – Nu există nicio altă ordine în care putem rezolva problemele, deci răspunsul este 0. A doua întrebare se referă la intervalul [2,4]: – Exista șase modalități de a rezolva problemele: (2, 3, 4), (2, 4, 3), (3, 2, 4), (3, 4, 2), (4, 2, 3), (4, 3, 2). – În niciuna din cele șase modalități nu sunt toate relațiile respectate, deci răspunsul este 0. A treia întrebare se referă la intervalul [1,3]: – Exista șase modalități de a rezolva problemele: (1,2,3), (1, 3, 2), (2, 1, 3), (2, 3, 1), (3, 1, 2), (3, 2, 1). – Dacă rezolvăm problemele în ordinea (1,3,2) trebuie să avem T1 < D1, T1 + T3 < D3 și T1 + T3 + T2 < D2. Observăm că toate sunt adevărate. – Deoarece am găsit o ordine de a rezolva problemele, pentru care toate relațiile sunt adevărate, răspunsul este 1."
+    }
+  ],
+  "examples": [
+    {
+      "input": "4 3\n1 10\n14 18\n2 7\n10 12\n3 4\n2 4\n1 3",
+      "output": "0\n0\n1",
+      "explanation": "Sunt 4 probleme, numerotate de la 1 la 4:"
+    }
+  ],
+  "constraints": [
+    "1 ≤ N, M ≤ 100.000",
+    "1 ≤ Ti, Di ≤ 1.000.000.000",
+    "Valorile Di nu sunt distincte două câte două (o valoarea poate apărea de mai multe ori)",
+    "Alex nu poate rezolva două probleme în același timp, însă Takahiro Wong poate (valorile Di nu sunt distincte două câte două)."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qc54c63745d.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "11",
+    "intrare/ieșire": "tastatură / ecran",
+    "limită timp": "1 secunde",
+    "limită memorie": "256 MB / 8 MB",
+    "sursa problemei": "info(1)cup 2018, Runda națională",
+    "autor": "Costin Andrei Oncescu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 1,
+  "memoryLimitMb": 256,
+  "author": "Costin Andrei Oncescu",
+  "sourceAttribution": "info(1)cup 2018, Runda națională",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3230/cambridge"
+}

@@ -1,0 +1,68 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2152"><article id="enunt">
+			<p>În regiunea Ionia a lumii grecești antice, regiune ce corespunde teritoriului actual al Mării Egee, există mai multe insule. Harta mării este reprezentată de o matrice de dimensiuni <code>N•M</code>, având valori de <code>1</code> și <code>0</code>, iar fiecare element din matrice reprezintă o zonă de dimensiune <code>1•1</code> din mare. Liniile matricei sunt numerotate de la <code>1</code> la <code>N</code>, de sus în jos, iar coloanele de la <code>1</code> la <code>M</code>, de la stânga la dreapta. Astfel, colțul din stânga sus al matricei este asociat zonei <code>(1,1)</code>, iar colțul din dreapta jos corespunde zonei <code>(N,M)</code>.</p>
+
+<p>Un element care conține valoarea <code>0</code> reprezintă faptul că în acea zonă se află apă. O insulă este determinată<br>
+de un dreptunghi format în totalitate din valori de <code>1</code>. Se garantează faptul că toate zonele care conțin valoarea <code>1</code><br>
+formează dreptunghiuri valide și că oricare două insule sunt separate de apă.</p>
+
+<h1>Cerința</h1>
+
+<p>Ionienii, fiind oameni practici, doresc construirea unui far-bibliotecă (așezat pe o platformă <code>1•1</code>), într-o zonă acoperită de apă. Poziția platformei va fi aleasă într-o celulă <code>C</code> astfel încât suma distanțelor dintre toate insulele și <code>C</code> să fie minimă. Distanța dintre o celulă <code>C</code> și o insulă este definită ca fiind minimul dintre distanțele Manhattan dintre <code>C</code> și fiecare celulă care aparține insulei (distanța poate trece atât prin alte insule, cât și prin zone acoperite de apă). Distanța Manhattan dintre două celule aflate pe linia <code>x1</code> și coloana <code>y1</code>, respectiv pe linia <code>x2</code> și coloana <code>y2</code>, este definită ca <code>|x1 – x2| + |y1 – y2|</code>, unde <code>|x|</code> reprezintă valoarea absolută a lui <code>x</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>arhipelag.in</code> conține pe prima linie valorile <code>N</code> și <code>M</code>, având semnificația din enunț. Următoarele <code>N</code> linii conțin câte <code>M</code> valori binare, separate de câte un spațiu, reprezentând harta mării.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>arhipelag.out</code> va conține o pereche de numere naturale, reprezentând linia și coloana celulei alese de ionieni pentru construcție. Dacă există mai multe soluții posibile, se va alege cea care are linia minimă. Dacă în continuare există mai multe soluții, se va alege cea care are coloana minimă.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>Pentru teste în valoare de 15 puncte, <code>1 &lt;= N, M &lt;= 50</code></li>
+	<li>Pentru alte teste în valoare de 20 de puncte, <code>1 &lt;= N, M &lt;= 300</code>, iar numărul de insule din arhipelag nu depășește <code>300</code></li>
+	<li>Pentru alte teste în valoare de 20 de puncte, <code>1 &lt;= N, M &lt;= 300</code></li>
+	<li>Pentru restul de teste, <code>1 &lt;= N, M &lt;= 1000</code></li>
+	<li>Se garantează că există cel puțin o zonă acoperită de apă</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>arhipelag.in</code></p>
+
+<pre>7 7
+0 1 0 1 0 1 1
+0 1 0 1 0 1 1
+0 0 0 1 0 0 0
+0 0 0 1 0 0 0
+0 0 0 1 0 0 0
+1 1 0 1 0 1 1
+1 1 0 1 0 1 1</pre>
+
+<p><code>arhipelag.out</code></p>
+
+<pre>2 3</pre>
+
+<h3>Explicație</h3>
+
+<p>Notând cu <code>D(x1, y1, x2, y2)</code> insula determinată de dreptunghiul având colțul stânga sus în <code>(x1, y1)</code> și colțul dreapta jos în <code>(x2, y2)</code>, arhipelagul conține următoarele insule: <code>D1(1, 2, 2, 2)</code>, <code>D2(1, 4, 7, 4)</code>, <code>D3(1, 6, 2, 7)</code>, <code>D4(6, 1, 7, 2)</code> și <code>D5(6, 6, 7, 7)</code>. Notând cu <code>dist(D)</code> distanța dintre celula <code>(2, 3)</code> și insula <code>D</code>, distanțele sunt următoarele: <code>dist(D1) = min {|2 – 1| + |3 – 2|, |2 – 2| + |3 - 2|} = 1</code>, <code>dist(D2) = 1</code>, <code>dist(D3) = 3</code>, <code>dist(D4) = 5</code> și <code>dist(D5) = 7</code>.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>arhipelag.in</code></p>
+
+<pre>4 4
+0 0 1 1
+0 0 1 1
+0 0 1 1
+0 0 0 0</pre>
+
+<p><code>arhipelag.out</code></p>
+
+<pre>1 2</pre>
+
+<h3>Explicație</h3>
+
+<p>Pentru fiecare dintre celulele <code>(1, 2)</code>, <code>(2, 2)</code>, <code>(3, 2)</code>, <code>(4, 3)</code> și <code>(4, 4)</code>, distanța dintre celulă și singura insulă existentă în acest exemplu este aceeași. Se va alege cea care are linia minimă, iar în caz de egalitate se va alege cea care are coloana minimă. Astfel, celula <code>(1, 2)</code> reprezintă soluția.</p>		</article>
+		</body></html>

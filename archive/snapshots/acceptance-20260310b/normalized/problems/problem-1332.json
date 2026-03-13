@@ -1,0 +1,291 @@
+{
+  "id": 1332,
+  "slug": "traseucal",
+  "name": "TraseuCal",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1332/traseucal",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 27,
+      "name": "Backtracking",
+      "slug": "backtracking",
+      "href": "/?pagina=probleme-lista&tag=27"
+    },
+    {
+      "id": 51,
+      "name": "Backtracking in plan",
+      "slug": "backtracking-in-plan",
+      "href": "/?pagina=probleme-lista&tag=51"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Se dă o tablă de șah formată din <code>n</code> linii și <code>m</code> coloane, definind <code>n*m</code> zone, unele dintre ele fiind libere, altele conținând obstacole. În zona de coordonate <code>1 1</code> se află un cal care se poate deplasa pe tablă în <code>L</code>, ca la șah, fără a părăsi tabla, fără a trece prin zone care conțin obstacole și fără a trece de două ori prin aceeași zonă.</p><p>Determinați o modalitate prin care calul poate ajunge în zona de coordonate <code>n m</code> – unde se află o căpiță de fân.</p>",
+      "text": "Se dă o tablă de șah formată din n linii și m coloane, definind n*m zone, unele dintre ele fiind libere, altele conținând obstacole. În zona de coordonate 1 1 se află un cal care se poate deplasa pe tablă în L, ca la șah, fără a părăsi tabla, fără a trece prin zone care conțin obstacole și fără a trece de două ori prin aceeași zonă.Determinați o modalitate prin care calul poate ajunge în zona de coordonate n m – unde se află o căpiță de fân."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fişierul de intrare <code>traseucal.in</code> conţine pe prima linie numerele <code>n m</code>, separate printr-un spațiu. Următoarele <code>n</code> linii conțin câte <code>m</code> valori, care descriu tabla: <code>0</code> corespunde unei zone libere, caracterul <code>1</code> corespunde unei zone ocupate de un obstacol.</p>",
+      "text": "Fişierul de intrare traseucal.in conţine pe prima linie numerele n m, separate printr-un spațiu. Următoarele n linii conțin câte m valori, care descriu tabla: 0 corespunde unei zone libere, caracterul 1 corespunde unei zone ocupate de un obstacol."
+    },
+    {
+      "title": "Date de ieşire",
+      "html": "<p>Fişierul de ieşire <code>traseucal.out</code> va conţine <code>n</code> linii, pe fiecare linie fiind câte <code>m</code> numere, care descriu traseul calului, astfel: </p><ul>\n\t<li>zonelor prin care nu va trece calul le corespund valoarea <code>0</code>.</li>\n\t<li>zonei în care se află inițial calul îi corespunde valoarea <code>1</code></li>\n\t<li>următoarei zone din traseul calului îi corespunde valoarea <code>2</code></li>\n\t<li>fiecărei zone din traseul calului îi corespunde o valoare număr natural semnificând la al câtelea pas ajunge calul în acea zonă.</li>\n</ul><p>Numerele de pe fiecare linie fișierului de ieșire sunt separate prin exact un spațiu.</p>",
+      "text": "Fişierul de ieşire traseucal.out va conţine n linii, pe fiecare linie fiind câte m numere, care descriu traseul calului, astfel: zonelor prin care nu va trece calul le corespund valoarea 0. zonei în care se află inițial calul îi corespunde valoarea 1 următoarei zone din traseul calului îi corespunde valoarea 2 fiecărei zone din traseul calului îi corespunde o valoare număr natural semnificând la al câtelea pas ajunge calul în acea zonă. Numerele de pe fiecare linie fișierului de ieșire sunt separate prin exact un spațiu."
+    },
+    {
+      "title": "Restricţii şi precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ n,m ≤ 10</code></li>\n\t<li>zona  în care se află calul și zona în care trebuie să ajungă sunt libere</li>\n\t<li>dacă nu există nicio modalitate prin care calul ajunge la căpița de fân toate cele <code>n*m</code> numere din fișierul <code>traseucal.out</code> vor fi zero.</li>\n\t<li>oricare traseu valid al calului este considerat corect</li>\n</ul>",
+      "text": "1 ≤ n,m ≤ 10 zona în care se află calul și zona în care trebuie să ajungă sunt libere dacă nu există nicio modalitate prin care calul ajunge la căpița de fân toate cele n*m numere din fișierul traseucal.out vor fi zero. oricare traseu valid al calului este considerat corect"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>traseucal.in</code></p><pre>4 5\n0 0 1 0 0\n0 0 1 0 0\n0 0 0 0 0\n0 0 0 1 0</pre><p><code>traseucal.out</code></p><pre>1 4 0 0 0 \n0 0 0 3 0 \n0 2 5 0 0 \n0 0 0 0 6 </pre>",
+      "text": "traseucal.in4 5 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 0traseucal.out1 4 0 0 0 0 0 0 3 0 0 2 5 0 0 0 0 0 0 6"
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "1 ≤ n,m ≤ 10",
+    "zona în care se află calul și zona în care trebuie să ajungă sunt libere",
+    "dacă nu există nicio modalitate prin care calul ajunge la căpița de fân toate cele n*m numere din fișierul traseucal.out vor fi zero.",
+    "oricare traseu valid al calului este considerat corect"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qd6a192faed.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "11",
+    "intrare/ieșire": "traseucal.in / traseucal.out",
+    "limită timp": "1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "-",
+    "autor": "-",
+    "dificultate": "medie"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 1,
+  "memoryLimitMb": 64,
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1332/traseucal"
+}

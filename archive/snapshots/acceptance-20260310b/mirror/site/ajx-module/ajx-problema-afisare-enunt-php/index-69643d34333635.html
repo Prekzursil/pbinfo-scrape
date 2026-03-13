@@ -1,0 +1,54 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4365"><article id="enunt">
+			<p>La începutul anului 2023, Gosu și-a creat o listă de rezoluții. Printre cele mai importante lucruri pe care Gosu își dorește să le realizeze anul acesta se numără cititul a <code>N</code> cărți pe care le are pe raftul bibliotecii. Fiecare carte are asociată un scor acordat de un critic, număr întreg strict pozitiv. Lista scorurilor este reprezentată prin <code>A</code><sub><code>1</code></sub>, <code>A</code><sub><code>2</code></sub>, …, <code>A</code><sub><code>N</code></sub>, unde <code>A</code><sub><code>i</code></sub> reprezintă scorul celei de-a <code>i</code>-a carte de pe raft.<br>
+Lista de rezoluții a lui Gosu conține reguli stricte pe care își dorește să le respecte. Printre ele se numără restricția de a lectura cărțile o singură dată, exact în ordinea în care se află pe raft. Deși este extrem de motivat să își îndeplinească toate rezoluțiile, este conștient că nu îi va fi ușor. Așadar, își propune să maximizeze beneficiile lecturii prin prioritizarea cărților din genurile literare preferate de acesta. Un gen literar este reprezentat printr-un număr prim p. O carte apartine unui gen literar p dacă scorul asociat acesteia este divizibil cu p. De asemenea, o carte poate aparține mai multor genuri.<br>
+Pentru a apuca să lectureze cât mai multe cărți din genurile sale preferate, în cazul în care va renunța ulterior la această rezoluție, Gosu este dispus să interschimbe de oricâte ori câte două cărți pe raft pentru a citi mai intâi cărțile cu scorul cel mai mare dintr-un gen literar. Două cărți pot fi interschimbate doar dacă au cel puțin un gen literar în comun.</p>
+
+<h1>Cerința</h1>
+
+<p>Fiind o persoană analitică și realistă, Gosu își imaginează <code>M</code> scenarii de forma “După primele <code>q</code> cărți citite, care va fi suma maximă a scorurilor acestora, după un număr nelimitat de interschimbări între cărți din genul literar <code>p</code>?”.<br>
+Acestea sunt situații ipotetice, deci ordinea cărților pe raft nu este modificată în realitate pe parcursul interogărilor. Aflați răspunsurile în cazul acestor situații, reprezentate prin interogări independente de forma <code>(p, q)</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Prima linie a intrării standard conține un singur număr întreg <code>N</code>, reprezentând numărul cărților. Pe următoarea linie se găsesc <code>N</code> numere întregi, separate prin spații, reprezentând lista de scoruri asociate cărților. A treia linie de input conține un singur număr intreg <code>M</code>, reprezentând numărul de interogări. Următoarele <code>M</code> linii conțin câte o interogare, reprezentată printr-o pereche de numere întregi separate printr-un spațiu, <code>(p, q)</code>, unde <code>p</code> este un număr prim care denotă categoria cărților ce pot fi interschimbate, iar <code>q</code> reprezintă numărul de cărți pe care Gosu plănuiește să le citească.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>La ieșirea standard se vor afișa, pe linii diferite, răspunsurile interogărilor.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N, M ≤ 100.000</code></li>
+	<li><code>1 ≤ A</code><sub><code>i</code></sub> <code>≤ 1.000.000</code>, <code>1 ≤ i ≤ N</code></li>
+	<li><code>1 ≤ p ≤ 1.000.000</code>, <code>p</code> este număr prim</li>
+	<li><code>1 ≤ q ≤ N</code></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>10
+5 3 33 2 9 8 10 11 10 7
+4
+5 4
+11 5
+2 6
+7 5</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>48
+52
+70
+52</pre>
+
+<h3>Explicație</h3>
+
+<p>Lista de scoruri asociate cărților este <code>[5, 3, 33, 2, 9, 8, 10, 11, 10, 7]</code> și avem <code>4</code> interogări. <br>
+Pentru prima interogare, interschimbând prima carte cu cea de-a noua, obținem scorul maximal al primelor <code>4</code> cărți de <code>48</code>. După interschimbare, lista de cărți ar deveni <code>[10, 3, 33, 2, 9, 8, 10, 11, 5, 7]</code>.<br>
+Pentru a doua interogare, nicio interschimbare nu este necesară; scorul total obținut este <code>52</code>.<br>
+Pentru a treia interogare, două interschimbări sunt necesare; spre exemplu, prin interschimbarea celei de-a patra cărți cu a șaptea, respectiv a celei de-a șasea cărți cu a noua, se obține scorul maximal al primelor <code>6</code> cărți de <code>70</code>. Configurația listei de cărți rearanjată este <code>[5, 3, 33, 10, 9, 10, 2, 11, 8, 7]</code>. <br>
+În ultima interogare, nicio interschimbare nu este posibilă, din moment ce niciuna din primele <code>5</code> cărți nu are asociat un scor divizibil cu <code>7</code>. Suma scorurilor este <code>52</code>.</p>		</article>
+		</body></html>

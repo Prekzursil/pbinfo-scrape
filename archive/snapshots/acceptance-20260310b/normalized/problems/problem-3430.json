@@ -1,0 +1,301 @@
+{
+  "id": 3430,
+  "slug": "bpj2020",
+  "name": "bpj2020",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3430/bpj2020",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 46,
+      "name": "Tablouri bidimensionale (matrice)",
+      "slug": "tablouri-bidimensionale-matrice",
+      "href": "/?pagina=probleme-lista&tag=46"
+    },
+    {
+      "id": 80,
+      "name": "Parcurgerea matricelor pătratice",
+      "slug": "parcurgerea-matricelor-p-tratice",
+      "href": "/?pagina=probleme-lista&tag=80"
+    }
+  ],
+  "tags": [
+    "Tablouri bidimensionale"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Gigel a descoperit noul joc Block Puzzle Jewel. Jocul se desfășoară astfel:</p><ul>\n\t<li>avem o tablă de joc sub forma unei matrice <code>8x8</code>;</li>\n\t<li>sunt <code>17</code> tipuri de piese care arată așa:<br>\n<img alt=\"\" src=\"https://www.pbinfo.ro/resurse/c7bd78/piese.png\"></li>\n\t<li>după ce Gigel adaugă o piesa, pătrățelele din care este formată piesa vor ocupa zonele corespunzătoare din tabla de joc iar, iar numărul de pătrățele din care este formată piesa se va adăuga la scorul lui Gigel. De exemplu,  dacă Gigel vrea să mute o piesă de tipul <code>16</code> atunci ea va ocupa locurile <code>m[i][j]</code> , <code>m[i][j+1]</code> , <code>m[i][j+2]</code> , <code>m[i+1][j+2]</code> și <code>m[i+2][j+2]</code> iar scorul lui Gigel va crește cu <code>5</code> puncte sau dacă Gigel vrea să mute o piesă de tipul <code>15</code> atunci ea va ocupa locurile <code>m[i][j] , m[i][j+1] , m[i+1][j-1] </code> și <code>m[i+1][j]</code> iar scorul lui Gigel va crește cu <code>4</code> puncte.</li>\n\t<li>dacă o linie sau o coloana este completată cu pătratele atunci ea se eliberează (se elimină pătrățelele care ocupă linia/coloana).</li>\n\t<li>modul de a pozitiona o piesă este așa : <code>a l c</code>, unde <code>a</code> este tipul piesei, <code>l</code> și <code>c</code> reprezintă linia și coloana unde se va afla pătrățelul din stânga sus al piesei respective în matrice</li>\n\t<li>Dacă la o mutare se elimină:\n\t<ul>\n\t\t<li>o linie sau o coloană , atunci Gigel primeste <code>10</code> puncte</li>\n\t\t<li><code>2</code> linii și coloane liberate, atunci Gigel primește <code>30</code> de puncte</li>\n\t\t<li><code>3</code> linii și coloane eliberate, atunci Gigel primește <code>60</code> de puncte</li>\n\t\t<li><code>4</code> linii și coloane eliberate, atunci Gigel primește <code>100</code> de puncte</li>\n\t\t<li><code>5</code> linii și coloane eliberate, atunci Gigel primește <code>150</code> de puncte</li>\n\t\t<li><code>6</code> linii și coloane eliberate, atunci Gigel primește <code>500</code> de puncte</li>\n\t</ul></li>\n\t</ul><p>Dându-se <code>n</code>, numărul de piese pe care le va muta Gigel și piesele pe care le va muta Gigel (folosind numerele <code>a</code>, <code>l</code> și <code>c</code>), să se determine scorul final al lui Gigel.</p>",
+      "text": "Gigel a descoperit noul joc Block Puzzle Jewel. Jocul se desfășoară astfel: avem o tablă de joc sub forma unei matrice 8x8; sunt 17 tipuri de piese care arată așa: după ce Gigel adaugă o piesa, pătrățelele din care este formată piesa vor ocupa zonele corespunzătoare din tabla de joc iar, iar numărul de pătrățele din care este formată piesa se va adăuga la scorul lui Gigel. De exemplu, dacă Gigel vrea să mute o piesă de tipul 16 atunci ea va ocupa locurile m[i][j] , m[i][j+1] , m[i][j+2] , m[i+1][j+2] și m[i+2][j+2] iar scorul lui Gigel va crește cu 5 puncte sau dacă Gigel vrea să mute o piesă de tipul 15 atunci ea va ocupa locurile m[i][j] , m[i][j+1] , m[i+1][j-1] și m[i+1][j] iar scorul lui Gigel va crește cu 4 puncte. dacă o linie sau o coloana este completată cu pătratele atunci ea se eliberează (se elimină pătrățelele care ocupă linia/coloana). modul de a pozitiona o piesă este așa : a l c, unde a este tipul piesei, l și c reprezintă linia și coloana unde se va afla pătrățelul din stânga sus al piesei respective în matrice Dacă la o mutare se elimină: o linie sau o coloană , atunci Gigel primeste 10 puncte 2 linii și coloane liberate, atunci Gigel primește 30 de puncte 3 linii și coloane eliberate, atunci Gigel primește 60 de puncte 4 linii și coloane eliberate, atunci Gigel primește 100 de puncte 5 linii și coloane eliberate, atunci Gigel primește 150 de puncte 6 linii și coloane eliberate, atunci Gigel primește 500 de puncte Dându-se n, numărul de piese pe care le va muta Gigel și piesele pe care le va muta Gigel (folosind numerele a, l și c), să se determine scorul final al lui Gigel."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>bpj2020.in</code> conține pe prima linie numărul <code>n</code>, iar pe următoarele <code>n</code> linii câte <code>3</code> numere <code>a l c</code> cu semnificația din enunț.</p>",
+      "text": "Fișierul de intrare bpj2020.in conține pe prima linie numărul n, iar pe următoarele n linii câte 3 numere a l c cu semnificația din enunț."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>bpj2020.out</code> va conține pe prima linie numărul <code>S</code>, reprezentând scorul final al lui Gigel.</p>",
+      "text": "Fișierul de ieșire bpj2020.out va conține pe prima linie numărul S, reprezentând scorul final al lui Gigel."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ n ≤ 50</code></li>\n\t<li><code>1 ≤ l , c ≤ 8</code></li>\n\t<li><code>1 ≤ a ≤ 17</code></li>\n\t<li>nu o să existe o piesa suprapusă peste alta și nici piese care să iasă din tabla de joc</li>\n\t<li>la început tabla de joc este goală</li>\n</ul>",
+      "text": "1 ≤ n ≤ 50 1 ≤ l , c ≤ 8 1 ≤ a ≤ 17 nu o să existe o piesa suprapusă peste alta și nici piese care să iasă din tabla de joc la început tabla de joc este goală"
+    },
+    {
+      "title": "Exemplu",
+      "html": "<p><code>bpj2020.in</code></p><pre>9\n17 7 1\n5 8 4\n3 7 2\n10 5 5\n12 4 4\n1 6 4\n7 4 1\n6 5 6\n16 4 6</pre><p><code>bpj2020.out</code></p><pre>108</pre>",
+      "text": "bpj2020.in9 17 7 1 5 8 4 3 7 2 10 5 5 12 4 4 1 6 4 7 4 1 6 5 6 16 4 6bpj2020.out108"
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "1 ≤ n ≤ 50",
+    "1 ≤ l , c ≤ 8",
+    "1 ≤ a ≤ 17",
+    "nu o să existe o piesa suprapusă peste alta și nici piese care să iasă din tabla de joc",
+    "la început tabla de joc este goală"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qc3ecba026c.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/c7bd78/piese.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-c7bd78-piese-png.png",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "PARMI NOUS (traianflorianalin)",
+    "clasa": "9",
+    "intrare/ieșire": "bpj2020.in / bpj2020.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "idee proprie",
+    "autor": "Traian Florian Alin Moldoveanu",
+    "dificultate": "dificilă"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "author": "Traian Florian Alin Moldoveanu",
+  "sourceAttribution": "idee proprie",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3430/bpj2020"
+}

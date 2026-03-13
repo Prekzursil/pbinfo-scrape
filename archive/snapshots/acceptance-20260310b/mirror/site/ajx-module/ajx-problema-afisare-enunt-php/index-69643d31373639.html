@@ -1,0 +1,136 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1769"><article id="enunt">
+			<p>Tudoraș are o pasiune pentru muzică. El deține câte <code>K</code> albume din discografia fiecăreia dintre cele <code>C</code> formații pe care le ascultă. În fiecare zi, Tudoraș extrage la întamplare exact <code>Q</code> albume din colecția sa, pe care le ascultă în cursul zilei.</p>
+
+<p>La finalul zilei, Tudoraș analizează albumele ascultate. Concret, el numără de la câte formații diferite provin cele Q albume alese și își notează această valoare. </p>
+
+<p>Care va fi media aritmetică a valorilor notate, dacă procesul se repetă pentru un număr infinit de zile? Cu alte cuvinte, care este valoarea medie (expected value) a numărului de formații ascultate într-o zi?</p>
+
+<h1>Date de intrare </h1>
+
+<p>Fișierul <code>albume.in</code> conține pe prima linie trei valori separate prin spațiu: <code>C K Q</code>.</p>
+
+<h1>Date de ieșire </h1>
+
+<p>Fișierul <code>albume.out</code> trebuie să conțină pe prima linie o singură valoare reală: media aritmetică a valorilor notate de Tudoraș. </p>
+
+<h1>Restricții și precizări </h1>
+
+<ul>
+	<li><code>1 ≤ C, K ≤ 1000</code></li>
+	<li><code>1 ≤ Q ≤ min(1000, C*K)</code></li>
+	<li>Pentru teste în valoare de 10 puncte, <code>K = 1</code>.</li>
+	<li>Pentru alte teste în valoare de 10 puncte, <code>Q = C * K</code>.</li>
+	<li>Pentru alte teste în valoare de 20 de puncte, <code>C * K ≤ 10</code>.</li>
+	<li>În fiecare zi, toate albumele au probabilitate egală de a fi extrase.</li>
+	<li>Rezultatul este considerat corect dacă are o eroare absolută de cel mult <code>10</code><sup><code>-6</code></sup>.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>albume.in</code></p>
+
+<pre>2 2 2</pre>
+
+<p><code>albume.out</code></p>
+
+<pre>1.666666667</pre>
+
+
+<h1>Exemplul 2</h1>
+
+<p><code>albume.in</code></p>
+
+<pre>232 654 27&nbsp;</pre>
+
+<p><code>albume.out</code></p>
+
+<pre>25.542102567&nbsp;</pre>
+
+<h1>Explicații</h1>
+
+<p>În primul exemplu, există două formații, fiecare cu două albume. Numerotăm albumele în următorul fel:&nbsp;</p>
+
+<ul>
+	<li><code>a1 = 1</code> (primul album al primei formații)&nbsp;</li>
+	<li><code>a2 = 1</code> (al doilea album al primei formații)&nbsp;</li>
+	<li><code>a3 = 2</code> (primul album al celei de-a doua formații)&nbsp;</li>
+	<li><code>a4 = 2</code> (al doilea album al celei de-a doua formații)&nbsp;</li>
+</ul>
+
+<p>Prin alegerea la întâmplare a două albume, pot apărea următoarele configurații:&nbsp;</p>
+
+<table class="table">
+		<tbody><tr>
+			<td> <ol><br>
+</ol></td>
+			<td> &nbsp;Albume alese&nbsp;</td>
+			<td> &nbsp;Formații&nbsp;</td>
+		</tr>
+		<tr>
+			<td> 1&nbsp;</td>
+			<td> a1, a2&nbsp;</td>
+			<td> 1&nbsp;</td>
+		</tr>
+		<tr>
+			<td> 2&nbsp;</td>
+			<td> a1, a3&nbsp;</td>
+			<td> 1, 2&nbsp;</td>
+		</tr>
+		<tr>
+			<td> 3&nbsp;</td>
+			<td> a1, a4&nbsp;</td>
+			<td> 1, 2&nbsp;</td>
+		</tr>
+		<tr>
+			<td> 4&nbsp;</td>
+			<td> a2, a1&nbsp;</td>
+			<td> 1&nbsp;</td>
+		</tr>
+		<tr>
+			<td> 5&nbsp;</td>
+			<td> a2, a3&nbsp;</td>
+			<td> 1, 2&nbsp;</td>
+		</tr>
+		<tr>
+			<td> 6&nbsp;</td>
+			<td> a2, a4 </td>
+			<td> 1, 2&nbsp;</td>
+		</tr>
+		<tr>
+			<td> 7&nbsp;</td>
+			<td> a3, a1&nbsp;</td>
+			<td> 2, 1&nbsp;</td>
+		</tr>
+		<tr>
+			<td> 8&nbsp;</td>
+			<td> a3, a2&nbsp;</td>
+			<td> 2, 1&nbsp;</td>
+		</tr>
+		<tr>
+			<td> 9&nbsp;</td>
+			<td> a3, a4&nbsp;</td>
+			<td> 2&nbsp;</td>
+		</tr>
+		<tr>
+			<td>10&nbsp;</td>
+			<td> a4, a1&nbsp;</td>
+			<td>2, 1&nbsp;</td>
+		</tr>
+		<tr>
+			<td>11&nbsp;</td>
+			<td> a4, a2&nbsp;</td>
+			<td>2, 1&nbsp;</td>
+		</tr>
+		<tr>
+			<td>12&nbsp;</td>
+			<td> a4, a3&nbsp;</td>
+			<td>2&nbsp;</td>
+		</tr>
+</tbody></table>
+
+<p>Suma numărului de formații din fiecare caz este egală cu <code>1+2+2+1+2+2+2+2+1+2+2+1 = 20</code>. </p>
+
+<p>Cele <code>12</code> cazuri au probabilitate egală de a se întâmpla. </p>
+
+<p>Rezultatul este <code>20 / 12 = 1.(6)</code> </p>		</article>
+		</body></html>

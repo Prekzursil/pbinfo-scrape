@@ -1,0 +1,92 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4127"><article id="enunt">
+			<p>Se citește un număr natural <code>N</code> și un șir de <code>N</code> numere naturale <code>a[1]</code>, <code>a[2]</code>, …, <code>a[N]</code>. Numerele din șir nu conțin cifra <code>0</code>. Începând de la primul număr din șir către ultimul se vor efectua următoarele modificări:</p>
+
+<ul>
+	<li>dacă ultima cifră a unui număr este egală cu prima cifră a următorului număr din șir cele două numere se unesc, cel de-al doilea lipindu-se de primul. Acest număr nou format se transformă, oprindu-se doar o dată fiecare cifră care apare în număr: cea mai din stânga apariție a cifrei se păstrează, următoarele apariții fiind eliminate. De exemplu, putem uni numerele <code>21245</code> și <code>51278</code> rezultând numărul <code>2124551278</code>. Se iau cifrele o singură dată rezultând <code>214578</code>. Numărul nou format se poate uni la rândul lui cu următorul și așa mai departe.</li>
+	<li>dacă ultima cifră a unui număr nu este egală cu prima cifră a următorului număr din șir cele două numere nu se unesc, dar primul număr din cele două se va transforma, păstrându-se doar o dată fiecare cifră care apare în număr: cea mai din stânga apariție a cifrei se păstrează, următoarele apariții fiind eliminate</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Dându-se cele <code>N</code> numere din șir să se determine:</p>
+
+<ul>
+	<li>Câte numere din <strong>șirul inițial</strong> nu au nevoie de transformare (conțin doar cifre distincte)?</li>
+	<li>Câte numere va conține șirul după realizarea tuturor operațiilor de unire?</li>
+	<li>Care este numărul maxim de cifre ale unui număr din noul șir și câte numere au acest număr maxim de cifre?</li>
+</ul>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>siruri.in</code> conține pe prima linie un număr natural <code>c</code> (<code>1, 2</code> sau <code>3</code>). Pe a doua linie se găsește un număr natural nenul <code>N</code>. Pe a treia linie se află <code>N</code> numere naturale separate de câte un spațiu reprezentând șirul inițial.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>În fișierul de ieșire <code>siruri.out</code> se va afla în funcție de cerința dată:</p>
+
+<ul>
+	<li>dacă <code>c = 1</code>, se va afișa pe prima linie numărul de numere ce nu au nevoie de transformare</li>
+	<li>dacă <code>c = 2</code>, se va afișa pe prima linie numărul de numere din șir după realizarea tuturor operațiilor de unire</li>
+	<li>dacă <code>c = 3</code>, se vor afișa pe prima linie două numere separate printr-un singur spatiu, reprezentând numărul maxim de cifre ale unui număr după efectuarea operațiilor de unire, respectiv numărul de astfel de numere cu număr maxim de cifre.</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>c ∈ {1, 2, 3}</code></li>
+	<li><code>1 ≤ N ≤ 100.000</code></li>
+	<li><code>1 ≤ a[i] ≤ 1.000.000.000</code></li>
+	<li><code>a[i]</code> conține doar cifre nenule, pentru oricare <code>1 ≤ i ≤ n</code></li>
+	<li>Pentru 18 puncte, <code>c = 1</code></li>
+	<li>Pentru 40 puncte, <code>c = 2</code></li>
+	<li>Pentru 42 puncte, <code>c = 3</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>siruri.in</code></p>
+
+<pre>1
+8
+21245 51278 869 33447 723 397897 545786 6783221</pre>
+
+<p><code>siruri.out</code></p>
+
+<pre>3</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerința este <code>1</code>. Sunt <code>8</code> numere în șir, dintre care doar <code>3</code> au cifre distincte: <code>[51278, 869, 723]</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>siruri.in</code></p>
+
+<pre>2
+8
+21245 51278 869 33447 723 397897 545786 6783221</pre>
+
+<p><code>siruri.out</code></p>
+
+<pre>4</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerința este <code>2</code>. Sunt <code>8</code> numere în șir, după transformări șirul va arăta astfel: <code>[21457869, 3472, 3978, 54786321]</code>.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>siruri.in</code></p>
+
+<pre>3
+9
+21245 51278 869 33447 723 397897 545786 6783221 235788946</pre>
+
+<p><code>siruri.out</code></p>
+
+<pre>8 3</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerința este <code>3</code>. Sunt <code>9</code> numere în șir, după transformări șirul va arăta astfel: <code>[21457869, 3472, 3978, 54786321, 23578946]</code>. Numărul maxim de cifre ale unui număr din noul șir este <code>8</code> și sunt <code>3</code> numere în noul șir care au <code>8</code> cifre: <code>[21457869, 54786321, 23578946]</code>.</p>		</article>
+		</body></html>

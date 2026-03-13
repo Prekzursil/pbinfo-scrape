@@ -1,0 +1,70 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4400"><article id="enunt">
+			<p>Pentru un număr natural <code>a</code> definim costul ca fiind valoarea absolută (modulul) diferenței dintre <code>a</code> și numărul prim cel mai apropiat de <code>a</code>. Asupra unui șir de <code>n</code> numere naturale, situate pe poziții numerotate de la <code>1</code> la <code>n</code>, se aplică, în ordine, o succesiune de <code>q</code> operații. O operație constă dintr-o înlocuire și o afișare și este descrisă sub forma <code>i x p</code>, cu semnificația:</p>
+
+<ul>
+	<li>mai întâi înlocuim cu <code>x</code> elementul din șir de pe poziția <code>i</code>;</li>
+	<li>apoi afișăm suma minimă totală a costurilor unor elemente convenabil selectate de pe <code>p</code> poziții distincte din șir.</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând <code>n</code> și cele <code>n</code> elemente ale șirului, scrieți un program care să determine:<br>
+1. suma costurilor tuturor elementelor din șirul dat;<br>
+2. rezultatele afișate în urma aplicării fiecăreia dintre cele <code>q</code> operații, date în forma precizată.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>primprim.in</code> conține pe prima linie un număr natural <code>C</code>, reprezentând cerința care trebuie să fie rezolvată (<code>1</code> sau <code>2</code>), pe a doua linie numărul natural <code>n</code>, cu semnificația din enunț, iar pe a treia linie cele <code>n</code> elemente din șir, în ordinea din șir. Dacă <code>C = 2</code>, pe a patra linie se află numărul natural <code>q</code>, reprezentând numărul de operații, iar pe următoarele <code>q</code> linii se află cele <code>q</code> operații, câte o operație pe linie, în forma descrisă în enunț. Numerele scrise pe aceeași linie sunt separate prin câte un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă <code>C = 1</code>, fișierul de ieșire <code>primprim.out</code> va conține o singură linie pe care va fi afișată suma costurilor tuturor elementelor din șir. Dacă <code>C = 2</code>, fișierul de ieșire <code>primprim.out</code> va conține <code>q</code> linii, pe linia <code>i</code> fiind scris rezultatul afișat după executarea celei de a <code>i</code>-a operații din fișierul de intrare.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ q ≤ 2 ∗ 100.000</code></li>
+	<li><code>1 ≤ i, p ≤ n ≤ 1.000.000</code>; <code>1 ≤ x ≤ 1.000.000</code></li>
+	<li>Elementele șirului sunt numere naturale nenule mai mici sau egale cu <code>1.000.000</code>.</li>
+	<li>Datorită dimensiunilor mari ale fișierelor, nu au putut fi adăugate toate.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>primprim.in</code></p>
+
+<pre>1
+5
+8 1 3 5 9</pre>
+
+<p><code>primprim.out</code></p>
+
+<pre>4</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C = 1</code>, <code>n = 5</code>, iar șirul este <code>8, 1, 3, 5, 9</code>. Costurile elementelor sunt, în ordine, <code>1, 1, 0, 0, 2</code>, deci suma este <code>4</code>.</p>
+
+
+<h1>Exemplul 2:</h1>
+
+<p><code>primprim.in</code></p>
+
+<pre>2
+5
+8 1 3 5 9
+3
+2 6 4
+3 5 2
+5 12 5</pre>
+
+<p><code>primprim.out</code></p>
+
+<pre>2
+0
+3</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C = 2</code>, <code>n = 5</code>, iar șirul inițial este <code>8, 1, 3, 5, 9</code>. Se aplică șirului <code>3</code> operații. După prima operație, pentru care <code>i = 2</code>, <code>x = 6</code> și <code>p = 4</code>, șirul devine <code>8, 6, 3, 5, 9</code>. Suma minimă totală se obține dacă selectăm valorile de pe pozițiile <code>1</code>, <code>2</code>, <code>3</code> și <code>4</code>, costurile fiind <code>1 + 1 + 0 + 0 = 2</code>. După a doua operație, pentru care <code>i = 3</code>, <code>x = 5</code> și <code>p = 2</code>, șirul devine <code>8, 6, 5, 5, 9</code>. Selectăm valorile de pe pozițiile <code>3</code> și <code>4</code> (acestea având costul <code>0</code>). După a treia operație, pentru care <code>i = 5</code>, <code>x = 12</code> și <code>p = 5</code>, șirul devine <code>8, 6, 5, 5, 12</code>. Selectăm toate valorile, deci suma este <code>1 + 1 + 0 + 0 + 1 = 3</code>.</p>		</article>
+		</body></html>

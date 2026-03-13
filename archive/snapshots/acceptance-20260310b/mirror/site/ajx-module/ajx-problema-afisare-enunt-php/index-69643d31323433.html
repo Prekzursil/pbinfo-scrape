@@ -1,0 +1,55 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1243"><article id="enunt">
+			<p><img align="right" alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1200-insula-png.png"> Pe țărmul insulei Mauritius sunt <code>N</code> localități, numerotate de la <code>1</code> la <code>N</code>, considerate puncte de maximă atracție pentru turiști. Acestea sunt conectate printr-o rețea feroviară cu linie ferată dublă ce leagă localitățile <code>1</code> de <code>2</code>, <code>2</code> de <code>3</code>, … , <code>N-1</code> de <code>N</code> și <code>N</code> de <code>1</code>,  putându-se realiza astfel două circuite. Primul circuit presupune vizitarea localităţilor <code>1 2 .., N 1</code>,  în această ordine, iar cel de-al doilea, vizitarea localităţilor <code>1 N N – 1 … 2 1</code>. În fiecare localitate există agenții ale tuturor celor <code>M</code> operatori de turism, numerotați de la <code>1</code> la <code>M</code>.</p>
+
+<p>Un tichet de călătorie se poate achiziționa doar din localitatea în care se găsește călătorul și permite deplasarea din acea localitate până la următoarea localitate a circuitului. Pentru fidelizarea clienților, operatorii de turism utilizează următoarea regulă pentru prețurile tichetelor: dacă un călător a ajuns într-o gară, cu un tichet cumpărat de la un anumit operator de turism și își continuă călătoria către următoarea destinație cu un tichet pe care-l va cumpăra de la un alt operator de turism, atunci noul tichet își va dubla prețul.</p>
+
+<p>Ștefan se află în concediu pe insulă în localitatea <code>1</code> și tocmai a câștigat un premiu oferit de operatorul de turism numerotat cu <code>1</code>, pentru o excursie cu <code>N</code> tichete de călătorie pe insula Mauritius.</p>
+
+<p>El pornește din localitatea în care se află și apoi parcurge cu trenul întregul circuit, astfel încât cu ultimul tichet cumpărat să se întoarcă în localitatea <code>1</code>, de unde a plecat. Același operator de turism îi oferă contra cost, primul tichet de călătorie. Ștefan va studia toate ofertele și dacă e cazul poate refuza inclusiv acest prim tichet pentru a-l achiziționa de un alt operator de turism, chiar dacă i se va dubla prețul (fiindcă a schimbat operatorul).</p>
+
+<h1>Cerinţă</h1>
+
+<p>Cunoscând prețul tichetelor de călătorie, stabilite de fiecare operator de turism, determinați suma minimă cu care Ștefan poate achiziționa cele <code>N</code> tichete necesare călătoriei sale.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fişierul de intrare <code>insula.in</code> conţine:</p>
+
+<ul>
+	<li>pe prima linie două numere naturale <code>N</code> și <code>M</code>, despărțite printr-un spațiu cu semnificația din enunț;</li>
+	<li>pe următoarele  <code>M</code>  linii, câte <code>N</code> numere naturale  <code>p[i,1]</code>, <code>p[i,2]</code>, … , <code>p[i,n]</code>, separate prin câte un spațiu. Valorile de pe linia <code>i+1</code>, reprezintă în ordine, prețurile stabilite de operatorul numerotat cu <code>i</code> pentru achiziționarea tichetelor de călătorie  între localitățile <code>1</code> și <code>2</code>, <code>2</code> și <code>3</code>, …, <code>N-1</code> și <code>N</code>, respectiv <code>N</code> și <code>1</code>.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>Fişierul de ieşire <code>insula.out</code> va conţine pe prima linie un singur număr natural ce reprezintă suma minimă cu care Ștefan poate achiziționa cele <code>N</code> tichete pentru călătoria sa.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>3 ≤ N &lt; 300</code>, <code>N</code> număr impar;</li>
+	<li><code>1 ≤ M &lt; 300</code></li>
+	<li>prețurile tichetelor sunt numere naturale nenule cu cel mult două cifre fiecare;</li>
+	<li>pentru 40% din punctaj, <code>N &lt; 10</code></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>insula.in</code></p>
+
+<pre>3 2
+10 9 3
+2 8 5</pre>
+
+<p><code>insula.out</code></p>
+
+<pre>16</pre>
+
+<h3>Explicație</h3>
+
+<p>Pe circuit sunt <code>3</code> localități și <code>2</code> operatori de turism.</p>
+
+<p>Operatorul <code>1</code> are următoarele prețuri: pentru deplasarea  între  localitățile <code>1</code> și <code>2</code> tichetul are prețul <code>10</code>, între localitățile <code>2</code> și <code>3</code> tichetul are prețul <code>9</code> iar între localitățile <code>3</code> și <code>1</code>, tichetul are prețul <code>3</code>. </p>
+
+<p>Operatorul <code>2</code> are următoarele prețuri: pentru deplasarea între localitățile <code>1</code> și <code>2</code> tichetul are prețul <code>2</code>, între localitățile <code>2</code> și <code>3</code> tichetul are prețul <code>8</code> iar între localitățile <code>3</code> și <code>1</code>, tichetul are prețul <code>5</code>.  Un traseu parcurs cu <code>3</code> tichete, poate fi: <code>1→3</code> preț <code>3</code> , <code>3→2</code>  preț <code>9</code> ,  <code>2→1</code> cu preț <code>2</code> de la operatorul <code>2</code>,(prețul se  dublează). Cost minim total <code>3+9+2*2=16</code></p>		</article>
+		</body></html>

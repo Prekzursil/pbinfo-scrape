@@ -1,0 +1,81 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4461"><article id="enunt">
+			<p>Două veverițe gemene au descoperit un depozit de alune care are o formă foarte ciudată. Mai precis, depozitul are forma unei matrice <code>N x N</code> cu <code>N</code> impar. Fiecare poziție din matrice este o cameră și în fiecare cameră se află câte o alună. Camerele sunt numerotate cu numărul de linie și numărul de coloană. Prima veveriță, pe numele ei Chip, se găsește inițial în camera <code>(1,1)</code>, iar a doua, pe numele ei Dale, în camera <code>(N,N)</code>. Veverițele vor să culeagă toate alunele și să se întâlnească în camera din centrul depozitului. Pentru aceasta, ele vor parcurge camerele trecând din una în alta fără să treacă vreodată printr-o cameră prin care a mai trecut una dintre ele. Ele se pot deplasa dintr-o cameră în alta (evident, fără să iasă din depozit și fără să intre într-o camera deja vizitată). Când trece dintr-o cameră într-alta, Chip își notează traseul astfel:</p>
+
+<ul>
+	<li>Dacă merge spre camera din dreapta, din camera <code>(L,C)</code> în camera <code>(L,C+1)</code>, notează trecerea cu <code>0</code>.</li>
+	<li>Dacă merge spre camera din stânga, din camera <code>(L,C)</code> în camera <code>(L,C-1)</code>, notează trecerea cu <code>1</code>.</li>
+	<li>Dacă merge spre camera de sus, din camera <code>(L,C)</code> în camera <code>(L-1,C)</code>, notează trecerea cu <code>2</code>.</li>
+	<li>Dacă merge spre camera de jos, din camera <code>(L,C)</code> în camera <code>(L+1,C)</code>, notează trecerea cu <code>3</code>.</li>
+</ul>
+
+<p>Interesant este că la orice trecere a lui Chip dintr-o cameră în alta, Dale se va muta exact în sens opus, adică:</p>
+
+<ul>
+	<li>Dacă Chip merge spre dreapta, Dale merge spre stânga.</li>
+	<li>Dacă Chip merge spre stânga, Dale merge spre dreapta.</li>
+	<li>Dacă Chip merge în sus, Dale merge în jos.</li>
+	<li>Dacă Chip merge în jos, Dale merge în sus.</li>
+</ul>
+
+<p>Meticulos, Chip își calculează și își notează în ordine lexicografică toate traseele posibile prin care pot fi culese toate alunele din depozit. De exemplu, pentru <code>N = 9</code>, traseul de pe poziția <code>P = 12345</code> este notat astfel:</p>
+
+<p><code>0000311113333333000211200000022213312213</code></p>
+
+<p>și corespunde schemei de mai jos:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-veverite-01-jpg.jpg"></p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând <code>N</code>, să se răspundă la <code>Q</code> întrebări de forma: “Ce traseu a notat Chip pe poziția <code>P</code>?”</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>veverite.in</code> conține pe prima linie numerele <code>N</code> și <code>Q</code> cu semnificația de mai sus. Pe următoarele <code>Q</code> linii se găsesc întrebările. Astfel, pe linia <code>i + 1</code> se găsește un singur număr <code>P[i]</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>veverite.out</code> va conține <code>Q</code> linii. Fiecare linie conține un șir de caractere 0, 1, 2 sau 3, neseparate prin spațiu. Șirul de pe linia <code>i</code> va conține codificarea traseului lui Chip corespunzător poziției <code>P[i]</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>3 ≤ N ≤ 9</code></li>
+	<li><code>N</code> este impar.</li>
+	<li><code>1 ≤ Q ≤ 1.000</code></li>
+	<li><code>1 ≤ P[i] ≤ maxP</code>, unde <code>maxP</code> este numărul maxim de trasee posibile pentru <code>N</code>.</li>
+	<li>Pentru 4 puncte, <code>N = 3</code></li>
+	<li>Pentru 7 puncte, <code>N = 5</code></li>
+	<li>Pentru 8 puncte, <code>N = 7</code>, <code>P[i] ≤ 10</code></li>
+	<li>Pentru 13 puncte, <code>N = 7</code>, <code>P[i] ≤ 564</code></li>
+	<li>Pentru 19 puncte, <code>N = 9</code>, <code>P[i] ≤ 10</code></li>
+	<li>Pentru 21 puncte, <code>N = 9</code>, <code>P[i] ≤ 1.000</code></li>
+	<li>Pentru 28 puncte, <code>N = 9</code>, <code>P[i] ≤ 93.866</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>veverite.in</code></p>
+
+<pre>5 3
+1
+2
+3</pre>
+
+<p><code>veverite.out</code></p>
+
+<pre>000031111300
+000031303112
+000033311120</pre>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>veverite.in</code></p>
+
+<pre>9 1
+12345</pre>
+
+<p><code>veverite.out</code></p>
+
+<pre>0000311113333333000211200000022213312213</pre>		</article>
+		</body></html>

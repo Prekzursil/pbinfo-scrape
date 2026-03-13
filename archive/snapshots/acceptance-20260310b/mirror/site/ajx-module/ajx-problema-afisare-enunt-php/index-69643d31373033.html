@@ -1,0 +1,91 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1703"><article id="enunt">
+			<p>Meseria de parchetar a devenit mai uşoară de când a apărut parchetul laminat. Acesta se livrează în plăci pătratice de câte <code>1</code> m<sup>2</sup> şi montarea lui este destul de uşoară. Gigel este convins că este suficient de priceput să facă această operaţie în propria locuinţă. El dispune de planul locuinţei şi a cumpărat o anumită cantitate reprezentând <code>X</code> m<sup>2</sup> de parchet laminat. Planul locuinţei este descris printr-un tablou bidimensional de dimensiuni <code>N x M</code>, fiecare element al tabloului reprezentând exact <code>1</code> m<sup>2</sup>. Pereţii sunt reprezentaţi prin caracterul <code>‘P’</code> iar suprafeţele camerelor prin caracterul <code>‘S’</code> (spaţiu). În planul din figura următoare este descrisă o locuinţă cu <code>5</code> camere acestea având respectiv, suprafeţele de <code>10</code>, <code>2</code>, <code>1</code>, <code>3</code>, <code>5</code> m<sup>2</sup>.</p>
+
+<pre>PPPPPPPPP
+PSSSPSPSP
+PSSSPSPPP
+PSSPPPPSP
+PSPPSSPSP
+PSPSSSPSP
+PPPPPPPPP</pre>
+
+<p>Gigel nu este sigur de faptul că parchetul cumpărat îi ajunge. Din această cauză a hotărât iniţial să pună parchetul începând cu camera cea mai mare, apoi în următoarea, în ordinea descrescătoare a suprafeţei şi aşa mai departe, până în momentul în care parchetul rămas nu mai este suficient pentru acoperirea suprafeţei următoarei camere. Nu va lăsa neparchetată o cameră pentru a parcheta una cu o suprafaţă mai mică. </p>
+
+<p>Gigel se mai gândeşte şi la posibilitatea de a acoperi complet un număr maxim de camere folosind întreaga cantitate de parchet.</p>
+
+<h1>Cerința</h1>
+
+<p>Fiind date <code>N</code>, <code>M</code>, <code>X</code> şi planul locuinţei să se determine: </p>
+
+<ol>
+	<li>numărul <code>C</code> de camere pe care a reuşit să le acopere Gigel şi numărul <code>R</code> de m<sup>2</sup> de parchet care îi rămân, procedând aşa cum a hotărât iniţial;</li>
+	<li>numărul de posibilităţi de parchetare a unui număr maxim de camere, folosind întreaga cantitate de parchet.</li>
+</ol>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>parchet.in</code> conține pe prima linie un număr natural <code>p</code> reprezentând cerinţa care trebuie să fie rezolvată (<code>1</code> sau <code>2</code>). Linia a doua a fişierului de intrare conţine numerele naturale <code>N</code> şi <code>M</code> separate printr-un spaţiu. Pe linia a treia se află numărul natural <code>X</code>. Următoarele <code>N</code> linii conţin câte <code>M</code> caractere <code>‘P’</code> şi <code>‘S’</code> descriind planul locuinţei.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă valoarea lui <code>p</code> este <code>1</code>, atunci fişierul de ieşire <code>parchet.out</code> conţine pe prima linie două numere naturale <code>C</code> şi <code>R</code> separate printr-un spaţiu, reprezentând respectiv numărul de camere acoperite cu parchet şi cantitatea de parchet rămasă, exprimată în m<sup>2</sup>. Dacă valoarea lui <code>p</code> este <code>2</code>, atunci pe prima linie a fişierului de ieşire se va scrie numărul de posibilităţi de parchetare a unui număr maxim de camere folosind întreaga cantitate de parchet, respectiv valoarea <code>0</code> în cazul în care acest lucru nu este posibil.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N, M ≤ 250</code></li>
+	<li>În casă sunt maxim <code>20</code> de camere şi casa are pereţi spre exterior.</li>
+	<li>Suprafaţa unei camere nu depăşeşte <code>(N-2)*(M-2)</code> m<sup>2</sup>.</li>
+	<li>Pentru rezolvarea corectă a cerinţei 1 se acordă 50% din punctaj, iar pentru rezolvarea corectă a cerinţei 2 se acordă 50% din punctaj.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>parchet.in</code></p>
+
+<pre>1
+7 9
+19
+PPPPPPPPP
+PSSSPSPSP
+PSSSPSPPP
+PSSPPPPSP
+PSPPSSPSP
+PSPSSSPSP
+PPPPPPPPP</pre>
+
+<p><code>parchet.out</code></p>
+
+<pre>3 1</pre>
+
+<h3>Explicație</h3>
+
+<p>Se va rezolva doar cerinţa 1.</p>
+
+<p>Locuinţa are <code>5</code> camere având suprafeţele de <code>10</code>, <code>2</code>, <code>1</code>, <code>3</code>, <code>5</code> m<sup>2</sup>. Pot fi parchetate complet <code>3</code> camere consumând <code>18</code> m~2~ = <code>10+5+3</code>. Rămâne <code>1</code> m~2~ de parchet nefolosit.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>parchet.in</code></p>
+
+<pre>2
+7 9
+19
+PPPPPPPPP
+PSSSPSPSP
+PSSSPSPPP
+PSSPPPPSP
+PSPPSSPSP
+PSPSSSPSP
+PPPPPPPPP</pre>
+
+<p><code>parchet.out</code></p>
+
+<pre>1</pre>
+
+<h3>Explicație</h3>
+
+<p>Se va rezolva doar cerinţa 2.</p>
+
+<p>Dacă se aleg camerele cu suprafeţele <code>10</code>, <code>1</code>, <code>3</code>, <code>5</code> va fi folosită întreaga suprafaţă de parchet. Există o singură posibilitate de a selecta un număr maxim de camere.</p>		</article>
+		</body></html>

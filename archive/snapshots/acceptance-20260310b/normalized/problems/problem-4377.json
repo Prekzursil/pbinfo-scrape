@@ -1,0 +1,307 @@
+{
+  "id": 4377,
+  "slug": "enigma",
+  "name": "enigma",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4377/enigma",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 53,
+      "name": "Programare dinamică",
+      "slug": "programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=53"
+    },
+    {
+      "id": 158,
+      "name": "Probleme de numărare",
+      "slug": "probleme-de-num-rare",
+      "href": "/?pagina=probleme-lista&tag=158"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Cum Pascalopol nu le are cu calculatoarele, iar aceasta este clar o problemă de Informatică, moșierul vă cere ajutorul și vă va oferi în schimb <code>100</code> de puncte.</p>",
+      "text": "Cum Pascalopol nu le are cu calculatoarele, iar aceasta este clar o problemă de Informatică, moșierul vă cere ajutorul și vă va oferi în schimb 100 de puncte."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>enigma.in</code> conține pe prima linie numerele naturale <code>N</code>, <code>M</code>, <code>L</code> și <code>C</code>, reprezentând numărul de linii și numărul de coloane ale bucății de pământ, respectiv coordonatele parcelei în care Felix vrea să ajungă. Pe următoarele <code>N</code> linii se vor afla câte <code>M</code> valori <code>0</code> sau <code>1</code>, unde <code>1</code> reprezintă o parcelă care este groapă, iar <code>0</code> reprezintă o parcelă care nu este groapă. Pe ultima linie se va afla numărul <code>K</code>, reprezentând lungimea maximă a unui salt pe care calul lui Felix îl poate face.</p>",
+      "text": "Fișierul de intrare enigma.in conține pe prima linie numerele naturale N, M, L și C, reprezentând numărul de linii și numărul de coloane ale bucății de pământ, respectiv coordonatele parcelei în care Felix vrea să ajungă. Pe următoarele N linii se vor afla câte M valori 0 sau 1, unde 1 reprezintă o parcelă care este groapă, iar 0 reprezintă o parcelă care nu este groapă. Pe ultima linie se va afla numărul K, reprezentând lungimea maximă a unui salt pe care calul lui Felix îl poate face."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>enigma.out</code> va conține o singură linie pe care va fi scris numărul de moduri în care calul poate ajunge din parcela <code>(1,1)</code> în parcela <code>(L,C)</code> prin modalitatea descrisă în enunț, modulo <code>1.000.000.007</code>.</p>",
+      "text": "Fișierul de ieșire enigma.out va conține o singură linie pe care va fi scris numărul de moduri în care calul poate ajunge din parcela (1,1) în parcela (L,C) prin modalitatea descrisă în enunț, modulo 1.000.000.007."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N, M, K ≤ 1000</code></li>\n\t<li>Se garantează că Felix vrea să ajungă într-o parcelă care nu este groapă, iar parcela <code>(1,1)</code> nu este groapă.</li>\n\t<li>Calul nu poate călca pe o parcelă care este groapă, dar poate efectua un salt peste una sau mai multe parcele care sunt gropi.</li>\n\t<li>Pentru 9 puncte, <code>1 ≤ N, M, K ≤ 7</code></li>\n\t<li>Pentru 11 puncte, <code>1 ≤ N, M ≤ 1000</code>, iar <code>K = 1</code></li>\n\t<li>Pentru 25 de puncte, <code>1 ≤ N, M, K ≤ 1000</code> și nu există nicio parcelă groapă</li>\n\t<li>Pentru 25 de puncte, <code>8 ≤ N, M, K ≤ 100</code></li>\n\t<li>Pentru 30 de puncte, <code>101 ≤ N, M, K ≤ 1000</code></li>\n</ul>",
+      "text": "1 ≤ N, M, K ≤ 1000 Se garantează că Felix vrea să ajungă într-o parcelă care nu este groapă, iar parcela (1,1) nu este groapă. Calul nu poate călca pe o parcelă care este groapă, dar poate efectua un salt peste una sau mai multe parcele care sunt gropi. Pentru 9 puncte, 1 ≤ N, M, K ≤ 7 Pentru 11 puncte, 1 ≤ N, M ≤ 1000, iar K = 1 Pentru 25 de puncte, 1 ≤ N, M, K ≤ 1000 și nu există nicio parcelă groapă Pentru 25 de puncte, 8 ≤ N, M, K ≤ 100 Pentru 30 de puncte, 101 ≤ N, M, K ≤ 1000"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>enigma.in</code></p><pre>5 5 4 3\n0 0 1 1 1\n1 0 1 0 0\n1 0 0 0 0\n0 1 0 1 0\n0 1 1 1 0\n2</pre><p><code>enigma.out</code></p><pre>2</pre>",
+      "text": "enigma.in5 5 4 3 0 0 1 1 1 1 0 1 0 0 1 0 0 0 0 0 1 0 1 0 0 1 1 1 0 2enigma.out2"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p>Cele două drumuri posibile sunt: <code>(1,1) → (1,2) → (2,2) → (3,2) → (3,3) → (4,3)</code>, respectiv <code>(1,1) → (1,2) → (3,2) → (3,3) → (4,3)</code>.</p>",
+      "text": "Cele două drumuri posibile sunt: (1,1) → (1,2) → (2,2) → (3,2) → (3,3) → (4,3), respectiv (1,1) → (1,2) → (3,2) → (3,3) → (4,3)."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>enigma.in</code></p><pre>5 5 4 3\n0 0 1 1 1\n0 0 0 0 0\n0 0 0 0 0\n0 1 0 1 0\n0 1 1 1 0\n3</pre><p><code>enigma.out</code></p><pre>17</pre>",
+      "text": "enigma.in5 5 4 3 0 0 1 1 1 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 1 1 1 0 3enigma.out17"
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "1 ≤ N, M, K ≤ 1000",
+    "Se garantează că Felix vrea să ajungă într-o parcelă care nu este groapă, iar parcela (1,1) nu este groapă.",
+    "Calul nu poate călca pe o parcelă care este groapă, dar poate efectua un salt peste una sau mai multe parcele care sunt gropi.",
+    "Pentru 9 puncte, 1 ≤ N, M, K ≤ 7",
+    "Pentru 11 puncte, 1 ≤ N, M ≤ 1000, iar K = 1",
+    "Pentru 25 de puncte, 1 ≤ N, M, K ≤ 1000 și nu există nicio parcelă groapă",
+    "Pentru 25 de puncte, 8 ≤ N, M, K ≤ 100",
+    "Pentru 30 de puncte, 101 ≤ N, M, K ≤ 1000"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qd25667b5e0.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "11",
+    "intrare/ieșire": "enigma.in / enigma.out",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "CNER_CODE 2023",
+    "autor": "Andrei Boacă",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 64,
+  "author": "Andrei Boacă",
+  "sourceAttribution": "CNER_CODE 2023",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4377/enigma"
+}

@@ -1,0 +1,68 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4244"><article id="enunt">
+			<p>Autorităţile dintr-o zonă de munte intenţionează să stabilească un plan de urgenţă, pentru a reacţiona mai eficient la frecventele calamităţi naturale din zonă. În acest scop au identificat <code>N</code> puncte de interes strategic şi le-au numerotat distinct de la <code>1</code> la <code>N</code>. Punctele de interes strategic sunt conectate prin <code>M</code> căi de acces având priorităţi în funcţie de importanţă. Între oricare două puncte de interes strategic există cel mult o cale de acces ce poate fi parcursă în ambele sensuri şi cel puţin un drum (format din una sau mai multe căi de acces) ce le conectează. <br>
+În cazul unei calamităţi unele căi de acces pot fi temporar întrerupte şi astfel între anumite puncte de interes nu mai există legătură. Ca urmare pot rezulta mai multe grupuri de puncte în aşa fel încât între oricare două puncte din acelaşi grup să existe măcar un drum şi între oricare două puncte din grupuri diferite să nu existe drum. </p>
+
+<h1>Cerința</h1>
+
+<p>Autorităţile estimează gravitatea unei calamităţi ca fiind suma priorităţilor căilor de acces distruse de aceasta şi doresc să determine un scenariu de gravitate maximă, în care punctele de interes strategic să fie împărţite într-un număr de <code>K</code> grupuri.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>urgenta.in</code> are următorul format:<br>
+<code>N M K</code><br>
+<code>i1 j1 p1</code> – între punctele <code>i1</code> şi <code>j1</code> există o cale de acces de prioritate <code>p1</code>.<br>
+<code>i2 j2 p2</code> – între punctele <code>i2</code> şi <code>j2</code> există o cale de acces de prioritate <code>p2</code>.<br>
+…<br>
+<code>iM jM pM</code> – între punctele <code>iM</code> şi <code>jM</code> există o cale de acces de prioritate <code>pM</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>urgenta.out</code> va avea următorul format:<br>
+<code>gravmax</code>	– gravitatea maximă<br>
+<code>C</code> – numărul de căi de acces întrerupte de calamitate<br>
+<code>k1 h1</code>	– între punctele <code>k1</code> şi <code>h1</code> a fost întreruptă calea de acces<br>
+<code>k2 h2</code> – între punctele <code>k2</code> şi <code>h2</code> a fost întreruptă calea de acces<br>
+…<br>
+<code>kC hC</code> – între punctele <code>kC</code> şi <code>hC</code> a fost întreruptă calea de acces</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>0 &lt; N &lt; 256</code></li>
+	<li><code>N - 2 &lt; M &lt; 32385</code></li>
+	<li><code>0 &lt; K &lt; N + 1</code></li>
+	<li>Priorităţile căilor de acces sunt întregi strict pozitivi mai mici decât <code>256</code>.</li>
+	<li>Un grup de puncte poate conţine între <code>1</code> şi <code>N</code> puncte inclusiv.</li>
+	<li>Dacă există mai multe soluţii, programul va determina una singură.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>urgenta.in</code></p>
+
+<pre>7 11 4
+1 2 1
+1 3 2
+1 7 3
+2 4 3
+3 4 2
+3 5 1
+3 6 1
+3 7 5
+4 5 5
+5 6 4
+6 7 3</pre>
+
+<p><code>urgenta.out</code></p>
+
+<pre>27
+8
+1 3
+1 7
+2 4
+3 4
+3 7
+4 5
+5 6
+6 7</pre>		</article>
+		</body></html>

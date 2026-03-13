@@ -1,0 +1,313 @@
+{
+  "id": 4434,
+  "slug": "castel5",
+  "name": "castel5",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4434/castel5",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 91,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=91"
+    },
+    {
+      "id": 92,
+      "name": "Geometrie",
+      "slug": "geometrie",
+      "href": "/?pagina=probleme-lista&tag=92"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Fiind date numărul natural nenul <code>N</code> și coordonatele celor <code>N+1</code> garduri (perechi de colțuri stânga-sus și dreapta-jos), să se determine (în cazul în care există) punctul <strong>cel mai apropiat de originea sistemului de coordonate</strong> unde Harap-Alb își poate amplasa castelul astfel încât acesta să se afle în interiorul a cel puțin <code>N</code> garduri.</p>",
+      "text": "Fiind date numărul natural nenul N și coordonatele celor N+1 garduri (perechi de colțuri stânga-sus și dreapta-jos), să se determine (în cazul în care există) punctul cel mai apropiat de originea sistemului de coordonate unde Harap-Alb își poate amplasa castelul astfel încât acesta să se afle în interiorul a cel puțin N garduri."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>castel.in</code> conține pe prima linie numărul natural nenul <code>N</code>, cu semnificația de mai sus. Următoarele <code>N+1</code> linii conțin câte patru numere naturale <code>a</code><sub><code>i</code></sub>, <code>b</code><sub><code>i</code></sub>, <code>c</code><sub><code>i</code></sub>, <code>b</code><sub><code>i</code></sub> (<code>1 ≤ i ≤ N + 1</code>), separate între ele prin câte un spațiu, reprezentând coordonatele gardurilor. Colțul din stânga-sus al gardului <code>i</code> se află în punctul de abscisă <code>a</code><sub><code>i</code></sub> și ordonată <code>b</code><sub><code>i</code></sub>, iar cel din dreapta-jos în punctul de abscisă <code>c</code><sub><code>i</code></sub> și ordonată <code>d</code><sub><code>i</code></sub>.</p>",
+      "text": "Fișierul de intrare castel.in conține pe prima linie numărul natural nenul N, cu semnificația de mai sus. Următoarele N+1 linii conțin câte patru numere naturale ai, bi, ci, bi (1 ≤ i ≤ N + 1), separate între ele prin câte un spațiu, reprezentând coordonatele gardurilor. Colțul din stânga-sus al gardului i se află în punctul de abscisă ai și ordonată bi, iar cel din dreapta-jos în punctul de abscisă ci și ordonată di."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>castel.out</code> va conține pe prima linie două numere naturale, reprezentând abscisa, respectiv ordonata punctului determinat conform cerinței. Dacă sunt mai multe astfel de puncte, se va alege <strong>cel cu abscisa minimă</strong>. Dacă nu există niciun astfel de punct, se va afișa mesajul <code>NU</code>. </p>",
+      "text": "Fișierul de ieșire castel.out va conține pe prima linie două numere naturale, reprezentând abscisa, respectiv ordonata punctului determinat conform cerinței. Dacă sunt mai multe astfel de puncte, se va alege cel cu abscisa minimă. Dacă nu există niciun astfel de punct, se va afișa mesajul NU."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N &lt; 200.000</code></li>\n\t<li><code>0 ≤ a</code><sub><code>i</code></sub>, <code>b</code><sub><code>i</code></sub>, <code>c</code><sub><code>i</code></sub>, <code>d</code><sub><code>i</code></sub> <code>&lt; 100.000</code> și <code>a</code><sub><code>i</code></sub> <code>≤ c</code><sub><code>i</code></sub>, <code>d</code><sub><code>i</code></sub> <code>≤ b</code><sub><code>i</code></sub>, pentru fiecare <code>i</code>: <code>1 ≤ i ≤ N + 1</code>.</li>\n\t<li>Laturile tuturor dreptunghiurilor sunt paralele cu axele de coordonate ale sistemului cartezian.}</li>\n\t<li>Originea sistemului de coordonate se află în punctul <code>(0,0)</code>.</li>\n\t<li>Interiorul unui gard conține și gardul (conturul).</li>\n\t<li>Pot exista dreptunghiuri degenerate, adică segmente (paralele cu axele de coordonate) sau puncte.</li>\n\t<li>Pot exista dreptunghiuri identice.</li>\n\t<li>Distanța dintre două puncte situate la coordonatele <code>(a,b)</code>, respectiv <code>(c,d)</code> este egală cu \\( \\sqrt{(c-a)^2+(d-b)^2} \\).</li>\n</ul>",
+      "text": "1 ≤ N < 200.000 0 ≤ ai, bi, ci, di < 100.000 și ai ≤ ci, di ≤ bi, pentru fiecare i: 1 ≤ i ≤ N + 1. Laturile tuturor dreptunghiurilor sunt paralele cu axele de coordonate ale sistemului cartezian.} Originea sistemului de coordonate se află în punctul (0,0). Interiorul unui gard conține și gardul (conturul). Pot exista dreptunghiuri degenerate, adică segmente (paralele cu axele de coordonate) sau puncte. Pot exista dreptunghiuri identice. Distanța dintre două puncte situate la coordonatele (a,b), respectiv (c,d) este egală cu \\( \\sqrt{(c-a)^2+(d-b)^2} \\)."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>castel.in</code></p><pre>3\n1 4 3 2\n4 2 5 0\n2 3 4 2\n2 3 5 1</pre><p><code>castel.out</code></p><pre>2 2</pre><h3>Explicație</h3><p>Zona hașurată cu roșu reprezintă punctele ce se află în interiorul a cel puțin <code>3</code> dreptunghiuri. Punctul <code>(4,2)</code> respectă, de asemenea, cerința. Dintre toate acestea, <code>(2,2)</code> este cel mai apropiat de origine.</p>",
+      "text": "castel.in3 1 4 3 2 4 2 5 0 2 3 4 2 2 3 5 1castel.out2 2ExplicațieZona hașurată cu roșu reprezintă punctele ce se află în interiorul a cel puțin 3 dreptunghiuri. Punctul (4,2) respectă, de asemenea, cerința. Dintre toate acestea, (2,2) este cel mai apropiat de origine."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>castel.in</code></p><pre>4\n1 4 5 2\n2 5 3 1\n4 5 5 1\n3 6 4 5\n2 5 5 4</pre><p><code>castel.out</code></p><pre>NU</pre><h3>Explicație</h3><p>Niciun punct nu se află în interiorul a cel puțin <code>4</code> garduri, așa cum se poate observa din cea de a doua diagramă de mai jos.</p>",
+      "text": "castel.in4 1 4 5 2 2 5 3 1 4 5 5 1 3 6 4 5 2 5 5 4castel.outNUExplicațieNiciun punct nu se află în interiorul a cel puțin 4 garduri, așa cum se poate observa din cea de a doua diagramă de mai jos."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Zona hașurată cu roșu reprezintă punctele ce se află în interiorul a cel puțin 3 dreptunghiuri. Punctul (4,2) respectă, de asemenea, cerința. Dintre toate acestea, (2,2) este cel mai apropiat de origine."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Niciun punct nu se află în interiorul a cel puțin 4 garduri, așa cum se poate observa din cea de a doua diagramă de mai jos."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N < 200.000",
+    "0 ≤ ai, bi, ci, di < 100.000 și ai ≤ ci, di ≤ bi, pentru fiecare i: 1 ≤ i ≤ N + 1.",
+    "Laturile tuturor dreptunghiurilor sunt paralele cu axele de coordonate ale sistemului cartezian.}",
+    "Originea sistemului de coordonate se află în punctul (0,0).",
+    "Interiorul unui gard conține și gardul (conturul).",
+    "Pot exista dreptunghiuri degenerate, adică segmente (paralele cu axele de coordonate) sau puncte.",
+    "Pot exista dreptunghiuri identice.",
+    "Distanța dintre două puncte situate la coordonatele (a,b), respectiv (c,d) este egală cu \\( \\sqrt{(c-a)^2+(d-b)^2} \\)."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qf06c11ef4b.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "10",
+    "intrare/ieșire": "castel.in / castel.out",
+    "limită timp": "0.4 secunde",
+    "limită memorie": "128 MB / 64 MB",
+    "sursa problemei": "ONI 2023 clasa a VIII-a",
+    "autor": "Sebastian Popa",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.4,
+  "memoryLimitMb": 128,
+  "author": "Sebastian Popa",
+  "sourceAttribution": "ONI 2023 clasa a VIII-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4434/castel5"
+}

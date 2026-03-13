@@ -1,0 +1,88 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3900"><article id="enunt">
+			<h1>Myszkowski</h1>
+
+<p>Cifrul <code>Myszkowski</code> functioneaza asa:</p>
+
+<ul>
+	<li>notam cu <code>n</code> lungimea mesajului, si cu <code>m</code> lungimea cheii;</li>
+</ul>
+
+<ul>
+	<li>mesajul se pozitioneaza intr-o matrice cu <code>m</code> coloane</li>
+</ul>
+
+<ul>
+	<li>Pentru mesajul <code>THEREISONEIMPOSTORAMONGUS</code> si cheia <code>IMPOSTOR</code> atunci matricea ar arata astfel:<br>
+<code>
+   1 2 3 4 5 6 7 8
+   I M P O S T O R
+   ---------------
+ 1 T H E R E I S O
+ 2 N E I M P O S T
+ 3 O R A M O N G U
+ 4 S
+</code></li>
+	<li>coloana <code>j</code> va avea asociata litera din cheie de pe pozitia <code>j</code>, apoi sortam coloanele in functie de litera lor, iar la litere egale, dupa numarul de ordine al coloanei:</li>
+</ul>
+
+<code>
+    I M O O P R S T
+    T H R S E O E I
+    N E M S I T P O
+    O R M G A U O N
+    S
+</code>
+<ul>
+	<li>Pentru a cripta mesajul procedam astfel: parcurgem coloanele si daca avem <code>k</code> coloane cu aceiasi litera atunci afisam prima litera din prima coloana, prima litera din a doua coloana … prima litera din a <code>k</code> -a coloana, a doua litera din prima coloana, a doua litera din a doua coloana… a doua litera din a <code>k</code> -a coloana … ;</li>
+</ul>
+
+<ul>
+	<li>mesajul criptat va arata astfel: <code>TNOS HERR SMSM GEIA OTUE POIO N</code> (daca <code>l= numarul de linii din matrice</code>, atunci impartim mesajul criptat in cuvinte cu <code>l</code> litere, mai putin ultimul cuvant).</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Se da numarul <code>c</code>:<br>
+</p><ul>
+	<li>pentru <code>c=1</code>, se citeste un mesaj si o cheie si trebuie sa afisati mesajul criptat</li>
+	<li>pentru <code>c=2</code>, se citeste un set de cuvinte ce reprezinta un mesaj criptat si o cheie si trebuie sa afisati mesajul decriptat.</li><br>
+</ul><p></p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>myszkowski.in</code> conține pe prima linie numărul <code>c</code>, mesajul criptat(daca <code>c=1</code>) sau setul de cuvinte(daca <code>c=2</code>) si cheia.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>myszkowski.out</code> va conține pe prima linie mesajul criptat sau  decripat, in functie de <code>c</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>mesajul si cheia sunt formate doar din litere mari</li>
+	<li><code>1 ≤ lungimea mesajului, lungimea cheii ≤ 10000</code></li>
+	<li><code>lungimea cheii ≤ lungimea mesajului</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>myszkowski.in</code></p>
+
+<pre>1
+THEREISONEIMPOSTORAMONGUS IMPOSTOR</pre>
+
+<p><code>myszkowski.out</code></p>
+
+<pre>TNOSHERRSMSMGEIAOTUEPOION</pre>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>myszkowski.in</code></p>
+
+<pre>2
+TNOSHERRSMSMGEIAOTUEPOION IMPOSTOR</pre>
+
+<p><code>myszkowski.out</code></p>
+
+<pre>THEREISONEIMPOSTORAMONGUS</pre>		</article>
+		</body></html>

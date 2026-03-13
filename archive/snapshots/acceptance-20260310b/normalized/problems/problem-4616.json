@@ -1,0 +1,326 @@
+{
+  "id": 4616,
+  "slug": "robotron",
+  "name": "Robotron",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4616/robotron",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 9,
+      "name": "Parcurgerea vectorilor",
+      "slug": "parcurgerea-vectorilor",
+      "href": "/?pagina=probleme-lista&tag=9"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>1) Să se determine numărul <code>M</code> al echipelor participante și codul <code>H</code> al planetei gazdă Hazard, știind că numărul jucătorilor din echipa planetei gazdă este strict mai mare decât numărul jucătorilor oricărei alte echipe.</p><p>2) Să se determine codul planetei de pe care provine echipa câștigătoare la runda <code>K</code> și codul jucătorului care aduce victoria acestei echipei la aceasta rundă.</p>",
+      "text": "1) Să se determine numărul M al echipelor participante și codul H al planetei gazdă Hazard, știind că numărul jucătorilor din echipa planetei gazdă este strict mai mare decât numărul jucătorilor oricărei alte echipe.2) Să se determine codul planetei de pe care provine echipa câștigătoare la runda K și codul jucătorului care aduce victoria acestei echipei la aceasta rundă."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>robotron.in</code> conține pe prima linie un număr <code>C</code>, reprezentând numărul cerinței, pe a doua linie, <code>3</code> numere naturale <code>N</code>,  <code>L</code> și <code>K</code> cu semnificația din enunț. Pe următoarele <code>N</code> linii sunt datele jucătorilor: pe a <code>i</code>-a dintre aceste linii se află câte două numere naturale <code>E[i]</code> și <code>P[i]</code>, cu semnificația din enunț. Numerele de pe aceeași linie a fișierului sunt separate prin câte un spațiu.</p>",
+      "text": "Fișierul de intrare robotron.in conține pe prima linie un număr C, reprezentând numărul cerinței, pe a doua linie, 3 numere naturale N, L și K cu semnificația din enunț. Pe următoarele N linii sunt datele jucătorilor: pe a i-a dintre aceste linii se află câte două numere naturale E[i] și P[i], cu semnificația din enunț. Numerele de pe aceeași linie a fișierului sunt separate prin câte un spațiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>robotron.out</code> va conține pe prima linie, pentru <code>C=1</code>, numerele <code>M</code> și <code>H</code>, iar pentru <code>C=2</code>, codul planetei și al jucătorului precizate la cerința <code>2</code>. Numerele de pe aceeași linie a fișierului sunt despărțite printr-un spațiu.</p>",
+      "text": "Fișierul de ieșire robotron.out va conține pe prima linie, pentru C=1, numerele M și H, iar pentru C=2, codul planetei și al jucătorului precizate la cerința 2. Numerele de pe aceeași linie a fișierului sunt despărțite printr-un spațiu."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 100.000</code></li>\n\t<li><code>1 ≤ L ≤ 1.000.000.000</code></li>\n\t<li><code>1 ≤ K ≤ 1.000.000.000</code></li>\n\t<li><code>101 ≤ E[i] ≤ 1.000.000.000</code></li>\n\t<li><code>101 ≤ P[i] ≤ 1.000.000</code></li>\n\t<li><code>1 ≤ CP ≤ 99</code></li>\n\t<li>Pentru 20 de puncte, <code>C = 1</code>, <code>N ≤ 1000</code></li>\n\t<li>Pentru 30 de puncte, <code>C = 1</code></li>\n\t<li>Pentru 10 puncte, <code>C = 2</code>, <code>N ≤ 10000</code>, <code>L ≤ 10000</code>, <code>K ≤ 1000</code></li>\n\t<li>Pentru 10 puncte, <code>C = 2</code>, <code>N ≤ 10000</code>, <code>L ≤ 10000</code></li>\n\t<li>Pentru 30 de puncte, <code>C = 2</code></li>\n</ul>",
+      "text": "1 ≤ N ≤ 100.000 1 ≤ L ≤ 1.000.000.000 1 ≤ K ≤ 1.000.000.000 101 ≤ E[i] ≤ 1.000.000.000 101 ≤ P[i] ≤ 1.000.000 1 ≤ CP ≤ 99 Pentru 20 de puncte, C = 1, N ≤ 1000 Pentru 30 de puncte, C = 1 Pentru 10 puncte, C = 2, N ≤ 10000, L ≤ 10000, K ≤ 1000 Pentru 10 puncte, C = 2, N ≤ 10000, L ≤ 10000 Pentru 30 de puncte, C = 2"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>robotron.in</code></p><pre>1\n7 23 2\n245 5\n3103 5\n3203 2\n3303 5\n2245 6\n3003 3\n231745 1</pre><p><code>robotron.out</code></p><pre>2 3</pre><h3>Explicație</h3><p>Sunt 7 jucători și ei vor fi împărțiți în 2 echipe (<code>M = 2</code>), reprezentând planetele cu codurile <code>3</code> (jucătorii cu codurile <code>31</code>, <code>32</code>, <code>33</code>, <code>30</code>) și <code>45</code> (jucătorii cu codurile <code>2</code>, <code>22</code>, <code>2317</code>). Codul planetei gazdă Hazard este <code>H = 3</code>, echipa planetei <code>3</code> fiind cea mai numeroasă.</p>",
+      "text": "robotron.in1 7 23 2 245 5 3103 5 3203 2 3303 5 2245 6 3003 3 231745 1robotron.out2 3ExplicațieSunt 7 jucători și ei vor fi împărțiți în 2 echipe (M = 2), reprezentând planetele cu codurile 3 (jucătorii cu codurile 31, 32, 33, 30) și 45 (jucătorii cu codurile 2, 22, 2317). Codul planetei gazdă Hazard este H = 3, echipa planetei 3 fiind cea mai numeroasă."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>robotron.in</code></p><pre>2\n7 23 2\n2145 5\n3103 5\n3203 2\n3303 5\n2245 6\n3003 3\n2345 1</pre><p><code>robotron.out</code></p><pre>45 21</pre><h3>Explicație</h3><p>Traseul conține <code>23</code> de căsuțe, iar la prima rundă membrii echipelor au pozițiile stabilite la înscriere și vor muta în ordinea acestor poziții:</p><p>Echipa planetei cu codul <code>3</code> are următorii jucători, cu codurile și puterile aferente: <code>31 5</code>, <code>32 2</code>, <code>33 5</code>, <code>30 3</code></p><p>Echipa planetei cu codul <code>45</code> are următorii jucători, cu codurile și puterile aferente: <code>21 5</code>, <code>22 6</code>, <code>23 1</code>.</p><p>La runda a 2-a pozițiile membrilor se schimbă, primii jucători din fiecare echipă trecând la coadă:</p><p>Echipa planetei cu codul <code>3</code>: <code>32 2</code>, <code>33 5</code>, <code>30 3</code>, <code>31 5</code>.</p><p>Echipa planetei cu codul <code>45</code>: <code>22 6</code>, <code>23 1</code>, <code>21 5</code>.</p><p>Echipa planetei cu codul <code>45</code> termină jocul în runda a <code>2</code>-a după <code>6</code> mutări, care, pentru această echipă, vor fi efectuate în ordine de jucătorii <code>22</code>, <code>23</code>, <code>21</code>, <code>22</code>, <code>23</code> si <code>21</code>. Deci ultima mutare o va face jucătorul cu codul <code>CJ = 21</code>, care ajunge în căsuța <code>2</code>, deci trece peste căsuța <code>1</code>. Ordinea în care mută jucătorii celor două echipe în cadrul acestei runde, precum și numerele căsuțelor ocupate succesiv de cei doi pioni, sunt ilustrate în tabelul de mai jos.  </p><p><img alt=\"\" src=\"/resurse/16a4b0/robotron_02.jpg\"></p>",
+      "text": "robotron.in2 7 23 2 2145 5 3103 5 3203 2 3303 5 2245 6 3003 3 2345 1robotron.out45 21ExplicațieTraseul conține 23 de căsuțe, iar la prima rundă membrii echipelor au pozițiile stabilite la înscriere și vor muta în ordinea acestor poziții:Echipa planetei cu codul 3 are următorii jucători, cu codurile și puterile aferente: 31 5, 32 2, 33 5, 30 3Echipa planetei cu codul 45 are următorii jucători, cu codurile și puterile aferente: 21 5, 22 6, 23 1.La runda a 2-a pozițiile membrilor se schimbă, primii jucători din fiecare echipă trecând la coadă:Echipa planetei cu codul 3: 32 2, 33 5, 30 3, 31 5.Echipa planetei cu codul 45: 22 6, 23 1, 21 5.Echipa planetei cu codul 45 termină jocul în runda a 2-a după 6 mutări, care, pentru această echipă, vor fi efectuate în ordine de jucătorii 22, 23, 21, 22, 23 si 21. Deci ultima mutare o va face jucătorul cu codul CJ = 21, care ajunge în căsuța 2, deci trece peste căsuța 1. Ordinea în care mută jucătorii celor două echipe în cadrul acestei runde, precum și numerele căsuțelor ocupate succesiv de cei doi pioni, sunt ilustrate în tabelul de mai jos."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Sunt 7 jucători și ei vor fi împărțiți în 2 echipe (M = 2), reprezentând planetele cu codurile 3 (jucătorii cu codurile 31, 32, 33, 30) și 45 (jucătorii cu codurile 2, 22, 2317). Codul planetei gazdă Hazard este H = 3, echipa planetei 3 fiind cea mai numeroasă."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Traseul conține 23 de căsuțe, iar la prima rundă membrii echipelor au pozițiile stabilite la înscriere și vor muta în ordinea acestor poziții:"
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 100.000",
+    "1 ≤ L ≤ 1.000.000.000",
+    "1 ≤ K ≤ 1.000.000.000",
+    "101 ≤ E[i] ≤ 1.000.000.000",
+    "101 ≤ P[i] ≤ 1.000.000",
+    "1 ≤ CP ≤ 99",
+    "Pentru 20 de puncte, C = 1, N ≤ 1000",
+    "Pentru 30 de puncte, C = 1",
+    "Pentru 10 puncte, C = 2, N ≤ 10000, L ≤ 10000, K ≤ 1000",
+    "Pentru 10 puncte, C = 2, N ≤ 10000, L ≤ 10000",
+    "Pentru 30 de puncte, C = 2"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q2c708225ae.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/robotron_01.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-robotron-01-jpg.jpg",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/robotron_02.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-robotron-02-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "robotron.in / robotron.out",
+    "limită timp": "0.2 secunde",
+    "limită memorie": "256 MB / 8 MB",
+    "sursa problemei": "OJI 2024, clasa a 8-a",
+    "autor": "Isabela Patricia Coman",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.2,
+  "memoryLimitMb": 256,
+  "author": "Isabela Patricia Coman",
+  "sourceAttribution": "OJI 2024, clasa a 8-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4616/robotron"
+}

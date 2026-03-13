@@ -1,0 +1,54 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1232"><article id="enunt">
+			<p>Fie <code>A = (a[1],a[2],…,a[N])</code> o permutare a mulțimii <code>{1,2,…,N}</code>.</p>
+
+<p>Permutarea <code>A</code> o numim <code>K</code>-swap dacă prin aplicarea algoritmului de sortare bubble-sort sunt necesare exact <code>K</code> swapuri (interschimbări) pentru ca aceasta să devină permutarea identică.<br>
+Reamintim algoritmul bubble-sort:</p>
+
+<pre class="code_cpp">do { &nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; ok = 1;&nbsp; &nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; for&nbsp;( i&nbsp;=&nbsp;1;&nbsp;i&nbsp;&lt;&nbsp;N;&nbsp;i ++ )&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;    if&nbsp;( a[i]&nbsp;&gt; a[i+1] ){&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;swap(a[i], a[i+1]); &nbsp;&nbsp;
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ok = 0; &nbsp;&nbsp;
+ &nbsp;    &nbsp;&nbsp;}
+}while( ok == 0 );    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</pre>
+
+<h1>Cerinţă</h1>
+
+<p>Pentru <code>N</code> și <code>K</code> dat să se determine numărul de permutări <code>K</code>-swap ale mulțimii <code>{1,2,…,N}</code>.</p>
+
+<p>Exemplu: pentru <code>N = 3</code> și <code>K = 2</code>, dintre permutările <code>{1,2,3}, {1,3,2}, {2,1,3}, {2,3,1}, {3,1,2}, {3,2,1}</code>, permutările <code>2</code>-swap sunt următoarele: <code>{2,3,1}, {3,1,2}</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>kswap.in</code> conține pe prima linie două numere naturale nenule <code>N K</code> separate printr-un spaţiu, cu semnificația descrisă anterior.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>kswap.out</code> va conține pe prima linie un singur număr natural <code>M</code> ce reprezintă numărul de permutări <code>K</code>-swap, modulo <code>30103</code> ale mulțimii <code>{1,2,…,N}</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 150</code></li>
+	<li><code>1 ≤ K ≤ N*(N-1)/2</code></li>
+	<li>Prin permutarea identică înțelegem permutarea <code>(1,2,…,N)</code></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>kswap.in</code></p>
+
+<pre>4 5</pre>
+
+<p><code>kswap.out</code></p>
+
+<pre>3</pre>
+
+<h3>Explicație</h3>
+
+<p>Permutările mulțimii <code>{1,2,3,4}</code> sunt:<br>
+<code>{1,2,3,4}</code>, <code>{1,2,4,3}</code>, <code>{1,3,2,4}</code>, <code>{1,3,4,2}</code>, <code>{1,4,2,3}</code>, <code>{1,4,3,2}</code>, <code>{2,1,3,4}</code>, <code>{2,1,4,3}</code>, <code>{2,3,1,4}</code>, <code>{2,3,4,1}</code>, <code>{2,4,1,3}</code>, <code>{2,4,3,1}</code>, <code>{3,1,2,4}</code>, <code>{3,1,4,2}</code>, <code>{3,2,1,4}</code>, <code>{3,2,4,1}</code>, <code>{3,4,1,2}</code>, <code>{3,4,2,1}</code>, <code>{4,1,2,3}</code>, <code>{4,1,3,2}</code>, <code>{4,2,1,3}</code>, <code>{4,2,3,1}</code>, <code>{4,3,1,2}</code>, <code>{4,3,2,1}</code>.</p>
+
+<p>Doar <code>3</code> dintre acestea sunt permutări <code>5</code>-swap: <code>{3,4,2,1}</code>, <code>{4,2,3,1}</code>, <code>{4,3,1,2}</code>.</p>		</article>
+		</body></html>

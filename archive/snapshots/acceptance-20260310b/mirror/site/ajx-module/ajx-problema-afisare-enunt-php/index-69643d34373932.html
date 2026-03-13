@@ -1,0 +1,71 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4792"><article id="enunt">
+			<p>Prințul Mugurel trebuie să organizeze un nou spectacol pentru locuitorii din Imperiul Rațelor de Cauciuc. De data aceasta s-a gândit la ceva inedit: o cursă de natație pe Râul Macilor. Mugurel a adunat cele mai bune <code>N</code> raţe din imperiu, numerotate de la <code>1</code> la <code>N</code>, fiecare rață fiind caracterizată prin viteză şi nivel de rezistenţă. </p>
+
+<p>Pe Râul Macilor s-au amenajat <code>M</code> culoare de înot, numerotate de la <code>1</code> la <code>M</code>; pe fiecare culoar este câte o baliză, situată la o anumită distanță (în metri) față de linia de start, iar această distanță este strict mai mare decât distanța balizei de pe culoarul anterior. Mugurel alege <code>M</code>  rațe dintre cele <code>N</code>, care sunt așezate adecvat la linia de start, fiecare pe câte un culoar de înot. Apoi, toate aceste rațe alese pornesc simultan, fiecare rață înoată pe culoarul ei, până la baliza corespunzătoare, și se întoarce înapoi la linia de start, pe același culoar. Durata cursei se măsoară de la pornirea simultană a rațelor, până la momentul când toate rațele ajung înapoi la linia de start.</p>
+
+<p>Deoarece Mugurel ține la sănătatea locuitorilor săi, nu dezavantajează raţele mai puţin rezistente. Așadar, rața care înoată până la baliza de pe culoarul ei trebuie să aibă nivelul de rezistență <strong>mai mare sau egal</strong> cu al celei de pe culoarul alăturat, numerotat cu o valoare mai mică.</p>
+
+<p>Mugurel dorește să ofere un show de neuitat tuturor spectatorilor, așa că vrea să obțină un nou record imperial, alegând rațele corespunzător, astfel încât cursa să se încheie cât mai repede.</p>
+
+<h1>Cerința</h1>
+
+<p>Determinați durata minimă pe care o poate avea cursa.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>natatie.in</code> conține:</p>
+
+<ul>
+	<li>pe prima linie două numere naturale, <code>N</code>  și <code>M</code> , cu semnificația din enunț;</li>
+	<li>pe a doua linie  <code>N</code>  numere naturale, reprezentând vitezele rațelor (măsurate în metri pe secundă), în ordinea numerotării acestora;</li>
+	<li>pe a treia linie <code>N</code>  numere naturale, reprezentând nivelurile de rezistență ale rațelor, în ordinea numerotării acestora.</li>
+	<li>pe a patra linie <code>M</code>  numere naturale, în ordine strict crescătoare, reprezentând distanțele balizelor față de linia de start, în ordinea numerotării culoarelor de înot corespunzătoare.</li>
+</ul>
+
+<p>Numerele aflate pe aceeași linie a fișierului sunt separate prin câte un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Pe prima linie a fișierului de ieșire <code>natatie.out</code> se va afișa un singur număr, reprezentând durata minimă a cursei (măsurată în secunde). Răspunsul este considerat corect dacă valoarea absolută (în modul) a diferenței dintre durata reală a cursei și cea afișată este <code>≤ 0.001</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ M ≤ N ≤ 3.000</code></li>
+	<li><code>1 ≤ v[i], r[i] ≤ 1.000.000.000</code>, <code>1 ≤ i ≤ N</code></li>
+	<li><code>1 ≤ d[j] ≤ 1.000.000.000</code>, <code>1 ≤ j ≤ M</code></li>
+	<li><code>d[j] &lt; d[j+1], 1 ≤ j &lt; M</code></li>
+	<li>Timpul în care o rață cu viteza <code>v</code> parcurge distanța <code>d</code> este <code>d / v</code>.</li>
+	<li>Pentru 17 puncte, vitezele tuturor rațelor sunt egale</li>
+	<li>Pentru 16 puncte, nivelul de rezistență al tuturor rațelor este acelaşi.</li>
+	<li>Pentru 15 puncte, <code>N - M = 1</code></li>
+	<li>Pentru 18 puncte, <code>1 ≤ M ≤ N ≤ 100</code> și nivelul de rezistenţă al raţei <code>i</code> are valoarea <code>i, 1 ≤ i ≤ N</code></li>
+	<li>Pentru 11 puncte, <code>1 ≤ d[j] ≤ 3.000</code>, <code>1 ≤ j ≤ M</code> și rezultatul este un număr natural</li>
+	<li>Pentru 13 puncte, rezultatul este un număr natural</li>
+	<li>Pentru 10 puncte, fără restricții suplimentare.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>natatie.in</code></p>
+
+<pre>3 2
+4 5 3
+5 2 2
+3 7</pre>
+
+<p><code>natatie.out</code></p>
+
+<pre>2.8</pre>
+
+<h3>Explicație</h3>
+
+<p>Perechile de rațe care pot participa în cursă sunt: <code>(2, 1)</code>, <code>(2, 3)</code>, <code>(3, 2)</code>, <code>(3, 1)</code>. Timpii obținuți pentru fiecare cursă sunt: </p>
+
+<ul>
+	<li><code>(2, 1)</code>: <code>max((3+3)/5, (7+7)/4) = 3.5</code></li>
+	<li><code>(2, 3)</code>: <code>max((3+3)/5, (7+7)/3) = 4.666</code></li>
+	<li><code>(3, 2)</code>: <code>max((3+3)/3, (7+7)/5) = 2.8</code></li>
+	<li><code>(3, 1)</code>: <code>max((3+3)/3 + (7+7)/4) = 3.5</code></li>
+</ul>		</article>
+		</body></html>

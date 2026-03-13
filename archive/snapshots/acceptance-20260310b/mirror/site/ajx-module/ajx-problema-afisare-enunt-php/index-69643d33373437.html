@@ -1,0 +1,113 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3747"><article id="enunt">
+			<h1>Enunț</h1>
+
+<p>Presupunem că avem două cutii notate <code>A</code> și <code>B</code>. Cutia <code>A</code> conține <code>N</code> bile numerotate cu numerele naturale distincte: <code>0</code>, <code>1</code>, <code>2</code>, . . . , <code>N − 1</code>. Cutia <code>B</code> este goală.</p>
+
+<p>Spunem că o bilă dintr-o cutie este <code>bila specială</code> a acestei cutii dacă numărul <code>X</code> cu care este numerotată această bilă este egal cu media aritmetică a numerelor celorlalte bile din cutie.</p>
+
+<p>La un moment dat, cineva mută bila cu numărul <code>K</code> din cutia <code>A</code> în cutia <code>B</code>.</p>
+
+<p>Vi se cere să alegeți alte <code>K</code> bile, din cutia <code>A</code>, pe care să le mutați în cutia <code>B</code> astfel încât cutia <code>B</code> să conțină <code>K + 1</code> bile, iar bila cu numărul <code>K</code> să fie bila specială a cutiei <code>B</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Scrieți un program care citește numerele <code>N</code> și <code>K</code>, apoi determină:<br>
+</p><ol>
+	<li>dacă, înainte să fie mutate bile din cutia <code>A</code> în cutia <code>B</code>, există o bilă specială în cutia <code>A</code>; în caz afirmativ, programul determină numărul <code>X</code> cu care este numerotată această bilă specială;</li>
+	<li>cel mai mic (în sens lexicografic) șir strict crescător al numerelor celor <code>K</code> bile care pot fi mutate din cutia <code>A</code> în cutia <code>B</code> astfel încât bila cu numărul <code>K</code> să fie bila specială a cutiei <code>B</code>;</li>
+	<li>cel mai mare (în sens lexicografic) șir strict crescător al numerelor celor <code>K</code> bile care pot fi mutate din cutia <code>A</code> în cutia <code>B</code> astfel încât bila cu numărul <code>K</code> să fie bila specială a cutiei <code>B</code>.</li><br>
+</ol><p></p>
+
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>bile4.in</code> conține pe prima linie trei numere naturale <code>C</code>, <code>N</code> și <code>K</code>, separate prin câte un spațiu. <code>C</code> reprezintă cerința care trebuie rezolvată (<code>1</code>, <code>2</code> sau <code>3</code>), iar <code>N</code> și <code>K</code> au semnificația din enunț.</p>
+
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>bile4.out</code> va conține:<br>
+</p><ul>
+	<li>dacă <code>C = 1</code>, pe prima linie, numărul natural X reprezentând numârul bilei speciale din cutia <code>A</code> sau valoarea <code>−1</code> dacă cutia <code>A</code> nu conține o astfel de bilă (reprezentând răspunsul la cerința <code>1</code>);</li>
+	<li>dacă <code>C = 2</code>, pe prima linie, un șir strict crescător de <code>K</code> numere naturale, separate prin câte un spațiu (reprezentând răspunsul la cerința <code>2</code>);</li>
+	<li>dacă <code>C = 3</code>, pe prima linie, un șir strict crescător de <code>K</code> numere naturale, separate prin câte un spațiu (reprezentând răspunsul la cerința <code>3</code>).</li><br>
+</ul><p></p>
+
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 1000</code></li>
+	<li>numerele de pe a doua linie a fișierului de intrare vor fi mai mici decât <code>1.000.000.000</code></li>
+	<li><code>N</code> număr natural, <code>4 ≤ N ≤ 100000</code></li>
+	<li><code>K</code> număr natural, <code>2 ≤ K ≤ N/2</code></li>
+	<li>Șirul <code>y</code><sub><code>1</code></sub>, <code>y</code><sub><code>2</code></sub>, . . . , <code>y</code><sub><code>k</code></sub> este mai mic în sens lexicografic decât șirul <code>z</code><sub><code>1</code></sub>, <code>z</code><sub><code>2</code></sub>, . . . , <code>z</code><sub><code>k</code></sub> dacă există un indice <code>p</code>,  <code>1 ≤ p ≤ K</code>, astfel încât:<br>
+<code>y</code><sub><code>1</code></sub><code> = z</code><sub><code>1</code></sub>, <code>y</code><sub><code>2</code></sub><code> = z</code><sub><code>2</code></sub>, . . .  , <code>y</code><sub><code>p-1</code></sub><code> = z</code><sub><code>p-1</code></sub> și <code>y</code><sub><code>p</code></sub><code> = z</code><sub><code>p</code></sub></li>
+	<li>Pentru cerința <code>1</code> se acordă <code>20p</code>, iar pentru fiecare dintre cerințele <code>2</code> și <code>3</code> se acordă câte <code>40p</code>.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>bile4.in</code></p>
+
+<pre>1 9 3</pre>
+
+<p><code>bile4.out</code></p>
+
+<pre>4</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința <code>1</code>. <br>
+<code>N = 9</code>. Avem <code>9</code> bile inscript, ionate cu <code>0, 1, 2, 3, 4, 5, 6, 7, 8</code>.<br>
+Bila specială este <code>X = 4</code> deoarece: <code>X = (0 + 1 + 2 + 3 + 5 + 6 + 7 + 8)/8 = 32/8 = 4</code></p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>bile4.in</code></p>
+
+<pre>1 8 3</pre>
+
+<p><code>bile4.out</code></p>
+
+<pre>-1</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința <code>1</code>. <br>
+<code>N = 8</code>. Se va scrie în fișierul de ieșire valoarea <code>−1</code> deoarece cutia <code>A</code> nu conține nicio bilă specială.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>bile4.in</code></p>
+
+<pre>2 8 3</pre>
+
+<p><code>bile4.out</code></p>
+
+<pre>0 2 7</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința <code>2</code>. <br>
+<code>N = 8</code>. Avem <code>8</code> bile inscripționate cu <code>0, 1, 2, 3, 4, 5, 6, 7</code>.<br>
+Șirurile strict crescătoare ale numerelor bilelor care pot fi mutate în cutia <code>B</code>, lângă bila specială <code>K = 3</code>, sunt: <code>0, 2, 7</code> sau <code>0, 4, 5</code> sau <code>1, 2, 6,</code> deoarece: <code>3 = (0 + 2 + 7)/3 = (0 + 4 + 5)/3 = (1 + 2 + 6)/3</code>.<br>
+Cel mai mic șir în sens lexicografic, crescător, este: <code>0, 2, 7</code>.</p>
+
+
+<h1>Exemplul 4:</h1>
+
+<p><code>bile4.in</code></p>
+
+<pre>3 8 3</pre>
+
+<p><code>bile4.out</code></p>
+
+<pre>1 2 6</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința <code>3</code>. <br>
+Șirurile strict crescătoare ale numerelor bilelor care pot fi mutate în cutia B, lângă bila specială <code>K = 3</code>, sunt: <code>0, 2, 7</code> sau <code>0, 4, 5</code> sau <code>1, 2, 6</code>, deoarece: <code>3 = (0 + 2 + 7)/3 = (0 + 4 + 5)/3 = (1 + 2 + 6)/3</code>.<br>
+Cel mai mare șir în sens lexicografic, crescător, este: <code>1, 2, 6</code>.</p>		</article>
+		</body></html>

@@ -1,0 +1,326 @@
+{
+  "id": 1108,
+  "slug": "traseu",
+  "name": "Traseu",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1108/traseu",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 85,
+      "name": "Structuri de date liniare",
+      "slug": "structuri-de-date-liniare",
+      "href": "/?pagina=probleme-lista&tag=85"
+    },
+    {
+      "id": 87,
+      "name": "Coada",
+      "slug": "coada",
+      "href": "/?pagina=probleme-lista&tag=87"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerinţe:",
+      "html": "<p>Se cere să se determine:<br>\na) numărul de camere prin care trece cel mai scurt traseu al șoricelului de la camera lui la camera cu alimente (inclusiv camera lui şi camera cu alimente);<br>\nb) etichetele camerelor prin care trece traseul determinat la punctul a).</p>",
+      "text": "Se cere să se determine: a) numărul de camere prin care trece cel mai scurt traseu al șoricelului de la camera lui la camera cu alimente (inclusiv camera lui şi camera cu alimente); b) etichetele camerelor prin care trece traseul determinat la punctul a)."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>traseu.in</code> conține:</p><ul>\n\t<li>pe prima linie, două numere naturale <code>N</code> și <code>M</code> separate printr-un spațiu, <code>N</code> cu semnificația din enunț iar <code>M</code> reprezentând numărul de camere ocupate de clienţii hotelului;<br>\npe a doua linie, trei numere naturale <code>K1 L1 C1</code>, separate prin câte un spațiu, reprezentând eticheta camerei în care se află șoricelul;</li>\n\t<li>pe a treia linie, trei numere naturale  <code>K2 L2 C2</code>, separate prin câte un spațiu, reprezentând eticheta camerei în care sunt depozitate alimentele;</li>\n\t<li>pe fiecare dintre următoarele <code>M</code> linii, câte trei numere naturale <code>X Y Z</code>, separate prin câte un spaţiu, reprezentând etichetele celor <code>M</code> camere ocupate de clienți.</li>\n</ul>",
+      "text": "Fișierul de intrare traseu.in conține: pe prima linie, două numere naturale N și M separate printr-un spațiu, N cu semnificația din enunț iar M reprezentând numărul de camere ocupate de clienţii hotelului; pe a doua linie, trei numere naturale K1 L1 C1, separate prin câte un spațiu, reprezentând eticheta camerei în care se află șoricelul; pe a treia linie, trei numere naturale K2 L2 C2, separate prin câte un spațiu, reprezentând eticheta camerei în care sunt depozitate alimentele; pe fiecare dintre următoarele M linii, câte trei numere naturale X Y Z, separate prin câte un spaţiu, reprezentând etichetele celor M camere ocupate de clienți."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>traseu.out</code> va conține pe prima linie un număr natural <code>T</code> reprezentând numărul de camere prin care trece cel mai scurt traseu al șoricelului de la camera lui la camera cu alimente determinat la punctul a). Pe fiecare din următoarele <code>T</code> linii, se vor scrie câte trei numere naturale <code>X Y Z</code>, separate prin câte un spaţiu, reprezentând etichetele camerelor prin care trece traseul determinat la punctul a), în ordinea în care sunt parcurse camerele de către șoricel pentru a ajunge din camera lui în camera cu alimente. </p>",
+      "text": "Fișierul de ieșire traseu.out va conține pe prima linie un număr natural T reprezentând numărul de camere prin care trece cel mai scurt traseu al șoricelului de la camera lui la camera cu alimente determinat la punctul a). Pe fiecare din următoarele T linii, se vor scrie câte trei numere naturale X Y Z, separate prin câte un spaţiu, reprezentând etichetele camerelor prin care trece traseul determinat la punctul a), în ordinea în care sunt parcurse camerele de către șoricel pentru a ajunge din camera lui în camera cu alimente."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2 ≤ N ≤ 100</code>; <code>1 ≤ M ≤ 5000</code>&nbsp;și <code>M &lt; N*N-2</code></li>\n\t<li>Șoricelul nu intră decât în camere neocupate de clienți.</li>\n\t<li>Camera șoricelului este o cameră neocupată de clienți.</li>\n\t<li>Dacă există mai multe trasee ale șoricelului de la camera lui la camera de alimente care trec prin exact <code>T</code> camere, atunci traseul afișat va fi cel mai mic traseu din punct de vedere lexicografic.</li>\n\t<li>Eticheta  <code>(X1 Y1 Z1)</code> se consideră strict mai mică în sens lexicografic ca eticheta <code>(X2 Y2 Z2)</code> dacă este satisfăcută doar una dintre condițiile:\n\t<ol>\n\t\t<li><code>X1&nbsp;&lt; X2</code></li>\n\t\t<li><code>X1 = X2</code> și <code>Y1 &lt; Y2</code></li>\n\t\t<li><code>X1 = X2</code> și <code>Y1 = Y2</code> și <code>Z1 &lt; Z2</code></li>\n\t</ol></li>\n\t<li>Eticheta  <code>X1 Y1 Z1</code> se consideră egală cu eticheta <code>X2 Y2 Z2</code> dacă <code>X1 = X2</code> și <code>Y1 = Y2</code> și <code>Z1 = Z2</code>. Vom scrie egalitatea lor astfel: <code>(X1 Y1 Z1) = (X2 Y2 Z2)</code>.</li>\n\t<li>Traseul ce trece (în această ordine) prin camerele cu etichetele <code>(X1 Y1 Z1)</code>, <code>(X2 Y2 Z2)</code>,…, <code>(XT YT ZT)</code> este mai mic din punct de vedere lexicografic ca traseul <code>(A1 B1 C1)</code>, <code>(A2 B2 C2)</code>,…, <code>(AT BT CT)</code> dacă există un indice <code>J</code> (<code>1≤J≤T</code>) astfel încât <code>(X1 Y1 Z1) = (A1 B1 C1)</code>, <code>(X2 Y2 Z2) = (A2 B2 C2)</code>…., <code>(XJ-1 YJ-1 ZJ-1) = (AJ-1 BJ-1 CJ-1)</code> iar eticheta <code>(XJ YJ ZJ)</code> este strict mai mică ca eticheta <code>(AJ BJ CJ)</code>.</li>\n\t<li>Se acordă: 40% din punctaj pentru determinarea corectă a numărului <code>T</code>&nbsp;și 100% din punctaj pentru rezolvarea corectă a ambelor cerințe.</li>\n\t<li>Se garantează că există soluție pentru ambele cerințe, pentru toate datele de test.</li>\n</ul>",
+      "text": "2 ≤ N ≤ 100; 1 ≤ M ≤ 5000 și M < N*N-2 Șoricelul nu intră decât în camere neocupate de clienți. Camera șoricelului este o cameră neocupată de clienți. Dacă există mai multe trasee ale șoricelului de la camera lui la camera de alimente care trec prin exact T camere, atunci traseul afișat va fi cel mai mic traseu din punct de vedere lexicografic. Eticheta (X1 Y1 Z1) se consideră strict mai mică în sens lexicografic ca eticheta (X2 Y2 Z2) dacă este satisfăcută doar una dintre condițiile: X1 < X2 X1 = X2 și Y1 < Y2 X1 = X2 și Y1 = Y2 și Z1 < Z2 Eticheta X1 Y1 Z1 se consideră egală cu eticheta X2 Y2 Z2 dacă X1 = X2 și Y1 = Y2 și Z1 = Z2. Vom scrie egalitatea lor astfel: (X1 Y1 Z1) = (X2 Y2 Z2). Traseul ce trece (în această ordine) prin camerele cu etichetele (X1 Y1 Z1), (X2 Y2 Z2),…, (XT YT ZT) este mai mic din punct de vedere lexicografic ca traseul (A1 B1 C1), (A2 B2 C2),…, (AT BT CT) dacă există un indice J (1≤J≤T) astfel încât (X1 Y1 Z1) = (A1 B1 C1), (X2 Y2 Z2) = (A2 B2 C2)…., (XJ-1 YJ-1 ZJ-1) = (AJ-1 BJ-1 CJ-1) iar eticheta (XJ YJ ZJ) este strict mai mică ca eticheta (AJ BJ CJ). Se acordă: 40% din punctaj pentru determinarea corectă a numărului T și 100% din punctaj pentru rezolvarea corectă a ambelor cerințe. Se garantează că există soluție pentru ambele cerințe, pentru toate datele de test."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>traseu.in</code></p><pre>3 4\n1 1 1\n3 3 3\n3 3 1\n2 1 1\n3 1 1\n3 1 3</pre><p><code>traseu.out</code></p><pre>7\n1 1 1\n1 1 2\n1 1 3\n1 2 3\n1 3 3\n2 3 3\n3 3 3</pre>",
+      "text": "traseu.in3 4 1 1 1 3 3 3 3 3 1 2 1 1 3 1 1 3 1 3traseu.out7 1 1 1 1 1 2 1 1 3 1 2 3 1 3 3 2 3 3 3 3 3"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p><img align=\"right\" alt=\"\" src=\"/resurse/9dc152/p-1100/traseu4.png\"> Hotelul are trei etaje (<code>1</code>, <code>2</code> şi <code>3</code>). Pe fiecare etaj sunt <code>3*3</code> camere. Șoricelul se află în camera cu eticheta <code>(1 1 1)</code> iar camera cu alimente are eticheta <code>(3 3 3)</code>.</p><p>Sunt <code>4</code> camere ocupate de clienţi. Acestea au etichetele&nbsp;: <code>3 3 1</code>, <code>2 1 1</code>, <code>3 1 1</code>, <code>3 1 3</code>.<br>\nTraseul cel mai scurt trece prin <code>T=7</code> camere. Sunt mai multe astfel de trasee. De exemplu:</p><ol>\n\t<li><code>(1 1 1, 1 1 2, 1 1 3, 1 2 3, 1 3 3, 2 3 3, 3 3 3)</code></li>\n\t<li><code>(1 1 1, 1 1 2, 1 1 3, 2 1 3, 2 2 3, 3 2 3, 3 3 3)</code></li>\n\t<li><code>(1 1 1, 1 2 1, 1 3 1, 1 3 2, 2 3 2, 3 2 3, 3 3 3)</code></li>\n\t<li>etc.</li>\n</ol><p>Cel mai mic astfel de traseu (în sens lexicografic) este traseul 1). </p>",
+      "text": "Hotelul are trei etaje (1, 2 şi 3). Pe fiecare etaj sunt 3*3 camere. Șoricelul se află în camera cu eticheta (1 1 1) iar camera cu alimente are eticheta (3 3 3).Sunt 4 camere ocupate de clienţi. Acestea au etichetele : 3 3 1, 2 1 1, 3 1 1, 3 1 3. Traseul cel mai scurt trece prin T=7 camere. Sunt mai multe astfel de trasee. De exemplu: (1 1 1, 1 1 2, 1 1 3, 1 2 3, 1 3 3, 2 3 3, 3 3 3) (1 1 1, 1 1 2, 1 1 3, 2 1 3, 2 2 3, 3 2 3, 3 3 3) (1 1 1, 1 2 1, 1 3 1, 1 3 2, 2 3 2, 3 2 3, 3 3 3) etc. Cel mai mic astfel de traseu (în sens lexicografic) este traseul 1)."
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "2 ≤ N ≤ 100; 1 ≤ M ≤ 5000 și M < N*N-2",
+    "Șoricelul nu intră decât în camere neocupate de clienți.",
+    "Camera șoricelului este o cameră neocupată de clienți.",
+    "Dacă există mai multe trasee ale șoricelului de la camera lui la camera de alimente care trec prin exact T camere, atunci traseul afișat va fi cel mai mic traseu din punct de vedere lexicografic.",
+    "Eticheta (X1 Y1 Z1) se consideră strict mai mică în sens lexicografic ca eticheta (X2 Y2 Z2) dacă este satisfăcută doar una dintre condițiile: X1 < X2 X1 = X2 și Y1 < Y2 X1 = X2 și Y1 = Y2 și Z1 < Z2",
+    "X1 < X2",
+    "X1 = X2 și Y1 < Y2",
+    "X1 = X2 și Y1 = Y2 și Z1 < Z2",
+    "Eticheta X1 Y1 Z1 se consideră egală cu eticheta X2 Y2 Z2 dacă X1 = X2 și Y1 = Y2 și Z1 = Z2. Vom scrie egalitatea lor astfel: (X1 Y1 Z1) = (X2 Y2 Z2).",
+    "Traseul ce trece (în această ordine) prin camerele cu etichetele (X1 Y1 Z1), (X2 Y2 Z2),…, (XT YT ZT) este mai mic din punct de vedere lexicografic ca traseul (A1 B1 C1), (A2 B2 C2),…, (AT BT CT) dacă există un indice J (1≤J≤T) astfel încât (X1 Y1 Z1) = (A1 B1 C1), (X2 Y2 Z2) = (A2 B2 C2)…., (XJ-1 YJ-1 ZJ-1) = (AJ-1 BJ-1 CJ-1) iar eticheta (XJ YJ ZJ) este strict mai mică ca eticheta (AJ BJ CJ).",
+    "Se acordă: 40% din punctaj pentru determinarea corectă a numărului T și 100% din punctaj pentru rezolvarea corectă a ambelor cerințe.",
+    "Se garantează că există soluție pentru ambele cerințe, pentru toate datele de test."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qd0cefdd832.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1100/traseu1.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-traseu1-png.png",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1100/traseu2.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-traseu2-png.png",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1100/traseu3.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-traseu3-png.png",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1100/traseu4.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-traseu4-png.png",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "10",
+    "intrare/ieșire": "traseu.in / traseu.out",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "ONI 2014, Clasa a IX-a",
+    "autor": "Carmen Minca",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 64,
+  "author": "Carmen Minca",
+  "sourceAttribution": "ONI 2014, Clasa a IX-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1108/traseu"
+}

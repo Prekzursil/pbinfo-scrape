@@ -1,0 +1,57 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3692"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>Se dă un șir <code>V</code> cu <code>N</code> valori naturale nenule, memorate pe poziții consecutive începând cu poziția <code>1</code>. Notăm cu <code>S</code> următoarea secvență de cod aplicată asupra sa:</p>
+
+<pre>(C/C++)
+maxim = 0;
+rep = 0;
+for(i = 1; i &lt;= N; i++)
+	if(V[i] &gt; maxim)
+		maxim = V[i];
+	else
+		if(V[i] == maxim)
+			rep++;</pre>
+
+<p>Considerăm operația de eliminare din <code>V</code> a elementului de pe o anumită poziție dată <code>P</code>. În urma operației de eliminare elementele de pe pozițiile <code>P + 1, P + 2, ..., N</code> ajung pe o poziție cu <code>1</code> mai mică iar <code>N</code> scade cu <code>1</code>.</p>
+
+<p>Dându-se mai multe operații de eliminare(independente una de alta, adică fiecare se aplică asupra șirului inițial, nu după operația anterioară), să se determine valoarea variabilei <code>rep</code> dacă am aplica secvența <code>S</code> asupra șirului obținut după fiecare operație de eliminare.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fițierul <code>maxime.in</code> conține pe prima linie un număr natural <code>N</code>. Pe linia a doua se află <code>N</code> numere naturale nenule, separate prin câte un spațiu. Pe linia următoare se află un număr <code>M</code> reprezentând numărul de operații de eliminare. Linia următoare conține <code>M</code> numere, cuprinse între <code>1</code> și <code>N</code>, ce reprezină poziția din șir a elementului la care se realizează eliminarea curentă. Numerele de pe această linie sunt separate prin câte un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul <code>maxime.out</code> conține pe primul rând <code>M</code> numere, separate prin câte un spațiu, reprezentând valoarea variabilei <code>rep</code> obținută aplicând secvența <code>S</code> după fiecare operație de eliminare.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N ≤ 100.000</code></li>
+	<li><code>1 ≤ V</code><sub><code>i</code></sub> <code>≤ 100.000</code></li>
+	<li><code>1 ≤ M ≤ 100.000</code></li>
+	<li><code>1 ≤ poziție eliminare ≤ N</code></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>maxime.in</code></p>
+
+<pre>6
+3 1 3 8 1 8
+3
+2 5 6</pre>
+
+<p><code>maxime.out</code></p>
+
+<pre>2 2 1</pre>
+
+<h3>Explicație</h3>
+
+<p>Aplicând prima operație de eliminare, șirul devine: <code>N = 5</code> și <code>V = 3 3 8 1 8</code>, valoarea <code>rep</code> devine <code>2</code>.</p>
+
+<p>Aplicând a doua operație de eliminare, șirul devine: <code>N = 5</code> și <code>V = 3 1 3 8 8</code>, valoarea <code>rep</code> devine <code>2</code>.</p>
+
+<p>Aplicând a treia operație de eliminare, șirul devine: <code>N = 5</code> și <code>V = 3 1 3 8 1</code>, valoarea <code>rep</code> devine <code>1</code>.</p>		</article>
+		</body></html>

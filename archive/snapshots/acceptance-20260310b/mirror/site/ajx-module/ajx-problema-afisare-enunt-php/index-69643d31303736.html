@@ -1,0 +1,68 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1076"><article id="enunt">
+			<p>Se consideră un tablou bidimensional cu <code>m</code> linii, <code>n</code> coloane şi elemente numere naturale. Pentru fiecare element se determină numărul de divizori pozitivi. Se formează apoi grupe cu elementele tabloului care au acelaşi număr de divizori, grupe notate <code>G</code><sub><code>1</code></sub>, <code>G</code><sub><code>2</code></sub>, …, <code>G</code><sub><code>k</code></sub>. Se ordonează descrescător grupele după numărul de elemente ce le conţin. Se ştie că o grupă <code>G</code><sub><code>1</code></sub> se află în faţa unei alte grupe <code>G</code><sub><code>2</code></sub> dacă <code>G</code><sub><code>1</code></sub> are mai multe elemente decât <code>G</code><sub><code>2</code></sub>  sau, în cazul în care cele două grupe conţin acelaşi număr de elemente, numărul de divizori ai elementelor din grupa <code>G</code><sub><code>1</code></sub> este mai mare decât numărul de divizori ai elementelor din grupa <code>G</code><sub><code>2</code></sub>. După ordonarea descrescătoare a grupelor, notăm prima grupă cu <code>A</code> şi a doua grupă cu <code>B</code>. În cazul în care toate elementele vor avea acelaşi număr de divizori, va exista o singură grupă, grupa <code>A</code>.</p>
+
+<h1>Cerinţe:</h1>
+
+<p>Scrieţi un program care citeşte <code>m</code>, <code>n</code>, elementele tabloului şi afişează:<br>
+a) numărul de divizori pozitivi pentru grupa <code>A</code>, numărul de elemente din grupă şi cea mai mare valoare din grupă;<br>
+b) numărul de divizori pozitivi pentru grupa <code>B</code>, numărul de elemente din grupă şi cea mai mare valoare din grupă; în cazul în care nu există grupa a doua, se va afişa de trei ori valoarea <code>0</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>grupe.in</code> conține pe prima linie valorile lui <code>m</code> şi <code>n</code> separate printr-un spaţiu, iar pe celelalte <code>m</code> linii câte <code>n</code> elemente separate două câte două printr-un spaţiu, reprezentând elementele tabloului.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>grupe.out</code> va conține:</p>
+
+<ul>
+	<li>pe prima linie valoarea numărului de divizori pozitivi din grupa <code>A</code>, numărul de elemente din grupa <code>A</code> şi cea mai mare valoare din grupa <code>A</code>, valori separate două câte două printr-un singur spaţiu;</li>
+	<li>pe a doua linie valoarea numărului de divizori pozitivi din grupa <code>B</code>, numărul de elemente din grupa <code>B</code> şi cea mai mare valoare din grupa <code>B</code>, valori separate două câte două printr-un singur spaţiu.</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>0&lt;m,n&lt;101</code>;</li>
+	<li>elementele tabloului bidimensional iniţial sunt mai mici sau egale decât <code>100.000</code> şi mai mari decât <code>1</code>;</li>
+	<li>o grupă poate fi compusă dintr-un singur element.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>grupe.in</code></p>
+
+<pre>2 3
+16 2 4
+10 6 5</pre>
+
+<p><code>grupe.out</code></p>
+
+<pre>4 2 10
+2 2 5</pre>
+
+<h1>Explicație</h1>
+
+<p>Numărul divizorilor pentru fiecare element al tabloului: <code>5</code> divizori (pentru valoarea <code>16</code>), <code>2</code> divizori (pentru valoarea <code>2</code>), <code>3</code> divizori (pentru valoarea <code>4</code>), <code>4</code> divizori (pentru valoarea <code>10</code>), <code>4</code> divizori (pentru valoarea <code>6</code>) şi <code>2</code> divizori (pentru valoarea <code>5</code>).</p>
+
+<p>Se pot forma grupele: cu <code>2</code> divizori (elementele <code>2</code>, <code>5</code>), cu <code>4</code> divizori (elementele <code>10</code>, <code>6</code>), cu <code>3</code> divizori (elementul <code>4</code>) şi cu <code>5</code> divizori (elementul <code>16</code>). După ordonarea descrescătoare a grupelor, grupele cu cele mai multe elemente sunt cele care conţin <code>2</code> elemente: <code>(10, 6)</code>, respectiv <code>(2, 5)</code>. Pentru că elementele <code>10</code> şi <code>6</code> au <code>4</code> divizori, ele vor face parte din grupa <code>A</code>, iar <code>2</code> şi <code>5</code>, având doar <code>2</code> divizori fiecare, vor face parte din grupa <code>B</code>. Deci grupa <code>A</code> are <code>4</code> divizori, <code>2</code> elemente şi cel mai mare element din grupă este <code>10</code>, iar grupa <code>B</code> are <code>2</code> divizori, <code>2</code> elemente şi cel mai mare element din grupă este <code>5</code>.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>grupe.in</code></p>
+
+<pre>2 3
+2 15 4
+10 6 5</pre>
+
+<p><code>grupe.out</code></p>
+
+<pre>4 3 15
+2 2 5</pre>
+
+<h1>Explicație</h1>
+
+<p>Numărul divizorilor pentru fiecare element al tabloului: <code>2</code> divizori (pentru  valoarea <code>2</code>), <code>4</code> divizori (pentru valoarea <code>15</code>), <code>3</code> divizori (pentru valoarea <code>4</code>), <code>4</code> divizori (pentru valoarea <code>10</code>), <code>4</code> divizori (pentru valoarea <code>6</code>) şi <code>2</code> divizori (pentru  valoarea <code>5</code>).</p>
+
+<p>După ordonarea descrescătoare a grupelor, grupa cu cele mai multe elemente este cea formată din elementele <code>10</code>, <code>6</code>, <code>15</code>, fiecare element având exact <code>4</code> divizori. Aceasta va fi grupa <code>A</code>. Grupa <code>B</code> va fi cea formată din două elemente, celelaltă grupă având un singur element. Deci grupa <code>A</code> are <code>4</code> divizori, <code>3</code> elemente şi cel mai mare element din grupă este <code>15</code>, iar grupa <code>B</code> are <code>2</code> divizori, <code>2</code> elemente şi cel mai mare element din grupă este <code>5</code>.</p>		</article>
+		</body></html>

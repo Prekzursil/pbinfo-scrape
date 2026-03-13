@@ -1,0 +1,123 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3541"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p><span class="caps">RAU</span>-Gigel este pasionat de grafică, așa că se gândește la un joc cu imagini. El creează într-un editor grafic o imagine bitmap binară de dimensiuni <code>N X N</code> pixeli. O imagine bitmap binară este o matrice de pixeli, fiecare pixel fiind un bit. Să considerăm că valoarea 0 (nesetat) înseamnă alb și valoarea 1 (setat) înseamnă negru (în realitate este exact invers!). Apoi <span class="caps">RAU</span>-Gigel împarte imaginea în patru imagini pătrate egale de latură <code>N / 2</code> pe care le notează de la <code>1</code> la <code>4</code> (<code>1</code> este imaginea din colțul dreapta-sus, <code>2</code> este cea din colțul dreapta-jos, <code>3</code>  stânga-jos și <code>4</code>  stânga-sus). El repetă procedeul pentru fiecare dintre cele <code>4</code> imagini obținute, și tot așa, reducând mereu latura la jumătate și notând direcțiile de la <code>1</code> la <code>4</code>, până când ajunge la imagini de mărimea unui pixel. </p>
+
+<p>Pentru simplitate, să presupunem că <code>N</code> este o putere a lui <code>2</code>, să spunem <code>K</code>. Deci, după <code>K</code> împărțiri succesive de imagini, orice pixel poate fi identificat printr-un șir unic format din cifrele <code>1</code>, <code>2</code>, <code>3</code> și <code>4</code>, de lungime <code>K</code>.</p>
+
+<p>De exemplu, dacă <code>N = 4</code>, atunci <code>K = 2</code>. Imaginea inițială are <code>16</code> pixeli. Vom avea <code>2</code> împărțiri succesive:</p>
+
+<p>După prima împărțire rezultă <code>4</code> imagini reduse la jumătate (fiecare are câte <code>4</code> pixeli): 	<br>
+<code>4</code> \(\quad\) <code>1</code><br>
+<code>3</code> \(\quad\) <code>2</code></p>
+
+<p>După a doua împărțire rezultă <code>16</code> imagini de câte <code>1</code> pixel: 	<br>
+<code>44</code> <code>41</code> \(\quad\) <code>14</code> <code>11</code><br>
+<code>43</code> <code>42</code> \(\quad\) <code>13</code> <code>12</code></p>
+
+<p><code>34</code> <code>31</code> \(\quad\) <code>24</code> <code>21</code><br>
+<code>33</code> <code>32</code> \(\quad\) <code>23</code> <code>22</code></p>
+
+<p>Inițial, imaginea este complet albă.</p>
+
+<p>Acum începe jocul. <span class="caps">RAU</span>-Gigel se gândește la <code>2</code> tipuri de operaţii:<br>
+Operaţia <code>1 x</code> schimbă starea pixelul identificat cu șirul <code>x</code>, descris ca mai sus. Dacă pixelul <code>x</code> nu este setat, îl setează. Dacă pixelul <code>x</code> este deja setat, atunci îl resetează.<br>
+Operaţia <code>2 x</code> , unde <code>x</code> are aceeași semnificație ca mai sus, este o interogare: dacă <code>x</code> este setat, se răspunde cu <code>0</code>. Dacă <code>x</code> nu este setat, se cere determinarea dimensiunii celei mai mari imagini complet albe, dintre cele create de <span class="caps">RAU</span>-Gigel, care conține pixelul <code>x</code>. Dimensiunea este dată de numărul de pixeli conținut.</p>
+
+<p>Dându-se <code>N</code> cu semnificația de mai sus și <code>M</code>, reprezentând numărul de operaţii şi cele <code>M</code> operaţii de tipul <code>1</code> și <code>2</code>, să se răspundă la operaţiile de tip <code>2</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>pixeli.in</code> conține pe prima linie numerele naturale <code>N</code> și <code>M</code> separate cu un spațiu. Pe următoarele <code>M</code> linii se află câte o cifră de <code>1</code> sau <code>2</code> și câte un string, de forma <code>tip_operaţie x</code>, reprezentând tipul operaţiei şi șirul <code>x</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>pixeli.out</code> va conține răspunsurile pentru operaţiile de tip 2, câte unul pe linie.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N ≤ 2.000.000.000</code>, <code>1 ≤ M ≤ 10.000</code></li>
+	<li>In toate testele, <code>N</code> este o putere a lui <code>2</code></li>
+	<li>Toate șirurile <code>x</code> sunt corect definite</li>
+	<li>Pentru teste în valoare de <code>30</code> de puncte, <code>N &lt;= 1.000</code> și <code>M &lt;= 50</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>pixeli.in</code></p>
+
+<pre>4 11
+1 11
+1 22 
+2 22
+2 33
+2 44
+2 24
+1 22
+2 22
+2 24
+1 11
+2 44</pre>
+
+<p><code>pixeli.out</code></p>
+
+<pre>0
+4
+4
+1
+4
+4
+16</pre>
+
+<h3>Explicație</h3>
+
+<p>Inițial imaginea este albă:<br>
+<code>0</code> <code>0</code> \(\quad\) <code>0</code> <code>0</code> <br>
+<code>0</code> <code>0</code> \(\quad\) <code>0</code> <code>0</code> </p>
+
+<p><code>0</code> <code>0</code> \(\quad\) <code>0</code> <code>0</code> <br>
+<code>0</code> <code>0</code> \(\quad\) <code>0</code> <code>0</code> </p>
+
+<p>După primele <code>2</code> operații de tip <code>1</code>, imaginea va conține:<br>
+<code>0</code> <code>0</code> \(\quad\) <code>0</code> <code>1</code> <br>
+<code>0</code> <code>0</code> \(\quad\) <code>0</code> <code>0</code> </p>
+
+<p><code>0</code> <code>0</code> \(\quad\) <code>0</code> <code>0</code> <br>
+<code>0</code> <code>0</code> \(\quad\) <code>0</code> <code>1</code> </p>
+
+<p>Următoarele <code>4</code> interogări vor referi, în ordine, pixelii marcati cu <code>a</code>, <code>b</code>, <code>c</code>, <code>d</code> (imaginea de mai jos). Cum <code>a</code> era setat, răspunsul este <code>0</code>. Cea mai mare imagine albă, creată de <span class="caps">RAU</span>-Gigel, care conține <code>b</code>, este colțul stânga jos cu <code>4</code> pixeli. La fel pentru <code>c</code>. În cazul pixelului <code>d</code>, răspunsul este <code>1</code> (chiar el).<br>
+<code>c</code> <code>0</code> \(\quad\) <code>0</code> <code>e</code> <br>
+<code>0</code> <code>0</code> \(\quad\) <code>0</code> <code>0</code> </p>
+
+<p><code>0</code> <code>0</code> \(\quad\) <code>d</code> <code>0</code> <br>
+<code>b</code> <code>0</code> \(\quad\) <code>0</code> <code>a</code> </p>
+
+<p>Urmează o operație de tip <code>1</code> care resetează pixelul notat cu <code>a</code> (șirul <code>22</code>). Următoarele <code>2</code> interogări pentru <code>a</code> și <code>d</code> generează răspunsurile <code>4</code>, respectiv <code>4</code>.</p>
+
+<p>În final, se resetează și pixelul <code>e</code>, iar ultima interogare, pentru <code>c</code>, va determina răspunsul <code>16</code>, toată imaginea fiind acum complet albă.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>pixeli.in</code></p>
+
+<pre>8 9
+1 111
+1 222
+2 222
+2 333
+2 444
+2 242
+1 222
+2 222
+2 242</pre>
+
+<p><code>pixeli.out</code></p>
+
+<pre>0
+16
+16
+4
+16
+16</pre>		</article>
+		</body></html>

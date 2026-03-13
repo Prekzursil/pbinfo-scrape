@@ -1,0 +1,135 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=693"><article id="enunt">
+			<p>Undeva, în deșertul <strong>Sahara</strong>, ilustrul biolog <strong>Sahraa Gaea</strong> a conceput și construit un sistem de irigații ingenios, sistem cu care își propune să irige o zonă deșertică dreptunghiulară bogată în nutrienți minerali. Zona deșertică este împărțită în <code>N*M</code> pătrate de latură unitate. În fiecare pătrat&nbsp;se află un dispozitiv de picurare ce asigură o anumită cantitate de apă în funcție de comanda primită de la centrul de control al sistemului.</p>
+
+<p>Sistemul de irigare este astfel conceput încât să irige (ude), pe baza unor comenzi automatizate, parcele dreptunghiulare ale regiunii deșertice. </p>
+
+<p>Orice parcelă are laturile paralele cu laturile zonei deșertice și este identificată prin coordonatele colțurilor stânga-sus&nbsp; <code>(x1,y1)</code>, respectiv dreapta-jos <code>(x2,y2)</code>.  La fiecare comandă se specifică parcela care va fi udată și cantitatea de apă (exprimată în litri) cu care va fi irigat fiecare pătrat al acesteia. </p>
+
+<p>Un pătrat al zonei deșertice devine fertil dacă acumulează cel puțin <code>Q</code> litri de apă.</p>
+
+<h1>Cerința</h1>
+
+<p>Să se determine aria maximă a unei suprafețe conexe fertile. Prin aria unei suprafețe înțelegem numărul de pătrate ce compun suprafața. Orice două pătrate fertile care au o latură comună fac parte din aceeaşi suprafaţă conexă fertilă.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fişierul de intrare <code>sahara.in</code> conţine pe prima linie trei numere naturale <code>N M Q</code> despărțite prin câte un spațiu, cu semnificația din enunț.</p>
+
+<p>Pe cea de-a doua linie a fișierului se găsește un număr natural <code>T</code>. Pe fiecare dintre următoarele <code>T</code> linii se află descrierea parcelelor udate sub forma: <code>x1 y1 x2 y2 q</code> , adică cinci numere naturale despărțite prin spațiu, unde  <code>x1 y1 x2 y2</code> reprezintă coordonatele colțurilor stânga-sus, respectiv dreapta-jos ale parcelei,  <code>q2</code>  cantitatea de apă cu care va fi irigat fiecare pătrat al parcelei.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fişierul de ieşire <code>sahara.out</code> va conține o singură valoare ce reprezintă aria maximă a unei suprafețe conexe fertile.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N, M ≤ 1000</code></li>
+	<li><code>1 ≤ x1 ≤ x2 ≤ N, 1 ≤ y1 ≤ y2 ≤ M</code></li>
+	<li><code>1 ≤ q ≤ 1 000</code></li>
+	<li><code>1 ≤ Q ≤ 10 000</code></li>
+	<li><code>1 ≤ T ≤ 50 000</code></li>
+	<li>Inițial zona deșertică nu conține ”apă”;</li>
+	<li>Pot exista suprafeţe conexe fertile formate dintr-un singur pătrat fertil;</li>
+	<li>Parcelele se pot suprapune.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>sahara.in</code></p>
+
+<pre>8 7 5
+7
+1 1 3 6 1
+4 2 5 7 2
+2 3 4 7 3
+1 2 4 3 3
+5 1 6 3 4
+5 5 7 6 2
+6 4 8 7 3</pre>
+
+<p><code>sahara.out</code></p>
+
+<pre>10</pre>
+
+<h1>Explicație</h1>
+
+<p>Cantitatea de apă acumulată în solul regiunii este:</p>
+
+<table>
+		<tbody><tr>
+			<td>1</td>
+			<td> 4</td>
+			<td> 4</td>
+			<td> 1</td>
+			<td> 1</td>
+			<td> 1</td>
+			<td> 0</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td> 4</td>
+			<td><strong>7</strong></td>
+			<td> 4</td>
+			<td> 4</td>
+			<td> 4</td>
+			<td> 3</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td> 4</td>
+			<td><strong>7</strong></td>
+			<td> 4</td>
+			<td> 4</td>
+			<td> 4</td>
+			<td> 3</td>
+		</tr>
+		<tr>
+			<td>0</td>
+			<td> <strong>5</strong></td>
+			<td><strong>8</strong></td>
+			<td> <strong>5</strong></td>
+			<td> <strong>5</strong></td>
+			<td> <strong>5</strong></td>
+			<td> <strong>5</strong></td>
+		</tr>
+		<tr>
+			<td>4</td>
+			<td> <strong>6</strong></td>
+			<td> <strong>6</strong></td>
+			<td> 2</td>
+			<td> 4</td>
+			<td> 4</td>
+			<td> 2</td>
+		</tr>
+		<tr>
+			<td>4</td>
+			<td> 4</td>
+			<td> 4</td>
+			<td> 3</td>
+			<td> <strong>5</strong></td>
+			<td> <strong>5</strong></td>
+			<td> 3</td>
+		</tr>
+		<tr>
+			<td>0</td>
+			<td> 0</td>
+			<td> 0</td>
+			<td> 3</td>
+			<td> <strong>5</strong></td>
+			<td> <strong>5</strong></td>
+			<td> 3</td>
+		</tr>
+		<tr>
+			<td>0</td>
+			<td> 0</td>
+			<td> 0</td>
+			<td> 3</td>
+			<td> 3</td>
+			<td> 3</td>
+			<td> 3</td>
+		</tr>
+</tbody></table>
+
+<p>Aria maximă a unei suprafețe fertile este egală cu <code>10</code>. Suprafața se consideră fertilă dacă acumulează cel puțin <code>5</code> litri de apă. </p>		</article>
+		</body></html>

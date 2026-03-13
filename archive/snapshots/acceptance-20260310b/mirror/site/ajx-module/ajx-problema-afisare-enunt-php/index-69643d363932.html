@@ -1,0 +1,58 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=692"><article id="enunt">
+			<p>Studenţii Facultăţii de Informatică din cadrul Universităţii din Cluj, au conceput roboţi care şterg praful, plantează copaci, pun gresie, servesc masa, etc. </p>
+
+<p><img src="/_assets/asset-https-www-pbinfo-ro-resurse-probleme-651-700-692-rosie-png.png" style="float:left;width:150px;"> Botezat „Rosie“, robotul care şterge praful are două braţe ( <span style="color:red;">S</span> – stâng şi <span style="color:red;">D</span> – drept) pe care sunt montate nişte perii ce sunt învârtite cu ajutorul unui motoraş. Braţul robotului  este programat să se poziţioneze în dreptul unei suprafeţe, periile învârtite de motoraş parcurg suprafaţa ştergând în acest fel praful de pe ea. </p>
+
+<p><img src="/_assets/asset-https-www-pbinfo-ro-resurse-probleme-651-700-692-etajera-png.png" style="float:right;width:90px;">Pentru o demonstraţie, robotul este aşezat în faţa unei etajere cu <code>N</code> rafturi numerotate în ordine, de jos în sus, cu numere de la <code>1</code> la <code>N</code>. Braţul stâng ( <span style="color:red;">S</span> ) al robotului este poziţionat în dreptul primului raft iar celălat braţ ( <span style="color:red;">D</span> ) în dreptul celui de-al <code>K</code>-lea raft.</p>
+
+<p>Pentru ştergerea prafului, deplasarea braţelor robotului este programată astfel: </p>
+
+<ul>
+	<li>fiecare braţ se deplasează doar de jos în sus, de la raftul în dreptul căruia este poziţionat la un moment dat, la raftul situat imediat deasupra acestuia;</li>
+	<li>din minut în minut, se deplasează doar unul din braţe, se poziţionează în dreptul raftului corespunzător şi şterge praful de pe acesta;</li>
+	<li>dacă ambele braţe ajung în dreptul aceluiaşi raft, atunci robotul se blochează şi demonstraţia se încheie fără succes.</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Ştiind că demonstraţia se termină în momentul în care braţul drept ( <span style="color:red;">D</span> ) al robotului a ajuns pe ultimul raft al etajerei, scrieţi un program care calculează numărul <code>M</code> de modalităţi diferite în care poate fi programat robotul pentru a asigura succesul demonstraţiei.</p>
+
+<p>Programul va afişa restul împărţirii numărului <code>M</code> la <code>64997</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fişierul de intrare <code>robot.in</code> conţine pe prima linie două numere naturale <code>N</code> şi <code>K</code>, în această ordine, separate printr-un spaţiu, având semnificaţia din enunţ.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>În fişierul <code>robot.out</code>  se va scrie pe prima linie un singur număr natural ce reprezintă restul împărţirii numărului <code>M</code> la <code>64997</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ K ≤ N ≤ 2800</code></li>
+	<li>cele două braţe NU se pot mişca simultan;</li>
+	<li>un braţ poate fi programat să se deplaseze în dreptul unui raft de pe care a fost deja şters praful;</li>
+	<li>un mod de programare al robotului este definit printr-o succesiune de deplasări ale braţelor:   <span style="color:red;">S</span>,  <span style="color:red;">D</span>;</li>
+	<li>două moduri de programare ale robotului sunt diferite dacă acestea au cel puţin o deplasare <span style="color:red;">S</span> sau <span style="color:red;">D</span> diferită.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>robot.in</code></p>
+
+<pre>5 2</pre>
+
+<p><code>robot.out</code></p>
+
+<pre>5</pre>
+
+<h1>Explicație</h1>
+
+<p>Sunt <code>5</code> modalităţi de programare a robotului pentru ca braţul drept să ajungă la ultimul raft:  <br>
+modalitatea <code>1</code>:   <span style="color:red;">D</span>: 2→3(deplasare de la raftul 2 la raftul 3)   <span style="color:red;">D</span>: 3→4    <span style="color:red;">D</span>: 4→5<br>
+modalitatea <code>2</code>:   <span style="color:red;">D</span>: 2→3   <span style="color:red;">S</span>: 1→2     <span style="color:red;">D</span>: 3→4   <span style="color:red;">D</span>: 4→5<br>
+modalitatea <code>3</code>:   <span style="color:red;">D</span>: 2→3   <span style="color:red;">S</span>: 1→2     <span style="color:red;">D</span>: 3→4   <span style="color:red;">S</span>:  2→3    <span style="color:red;">D</span>: 4→5<br>
+modalitatea <code>4</code>:   <span style="color:red;">D</span>: 2→3   <span style="color:red;">D</span>: 3→4     <span style="color:red;">S</span>: 1→2   <span style="color:red;">D</span>: 4→5<br>
+modalitatea <code>5</code>:   <span style="color:red;">D</span>: 2→3   <span style="color:red;">D</span>: 3→4     <span style="color:red;">S</span>: 1→2   <span style="color:red;">S</span>:  2→3    <span style="color:red;">D</span>: 4→5</p>		</article>
+		</body></html>

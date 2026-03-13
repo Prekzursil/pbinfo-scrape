@@ -1,0 +1,94 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4363"><article id="enunt">
+			<p>Fie un șir de întregi \( {a}_{1}, …, {a}_{k} \). Vom numi valoarea lui \( {a}_{1}, …, {a}_{k} \), pe care o vom nota \( value({a}_{1}, …, {a}_{k}) \), numărul maxim <code>2</code><sup><code>x</code></sup> astfel încât <code>2</code><sup><code>x</code></sup> divide \( {a}_{1} + … + {a}_{k} \). Spre exemplu, dacă <code>k = 3</code> și <code>a1 = 8</code>, <code>a2 = 3</code>, <code>a3 = 1</code> atunci <code>a1 + a2 + a3 = 12</code> iar valoarea secvenței este <code>4</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Vei primi o secvență de <code>n</code> numere naturale \( {a}_{1}, …, {a}_{n} \). Calculează restul impărțirii sumei tuturor subsecvențelor continue ale șirului \( {a}_{1}, …, {a}_{n} \) la <code>1.000.000.007</code>, care este egal cu:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-sequences-01-jpg.jpg" style="width:500px;"></p>
+
+<p>Cu alte cuvinte, \( S({a}_{1}, …, {a}_{n}) \) este restul împărțirii sumei valorilor \( value({a}_{i}, …, {a}_{j}) \) pentru toate <code>1 ≤ i ≤ j ≤ n</code> prin împărțirea la <code>1.000.000.007</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Programul citește de pe prima linie numărul <code>n</code>. A doua linie va conține întregii \( {a}_{1}, …, {a}_{n} \), separați prin câte un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Programul va afișa o singură linie care conține numărul \( S({a}_{1}, …, {a}_{n}) \).</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 200.000</code></li>
+	<li><code>1 ≤ a</code><sub><code>i</code></sub> <code>≤ 1.000.000</code></li>
+	<li>\( {a}_{1} + … + {a}_{n} ≤ 1.000.000 \)</li>
+	<li>Pentru 13 puncte, <code>a</code><sub><code>i</code></sub> <code>= 1</code>, <code>n ≤ 200</code></li>
+	<li>Pentru 16 puncte, \( {a}_{1} + … + {a}_{n} ≤ 200 \)</li>
+	<li>Pentru 5 puncte, <code>n ≤ 200</code></li>
+	<li>Pentru 20 puncte, <code>n ≤ 5000</code></li>
+	<li>Pentru 21 puncte, \( {a}_{1} + … + {a}_{n} ≤ 200.000 \)</li>
+	<li>Pentru 25 puncte, fără restricții suplimentare</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>3
+1 2 3</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>8</pre>
+
+<h3>Explicație</h3>
+
+<p>Valorile tuturor subsecvențelor continue sunt:</p>
+
+<ul>
+	<li><code>value(1) = 1</code></li>
+	<li><code>value(1, 2) = 1</code></li>
+	<li><code>value(1, 2, 3) = 2</code></li>
+	<li><code>value(2) = 2</code></li>
+	<li><code>value(2, 3) = 1</code></li>
+	<li><code>value(3) = 1</code></li>
+</ul>
+
+<p>Astfel, <code>S(1, 2, 3)</code> este restul împărțirii sumei valorilor la <code>1.000.000.007</code>, adică <code>8</code> pentru acest exemplu.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>5
+2 4 1 2 4</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>25</pre>
+
+<h3>Explicație</h3>
+
+<p>Valorile tuturor subsecvențelor continue sunt:</p>
+
+<ul>
+	<li><code>value(2) = 2</code></li>
+	<li><code>value(2, 4) = 2</code></li>
+	<li><code>value(2, 4, 1) = 1</code></li>
+	<li><code>value(2, 4, 1, 2) = 1</code></li>
+	<li><code>value(2, 4, 1, 2, 4) = 1</code></li>
+	<li><code>value(4) = 4</code></li>
+	<li><code>value(4, 1) = 1</code></li>
+	<li><code>value(4, 1, 2) = 1</code></li>
+	<li><code>value(4, 1, 2, 4) = 1</code></li>
+	<li><code>value(1) = 1</code></li>
+	<li><code>value(1, 2) = 1</code></li>
+	<li><code>value(1, 2, 4) = 1</code></li>
+	<li><code>value(2) = 2</code></li>
+	<li><code>value(2, 4) = 2</code></li>
+	<li><code>value(4) = 4</code></li>
+</ul>
+
+<p>Astfel, <code>S(2, 4, 1, 2, 4)</code> este restul împărțirii sumei valorilor la <code>1.000.000.007</code>, adică <code>25</code> pentru acest exemplu.</p>		</article>
+		</body></html>

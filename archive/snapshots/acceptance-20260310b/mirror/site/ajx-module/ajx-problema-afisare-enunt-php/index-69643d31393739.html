@@ -1,0 +1,74 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1979"><article id="enunt">
+			<p>Gigel se joacă cu un graf orientat cu <code>N</code> noduri. Inițial toate nodurile grafului sunt transparente, dar lui Gigel îi place schimbarea. Fire ambițioasă, el colorează unele noduri în roșu, altele în negru, iar pe celelalte în alb (probabil din cauza crizei de vopsea colorată din 2017).</p>
+
+<p>Gigel recrutează o armată de furnici pe care o așează în nodul <code>1</code>, cu el în fruntea lor și se hotărăște să cucerească graful.În fiecare moment, Gigel poate trimite un număr de furnici din orice nod <code>X</code> (în care se află deja furnici) în vecinii lui <code>X</code>, cu condiția ca cel puțin o furnică să rămână în nodul <code>X</code>. Excepție de la această regulă face nodul <code>1</code>, cel în care se află Gigel, unde nu este obligatoriu să rămână furnici.</p>
+
+<p>Dacă într-un nod se află Gigel sau cel puțin o furnică, atunci acel nod se numește ocupat. Graful este cucerit atunci când Gigel a ocupat cel puțin un nod roșu și cel puțin un nod negru.</p>
+
+<h1>Cerința</h1>
+
+<p>Sa se determine numărul minim de furnici pentru ca Gigel să cucerească graful.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>rbtree.in</code> conține pe prima linie trei numere naturale: <code>N</code> – reprezentând numărul de noduri ale grafului, <code>R</code> – reprezentând numărul nodurilor de culoare roșie și <code>B</code> – reprezentând numărul nodurilor de culoare neagră.<br>
+A doua linie conține <code>R</code> numere distincte <code>r1</code>, <code>r2</code>, …, <code>rR</code>, reprezentând nodurile roșii.<br>
+A treia linie conține <code>B</code> numere distincte <code>b1</code>, <code>b2</code>, …, <code>bB</code>, reprezentând nodurile negre.<br>
+Următoarele <code>N</code> linii descriu nodurile grafului împreună cu vecinii lor. Pe linia  <code>i+3</code>  se află vecinii nodului <code>i</code> și este formată din:<br>
+- un număr <code>P</code>, reprezentând numărul de vecini ai nodului <code>i</code><br>
+- <code>P</code> numere distincte <code>n1</code>, <code>n2</code>, <code>…</code> , <code>nP</code> reprezentând vecinii nodului</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>rbtree.out</code> va conține o singură linie pe care se află numărul minim de furnici pentru ca Gigel să cucerească graful. În cazul în care graful nu poate fi cucerit, se va afișa mesajul <code>impossible</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N ≤ 100.000</code></li>
+	<li><code>1 ≤ R &lt; N</code></li>
+	<li><code>1 ≤ B &lt; N</code></li>
+	<li><code>1 ≤ ri ≤ N</code>, pentru oricare <code>i</code>, <code>1 ≤ i ≤ R</code></li>
+	<li><code>1 ≤ bi ≤ N</code>, pentru oricare <code>i</code>, <code>1 ≤ i ≤ B</code></li>
+	<li><code>0 ≤ P ≤ 10</code></li>
+	<li><code>1 ≤ ni ≤ N</code>, pentru oricare <code>1 ≤ i ≤ P</code></li>
+	<li>Se garantează că un nod are o singură culoare. Dacă un nod nu este roșu sau negru, atunci este alb.</li>
+	<li>Gigel rămâne tot timpul în nodul <code>1</code>, deci nodul <code>1</code> este ocupat.</li>
+</ul>
+
+<h1>Exemple:</h1>
+
+<p><code>rbtree.in</code></p>
+
+<pre>3 1 1
+2
+3
+1 2
+2 3 1
+1 1</pre>
+
+<p><code>rbtree.out</code></p>
+
+<pre>2</pre>
+
+<p><code>rbtree.in</code></p>
+
+<pre>3 1 1
+2
+3
+1 2
+1 1
+2 1 2</pre>
+
+<p><code>rbtree.out</code></p>
+
+<pre>impossible</pre>
+
+<h3>Explicație</h3>
+
+<p>Pentru primul ex.:<br>
+Gigel se află inițial alături de două furnici în nodul <code>1</code>. El trimite ambele furnici în nodul <code>2</code>, după care trimite o furnică din nodul <code>2</code> în nodul <code>3</code>. În nodul <code>1</code> poate să nu rămână nicio furnică deoarece rămâne Gigel.</p>
+
+<p>Al doilea ex.:<br>
+Gigel poate trimite furnici doar în nodul <code>2</code>. Deoarece niciunul dintre nodurile <code>1</code> și <code>2</code> nu sunt negre, atunci Gigel nu poate cuceri graful.</p>		</article>
+		</body></html>

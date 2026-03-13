@@ -1,0 +1,108 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4113"><article id="enunt">
+			<p>Tsubasa-chan adoră dulciurile! De curând a apărut un nou tip de desert. Astfel decide să înfăptuiască o nouă fabrică care să producă acest produs delicios. Fabrica conține un container imens pătratic, plin de aluat, de <code>10</code><sup><code>6</code></sup> <code>x 10</code><sup><code>6</code></sup> unități. Fiecare punct din container are drept coordonate o pereche de numere reale <code>(x, y)</code>, unde <code>0 ≤ x, y ≤ 10</code><sup><code>6</code></sup>, iar fiecare punct are o dulceață. Dulceața unui punct este un număr real, inițial <code>0</code>. Pentru fabricarea desertului este nevoie de <code>Q</code> operații, care pot fi de următoarele tipuri:</p>
+
+<ul>
+	<li>O <strong>îndulcire verticală</strong>, determinată de o coordonată <code>x</code><sub><code>u</code></sub> întreagă și o valoare întreagă <code>v</code>. După această operație, toate punctele din container <code>(x, y)</code> unde <code>x</code><sub><code>u</code></sub> <code>≤ x &lt; x</code><sub><code>u</code></sub> <code>+ 1</code> devin mai dulci cu <code>v</code>.</li>
+	<li>O <strong>îndulcire orizontală</strong>, determinată de o coordonată <code>y</code><sub><code>u</code></sub> întreagă și o valoare întreagă <code>v</code>. După această operație, toate punctele din container <code>(x, y)</code> unde <code>y</code><sub><code>u</code></sub> <code>≤ y &lt; y</code><sub><code>u</code></sub> <code>+ 1</code> devin mai dulci cu <code>v</code>.</li>
+	<li>O <strong>degustare</strong>, determinată de 4 coordonate întregi <code>x</code><sub><code>q</code></sub>, <code>y</code><sub><code>q</code></sub>, <code>x</code><sub><code>q'</code></sub>, <code>y</code><sub><code>q'</code></sub>. Pentru aceeastă operație, Tsubasa ia o lingură, o pune în aluat la punctul <code>(x</code><sub><code>q</code></sub>, <code>y</code><sub><code>q</code></sub><code>)</code>, și apoi o duce in linie dreaptă la punctul <code>(x</code><sub><code>q'</code></sub>, <code>y</code><sub><code>q'</code></sub><code>)</code>. Mișcarea se efectuează într-o secundă, cu viteză constantă. După aceea, Tsubasa gustă desertul, vrând să afle <strong>dulceața totală</strong> a aluatului din lingură. Această valoare se calculează în felul următor: dacă lingura trece prin zone de dulceața <code>d</code><sub><code>1</code></sub> pentru <code>t</code><sub><code>1</code></sub> secunde, de dulceață <code>d</code><sub><code>2</code></sub> pentru <code>t</code><sub><code>2</code></sub> secunde, …, și de dulceață <code>d</code><sub><code>k</code></sub> pentru <code>t</code><sub><code>k</code></sub> secunde, atunci dulceața totală din lingură este <code>t</code><sub><code>1</code></sub> • <code>d</code><sub><code>1</code></sub> + <code>t</code><sub><code>2</code></sub> • <code>d</code><sub><code>2</code></sub> + … + <code>t</code><sub><code>k</code></sub> • <code>d</code><sub><code>k</code></sub>. Nu se modifică dulceața din container.</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Dându-se toate operațiile întreprinse în producerea desertului, să se găsească dulcețurile totale ce sunt găsite la toate operațiile de degustare. </p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului de intrare <strong>dulciuri.in</strong> se va găsi numărul <code>Q</code> de operații.</p>
+
+<p>Pe următoarele <code>Q</code> linii urmează descrieri a tuturor operațiilor, câte una pe linie, în ordine. O operație este codificată în felul următor:</p>
+
+<ul>
+	<li>O îndulcire verticală este codificată prin <code>1 x</code><sub><code>u</code></sub> <code>v</code>.</li>
+	<li>O îndulcire orizontală este codificată prin <code>2 y</code><sub><code>u</code></sub> <code>v</code>.</li>
+	<li>O degustare este codificată prin <code>3 x</code><sub><code>q</code></sub> <code>y</code><sub><code>q</code></sub> <code>x</code><sub><code>q'</code></sub> <code>y</code><sub><code>q'</code></sub>.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>În fișierul de ieșire <code>dulciuri.out</code>, să se afișeze toate rezultatele degustărilor, în ordine, câte una pe linie. Rezultatul unei degustări se consideră a fi corect daca eroarea absolută sau relativă față de soluția comisiei este cel mult <code>10</code><sup><code>-7</code></sup>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>Toate coordonatele din datele de intrare sunt întregi în intervalul <code>[0, 1.000.000]</code>.</li>
+	<li><code>0 ≤ v ≤ 1000</code>.</li>
+	<li><code>v</code> este întreg.</li>
+	<li><code>1 ≤ Q ≤ 100.000</code>.</li>
+	<li>Pentru 20 de puncte nu se fac îndulciri orizontale și <code>Q ≤ 2000</code>.</li>
+	<li>Pentru 20 de puncte, la fiecare degustare, fie <code>x</code><sub><code>q</code></sub> <code>= x</code><sub><code>q'</code></sub> sau <code>y</code><sub><code>q</code></sub> <code>= y</code><sub><code>q'</code></sub>, <code>Q ≤ 2000</code></li>
+	<li>Pentru 10 de puncte, se face cel mult o degustare</li>
+	<li>Pentru 20 de puncte, toate degustările se fac după toate îndulcirile</li>
+	<li>Pentru 10 de puncte, <code>Q ≤ 2000</code></li>
+	<li>Pentru 20 de puncte, fără restricții suplimentare</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>dulciuri.in</code></p>
+
+<pre>3
+1 2 60
+2 3 60
+3 0 0 3 4</pre>
+
+<p><code>dulciuri.out</code></p>
+
+<pre>35</pre>
+
+<h3>Explicație</h3>
+
+<p>Situația pentru degustarea din primul exemplu este explicată în diagrama de mai jos.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-dulciuri-1-jpg.jpg"></p>
+
+<p>Zonele roz sunt zonele în care s-a aplicat o îndulcire, și numerele reprezintă cu cât s-a îndulcit. Zona din intersecția îndulcirilor are dulceața 120. Linia diagonală punctată reprezintă traseul.</p>
+
+<p>Traseul are lungimea \( \sqrt{3^2 + 4^2} = 5 \), și este completat într-o secundă – astfel are viteza de <code>5</code> unități pe secundă. Segmentul de la <code>(2, 2.(6))</code> la <code>(2.25, 3)</code> are lungimea \( \sqrt{(2.25 – 2)^2 + (2.(6) – 3)^2} = \sqrt{¼^2 + (1/3)^2} = 5/12 \), și are dulceața <code>60</code> – astfel el este traversat în <code>(5/12) x (1/5) = 1/12</code> secunde, și contribuie cu <code>(1/12) x 60 = 5</code> la dulceața totală. Segmentul de la <code>(2.25, 3)</code> la <code>(3, 4)</code> are lungimea \( \sqrt{(3 – 2.25)^2 + (4 – 3)^2} = 5/4 \), și are dulceața <code>120</code> – astfel el este traversat în <code>(5/4) x (1/5) = 1/4</code> secunde, și contribuie cu <code>(1/4) x 120 = 30</code> la dulceața totală. Astfel, cum segmentul de la <code>(0, 0)</code> la <code>(2, 2.(6))</code> contribuie cu <code>0</code>, dulceața totală este <code>35</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>dulciuri.in</code></p>
+
+<pre>4
+1 2 10
+3 2 0 2 1
+3 3 0 3 1
+3 2 0 2 0</pre>
+
+<p><code>dulciuri.out</code></p>
+
+<pre>10
+0
+10</pre>
+
+<h3>Explicație</h3>
+
+<p>Situația pentru degustările din al doilea exemplu este explicată în diagrama de mai jos.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-dulciuri-2-jpg.jpg"></p>
+
+<p>În primul traseu (cel din stânga) trecem mereu printr-o zonă cu dulceața <code>10</code>, deci rezultatul degustării este <code>10</code>. În al doilea traseu (cel din dreapta) trecem mereu printr-o zonă cu dulceața <code>0</code>, deci rezultatul degustării este <code>0</code>. În al treilea traseu, stăm pe loc pentru o secundă într-o zona de dulceață <code>10</code>, deci răspunsul este <code>10</code>.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>dulciuri.in</code></p>
+
+<pre>6
+1 4 413
+1 3 234
+2 5 244
+2 3 777
+3 1 2 14 15
+3 31 4 2 40</pre>
+
+<p><code>dulciuri.out</code></p>
+
+<pre>128.3076923077
+29.0881226054</pre>		</article>
+		</body></html>

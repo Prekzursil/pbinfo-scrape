@@ -1,0 +1,70 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=678"><article id="enunt">
+			<p>Alex a accesat fonduri europene și a pus bazele unei afaceri profitabile, constând în creșterea viermilor de mătase. Viermii de mătase se hrănesc cu frunze de dud, iar Alex are mulți duzi în grădină. El a observat că dacă așează un vierme de mătase pe o frunză de dud, acesta va mânca toată frunza într-un timp care depinde doar de mărimea suprafeței frunzei.</p>
+
+<p>Alex a decis să le aplice viermilor săi de mătase un test de inteligență. În acest scop, a pus în practică următorul experiment științific: pe o bară îngustă, liniară, a așezat de la stânga la dreapta <code>n</code> frunze de dud având suprafețele <code>s[1]</code>, <code>s[2]</code>, … <code>s[n]</code>, la distanțe <code>x[1]</code>, <code>x[2]</code>,…, <code>x[n]</code> milimetri față de capătul din stânga. Alex a așezat un vierme de mătase pe frunza cu numărul de ordine <code>k</code>. Pentru oricare frunză <code>i</code>, viermele de mătase va mânca frunza în <code>s[i]</code> secunde, unde <code>s[i]</code> este mărimea suprafeței frunzei. După ce mănâncă în întregime o frunză, viermele pornește imediat cu viteza de <code>1</code> milimetru/ secundă spre următoarea frunză, care poate fi la stânga sau la dreapta sa. Altfel spus, el își poate schimba dacă e cazul, sensul de deplasare după ce mănâncă o frunză.</p>
+
+<p>Alex ar dori să știe care este numărul maxim de frunze de dud pe ar putea să le mănânce în întregime cel mai inteligent vierme de mătase pe care îl are, având la dispoziție timpul de maxim <code>t</code> secunde.</p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând <code>n</code>, <code>k</code>, <code>t</code>, distanțele <code>x[1]</code>, <code>x[2]</code>, .., <code>x[n]</code> și suprafețele <code>s[1]</code>, <code>s[2]</code>, …, <code>s[n]</code> cu semnificațiile descrise mai sus, să se determine numărul maxim de frunze pe care un vierme de mătase poate să le mănânce în întregime, într-un timp cel mult egal cu <code>t</code>, dacă este plasat inițial pe frunza <code>k</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fişierul de intrare <code>mts.in</code> conţine pe prima linie trei numere naturale <code>n k t</code> separate prin câte un spaţiu, cu semnificația descrisă anterior.</p>
+
+<p>Pe linia a doua se află <code>n</code> numere naturale <code>s[1] s[2] ... s[n]</code> separate prin câte un spațiu, reprezentând mărimea suprafețelor celor <code>n</code> frunze. </p>
+
+<p>Pe linia a treia se găsesc se găsesc <code>n</code> numere naturale <code>x[1] x[2] ... x[n]</code> separate prin câte un spațiu,  reprezentând distanțele la care sunt așezate cele <code>n</code> frunze de dud față de capătul din stânga a barei.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Pe prima linie a fişierului <code>mts.out</code> se va scrie un singur număr natural <code>f</code> reprezentând numărul maxim de frunze care pot fi mâncate de către cel mai inteligent vierme de mătase în timpul <code>t</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ k ≤ n ≤ 200 000</code></li>
+	<li><code>1 ≤ s[1], s[2], ..., s[n] ≤ 1000</code></li>
+	<li><code>1 ≤ x[1] &lt; x[2] &lt; ... &lt; x[n] ≤ 1 000 000</code></li>
+	<li><code>1 ≤ t ≤ 2 000 000</code></li>
+	<li>Imediat cum ajunge la poziția în care se găsește o frunză de dud, viermele se oprește și începe să mănânce acea frunză. Nu va pleca din acea poziție până când frunza nu va fi mâncată în întregime.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>mts.in</code></p>
+
+<pre>3 2 9
+4 2 5
+1 5 6</pre>
+
+<p><code>mts.out</code></p>
+
+<pre>2</pre>
+
+<h1>Explicație</h1>
+
+<p>Viermele va mânca <code>2</code> frunze: cele cu numerele de ordine <code>2</code> și <code>3</code>. Timpul total va fi:    <br>
+<code>s[2] + s[3] + (x[3] – x[2]) = 2 + 5 + 1 = 8</code></p>
+
+<p>Dacă ar încerca să mănânce frunzele <code>2</code> și <code>1</code>, atunci timpul total ar fi:<br>
+<code>s[2] + s[1] + (x[2] – x[1]) = 2 + 4 + (5 – 1) = 10 &gt; 9</code></p>
+
+<h1>Exemplu:</h1>
+
+<p><code>mts.in</code></p>
+
+<pre>4 2 11
+4 2 1 5
+1 2 4 8</pre>
+
+<p><code>mts.out</code></p>
+
+<pre>3</pre>
+
+<h1>Explicație</h1>
+
+<p>Viermele va mânca <code>3</code> frunze: cele cu numerele de ordine <code>2</code>, <code>1</code> și <code>3</code>, exact în această ordine, în timpul total: <br>
+<code>s[2] + s[1] + s[3] + 2*(x[2]–x[1]) + (x[3]-x[2]) = 2 + 1 + 4 + 2*(2 – 1) + (4 – 2) = 11</code></p>		</article>
+		</body></html>

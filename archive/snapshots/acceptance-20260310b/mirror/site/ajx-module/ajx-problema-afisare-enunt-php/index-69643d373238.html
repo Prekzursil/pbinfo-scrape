@@ -1,0 +1,61 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=728"><article id="enunt">
+			<p>Ionel este mare pasionat al jocului Triburile. Ideea jocului este aceea că fiecare jucător deţine la un moment dat câteva sate dintr-o zonă şi încearcă să domine acea zonă cucerind satele deţinute în respectiva zonă de alţi jucători. Ionel a ajuns să deţină foarte multe sate şi îi este din ce în ce mai greu să-şi organizeze atacurile.</p>
+
+<p>În acest moment el are <code>n</code> sate, numerotate de la <code>1</code> la <code>n</code>, şi urmează să organizeze atacuri coordonate asupra satelor duşmane. Ionel cunoaşte cât timp face armata din fiecare sat al său până la fiecare sat inamic.</p>
+
+<p>Ionel a ales două sate inamice <code>X</code> şi <code>Y</code> pe care vrea să le atace. El s-a gândit la următorul scenariu: selectează <code>k</code> sate diferite ale sale şi trimite toate armatele din ele la atac asupra unuia dintre cele două sate inamice. Toate cele <code>k</code> atacuri trebuie să fie coordonate, adică toate trupele provenind din cele <code>k</code> sate trebuie să sosească în satul atacat exact la aceeaşi oră (pentru aceasta, ele pot pleca la momente diferite de timp). Se ştie că în urma acestui atac supravieţuiesc din fiecare sat al lui Ionel suficiente trupe care se întorc în satul de unde provin şi pot participa la un  nou atac. Ionel va selecta apoi din nou <code>k</code> sate de-ale sale, printre care pot fi şi sate care au participat la primul atac, şi va lansa ofensiva asupra celuilalt sat inamic. Şi de data aceasta armatele provenind de la cele <code>k</code> sate trebuie sa ajungă în acelaşi timp la obiectivul pe care îl atacă. </p>
+
+<p>Ionel doreşte ca timpul scurs de la plecarea primei armate până la momentul sosirii armatelor în cel de al doilea sat atacat să fie cât mai scurt, pentru a putea surprinde în felul acesta inamicul. </p>
+
+<p>Vom considera că prima armată a lui Ionel va pleca la atac la ora <code>00:00</code>, şi toate cele <code>2k</code> atacuri îşi vor atinge ţinta cel târziu la ora <code>23:59</code> a aceleiaşi zile.</p>
+
+<p>Timpul necesar revenirii unei armate în satul de origine după atacul asupra unui sat inamic este egal cu timpul necesar deplasării din satul de origine spre respectivul sat atacat, iar atacul este instantaneu (nu consumă timp). </p>
+
+<h1>Cerința</h1>
+
+<p>Se cere să se determine ora la care ajung trupele în cel de al doilea sat atacat, conform cerinţelor de mai sus.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fişierul de intrare <code>triburi.in</code> conţine:</p>
+
+<ul>
+	<li>pe prima linie două numere naturale <code>n</code> şi <code>k</code>  reprezentând numărul de sate deţinute de Ionel şi respectiv numărul de armate care trebuie să participe la atacul asupra fiecărui sat inamic.</li>
+</ul>
+
+<ul>
+	<li>următoarele <code>n</code> linii conţin câte patru numere <code>h1i</code>, <code>m1i</code>, <code>h2i</code>, <code>m2i</code> (<code>i=1,2,...,n</code>) separate prin câte un spaţiu, reprezentând timpul (exprimat în ore şi minute) necesar ca trupele din satul al <code>i</code>-lea să ajungă în satul inamic <code>X</code> (<code>h1i</code>, <code>m1i</code>) respectiv timpul (exprimat în ore şi minute) necesar ca trupele din satul al <code>i</code>-lea să ajungă în satul inamic <code>Y</code> (<code>h2i</code>, <code>m2i</code>).</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>triburi.out</code> va conține pe prima două numere naturale <code>h</code> şi <code>m</code>, separate printr-un spaţiu reprezentând ora respectiv minutul sosirii trupelor în cel de al doilea sat atacat.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 1000</code></li>
+	<li><code>1 ≤ k ≤ n</code></li>
+	<li>Nu sunt afişate la ore sau minute zerourile nesemnificative, astfel ora <code>06:05</code> va fi exprimată <code>6 5</code>.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>triburi.in</code></p>
+
+<pre>6 3
+1 10 2 34
+2 16 1 35
+3 20 1 40
+2 17 1 32
+3 15 3 46
+0 29 1 15</pre>
+
+<p><code>triburi.out</code></p>
+
+<pre>3 15</pre>
+
+<h1>Explicație</h1>
+
+<p>Se va ataca mai întâi satul <code>Y</code> cu trupele din satele <code>3</code>, <code>4</code> şi <code>6</code>, în această ordine, ora la care armatele ajung în satul <code>Y</code> fiind <code>1:40</code>. Se atacă apoi satul <code>X</code> cu armatele din satele <code>1</code>, <code>2</code> şi <code>5</code> armatele ajungând în satul <code>X</code> la ora <code>3:15</code>. Se observă că trupele din satul <code>6</code> atacă satul <code>Y</code>, supravieţuitorii se întorc în sat şi atacă apoi satul <code>X</code>.</p>		</article>
+		</body></html>

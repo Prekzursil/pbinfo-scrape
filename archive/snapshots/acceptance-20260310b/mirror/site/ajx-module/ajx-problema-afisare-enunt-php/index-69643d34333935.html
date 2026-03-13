@@ -1,0 +1,72 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4395"><article id="enunt">
+			<p>Macarie a primit ca temă la Informatică următorul enunț de problemă: “Se consideră un șir <code>A</code> cu <code>N</code> numere naturale nenule, numerotate începând de la <code>1</code> până la <code>N</code>. Numim secvență o succesiune de termeni situați pe poziții consecutive în șir, iar lungimea secvenței o reprezintă numărul de termeni din care este formată. Costul unei secvențe este egal cu produsul dintre suma valorilor prime din secvență și suma celor compuse. Numărul compus este un număr care are cel puțin un divizor natural diferit de <code>1</code> și de el însuși, iar un număr este prim dacă are exact doi divizori naturali distincți, pe <code>1</code> și pe el însuși.”.</p>
+
+<p>Știm că numărul <code>1</code> nu este nici număr prim, nici compus, deci nu influențează costul niciunei secvențe în care se găsește. Evident, costul unei secvențe care nu conține niciun număr prim sau al unei secvențe care nu conține niciun număr compus este egal cu <code>0</code>. De asemenea, suma valorilor prime dintr-o secvență care conține un singur număr prim <code>X</code> este egală cu <code>X</code>; în mod similar, suma valorilor compuse dintr-o secvență care conține un singur număr compus <code>Y</code> este egală cu <code>Y</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Ajutați-l pe Macarie să rezolve următoarele două cerințe ale temei:<br>
+1. Să se determine lungimea maximă a unei secvențe din șirul <code>A</code> pentru care costul ei este mai mic sau egal decât un număr natural nenul <code>K</code>.<br>
+2. Presupunem că fiecare număr compus din șirul <code>A</code> este înlocuit cu produsul dintre cel mai mic factor prim al său și cel mai mare factor prim al său. Să se determine secvența de lungime maximă din șirul nou obținut, pentru care cel mai mare divizor comun al numerelor din care este formată este diferit de <code>1</code>. Se vor afișa pozițiile primului și ultimului element din secvență. Dacă sunt mai multe astfel de secvențe de lungime maximă, se va afișa cea pentru care poziția primului său element este maximă.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului de intrare <code>tema.in</code> se află trei numere naturale nenule <code>C</code>, <code>N</code> și <code>K</code>, în această ordine, separate prin câte un spațiu, unde <code>C</code> este numărul cerinței care trebuie rezolvată (<code>1</code> sau <code>2</code>), iar <code>N</code> și <code>K</code> au semnificația din enunț. Pe a doua linie se află <code>N</code> numere naturale nenule, separate între ele prin câte un spațiu, reprezentând, în ordine, termenii șirului <code>A</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Pe prima linie a fișierului de ieșire <code>tema.out</code>:</p>
+
+<ul>
+	<li>se scrie un număr natural nenul, reprezentând lungimea maximă determinată pentru prima cerință, dacă <code>C = 1</code>;</li>
+	<li>se scriu două numere naturale nenule, separate printr-un spațiu, reprezentând, în ordine, pozițiile primului, respectiv ultimului element din secvența de lungime maximă, determinată conform celei de a doua cerințe, dacă <code>C = 2</code>.</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N ≤ 100.000</code></li>
+	<li><code>1 ≤ K ≤ 10</code><sup><code>18</code></sup>; Numărul <code>K</code> nu are niciun rol pentru cerința 2.</li>
+	<li><code>1 ≤ A[i] ≤ 1.000.000</code>, pentru fiecare <code>i</code>: <code>1 ≤ i ≤ N</code>.</li>
+	<li>În cazul ambelor cerințe, există o secvență soluție ce are lungimea cel puțin egală cu <code>2</code>.</li>
+	<li>Există cel puțin un element diferit de <code>1</code> în șirul <code>A</code>.</li>
+	<li>Pentru 10 puncte, <code>C = 1</code> și <code>N = 2</code></li>
+	<li>Pentru 25 puncte, <code>C = 1</code> și <code>N ≤ 4000</code></li>
+	<li>Pentru 15 puncte, <code>C = 1</code> și <code>5000 &lt; N</code></li>
+	<li>Pentru 10 puncte, <code>C = 2</code> și <code>N = 2</code></li>
+	<li>Pentru 25 puncte, <code>C = 2</code> și <code>N ≤ 4000</code></li>
+	<li>Pentru 15 puncte, <code>C = 2</code> și <code>5000 &lt; N</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>tema.in</code></p>
+
+<pre>1 10 45
+10 2 3 1 4 5 8 2 6 3</pre>
+
+<p><code>tema.out</code></p>
+
+<pre>5</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C = 1</code>, <code>N = 10</code> și <code>K = 45</code>. Secvența <code>(2, 3, 1, 4, 5) = (A2,A3,A4,A5,A6)</code> are costul egal cu <code>(2 + 3 + 5) × 4 = 40</code>. Nu există, în șirul <code>A</code>, o secvență de lungime mai mare și de cost mai mic sau egal decât <code>45</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>tema.in</code></p>
+
+<pre>2 10 20
+1 2 32 4 42 49 7 21 1 63</pre>
+
+<p><code>tema.out</code></p>
+
+<pre>5 8</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C = 2</code>, <code>N = 10</code> și <code>K = 20</code>. După modificări, șirul <code>A</code> devine: <code>(1, 2, 4, 4, 14, 49, 7, 21, 1, 21)</code>.<br>
+Există două secvențe de lungime maximă pentru care cel mai mare divizor comun (“c.m.m.d.c.”) al numerelor din care sunt formate este diferit de <code>1</code>: <code>(2, 4, 4, 14)</code> (poziția în șir a primului element este <code>2</code>, iar c.m.m.d.c.-ul elementelor sale este <code>2</code>), respectiv <code>(14, 49, 7, 21)</code> (poziția în șir a primului element este <code>5</code>, iar c.m.m.d.c.-ul elementelor sale este <code>7</code>).<br>
+Pentru că sunt două secvențe de lungime maximă, în enunț este precizat că se va alege cea pentru care poziția primului său element este maximă, adică, în acest caz, <code>(14, 49, 7, 21) = (A5,A6,A7,A8)</code>.</p>		</article>
+		</body></html>

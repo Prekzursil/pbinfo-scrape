@@ -1,0 +1,78 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2130"><article id="enunt">
+			<p>Vlad a inventat un nou joc. Jocul conţine N standuri aşezate în linie dreaptă. Fiecare stand are o etichetă pe care este scris un număr natural. Eticheta este considerată corectă dacă numărul îndeplineşte următoarele două condiţii:</p>
+
+<ul>
+	<li>conține atât cifre pare, cât și cifre impare;</li>
+	<li>începe cu cifrele impare așezate în ordine crescătoare, urmate de cifrele pare în ordine descrescătoare.</li>
+</ul>
+
+<p>De exemplu, eticheta <code>137860</code> este corectă, dar etichetele <code>23541</code>, <code>135</code>, <code>64</code> şi <code>3146</code> nu sunt corecte.</p>
+
+<p>Pentru jocul său, Vlad a construit robotul reparator care ştie să verifice numere şi să le repare, dacă este necesar. Robotul reparator se deplasează în linie dreaptă și se opreşte pe rând la fiecare dintre cele <code>N</code> standuri. La fiecare stand, robotul verifică eticheta şi dacă nu este corectă, o „repară”. Pentru a repara eticheta, robotul aranjează cifrele impare în ordine crescătoare, apoi, în continuare, aranjează cifrele pare în ordine descrescătoare; dacă eticheta nu conţine nicio cifră impară, cea mai mare cifră pară o înlocuieşte cu <code>9</code> ; dacă eticheta nu conţine nicio cifră pară, cea mai mică cifră impară o înlocuieşte cu <code>0</code> . Deplasarea de la un stand la altul durează <code>t</code> secunde, verificarea etichetei unui stand durează <code>v</code> secunde, iar repararea acesteia durează <code>r</code> secunde. Cursa robotului se încheie după ce robotul a verificat toate cele <code>N</code> standuri şi a reparat etichetele incorecte.</p>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care citeşte numărul <code>N</code> de standuri, timpul (ora <code>h</code> , minutul <code>m</code> , secunda <code>s</code>) când robotul ajunge la primul stand, timpii <code>t</code> , <code>v</code> și <code>r</code> cu semnificaţia din enunţ şi etichetele standurilor și care rezolvă următoarele cerințe:</p>
+
+<ol>
+	<li>calculează şi afişează timpul (ora, minutul şi secunda) când robotul a încheiat verificarea tuturor celor <code>N</code> standuri şi repararea etichetelor incorecte;</li>
+	<li>repară (unde este necesar) etichetele standurilor şi afişează etichetele celor <code>N</code> standuri la final.</li>
+</ol>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>robot4.in</code> conține pe prima linie numărul <code>C</code> , reprezentând cerinţa care urmează să fie rezolvată (<code>1</code> sau <code>2</code>). Pe linia a doua se află numerele naturale <code>N</code> , <code>h</code> , <code>m</code> , <code>s</code> , iar pe linia a treia numerele naturale <code>t</code> , <code>v</code> , <code>r</code> , cu semnificaţia din enunţ. Numerele aflate pe aceeaşi linie sunt separate prin câte un spaţiu. Pe următoarele <code>N</code> linii se află etichetele standurilor, în ordinea aşezării acestora, câte o etichetă pe o linie.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă <code>C=1</code>, fişierul de ieşire <code>robot4.out</code> va conţine o singură linie pe care vor fi scrise 3 numere naturale separate prin câte un spaţiu <code>hf mf sf</code>, reprezentând ora, minutul şi respectiv secunda la care robotul termină repararea.<br>
+Dacă <code>C=2</code>, fişierul de ieşire <code>robot4.out</code> va conţine <code>N</code> linii pe care vor fi scrise etichetele standurilor, în ordinea aşezării acestora, după ce robotul a încheiat verificarea şi repararea, câte o etichetă pe o linie.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N ≤ 500</code></li>
+	<li>Etichetele standurilor au cel puțin două și cel mult nouă cifre.</li>
+	<li>Robotul începe și încheie repararea în aceeaşi zi; <code>0 ≤ h, hf &lt; 24</code> ; <code>0 ≤ m, mf, s, sf &lt; 60</code></li>
+	<li>Pentru rezolvarea corectă a cerinţei 1 se acordă 40 de puncte; pentru rezolvarea corectă a cerinţei 2 se acordă 60 de puncte.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>robot4.in</code></p>
+
+<pre>1
+3 11 20 50
+7 5 15
+376572
+3564
+123</pre>
+
+<p><code>robot4.out</code></p>
+
+<pre>11 21 49</pre>
+
+<h1>Exemplul 2</h1>
+
+<p><code>robot4.in</code></p>
+
+<pre>2
+3 11 20 50
+7 5 15
+376572
+3564
+113</pre>
+
+<p><code>robot4.out</code></p>
+
+<pre>357762
+3564
+130</pre>
+
+<h1>Explicații</h1>
+
+<p><strong>Pentru exemplul 1</strong>: Cerinţa este 1 . Există <code>3</code> standuri. Pentru simplitate notăm cu <code>h:m:s</code> ora <code>h</code> ,@m@ minute şi <code>s</code><br>
+secunde. La primul stand robotul ajunge la ora <code>11:20:50</code>. Primul stand are eticheta <code>376572</code>, care este incorectă, deci robotul o repară. Aici va petrece <code>5</code> secunde pentru verificare şi <code>15</code> secunde pentru reparare, deci va pleca de aici la ora <code>11:21:10</code>. La al doilea stand va ajunge la ora <code>11:21:17</code>; eticheta sa <code>3564</code> este corectă deci robotul nu o va modifica; aici va petrece <code>5</code> secunde pentru verificare şi pleacă la ora <code>11:21:22</code>. La al treilea stand va ajunge la ora <code>11:21:29</code>. Al treilea stand are eticheta incorectă <code>123</code>, robotul o repară, deci aici va petrece <code>5+15=20</code> secunde şi ora la care încheie cursa este <code>11:21:49</code>.</p>
+
+<p><strong>Pentru exemplul 2</strong>: Cerinţa este 2 . Există <code>3</code> standuri. Primul stand are eticheta <code>376572</code>, care este incorectă, robotul o repară şi aceasta devine <code>357762</code>. La al doilea stand eticheta <code>3564</code> este corectă. deci robotul nu o va modifica. Al treilea stand are eticheta incorectă <code>113</code>, robotul o repară şi devine <code>130</code>.</p>		</article>
+		</body></html>

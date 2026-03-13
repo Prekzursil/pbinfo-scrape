@@ -1,0 +1,80 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1097"><article id="enunt">
+			<p>O suprafaţă dreptunghiulară de înălţime <code>N</code> şi lăţime <code>M</code> unităţi trebuie acoperită perfect (placată) prin utilizarea unor plăci de formă dreptunghiulară de dimensiune <code>1 x P</code> sau <code>P x 1</code>, unde <code>P</code> este un număr natural nenul. Suprafaţa dată poate fi privită ca un caroiaj cu <code>NxM</code> pătrăţele egale cu unitatea.</p>
+
+<p>O placare corectă a suprafeţei iniţiale se memorează într-un fişier text folosind următoarele convenţii de codificare:</p>
+
+<ul>
+	<li>pe prima linie se precizează  dimensiunile <code>N</code> şi <code>M</code> ale suprafeţei;</li>
+	<li>o placă dreptunghiulară de laţime <code>P</code> este codificată prin numărul natural <code>P</code>, iar o placă de înalţime <code>P</code> se codifică prin numărul întreg <code>–P</code>;</li>
+	<li>convenim ca placa având ambele dimensiuni egale cu unitatea să se codifice cu valoarea <code>1</code>;</li>
+	<li>pe fiecare din cele <code>N</code> linii ale codificării se află câte un şir de valori întregi reprezentând, în ordine de la stânga la dreapta, codurile plăcilor care se găsesc amplasate începând de la respectiva linie;</li>
+	<li>codul <code>P</code> strict mai mare ca <code>1</code> al unei placi orizontale apare o singură dată pe linia corespunzătoare pe care se află placa, iar codul <code>–P</code>  al unei placi verticale va apare o singură dată şi anume pe prima linie de la care placa respectivă este amplasată în jos pe o anumita coloană a suprafeţei;</li>
+	<li>dacă pe o anumită linie a suprafeţei nu există astfel de coduri de plăci, atunci pe respectiva linie din fişier este o singură valoare de <code>0</code>.</li>
+</ul>
+
+<p>Folosind codificarea unei placări a suprafeţei iniţiale, se poate determina imaginea acestei placări sub forma unui tablou bidimensional <code>A</code>, cu <code>N</code> linii şi <code>M</code> coloane, unde <code>A</code><sub><code>ij</code></sub> = valoarea absolută a codului plăcii care se suprapune peste pătrăţelul de pe linia <code>i</code> şi coloana <code>j</code>.</p>
+
+<h1>Cerinţă</h1>
+
+<p>Cunoscând codificarea unei placări corecte a suprafeţei date să se obţină imaginea acestei placări (matricea de valori corespunzătoare codificării suprafeţei).</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>placare.in</code> are următoarea structură:</p>
+
+<ul>
+	<li>pe prima linie valorile naturale <code>N  M</code>, separate printr-un spaţiu, unde <code>N</code> este înălţimea suprafeţei, <code>M</code> este lăţimea suprafeţei.</li>
+	<li>pe fiecare din următoarele <code>N</code> linii se află un şir de valori întregi, separate prin câte un spaţiu, reprezentând codificarea respectivei linii a placării.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>În fișierul de ieșire <code>placare.out</code> se va tipări tabloul bidimensional ce reprezintă imaginea placării, compus din <code>N</code> linii, pe fiecare dintre ele aflându-se <code>M</code> valori naturale separate prin câte un spaţiu, cu semnificaţia din enunţ.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N, M ≤ 300</code></li>
+	<li>pentru 80% din teste, <code>1 ≤ N, M ≤ 100</code></li>
+	<li>dimensiunea <code>P</code> sau <code>-P</code> a unei plăci este aleasă astfel încât acoperirea obţinută să nu depăşească înălţimea <code>N</code> sau latimea <code>M</code> a suprafeţei.</li>
+	<li>datele din fişierul de intrare sunt corecte în sensul că reprezintă codificarea unei acoperiri a zonei dreptunghiulare de dimensiuni <code>N</code> şi <code>M</code>.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>placare.in</code></p>
+
+<pre>4 4
+-4 1 1 1
+1 2
+2 1
+3</pre>
+
+<p><code>placare.out</code></p>
+
+<pre>4 1 1 1
+4 1 2 2
+4 2 2 1
+4 3 3 3</pre>
+
+<h1>Explicație</h1>
+
+<p>Valoarea <code>-4</code> codifică o placă de înălţime <code>4</code> şi laţime <code>1</code> plasată începând din pătratul de coordonate <code>(1,1)</code> şi pînă în pătratul de coordonate <code>(4,1)</code></p>
+
+<p>Valoarea <code>3</code> de pe ultima linie a codificării desemnează o placă de lăţime <code>3</code> şi înălţime <code>1</code>, plasată orizontal, începând din pătrăţelul de coordonate <code>(4,2)</code>.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>placare.in</code></p>
+
+<pre>3 2
+-3 -2
+0
+1</pre>
+
+<p><code>placare.out</code></p>
+
+<pre>3 2
+3 2
+3 1</pre>		</article>
+		</body></html>

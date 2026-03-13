@@ -1,0 +1,64 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1731"><article id="enunt">
+			<p>Pentru un număr dat cu <code>k</code> cifre \(c_1c_2…c_k\), se numeşte algoritm de deplasare circulară spre dreapta de la o cifră iniţială \(c_i\), la o cifră finală \(c_j\), deplasarea din cifră în cifră spre dreapta de \(c_i\) ori (<code>1≤i,j≤k</code>). Dacă pe parcursul deplasării s-a ajuns la cifra \(c_k\), se continuă deplasarea circulară spre dreapta cu cifra \(c_1\).<br>
+Un număr cu <code>k</code> cifre se numeşte  număr „circular” dacă îndeplineşte următoarele două cerinţe:<br>
+</p><ul>
+	<li>toate cifrele sunt nenule;</li>
+	<li>pornind de la cifra \(c_1\), aplicând algoritmul de deplasare circulară spre dreapta de exact <code>k</code> ori, se ajunge din nou la \(c_1\), fiecare dintre cifrele numărului fiind exact o singură dată cifră iniţială.<br>
+De exemplu, numărul <code>2396</code> este un număr “circular”, pentru că are doar cifre nenule şi algoritmul de deplasare circulară spre dreapta se aplică astfel:<br>
+<em>1.</em> Se porneşte de la cifra iniţială <code>2</code> (<code>2 3 9 6</code>) şi se numără două cifre spre dreapta, ajungând la cifra finală <code>9</code>:  <code>2 3 9 6</code>.<br>
+<em>2.</em> Se porneşte de la cifra iniţială <code>9</code> şi se numără nouă cifre spre dreapta, ajungând la cifra finală <code>6</code>:  <code>2 3 9 6</code>.<br>
+<em>3.</em> Se porneşte de la cifra iniţială <code>6</code> şi se numără şase cifre spre dreapta, ajungând la cifra finală <code>3</code>:  <code>2 3 9 6</code>.<br>
+<em>4.</em> Se porneşte de la cifra iniţială <code>3</code> şi se numără trei cifre spre dreapta, ajungând la cifra finală <code>2</code>:  <code>2 3 9 6</code>.<br>
+Astfel, se ajunge la prima cifră din număr, adică la cifra <code>2</code>, după exact <code>4</code> aplicări ale algoritmului, iar fiecare dintre cifrele numărului este exact o dată cifră iniţială.</li><br>
+</ul><p></p>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care citeşte numărul natural nenul <code>n</code>, apoi numerele naturale \(x_1, x_2, …, x_n\), şi determină:<br>
+a) cel mai mare număr din şir în care există cel puţin o cifră care apare de minimum două ori, iar în cazul în care în şir nu există un astfel de număr, se va afişa cel mai mare număr din şir;<br>
+b) un şir \(a_1, a_2, …, a_n\) de <code>n</code> numere naturale pentru care un element \(a_i\)(<code>1≤i≤n</code>)se calculează astfel:<br>
+</p><ul>
+	<li>este egal cu \(x_i\) , dacă \(x_i\) este număr circular;</li>
+	<li>este numărul cel mai apropiat de \(x_i\) (număr mai mare sau mai mic decât \(x_i\)), cu proprietatea că este număr circular; dacă pentru un număr din şir se identifică un număr circular <code>y</code>, \( y &gt; x_i\) şi un număr circular <code>z</code>, <code>z&lt;</code>\(x_i\), pentru care \( y – x_i\) <code>=</code> \(x_i – z\), atunci se va alege numărul <code>y</code>.</li><br>
+</ul><p></p>
+
+<h1>Date de intrare</h1>
+
+<p>Fişierul <code>numar.in</code> conţine pe prima linie numărul <code>n</code>, iar pe următoarele <code>n</code> linii numerele naturale \(x_1, x_2, …, x_n\). </p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fişierul <code>numar.out</code> va conţine pe prima linie un număr natural determinat conform cerinţei a), iar pe următoarele <code>n</code> linii şirul de numere determinat conform cerinţei de la punctul b), fiecare număr pe câte un rând.  </p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>0 &lt; n &lt; 100</code></li>
+	<li><code>9 &lt;</code> \(x_i\) <code>&lt; 999589</code>, <code>1 ≤ i ≤ n</code></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>numar.in</code></p>
+
+<pre>5
+15
+123
+1972
+222
+515</pre>
+
+<p><code>numar.out</code></p>
+
+<pre>515
+15 
+117
+1959
+222
+522</pre>
+
+<h3>Explicație</h3>
+
+<p>a) <code>515</code> este cel mai mare număr dintre cele cinci numere citite, număr ce conţine o cifră care apare de minimum două ori.<br>
+b) Pentru <code>15</code>: de la cifra iniţială <code>1</code>, se numără o cifră şi se ajunge la cifra finală <code>5</code>, apoi începând de la cifra <code>5</code> ca cifră iniţială, se numără cinci cifre şi se ajunge la cifra finală <code>1</code>. Astfel cifrele <code>1</code>, <code>5</code> sunt o singură dată cifre iniţiale şi după două aplicări ale algoritmului de deplasare se ajunge la prima cifră, deci <code>15</code> este număr circular.</p>		</article>
+		</body></html>

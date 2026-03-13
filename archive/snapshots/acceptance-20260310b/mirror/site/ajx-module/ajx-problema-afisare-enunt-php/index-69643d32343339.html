@@ -1,0 +1,69 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2439"><article id="enunt">
+			<p>Roboțelul Nino a primit cadou un dispozitiv care inscripționează bile. Dispozitivul poate fi încărcat cu n bile, ce vor fi inscripționate în ordine, cu numerele <code>1</code>, <code>2</code>, …, <code>n</code>.<br>
+Nino trebuie să împartă bilele inscripționate în două șiruri, <code>X</code> și <code>Y</code>, astfel:<br>
+- La primul pas Nino va pune în primul șir bila cu numărul <code>1</code> (<code>X[1] = 1</code>), iar în al doilea șir bila cu numărul <code>2</code> (<code>Y[1] = 2</code>).<br>
+- La al doilea pas Nino va pune în primul șir bila cu numărul <code>3</code> (<code>X[2] = 3</code>), iar în al doilea șir bila cu numărul <code>4</code> (<code>Y[2] = 4</code>).<br>
+- La fiecare pas <code>i ≥ 3</code> Nino va pune în șirul <code>X</code> bila <code>X[i] = X[i-1] + Y[i-1]</code>, iar în șirul <code>Y</code>, în ordine crescătoare, bilele numerotate cu <code>X[i-1]+1</code>, <code>X[i-1]+2</code>, …, <code>X[i]-1</code>, cu excepția bilei <code>4</code> care a fost pusă deja.<br>
+Dacă la un pas <code>k</code>, <code>X[k] &gt; n</code>, bilele rămase vor fi inscripționate cu valorile <code>X[k-1]+1</code>, <code>X[k-1]+2</code>, …, <code>n</code> și vor fi puse în șirul <code>Y</code>.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-tbile-jpg.jpg"></p>
+
+<p>Pentru că bilele se rostogolesc, Nino împachetează în tuburi verticale de culoare galbenă, bilele din primul șir, iar în tuburi verticale de culoare roșie, bilele din al doilea șir. În fiecare tub încap cel mult <code>m</code> bile, dispuse pe o singură coloană. Tuburile sunt așezate vertical, întâi cele galbene, în ordinea umplerii, apoi cele roșii în ordinea umplerii lor. Bilele de la baza fiecărui tub formează nivelul <code>1</code>, cele situate imediat deasupra lor formează nivelul <code>2</code> etc., nivelul maxim putând fi <code>m</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Se dau numerele naturale <code>n</code> și <code>m</code> și se cere să se determine:<br>
+1. Numărul de tuburi de culoare roșie necesare pentru a împacheta bilele din șirul <code>Y</code> și numărul total de bile conținute de acestea.<br>
+2. Pentru un nivel <code>v</code> dat, suma numerelor inscripționate pe bilele de pe nivelul <code>v</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>tbile.in</code> conţine pe prima linie un număr natural <code>c</code> reprezentând cerința care trebuie să fie rezolvată (<code>1</code> sau <code>2</code>), pe a doua linie un număr natural <code>n</code>, reprezentând numărul de bile ce se inscripționează, iar pe cea de a treia linie un număr natural <code>m</code>, reprezentând numărul de bile care încap într-un tub. Dacă cerința este <code>c = 2</code>, fișierul de intrare conține, în plus, pe a patra linie, un număr natural <code>v</code> reprezentând numărul unui nivel.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă cerința este <code>c = 1</code>, atunci, pe prima linie a fișierului <code>tbile.out</code>, vor fi scrise două numere naturale, separate printr-un spațiu, reprezentând, în această ordine, numărul de tuburi de culoare roșie necesare pentru a împacheta bilele din șirul <code>Y</code>, respectiv, numărul total de bile conținute de acestea.<br>
+Dacă cerința este <code>c = 2</code>, atunci, pe prima linie a fișierului <code>tbile.out</code> va fi scris un număr natural reprezentând suma numerelor inscripționate pe bilele de pe nivelul <code>v</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>5 ≤ n ≤ 2 000 000 000</code></li>
+	<li><code>1 ≤ c ≤ m ≤ 311445015</code></li>
+	<li>Se acordă <code>30</code> de puncte pentru rezolvarea corectă a cerinței 1 și <code>60</code> de puncte pentru rezolvarea corectă a cerinței 2.</li>
+	<li>În concurs s-au acordat <code>10</code> puncte din oficiu. Aici se acordă punctele pentru exemplele din enunț.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>tbile.in</code></p>
+
+<pre>1
+36
+5</pre>
+
+<p><code>tbile.out</code></p>
+
+<pre>6 29</pre>
+
+<h3>Explicație</h3>
+
+<p>Primul șir va conține <code>7</code> bile (<code>1</code>, <code>3</code>, <code>7</code>, <code>12</code>, <code>18</code>, <code>26</code>, <code>35</code>), iar cel de al doilea <code>36-7=29</code> de bile (ca în figura de mai sus). Sunt necesare <code>6</code> tuburi de capacitate <code>5</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>tbile.in</code></p>
+
+<pre>2
+36
+5
+3</pre>
+
+<p><code>tbile.out</code></p>
+
+<pre>126</pre>
+
+<h3>Explicație</h3>
+
+<p>Pe nivelul <code>3</code> se găsesc bilele inscripționate cu numerele <code>7</code>, <code>5</code>, <code>11</code>, <code>17</code>, <code>23</code>, <code>29</code> și <code>34</code>. Suma acestor valori este <code>126</code>.</p>		</article>
+		</body></html>

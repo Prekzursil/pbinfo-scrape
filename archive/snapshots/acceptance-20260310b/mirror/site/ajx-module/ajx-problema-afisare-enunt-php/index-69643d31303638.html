@@ -1,0 +1,72 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1068"><article id="enunt">
+			<p><img align="right" alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1051-1075-suma5-png.png"> Constructorii angajaţi de faraonul Keops au terminat construirea piramidei în trepte mult visată. Măreaţa piramidă are <code>n</code> camere identice de formă cubică, numerotate de la <code>1</code> la <code>n</code>, dispuse pe <code>m</code> niveluri astfel:</p>
+
+<ul>
+	<li>camera din vârful piramidei formează nivelul <code>1</code> şi are numărul <code>1</code>;</li>
+	<li>nivelul <code>2</code> al piramidei este format din următoarele <code>4</code> camere care în secţiune cu un plan paralel cu baza au aspectul unei matrice cu <code>2</code> linii şi <code>2</code> coloane; camerele de pe nivelul <code>2</code> sunt numerotate de la <code>2</code> la <code>5</code> în ordinea crescătoare a liniilor matricei, iar pe aceeaşi linie în ordinea crescătoare a coloanelor matricei;<br>
+………………..</li>
+	<li>nivelul <code>m</code> al piramidei este format din <code>m*m</code> camere şi au, în secţiune cu un plan paralel cu baza, aspectul unei matrice cu <code>m</code> linii şi m coloane; camerele de pe nivelul <code>m</code> sunt numerotate în continuarea celor de pe nivelurile <code>1</code>, <code>2</code>,…, <code>m-1</code>, în ordinea crescătoare a liniilor matricei de secţiune, iar pe aceeaşi linie în ordinea crescătoare a coloanelor matricei. De exemplu, piramida din desenul de mai sus are <code>n=30</code>, <code>m=4</code> iar camerele sunt numerotate şi dispuse pe niveluri astfel:</li>
+</ul>
+
+<p style="text-align:center;"><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1051-1075-suma5-1-png.png"></p>
+
+<p>Nivelurile de camere sunt poziţionate astfel încât camerele de pe prima linie şi prima coloană a fiecărui nivel să se suprapună. Pentru exemplul dat, camerele <code>1</code>, <code>2</code>, <code>6</code> şi <code>15</code> sunt situate una sub alta, în această ordine.</p>
+
+<p>Accesul în oricare din camerele piramidei, situate pe diferite niveluri, se realizează prin drumuri construite astfel:</p>
+
+<ul>
+	<li>intrarea în piramidă se face doar prin camera din vârful ei, cea cu numărul <code>1</code>;</li>
+	<li>din camera cu numărul <code>k</code> de pe un drum se poate intra într-una din cele patru camere situate pe nivelul imediat următor al piramidei şi anume: camera situată sub cea cu numărul <code>k</code> sau una din cele trei camere vecine acesteia în secţiune (în direcţiile Est, Sud-Est, Sud, considerând secţiunile poziţionate ca în imaginile de mai sus). De exemplu, din camera cu numărul <code>10</code> se poate intra într-una din camerele cu numerele: <code>20</code>, <code>21</code>, <code>24</code> sau <code>25</code>.</li>
+</ul>
+
+<p>Faraonul priveşte cu mândrie şi tristeţe la frumoasa piramidă. Banii din visterie s-au împuţinat iar camerele piramidei trebuie finisate şi decorate. Scribul său favorit a refăcut toate calculele, a eliminat obiectele inutile şi a stabilit pentru fiecare cameră <code>k</code> un cost <code>c</code><sub><code>k</code></sub> aferent finisării şi decorării ei (<code>1≤k≤n</code>). </p>
+
+<p>Însă, suma totală necesară fiind încă mare, faraonul i-a cerut scribului să aleagă un drum, dintre cele construite, care să treacă prin toate nivelurile piramidei astfel încât suma <code>s</code> a tuturor costurilor aferente finisării şi decorării camerelor de pe acest drum să fie minimă. Deocamdată, doar aceste camere vor fi aranjate…</p>
+
+<h1>Cerinţă</h1>
+
+<p>Scrieţi un program care să determine numărul <code>m</code> de niveluri ale piramidei, suma minimă <code>s</code> a tuturor costurilor aferente finisării şi decorării camerelor de pe un drum ce trece prin toate nivelurile piramidei, construit în modul descris în enunţ, precum şi un astfel de drum pentru care se obţine suma minimă, putând fi ales de scrib.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>suma5.in</code> conține pe prima linie numărul natural nenul <code>n</code> reprezentând numărul de camere din piramidă. A doua linie conţine <code>n</code> numere naturale nenule <code>c</code><sub><code>1</code></sub>, <code>c</code><sub><code>2</code></sub>,…, <code>c</code><sub><code>n</code></sub>, separate prin câte un spaţiu, reprezentând costurile aferente finisării şi decorării camerelor, în ordinea numerotării lor.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>suma5.out</code> va conține pe prima linie două numere naturale <code>m</code> şi <code>s</code>, separate printr-un singur spaţiu, cu semnificaţia din enunţ. Cea de-a doua linie va conţine, separate prin câte un spaţiu, în ordinea parcurgerii lor, numerele camerelor de pe un drum ce trece prin toate nivelurile piramidei, drum pentru care se obţine suma minimă <code>s</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 63365</code></li>
+	<li>Pentru fiecare valoare <code>n</code> citită se poate construi în modul descris în enunţ o piramidă în trepte cu n camere</li>
+	<li><code>1 ≤ c</code><sub><code>1</code></sub><code>, c</code><sub><code>2</code></sub><code>,…, c</code><sub><code>n</code></sub><code> &lt;100</code></li>
+	<li>Dacă există mai multe drumuri ce trec prin toate nivelurile piramidei şi pentru care se obţine suma minimă <code>s</code>, atunci drumul ales va fi cel mai mic drum din punct de vedere lexicografic.</li>
+	<li>Se acordă:
+	<ul>
+		<li>10% din punctaj pentru determinarea corectă a numărului <code>m</code> de niveluri ale piramidei</li>
+		<li>30% din punctaj pentru determinarea corectă a sumei minime <code>s</code></li>
+		<li>60% din punctaj pentru determinarea corectă a drumului cerut.</li>
+	</ul></li>
+	</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>suma5.in</code></p>
+
+<pre>14
+7 8 4 5 5 8 4 2 7 7 8 3 1 6</pre>
+
+<p><code>suma5.out</code></p>
+
+<pre>3 13
+1 3 8</pre>
+
+<h1>Explicație</h1>
+
+<p>Piramida conţine <code>14</code> camere dispuse pe <code>m=3</code> trei niveluri. Nivelurile conţin valorile:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1051-1075-suma5-2-png.png"></p>
+
+<p>Suma minimă <code>s</code> a tuturor costurilor aferente finisării şi decorării camerelor de un drum ce trece prin toate cele <code>3</code> niveluri ale piramidei este <code>13</code>. Există mai multe drumuri pentru care se poate obţine suma minimă: <code>[1,3,8]</code>, <code>[1,4,13]</code>, <code>[1,5,13]</code>. Din punct de vedere lexicografic, cel mai mic drum dintre aceste drumuri este: <code>[1,3,8]</code>.</p>		</article>
+		</body></html>

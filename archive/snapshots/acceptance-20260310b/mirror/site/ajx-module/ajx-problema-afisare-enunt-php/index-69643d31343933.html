@@ -1,0 +1,87 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1493"><article id="enunt">
+			<p>Se consideră alfabetul compus din literele mici, de la <code>a</code> la <code>z</code>, fără diacritice. Se numeşte cuvânt un şir finit, eventual vid, de litere din alfabet. Se numeşte mască un şir de caractere din alfabet având eventual în plus caracterele <code>?</code> şi <code>*</code> cu următoarea semnificaţie: caracterul <code>?</code> înlocuieşte oricare din literele de la <code>a</code> la <code>z</code> (o singură literă) iar caracterul <code>*</code> înlocuieşte un cuvânt oarecare, eventual vid, format cu litere de la <code>a</code> la <code>z</code>.</p>
+
+<p>Spre exemplu avem masca <code>a?b*c</code>. Dacă avem <code>3</code> cuvinte şi anume <code>abbc</code>, <code>acbaac</code> şi <code>abac</code> atunci primele <code>2</code> se potrivesc cu masca.</p>
+
+<h1>Cerința</h1>
+
+<p>Considerându-se o listă de cuvinte, să se determine:</p>
+
+<p>a) Numărul de cuvinte distincte.<br>
+b) Numărul de cuvinte distincte ce se potrivesc cu o mască dată, adică se pot obţine prin înlocuirea caracterelor <code>?</code> şi <code>*</code> din mască.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>masca.in</code> conține:</p>
+
+<ul>
+	<li>Pe prima linie un număr natural <code>p</code>. Pentru toate testele de intrare, numărul <code>p</code> poate avea doar valoarea <code>1</code> sau valoarea <code>2</code>.</li>
+	<li>Pe a doua linie o mască <code>E</code> (şir de caractere).</li>
+	<li>Pe a treia linie numărul <code>N</code> de cuvinte.</li>
+	<li>Pe fiecare din următoarele <code>N</code> linii câte un cuvânt <code>S</code> (şir de caractere) cu litere din alfabet.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>masca.out</code> va conține:</p>
+
+<ul>
+	<li>Dacă valoarea lui <code>p</code> este <code>1</code>, se va rezolva numai punctul a) din cerinţă. În acest caz, în fişierul de ieşire se va scrie un singur număr natural <code>N1</code>, reprezentând numărul de cuvinte distincte <code>S</code> din fişierul de intrare.</li>
+	<li>Dacă valoarea lui <code>p</code> este <code>2</code>, se va rezolva numai punctul b) din cerinţă. În acest caz, în fişierul de ieșire se va scrie un număr natural <code>N2</code>, reprezentând numărul de cuvinte distincte <code>S</code> ce se potrivesc cu masca <code>E</code>.</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>Pentru rezolvarea corectă a primei cerinţe se acordă 20 de puncte, iar pentru cerinţa a doua se acordă 80 de puncte.</li>
+	<li><code>1≤N≤1000</code></li>
+	<li>Lungimea unui cuvânt oarecare <code>S</code> cât şi a expresiei mască <code>E</code> este între <code>1</code> şi <code>100</code> de caractere.</li>
+	<li>În expresia mască <code>E</code> sunt cel mult două caractere <code>*</code>.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>masca.in</code></p>
+
+<pre>1
+a*a?b
+7
+ababb
+aab
+aabb
+aab
+abcaab
+abcaab
+ababa</pre>
+
+<p><code>masca.out</code></p>
+
+<pre>5</pre>
+
+<h3>Explicație</h3>
+
+<p>Cuvintele <code>aab</code> si <code>abcaab</code> apar de cate <code>2</code> ori. <strong>Atenţie! Pentru acest test se rezolvă doar cerinţa a).</strong></p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>masca.in</code></p>
+
+<pre>2
+a*a?b
+7
+ababb
+aab
+aabb
+aab
+abcaab
+abcaab
+ababa</pre>
+
+<p><code>masca.out</code></p>
+
+<pre>3</pre>
+
+<h3>Explicație</h3>
+
+<p>Cuvintele <code>ababb</code>, <code>aabb</code> și <code>abcaab</code> se potrivesc cu masca. Cuvântul <code>abcaab</code> apare de <code>2</code> ori. <strong>Atenţie! Pentru acest test se rezolvă doar cerinţa b).</strong></p>		</article>
+		</body></html>

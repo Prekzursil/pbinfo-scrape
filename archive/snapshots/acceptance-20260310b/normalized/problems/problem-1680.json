@@ -1,0 +1,308 @@
+{
+  "id": 1680,
+  "slug": "sushi",
+  "name": "Sushi",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1680/sushi",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 16,
+      "name": "Teoria Grafurilor",
+      "slug": "teoria-grafurilor",
+      "href": "/?pagina=probleme-lista&tag=16"
+    },
+    {
+      "id": 64,
+      "name": "Arbori cu rădăcină",
+      "slug": "arbori-cu-r-d-cin",
+      "href": "/?pagina=probleme-lista&tag=64"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Henry și Hetty au intrat în restaurant la momentul de timp <code>0</code>. Ei știu că pe parcursul vizitei lor pe benzile rulante  vor fi așezate <code>M</code> preparate. Pentru fiecare din cele <code>M</code> preparate ei cunosc tripletul <code>(x, y, t)</code>, semnificând faptul că la momentul de timp <code>t</code> preparatul va fi așezat pe bandă în dreptul mesei <code>x</code> pentru a pleca spre spre masa <code>V[x,y]</code>. Ei mai știu și că timpul necesar unui preparat de a parcurge distanța dintre două mese vecine este de o unitate. Cei doi se vor așeza la o masă și vor lua de pe bandă toate preparatele care trec prin dreptul mesei respective. Henry și Hetty se întreabă: pentru fiecare masă <code>i</code>, care este timpul minim după care culeg toate cele <code>M</code> preparate ce vor fi puse pe bandă?</p>",
+      "text": "Henry și Hetty au intrat în restaurant la momentul de timp 0. Ei știu că pe parcursul vizitei lor pe benzile rulante vor fi așezate M preparate. Pentru fiecare din cele M preparate ei cunosc tripletul (x, y, t), semnificând faptul că la momentul de timp t preparatul va fi așezat pe bandă în dreptul mesei x pentru a pleca spre spre masa V[x,y]. Ei mai știu și că timpul necesar unui preparat de a parcurge distanța dintre două mese vecine este de o unitate. Cei doi se vor așeza la o masă și vor lua de pe bandă toate preparatele care trec prin dreptul mesei respective. Henry și Hetty se întreabă: pentru fiecare masă i, care este timpul minim după care culeg toate cele M preparate ce vor fi puse pe bandă?"
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>sushi.in</code> conține pe prima linie două numere naturale <code>N</code> și <code>M</code>, reprezentând numărul de mese, respectiv numărul de preparate aflate în restaurant. Pe următoarele <code>N</code> linii se vor afla descrierile listelor de vecini ale fiecărei mese. Astfel, pe linia <code>i+1</code>, se va afla numărul natural <code>K[i]</code>, urmat de <code>K[i]</code> numere naturale: <code>V[i,1]</code>, <code>V[i,2]</code> … <code>V[i,K[i]]</code>, cu semnificația din enunț. Pe fiecare din următoarele <code>M</code> linii se va afla cate un triplet de numere naturale <code>(x, y, t)</code>, semnificând faptul că la momentul de timp <code>t</code> un preparat va fi așezat pe bandă în dreptul mesei <code>x</code> pentru a pleca spre masa <code>V[x,y]</code>.</p>",
+      "text": "Fișierul de intrare sushi.in conține pe prima linie două numere naturale N și M, reprezentând numărul de mese, respectiv numărul de preparate aflate în restaurant. Pe următoarele N linii se vor afla descrierile listelor de vecini ale fiecărei mese. Astfel, pe linia i+1, se va afla numărul natural K[i], urmat de K[i] numere naturale: V[i,1], V[i,2] … V[i,K[i]], cu semnificația din enunț. Pe fiecare din următoarele M linii se va afla cate un triplet de numere naturale (x, y, t), semnificând faptul că la momentul de timp t un preparat va fi așezat pe bandă în dreptul mesei x pentru a pleca spre masa V[x,y]."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>sushi.out</code> va conține pe prima linie <code>N</code> numere naturale, al <code>i</code>-lea dintre acestea reprezentând timpul necesar pentru culegerea tuturor preparatelor de pe bandă dacă Henry și Hetty s-ar așeza la masa cu indice <code>i</code>.</p>",
+      "text": "Fișierul de ieșire sushi.out va conține pe prima linie N numere naturale, al i-lea dintre acestea reprezentând timpul necesar pentru culegerea tuturor preparatelor de pe bandă dacă Henry și Hetty s-ar așeza la masa cu indice i."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 100 000</code></li>\n\t<li><code>1 ≤ M ≤ 100 000</code></li>\n\t<li>Pentru fiecare triplet <code>(x, y, t)</code> avem <code>1 ≤ x ≤ N</code>, <code>1 ≤ y ≤ K[x]</code> și <code>0 ≤ t ≤ 100 000</code></li>\n</ul>",
+      "text": "1 ≤ N ≤ 100 000 1 ≤ M ≤ 100 000 Pentru fiecare triplet (x, y, t) avem 1 ≤ x ≤ N, 1 ≤ y ≤ K[x] și 0 ≤ t ≤ 100 000"
+    },
+    {
+      "title": "Exemplul 1",
+      "html": "<p><code>sushi.in</code></p><pre>5 1\n3 2 3 4\n1 1\n2 1 5\n1 1\n1 3\n3 1 0</pre><p><code>sushi.out</code></p><pre>1 4 0 2 7</pre><h3>Explicație</h3><p>Avem <code>N = 5</code> mese și <code>M = 1</code> preparate.</p><ul>\n\t<li>Masa <code>1</code> se învecinează cu <code>3</code> mese: <code>(2, 3, 4)</code></li>\n\t<li>Masa <code>2</code> se învecinează cu <code>1</code> masă: <code>(1)</code></li>\n\t<li>Masa <code>3</code> se învecinează cu <code>2</code> mese: <code>(1, 5)</code></li>\n\t<li>Masa <code>4</code> se învecinează cu <code>1</code> masă: <code>(1)</code></li>\n\t<li>Masa <code>5</code> se învecinează cu <code>1</code> masă: <code>(3)</code></li>\n</ul><p>Singurul preparat va fi pus la momentul <code>0</code> la masa <code>3</code> pentru a pleca spre prima masă din lista de vecini a lui <code>3</code>: masa cu indicele <code>1</code>.</p><p>Preparatul va avea următorul traseu: <code>3, 1, 4, 1, 2, 1, 3, 5, 3 ...</code></p><p>El poate fi ridicat de la:</p><ul>\n\t<li>masa <code>1</code> la momentul <code>1</code></li>\n\t<li>masa <code>2</code> la momentul <code>4</code></li>\n\t<li>masa <code>3</code> la momentul <code>0</code></li>\n\t<li>masa <code>4</code> la momentul <code>2</code></li>\n\t<li>masa <code>5</code> la momentul <code>7</code></li>\n</ul>",
+      "text": "sushi.in5 1 3 2 3 4 1 1 2 1 5 1 1 1 3 3 1 0sushi.out1 4 0 2 7ExplicațieAvem N = 5 mese și M = 1 preparate. Masa 1 se învecinează cu 3 mese: (2, 3, 4) Masa 2 se învecinează cu 1 masă: (1) Masa 3 se învecinează cu 2 mese: (1, 5) Masa 4 se învecinează cu 1 masă: (1) Masa 5 se învecinează cu 1 masă: (3) Singurul preparat va fi pus la momentul 0 la masa 3 pentru a pleca spre prima masă din lista de vecini a lui 3: masa cu indicele 1.Preparatul va avea următorul traseu: 3, 1, 4, 1, 2, 1, 3, 5, 3 ...El poate fi ridicat de la: masa 1 la momentul 1 masa 2 la momentul 4 masa 3 la momentul 0 masa 4 la momentul 2 masa 5 la momentul 7"
+    },
+    {
+      "title": "Exemplul 2",
+      "html": "<p><code>sushi.in</code></p><pre>3 2\n2 2 3\n1 1\n1 1\n2 1 0\n3 1 1</pre><p><code>sushi.out</code></p><pre>2 3 2</pre><h3>Explicație</h3><p>Avem <code>N = 3</code> mese și <code>M = 2</code> preparate.</p><ul>\n\t<li>Masa <code>1</code> se învecinează cu <code>2</code> mese: <code>(2, 3)</code></li>\n\t<li>Masa <code>2</code> se învecinează cu <code>1</code> masă: <code>(1)</code></li>\n\t<li>Masa <code>3</code> se învecinează cu <code>1</code> masă: <code>(1)</code></li>\n</ul><p>Un preparat este pus la momentul <code>0</code> la masa <code>2</code> plecând spre prima masă din lista de vecini a lui <code>2</code>: masa cu indicele <code>1</code>. El poate fi ridicat de la:</p><ul>\n\t<li>masa <code>1</code> la momentul <code>1</code></li>\n\t<li>masa <code>2</code> la momentul <code>0</code></li>\n\t<li>masa <code>3</code> la momentul <code>2</code></li>\n</ul><p>Celălalt preparat este pus la momentul <code>1</code> la masa <code>3</code> plecând spre prima masă din lista de vecini a lui <code>3</code>: masa cu indicele <code>1</code>. El poate fi ridicat de la:</p><ul>\n\t<li>masa <code>1</code> la momentul <code>2</code></li>\n\t<li>masa <code>2</code> la momentul <code>3</code></li>\n\t<li>masa <code>3</code> la momentul <code>1</code></li>\n</ul>",
+      "text": "sushi.in3 2 2 2 3 1 1 1 1 2 1 0 3 1 1sushi.out2 3 2ExplicațieAvem N = 3 mese și M = 2 preparate. Masa 1 se învecinează cu 2 mese: (2, 3) Masa 2 se învecinează cu 1 masă: (1) Masa 3 se învecinează cu 1 masă: (1) Un preparat este pus la momentul 0 la masa 2 plecând spre prima masă din lista de vecini a lui 2: masa cu indicele 1. El poate fi ridicat de la: masa 1 la momentul 1 masa 2 la momentul 0 masa 3 la momentul 2 Celălalt preparat este pus la momentul 1 la masa 3 plecând spre prima masă din lista de vecini a lui 3: masa cu indicele 1. El poate fi ridicat de la: masa 1 la momentul 2 masa 2 la momentul 3 masa 3 la momentul 1"
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Avem N = 5 mese și M = 1 preparate."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Avem N = 3 mese și M = 2 preparate."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 100 000",
+    "1 ≤ M ≤ 100 000",
+    "Pentru fiecare triplet (x, y, t) avem 1 ≤ x ≤ N, 1 ≤ y ≤ K[x] și 0 ≤ t ≤ 100 000"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qfc8cbade20.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "11",
+    "intrare/ieșire": "sushi.in / sushi.out",
+    "limită timp": "0.8 secunde",
+    "limită memorie": "128 MB / 128 MB",
+    "sursa problemei": "ONI 2016, clasele XI-XII",
+    "autor": "Vlad Gavrila, Daniel Posdarascu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.8,
+  "memoryLimitMb": 128,
+  "author": "Vlad Gavrila, Daniel Posdarascu",
+  "sourceAttribution": "ONI 2016, clasele XI-XII",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1680/sushi"
+}

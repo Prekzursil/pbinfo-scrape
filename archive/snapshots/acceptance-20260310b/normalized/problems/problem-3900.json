@@ -1,0 +1,307 @@
+{
+  "id": 3900,
+  "slug": "myszkowski",
+  "name": "Myszkowski",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3900/myszkowski",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 10,
+      "name": "Şiruri de caractere",
+      "slug": "iruri-de-caractere",
+      "href": "/?pagina=probleme-lista&tag=10"
+    },
+    {
+      "id": 84,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=84"
+    }
+  ],
+  "tags": [
+    "Criptografie",
+    "Tablouri bidimensionale",
+    "Siruri de caractere",
+    "Sortare"
+  ],
+  "sections": [
+    {
+      "title": "Myszkowski",
+      "html": "<p>Cifrul <code>Myszkowski</code> functioneaza asa:</p><ul>\n\t<li>notam cu <code>n</code> lungimea mesajului, si cu <code>m</code> lungimea cheii;</li>\n</ul><ul>\n\t<li>mesajul se pozitioneaza intr-o matrice cu <code>m</code> coloane</li>\n</ul><ul>\n\t<li>Pentru mesajul <code>THEREISONEIMPOSTORAMONGUS</code> si cheia <code>IMPOSTOR</code> atunci matricea ar arata astfel:<br>\n<code>\n   1 2 3 4 5 6 7 8\n   I M P O S T O R\n   ---------------\n 1 T H E R E I S O\n 2 N E I M P O S T\n 3 O R A M O N G U\n 4 S\n</code></li>\n\t<li>coloana <code>j</code> va avea asociata litera din cheie de pe pozitia <code>j</code>, apoi sortam coloanele in functie de litera lor, iar la litere egale, dupa numarul de ordine al coloanei:</li>\n</ul><code>\n    I M O O P R S T\n    T H R S E O E I\n    N E M S I T P O\n    O R M G A U O N\n    S\n</code><ul>\n\t<li>Pentru a cripta mesajul procedam astfel: parcurgem coloanele si daca avem <code>k</code> coloane cu aceiasi litera atunci afisam prima litera din prima coloana, prima litera din a doua coloana … prima litera din a <code>k</code> -a coloana, a doua litera din prima coloana, a doua litera din a doua coloana… a doua litera din a <code>k</code> -a coloana … ;</li>\n</ul><ul>\n\t<li>mesajul criptat va arata astfel: <code>TNOS HERR SMSM GEIA OTUE POIO N</code> (daca <code>l= numarul de linii din matrice</code>, atunci impartim mesajul criptat in cuvinte cu <code>l</code> litere, mai putin ultimul cuvant).</li>\n</ul>",
+      "text": "Cifrul Myszkowski functioneaza asa: notam cu n lungimea mesajului, si cu m lungimea cheii; mesajul se pozitioneaza intr-o matrice cu m coloane Pentru mesajul THEREISONEIMPOSTORAMONGUS si cheia IMPOSTOR atunci matricea ar arata astfel: 1 2 3 4 5 6 7 8 I M P O S T O R --------------- 1 T H E R E I S O 2 N E I M P O S T 3 O R A M O N G U 4 S coloana j va avea asociata litera din cheie de pe pozitia j, apoi sortam coloanele in functie de litera lor, iar la litere egale, dupa numarul de ordine al coloanei: I M O O P R S T T H R S E O E I N E M S I T P O O R M G A U O N S Pentru a cripta mesajul procedam astfel: parcurgem coloanele si daca avem k coloane cu aceiasi litera atunci afisam prima litera din prima coloana, prima litera din a doua coloana … prima litera din a k -a coloana, a doua litera din prima coloana, a doua litera din a doua coloana… a doua litera din a k -a coloana … ; mesajul criptat va arata astfel: TNOS HERR SMSM GEIA OTUE POIO N (daca l= numarul de linii din matrice, atunci impartim mesajul criptat in cuvinte cu l litere, mai putin ultimul cuvant)."
+    },
+    {
+      "title": "Cerința",
+      "html": "<p>Se da numarul <code>c</code>:<br>\n</p><ul>\n\t<li>pentru <code>c=1</code>, se citeste un mesaj si o cheie si trebuie sa afisati mesajul criptat</li>\n\t<li>pentru <code>c=2</code>, se citeste un set de cuvinte ce reprezinta un mesaj criptat si o cheie si trebuie sa afisati mesajul decriptat.</li><br>\n</ul><p></p>",
+      "text": "Se da numarul c: pentru c=1, se citeste un mesaj si o cheie si trebuie sa afisati mesajul criptat pentru c=2, se citeste un set de cuvinte ce reprezinta un mesaj criptat si o cheie si trebuie sa afisati mesajul decriptat."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>myszkowski.in</code> conține pe prima linie numărul <code>c</code>, mesajul criptat(daca <code>c=1</code>) sau setul de cuvinte(daca <code>c=2</code>) si cheia.</p>",
+      "text": "Fișierul de intrare myszkowski.in conține pe prima linie numărul c, mesajul criptat(daca c=1) sau setul de cuvinte(daca c=2) si cheia."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>myszkowski.out</code> va conține pe prima linie mesajul criptat sau  decripat, in functie de <code>c</code>.</p>",
+      "text": "Fișierul de ieșire myszkowski.out va conține pe prima linie mesajul criptat sau decripat, in functie de c."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li>mesajul si cheia sunt formate doar din litere mari</li>\n\t<li><code>1 ≤ lungimea mesajului, lungimea cheii ≤ 10000</code></li>\n\t<li><code>lungimea cheii ≤ lungimea mesajului</code></li>\n</ul>",
+      "text": "mesajul si cheia sunt formate doar din litere mari 1 ≤ lungimea mesajului, lungimea cheii ≤ 10000 lungimea cheii ≤ lungimea mesajului"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>myszkowski.in</code></p><pre>1\nTHEREISONEIMPOSTORAMONGUS IMPOSTOR</pre><p><code>myszkowski.out</code></p><pre>TNOSHERRSMSMGEIAOTUEPOION</pre>",
+      "text": "myszkowski.in1 THEREISONEIMPOSTORAMONGUS IMPOSTORmyszkowski.outTNOSHERRSMSMGEIAOTUEPOION"
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>myszkowski.in</code></p><pre>2\nTNOSHERRSMSMGEIAOTUEPOION IMPOSTOR</pre><p><code>myszkowski.out</code></p><pre>THEREISONEIMPOSTORAMONGUS</pre>",
+      "text": "myszkowski.in2 TNOSHERRSMSMGEIAOTUEPOION IMPOSTORmyszkowski.outTHEREISONEIMPOSTORAMONGUS"
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "mesajul si cheia sunt formate doar din litere mari",
+    "1 ≤ lungimea mesajului, lungimea cheii ≤ 10000",
+    "lungimea cheii ≤ lungimea mesajului"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q1622e08050.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "PARMI NOUS (traianflorianalin)",
+    "clasa": "10",
+    "intrare/ieșire": "myszkowski.in / myszkowski.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "cifrul Myszkowski",
+    "autor": "Traian Florian Alin Moldoveanu",
+    "dificultate": "dificilă"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "author": "Traian Florian Alin Moldoveanu",
+  "sourceAttribution": "cifrul Myszkowski",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3900/myszkowski"
+}

@@ -1,0 +1,78 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3437"><article id="enunt">
+			<p>Într-o țară îndepărtată, economia este în criză. Cea mai mare problemă este lipsa de capital care creează blocaje financiare. De exemplu, o firmă <code>X</code> poate avea datorii către o firmă <code>Y</code> pe care nu le poate plăti, deoarece o altă firmă <code>Z</code> are datorii către firma <code>X</code> pe care nu le-a plătit, ş.a.m.d.</p>
+
+<p>Există o listă cu toate datoriile firmelor sub forma următoare:</p>
+
+<p><code>X &gt; Y S</code></p>
+
+<p>cu semnificaţia “firma <code>X</code> datorează firmei <code>Y</code> suma <code>S</code>”. Este posibil ca <code>X</code> să aibă mai multe datorii la firma <code>Y</code> (în funcţie de contractele derulate împreună) sau chiar ca <code>X</code> să aibă datorii la <code>Y</code> și <code>Y</code> să aibă datorii la <code>X</code>.</p>
+
+<h1>Cerințe</h1>
+
+<p>Cunoscând lista cu datoriile firmelor, scrieți un program care să rezolve următoarele cerințe:</p>
+
+<ol>
+	<li>determină numărul de firme distincte care apar în această listă;</li>
+	<li>realizează o situație financiară a firmelor distincte din această listă, scrise în ordine lexicografică; pentru fiecare firmă se vor determina două valori <code>SD SP</code>, unde <code>SD</code> reprezintă suma totală a datoriilor pe care firma le are către alte firme, iar <code>SP</code> este totalul sumelor pe care firma trebuie să le primească de la alte firme.</li>
+</ol>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>datorii1.in</code> conține pe prima linie un număr natural <code>C</code> reprezentând cerința care<br>
+trebuie să fie rezolvată (<code>1</code> su <code>2</code>). Pe a doua linie se află un număr natural <code>D</code> care reprezintă numărul de înregistrări existente în lista datoriilor firmelor. Pe următoarele <code>D</code> linii sunt descrise datoriile firmelor, în forma specificată în enunț, câte o datorie pe o linie.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>datorii.out</code> va conține răspunsul la cerinţa <code>C</code> specificată în fișierul de intrare. Dacă <code>C=1</code> fișierul va conține un număr natural, reprezentând numărul de firme distincte care apar în lista menționată. Dacă <code>C=2</code> fișierul va conține pentru fiecare dintre firmele distincte din lista menționată câte un singur triplet de forma <code>X SD SP</code>, unde <code>X</code> este numele firmei, iar <code>SD</code> și <code>SP</code> au semnificația din enunț pentru firma <code>X</code>; tripletele vor fi scrise astfel încât numele firmelor să apară în ordine lexicografică, fiecare triplet pe câte o linie a fișierului, iar <code>X</code>, <code>SD</code> și <code>SP</code> vor fi separate prin câte un singur spațiu.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>Există în total cel mult <code>6000</code> de firme distincte în lista menționată de datorii.</li>
+	<li>Numele unei firme este format din maximum <code>20</code> de caractere (litere mari şi mici ale alfabetului englez, cifre, spaţii); se face distincţie între literele mari şi literele mici în numele firmelor; nu există alte restricţii referitoare la numele firmelor.</li>
+	<li>Două firme distincte au nume distincte. O firmă nu poate avea datorii la ea însăși.</li>
+	<li>În descrierea unei datorii (<code>X &gt; Y S</code>) există un singur spaţiu între <code>X</code> și <code>&gt;</code>, un singur spațiu între <code>&gt;</code> și <code>Y</code>, respectiv un singur spațiu între <code>Y</code> și <code>S</code>.</li>
+	<li><code>1 ≤ D ≤ 80000</code></li>
+	<li>Sumele datorate de firme sunt numere naturale nenule <code>≤10</code><sup><code>6</code></sup>.</li>
+	<li>Dacă <code>X</code> și <code>Y</code> sunt numele a două firme distincte, iar <code>k</code> (<code>k≥0</code>) este valoarea maximă cu proprietatea că secvența formată din primele <code>k</code> caractere din <code>X</code> este identică cu secvența formată din primele caractere din <code>Y</code>, spunem că <code>X</code> precedă din punct de vedere lexicografic pe <code>Y</code> dacă <code>X</code> are doar <code>k</code> caractere sau dacă al <code>k+1</code>-lea caracter din <code>X</code> este mai mic decât al <code>k+1</code>-lea caracter din <code>Y</code>.</li>
+	<li>Pentru teste valorând 30 de puncte cerinţa este <code>1</code>. Pentru teste valorând 60 de puncte cerinţa este <code>2</code>.<br>
+Pentru teste valorând 40 de puncte <code>D≤1000</code>. Pentru teste valorând 45 de puncte numele firmelor nu<br>
+conțin spaţii.</li>
+	<li>În concurs s-au acordat 10 puncte din oficiu. Pe site se acordă 10 puncte pentru exemple.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>datorii.in</code></p>
+
+<pre>1
+4
+Vasile Inc &gt; Anatolia 100
+ana &gt; Anatolia 10
+ana &gt; Vasilescu Inc 5
+Popa25 PF &gt; Anatolia 30</pre>
+
+<p><code>datorii.out</code></p>
+
+<pre>5</pre>
+
+<h1>Exemplul 2</h1>
+
+<p><code>datorii.in</code></p>
+
+<pre>2
+5
+Vasile Inc &gt; Anatolia 100
+ana &gt; Anatolia 10
+ana &gt; Vasilescu Inc 5
+Popa25 PF &gt; Anatolia 30
+Popa25 PF &gt; ana 50</pre>
+
+<p><code>datorii.out</code></p>
+
+<pre>Anatolia 0 140
+Popa25 PF 80 0
+Vasile Inc 100 0
+Vasilescu Inc 0 5
+ana 15 50</pre>		</article>
+		</body></html>

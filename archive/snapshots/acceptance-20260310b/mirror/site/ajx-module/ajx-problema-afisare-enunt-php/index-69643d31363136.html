@@ -1,0 +1,78 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1616"><article id="enunt">
+			<p>La întâlnirea anuală a cârtițelor, la concursul pentru selecția noilor membri ai consiliului director, a fost propusă următoarea problemă: </p>
+
+<p><img src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1200-1616-galerie-1-png.png" style="float:right;"> De jur-împrejurul unui teren dreptunghiular împărțit în <code>n*m</code> celule de formă pătrată, cu aceeași arie, cârtițele au săpat galerii exterioare. Celulele aflate pe marginea terenului sunt numerotate consecutiv, de la <code>1</code> la <code>2*(n+m)</code>, începând din colțul din stânga-sus, ca în imaginea alăturată. În galeriile exterioare, pe marginea terenului, se află <code>t</code> cârtițe care sunt pregătite să sape galerii interioare. Cârtițele aflate pe latura de Nord a terenului se vor deplasa către Sud, cele care se află pe latura de la Est se vor deplasa către Vest, cele care se află pe latura de la Sud se vor deplasa către Nord, iar cele care se află pe latura de la Vest se vor deplasa către Est.</p>
+
+<p>Cârtițele încep să sape în același timp. În fiecare oră, o cârtiță sapă într-o singură celulă a terenului.</p>
+
+<p>O cârtiță se oprește dacă:</p>
+
+<ul>
+	<li>ajunge într-o altă galerie interioară; ea nu sapă în aceasta, iar galeria ei se unește cu cea în care ajunge;</li>
+	<li>în  celula  în care sapă, mai sapă și alte cârtițe, în aceeași oră; galeriile lor se unesc într-o singură galerie și toate aceste cârtițe se opresc;</li>
+	<li>ajunge pe marginea terenului, în partea opusă celei din care a plecat, galeria săpată de ea până în acest moment comunicând acum cu galeria exterioară, în care ea nu sapă.</li>
+</ul>
+
+<p>De exemplu, dacă pe marginea unui teren format din <code>7x5</code> celule, se află <code>5</code> cârtițe, în celulele <code>3</code>, <code>8</code>, <code>10</code>, <code>19</code> și <code>23</code>, atunci, după o oră, terenul are configurația din fig.1, după două ore, configurația din fig.2, după trei ore, configurația din fig.3 (ultima cârtiță ajunge în galeria primei cârtițe și primele două cârtițe sapă în aceeași celulă și apoi se opresc), după <code>4</code> ore, configurația din fig.4, după <code>5</code> ore, configurația din fig.5, când cele două cârtițe rămase sapă pe marginea terenului și apoi se opresc pentru că au ajuns în galeria exterioară (fig.6). Galeriile acestora nu se unesc pentru că niciuna dintre ele nu a intrat în galeria celeilalte și nici nu s-au întâlnit într-o celulă.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1200-1616-galerie-2-png.png"></p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscându-se numerele <code>n</code>, <code>m</code>, <code>t</code> și cele <code>t</code> celule exterioare în care se află cârtițele, să se determine:</p>
+
+<p>1. numărul maxim de celule  în care sapă o cârtiță până la oprirea tuturor cârtițelor;<br>
+2. numărul maxim de celule din care este formată o galerie interioară.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>galerie.in</code> conține pe prima linie una dintre valorile <code>1</code> sau <code>2</code> reprezentând cerinţa 1, dacă se cere determinarea numărului maxim de celule în care sapă o cârtiță până la oprirea tuturor cârtițelor, respectiv cerinţa 2, dacă se cere determinarea numărul maxim de celule din care este formată o galerie interioară.</p>
+
+<p>Linia a doua conține, separate prin câte un spațiu, trei numere naturale: <code>n</code>, <code>m</code> (reprezentând dimensiunile terenului) și <code>t</code> (reprezentând numărul de cârtițe aflate în galeriile exterioare).</p>
+
+<p>Linia a treia conţine cele <code>t</code> numere naturale separate prin câte un spațiu, reprezentând pozițiile celor <code>t</code> cârtițe.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>galerie.out</code> va conține pe prima o valoarea naturală reprezentând numărul maxim de celule în care sapă o cârtiță până la oprirea tuturor cârtițelor, dacă cerinţa a fost 1, respectiv un număr natural reprezentând numărul maxim de celule din care este formată o galerie interioară, dacă cerinţa a fost 2.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>3 ≤ n,m ≤ 200</code>; <code>1 ≤ t ≤ 2*(n+m)</code>;</li>
+	<li>Într-o celulă numerotată, exterioară terenului, se poate afla o singură cârtiță.</li>
+	<li>Pentru rezolvarea corectă a cerinţei 1 se acordă 30% din punctaj, iar pentru rezolvarea corectă a cerinţei 2 se acordă 70% din punctaj.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>galerie.in</code></p>
+
+<pre>1
+7 5 5
+19 3 8 10 23</pre>
+
+<p><code>galerie.out</code></p>
+
+<pre>5</pre>
+
+<h3>Explicație</h3>
+
+<p>Cârtița care pleacă din poziția <code>23</code> sapă în două celule; cârtițele care pleacă din pozițiile <code>3</code> și <code>8</code>, sapă în <code>3</code> celule, iar celelalte două cârtițe în <code>5</code> celule.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>galerie.in</code></p>
+
+<pre>2
+7 5 5
+19 3 8 10 23</pre>
+
+<p><code>galerie.out</code></p>
+
+<pre>7</pre>
+
+<h3>Explicație</h3>
+
+<p>S-au format trei galerii interioare, două formate din câte <code>5</code> celule și o galerie interioară formată din <code>7</code> celule (fig.6).</p>		</article>
+		</body></html>

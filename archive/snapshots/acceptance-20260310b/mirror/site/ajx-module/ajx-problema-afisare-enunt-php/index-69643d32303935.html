@@ -1,0 +1,64 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2095"><article id="enunt">
+			Se dau numerele <code>N</code> și <code>M</code> și apoi <code>M</code> perechi de numere <code>X</code>, <code>Y</code> ambele valori fiind cuprinse între <code>1</code> și <code>N</code>. În această problemă numim interval o mulțime de numere naturale consecutive. Notăm <code>[A, B]</code> cu <code>A &lt;= B</code> ca fiind intervalul format din numerele <code>A, A+1, A+2, ... B-1, B</code>. Numim descompunere în intervale a unei perechi de numere <code>X</code>, <code>Y</code> ca fiind o mulțime de intervale care acoperă complet mulțimea (fiecare număr dintre <code>X</code> și <code>Y</code>, inclusiv, este conținut de exact un interval din descompunere). De exemplu, pentru perechea <code>5,10</code>, o descompunere în intervale este <code>[5,5], [6,8],[9,10]</code>.
+Dorim să realizăm o descompunere în intervale a tuturor celor <code>M</code> perechi de numere date, astfel încât să se îndeplinească condițiile următoare (notăm <code>L = 1 + [log</code><sub><code>2</code></sub><code>N]</code>).
+<ul>
+	<li>fiecare pereche să aibă în descompunere maxim <code>2*L</code> intervale.</li>
+	<li>numărul total de intervale distincte cu mai mult de un element care apar în descompuneri să nu depășească valoarea <code>N</code>.</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Afișați descompunerea fiecărei perechi din fișierul de intrare.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fisierului <code>di.in</code> se află două numere <code>N</code> și <code>M</code>, separate prin spațiu, cu semnificația de mai sus. Pe fiecare din următoarele <code>M</code> linii se găsesc câte <code>2</code> numere naturale separate prin câte un spațiu, <code>X Y</code> ce reprezintă câte o pereche ce trebuie descompusă.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul <code>di.out</code> conține <code>M</code> linii, pe fiecare aflându-se descompunerea unei perechi date în fișierul de intrare, în ordine. Primul element al unei linii reprezintă numărul de intervale ale unei descompuneri, notat <code>K</code>. Urmează apoi <code>K+1</code> elemente în ordine strict crescătoare, <code>E</code><sub>1</sub><code>, E</code><sub>2</sub><code>, ... E</code><sub>k+1</sub><code>.</code> Primul interval este <code>[E</code><sub>1</sub><code>, E</code><sub>2</sub><code>],</code> al doilea este <code>[E</code><sub>2</sub><code>+1, E</code><sub>3</sub><code>] ... </code>Ultimul interval este <code>[E</code><sub>k</sub>+1 <code>,E </code> <sub>k+1</sub> <code>].</code></p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 100000</code></li>
+	<li><code>1 ≤ M ≤ 200000</code></li>
+	<li><code>1 ≤ X ≤ Y ≤ N</code></li>
+	<li><code>X ≤ Y</code></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>di.in</code></p>
+
+<pre>7 10
+1 4
+1 5
+1 6
+1 7
+2 5
+2 6
+2 7
+3 6
+3 7
+4 7</pre>
+
+
+<p><code>di.out</code></p>
+
+<pre>1 1 4
+2 1 4 5
+2 1 4 6
+1 1 7
+3 2 2 4 5
+3 2 2 4 6
+3 2 2 4 7
+2 3 4 6
+3 3 4 6 7
+2 4 4 7</pre>
+
+
+<h3>Explicație</h3>
+
+<p>Pentru perechea <code>2,7</code> codificarea descompunerii este <code>2 2 4 7</code> reprezentând intervalele <code>[2,2], [3,4], [5,7]</code>.</p>		</article>
+		</body></html>

@@ -1,0 +1,311 @@
+{
+  "id": 2863,
+  "slug": "pyk",
+  "name": "pyk",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/2863/pyk",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 1,
+      "name": "Algoritmi elementari",
+      "slug": "algoritmi-elementari",
+      "href": "/?pagina=probleme-lista&tag=1"
+    },
+    {
+      "id": 18,
+      "name": "Divizibilitate",
+      "slug": "divizibilitate",
+      "href": "/?pagina=probleme-lista&tag=18"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "pyk",
+      "html": "<p>Fie <code>k</code>, <code>n</code> și <code>y</code> trei numere naturale. Fie <code>X</code> un șir format din <code>n</code> numere naturale: \\( x_1, x_2, x_3, …, x_n \\). Fie <code>P</code> produsul numerelor \\( y, x_1, x_2, x_3, …, x_n \\), adică \\( P = y\\times x_1\\times x_2 \\times x_3 \\times … \\times x_n \\). Numărul <code>P</code> este o <strong>“k-putere”</strong> dacă există un număr natural <code>z</code> astfel încât \\( P=z^k \\).</p>",
+      "text": "Fie k, n și y trei numere naturale. Fie X un șir format din n numere naturale: \\( x_1, x_2, x_3, …, x_n \\). Fie P produsul numerelor \\( y, x_1, x_2, x_3, …, x_n \\), adică \\( P = y\\times x_1\\times x_2 \\times x_3 \\times … \\times x_n \\). Numărul P este o “k-putere” dacă există un număr natural z astfel încât \\( P=z^k \\)."
+    },
+    {
+      "title": "Cerințe",
+      "html": "<p>Scrieți un program care să citească numerele \\( k, n, x_1, x_2, x_3, …, x_n \\) și care să determine:</p><ul>\n\t<li>1. <strong>cel mai mic</strong> și <strong>cel mai mare</strong> număr din șirul <code>X</code> ce sunt formate doar din cifre identice;</li>\n\t<li>2. <strong>descompunerea în factori primi a celui mai mic</strong> număr natural <code>y</code> (<code>y ≥ 2</code>) cu proprietatea că numărul \\( P = y\\times x_1\\times x_2 \\times x_3 \\times … \\times x_n \\) este o <strong>“k-putere”</strong>.</li>\n</ul>",
+      "text": "Scrieți un program care să citească numerele \\( k, n, x_1, x_2, x_3, …, x_n \\) și care să determine: 1. cel mai mic și cel mai mare număr din șirul X ce sunt formate doar din cifre identice; 2. descompunerea în factori primi a celui mai mic număr natural y (y ≥ 2) cu proprietatea că numărul \\( P = y\\times x_1\\times x_2 \\times x_3 \\times … \\times x_n \\) este o “k-putere”."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>pyk.in</code> conține:</p><ul>\n\t<li>pe prima linie, un număr natural <strong>C</strong>, reprezentând cerința din problemă care trebuie rezolvată (<strong>1</strong> sau <strong>2</strong>);</li>\n\t<li>pe a doua linie, numerele naturale <code>k</code> și <code>n</code>, separate printr-un singur spațiu;</li>\n\t<li>pe a treia linie, cele n numere naturale \\( x_1, x_2, x_3, …, x_n \\), separate prin câte un singur spaţiu.</li>\n</ul>",
+      "text": "Fișierul de intrare pyk.in conține: pe prima linie, un număr natural C, reprezentând cerința din problemă care trebuie rezolvată (1 sau 2); pe a doua linie, numerele naturale k și n, separate printr-un singur spațiu; pe a treia linie, cele n numere naturale \\( x_1, x_2, x_3, …, x_n \\), separate prin câte un singur spaţiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Dacă <strong>C=1</strong>, atunci prima linie a fişierului de ieşire <code>pyk.out</code> va conține două numere naturale, separate printr-un<br>\nsingur spațiu, reprezentând răspunsul la cerința 1 a problemei. Dacă nu există astfel de numere, prima linie a<br>\nfișierului va conține valoarea 1.</p><p>Dacă <strong>C=2</strong>, atunci fișierul de ieşire <code>pyk.out</code> va conține:</p><ul>\n\t<li>pe prima linie, un număr natural <code>m</code> reprezentând numărul de factori primi distincți din descompunerea în<br>\nfactori primi a numărului <code>y</code>, determinat la rezolvarea cerinței <code>2</code>;</li>\n\t<li>pe fiecare dintre următoarele <code>m</code> linii (câte o linie pentru fiecare factor prim din descompunerea în factori primi<br>\na lui <code>y</code>), câte două valori <code>F</code> şi <code>E</code>, separate printr-un singur spaţiu, reprezentând factorul prim <code>F</code> și exponentul<br>\n<code>E</code> al acestui factor din descompunerea în factori primi a lui <code>y</code>.</li>\n</ul><p>Scrierea în fișier a acestor factori primi se va face în ordinea crescătoare a valorii lor. </p>",
+      "text": "Dacă C=1, atunci prima linie a fişierului de ieşire pyk.out va conține două numere naturale, separate printr-un singur spațiu, reprezentând răspunsul la cerința 1 a problemei. Dacă nu există astfel de numere, prima linie a fișierului va conține valoarea 1.Dacă C=2, atunci fișierul de ieşire pyk.out va conține: pe prima linie, un număr natural m reprezentând numărul de factori primi distincți din descompunerea în factori primi a numărului y, determinat la rezolvarea cerinței 2; pe fiecare dintre următoarele m linii (câte o linie pentru fiecare factor prim din descompunerea în factori primi a lui y), câte două valori F şi E, separate printr-un singur spaţiu, reprezentând factorul prim F și exponentul E al acestui factor din descompunerea în factori primi a lui y. Scrierea în fișier a acestor factori primi se va face în ordinea crescătoare a valorii lor."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2 ≤ n ≤ 50.000</code></li>\n\t<li><code>2 ≤ k ≤ 100</code></li>\n\t<li><code>2 ≤ </code> \\( x_1, x_2, x_3, …, x_n \\) <code>≤ 10.000</code></li>\n\t<li><code>2 ≤ y</code></li>\n\t<li>pentru rezolvarea corectă a cerinței <strong>1</strong> se acordă <code>10</code> puncte;</li>\n\t<li>pentru rezolvarea corectă a cerinței <strong>2</strong> se acordă <code>90</code> puncte.</li>\n</ul>",
+      "text": "2 ≤ n ≤ 50.000 2 ≤ k ≤ 100 2 ≤ \\( x_1, x_2, x_3, …, x_n \\) ≤ 10.000 2 ≤ y pentru rezolvarea corectă a cerinței 1 se acordă 10 puncte; pentru rezolvarea corectă a cerinței 2 se acordă 90 puncte."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>pyk.in</code></p><pre>1\n2 7\n122 1111 5 4 88 123 999</pre><p><code>pyk.out</code></p><pre>4 1111 </pre><h3>Explicație</h3><p>Cerința este <strong>1</strong>, <strong>k=2</strong>, <strong>n=7</strong>. Numerele din șirul <code>X</code> formate doar din cifre identice sunt: <code>1111</code>, <code>5</code>, <code>4</code>, <code>88</code>, <code>999</code>. Cel mai mic număr dintre acestea este <code>4</code>, iar cel mai mare este <code>1111</code>.</p><p><code>pyk.in</code></p><pre>2\n3 6\n12 5 60 125 4 36</pre><p><code>pyk.out</code></p><pre>3\n2 1\n3 2\n5 1</pre><h3>Explicație</h3><p>Cerința este <strong>2</strong>, <strong>k=3</strong>, <strong>n=6</strong>. Produsul celor <code>6</code> numere din șir este: <code>12*5*60*125*4*36=64800000</code>. <strong>y=90</strong> este cea mai mică valoare pentru care <code>P = 90 * 64800000 = 1800</code><sup><code>3</code></sup> devine o <strong>“k-putere“</strong>. Descompunerea în factori primi a lui <code>y</code> conține <strong>m=3</strong> factori<br>\nprimi: \\( 2^1\\times 3^2\\times 5^1 \\).</p>",
+      "text": "pyk.in1 2 7 122 1111 5 4 88 123 999pyk.out4 1111 ExplicațieCerința este 1, k=2, n=7. Numerele din șirul X formate doar din cifre identice sunt: 1111, 5, 4, 88, 999. Cel mai mic număr dintre acestea este 4, iar cel mai mare este 1111.pyk.in2 3 6 12 5 60 125 4 36pyk.out3 2 1 3 2 5 1ExplicațieCerința este 2, k=3, n=6. Produsul celor 6 numere din șir este: 12*5*60*125*4*36=64800000. y=90 este cea mai mică valoare pentru care P = 90 * 64800000 = 18003 devine o “k-putere“. Descompunerea în factori primi a lui y conține m=3 factori primi: \\( 2^1\\times 3^2\\times 5^1 \\)."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cerința este 1, k=2, n=7. Numerele din șirul X formate doar din cifre identice sunt: 1111, 5, 4, 88, 999. Cel mai mic număr dintre acestea este 4, iar cel mai mare este 1111."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cerința este 2, k=3, n=6. Produsul celor 6 numere din șir este: 12*5*60*125*4*36=64800000. y=90 este cea mai mică valoare pentru care P = 90 * 64800000 = 18003 devine o “k-putere“. Descompunerea în factori primi a lui y conține m=3 factori primi: \\( 2^1\\times 3^2\\times 5^1 \\)."
+    }
+  ],
+  "constraints": [
+    "2 ≤ n ≤ 50.000",
+    "2 ≤ k ≤ 100",
+    "2 ≤ \\( x_1, x_2, x_3, …, x_n \\) ≤ 10.000",
+    "2 ≤ y",
+    "pentru rezolvarea corectă a cerinței 1 se acordă 10 puncte;",
+    "pentru rezolvarea corectă a cerinței 2 se acordă 90 puncte."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qf476849112.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Vintila Valentin (Wi)",
+    "clasa": "9",
+    "intrare/ieșire": "pyk.in / pyk.out",
+    "limită timp": "0.3 secunde",
+    "limită memorie": "8 MB / 8 MB",
+    "sursa problemei": "ONIgim 2018 (clasa a V-a)",
+    "autor": "Carmen Mincă",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.3,
+  "memoryLimitMb": 8,
+  "author": "Carmen Mincă",
+  "sourceAttribution": "ONIgim 2018 (clasa a V-a)",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/2863/pyk"
+}

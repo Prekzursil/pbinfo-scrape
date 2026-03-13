@@ -1,0 +1,297 @@
+{
+  "id": 329,
+  "slug": "bila",
+  "name": "Bila",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/329/bila",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 27,
+      "name": "Backtracking",
+      "slug": "backtracking",
+      "href": "/?pagina=probleme-lista&tag=27"
+    },
+    {
+      "id": 51,
+      "name": "Backtracking in plan",
+      "slug": "backtracking-in-plan",
+      "href": "/?pagina=probleme-lista&tag=51"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerinţa",
+      "html": "<p>Se consideră o tablă de joc de formă dreptunghiulară, împărţită în <code>n</code> lini şi <code>m</code> coloane. Se obţin astfel <code>n*m</code> zone şi se cunoaște înălțimea fiecărei zone. La o poziție cunoscută – linia <code>istart</code>, coloana <code>jstart</code> se află o bilă care se poate deplasa pe o poziție vecină (sus, jos, stânga, dreapta) doar dacă înălțimea poziției vecine este strict mai mică decât înălțimea poziției curente.</p><p>Determinați numărul maxim de zone prin care poate să treacă bila pentru a ajunge pe una dintre marginile tablei de joc.</p>",
+      "text": "Se consideră o tablă de joc de formă dreptunghiulară, împărţită în n lini şi m coloane. Se obţin astfel n*m zone şi se cunoaște înălțimea fiecărei zone. La o poziție cunoscută – linia istart, coloana jstart se află o bilă care se poate deplasa pe o poziție vecină (sus, jos, stânga, dreapta) doar dacă înălțimea poziției vecine este strict mai mică decât înălțimea poziției curente.Determinați numărul maxim de zone prin care poate să treacă bila pentru a ajunge pe una dintre marginile tablei de joc."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fişierul de intrare <code>bila.in</code> conţine pe prima linie numerele <code>n</code> și <code>m</code>. Următoarele <code>n</code> linii conțin câte <code>m</code> numere naturale strict pozitive reprezentând înălțimile fiecărei zone.<br>\nPe linia <code>n+2</code> se află două numere <code>istart</code>, <code>jstart</code> cu semnificația din enunț.</p>",
+      "text": "Fişierul de intrare bila.in conţine pe prima linie numerele n și m. Următoarele n linii conțin câte m numere naturale strict pozitive reprezentând înălțimile fiecărei zone. Pe linia n+2 se află două numere istart, jstart cu semnificația din enunț."
+    },
+    {
+      "title": "Date de ieşire",
+      "html": "<p>Fişierul de ieşire <code>bila.out</code> va conţine pe prima linie numărul <code>P</code>, reprezentând numărul maxim de zone prin care poate să treacă bila pentru a ajunge pe una dintre marginile tablei de joc, inclusiv zona inițială.</p>",
+      "text": "Fişierul de ieşire bila.out va conţine pe prima linie numărul P, reprezentând numărul maxim de zone prin care poate să treacă bila pentru a ajunge pe una dintre marginile tablei de joc, inclusiv zona inițială."
+    },
+    {
+      "title": "Restricţii şi precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ n, m ≤ 20</code></li>\n\t<li>liniile și coloanele sunt numerotate de la <code>1</code></li>\n\t<li>înălțimea fiecărei zone este cuprinsă între <code>1</code> și <code>50</code></li>\n\t<li>când bila ajunge pe o margine a tablei, se oprește acolo. Nu mai continua pe acea margine și nu se poate întoarce în interiorul tablei.</li>\n\t<li>dacă nu este posibil ca bila să ajungă pe marginea tablei se va afișa valoarea <code>0</code></li>\n</ul>",
+      "text": "1 ≤ n, m ≤ 20 liniile și coloanele sunt numerotate de la 1 înălțimea fiecărei zone este cuprinsă între 1 și 50 când bila ajunge pe o margine a tablei, se oprește acolo. Nu mai continua pe acea margine și nu se poate întoarce în interiorul tablei. dacă nu este posibil ca bila să ajungă pe marginea tablei se va afișa valoarea 0"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>bila.in</code></p><pre>4 5\n4 4 3 1 5\n8 7 2 1 3\n9 6 3 2 1\n2 5 4 3 7\n2 2</pre><p><code>bila.out</code></p><pre>5</pre>",
+      "text": "bila.in4 5 4 4 3 1 5 8 7 2 1 3 9 6 3 2 1 2 5 4 3 7 2 2bila.out5"
+    },
+    {
+      "title": "Explicație",
+      "html": "<table>\n\t\t<tbody><tr>\n\t\t\t<td> 4 </td>\n\t\t\t<td> 4 </td>\n\t\t\t<td> 3 </td>\n\t\t\t<td> 1 </td>\n\t\t\t<td> 5 </td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td> 8 </td>\n\t\t\t<td> <strong>7</strong> </td>\n\t\t\t<td> 2 </td>\n\t\t\t<td> 1 </td>\n\t\t\t<td> 3 </td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td> 9 </td>\n\t\t\t<td> <strong>6</strong> </td>\n\t\t\t<td> <strong>3</strong> </td>\n\t\t\t<td> <strong>2</strong> </td>\n\t\t\t<td> <strong>1</strong> </td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td> 2 </td>\n\t\t\t<td> 5 </td>\n\t\t\t<td> 4 </td>\n\t\t\t<td> 3 </td>\n\t\t\t<td> 7 </td>\n\t\t</tr>\n</tbody></table>",
+      "text": "4 4 3 1 5 8 7 2 1 3 9 6 3 2 1 2 5 4 3 7"
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "1 ≤ n, m ≤ 20",
+    "liniile și coloanele sunt numerotate de la 1",
+    "înălțimea fiecărei zone este cuprinsă între 1 și 50",
+    "când bila ajunge pe o margine a tablei, se oprește acolo. Nu mai continua pe acea margine și nu se poate întoarce în interiorul tablei.",
+    "dacă nu este posibil ca bila să ajungă pe marginea tablei se va afișa valoarea 0"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q4f93f4fc7c.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "11",
+    "intrare/ieșire": "bila.in / bila.out",
+    "limită timp": "0.8 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "-",
+    "autor": "-",
+    "dificultate": "medie"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.8,
+  "memoryLimitMb": 64,
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/329/bila"
+}

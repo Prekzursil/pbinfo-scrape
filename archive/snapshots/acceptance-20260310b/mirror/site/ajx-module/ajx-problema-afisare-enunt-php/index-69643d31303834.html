@@ -1,0 +1,61 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1084"><article id="enunt">
+			<p>Un elev în clasa a V-a, Rareş, s-a gândit să&nbsp;studieze mersul trenurilor ce trec prin gara din oraşul său, într-o zi. Gara are <code>2</code> linii, numerotate cu <code>1</code> şi <code>2</code>, pe care sosesc şi pleacă trenurile. În acea zi, în gară sosesc <code>T</code> trenuri. Pentru fiecare tren din cele <code>T</code>, Rareş cunoaşte linia <code>L</code> pe care va sosi, momentul sosirii, adică ora <code>H</code> şi minutul <code>M</code>, precum şi durata de timp <code>S</code> de staţionare (exprimată în minute). El a decis ca perioada de studiu a celor <code>T</code> trenuri să înceapă cu momentul sosirii primului tren în gară din cele <code>T</code> şi să se încheie odată cu momentul plecării ultimului tren din cele <code>T</code>. </p>
+
+<p>Din sala de aşteptare Rareş poate vedea cele <code>2</code> linii. Rareş are însă o problemă: atunci când un tren se află în gară  pe linia <code>1</code>, el nu poate vedea trenul staţionat în acelaşi timp pe linia <code>2</code>. De exemplu, dacă un tren ajunge în gară pe linia <code>1</code> la ora <code>14:21</code> şi staţionează <code>5</code> minute atunci trenul va pleca din gară la ora <code>14:26</code>. Astfel, în intervalul de timp <code>[14:21-14:26]</code>, Rareş nu poate vedea ce se întâmplă pe linia <code>2</code>. Trenul de pe linia <code>2</code> va putea fi vizibil începând cu minutul următor, adică de la <code>14:27</code>.</p>
+
+<h1>Cerinţă</h1>
+
+<p>Scrieţi un program care să determine pentru un număr <code>T</code> de trenuri care trec prin gară în perioada de studiu din acea zi: </p>
+
+<ul>
+	<li>numărul maxim de trenuri <code>Z</code> care au staţionat pe aceeaşi linie;</li>
+	<li>numărul <code>X</code> de trenuri pe care Rareş le vede;</li>
+	<li>durata de timp maximă <code>Y</code> (exprimată în număr de minute consecutive), din perioada de studiu, în care Rareş nu a văzut niciun tren.</li>
+</ul>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>tren.in</code> conține pe prima linie numărul <code>T</code> de trenuri şi pe fiecare din următoarele <code>T</code> linii, în ordinea sosirii trenurilor în gară, câte patru numere naturale <code>L</code>, <code>H</code>, <code>M</code> şi <code>S</code>, separate prin câte un spaţiu, ce reprezintă linia <code>L</code> pe care soseşte trenul, momentul sosirii trenului (ora <code>H</code> şi minutul <code>M</code>) şi durata de timp <code>S</code> de staţionare.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>tren.out</code> va conține pe prima linie, separate prin câte un spaţiu, valorile cerute <code>Z</code>, <code>X</code> și <code>Y</code> (în această ordine).</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ T ≤ 100</code>; <code>0 ≤ H ≤ 23</code>; <code>0 ≤ M ≤ 59</code>; <code>1 ≤ S ≤ 9</code>;  <code>T</code>, <code>H</code>, <code>M</code>, <code>S</code> sunt numere naturale;</li>
+	<li>în acelaşi moment de timp nu pot pleca/sosi mai multe trenuri;<br>
+*&nbsp;în acelaşi moment de timp nu poate pleca un tren şi altul să sosească;</li>
+	<li>pe aceeaşi linie nu pot staţiona mai multe trenuri în acelaşi moment de timp;<br>
+*&nbsp;pentru aflarea corectă a numărului <code>Z</code> se acordă 20% din punctajul pe test;<br>
+*&nbsp;pentru aflarea corectă a numărului <code>X</code> se acordă 40% din punctajul pe test;<br>
+*&nbsp;pentru aflarea corectă a numărului <code>Y</code> se acordă 40% din punctajul pe test.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>tren.in</code></p>
+
+<pre>8
+1 14 20 3
+2 14 21 1
+2 14 24 4
+1 14 40 8
+2 14 41 1
+2 14 43 1
+2 14 45 5
+1 14 56 1</pre>
+
+<p><code>tren.out</code></p>
+
+<pre>5 5 11</pre>
+
+<h1>Explicație</h1>
+
+<p>Pe linia <code>1</code> au staţionat  <code>3</code> trenuri, iar pe linia <code>2</code> au staţionat <code>5</code> trenuri,  astfel <code>Z=5.</code></p>
+
+<p>La ora <code>14:20</code> Rareş vede trenul care ajunge pe linia <code>1</code> şi va staţiona până la ora <code>14:23</code>. El nu vede trenul care ajunge pe linia <code>2</code> la ora <code>14:21</code> şi pleacă la <code>14:22</code>. El vede trenul care ajunge pe linia <code>2</code> la <code>14:24</code> pentru că în momentul sosirii  nu se află tren pe linia <code>1</code>. De asemenea, el vede trenul care ajunge la <code>14:40</code> pe linia <code>1</code>, dar nu vede următoarele <code>2</code> trenuri care ajung pe linia <code>2</code> întrucât trenul de pe linia <code>1</code> pleacă la <code>14:48</code>. Vede şi ultimul tren de pe linia <code>2</code> pentru că el soseşte înainte de plecarea trenului de pe linia <code>1</code> şi pleacă după acesta. În total a văzut <code>5</code> trenuri.</p>
+
+<p>În intervalele de timp <code>[14:29-14:39]</code> şi <code>[14:51-14:55]</code>, Rareş nu vede niciun tren, durata de timp maximă fiind de <code>11</code> minute (determinată de trenul care pleacă la <code>14:28</code> şi următorul tren care soseşte la <code>14:40</code>).</p>		</article>
+		</body></html>

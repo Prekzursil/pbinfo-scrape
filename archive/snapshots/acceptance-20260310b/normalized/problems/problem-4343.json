@@ -1,0 +1,312 @@
+{
+  "id": 4343,
+  "slug": "prietene1",
+  "name": "prietene1",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4343/prietene1",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 45,
+      "name": "Vectori caracteristici / de frecventa",
+      "slug": "vectori-caracteristici-de-frecventa",
+      "href": "/?pagina=probleme-lista&tag=45"
+    }
+  ],
+  "tags": [
+    "Descompunere in factori",
+    "ciurul lui Eratostene"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Fiind date două șiruri de numere naturale, primul cu <code>n</code> numere, iar al doilea cu <code>m</code> numere, scrieți un program care rezolvă următoarele cerințe:<br>\n1) Determină cel mai mare dintre cele <code>n + m</code> numere date ce are număr maxim de divizori primi.<br>\n2) Determină câte perechi de numere prietene de forma <code>(x, y)</code> se pot forma, <code>x</code> fiind din primul șir, iar <code>y</code> din al doilea șir.</p>",
+      "text": "Fiind date două șiruri de numere naturale, primul cu n numere, iar al doilea cu m numere, scrieți un program care rezolvă următoarele cerințe: 1) Determină cel mai mare dintre cele n + m numere date ce are număr maxim de divizori primi. 2) Determină câte perechi de numere prietene de forma (x, y) se pot forma, x fiind din primul șir, iar y din al doilea șir."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>prietene.in</code> conţine pe prima linie numărul C reprezentând cerința (1 sau 2), pe a doua linie numerele n și m, pe a treia linie un șir de n numere, iar pe a patra linie un șir de m numere, numerele de pe fiecare linie fiind separate prin câte un spațiu.</p>",
+      "text": "Fișierul de intrare prietene.in conţine pe prima linie numărul C reprezentând cerința (1 sau 2), pe a doua linie numerele n și m, pe a treia linie un șir de n numere, iar pe a patra linie un șir de m numere, numerele de pe fiecare linie fiind separate prin câte un spațiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Dacă <code>C = 1</code>, atunci pe prima linie a fişierului de ieşire <code>prietene.out</code> se va scrie numărul ce reprezintă răspunsul la cerința 1.<br>\nDacă <code>C = 2</code>, atunci pe prima linie a fişierului de ieşire <code>prietene.out</code> se va scrie numărul ce reprezintă răspunsul la cerința 2.</p>",
+      "text": "Dacă C = 1, atunci pe prima linie a fişierului de ieşire prietene.out se va scrie numărul ce reprezintă răspunsul la cerința 1. Dacă C = 2, atunci pe prima linie a fişierului de ieşire prietene.out se va scrie numărul ce reprezintă răspunsul la cerința 2."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ n,m ≤ 10.000</code></li>\n\t<li>Cele două șiruri conțin numere naturale din intervalul <code>[2, 1.000.000.000]</code>.</li>\n\t<li>Pentru 30% din teste cerinţa va fi <code>C = 1</code>.</li>\n\t<li>10 puncte se acordă pentru exemplele din enunț.</li>\n</ul>",
+      "text": "1 ≤ n,m ≤ 10.000 Cele două șiruri conțin numere naturale din intervalul [2, 1.000.000.000]. Pentru 30% din teste cerinţa va fi C = 1. 10 puncte se acordă pentru exemplele din enunț."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>prietene.in</code></p><pre>1\n3 4\n36 30 5\n12 60 13 77</pre><p><code>prietene.out</code></p><pre>60</pre><h3>Explicație</h3><p>Pentru fiecare număr din șirurile date scriem numărul de divizori primi: <code>36 → 2</code>, <code>30 → 3</code>, <code>5 → 1</code>, <code>12 → 2</code>, <code>60 → 3</code>, <code>13 → 1</code>, <code>77 → 2</code>. Numărul maxim de divizori primi este <code>3</code>. Cel mai mare număr din șirurile date care are <code>3</code> divizori primi este <code>60</code>.</p>",
+      "text": "prietene.in1 3 4 36 30 5 12 60 13 77prietene.out60ExplicațiePentru fiecare număr din șirurile date scriem numărul de divizori primi: 36 → 2, 30 → 3, 5 → 1, 12 → 2, 60 → 3, 13 → 1, 77 → 2. Numărul maxim de divizori primi este 3. Cel mai mare număr din șirurile date care are 3 divizori primi este 60."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>prietene.in</code></p><pre>2\n4 5\n36 30 5 10\n12 60 15 77 105</pre><p><code>prietene.out</code></p><pre>8</pre><h3>Explicație</h3><p>Sunt <code>8</code> perechi de numere prietene: <code>(36, 12)</code>, <code>(36, 15)</code>, <code>(36, 77)</code>, <code>(10, 12)</code>, <code>(10, 15)</code>, <code>(10, 77)</code>, <code>(30, 60)</code>, <code>(30, 105)</code>.</p>",
+      "text": "prietene.in2 4 5 36 30 5 10 12 60 15 77 105prietene.out8ExplicațieSunt 8 perechi de numere prietene: (36, 12), (36, 15), (36, 77), (10, 12), (10, 15), (10, 77), (30, 60), (30, 105)."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Pentru fiecare număr din șirurile date scriem numărul de divizori primi: 36 → 2, 30 → 3, 5 → 1, 12 → 2, 60 → 3, 13 → 1, 77 → 2. Numărul maxim de divizori primi este 3. Cel mai mare număr din șirurile date care are 3 divizori primi este 60."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Sunt 8 perechi de numere prietene: (36, 12), (36, 15), (36, 77), (10, 12), (10, 15), (10, 77), (30, 60), (30, 105)."
+    }
+  ],
+  "constraints": [
+    "1 ≤ n,m ≤ 10.000",
+    "Cele două șiruri conțin numere naturale din intervalul [2, 1.000.000.000].",
+    "Pentru 30% din teste cerinţa va fi C = 1.",
+    "10 puncte se acordă pentru exemplele din enunț."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q192ec7fbc9.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "prietene.in / prietene.out",
+    "limită timp": "1 secunde",
+    "limită memorie": "10 MB / 2 MB",
+    "sursa problemei": "Olimpiada Municipală de Informatică, Iași, 2023",
+    "autor": "Simona Ingrid Iuscinschi",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 1,
+  "memoryLimitMb": 10,
+  "author": "Simona Ingrid Iuscinschi",
+  "sourceAttribution": "Olimpiada Municipală de Informatică, Iași, 2023",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4343/prietene1"
+}

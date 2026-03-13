@@ -1,0 +1,92 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4083"><article id="enunt">
+			<p>Ana şi Bogdan au inventat un nou joc, pe care l-au denumit Strips. Este un joc de strategie, dar şi de antrenare a memoriei, deoarece se joacă pe o tablă care nu este vizibilă pentru cei doi jucători în timpul jocului.<br>
+Tabla de joc este o bandă albă de lungime <code>N</code> cm, pe care sunt marcate poziţii de lungime <code>1</code> cm. Poziţiile sunt numerotate pe tablă de la <code>0</code> la <code>N-1</code>, poziţia <code>0</code> fiind marcată la începutul tablei (capătul din stânga), iar poziţia <code>N-1</code> fiind marcată la sfârşitul tablei (capătul din dreapta). <br>
+La începutul jocului fiecare jucător are <code>Nr</code> benzi colorate, toate de aceeaşi lungime <code>L</code> cm. Benzile Anei sunt de culoare roşie, iar benzile lui Bogdan sunt de culoare verde. <br>
+Jucătorii mută alternativ, prima la mutare fiind Ana. La o mutare, jucătorul care este la rând alege o poziţie de pe tabla de joc şi dacă poziţia este validă, pe tabla de joc va fi plasată o bandă a jucătorului respectiv, cu capătul din stânga în poziţia aleasă. Dacă poziţia nu este validă, mutarea nu va fi executată, iar jucătorul respectiv va primi <code>1</code> punct de penalizare şi pierde banda care ar fi trebuit plasată pe tablă la poziţia respectivă (aceasta este eliminată din joc).<br>
+O poziţie este considerată validă, dacă pe tabla de joc poate fi plasată o bandă de lungime <code>L</code> cu capătul din stânga al benzii fixat la poziţia specificată, astfel încât banda să fie integral pe tabla de joc, fără a se suprapune sau a se atinge cu o zonă de pe bandă colorată în culoarea adversarului.<br>
+Jocul se termină când jucătorii nu mai au benzi. Fiecare jucător are ca scop să obţină o zonă pe bandă de lungime cât mai mare colorată în culoarea sa. O zonă de pe bandă este constituită din poziţii consecutive, colorate cu aceeaşi culoare.</p>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care citeşte lungimea tablei de joc, numărul de benzi colorate pe care le are fiecare jucător la începutul jocului, lungimea benzilor, precum şi poziţiile specificate de jucători pe parcursul jocului şi rezolvă următoarele două cerinţe:</p>
+
+<ul>
+	<li>determină numărul de puncte de penalizare pentru fiecare dintre cei doi jucători;</li>
+	<li>determină pentru fiecare jucător care este lungimea maximă a unei zone de pe tabla de joc colorată în culoarea sa la sfârşitul jocului.</li>
+</ul>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>strips.in</code> conţine pe prima linie un număr natural <code>C</code> care reprezintă cerinţa care urmează a fi rezolvată (<code>1</code> sau <code>2</code>). Pe cea de-a doua linie se află trei numere naturale separate prin câte un spaţiu <code>N</code> <code>Nr</code> <code>L</code>, cu semnificaţia din enunţ. Celelalte linii ale fişierului de intrare conţin în ordine poziţiile specificate de jucători pe parcursul jocului, câte o poziţie pe o linie.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>strips.out</code> va conţine o singură linie pe care vor fi scrise două numere naturale <code>rezA</code> <code>rezB</code>, separate printr-un singur spaţiu. Dacă <code>C=1</code> atunci <code>rezA</code> este numărul de puncte de penalizare acumulate de Ana, iar <code>rezB</code> numărul de puncte de penalizare acumulate de Bogdan. Dacă <code>C=2</code> atunci <code>rezA</code> este lungimea maximă a unei zone de culoare roşie la sfârşitul jocului, iar <code>rezB</code> este lungimea maximă a unei zone de culoare verde la sfârşitul jocului.  </p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 1.000.000.000</code></li>
+	<li><code>1 ≤ Nr ≤ 50.000</code></li>
+	<li><code>1 ≤ L ≤ 20.000</code></li>
+	<li>Se garantează că pentru datele de test, la finalul jocului, pentru fiecare dintre cei doi jucători numărul de zone disjuncte de pe tabla de joc colorate în culoarea jucătorului respectiv este  <code>≤ 5000</code>.</li>
+	<li>Poziţiile sunt numere naturale mai mici decât <code>N</code>.</li>
+	<li>Fiindcă sunt începători, Ana şi Bogdan încă nu joacă optim.</li>
+	<li>Pentru teste valorând 50 de puncte cerinţa este <code>1</code>.</li>
+	<li>Pentru teste valorând 40 de puncte <code>1 ≤ N ≤ 1.000.000</code>, <code>1 ≤ L ≤ 1000</code> şi <code>1 ≤ Nr ≤ 1000</code>.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>strips.in</code></p>
+
+<pre>1
+20 4 3
+9
+15
+2
+13
+5
+17
+0
+12</pre>
+
+<p><code>strips.out</code></p>
+
+<pre>0 1</pre>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>strips.in</code></p>
+
+<pre>2
+20 4 3
+9
+15
+2
+13
+5
+17
+0
+12</pre>
+
+<p><code>strips.out</code></p>
+
+<pre>8 7</pre>
+
+<h3>Explicație</h3>
+
+<p>Tabla de joc are <code>20</code> de cm, poziţiile fiind numerotate de la <code>0</code> la <code>19</code>.<br>
+Jucătorii au fiecare câte <code>4</code> benzi de lungime <code>3</code>.<br>
+La prima mutare Ana aplică o bandă roşie peste poziţiile <code>9</code>, <code>10</code>, <code>11</code>.<br>
+La a doua mutare Bogdan aplică o bandă verde peste poziţiile <code>15</code>, <code>16</code>, <code>17</code>.<br>
+La a treia mutare Ana aplică o bandă roşie peste poziţiile <code>2</code>, <code>3</code>, <code>4</code>.<br>
+La a patra mutare Bogdan aplică o bandă verde peste poziţiile <code>13</code>, <code>14</code>, <code>15</code>.<br>
+La a cincea mutare Ana aplică o bandă roşie peste poziţiile <code>5</code>, <code>6</code>, <code>7</code>.<br>
+La a şasea mutare Bogdan aplică o bandă verde peste poziţiile <code>17</code>, <code>18</code>, <code>19</code>.<br>
+La a şaptea mutare Ana aplică o bandă roşie peste poziţiile <code>0</code>, <code>1</code>, <code>2</code>.<br>
+La a opta mutare Bogdan a ales o poziţie invalidă (pentru că atinge o zonă de culoare roşie), ca urmare mutarea nu va fi executată (va avea <code>1</code> punct de penalizare).<br>
+Tabla de joc la finalul jocului va arăta astfel:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-strips-jpg.jpg"></p>		</article>
+		</body></html>

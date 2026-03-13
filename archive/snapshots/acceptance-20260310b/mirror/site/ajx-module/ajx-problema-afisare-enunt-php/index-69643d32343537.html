@@ -1,0 +1,76 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2457"><article id="enunt">
+			<p>În matematică factorialul unui număr natural nenul <code>K</code> este notat cu <code>K!</code> și este egal cu produsul numerelor naturale nenule mai mici sau egale cu <code>K</code>.<br>
+Exemple: <br>
+<code>1! = 1</code><br>
+<code>2! = 1•2 = 2</code><br>
+<code>3! = 1•2•3 = 6</code><br>
+…<br>
+<code>K! = 1•2•3•...•K</code>. <br>
+Orice număr natural <code>N</code> poate fi descompus cu ajutorul numerelor factoriale astfel: <br>
+<code>N = 1! • f[1] + 2! • f[2] + 3! • f[3] + ... + m! • f[m]</code><br>
+unde coeficienții <code>f[i]</code>, cu <code>1 ≤ i ≤ m</code> sunt numere naturale și în plus <code>f[m] ≠ 0</code>.<br>
+Exemple: <br>
+<code>20 = 1!•20</code>;<br>
+<code>20 = 1!•6 + 2!•4 + 3!•1</code>;<br>
+<code>20 = 1!•0 + 2!•1+ 3!•3</code>;<br>
+Dintre toate aceste descompuneri posibile există o singură descompunere, numită descompunere în bază factorială care respectă suplimentar condițiile <code>0 ≤ f[i] ≤ i</code>, cu <code>1 ≤ i &lt; m</code> și <code>0 &lt; f[m] ≤ m</code>.<br>
+Exemple: <br>
+<code>6 = 1!•0 + 2!•0 + 3!•1</code>;<br>
+<code>17 = 1!•1+ 2!•2 + 3!•2</code>;<br>
+<code>119 = 1!•1+ 2!•2 + 3!•3+ 4!•4</code>;</p>
+
+<h1>Cerința</h1>
+
+<p>1. Să se determine descompunerea în bază factorială a unui număr natural <code>X</code> dat.<br>
+2. Cunoscând o descompunere oarecare a unui număr natural <code>Y</code> să se determine descompunerea în bază factorială a acestuia.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare este <code>bazaf.in</code>. Acesta conţine pe primul rând un număr natural <code>V</code> care poate avea doar valorile <code>1</code> sau <code>2</code> cu următoarea semnificație:<br>
+- dacă valoarea lui <code>V</code> este <code>1</code>, pe a doua linie a fișierului de intrare se găsește un număr natural <code>X</code> cu semnificația de mai sus;<br>
+- dacă valoarea lui <code>V</code> este <code>2</code>, pe a doua linie a fișierului de intrare se găsește o descompunere a unui număr <code>Y</code> sub forma unui șir de valori naturale în care primul termen este <code>m</code>, urmat de <code>m</code> valori f[i], care respectă condițiile <code>f[i] ≥ 0</code> , cu <code>1 ≤ i &lt; m</code> și <code>f[m] ≠ 0</code>, despărțite prin câte un spațiu, cu semnificația de mai sus.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire este <code>bazaf.out</code>. Dacă valoarea <code>V</code> este <code>1</code> atunci fișierul de ieșire va conţine descompunerea în baza factorială a numărului <code>X</code> iar dacă valoarea <code>V</code> este <code>2</code> atunci fișierul de ieșire va conține descompunerea în baza factorială<br>
+a numărului <code>Y</code>.Descompunerea în bază factorială presupune scrierea în fișierul de ieșire a unei singure linii sub forma unui șir de valori naturale în care primul termen este <code>m</code>,urmat de <code>m</code> valori <code>f[i]</code>, care respectă condițiile <code>0 ≤ f[i] ≤ i</code>, cu <code>1 ≤ i &lt; m</code> și <code>0 &lt; f[m] ≤ m</code>, despărțite prin câte un spațiu, având semnificația de mai sus.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ X ≤ 10</code><sup><code>15</code></sup></li>
+	<li><code>1 &lt; m ≤ 100 000</code></li>
+	<li><code>0 ≤ f[i] ≤ 10</code><sup><code>9</code></sup></li>
+	<li>Pentru rezolvarea corectă a primei cerință se va acorda <code>30%</code> din punctaj, iar pentru cea de-a doua cerință se va acorda <code>70%</code> din punctaj.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>bazaf.in</code></p>
+
+<pre>1
+17</pre>
+
+<p><code>bazaf.out</code></p>
+
+<pre>3 1 2 2</pre>
+
+<h3>Explicație</h3>
+
+<p><code>V = 1</code>, deci se rezolvă doar prima cerință. <code>X = 17</code>. Descompunerea numărului <code>X = 17</code> în bază factorială conține trei termeni și este formată din coeficienții <code>1</code>, <code>2</code>, <code>2</code> (<code>17 = 1!•1+2!•2+3!•2</code>);</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>bazaf.in</code></p>
+
+<pre>2
+2 10 5</pre>
+
+<p><code>bazaf.out</code></p>
+
+<pre>3 0 1 3</pre>
+
+<h3>Explicație</h3>
+
+<p><code>V = 2</code>, deci se rezolvă doar a doua cerință Descompunerea <code>2 10 5</code> este o descompunere cu <code>2</code> termeni având coeficienții <code>10, 5</code> și corespunde numărului <code>Y = 20</code>. Descompunerea în bază factorială a numărului <code>Y = 20</code> va fi <code>3 0 1 3</code> (<code>20 = 1!•0+2!•1+3!•3</code>).</p>		</article>
+		</body></html>

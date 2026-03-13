@@ -1,0 +1,42 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=736"><article id="enunt">
+			<p>Pentru scrierea mesajelor soldaţii dintr-o unitate militară folosesc <code>9</code> litere mici: <code>a</code>, <code>e</code>, <code>i</code>, <code>o</code>, <code>u</code>, <code>m</code>, <code>n</code>, <code>r</code>, <code>s</code> şi caracterul spaţiu. Aceste litere sunt codificate cu ajutorul cifrelor <code>1</code>, <code>2</code>, …, <code>9</code> (în ordinea de mai sus), iar pentru caracterul spaţiu se foloseşte cifra <code>0</code>. Astfel codificarea textului <code>ana are mere</code> se poate realiza prin numărul natural <code>171018206282</code>.</p>
+
+<p>Pentru a mări gradul de securitate a mesajelor transmise soldaţii relizează o supracodificare, înlocuind fiecare cifră <code>k</code> folosită la codicare cu puterea <code>2</code><sup><code style="font-size:0.8em;">k</code></sup>. Astfel textul anterior se supracodifică astfel: <code>2128212256416442564</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Să se scrie un program care pentru o supracodificare dată, determină textul iniţial. Dacă există mai multe astfel de texte se vor determina toate.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fişierul de intrare <code>codif.in</code> conţine pe prima linie, <code>n</code> numărul de cifre folosite la textul supracodificat, iar pe a doua linie conţine supracodificarea.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>codif.out</code> va conține pe prima linie numărul <code>m</code> de texte ce corespund supracodificării date, iar pe următoarele <code>m</code> linii, textele, fiecare dintre acestea pe câte o linie, în ordine <em>lungo-lexicografică</em>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>0&lt; n &lt; 83</code></li>
+	<li>Pentru două texte <code>u=</code><code>u</code><sub><code style="font-size:0.8em;">1</code></sub><code>u</code><sub><code style="font-size:0.8em;">2</code></sub><code>...</code><code>u</code><sub><code style="font-size:0.8em;">a</code></sub> şi <code>v=</code><code>v</code><sub><code style="font-size:0.8em;">1</code></sub><code>v</code><sub><code style="font-size:0.8em;">2</code></sub><code>...</code><code>v</code><sub><code style="font-size:0.8em;">b</code></sub>, avem că <code>u</code> este înaintea lui <code>v</code> în ordine <em>lungo-lexicografică</em>, dacă <code>a&lt;b</code> sau dacă <code>a=b</code> şi există un indice <code>1≤i≤a</code> cu proprietatea că  <code>u</code><sub><code style="font-size:0.8em;">1</code></sub><code>=v</code><sub><code style="font-size:0.8em;">1</code></sub>, … , <code>u</code><sub><code style="font-size:0.8em;">i-1</code></sub><code>=v</code><sub><code style="font-size:0.8em;">i-1</code></sub>, <code>u</code><sub><code style="font-size:0.8em;">i</code></sub><code>=v</code><sub><code style="font-size:0.8em;">i</code></sub>. Ordinea caracterelor este cea dată de codurile <span class="caps">ASCII</span>. De exemplu, în ordine lungo-lexicografică, textul <code>aerss</code> este înaintea textului <code>aeumr</code>, şi după textul <code>sun</code>.</li>
+	<li>Fiecare linie din fişierul de ieşire va avea sfârşit de linie.</li>
+	<li>Pentru toate testele numărul de texte care corespunde aceleiaşi supracodificări este mai mic sau egal cu <code>70</code>.</li>
+</ul>
+
+
+<h1>Exemplu:</h1>
+
+<p><code>codif.in</code></p>
+
+<pre>19
+2128212256416442564</pre>
+
+<p><code>codif.out</code></p>
+
+<pre>4
+ana are mere
+ana areoeere
+a aia are mere
+a aia areoeere</pre>		</article>
+		</body></html>

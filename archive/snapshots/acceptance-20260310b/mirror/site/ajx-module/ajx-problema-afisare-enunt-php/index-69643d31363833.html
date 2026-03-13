@@ -1,0 +1,62 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1683"><article id="enunt">
+			<p>Se consideră o matrice cu un număr infinit de linii și coloane indexate începând cu <code>0</code>.<br>
+Pe prima linie matricea conține șirul numerelor naturale (<code>0, 1, 2, 3 …</code>).<br>
+Pe fiecare linie începând cu linia a doua pe poziția <code>j</code> matricea conține suma <strong>xor</strong> a elementelor situate pe linia anterioara de la poziția <code>0</code> până la poziția <code>j</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Se cere să se răspundă la <code>q</code> întrebări de forma “Pentru <code>i</code> și <code>j</code> date, să se determine numărul situat pe linia <code>i</code> coloana <code>j</code> a matricei”. Pentru a genera cele <code>q</code> întrebări vor fi cunoscute următoarele valori: \( i_1, j_1, a, b, m \).<br>
+\( i_1, j_1\) reprezintă valorile pentru prima întrebare. Următoarele întrebări \( i_k, j_k \) vor fi generate una din alta folosind următoarea regulă:</p>
+
+<p>\( {i}_{k} = \left (a* {i}_{k-1} +b \right) \text{ mod } m \)<br>
+\( {j}_{k} = \left (a* {j}_{k-1} +b \right) \text{ mod } m \)</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>xor1.in</code> conține pe prima linie numerele naturale \( q, i_1, j_1, a, b, m \) separate prin câte un spaţiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>xor1.out</code> va conține <code>q</code> linii. Pe linia <code>k</code> se va afișa elementul situat pe linia \(i_k\)  coloana \(j_k\) a matricei.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>Pentru 10% dintre teste <code>1 ≤ q ≤ 100</code>, <code>1 ≤ m ≤ 100</code></li>
+	<li>Pentru alte 10% dintre teste <code>1 ≤ q ≤ 100000</code>, <code>1 ≤ m ≤ 1000</code></li>
+	<li>Pentru alte 30% dintre teste <code>1 ≤ q ≤ 50</code>, <code>1 ≤ m ≤ 30000</code></li>
+	<li>Pentru alte 50% dintre teste <code>1 ≤ q ≤ 100000</code>, <code>1 ≤ m ≤ 10</code><sup><code>8</code></sup></li>
+	<li>\( 0≤   {i}_{1} , {j}_{1} &lt;  m \)</li>
+	<li><code>1 ≤ a,b ≤ 9</code></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>xor1.in</code></p>
+
+<pre>4 2 3 1 1 5</pre>
+
+<p><code>xor1.out</code></p>
+
+<pre>2
+7
+0
+1</pre>
+
+<h3>Explicație</h3>
+
+<p>Avem <code>q=4</code> întrebări. </p>
+
+<p>Pentru <code>i</code><sub><code>1</code></sub><code>=2</code>, <code>j</code><sub><code>1</code></sub><code>=3</code>, <code>a=1</code>, <code>b=1</code>, <code>m=5</code> se obțin întrebările: <code>(2,3)</code>, <code>(3,4)</code>, <code>(4,0)</code>, <code>(0,1)</code></p>
+
+<p>Matricea este:</p>
+
+<p>0 <strong>1</strong> 2 3 4 5 6 …<br>
+0 1 3 0 4 1 7 …<br>
+0 1 2 <strong>2</strong> 6 7 0 …<br>
+0 1 3 1 <strong>7</strong> 0 0 …<br>
+<strong>0</strong> 1 2 3 4 4 4 …<br>
+…</p>
+
+<p>Se observă că pe pozițiile corespunzătoare întrebărilor avem valorile <code>2</code>, <code>7</code>, <code>0</code> și <code>1</code>.</p>		</article>
+		</body></html>

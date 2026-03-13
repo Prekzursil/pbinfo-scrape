@@ -1,0 +1,52 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3530"><article id="enunt">
+			<p>Se consideră următoarea definiție a clasei Tablou în C++</p>
+
+<pre class="code_c">class Tablou
+{
+public:
+    int *t; // tabloul unidimensional
+    int n; // dimensiunea fizica si logica tabloului
+    // constructorul
+    Tablou(int dim, int a, int b, int c, int d)
+    {
+        n = dim;
+        t = new int[n];
+        t[0] = a;
+        for (int i = 1; i &lt; n; i++)
+            t[i] = 1 + (t[i - 1] * b + c) % d;
+    }
+    // destructorul
+    ~Tablou()
+    {
+        n = 0;
+        delete[] t;
+    }
+    // returneaza maximul din t
+    int Max()
+    {
+        // TO DO
+    }
+    // returneaza prima pozitie unde se gaseste val in t,
+    // sau returneaza -1 daca val nu apare in t
+    int Cauta(int val)
+    {
+        // TO DO
+    }
+};</pre>
+
+<p>Clasa gestionează un tablou unidimensional alocat dinamic. Constructorul clasei inițializează un vector <code>t</code> de dimensiune <code>dim</code>, iar componentele sunt create după o relație de recurență. Așa cum se observă, vectorul este indexat de la <code>0</code>.</p>
+
+<h1>Cerinţa</h1>
+
+<p>Scrieți definiția completă a metodelor <code>Max</code> și <code>Cauta</code>. Funcția <code>Max</code> trebuie să returneze valoarea maximă din vectorul <code>t</code>. Funcția <code>Cauta(val)</code> caută valoarea <code>val</code> în vectorul <code>t</code> și fie trebuie să returneze cea mai din stânga poziție unde se află valoarea <code>val</code>, fie să returneze <code>-1</code> dacă <code>val</code> nu se află în <code>t</code>.</p>
+
+<h1>Restricţii şi precizări</h1>
+
+<ul>
+	<li>numele metodelor sunt <code>Max</code> și <code>Cauta</code></li>
+</ul>
+
+<h1>Important</h1>
+
+<p>Soluţia propusă va conţine definiţia completă a funcţiilor cerute. Prezenţa în soluţie a altor instrucţiuni poate duce erori de compilare sau de execuţie care vor avea ca efect depunctarea soluţiei.</p>		</article>
+		</body></html>

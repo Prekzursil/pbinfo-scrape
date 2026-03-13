@@ -1,0 +1,314 @@
+{
+  "id": 3701,
+  "slug": "expandmat",
+  "name": "expandmat",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3701/expandmat",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 91,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=91"
+    },
+    {
+      "id": 115,
+      "name": "Diverse",
+      "slug": "diverse",
+      "href": "/?pagina=probleme-lista&tag=115"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Se dau <code>Q</code> triplete <code>(i, j, L)</code>, cu semnificația: pe poziția <code>A[i][j]</code> se află litera <code>L</code>. Care este numărul maxim de triplete care se pot selecta astfel încât toate să fie adevărate?<br>\nExemplu:<br>\n<code>N = 2</code>, <code>Q = 7</code><br>\n<code>(1, 2, b)</code><br>\n<code>(2, 3, f)</code><br>\n<code>(2, 1, d)</code><br>\n<code>(1, 2, z)</code><br>\n<code>(4, 1, y)</code><br>\n<code>(4, 4, a)</code><br>\n<code>(3, 3, d)</code><br>\nRăspunsul este <code>5</code> (prima, a doua și ultimele trei). De exemplu, dacă matricea de pornire este:<br>\n<code>ab</code><br>\n<code>cd</code><br>\nAtunci matricea <code>A</code> va fi:<br>\n<code>abde</code><br>\n<code>cdfg</code><br>\n<code>vxdc</code><br>\n<code>yzba</code></p>",
+      "text": "Se dau Q triplete (i, j, L), cu semnificația: pe poziția A[i][j] se află litera L. Care este numărul maxim de triplete care se pot selecta astfel încât toate să fie adevărate? Exemplu: N = 2, Q = 7 (1, 2, b) (2, 3, f) (2, 1, d) (1, 2, z) (4, 1, y) (4, 4, a) (3, 3, d) Răspunsul este 5 (prima, a doua și ultimele trei). De exemplu, dacă matricea de pornire este: ab cd Atunci matricea A va fi: abde cdfg vxdc yzba"
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>expandmat.in</code> conține pe prima linie numerele <code>N</code> și <code>Q</code>, despărțite printr-un spațiu, cu semnificaţia de mai sus, iar pe fiecare din următoarele <code>Q</code> linii va fi câte un triplet de numere <code>i</code>, <code>j</code>, <code>L</code> cu semnificațiile din enunț.</p>",
+      "text": "Fișierul de intrare expandmat.in conține pe prima linie numerele N și Q, despărțite printr-un spațiu, cu semnificaţia de mai sus, iar pe fiecare din următoarele Q linii va fi câte un triplet de numere i, j, L cu semnificațiile din enunț."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>expandmat.out</code> va conține pe prima linie numărul maxim de triplete care se pot selecta astfel încât toate să fie adevărate.</p>",
+      "text": "Fișierul de ieșire expandmat.out va conține pe prima linie numărul maxim de triplete care se pot selecta astfel încât toate să fie adevărate."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 60</code></li>\n\t<li><code>1 ≤ Q ≤ 100.000</code></li>\n\t<li>Matricea este indexată de la <code>1</code>.</li>\n\t<li><strong>Subtask 1</strong>, în valoare de 21 puncte: matricea inițială conține doar literele <code>a</code>, <code>b</code>, <code>c</code>, <code>d</code> şi <code>N ≤ 8</code>, <code>Q ≤ 100</code></li>\n\t<li><strong>Subtask 2</strong>, în valoare de 19 de puncte: matricea inițială conține doar literele <code>a</code>, <code>b</code>, <code>c</code>, <code>d</code> şi <code>N ≤ 60</code>, <code>Q ≤ 300</code></li>\n\t<li><strong>Subtask 3</strong>, în valoare de 13 puncte: literele matricei inițiale sunt egale</li>\n\t<li><strong>Subtask 4</strong>, în valoare de 21 puncte: în matricea inițială literele de pe aceeași linie sunt egale</li>\n\t<li><strong>Subtask 5</strong>, în valoare de 9 puncte: se garantează că răspunsul este cel puțin <code>Q / 2</code>.</li>\n\t<li><strong>Subtask 6</strong>, în valoare de 17 puncte: fără restricții suplimentare.</li>\n</ul>",
+      "text": "1 ≤ N ≤ 60 1 ≤ Q ≤ 100.000 Matricea este indexată de la 1. Subtask 1, în valoare de 21 puncte: matricea inițială conține doar literele a, b, c, d şi N ≤ 8, Q ≤ 100 Subtask 2, în valoare de 19 de puncte: matricea inițială conține doar literele a, b, c, d şi N ≤ 60, Q ≤ 300 Subtask 3, în valoare de 13 puncte: literele matricei inițiale sunt egale Subtask 4, în valoare de 21 puncte: în matricea inițială literele de pe aceeași linie sunt egale Subtask 5, în valoare de 9 puncte: se garantează că răspunsul este cel puțin Q / 2. Subtask 6, în valoare de 17 puncte: fără restricții suplimentare."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>expandmat.in</code></p><pre>2 7\n1 2 b\n2 3 f\n2 1 d\n1 2 z\n4 1 y\n4 4 a\n3 3 d</pre><p><code>expandmat.out</code></p><pre>5</pre><h3>Explicație</h3><p><code>N = 2</code> și <code>Q = 7</code>.</p><p>Cele <code>5</code> triplete care se pot alege sunt:<br>\n<code>1 2 b</code><br>\n<code>2 3 f</code><br>\n<code>4 1 y</code><br>\n<code>4 4 a</code><br>\n<code>3 3 d</code></p><p>Dacă matricea inițială este:<br>\n<code>ab</code><br>\n<code>cd</code><br>\nAtunci matricea finală este:<br>\n<code>abde</code><br>\n<code>cdfg</code><br>\n<code>wxdc</code><br>\n<code>yzba</code></p><p>Această matrice satisface toate cele <code>5</code> triplete.</p>",
+      "text": "expandmat.in2 7 1 2 b 2 3 f 2 1 d 1 2 z 4 1 y 4 4 a 3 3 dexpandmat.out5ExplicațieN = 2 și Q = 7.Cele 5 triplete care se pot alege sunt: 1 2 b 2 3 f 4 1 y 4 4 a 3 3 dDacă matricea inițială este: ab cd Atunci matricea finală este: abde cdfg wxdc yzbaAceastă matrice satisface toate cele 5 triplete."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "N = 2 și Q = 7."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 60",
+    "1 ≤ Q ≤ 100.000",
+    "Matricea este indexată de la 1.",
+    "Subtask 1, în valoare de 21 puncte: matricea inițială conține doar literele a, b, c, d şi N ≤ 8, Q ≤ 100",
+    "Subtask 2, în valoare de 19 de puncte: matricea inițială conține doar literele a, b, c, d şi N ≤ 60, Q ≤ 300",
+    "Subtask 3, în valoare de 13 puncte: literele matricei inițiale sunt egale",
+    "Subtask 4, în valoare de 21 puncte: în matricea inițială literele de pe aceeași linie sunt egale",
+    "Subtask 5, în valoare de 9 puncte: se garantează că răspunsul este cel puțin Q / 2.",
+    "Subtask 6, în valoare de 17 puncte: fără restricții suplimentare."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q520d4b40d5.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/expandmat_1.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-expandmat-1-jpg.jpg",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/expandmat_3.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-expandmat-3-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "10",
+    "intrare/ieșire": "expandmat.in / expandmat.out",
+    "limită timp": "0.2 secunde",
+    "limită memorie": "256 MB / 8 MB",
+    "sursa problemei": "Concursul Național Info Pro, Etapa IV",
+    "autor": "Alexandra Udriștoiu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.2,
+  "memoryLimitMb": 256,
+  "author": "Alexandra Udriștoiu",
+  "sourceAttribution": "Concursul Național Info Pro, Etapa IV",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3701/expandmat"
+}

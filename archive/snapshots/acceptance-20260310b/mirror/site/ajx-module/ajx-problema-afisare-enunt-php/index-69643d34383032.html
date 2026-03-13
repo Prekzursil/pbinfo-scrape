@@ -1,0 +1,79 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4802"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>Aflat pe plaja urbană din cartierul Cricozescu al orașului Jluc, Andrei participă la un concurs de construcții de castele de nisip. Fiecare concurent a construit deja un anumit număr de castele <code>n</code>, însă organizatorii concursului au schimbat regulile în ultimul moment, astfel că, pentru a fi eligibili în etapa de jurizare, toate castelele concurenților trebuie să aibă exact aceeași înălțime <code>h</code>, unde <code>h</code> este înălțimea unui castel deja construit de Andrei. Pentru a uniformiza înălțimile, concurenții trebuie să efectueze un număr de operații asupra unui castel, iar în cadrul unei operații există două posibilități:</p>
+
+<ul>
+	<li>Fie se adaugă o lopată de nisip castelului curent – în acest caz, înâlțimea castelului crește cu 1cm;</li>
+	<li>Fie se înlătură o lopată de nisip din vârful castelului – în acest caz, înălțimea castelului scade cu 1cm.</li>
+</ul>
+
+<p>Având în vedere precizările făcute de organizatori la finalul concursului, Andrei ne cere să îl ajutăm să determine numărul minim de operații pe care el trebuie să le facă asupra castelelor sale astfel încât toate să aibă, în final, aceeași înălțime <code>h</code>, <code>h</code> fiind înălțimea inițială a unuia dintre castelele construite.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>castele.in</code> conține pe prima linie un număr natural <code>n</code>, reprezentând numărul de castele pe care Andrei le are, iar pe a doua linie se află <code>n</code> numere naturale, reprezentând înălțimile inițiale ale castelelor lui Andrei.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>castele.out</code> va conține pe singura linie numărul <code>k</code>, reprezentând numărul minin de operații pe care Andrei trebuie să le efectueze astfel încât castelele sale să aibă aceeași înălțime.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 100000</code>;</li>
+	<li><code>1 ≤ h ≤ 1000</code>, unde <code>h</code> reprezintă înălțimea unui castel;</li>
+	<li>Pentru teste în valoare de <code>10</code> puncte, toate castelele au înălțimile egale.</li>
+	<li>Pentru teste în valoare de <code>45</code> de puncte, <code>n ≤ 1000</code>.</li>
+	<li>Pentru alte teste în valoare de <code>15</code> puncte, înălțimile castelelor sunt sortate crescător.</li>
+	<li>Pentru alte teste în valoare de <code>30</code> de puncte, nu există restricții suplimentare.</li>
+</ul>
+
+<h1>Exemplu 1</h1>
+
+<p><code>castele.in</code></p>
+
+<pre>7
+3 1 2 1 2 3 3</pre>
+
+<p><code>castele.out</code></p>
+
+<pre>5</pre>
+
+<h3>Explicație</h3>
+
+<p>Avem 7 castele cu înălțimile: <code>3, 1, 2, 1, 2, 3, 3</code>. Pentru a le aduce pe toate la aceeași înălțime, una dintre strategii posibile este să alegem înălțimea finală a castelelor ca fiind <code>2</code> (deși pot exista și alte înălțimi care duc la același număr minim de operații). </p>
+
+<ul>
+	<li>Primul castel (3) necesită 1 operație pentru a ajunge la 2 (înlăturăm o lopată de nisip).</li>
+	<li>Al doilea castel (1) necesită 1 operație pentru a ajunge la 2 (adăugăm o lopată de nisip).</li>
+	<li>Al treilea (2) nu necesită nicio operație, este deja la înălțimea 2.</li>
+	<li>Al patrulea (1) necesită 1 operație pentru a ajunge la 2.</li>
+	<li>Al cincilea (2) este deja la 2.</li>
+	<li>Al șaselea (3) necesită 1 operație pentru a ajunge la 2.</li>
+	<li>Al șaptelea (3) necesită 1 operație pentru a ajunge la 2.</li>
+</ul>
+
+<p>Numărul total de operații este <code>1 + 1 + 0 + 1 + 0 + 1 + 1 = 5</code>.</p>
+
+<h1>Exemplu 2</h1>
+
+<p><code>castele.in</code></p>
+
+<pre>4
+1 1 10 10</pre>
+
+<p><code>castele.out</code></p>
+
+<pre>18</pre>
+
+<h3>Explicație</h3>
+
+Avem 4 castele cu înălțimile: <code>1, 1, 10, 10</code>. De exemplu, dacă alegem ca toate să fie înălțimea 1:
+<ul>
+	<li>Primele două castele (1 și 1) sunt deja la 1, deci <code>0</code> operații.</li>
+	<li>Următoarele două (10 și 10) necesită câte 9 operații fiecare pentru a ajunge la 1 (înlăturăm câte o lopată de nisip de 9 ori pentru fiecare).</li>
+</ul>
+
+<p>Totalul este <code>0 + 0 + 9 + 9 = 18</code> operații, iar acesta este numărul minim.</p>		</article>
+		</body></html>

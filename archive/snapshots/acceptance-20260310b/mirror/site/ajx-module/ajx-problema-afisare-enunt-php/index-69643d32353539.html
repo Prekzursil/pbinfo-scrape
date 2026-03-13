@@ -1,0 +1,92 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2559"><article id="enunt">
+			<p>O companie feroviară a lansat recent un nou prototip de tren, format dintr-un singur vagon cu <code>N</code> scaune. Scaunele sunt numerotate la <code>1</code> la <code>N</code> (numerotarea începe de la partea din față a trenului) și sunt aranjate într-o linie, unul în spatele altuia. Următoarele reguli urmează să fie respectate de fiecare pasager:</p>
+
+<p>1. Pasagerii vor urca în tren doar pe ușa din spate, care este situată după toate scaunele. Odată urcați, pasagerii au dreptul să se deplaseze doar spre partea din față și pot părăsi trenul doar prin ușa din față (care este situată în fața tuturor scaunelor).<br>
+2. Fiecare pasager va ocupa locul situat imediat după ultimul scaun ocupat. Dacă trenul este absolut liber, pasagerul va ocupa scaunul din față (marcat ca locul <code>1</code>).<br>
+3. Nici un pasager nu are dreptul să-și părăsească locul până la debarcare. <br>
+4. La fiecare stație, pasagerii care au ajuns la destinație părăsesc trenul. Dacă există pasageri pe scaune în fața celui care a ajuns la destinație, ei de asemenea vor părăsi trenul, chiar dacă încă nu au ajuns la destinația lor.<br>
+5. Odată ce a ieșit din tren, pasagerul nu mai are dreptul să urce înapoi.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-train-jpg.jpg"></p>
+
+<p>Ruta trenului are <code>M</code> stații, numerotate de la <code>1</code> la <code>M</code>. Trenul se oprește în fiecare stație, începând cu stația <code>1</code> și terminând cu stația <code>M</code>. La toate cele <code>M</code> stații de tren se află în total <code>N</code> pasageri, numerotați de la <code>1</code> la <code>N</code>. Pentru fiecare pasager se cunoaște din timp prețul tichetului, stația de îmbarcare și stația de debarcare.</p>
+
+<p>Compania feroviară  dorește să aibă doar clienți fericiți, care ajung la destinația lor. Pentru a avea doar clienți fericiți, compania a permis conductorului să selecteze pasagerii care se pot îmbarca, precum și ordinea în care li se permite îmbarcarea. Astfel, conductorul poate să decidă să nu permită unor pasageri să urce în tren.</p>
+
+<h1>Cerința</h1>
+
+<p>Determinați profitul maximal care poate fi obținut de companie având doar clienți fericiți, precum și o ordine de îmbarcare validă, care permite obținerea acestui profit.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>train.in</code> conține pe prima linie o pereche de numere <code>N</code> și <code>M</code>. Următoarele <code>N</code> linii descriu datele de călătorie ale fiecărui pasager: câte trei numere întregi  <code>x</code>, <code>y</code> și <code>c</code>, unde <code>x</code> reprezintă stația de îmbarcare, <code>y</code> reprezintă stația de  destinație și <code>c</code> este costul tichetului.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>train.out</code> va avea următorul format: <br>
+1. Prima linie va conține un număr <code>P</code> reprezentând profitul maximal pe care îl poate obține compania feroviară;<br>
+2. Cea de a doua linie va conține un număr <code>Num</code> reprezentând numărul pasagerilor, care vor putea ajunge la destinația lor în condiția unei soluții optimale, adică a unui profit maximal;<br>
+3. Cea de a treia linie va conține indicii pentru fiecare pasager, care ajunge la destinația sa, în ordinea îmbarcării, în soluția optimală determinată. Indicii pasagerilor vor fi separați prin exact un spațiu.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 100000</code></li>
+	<li><code>1 ≤ M ≤ 2 000 000 000</code></li>
+	<li><code>1 ≤ x &lt; y ≤  M</code> pentru toți pasagerii</li>
+	<li><code>1 ≤ c ≤ 10000</code></li>
+	<li>Orice configurație a pasagerilor care produce un profit maximal al companiei este considerată corectă;</li>
+	<li>Pentru fiecare test, veți primi <code>60%</code> punctaj/test pentru scrierea profitului maximal corect <code>P</code> sau <code>100%</code> punctaj/test pentru scrierea corectă a tuturor valorilor solicitate;</li>
+	<li>Pentru <code>10</code> puncte, <code>N ≤ 25</code></li>
+	<li>Pentru <code>30</code> puncte, <code>26 ≤ N ≤ 2500</code></li>
+	<li>Pentru <code>60</code> puncte, <code>2501 ≤ N ≤ 100000</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>train.in</code></p>
+
+<pre>4 8
+2 6 10
+4 5 1
+3 7 10
+1 7 10</pre>
+
+<p><code>train.out</code></p>
+
+<pre>20 
+2
+1 3</pre>
+
+<h3>Explicație</h3>
+
+<p>Răspunsul corect poate fi obținut astfel: <br>
+stația <code>2</code>: pasagerul <code>1</code> urcă în tren <br>
+stația <code>3</code>: pasagerul <code>3</code> urcă în tren<br>
+stația <code>6</code>: pasagerul <code>1</code> coboară din tren<br>
+stația <code>7</code>: pasagerul <code>3</code> coboară din tren</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>train.in</code></p>
+
+<pre>4 10
+1 3 3
+1 10 2
+2 5 3
+1 2 5</pre>
+
+<p><code>train.out</code></p>
+
+<pre>11
+3
+4 1 3</pre>
+
+<h3>Explicație</h3>
+
+<p>Răspunsul corect poate fi obținut astfel: <br>
+stația <code>1</code>: pasagerul <code>4</code> și <code>1</code> urcă în tren <br>
+stația <code>2</code>: pasagerul <code>4</code> coboară din tren, pasagerul <code>3</code> urcă în tren<br>
+stația <code>3</code>: pasagerul <code>1</code> coboară din tren<br>
+stația <code>5</code>: pasagerul <code>3</code> coboară din tren</p>		</article>
+		</body></html>

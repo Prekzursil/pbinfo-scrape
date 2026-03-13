@@ -1,0 +1,91 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1219"><article id="enunt">
+			<p>Ilinca a citit despre criptarea mesajelor, acum dorește să comunice cu prietena ei Miruna numai prin mesaje criptate folosind un sistem propriu de criptare. </p>
+
+<p>Ilinca ştie că fiecare caracter se reprezintă în memoria calculatorului pe <code>8</code> biți, în care se memorează scrierea în baza <code>2</code> a codului <span class="caps">ASCII</span> al caracterului respectiv. Pentru a cripta caracterul, Ilinca foloseşte o matrice pătratică având <code>8</code> linii (numerotate de la <code>0</code> la <code>7</code> de sus în jos) şi <code>8</code> coloane (numerotate de la <code>0</code> la <code>7</code> de la stânga la dreapta). Pe prima linie a matricei Ilinca scrie cei <code>8</code> biţi reprezentând scrierea în baza <code>2</code> a codului <span class="caps">ASCII</span> al caracterului, pe poziţia <code>0</code> fiind scrisă cifra cea mai semnificativă (corespunzătoare lui <code>27</code>). Pe fiecare dintre următoarele <code>7</code> linii din matrice scrie permutarea circulară cu o poziție la stânga a liniei anterioare. Ordonează lexicografic liniile matricei formate și defineşte cript-ul caracterului ca fiind succesi­unea de biți reprezentată de ultima coloană din matrice, parcursă de sus în jos, urmată de indicele liniei din matrice pe care a ajuns după ordonarea lexicografică reprezentarea în baza <code>2</code> a codului <span class="caps">ASCII</span> al caracterului. Dacă există linii egale în matrice, după ordonarea lexicografică acestea îşi vor păstra ordinea relativă iniţială, astfel că linia conţinând reprezentarea în baza <code>2</code> a codului <span class="caps">ASCII</span> al caracterului va fi prima dintre acestea.</p>
+
+<p>Pentru a cripta un mesaj, Ilinca scrie în ordine cript-urile caracterelor din mesajul respectiv.</p>
+
+<p>Miruna cunoaşte sistemul de criptare al Ilincăi, ca urmare ştie să decripteze mesajele primite.</p>
+
+<h1>Cerinţă</h1>
+
+<p>Scrieți un program care să rezolve următoarele două cerinţe:<br>
+1. citește un mesaj şi afişează mesajul criptat conform sistemului Ilincăi;<br>
+2. citeşte un mesaj criptat conform sistemului Ilincăi şi determină mesajul decriptat.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>cript.in</code> conţine pe prima linie un număr natural <code>c</code>, care poate fi <code>1</code> sau <code>2</code>, reprezentând cerinţa ce urmează a fi rezolvată. Pe a doua linie a fişierului se află un șir de caractere.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fişierul de ieşire <code>cript.out</code> va conţine o singură linie pe care va fi scrisă criptarea șirului din fişierul de intrare (dacă <code>c=1</code>), respectiv decriptarea şirului din fişierul de intrare (dacă <code>c=2</code>).</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>Lungimea mesajului necriptat este nenulă şi nu depăşeşte <code>30000</code>.</li>
+	<li>Caracterele din şirul citit au coduri cuprinse între <code>32</code> și <code>127</code>.</li>
+	<li>Spunem că şirul <code>s1</code> precedă în ordinea lexicografică şirul <code>s2</code> dacă există o poziţie <code>k</code> astfel încât <code>s1[i]==s2[i]</code> pentru orice <code>i&lt;k</code> şi <code>s1[k]&lt;s2[k]</code>.</li>
+	<li>Pentru teste valorând 50% din punctaj cerinţa este 1.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>cript.in</code></p>
+
+<pre>1
+AB</pre>
+
+<p><code>cript.out</code></p>
+
+<pre>100010004101000004</pre>
+
+<h3>Explicație</h3>
+
+<p>Caracterul <code>'A'</code>  are codul <span class="caps">ASCII</span> <code>65</code> reprezentarea pe <code>8</code> biți fiind <code>01000001</code></p>
+
+Matricea permutărilor circulare este în stânga, iar în dreapta este matricea cu liniile ordonate lexicografic
+<table><tbody><tr><td>
+
+<p><strong><code>01000001</code></strong><br>
+<code>10000010</code><br>
+<code>00000101</code><br>
+<code>00001010</code><br>
+<code>00010100</code><br>
+<code>00101000</code><br>
+<code>01010000</code><br>
+<code>10100000</code></p>
+
+<p></p></td><td><p></p>
+
+<p><code>00000101</code><br>
+<code>00001010</code><br>
+<code>00010100</code><br>
+<code>00101000</code><br>
+<strong><code>01000001</code></strong><br>
+<code>01010000</code><br>
+<code>10000010</code><br>
+<code>10100000</code></p>
+
+</td></tr></tbody></table>
+
+<p>Linia reprezentării lui <code>'A'</code> are indicele <code>4</code>. Cript-ul caracterului <code>'A'</code>  este <code>100010004</code>.</p>
+
+<p>Se procedează analog pentru <code>'B'</code>.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>cript.in</code></p>
+
+<pre>2
+101110001111000002</pre>
+
+<p><code>cript.out</code></p>
+
+<pre>VI</pre>
+
+<h3>Explicație</h3>
+
+<p><code>101110001</code> este cript-ul caracterului <code>'V'</code>, iar <code>111000002</code> este cript-ul caracterului <code>'I'</code>.</p>		</article>
+		</body></html>

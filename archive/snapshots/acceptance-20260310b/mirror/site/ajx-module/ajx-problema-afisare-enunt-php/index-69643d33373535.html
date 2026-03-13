@@ -1,0 +1,72 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3755"><article id="enunt">
+			<p>Plictisit de filantropie și produs cipuri, William Poartă și-a găsit o nouă pasiune: anchetele epidemiologice. Astfel, el s-a gândit să cerceteze răspândirea unui virus din trecut asupra omenirii, formată din <code>N</code> persoane. William știe pentru fiecare om starea sa finală (infectat sau neinfectat), însă nu știe care dintre oameni au fost infectați inițial, și care au fost infectați de la alte persoane. Pe langă aceasta, el a aflat de la prietenul său Marcel Zahăr și o serie de întâlniri (în ordine cronologică) ce au avut loc între câte două persoane prin care virusul s-a răspândit, în următorul fel: dacă vreunul dintre cei doi vine la întâlnire infectat, atunci acesta îl va infecta și pe celălalt (dacă acesta nu era deja infectat).</p>
+
+<h1>Cerința</h1>
+
+<p>Acum William își pune următoarele întrebări:<br>
+1. Pentru fiecare om, poate acesta să fie unul dintre cei <strong>infectați</strong> inițial?<br>
+2. Pentru fiecare om, poate acesta să fie unul dintre cei <strong>neinfectați</strong> inițial?</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie se găsește un număr întreg <code>C</code>, reprezentând numărul cerinței de rezolvat. Pe cea de-a doua linie se găsesc două numere întregi <code>N</code>, <code>M</code>, reprezentând numărul de persoane, respectiv numărul de întâlniri care au loc. Pe cea de-a treia linie se găsesc <code>N</code> numere (având valori între <code>0</code> și <code>1</code>) separate prin spații, reprezentând <br>
+pentru fiecare om starea sa finală (<code>0</code> – neinfectat, <code>1</code> – infectat). Următoarele <code>M</code> linii reprezintă fiecare câte o întâlnire (în ordine cronologică), având <code>2</code> numere întregi distincte (între <code>1</code> și <code>N</code>) reprezentând cele două persoane care se întâlnesc.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Se va afișa o singură linie conținând <code>N</code> cifre binare neseparate prin spații, reprezentând răspunsul pentru<br>
+respectivul test. Dacă <code>C = 1</code>, se rezolvă prima cerință, iar al <code>i</code>-lea caracter va fi <code>1</code> dacă și numai dacă există un scenariu inițial în care persoana <code>i</code> este infectată care duce la scenariul final dat, altfel va fi <code>0</code>. Dacă <code>C = 2</code>, se rezolvă a doua cerință, iar al <code>i</code>-lea caracter va fi <code>1</code> dacă și numai dacă există un scenariu<br>
+inițial în care persoana <code>i</code> este neinfectată care duce la scenariul final dat, altfel va fi <code>0</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ C ≤ 2</code></li>
+	<li><code>1 ≤ N ≤ 100.000</code></li>
+	<li><code>0 ≤ M ≤ 100.000</code></li>
+	<li>Se garantează că pentru fiecare test există un scenariu posibil inițial care să ducă la scenariul final.</li>
+	<li>Persoanele nu se pot infecta spontan. Acestea pot fi infectate la final doar dacă au fost infectate inițial sau au fost infectate de o altă persoană în urma unei întâlniri.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>1
+6 5
+1 1 0 0 1 1
+4 3
+3 6
+1 2
+5 6
+3 4</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>110010</pre>
+
+<h1>Exemplul 2:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>2
+6 5
+1 1 0 0 1 1
+4 3
+3 6
+1 2
+5 6
+3 4</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>111101</pre>
+
+<h3>Explicații</h3>
+
+<p>Considerăm următoarele două scenarii inițiale: <code>010010</code>, <code>100010</code>. </p>
+
+<p>Se poate observa ușor că ambele scenarii duc la starea finală <code>110011</code> în urma întâlnirilor. Pentru persoanele <code>1</code>, <code>2</code> și <code>5</code> există scenarii în care acestea sunt infectate inițial, și se poate demonstra că pentru niciuna dintre persoanele <code>3</code>, <code>4</code> și <code>6</code> nu există vreun scenariu inițial în care acestea să fie infectate.</p>
+
+<p>Pentru persoanele <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code> și <code>6</code> există scenarii în care acestea sunt neinfectate inițial, și se poate demonstra că pentru persoana <code>5</code> nu există vreun scenariu inițial în care acesta să fie neinfectată.</p>		</article>
+		</body></html>

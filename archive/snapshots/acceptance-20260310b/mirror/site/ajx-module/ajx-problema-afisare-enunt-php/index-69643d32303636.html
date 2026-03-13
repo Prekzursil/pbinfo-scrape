@@ -1,0 +1,89 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2066"><article id="enunt">
+			<p>Pe o foaie de matematică cu <code>N</code> pătrățele orizontale (pe aceeași linie) și <code>M</code> pătrățele verticale (pe aceeași coloană), Alex a pictat nave. Definim o navă linie (L) ca un set de pătrățele umbrite, consecutive pe un rând al foii de matematică. Definim o navă coloană (C) ca un set de pătrățele umbrite, consecutive pe o coloană a foii de matematică. Dimensiunea unei nave este egală cu numărul de pătrățele din care este formată. O navă formată dintr-un singur pătrățel nu este nici linie, nici coloană. Navele pot avea diferite dimensiuni. Două nave diferite nu se ating pe laturi sau colțuri, nu se suprapun și nu au pătrățele comune. Pe foaia de matematică sunt pictate doar nave de cele 3 tipuri: navă linie (L), navă coloană (C) sau navă pătrățel.</p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscându-se <code>M</code>, <code>N</code> și pictura lui Alex, scrieți un program care să determine:</p>
+
+<ol>
+	<li>Numărul de nave formate doar dintr-un singur pătrățel;</li>
+	<li>Numărul de nave linie și numărul de nave coloană, precum și dimensiunile acestora.</li>
+</ol>
+
+<h1>Date de intrare</h1>
+
+<p>Fişierul de intrare <code>boats.in</code> conţine pe prima linie un număr natural <code>P</code> reprezentând cerinţa care trebuie să fie rezolvată (1 sau 2). Pe cea de a doua linie fișierul conține două numere întregi, separate printr-un spațiu, reprezentând valorile M și N din enunț. Pe următoarele <code>M</code> linii se află câte <code>N</code> valori egale cu 0 sau 1, separate prin câte un spațiu (0 – dacă pătrățelul nu face parte dintr-o navă, 1 – în cazul în care pătrățelul este o parte a unei nave).</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă cerința este <code>P=1</code>, atunci pe prima linie a fișierului <code>boats.out</code> va fi scris un număr natural reprezentând numărul de nave formate dintr-un singur pătrățel.</p>
+
+<p>Dacă cerința este <code>P=2</code>, atunci în fișierul <code>boats.out</code> vor fi scrise, pe câte o linie, separate prin câte un spațiu, trei valori: caracterul <code>L</code> urmat de numerele <code>d</code> și <code>c</code>, în ordine crescătoare după valoarea <code>d</code>, unde <code>d</code> – reprezintă lungimea navei (numărul de pătrățele) iar <code>c</code> – numărul de nave linie de lungime <code>d</code>. Apoi, pe fiecare dintre liniile următoare vor fi scrise, separate prin câte un spațiu, caracterul <code>C</code> urmat de două numere: <code>d</code> și <code>c</code>, în ordine crescătoare după <code>d</code>, unde <code>d</code> – reprezintă lungimea navei (numărul de pătrățele) și <code>c</code> – numărul de nave coloană de lungime <code>d</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ M ≤ 1000</code>; <code>2 ≤ N ≤ 1000</code></li>
+	<li>Se garantează existența a cel puțin unei nave.</li>
+	<li>Pentru rezolvarea corectă a primei cerinţe se va acorda 20% din punctaj, iar pentru rezolvarea corectă a celei de a doua cerințe se va acorda 80% din punctaj.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>boats.in</code></p>
+
+<pre>1
+12 12
+0 0 0 0 0 0 0 0 0 0 0 1
+0 1 1 1 1 1 0 0 0 0 0 1
+0 0 0 0 0 0 0 1 0 0 0 1
+0 1 0 0 0 0 0 0 0 0 0 0
+0 1 0 0 0 0 0 0 0 0 0 0
+0 1 0 1 1 1 1 1 1 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 1 0 0 0 0 
+0 0 0 0 0 0 0 1 0 0 0 0 
+0 0 0 0 0 0 0 1 0 0 0 0 
+0 0 0 0 0 0 0 1 0 0 0 0 
+0 1 1 0 0 0 0 0 0 0 0 0</pre>
+
+<p><code>boats.out</code></p>
+
+<pre>1</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă doar cerința 1. Există o singură navă formatată dintr-un singur pătrățel, cea de la coordonatele <code>3 8</code>.</p>
+
+
+<h1>Exemplul 2</h1>
+
+<p><code>boats.in</code></p>
+
+<pre>2
+12 12
+0 0 0 0 0 0 0 0 0 0 0 1
+0 1 1 1 1 1 0 0 0 0 0 1
+0 0 0 0 0 0 0 1 0 0 0 1
+0 1 0 0 0 0 0 0 0 0 0 0
+0 1 0 0 0 0 0 0 0 0 0 0
+0 1 0 1 1 1 1 1 1 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 1 0 0 0 0 
+0 0 0 0 0 0 0 1 0 0 0 0 
+0 0 0 0 0 0 0 1 0 0 0 0 
+0 0 0 0 0 0 0 1 0 0 0 0 
+0 1 1 0 0 0 0 0 0 0 0 0</pre>
+
+<p><code>boats.out</code></p>
+
+<pre>L 2 1
+L 5 1
+L 6 1
+C 3 2
+C 4 1</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă doar cerința 2. Există <code>3</code> nave linie: o navă linie de lungime <code>2</code>, o navă linie de lungime <code>5</code> și o navă linie de lungime <code>6</code>. Există <code>3</code> nave coloană: <code>2</code> nave coloană de lungime <code>3</code>, o navă coloană de lungime <code>4</code>.</p>		</article>
+		</body></html>

@@ -1,0 +1,74 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4619"><article id="enunt">
+			<p>Alex este un băiat căruia îi place să citească și care contorizează cât de mult a citit pe parcursul ultimelor <code>n</code> zile. Mai precis, el și-a notat câte pagini a citit în fiecare dintre acestea. Chiar dacă pasiunea lui este literatura, își dorește să progreseze și la informatică. Alex și-a pus două întrebări legate de șirul format din numărul de pagini citite de el în ultimele <code>n</code> zile, dar după ce a petrecut câteva zile gândindu-se la ele și-a dat seama că sunt prea dificile pentru el. Ajutați-l să găsească răspunsurile!</p>
+
+<h1>Cerința</h1>
+
+<p>Fie numărul <code>n</code>, numărul <code>p</code> și acel șir de valori notate de Alex în cele <code>n</code> zile. Determinați răspunsul la următoarele întrebări care îl frământă pe Alex:</p>
+
+<p>1) Câte triplete de numere aflate pe poziții consecutive în șirul dat îndeplinesc condiția ca cel mai mare divizor comun al lor să aibă cel mult <code>p</code> divizori naturali?<br>
+2) Care este lungimea maximă a unei secvențe din șirul dat, în care cel mai mare divizor comun al oricărui triplet de numere situate pe poziții consecutive are cel mult <code>p</code> divizori naturali?</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>avid.in</code> conține pe prima linie un număr natural <code>C</code>, având valoarea <code>1</code> sau <code>2</code>, reprezentând numărul întrebării. Pe a doua linie se află două numere naturale <code>n</code> și <code>p</code>, în această ordine, cu semnificația din enunț. A treia linie din fișier conține <code>n</code> numere naturale reprezentând șirul de valori notate în cele <code>n</code> zile. Numerele aflate pe aceeași linie a fișierului sunt separate prin câte un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>avid.out</code> va conține un singur număr, reprezentând răspunsul pentru întrebarea dată, <code>C</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ C ≤ 2</code></li>
+	<li><code>3 ≤ n ≤ 1.000.000</code></li>
+	<li><code>2 ≤ p ≤ 100</code></li>
+	<li><code>1 ≤ a</code><sub><code>i</code></sub> <code>≤ 5.000.000</code>, unde <code>a</code><sub><code>i</code></sub> este numărul de pagini citite de Alex în ziua <code>i</code> (Alex citește la o viteză impresionantă)</li>
+	<li>Pentru prima cerință, se garantează că există cel puțin un triplet cu proprietatea indicată.</li>
+	<li>Pentru a doua cerință, se garantează că există cel puțin o secvență validă cu proprietatea indicată.</li>
+	<li>Pentru 12 puncte, <code>C = 1</code>, <code>n ≤ 1000</code></li>
+	<li>Pentru 17 puncte, <code>C = 1</code>, <code>1000 &lt; n ≤ 1.000.000</code></li>
+	<li>Pentru 29 puncte, <code>C = 2</code>, <code>n ≤ 1000</code></li>
+	<li>Pentru 42 puncte, <code>C = 2</code>, <code>1000 &lt; n ≤ 1.000.000</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>avid.in</code></p>
+
+<pre>1
+10 3
+12 48 36 6 3 7 12 16 24 3</pre>
+
+<p><code>avid.out</code></p>
+
+<pre>6</pre>
+
+<h3>Explicație</h3>
+
+<p><code>cmmdc(12, 48, 36) = 12</code>, care are <code>6</code> divizori naturali.<br>
+<code>cmmdc(48, 36, 6) = 6</code>, care are <code>4</code> divizori naturali.<br>
+<code>cmmdc(36, 6, 3) = 3</code>, care are <code>2</code> divizori naturali.<br>
+<code>cmmdc(6, 3, 7) = 1</code>, care are <code>1</code> divizor natural.<br>
+<code>cmmdc(3, 7, 12) = 1</code>, care are <code>1</code> divizor natural.<br>
+<code>cmmdc(7, 12, 16) = 1</code>, care are <code>1</code> divizor natural.<br>
+<code>cmmdc(12, 16, 24) = 4</code>, care are <code>3</code> divizori naturali.<br>
+<code>cmmdc(16, 24, 3) = 1</code>, care are <code>1</code> divizor natural.</p>
+
+<p>Deci, <code>6</code> dintre cele <code>8</code> triplete au cel mult <code>p=3</code> divizori naturali.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>avid.in</code></p>
+
+<pre>2
+7 2
+12 48 36 6 3 7 12</pre>
+
+<p><code>avid.out</code></p>
+
+<pre>5</pre>
+
+<h3>Explicație</h3>
+
+<p>Pentru că <code>p = 2</code>, cea mai lungă secvență este <code>36 6 3 7 12</code>.</p>		</article>
+		</body></html>

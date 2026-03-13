@@ -1,0 +1,49 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=613"><article id="enunt">
+			<p>Se dau <code>N</code> puncte în spațiul 3D prin coordonatele lor. Dorim să amplasăm două cuburi cu laturile paralele cu axele de coordonate, astfel încât fiecare punct să se afle pe una dintre feţele sau în interiorul a cel puțin unuia dintre cuburi. În plus, latura cubului de latură maximă dintre cele două trebuie să fie minimă.</p>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care să determine latura cubului de latură maximă pentru două cuburi care realizează acoperirea mulțimii de puncte în condiţiile de mai sus.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fişierului cuburi.in se află <code>10</code> numere naturale <code>N</code>, <code>Ax</code>, <code>Bx</code>, <code>Cx</code>, <code>Ay</code>, <code>By</code>, <code>Cy</code>, <code>Az</code>, <code>Bz</code>, <code>Cz</code>. Coordonatele celor N puncte se generează după următoarele reguli:</p>
+
+<ul>
+	<li><code>X1 = 1</code>, <code>Xi = (Xi-1 * Ax + Bx * i) mod Cx</code>, pentru <code>i = 2...n</code></li>
+	<li><code>Y1 = 1</code>, <code>Yi = (Yi-1 * Ay + By * i) mod Cy</code>, pentru <code>i = 2...n</code></li>
+	<li><code>Z1 = 1</code>, <code>Zi = (Zi-1 * Az + Bz * i) mod Cz</code>, pentru <code>i = 2...n</code></li>
+</ul>
+
+<p>Al <code>i</code>-lea punct are coordonatele <code>(Xi, Yi, Zi)</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fişierul de ieşire <code>cuburi.out</code> va conţine un singur număr natural reprezentând latura cubului de latură maximă.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 2*1.000.000</code></li>
+	<li><code>1 ≤ Ax, Ay, Az ≤ 1000</code></li>
+	<li><code>1 ≤ Bx, By, Bz ≤ 1010</code></li>
+	<li><code>2 ≤ Cx, Cy, Cz ≤ 1015</code></li>
+	<li>Un punct aflat pe o față a cubului (inclusiv pe o muchie sau într-un colț al cubului) se consideră în interiorul cubului</li>
+	<li>Pentru teste în valoare de <code>30</code> de puncte <code>N ≤ 100</code> și <code>Cx, Cy, Cz ≤ 20</code></li>
+	<li>Pentru teste în valoare de <code>60</code> de puncte <code>N ≤ 10.000</code></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>cuburi.in</code></p>
+
+<pre>6 2 3 10 3 1 9 5 7 8</pre>
+
+<p><code>cuburi.out</code></p>
+
+<pre>5</pre>
+
+<h1>Explicație</h1>
+
+<p>Cele 6 puncte au următoarele coordonate: <code>(1,1,1)</code>, <code>(8,5,3)</code>, <code>(5,0,4)</code>, <code>(2,4,0)</code>, <code>(9,8,3)</code>, <code>(6,3,1)</code>. O soluție posibilă este să amplasăm primul cub astfel încât două dintre colțurile opuse să aibă coordonatele <code>(0, 0, 0)</code> respectiv <code>(5,5,5)</code> iar al doilea cub să aibă două colțuri opuse la coordonatele <code>(6,3,1)</code>, respectiv <code>(11,8,6)</code>.</p>		</article>
+		</body></html>

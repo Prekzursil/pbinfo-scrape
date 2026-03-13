@@ -1,0 +1,305 @@
+{
+  "id": 1692,
+  "slug": "calafat",
+  "name": "Calafat",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1692/calafat",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 116,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=116"
+    },
+    {
+      "id": 150,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=150"
+    }
+  ],
+  "tags": [
+    "Arbori de intervale",
+    "Arbori indexați binar",
+    "Șmenul lui Batog (Square Root Decomposition)"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Se dă un șir format din <code>N</code> numere naturale. Pentru fiecare valoare distinctă dintr-o subsecvență cuprinsă între doi indici <code>st</code> si <code>dr</code> considerăm distanța dintre indicii primei și ultimei apariții ale acesteia în cadrul subsecvenței. Dându-se <code>M</code> subsecvențe de forma <code>[st, dr]</code>, se cere să se calculeze suma distanțelor corespunzătoare tuturor valorilor distincte din subsecvență.</p>",
+      "text": "Se dă un șir format din N numere naturale. Pentru fiecare valoare distinctă dintr-o subsecvență cuprinsă între doi indici st si dr considerăm distanța dintre indicii primei și ultimei apariții ale acesteia în cadrul subsecvenței. Dându-se M subsecvențe de forma [st, dr], se cere să se calculeze suma distanțelor corespunzătoare tuturor valorilor distincte din subsecvență."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>calafat.in</code> conține pe prima linie două numere natural <code>N</code> și <code>M</code>. Pe a doua linie se vor afla cele <code>N</code> numere din șirul dat. Pe următoarele <code>M</code> linii se vor afla câte două numere <code>st</code> și <code>dr</code>, cu semnificația că vrem să calculăm suma menționată mai sus pentru subsecvența <code>[st,dr]</code>.</p>",
+      "text": "Fișierul de intrare calafat.in conține pe prima linie două numere natural N și M. Pe a doua linie se vor afla cele N numere din șirul dat. Pe următoarele M linii se vor afla câte două numere st și dr, cu semnificația că vrem să calculăm suma menționată mai sus pentru subsecvența [st,dr]."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>calafat.out</code> va conține <code>M</code> numere naturale, câte unul pe fiecare linie, reprezentând cele <code>M</code> sume cerute.</p>",
+      "text": "Fișierul de ieșire calafat.out va conține M numere naturale, câte unul pe fiecare linie, reprezentând cele M sume cerute."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N, M ≤ 200000</code></li>\n\t<li><code>1 ≤ st ≤ dr ≤ N</code></li>\n\t<li>Valorile din șir se vor afla în intervalul <code>[1, N]</code></li>\n\t<li>Pentru 20% din teste se garantează că <code>N, M ≤ 1000</code></li>\n\t<li>Pentru alte 25% din teste se garantează că <code>N, M ≤ 35 000</code> iar numărul de elemente distincte din șir este maxim <code>100</code>.</li>\n\t<li>Pentru alte 25% din teste se garantează că <code>N, M ≤ 70 000</code></li>\n</ul>",
+      "text": "1 ≤ N, M ≤ 200000 1 ≤ st ≤ dr ≤ N Valorile din șir se vor afla în intervalul [1, N] Pentru 20% din teste se garantează că N, M ≤ 1000 Pentru alte 25% din teste se garantează că N, M ≤ 35 000 iar numărul de elemente distincte din șir este maxim 100. Pentru alte 25% din teste se garantează că N, M ≤ 70 000"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>calafat.in</code></p><pre>7 3\n1 3 1 2 2 1 3\n2 4\n2 7\n3 6</pre><p><code>calafat.out</code></p><pre>0\n9\n4</pre><h3>Explicație</h3><p>În prima subsecvență fiecare valoare apare o singură dată, deci suma diferențelor este <code>0</code>.</p><p>În a doua subsecvență:</p><ul>\n\t<li>Valoarea <code>3</code> apare la indicii <code>2</code> și <code>7</code> rezultând diferența <code>7-2=5</code></li>\n\t<li>Valoarea <code>1</code> apare la indicii <code>3</code> și <code>6</code> =&gt; diferența <code>6–3=3</code></li>\n\t<li>Valoarea <code>2</code> apare la indicii <code>4</code> și <code>5</code> =&gt; diferența <code>5-4=1</code></li>\n</ul><p>Suma diferențelor este <code>9</code>.</p><p>În a treia subsecvență:</p><ul>\n\t<li>Valoarea <code>1</code> apare la indicii <code>3</code> și <code>6</code> =&gt; diferența <code>6–3=3</code></li>\n\t<li>Valoarea <code>2</code> apare la indicii <code>4</code> și <code>5</code> =&gt; diferența <code>5-4=1</code></li>\n</ul><p>Suma diferențelor este <code>4</code>.</p>",
+      "text": "calafat.in7 3 1 3 1 2 2 1 3 2 4 2 7 3 6calafat.out0 9 4ExplicațieÎn prima subsecvență fiecare valoare apare o singură dată, deci suma diferențelor este 0.În a doua subsecvență: Valoarea 3 apare la indicii 2 și 7 rezultând diferența 7-2=5 Valoarea 1 apare la indicii 3 și 6 => diferența 6–3=3 Valoarea 2 apare la indicii 4 și 5 => diferența 5-4=1 Suma diferențelor este 9.În a treia subsecvență: Valoarea 1 apare la indicii 3 și 6 => diferența 6–3=3 Valoarea 2 apare la indicii 4 și 5 => diferența 5-4=1 Suma diferențelor este 4."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "În prima subsecvență fiecare valoare apare o singură dată, deci suma diferențelor este 0."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N, M ≤ 200000",
+    "1 ≤ st ≤ dr ≤ N",
+    "Valorile din șir se vor afla în intervalul [1, N]",
+    "Pentru 20% din teste se garantează că N, M ≤ 1000",
+    "Pentru alte 25% din teste se garantează că N, M ≤ 35 000 iar numărul de elemente distincte din șir este maxim 100.",
+    "Pentru alte 25% din teste se garantează că N, M ≤ 70 000"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q51908ecba1.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "11",
+    "intrare/ieșire": "calafat.in / calafat.out",
+    "limită timp": "1.5 secunde",
+    "limită memorie": "64 MB / 64 MB",
+    "sursa problemei": "ONI 2016, clasele XI-XII",
+    "autor": "Denis-Gabriel Mită",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 1.5,
+  "memoryLimitMb": 64,
+  "author": "Denis-Gabriel Mită",
+  "sourceAttribution": "ONI 2016, clasele XI-XII",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1692/calafat"
+}

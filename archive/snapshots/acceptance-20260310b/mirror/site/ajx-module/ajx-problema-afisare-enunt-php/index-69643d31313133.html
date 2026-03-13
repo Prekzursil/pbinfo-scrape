@@ -1,0 +1,72 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1113"><article id="enunt">
+			<p>Suleiman I s-a confruntat în anul 1548 cu mari probleme interne. În acel an, el a primit vestea că într-una din regiunile Imperiului se pregăteşte o răscoală. Harta Imperiului este realizată sub forma unui tablou bidimensional cu <code>n</code> linii şi <code>m</code> coloane, iar fiecare element al tabloului corespunde unei regiuni a Imperiului. În fiecare regiune erau deja cantonaţi soldaţi, dar pentru a preîntâmpina răscoala sultanul decide ca toţi cei <code>k</code> soldaţi din Garda Imperială să fie trimişi în regiuni, întărindu-le pe cele păzite de mai puţini soldaţi. Distribuirea lor respectă următoarele reguli:</p>
+
+<ul>
+	<li>Dacă există o singură regiune cu număr de soldaţi mai mic decât al tuturor celorlalte regiuni, trimite un soldat în această regiune.</li>
+	<li>Dacă există mai multe regiuni cu acelaşi număr minim de soldaţi, trimite un soldat în regiunea care iniţial avea un număr mai mic de soldaţi. Dacă mai multe regiuni aveau acelaşi număr iniţial de soldaţi, se trimite un soldat în regiunea cu indicele liniei mai mic, iar dacă regiunile sunt pe aceeaşi linie, în regiunea cu indicele coloanei mai mic.</li>
+</ul>
+
+<p>Suleiman continuă distribuirea soldaţilor din garda imperială în regiuni conform celor precizate anterior, până la epuizarea soldaţilor din Garda Imperială.</p>
+
+<h1>Cerinţe</h1>
+
+<p>Cunoscându-se <code>n</code>, <code>m</code> şi <code>k</code> reprezentând numărul de linii, numărul de coloane, respectiv numărul de soldaţi din Garda Imperială, precum şi numărul de soldaţi existent deja în regiunile Imperiului, să se determine:<br>
+a) numărul de regiuni din Imperiu în care vor fi trimişi soldaţii din Garda Imperială, respectiv numărul minim de soldaţi care se vor găsi într-o regiune, după trimiterea soldaţilor din Garda Imperială;<br>
+b) distanța maximă între două regiuni în care au fost trimiși soldaţi ai Gărzii Imperiale. Distanța între o regiune <code>A</code> și o regiune <code>B</code> se calculează folosind formula <code>|LA- LB| + |CA- CB|</code>, unde <code>(LA ,CA)</code> reprezintă coordonatele regiunii <code>A</code>, precizate prin numărul liniei și coloanei, respectiv <code>(LB ,CB)</code> reprezintă coordonatele regiunii <code>B</code>, precizate prin numărul liniei și coloanei.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>rascoala.in</code> conține pe prima linie un număr natural <code>p</code> care poate fi <code>1</code> sau <code>2</code>. Pe a doua linie a fişierului se găsesc trei valori naturale <code>n m k</code>, despărţite prin câte un  spaţiu,&nbsp;cu semnificația din enunț. Pe fiecare dintre următoarele <code>n</code> linii se află câte <code>m</code> numere&nbsp;naturale, separate prin câte un spaţiu, reprezentând numărul de soldaţi aflaţi iniţial în fiecare regiune.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă valoarea lui <code>p</code> este <code>1</code>, atunci se va rezolva numai punctul a) din cerință. În acest caz, fişierul de ieşire <code>rascoala.out</code> va conţine două valori naturale, fiecare pe câte un rând, reprezentând în ordine, numărul de regiuni în care a trimis Suleiman soldaţii din Garda Imperială, respectiv, numărul minim de soldaţi care se află într-o regiune după trimiterea soldaţilor din Garda Imperială.</p>
+
+<p>Dacă valoarea lui <code>p</code> este <code>2</code>, atunci se va rezolva numai punctul b) din cerință. În acest caz, fişierul de ieşire <code>rascoala.out</code> va conţine un singur număr natural, reprezentând distanţa maximă între două regiuni în care au fost trimiși soldaţi ai Gărzii Imperiale.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n, m ≤ 500</code>;</li>
+	<li><code>1 ≤ k ≤ 1 000 000 000</code>;</li>
+	<li>numărul iniţial de soldaţi din orice regiune este un număr natural nenul ce nu depăşește <code>1 000 000</code>;</li>
+	<li>40% din teste vor avea pe prima linie valoarea <code>1</code>, iar restul de 60% din teste vor avea pe prima linie valoarea <code>2</code>.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>rascoala.in</code></p>
+
+<pre>1 
+3 4 6
+5 3 4 6 
+5 5 8 5 
+9 6 8 7</pre>
+
+<p><code>rascoala.out</code></p>
+
+<pre>3
+5</pre>
+
+<h1>Explicație</h1>
+
+<p>Se trimite un soldat în regiunea <code>(1,2)</code>, obținând două regiuni cu câte <code>4</code> soldaţi. Se trimite un soldat în regiunea <code>(1,2)</code>, (număr inițial de soldaţi minim), apoi un soldat în regiunea <code>(1,3)</code>. Cei trei soldaţi rămaşi vor fi trimişi astfel: primul în regiunea <code>(1,2)</code>, al doilea în regiunea <code>(1,3)</code>, iar al treilea în regiunea <code>(1,1)</code>. </p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>rascoala.in</code></p>
+
+<pre>2 
+3 4 6
+5 3 4 6 
+5 5 8 5 
+9 6 8 7</pre>
+
+<p><code>rascoala.out</code></p>
+
+<pre>2</pre>
+
+<h1>Explicație</h1>
+
+<p>Distanţa maximă va fi <code>2</code> între regiunile <code>(1, 1)</code> şi <code>(1,3)</code>.</p>		</article>
+		</body></html>

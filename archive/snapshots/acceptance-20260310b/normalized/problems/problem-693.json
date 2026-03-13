@@ -1,0 +1,305 @@
+{
+  "id": 693,
+  "slug": "sahara",
+  "name": "Sahara",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/693/sahara",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 91,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=91"
+    },
+    {
+      "id": 115,
+      "name": "Diverse",
+      "slug": "diverse",
+      "href": "/?pagina=probleme-lista&tag=115"
+    }
+  ],
+  "tags": [
+    "Smenul lui Mars (Difference Arrays)",
+    "Fill"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Să se determine aria maximă a unei suprafețe conexe fertile. Prin aria unei suprafețe înțelegem numărul de pătrate ce compun suprafața. Orice două pătrate fertile care au o latură comună fac parte din aceeaşi suprafaţă conexă fertilă.</p>",
+      "text": "Să se determine aria maximă a unei suprafețe conexe fertile. Prin aria unei suprafețe înțelegem numărul de pătrate ce compun suprafața. Orice două pătrate fertile care au o latură comună fac parte din aceeaşi suprafaţă conexă fertilă."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fişierul de intrare <code>sahara.in</code> conţine pe prima linie trei numere naturale <code>N M Q</code> despărțite prin câte un spațiu, cu semnificația din enunț.</p><p>Pe cea de-a doua linie a fișierului se găsește un număr natural <code>T</code>. Pe fiecare dintre următoarele <code>T</code> linii se află descrierea parcelelor udate sub forma: <code>x1 y1 x2 y2 q</code> , adică cinci numere naturale despărțite prin spațiu, unde  <code>x1 y1 x2 y2</code> reprezintă coordonatele colțurilor stânga-sus, respectiv dreapta-jos ale parcelei,  <code>q2</code>  cantitatea de apă cu care va fi irigat fiecare pătrat al parcelei.</p>",
+      "text": "Fişierul de intrare sahara.in conţine pe prima linie trei numere naturale N M Q despărțite prin câte un spațiu, cu semnificația din enunț.Pe cea de-a doua linie a fișierului se găsește un număr natural T. Pe fiecare dintre următoarele T linii se află descrierea parcelelor udate sub forma: x1 y1 x2 y2 q , adică cinci numere naturale despărțite prin spațiu, unde x1 y1 x2 y2 reprezintă coordonatele colțurilor stânga-sus, respectiv dreapta-jos ale parcelei, q2 cantitatea de apă cu care va fi irigat fiecare pătrat al parcelei."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fişierul de ieşire <code>sahara.out</code> va conține o singură valoare ce reprezintă aria maximă a unei suprafețe conexe fertile.</p>",
+      "text": "Fişierul de ieşire sahara.out va conține o singură valoare ce reprezintă aria maximă a unei suprafețe conexe fertile."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2 ≤ N, M ≤ 1000</code></li>\n\t<li><code>1 ≤ x1 ≤ x2 ≤ N, 1 ≤ y1 ≤ y2 ≤ M</code></li>\n\t<li><code>1 ≤ q ≤ 1 000</code></li>\n\t<li><code>1 ≤ Q ≤ 10 000</code></li>\n\t<li><code>1 ≤ T ≤ 50 000</code></li>\n\t<li>Inițial zona deșertică nu conține ”apă”;</li>\n\t<li>Pot exista suprafeţe conexe fertile formate dintr-un singur pătrat fertil;</li>\n\t<li>Parcelele se pot suprapune.</li>\n</ul>",
+      "text": "2 ≤ N, M ≤ 1000 1 ≤ x1 ≤ x2 ≤ N, 1 ≤ y1 ≤ y2 ≤ M 1 ≤ q ≤ 1 000 1 ≤ Q ≤ 10 000 1 ≤ T ≤ 50 000 Inițial zona deșertică nu conține ”apă”; Pot exista suprafeţe conexe fertile formate dintr-un singur pătrat fertil; Parcelele se pot suprapune."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>sahara.in</code></p><pre>8 7 5\n7\n1 1 3 6 1\n4 2 5 7 2\n2 3 4 7 3\n1 2 4 3 3\n5 1 6 3 4\n5 5 7 6 2\n6 4 8 7 3</pre><p><code>sahara.out</code></p><pre>10</pre>",
+      "text": "sahara.in8 7 5 7 1 1 3 6 1 4 2 5 7 2 2 3 4 7 3 1 2 4 3 3 5 1 6 3 4 5 5 7 6 2 6 4 8 7 3sahara.out10"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p>Cantitatea de apă acumulată în solul regiunii este:</p><table>\n\t\t<tbody><tr>\n\t\t\t<td>1</td>\n\t\t\t<td> 4</td>\n\t\t\t<td> 4</td>\n\t\t\t<td> 1</td>\n\t\t\t<td> 1</td>\n\t\t\t<td> 1</td>\n\t\t\t<td> 0</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td>1</td>\n\t\t\t<td> 4</td>\n\t\t\t<td><strong>7</strong></td>\n\t\t\t<td> 4</td>\n\t\t\t<td> 4</td>\n\t\t\t<td> 4</td>\n\t\t\t<td> 3</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td>1</td>\n\t\t\t<td> 4</td>\n\t\t\t<td><strong>7</strong></td>\n\t\t\t<td> 4</td>\n\t\t\t<td> 4</td>\n\t\t\t<td> 4</td>\n\t\t\t<td> 3</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td>0</td>\n\t\t\t<td> <strong>5</strong></td>\n\t\t\t<td><strong>8</strong></td>\n\t\t\t<td> <strong>5</strong></td>\n\t\t\t<td> <strong>5</strong></td>\n\t\t\t<td> <strong>5</strong></td>\n\t\t\t<td> <strong>5</strong></td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td>4</td>\n\t\t\t<td> <strong>6</strong></td>\n\t\t\t<td> <strong>6</strong></td>\n\t\t\t<td> 2</td>\n\t\t\t<td> 4</td>\n\t\t\t<td> 4</td>\n\t\t\t<td> 2</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td>4</td>\n\t\t\t<td> 4</td>\n\t\t\t<td> 4</td>\n\t\t\t<td> 3</td>\n\t\t\t<td> <strong>5</strong></td>\n\t\t\t<td> <strong>5</strong></td>\n\t\t\t<td> 3</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td>0</td>\n\t\t\t<td> 0</td>\n\t\t\t<td> 0</td>\n\t\t\t<td> 3</td>\n\t\t\t<td> <strong>5</strong></td>\n\t\t\t<td> <strong>5</strong></td>\n\t\t\t<td> 3</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td>0</td>\n\t\t\t<td> 0</td>\n\t\t\t<td> 0</td>\n\t\t\t<td> 3</td>\n\t\t\t<td> 3</td>\n\t\t\t<td> 3</td>\n\t\t\t<td> 3</td>\n\t\t</tr>\n</tbody></table><p>Aria maximă a unei suprafețe fertile este egală cu <code>10</code>. Suprafața se consideră fertilă dacă acumulează cel puțin <code>5</code> litri de apă. </p>",
+      "text": "Cantitatea de apă acumulată în solul regiunii este: 1 4 4 1 1 1 0 1 4 7 4 4 4 3 1 4 7 4 4 4 3 0 5 8 5 5 5 5 4 6 6 2 4 4 2 4 4 4 3 5 5 3 0 0 0 3 5 5 3 0 0 0 3 3 3 3 Aria maximă a unei suprafețe fertile este egală cu 10. Suprafața se consideră fertilă dacă acumulează cel puțin 5 litri de apă."
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "2 ≤ N, M ≤ 1000",
+    "1 ≤ x1 ≤ x2 ≤ N, 1 ≤ y1 ≤ y2 ≤ M",
+    "1 ≤ q ≤ 1 000",
+    "1 ≤ Q ≤ 10 000",
+    "1 ≤ T ≤ 50 000",
+    "Inițial zona deșertică nu conține ”apă”;",
+    "Pot exista suprafeţe conexe fertile formate dintr-un singur pătrat fertil;",
+    "Parcelele se pot suprapune."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q74d9f46115.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "10",
+    "intrare/ieșire": "sahara.in / sahara.out",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "64 MB / 64 MB",
+    "sursa problemei": "Lot Juniori, Sovata, 2014",
+    "autor": "Eugen Nodea",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 64,
+  "author": "Eugen Nodea",
+  "sourceAttribution": "Lot Juniori, Sovata, 2014",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/693/sahara"
+}

@@ -1,0 +1,72 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4118"><article id="enunt">
+			<p>În tărâmul <span class="caps">ONI</span> se află <code>N</code> regate legate între ele prin <code>M</code> muchii bidirecționale. Se garantează că se poate ajunge de la orice regat la oricare alt regat folosind aceste muchii. Aceste regate vor să facă alianțe între ele și se vor folosi de puncte de frontieră pentru a realiza acest lucru.</p>
+
+<p>Fiecare muchie <code>i</code>, unde <code>1 ≤ i ≤ M</code>, are asociat un număr natural <code>c[i]</code> reprezentând costul construcției unui punct de frontieră pe aceasta. Mai mult decât atât, fiecare regat <code>i</code>, unde <code>1 ≤ i ≤ N</code>, are asociat un număr natural <code>r[i]</code> reprezentând costul construcției unui punct de frontieră la intrarea acestuia.</p>
+
+<p>Pentru ca regatul <code>X</code> să intre într-o alianță cu regatul <code>Y</code>, unde <code>1 ≤ X, Y ≤ N, X ≠ Y</code>, acesta are două opțiuni:</p>
+
+<ul>
+	<li>construiește un punct de frontieră pe <strong>o singură</strong> muchie <code>i</code> cu cost <code>c[i]</code>, astfel încât <strong>orice drum</strong> de la <code>X</code> la <code>Y</code> trece prin acest punct de frontieră;</li>
+	<li>construiește un punct de frontieră la intrarea regatului său (regatului <code>X</code>) cu cost <code>r[X]</code>.</li>
+</ul>
+
+<p>Evident, regatul <code>X</code> va alege costul minim pentru a intra într-o alianță cu regatul <code>Y</code>. Vom nota acest cost minim cu <code>Cost(X, Y)</code>. <strong>Atenție</strong>, costul ca regatul <code>X</code> să intre într-o alianță cu regatul <code>Y</code> poate fi diferit de costul ca regatul <code>Y</code> să intre într-o alianță cu regatul <code>X</code>!</p>
+
+<p>Pentru ca regatul <code>X</code> să fie într-o <strong>alianță perfectă</strong> acesta trebuie să facă alianță cu toate celalate regate. </p>
+
+<p><strong>Atenție</strong>, în formarea unei alianțe nu se iau în considerare punctele de frontieră construite în formarea altor alianțe. Cu alte cuvinte, <code>Cost(X, Y)</code> se calculează independent pentru fiecare pereche <code>(X, Y)</code>!</p>
+
+<h1>Cerința</h1>
+
+<p>Pentru fiecare regat trebuie să calculați costul pe care acesta trebuie să-l plătească pentru a fi într-o alianță perfectă. Cu alte cuvinte, pentru fiecare regat <code>i</code>, unde <code>1 ≤ i ≤ N</code>, trebuie să calculați \( \sum_{j = 1, j \neq i}^{N} \mathit{Cost}(i, j) \). </p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului de intrare <code>regate.in</code> se află <code>N</code> și <code>M</code>, numărul de regate, respectiv, numărul de muchii bidirecționale. Pe a doua linie se găsesc numerele <code>r[1]</code>, …, <code>r[N]</code>, separate prin spații, unde <code>r[i]</code> reprezintă costul construcției unui punct de frontieră la intrarea regatului <code>i</code>. Pe următoarele <code>M</code> linii se află câte trei numere naturale <code>a[i]</code>, <code>b[i]</code>, <code>c[i]</code>, separate prin spații, <code>1 ≤ i ≤ M</code>, semnificând că există o muchie bidirecțională între regatul <code>a[i]</code> și regatul <code>b[i]</code>, iar <code>c[i]</code> reprezintă costul construcției unui punct de frontieră pe muchia <code>i</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>În fișierul de ieșire <code>regate.out</code> se vor afișa <code>N</code> linii. Fiecare linie <code>i</code> va conține un singur număr întreg, reprezentând costul ce trebuie plătit pentru ca regatul <code>i</code> să fie într-o alianță perfectă, cu alte cuvinte, \( \sum_{j = 1, j \neq i}^{N} \mathit{Cost}(i, j) \).</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 200.000</code></li>
+	<li><code>1 ≤ M ≤ 200.000</code></li>
+	<li><code>1 ≤ c[i]≤ 1.000.000.000</code></li>
+	<li><code>1 ≤ r[i] ≤ 1.000.000.000</code></li>
+	<li><code>1 ≤ a[i], b[i] ≤ N</code>, <code>a[i] ≠ b[i]</code> (adică nu există muchie de la un regat la el insuși)</li>
+	<li>Între două regate poate exista cel mult o muchie</li>
+	<li>Datorită dimensiunilor foarte mari, doar o parte din teste au putut fi folosite.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>regate.in</code></p>
+
+<pre>5 5
+8 13 9 7 12
+1 2 10
+2 3 10
+3 4 10
+4 5 10
+1 3 10</pre>
+
+<p><code>regate.out</code></p>
+
+<pre>32
+46
+36
+28
+40</pre>
+
+<h3>Explicație</h3>
+
+<p>De exemplu, pentru regatul <code>2</code> avem:<br>
+<code>Cost(2, 1) = 13</code><br>
+<code>Cost(2, 3) = 13</code><br>
+<code>Cost(2, 4) = 10</code><br>
+<code>Cost(2, 5) = 10</code><br>
+Suma acestora este <code>46</code>.<br>
+Atenție că, de exemplu, în calculul lui <code>Cost(2, 1)</code>, nu putem pune un punct de frontieră pe muchia <code>(1 ,2)</code> de cost <code>10</code>, deoarece există drumul <code>2 → 3 → 1</code> care nu trece prin muchia <code>(1, 2)</code>.</p>		</article>
+		</body></html>

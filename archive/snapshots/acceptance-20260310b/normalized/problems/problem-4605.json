@@ -1,0 +1,324 @@
+{
+  "id": 4605,
+  "slug": "santinele",
+  "name": "santinele",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4605/santinele",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 9,
+      "name": "Parcurgerea vectorilor",
+      "slug": "parcurgerea-vectorilor",
+      "href": "/?pagina=probleme-lista&tag=9"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Date fiind <code>N</code>, <code>K</code> și înălțimile celor <code>N</code> vârfuri, să se determine:</p><ul>\n\t<li>Numărul maxim de vârfuri consecutive, începând de la primul vârf al lanțului muntos (inclusiv acest vârf), ce pot fi vegheate cu o singură santinelă.</li>\n\t<li>Numărul minim de santinele necesare ca toate vârfurile să fie vegheate.</li>\n</ul>",
+      "text": "Date fiind N, K și înălțimile celor N vârfuri, să se determine: Numărul maxim de vârfuri consecutive, începând de la primul vârf al lanțului muntos (inclusiv acest vârf), ce pot fi vegheate cu o singură santinelă. Numărul minim de santinele necesare ca toate vârfurile să fie vegheate."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>santinele.in</code> conține pe prima linie numărul cerinței, 1 sau 2. Pe a doua linie, fișierul conține numerele <code>N</code> și <code>K</code>, cu semnificația din enunț. Pe a treia linie, fișierul conține <code>N</code> numere, <code>h[1], h[2], ..., h[N]</code>, reprezentând înălțimile celor <code>N</code> vârfuri, în ordinea dispunerii lor de la stânga la dreapta, în cadrul lanțului muntos. Numerele aflate pe aceeași linie a fișierului de intrare sunt separate prin câte un spațiu.</p>",
+      "text": "Fișierul de intrare santinele.in conține pe prima linie numărul cerinței, 1 sau 2. Pe a doua linie, fișierul conține numerele N și K, cu semnificația din enunț. Pe a treia linie, fișierul conține N numere, h[1], h[2], ..., h[N], reprezentând înălțimile celor N vârfuri, în ordinea dispunerii lor de la stânga la dreapta, în cadrul lanțului muntos. Numerele aflate pe aceeași linie a fișierului de intrare sunt separate prin câte un spațiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>santinele.out</code> va conține un singur număr. Dacă cerința este 1, conține numărul maxim de vârfuri determinate la această cerință. Dacă cerința este 2, conține numărul minim de santinele determinate la această cerință.</p>",
+      "text": "Fișierul de ieșire santinele.out va conține un singur număr. Dacă cerința este 1, conține numărul maxim de vârfuri determinate la această cerință. Dacă cerința este 2, conține numărul minim de santinele determinate la această cerință."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 100.000</code></li>\n\t<li><code>0 ≤ K &lt; N</code></li>\n\t<li><code>1 ≤ h[i] ≤ 1.000.000</code></li>\n\t<li>Pentru 14 puncte, <code>C = 1</code></li>\n\t<li>Pentru 14 puncte, <code>C = 2</code>, <code>N</code> este par și <code>K = N / 2</code></li>\n\t<li>Pentru 16 puncte, <code>C = 2</code> și <code>h[1] &lt; h[2] &lt; ... &lt; h[N]</code></li>\n\t<li>Pentru 13 puncte, <code>C = 2</code> și există <code>1 &lt; p &lt; N</code> pentru care <code>h[1] &lt; h[2] &lt; ... &lt; h[p-1] &lt; h[p] &gt; h[p+1] &gt; ... &gt; h[N]</code></li>\n\t<li>Pentru 14 puncte, <code>C = 2</code> și <code>N ≤ 15</code></li>\n\t<li>Pentru 29 puncte, fără restricții suplimentare</li>\n</ul>",
+      "text": "1 ≤ N ≤ 100.000 0 ≤ K < N 1 ≤ h[i] ≤ 1.000.000 Pentru 14 puncte, C = 1 Pentru 14 puncte, C = 2, N este par și K = N / 2 Pentru 16 puncte, C = 2 și h[1] < h[2] < ... < h[N] Pentru 13 puncte, C = 2 și există 1 < p < N pentru care h[1] < h[2] < ... < h[p-1] < h[p] > h[p+1] > ... > h[N] Pentru 14 puncte, C = 2 și N ≤ 15 Pentru 29 puncte, fără restricții suplimentare"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>santinele.in</code></p><pre>1\n8 2\n6 10 5 7 8 5 4 4</pre><p><code>santinele.out</code></p><pre>4</pre>",
+      "text": "santinele.in1 8 2 6 10 5 7 8 5 4 4santinele.out4"
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>santinele.in</code></p><pre>2\n10 2\n10 5 5 10 6 7 4 1 6 7</pre><p><code>santinele.out</code></p><pre>4</pre>",
+      "text": "santinele.in2 10 2 10 5 5 10 6 7 4 1 6 7santinele.out4"
+    },
+    {
+      "title": "Exemplul 3:",
+      "html": "<p><code>santinele.in</code></p><pre>2\n15 3\n5 3 1 12 11 9 15 11 10 9 2 7 10 11 7</pre><p><code>santinele.out</code></p><pre>3</pre>",
+      "text": "santinele.in2 15 3 5 3 1 12 11 9 15 11 10 9 2 7 10 11 7santinele.out3"
+    },
+    {
+      "title": "Exemplul 4:",
+      "html": "<p><code>santinele.in</code></p><pre>2\n20 5\n7 12 23 21 20 24 28 21 4 16 27 1 6 8 20 3 3 5 11 5</pre><p><code>santinele.out</code></p><pre>3</pre><h3>Explicații ale exemplelor</h3><p>Primul exemplu: Cerința este 1 și <code>K = 2</code>. Santinela veghează vârful pe care este plasată, maximum două vârfuri la stânga și maximum două vârfuri la dreapta. Cu o singură santinelă putem acoperi maximum patru vârfuri, începând cu primul vârf, plasând santinela pe al doilea vârf.</p><p>Al doilea exemplu: Cerința este 2 și <code>K = 2</code>. Sunt necesare minimum <code>4</code> santinele, pe care le putem amplasa pe vârfurile: primul, al <code>4</code>-lea, al <code>7</code>-lea, al <code>10</code>-lea.</p><p>Al treilea exemplu: Cerința este 2 și <code>K = 3</code>. Sunt necesare minimum <code>3</code> santinele. Le putem amplasa pe vârfurile: primul, al <code>7</code>-lea, al <code>14</code>-lea.</p><p>Al patrulea exemplu: Cerința este 2 și <code>K = 5</code>. Sunt necesare minimum <code>3</code> santinele. Le putem amplasa pe vârfurile: al <code>3</code>-lea, al <code>7</code>-lea, al <code>15</code>-lea.</p><p><img alt=\"\" src=\"/resurse/16a4b0/santinele_01.jpg\"></p>",
+      "text": "santinele.in2 20 5 7 12 23 21 20 24 28 21 4 16 27 1 6 8 20 3 3 5 11 5santinele.out3Explicații ale exemplelorPrimul exemplu: Cerința este 1 și K = 2. Santinela veghează vârful pe care este plasată, maximum două vârfuri la stânga și maximum două vârfuri la dreapta. Cu o singură santinelă putem acoperi maximum patru vârfuri, începând cu primul vârf, plasând santinela pe al doilea vârf.Al doilea exemplu: Cerința este 2 și K = 2. Sunt necesare minimum 4 santinele, pe care le putem amplasa pe vârfurile: primul, al 4-lea, al 7-lea, al 10-lea.Al treilea exemplu: Cerința este 2 și K = 3. Sunt necesare minimum 3 santinele. Le putem amplasa pe vârfurile: primul, al 7-lea, al 14-lea.Al patrulea exemplu: Cerința este 2 și K = 5. Sunt necesare minimum 3 santinele. Le putem amplasa pe vârfurile: al 3-lea, al 7-lea, al 15-lea."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Primul exemplu: Cerința este 1 și K = 2. Santinela veghează vârful pe care este plasată, maximum două vârfuri la stânga și maximum două vârfuri la dreapta. Cu o singură santinelă putem acoperi maximum patru vârfuri, începând cu primul vârf, plasând santinela pe al doilea vârf."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 100.000",
+    "0 ≤ K < N",
+    "1 ≤ h[i] ≤ 1.000.000",
+    "Pentru 14 puncte, C = 1",
+    "Pentru 14 puncte, C = 2, N este par și K = N / 2",
+    "Pentru 16 puncte, C = 2 și h[1] < h[2] < ... < h[N]",
+    "Pentru 13 puncte, C = 2 și există 1 < p < N pentru care h[1] < h[2] < ... < h[p-1] < h[p] > h[p+1] > ... > h[N]",
+    "Pentru 14 puncte, C = 2 și N ≤ 15",
+    "Pentru 29 puncte, fără restricții suplimentare"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q34b6512d17.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/santinele_01.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-santinele-01-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "santinele.in / santinele.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "128 MB / 8 MB",
+    "sursa problemei": "OJI 2024, clasa a 9-a",
+    "autor": "Cristian Frâncu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 128,
+  "author": "Cristian Frâncu",
+  "sourceAttribution": "OJI 2024, clasa a 9-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4605/santinele"
+}

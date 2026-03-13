@@ -1,0 +1,88 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1693"><article id="enunt">
+			<p>O matrice pătratică de dimensiuni <code>N x N</code> cu liniile și coloanele indexate de la <code>1</code> la <code>N</code> se numește <em>matrice șmecheră de Calafat</em> dacă pe fiecare linie și fiecare coloană există exact două valori de <code>1</code>, restul elementelor fiind <code>0</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Având două <em>matrice șmechere de Calafat</em> notate cu <code>A</code> și <code>B</code>, se cere ca prin interschimbări de linii și coloane să se transforme matricea <code>B</code> în matricea <code>A</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>transform.in</code> conține pe prima linie numărul <code>N</code>, reprezentând dimensiunea matricei. Pe următoarele <code>2N</code> linii avem câte o pereche de numere naturale separate prin spațiu, reprezentând linia și coloana unui element de valoare <code>1</code> din matricea <code>A</code>. În continuare pe următoarele <code>2N</code> linii avem câte o pereche de numere naturale separate prin spațiu, reprezentând linia și coloana unui element de valoare <code>1</code> din matricea <code>B</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>transform.out</code> va conține pe fiecare linie câte o operație de interschimbare a două linii sau două coloane, codificată printr-un triplet <code>ch x y</code> format dintr-un caracter <code>ch</code> și două numere naturale <code>x</code> și <code>y</code> separate prin câte un spațiu. Valoarea lui <code>ch</code> de fiecare dată poate fi doar <code>’L’</code> ,  <code>’C’</code> sau <code>’0’</code>. Dacă valoarea lui <code>ch</code> este egală cu <code>’L’</code>, atunci se vor interschimba liniile <code>x</code> și <code>y</code> în matricea <code>B</code>. Dacă valoarea lui <code>ch</code> este egală cu <code>’C’</code>, atunci se vor interschimba coloanele <code>x</code> și <code>y</code> în matricea <code>B</code>. Ultimul triplet de valori introdus în fișierul de ieșire va fi <code>0 0 0</code> reprezentând terminarea acțiunii.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 80000</code></li>
+	<li>Pentru un program care se încadrează în timpul de execuție, punctajul acordat depinde de numărul de operații tipărite în fișierul de ieșire. Să notăm cu <code>op</code> numărul de operații efectuate. Astfel pentru fiecare fișier de ieșire corect, punctajul se va acorda astfel:
+	<ul>
+		<li>dacă <code>1 ≤ op ≤ 2N</code> , se acordă 100% din punctaj;</li>
+		<li>dacă <code>2N+1 ≤ op ≤ 4N</code> , se acordă 75% din punctaj;</li>
+		<li>dacă <code>op &gt; 4N</code>, se acordă 50% din punctaj.</li>
+	</ul></li>
+	<li>Pentru  toate testele de intrare există soluție.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>transform.in</code></p>
+
+<pre>4
+1 1
+2 2
+3 3
+4 1
+3 4
+4 4
+2 3
+1 2
+1 3 
+2 3
+1 1
+2 2
+4 2
+4 4
+3 4
+3 1</pre>
+
+<p><code>transform.out</code></p>
+
+<pre>L 3 4
+C 3 2
+0 0 0</pre>
+
+<h3><code>N=4</code></h3>
+
+<p>Prima dată se citește matricea <code>A</code>:</p>
+
+<pre>1 1 0 0
+0 1 1 0
+0 0 1 1
+1 0 0 1</pre>
+
+<p>apoi citim matricea <code>B</code>:</p>
+
+<pre>1 0 1 0
+0 1 1 0
+1 0 0 1
+0 1 0 1</pre>
+
+<p>Aplicăm operația <code>L 3 4</code> interschimbând liniile <code>3</code> și <code>4</code> în matricea <code>B</code>:</p>
+
+<pre>1 0 1 0
+0 1 1 0
+0 1 0 1
+1 0 0 1</pre>
+
+<p>Aplicăm operația <code>C 3 2</code> interschimbând coloanele <code>3</code> și <code>2</code> în matricea <code>B</code>:</p>
+
+<pre>1 1 0 0
+0 1 1 0
+0 0 1 1
+1 0 0 1</pre>
+
+<p>Citind linia <code>0 0 0</code> înțelegem că s-au terminat operațiile și s-a obținut matricea <code>A</code>.</p>		</article>
+		</body></html>

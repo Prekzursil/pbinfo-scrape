@@ -1,0 +1,64 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3758"><article id="enunt">
+			<p>Se dau numerele naturale <code>n</code> și <code>k</code>, precum și un șir <code>a[1]</code>, <code>a[2]</code> ,…, <code>a[n]</code> de numere naturale nenule. Din șir de poate elimina o singură secvență (eventual vidă) <code>a[i]</code>, <code>a[i+1]</code>, …, <code>a[j]</code> astfel că în șir rămân elementele <code>a[1]</code>, <code>a[2]</code>, …, <code>a[i-1]</code>, <code>a[j+1]</code>, …, <code>a[n]</code>. </p>
+
+<p>De exemplu, din șirul <code>a=(1,2,3,4,5,7)</code> se poate elimina secvența <code>3,4,5</code> și rămâne <code>1,2,7</code>; sau se poate elimina secvența vidă și rămâne șirul inițial <code>1,2,3,4,5,7</code>; sau se poate elimina <code>1,2,3,4</code> și rămâne șirul <code>5,7</code>. </p>
+
+<p>După eliminarea secvenței, elementele rămase formează un șir <strong>inno</strong> dacă aplicându-se operația <code>&amp;</code> pe biți asupra lor rezultatul este un număr care are cel puțin <code>k</code> biți de <code>1</code> în baza <code>2</code>. De exemplu, dacă <code>a=(1,2,3,4,5,7)</code> și <code>k=2</code>, atunci prin eliminarea secvenței <code>1,2,3,4</code> rămân elementele <code>5,7</code>, iar <code>5 &amp; 7 = 5</code>, care are <code>2</code> biți de <code>1</code> în baza <code>2</code>. Dar dacă se elimină secvența <code>3,4,5</code> atunci rămân elementele <code>1,2,7</code>, iar <code>1 &amp; 2 &amp; 7 = 0</code>, deci nu este șir <strong>inno</strong>.</p>
+
+<h1>Cerința</h1>
+
+<p>Să se determine în câte moduri se poate elimina o secvență astfel încât elementele rămase să formeze șir <strong>inno</strong>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>inno.in</code> conține pe prima linie numerele naturale <code>n</code> și <code>k</code>. Pe linia a doua se află <code>n</code> numere naturale reprezentând elementele șirului.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>inno.out</code> va conține pe prima linie un singur număr natural reprezentând numărul de moduri de a elimina o secvență astfel încât șirul rămas să fie <strong>inno</strong>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>3 ≤ n ≤ 200.000</code>;</li>
+	<li><code>1 ≤ k ≤ 29</code>;</li>
+	<li><code>0 ≤ a[i] ≤ 2</code><sup><code>31</code></sup> <code>- 1</code>;</li>
+	<li><code>&amp;</code> este operatorul de conjuncție pe biți. Dacă <code>x</code> și <code>y</code> sunt valori binare, atunci expresia <code>x &amp; y</code> este egală cu <code>1</code> dacă și numai dacă <code>x = 1</code> și <code>y = 1</code>. Deci <code>1 &amp; 1 = 1</code>, <code>0 &amp; 1 = 0</code>, <code>1 &amp; 0 = 0</code>, <code>0 &amp; 0 = 0</code>. Dacă <code>a</code> și <code>b</code> sunt numere naturale, atunci expresia <code>a &amp; b</code> se efectuează la nivelul reprezentării în baza <code>2</code>. De exemplu, dacă <code>a = 12</code> și <code>b = 20</code>, atunci <code>a &amp; b = 12 &amp; 20 = 01100</code><sub><code>(2)</code></sub> <code>&amp; 10100</code><sub><code>(2)</code></sub> <code>= 00100</code><sub><code>(2)</code></sub> <code>= 4</code><sub><code>(10)</code></sub>;</li>
+</ul>
+
+
+<h1>Exemplul 1:</h1>
+
+<p><code>inno.in</code></p>
+
+<pre>4 2
+10 7 5 15</pre>
+
+<p><code>inno.out</code></p>
+
+<pre>5</pre>
+
+<h3>Explicație</h3>
+
+<p>Modalitățile sunt:<br>
+- se elimină <code>10</code> și rămâne șirul <code>7 5 15</code>, iar <code>7 &amp; 5 &amp; 15 = 5</code>, care are <code>2</code> biți de <code>1</code><br>
+- se elimină <code>10 7</code> și rămâne șirul <code>5 15</code>, iar <code>5 &amp; 15 = 5</code>, care are <code>2</code> biți de <code>1</code><br>
+- se elimină <code>10 7 5</code> și rămâne șirul <code>15</code>, iar <code>15</code> are <code>4</code> biți de <code>1</code><br>
+- se elimină <code>7 5</code> și rămâne șirul <code>10 15</code>, iar <code>10 &amp; 15 = 10</code> are <code>2</code> biți de <code>1</code><br>
+- se elimină <code>7 5 15</code> și rămâne șirul <code>10</code>, iar <code>10</code> are <code>2</code> biți de <code>1</code></p>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>inno.in</code></p>
+
+<pre>5 4
+7 7 6 1 62</pre>
+
+<p><code>inno.out</code></p>
+
+<pre>1</pre>
+
+<h3>Explicație</h3>
+
+<p>Singura posibilitate este eliminarea secvenței <code>7 7 6 1</code>. Rămâne doar numărul <code>62</code>, care are <code>5</code> biți de <code>1</code>.</p>		</article>
+		</body></html>

@@ -1,0 +1,94 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=733"><article id="enunt">
+			<p>Se dau <code>N</code> şi <code>M</code> două numere naturale şi o matrice <code>A</code> cu <code>N</code> linii (numerotate de la <code>1</code> la <code>N</code>) şi <code>M</code> coloane (numerotate de la <code>1</code> la <code>M</code>) având elementele numere întregi în intervalul închis <code>[-30000,30000]</code>. Asupra acestei matrice se pot efectua mai multe operaţii de ştergere a unor linii, de ordonare a elementelor aflate pe anumite linii sau de adăugare a unor noi linii la sfârşitul matricei. Fiecare dintre aceste operaţii este codificată printr-o comandă având următoarea sintaxă:</p>
+
+<p>Ştergerea este precizată printr-o linie de forma:</p>
+
+<p><code>S i j k i[1] o[1] v[1] i[2] o[2] v[2] i[3] o[3] v[3] ... i[k] o[k] v[k]</code></p>
+
+<p>Comanda precizează că se şterg din matrice acele linii <code>L</code> din mulțimea <code>{i, i+1, i+2, ..., j}</code> pentru care sunt îndeplinite simultan următoarele condiţii:</p>
+
+<ul>
+	<li><code>A[L][i[1]]</code> este în relaţia <code>o[1]</code> faţă de <code>v[1]</code></li>
+	<li><code>A[L][i[2]]</code> este în relaţia <code>o[2]</code> faţă de <code>v[2]</code></li>
+	<li>…</li>
+	<li><code>A[L][i[k]]</code> este în relaţia <code>o[k]</code> faţă de <code>v[k]</code></li>
+</ul>
+
+<p>unde <code>o[1]</code>, <code>o[2]</code>, …, <code>o[k]</code> pot fi unul dintre operatorii <code>&lt;</code> (mai mic), <code>&gt;</code> (mai mare), <code>!</code> (diferit), <code>=</code> (egal).</p>
+
+<p>De exemplu comanda: <code>S 3 5 2 2 &lt; 10 5 ! 7</code> precizează că se şterg liniile <code>L</code> din <code>{3, 4, 5}</code> în cazul în care <code>A[L][2]&lt;10</code> și <code>A[L][5]≠7</code>.</p>
+
+<p>După ştergerea tuturor liniilor precizate se va proceda la renumerotarea liniilor din matrice, iar dimensiunea matricii se va modifica.</p>
+
+<p>Ordonarea este precizată printr-o linie de forma</p>
+
+<p><code>O i j t col[1] ch[1] col[2] ch[2] col[3] ch[3] ... col[t] ch[t]</code></p>
+
+<p>cu semnificaţia că liniile <code>i, i+1, i+2, ..., j</code> sunt sortate după valoarea din coloana <code>col[1]</code>; dacă pentru două linii valoarea din coloana <code>col[1]</code> coincide se vor ordona după coloana <code>col[2]</code>, apoi după coloana <code>col[3]</code> etc. Sortarea după o anumită coloană <code>col[i]</code> se face crescător dacă <code>ch[i]</code> este <code>C</code> respectiv descrescător dacă <code>ch[i]</code> este <code>D</code>. Dacă două linii conţin valori identice în toate cele <code>t</code> coloane, se va păstra ordinea relativă în care apar ele în tabela iniţială. Adăugarea este precizată printr-o linie de forma</p>
+
+<p><code>A v[1] v[2] ... v[M]</code></p>
+
+<p>cu semnificaţia că se adaugă la sfârşitul matricei, după ultima sa linie, o linie nouă, elementele noii linii având pe rând, de la stânga la dreapta, valorile <code>v[1]</code>, <code>v[2]</code>, …, <code>v[M]</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care citeşte elementele matricei iniţiale, apoi citeşte un şir de comenzi şi determină matricea rezultată după efectuarea operaţiilor precizate prin comenzile respective în ordinea în care acestea sunt date.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>matrice2.in</code> conține pe prima linie numerele naturale <code>N</code> şi <code>M</code> separate printr-un spaţiu. Pe fiecare dintre următoarele <code>N</code> linii se afla câte <code>M</code> numere întregi, reprezentând elementele matricei. Elementele de pe aceeaşi linie sunt separate prin câte un spaţiu.</p>
+
+<p>Următoarea linie a fişierului de intrare conţine un singur număr natural <code>P</code>, reprezentând numărul de operaţii ce se aplică matricei. Următoarele <code>P</code> linii ale matricei precizează fiecare câte o comandă care se aplică matricei, respectând sintaxa şi precizările din enunţ.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>matrice2.out</code> va conține pe prima linie un număr natural <code>R</code> reprezentând numărul de linii al matricei finale. Pe fiecare dintre următoarele <code>R</code> linii se află câte <code>M</code> numere întregi, reprezentând elementele matricei finale. Elementele de pe aceeaşi linie sunt separate prin câte un spaţiu. </p>
+
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N, R ≤ 200</code></li>
+	<li><code>1 ≤ M ≤ 100</code></li>
+	<li><code>1 ≤ P ≤ 150</code></li>
+	<li>Niciuna dintre matricele intermediare nu au mai mult de <code>200</code> de linii</li>
+	<li>Numărul maxim de condiţii pentru orice comandă de ştergere sau de ordonare este de <code>20 (1 ≤ k,t ≤ 20)</code></li>
+	<li>Toate comenzile din fişierul de intrare sunt corecte atât din punct de vedere sintactic dar şi din punct de vedere logic, adică nu se cere de exemplu sortarea sau ştergerea unor linii din afara matricei</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>matrice2.in</code></p>
+
+<pre>10 4
+5 1 6 3
+4 2 3 7
+4 2 3 2
+2 8 1 3
+4 2 1 6
+1 3 2 1
+9 7 5 1
+9 7 3 8
+3 8 2 6
+6 7 1 3
+8
+O 2 5 1 3 C
+O 7 10 1 2 C
+S 5 9 1 1 &lt; 4
+A 7 3 5 1
+A 9 2 1 6
+O 2 7 3 2 C 1 D 4 D
+O 1 11 1 3 C
+S 1 11 2 1 &gt; 4 3 ! 5</pre>
+
+<p><code>matrice2.out</code></p>
+
+<pre>7
+4 2 1 6
+2 8 1 3
+3 8 2 6
+4 2 3 7
+4 2 3 2
+9 7 5 1
+7 3 5 1</pre>		</article>
+		</body></html>

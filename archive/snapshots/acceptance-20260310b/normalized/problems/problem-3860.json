@@ -1,0 +1,301 @@
+{
+  "id": 3860,
+  "slug": "consecutive1",
+  "name": "consecutive1",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3860/consecutive1",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 21,
+      "name": "Probleme cu secvențe",
+      "slug": "probleme-cu-secven-e",
+      "href": "/?pagina=probleme-lista&tag=21"
+    }
+  ],
+  "tags": [
+    "Two Pointers",
+    "Range Minimum Query"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Dându-se <code>Q</code> întrebări, să se răspundă la acestea. La fiecare interogare, dacă prin sortare se obține o secvență de numere consecutive veți afișa valoarea <code>1</code>, iar în caz contrar veți afișa valoarea <code>0</code>.</p>",
+      "text": "Dându-se Q întrebări, să se răspundă la acestea. La fiecare interogare, dacă prin sortare se obține o secvență de numere consecutive veți afișa valoarea 1, iar în caz contrar veți afișa valoarea 0."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>De la tastatură, de pe prima linie se citește numărul natural <code>n</code>. Pe linia a doua se află <code>n</code> numere naturale reprezentând elementele șirului. Pe a treia linie se află numărul <code>Q</code>, iar pe următoarele <code>Q</code> linii se găsesc câte două numere naturale <code>x</code> și <code>y</code>, <code>1 ≤ x ≤ y ≤ n</code>, reprezentând câte o interogare.</p>",
+      "text": "De la tastatură, de pe prima linie se citește numărul natural n. Pe linia a doua se află n numere naturale reprezentând elementele șirului. Pe a treia linie se află numărul Q, iar pe următoarele Q linii se găsesc câte două numere naturale x și y, 1 ≤ x ≤ y ≤ n, reprezentând câte o interogare."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>La ecran se vor afișa pe o singură linie, fără spații, <code>Q</code> cifre din mulțimea <code>{0, 1}</code> reprezentând răspunsurile la fiecare întrebare.</p>",
+      "text": "La ecran se vor afișa pe o singură linie, fără spații, Q cifre din mulțimea {0, 1} reprezentând răspunsurile la fiecare întrebare."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li>Pentru 10 puncte, <code>3 ≤ n ≤ 50</code>, <code>1 ≤ Q ≤ 100</code></li>\n\t<li>Pentru 30 puncte, <code>n ≤ 300</code>, <code>Q ≤ 10.000</code></li>\n\t<li>Pentru 60 puncte, <code>10.000 ≤ n ≤ 100.000</code>, <code>Q ≤ 200.000</code></li>\n</ul>",
+      "text": "Pentru 10 puncte, 3 ≤ n ≤ 50, 1 ≤ Q ≤ 100 Pentru 30 puncte, n ≤ 300, Q ≤ 10.000 Pentru 60 puncte, 10.000 ≤ n ≤ 100.000, Q ≤ 200.000"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><strong>Intrare</strong></p><pre>9\n4 1 3 4 2 1 6 5 4\n5\n1 4\n3 5\n3 6\n5 9\n7 9</pre><p><strong>Ieșire</strong></p><pre>01101</pre><h3>Explicație</h3><p>Sunt <code>5</code> interogări. <br>\nÎntrebarea 1: <code>4 1 3 4</code> nu obține o secvență de numere consecutive, deci răspunsul este <code>0</code>.<br>\nÎntrebarea 2: <code>3 4 2</code> obține o secvență de numere consecutive, deci răspunsul este <code>1</code>.<br>\nÎntrebarea 3: <code>3 4 2 1</code> obține o secvență de numere consecutive, deci răspunsul este <code>1</code>.<br>\nÎntrebarea 4: <code>2 1 6 5 4</code> nu obține o secvență de numere consecutive, deci răspunsul este <code>0</code>.<br>\nÎntrebarea 5: <code>6 5 4</code> obține o secvență de numere consecutive, deci răspunsul este <code>1</code>.</p>",
+      "text": "Intrare9 4 1 3 4 2 1 6 5 4 5 1 4 3 5 3 6 5 9 7 9Ieșire01101ExplicațieSunt 5 interogări. Întrebarea 1: 4 1 3 4 nu obține o secvență de numere consecutive, deci răspunsul este 0. Întrebarea 2: 3 4 2 obține o secvență de numere consecutive, deci răspunsul este 1. Întrebarea 3: 3 4 2 1 obține o secvență de numere consecutive, deci răspunsul este 1. Întrebarea 4: 2 1 6 5 4 nu obține o secvență de numere consecutive, deci răspunsul este 0. Întrebarea 5: 6 5 4 obține o secvență de numere consecutive, deci răspunsul este 1."
+    }
+  ],
+  "examples": [
+    {
+      "input": "9\n4 1 3 4 2 1 6 5 4\n5\n1 4\n3 5\n3 6\n5 9\n7 9",
+      "output": "01101",
+      "explanation": "Sunt 5 interogări. Întrebarea 1: 4 1 3 4 nu obține o secvență de numere consecutive, deci răspunsul este 0. Întrebarea 2: 3 4 2 obține o secvență de numere consecutive, deci răspunsul este 1. Întrebarea 3: 3 4 2 1 obține o secvență de numere consecutive, deci răspunsul este 1. Întrebarea 4: 2 1 6 5 4 nu obține o secvență de numere consecutive, deci răspunsul este 0. Întrebarea 5: 6 5 4 obține o secvență de numere consecutive, deci răspunsul este 1."
+    }
+  ],
+  "constraints": [
+    "Pentru 10 puncte, 3 ≤ n ≤ 50, 1 ≤ Q ≤ 100",
+    "Pentru 30 puncte, n ≤ 300, Q ≤ 10.000",
+    "Pentru 60 puncte, 10.000 ≤ n ≤ 100.000, Q ≤ 200.000"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qcef489097f.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "tastatură / ecran",
+    "limită timp": "1 secunde",
+    "limită memorie": "256 MB / 8 MB",
+    "sursa problemei": "EJOI 2021, sesiunea de antrenament",
+    "autor": "Dan Pracsiu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 1,
+  "memoryLimitMb": 256,
+  "author": "Dan Pracsiu",
+  "sourceAttribution": "EJOI 2021, sesiunea de antrenament",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3860/consecutive1"
+}

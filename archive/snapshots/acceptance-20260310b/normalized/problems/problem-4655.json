@@ -1,0 +1,324 @@
+{
+  "id": 4655,
+  "slug": "mandms",
+  "name": "mandms",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4655/mandms",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 25,
+      "name": "Metoda Greedy",
+      "slug": "metoda-greedy",
+      "href": "/?pagina=probleme-lista&tag=25"
+    },
+    {
+      "id": 24,
+      "name": "Probleme diverse cu metoda Greedy",
+      "slug": "probleme-diverse-cu-metoda-greedy",
+      "href": "/?pagina=probleme-lista&tag=24"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Folosind toate bulinele, ajutați-o pe Andra să determine:</p><p>1) Numărul minim de piramide de ciocolată pe care le poate forma.<br>\n2) Numărul minim de piramide serioase de ciocolată pe care le poate forma, astfel încât toate cele obținute să fie de acest fel.</p>",
+      "text": "Folosind toate bulinele, ajutați-o pe Andra să determine:1) Numărul minim de piramide de ciocolată pe care le poate forma. 2) Numărul minim de piramide serioase de ciocolată pe care le poate forma, astfel încât toate cele obținute să fie de acest fel."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>mandms.in</code> conține pe prima linie numărul <code>p</code>, care poate fi doar <code>1</code> sau <code>2</code>. Pe a doua linie a fișierului, se află numărul natural <code>n</code>, cu semnificația din enunț. Pe a treia linie se află numerele naturale <code>x</code>, <code>y</code>, <code>z</code>, <code>t</code>, în această ordine, cu semnificația din enunț.</p>",
+      "text": "Fișierul de intrare mandms.in conține pe prima linie numărul p, care poate fi doar 1 sau 2. Pe a doua linie a fișierului, se află numărul natural n, cu semnificația din enunț. Pe a treia linie se află numerele naturale x, y, z, t, în această ordine, cu semnificația din enunț."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Dacă <code>p=1</code>, fișierul de ieșire <code>mandms.out</code> conține un număr natural, reprezentând valoarea precizată la cerința <code>1</code>. Dacă <code>p=2</code>, fișierul de ieșire <code>mandms.out</code> conține un număr natural, reprezentând valoarea precizată la cerința <code>2</code>.</p>",
+      "text": "Dacă p=1, fișierul de ieșire mandms.out conține un număr natural, reprezentând valoarea precizată la cerința 1. Dacă p=2, fișierul de ieșire mandms.out conține un număr natural, reprezentând valoarea precizată la cerința 2."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ n ≤ 2.000.000</code></li>\n\t<li><code>1 ≤ x, y, t &lt; 2</code><sup><code>64</code></sup>.</li>\n\t<li><code>0 ≤ z &lt; 2</code><sup><code>64</code></sup>.</li>\n\t<li><code>1 ≤ c[i] &lt; 2</code><sup><code>64</code></sup>.</li>\n\t<li><code>0 ≤ c[i] * y &lt; 2</code><sup><code>64</code></sup>, pentru orice <code>i = 2..n</code>,</li>\n\t<li>Pentru 30 de puncte, <code>p = 1</code>, <code>n ≤ 1.500.000</code> și numărul total de buline este strict mai mic decât <code>2</code><sup><code>64</code></sup></li>\n\t<li>Pentru 10 puncte, <code>p = 1, n ≤ 1.500.000</code></li>\n\t<li>Pentru 40 de puncte, <code>p = 2</code>, <code>n ≤ 100.000</code></li>\n\t<li>Pentru 20 de puncte, <code>p = 2</code> și nu există alte restricții suplimentare</li>\n</ul>",
+      "text": "1 ≤ n ≤ 2.000.000 1 ≤ x, y, t < 264. 0 ≤ z < 264. 1 ≤ c[i] < 264. 0 ≤ c[i] * y < 264, pentru orice i = 2..n, Pentru 30 de puncte, p = 1, n ≤ 1.500.000 și numărul total de buline este strict mai mic decât 264 Pentru 10 puncte, p = 1, n ≤ 1.500.000 Pentru 40 de puncte, p = 2, n ≤ 100.000 Pentru 20 de puncte, p = 2 și nu există alte restricții suplimentare"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>mandms.in</code></p><pre>1\n8\n3 15 18 17</pre><p><code>mandms.out</code></p><pre>5</pre><h3>Explicație</h3><p><code>x = 3, y = 15, z = 18, t = 17</code>. Numărul de buline de cele <code>8</code> tipuri se calculează astfel:<br>\n<code>c[1] = x = 3</code><br>\n<code>c[2] = (3 * 15) % 17 + 18 = 29</code><br>\n<code>c[3] = (29 * 15) % 17 + 18 = 28</code><br>\n<code>c[4] = (28 * 15) % 17 + 18 = 30</code><br>\n<code>c[5] = (30 * 15) % 17 + 18 = 26</code><br>\n<code>c[6] = (26 * 15) % 17 + 18 = 34</code><br>\n<code>c[7] = (34 * 15) % 17 + 18 = 18</code><br>\n<code>c[8] = (18 * 15) % 17 + 18 = 33</code></p><p>Posibile configurații ale piramidelor:</p><p><img alt=\"\" src=\"/resurse/16a4b0/mandms_01.png\"></p><p>În această configurație, avem o piramidă cu <code>7</code> rânduri, una cu <code>6</code> rânduri, una cu <code>3</code> rânduri, una cu <code>2</code> rânduri, și una cu un singur rând.</p>",
+      "text": "mandms.in1 8 3 15 18 17mandms.out5Explicațiex = 3, y = 15, z = 18, t = 17. Numărul de buline de cele 8 tipuri se calculează astfel: c[1] = x = 3 c[2] = (3 * 15) % 17 + 18 = 29 c[3] = (29 * 15) % 17 + 18 = 28 c[4] = (28 * 15) % 17 + 18 = 30 c[5] = (30 * 15) % 17 + 18 = 26 c[6] = (26 * 15) % 17 + 18 = 34 c[7] = (34 * 15) % 17 + 18 = 18 c[8] = (18 * 15) % 17 + 18 = 33Posibile configurații ale piramidelor:În această configurație, avem o piramidă cu 7 rânduri, una cu 6 rânduri, una cu 3 rânduri, una cu 2 rânduri, și una cu un singur rând."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>mandms.in</code></p><pre>2\n8\n3 15 18 17</pre><p><code>mandms.out</code></p><pre>7</pre><h3>Explicație</h3><p><code>x = 3, y = 15, z = 18, t = 17</code> <br>\nNumărul de buline de cele <code>8</code> tipuri se calculează astfel:<br>\n<code>c[1] = x = 3</code><br>\n<code>c[2] = (3 * 15) % 17 + 18 = 29</code><br>\n<code>c[3] = (29 * 15) % 17 + 18 = 28</code><br>\n<code>c[4] = (28 * 15) % 17 + 18 = 30</code><br>\n<code>c[5] = (30 * 15) % 17 + 18 = 26</code><br>\n<code>c[6] = (26 * 15) % 17 + 18 = 34</code><br>\n<code>c[7] = (34 * 15) % 17 + 18 = 18</code><br>\n<code>c[8] = (18 * 15) % 17 + 18 = 33</code></p><p>Numărul minim de piramide serioase care se pot forma, astfel încât toate cele obținute să fie serioase, este <code>7</code>.<br>\nPentru acest exemplu, trebuie formate doar piramide serioase. Cele <code>7</code> piramide pot fi:</p><p><img alt=\"\" src=\"/resurse/16a4b0/mandms_02.png\"></p><p>În această configurație, avem două piramide cu <code>6</code> rânduri, două cu <code>5</code> rânduri, una cu <code>3</code> rânduri, și două cu <code>2</code> rânduri.</p>",
+      "text": "mandms.in2 8 3 15 18 17mandms.out7Explicațiex = 3, y = 15, z = 18, t = 17 Numărul de buline de cele 8 tipuri se calculează astfel: c[1] = x = 3 c[2] = (3 * 15) % 17 + 18 = 29 c[3] = (29 * 15) % 17 + 18 = 28 c[4] = (28 * 15) % 17 + 18 = 30 c[5] = (30 * 15) % 17 + 18 = 26 c[6] = (26 * 15) % 17 + 18 = 34 c[7] = (34 * 15) % 17 + 18 = 18 c[8] = (18 * 15) % 17 + 18 = 33Numărul minim de piramide serioase care se pot forma, astfel încât toate cele obținute să fie serioase, este 7. Pentru acest exemplu, trebuie formate doar piramide serioase. Cele 7 piramide pot fi:În această configurație, avem două piramide cu 6 rânduri, două cu 5 rânduri, una cu 3 rânduri, și două cu 2 rânduri."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "x = 3, y = 15, z = 18, t = 17. Numărul de buline de cele 8 tipuri se calculează astfel: c[1] = x = 3 c[2] = (3 * 15) % 17 + 18 = 29 c[3] = (29 * 15) % 17 + 18 = 28 c[4] = (28 * 15) % 17 + 18 = 30 c[5] = (30 * 15) % 17 + 18 = 26 c[6] = (26 * 15) % 17 + 18 = 34 c[7] = (34 * 15) % 17 + 18 = 18 c[8] = (18 * 15) % 17 + 18 = 33"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "x = 3, y = 15, z = 18, t = 17 Numărul de buline de cele 8 tipuri se calculează astfel: c[1] = x = 3 c[2] = (3 * 15) % 17 + 18 = 29 c[3] = (29 * 15) % 17 + 18 = 28 c[4] = (28 * 15) % 17 + 18 = 30 c[5] = (30 * 15) % 17 + 18 = 26 c[6] = (26 * 15) % 17 + 18 = 34 c[7] = (34 * 15) % 17 + 18 = 18 c[8] = (18 * 15) % 17 + 18 = 33"
+    }
+  ],
+  "constraints": [
+    "1 ≤ n ≤ 2.000.000",
+    "1 ≤ x, y, t < 264.",
+    "0 ≤ z < 264.",
+    "1 ≤ c[i] < 264.",
+    "0 ≤ c[i] * y < 264, pentru orice i = 2..n,",
+    "Pentru 30 de puncte, p = 1, n ≤ 1.500.000 și numărul total de buline este strict mai mic decât 264",
+    "Pentru 10 puncte, p = 1, n ≤ 1.500.000",
+    "Pentru 40 de puncte, p = 2, n ≤ 100.000",
+    "Pentru 20 de puncte, p = 2 și nu există alte restricții suplimentare"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q33634c29e7.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/mandms_01.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-mandms-01-png.png",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/mandms_02.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-mandms-02-png.png",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "11",
+    "intrare/ieșire": "mandms.in / mandms.out",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "ONI 2024, clasa a 8-a",
+    "autor": "Mircea Măierean",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 64,
+  "author": "Mircea Măierean",
+  "sourceAttribution": "ONI 2024, clasa a 8-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4655/mandms"
+}

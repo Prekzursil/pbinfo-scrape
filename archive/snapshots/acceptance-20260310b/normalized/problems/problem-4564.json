@@ -1,0 +1,308 @@
+{
+  "id": 4564,
+  "slug": "douadrumuri",
+  "name": "DouaDrumuri",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4564/douadrumuri",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 53,
+      "name": "Programare dinamică",
+      "slug": "programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=53"
+    },
+    {
+      "id": 54,
+      "name": "Probleme diverse de programare dinamică",
+      "slug": "probleme-diverse-de-programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=54"
+    }
+  ],
+  "tags": [
+    "Programare dinamică"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Se dă o matrice de mărime <code>N</code> pe <code>N</code> care conține litere ale alfabetului englez. Definim un drum dreapta-jos ca fiind un șir de celule ale matricei care începe cu celula <code>(1, 1)</code>, se termină cu celula <code>(N, N)</code>, iar pentru fiecare celulă <code>(x, y)</code> din drum (exceptând ultima), succesoarea sa este fie <code>(x+1, y)</code>, fie <code>(x, y+1)</code>. Spunem că șirul de caractere generat de un drum în matrice este șirul obținut prin concatenarea valorilor celulelor drumului în ordine.</p><p>Să se găsească 2 drumuri dreapta-jos care nu se intersectează (decât în celulele <code>(1, 1)</code> și <code>(N, N)</code>) pentru care coeficientul de similaritate este maxim. Coeficientul de similaritate a 2 drumuri reprezintă numărul de poziții <code>i</code> pentru care <code>a[i] = b[i]</code>, <code>0 ≤ i &lt; lungime(a), lungime(b)</code>, unde <code>a</code> și <code>b</code> sunt șirurile generate de cele 2 drumuri.</p>",
+      "text": "Se dă o matrice de mărime N pe N care conține litere ale alfabetului englez. Definim un drum dreapta-jos ca fiind un șir de celule ale matricei care începe cu celula (1, 1), se termină cu celula (N, N), iar pentru fiecare celulă (x, y) din drum (exceptând ultima), succesoarea sa este fie (x+1, y), fie (x, y+1). Spunem că șirul de caractere generat de un drum în matrice este șirul obținut prin concatenarea valorilor celulelor drumului în ordine.Să se găsească 2 drumuri dreapta-jos care nu se intersectează (decât în celulele (1, 1) și (N, N)) pentru care coeficientul de similaritate este maxim. Coeficientul de similaritate a 2 drumuri reprezintă numărul de poziții i pentru care a[i] = b[i], 0 ≤ i < lungime(a), lungime(b), unde a și b sunt șirurile generate de cele 2 drumuri."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Prima linie conține valoarea lui <code>N</code>. Următoarele <code>N</code> linii conțin câte <code>N</code> litere mici ale alfabetului englez, reprezentând matricea.</p>",
+      "text": "Prima linie conține valoarea lui N. Următoarele N linii conțin câte N litere mici ale alfabetului englez, reprezentând matricea."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Prima linie va conține coeficientul maxim de similaritate între 2 drumuri dreapta jos care nu se interesectează decât în capete.</p>",
+      "text": "Prima linie va conține coeficientul maxim de similaritate între 2 drumuri dreapta jos care nu se interesectează decât în capete."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 300</code></li>\n</ul>",
+      "text": "1 ≤ N ≤ 300"
+    },
+    {
+      "title": "Punctare",
+      "html": "<ul>\n\t<li>Pentru teste în valoare de <code>20</code> de puncte, <code>1 ≤ N ≤ 7</code>.</li>\n\t<li>Pentru teste în valoare de <code>50</code> de puncte, <code>1 ≤ N ≤ 50</code>.</li>\n\t<li>Pentru teste în valoare de <code>80</code> de puncte, <code>1 ≤ N ≤ 150</code>.</li>\n</ul>",
+      "text": "Pentru teste în valoare de 20 de puncte, 1 ≤ N ≤ 7. Pentru teste în valoare de 50 de puncte, 1 ≤ N ≤ 50. Pentru teste în valoare de 80 de puncte, 1 ≤ N ≤ 150."
+    },
+    {
+      "title": "Exemplu 1:",
+      "html": "<p><code>douadrumuri.in</code></p><pre>3\nabe\ncef\nzfq</pre><p><code>douadrumuri.out</code></p><pre>4</pre>",
+      "text": "douadrumuri.in3 abe cef zfqdouadrumuri.out4"
+    },
+    {
+      "title": "Exemplu 2:",
+      "html": "<p><code>douadrumuri.in</code></p><pre>4\nabcd\nbcde\naaaa\nzdef</pre><p><code>douadrumuri.out</code></p><pre>5</pre><h3>Explicații</h3><p>În primul exemplu, drumurile sunt:<br>\n</p><ul>\n\t<li><code>(1, 1) → (1, 2) → (1, 3) → (2, 3) → (3, 3)</code></li>\n\t<li><code>(1, 1) → (2, 1) → (2, 2) → (3, 2) → (3, 3)</code></li><br>\n</ul><p></p><p>Șirurile generate de acestea sunt:<br>\n</p><ul>\n\t<li><code>abefq</code></li>\n\t<li><code>acefq</code></li><br>\n</ul><p></p>",
+      "text": "douadrumuri.in4 abcd bcde aaaa zdefdouadrumuri.out5ExplicațiiÎn primul exemplu, drumurile sunt: (1, 1) → (1, 2) → (1, 3) → (2, 3) → (3, 3) (1, 1) → (2, 1) → (2, 2) → (3, 2) → (3, 3) Șirurile generate de acestea sunt: abefq acefq"
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "În primul exemplu, drumurile sunt:"
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 300"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q8cf676f26e.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Moldovan Robert (moldovan_robert_lol)",
+    "clasa": "11",
+    "intrare/ieșire": "douadrumuri.in / douadrumuri.out",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "256 MB / 8 MB",
+    "sursa problemei": "Concursul Interjudețean de Matematică și Informatică Grigore Moisil, 2023",
+    "autor": "Bogdan Pop",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 256,
+  "author": "Bogdan Pop",
+  "sourceAttribution": "Concursul Interjudețean de Matematică și Informatică Grigore Moisil, 2023",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4564/douadrumuri"
+}

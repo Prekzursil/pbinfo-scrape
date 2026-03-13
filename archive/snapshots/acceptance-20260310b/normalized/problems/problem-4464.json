@@ -1,0 +1,322 @@
+{
+  "id": 4464,
+  "slug": "excursie1",
+  "name": "excursie1",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4464/excursie1",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 65,
+      "name": "Structuri de date arborescente",
+      "slug": "structuri-de-date-arborescente",
+      "href": "/?pagina=probleme-lista&tag=65"
+    },
+    {
+      "id": 154,
+      "name": "Arbori de intervale",
+      "slug": "arbori-de-intervale",
+      "href": "/?pagina=probleme-lista&tag=154"
+    }
+  ],
+  "tags": [
+    "Range Minimum Query"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p> Pentru fiecare dintre cele <code>Q</code> excursii, se cere să se determine <strong>costul total minim</strong>, exprimat în dolari, care va fi plătit pentru ca cei doi tineri să se poată întâlni într-unul dintre cele <code>N</code> sate, eventual după modificarea a <code>0</code> sau mai multe indicatoare din satele vizitate.</p>",
+      "text": "Pentru fiecare dintre cele Q excursii, se cere să se determine costul total minim, exprimat în dolari, care va fi plătit pentru ca cei doi tineri să se poată întâlni într-unul dintre cele N sate, eventual după modificarea a 0 sau mai multe indicatoare din satele vizitate."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie a fișierului de intrare <code>excursie.in</code> se află numărul natural nenul <code>N</code>, cu semnificația de mai sus. Pe următoarea linie se află, fără niciun spațiu între ele, <code>N</code> caractere ce pot fi fie <code>R</code>, fie <code>L</code>, al <code>i</code>-lea caracter reprezentând ce este scris inițial pe indicatorul din dreptul satului <code>i</code>. Pe cea de a treia linie se află numărul natural nenul <code>Q</code>, reprezentând numărul de excursii. Pe următoarele <code>Q</code> linii se află, separate prin câte un spațiu, câte două numere naturale <code>i</code> și <code>j</code>, descriind, în ordine, excursiile tinerilor, adică satele din care pornesc cei doi în fiecare dintre cele <code>Q</code> zile.</p>",
+      "text": "Pe prima linie a fișierului de intrare excursie.in se află numărul natural nenul N, cu semnificația de mai sus. Pe următoarea linie se află, fără niciun spațiu între ele, N caractere ce pot fi fie R, fie L, al i-lea caracter reprezentând ce este scris inițial pe indicatorul din dreptul satului i. Pe cea de a treia linie se află numărul natural nenul Q, reprezentând numărul de excursii. Pe următoarele Q linii se află, separate prin câte un spațiu, câte două numere naturale i și j, descriind, în ordine, excursiile tinerilor, adică satele din care pornesc cei doi în fiecare dintre cele Q zile."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>excursie.out</code> va conține <code>Q</code> linii, pe cea de a <code>i</code>-a linie aflându-se <strong>costul total minim</strong> necesar efectuării excursiei din ziua <code>i</code>, pentru fiecare <code>i</code>: <code>1 ≤ i ≤ Q</code>.</p>",
+      "text": "Fișierul de ieșire excursie.out va conține Q linii, pe cea de a i-a linie aflându-se costul total minim necesar efectuării excursiei din ziua i, pentru fiecare i: 1 ≤ i ≤ Q."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2 ≤ N ≤ 200.000</code> și <code>1 ≤ Q ≤ 200.000</code></li>\n\t<li>Indicatoarele din satele <code>1</code> și <code>N</code> nu pot fi modificate.</li>\n\t<li>Chiar dacă pentru efectuarea unei excursii dintre cele <code>Q</code> se pot modifica indicatoarele anumitor sate, în timpul nopții, înainte de începerea următoarei excursii, acestea vor reveni la starea inițială, așa cum au fost descrise în fișierul de intrare.</li>\n\t<li>Dacă pentru efectuarea unei excursii nu este necesar să fie schimbat niciun indicator, atunci costul (total) aferent acesteia va fi egal cu <code>0</code> dolari. De asemenea, în cadrul unei excursii, este permis ca indicația de pe un indicator întâlnit pe parcursul traseului să fie schimbată de mai multe ori.</li>\n\t<li>Este posibil ca pentru efectuarea unei excursii să existe mai multe modalități de a modifica indicatoarele astfel încât costul total să fie minim.</li>\n</ul>",
+      "text": "2 ≤ N ≤ 200.000 și 1 ≤ Q ≤ 200.000 Indicatoarele din satele 1 și N nu pot fi modificate. Chiar dacă pentru efectuarea unei excursii dintre cele Q se pot modifica indicatoarele anumitor sate, în timpul nopții, înainte de începerea următoarei excursii, acestea vor reveni la starea inițială, așa cum au fost descrise în fișierul de intrare. Dacă pentru efectuarea unei excursii nu este necesar să fie schimbat niciun indicator, atunci costul (total) aferent acesteia va fi egal cu 0 dolari. De asemenea, în cadrul unei excursii, este permis ca indicația de pe un indicator întâlnit pe parcursul traseului să fie schimbată de mai multe ori. Este posibil ca pentru efectuarea unei excursii să existe mai multe modalități de a modifica indicatoarele astfel încât costul total să fie minim."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>excursie.in</code></p><pre>7\nRRRLLLL\n1\n2 6</pre><p><code>excursie.out</code></p><pre>0</pre><h3>Explicație</h3><p>Pe insulă există <code>N = 7</code> sate, iar inițial, conform indicatoarelor din dreptul satelor:</p><ul>\n\t<li>din satul <code>1</code> se poate ajunge în satul <code>2</code>;</li>\n\t<li>din satul <code>2</code> se poate ajunge în satul <code>3</code>;</li>\n\t<li>din satul <code>3</code> se poate ajunge în satul <code>4</code>;</li>\n\t<li>din satul <code>4</code> se poate ajunge în satul <code>3</code>;</li>\n\t<li>din satul <code>5</code> se poate ajunge în satul <code>4</code>;</li>\n\t<li>din satul <code>6</code> se poate ajunge în satul <code>5</code>;</li>\n\t<li>din satul <code>7</code> se poate ajunge în satul <code>6</code>.</li>\n</ul><p>Va fi efectuată o singură excursie (<code>Q = 1</code>): John va începe din satul <code>2</code>, iar Mary din satul <code>6</code>. Fără a schimba niciun indicator (cost total: <code>0</code> dolari), cei doi se pot întâlni, de exemplu, în satul <code>3</code>, respectând indicațiile de pe indicatoarele întâlnite. Astfel, John se va deplasa din satul <code>2</code> în satul <code>3</code>. De asemenea, Mary se va deplasa, pornind din satul <code>6</code>, în satul <code>5</code>, apoi în satul <code>4</code>, iar în cele din urmă în satul <code>3</code>, unde se va întâlni cu John.</p>",
+      "text": "excursie.in7 RRRLLLL 1 2 6excursie.out0ExplicațiePe insulă există N = 7 sate, iar inițial, conform indicatoarelor din dreptul satelor: din satul 1 se poate ajunge în satul 2; din satul 2 se poate ajunge în satul 3; din satul 3 se poate ajunge în satul 4; din satul 4 se poate ajunge în satul 3; din satul 5 se poate ajunge în satul 4; din satul 6 se poate ajunge în satul 5; din satul 7 se poate ajunge în satul 6. Va fi efectuată o singură excursie (Q = 1): John va începe din satul 2, iar Mary din satul 6. Fără a schimba niciun indicator (cost total: 0 dolari), cei doi se pot întâlni, de exemplu, în satul 3, respectând indicațiile de pe indicatoarele întâlnite. Astfel, John se va deplasa din satul 2 în satul 3. De asemenea, Mary se va deplasa, pornind din satul 6, în satul 5, apoi în satul 4, iar în cele din urmă în satul 3, unde se va întâlni cu John."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>excursie.in</code></p><pre>5\nRRLRL\n3\n1 3\n4 1\n2 5</pre><p><code>excursie.out</code></p><pre>0\n1\n1</pre><h3>Explicație</h3><p>Pentru cea de a doua excursie <code>(4, 1)</code>, este necesar ca cel puțin un indicator să fie schimbat, cu costul de <code>1</code> dolar. De exemplu, indicatorul din dreptul satului <code>3</code> poate fi transformat din <code>L</code> în <code>R</code>.</p>",
+      "text": "excursie.in5 RRLRL 3 1 3 4 1 2 5excursie.out0 1 1ExplicațiePentru cea de a doua excursie (4, 1), este necesar ca cel puțin un indicator să fie schimbat, cu costul de 1 dolar. De exemplu, indicatorul din dreptul satului 3 poate fi transformat din L în R."
+    },
+    {
+      "title": "Exemplul 3:",
+      "html": "<p><code>excursie.in</code></p><pre>8\nRLRRRLRL\n4\n2 4\n1 6\n2 8\n6 2</pre><p><code>excursie.out</code></p><pre>1\n1\n2\n1</pre><h3>Explicație</h3><p>Pentru cea de a treia excursie <code>(2, 8)</code>, este nevoie ca cel puțin două indicatoare să fie schimbate, cu costul total de <code>2</code> dolari. De exemplu, indicatoarele din dreptul satelor <code>2</code> și <code>6</code> pot fi transformate din <code>L</code> în <code>R</code>. John și Mary nu se pot întâlni dacă nu schimbă cel puțin două indicatoare în cadrul acestei excursii.</p>",
+      "text": "excursie.in8 RLRRRLRL 4 2 4 1 6 2 8 6 2excursie.out1 1 2 1ExplicațiePentru cea de a treia excursie (2, 8), este nevoie ca cel puțin două indicatoare să fie schimbate, cu costul total de 2 dolari. De exemplu, indicatoarele din dreptul satelor 2 și 6 pot fi transformate din L în R. John și Mary nu se pot întâlni dacă nu schimbă cel puțin două indicatoare în cadrul acestei excursii."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Pe insulă există N = 7 sate, iar inițial, conform indicatoarelor din dreptul satelor:"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Pentru cea de a doua excursie (4, 1), este necesar ca cel puțin un indicator să fie schimbat, cu costul de 1 dolar. De exemplu, indicatorul din dreptul satului 3 poate fi transformat din L în R."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Pentru cea de a treia excursie (2, 8), este nevoie ca cel puțin două indicatoare să fie schimbate, cu costul total de 2 dolari. De exemplu, indicatoarele din dreptul satelor 2 și 6 pot fi transformate din L în R. John și Mary nu se pot întâlni dacă nu schimbă cel puțin două indicatoare în cadrul acestei excursii."
+    }
+  ],
+  "constraints": [
+    "2 ≤ N ≤ 200.000 și 1 ≤ Q ≤ 200.000",
+    "Indicatoarele din satele 1 și N nu pot fi modificate.",
+    "Chiar dacă pentru efectuarea unei excursii dintre cele Q se pot modifica indicatoarele anumitor sate, în timpul nopții, înainte de începerea următoarei excursii, acestea vor reveni la starea inițială, așa cum au fost descrise în fișierul de intrare.",
+    "Dacă pentru efectuarea unei excursii nu este necesar să fie schimbat niciun indicator, atunci costul (total) aferent acesteia va fi egal cu 0 dolari. De asemenea, în cadrul unei excursii, este permis ca indicația de pe un indicator întâlnit pe parcursul traseului să fie schimbată de mai multe ori.",
+    "Este posibil ca pentru efectuarea unei excursii să existe mai multe modalități de a modifica indicatoarele astfel încât costul total să fie minim."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q61c8196d08.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "11",
+    "intrare/ieșire": "excursie.in / excursie.out",
+    "limită timp": "0.3 secunde",
+    "limită memorie": "128 MB / 64 MB",
+    "sursa problemei": "Lot informatică 2023",
+    "autor": "Andrei Onuț, Daniela Lica",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.3,
+  "memoryLimitMb": 128,
+  "author": "Andrei Onuț, Daniela Lica",
+  "sourceAttribution": "Lot informatică 2023",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4464/excursie1"
+}

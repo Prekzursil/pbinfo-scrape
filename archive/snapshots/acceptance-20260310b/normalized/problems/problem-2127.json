@@ -1,0 +1,323 @@
+{
+  "id": 2127,
+  "slug": "ninjago",
+  "name": "ninjago",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/2127/ninjago",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 16,
+      "name": "Teoria Grafurilor",
+      "slug": "teoria-grafurilor",
+      "href": "/?pagina=probleme-lista&tag=16"
+    },
+    {
+      "id": 60,
+      "name": "Grafuri cu costuri",
+      "slug": "grafuri-cu-costuri",
+      "href": "/?pagina=probleme-lista&tag=60"
+    }
+  ],
+  "tags": [
+    "Algoritmul lui Kruskal",
+    "Păduri de mulțimi disjuncte"
+  ],
+  "sections": [
+    {
+      "title": "Cerințe",
+      "html": "<ol>\n\t<li>Precizați la câte dintre cele <code>n</code> păpuși poate ajunge Zane înainte de a cere ajutorul celorlalți ninja.</li>\n\t<li>Precizați pentru eliberarea câtor coridoare trebuie să ceară ajutor extern pentru a reuși să ajungă la toate cele <code>n</code> păpuși și câte obstacole de tip <code>E</code> sunt în total pe aceste coridoare.</li>\n\t<li>Precizați care este numărul minim de unități de energie utilizate.</li>\n</ol>",
+      "text": "Precizați la câte dintre cele n păpuși poate ajunge Zane înainte de a cere ajutorul celorlalți ninja. Precizați pentru eliberarea câtor coridoare trebuie să ceară ajutor extern pentru a reuși să ajungă la toate cele n păpuși și câte obstacole de tip E sunt în total pe aceste coridoare. Precizați care este numărul minim de unități de energie utilizate."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>ninjago.in</code> conține pe prima linie <code>v</code> care&nbsp;poate avea doar valorile <code>1</code>, <code>2</code> sau <code>3</code> reprezentând cerința care va fi rezolvată. Fișierul <code>ninjago.in</code> conține pe a doua linie numerele naturale <code>n</code> și <code>m</code> separate printr-un spațiu, iar pe următoarele <code>m</code> linii pentru fiecare coridor două numere naturale separate printr-un spațiu reprezentând cele două păpuși între care se circulă pe coridorul respectiv urmate de un spaţiu și patru litere corespunzătoare celor patru tipuri de obstacole în ordinea în care Skulkiu le-a amplasat pe coridorul respectiv. Între cele patru litere nu se află nici un spaţiu.</p>",
+      "text": "Fișierul de intrare ninjago.in conține pe prima linie v care poate avea doar valorile 1, 2 sau 3 reprezentând cerința care va fi rezolvată. Fișierul ninjago.in conține pe a doua linie numerele naturale n și m separate printr-un spațiu, iar pe următoarele m linii pentru fiecare coridor două numere naturale separate printr-un spațiu reprezentând cele două păpuși între care se circulă pe coridorul respectiv urmate de un spaţiu și patru litere corespunzătoare celor patru tipuri de obstacole în ordinea în care Skulkiu le-a amplasat pe coridorul respectiv. Între cele patru litere nu se află nici un spaţiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Dacă valoarea lui <code>v</code> este <code>1</code> atunci fișierul de ieșire <code>ninjago.out</code> va conține pe prima linie numai numărul păpușilor la care poate ajunge Zane înainte de a cere ajutorul celorlalți ninja.</p><p>Dacă valoarea lui <code>v</code> este <code>2</code> atunci fișierul de ieșire <code>ninjago.out</code> va conține pe prima linie numărul de coridoare pe care nu le poate elibera singur și pe a doua linie numărul total de obstacole de tip <code>E</code> de pe aceste coridoare.</p><p>Dacă valoarea lui <code>v</code> este <code>3</code> atunci fișierul de ieșire <code>ninjago.out</code> va conține pe prima linie numai numărul minim de unități de energie utilizate.</p>",
+      "text": "Dacă valoarea lui v este 1 atunci fișierul de ieșire ninjago.out va conține pe prima linie numai numărul păpușilor la care poate ajunge Zane înainte de a cere ajutorul celorlalți ninja.Dacă valoarea lui v este 2 atunci fișierul de ieșire ninjago.out va conține pe prima linie numărul de coridoare pe care nu le poate elibera singur și pe a doua linie numărul total de obstacole de tip E de pe aceste coridoare.Dacă valoarea lui v este 3 atunci fișierul de ieșire ninjago.out va conține pe prima linie numai numărul minim de unități de energie utilizate."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤  N,M  ≤ 31200</code>;</li>\n\t<li>Pentru rezolvarea corectă a primei cerințe se acordă 20 de puncte;</li>\n\t<li>Pentru rezolvarea corectă a celei de-a doua cerințe se acordă 40 de puncte;</li>\n\t<li>Pentru rezolvarea corectă a celei de-a treia cerințe se acordă 30 de puncte.</li>\n\t<li>În concurs s-au acordat 10 puncte din oficiu. Pe site se acordă 10 puncte pentru exemple.</li>\n</ul>",
+      "text": "1 ≤ N,M ≤ 31200; Pentru rezolvarea corectă a primei cerințe se acordă 20 de puncte; Pentru rezolvarea corectă a celei de-a doua cerințe se acordă 40 de puncte; Pentru rezolvarea corectă a celei de-a treia cerințe se acordă 30 de puncte. În concurs s-au acordat 10 puncte din oficiu. Pe site se acordă 10 puncte pentru exemple."
+    },
+    {
+      "title": "Exemplul 1",
+      "html": "<p><code>ninjago.in</code></p><pre>1\n9 15\n1 2 CBAA \n1 5 ABAA \n2 6 CBEA \n2 7 ACBA \n2 5 CBEA \n3 4 ABAA \n3 7 AECE \n3 8 CBAC \n3 9 ECEE \n4 8 DBAD \n4 9 ECEB \n5 6 CBAD \n5 7 BAAD \n6 7 CBAA \n7 8 ECEB </pre><p><code>ninjago.out</code></p><pre>5</pre>",
+      "text": "ninjago.in1 9 15 1 2 CBAA 1 5 ABAA 2 6 CBEA 2 7 ACBA 2 5 CBEA 3 4 ABAA 3 7 AECE 3 8 CBAC 3 9 ECEE 4 8 DBAD 4 9 ECEB 5 6 CBAD 5 7 BAAD 6 7 CBAA 7 8 ECEB ninjago.out5"
+    },
+    {
+      "title": "Exemplul 2",
+      "html": "<p><code>ninjago.in</code></p><pre>2\n9 15\n1 2 CBAA \n1 5 ABAA \n2 6 CBEA \n2 7 ACBA \n2 5 CBEA \n3 4 ABAA \n3 7 AECE \n3 8 CBAC \n3 9 ECEE \n4 8 DBAD \n4 9 ECEB \n5 6 CBAD \n5 7 BAAD \n6 7 CBAA \n7 8 ECEB</pre><p><code>ninjago.out</code></p><pre>2\n4</pre>",
+      "text": "ninjago.in2 9 15 1 2 CBAA 1 5 ABAA 2 6 CBEA 2 7 ACBA 2 5 CBEA 3 4 ABAA 3 7 AECE 3 8 CBAC 3 9 ECEE 4 8 DBAD 4 9 ECEB 5 6 CBAD 5 7 BAAD 6 7 CBAA 7 8 ECEBninjago.out2 4"
+    },
+    {
+      "title": "Exemplul 3",
+      "html": "<p><code>ninjago.in</code></p><pre>3\n9 15\n1 2 CBAA \n1 5 ABAA \n2 6 CBEA \n2 7 ACBA \n2 5 CBEA \n3 4 ABAA \n3 7 AECE \n3 8 CBAC \n3 9 ECEE \n4 8 DBAD \n4 9 ECEB \n5 6 CBAD \n5 7 BAAD \n6 7 CBAA \n7 8 ECEB</pre><p><code>ninjago.out</code></p><pre>1593</pre><h3>Explicații</h3><h3>Explicația exemplului 1</h3><p>Zane va putea ajunge la nodurile <code>1</code>, <code>2</code>, <code>5</code>, <code>6</code>, <code>7</code>. eliberând singur coridoarele (1,2), (1,5), (2,7) și (6,7)</p><h3>Explicația exemplului 2</h3><p>Zane trebuie să ceară ajutor pentru eliberarea a <code>2</code> coridoare pentru a putea ajunge la toate cele <code>9</code> păpuși. <br>\nZane are nevoie de ajutor pentru a elibera coridoarele <code>(3,7)</code> și <code>(4,9)</code>. Pe fiecare dintre aceste <code>2</code> coridoare se află câte <code>2</code> obstacole de tip <code>E</code>, deci în total <code>4</code> obstacole de tip <code>E</code>.</p><h3>Explicația exemplului 3</h3><p>Zane va consuma minim <code>1593</code> de unități de energie astfel:</p><ul>\n\t<li><code>163</code> pentru coridorul <code>(1,2)</code></li>\n\t<li><code>161</code> pentru coridorul <code>(1,5)</code></li>\n\t<li><code>191</code> pentru coridorul <code>(2,7)</code></li>\n\t<li><code>161</code> pentru coridorul <code>(3,4)</code></li>\n\t<li><code>76</code> pentru coridorul <code>(3,7)</code></li>\n\t<li><code>413</code> pentru coridorul <code>(3,8)</code></li>\n\t<li><code>265</code> pentru coridorul <code>(4,9)</code></li>\n\t<li><code>163</code> pentru coridorul <code>(6,7)</code></li>\n</ul><p>Pentru coridorul <code>(4,9)</code> obstacolele sunt <code>ECEB</code>, deci Zane va consuma  <code>0+3*5+0*25+2*125=265</code> unități de energie.</p>",
+      "text": "ninjago.in3 9 15 1 2 CBAA 1 5 ABAA 2 6 CBEA 2 7 ACBA 2 5 CBEA 3 4 ABAA 3 7 AECE 3 8 CBAC 3 9 ECEE 4 8 DBAD 4 9 ECEB 5 6 CBAD 5 7 BAAD 6 7 CBAA 7 8 ECEBninjago.out1593ExplicațiiExplicația exemplului 1Zane va putea ajunge la nodurile 1, 2, 5, 6, 7. eliberând singur coridoarele (1,2), (1,5), (2,7) și (6,7)Explicația exemplului 2Zane trebuie să ceară ajutor pentru eliberarea a 2 coridoare pentru a putea ajunge la toate cele 9 păpuși. Zane are nevoie de ajutor pentru a elibera coridoarele (3,7) și (4,9). Pe fiecare dintre aceste 2 coridoare se află câte 2 obstacole de tip E, deci în total 4 obstacole de tip E.Explicația exemplului 3Zane va consuma minim 1593 de unități de energie astfel: 163 pentru coridorul (1,2) 161 pentru coridorul (1,5) 191 pentru coridorul (2,7) 161 pentru coridorul (3,4) 76 pentru coridorul (3,7) 413 pentru coridorul (3,8) 265 pentru coridorul (4,9) 163 pentru coridorul (6,7) Pentru coridorul (4,9) obstacolele sunt ECEB, deci Zane va consuma 0+3*5+0*25+2*125=265 unități de energie."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Zane va putea ajunge la nodurile 1, 2, 5, 6, 7. eliberând singur coridoarele (1,2), (1,5), (2,7) și (6,7)"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Zane trebuie să ceară ajutor pentru eliberarea a 2 coridoare pentru a putea ajunge la toate cele 9 păpuși. Zane are nevoie de ajutor pentru a elibera coridoarele (3,7) și (4,9). Pe fiecare dintre aceste 2 coridoare se află câte 2 obstacole de tip E, deci în total 4 obstacole de tip E."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Zane va consuma minim 1593 de unități de energie astfel:"
+    }
+  ],
+  "constraints": [
+    "1 ≤ N,M ≤ 31200;",
+    "Pentru rezolvarea corectă a primei cerințe se acordă 20 de puncte;",
+    "Pentru rezolvarea corectă a celei de-a doua cerințe se acordă 40 de puncte;",
+    "Pentru rezolvarea corectă a celei de-a treia cerințe se acordă 30 de puncte.",
+    "În concurs s-au acordat 10 puncte din oficiu. Pe site se acordă 10 puncte pentru exemple."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qbe8a6d4e5d.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "11",
+    "intrare/ieșire": "ninjago.in / ninjago.out",
+    "limită timp": "1 secunde",
+    "limită memorie": "64 MB / 32 MB",
+    "sursa problemei": "OJI 2017, Clasele XI-XII",
+    "autor": "Muresan Codruta",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 1,
+  "memoryLimitMb": 64,
+  "author": "Muresan Codruta",
+  "sourceAttribution": "OJI 2017, Clasele XI-XII",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/2127/ninjago"
+}

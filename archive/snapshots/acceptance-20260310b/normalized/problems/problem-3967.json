@@ -1,0 +1,304 @@
+{
+  "id": 3967,
+  "slug": "logic1",
+  "name": "Logic1",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3967/logic1",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 81,
+      "name": "Recursivitate",
+      "slug": "recursivitate",
+      "href": "/?pagina=probleme-lista&tag=81"
+    },
+    {
+      "id": 83,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=83"
+    }
+  ],
+  "tags": [
+    "Evaluare de expresii",
+    "Recursivitate"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Scrieţi un program care determină dacă <strong>două expresii logice</strong> sunt <strong>echivalente</strong> sau <strong>nu</strong>.  </p><p>Fiecare expresie este formată din:  </p><ul>\n\t<li>variabile, cele <code>26</code> de <strong>litere mici ale alfabetului englez</strong>, de la <code>a – z</code>;</li>\n\t<li>operatori binari <code>&amp;, ^, |</code> <strong>(ŞI, <span class=\"caps\">SAU</span> <span class=\"caps\">EXCLUSIV</span> respectiv <span class=\"caps\">SAU</span>)</strong>;</li>\n\t<li>operatorul unar <code>~ (NEGAŢIE)</code>;</li>\n\t<li>paranteze rotunde.</li>\n</ul><p>Expresiile vor fi evaluate respectând regulile de <strong>priorităţi ale operatorilor şi parantezelor</strong> pentru evaluarea expresiilor logice în care intervin ca operanzi biţii <code>0</code> şi <code>1</code>. <strong>Priorităţile în ordine descrescătoare</strong> sunt: parantezele rotunde <code>(, )</code>, operatorul unar <code>~</code>, operatorii binari în ordine descrescătoare <code>&amp;, ^, |</code>. </p><p>Două expresii sunt echivalente dacă: </p><ul>\n\t<li>conţin acelaşi set de variabile indiferent de numărul de apariţii a variabilei în expresie;</li>\n\t<li>pentru orice set de date de intrare pentru variabile (valori <code>0, 1</code>) rezultatul obţinut este acelaşi. Se dau <code>n</code> <strong>numere naturale</strong>. Calculați suma lor.</li>\n</ul>",
+      "text": "Scrieţi un program care determină dacă două expresii logice sunt echivalente sau nu. Fiecare expresie este formată din: variabile, cele 26 de litere mici ale alfabetului englez, de la a – z; operatori binari &, ^, | (ŞI, SAU EXCLUSIV respectiv SAU); operatorul unar ~ (NEGAŢIE); paranteze rotunde. Expresiile vor fi evaluate respectând regulile de priorităţi ale operatorilor şi parantezelor pentru evaluarea expresiilor logice în care intervin ca operanzi biţii 0 şi 1. Priorităţile în ordine descrescătoare sunt: parantezele rotunde (, ), operatorul unar ~, operatorii binari în ordine descrescătoare &, ^, |. Două expresii sunt echivalente dacă: conţin acelaşi set de variabile indiferent de numărul de apariţii a variabilei în expresie; pentru orice set de date de intrare pentru variabile (valori 0, 1) rezultatul obţinut este acelaşi. Se dau n numere naturale. Calculați suma lor."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fişierul de intrare <code>logic.in</code> conţine pe primul rând un număr natural <code>n</code>, ce reprezintă numărul testelor ce se vor evalua. Fiecare test reprezintă evaluarea a două expresii. Pe următoarele <code>2 * n</code> linii sunt şiruri de caractere ce constituie expresiile. Acestea sunt scrise pe câte o linie fiecare. </p>",
+      "text": "Fişierul de intrare logic.in conţine pe primul rând un număr natural n, ce reprezintă numărul testelor ce se vor evalua. Fiecare test reprezintă evaluarea a două expresii. Pe următoarele 2 * n linii sunt şiruri de caractere ce constituie expresiile. Acestea sunt scrise pe câte o linie fiecare."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fişierul de ieşire <code>logic.out</code> va conţine <code>n</code> linii, pe fiecare linie <code>k</code> fiind mesajul <code>egale</code> sau <code>diferite</code> în funcţie de rezultatul evaluării expresiilor de pe liniile <code>2*k</code> şi respectiv <code>2*k+1</code> din fişierul de intrare.</p>",
+      "text": "Fişierul de ieşire logic.out va conţine n linii, pe fiecare linie k fiind mesajul egale sau diferite în funcţie de rezultatul evaluării expresiilor de pe liniile 2*k şi respectiv 2*k+1 din fişierul de intrare."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>0 &lt; n ≤ 50</code></li>\n\t<li><code>n</code> reprezintă numărul de perechi de expresii ce trebuie evaluate.</li>\n\t<li>O expresie conţine cel mult <code>100</code> <strong>de operaţii</strong> şi maxim <code>10</code> <strong>variabile</strong>.</li>\n\t<li>O expresie poate avea cel mult <code>255</code> <strong>caractere</strong>. <strong>Spaţiul nu este separator în interiorul unei expresii</strong>.</li>\n\t<li>Numele unei variabile este <strong>un singur caracter</strong>, <strong>literă mică a alfabetului englez</strong>.</li>\n\t<li>Expresiile date sunt corecte.</li>\n</ul>",
+      "text": "0 < n ≤ 50 n reprezintă numărul de perechi de expresii ce trebuie evaluate. O expresie conţine cel mult 100 de operaţii şi maxim 10 variabile. O expresie poate avea cel mult 255 caractere. Spaţiul nu este separator în interiorul unei expresii. Numele unei variabile este un singur caracter, literă mică a alfabetului englez. Expresiile date sunt corecte."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>logic.in</code></p><pre>4\na&amp;(c|~c)\na\n~(a|b|c|d)\n~a&amp;~b&amp;~c&amp;~d\nz&amp;b\na&amp;b\na|b\n(a|~a)&amp;(a|~a)&amp;(a|~a)&amp;(a|b)</pre><p><code>logic.out</code></p><pre>diferite \negale \ndiferite \negale </pre><h3>Explicație</h3><p>Pentru ultimul set de expresii tabelul este: </p><p><a><img src=\"https://i.ibb.co/vBCz0F1/tabel.png\" alt=\"tabel\" border=\"0\"></a></p><p>unde <code>E</code> = <code>(a|~a)&amp;(a|~a)&amp;(a|~a)&amp;(a|b)</code></p>",
+      "text": "logic.in4 a&(c|~c) a ~(a|b|c|d) ~a&~b&~c&~d z&b a&b a|b (a|~a)&(a|~a)&(a|~a)&(a|b)logic.outdiferite egale diferite egale ExplicațiePentru ultimul set de expresii tabelul este: unde E = (a|~a)&(a|~a)&(a|~a)&(a|b)"
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Pentru ultimul set de expresii tabelul este:"
+    }
+  ],
+  "constraints": [
+    "0 < n ≤ 50",
+    "n reprezintă numărul de perechi de expresii ce trebuie evaluate.",
+    "O expresie conţine cel mult 100 de operaţii şi maxim 10 variabile.",
+    "O expresie poate avea cel mult 255 caractere. Spaţiul nu este separator în interiorul unei expresii.",
+    "Numele unei variabile este un singur caracter, literă mică a alfabetului englez.",
+    "Expresiile date sunt corecte."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q25b938dcfc.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Dumitrescu Ovidiu Mihail (dovidiu)",
+    "clasa": "10",
+    "intrare/ieșire": "logic.in / logic.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "8 MB / 2 MB",
+    "sursa problemei": "ONI 2006, Clasa a X-a",
+    "autor": "Adrian Niţă, Maria Niţă",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 8,
+  "author": "Adrian Niţă, Maria Niţă",
+  "sourceAttribution": "ONI 2006, Clasa a X-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3967/logic1"
+}

@@ -1,0 +1,330 @@
+{
+  "id": 4113,
+  "slug": "dulciuri",
+  "name": "dulciuri",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4113/dulciuri",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 65,
+      "name": "Structuri de date arborescente",
+      "slug": "structuri-de-date-arborescente",
+      "href": "/?pagina=probleme-lista&tag=65"
+    },
+    {
+      "id": 154,
+      "name": "Arbori de intervale",
+      "slug": "arbori-de-intervale",
+      "href": "/?pagina=probleme-lista&tag=154"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Dându-se toate operațiile întreprinse în producerea desertului, să se găsească dulcețurile totale ce sunt găsite la toate operațiile de degustare. </p>",
+      "text": "Dându-se toate operațiile întreprinse în producerea desertului, să se găsească dulcețurile totale ce sunt găsite la toate operațiile de degustare."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie a fișierului de intrare <strong>dulciuri.in</strong> se va găsi numărul <code>Q</code> de operații.</p><p>Pe următoarele <code>Q</code> linii urmează descrieri a tuturor operațiilor, câte una pe linie, în ordine. O operație este codificată în felul următor:</p><ul>\n\t<li>O îndulcire verticală este codificată prin <code>1 x</code><sub><code>u</code></sub> <code>v</code>.</li>\n\t<li>O îndulcire orizontală este codificată prin <code>2 y</code><sub><code>u</code></sub> <code>v</code>.</li>\n\t<li>O degustare este codificată prin <code>3 x</code><sub><code>q</code></sub> <code>y</code><sub><code>q</code></sub> <code>x</code><sub><code>q'</code></sub> <code>y</code><sub><code>q'</code></sub>.</li>\n</ul>",
+      "text": "Pe prima linie a fișierului de intrare dulciuri.in se va găsi numărul Q de operații.Pe următoarele Q linii urmează descrieri a tuturor operațiilor, câte una pe linie, în ordine. O operație este codificată în felul următor: O îndulcire verticală este codificată prin 1 xu v. O îndulcire orizontală este codificată prin 2 yu v. O degustare este codificată prin 3 xq yq xq' yq'."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>În fișierul de ieșire <code>dulciuri.out</code>, să se afișeze toate rezultatele degustărilor, în ordine, câte una pe linie. Rezultatul unei degustări se consideră a fi corect daca eroarea absolută sau relativă față de soluția comisiei este cel mult <code>10</code><sup><code>-7</code></sup>.</p>",
+      "text": "În fișierul de ieșire dulciuri.out, să se afișeze toate rezultatele degustărilor, în ordine, câte una pe linie. Rezultatul unei degustări se consideră a fi corect daca eroarea absolută sau relativă față de soluția comisiei este cel mult 10-7."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li>Toate coordonatele din datele de intrare sunt întregi în intervalul <code>[0, 1.000.000]</code>.</li>\n\t<li><code>0 ≤ v ≤ 1000</code>.</li>\n\t<li><code>v</code> este întreg.</li>\n\t<li><code>1 ≤ Q ≤ 100.000</code>.</li>\n\t<li>Pentru 20 de puncte nu se fac îndulciri orizontale și <code>Q ≤ 2000</code>.</li>\n\t<li>Pentru 20 de puncte, la fiecare degustare, fie <code>x</code><sub><code>q</code></sub> <code>= x</code><sub><code>q'</code></sub> sau <code>y</code><sub><code>q</code></sub> <code>= y</code><sub><code>q'</code></sub>, <code>Q ≤ 2000</code></li>\n\t<li>Pentru 10 de puncte, se face cel mult o degustare</li>\n\t<li>Pentru 20 de puncte, toate degustările se fac după toate îndulcirile</li>\n\t<li>Pentru 10 de puncte, <code>Q ≤ 2000</code></li>\n\t<li>Pentru 20 de puncte, fără restricții suplimentare</li>\n</ul>",
+      "text": "Toate coordonatele din datele de intrare sunt întregi în intervalul [0, 1.000.000]. 0 ≤ v ≤ 1000. v este întreg. 1 ≤ Q ≤ 100.000. Pentru 20 de puncte nu se fac îndulciri orizontale și Q ≤ 2000. Pentru 20 de puncte, la fiecare degustare, fie xq = xq' sau yq = yq', Q ≤ 2000 Pentru 10 de puncte, se face cel mult o degustare Pentru 20 de puncte, toate degustările se fac după toate îndulcirile Pentru 10 de puncte, Q ≤ 2000 Pentru 20 de puncte, fără restricții suplimentare"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>dulciuri.in</code></p><pre>3\n1 2 60\n2 3 60\n3 0 0 3 4</pre><p><code>dulciuri.out</code></p><pre>35</pre><h3>Explicație</h3><p>Situația pentru degustarea din primul exemplu este explicată în diagrama de mai jos.</p><p><img alt=\"\" src=\"/resurse/16a4b0/dulciuri_1.jpg\"></p><p>Zonele roz sunt zonele în care s-a aplicat o îndulcire, și numerele reprezintă cu cât s-a îndulcit. Zona din intersecția îndulcirilor are dulceața 120. Linia diagonală punctată reprezintă traseul.</p><p>Traseul are lungimea \\( \\sqrt{3^2 + 4^2} = 5 \\), și este completat într-o secundă – astfel are viteza de <code>5</code> unități pe secundă. Segmentul de la <code>(2, 2.(6))</code> la <code>(2.25, 3)</code> are lungimea \\( \\sqrt{(2.25 – 2)^2 + (2.(6) – 3)^2} = \\sqrt{¼^2 + (1/3)^2} = 5/12 \\), și are dulceața <code>60</code> – astfel el este traversat în <code>(5/12) x (1/5) = 1/12</code> secunde, și contribuie cu <code>(1/12) x 60 = 5</code> la dulceața totală. Segmentul de la <code>(2.25, 3)</code> la <code>(3, 4)</code> are lungimea \\( \\sqrt{(3 – 2.25)^2 + (4 – 3)^2} = 5/4 \\), și are dulceața <code>120</code> – astfel el este traversat în <code>(5/4) x (1/5) = 1/4</code> secunde, și contribuie cu <code>(1/4) x 120 = 30</code> la dulceața totală. Astfel, cum segmentul de la <code>(0, 0)</code> la <code>(2, 2.(6))</code> contribuie cu <code>0</code>, dulceața totală este <code>35</code>.</p>",
+      "text": "dulciuri.in3 1 2 60 2 3 60 3 0 0 3 4dulciuri.out35ExplicațieSituația pentru degustarea din primul exemplu este explicată în diagrama de mai jos.Zonele roz sunt zonele în care s-a aplicat o îndulcire, și numerele reprezintă cu cât s-a îndulcit. Zona din intersecția îndulcirilor are dulceața 120. Linia diagonală punctată reprezintă traseul.Traseul are lungimea \\( \\sqrt{3^2 + 4^2} = 5 \\), și este completat într-o secundă – astfel are viteza de 5 unități pe secundă. Segmentul de la (2, 2.(6)) la (2.25, 3) are lungimea \\( \\sqrt{(2.25 – 2)^2 + (2.(6) – 3)^2} = \\sqrt{¼^2 + (1/3)^2} = 5/12 \\), și are dulceața 60 – astfel el este traversat în (5/12) x (1/5) = 1/12 secunde, și contribuie cu (1/12) x 60 = 5 la dulceața totală. Segmentul de la (2.25, 3) la (3, 4) are lungimea \\( \\sqrt{(3 – 2.25)^2 + (4 – 3)^2} = 5/4 \\), și are dulceața 120 – astfel el este traversat în (5/4) x (1/5) = 1/4 secunde, și contribuie cu (1/4) x 120 = 30 la dulceața totală. Astfel, cum segmentul de la (0, 0) la (2, 2.(6)) contribuie cu 0, dulceața totală este 35."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>dulciuri.in</code></p><pre>4\n1 2 10\n3 2 0 2 1\n3 3 0 3 1\n3 2 0 2 0</pre><p><code>dulciuri.out</code></p><pre>10\n0\n10</pre><h3>Explicație</h3><p>Situația pentru degustările din al doilea exemplu este explicată în diagrama de mai jos.</p><p><img alt=\"\" src=\"/resurse/16a4b0/dulciuri_2.jpg\"></p><p>În primul traseu (cel din stânga) trecem mereu printr-o zonă cu dulceața <code>10</code>, deci rezultatul degustării este <code>10</code>. În al doilea traseu (cel din dreapta) trecem mereu printr-o zonă cu dulceața <code>0</code>, deci rezultatul degustării este <code>0</code>. În al treilea traseu, stăm pe loc pentru o secundă într-o zona de dulceață <code>10</code>, deci răspunsul este <code>10</code>.</p>",
+      "text": "dulciuri.in4 1 2 10 3 2 0 2 1 3 3 0 3 1 3 2 0 2 0dulciuri.out10 0 10ExplicațieSituația pentru degustările din al doilea exemplu este explicată în diagrama de mai jos.În primul traseu (cel din stânga) trecem mereu printr-o zonă cu dulceața 10, deci rezultatul degustării este 10. În al doilea traseu (cel din dreapta) trecem mereu printr-o zonă cu dulceața 0, deci rezultatul degustării este 0. În al treilea traseu, stăm pe loc pentru o secundă într-o zona de dulceață 10, deci răspunsul este 10."
+    },
+    {
+      "title": "Exemplul 3:",
+      "html": "<p><code>dulciuri.in</code></p><pre>6\n1 4 413\n1 3 234\n2 5 244\n2 3 777\n3 1 2 14 15\n3 31 4 2 40</pre><p><code>dulciuri.out</code></p><pre>128.3076923077\n29.0881226054</pre>",
+      "text": "dulciuri.in6 1 4 413 1 3 234 2 5 244 2 3 777 3 1 2 14 15 3 31 4 2 40dulciuri.out128.3076923077 29.0881226054"
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Zonele roz sunt zonele în care s-a aplicat o îndulcire, și numerele reprezintă cu cât s-a îndulcit. Zona din intersecția îndulcirilor are dulceața 120. Linia diagonală punctată reprezintă traseul."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "În primul traseu (cel din stânga) trecem mereu printr-o zonă cu dulceața 10, deci rezultatul degustării este 10. În al doilea traseu (cel din dreapta) trecem mereu printr-o zonă cu dulceața 0, deci rezultatul degustării este 0. În al treilea traseu, stăm pe loc pentru o secundă într-o zona de dulceață 10, deci răspunsul este 10."
+    }
+  ],
+  "constraints": [
+    "Toate coordonatele din datele de intrare sunt întregi în intervalul [0, 1.000.000].",
+    "0 ≤ v ≤ 1000.",
+    "v este întreg.",
+    "1 ≤ Q ≤ 100.000.",
+    "Pentru 20 de puncte nu se fac îndulciri orizontale și Q ≤ 2000.",
+    "Pentru 20 de puncte, la fiecare degustare, fie xq = xq' sau yq = yq', Q ≤ 2000",
+    "Pentru 10 de puncte, se face cel mult o degustare",
+    "Pentru 20 de puncte, toate degustările se fac după toate îndulcirile",
+    "Pentru 10 de puncte, Q ≤ 2000",
+    "Pentru 20 de puncte, fără restricții suplimentare"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qeff846e8bb.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/dulciuri_1.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-dulciuri-1-jpg.jpg",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/dulciuri_2.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-dulciuri-2-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "11",
+    "intrare/ieșire": "dulciuri.in / dulciuri.out",
+    "limită timp": "0.9 secunde",
+    "limită memorie": "512 MB / 64 MB",
+    "sursa problemei": "OJI 2022 clasele XI-XII",
+    "autor": "Tamio-Vesa Nakajima",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.9,
+  "memoryLimitMb": 512,
+  "author": "Tamio-Vesa Nakajima",
+  "sourceAttribution": "OJI 2022 clasele XI-XII",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4113/dulciuri"
+}

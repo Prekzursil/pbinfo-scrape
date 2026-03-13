@@ -1,0 +1,327 @@
+{
+  "id": 4122,
+  "slug": "munte2",
+  "name": "munte2",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4122/munte2",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 25,
+      "name": "Metoda Greedy",
+      "slug": "metoda-greedy",
+      "href": "/?pagina=probleme-lista&tag=25"
+    },
+    {
+      "id": 24,
+      "name": "Probleme diverse cu metoda Greedy",
+      "slug": "probleme-diverse-cu-metoda-greedy",
+      "href": "/?pagina=probleme-lista&tag=24"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<ul>\n\t<li>Să se precizeze dacă pentru permutarea dată aplicând oricâte operații de <code>swap</code> sau <code>dswap</code> se poate obține o permutare de tip munte.</li>\n\t<li>Plecând de la permutarea dată, câte permutări de tip munte distincte se pot obține aplicând oricâte operații de <code>swap</code> sau <code>dswap</code>?</li>\n</ul>",
+      "text": "Să se precizeze dacă pentru permutarea dată aplicând oricâte operații de swap sau dswap se poate obține o permutare de tip munte. Plecând de la permutarea dată, câte permutări de tip munte distincte se pot obține aplicând oricâte operații de swap sau dswap?"
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>munte.in</code> conține pe prima linie două numere naturale <code>C ∈ {1, 2}</code> și <code>N</code>, reprezentând cerința care trebuie rezolvată, respectiv numărul de elemente ale permutării <code>a</code>. Pe a doua linie se găsesc <code>N</code> numere naturale separate prin câte un singur spațiu, reprezentând permutarea <code>a</code>.</p>",
+      "text": "Fișierul de intrare munte.in conține pe prima linie două numere naturale C ∈ {1, 2} și N, reprezentând cerința care trebuie rezolvată, respectiv numărul de elemente ale permutării a. Pe a doua linie se găsesc N numere naturale separate prin câte un singur spațiu, reprezentând permutarea a."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>munte.out</code> va conține o singură linie, în funcție de cerință:</p><ul>\n\t<li>pentru <code>C = 1</code>, în cazul în care se poate obține cel puțin o permutare de tip munte plecând de la șirul <code>a</code> se va afișa cuvântul <code>DA</code>, altfel cuvântul <code>NU</code>;</li>\n\t<li>pentru <code>C = 2</code>, se va afișa un singur număr natural, reprezentând numărul permutărilor de tip munte distincte ce se pot obține aplicând doar operații de <strong>swap</strong> și <strong>dswap</strong> asupra permutării citite. Întrucât această valoare poate fi foarte mare, se va tipări rezultatul modulo <code>111.181.111</code>.</li>\n</ul>",
+      "text": "Fișierul de ieșire munte.out va conține o singură linie, în funcție de cerință: pentru C = 1, în cazul în care se poate obține cel puțin o permutare de tip munte plecând de la șirul a se va afișa cuvântul DA, altfel cuvântul NU; pentru C = 2, se va afișa un singur număr natural, reprezentând numărul permutărilor de tip munte distincte ce se pot obține aplicând doar operații de swap și dswap asupra permutării citite. Întrucât această valoare poate fi foarte mare, se va tipări rezultatul modulo 111.181.111."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>C ∈ {1, 2}</code></li>\n\t<li><code>4 ≤ N ≤ 200.000</code></li>\n</ul>",
+      "text": "C ∈ {1, 2} 4 ≤ N ≤ 200.000"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>munte.in</code></p><pre>2 7\n3 4 2 7 1 6 5</pre><p><code>munte.out</code></p><pre>4</pre><h3>Explicație</h3><p>Se pot obține următoarele patru permutări de tip munte:<br>\n<code>1 3 4 7 6 5 2</code><br>\n<code>2 3 4 7 6 5 1</code><br>\n<code>2 5 6 7 4 3 1</code><br>\n<code>1 5 6 7 4 3 2</code></p>",
+      "text": "munte.in2 7 3 4 2 7 1 6 5munte.out4ExplicațieSe pot obține următoarele patru permutări de tip munte: 1 3 4 7 6 5 2 2 3 4 7 6 5 1 2 5 6 7 4 3 1 1 5 6 7 4 3 2"
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>munte.in</code></p><pre>1 6\n6 3 4 5 1 2</pre><p><code>munte.out</code></p><pre>DA</pre><h3>Explicație</h3><p>Se pot obține următoarele permutări de tip munte:<br>\n<code>1 2 4 5 6 3</code><br>\n<code>3 6 5 4 2 1</code></p>",
+      "text": "munte.in1 6 6 3 4 5 1 2munte.outDAExplicațieSe pot obține următoarele permutări de tip munte: 1 2 4 5 6 3 3 6 5 4 2 1"
+    },
+    {
+      "title": "Exemplul 3:",
+      "html": "<p><code>munte.in</code></p><pre>1 6\n1 2 3 5 4 6</pre><p><code>munte.out</code></p><pre>NU</pre><h3>Explicație</h3><p>Nu există niciun mod de a transforma permutarea în munte.</p>",
+      "text": "munte.in1 6 1 2 3 5 4 6munte.outNUExplicațieNu există niciun mod de a transforma permutarea în munte."
+    },
+    {
+      "title": "Exemplul 4:",
+      "html": "<p><code>munte.in</code></p><pre>1 7\n2 3 4 1 7 6 5</pre><p><code>munte.out</code></p><pre>NU</pre><h3>Explicație</h3><p>Nu există niciun mod de a transforma permutarea în munte.</p>",
+      "text": "munte.in1 7 2 3 4 1 7 6 5munte.outNUExplicațieNu există niciun mod de a transforma permutarea în munte."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Se pot obține următoarele patru permutări de tip munte: 1 3 4 7 6 5 2 2 3 4 7 6 5 1 2 5 6 7 4 3 1 1 5 6 7 4 3 2"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Se pot obține următoarele permutări de tip munte: 1 2 4 5 6 3 3 6 5 4 2 1"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Nu există niciun mod de a transforma permutarea în munte."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Nu există niciun mod de a transforma permutarea în munte."
+    }
+  ],
+  "constraints": [
+    "C ∈ {1, 2}",
+    "4 ≤ N ≤ 200.000"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qb57bc8128c.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "11",
+    "intrare/ieșire": "munte.in / munte.out",
+    "limită timp": "0.2 secunde",
+    "limită memorie": "512 MB / 64 MB",
+    "sursa problemei": "ONI 2022, clasa a X-a",
+    "autor": "Szabo Zoltan, Theodor-Gabriel Tulbă-Lecu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.2,
+  "memoryLimitMb": 512,
+  "author": "Szabo Zoltan, Theodor-Gabriel Tulbă-Lecu",
+  "sourceAttribution": "ONI 2022, clasa a X-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4122/munte2"
+}

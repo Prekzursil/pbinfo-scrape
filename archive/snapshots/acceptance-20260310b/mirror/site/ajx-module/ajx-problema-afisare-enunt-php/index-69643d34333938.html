@@ -1,0 +1,74 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4398"><article id="enunt">
+			<p>Un număr se numește palindrom dacă citit de la stânga la dreapta este identic cu numărul citit de la dreapta la stânga. De exemplu, numerele <code>131</code> și <code>15677651</code> sunt palindromuri. Un număr care nu este palindrom poate fi transformat în palindrom adăugând la dreapta sa una sau mai multe cifre.</p>
+
+<h1>Cerința</h1>
+
+<p>Dat fiind un șir de <code>n</code> numere naturale, scrieți un program care să rezolve următoarele două cerințe:<br>
+1. să se determine numărul minim total de cifre care trebuie să fie adăugate, astfel încât fiecare valoare din șir să fie palindrom;<br>
+2. considerând că putem adăuga cel mult <code>S</code> cifre, să se determine numărul maxim de termeni palindrom aflați pe poziții consecutive în șirul obținut.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>palindrom.in</code> conține pe prima linie numărul <code>C</code>, reprezentând cerința care trebuie să fie rezolvată (<code>1</code> sau <code>2</code>). Pe cea de a doua linie se află un număr natural <code>n</code>, reprezentând numărul de valori din șir. Pe următoarele <code>n</code> linii se află cele <code>n</code> numere din șir, câte un număr pe o linie. Dacă <code>C = 2</code>, pe ultima linie a fișierului de intrare se va afla numărul natural <code>S</code> reprezentând numărul maxim de cifre ce pot fi adăugate.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>palindrom.out</code> va conține o singură linie pe care va fi scris răspunsul la cerința <code>C</code> din fișierul de intrare.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 50.000</code>; <code>0 ≤ S ≤ 500.000</code></li>
+	<li>Numerele din șir au cel mult <code>50</code> de cifre.</li>
+	<li>Pentru 15 puncte, <code>C = 1</code> și <code>n = 1</code></li>
+	<li>Pentru 10 puncte, <code>C = 2</code>, <code>S = 0</code>, <code>1 &lt; n ≤ 100</code> și numerele din șir au cel mult <code>18</code> cifre.</li>
+	<li>Pentru 14 puncte, <code>C = 1</code>, <code>1 &lt; n ≤ 1000</code> și numerele din șir au cel mult <code>18</code> cifre.</li>
+	<li>Pentru 15 puncte, <code>C = 2</code>, <code>S &gt; 0</code>, <code>1 &lt; n ≤ 1000</code> și numerele din șir au cel mult <code>18</code> cifre.</li>
+	<li>Pentru 16 puncte, <code>C = 2</code>, <code>1000 &lt; n ≤ 50.000</code> și numerele din șir au cel mult <code>18</code> cifre.</li>
+	<li>Pentru 13 puncte, <code>C = 1</code>, <code>1000 &lt; n ≤ 50.000</code> și numerele din șir au între <code>19</code> și <code>50</code> de cifre.</li>
+	<li>Pentru 17 puncte, <code>C = 2</code>, <code>1000 &lt; n ≤ 50.000</code> și numerele din șir au între <code>19</code> și <code>50</code> de cifre.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>palindrom.in</code></p>
+
+<pre>1
+5
+12232
+131
+12345
+0
+7717</pre>
+
+<p><code>palindrom.out</code></p>
+
+<pre>7</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C = 1</code>, <code>n = 5</code>. Pentru a transforma <code>12232</code> în palindrom trebuie să adăugăm minimum două cifre (<code>1223221</code>), pentru <code>12345</code> trebuie să adăugăm minimum <code>4</code> cifre (<code>123454321</code>), pentru <code>7717</code> trebuie să adăugăm minimum o cifră (<code>77177</code>), iar numerele <code>131</code> și <code>0</code> sunt deja palindromuri. În total <code>2 + 4 + 1 = 7</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>palindrom.in</code></p>
+
+<pre>2
+7
+12232
+131
+12345
+0
+7717
+1244
+215809
+4</pre>
+
+<p><code>palindrom.out</code></p>
+
+<pre>3</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C = 2</code>, <code>n = 7</code>, <code>S = 4</code>, deci se pot adăuga maximum <code>4</code> cifre. Putem adăuga cele <code>4</code> cifre numărului <code>12345</code> și obținem o secvență de lungime <code>3</code> formată numai din palindromuri (<code>131 123454321 0</code>). O altă variantă este de a adăuga o cifră la <code>7717</code> și două cifre la <code>21244</code> și obținem tot o secvență de lungime <code>3</code> formată numai din palindromuri (<code>0 77177 124421</code>). Pentru orice altă variantă, secvența de palindromuri obținută are mai puțini termeni.</p>		</article>
+		</body></html>

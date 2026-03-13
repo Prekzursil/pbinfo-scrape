@@ -1,0 +1,311 @@
+{
+  "id": 3728,
+  "slug": "campionat2",
+  "name": "Campionat2",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3728/campionat2",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 46,
+      "name": "Tablouri bidimensionale (matrice)",
+      "slug": "tablouri-bidimensionale-matrice",
+      "href": "/?pagina=probleme-lista&tag=46"
+    },
+    {
+      "id": 58,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=58"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Avem de răspuns la întrebări de două tipuri:<br>\n1. Care echipe ar fi pe locul I dacă toate meciurile restante s-ar termina la egalitate? O echipă este pe locul I dacă are număr maxim de puncte.<br>\n2. Care echipe depind strict de propriile rezultate pentru a deveni campioane? O echipă devine campioană (câștigă campionatul) dacă termină cu număr de puncte strict mai mare decât oricare dintre celelalte echipe. Spunem că o echipă depinde strict de propriile rezultate pentru a deveni campioană dacă ea devine campioană câștigând toate meciurile pe care trebuie să le mai joace, indiferent de rezultatele celorlalte meciuri.</p>",
+      "text": "Avem de răspuns la întrebări de două tipuri: 1. Care echipe ar fi pe locul I dacă toate meciurile restante s-ar termina la egalitate? O echipă este pe locul I dacă are număr maxim de puncte. 2. Care echipe depind strict de propriile rezultate pentru a deveni campioane? O echipă devine campioană (câștigă campionatul) dacă termină cu număr de puncte strict mai mare decât oricare dintre celelalte echipe. Spunem că o echipă depinde strict de propriile rezultate pentru a deveni campioană dacă ea devine campioană câștigând toate meciurile pe care trebuie să le mai joace, indiferent de rezultatele celorlalte meciuri."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>campionat.in</code> conține pe prima linie un număr <code>T</code>, reprezentând tipul de întrebare (<code>1</code> sau <code>2</code>). Pe linia a doua se află un număr <code>N</code> reprezentând numărul de echipe din campionat (considerăm că echipele sunt etichetate cu numere distincte de la <code>1</code> la <code>N</code>). Pe linia a treia se află <code>N</code> numere naturale separate prin câte un spațiu, al <code>i</code>-lea număr reprezentând punctajul celei de-a <code>i</code>-a echipe. Pe linia a patra se află un număr <code>D</code>, reprezentând numărul de meciuri restante. Pe fiecare dintre următoarele <code>D</code> linii se află câte două numere distincte <code>i</code>, <code>j</code>, cuprinse între <code>1</code> și <code>N</code>, cu semnificația că echipele <code>i</code> și <code>j</code> au de disputat un meci restant.</p>",
+      "text": "Fișierul de intrare campionat.in conține pe prima linie un număr T, reprezentând tipul de întrebare (1 sau 2). Pe linia a doua se află un număr N reprezentând numărul de echipe din campionat (considerăm că echipele sunt etichetate cu numere distincte de la 1 la N). Pe linia a treia se află N numere naturale separate prin câte un spațiu, al i-lea număr reprezentând punctajul celei de-a i-a echipe. Pe linia a patra se află un număr D, reprezentând numărul de meciuri restante. Pe fiecare dintre următoarele D linii se află câte două numere distincte i, j, cuprinse între 1 și N, cu semnificația că echipele i și j au de disputat un meci restant."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>campionat.out</code> va conține o singură linie.</p><ul>\n\t<li>Dacă <code>T = 1</code>, linia va conține etichetele echipelor care termină pe locul I, în cazul în care toate meciurile restante se termină la egalitate.</li>\n\t<li>Dacă <code>T = 2</code>, linia va conține etichetele echipelor care depind strict de propriile rezultate pentru a deveni campioane. Dacă nicio echipă nu poate deveni campioană depinzând doar de rezultatele sale, în fișierul de ieșire se va scrie doar numărul <code>0</code>.</li>\n</ul><p>Atât pentru <code>T = 1</code>, cât și pentru <code>T = 2</code> etichetele echipelor vor fi scrise în ordine crescătoare, separate prin câte un spațiu.</p>",
+      "text": "Fișierul de ieșire campionat.out va conține o singură linie. Dacă T = 1, linia va conține etichetele echipelor care termină pe locul I, în cazul în care toate meciurile restante se termină la egalitate. Dacă T = 2, linia va conține etichetele echipelor care depind strict de propriile rezultate pentru a deveni campioane. Dacă nicio echipă nu poate deveni campioană depinzând doar de rezultatele sale, în fișierul de ieșire se va scrie doar numărul 0. Atât pentru T = 1, cât și pentru T = 2 etichetele echipelor vor fi scrise în ordine crescătoare, separate prin câte un spațiu."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2 ≤ N ≤ 1000</code></li>\n\t<li><code>1 ≤ D ≤ 500.000</code></li>\n\t<li>Punctajele inițiale ale echipelor sunt numere naturale cel mult egale cu <code>1000</code>.</li>\n\t<li>Regulile de desfășurare a campionatului sunt mai ciudate, nu trebuie să vă puneți problema dacă este posibil ca echipele să aibă șirul dat al punctajelor în urma meciurilor disputate deja (considerăm că până la momentul de față federația a acordat diverse bonusuri și depunctări).</li>\n\t<li>Dacă între meciurile rămase de jucat este vreunul care apare de mai multe ori (fie sub forma <code>(i, j)</code> fie sub forma <code>(j, i)</code>), el se va disputa o singură dată.</li>\n\t<li>Programarea meciurilor s-a făcut în mod indisciplinat, deci este posibil ca unele echipe să mai aibă de jucat mai multe meciuri decât altele, iar unele chiar să nu mai aibă de jucat niciun meci.</li>\n</ul>",
+      "text": "2 ≤ N ≤ 1000 1 ≤ D ≤ 500.000 Punctajele inițiale ale echipelor sunt numere naturale cel mult egale cu 1000. Regulile de desfășurare a campionatului sunt mai ciudate, nu trebuie să vă puneți problema dacă este posibil ca echipele să aibă șirul dat al punctajelor în urma meciurilor disputate deja (considerăm că până la momentul de față federația a acordat diverse bonusuri și depunctări). Dacă între meciurile rămase de jucat este vreunul care apare de mai multe ori (fie sub forma (i, j) fie sub forma (j, i)), el se va disputa o singură dată. Programarea meciurilor s-a făcut în mod indisciplinat, deci este posibil ca unele echipe să mai aibă de jucat mai multe meciuri decât altele, iar unele chiar să nu mai aibă de jucat niciun meci."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>campionat.in</code></p><pre>1\n4\n2 3 2 1\n3\n1 3\n1 2\n3 1</pre><p><code>campionat.out</code></p><pre>1 2</pre><h3>Explicație</h3><p>Echipa <code>2</code> are de disputat un singur meci cu echipa <code>1</code>, iar al doilea meci se va disputa între echipele <code>1</code> și <code>3</code> (chiar dacă în listă apare de două ori perechea <code>1 3</code>, este vorba despre un singur meci).<br>\nCele două jocuri se vor termina la egalitate și astfel punctajele echipelor la final vor fi: <code>4 4 3 1</code>. Așadar echipele <code>1</code> și <code>2</code> ies pe primul loc.</p>",
+      "text": "campionat.in1 4 2 3 2 1 3 1 3 1 2 3 1campionat.out1 2ExplicațieEchipa 2 are de disputat un singur meci cu echipa 1, iar al doilea meci se va disputa între echipele 1 și 3 (chiar dacă în listă apare de două ori perechea 1 3, este vorba despre un singur meci). Cele două jocuri se vor termina la egalitate și astfel punctajele echipelor la final vor fi: 4 4 3 1. Așadar echipele 1 și 2 ies pe primul loc."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>campionat.in</code></p><pre>2\n4\n1 3 2 1\n3\n1 3\n1 2\n3 1</pre><p><code>campionat.out</code></p><pre>1 2</pre><h3>Explicație</h3><p>Echipa <code>1</code> devine campioană dacă învinge în ambele meciuri, nicio altă echipă neputând să o egaleze la puncte sau să o depășească. De asemenea, echipa <code>2</code> devine campioană dacă învinge echipa <code>1</code> în meciul restant, indiferent de rezultatul celuilalt meci. Echipa <code>3</code>, chiar dacă învinge în meciul cu echipa <code>1</code>, nu depinde doar de rezultatul său<br>\nîntrucât echipa <code>2</code> ar depăși-o la puncte dacă și ea ar câștiga meciul pe care îl mai are de disputat.</p>",
+      "text": "campionat.in2 4 1 3 2 1 3 1 3 1 2 3 1campionat.out1 2ExplicațieEchipa 1 devine campioană dacă învinge în ambele meciuri, nicio altă echipă neputând să o egaleze la puncte sau să o depășească. De asemenea, echipa 2 devine campioană dacă învinge echipa 1 în meciul restant, indiferent de rezultatul celuilalt meci. Echipa 3, chiar dacă învinge în meciul cu echipa 1, nu depinde doar de rezultatul său întrucât echipa 2 ar depăși-o la puncte dacă și ea ar câștiga meciul pe care îl mai are de disputat."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Echipa 2 are de disputat un singur meci cu echipa 1, iar al doilea meci se va disputa între echipele 1 și 3 (chiar dacă în listă apare de două ori perechea 1 3, este vorba despre un singur meci). Cele două jocuri se vor termina la egalitate și astfel punctajele echipelor la final vor fi: 4 4 3 1. Așadar echipele 1 și 2 ies pe primul loc."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Echipa 1 devine campioană dacă învinge în ambele meciuri, nicio altă echipă neputând să o egaleze la puncte sau să o depășească. De asemenea, echipa 2 devine campioană dacă învinge echipa 1 în meciul restant, indiferent de rezultatul celuilalt meci. Echipa 3, chiar dacă învinge în meciul cu echipa 1, nu depinde doar de rezultatul său întrucât echipa 2 ar depăși-o la puncte dacă și ea ar câștiga meciul pe care îl mai are de disputat."
+    }
+  ],
+  "constraints": [
+    "2 ≤ N ≤ 1000",
+    "1 ≤ D ≤ 500.000",
+    "Punctajele inițiale ale echipelor sunt numere naturale cel mult egale cu 1000.",
+    "Regulile de desfășurare a campionatului sunt mai ciudate, nu trebuie să vă puneți problema dacă este posibil ca echipele să aibă șirul dat al punctajelor în urma meciurilor disputate deja (considerăm că până la momentul de față federația a acordat diverse bonusuri și depunctări).",
+    "Dacă între meciurile rămase de jucat este vreunul care apare de mai multe ori (fie sub forma (i, j) fie sub forma (j, i)), el se va disputa o singură dată.",
+    "Programarea meciurilor s-a făcut în mod indisciplinat, deci este posibil ca unele echipe să mai aibă de jucat mai multe meciuri decât altele, iar unele chiar să nu mai aibă de jucat niciun meci."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qad217471d1.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "campionat.in / campionat.out",
+    "limită timp": "0.2 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "OJI 2021 clasa a VII-a",
+    "autor": "Marius Nicoli",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.2,
+  "memoryLimitMb": 64,
+  "author": "Marius Nicoli",
+  "sourceAttribution": "OJI 2021 clasa a VII-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3728/campionat2"
+}

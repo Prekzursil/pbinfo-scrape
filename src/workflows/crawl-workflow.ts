@@ -1,0 +1,335 @@
+import { mkdirSync } from 'node:fs';
+import { dirname } from 'node:path';
+
+import {
+  assertSnapshotRecord,
+  buildQueuePath,
+  markSnapshotCompleted,
+  prepareSnapshot,
+  readArchiveCatalog,
+} from '../archive/storage.js';
+import { createCookieFetch } from '../auth/session-store.js';
+import { loadLocalConfig } from '../config/local-config.js';
+import { CrawlQueue, readCrawlQueueSnapshot } from '../crawl/crawl-queue.js';
+import { ArchiveCrawler } from '../crawl/archive-crawler.js';
+import { createPlaywrightBrowserCapture } from '../crawl/browser-capture.js';
+import type { CrawlQueueInput } from '../types/crawl.js';
+
+export type CrawlMode = 'incremental' | 'fresh';
+
+export interface CrawlWorkflowOptions {
+  maxIterations?: number;
+  now?: Date;
+  snapshotId?: string;
+  checkpoint?: 'canonical' | 'checkpoint';
+  mode?: CrawlMode;
+}
+
+export interface CrawlWorkflowResult {
+  processed: number;
+  queuePath: string;
+  snapshotId: string;
+  completed: boolean;
+}
+
+export interface CrawlFailureSummary {
+  id: number;
+  url: string;
+  attemptCount: number;
+  lastError: string;
+  visibleAt?: string;
+}
+
+export interface CrawlStatusResult {
+  snapshotId: string;
+  queuePath: string;
+  pending: number;
+  completed: number;
+  inProgress: number;
+  publishEligible: boolean;
+  recentFailures: CrawlFailureSummary[];
+}
+
+export async function runCrawlWorkflow(
+  workspaceRoot: string,
+  scope: 'public' | 'user' | 'all',
+  options: CrawlWorkflowOptions = {},
+): Promise<CrawlWorkflowResult> {
+  const config = loadLocalConfig(workspaceRoot);
+  const now = options.now ?? new Date();
+  const catalog = readArchiveCatalog(config.paths.archiveRoot);
+  const resolvedSnapshotId =
+    options.mode === 'incremental'
+      ? resolveIncrementalSnapshotId(catalog, options.snapshotId)
+      : options.snapshotId;
+  const snapshot = prepareSnapshot(config, {
+    now,
+    snapshotId: resolvedSnapshotId,
+    scope,
+    checkpoint: options.checkpoint,
+  });
+  const queuePath = buildQueuePath(config.paths.localRoot, snapshot.snapshotId);
+  mkdirSync(dirname(queuePath), { recursive: true });
+  const queue = new CrawlQueue(queuePath);
+  queue.requeueInProgress();
+  queue.enqueueMany(buildSeeds(config, scope));
+  const fetchImpl =
+    config.auth.strategy !== 'none' || config.auth.sessionCookiesPath
+      ? await createCookieFetch(config.auth.sessionCookiesPath)
+      : fetch;
+  let browserCapture:
+    | Awaited<ReturnType<typeof createPlaywrightBrowserCapture>>
+    | undefined;
+  if (config.crawl.crossCheckWithBrowser) {
+    try {
+      browserCapture = await createPlaywrightBrowserCapture(
+        config.auth.sessionCookiesPath,
+      );
+    } catch {
+      browserCapture = undefined;
+    }
+  }
+
+  const crawler = new ArchiveCrawler({
+    config,
+    snapshot,
+    queue,
+    fetchImpl: createRateLimitedFetch(fetchImpl),
+    browserCapture,
+    retryDelayMs: config.crawl.retryDelayMs,
+  });
+
+  const maxIterations = options.maxIterations ?? Number.POSITIVE_INFINITY;
+  let processed = 0;
+  let remainingBudget = maxIterations;
+  const concurrency = Math.max(
+    1,
+    Number.isFinite(maxIterations)
+      ? Math.min(config.crawl.maxConcurrency, maxIterations)
+      : config.crawl.maxConcurrency,
+  );
+
+  try {
+    await Promise.all(
+      Array.from({ length: concurrency }, async () => {
+        while (consumeBudget()) {
+          const didProcess = await crawler.processNext(new Date());
+          if (!didProcess) {
+            restoreBudget();
+            return;
+          }
+          processed += 1;
+        }
+      }),
+    );
+  } finally {
+    await browserCapture?.close();
+    queue.close();
+  }
+
+  const queueState = queue.getSnapshot();
+  const completed = queueState.pending === 0 && queueState.inProgress === 0;
+  if (completed) {
+    markSnapshotCompleted(config, snapshot.snapshotId);
+  }
+
+  return {
+    processed,
+    queuePath,
+    snapshotId: snapshot.snapshotId,
+    completed,
+  };
+
+  function consumeBudget(): boolean {
+    if (remainingBudget <= 0) {
+      return false;
+    }
+
+    remainingBudget -= 1;
+    return true;
+  }
+
+  function restoreBudget(): void {
+    if (Number.isFinite(maxIterations)) {
+      remainingBudget += 1;
+    }
+  }
+}
+
+export async function resumeCrawlWorkflow(
+  workspaceRoot: string,
+  options: CrawlWorkflowOptions = {},
+): Promise<CrawlWorkflowResult> {
+  const config = loadLocalConfig(workspaceRoot);
+  const catalog = readArchiveCatalog(config.paths.archiveRoot);
+  const snapshot = options.snapshotId
+    ? assertSnapshotRecord(catalog, options.snapshotId)
+    : findLatestInProgressSnapshot(catalog);
+
+  if (!snapshot) {
+    throw new Error('No unfinished snapshot is available to resume.');
+  }
+
+  return runCrawlWorkflow(workspaceRoot, snapshot.scope, {
+    ...options,
+    snapshotId: snapshot.snapshotId,
+    checkpoint: snapshot.checkpoint,
+    mode: 'incremental',
+  });
+}
+
+export function getCrawlStatusWorkflow(
+  workspaceRoot: string,
+  snapshotId?: string,
+): CrawlStatusResult {
+  const config = loadLocalConfig(workspaceRoot);
+  const catalog = readArchiveCatalog(config.paths.archiveRoot);
+  const resolvedSnapshotId = snapshotId ?? catalog.currentSnapshotId;
+  if (!resolvedSnapshotId) {
+    throw new Error('No archived snapshot is available.');
+  }
+
+  const snapshotRecord = assertSnapshotRecord(catalog, resolvedSnapshotId);
+  const queuePath = buildQueuePath(config.paths.localRoot, resolvedSnapshotId);
+  const queueState = readCrawlQueueSnapshot(queuePath);
+  const recentFailures = queueState.items
+    .filter((item) => item.lastError)
+    .sort((left, right) => right.updatedAt.localeCompare(left.updatedAt))
+    .slice(0, 5)
+    .map((item) => ({
+      id: item.id,
+      url: item.url,
+      attemptCount: item.attemptCount,
+      lastError: item.lastError!,
+      visibleAt: item.visibleAt,
+    }));
+
+  return {
+    snapshotId: resolvedSnapshotId,
+    queuePath,
+    pending: queueState.pending,
+    completed: queueState.completed,
+    inProgress: queueState.inProgress,
+    publishEligible:
+      queueState.pending === 0 &&
+      queueState.inProgress === 0 &&
+      snapshotRecord.status === 'completed',
+    recentFailures,
+  };
+}
+
+function buildSeeds(
+  config: ReturnType<typeof loadLocalConfig>,
+  scope: 'public' | 'user' | 'all',
+): CrawlQueueInput[] {
+  const queue = new Map<string, CrawlQueueInput>();
+
+  if (scope === 'public' || scope === 'all') {
+    for (const url of config.crawl.publicStartUrls) {
+      const key = `page:${url}`;
+      queue.set(key, {
+        key,
+        url,
+        kind: 'public-page',
+      });
+    }
+  }
+
+  if ((scope === 'user' || scope === 'all') && config.crawl.userHandle) {
+    const roots = [
+      `https://www.pbinfo.ro/profil/${config.crawl.userHandle}`,
+      `https://www.pbinfo.ro/profil/${config.crawl.userHandle}/probleme`,
+      `https://www.pbinfo.ro/solutii/user/${config.crawl.userHandle}`,
+    ];
+    for (const url of roots) {
+      const key = `page:${url}`;
+      queue.set(key, {
+        key,
+        url,
+        kind: url.includes('/solutii/') ? 'user-solutions' : 'user-profile',
+      });
+    }
+  }
+
+  return [...queue.values()];
+}
+
+function findLatestInProgressSnapshot(
+  catalog: ReturnType<typeof readArchiveCatalog>,
+) {
+  const current = catalog.currentSnapshotId
+    ? catalog.snapshots.find((snapshot) => snapshot.snapshotId === catalog.currentSnapshotId)
+    : undefined;
+  if (current?.status === 'in_progress') {
+    return current;
+  }
+
+  return [...catalog.snapshots]
+    .filter((snapshot) => snapshot.status === 'in_progress')
+    .sort((left, right) => right.createdAt.localeCompare(left.createdAt))[0];
+}
+
+function resolveIncrementalSnapshotId(
+  catalog: ReturnType<typeof readArchiveCatalog>,
+  requestedSnapshotId?: string,
+): string | undefined {
+  if (requestedSnapshotId) {
+    return requestedSnapshotId;
+  }
+
+  if (catalog.canonicalSnapshotId) {
+    return catalog.canonicalSnapshotId;
+  }
+
+  if (catalog.currentSnapshotId) {
+    return catalog.currentSnapshotId;
+  }
+
+  return undefined;
+}
+
+function createRateLimitedFetch(
+  fetchImpl: typeof fetch,
+  minimumDelayMs = 250,
+): typeof fetch {
+  let nextAvailableAt = 0;
+  let queue = Promise.resolve();
+
+  return (async (input: RequestInfo | URL, init?: RequestInit) => {
+    const target = resolveFetchUrl(input);
+    if (!target || !isPbinfoHost(target)) {
+      return fetchImpl(input, init);
+    }
+
+    await (queue = queue.then(async () => {
+      const waitFor = nextAvailableAt - Date.now();
+      if (waitFor > 0) {
+        await new Promise((resolve) => setTimeout(resolve, waitFor));
+      }
+      nextAvailableAt = Date.now() + minimumDelayMs;
+    }));
+
+    return fetchImpl(input, init);
+  }) as typeof fetch;
+}
+
+function resolveFetchUrl(input: RequestInfo | URL): URL | undefined {
+  if (input instanceof URL) {
+    return input;
+  }
+
+  if (typeof input === 'string') {
+    return new URL(input);
+  }
+
+  if ('url' in input && typeof input.url === 'string') {
+    return new URL(input.url);
+  }
+
+  return undefined;
+}
+
+function isPbinfoHost(url: URL): boolean {
+  const host = url.hostname.toLowerCase();
+  return host === 'www.pbinfo.ro' || host === 'pbinfo.ro';
+}

@@ -1,0 +1,286 @@
+{
+  "id": 3830,
+  "slug": "e-birocratieinterstelara",
+  "name": "E-BirocratieInterstelara",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3830/e-birocratieinterstelara",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 91,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=91"
+    },
+    {
+      "id": 115,
+      "name": "Diverse",
+      "slug": "diverse",
+      "href": "/?pagina=probleme-lista&tag=115"
+    }
+  ],
+  "tags": [
+    "Șmenul lui Batog (Square Root Decomposition)",
+    "number theory"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Anual, Imperiul Interstelar organizează o întâlnire administrativă în capitală. La întâlnire sunt invitați toți guvernatorii planetelor din imperiu. Planetele imperiului pot fi numerotate cu valori de la <code>0</code> la <code>MOD-1</code>(inclusiv) unde planeta <code>0</code> este chiar capitala. Distanțele mari dintre planete fac transportul obișnuit între planete aproape imposibil. Din fericire, găuri de vierme conectează tot imperiul. Vom nota planeta către care duce o gaură de vierme cu <code>f(x) = (x * a + b) % MOD</code>. Astfel, de la planeta <code>x</code> există un drum către planeta <code>f(x)</code> și un drum de la planeta <code>f(x)</code> la planeta <code>x</code>. Fiecare guvernator începe de pe o planetă cunoscută și trebuie să ajungă în capitală. Atenție, pozițiile inițiale nu trebuie să fie distincte! Fiecare salt printr-o gaură de vierme consumă o unitate de energie din rețeaua centrală. Se presupune că fiecare guvernator ia ruta cea mai scurtă către capitală. Din motive birocratice, sunteți rugați să calculați cantitatea de energie consumată de transportul guvernatorilor către captială.</p>",
+      "text": "Anual, Imperiul Interstelar organizează o întâlnire administrativă în capitală. La întâlnire sunt invitați toți guvernatorii planetelor din imperiu. Planetele imperiului pot fi numerotate cu valori de la 0 la MOD-1(inclusiv) unde planeta 0 este chiar capitala. Distanțele mari dintre planete fac transportul obișnuit între planete aproape imposibil. Din fericire, găuri de vierme conectează tot imperiul. Vom nota planeta către care duce o gaură de vierme cu f(x) = (x * a + b) % MOD. Astfel, de la planeta x există un drum către planeta f(x) și un drum de la planeta f(x) la planeta x. Fiecare guvernator începe de pe o planetă cunoscută și trebuie să ajungă în capitală. Atenție, pozițiile inițiale nu trebuie să fie distincte! Fiecare salt printr-o gaură de vierme consumă o unitate de energie din rețeaua centrală. Se presupune că fiecare guvernator ia ruta cea mai scurtă către capitală. Din motive birocratice, sunteți rugați să calculați cantitatea de energie consumată de transportul guvernatorilor către captială."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie a fișierului de intrare vor fi numerele <code>n, a, b, MOD</code> separate printr-un spațiu. Pe următoarea linie veți găsi <code>n</code> valori din intervalul <code>[0 , MOD-1]</code> reprezentând planeta de pe care își începe drumul fiecare guvernator.</p>",
+      "text": "Pe prima linie a fișierului de intrare vor fi numerele n, a, b, MOD separate printr-un spațiu. Pe următoarea linie veți găsi n valori din intervalul [0 , MOD-1] reprezentând planeta de pe care își începe drumul fiecare guvernator."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>În fișierul de ieșire trebuie să se găsească un singur număr, energia totală consumată.</p>",
+      "text": "În fișierul de ieșire trebuie să se găsească un singur număr, energia totală consumată."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<p>• <code>N &lt;= 50 , MOD &lt;= 10^10 , 1 &lt; a &lt; MOD și 0 &lt;= b &lt; MOD</code><br>\n• <code>MOD</code> este un număr prim<br>\n• Pentru <code>30 de puncte , N &lt;= 1.000.000 și MOD &lt;= 1.000.000</code><br>\n• Pentru restul de <code>70</code> puncte se respectă restricțiile inițiale<br>\n• Toate numerele din fișierul de input sunt naturale.</p><p><code>bir_interstelara.in</code></p><pre>2 2 1 13</pre><p><code>bir_interstelara.out</code></p><pre>3</pre><h3>Explicație</h3><p>Pentru exemplul dat , cantitatea de energie este <code>3</code> , deoarece primul guvernator se poate duce prima dată pe<br>\nplanetă <code>1</code> deoarece <code>f(1) = (2*1+1)%13 = 3</code> și apoi se poate duce în capitală , deoarece <code>f(0) = (2*0+1)%13 = 1</code>. Al doilea guvernator se poate duce direct în captiala , deoarece <code>f(6) = (2*6+1)%13 = 0</code>.Consumul de energie este astfel <code>2+1 = 3</code>.</p>",
+      "text": "• N <= 50 , MOD <= 10^10 , 1 < a < MOD și 0 <= b < MOD • MOD este un număr prim • Pentru 30 de puncte , N <= 1.000.000 și MOD <= 1.000.000 • Pentru restul de 70 puncte se respectă restricțiile inițiale • Toate numerele din fișierul de input sunt naturale.bir_interstelara.in2 2 1 13bir_interstelara.out3ExplicațiePentru exemplul dat , cantitatea de energie este 3 , deoarece primul guvernator se poate duce prima dată pe planetă 1 deoarece f(1) = (2*1+1)%13 = 3 și apoi se poate duce în capitală , deoarece f(0) = (2*0+1)%13 = 1. Al doilea guvernator se poate duce direct în captiala , deoarece f(6) = (2*6+1)%13 = 0.Consumul de energie este astfel 2+1 = 3."
+    }
+  ],
+  "examples": [],
+  "constraints": [],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q06b77fea9a.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Iacob Tudor (IacobTudor)",
+    "clasa": "10",
+    "intrare/ieșire": "bir_interstelara.in / bir_interstelara.out",
+    "limită timp": "2.69 secunde",
+    "limită memorie": "64 MB / 32 MB",
+    "sursa problemei": "infoleague.net runda de antrenament, problema E.",
+    "autor": "Tudose Rareș Felix",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 2.69,
+  "memoryLimitMb": 64,
+  "author": "Tudose Rareș Felix",
+  "sourceAttribution": "infoleague.net runda de antrenament, problema E.",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3830/e-birocratieinterstelara"
+}

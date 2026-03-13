@@ -1,0 +1,69 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3771"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>In plină perioadă de pandemie, cercetătorii unui institut vor să facă o serie de experimente pe culturi de celule. S-a observat deja că celula cercetată are o creștere liniară dependentă de cele trei zile imediat anterioare: dacă acum două zile aveam <code>x</code> celule, ieri aveam <code>y</code> iar astăzi avem <code>z</code> celule, atunci mâine vom avea <code>x+ay+bz</code> celule. Dacă într-o zi, numărul de celule depășește o valoare <code>k</code>, cercetătorii reduc cultura la valoarea <code>modulo K</code>. </p>
+
+<p>Dacă, pentru un <code>n</code> dat, se cunoaște numărul de celule din zilele <code>n</code>, <code>n-1</code>, <code>n-2</code> și se cunosc factorii de multiplicare <code>a</code> și <code>b</code>, care este numărul de celule care trebuie cultivate în primele <code>3</code> zile ale experimentului?</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>pandemia.in</code> conține mai multe seturi de date. Pe prima linie se va găsi un număr întreg <code>T</code> reprezentând numărul de experimente pentru care se cere răspunsul. Pe următoarele <code>T</code> linii se vor găsi experimentele: câte șase numere întregi separate prin spații, în ordinea următoare: <code>N A B U V W</code>, unde <code>N</code> este numărul de zile ale experimentului, <code>A</code> și <code>B</code> sunt factorii de multiplicare din enunț, iar <code>U</code>, <code>V</code>, respectiv <code>W</code> reprezintă numărul de bacterii din zilele <code>N</code>, <code>N-1</code> și, respectiv, <code>N-2</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>pandemia.out</code> va conține <code>T</code> linii cu răspunsurile, în ordine, la cele <code>T</code> experimente din fișierul de intrare, și anume trei numere naturale mai mici decât <code>K</code> separate prin câte un spațiu, reprezentând numărul de bacterii din ziua <code>0</code>, ziua <code>1</code> și, respectiv ziua <code>2</code> (în această ordine). </p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ T ≤ 50</code>, <code>3 ≤ N ≤ 100.000</code>, unde <code>T</code>, <code>N</code> numere naturale</li>
+	<li><code>1 ≤ A, B ≤ 100</code>, <code>1 ≤ U, V, W &lt; K</code>, unde <code>A, B, U, V, W</code> numere naturale</li>
+	<li><code>K = 10.000.007</code></li>
+	<li>prima zi se consideră ziua <code>0</code></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>pandemia.in</code></p>
+
+<pre>2
+6 1 1 37 20 11
+5 1 2 58 23 9</pre>
+
+<p><code>pandemia.out</code></p>
+
+<pre>1 2 3
+1 2 3</pre>
+
+<h3>Explicație</h3>
+
+Testul 1: Intr-adevăr, dacă: 
+<ul>
+	<li>ziua 0: 1 celulă</li>
+	<li>ziua 1: 2 celule</li>
+	<li>ziua 2: 3 celule</li>
+</ul>
+
+atunci:
+<ul>
+	<li>ziua 3: 1 + 1*2 + 1*3 = 6 celule</li>
+	<li>ziua 4: 2 + 1*3 + 1*6 = 11  celule</li>
+	<li>ziua 5: 3 + 1*6 + 1*11 = 20  celule</li>
+	<li>ziua 6: 6 + 1*11 + 1*20 = 37  celule</li>
+</ul>
+
+Testul 2: Intr-adevăr, 
+dacă:
+<ul>
+	<li>ziua 0: 1 celulă</li>
+	<li>ziua 1: 2 celule</li>
+	<li>ziua 2: 3 celule</li>
+</ul>
+
+atunci:
+<ul>
+	<li>ziua 3: 1 + 1*2 + 2*3 = 9 celule</li>
+	<li>ziua 4: 2 + 1*3 + 2*9 = 23  celule</li>
+	<li>ziua 5: 3 + 1*9 + 2*23 = 58  celule</li>
+</ul>		</article>
+		</body></html>

@@ -1,0 +1,44 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2470"><article id="enunt">
+			<p>Se dă un șir de caractere de lungime <code>N</code> format din litere mari ale alfabetului englez și un număr întreg <code>K</code>. Asupra șirului se poate aplica în mod repetat următoarea operație: se alege o subsecvență de lungime cel putin <code>K</code> având toate elementele egale și se elimină din șir. Evident că prima dată operația se aplică asupra șirului inițial și ulterior asupra șirului obținut din aplicarea operației anterioare. Operația se aplică până când șirul devine șirul vid (de lungime <code>0</code>) sau șirul nu mai conține subsecvențe de lungime cel puțin <code>K</code> cu toate elemente egale.</p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând <code>N</code>, <code>K</code> și șirul de caractere, să se determine care este lungimea minimă la care poate fi redus șirul după aplicarea operațiilor într-un mod convenabil.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>zuma.in</code> conține pe prima linie numerele <code>N</code> și <code>K</code> separate prin spațiu și pe a doua linie șirul de caractere format din <code>N</code> litere mari.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>În fișierul de ieșire <code>zuma.out</code> trebuie să afișați un singur număr natural reprezentând lungimea minimă pe care o poate avea șirul după aplicarea în mod convenabil a operațiilor.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ K ≤ N ≤ 500</code></li>
+	<li>Pentru teste în valoare de <code>10</code> puncte <code>25 ≤ K ≤ N ≤ 100</code></li>
+	<li>Pentru alte teste în valoare de <code>10</code> puncte <code>K = 2</code></li>
+	<li>Pentru alte teste în valoare de <code>10</code> puncte numărul de caractere distincte din șir este <code>2</code></li>
+	<li>Pentru alte teste în valoare de <code>15</code> puncte <code>1 ≤ N ≤ 50</code></li>
+	<li>Pentru alte teste în valoare de <code>35</code> puncte <code>1 ≤ N ≤ 200</code></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>zuma.in</code></p>
+
+<pre>10 3
+AAABBBCCCA</pre>
+
+<p><code>zuma.out</code></p>
+
+<pre>0</pre>
+
+<h3>Explicație</h3>
+
+<p>Avem <code>N = 10</code> și <code>K = 3</code>. Se poate elimina orice subsecvență cu litere identice de lungime cel puțin <code>3</code>.<br>
+Considerând șirul indexat de la <code>1</code>, la prima operație putem elimina subsecvența <code>[4,6]=BBB</code> pentru că are lungimea <code>3</code>.<br>
+Acum șirul este <code>AAACCCA</code>, deci putem elimina subsecvența <code>[4,6]=CCC</code>, obținând șirul <code>AAAA</code>. Acesta este format din <code>4</code> caractere egale, deci îl putem șterge și obținem șirul vid ce are lungimea <code>0</code>.<br>
+Dacă am fi ales la pasul anterior să eliminăm subsecvența <code>[1,3]=AAA</code> și apoi subsecvența <code>CCC</code>, am fi obținut un șir final de lungime <code>1</code>, format din ultimul <code>A</code>.</p>		</article>
+		</body></html>

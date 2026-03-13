@@ -1,0 +1,101 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4793"><article id="enunt">
+			<p>Considerăm numerele naturale <code>N</code>, <code>X</code>, <code>Y</code>, <code>M[1], M[2], ..., M[N]</code>. Șirul de numere naturale <code>A[1], A[2], ..., A[N]</code> este numit <strong>bun</strong> dacă următoarele condiții sunt satisfăcute simultan:</p>
+
+<ul>
+	<li><code>A[1] OR A[2] OR ... OR A[N] = X</code>, unde <code>OR</code> reprezintă operația <strong>sau pe biți</strong>.</li>
+	<li><code>A[1] XOR A[2] XOR ... XOR A[N] = Y</code>, unde <code>XOR</code> reprezintă operația <strong>sau exclusiv pe biți</strong>.</li>
+	<li><code>A[i] AND M[i] = M[i]</code>, pentru <code>1 ≤ i ≤ N</code>, unde <code>AND</code> reprezintă operația <strong>și pe biți</strong>.</li>
+</ul>
+
+<p>Se dau <code>N</code>, <code>X</code>, <code>Y</code> și <code>M[1], M[2], ..., M[N]</code>, cu semnificația din enunț.</p>
+
+<h1>Cerința</h1>
+
+<p>Să se determine dacă există șiruri bune, respectiv să se determine numărul de șiruri bune, modulo <code>1.000.000.007</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>bitsir.in</code> conține pe prima linie trei numere naturale <code>N</code>, <code>X</code> și <code>Y</code>, și pe a doua linie numerele naturale <code>M[1], M[2], ..., M[N]</code>. Numerele aflate pe aceeași linie a fișierului sunt separate prin câte un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>bitsir.out</code> conține <strong>exact</strong> două linii. Fișierul conține pe prima linie mesajul <code>DA</code>, dacă există șiruri bune, sau mesajul <code>NU</code> în caz contrar, iar pe a doua linie numărul de șiruri bune determinat. Valoarea de pe a doua linie a fișierului trebuie să fie un număr natural cuprins în intervalul <code>[0, 1.000.000.006]</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 100.000</code></li>
+	<li><code>0 ≤ X, Y ≤ 2</code><sup><code>30</code></sup> <code>- 1</code></li>
+	<li><code>0 ≤ M[i] ≤ X</code></li>
+	<li>Dacă prima linie a fișierului de ieșire este corectă, dar a doua linie a fișierului de ieșire nu este corectă, se acordă <code>50%</code> din punctajul corespunzător testului respectiv.</li>
+	<li><strong>Dacă prima linie a fișierului de ieșire nu este corectă</strong>, se acordă <code>0%</code> din punctajul corespunzător testului respectiv.</li>
+	<li>Operația <code>OR</code> este reprezentată în C/C++ prin <code>|</code>. Spre exemplu, <code>12 OR 10 = 14</code>.</li>
+	<li>Operația <code>XOR</code> este reprezentată în în C/C++ prin <code>^</code>. Spre exemplu, <code>12 XOR 10 = 6</code>.</li>
+	<li>Operația <code>AND</code> este reprezentată în C/C++ prin <code>&amp;</code>. Spre exemplu, <code>12 AND 10 = 8</code>.</li>
+	<li>Pentru 9 puncte, <code>X = Y = M[1] = M[2] = ... = M[N] = 0</code></li>
+	<li>Pentru 9 puncte, <code>X = 1, Y = M[1] = M[2] = ... = M[N] = 0</code></li>
+	<li>Pentru 9 puncte, <code>N * X ≤ 20</code></li>
+	<li>Pentru 18 puncte, <code>X = 0</code></li>
+	<li>Pentru 12 puncte, <code>N ≤ 4</code>,  <code> X ≤ 63</code></li>
+	<li>Pentru 15 puncte, <code>N = 2</code>,  <code>X ≤ 2</code><sup><code>23</code></sup> <code>- 1</code></li>
+	<li>Pentru 12 puncte, <code>0 ≤ X, Y, M[1], M[2], ..., M[N] ≤ 1</code></li>
+	<li>Pentru 16 puncte, fără restricții suplimentare.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>bitsir.in</code></p>
+
+<pre>3 11 10
+8 2 0</pre>
+
+<p><code>bitsir.out</code></p>
+
+<pre>DA
+12</pre>
+
+<h3>Explicație</h3>
+
+<p>Șirurile bune sunt:</p>
+
+<p>1. <code>8, 3, 1</code><br>
+2. <code>8, 11, 9</code><br>
+3. <code>9, 2, 1</code><br>
+4. <code>9, 3, 0</code><br>
+5. <code>9, 10, 9</code><br>
+6. <code>9, 11, 8</code><br>
+7. <code>10, 3, 3</code><br>
+8. <code>10, 11, 11</code><br>
+9. <code>11, 2, 3</code><br>
+10. <code>11, 3, 2</code><br>
+11. <code>11, 10, 11</code><br>
+12. <code>11, 11, 10</code></p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>bitsir.in</code></p>
+
+<pre>3 7 5
+2 3 6</pre>
+
+<p><code>bitsir.out</code></p>
+
+<pre>NU
+0</pre>
+
+<h3>Explicație</h3>
+
+<p>Nu există șiruri bune.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>bitsir.in</code></p>
+
+<pre>10 31 24
+5 17 1 6 0 30 12 15 8 23</pre>
+
+<p><code>bitsir.out</code></p>
+
+<pre>DA
+8388608</pre>		</article>
+		</body></html>

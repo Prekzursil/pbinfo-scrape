@@ -1,0 +1,73 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4443"><article id="enunt">
+			<p><strong>biom</strong> – Complex ecologic ce se formează în raport cu un anumit mediu ambiant. </p>
+
+<p>Steve Stonecutter se află într-o lume formată din cuburi, iar fiecare cub aparține unui singur biom. Cuburile sunt dispuse într-o linie și sunt numerotate de la <code>1</code> la <code>N</code>. Se consideră că blocurile <code>i</code> și <code>i + 1</code> sunt vecine între ele pentru toate valorile <code>i</code> de la <code>1</code> la <code>N - 1</code>. Putem reprezenta această lume ca și un șir de caractere <code>S</code> de lungime <code>N</code> format din litere mici ale alfabetului limbii engleze, numerotat de la <code>1</code> la <code>N</code>, unde al <code>i</code>-lea caracter reprezintă biomul din care face parte al <code>i</code>-lea cub. Pentru a se deplasa, Steve poate face următoarele mișcări:</p>
+
+<ul>
+	<li>se poate deplasa cu costul <code>A</code> de la cubul <code>i</code> la vecinul său imediat la dreapta, adică <code>i + 1</code>;</li>
+	<li>se poate deplasa cu costul <code>B</code> de la cubul <code>i</code> la vecinul său imediat la stânga, adică <code>i - 1</code>;</li>
+	<li>se poate deplasa cu costul <code>C</code> de la cubul <code>i</code> la cubul <code>j</code> minim pentru care <code>j &gt; i</code> și <code>S[i] = S[j]</code>;</li>
+	<li>se poate deplasa cu costul <code>D</code> de la cubul <code>i</code> la cubul <code>j</code> maxim pentru care <code>j &lt; i</code> și <code>S[i] = S[j]</code>.</li>
+</ul>
+
+<p>Aceste mișcări se pot realiza dacă și numai dacă poziția în care Steve vrea să se deplaseze există. De exemplu, dacă Steve se afla pe cubul <code>1</code>, acesta nu se poate face a doua sau a patra mișcare.</p>
+
+<h1>Cerința</h1>
+
+<p>Începând de la cubul <code>1</code>, Steve dorește să ajungă la cubul <code>N</code> cu cost minim, așa că vă roagă pe voi să aflați care este acest cost.</p>
+
+<h1>Date de intrare</h1>
+
+<p>În fișierul de intrare <code>biom.in</code> pe prima linie se găsește un singur număr <code>N</code>, reprezentând numărul de cuburi din lumea în care se află Steve. Pe a doua linie se află patru numere <code>A</code>, <code>B</code>, <code>C</code> și <code>D</code> reprezentând costurile fiecărei operații pe care o poate face Steve. Pe a treia linie se află șirul de caractere <code>S</code> de lungime <code>N</code> ce reprezintă harta biomurilor lumii.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>În fișierul de ieșire <code>biom.out</code> se va afla un singur număr ce reprezintă costul minim de a ajunge de la cubul <code>1</code> la cubul <code>N</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 1.000.000</code></li>
+	<li><code>0 ≤ A, B, C, D ≤ 1.000.000.000</code></li>
+	<li>Pentru 12 puncte, <code>N ≤ 10</code></li>
+	<li>Pentru 8 puncte, pentru orice <code>i &lt; j &lt; k</code>, dacă <code>S[i] = S[k]</code>, atunci <code>S[i] = S[j]</code></li>
+	<li>Pentru 11 puncte, <code>B = D = 1.000.000.000</code>, iar <code>A, C ≤ 1000</code></li>
+	<li>Pentru 19 puncte, <code>A = 1</code>, iar fiecare dintre <code>B</code>, <code>C</code> și <code>D</code> poate să fie <code>1</code> sau <code>1.000.000.000</code></li>
+	<li>Pentru 10 puncte, <code>A ≤ 1</code>, iar fiecare dintre <code>B</code>, <code>C</code> și <code>D</code> poate să fie <code>0</code>, <code>1</code> sau <code>1.000.000.000</code></li>
+	<li>Pentru 11 puncte, <code>N &lt;= 500</code></li>
+	<li>Pentru 8 puncte, <code>N ≤ 100.000</code></li>
+	<li>Pentru 21 puncte, restricții inițiale.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>biom.in</code></p>
+
+<pre>6
+3 5 4 2
+abccbc</pre>
+
+<p><code>biom.out</code></p>
+
+<pre>10</pre>
+
+<h3>Explicație</h3>
+
+<p>Steve se poate mișca cu o poziție la dreapta cu cost <code>3</code>. De la cubul <code>2</code>, acesta se poate deplasa spre cubul <code>5</code> cu cost <code>4</code>. La sfârșit, acesta se deplasează din nou cu o poziție la dreapta pentru a ajunge la destinație, cubul <code>6</code>. Costul total va fi <code>3 + 4 + 3 = 10</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>biom.in</code></p>
+
+<pre>15
+1 2 3 4
+abccabcbacbabcb</pre>
+
+<p><code>biom.out</code></p>
+
+<pre>11</pre>
+
+<h3>Explicație</h3>
+
+<p>Steve se poate deplasa de la cubul <code>1</code> la cubul <code>5</code>, iar pe urmă la cubul <code>9</code>, ambele deplasări având fiecare costul <code>3</code>. Pe urmă, de la cubul <code>9</code> se poate deplasa la cubul <code>10</code> cu cost <code>1</code>. De la cubul <code>10</code>, se poate deplasa la cubul <code>14</code> cu cost <code>3</code>, ca în final să ajungă la destinație, în cubul <code>15</code>, cu cost <code>1</code>. Costul total de deplasare va fi <code>3 + 3 + 1 + 3 + 1 = 11</code>.</p>		</article>
+		</body></html>

@@ -1,0 +1,110 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1674"><article id="enunt">
+			<p>Fermierul Quinto are o livadă plină cu pomi fructiferi. Livada are <code>N</code> rânduri, numerotate de la <code>1</code> la <code>N</code>, pe fiecare rând  aflându-se câte <code>M</code> pomi fructiferi, numerotaţi de la <code>1</code> la <code>M</code>. Livada lui Quinto este una specială, aşa că pentru unii pomi se cunoaşte cantitatea de fructe (exprimată în kg) care poate fi culeasă, iar pentru alţii aceasta poate fi determinată pe baza unei formule. Quinto şi-a propus să recolteze <code>C</code> kg de fructe din pomii aflaţi în livada lui. Acesta foloseşte un utilaj modern pentru culesul fructelor. Utilajul poate fi folosit pe oricare din rândurile livezii, dar poate aduna doar fructele dintr-un şir consecutiv de pomi, începând cu primul pom de pe rândul respectiv, neavând posibilitatea de a culege parţial fructele dintr-un pom. Preocupat de  frumuseţea livezii sale, Quinto s-a gândit la restricţii suplimentare pentru recoltarea cantităţii <code>C</code> de fructe. Astfel, el doreşte să adune fructele din pomi de pe maximum <code>R</code> rânduri diferite, pentru ca <code>N-R</code> rânduri să rămână complete. De asemenea, el doreşte să culeagă cu prioritate pomii care au o cantitate cât mai mică de fructe, pentru ca în livadă să rămână cei mai roditori pomi. Quinto şi-a dat seama că este dificil să culeagă fix <code>C</code> kg de fructe, prin urmare este mulţumit şi cu o cantitate mai mare, care respectă celelalte condiţii impuse de el.</p>
+
+<h1>Cerința</h1>
+
+<p>Determinaţi cea mai mică valoare <code>X</code> posibilă astfel încât să se poată culege, în condițiile de mai sus, o cantitate de cel puțin <code>C</code> kg de fructe și orice pom din care se culeg fructe să conțină cel mult <code>X</code> kg de fructe.</p>
+
+<h1>Date de intrare</h1>
+
+<ul>
+	<li>Pe prima linie a fişierului <code>livada1.in</code> se află <code>4</code> numere naturale <code>N M C R</code> cu semnificaţia din enunţ.</li>
+	<li>Pe a doua linie din fişierul de intrare se află <code>5</code> numere naturale <code>x y z w u</code>, separate printr-un spaţiu.</li>
+	<li>Dacă notăm cu <code>A[i][j]</code> cantitatea de fructe (exprimată în kg) din cel de-al <code>j</code>-lea pom de pe linia <code>i</code>, atunci:
+	<ul>
+		<li>Linia a treia din fişierul de intrare conţine <code>M</code> valori <code>A[1][i]</code>, <code>1≤i≤M</code>, separate printr-un spaţiu</li>
+		<li>Linia a patra din fişierul de intrare conţine <code>N-1</code> valori <code>A[i][1]</code>, <code>2≤i≤N</code>, separate printr-un spaţiu</li>
+		<li>Celelalte valori <code>A[i][j]</code>, <code>2≤i≤N</code>, <code>2≤j≤M</code>, se calculează conform formulei:<br>
+<code>A[i][j] = (x*A[i-1][j] + y*A[i][j-1] + z*A[i-1][j-1] + w) % u</code>.</li>
+	</ul></li>
+	</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>livada1.out</code> va conține o singură valoare scrisă pe prima linie, care reprezintă cea mai mică valoare a cantităţii de fructe (exprimată în kg) dintr-un pom cules, astfel încât să fie respectate toate restricţiile problemei.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ R ≤ N ≤ 100</code></li>
+	<li><code>1 ≤ M ≤ 25000</code></li>
+	<li><code>0 ≤ x,y,z,w,u ≤ 10^9</code></li>
+	<li><code>0 ≤ A[i][j] ≤ 10^9</code></li>
+	<li>Atenție la determinarea fiecărei valori <code>A[i][j]</code> pentru că în formulă sunt produse care pot să furnizeze valori mai mari decât <code>2^32-1</code>.</li>
+	<li><code>1 ≤ C ≤ 10^18</code></li>
+	<li>Se garantează că pentru toate testele problema are soluție</li>
+	<li>Pentru 30% din teste se garantează faptul că <code>1 ≤ M ≤ 100</code> şi <code>1 ≤ A[i][j] ≤ 100</code></li>
+	<li>Pentru 70% din teste se garantează faptul că <code>1 ≤ M ≤ 4000</code></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>livada1.in</code></p>
+
+<pre>5 6 18 4
+3 6 5 2 7
+4 1 3 5 1 2
+5 2 6 3</pre>
+
+<p><code>livada1.out</code></p>
+
+<pre>4</pre>
+
+<h3>Explicație</h3>
+
+<p>Sunt <code>5</code> rânduri cu câte <code>6</code> pomi pe fiecare rând. Figura de mai jos arată matricea care se obține conform formulelor precizate.</p>
+
+<table class="explicatie">
+		<tbody><tr>
+			<td style="background:gray;">4 </td>
+			<td style="background:gray;">1 </td>
+			<td style="background:gray;">3 </td>
+			<td> 5 </td>
+			<td> 1 </td>
+			<td> 2 </td>
+		</tr>
+		<tr>
+			<td> 5 </td>
+			<td> 6 </td>
+			<td> 3 </td>
+			<td> 1 </td>
+			<td> 1 </td>
+			<td> 5 </td>
+		</tr>
+		<tr>
+			<td style="background:gray;">2 </td>
+			<td style="background:gray;">1 </td>
+			<td> 5 </td>
+			<td> 1 </td>
+			<td> 2 </td>
+			<td> 6 </td>
+		</tr>
+		<tr>
+			<td> 6 </td>
+			<td> 2 </td>
+			<td> 6 </td>
+			<td> 3 </td>
+			<td> 3 </td>
+			<td> 6 </td>
+		</tr>
+		<tr>
+			<td style="background:gray;">3 </td>
+			<td style="background:gray;">0 </td>
+			<td style="background:gray;">2 </td>
+			<td style="background:gray;">4 </td>
+			<td style="background:gray;">1 </td>
+			<td> 6 </td>
+		</tr>
+</tbody></table>
+
+<p>Se doreşte culegerea a cel puţin <code>18</code> de kg de fructe de pe maxim <code>4</code> rânduri din cele <code>5</code>.</p>
+
+<p>În figura de mai sus, este prezentată o soluţie posibilă în care cantitatea maximă culeasă dintr-un pom este de <code>4</code> kg.</p>
+
+<p>Nu se pot culege <code>18</code> de kg de fructe de pe maxim <code>4</code> rânduri astfel încât să fie culeşi doar pomi cu cantitate de fructe <code>3</code> kg (în acest caz se pot culege cel mult <code>8</code> kg).</p>
+
+<style>
+table.explicatie{border-collapse: collapse;}
+table.explicatie td{border: solid 1px lightgray; width:1.5em; height:1.5em; text-align:center}
+</style>		</article>
+		</body></html>

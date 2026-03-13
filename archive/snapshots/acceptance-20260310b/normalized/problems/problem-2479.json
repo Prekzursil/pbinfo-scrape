@@ -1,0 +1,299 @@
+{
+  "id": 2479,
+  "slug": "pietre",
+  "name": "pietre",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/2479/pietre",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 46,
+      "name": "Tablouri bidimensionale (matrice)",
+      "slug": "tablouri-bidimensionale-matrice",
+      "href": "/?pagina=probleme-lista&tag=46"
+    },
+    {
+      "id": 58,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=58"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Să se determine numărul pietrei care efectuând sărituri în conformitate cu succesiunea dată, conduce la o configuraţie finală formată dintr-un număr minim de pietre pe tablă. Dacă există mai multe pietre care ar conduce la acelaşi număr minim de pietre în configuraţia finală, se va afişa valoarea cea mai mică dintre numerele de identificare ale pietrelor respective.</p>",
+      "text": "Să se determine numărul pietrei care efectuând sărituri în conformitate cu succesiunea dată, conduce la o configuraţie finală formată dintr-un număr minim de pietre pe tablă. Dacă există mai multe pietre care ar conduce la acelaşi număr minim de pietre în configuraţia finală, se va afişa valoarea cea mai mică dintre numerele de identificare ale pietrelor respective."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>p Fişierul de intrare <code>pietre.in</code> va conţine:</p><ol>\n\t<li>pe prima linie din fişier numărul natural <code>n</code> care reprezintă numărul de linii, numărul natural <code>m</code> care reprezintă numărul de coloane, numărul natural de pietre <code>k</code> și numărul natural de găuri <code>g</code>, valori separate între ele două câte două printr-un spațiu;</li>\n\t<li>pe următoarele <code>k</code> linii, câte două valori separate două câte două printr-un spaţiu, reprezentând linia și coloana unei pietre;</li>\n\t<li>pe următoarele <code>g</code> linii, câte două valori separate două câte două printr-un spațiu, reprezentând linia și coloana unei găuri;</li>\n\t<li>pe ultima linie se află succesiunea de sărituri.</li>\n</ol>",
+      "text": "p Fişierul de intrare pietre.in va conţine: pe prima linie din fişier numărul natural n care reprezintă numărul de linii, numărul natural m care reprezintă numărul de coloane, numărul natural de pietre k și numărul natural de găuri g, valori separate între ele două câte două printr-un spațiu; pe următoarele k linii, câte două valori separate două câte două printr-un spaţiu, reprezentând linia și coloana unei pietre; pe următoarele g linii, câte două valori separate două câte două printr-un spațiu, reprezentând linia și coloana unei găuri; pe ultima linie se află succesiunea de sărituri."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p> Fișierul de ieşire <code>pietre.out</code> va conţine:</p><ol>\n\t<li>pe prima linie numărul pietrei căreia aplicându-i-se succesiunea de sărituri conduce la configuraţia conţinând cel mai mic număr de pietre;</li>\n\t<li>pe a doua linie se află numărul de pietre din configuraţia finală (fie acesta <code>t</code>);</li>\n\t<li>pe următoarele <code>t</code> linii se află câte două valori, separate între ele printr-un spațiu, reprezentând linia și coloana fiecărei pietre rămase pe tablă, începând cu cea mai de sus (linia cea mai mică) și coloana cea mai din stânga (coloana cea mai mică) și până la piatra cea mai de jos cu linia cea mai de jos (cea mai mare) și coloana cea mai din dreapta (cea mai mare).</li>\n</ol>",
+      "text": "Fișierul de ieşire pietre.out va conţine: pe prima linie numărul pietrei căreia aplicându-i-se succesiunea de sărituri conduce la configuraţia conţinând cel mai mic număr de pietre; pe a doua linie se află numărul de pietre din configuraţia finală (fie acesta t); pe următoarele t linii se află câte două valori, separate între ele printr-un spațiu, reprezentând linia și coloana fiecărei pietre rămase pe tablă, începând cu cea mai de sus (linia cea mai mică) și coloana cea mai din stânga (coloana cea mai mică) și până la piatra cea mai de jos cu linia cea mai de jos (cea mai mare) și coloana cea mai din dreapta (cea mai mare)."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2 ≤ n,m ≤ 100</code></li>\n\t<li><code>2 ≤ k ≤ n*m-1</code></li>\n\t<li><code>0 ≤ g ≤ n*m-1</code></li>\n\t<li>Se garantează că în fiecare test există cel puţin o piatră care efectuează cel puțin o săritură.</li>\n</ul>",
+      "text": "2 ≤ n,m ≤ 100 2 ≤ k ≤ n*m-1 0 ≤ g ≤ n*m-1 Se garantează că în fiecare test există cel puţin o piatră care efectuează cel puțin o săritură."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>pietre.in</code></p><pre>5 4 6 2\n1 1\n1 2\n2 2\n3 2\n3 3\n4 1\n3 4\n5 3\nVSE</pre><p><code>pietre.out</code></p><pre>5\n4\n1 1\n1 2\n2 2\n5 1</pre><h3>Explicație</h3><p>Piatra 1: nu poate efectua săritura <code>V</code> (deoarece ar părăsi tabla de joc), nici săritura <code>S</code> (pentru că nu există nicio piatră în celula vecină aflată în direcția sud), efectuează săritura E, deci configurația finală a tabelei va conține <code>5</code> pietre.<br>\nPentru piatra <code>2</code> se obține configurația finală identică celei inițiale, deoarece nu poate efectua nicio săritură.<br>\nPiatra <code>3</code> poate efectua doar săritura <code>S</code>. Configurația finală conține <code>5</code> pietre.<br>\nPiatra <code>4</code> nu poate efectua nicio săritură. Configurația finală conține <code>6</code> pietre.<br>\nPiatra <code>5</code> poate efectua săriturile: <code>V</code> și dispare piatra <code>4</code>, <code>S</code> și dispare piatra și nu poate efectua săritura <code>E</code>. Configurația finală are <code>4</code> pietre.<br>\nPiatra <code>6</code> nu poate efectua nicio săritură. Configurația finală conține <code>6</code> pietre.</p>",
+      "text": "pietre.in5 4 6 2 1 1 1 2 2 2 3 2 3 3 4 1 3 4 5 3 VSEpietre.out5 4 1 1 1 2 2 2 5 1ExplicațiePiatra 1: nu poate efectua săritura V (deoarece ar părăsi tabla de joc), nici săritura S (pentru că nu există nicio piatră în celula vecină aflată în direcția sud), efectuează săritura E, deci configurația finală a tabelei va conține 5 pietre. Pentru piatra 2 se obține configurația finală identică celei inițiale, deoarece nu poate efectua nicio săritură. Piatra 3 poate efectua doar săritura S. Configurația finală conține 5 pietre. Piatra 4 nu poate efectua nicio săritură. Configurația finală conține 6 pietre. Piatra 5 poate efectua săriturile: V și dispare piatra 4, S și dispare piatra și nu poate efectua săritura E. Configurația finală are 4 pietre. Piatra 6 nu poate efectua nicio săritură. Configurația finală conține 6 pietre."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Piatra 1: nu poate efectua săritura V (deoarece ar părăsi tabla de joc), nici săritura S (pentru că nu există nicio piatră în celula vecină aflată în direcția sud), efectuează săritura E, deci configurația finală a tabelei va conține 5 pietre. Pentru piatra 2 se obține configurația finală identică celei inițiale, deoarece nu poate efectua nicio săritură. Piatra 3 poate efectua doar săritura S. Configurația finală conține 5 pietre. Piatra 4 nu poate efectua nicio săritură. Configurația finală conține 6 pietre. Piatra 5 poate efectua săriturile: V și dispare piatra 4, S și dispare piatra și nu poate efectua săritura E. Configurația finală are 4 pietre. Piatra 6 nu poate efectua nicio săritură. Configurația finală conține 6 pietre."
+    }
+  ],
+  "constraints": [
+    "2 ≤ n,m ≤ 100",
+    "2 ≤ k ≤ n*m-1",
+    "0 ≤ g ≤ n*m-1",
+    "Se garantează că în fiecare test există cel puţin o piatră care efectuează cel puțin o săritură."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q96489c4ce2.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Doru Floare (Doruletz)",
+    "clasa": "9",
+    "intrare/ieșire": "pietre.in / pietre.out",
+    "limită timp": "2 secunde",
+    "limită memorie": "16 MB / 8 MB",
+    "sursa problemei": "ONIgim2018",
+    "autor": "Tîmplaru Roxana",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 2,
+  "memoryLimitMb": 16,
+  "author": "Tîmplaru Roxana",
+  "sourceAttribution": "ONIgim2018",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/2479/pietre"
+}

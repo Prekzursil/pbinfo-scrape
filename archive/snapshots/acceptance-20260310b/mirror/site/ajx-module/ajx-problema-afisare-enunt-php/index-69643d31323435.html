@@ -1,0 +1,171 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1245"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>Emil are un mouse special, cu două rotițe de <em>scroll</em>. Pe fiecare rotiță de scroll el poate fixa câte o bandă circulară de cauciuc pe care sunt printate în format 3D caracterele utilizate frecvent pentru editare.</p>
+
+<p>Apăsând vertical rotița de <em>scroll</em> în punctul ei cel mai înalt, caracterul aflat în punctul de apăsare va fi generat de către mouse. Astfel se pot edita diferite texte doar cu ajutorul mouse-ului. Ordinea în care sunt printate caracterele influențează viteza de tastare și energia consumată în procesul de editare a textelor. Efortul de trecere de la un caracter la următorul sau la anteriorul consumă o cantitate de energie egală cu o unitate. Apăsarea pe rotiță nu consumă energie. Emil vrea să afle care este cantitatea minimă de energie pe care trebuie să o consume pentru construirea unui text dat.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>birot.in</code> conține pe prima linie șirul de caractere printat pe banda de cauciuc de pe prima rotiță de <em>scroll</em>. Pe a doua linie se află șirul de caractere printat pe banda de cauciuc de pe a doua rotiță de scroll, iar pe a treia linie se afla textul care trebuie construit cu ajutorul mouse-ului.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>birot.out</code> va conține pe prima linie numărul reprezentând cantitatea minimă de energie ce trebuie consumată pentru construirea textului dat.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>lungimile primelor două șiruri sunt egale și <code>≤ 90</code>;</li>
+	<li>în fiecare din primele două șiruri caracterele sunt distincte;</li>
+	<li>primele două șiruri sunt formate din aceleași caractere, eventual așezate în altă ordine;</li>
+	<li>lungimea șirului care trebuie construit este cel mult egală cu 10 000;</li>
+	<li>orice caracter din șirul care trebuie construit se găsește în fiecare din primele două șiruri;</li>
+	<li>caracterele care pot apărea în textul dat și pe benzile de cauciuc sunt caractere printabile, inclusiv caracterul spaţiu;</li>
+	<li>inițial fiecare rotiță este așezată astfel încât primul caracter din șirul corespunzător ei să se afle deasupra, în poziția cea mai înaltă;</li>
+	<li>benzile de cauciuc sunt astfel așezate pe rotițe încât împingând rotițele înspre înainte caracterele sunt parcurse, circular, în ordinea dată în șirurile citite.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>birot.in</code></p>
+
+<pre>abo-r
+ao-br
+bar-ba-ra</pre>
+
+<p><code>birot.out</code></p>
+
+<pre>7</pre>
+
+<h3>Explicație</h3>
+
+<table>
+		<tbody><tr>
+			<td>comandă </td>
+			<td> rotița 1 </td>
+			<td> rotița 2 </td>
+			<td> text creat </td>
+			<td>energie </td>
+		</tr>
+		<tr>
+			<td>la început </td>
+			<td> abo-r </td>
+			<td> ao-br </td>
+			<td> </td>
+			<td> 0 </td>
+		</tr>
+		<tr>
+			<td> înapoi rotița1</td>
+			<td> bo-ra </td>
+			<td> ao-br </td>
+			<td> </td>
+			<td> 1 </td>
+		</tr>
+		<tr>
+			<td> apăs rotița1 </td>
+			<td> bo-ra </td>
+			<td> ao-br </td>
+			<td> b </td>
+			<td> </td>
+		</tr>
+		<tr>
+			<td> apăs rotița2 </td>
+			<td> bo-ra </td>
+			<td> ao-br </td>
+			<td> ba </td>
+			<td> </td>
+		</tr>
+		<tr>
+			<td> înainte rotița2 </td>
+			<td> bo-ra </td>
+			<td> rao-b </td>
+			<td> ba </td>
+			<td> 2 </td>
+		</tr>
+		<tr>
+			<td> apăs rotița2 </td>
+			<td> bo-ra </td>
+			<td> rao-b </td>
+			<td> bar </td>
+			<td> </td>
+		</tr>
+		<tr>
+			<td> înainte rotița2</td>
+			<td> bo-ra </td>
+			<td> brao- </td>
+			<td> bar </td>
+			<td> 3 </td>
+		</tr>
+		<tr>
+			<td> înainte rotița2 </td>
+			<td> bo-ra </td>
+			<td> -brao </td>
+			<td> bar </td>
+			<td> 4 </td>
+		</tr>
+		<tr>
+			<td> apăs rotița2 </td>
+			<td> bo-ra </td>
+			<td> -brao </td>
+			<td> bar- </td>
+			<td> </td>
+		</tr>
+		<tr>
+			<td> apăs rotița1 </td>
+			<td> bo-ra </td>
+			<td> -brao </td>
+			<td> bar-b</td>
+			<td> </td>
+		</tr>
+		<tr>
+			<td> înainte rotița1</td>
+			<td> abo_r </td>
+			<td> -brao </td>
+			<td> bar-b </td>
+			<td> 5 </td>
+		</tr>
+		<tr>
+			<td> apăs rotița1 </td>
+			<td> abo_r </td>
+			<td> -brao </td>
+			<td> bar-ba </td>
+			<td> </td>
+		</tr>
+		<tr>
+			<td> apăs rotița2 </td>
+			<td> abo_r </td>
+			<td> -brao </td>
+			<td> bar-ba-</td>
+			<td> </td>
+		</tr>
+		<tr>
+			<td> înainte rotița1 </td>
+			<td> rabo- </td>
+			<td> -brao </td>
+			<td> bar-ba- </td>
+			<td>6 </td>
+		</tr>
+		<tr>
+			<td> apăs rotița1 </td>
+			<td> rabo- </td>
+			<td> -brao </td>
+			<td> bar-ba-r </td>
+			<td> </td>
+		</tr>
+		<tr>
+			<td> înapoi rotița1 </td>
+			<td> abo-r </td>
+			<td> -brao </td>
+			<td> bar-ba-r </td>
+			<td> 7 </td>
+		</tr>
+		<tr>
+			<td> apăs rotița1 </td>
+			<td> abo-r </td>
+			<td> -brao </td>
+			<td> bar-ba-ra </td>
+			<td> </td>
+		</tr>
+</tbody></table>		</article>
+		</body></html>

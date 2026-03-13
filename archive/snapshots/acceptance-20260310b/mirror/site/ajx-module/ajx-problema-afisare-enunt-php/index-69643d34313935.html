@@ -1,0 +1,59 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4195"><article id="enunt">
+			<p>Nelu tocmai și-a cumpărat un nou tip de încuietoare digitală pe care vrea să o folosească pentru vestiarul de la școală. Codul secret al acestei încuietori este o secvență de <code>N</code> numere naturale, indexate de la <code>1</code> la <code>N</code>. Introducerea acestui cod și deblocarea dispozitivului se face într-un mod special. Încuietoarea începe cu o secvență afișată compusă din <code>N</code> valori de zero. Nelu poate folosi apoi o operație numită <code>incS(i, j)</code>, care incrementează cu <code>1</code> toate valorile cu indici între <code>i</code> și <code>j</code> (inclusiv). De exemplu, folosind o operație <code>incS(2, 4)</code> pe secvența <code>[0, 0, 0, 0]</code>, vom produce secvența <code>[0, 1, 1, 1]</code>. În mod similar, folosind un <code>incS(2, 3)</code> pe secvența <code>[4, 1, 3, 2]</code>, vom produce secvența <code>[4, 2, 4, 2]</code>. Încuietoarea se deblochează atunci când secvența afișată se potrivește cu codul secret.<br>
+Deoarece ˆıncuietoarea este nouă, Nelu trebuie să seteze codul secret. Fiind pasionat de permutări, ar vrea ca codul secret să fie o permutare a numerelor de la <code>1</code> la <code>N</code>, adică o secvență de <code>N</code> numere care să conțină fiecare număr de la <code>1</code> la <code>N</code> exact o dată. În plus, vrea să facă codul dificil de ghicit pentru colegii săi. Pentru aceasta, Nelu dorește ca numărul minim de operații <code>incS</code> necesare pentru deblocarea dispozitivului să fie exact egal cu numărul său preferat <code>M</code>. Dintre toate codurile posibile, dacă există, el îl va selecta pe cel minim lexicografic (după cum este explicat în Restricții). </p>
+
+<h1>Cerința</h1>
+
+<p>Nelu îți cere ajutorul pentru a-și găsi codul secret.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Intrarea constă dintr-o linie care conține două numere întregi separate printr-un spațiu <code>N</code> și <code>M</code>, cu<br>
+semnificațiile de mai sus.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Afișați o secvență de <code>N</code> numere, separate prin spații, reprezentând codul secret pe care Nelu ar trebui să-l seteze pentru lacăt. Dacă nu există o astfel de secvență, afișați mesajul <code>IMPOSSIBLE</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 1.000.000</code></li>
+	<li><code>1 ≤ M ≤ 10</code><sup><code>12</code></sup></li>
+	<li>O permutare <code>A</code><sub><code>1</code></sub>, <code>A</code><sub><code>2</code></sub>, …, <code>A</code><sub><code>N</code></sub> este mai mică lexicografic decât o altă permutare <code>B</code><sub><code>1</code></sub>, <code>B</code><sub><code>2</code></sub>, …, <code>B</code><sub><code>N</code></sub>, dacă există o poziție <code>P</code> pentru care <code>A</code><sub><code>1</code></sub> <code>= B</code><sub><code>1</code></sub>, <code>A</code><sub><code>2</code></sub> <code>= B</code><sub><code>2</code></sub>, …, <code>A</code><sub><code>P-1</code></sub> <code>= B</code><sub><code>P-1</code></sub> și <code>A</code><sub><code>P</code></sub> <code>&lt; B</code><sub><code>P</code></sub>.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>3 3</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>1 2 3</pre>
+
+<h1>Exemplul 2</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>3 4</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>2 1 3</pre>
+
+<h1>Exemplul 3</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>3 5</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>IMPOSSIBLE</pre>
+
+<h3>Explicații</h3>
+
+<p>Permutările pentru <code>N = 3</code> sunt <code>[1, 2, 3]</code>, <code>[1, 3, 2]</code>, <code>[2, 1, 3]</code>, <code>[2, 3, 1]</code>, <code>[3, 1, 2]</code> și <code>[3, 2, 1]</code>. Numărul minim de operații <code>incS</code> necesare pentru aceste permutări sunt, în ordine: <code>3, 3, 4, 3, 4, 3</code>. De exemplu, pentru permutarea <code>[2, 1, 3]</code>, Nelu poate folosi <code>incS(3, 3)</code>, <code>incS(1, 3)</code>, <code>incS(1, 1)</code> și <code>incS(3, 3)</code>. Totuși, Nelu nu poate obține <code>[2, 1, 3]</code> cu mai puțin de <code>4</code> operații <code>incS</code>. Pentru <code>M = 3</code>, permutarea lexicografic minimă, pentru care numărul minim de <code>incS</code> necesar pentru deblocarea dispozitivului este exact egal cu <code>M</code> este <code>[1, 2, 3]</code>. Pentru <code>M = 4</code>, codul secret este <code>[2, 1, 3]</code>. Pentru <code>M = 5</code>, nu există o astfel de permutare.</p>		</article>
+		</body></html>

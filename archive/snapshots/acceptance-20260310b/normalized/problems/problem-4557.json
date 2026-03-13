@@ -1,0 +1,305 @@
+{
+  "id": 4557,
+  "slug": "lee3",
+  "name": "Lee3",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4557/lee3",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 53,
+      "name": "Programare dinamică",
+      "slug": "programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=53"
+    },
+    {
+      "id": 54,
+      "name": "Probleme diverse de programare dinamică",
+      "slug": "probleme-diverse-de-programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=54"
+    }
+  ],
+  "tags": [
+    "Traveling Salesman Problem",
+    "Programare dinamica pe stari exponentiale"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Se dă o matrice binara cu <code>N</code> linii și <code>M</code> coloane. Celulele cu numărul <code>0</code> sunt libere și se pot traversa. Celulele cu numărul <code>1</code> sunt ocupate și nu se pot traversa. Pentru <code>K</code> poziții date, se cere să se determine drumul de lungime minimă care pleacă de la poziția <code>(i1, j1)</code> și trece prin toate cele <code>K</code> poziții intermediare (nu contează în ce ordine), ajungând în final în poziția <code>(i2, j2)</code>.</p>",
+      "text": "Se dă o matrice binara cu N linii și M coloane. Celulele cu numărul 0 sunt libere și se pot traversa. Celulele cu numărul 1 sunt ocupate și nu se pot traversa. Pentru K poziții date, se cere să se determine drumul de lungime minimă care pleacă de la poziția (i1, j1) și trece prin toate cele K poziții intermediare (nu contează în ce ordine), ajungând în final în poziția (i2, j2)."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>lee3.in</code> conține pe prima linie numerele <code>N</code> și <code>M</code>. </p><p>Pe următoarele <code>N</code> linii vor fi câte <code>M</code> numere, reprezentand structura matricei.</p><p>Pe următoarea linie se vor afla patru numere: <code>i1</code>, <code>j1</code>, <code>i2</code> si <code>j2</code> cu semnificația din enunț. Pe următoarea linie se află numărul <code>K</code>, urmat de <code>K</code> perechi de numere <code>(i, j)</code> după cum reiese și din enunț.</p>",
+      "text": "Fișierul de intrare lee3.in conține pe prima linie numerele N și M. Pe următoarele N linii vor fi câte M numere, reprezentand structura matricei.Pe următoarea linie se vor afla patru numere: i1, j1, i2 si j2 cu semnificația din enunț. Pe următoarea linie se află numărul K, urmat de K perechi de numere (i, j) după cum reiese și din enunț."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>lee3.out</code> va conține pe prima linie numărul <code>C</code>, reprezentând numărul minim de poziții din matrice prin care se va trece începând cu <code>(i1, j1)</code>, pentru a trece prin toate cele <code>K</code> poziții și terminând în poziția <code>(i2, j2)</code>.</p><p>Pe următoarele linii se vor afișa <code>K+2</code> perechi de numere <code>(i, j)</code>, reprezentând ordinea în care sunt parcurse cele <code>K</code> poziții, inclusiv poziția inițială și cea finală. Indicii pozițiilor se separă prin virgula. Dacă există mai multe trasee de aceeași lungime minimă, atunci se va afișa oricare.</p>",
+      "text": "Fișierul de ieșire lee3.out va conține pe prima linie numărul C, reprezentând numărul minim de poziții din matrice prin care se va trece începând cu (i1, j1), pentru a trece prin toate cele K poziții și terminând în poziția (i2, j2).Pe următoarele linii se vor afișa K+2 perechi de numere (i, j), reprezentând ordinea în care sunt parcurse cele K poziții, inclusiv poziția inițială și cea finală. Indicii pozițiilor se separă prin virgula. Dacă există mai multe trasee de aceeași lungime minimă, atunci se va afișa oricare."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N, M ≤ 750</code></li>\n\t<li><code>1 ≤ K ≤ 19</code></li>\n\t<li><code>1 ≤ i1, i2, i[k] ≤ N</code></li>\n\t<li><code>1 ≤ j1, j2, j[k] ≤ M</code></li>\n\t<li>Se garantează că există soluție pentru toate testele</li>\n\t<li>Pentru 10% din teste: <code>K ≤ 7</code></li>\n\t<li>Pentru restul testelor: nicio restricție suplimentară</li>\n</ul>",
+      "text": "1 ≤ N, M ≤ 750 1 ≤ K ≤ 19 1 ≤ i1, i2, i[k] ≤ N 1 ≤ j1, j2, j[k] ≤ M Se garantează că există soluție pentru toate testele Pentru 10% din teste: K ≤ 7 Pentru restul testelor: nicio restricție suplimentară"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>lee3.in</code></p><pre>4 5\n0 0 0 0 0\n1 0 1 1 1\n1 0 0 0 1\n1 1 0 0 0\n1 1 4 4\n3\n1 5\n3 2\n3 4</pre><p><code>lee3.out</code></p><pre>12\n1,1\n1,5\n3,2\n3,4\n4,4</pre><h3>Explicație</h3><p>Se pleacă din poziția <code>(1, 1)</code> și se merge în poziția <code>(1, 5)</code>, apoi în <code>(3, 2</code>, apoi în <code>(3, 4)</code> și apoi ajunge la destinație în <code>(4, 4)</code>.</p>",
+      "text": "lee3.in4 5 0 0 0 0 0 1 0 1 1 1 1 0 0 0 1 1 1 0 0 0 1 1 4 4 3 1 5 3 2 3 4lee3.out12 1,1 1,5 3,2 3,4 4,4ExplicațieSe pleacă din poziția (1, 1) și se merge în poziția (1, 5), apoi în (3, 2, apoi în (3, 4) și apoi ajunge la destinație în (4, 4)."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Se pleacă din poziția (1, 1) și se merge în poziția (1, 5), apoi în (3, 2, apoi în (3, 4) și apoi ajunge la destinație în (4, 4)."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N, M ≤ 750",
+    "1 ≤ K ≤ 19",
+    "1 ≤ i1, i2, i[k] ≤ N",
+    "1 ≤ j1, j2, j[k] ≤ M",
+    "Se garantează că există soluție pentru toate testele",
+    "Pentru 10% din teste: K ≤ 7",
+    "Pentru restul testelor: nicio restricție suplimentară"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qab2f84f58f.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Moldovan Robert (moldovan_robert_lol)",
+    "clasa": "11",
+    "intrare/ieșire": "lee3.in / lee3.out",
+    "limită timp": "2 secunde",
+    "limită memorie": "128 MB / 8 MB",
+    "sursa problemei": "PbInfo",
+    "autor": "Paul Ioan Somesan, varianta modificata",
+    "dificultate": "dificilă"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 2,
+  "memoryLimitMb": 128,
+  "author": "Paul Ioan Somesan, varianta modificata",
+  "sourceAttribution": "PbInfo",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4557/lee3"
+}

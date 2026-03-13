@@ -1,0 +1,59 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3774"><article id="enunt">
+			<p>Bob Ross este foarte faimos pentru picturile sale în ulei cu peisaje muntoase. Astăzi s-a hotărât să picteze o nouă operă, dar va aborda procesul său de creație într-un mod inedit.</p>
+
+<p>Bob dispune de <code>N</code> puncte pe o pânză infinită, al <code>i</code>-lea punct având coordonatele <code>(x[i], y[i])</code>. Punctele au proprietatea că <code>x[i] &lt; x[i+1]</code>. El își va alege un număr de puncte și pentru fiecare punct ales <code>i</code>, va colora segmentele dintre perechile de puncte <code>(i - 1, i)</code> și <code>(i, i+1)</code>.</p>
+
+<p>Alegând o submulțime a celor <code>N</code> puncte, el va colora segmentele incidente acestor puncte în următorul mod: de fiecare dată când își alege un punct, va colora segmentele incidente cu acel punct (orice punct are doi vecini, cu excepția primului și ultimului punct, care au doar un vecin). Dacă un segment este deja colorat, atunci nu va fi colorat a doua oară, și nici cantitatea de vopsea de pe pensulă nu va scădea.</p>
+
+<p>Inițial, Bob are o pensulă cu o cantitate <code>V</code> de vopsea. Cantitatea de vopsea necesară pentru a colora un segment este egală cu <strong>pătratul lungimii acelui segment</strong>, iar după colorare cantitatea de vopsea de pe pensulă scade cu această valoare. </p>
+
+<h1>Cerința</h1>
+
+<p>Bob s-a gândit la următoarele <code>K</code> scenarii. Dacă la scenariul <code>i</code> ar avea o pensulă cu o cantitate <code>V[i]</code> de vopsea, care este numărul maxim <code>P[i]</code>, astfel încât oricum am alege <code>P[i]</code> puncte, să poată colora toate segmentele adiacente acelor puncte?</p>
+
+<h1>Date de intrare</h1>
+
+<p>Prima linie din fișierul de intrare <code>ross.in</code> va conține un singur număr <code>N</code> reprezentând numărul de puncte de pe pânza lui Bob. Pe următoarele <code>N</code> linii se vor afla câte <code>2</code> numere <code>x[i], y[i]</code> separate printr-un spațiu, reprezentând coordonatele punctului <code>i</code>. Pe următoarea linie se află numărul <code>K</code> de scenarii ale lui Bob. Pe următoarele <code>K</code> linii se va afla câte un număr <code>V[i]</code> reprezentând cantitatea de vopsea de pe pensulă pentru scenariul <code>i</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>ross.out</code> va conține <code>K</code> linii, linia <code>i</code> având un singur număr <code>P[i]</code> reprezentând răspunsul pentru scenariul <code>i</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 2.000</code></li>
+	<li><code>1 ≤ K ≤ 100.000</code></li>
+	<li><code>1 ≤ x[i], y[i] ≤ 1.000.000</code></li>
+	<li><code>0 ≤ V[i] ≤ 10</code><sup><code>15</code></sup></li>
+	<li><code>x[i] &lt; x[i+1]</code>, pentru orice <code>i ∊ {1, 2, ..., N-1}</code>.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>ross.in</code></p>
+
+<pre>6
+2 2
+4 4
+5 1
+7 6
+8 5
+10 2
+2
+44
+55</pre>
+
+<p><code>ross.out</code></p>
+
+<pre>1
+2</pre>
+
+<h3>Explicație</h3>
+
+<p>Pentru <code>V = 44</code> răspunsul este <code>1</code>. Oricum am alege un punct, putem colora segmentele adiacente acestuia. Există totuși perechi de <code>2</code> puncte, care pentru colorare, necesită o cantitate de vopsea mai mare decât <code>44</code> (spre exemplu, alegând punctele <code>(5, 1)</code> și <code>(10, 2)</code>, avem nevoie de o pensulă cu o cantitate de vopsea mai mare sau egală ca <code>52</code>).</p>
+
+<p>Pentru <code>V = 55</code> răpsunsul este <code>2</code>. Pentru oricare <code>2</code> perechi de puncte alese, cantitatea de de vopsea necesară este mai mică sau egală cu <code>55</code>. Alegând punctele <code>(4, 4)</code>, <code>(7, 6)</code> și <code>(10, 2)</code>, costul colorării depașește <code>55</code>, deci răspunsul este <code>2</code>.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-ross-00-jpg.jpg"></p>		</article>
+		</body></html>

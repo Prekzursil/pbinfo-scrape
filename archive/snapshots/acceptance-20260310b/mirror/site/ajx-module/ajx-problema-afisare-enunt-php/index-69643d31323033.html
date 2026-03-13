@@ -1,0 +1,86 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1203"><article id="enunt">
+			<p>Fie un vector <code>V</code> cu <code>N</code> elemente și un număr <code>K</code>. Vectorul <code>V</code> trebuie împărțit în exact <code>K</code> subsecvențe nevide, astfel încât fiecare element din vector să aparțină exact unei subsecvențe. Această împărțire trebuie făcută astfel încât maximul șmecheriei fiecărei subsecvențe să fie cât mai mic. (Această problemă concepe greșit sistemul de șmecherie și valoare). Șmecheria fiecărei subsecvențe se definește ca fiind parte întreagă din <code>((Vmax – Vmin + 1) / 2)</code>, unde <code>Vmax</code> este valoarea maximă din subsecvență, iar <code>Vmin</code> este valoarea minimă.</p>
+
+<p>Vectorul <code>V</code> de <code>N</code> elemente va fi generat în felul următor: se dă un număr <code>M</code> și <code>2</code> vectori <code>A</code> și <code>B</code> de lungime <code>M</code> (indexați de la <code>0</code> la <code>M - 1</code>). Fiecare element <code>i</code>, <code>0 ≤ i &lt; N</code>, din vectorul <code>V</code> va fi calculat cu următoarea formulă: <code>V[i] = (A[i % M] ^ B[i / M])</code>, unde <code>x % y</code> reprezintă restul lui <code>x</code> la împărțirea cu <code>y</code>, <code>x / y</code> reprezintă câtul împărțirii lui <code>x</code> la <code>y</code> și <code>x ^ y</code> reprezintă rezultatul operației <code>xor</code> (sau exclusiv pe biți) dintre <code>x</code> și <code>y</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului <code>ksecv.in</code> se află <code>3</code> numere naturale <code>N</code>, <code>K</code> și <code>M</code>, cu semnificația din enunț, separate prin câte un spațiu.&nbsp;Pe a doua linie a fișierului se află <code>M</code> numere naturale separate prin câte un spațiu, reprezentând vectorul <code>A</code>. Pe a treia linie se află <code>M</code> numere naturale separate prin câte un spațiu, reprezentând vectorul <code>B</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Pe prima linie a fișierului de ieșire <code>ksecv.out</code> se va afișa&nbsp;cel mai mic număr natural <code>S</code> pentru care vectorul <code>V</code> poate fi împărțit în exact <code>K</code> subsecvențe nevide, fiecare având șmecheria mai mică sau egală cu <code>S</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 1 000 000</code></li>
+	<li><code>1 ≤ K ≤ 1 000</code></li>
+	<li><code>1 ≤ M ≤ 2 048</code></li>
+	<li><code>N &lt; M*M</code></li>
+	<li><code>1 ≤ K &lt; N</code></li>
+	<li>Valorile vectorilor <code>A</code> și <code>B</code> vor fi din intervalul <code>[0, 2</code><sup><code>60</code></sup><code> - 1]</code></li>
+	<li>Fiecare din cele <code>K</code> subsecvențe trebuie să aibă cel puțin un element.</li>
+	<li>Pentru 20% din teste <code>N ≤ 100</code>, <code>K ≤ 50</code>.</li>
+	<li>Pentru alte 20% din teste <code>N ≤ 100 000</code>, <code>K ≤ 1000</code>.</li>
+	<li>Pentru alte 20% din teste <code>N ≤ 1 000 000</code>, <code>K ≤ 50</code>.</li>
+	<li>Vectorul <code>V</code> are indicii indexați de la <code>0</code> la <code>N - 1</code>.</li>
+	<li>Vectorii <code>A</code> și <code>B</code> au indicii indexați de la <code>0</code> la <code>M - 1</code>.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>ksecv.in</code></p>
+
+<pre>6 3 6
+13 4 6 19 4 10
+0 0 0 0 0 0</pre>
+
+<p><code>ksecv.out</code></p>
+
+<pre>5</pre>
+
+<h3>Explicație</h3>
+
+<p>Valorile vectorului <code>V</code> sunt <code>13 4 6 19 4 10</code>.</p>
+
+<p>Dacă împărțim șirul în subsecvențele <code>[0,2] [3,3] [4,5]</code> obținem șmecheriile <code>5</code>, <code>0</code> și <code>3</code>. Șmecheria maxima este <code>5</code>.</p>
+
+<p>Nu putem împărți vectorul <code>V</code> astfel încât șmecheria maximă a unei subsecvențe să fie mai mică decât <code>5</code>.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>ksecv.in</code></p>
+
+<pre>6 4 6
+13 4 6 19 4 10
+0 0 0 0 0 0</pre>
+
+<p><code>ksecv.out</code></p>
+
+<pre>3</pre>
+
+<h3>Explicație</h3>
+
+<p>Valorile vectorului <code>V</code> sunt <code>13 4 6 19 4 10</code>.</p>
+
+<p>O posibilă împărțire este: <code>[0,0] [1,2] [3,3] [4,5]</code>. Șmecheriile fiecărei subsecvențe sunt <code>0</code>, <code>1</code>, <code>0</code> și <code>3</code>.</p>
+
+<h1>Exemplul 3</h1>
+
+<p><code>ksecv.in</code></p>
+
+<pre>6 3 3
+3 4 2
+4 5 3</pre>
+
+<p><code>ksecv.out</code></p>
+
+<pre>3</pre>
+
+<h3>Explicație</h3>
+
+<p>Valorile vectorului <code>V</code> sunt <code>7 0 6 6 1 7</code>. </p>
+
+<p>Dacă împărțim în subsecvențele <code>[0,0] [1,4] [5,5]</code>, obținem șmecheriile <code>0</code>, <code>3</code> și <code>0</code>.</p>		</article>
+		</body></html>

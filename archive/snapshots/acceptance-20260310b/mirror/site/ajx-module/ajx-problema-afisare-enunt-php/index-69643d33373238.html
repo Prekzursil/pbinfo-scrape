@@ -1,0 +1,77 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3728"><article id="enunt">
+			<p>Ne aflăm la un anumit moment al desfășurării campionatului național de fotbal. O parte dintre meciuri s-au jucat, altele urmează să fie disputate. Se cunoaște numărul de puncte acumulate deja de fiecare echipă înaintea desfășurării meciurilor restante. Se cunoaște, de asemenea, că un meci se poate termina egal, caz în care fiecare dintre echipe primește câte un punct, sau cu victoria uneia dintre echipe, iar în acest caz acea echipă primește trei puncte, iar cealaltă zero puncte.</p>
+
+<h1>Cerința</h1>
+
+<p>Avem de răspuns la întrebări de două tipuri:<br>
+1. Care echipe ar fi pe locul I dacă toate meciurile restante s-ar termina la egalitate? O echipă este pe locul I dacă are număr maxim de puncte.<br>
+2. Care echipe depind strict de propriile rezultate pentru a deveni campioane? O echipă devine campioană (câștigă campionatul) dacă termină cu număr de puncte strict mai mare decât oricare dintre celelalte echipe. Spunem că o echipă depinde strict de propriile rezultate pentru a deveni campioană dacă ea devine campioană câștigând toate meciurile pe care trebuie să le mai joace, indiferent de rezultatele celorlalte meciuri.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>campionat.in</code> conține pe prima linie un număr <code>T</code>, reprezentând tipul de întrebare (<code>1</code> sau <code>2</code>). Pe linia a doua se află un număr <code>N</code> reprezentând numărul de echipe din campionat (considerăm că echipele sunt etichetate cu numere distincte de la <code>1</code> la <code>N</code>). Pe linia a treia se află <code>N</code> numere naturale separate prin câte un spațiu, al <code>i</code>-lea număr reprezentând punctajul celei de-a <code>i</code>-a echipe. Pe linia a patra se află un număr <code>D</code>, reprezentând numărul de meciuri restante. Pe fiecare dintre următoarele <code>D</code> linii se află câte două numere distincte <code>i</code>, <code>j</code>, cuprinse între <code>1</code> și <code>N</code>, cu semnificația că echipele <code>i</code> și <code>j</code> au de disputat un meci restant.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>campionat.out</code> va conține o singură linie.</p>
+
+<ul>
+	<li>Dacă <code>T = 1</code>, linia va conține etichetele echipelor care termină pe locul I, în cazul în care toate meciurile restante se termină la egalitate.</li>
+	<li>Dacă <code>T = 2</code>, linia va conține etichetele echipelor care depind strict de propriile rezultate pentru a deveni campioane. Dacă nicio echipă nu poate deveni campioană depinzând doar de rezultatele sale, în fișierul de ieșire se va scrie doar numărul <code>0</code>.</li>
+</ul>
+
+<p>Atât pentru <code>T = 1</code>, cât și pentru <code>T = 2</code> etichetele echipelor vor fi scrise în ordine crescătoare, separate prin câte un spațiu.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N ≤ 1000</code></li>
+	<li><code>1 ≤ D ≤ 500.000</code></li>
+	<li>Punctajele inițiale ale echipelor sunt numere naturale cel mult egale cu <code>1000</code>.</li>
+	<li>Regulile de desfășurare a campionatului sunt mai ciudate, nu trebuie să vă puneți problema dacă este posibil ca echipele să aibă șirul dat al punctajelor în urma meciurilor disputate deja (considerăm că până la momentul de față federația a acordat diverse bonusuri și depunctări).</li>
+	<li>Dacă între meciurile rămase de jucat este vreunul care apare de mai multe ori (fie sub forma <code>(i, j)</code> fie sub forma <code>(j, i)</code>), el se va disputa o singură dată.</li>
+	<li>Programarea meciurilor s-a făcut în mod indisciplinat, deci este posibil ca unele echipe să mai aibă de jucat mai multe meciuri decât altele, iar unele chiar să nu mai aibă de jucat niciun meci.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>campionat.in</code></p>
+
+<pre>1
+4
+2 3 2 1
+3
+1 3
+1 2
+3 1</pre>
+
+<p><code>campionat.out</code></p>
+
+<pre>1 2</pre>
+
+<h3>Explicație</h3>
+
+<p>Echipa <code>2</code> are de disputat un singur meci cu echipa <code>1</code>, iar al doilea meci se va disputa între echipele <code>1</code> și <code>3</code> (chiar dacă în listă apare de două ori perechea <code>1 3</code>, este vorba despre un singur meci).<br>
+Cele două jocuri se vor termina la egalitate și astfel punctajele echipelor la final vor fi: <code>4 4 3 1</code>. Așadar echipele <code>1</code> și <code>2</code> ies pe primul loc.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>campionat.in</code></p>
+
+<pre>2
+4
+1 3 2 1
+3
+1 3
+1 2
+3 1</pre>
+
+<p><code>campionat.out</code></p>
+
+<pre>1 2</pre>
+
+<h3>Explicație</h3>
+
+<p>Echipa <code>1</code> devine campioană dacă învinge în ambele meciuri, nicio altă echipă neputând să o egaleze la puncte sau să o depășească. De asemenea, echipa <code>2</code> devine campioană dacă învinge echipa <code>1</code> în meciul restant, indiferent de rezultatul celuilalt meci. Echipa <code>3</code>, chiar dacă învinge în meciul cu echipa <code>1</code>, nu depinde doar de rezultatul său<br>
+întrucât echipa <code>2</code> ar depăși-o la puncte dacă și ea ar câștiga meciul pe care îl mai are de disputat.</p>		</article>
+		</body></html>

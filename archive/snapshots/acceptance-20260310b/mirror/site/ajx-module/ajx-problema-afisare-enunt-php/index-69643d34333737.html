@@ -1,0 +1,74 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4377"><article id="enunt">
+			<p>Aflându-se la moșia lui Pascalopol, Otilia este fascinată de vasta întindere de pământ pe care bărbatul o deține. Cum Pascalopol este un om darnic și îi face toate poftele Otiliei, încă de când era mică, acesta îi dăruiește tinerei o bucată de pământ de dimensiune <code>N*M</code> împărțită în parcele de dimensiune <code>1*1</code>, dispuse pe <code>N</code> linii și <code>M</code> coloane (numerotate de la <code>1</code> la <code>N</code>, respectiv de la <code>1</code> la <code>M</code>). Astfel, fiecare parcelă poate fi identificată prin coordonatele <code>(i,j)</code>, unde <code>i</code> reprezintă linia, iar <code>j</code> reprezintă coloana pe care se află parcela. </p>
+
+<p>Bucata de pământ conține și gropi. O parcelă care este groapă este reprezentată prin numărul <code>1</code>, în timp ce o parcelă care nu este groapă este reprezentată prin numărul <code>0</code>. Pentru că Felix este gelos pe Pascalopol și nu suportă ca Otilia să-i ofere atât de multă atenție, tânărul i-a pus următoarea întrebare moșierului, vrând prin aceasta să-i arate că el este net superior din punct de vedere informatic:</p>
+
+<p>“- Dacă eu plec din parcela <code>(1,1)</code>, iar calul meu poate face un salt cu orice lungime între <code>1</code> și <code>K</code> la sud (linia crește) sau la est (coloana crește), în câte moduri pot ajunge în parcela <code>(L,C)</code>, ținând cont că nu pot păși pe o parcelă care conține o groapă.”. </p>
+
+<p>Mai formal, dintr-o parcelă de coordonate <code>(i, j)</code>, calul se poate deplasa cu un salt în oricare dintre parcelele de coordonate <code>(i+x, j)</code> sau <code>(i, j+x)</code> (<code>1 ≤ x ≤ K</code>) doar dacă parcela este reprezentată prin numărul <code>0</code>.</p>
+
+<p>Două succesiuni de salturi sunt distincte dacă au număr diferit de salturi sau dacă există o parcelă prin care trece doar una dintre cele două succesiuni.  </p>
+
+<p>Pentru că numărul poate fi foarte mare, Felix se mulțumește doar cu restul acestuia la împărțirea cu <code>1.000.000.007</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Cum Pascalopol nu le are cu calculatoarele, iar aceasta este clar o problemă de Informatică, moșierul vă cere ajutorul și vă va oferi în schimb <code>100</code> de puncte.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>enigma.in</code> conține pe prima linie numerele naturale <code>N</code>, <code>M</code>, <code>L</code> și <code>C</code>, reprezentând numărul de linii și numărul de coloane ale bucății de pământ, respectiv coordonatele parcelei în care Felix vrea să ajungă. Pe următoarele <code>N</code> linii se vor afla câte <code>M</code> valori <code>0</code> sau <code>1</code>, unde <code>1</code> reprezintă o parcelă care este groapă, iar <code>0</code> reprezintă o parcelă care nu este groapă. Pe ultima linie se va afla numărul <code>K</code>, reprezentând lungimea maximă a unui salt pe care calul lui Felix îl poate face.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>enigma.out</code> va conține o singură linie pe care va fi scris numărul de moduri în care calul poate ajunge din parcela <code>(1,1)</code> în parcela <code>(L,C)</code> prin modalitatea descrisă în enunț, modulo <code>1.000.000.007</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N, M, K ≤ 1000</code></li>
+	<li>Se garantează că Felix vrea să ajungă într-o parcelă care nu este groapă, iar parcela <code>(1,1)</code> nu este groapă.</li>
+	<li>Calul nu poate călca pe o parcelă care este groapă, dar poate efectua un salt peste una sau mai multe parcele care sunt gropi.</li>
+	<li>Pentru 9 puncte, <code>1 ≤ N, M, K ≤ 7</code></li>
+	<li>Pentru 11 puncte, <code>1 ≤ N, M ≤ 1000</code>, iar <code>K = 1</code></li>
+	<li>Pentru 25 de puncte, <code>1 ≤ N, M, K ≤ 1000</code> și nu există nicio parcelă groapă</li>
+	<li>Pentru 25 de puncte, <code>8 ≤ N, M, K ≤ 100</code></li>
+	<li>Pentru 30 de puncte, <code>101 ≤ N, M, K ≤ 1000</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>enigma.in</code></p>
+
+<pre>5 5 4 3
+0 0 1 1 1
+1 0 1 0 0
+1 0 0 0 0
+0 1 0 1 0
+0 1 1 1 0
+2</pre>
+
+<p><code>enigma.out</code></p>
+
+<pre>2</pre>
+
+<h1>Explicație</h1>
+
+<p>Cele două drumuri posibile sunt: <code>(1,1) → (1,2) → (2,2) → (3,2) → (3,3) → (4,3)</code>, respectiv <code>(1,1) → (1,2) → (3,2) → (3,3) → (4,3)</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>enigma.in</code></p>
+
+<pre>5 5 4 3
+0 0 1 1 1
+0 0 0 0 0
+0 0 0 0 0
+0 1 0 1 0
+0 1 1 1 0
+3</pre>
+
+<p><code>enigma.out</code></p>
+
+<pre>17</pre>		</article>
+		</body></html>

@@ -1,0 +1,119 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4817"><article id="enunt">
+			<p>Fie <code>a = (a[1], a[2], ..., a[n])</code> un șir de <code>n</code> numere întregi. Pentru fiecare <code>k ∈ {1,2, ...,n}</code>, definim <code>min[k] = min{a[1], a[2], ... ,a[k]}</code> și <code>max[k] = max{a[1], a[2], ...,a[k]}</code>. Astfel, asociem șirului <code>a</code> un alt șir de intervale închise <code>minmax = ([min[1], max[1]], [min[2], max[2]], ..., [min[n], max[n]])</code>.</p>
+
+<p>Vom spune că șirul <code>a</code> este un <strong>șir cromatic</strong> dacă și numai dacă elementele șirului <code>minmax</code> sunt distincte două câte două, adică nu există două intervale identice în șir. </p>
+
+<p>De exemplu, dacă <code>a = (7, 4, 9)</code>, atunci șirul <code>minmax</code> este <code>([7, 7], [4, 7], [4, 9])</code>. Cum nu există două intervale identice în <code>minmax</code>, șirul <code>a</code> este cromatic. În schimb, dacă <code>a = (4, 9, 7)</code>, atunci șirul <code>minmax</code> este <code>([4, 4], [4, 9], [4, 9])</code>. Intervalul <code>[4, 9]</code> se repetă, deci șirul <code>a</code> <strong>nu</strong> este cromatic.</p>
+
+<p>Considerăm toate șirurile cromatice distincte ce se pot forma prin rearanjarea elementelor șirului <code>a</code> și le ordonăm lexicografic. Notăm cu <code>NSC</code> numărul de șiruri astfel obținute. De exemplu, dintre cele 6 permutări ale șirului <code>a = (7,4,9)</code>, numai <code>NSC = 4</code> sunt cromatice:<br>
+1) <code>(4, 7, 9)</code>; <br>
+2) <code>(7, 4, 9)</code>;<br>
+3) <code>(7, 9, 4)</code>;<br>
+4) <code>(9, 7, 4)</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Dându-se un șir <code>a</code>, nu neapărat cromatic, să se determine:</p>
+
+<ul>
+	<li>Numărul de șiruri cromatice <code>NSC</code> ce se pot forma prin rearanjarea elementelor șirului <code>a</code>. Întrucât acest număr poate fi foarte mare, se cere <code>NSC</code> modulo <code>1.000.000.007</code>.</li>
+	<li>Știind că șirul <code>a</code> este cromatic, să se determine poziția <code>p ∈ {1, 2, ..., NSC}</code> a șirului <code>a</code> în lista ordonată lexicografic a tuturor permutărilor cromatice ale lui <code>a</code>.</li>
+	<li>Dat fiind <code>q ∈ {1, 2, ..., NSC}</code>, să se determine cel de-al <code>q</code>-lea șir cromatic în ordine lexicografică ce se poate obține prin rearanjarea elementelor șirului <code>a</code>.</li>
+</ul>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>cromatic.in</code> conține pe prima linie un număr natural <code>c ∈ {1, 2, 3}</code>, reprezentând numărul cerinței de rezolvat: </p>
+
+<ul>
+	<li>Dacă <code>c = 1</code>, pe linia a doua vom avea un număr natural <code>n</code>, iar pe linia a treia vom avea <code>n</code> numere naturale separate prin spații, reprezentând un șir <strong>nu neapărat cromatic</strong>.</li>
+	<li>Dacă <code>c = 2</code>, pe linia a doua vom avea un număr natural <code>n</code>, iar pe linia a treia vom avea <code>n</code> numere naturale separate prin spații, reprezentând un șir cromatic.</li>
+	<li>Dacă  <code>c</code> = <code>3</code>, linia a doua va conține numerele <code>n</code> și <code>p</code> separate prin spații, iar linia a treia va conține <code>n</code> numere distincte separate prin spații, reprezentând un șir <strong>nu neapărat cromatic</strong>.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>cromatic.out</code> trebuie să conțină o singură linie, pe care se va afișa, în funcție de numărul cerinței de rezolvat:</p>
+
+<ul>
+	<li>Dacă <code>c = 1</code>, numărul natural <code>NSC</code> modulo <code>1.000.000.007</code>;</li>
+	<li>Dacă <code>c = 2</code>, numărul natural <code>p</code>, ce reprezintă poziția șirului <code>a</code> în lista ordonată lexicografic a tuturor șirurilor cromatice obținute prin rearanjarea elementelor șirului citit;</li>
+	<li>Dacă <code>c = 3</code>, un șir de <code>n</code> numere naturale, separate prin spații, ce reprezintă cel de-al <code>q</code>-lea șir cromatic în ordine lexicografică care se poate obține prin rearanjarea elementelor șirului <code>a</code>.</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2  ≤ n ≤ 300.000</code>;</li>
+	<li><code>-1.000.000.000 ≤ a[i] ≤ 1.000.000.000</code>;</li>
+	<li><code>1 ≤ p, q ≤ 1.000.000.000</code>;</li>
+	<li><code>p, q ∈ {1, 2, ..., NSC}</code>.</li>
+	<li>Pentru 9 puncte, <code>c=1</code>, <code>n ≤ 20</code></li>
+	<li>Pentru 7 puncte, <code>c=1</code>,  <code>21 ≤ n ≤ 300.000</code></li>
+	<li>Pentru 10 puncte, <code>c=2</code>, <code>1 ≤ p ≤ n</code></li>
+	<li>Pentru 10 puncte, <code>c=2</code>, <code>NSC - p ≤ n</code></li>
+	<li>Pentru 10 puncte, <code>c=2</code>, <code>n ≤ 20</code></li>
+	<li>Pentru 12 puncte, <code>c=2</code>,  <code>21 ≤ n ≤ 300.000</code></li>
+	<li>Pentru 10 puncte, <code>c=3</code>, <code>1 ≤ q ≤ n</code></li>
+	<li>Pentru 10 puncte, <code>c=3</code>, <code>NSC - q ≤ n</code></li>
+	<li>Pentru 10 puncte, <code>c=3</code>, <code>n ≤ 20</code></li>
+	<li>Pentru 12 puncte, <code>c=3</code>, <code>21 ≤ n ≤ 300.000</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>cromatic.in</code></p>
+
+<pre>1
+4
+1 5 3 8</pre>
+
+<p><code>cromatic.out</code></p>
+
+<pre>8</pre>
+
+<h3>Explicație</h3>
+
+<p>Avem 8 șiruri cromatice distincte:</p>
+
+<p>1: <code>1 3 5 8</code><br>
+2: <code>3 1 5 8</code><br>
+3: <code>3 5 1 8</code><br>
+4: <code>3 5 8 1</code><br>
+5: <code>5 3 1 8</code><br>
+6: <code>5 3 8 1</code><br>
+7: <code>5 8 3 1</code><br>
+8: <code>8 5 3 1</code></p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>cromatic.in</code></p>
+
+<pre>2
+4
+5 3 1 8</pre>
+
+<p><code>cromatic.out</code></p>
+
+<pre>5</pre>
+
+<h3>Explicație</h3>
+
+<p>În lista ordonată lexicografic, șirul citit se găsește pe poziția <code>5</code>.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>cromatic.in</code></p>
+
+<pre>3
+4 7
+5 3 1 8</pre>
+
+<p><code>cromatic.out</code></p>
+
+<pre>5 8 3 1</pre>
+
+<h3>Explicație</h3>
+
+<p>A șaptea soluție în ordine lexicografică este <code>5 8 3 1</code></p>		</article>
+		</body></html>

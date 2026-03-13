@@ -1,0 +1,337 @@
+{
+  "id": 4133,
+  "slug": "microbuz",
+  "name": "microbuz",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4133/microbuz",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 45,
+      "name": "Vectori caracteristici / de frecventa",
+      "slug": "vectori-caracteristici-de-frecventa",
+      "href": "/?pagina=probleme-lista&tag=45"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Scrieţi un program care să rezolve următoarele cerințe:</p><ul>\n\t<li>determină preţul minim al unui set de bilete ce poate fi achiziționat pentru parcurgerea a exact <code>N</code> kilometri;</li>\n\t<li>determină distanţele alese de Gigel, astfel încât preţul total al călătoriei să fie minim;</li>\n\t<li>determină două seturi distincte de bilete pentru care prețul total al biletelor este același și este cel mai mare posibil. Pentru fiecare set nu este permisă alegerea mai multor bilete cu același preț și nu există două bilete cu același preț în ambele seturi.</li>\n</ul>",
+      "text": "Scrieţi un program care să rezolve următoarele cerințe: determină preţul minim al unui set de bilete ce poate fi achiziționat pentru parcurgerea a exact N kilometri; determină distanţele alese de Gigel, astfel încât preţul total al călătoriei să fie minim; determină două seturi distincte de bilete pentru care prețul total al biletelor este același și este cel mai mare posibil. Pentru fiecare set nu este permisă alegerea mai multor bilete cu același preț și nu există două bilete cu același preț în ambele seturi."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>microbuz.in</code> are trei linii. Pe prima linie se află un număr natural <code>C</code> ce reprezintă cerința (<code>1</code>, <code>2</code> sau <code>3</code>). Linia  a doua conține zece valori naturale ordonate <strong>strict crescător</strong>, separate prin câte un spaţiu, reprezentând preţurile pentru parcurgerea a <code>1</code>, <code>2</code>, …, <code>10</code> kilometri. Linia a treia conţine valoarea <code>N</code> reprezentând distanţa pe care doreşte să o parcurgă Gigel.</p>",
+      "text": "Fișierul de intrare microbuz.in are trei linii. Pe prima linie se află un număr natural C ce reprezintă cerința (1, 2 sau 3). Linia a doua conține zece valori naturale ordonate strict crescător, separate prin câte un spaţiu, reprezentând preţurile pentru parcurgerea a 1, 2, …, 10 kilometri. Linia a treia conţine valoarea N reprezentând distanţa pe care doreşte să o parcurgă Gigel."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>microbuz.out</code> are următoarea structură:</p><ul>\n\t<li>dacă <code>C = 1</code>, pe prima linie se va afișa un întreg reprezentând costul minim al călătoriei;</li>\n\t<li>dacă <code>C = 2</code>, pe fiecare linie se vor afișa câte două numere întregi, separate printr-un spaţiu, reprezentând distanța parcursă şi preţul biletului corespunzător;</li>\n\t<li>dacă <code>C = 3</code>, pe prima linie se va afișa prețul comun al celor două seturi de bilete, iar pe următoarele două linii câte un set de bilete dat prin numărul de km pentru biletele din set, în ordine strict crescătoare, separate prin câte un spațiu.</li>\n</ul>",
+      "text": "Fișierul de ieșire microbuz.out are următoarea structură: dacă C = 1, pe prima linie se va afișa un întreg reprezentând costul minim al călătoriei; dacă C = 2, pe fiecare linie se vor afișa câte două numere întregi, separate printr-un spaţiu, reprezentând distanța parcursă şi preţul biletului corespunzător; dacă C = 3, pe prima linie se va afișa prețul comun al celor două seturi de bilete, iar pe următoarele două linii câte un set de bilete dat prin numărul de km pentru biletele din set, în ordine strict crescătoare, separate prin câte un spațiu."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>C ∈ {1, 2, 3}</code></li>\n\t<li><code>1 ≤ N ≤ 165</code></li>\n\t<li>cele <code>10</code> prețuri sunt numere naturale din intervalul <code>[10, 99]</code></li>\n\t<li>răspunsul la cerința <code>3</code> nu depinde de valoarea lui <code>N</code></li>\n\t<li>Pentru 28 de puncte, <code>C = 1</code></li>\n\t<li>Pentru 38 de puncte, <code>C = 2</code></li>\n\t<li>Pentru 34 de puncte, <code>C = 3</code></li>\n</ul>",
+      "text": "C ∈ {1, 2, 3} 1 ≤ N ≤ 165 cele 10 prețuri sunt numere naturale din intervalul [10, 99] răspunsul la cerința 3 nu depinde de valoarea lui N Pentru 28 de puncte, C = 1 Pentru 38 de puncte, C = 2 Pentru 34 de puncte, C = 3"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>microbuz.in</code></p><pre>1\n11 14 18 23 29 36 44 45 53 64\n15</pre><p><code>microbuz.out</code></p><pre>86</pre><h3>Explicație</h3><p>Cerința este 1. Costul minim total este <code>86</code>.</p>",
+      "text": "microbuz.in1 11 14 18 23 29 36 44 45 53 64 15microbuz.out86ExplicațieCerința este 1. Costul minim total este 86."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>microbuz.in</code></p><pre>2\n11 14 18 23 29 36 44 45 53 64\n15</pre><p><code>microbuz.out</code></p><pre>3 18\n4 23\n8 45</pre><h3>Explicație</h3><p>Cerința este 2. Biletele cumpărate și prețurile lor sunt: <br>\n<code>3</code> km parcurși, preț <code>18</code><br>\n<code>4</code> km parcurși, preț <code>23</code><br>\n<code>8</code> km parcurși, preț <code>45</code></p>",
+      "text": "microbuz.in2 11 14 18 23 29 36 44 45 53 64 15microbuz.out3 18 4 23 8 45ExplicațieCerința este 2. Biletele cumpărate și prețurile lor sunt: 3 km parcurși, preț 18 4 km parcurși, preț 23 8 km parcurși, preț 45"
+    },
+    {
+      "title": "Exemplul 3:",
+      "html": "<p><code>microbuz.in</code></p><pre>2\n13 17 18 19 21 22 25 28 31 37\n39</pre><p><code>microbuz.out</code></p><pre>7 25\n7 25\n8 28\n8 28\n9 31</pre><h3>Explicație</h3><p>Cerința este 2. Biletele cumpărate și prețurile lor sunt: <br>\n<code>7</code> km parcurși, preț <code>25</code><br>\n<code>7</code> km parcurși, preț <code>25</code><br>\n<code>8</code> km parcurși, preț <code>28</code><br>\n<code>8</code> km parcurși, preț <code>28</code><br>\n<code>9</code> km parcurși, preț <code>31</code></p>",
+      "text": "microbuz.in2 13 17 18 19 21 22 25 28 31 37 39microbuz.out7 25 7 25 8 28 8 28 9 31ExplicațieCerința este 2. Biletele cumpărate și prețurile lor sunt: 7 km parcurși, preț 25 7 km parcurși, preț 25 8 km parcurși, preț 28 8 km parcurși, preț 28 9 km parcurși, preț 31"
+    },
+    {
+      "title": "Exemplul 4:",
+      "html": "<p><code>microbuz.in</code></p><pre>3\n11 14 18 23 29 36 44 45 53 64\n15</pre><p><code>microbuz.out</code></p><pre>163\n2 3 4 7 10 \n5 6 8 9</pre><h3>Explicație</h3><p>Cerința este 3. Prețul maxim comun este <code>163</code>.<br>\nSetul 1: câte un bilet cu prețurile <code>14 18 23 44 64</code>.<br>\nSetul 2: câte un bilet cu prețurile <code>29 36 45 53</code>.</p>",
+      "text": "microbuz.in3 11 14 18 23 29 36 44 45 53 64 15microbuz.out163 2 3 4 7 10 5 6 8 9ExplicațieCerința este 3. Prețul maxim comun este 163. Setul 1: câte un bilet cu prețurile 14 18 23 44 64. Setul 2: câte un bilet cu prețurile 29 36 45 53."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cerința este 1. Costul minim total este 86."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cerința este 2. Biletele cumpărate și prețurile lor sunt: 3 km parcurși, preț 18 4 km parcurși, preț 23 8 km parcurși, preț 45"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cerința este 2. Biletele cumpărate și prețurile lor sunt: 7 km parcurși, preț 25 7 km parcurși, preț 25 8 km parcurși, preț 28 8 km parcurși, preț 28 9 km parcurși, preț 31"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cerința este 3. Prețul maxim comun este 163. Setul 1: câte un bilet cu prețurile 14 18 23 44 64. Setul 2: câte un bilet cu prețurile 29 36 45 53."
+    }
+  ],
+  "constraints": [
+    "C ∈ {1, 2, 3}",
+    "1 ≤ N ≤ 165",
+    "cele 10 prețuri sunt numere naturale din intervalul [10, 99]",
+    "răspunsul la cerința 3 nu depinde de valoarea lui N",
+    "Pentru 28 de puncte, C = 1",
+    "Pentru 38 de puncte, C = 2",
+    "Pentru 34 de puncte, C = 3"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q6bb481b4ae.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/microbuz_001.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-microbuz-001-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "microbuz.in / microbuz.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "ONI 2022, clasa a VII-a",
+    "autor": "Marinel Șerban",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "author": "Marinel Șerban",
+  "sourceAttribution": "ONI 2022, clasa a VII-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4133/microbuz"
+}

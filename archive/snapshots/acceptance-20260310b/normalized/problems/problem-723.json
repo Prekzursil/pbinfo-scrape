@@ -1,0 +1,300 @@
+{
+  "id": 723,
+  "slug": "fibo",
+  "name": "Fibo",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/723/fibo",
+  "categoryChain": [],
+  "tags": [
+    "Fibonacci"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Ajutaţi-o pe Maria, să decidă despre un element Fibonacci oarecare dacă se poate scrie ca sumă sau diferenţă de două numere Fibonacci distincte ridicate la pătrat. Datorită valorilor mari ale numerelor Fibonacci se cere restul împărţirii lor la <code>46337</code>.</p>",
+      "text": "Ajutaţi-o pe Maria, să decidă despre un element Fibonacci oarecare dacă se poate scrie ca sumă sau diferenţă de două numere Fibonacci distincte ridicate la pătrat. Datorită valorilor mari ale numerelor Fibonacci se cere restul împărţirii lor la 46337."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fişierul de intrare <code>fibo.in</code> conţine un singur număr natural <code>n</code>, ce reprezintă numărul de ordine al celui de al <code>n</code>-lea număr Fibonacci (<code>3&lt;n&lt;25000</code>).</p>",
+      "text": "Fişierul de intrare fibo.in conţine un singur număr natural n, ce reprezintă numărul de ordine al celui de al n-lea număr Fibonacci (3<n<25000)."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>În cazul în care problema are soluţie, fişierul <code>fibo.out</code> va conţine <code>5</code> rânduri:<br>\n</p><ul>\n\t<li>prima linie a fişierului va conţine valoarea <code>1</code> sau <code>0</code>, după cum cel de al <code>n</code>-lea număr Fibonacci poate fi scris ca sumă, respectiv ca diferenţă a altor două numere Fibonacci ridicate la pătrat.</li>\n\t<li>a doua linie a fişierului de ieşire va conţine două numere naturale <code>i</code> şi <code>j</code> (<code>0&lt;i&lt;j</code>) separate printr-un spaţiu, reprezentând numerele de ordine a celor două elemente Fibonacci cerute în enunţ ( <code>f</code><sub><code style=\"font-size:0.8em;\">n</code></sub><code>=f</code><sub><code style=\"font-size:0.8em;\">j</code></sub><sup><code style=\"font-size:0.8em;\">2</code></sup><code>±f</code><sub><code style=\"font-size:0.8em;\">i</code></sub><sup><code style=\"font-size:0.8em;\">2</code></sup> ).</li>\n\t<li>a treia linie a fişierului de ieşire va conţine restul împărţirii celui de al <code>i</code>-lea număr Fibonacci la <code>46337</code>,</li>\n\t<li>a patra linie a fişierului de ieşire va conţine restul împărţirii celui de al <code>j</code>-lea număr Fibonacci la <code>46337</code></li>\n\t<li>a cincea linie a fişierului de ieşire va conţine restul împărţirii celui de al <code>n</code>-lea număr Fibonacci la <code>46337</code>.</li><br>\n</ul><p></p><p>În cazul în care problema nu are soluţie, fişierul de ieşire va conţine pe prima sa linie valoarea <code>-1</code>.</p>",
+      "text": "În cazul în care problema are soluţie, fişierul fibo.out va conţine 5 rânduri: prima linie a fişierului va conţine valoarea 1 sau 0, după cum cel de al n-lea număr Fibonacci poate fi scris ca sumă, respectiv ca diferenţă a altor două numere Fibonacci ridicate la pătrat. a doua linie a fişierului de ieşire va conţine două numere naturale i şi j (0<i<j) separate printr-un spaţiu, reprezentând numerele de ordine a celor două elemente Fibonacci cerute în enunţ ( fn=fj2±fi2 ). a treia linie a fişierului de ieşire va conţine restul împărţirii celui de al i-lea număr Fibonacci la 46337, a patra linie a fişierului de ieşire va conţine restul împărţirii celui de al j-lea număr Fibonacci la 46337 a cincea linie a fişierului de ieşire va conţine restul împărţirii celui de al n-lea număr Fibonacci la 46337. În cazul în care problema nu are soluţie, fişierul de ieşire va conţine pe prima sa linie valoarea -1."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>3&lt;n&lt;25000</code></li>\n\t<li>Indicii numerelor Fibonacci pornesc de la <code>1</code>: <code>f</code><sub><code style=\"font-size:0.8em;\">1</code></sub><code>=1</code>, <code>f</code><sub><code style=\"font-size:0.8em;\">2</code></sub><code>=1</code>, <code>f</code><sub><code style=\"font-size:0.8em;\">3</code></sub><code>=2</code>, ...</li>\n\t<li>Pot exista mai multe soluţii, în acest caz se acceptă oricare dintre ele.</li>\n</ul>",
+      "text": "3<n<25000 Indicii numerelor Fibonacci pornesc de la 1: f1=1, f2=1, f3=2, ... Pot exista mai multe soluţii, în acest caz se acceptă oricare dintre ele."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>fibo.in</code></p><pre>5</pre><p><code>fibo.out</code></p><pre>1\n1 3\n1\n2\n5</pre>",
+      "text": "fibo.in5fibo.out1 1 3 1 2 5"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p><code>1</code> – este vorba de o sumă<br>\nse folosesc elementele <code>f</code><sub><code style=\"font-size:0.8em;\">1</code></sub> şi <code>f</code><sub><code style=\"font-size:0.8em;\">3</code></sub><br>\n<code>f</code><sub><code style=\"font-size:0.8em;\">1</code></sub><code> mod 46337 = 1</code><br>\n<code>f</code><sub><code style=\"font-size:0.8em;\">3</code></sub><code> mod 46337 = 2</code><br>\n<code>f</code><sub><code style=\"font-size:0.8em;\">5</code></sub><code> mod 46337 = 5</code><br>\nfiindcă <code>f</code><sub><code style=\"font-size:0.8em;\">5</code></sub><code> = f</code><sub><code style=\"font-size:0.8em;\">1</code></sub><sup><code style=\"font-size:0.8em;\">2</code></sup><code> + f</code><sub><code style=\"font-size:0.8em;\">3</code></sub><sup><code style=\"font-size:0.8em;\">2</code></sup><code> = 1 + 4 = 5</code></p>",
+      "text": "1 – este vorba de o sumă se folosesc elementele f1 şi f3 f1 mod 46337 = 1 f3 mod 46337 = 2 f5 mod 46337 = 5 fiindcă f5 = f12 + f32 = 1 + 4 = 5"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>fibo.in</code></p><pre>5</pre><p><code>fibo.out</code></p><pre>0\n3 4\n2\n3\n5</pre>",
+      "text": "fibo.in5fibo.out0 3 4 2 3 5"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p><code>0</code> – este vorba de o diferenţă<br>\nse folosesc elementele <code>f</code><sub><code style=\"font-size:0.8em;\">3</code></sub> şi <code>f</code><sub><code style=\"font-size:0.8em;\">4</code></sub><br>\n<code>f</code><sub><code style=\"font-size:0.8em;\">3</code></sub><code> mod 46337 = 2</code><br>\n<code>f</code><sub><code style=\"font-size:0.8em;\">4</code></sub><code> mod 46337 = 3</code><br>\n<code>f</code><sub><code style=\"font-size:0.8em;\">5</code></sub><code> mod 46337 = 5</code><br>\nfiindcă <code>f</code><sub><code style=\"font-size:0.8em;\">5</code></sub><code> = f</code><sub><code style=\"font-size:0.8em;\">4</code></sub><sup><code style=\"font-size:0.8em;\">2</code></sup><code> - f</code><sub><code style=\"font-size:0.8em;\">3</code></sub><sup><code style=\"font-size:0.8em;\">2</code></sup><code> = 9 - 4 = 5</code></p>",
+      "text": "0 – este vorba de o diferenţă se folosesc elementele f3 şi f4 f3 mod 46337 = 2 f4 mod 46337 = 3 f5 mod 46337 = 5 fiindcă f5 = f42 - f32 = 9 - 4 = 5"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>fibo.in</code></p><pre>12</pre><p><code>fibo.out</code></p><pre>0\n5 7\n5\n13\n144</pre>",
+      "text": "fibo.in12fibo.out0 5 7 5 13 144"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p><code>0</code> – este vorba de o diferenţă<br>\nse folosesc elementele <code>f</code><sub><code style=\"font-size:0.8em;\">5</code></sub> şi <code>f</code><sub><code style=\"font-size:0.8em;\">7</code></sub><br>\n<code>f</code><sub><code style=\"font-size:0.8em;\">5</code></sub><code> mod 46337 = 5</code><br>\n<code>f</code><sub><code style=\"font-size:0.8em;\">7</code></sub><code> mod 46337 = 13</code><br>\n<code>f</code><sub><code style=\"font-size:0.8em;\">12</code></sub><code> mod 46337 = 144</code><br>\nfiindcă <code>f</code><sub><code style=\"font-size:0.8em;\">12</code></sub><code> = f</code><sub><code style=\"font-size:0.8em;\">7</code></sub><sup><code style=\"font-size:0.8em;\">2</code></sup><code> - f</code><sub><code style=\"font-size:0.8em;\">5</code></sub><sup><code style=\"font-size:0.8em;\">2</code></sup><code> = 169 - 25 = 144</code></p>",
+      "text": "0 – este vorba de o diferenţă se folosesc elementele f5 şi f7 f5 mod 46337 = 5 f7 mod 46337 = 13 f12 mod 46337 = 144 fiindcă f12 = f72 - f52 = 169 - 25 = 144"
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "3<n<25000",
+    "Indicii numerelor Fibonacci pornesc de la 1: f1=1, f2=1, f3=2, ...",
+    "Pot exista mai multe soluţii, în acest caz se acceptă oricare dintre ele."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q7a52f27257.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "11",
+    "intrare/ieșire": "fibo.in / fibo.out",
+    "limită timp": "0.4 secunde",
+    "limită memorie": "8 MB / 8 MB",
+    "sursa problemei": "Lot Juniori, Focsani, 2010",
+    "autor": "Zoltan Szabo",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.4,
+  "memoryLimitMb": 8,
+  "author": "Zoltan Szabo",
+  "sourceAttribution": "Lot Juniori, Focsani, 2010",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/723/fibo"
+}

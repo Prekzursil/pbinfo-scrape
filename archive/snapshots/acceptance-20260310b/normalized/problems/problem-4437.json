@@ -1,0 +1,325 @@
+{
+  "id": 4437,
+  "slug": "arcade1",
+  "name": "arcade1",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4437/arcade1",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 85,
+      "name": "Structuri de date liniare",
+      "slug": "structuri-de-date-liniare",
+      "href": "/?pagina=probleme-lista&tag=85"
+    },
+    {
+      "id": 87,
+      "name": "Coada",
+      "slug": "coada",
+      "href": "/?pagina=probleme-lista&tag=87"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Problema este formată din doua cerințe:</p><ul>\n\t<li><strong>Cerința 1</strong>. Se citește un șir de mișcări format din literele <code>U</code>, <code>D</code>, <code>L</code>, <code>R</code>, ce descriu în ordine mișcările lui Pacman. Deplasându-se conform acestui șir, va ajunge Pacman din <code>(1, 1)</code> la punctul galben de coordonate <code>(N, N)</code>?</li>\n\t<li><strong>Cerința 2</strong>. Care este numărul minim de mișcări <code>U</code>, <code>D</code>, <code>L</code>, <code>R</code> prin care Pacman poate ajunge din <code>(1, 1)</code> la punctul galben de coordonate <code>(N, N)</code>?</li>\n</ul>",
+      "text": "Problema este formată din doua cerințe: Cerința 1. Se citește un șir de mișcări format din literele U, D, L, R, ce descriu în ordine mișcările lui Pacman. Deplasându-se conform acestui șir, va ajunge Pacman din (1, 1) la punctul galben de coordonate (N, N)? Cerința 2. Care este numărul minim de mișcări U, D, L, R prin care Pacman poate ajunge din (1, 1) la punctul galben de coordonate (N, N)?"
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>arcade.in</code> conține va conține <code>T</code> teste. Pe prima linie a fișierului se află numărul cerinței <code>C ∈ {1, 2}</code> și numărul de teste <code>T</code>. Pe prima linie a fiecărui test <code>i</code> se află <code>N</code><sub><code>i</code></sub>, dimensiunea matricei pentru testul <code>i</code>, iar pe a doua linie sunt <code>N</code><sub><code>i</code></sub> numere <code>P</code><sub><code>1</code></sub>, <code>P</code><sub><code>2</code></sub>, …, <code>P</code><sub><code>Ni</code></sub>. Pentru fiecare <code>1 ≤ j ≤ N</code><sub><code>i</code></sub>, obstacolul <code>j</code> are coordonatele <code>(j, P</code><sub><code>j</code></sub><code>)</code>. Dacă <code>C = 1</code>, pe a treia linie a fiecărui test se află mișcările scrise ca un șir de caractere, fără spații, din mulțimea <code>{U, D, L, R}</code>.</p>",
+      "text": "Fișierul de intrare arcade.in conține va conține T teste. Pe prima linie a fișierului se află numărul cerinței C ∈ {1, 2} și numărul de teste T. Pe prima linie a fiecărui test i se află Ni, dimensiunea matricei pentru testul i, iar pe a doua linie sunt Ni numere P1, P2, …, PNi. Pentru fiecare 1 ≤ j ≤ Ni, obstacolul j are coordonatele (j, Pj). Dacă C = 1, pe a treia linie a fiecărui test se află mișcările scrise ca un șir de caractere, fără spații, din mulțimea {U, D, L, R}."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Pe fiecare dintre cele <code>T</code> linii ale fișierului de ieșire <code>arcade.out</code> se va afla răspunsul pentru testul corespunzător. În cazul în care <code>C = 1</code>, se va afișa <code>Won</code>, dacă răspunsul la cerință este afirmativ, respectiv <code>Lost</code>, dacă răspunsul este negativ. Dacă <code>C = 2</code>, se va afișa numărul minim de mișcări cerut, sau <code>-1</code> dacă nu se poate ajunge din <code>(1, 1)</code> în <code>(N,N)</code>.</p>",
+      "text": "Pe fiecare dintre cele T linii ale fișierului de ieșire arcade.out se va afla răspunsul pentru testul corespunzător. În cazul în care C = 1, se va afișa Won, dacă răspunsul la cerință este afirmativ, respectiv Lost, dacă răspunsul este negativ. Dacă C = 2, se va afișa numărul minim de mișcări cerut, sau -1 dacă nu se poate ajunge din (1, 1) în (N,N)."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ T ≤ 50.000</code></li>\n\t<li><code>2 ≤ N</code><sub><code>i</code></sub>, pentru orice test <code>1 ≤ i ≤ T</code></li>\n\t<li><code>N</code><sub><code>1</code></sub> <code>+ N</code><sub><code>2</code></sub> <code>+ ... + N</code><sub><code>T</code></sub> <code>≤ 100.000</code> (unde <code>N</code><sub><code>1</code></sub> <code>+ N</code><sub><code>2</code></sub> <code>+ ... + N</code><sub><code>T</code></sub> reprezintă suma tuturor <code>N</code>-urilor dintr-un fișier de intrare)</li>\n\t<li><code>1 ≤ P</code><sub><code>j</code></sub> <code>≤ N</code><sub><code>i</code></sub> și <code>P</code><sub><code>j</code></sub> <code>≠ P</code><sub><code>k</code></sub> pentru orice <code>j ≠ k</code>.</li>\n\t<li>Pentru <code>C = 1</code>, suma lungimilor șirurilor de mișcări din toate cele <code>T</code> teste nu depășește <code>1.000.000</code>.</li>\n\t<li>Se garantează că <code>(1, 1)</code> și <code>(N, N)</code> nu sunt blocate de un obstacol (<code>P</code><sub><code>1</code></sub> <code>≠ 1</code> și <code>P</code><sub><code>N</code></sub> <code>≠ N</code>).</li>\n\t<li>Pentru 18 puncte, <code>C = 1</code>, <code>N</code><sub><code>1</code></sub> <code>+ N</code><sub><code>2</code></sub> <code>+ ... + N</code><sub><code>T</code></sub> <code>≤ 1000</code>, suma lungimilor șirurilor de mișcări din toate cele <code>T</code> teste nu depășește <code>10.000</code></li>\n\t<li>Pentru 19 puncte, <code>C = 1</code></li>\n\t<li>Pentru 33 puncte, <code>C = 2</code>, <code>N</code><sub><code>1</code></sub> <code>+ N</code><sub><code>2</code></sub> <code>+ ... + N</code><sub><code>T</code></sub> <code>≤ 1000</code></li>\n\t<li>Pentru 30 puncte, <code>C = 2</code></li>\n</ul>",
+      "text": "1 ≤ T ≤ 50.000 2 ≤ Ni, pentru orice test 1 ≤ i ≤ T N1 + N2 + ... + NT ≤ 100.000 (unde N1 + N2 + ... + NT reprezintă suma tuturor N-urilor dintr-un fișier de intrare) 1 ≤ Pj ≤ Ni și Pj ≠ Pk pentru orice j ≠ k. Pentru C = 1, suma lungimilor șirurilor de mișcări din toate cele T teste nu depășește 1.000.000. Se garantează că (1, 1) și (N, N) nu sunt blocate de un obstacol (P1 ≠ 1 și PN ≠ N). Pentru 18 puncte, C = 1, N1 + N2 + ... + NT ≤ 1000, suma lungimilor șirurilor de mișcări din toate cele T teste nu depășește 10.000 Pentru 19 puncte, C = 1 Pentru 33 puncte, C = 2, N1 + N2 + ... + NT ≤ 1000 Pentru 30 puncte, C = 2"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>arcade.in</code></p><pre>1 3\n5\n2 1 3 5 4\nLDLDL\n4\n3 1 4 2\nRDRUL\n6\n3 2 1 6 5 4\nRURU</pre><p><code>arcade.out</code></p><pre>Won\nLost\nWon</pre><h3>Explicație</h3><p>Drumul pentru primul test:</p><p><img alt=\"\" src=\"/resurse/16a4b0/arcade1_001.jpg\"></p>",
+      "text": "arcade.in1 3 5 2 1 3 5 4 LDLDL 4 3 1 4 2 RDRUL 6 3 2 1 6 5 4 RURUarcade.outWon Lost WonExplicațieDrumul pentru primul test:"
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>arcade.in</code></p><pre>2 3\n5\n2 1 3 5 4\n6\n6 5 4 3 2 1\n6\n3 2 1 6 5 4</pre><p><code>arcade.out</code></p><pre>4\n-1\n4</pre><h3>Explicație</h3><p>Pentru primul test, șirul <code>LDRU</code> este una din cele mai scurte variante.</p><p><img alt=\"\" src=\"/resurse/16a4b0/arcade1_002.jpg\"></p>",
+      "text": "arcade.in2 3 5 2 1 3 5 4 6 6 5 4 3 2 1 6 3 2 1 6 5 4arcade.out4 -1 4ExplicațiePentru primul test, șirul LDRU este una din cele mai scurte variante."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Drumul pentru primul test:"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Pentru primul test, șirul LDRU este una din cele mai scurte variante."
+    }
+  ],
+  "constraints": [
+    "1 ≤ T ≤ 50.000",
+    "2 ≤ Ni, pentru orice test 1 ≤ i ≤ T",
+    "N1 + N2 + ... + NT ≤ 100.000 (unde N1 + N2 + ... + NT reprezintă suma tuturor N-urilor dintr-un fișier de intrare)",
+    "1 ≤ Pj ≤ Ni și Pj ≠ Pk pentru orice j ≠ k.",
+    "Pentru C = 1, suma lungimilor șirurilor de mișcări din toate cele T teste nu depășește 1.000.000.",
+    "Se garantează că (1, 1) și (N, N) nu sunt blocate de un obstacol (P1 ≠ 1 și PN ≠ N).",
+    "Pentru 18 puncte, C = 1, N1 + N2 + ... + NT ≤ 1000, suma lungimilor șirurilor de mișcări din toate cele T teste nu depășește 10.000",
+    "Pentru 19 puncte, C = 1",
+    "Pentru 33 puncte, C = 2, N1 + N2 + ... + NT ≤ 1000",
+    "Pentru 30 puncte, C = 2"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qff0d4e6ba0.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/arcade1_001.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-arcade1-001-jpg.jpg",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/arcade1_002.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-arcade1-002-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "10",
+    "intrare/ieșire": "arcade.in / arcade.out",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "128 MB / 64 MB",
+    "sursa problemei": "ONI 2023 clasa a X-a",
+    "autor": "Ilie-Daniel Apostol",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 128,
+  "author": "Ilie-Daniel Apostol",
+  "sourceAttribution": "ONI 2023 clasa a X-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4437/arcade1"
+}

@@ -1,0 +1,92 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4136"><article id="enunt">
+			<p>Fie <code>S = (S</code><sub><code>1</code></sub><code>, S</code><sub><code>2</code></sub>, <code>..., S</code><sub><code>N</code></sub><code>)</code> un şir format din <code>N</code> numere naturale mai mici decât <code>10</code> şi <code>x</code> un număr natural cu <code>p</code> cifre, reprezentat în baza <code>10</code> prin <code>x = x</code><sub><code>1</code></sub><code>x</code><sub><code>2</code></sub><code>...x</code><sub><code>p</code></sub>. Observaţi că poziţiile din şirul <code>S</code> sunt numerotate de la stânga la dreapta de la <code>1</code> la <code>N</code>, iar cifrele numărului <code>x</code> sunt numerotate de la stânga la dreapta de la <code>1</code> la <code>p</code> (cifra <code>p</code> fiind cifra unităţilor).</p>
+
+<p>Vom spune că <code>x</code> <strong>apare ca subșir</strong> în șirul <code>S</code> dacă există pozițiile <code>1 ≤ j</code><sub><code>1</code></sub> <code>&lt; j</code><sub><code>2</code></sub> <code>&lt; ... &lt; j</code><sub><code>p</code></sub> <code>≤ N</code> astfel încât să avem <code>S</code><sub><code>ji</code></sub> = <code>x</code><sub><code>i</code></sub> pentru orice <code>1 ≤ i ≤ p</code>. De exemplu, pentru <code>S=(2,3,7,9)</code>, <code>27</code> apare ca subșir în <code>S</code>, dar <code>93</code> nu apare ca subșir în <code>S</code>.  </p>
+
+<p>Numim prefix de lungime <code>j</code> al lui <code>S</code>, secvența <code>S</code><sub><code>1</code></sub>, <code>S</code><sub><code>2</code></sub>, …, <code>S</code><sub><code>j</code></sub> (secvenţa care începe la poziţia <code>1</code> şi se termină la poziţia <code>j</code>, <code>1 ≤ j ≤ N</code>).</p>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care, cunoscând şirul <code>S</code>, rezolvă următoarele două cerinţe:</p>
+
+<ul>
+	<li>fiind date <code>Nr</code> perechi de forma <code>x</code> <code>j</code>, determină pentru fiecare pereche dacă numărul <code>x</code> apare ca subșir în prefixul de lungime <code>j</code> al lui <code>S</code> şi afişează valoarea <code>1</code> în caz afirmativ, respectiv valoarea <code>0</code> în caz contrar;</li>
+	<li>fiind date <code>Nr</code> perechi de forma <code>a</code> <code>b</code>, determină şi afişează pentru fiecare pereche numărul de numere naturale din intervalul închis <code>[a, b]</code> care apar ca subșir în șirul <code>S</code>.</li>
+</ul>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>subsir.in</code> conține pe prima linie un număr natural <code>C</code> care reprezintă cerinţa care urmează a fi rezolvată (<code>1</code> sau <code>2</code>). Pe a doua linie se află numărul natural <code>N</code>. Pe a treia linie se află <code>N</code> numere naturale mai mici decât <code>10</code>, <code>S</code><sub><code>1</code></sub>, <code>S</code><sub><code>2</code></sub>, …, <code>S</code><sub><code>N</code></sub>, reprezentând elementele şirului <code>S</code>. Pe linia a patra se află un număr natural <code>Nr</code> care reprezintă numărul de perechi. Pe următoarele <code>Nr</code> linii se află câte o pereche de numere naturale. Numerele scrise pe aceeaşi linie în fişierul de intrare sunt separate prin câte un spaţiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>subsir.out</code> va conține <code>Nr</code> linii, pe cea de a <code>i</code>-a linie fiind scris rezultatul pentru cea de a <code>i</code>-a pereche dintre cele <code>Nr</code> perechi din fişierul de intrare, conform cerinţei <code>C</code>.  </p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 10.000</code></li>
+	<li><code>1 ≤ Nr ≤ 10.000</code></li>
+	<li><code>0 ≤ x &lt; 10.000.000</code></li>
+	<li><code>1 ≤ j ≤ N</code></li>
+	<li><code>0 ≤ a ≤ b &lt; 10.000.000</code></li>
+	<li>Pentru teste valorând 30 de puncte cerinţa este <code>1</code>.</li>
+	<li>Pentru teste valorând 70 de puncte cerinţa este <code>2</code>.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>subsir.in</code></p>
+
+<pre>1
+10
+5 6 1 0 3 2 5 2 3 1
+5
+1 4
+1 2
+153 6
+153 9
+72 8</pre>
+
+<p><code>subsir.out</code></p>
+
+<pre>1
+0
+0
+1
+0</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerinţa este <code>1</code>, deci trebuie să verificăm pentru fiecare dintre cele <code>Nr=5</code> perechi <code>x</code> <code>j</code> specificate dacă <code>x</code> apare ca subşir în prefixul de lungime <code>j</code> al lui <code>S</code>.<br>
+Prima pereche este <code>1 4</code>. Numărul <code>1</code> apare ca subşir în prefixul <code>5 6 1 0</code>, deci se afişează <code>1</code>.<br>
+A doua pereche este <code>1 2</code>. Numărul <code>1</code> nu apare ca subşir în prefixul <code>5 6</code>, deci se afişează <code>0</code>.<br>
+A treia pereche este <code>153 6</code>. Numărul <code>153</code> nu apare în prefixul <code>5 6 1 0 3 2</code>, deci se va afişa <code>0</code>.<br>
+A patra pereche este <code>153 9</code>. De data aceasta numărul <code>153</code> apare ca subşir în prefixul <code>5 6 1 0 3 2 5 2 3</code>, deci se afişează <code>1</code>.<br>
+A cincea pereche este <code>72 8</code>. Numărul <code>72</code> nu apare ca subşir în niciun prefix al lui <code>S</code>, deci nici în cel de lungime <code>8</code> și se va afişa <code>0</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>subsir.in</code></p>
+
+<pre>2
+10
+5 6 1 0 3 2 5 2 3 1
+3
+0 20
+40 105
+81 99</pre>
+
+<p><code>subsir.out</code></p>
+
+<pre>11
+15
+0</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerinţa este 2, deci trebuie să determinăm pentru fiecare dintre cele <code>Nr = 3</code> perechi <code>a</code> <code>b</code> specificate câte numere naturale din intervalul <code>[a, b]</code> apar ca subşir în <code>S</code>.<br>
+Pentru intervalul <code>[0, 20]</code> există <code>11</code> numere, acestea fiind <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>5</code>, <code>6</code>, <code>10</code>, <code>11</code>, <code>12</code>, <code>13</code>, <code>15</code>.<br>
+Pentru intervalul <code>[40, 105]</code> există <code>15</code> numere, acestea fiind <code>50</code>, <code>51</code>, <code>52</code>, <code>53</code>, <code>55</code>, <code>56</code>, <code>60</code>, <code>61</code>, <code>62</code>, <code>63</code>, <code>65</code>, <code>101</code>, <code>102</code>, <code>103</code>, <code>105</code>.<br>
+Pentru intervalul <code>[81,99]</code> răspunsul este <code>0</code>, deoarece nu există niciun număr în acest interval care să fie subşir al lui <code>S</code>.</p>		</article>
+		</body></html>

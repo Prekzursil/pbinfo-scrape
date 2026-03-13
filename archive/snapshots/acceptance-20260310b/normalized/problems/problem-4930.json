@@ -1,0 +1,312 @@
+{
+  "id": 4930,
+  "slug": "constelatii",
+  "name": "Constelatii",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4930/constelatii",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 16,
+      "name": "Teoria Grafurilor",
+      "slug": "teoria-grafurilor",
+      "href": "/?pagina=probleme-lista&tag=16"
+    },
+    {
+      "id": 60,
+      "name": "Grafuri cu costuri",
+      "slug": "grafuri-cu-costuri",
+      "href": "/?pagina=probleme-lista&tag=60"
+    }
+  ],
+  "tags": [
+    "Algoritmul lui Kruskal",
+    "Exponențiere rapidă de matrici"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>În urma construrii drumurilor pentru fortificare a regatului Ofni, constructorii au dat peste un vechi templu. În interiorul templului a fost descoperită o cronică care vorbea despre mișcarea stelelor. Ibit și Luap, doi elevi curioși, au studiat cronica. Au învățat că strămoșii lor au pictat hărți ale cerului nopții sub forma unor matrici cu <code>n</code> linii și <code>m</code> coloane unde <code>*</code> simbolizează o stea iar <code>#</code> un loc gol. Un grup de mai multe stele învecinate pe linie, coloană sau diagonală formează o constelație. </p><p>De asemenea au aflat că strămoșii lor au estimat distanța dintre două constelații la începutul universului, la anul <code>0</code>, ca fiind drumul minim prin harta cerului de la orice stea a unei constelații la orice stea a celelilalte prin mișcări pe linie și coloană, din celulă în celulă. Din cauza mișcării corpurilor cerești și a unor concepte avansate de astro-fizică, au estimat că distanța dintre două constelații <code>c</code><sub><code>1</code></sub> și <code>c</code><sub><code>2</code></sub> se modifică în timp în funcție de șirul recurent cu termenii <code>x</code><sub><code>0</code></sub> <code>= distanța inițială</code> și <code>x</code><sub><code>i+1</code></sub> <code>= (a + b * x</code><sub><code>i</code></sub><code>)/(c + d * x</code><sub><code>i</code></sub> <code>)</code> astfel că distanța după <code>k</code> ani de la anul 0 dintre constelațiile <code>c</code><sub><code>1</code></sub> și <code>c</code><sub><code>2</code></sub> este partea întreagă a termenului <code>x</code><sub><code>k</code></sub>, parte întreagă asupra căreia aplicam modulo <code>mod</code> unde <code>mod = 99991</code>. În plus, dacă <code>c</code><sub><code>1</code></sub> și <code>c</code><sub><code>2</code></sub> se pot roti sau oglindi pentru a deveni una cealaltă, cele două se numesc constelații haotice și nu se poate merge din una în cealaltă.</p><p>Pe lângă că acum știu cum funcționează distanțele interstelare, cei doi sunt bucuroși să afle că în templu este ascunsă o comoară, dar pentru a deshide ușa tezaurului este nevoie să introducă drumul minim necesar pentru a conecta între ele toate constelațiile în anul curent <code>X</code>. Cei doi sunt nerăbdători să găsească comoara.</p><p>Problema are 3 cerințe.<br>\nPentru <code>c = 1</code>, se cere determinarea numărului de constelații.<br>\nPentru <code>c = 2</code>,  se cere determinarea drumului de lungime minimă dintre constelațiile care conțin stelele <code>(x, y)</code> sau afișare mesajului <code>nu exista</code> dacă cele două sunt haotice și/sau nu pot fi unite de o succesiune de drumuri formate din stele.<br>\nPentru <code>c = 3</code>, se cere determinararea lungimii minime a unui drum care conectează toate constelațiile ce pot fi conectate, chiar dacă se formează grupuri de constelații care nu pot fi conectate.</p>",
+      "text": "În urma construrii drumurilor pentru fortificare a regatului Ofni, constructorii au dat peste un vechi templu. În interiorul templului a fost descoperită o cronică care vorbea despre mișcarea stelelor. Ibit și Luap, doi elevi curioși, au studiat cronica. Au învățat că strămoșii lor au pictat hărți ale cerului nopții sub forma unor matrici cu n linii și m coloane unde * simbolizează o stea iar # un loc gol. Un grup de mai multe stele învecinate pe linie, coloană sau diagonală formează o constelație. De asemenea au aflat că strămoșii lor au estimat distanța dintre două constelații la începutul universului, la anul 0, ca fiind drumul minim prin harta cerului de la orice stea a unei constelații la orice stea a celelilalte prin mișcări pe linie și coloană, din celulă în celulă. Din cauza mișcării corpurilor cerești și a unor concepte avansate de astro-fizică, au estimat că distanța dintre două constelații c1 și c2 se modifică în timp în funcție de șirul recurent cu termenii x0 = distanța inițială și xi+1 = (a + b * xi)/(c + d * xi ) astfel că distanța după k ani de la anul 0 dintre constelațiile c1 și c2 este partea întreagă a termenului xk, parte întreagă asupra căreia aplicam modulo mod unde mod = 99991. În plus, dacă c1 și c2 se pot roti sau oglindi pentru a deveni una cealaltă, cele două se numesc constelații haotice și nu se poate merge din una în cealaltă.Pe lângă că acum știu cum funcționează distanțele interstelare, cei doi sunt bucuroși să afle că în templu este ascunsă o comoară, dar pentru a deshide ușa tezaurului este nevoie să introducă drumul minim necesar pentru a conecta între ele toate constelațiile în anul curent X. Cei doi sunt nerăbdători să găsească comoara.Problema are 3 cerințe. Pentru c = 1, se cere determinarea numărului de constelații. Pentru c = 2, se cere determinarea drumului de lungime minimă dintre constelațiile care conțin stelele (x, y) sau afișare mesajului nu exista dacă cele două sunt haotice și/sau nu pot fi unite de o succesiune de drumuri formate din stele. Pentru c = 3, se cere determinararea lungimii minime a unui drum care conectează toate constelațiile ce pot fi conectate, chiar dacă se formează grupuri de constelații care nu pot fi conectate."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>constelatii.in</code> va conține pe prima linie, separate printr-un spațiu, valorile <code>c</code>, <code>n</code> și <code>m</code>, unde <code>c</code> numărul cerinței și <code>n</code> și <code>m</code> au semnificația din enunț. Pe următoarele <code>n</code> linii se află șiruri de câte <code>m</code> caractere neseparate prin spații care reprezintă harta regatului. Dacă <code>c = 2</code>, următoarea linie va conține numărul de întrebări <code>Q</code>, iar pe următarele <code>Q</code> linii se vor afla câte două perechi marcând coordonatele a <code>Q</code> perechi de stele de pe cer. Dacă <code>c = 3</code>, pe linia următoare citirii matricei se vor afla valorile <code>a</code>, <code>b</code>, <code>c</code>, <code>d</code>, <code>X</code> despărțite printr-un spațiu.</p>",
+      "text": "Fișierul de intrare constelatii.in va conține pe prima linie, separate printr-un spațiu, valorile c, n și m, unde c numărul cerinței și n și m au semnificația din enunț. Pe următoarele n linii se află șiruri de câte m caractere neseparate prin spații care reprezintă harta regatului. Dacă c = 2, următoarea linie va conține numărul de întrebări Q, iar pe următarele Q linii se vor afla câte două perechi marcând coordonatele a Q perechi de stele de pe cer. Dacă c = 3, pe linia următoare citirii matricei se vor afla valorile a, b, c, d, X despărțite printr-un spațiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Dacă <code>c = 1</code>, fișierul de ieșire <code>constelatii.out</code> ca conține numărul de constelații. Dacă <code>c = 2</code>, fișierul de ieșire va conține <code>Q</code> linii, pe fiecare fiind scrisă o valoare cu semnificația din enunț sau mesajul <code>nu exista</code>. Dacă <code>c = 3</code> se va afișa o valoare cu proprietatea din enunț.</p>",
+      "text": "Dacă c = 1, fișierul de ieșire constelatii.out ca conține numărul de constelații. Dacă c = 2, fișierul de ieșire va conține Q linii, pe fiecare fiind scrisă o valoare cu semnificația din enunț sau mesajul nu exista. Dacă c = 3 se va afișa o valoare cu proprietatea din enunț."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ n, m ≤ 1000</code></li>\n\t<li><code>1 ≤ a, b, c, d ≤ 1000</code></li>\n\t<li><code>1 ≤ X ≤ 1.000.000.000.000</code></li>\n\t<li><code>1 ≤ Q ≤ 10.000</code></li>\n\t<li>nr de constelații de pe cer <code>≤ 500</code></li>\n\t<li>nr de stele dintr-o constelație <code>≤ 30</code></li>\n\t<li><code>15</code> puncte pentru cerința <code>1</code></li>\n\t<li><code>15</code> puncte pentru cerința <code>2</code></li>\n\t<li><code>70</code> puncte pentru cerința <code>3</code></li>\n\t<li>Dacă îi ajutați să ajungă la comoară, Ibit și Luap vă vor răsplăti cu <code>100</code> de puncte.</li>\n</ul>",
+      "text": "1 ≤ n, m ≤ 1000 1 ≤ a, b, c, d ≤ 1000 1 ≤ X ≤ 1.000.000.000.000 1 ≤ Q ≤ 10.000 nr de constelații de pe cer ≤ 500 nr de stele dintr-o constelație ≤ 30 15 puncte pentru cerința 1 15 puncte pentru cerința 2 70 puncte pentru cerința 3 Dacă îi ajutați să ajungă la comoară, Ibit și Luap vă vor răsplăti cu 100 de puncte."
+    },
+    {
+      "title": "Exemplul 1",
+      "html": "<p><code>constelatii.in</code></p><pre>1 10 10\n#****#####\n#*##*#####\n#****#####\n##########\n#*########\n#####*####\n#####*####\n######*###\n#*#######*\n#######**#</pre><p><code>constelatii.out</code></p><pre>5</pre>",
+      "text": "constelatii.in1 10 10 #****##### #*##*##### #****##### ########## #*######## #####*#### #####*#### ######*### #*#######* #######**#constelatii.out5"
+    },
+    {
+      "title": "Exemplul 2",
+      "html": "<p><code>constelatii.in</code></p><pre>2 10 10\n#****#####\n#*##*#####\n#****#####\n##########\n#*########\n#####*####\n#####*####\n######*###\n#*#######*\n#######**#\n4\n2 2 9 2\n7 6 9 10\n5 2 9 2\n1 5 10 8</pre><p><code>constelati.out</code></p><pre>6\nnu exista\nnu exista\n9</pre><h3>Explicație</h3><p>Pe harta cerului sunt <code>5</code> constelații. Constelațiile care conțin perechile de stele <code>(7, 6)</code>; <code>(9, 10)</code> și <code>(5, 2)</code>; <code>(9, 2)</code> sunt haotice.</p>",
+      "text": "constelatii.in2 10 10 #****##### #*##*##### #****##### ########## #*######## #####*#### #####*#### ######*### #*#######* #######**# 4 2 2 9 2 7 6 9 10 5 2 9 2 1 5 10 8constelati.out6 nu exista nu exista 9ExplicațiePe harta cerului sunt 5 constelații. Constelațiile care conțin perechile de stele (7, 6); (9, 10) și (5, 2); (9, 2) sunt haotice."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Pe harta cerului sunt 5 constelații. Constelațiile care conțin perechile de stele (7, 6); (9, 10) și (5, 2); (9, 2) sunt haotice."
+    }
+  ],
+  "constraints": [
+    "1 ≤ n, m ≤ 1000",
+    "1 ≤ a, b, c, d ≤ 1000",
+    "1 ≤ X ≤ 1.000.000.000.000",
+    "1 ≤ Q ≤ 10.000",
+    "nr de constelații de pe cer ≤ 500",
+    "nr de stele dintr-o constelație ≤ 30",
+    "15 puncte pentru cerința 1",
+    "15 puncte pentru cerința 2",
+    "70 puncte pentru cerința 3",
+    "Dacă îi ajutați să ajungă la comoară, Ibit și Luap vă vor răsplăti cu 100 de puncte."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qa69df9c89a.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Bacain Octavian-Tiberiu (Octavian2007)",
+    "clasa": "11",
+    "intrare/ieșire": "constelatii.in / constelatii.out",
+    "limită timp": "0.2 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "-",
+    "autor": "Bâcâin Octavian-Tiberiu",
+    "dificultate": "dificilă"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.2,
+  "memoryLimitMb": 64,
+  "author": "Bâcâin Octavian-Tiberiu",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4930/constelatii"
+}

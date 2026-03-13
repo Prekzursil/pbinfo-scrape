@@ -1,0 +1,65 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3564"><article id="enunt">
+			<p>Se consideră <code>n</code> copaci de diferite înălţimi, aflaţi în linie dreaptă la distanţe egale, numerotaţi de la <code>1</code> la <code>n</code>. Pentru fiecare copac se cunoaşte înălţimea sa \( {H}_{i} \). Cum şi copacii simt nevoia să socializeze, fiecare dintre ei are prieteni printre ceilalţi copaci. Prietenii oricărui copac <code>i</code> se pot afla atât la stânga, cât şi la dreapta sa. Relaţiile de prietenie sunt definite în felul următor: pentru fiecare copac <code>i</code> considerăm un şir \( {d}_{1}, {d}_{2}, …, {d}_{x} \) reprezentând prietenii copacului <code>i</code> situaţi în dreapta sa şi un şir \( {s}_{1}, {s}_{2}, …, {s}_{y} \) reprezentând prietenii copacului <code>i</code> situaţi în stânga acestuia. Copacii din cele două şiruri corespunzătoare unui copac <code>i</code> formează împreună lista prietenilor acestuia. Şirurile corespunzătoare copacului <code>i</code> se definesc astfel:</p>
+
+<ol>
+	<li>\( {d}_{1} = i + 1 \) (dacă <code>i = n</code>, atunci copacul <code>i</code> nu are niciun prieten la dreapta sa, şirul rămânând vid). Pentru fiecare <code>k ≥ 2</code>, \( {d}_{k} \) este cel mai mic indice (\( 1 ≤ {d}_{k} ≤ n \)) cu proprietatea că \( {d}_{k} &gt; {d}_{k-1} \) şi \( {H}_{{d}_{k}} &gt; {H}_{{d}_{k-1}} \). Dacă \( {d}_{k} \) nu există, atunci lista de prieteni la dreapta ai copacului <code>i</code> s-a încheiat şi construirea şirului se opreşte la acest pas.</li>
+	<li>\( {s}_{1} = i – 1 \) (dacă <code>i = 1</code>, atunci copacul <code>i</code> nu are niciun prieten la stânga sa, şirul rămânând vid). Pentru fiecare <code>k ≥ 2</code>, \( {s}_{k} \) este cel mai mare indice (\( 1 ≤ {s}_{k} ≤ n \)) cu proprietatea că \( {s}_{k} &lt; {s}_{k-1} \) şi \( {H}_{{s}_{k}} &gt; {H}_{{s}_{k-1}} \). Dacă \( {s}_{k} \) nu există, atunci lista de prieteni la stânga ai copacului <code>i</code> s-a încheiat şi construirea şirului se opreşte la acest pas.</li>
+</ol>
+
+<p>De exemplu, în figura de mai jos sunt reprezentaţi <code>7</code> copaci, fiecare având precizată sub el valoarea </p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-dcee6e-x-jpg.jpg"></p>
+
+<p>Copacul <code>1</code> este prieten cu copacul <code>2</code> fiind vecini, cu copacul <code>5</code> (deoarece copacul <code>5</code> este primul din dreapta lui <code>2</code> cu înălţimea mai mare strict decât înălţimea lui <code>2</code>). La dreapta copacului <code>5</code> nu există niciun copac cu înălţimea mai mare strict decât a sa, deci singurii prieteni ai copacului <code>1</code> sunt <code>2</code> şi <code>5</code>.</p>
+
+<p>Pentru copacul <code>3</code>, prietenii la stânga sa sunt copacii <code>2</code> şi <code>1</code>, iar cei de la dreapta sa sunt copacii <code>4</code> şi <code>5</code>. Pentru copacul <code>6</code>, singurul prieten la stânga este copacul <code>5</code>, iar la dreapta copacul <code>7</code>.</p>
+
+<p>Copacul <code>7</code> poate avea prieteni doar la stânga, aceştia sunt <code>6</code> şi <code>5</code> (la stânga copacului <code>5</code> nu mai există niciun copac cu înălţimea mai mare strict decât <code>8</code>).</p>
+
+<p>Grădinarul Marian vrea să aleagă <code>3</code> copaci diferiţi dintre cei <code>n</code> pentru a-i planta în altă grădină. El doreşte ca dintre cei <code>3</code> copaci, oricum ar alege <code>A</code> si <code>B</code>, <code>2</code> dintre ei, atunci <code>A</code> este prieten cu <code>B</code> şi <code>B</code> este prieten cu <code>A</code> (relaţiile de prietenie se consideră cele stabilite iniţial). Marian are mai multe opţiuni şi se întreabă în câte moduri distincte poate alege cei <code>3</code> copaci cu proprietatea cerută.</p>
+
+<h1>Cerința</h1>
+
+<p>Determinaţi în câte moduri se pot alege <code>3</code> copaci diferiţi dintre cei <code>n</code> cu proprietatea că, oricum am alege <code>2</code> copaci dintre cei <code>3</code>, fie aceştia copacul <code>A</code> şi copacul <code>B</code>, atunci <code>A</code> este prieten cu <code>B</code> şi <code>B</code> este prieten cu <code>A</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fişierul de intrare <code>copaci1.in</code> conţine pe prima linie un număr natural <code>n</code>, reprezentând numărul de copaci, iar pe a doua linie <code>n</code> numere naturale nenule, separate prin câte un spaţiu, reprezentând înălţimile copacilor.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fişierul de ieşire <code>copaci1.out</code> va conţine pe prima linie un număr natural reprezentând numărul de moduri în care Marian poate alege <code>3</code> copaci cu proprietatea din enunţ.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 200 000</code>;</li>
+	<li>\( 1 ≤ {H}_{i} ≤ 200\);</li>
+	<li>nu vor exista <code>2</code> copaci alăturaţi cu aceeaşi înălţime;</li>
+	<li>două triplete de copaci se consideră distincte dacă există cel puţin un copac din primul triplet care nu se află şi în al doilea triplet;</li>
+	<li>pentru <code>30%</code> din teste, <code>1 ≤ n ≤ 200</code>.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>copaci1.in</code></p>
+
+<pre>7
+6 4 2 3 8 5 8</pre>
+
+<p><code>copaci1.out</code></p>
+
+<pre>4</pre>
+
+<h3>Explicație</h3>
+
+<p>Copacul <code>1</code> este prieten cu copacii: <code>2 5</code><br>
+Copacul <code>2</code> este prieten cu copacii: <code>1 3 4 5</code><br>
+Copacul <code>3</code> este prieten cu copacii: <code>1 2 4 5</code><br>
+Copacul <code>4</code> este prieten cu copacii: <code>1 2 3 5</code><br>
+Copacul <code>5</code> este prieten cu copacii: <code>1 2 4 6 7</code><br>
+Copacul <code>6</code> este prieten cu copacii: <code>5 7</code><br>
+Copacul <code>7</code> este prieten cu copacii: <code>5 6</code><br>
+Modurile în care Marian poate alege cei <code>3</code> copaci sunt: <br>
+<code>(1, 2, 5), (2, 4, 5), (2, 3, 4), (5, 6, 7)</code>.</p>		</article>
+		</body></html>

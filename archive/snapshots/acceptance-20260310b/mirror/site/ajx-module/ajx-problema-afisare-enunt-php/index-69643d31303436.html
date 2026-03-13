@@ -1,0 +1,50 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1046"><article id="enunt">
+			<p>Se consideră un şir <code>x</code><sub><code>1</code></sub>, <code>x</code><sub><code>2</code></sub>,…, <code>x</code><sub><code>n</code></sub> format din <code>n</code> numere naturale distincte. O secvenţă de număr maxim de  elemente vecine în şir, de forma <code>x</code><sub><code>i</code></sub>, <code>x</code><sub><code>i+1</code></sub>,…, <code>x</code><sub><code>k-1</code></sub>, <code>x</code><sub><code>k</code></sub>, <code>x</code><sub><code>k+1</code></sub>,…, <code>x</code><sub><code>j</code></sub> (<code>1≤i&lt;k&lt;j≤n</code>) cu proprietatea că <code>x</code><sub><code>i</code></sub><code> &lt; x</code><sub><code>i+1</code></sub><code> &lt; ...&lt; x</code><sub><code>k-1</code></sub><code> &lt; x</code><sub><code>k</code></sub><code> &gt; x</code><sub><code>k+1</code></sub><code> &gt; ... &gt; x</code><sub><code>j</code></sub>, se numeşte munte cu vârful <code>x</code><sub><code>k</code></sub>. Două secvenţe munte au maxim un element comun în şir. O secvenţă munte are cel puţin <code>3</code> elemente. Un exemplu de şir format cu valorile <code>3 4 6 8</code> nu conţine nicio secvenţă munte, iar unul format cu valorile <code>3 4 8 1 2 5 0</code> conţine <code>2</code> secvenţe munte: <code>3 4 8 1</code> şi <code>1 2 5 0</code>.</p>
+
+<p>După determinarea tuturor secvenţelor munte şi a vârfurilor acestora, se elimină din şir vârfurile secvenţelor munte şi procedura continuă repetat cu determinarea noilor secvenţe munte şi a vârfurilor lor din şirul nou obţinut. Procedura se opreşte în momentul în care în şir nu mai există nicio secvenţă munte. </p>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care citeşte numerele <code>n</code>, <code>x</code><sub><code>1</code></sub>, <code>x</code><sub><code>2</code></sub>, …, <code>x</code><sub><code>n</code></sub> şi apoi determină:<br>
+a) numărul de secvenţe munte din şirul iniţial;<br>
+b) numărul total de secvenţe munte obţinute pornind de la şirul iniţial până la cel care nu mai conţine nicio secvenţă munte;<br>
+c) numărul de elemente din şirul final care nu mai conţine secvenţe munte.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>munte.in</code> conține pe prima linie numărul <code>n</code>, iar pe următoarea linie numerele naturale  <code>x</code><sub><code>1</code></sub>, <code>x</code><sub><code>2</code></sub>,…, <code>x</code><sub><code>n</code></sub> separate două câte două prin câte un spaţiu. </p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>munte.out</code> va conține pe prima linie un număr natural conform cerinţei a), pe a doua linie un număr natural conform cerinţei b), pe a treia linie un număr natural conform cerinţei c). </p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>3 ≤ n ≤ 100</code></li>
+	<li><code>0 ≤ x</code><sub><code>i</code></sub><code> ≤ 100000</code>, <code>1 ≤ i ≤ n</code></li>
+	<li>Pentru rezolvarea corectă a cerinţei a)  se obţine <code>20%</code> din punctaj.</li>
+	<li>Pentru rezolvarea corectă a cerinţei b)  se obţine <code>40%</code> din punctaj.</li>
+	<li>Pentru rezolvarea corectă a cerinţei c)  se obţine <code>40%</code> din punctaj.<br>
+Pentru testele date se asigură că şirul de numere dat iniţial conţine cel puţin o secvenţă munte.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>munte.in</code></p>
+
+<pre>8
+1 2 5 0 6 9 3 4</pre>
+
+<p><code>munte.out</code></p>
+
+<pre>2
+4
+4</pre>
+
+<h1>Explicație</h1>
+
+<p>a) Sunt două secvenţe munte: <code>1 2 5 0</code> şi <code>0 6 9 3</code><br>
+b) După eliminarea vârfurilor secvenţelor munte, şirul nou este <code>1 2 0 6 3 4</code>. Acest şir conţine <code>2</code> secvenţe munte: <code>1 2 0</code> şi <code>0 6 3</code>. După eliminarea vârfurilor secvenţelor munte, şirul nou este <code>1 0 3 4</code>. Noul şir nu mai conţine nicio secvenţă munte. În total sunt deci <code>4</code> secvenţe.<br>
+c) Şirul final care nu mai conţine secvenţe munte <code>1 0 3 4</code> are <code>4</code> elemente</p>		</article>
+		</body></html>

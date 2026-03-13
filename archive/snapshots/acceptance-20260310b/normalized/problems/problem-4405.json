@@ -1,0 +1,323 @@
+{
+  "id": 4405,
+  "slug": "unificare",
+  "name": "unificare",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4405/unificare",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 9,
+      "name": "Parcurgerea vectorilor",
+      "slug": "parcurgerea-vectorilor",
+      "href": "/?pagina=probleme-lista&tag=9"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Determinați și afișați:<br>\n1. cel mai mare număr de exact <code>k</code> cifre din șirul dat;<br>\n2. cel mai mare număr care poate fi obținut prin unificarea a două valori aflate pe poziții alăturate în șirul dat;<br>\n3. cel mai mare număr care se poate obține prin unificarea a <code>k</code> valori aflate pe poziții consecutive în șirul dat.</p>",
+      "text": "Determinați și afișați: 1. cel mai mare număr de exact k cifre din șirul dat; 2. cel mai mare număr care poate fi obținut prin unificarea a două valori aflate pe poziții alăturate în șirul dat; 3. cel mai mare număr care se poate obține prin unificarea a k valori aflate pe poziții consecutive în șirul dat."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>unificare.in</code> conține pe prima linie un număr natural <code>C</code>, reprezentând cerința ce trebuie rezolvată (<code>1</code>, <code>2</code> sau <code>3</code>), pe a doua linie <code>n</code> și <code>k</code>, cu semnificația din enunț, iar pe a treia linie cei <code>n</code> termeni ai șirului precizat, în ordinea<br>\ndin șir. Numerele aflate pe aceeași linie a fișierului sunt separate prin câte un spațiu.</p>",
+      "text": "Fișierul de intrare unificare.in conține pe prima linie un număr natural C, reprezentând cerința ce trebuie rezolvată (1, 2 sau 3), pe a doua linie n și k, cu semnificația din enunț, iar pe a treia linie cei n termeni ai șirului precizat, în ordinea din șir. Numerele aflate pe aceeași linie a fișierului sunt separate prin câte un spațiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>În fișierul de ieșire <code>unificare.out</code>:<br>\n• dacă <code>C = 1</code>, se va afișa pe prima linie cel mai mare număr de <code>k</code> cifre din șirul dat;<br>\n• dacă <code>C = 2</code>, se va afișa pe prima linie cel mai mare număr obținut prin unificarea a două numere alăturate în șir;<br>\n• dacă <code>C = 3</code>, se va afișa pe prima linie valoarea maximă obținută prin unificarea a <code>k</code> valori aflate pe poziții consecutive.</p>",
+      "text": "În fișierul de ieșire unificare.out: • dacă C = 1, se va afișa pe prima linie cel mai mare număr de k cifre din șirul dat; • dacă C = 2, se va afișa pe prima linie cel mai mare număr obținut prin unificarea a două numere alăturate în șir; • dacă C = 3, se va afișa pe prima linie valoarea maximă obținută prin unificarea a k valori aflate pe poziții consecutive."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>C ∈ {1, 2, 3}</code>; <code>1 ≤ n ≤ 100.000</code>; <code>1 ≤ k ≤ n / 2</code></li>\n\t<li><code>0 ≤ a[i] ≤ 100.000.000</code>, pentru oricare <code>1 ≤ i ≤ n</code></li>\n\t<li>Pentru 20 de puncte, <code>C = 1</code> și <code>k ≤ 8</code></li>\n\t<li>Pentru 5 de puncte, <code>C = 2</code> și <code>n = 2</code></li>\n\t<li>Pentru 10 de puncte, <code>C = 2</code> și <code>0 ≤ a[i] ≤ 9</code>, pentru oricare <code>1 ≤ i ≤ n</code></li>\n\t<li>Pentru 35 de puncte, <code>C = 2</code>, fără restricții suplimentare</li>\n\t<li>Pentru 15 de puncte, <code>C = 3</code> și <code>k ≤ 8</code></li>\n\t<li>Pentru 15 de puncte, <code>C = 3</code> și <code>k ≤ n / 2</code></li>\n</ul>",
+      "text": "C ∈ {1, 2, 3}; 1 ≤ n ≤ 100.000; 1 ≤ k ≤ n / 2 0 ≤ a[i] ≤ 100.000.000, pentru oricare 1 ≤ i ≤ n Pentru 20 de puncte, C = 1 și k ≤ 8 Pentru 5 de puncte, C = 2 și n = 2 Pentru 10 de puncte, C = 2 și 0 ≤ a[i] ≤ 9, pentru oricare 1 ≤ i ≤ n Pentru 35 de puncte, C = 2, fără restricții suplimentare Pentru 15 de puncte, C = 3 și k ≤ 8 Pentru 15 de puncte, C = 3 și k ≤ n / 2"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>unificare.in</code></p><pre>1\n5 3\n112 223 12334 561 289</pre><p><code>unificare.out</code></p><pre>561</pre><h3>Explicație</h3><p><code>C = 1</code>, <code>n = 5</code> și <code>k = 3</code>. În șir sunt <code>4</code> numere care au exact <code>3</code> cifre: <code>112</code>, <code>223</code>, <code>561</code> și <code>289</code>, cel mai mare dintre ele fiind <code>561</code>.</p>",
+      "text": "unificare.in1 5 3 112 223 12334 561 289unificare.out561ExplicațieC = 1, n = 5 și k = 3. În șir sunt 4 numere care au exact 3 cifre: 112, 223, 561 și 289, cel mai mare dintre ele fiind 561."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>unificare.in</code></p><pre>2\n5 3\n112 223 12334 561 289</pre><p><code>unificare.out</code></p><pre>6543211</pre><h3>Explicație</h3><p><code>C = 2</code>, <code>n = 5</code> și <code>k = 3</code>, nu utilizăm valoarea lui <code>k</code> și unificând <code>a[3]</code> cu <code>a[4]</code> vom obține cea mai mare valoare: <code>6543211</code>.</p>",
+      "text": "unificare.in2 5 3 112 223 12334 561 289unificare.out6543211ExplicațieC = 2, n = 5 și k = 3, nu utilizăm valoarea lui k și unificând a[3] cu a[4] vom obține cea mai mare valoare: 6543211."
+    },
+    {
+      "title": "Exemplul 3:",
+      "html": "<p><code>unificare.in</code></p><pre>3\n5 3\n112 223 12334 561 289</pre><p><code>unificare.out</code></p><pre>9865432211</pre><h3>Explicație</h3><p><code>C = 3</code>, <code>n = 5</code> și <code>k = 3</code>. Cea mai mare valoare care se poate obține este <code>9865432211</code> și o obținem unificând <code>a[3]</code> cu <code>a[4]</code> și cu <code>a[5]</code>.</p>",
+      "text": "unificare.in3 5 3 112 223 12334 561 289unificare.out9865432211ExplicațieC = 3, n = 5 și k = 3. Cea mai mare valoare care se poate obține este 9865432211 și o obținem unificând a[3] cu a[4] și cu a[5]."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "C = 1, n = 5 și k = 3. În șir sunt 4 numere care au exact 3 cifre: 112, 223, 561 și 289, cel mai mare dintre ele fiind 561."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "C = 2, n = 5 și k = 3, nu utilizăm valoarea lui k și unificând a[3] cu a[4] vom obține cea mai mare valoare: 6543211."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "C = 3, n = 5 și k = 3. Cea mai mare valoare care se poate obține este 9865432211 și o obținem unificând a[3] cu a[4] și cu a[5]."
+    }
+  ],
+  "constraints": [
+    "C ∈ {1, 2, 3}; 1 ≤ n ≤ 100.000; 1 ≤ k ≤ n / 2",
+    "0 ≤ a[i] ≤ 100.000.000, pentru oricare 1 ≤ i ≤ n",
+    "Pentru 20 de puncte, C = 1 și k ≤ 8",
+    "Pentru 5 de puncte, C = 2 și n = 2",
+    "Pentru 10 de puncte, C = 2 și 0 ≤ a[i] ≤ 9, pentru oricare 1 ≤ i ≤ n",
+    "Pentru 35 de puncte, C = 2, fără restricții suplimentare",
+    "Pentru 15 de puncte, C = 3 și k ≤ 8",
+    "Pentru 15 de puncte, C = 3 și k ≤ n / 2"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qfc9c4b3057.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "unificare.in / unificare.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "OJI 2023, clasa a VI-a",
+    "autor": "Raluca Costineanu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "author": "Raluca Costineanu",
+  "sourceAttribution": "OJI 2023, clasa a VI-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4405/unificare"
+}

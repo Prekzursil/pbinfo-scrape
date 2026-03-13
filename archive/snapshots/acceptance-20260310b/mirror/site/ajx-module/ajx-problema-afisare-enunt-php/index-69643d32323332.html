@@ -1,0 +1,58 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2232"><article id="enunt">
+			<p>Pentru a testa o nouă topologie s-a construit o reţea de calculatoare în care fiecare calculator transmite informaţia unidirecţional către un singur calculator din reţea. Numim conexiune o pereche ordonată de calculatoare, nu neapărat distincte, în care primul este cel care trimite informaţia iar al doilea este cel care o recepţioneaza direct. Fiind dată o astfel de reţea şi conexiunile existente între calculatoarele care o alcătuiesc, să se determine submulţimea cu număr maxim de <b>calculatoare-feed-back</b>. Un <b>calculator-feed-back</b> are proprietatea că informația ce pleacă de la acesta ajunge, prin intermediul conexiunilor succesive, înapoi la calculatorul de la care a plecat.</p>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care, pentru o reţea cu <code>n</code> calculatoare numerotate de la <code>1</code> la <code>n</code> şi conexiuni precizate, determină submulţimea cu număr maxim de calculatoare-feed-back.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fişierului de intrare <code>retea1.in</code> se află un număr natural nenul <code>n</code>, reprezentând numărul de calculatoare din reţea, iar pe fiecare dinre următoarele <code>n</code> linii, separate prin câte un spaţiu, câte <code>n-1</code> valori <code>0</code> şi o valoare <code>1</code>, cu semnificaţia: pe linia <code>i</code>, elementul de pe poziţia <code>j</code> este <code>1</code> dacă şi numai dacă există conexine între calculatorul <code>i</code> şi calculatorul <code>j</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>În fişierul de ieşire <code>retea1.out</code> se vor scrie pe prima linie calculatoarele-feed-back din submulţimea determinată. Elementele submulţimii sunt scrise în ordine crescătoare, separate prin câte o virgulă, fără spaţii iar submulţimea începe cu caracterul <code>{</code> şi se termină cu caracterul <code>}</code>. În fişierul de ieşire nu se vor scrie spaţii înainte, între sau după elementele mulţimii.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 300</code></li>
+	<li>un calculator poate să aibă o conexiune cu el însuşi</li>
+	<li>un calculator poate avea o conexiune doar cu singur calculator</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>retea1.in</code></p>
+
+<pre>5
+0 0 0 1 0 
+1 0 0 0 0 
+1 0 0 0 0 
+0 1 0 0 0 
+0 0 0 0 1</pre>
+
+<p><code>retea1.out</code></p>
+
+<pre>{1,2,4,5}</pre>
+
+<h3>Explicație</h3>
+
+<p>Calculatorul <code>1</code> are conexiune cu calculatorul <code>4</code>, calculatorul <code>4</code> are conexiune cu calculatorul <code>2</code>, iar calculatorul <code>2</code> are conexiune cu calculatorul <code>1</code>, deci oricare dintre calculatoarele <code>1</code>, <code>2</code> sau <code>4</code> este calculator-feed-back. Calculatorul <code>5</code> are conexiune cu el însuşi deci este calculator-feed-back. Submulţimea finală este <code>{1,2,4,5}</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>retea1.in</code></p>
+
+<pre>6
+0 0 0 0 1 0 
+0 0 0 1 0 0 
+0 0 0 0 0 1 
+0 0 0 0 1 0 
+0 0 0 1 0 0 
+0 0 0 1 0 0</pre>
+
+<p><code>retea1.out</code></p>
+
+<pre>{4,5}</pre>		</article>
+		</body></html>

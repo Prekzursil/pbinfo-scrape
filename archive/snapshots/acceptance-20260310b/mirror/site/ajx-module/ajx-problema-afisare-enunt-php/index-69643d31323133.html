@@ -1,0 +1,79 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1213"><article id="enunt">
+			<p>Iepurașul Coconaș vrea să ajungă la grădina cu morcovi. Pentru aceasta el trebuie să traverseze prin salturi o zonă cu proprietăți speciale. Zona este formată din <code>N</code> căsuțe numerotate de la <code>1</code> la <code>N</code>, dispuse una după cealaltă, iar fiecare căsuță conține un număr natural ce reprezintă cantitatea de energie necesară iepurașului pentru a sări  într-o altă căsuță.</p>
+
+<p>Iepurașul pleacă dintr-o anumită căsuță și se deplasează, de la stânga la dreapta, spre grădina cu morcovi după următoarele reguli:</p>
+
+<ul>
+	<li>numărul înscris în căsuța în care se află iepurașul reprezintă numărul de căsuțe peste care el va sări;</li>
+	<li>dacă numărul înscris în căsuța în care se află iepurașul este număr prim, atunci energia lui se dublează şi va sări peste un număr dublu de căsuţe;</li>
+	<li>numărarea căsuțelor peste care va sări se face de la stânga la dreapta și începe cu căsuța imediat următoare. Astfel, dacă iepurașul se află în căsuța a treia și numărul înscris în această căsuță este <code>5</code>,  iepurașul va ajunge în căsuța cu numărul de ordine <code>13</code> (<code>13=3+2*5</code>).</li>
+	<li>dacă iepurașul ajunge într-o căsuță care conține numărul <code>0</code>, el rămâne acolo pentru că nu mai are energie să sară mai departe, altfel el continuă să sară după regulile descrise mai sus;</li>
+	<li>iepurașul ajunge la grădina cu morcovi dacă ultimul salt pe care îl face depășește căsuța <code>N</code>.</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Scrieți un program care citește trei numere naturale <code>P</code>, <code>N</code> și <code>K</code> iar apoi <code>N</code> numere naturale și determină:</p>
+
+<p>1) dacă iepurașul poate ajunge sau nu, la grădina cu morcovi pornind din căsuța <code>K</code> și numărul de salturi pe care le face iepurașul pornind din căsuța <code>K</code>;<br>
+2) căsuța de pornire a iepurașului, astfel încât drumul parcurs de el să traverseze un număr maxim de căsuțe. Pentru a determina numărul de căsuțe se vor lua în calcul: căsuța de pornire, toate căsuțele peste care iepurașul a sărit și toate căsuțele în care a ajuns în urma salturilor. Iepurașul poate porni din oricare căsuță. În cazul în care există două sau mai multe căsuțe de pornire care conduc la același număr maxim de căsuțe traversate se va lua în considerare căsuța cu numărul de ordine cel mai mic.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fişierul de intrare <code>iepuras.in</code> conţine pe prima linie un număr natural <code>P</code>. Pentru toate testele de intrare, numărul <code>P</code> poate avea doar valoarea <code>1</code> sau valoarea <code>2</code>. Pe a doua linie a fișierului <code>iepuras.in</code> se găsesc, în această ordine, numerele naturale <code>N</code> și <code>K</code>, separate prin câte un spațiu. Pe a treia linie se găsesc <code>N</code> numere naturale separate prin câte un spațiu, reprezentând valorile din fiecare căsuță în ordine de la <code>1</code> la <code>N</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă valoarea lui <code>P</code> este <code>1</code>, se va rezolva numai punctul 1) din cerințe. În acest caz, fişierul de ieşire <code>iepuras.out</code> va conține pe prima linie cuvântul <code>DA</code> în cazul în care iepurașul a ajuns în grădina cu morcovi , respectiv cuvântul <code>NU</code> în caz contrar, iar pe a doua linie va conține un număr natural reprezentând numărul de salturi pe care le face iepurașul pornind din căsuța <code>K</code>.</p>
+
+<p>Dacă valoarea lui <code>P</code> este <code>2</code>, se va rezolva numai punctul 2) din cerințe. În acest caz, fişierul de ieşire <code>iepuras.out</code> va conține pe prima linie două numere naturale separate printr-un spaţiu reprezentând, în ordine, căsuța de pornire și numărul maxim de căsuțe determinat,  iar  pe a doua linie, un șir de  numere naturale separate prin câte un spațiu reprezentând numerele din căsuțele în care iepurașul nu s-a aflat sau nu a sărit pe parcursul drumului, de la stânga la dreapta, începând cu căsuța <code>1</code>. Dacă numărul maxim de căsuțe traversate este chiar <code>N</code> linia a doua nu va conține niciun număr.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 7000</code></li>
+	<li><code>1 ≤ K ≤ N</code></li>
+	<li><code>0 ≤</code> numerele conţinute în căsuţe <code>≤ 100</code></li>
+	<li>Pentru rezolvarea corectă a primei cerinţe se acordă 30 de puncte, pentru rezolvarea corectă a celei de a doua cerințe se acordă 70 de puncte.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>iepuras.in</code></p>
+
+<pre>1
+14 3
+2 3 4 0 1 1 2 1 4 0 0 2 1 1</pre>
+
+<p><code>iepuras.out</code></p>
+
+<pre>NU
+2</pre>
+
+<h3>Explicație</h3>
+
+<p><code>P = 1</code>, pentru acest test, se rezolva cerința 1).</p>
+
+<p>Iepurașul pleacă din căsuța <code>3</code>, sare în căsuța cu numărul de ordine <code>7</code> și mai departe, în căsuța cu numărul de ordine <code>11</code>, unde găsind numărul <code>0</code> se oprește.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>iepuras.in</code></p>
+
+<pre>2
+14 3
+2 3 6 0 1 1 2 1 4 0 0 2 3 1</pre>
+
+<p><code>iepuras.out</code></p>
+
+<pre>2 13
+2 6 0 1 1 2 0 0 2 1</pre>
+
+<h3>Explicație</h3>
+
+<p><code>P = 2</code>, pentru acest test, se rezolvă cerința 2).</p>
+
+<p>Pentru a traversa un număr maxim de căsuțe, iepurașul pleacă din căsuța cu numărul de ordine <code>2</code> și sare, pe rând, în căsuțele cu numerele de ordine <code>8</code>, <code>9</code>, <code>13</code>, și apoi în grădină, traversând astfel <code>13</code> căsuţe (de la căsuța <code>2</code> la căsuța <code>14</code>).</p>
+
+<p>Iepurașul nu s-a aflat sau nu a sărit în căsuţele de pe poziţiile <code>1</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>10</code>, <code>11</code>, <code>12</code> și <code>14</code>.</p>		</article>
+		</body></html>

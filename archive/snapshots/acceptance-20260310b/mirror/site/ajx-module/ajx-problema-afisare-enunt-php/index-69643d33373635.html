@@ -1,0 +1,77 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3765"><article id="enunt">
+			<p>Un laborator specializat studiază mutațiile unui virus pandemic pentru a găsi cel mai bun vaccin pentru combaterea acestuia. Codul unui virus este un șir format din litere (mari și mici) ale alfabetului englez. Numim mutație a virusului pandemic un șir de caractere care are aceeași lungime cu codul virusului și care conține o singură poziție pentru care litera din șir este diferită de litera situată pe poziția respectivă în codul virusului pandemic. De exemplu, pentru virusul pandemic având codul <code>abac</code>, șirul <code>Bbac</code> reprezintă o mutație, deoarece are aceeași lungime și diferă doar prin litera de pe prima poziție. Laboratorul primește o listă conținând codurilor mai multor viruși descoperiți în urma testărilor.</p>
+
+<h1>Cerința</h1>
+
+<p>Scrieți un program care, cunoscând codul virusului pandemic și lista codurilor virușilor descoperiți în urma testărilor, rezolvă următoarele cerințe:</p>
+
+<p>1. Determină numărul de mutații ale virusului pandemic existente în listă, mutații nu neapărat distincte;<br>
+2. Determină mutația cu număr maxim de apariții în listă; dacă există mai multe mutații cu același număr maxim de apariții, se va determina prima mutație, în ordine lexicografică.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>virus.in</code> conține pe prima linie un număr natural <code>C</code> reprezentând cerința care trebuie să fie rezolvată (<code>1</code> sau <code>2</code>). Pe cea de a doua linie se află codul virusului pandemic. Pe a treia linie se află un număr natural <code>N</code>, reprezentând numărul de viruși existenți în lista primită de laborator. Pe următoarele <code>N</code> linii se află codurile virușilor din listă, câte un cod pe o linie.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>virus.out</code> va conține o singură linie:</p>
+
+<ul>
+	<li>Dacă <code>C = 1</code>, pe prima linie va fi scris un număr natural care reprezintă câte elemente din listă sunt mutații ale virusului pandemic.</li>
+	<li>Dacă <code>C = 2</code>, pe prima linie va fi scris un șir de caractere care reprezintă mutația cu număr maxim de apariții. Dacă există mai multe mutații cu număr maxim de apariții, va fi afișată prima (cea mai mică), în ordine lexicografică.</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N ≤ 50.000</code></li>
+	<li>Lungimea maximă a codului unui virus este <code>200</code></li>
+	<li>Daca <code>a</code> și <code>b</code> sunt două șiruri de lungime <code>lg</code>, spunem că șirul <code>a = a</code><sub><code>0</code></sub> <code>a</code><sub><code>1</code></sub> <code>a</code><sub><code>2</code></sub> <code>... a</code><sub><code>lg-1</code></sub> este mai mic din punct de vedere lexicografic decât șirul <code>b = b</code><sub><code>0</code></sub> <code>b</code><sub><code>1</code></sub> <code>b</code><sub><code>2</code></sub> <code>... b</code><sub><code>lg-1</code></sub>, dacă există o poziție <code>k ∈{0, 1, ...,  lg - 1}</code> astfel încât <code>a</code><sub><code>i</code></sub> <code>= b</code><code>i</code> pentru orice <code>0 ≤ i &lt; k</code> și <code>a</code><sub><code>k</code></sub> <code>&lt; b</code><code>k</code>.</li>
+	<li>În codul <span class="caps">ASCII</span> codurile literelor mari sunt mai mici decât codurile literelor mici.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>virus.in</code></p>
+
+<pre>1
+abac
+5
+Abbbq
+Zbac
+abbC
+aBac
+Zbac</pre>
+
+<p><code>virus.out</code></p>
+
+<pre>3</pre>
+
+<h3>Explicație</h3>
+
+<p>Mutațiile sunt <code>Zbac</code>, <code>aBac</code> și <code>Zbac</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>virus.in</code></p>
+
+<pre>2
+abcD
+8
+abcdD
+XbcD
+Xc
+XbcD
+aXcD
+aXcD
+aXc
+ab</pre>
+
+<p><code>virus.out</code></p>
+
+<pre>XbcD</pre>
+
+<h3>Explicație</h3>
+
+<p>Mutațiile <code>XbcD</code> și <code>aXcD</code> apar fiecare de câte <code>2</code> ori, prima în ordine lexicografică fiind <code>XbcD</code>. <code>XbcD</code> este mai mic lexicografic decât <code>aXcD</code>, deoarece în codul <span class="caps">ASCII</span>: <code>'A' &lt; 'B' &lt; ... &lt; 'Z' &lt; 'a' &lt; 'b' &lt; ... &lt; 'z'</code></p>		</article>
+		</body></html>

@@ -1,0 +1,160 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4411"><article id="enunt">
+			<p>Se dă un graf orientat cu <code>n</code> noduri și <code>m</code> muchii. Fiecare muchie are costul <code>1</code> (poate fi parcursă într-un minut). Doi “prieteni” (<strong>veri</strong>) pornesc din nodul <code>S</code>. Unul dintre ei vrea să ajungă în nodul <code>A</code>, iar celălalt vrea să ajungă în nodul <code>B</code>.</p>
+
+<p>Cei doi prieteni se vor plimba împreună până când <strong>ciclează</strong>, adică până când vor ajunge în același nod a doua oară, notat cu <code>Z</code>. După ciclare, ei își pot continua drumurile separat. Totuși, dacă vor, pot să meargă amândoi în continuare pe același drum:~doar dispare obligația de a merge împreună.</p>
+
+<p>Fiecare dintre ei trebuie să-și termine drumul doar după ciclare, adică după ce nu mai sunt obligați să meargă împreună. Totuși, este în regulă dacă drumul unuia se termină exact în nodul în care au ciclat (adică ciclează în <code>A</code> sau <code>B</code>).</p>
+
+<h1>Cerința</h1>
+
+<p>Care este numărul minim de minute necesar, astfel încât să fie posibil ca amândoi să ajungă la destinațiile lor, în timpul alocat, în <code>A</code>, respectiv <code>B</code>?<br>
+Cu alte cuvinte, dacă cei doi veri ciclează pentru prima oară după exact <code>t</code> minute, apoi își continuă drumurile pentru alte <code>tA</code>, respectiv <code>tB</code> minute, vrem să aflăm valoarea minimă a lui <code>max(t + tA, t + tB)</code>.<br>
+Există două tipuri de cerințe, reprezentate printr-un număr <code>c</code>:</p>
+
+<ul>
+	<li>Dacă <code>c = 1</code>, trebuie calculată valoarea minimă a lui <code>max(t + tA, t + tB)</code>.</li>
+	<li>Dacă <code>c = 2</code>, trebuie afișat un triplet de drumuri care poate fi urmat de cei doi veri (drumul comun din <code>S</code> până în <code>Z</code>, drum urmat ulterior de primul văr din <code>Z</code> până în <code>A</code>, drum urmat ulterior de al doilea văr din <code>Z</code> până în <code>B</code>), astfel încât valoarea asociată drumurilor, adică <code>max(t + tA, t + tB)</code> să fie minimă. Orice triplet corect cu valoarea asociată minimă poate fi afișat.</li>
+</ul>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului de intrare <code>veri.in</code> se găsește <code>c</code>. Pe a doua linie se găsesc doi întregi <code>n</code> și <code>m</code>. Pe a treia linie se găsesc trei întregi <code>S</code>, <code>A</code> și <code>B</code>. Pe următoarele <code>m</code> linii se găsesc câte doi întregi <code>X</code> și <code>Y</code>, reprezentând că există o muchie direcționată de la nodul <code>X</code> la nodul <code>Y</code>, care poate fi parcursă într-un minut (de cost <code>1</code>).</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire este <code>veri.out</code>. Dacă <code>c = 1</code>, afișați un singur număr, valoarea minimă a lui <code>max(t + tA, t + tB)</code>. Dacă <code>c = 2</code>, afișati trei drumuri. Primul drum este format de la <code>S</code> până la <code>Z</code>. Al doilea drum este format de la <code>Z</code> până la <code>A</code>. Al treilea drum este format de la <code>Z</code> până la <code>B</code>, unde <code>S</code>, <code>A</code>, <code>B</code>, <code>Z</code> sunt definite anterior. Fiecare drum se va tipări pe două linii separate.</p>
+
+<ul>
+	<li>Pe prima linie va apărea lungimea drumului, adică numărul de muchii.</li>
+	<li>Pe a doua linie vor apărea nodurile drumului, separate prin câte un spațiu.</li>
+</ul>
+
+<p>Valoarea asociată drumurilor, adică <code>max(t + tA, t + tB)</code>, trebuie să fie minimă.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ S, A, B, Z ≤ n ≤ 5000</code>.</li>
+	<li>Nodurile sunt numerotate de la <code>1</code> la <code>n</code>.</li>
+	<li><code>A ≠ B</code></li>
+	<li><code>1 ≤ m ≤ n(n − 1)</code></li>
+	<li>Se garantează că pentru orice test dat spre rezolvare există cel puțin o soluție.</li>
+	<li>Nu există muchii de la un nod la el însuși. Există maxim o muchie orientată între oricare două noduri distincte.</li>
+	<li>Dacă verii se despart în <code>A</code>, primul văr poate să nu mai facă nimic (drumul lui ulterior ar avea <code>0</code> muchii și l-ar conține doar pe <code>A</code>: vezi exemplul <code>3</code>). Analog pentru <code>B</code>.</li>
+	<li>Pentru fiecare subtask, testele cu <code>c = 1</code> vor conta pentru <code>60%</code> din punctaj.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>veri.in</code></p>
+
+<pre>2
+7 8
+1 3 4
+1 2
+2 5
+5 7
+7 6
+6 7
+6 5
+5 3
+7 4</pre>
+
+<p><code>veri.out</code></p>
+
+<pre>5
+1 2 5 7 6 5
+1
+5 3
+2
+5 7 4</pre>
+
+<h3>Explicație</h3>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-veri-01-jpg.jpg"></p>
+
+<p>Drumul urmat în comun de cei doi este <code>1 → 2 → 5 → 7 → 6 → 5</code>. Drumul urmat de primul văr în continuare este <code>5 → 3</code>. Drumul continuat de al doilea văr este <code>5 → 7 → 4</code>. Astfel, primul văr are nevoie de <code>6</code> minute pentru a ajunge în <code>A</code>, iar al doilea de <code>7</code> minute pentru a ajunge în <code>B</code>, deci răspunsul pentru <code>c = 1</code> este <code>7</code>. Cei doi ar fi putut să cicleze în <code>7</code>, dacă ar fi urmat drumul <code>1 → 2 → 5 → 7 → 6 → 7</code>. Totuși, deși al doilea văr ar fi ajuns în <code>B</code> în doar <code>6</code> minute (<code>7 → 4</code>), primul văr ar fi avut nevoie de cel puțin <code>8</code> minute ca să ajungă în <code>A</code> (<code>7 → 6 → 5 → 3</code>).</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>veri.in</code></p>
+
+<pre>2
+7 8
+1 2 5
+1 3
+1 4
+3 2
+4 5
+6 4
+7 3
+3 6
+4 7</pre>
+
+<p><code>veri.out</code></p>
+
+<pre>5
+1 4 7 3 6 4
+3
+4 7 3 2
+1
+4 5</pre>
+
+<h3>Explicație</h3>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-veri-02-jpg.jpg"></p>
+
+<p>Răspunsul corect pentru <code>c = 1</code> este <code>8</code>. Pentru acest exemplu există două soluții corecte. A doua soluție este tripletul de drumuri (<code>1 → 3 → 6 → 4 → 7 → 3</code>, <code>3 → 2</code>, <code>3 → 6 → 4 → 5</code>).</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>veri.in</code></p>
+
+<pre>2
+5 6
+1 3 5
+1 2
+2 3
+3 4
+4 3
+3 1
+3 5</pre>
+
+<p><code>veri.out</code></p>
+
+<pre>4
+1 2 3 4 3
+0
+3
+1
+3 5</pre>
+
+<h3>Explicație</h3>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-veri-03-jpg.jpg"></p>
+
+<p>Răspunsul corect pentru <code>c = 1</code> este <code>5</code>. Este folosit un ciclu care se termină în <code>A = 3</code>.</p>
+
+<h1>Exemplul 4:</h1>
+
+<p><code>veri.in</code></p>
+
+<pre>1
+4 4
+1 2 4
+1 3
+3 2
+2 3
+2 4</pre>
+
+<p><code>veri.out</code></p>
+
+<pre>5</pre>
+
+<h3>Explicație</h3>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-veri-04-jpg.jpg"></p>
+
+<p>Pentru <code>c = 2</code>, singurul triplet corect de drumuri este (<code>1 → 3 → 2 → 3</code>, <code>3 → 2</code>, <code>3 → 2 → 4</code>).<br>
+<strong>Atenție!</strong> Tripletul (<code>1 → 3 → 2 → 3 → 2</code>, <code>2</code>, <code>2 → 4</code>) este greșit, deoarece primul nod vizitat a doua oară nu este <code>2</code>.</p>		</article>
+		</body></html>

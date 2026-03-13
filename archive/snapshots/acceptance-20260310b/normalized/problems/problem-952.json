@@ -1,0 +1,301 @@
+{
+  "id": 952,
+  "slug": "suprasolicitare",
+  "name": "Suprasolicitare",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/952/suprasolicitare",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 85,
+      "name": "Structuri de date liniare",
+      "slug": "structuri-de-date-liniare",
+      "href": "/?pagina=probleme-lista&tag=85"
+    },
+    {
+      "id": 87,
+      "name": "Coada",
+      "slug": "coada",
+      "href": "/?pagina=probleme-lista&tag=87"
+    }
+  ],
+  "tags": [
+    "Coada",
+    "Algoritmul lui Lee"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Hackerul Gigel e pus pe șotii. Folosind un pachet de date corupt, acesta încearcă sa suprasolicite o rețea de <code>n*n</code> calculatoare dispuse sub forma unei matrice cu <code>n</code> rânduri și <code>n</code> coloane. El știe că fiecare calculator este conectat la calculatoarele adiacente(sus, dreapta, stânga, jos), fiecare calculator de pe rândul <code>n</code> este conectat la calculatorul de pe rândul <code>1</code> și aceeași coloană, și fiecare calculator de pe coloana <code>n</code> este conectat la cel de pe coloana <code>1</code> și aceeași linie.</p><p>Pentru a evita virușii nedoriți, calculatoarele din rețea nu pot prelucra pachete corupte și vor încerca pe cât posibil să le evite. Dacă un calculator primește un pachet corupt de la un calculator vecin, acesta îl va transmite mai departe în aceeași direcție ca cea alesă de calculatorul de la care a primit pachetul.</p><p>Se mai știe că administratorul rețelei a criptat câteva calculatoare, iar acestea nu vor accepta pachete corupte. Dacă un calculator încearcă sa trimită un pachet corupt unui calculator criptat operația va eșua, iar calculatorul respectiv va păstra pachetul până va primi o nouă comandă. Hackerul Gigel este foarte inteligent și poate da o comandă fiecărui calculator necriptat prin care să direcționeze pachetul de date corupt în una dintre cele patru direcții: <code>Sus</code>, <code>Dreapta</code>, <code>Jos</code>, <code>Stanga</code>.</p><p>Pentru a suprasolicita rețeaua, hackerul Gigel trebuie să găsească o succesiune de <code>n</code> calculatoare necriptate situate pe același rând sau aceeași coloană, pentru ca atunci când va trimite pachetul corupt spre acestea, ele să îl transmită mai departe la infinit.</p><p>Pachetul corupt se află inițial în calculatorul aflat pe rândul <code>x</code> și coloana <code>y</code>. Ajutați-l pe hackerul Gigel găsească o succesiune de comenzi prin care să suprasolicite rețeaua!</p>",
+      "text": "Hackerul Gigel e pus pe șotii. Folosind un pachet de date corupt, acesta încearcă sa suprasolicite o rețea de n*n calculatoare dispuse sub forma unei matrice cu n rânduri și n coloane. El știe că fiecare calculator este conectat la calculatoarele adiacente(sus, dreapta, stânga, jos), fiecare calculator de pe rândul n este conectat la calculatorul de pe rândul 1 și aceeași coloană, și fiecare calculator de pe coloana n este conectat la cel de pe coloana 1 și aceeași linie.Pentru a evita virușii nedoriți, calculatoarele din rețea nu pot prelucra pachete corupte și vor încerca pe cât posibil să le evite. Dacă un calculator primește un pachet corupt de la un calculator vecin, acesta îl va transmite mai departe în aceeași direcție ca cea alesă de calculatorul de la care a primit pachetul.Se mai știe că administratorul rețelei a criptat câteva calculatoare, iar acestea nu vor accepta pachete corupte. Dacă un calculator încearcă sa trimită un pachet corupt unui calculator criptat operația va eșua, iar calculatorul respectiv va păstra pachetul până va primi o nouă comandă. Hackerul Gigel este foarte inteligent și poate da o comandă fiecărui calculator necriptat prin care să direcționeze pachetul de date corupt în una dintre cele patru direcții: Sus, Dreapta, Jos, Stanga.Pentru a suprasolicita rețeaua, hackerul Gigel trebuie să găsească o succesiune de n calculatoare necriptate situate pe același rând sau aceeași coloană, pentru ca atunci când va trimite pachetul corupt spre acestea, ele să îl transmită mai departe la infinit.Pachetul corupt se află inițial în calculatorul aflat pe rândul x și coloana y. Ajutați-l pe hackerul Gigel găsească o succesiune de comenzi prin care să suprasolicite rețeaua!"
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>suprasolicitare.in</code> conține pe prima linie numărul <code>n</code>, urmat de <code>n</code> linii, fiecare cu câte <code>n</code> numere având valorile <code>0</code> (calculator necriptat) sau <code>1</code> (calculator criptat). Pe linia <code>n + 2</code> a fișierului se află coordonatele <code>x</code> și <code>y</code> ale calculatorului de unde începe Gigel să transmită pachetul de date corupt, separate printr-un spațiu.</p>",
+      "text": "Fișierul de intrare suprasolicitare.in conține pe prima linie numărul n, urmat de n linii, fiecare cu câte n numere având valorile 0 (calculator necriptat) sau 1 (calculator criptat). Pe linia n + 2 a fișierului se află coordonatele x și y ale calculatorului de unde începe Gigel să transmită pachetul de date corupt, separate printr-un spațiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire va conține un număr natural <code>Sol</code> reprezentând numărul de comenzi pe care le transmite Gigel în rețea pentru a transmite pachetul. Pe următoarele <code>Sol</code> rânduri se află câte un cuvânt din mulțimea <code>{'Sus', 'Dreapta', 'Jos', 'Stanga'}</code> reprezentând direcția înspre care acesta trimite pachetul corupt.</p>",
+      "text": "Fișierul de ieșire va conține un număr natural Sol reprezentând numărul de comenzi pe care le transmite Gigel în rețea pentru a transmite pachetul. Pe următoarele Sol rânduri se află câte un cuvânt din mulțimea {'Sus', 'Dreapta', 'Jos', 'Stanga'} reprezentând direcția înspre care acesta trimite pachetul corupt."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ n ≤ 100</code></li>\n\t<li>Orice soluție care duce la înghețarea rețelei este considerată corectă.</li>\n\t<li>O altă comandă decât cea din mulțimea <code>{'Sus', 'Dreapta', 'Jos', 'Stanga'}</code> va duce la descoperirea pachetului de către administrator</li>\n\t<li>Dacă valoarea lui <code>Sol</code> este mai mare decât numărul de comenzi, se va acorda <code>60%</code> din punctaj.</li>\n\t<li>Pentru teste în valoare de <code>50</code> de puncte, <code>n ≤ 10</code></li>\n</ul>",
+      "text": "1 ≤ n ≤ 100 Orice soluție care duce la înghețarea rețelei este considerată corectă. O altă comandă decât cea din mulțimea {'Sus', 'Dreapta', 'Jos', 'Stanga'} va duce la descoperirea pachetului de către administrator Dacă valoarea lui Sol este mai mare decât numărul de comenzi, se va acorda 60% din punctaj. Pentru teste în valoare de 50 de puncte, n ≤ 10"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>suprasolicitare.in</code></p><pre>8\n0 0 0 0 0 0 0 0\n0 1 0 1 1 0 1 1\n0 0 0 0 1 0 1 1\n0 0 0 1 1 0 1 1\n1 0 1 0 0 0 0 0\n1 1 1 1 1 1 0 1\n1 1 1 1 1 1 0 1\n1 1 1 1 1 1 0 1\n5 6</pre><p><code>suprasolicitare.out</code></p><pre>2 \nSus\nDreapta</pre>",
+      "text": "suprasolicitare.in8 0 0 0 0 0 0 0 0 0 1 0 1 1 0 1 1 0 0 0 0 1 0 1 1 0 0 0 1 1 0 1 1 1 0 1 0 0 0 0 0 1 1 1 1 1 1 0 1 1 1 1 1 1 1 0 1 1 1 1 1 1 1 0 1 5 6suprasolicitare.out2 Sus Dreapta"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p>Pornind din calculatorul aflat la <code>x = 5</code> și <code>y = 6</code>, pachetul se deplasează la calculatorul cu <code>x = 1</code> și <code>y = 6</code> de unde Gigel îl poate trimite într-un ciclu infinit pe rândul <code>1</code>.<br>\nSuccesiunea <code>Sus</code>, <code>Stanga</code> este de asemenea validă.</p>",
+      "text": "Pornind din calculatorul aflat la x = 5 și y = 6, pachetul se deplasează la calculatorul cu x = 1 și y = 6 de unde Gigel îl poate trimite într-un ciclu infinit pe rândul 1. Succesiunea Sus, Stanga este de asemenea validă."
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "1 ≤ n ≤ 100",
+    "Orice soluție care duce la înghețarea rețelei este considerată corectă.",
+    "O altă comandă decât cea din mulțimea {'Sus', 'Dreapta', 'Jos', 'Stanga'} va duce la descoperirea pachetului de către administrator",
+    "Dacă valoarea lui Sol este mai mare decât numărul de comenzi, se va acorda 60% din punctaj.",
+    "Pentru teste în valoare de 50 de puncte, n ≤ 10"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q51e21a3a77.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Văran Tudor (tudorvaran)",
+    "clasa": "10",
+    "intrare/ieșire": "suprasolicitare.in / suprasolicitare.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "-",
+    "autor": "Tudor Văran",
+    "dificultate": "dificilă"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "author": "Tudor Văran",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/952/suprasolicitare"
+}

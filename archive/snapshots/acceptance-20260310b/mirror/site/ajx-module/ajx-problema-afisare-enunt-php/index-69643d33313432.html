@@ -1,0 +1,166 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3142"><article id="enunt">
+			<h1>Polybius</h1>
+
+<p>Cifrul Polybius este un cifru folosit de Grecii Antici care are la bază un tabel de <code>5</code> linii și <code>5</code> coloane pentru a cripta sau decripta un șir de caractere. Pentru criptare, luăm fiecare caracter din șir și afișăm linia și coloana din tabel unde se află caracterul. Pentru decriptare afișăm caracterul care se află în tabel la linia și coloana dată.</p>
+
+<p>De exemplu, folosind tabelul:</p>
+
+<table class="table table-striped table-bordered">
+		<tbody><tr>
+			<th>#</th>
+			<th>1</th>
+			<th>2</th>
+			<th>3</th>
+			<th>4</th>
+			<th>5</th>
+		</tr>
+		<tr>
+			<th>1</th>
+			<td>A</td>
+			<td>B</td>
+			<td>C</td>
+			<td>D</td>
+			<td>E</td>
+		</tr>
+		<tr>
+			<th>2</th>
+			<td>F</td>
+			<td>G</td>
+			<td>H</td>
+			<td>I</td>
+			<td>K</td>
+		</tr>
+		<tr>
+			<th>3</th>
+			<td>L</td>
+			<td>M</td>
+			<td>N</td>
+			<td>O</td>
+			<td>P</td>
+		</tr>
+		<tr>
+			<th>4</th>
+			<td>Q</td>
+			<td>R</td>
+			<td>S</td>
+			<td>T</td>
+			<td>U</td>
+		</tr>
+		<tr>
+			<th>5</th>
+			<td>V</td>
+			<td>W</td>
+			<td>X</td>
+			<td>Y</td>
+			<td>Z</td>
+		</tr>
+</tbody></table>
+
+<p>Împreună cu șirul <code>INF</code>, afișăm <code>243321</code> deoarece litera <code>I</code> se află pe poziția <code>(2, 4)</code>, litera <code>N</code> se află pe poziția <code>(3, 3)</code> iar litera <code>F</code> se află pe poziția <code>(2, 1)</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Se dă un număr <code>p</code>, un șir de caractere <code>t</code> de <code>25</code> de caractere corespunzător tabelului și un șir de caractere <code>s</code>. Să se determine:</p>
+
+<p>1. Pentru <code>p = 1</code>, să se cripteze șirul <code>s</code>, format doar din litere mari, folosind tabelul <code>t</code>.</p>
+
+<p>2. Pentru <code>p = 2</code>, să se decripteze șirul <code>s</code>, format doar din cifre, folosind tabelul <code>t</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>polybius.in</code> conține pe prima linie numărul <code>p</code>, pe a doua linie șirul <code>t</code> format din <code>25</code> de caractere, reprezentând toate elementele tabelului, de la stânga la dreapta și de sus în jos. A treia linie șirul de litere <code>s</code> care trebuie criptat, dacă <code>p=1</code>, respectiv șirul de cifre care trebuie decriptat, dacă <code>p=2</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Pentru <code>p = 1</code>, fișierul de ieșire <code>polybius.out</code> va conține pe prima linie rezultatul criptării. Cifrele se afișează fără spațiu între ele.</p>
+
+<p>Pentru <code>p = 2</code>, fișierul de ieșire <code>polybius.out</code> va conține pe prima linie rezultatul decriptării.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ p ≤ 2</code></li>
+	<li>lungimea șirului <code>t</code> este de <code>25</code> de caractere</li>
+	<li><code>1 ≤</code> lungimea șirului de litere <code>s ≤ 500.000</code></li>
+	<li>Se garantează că toate caracterele din <code>s</code> sunt incluse în șirul <code>t</code> și caracterele din <code>t</code> sunt distincte două câte două.</li>
+	<li>O literă din alfabet va lipsi întotdeauna din tabel, fiind un tabel <code>5x5</code> iar alfabetul are <code>26</code> de caractere.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>polybius.in</code></p>
+
+<pre>1
+ABCDEFGHIKLMNOPQRSTUVWXYZ 
+ANAAREMERE</pre>
+
+<p><code>polybius.out</code></p>
+
+<pre>11331111421532154215</pre>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>polybius.in</code></p>
+
+<pre>2
+ABCDEFGHIKLMNOPQRSTUVWXYZ 
+11331111421532154215</pre>
+
+<p><code>polybius.out</code></p>
+
+<pre>ANAAREMERE</pre>
+
+<h3>Explicație</h3>
+
+<p>Tabelul din exemple corespunzător șirului este acesta:<br>
+<br><table class="table table-striped table-bordered">
+		<tbody><tr>
+			<th>#</th>
+			<th>1</th>
+			<th>2</th>
+			<th>3</th>
+			<th>4</th>
+			<th>5</th>
+		</tr>
+		<tr>
+			<th>1</th>
+			<td>A</td>
+			<td>B</td>
+			<td>C</td>
+			<td>D</td>
+			<td>E</td>
+		</tr>
+		<tr>
+			<th>2</th>
+			<td>F</td>
+			<td>G</td>
+			<td>H</td>
+			<td>I</td>
+			<td>K</td>
+		</tr>
+		<tr>
+			<th>3</th>
+			<td>L</td>
+			<td>M</td>
+			<td>N</td>
+			<td>O</td>
+			<td>P</td>
+		</tr>
+		<tr>
+			<th>4</th>
+			<td>Q</td>
+			<td>R</td>
+			<td>S</td>
+			<td>T</td>
+			<td>U</td>
+		</tr>
+		<tr>
+			<th>5</th>
+			<td>V</td>
+			<td>W</td>
+			<td>X</td>
+			<td>Y</td>
+			<td>Z</td>
+		</tr>
+</tbody></table></p>		</article>
+		</body></html>

@@ -1,0 +1,342 @@
+{
+  "id": 3863,
+  "slug": "dungeons",
+  "name": "dungeons",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3863/dungeons",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 85,
+      "name": "Structuri de date liniare",
+      "slug": "structuri-de-date-liniare",
+      "href": "/?pagina=probleme-lista&tag=85"
+    },
+    {
+      "id": 87,
+      "name": "Coada",
+      "slug": "coada",
+      "href": "/?pagina=probleme-lista&tag=87"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Din fericire, urmărind diverse ghiduri pe internet ai aflat harta exactă a terenului, însă nu ştii în care dintre punctele de start vei fi repartizat. Este garantat însă că vei porni dintr-o celulă de start. Considerând că vei adopta cea mai bună strategie, care este numărul maxim de monezi pe care îl poţi obține garantat, indiferent de unde vei fi poziţionat la început?</p>",
+      "text": "Din fericire, urmărind diverse ghiduri pe internet ai aflat harta exactă a terenului, însă nu ştii în care dintre punctele de start vei fi repartizat. Este garantat însă că vei porni dintr-o celulă de start. Considerând că vei adopta cea mai bună strategie, care este numărul maxim de monezi pe care îl poţi obține garantat, indiferent de unde vei fi poziţionat la început?"
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie a intrării standard se vor găsi valorile <code>N</code> şi <code>M</code>: dimensiunile terenului pe care se va desfăşura jocul, conform ghidurilor de pe internet. Următoarele <code>N</code> linii conţin fiecare câte un şir de caractere de lungime <code>M</code>, reprezentând harta conform codificării descrise în enunţ.</p>",
+      "text": "Pe prima linie a intrării standard se vor găsi valorile N şi M: dimensiunile terenului pe care se va desfăşura jocul, conform ghidurilor de pe internet. Următoarele N linii conţin fiecare câte un şir de caractere de lungime M, reprezentând harta conform codificării descrise în enunţ."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>La ecran se va afişa un singur număr natural, numărul maxim de monezi care se poate obţine garantat pe acel teren.</p>",
+      "text": "La ecran se va afişa un singur număr natural, numărul maxim de monezi care se poate obţine garantat pe acel teren."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li>Fie <code>S</code> numărul de celule de start ce se află pe hartă. <code>N ≤ 400</code>, <code>M ≤ 400</code>, <code>S ≤ 60</code>.</li>\n\t<li>Pentru 3 puncte, <code>S = 1</code>, nu există mine și cu excepția primei și ultimei coloane și nu există pereți.</li>\n\t<li>Pentru 7 puncte, <code>N = 3</code></li>\n\t<li>Pentru 12 puncte, <code>S = 1</code></li>\n\t<li>Pentru 23 puncte, <code>S = 2</code></li>\n\t<li>Pentru 41 puncte, <code>1 ≤ N, M ≤ 250</code>, <code>1 ≤ S ≤ 12</code></li>\n\t<li>Pentru 14 puncte, nicio restricție suplimentară</li>\n</ul>",
+      "text": "Fie S numărul de celule de start ce se află pe hartă. N ≤ 400, M ≤ 400, S ≤ 60. Pentru 3 puncte, S = 1, nu există mine și cu excepția primei și ultimei coloane și nu există pereți. Pentru 7 puncte, N = 3 Pentru 12 puncte, S = 1 Pentru 23 puncte, S = 2 Pentru 41 puncte, 1 ≤ N, M ≤ 250, 1 ≤ S ≤ 12 Pentru 14 puncte, nicio restricție suplimentară"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><strong>Intrare</strong></p><pre>3 7\n#######\n#Soooo#\n#######</pre><p><strong>Ieșire</strong></p><pre>4</pre><h3>Explicație</h3><p>Există o singură poziție de start, deci știm exact de unde va porni jucătorul. În acest caz, jucătorul poate colecta toate monezile.</p>",
+      "text": "Intrare3 7 ####### #Soooo# #######Ieșire4ExplicațieExistă o singură poziție de start, deci știm exact de unde va porni jucătorul. În acest caz, jucătorul poate colecta toate monezile."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><strong>Intrare</strong></p><pre>3 8\n########\n#SoXooS#\n########</pre><p><strong>Ieșire</strong></p><pre>1</pre><h3>Explicație</h3><p>Sunt două poziții de start, iar jucătorul poate deduce unde este poziționat pe baza zonei de vizibilitate (<code>P</code> este poziția jucătorului):</p><p><code>###</code>  <code>###</code><br>\n<code>#Po</code>  <code>oP#</code><br>\n<code>###</code>  <code>###</code></p><p>Numărul maxim de monezi pe care le poate colecta jucătorul dacă pornește din partea stângă este <code>1</code>, respectiv <code>2</code> dacă pornește din partea dreaptă. Deci, pe cel mai rău caz, putem colecta o monedă.</p>",
+      "text": "Intrare3 8 ######## #SoXooS# ########Ieșire1ExplicațieSunt două poziții de start, iar jucătorul poate deduce unde este poziționat pe baza zonei de vizibilitate (P este poziția jucătorului):### ### #Po oP# ### ###Numărul maxim de monezi pe care le poate colecta jucătorul dacă pornește din partea stângă este 1, respectiv 2 dacă pornește din partea dreaptă. Deci, pe cel mai rău caz, putem colecta o monedă."
+    },
+    {
+      "title": "Exemplul 3:",
+      "html": "<p><strong>Intrare</strong></p><pre>7 18\n##################\n#................#\n#.o...SX.......o.#\n#.o...X..X.....o.#\n#.o.....XS.....o.#\n#................#\n##################</pre><p><strong>Ieșire</strong></p><pre>0</pre><h3>Explicație</h3><p>În orice direcţie s-ar mişca iniţial jucătorul, pe caz nefavorabil se va afla o mină în direcţia respectivă.<br>\nZona de vizibilitate iniţială este (<code>P</code> este poziția jucătorului):</p><p><code>...</code><br>\n<code>.P.</code><br>\n<code>...</code></p>",
+      "text": "Intrare7 18 ################## #................# #.o...SX.......o.# #.o...X..X.....o.# #.o.....XS.....o.# #................# ##################Ieșire0ExplicațieÎn orice direcţie s-ar mişca iniţial jucătorul, pe caz nefavorabil se va afla o mină în direcţia respectivă. Zona de vizibilitate iniţială este (P este poziția jucătorului):... .P. ..."
+    },
+    {
+      "title": "Exemplul4:",
+      "html": "<p><strong>Intrare</strong></p><pre>7 18\n##################\n#....#...........#\n#.o...SX.......o.#\n#.o...X..X.....o.#\n#.o.....XS.....o.#\n#.........#......#\n##################</pre><p><strong>Ieșire</strong></p><pre>6</pre><h3>Explicație</h3><p>Jucătorul îşi poate da seama în care celulă a fost plasat iniţial, analizând zona de vizibilitate. Mai exact, acesta se uită dacă iniţial vede un perete în stânga-sus sau dreapta-jos; astfel, ştie exact cum să se poziţioneze pentru a evita minele. Zonele de vizibilitate iniţiale aferente celor două poziţii sunt (<code>P</code> este poziția jucătorului):</p><p><code>#..</code> <code>...</code><br>\n<code>.P.</code> <code>.P.</code><br>\n<code>...</code> <code>..#</code></p>",
+      "text": "Intrare7 18 ################## #....#...........# #.o...SX.......o.# #.o...X..X.....o.# #.o.....XS.....o.# #.........#......# ##################Ieșire6ExplicațieJucătorul îşi poate da seama în care celulă a fost plasat iniţial, analizând zona de vizibilitate. Mai exact, acesta se uită dacă iniţial vede un perete în stânga-sus sau dreapta-jos; astfel, ştie exact cum să se poziţioneze pentru a evita minele. Zonele de vizibilitate iniţiale aferente celor două poziţii sunt (P este poziția jucătorului):#.. ... .P. .P. ... ..#"
+    },
+    {
+      "title": "Exemplul 5:",
+      "html": "<p><strong>Intrare</strong></p><pre>7 18\n##################\n#......X..S....oo#\n##################\n#..o..S.X......o.#\n##########X#######\n#o.....S...X.....#\n##################</pre><p><strong>Ieșire</strong></p><pre>1</pre><h3>Explicație</h3><p>Jucătorul se mută <code>2</code> paşi la stânga. Dacă vede o monedă la stânga, deduce că este în zona din mijloc, o culege şi termină jocul. Dacă nu, ştie că nu este în zona din mijloc, aşa că se mută la dreapta <code>4</code> pași. Observând mai apoi dacă există spaţiu liber în dreapta-sus (minele sunt văzute drept spaţii libere), poate deduce dacă se află în zona de sus sau zona de jos. În ambele cazuri, este liber să colecteze moneda/monezile corespunzătoare. În cel mai nefavorabil caz, însă, va putea colecta o singură monedă. Se poate observa că jucătorul nu se putea muta iniţial spre dreapta, deoarece ar fi riscat să atingă mina din centru pe caz nefavorabil.</p>",
+      "text": "Intrare7 18 ################## #......X..S....oo# ################## #..o..S.X......o.# ##########X####### #o.....S...X.....# ##################Ieșire1ExplicațieJucătorul se mută 2 paşi la stânga. Dacă vede o monedă la stânga, deduce că este în zona din mijloc, o culege şi termină jocul. Dacă nu, ştie că nu este în zona din mijloc, aşa că se mută la dreapta 4 pași. Observând mai apoi dacă există spaţiu liber în dreapta-sus (minele sunt văzute drept spaţii libere), poate deduce dacă se află în zona de sus sau zona de jos. În ambele cazuri, este liber să colecteze moneda/monezile corespunzătoare. În cel mai nefavorabil caz, însă, va putea colecta o singură monedă. Se poate observa că jucătorul nu se putea muta iniţial spre dreapta, deoarece ar fi riscat să atingă mina din centru pe caz nefavorabil."
+    }
+  ],
+  "examples": [
+    {
+      "input": "3 7\n#######\n#Soooo#\n#######",
+      "output": "4",
+      "explanation": "Există o singură poziție de start, deci știm exact de unde va porni jucătorul. În acest caz, jucătorul poate colecta toate monezile."
+    },
+    {
+      "input": "3 8\n########\n#SoXooS#\n########",
+      "output": "1",
+      "explanation": "Sunt două poziții de start, iar jucătorul poate deduce unde este poziționat pe baza zonei de vizibilitate (P este poziția jucătorului):"
+    },
+    {
+      "input": "7 18\n##################\n#................#\n#.o...SX.......o.#\n#.o...X..X.....o.#\n#.o.....XS.....o.#\n#................#\n##################",
+      "output": "0",
+      "explanation": "În orice direcţie s-ar mişca iniţial jucătorul, pe caz nefavorabil se va afla o mină în direcţia respectivă. Zona de vizibilitate iniţială este (P este poziția jucătorului):"
+    },
+    {
+      "input": "7 18\n##################\n#....#...........#\n#.o...SX.......o.#\n#.o...X..X.....o.#\n#.o.....XS.....o.#\n#.........#......#\n##################",
+      "output": "6",
+      "explanation": "Jucătorul îşi poate da seama în care celulă a fost plasat iniţial, analizând zona de vizibilitate. Mai exact, acesta se uită dacă iniţial vede un perete în stânga-sus sau dreapta-jos; astfel, ştie exact cum să se poziţioneze pentru a evita minele. Zonele de vizibilitate iniţiale aferente celor două poziţii sunt (P este poziția jucătorului):"
+    },
+    {
+      "input": "7 18\n##################\n#......X..S....oo#\n##################\n#..o..S.X......o.#\n##########X#######\n#o.....S...X.....#\n##################",
+      "output": "1",
+      "explanation": "Jucătorul se mută 2 paşi la stânga. Dacă vede o monedă la stânga, deduce că este în zona din mijloc, o culege şi termină jocul. Dacă nu, ştie că nu este în zona din mijloc, aşa că se mută la dreapta 4 pași. Observând mai apoi dacă există spaţiu liber în dreapta-sus (minele sunt văzute drept spaţii libere), poate deduce dacă se află în zona de sus sau zona de jos. În ambele cazuri, este liber să colecteze moneda/monezile corespunzătoare. În cel mai nefavorabil caz, însă, va putea colecta o singură monedă. Se poate observa că jucătorul nu se putea muta iniţial spre dreapta, deoarece ar fi riscat să atingă mina din centru pe caz nefavorabil."
+    }
+  ],
+  "constraints": [
+    "Fie S numărul de celule de start ce se află pe hartă. N ≤ 400, M ≤ 400, S ≤ 60.",
+    "Pentru 3 puncte, S = 1, nu există mine și cu excepția primei și ultimei coloane și nu există pereți.",
+    "Pentru 7 puncte, N = 3",
+    "Pentru 12 puncte, S = 1",
+    "Pentru 23 puncte, S = 2",
+    "Pentru 41 puncte, 1 ≤ N, M ≤ 250, 1 ≤ S ≤ 12",
+    "Pentru 14 puncte, nicio restricție suplimentară"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q923386f5a1.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "10",
+    "intrare/ieșire": "tastatură / ecran",
+    "limită timp": "1.8 secunde",
+    "limită memorie": "256 MB / 8 MB",
+    "sursa problemei": "EJOI 2021, ziua 2",
+    "autor": "Lucian Bicsi",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 1.8,
+  "memoryLimitMb": 256,
+  "author": "Lucian Bicsi",
+  "sourceAttribution": "EJOI 2021, ziua 2",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3863/dungeons"
+}

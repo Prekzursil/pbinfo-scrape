@@ -1,0 +1,305 @@
+{
+  "id": 3759,
+  "slug": "cartita",
+  "name": "Cartita",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3759/cartita",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 21,
+      "name": "Probleme cu secvențe",
+      "slug": "probleme-cu-secven-e",
+      "href": "/?pagina=probleme-lista&tag=21"
+    }
+  ],
+  "tags": [
+    "Smenul lui Mars (Difference Arrays)",
+    "Șmenul lui Batog (Square Root Decomposition)",
+    "Range Minimum Query"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Se cunosc înălțimile inițiale ale tuturor celor <code>N</code> grămăjoare și cele <code>U</code> modificări făcute de cârtiță asupra înălțimilor grămăjoarelor de pământ ale morcovilor. Știm că în cadrul unei secvențe continue de morcovi cel mai tentant pentru cârtiță este morcovul cu cea mai mică înălțime a grămăjoarei de pământ. Ajutați-l pe Macarie să identifice înălțimea grămăjoarei celui mai tentant morcov, pentru mai multe intervale date, după efectuarea tuturor modificărilor realizate de cârtiță.</p>",
+      "text": "Se cunosc înălțimile inițiale ale tuturor celor N grămăjoare și cele U modificări făcute de cârtiță asupra înălțimilor grămăjoarelor de pământ ale morcovilor. Știm că în cadrul unei secvențe continue de morcovi cel mai tentant pentru cârtiță este morcovul cu cea mai mică înălțime a grămăjoarei de pământ. Ajutați-l pe Macarie să identifice înălțimea grămăjoarei celui mai tentant morcov, pentru mai multe intervale date, după efectuarea tuturor modificărilor realizate de cârtiță."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>cartita.in</code> conţine pe prima linie un număr natural <code>N</code> având semnificația din enunț.</p><p>Pe următoarea linie se află <code>N</code> numere naturale despărțite prin câte un spațiu, reprezentând în ordine, înălțimile grămăjoarelor de pământ, al <code>i</code>-lea număr reprezentând înălțimea inițială <code>h[i]</code>, a grămăjoarei din dreptul morcovului <code>i</code>. </p><p>Pe a treia linie se află un număr natural <code>U</code> reprezentând numărul de morcovi către care cărtița a săpat galerii. </p><p>Pe următoarele <code>U</code> linii se află câte un triplet de numere naturale <code>pos, x, K</code>, separate între ele prin câte un spațiu, cu semnificația că în urma săpării unei galerii către morcovul <code>pos</code> înălțimea grămăjoarei lui a crescut cu <code>x</code> centimetri, iar celelalte înălțimi se modifică, după regula descrisă în enunț.</p><p>Pe următoarea linie se găsește numărul <code>Q</code> reprezentând numărul de intervale unde se dorește identificarea înălțimii minime a unei grămăjoare corespunzătoare celui mai tentant morcov.</p><p>Pe următoarele <code>Q</code> linii sunt câte două numere naturale <code>L, R</code>, separate între ele printr-un spațiu, reprezentând capetele intervalului de morcovi investigat.</p>",
+      "text": "Fișierul de intrare cartita.in conţine pe prima linie un număr natural N având semnificația din enunț.Pe următoarea linie se află N numere naturale despărțite prin câte un spațiu, reprezentând în ordine, înălțimile grămăjoarelor de pământ, al i-lea număr reprezentând înălțimea inițială h[i], a grămăjoarei din dreptul morcovului i. Pe a treia linie se află un număr natural U reprezentând numărul de morcovi către care cărtița a săpat galerii. Pe următoarele U linii se află câte un triplet de numere naturale pos, x, K, separate între ele prin câte un spațiu, cu semnificația că în urma săpării unei galerii către morcovul pos înălțimea grămăjoarei lui a crescut cu x centimetri, iar celelalte înălțimi se modifică, după regula descrisă în enunț.Pe următoarea linie se găsește numărul Q reprezentând numărul de intervale unde se dorește identificarea înălțimii minime a unei grămăjoare corespunzătoare celui mai tentant morcov.Pe următoarele Q linii sunt câte două numere naturale L, R, separate între ele printr-un spațiu, reprezentând capetele intervalului de morcovi investigat."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fişierul de ieşire <code>cartita.out</code> va conţine <code>Q</code> linii, pe fiecare găsindu-se, în ordine, răspunsul la intervalele investigate.</p>",
+      "text": "Fişierul de ieşire cartita.out va conţine Q linii, pe fiecare găsindu-se, în ordine, răspunsul la intervalele investigate."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 100.000</code></li>\n\t<li><code>1 ≤ U ≤ 300.000</code></li>\n\t<li><code>1 ≤ Q ≤ 200.000</code></li>\n\t<li><code>1 ≤ L ≤ R ≤ N</code></li>\n\t<li>Inițial <code>1 ≤ h[i] ≤ N</code>, pentru fiecare <code>i</code>, <code>1 ≤ i ≤ N</code></li>\n\t<li><code>1 ≤ pos ≤ N</code>, <code>1 ≤ x ≤ 400</code> și <code>-21 ≤ K ≤ 21</code>, <code>K ≠ 0</code></li>\n</ul>",
+      "text": "1 ≤ N ≤ 100.000 1 ≤ U ≤ 300.000 1 ≤ Q ≤ 200.000 1 ≤ L ≤ R ≤ N Inițial 1 ≤ h[i] ≤ N, pentru fiecare i, 1 ≤ i ≤ N 1 ≤ pos ≤ N, 1 ≤ x ≤ 400 și -21 ≤ K ≤ 21, K ≠ 0"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>cartita.in</code></p><pre>6\n1 6 2 4 3 4\n3\n4 5 2\n2 4 1\n4 2 8\n3\n1 6\n2 4\n4 4</pre><p><code>cartita.out</code></p><pre>-19\n-3\n17</pre><h3>Explicație</h3><ul>\n\t<li>După prima galerie săpată către morcovul <code>4</code>, șirul înălțimilor celor <code>N=6</code> grămăjoare a devenit <code>(0, 7, 5, 9, 10, 13)</code>.</li>\n\t<li>După a doua galerie săpată către morcovul <code>2</code>, șirul înălțimilor celor <code>N=6</code> grămăjoare a devenit <code>(3, 11, 10, 15, 17, 21)</code>.</li>\n\t<li>După a treia galerie săpată către morcovul <code>4</code>, șirul înălțimilor celor <code>N=6</code> grămăjoare a devenit <code>(-19, -3, 4, 17, 27, 39)</code></li>\n\t<li>Pe intervalul <code>[1,6]</code>, înălțimea minimă este <code>-19</code>, pe intervalul <code>[2,4]</code>, înălțimea minimă este <code>-3</code>, iar pentru ultimul interval investigat <code>[4,4]</code> înălțimea minimă este <code>17</code>.</li>\n</ul>",
+      "text": "cartita.in6 1 6 2 4 3 4 3 4 5 2 2 4 1 4 2 8 3 1 6 2 4 4 4cartita.out-19 -3 17Explicație După prima galerie săpată către morcovul 4, șirul înălțimilor celor N=6 grămăjoare a devenit (0, 7, 5, 9, 10, 13). După a doua galerie săpată către morcovul 2, șirul înălțimilor celor N=6 grămăjoare a devenit (3, 11, 10, 15, 17, 21). După a treia galerie săpată către morcovul 4, șirul înălțimilor celor N=6 grămăjoare a devenit (-19, -3, 4, 17, 27, 39) Pe intervalul [1,6], înălțimea minimă este -19, pe intervalul [2,4], înălțimea minimă este -3, iar pentru ultimul interval investigat [4,4] înălțimea minimă este 17."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "După prima galerie săpată către morcovul 4, șirul înălțimilor celor N=6 grămăjoare a devenit (0, 7, 5, 9, 10, 13). După a doua galerie săpată către morcovul 2, șirul înălțimilor celor N=6 grămăjoare a devenit (3, 11, 10, 15, 17, 21). După a treia galerie săpată către morcovul 4, șirul înălțimilor celor N=6 grămăjoare a devenit (-19, -3, 4, 17, 27, 39) Pe intervalul [1,6], înălțimea minimă este -19, pe intervalul [2,4], înălțimea minimă este -3, iar pentru ultimul interval investigat [4,4] înălțimea minimă este 17."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 100.000",
+    "1 ≤ U ≤ 300.000",
+    "1 ≤ Q ≤ 200.000",
+    "1 ≤ L ≤ R ≤ N",
+    "Inițial 1 ≤ h[i] ≤ N, pentru fiecare i, 1 ≤ i ≤ N",
+    "1 ≤ pos ≤ N, 1 ≤ x ≤ 400 și -21 ≤ K ≤ 21, K ≠ 0"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q73d4a07c82.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "cartita.in / cartita.out",
+    "limită timp": "0.25 secunde",
+    "limită memorie": "128 MB / 8 MB",
+    "sursa problemei": "ONSEPI, 2021, baraj juniori",
+    "autor": "Dana Lica",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.25,
+  "memoryLimitMb": 128,
+  "author": "Dana Lica",
+  "sourceAttribution": "ONSEPI, 2021, baraj juniori",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3759/cartita"
+}

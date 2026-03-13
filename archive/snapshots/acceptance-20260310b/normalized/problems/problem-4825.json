@@ -1,0 +1,310 @@
+{
+  "id": 4825,
+  "slug": "heavylightdecomposition",
+  "name": "HeavyLightDecomposition",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4825/heavylightdecomposition",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 16,
+      "name": "Teoria Grafurilor",
+      "slug": "teoria-grafurilor",
+      "href": "/?pagina=probleme-lista&tag=16"
+    },
+    {
+      "id": 64,
+      "name": "Arbori cu rădăcină",
+      "slug": "arbori-cu-r-d-cin",
+      "href": "/?pagina=probleme-lista&tag=64"
+    }
+  ],
+  "tags": [
+    "arbori",
+    "Arbori de intervale",
+    "Heavy-Light Decomposition",
+    "Arhiva educațională"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Se dă un arbore cu \\(N\\) noduri înrădăcinat în nodul \\(1\\), unde fiecare nod are un pondere asociat întreg \\(V_i\\). Să se proceseze \\(Q\\) evenimente de următoarele \\(3\\) tipuri:</p><ul>\n\t<li>\\(1 \\ k \\ v\\) – ponderele nodului \\(k\\) devine egal cu \\(v\\)</li>\n\t<li>\\(2 \\ a \\ b\\) – să se afișeze ponderele minim al unui nod de pe drumul simplu de la nodul \\(a\\) la nodul \\(b\\).</li>\n\t<li>\\(3 \\ k\\) – să se afișeze ponderele minim al unui nod din subarborele înrădăcinat în nodul \\(k\\).</li>\n</ul>",
+      "text": "Se dă un arbore cu \\(N\\) noduri înrădăcinat în nodul \\(1\\), unde fiecare nod are un pondere asociat întreg \\(V_i\\). Să se proceseze \\(Q\\) evenimente de următoarele \\(3\\) tipuri: \\(1 \\ k \\ v\\) – ponderele nodului \\(k\\) devine egal cu \\(v\\) \\(2 \\ a \\ b\\) – să se afișeze ponderele minim al unui nod de pe drumul simplu de la nodul \\(a\\) la nodul \\(b\\). \\(3 \\ k\\) – să se afișeze ponderele minim al unui nod din subarborele înrădăcinat în nodul \\(k\\)."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie se vor afla numerele naturale nenule \\(N\\) și \\(Q\\), reprezentând numărul de noduri ale arborelui, respectiv numărul de evenimente care trebuie procesate.</p><p>Pe a doua linie se vor afla \\(N\\) numere întregi, separate prin spații, reprezentând ponderele nodului \\(i\\).</p><p>Pe fiecare dintre următoarele \\(N-1\\) linii se va afla câte o pereche de numere naturale \\(a\\) și \\(b\\), separate prin spații, reprezentând o muchie de la nodul \\(a\\) la nodul \\(b\\).</p><p>Pe fiecare dintre următoarele \\(Q\\) linii, se va afla câte un eveniment, în formatul de mai sus, numerele fiind separate prin spații. </p>",
+      "text": "Pe prima linie se vor afla numerele naturale nenule \\(N\\) și \\(Q\\), reprezentând numărul de noduri ale arborelui, respectiv numărul de evenimente care trebuie procesate.Pe a doua linie se vor afla \\(N\\) numere întregi, separate prin spații, reprezentând ponderele nodului \\(i\\).Pe fiecare dintre următoarele \\(N-1\\) linii se va afla câte o pereche de numere naturale \\(a\\) și \\(b\\), separate prin spații, reprezentând o muchie de la nodul \\(a\\) la nodul \\(b\\).Pe fiecare dintre următoarele \\(Q\\) linii, se va afla câte un eveniment, în formatul de mai sus, numerele fiind separate prin spații."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Pentru fiecare eveniment de tip \\(2\\) sau \\(3\\), se va afișa pe câte o linie răspunsul evenimentului respectiv.</p>",
+      "text": "Pentru fiecare eveniment de tip \\(2\\) sau \\(3\\), se va afișa pe câte o linie răspunsul evenimentului respectiv."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li>\\(1 \\leq N, Q \\leq 200 \\ 000\\)</li>\n\t<li>\\(1 \\leq a_i, b_i, k_i \\leq N\\)</li>\n\t<li>\\(-1 \\ 000 \\ 000 \\ 000 \\leq V_i, v_i \\leq 1 \\ 000 \\ 000 \\ 000\\)</li>\n\t<li>Se recomandă folosirea <a href=\"https://www.geeksforgeeks.org/fast-io-for-competitive-programming/\">fastio</a>.</li>\n</ul>",
+      "text": "\\(1 \\leq N, Q \\leq 200 \\ 000\\) \\(1 \\leq a_i, b_i, k_i \\leq N\\) \\(-1 \\ 000 \\ 000 \\ 000 \\leq V_i, v_i \\leq 1 \\ 000 \\ 000 \\ 000\\) Se recomandă folosirea fastio."
+    },
+    {
+      "title": "Exemplu 1:",
+      "html": "<p><strong>Intrare</strong></p><pre>5 4\n3 1 4 2 5\n1 2\n1 3\n3 4\n3 5\n2 2 5\n3 3\n1 3 0\n2 2 5</pre><p><strong>Ieșire</strong></p><pre>1\n2\n0</pre>",
+      "text": "Intrare5 4 3 1 4 2 5 1 2 1 3 3 4 3 5 2 2 5 3 3 1 3 0 2 2 5Ieșire1 2 0"
+    },
+    {
+      "title": "Exemplu 2:",
+      "html": "<p><strong>Intrare</strong></p><pre>10 6\n10 20 30 40 50 60 70 80 90 100\n1 2\n1 3\n2 4\n2 5\n3 6\n3 7\n4 8\n4 9\n5 10\n2 8 10\n3 2\n1 4 15\n2 8 10\n3 2\n2 6 7</pre><p><strong>Ieșire</strong></p><pre>20\n20\n15\n15\n30</pre>",
+      "text": "Intrare10 6 10 20 30 40 50 60 70 80 90 100 1 2 1 3 2 4 2 5 3 6 3 7 4 8 4 9 5 10 2 8 10 3 2 1 4 15 2 8 10 3 2 2 6 7Ieșire20 20 15 15 30"
+    }
+  ],
+  "examples": [
+    {
+      "input": "5 4\n3 1 4 2 5\n1 2\n1 3\n3 4\n3 5\n2 2 5\n3 3\n1 3 0\n2 2 5",
+      "output": "1\n2\n0"
+    },
+    {
+      "input": "10 6\n10 20 30 40 50 60 70 80 90 100\n1 2\n1 3\n2 4\n2 5\n3 6\n3 7\n4 8\n4 9\n5 10\n2 8 10\n3 2\n1 4 15\n2 8 10\n3 2\n2 6 7",
+      "output": "20\n20\n15\n15\n30"
+    }
+  ],
+  "constraints": [
+    "\\(1 \\leq N, Q \\leq 200 \\ 000\\)",
+    "\\(1 \\leq a_i, b_i, k_i \\leq N\\)",
+    "\\(-1 \\ 000 \\ 000 \\ 000 \\leq V_i, v_i \\leq 1 \\ 000 \\ 000 \\ 000\\)",
+    "Se recomandă folosirea fastio."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q49646e97ed.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Moldovan Robert (moldovan_robert_lol)",
+    "clasa": "11",
+    "intrare/ieșire": "tastatură / ecran",
+    "limită timp": "0.8 secunde",
+    "limită memorie": "128 MB / 128 MB",
+    "sursa problemei": "-",
+    "autor": "-",
+    "dificultate": "dificilă"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.8,
+  "memoryLimitMb": 128,
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4825/heavylightdecomposition"
+}

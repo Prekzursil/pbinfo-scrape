@@ -1,0 +1,89 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4830"><article id="enunt">
+			<p>Există <code>N</code> căsuțe (pătrățele), așezate în ordine, de la stânga la dreapta, numerotate de la 1 la <code>N</code>. În interiorul fiecărei căsuțe putem scrie câte un număr natural. Inițial, în fiecare căsuță scriem același număr <code>0</code>. Executăm, în ordine, <code>Q</code> operații, care pot fi de trei tipuri:</p>
+
+<ul>
+	<li>Primul tip de operație se codifică prin <code>1 st dr nr</code> și înseamnă că în fiecare căsuță cu indicii între <code>st</code> inclusiv și <code>dr</code> exclusiv ștergem numerele care existau înainte și scriem în locul lor același număr <code>nr</code>.</li>
+	<li>Al doilea tip de operație se codifică prin <code>2 poz</code> și rezultatul operației este numărul aflat în căsuța cu indicele <code>poz</code>.</li>
+	<li>Al treilea tip de operație se codifică prin <code>3 st dr</code> și rezultatul operației este numărul de apariții al valorii celei mai mari din căsuțele cu indicii între <code>st</code> inclusiv și <code>dr</code> exclusiv.</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Determinați rezultatele tuturor operațiilor de tip 2 sau 3, în ordinea executării acestora.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>casute.in</code> conține pe prima linie două numere naturale <code>N</code> și <code>Q</code> separate printr-un spațiu, cu semnificația din enunț. Pe fiecare dintre următoarele <code>Q</code> linii se află codificările celor <code>Q</code> operații. Fiecare linie care codifică o operație începe cu un număr natural, reprezentând tipul operației, care poate fi 1, 2 sau 3 și este urmat de un spațiu.</p>
+
+<ul>
+	<li>Dacă tipul operației este 1, atunci urmează trei numere naturale separate prin câte un spațiu: <code>st</code>, <code>dr</code> și <code>nr</code>, cu semnificația din enunț.</li>
+	<li>Dacă tipul operației este 2, atunci urmează un singur număr natural <code>poz</code>, cu semnificația din enunț.</li>
+	<li>Dacă tipul operației este 3, atunci urmează două numere naturale separate printr-un spațiu <code>st</code> și <code>dr</code>, cu semnificația din enunț.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>casute.out</code> conține, pentru fiecare operație de tip 2 sau 3, în ordinea în care acestea se regăsesc în fișierul de intrare, pe linii separate, câte un număr natural reprezentând rezultatul operației corespunzătoare.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>Q ≤ 3000</code>;</li>
+	<li><code>N ≤ 1.000.000.000</code>;</li>
+	<li><code>1 ≤ st &lt; dr ≤ N+1</code> pentru orice operație de tipul 1 și 3;</li>
+	<li><code>1 ≤ poz ≤ N</code> pentru orice operație de tipul 2;</li>
+	<li><code>1 ≤ nr ≤ 3000</code> pentru orice operație de tipul 1;</li>
+	<li>în tabelul de mai jos, notăm <code>Op = {1, 2}</code> dacă există numai operații de tipul 1 și 2, sau <code>Op = {1, 2, 3}</code> dacă există operații de toate tipurile (1, 2 și 3);</li>
+	<li>în tabelul de mai jos, notăm <code>D = 1</code> dacă oricare dintre valorile <code>st</code>, <code>dr</code> și <code>poz</code> apar într-o singură operație, sau <code>D = 0</code> dacă se pot și repeta.</li>
+	<li>Pentru 25 de puncte, <code>N ≤ 3000</code>, <code>D = 0</code>, <code>Op = {1, 2}</code></li>
+	<li>Pentru 25 de puncte, <code>N ≤ 3000</code>, <code>D = 0</code>, <code>Op = {1, 2, 3}</code></li>
+	<li>Pentru 25 de puncte, <code>N ≤ 1.000.000.000</code>, <code>D = 1</code>, <code>Op = {1, 2}</code></li>
+	<li>Pentru 15 puncte, <code>N ≤ 1.000.000.000</code>, <code>D = 1</code>, <code>Op = {1, 2, 3}</code></li>
+	<li>Pentru 10 puncte, <code>N ≤ 1.000.000.000</code>, <code>D = 0</code>, <code>Op = {1, 2, 3}</code></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>casute.in</code></p>
+
+<pre>9 12
+1 3 7 4
+1 2 4 5
+1 6 10 3
+2 1
+2 2
+2 3
+2 9
+3 1 10
+3 5 8
+3 1 2
+1 1 4 1
+2 1</pre>
+
+<p><code>casute.out</code></p>
+
+<pre>0
+5
+5
+3
+2
+1
+1
+1</pre>
+
+<h3>Explicație</h3>
+
+<p>Sunt <code>N = 9</code> căsuțe. Inițial numerele din cele 9 căsuțe sunt: <code>0 0 0 0 0 0 0 0 0</code> (scriem <code>0</code> pe toate pozițiile).<br>
+După prima operație: <code>1 3 7 4</code>, numerele devin: <code>0 0 4 4 4 4 0 0 0</code> (scriem <code>4</code> pe pozițiile <code>3</code>, <code>4</code>, <code>5</code> și <code>6</code>).<br>
+După a doua operație: <code>1 2 4 5</code>, numerele devin: <code>0 5 5 4 4 4 0 0 0</code> (scriem <code>5</code> pe pozițiile <code>2</code> și <code>3</code>).<br>
+După a treia operație: <code>1 6 10 3</code>, numerele devin: <code>0 5 5 4 4 3 3 3 3</code> (scriem <code>3</code> pe pozițiile <code>6</code>, <code>7</code>, <code>8</code> și <code>9</code>).<br>
+Rezultatul pentru a patra operație: <code>2 1</code> este <code>0</code>.<br>
+Rezultatul pentru a cincea operație: <code>2 2</code> este <code>5</code>.<br>
+Rezultatul pentru a șasea operație: <code>2 3</code> este <code>5</code>.<br>
+Rezultatul pentru a șaptea operație: <code>2 9</code> este <code>3</code>.<br>
+Rezultatul pentru a opta operație: <code>3 1 10</code> este <code>2</code>, deoarece maximul din toate căsuțele este <code>5</code> iar acesta apare de două ori.<br>
+Rezultatul pentru a noua operație: <code>3 5 8</code> este <code>1</code>, deoarece maximul din căsuțele cu valorile: <code>4 3 3</code> este <code>4</code> iar acesta apare o dată.<br>
+Rezultatul pentru a zecea operație: <code>3 1 2</code> este <code>1</code>, deoarece maximul din căsuțele cu valorile: <code>0</code> este <code>0</code> iar acesta apare o dată.<br>
+După a unsprezecea operație: <code>1 1 4 1</code>, numerele devin: <code>1 1 1 4 4 3 3 3 3</code> (scriem <code>1</code> pe pozițiile <code>1</code>, <code>2</code> și <code>3</code>).<br>
+Rezultatul pentru a doisprezecea operație: <code>2 1</code> este <code>1</code>.</p>		</article>
+		</body></html>

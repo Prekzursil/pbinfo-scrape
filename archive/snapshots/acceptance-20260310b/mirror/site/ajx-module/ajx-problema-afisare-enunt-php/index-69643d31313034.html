@@ -1,0 +1,60 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1104"><article id="enunt">
+			<p>Se consideră <code>N</code> vectori cu elemente întregi, numerotați de la <code>1</code> la <code>N</code>, sortați crescător, fiecare vector având un număr precizat de elemente.</p>
+
+<h1>Cerinţă</h1>
+
+<p>Să se răspundă la <code>Q</code> întrebări de tipul:<br>
+a) <code>1 i j</code>, cu semnificaţia: care este minimul dintre modulele diferențelor oricăror două elemente, primul element aparținând vectorului numerotat cu <code>i</code>, iar cel de al doilea element aparținând vectorului numerotat cu <code>j</code> ?<br>
+b) <code>2 i j</code>, cu semnificația: care este valoarea ce se găsește pe poziția mediană în vectorul obținut prin interclasarea vectorilor având numerele de ordine <code>i,i+1,…,j</code>  (<code>i&lt;j</code>).</p>
+
+<h1>Date de intrare </h1>
+
+<p>Fişierul de intrare <code>qvect.in</code> conţine pe prima linie două numerele naturale <code>N Q</code>, separate printr-un spațiu, ce reprezintă numărul de vectori, respectiv numărul de întrebări. </p>
+
+<p>Pe fiecare dintre următoarele <code>N</code> linii se găsește descrierea unui vector sub forma: <code>k a</code><sub><code>1</code></sub><code> a</code><sub><code>2</code></sub><code> … a</code><sub><code>k</code></sub>, unde <code>k</code> reprezintă numărul de elemente, iar <code>a</code><sub><code>1</code></sub><code> a</code><sub><code>2</code></sub><code> … a</code><sub><code>k</code></sub> reprezintă elementele vectorului, separate prin câte un spațiu.</p>
+
+<p>Pe fiecare dintre următoarele <code>Q</code> linii se găsește descrierea unei întrebări sub forma unui triplet de numere naturale: <code>t i j</code>, separate prin câte un spațiu, unde <code>t</code> reprezintă tipul întrebării şi poate lua numai valorile <code>1</code> sau <code>2</code>, iar <code>i</code> și <code>j</code> au semnificația precizată în cerinţă.</p>
+
+<h1>Date de ieşire</h1>
+
+<p>Fişierul de ieşire <code>qvect.out</code> va  conţine <code>Q</code> numere întregi, câte unul pe linie, reprezentând în ordine, răspunsurile la cele <code>Q</code> întrebări.</p>
+
+<h1>Restricţii:</h1>
+
+<ul>
+	<li><code>1 ≤ N, i, j ≤ 100</code></li>
+	<li><code>1 ≤ Q ≤ 1000</code></li>
+	<li><code>1 ≤ t ≤ 2</code></li>
+	<li><code>1 ≤ k ≤ 5000</code></li>
+	<li><code>-1 000 000 000 ≤ a</code><sub><code>p</code></sub><code> ≤ 1 000 000 000</code></li>
+	<li>Prin valoarea aflată pe poziția mediană a unui vector <code>a</code> cu <code>k</code> elemente se înțelege valoarea elementului situat pe poziţia  <code>[k/2]</code>, adică partea întreagă a lui <code>k / 2</code>.</li>
+	<li>15% dintre teste vor conține numai întrebări de tipul <code>1</code></li>
+	<li>15% dintre teste vor conține numai întrebări de tipul <code>2</code></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>qvect.in</code></p>
+
+<pre>3 3
+7 1 4 5 8 11 18 19
+6 2 4 5 10 21 29
+4 13 14 15 15
+2 2 3
+1 2 3
+2 1 3</pre>
+
+<p><code>qvect.out</code></p>
+
+<pre>13
+3
+10</pre>
+
+<h1>Explicație</h1>
+
+<p>Prima întrebare este de tipul <code>2</code>. Vectorul nou obținut prin interclasarea vectorilor numerotați cu <code>2</code> și cu <code>3</code> este următorul: <code>2,4,5,10,13,14,15,15,21,29</code> și conține <code>6+4=10</code> elemente, valoarea elementului median este <code>13</code></p>
+
+<p>A doua întrebare este de tipul <code>1</code>. Diferența minimă se obține pentru perechea <code>(10,13)</code>, unde valoarea <code>10</code> aparține vectorului numerotat cu <code>2</code>, iar valoarea <code>13</code> aparține vectorului numerotat cu <code>3</code>.</p>
+
+<p>A treia întrebare este de tipul <code>2</code>. Poziția mediană în vectorul nou obținut prin interclasare este <code>(7+6+4)/2 = 8</code>, deci  valoarea ce se găsește pe poziția mediană este <code>10</code>.</p>		</article>
+		</body></html>

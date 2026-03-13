@@ -1,0 +1,318 @@
+{
+  "id": 4128,
+  "slug": "iluminat",
+  "name": "iluminat",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4128/iluminat",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 46,
+      "name": "Tablouri bidimensionale (matrice)",
+      "slug": "tablouri-bidimensionale-matrice",
+      "href": "/?pagina=probleme-lista&tag=46"
+    },
+    {
+      "id": 80,
+      "name": "Parcurgerea matricelor pătratice",
+      "slug": "parcurgerea-matricelor-p-tratice",
+      "href": "/?pagina=probleme-lista&tag=80"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Cunoscând numerele naturale nenule <code>n</code> și <code>k</code>, precum și numărul de stâlpi de iluminat din fiecare cartier, să se determine:</p><ul>\n\t<li>Câți stâlpi de iluminat se află în cartierul cu număr maxim de stâlpi de iluminat la etapa cu numărul <code>k</code> din procedeul de stingere a becurilor?</li>\n\t<li>Câte becuri se sting, în total, la etapa cu numărul <code>k</code>?</li>\n\t<li>Care este numărul maxim de becuri aprinse într-o zonă pătratică a orașului de dimensiune <code>k x k</code>, înainte de a începe stingerea becurilor?</li>\n</ul>",
+      "text": "Cunoscând numerele naturale nenule n și k, precum și numărul de stâlpi de iluminat din fiecare cartier, să se determine: Câți stâlpi de iluminat se află în cartierul cu număr maxim de stâlpi de iluminat la etapa cu numărul k din procedeul de stingere a becurilor? Câte becuri se sting, în total, la etapa cu numărul k? Care este numărul maxim de becuri aprinse într-o zonă pătratică a orașului de dimensiune k x k, înainte de a începe stingerea becurilor?"
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>iluminat.in</code> conține pe prima linie o cifră <code>c</code> (<code>1</code>, <code>2</code> sau <code>3</code>), reprezentând cerința cerută. Pe linia următoare se găsesc două numere naturale nenule <code>n</code> și <code>k</code>, separate printr-un spațiu. Pe următoarele <code>n</code> linii se află <code>n</code><sup><code>2</code></sup> numere naturale distincte, câte <code>n</code> pe fiecare linie, separate prin câte un spațiu, cu semnificația din enunț. </p>",
+      "text": "Fișierul de intrare iluminat.in conține pe prima linie o cifră c (1, 2 sau 3), reprezentând cerința cerută. Pe linia următoare se găsesc două numere naturale nenule n și k, separate printr-un spațiu. Pe următoarele n linii se află n2 numere naturale distincte, câte n pe fiecare linie, separate prin câte un spațiu, cu semnificația din enunț."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>În fișierul de ieșire <code>iluminat.out</code> se va afișa răspunsul în funcție de cerință:</p><ul>\n\t<li>dacă <code>c = 1</code> se va afișa pe prima linie un singur număr reprezentând numărul de stâlpi de iluminat din cartierul cu număr maxim de stâlpi de iluminat la etapa <code>k</code></li>\n\t<li>dacă <code>c = 2</code> se va afișa pe prima linie un singur număr reprezentând câte becuri se sting, în total, la etapa cu numărul <code>k</code></li>\n\t<li>dacă <code>c = 3</code> se va afișa numărul maxim de becuri aprinse într-o zonă pătratică de dimensiune <code>k x k</code> înainte de stingerea becurilor</li>\n</ul>",
+      "text": "În fișierul de ieșire iluminat.out se va afișa răspunsul în funcție de cerință: dacă c = 1 se va afișa pe prima linie un singur număr reprezentând numărul de stâlpi de iluminat din cartierul cu număr maxim de stâlpi de iluminat la etapa k dacă c = 2 se va afișa pe prima linie un singur număr reprezentând câte becuri se sting, în total, la etapa cu numărul k dacă c = 3 se va afișa numărul maxim de becuri aprinse într-o zonă pătratică de dimensiune k x k înainte de stingerea becurilor"
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>c ∈ {1, 2, 3}</code></li>\n\t<li><code>1 ≤ k &lt; n ≤ 1000</code></li>\n\t<li>Numărul de becuri din fiecare cartier este mai mic sau egal cu <code>n</code><sup><code>2</code></sup></li>\n</ul>",
+      "text": "c ∈ {1, 2, 3} 1 ≤ k < n ≤ 1000 Numărul de becuri din fiecare cartier este mai mic sau egal cu n2"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>iluminat.in</code></p><pre>1\n4 2\n1 2 3 4\n16 13 5 6\n12 9 7 14\n10 11 8 15</pre><p><code>iluminat.out</code></p><pre>15</pre><h3>Explicație</h3><p>Cerința este <code>1</code>. Se sting becurile din cartierul având <code>16</code> stâlpi de iluminat, ceea ce duce la stingerea becurilor de pe stâlpii din linia <code>2</code> și din coloana <code>1</code>. Tabloul devine:</p><p><code>0  2  3  4</code><br>\n<code>0  0  0  0</code><br>\n<code>0  9  7 14</code><br>\n<code>0 11  8 15</code></p><p>La etapa a doua, primul cartier în care se sting becurile are <code>15</code> stâlpi de iluminat.</p>",
+      "text": "iluminat.in1 4 2 1 2 3 4 16 13 5 6 12 9 7 14 10 11 8 15iluminat.out15ExplicațieCerința este 1. Se sting becurile din cartierul având 16 stâlpi de iluminat, ceea ce duce la stingerea becurilor de pe stâlpii din linia 2 și din coloana 1. Tabloul devine:0 2 3 4 0 0 0 0 0 9 7 14 0 11 8 15La etapa a doua, primul cartier în care se sting becurile are 15 stâlpi de iluminat."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>iluminat.in</code></p><pre>2\n4 2\n1 2 3 4\n16 13 5 6\n12 9 7 14\n10 11 8 15</pre><p><code>iluminat.out</code></p><pre>52</pre><h3>Explicație</h3><p>Cerința este <code>2</code>. Se sting becurile din cartierul având <code>16</code> stâlpi de iluminat, ceea ce duce la stingerea becurilor de pe stâlpii din linia <code>2</code> și din coloana <code>1</code>. Tabloul devine:</p><p><code>0  2  3  4</code><br>\n<code>0  0  0  0</code><br>\n<code>0  9  7 14</code><br>\n<code>0 11  8 15</code></p><p>La etapa a doua, primul cartier în care se sting becurile are <code>15</code> stâlpi de iluminat, ceea ce duce la stingerea becurilor din linia <code>4</code> și din coloana <code>4</code> din noul tablou. Acesta devine:</p><p><code>0 2 3 0</code><br>\n<code>0 0 0 0</code><br>\n<code>0 9 7 0</code><br>\n<code>0 0 0 0</code></p><p>Numărul total de becuri stinse la etapa cu numărul <code>k=2</code> este: <code>15+11+8+14+4=52</code>.</p>",
+      "text": "iluminat.in2 4 2 1 2 3 4 16 13 5 6 12 9 7 14 10 11 8 15iluminat.out52ExplicațieCerința este 2. Se sting becurile din cartierul având 16 stâlpi de iluminat, ceea ce duce la stingerea becurilor de pe stâlpii din linia 2 și din coloana 1. Tabloul devine:0 2 3 4 0 0 0 0 0 9 7 14 0 11 8 15La etapa a doua, primul cartier în care se sting becurile are 15 stâlpi de iluminat, ceea ce duce la stingerea becurilor din linia 4 și din coloana 4 din noul tablou. Acesta devine:0 2 3 0 0 0 0 0 0 9 7 0 0 0 0 0Numărul total de becuri stinse la etapa cu numărul k=2 este: 15+11+8+14+4=52."
+    },
+    {
+      "title": "Exemplul 3:",
+      "html": "<p><code>iluminat.in</code></p><pre>3\n4 2\n1 2 3 4\n16 13 5 6\n12 9 7 14\n10 11 8 15</pre><p><code>iluminat.out</code></p><pre>50</pre><h3>Explicație</h3><p>Cerința este <code>3</code>. Numărul maxim de becuri aprinse într-o zonă pătratică a orașului de dimensiune <code>2 x 2</code> este <code>50</code>, în zona cu colțul stânga-sus pe linia 2 și coloana 2</p><p><code>16 13</code><br>\n<code>12  9</code></p>",
+      "text": "iluminat.in3 4 2 1 2 3 4 16 13 5 6 12 9 7 14 10 11 8 15iluminat.out50ExplicațieCerința este 3. Numărul maxim de becuri aprinse într-o zonă pătratică a orașului de dimensiune 2 x 2 este 50, în zona cu colțul stânga-sus pe linia 2 și coloana 216 13 12 9"
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cerința este 1. Se sting becurile din cartierul având 16 stâlpi de iluminat, ceea ce duce la stingerea becurilor de pe stâlpii din linia 2 și din coloana 1. Tabloul devine:"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cerința este 2. Se sting becurile din cartierul având 16 stâlpi de iluminat, ceea ce duce la stingerea becurilor de pe stâlpii din linia 2 și din coloana 1. Tabloul devine:"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cerința este 3. Numărul maxim de becuri aprinse într-o zonă pătratică a orașului de dimensiune 2 x 2 este 50, în zona cu colțul stânga-sus pe linia 2 și coloana 2"
+    }
+  ],
+  "constraints": [
+    "c ∈ {1, 2, 3}",
+    "1 ≤ k < n ≤ 1000",
+    "Numărul de becuri din fiecare cartier este mai mic sau egal cu n2"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q652e54687f.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "iluminat.in / iluminat.out",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "ONI 2022, clasa a VI-a",
+    "autor": "Violeta Grecea",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 64,
+  "author": "Violeta Grecea",
+  "sourceAttribution": "ONI 2022, clasa a VI-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4128/iluminat"
+}

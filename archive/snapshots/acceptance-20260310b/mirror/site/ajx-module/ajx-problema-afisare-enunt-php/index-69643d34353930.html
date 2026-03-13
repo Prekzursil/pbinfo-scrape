@@ -1,0 +1,66 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4590"><article id="enunt">
+			<p>Alexandru și Tudor au inventat un joc numit Jocul Divizorilor. La acest joc, fiecare dintre cei doi jucători extrage un șir format din <code>n</code> numere. Alexandru este jucătorul cu numărul 1 si Tudor este jucătorul cu numărul 2. Pentru  fiecare număr <code>x</code> din șir, se obține divizorul său prim care are puterea cea mai mare denumit <code>p</code>-divizor;  dacă numărul <code>x</code> are mai mulți divizori primi care au aceeași putere maximă, atunci <code>p</code>-divizorul este  divizorul prim cel mai mare dintre aceștia. Astfel, <code>p</code>-divizorul numărului <code>36</code> este <code>3</code>, <code>p</code>-divizorul numărului <code>12</code> este <code>2</code>, <code>p</code>-divizorul numărului <code>30</code> este <code>5</code>. Regulile jocului sunt următoarele:</p>
+
+<ul>
+	<li>Fiecare dintre jucători alege primul număr din șirul său, în ordinea dată și determină <code>p</code>-divizorul acestuia.</li>
+	<li>Dintre cei doi <code>p</code>-divizori se alege numărul cel mai mare denumit număr câștigător. Jucătorul care a obținut acest număr primește <code>10</code> puncte. Dacă cei <code>2</code> p-divizori sunt egali atunci reprezintă numere câștigătoare și fiecare jucător primește <code>5</code> puncte .</li>
+	<li>Fiecare dintre jucători alege al doilea număr din șirul său, în ordinea dată și îi determină <code>p</code>-divizorul, conform regulilor anterioare. Se continuă astfel cu alegerea numerelor din cele două șiruri, până la terminarea șirurilor.</li>
+	<li>Jocul este câștigat de către jucătorul care obține punctajul cel mai mare.</li>
+	<li>Dacă jucătorii au punctaje egale la finalul jocului, câștigă jucătorul care a obținut cel mai mare <code>p</code>-divizor, dintre toate numerele câștigătoare.</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care citește numărul <code>n</code>, cele <code>n</code> numere din șirul lui Alexandru, apoi cele <code>n</code> numere din șirul lui Tudor și determină numărul de ordine al câștigătorului jocului, punctajul câștigătorului jocului și cel mai mare număr dintre  toate numerele câștigătoare din joc.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>joc.in</code> conține pe prima linie un număr natural <code>n</code>, ce reprezintă numărul de numere din șirul fiecărui jucător. Pe a doua linie din fișier, se află <code>n</code> numere naturale nenule, separate prin spațiu, ce reprezintă șirul de numere din joc ale lui Alexandru. Pe a treia linie din fișier, se află <code>n</code> numere naturale nenule, separate prin spațiu, ce reprezintă șirul de numere din joc ale lui Tudor.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>joc.out</code> va conține o singură linie pe care se află trei numere naturale, separate prin spațiu, ce reprezintă numărul de ordine al câștigătorului jocului (<code>1</code>, dacă Alexandru câștigă jocul sau <code>2</code>, dacă Tudor câștigă), punctajul câștigătorului jocului și cel mai mare număr dintre toate numerele câștigătoare din joc.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ n ≤ 700</code></li>
+	<li>Orice număr din cele două șiruri ale jucătorilor are cel mult <code>8</code> cifre și este mai mare decât <code>1</code>.</li>
+	<li>Se asigură că pentru testele de intrare utilizate există un singur câștigător.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>joc.in</code></p>
+
+<pre>5
+12 23 45 9 100
+42 24 60 54 225</pre>
+
+<p><code>joc.out</code></p>
+
+<pre>1 30 23</pre>
+
+<h3>Explicație</h3>
+
+<p>Se alege primul număr din cele două șiruri: <code>12</code> (are p-divizor egal cu <code>2</code>), și <code>42</code> (are p-divizor egal cu <code>7</code>), număr câștigator este <code>7</code> și al doilea jucător primește <code>10</code> puncte. <br>
+Se alege al doilea număr din cele două șiruri: <code>23</code> (are p-divizorul <code>23</code>) și <code>24</code> (are p-divizorul <code>2</code>), primul jucător primește <code>10</code> puncte etc.<br>
+Primul jucător are <code>30</code> puncte (<code>0 + 10 + 10 + 5 + 5 = 30</code>), al doilea jucător are <code>20</code> puncte (<code>10 + 0 + 0 + 5 + 5 = 20</code>). Primul jucător câstigă jocul.<br>
+Cel mai mare număr dintre  toate numerele câștigătoare din joc este <code>23</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>joc.in</code></p>
+
+<pre>4
+9 225 7  4
+11 32 16 18</pre>
+
+<p><code>joc.out</code></p>
+
+<pre>2 20 11</pre>
+
+<h3>Explicație</h3>
+
+<p>Ce doi jucători obțin punctaje egale, au <code>20</code> de puncte. Jocul este câștigat de al doilea jucător care are cel mai mare p-divizor câștigător, egal cu <code>11</code>.</p>		</article>
+		</body></html>

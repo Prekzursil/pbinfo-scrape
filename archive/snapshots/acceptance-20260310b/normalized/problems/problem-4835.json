@@ -1,0 +1,338 @@
+{
+  "id": 4835,
+  "slug": "vnoroc",
+  "name": "vnoroc",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4835/vnoroc",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 53,
+      "name": "Programare dinamică",
+      "slug": "programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=53"
+    },
+    {
+      "id": 54,
+      "name": "Probleme diverse de programare dinamică",
+      "slug": "probleme-diverse-de-programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=54"
+    }
+  ],
+  "tags": [
+    "Subșir crescător de lungime maximă"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Cunoscând șirul <code>V</code> modificat de Acilisav:<br>\n1. determinaţi numărul minim de cifre care trebuie să fie eliminate din șirul <code>V</code>, astfel încât acesta să devină talisman norocos;<br>\n2. determinaţi talismanul norocos minim lexicografic, care se obţine eliminând din șirul <code>V</code> un număr minim de cifre.</p>",
+      "text": "Cunoscând șirul V modificat de Acilisav: 1. determinaţi numărul minim de cifre care trebuie să fie eliminate din șirul V, astfel încât acesta să devină talisman norocos; 2. determinaţi talismanul norocos minim lexicografic, care se obţine eliminând din șirul V un număr minim de cifre."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>vnoroc.in</code> conţine pe prima linie numerele naturale <code>C</code> și <code>N</code>, reprezentând cerința care trebuie să fie rezolvată (1 sau 2), respectiv numărul de elemente din șirul <code>V</code>. Pe a doua linie se află <code>N</code> cifre separate prin câte un spațiu, reprezentând elementele șirului <code>V</code>.</p>",
+      "text": "Fișierul de intrare vnoroc.in conţine pe prima linie numerele naturale C și N, reprezentând cerința care trebuie să fie rezolvată (1 sau 2), respectiv numărul de elemente din șirul V. Pe a doua linie se află N cifre separate prin câte un spațiu, reprezentând elementele șirului V."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>vnoroc.out</code> conţine o singură linie, pe care este scris:</p><ul>\n\t<li>dacă <code>C = 1</code>, un număr natural <code>nr</code>, reprezentând numărul minim determinat pentru cerința 1;</li>\n\t<li>dacă <code>C = 2</code>, <code>(N-nr)</code> cifre separate prin câte un spaţiu, reprezentând talismanul norocos minim lexicografic, determinat pentru cerința 2.</li>\n</ul>",
+      "text": "Fișierul de ieșire vnoroc.out conţine o singură linie, pe care este scris: dacă C = 1, un număr natural nr, reprezentând numărul minim determinat pentru cerința 1; dacă C = 2, (N-nr) cifre separate prin câte un spaţiu, reprezentând talismanul norocos minim lexicografic, determinat pentru cerința 2."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2 ≤ N ≤ 1.000.000</code></li>\n\t<li>Cifrele din șirul <code>V</code> sunt mai mici sau egale cu <code>7</code></li>\n\t<li>Spunem că șirul <code>a[1]</code>, <code>a[2]</code>, …, <code>a[N]</code> este mai mic strict din punctul de vedere lexicografic decât șirul <code>b[1]</code>, <code>b[2]</code>, … <code>b[N]</code> dacă există <code>k</code> (<code>1 ≤ k ≤ N</code>), astfel încât <code>a[i] = b[i]</code>, pentru orice <code>1 ≤ i &lt; k</code> şi <code>a[k] &lt; b[k]</code></li>\n\t<li>Pentru 6 puncte, <code>C=1</code>, toate cifrele sunt prime</li>\n\t<li>Pentru 12 puncte, <code>C=1</code>, <code>1 ≤ N ≤ 100</code></li>\n\t<li>Pentru 12 puncte, <code>C=1</code>, <code>100 &lt; N ≤ 1000</code></li>\n\t<li>Pentru 14 puncte, <code>C=1</code>, <code>1000 &lt; N ≤ 1.000.000</code></li>\n\t<li>Pentru 6 puncte, <code>C=2</code>, toate cifrele sunt prime</li>\n\t<li>Pentru 16 puncte, <code>C=2</code>, <code>1 ≤ N ≤ 100</code></li>\n\t<li>Pentru 16 puncte, <code>C=2</code>, <code>100 &lt; N ≤ 1000</code></li>\n\t<li>Pentru 18 puncte, <code>C=2</code>, <code>1000 &lt; N ≤ 1.000.000</code></li>\n</ul>",
+      "text": "2 ≤ N ≤ 1.000.000 Cifrele din șirul V sunt mai mici sau egale cu 7 Spunem că șirul a[1], a[2], …, a[N] este mai mic strict din punctul de vedere lexicografic decât șirul b[1], b[2], … b[N] dacă există k (1 ≤ k ≤ N), astfel încât a[i] = b[i], pentru orice 1 ≤ i < k şi a[k] < b[k] Pentru 6 puncte, C=1, toate cifrele sunt prime Pentru 12 puncte, C=1, 1 ≤ N ≤ 100 Pentru 12 puncte, C=1, 100 < N ≤ 1000 Pentru 14 puncte, C=1, 1000 < N ≤ 1.000.000 Pentru 6 puncte, C=2, toate cifrele sunt prime Pentru 16 puncte, C=2, 1 ≤ N ≤ 100 Pentru 16 puncte, C=2, 100 < N ≤ 1000 Pentru 18 puncte, C=2, 1000 < N ≤ 1.000.000"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>vnoroc.in</code></p><pre>1 5\n4 4 3 6 2</pre><p><code>vnoroc.out</code></p><pre>1</pre><h3>Explicație</h3><p>Pentru ca șirul să devină norocos, este suficient să eliminăm cifra <code>3</code>.</p>",
+      "text": "vnoroc.in1 5 4 4 3 6 2vnoroc.out1ExplicațiePentru ca șirul să devină norocos, este suficient să eliminăm cifra 3."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>vnoroc.in</code></p><pre>2 5\n4 4 3 6 2</pre><p><code>vnoroc.out</code></p><pre>4 4 6 2</pre><h3>Explicație</h3><p>Singura soluţie care se poate obţine eliminând un număr minim de cifre (<code>1</code>) este <code>4 4 6 2</code>.</p>",
+      "text": "vnoroc.in2 5 4 4 3 6 2vnoroc.out4 4 6 2ExplicațieSingura soluţie care se poate obţine eliminând un număr minim de cifre (1) este 4 4 6 2."
+    },
+    {
+      "title": "Exemplul 3:",
+      "html": "<p><code>vnoroc.in</code></p><pre>2 6\n5 7 5 7 5 7</pre><p><code>vnoroc.out</code></p><pre>5 5 5</pre><h3>Explicație</h3><p>Numărul minim de cifre care trebuie să fie eliminate este <code>3</code>. Se pot obţine două talismane norocoase prin eliminarea a câte <code>3</code> cifre: <code>(5, 5, 5)</code> și <code>(7, 7, 7)</code>. Se afișează talismanul norocos minim lexicografic <code>5 5 5</code>.</p>",
+      "text": "vnoroc.in2 6 5 7 5 7 5 7vnoroc.out5 5 5ExplicațieNumărul minim de cifre care trebuie să fie eliminate este 3. Se pot obţine două talismane norocoase prin eliminarea a câte 3 cifre: (5, 5, 5) și (7, 7, 7). Se afișează talismanul norocos minim lexicografic 5 5 5."
+    },
+    {
+      "title": "Exemplul 4:",
+      "html": "<p><code>vnoroc.in</code></p><pre>2 9\n2 3 5 3 7 0 0 5 1</pre><p><code>vnoroc.out</code></p><pre>3 3 0 0 5</pre><h3>Explicație</h3><p>Numărul minim de cifre care trebuie să fie eliminate este <code>4</code>. Se poate obţine un singur talisman norocos <code>(3, 3, 0, 0, 5)</code> prin eliminarea a <code>4</code> cifre.</p>",
+      "text": "vnoroc.in2 9 2 3 5 3 7 0 0 5 1vnoroc.out3 3 0 0 5ExplicațieNumărul minim de cifre care trebuie să fie eliminate este 4. Se poate obţine un singur talisman norocos (3, 3, 0, 0, 5) prin eliminarea a 4 cifre."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Pentru ca șirul să devină norocos, este suficient să eliminăm cifra 3."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Singura soluţie care se poate obţine eliminând un număr minim de cifre (1) este 4 4 6 2."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Numărul minim de cifre care trebuie să fie eliminate este 3. Se pot obţine două talismane norocoase prin eliminarea a câte 3 cifre: (5, 5, 5) și (7, 7, 7). Se afișează talismanul norocos minim lexicografic 5 5 5."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Numărul minim de cifre care trebuie să fie eliminate este 4. Se poate obţine un singur talisman norocos (3, 3, 0, 0, 5) prin eliminarea a 4 cifre."
+    }
+  ],
+  "constraints": [
+    "2 ≤ N ≤ 1.000.000",
+    "Cifrele din șirul V sunt mai mici sau egale cu 7",
+    "Spunem că șirul a[1], a[2], …, a[N] este mai mic strict din punctul de vedere lexicografic decât șirul b[1], b[2], … b[N] dacă există k (1 ≤ k ≤ N), astfel încât a[i] = b[i], pentru orice 1 ≤ i < k şi a[k] < b[k]",
+    "Pentru 6 puncte, C=1, toate cifrele sunt prime",
+    "Pentru 12 puncte, C=1, 1 ≤ N ≤ 100",
+    "Pentru 12 puncte, C=1, 100 < N ≤ 1000",
+    "Pentru 14 puncte, C=1, 1000 < N ≤ 1.000.000",
+    "Pentru 6 puncte, C=2, toate cifrele sunt prime",
+    "Pentru 16 puncte, C=2, 1 ≤ N ≤ 100",
+    "Pentru 16 puncte, C=2, 100 < N ≤ 1000",
+    "Pentru 18 puncte, C=2, 1000 < N ≤ 1.000.000"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q5afffcdc83.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "11",
+    "intrare/ieșire": "vnoroc.in / vnoroc.out",
+    "limită timp": "0.3 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "ONI 2025, baraj juniori",
+    "autor": "Victor Botnaru",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.3,
+  "memoryLimitMb": 64,
+  "author": "Victor Botnaru",
+  "sourceAttribution": "ONI 2025, baraj juniori",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4835/vnoroc"
+}

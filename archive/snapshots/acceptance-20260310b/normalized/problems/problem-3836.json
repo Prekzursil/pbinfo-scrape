@@ -1,0 +1,304 @@
+{
+  "id": 3836,
+  "slug": "caesar-legions",
+  "name": "Caesar Legions",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3836/caesar-legions",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 53,
+      "name": "Programare dinamică",
+      "slug": "programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=53"
+    },
+    {
+      "id": 54,
+      "name": "Probleme diverse de programare dinamică",
+      "slug": "probleme-diverse-de-programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=54"
+    }
+  ],
+  "tags": [
+    "Range Minimum Query",
+    "Arbori de intervale",
+    "Map"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Generalul vostru preferat, Gaius Julius Caesar se află într-o nouă campanie militară. De data aceasta el deține <code>N</code> soldați numerotați de la <code>1</code> la <code>N</code>. Această armată este definită printr-un vector unidimensional <code>legions</code>, <code>legions[i]</code> înseamnand ca al <code>i</code>-lea soldat face parte din legiunea <code>legions[i]</code>. Julius Caesar vrea să ia cu el în luptă o secvență <code>st.....dr</code> de soldați. Deoarece nu vrea să existe discriminare, odată luat un soldat dintr-o legiune <code>x</code>, toți soldații din legiunea <code>x</code> trebuie sa fie prezenți în <code>st....dr</code>. De exemplu dacă legiunile soldaților sunt <code>[1 , 2 , 1]</code> atunci Julius Caesar nu poate lua secvența determinată de primul soldat, deoarece conține un soldat din legiunea <code>1</code>, dar nu îi contine pe toți. Prin urmare secvențele bune ar fi: <code>[1 , 3]</code> și <code>[2 ,2]</code>. Julius Caesar se intreabă câte astfel de intervale de soldați există în armata sa.</p>",
+      "text": "Generalul vostru preferat, Gaius Julius Caesar se află într-o nouă campanie militară. De data aceasta el deține N soldați numerotați de la 1 la N. Această armată este definită printr-un vector unidimensional legions, legions[i] înseamnand ca al i-lea soldat face parte din legiunea legions[i]. Julius Caesar vrea să ia cu el în luptă o secvență st.....dr de soldați. Deoarece nu vrea să existe discriminare, odată luat un soldat dintr-o legiune x, toți soldații din legiunea x trebuie sa fie prezenți în st....dr. De exemplu dacă legiunile soldaților sunt [1 , 2 , 1] atunci Julius Caesar nu poate lua secvența determinată de primul soldat, deoarece conține un soldat din legiunea 1, dar nu îi contine pe toți. Prin urmare secvențele bune ar fi: [1 , 3] și [2 ,2]. Julius Caesar se intreabă câte astfel de intervale de soldați există în armata sa."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>caesar.in</code> conține pe prima linie un număr <code>N</code> reprezentând numărul de soldați pe care îi deține Julius Caesar. Pe a doua linie se află <code>N</code> valori reprezentând legiunile soldaților.</p>",
+      "text": "Fișierul de intrare caesar.in conține pe prima linie un număr N reprezentând numărul de soldați pe care îi deține Julius Caesar. Pe a doua linie se află N valori reprezentând legiunile soldaților."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>caesar.out</code> conține numărul de secvențe cu proprietatea dată.</p>",
+      "text": "Fișierul de ieșire caesar.out conține numărul de secvențe cu proprietatea dată."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>N ≤ 100.000</code>, <code>legions[i] ≤ 1e9</code> oricare <code>i</code> din <code>[1, N]</code>.</li>\n\t<li>Pentru 10 puncte, <code>N ≤ 100</code>, <code>legions[i] ≤ 1e9</code> oricare <code>i</code> din <code>[1, N]</code>.</li>\n\t<li>Pentru alte 10 puncte, <code>N ≤ 1000</code>, <code>legions[i] ≤ 1e9</code>, oricare <code>i</code> din <code>[1, N]</code>.</li>\n\t<li>Pentru alte 10 puncte, <code>N ≤ 100.000</code>, <code>legions[i] ≤ 100</code>, oricare <code>i</code> din <code>[1, N]</code>.</li>\n\t<li>Pentru restul de 70 puncte se respectă restricțiile inițiale.</li>\n</ul>",
+      "text": "N ≤ 100.000, legions[i] ≤ 1e9 oricare i din [1, N]. Pentru 10 puncte, N ≤ 100, legions[i] ≤ 1e9 oricare i din [1, N]. Pentru alte 10 puncte, N ≤ 1000, legions[i] ≤ 1e9, oricare i din [1, N]. Pentru alte 10 puncte, N ≤ 100.000, legions[i] ≤ 100, oricare i din [1, N]. Pentru restul de 70 puncte se respectă restricțiile inițiale."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>caesar.in</code></p><pre>3\n1 2 3</pre><p><code>caesar.out</code></p><pre>6</pre><p><code>caesar.in</code></p><pre>3\n1 2 1 </pre><p><code>caesar.out</code></p><pre>2</pre><h3>Explicație</h3><p>În primul exemplu , orice secvență este bună.<br>\nÎn al doilea exemplu , secvențele bune sunt <code>[1 , 3]</code> și <code>[2 , 2]</code>.</p>",
+      "text": "caesar.in3 1 2 3caesar.out6caesar.in3 1 2 1 caesar.out2ExplicațieÎn primul exemplu , orice secvență este bună. În al doilea exemplu , secvențele bune sunt [1 , 3] și [2 , 2]."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "În primul exemplu , orice secvență este bună. În al doilea exemplu , secvențele bune sunt [1 , 3] și [2 , 2]."
+    }
+  ],
+  "constraints": [
+    "N ≤ 100.000, legions[i] ≤ 1e9 oricare i din [1, N].",
+    "Pentru 10 puncte, N ≤ 100, legions[i] ≤ 1e9 oricare i din [1, N].",
+    "Pentru alte 10 puncte, N ≤ 1000, legions[i] ≤ 1e9, oricare i din [1, N].",
+    "Pentru alte 10 puncte, N ≤ 100.000, legions[i] ≤ 100, oricare i din [1, N].",
+    "Pentru restul de 70 puncte se respectă restricțiile inițiale."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qf1546fe2ce.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Iacob Tudor (IacobTudor)",
+    "clasa": "11",
+    "intrare/ieșire": "caesar.in / caesar.out",
+    "limită timp": "0.2 secunde",
+    "limită memorie": "64 MB / 32 MB",
+    "sursa problemei": "infoleague.net runda 2 problema 3.",
+    "autor": "Cozma Tiberiu Ștefan",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.2,
+  "memoryLimitMb": 64,
+  "author": "Cozma Tiberiu Ștefan",
+  "sourceAttribution": "infoleague.net runda 2 problema 3.",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3836/caesar-legions"
+}

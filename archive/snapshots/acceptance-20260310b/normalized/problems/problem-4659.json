@@ -1,0 +1,321 @@
+{
+  "id": 4659,
+  "slug": "p13",
+  "name": "p13",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4659/p13",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 21,
+      "name": "Probleme cu secvențe",
+      "slug": "probleme-cu-secven-e",
+      "href": "/?pagina=probleme-lista&tag=21"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>1. Să se calculeze numărul de elemente din șirul dat care sunt numere speciale.<br>\n2. Să se calculeze numărul secvențelor din șirul dat care au lungimea cel mult egală cu <code>K</code> și în care un singur element este număr special.<br>\n3. Să se determine și să se afișeze pentru fiecare secvență de lungime <code>K</code> numărul minim de elemente care ar trebui eventual eliminate astfel încât concatenând elementele rămase să obținem un număr special, iar dacă din secvență nu se poate obține un număr special atunci se va afișa <code>-1</code>.</p>",
+      "text": "1. Să se calculeze numărul de elemente din șirul dat care sunt numere speciale. 2. Să se calculeze numărul secvențelor din șirul dat care au lungimea cel mult egală cu K și în care un singur element este număr special. 3. Să se determine și să se afișeze pentru fiecare secvență de lungime K numărul minim de elemente care ar trebui eventual eliminate astfel încât concatenând elementele rămase să obținem un număr special, iar dacă din secvență nu se poate obține un număr special atunci se va afișa -1."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>În fișierul de intrare <code>p13.in</code> se găsesc pe prima linie, separate prin câte un spațiu, <code>C</code>, <code>N</code> și <code>K</code>, unde <code>C</code> reprezintă cerința ce trebuie rezolvată, <code>N</code> numărul de valori care trebuie citite, <code>K</code> lungimea cerută la cerințele 2 și 3. Pe a doua linie, separate prin câte un spațiu se află cele <code>N</code> numere.</p>",
+      "text": "În fișierul de intrare p13.in se găsesc pe prima linie, separate prin câte un spațiu, C, N și K, unde C reprezintă cerința ce trebuie rezolvată, N numărul de valori care trebuie citite, K lungimea cerută la cerințele 2 și 3. Pe a doua linie, separate prin câte un spațiu se află cele N numere."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>În fișierul de ieșire <code>p13.out</code> se va scrie pe prima linie valoarea obținută pentru cerințele 1 și 2, iar pentru cerința 3 se vor afișa valorile obținute separate prin câte un spațiu.</p>",
+      "text": "În fișierul de ieșire p13.out se va scrie pe prima linie valoarea obținută pentru cerințele 1 și 2, iar pentru cerința 3 se vor afișa valorile obținute separate prin câte un spațiu."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ C ≤ 3</code></li>\n\t<li><code>1 ≤ K ≤ N ≤ 100.000</code></li>\n\t<li>Fiecare număr din șir este un număr natural cu cel mult 6 cifre.</li>\n\t<li>Pentru 21 de puncte, <code>C = 1</code></li>\n\t<li>Pentru 40 de puncte, <code>C = 2</code></li>\n\t<li>Pentru 39 de puncte, <code>C = 3</code></li>\n</ul>",
+      "text": "1 ≤ C ≤ 3 1 ≤ K ≤ N ≤ 100.000 Fiecare număr din șir este un număr natural cu cel mult 6 cifre. Pentru 21 de puncte, C = 1 Pentru 40 de puncte, C = 2 Pentru 39 de puncte, C = 3"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>p13.in</code></p><pre>1 4 3\n121 423 43 3003</pre><p><code>p13.out</code></p><pre>2</pre><h3>Explicație</h3><p>Numerele speciale sunt <code>121</code> și <code>3003</code>.</p>",
+      "text": "p13.in1 4 3 121 423 43 3003p13.out2ExplicațieNumerele speciale sunt 121 și 3003."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>p13.in</code></p><pre>2 4 3\n121 423 43 3003</pre><p><code>p13.out</code></p><pre>6</pre><h3>Explicație</h3><p>Secvențele de lungime cel mult 3 care conțin exact un singur număr special sunt: <code>121</code>, <code>121 423</code>, <code>121 423 43</code>, <code>3003</code>, <code>43 3003</code>, <code>423 43 3003</code>.</p>",
+      "text": "p13.in2 4 3 121 423 43 3003p13.out6ExplicațieSecvențele de lungime cel mult 3 care conțin exact un singur număr special sunt: 121, 121 423, 121 423 43, 3003, 43 3003, 423 43 3003."
+    },
+    {
+      "title": "Exemplul 3:",
+      "html": "<p><code>p13.in</code></p><pre>3 4 3\n121 423 43 3003</pre><p><code>p13.out</code></p><pre>0 0</pre><h3>Explicație</h3><p>Prin concatenare ambele secvente de lungime <code>3</code> devin numere speciale <code>12142343</code> și <code>423433003</code>.</p>",
+      "text": "p13.in3 4 3 121 423 43 3003p13.out0 0ExplicațiePrin concatenare ambele secvente de lungime 3 devin numere speciale 12142343 și 423433003."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Numerele speciale sunt 121 și 3003."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Secvențele de lungime cel mult 3 care conțin exact un singur număr special sunt: 121, 121 423, 121 423 43, 3003, 43 3003, 423 43 3003."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Prin concatenare ambele secvente de lungime 3 devin numere speciale 12142343 și 423433003."
+    }
+  ],
+  "constraints": [
+    "1 ≤ C ≤ 3",
+    "1 ≤ K ≤ N ≤ 100.000",
+    "Fiecare număr din șir este un număr natural cu cel mult 6 cifre.",
+    "Pentru 21 de puncte, C = 1",
+    "Pentru 40 de puncte, C = 2",
+    "Pentru 39 de puncte, C = 3"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q95831055d8.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "p13.in / p13.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "ONI 2024, clasa a 5-a",
+    "autor": "Ionel-Vasile Piț-Rada",
+    "dificultate": "ușoară"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "author": "Ionel-Vasile Piț-Rada",
+  "sourceAttribution": "ONI 2024, clasa a 5-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4659/p13"
+}

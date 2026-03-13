@@ -1,0 +1,134 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2471"><article id="enunt">
+			<p>Gigel a inventat un nou limbaj de programare pe care l-a numit <code>GCL</code> (Gigel Campion Language). În <code>GCL</code> pot fi utilizate maxim <code>26</code> variabile notate cu litere mici ale alfabetului englez. Valoarea inițială fiecărei variabile (la începutul execuției programului) este <code>0</code>.</p>
+
+<p>Un program în limbajul <span class="caps">GCL</span> este format dintr-o succesiune de comenzi, câte o comandă pe o linie.</p>
+
+<table class="table table-bordered">
+		<tbody><tr>
+			<th>Comanda </th>
+			<th>Semnificație </th>
+		</tr>
+		<tr>
+			<td> <code>INCEPE</code> </td>
+			<td>Marchează începutul programului (apare o singură dată la început).</td>
+		</tr>
+		<tr>
+			<td> <code>var=expresie</code> </td>
+			<td>Variabilei <code>var</code> din partea stângă a semnului <code>=</code> i se atribuie valoarea expresiei din partea dreaptă. O expresie este formată din unul sau mai mulți termeni între care poate exista operatorul + sau operatorul – (semnificând adunare, respectiv scădere). Un termen poate fi o constantă, o variabilă sau o variabilă precedată de o constantă (ceea ce semnifică faptul că variabila este înmulțită cu constanta). De exemplu, <code>a = 2b + 4 – c</code></td>
+		</tr>
+		<tr>
+			<td> <code>REPETA n</code> </td>
+			<td> Indică începutul unui bloc de instrucțiuni care se va repeta de <code>n</code> ori.</td>
+		</tr>
+		<tr>
+			<td> <code>STOP</code> </td>
+			<td> Indică sfârșitul unui bloc <code>REPETA</code> sau sfârșitul programului</td>
+		</tr>
+		<tr>
+			<td> <code>SCRIE var</code> </td>
+			<td> Afișează o linie de forma următoare:<br>
+<code>var = valoare</code><br>
+unde var reprezintă numele variabilei care se scrie, iar valoare reprezintă valoarea variabilei. Semnul <code>=</code> trebuie să fie precedat și urmat de câte un singur spațiu.</td>
+		</tr>
+</tbody></table>
+
+<h1>Cerința</h1>
+
+<p>Scrieți un program care citește un program scris limbajul <span class="caps">GCL</span> și rezolvă următoarele două cerințe:</p>
+
+<p>1. determină numărul de comenzi <code>SCRIE</code> care se execută;<br>
+2. determină rezultatele afișate de comenzile <code>SCRIE</code> din programul scris în limbajul <span class="caps">GCL</span>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>gcl.in</code> conține pe prima linie cerința (1 sau 2) apoi, pe liniile următoare un program corect<br>
+scris în limbajul <span class="caps">GCL</span>.</p>
+
+<h1>Date de ieșire</h1>
+
+<ul>
+	<li>Dacă cerința este 1, fișierul de ieșire <code>gcl.out</code> va conține pe prima linie numărul de comenzi <code>SCRIE</code> executate.</li>
+	<li>Dacă cerința este 2, fișierul de ieșire <code>gcl.out</code> va conține rezultatele afișate de comenzile <code>SCRIE</code> din programul<br>
+scris în limbajul <span class="caps">GCL</span>, în ordinea executării acestor comenzi.</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>Programul în limbajul <span class="caps">GCL</span> va avea maxim 50 de linii de cel mult 100 de caractere.</li>
+	<li>Comenzile dintr-un program <span class="caps">GCL</span> pot conține oricâte spații, plasate oriunde, dar nu în interiorul cuvintelor cheie (<code>REPETA</code> , <code>INCEPE</code>, <code>STOP</code> , <code>SCRIE</code> ) și al constantelor.</li>
+	<li>Constantele care intervin în expresii sunt numere naturale, <code>0 ≤ constantă ≤ 2000 000 000</code>.</li>
+	<li>Numărul <code>n</code> care apare în comenzile <code>REPETA</code> este un număr natural, <code>0 ≤ n ≤ 10</code> .</li>
+	<li>Nu pot exista comenzi <code>REPETA</code> imbricate. Mai exact, după comanda <code>REPETA</code> și până la comanda <code>STOP</code> care<br>
+marchează sfârșitul comenzii <code>REPETA</code> nu poate apărea o altă comandă <code>REPETA</code>.</li>
+	<li>Valorile calculate în expresii sunt, la orice moment, numere întregi din intervalul <code>[-2</code><sup><code>31</code></sup><code>, 2</code><sup><code>31</code></sup><code>-1]</code>.</li>
+	<li>Toate cuvintele cheie din comenzile <span class="caps">GCL</span> sunt scrise cu litere mari.</li>
+	<li>Pentru cerința 1 se acordă 40% din punctaj, iar pentru cerința 2 se acordă 60% din punctaj.</li>
+</ul>
+
+<h1>Exemplu 1:</h1>
+
+<p><code>gcl.in</code></p>
+
+<pre>1
+INCEPE
+ a = 1
+ b = a
+ SCRIE a
+ SCRIE b
+ REPETA 10
+ c = a + b
+ a = b
+ b = c
+ SCRIE c
+ STOP
+STOP</pre>
+
+<p><code>gcl.out</code></p>
+
+<pre>12</pre>
+
+<h1>Exemplu 2:</h1>
+
+<p><code>gcl.in</code></p>
+
+<pre>2
+INCEPE
+ n = 10
+ k = 1
+ REPETA 9
+ n = n + k
+ SCRIE n
+ k = 3 - k
+ STOP
+STOP </pre>
+
+<p><code>gcl.out</code></p>
+
+<pre>n = 11
+n = 13
+n = 14
+n = 16
+n = 17
+n = 19
+n = 20
+n = 22
+n = 23</pre>
+
+<h1>Exemplu 3:</h1>
+
+<p><code>gcl.in</code></p>
+
+<pre>2
+INCEPE
+ x = 1
+ REPETA 10
+ x = 2x
+ STOP
+ SCRIE x
+STOP </pre>
+
+<p><code>gcl.out</code></p>
+
+<pre>x = 1024 </pre>		</article>
+		</body></html>

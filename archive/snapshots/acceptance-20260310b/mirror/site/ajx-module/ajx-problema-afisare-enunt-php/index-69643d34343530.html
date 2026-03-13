@@ -1,0 +1,65 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4450"><article id="enunt">
+			<p>Un număr natural se numește extrapar dacă poate fi scris ca sumă de puteri distincte ale lui <code>2</code>, puteri care au exponent par. Numărul <code>0</code> este considerat, de asemenea, extrapar. Considerând reprezentarea în baza 2 pentru un număr natural, se numerotează pozițiile cifrelor din reprezentare, de la dreapta către stânga, începând cu <code>0</code>. Asupra reprezentării în baza 2 trebuie să se efectueze o singură operație. Operația constă din eliminarea a exact <code>K</code> cifre situate pe poziții consecutive.</p>
+
+<h1>Cerința</h1>
+
+<p>Fiind date reprezentările în baza 2 pentru <code>N</code> numere naturale, să se determine pentru fiecare dintre ele dacă se poate obține un număr extrapar în condițiile de mai sus. </p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>extrapare.in</code> conține pe prima linie două numere naturale <code>N</code> <code>K</code>, separate printr-un spațiu. Pe fiecare dintre următoarele <code>N</code> linii se află reprezentarea în baza 2 a unui număr natural.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>extrapare.out</code> va conține <code>N</code> linii. Pe cea de a <code>i</code>-a linie (<code>1 ≤ i ≤ N</code>) se va afișa reprezentarea în baza 2 a numărului extrapar obținut prin efectuarea unei singure operații asupra celei de a <code>i</code>-a reprezentări din fișierul de intrare, sau valoarea <code>-1</code> dacă obținerea unui număr extrapar nu este posibilă în acest mod. </p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>0 &lt; N ≤ 10</code></li>
+	<li><code>0 ≤ K &lt; numărul de cifre din oricare reprezentare din fișierul de intrare</code></li>
+	<li>Orice reprezentare din fișierul de intrare are cel mult <code>1.000.000</code> de cifre.</li>
+	<li>Dacă există mai multe modalități de a efectua o operație astfel încât rezultatul să fie un număr extrapar, se va afișa rezultatul pentru acea operație în care poziția primei cifre eliminate este cea mai mare (cea mai din stânga poziție).</li>
+	<li>Se garantează că reprezentările în baza 2 din fișierul de intrare au cifra cea mai din stânga egală cu 1.</li>
+	<li>Reprezentarea în baza 2 a numărului rezultat în urma efectuării operației se va afișa fără zerourile nesemnificative ce se pot forma la stânga lui.</li>
+	<li>Pentru 19 puncte, <code>K = 0</code></li>
+	<li>Pentru 32 puncte, <code>K &gt; 0</code> și lungimea șirurilor <code>≤ 1000</code>.</li>
+	<li>Pentru 49 puncte, <code>K &gt; 0</code> și lungimea șirurilor <code>≤ 1.000.000</code>.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>extrapare.in</code></p>
+
+<pre>9 3
+1001101
+1010000010
+101010001
+111010100
+100100
+100010100
+101000001
+11110
+101000</pre>
+
+<p><code>extrapare.out</code></p>
+
+<pre>-1
+1010000
+10001
+10100
+100
+10100
+1
+-1
+0</pre>
+
+<h3>Explicație</h3>
+
+<p>Trebuie să eliminăm <code>3</code> cifre pentru a forma numere extrapare.<br>
+- Numerele pentru care nu se poate obține un număr extrapar prin eliminarea a trei cifre de pe poziții consecutive sunt primul și al optulea.<br>
+- Din <code>1010000010</code> tăiem cifrele de pe pozițiile <code>0</code>, <code>1</code> și <code>2</code> și obținem <code>1010000</code>.<br>
+- <code>101010001</code> este deja extrapar și vom elimina cele mai din stânga trei cifre.<br>
+- Observăm că dacă rezultatul este format doar din cifre egale cu <code>0</code> se va afișa un singur <code>0</code>.<br>
+Și așa mai departe.</p>		</article>
+		</body></html>

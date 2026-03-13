@@ -1,0 +1,108 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4832"><article id="enunt">
+			<p>Veverițele <span class="caps">ALVN</span> și prietenii săi Simon și Theodore au fost afectați de noua criză de ghinde, așa că au plecat de acasă în căutarea hranei. Din fericire, după o perioadă de căutări, au descoperit o grădină cu $N$ rânduri de stejari cu câte $M$ stejari pe fiecare rând. Fiecare stejar are alocată câte o parcelă de formă pătrată și de dimensiuni identice. Fiecare stejar este bătrân și are ramuri mari, astfel încât produce ghinde care pot cădea nu doar în parcela în care se află, ci și în parcelele adiacente. Fiecare stejar are un coeficient de producție al ghindelor $C$ și va produce ghinde conform următoarei distribuții:</p>
+
+<ul>
+	<li>Produce un număr <code>x[1] * C</code> de ghinde în parcela proprie (centru).</li>
+	<li>Un număr <code>x[2] * C</code> de ghinde ajung în parcelele din inelul imediat exterior (parcelele adiacente direct), ca în desenul alăturat.</li>
+	<li>Un număr <code>x[3] * C</code> de ghinde ajung în celulele din al doilea inel și așa mai departe, pentru fiecare inel exterior.</li>
+</ul>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-alvn-001-jpg.jpg"></p>
+
+<p>Acest model continuă până la cel mai îndepărtat inel. Fiecare stejar are cel mult <code>k</code> inele, incluzând parcela în care se află, iar șirul <code>x[1], x[2], ... x[k]</code> este ordonat descrescător astfel încât stejarul produce cele mai multe ghinde în parcela în care se află, iar numărul scade treptat în parcelele din inelele mai îndepărtate. </p>
+
+<p>Inelele sunt pătratice și concentrice, putând fi incomplete, în funcție de poziția stejarului în grădină. Dacă în grădină este doar grupul format din <span class="caps">ALVN</span> și prietenii săi, aleg pentru grup parcela cu numărul maxim de ghinde. Dacă în grădină sunt două grupuri de veverițe, acestea decid, pentru a nu exista supărări, ca ambele grupuri să aleagă propriile parcele, respectând următoarele reguli:</p>
+
+<ul>
+	<li>Pot mânca doar din copaci ale căror inele nu au nicio parcelă în comun.</li>
+	<li>Vor încerca să maximizeze numărul total de ghinde pe care le consumă.</li>
+</ul>
+
+<p>De exemplu, în imaginea de mai jos, dacă sunt două grupuri de veverițe, ele se pot așeza pe parcelele <code>(1,1)</code> și <code>(4,2)</code>, întrucât <br>
+inelele copacilor (reprezentate cu verde) doar se ating, nu au parcele comune. În schimb, veverițele nu se pot așeza în parcelele <code>(4,6)</code> și <code>(6,6)</code>, deoarece inelele au în comun parcelele din pozițiile <code>(5,5)</code> și <code>(5,6)</code> (în imagine sunt reprezentate cu roșu, inclusiv cele comune). </p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-alvn-002-jpg.jpg"></p>
+
+<p>Se cunosc <code>N</code>, <code>M</code>, coeficienții fiecărui stejar din grădină, <code>k</code>, și valorile <code>x[1], x[2], ... x[k]</code>, cu semnificația din enunț. </p>
+
+<h1>Cerința</h1>
+
+<p>1. Determinați <code>S</code>, numărul maxim de ghinde pe care le poate consuma grupul lui <span class="caps">ALVN</span>, când ei sunt singuri în grădină.<br>
+2. Determinați <code>T</code>, numărul total de ghinde consumate de două grupuri de veverițe aflate în grădină.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului <code>alvn.in</code> se află un număr natural <code>p</code>, care reprezintă cerința (<code>1</code> sau <code>2</code>). Pe a doua linie se află două numere naturale <code>N</code> și <code>M</code>, cu semnificația din enunț. Următoarele <code>N</code> linii conțin câte <code>M</code> valori, reprezentând coeficienții de ghinde produse de fiecare stejar, în ordine, rând după rând și pentru fiecare rând, în ordinea parcelelor pe care se află. Pe linia <code>N+3</code> se află valoarea <code>k</code>, cu semnificația din enunț. Pe linia următoare, se află <code>k</code> valori, reprezentând coeficienții <code>x[1], x[2], ..., x[k]</code>, cu semnificația din enunț.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>alvn.out</code> va conține un singur număr natural, astfel:</p>
+
+<ul>
+	<li>Dacă <code>p=1</code>, atunci se va afișa numărul <code>S</code>, determinat la cerința 1.</li>
+	<li>Dacă <code>p=2</code>, se va afișa numărul <code>T</code>, determinat la cerința 2.</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N, M ≤ 700</code></li>
+	<li><code>1 ≤ K ≤ min(N, M, 200)</code></li>
+	<li><code>0 ≤ x[k] ≤ 100</code>, pentru orice <code>k ∈ {1, 2, ..., K}</code></li>
+	<li><code>0 ≤ coeficientul fiecărui stejar ≤ 100</code></li>
+	<li>Valorile <code>x[1], x[2], ..., x[k]</code> respectă relația <code>x[1] ≥ x[2] ≥ x[3] ≥ ... ≥ x[k]</code></li>
+	<li>Pentru 10 puncte, <code>p=1</code> și <code>N, M ≤ 100, K ≤ 10</code></li>
+	<li>Pentru 35 de puncte, <code>p=1</code> și nu există restricții suplimentare</li>
+	<li>Pentru 20 de puncte, <code>p=2</code> și <code>K ≤ 10</code></li>
+	<li>Pentru 35 de puncte, <code>p=2</code> și nu există restricții suplimentare</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>alvn.in</code></p>
+
+<pre>1
+4 4
+1 0 1 0
+0 2 0 1
+1 0 3 0
+0 1 0 1
+3
+4 2 1</pre>
+
+<p><code>alvn.out</code></p>
+
+<pre>25</pre>
+
+<h3>Explicație</h3>
+
+<p>Numărul de ghinde din fiecare celulă este:<br>
+<code>13 13 15 9</code><br>
+<code>13 23 18 16</code><br>
+<code>15 18 25 14</code> <br>
+<code>9 16 14 14</code><br>
+În parcela <code>(3, 3)</code> sunt ghinde din următorii stejari, din parcelele:  <code>(3, 3)</code>: <code>3 * 4 = 12</code>,  <code>(2, 2)</code>: <code>2 * 2 = 4</code>,  <code>(2, 4)</code>: <code>2 * 1 = 2</code>,  <code>(4, 2)</code>: <code>2 * 1 = 2</code>,  <code>(4, 4)</code>: <code>2 * 1 = 2</code>,  <code>(1, 1)</code>: <code>1 * 1 = 1</code>,  <code>(1, 3)</code>: <code>1 * 1 = 1</code>,  <code>(3, 1)</code>: <code>1 * 1 = 1</code>. Deci, în total sunt <code>25</code> de ghinde.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>alvn.in</code></p>
+
+<pre>2
+4 4
+1 0 1 0
+0 2 0 1
+1 0 3 0
+0 1 0 1
+2
+2 1</pre>
+
+<p><code>alvn.out</code></p>
+
+<pre>11</pre>
+
+<h3>Explicație</h3>
+
+<p>Veverițele se vor așeza în parcelele <code>(1,3)</code> și <code>(4,2)</code>. Inelele acestor copaci nu se vor intersecta. Parcelele din inelele stejarului din <code>(1, 3)</code> sunt verzi, iar cele ale stejarului din <code>(4, 2)</code> sunt mov. Parcela <code>(1,3)</code> va avea valoarea <code>5</code>, iar parcela <code>(4,2)</code> va avea valoarea <code>6</code>.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-alvn-003-jpg.jpg"></p>		</article>
+		</body></html>

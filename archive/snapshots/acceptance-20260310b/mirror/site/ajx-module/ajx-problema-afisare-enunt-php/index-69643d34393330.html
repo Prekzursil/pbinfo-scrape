@@ -1,0 +1,92 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4930"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>În urma construrii drumurilor pentru fortificare a regatului Ofni, constructorii au dat peste un vechi templu. În interiorul templului a fost descoperită o cronică care vorbea despre mișcarea stelelor. Ibit și Luap, doi elevi curioși, au studiat cronica. Au învățat că strămoșii lor au pictat hărți ale cerului nopții sub forma unor matrici cu <code>n</code> linii și <code>m</code> coloane unde <code>*</code> simbolizează o stea iar <code>#</code> un loc gol. Un grup de mai multe stele învecinate pe linie, coloană sau diagonală formează o constelație. </p>
+
+<p>De asemenea au aflat că strămoșii lor au estimat distanța dintre două constelații la începutul universului, la anul <code>0</code>, ca fiind drumul minim prin harta cerului de la orice stea a unei constelații la orice stea a celelilalte prin mișcări pe linie și coloană, din celulă în celulă. Din cauza mișcării corpurilor cerești și a unor concepte avansate de astro-fizică, au estimat că distanța dintre două constelații <code>c</code><sub><code>1</code></sub> și <code>c</code><sub><code>2</code></sub> se modifică în timp în funcție de șirul recurent cu termenii <code>x</code><sub><code>0</code></sub> <code>= distanța inițială</code> și <code>x</code><sub><code>i+1</code></sub> <code>= (a + b * x</code><sub><code>i</code></sub><code>)/(c + d * x</code><sub><code>i</code></sub> <code>)</code> astfel că distanța după <code>k</code> ani de la anul 0 dintre constelațiile <code>c</code><sub><code>1</code></sub> și <code>c</code><sub><code>2</code></sub> este partea întreagă a termenului <code>x</code><sub><code>k</code></sub>, parte întreagă asupra căreia aplicam modulo <code>mod</code> unde <code>mod = 99991</code>. În plus, dacă <code>c</code><sub><code>1</code></sub> și <code>c</code><sub><code>2</code></sub> se pot roti sau oglindi pentru a deveni una cealaltă, cele două se numesc constelații haotice și nu se poate merge din una în cealaltă.</p>
+
+<p>Pe lângă că acum știu cum funcționează distanțele interstelare, cei doi sunt bucuroși să afle că în templu este ascunsă o comoară, dar pentru a deshide ușa tezaurului este nevoie să introducă drumul minim necesar pentru a conecta între ele toate constelațiile în anul curent <code>X</code>. Cei doi sunt nerăbdători să găsească comoara.</p>
+
+<p>Problema are 3 cerințe.<br>
+Pentru <code>c = 1</code>, se cere determinarea numărului de constelații.<br>
+Pentru <code>c = 2</code>,  se cere determinarea drumului de lungime minimă dintre constelațiile care conțin stelele <code>(x, y)</code> sau afișare mesajului <code>nu exista</code> dacă cele două sunt haotice și/sau nu pot fi unite de o succesiune de drumuri formate din stele.<br>
+Pentru <code>c = 3</code>, se cere determinararea lungimii minime a unui drum care conectează toate constelațiile ce pot fi conectate, chiar dacă se formează grupuri de constelații care nu pot fi conectate.</p>
+
+
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>constelatii.in</code> va conține pe prima linie, separate printr-un spațiu, valorile <code>c</code>, <code>n</code> și <code>m</code>, unde <code>c</code> numărul cerinței și <code>n</code> și <code>m</code> au semnificația din enunț. Pe următoarele <code>n</code> linii se află șiruri de câte <code>m</code> caractere neseparate prin spații care reprezintă harta regatului. Dacă <code>c = 2</code>, următoarea linie va conține numărul de întrebări <code>Q</code>, iar pe următarele <code>Q</code> linii se vor afla câte două perechi marcând coordonatele a <code>Q</code> perechi de stele de pe cer. Dacă <code>c = 3</code>, pe linia următoare citirii matricei se vor afla valorile <code>a</code>, <code>b</code>, <code>c</code>, <code>d</code>, <code>X</code> despărțite printr-un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă <code>c = 1</code>, fișierul de ieșire <code>constelatii.out</code> ca conține numărul de constelații. Dacă <code>c = 2</code>, fișierul de ieșire va conține <code>Q</code> linii, pe fiecare fiind scrisă o valoare cu semnificația din enunț sau mesajul <code>nu exista</code>. Dacă <code>c = 3</code> se va afișa o valoare cu proprietatea din enunț.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n, m ≤ 1000</code></li>
+	<li><code>1 ≤ a, b, c, d ≤ 1000</code></li>
+	<li><code>1 ≤ X ≤ 1.000.000.000.000</code></li>
+	<li><code>1 ≤ Q ≤ 10.000</code></li>
+	<li>nr de constelații de pe cer <code>≤ 500</code></li>
+	<li>nr de stele dintr-o constelație <code>≤ 30</code></li>
+	<li><code>15</code> puncte pentru cerința <code>1</code></li>
+	<li><code>15</code> puncte pentru cerința <code>2</code></li>
+	<li><code>70</code> puncte pentru cerința <code>3</code></li>
+	<li>Dacă îi ajutați să ajungă la comoară, Ibit și Luap vă vor răsplăti cu <code>100</code> de puncte.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>constelatii.in</code></p>
+
+<pre>1 10 10
+#****#####
+#*##*#####
+#****#####
+##########
+#*########
+#####*####
+#####*####
+######*###
+#*#######*
+#######**#</pre>
+
+<p><code>constelatii.out</code></p>
+
+<pre>5</pre>
+
+<h1>Exemplul 2</h1>
+
+<p><code>constelatii.in</code></p>
+
+<pre>2 10 10
+#****#####
+#*##*#####
+#****#####
+##########
+#*########
+#####*####
+#####*####
+######*###
+#*#######*
+#######**#
+4
+2 2 9 2
+7 6 9 10
+5 2 9 2
+1 5 10 8</pre>
+
+<p><code>constelati.out</code></p>
+
+<pre>6
+nu exista
+nu exista
+9</pre>
+
+
+<h3>Explicație</h3>
+
+<p>Pe harta cerului sunt <code>5</code> constelații. Constelațiile care conțin perechile de stele <code>(7, 6)</code>; <code>(9, 10)</code> și <code>(5, 2)</code>; <code>(9, 2)</code> sunt haotice.</p>		</article>
+		</body></html>

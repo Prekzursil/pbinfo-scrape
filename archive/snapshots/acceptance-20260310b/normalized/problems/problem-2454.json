@@ -1,0 +1,308 @@
+{
+  "id": 2454,
+  "slug": "bsrec",
+  "name": "bsrec",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/2454/bsrec",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 155,
+      "name": "Căutare binară",
+      "slug": "c-utare-binar",
+      "href": "/?pagina=probleme-lista&tag=155"
+    }
+  ],
+  "tags": [
+    "Cautare binara"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Dându-se <code>N</code> (lungimea vectorului), <code>Q</code> (numărul de query-uri apelate) şi cele <code>Q</code> query-uri, să se determine vectorul iniţial. Dacă există mai multe soluţii se va afişa soluţia minim lexicografică. Dacă nu există soluţie se va afişa valoarea <code>-1</code>. Un vector <code>V1</code> se consideră mai mic lexicografic decât un alt vector <code>V2</code> dacă există un indice <code>i</code> astfel încât: <code>V1[1] = V2[1]</code>, <code>V1[2] = V2[2]</code>, …, <code>V1[i-1] = V2[i-1]</code> și <code>V1[i] &lt; V2[i]</code>. Cele <code>Q</code> query-uri sunt formate din:</p><ul>\n\t<li><code>X</code> – valoarea pe care o căutăm binar în vector</li>\n\t<li><code>M</code> – numărul de iteraţii în algoritmul de căutare binară</li>\n\t<li><code>[a, b]</code> – intervalul în care se aplică algoritmul de cautare binară (perechea <code>(a, b)</code> este considerată prima iteraţie în algoritm)</li>\n\t<li><code>M-1</code> perechi de indici reprezentând valorile afişate de algoritmul de căutare binară în urma fiecărei iteraţii</li>\n</ul>",
+      "text": "Dându-se N (lungimea vectorului), Q (numărul de query-uri apelate) şi cele Q query-uri, să se determine vectorul iniţial. Dacă există mai multe soluţii se va afişa soluţia minim lexicografică. Dacă nu există soluţie se va afişa valoarea -1. Un vector V1 se consideră mai mic lexicografic decât un alt vector V2 dacă există un indice i astfel încât: V1[1] = V2[1], V1[2] = V2[2], …, V1[i-1] = V2[i-1] și V1[i] < V2[i]. Cele Q query-uri sunt formate din: X – valoarea pe care o căutăm binar în vector M – numărul de iteraţii în algoritmul de căutare binară [a, b] – intervalul în care se aplică algoritmul de cautare binară (perechea (a, b) este considerată prima iteraţie în algoritm) M-1 perechi de indici reprezentând valorile afişate de algoritmul de căutare binară în urma fiecărei iteraţii"
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>bsrec.in</code> conține pe prima linie o valoare <code>T</code> reprezentând numărul de teste ce vor fi efectuate. Pentru fiecare din cele <code>T</code> teste se va citi de pe prima linie valoarea <code>N</code> (numărul de elemente ale vectorului), respectiv <code>Q</code> (numărul de query-uri), despărţite prin câte un spaţiu. Următoarele linii descriu cele <code>Q</code> query-uri. În cadrul unui query, prima linie va conține o pereche de numere <code>(X, M)</code> despărţite printr-un spaţiu, unde <code>X</code> reprezintă valoarea căutată în vector, iar <code>M</code> numărul de paşi efectuaţi în căutarea binară a celei mai mici valori din vector care este mai mare decât <code>X</code>. Pe următoarea linie a query-ului se găseşte perechea de valori <code>(a, b)</code> având semnificaţia de mai sus. Următoarele <code>M-1</code> linii conţin perechi <code>(st, dr)</code> de valori naturale despărţite prin câte un spaţiu care reprezintă indicii stânga, respectiv dreapta ce sunt afişaţi în urma fiecărei iteraţii a algoritmului de mai sus.</p>",
+      "text": "Fișierul de intrare bsrec.in conține pe prima linie o valoare T reprezentând numărul de teste ce vor fi efectuate. Pentru fiecare din cele T teste se va citi de pe prima linie valoarea N (numărul de elemente ale vectorului), respectiv Q (numărul de query-uri), despărţite prin câte un spaţiu. Următoarele linii descriu cele Q query-uri. În cadrul unui query, prima linie va conține o pereche de numere (X, M) despărţite printr-un spaţiu, unde X reprezintă valoarea căutată în vector, iar M numărul de paşi efectuaţi în căutarea binară a celei mai mici valori din vector care este mai mare decât X. Pe următoarea linie a query-ului se găseşte perechea de valori (a, b) având semnificaţia de mai sus. Următoarele M-1 linii conţin perechi (st, dr) de valori naturale despărţite prin câte un spaţiu care reprezintă indicii stânga, respectiv dreapta ce sunt afişaţi în urma fiecărei iteraţii a algoritmului de mai sus."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>bsrec.out</code> va conține <code>T</code> linii, linia <code>i</code> conţinând răspunsul pentru testul <code>i</code>. Dacă testul admite soluţie, se vor afişa <code>N</code> numere naturale nenule strict crescătoare ce vor reprezenta valorile vectorului <code>v</code>. Deoarece există mai multe soluţii, se va afişa soluţia minim lexicografică. Dacă testul NU admite soluţie, se va afişa <code>-1</code>.</p>",
+      "text": "Fișierul de ieșire bsrec.out va conține T linii, linia i conţinând răspunsul pentru testul i. Dacă testul admite soluţie, se vor afişa N numere naturale nenule strict crescătoare ce vor reprezenta valorile vectorului v. Deoarece există mai multe soluţii, se va afişa soluţia minim lexicografică. Dacă testul NU admite soluţie, se va afişa -1."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ T ≤ 10</code></li>\n\t<li><code>1 ≤ N, Q ≤ 1000</code></li>\n\t<li><code>1 ≤ X ≤ 1 000 000 000</code></li>\n\t<li><code>1 ≤ st ≤ dr ≤ N</code>, cu excepţia ultimei perechi din căutarea binară unde <code>st &gt; dr</code>.</li>\n\t<li>Pentru <code>20%</code> din punctajul total există teste cu <code>1 ≤ N, Q ≤ 10</code> şi soluţia minim lexicografică admite valori până în <code>20</code>.</li>\n\t<li>Se garantează că <code>M ≤ 15</code>.</li>\n</ul>",
+      "text": "1 ≤ T ≤ 10 1 ≤ N, Q ≤ 1000 1 ≤ X ≤ 1 000 000 000 1 ≤ st ≤ dr ≤ N, cu excepţia ultimei perechi din căutarea binară unde st > dr. Pentru 20% din punctajul total există teste cu 1 ≤ N, Q ≤ 10 şi soluţia minim lexicografică admite valori până în 20. Se garantează că M ≤ 15."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>bsrec.in</code></p><pre>2\n5 3\n3 4\n1 5\n1 2\n2 2\n2 1\n30 3\n2 4\n4 4\n5 4\n25 2\n4 5\n4 3\n5 3\n30 4\n1 5\n1 2\n2 2\n2 1\n3 3\n2 4\n4 4\n5 4\n5 2\n4 5\n4 3</pre><p><code>bsrec.out</code></p><pre>1 3 4 25 26\n-1</pre><h3>Explicație</h3><p>Fișierul conține două teste.<br>\nPrimul test are trei query-uri:<br>\n- Primul query caută binar valoarea <code>3</code> în intervalul <code>[1,5]</code> și face <code>4</code> iterații<br>\n- Cel de al doilea query caută binar valoarea <code>30</code> pe intervalul <code>[2,4]</code> și face <code>3</code> iterații<br>\n- Cel de al treilea query caută binar valoarea <code>25</code> pe intervalul <code>[4,5]</code> și face <code>2</code> iterații<br>\nCel de al doilea test are <code>3</code> query-uri, dar NU admite soluție.</p>",
+      "text": "bsrec.in2 5 3 3 4 1 5 1 2 2 2 2 1 30 3 2 4 4 4 5 4 25 2 4 5 4 3 5 3 30 4 1 5 1 2 2 2 2 1 3 3 2 4 4 4 5 4 5 2 4 5 4 3bsrec.out1 3 4 25 26 -1ExplicațieFișierul conține două teste. Primul test are trei query-uri: - Primul query caută binar valoarea 3 în intervalul [1,5] și face 4 iterații - Cel de al doilea query caută binar valoarea 30 pe intervalul [2,4] și face 3 iterații - Cel de al treilea query caută binar valoarea 25 pe intervalul [4,5] și face 2 iterații Cel de al doilea test are 3 query-uri, dar NU admite soluție."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Fișierul conține două teste. Primul test are trei query-uri: - Primul query caută binar valoarea 3 în intervalul [1,5] și face 4 iterații - Cel de al doilea query caută binar valoarea 30 pe intervalul [2,4] și face 3 iterații - Cel de al treilea query caută binar valoarea 25 pe intervalul [4,5] și face 2 iterații Cel de al doilea test are 3 query-uri, dar NU admite soluție."
+    }
+  ],
+  "constraints": [
+    "1 ≤ T ≤ 10",
+    "1 ≤ N, Q ≤ 1000",
+    "1 ≤ X ≤ 1 000 000 000",
+    "1 ≤ st ≤ dr ≤ N, cu excepţia ultimei perechi din căutarea binară unde st > dr.",
+    "Pentru 20% din punctajul total există teste cu 1 ≤ N, Q ≤ 10 şi soluţia minim lexicografică admite valori până în 20.",
+    "Se garantează că M ≤ 15."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qb34936e018.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/bsrec.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-bsrec-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "bsrec.in / bsrec.out",
+    "limită timp": "0.3 secunde",
+    "limită memorie": "128 MB / 32 MB",
+    "sursa problemei": "ONI 2018 clasa a IX-a",
+    "autor": "Eugenie Daniel Posdărăscu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.3,
+  "memoryLimitMb": 128,
+  "author": "Eugenie Daniel Posdărăscu",
+  "sourceAttribution": "ONI 2018 clasa a IX-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/2454/bsrec"
+}

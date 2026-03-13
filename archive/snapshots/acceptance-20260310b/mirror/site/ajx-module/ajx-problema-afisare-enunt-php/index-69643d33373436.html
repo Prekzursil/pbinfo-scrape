@@ -1,0 +1,64 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3746"><article id="enunt">
+			<p>Ne aflăm înainte de începutul faimoasei curse de anduranță de la Le Mans. După cum bine stiți, într-o cursă de anduranță mașina care a parcurs cea mai mare distanță pe parcursul cursei este considerată câștigătoare. Anul acesta Federația Internațională de Automobilism (<span class="caps">FIA</span>) a făcut câteva schimbări majore cu privire la desfășurarea cursei. Anul acesta cursa va dura exact <code>T</code> secunde și vor participa <code>N</code> echipe, fiecare echipă având câte o mașină, iar fiecare mașină poate pleca de pe oricare dintre cele <code>M</code> poziții din grila de start. De asemenea, <span class="caps">FIA</span> a impus câteva reguli care au nemulțumit echipele participante:</p>
+
+<ul>
+	<li>Fiecare mașină este obligată să se deplaseze cu o viteză constantă pe parcursul întregii curse. Astfel, a <code>i</code>-a mașină se va deplasa cu viteza de <code>v[i]</code> metri pe secundă.</li>
+	<li>Dacă o mașină pleacă de pe o poziție <code>j</code> din grila de start, aceasta se află la o distanță de <code>p[j]</code> metri după linia de start, iar această distanță este luată în considerare ca o distanță deja parcursă în cadrul cursei.</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Ca semn de protest asupra noului regulament, echipele au hotărât să se așeze în grila de start astfel încât diferența maximă dintre distanțele parcurse de oricare două mașini să fie cât mai mică posibil.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie din fișierul <code>lemans.in</code> se vor afla trei numere:</p>
+
+<ul>
+	<li><code>T</code> – durata cursei exprimată în secunde</li>
+	<li><code>N</code> – numărul de mașini</li>
+	<li><code>M</code> – numărul de poziții de start din grilă</li>
+</ul>
+
+<p>Pe a doua linie se află <code>N</code> numere separate prin câte un spațiu, reprezentând șirul <code>v</code> de viteze ale mașinilor. Pe a treia linie se află <code>M</code> numere separate prin câte un spațiu, reprezentând șirul <code>p</code> – distanțele față de linia de start a pozițiilor de start din grilă.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul <code>lemans.out</code> va conține pe prima linie un singur număr reprezentând valoarea minimă posibilă a diferenței maxime dintre distanțele parcurse de oricare două mașini. Pe a doua linie se vor afla <code>N</code> numere între <code>1</code> și <code>M</code> separate prin câte un spațiu, al <code>i</code>-lea număr reprezentând poziția de start din grilă a mașinii cu numărul <code>i</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N, M ≤ 1000</code></li>
+	<li><code>1 ≤ T ≤ 1000</code></li>
+	<li><code>1 ≤ v[i] ≤ 1.000.000</code> pentru orice <code>i ∈ {1,2,...,N}</code></li>
+	<li><code>0 ≤ p[i] ≤ 1.000.000.000</code>; pentru orice <code>i,j ∈ {1,2,...,M}</code></li>
+	<li>Două sau mai multe mașini pot porni de pe aceeași poziție din grila de start</li>
+	<li>În grilă pot exista și poziții neocupate de o mașină</li>
+	<li>Pot exista mai multe distribuții ale mașinilor pe grila de start ce oferă o soluție optimă. Se acceptă orice soluție corectă.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>lemans.in</code></p>
+
+<pre>5 4 3
+2 3 4 5
+7 1 11</pre>
+
+<p><code>lemans.out</code></p>
+
+<pre>5
+3 1 2 2</pre>
+
+<h3>Explicație</h3>
+
+<p>Distanța minimă posibilă este <code>5</code> și se poate obține astfel:</p>
+
+<ul>
+	<li>Mașina <code>1</code> pleacă de pe poziția <code>3</code>, deci va parcurge <code>p[3] + v[1] * 5 = 11 + 2 * 5 = 21</code> metri;</li>
+	<li>Mașina <code>2</code> pleacă de pe poziția <code>1</code>, deci va parcurge <code>p[1] + v[2] * 5 = 7 + 3 * 5 = 22</code> metri;</li>
+	<li>Mașina <code>3</code> pleacă de pe poziția <code>2</code>, deci va parcurge <code>p[2] + v[3] * 5 = 1 + 4 * 5 = 21</code> metri;</li>
+	<li>Mașina <code>4</code> pleacă de pe poziția <code>2</code>, deci va parcurge <code>p[2] + v[4] * 5 = 1 + 5 * 5 = 26</code> metri.</li>
+</ul>		</article>
+		</body></html>

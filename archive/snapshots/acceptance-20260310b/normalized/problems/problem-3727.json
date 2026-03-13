@@ -1,0 +1,340 @@
+{
+  "id": 3727,
+  "slug": "polihroniade",
+  "name": "Polihroniade",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3727/polihroniade",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 25,
+      "name": "Metoda Greedy",
+      "slug": "metoda-greedy",
+      "href": "/?pagina=probleme-lista&tag=25"
+    },
+    {
+      "id": 24,
+      "name": "Probleme diverse cu metoda Greedy",
+      "slug": "probleme-diverse-cu-metoda-greedy",
+      "href": "/?pagina=probleme-lista&tag=24"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Dorind s-o impresioneze pe Elisabeta, Victor apelează la voi, programatori renumiți, să-l ajutați în a transforma matricea <code>A</code> într-o tablă de șah. Pentru aceasta, Victor are nevoie de următoarele informații:<br>\n1. Poate fi transformată matricea <code>A</code> în tablă de șah?<br>\n2. Care este numărul minim de operații necesare pentru a duce la îndeplinire acest scop?<br>\n3. Care ar fi o succesiune de operații care transformă matricea <code>A</code> într-o tablă de șah?</p><p>În cazul ultimei cerințe, pentru a intra în grațiile lui Victor va trebui ca numărul de operații efectuate să fie minim. Totuși, chiar și un număr neminim de operații va fi răsplătit, însă nu într-atât de mult.</p><p>Vi se dau două numere <code>P</code>, <code>T</code> și <code>T</code> matrice <code>A</code>, reprezentând mai multe instanțe ale problemei. Pentru fiecare matrice <code>A</code> dintre cele <code>T</code> va trebui să rezolvați cerința cu numărul <code>P∊{1,2,3}</code> dintre cele listate mai sus.</p>",
+      "text": "Dorind s-o impresioneze pe Elisabeta, Victor apelează la voi, programatori renumiți, să-l ajutați în a transforma matricea A într-o tablă de șah. Pentru aceasta, Victor are nevoie de următoarele informații: 1. Poate fi transformată matricea A în tablă de șah? 2. Care este numărul minim de operații necesare pentru a duce la îndeplinire acest scop? 3. Care ar fi o succesiune de operații care transformă matricea A într-o tablă de șah?În cazul ultimei cerințe, pentru a intra în grațiile lui Victor va trebui ca numărul de operații efectuate să fie minim. Totuși, chiar și un număr neminim de operații va fi răsplătit, însă nu într-atât de mult.Vi se dau două numere P, T și T matrice A, reprezentând mai multe instanțe ale problemei. Pentru fiecare matrice A dintre cele T va trebui să rezolvați cerința cu numărul P∊{1,2,3} dintre cele listate mai sus."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie se găsesc două numere întregi pozitive <code>P</code> și <code>T</code>, reprezentând numarul cerinței de rezolvat și, respectiv, numărul de scenarii pentru care va trebui să rezolvați problema. Urmează cele <code>T</code> instanțe ale problemei, fiecare fiind compusă din <code>N + 1</code> linii: pe prima linie se va afla numarul <code>N</code>, iar pe următoarele <code>N</code> linii câte <code>N</code> cifre binare neseparate prin spații, reprezentând câte o linie a matricei <code>A</code>.</p>",
+      "text": "Pe prima linie se găsesc două numere întregi pozitive P și T, reprezentând numarul cerinței de rezolvat și, respectiv, numărul de scenarii pentru care va trebui să rezolvați problema. Urmează cele T instanțe ale problemei, fiecare fiind compusă din N + 1 linii: pe prima linie se va afla numarul N, iar pe următoarele N linii câte N cifre binare neseparate prin spații, reprezentând câte o linie a matricei A."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Pentru fiecare dintre cele <code>T</code> instanțe se va afișa răspunsul, începând de la o linie nouă, după cum urmează:<br>\n1. Dacă <code>P = 1</code>, atunci se va afișa pe o singură linie <code>1</code> dacă matricea <code>A</code> poate fi transformată în tablă de șah, și <code>0</code> altfel.<br>\n2. Dacă <code>P = 2</code>, atunci se va afișa pe o singură linie un întreg reprezentând numărul minim de interschimbări de linii și/sau coloane necesare pentru a transforma matricea <code>A</code> în tablă de șah.<br>\n3. Dacă <code>P = 3</code>, atunci se va afișa pe o linie un număr <code>X</code>. Apoi, pe fiecare dintre următoarele <code>X</code> linii se va afișa câte o interschimbare de linii sau coloane, după următorul format: <code>L i j</code> are semnificația că liniile <code>i</code> și <code>j</code> se interschimbă, iar <code>C i j</code> are semnificația că se interschimbă coloanele <code>i</code> și <code>j</code>. Matricea obținută după aplicarea celor <code>X</code> operații asupra lui <code>A</code> în ordinea dată trebuie să fie o tablă de șah.</p>",
+      "text": "Pentru fiecare dintre cele T instanțe se va afișa răspunsul, începând de la o linie nouă, după cum urmează: 1. Dacă P = 1, atunci se va afișa pe o singură linie 1 dacă matricea A poate fi transformată în tablă de șah, și 0 altfel. 2. Dacă P = 2, atunci se va afișa pe o singură linie un întreg reprezentând numărul minim de interschimbări de linii și/sau coloane necesare pentru a transforma matricea A în tablă de șah. 3. Dacă P = 3, atunci se va afișa pe o linie un număr X. Apoi, pe fiecare dintre următoarele X linii se va afișa câte o interschimbare de linii sau coloane, după următorul format: L i j are semnificația că liniile i și j se interschimbă, iar C i j are semnificația că se interschimbă coloanele i și j. Matricea obținută după aplicarea celor X operații asupra lui A în ordinea dată trebuie să fie o tablă de șah."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ T ≤ 350</code></li>\n\t<li><code>1 ≤ N ≤ 1 000</code></li>\n\t<li><code>N</code> este par.</li>\n\t<li>Pentru cerințele de tip <code>P = 2</code> și <code>P = 3</code> se garantează că matricea <code>A</code> poate fi transformată în tablă de șah folosind interschimbări de linii și/sau coloane.</li>\n\t<li>Suma valorilor <code>N</code> pentru cele <code>T</code> scenarii nu depășește <code>2.000</code>.</li>\n\t<li>Pentru 40 de puncte, <code>P = 1</code></li>\n\t<li>Pentru alte 34 de puncte, <code>P = 2</code></li>\n\t<li>Pentru alte 26 de puncte, <code>P = 3</code></li>\n\t<li>Dacă există mai multe soluții, oricare este considerată corectă.</li>\n\t<li>Dacă numărul <code>X</code> de operații folosite nu este minim, atunci se acordă 50% din punctajul pe test.</li>\n</ul>",
+      "text": "1 ≤ T ≤ 350 1 ≤ N ≤ 1 000 N este par. Pentru cerințele de tip P = 2 și P = 3 se garantează că matricea A poate fi transformată în tablă de șah folosind interschimbări de linii și/sau coloane. Suma valorilor N pentru cele T scenarii nu depășește 2.000. Pentru 40 de puncte, P = 1 Pentru alte 34 de puncte, P = 2 Pentru alte 26 de puncte, P = 3 Dacă există mai multe soluții, oricare este considerată corectă. Dacă numărul X de operații folosite nu este minim, atunci se acordă 50% din punctajul pe test."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><strong>Intrare</strong></p><pre>1 3\n2\n11\n11\n4\n1100\n1100\n0011\n0011\n2\n10\n01</pre><p><strong>Ieșire</strong></p><pre>0\n1\n1</pre><h3>Explicație</h3><p>Avem <code>P = 1</code>, deci pentru cele <code>T = 3</code> instanțe se cere numai dacă se pot transforma în tablă de șah prin interschimbări de linii și/sau coloane. Pentru prima instanță acest lucru nu este posibil, deoarece nu avem niciun <code>0</code> în matrice. Pentru cea de-a doua instanță, putem efectua următoarele operații:</p><p><img alt=\"\" src=\"/resurse/16a4b0/polihroniade_02.jpg\"></p><p>Pentru ultima instanță, matricea <code>A</code> este deja tablă de șah.</p>",
+      "text": "Intrare1 3 2 11 11 4 1100 1100 0011 0011 2 10 01Ieșire0 1 1ExplicațieAvem P = 1, deci pentru cele T = 3 instanțe se cere numai dacă se pot transforma în tablă de șah prin interschimbări de linii și/sau coloane. Pentru prima instanță acest lucru nu este posibil, deoarece nu avem niciun 0 în matrice. Pentru cea de-a doua instanță, putem efectua următoarele operații:Pentru ultima instanță, matricea A este deja tablă de șah."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><strong>Intrare</strong></p><pre>2 2\n4\n1100\n1100\n0011\n0011\n2\n10\n01</pre><p><strong>Ieșire</strong></p><pre>2\n0</pre><h3>Explicație</h3><p>Pentru al doilea exemplu avem <code>P = 2</code>, deci pentru cele <code>T = 2</code> instanțe se cere numărul minim de operații pentru a le transforma în tablă de șah. Pentru prima instanță, o soluție cu <code>2</code> operații este prezentată mai sus, și nu există soluții mai scurte. Pentru cea de-a doua instanță, matricea este deja tablă de șah, deci răspunsul este <code>0</code>.</p>",
+      "text": "Intrare2 2 4 1100 1100 0011 0011 2 10 01Ieșire2 0ExplicațiePentru al doilea exemplu avem P = 2, deci pentru cele T = 2 instanțe se cere numărul minim de operații pentru a le transforma în tablă de șah. Pentru prima instanță, o soluție cu 2 operații este prezentată mai sus, și nu există soluții mai scurte. Pentru cea de-a doua instanță, matricea este deja tablă de șah, deci răspunsul este 0."
+    },
+    {
+      "title": "Exemplul 3:",
+      "html": "<p><strong>Intrare</strong></p><pre>3 2\n4\n1100\n1100\n0011\n0011\n2\n10\n01</pre><p><strong>Ieșire</strong></p><pre>3\nL 2 4\nC 2 3\nL 1 2\n0</pre><h3>Explicație</h3><p>Al treilea exemplu este exact ca anteriorul, numai că avem <code>P = 3</code>, deci trebuie tipărite exact care sunt operațiile ce aduc matricea la forma de tablă de șah. Pentru punctaj maxim pe acest exemplu, ar fi obligatoriu să afișăm o soluție cu <code>2</code> operații (adică număr minim), cum ar fi cea de mai sus. Cu toate acestea, cu scop demonstrativ, noi venim cu o soluție compusa din <code>3</code> operații prin care obținem doar 50% din punctaj:</p><p><img alt=\"\" src=\"/resurse/16a4b0/polihroniade_03.jpg\"></p>",
+      "text": "Intrare3 2 4 1100 1100 0011 0011 2 10 01Ieșire3 L 2 4 C 2 3 L 1 2 0ExplicațieAl treilea exemplu este exact ca anteriorul, numai că avem P = 3, deci trebuie tipărite exact care sunt operațiile ce aduc matricea la forma de tablă de șah. Pentru punctaj maxim pe acest exemplu, ar fi obligatoriu să afișăm o soluție cu 2 operații (adică număr minim), cum ar fi cea de mai sus. Cu toate acestea, cu scop demonstrativ, noi venim cu o soluție compusa din 3 operații prin care obținem doar 50% din punctaj:"
+    }
+  ],
+  "examples": [
+    {
+      "input": "1 3\n2\n11\n11\n4\n1100\n1100\n0011\n0011\n2\n10\n01",
+      "output": "0\n1\n1",
+      "explanation": "Avem P = 1, deci pentru cele T = 3 instanțe se cere numai dacă se pot transforma în tablă de șah prin interschimbări de linii și/sau coloane. Pentru prima instanță acest lucru nu este posibil, deoarece nu avem niciun 0 în matrice. Pentru cea de-a doua instanță, putem efectua următoarele operații:"
+    },
+    {
+      "input": "2 2\n4\n1100\n1100\n0011\n0011\n2\n10\n01",
+      "output": "2\n0",
+      "explanation": "Pentru al doilea exemplu avem P = 2, deci pentru cele T = 2 instanțe se cere numărul minim de operații pentru a le transforma în tablă de șah. Pentru prima instanță, o soluție cu 2 operații este prezentată mai sus, și nu există soluții mai scurte. Pentru cea de-a doua instanță, matricea este deja tablă de șah, deci răspunsul este 0."
+    },
+    {
+      "input": "3 2\n4\n1100\n1100\n0011\n0011\n2\n10\n01",
+      "output": "3\nL 2 4\nC 2 3\nL 1 2\n0",
+      "explanation": "Al treilea exemplu este exact ca anteriorul, numai că avem P = 3, deci trebuie tipărite exact care sunt operațiile ce aduc matricea la forma de tablă de șah. Pentru punctaj maxim pe acest exemplu, ar fi obligatoriu să afișăm o soluție cu 2 operații (adică număr minim), cum ar fi cea de mai sus. Cu toate acestea, cu scop demonstrativ, noi venim cu o soluție compusa din 3 operații prin care obținem doar 50% din punctaj:"
+    }
+  ],
+  "constraints": [
+    "1 ≤ T ≤ 350",
+    "1 ≤ N ≤ 1 000",
+    "N este par.",
+    "Pentru cerințele de tip P = 2 și P = 3 se garantează că matricea A poate fi transformată în tablă de șah folosind interschimbări de linii și/sau coloane.",
+    "Suma valorilor N pentru cele T scenarii nu depășește 2.000.",
+    "Pentru 40 de puncte, P = 1",
+    "Pentru alte 34 de puncte, P = 2",
+    "Pentru alte 26 de puncte, P = 3",
+    "Dacă există mai multe soluții, oricare este considerată corectă.",
+    "Dacă numărul X de operații folosite nu este minim, atunci se acordă 50% din punctajul pe test."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q4217ce890c.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/polihroniade_01.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-polihroniade-01-jpg.jpg",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/polihroniade_02.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-polihroniade-02-jpg.jpg",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/polihroniade_03.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-polihroniade-03-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "11",
+    "intrare/ieșire": "tastatură / ecran",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "256 MB / 8 MB",
+    "sursa problemei": "OJI 2021, clasele XI-XII",
+    "autor": "Andrei Costin Constantinescu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 256,
+  "author": "Andrei Costin Constantinescu",
+  "sourceAttribution": "OJI 2021, clasele XI-XII",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3727/polihroniade"
+}

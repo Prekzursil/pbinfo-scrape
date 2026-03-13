@@ -1,0 +1,102 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4926"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>În regatul Ofni este Ajunul Crăciunului. Maleficul vrăjitor Irum din regatul vecin Akizif a aruncat un blestem asupra a <code>k</code> orașe din regatul Ofni, orașe care pot fi vizualizate ca matrici cu <code>n</code> <sub> <code>i</code> </sub> linii și <code>m</code> <sub> <code>i</code> </sub> coloane. Acest blestem constă în grinchificarea persoanelor din aceste orașe. Blestemul funcționează în felul următor. Irum alege din fiecare oraș mai multe case (pătrățele unitate ale matricei oraș) și le infectează. După ce termină de infectat casele de pornire, blestemul infectează oricare casă cu cel puțin doi vecini pe linie sau coloană. Cum blestemul se mișcă foarte rapid, transformările se petrec instantaneu. Pentru că era bătrân și obosit, Irum a făcut o greșeală, astfel că dacă blestemul nu va putea infecta întregul oraș, acesta se destramă și nu va avea efect. Dacă toate casele din oraș vor fi afectate, toți locuitorii orașului vor deveni grinchi. </p>
+
+<p>Pentru a salva Crăciunul, bunul vrăjitor Picm trebuie să găsească o vrajă pentru a preschimba locuitorii grinchificați ai orașului înapoi cum erau. Cu ajutorul unui spion, Picm a aflat câte orașe sunt infectate, dimensiunile acestora, precum și câte și care au fost celule infectate inițial de Irum. Picm știe că vraja se află în cartea lui magică, Pbofni, la pagina numărul <code>P</code> unde <code>P</code> este suma <code>ok</code><sub><code>i</code></sub><code>*i</code><sup><code>n</code><sub><code>i</code></sub><code>*m</code><sub><code>i</code></sub><code>%97</code></sup> și <code>ok</code><sub><code>i</code></sub> este <code>1</code> dacă orașul a fost infectat și <code>0</code> în cazul contrar. Cum în Ofni nu s-au inventat încă calculatoarele și apusul e aproape, Picm, bun algoritmician de altfel, vă cere ajutorul pentru a afla numărul paginii și a salva Crăciunul de pandemia de grinchi.</p>
+
+<p>Problema are două cerințe.<br>
+Pentru <code>c = 1</code>, se cere determinarea numărului de orașe grinchificate.<br>
+Pentru <code>c = 2</code>, se cere numărul paginii P la care se află vraja salvatoare.</p>
+
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>pandemica.in</code> va conține pe prima linie, separate printr-un spațiu, valorile <code>c</code> și <code>k</code>, unde <code>c</code> numărul cerinței și <code>k</code> numărul de orașe blestemate. Pe următoarele linii vom avea de <code>k</code> ori următoarele: dimensiunile <code>n</code><sub><code>i</code></sub> și <code>m</code><sub><code>i</code></sub> ale orașelor și numărul <code>x</code><sub><code>i</code> </sub> de case infectate. Pe următoarele <code>x</code><sub><code>i</code></sub> linii se află câte o pereche de numere marcând indicele liniei și coloanei unei celule infectate din orașul cu indicele <code>i</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă <code>c = 1</code>, fișierul de ieșire <code>pandemica.out</code> va conține o singură valoare egală cu numărul de orașe grinchificate (infectate complet). Dacă <code>c = 2</code>, fișierul de ieșire va conține o singură valoare marcând pagina la care se află vraja căutată de Picm.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ k ≤ 200</code></li>
+	<li><code>1 ≤ n</code><sub><code>i</code></sub><code>, m</code><sub><code>i</code></sub><code>≤ 500</code></li>
+	<li><code>10</code> puncte pentru cerința <code>1</code> cu <code>1 ≤ k ≤ 50</code></li>
+	<li><code>30</code> puncte pentru cerința <code>1</code> fără restricții suplimentare</li>
+	<li><code>10</code> puncte pentru cerința <code>2</code> cu <code>n</code><sub><code>i</code></sub><code>, m</code><sub><code>i</code></sub><code>≤ 75</code></li>
+	<li><code>50</code> puncte pentru cerința <code>2</code> fără restricții suplimentare</li>
+	<li>Succes :)</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>pandemica.in</code></p>
+
+<pre>1 3
+5 5 10
+2 2
+2 3
+3 2
+4 2
+1 1
+1 4
+2 5
+4 5
+5 1
+5 4
+4 4 5
+1 2
+2 2
+3 2
+2 1
+2 3
+5 5 4
+2 2
+3 2
+2 3
+3 3</pre>
+
+
+<p><code>pandemica.out</code></p>
+
+<pre>1</pre>
+
+<h1>Exemplul 2</h1>
+
+<p><code>pandemica.in</code></p>
+
+<pre>2 3
+5 5 10
+2 2
+2 3
+3 2
+4 2
+1 1
+1 4
+2 5
+4 5
+5 1
+5 4
+4 4 5
+1 2
+2 2
+3 2
+2 1
+2 3
+5 5 4
+2 2
+3 2
+2 3
+3 3</pre>
+
+
+<p><code>pandemica.out</code></p>
+
+<pre>1</pre>
+
+<h3>Explicație</h3>
+
+<p>Simulând modul în care se extinde infecția observăm că doar primul oraș este grinchificat complet. Astfel, pentru cerința <code>1</code>, rezultatul este <code>1</code> (un singur oraș din cele 3), iar pentru cerința <code>2</code>, numărul paginii este <code>P=1*1</code><sup><code>5*5%97</code></sup><code>+0*2</code><sup><code>4*4%97</code></sup><code>+0*3</code><sup><code>5*5%97</code></sup><code>=1+0+0=1</code>.</p>		</article>
+		</body></html>

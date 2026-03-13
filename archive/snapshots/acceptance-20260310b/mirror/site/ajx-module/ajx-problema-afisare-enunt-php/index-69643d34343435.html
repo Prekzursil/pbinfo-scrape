@@ -1,0 +1,136 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4445"><article id="enunt">
+			<p>Firma TgM produce plăci de umflat baloane. O placă de dimensiuni <code>n</code> x <code>m</code> este formată din <code>n</code> linii cu câte <code>m</code> celule pătrate de latură <code>1</code>, fiecare celulă conținând un dispozitiv de care poate fi prins un balon pentru a fi umflat. Un balon are un nivel de umplere <code>b[i][j] </code> cuprins între <code>1</code> (dezumflat) și nivelul de umplere maxim posibil <code>k</code>. Introducerea unui nou volum de aer într-un balon umplut la nivelul maxim <code>k</code>, conduce la spargerea lui (nivel <code>k+1</code>). Fiecare balon spart este înlocuit automat cu un balon nou aflat la nivelul de umplere <code>1</code> înainte de a introduce un nou volum de aer în oricare dintre baloanele de pe placă.</p>
+
+<p><img align="right" alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-balon-01-jpg.jpg" style="width:350px;"></p>
+
+<p>Introducerea aerului în anumite baloane se face printr-o acționare care constă în următorii pași:</p>
+
+<ul>
+	<li>se conectează un sistem cilindru-piston la dispozitivul dintr-o celulă aflată pe linia <code>x</code> și coloana <code>y</code>;</li>
+	<li>se selectează o valoare naturală nenulă <code>d</code>;</li>
+	<li>se apasă butonul Air aflat pe mânerul pistonului.</li>
+</ul>
+
+<p>În urma acționării butonului Air, fiecare balon situat în pătratul cu colțul din stânga sus <code>(x, y)</code> cu latura <code>d</code> trece de la nivelul de umplere curent la nivelul de umplere imediat următor. Dacă pătratul de latură <code>d</code> depășește una sau mai multe din marginile plăcii, se transmite aer doar în baloanele aflate în interiorul acestuia. La acționarea butonului se consumă un număr de unități de volum de aer egal cu numărul de baloane aflate în interiorul pătratului. </p>
+
+<h1>Cerința</h1>
+
+<p>Dându-se dimensiunile unei plăci <code>n</code> și <code>m</code>, nivelul maxim posibil de umplere a unui balon <code>k</code>, numărul <code>p</code> de acționări ale butonului Air, nivelul inițial de umplere al fiecărui balon de pe placă și pentru fiecare dintre acționările pistonului cele trei valori <code>x</code>, <code>y</code> și <code>d</code> corespunzătoare, scrieți un program care determină și afișează:<br>
+1. numărul de unități de aer consumate după cele <code>p</code> acționări ale butonului Air;<br>
+2. numărul de baloane sparte după cele <code>p</code> acționări ale butonului Air;<br>
+3. nivelul maxim de umplere a unui balon după cele <code>p</code> acționări ale butonului Air și numărul de baloane aflate la acest nivel de umplere.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>balon.in</code> conține pe prima linie un număr natural <code>C</code>, reprezentând cerința ce trebuie  rezolvată (<code>1</code>, <code>2</code> sau <code>3</code>), pe a doua  linie patru numere naturale nenule <code>n</code>, <code>m</code>, <code>k</code> și <code>p</code>, cu semnificația din enunț, pe fiecare din următoarele <code>n</code> linii câte <code>m</code> valori reprezentând nivelul inițial de umplere a baloanelor de pe linia respectivă, iar pe fiecare din ultimele <code>p</code> linii câte trei numere naturale <code>x</code>, <code>y</code> și <code>d</code> corespunzătoare unei acționări a pistonului. Numerele aflate pe aceeași linie a fișierului sunt separate prin câte un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>In fișierul de ieșire <code>balon.out</code>:</p>
+
+<ul>
+	<li>dacă <code>C = 1</code>, se va afișa pe prima linie numărul de unități de aer consumate după cele <code>p</code> acționări ale butonului Air;</li>
+	<li>dacă <code>C = 2</code>, se va afișa pe prima linie numărul de baloane sparte după cele <code>p</code> acționări ale butonului Air;</li>
+	<li>dacă <code>C = 3</code>, se vor afișa pe prima linie două numere separate printr-un spațiu reprezentând nivelul maxim de umplere a unui balon după cele <code>p</code> acționări ale butonului Air și numărul de baloane aflate la acest nivel de umplere.</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>C ∈ {1, 2, 3}</code></li>
+	<li><code>1 ≤ n, m, d ≤ 1000</code></li>
+	<li><code>1 ≤ x ≤ n</code> și <code>1 ≤ y ≤ m</code></li>
+	<li><code>3 ≤ k, p ≤ 1.000.000</code></li>
+	<li><code>1 ≤ b[i][j] ≤ k</code>, pentru oricare <code>1 ≤ i ≤ n</code> și <code>1 ≤ j ≤ m</code></li>
+	<li>Pentru 30 de puncte, <code>C = 1</code></li>
+	<li>Pentru 35 de puncte, <code>C = 2</code></li>
+	<li>Pentru 35 de puncte, <code>C = 3</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>balon.in</code></p>
+
+<pre>1
+4 6 5 2
+1 2 3 3 2 1
+1 1 4 3 2 2
+3 1 1 1 5 3
+2 4 2 4 2 2
+2 1 3
+3 5 3</pre>
+
+<p><code>balon.out</code></p>
+
+<pre>13</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C = 1</code>, <code>n = 4</code>, <code>m = 6</code>, <code>k = 5</code> și <code>p = 2</code>. La prima acționare a pistonului se consumă <code>9</code> unități de volum de aer corespunzătoare elementelor marcate cu galben în figura din enunț. La a doua acționare a pistonului se consumă <code>4</code> unități de volum de aer corespunzătoare elementelor marcate cu roz în figura din enunț, deoarece doar patru dintre baloane sunt în interiorul pătratului de latură <code>3</code> cu colțul din stânga sus în poziția <code>(3, 5)</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>balon.in</code></p>
+
+<pre>2
+4 6 5 3
+1 2 3 3 2 1
+1 1 4 3 2 2
+3 1 1 1 5 3
+2 4 2 4 2 2
+2 1 3
+3 5 3
+3 2 4</pre>
+
+<p><code>balon.out</code></p>
+
+<pre>2</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C = 2</code>, <code>n = 4</code>, <code>m = 6</code>, <code>k = 5</code> și <code>p = 3</code>. După prima acționare corespunzătoare tripletei <code>x = 2</code>, <code>y = 1</code>, <code>d = 3</code> nivelurile de umplere devin:<br>
+<code>1 2 3 3 2 1</code><br>
+<code>2 2 5 3 2 2</code><br>
+<code>4 2 2 1 5 3</code><br>
+<code>3 5 3 4 2 2</code> și nu s-a spart niciun balon.</p>
+
+<p>După a doua acționare corespunzătoare tripletei <code>x = 3</code>, <code>y = 5</code>, <code>d = 3</code> nivelurile de umplere devin:<br>
+<code>1 2 3 3 2 1</code><br>
+<code>2 2 5 3 2 2</code><br>
+<code>4 2 2 1 1 4</code><br>
+<code>3 5 3 4 3 3</code> și s-a spart balonul din poziția <code>x = 3</code>, <code>y = 5</code>, fiind înlocuit automat cu un balon nou.</p>
+
+<p>După a treia acționare corespunzătoare tripletei <code>x = 3</code>, <code>y = 2</code>, <code>d = 4</code> nivelurile de umplere devin:<br>
+<code>1 2 3 3 2 1</code><br>
+<code>2 2 5 3 2 2</code><br>
+<code>4 3 3 2 2 4</code><br>
+<code>3 1 4 5 4 3</code> și s-a spart balonul din poziția <code>x = 4</code>, <code>y = 2</code>, fiind înlocuit automat cu un balon nou.<br>
+În total s-au spart <code>2</code> baloane.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>balon.in</code></p>
+
+<pre>2
+4 6 5 3
+1 2 3 3 2 1
+1 1 4 3 2 2
+3 1 1 1 5 3
+2 4 2 4 2 2
+2 1 3
+3 5 3
+3 2 4</pre>
+
+<p><code>balon.out</code></p>
+
+<pre>5 2</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C = 3</code>, <code>n = 4</code>, <code>m = 6</code>, <code>k = 5</code> și <code>p = 3</code>. După cele trei acționări, nivelurile de umplere au devenit:<br>
+<code>1 2 3 3 2 1</code><br>
+<code>2 2 5 3 2 2</code><br>
+<code>4 3 3 2 2 4</code><br>
+<code>3 1 4 5 4 3</code><br>
+Nivelul maxim de umplere a unui balon este <code>5</code> și sunt două baloane cu acest nivel de umplere.</p>		</article>
+		</body></html>

@@ -1,0 +1,301 @@
+{
+  "id": 4505,
+  "slug": "mewtwo",
+  "name": "Mewtwo",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4505/mewtwo",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 85,
+      "name": "Structuri de date liniare",
+      "slug": "structuri-de-date-liniare",
+      "href": "/?pagina=probleme-lista&tag=85"
+    },
+    {
+      "id": 87,
+      "name": "Coada",
+      "slug": "coada",
+      "href": "/?pagina=probleme-lista&tag=87"
+    }
+  ],
+  "tags": [
+    "Parcurgere in latime",
+    "Algoritmul lui Lee"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Ash este un antrenor Pokemon ambițios, setându-și scopul să devină cel mai bun. Din păcate, rivalul său, Gary, a furat startul și are Pokemoni mai puternici decât cei ai lui Ash.</p><p>Totuși, Ash nu se va da bătut chiar așa ușor! Are un plan de bătaie: în aventurile sale a găsit o clădire misterioasă care poate fi reprezentată ca o matrice de <code>N x M</code>, fiecare celulă reprezentând conținutul unei camere. În această clădire se află: </p><ul>\n\t<li><ins>Ash</ins> (codificat cu <code>A</code>): Ash se află inițial în această cameră</li>\n\t<li><ins>Mewtwo</ins> (codificat cu <code>M</code>): cel mai puternic Pokemon cunoscut de om. Ash are deja un <em>Master Ball</em>, așa că îl va poate prinde pe Mewtwo cu ușurință.</li>\n\t<li><ins>Gary</ins> (codificat cu <code>G</code>): a fost provocat de Ash la o bătălie de Pokemoni și îl așteaptă într-o anumită cameră</li>\n\t<li><ins>cameră liberă</ins> (codificată cu <code>-</code>): Ash poate accesa această cameră</li>\n\t<li><ins>cameră ocupată</ins> (codificată cu <code>#</code>): Ash <b>nu</b> poate accesa această cameră</li>\n</ul><p>Planul său constă în a-l prinde pe Mewtwo, după aceea în a-l confrunta pe Gary. Ash se poate deplasa în cele patru direcții cardinale (<code>N</code>, <code>E</code>, <code>S</code>, <code>V</code>). Știind că o deplasare se face într-o secundă, determinați numărul minim de secunde în care Ash poate ajunge la Mewtwo, apoi la Gary.</p>",
+      "text": "Ash este un antrenor Pokemon ambițios, setându-și scopul să devină cel mai bun. Din păcate, rivalul său, Gary, a furat startul și are Pokemoni mai puternici decât cei ai lui Ash.Totuși, Ash nu se va da bătut chiar așa ușor! Are un plan de bătaie: în aventurile sale a găsit o clădire misterioasă care poate fi reprezentată ca o matrice de N x M, fiecare celulă reprezentând conținutul unei camere. În această clădire se află: Ash (codificat cu A): Ash se află inițial în această cameră Mewtwo (codificat cu M): cel mai puternic Pokemon cunoscut de om. Ash are deja un Master Ball, așa că îl va poate prinde pe Mewtwo cu ușurință. Gary (codificat cu G): a fost provocat de Ash la o bătălie de Pokemoni și îl așteaptă într-o anumită cameră cameră liberă (codificată cu -): Ash poate accesa această cameră cameră ocupată (codificată cu #): Ash nu poate accesa această cameră Planul său constă în a-l prinde pe Mewtwo, după aceea în a-l confrunta pe Gary. Ash se poate deplasa în cele patru direcții cardinale (N, E, S, V). Știind că o deplasare se face într-o secundă, determinați numărul minim de secunde în care Ash poate ajunge la Mewtwo, apoi la Gary."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Programul citește de la tastatură numerele <code>N</code> și <code>M</code>, reprezentând dimensiunile clădirii misterioase.</p><p>Pe următoarele <code>N</code> linii se vor afla șiruri de câte <code>M</code> caractere, reprezentând structura clădirii.</p>",
+      "text": "Programul citește de la tastatură numerele N și M, reprezentând dimensiunile clădirii misterioase.Pe următoarele N linii se vor afla șiruri de câte M caractere, reprezentând structura clădirii."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Se va afișa numărul minim de secunde în care Ash poate ajunge la Mewtwo, apoi la Gary.</p>",
+      "text": "Se va afișa numărul minim de secunde în care Ash poate ajunge la Mewtwo, apoi la Gary."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li>Când zicem cel mai puternic Pokemon, ne referim comparativ cu cei din generația <code>1</code>.</li>\n\t<li>Se garantează că Ash își va putea executa planul de bătaie</li>\n\t<li><code>1 ≤ N ≤ 1.000</code></li>\n\t<li><code>1 ≤ M ≤ 1.000</code></li>\n</ul>",
+      "text": "Când zicem cel mai puternic Pokemon, ne referim comparativ cu cei din generația 1. Se garantează că Ash își va putea executa planul de bătaie 1 ≤ N ≤ 1.000 1 ≤ M ≤ 1.000"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><strong>Intrare</strong></p><pre>8 10\n--#-------\n-A#-------\n--#---M-#-\n--#--####-\n--##-##---\n-----#--G-\n--#--#----\n--########</pre><p><strong>Ieșire</strong></p><pre>21</pre><h3>Explicație</h3><p>Distanța minimă de la Ash până la Mewtwo este <code>12</code>, iar distanța minimă de la Mewtwo panâ la Gary este <code>9</code>. Suma acestor distante este <code>21</code>.</p>",
+      "text": "Intrare8 10 --#------- -A#------- --#---M-#- --#--####- --##-##--- -----#--G- --#--#---- --########Ieșire21ExplicațieDistanța minimă de la Ash până la Mewtwo este 12, iar distanța minimă de la Mewtwo panâ la Gary este 9. Suma acestor distante este 21."
+    }
+  ],
+  "examples": [
+    {
+      "input": "8 10\n--#-------\n-A#-------\n--#---M-#-\n--#--####-\n--##-##---\n-----#--G-\n--#--#----\n--########",
+      "output": "21",
+      "explanation": "Distanța minimă de la Ash până la Mewtwo este 12, iar distanța minimă de la Mewtwo panâ la Gary este 9. Suma acestor distante este 21."
+    }
+  ],
+  "constraints": [
+    "Când zicem cel mai puternic Pokemon, ne referim comparativ cu cei din generația 1.",
+    "Se garantează că Ash își va putea executa planul de bătaie",
+    "1 ≤ N ≤ 1.000",
+    "1 ≤ M ≤ 1.000"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q3d51cb8dbf.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Moldovan Robert (moldovan_robert_lol)",
+    "clasa": "10",
+    "intrare/ieșire": "tastatură / ecran",
+    "limită timp": "0.15 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "-",
+    "autor": "Robert Moldovan",
+    "dificultate": "medie"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.15,
+  "memoryLimitMb": 64,
+  "author": "Robert Moldovan",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4505/mewtwo"
+}

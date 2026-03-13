@@ -1,0 +1,145 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2588"><article id="enunt">
+			<p>Un iepuraş se găseşte într-o grădină plină de surprize. Harta grădinii poate fi reprezentată sub forma unei table dreptunghiulare cu <code>m</code> linii, numerotate de la <code>1</code> la <code>m</code> de sus în jos, şi <code>n</code> coloane, numerotate de la <code>1</code> la <code>n</code> de la stânga la dreapta. În fiecare celulă a acestei grădini se poate găsi cel mult una dintre următoarele surprize: săgeată, pom, zid, trapă, morcov, bombă.</p>
+
+<p>O săgeată indică una din direcţiile nord, sud, est, vest. Odată ajuns într-o celulă conţinând o astfel de săgeată iepuraşul îşi va continua deplasarea în sensul indicat de săgeată, iar aceasta dispare.</p>
+
+<p>Într-o celulă în care se găseşte un pom sau un zid iepuraşul nu poate să pătrundă, însă dacă se “loveşte” de un pom, el îşi păstrează direcţia, însă schimbă sensul (dacă se deplasa spre nord, îşi va schimba sensul spre sud, dacă se deplasa spre est, se va deplasa după aceea spre vest etc). </p>
+
+<p>Dacă iepuraşul intră într-o celulă conţinând o trapă, toate zidurile aflate pe teren dispar şi vor apărea alte ziduri, în poziţii precizate. Dacă iepuraşul va trece din nou printr-o celulă conţinând o trapă, zidurile nou construite dispar şi vor reapărea zidurile iniţiale. Mai exact există două grupe de ziduri care comută la fiecare trecere printr-o celulă care conţine o trapă.</p>
+
+<p>Dacă iepuraşul va trece de două ori prin vecinătatea unei celule conţinând o bombă (adică prin celulele învecinate la sud, nord, est sau vest cu celula conţinând bombă), bomba va exploda iar iepuraşul se transformă instantaneu în îngeraş. De asemenea, dacă iepuraşul întră într-o celulă conţinând o bombă se transformă instantaneu în îngeraș.</p>
+
+<p>Iepuraşul va ronţăi toţi morcovii care îi ies în cale. Evident că dacă trece a doua oară prin aceeaşi celulă, la a doua trecere nu va mai găsi morcov.</p>
+
+<p>Surprizele din grădină sunt codificate astfel: <b>1</b> pentru <code>săgeată spre nord</code>, <b>2</b> pentru <code>săgeată spre vest</code>, <b>3</b> pentru <code>săgeată spre sud</code>, <b>4</b> pentru <code>săgeată spre est</code>, <b>5</b> pentru <code>pom</code>, <b>6</b> pentru <code>bombă</code>, <b>7</b> pentru <code>morcov</code>, <b>8</b> pentru <code>zid</code>, <b>9</b> pentru <code>trapă</code>. <code>Căsuţele libere</code> de pe harta grădinii se codifică cu <b>0</b>.</p>
+
+<p>Iniţial, se cunosc poziţia şi sensul de deplasare ale iepuraşului.  Expediţia acestuia se termină în următoarele situaţii:</p>
+
+<ul>
+	<li>la explozia unei bombe, caz in care se transforma in ingeras;</li>
+	<li>la parasirea gradinii (adica la iesirea in afara zonei dreptunghiulare date), caz in care se rataceste;</li>
+	<li>in momentul in care reuseste sa rontaie toti morcovii, caz in care este fericit.</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Fiind data harta grădinii se cere să se determine starea finală a iepuraşului (îngeraş, rătăcit respectiv fericit), numărul de morcovi ronţăiţi până în momentul terminării expediţiei, precum şi numărul de paşi pe care îi face iepuraşul până la acest moment.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fişierului de intrare <code>iepuras1.in</code> se găsesc două numere întregi <code>m</code> şi <code>n</code>, separate printr-un spaţiu, reprezentând numărul de linii, respectiv numărul de coloane ale hărţii.</p>
+
+<p>Linia a doua a fişierului conţine trei numere naturale, separate prin câte un spaţiu, reprezentând linia si coloana poziţiei iniţiale a iepuraşului pe hartă precum şi direcţia spre care acesta este orientat. Direcţia este codificată astfel: <b>1</b> pentru <code>nord</code>, <b>2</b> pentru <code>vest</code>, <b>3</b> pentru <code>sud</code>, <b>4</b> pentru <code>est</code>.</p>
+
+<p>Următoarele m linii conţin câte <code>n</code> numere întregi separate prin câte un spaţiu, reprezentând codificarea hărţii grădinii, conform celor precizate mai sus.</p>
+
+<p>Următoarea linie conţine un singur număr natural <code>t</code> reprezentând numărul de celule ce vor conţine ziduri după prima trecere printr-o celulă conţinând o trapă. Următoarele <code>t</code> linii conţin câte două numere naturale <code>i</code> şi <code>j</code>, separate printr-un spaţiu, reprezentând coordonatele câte unei celule ce va conţine zid după o primă trecere printr-o celulă conţinând o trapă.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fişierul de ieşire <code>iepuras1.out</code> va conţine pe prima sa linie unul dintre cuvintele <code>INGERAS</code>, <code>RATACIT</code> respectiv <code>FERICIT</code>, corespunzător stării finale a iepuraşului. A doua linie a fişierului va conţine două numere întregi separate printr-un spaţiu, reprezentând linia şi coloana ultimei poziţii de pe teren a iepuraşului, adică poziţia în care a murit, sau în care a devenit fericit, respectiv ultima poziţie a sa de pe teren, înainte de a se rătăci.</p>
+
+<p>A treia linie a fişierului va conţine două numere întregi separate printr-un spaţiu, reprezentând numărul de morcovi culeşi până în momentul terminării expediţiei, respectiv numărul de paşi pe care îi face iepuraşul până ajunge în starea finală.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>poziţia iniţială a iepuraşului este una validă, adică este o celulă liberă din interiorul terenului;</li>
+	<li>pentru datele de test, se asigură că iepuraşul va face un număr finit de paşi până la terminarea expediţiei sale;</li>
+	<li><code>1 ≤ m, n ≤ 200</code></li>
+	<li><code>0 ≤ t ≤ 20</code></li>
+	<li>numărul maxim de ziduri aflate la un moment dat pe teren este de cel mult 50, şi este posibil ca la un moment dat să nu existe niciun zid pe teren.</li>
+	<li>Se garantează că pentru datele de intrare iepuraşul nu poate ajunge simultan în două din cele trei stări.</li>
+	<li>Pomii şi trapele sunt obiecte care rămân permanent în teren, în poziţiile lor iniţiale.</li>
+	<li>Într-o celulă a grădinii se poate găsi la un moment dat o singură surpriză (<code>pom</code>, <code>zid</code>, <code>trapă</code>, <code>morcov</code>, <code>săgeată</code>, <code>bombă</code>).</li>
+</ul>
+
+<h1>Exemplu 1:</h1>
+
+<p><code>iepuras1.in</code></p>
+
+<pre>10 15
+7 1 4
+0 0 6 0 5 5 0 7 0 0 0 0 0 0 0
+0 0 0 0 5 5 0 0 4 0 0 0 0 0 3
+0 5 5 0 5 5 0 0 0 0 0 0 0 0 0 
+0 5 5 0 5 5 0 1 7 0 0 7 0 0 2
+0 0 0 0 5 5 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 5 0 0 0 0 0 0 0 0 0
+0 3 0 0 0 5 6 0 0 5 5 5 0 0 0
+0 7 0 0 0 0 0 0 0 0 0 0 0 5 0
+0 4 0 0 0 7 0 0 3 5 0 0 0 5 0
+0 6 0 0 0 0 0 0 1 5 0 0 0 5 0
+0 </pre>
+
+<p><code>iepuras1.out</code></p>
+
+<pre>FERICIT
+1 8
+5 37</pre>
+
+<h1>Exemplu 2:</h1>
+
+<p><code>iepuras1.in</code></p>
+
+<pre>4 3
+2 1 3
+0 0 0 
+0 0 0 
+9 6 7 
+8 0 0 
+4
+4 3
+1 2
+1 3
+2 3</pre>
+
+<p><code>iepuras1.out</code></p>
+
+<pre>RATACIT
+4 1
+0 3</pre>
+
+<h1>Exemplu 3:</h1>
+
+<p><code>iepuras1.in</code></p>
+
+<pre>6 5
+2 1 3
+0 0 0 7 0
+0 0 0 0 0
+9 6 7 2 0
+8 0 0 0 0
+7 8 0 0 0
+4 8 9 1 0
+4
+4 4
+5 4
+1 5
+2 5</pre>
+
+<p><code>iepuras1.out</code></p>
+
+<pre>INGERAS
+3 3
+2 11</pre>
+
+<h1>Exemplu 4:</h1>
+
+<p><code>iepuras1.in</code></p>
+
+<pre>5 4
+2 1 3
+4 0 7 0
+0 0 0 0
+0 0 0 0
+5 0 0 0
+0 0 0 0
+0</pre>
+
+<p><code>iepuras1.out</code></p>
+
+<pre>FERICIT
+1 3
+1 5</pre>		</article>
+		</body></html>

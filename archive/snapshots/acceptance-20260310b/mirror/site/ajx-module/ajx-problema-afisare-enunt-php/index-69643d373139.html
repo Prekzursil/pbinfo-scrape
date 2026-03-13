@@ -1,0 +1,195 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=719"><article id="enunt">
+			<p>Pentru a putea ţine evidenţa mai uşor, administratorul unui magazin întocmeşte o listă cu produsele care se găsesc în magazin la începutul zilei. El scrie numele produselor, folosind cuvinte de aceeaşi lungime, formate doar din literele mici ale alfabetului englez. Îndată finalizată lista, el îi asociază un cod reprezentând cel mai mic cuvânt în sens lexicografic, obţinut prin preluarea unei litere din fiecare nume de produs, în ordinea în care acestea au fost scrise pe listă.</p>
+
+<p>El observă că acest cod poate fi obţinut în mai multe moduri. Doreşte însă să identifice varianta în care literele alese sunt cât mai apropiate, altfel spus, distanţa, reprezentând numărul de poziţii, între poziţia cea mai mică şi poziţia cea mai mare pe care sunt plasate caracterele alese, este minimă. De exemplu: </p>
+
+<p>Pentru lista care cuprinde produsele de mai jos:</p>
+
+<style>
+  table{border:solid 1px gray;}
+  table td{border:solid 1px gray; width:30px; text-align:center;}
+</style>
+
+<table>
+		<tbody><tr>
+			<td> c </td>
+			<td> a </td>
+			<td> i </td>
+			<td> e </td>
+			<td> t </td>
+		</tr>
+		<tr>
+			<td> l </td>
+			<td> a </td>
+			<td> p </td>
+			<td> t </td>
+			<td> e </td>
+		</tr>
+		<tr>
+			<td> m </td>
+			<td> i </td>
+			<td> e </td>
+			<td> r </td>
+			<td> e </td>
+		</tr>
+		<tr>
+			<td> c </td>
+			<td> a </td>
+			<td> f </td>
+			<td> e </td>
+			<td> a </td>
+		</tr>
+</tbody></table>
+
+<p>Codul asociat este: <code>aaea</code></p>
+
+<p>O variantă de obţinere în care distanţa este <code>4</code>. Poziţia literei <code>a</code> din al doilea cuvânt este <code>2</code> iar a lui <code>e</code>, ales în al treilea cuvânt este <code>5</code>:</p>
+
+<table>
+		<tbody><tr>
+			<td> c </td>
+			<td> <code>a</code> </td>
+			<td> i </td>
+			<td> e </td>
+			<td> t </td>
+		</tr>
+		<tr>
+			<td> l </td>
+			<td> <code>a</code> </td>
+			<td> p </td>
+			<td> t </td>
+			<td> e </td>
+		</tr>
+		<tr>
+			<td> m </td>
+			<td> i </td>
+			<td> e </td>
+			<td> r </td>
+			<td> <code>e</code> </td>
+		</tr>
+		<tr>
+			<td> c </td>
+			<td> <code>a</code> </td>
+			<td> f </td>
+			<td> e </td>
+			<td> a </td>
+		</tr>
+</tbody></table>
+
+<p>Varianta optimă este caracterizată de distanţa <code>2</code>. deoarece, poziţia minimă a unui caracter ales este <code>2</code> iar cea maximă este <code>3</code>:</p>
+
+<table>
+		<tbody><tr>
+			<td> c </td>
+			<td> <code>a</code> </td>
+			<td> i </td>
+			<td> e </td>
+			<td> t </td>
+		</tr>
+		<tr>
+			<td> l </td>
+			<td> <code>a</code> </td>
+			<td> p </td>
+			<td> t </td>
+			<td> e </td>
+		</tr>
+		<tr>
+			<td> m </td>
+			<td> i </td>
+			<td> <code>e</code> </td>
+			<td> r </td>
+			<td> e </td>
+		</tr>
+		<tr>
+			<td> c </td>
+			<td> <code>a</code> </td>
+			<td> f </td>
+			<td> e </td>
+			<td> a </td>
+		</tr>
+</tbody></table>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care să determine codul asociat listei de produse şi distanţa minimă prin care poate fi obţinut.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>minime.in</code> conține pe prima linie o pereche de numere naturale <code>N</code> şi <code>M</code> reprezentând numărul de produse scrise pe listă şi numărul de litere ale fiecărui nume de produs. Pe următoarele <code>N</code> linii se găsesc şiruri de câte <code>M</code> caractere litere mici reprezentând numele produselor, în ordinea în care au fost scrise în listă.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>minime.out</code> va conține <code>2</code> linii:</p>
+
+<p>a) pe prima linie, se va afişa un şir de caractere format din <code>N</code> litere mici reprezentând codul asociat listei; <br>
+b) pe a doua linie, se va scrie un număr natural reprezentând distanţa minimă în care poate fi obţinut;</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 100 000</code></li>
+	<li><code>1 ≤ M ≤ 255</code></li>
+</ul>
+
+<ul>
+	<li>numerele de pe a doua linie a fișierului de intrare vor fi mai mici decât <code>1.000.000.000</code></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>minime.in</code></p>
+
+<pre>5 5 
+inele
+cacao
+ardei
+lapte
+peste</pre>
+
+<p><code>minime.out</code></p>
+
+<pre>eaaae
+3</pre>
+
+<h1>Explicație</h1>
+
+<p>Distanţa minimă este <code>3</code> şi se obţine astfel:</p>
+
+<table>
+		<tbody><tr>
+			<td> i </td>
+			<td> n </td>
+			<td> <code>e</code> </td>
+			<td> l </td>
+			<td> e </td>
+		</tr>
+		<tr>
+			<td> c </td>
+			<td> <code>a</code> </td>
+			<td> c </td>
+			<td> a </td>
+			<td> o </td>
+		</tr>
+		<tr>
+			<td> <code>a</code> </td>
+			<td> r </td>
+			<td> d </td>
+			<td> e </td>
+			<td> i </td>
+		</tr>
+		<tr>
+			<td> l </td>
+			<td> <code>a</code> </td>
+			<td> p </td>
+			<td> t </td>
+			<td> e </td>
+		</tr>
+		<tr>
+			<td> p </td>
+			<td> <code>e</code> </td>
+			<td> s </td>
+			<td> t </td>
+			<td> e </td>
+		</tr>
+</tbody></table>		</article>
+		</body></html>

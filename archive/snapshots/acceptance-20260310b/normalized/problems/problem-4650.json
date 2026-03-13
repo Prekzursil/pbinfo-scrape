@@ -1,0 +1,318 @@
+{
+  "id": 4650,
+  "slug": "sim",
+  "name": "sim",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4650/sim",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 46,
+      "name": "Tablouri bidimensionale (matrice)",
+      "slug": "tablouri-bidimensionale-matrice",
+      "href": "/?pagina=probleme-lista&tag=46"
+    },
+    {
+      "id": 80,
+      "name": "Parcurgerea matricelor pătratice",
+      "slug": "parcurgerea-matricelor-p-tratice",
+      "href": "/?pagina=probleme-lista&tag=80"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Cum Paftenie este prea distras de micul său dejun englezesc cu cârnăciori și fasole fiartă, apelează la voi pentru a determina:</p><p>1) Numărul maxim de cetățeni care iau micul dejun împreună în cea de-a doua zi.<br>\n2) Gradul de fericire al orașului său.</p>",
+      "text": "Cum Paftenie este prea distras de micul său dejun englezesc cu cârnăciori și fasole fiartă, apelează la voi pentru a determina:1) Numărul maxim de cetățeni care iau micul dejun împreună în cea de-a doua zi. 2) Gradul de fericire al orașului său."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>sim.in</code> conține conține pe prima linie un număr natural <code>C</code>, iar pe a doua linie numerele naturale <code>n</code> și <code>k</code>, separate printr-un spațiu. Următoarele <code>n</code> linii din fișier conțin câte <code>n</code> numere naturale din mulțimea <code>{1, 2, 3, 4}</code> (<code>1</code> pentru nord, <code>2</code> pentru sud, <code>3</code> pentru vest, <code>4</code> pentru est), separate prin câte un spațiu. Al <code>j</code>-lea număr de pe linia <code>i + 2</code> din fișier reprezintă direcția indicatorului asociat cafenelei <code>(i, j)</code>.</p>",
+      "text": "Fișierul de intrare sim.in conține conține pe prima linie un număr natural C, iar pe a doua linie numerele naturale n și k, separate printr-un spațiu. Următoarele n linii din fișier conțin câte n numere naturale din mulțimea {1, 2, 3, 4} (1 pentru nord, 2 pentru sud, 3 pentru vest, 4 pentru est), separate prin câte un spațiu. Al j-lea număr de pe linia i + 2 din fișier reprezintă direcția indicatorului asociat cafenelei (i, j)."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>sim.out</code> va conține un singur număr natural <code>X</code>:</p><ul>\n\t<li>Dacă <code>C = 1</code>, atunci <code>X</code> va fi numărul maxim de cetățeni care iau micul dejun împreună în cea de-a doua zi.</li>\n\t<li>Dacă <code>C = 2</code>, atunci <code>X</code> va fi gradul de fericire al orașului lui Paftenie.</li>\n</ul>",
+      "text": "Fișierul de ieșire sim.out va conține un singur număr natural X: Dacă C = 1, atunci X va fi numărul maxim de cetățeni care iau micul dejun împreună în cea de-a doua zi. Dacă C = 2, atunci X va fi gradul de fericire al orașului lui Paftenie."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>C ∊ {1, 2}</code></li>\n\t<li><code>2 ≤ n ≤ 1.000</code></li>\n\t<li><code>k ∊ {1.000, 1.000.000.000}</code></li>\n\t<li>Se garantează că nu există niciun indicator care, odată urmat, duce la părăsirea orașului.</li>\n\t<li>Pentru 20 de puncte, <code>C = 1</code>, <code>n ≤ 30</code>, <code>k = 1.000</code></li>\n\t<li>Pentru 30 de puncte, <code>C = 2</code>, <code>n ≤ 30</code>, <code>k = 1.000</code></li>\n\t<li>Pentru 20 de puncte, <code>C = 2</code>, <code>n ≤ 30</code>, <code>k = 1.000.000.000</code></li>\n\t<li>Pentru 30 de puncte, <code>C = 2</code>, <code>30 &lt; n ≤ 1.000</code>, <code>k = 1.000.000.000</code></li>\n</ul>",
+      "text": "C ∊ {1, 2} 2 ≤ n ≤ 1.000 k ∊ {1.000, 1.000.000.000} Se garantează că nu există niciun indicator care, odată urmat, duce la părăsirea orașului. Pentru 20 de puncte, C = 1, n ≤ 30, k = 1.000 Pentru 30 de puncte, C = 2, n ≤ 30, k = 1.000 Pentru 20 de puncte, C = 2, n ≤ 30, k = 1.000.000.000 Pentru 30 de puncte, C = 2, 30 < n ≤ 1.000, k = 1.000.000.000"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>sim.in</code></p><pre>1\n3 1000\n4 3 2\n4 2 2\n4 3 3</pre><p><code>sim.out</code></p><pre>3</pre><h3>Explicație</h3><p>Orașul este reprezentat grafic în tabloul bidimensional (matricea) <code>A</code>, iar cetățenii săi sunt numerotați precum în matricea <code>A</code><sub><code>1</code></sub>. În fiecare celulă a matricei <code>A</code><sub><code>i</code></sub>, cu <code>1 ≤ i ≤ 2</code>, sunt cetățenii care, în ziua <code>i</code>, iau micul dejun în cafeneaua respectivă. Numărul maxim de cetățeni care iau masa împreună în a doua zi este <code>3</code>, aceștia fiind situați în cafeneaua <code>(3, 2)</code>.</p>",
+      "text": "sim.in1 3 1000 4 3 2 4 2 2 4 3 3sim.out3ExplicațieOrașul este reprezentat grafic în tabloul bidimensional (matricea) A, iar cetățenii săi sunt numerotați precum în matricea A1. În fiecare celulă a matricei Ai, cu 1 ≤ i ≤ 2, sunt cetățenii care, în ziua i, iau micul dejun în cafeneaua respectivă. Numărul maxim de cetățeni care iau masa împreună în a doua zi este 3, aceștia fiind situați în cafeneaua (3, 2)."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>sim.in</code></p><pre>25\n1000\n4 3 2 4 2\n4 2 2 3 2\n1 4 4 2 1\n1 4 1 2 1\n1 3 3 3 1</pre><p><code>sim.out</code></p><pre>30</pre><h3>Explicație</h3><p>Orașul este reprezentat grafic în tabloul bidimensional (matricea) <code>B</code>, iar cetățenii săi sunt numerotați precum în matricea <code>B</code><sub><code>1</code></sub>. În fiecare celulă a matricei <code>B</code><sub><code>i</code></sub>, cu <code>1 ≤ i ≤ 4</code>, sunt cetățenii care, în ziua <code>i</code>, iau micul dejun în cafeneaua respectivă. Tabelul <code>T</code> conține întâlnirile care au loc până la finalul celor <code>1000</code> de zile. A doua coloană conține lista cetățenilor cu care se întâlnește cetățeanul din prima coloană. Răspunsul este <code>3 + 2 + 2 + 3 + 2 + 3 + 2 + 2 + 2 + 3 + 2 + 2 + 2 = 30</code>.</p><p><img alt=\"\" src=\"/resurse/16a4b0/sim_01.jpg\"></p>",
+      "text": "sim.in25 1000 4 3 2 4 2 4 2 2 3 2 1 4 4 2 1 1 4 1 2 1 1 3 3 3 1sim.out30ExplicațieOrașul este reprezentat grafic în tabloul bidimensional (matricea) B, iar cetățenii săi sunt numerotați precum în matricea B1. În fiecare celulă a matricei Bi, cu 1 ≤ i ≤ 4, sunt cetățenii care, în ziua i, iau micul dejun în cafeneaua respectivă. Tabelul T conține întâlnirile care au loc până la finalul celor 1000 de zile. A doua coloană conține lista cetățenilor cu care se întâlnește cetățeanul din prima coloană. Răspunsul este 3 + 2 + 2 + 3 + 2 + 3 + 2 + 2 + 2 + 3 + 2 + 2 + 2 = 30."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Orașul este reprezentat grafic în tabloul bidimensional (matricea) A, iar cetățenii săi sunt numerotați precum în matricea A1. În fiecare celulă a matricei Ai, cu 1 ≤ i ≤ 2, sunt cetățenii care, în ziua i, iau micul dejun în cafeneaua respectivă. Numărul maxim de cetățeni care iau masa împreună în a doua zi este 3, aceștia fiind situați în cafeneaua (3, 2)."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Orașul este reprezentat grafic în tabloul bidimensional (matricea) B, iar cetățenii săi sunt numerotați precum în matricea B1. În fiecare celulă a matricei Bi, cu 1 ≤ i ≤ 4, sunt cetățenii care, în ziua i, iau micul dejun în cafeneaua respectivă. Tabelul T conține întâlnirile care au loc până la finalul celor 1000 de zile. A doua coloană conține lista cetățenilor cu care se întâlnește cetățeanul din prima coloană. Răspunsul este 3 + 2 + 2 + 3 + 2 + 3 + 2 + 2 + 2 + 3 + 2 + 2 + 2 = 30."
+    }
+  ],
+  "constraints": [
+    "C ∊ {1, 2}",
+    "2 ≤ n ≤ 1.000",
+    "k ∊ {1.000, 1.000.000.000}",
+    "Se garantează că nu există niciun indicator care, odată urmat, duce la părăsirea orașului.",
+    "Pentru 20 de puncte, C = 1, n ≤ 30, k = 1.000",
+    "Pentru 30 de puncte, C = 2, n ≤ 30, k = 1.000",
+    "Pentru 20 de puncte, C = 2, n ≤ 30, k = 1.000.000.000",
+    "Pentru 30 de puncte, C = 2, 30 < n ≤ 1.000, k = 1.000.000.000"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q277d243814.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/sim_01.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-sim-01-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "sim.in / sim.out",
+    "limită timp": "0.4 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "ONI 2024, clasa a 6-a",
+    "autor": "Iulian Oleniuc",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.4,
+  "memoryLimitMb": 64,
+  "author": "Iulian Oleniuc",
+  "sourceAttribution": "ONI 2024, clasa a 6-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4650/sim"
+}

@@ -1,0 +1,312 @@
+{
+  "id": 630,
+  "slug": "joc",
+  "name": "Joc",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/630/joc",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 16,
+      "name": "Teoria Grafurilor",
+      "slug": "teoria-grafurilor",
+      "href": "/?pagina=probleme-lista&tag=16"
+    },
+    {
+      "id": 60,
+      "name": "Grafuri cu costuri",
+      "slug": "grafuri-cu-costuri",
+      "href": "/?pagina=probleme-lista&tag=60"
+    }
+  ],
+  "tags": [
+    "Algoritmul lui Dijkstra"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Cunoscând numărul de pătrate <code>N</code>, pătratul de start <code>S</code>, pătratul final <code>F</code> și pentru fiecare pătrat, pătratele în care jucătorul poate sări, se cere:</p><p>a) Efortul minim necesar pentru a ajunge în pătratul final.<br>\nb) Pătratele pe care jucătorul le sare până ajunge la pătratul final.</p>",
+      "text": "Cunoscând numărul de pătrate N, pătratul de start S, pătratul final F și pentru fiecare pătrat, pătratele în care jucătorul poate sări, se cere:a) Efortul minim necesar pentru a ajunge în pătratul final. b) Pătratele pe care jucătorul le sare până ajunge la pătratul final."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fişierul de intrare <code>joc.in</code> conține pe prima linie un număr natural <code>p</code>. Pentru toate testele de intrare, numărul <code>p</code> poate avea doar valoarea <code>1</code> sau valoarea <code>2</code>. Pe a doua linie se află trei numere naturale  <code>N</code>, <code>S</code> și <code>F</code> cu semnificația din enunț. Pe următoarea linie se află <code>N</code> numere naturale reprezentând nivelul la care se află fiecare pătrat. Pe următoarele <code>N</code> linii se află  pătratele în care se poate sări din fiecare pătrat. Astfel, pe linia <code>i</code> se află numărul de pătrate în care se poate sări din pătratul <code>i-3</code> urmat de pătratele în care se poate sări. Dacă dintr-un pătrat nu se poate sări în niciun alt pătrat atunci pe linia lui se află <code>0</code>.</p>",
+      "text": "Fişierul de intrare joc.in conține pe prima linie un număr natural p. Pentru toate testele de intrare, numărul p poate avea doar valoarea 1 sau valoarea 2. Pe a doua linie se află trei numere naturale N, S și F cu semnificația din enunț. Pe următoarea linie se află N numere naturale reprezentând nivelul la care se află fiecare pătrat. Pe următoarele N linii se află pătratele în care se poate sări din fiecare pătrat. Astfel, pe linia i se află numărul de pătrate în care se poate sări din pătratul i-3 urmat de pătratele în care se poate sări. Dacă dintr-un pătrat nu se poate sări în niciun alt pătrat atunci pe linia lui se află 0."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Dacă valoarea lui <code>p</code> este <code>1</code>, <strong>se va rezolva numai punctul a)</strong> din cerintă. În acest caz, în fişierul de ieşire <code>joc.out</code>  se va scrie un singur număr întreg reprezentând efortul minim necesar pentru a ajunge în pătratul final.</p><p>Dacă valoarea lui <code>p</code> este <code>2</code>, <strong>se va rezolva numai punctul b)</strong> din cerintă. În acest caz, în fișierul de iesire  joc.out  se va scrie pe prima linie un număr natural <code>M</code> reprezentând numărul de pătrate necesare pentru a ajunge în pătratul final iar pe linia a doua se vor scrie cele <code>M</code> pătrate.</p>",
+      "text": "Dacă valoarea lui p este 1, se va rezolva numai punctul a) din cerintă. În acest caz, în fişierul de ieşire joc.out se va scrie un singur număr întreg reprezentând efortul minim necesar pentru a ajunge în pătratul final.Dacă valoarea lui p este 2, se va rezolva numai punctul b) din cerintă. În acest caz, în fișierul de iesire joc.out se va scrie pe prima linie un număr natural M reprezentând numărul de pătrate necesare pentru a ajunge în pătratul final iar pe linia a doua se vor scrie cele M pătrate."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ S, F ≤ N ≤ 50 000</code></li>\n\t<li><code>S ≠ F</code></li>\n\t<li>numărul total al săriturilor stabilite la începutul jocului nu depăşeşte <code>500 000</code>;</li>\n\t<li>nivelul maxim al unui pătrat <code>≤ 50 000</code>;</li>\n\t<li>va exista întotdeauna o modalitate printr-un număr nenul de pași de a ajunge de la pătratul <code>S</code> la pătratul <code>F</code>;</li>\n\t<li>pentru rezolvarea corectă a primei cerinţe se acordă 40 de puncte, iar pentru cerința a doua se acordă 60 de puncte.</li>\n</ul>",
+      "text": "1 ≤ S, F ≤ N ≤ 50 000 S ≠ F numărul total al săriturilor stabilite la începutul jocului nu depăşeşte 500 000; nivelul maxim al unui pătrat ≤ 50 000; va exista întotdeauna o modalitate printr-un număr nenul de pași de a ajunge de la pătratul S la pătratul F; pentru rezolvarea corectă a primei cerinţe se acordă 40 de puncte, iar pentru cerința a doua se acordă 60 de puncte."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>joc.in</code></p><pre>1\n5 1 4\n20 10 34 45 5\n2 2 3\n2 4 5\n0\n2 1 3\n2 4 1</pre><p><code>joc.out</code></p><pre>6</pre>",
+      "text": "joc.in1 5 1 4 20 10 34 45 5 2 2 3 2 4 5 0 2 1 3 2 4 1joc.out6"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p><code>p = 1</code></p><p>Pentru a ajunge din primul pătrat adică pătratul aflat la nivelul <code>20</code> în cel de-al patrulea pătrat adică pătratul aflat la nivelul <code>45</code> cu un efort minim jucătorul sare de pe pătratul aflat la nivelul <code>20</code> pe pătratul aflat la nivelul <code>10</code> cu  efortul 2  iar de pe pătratul aflat la nivelul <code>10</code> pe pătratul aflat la nivelul <code>45</code> cu  efortul <code>4</code> obținând efortul <code>6</code>.</p><p><strong>Atenție! Pentru acest test se rezolvă doar cerința a).</strong></p>",
+      "text": "p = 1Pentru a ajunge din primul pătrat adică pătratul aflat la nivelul 20 în cel de-al patrulea pătrat adică pătratul aflat la nivelul 45 cu un efort minim jucătorul sare de pe pătratul aflat la nivelul 20 pe pătratul aflat la nivelul 10 cu efortul 2 iar de pe pătratul aflat la nivelul 10 pe pătratul aflat la nivelul 45 cu efortul 4 obținând efortul 6.Atenție! Pentru acest test se rezolvă doar cerința a)."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>joc.in</code></p><pre>2\n5 1 4\n20 10 34 45 5\n2 2 3\n2 4 5\n0\n2 1 3\n2 4 1</pre><p><code>joc.out</code></p><pre>3\n1 2 4</pre>",
+      "text": "joc.in2 5 1 4 20 10 34 45 5 2 2 3 2 4 5 0 2 1 3 2 4 1joc.out3 1 2 4"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p><code>p = 2</code></p><p>Pentru a ajunge din primul pătrat adică pătratul aflat la nivelul <code>20</code> în cel de-al patrulea pătrat adică pătratul aflat la nivelul <code>45</code> cu un efort minim jucătorul sare de pe pătratul aflat la nivelul <code>20</code> pe pătratul aflat la nivelul <code>10</code> iar de pe pătratul aflat la nivelul <code>10</code> pe pătratul aflat la nivelul <code>45</code>.</p><p><strong>Atenție! Pentru acest test se rezolvă doar cerința b).</strong></p>",
+      "text": "p = 2Pentru a ajunge din primul pătrat adică pătratul aflat la nivelul 20 în cel de-al patrulea pătrat adică pătratul aflat la nivelul 45 cu un efort minim jucătorul sare de pe pătratul aflat la nivelul 20 pe pătratul aflat la nivelul 10 iar de pe pătratul aflat la nivelul 10 pe pătratul aflat la nivelul 45.Atenție! Pentru acest test se rezolvă doar cerința b)."
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "1 ≤ S, F ≤ N ≤ 50 000",
+    "S ≠ F",
+    "numărul total al săriturilor stabilite la începutul jocului nu depăşeşte 500 000;",
+    "nivelul maxim al unui pătrat ≤ 50 000;",
+    "va exista întotdeauna o modalitate printr-un număr nenul de pași de a ajunge de la pătratul S la pătratul F;",
+    "pentru rezolvarea corectă a primei cerinţe se acordă 40 de puncte, iar pentru cerința a doua se acordă 60 de puncte."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qef5fef42da.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "11",
+    "intrare/ieșire": "joc.in / joc.out",
+    "limită timp": "1.5 secunde",
+    "limită memorie": "16 MB / 8 MB",
+    "sursa problemei": "Grigore Moisil, 2014",
+    "autor": "Serban Alexandru Florian",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 1.5,
+  "memoryLimitMb": 16,
+  "author": "Serban Alexandru Florian",
+  "sourceAttribution": "Grigore Moisil, 2014",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/630/joc"
+}

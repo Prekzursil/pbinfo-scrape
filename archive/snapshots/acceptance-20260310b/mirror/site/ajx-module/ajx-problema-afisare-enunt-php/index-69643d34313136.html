@@ -1,0 +1,71 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4116"><article id="enunt">
+			<p>Ariciul Gălușcă este un arici obișnuit pe timp de zi. Noaptea, însă, el este de fapt eroul misterios al orașului Hedgytown – un oraș mai special, deoarece are clădiri atât deasupra solului, cât și sub pamânt, unde gravitația este inversată.</p>
+
+<p>Orașul poate fi văzut ca o dreaptă (ce reprezintă solul), cu un șir de clădiri dreptunghiulare lipite deasupra solului, și un șir de clădiri dreptunghiulare lipite dedesubtul solului. Sunt <code>N</code> clădiri peste pământ și <code>M</code> sub pământ. Cele două șiruri încep și se termină la aceleași poziții. Fiecare clădire este caracterizată de trei valori: <code>L</code>, <code>H</code> și <code>E</code>. <code>L</code> reprezintă lățimea clădirii, <code>H</code> reprezintă înălțimea clădirii și <code>E</code> reprezintă efortul necesar pentru a folosi liftul din acea clădire.</p>
+
+<p>Inițial, Gălușcă se afla pe partea din stânga a orașului, la nivelul solului (în dreptul primei clădiri) și trebuie să ajungă pe partea din dreapta a orașului, tot la nivelul solului (în dreptul ultimei clădiri). În acest scop, el se poate deplasa pe contururile clădirilor, consumând o unitate de efort pentru a se deplasa o unitate pe conturul unei clădiri – sau folosind lifturile.</p>
+
+<p>O deplasare cu liftul este mereu de pe conturul unei clădiri până pe conturul clădirii aflate pe cealaltă parte a solului – cu alte cuvinte, când folosește liftul, ariciul nu are voie să se deplaseze doar până la sol sau să se oprească în interiorul clădirii. În cazul în care clădirea pe care se află ariciul necesită efortul <code>E</code> pentru a folosi liftul și clădirea de pe partea opusă a solului necesită efortul <code>E'</code>, atunci efortul total necesar pentru a folosi liftul este <code>E + E'</code>.</p>
+
+<p>Deplasarea cu liftul se efectuează vertical. Astfel, liftul îl va lăsa pe Gălușcă la aceeași distanță orizontală față de începutul orașului, doar că pe acoperișul clădirii opuse. Liftul nu poate fi folosit unde se întâlnesc două clădiri adiacente orizontal – nici dacă se întâlnesc pe partea solului de unde începe deplasarea, nici dacă se întâlnesc pe partea solului unde se termină deplasarea.</p>
+
+<p>Deplasarea cu liftul trebuie să se efectueze strict prin interiorul clădirilor unde începe și se termină deplasarea – nu are voie să treacă prin conturul clădirilor decât la începutul și sfârșitul mișcării, și la trecerea prin sol.</p>
+
+<p>O deplasare cu liftul nu are voie să se facă atunci când Gălușcă se află în dreptul graniței dintre două clădiri adiacente.<br>
+Atenție, cum Gălușcă este un erou, acesta nu va merge niciodată înapoi – doar va înainta sau va folosi lifturile.</p>
+
+<h1>Cerința</h1>
+
+<p>Se cere să se afle  numărul minim de unități de efort pe care trebuie să le depună ariciul Gălușcă pentru a ajunge la destinația sa.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului de intrare <code>superhedgy.in</code> se dă <code>N</code>, reprezentând numărul de clădiri de deasupra solului. Pe următoarele <code>N</code> linii ale fișierului de intrare se dau <code>L</code>, <code>H</code>, și <code>E</code>, reprezentând datele clădirilor de deasupra solului, în ordinea în care sunt plasate în oraș începând cu cea mai apropiată clădire de Gălușcă. Pe linia <code>N+2</code> a fișierului de intrare se află <code>M</code>, reprezentând numărul de clădiri dedesubtul solului. Pe următoarele <code>M</code> linii ale fișierului de intrare se dau <code>L</code>, <code>H</code>, și <code>E</code>, reprezentând datele clădirilor de dedesubtul solului, în ordinea în care sunt plasate în oraș începând cu cea mai apropiată clădire de Gălușcă.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>superhedgy.out</code> va conține un singur număr natural, reprezentând numarul minim de unități de efort pe care trebuie să le depună Gălușcă pentru a ajunge la destinație.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N, M ≤ 100.000</code></li>
+	<li><code>1 ≤ L, H ≤ 1.000.000.000</code></li>
+	<li><code>0 ≤ E ≤ 1.000.000.000</code></li>
+	<li>Suma lungimilor clădirilor de  deasupra și de dedesubtul pământului coincid. Fie <code>L</code><sub><code>Total</code></sub> această lungime totală.</li>
+	<li>Pentru 20 de puncte, <code>1 ≤ L</code><sub><code>Total</code></sub> <code>≤ 10</code></li>
+	<li>Pentru 20 de puncte, <code>E = 0</code> pentru toate clădirile din oraș, <code>1 ≤ L</code><sub><code>Total</code></sub> <code>≤ 100.000</code></li>
+	<li>Pentru 40 de puncte, <code>1 ≤ L</code><sub><code>Total</code></sub> <code>≤ 100.000</code></li>
+	<li>Pentru 20 de puncte, fără restricții suplimentare</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>superhedgy.in</code></p>
+
+<pre>3
+1 2 5
+3 1 1
+2 3 1
+4
+1 4 10
+2 3 1
+1 2 1
+2 1 1</pre>
+
+<p><code>superhedgy.out</code></p>
+
+<pre>13</pre>
+
+<h3>Explicație</h3>
+
+<p>Orașul va arăta ca în figura de mai jos:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-superhedgy-01-jpg.jpg"></p>
+
+<p>Un traseu posibil al ariciului va fi următorul:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-superhedgy-02-jpg.jpg"></p>
+
+<p>Atenție! Deplasarea cu liftul nu s-ar fi putut efectua mai la stânga sau mai la dreapta cu <code>0.5</code> unități.</p>		</article>
+		</body></html>

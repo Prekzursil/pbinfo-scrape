@@ -1,0 +1,65 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=148"><article id="enunt">
+			<p>Se dă o matrice cu numere naturale nenule, pătratică, cu liniile şi coloanele numerotate de la <code>1</code> la <code>N</code>. Fiecare număr din matrice reprezintă înălţimea unui pilon plasat în acea poziţie.</p>
+
+<p>Putem plasa un observator „sub” matrice (adică pe o poziţie <code>i j</code> cu <code>i &gt; N</code> şi <code>1 ≤ j ≤ N</code>), de unde poate vedea în trei direcţii:</p>
+
+<ul>
+	<li>nord (pe coloana <code>j</code>);</li>
+	<li>nord-vest (elemente din matrice de pe poziţii <code>is,js</code> cu <code>i - is = j - js</code>, dacă există astfel de elemente);</li>
+	<li>nord-est (elemente din matrice de pe poziţii <code>is,js</code> cu <code>i - is = js - j</code>, dacă există astfel de elemente);</li>
+</ul>
+
+<p><img align="right" alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-probleme-matrice1-matrice-jpg.jpg"></p>
+
+<p>Plasat într-o poziţie şi privind pe una dintre direcţii, observatorul poate vedea doar pilonii pe care nu îi separă de observator niciun pilon cu înălţimea mai mare şi nici egală. În  exemplul alăturat avem o matrice cu <code>5</code> linii şi <code>5</code> coloane. Observatorul de pe poziţia <code>(6,1)</code> va vedea pe direcţia nord doar pilonii de înălţimi <code>1</code>, <code>2</code> şi <code>5</code> (celulele haşurate), iar în direcţia nord-est, doar pilonul cu înălţimea <code>7</code>.</p>
+
+<p>Observatorul de pe poziţia <code>(8,1)</code> va vedea pe direcţia nord de asemenea pilonii de înălţimi <code>1</code>, <code>2</code> şi <code>5</code>,  iar în direcţia nord-est, pilonii de înălţimi <code>1</code> şi <code>4</code>.</p>
+
+<h1>Cerinţa</h1>
+
+<p>Se cunoaşte configuraţia matricei şi mai multe poziţii posibile ale observatorului. Să se determine, pentru fiecare poziţie, numărul de piloni pe care îi vede observatorul plasat acolo.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fişierul <code>matrice1.in</code> are pe prima linie un număr natural <code>N</code>, dimensiunea matricei. Pe fiecare din următoarele <code>N</code> linii se găsesc câte <code>N</code> numere naturale. Numerele de pe aceeaşi linie se separă prin câte un spaţiu.</p>
+
+<p>Pe linia următoare se găseşte un număr <code>Q</code> care reprezintă numărul de poziţii ale observatorului. Pe fiecare dintre următoarele <code>Q</code> linii sunt câte <code>2</code> numere naturale, separate printr-un un spaţiu, reprezentând o poziţie a observatorului (mai întâi linia, apoi coloana).</p>
+
+<h1>Date de ieşire</h1>
+
+<p>Fişierul <code>matrice1.out</code> va avea <code>Q</code> linii. Pe fiecare linie se găseşte numărul de piloni văzuţi de observator din fiecare poziţie a sa, în ordinea dată în fişierul de intrare.</p>
+
+<h1>Restricţii</h1>
+
+<ul>
+	<li><code>2 ≤ N ≤ 500</code></li>
+	<li><code>1 ≤ Q ≤ 500.000</code></li>
+	<li>Elementele matricei sunt numere naturale cuprinse între <code>1</code> şi <code>30.000</code> (inclusiv)</li>
+	<li>Pentru fiecare poziţie <code>i,j</code> a observatorului avem <code>N + 1 ≤ i ≤ 2 * N</code> şi <code>1 ≤ j ≤ N</code>;</li>
+</ul>
+
+<h1>Exemplu</h1>
+
+<p><code>matrice1.in</code></p>
+
+<pre>5
+1 7 4 4 9
+5 2 5 1 5
+2 1 2 2 1
+1 4 3 5 4
+1 7 1 2 2
+3
+6 1
+8 1
+6 5</pre>
+
+<p><code>matrice1.out</code></p>
+
+<pre>4
+5
+7</pre>
+
+<p><strong>Explicaţie</strong></p>
+
+<p>Pentru prima poziţie, <code>6</code>, <code>1</code> observatorul vede <code>3</code> piloni în direcţia nord şi un pilon în direcţia nord-est, în total <code>4</code>.</p>		</article>
+		</body></html>

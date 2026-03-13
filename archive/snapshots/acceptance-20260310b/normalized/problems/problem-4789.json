@@ -1,0 +1,316 @@
+{
+  "id": 4789,
+  "slug": "joc15",
+  "name": "joc15",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4789/joc15",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 21,
+      "name": "Probleme cu secvențe",
+      "slug": "probleme-cu-secven-e",
+      "href": "/?pagina=probleme-lista&tag=21"
+    }
+  ],
+  "tags": [
+    "Element majoritar"
+  ],
+  "sections": [
+    {
+      "title": "Cerinț3",
+      "html": "<p>1) Determinați numărul de moduri în care Aurel poate începe jocul, astfel încât prima secvență pe care o “vede” pe hartă să NU fie riscantă. Două moduri de a începe jocul sunt considerate diferite dacă încep pe sectoare diferite sau dacă au vizibilitatea diferită.<br>\n2) Determinați scorul obținut dacă Aurel pornește din sectorul <code>1</code> cu vizibilitatea <code>0</code>.</p>",
+      "text": "1) Determinați numărul de moduri în care Aurel poate începe jocul, astfel încât prima secvență pe care o “vede” pe hartă să NU fie riscantă. Două moduri de a începe jocul sunt considerate diferite dacă încep pe sectoare diferite sau dacă au vizibilitatea diferită. 2) Determinați scorul obținut dacă Aurel pornește din sectorul 1 cu vizibilitatea 0."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>joc.in</code> conține pe prima linie numărul natural <code>C</code> reprezentând cerința care trebuie să fie rezolvată. Pe a doua linie se află numărul natural <code>N</code> reprezentând numărul de sectoare. Pe a treia linie se află <code>N</code> numere naturale, reprezentând decorurile asociate sectoarelor, în ordinea numerotării acestora. Pe a patra linie se află <code>N</code> numere naturale, reprezentând scorurile asociate sectoarelor, în ordinea numerotării acestora. Numerele aflate pe aceeași linie a fișierului sunt separate prin câte un spațiu.</p>",
+      "text": "Fișierul de intrare joc.in conține pe prima linie numărul natural C reprezentând cerința care trebuie să fie rezolvată. Pe a doua linie se află numărul natural N reprezentând numărul de sectoare. Pe a treia linie se află N numere naturale, reprezentând decorurile asociate sectoarelor, în ordinea numerotării acestora. Pe a patra linie se află N numere naturale, reprezentând scorurile asociate sectoarelor, în ordinea numerotării acestora. Numerele aflate pe aceeași linie a fișierului sunt separate prin câte un spațiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>joc.out</code> va conține o singură linie pe care este scris numărul determinat pentru cerința <code>C</code> din fișierul de intrare.</p>",
+      "text": "Fișierul de ieșire joc.out va conține o singură linie pe care este scris numărul determinat pentru cerința C din fișierul de intrare."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ C ≤ 2</code></li>\n\t<li>Dacă <code>C = 1</code>, atunci <code>1 ≤ N ≤ 3.000</code></li>\n\t<li>Dacă <code>C = 2</code>, atunci <code>1 ≤ N ≤ 100.000</code></li>\n\t<li><code>1 ≤ decor</code><sub><code>i</code></sub> <code>≤ N</code>, pentru <code>1 ≤ i ≤ N</code></li>\n\t<li><code>1 ≤ scor</code><sub><code>i</code></sub> <code>≤ 1.000.000</code>, pentru <code>1 ≤ i ≤ N</code></li>\n\t<li>Pentru 25 de puncte, <code>C=1</code>, <code>1 ≤ N ≤ 800</code></li>\n\t<li>Pentru 21 de puncte, <code>C=1</code>, <code>800 &lt; N ≤ 3.000</code></li>\n\t<li>Pentru 24 de puncte, <code>C=2</code>, <code>1 ≤ N ≤ 9.000</code></li>\n\t<li>Pentru 30 de puncte, <code>C=2</code>, <code>9.000 &lt; N ≤ 100.000</code></li>\n</ul>",
+      "text": "1 ≤ C ≤ 2 Dacă C = 1, atunci 1 ≤ N ≤ 3.000 Dacă C = 2, atunci 1 ≤ N ≤ 100.000 1 ≤ decori ≤ N, pentru 1 ≤ i ≤ N 1 ≤ scori ≤ 1.000.000, pentru 1 ≤ i ≤ N Pentru 25 de puncte, C=1, 1 ≤ N ≤ 800 Pentru 21 de puncte, C=1, 800 < N ≤ 3.000 Pentru 24 de puncte, C=2, 1 ≤ N ≤ 9.000 Pentru 30 de puncte, C=2, 9.000 < N ≤ 100.000"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>joc.in</code></p><pre>1\n5\n1 1 2 1 3\n2 3 1 1 5</pre><p><code>joc.out</code></p><pre>10</pre><h3>Explicație</h3><p>Se notează cu <code>st</code> sectorul de start și cu <code>v</code> vizibilitatea; există <code>10</code> moduri în care Aurel poate începe jocul astfel încât prima secvență văzută să nu fie riscantă:</p><ul>\n\t<li><code>st=1</code>, <code>v=0</code> (secvența 1)</li>\n\t<li><code>st=2</code>, <code>v=0</code> (secvența 2)</li>\n\t<li><code>st=3</code>, <code>v=0</code> (secvența 3)</li>\n\t<li><code>st=4</code>, <code>v=0</code> (secvența 4)</li>\n\t<li><code>st=5</code>, <code>v=0</code> (secvența 5)</li>\n\t<li><code>st=3</code>, <code>v=1</code> (secvența 2,3)</li>\n\t<li><code>st=4</code>, <code>v=1</code> (secvența 3,4)</li>\n\t<li><code>st=5</code>, <code>v=1</code> (secvența 4,5)</li>\n\t<li><code>st=5</code>, <code>v=2</code> (secvența 3,4,5)</li>\n\t<li><code>st=5</code>, <code>v=3</code> (secvența 2,3,4,5)</li>\n</ul>",
+      "text": "joc.in1 5 1 1 2 1 3 2 3 1 1 5joc.out10ExplicațieSe notează cu st sectorul de start și cu v vizibilitatea; există 10 moduri în care Aurel poate începe jocul astfel încât prima secvență văzută să nu fie riscantă: st=1, v=0 (secvența 1) st=2, v=0 (secvența 2) st=3, v=0 (secvența 3) st=4, v=0 (secvența 4) st=5, v=0 (secvența 5) st=3, v=1 (secvența 2,3) st=4, v=1 (secvența 3,4) st=5, v=1 (secvența 4,5) st=5, v=2 (secvența 3,4,5) st=5, v=3 (secvența 2,3,4,5)"
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>joc.in</code></p><pre>2\n5\n1 1 2 1 3\n2 3 1 1 5</pre><p><code>joc.out</code></p><pre>16</pre><h3>Explicație</h3><p>Aurel pornește din sectorul 1 cu vizibilitate <code>v=0</code>. Scorul total este inițial <code>scor</code><sub><code>1</code></sub> <code>= 2</code>.</p><ul>\n\t<li>El vede doar sectorul 1, iar secvența văzută nu este riscantă, deci avansează în sectorul 2 și crește <code>v</code> cu <code>1</code>. La scorul total se adună <code>scor</code><sub><code>2</code></sub> <code>= 3</code>.</li>\n\t<li>Secvența văzută, formată din sectoarele 1, 2, este riscantă, deci scade <code>v</code> cu <code>1</code>. Aurel este acum în sectorul 2, cu <code>v=0</code>. La scorul total se adună <code>scor</code><sub><code>2</code></sub> <code>= 3</code>.</li>\n\t<li>Secvența curentă văzută nu este riscantă, deci avansează în sectorul 3 și crește <code>v</code> cu <code>1</code>. La scorul total se adună <code>scor</code><sub><code>3</code></sub> <code>= 1</code>.</li>\n\t<li>Secvența văzută 2,3 nu este riscantă, deci avansează în sectorul 4 și crește <code>v</code> cu <code>1</code>. La scorul total se adună <code>scor</code><sub><code>4</code></sub> <code>= 1</code>.</li>\n\t<li>Secvența văzută, formată din sectoarele 2,3,4 este riscantă, deci scade <code>v</code> cu <code>1</code>. La scorul total se adună <code>scor</code><sub><code>4</code></sub> <code>= 1</code>.</li>\n\t<li>Secvența văzută 3,4 nu este riscantă, deci avansează în  sectorul 5 și crește <code>v</code> cu <code>1</code>. La scorul total se adună <code>scor</code><sub><code>5</code></sub> <code>= 5</code>.</li>\n\t<li>Secvența văzută formată din sectoarele 3,4,5 nu este riscantă, deci avansează și se poziționează după ultimul sector, terminând jocul. Scorul total obținut este <code>2 + 3 + 3 + 1 + 1 + 1 + 5 = 16</code>.</li>\n</ul>",
+      "text": "joc.in2 5 1 1 2 1 3 2 3 1 1 5joc.out16ExplicațieAurel pornește din sectorul 1 cu vizibilitate v=0. Scorul total este inițial scor1 = 2. El vede doar sectorul 1, iar secvența văzută nu este riscantă, deci avansează în sectorul 2 și crește v cu 1. La scorul total se adună scor2 = 3. Secvența văzută, formată din sectoarele 1, 2, este riscantă, deci scade v cu 1. Aurel este acum în sectorul 2, cu v=0. La scorul total se adună scor2 = 3. Secvența curentă văzută nu este riscantă, deci avansează în sectorul 3 și crește v cu 1. La scorul total se adună scor3 = 1. Secvența văzută 2,3 nu este riscantă, deci avansează în sectorul 4 și crește v cu 1. La scorul total se adună scor4 = 1. Secvența văzută, formată din sectoarele 2,3,4 este riscantă, deci scade v cu 1. La scorul total se adună scor4 = 1. Secvența văzută 3,4 nu este riscantă, deci avansează în sectorul 5 și crește v cu 1. La scorul total se adună scor5 = 5. Secvența văzută formată din sectoarele 3,4,5 nu este riscantă, deci avansează și se poziționează după ultimul sector, terminând jocul. Scorul total obținut este 2 + 3 + 3 + 1 + 1 + 1 + 5 = 16."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Se notează cu st sectorul de start și cu v vizibilitatea; există 10 moduri în care Aurel poate începe jocul astfel încât prima secvență văzută să nu fie riscantă:"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Aurel pornește din sectorul 1 cu vizibilitate v=0. Scorul total este inițial scor1 = 2."
+    }
+  ],
+  "constraints": [
+    "1 ≤ C ≤ 2",
+    "Dacă C = 1, atunci 1 ≤ N ≤ 3.000",
+    "Dacă C = 2, atunci 1 ≤ N ≤ 100.000",
+    "1 ≤ decori ≤ N, pentru 1 ≤ i ≤ N",
+    "1 ≤ scori ≤ 1.000.000, pentru 1 ≤ i ≤ N",
+    "Pentru 25 de puncte, C=1, 1 ≤ N ≤ 800",
+    "Pentru 21 de puncte, C=1, 800 < N ≤ 3.000",
+    "Pentru 24 de puncte, C=2, 1 ≤ N ≤ 9.000",
+    "Pentru 30 de puncte, C=2, 9.000 < N ≤ 100.000"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qffcc0750d3.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "joc.in / joc.out",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "OJI 2025, clasa a 8-a",
+    "autor": "Dumitru Ilie",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 64,
+  "author": "Dumitru Ilie",
+  "sourceAttribution": "OJI 2025, clasa a 8-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4789/joc15"
+}

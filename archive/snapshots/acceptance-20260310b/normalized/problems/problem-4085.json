@@ -1,0 +1,337 @@
+{
+  "id": 4085,
+  "slug": "patratele",
+  "name": "Patratele",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4085/patratele",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 46,
+      "name": "Tablouri bidimensionale (matrice)",
+      "slug": "tablouri-bidimensionale-matrice",
+      "href": "/?pagina=probleme-lista&tag=46"
+    },
+    {
+      "id": 58,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=58"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p> Fiind date dimensiunile <code>n</code> şi <code>m</code> ale foii de matematică, precum şi tabloul bidimensional de dimensiune <code>n x m</code> care conține codificarea foii, să se determine:</p><ul>\n\t<li>numărul total de pătrate existente pe foaia de matematică în desenul realizat conform codificării</li>\n\t<li>distribuția numărului de pătrate în ordinea strict crescătoare a lungimii laturilor</li>\n\t<li>unde poate fi trasată încă o linie astfel încât numărul total de pătrate să crească și să devină maxim posibil</li>\n</ul>",
+      "text": "Fiind date dimensiunile n şi m ale foii de matematică, precum şi tabloul bidimensional de dimensiune n x m care conține codificarea foii, să se determine: numărul total de pătrate existente pe foaia de matematică în desenul realizat conform codificării distribuția numărului de pătrate în ordinea strict crescătoare a lungimii laturilor unde poate fi trasată încă o linie astfel încât numărul total de pătrate să crească și să devină maxim posibil"
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fişierul de intrare <code>patratele.in</code> conţine pe prima linie trei numere naturale <code>n m t</code>, separate prin câte un spaţiu, indicând dimensiunile foii de matematică <code>n x m</code>, respectiv cerinţa care trebuie rezolvată (<code>1</code>, <code>2</code> sau <code>3</code>). Fiecare dintre următoarele <code>n</code> linii conţine câte <code>m</code> numere naturale, fiecare dintre acestea reprezentând codificarea foii de matematică.</p>",
+      "text": "Fişierul de intrare patratele.in conţine pe prima linie trei numere naturale n m t, separate prin câte un spaţiu, indicând dimensiunile foii de matematică n x m, respectiv cerinţa care trebuie rezolvată (1, 2 sau 3). Fiecare dintre următoarele n linii conţine câte m numere naturale, fiecare dintre acestea reprezentând codificarea foii de matematică."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>patratele.out</code> va conține următoarele în funcție de cerința cerută:</p><ul>\n\t<li>Dacă <code>t = 1</code>, pe prima linie numărul total de pătrate determinat;</li>\n\t<li>Dacă <code>t = 2</code>, pe fiecare linie vor fi afișate câte două numere naturale nenule <code>a</code> și <code>b</code>, separate printr-un spaţiu, indicând lungimea laturii pătratelor – <code>a</code>, respectiv numărul de pătrate cu latura de lungimea respectivă – <code>b</code>, în ordinea strict crescătoare a valorilor lui <code>a</code>;</li>\n\t<li>Dacă <code>t = 3</code>, prima linie va conține numărul maxim de pătrate, iar linia a doua va conține două valori naturale <code>lin</code>, <code>col</code> și un cuvânt <code>pozitie</code> separate printr-un spațiu, unde <code>lin</code>, <code>col</code>  reprezintă coordonatele pătratului de latură <code>1</code> unde se trasează linia suplimentară, iar <code>pozitie ∈ {SUS, DREAPTA, JOS, STANGA, NU}</code> (se va afișa <code>NU</code> în cazul în care nu se poate trasa nicio linie – în acest caz cele trei valori numerice afișate vor fi de asemenea <code>0</code>).</li>\n</ul>",
+      "text": "Fișierul de ieșire patratele.out va conține următoarele în funcție de cerința cerută: Dacă t = 1, pe prima linie numărul total de pătrate determinat; Dacă t = 2, pe fiecare linie vor fi afișate câte două numere naturale nenule a și b, separate printr-un spaţiu, indicând lungimea laturii pătratelor – a, respectiv numărul de pătrate cu latura de lungimea respectivă – b, în ordinea strict crescătoare a valorilor lui a; Dacă t = 3, prima linie va conține numărul maxim de pătrate, iar linia a doua va conține două valori naturale lin, col și un cuvânt pozitie separate printr-un spațiu, unde lin, col reprezintă coordonatele pătratului de latură 1 unde se trasează linia suplimentară, iar pozitie ∈ {SUS, DREAPTA, JOS, STANGA, NU} (se va afișa NU în cazul în care nu se poate trasa nicio linie – în acest caz cele trei valori numerice afișate vor fi de asemenea 0)."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li>Numerotarea liniilor și coloanelor foii de matematică începe de la <code>1</code></li>\n\t<li>Dacă la cerința <code>t=3</code> se obțin mai multe poziții de trasare a liniei, se va afișa soluția cu indicele liniei minim, iar în caz de egalitate după linii, se va afișa soluția cu indicele coloanei minim. În cazul în care există mai multe posibilități de trasare a unei linii în același pătrat, pozițiile vor fi luate în ordinea <code>SUS</code>, <code>DREAPTA</code>, <code>JOS</code>, <code>STANGA</code></li>\n\t<li><code>1 ≤ n, m ≤ 60</code></li>\n\t<li>Pentru 30 de puncte, <code>t = 1</code></li>\n\t<li>Pentru 30 de puncte, <code>t = 2</code></li>\n\t<li>Pentru 10 puncte, <code>t = 3</code> și <code>1 ≤ n, m ≤ 20</code></li>\n\t<li>Pentru 30 de puncte, <code>t = 3</code></li>\n</ul>",
+      "text": "Numerotarea liniilor și coloanelor foii de matematică începe de la 1 Dacă la cerința t=3 se obțin mai multe poziții de trasare a liniei, se va afișa soluția cu indicele liniei minim, iar în caz de egalitate după linii, se va afișa soluția cu indicele coloanei minim. În cazul în care există mai multe posibilități de trasare a unei linii în același pătrat, pozițiile vor fi luate în ordinea SUS, DREAPTA, JOS, STANGA 1 ≤ n, m ≤ 60 Pentru 30 de puncte, t = 1 Pentru 30 de puncte, t = 2 Pentru 10 puncte, t = 3 și 1 ≤ n, m ≤ 20 Pentru 30 de puncte, t = 3"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>patratele.in</code></p><pre>3 5 1\n9 7 15 13 7\n14 15 11 15 11\n1 3 12 7 14</pre><p><code>patratele.out</code></p><pre>6</pre><h3>Explicație</h3><p>Se rezolvă cerința 1. În total au fost găsite 6 pătrate</p>",
+      "text": "patratele.in3 5 1 9 7 15 13 7 14 15 11 15 11 1 3 12 7 14patratele.out6ExplicațieSe rezolvă cerința 1. În total au fost găsite 6 pătrate"
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>patratele.in</code></p><pre>3 5 2\n9 7 15 13 7\n14 15 11 15 11\n1 3 12 7 14</pre><p><code>patratele.out</code></p><pre>1 3\n2 2\n3 1</pre><h3>Explicație</h3><p>Se rezolvă cerința 2.</p><ul>\n\t<li>3 pătrate de latură 1</li>\n\t<li>2 pătrate de latură 2</li>\n\t<li>1 pătrat de latură 3</li>\n</ul>",
+      "text": "patratele.in3 5 2 9 7 15 13 7 14 15 11 15 11 1 3 12 7 14patratele.out1 3 2 2 3 1ExplicațieSe rezolvă cerința 2. 3 pătrate de latură 1 2 pătrate de latură 2 1 pătrat de latură 3"
+    },
+    {
+      "title": "Exemplul 3:",
+      "html": "<p><code>patratele.in</code></p><pre>3 5 3\n9 7 15 13 7\n14 15 11 15 11\n1 3 12 7 14</pre><p><code>patratele.out</code></p><pre>9\n2 5 JOS</pre><h3>Explicație</h3><p>Se rezolvă cerința 3. Dacă se trasează încă o linie la pătratul din linia 2 coloana 5 jos, se mai obțin încă 3 pătrate.</p>",
+      "text": "patratele.in3 5 3 9 7 15 13 7 14 15 11 15 11 1 3 12 7 14patratele.out9 2 5 JOSExplicațieSe rezolvă cerința 3. Dacă se trasează încă o linie la pătratul din linia 2 coloana 5 jos, se mai obțin încă 3 pătrate."
+    },
+    {
+      "title": "Exemplul 4:",
+      "html": "<p><code>patratele.in</code></p><pre>3 3 3\n9 1 3\n8 0 2\n12 0 0</pre><p><code>patratele.out</code></p><pre>0\n0 0 NU</pre><h3>Explicație</h3><p>Se rezolvă cerința 3. Nu se poate adăuga niciun pătrat nou prin trasarea unei singure linii.</p>",
+      "text": "patratele.in3 3 3 9 1 3 8 0 2 12 0 0patratele.out0 0 0 NUExplicațieSe rezolvă cerința 3. Nu se poate adăuga niciun pătrat nou prin trasarea unei singure linii."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Se rezolvă cerința 1. În total au fost găsite 6 pătrate"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Se rezolvă cerința 2."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Se rezolvă cerința 3. Dacă se trasează încă o linie la pătratul din linia 2 coloana 5 jos, se mai obțin încă 3 pătrate."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Se rezolvă cerința 3. Nu se poate adăuga niciun pătrat nou prin trasarea unei singure linii."
+    }
+  ],
+  "constraints": [
+    "Numerotarea liniilor și coloanelor foii de matematică începe de la 1",
+    "Dacă la cerința t=3 se obțin mai multe poziții de trasare a liniei, se va afișa soluția cu indicele liniei minim, iar în caz de egalitate după linii, se va afișa soluția cu indicele coloanei minim. În cazul în care există mai multe posibilități de trasare a unei linii în același pătrat, pozițiile vor fi luate în ordinea SUS, DREAPTA, JOS, STANGA",
+    "1 ≤ n, m ≤ 60",
+    "Pentru 30 de puncte, t = 1",
+    "Pentru 30 de puncte, t = 2",
+    "Pentru 10 puncte, t = 3 și 1 ≤ n, m ≤ 20",
+    "Pentru 30 de puncte, t = 3"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qb7b8653a4d.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/patratele.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-patratele-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "patratele.in / patratele.out",
+    "limită timp": "1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "OJI 2022, Clasa a VII-a",
+    "autor": "Marinel Șerban",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 1,
+  "memoryLimitMb": 64,
+  "author": "Marinel Șerban",
+  "sourceAttribution": "OJI 2022, Clasa a VII-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4085/patratele"
+}

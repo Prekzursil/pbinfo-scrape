@@ -1,0 +1,319 @@
+{
+  "id": 4619,
+  "slug": "avid",
+  "name": "avid",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4619/avid",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 45,
+      "name": "Vectori caracteristici / de frecventa",
+      "slug": "vectori-caracteristici-de-frecventa",
+      "href": "/?pagina=probleme-lista&tag=45"
+    }
+  ],
+  "tags": [
+    "ciurul lui Eratostene",
+    "Numararea divizorilor",
+    "Cmmdc"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Fie numărul <code>n</code>, numărul <code>p</code> și acel șir de valori notate de Alex în cele <code>n</code> zile. Determinați răspunsul la următoarele întrebări care îl frământă pe Alex:</p><p>1) Câte triplete de numere aflate pe poziții consecutive în șirul dat îndeplinesc condiția ca cel mai mare divizor comun al lor să aibă cel mult <code>p</code> divizori naturali?<br>\n2) Care este lungimea maximă a unei secvențe din șirul dat, în care cel mai mare divizor comun al oricărui triplet de numere situate pe poziții consecutive are cel mult <code>p</code> divizori naturali?</p>",
+      "text": "Fie numărul n, numărul p și acel șir de valori notate de Alex în cele n zile. Determinați răspunsul la următoarele întrebări care îl frământă pe Alex:1) Câte triplete de numere aflate pe poziții consecutive în șirul dat îndeplinesc condiția ca cel mai mare divizor comun al lor să aibă cel mult p divizori naturali? 2) Care este lungimea maximă a unei secvențe din șirul dat, în care cel mai mare divizor comun al oricărui triplet de numere situate pe poziții consecutive are cel mult p divizori naturali?"
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>avid.in</code> conține pe prima linie un număr natural <code>C</code>, având valoarea <code>1</code> sau <code>2</code>, reprezentând numărul întrebării. Pe a doua linie se află două numere naturale <code>n</code> și <code>p</code>, în această ordine, cu semnificația din enunț. A treia linie din fișier conține <code>n</code> numere naturale reprezentând șirul de valori notate în cele <code>n</code> zile. Numerele aflate pe aceeași linie a fișierului sunt separate prin câte un spațiu.</p>",
+      "text": "Fișierul de intrare avid.in conține pe prima linie un număr natural C, având valoarea 1 sau 2, reprezentând numărul întrebării. Pe a doua linie se află două numere naturale n și p, în această ordine, cu semnificația din enunț. A treia linie din fișier conține n numere naturale reprezentând șirul de valori notate în cele n zile. Numerele aflate pe aceeași linie a fișierului sunt separate prin câte un spațiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>avid.out</code> va conține un singur număr, reprezentând răspunsul pentru întrebarea dată, <code>C</code>.</p>",
+      "text": "Fișierul de ieșire avid.out va conține un singur număr, reprezentând răspunsul pentru întrebarea dată, C."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ C ≤ 2</code></li>\n\t<li><code>3 ≤ n ≤ 1.000.000</code></li>\n\t<li><code>2 ≤ p ≤ 100</code></li>\n\t<li><code>1 ≤ a</code><sub><code>i</code></sub> <code>≤ 5.000.000</code>, unde <code>a</code><sub><code>i</code></sub> este numărul de pagini citite de Alex în ziua <code>i</code> (Alex citește la o viteză impresionantă)</li>\n\t<li>Pentru prima cerință, se garantează că există cel puțin un triplet cu proprietatea indicată.</li>\n\t<li>Pentru a doua cerință, se garantează că există cel puțin o secvență validă cu proprietatea indicată.</li>\n\t<li>Pentru 12 puncte, <code>C = 1</code>, <code>n ≤ 1000</code></li>\n\t<li>Pentru 17 puncte, <code>C = 1</code>, <code>1000 &lt; n ≤ 1.000.000</code></li>\n\t<li>Pentru 29 puncte, <code>C = 2</code>, <code>n ≤ 1000</code></li>\n\t<li>Pentru 42 puncte, <code>C = 2</code>, <code>1000 &lt; n ≤ 1.000.000</code></li>\n</ul>",
+      "text": "1 ≤ C ≤ 2 3 ≤ n ≤ 1.000.000 2 ≤ p ≤ 100 1 ≤ ai ≤ 5.000.000, unde ai este numărul de pagini citite de Alex în ziua i (Alex citește la o viteză impresionantă) Pentru prima cerință, se garantează că există cel puțin un triplet cu proprietatea indicată. Pentru a doua cerință, se garantează că există cel puțin o secvență validă cu proprietatea indicată. Pentru 12 puncte, C = 1, n ≤ 1000 Pentru 17 puncte, C = 1, 1000 < n ≤ 1.000.000 Pentru 29 puncte, C = 2, n ≤ 1000 Pentru 42 puncte, C = 2, 1000 < n ≤ 1.000.000"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>avid.in</code></p><pre>1\n10 3\n12 48 36 6 3 7 12 16 24 3</pre><p><code>avid.out</code></p><pre>6</pre><h3>Explicație</h3><p><code>cmmdc(12, 48, 36) = 12</code>, care are <code>6</code> divizori naturali.<br>\n<code>cmmdc(48, 36, 6) = 6</code>, care are <code>4</code> divizori naturali.<br>\n<code>cmmdc(36, 6, 3) = 3</code>, care are <code>2</code> divizori naturali.<br>\n<code>cmmdc(6, 3, 7) = 1</code>, care are <code>1</code> divizor natural.<br>\n<code>cmmdc(3, 7, 12) = 1</code>, care are <code>1</code> divizor natural.<br>\n<code>cmmdc(7, 12, 16) = 1</code>, care are <code>1</code> divizor natural.<br>\n<code>cmmdc(12, 16, 24) = 4</code>, care are <code>3</code> divizori naturali.<br>\n<code>cmmdc(16, 24, 3) = 1</code>, care are <code>1</code> divizor natural.</p><p>Deci, <code>6</code> dintre cele <code>8</code> triplete au cel mult <code>p=3</code> divizori naturali.</p>",
+      "text": "avid.in1 10 3 12 48 36 6 3 7 12 16 24 3avid.out6Explicațiecmmdc(12, 48, 36) = 12, care are 6 divizori naturali. cmmdc(48, 36, 6) = 6, care are 4 divizori naturali. cmmdc(36, 6, 3) = 3, care are 2 divizori naturali. cmmdc(6, 3, 7) = 1, care are 1 divizor natural. cmmdc(3, 7, 12) = 1, care are 1 divizor natural. cmmdc(7, 12, 16) = 1, care are 1 divizor natural. cmmdc(12, 16, 24) = 4, care are 3 divizori naturali. cmmdc(16, 24, 3) = 1, care are 1 divizor natural.Deci, 6 dintre cele 8 triplete au cel mult p=3 divizori naturali."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>avid.in</code></p><pre>2\n7 2\n12 48 36 6 3 7 12</pre><p><code>avid.out</code></p><pre>5</pre><h3>Explicație</h3><p>Pentru că <code>p = 2</code>, cea mai lungă secvență este <code>36 6 3 7 12</code>.</p>",
+      "text": "avid.in2 7 2 12 48 36 6 3 7 12avid.out5ExplicațiePentru că p = 2, cea mai lungă secvență este 36 6 3 7 12."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "cmmdc(12, 48, 36) = 12, care are 6 divizori naturali. cmmdc(48, 36, 6) = 6, care are 4 divizori naturali. cmmdc(36, 6, 3) = 3, care are 2 divizori naturali. cmmdc(6, 3, 7) = 1, care are 1 divizor natural. cmmdc(3, 7, 12) = 1, care are 1 divizor natural. cmmdc(7, 12, 16) = 1, care are 1 divizor natural. cmmdc(12, 16, 24) = 4, care are 3 divizori naturali. cmmdc(16, 24, 3) = 1, care are 1 divizor natural."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Pentru că p = 2, cea mai lungă secvență este 36 6 3 7 12."
+    }
+  ],
+  "constraints": [
+    "1 ≤ C ≤ 2",
+    "3 ≤ n ≤ 1.000.000",
+    "2 ≤ p ≤ 100",
+    "1 ≤ ai ≤ 5.000.000, unde ai este numărul de pagini citite de Alex în ziua i (Alex citește la o viteză impresionantă)",
+    "Pentru prima cerință, se garantează că există cel puțin un triplet cu proprietatea indicată.",
+    "Pentru a doua cerință, se garantează că există cel puțin o secvență validă cu proprietatea indicată.",
+    "Pentru 12 puncte, C = 1, n ≤ 1000",
+    "Pentru 17 puncte, C = 1, 1000 < n ≤ 1.000.000",
+    "Pentru 29 puncte, C = 2, n ≤ 1000",
+    "Pentru 42 puncte, C = 2, 1000 < n ≤ 1.000.000"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qceaee13b07.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "avid.in / avid.out",
+    "limită timp": "0.4 secunde",
+    "limită memorie": "128 MB / 8 MB",
+    "sursa problemei": "OJI 2024, clasa a 6-a",
+    "autor": "Giulian Buzatu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.4,
+  "memoryLimitMb": 128,
+  "author": "Giulian Buzatu",
+  "sourceAttribution": "OJI 2024, clasa a 6-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4619/avid"
+}

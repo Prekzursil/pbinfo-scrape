@@ -1,0 +1,330 @@
+{
+  "id": 2196,
+  "slug": "multisum",
+  "name": "multisum",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/2196/multisum",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 91,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=91"
+    },
+    {
+      "id": 115,
+      "name": "Diverse",
+      "slug": "diverse",
+      "href": "/?pagina=probleme-lista&tag=115"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Pentru mai multe seturi de date formate din câte două numere naturale <code>A</code> și <code>B</code>, <code>A ≤ B</code>, se cere să se determine, pentru fiecare set una dintre următoarele cerințe:<br>\n1. numărul maxim de termeni în care pot fi descompuse numerele din intervalul <code>[A,B]</code> după regula descrisă în enunț;<br>\n2. numărul de numere din intervalul <code>[A,B]</code> care pot fi descompuse cu un număr maxim de termeni;<br>\n3. numărul din intervalul <code>[A,B]</code> care admite o descompunere cu un număr maxim de termeni, minimă din punct de vedere lexicografic.</p>",
+      "text": "Pentru mai multe seturi de date formate din câte două numere naturale A și B, A ≤ B, se cere să se determine, pentru fiecare set una dintre următoarele cerințe: 1. numărul maxim de termeni în care pot fi descompuse numerele din intervalul [A,B] după regula descrisă în enunț; 2. numărul de numere din intervalul [A,B] care pot fi descompuse cu un număr maxim de termeni; 3. numărul din intervalul [A,B] care admite o descompunere cu un număr maxim de termeni, minimă din punct de vedere lexicografic."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Din fișierul de intrare <code>multisum.in</code> se citesc, de pe prima linie, două numere <code>N</code> și <code>C</code>, despărțite printr-un spațiu, reprezentând numărul de seturi de date și tipul cerinței: <code>C = 1</code> pentru cerința <code>1</code>, <code>C = 2</code> pentru cerința <code>2</code> și <code>C = 3</code> pentru cerința <code>3</code>. De pe următoarele <code>N</code> linii ale fișierului se citește câte o pereche de numere <code>A</code> și <code>B</code>, separate printr-un spațiu.</p>",
+      "text": "Din fișierul de intrare multisum.in se citesc, de pe prima linie, două numere N și C, despărțite printr-un spațiu, reprezentând numărul de seturi de date și tipul cerinței: C = 1 pentru cerința 1, C = 2 pentru cerința 2 și C = 3 pentru cerința 3. De pe următoarele N linii ale fișierului se citește câte o pereche de numere A și B, separate printr-un spațiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>În fișierul de ieșire <code>multisum.out</code> se va scrie câte o linie pentru fiecare pereche <code>A B</code> din fișierul de intrare, linie care va conține numărul cerut, conform cerinței: dacă <code>C = 1</code>, numărul va reprezenta numărul maxim de termeni dintr-o descompunere, dacă <code>C = 2</code>, numărul va reprezenta numărul de valori din intervalul respectiv care pot fi descompuse cu un număr maxim de termeni, iar dacă <code>C = 3</code>, numărul va reprezenta acea valoare din intervalul respectiv care admite o descompunere cu un număr maxim de termeni, minimă din punct de vedere lexicografic.</p>",
+      "text": "În fișierul de ieșire multisum.out se va scrie câte o linie pentru fiecare pereche A B din fișierul de intrare, linie care va conține numărul cerut, conform cerinței: dacă C = 1, numărul va reprezenta numărul maxim de termeni dintr-o descompunere, dacă C = 2, numărul va reprezenta numărul de valori din intervalul respectiv care pot fi descompuse cu un număr maxim de termeni, iar dacă C = 3, numărul va reprezenta acea valoare din intervalul respectiv care admite o descompunere cu un număr maxim de termeni, minimă din punct de vedere lexicografic."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>0 &lt; N ≤ 1000</code></li>\n\t<li><code>2 &lt; A ≤ B ≤ 100 000</code></li>\n\t<li>Suma lungimilor intervalelor din toate seturile unui test nu va depăși <code>100 000</code>.</li>\n\t<li>Pentru rezolvarea corectă a cerinței <code>1</code>, se acordă <code>20%</code> din punctaj, pentru cerința <code>2</code> se acordă <code>40%</code> din punctaj, iar pentru cerința <code>3</code> se acordă <code>40%</code> din punctaj.</li>\n\t<li>Pentru teste în valoare de <code>30</code> de puncte, <code>N ≤ 50</code>, <code>B ≤ 1000</code> și suma lungimilor intervalelor din teste nu va depăși <code>10 000</code>.</li>\n</ul>",
+      "text": "0 < N ≤ 1000 2 < A ≤ B ≤ 100 000 Suma lungimilor intervalelor din toate seturile unui test nu va depăși 100 000. Pentru rezolvarea corectă a cerinței 1, se acordă 20% din punctaj, pentru cerința 2 se acordă 40% din punctaj, iar pentru cerința 3 se acordă 40% din punctaj. Pentru teste în valoare de 30 de puncte, N ≤ 50, B ≤ 1000 și suma lungimilor intervalelor din teste nu va depăși 10 000."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>multisum.in</code></p><pre>1 1\n50 60</pre><p><code>multisum.out</code></p><pre>5</pre><h3>Explicație</h3><p>Există un singur set de date. Se rezolvă cerința <code>1</code>. Descompunerile maximale ale numerelor din interval au unele <code>4</code> termeni, altele <code>5</code> termeni. Deci cel mai mare număr de termeni este <code>5</code> (și acesta se obține pentru numerele <code>55</code>, <code>57</code>, <code>58</code> și <code>59</code>).</p>",
+      "text": "multisum.in1 1 50 60multisum.out5ExplicațieExistă un singur set de date. Se rezolvă cerința 1. Descompunerile maximale ale numerelor din interval au unele 4 termeni, altele 5 termeni. Deci cel mai mare număr de termeni este 5 (și acesta se obține pentru numerele 55, 57, 58 și 59)."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>multisum.in</code></p><pre>1 2\n50 60</pre><p><code>multisum.out</code></p><pre>4</pre><h3>Explicație</h3><p>Există un singur set de date. Se rezolvă cerința <code>2</code>. Numerele care se pot descompune într-un număr maxim de termeni sunt <code>55</code>, <code>57</code>, <code>58</code> și <code>59</code>. Deci sunt <code>4</code> numere care admit o descompunere maximală.</p>",
+      "text": "multisum.in1 2 50 60multisum.out4ExplicațieExistă un singur set de date. Se rezolvă cerința 2. Numerele care se pot descompune într-un număr maxim de termeni sunt 55, 57, 58 și 59. Deci sunt 4 numere care admit o descompunere maximală."
+    },
+    {
+      "title": "Exemplul 3:",
+      "html": "<p><code>multisum.in</code></p><pre>1 3\n50 60</pre><p><code>multisum.out</code></p><pre>55</pre><h3>Explicație</h3><p>Există un singur set de date. Se rezolvă cerința <code>3</code>. Cele <code>4</code> numere care admit descompuneri maximale sunt:<br>\n<code>55=1+2+4+16+32</code>, <code>55=1+2+4+12+36</code>, <code>55=1+2+4+8+40</code> <br>\n<code>57=1+2+6+12+36</code>, <code>58=1+3+6+12+36</code>, <code>59=1+2+8+16+32</code><br>\nCea mai mică sumă din punct de vedere lexicografic este <code>1+2+4+8+40</code> și ea corespunde numărului <code>55</code>.</p>",
+      "text": "multisum.in1 3 50 60multisum.out55ExplicațieExistă un singur set de date. Se rezolvă cerința 3. Cele 4 numere care admit descompuneri maximale sunt: 55=1+2+4+16+32, 55=1+2+4+12+36, 55=1+2+4+8+40 57=1+2+6+12+36, 58=1+3+6+12+36, 59=1+2+8+16+32 Cea mai mică sumă din punct de vedere lexicografic este 1+2+4+8+40 și ea corespunde numărului 55."
+    },
+    {
+      "title": "Exemplul 4:",
+      "html": "<p><code>multisum.in</code></p><pre>3 3\n50 50\n10 13\n16 17</pre><p><code>multisum.out</code></p><pre>50\n11\n17</pre><h3>Explicație</h3><p>Sunt <code>3</code> seturi de date. Se rezolvă cerința <code>3</code>: Intervalul <code>[50, 50]</code> conține doar numărul <code>50</code> care admite o singură descompunere maximală (cu <code>4</code> termeni) și aceasta este minimă din punct de vedere lexicografic.<br>\nDintre numerele din intervalul <code>[10,13]</code>, numerele <code>10</code>, <code>11</code> și <code>13</code> admit o descompunere cu un număr maxim de termeni (<code>3</code> termeni), dar o descompunere maximală a lui <code>11</code> (<code>1+2+8</code>) este minimă din punct de vedere lexicografic. În intervalul <code>[16,17]</code> numerele admit câte două descompuneri maximale: <code>16=1+3+12</code>, <code>16=1+5+10</code>, <code>17=1+2+14</code>, <code>17=1+4+12</code>, iar descompunerea minimă din punct de vedere lexicografic este <code>1+2+14</code> și corespunde valorii <code>17</code>.</p>",
+      "text": "multisum.in3 3 50 50 10 13 16 17multisum.out50 11 17ExplicațieSunt 3 seturi de date. Se rezolvă cerința 3: Intervalul [50, 50] conține doar numărul 50 care admite o singură descompunere maximală (cu 4 termeni) și aceasta este minimă din punct de vedere lexicografic. Dintre numerele din intervalul [10,13], numerele 10, 11 și 13 admit o descompunere cu un număr maxim de termeni (3 termeni), dar o descompunere maximală a lui 11 (1+2+8) este minimă din punct de vedere lexicografic. În intervalul [16,17] numerele admit câte două descompuneri maximale: 16=1+3+12, 16=1+5+10, 17=1+2+14, 17=1+4+12, iar descompunerea minimă din punct de vedere lexicografic este 1+2+14 și corespunde valorii 17."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Există un singur set de date. Se rezolvă cerința 1. Descompunerile maximale ale numerelor din interval au unele 4 termeni, altele 5 termeni. Deci cel mai mare număr de termeni este 5 (și acesta se obține pentru numerele 55, 57, 58 și 59)."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Există un singur set de date. Se rezolvă cerința 2. Numerele care se pot descompune într-un număr maxim de termeni sunt 55, 57, 58 și 59. Deci sunt 4 numere care admit o descompunere maximală."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Există un singur set de date. Se rezolvă cerința 3. Cele 4 numere care admit descompuneri maximale sunt: 55=1+2+4+16+32, 55=1+2+4+12+36, 55=1+2+4+8+40 57=1+2+6+12+36, 58=1+3+6+12+36, 59=1+2+8+16+32 Cea mai mică sumă din punct de vedere lexicografic este 1+2+4+8+40 și ea corespunde numărului 55."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Sunt 3 seturi de date. Se rezolvă cerința 3: Intervalul [50, 50] conține doar numărul 50 care admite o singură descompunere maximală (cu 4 termeni) și aceasta este minimă din punct de vedere lexicografic. Dintre numerele din intervalul [10,13], numerele 10, 11 și 13 admit o descompunere cu un număr maxim de termeni (3 termeni), dar o descompunere maximală a lui 11 (1+2+8) este minimă din punct de vedere lexicografic. În intervalul [16,17] numerele admit câte două descompuneri maximale: 16=1+3+12, 16=1+5+10, 17=1+2+14, 17=1+4+12, iar descompunerea minimă din punct de vedere lexicografic este 1+2+14 și corespunde valorii 17."
+    }
+  ],
+  "constraints": [
+    "0 < N ≤ 1000",
+    "2 < A ≤ B ≤ 100 000",
+    "Suma lungimilor intervalelor din toate seturile unui test nu va depăși 100 000.",
+    "Pentru rezolvarea corectă a cerinței 1, se acordă 20% din punctaj, pentru cerința 2 se acordă 40% din punctaj, iar pentru cerința 3 se acordă 40% din punctaj.",
+    "Pentru teste în valoare de 30 de puncte, N ≤ 50, B ≤ 1000 și suma lungimilor intervalelor din teste nu va depăși 10 000."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q103ac4a5ba.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "10",
+    "intrare/ieșire": "multisum.in / multisum.out",
+    "limită timp": "0.4 secunde",
+    "limită memorie": "16 MB / 8 MB",
+    "sursa problemei": "ONI 2017, clasa a X-a",
+    "autor": "Rodica Pintea",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.4,
+  "memoryLimitMb": 16,
+  "author": "Rodica Pintea",
+  "sourceAttribution": "ONI 2017, clasa a X-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/2196/multisum"
+}

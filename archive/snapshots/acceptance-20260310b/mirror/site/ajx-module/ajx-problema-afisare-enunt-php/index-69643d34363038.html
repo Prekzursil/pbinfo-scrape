@@ -1,0 +1,141 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4608"><article id="enunt">
+			<p>Se consideră matricea <code>𝑇</code> cu <code>𝑛</code> linii (numerotate de la <code>1</code> la <code>𝑛</code>) și <code>𝑚</code> coloane (numerotate de la <code>1</code> la <code>𝑚</code>) ce conține numere întregi.</p>
+
+<p>O submatrice a matricei <code>𝑇</code> este definită prin linia și coloana colțului stânga-sus <code>(𝑥1, 𝑦1)</code>, respectiv linia și coloana colțului dreapta-jos <code>(𝑥2, 𝑦2)</code>, cu <code>1 ≤ 𝑥1 ≤ 𝑥2 ≤ 𝑛</code> și <code>1 ≤ 𝑦1 ≤ 𝑦2 ≤ 𝑚</code> și conține toate elementele de pe pozițiile <code>(𝑥, 𝑦)</code> ale matricei pentru care <code>𝑥1 ≤ 𝑥 ≤ 𝑥2</code> și <code>𝑦1 ≤ 𝑦 ≤ 𝑦2</code>. În particular, submatricea cu colțul stânga-sus în <code>(1, 1)</code> și colțul dreapta-jos în <code>(𝑛,𝑚)</code> este identică cu matricea <code>𝑇</code>.</p>
+
+<p>Pentru fiecare linie a unei submatrice date, se calculează suma pe linie prin adunarea elementelor aflate pe aceasta. Sumele obținute pentru fiecare dintre liniile acestei submatrice formează termenii unui șir, numit șirul <code>𝑆</code> al sumelor pe linii. Spunem că submatricea este <em>aprogressive</em> dacă <code>𝑥1 &lt; 𝑥2</code> și <code>𝑦1 &lt; 𝑦2</code> și șirul <code>𝑆</code> al sumelor pe linii poate fi rearanjat pentru a forma, cu toți termenii săi, o progresie aritmetică de rație nenulă <code>𝑟</code>. </p>
+
+<p>Forma comprimată a unei submatrice <code>𝑅</code> cu colțul stânga-sus <code>(𝑥1, 𝑦1)</code> și colțul dreapta jos <code>(𝑥2, 𝑦2)</code> se notează cu <code>C(𝑅)</code> și se definește astfel:</p>
+
+<p><img align="right" alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-4400-approgresive-1-png.png" style="width:120px;"></p>
+
+<ul>
+	<li>dacă <code>𝑥1 = 𝑥2</code> (este o submatrice linie) sau dacă <code>𝑦1 = 𝑦2</code> (este o submatrice coloană) atunci forma sa comprimată este <code>C(𝑅)= (𝑥1, 𝑦1, 𝑥2, 𝑦2, 0)</code>. În caz contrar,</li>
+	<li>dacă <code>𝑅</code> este aprogressive, forma sa comprimată este <code>C(𝑅)= (𝑥1, 𝑦1, 𝑥2, 𝑦2, 𝑟)</code>. În caz contrar,</li>
+	<li>se împarte <code>𝑅</code> în <code>4</code> submatrice <code>𝐴</code>, <code>𝐵</code>, <code>𝐶</code>, <code>𝐷</code> cu mulțimi disjuncte de elemente după cum este ilustrat în figura alăturată, unde submatricea <code>𝐴</code> are colțul stânga-sus în <code>(𝑥1, 𝑦1)</code>, iar colțul dreapta-jos în \( \left( \left[ \frac{x1 + x2}{2}  \right], \left[ \frac{y1 + y2}{2}  \right] \right) \), \( \left[ x  \right]  \) reprezentând partea întreagă a numărului real <code>𝑥</code>. Forma comprimată a submatricei <code>𝑅</code> este definită recursiv <code>C(𝑅) =(C(𝐴), C(𝐵), C(𝐶), C(𝐷))</code>.</li>
+</ul>
+
+<p><img align="right" alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-4400-approgresive-2-png.png" style="width:200px;"></p>
+
+<p>De exemplu, matricea <code>𝑇</code> din figura alăturată pentru că are <code>𝑛 = 5</code>, <code>𝑚 = 5</code>, <code>𝑥1 = 1</code>, <code>𝑦1 = 1</code>, <code>𝑥2 = 5</code>, <code>𝑦2 = 5</code> se<br>
+comprimă urmând raționamentul de mai jos.</p>
+
+<p>Pentru că nu este nici matrice-linie și nici matrice-coloană, se determină pentru matricea <code>T</code> șirul <code>𝑆</code> al sumelor pe linii, anume: <code>9, 19, 14, 8, 10</code>. Pentru că nu este matrice aprogressive, matricea va fi împărțită în submatricele:</p>
+
+<ul>
+	<li><code>𝐴</code> – cu colțurile stânga-sus, respectiv dreapta-jos <code>(1, 1)–(3, 3)</code>;</li>
+	<li><code>𝐵</code> – cu colțurile stânga-sus, respectiv dreapta-jos <code>(1, 4)–(3, 5)</code>;</li>
+	<li><code>𝐶</code> – cu colțurile stânga-sus, respectiv dreapta-jos <code>(4, 1)–(5, 3)</code>;</li>
+	<li><code>𝐷</code> – cu colțurile stânga-sus, respectiv dreapta-jos <code>(4, 4)–(5, 5)</code>;</li>
+</ul>
+
+<p>Pentru submatricea <code>𝐴</code> șirul <code>𝑆</code> al sumelor pe linii este: <code>4, 10, 7</code>, care, prin rearanjare, formează o progresie aritmetică cu rația <code>𝑟 = 3</code>. Forma comprimată a submatricei <code>𝐴</code> este <code>C(𝐴)=(1, 1, 3, 3, 3)</code>.</p>
+
+<p>Pentru submatricea <code>𝐵</code> șirul <code>𝑆</code> al sumelor pe linii este: <code>5, 9, 7</code>, care, prin rearanjare, formează o progresie aritmetică cu rația <code>𝑟 = 2</code>. Forma comprimată a submatricei <code>𝐵</code> este <code>C(𝐵)= (1, 4, 3, 5, 2)</code>.</p>
+
+<p>Pentru submatricea <code>𝐶</code> șirul <code>𝑆</code> al sumelor pe linii este: <code>5, 5</code>, care, prin rearanjare, formează o progresie aritmetică dar cu rația <code>𝑟 = 0</code>. Pentru această submatrice se reia procedeul de împărțire. Forma comprimată a submatricei <code>𝐶</code> este <code>C(𝐶)= ( (4, 1, 4, 2, 0) (4, 3, 4, 3, 0) (5, 1, 5, 2, 0) (5, 3, 5, 3, 0))</code>.</p>
+
+<p>Pentru submatricea <code>𝐷</code> șirul <code>𝑆</code> al sumelor pe linii este: <code>3, 5</code>, care, prin reanjare formează o progresie aritmetică cu rația <code>𝑟 = 2</code>. Forma comprimată a submatricei 𝐷 este <code>C(𝐷)= (4, 4, 5, 5, 2)</code>.</p>
+
+<p>Astfel, forma comprimată a matricei <code>𝑇</code> este: <code>C(𝑇)=( (1, 1, 3, 3, 3) (1, 4, 3, 5, 2) ( (4, 1, 4, 2, 0) (4, 3, 4, 3, 0) (5, 1, 5, 2, 0) (5, 3, 5, 3, 0)) (4, 4, 5, 5, 2))</code>.</p>
+
+<h1>Cerințe</h1>
+
+<p>Cunoscând dimensiunile și elementele matricei <code>𝑇</code> să se determine:</p>
+
+<ol>
+	<li>Indicii liniilor matricei <code>𝑇</code> pentru care suma elementelor aflate pe fiecare dintre acestea este maximă.</li>
+	<li>Indicii liniilor matricei <code>𝑇</code> pentru care elementele pot fi rearanjate astfel încât să formeze pe linia respectivă, o progresie aritmetică de rație nenulă.</li>
+	<li>Forma comprimată a matricei <code>𝑇</code>.</li>
+</ol>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>aprogressive.in</code> conține pe prima linie numărul <code>𝑐</code> reprezentând cerința care trebuie rezolvată. Pe a doua linie se află numerele naturale <code>𝑛</code> și <code>𝑚</code> cu semnificația din enunț. Pe fiecare dintre următoarele <code>𝑛</code> linii se află câte <code>𝑚</code> numere întregi ce reprezintă elementele matricei <code>𝑇</code>. Numerele aflate pe aceeași linie a fișierului de intrare sunt separate prin câte un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>aprogressive.out</code> va conține fie răspunsul pentru cerința 1 (dacă <code>𝑐 = 1</code>), fie răspunsul pentru cerința 2 (dacă <code>𝑐 = 2</code>), fie răspunsul pentru cerința 3 (dacă <code>𝑐 = 3</code>).</p>
+
+<p>Pentru cerința 1 se vor afișa, fiecare pe câte un rând, în ordine strict crescătoare, indicii determinați pentru cerința 1.</p>
+
+<p>Pentru cerința 2 se vor afișa, fiecare pe câte un rând, în ordine strict crescătoare, indicii determinați pentru cerința 2, iar dacă nu există linii care să respecte cerința, se va afișa <code>0</code>.<br>
+Pentru cerința 3 se va afișa forma comprimată a matricei <code>𝑇</code>, pe un singur rând, fără spații, cu valorile separate prin câte o virgulă, încadrate corespunzător între paranteze rotunde.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>𝑐 ∈ {1, 2, 3}</code></li>
+	<li><code>1 ≤ 𝑛,𝑚 ≤ 1024</code></li>
+	<li>Elementele matricei <code>𝑇</code> aparțin intervalului <code>[−10</code><sup><code>9</code></sup><code>, 10</code><sup><code>9</code></sup><code>]</code>.</li>
+	<li>Punctaj:
+	<ol>
+		<li>pentru 20 de puncte, <code>𝑐 = 1</code></li>
+		<li>pentru 25 de puncte, <code>𝑐 = 2</code></li>
+		<li>pentru 25 de puncte <code>𝑐 = 3</code> și <code>𝑛,𝑚 ≤ 512</code></li>
+		<li>pentru 30 de puncte, <code>𝑐 = 3</code> și fără alte restricții suplimentare</li>
+	</ol></li>
+	</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>aprogressive.in</code></p>
+
+<pre>1
+3 4
+6 3 7 4
+3 1 4 2
+2 6 4 8</pre>
+
+<p><code>aprogressive.out</code></p>
+
+<pre>1
+3</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerința 1. Suma pe linia 1 este egală cu <code>20</code>. Suma pe linia 2 este egală cu <code>10</code>. Suma pe linia 3 este egală cu <code>20</code>. Se afișează indicii liniilor <code>1</code> și <code>3</code>, în această ordine, deoarece pe aceste linii suma este maximă</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>aprogressive.in</code></p>
+
+<pre>2
+3 4
+6 3 7 4
+3 1 4 2
+2 6 4 8</pre>
+
+<p><code>aprogressive.out</code></p>
+
+<pre>2
+3</pre>
+
+<h3>Explicație</h3>
+
+<p><code>𝑐 = 2, 𝑛 = 3, 𝑚 = 4</code>. Se rezolvă cerința 2.</p>
+
+<p>Elementele liniei 2 pot fi rearanjate astfel încât să formeze o progresie aritmetică cu rația <code>𝑟 = 1</code>: <code>1, 2, 3, 4</code>.<br>
+Elementele liniei 3 pot fi rearanjate astfel încât să formeze o progresie aritmetică cu rația <code>𝑟 = 2</code> : <code>2, 4, 6, 8</code>.<br>
+Se afișează indicii liniilor 2 și 3, în această ordine.</p>
+
+<h1>Exemplul 3</h1>
+
+<p><code>aprogressive.in</code></p>
+
+<pre>3
+5 5
+2 1 1 3 2
+3 2 5 4 5
+1 4 2 1 6
+2 2 1 2 1
+1 3 1 2 3</pre>
+
+<p><code>aprogressive.out</code></p>
+
+<pre>((1,1,3,3,3)(1,4,3,5,2)((4,1,4,2,0)(4,3,4,3,0)(5,1,5,2,0)(5,3,5,3,0))(4,4,5,5,2))</pre>
+
+<h3>Explicație</h3>
+
+<p><code>𝑐 = 3, 𝑛 = 5, 𝑚 = 5</code>. Se rezolvă cerința 3. Etapele de obținere a răspunsului sunt explicate în enunț.</p>		</article>
+		</body></html>

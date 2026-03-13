@@ -1,0 +1,310 @@
+{
+  "id": 4777,
+  "slug": "sponsor",
+  "name": "sponsor",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4777/sponsor",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 10,
+      "name": "Şiruri de caractere",
+      "slug": "iruri-de-caractere",
+      "href": "/?pagina=probleme-lista&tag=10"
+    },
+    {
+      "id": 84,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=84"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Scrieți un program care să determine numărul de posibilități de selectare din lista de sponsori a acelora care respectă această proprietate, precum și soluția minimă lexicografic.</p>",
+      "text": "Scrieți un program care să determine numărul de posibilități de selectare din lista de sponsori a acelora care respectă această proprietate, precum și soluția minimă lexicografic."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>sponsor.in</code> are pe prima linie două valori naturale <code>C</code> și <code>N</code> separate printr-un spațiu, reprezentând cerința (<code>1</code> sau <code>2</code>) respectiv numărul de sponsori. Pe următoarele <code>N</code> linii se află numele celor <code>N</code> sponsori, câte un sponsor pe linie.</p>",
+      "text": "Fișierul de intrare sponsor.in are pe prima linie două valori naturale C și N separate printr-un spațiu, reprezentând cerința (1 sau 2) respectiv numărul de sponsori. Pe următoarele N linii se află numele celor N sponsori, câte un sponsor pe linie."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>sponsor.out</code> conține pe prima linie, dacă cerința este <code>1</code>, numărul <code>M</code> de posibilități de a selecta dintre cei <code>N</code> sponsori o listă care să respecte proprietatea descrisă. Dacă cerința este <code>2</code>, fișierul de ieșire va conține o listă de <code>11</code> sponsori care respectă proprietatea descrisă, scrisă corect, câte un sponsor pe linie.</p>",
+      "text": "Fișierul de ieșire sponsor.out conține pe prima linie, dacă cerința este 1, numărul M de posibilități de a selecta dintre cei N sponsori o listă care să respecte proprietatea descrisă. Dacă cerința este 2, fișierul de ieșire va conține o listă de 11 sponsori care respectă proprietatea descrisă, scrisă corect, câte un sponsor pe linie."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>11 ≤ N ≤ 50</code></li>\n\t<li>orice nume de sponsor are maximum <code>30</code> de caractere și apare o singură dată în listă</li>\n\t<li>numele sponsorilor conține numai litere mari și alte caractere imprimabile (cod <span class=\"caps\">ASCII</span> din mulțimea <code>[32, 127]</code>); primul și ultimul caracter al numelui sunt litere</li>\n\t<li>pentru toate testele există cel puțin o soluție</li>\n\t<li>pentru cerința 1 se acordă 49 puncte, iar pentru cerința 2 se acordă 41 puncte; 10 puncte se acordă pentru exemplele din enunț</li>\n</ul>",
+      "text": "11 ≤ N ≤ 50 orice nume de sponsor are maximum 30 de caractere și apare o singură dată în listă numele sponsorilor conține numai litere mari și alte caractere imprimabile (cod ASCII din mulțimea [32, 127]); primul și ultimul caracter al numelui sunt litere pentru toate testele există cel puțin o soluție pentru cerința 1 se acordă 49 puncte, iar pentru cerința 2 se acordă 41 puncte; 10 puncte se acordă pentru exemplele din enunț"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>sponsor.in</code></p><pre>1 12\nICONOGRAF\nOCHELARI PENTRU OCHI\nLAN\nASTAZI\nMANGO\nPAR\nIMPRESIONISM\nABBA\nDECAPOTAT\nDEMISEC\nELBA\nIF</pre><p><code>sponsor.out</code></p><pre>2</pre><h3>Explicație</h3><p>Cerința <code>1</code>, sunt <code>12</code> sponsori, există <code>2</code> posibilități de a selecta lista. Cele <code>2</code> posibilități sunt:</p><p><code>OCHELARI PENTRU OCHI\tOCHELARI PENTRU OCHI</code><br>\n<code>LAN\t\t\tLAN</code><br>\n<code>ICONOGRAF\t\tIF</code><br>\n<code>MANGO\t\t\tMANGO</code><br>\n<code>PAR\t\t\tPAR</code><br>\n<code>IMPRESIONISM\t\tIMPRESIONISM</code><br>\n<code>ABBA\t\t\tABBA</code><br>\n<code>DECAPOTAT\t\tDECAPOTAT</code><br>\n<code>AMANDOI\t\t\tAMANDOI</code><br>\n<code>DEMI_SEC\t\tDEMI_SEC</code><br>\n<code>ELBA\t\t\tELBA</code></p>",
+      "text": "sponsor.in1 12 ICONOGRAF OCHELARI PENTRU OCHI LAN ASTAZI MANGO PAR IMPRESIONISM ABBA DECAPOTAT DEMISEC ELBA IFsponsor.out2ExplicațieCerința 1, sunt 12 sponsori, există 2 posibilități de a selecta lista. Cele 2 posibilități sunt:OCHELARI PENTRU OCHI OCHELARI PENTRU OCHI LAN LAN ICONOGRAF IF MANGO MANGO PAR PAR IMPRESIONISM IMPRESIONISM ABBA ABBA DECAPOTAT DECAPOTAT AMANDOI AMANDOI DEMI_SEC DEMI_SEC ELBA ELBA"
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>sponsor.in</code></p><pre>2 12\nICONOGRAF\nOCHELARI PENTRU OCHI\nLAN\nAMANDOI\nMANGO\nPAR\nIMPRESIONISM\nABBA\nDECAPOTAT\nDEMI_SEC\nELBA\nIF</pre><p><code>sponsor.out</code></p><pre>OCHELARI PENTRU OCHI\nLAN\nICONOGRAF\nMANGO\nPAR\nIMPRESIONISM\nABBA\nDECAPOTAT\nAMANDOI\nDEMI_SEC\nELBA</pre><h3>Explicație</h3><p>Cerința <code>2</code>, a fost afișată soluția minimă lexicografic dintre cele <code>2</code> posibilități de a selecta sponsorii<br>\n<code>ICONOGRAF &lt; IF</code> deoarece <code>litera C &lt; litera F</code></p>",
+      "text": "sponsor.in2 12 ICONOGRAF OCHELARI PENTRU OCHI LAN AMANDOI MANGO PAR IMPRESIONISM ABBA DECAPOTAT DEMI_SEC ELBA IFsponsor.outOCHELARI PENTRU OCHI LAN ICONOGRAF MANGO PAR IMPRESIONISM ABBA DECAPOTAT AMANDOI DEMI_SEC ELBAExplicațieCerința 2, a fost afișată soluția minimă lexicografic dintre cele 2 posibilități de a selecta sponsorii ICONOGRAF < IF deoarece litera C < litera F"
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cerința 1, sunt 12 sponsori, există 2 posibilități de a selecta lista. Cele 2 posibilități sunt:"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cerința 2, a fost afișată soluția minimă lexicografic dintre cele 2 posibilități de a selecta sponsorii ICONOGRAF < IF deoarece litera C < litera F"
+    }
+  ],
+  "constraints": [
+    "11 ≤ N ≤ 50",
+    "orice nume de sponsor are maximum 30 de caractere și apare o singură dată în listă",
+    "numele sponsorilor conține numai litere mari și alte caractere imprimabile (cod ASCII din mulțimea [32, 127]); primul și ultimul caracter al numelui sunt litere",
+    "pentru toate testele există cel puțin o soluție",
+    "pentru cerința 1 se acordă 49 puncte, iar pentru cerința 2 se acordă 41 puncte; 10 puncte se acordă pentru exemplele din enunț"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qee3afee6df.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "10",
+    "intrare/ieșire": "sponsor.in / sponsor.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "OMI 2025, clasa a 10-a",
+    "autor": "Marinel Șerban",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "author": "Marinel Șerban",
+  "sourceAttribution": "OMI 2025, clasa a 10-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4777/sponsor"
+}

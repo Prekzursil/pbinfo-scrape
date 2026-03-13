@@ -1,0 +1,112 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4451"><article id="enunt">
+			<p>Se consideră un șir de <code>n</code> numere naturale nenule <code>a = (a[1], a[2], ..., a[n])</code>. Două numere situate pe poziții consecutive în șir (<code>a[i]</code> și <code>a[i+1]</code>, unde <code>1 ≤ i &lt; n</code>) pot <strong>fuziona</strong> dacă ele au cel puțin un divizor comun strict mai mare decât 1. În urma fuziunii ele vor fi înlocuite de cel mai mic număr care se divide cu toți divizorii lui <code>a[i]</code> și ai lui <code>a[i+1]</code>. Operația de fuziune se poate repeta, pe noul șir obținut, până când în șir nu va exista nicio pereche de numere situate pe poziții consecutive care să poată fuziona. Să notăm cu <code>b</code> șirul obținut după efectuarea tuturor operațiilor de fuzionare.</p>
+
+<p>Numim <strong>coeficient de fuziune</strong> al șirului <code>b</code> și îl notăm cu <code>cf(b)</code> un număr nenul care are proprietatea că orice termen al șirului <code>b</code> are cel puțin un divizor comun cu <code>cf(b)</code>, strict mai mare decât 1. În plus, <code>cf(b)</code> trebuie să respecte următoarele condiții:</p>
+
+<ul>
+	<li>factorii săi primi sunt distincți (de exemplu <code>30 = 2 • 3 • 5</code> are doar factori primi distincți, dar <code>18=2 • 3 • 3</code> nu are doar factori primi distincți);</li>
+	<li>orice factor prim al lui <code>cf(b)</code> este factor prim pentru cel puțin un număr din șirul <code>b</code>;</li>
+	<li>lista factorilor primi distincți ai lui <code>cf(b)</code> ordonată strict crescător este minimă din punct de vedere lexicografic.</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Dat fiind un șir de numere naturale nenule, scrieți un program care să rezolve următoarele două cerințe:<br>
+1) să se determine lungimea minimă a șirului <code>b</code> obținut după efectuarea tuturor operațiilor de fuziune posibile;<br>
+2) să se determine <code>cf(b)</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>fuziune.in</code> conține pe prima linie cerința <code>C</code> care trebuie să fie rezolvată (1 sau 2). Pe cea de-a doua linie se află un număr natural <code>n</code>, reprezentând numărul de valori din șir. Pe următoarele <code>n</code> linii se află cele <code>n</code> numere din șir, câte un număr pe o linie. </p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>fuziune.out</code> va conține o singură linie pe care va fi scris răspunsul la cerința <code>C</code> din fișierul de intrare.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 100.000</code></li>
+	<li><code>2 ≤ a[i] ≤ 2.000.000.000</code>, pentru orice <code>1 ≤ i ≤ n</code></li>
+	<li>Se garantează că numărul de factori primi distincți pentru numerele din șirul <code>b</code> (pentru cerința 1) și pentru <code>cf(b)</code> (pentru cerința 2) este cel mult egal cu <code>250</code>.</li>
+	<li>Fie <code>d = (d[1] &lt; d[2] &lt; ... &lt; d[k])</code> și <code>f = (f[1] &lt; f[2] &lt; ... &lt; f[h])</code> două liste de factori primi distincți ordonate strict crescător. Spunem că <code>d</code> este mai mică din punct de vedere lexicografic decât <code>f</code> dacă există o poziție <code>i</code> astfel încât <code>d[j] = f[j]</code>, pentru orice <code>1 ≤ j &lt; i</code> și (<code>d[i] &lt; f[i]</code> sau <code>i = k + 1</code>).</li>
+	<li>Pentru 15 puncte, <code>C = 1</code>, <code>1 ≤ n ≤ 1000</code> și numerele din șir sunt <code>≤ 10.000</code>.</li>
+	<li>Pentru 15 puncte, <code>C = 1</code>, <code>10.000 ≤ n ≤ 100.000</code> și numerele din șir sunt <code>≤ 10.000</code>.</li>
+	<li>Pentru 10 puncte, <code>C = 1</code>, <code>1 ≤ n ≤ 1000</code> și numerele din șir sunt <code>≤ 2.000.000.000</code>.</li>
+	<li>Pentru 30 puncte, <code>C = 1</code>, <code>10.000 ≤ n ≤ 100.000</code> și numerele din șir sunt <code>≤ 2.000.000.000</code>.</li>
+	<li>Pentru 12 puncte, <code>C = 2</code> și rezultatul va fi un număr de maximum <code>18</code> cifre.</li>
+	<li>Pentru 18 puncte, <code>C = 2</code> și rezultatul va fi un număr cu maximum <code>1500</code> cifre.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>fuziune.in</code></p>
+
+<pre>1
+8
+30
+18
+997
+121
+625
+5
+55
+101</pre>
+
+<p><code>fuziune.out</code></p>
+
+<pre>4</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C=1</code>. Numerele <code>30 = 2 • 3 • 5</code> și <code>18 = 2 • 3^2</code> vor fuziona și se obține valoarea <code>90 = 2 • 3^2 • 5</code>. Numerele <code>625</code>, <code>5</code> și <code>55</code> vor fuziona de asemenea, apoi rezultatul va fuziona cu <code>121</code> și se obține valoarea <code>75625 = 5^4 • 11^2</code>. În șirul rezultat vor rămâne, după efectuarea tuturor fuzionărilor <code>4</code> numere (<code>90</code>, <code>997</code>, <code>75625</code> și <code>101</code>).</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>fuziune.in</code></p>
+
+<pre>2
+3
+16
+18
+25</pre>
+
+<p><code>fuziune.out</code></p>
+
+<pre>30</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C=2</code>. În urma efectuării tuturor operațiilor de fuziune posibile se obține șirul <br>
+<code>144 = 2^4 • 3^2</code><br>
+<code>25 = 5^2</code><br>
+<code>cf(b) = 2 • 3 • 5 = 30</code>.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>fuziune.in</code></p>
+
+<pre>2
+8
+30
+18
+97
+121
+625
+5
+55
+10403</pre>
+
+<p><code>fuziune.out</code></p>
+
+<pre>3233010</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C=2</code>. În urma efectuării tuturor operațiilor de fuziune posibile se obține șirul<br>
+<code>90=2 • 3^2 • 5</code><br>
+<code>97</code><br>
+<code>75625 = 5^4 • 11^2</code><br>
+<code>10403 = 101 • 103</code><br>
+<code>cf(b) = 2 • 3 • 5 • 11 • 97 • 101 = 3233010</code>.</p>		</article>
+		</body></html>

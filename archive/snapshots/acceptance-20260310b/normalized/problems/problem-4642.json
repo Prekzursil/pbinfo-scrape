@@ -1,0 +1,318 @@
+{
+  "id": 4642,
+  "slug": "sumxor",
+  "name": "sumxor",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4642/sumxor",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 44,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=44"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Scrieți un program care să rezolve următoarele două cerințe:<br>\n1. Construiți o altă permutare <code>B</code> astfel încât expresia <code>E = (A1 + B1) ⊕ (A2 + B2) ⊕ ... ⊕ (AN + BN)</code> să aibă valoare minimă.<br>\n2. Construiți o altă permutare <code>B</code> astfel încât expresia <code>E = (A1 + B1) ⊕ (A2 + B2) ⊕ ... ⊕ (AN + BN)</code> să aibă valoare maximă.</p>",
+      "text": "Scrieți un program care să rezolve următoarele două cerințe: 1. Construiți o altă permutare B astfel încât expresia E = (A1 + B1) ⊕ (A2 + B2) ⊕ ... ⊕ (AN + BN) să aibă valoare minimă. 2. Construiți o altă permutare B astfel încât expresia E = (A1 + B1) ⊕ (A2 + B2) ⊕ ... ⊕ (AN + BN) să aibă valoare maximă."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>sumxor.in</code> conține pe prima linie numărul <code>C</code> care poate avea valoarea <code>1</code> sau <code>2</code> în funcție de cerința ce trebuie rezolvată. Pe a doua linie se va afla numărul <code>N</code>, iar pe a treia linie se vor afla <code>N</code> numere distincte cuprinse între <code>1</code> și <code>N</code>, reprezentând permutarea <code>A</code>.</p>",
+      "text": "Fișierul de intrare sumxor.in conține pe prima linie numărul C care poate avea valoarea 1 sau 2 în funcție de cerința ce trebuie rezolvată. Pe a doua linie se va afla numărul N, iar pe a treia linie se vor afla N numere distincte cuprinse între 1 și N, reprezentând permutarea A."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>sumxor.out</code> va conține pe prima linie valoarea expresiei <code>E</code> în funcție de cerință (pentru cerința 1 se va afișa minimul, iar pentru cerința 2 se va afișa maximul). Pe a doua linie se vor afișa <code>N</code> numere distincte cuprinse între <code>1</code> și <code>N</code>, separate prin câte un spațiu reprezentând o permutare <code>B</code> cu ajutorul căreia se obține valoarea <code>E</code>.</p>",
+      "text": "Fișierul de ieșire sumxor.out va conține pe prima linie valoarea expresiei E în funcție de cerință (pentru cerința 1 se va afișa minimul, iar pentru cerința 2 se va afișa maximul). Pe a doua linie se vor afișa N numere distincte cuprinse între 1 și N, separate prin câte un spațiu reprezentând o permutare B cu ajutorul căreia se obține valoarea E."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 1.000.000</code></li>\n\t<li><code>1 ≤ Ai ≤ N</code>, <code>Ai ̸≠ Aj</code> pentru orice <code>i ̸≠ j</code></li>\n\t<li>Dacă există mai multe șiruri <code>B</code> care satisfac condițiile, puteți afișa oricare dintre ele.</li>\n\t<li>Pentru 16 puncte, <code>C = 1</code>, <code>1 ≤ N ≤ 10</code></li>\n\t<li>Pentru 16 puncte, <code>C = 2, 1 ≤ N ≤ 10</code></li>\n\t<li>Pentru 23 de puncte, <code>C = 1</code></li>\n\t<li>Pentru 45 de puncte, <code>C = 2</code></li>\n\t<li>Datorită dimensiunilor mari, nu au putut fi adăugate toate testele.</li>\n</ul>",
+      "text": "1 ≤ N ≤ 1.000.000 1 ≤ Ai ≤ N, Ai ̸≠ Aj pentru orice i ̸≠ j Dacă există mai multe șiruri B care satisfac condițiile, puteți afișa oricare dintre ele. Pentru 16 puncte, C = 1, 1 ≤ N ≤ 10 Pentru 16 puncte, C = 2, 1 ≤ N ≤ 10 Pentru 23 de puncte, C = 1 Pentru 45 de puncte, C = 2 Datorită dimensiunilor mari, nu au putut fi adăugate toate testele."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>sumxor.in</code></p><pre>1\n2\n2 1</pre><p><code>sumxor.out</code></p><pre>0\n1 2</pre><h3>Explicație</h3><p><code>E = (2 + 1) ⊕ (1 + 2) = 3 ⊕ 3 = 0</code>. Aceasta este valoarea minimă ce se poate obține.</p>",
+      "text": "sumxor.in1 2 2 1sumxor.out0 1 2ExplicațieE = (2 + 1) ⊕ (1 + 2) = 3 ⊕ 3 = 0. Aceasta este valoarea minimă ce se poate obține."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>sumxor.in</code></p><pre>2\n5\n4 3 1 5 2</pre><p><code>sumxor.out</code></p><pre>14\n5 4 3 2 1</pre><h3>Explicație</h3><p><code>E = (4 + 5)⊕(3 + 4)⊕(1 + 3)⊕(5 + 2)⊕(2 + 1) = 9 ⊕ 7 ⊕ 4 ⊕ 7 ⊕ 3 = 14</code>. Se poate demonstra că nu se poate obține o valoare mai mare în acest caz.</p>",
+      "text": "sumxor.in2 5 4 3 1 5 2sumxor.out14 5 4 3 2 1ExplicațieE = (4 + 5)⊕(3 + 4)⊕(1 + 3)⊕(5 + 2)⊕(2 + 1) = 9 ⊕ 7 ⊕ 4 ⊕ 7 ⊕ 3 = 14. Se poate demonstra că nu se poate obține o valoare mai mare în acest caz."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "E = (2 + 1) ⊕ (1 + 2) = 3 ⊕ 3 = 0. Aceasta este valoarea minimă ce se poate obține."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "E = (4 + 5)⊕(3 + 4)⊕(1 + 3)⊕(5 + 2)⊕(2 + 1) = 9 ⊕ 7 ⊕ 4 ⊕ 7 ⊕ 3 = 14. Se poate demonstra că nu se poate obține o valoare mai mare în acest caz."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 1.000.000",
+    "1 ≤ Ai ≤ N, Ai ̸≠ Aj pentru orice i ̸≠ j",
+    "Dacă există mai multe șiruri B care satisfac condițiile, puteți afișa oricare dintre ele.",
+    "Pentru 16 puncte, C = 1, 1 ≤ N ≤ 10",
+    "Pentru 16 puncte, C = 2, 1 ≤ N ≤ 10",
+    "Pentru 23 de puncte, C = 1",
+    "Pentru 45 de puncte, C = 2",
+    "Datorită dimensiunilor mari, nu au putut fi adăugate toate testele."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q58e7d56c1f.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/sumxor_01.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-sumxor-01-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "sumxor.in / sumxor.out",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "32 MB / 8 MB",
+    "sursa problemei": "CNER CODE clasa a X-a",
+    "autor": "Andrei Boacă",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 32,
+  "author": "Andrei Boacă",
+  "sourceAttribution": "CNER CODE clasa a X-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4642/sumxor"
+}

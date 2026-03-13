@@ -1,0 +1,87 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2054"><article id="enunt">
+			<p>Inspirați de clasicul joc Tic-Tac-Toe (X și 0), Teodora și Ștefan își propun să joace ceva asemănător, adăugând jocului clasic câteva reguli noi:</p>
+
+<ul>
+	<li>tabla de joc este un pătrat de latură <code>N</code>, care este împărțit în <code>N*N</code> celule, așezate pe <code>N</code> linii și <code>N</code> coloane; celulele pătratului sunt numerotate de la <code>1</code> la <code>N</code><sup><code>2</code></sup> parcurgând liniile de sus în jos, și coloanele de la stânga la dreapta;</li>
+	<li>Teodora va marca celulele cu <code>X</code> (litera <code>X</code>), iar Ștefan cu <code>0</code> (cifra <code>0</code>);</li>
+	<li>în cadrul unei runde, copiii marchează alternativ câte o celulă din pătrat, nemarcată anterior;</li>
+	<li>o rundă a jocului este descrisă printr-un șir format din exact <code>N</code><sup><code>2</code></sup> numere naturale reprezentând celulele pătratului, în ordinea în care au fost marcate succesiv de cei doi copii;</li>
+	<li>jocul are <code>K</code> runde; prima este începută de Teodora, a doua de Ștefan, a treia Teodora, a patra Ștefan și așa mai departe;</li>
+	<li>o rundă este câștigată de jucătorul care reușește primul să marcheze complet o linie, o coloană, diagonala principală sau una din cele două semidiagonale paralele și alăturate cu aceasta, diagonala secundară sau una din cele două semidiagonale paralele și alăturate acesteia;</li>
+	<li>o rundă se încheie fără un câștigător dacă după marcarea celor <code>N</code><sup><code>2</code></sup> celule nu există pe tabla de joc nicio linie, coloană, diagonală sau semidiagonală marcate cu același simbol.</li>
+</ul>
+
+<h1>Cerințe</h1>
+
+<p>Cunoscând numerele <code>N</code>, <code>K</code> și cele <code>K</code> șiruri de numere care reprezintă rundele jucate, scrieți un program care să rezolve una dintre următoarele două cerințe:</p>
+
+<ol>
+	<li>Să se determine câte runde a câștigat fiecare copil.</li>
+	<li>Să se determine care este cel mai mare număr de marcări efectuate până la câștigarea unei runde.</li>
+</ol>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>joc7.in</code> conține pe prima linie un număr natural <code>C</code>. Pentru toate testele, <code>C</code> poate lua numai valorile <code>1</code> sau <code>2</code>. Pe a doua linie se află două numere naturale <code>N</code> și <code>K</code>, separate prin câte un spațiu, reprezentând dimensiunea tablei de joc și respectiv numărul de runde jucate. Pe următoarele <code>K</code> linii sunt descrise rundele de joc, câte o rundă pe câte o linie a fișierului. În cadrul liniilor, numerele sunt separate prin câte un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă valoarea lui <code>C</code> este <code>1</code>, se va rezolva numai punctul 1) din cerințe. În acest caz, fișierul de ieșire <code>joc7.out</code> va conține pe prima linie două numere naturale <code>t</code> și <code>s</code>, separate printr-un spațiu, unde <code>t</code> reprezintă numărul de runde câștigate de Teodora, iar <code>s</code> numărul rundelor câștigate de Ștefan.</p>
+
+<p>Dacă valoarea lui <code>C</code> este <code>2</code>, se va rezolva numai punctul 2) din cerințe. În acest caz, fișierul de ieșire <code>joc7.out</code> va conține pe prima linie numărul cel mai mare de marcări efectuate până la câștigarea unei runde.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>3 ≤ N ≤ 100</code></li>
+	<li><code>1 ≤ K ≤ 25</code></li>
+	<li>La fiecare joc se câștigă cel puțin o rundă.</li>
+	<li>Pentru rezolvarea corectă a primei cerințe se acordă 45 de puncte, iar pentru rezolvarea corectă a celei de a doua cerințe se acordă 45 de puncte. În concurs s-au acordat 10 puncte din oficiu. Pe site se acordă 10 puncte pentru exemple.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>joc7.in</code></p>
+
+<pre>1
+4 4
+16 13 15 9 10 1 5 2 6 14 3 7 11 4 8 12
+1 2 3 4 5 6 7 8 12 11 10 9 13 14 15 16
+1 5 9 6 2 7 3 8 4 10 11 12 13 14 15 16
+1 2 3 4 8 7 6 5 12 11 10 9 16 15 14 13</pre>
+
+<p><code>joc7.out</code></p>
+
+<pre>2 1</pre>
+
+<h3>Explicație</h3>
+
+<p>Ilustrarea rundelor de joc până la momentul identificării unui câștigător este următoarea:</p>
+
+<ul>
+	<li>Runda 1 (începe Teodora): Runda este câștigată de Teodora după <code>7</code> marcări. Se completează semidiagonala situată sub diagonala principală.</li>
+	<li>Runda 2 (începe Ştefan): Runda este câştigată de Teodora după <code>14</code> marcări. Se completează semidiagonala situată sub diagonala secundară.</li>
+	<li>Runda 3 (începe Teodora): Runda este câştigată de Ștefan după <code>8</code> marcări. Se completează linia a doua.</li>
+	<li>Runda 4 (începe Ştefan): Runda nu este câştigată de niciun jucător.</li>
+</ul>
+
+
+<h1>Exemplul 2</h1>
+
+<p><code>joc7.in</code></p>
+
+<pre>2
+4 4
+16 13 15 9 10 1 5 2 6 14 3 7 11 4 8 12
+1 2 3 4 5 6 7 8 12 11 10 9 13 14 15 16
+1 5 9 6 2 7 3 8 4 10 11 12 13 14 15 16
+1 2 3 4 8 7 6 5 12 11 10 9 16 15 14 13</pre>
+
+<p><code>joc7.out</code></p>
+
+<pre>14</pre>
+
+<h3>Explicație</h3>
+
+<p>Doar <code>3</code> dintre cele <code>4</code> runde jucate au fost câştigate. Până în momentul câştigării în prima rundă s-au făcut <code>7</code> marcări, în a doua <code>14</code>, iar în a treia <code>8</code>. Deci numărul maxim de marcări făcute până la câştigarea unei runde este <code>14</code>.</p>		</article>
+		</body></html>

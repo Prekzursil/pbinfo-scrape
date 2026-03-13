@@ -1,0 +1,311 @@
+{
+  "id": 3441,
+  "slug": "cetate",
+  "name": "Cetate",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3441/cetate",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 46,
+      "name": "Tablouri bidimensionale (matrice)",
+      "slug": "tablouri-bidimensionale-matrice",
+      "href": "/?pagina=probleme-lista&tag=46"
+    },
+    {
+      "id": 58,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=58"
+    }
+  ],
+  "tags": [
+    "Sume parțiale"
+  ],
+  "sections": [
+    {
+      "title": "Cerințe",
+      "html": "<p>Scrieţi un program care, cunoscând matricea cetății și o valoare <code>K</code>, determină:</p><ol>\n\t<li>profitul maxim al unei submatrice cu laturile egale cu <code>K</code>, precum și configurația prin care se identifică ea;</li>\n\t<li>profitul maxim al unei submatrice cu laturile cel mult egale cu <code>K</code>, precum și configurația prin care se identifică ea.</li>\n</ol>",
+      "text": "Scrieţi un program care, cunoscând matricea cetății și o valoare K, determină: profitul maxim al unei submatrice cu laturile egale cu K, precum și configurația prin care se identifică ea; profitul maxim al unei submatrice cu laturile cel mult egale cu K, precum și configurația prin care se identifică ea."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>cetate.in</code> conține pe primul rând o valoare <code>c</code> egală cu <code>1</code> sau <code>2</code>, reprezentând cerința ce urmează a fi rezolvată. Următoarea linie conține în ordine <code>N</code>, <code>M</code> și <code>K</code>, cu semnificația din enunț, iar pe următoarele <code>N</code> linii se află câte <code>M</code> numere, reprezentând valorile din matricea dată. Numerele aflate pe aceeași linie a fișierului sunt separate prin câte un spațiu.</p>",
+      "text": "Fișierul de intrare cetate.in conține pe primul rând o valoare c egală cu 1 sau 2, reprezentând cerința ce urmează a fi rezolvată. Următoarea linie conține în ordine N, M și K, cu semnificația din enunț, iar pe următoarele N linii se află câte M numere, reprezentând valorile din matricea dată. Numerele aflate pe aceeași linie a fișierului sunt separate prin câte un spațiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>cetate.out</code> va conține pe prima profitul maxim cerut, conform cerinței, iar pe a doua linie va conține <code>4</code> numere naturale, reprezentând configurația prin care se identifică submatricea obținută. Dacă există mai multe submatrice conform cerinței, se va lua în considerare cea pentru care configurația formată din cele <code>4</code> numere de mai sus este minim lexicografică.</p>",
+      "text": "Fișierul de ieșire cetate.out va conține pe prima profitul maxim cerut, conform cerinței, iar pe a doua linie va conține 4 numere naturale, reprezentând configurația prin care se identifică submatricea obținută. Dacă există mai multe submatrice conform cerinței, se va lua în considerare cea pentru care configurația formată din cele 4 numere de mai sus este minim lexicografică."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N, M ≤ 400</code>; <code>1 ≤ K ≤ min(N, M)</code></li>\n\t<li>Valorile date pentru matricea cetății se află în intervalul <code>[-10</code><sup><code>9</code></sup><code> ,10</code><sup><code>9</code></sup><code>]</code></li>\n\t<li>Pentru teste în valoare de 20 de puncte, <code>c=1</code>, iar pentru restul testelor, în valoare de 70 de puncte, <code>c=2</code>. Pentru teste în valoare de 8 puncte, <code>c=1</code> și <code>1 ≤ N,M ≤ 70</code>. Pentru teste în valoare de <code>25</code> de puncte, <code>c=2</code> și <code>1 ≤ N, M ≤ 70</code></li>\n\t<li>Configurația \\((x_1, x_2, x_3, x_4)\\) este mai mică din punctul de vedere lexicografic decât configurația \\((y_1,y_2,y_3,y_4)\\) dacă există \\(p\\) astfel încât \\(x_p &lt; y_p\\) și \\(x_1 = y_1\\), \\(x_2 = y_2\\), … \\(x_{p-1} = y_{p-1}\\).</li>\n</ul>",
+      "text": "1 ≤ N, M ≤ 400; 1 ≤ K ≤ min(N, M) Valorile date pentru matricea cetății se află în intervalul [-109 ,109] Pentru teste în valoare de 20 de puncte, c=1, iar pentru restul testelor, în valoare de 70 de puncte, c=2. Pentru teste în valoare de 8 puncte, c=1 și 1 ≤ N,M ≤ 70. Pentru teste în valoare de 25 de puncte, c=2 și 1 ≤ N, M ≤ 70 Configurația \\((x_1, x_2, x_3, x_4)\\) este mai mică din punctul de vedere lexicografic decât configurația \\((y_1,y_2,y_3,y_4)\\) dacă există \\(p\\) astfel încât \\(x_p < y_p\\) și \\(x_1 = y_1\\), \\(x_2 = y_2\\), … \\(x_{p-1} = y_{p-1}\\)."
+    },
+    {
+      "title": "Exemplul 1",
+      "html": "<p><code>cetate.in</code></p><pre>1\n3 4 3\n-1 -1 -1 -1\n-1 2 -1 -1\n-1 -1 -1 -1</pre><p><code>cetate.out</code></p><pre>-6\n1 1 3 3</pre><h3>Explicație</h3><p>În acest exemplu, se rezolvă cerința <code>1</code>. S-a determinat submatricea cu configurația <code>i1=1</code>, <code>j1=1</code>, <code>i2=3</code>, <code>j2=3</code>, formată din elementele aflate pe liniile <code>1</code>, <code>2</code> și <code>3</code> și coloanele <code>1</code>, <code>2</code> și <code>3</code>. O altă submatrice cu profitul <code>-6</code> este cea dată de configurația <code>1, 2, 3, 4</code>, care însă este mai mare din punctul de vedere lexicografic decât cea afișată, de aceea nu este o soluție acceptată.</p>",
+      "text": "cetate.in1 3 4 3 -1 -1 -1 -1 -1 2 -1 -1 -1 -1 -1 -1cetate.out-6 1 1 3 3ExplicațieÎn acest exemplu, se rezolvă cerința 1. S-a determinat submatricea cu configurația i1=1, j1=1, i2=3, j2=3, formată din elementele aflate pe liniile 1, 2 și 3 și coloanele 1, 2 și 3. O altă submatrice cu profitul -6 este cea dată de configurația 1, 2, 3, 4, care însă este mai mare din punctul de vedere lexicografic decât cea afișată, de aceea nu este o soluție acceptată."
+    },
+    {
+      "title": "Exemplul 2",
+      "html": "<p><code>cetate.in</code></p><pre>2\n3 4 3\n-1 -1 -1 -1\n-1 2 1 -1\n-1 -1 -1 -1</pre><p><code>cetate.out</code></p><pre>3\n2 2 2 3</pre><h3>Explicație</h3><p>În acest exemplu, se rezolvă cerința <code>2</code>. Au fost considerate toate submatricele, cu laturile <code>1</code>, <code>2</code> sau <code>3</code>, iar submatricea găsită, cu laturile <code>1</code> și <code>2</code>, este singura submatrice de profit maxim care respectă condițiile impuse de cerință.</p>",
+      "text": "cetate.in2 3 4 3 -1 -1 -1 -1 -1 2 1 -1 -1 -1 -1 -1cetate.out3 2 2 2 3ExplicațieÎn acest exemplu, se rezolvă cerința 2. Au fost considerate toate submatricele, cu laturile 1, 2 sau 3, iar submatricea găsită, cu laturile 1 și 2, este singura submatrice de profit maxim care respectă condițiile impuse de cerință."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "În acest exemplu, se rezolvă cerința 1. S-a determinat submatricea cu configurația i1=1, j1=1, i2=3, j2=3, formată din elementele aflate pe liniile 1, 2 și 3 și coloanele 1, 2 și 3. O altă submatrice cu profitul -6 este cea dată de configurația 1, 2, 3, 4, care însă este mai mare din punctul de vedere lexicografic decât cea afișată, de aceea nu este o soluție acceptată."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "În acest exemplu, se rezolvă cerința 2. Au fost considerate toate submatricele, cu laturile 1, 2 sau 3, iar submatricea găsită, cu laturile 1 și 2, este singura submatrice de profit maxim care respectă condițiile impuse de cerință."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N, M ≤ 400; 1 ≤ K ≤ min(N, M)",
+    "Valorile date pentru matricea cetății se află în intervalul [-109 ,109]",
+    "Pentru teste în valoare de 20 de puncte, c=1, iar pentru restul testelor, în valoare de 70 de puncte, c=2. Pentru teste în valoare de 8 puncte, c=1 și 1 ≤ N,M ≤ 70. Pentru teste în valoare de 25 de puncte, c=2 și 1 ≤ N, M ≤ 70",
+    "Configurația \\((x_1, x_2, x_3, x_4)\\) este mai mică din punctul de vedere lexicografic decât configurația \\((y_1,y_2,y_3,y_4)\\) dacă există \\(p\\) astfel încât \\(x_p < y_p\\) și \\(x_1 = y_1\\), \\(x_2 = y_2\\), … \\(x_{p-1} = y_{p-1}\\)."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qb55144067f.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "9",
+    "intrare/ieșire": "cetate.in / cetate.out",
+    "limită timp": "1 secunde",
+    "limită memorie": "64 MB / 32 MB",
+    "sursa problemei": "OJI 2020, clasa a IX-a",
+    "autor": "Iordache Ioan-Bogdan",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 1,
+  "memoryLimitMb": 64,
+  "author": "Iordache Ioan-Bogdan",
+  "sourceAttribution": "OJI 2020, clasa a IX-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3441/cetate"
+}

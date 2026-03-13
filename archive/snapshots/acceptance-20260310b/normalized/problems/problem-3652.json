@@ -1,0 +1,314 @@
+{
+  "id": 3652,
+  "slug": "secvcost",
+  "name": "secvcost",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3652/secvcost",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 85,
+      "name": "Structuri de date liniare",
+      "slug": "structuri-de-date-liniare",
+      "href": "/?pagina=probleme-lista&tag=85"
+    },
+    {
+      "id": 86,
+      "name": "Stiva",
+      "slug": "stiva",
+      "href": "/?pagina=probleme-lista&tag=86"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Se dau <code>M</code> întrebări de forma: <code>X Y</code> – să se calculeze suma tuturor costurilor pozițiilor din secvența <code>[X, Y]</code>.<br>\nAtenție! Când se calculează costul unei poziții <code>P</code> din <code>[X, Y]</code>, secvența de lungime maximă pe care valoarea <code>V[P]</code> este maximă se calculează în funcție de tot șirul, NU în funcție de secvența <code>[X, Y]</code> (pentru clarificare urmăriți exemplul).</p>",
+      "text": "Se dau M întrebări de forma: X Y – să se calculeze suma tuturor costurilor pozițiilor din secvența [X, Y]. Atenție! Când se calculează costul unei poziții P din [X, Y], secvența de lungime maximă pe care valoarea V[P] este maximă se calculează în funcție de tot șirul, NU în funcție de secvența [X, Y] (pentru clarificare urmăriți exemplul)."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>secvcost.in</code> conține pe prima linie cele două numere <code>N</code> și <code>M</code>, separate prin spațiu. Pe a doua linie se află <code>N</code> numere naturale distincte reprezentând elementele șirului <code>V</code>. Pe următoarele <code>M</code> linii se află perechi de valori <code>X</code>, <code>Y</code> reprezentând întrebările la care trebuie să se răspundă.</p>",
+      "text": "Fișierul de intrare secvcost.in conține pe prima linie cele două numere N și M, separate prin spațiu. Pe a doua linie se află N numere naturale distincte reprezentând elementele șirului V. Pe următoarele M linii se află perechi de valori X, Y reprezentând întrebările la care trebuie să se răspundă."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>secvcost.out</code> va conține <code>M</code> linii cu câte un număr pe fiecare linie reprezentând răspunsul la cele <code>M</code> întrebări, în ordine.</p>",
+      "text": "Fișierul de ieșire secvcost.out va conține M linii cu câte un număr pe fiecare linie reprezentând răspunsul la cele M întrebări, în ordine."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li>Toate valorile din șir sunt mai mici sau egale decât <code>5.000.000</code></li>\n\t<li>Pentru 25% din teste <code>N, M ≤ 500</code></li>\n\t<li>Pentru alte 25% din teste <code>N, M ≤ 10.000</code></li>\n\t<li>Pentru restul de 50% din teste <code>N, M ≤ 200.000</code></li>\n</ul>",
+      "text": "Toate valorile din șir sunt mai mici sau egale decât 5.000.000 Pentru 25% din teste N, M ≤ 500 Pentru alte 25% din teste N, M ≤ 10.000 Pentru restul de 50% din teste N, M ≤ 200.000"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>secvcost.in</code></p><pre>5 2\n2 3 1 5 4\n3 3\n2 2</pre><p><code>secvcost.out</code></p><pre>1\n9</pre><h3>Explicație</h3><p>Pentru prima întrebare avem <code>V[3] = 1</code> care este maxim pe secvența <code>[3, 3]</code>. Costul este <code>1 * 1 = 1</code>. Pentru a doua întrebare avem <code>V[2] = 3</code> care este maxim pe secvența <code>[1, 3]</code>. Costul este <code>3 * 3 = 9</code>.</p>",
+      "text": "secvcost.in5 2 2 3 1 5 4 3 3 2 2secvcost.out1 9ExplicațiePentru prima întrebare avem V[3] = 1 care este maxim pe secvența [3, 3]. Costul este 1 * 1 = 1. Pentru a doua întrebare avem V[2] = 3 care este maxim pe secvența [1, 3]. Costul este 3 * 3 = 9."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>secvcost.in</code></p><pre>5 3\n2 3 1 5 4\n1 3\n5 5\n4 4</pre><p><code>secvcost.out</code></p><pre>12\n4\n25</pre><h3>Explicație</h3><p><code>2*1 + 3*3 + 1*1 = 12</code><br>\n<code>4*1 = 4</code><br>\n<code>5*5 = 25</code></p>",
+      "text": "secvcost.in5 3 2 3 1 5 4 1 3 5 5 4 4secvcost.out12 4 25Explicație2*1 + 3*3 + 1*1 = 12 4*1 = 4 5*5 = 25"
+    },
+    {
+      "title": "Exemplul 3:",
+      "html": "<p><code>secvcost.in</code></p><pre>10 10\n10 30 29 39 34 32 3 6 7 9\n6 7\n1 7\n6 10\n1 5\n7 9\n4 7\n3 7\n5 6\n3 7\n6 10</pre><p><code>secvcost.out</code></p><pre>163\n886\n232\n723\n36\n757\n786\n364\n786\n232</pre>",
+      "text": "secvcost.in10 10 10 30 29 39 34 32 3 6 7 9 6 7 1 7 6 10 1 5 7 9 4 7 3 7 5 6 3 7 6 10secvcost.out163 886 232 723 36 757 786 364 786 232"
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Pentru prima întrebare avem V[3] = 1 care este maxim pe secvența [3, 3]. Costul este 1 * 1 = 1. Pentru a doua întrebare avem V[2] = 3 care este maxim pe secvența [1, 3]. Costul este 3 * 3 = 9."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "2*1 + 3*3 + 1*1 = 12 4*1 = 4 5*5 = 25"
+    }
+  ],
+  "constraints": [
+    "Toate valorile din șir sunt mai mici sau egale decât 5.000.000",
+    "Pentru 25% din teste N, M ≤ 500",
+    "Pentru alte 25% din teste N, M ≤ 10.000",
+    "Pentru restul de 50% din teste N, M ≤ 200.000"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q994c12db05.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "10",
+    "intrare/ieșire": "secvcost.in / secvcost.out",
+    "limită timp": "0.3 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "Concursul Național Info Pro, Etapa I",
+    "autor": "Emanuel Dicu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.3,
+  "memoryLimitMb": 64,
+  "author": "Emanuel Dicu",
+  "sourceAttribution": "Concursul Național Info Pro, Etapa I",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3652/secvcost"
+}

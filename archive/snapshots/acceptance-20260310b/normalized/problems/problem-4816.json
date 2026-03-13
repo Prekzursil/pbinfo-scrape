@@ -1,0 +1,313 @@
+{
+  "id": 4816,
+  "slug": "experimente",
+  "name": "experimente",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4816/experimente",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 65,
+      "name": "Structuri de date arborescente",
+      "slug": "structuri-de-date-arborescente",
+      "href": "/?pagina=probleme-lista&tag=65"
+    },
+    {
+      "id": 148,
+      "name": "Structuri de date",
+      "slug": "structuri-de-date",
+      "href": "/?pagina=probleme-lista&tag=148"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>La fiecare pas, Dexter vrea să știe câți din cei <code>N</code> șoareci au participat la toate experimentele efectuate până atunci. Altfel spus, după fiecare al <code>i</code>-lea experiment efectuat, să se determine numărul de șoareci care au participat la  toate experimentele <code>1, 2, ..., i</code>.</p>",
+      "text": "La fiecare pas, Dexter vrea să știe câți din cei N șoareci au participat la toate experimentele efectuate până atunci. Altfel spus, după fiecare al i-lea experiment efectuat, să se determine numărul de șoareci care au participat la toate experimentele 1, 2, ..., i."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>experimente.in</code> conține pe prima linie două numere <code>N</code> și <code>M</code>. Fiecare din următoarele <code>M</code> linii conține două numere <code>A[i]</code> și <code>B[i]</code>, având următoarea semnificație:</p><ul>\n\t<li>dacă <code>i = 1</code>, atunci <code>S[i] = A[i]</code> și <code>F[i] = B[i]</code>;</li>\n\t<li>dacă <code>i &gt; 1</code> și notând cu <code>R[i-1]</code> răspunsul pentru cel de al <code>(i-1)</code>-lea experiment, atunci <code>S[i] = (R[i-1] + A[i]) mod N</code> și <code>F[i] = (R[i-1] + B[i]) mod N</code>.</li>\n</ul>",
+      "text": "Fișierul de intrare experimente.in conține pe prima linie două numere N și M. Fiecare din următoarele M linii conține două numere A[i] și B[i], având următoarea semnificație: dacă i = 1, atunci S[i] = A[i] și F[i] = B[i]; dacă i > 1 și notând cu R[i-1] răspunsul pentru cel de al (i-1)-lea experiment, atunci S[i] = (R[i-1] + A[i]) mod N și F[i] = (R[i-1] + B[i]) mod N."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>experimente.out</code> trebuie să conțină <code>M</code> linii. Pe cea de a <code>i</code>-a linie se va afișa un singur număr reprezentând numărul de șoareci care au participat la toate experimentele <code>1, 2, ..., i</code>.<br>\n% numărul de șoareci care participă la primele <code>i</code> experimente.</p>",
+      "text": "Fișierul de ieșire experimente.out trebuie să conțină M linii. Pe cea de a i-a linie se va afișa un singur număr reprezentând numărul de șoareci care au participat la toate experimentele 1, 2, ..., i. % numărul de șoareci care participă la primele i experimente."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 1.000.000.000</code>;</li>\n\t<li><code>1 ≤ M ≤ 100.000</code>;</li>\n\t<li><code>0 ≤ A[i], B[i] &lt; N</code>.</li>\n\t<li>Pentru 18 puncte, <code>S[i] ≤ F[i]</code> pentru <code>1 ≤ i ≤ M</code></li>\n\t<li>Pentru 20 de puncte, <code>1 ≤ N, M ≤ 1000</code></li>\n\t<li>Pentru 22 de puncte, <code>1 ≤ N ≤ 100.000, 1 ≤ M ≤ 1000</code></li>\n\t<li>Pentru 20 de puncte, <code>1 ≤ N, M ≤ 100.000</code></li>\n\t<li>Pentru 20 de puncte, fără restricţii suplimentare</li>\n</ul>",
+      "text": "1 ≤ N ≤ 1.000.000.000; 1 ≤ M ≤ 100.000; 0 ≤ A[i], B[i] < N. Pentru 18 puncte, S[i] ≤ F[i] pentru 1 ≤ i ≤ M Pentru 20 de puncte, 1 ≤ N, M ≤ 1000 Pentru 22 de puncte, 1 ≤ N ≤ 100.000, 1 ≤ M ≤ 1000 Pentru 20 de puncte, 1 ≤ N, M ≤ 100.000 Pentru 20 de puncte, fără restricţii suplimentare"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>experimente.in</code></p><pre>5 3\n1 4\n3 0\n2 0</pre><p><code>experimente.out</code></p><pre>4\n3\n2</pre><h3>Explicație</h3><p>Pentru primul experiment <code>S[1] = 1</code> și <code>F[1] = 4</code>; participă șoarecii <code>1</code>, <code>2</code>, <code>3</code> și <code>4</code>, deci <code>R[1] = 4</code>.<br>\nPentru al doilea experiment, <code>S[2] = (3 + 4) mod 5 = 2</code>, iar <code>F[2] = (0 + 4) mod 5 = 4</code>. La primele două experimente participă șoarecii <code>2</code>, <code>3</code> și <code>4</code>, deci <code>R[2] = 3</code>.<br>\nPentru al treilea experiment, <code>S[3] = (2 + 3) mod 5 = 0</code>, iar <code>F[3] = (0 + 3) mod 5 = 3</code>. La primele trei experimente participă șoarecii <code>2</code> și <code>3</code>, deci <code>R[3] = 2</code>.</p>",
+      "text": "experimente.in5 3 1 4 3 0 2 0experimente.out4 3 2ExplicațiePentru primul experiment S[1] = 1 și F[1] = 4; participă șoarecii 1, 2, 3 și 4, deci R[1] = 4. Pentru al doilea experiment, S[2] = (3 + 4) mod 5 = 2, iar F[2] = (0 + 4) mod 5 = 4. La primele două experimente participă șoarecii 2, 3 și 4, deci R[2] = 3. Pentru al treilea experiment, S[3] = (2 + 3) mod 5 = 0, iar F[3] = (0 + 3) mod 5 = 3. La primele trei experimente participă șoarecii 2 și 3, deci R[3] = 2."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>experimente.in</code></p><pre>6 2\n4 1\n2 5</pre><p><code>experimente.out</code></p><pre>4\n2</pre><h3>Explicație</h3><p>Pentru primul experiment <code>S[1] = 4</code> și <code>F[1] = 1</code>; participă șoarecii <code>0</code>, <code>1</code>, <code>4</code> și <code>5</code>, deci <code>R[1] = 4</code>.<br>\nPentru al doilea experiment, <code>S[2] = (2 + 4) mod 6 = 0</code>, iar <code>F[2] = (5 + 4) mod 6 = 3</code>. La primele două experimente participă șoarecii <code>0</code> și <code>1</code>, deci <code>R[2] = 2</code>.</p>",
+      "text": "experimente.in6 2 4 1 2 5experimente.out4 2ExplicațiePentru primul experiment S[1] = 4 și F[1] = 1; participă șoarecii 0, 1, 4 și 5, deci R[1] = 4. Pentru al doilea experiment, S[2] = (2 + 4) mod 6 = 0, iar F[2] = (5 + 4) mod 6 = 3. La primele două experimente participă șoarecii 0 și 1, deci R[2] = 2."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Pentru primul experiment S[1] = 1 și F[1] = 4; participă șoarecii 1, 2, 3 și 4, deci R[1] = 4. Pentru al doilea experiment, S[2] = (3 + 4) mod 5 = 2, iar F[2] = (0 + 4) mod 5 = 4. La primele două experimente participă șoarecii 2, 3 și 4, deci R[2] = 3. Pentru al treilea experiment, S[3] = (2 + 3) mod 5 = 0, iar F[3] = (0 + 3) mod 5 = 3. La primele trei experimente participă șoarecii 2 și 3, deci R[3] = 2."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Pentru primul experiment S[1] = 4 și F[1] = 1; participă șoarecii 0, 1, 4 și 5, deci R[1] = 4. Pentru al doilea experiment, S[2] = (2 + 4) mod 6 = 0, iar F[2] = (5 + 4) mod 6 = 3. La primele două experimente participă șoarecii 0 și 1, deci R[2] = 2."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 1.000.000.000;",
+    "1 ≤ M ≤ 100.000;",
+    "0 ≤ A[i], B[i] < N.",
+    "Pentru 18 puncte, S[i] ≤ F[i] pentru 1 ≤ i ≤ M",
+    "Pentru 20 de puncte, 1 ≤ N, M ≤ 1000",
+    "Pentru 22 de puncte, 1 ≤ N ≤ 100.000, 1 ≤ M ≤ 1000",
+    "Pentru 20 de puncte, 1 ≤ N, M ≤ 100.000",
+    "Pentru 20 de puncte, fără restricţii suplimentare"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q2e3129a57b.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "11",
+    "intrare/ieșire": "experimente.in / experimente.out",
+    "limită timp": "1 secunde",
+    "limită memorie": "256 MB / 64 MB",
+    "sursa problemei": "OJI 2025, clasele 11-12",
+    "autor": "Andrei Grigorean",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 1,
+  "memoryLimitMb": 256,
+  "author": "Andrei Grigorean",
+  "sourceAttribution": "OJI 2025, clasele 11-12",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4816/experimente"
+}

@@ -1,0 +1,53 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1246"><article id="enunt">
+			<p>Specificul insulelor din arhipelagul  Maldive (Oceanul Indian) este faptul că toate cele <code>N</code> insule ale sale au forma unui triunghi. Localizarea acestor insule folosește coordonatele carteziene ale celor trei vârfuri.</p>
+
+<p>Administrația acestor insule dorește să instaleze un dispozitiv de emisie-recepţie pe apă sau pe o insulă, într-un punct având coordonate numere naturale <code>(xD, yD)</code>, ce transmite semnale numai pe direcții orizontale și verticale concomitent, cu următoarele proprietăţi:</p>
+
+<ul>
+	<li>notând cu <code>NRO</code> numărul de insule la care ajunge semnalul pe orizontală și cu <code>NRV</code> numărul de insule la care ajunge semnalul pe verticală, suma <code>NRO + NRV</code> trebuie să fie maximă;</li>
+	<li>dacă există mai multe puncte cu proprietatea anterioară, atunci se va alege punctul cel mai mic în ordine lexicografică.</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Să se scrie un program care cunoscând numărul de insule <code>N</code> şi coordonatele carteziene ale vârfurilor acestora, determină coordonatele <code>xD</code> și <code>yD</code> cu proprietățile din enunţ.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>dispozitiv.in</code> conține pe prima linie numărul <code>N</code>, cu semnificaţia de mai sus, iar pe următoarele <code>N</code> linii se află câte şase numere reprezentând coordonatele vârfurilor insulelor <code>(x1 y1 x2 y2 x3 y3)</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>dispozitiv.out</code> va conține pe prima linie coordonatele <code>xD</code> și <code>yD</code> cu proprietatea din enunţ, separate printr-un spațiu.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤  N ≤ 10 000</code></li>
+	<li>Coordonatele vârfurilor insulelor sunt numere naturale  <code>≤ 10</code><sup><code>9</code></sup></li>
+	<li>Orice două insule nu au puncte comune</li>
+	<li>Punctul de coordonate <code>(x1, y1)</code> este mai mic decât punctul de coordonate <code>(x2, y2)</code>, dacă <code>x1 &lt; x2</code> sau (<code>x1 = x2</code> și <code>y1 &lt; y2</code>)</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>dispozitiv.in</code></p>
+
+<pre>6
+0 7 4 7 1 10
+5 1 6 1 6 2
+2 3 2 4 4 4
+2 0 1 2 4 2
+6 7 7 7 6 10
+5 0 7 0 7 1</pre>
+
+<p><code>dispozitiv.out</code></p>
+
+<pre>2 1</pre>
+
+<h3>Explicație</h3>
+
+<p>Codificăm insulele cu <code>1, 2, …, 6</code>, iar insula <code>i</code> va avea coordonatele vârfurilor pe linia <code>i + 1</code>.<br>
+Paralelele la axa <code>Ox</code> și <code>Oy</code> prin punctul de coordonate <code>(2, 1)</code> intersectează un număr de <code>NRO = 3</code> triunghiuri și anume: <code>4</code>, <code>2</code>, <code>6</code> pe orizontală şi intersectează un număr de <code>NRV = 3</code> triunghiuri:  <code>4</code>, <code>3</code>, <code>1</code> pe verticală. <code>NRO + NRV</code> este maxim.<br>
+Mai sunt și alte puncte cu aceeași proprietate, dar mai mari în ordine lexicografică, cum ar fi punctul de coordonate <code>(6, 1)</code>.</p>		</article>
+		</body></html>

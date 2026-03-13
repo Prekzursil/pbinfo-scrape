@@ -1,0 +1,62 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2191"><article id="enunt">
+			<p>Ion este un lingvist pasionat. Recent el a descoperit un text scris într-o limbă necunoscută. Textul este scris pe mai multe linii şi este format din cuvinte scrise cu litere mici din alfabetul latin, separate prin spaţii sau/şi semne de punctuaţie (<code>,:;.!?-</code>). Ion a fost frapat că există multe similitudini între cuvintele din text. Fiind foarte riguros, Ion definește similitudinea a două cuvinte după cum urmează. Fie <code>c1</code> şi <code>c2</code> două cuvinte. Cuvântul <code>c1</code> poate fi obţinut din cuvântul <code>c2</code> printr-o succesiune de operaţii elementare. Operaţiile elementare ce pot fi folosite sunt:</p>
+
+<ul>
+	<li><code>move(c1, c2)</code> – Mută primul caracter din <code>c1</code> la sfârşitul cuvântului <code>c2</code> (de exemplu, dacă <code>c1="alba"</code> şi <code>c2="neagra"</code>, după efectuarea operaţiei <code>move(c1, c2)</code>, <code>c1</code> va fi <code>"lba"</code>, iar <code>c2</code> va fi <code>"neagraa"</code>)</li>
+	<li><code>insert(c1, x)</code> – Inserează caracterul <code>x</code> la începutul lui <code>c1</code> (de exemplu, dacă <code>c1="alba"</code> şi <code>x='b'</code>, după executarea operaţiei <code>insert(c1,x)</code>, <code>c1</code> va fi <code>"balba"</code>)</li>
+	<li><code>delete(c1)</code> – Şterge primul caracter din <code>c1</code> (de exemplu, dacă <code>c1="alba"</code>, după executarea operaţiei <code>delete(c1)</code>, <code>c1</code> va fi <code>"lba"</code>)</li>
+</ul>
+
+<p>Definim similitudinea dintre <code>c1</code> şi <code>c2</code> ca fiind numărul minim de operații <code>insert</code> şi <code>delete</code> ce trebuie să fie executate pentru a transforma cuvântul <code>c1</code> în cuvântul <code>c2</code> (operațiile <code>move</code> nu se numără).<br>
+Fie <code>c0</code> primul cuvânt din text. Începând cu <code>c0</code> putem construi lanțuri de <code>k</code>-similitudine. <br>
+Un lanţ de <code>k</code>-similitudine este o succesiune de cuvinte distincte din text cu următoarele proprietăți:</p>
+
+<ul>
+	<li>dacă cuvântul <code>x</code> apare în lanţ înaintea cuvântului <code>y</code>, atunci prima apariţie a lui <code>x</code> în text precedă prima apariţie a lui <code>y</code> în text;</li>
+	<li>dacă <code>x</code> şi <code>y</code> sunt cuvinte consecutive în lanţ (în ordinea <code>x y</code>), atunci similitudinea dintre <code>x</code> şi <code>y</code> este mai mică sau egală decât <code>k</code>;</li>
+	<li>lanţul este maximal (adică nu putem adăuga încă un cuvânt la sfârşitul acestui lanţ, astfel încât să fie respectate proprietăţile precedente).</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care să determine numărul de lanţuri de <code>k</code>-similitudine care încep cu <code>c0</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>lant2.in</code> conţine pe prima linie valoarea <code>k</code>. Pe următoarele linii se află textul dat.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>lant2.out</code> va conţine o singură linie pe care va fi scris numărul de lanţuri de <code>k</code>-similitudine care încep cu <code>c0</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>Lungimea unei linii din text nu depășește <code>1000</code> de caractere.</li>
+	<li>Lungimea unui cuvânt nu depășește <code>30</code> de caractere.</li>
+	<li>Numărul total de cuvinte distincte este de cel mult <code>150</code>.</li>
+	<li>Pentru datele de test, numărul de lanţuri de <code>k</code>-similitudine care încep cu <code>c0</code> va fi  mai mic sau egal cu <code>2.000.000.000</code></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>lant2.in</code></p>
+
+<pre>5
+ana are mere, banane,
+pere si castane.</pre>
+
+<p><code>lant2.out</code></p>
+
+<pre>6</pre>
+
+<h3>Explicație</h3>
+
+<p>Lanţurile de <code>5</code>-similitudine care se pot forma sunt:<br>
+<code>ana are mere pere</code><br>
+<code>ana are pere</code><br>
+<code>ana are banane castane</code><br>
+<code>ana are si</code><br>
+<code>ana banane castane</code><br>
+<code>ana si</code></p>		</article>
+		</body></html>

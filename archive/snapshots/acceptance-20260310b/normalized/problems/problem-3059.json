@@ -1,0 +1,311 @@
+{
+  "id": 3059,
+  "slug": "lexicografic",
+  "name": "lexicografic",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3059/lexicografic",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 65,
+      "name": "Structuri de date arborescente",
+      "slug": "structuri-de-date-arborescente",
+      "href": "/?pagina=probleme-lista&tag=65"
+    },
+    {
+      "id": 154,
+      "name": "Arbori de intervale",
+      "slug": "arbori-de-intervale",
+      "href": "/?pagina=probleme-lista&tag=154"
+    }
+  ],
+  "tags": [
+    "Arbori de intervale"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Dându-se un număr natural <code>K</code>, se cere șirul minim lexicografic ce se poate obține prin aplicarea a cel mult <code>K</code> interschimbări de elemente de pe poziții consecutive.</p>",
+      "text": "Dându-se un număr natural K, se cere șirul minim lexicografic ce se poate obține prin aplicarea a cel mult K interschimbări de elemente de pe poziții consecutive."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>În fișierul <code>lexicografic.in</code> se află pe prima linie <code>T</code>, reprezentând numărul de teste. Urmează cele <code>T</code> teste, fiecare pe câte două linii. Pe prima linie din cadrul unui test se află două numere <code>N</code> și <code>K</code> separate prin spațiu. Pe linia a doua din cadrul unui test se află cele <code>N</code> elemente ale șirului <code>v</code> separate prin spații.</p>",
+      "text": "În fișierul lexicografic.in se află pe prima linie T, reprezentând numărul de teste. Urmează cele T teste, fiecare pe câte două linii. Pe prima linie din cadrul unui test se află două numere N și K separate prin spațiu. Pe linia a doua din cadrul unui test se află cele N elemente ale șirului v separate prin spații."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>În fișierul <code>lexicografic.out</code> se vor afișa cele <code>T</code> linii, câte una corespunzătoare răspunsului pe fiecare test. Linia corespunzătoare unui test va conține cele <code>N</code> elemente separate prin spații ale șirului minim lexicografic ce s-a obținut din șirul inițial, după aplicarea a cel mult <code>K</code> interschimbări de elemente de pe poziții consecutive.</p>",
+      "text": "În fișierul lexicografic.out se vor afișa cele T linii, câte una corespunzătoare răspunsului pe fiecare test. Linia corespunzătoare unui test va conține cele N elemente separate prin spații ale șirului minim lexicografic ce s-a obținut din șirul inițial, după aplicarea a cel mult K interschimbări de elemente de pe poziții consecutive."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 250.000</code>;</li>\n\t<li><code>T ≤ 2500</code>;</li>\n\t<li>într-un fișier de intrare suma totală a lungimilor șirurilor corespunzătoare celor <code>T</code> teste nu va depăși <code>250.000</code>;</li>\n\t<li><code>1 ≤ K ≤ N*(N-1)/2</code>;</li>\n\t<li><code>1 ≤ v[i] ≤ N</code>, pentru <code>1 ≤ i ≤ N</code>;</li>\n\t<li>Vă rugăm să acordați atenție tipului de date necesar pentru a citi valoarea lui <code>K</code>;</li>\n\t<li>Pentru acordarea punctajului pe un fișier de test este necesară rezolvarea corectă a tuturor celor <code>T</code> teste;</li>\n\t<li>Pentru teste în valoare de <code>5</code> puncte se garantează <code>K = N * (N – 1) / 2</code>;</li>\n\t<li>Pentru alte teste în valoare de <code>7</code> puncte se garantează <code>K = 1</code>;</li>\n\t<li>Pentru alte teste în valoare de <code>23</code> de puncte se garantează <code>T ≤ 10</code>, <code>N ≤ 50</code>;</li>\n\t<li>Pentru alte teste în valoare de <code>4</code> puncte se garantează <code>T ≤ 10</code>, <code>N ≤ 100</code>;</li>\n\t<li>Pentru alte teste în valoare de <code>12</code> puncte se garantează <code>T ≤ 10</code>, <code>N ≤ 500</code>;</li>\n\t<li>Pentru alte teste în valoare de <code>24</code> de puncte se garantează <code>T ≤ 10</code>, <code>N ≤ 2000</code>;</li>\n\t<li>Un șir <code>a</code><sub><code>1</code></sub>, <code>a</code><sub><code>2</code></sub>, …, <code>a</code><sub><code>n</code></sub> este mai mic lexicografic decât un alt șir <code>b</code><sub><code>1</code></sub>, <code>b</code><sub><code>2</code></sub>, …, <code>b</code><sub><code>n</code></sub> dacă există un număr întreg <code>P</code> mai mic sau egal cu <code>N</code> astfel încât: <code>a</code><sub><code>1</code></sub> <code>= b</code><sub><code>1</code></sub>, <code>a</code><sub><code>2</code></sub> <code>= b</code><sub><code>2</code></sub>, … , <code>a</code><sub><code>P-1</code></sub> <code>= b</code><sub><code>P-1</code></sub>, iar <code>a</code><sub><code>P</code></sub> <code>&lt; b</code><sub><code>P</code></sub>.</li>\n</ul>",
+      "text": "1 ≤ N ≤ 250.000; T ≤ 2500; într-un fișier de intrare suma totală a lungimilor șirurilor corespunzătoare celor T teste nu va depăși 250.000; 1 ≤ K ≤ N*(N-1)/2; 1 ≤ v[i] ≤ N, pentru 1 ≤ i ≤ N; Vă rugăm să acordați atenție tipului de date necesar pentru a citi valoarea lui K; Pentru acordarea punctajului pe un fișier de test este necesară rezolvarea corectă a tuturor celor T teste; Pentru teste în valoare de 5 puncte se garantează K = N * (N – 1) / 2; Pentru alte teste în valoare de 7 puncte se garantează K = 1; Pentru alte teste în valoare de 23 de puncte se garantează T ≤ 10, N ≤ 50; Pentru alte teste în valoare de 4 puncte se garantează T ≤ 10, N ≤ 100; Pentru alte teste în valoare de 12 puncte se garantează T ≤ 10, N ≤ 500; Pentru alte teste în valoare de 24 de puncte se garantează T ≤ 10, N ≤ 2000; Un șir a1, a2, …, an este mai mic lexicografic decât un alt șir b1, b2, …, bn dacă există un număr întreg P mai mic sau egal cu N astfel încât: a1 = b1, a2 = b2, … , aP-1 = bP-1, iar aP < bP."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>lexicografic.in</code></p><pre>3\n5 2\n4 2 3 1 1\n4 3\n2 1 3 4\n6 4\n5 3 5 3 4 6</pre><p><code>lexicografic.out</code></p><pre>2 3 4 1 1\n1 2 3 4\n3 3 5 4 5 6</pre><h3>Explicație</h3><p>Pentru primul test: Șirul este format din <code>N = 5</code> elemente, și anume <code>v=(4,2,3,1,1)</code>. Putem efectua <code>K=2</code> interschimbări. Interschimbând elementele <code>v[1]</code> și <code>v[2]</code> obținem șirul <code>(2,4,3,1,1)</code>, apoi după interschimbarea elementelor <code>v[3]</code> și <code>v[2]</code> se obține șirul minim lexicografic <code>(2,3,4,1,1)</code>.</p>",
+      "text": "lexicografic.in3 5 2 4 2 3 1 1 4 3 2 1 3 4 6 4 5 3 5 3 4 6lexicografic.out2 3 4 1 1 1 2 3 4 3 3 5 4 5 6ExplicațiePentru primul test: Șirul este format din N = 5 elemente, și anume v=(4,2,3,1,1). Putem efectua K=2 interschimbări. Interschimbând elementele v[1] și v[2] obținem șirul (2,4,3,1,1), apoi după interschimbarea elementelor v[3] și v[2] se obține șirul minim lexicografic (2,3,4,1,1)."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Pentru primul test: Șirul este format din N = 5 elemente, și anume v=(4,2,3,1,1). Putem efectua K=2 interschimbări. Interschimbând elementele v[1] și v[2] obținem șirul (2,4,3,1,1), apoi după interschimbarea elementelor v[3] și v[2] se obține șirul minim lexicografic (2,3,4,1,1)."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 250.000;",
+    "T ≤ 2500;",
+    "într-un fișier de intrare suma totală a lungimilor șirurilor corespunzătoare celor T teste nu va depăși 250.000;",
+    "1 ≤ K ≤ N*(N-1)/2;",
+    "1 ≤ v[i] ≤ N, pentru 1 ≤ i ≤ N;",
+    "Vă rugăm să acordați atenție tipului de date necesar pentru a citi valoarea lui K;",
+    "Pentru acordarea punctajului pe un fișier de test este necesară rezolvarea corectă a tuturor celor T teste;",
+    "Pentru teste în valoare de 5 puncte se garantează K = N * (N – 1) / 2;",
+    "Pentru alte teste în valoare de 7 puncte se garantează K = 1;",
+    "Pentru alte teste în valoare de 23 de puncte se garantează T ≤ 10, N ≤ 50;",
+    "Pentru alte teste în valoare de 4 puncte se garantează T ≤ 10, N ≤ 100;",
+    "Pentru alte teste în valoare de 12 puncte se garantează T ≤ 10, N ≤ 500;",
+    "Pentru alte teste în valoare de 24 de puncte se garantează T ≤ 10, N ≤ 2000;",
+    "Un șir a1, a2, …, an este mai mic lexicografic decât un alt șir b1, b2, …, bn dacă există un număr întreg P mai mic sau egal cu N astfel încât: a1 = b1, a2 = b2, … , aP-1 = bP-1, iar aP < bP."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q2a8ce3526e.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "11",
+    "intrare/ieșire": "lexicografic.in / lexicografic.out",
+    "limită timp": "1 secunde",
+    "limită memorie": "128 MB / 8 MB",
+    "sursa problemei": "ONI 2019 clasele XI-XII",
+    "autor": "Andrei Costin Constantinescu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 1,
+  "memoryLimitMb": 128,
+  "author": "Andrei Costin Constantinescu",
+  "sourceAttribution": "ONI 2019 clasele XI-XII",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3059/lexicografic"
+}

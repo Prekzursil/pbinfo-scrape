@@ -1,0 +1,311 @@
+{
+  "id": 1706,
+  "slug": "stele",
+  "name": "Stele",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1706/stele",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 44,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=44"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Scrieți un program care rezolvă următoarele cerinţe:</p><ol>\n\t<li>cunoscând <code>s</code> numărul de stele dintr-o galaxie, determină o reprezentare codificată a acestui număr formată doar din litere mici distincte ordonate alfabetic;</li>\n\t<li>cunoscând <code>g</code>, reprezentând numărul de galaxii și <code>g</code> numere în scriere codificată, reprezentând numărul de stele din fiecare galaxie, determină scrierea zecimală a numărului total de stele din cele <code>g</code> galaxii.</li>\n</ol>",
+      "text": "Scrieți un program care rezolvă următoarele cerinţe: cunoscând s numărul de stele dintr-o galaxie, determină o reprezentare codificată a acestui număr formată doar din litere mici distincte ordonate alfabetic; cunoscând g, reprezentând numărul de galaxii și g numere în scriere codificată, reprezentând numărul de stele din fiecare galaxie, determină scrierea zecimală a numărului total de stele din cele g galaxii."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>stele.in</code> conține pe prima linie un număr natural <code>c</code>, reprezentând cerinţa care trebuie rezolvată (1 sau 2). Dacă cerinţa este 1, pe a doua linie se află un număr natural <code>s</code>, ce reprezintă numărul care trebuie codificat. </p><p>Dacă cerinţa este 2, pe a doua linie se află un număr natural <code>g</code> reprezentând numărul de galaxii, iar pe următoarele <code>g</code> linii câte un șir de caractere reprezentând numărul de stele dintr-o galaxie, codificat folosind algoritmul descris mai sus.</p>",
+      "text": "Fișierul de intrare stele.in conține pe prima linie un număr natural c, reprezentând cerinţa care trebuie rezolvată (1 sau 2). Dacă cerinţa este 1, pe a doua linie se află un număr natural s, ce reprezintă numărul care trebuie codificat. Dacă cerinţa este 2, pe a doua linie se află un număr natural g reprezentând numărul de galaxii, iar pe următoarele g linii câte un șir de caractere reprezentând numărul de stele dintr-o galaxie, codificat folosind algoritmul descris mai sus."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>stele.out</code> va conţine o singură linie pe care va fi scris un șir de litere mici distincte, ordonate alfabetic, reprezentând scrierea codificată a numărului <code>s</code> (dacă cerinţa este 1) sau un număr natural în scriere zecimală ce reprezintă numărul total de stele din cele <code>g</code> galaxii (dacă cerinţa este 2).</p>",
+      "text": "Fișierul de ieșire stele.out va conţine o singură linie pe care va fi scris un șir de litere mici distincte, ordonate alfabetic, reprezentând scrierea codificată a numărului s (dacă cerinţa este 1) sau un număr natural în scriere zecimală ce reprezintă numărul total de stele din cele g galaxii (dacă cerinţa este 2)."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ s ≤ 2</code><sup><code>26</code></sup><code>-1</code></li>\n\t<li><code>1 ≤ g ≤ 1000</code></li>\n\t<li>Reprezentările codificate din fişierul de intrare pot avea maximum <code>420</code> caractere.</li>\n\t<li>Numărul care poate apărea în fața unei litere poate avea maximum <code>15</code> cifre.</li>\n\t<li>Pentru teste valorând 30% din punctaj cerinţa este 1.</li>\n\t<li>Pentru teste corespunzătoare cerinţei 2 valorând 20% din punctaj valoarea obținută nu depășește <code>10</code><sup><code>18</code></sup></li>\n</ul>",
+      "text": "1 ≤ s ≤ 226-1 1 ≤ g ≤ 1000 Reprezentările codificate din fişierul de intrare pot avea maximum 420 caractere. Numărul care poate apărea în fața unei litere poate avea maximum 15 cifre. Pentru teste valorând 30% din punctaj cerinţa este 1. Pentru teste corespunzătoare cerinţei 2 valorând 20% din punctaj valoarea obținută nu depășește 1018"
+    },
+    {
+      "title": "Exemplul 1",
+      "html": "<p><code>stele.in</code></p><pre>1\n100</pre><p><code>stele.out</code></p><pre>cfg</pre><h3>Explicație</h3><p>Cerința este 1. Reprezentarea numărului <code>100</code>  care respectă cerinţa este: <code>cfg = 2</code><sup><code>2</code></sup><code>+2</code><sup><code>5</code></sup><code>+2</code><sup><code>6</code></sup><code> = 4+32+64 = 100</code></p>",
+      "text": "stele.in1 100stele.outcfgExplicațieCerința este 1. Reprezentarea numărului 100 care respectă cerinţa este: cfg = 22+25+26 = 4+32+64 = 100"
+    },
+    {
+      "title": "Exemplul 2",
+      "html": "<p><code>stele.in</code></p><pre>2\n5\n2a7g\n17b5d14g\n100a2000b\n7e15f\n2d6f</pre><p><code>stele.out</code></p><pre>6320</pre><h3>Explicație</h3><p>Cerința este 2 și avem <code>5</code> numere:</p><ul>\n\t<li><code>2a7g = 450</code></li>\n\t<li><code>17b5d14g = 970</code></li>\n\t<li><code>100a2000b = 4100</code></li>\n\t<li><code>7e15f = 592</code></li>\n\t<li><code>2d6f = 208</code></li>\n</ul><p>Suma lor este: <code>450 + 970 + 4100 + 592 + 208 = 6320</code></p>",
+      "text": "stele.in2 5 2a7g 17b5d14g 100a2000b 7e15f 2d6fstele.out6320ExplicațieCerința este 2 și avem 5 numere: 2a7g = 450 17b5d14g = 970 100a2000b = 4100 7e15f = 592 2d6f = 208 Suma lor este: 450 + 970 + 4100 + 592 + 208 = 6320"
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cerința este 1. Reprezentarea numărului 100 care respectă cerinţa este: cfg = 22+25+26 = 4+32+64 = 100"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cerința este 2 și avem 5 numere:"
+    }
+  ],
+  "constraints": [
+    "1 ≤ s ≤ 226-1",
+    "1 ≤ g ≤ 1000",
+    "Reprezentările codificate din fişierul de intrare pot avea maximum 420 caractere.",
+    "Numărul care poate apărea în fața unei litere poate avea maximum 15 cifre.",
+    "Pentru teste valorând 30% din punctaj cerinţa este 1.",
+    "Pentru teste corespunzătoare cerinţei 2 valorând 20% din punctaj valoarea obținută nu depășește 1018"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q5d5ff06484.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "9",
+    "intrare/ieșire": "stele.in / stele.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "16 MB / 8 MB",
+    "sursa problemei": "ONI 2016, clasa a VIII-a",
+    "autor": "Raluca Costineanu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 16,
+  "author": "Raluca Costineanu",
+  "sourceAttribution": "ONI 2016, clasa a VIII-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1706/stele"
+}

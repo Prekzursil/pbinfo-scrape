@@ -1,0 +1,109 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3719"><article id="enunt">
+			<p>Definim distanța dintre două șiruri de caractere de aceeași lungime ca fiind numărul minim de caractere ce trebuie modificate (înlocuite fiecare cu câte un alt caracter) în primul șir pentru a obține al doilea șir. Vom nota distanța dintre șirurile <code>a</code> și <code>b</code> cu <code>dist(a, b)</code>. De exemplu, <code>dist("abc", "aaa") = 2</code> (înlocuim caracterul <code>b</code> cu <code>a</code>, respectiv caracterul <code>c</code> cu <code>a</code>), iar <code>dist("ABC", "abc") = 3</code> (literele mici se consideră diferite de cele mari).</p>
+
+<p>Definim o subsecvență a unui șir <code>s</code> de caractere ca fiind un șir format din caractere de pe poziții consecutive din <code>s</code>. Considerăm două subsecvențe ca fiind distincte dacă încep sau se termină la poziții diferite. Vom nota cu <code>s(i, j)</code> subsecvența formată din caracterele indexate de la <code>i</code> la <code>j</code> ale șirului <code>s</code>. Șirurile se indexează de la <code>0</code>. Exemplu: pentru șirul <code>s ="abc"</code> subsecvențele sunt <code>s(0, 0) = "a"</code>, <code>s(1, 1) = "b"</code>, <code>s(2, 2) = "c"</code>, <code>s(0, 1) = "ab"</code>, <code>s(1, 2) = "bc"</code>, <code>s(0, 2) = "abc"</code>, iar pentru șirul <code>s = "aa"</code> acestea sunt <code>s(0, 0) = "a"</code>, <code>s(1, 1) = "a"</code>, <code>s(0, 1) = "aa"</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Se dă un șir de caractere <code>s</code>, care poate conține doar litere mici și mari ale alfabetului englez (de la <code>a</code> la <code>z</code> și de la <code>A</code> la <code>Z</code>). Pentru toate perechile neordonate de subsecvențe distincte ale șirului <code>s</code> care au lungimi egale, vrem să calculăm distanța dintre ele și să afișăm suma acestora modulo <code>1.000.000.007</code>. Formal, se cere suma valorilor <code>dist(s(a, b), s(c, d))</code>, pentru toți indicii <code>a</code>, <code>b</code>, <code>c</code>, <code>d</code> cu <code>0 ≤ a, b, c, d &lt; |s|</code>, <code>a &lt; c</code>, <code>a ≤ b</code>, <code>c ≤ d</code>, <code>b - a = d - c</code>, modulo <code>1.000.000.007</code>. <code>|s|</code> reprezintă lungimea șirului <code>s</code>, care este indexat de la <code>0</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>sdistante.in</code> conține pe prima linie șirul dat <code>s</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Se va afișa pe singurul rând al fișierului <code>sdistante.out</code> un număr întreg reprezentând suma distanțelor, modulo <code>1.000.000.007</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ |s| ≤ 4.000.000</code>, unde <code>|s|</code> este lungimea șirului <code>s</code></li>
+	<li>Pentru 11 puncte, <code>|s| ≤ 20</code> și <code>s</code> conține doar litere mici</li>
+	<li>Pentru alte 5 puncte, <code>|s| ≤ 50</code> și <code>s</code> conține doar caracterele <code>a</code> și <code>b</code></li>
+	<li>Pentru alte 15 puncte, <code>|s| ≤ 350</code> și <code>s</code> conține doar litere mici</li>
+	<li>Pentru alte 6 puncte, <code>|s| ≤ 1000</code> și <code>s</code> conține doar caracterele <code>a</code> și <code>b</code></li>
+	<li>Pentru alte 30 puncte, <code>|s| ≤ 5000</code> și <code>s</code> conține doar litere mici</li>
+	<li>Pentru alte 5 puncte, <code>|s| ≤ 100.000</code> și <code>s</code> conține doar caracterele <code>a</code> și <code>b</code></li>
+	<li>Pentru alte 4 puncte, <code>|s| ≤ 100.000</code> și <code>s</code> conține doar litere mici</li>
+	<li>Pentru alte 6 puncte, <code>|s| ≤ 1.000.000</code> și <code>s</code> conține doar caracterele <code>a</code> și <code>b</code></li>
+	<li>Pentru alte 6 puncte, fără restricții</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>sdistante.in</code></p>
+
+<pre>abc</pre>
+
+<p><code>sdistante.out</code></p>
+
+<pre>5</pre>
+
+<h3>Explicație</h3>
+
+<ul>
+	<li><code>dist(s(0, 0), s(1, 1)) = dist("a", "b") = 1</code></li>
+	<li><code>dist(s(0, 0), s(2, 2)) = dist("a", "c") = 1</code></li>
+	<li><code>dist(s(1, 1), s(2, 2)) = dist("b", "c") = 1</code></li>
+	<li><code>dist(s(0, 1), s(1, 2)) = dist("ab", "bc") = 2</code></li>
+</ul>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>sdistante.in</code></p>
+
+<pre>aab</pre>
+
+<p><code>sdistante.out</code></p>
+
+<pre>3</pre>
+
+<h3>Explicație</h3>
+
+<ul>
+	<li><code>dist(s(0, 0), s(1, 1)) = dist("a"; "a") = 0</code></li>
+	<li><code>dist(s(0, 0), s(2, 2)) = dist("a"; "b") = 1</code></li>
+	<li><code>dist(s(1, 1), s(2, 2)) = dist("a"; "b") = 1</code></li>
+	<li><code>dist(s(0, 1), s(1, 2)) = dist("aa"; "ab") = 1</code></li>
+</ul>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>sdistante.in</code></p>
+
+<pre>ABa</pre>
+
+<p><code>sdistante.out</code></p>
+
+<pre>5</pre>
+
+<h3>Explicație</h3>
+
+<ul>
+	<li><code>dist(s(0, 0), s(1, 1)) = dist("A"; "B") = 1</code><br>
+• <code>dist(s(0, 0), s(2, 2)) = dist("A"; "a") = 1</code><br>
+• <code>dist(s(1, 1), s(2, 2)) = dist("B"; "a") = 1</code><br>
+• <code>dist(s(0, 1), s(1, 2)) = dist("AB"; "Ba") = 2</code></li>
+</ul>
+
+<h1>Exemplul 4:</h1>
+
+<p><code>sdistante.in</code></p>
+
+<pre>aaaaabbbaaaa</pre>
+
+<p><code>sdistante.out</code></p>
+
+<pre>480</pre>
+
+<h1>Exemplul 5:</h1>
+
+<p><code>sdistante.in</code></p>
+
+<pre>abcdefghizabcdefghiz</pre>
+
+<p><code>sdistante.out</code></p>
+
+<pre>7095</pre>		</article>
+		</body></html>

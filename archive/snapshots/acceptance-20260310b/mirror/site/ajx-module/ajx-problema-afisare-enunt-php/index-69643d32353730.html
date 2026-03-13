@@ -1,0 +1,82 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2570"><article id="enunt">
+			<p>Regele Rufus dorește să stabilească moștenitorul averii sale, adică să ofere parola de la seif celui mai deștept dintre fiii săi. Inițial, regele a avut parola <code>X</code> formată din <code>N</code> cifre nenule și un cod cheie <code>Q</code> (număr natural cu exact nouă cifre, distincte, toate nenule). În fiecare an din cei <code>K</code> ani de domnie, folosind codul cheie <code>Q</code>, Rufus a modificat câte o secvență de cifre din parolă ajungând la parola finală <code>P</code>.Pentru fiecare secvență se cunoaște poziția <code>S</code> a primei cifre din secvență și poziția <code>D</code> a ultimei cifre din secvență. Astfel, secvența este formată din cifrele situate pe pozițiile <code>S</code>, <code>S+1</code>, <code>S+2</code>,…, <code>D</code> în parola <code>X</code>.</p>
+
+<p>Modificarea unei secvențe din <code>X</code> constă în înlocuirea fiecărei apariții a cifrei <code>1</code> cu prima cifră a lui <code>Q</code>, apoi a fiecărei apariții a cifrei <code>2</code> cu a doua cifră a lui <code>Q</code>,…, a fiecărei apariții a cifrei <code>9</code> cu ultima cifră a lui <code>Q</code>.</p>
+
+<p>Pentru a decide moștenitorul, regele le dă fiilor parola finală <code>P</code>, codul cheie <code>Q</code>, numărul <code>K</code> de ani de domnie și cele <code>K</code> secvențe de cifre care au fost modificate și le cere să găsească: parola inițială <code>X</code>, poziția minimă <code>Z</code> din parola <code>X</code> care a apărut în cele mai multe secvențe dintre cele modificate de rege de-a lungul celor <code>K</code> ani de domnie și cifrele distincte care au ocupat poziția <code>Z</code> în cei <code>K</code> ani.</p>
+
+<h1>Cerința</h1>
+
+<p>Scrieți un program care citește numerele <code>Q</code>, <code>N</code>, <code>K</code>, cele <code>N</code> cifre ale parolei finale <code>P</code> și cele <code>K</code> perechi de poziții <code>S</code> și <code>D</code>, și care rezolvă următoarele două cerințe:</p>
+
+<ol>
+	<li>determină parola inițială <code>X</code>;</li>
+	<li>determină poziția minimă <code>Z</code> și cifrele distincte care au ocupat această poziție în cei <code>K</code> ani de domnie.</li>
+</ol>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>mostenire.in</code> conține pe prima linie un număr natural <code>C</code> reprezentând cerința din problemă care trebuie rezolvată (1 sau 2). A doua linie din fișier conține cele trei numere naturale <code>Q</code>, <code>N</code> și <code>K</code>, separate prin câte un spațiu. A treia linie din fișier conține cele <code>N</code> cifre ale parolei finale <code>P</code>, separate prin câte un spațiu. Fiecare linie dintre următoarele <code>K</code>, conține câte două numere naturale <code>S</code> și <code>D</code>, separate printr-un singur spațiu, reprezentând câte o pereche de poziții.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă <code>C=1</code>, fișierul de ieșire <code>mostenire.out</code> va conține pe prima linie cele <code>N</code> cifre ale parolei inițiale <code>X</code>, separate prin câte un spațiu, în ordinea în care apar în <code>X</code>, reprezentând răspunsul la cerința 1.</p>
+
+<p>Dacă <code>C=2</code>, fișierul de ieșire <code>mostenire.out</code> va conține pe prima linie numărul natural <code>Z</code>, iar pe a doua linie cifrele distincte care au apărut pe poziția minimă <code>Z</code>, reprezentând răspunsul la cerința 2. Acestea vor fi afișate în ordine crescătoare, separate prin câte un spațiu.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 10 000</code></li>
+	<li>numărul natural <code>Q</code> este format din exact 9 cifre, distincte și nenule</li>
+	<li>pozițiile cifrelor din parola <code>X</code> sunt numerotate cu numerele distincte consecutive <code>1,2,...,N</code></li>
+	<li><code>1 ≤ K ≤ 100</code></li>
+	<li>pentru toate perechile de poziții modificate de rege: <code>S ≤ D</code></li>
+	<li>cel puțin o cifră din parola <code>X</code> va fi înlocuită</li>
+	<li>pentru rezolvarea corectă a cerinței 1 se acordă 50 de puncte</li>
+	<li>pentru rezolvarea corectă a cerinței 2 se acordă 50 de puncte.</li>
+</ul>
+
+<h1>Exemplu 1:</h1>
+
+<p><code>mostenire.in</code></p>
+
+<pre>1
+712534698 12 4
+1 4 7 1 3 4 7 1 4 8 1 8
+2 4
+6 11
+3 9
+1 7</pre>
+
+<p><code>mostenire.out</code></p>
+
+<pre>2 7 3 5 4 1 3 3 7 9 2 8 </pre>
+
+<h3>Explicație</h3>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-a6beb1-mostenire-png.png"></p>
+
+<h1>Exemplu 2:</h1>
+
+<p><code>mostenire.in</code></p>
+
+<pre>2
+712534698 12 4
+1 4 7 1 3 4 7 1 4 8 1 8
+2 4
+6 11
+3 9
+1 7</pre>
+
+<p><code>mostenire.out</code></p>
+
+<pre>3
+1 2 3 7</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerința este 2, <code>N=12</code>, <code>K=4</code>. <code>P=(1 4 7 1 3 4 7 1 4 8 1 8)</code></p>
+
+<p>Pozițiile care au apărut în cele mai multe secvențe sunt: 3,4,6,7 =&gt; Z=3, iar cifrele distincte care au ocupat succesiv această poziție sunt <code>3</code>, <code>2</code>, <code>1</code>, <code>7</code>. Aceste cifre se vor scrie în fișier în ordine crescătoare</p>		</article>
+		</body></html>

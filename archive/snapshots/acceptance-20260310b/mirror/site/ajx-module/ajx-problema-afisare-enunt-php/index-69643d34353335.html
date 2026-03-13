@@ -1,0 +1,61 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4535"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>Se dă o tablă de șah formată din <code>n</code> linii și <code>m</code> coloane, definind <code>n*m</code> zone, unele dintre ele fiind libere, altele conținând piese, mai precis: un cal, nebuni și pioni. Calul este codificat prin cifra <code>2</code>, pionii prin <code>1</code>, nebunii prin <code>3</code>, iar pozițiile libere prin <code>0</code>. Calul care se poate deplasa pe tablă prin salturi de forma literei  <code>L</code>, exact ca la șah (doi pași pe o direcție și un pas pe cealaltă direcție, perpendiculară), fără a părăsi tabla, fără a trece prin zone care conțin nebuni și fără a trece de două ori prin aceeași zonă.</p>
+
+<p>Determinați în câte moduri poate lua calul toți pionii și care este numărul minim de salturi pentru acest lucru,  știind că salturile calului se opresc în momentul în care ia ultimul pion.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fişierul de intrare <code>cal_xi.in</code> conţine pe prima linie numerele <code>n m</code>, separate printr-un spațiu. Următoarele <code>n</code> linii conțin câte <code>m</code> valori, care descriu tabla: cifra <code>0</code> corespunde unei zone libere, cifra <code>1</code> corespunde unei zone ocupate de un pion, unica cifră <code>2</code> corespunde zonei ocupate de cal, iar cifra <code>3</code> corespunde unei zone ocupate de un nebun. Cele <code>n*m</code> cifre sunt separate prin spații. </p>
+
+<h1>Date de ieşire</h1>
+
+<p>Fişierul de ieşire <code>cal_xi.out</code> va conţine, separate prin exact un spațiu, numărul moduri poate lua calul toți pionii și care este numărul minim de salturi pentru acest lucru. Dacă nu există niciun traseu prin care calul să ia toții pionii de pe tablă, atunci se va afișa mesajul <code>IMPOSIBIL</code>.</p>
+
+<h1>Restricţii şi precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n,m ≤ 10</code></li>
+	<li>zona  în care se află calul este unică</li>
+	<li>pe tablă exisță cel puțin un pion</li>
+	<li>traseul calului se termină atunci când ia ultimul pion</li>
+	<li>calul nu poate trece de două ori prin aceeași zonă.</li>
+	<li>calul nu poate trece prin zone ocupate de nebuni.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>cal_xi.in</code></p>
+
+<pre>4 5
+3 3 0 0 3
+0 3 1 0 3
+2 0 0 0 3
+0 3 0 1 0</pre>
+
+<p><code>cal_xi.out</code></p>
+
+<pre>3 2 </pre>
+
+<h1>Explicație:</h1>
+
+<p>Cele 3 trasee sunt:</p>
+
+<pre>0 0 0 0 0 
+0 0 2 0 0 
+1 0 0 0 0 
+0 0 0 3 0 </pre>
+
+<pre>0 0 7 0 0 
+6 0 10 3 0 
+1 8 5 0 0 
+0 0 2 9 4 </pre>
+
+<pre>0 0 0 0 0 
+0 0 6 3 0 
+1 4 0 0 0 
+0 0 2 5 0</pre>
+
+<p>Traseul cel mai scurt necesită două salturi ale calului: din (3,1) în (2,3) și apoi în (4,4).</p>		</article>
+		</body></html>

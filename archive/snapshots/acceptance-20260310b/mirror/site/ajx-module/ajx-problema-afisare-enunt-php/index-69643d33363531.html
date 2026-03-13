@@ -1,0 +1,117 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3651"><article id="enunt">
+			<p>Se consideră un tablou cu <code>N</code> linii și <code>N</code> coloane ce conține numerele naturale de la <code>1</code> la <code>N</code><sup><code>2</code></sup> așezate consecutiv, întâi pe linii și apoi pe coloane, începând cu <code>1</code> în colțul din stânga sus, conform exemplului alăturat (<code>N = 4</code>).</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-ghem-01-jpg.jpg"></p>
+
+<p>Dacă se derulează elemente tabloului, asemănător cu un ghem, prin rotirea tabloului în jurul centrului (intersecția diagonalelor), trăgând de unul din colțurile sale pe orizontală sau pe verticală, către exterior, se obține un șir cu numerele de la <code>1</code> la <code>N</code><sup><code>2</code></sup>, într-o anumită ordine.<br>
+Exemple: dacă <code>N = 4</code> și se va trage de:</p>
+
+<ul>
+	<li>colțul din stânga sus – pe orizontală, se va obține șirul: <code>1 2 3 4 8 12 16 15 14 13 9 5 6 7 11 10</code>;</li>
+	<li>colțul din dreapta jos – pe verticală, se va obține șirul: <code>16 12 8 4 3 2 1 5 9 13 14 15 11 7 6 10</code>;</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Să se scrie un program care citește:</p>
+
+<ul>
+	<li>un numărul natural <code>N</code>, ce reprezintă numărul de linii și de coloane al unui tablou ce conține numerele naturale<br>
+de la <code>1</code> la <code>N</code><sup><code>2</code></sup>;</li>
+	<li>două numere naturale <code>X</code> și <code>Y</code>, ce reprezintă coordonatele colțului de unde se face derularea:<br>
+{ <code>(1,1) – stânga sus</code>; <code>(1,N) – dreapta sus</code>; <code>(N,N) – dreapta jos</code>; <code>(N,1) – stânga jos;</code>}</li>
+	<li>un caracter <code>D</code> (majusculă), ce reprezintă direcția pe care se face tragerea (<code>O</code> – orizontală și <code>V</code> – verticală).</li>
+</ul>
+
+<p>și afișează șirul de numere ce rezultă din desfășurarea tabloului, începând cu colțul de unde se face tragerea și pe<br>
+direcția de tragere.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>ghem.in</code> conţine pe prima linie numărul natural <code>N</code>, pe a doua linie două numere naturale <code>X</code> și <code>Y</code> despărțite printr-un spațiu, iar pe a treia linie caracterul <code>D</code>, având semnificația de mai sus.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>ghem.out</code> va conţine pe primul rând șirul de numere obținut prin desfășurarea tabloului.<br>
+Între oricare două numere succesive va exista un singur spațiu.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N ≤ 500</code><br>
+• <code>(X,Y)</code> aparține mulțimii <code>{(1,1), (1,N), (N,N), (N,1)}</code>;<br>
+• <code>D</code> aparține mulțimii <code>{’O’,’V’}</code> – majuscule;</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>ghem.in</code></p>
+
+<pre>4
+1 1
+O</pre>
+
+<p><code>ghem.out</code></p>
+
+<pre>1 2 3 4 8 12 16 15 14 13 9 5 6 7 11 10</pre>
+
+<h3>Explicație</h3>
+
+<p>Matricea alăturată se desfășoară “trăgând” de colțul din stânga sus în direcție orizontală obținându-se șirul: <code>1 2 3 4 8 12 16 15 14 13 9 5 6 7 11 10</code></p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-ghem-02-jpg.jpg"></p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>ghem.in</code></p>
+
+<pre>4
+4 4
+V</pre>
+
+<p><code>ghem.out</code></p>
+
+<pre>16 12 8 4 3 2 1 5 9 13 14 15 11 7 6 10</pre>
+
+<h3>Explicație</h3>
+
+<p>Matricea alăturată se desfășoară “trăgând” de colțul din dreapta jos în direcție verticală obținându-se șirul: <code>16 12 8 4 3 2 1 5 9 13 14 15 11 7 6 10</code></p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-ghem-02-jpg.jpg"></p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>ghem.in</code></p>
+
+<pre>3
+1 3
+V</pre>
+
+<p><code>ghem.out</code></p>
+
+<pre>3 6 9 8 7 4 1 2 5</pre>
+
+<h3>Explicație</h3>
+
+<p>Matricea alăturată se desfășoară “trăgând” de colțul din dreapta sus în direcție verticală obținându-se șirul: <code>3 6 9 8 7 4 1 2 5</code></p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-ghem-04-jpg.jpg"></p>
+
+<h1>Exemplul 4:</h1>
+
+<p><code>ghem.in</code></p>
+
+<pre>3
+3 1
+O</pre>
+
+<p><code>ghem.out</code></p>
+
+<pre>7 8 9 6 3 2 1 4 5</pre>
+
+<h3>Explicație</h3>
+
+<p>Matricea alăturată se desfășoară “trăgând” de colțul din stânga jos în direcție orizontală obținându-se șirul: <code>7 8 9 6 3 2 1 4 5</code></p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-ghem-04-jpg.jpg"></p>		</article>
+		</body></html>

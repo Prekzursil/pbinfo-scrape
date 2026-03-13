@@ -1,0 +1,304 @@
+{
+  "id": 2124,
+  "slug": "ornament",
+  "name": "Ornament",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/2124/ornament",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 27,
+      "name": "Backtracking",
+      "slug": "backtracking",
+      "href": "/?pagina=probleme-lista&tag=27"
+    },
+    {
+      "id": 50,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=50"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Să se scrie un program care primeşte o listă de <code>n</code> pătrăţele colorate şi determină o aranjare a lor sub forma de pătrat de forma <code>k•k (k•k = n)</code> astfel încât două laturi adiacente să aibă aceeaşi culoare, precum şi numărul de astfel de aranjări.</p>",
+      "text": "Să se scrie un program care primeşte o listă de n pătrăţele colorate şi determină o aranjare a lor sub forma de pătrat de forma k•k (k•k = n) astfel încât două laturi adiacente să aibă aceeaşi culoare, precum şi numărul de astfel de aranjări."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fişierul de intrare <code>ornament.in</code> va conţine pe prima linie valoarea <code>n</code>. Următoarele <code>n</code> linii vor conţine câte patru numere naturale <code>N, E, S, V</code> separate prin câte un spaţiu, reprezentând cele <code>4</code> culori ale laturilor pătrăţelelor. Ordinea laturilor este considerată: <code>Nord, Est, Sud, Vest</code> şi pătrăţelele nu se vor roti. Ultima linie din fişierul de intrare va conţine una dintre valorile <code>1 sau 2</code>; valoarea <code>1</code> indică faptul că este cerută o soluţie corectă, iar valoarea <code>2</code> indică faptul că este cerut numărul de soluţii corecte.</p>",
+      "text": "Fişierul de intrare ornament.in va conţine pe prima linie valoarea n. Următoarele n linii vor conţine câte patru numere naturale N, E, S, V separate prin câte un spaţiu, reprezentând cele 4 culori ale laturilor pătrăţelelor. Ordinea laturilor este considerată: Nord, Est, Sud, Vest şi pătrăţelele nu se vor roti. Ultima linie din fişierul de intrare va conţine una dintre valorile 1 sau 2; valoarea 1 indică faptul că este cerută o soluţie corectă, iar valoarea 2 indică faptul că este cerut numărul de soluţii corecte."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>În cazul cerinţei <code>1</code> fişierul de ieşire <code>ornament.out</code> va conţine <code>k</code> linii. Fiecare linie va conţine câte <code>k</code> valori reprezentând numerele de ordine ale pătrăţelelor din fişierul de intrare, aranjate astfel încât să fie respectată condiţia din enunţ. În cazul cerinţei <code>2</code>, fişierul de ieşire va conţine pe prima linie un singur număr natural reprezentând numărul de soluţii corecte.</p>",
+      "text": "În cazul cerinţei 1 fişierul de ieşire ornament.out va conţine k linii. Fiecare linie va conţine câte k valori reprezentând numerele de ordine ale pătrăţelelor din fişierul de intrare, aranjate astfel încât să fie respectată condiţia din enunţ. În cazul cerinţei 2, fişierul de ieşire va conţine pe prima linie un singur număr natural reprezentând numărul de soluţii corecte."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<p>• <code>n = 4, 9, 16</code><br>\n• Pentru datele de intrare problema are întotdeauna soluţie, în timpul indicat.</p>",
+      "text": "• n = 4, 9, 16 • Pentru datele de intrare problema are întotdeauna soluţie, în timpul indicat."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>ornament.in</code></p><pre>16\n4 4 1 1\n4 3 1 2\n2 2 2 3\n4 1 3 2\n1 1 3 1\n1 3 1 1\n2 4 1 3\n3 1 1 4\n3 2 4 1\n1 3 2 2\n1 4 4 3\n1 1 2 4\n4 3 3 2\n2 1 1 3\n4 4 3 1\n2 4 4 4\n1</pre><p><code>ornament.out</code></p><pre>2 3 4 9 \n10 7 8 1 \n16 12 6 11 \n13 14 5 15</pre><h3>Explicație</h3><p>Soluţia corespunde aranjării</p><pre> |-4-| |-2-| |-4-| |-3-|\n 2   3 3   2 2   1 1   2\n |-1-| |-2-| |-3-| |-4-|\n\n |-1-| |-2-| |-3-| |-4-|\n 2   3 3   4 4   1 1   4\n |-2-| |-1-| |-1-| |-1-|\n\n |-2-| |-1-| |-1-| |-1-|\n 4   4 4   1 1   3 3   4\n |-4-| |-2-| |-1-| |-4-|\n\n |-4-| |-2-| |-1-| |-4-|\n 2   3 3   1 1   1 1   4\n |-3-| |-1-| |-3-| |-3-|</pre>",
+      "text": "ornament.in16 4 4 1 1 4 3 1 2 2 2 2 3 4 1 3 2 1 1 3 1 1 3 1 1 2 4 1 3 3 1 1 4 3 2 4 1 1 3 2 2 1 4 4 3 1 1 2 4 4 3 3 2 2 1 1 3 4 4 3 1 2 4 4 4 1ornament.out2 3 4 9 10 7 8 1 16 12 6 11 13 14 5 15ExplicațieSoluţia corespunde aranjării |-4-| |-2-| |-4-| |-3-| 2 3 3 2 2 1 1 2 |-1-| |-2-| |-3-| |-4-| |-1-| |-2-| |-3-| |-4-| 2 3 3 4 4 1 1 4 |-2-| |-1-| |-1-| |-1-| |-2-| |-1-| |-1-| |-1-| 4 4 4 1 1 3 3 4 |-4-| |-2-| |-1-| |-4-| |-4-| |-2-| |-1-| |-4-| 2 3 3 1 1 1 1 4 |-3-| |-1-| |-3-| |-3-|"
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>ornament.in</code></p><pre>16\n4 4 1 1\n4 3 1 2\n2 2 2 3\n4 1 3 2\n1 1 3 1\n1 3 1 1\n2 4 1 3\n3 1 1 4\n3 2 4 1\n1 3 2 2\n1 4 4 3\n1 1 2 4\n4 3 3 2\n2 1 1 3\n4 4 3 1\n2 4 4 4\n2</pre><p><code>ornament.out</code></p><pre>1</pre><h3>Explicație</h3>",
+      "text": "ornament.in16 4 4 1 1 4 3 1 2 2 2 2 3 4 1 3 2 1 1 3 1 1 3 1 1 2 4 1 3 3 1 1 4 3 2 4 1 1 3 2 2 1 4 4 3 1 1 2 4 4 3 3 2 2 1 1 3 4 4 3 1 2 4 4 4 2ornament.out1Explicație"
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Soluţia corespunde aranjării"
+    }
+  ],
+  "constraints": [],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qfa69779d14.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/2d6f58/Ornament/p.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-2d6f58-Ornament-p-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Peticaru Alexandru (AlexandruPeticaru)",
+    "clasa": "11",
+    "intrare/ieșire": "ornament.in / ornament.out",
+    "limită timp": "0.2 secunde",
+    "limită memorie": "2 MB / 1 MB",
+    "sursa problemei": "Olimpiada Municipala Informatica Iasi 2015",
+    "autor": "Marinel Serban",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.2,
+  "memoryLimitMb": 2,
+  "author": "Marinel Serban",
+  "sourceAttribution": "Olimpiada Municipala Informatica Iasi 2015",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/2124/ornament"
+}

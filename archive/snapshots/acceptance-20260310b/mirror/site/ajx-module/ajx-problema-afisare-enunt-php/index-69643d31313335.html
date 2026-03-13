@@ -1,0 +1,76 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1135"><article id="enunt">
+			<p>Se dă o tablă de șah cu <code>n+1</code> linii (numerotate de sus în jos  începând cu <code>1</code>) și <code>2n+1</code> coloane (numerotate de la stânga la dreapta începând cu <code>1</code>). Pe prima linie pătratul din mijloc conține <code>1</code> gram de fân, iar celelalte pătrate de pe prima linie nu conțin nimic. Începând cu linia a doua fiecare pătrat conține o cantitate de fân obținută prin adunarea cantităților de fân din cele <code>3</code> pătrate ale liniei anterioare cu care se învecinează (pe verticală și diagonală). De exemplu dacă <code>n=3</code> tabla are <code>4</code> linii, <code>7</code> coloane și următoarea configurație.</p>
+
+<p style="text-align:center;"><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-p2sah-png.png"></p>
+
+<p>Un cal pleacă de pe prima linie, de pe o coloana <code>k&lt;=n</code>, sare din orice poziție <code>(i,j)</code> în poziția <code>(i+1,j+2)</code> atât timp cât este posibil și mănâncă tot fânul din pătratele prin care trece. De exemplu, pentru <code>n=3</code> și <code>k=2</code>, pătratele prin care trece calul sunt marcate cu asterisc (<code>*</code>)</p>
+
+<h1>Cerinţe</h1>
+
+<p><strong>1.</strong> Cunoscând <code>n</code> și <code>k</code>, să se calculeze cantitatea de fân de pe linia <code>k</code> a tablei.<br>
+<strong>2.</strong> Cunoscând <code>n</code> și <code>k</code>, să se calculeze câte grame de fân mănâncă un cal care pleacă de pe prima linie, de pe coloana <code>k</code>.</p>
+
+<p>Întrucât aceste numere pot fi mari, se cere doar restul modulo <code>100003</code> ale acestor numere.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>p2sah.in</code> conține pe prima linie un număr <code>t</code> cu valoarea <code>1</code> sau <code>2</code>. Pe a doua linie a fișierului de intrare se găsesc două numere naturale <code>n</code> și <code>k</code> separate printr-un spațiu.</p>
+
+<p>Dacă <code>t=1</code> se va rezolva prima cerință, deci  pentru valoarea <code>n</code> citită tabla are <code>n+1</code> linii și <code>2n+1</code> coloane, iar <code>k</code> reprezintă numărul liniei de pe care trebuie calculată cantitatea de fân.</p>
+
+<p>Dacă <code>t=2</code> se va rezolva a doua cerință, deci  pentru valoarea <code>n</code> citită tabla are <code>n+1</code> linii și <code>2n+1</code> coloane, iar <code>k</code> reprezintă numărul coloanei din prima linie de unde pleacă calul.</p>
+
+<h1>Date de ieșire</h1>
+
+<p><strong>Dacă <code>t</code> din fișierul de intrare este <code>1</code> se va rezolva doar prima cerință.</strong></p>
+
+<p>În acest caz fișierul de ieșire <code>p2sah.out</code> va conține un singur număr reprezentând cantitatea totală de fân din toate pătratele situate pe tabla pe linia <code>k</code> (trebuie afișat restul modulo <code>100003</code>).</p>
+
+<p><strong>Dacă <code>t</code> din fișierul de intrare este <code>2</code> se va rezolva doar a doua cerință.</strong></p>
+
+<p>În acest caz fișierul de ieșire <code>p2sah.out</code> va conține un singur număr reprezentând cantitatea totală de fân mâncată de un cal care pleacă de pe linia <code>1</code> și coloana <code>k</code> (trebuie afișat restul modulo <code>100003</code>).</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ k ≤ n ≤ 1.000.000.000</code></li>
+	<li>La cerința 1 pentru 80% dintre teste <code>k ≤ n ≤ 1.000.000</code>, iar pentru alte 20% din teste <code>k ≤ n ≤ 1.000.000.000</code></li>
+	<li>La cerința 2 pentru 30% dintre teste <code>k ≤ n ≤ 1000</code>, pentru alte 30% dintre teste  <code>k ≤ n ≤ 1.000.000</code>, iar pentru restul de 40% dintre teste <code>k ≤ n ≤ 1.000.000.000</code>.</li>
+	<li>Rezolvarea corectă a primei cerințe asigură 20% din punctajul testului respectiv.</li>
+	<li>Rezolvarea corectă a celei de a doua cerințe asigura 70% din punctajul testului respectiv.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>p2sah.in</code></p>
+
+<pre>1
+3 2</pre>
+
+<p><code>p2sah.out</code></p>
+
+<pre>3</pre>
+
+<h1>Explicație</h1>
+
+<p><code>t=1</code>, deci se rezolvă prima cerință.</p>
+
+<p>Pe linia a doua există <code>3</code> pătrate care conțin fiecare câte un gram de fân.(vezi desenul din enunț)</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>p2sah.in</code></p>
+
+<pre>2
+3 2</pre>
+
+<p><code>p2sah.out</code></p>
+
+<pre>2</pre>
+
+<h1>Explicație</h1>
+
+<p><code>t=2</code>, deci se rezolvă a doua cerință.</p>
+
+<p>Traseul calului este: <code>(1,2) -&gt; (2,4) -&gt; (3,6)</code> adică exact pătrățelele marcate cu asterisc în desenul din enunț. Prima poziție nu conține fân, iar celelalte două conțin câte un gram de fân. Deci calul mănâncă <code>2</code> grame de fân.</p>		</article>
+		</body></html>

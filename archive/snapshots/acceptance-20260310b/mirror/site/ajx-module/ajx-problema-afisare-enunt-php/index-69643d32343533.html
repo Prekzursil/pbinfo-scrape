@@ -1,0 +1,65 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2453"><article id="enunt">
+			<p>Dan este un mare pasionat al fructelor, printre preferatele sale fiind strugurii şi pepenii. Însă recent şi-a descoperit și pasiunea pentru legume, în special pentru roşii, dar mai ales roşiile mici. Spre norocul lui, grădina bunicului este plină de roşii. Grădina are forma unei matrice cu <code>N</code> linii și <code>M</code> coloane cu elemente numere naturale, nu neapărat distincte, unde fiecare element din matrice reprezintă dimensiunea unei roşii. Matricea are proprietatea că oricare coloană are valorile ordonate crescător de sus în jos, adică de la prima spre ultima linie. Bunicul său îi cere să rezolve <code>Q</code> sarcini. Pentru fiecare sarcină, Dan primeşte un număr natural <code>x</code> şi trebuie să găsească o submatrice de arie maximă care începe de pe linia <code>1</code> a matricei care reprezintă grădina şi are toate elementele mai mici sau egale decât <code>x</code>. Pentru determinarea submatricei cerute, Dan are voie să mute toate valorile unei coloane în fața oricărei alte coloane. De asemenea, îi este permis să facă oricâte mutări de tipul acesta.</p>
+
+<h1>Cerința</h1>
+
+<p>Să se calculeze aria maximă a unei submatrice care respectă specificațiile din enunț, pentru fiecare din cele <code>Q</code> sarcini date de către bunic.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>rosii_mici.in</code> conține pe prima linie trei numere naturale <code>N</code>, <code>M</code> și <code>Q</code> separate printr-un spaţiu, având semnificația din enunț. Pe fiecare dintre următoarele <code>N</code> linii se află câte <code>M</code> numere naturale despărțite prin câte un spațiu, reprezentând valorile matricei. Pe următoarele <code>Q</code> linii se află câte un număr natural <code>x</code>, reprezentând dimensiunea unei roşii.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>rosii_mici.out</code> va conține pe primele <code>Q</code> linii câte un număr natural, reprezentând aria maximă cerută<br>
+pentru fiecare sarcină, în ordinea în care acestea apar în fișierul de intrare.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N, M ≤ 1000</code></li>
+	<li><code>1 ≤ Q ≤ 100 000</code></li>
+	<li><code>1 ≤ A[i][j] ≤ N * M</code>, <code>1 ≤ i ≤ N</code>, <code>1 ≤ j ≤ M</code></li>
+	<li><code>1 ≤ x ≤ N * M</code></li>
+	<li>Pentru <code>30%</code> din punctajul total există teste cu <code>1 ≤ N, M, Q ≤ 50</code></li>
+	<li>Pentru alte <code>20%</code> din punctajul total există teste cu <code>1 ≤ M ≤ 100</code></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>rosii_mici.in</code></p>
+
+<pre>3 4 3
+1 9 6 2
+1 10 10 4
+7 15 10 6
+6
+10
+9</pre>
+
+<p><code>rosii_mici.out</code></p>
+
+<pre>4
+9
+6</pre>
+
+<h3>Explicație</h3>
+
+<p>Pentru rezolvarea primei sarcini Dan mută prima coloană în fața celei de a patra obținând matricea:<br>
+<code>9 6 1 2</code><br>
+<code>10 10 1 4</code><br>
+<code>15 10 7 6</code><br>
+Alege apoi submatricea cu colțul stânga sus în <code>(1,3)</code> și colțul dreapta jos în <code>(2,4)</code>. Aria acesteia este <code>4</code>.</p>
+
+<p>Pentru rezolvarea celei de a doua sarcini, Dan mută prima coloană în fața celei de a treia obținând matricea:<br>
+<code>9 1 6 2</code><br>
+<code>10 1 10 4</code><br>
+<code>15 7 10 6</code><br>
+Soluția este submatricea cu colțul stânga sus în <code>(1,2)</code> și colțul dreapta jos în <code>(3,4)</code>. Aria acesteia este <code>9</code>.</p>
+
+<p>Pentru rezolvarea celei de a treia sarcini, Dan mută ultima coloană în fața primei coloane, obținând matricea:<br>
+<code>2 1 9 6</code><br>
+<code>4 1 10 10</code><br>
+<code>6 7 15 10</code><br>
+Soluția este submatricea cu colțul stânga sus în <code>(1,1)</code> și colțul dreapta jos în <code>(3,2)</code>. Aria acesteia este <code>6</code>.</p>		</article>
+		</body></html>

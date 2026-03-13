@@ -1,0 +1,126 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1785"><article id="enunt">
+			<p>Fericit că s-a calificat la <span class="caps">ONI</span>, <span class="caps">XOR</span>in vrea să sărbătorească făcând cât mai mult zgomot. Deoarece e programator, acesta s-a gândit să automatizeze felul în care face zgomot.&nbsp;</p>
+
+<p>Pentru a face zgomot el folosește o placă cu circuite de diverse intensități.&nbsp;Placa poate fi reprezentată sub forma unei matrice cu <code>N</code> linii și <code>M</code> coloane. Fiecare celulă din matrice are o intensitate între <code>0</code> și <code>9</code> (o celulă cu intensitatea 0 corespunde unei zone goale, fără nici un circuit).</p>
+
+<p>Un circuit începe într-o celulă a matricei și se termină în altă celulă, fiind o succesiune de celule adiacente de aceeași intensitate de la un capăt la celălalt al circuitului, asemenea unui drum pe matrice între cele două celule. Două celule se consideră adiacente dacă au o latură comună, deci o celulă e adiacentă cu maxim patru alte celule.</p>
+
+<p>Placa a fost concepută în așa fel încât să nu apară scurtcircuite, așadar curentul dintr-un circuit poate merge numai într-o singură direcție (cu alte cuvinte, fiecare celulă dintr-un circuit se învecinează cu maxim alte două celule din același circuit). Nu există circuite de aceeași intensitate care să se învecineze.</p>
+
+<p>Zgomotul produs de un circuit este egal cu lungimea lui, adică cu numărul de celule din matrice corespunzătoare circuitului.</p>
+
+<p>Exemple de circuite invalide:&nbsp;</p>
+
+<table><tbody><tr><td><pre>03&nbsp;&nbsp;&nbsp; 111&nbsp;
+33&nbsp;&nbsp;&nbsp; 110&nbsp;
+33&nbsp;&nbsp;&nbsp; 110&nbsp;</pre></td><td><pre>040&nbsp;
+444&nbsp;
+040&nbsp;
+</pre></td></tr><tr><td>Circuitele pot să se scurtcircuiteze.&nbsp;</td><td>Circuitul nu are exact două capete.&nbsp;</td></tr></tbody></table>
+
+<h1>Cerințe</h1>
+
+<p>1) Să se afle numărul de circuite.&nbsp;<br>
+2) Să se afle valoarea zgomotului maxim care poate fi obținut unind două circuite. Două circuite pot fi unite dacă se poate trage o legătură de la un capăt al unui circuit până la un capăt al celuilalt circuit, numai prin celulele libere ale matricei (de intensitate 0). Legătura trebuie să aibă forma unui circuit. Lungimea circuitului nou creat nu se adaugă la zgomotul produs de cele doua circuite.&nbsp;<br>
+3) Să se afișeze placa ce conține legătura care unește două circuite din care se obține zgomotul maxim de la cerința 2. Dacă există mai multe variante, se poate afișa orice placă care conține legătura validă.&nbsp;</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului <code>mz.in</code> se vor afla <code>N</code> și <code>M</code>, lungimea și lățimea plăcii.&nbsp;Pe urmatoarele <code>N</code> linii se vor afla <code>M</code> numere care vor caracteriza intensitatea circuitului care trece prin celula respectivă. În cazul în care prin celula respectivă nu trece un circuit, în fișier se va afla caracterul <code>0</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Prima linie a fișierului <code>mz.out</code> va conține pe prima linie numărul de circuite.&nbsp;<br>
+A doua linie va conține lungimea maximă a unui circuit care poate fi obținut unind două circuite.&nbsp;<br>
+Pe următoarele linii se va afișa matricea care conține circuitul nou format. Fiecare celulă din legătură prin care trece circuitul va fi marcată prin caracterul <code>x</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 &lt;= N, M &lt;= 1000</code> pentru toate testele.&nbsp;</li>
+	<li><code>1 &lt;= N * M &lt;= 2500</code> pentru 20% din teste.&nbsp;</li>
+	<li><code>1 &lt;= N * M &lt;= 10000</code> pentru 40% din teste.&nbsp;</li>
+	<li>Se garantează existența a cel puțin 2 circuite care pot fi unite.&nbsp;</li>
+	<li>Două circuite pot fi unite doar prin capetele lor (capetele legăturii dintre circuite trebuie să fie adiacente cu câte un capăt al fiecărui circuit unit).&nbsp;</li>
+	<li>Două circuite nu pot fi unite decât prin zone libere (legătură se poate forma doar pe celule de intensitate <code>0</code>).&nbsp;</li>
+	<li>În cazul în care există mai multe soluții la cerința 3, se va afișa oricare dintre ele.&nbsp;</li>
+	<li>Pentru rezolvarea corectă a cerinței (1) se primește 20% din punctaj.&nbsp;&nbsp;</li>
+	<li>Pentru rezolvarea corectă a cerințelor (1) și (2) se primește 50% din punctaj.&nbsp;</li>
+	<li>Pentru rezolvarea corectă a tuturor celor 3 cerințe se primește 100% din punctaj.&nbsp;</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>mz.in</code></p>
+
+<pre>8 6&nbsp;
+122100&nbsp;
+111100&nbsp;
+000000&nbsp;
+000011&nbsp;
+222221&nbsp;
+000011&nbsp;
+000000&nbsp;
+333000&nbsp;</pre>
+
+<p><code>mz.out</code></p>
+
+<pre>5&nbsp;
+11&nbsp;
+1221x0&nbsp;
+1111x0&nbsp;
+000xx0&nbsp;
+xxxx11&nbsp;
+222221&nbsp;
+000011&nbsp;
+000000&nbsp;
+333000&nbsp;</pre>
+
+<h1>Exemplul 2</h1>
+
+<p><code>mz.in</code></p>
+
+<pre>4 20&nbsp;
+00000000000010000000&nbsp;
+00000000000010000000&nbsp;
+00000000000100000000&nbsp;
+00000000001000000000&nbsp;</pre>
+
+<p><code>mz.out</code></p>
+
+
+<pre>3&nbsp;
+3&nbsp;
+00000000000x10000000&nbsp;
+0000000000xx10000000&nbsp;
+0000000000x100000000&nbsp;
+00000000001000000000&nbsp;</pre>
+
+
+<h1>Exemplul 3</h1>
+
+<p><code>mz.in</code></p>
+
+<pre>8 25&nbsp;
+0000000000000000000000000&nbsp;
+0000001110001010011000000&nbsp;
+0000010001110101100100000&nbsp;
+0000001000000100001000000&nbsp;
+0000110000000000000100000&nbsp;
+2111000011000000000010000&nbsp;
+0001000000000010000012000&nbsp;
+0001000000000000000000100</pre>
+
+<p><code>mz.out</code></p>
+
+<pre>20&nbsp;
+8&nbsp;
+00000xxxxxxx0000000000000&nbsp;
+0000xx11100x1010011000000&nbsp;
+0000x10001110101100100000&nbsp;
+000xx01000000100001000000&nbsp;
+0xxx110000000000000100000&nbsp;
+2111000011000000000010000&nbsp;
+0001000000000010000012000&nbsp;
+0001000000000000000000100&nbsp;</pre>		</article>
+		</body></html>

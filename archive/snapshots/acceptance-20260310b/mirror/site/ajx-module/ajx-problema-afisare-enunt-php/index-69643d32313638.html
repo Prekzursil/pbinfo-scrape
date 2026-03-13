@@ -1,0 +1,50 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2168"><article id="enunt">
+			Costel trebuie să realizeze, împreună cu echipa sa, o aplicaţie software pentru gestiunea fişierelor de pe hard-disc, sarcina sa fiind aceea de a scrie un modul pentru determinarea căilor tuturor fişierelor de date aflate în structura arborescentă a folderelor de pe disc. Membrii echipei au stabilit o codificare proprie pentru memorarea structurii fişierelor de pe disc, utilizând un şir de caractere. Specificaţiile tehnice sunt următoarele:
+<ul>
+	<li>folderul este un fişier de tip special, care poate conţine fişiere şi/sau foldere (acestea fiind considerate subfoldere ale folderului respectiv);</li>
+	<li>numele folderelor încep cu o literă, au maxim <code>30</code> de caractere și sunt scrise cu majuscule;</li>
+	<li>numele fișierelor de date încep cu o literă, au maxim <code>30</code> de caractere și sunt scrise cu minuscule;</li>
+	<li>caracterele utilizate pentru numele fişierelor şi folderelor sunt literele alfabetului englez şi cifrele arabe;</li>
+	<li>reprezentarea structurii fişierelor sub forma unui şir de caractere se realizează după următoarea regulă: <code>NUME_FOLDER(lista_de_foldere_si_fisiere)</code>, unde <code>lista_de_foldere_si_fisiere</code>, posibil vidă, conţine fişierele şi/sau subfolderele folderului <code>NUME_FOLDER</code>, separate prin virgulă. Subfolderele se reprezintă respectând aceeaşi regulă.</li>
+</ul>
+
+<p>De exemplu, structura de fişiere şi foldere din figura de mai jos:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-dir-oji2007-jpg.jpg"></p>
+
+<p>se reprezintă prin şirul de caractere: <code>FOLDER1(FOLDER2(),FOLDER3(FOLDER4(poveste,basm),basm))</code></p>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care, cunoscând şirul de caractere ce codifică o structură de fişiere de pe disc, determină calea pentru fiecare fişier de date din structură. Prin cale a unui fişier se înţelege o succesiune de foldere, fiecare folder fiind urmat de caracterul <code>\(backslash)</code>, începând de la folderul aflat pe cel mai înalt nivel al structurii (primul specificat în şirul ce codifică structura de fişiere), până la subfolderul în care se află fişierul de date respectiv şi terminată cu numele fişierului. Căile determinate vor fi afişate în ordine lexicografică.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>dir.in</code> conţine pe prima linie şirul de caractere ce codifică structura de fişiere de pe disc.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>dir.out</code> va conţine pe prima linie un număr natural <code>N</code> reprezentând numărul de fişiere de date găsite. Pe următoarele <code>N</code> linii se vor scrie, în ordine lexicografică, căile ce permit identificarea fişierelor găsite, în formatul: <code>F1\F2\...\Fn\fisier</code>, câte o cale pe o linie.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>Şirul de caractere ce codifică structura de fişiere este nevid şi conţine maxim <code>1600</code> de caractere.</li>
+	<li>Structura de foldere conţine cel puţin un folder şi cel puţin un fişier.</li>
+	<li>Numărul de fişiere de date este cel mult <code>100</code>.</li>
+	<li>Lungimea căii unui fişier este de cel mult <code>255</code> caractere.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>dir.in</code></p>
+
+<pre>FOLDER1(FOLDER2(),FOLDER3(FOLDER4(poveste,basm),basm))</pre>
+
+<p><code>dir.out</code></p>
+
+<pre>3
+FOLDER1\FOLDER3\FOLDER4\basm
+FOLDER1\FOLDER3\FOLDER4\poveste
+FOLDER1\FOLDER3\basm</pre>		</article>
+		</body></html>

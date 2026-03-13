@@ -1,0 +1,311 @@
+{
+  "id": 3373,
+  "slug": "culori4",
+  "name": "culori4",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3373/culori4",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 21,
+      "name": "Probleme cu secvențe",
+      "slug": "probleme-cu-secven-e",
+      "href": "/?pagina=probleme-lista&tag=21"
+    }
+  ],
+  "tags": [
+    "Smenul lui Mars (Difference Arrays)"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Scrieţi un program care determină și afișează:<br>\n1.\tLungimea maximă a unei bucăți de pânză de aceeași culoare după vopsirea inițială;<br>\n2.\tCum va arăta pânza în urma modificărilor prietenei mele.</p>",
+      "text": "Scrieţi un program care determină și afișează: 1. Lungimea maximă a unei bucăți de pânză de aceeași culoare după vopsirea inițială; 2. Cum va arăta pânza în urma modificărilor prietenei mele."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>culori.in</code> conține pe prima linie cerința (1 sau 2). Linia următoare conține trei numere naturale <code>C N M</code> separate prin câte un spațiu, reprezentând numărul de culori, lungimea în cm a pânzei, respectiv numărul de modificări efectuate de prietena mea; următoarea linie conține N numere naturale separate prin câte un spațiu, <code>c1 c2 c3 ... cN</code> reprezentând culoarea fiecărui cm de pânză după vopsirea inițială, iar următoarele <code>M</code> linii conțin fiecare câte trei numere: două numere naturale <code>A B</code>, separate printr-un spațiu, reprezentând <code>A</code> – poziția la care începe și <code>B</code> – poziția finală la care se termină modificarea intensității și, separat printr-un spațiu, un număr întreg <code>X</code> reprezentând valoarea cu care se modifică intensitatea.</p>",
+      "text": "Fișierul de intrare culori.in conține pe prima linie cerința (1 sau 2). Linia următoare conține trei numere naturale C N M separate prin câte un spațiu, reprezentând numărul de culori, lungimea în cm a pânzei, respectiv numărul de modificări efectuate de prietena mea; următoarea linie conține N numere naturale separate prin câte un spațiu, c1 c2 c3 ... cN reprezentând culoarea fiecărui cm de pânză după vopsirea inițială, iar următoarele M linii conțin fiecare câte trei numere: două numere naturale A B, separate printr-un spațiu, reprezentând A – poziția la care începe și B – poziția finală la care se termină modificarea intensității și, separat printr-un spațiu, un număr întreg X reprezentând valoarea cu care se modifică intensitatea."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>culori.out</code> va conține o singură linie pe care va fi scris un număr natural determinat conform cerinței, dacă cerința este 1 sau <code>N</code> numere naturale determinate conform cerinței, dacă cerința este 2.</p>",
+      "text": "Fișierul de ieșire culori.out va conține o singură linie pe care va fi scris un număr natural determinat conform cerinței, dacă cerința este 1 sau N numere naturale determinate conform cerinței, dacă cerința este 2."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>0 &lt; N &lt; 10.001</code></li>\n\t<li><code>0 &lt; C &lt; 1.000.001</code></li>\n\t<li><code>0 &lt; M &lt; 200.001</code></li>\n\t<li>în urma tuturor modificărilor nuanțele rămân în mulțimea <code>{1, 2, ..., C}</code></li>\n</ul>",
+      "text": "0 < N < 10.001 0 < C < 1.000.001 0 < M < 200.001 în urma tuturor modificărilor nuanțele rămân în mulțimea {1, 2, ..., C}"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>culori.in</code></p><pre>1\n3 8 2\n1 1 2 2 2 2 3 3 \n2 5 1\n5 8 -1</pre><p><code>culori.out</code></p><pre>4</pre><h3>Explicație</h3><p>Cea mai lungă secvență de elemente egale este <code>2 2 2 2</code> și are <code>4</code> elemente</p>",
+      "text": "culori.in1 3 8 2 1 1 2 2 2 2 3 3 2 5 1 5 8 -1culori.out4ExplicațieCea mai lungă secvență de elemente egale este 2 2 2 2 și are 4 elemente"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>culori.in</code></p><pre>2\n3 8 2\n1 1 2 2 2 2 3 3\n2 5 1\n5 8 -1</pre><p><code>culori.out</code></p><pre>1 2 3 3 2 1 2 2 </pre><h3>Explicație</h3><p>După prima modificare vectorul este: <code>1 2 3 3 3 2 3 3</code>.<br>\nDupă a doua modificare este: <code>1 2 3 3 2 1 2 2</code>.</p>",
+      "text": "culori.in2 3 8 2 1 1 2 2 2 2 3 3 2 5 1 5 8 -1culori.out1 2 3 3 2 1 2 2 ExplicațieDupă prima modificare vectorul este: 1 2 3 3 3 2 3 3. După a doua modificare este: 1 2 3 3 2 1 2 2."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cea mai lungă secvență de elemente egale este 2 2 2 2 și are 4 elemente"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "După prima modificare vectorul este: 1 2 3 3 3 2 3 3. După a doua modificare este: 1 2 3 3 2 1 2 2."
+    }
+  ],
+  "constraints": [
+    "0 < N < 10.001",
+    "0 < C < 1.000.001",
+    "0 < M < 200.001",
+    "în urma tuturor modificărilor nuanțele rămân în mulțimea {1, 2, ..., C}"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q6bbb569584.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "culori.in / culori.out",
+    "limită timp": "0.2 secunde",
+    "limită memorie": "8 MB / 2 MB",
+    "sursa problemei": "Olimpiada Municipala de Informatica, Iasi, 2020",
+    "autor": "Lucia Miron",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.2,
+  "memoryLimitMb": 8,
+  "author": "Lucia Miron",
+  "sourceAttribution": "Olimpiada Municipala de Informatica, Iasi, 2020",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3373/culori4"
+}

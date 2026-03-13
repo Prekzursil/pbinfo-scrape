@@ -1,0 +1,84 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=688"><article id="enunt">
+			<p>Pixy locuieşte într-o ţară colorată. Harta ţării poate fi reprezentată sub forma unui dreptunghi împărţit în celule, organizate în <code>M</code> linii şi <code>N</code> coloane. Liniile sunt numerotate de la <code>1</code> la <code>M</code>, începând de la linia de sus, iar coloanele sunt numerotate de la <code>1</code> la <code>N</code> începând de la coloana din stânga. Fiecare celulă are o anumită culoare. Culorile sunt codificate cu literele <code>A</code>, <code>B</code>, <code>C</code>, <code>D</code>, <code>E</code>, <code>F</code> (există doar <code>6</code> culori).</p>
+
+<p>Casa lui Pixy se găseşte în celula de coordinate <code>(1,1)</code>, iar prietena lui, Pixela, locuieşte în celula de coordonate <code>(M,N)</code>. Pixy doreşte să ajungă la aleasa inimii sale, însă nu poate păşi decât pe celule de aceeaşi culoare. Ştim că Pixy se poate deplasa doar orizontal, sau vertical cu câte o căsuţă la fiecare pas.</p>
+
+<p>Pentru a putea ajunge la Pixela, Pixy va proceda astfel: alege o culoare şi va recolora celula în care se găseşte casa sa cu culoarea aleasă. Astfel va obţine o zonă de celule adiacente având toate aceeaşi culoare. Două celule se consideră adiacente dacă se învecinează orizontal sau vertical. De exemplu, pentru harta din figura 1, dacă alege culoarea având codul <code>D</code> va obţine zona marcată din figura 2, toate celulele din această zonă având culoarea <code>D</code>. </p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-probleme-651-700-pixy-png.png"></p>
+
+<p>În continuare Pixy va proceda asemănător: alege o nouă culoare, şi recolorează toată zona obţinută la pasul anterior cu noua culoare, astfel zona pe care poate păşi se lărgeşte. De exemplu, dacă în situaţia din figura 2, Pixy alege acum culoarea cu codul <code>C</code> va obţine situaţia din figura 3. </p>
+
+<p>Procedeul continuă până când celula corespunzătoare casei Pixelei face şi ea parte din zona obţinută de Pixy în urma recolorărilor.</p>
+
+<p>Alegerea culorilor de la fiecare pas trebuie făcută cu mare grijă, astfel încât numărul de recolorări să fie minim.</p>
+
+<p>Acum lui Pixy îi mai rămâne sarcina de a găsi un drum cât mai scurt pe care îl va parcurge până la Pixela, păşind doar pe celulele din zona obţinută în urma recolorărilor succesive, adică celulele de pe parcursul drumului vor avea toate aceeaşi culoare. </p>
+
+<h1>Cerința</h1>
+
+<p>Se cere să determinaţi:</p>
+
+<p>a) numărul minim de recolorări <br>
+b) lungimea drumului minim de la Pixy la Pixela, parcurs pe zona obţinută în urma recolorărilor de la cerinţa a).</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fişierul de intrare <code>pixy.in</code> conţine pe prima linie două numere naturale <code>M</code> şi <code>N</code>, separate printr-un spaţiu, reprezentând dimensiunile hărţii. Următoarele <code>M</code> linii conţin câte <code>N</code> litere mari ale alfabetului englez reprezentând culorile celulelor de pe hartă.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>p. Prima linie a fişierului <code>pixy.out</code> va conţine un număr întreg reprezentând numărul minim de recolorări.</p>
+
+<p>A doua linie a fişierului conţine o singură valoare întreagă, reprezentând lungimea drumului parcurs de Pixy.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2≤M,N≤500</code></li>
+	<li>Pentru răspuns corect la prima cerinţă se acordă <code>40%</code> din punctaj, pentru răspuns corect la cea de a doua cerinţă se acordă <code>60%</code> din punctaj.</li>
+	<li>Celulele vecine cu casa lui Pixy au iniţial culori diferite de culoarea casei.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>pixy.in</code></p>
+
+<pre>5 6
+ADDBCD
+DCDCBE
+ACBAED
+CBDADE
+ABDCEE</pre>
+
+<p><code>pixy.out</code></p>
+
+<pre>5
+9</pre>
+
+<h1>Explicație</h1>
+
+<p>Se fac următoarele recolorări:</p>
+
+<p><strong>Pasul 1</strong>: se alege culoarea <code>D</code>:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-probleme-651-700-pixy-1-png.png"></p>
+
+<p><strong>Pasul 2</strong>: se alege culoarea <code>C</code>:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-probleme-651-700-pixy-2-png.png"></p>
+
+<p><strong>Pasul 3</strong>: se alege culoarea <code>A</code>:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-probleme-651-700-pixy-3-png.png"></p>
+
+<p><strong>Pasul 4</strong>: se alege culoarea <code>D</code>:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-probleme-651-700-pixy-4-png.png"></p>
+
+<p><strong>Pasul 5</strong>: se alege culoarea <code>E</code>:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-probleme-651-700-pixy-5-png.png"></p>
+
+<p>S-au făcut deci <code>5</code> recolorări. Drumul pe care îl poate parcurge Pixy este următorul: <code>(1,1) → (1,2) → (1,3) → (2,3) → (2,4) → (3,4) → (4,4) → (4,5) → (5,5) → (5,6)</code> şi are lungimea <code>9</code>.</p>		</article>
+		</body></html>

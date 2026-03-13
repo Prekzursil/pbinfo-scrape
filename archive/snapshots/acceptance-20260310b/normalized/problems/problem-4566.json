@@ -1,0 +1,326 @@
+{
+  "id": 4566,
+  "slug": "turism1",
+  "name": "Turism1",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4566/turism1",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 16,
+      "name": "Teoria Grafurilor",
+      "slug": "teoria-grafurilor",
+      "href": "/?pagina=probleme-lista&tag=16"
+    },
+    {
+      "id": 59,
+      "name": "Probleme diverse cu grafuri orientate",
+      "slug": "probleme-diverse-cu-grafuri-orientate",
+      "href": "/?pagina=probleme-lista&tag=59"
+    }
+  ],
+  "tags": [
+    "Algoritmul lui Kosaraju",
+    "Algoritmul lui Tarjan",
+    "Componente Tare Conexe"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Alex, un mare entuziast al turismului, a decis să-și transforme pasiunea într-o afacere și să organizeze tururi ale orașului Bistrița. Orașul poate fi reprezentat ca un graf orientat al obiectivelor turistice, conectate direct de străzi. Totuși, dat fiind că abilitatea de a se orienta a lui Alex nu este comparabilă cu entuziasmul lui, organizarea traseelor este dificilă pentru el. În primul rând, el vrea să numere câte astfel de trasee există în oraș. Un traseu reprezintă o listă ordonată \\(a\\) de \\(k\\) obiective turistice, cu următoarele proprietăți:</p><ul>\n\t<li>De la nodul \\( {a}_{i} \\) se poate ajunge în nodul \\( {a}_{i+1} \\)</li>\n\t<li>De la nodul \\( {a}_{k} \\) se poate ajunge în nodul \\( {a}_{1} \\)</li>\n</ul><p>Spunem că se poate ajunge de la nodul <code>x</code> la nodul <code>y</code> dacă există un drum de <code>0</code> sau mai multe străzi care începe în nodul <code>x</code> și se termină în nodul <code>y</code>. Există <code>2</code> tipuri de trasee turistice:</p><ul>\n\t<li>Tipul 1, în care obiectivele se pot repeta</li>\n\t<li>Tipul 2, în care obiectivele trebuie să fie distincte</li>\n</ul><p>Graful obiectivelor turistice este un graf orientat în care o muchie de la <code>x</code> la <code>y</code> reprezintă un drum direct de la nodul <code>x</code> la nodul <code>y</code>. Alex are nevoie de ajutorul vostru, pentru a determina câte trasee de lungime <code>k</code> există pentru un tip dat de trasee turistice (Tipul 1 sau Tipul 2), pentru fiecare <code>k</code> de la <code>1</code> la <code>Q</code>.</p>",
+      "text": "Alex, un mare entuziast al turismului, a decis să-și transforme pasiunea într-o afacere și să organizeze tururi ale orașului Bistrița. Orașul poate fi reprezentat ca un graf orientat al obiectivelor turistice, conectate direct de străzi. Totuși, dat fiind că abilitatea de a se orienta a lui Alex nu este comparabilă cu entuziasmul lui, organizarea traseelor este dificilă pentru el. În primul rând, el vrea să numere câte astfel de trasee există în oraș. Un traseu reprezintă o listă ordonată \\(a\\) de \\(k\\) obiective turistice, cu următoarele proprietăți: De la nodul \\( {a}_{i} \\) se poate ajunge în nodul \\( {a}_{i+1} \\) De la nodul \\( {a}_{k} \\) se poate ajunge în nodul \\( {a}_{1} \\) Spunem că se poate ajunge de la nodul x la nodul y dacă există un drum de 0 sau mai multe străzi care începe în nodul x și se termină în nodul y. Există 2 tipuri de trasee turistice: Tipul 1, în care obiectivele se pot repeta Tipul 2, în care obiectivele trebuie să fie distincte Graful obiectivelor turistice este un graf orientat în care o muchie de la x la y reprezintă un drum direct de la nodul x la nodul y. Alex are nevoie de ajutorul vostru, pentru a determina câte trasee de lungime k există pentru un tip dat de trasee turistice (Tipul 1 sau Tipul 2), pentru fiecare k de la 1 la Q."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Prima linie conține <code>T</code>, tipul traseului.</p><p>A doua linie conține <code>N</code>, <code>M</code> și <code>Q</code>, reprezentând numărul de noduri și de muchii ale grafului, respectiv <code>k</code>-ul maxim pentru care Alex vrea să afle numărul de trasee. Următoarele <code>M</code> linii conțin câte <code>2</code> numere <code>x</code>, <code>y</code>, reprezentând o muchie orientată de la <code>x</code> la <code>y</code>.</p>",
+      "text": "Prima linie conține T, tipul traseului.A doua linie conține N, M și Q, reprezentând numărul de noduri și de muchii ale grafului, respectiv k-ul maxim pentru care Alex vrea să afle numărul de trasee. Următoarele M linii conțin câte 2 numere x, y, reprezentând o muchie orientată de la x la y."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Pentru fiecare linie <code>k</code>, de la <code>1</code> la <code>Q</code>, se va afișa numărul de trasee de lungime <code>k</code>, modulo \\( 10^9+7 \\).</p>",
+      "text": "Pentru fiecare linie k, de la 1 la Q, se va afișa numărul de trasee de lungime k, modulo \\( 10^9+7 \\)."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 300 000</code></li>\n\t<li><code>1 ≤ M, Q ≤ 1 000 000</code></li>\n</ul>",
+      "text": "1 ≤ N ≤ 300 000 1 ≤ M, Q ≤ 1 000 000"
+    },
+    {
+      "title": "Punctare",
+      "html": "<ul>\n\t<li>Pentru <code>7</code> puncte, <code>T = 1, 1 ≤ N ≤ 6, 1 ≤ M ≤ 30, 1 ≤ Q ≤ 30</code>.</li>\n\t<li>Pentru alte <code>15</code> puncte, <code>T = 1, 1 ≤ N, Q ≤ 50, 1 ≤ M ≤ 100</code>.</li>\n\t<li>Pentru alte <code>17</code> puncte, <code>T = 1, 1 ≤ N, Q ≤ 1000, 1 ≤ M ≤ 2000</code>.</li>\n\t<li>Pentru alte <code>21</code> de puncte, <code>T = 1, 1 ≤ N, Q ≤ 100 000, 1 ≤ M ≤ 200 000</code>.</li>\n\t<li>Pentru alte <code>8</code> puncte, <code>T = 2, 1 ≤ N, Q ≤ 1000, 1 ≤ M ≤ 2000</code>.</li>\n\t<li>Pentru alte <code>20</code> de puncte, <code>T = 2, 1 ≤ N, Q ≤ 100 000, 1 ≤ M ≤ 200 000</code>.</li>\n\t<li>Pentru restul de <code>12</code> puncte, <code>T = 2, 1 ≤ N ≤ 300 000, 1 ≤ M, Q ≤ 1 000 000</code>.</li>\n</ul>",
+      "text": "Pentru 7 puncte, T = 1, 1 ≤ N ≤ 6, 1 ≤ M ≤ 30, 1 ≤ Q ≤ 30. Pentru alte 15 puncte, T = 1, 1 ≤ N, Q ≤ 50, 1 ≤ M ≤ 100. Pentru alte 17 puncte, T = 1, 1 ≤ N, Q ≤ 1000, 1 ≤ M ≤ 2000. Pentru alte 21 de puncte, T = 1, 1 ≤ N, Q ≤ 100 000, 1 ≤ M ≤ 200 000. Pentru alte 8 puncte, T = 2, 1 ≤ N, Q ≤ 1000, 1 ≤ M ≤ 2000. Pentru alte 20 de puncte, T = 2, 1 ≤ N, Q ≤ 100 000, 1 ≤ M ≤ 200 000. Pentru restul de 12 puncte, T = 2, 1 ≤ N ≤ 300 000, 1 ≤ M, Q ≤ 1 000 000."
+    },
+    {
+      "title": "Exemplu 1:",
+      "html": "<p><code>turism.in</code></p><pre>1\n3 2 3\n1 2\n2 1</pre><p><code>turism.out</code></p><pre>3\n5\n9</pre>",
+      "text": "turism.in1 3 2 3 1 2 2 1turism.out3 5 9"
+    },
+    {
+      "title": "Exemplu 2:",
+      "html": "<p><code>turism.in</code></p><pre>2\n3 2 3\n1 2\n2 1</pre><p><code>turism.out</code></p><pre>3\n2\n0</pre>",
+      "text": "turism.in2 3 2 3 1 2 2 1turism.out3 2 0"
+    },
+    {
+      "title": "Exemplu 3:",
+      "html": "<p><code>turism.in</code></p><pre>1\n5 4 10\n1 2\n2 3\n3 1\n3 4</pre><p><code>turism.out</code></p><pre>5\n11\n29\n83\n245\n731\n2189\n6563\n19685\n59051</pre>",
+      "text": "turism.in1 5 4 10 1 2 2 3 3 1 3 4turism.out5 11 29 83 245 731 2189 6563 19685 59051"
+    },
+    {
+      "title": "Exemplu 4:",
+      "html": "<p><code>turism.in</code></p><pre>2\n6 7 4\n1 2\n2 3\n3 4\n4 5\n5 3\n3 1\n3 6</pre><p><code>turism.out</code></p><pre>6\n20\n60\n120</pre>",
+      "text": "turism.in2 6 7 4 1 2 2 3 3 4 4 5 5 3 3 1 3 6turism.out6 20 60 120"
+    },
+    {
+      "title": "Exemplu 5:",
+      "html": "<p><code>turism.in</code></p><pre>1\n8 9 15\n1 2\n2 3\n3 4\n2 1\n4 5\n5 6\n6 7\n7 8\n8 2</pre><p><code>turism.out</code></p><pre>8\n64\n512\n4096\n32768\n262144\n2097152\n16777216\n134217728\n73741817\n589934536\n719476260\n755810045\n46480318\n371842544</pre><h3>Explicații</h3><p>Pentru primul exemplu, traseele sunt:</p><ul>\n\t<li><code>(1)</code>, <code>(2)</code>, <code>(3)</code> – lungime <code>1</code></li>\n\t<li><code>(1, 1)</code>, <code>(1, 2)</code>, <code>(2, 1)</code>, <code>(2, 2)</code>, <code>(3, 3)</code> – lungime <code>2</code></li>\n\t<li><code>(1, 1, 1)</code>, <code>(1, 1, 2)</code>, <code>(1, 2, 1)</code>, <code>(2, 1, 1)</code>, <code>(1, 2, 2)</code>, <code>(2, 1, 2)</code>, <code>(2, 2, 1)</code>, <code>(2, 2, 2)</code>, <code>(3, 3, 3)</code> – lungime <code>3</code></li>\n</ul><p>Pentru al doilea exemplu, traseele sunt:</p><ul>\n\t<li><code>(1)</code>, <code>(2)</code>, <code>(3)</code> – lungime <code>1</code></li>\n\t<li><code>(1, 2)</code>, <code>(2, 1)</code> – lungime <code>2</code></li>\n</ul>",
+      "text": "turism.in1 8 9 15 1 2 2 3 3 4 2 1 4 5 5 6 6 7 7 8 8 2turism.out8 64 512 4096 32768 262144 2097152 16777216 134217728 73741817 589934536 719476260 755810045 46480318 371842544ExplicațiiPentru primul exemplu, traseele sunt: (1), (2), (3) – lungime 1 (1, 1), (1, 2), (2, 1), (2, 2), (3, 3) – lungime 2 (1, 1, 1), (1, 1, 2), (1, 2, 1), (2, 1, 1), (1, 2, 2), (2, 1, 2), (2, 2, 1), (2, 2, 2), (3, 3, 3) – lungime 3 Pentru al doilea exemplu, traseele sunt: (1), (2), (3) – lungime 1 (1, 2), (2, 1) – lungime 2"
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Pentru primul exemplu, traseele sunt:"
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 300 000",
+    "1 ≤ M, Q ≤ 1 000 000"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qe650819da1.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Moldovan Robert (moldovan_robert_lol)",
+    "clasa": "11",
+    "intrare/ieșire": "turism.in / turism.out",
+    "limită timp": "1.5 secunde",
+    "limită memorie": "256 MB / 64 MB",
+    "sursa problemei": "Concursul Interjudețean de Matematică și Informatică Grigore Moisil, 2023",
+    "autor": "Bogdan Pop",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 1.5,
+  "memoryLimitMb": 256,
+  "author": "Bogdan Pop",
+  "sourceAttribution": "Concursul Interjudețean de Matematică și Informatică Grigore Moisil, 2023",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4566/turism1"
+}

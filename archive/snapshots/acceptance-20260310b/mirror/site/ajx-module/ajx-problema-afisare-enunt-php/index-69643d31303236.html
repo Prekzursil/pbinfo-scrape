@@ -1,0 +1,98 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1026"><article id="enunt">
+			<p>Suprafața plană a unei mese de pseudo-biliard este formată din <code>n x n</code> celule pătratice cu lungimea laturii egală cu <code>1</code> (o unitate), lipite, dispuse pe n linii numerotate de la <code>1</code> la <code>n</code> și <code>n</code> coloane, numerotate de la <code>1</code> la <code>n</code>. Pe masă se așează <code>K</code> bile, fiecare bilă găsindu-se în centrul unei anumite celule a mesei. Un jucător dorește să plaseze pe suprafața mesei un cadru pătratic având lungimea diagonalei egală cu <code>D</code> unități. </p>
+
+<p>El trebuie să răspundă la <code>m</code> întrebări de forma: <code>x y</code>. Fiecare întrebare are semnificația: câte bile se găsesc în interiorul sau pe laturile cadrului ?</p>
+
+<p>Cadrul se plasează astfel încât fiecare colț să fie poziționat în centrul unei celule, colțurile opuse să se găsească pe aceeași coloană, respectiv pe aceeași linie, iar colțul “de sus” să fie plasat în centrul celulei aflată pe linia <code>x</code> și coloana <code>y</code>.</p>
+
+<h1>Cerinţă</h1>
+
+<p>Cunoscând lungimea <code>n</code> a laturilor mesei, numărul <code>m</code> de întrebări, numărul <code>K</code> de bile așezate pe masă, pozițiile lor și lungimea <code>D</code> a diagonalei cadrului pătratic, se cere:<br>
+1. Numărul de celule care se vor găsi în întregime în interiorul cadrului, dacă acesta se așează pe suprafața mesei, conform descrierii de mai sus.<br>
+2. Câte un răspuns pentru fiecare dintre cele <code>m</code> întrebări.</p>
+
+<h1>Date de intrare </h1>
+
+<p>Fişierul de intrare <code>pseudobil.in</code> conţine pe prima linie un număr natural <code>p</code>. Pentru toate testele de intrare, numărul <code>p</code> poate avea doar valoarea <code>1</code> sau valoarea  <code>2</code>.<br>
+Pe linia a doua se găsesc numerele naturale <code>n</code>, <code>K</code> și <code>D</code> separate prin câte un spațiu.<br>
+Pe fiecare dintre următoarele <code>K</code> linii, se găsesc câte două numere <code>a</code> și <code>b</code> (<code>a, b ≤ n</code>) reprezentând linia și coloana celulei în centrul căreia va fi așezată o bilă.<br>
+Pe linia <code>K + 3</code> se găsește un număr natural <code>m</code>. <br>
+Următoarele <code>m</code> linii conțin câte două numere naturale <code>x</code> și <code>y</code>, reprezentând linia și coloana celulei în centrul căreia se va plasa colțul “de sus” al cadrului.</p>
+
+<h1>Date de ieşire</h1>
+
+<p>Dacă valoarea lui <code>p</code> este <code>1</code>,  se va rezolva numai punctul <code>1</code> din cerință. În acest caz, în fişierul de ieşire pseudobil.out se va scrie un singur număr natural <code>n1</code>, reprezentând numărul de celule care se vor găsi în întregime în interiorul cadrului. <br>
+Dacă valoarea lui <code>p</code> este <code>2</code>, se va rezolva numai punctul <code>2</code> din cerință. În acest caz, fişierul de ieşire <code>pseudobil.out</code> va conține <code>m</code> linii. Pe fiecare linie <code>i</code> se va scrie câte un număr natural <code>n2</code>, reprezentând răspunsul pentru întrebarea <code>i</code>.</p>
+
+<h1>Restricţii şi precizări</h1>
+
+<ul>
+	<li><code>3 ≤ n ≤ 1500</code></li>
+	<li><code>1 ≤ K ≤ 55 000</code></li>
+	<li><code>2 ≤ D ≤ n – 1</code> , <code>D</code> – număr par</li>
+	<li><code>1 ≤ m ≤ 100 000</code></li>
+	<li>Pozițiile cadrului sunt distince.</li>
+	<li>Se garantează pentru <code>x</code> și <code>y</code> valori pentru care cadrul este plasat în interiorul suprafeței mesei de pseudo-biliard.</li>
+	<li>Pentru rezolvarea corectă a primei cerinţe se acordă <code>20</code> de puncte, iar pentru cerința a doua se acordă <code>80</code> de puncte.</li>
+	<li>Pentru primele <code>35%</code> dintre testele care verifică cerința 2,  <code>m ≤ 1000</code>  și <code>n ≤  500</code></li>
+	<li>Pentru primele <code>75%</code> din testele care verifică cerința 2,      <code>m ≤ 10000</code> și <code>n ≤ 1000</code></li>
+</ul>
+
+<p><code>pseudobil.in</code></p>
+
+<pre>1
+5 2 4
+3 4
+5 2
+1
+1 3</pre>
+
+<p><code>pseudobil.out</code></p>
+
+<pre>5</pre>
+
+<p><code>pseudobil.in</code></p>
+
+<pre>2
+6 5 4
+2 3
+1 1
+5 6
+4 4
+3 5
+2
+1 3
+2 4</pre>
+
+<p><code>pseudobil.out</code></p>
+
+<pre>3
+2</pre>
+
+<h1>Explicație</h1>
+
+<p><b>Pentru primul exemplu:</b></p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-a75486-pseudobil-expl1-png.png"></p>
+
+<p><code>p = 1
+n = 5,  K = 2,  D = 4 
+D = (3 unități + 2*0.5 unități) = 4</code></p>
+
+<p>Numărul de celule aflate în întregime în interiorul cadrului este <code>n1 = 5</code>.</p>
+
+<p><b>Atenție! Pentru acest test se rezolvă doar cerința 1.</b><br>
+Se observă că în acest caz este suficient să se citească datele aflate pe primele două linii.</p>
+
+<p><b>Pentru al doilea exemplu:</b></p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-a75486-pseudobil-expl2-png.png"></p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-a75486-pseudobil-expl3-png.png"></p>
+
+<p><code>p = 2, n = 6,  K = 5,  D = 4.</code> <br>
+Prima întrebare este: <code>1 3</code> .  Sunt două bile pe laturile cadrului și una în interior, deci <code>n2 = 3</code><br>
+A doua întrebare este: <code>2 4</code>. O bilă se găsește pe una dintre laturile  cadrului și una în interior, deci <code>n2 = 2</code></p>
+
+<p><b>Atenție! Pentru acest test se rezolvă doar cerința 2.</b></p>		</article>
+		</body></html>

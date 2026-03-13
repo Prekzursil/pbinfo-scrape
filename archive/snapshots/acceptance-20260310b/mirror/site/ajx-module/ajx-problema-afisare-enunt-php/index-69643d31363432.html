@@ -1,0 +1,150 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1642"><article id="enunt">
+			<p>Pădurea magică din Povestea lui Negrimon este situată pe un teren dreptunghiular care poate fi privit ca o matrice cu <code>N</code> linii, numerotate de la <code>1</code> la <code>N</code> şi <code>M</code> coloane, numerotate de la <code>1</code> la <code>M</code>. Putem spune că terenul este împărţit în <code>N * M</code><br>
+parcele pătrate de latură <code>1</code>. În pădure trăieşte şarpele Snake care, iniţial, este lung cât <code>K</code> parcele şi lat cât una singură. La începutul poveştii şarpele se află pe prima linie, pe parcelele de la <code>1</code> la <code>K</code>, capul fiind pe poziţia <code>K</code> şi orientat spre est.</p>
+
+<p>Snake se deplasează cu o parcelă pe secundă. Astfel, după prima secundă, şarpele se va afla tot pe linia <code>1</code>, deplasat cu o poziţie spre dreapta, mai exact capul va fi în parcela <code>K + 1</code>. Deplasarea se face simultan cu întreg corpul.</p>
+
+<p>În pădure au loc <code>E</code> evenimente ce pot fi de tipurile următoare:</p>
+
+<ol>
+	<li>Apariţia unui măr la secunda <code>st</code> pe linia <code>x</code> şi coloana <code>y</code>, care va dispărea la secunda <code>en</code>, dacă nu este mâncat până atunci de şarpe. Snake înghite mărul când capul său ajunge în parcela care îl conţine. Mărul dispare, desigur, iar corpul şarpelui creşte instantaneu cu o unitate care îi va fi adăugată la coadă şi va ocupa aceeaşi parcelă pe care s-a aflat coada (ultima porţiune din corp) la secunda anterioară înghiţirii mărului.</li>
+</ol>
+
+<ol>
+	<li>Apariţia unui schimbător la secunda <code>st</code> pe linia <code>x</code> şi coloana <code>y</code>, care va dispărea la secunda <code>en</code> şi care are valoarea <code>v</code>. Când capul şarpelui ajunge în parcela schimbătorului, direcţia ulterioară de deplasare va fi dată de valoarea <code>v ∈ {1, 2, 3, 4}</code> cu semnificaţia: <code>1</code> Nord (sus); <code>2</code> Est (dreapta); <code>3</code> Sud (jos); <code>4</code> Vest (stânga).</li>
+</ol>
+
+<p>Schimbătorul funcţionează astfel: de exemplu, dacă Snake se deplasează spre Est şi la o anumită secundă capul acestuia ajunge într-o parcelă unde se află un schimbător cu valoarea <code>1</code>, la următoarea secundă capul se va afla în parcela situată deasupra schimbătorului şi în parcela schimbătorului se află prima porţiune din corpul şarpelui.</p>
+
+ <img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1200-1642-culegere-1-png.png"> <img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1200-1642-culegere-2-png.png"> <img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1200-1642-culegere-3-png.png"> <img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1200-1642-culegere-4-png.png"> <img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1200-1642-culegere-5-png.png">
+
+<p>Schimbătorul dispare exact în secunda <code>en</code> iar până atunci rămâne în matrice indiferent de câte ori Snake trece prin parcela acestuia. Schimbătorul va acţiona doar când capul lui Snake ajunge în parcela lui şi nu va exista nicio situaţie în care să se schimbe direcţia în sens opus celei din care vine. De exemplu, dacă direcţia lui Snake este spre Est, nu va întâlni un schimbător cu valoarea <code>4</code>, care l-ar întoarce spre Vest.</p>
+
+<p>În fiecare secundă <code>s</code>, evenimentele se petrec în acestă ordine: dispar obiectele programate să dispară în secunda <code>s</code>, apar obiectele ce trebuie să apară în secunda <code>s</code>, Snake se deplasează cu o parcelă. Dacă printr-o combinaţie nefericită de mişcări, Snake se loveşte de propriul corp, el se blochează şi aşteptă serviciul de asistenţă a pădurii.</p>
+
+<p>Deoarece Snake se află într-o pădure magică, deplasarea lui respectă reguli speciale: când capul este pe ultima coloană din matrice şi se mişcă spre Est, el reapare pe aceeaşi linie, dar pe prima coloană, trăgând corpul simultan. Analog şi pentru prima coloană, când se deplasează spre Vest, capul reapare pe aceeaşi linie dar pe ultima coloană. Dacă şarpele se află pe prima linie şi se deplasează spre Nord, mişcarea va continua pe ultima linie şi aceeaşi coloană din matrice. Analog pentru ultima linie, când Snake se deplasează spre Sud, capul reapare pe prima linie şi aceeaşi<br>
+coloană. Aceste mişcări au loc doar dacă Snake nu se blochează în propriul corp.</p>
+
+<p>Povestea se termină în secunda în care apare oricare dintre situaţiile: Snake se loveşte de propriul corp, caz în care el rămâne <span class="caps">BLOCAT</span>; toate cele <code>E</code> evenimente s-au produs şi nu mai există niciun obiect în matrice pentru că toate au<br>
+dispărut, caz în care rămâne un şarpe <span class="caps">LIBER</span>.</p>
+
+<h1>Cerința</h1>
+
+<p>În funcţie de finalul poveştii, afişaţi starea lui Snake şi harta pădurii în secunda respectivă. Pe hartă trebuie să fie marcate parcelele ocupate de corpul lui Snake, inclusiv capul.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>culegere.in</code> conține pe prima linie valorile: <code>N</code> – numărul de linii, <code>M</code> – numărul de coloane în care este împărţită pădurea, K- lungimea şarpelui şi <code>E</code> – numărul de evenimente din pădure, separate prin câte un spaţiu.</p>
+
+<p>Următoarele <code>E</code> linii respectă unul dintre formatele:</p>
+
+<ul>
+	<li><code>1 x y st en</code> – Apare un măr la secunda <code>st</code>, pe linia <code>x</code>, coloana <code>y</code> şi dispare la secunda <code>en</code></li>
+	<li><code>2 x y st en v</code> – Apare un schimbător la secunda <code>st</code>, pe linia <code>x</code>, coloana <code>y</code>, dispare la secunda <code>en</code> şi are valoarea <code>v</code>. Evenimentele sunt sortate crescător în funcţie de <code>st</code>.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>culegere.out</code> va conține pe prima linie cuvântul <code>BLOCAT</code> sau <code>LIBER</code>, în funcţie de starea lui Snake la sfârşitul poveştii. Pe fiecare dintre următoarele <code>N</code> linii, se vor afla <code>M</code> caractere din mulţimea <code>{'.', 'O', '#'}</code>, cu<br>
+următoarea semnificaţie : <code>'.'</code> – parcelă liberă, majuscula <code>'O'</code> – parcelă în care se află o porţiune din corpul şarpelui, <code>'#'</code> – parcela în care se află capul lui Snake. Caracterul <code>'#'</code> va apărea o singură dată în matrice.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N, M ≤ 2000; 2 ≤ K &lt; M; 1 ≤ E ≤ 500.000;</code></li>
+	<li><code>1 ≤ x ≤ N; 1 ≤ y ≤ M; 1 ≤ st &lt; en ≤ 500.000; v ∈ {1,2,3,4}</code></li>
+	<li>Obiectele apar doar în parcele libere.</li>
+	<li>Povestea începe la secunda <code>0</code>.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>culegere.in</code></p>
+
+<pre>4 5 3 4
+1 1 5 1 5
+2 1 1 2 6 3
+2 2 1 2 5 2
+2 4 4 3 5 4</pre>
+
+<p><code>culegere.out</code></p>
+
+<pre>LIBER
+O....
+OO#..
+.....
+.....</pre>
+
+<h3>Explicație</h3>
+
+<p><strong>Secunda 0:</strong></p>
+
+<pre>OO#..
+.....
+.....
+.....</pre>
+
+<p><strong>Secunda 1:</strong> apare 1 măr, deplasare spre Est</p>
+
+<pre>.OO#M
+.....
+.....
+.....</pre>
+
+<p><strong>Secunda 2:</strong> apar <code>2</code> schimbătoare, deplasare spre Est, înghite măr, creşte coada</p>
+
+<pre>3OOO#
+2....
+.....
+.....</pre>
+
+<p><strong>Secunda 3:</strong> apare un schimbător pe <code>(4, 4)</code>, deplasare spre Est şi capul apare pe prima coloană peste schimbătorul <code>3</code> din poziţia <code>(1, 1)</code></p>
+
+<pre>#.OOO
+2....
+.....
+....4</pre>
+
+<p><strong>Secunda 4:</strong> Nu apar şi nu dispar obiecte, deplasare spre Sud, corpul urmează acelaşi traseu ca şi capul care a fost influenţat la secunda <code>3</code> de schimbătorul cu valoarea <code>3</code>; capul ajunge peste schimbătorul <code>2</code> de la poziţia <code>(2,1)</code></p>
+
+<pre>O..OO
+#....
+.....
+....4</pre>
+
+<p><strong>Secunda 5:</strong> dispare schimbătorul de la <code>(4, 4)</code>, deplasare spre Est deoarece capul a fost influenţat de schimbătorul cu valoarea <code>2</code> la secunda <code>4</code>; dacă mărul nu ar fi fost mâncat, acum ar fi dispărut</p>
+
+<pre>O...O
+O#...
+.....
+.....</pre>
+
+<p><strong>Secunda 6:</strong> dispare primul schimbător chiar dacă acesta a fost acoperit de corpul lui<br>
+Snake, deplasare spre Est</p>
+
+<pre>O....
+OO#..
+.....
+.....</pre>
+
+<p>Aceasta este configuraţia finală deoarece acum a dispărut şi ultimul obiect. Snake nu s-a blocat în propriul corp, deci este <span class="caps">LIBER</span>.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>culegere.in</code></p>
+
+<pre>2 6 5 3
+2 1 6 1 20 3
+2 2 6 2 20 4
+2 2 5 1 20 1</pre>
+
+<p><code>culegere.out</code></p>
+
+<pre>BLOCAT
+...OOO
+....#O</pre>
+
+<h3>Explicație</h3>
+
+<p>Snake s-a blocat în propriul corp înainte să dispară ultimul obiect.</p>		</article>
+		</body></html>

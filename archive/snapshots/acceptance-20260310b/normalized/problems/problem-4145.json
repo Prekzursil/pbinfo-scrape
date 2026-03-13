@@ -1,0 +1,337 @@
+{
+  "id": 4145,
+  "slug": "cfr",
+  "name": "CFR",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4145/cfr",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 65,
+      "name": "Structuri de date arborescente",
+      "slug": "structuri-de-date-arborescente",
+      "href": "/?pagina=probleme-lista&tag=65"
+    },
+    {
+      "id": 148,
+      "name": "Structuri de date",
+      "slug": "structuri-de-date",
+      "href": "/?pagina=probleme-lista&tag=148"
+    }
+  ],
+  "tags": [
+    "arbori",
+    "Păduri de mulțimi disjuncte",
+    "Range Minimum Query",
+    "STL",
+    "Arbori de intervale",
+    "Combinatorica",
+    "Lowest Common Ancestor",
+    "Aritmetica modulara"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p><span class=\"caps\">RAU</span>-Gigel se joacă cu noul său set de cale ferată, primit cadou de ziua lui anul acesta. Setul conține <code>N</code> gări distincte din diverse orașe reprezentative ale României (București, Iași, Sebeș, …), numerotate în continuare, pentru simplitate, cu numere de la <code>1</code> la <code>N</code> și <code>N – 1</code> bucăți de șină care pot conecta între ele câte două gări distincte date (conexiunea este bidirecțională) astfel încât folosind aceste șine există un drum unic alcătuit din șine între oricare două gări distincte. Ca orice jucărie, fiecare din cele <code>N – 1</code> bucăți de șină are un grad de periculozitate asociat acesteia, o valoare exprimată printr-un număr natural nenul (nimeni nu este perfect până la urmă, nici jucăriile), pentru a ști de la ce vârsta ar fi bine să poată fi folosite de copii, de exemplu. De asemenea, toate bucățile de șină au aceeași lungime constantă, de o unitate.</p><p><span class=\"caps\">RAU</span>-Gigel își desfășoară joaca pe parcursul a <code>Q</code> zile și în fiecare zi este supravegheat de câte un membru al familiei pentru a fi în siguranță. Din nefericire pentru el, în fiecare din cele <code>Q</code> zile persoana care îl supraveghează îi încurcă puțin planurile, permițându-i să folosească doar șinele care au gradul de periculozitate cel mult <code>M</code> (inclusiv <code>M</code>), o valoare naturală nenulă aleasă de aceasta (de remarcat că poate mereu folosi toate gările). Astfel, folosind toate șinele pe care le are la dispoziție pentru a conecta între ele gările corespunzătoare, va obține una sau mai multe așezări conexe maximale de gări (există un drum unic alcătuit din șine între oricare două gări distincte dintr-o așezare) pe care le va numi în continuare orașe. În fiecare astfel de zi, personajul nostru principal primește de la persoana care îl supraveghează un număr natural nenul <code>K</code> de bucăți de șină considerate perfect sigure pentru joaca copilului de către respectivul supraveghetor, cu care poate conecta oricare două gări distincte dorește. De asemenea, șinele primite îi sunt luate la finalul zilei (poate că persoana respectivă mai supraveghează și alți copii în următoarele zile și mai are nevoie de ele). </p><p><span class=\"caps\">RAU</span>-Gigel consideră că un lanț este un șir de una sau mai multe gări distincte astfel încât oricare două gări adiacente din acesta sunt conectate de exact o șină, iar lanțul de lungime maximă este cel format dintr-un număr maxim de bucăți de șină (astfel, lungimea unui lanț este dată de numărul de bucăți de șină din care este alcătuit). Scopul acestuia este ca în fiecare zi să formeze un singur lanț cât mai lung având la dispoziție șinele primite de la supraveghetor și cel mult câte un lanț din fiecare oraș creat de acesta, la alegere (adică pentru fiecare oraș poate să aleagă exact un lanț din el (oricare dorește) sau să nu folosească niciun lanț din acel oraș). </p><p><span class=\"caps\">RAU</span>-Gigel cunoaște deja toate detaliile a <code>T</code> astfel de scenarii de joacă independente și vrea pentru fiecare dintre acestea, pe baza informațiilor date, să-l ajutați să afle în fiecare zi care este lungimea maximă a unui lanț de șine pe care îl poate obține în modul descris anterior (prima cerință), respectiv numărul de modalități distincte de obținere a acestui maxim (a doua cerință), calculat modulo <code>1.000.000.007</code>. Două modalități de obținere a maximului sunt considerate distincte dacă cele două submulțimi de orașe din care acesta a selectat lanțurile de lungime maximă sunt diferite.</p>",
+      "text": "RAU-Gigel se joacă cu noul său set de cale ferată, primit cadou de ziua lui anul acesta. Setul conține N gări distincte din diverse orașe reprezentative ale României (București, Iași, Sebeș, …), numerotate în continuare, pentru simplitate, cu numere de la 1 la N și N – 1 bucăți de șină care pot conecta între ele câte două gări distincte date (conexiunea este bidirecțională) astfel încât folosind aceste șine există un drum unic alcătuit din șine între oricare două gări distincte. Ca orice jucărie, fiecare din cele N – 1 bucăți de șină are un grad de periculozitate asociat acesteia, o valoare exprimată printr-un număr natural nenul (nimeni nu este perfect până la urmă, nici jucăriile), pentru a ști de la ce vârsta ar fi bine să poată fi folosite de copii, de exemplu. De asemenea, toate bucățile de șină au aceeași lungime constantă, de o unitate.RAU-Gigel își desfășoară joaca pe parcursul a Q zile și în fiecare zi este supravegheat de câte un membru al familiei pentru a fi în siguranță. Din nefericire pentru el, în fiecare din cele Q zile persoana care îl supraveghează îi încurcă puțin planurile, permițându-i să folosească doar șinele care au gradul de periculozitate cel mult M (inclusiv M), o valoare naturală nenulă aleasă de aceasta (de remarcat că poate mereu folosi toate gările). Astfel, folosind toate șinele pe care le are la dispoziție pentru a conecta între ele gările corespunzătoare, va obține una sau mai multe așezări conexe maximale de gări (există un drum unic alcătuit din șine între oricare două gări distincte dintr-o așezare) pe care le va numi în continuare orașe. În fiecare astfel de zi, personajul nostru principal primește de la persoana care îl supraveghează un număr natural nenul K de bucăți de șină considerate perfect sigure pentru joaca copilului de către respectivul supraveghetor, cu care poate conecta oricare două gări distincte dorește. De asemenea, șinele primite îi sunt luate la finalul zilei (poate că persoana respectivă mai supraveghează și alți copii în următoarele zile și mai are nevoie de ele). RAU-Gigel consideră că un lanț este un șir de una sau mai multe gări distincte astfel încât oricare două gări adiacente din acesta sunt conectate de exact o șină, iar lanțul de lungime maximă este cel format dintr-un număr maxim de bucăți de șină (astfel, lungimea unui lanț este dată de numărul de bucăți de șină din care este alcătuit). Scopul acestuia este ca în fiecare zi să formeze un singur lanț cât mai lung având la dispoziție șinele primite de la supraveghetor și cel mult câte un lanț din fiecare oraș creat de acesta, la alegere (adică pentru fiecare oraș poate să aleagă exact un lanț din el (oricare dorește) sau să nu folosească niciun lanț din acel oraș). RAU-Gigel cunoaște deja toate detaliile a T astfel de scenarii de joacă independente și vrea pentru fiecare dintre acestea, pe baza informațiilor date, să-l ajutați să afle în fiecare zi care este lungimea maximă a unui lanț de șine pe care îl poate obține în modul descris anterior (prima cerință), respectiv numărul de modalități distincte de obținere a acestui maxim (a doua cerință), calculat modulo 1.000.000.007. Două modalități de obținere a maximului sunt considerate distincte dacă cele două submulțimi de orașe din care acesta a selectat lanțurile de lungime maximă sunt diferite."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>cfr.in</code> conține pe prima linie un număr natural nenul <code>T</code>, reprezentând numărul de scenarii. Pentru fiecare scenariu pe prima linie se află un număr <code>C</code> care reprezintă numărul cerinței care trebuie rezolvată. </p><p>Pe cea de-a doua linie se află <code>N</code>, numărul de gări, urmat de <code>N – 1</code> linii care reprezintă descrierile șinelor de tren: câte <code>3</code> numere <code>u_i  v_i  w_i</code> pe fiecare linie, care reprezintă gările conectate, respectiv gradul de periculozitate pentru bucata de șină cu numărul <code>i</code>, <code>1 ≤ i &lt; N</code>.</p><p>Pe următoarea linie se află numărul <code>Q</code> urmat de descrierile celor <code>Q</code> zile de joacă: câte <code>2</code> numere <code>M_i  K_i</code> pe fiecare linie, având semnificațiile din enunț, <code>1 ≤ i ≤ Q</code>.</p>",
+      "text": "Fișierul de intrare cfr.in conține pe prima linie un număr natural nenul T, reprezentând numărul de scenarii. Pentru fiecare scenariu pe prima linie se află un număr C care reprezintă numărul cerinței care trebuie rezolvată. Pe cea de-a doua linie se află N, numărul de gări, urmat de N – 1 linii care reprezintă descrierile șinelor de tren: câte 3 numere u_i v_i w_i pe fiecare linie, care reprezintă gările conectate, respectiv gradul de periculozitate pentru bucata de șină cu numărul i, 1 ≤ i < N.Pe următoarea linie se află numărul Q urmat de descrierile celor Q zile de joacă: câte 2 numere M_i K_i pe fiecare linie, având semnificațiile din enunț, 1 ≤ i ≤ Q."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>cfr.out</code> va conține răspunsurile, în ordinea solicitării, adică lungimea maximă care poate fi obținută în condițiile zilei corespunzătoare dacă <code>C = 1</code> sau numărul de modalități distincte de a obține această lungime maximă modulo <code>1.000.000.007</code>, dacă <code>C = 2</code>.</p>",
+      "text": "Fișierul de ieșire cfr.out va conține răspunsurile, în ordinea solicitării, adică lungimea maximă care poate fi obținută în condițiile zilei corespunzătoare dacă C = 1 sau numărul de modalități distincte de a obține această lungime maximă modulo 1.000.000.007, dacă C = 2."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ T ≤ 3</code></li>\n\t<li><code>1 ≤ C ≤ 2</code></li>\n\t<li><code>1 ≤ N, Q ≤ 100.000</code></li>\n\t<li><code>1 ≤ u_i, v_i ≤ N</code></li>\n\t<li><code>1 ≤ w_i, M_i ≤ 1.000.000.000</code></li>\n\t<li><code>1 ≤ K_i ≤ N</code></li>\n\t<li>Un lanț poate fi format dintr-o singură gară sau să aibă la cele <code>2</code> capete ale sale câte o gară.</li>\n\t<li>Nu este obligatoriu ca într-o zi să se folosească toate cele <code>K_i</code> șine primite (mai ales că acest lucru s-ar putea să fie imposibil, pentru că o bucată de șină primită trebuie să conecteze exact două gări distincte într-un lanț).</li>\n\t<li>Pentru teste în valoare de <code>10</code> de puncte, <code>C = 1</code> pentru toate scenariile și <code>1 ≤ N, Q ≤ 1.000</code>.</li>\n\t<li>Pentru alte teste în valoare de <code>10</code> de puncte, <code>C = 1</code> pentru toate scenariile și <code>M_i = 1.000.000.000</code>, <code>1 ≤ i ≤ Q</code>.</li>\n\t<li>Pentru alte teste în valoare de <code>10</code> de puncte, <code>C = 1</code> pentru toate scenariile și  <code>u_i=i, v_i = i+1</code>, <code>1 ≤ i &lt; N</code>.</li>\n\t<li>Pentru alte teste în valoare de <code>10</code> de puncte, <code>C = 1</code> pentru toate scenariile și <code>K_i=1</code>, <code>1 ≤ i ≤ Q</code>.</li>\n\t<li>Pentru alte teste în valoare de <code>10</code> de puncte, <code>C = 1</code>  pentru toate scenariile și nu există restricții suplimentare.</li>\n\t<li>Pentru alte teste în valoare de <code>10</code> de puncte, <code>C = 2</code> pentru toate scenariile și <code>1 ≤ N, Q ≤ 1.000</code>.</li>\n\t<li>Pentru alte teste în valoare de <code>10</code> de puncte, <code>C = 2</code> pentru toate scenariile și <code>M_i=1.000.000.000</code>, <code>1 ≤ i ≤ Q</code>.</li>\n\t<li>Pentru alte teste în valoare de <code>10</code> de puncte, <code>C = 2</code> pentru toate scenariile și  <code>u_i=i,v_i=i+1</code>, <code>1 ≤ i &lt; N</code>.</li>\n\t<li>Pentru alte teste în valoare de <code>10</code> de puncte, <code>C = 2</code> pentru toate scenariile și <code>K_i=1</code>, <code>1 ≤ i ≤ Q</code>.</li>\n\t<li>Pentru alte teste în valoare de <code>10</code> de puncte, <code>C = 2</code> pentru toate scenariile și nu există restricții suplimentare.</li>\n</ul>",
+      "text": "1 ≤ T ≤ 3 1 ≤ C ≤ 2 1 ≤ N, Q ≤ 100.000 1 ≤ u_i, v_i ≤ N 1 ≤ w_i, M_i ≤ 1.000.000.000 1 ≤ K_i ≤ N Un lanț poate fi format dintr-o singură gară sau să aibă la cele 2 capete ale sale câte o gară. Nu este obligatoriu ca într-o zi să se folosească toate cele K_i șine primite (mai ales că acest lucru s-ar putea să fie imposibil, pentru că o bucată de șină primită trebuie să conecteze exact două gări distincte într-un lanț). Pentru teste în valoare de 10 de puncte, C = 1 pentru toate scenariile și 1 ≤ N, Q ≤ 1.000. Pentru alte teste în valoare de 10 de puncte, C = 1 pentru toate scenariile și M_i = 1.000.000.000, 1 ≤ i ≤ Q. Pentru alte teste în valoare de 10 de puncte, C = 1 pentru toate scenariile și u_i=i, v_i = i+1, 1 ≤ i < N. Pentru alte teste în valoare de 10 de puncte, C = 1 pentru toate scenariile și K_i=1, 1 ≤ i ≤ Q. Pentru alte teste în valoare de 10 de puncte, C = 1 pentru toate scenariile și nu există restricții suplimentare. Pentru alte teste în valoare de 10 de puncte, C = 2 pentru toate scenariile și 1 ≤ N, Q ≤ 1.000. Pentru alte teste în valoare de 10 de puncte, C = 2 pentru toate scenariile și M_i=1.000.000.000, 1 ≤ i ≤ Q. Pentru alte teste în valoare de 10 de puncte, C = 2 pentru toate scenariile și u_i=i,v_i=i+1, 1 ≤ i < N. Pentru alte teste în valoare de 10 de puncte, C = 2 pentru toate scenariile și K_i=1, 1 ≤ i ≤ Q. Pentru alte teste în valoare de 10 de puncte, C = 2 pentru toate scenariile și nu există restricții suplimentare."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>cfr.in</code></p><pre>1\n1\n13\n1 2 1\n1 3 2\n1 4 2\n2 5 3\n3 6 1\n4 7 3\n4 8 2\n5 9 4\n5 10 4\n5 11 4\n8 12 3\n8 13 1\n4\n2 10\n3 2\n1 4\n4 3</pre><p><code>cfr.out</code></p><pre>11\n7\n7\n6</pre><h3>Explicație</h3><p>La final se află o reprezentarea vizuală a rețelei de gări, respectiv șine corespunzătoare acestui exemplu (pe șine s-a trecut gradul lor de periculozitate, iar lungimea tuturor este, cum s-a precizat și în enunț, constantă, de o unitate).</p><p>Să considerăm prima zi. Avem la dispoziție doar șinele de tren cu grad de periculozitate cel mult <code>2</code>, așa că așezările de gări formate sunt: <code>{1, 2, 3, 4, 6, 8, 13}, {5}, {7}, {9}, {10}, {11}, {12}</code>, în total <code>7</code> așezări. <span class=\"caps\">RAU</span>-Gigel poate alege din prima așezare lanțul de gări <code>6 – 3 – 1 – 4 – 8 – 13</code>, de lungime <code>5</code> (șine), iar din restul așezărilor există câte o singură opțiune de alegere, care este mereu un lanț format dintr-un singur nod, de lungime <code>0</code> (șine). Observăm că <span class=\"caps\">RAU</span>-Gigel are la dispoziție destule șine adiționale primite pentru a “lega” toate lanțurile alese, astfel poate obține lanțul: <code>6 – 3 – 1 – 4 – 8 – 13 – 5 – 7 – 9 – 10 – 11 – 12</code>, de lungime <code>11</code> (șine). Oricum ar alege alte lanțuri, <span class=\"caps\">RAU</span>-Gigel nu poate obține un lanț final de lungime strict mai mare, deci răspunsul pentru prima zi este 11. De asemenea, se remarcă faptul că nu s-au folosit toate bucățile de șină primită, ci doar <code>6</code> din cele <code>10</code>. <span class=\"caps\">RAU</span>-Gigel nu mai poate folosi șinele rămase pentru a prelungi lanțul obținut (de exemplu să atașeze încă o șină la unul din capetele lanțului, să zicem la <code>12</code>) pentru că o șină trebuie să unească exact <code>2</code> gări distincte.</p>",
+      "text": "cfr.in1 1 13 1 2 1 1 3 2 1 4 2 2 5 3 3 6 1 4 7 3 4 8 2 5 9 4 5 10 4 5 11 4 8 12 3 8 13 1 4 2 10 3 2 1 4 4 3cfr.out11 7 7 6ExplicațieLa final se află o reprezentarea vizuală a rețelei de gări, respectiv șine corespunzătoare acestui exemplu (pe șine s-a trecut gradul lor de periculozitate, iar lungimea tuturor este, cum s-a precizat și în enunț, constantă, de o unitate).Să considerăm prima zi. Avem la dispoziție doar șinele de tren cu grad de periculozitate cel mult 2, așa că așezările de gări formate sunt: {1, 2, 3, 4, 6, 8, 13}, {5}, {7}, {9}, {10}, {11}, {12}, în total 7 așezări. RAU-Gigel poate alege din prima așezare lanțul de gări 6 – 3 – 1 – 4 – 8 – 13, de lungime 5 (șine), iar din restul așezărilor există câte o singură opțiune de alegere, care este mereu un lanț format dintr-un singur nod, de lungime 0 (șine). Observăm că RAU-Gigel are la dispoziție destule șine adiționale primite pentru a “lega” toate lanțurile alese, astfel poate obține lanțul: 6 – 3 – 1 – 4 – 8 – 13 – 5 – 7 – 9 – 10 – 11 – 12, de lungime 11 (șine). Oricum ar alege alte lanțuri, RAU-Gigel nu poate obține un lanț final de lungime strict mai mare, deci răspunsul pentru prima zi este 11. De asemenea, se remarcă faptul că nu s-au folosit toate bucățile de șină primită, ci doar 6 din cele 10. RAU-Gigel nu mai poate folosi șinele rămase pentru a prelungi lanțul obținut (de exemplu să atașeze încă o șină la unul din capetele lanțului, să zicem la 12) pentru că o șină trebuie să unească exact 2 gări distincte."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>cfr.in</code></p><pre>1 \n2\n13\n1 2 1\n1 3 2\n1 4 2\n2 5 3\n3 6 1\n4 7 3\n4 8 2\n5 9 4\n5 10 4\n5 11 4\n8 12 3\n8 13 1\n4\n2 10\n3 2\n1 4\n4 3</pre><p><code>cfr.out</code></p><pre>1\n3\n21\n1</pre><h3>Explicație</h3><p>Reprezentarea vizuală a rețelei de gări, respectiv șine corespunzătoare acestui exemplu este identică cu cea a primului exemplu și se găsește la final.</p><p>Să considerăm a doua zi. Avem la dispoziție doar șinele de tren cu grad de periculozitate cel mult <code>3</code>, așa că așezările de gări formate sunt: <code>{1, 2, 3, 4, 5, 6, 7, 8, 12, 13}, {9}, {10}, {11}</code>, în total <code>4</code> așezări, pe care le numerotăm de la <code>1</code> la <code>4</code> în ordinea în care sunt scrise. Se observă că lungimea maximă a unui lanț pe care îl poate obține <span class=\"caps\">RAU</span>-Gigel în modul descris în enunț este de <code>7</code> șine. De asemenea, se mai observă și că într-o soluție optimă acesta este mereu obligat să aleagă un lanț de lungime <code>5</code> din prima așezare (nu contează care din ele chiar dacă există mai multe), iar apoi poate alege oricare <code>2</code> “lanțuri” distincte din așezările rămase pentru că toate sunt formate dintr-un singur nod și au lungimea <code>0</code> (șine), <span class=\"caps\">RAU</span>-Gigel formând astfel un lanț de lungime <code>7</code> în urma utilizării celor două șine primite adițional în această zi. Astfel, soluțiile optime sunt: <code>{1, 2, 3}, {1, 2, 4}, {1, 3, 4}</code>, în număr de <code>3</code> (de remarcat din nou că “forma” unei soluții este dată de așezările din care s-au ales lanțurile, nu de gările / șinele din care este alcătuit lanțul final).</p><p><img alt=\"\" src=\"https://www.pbinfo.ro/resurse/41f38a/cfr.png\"> </p>",
+      "text": "cfr.in1 2 13 1 2 1 1 3 2 1 4 2 2 5 3 3 6 1 4 7 3 4 8 2 5 9 4 5 10 4 5 11 4 8 12 3 8 13 1 4 2 10 3 2 1 4 4 3cfr.out1 3 21 1ExplicațieReprezentarea vizuală a rețelei de gări, respectiv șine corespunzătoare acestui exemplu este identică cu cea a primului exemplu și se găsește la final.Să considerăm a doua zi. Avem la dispoziție doar șinele de tren cu grad de periculozitate cel mult 3, așa că așezările de gări formate sunt: {1, 2, 3, 4, 5, 6, 7, 8, 12, 13}, {9}, {10}, {11}, în total 4 așezări, pe care le numerotăm de la 1 la 4 în ordinea în care sunt scrise. Se observă că lungimea maximă a unui lanț pe care îl poate obține RAU-Gigel în modul descris în enunț este de 7 șine. De asemenea, se mai observă și că într-o soluție optimă acesta este mereu obligat să aleagă un lanț de lungime 5 din prima așezare (nu contează care din ele chiar dacă există mai multe), iar apoi poate alege oricare 2 “lanțuri” distincte din așezările rămase pentru că toate sunt formate dintr-un singur nod și au lungimea 0 (șine), RAU-Gigel formând astfel un lanț de lungime 7 în urma utilizării celor două șine primite adițional în această zi. Astfel, soluțiile optime sunt: {1, 2, 3}, {1, 2, 4}, {1, 3, 4}, în număr de 3 (de remarcat din nou că “forma” unei soluții este dată de așezările din care s-au ales lanțurile, nu de gările / șinele din care este alcătuit lanțul final)."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "La final se află o reprezentarea vizuală a rețelei de gări, respectiv șine corespunzătoare acestui exemplu (pe șine s-a trecut gradul lor de periculozitate, iar lungimea tuturor este, cum s-a precizat și în enunț, constantă, de o unitate)."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Reprezentarea vizuală a rețelei de gări, respectiv șine corespunzătoare acestui exemplu este identică cu cea a primului exemplu și se găsește la final."
+    }
+  ],
+  "constraints": [
+    "1 ≤ T ≤ 3",
+    "1 ≤ C ≤ 2",
+    "1 ≤ N, Q ≤ 100.000",
+    "1 ≤ u_i, v_i ≤ N",
+    "1 ≤ w_i, M_i ≤ 1.000.000.000",
+    "1 ≤ K_i ≤ N",
+    "Un lanț poate fi format dintr-o singură gară sau să aibă la cele 2 capete ale sale câte o gară.",
+    "Nu este obligatoriu ca într-o zi să se folosească toate cele K_i șine primite (mai ales că acest lucru s-ar putea să fie imposibil, pentru că o bucată de șină primită trebuie să conecteze exact două gări distincte într-un lanț).",
+    "Pentru teste în valoare de 10 de puncte, C = 1 pentru toate scenariile și 1 ≤ N, Q ≤ 1.000.",
+    "Pentru alte teste în valoare de 10 de puncte, C = 1 pentru toate scenariile și M_i = 1.000.000.000, 1 ≤ i ≤ Q.",
+    "Pentru alte teste în valoare de 10 de puncte, C = 1 pentru toate scenariile și u_i=i, v_i = i+1, 1 ≤ i < N.",
+    "Pentru alte teste în valoare de 10 de puncte, C = 1 pentru toate scenariile și K_i=1, 1 ≤ i ≤ Q.",
+    "Pentru alte teste în valoare de 10 de puncte, C = 1 pentru toate scenariile și nu există restricții suplimentare.",
+    "Pentru alte teste în valoare de 10 de puncte, C = 2 pentru toate scenariile și 1 ≤ N, Q ≤ 1.000.",
+    "Pentru alte teste în valoare de 10 de puncte, C = 2 pentru toate scenariile și M_i=1.000.000.000, 1 ≤ i ≤ Q.",
+    "Pentru alte teste în valoare de 10 de puncte, C = 2 pentru toate scenariile și u_i=i,v_i=i+1, 1 ≤ i < N.",
+    "Pentru alte teste în valoare de 10 de puncte, C = 2 pentru toate scenariile și K_i=1, 1 ≤ i ≤ Q.",
+    "Pentru alte teste în valoare de 10 de puncte, C = 2 pentru toate scenariile și nu există restricții suplimentare."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q6c58964414.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/41f38a/cfr.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-41f38a-cfr-png.png",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Crisan Daniela Alexandra (URA)",
+    "clasa": "11",
+    "intrare/ieșire": "cfr.in / cfr.out",
+    "limită timp": "1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "RAU-Coder 2022",
+    "autor": "Alexandru Lorintz",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 1,
+  "memoryLimitMb": 64,
+  "author": "Alexandru Lorintz",
+  "sourceAttribution": "RAU-Coder 2022",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4145/cfr"
+}

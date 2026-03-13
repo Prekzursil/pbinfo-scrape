@@ -1,0 +1,98 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4786"><article id="enunt">
+			<p>Lordul John a decis că a venit vremea să însămânțeze terenul său. Terenul a fost împărțit în parcele organizate în <code>N</code> linii, pe fiecare linie fiind câte <code>N</code> parcele pătrate, fiecare cu suprafața de un metru pătrat. Liniile au fost numerotate de sus în jos de la <code>1</code> la <code>N</code>, iar coloanele de la stânga la dreapta de la <code>1</code> la <code>N</code>. Fiind un aviator pasionat, a folosit avionul său pentru a survola terenul în vederea însămânțării. Când se află în zbor deasupra câte unei parcele, aruncă în aceasta o singură sămânță. Lordul realizează <code>M</code> zboruri deasupra terenului, iar în fiecare astfel de zbor se deplasează în câte o singură direcție, paralelă cu laturile sau cu diagonalele terenului. Fiecare zbor <code>i</code> (cu <code>1 ≤ i ≤ M</code>) este definit printr-un set de patru valori, <code>LS</code><sub><code>i</code></sub> <code>CS</code><sub><code>i</code></sub> <code>LF</code><sub><code>i</code></sub> <code>CF</code><sub><code>i</code></sub>, unde (<code>LS</code><sub><code>i</code></sub>, <code>CS</code><sub><code>i</code></sub>) sunt coordonatele (linia și coloana) primei parcele în care a aruncat o sămânță și (<code>LF</code><sub><code>i</code></sub>, <code>CF</code><sub><code>i</code></sub>) sunt coordonatele parcelei în care a aruncat ultima sămânță, în cadrul acestui zbor.</p>
+
+<p>La final, după însămânțare, Lordul John dorește să împrejmuiască cu gard parcelele însămânțate, pentru a le separa de cele rămase neînsămânțate sau de marginea terenului. Se cunosc <code>N</code>, <code>M</code> precum și valorile (<code>LS</code><sub><code>1</code></sub>, <code>CS</code><sub><code>1</code></sub>, <code>LF</code><sub><code>1</code></sub>, <code>CF</code><sub><code>1</code></sub>), (<code>LS</code><sub><code>2</code></sub>, <code>CS</code><sub><code>2</code></sub>, <code>LF</code><sub><code>2</code></sub>, <code>CF</code><sub><code>2</code></sub>), …, (<code>LS</code><sub><code>M</code></sub>, <code>CS</code><sub><code>M</code></sub>, <code>LF</code><sub><code>M</code></sub>, <code>CF</code><sub><code>M</code></sub>) cu semnificația din enunț.</p>
+
+<h1>Cerința</h1>
+
+<p>1. Determinați numărul semințelor care sunt aruncate.<br>
+2. Determinați numărul de parcele care sunt însămânțate.<br>
+3. Determinați lungimea gardului care trebuie să separe suprafețele însămânțate de cele neînsămânțate sau de marginea terenului.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>teren.in</code> conține pe prima linie trei numere naturale, <code>C</code>, <code>N</code> și <code>M</code>, unde <code>C</code> este numărul cerinței care trebuie rezolvată (care poate fi doar <code>1</code>, <code>2</code> sau <code>3</code>), iar <code>N</code> și <code>M</code> au semnificația din enunț. Pe următoarele <code>M</code> linii se află câte patru numere naturale, reprezentând seturile de valori care definesc zborurile, în ordinea realizării lor. Numerele aflate pe aceeași linie a fișierului sunt separate prin câte un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>teren.out</code> va conține numărul determinat pentru cerința <code>C</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N, LS, LF, CS, CF ≤ 1.000</code>.</li>
+	<li><code>1 ≤ M ≤ 100.000</code></li>
+	<li>Pentru 20 de puncte, <code>C = 1</code>, iar avionul se deplasează numai de la stânga la dreapta sau de sus în jos</li>
+	<li>Pentru 15 de puncte, <code>C = 1</code>, iar avionul se poate deplasa în orice direcție</li>
+	<li>Pentru 20 de puncte, <code>C = 2</code>, iar avionul se deplasează numai de la stânga la dreapta sau de sus în jos</li>
+	<li>Pentru 15 de puncte, <code>C = 2</code>, iar avionul se poate deplasa în orice direcție</li>
+	<li>Pentru 30 de puncte, <code>C = 3</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>teren.in</code></p>
+
+<pre>1 7 6
+2 2 2 4
+1 3 5 3
+1 2 4 5
+3 5 6 2
+5 4 5 1
+7 5 5 7</pre>
+
+<p><code>teren.out</code></p>
+
+<pre>23</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința <code>C = 1</code>. Primul zbor este marcat de săgeata roșie; se survolează parcelele de la coordonatele <code>(2, 2)</code>, <code>(2, 3)</code> și <code>(2, 4)</code>; la acest zbor se aruncă <code>3</code> semințe. Al doilea zbor este marcat de săgeata albastru-deschis; la acest zbor se aruncă <code>5</code> semințe. În total, în cele <code>6</code> zboruri sunt aruncate <code>3 + 5 + 4 + 4 + 4 + 3 = 23</code> de semințe.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-teren1-001-jpg.jpg"></p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>teren.in</code></p>
+
+<pre>2 7 6
+2 2 2 4
+1 3 5 3
+1 2 4 5
+3 5 6 2
+5 4 5 1
+7 5 5 7</pre>
+
+<p><code>teren.out</code></p>
+
+<pre>19</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința <code>C = 2</code>. Parcelele însămânțate sunt colorate cu galben.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-teren1-002-jpg.jpg"></p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>teren.in</code></p>
+
+<pre>3 7 6
+2 2 2 4
+1 3 5 3
+1 2 4 5
+3 5 6 2
+5 4 5 1
+7 5 5 7</pre>
+
+<p><code>teren.out</code></p>
+
+<pre>36</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința <code>C = 3</code>. Gardurile folosite sunt marcate cu culoarea roșie, aflate la marginea unor parcele<br>
+colorate cu galben.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-teren1-003-jpg.jpg"></p>		</article>
+		</body></html>

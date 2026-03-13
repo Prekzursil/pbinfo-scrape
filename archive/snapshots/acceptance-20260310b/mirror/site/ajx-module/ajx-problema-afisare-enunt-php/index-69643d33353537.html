@@ -1,0 +1,101 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3557"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>Suntem în anul <code>2050</code>. Compania <code>U.S. Robotics and Mechanical Men</code> a finalizat proiectul de creare a primului motor superluminic, care acum se află în pragul de testare. Pentru această sarcină a fost ales un model <code>QT-1</code> de robot pozitronic care urmează să piloteze nava cu motorul superluminic încorporat și să raporteze randamentul de funcționare al acestuia.</p>
+
+<p>Sectorul ales pentru testarea zborului interstelar constă într-o secțiune din galaxie alcătuită din <code>n</code> sisteme solare, conectate între ele prin rute hiperspațiale unidirecționale de un anumit cost energetic (care poate fi și negativ). La rândul lui, fiecare sistem solar este dispus sub forma unei configurații de <code>s-1</code> rute interplanetare ce unesc toate planetele din acesta astfel încât să se evite formarea de cicluri în continuumul spațiu-timp. Ciclurile în continuumul spațiu-timp nu se pot forma atâta timp cât drumul de lungime minimă dintre oricare două planete din același sistem solar este unic.</p>
+
+<p>Randamentul pe care trebuie să-l monitorizeze <code>QT-1</code> se definește ca valoarea minimă a costului energetic suportat de motor ce se poate obține în urma salturilor prin hiperspațiu pornind de la sistemul solar al Pământului, <code>x</code>, și ajungând la cel ales drept destinație, <code>y</code>. Însă, cum circuitele pozitronice ale robotului sunt extrem de sensibile în raport cu configurația rutelor interplanetare ale unui sistem solar, <code>QT-1</code> urmează să traverseze exclusiv sisteme solare echivalente structural cu cel de origine.</p>
+
+<p>Ajutați-l pe <code>QT-1</code> să afle randamentul motorului obținut pe traseul optim de traversare a galaxiei, iar, dacă nu există un astfel de randament, atunci ajutați-l să concluzioneze că succesiunea de salturi hiperspațiale a fost întreruptă de o gaură neagră. Definim o gaură neagră drept o succesiune de salturi prin hiperspațiu între sisteme solare echivalente structural cu cel de origine, care începe și se termină în același sistem solar și in urma căreia randamentul motorului scade, provocând colapsul lui <code>QT-1</code> in eter. Însă, dacă <code>QT-1</code> nu poate ajunge la o gaură neagră detectată aceasta nu va fi raportată, deoarece nu va influența traseul robotului.</p>
+
+<p>De voi depinde viitorul omenirii!</p>
+
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului <code>stardust.in</code> se află <code>n</code> – numărul de sisteme solare, <code>m</code> – numărul de rute interstelare, <code>x</code> și <code>y</code> – sistemul origine, respectiv destinație și <code>s</code> – numărul de planete din fiecare sistem solar.</p>
+
+<p>Pe următoarele <code>m</code> linii se află triplete de forma <code>u</code>, <code>v</code>, <code>w</code>, cu proprietatea că există rută unidirecțională prin hiperspațiu, de cost <code>w</code>, de la sistemul solar <code>u</code> la sistemul solar <code>v</code>.</p>
+
+<p>În continuare se vor citi, în ordine de la <code>1</code> la <code>n</code>, configurațiile de rute interplanetare corespunzătoare fiecărui sistem solar: câte <code>s-1</code> linii pe care se găsesc perechi de forma <code>p</code>, <code>q</code>, cu proprietatea că există rută interplanetară bidirecțională de la planeta <code>p</code> la planeta <code>q</code> a respectivului sistem solar.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Pe prima linie a fișierului <code>stardust.out</code> se va afișa <code>W</code> – randamentul înregistrat pe drumul optim dintre sistemele <code>x</code> și <code>y</code>.</p>
+
+<p>Dacă nu există un astfel de randament, se va afișa mesajul <code>Black hole detected!</code> .</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 1.000</code></li>
+	<li><code>2 ≤ s ≤ 100</code></li>
+	<li><code>1 ≤ n ≤ m ≤ 28.000</code></li>
+	<li><code>|w| ≤ 10.000</code></li>
+	<li><code>1 ≤ u, v ≤ n</code></li>
+	<li><code>1 ≤ p, q ≤ s</code></li>
+	<li>Sistemele solare sunt indexate de la <code>1</code> la <code>n</code>.</li>
+	<li>Planetele din fiecare sistem solar sunt indexate de la <code>1</code> la <code>s</code>.</li>
+	<li>Două sisteme solare <code>A = (V1, E1)</code> și <code>B = (V2, E2)</code> sunt echivalente structural dacă și numai dacă există o bijecție <code>f : V1 -&gt; V2</code> asftel încât: \( (u,v \in V1, [u,v] \in E1)  &lt;=&gt;  (f(u),f(v) \in V2, [f(u),f(v)] \in E2) \).</li>
+	<li>Se garantează că există în cadrul fiecărui test cel puțin un lanț elementar format din sisteme solare echivalente structural ce unește sistemele <code>x</code> și <code>y</code>.</li>
+	<li>Se recomandă parsarea fișierului de intrare</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>stardust.in</code></p>
+
+<pre>5 6 3 5 4
+2 5 7
+1 4 -4
+4 5 4
+3 2 3
+3 1 -2
+2 4 2
+1 2
+2 3
+4 3
+1 2
+2 3
+2 4
+1 2
+1 3
+1 4
+1 3
+2 3
+4 3
+4 1
+2 4
+4 3</pre>
+
+<p><code>stardust.out</code></p>
+
+<pre>9  </pre>
+
+<h3></h3>
+
+<p><code>stardust.in</code></p>
+
+<pre>5 5 1 5 2
+1 2 99
+2 3 10
+3 4 20 
+4 2 -31
+1 5 0
+1 2
+1 2
+2 1
+2 1
+1 2</pre>
+
+<p><code>stardust.out</code></p>
+
+<pre>Black hole detected!</pre>
+
+<h3>Explicație</h3>
+
+<p>În primul exemplu toate sistemele solare sunt echivalente structural între ele mai puțin primul, astfel traseul valid de cost minim fiind <code>3 -&gt; 2 -&gt; 4 -&gt; 5</code>.</p>
+
+<p>În al doilea exemplu toate sistemele solare sunt sunt echivalente între ele, însă se formeaza o gaură neagră între sistemele solare <code>2</code>, <code>3</code> și <code>4</code>.</p>		</article>
+		</body></html>

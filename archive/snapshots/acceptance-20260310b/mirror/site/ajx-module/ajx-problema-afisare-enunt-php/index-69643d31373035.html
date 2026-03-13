@@ -1,0 +1,97 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1705"><article id="enunt">
+			<p>Noile reguli din sistemul sanitar cer ca medicii să nu prescrie pe reţete un anumit medicament, ci să menţioneze substanţa activă. Reţeta este formată din <code>n</code> prescripţii, câte una pentru fiecare substanţă activă prescrisă.</p>
+
+<p>Farmacista de la care cumpăr medicamentele mi-a făcut o listă în care pentru fiecare substanţă activă de pe reţetă sunt trecute medicamentele care conţin substanţa activă respectivă, precum şi preţul pastilelor prescrise din medicamentul respectiv, sub forma următoare:</p>
+
+<ul>
+	<li><code>substanţa activă : medicament</code><sub><code>1</code></sub> <code>preţ</code><sub><code>1</code></sub><code>, medicament</code><sub><code>2</code></sub> <code>preţ</code><sub><code>2</code></sub><code>, ..., medicament</code><sub><code>k</code></sub> <code>preţ</code><sub><code>k</code></sub></li>
+</ul>
+
+<p>Din păcate, între anumite medicamente există incompatibilităţi şi ca urmare ele nu pot fi administrate simultan, deoarece ar produce reacţii adverse. De aceea, farmacista mea mi-a dat şi o listă de incompatibilităţi, în listă fiind specificate perechi de medicamente incompatibile, sub forma:</p>
+
+<ul>
+	<li><code>medicament</code><sub><code>1</code></sub><code>/medicament</code><sub><code>2</code></sub></li>
+</ul>
+
+<p>Când cumpăr reţeta, eu trebuie să iau câte un medicament pentru fiecare substanţă activă prescrisă de medic şi să am grijă să nu cumpăr medicamente care sunt incompatibile. Desigur, voi cumpăra pastilele prescrise pentru tratamentul complet.</p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând lista pe care mi-a dat-o farmacista, precum şi incompatibilităţile dintre medicamente, scrieţi un program care să determine:</p>
+
+<ol>
+	<li>câte medicamente am la dispoziţie pentru fiecare substanţă activă;</li>
+	<li>suma minimă pe care trebuie să o cheltui pentru a cumpăra reţeta.</li>
+</ol>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>farma.in</code> conține pe prima linie numărul natural <code>c</code>, reprezentând cerinţa pe care trebuie să o rezolvăm (1 sau 2). Pe a doua linie se află numărul natural <code>n</code>, reprezentând numărul de substanţe active prescrise de medic. Pe următoarele <code>n</code> linii se află lista pe care mi-a dat-o farmacista, pe fiecare linie fiind specificată o substanţă activă, urmată de medicamentele care conţin această substanţă şi preţurile lor, sub  forma precizată în enunţ. Pe următoarea linie se află un număr natural <code>m</code>, reprezentând numărul de perechi de medicamente existente în lista de incompatibilităţi. Pe următoarele <code>m</code> linii sunt scrise perechile de medicamente incompatibile, câte o pereche pe o linie, sub forma precizată în enunţ.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă cerinţa este 1, fişierul de ieşire <code>farma.out</code> va conţine <code>n</code> linii, pe linia <code>i</code> (<code>1≤i≤n</code>) fiind scris numărul de medicamente disponibile pentru substanţa activă descrisă pe linia <code>i+1</code> în fişierul de intrare. </p>
+
+<p>Dacă cerinţa este 2, fişierul de ieşire <code>farma.out</code> va conţine o singură linie pe care va fi scris un număr natural reprezentând suma minimă pe care trebuie să o plătesc pentru a cumpăra reţeta, în condiţiile descrise în enunţ.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>0 &lt; n &lt; 10</code></li>
+	<li><code>0 ≤ m ≤ 1400</code></li>
+	<li>Denumirile substanţelor active şi ale medicamentelor sunt şiruri de maximum <code>30</code> de litere mici ale alfabetului englez. Un medicament poate apărea în lista unei singure substanţe active.</li>
+	<li>Preţurile pastilelor sunt numere naturale nenule strict mai mici decât <code>1000</code>.</li>
+	<li>Pentru fiecare substanţă activă există cel mult 9 medicamente care să conţină substanţa activă respectivă.</li>
+	<li>În fiecare pereche din lista de incompatibilităţi se află medicamente care conţin substanţe active diferite.</li>
+	<li>În lista de medicamente corespunzătoare fiecărei substanţe active pot exista oricâte spaţii, dar lungimea oricărei linii nu depăşeşte <code>700</code> de caractere.</li>
+	<li>Pentru datele de test există întotdeauna soluţie.</li>
+	<li>Pentru teste valorând 10% din punctaj cerinţa este 1.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>farma.in</code></p>
+
+<pre>1
+3
+metformin:siofor 10,glibomet 30,bidiab 60,gliformin 10
+ibuprofen:nurofen 24,advil     35,         ibusinus 9
+  diclofenac : diclac 28 ,   voltaren 50, cambia 102
+0</pre>
+
+<p><code>farma.out</code></p>
+
+<pre>4
+3
+3</pre>
+
+<h3>Explicație</h3>
+
+<p>Există <code>4</code> medicamente pentru prima substanţă activă, <code>3</code> medicamente pentru cea de a doua şi tot <code>3</code> medicamente pentru cea de a treia.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>farma.in</code></p>
+
+<pre>2
+3
+metformin:siofor 10,glibomet 30,bidiab 60,gliformin 10
+ibuprofen:nurofen 24,advil 35,         ibusinus 9
+  diclofenac : diclac 28 ,   voltaren 50, cambia 102
+5
+siofor/diclac
+gliformin/diclac
+ibusinus/siofor
+ibusinus/voltaren
+bidiab/diclac</pre>
+
+<p><code>farma.out</code></p>
+
+<pre>67</pre>
+
+<h3>Explicație</h3>
+
+<p>Plătim suma minimă <code>67</code>  dacă vom cumpăra <code>glibomet</code> (preţ <code>30</code>), ibusinus (preţ <code>9</code>), diclac (preţ <code>28</code>).</p>
+
+<p>Observaţi că oricare două medicamente cumpărate sunt compatibile.</p>		</article>
+		</body></html>

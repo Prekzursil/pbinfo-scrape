@@ -1,0 +1,88 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4791"><article id="enunt">
+			<p>Un dispozitiv de tip semafor are trei culori, roșu, galben și verde, și funcționează ciclic, astfel încât, în fiecare moment, să fie aprinsă o singură culoare. Într-o serie, culorile se succed întotdeauna în ordinea următoare: roșu, galben, verde, galben. Astfel, la pornire se aprinde roșu, iar după ce se stinge această culoare se aprinde galben, apoi verde și apoi, din nou, galben, apoi seria culorilor se reia ciclic, în succesiunea precizată. Pentru două semafoare se testează acum modul de funcționare. La primul semafor, într-o serie roșu stă aprins <code>R1</code> secunde, apoi se aprinde galben, pentru <code>G1</code> secunde, apoi se aprinde verde, pentru <code>V1</code> secunde, apoi din nou galben, pentru <code>G1</code> secunde. La al doilea semafor, într-o serie roșu stă aprins <code>R2</code> secunde, apoi se aprinde galben, pentru <code>G2</code> secunde, apoi se aprinde verde, pentru <code>V2</code> secunde, și din nou galben, pentru <code>G2</code> secunde. În acest moment, au trecut <code>T1</code> secunde de la pornirea primului semafor și <code>T2</code> secunde de la pornirea celui de-al doilea semafor.</p>
+
+<h1>Cerințe</h1>
+
+<p>1) Știind că în acest moment la niciunul dintre semafoare nu este aprins verde, determinați numărul minim de secunde care trebuie să treacă, din acest moment, până când se aprinde verde la cel puțin unul dintre ele.<br>
+2) Determinați numărul minim de secunde care trebuie să treacă, din acest moment, până când ambele semafoare au aprinsă aceeași culoare.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>semafoare.in</code> conține:</p>
+
+<ul>
+	<li>pe prima linie, un număr natural <code>C</code>, reprezentând numărul cerinței, care poate avea valorile <code>1</code> sau <code>2</code>;</li>
+	<li>pe a doua linie, trei numere naturale, <code>R1</code>, <code>G1</code>, <code>V1</code>, în această ordine, cu semnificația din enunț;</li>
+	<li>pe a treia linie, trei numere naturale, <code>R2</code>, <code>G2</code>, <code>V2</code>, în această ordine, cu semnificația din enunț;</li>
+	<li>pe a patra linie, două numere naturale, <code>T1</code> și <code>T2</code>, în această ordine, cu semnificația din enunț.</li>
+</ul>
+
+<p>Numerele aflate pe aceeași linie sunt separate prin câte un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>semafoare.out</code> va conține pe prima linie, un număr natural, reprezentând rezultatul determinat conform cerinței C.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>R1</code>, <code>G1</code>, <code>V1</code>, <code>R2</code>, <code>G2</code>, <code>V2</code> sunt numere naturale nenule, cu cel mult 5 cifre fiecare</li>
+	<li><code>0 ≤ T1, T2 ≤ 1.000.000.000</code></li>
+	<li>Pentru datele furnizate, se garantează că există întotdeauna soluție.</li>
+	<li>Pentru 33 de puncte, <code>T1 = 0</code> și <code>T2 = 0</code></li>
+	<li>Pentru 35 de puncte, <code>T1 + T2 &gt; 0</code></li>
+	<li>Pentru 13 puncte, <code>1 ≤ T1, T2 ≤ 100.000</code></li>
+	<li>Pentru 19 puncte, <code>100.001 ≤ T1, T2 ≤ 1.000.000.000</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>semafoare.in</code></p>
+
+<pre>1
+2 4 2
+3 1 3
+0 0</pre>
+
+<p><code>semafoare.out</code></p>
+
+<pre>4</pre>
+
+<h3>Explicație</h3>
+
+<p>Primul semafor pornește în acest moment cu roșu, care stă aprins <code>2</code> secunde, apoi galben <code>4</code> secunde și verde <code>2</code> secunde. Trec <code>2 + 4 = 6</code> secunde până când se aprinde verde. Al doilea semafor pornește în acest moment cu roșu, care stă aprins <code>3</code> secunde, galben <code>1</code> secundă și verde <code>3</code> secunde. Trec <code>3 + 1 = 4</code> secunde până când se aprinde verde.  Numărul minim de secunde care trebuie să treacă din acest moment până când se aprinde verde la unul dintre semafoare este egal cu <code>4</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>semafoare.in</code></p>
+
+<pre>1
+2 4 2
+3 1 3
+4 1</pre>
+
+<p><code>semafoare.out</code></p>
+
+<pre>2</pre>
+
+<h3>Explicație</h3>
+
+<p>Primul semafor a pornit de <code>4</code> secunde, deci în acest moment este deja aprins galben, de <code>2</code> secunde, iar peste <code>2</code> secunde urmează verde. Al doilea semafor a pornit de <code>1</code> secundă, deci în acest moment este deja aprins roșu, de <code>1</code> secundă, iar peste <code>2</code> secunde urmează galben, apoi peste încă o secundă urmează verde (în total peste <code>3</code> secunde). Numărul minim de secunde care trebuie să treacă din acest moment până când se aprinde verde la unul dintre semafoare este egal cu <code>2</code>.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>semafoare.in</code></p>
+
+<pre>2
+2 4 2
+3 1 3
+3 2</pre>
+
+<p><code>semafoare.out</code></p>
+
+<pre>1</pre>
+
+<h3>Explicație</h3>
+
+<p>Primul semafor a pornit de <code>3</code> secunde, deci în acest moment este deja aprins galben, de <code>1</code> secundă, care stă aprins încă <code>3</code> secunde. Al doilea semafor a pornit de <code>2</code> secunde, deci în acest moment este deja aprins roșu, de <code>2</code> secunde, iar peste <code>1</code> secundă urmează galben. După o secundă din acest moment este aprins galben, la ambele semafoare.</p>		</article>
+		</body></html>

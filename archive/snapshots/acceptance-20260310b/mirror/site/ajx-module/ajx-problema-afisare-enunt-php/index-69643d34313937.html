@@ -1,0 +1,62 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4197"><article id="enunt">
+			<p>Alice tocmai s-a decis să-și impresioneze fratele mai mic, Bob, cu abilitățile sale de deducție matematică. Astfel, ea așează într-o matrice cu <code>N</code> linii și <code>M</code> coloane toate numerele <code>1</code>, <code>2</code>, …, <code>N × M</code>, astfel încât fiecare linie și respectiv fiecare coloană, să fie sortată strict crescător. O matrice cu aceste proprietăți se numește o <strong>matrice AB</strong>. Alice îi cere apoi lui Bob să elimine <code>K</code> valori din matrice, care sa nu fie adiacente orizontal sau adiacente vertical. Apoi, ea va încerca să reintroducă aceste <code>K</code> valori în matrice astfel încât sa rămână o matrice AB. După câteva încercări, Alice realizează că, în anumite situații pot exista mai multe moduri de a aranja cele <code>K</code> numere pe pozițiile libere. </p>
+
+<h1>Cerința</h1>
+
+<p>Scrieți un program care, cunoscând matricea AB inițială și <code>Q</code> interogări, constând fiecare dintr-o listă de elemente eliminate din matrice, determină pentru fiecare interogare dacă există o soluție unică de a aranja elementele eliminate în matrice astfel încât aceasta să fie matrice AB.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Prima linie a datelor de intrare conține trei numere naturale <code>N</code>, <code>M</code> și <code>Q</code>, separate prin câte un spațiu, având semnificația din enunț. Pe următoarele <code>N</code> linii se află câte <code>M</code> valori, separate prin câte un spațiu, reprezentând matricea AB construită de Alice. Urmează apoi <code>Q</code> interogări, fiecare interogare fiind descrisă pe două linii. Prima linie care descrie o interogare conține numărul natural <code>K</code>, reprezentând numărul de valori eliminate de către Bob. Pe a doua linie din descrierea interogării se află cele <code>K</code> numere eliminate, separate prin câte un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Veți afișa <code>Q</code> linii, fiecare reprezentând un număr întreg. Cea de a <code>i</code>-a linie va conține răspunsul pentru a <code>i</code>-a interogare: răspunsul va fi <code>1</code> dacă există o soluție unică de a aranja elementele eliminate astfel încât să se obțină o matrice AB, respectiv <code>0</code> în caz contrar.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N, M ≤ 2.000</code></li>
+	<li><code>1 ≤ Q ≤ 25</code></li>
+	<li><code>K ≥ 1</code></li>
+	<li>Se garantează că în orice interogare numerele eliminate sunt distincte și respectă condiția din enunț (nu sunt adiacente orizontal sau vertical).</li>
+	<li>Numărul total al valorilor din interogări nu depășește <code>4.000.000</code>.</li>
+	<li>Punctajul pentru un test va fi acordat doar dacă răspunsurile pentru toate interogările din testul respectiv sunt corecte.</li>
+	<li>Datorită dimensiunilor mari ale datelor de intrare, doar unele teste au fost adăugate.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>3 3 2
+1 2 4
+3 5 8
+6 7 9
+3
+1 5 9
+3
+5 4 6</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>1
+0</pre>
+
+<h3>Explicație</h3>
+
+<p>Prima interogare presupune eliminarea numerelor <code>1</code>, <code>5</code> și <code>9</code>, matricea după eliminare arătând astfel:<br>
+<code>? 2 4</code><br>
+<code>3 ? 8</code><br>
+<code>6 7 ?</code><br>
+Se observă că aranjarea celor trei numere este unică, obținându-se matricea originală. </p>
+
+<p>A doua interogare presupune eliminarea valorilor <code>5</code>, <code>4</code> și <code>6</code>:<br>
+<code>1 2 ?</code><br>
+<code>3 ? 8</code><br>
+<code>? 7 9</code><br>
+Rearanjarea nu este unică, o soluție alternativă fiind:<br>
+<code>1 2 5</code><br>
+<code>3 6 8</code><br>
+<code>4 7 9</code></p>		</article>
+		</body></html>

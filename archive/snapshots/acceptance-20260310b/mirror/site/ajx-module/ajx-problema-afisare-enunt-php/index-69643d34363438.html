@@ -1,0 +1,67 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4648"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>Căpcăunul cel rău o ține captivă pe frumoasa prințesă într-un castel izolat, într-un turn înalt. <span class="caps">RAU</span>-Gigel prinde de veste și se duce într-un suflet să o salveze. El trebuie să treacă un canal de apărare de lungime <code>K</code>, așezând <code>N</code> pietre de dimensiuni egale cu unitatea, în formă de trepte de înălțimi <code>h</code>, <code>h + 1</code>, <code>h + 2</code>, <code>h + 3</code>, …. <code>h + K - 1</code>. Prima treaptă trebuie să aibă cel puțin o piatră, iar dacă o singură piatră rămâne nedistribuită, toată construcția se face una cu pământul. </p>
+
+<p>Dacă se cunosc: numărul <code>N</code> de pietre magice și distanța <code>K</code> dintre poziția lui <span class="caps">RAU</span>-Gigel și donjonul prințesei, putem să aflăm dacă <span class="caps">RAU</span>-Gigel va reuși să construiască treptele? </p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-41f38a-Donjon1-png.png"></p>
+
+<p><span class="caps">RAU</span>-Gigel își încearcă șansele. Un eșec va însemna renunțarea la prințesă. O reușită însă, va conduce la o surpriză din partea căpcăunului, acesta îl va supune pe <span class="caps">RAU</span>-Gigel la o nouă provocare: </p>
+
+<p><i><span class="caps">RAU</span>-Gigel, flăcăul meu, <br>
+Te voi provoca la greu! <br>
+De testu’-l vei câștiga, <br>
+Pe prințesa vei avea!</i></p>
+
+<p>Și, căpcăunul îi propune lui <span class="caps">RAU</span>-Gigel următorul test: <i>„vom alege, pe rând, câte o treaptă dintre cele construite de tine și vom dărâma din ea oricâte pietre, minim una, cel mult toate. Prea-frumoasa prințesă va rămâne cu acela dintre noi, care va dărâma și ultima piatră”</i>. <span class="caps">RAU</span>-Gigel va începe primul, iar atât <span class="caps">RAU</span>-Gigel cât și căpcăunul vor juca responsabil, adică vor face întotdeauna alegerea cea mai bună în interesul propriu. Reușește <span class="caps">RAU</span>-Gigel să elibereze prințesa?</p>
+
+<p>De exemplu, daca avem <code>N = 5</code> și <code>K = 2</code>, <span class="caps">RAU</span>-Gigel construiește <code>2</code> trepte de înălțimi <code>2</code> și <code>3</code>, astfel nu rămân pietre nefolosite. Să vedem acum cine va câștiga cea de-a doua provocare. <span class="caps">RAU</span>-Gigel va alege primul. El poate alege prima treaptă și poate dărâma toate pietrele de pe ea, însă aceasta va fi o alegere greșita, întrucât căpcăunul va dărâma la rândul lui toate pietrele de pe treapta a doua, păstrând prințesa captivă. Așadar, <span class="caps">RAU</span>-Gigel nu va începe prin a dărâma toate pietrele de pe o treaptă.</p>
+
+<p>O altă variantă ar fi ca <span class="caps">RAU</span>-Gigel să aleagă prima treaptă, de unde să dărâme o singura piatră. Aceasta iarăși ar fi o mutare greșită, căpcăunul ar dărâma la rândul său două pietre de pe treapta a doua, iar acum, orice alegere ar face <span class="caps">RAU</span>-Gigel, ar pierde.</p>
+
+<p>Cu siguranță, <span class="caps">RAU</span>-Gigel va alege treapta a doua de unde va dărâma o singură piatră. Căpcăunul nu va avea ieșire din aceasta situație: dacă dărâmă ambele pietre de pe oricare treaptă, <span class="caps">RAU</span>-Gigel le va dărâma pe celelalte două și va câștiga, dacă căpcăunul dărâmă numai o piatră de pe oricare treaptă, <span class="caps">RAU</span>-Gigel va alege o piatră de pe cealaltă treaptă, apoi din nou, va lua fiecare câte o piatră, și căpcăunul nu va mai avea ce dărâma, iar <span class="caps">RAU</span>-Gigel va pleca cu prea frumoasa fată. </p>
+
+<p>Se vor testa mai multe scenarii de tipul celui descris mai sus. </p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>donjon.in</code> conține pe prima linie numărul <code>Q</code> reprezentând numărul de scenarii, apoi pe următoarele <code>Q</code> rânduri se vor afla câte două numere <code>N</code> și <code>K</code> separate cu un spațiu, cu semnificația din enunț.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul <code>donjon.out</code>  va conține <code>Q</code> rânduri pe care se află răspunsurile la cele <code>Q</code> scenarii, astfel: dacă <span class="caps">RAU</span>-Gigel nu reușește să construiască treptele, se va răspunde cu litera mare <code>C</code>. Dacă reușește să construiască treptele, se va răspunde cu <code>x y</code>, separate printr-un spațiu, unde <code>x</code> este litera mare <code>C</code> dacă căpcăunul câștigă proba a doua, respectiv litera mare <code>G</code> dacă <span class="caps">RAU</span>-Gigel salvează prințesa, iar <code>y</code> este un număr natural nenul reprezentând numărul de pietre folosite de <span class="caps">RAU</span>-Gigel pentru prima treaptă.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ Q ≤ 10</code>, <code>2 ≤ N ≤ 1.000.000.000.000.000.000</code>, <code>2 ≤ K ≤ 1.000.000.000</code></li>
+	<li>Pentru teste în valoare de <code>20</code> de puncte: <code>Q ≤ 5</code>, <code>N ≤ 10</code> pentru toate scenariile</li>
+	<li>Teste în valoare de <code>30</code> de puncte sunt favorabile lui <span class="caps">RAU</span>-Gigel pentru toate scenariile, în sensul că, dacă acesta trece de prima provocare și reușește să așeze pietrele conform cerinței, atunci se garantează că va câștiga și cea de-a doua provocare</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>donjon.in</code></p>
+
+<pre>3
+5 2
+6 3
+5 3</pre>
+
+<p><code>donjon.out</code></p>
+
+<pre>G 2
+C 1
+C</pre>
+
+<h3>Explicație</h3>
+
+<p>Avem <code>3</code> scenarii.</p>
+
+<p>In primul scenariu sunt <code>5</code> pietre, iar lățimea canalului de apărare este <code>2</code>. Răspunsul pentru acest scenariu va fi <code>G 2</code> pentru că <span class="caps">RAU</span>-Gigel reușește la ambele provocări, iar prima treaptă construită are <code>2</code> pietre (vezi explicația mai sus). </p>
+
+<p>Pentru scenariul al doilea, avem <code>N = 6</code> și <code>K = 3</code>. <span class="caps">RAU</span>-Gigel trece de prima proba si construiește cele <code>3</code> trepte: <code>1</code>, <code>2</code>, <code>3</code>. Dar, oricum ar încerca să le dărâme, căpcăunul va avea ultima aruncare. Răspunsul pentru acest scenariu va fi <code>C 1</code> pentru că, deși  <span class="caps">RAU</span>-Gigel trece de prima provocare așezând o piatră ca primă treaptă, el pierde jocul final.</p>
+
+<p>Pentru ultimul scenariu, răspunsul este <code>C</code>, <span class="caps">RAU</span>-Gigel nu poate construi <code>3</code> trepte cu <code>5</code> pietre, conform cerinței, care să îi asigure trecerea către donjonul prințesei.</p>		</article>
+		</body></html>

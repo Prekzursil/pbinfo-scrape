@@ -1,0 +1,307 @@
+{
+  "id": 2051,
+  "slug": "pp",
+  "name": "pp",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/2051/pp",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 44,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=44"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Se cere să se scrie un program care să citească un număr <code>C</code> reprezentând tipul cerinței, un șir de <code>N</code> numere naturale nenule ordonate crescător <code>a[1]≤a[2]≤...≤a[N]</code>  și <code>T</code> perechi de numere naturale  <code>(p[k],q[k])</code> cu <code>1≤p[k]&lt;q[k]≤N</code> și <code>1≤k≤T</code> și apoi:</p><p>(1) Dacă <code>C=1</code>, atunci trebuie să se determine pentru fiecare pereche dată de numere naturale <code>(p,q)</code> suma <code>a[p]+a[p+1]+...+a[q]</code>. <br>\n(2) Dacă <code>C=2</code>, atunci trebuie să se determine pentru fiecare pereche dată de numere naturale <code>(p,q)</code> numărul de perechi <code>(i,j)</code> care respectă simultan condițiile <code>p≤i&lt;j≤q</code> și <code>a[i]≠a[j]</code>.</p>",
+      "text": "Se cere să se scrie un program care să citească un număr C reprezentând tipul cerinței, un șir de N numere naturale nenule ordonate crescător a[1]≤a[2]≤...≤a[N] și T perechi de numere naturale (p[k],q[k]) cu 1≤p[k]<q[k]≤N și 1≤k≤T și apoi:(1) Dacă C=1, atunci trebuie să se determine pentru fiecare pereche dată de numere naturale (p,q) suma a[p]+a[p+1]+...+a[q]. (2) Dacă C=2, atunci trebuie să se determine pentru fiecare pereche dată de numere naturale (p,q) numărul de perechi (i,j) care respectă simultan condițiile p≤i<j≤q și a[i]≠a[j]."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>pp.in</code> conține pe prima linie numărul natural <code>C</code>. Pe al doilea rând se află numărul <code>N</code>. Pe al treilea rând sunt scrise <code>N</code> numere naturale ordonate crescător și separate prin câte un spațiu. Pe al patrulea rând este scris numărul natural <code>T</code>, iar pe fiecare dintre următoarele <code>T</code> rânduri câte două numere naturale separate prin câte un spațiu.</p>",
+      "text": "Fișierul de intrare pp.in conține pe prima linie numărul natural C. Pe al doilea rând se află numărul N. Pe al treilea rând sunt scrise N numere naturale ordonate crescător și separate prin câte un spațiu. Pe al patrulea rând este scris numărul natural T, iar pe fiecare dintre următoarele T rânduri câte două numere naturale separate prin câte un spațiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Dacă <code>C=1</code>, atunci fișierul de ieșire <code>pp.out</code> va conține pe fiecare dintre primele <code>T</code> linii câte un număr natural. Al <code>k</code>-lea număr va reprezenta suma elementelor cuprinse între pozițiile <code>p[k]</code> și <code>q[k]</code> inclusiv.</p><p>Dacă <code>C=2</code>, atunci fișierul de ieșire <code>pp.out</code> va conține pe fiecare dintre primele <code>T</code> linii câte un număr natural. Al <code>k</code>-lea număr va reprezenta numărul cerut de perechi de indici cuprinși între poziţiile <code>p[k]</code> şi <code>q[k]</code> inclusiv.</p>",
+      "text": "Dacă C=1, atunci fișierul de ieșire pp.out va conține pe fiecare dintre primele T linii câte un număr natural. Al k-lea număr va reprezenta suma elementelor cuprinse între pozițiile p[k] și q[k] inclusiv.Dacă C=2, atunci fișierul de ieșire pp.out va conține pe fiecare dintre primele T linii câte un număr natural. Al k-lea număr va reprezenta numărul cerut de perechi de indici cuprinși între poziţiile p[k] şi q[k] inclusiv."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ p[i] &lt; q[i] ≤ N ≤ 100 000</code></li>\n\t<li><code>1 ≤ a[1] ≤ a[2] ≤ ... ≤ a[N] ≤ 100 000</code></li>\n\t<li><code>1 ≤ T ≤ 1000</code></li>\n</ul>",
+      "text": "1 ≤ p[i] < q[i] ≤ N ≤ 100 000 1 ≤ a[1] ≤ a[2] ≤ ... ≤ a[N] ≤ 100 000 1 ≤ T ≤ 1000"
+    },
+    {
+      "title": "Exemplul 1",
+      "html": "<p><code>pp.in</code></p><pre>1\n5\n1 2 3 3 3\n2\n1 4\n2 5</pre><p><code>pp.out</code></p><pre>9\n11</pre><h3>Explicație</h3><p>Suntem în cazul <code>C=1</code>. Prima pereche <code>(p,q)</code> este <code>(1,4)</code>. Suma valorilor din secvență este <code>1+2+3+3=9</code>. A doua pereche <code>(p,q)</code> este <code>(2,5)</code>. Suma valorilor din secvență este <code>2+3+3+3=11</code>.</p>",
+      "text": "pp.in1 5 1 2 3 3 3 2 1 4 2 5pp.out9 11ExplicațieSuntem în cazul C=1. Prima pereche (p,q) este (1,4). Suma valorilor din secvență este 1+2+3+3=9. A doua pereche (p,q) este (2,5). Suma valorilor din secvență este 2+3+3+3=11."
+    },
+    {
+      "title": "Exemplul 2",
+      "html": "<p><code>pp.in</code></p><pre>2\n5\n1 2 3 3 3\n2\n1 4\n2 5</pre><p><code>pp.out</code></p><pre>5\n3</pre><h3>Explicație</h3><p>Suntem în cazul <code>C=2</code>. Prima pereche <code>(p,q)</code> este <code>(1,4)</code>. Perechile de poziții care conțin numere diferite între ele sunt <code>(1,2)</code>, <code>(1,3)</code>, <code>(1,4)</code>, <code>(2,3)</code>, <code>(2,4)</code>. Deci sunt <code>5</code> perechi.</p><p>A doua pereche <code>(p,q)</code> este <code>(2,5)</code>. Perechile de poziții care conțin numere diferite sunt <code>(2,3)</code>, <code>(2,4)</code>, <code>(2,5)</code>. Deci sunt <code>3</code> perechi.</p>",
+      "text": "pp.in2 5 1 2 3 3 3 2 1 4 2 5pp.out5 3ExplicațieSuntem în cazul C=2. Prima pereche (p,q) este (1,4). Perechile de poziții care conțin numere diferite între ele sunt (1,2), (1,3), (1,4), (2,3), (2,4). Deci sunt 5 perechi.A doua pereche (p,q) este (2,5). Perechile de poziții care conțin numere diferite sunt (2,3), (2,4), (2,5). Deci sunt 3 perechi."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Suntem în cazul C=1. Prima pereche (p,q) este (1,4). Suma valorilor din secvență este 1+2+3+3=9. A doua pereche (p,q) este (2,5). Suma valorilor din secvență este 2+3+3+3=11."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Suntem în cazul C=2. Prima pereche (p,q) este (1,4). Perechile de poziții care conțin numere diferite între ele sunt (1,2), (1,3), (1,4), (2,3), (2,4). Deci sunt 5 perechi."
+    }
+  ],
+  "constraints": [
+    "1 ≤ p[i] < q[i] ≤ N ≤ 100 000",
+    "1 ≤ a[1] ≤ a[2] ≤ ... ≤ a[N] ≤ 100 000",
+    "1 ≤ T ≤ 1000"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q809f7f0e6b.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "pp.in / pp.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "128 MB / 8 MB",
+    "sursa problemei": "Lot Covasna 2017",
+    "autor": "-",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 128,
+  "sourceAttribution": "Lot Covasna 2017",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/2051/pp"
+}

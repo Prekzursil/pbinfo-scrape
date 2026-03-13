@@ -1,0 +1,52 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3041"><article id="enunt">
+			<p>Casa de Modă Venus a decis să se modernizeze şi, începând cu 1 ianuarie 2020 ora 00:00, l-a angajat pe robotul Vasile. Vasile poate executa orice comandă în exact <code>T</code> ore, indiferent de complexitatea acesteia (mai exact, dacă Vasile începe să lucreze la comandă în momentul <code>x</code>, la momentul <code>x+T</code> ore comanda va fi gata de predare). Foarte încrezătoare în calitățile robotului Vasile, Casa de Modă Venus a lansat o campanie publicitară cu sloganul “Dacă am întârziat, primești produsul comandat gratis!”. Campania și-a atins scopul, ca urmare Casa de Modă a primit deja <code>N</code> comenzi pentru întreg anul 2020. Pentru fiecare comandă sunt specificate valoarea acesteia, precum și data și ora până la care produsul comandat trebuie să fie gata de predare. Dacă Vasile predă produsul exact la data și ora specificată în comandă (sau înainte) el încasează valoarea comenzii. Dacă nu, el tot trebuie să execute comanda respectivă, dar nu va primi suma reprezentând valoarea ei.<br>
+Deși lucrează fără nicio pauză, Vasile estimează că este posibil să nu poată preda la timp toate comenzile, dar își planifică lucrul, astfel încât pierderea să fie minimă (adică suma valorilor comenzilor care nu vor fi predate la timp să fie cât mai mică). Numim planificare optimală succesiunea în care Vasile trebuie să execute cele <code>N</code> comenzi, astfel încât pierderea să fie minimă.</p>
+
+<h1>Cerința</h1>
+
+<p>Scrieți un program care, cunoscând informațiile referitoare la cele <code>N</code> comenzi, determină pierderea minimă, precum și o planificare optimală.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>venus.in</code> conține pe prima linie numărul natural <code>N</code>, reprezentând numărul de comenzi și numărul natural <code>T</code>, reprezentând numărul de ore necesare lui Vasile pentru a executa o comandă. Pe următoarele <code>N</code> linii se află informațiile despre comenzi, câte o comandă pe o linie, sub forma:<br>
+<code>V zi luna ora</code><br>
+unde <code>V</code> este valoarea comenzii, <code>zi</code> este ziua în care trebuie predată comanda (un număr natural cuprins între <code>1</code> și numărul de zile ale lunii), <code>luna</code> este denumirea lunii, iar <code>ora</code> este un număr natural cuprins între <code>0</code> și <code>23</code>. Valorile scrise pe aceeași linie sunt separate prin câte un spațiu. Comenzile se consideră numerotate de la <code>1</code> la <code>N</code> în ordinea din fișierul de intrare.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>venus.out</code> va conține pe prima linie numărul natural <code>pmin</code>, reprezentând pierderea minimă. Pe a doua linie vor fi scrise <code>N</code> numere naturale distincte cuprinse între <code>1</code> și <code>N</code>, separate prin câte un spațiu, reprezentând o planificare optimală.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 1000</code></li>
+	<li><code>1 ≤ T ≤ 500</code></li>
+	<li><code>1 ≤ V ≤ 10.000</code></li>
+	<li>Numele lunilor vor fi scrise cu litere mici. Anul 2020 este an bisect, adică luna februarie are <code>29</code> de zile.</li>
+	<li>Dacă există mai multe planificări optimale, se va accepta orice soluție corectă.</li>
+	<li>Se acordă <code>50%</code> din punctajul pentru fiecare test pentru determinarea valorii <code>pmin</code>. Punctajul integral pentru fiecare test se acordă pentru rezolvarea ambelor cerințe (<code>pmin</code> şi o planificare optimală).</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>venus.in</code></p>
+
+<pre>4 25
+90 10 ianuarie 20
+50 2 ianuarie 8
+20 4 ianuarie 3
+70 2 ianuarie 9</pre>
+
+<p><code>venus.out</code></p>
+
+<pre>50
+4 1 3 2</pre>
+
+<h3>Explicație</h3>
+
+<p>Începând cu <code>1 ianuarie ora 0</code>, Vasile execută comanda <code>4</code> și termină pe <code>2 ianuarie la ora 1.00</code>.<br>
+Execută apoi comanda <code>1</code> pe care o termină pe <code>3 ianuarie la ora 2.00</code>.<br>
+Execută apoi comanda <code>3</code> pe care o termină pe <code>4 ianuarie la ora 3.00</code>.<br>
+Execută apoi comanda <code>2</code> pe care o termină pe <code>5 ianuarie la ora 4.00</code>, ceea ce înseamnă că a depășit termenul de predare, deci pierde valoarea ei (<code>50</code>).<br>
+Există și alte planificări optimale posibile. De exemplu, <code>4 3 1 2</code>.</p>		</article>
+		</body></html>

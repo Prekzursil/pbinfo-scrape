@@ -1,0 +1,121 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4414"><article id="enunt">
+			<p>La o tragere loto expres specială se extrag <code>M</code> numere distincte din mulţimea <code>{1, 2, 3, ..., 49}</code>. O persoană care joacă la acest joc scrie pe bilet <code>K</code> numere distincte dintre cele <code>49</code> posibile. Categoriile de câştig sunt următoarele în ordine descrescătoare după valoarea câștigului (categoria 1 este cea mai valoroasă):</p>
+
+<ul>
+	<li>categoria 1: <code>K</code> numere scrise pe bilet din primele <code>K</code> extrase oficial;</li>
+	<li>categoria 2: <code>K</code> numere scrise din toate cele <code>M</code> extrase oficial;</li>
+	<li>categoria 3: <code>K</code>-1 numere scrise din primele <code>K</code>-1 extrase oficial;</li>
+	<li>categoria 4: <code>K</code>-1 numere scrise din primele <code>K</code> extrase oficial;</li>
+	<li>categoria 5: <code>K</code>-1 numere scrise din toate cele <code>M</code> extrase oficial;</li>
+	<li>categoria 6: <code>K</code>-2 numere scrise din toate cele <code>M</code> extrase oficial.</li>
+</ul>
+
+<p>La tragere au cumpărat bilete <code>J</code> jucători. <strong>Un jucător câștigă la cea mai valoroasă categorie la care se încadrează</strong>.</p>
+
+<h1>Cerința</h1>
+
+<p>Să se scrie un program care să determine:</p>
+
+<ul>
+	<li>Numărul de jucători câștigători pentru o categorie specificată <code>C</code> de câștig. Categoriile sunt numerotate <code>{1, 2, ..., 6, 7}</code>. Categoria <code>7</code> este destinată necâștigătorilor.</li>
+	<li>Numerele care sunt alese de numărul maxim de jucători, scrise în ordine crescătoare.</li>
+</ul>
+
+<h1>Date de intrare</h1>
+
+<p>Fişierul de intrare <code>loto.in</code> conţine pe prima linie cerința (1 sau 2). Linia a doua conține numerele <code>M K C</code> separate prin câte un spaţiu. Linia a treia conţine, în ordinea în care au fost extrase, cele <code>M</code> numere extrase oficial, separate prin câte un spaţiu. Linia a patra conţine un număr natural <code>J</code>, reprezentând numărul de jucători, iar fiecare dintre următoarele <code>J</code> linii conține câte <code>K</code> numere naturale, în ordinea în care au fost jucate, reprezentând numerele alese și scrise pe bilet de cele <code>J</code> persoane. </p>
+
+<h1>Date de ieșire</h1>
+
+<p>Pentru cerința <code>1</code> fişierul de ieşire <code>loto.out</code> va conţine pe prima linie un număr natural, reprezentând numărul de câștigători pentru categoria de câştig <code>C</code>.<br>
+Pentru cerința <code>2</code> fişierul de ieşire <code>loto.out</code> va conţine pe prima linie numerele alese de numărul maxim de jucători, scrise în ordine crescătoare, separate prin câte un spațiu. </p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ M ≤ 49</code></li>
+	<li><code>5 ≤ K ≤ M</code></li>
+	<li><code>1 ≤ C ≤ 7</code></li>
+	<li><code>1 ≤ J ≤ 1000</code></li>
+	<li>Pentru cerința <code>1</code> se acordă <code>70</code> puncte, iar pentru cerința <code>2</code> se acordă <code>30</code> puncte</li>
+	<li>Pentru 15 puncte, <code>1 ≤ J ≤ 10</code></li>
+	<li>Pentru 30 puncte, <code>11 ≤ J ≤ 100</code></li>
+	<li>Pentru 55 puncte, <code>101 ≤ J ≤ 1000</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>loto.in</code></p>
+
+<pre>1
+6 5 1
+1 2 3 4 5 6
+1
+5 4 3 2 1</pre>
+
+<p><code>loto.out</code></p>
+
+<pre>1</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerința 1. La extragerea oficială s-au extras <code>6</code> numere. Jucătorii pot completa <code>5</code> numere. Numerele extrase oficial sunt, în ordine, <code>1 2 3 4 5 6</code>.  Există un singur jucător. Acesta a scris pe bilet numerele <code>5 4 3 2 1</code>. Persoana care a jucat a câștigat la categoria 1 deoarece a scris primele <code>5</code> numere extrase oficial.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>loto.in</code></p>
+
+<pre>1
+6 5 4
+1 2 3 4 5 6
+2
+9 1 5 3 2
+3 1 5 2 4</pre>
+
+<p><code>loto.out</code></p>
+
+<pre>1</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerința 1. Există <code>2</code> jucători. Unul dintre jucători a câștigat la categoria 1 și unul a câștigat la categoria 4. Se cere numărul de câștigători la categoria 4, deci <code>1</code>.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>loto.in</code></p>
+
+<pre>1
+6 5 7
+1 2 3 4 5 6
+3
+2 33 7 8 19
+21 3 47 8 29
+12 32 17 8 39</pre>
+
+<p><code>loto.out</code></p>
+
+<pre>3</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerința 1. Există <code>3</code> jucători. Nici unul dintre cei care au jucat nu a câștigat la nici o categorie.</p>
+
+<h1>Exemplul 4:</h1>
+
+<p><code>loto.in</code></p>
+
+<pre>2
+6 5 4
+1 2 3 4 5 6
+2
+9 1 5 3 2
+3 1 5 2 4</pre>
+
+<p><code>loto.out</code></p>
+
+<pre>1 2 3 5</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerința 2. Numerele <code>1 2 3 5</code> au fost scrise de ambele persoane, deci numărul maxim de jucători este <code>2</code>.</p>		</article>
+		</body></html>

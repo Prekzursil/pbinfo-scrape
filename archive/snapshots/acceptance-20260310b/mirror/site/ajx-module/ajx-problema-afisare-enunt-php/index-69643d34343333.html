@@ -1,0 +1,65 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4433"><article id="enunt">
+			<p>Se dă un șir <code>V</code> ce conține <code>N</code> numere întregi numerotate începând de la <code>1</code>: <code>V[1], V[2], ..., V[N]</code> și două numere naturale nenule <code>K</code> și <code>L</code>, cu proprietatea că: <code>1 ≤ K ≤ L ≤ N</code>. Mihai studiază doar secvențele de lungime <code>L</code>, adică secvențele formate din exact <code>L</code> elemente situate pe poziții alăturate în acest șir <code>V</code>.</p>
+
+<p>El își poate pune următoarea întrebare: “Dacă aș rearanja, în ordine <strong>crescătoare</strong>, elementele secvenței de lungime <code>L</code> care începe la poziția <code>poz</code> în șirul <code>V</code>, ce valoare s-ar afla pe poziția a <code>K</code>-a în cadrul secvenței rezultate?”. Pentru secvența din șir care începe la poziția <code>poz</code> și are <code>L</code> elemente, adică <code>V[poz], V[poz+1], ..., V[poz+L-1]</code>, valoarea elementului de pe poziția a <code>K</code>-a în cadrul secvenței este <code>V[poz+K-1]</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Ajutați-l pe Mihai să afle care este răspunsul corect pentru <code>Q</code> întrebări de tipul descris mai sus!</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului de intrare <code>kth.in</code> se află trei numere naturale nenule <code>N</code>, <code>K</code> și <code>L</code>, separate între ele prin câte un spațiu, cu semnificațiile de mai sus. Pe următoarea linie se află, separate între ele prin câte un spațiu, <code>N</code> numere întregi, reprezentând, în ordine, elementele șirului <code>V</code>. Pe următoarea linie se află numărul natural nenul <code>Q</code>, reprezentând numărul de întrebări formulate de către Mihai. Pe fiecare dintre următoarele <code>Q</code> linii se află câte un număr natural nenul <code>poz</code>, reprezentând poziția de început a secvenței de <code>L</code> elemente pentru care se pune întrebarea respectivă.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>kth.out</code> va conține <code>Q</code> linii. Pe linia <code>i</code> se va afla un număr întreg ce reprezintă răspunsul la întrebarea <code>i</code>, în ordinea dată în fișierul de intrare, pentru fiecare <code>i</code>: <code>1 ≤ i ≤ Q</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N ≤ 300.000</code> și <code>1 ≤ Q ≤ 300.000</code>.</li>
+	<li><code>−50 000 ≤ V[i] ≤ 50.000</code>, pentru fiecare <code>i</code>: <code>1 ≤ i ≤ N</code>.</li>
+	<li><code>1 ≤ poz ≤ N − L + 1</code>, pentru fiecare dintre cele <code>Q</code> întrebări.</li>
+	<li>Valorile <code>poz</code> din cadrul celor <code>Q</code> întrebări nu sunt neapărat distincte între ele oricare două.</li>
+	<li>Datorită dimensiunilor, nu toate testele au putut fi adăugate.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>kth.in</code></p>
+
+<pre>5 2 3
+4 -5 2 1 4
+2
+2
+1</pre>
+
+<p><code>kth.out</code></p>
+
+<pre>1
+2</pre>
+
+<h3>Explicație</h3>
+
+<p>Sunt <code>N = 5</code> elemente în șirul <code>V = (4, -5, 2, 1, 4)</code>. Pentru prima întrebare (pentru care <code>poz = 2</code>), dacă secvența formată din <code>L=3</code> elemente: <code>(V[2], V[3], V[4])</code> ar fi ordonată crescător, aceasta ar deveni: <code>(-5, 1, 2)</code>, ceea ce înseamnă că pe cea de a doua (<code>K = 2</code>) poziție în cadrul ei s-ar afla valoarea <code>1</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>kth.in</code></p>
+
+<pre>5 2 3
+1 5 2 4 3
+2
+2
+1</pre>
+
+<p><code>kth.out</code></p>
+
+<pre>4
+2</pre>
+
+<h3>Explicație</h3>
+
+<p>Sunt <code>N = 5</code> elemente în șirul <code>V = (1, 5, 2, 4, 3)</code>, <code>K = 2</code> și <code>L = 3</code>. <code>Q = 2</code> întrebări formulate.</p>		</article>
+		</body></html>

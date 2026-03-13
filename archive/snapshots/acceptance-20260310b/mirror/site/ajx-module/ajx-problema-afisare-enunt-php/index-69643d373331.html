@@ -1,0 +1,57 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=731"><article id="enunt">
+			<p>La Institutul Român de Cercetări Nucleare se fac experimente în scopul studierii efectelor obţinute prin depozitarea compuşilor radioactivi în spaţiile de depozitare ale unei incinte. Experimentul se desfăşoară într-o incintă de formă pătrată având <code>N*N</code> spaţii de depozitare identice, aşezate precum elementele unei matrice pătratice de dimensiune <code>N</code>. Convenim să numim celule spaţiile de depozitare.</p>
+
+<p>Fiecare celulă conţine un compus care emană radiaţii (cantitatea de radiaţii emisă este un număr strict pozitiv), absoarbe radiaţii (cantitatea de radiaţii ”emisă” este un număr strict negativ) sau este neutră din punct de vedere radioactiv (cantitatea de radiaţii emisă este <code>0</code>). Compusul dintr-o celulă influenţează nu numai celula curentă, ci şi celulele din jur, pe o distanţă <code>k</code> dată. Definim factorul radioactiv al unei celule ca fiind: valoarea din celula curenta <code>* 1 +</code> (suma valorilor din celulele matricei aflate la distanţă <code>1</code>) <code>* (1-1/k) + </code>(suma valorilor din celulele din matrice aflate la distanţă <code>2</code>) <code>* (1-2/k)</code> etc. pâna la distanta <code>k</code> de unde influenţa devine <code>0</code>.</p>
+
+<p>De exemplu, pentru n=10, k=4 şi matricea</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-probleme-701-750-731-radioactiv-png.png"></p>
+
+<p>Factorul radioactiv al celulei de pe linia <code>5</code> şi coloana <code>5</code> se calculează cu ajutorul sumelor valorilor din celulele marcate prin culori: <code>2*1+ (0+1-1+1+0+2+0+1)*(1-1/4) + (0+1+0-1-2-1-3-1+0+1+0+0+0+1+0+0)*(1-2/4) + (1+0+2+1+2+0+0+0+0-1+0+2+1-5+0+3+0-1-2+2+0+0+1+1) *(1-3/4) = 2+3-5/2+7/4 = 4.25</code></p>
+
+<p>Factorul celulei de pe linia <code>10</code> şi coloana <code>2</code> este: <code>(-1)*1+(-1)*(1-1/4)+4*(1-2/4)+0*(1-3/4)= -1+3/4+2+0=1.75</code></p>
+
+<h1>Cerința</h1>
+
+<p>Să se determine numărul de celule ale matricei în care factorul radioactiv este minim.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>radioactiv.in</code> conține pe prima linie valorile naturale <code>n</code> şi <code>k</code>, iar pe următoarele <code>n</code> linii câte <code>n</code> valori întregi, despărţite prin câte un spaţiu, reprezentând valorile din matrice.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>radioactiv.out</code> va conține pe prima linie un singur număr natural reprezentând numărul de celule ale matricei în care factorul radioactiv este minim.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>n ≤ 1000</code></li>
+	<li><code>k ≤ 20</code></li>
+	<li>valorile din matrice sunt numere întregi cu cel mult <code>2</code> cifre</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>radioactiv.in</code></p>
+
+<pre>10 4
+1  2 -1 -3  4  1  1  1  1  1
+0  1  2  0  0  0  0 -1  1  0
+3  2  0 -1 -2 -1 -3  0  1  2
+1  0  1  0  1 -1 -1  2  0  0
+0  1  0  1  2  1  0  1  0  1
+2  1  0  0  2  0  1 -5  0  0
+0  1  0  1  0  0  0  0  2  1
+1  0  0  2 -2 -1  0  3  1  2
+0  0  0  0  1  1  1  1  1  1
+-1 -1  0  1 -1  2 -1  3  0  2</pre>
+
+<p><code>radioactiv.out</code></p>
+
+<pre>2</pre>
+
+<h1>Explicație</h1>
+
+<p>Factorul radioactiv minim este <code>-0.25</code> și se obţine în celula de pe linia <code>3</code> și coloana <code>6</code> și în celula de pe linia <code>4</code> și coloana <code>6</code>. </p>		</article>
+		</body></html>

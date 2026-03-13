@@ -1,0 +1,311 @@
+{
+  "id": 1648,
+  "slug": "diez",
+  "name": "Diez",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1648/diez",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 116,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=116"
+    },
+    {
+      "id": 150,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=150"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Fiind dat un şir de <code>N</code> litere mici şi o listă de <code>M</code> operaţii, să se afişeze răspunsurile la operaţiile de tip <code>2</code>, respectând ordinea din succesiunea de operaţii date.</p>",
+      "text": "Fiind dat un şir de N litere mici şi o listă de M operaţii, să se afişeze răspunsurile la operaţiile de tip 2, respectând ordinea din succesiunea de operaţii date."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>diez.in</code> conține pe prima linie valorile <code>N</code> şi <code>M</code>, separate printr-un spaţiu cu semnificaţia din enunţ. Pe a doua linie se află un şir de <code>N</code> litere mici ale alfabetului englez iar următoarele <code>M</code> linii conţin câte o operaţie în unul dintre formatele:</p><ul>\n\t<li><code>1 p x</code> – Datele pentru operaţia de tipul <code>1</code>.</li>\n\t<li><code>2 q1 q2 lg</code> – Datele pentru operaţia de tipul <code>2</code>.</li>\n</ul>",
+      "text": "Fișierul de intrare diez.in conține pe prima linie valorile N şi M, separate printr-un spaţiu cu semnificaţia din enunţ. Pe a doua linie se află un şir de N litere mici ale alfabetului englez iar următoarele M linii conţin câte o operaţie în unul dintre formatele: 1 p x – Datele pentru operaţia de tipul 1. 2 q1 q2 lg – Datele pentru operaţia de tipul 2."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>În fișierul de ieșire <code>diez.out</code> se vor scrie valori egale cu <code>0</code> sau <code>1</code>, câte una pe o linie, reprezentând răspunsurile date, în ordine, la operaţiile de tipul <code>2</code> existente în fişierul de intrare.</p>",
+      "text": "În fișierul de ieșire diez.out se vor scrie valori egale cu 0 sau 1, câte una pe o linie, reprezentând răspunsurile date, în ordine, la operaţiile de tipul 2 existente în fişierul de intrare."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N, M ≤ 250 000</code></li>\n\t<li><code>0 ≤ p ≤</code> lungimea şirului la momentul inserării</li>\n\t<li><code>x</code> este literă mică a alfabetului englez</li>\n\t<li><code>q1, q2 ≥ 0</code>; se garantează că pentru fiecare operaţie de tipul <code>2</code> există <code>lg</code> caractere în şir începând atât cu poziţia <code>q1</code> cât şi cu poziţia <code>q2</code></li>\n\t<li><code>1 &lt; lg ≤</code> lungimea şirului la momentul efectuării operaţiei de tipul <code>2</code></li>\n\t<li>Numerotarea caracterelor din şir începe de la poziţia <code>0</code></li>\n</ul>",
+      "text": "1 ≤ N, M ≤ 250 000 0 ≤ p ≤ lungimea şirului la momentul inserării x este literă mică a alfabetului englez q1, q2 ≥ 0; se garantează că pentru fiecare operaţie de tipul 2 există lg caractere în şir începând atât cu poziţia q1 cât şi cu poziţia q2 1 < lg ≤ lungimea şirului la momentul efectuării operaţiei de tipul 2 Numerotarea caracterelor din şir începe de la poziţia 0"
+    },
+    {
+      "title": "Exemplul 1",
+      "html": "<p><code>diez.in</code></p><pre>8 6\nabcasfas\n2 0 5 3\n1 3 d\n2 4 7 2\n1 1 s\n1 10 b\n2 0 8 3</pre><p><code>diez.out</code></p><pre>0\n1\n1</pre><h3>Explicație</h3><p>Se compară secvenţele <code>abc</code> şi <code>fas</code> care sunt diferite → se afişează <code>0</code><br>\nCaracterul <code>d</code> este inserat înainte de poziţia <code>3</code> şi se obţine şirul <code>abcdasfas</code><br>\nSe compară subşirurile <code>as</code> şi <code>as</code>, sunt identice → se afişează <code>1</code><br>\nCaracterul <code>s</code> este inserat înainte de poziţia <code>1</code>, se obţine şirul <code>asbcdasfas</code><br>\nCaracterul <code>b</code> este inserat pe poziţia <code>10</code>, poziţia este egală cu lungimea şirului, se obţine şirul <code>asbcdasfasb</code><br>\nSe compară subşirurile <code>asb</code> si <code>asb</code> , sunt identice → se afişează <code>1</code></p>",
+      "text": "diez.in8 6 abcasfas 2 0 5 3 1 3 d 2 4 7 2 1 1 s 1 10 b 2 0 8 3diez.out0 1 1ExplicațieSe compară secvenţele abc şi fas care sunt diferite → se afişează 0 Caracterul d este inserat înainte de poziţia 3 şi se obţine şirul abcdasfas Se compară subşirurile as şi as, sunt identice → se afişează 1 Caracterul s este inserat înainte de poziţia 1, se obţine şirul asbcdasfas Caracterul b este inserat pe poziţia 10, poziţia este egală cu lungimea şirului, se obţine şirul asbcdasfasb Se compară subşirurile asb si asb , sunt identice → se afişează 1"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>diez.in</code></p><pre>6 3\natmatm\n2 0 2 4\n1 6 a\n2 0 3 4</pre><p><code>diez.out</code></p><pre>0\n1</pre><h3>Explicație</h3><p>Se compară subşirurile <code>atma</code> şi <code>matm</code>, sunt diferite → se afişează <code>0</code><br>\nCaracterul <code>a</code> se alipeşte la final, se obţine şirul <code>atmatma</code><br>\nSe compară subşirurile <code>atma atma</code>, sunt identice → se afişează <code>1</code></p>",
+      "text": "diez.in6 3 atmatm 2 0 2 4 1 6 a 2 0 3 4diez.out0 1ExplicațieSe compară subşirurile atma şi matm, sunt diferite → se afişează 0 Caracterul a se alipeşte la final, se obţine şirul atmatma Se compară subşirurile atma atma, sunt identice → se afişează 1"
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Se compară secvenţele abc şi fas care sunt diferite → se afişează 0 Caracterul d este inserat înainte de poziţia 3 şi se obţine şirul abcdasfas Se compară subşirurile as şi as, sunt identice → se afişează 1 Caracterul s este inserat înainte de poziţia 1, se obţine şirul asbcdasfas Caracterul b este inserat pe poziţia 10, poziţia este egală cu lungimea şirului, se obţine şirul asbcdasfasb Se compară subşirurile asb si asb , sunt identice → se afişează 1"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Se compară subşirurile atma şi matm, sunt diferite → se afişează 0 Caracterul a se alipeşte la final, se obţine şirul atmatma Se compară subşirurile atma atma, sunt identice → se afişează 1"
+    }
+  ],
+  "constraints": [
+    "1 ≤ N, M ≤ 250 000",
+    "0 ≤ p ≤ lungimea şirului la momentul inserării",
+    "x este literă mică a alfabetului englez",
+    "q1, q2 ≥ 0; se garantează că pentru fiecare operaţie de tipul 2 există lg caractere în şir începând atât cu poziţia q1 cât şi cu poziţia q2",
+    "1 < lg ≤ lungimea şirului la momentul efectuării operaţiei de tipul 2",
+    "Numerotarea caracterelor din şir începe de la poziţia 0"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qd5f28f3d2b.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "11",
+    "intrare/ieșire": "diez.in / diez.out",
+    "limită timp": "2 secunde",
+    "limită memorie": "128 MB / 8 MB",
+    "sursa problemei": "Urmasii lui Moisil, 2016",
+    "autor": "Stefan Negrus",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 2,
+  "memoryLimitMb": 128,
+  "author": "Stefan Negrus",
+  "sourceAttribution": "Urmasii lui Moisil, 2016",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1648/diez"
+}

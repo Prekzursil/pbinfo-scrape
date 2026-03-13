@@ -1,0 +1,93 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1821"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>Alex s-a decis să organizeze pentru colegii lui un concurs de orientare turistică, pe care l-a intitulat “Treasure Hunt”, nu pentru că ar fi avut ceva bogății de ascuns, ci pentru a-i face curioși și a-i mobiliza să mai lase puțin joaca pe calculator și să facă mișcare în aer liber. Pentru aceasta el a cercetat terenul pe care s-a decis să organizeze acest concurs și a identificat <code>n</code> puncte posibile de amplasare a posturilor de control, prin care concurenții să treacă obligatoriu și de unde să primească indicii referitoare la următorul punct. Bineînțeles că în punctele de control există și “comori” ascunse, care au asociate anumite punctaje, de valori cunoscute. A notat pe o hartă coordonatele <code>(x,y)</code> ale acestor puncte, în ordinea necesară parcurgerii lor, dar și altitudinea la care se află acestea și punctajul <code>p</code> atribuit “comorii” din acel punct. Problema a apărut mai târziu, atunci când Alex s-a decis să nu lase un concurent să se oprească în toate punctele, pentru că atunci colegii lui ar găsi un motiv să mai tragă de timp pentru a se odihni și concursul ar dura prea mult. Așa că a stabilit să permită maxim <code>M</code> opriri din cele <code>N</code> puncte, cu condiția ca între două opriri succesive distanța de pe traseu să nu fie mai mică decât o valoare impusă, <code>d</code>, stabilită de Alex printr-o metodă proprie. Trecerea prin toate punctele este obligatorie, așa că distanța se calculează ca suma distanțelor dintre puncte. Curios din fire, Alex vrea să știe:<br>
+</p><ul>
+	<li>Care este efortul total pentru parcurgerea întregului traseu și care este distanța maximă între două puncte de pe traseu. Efortul trebuie calculat după o formulă pe care tot Alex a stabilit-o ca suma eforturilor de pe fiecare tronson în parte, definit astfel <br>
+\( e =<br>
+\begin{cases}<br>
+𝑑 + 𝑑 ∗ ∆ℎ/10                           &amp; \text {, 𝑑𝑎𝑐a 𝑢𝑟𝑐a} \\<br>
+𝑑 + 𝑑 ∗\frac{|∆ℎ|}{5∗10}              &amp; \text{, 𝑑𝑎𝑐a 𝑐𝑜𝑏𝑜𝑎𝑟a} \\<br>
+\end{cases} \), unde <code>∆ℎ</code> este diferența de altitudine dintre două puncte consecutive de pe traseu, chiar dacă în acestea concurentul nu se oprește.</li>
+	<li>Care este punctajul maxim pe care îl poate obține un concurent, și care ar trebui să fie punctele de control în care să se oprească pentru a le obține. Din păcate Alex nu e prea bun la informatică, așa ca vă roagă pe voi să-l ajutați.</li><br>
+</ul><p></p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul <code>treasurehunt.in</code> și are următoarea formă:</p>
+
+<ul>
+	<li>Pe prima linie un număr natural <code>z=1</code> sau <code>z=2</code>.</li>
+	<li>Pe următoarea linie numerele <code>N</code>, <code>M</code> și <code>d</code>, reprezentând numărul de puncte de control stabilite, numărul maxim de opriri acceptate, respectiv distanța minimă între două opriri succesive.</li>
+	<li>Pe următoarele <code>N</code> linii câte <code>4</code> numere <code>x, y, h, p</code> reprezentând coordonatele, altitudinea și punctajul comorii din fiecare punct. Punctele <code>1</code> și <code>n</code> vor rămâne obligatoriu pe traseu și nu conțin comori, așadar nu li se impune nici o condiție dintre cele stabilite mai sus (nu se numără în cele <code>M</code> opriri, iar distanța față de punctele unei opriri alese poate fi mai mica decât <code>d</code>).</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul <code>treasurehunt.out</code> are forma:<br>
+</p><ul>
+	<li>Dacă <code>z=1</code>, pe prima linie un număr real care reprezintă distanța maximă între două puncte de pe traseul inițial şi pe a doua linie un alt număr real care reprezintă efortul total pentru parcurgerea întregului traseu.</li>
+	<li>Dacă <code>z=2</code>, pe prima linie punctajul maxim care poate fi obținut cu cel mult <code>M</code> opriri şi pe următoarea linie numerele de ordine ale punctelor de pe traseu unde se fac opririle corespunzătoare acestui caz.</li><br>
+</ul><p></p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ M ≤ N ≤ 10000</code></li>
+	<li><code>0 ≤ p ≤ 100</code></li>
+	<li><code>0 &lt;= d &lt;= 1000</code></li>
+	<li>Coordonatele punctelor și altitudinea sunt numere întregi cu maxim <code>4</code> cifre, distanțele și efortul sunt numere reale calculate cu exact <code>2</code> cifre, fără aproximare.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>treasurehunt.in</code></p>
+
+<pre>1
+10 5 3
+0 0 0 0
+2 0 3 4
+3 0 3 7
+4 0 5 10
+5 0 5 5
+6 0 3 9
+7 0 4 10
+8 0 4 15
+10 0 6 15
+15 0 0 0</pre>
+
+<p><code>treasurehunt.out</code></p>
+
+<pre>5
+16.94</pre>
+
+<h3>Explicație</h3>
+
+<p>Între punctele <code>1</code> și <code>2</code> distanța este <code>2</code> și urcă cu <code>3</code>, deci efortul va fi <code>2+2*3/10=2.6</code> . Între punctele <code>2</code> și <code>3</code> distanța este <code>1</code> și <code>∆ℎ = 0</code>, deci efortul va fi <code>1</code>. Între punctele <code>3</code> și <code>4</code> distanța este <code>1</code> și <code>∆ℎ =2</code>, deci efortul va fi <code>1,2</code>. Între punctele <code>4</code> și <code>5</code> distanța este <code>1</code> și <code>∆ℎ = 0</code>, deci efortul va fi <code>1</code>, etc., rezultă efortul total <code>16.94</code>. Distanta maxima este <code>5</code> intre punctele <code>9</code> și <code>10</code></p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>treasurehunt.in</code></p>
+
+<pre>2
+10 5 3
+0 0 0 0
+2 0 3 4
+3 0 3 7
+4 0 5 10
+5 0 5 5
+6 0 3 9
+7 0 4 10
+8 0 4 15
+10 0 6 15
+15 0 0 0</pre>
+
+<p><code>treasurehunt.out</code></p>
+
+<pre>35
+1 4 7 9 10</pre>
+
+<h3>Explicație</h3>
+
+<p>Punctajul maxim care se poate obține este <code>35</code>, când concurenții se opresc în punctele <code>1,4,7,9</code> și <code>10</code> din care obțin punctajele <code>0+10+10+15+0</code>.</p>		</article>
+		</body></html>

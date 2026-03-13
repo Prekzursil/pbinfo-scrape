@@ -1,0 +1,54 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3607"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>În această dimineață Aky, un băiat sportiv, s-a hotărât să meargă la alergat. Acesta vrea după ce ajunge acasă să își rezolve tema la informatică și pentru asta trebuie să nu fie foarte obosit în urma antrenamentului, deci vrea să își aleagă un traseu cât mai ușor pe care să alerge, iar pentru asta și-a pus la punct un plan foarte exact. </p>
+
+<p>Acesta are în orașul său o distanță <code>N</code> kilometri legați, numerotați de la <code>1</code> la <code>N</code>, iar fiecărui kilometru <code>i</code> din cele <code>N</code>(<code>1 ≤ i ≤ N</code>) îi cunoaște gradul de dificultate <code>a[i]</code>. Băiatul a întocmit o listă cu <code>M</code> intervale diferite de kilometri de forma <code>[l, r]</code>, fiecare interval având un anumit grad de oboseală asociat acestuia. Gradul de oboseală <code>G</code> asociat unui interval <code>[l, r]</code> de lungime <code>L = r - l + 1</code> se calculează astfel: <code>G = a[l] * L + a[l + 1] * (L - 1) + ... + a[r - 1] * 2 + a[r] * 1</code> și reprezintă cu cât va crește valoarea de oboseală a lui Aky dupa ce va alerga kilometrii intervalului respectiv. Acum Aky vă cere vouă să-l ajutați să-și ducă planul la sfârșit, aflând care este valoarea minimă de oboseală pe care o poate avea la finalul antrenamentului său, știind că trebuie sa alerge kilometrii a exact <code>K</code> din intervalele din lista sa.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fişierul de intrare <code>run.in</code> are pe prima linie numerele <code>N M K</code>, reprezentând numărul de kilometri din orașul lui Aky, numărul de intervale din lista sa, respectiv câte dintre intervale trebuie să aleagă pentru alergat, pe a <code>2</code>-a linie <code>N</code> numere naturale <code>a[1], a[2], ..., a[N]</code>, reprezentând gradele de dificultate ale celor <code>N</code> kilometri, iar pe următoarele <code>M</code> linii câte <code>2</code> numere <code>l r</code> reprezentând intervalele din lista lui Aky.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fişierul de ieşire <code>run.out</code> va conţine pe prima linie numărul natural <code>V</code>, reprezentând valoarea minimă de oboseală pe care o poate avea băiatul la finalul antrenamentului său.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N, M ≤ 100.000</code></li>
+	<li><code>1 ≤ K ≤ M</code></li>
+	<li><code>1 ≤ a[i] ≤ 10.000</code></li>
+	<li><code>1 ≤ l ≤ r ≤ n</code></li>
+	<li>pentru teste în valoare de <code>50</code> de puncte <code>N ≤ 5.000</code> și <code>M ≤ 5.000</code></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>run.in</code></p>
+
+<pre>5 5 3
+2 3 1 5 6
+1 3
+1 4
+3 4
+2 5
+4 5</pre>
+
+<p><code>run.out</code></p>
+
+<pre>36</pre>
+
+<h3>Explicație</h3>
+
+<p>Vom lua fiecare interval și vom calcula gradul său de oboseală:<br>
+</p><ul>
+	<li><code>[1, 3]</code>: <code>G = 2 * 3 + 3 * 2 + 1 * 1 = 13</code></li>
+	<li><code>[1, 4]</code>: <code>G = 2 * 4 + 3 * 3 + 1 * 2 + 5 * 1 = 24</code></li>
+	<li><code>[3, 4]</code>: <code>G = 1 * 2 + 5 * 1 = 7</code></li>
+	<li><code>[2, 5]</code>: <code>G = 3 * 4 + 1 * 3 + 5 * 2 + 6 * 1 = 31</code></li>
+	<li><code>[4, 5]</code>: <code>G = 5 * 2 + 6 * 1 = 16</code></li><br>
+</ul><p></p>
+
+<p>Obținem în final gradele de oboseală <code>13 24 7 31 16</code> din care Aky trebuie să aleagă <code>3</code> astfel încât valoarea sa de oboseală să fie minimă. Acesta elege primul, al treilea, respectiv ultimul interval obținând valoarea de oboseală minimă <code>13 + 7 + 16 = 36</code>.</p>		</article>
+		</body></html>

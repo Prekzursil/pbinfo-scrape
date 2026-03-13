@@ -1,0 +1,309 @@
+{
+  "id": 3765,
+  "slug": "virus1",
+  "name": "virus1",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3765/virus1",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 10,
+      "name": "Şiruri de caractere",
+      "slug": "iruri-de-caractere",
+      "href": "/?pagina=probleme-lista&tag=10"
+    },
+    {
+      "id": 84,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=84"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Scrieți un program care, cunoscând codul virusului pandemic și lista codurilor virușilor descoperiți în urma testărilor, rezolvă următoarele cerințe:</p><p>1. Determină numărul de mutații ale virusului pandemic existente în listă, mutații nu neapărat distincte;<br>\n2. Determină mutația cu număr maxim de apariții în listă; dacă există mai multe mutații cu același număr maxim de apariții, se va determina prima mutație, în ordine lexicografică.</p>",
+      "text": "Scrieți un program care, cunoscând codul virusului pandemic și lista codurilor virușilor descoperiți în urma testărilor, rezolvă următoarele cerințe:1. Determină numărul de mutații ale virusului pandemic existente în listă, mutații nu neapărat distincte; 2. Determină mutația cu număr maxim de apariții în listă; dacă există mai multe mutații cu același număr maxim de apariții, se va determina prima mutație, în ordine lexicografică."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>virus.in</code> conține pe prima linie un număr natural <code>C</code> reprezentând cerința care trebuie să fie rezolvată (<code>1</code> sau <code>2</code>). Pe cea de a doua linie se află codul virusului pandemic. Pe a treia linie se află un număr natural <code>N</code>, reprezentând numărul de viruși existenți în lista primită de laborator. Pe următoarele <code>N</code> linii se află codurile virușilor din listă, câte un cod pe o linie.</p>",
+      "text": "Fișierul de intrare virus.in conține pe prima linie un număr natural C reprezentând cerința care trebuie să fie rezolvată (1 sau 2). Pe cea de a doua linie se află codul virusului pandemic. Pe a treia linie se află un număr natural N, reprezentând numărul de viruși existenți în lista primită de laborator. Pe următoarele N linii se află codurile virușilor din listă, câte un cod pe o linie."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>virus.out</code> va conține o singură linie:</p><ul>\n\t<li>Dacă <code>C = 1</code>, pe prima linie va fi scris un număr natural care reprezintă câte elemente din listă sunt mutații ale virusului pandemic.</li>\n\t<li>Dacă <code>C = 2</code>, pe prima linie va fi scris un șir de caractere care reprezintă mutația cu număr maxim de apariții. Dacă există mai multe mutații cu număr maxim de apariții, va fi afișată prima (cea mai mică), în ordine lexicografică.</li>\n</ul>",
+      "text": "Fișierul de ieșire virus.out va conține o singură linie: Dacă C = 1, pe prima linie va fi scris un număr natural care reprezintă câte elemente din listă sunt mutații ale virusului pandemic. Dacă C = 2, pe prima linie va fi scris un șir de caractere care reprezintă mutația cu număr maxim de apariții. Dacă există mai multe mutații cu număr maxim de apariții, va fi afișată prima (cea mai mică), în ordine lexicografică."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2 ≤ N ≤ 50.000</code></li>\n\t<li>Lungimea maximă a codului unui virus este <code>200</code></li>\n\t<li>Daca <code>a</code> și <code>b</code> sunt două șiruri de lungime <code>lg</code>, spunem că șirul <code>a = a</code><sub><code>0</code></sub> <code>a</code><sub><code>1</code></sub> <code>a</code><sub><code>2</code></sub> <code>... a</code><sub><code>lg-1</code></sub> este mai mic din punct de vedere lexicografic decât șirul <code>b = b</code><sub><code>0</code></sub> <code>b</code><sub><code>1</code></sub> <code>b</code><sub><code>2</code></sub> <code>... b</code><sub><code>lg-1</code></sub>, dacă există o poziție <code>k ∈{0, 1, ...,  lg - 1}</code> astfel încât <code>a</code><sub><code>i</code></sub> <code>= b</code><code>i</code> pentru orice <code>0 ≤ i &lt; k</code> și <code>a</code><sub><code>k</code></sub> <code>&lt; b</code><code>k</code>.</li>\n\t<li>În codul <span class=\"caps\">ASCII</span> codurile literelor mari sunt mai mici decât codurile literelor mici.</li>\n</ul>",
+      "text": "2 ≤ N ≤ 50.000 Lungimea maximă a codului unui virus este 200 Daca a și b sunt două șiruri de lungime lg, spunem că șirul a = a0 a1 a2 ... alg-1 este mai mic din punct de vedere lexicografic decât șirul b = b0 b1 b2 ... blg-1, dacă există o poziție k ∈{0, 1, ..., lg - 1} astfel încât ai = bi pentru orice 0 ≤ i < k și ak < bk. În codul ASCII codurile literelor mari sunt mai mici decât codurile literelor mici."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>virus.in</code></p><pre>1\nabac\n5\nAbbbq\nZbac\nabbC\naBac\nZbac</pre><p><code>virus.out</code></p><pre>3</pre><h3>Explicație</h3><p>Mutațiile sunt <code>Zbac</code>, <code>aBac</code> și <code>Zbac</code>.</p>",
+      "text": "virus.in1 abac 5 Abbbq Zbac abbC aBac Zbacvirus.out3ExplicațieMutațiile sunt Zbac, aBac și Zbac."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>virus.in</code></p><pre>2\nabcD\n8\nabcdD\nXbcD\nXc\nXbcD\naXcD\naXcD\naXc\nab</pre><p><code>virus.out</code></p><pre>XbcD</pre><h3>Explicație</h3><p>Mutațiile <code>XbcD</code> și <code>aXcD</code> apar fiecare de câte <code>2</code> ori, prima în ordine lexicografică fiind <code>XbcD</code>. <code>XbcD</code> este mai mic lexicografic decât <code>aXcD</code>, deoarece în codul <span class=\"caps\">ASCII</span>: <code>'A' &lt; 'B' &lt; ... &lt; 'Z' &lt; 'a' &lt; 'b' &lt; ... &lt; 'z'</code></p>",
+      "text": "virus.in2 abcD 8 abcdD XbcD Xc XbcD aXcD aXcD aXc abvirus.outXbcDExplicațieMutațiile XbcD și aXcD apar fiecare de câte 2 ori, prima în ordine lexicografică fiind XbcD. XbcD este mai mic lexicografic decât aXcD, deoarece în codul ASCII: 'A' < 'B' < ... < 'Z' < 'a' < 'b' < ... < 'z'"
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Mutațiile sunt Zbac, aBac și Zbac."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Mutațiile XbcD și aXcD apar fiecare de câte 2 ori, prima în ordine lexicografică fiind XbcD. XbcD este mai mic lexicografic decât aXcD, deoarece în codul ASCII: 'A' < 'B' < ... < 'Z' < 'a' < 'b' < ... < 'z'"
+    }
+  ],
+  "constraints": [
+    "2 ≤ N ≤ 50.000",
+    "Lungimea maximă a codului unui virus este 200",
+    "Daca a și b sunt două șiruri de lungime lg, spunem că șirul a = a0 a1 a2 ... alg-1 este mai mic din punct de vedere lexicografic decât șirul b = b0 b1 b2 ... blg-1, dacă există o poziție k ∈{0, 1, ..., lg - 1} astfel încât ai = bi pentru orice 0 ≤ i < k și ak < bk.",
+    "În codul ASCII codurile literelor mari sunt mai mici decât codurile literelor mici."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q12ea449d39.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "10",
+    "intrare/ieșire": "virus.in / virus.out",
+    "limită timp": "0.3 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "ONSEPI, 2021, clasa a VII-a",
+    "autor": "Adrian Pintea",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.3,
+  "memoryLimitMb": 64,
+  "author": "Adrian Pintea",
+  "sourceAttribution": "ONSEPI, 2021, clasa a VII-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3765/virus1"
+}

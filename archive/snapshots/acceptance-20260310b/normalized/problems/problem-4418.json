@@ -1,0 +1,325 @@
+{
+  "id": 4418,
+  "slug": "planor",
+  "name": "planor",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4418/planor",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 85,
+      "name": "Structuri de date liniare",
+      "slug": "structuri-de-date-liniare",
+      "href": "/?pagina=probleme-lista&tag=85"
+    },
+    {
+      "id": 87,
+      "name": "Coada",
+      "slug": "coada",
+      "href": "/?pagina=probleme-lista&tag=87"
+    }
+  ],
+  "tags": [
+    "Deque"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Date fiind numărul <code>N</code> de parcele,  <code>K</code> – numărul maxim de parcele pe care le poate parcurge planorul ce pornește de la înălțime zero, precum și diferențele de nivel corespunzătoare fiecăreia dintre cele <code>N</code> parcele să se rezolve următoarele 3 cerințe:<br>\n1) înălțimea maximă la care ajunge planorul dacă pleacă din prima parcelă și parcurge <strong>cel mult K parcele</strong> (dar cel puțin una);<br>\n2) înălțimea maximă la care ajunge planorul, dacă alege convenabil o parcelă <code>X</code> de lansare și după ce parcurge <strong>exact K parcele</strong>;<br>\n3) înălțimea maximă la care ajunge planorul, dacă alege convenabil o parcelă <code>X</code> de lansare și parcurge <strong>cel mult K  parcele</strong> (dar cel puțin una).</p>",
+      "text": "Date fiind numărul N de parcele, K – numărul maxim de parcele pe care le poate parcurge planorul ce pornește de la înălțime zero, precum și diferențele de nivel corespunzătoare fiecăreia dintre cele N parcele să se rezolve următoarele 3 cerințe: 1) înălțimea maximă la care ajunge planorul dacă pleacă din prima parcelă și parcurge cel mult K parcele (dar cel puțin una); 2) înălțimea maximă la care ajunge planorul, dacă alege convenabil o parcelă X de lansare și după ce parcurge exact K parcele; 3) înălțimea maximă la care ajunge planorul, dacă alege convenabil o parcelă X de lansare și parcurge cel mult K parcele (dar cel puțin una)."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>planor.in</code> conține pe prima linie numerele <code>C</code>, <code>N</code> și <code>K</code>, reprezentând numărul cerinței (1, 2 sau 3), numărul de parcele și respectiv numărul maxim de parcele parcurse. A doua linie conține <code>N</code> numere, reprezentând, în ordinea de la 1 la <code>N</code>, diferențele de nivel pentru cele <code>N</code> parcele. NUmerele scrise pe aceeași linie sunt separate prin câte un spațiu.</p>",
+      "text": "Fișierul de intrare planor.in conține pe prima linie numerele C, N și K, reprezentând numărul cerinței (1, 2 sau 3), numărul de parcele și respectiv numărul maxim de parcele parcurse. A doua linie conține N numere, reprezentând, în ordinea de la 1 la N, diferențele de nivel pentru cele N parcele. NUmerele scrise pe aceeași linie sunt separate prin câte un spațiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>planor.out</code> va conține o singură linie pe care va fi scris un singur număr, răspunsul la cerința <code>C</code> din fișierul de intrare.</p>",
+      "text": "Fișierul de ieșire planor.out va conține o singură linie pe care va fi scris un singur număr, răspunsul la cerința C din fișierul de intrare."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ K ≤ N ≤ 200.000</code></li>\n\t<li><code>−200.000 ≤ diferențele de nivel ≤ 200.000</code></li>\n\t<li>Planorul poate ajunge la înălțime negativă în orice moment al zborului.</li>\n\t<li>Pentru 12 puncte, <code>C = 1</code></li>\n\t<li>Pentru 4 puncte, <code>C = 2</code> și <code>1 ≤ N ≤ 5.000</code></li>\n\t<li>Pentru 16 puncte, <code>C = 2</code> și <code>10.000 ≤ N ≤ 200.000</code></li>\n\t<li>Pentru 20 puncte, <code>C = 3</code> și <code>1 ≤ N ≤ 5.000</code></li>\n\t<li>Pentru 48 puncte, <code>C = 3</code> și <code>10.000 ≤ N ≤ 200.000</code></li>\n</ul>",
+      "text": "1 ≤ K ≤ N ≤ 200.000 −200.000 ≤ diferențele de nivel ≤ 200.000 Planorul poate ajunge la înălțime negativă în orice moment al zborului. Pentru 12 puncte, C = 1 Pentru 4 puncte, C = 2 și 1 ≤ N ≤ 5.000 Pentru 16 puncte, C = 2 și 10.000 ≤ N ≤ 200.000 Pentru 20 puncte, C = 3 și 1 ≤ N ≤ 5.000 Pentru 48 puncte, C = 3 și 10.000 ≤ N ≤ 200.000"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>planor.in</code></p><pre>1 14 4\n4 -5 3 -2 6 3 -2 -1 4 3 6 -4 2 3</pre><p><code>planor.out</code></p><pre>4</pre><h3>Explicație</h3><p>Plecând de la parcela <code>1</code> de la înălțime <code>0</code> și zburând o singură parcelă către dreapta, planorul va ajunge la înălțimea <code>4</code>, care este maximă posibil.</p>",
+      "text": "planor.in1 14 4 4 -5 3 -2 6 3 -2 -1 4 3 6 -4 2 3planor.out4ExplicațiePlecând de la parcela 1 de la înălțime 0 și zburând o singură parcelă către dreapta, planorul va ajunge la înălțimea 4, care este maximă posibil."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>planor.in</code></p><pre>2 14 4\n4 -5 3 -2 6 3 -2 -1 4 3 6 -4 2 3</pre><p><code>planor.out</code></p><pre>12</pre><h3>Explicație</h3><p>Plecând de la parcela <code>8</code> de la înălțime <code>0</code> și zburând patru parcele către dreapta, planorul va ajunge la înălțimea <code>12</code>. Aceasta este înălțimea maximă posibilă.</p>",
+      "text": "planor.in2 14 4 4 -5 3 -2 6 3 -2 -1 4 3 6 -4 2 3planor.out12ExplicațiePlecând de la parcela 8 de la înălțime 0 și zburând patru parcele către dreapta, planorul va ajunge la înălțimea 12. Aceasta este înălțimea maximă posibilă."
+    },
+    {
+      "title": "Exemplul 3:",
+      "html": "<p><code>planor.in</code></p><pre>3 14 4\n4 -5 3 -2 6 3 -2 -1 4 3 6 -4 2 3</pre><p><code>planor.out</code></p><pre>13</pre><h3>Explicație</h3><p>Plecând de la parcela <code>9</code> de la înălțime <code>0</code> și zburând trei parcele către dreapta, planorul va ajunge la înălțimea <code>13</code>. Aceasta este înălțimea maximă posibilă.</p>",
+      "text": "planor.in3 14 4 4 -5 3 -2 6 3 -2 -1 4 3 6 -4 2 3planor.out13ExplicațiePlecând de la parcela 9 de la înălțime 0 și zburând trei parcele către dreapta, planorul va ajunge la înălțimea 13. Aceasta este înălțimea maximă posibilă."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Plecând de la parcela 1 de la înălțime 0 și zburând o singură parcelă către dreapta, planorul va ajunge la înălțimea 4, care este maximă posibil."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Plecând de la parcela 8 de la înălțime 0 și zburând patru parcele către dreapta, planorul va ajunge la înălțimea 12. Aceasta este înălțimea maximă posibilă."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Plecând de la parcela 9 de la înălțime 0 și zburând trei parcele către dreapta, planorul va ajunge la înălțimea 13. Aceasta este înălțimea maximă posibilă."
+    }
+  ],
+  "constraints": [
+    "1 ≤ K ≤ N ≤ 200.000",
+    "−200.000 ≤ diferențele de nivel ≤ 200.000",
+    "Planorul poate ajunge la înălțime negativă în orice moment al zborului.",
+    "Pentru 12 puncte, C = 1",
+    "Pentru 4 puncte, C = 2 și 1 ≤ N ≤ 5.000",
+    "Pentru 16 puncte, C = 2 și 10.000 ≤ N ≤ 200.000",
+    "Pentru 20 puncte, C = 3 și 1 ≤ N ≤ 5.000",
+    "Pentru 48 puncte, C = 3 și 10.000 ≤ N ≤ 200.000"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q8d8384039b.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "10",
+    "intrare/ieșire": "planor.in / planor.out",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "128 MB / 64 MB",
+    "sursa problemei": "Urmașii lui Moisil 2023, clasa a X-a",
+    "autor": "Cristian Frâncu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 128,
+  "author": "Cristian Frâncu",
+  "sourceAttribution": "Urmașii lui Moisil 2023, clasa a X-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4418/planor"
+}

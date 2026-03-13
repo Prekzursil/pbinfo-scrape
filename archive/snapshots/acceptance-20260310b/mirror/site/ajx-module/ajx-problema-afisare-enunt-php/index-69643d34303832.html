@@ -1,0 +1,79 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4082"><article id="enunt">
+			<p>Într-o minunată zi de primăvară, <code>P</code> răţuşte au ieşit la plimbare pe lac. Un pelican milităros, care stătea pe mal, a decis să facă instrucţie cu nevinovatele raţe. Pentru aceasta, a cartografiat imediat lacul şi l-a reprezentat ca o matrice cu <code>N</code> linii (numerotate de la <code>0</code> la <code>N-1</code> de sus în jos) şi <code>N</code> coloane (numerotate de la <code>0</code> la <code>N-1</code> de la stânga la dreapta). Astfel, poziţia oricărei raţe pe lac poate fi identificată prin linia şi coloana pe care se află raţa. Raţele sunt orientate cu faţa spre una dintre direcţiile <code>Nord</code>, <code>Sud</code>, <code>Est</code>, <code>Vest</code>. Pelicanul a codificat direcţiile <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code> ca în figură.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-pelican-01-jpg.jpg"></p>
+
+<p>Când pelicanul strigă: “Comanda la mine!” raţele trebuie să execute simultan cele <code>K</code> comenzi pe care le dă pelicanul. Comenzile pelicanului sunt codificate astfel:</p>
+
+<ul>
+	<li><code>A nr</code> – Raţa avansează cu <code>nr</code> poziţii în direcţia spre care este orientată. Dacă avansând depăşeşte marginea tablei de joc va intra pe latura opusă. De exemplu, pe un lac <code>5 x 5</code>, o raţă plasată în poziţia <code>(1,3)</code> cu orientare <code>1</code> (Nord), executând comanda <code>A</code> <code>3</code> se va deplasa astfel: <code>(1,3) → (0,3) → (4,3) → (3,3)</code>.</li>
+	<li><code>R nr</code> – Raţa se roteşte cu <code>nr • 90</code><sup><code>o</code></sup> în sens orar, unde <code>nr ∈ {1,2,3,4}</code>. De exemplu, dacă orientarea iniţială a raţei este <code>1</code> (Nord), comanda <code>R 2</code> va schimba orientarea spre <code>3</code> (Sud).</li>
+	<li><code>Z nr</code> – Raţa zboară pe linia <code>nr / N</code> şi coloana <code>nr % N</code>, păstrând orientarea. Se garantează că <code>nr / N ∈ {0,1, ..., N - 1}</code>. De exemplu, pe un lac <code>5 x 5</code>, după executarea comenzii <code>Z 7</code>, raţa va ajunge pe linia <code>1</code> şi coloana <code>2</code>.</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care, cunoscând poziţia iniţială pe lac a celor <code>P</code> raţe şi succesiunea comenzilor pelicanului, determină poziţia finală a fiecărei raţe.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>pelican.in</code> conţine pe prima linie trei numere naturale <code>N</code> <code>P</code> <code>K</code>, cu semnificaţia din enunţ. Pe următoarele <code>P</code> linii sunt date câte <code>3</code> numere naturale <code>i</code> <code>j</code> <code>d</code> (<code>0 ≤ i, j &lt; N</code> şi <code>1 ≤ d ≤ 4</code>) cu semnificaţia că pe linia <code>i</code> şi coloana <code>j</code> se găseşte o raţă orientată în direcţia <code>d</code>. Ultimele <code>K</code> linii conţin cele <code>K</code> comenzi, câte o comandă pe o linie, în formatul specificat în enunţ (un caracter din mulţimea {<code>'A'</code>, <code>'R'</code>, <code>'Z'</code>} şi un număr natural). Valorile scrise pe aceeaşi linie sunt separate de câte un spaţiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>pelican.out</code> va conţine <code>P</code> linii. Pe linia <code>i</code> va fi scrisă poziţia celei de a <code>i</code>-a raţe din fişierul de intrare (linia şi coloana separate printr-un singur spaţiu) după executarea în ordine a celor <code>K</code> comenzi.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 1000</code></li>
+	<li><code>1 ≤ P ≤ 10.000</code></li>
+	<li><code>1 ≤ K ≤ 100.000</code></li>
+	<li>Mai multe raţe pot ocupa aceeaşi poziţie.</li>
+	<li>Se garantează că datele din fişierul de intrare sunt corecte.</li>
+	<li>Pentru teste valorând 76 de puncte fişierul de intrare nu conţine comanda <code>Z</code>.</li>
+	<li>Pentru teste valorând 20 de puncte <code>N ≤ 100</code>, <code>P ≤ 100</code> şi <code>K ≤ 1000</code>.</li>
+	<li>Pentru teste valorând 36 de puncte <code>N &gt; 100</code>, <code>1000 ≤ P ≤ 5000</code> şi <code>K ≤ 50000</code>.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>pelican.in</code></p>
+
+<pre>5 3 4
+1 1 2
+2 3 1
+3 1 4
+A 3
+R 3
+A 1
+A 3</pre>
+
+<p><code>pelican.out</code></p>
+
+<pre>2 4
+4 4
+2 3</pre>
+
+<h3>Explicație</h3>
+
+<p>Lacul are <code>5</code> linii şi <code>5</code> coloane. Pe lac există <code>3</code> raţe poziţionate ca în figură.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-pelican-02-jpg.jpg"></p>
+
+<p>Pelicanul dă <code>4</code> comenzi pe care toate cele <code>3</code> raţe le execută în ordine. Raţele execută comanda <code>A</code> <code>3</code></p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-pelican-03-jpg.jpg"></p>
+
+<p>Raţele execută comanda <code>R</code> <code>3</code> (se rotesc cu <code>270</code><sup><code>o</code></sup> în sens orar)</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-pelican-04-jpg.jpg"></p>
+
+<p>Raţele execută comanda <code>A</code> <code>1</code></p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-pelican-05-jpg.jpg"></p>
+
+<p>Raţele execută comanda <code>A</code> <code>3</code></p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-pelican-06-jpg.jpg"></p>		</article>
+		</body></html>

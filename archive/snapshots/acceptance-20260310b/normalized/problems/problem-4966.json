@@ -1,0 +1,345 @@
+{
+  "id": 4966,
+  "slug": "zudt",
+  "name": "zudt",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4966/zudt",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 21,
+      "name": "Probleme cu secvențe",
+      "slug": "probleme-cu-secven-e",
+      "href": "/?pagina=probleme-lista&tag=21"
+    }
+  ],
+  "tags": [
+    "Sume parțiale",
+    "Cautare binara"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Se cunosc numărul <code>N</code> și șirul <code>A</code>. Scrieți un program care să determine răspunsurile pentru următoarele trei întrebări:<br>\n1. Există o poziție <code>i</code> (<code>1 ≤ i &lt; N</code>) cu proprietatea că <code>S(1, i) = S(i+1, N)</code>?<br>\n2. Există o poziție <code>i</code> (<code>1 &lt; i &lt; N</code>) cu proprietatea că <code>S(1,i-1) = S(i+1,N)</code>?<br>\n3. Există două poziții <code>i</code> și <code>j</code> (<code>1 &lt; i</code> și <code>i+1 &lt; j &lt; N</code>) cu proprietatea că <code>S(1,i-1) = S(i+1,j-1) = S(j+1,N)</code>?</p>",
+      "text": "Se cunosc numărul N și șirul A. Scrieți un program care să determine răspunsurile pentru următoarele trei întrebări: 1. Există o poziție i (1 ≤ i < N) cu proprietatea că S(1, i) = S(i+1, N)? 2. Există o poziție i (1 < i < N) cu proprietatea că S(1,i-1) = S(i+1,N)? 3. Există două poziții i și j (1 < i și i+1 < j < N) cu proprietatea că S(1,i-1) = S(i+1,j-1) = S(j+1,N)?"
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>zudt.in</code> conține:  </p><ul>\n\t<li>pe prima linie, un număr natural <code>C</code> (<code>1</code>, <code>2</code> sau <code>3</code>) reprezentând cerința care trebuie rezolvată;</li>\n\t<li>pe a doua linie, numărul natural <code>N</code> cu semnificația din enunț;</li>\n\t<li>pe a treia linie, conține <code>N</code> numere naturale nenule, separate prin câte un spațiu, reprezentând elementele șirului <code>A</code>.</li>\n</ul>",
+      "text": "Fișierul de intrare zudt.in conține: pe prima linie, un număr natural C (1, 2 sau 3) reprezentând cerința care trebuie rezolvată; pe a doua linie, numărul natural N cu semnificația din enunț; pe a treia linie, conține N numere naturale nenule, separate prin câte un spațiu, reprezentând elementele șirului A."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>zudt.out</code> va conține pe prima linie răspunsul determinat pentru cerința <code>C</code>: </p><ul>\n\t<li>Pentru <code>C = 1</code>, prima linie conține un număr natural reprezentând răspunsul la prima intrebare. Dacă există o astfel de poziție <code>i</code> astfel încât <code>S(1,i) = S(i+1,N)</code>, atunci răspunsul este numărul <code>i</code>. Dacă nu există, atunci răspunsul este numărul <code>0</code>.</li>\n\t<li>Pentru <code>C = 2</code>, prima linie conține un număr natural reprezentând răspunsul la a doua intrebare. Dacă există o astfel de poziție <code>i</code> astfel încât <code>S(1,i-1) = S(i+1,N)</code>, atunci răspunsul este numărul <code>i</code>. Dacă nu există, atunci răspunsul este numărul <code>0</code>.</li>\n\t<li>Pentru <code>C = 3</code>, prima linie conține două numere naturale, separate printr-un singur spațiu, reprezentând răspunsul la a treia intrebare. Dacă există două poziții distincte <code>i</code> și <code>j</code> astfel încât <code>S(1,i-1) = S(i+1,j-1) = S(j+1, N)</code>, atunci răspunsul este format din numărul <code>i</code> și numărul <code>j</code>, în această ordine. Dacă nu există, atunci răspunsul este numărul <code>0</code>.</li>\n</ul>",
+      "text": "Fișierul de ieșire zudt.out va conține pe prima linie răspunsul determinat pentru cerința C: Pentru C = 1, prima linie conține un număr natural reprezentând răspunsul la prima intrebare. Dacă există o astfel de poziție i astfel încât S(1,i) = S(i+1,N), atunci răspunsul este numărul i. Dacă nu există, atunci răspunsul este numărul 0. Pentru C = 2, prima linie conține un număr natural reprezentând răspunsul la a doua intrebare. Dacă există o astfel de poziție i astfel încât S(1,i-1) = S(i+1,N), atunci răspunsul este numărul i. Dacă nu există, atunci răspunsul este numărul 0. Pentru C = 3, prima linie conține două numere naturale, separate printr-un singur spațiu, reprezentând răspunsul la a treia intrebare. Dacă există două poziții distincte i și j astfel încât S(1,i-1) = S(i+1,j-1) = S(j+1, N), atunci răspunsul este format din numărul i și numărul j, în această ordine. Dacă nu există, atunci răspunsul este numărul 0."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>C ∈ {1, 2, 3}</code></li>\n\t<li><code>5 ≤ N ≤ 200.000</code></li>\n\t<li><code>1 ≤ a[i] ≤ 1000</code>, <code>i = 1, 2, ..., N</code></li>\n\t<li><code>S(i,i) = a[i]</code>, <code>i = 1, 2, ..., N</code></li>\n\t<li>Pentru 60 de puncte, <code>C = 1</code> și <code>N ≤ 1000</code></li>\n\t<li>Pentru 20 de puncte, <code>C = 2</code> și <code>N ≤ 200.000</code></li>\n\t<li>Pentru 20 de puncte, <code>C = 3</code> și <code>N ≤ 200.000</code></li>\n</ul>",
+      "text": "C ∈ {1, 2, 3} 5 ≤ N ≤ 200.000 1 ≤ a[i] ≤ 1000, i = 1, 2, ..., N S(i,i) = a[i], i = 1, 2, ..., N Pentru 60 de puncte, C = 1 și N ≤ 1000 Pentru 20 de puncte, C = 2 și N ≤ 200.000 Pentru 20 de puncte, C = 3 și N ≤ 200.000"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>zudt.in</code></p><pre>1\n9\n2 3 1 4 2 4 4 5 15</pre><p><code>zudt.out</code></p><pre>7</pre><h3>Explicație</h3><p><code>i = 7</code>, <code>S(1, 7)=20</code> și <code>S(8,9)=20</code></p>",
+      "text": "zudt.in1 9 2 3 1 4 2 4 4 5 15zudt.out7Explicației = 7, S(1, 7)=20 și S(8,9)=20"
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>zudt.in</code></p><pre>1\n5\n2 3 1 4 6</pre><p><code>zudt.out</code></p><pre>0</pre><h3>Explicație</h3><p>Nu există o poziție <code>i</code> cu proprietatea cerută.<br>\n<code>S(1,1)=2</code>, <code>S(2,5)=14</code>, <code>2 ≠ 14</code><br>\n<code>S(1,2)=3</code>, <code>S(3,5)=13</code>, <code>3 ≠ 13</code><br>\n<code>S(1,3)=6</code>, <code>S(4,5)=10</code>, <code>6 ≠ 10</code><br>\n<code>S(1,4)=10</code>, <code>S(5,5)=6</code>, <code>10 ≠ 5</code></p>",
+      "text": "zudt.in1 5 2 3 1 4 6zudt.out0ExplicațieNu există o poziție i cu proprietatea cerută. S(1,1)=2, S(2,5)=14, 2 ≠ 14 S(1,2)=3, S(3,5)=13, 3 ≠ 13 S(1,3)=6, S(4,5)=10, 6 ≠ 10 S(1,4)=10, S(5,5)=6, 10 ≠ 5"
+    },
+    {
+      "title": "Exemplul 3:",
+      "html": "<p><code>zudt.in</code></p><pre>2\n5\n2 3 1 4 2</pre><p><code>zudt.out</code></p><pre>0</pre><h3>Explicație</h3><p>Nu există o poziție <code>i</code> cu proprietatea cerută.<br>\n<code>i=2</code>, <code>S(1,1)=2</code>, <code>S(3,5)=7</code>, <code>2 ≠ 7</code><br>\n<code>i=3</code>, <code>S(1,2)=5</code>, <code>S(4,5)=6</code>, <code>5 ≠ 6</code><br>\n<code>i=4</code>, <code>S(1,3)=6</code>, <code>S(5,5)=2</code>, <code>6 ≠ 2</code></p>",
+      "text": "zudt.in2 5 2 3 1 4 2zudt.out0ExplicațieNu există o poziție i cu proprietatea cerută. i=2, S(1,1)=2, S(3,5)=7, 2 ≠ 7 i=3, S(1,2)=5, S(4,5)=6, 5 ≠ 6 i=4, S(1,3)=6, S(5,5)=2, 6 ≠ 2"
+    },
+    {
+      "title": "Exemplul 4:",
+      "html": "<p><code>zudt.in</code></p><pre>2\n9\n2 3 1 4 202 7 1 1 1</pre><p><code>zudt.out</code></p><pre>5</pre><h3>Explicație</h3><p><code>i=5</code>, <code>S(1,4)=10</code> și <code>S(6,9)=10</code></p>",
+      "text": "zudt.in2 9 2 3 1 4 202 7 1 1 1zudt.out5Explicației=5, S(1,4)=10 și S(6,9)=10"
+    },
+    {
+      "title": "Exemplul 5:",
+      "html": "<p><code>zudt.in</code></p><pre>3\n9\n2 3 1 8 6 7 2 2 2</pre><p><code>zudt.out</code></p><pre>4 6</pre><h3>Explicație</h3><p><code>i = 4</code> și <code>j = 6</code>, <code>S(1,3) = 6</code>, <code>S(5,5) = 6</code> și <code>S(7,9) = 6</code></p>",
+      "text": "zudt.in3 9 2 3 1 8 6 7 2 2 2zudt.out4 6Explicației = 4 și j = 6, S(1,3) = 6, S(5,5) = 6 și S(7,9) = 6"
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "i = 7, S(1, 7)=20 și S(8,9)=20"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Nu există o poziție i cu proprietatea cerută. S(1,1)=2, S(2,5)=14, 2 ≠ 14 S(1,2)=3, S(3,5)=13, 3 ≠ 13 S(1,3)=6, S(4,5)=10, 6 ≠ 10 S(1,4)=10, S(5,5)=6, 10 ≠ 5"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Nu există o poziție i cu proprietatea cerută. i=2, S(1,1)=2, S(3,5)=7, 2 ≠ 7 i=3, S(1,2)=5, S(4,5)=6, 5 ≠ 6 i=4, S(1,3)=6, S(5,5)=2, 6 ≠ 2"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "i=5, S(1,4)=10 și S(6,9)=10"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "i = 4 și j = 6, S(1,3) = 6, S(5,5) = 6 și S(7,9) = 6"
+    }
+  ],
+  "constraints": [
+    "C ∈ {1, 2, 3}",
+    "5 ≤ N ≤ 200.000",
+    "1 ≤ a[i] ≤ 1000, i = 1, 2, ..., N",
+    "S(i,i) = a[i], i = 1, 2, ..., N",
+    "Pentru 60 de puncte, C = 1 și N ≤ 1000",
+    "Pentru 20 de puncte, C = 2 și N ≤ 200.000",
+    "Pentru 20 de puncte, C = 3 și N ≤ 200.000"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q6e2501ef88.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "zudt.in / zudt.out",
+    "limită timp": "0.2 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "OJI 2026, clasa a 6-a",
+    "autor": "Pracsiu Dan",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.2,
+  "memoryLimitMb": 64,
+  "author": "Pracsiu Dan",
+  "sourceAttribution": "OJI 2026, clasa a 6-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4966/zudt"
+}

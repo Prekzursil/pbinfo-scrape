@@ -1,0 +1,102 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4141"><article id="enunt">
+			<p>Gimi tocmai a câștigat o licitație pentru asfaltarea unei noi autostrăzi. Firma lui este responsabilă de prelucrarea zonelor dintr-o suprafață bidimensională de dimensiuni <code>N × N</code>. Știm că dacă un drum va trece prin a <code>i</code>-a linie, respectiv a <code>j</code>-a coloană, atunci acea zonă de la poziția <code>(i, j)</code> va trebui asfaltată. Liniile și coloanele suprafeței bidimensionale sunt numerotate de la <code>1</code> la <code>N</code>. Din nefericire pentru el, a aflat abia după semnarea contractului că proiectul nu este așa de simplu precum a crezut. Drumul va fi determinat de traseul<br>
+urmat de o dronă. Mai mult, Gimi nici nu știe acest traseu, dar a primit de la proiectantul autostrăzii poziția inițială a dronei <code>(ls, cs)</code>, reprezentând linia și coloana zonei în care se află inițial drona, și o listă de <code>K</code> instrucțiuni pe care acesta le-a aplicat dronei.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-autostrada1-001-jpg.jpg"></p>
+
+<p>Fiecare instrucțiune este o pereche de tipul <code>(dir, p)</code>, cu semnificația că drona s-a deplasat pe direcția <code>dir</code> cu <code>p</code> unități, unde <code>dir</code> poate avea următoarele valori:</p>
+
+<ul>
+	<li><code>0</code> – direcția Nord</li>
+	<li><code>1</code> – direcția Est</li>
+	<li><code>2</code> – direcția Sud</li>
+	<li><code>3</code> – direcția Vest</li>
+</ul>
+
+<p>Spre exemplu, dacă drona se află în poziția <code>(1, 3)</code> și a primit instrucțiunea <code>(2, 3)</code>, atunci drona se va deplasa spre sud (direcția <code>2</code>) cu <code>3</code> unități și va parcurge zonele <code>(2, 3)</code>, <code>(3, 3)</code> și <code>(4, 3)</code> unde se va opri. Toate aceste zone vor trebui asfaltate de firma lui Gimi.</p>
+
+<p>Costul de asfaltare al unei zone prin care trece un drum simplu este <code>C</code><sub><code>z</code></sub>. Din fericire pentru Gimi, o zonă parcursă de mai multe ori de dronă trebuie asfaltată o singură dată. Însă, el a observat că pot apărea niște cazuri particulare:</p>
+
+<ul>
+	<li>Dacă într-o zonă se produce o intersecție de tip <code>⊤</code>, înseamnă că este nevoie de benzi de accelerare/decelerare în intersecție. Atunci costul de asfaltare al zonei devine <code>C</code><sub><code>t</code></sub>.</li>
+	<li>Dacă într-o zonă se produce o intersecție de tip <code>+</code>, înseamnă că este nevoie de construirea unui pod, caz în care costul de asfaltare al zonei devine <code>C</code><sub><code>p</code></sub>.</li>
+</ul>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-autostrada1-002-jpg.jpg"></p>
+
+<h1>Cerința</h1>
+
+<p>Având aceste informații, Gimi vrea să verifice dacă traseul dronei este valid, adică drona nu va părăsi niciodată suprafața de care este responsabilă firma lui Gimi. În cazul în care traseul este invalid Gimi vrea să știe a câta instrucțiune dintre cele <code>K</code> a determinat mutarea dronei în afara suprafeței. Dacă traseul este valid, el vrea să determine costul total de asfaltare al autostrăzii.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Prima linie din fișierul de intrare <code>autostrada.in</code> va conține patru numere naturale <code>N</code>, <code>K</code>, <code>ls</code> și <code>cs</code>, unde <code>N</code> este dimensiunea suprafeței, <code>K</code> este numărul de instrucțiuni aplicate dronei, iar <code>(ls, cs)</code> reprezintă linia și coloana zonei în care se află inițial drona. A doua linie va conține trei numere naturale <code>C</code><sub><code>z</code></sub>, <code>C</code><sub><code>t</code></sub> și <code>C</code><sub><code>p</code></sub>, reprezentând costurile de asfaltare ale unei zone simple, unei intersecții de tip <code>⊤</code>, respectiv unei intersecții de tip <code>+</code>. Următoarele <code>K</code> linii vor conține câte două numere naturale <code>dir</code><sub><code>i</code></sub> și <code>p</code><sub><code>i</code></sub>, reprezentând valorile specifice celei de-a <code>i</code>-a instrucțiuni primite de dronă. Numerele scrise pe aceeași linie sunt separate printr-un singur spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă traseul dronei este invalid, pe prima linie din fișierul de ieșire <code>autostrada.out</code> se va afișa textul<br>
+<code>TRASEU INVALID</code>, iar apoi, pe a doua linie, un singur număr natural, reprezentând a câta instrucțiune dintre cele <code>K</code> a determinat mutarea dronei în afara suprafeței. Altfel, pe prima linie din fișierul de ieșire se va afișa textul <code>TRASEU VALID</code>, iar apoi, pe a doua linie, un singur număr natural reprezentând costul total necesar pentru asfaltarea autostrăzii.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N ≤ 2000</code></li>
+	<li><code>1 ≤ K ≤ 1.000.000</code></li>
+	<li><code>1 ≤ ls, cs ≤ N</code></li>
+	<li><code>1 ≤ Cz, Ct, Cp ≤ 100</code></li>
+	<li><code>dir</code><sub><code>i</code></sub> <code>∈ {0, 1, 2, 3}</code> pentru orice <code>1 ≤ i ≤ K</code></li>
+	<li><code>1 ≤ p</code><sub><code>i</code></sub> <code>≤ N</code> pentru orice <code>1 ≤ i ≤ K</code></li>
+	<li>Poziția inițială și poziția finală a dronei trebuie asfaltate.</li>
+	<li>Datorită testelor mari, doar unele au fost adăugate</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>autostrada.in</code></p>
+
+<pre>3 3 1 1
+1 2 3
+1 2
+2 3
+3 1</pre>
+
+<p><code>autostrada.out</code></p>
+
+<pre>TRASEU INVALID
+2</pre>
+
+<h3>Explicație</h3>
+
+<p>Cu verde s-au marcat zonele ce trebuiesc asfaltate, iar cu linii albe s-a indicat traseul dronei. Zonele gri sunt zone nevizitate de traseul dronei. A doua instrucțiune este invalidă, drona ieșind din suprafață întrucât ar ajunge in coordonatele <code>(4, 3)</code>.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-autostrada1-003-jpg.jpg"></p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>autostrada.in</code></p>
+
+<pre>5 7 2 1
+1 2 3
+1 4
+2 2
+3 3
+0 3
+1 2
+2 1
+3 3</pre>
+
+<p><code>autostrada.out</code></p>
+
+<pre>TRASEU VALID
+17</pre>
+
+<h3>Explicație</h3>
+
+<p>Traseul determinat de dronă este:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-autostrada1-004-jpg.jpg"></p>
+
+<p>Se observă că toate zonele, mai puțin <code>(2, 2)</code> și <code>(2, 4)</code> sunt simple, adică nu sunt intersecții, și fiecare au<br>
+costul de asfaltare <code>Cz = 1</code>. În <code>(2, 2)</code> avem o intersecție de tip <code>+</code>, deci costul de asfaltare va fi <code>Cp = 3</code>.<br>
+În <code>(2, 4)</code> avem o intersecție de tip <code>⊤</code>, deci costul de asfaltare va fi <code>Ct = 2</code>. În total, costul este <code>12 × 1 + 1 × 2 + 1 × 3 = 17</code>.</p>		</article>
+		</body></html>

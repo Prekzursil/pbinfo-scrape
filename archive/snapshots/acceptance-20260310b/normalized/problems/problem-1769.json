@@ -1,0 +1,300 @@
+{
+  "id": 1769,
+  "slug": "albume",
+  "name": "albume",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1769/albume",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 116,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=116"
+    },
+    {
+      "id": 117,
+      "name": "Matematica",
+      "slug": "matematica",
+      "href": "/?pagina=probleme-lista&tag=117"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul <code>albume.in</code> conține pe prima linie trei valori separate prin spațiu: <code>C K Q</code>.</p>",
+      "text": "Fișierul albume.in conține pe prima linie trei valori separate prin spațiu: C K Q."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul <code>albume.out</code> trebuie să conțină pe prima linie o singură valoare reală: media aritmetică a valorilor notate de Tudoraș. </p>",
+      "text": "Fișierul albume.out trebuie să conțină pe prima linie o singură valoare reală: media aritmetică a valorilor notate de Tudoraș."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ C, K ≤ 1000</code></li>\n\t<li><code>1 ≤ Q ≤ min(1000, C*K)</code></li>\n\t<li>Pentru teste în valoare de 10 puncte, <code>K = 1</code>.</li>\n\t<li>Pentru alte teste în valoare de 10 puncte, <code>Q = C * K</code>.</li>\n\t<li>Pentru alte teste în valoare de 20 de puncte, <code>C * K ≤ 10</code>.</li>\n\t<li>În fiecare zi, toate albumele au probabilitate egală de a fi extrase.</li>\n\t<li>Rezultatul este considerat corect dacă are o eroare absolută de cel mult <code>10</code><sup><code>-6</code></sup>.</li>\n</ul>",
+      "text": "1 ≤ C, K ≤ 1000 1 ≤ Q ≤ min(1000, C*K) Pentru teste în valoare de 10 puncte, K = 1. Pentru alte teste în valoare de 10 puncte, Q = C * K. Pentru alte teste în valoare de 20 de puncte, C * K ≤ 10. În fiecare zi, toate albumele au probabilitate egală de a fi extrase. Rezultatul este considerat corect dacă are o eroare absolută de cel mult 10-6."
+    },
+    {
+      "title": "Exemplul 1",
+      "html": "<p><code>albume.in</code></p><pre>2 2 2</pre><p><code>albume.out</code></p><pre>1.666666667</pre>",
+      "text": "albume.in2 2 2albume.out1.666666667"
+    },
+    {
+      "title": "Exemplul 2",
+      "html": "<p><code>albume.in</code></p><pre>232 654 27&nbsp;</pre><p><code>albume.out</code></p><pre>25.542102567&nbsp;</pre>",
+      "text": "albume.in232 654 27 albume.out25.542102567"
+    },
+    {
+      "title": "Explicații",
+      "html": "<p>În primul exemplu, există două formații, fiecare cu două albume. Numerotăm albumele în următorul fel:&nbsp;</p><ul>\n\t<li><code>a1 = 1</code> (primul album al primei formații)&nbsp;</li>\n\t<li><code>a2 = 1</code> (al doilea album al primei formații)&nbsp;</li>\n\t<li><code>a3 = 2</code> (primul album al celei de-a doua formații)&nbsp;</li>\n\t<li><code>a4 = 2</code> (al doilea album al celei de-a doua formații)&nbsp;</li>\n</ul><p>Prin alegerea la întâmplare a două albume, pot apărea următoarele configurații:&nbsp;</p><table class=\"table\">\n\t\t<tbody><tr>\n\t\t\t<td> <ol><br>\n</ol></td>\n\t\t\t<td> &nbsp;Albume alese&nbsp;</td>\n\t\t\t<td> &nbsp;Formații&nbsp;</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td> 1&nbsp;</td>\n\t\t\t<td> a1, a2&nbsp;</td>\n\t\t\t<td> 1&nbsp;</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td> 2&nbsp;</td>\n\t\t\t<td> a1, a3&nbsp;</td>\n\t\t\t<td> 1, 2&nbsp;</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td> 3&nbsp;</td>\n\t\t\t<td> a1, a4&nbsp;</td>\n\t\t\t<td> 1, 2&nbsp;</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td> 4&nbsp;</td>\n\t\t\t<td> a2, a1&nbsp;</td>\n\t\t\t<td> 1&nbsp;</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td> 5&nbsp;</td>\n\t\t\t<td> a2, a3&nbsp;</td>\n\t\t\t<td> 1, 2&nbsp;</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td> 6&nbsp;</td>\n\t\t\t<td> a2, a4 </td>\n\t\t\t<td> 1, 2&nbsp;</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td> 7&nbsp;</td>\n\t\t\t<td> a3, a1&nbsp;</td>\n\t\t\t<td> 2, 1&nbsp;</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td> 8&nbsp;</td>\n\t\t\t<td> a3, a2&nbsp;</td>\n\t\t\t<td> 2, 1&nbsp;</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td> 9&nbsp;</td>\n\t\t\t<td> a3, a4&nbsp;</td>\n\t\t\t<td> 2&nbsp;</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td>10&nbsp;</td>\n\t\t\t<td> a4, a1&nbsp;</td>\n\t\t\t<td>2, 1&nbsp;</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td>11&nbsp;</td>\n\t\t\t<td> a4, a2&nbsp;</td>\n\t\t\t<td>2, 1&nbsp;</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td>12&nbsp;</td>\n\t\t\t<td> a4, a3&nbsp;</td>\n\t\t\t<td>2&nbsp;</td>\n\t\t</tr>\n</tbody></table><p>Suma numărului de formații din fiecare caz este egală cu <code>1+2+2+1+2+2+2+2+1+2+2+1 = 20</code>. </p><p>Cele <code>12</code> cazuri au probabilitate egală de a se întâmpla. </p><p>Rezultatul este <code>20 / 12 = 1.(6)</code> </p>",
+      "text": "În primul exemplu, există două formații, fiecare cu două albume. Numerotăm albumele în următorul fel: a1 = 1 (primul album al primei formații) a2 = 1 (al doilea album al primei formații) a3 = 2 (primul album al celei de-a doua formații) a4 = 2 (al doilea album al celei de-a doua formații) Prin alegerea la întâmplare a două albume, pot apărea următoarele configurații: Albume alese Formații 1 a1, a2 1 2 a1, a3 1, 2 3 a1, a4 1, 2 4 a2, a1 1 5 a2, a3 1, 2 6 a2, a4 1, 2 7 a3, a1 2, 1 8 a3, a2 2, 1 9 a3, a4 2 10 a4, a1 2, 1 11 a4, a2 2, 1 12 a4, a3 2 Suma numărului de formații din fiecare caz este egală cu 1+2+2+1+2+2+2+2+1+2+2+1 = 20. Cele 12 cazuri au probabilitate egală de a se întâmpla. Rezultatul este 20 / 12 = 1.(6)"
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "1 ≤ C, K ≤ 1000",
+    "1 ≤ Q ≤ min(1000, C*K)",
+    "Pentru teste în valoare de 10 puncte, K = 1.",
+    "Pentru alte teste în valoare de 10 puncte, Q = C * K.",
+    "Pentru alte teste în valoare de 20 de puncte, C * K ≤ 10.",
+    "În fiecare zi, toate albumele au probabilitate egală de a fi extrase.",
+    "Rezultatul este considerat corect dacă are o eroare absolută de cel mult 10-6."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qb22a192232.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Chetreanu Raluca (ralucadenisa)",
+    "clasa": "11",
+    "intrare/ieșire": "albume.in / albume.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "16 MB / 8 MB",
+    "sursa problemei": "Concursul Interjudeţean de Matematică şi Informatică Grigore Moisil, 2016",
+    "autor": "-",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 16,
+  "sourceAttribution": "Concursul Interjudeţean de Matematică şi Informatică Grigore Moisil, 2016",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1769/albume"
+}

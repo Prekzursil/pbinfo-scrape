@@ -1,0 +1,152 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1215"><article id="enunt">
+			<p>În țara lui Piticot cuvintele au doar două litere, prima fiind o majusculă (literă mare) iar a doua o minusculă (literă mică). Piticii <em>Mi</em> și <em>Gi</em> se distrează și își trimit mesaje ascunzând cuvintele în cadrul unor secvențe transmise sub forma unor șiruri de litere. Piticul <em>Mi</em> scrie și trimite un mesaj piticului <em>Gi</em> respectând următoarele reguli:</p>
+
+<ul>
+	<li>un mesaj conține una sau mai multe secvențe;</li>
+	<li>orice literă care apare în mesaj, de cel puțin două ori, pe poziții alăturate, este numită terminator;</li>
+	<li>o secvență se  încheie când s-a întâlnit o succesiune de litere terminator;</li>
+	<li>cuvântul este format din prima majusculă și ultima minusculă din secvență, fără a lua în seamă litera terminator a secvenței;</li>
+	<li>o secvență ascunde un cuvânt dacă terminatorul său se repetă de exact două ori și dacă conține cel puțin o literă mare și o literă mică, ignorând terminatorul de secvență;</li>
+	<li>costul unui cuvânt este egal cu numărul total de apariții al celor două litere din care este format, în cadrul secvenței în care a fost ascuns, luând în considerare inclusiv literele terminator.</li>
+</ul>
+
+<p>De exemplu secvența  <code>s f u E e t R u E E</code> ascunde un cuvânt deoarece conține și majuscule și minuscule, iar litera terminator de secvență,  <code>E</code>, se repetă de exact două ori. Secvența ascunde cuvântul <code>Eu</code>, iar costul cuvântului este <code>5</code> (<code>3</code> litere <code>E</code> + <code>2</code> două litere <code>u</code>). </p>
+
+<p>La primirea mesajului, piticul <em>Gi</em> determină, pentru fiecare majusculă, costul maxim al cuvintelor care încep cu aceasta.</p>
+
+<h1>Cerinţe</h1>
+
+<p>Scrieţi un program care determină:</p>
+
+<p>1) numărul de secvențe trimise care nu ascund cuvinte;<br>
+2) cuvintele din mesaj, în ordinea în care au fost trimise de piticul <em>Mi</em>; <br>
+3) pentru fiecare majusculă, câte cuvinte care încep cu ea au costul maxim determinat de <em>Gi</em>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>mesaj.in</code> conţine pe prima linie un număr natural <code>P</code>. Pentru toate testele de intrare, numărul <code>P</code> poate avea numai una dintre valorile <code>1</code>, <code>2</code> sau <code>3</code>. Pe a doua linie a fișierului de intrare se găsește  numărul natural N reprezentând numărul de litere folosite de <em>Mi</em> pentru scrierea mesajului. Pe a treia linie se găsesc <code>N</code> litere mari și mici ale alfabetului englez, separate prin câte un spațiu, reprezentând literele mesajului, în ordinea în care au fost trimise.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă valoarea lui <code>P</code> este <code>1</code>, se va rezolva numai punctul 1) din cerințe. În acest caz, fişierul de ieşire <code>mesaj.out</code> va conține pe prima linie un număr natural reprezentând răspunsul la cerinţa 1).</p>
+
+<p>Dacă valoarea lui <code>P</code> este <code>2</code>, se va rezolva numai punctul 2) din cerințe. În acest caz, fişierul de ieşire <code>mesaj.out</code> va conține cuvintele din mesaj, fiecare cuvânt scris pe câte o linie, în ordinea în care au fost trimise.</p>
+
+<p>Dacă valoarea lui <code>P</code> este <code>3</code>, se va rezolva numai punctul 3) din cerințe. În acest caz, fişierul de ieşire <code>mesaj.out</code> va conține pe fiecare linie câte o majusculă urmată de un număr natural nenul, separate printr-un spațiu. Majusculele vor fi afișate în ordine de la <code>A</code> la <code>Z</code>, însă doar cele pentru care au existat în mesaj cuvinte care au început cu ele. </p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 2000000</code></li>
+	<li>litera terminator a unei secvențe poate fi ori minusculă ori majusculă;</li>
+	<li>ultimele litere din fișier sunt literele terminator ale ultimei secvențe din mesajul trimis;<br>
+se garantează că în șirul de litere din fișierul de intrare se află ascuns cel puțin un cuvânt;</li>
+	<li>majusculele alfabetului englez sunt <code>A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z</code>;</li>
+	<li>pentru 50% din teste <code>N ≤ 1000000</code></li>
+	<li>Pentru rezolvarea cerinţei 1) se acordă 20 de puncte, pentru rezolvarea cerinţei 2) se acordă 40 de puncte, iar pentru rezolvarea cerinţei 3) se acordă 40 de puncte.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>mesaj.in</code></p>
+
+<pre>1
+34
+w w w w e D o r F D o r r t R n e R e y y j j i M o e i t t t j w w</pre>
+
+<p><code>mesaj.out</code></p>
+
+<pre>4</pre>
+
+<h3>Explicație</h3>
+
+<p>Textul conține șase secvențe:</p>
+
+<ol>
+	<li><code>w w w w</code></li>
+	<li><code>e D o r F D o r r</code></li>
+	<li><code>t R n e R e y y</code></li>
+	<li><code>j j</code></li>
+	<li><code>i M o e i t t t</code></li>
+	<li><code>j w w</code></li>
+</ol>
+
+<p>Sunt <code>4</code> secvențe care nu ascund cuvinte:</p>
+
+<ul>
+	<li>prima secvență și a patra deoarece conțin numai terminatorul;</li>
+	<li>secvența a cincea nu se decodifică deoarece terminatorul se repetă de mai mult de două ori;</li>
+	<li>secvența a șasea nu conține majuscule.</li>
+</ul>
+
+<h1>Exemplul 2</h1>
+
+<p><code>mesaj.in</code></p>
+
+<pre>2
+34
+u N a a e D o r F D o r r t R n e R e y y j j i M o e i t t t j w w</pre>
+
+<p><code>mesaj.out</code></p>
+
+<pre>Nu
+Do 
+Re</pre>
+
+<h3>Explicație</h3>
+
+<p>Textul conține șase secvențe:</p>
+
+<ol>
+	<li><code>u N a a</code></li>
+	<li><code>e D o r F D o r r</code></li>
+	<li><code>t R n e R e y y</code></li>
+	<li><code>j j</code></li>
+	<li><code>i M o e i t t t</code></li>
+	<li><code>j w w</code></li>
+</ol>
+
+<p>Prima secvență are terminatorul <code>a</code> care se repetă de două ori și ascunde cuvântul <code>Nu</code><br>
+A doua secvență are terminatorul <code>r</code> și ascunde cuvântul <code>Do</code>.<br>
+A treia are terminatorul <code>y</code> și ascunde cuvântul <code>Re</code>. <br>
+Ultimele trei secvențe nu ascund cuvinte.</p>
+
+<h1>Exemplul 3</h1>
+
+<p><code>mesaj.in</code></p>
+
+<pre>3
+24
+A a t t B b B t t e A e a n n B w I I F i e F F</pre>
+
+<p><code>mesaj.out</code></p>
+
+<pre>A 2
+B 1
+F 1</pre>
+
+<h3>Explicație</h3>
+
+<p>Textul conține cinci secvențe:</p>
+
+<ol>
+	<li><code>A a t t </code></li>
+	<li><code>B b B t t</code></li>
+	<li><code>e A e a n n</code></li>
+	<li><code>B w I I</code></li>
+	<li><code>F i e F F</code></li>
+</ol>
+
+<p>Cuvintele transmise în mesaj sunt </p>
+
+<ol>
+	<li><code>Aa</code> (cost <code>2</code>)</li>
+	<li><code>Bb</code> (cost <code>3</code>)</li>
+	<li><code>Aa</code> (cost <code>2</code>)</li>
+	<li><code>Bw</code> (cost <code>2</code>)</li>
+	<li><code>Fe</code> (cost <code>4</code>)</li>
+</ol>
+
+<p>Costul maxim al cuvintelor care încep cu <code>A</code> este <code>2</code> și au fost <code>2</code> cuvinte transmise. Pentru litera <code>B</code> s-a transmis un singur cuvânt de cost maxim <code>3</code>.<br>
+Pentru litera <code>F</code> s-a transmis un singur cuvânt de cost maxim <code>4</code>.</p>		</article>
+		</body></html>

@@ -1,0 +1,59 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3109"><article id="enunt">
+			Cel mai lung tunel al autostrăzii Moldovei (?!) are lungimea <code>L</code> (exprimată în metri) și are un singur sens de deplasare. Autovehiculele care tranzitează tunelul se deplasează cu viteză constantă. Tunelul este monitorizat video permanent. Dacă sunt sesizate incidente, atunci conform protocolului situațiilor de urgență, se produc următoarele evenimente:
+<ul>
+	<li>este oprită intrarea în tunel;</li>
+	<li>autovehiculele aflate în tunel sunt localizate prin detectarea poziției <code>x</code> față de intrarea în tunel precum și a vitezei de deplasare v;</li>
+	<li>se interzice depășirea unui alt autovehicul.</li>
+</ul>
+
+<p>Din păcate, pe perioada protocolului, în tunel se formează grupuri (stauband) de autovehicule, viteza de deplasare a grupului de mașini fiind adaptată la viteza primei mașini din grup, locația de referință (poziția) autovehiculului care se adaugă unui stauband va deveni locația primului autovehicul din stauband. Se presupune că atât autovehiculele cât și staubandurile formate au reprezentări punctiforme.  </p>
+
+<h1>Cerința</h1>
+
+<p>1) numărul de staubanduri formate până la părăsirea tunelului de către toate autovehiculele în cazul activării protocolului;<br>
+2) numărul maxim de autovehicule aflate într-un grup (stauband).</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>tunel.in</code> conține pe prima linie numerele naturale nenule <code>N</code> și <code>L</code> cu semnificația din enunț. Pe următoarele <code>N</code> linii se găsesc <code>N</code> perechi de numere naturale nenule x v ce reprezintă poziția față de intrarea în tunel, respectiv viteza de deplasare a autovehiculului <code>i</code> (<code>1 ≤ i ≤ N</code>).</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>tunel.out</code> va conține două valori naturale, câte una pe linie, ce reprezintă numărul de staubanduri formate respectiv numărul maxim de autovehicule aflate într-un stauband. </p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 &lt; N ≤ 50000</code>;</li>
+	<li><code>1 &lt; L ≤ 50000</code>;</li>
+	<li><code>0 &lt; x &lt; L</code>, <code>x</code> – număr natural;</li>
+	<li><code>0 &lt; v &lt; 100</code>, <code>v</code> – număr natural;</li>
+	<li>Un stauband conține cel puțin un autovehicul;</li>
+	<li>Poziția (locația) este exprimată în metri iar viteza de deplasare în metri/secundă;</li>
+	<li>Locațiile inițiale ale vehiculelor în tunel sunt distincte două câte două;</li>
+	<li>Se consideră că un stauband a ieșit din tunel atunci când coordonata <code>x</code> a acestuia este mai mare decât <code>L</code>;</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>tunel.in</code></p>
+
+<pre>5 13
+10 2
+8 4
+1 3
+4 1
+2 2</pre>
+
+<p><code>tunel.out</code></p>
+
+<pre>2
+3</pre>
+
+<h3>Explicație</h3>
+
+<p>După o secundă de deplasare, autovehiculele <code>m1</code> (<code>x=1</code>, <code>v=3</code>) și <code>m2</code> (<code>x=2</code>, <code>v=2</code>) formează un stauband ce se va deplasa cu viteza <code>v=2</code>, iar autovehiculele <code>m4</code> (<code>x=8</code>, <code>v=4</code>) și <code>m5</code> (<code>x=10</code>, <code>v=2</code>) formează un stauband Acesta se va deplasa cu viteza <code>v=2</code>.<br>
+După încă o secundă se formează stauband <code>m1</code>, <code>m2</code>, <code>m3</code> care se deplasează cu viteza <code>v=1</code>.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-tunel-jpg.jpg"></p>		</article>
+		</body></html>

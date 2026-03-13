@@ -1,0 +1,48 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2561"><article id="enunt">
+			<p>Se consideră un set de două șiruri de caractere <code>X</code> și <code>Y</code>. Șirul <code>X</code> este format din caractere din mulțimea <code>{'A'..'Z', 'a' ..'z', '*'}</code>, iar șirul <code>Y</code> este format din caractere din mulțimea <code>{'A'..'Z', 'a'..'z'}</code>. Lungimea șirului <code>Y</code> este mai mare sau egală cu numărul de caractere <code>*</code> din <code>X</code>. Caracterele <code>*</code> din șirul <code>X</code> vor fi înlocuite cu caractere din <code>Y</code>, evident fără a depăși numărul de apariții ale acestora.</p>
+
+<h1>Cerința</h1>
+
+<p>Fiind date <code>N</code> seturi de câte două șiruri fiecare, (<code>X</code><sub><code>1</code></sub>, <code>Y</code><sub><code>1</code></sub>), (<code>X</code><sub><code>2</code></sub>, <code>Y</code><sub><code>2</code></sub>), …, (<code>X</code><sub><code>N</code></sub>, <code>Y</code><sub><code>N</code></sub>), să se determine lungimea celui mai lung subșir strict crescător ce se poate forma în <code>X</code><sub><code>i</code></sub> prin înlocuirea caracterelor <code>*</code> cu caractere din <code>Y</code><sub><code>i</code></sub>, <code>1 ≤ i ≤ N</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>addchar.in</code> conține pe prima linie numărul natural nenul <code>N</code>, iar apoi pe linii distincte, cele <code>N</code> seturi de câte două șiruri: (<code>X</code><sub><code>1</code></sub>, <code>Y</code><sub><code>1</code></sub>), (<code>X</code><sub><code>2</code></sub>, <code>Y</code><sub><code>2</code></sub>), …, (<code>X</code><sub><code>N</code></sub>, <code>Y</code><sub><code>N</code></sub>).</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>addchar.out</code> va avea <code>N</code> linii. Fiecare linie conține o singură valoare naturală ce reprezintă lungimea celui mai lung subșir strict crescător ce se poate forma în <code>X</code><sub><code>i</code></sub> prin înlocuirea caracterelor <code>*</code> cu caractere din <code>Y</code><sub><code>i</code></sub>, <code>1 ≤ i ≤ N</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 20</code></li>
+	<li><code>2 ≤ lungimea(X</code><sub><code>i</code></sub><code>) ≤ 10000</code></li>
+	<li><code>1 ≤ lungimea(Y</code><sub><code>i</code></sub><code>) &lt; 10000</code></li>
+	<li><code>1 ≤ număr maxim de caractere '*' ≤ min(5000, lungimea(Y</code><sub><code>i</code></sub><code>))</code></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>addchar.in</code></p>
+
+<pre>2
+C*a**Fceb*B
+DbaAaBA
+z*y*tm**
+ceAB</pre>
+
+<p><code>addchar.out</code></p>
+
+<pre>6
+4</pre>
+
+<h3>Explicație</h3>
+
+<p>Sunt două perechi de șiruri. Prima pereche este <code>X1 = C*a**Fceb*B</code>, <code>Y1 = DbaAaBA</code>.</p>
+
+<p>Se pot forma mai multe secvențe: <code>CBaAAFcebaB</code>, <code>CAaBDFcebAB</code>, <code>CAaBDFcebaB</code>, …<br>
+Cel mai lung subșir strict crescător se obține din șirul <code>CAaBDFcebAB</code>, este <code>ABDFce</code> și are lungimea 6.</p>
+
+<p>A doua pereche de șiruri este <code>X2 = z*y*tm**</code>, <code>Y2 = ceAB</code>. Cel mai lung subșir strict crescător se obține din șirul <code>zAyBtmce</code> și are lungimea <code>4</code>: <code>ABce</code>.</p>		</article>
+		</body></html>

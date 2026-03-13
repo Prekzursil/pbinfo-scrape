@@ -1,0 +1,328 @@
+{
+  "id": 1622,
+  "slug": "elicoptere",
+  "name": "Elicoptere",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1622/elicoptere",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 16,
+      "name": "Teoria Grafurilor",
+      "slug": "teoria-grafurilor",
+      "href": "/?pagina=probleme-lista&tag=16"
+    },
+    {
+      "id": 17,
+      "name": "Parcurgerea grafurilor neorientate",
+      "slug": "parcurgerea-grafurilor-neorientate",
+      "href": "/?pagina=probleme-lista&tag=17"
+    }
+  ],
+  "tags": [
+    "Algoritmul lui Kruskal",
+    "Geometrie"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Să se scrie un program care pentru <code>n</code>, <code>k</code> şi coordonatele vârfurilor insulelor cunoscute, determină:</p><ol>\n\t<li>numărul minim de elicoptere ce vor fi cumpărate de administraţie;</li>\n\t<li>numărul perechilor neordonate de insule între care se poate realiza transportul prin elicoptere direct sau indirect;</li>\n\t<li>suma distantelor parcurse de toate elicopterele cumpărate (distanța parcursă de un elicopter se consideră distanța dintre insulele între care acesta asigură transportul).</li>\n</ol>",
+      "text": "Să se scrie un program care pentru n, k şi coordonatele vârfurilor insulelor cunoscute, determină: numărul minim de elicoptere ce vor fi cumpărate de administraţie; numărul perechilor neordonate de insule între care se poate realiza transportul prin elicoptere direct sau indirect; suma distantelor parcurse de toate elicopterele cumpărate (distanța parcursă de un elicopter se consideră distanța dintre insulele între care acesta asigură transportul)."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>elicoptere.in</code> conține pe prima linie  o valoare <code>v</code> ce poate fi <code>1</code>, <code>2</code>, sau <code>3</code>, în funcţie de cerinţa ce va fi rezolvată, pe linia a doua numerele naturale <code>n</code> şi <code>k</code> separate printr-un spaţiu, cu semnificaţia de mai sus, iar pe următoarele <code>n</code> linii se află câte şase numere naturale <code>x1</code>, <code>y1</code>, <code>x2</code>, <code>y2</code>, <code>x3</code> și <code>y3</code> separate prin spațiu reprezentând coordonatele celor trei vârfuri ale insulelor în formatul (abscisă, ordonată).</p>",
+      "text": "Fișierul de intrare elicoptere.in conține pe prima linie o valoare v ce poate fi 1, 2, sau 3, în funcţie de cerinţa ce va fi rezolvată, pe linia a doua numerele naturale n şi k separate printr-un spaţiu, cu semnificaţia de mai sus, iar pe următoarele n linii se află câte şase numere naturale x1, y1, x2, y2, x3 și y3 separate prin spațiu reprezentând coordonatele celor trei vârfuri ale insulelor în formatul (abscisă, ordonată)."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Dacă valoarea lui <code>v</code> este <code>1</code> atunci fişierul de ieşire <code>elicoptere.out</code> va conţine pe prima linie numai numărul minim de elicoptere, ce vor fi cumpărate de administraţie.</p><p>Dacă valoarea lui <code>v</code> este <code>2</code> atunci fişierul de ieşire <code>elicoptere.out</code> va conţine pe prima linie numai numărul maxim de perechi de insule între care se poate realiza transportul prin elicoptere.</p><p>Dacă valoarea lui <code>v</code> este <code>3</code> atunci fişierul de ieşire <code>elicoptere.out</code> va conţine pe prima linie suma minimă a lungimii rutelor parcurse de elicoptere.</p>",
+      "text": "Dacă valoarea lui v este 1 atunci fişierul de ieşire elicoptere.out va conţine pe prima linie numai numărul minim de elicoptere, ce vor fi cumpărate de administraţie.Dacă valoarea lui v este 2 atunci fişierul de ieşire elicoptere.out va conţine pe prima linie numai numărul maxim de perechi de insule între care se poate realiza transportul prin elicoptere.Dacă valoarea lui v este 3 atunci fişierul de ieşire elicoptere.out va conţine pe prima linie suma minimă a lungimii rutelor parcurse de elicoptere."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ n ≤ 100;</code></li>\n\t<li><code>1 ≤ k ≤ 1000;</code></li>\n\t<li>coordonatele vârfurilor insulelor sunt numere naturale <code>0 ≤ xi , yi ≤ 10</code><sup><code>6</code></sup>;</li>\n\t<li>orice două insule nu au puncte comune;</li>\n\t<li>la cerința 2, dacă se poate ajunge din insula A în insula B atunci evident că se poate ajunge și din B în A, deci perechea formată din A și B se numără o singură dată;</li>\n\t<li>distanța dintre două insule poate fi şi număr real. La cerința 3 rezultatul se cere cu o aproximație de <code>0.001</code>, adică rezultatul notat cu <code>R</code> se consideră corect, dacă faţă de rezultatul comisiei <code>C</code> îndeplineşte condiţia <code>|R-C|&lt;0.001</code>.</li>\n\t<li>pentru a calcula şi afișa un număr real <code>x</code> cu o precizie cât mai mare vă recomandăm folosirea tipului <code>double</code></li>\n\t<li>pentru rezolvarea corectă a cerinței 1 se acordă 20% din punctaj;</li>\n\t<li>pentru rezolvarea corectă a cerinței 2 se acordă 40% din punctaj;</li>\n\t<li>pentru rezolvarea corectă a cerinței 3 se acordă 40% din punctaj.</li>\n</ul>",
+      "text": "1 ≤ n ≤ 100; 1 ≤ k ≤ 1000; coordonatele vârfurilor insulelor sunt numere naturale 0 ≤ xi , yi ≤ 106; orice două insule nu au puncte comune; la cerința 2, dacă se poate ajunge din insula A în insula B atunci evident că se poate ajunge și din B în A, deci perechea formată din A și B se numără o singură dată; distanța dintre două insule poate fi şi număr real. La cerința 3 rezultatul se cere cu o aproximație de 0.001, adică rezultatul notat cu R se consideră corect, dacă faţă de rezultatul comisiei C îndeplineşte condiţia |R-C|<0.001. pentru a calcula şi afișa un număr real x cu o precizie cât mai mare vă recomandăm folosirea tipului double pentru rezolvarea corectă a cerinței 1 se acordă 20% din punctaj; pentru rezolvarea corectă a cerinței 2 se acordă 40% din punctaj; pentru rezolvarea corectă a cerinței 3 se acordă 40% din punctaj."
+    },
+    {
+      "title": "Exemplul 1",
+      "html": "<p><code>elicoptere.in</code></p><pre>1\n6 11\n100 20 100 30 105 30\n20 20 30 30 20 30\n200 20 200 30 205 30\n100 40 100 50 105 40\n10 40 5 40 10 50\n10 20 5 30 10 30</pre><p><code>elicoptere.out</code></p><pre>3</pre><h3>Explicație</h3><p><code>v = 1</code>, deci se rezolvă <span class=\"caps\">NUMAI</span> prima cerință.</p><p>Perechile de insule cu transport direct cu elicoptere: <code>(1,4) (2,6)</code>, <code>(6,5)</code> și obținem astfel <code>3</code> elicoptere.</p>",
+      "text": "elicoptere.in1 6 11 100 20 100 30 105 30 20 20 30 30 20 30 200 20 200 30 205 30 100 40 100 50 105 40 10 40 5 40 10 50 10 20 5 30 10 30elicoptere.out3Explicațiev = 1, deci se rezolvă NUMAI prima cerință.Perechile de insule cu transport direct cu elicoptere: (1,4) (2,6), (6,5) și obținem astfel 3 elicoptere."
+    },
+    {
+      "title": "Exemplul 2",
+      "html": "<p><code>elicoptere.in</code></p><pre>2\n6 11\n100 20 100 30 105 30\n20 20 30 30 20 30\n200 20 200 30 205 30\n100 40 100 50 105 40\n10 40 5 40 10 50\n10 20 5 30 10 30</pre><p><code>elicoptere.out</code></p><pre>4</pre><h3>Explicație</h3><p><code>v = 2</code>, deci se rezolvă <span class=\"caps\">NUMAI</span> a doua cerință.</p><p>Perechile de insule cu transport direct cu elicoptere: <code>(1,4) (2,6)</code>, <code>(6,5)</code> și obținem astfel <code>3</code> elicoptere.</p><p>Insula <code>3</code> rămâne izolată, astfel avem două grupuri de insule. Primul grup conţine insulele <code>1</code> şi <code>4</code>, iar al doilea insulele <code>2</code>, <code>5</code>, <code>6</code>. Din primul grup se numara perechea <code>(1,4)</code>, iar din al doilea grup se numara perechile de insule <code>(2,5)</code>, <code>(2,6)</code> si <code>(5,6)</code>. In total <code>4</code> perechi de insule intre care se poate deplasa cu elicopterul direct sau cu escala (indirect).</p>",
+      "text": "elicoptere.in2 6 11 100 20 100 30 105 30 20 20 30 30 20 30 200 20 200 30 205 30 100 40 100 50 105 40 10 40 5 40 10 50 10 20 5 30 10 30elicoptere.out4Explicațiev = 2, deci se rezolvă NUMAI a doua cerință.Perechile de insule cu transport direct cu elicoptere: (1,4) (2,6), (6,5) și obținem astfel 3 elicoptere.Insula 3 rămâne izolată, astfel avem două grupuri de insule. Primul grup conţine insulele 1 şi 4, iar al doilea insulele 2, 5, 6. Din primul grup se numara perechea (1,4), iar din al doilea grup se numara perechile de insule (2,5), (2,6) si (5,6). In total 4 perechi de insule intre care se poate deplasa cu elicopterul direct sau cu escala (indirect)."
+    },
+    {
+      "title": "Exemplul 3",
+      "html": "<p><code>elicoptere.in</code></p><pre>3\n6 11\n100 20 100 30 105 30\n20 20 30 30 20 30\n200 20 200 30 205 30\n100 40 100 50 105 40\n10 40 5 40 10 50\n10 20 5 30 10 30</pre><p><code>elicoptere.out</code></p><pre>30</pre><h3>Explicație</h3><p><code>v = 3</code>, deci se rezolvă <span class=\"caps\">NUMAI</span> a treia cerință.</p><p>Perechile de insule cu transport direct cu elicoptere: <code>(1,4) (2,6)</code>, <code>(6,5)</code> și obținem astfel <code>3</code> elicoptere.</p><p>Insula <code>3</code> rămâne izolată, astfel avem două grupuri de insule. Primul grup conţine insulele <code>1</code> şi <code>4</code>, iar al doilea insulele <code>2</code>, <code>5</code>, <code>6</code>.</p><p>Elicopterele asigură transportul direct între insulele:</p><ul>\n\t<li><code>1</code> şi <code>4</code> cu distanţa verticală egală cu <code>10</code>;</li>\n\t<li><code>2</code> şi <code>6</code> cu distanţa orizontală egală cu <code>10</code>;</li>\n\t<li><code>5</code> şi <code>6</code> cu distanţa verticală egală cu <code>10</code>;</li>\n</ul><p>În total liniile de transport au distanţa <code>30</code>.</p>",
+      "text": "elicoptere.in3 6 11 100 20 100 30 105 30 20 20 30 30 20 30 200 20 200 30 205 30 100 40 100 50 105 40 10 40 5 40 10 50 10 20 5 30 10 30elicoptere.out30Explicațiev = 3, deci se rezolvă NUMAI a treia cerință.Perechile de insule cu transport direct cu elicoptere: (1,4) (2,6), (6,5) și obținem astfel 3 elicoptere.Insula 3 rămâne izolată, astfel avem două grupuri de insule. Primul grup conţine insulele 1 şi 4, iar al doilea insulele 2, 5, 6.Elicopterele asigură transportul direct între insulele: 1 şi 4 cu distanţa verticală egală cu 10; 2 şi 6 cu distanţa orizontală egală cu 10; 5 şi 6 cu distanţa verticală egală cu 10; În total liniile de transport au distanţa 30."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "v = 1, deci se rezolvă NUMAI prima cerință."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "v = 2, deci se rezolvă NUMAI a doua cerință."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "v = 3, deci se rezolvă NUMAI a treia cerință."
+    }
+  ],
+  "constraints": [
+    "1 ≤ n ≤ 100;",
+    "1 ≤ k ≤ 1000;",
+    "coordonatele vârfurilor insulelor sunt numere naturale 0 ≤ xi , yi ≤ 106;",
+    "orice două insule nu au puncte comune;",
+    "la cerința 2, dacă se poate ajunge din insula A în insula B atunci evident că se poate ajunge și din B în A, deci perechea formată din A și B se numără o singură dată;",
+    "distanța dintre două insule poate fi şi număr real. La cerința 3 rezultatul se cere cu o aproximație de 0.001, adică rezultatul notat cu R se consideră corect, dacă faţă de rezultatul comisiei C îndeplineşte condiţia |R-C|<0.001.",
+    "pentru a calcula şi afișa un număr real x cu o precizie cât mai mare vă recomandăm folosirea tipului double",
+    "pentru rezolvarea corectă a cerinței 1 se acordă 20% din punctaj;",
+    "pentru rezolvarea corectă a cerinței 2 se acordă 40% din punctaj;",
+    "pentru rezolvarea corectă a cerinței 3 se acordă 40% din punctaj."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qdae11d17f9.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "11",
+    "intrare/ieșire": "elicoptere.in / elicoptere.out",
+    "limită timp": "0.2 secunde",
+    "limită memorie": "4 MB / 4 MB",
+    "sursa problemei": "OJI 2016, Clasele XI-XII",
+    "autor": "Doru Popescu Anastasiu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.2,
+  "memoryLimitMb": 4,
+  "author": "Doru Popescu Anastasiu",
+  "sourceAttribution": "OJI 2016, Clasele XI-XII",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1622/elicoptere"
+}

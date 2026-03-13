@@ -1,0 +1,301 @@
+{
+  "id": 4428,
+  "slug": "pix",
+  "name": "pix",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4428/pix",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 49,
+      "name": "Verificarea unor proprietăţi",
+      "slug": "verificarea-unor-propriet-i",
+      "href": "/?pagina=probleme-lista&tag=49"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Scrieţi un program care citeşte valorile <code>N</code>, <code>nr[1]</code>, <code>nr[2]</code>, … <code>nr[N]</code> şi <code>Vmax</code> și determină numărul minim de cutii pe care robotul Vasile trebuie să le pregătească în camera de livrare astfel încât să poată livra orice număr de pixuri cuprins între <code>1</code> şi <code>Vmax</code>, fără a deschide nicio cutie.</p>",
+      "text": "Scrieţi un program care citeşte valorile N, nr[1], nr[2], … nr[N] şi Vmax și determină numărul minim de cutii pe care robotul Vasile trebuie să le pregătească în camera de livrare astfel încât să poată livra orice număr de pixuri cuprins între 1 şi Vmax, fără a deschide nicio cutie."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>pix.in</code> conține pe prima linie numărul natural <code>N</code> reprezentând numărul de tipuri de cutii. Pe a doua linie se află <code>N</code> numere naturale în ordine crescătoare, separate prin câte un spaţiu, <code>nr[1]</code>, <code>nr[2]</code>, …, <code>nr[N]</code> reprezentând numărul pixuri ambalate în fiecare tip de cutie. Pe a treia linie se află numărul natural <code>Vmax</code> cu semnificația din enunț.</p>",
+      "text": "Fișierul de intrare pix.in conține pe prima linie numărul natural N reprezentând numărul de tipuri de cutii. Pe a doua linie se află N numere naturale în ordine crescătoare, separate prin câte un spaţiu, nr[1], nr[2], …, nr[N] reprezentând numărul pixuri ambalate în fiecare tip de cutie. Pe a treia linie se află numărul natural Vmax cu semnificația din enunț."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>pix.out</code> va conține o singură linie pe care va fi scris un număr natural reprezentând numărul minim de cutii pe care robotul Vasile trebuie să le pregătească în camera de livrare astfel încât să poată livra orice număr de pixuri cuprins între <code>1</code> şi <code>Vmax</code>.</p>",
+      "text": "Fișierul de ieșire pix.out va conține o singură linie pe care va fi scris un număr natural reprezentând numărul minim de cutii pe care robotul Vasile trebuie să le pregătească în camera de livrare astfel încât să poată livra orice număr de pixuri cuprins între 1 şi Vmax."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 100.000</code></li>\n\t<li><code>1 ≤ Vmax, nr[i] ≤ 10</code><sup><code>12</code></sup>, pentru <code>1 ≤ i ≤ N</code></li>\n\t<li>Se garantează că pentru toate datele de test există soluție.</li>\n\t<li>Pentru 20 de puncte, <code>1 ≤ N &lt; 15</code></li>\n\t<li>Pentru 10 de puncte, <code>15 ≤ N &lt; 600</code></li>\n\t<li>Pentru 40 de puncte, <code>Vmax ≤ 100.000</code></li>\n</ul>",
+      "text": "1 ≤ N ≤ 100.000 1 ≤ Vmax, nr[i] ≤ 1012, pentru 1 ≤ i ≤ N Se garantează că pentru toate datele de test există soluție. Pentru 20 de puncte, 1 ≤ N < 15 Pentru 10 de puncte, 15 ≤ N < 600 Pentru 40 de puncte, Vmax ≤ 100.000"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>pix.in</code></p><pre>4\n1 2 3 5\n15</pre><p><code>pix.out</code></p><pre>5</pre><h3>Explicație</h3><p>Numărul minim de cutii pe care trebuie să le pregătească Vasile este <code>5</code> (o cutie de tipul <code>1</code>, două de tipul <code>2</code> şi două de tipul <code>4</code>, numărul de pixuri din aceste cutii fiind <code>1, 2, 2, 5, 5</code>)<br>\nEl poate astfel livra orice număr de pixuri între <code>1</code> şi <code>15</code>, o modalitate posibilă fiind:<br>\n1: cutia de tip <code>1</code><br>\n2: o cutie de tip <code>2</code><br>\n3: o cutie de tip <code>1</code> şi o cutie de tip <code>2</code><br>\n4: două cutii de tip <code>2</code><br>\n5: o cutie de tip <code>4</code><br>\n6: o cutie de tip <code>1</code> şi o cutie de tip <code>4</code><br>\n7: o cutie de tip <code>2</code> și o cutie de tip <code>4</code><br>\n8: câte o cutie de tipurile <code>1</code>, <code>2</code>, <code>4</code><br>\n9: o cutie de tip <code>4</code> şi două cutii de tip <code>2</code><br>\n10: două cutii de tip <code>4</code><br>\n11: două cutii de tip <code>4</code> şi o cutie de tip <code>1</code><br>\n12: două cutii de tip <code>4</code> şi o cutie de tip <code>2</code><br>\n13: două cutii de tip <code>4</code>, o cutie de tip <code>2</code> şi o cutie de tip <code>1</code><br>\n14: două cutii de tip <code>4</code> şi două cutii de tip <code>2</code><br>\n15: toate cutiile<br>\nAceasta nu este singura posibilitate de a alege un număr minim de cutii pentru a obține toate valorile de la <code>1</code> la <code>15</code>.</p>",
+      "text": "pix.in4 1 2 3 5 15pix.out5ExplicațieNumărul minim de cutii pe care trebuie să le pregătească Vasile este 5 (o cutie de tipul 1, două de tipul 2 şi două de tipul 4, numărul de pixuri din aceste cutii fiind 1, 2, 2, 5, 5) El poate astfel livra orice număr de pixuri între 1 şi 15, o modalitate posibilă fiind: 1: cutia de tip 1 2: o cutie de tip 2 3: o cutie de tip 1 şi o cutie de tip 2 4: două cutii de tip 2 5: o cutie de tip 4 6: o cutie de tip 1 şi o cutie de tip 4 7: o cutie de tip 2 și o cutie de tip 4 8: câte o cutie de tipurile 1, 2, 4 9: o cutie de tip 4 şi două cutii de tip 2 10: două cutii de tip 4 11: două cutii de tip 4 şi o cutie de tip 1 12: două cutii de tip 4 şi o cutie de tip 2 13: două cutii de tip 4, o cutie de tip 2 şi o cutie de tip 1 14: două cutii de tip 4 şi două cutii de tip 2 15: toate cutiile Aceasta nu este singura posibilitate de a alege un număr minim de cutii pentru a obține toate valorile de la 1 la 15."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Numărul minim de cutii pe care trebuie să le pregătească Vasile este 5 (o cutie de tipul 1, două de tipul 2 şi două de tipul 4, numărul de pixuri din aceste cutii fiind 1, 2, 2, 5, 5) El poate astfel livra orice număr de pixuri între 1 şi 15, o modalitate posibilă fiind: 1: cutia de tip 1 2: o cutie de tip 2 3: o cutie de tip 1 şi o cutie de tip 2 4: două cutii de tip 2 5: o cutie de tip 4 6: o cutie de tip 1 şi o cutie de tip 4 7: o cutie de tip 2 și o cutie de tip 4 8: câte o cutie de tipurile 1, 2, 4 9: o cutie de tip 4 şi două cutii de tip 2 10: două cutii de tip 4 11: două cutii de tip 4 şi o cutie de tip 1 12: două cutii de tip 4 şi o cutie de tip 2 13: două cutii de tip 4, o cutie de tip 2 şi o cutie de tip 1 14: două cutii de tip 4 şi două cutii de tip 2 15: toate cutiile Aceasta nu este singura posibilitate de a alege un număr minim de cutii pentru a obține toate valorile de la 1 la 15."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 100.000",
+    "1 ≤ Vmax, nr[i] ≤ 1012, pentru 1 ≤ i ≤ N",
+    "Se garantează că pentru toate datele de test există soluție.",
+    "Pentru 20 de puncte, 1 ≤ N < 15",
+    "Pentru 10 de puncte, 15 ≤ N < 600",
+    "Pentru 40 de puncte, Vmax ≤ 100.000"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q8644bd67a2.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "pix.in / pix.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "32 MB / 8 MB",
+    "sursa problemei": "ONI 2023, clasa a VII-a",
+    "autor": "Emanuela Cerchez",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 32,
+  "author": "Emanuela Cerchez",
+  "sourceAttribution": "ONI 2023, clasa a VII-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4428/pix"
+}

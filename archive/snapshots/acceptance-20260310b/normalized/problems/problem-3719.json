@@ -1,0 +1,335 @@
+{
+  "id": 3719,
+  "slug": "sdistante",
+  "name": "SDistante",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3719/sdistante",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 10,
+      "name": "Şiruri de caractere",
+      "slug": "iruri-de-caractere",
+      "href": "/?pagina=probleme-lista&tag=10"
+    },
+    {
+      "id": 84,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=84"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Se dă un șir de caractere <code>s</code>, care poate conține doar litere mici și mari ale alfabetului englez (de la <code>a</code> la <code>z</code> și de la <code>A</code> la <code>Z</code>). Pentru toate perechile neordonate de subsecvențe distincte ale șirului <code>s</code> care au lungimi egale, vrem să calculăm distanța dintre ele și să afișăm suma acestora modulo <code>1.000.000.007</code>. Formal, se cere suma valorilor <code>dist(s(a, b), s(c, d))</code>, pentru toți indicii <code>a</code>, <code>b</code>, <code>c</code>, <code>d</code> cu <code>0 ≤ a, b, c, d &lt; |s|</code>, <code>a &lt; c</code>, <code>a ≤ b</code>, <code>c ≤ d</code>, <code>b - a = d - c</code>, modulo <code>1.000.000.007</code>. <code>|s|</code> reprezintă lungimea șirului <code>s</code>, care este indexat de la <code>0</code>.</p>",
+      "text": "Se dă un șir de caractere s, care poate conține doar litere mici și mari ale alfabetului englez (de la a la z și de la A la Z). Pentru toate perechile neordonate de subsecvențe distincte ale șirului s care au lungimi egale, vrem să calculăm distanța dintre ele și să afișăm suma acestora modulo 1.000.000.007. Formal, se cere suma valorilor dist(s(a, b), s(c, d)), pentru toți indicii a, b, c, d cu 0 ≤ a, b, c, d < |s|, a < c, a ≤ b, c ≤ d, b - a = d - c, modulo 1.000.000.007. |s| reprezintă lungimea șirului s, care este indexat de la 0."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>sdistante.in</code> conține pe prima linie șirul dat <code>s</code>.</p>",
+      "text": "Fișierul de intrare sdistante.in conține pe prima linie șirul dat s."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Se va afișa pe singurul rând al fișierului <code>sdistante.out</code> un număr întreg reprezentând suma distanțelor, modulo <code>1.000.000.007</code>.</p>",
+      "text": "Se va afișa pe singurul rând al fișierului sdistante.out un număr întreg reprezentând suma distanțelor, modulo 1.000.000.007."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ |s| ≤ 4.000.000</code>, unde <code>|s|</code> este lungimea șirului <code>s</code></li>\n\t<li>Pentru 11 puncte, <code>|s| ≤ 20</code> și <code>s</code> conține doar litere mici</li>\n\t<li>Pentru alte 5 puncte, <code>|s| ≤ 50</code> și <code>s</code> conține doar caracterele <code>a</code> și <code>b</code></li>\n\t<li>Pentru alte 15 puncte, <code>|s| ≤ 350</code> și <code>s</code> conține doar litere mici</li>\n\t<li>Pentru alte 6 puncte, <code>|s| ≤ 1000</code> și <code>s</code> conține doar caracterele <code>a</code> și <code>b</code></li>\n\t<li>Pentru alte 30 puncte, <code>|s| ≤ 5000</code> și <code>s</code> conține doar litere mici</li>\n\t<li>Pentru alte 5 puncte, <code>|s| ≤ 100.000</code> și <code>s</code> conține doar caracterele <code>a</code> și <code>b</code></li>\n\t<li>Pentru alte 4 puncte, <code>|s| ≤ 100.000</code> și <code>s</code> conține doar litere mici</li>\n\t<li>Pentru alte 6 puncte, <code>|s| ≤ 1.000.000</code> și <code>s</code> conține doar caracterele <code>a</code> și <code>b</code></li>\n\t<li>Pentru alte 6 puncte, fără restricții</li>\n</ul>",
+      "text": "1 ≤ |s| ≤ 4.000.000, unde |s| este lungimea șirului s Pentru 11 puncte, |s| ≤ 20 și s conține doar litere mici Pentru alte 5 puncte, |s| ≤ 50 și s conține doar caracterele a și b Pentru alte 15 puncte, |s| ≤ 350 și s conține doar litere mici Pentru alte 6 puncte, |s| ≤ 1000 și s conține doar caracterele a și b Pentru alte 30 puncte, |s| ≤ 5000 și s conține doar litere mici Pentru alte 5 puncte, |s| ≤ 100.000 și s conține doar caracterele a și b Pentru alte 4 puncte, |s| ≤ 100.000 și s conține doar litere mici Pentru alte 6 puncte, |s| ≤ 1.000.000 și s conține doar caracterele a și b Pentru alte 6 puncte, fără restricții"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>sdistante.in</code></p><pre>abc</pre><p><code>sdistante.out</code></p><pre>5</pre><h3>Explicație</h3><ul>\n\t<li><code>dist(s(0, 0), s(1, 1)) = dist(\"a\", \"b\") = 1</code></li>\n\t<li><code>dist(s(0, 0), s(2, 2)) = dist(\"a\", \"c\") = 1</code></li>\n\t<li><code>dist(s(1, 1), s(2, 2)) = dist(\"b\", \"c\") = 1</code></li>\n\t<li><code>dist(s(0, 1), s(1, 2)) = dist(\"ab\", \"bc\") = 2</code></li>\n</ul>",
+      "text": "sdistante.inabcsdistante.out5Explicație dist(s(0, 0), s(1, 1)) = dist(\"a\", \"b\") = 1 dist(s(0, 0), s(2, 2)) = dist(\"a\", \"c\") = 1 dist(s(1, 1), s(2, 2)) = dist(\"b\", \"c\") = 1 dist(s(0, 1), s(1, 2)) = dist(\"ab\", \"bc\") = 2"
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>sdistante.in</code></p><pre>aab</pre><p><code>sdistante.out</code></p><pre>3</pre><h3>Explicație</h3><ul>\n\t<li><code>dist(s(0, 0), s(1, 1)) = dist(\"a\"; \"a\") = 0</code></li>\n\t<li><code>dist(s(0, 0), s(2, 2)) = dist(\"a\"; \"b\") = 1</code></li>\n\t<li><code>dist(s(1, 1), s(2, 2)) = dist(\"a\"; \"b\") = 1</code></li>\n\t<li><code>dist(s(0, 1), s(1, 2)) = dist(\"aa\"; \"ab\") = 1</code></li>\n</ul>",
+      "text": "sdistante.inaabsdistante.out3Explicație dist(s(0, 0), s(1, 1)) = dist(\"a\"; \"a\") = 0 dist(s(0, 0), s(2, 2)) = dist(\"a\"; \"b\") = 1 dist(s(1, 1), s(2, 2)) = dist(\"a\"; \"b\") = 1 dist(s(0, 1), s(1, 2)) = dist(\"aa\"; \"ab\") = 1"
+    },
+    {
+      "title": "Exemplul 3:",
+      "html": "<p><code>sdistante.in</code></p><pre>ABa</pre><p><code>sdistante.out</code></p><pre>5</pre><h3>Explicație</h3><ul>\n\t<li><code>dist(s(0, 0), s(1, 1)) = dist(\"A\"; \"B\") = 1</code><br>\n• <code>dist(s(0, 0), s(2, 2)) = dist(\"A\"; \"a\") = 1</code><br>\n• <code>dist(s(1, 1), s(2, 2)) = dist(\"B\"; \"a\") = 1</code><br>\n• <code>dist(s(0, 1), s(1, 2)) = dist(\"AB\"; \"Ba\") = 2</code></li>\n</ul>",
+      "text": "sdistante.inABasdistante.out5Explicație dist(s(0, 0), s(1, 1)) = dist(\"A\"; \"B\") = 1 • dist(s(0, 0), s(2, 2)) = dist(\"A\"; \"a\") = 1 • dist(s(1, 1), s(2, 2)) = dist(\"B\"; \"a\") = 1 • dist(s(0, 1), s(1, 2)) = dist(\"AB\"; \"Ba\") = 2"
+    },
+    {
+      "title": "Exemplul 4:",
+      "html": "<p><code>sdistante.in</code></p><pre>aaaaabbbaaaa</pre><p><code>sdistante.out</code></p><pre>480</pre>",
+      "text": "sdistante.inaaaaabbbaaaasdistante.out480"
+    },
+    {
+      "title": "Exemplul 5:",
+      "html": "<p><code>sdistante.in</code></p><pre>abcdefghizabcdefghiz</pre><p><code>sdistante.out</code></p><pre>7095</pre>",
+      "text": "sdistante.inabcdefghizabcdefghizsdistante.out7095"
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "dist(s(0, 0), s(1, 1)) = dist(\"a\", \"b\") = 1 dist(s(0, 0), s(2, 2)) = dist(\"a\", \"c\") = 1 dist(s(1, 1), s(2, 2)) = dist(\"b\", \"c\") = 1 dist(s(0, 1), s(1, 2)) = dist(\"ab\", \"bc\") = 2"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "dist(s(0, 0), s(1, 1)) = dist(\"a\"; \"a\") = 0 dist(s(0, 0), s(2, 2)) = dist(\"a\"; \"b\") = 1 dist(s(1, 1), s(2, 2)) = dist(\"a\"; \"b\") = 1 dist(s(0, 1), s(1, 2)) = dist(\"aa\"; \"ab\") = 1"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "dist(s(0, 0), s(1, 1)) = dist(\"A\"; \"B\") = 1 • dist(s(0, 0), s(2, 2)) = dist(\"A\"; \"a\") = 1 • dist(s(1, 1), s(2, 2)) = dist(\"B\"; \"a\") = 1 • dist(s(0, 1), s(1, 2)) = dist(\"AB\"; \"Ba\") = 2"
+    }
+  ],
+  "constraints": [
+    "1 ≤ |s| ≤ 4.000.000, unde |s| este lungimea șirului s",
+    "Pentru 11 puncte, |s| ≤ 20 și s conține doar litere mici",
+    "Pentru alte 5 puncte, |s| ≤ 50 și s conține doar caracterele a și b",
+    "Pentru alte 15 puncte, |s| ≤ 350 și s conține doar litere mici",
+    "Pentru alte 6 puncte, |s| ≤ 1000 și s conține doar caracterele a și b",
+    "Pentru alte 30 puncte, |s| ≤ 5000 și s conține doar litere mici",
+    "Pentru alte 5 puncte, |s| ≤ 100.000 și s conține doar caracterele a și b",
+    "Pentru alte 4 puncte, |s| ≤ 100.000 și s conține doar litere mici",
+    "Pentru alte 6 puncte, |s| ≤ 1.000.000 și s conține doar caracterele a și b",
+    "Pentru alte 6 puncte, fără restricții"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q044e7b0650.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "10",
+    "intrare/ieșire": "sdistante.in / sdistante.out",
+    "limită timp": "0.3 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "OJI 2021, clasa a X-a",
+    "autor": "Bogdan Petru Pop",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.3,
+  "memoryLimitMb": 64,
+  "author": "Bogdan Petru Pop",
+  "sourceAttribution": "OJI 2021, clasa a X-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3719/sdistante"
+}

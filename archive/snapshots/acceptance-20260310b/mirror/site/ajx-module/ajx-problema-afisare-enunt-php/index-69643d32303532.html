@@ -1,0 +1,49 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2052"><article id="enunt">
+			<p>Misiunea robotului Curiosity este de-a trimite imagini și informații către satelitul plasat pe orbita planetei Marte. Zona de explorare a robotului este de-a lungul unei axe de coordonate <code>Ox</code>. Robotul este înzestrat cu o baterie solară de capacitate energetică maximă <code>C</code> și consumă pentru fiecare unitate de drum parcurs o unitate de energie. Coordonata punctului de plecare al incursiunii robotului (raportată la origine <code>x=0</code>) este <code>Xs</code>, iar punctul unde este finalizat studiul are coordonata <code>Xf</code>.<br>
+Totodată, cercetătorii au stabilit <code>N</code> puncte ce fac posibilă încărcarea bateriilor robotului, numerotate de la <code>1</code> la <code>N</code>. În funcție de intensitatea luminii solare primite, reflectată în durata de încărcare a bateriei, punctele de încărcare sunt de trei tipuri: tipul <code>1</code>–intensitate minimă/timp de încărcare mare, tipul <code>2</code>–intensitate medie/timp de încărcare mediu, tipul <code>3</code>–intensitate maximă/timp de încărcare scurt. Altfel, fiecare punct de încărcare <code>i</code> este descris prin perechea <code>t[i] x[i]</code>, adică tipul de încărcare, respectiv poziția acestuia pe axă. În orice punct de încărcare robotul poate decide dacă încarcă sau nu bateria, cu unități de energie, nu mai mult decât capacitatea maximă. Robotul se poate deplasa dintr-un punct atât în stânga cât și în dreapta pe axă.<br>
+Pentru a scurta durata parcurgerii distanței către punctul final se dorește determinarea unei strategi optime a opririlor pentru încărcarea bateriilor, astfel încât cantitatea totală de energie încărcată în puncte de tipul <code>1</code> să fie minimă. În cazul în care sunt mai multe strategii de oprire pentru care cantitatea totală de energie încărcată în puncte de tipul <code>1</code> este minimă, atunci se va alege strategia pentru care cantitatea totală de energie încărcată în puncte de tipul <code>2</code> să fie minimă.</p>
+
+<h1>Cerința</h1>
+
+<p>Dacă se cunosc <code>Xs</code>, <code>Xf</code>, <code>C</code>, precum și descrierea celor <code>N</code> puncte de încărcare să se determine o strategie de deplasare între coordonatele <code>Xs</code> și <code>Xf</code>, optimă din punct de vedere al timpului necesar încărcării bateriilor.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>curiosity.in</code> conţine pe prima linie patru numere naturale <code>Xs</code>, <code>Xf</code>, <code>C</code>, <code>N</code> cu semnificația din enunț. Pe următoarele <code>N</code> linii este descrierea punctelor de oprire: <code>t[i] x[i]</code>, unde <code>t[i]</code> reprezintă tipul de încărcare al punctului <code>i</code>, iar <code>x[i]</code> poziția acestuia pe axă.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>curiosity.out</code> Fişierul curiosity.out conţine pe o singură linie două numere naturale despărțite printr-un spațiu, ce reprezintă cantitatea totală minimă de energie încărcată în puncte de tipul <code>1</code>, respectiv cantitatea totală minimă de energie încărcată în puncte de tipul <code>2</code>. Dacă nu există soluție se va afișa valoarea <code>-1</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 100000</code></li>
+	<li><code>1 ≤ C ≤ 1000</code></li>
+	<li><code>1 ≤ t[i] ≤ 3</code>; <code>-1000000 ≤ x[i] ≤ 1000000</code></li>
+	<li><code>-1000000 ≤ Xs &lt; Xf ≤ 1000000</code>. Acestea pot coincide cu coordonatele punctelor de încărcare;</li>
+	<li>Punctele de încărcare sunt distincte. Coordonatele punctelor sunt de tip întreg;</li>
+	<li>Punctele de încărcare sunt date în ordine crescătoare</li>
+	<li>Atenție, în momentul plecării din punctul <code>Xs</code> robotul este încărcat la capacitatea maximă <code>C</code>.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>curiosity.in</code></p>
+
+<pre>1 11 5 4
+3 -1
+1 3
+2 7
+3 10</pre>
+
+<p><code>curiosity.out</code></p>
+
+<pre>1 3</pre>
+
+<h3>Explicație</h3>
+
+<p>Pe axa există <code>n=4</code> puncte de încărcare. Robotul pleaca din punctul <code>xs=1</code> și trebuie să ajungă în punctul <code>xf=11</code>. Inițial robotul are bateria încărcată la capacitatea maximă <code>C=5</code> unități. Robotul oprește în punctul <code>x=3</code>. Pentru deplasarea din <code>x=1</code> în <code>x=3</code> a consumat <code>2</code> unități de energie. Încarcă bateria cu <code>1</code> unitate (tip <code>1</code>). Bateria are în acest moment capacitatea de <code>4</code> unități, suficiente pentru a ajunge în punctul <code>x=7</code> unde încarcă bateria cu <code>3</code> unități (tip <code>2</code>). În punctul <code>x=10</code> încarcă bateria cu <code>1</code> unitate (tip <code>3</code>).</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-Imagini-curiosity01-jpg.jpg"></p>		</article>
+		</body></html>

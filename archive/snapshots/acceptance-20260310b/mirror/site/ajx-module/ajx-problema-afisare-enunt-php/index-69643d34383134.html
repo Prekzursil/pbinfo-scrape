@@ -1,0 +1,89 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4814"><article id="enunt">
+			<p>Áles se află într-un castel, reprezentat printr-o matrice <code>A</code> cu <code>N</code> linii și <code>N</code> coloane, fiecare element corespunzând unei camere. Fiecare cameră are asociat câte un număr natural de la <code>1</code> la <code>K</code>, care este memorat în elementul corespunzător din matrice. Oricare două camere cu același număr asociat sunt conectate printr-un tunel. De asemenea, fiecare cameră este conectată printr-o ușă cu o cameră vecină, elementele corespunzătoare acestora fiind în matrice pe acceași linie și pe coloane alăturate sau pe aceeași coloană și pe linii alăturate. Scopul lui Áles este să viziteze toate camerele, fiecare cel puțin o dată, astfel încât numerele asociate lor, în ordinea vizitării acestora, să formeze un şir crescător, începând de la <code>1</code>.</p>
+
+<p>Áles alege la început o cameră care are asociat numărul <code>1</code>. Din fiecare cameră ce corespunde unui element \(A_{i,j}\) el poate vizita:</p>
+
+<ul>
+	<li>folosind un tunel, orice cameră ce corespunde unui element \(i’,j’\) astfel încât \(A_{i’,j’} = A_{i,j}\).</li>
+	<li>folosind o uşă, orice camera vecină cu un număr asociat consecutiv, deci care corespunde unui element \(i’,j’\) astfel încât \( |i’-i|+|j’-j|=1 \) și \(A_{i’,j’}=A_{i,j}+1\).</li>
+	<li>folosind un teleportor, în orice cameră cu numărul asociat \(A_{i,j}+1\), la această metodă de deplasare putând să recurgă numai dacă nu poate ajunge la o astfel de cameră utilizând un tunel sau o uşă.</li>
+</ul>
+
+<p>Ați înțeles, Áles doreşte să folosească teleportorul de cât mai puţine ori! El calculează mai întâi numărul minim necesar de teleportări pentru configurația inițială a camerelor, apoi face, pe rând, <code>Q</code> transformări succesive ale configurației, prin schimbarea numărului asociat pentru câte o cameră; după fiecare astfel de transformare, calculează din nou numărul minim necesar de teleportări pentru configurația respectivă.</p>
+
+<h1>Cerința</h1>
+
+<p>Pentru configurația inițială, precum și după fiecare dintre cele Q transformări ale acesteia, în ordinea în care sunt realizate, determinați numărul minim de teleportări necesare pentru ca Áles să își îndeplinească scopul.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>teleportor.in</code> conține:</p>
+
+<ul>
+	<li>pe prima linie numerele naturale <code>N</code> și <code>K</code>, cu semnificația din enunț.</li>
+	<li>pe următoarele <code>N</code> linii câte <code>N</code> numere naturale, reprezentând numerele asociate inițial camerelor, în ordinea corespunzătoare elementelor din matrice, linie cu linie, de sus în jos, și de la stânga la dreapta pe fiecare linie.</li>
+	<li>pe următoarea linie numărul <code>Q</code>, cu semnificația din enunț.</li>
+	<li>pe următoarele <code>Q</code> linii câte trei numere naturale <code>i j c</code>, cu semnificația că \(A_{i,j}\) este schimbat cu <code>c</code>.</li>
+</ul>
+
+<p>Numerele aflate pe aceeași linie a fișierului sunt separate prin câte un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>teleportor.out</code> va conţine pe <code>Q+1</code> linii, numerele minime de teleportări determinate conform cerinței, câte un singur număr pe linie, în ordinea indicată.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 1.000</code></li>
+	<li><code>1 ≤ K ≤ N</code><sup><code>2</code></sup></li>
+	<li><code>1 ≤ Q ≤ 250.000</code></li>
+	<li><code>1 ≤ i,j ≤ N</code></li>
+	<li>În configuraţia iniţială şi după fiecare transformare a acesteia se garantează că fiecare număr de la <code>1</code> la <code>K</code> este asociat cel puţin unei camere.</li>
+	<li>Pentru 29 puncte, <code>N, K, Q ≤ 50</code></li>
+	<li>Pentru 23 puncte, <code>N, Q ≤ 100</code></li>
+	<li>Pentru 20 puncte, <code>K = N</code><sup><code>2</code></sup><code>-1</code></li>
+	<li>Pentru 28 puncte, fără restricții suplimentare.</li>
+	<li>Datorită dimensiunilor mari ale fișierelor, nu au fost încărcate toate testele.</li>
+</ul>
+
+<h1>Exemplu</h1>
+
+<p><code>teleportor.in</code></p>
+
+<pre>3 3
+2 1 1
+1 2 1
+3 1 3
+2
+3 2 3
+2 1 2</pre>
+
+<p><code>teleportor.out</code></p>
+
+<pre>1
+0
+0</pre>
+
+<h3>Explicație</h3>
+
+<p>Înainte de prima operație un posibil drum care obține o singură teleportare poate fi: <code>(1, 2) → (1, 3) → (2, 3) → (3, 2) → (2, 1) → (1, 1) → (2, 2) → (3, 1) → (3, 3)</code>.</p>
+
+<p>Teleportarea are loc la pasul <code>(2, 2) → (3, 1)</code>.</p>
+
+<p>După prima operație, camerele sunt numerotate conform:</p>
+
+<pre>2 1 1
+1 2 1
+3 3 3</pre>
+
+<p>Un posibil drum care nu necesită nicio teleportare poate fi: <code>(1, 2) → (1, 3) → (2, 3) → (2, 1) → (1, 1) → (2, 2) → (3, 2) → (3, 1) → (3, 3)</code>.</p>
+
+<p>După a doua operație, camerele sunt numerotate conform:</p>
+
+<pre>2 1 1
+2 2 1
+3 3 3</pre>
+
+<p>Un posibil drum care nu necesită nicio teleportare poate fi: <code>(1, 2) → (1, 3) → (2, 3) → (2, 2) → (2, 1) → (1, 1) → (2, 1) → (3, 1) → (3, 2) → (3, 3)</code>.</p>		</article>
+		</body></html>

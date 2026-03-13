@@ -1,0 +1,94 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4652"><article id="enunt">
+			<p>Robotul Vasile se visează artist plastic. El creează picturi 3D, pe un suport pe care îl scoate la imprimantă. O pictură 3D are formă dreptunghiulară şi poate fi împărţită în “pixeli 3D”, aranjaţi pe <code>n</code> linii şi <code>m</code> coloane, fiecare pixel 3D având o anumită înălţime. Iniţial pictura este albă. </p>
+
+<p>Un pixel 3D este considerat “vârf” dacă el are înălţimea strict mai mare decât înălțimile tuturor vecinilor săi. Doi pixeli 3D se consideră vecini dacă ei se află pe aceeaşi linie, pe coloane consecutive, sau se află pe aceeaşi coloană, pe linii consecutive.</p>
+
+<p>Robotul Vasile pictează algoritmic, în modul următor: parcurge pixelii în ordinea liniilor, iar pe fiecare linie în ordinea coloanelor şi dacă pixelul curent este un vârf “toarnă” peste el o nouă culoare (o culoare diferită de alb şi de toate culorile utilizate până la momentul respectiv). Vom denumi culori pure, culorile pe care robotul Vasile le toarnă peste pixelii vârf. Culoarea pură se va “scurge” şi va vopsi toţi pixelii 3D vecini care au înălţime strict mai mică decât a vârfului vopsit, apoi se va scurge în continuare la vecinii vecinilor cu înălţimi strict mai mici ş.a.m.d., până când scurgerea nu mai este posibilă. Atunci când culoarea pură ajunge peste un pixel alb, acesta se va colora în culoarea respectivă. Dacă însă culoarea pură ajunge peste un pixel care a fost colorat anterior, culorile se vor combina şi se va crea o nouă culoare. Culorile care se formează prin combinare vor fi diferite de toate culorile pure pe care robotul Vasile le toarnă peste pixelii vârf. </p>
+
+<p>Deşi se visează artist, robotul Vasile nu are simţ estetic, ca urmare a stabilit trei criterii de evaluare a calităţii artistice a unei picturi: numărul maxim de culori pure care se combină pe un pixel 3D, numărul de culori distincte care apar în pictură (pure sau obținute prin combinare), respectiv dimensiunea maximă a unei zone colorate în aceeaşi culoare, diferită de alb. O zonă este formată din pixeli 3D cu proprietatea că, pentru oricare doi pixeli <code>p1</code> şi <code>p2</code> din zona respectivă există o succesiune de pixeli 3D care începe cu <code>p1</code>, se termină cu <code>p2</code> şi oricare doi pixeli consecutivi sunt vecini. Dimensiunea unei zone este egală cu numărul de pixeli 3D din zona respectivă. </p>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care, cunoscând <code>n</code> şi <code>m</code> (dimensiunile picturii), respectiv înălţimile pixelilor 3D, rezolvă următoarele trei cerinţe:<br>
+1. determină numărul maxim de culori pure care se combină pe un pixel 3D;<br>
+2. determină numărul de culori distincte care apar în pictura creată conform algoritmului aplicat de robotul Vasile;<br>
+3. determină dimensiunea maximă a unei zone formată din pixeli 3D de aceeaşi culoare, diferită de alb.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>pictura.in</code> conține pe prima linie trei numere naturale <code>C</code>, <code>n</code>, <code>m</code>, reprezentând cerinţa care trebuie să fie rezolvată (<code>1</code>, <code>2</code> sau <code>3</code>), numărul de linii, respectiv numărul de coloane ale picturii. Pe fiecare dintre următoarele <code>n</code> linii se află câte <code>m</code> numere naturale reprezentând înălţimile pixelilor 3D care constituie suprafaţa pe care pictează robotul Vasile (respectând ordinea liniilor, respectiv a coloanelor). Valorile scrise pe aceeaşi linie sunt separate prin câte un spaţiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>pictura.out</code> va conține o singură linie pe care va fi scris răspunsul la cerinţa <code>C</code> din fişierul de intrare. </p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>3 ≤ n, m ≤ 300</code></li>
+	<li>Înălţimile pixelilor 3D sunt numere naturale <code>≤ 30.000</code>.</li>
+	<li>Pentru toate datele de test se garantează că numărul de culori pure care se combină pe un același pixel 3D este <code>&lt; 200</code>.</li>
+	<li>Pentru 30 de puncte, <code>C=1</code></li>
+	<li>Pentru 50 de puncte, <code>C=2</code></li>
+	<li>Pentru 20 de puncte, <code>C=3</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>pictura.in</code></p>
+
+<pre>1 5 3
+8 7 8
+8 20 18
+11 5 30
+19 4 50
+2 3 40</pre>
+
+<p><code>pictura.out</code></p>
+
+<pre>3</pre>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>pictura.in</code></p>
+
+<pre>2 5 3
+8 7 8
+8 20 18
+11 5 30
+19 4 50
+2 3 40</pre>
+
+<p><code>pictura.out</code></p>
+
+<pre>7</pre>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>pictura.in</code></p>
+
+<pre>3 5 3
+8 7 8
+8 20 18
+11 5 30
+19 4 50
+2 3 40</pre>
+
+<p><code>pictura.out</code></p>
+
+<pre>4</pre>
+
+<h3>Explicații</h3>
+
+<p>Înălţimile pixelilor 3D sunt ilustrate în figura 1, vârfurile fiind marcate îngroşat (înălţimile acestora fiind <code>20</code>, <code>19</code>, <code>50</code>). Toți pixelii au inițial culoarea albă, marcată cu <code>0</code>.</p>
+
+<p>Vom colora succesiv cele <code>3</code> vârfuri. Colorând vârful cu înălţimea <code>20</code> în culoarea <code>1</code> obţinem imaginea din figura 2. </p>
+
+<p>Colorând vârful cu înălţimea <code>19</code> în culoarea <code>2</code> obţinem imaginea din figura 3, unde am notat cu <code>(1,2)</code> combinaţia culorilor <code>1</code> şi <code>2</code>.</p>
+
+<p>Colorând vârful cu înălţimea <code>50</code> în culoarea <code>3</code> obţinem imaginea din figura 3, unde am notat cu <code>(1,3)</code> combinaţia culorilor <code>1</code> şi <code>3</code>, iar cu <code>(1,2,3)</code> combinaţia culorilor <code>1</code>, <code>2</code> şi <code>3</code>.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-pictura-01-jpg.jpg"></p>
+
+<p>Sunt vizibile <code>7</code> culori distincte: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>(1,2)</code>, <code>(1,3)</code> şi <code>(1,2,3)</code>. Numărul maxim de culori pure care se combină pe un același pixel 3D este <code>3</code>. Dimensiunea maximă a unei zone formată din pixeli de aceeaşi culoare este <code>4</code>  – zona colorată în culoarea <code>(1,2,3)</code>.</p>		</article>
+		</body></html>

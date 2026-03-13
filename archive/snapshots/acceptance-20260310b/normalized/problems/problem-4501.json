@@ -1,0 +1,307 @@
+{
+  "id": 4501,
+  "slug": "strcmpmut",
+  "name": "strcmpmut",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4501/strcmpmut",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 65,
+      "name": "Structuri de date arborescente",
+      "slug": "structuri-de-date-arborescente",
+      "href": "/?pagina=probleme-lista&tag=65"
+    },
+    {
+      "id": 154,
+      "name": "Arbori de intervale",
+      "slug": "arbori-de-intervale",
+      "href": "/?pagina=probleme-lista&tag=154"
+    }
+  ],
+  "tags": [
+    "Arbori de intervale",
+    "Preprocesare",
+    "Precalculare"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Se dă un string <code>S</code> format doar din litere mici ale alfabetului englez și <code>Q</code> operații de forma:</p><ul>\n\t<li><code>1 a b len</code> – se va afișa <code>1</code> dacă secvențele <code>S[a, a+len-1]</code> și <code>S[b, b+len-1]</code> sunt egale. În caz contrar, se va afișa <code>0</code>.</li>\n\t<li><code>2 l r ch</code> – toate caracterele între pozițiile <code>l</code> și <code>r</code> devin <code>ch</code>.</li>\n</ul><p>Să se scrie un program care poate efectua aceste operații.</p>",
+      "text": "Se dă un string S format doar din litere mici ale alfabetului englez și Q operații de forma: 1 a b len – se va afișa 1 dacă secvențele S[a, a+len-1] și S[b, b+len-1] sunt egale. În caz contrar, se va afișa 0. 2 l r ch – toate caracterele între pozițiile l și r devin ch. Să se scrie un program care poate efectua aceste operații."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie se va afla string-ul <code>S</code>.</p><p>Pe a doua linie se va afla numărul <code>Q</code>.</p><p>Pe următoarele <code>Q</code> linii se vor afla operațiile.</p>",
+      "text": "Pe prima linie se va afla string-ul S.Pe a doua linie se va afla numărul Q.Pe următoarele Q linii se vor afla operațiile."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Pentru fiecare operație de tip <code>1</code>, se va afisa câte un bit <code>1</code> dacă dacă secvențele <code>S[a, a+len-1]</code> și <code>S[b, b+len-1]</code> sunt egale. În caz contrar, se va afișa <code>0</code>.</p>",
+      "text": "Pentru fiecare operație de tip 1, se va afisa câte un bit 1 dacă dacă secvențele S[a, a+len-1] și S[b, b+len-1] sunt egale. În caz contrar, se va afișa 0."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li>Se recomandă folosirea <a href=\"https://www.geeksforgeeks.org/fast-io-for-competitive-programming/\">fastio</a></li>\n\t<li><code>1 ≤ |S| ≤ 100.000</code></li>\n\t<li><code>1 ≤ Q ≤ 100.000</code></li>\n\t<li><code>1 ≤ a ≤ b ≤ |S|</code></li>\n\t<li><code>1 ≤ l, r ≤ |S|</code></li>\n\t<li><code>b+len-1 ≤ |S|</code></li>\n\t<li>pentru 20% din teste: <code>1 ≤ |S| ≤ 1.000, 1 ≤ Q ≤ 1.000</code></li>\n\t<li>pentru alte 20% din teste: toate operațiile vor fi de tipul <code>1</code></li>\n\t<li>string-ul este indexat de la <code>1</code></li>\n</ul>",
+      "text": "Se recomandă folosirea fastio 1 ≤ |S| ≤ 100.000 1 ≤ Q ≤ 100.000 1 ≤ a ≤ b ≤ |S| 1 ≤ l, r ≤ |S| b+len-1 ≤ |S| pentru 20% din teste: 1 ≤ |S| ≤ 1.000, 1 ≤ Q ≤ 1.000 pentru alte 20% din teste: toate operațiile vor fi de tipul 1 string-ul este indexat de la 1"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><strong>Intrare</strong></p><pre>asdfiuash\n5\n1 1 5 1\n1 1 7 2\n1 1 7 3\n2 9 9 d\n1 1 7 3</pre><p><strong>Ieșire</strong></p><pre>0101</pre><h3>Explicație</h3><p>Pentru primul caz, comparăm substring-urile <code>\"a\"</code> și <code>\"i\"</code>. Acestea <b>nu</b> sunt egale.</p><p>Pentru al doilea caz, comparăm substring-urile <code>\"as\"</code> și <code>\"as\"</code>. Acestea sunt egale.</p><p>Pentru al treilea caz, comparăm substring-urile <code>\"asd\"</code> și <code>\"ash\"</code>. Acestea <b>nu</b> sunt egale.</p><p>Pentru al patrulea caz, comparăm substring-urile <code>\"asd\"</code> și <code>\"asd\"</code>. Acestea sunt egale.</p>",
+      "text": "Intrareasdfiuash 5 1 1 5 1 1 1 7 2 1 1 7 3 2 9 9 d 1 1 7 3Ieșire0101ExplicațiePentru primul caz, comparăm substring-urile \"a\" și \"i\". Acestea nu sunt egale.Pentru al doilea caz, comparăm substring-urile \"as\" și \"as\". Acestea sunt egale.Pentru al treilea caz, comparăm substring-urile \"asd\" și \"ash\". Acestea nu sunt egale.Pentru al patrulea caz, comparăm substring-urile \"asd\" și \"asd\". Acestea sunt egale."
+    }
+  ],
+  "examples": [
+    {
+      "input": "asdfiuash\n5\n1 1 5 1\n1 1 7 2\n1 1 7 3\n2 9 9 d\n1 1 7 3",
+      "output": "0101",
+      "explanation": "Pentru primul caz, comparăm substring-urile \"a\" și \"i\". Acestea nu sunt egale."
+    }
+  ],
+  "constraints": [
+    "Se recomandă folosirea fastio",
+    "1 ≤ |S| ≤ 100.000",
+    "1 ≤ Q ≤ 100.000",
+    "1 ≤ a ≤ b ≤ |S|",
+    "1 ≤ l, r ≤ |S|",
+    "b+len-1 ≤ |S|",
+    "pentru 20% din teste: 1 ≤ |S| ≤ 1.000, 1 ≤ Q ≤ 1.000",
+    "pentru alte 20% din teste: toate operațiile vor fi de tipul 1",
+    "string-ul este indexat de la 1"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qc9f31f6965.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Moldovan Robert (moldovan_robert_lol)",
+    "clasa": "11",
+    "intrare/ieșire": "tastatură / ecran",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "128 MB / 8 MB",
+    "sursa problemei": "-",
+    "autor": "Robert Moldovan",
+    "dificultate": "dificilă"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 128,
+  "author": "Robert Moldovan",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4501/strcmpmut"
+}

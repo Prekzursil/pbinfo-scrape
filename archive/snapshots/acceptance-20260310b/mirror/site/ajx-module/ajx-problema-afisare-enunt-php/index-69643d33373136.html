@@ -1,0 +1,142 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3716"><article id="enunt">
+			<h1>Enunț</h1>
+
+<p>Se dă o matrice de rebus cu <code>n</code> linii și <code>m</code> coloane. Fiecare celulă conține unul dintre caracterele:<br>
+</p><ul>
+	<li><code>'+'</code> – celulă blocată (nu poate conține literă)</li>
+	<li><code>'-'</code> – celulă liberă (trebuie completată cu o literă)</li><br>
+</ul><p></p>
+
+<p>De asemenea, se dă o listă de <code>W</code> cuvinte (formate doar din litere mari <code>A-Z</code>) care trebuie completate în rebus.</p>
+
+<p>Un cuvânt poate fi plasat:<br>
+</p><ul>
+	<li>pe orizontală (în aceeași linie), sau</li>
+	<li>pe verticală (în aceeași coloană),</li><br>
+</ul><p></p>
+
+<p>într-un segment maximal de celule <code>'-'</code> consecutive (numit <strong>slot</strong>). Lungimea cuvântului trebuie să fie egală cu lungimea slotului.</p>
+
+<p>Două cuvinte se pot intersecta (o celulă poate aparține atât unui slot orizontal, cât și unuia vertical), dar în acest caz litera rezultată în acea celulă trebuie să coincidă pentru ambele cuvinte.</p>
+
+<p>Fiecare cuvânt din listă trebuie folosit exact o singură dată.</p>
+
+<h1>Cerința</h1>
+
+<p>Completați rebusul și afișați matricea finală.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>"crossword.in"</code> conține:<br>
+</p><ul>
+	<li>pe prima linie numerele <code>n</code> și <code>m</code></li>
+	<li>pe următoarele <code>n</code> linii câte un șir de <code>m</code> caractere din mulțimea <code>{'+', '-'}</code> (fără spații)</li>
+	<li>pe ultima linie un șir care conține cele <code>W</code> cuvinte ce trebuie plasate, separate prin caracterul <code>;</code>.</li><br>
+</ul><p></p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>"crossword.out"</code> va conține <code>n</code> linii, fiecare cu <code>m</code> caractere, reprezentând rebusul completat (celulele <code>'+'</code> rămân neschimbate, iar celulele <code>'-'</code> devin litere mari <code>A-Z</code>).</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n, m ≤ 1000</code></li>
+	<li><code>1 ≤ W ≤ 200</code></li>
+	<li>fiecare cuvânt are lungimea între <code>2</code> și <code>max(n, m)</code></li>
+	<li>cuvintele sunt formate doar din caractere <code>A-Z</code></li>
+	<li>se garantează că fiecare celulă <code>'-'</code> aparține cel puțin unui slot (orizontal sau vertical) de lungime <code>&gt;= 2</code></li>
+	<li>se garantează că numărul total de sloturi (orizontale + verticale) de lungime <code>&gt;= 2</code> este exact <code>W</code></li>
+	<li>se garantează că există cel puțin o soluție și că soluția este unică</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>crossword.in</code></p>
+
+<pre>10 10
++-++++++++
++-++++++++
++-++++++++
++-----++++
++-+++-++++
++-+++-++++
++++++-++++
+++------++
++++++-++++
++++++-++++
+LONDON;DELHI;ICELAND;ANKARA</pre>
+
+<p><code>crossword.out</code></p>
+
+<pre>+L++++++++
++O++++++++
++N++++++++
++DELHI++++
++O+++C++++
++N+++E++++
++++++L++++
+++ANKARA++
++++++N++++
++++++D++++</pre>
+
+<h1>Exemplul 2</h1>
+
+<p><code>crossword.in</code></p>
+
+<pre>10 10
++-++++++++
++-++++++++
++-------++
++-++++++++
++-++++++++
++------+++
++-+++-++++
++++++-++++
++++++-++++
+++++++++++
+AGRA;NORWAY;ENGLAND;GWALIOR</pre>
+
+<p><code>crossword.out</code></p>
+
+<pre>+E++++++++
++N++++++++
++GWALIOR++
++L++++++++
++A++++++++
++NORWAY+++
++D+++G++++
++++++R++++
++++++A++++
+++++++++++</pre>
+
+<h1>Exemplul 3</h1>
+
+<p><code>crossword.in</code></p>
+
+<pre>10 10
+++++++-+++
+++------++
+++++++-+++
+++++++-+++
++++------+
+++++++-+-+
+++++++-+-+
+++++++++-+
+++++++++-+
+++++++++-+
+ICELAND;MEXICO;PANAMA;ALMATY</pre>
+
+<p><code>crossword.out</code></p>
+
+<pre>++++++I+++
+++MEXICO++
+++++++E+++
+++++++L+++
++++PANAMA+
+++++++N+L+
+++++++D+M+
+++++++++A+
+++++++++T+
+++++++++Y+</pre>		</article>
+		</body></html>

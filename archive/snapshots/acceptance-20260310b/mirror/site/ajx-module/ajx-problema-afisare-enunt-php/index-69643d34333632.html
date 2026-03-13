@@ -1,0 +1,59 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4362"><article id="enunt">
+			<p>Se dă un șir cu <code>N</code> elemente ce conține numerele naturale de la <code>1</code> la <code>K</code>, în această ordine, acestea putând fi separate de elemente egale cu <code>0</code>. De exemplu, pentru <code>N = 9</code>, șirul poate fi <code>0, 1, 2, 3, 0, 0, 4, 0, 5</code>. Acest șir poate fi completat succesiv cu câte un element după următoarea regulă: dacă printre ultimele <code>N</code> elemente din șir se află un număr impar de elemente nenule, atunci elementul care se adaugă este succesorul celui mai mare element nenul din șir, în caz contrar se va adăuga elementul <code>0</code>. Pentru exemplul anterior, după adăugarea a încă <code>4</code> elemente, șirul va deveni <code>0, 1, 2, 3, 0, 0, 4, 0, 5, 6, 0, 7, 8</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Să se răspundă la <code>Q</code> întrebări de forma: pentru două numere date <code>l</code> și <code>r</code>, care este valoarea sumei elementelor din șir de la indicele <code>l</code> la indicele <code>r</code>, inclusiv acestea?</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a intrării standard se află numerele <code>N</code> și <code>Q</code>, pe a doua linie cele <code>N</code> elemente ale șirului dat, iar pe următoarele <code>Q</code> linii câte două numere reprezentând valorile lui <code>l</code> și <code>r</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Se vor afișa la ecran, pe linii diferite, răspunsurile la cele <code>Q</code> întrebări.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N, Q ≤ 100.000</code></li>
+	<li><code>1 ≤ l ≤ r ≤ 2.000.000.000</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>9 2
+0 1 2 3 0 0 4 0 5
+1 4
+7 13</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>6
+30</pre>
+
+<h3>Explicație</h3>
+
+<p>Avem <code>N = 9</code> iar șirul este format cu elementele <code>0, 1, 2, 3, 0, 0, 4, 0, 5</code>. Cum printre acestea se află <code>5</code> elemente nenule, deducem <code>K = 5</code>. Având un număr impar de elemente nenule printre ultimele <code>9</code> elemente din șir deducem că următorul element din șir este <code>6</code> (succesorul lui <code>5</code>). Acum șirul este <code>0, 1, 2, 3, 0, 0, 4, 0, 5, 6</code>, iar ultimele <code>9</code> elemente din șir sunt <code>1, 2, 3, 0, 0, 4, 0, 5, 6</code>. Printre acestea avem un număr par de elemente nenule, deci următorul element din șir va fi <code>0</code>. Șirul devine: <code>0, 1, 2, 3, 0, 0, 4, 0, 5, 6, 0</code>. Ultimele <code>9</code> elemente din șir sunt <code>2, 3, 0, 0, 4, 0, 5, 6, 0</code>, printre care avem un număr impar de elemente nenule, deci următorul element din șir va fi <code>7</code> (succesorul lui <code>6</code>).<br>
+Elementele cuprinse între indicii <code>1</code> și <code>4</code> (inclusiv) sunt <code>0, 1, 2, 3</code> și suma lor este <code>6</code>, iar elementele cuprinse între indicii <code>7</code> și <code>13</code> (inclusiv) sunt <code>4, 0, 5, 6, 0, 7, 8</code> și suma lor este <code>30</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>3 2
+1 2 3
+1 5
+3 8</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>15
+33</pre>
+
+<h3>Explicație</h3>
+
+<p>Șirul generat va fi <code>1, 2, 3, 4, 5, 6, 7, ...</code> . Suma elementelor cuprinse între indicii <code>1</code> și <code>5</code> este <code>1 + 2 + 3 + 4 + 5 = 15</code>, iar suma elementelor cuprinse între indicii <code>3</code> și <code>8</code> este <code>3 + 4 + ... + 8 = 33</code>.</p>		</article>
+		</body></html>

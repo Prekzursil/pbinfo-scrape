@@ -1,0 +1,78 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4340"><article id="enunt">
+			<p>Un hotel pentru carantină <span class="caps">COVID</span> are <code>k</code> camere. În fiecare cameră poate sta la un moment dat un singur pacient. Hotelul este utilizat o perioadă de <code>z</code> zile dintr-un an. Perioada de carantină pentru fiecare pacient este exact <code>m</code> zile din perioada <code>z</code>. <span class="caps">DSP</span> a trimis conducerii hotelului o solicitare de cazare pentru <code>n</code> pacienți. Pentru fiecare pacient este precizată prima zi din perioadă începând cu care va trebui să fie cazat – perioada <code>z</code> începe cu ziua <code>1</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>1. <span class="caps">DSP</span> solicită determinarea numărului maxim de pacienți care vor putea fi primiţi în hotel conform solicitării trimise.<br>
+2. <span class="caps">DSP</span> solicită o listă cu numerele de ordine a pacienților din lista trimisă, care vor putea fi cazați.<br>
+3. Care este cea mai lungă secvență de pacienți din lista trimisă de <span class="caps">DSP</span> care nu au putut fi cazați. Afișați lungimea secvenței, precum și numărul de ordine al primului pacient al secvenței.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului de intrare <code>hotel.in</code> este scrisă cerința (<code>1</code>, <code>2</code> sau <code>3</code>). Pe linia a doua a fișierului de intrare sunt scrise valorile <code>k m n z</code> (<code>k</code> – numărul de camere din hotel, <code>m</code> – zile carantină, <code>n</code> – numărul pacienților, <code>z</code> – perioada). Pe următoarea linie (a treia) sunt scrise <code>n</code> numere naturale, separate prin câte un spațiu, reprezentând ziua în care începe carantina pentru pacientul respectiv.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă cerința este <code>1</code>, pe prima linie a fișierului de ieșire <code>hotel.out</code> va fi scris numărul maxim de pacienți care pot fi cazaţi în hotel conform solicitării trimise de <span class="caps">DSP</span>. Dacă cerința este <code>2</code>, pe prima linie vor fi scrise, separate prin câte un spațiu, numerele de ordine ale pacienților cazați, în ordinea în care se va face cazarea lor. Pacienții care sunt cazați în aceiași zi, vor fi cazați în ordinea din lista trimisă de <span class="caps">DSP</span>. Dacă cerința este <code>3</code> pe prima linie se vor afișa două numere naturale <code>a</code> și <code>b</code>, separate printr-un spațiu, reprezentând numărul maxim de pacienți necazați consecutiv din lista trimisă de <span class="caps">DSP</span>, respectiv numărul de ordine al primului pacient din secvența respectivă. Dacă există mai multe soluții la cerința <code>3</code>, se va afișa cea cu numărul de ordine al primului pacient minim.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ k ≤ 100</code></li>
+	<li><code>1 ≤ z ≤ 365</code></li>
+	<li><code>1 ≤ m ≤ z</code></li>
+	<li><code>1 ≤ n ≤ 1000</code></li>
+	<li>solicitările de cazare corespund numai celor <code>z</code> zile din perioada de utilizare a hotelului, ceea ce înseamnă că un pacient nu poate fi cazat mai puțin de <code>m</code> zile şi acestea trebuie să facă parte din perioada de <code>z</code> zile</li>
+	<li>cel puțin un pacient poate fi cazat, iar dacă toți pacienții au fost cazați, la cerința <code>3</code> se vor afișa două valori <code>0</code></li>
+	<li>cerința 1 – 39 puncte; cerința 2 – 30 puncte; cerința 3 – 21 puncte</li>
+	<li>10 puncte se acordă pentru testele din enunț</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>hotel.in</code></p>
+
+<pre>1
+2 7 8 365
+1 10 2 11 1 3 4 18</pre>
+
+<p><code>hotel.out</code></p>
+
+<pre>5</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerința 1. Sunt <code>2</code> camere, perioada de carantină este de <code>7</code> zile, sunt <code>8</code> pacienți, hotelul este utilizat <code>365</code> zile. Pot fi cazați <code>5</code> pacienți adică pacienții cu numerele de ordine <code>1</code>, <code>5</code>, <code>2</code>, <code>4</code>, <code>8</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>hotel.in</code></p>
+
+<pre>2
+2 7 8 365
+1 10 2 11 1 3 4 18</pre>
+
+<p><code>hotel.out</code></p>
+
+<pre>1 5 2 4 8</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerința 2. Sunt cazați pacienții cu numerele de ordine <code>1</code> și <code>5</code>, în această ordine. Ambele camere devin disponibile din ziua <code>8</code>. În ziua <code>10</code> este cazat în camera <code>1</code> pacientul cu numărul de ordine <code>2</code>, iar în ziua <code>11</code> pacientul cu numărul de ordine <code>4</code> în camera <code>2</code>. Camera <code>1</code> devine liberă din ziua <code>18</code>, pacientul cu numărul de ordine <code>8</code> este cazat aici.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>hotel.in</code></p>
+
+<pre>3
+2 7 8 365
+1 10 2 11 1 3 4 18</pre>
+
+<p><code>hotel.out</code></p>
+
+<pre>2 6</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerința 3. Nu au putut fi cazați pacienții cu numerele de ordine <code>3</code>, <code>6</code> și <code>7</code>. Deci secvența cu număr maxim de pacienți necazați este <code>6 7</code>. Secvența are <code>2</code> pacienți, primul având numărul de ordine <code>6</code>.</p>		</article>
+		</body></html>

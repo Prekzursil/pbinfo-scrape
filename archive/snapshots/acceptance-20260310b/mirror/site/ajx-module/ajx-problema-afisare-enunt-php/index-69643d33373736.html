@@ -1,0 +1,55 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3776"><article id="enunt">
+			<p>Se dă un șir <code>S</code> format din litere mici ale alfabetului englez. O secvență din şir este <code>palindromică</code> dacă prin parcurgerea sa de la dreapta la stânga se obține același cuvânt precum la parcurgerea de la stânga la dreapta.</p>
+
+<h1>Cerința</h1>
+
+<p>Se formulează <code>m</code> întrebări de forma <code>i, j, k</code> cu semnificația: pornind de la secvența formată din caracterele dintre indicii <code>i</code> și <code>j</code> inclusiv și având posibilitatea să o extindem în total cu maximum <code>k</code> caractere în <code>S</code> (imediat în stânga poziției <code>i</code> și/sau imediat în dreapta poziției <code>j</code>), putem să obținem o secvență palindromică?</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>sp.in</code> conține pe prima linie un șir <code>S</code> format din litere mici ale alfabetului englez, neseparate prin spații. Pe linia a doua se găsește numărul de interogări <code>m</code>. Pe fiecare dintre următoarele <code>m</code> linii se găsesc câte trei numere <code>i</code>, <code>j</code> și <code>k</code> (separate prin spațiu), reprezentând indicele de început, cel de final pentru câte o secvență și numărul maxim de caractere cu care eventual o putem extinde.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>sp.out</code> va conține o singură linie pe care vor fi scrise <code>m</code> valori <code>0</code> sau <code>1</code>, neseparate prin spații. Dacă din cea de a <code>i</code>-a interogare, dintre cele <code>m</code> din fișierul de intrare, putem forma un palindrom în condițiile din enunț, al <code>i</code>-lea număr din fișier va fi <code>1</code>, iar în caz contrar va fi <code>0</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>Notăm cu <code>n</code> lungimea şirului <code>S</code></li>
+	<li><code>1 ≤ n ≤ 200.000</code></li>
+	<li><code>1 ≤ m ≤ 200.000</code></li>
+	<li><code>0 ≤ k ≤ 5</code></li>
+	<li>La fiecare interogare dată sub forma <code>i j k</code>, avem <code>1 ≤ i ≤ j ≤ n</code></li>
+	<li>Şirul <code>S</code> este indexat de la <code>1</code>.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>sp.in</code></p>
+
+<pre>abaaaac
+6
+1 2 0
+1 2 1
+2 4 1
+2 4 2
+1 2 0
+2 2 1</pre>
+
+<p><code>sp.out</code></p>
+
+<pre>010001</pre>
+
+<h3>Explicație</h3>
+
+<p>La prima interogare, <code>k = 0</code> iar secvența dată nu este palindromică, deci se scrie la ieșire <code>0</code>.</p>
+
+<p>La a doua interogare este vorba despre aceeași secvență dar acum <code>k = 1</code>. Deci putem să o extindem cu un caracter. Se poate cu acela din dreapta și obținem secvența <code>aba</code> care este palindromică.</p>
+
+<p>La a treia interogare, secvența formată <code>baa</code> nu este palindromică iar prin extinderea cu un caracter obținem secvențele <code>abaa</code> (extinzând în stânga) sau <code>baaa</code> (extinzând în dreapta). Niciuna dintre aceste secvențe nu este palindromică.</p>
+
+<p>La a patra interogare avem secvența <code>baa</code> și o putem extinde cu până la două caractere: avem variantele: cu un caracter din stânga și obținem <code>abaa</code>, cu un caracter din dreapta și obținem <code>baaa</code>, cu un caracter din stânga și unul din dreapta și obținem <code>abaaa</code>, cu două caractere din dreapta și obținem <code>baaaa</code>. Nu putem extinde cu două caractere în stânga pentru că nu avem.</p>
+
+<p>A cincea interogare este aceeași cu prima și rezultatul este <code>0</code>,  iar a șasea interogare conține un interval dintr-un element, iar acesta reprezintă o secvență palindromică.</p>		</article>
+		</body></html>

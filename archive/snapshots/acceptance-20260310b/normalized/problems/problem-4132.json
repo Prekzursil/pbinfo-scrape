@@ -1,0 +1,313 @@
+{
+  "id": 4132,
+  "slug": "culori6",
+  "name": "culori6",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4132/culori6",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 9,
+      "name": "Parcurgerea vectorilor",
+      "slug": "parcurgerea-vectorilor",
+      "href": "/?pagina=probleme-lista&tag=9"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Cunoscând numărul <code>N</code> de rânduri cu pătrățele, numărul de pătrățele colorate de pe fiecare rând și culoarea fiecărui pătrățel, scrieți un program care să determine:</p><ul>\n\t<li><code>Lmax</code> si <code>Kmax</code>, două numere naturale, unde <code>Lmax</code> reprezintă lungimea maximă unui rând ce are proprietatea că oricare două pătrățele alăturate au culori diferite, iar <code>Kmax</code> reprezintă câte astfel de rânduri sunt pe foaie.</li>\n\t<li>Cel mai mare număr natural ce se poate forma prin lipirea tuturor cifrelor corespunzătoare culorilor de pe același rând, parcurse de la stânga la dreapta.</li>\n</ul>",
+      "text": "Cunoscând numărul N de rânduri cu pătrățele, numărul de pătrățele colorate de pe fiecare rând și culoarea fiecărui pătrățel, scrieți un program care să determine: Lmax si Kmax, două numere naturale, unde Lmax reprezintă lungimea maximă unui rând ce are proprietatea că oricare două pătrățele alăturate au culori diferite, iar Kmax reprezintă câte astfel de rânduri sunt pe foaie. Cel mai mare număr natural ce se poate forma prin lipirea tuturor cifrelor corespunzătoare culorilor de pe același rând, parcurse de la stânga la dreapta."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>culori.in</code> conține pe prima linie două numere naturale <code>C</code> și <code>N</code>, unde <code>C</code> reprezintă numărul cerinţei şi poate avea valorile <code>1</code> sau <code>2</code>, iar <code>N</code> reprezintă numărul rândurilor din caiet colorate de Andrei. Pe fiecare din următoarele  <code>N</code> linii, numere naturale despărțite prin câte un spațiu. Fiecare linie corespunde unui rând al foii de caiet, în ordinea numerotării rândurilor. Primul număr de pe fiecare linie reprezintă numărul pătrățelelor colorate de Andrei pe rândul respectiv, iar apoi următoarele valori reprezintă codurile culorilor folosite pentru colorarea pătrățelelor de pe rândul respectiv, fiecare corespunzând câte unui pătrățel, în ordine, începând cu primul de pe acel rând (cel din stânga), până la ultimul de pe acel rând (cel din dreapta).</p>",
+      "text": "Fișierul de intrare culori.in conține pe prima linie două numere naturale C și N, unde C reprezintă numărul cerinţei şi poate avea valorile 1 sau 2, iar N reprezintă numărul rândurilor din caiet colorate de Andrei. Pe fiecare din următoarele N linii, numere naturale despărțite prin câte un spațiu. Fiecare linie corespunde unui rând al foii de caiet, în ordinea numerotării rândurilor. Primul număr de pe fiecare linie reprezintă numărul pătrățelelor colorate de Andrei pe rândul respectiv, iar apoi următoarele valori reprezintă codurile culorilor folosite pentru colorarea pătrățelelor de pe rândul respectiv, fiecare corespunzând câte unui pătrățel, în ordine, începând cu primul de pe acel rând (cel din stânga), până la ultimul de pe acel rând (cel din dreapta)."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>culori.out</code> va conține pe prima linie:</p><ul>\n\t<li>pentru cerința <code>1</code>,  două numere naturale <code>Lmax</code> și <code>Kmax</code>, în această ordine și despărțite printr-un spațiu;</li>\n\t<li>pentru cerința <code>2</code>, un singur număr natural determinat conform cerinței.</li>\n</ul>",
+      "text": "Fișierul de ieșire culori.out va conține pe prima linie: pentru cerința 1, două numere naturale Lmax și Kmax, în această ordine și despărțite printr-un spațiu; pentru cerința 2, un singur număr natural determinat conform cerinței."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 10.000</code>;</li>\n\t<li><code>1 ≤ numărul pătrățelelor colorate de pe fiecare rând ≤ 500</code>;</li>\n\t<li>pentru rezolvarea corectă a primei cerințe se acordă <code>27</code> de puncte, iar pentru rezolvarea corectă a celei de-a doua cerințe se acordă <code>73</code> de puncte;</li>\n</ul>",
+      "text": "1 ≤ N ≤ 10.000; 1 ≤ numărul pătrățelelor colorate de pe fiecare rând ≤ 500; pentru rezolvarea corectă a primei cerințe se acordă 27 de puncte, iar pentru rezolvarea corectă a celei de-a doua cerințe se acordă 73 de puncte;"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>culori.in</code></p><pre>1 7\n6 4 2 3 1 1 1\n5 7 2 3 9 3 \n2 4 4    \n6 2 2 7 1 7 7\n1 3     \n4 9 9 9 9  \n5 7 2 7 2 7</pre><p><code>culori.out</code></p><pre>5 2</pre><h3>Explicație</h3><p>Exemplul corespunde desenului din imaginea de mai sus. Se va rezolva cerința <code>1</code>. Rândurile <code>2</code>, <code>5</code> și <code>7</code> au proprietatea din cerință. Lungimea rândului <code>2</code> este <code>5</code>, a rândului <code>5</code> este <code>1</code>, iar a rândului <code>7</code>  este <code>5</code>, deci lungimea maximă a unui rând este <code>5</code> și sunt <code>2</code> rânduri de această lungime. <code>Lmax=5</code> și <code>Kmax=2</code>.</p>",
+      "text": "culori.in1 7 6 4 2 3 1 1 1 5 7 2 3 9 3 2 4 4 6 2 2 7 1 7 7 1 3 4 9 9 9 9 5 7 2 7 2 7culori.out5 2ExplicațieExemplul corespunde desenului din imaginea de mai sus. Se va rezolva cerința 1. Rândurile 2, 5 și 7 au proprietatea din cerință. Lungimea rândului 2 este 5, a rândului 5 este 1, iar a rândului 7 este 5, deci lungimea maximă a unui rând este 5 și sunt 2 rânduri de această lungime. Lmax=5 și Kmax=2."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>culori.in</code></p><pre>2 7\n6 4 2 3 1 1 1\n5 7 2 3 9 3 \n2 4 4    \n6 2 2 7 1 7 7\n1 3     \n4 9 9 9 9  \n5 7 2 7 2 7</pre><p><code>culori.out</code></p><pre>423111</pre><h3>Explicație</h3><p>Se va rezolva cerința 2. Numerele naturale construite din cifrele fiecărui rând sunt: <code>423111</code>, <code>72393</code>, <code>44</code>, <code>227177</code>, <code>3</code>, <code>9999</code> și <code>72727</code>. Cel mai mare dintre ele este <code>423111</code>. </p>",
+      "text": "culori.in2 7 6 4 2 3 1 1 1 5 7 2 3 9 3 2 4 4 6 2 2 7 1 7 7 1 3 4 9 9 9 9 5 7 2 7 2 7culori.out423111ExplicațieSe va rezolva cerința 2. Numerele naturale construite din cifrele fiecărui rând sunt: 423111, 72393, 44, 227177, 3, 9999 și 72727. Cel mai mare dintre ele este 423111."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Exemplul corespunde desenului din imaginea de mai sus. Se va rezolva cerința 1. Rândurile 2, 5 și 7 au proprietatea din cerință. Lungimea rândului 2 este 5, a rândului 5 este 1, iar a rândului 7 este 5, deci lungimea maximă a unui rând este 5 și sunt 2 rânduri de această lungime. Lmax=5 și Kmax=2."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Se va rezolva cerința 2. Numerele naturale construite din cifrele fiecărui rând sunt: 423111, 72393, 44, 227177, 3, 9999 și 72727. Cel mai mare dintre ele este 423111."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 10.000;",
+    "1 ≤ numărul pătrățelelor colorate de pe fiecare rând ≤ 500;",
+    "pentru rezolvarea corectă a primei cerințe se acordă 27 de puncte, iar pentru rezolvarea corectă a celei de-a doua cerințe se acordă 73 de puncte;"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q77ee68f962.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/culori6_001.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-culori6-001-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "culori.in / culori.out",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "ONI 2022, clasa a V-a",
+    "autor": "Cristina Iordaiche",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 64,
+  "author": "Cristina Iordaiche",
+  "sourceAttribution": "ONI 2022, clasa a V-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4132/culori6"
+}

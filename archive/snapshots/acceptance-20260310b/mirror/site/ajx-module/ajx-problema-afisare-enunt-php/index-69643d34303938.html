@@ -1,0 +1,112 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4098"><article id="enunt">
+			<p>Data stelară 3210: Căpitanul navei <span class="caps">USS</span> Entrerprise, Jean-Luc Picard se află într-o misiune importantă în cuadrantul Beta al galaxiei. Acesta trebuie să ajungă cât mai rapid de la planeta Vulcan până la planeta Qo’noS, dar din păcate pentru această misiune Jean-Luc Picard nu va putea să ajungă instantaneu la destinație folosind warp drive-ul navei, ci va trebui să se deplaseze în mod normal, din sector în sector.</p>
+
+<p>Harta galaxiei este reprezentată sub forma unei tabele bidimensionale de dimensiune <code>N x N</code>, în care fiecare celulă reprezintă un sector al galaxiei. Coordonatele sectorului în care se află planeta Vulcan sunt <code>(xs, ys)</code>, iar coordonatele sectorului în care se află planeta Qo’noS sunt <code>(xf, yf)</code>. </p>
+
+<p><span class="caps">USS</span> Enterprise se poate deplasa într-o unitate de timp dintr-un sector în oricare dintre sectorele adiacente, fie pe aceeasi linie, fie pe aceeasi coloană. În plus, nava poate staționa o perioadă nedeterminată de timp în orice sector. Nava se poate afla doar pe un sector care la momentul actual de timp nu o pune în pericol. </p>
+
+<p>Pentru că nicio aventură nu este lipsită de pericole, drumul lui Jean-Luc Picard este presărat de pulsari, obiecte cosmice foarte periculoase care lansează în vecinătatea lor, la intervale fixe de timp, unde gravitaționale care ar putea distruge <span class="caps">USS</span> Enterprise. </p>
+
+<p>Un pulsar <code>P_i</code> este caracterizat prin patru variabile <code>(xi, yi, ri, ti)</code>, unde <code>(xi, yi)</code> reprezintă coordonatele sectorului în care se regăsește pulsarul, <code>ri</code> reprezintă raza de acțiune a pulsarului, iar <code>ti</code> reprezintă starea în care se află pulsarul la momentul de început al deplasării navei.</p>
+
+<p>Un pulsar <code>Pi</code> trece periodic printr-un număr de <code>ri</code> stări de la <code>0</code> la <code>ri - 1</code>. Când acesta se află în starea <code>t</code>, acesta afectează toate sectoarele aflate la o distanță Manhattan mai mică sau egală cu <code>t</code> față de sectorul în care se află acesta. Dacă pulsarul la un moment de timp se află în starea <code>t</code>, la momentul următor se va afla în starea <code>(t + 1) % ri</code>.</p>
+
+<p>Un exemplu de funcționare al unui pulsar cu rază de acțiune <code>r = 4</code>, timp de <code>6</code> unități de timp, începând cu <code>t = 0</code> este următorul:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-pulsar-1-jpg.jpg"></p>
+
+<h1>Cerința</h1>
+
+<p>Vouă vă revine rolul de a îl ajuta pe Jean-Luc Picard și să îi răspundeți la una din următoarele întrebări știind harta galaxiei:</p>
+
+<ul>
+	<li>Care este numărul maxim de sectoare ale galaxiei <code>Smax</code> afectate la orice moment de timp de către cel puțin un pulsar.</li>
+	<li>Care este timpul minim <code>Tmin</code> de care are nevoie Jean-Luc Picard pentru a ajunge pe planeta Qo’noS.</li>
+</ul>
+
+<h1>Date de intrare</h1>
+
+<p>Din fișierul de intrare <code>pulsar.in</code> se vor citi următoarele:</p>
+
+<ul>
+	<li>Pe prima linie se vor afla trei numere <code>C</code>, <code>N</code> și <code>P</code> separate prin câte un spațiu, reprezentând cerința ce trebuie rezolvată, dimensiunea galaxiei și numărul de pulsari din galaxie</li>
+	<li>Pe următoarele <code>P</code> linii se vor afla câte patru numere separate prin spațiu, <code>xi, yi, ri, ti</code>, reprezentând descrierea pulsarului <code>Pi</code></li>
+	<li>Pe penultima linie se vor afla două numere separate printr-un spațiu reprezentând coordonatele sectorului planetei Vulcan <code>xs</code> și <code>ys</code></li>
+	<li>Pe ultima linie se vor afla două numere separate printr-un spațiu reprezentând coordonatele sectorului planetei Qo’noS <code>xf</code> și <code>yf</code></li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>În fișierul de ieșire <code>pulsar.out</code> se va afișa un singur număr în funcție de cerință:</p>
+
+<ul>
+	<li>Dacă <code>C = 1</code>, atunci se va afișa numărul <code>Smax</code></li>
+	<li>Dacă <code>C = 2</code>, atunci se va afișa numărul <code>Tmin</code></li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>Distanța Manhattan dintre două coordonate <code>(x1, y1)</code> și <code>(x2, y2)</code> este definită ca: <code>|x1 - x2| + |y1 - y2|</code></li>
+	<li>Nava nu va putea părăsi la niciun moment de timp harta galaxiei</li>
+	<li>Undele pulsarilor pot părăsi harta galaxiei, dar acele sectoare nu reprezintă interes pentru problema noastră</li>
+	<li>Se garantează că la momentul plecării, nava nu este aflată în pericol</li>
+	<li>Se garantează că există soluție</li>
+	<li>Pot exista mai mulți pulsari în același sector</li>
+	<li><code>C ∈ {1, 2}</code></li>
+	<li><code>3 ≤ N ≤ 500</code></li>
+	<li><code>1 ≤ P ≤ 15.000</code></li>
+	<li><code>0 ≤ ti &lt; ri ≤ 6</code> pentru orice <code>1 ≤ i ≤ P</code></li>
+	<li><code>1 ≤ xs, ys, xf, yf ≤ N</code></li>
+	<li><code>1 ≤ xi, yi ≤ N</code> pentru orice <code>1 ≤ i ≤ P</code></li>
+	<li>Pentru 19 puncte, <code>C = 1</code></li>
+	<li>Pentru 22 de puncte, <code>C = 2</code> și <code>ri = 1</code> pentru orice <code>1 ≤ i ≤ P</code></li>
+	<li>Pentru 9 puncte, <code>C = 2</code>, <code>N ≤ 7</code> și <code>ri ≤ 3</code> pentru orice <code>1 ≤ i ≤ P</code></li>
+	<li>Pentru 13 puncte, <code>C = 2</code>, <code>ti = 0</code> pentru orice <code>1 ≤ i ≤ P</code></li>
+	<li>Pentru 37 puncte, <code>C = 2</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>pulsar.in</code></p>
+
+<pre>1 5 4
+3 1 2 1
+1 5 3 1
+5 3 2 0
+3 4 2 1
+1 1
+5 5</pre>
+
+<p><code>pulsar.out</code></p>
+
+<pre>14</pre>
+
+<h3>Explicație</h3>
+
+<p>Mai jos se poate observa dumul realizat de <span class="caps">USS</span> Enterprise. Cu albastru s-a ilustrat nava, cu rosu, zonele afectate de pulsari, iar cu verde planeta Qo’nos:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-pulsar-2-jpg.jpg"></p>
+
+<p>Se observă că nu va exista niciodată un moment de timp în care pulsarii să ocupe mai mult de <code>14</code> sectoare.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>pulsar.in</code></p>
+
+<pre>2 5 4
+3 1 2 1
+1 5 3 1
+5 3 2 0
+3 4 2 1
+1 1
+5 5</pre>
+
+<p><code>pulsar.out</code></p>
+
+<pre>9</pre>
+
+<h3>Explicație</h3>
+
+<p>În figura de mai sus este prezentat un posibil drum de durată <code>9</code>. Acest timp este și minim pentru exemplul dat.</p>		</article>
+		</body></html>

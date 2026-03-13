@@ -1,0 +1,69 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4420"><article id="enunt">
+			<p>De ziua lui, Florin a primit un șir de caractere <strong>periodic</strong> și <strong>infinit</strong>. Perioada lui are lungime <code>n</code> și conține doar litere mici ale alfabetului englez. Deoarece este curios, el vrea să își personalizeze șirul primit în diverse moduri. Pentru a face asta, el vă dă <code>q</code> operații care se realizează pe șirul dat, operații de două tipuri, după cum urmează:</p>
+
+<ul>
+	<li><code>1 x y</code>: Litera de pe poziția <code>x</code> devine egală cu <code>y</code>, unde <code>y</code> este o literă mică a alfabetului englez.</li>
+	<li><code>2 a b c</code>: Florin vrea să afle câte litere egale cu <code>c</code> există între pozițiile <code>[a, b]</code> din șirul de caractere.</li>
+</ul>
+
+<p>Fiindcă nu vrea să strice periodicitatea șirului foarte mult, Florin vă garantează că pentru toate operațiile de actualizare, valorile pozițiilor modificate au în reprezentarea binară cel mult <code>k</code> biți egali cu <code>1</code>. </p>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care, dându-se șirul de caractere și actualizările, răspunde la interogări.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>perioade.in</code> conține pe prima linie <code>n</code> și <code>k</code>, reprezentând lungimea perioadei șirului de caractere, respectiv numărul maxim de biți de <code>1</code> pe care îl are o poziție modificată la operația de tipul <code>1</code>. Pe cea de-a doua linie se va citi perioada șirului de caractere inițial. Pe cea de-a treia linie se va citi <code>q</code>, reprezentând numărul de operații făcut de Florin. Pe următoarele <code>q</code> linii se vor citi operațiile, care respectă descrierea din enunț. </p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>perioade.out</code> va conține răspunsurile pentru operațiile de tipul <code>2</code>, câte un răspuns pe fiecare linie, în ordinea în care sunt date în datele de intrare. </p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n, q ≤ 250.000</code></li>
+	<li><code>1 ≤ k ≤ 4</code></li>
+	<li>Pentru toate query-urile, <code>1 ≤ x, a, b ≤ 10</code><sup><code>18</code></sup>, <code>a ≤ b</code>. Pozițiile modificate au cel mult <code>k</code> biți egali cu <code>1</code>.</li>
+	<li>Datorită dimensiunilor mari, numai unele teste au fost adăugate.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>perioade.in</code></p>
+
+<pre>3 4
+bun
+11
+1 9 a
+1 7 a
+2 3 11 n
+1 4 x
+2 7 13 b
+1 6 o
+1 12 b
+1 8 r
+2 1 15 u
+1 7 b
+2 3 12 b</pre>
+
+<p><code>perioade.out</code></p>
+
+<pre>2
+2
+4
+3</pre>
+
+<h3>Explicație</h3>
+
+<p>Înainte de operații, șirul este <code>bunbunbunbunbunbun...</code><br>
+După primele două actualizări, șirul devine <code>bunbunauabunbunbun...</code><br>
+Pentru prima operație de tipul <code>2</code>, avem litera <code>n</code> pe pozițiile <code>3</code> și <code>6</code>.<br>
+După următoarea actualizare, șirul devine <code>bunxunauabunbunbun...</code><br>
+Pentru cea de-a doua operație de tipul <code>2</code>, vom avea litera <code>b</code> pe pozițiile <code>10</code> și <code>13</code>. <br>
+După următoarele trei actualizări, șirul devine <code>bunxuoarabubbunbun...</code><br>
+Pentru cea de-a treia operație de tipul <code>2</code>, vom avea litera <code>u</code> pe pozițiile <code>2</code>, <code>5</code>, <code>11</code> și <code>14</code>.  <br>
+După următoarea actualizare, șirul devine <code>bunxuobrabubbunbun...</code><br>
+Pentru ultima operație de tipul <code>2</code>, vom avea litera <code>b</code> pe pozițiile <code>7</code>, <code>10</code> și <code>12</code>.</p>		</article>
+		</body></html>

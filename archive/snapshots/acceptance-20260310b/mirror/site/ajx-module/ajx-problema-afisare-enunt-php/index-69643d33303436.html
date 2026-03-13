@@ -1,0 +1,64 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3046"><article id="enunt">
+			Dorel, plictisit de puzzle-ul pe care l-a upgradat ieri, a decis să meargă afară cu ceilalți copii.
+El îi privește pe cei <code>N</code> copii cum joacă “telefonul fără fir”.
+Jocul decurge în felul următor:
+<ul>
+	<li>Inițial, copiii se așază pe axa <code>Ox</code>, copilul <code>i</code> la distanța <code>X</code><sub><code>i</code></sub> metri față de origine.</li>
+	<li>Copilul cel mai aproape de origine alege un cuvânt secret și îl transmite celui din dreapta lui; cel din dreapta lui îl transmite următorului și așa mai departe până se ajunge la ultimul copil.</li>
+</ul>
+
+<p>Pentru a transmite cuvântul, fiecare copil trebuie să meargă până la copilul din dreapta lui. Toți copiii se deplasează cu viteza constantă de <code>1</code> metru/secundă. Cu toate acestea, pentru a evita deplasarea fiecare copil dispune de un dispozitiv de tip walkie-talkie ce permite transmiterea unui cuvânt mai departe. Toate stațiile walkie-talkie au o rază de acțiune <code>R</code>, setată la începutul unei runde de joc (exprimată în metri) ce nu poate fi modificată pe parcursul jocului. Stațiile sunt conectate la aceeași sursă de alimentare care are <code>B</code> unități de energie.<br>
+În funcție de raza de acțiune setată, copiii pot sau nu să folosească sistemul walkie-talkie pentru a nu se mai deplasa. Mai exact, dacă un copil ar trebui să parcurgă o distanță mai mică sau egală cu <code>R</code> ca să transmită cuvântul celui din dreapta sa și bateria sursei are cel puțin <code>R</code> unități de energie rămase, acesta poate folosi sistemul walkie-talkie ca să transmită instantaneu cuvântul secret, iar bateria se va descărca cu <code>R</code> unități de energie. Cu toate acestea, chiar și cu sistemul walkie-talkie, un copil nu are voie să transmită mesajul decât primului copil situat în dreapta lui.<br>
+Copiii doresc ca jocul să se termine cât mai repede, așa că vor seta o rază de acțiune convenabilă și vor alege să folosească sau nu sistemul walkie-talkie, pentru a minimiza timpul necesar ca toți cei <code>N</code> copii să afle cuvântul secret.<br>
+Dorel dorește să se alăture jocului, așa că în a doua parte a jocului va intra și el în rând. Dorel se va așeza pe axa <code>Ox</code>, undeva între primul și ultimul copil, la o anumită distanță de origine unde nu se află un alt copil.</p>
+
+<h1>Cerința</h1>
+
+<p>1. Care este durata minimă a jocului, dacă Dorel nu ia parte la joc?<br>
+2. Care este durata minimă a jocului, dacă Dorel ia parte la joc și se poziționează în mod optim pentru a minimiza durata jocului?</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>telefon.in</code> conține pe prima linie două numere naturale <code>N</code> și <code>B</code> cu semnificația din enunț. Pe cea de-a doua linie se află <code>N</code> numere naturale nenule distincte <code>X</code><sub><code>i</code></sub>, în ordine strict crescătoare, unde <code>X</code><sub><code>i</code></sub> reprezintă distanța copilului <code>i</code> față de origine, <code>1 ≤ i ≤ N</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>telefon.out</code> va conține două numere naturale <code>C1 C2</code>, separate printr-un spațiu, unde <code>C1</code> reprezintă răspunsul la cerința <code>1</code> iar <code>C2</code> răspunsul la cerința <code>2</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N ≤ 100.000</code></li>
+	<li><code>1 ≤ B ≤ 1.000.000.000</code>, <code>1 ≤ X</code><sub><code>i</code></sub> <code>≤ 1.000.000.000</code></li>
+	<li>Se garantează că Dorel are cel puțin o poziție liberă pe care se poate așeza</li>
+	<li>Un copil poate alege între a se deplasa sau a folosi walkie-talkie pentru a transmite un mesaj</li>
+	<li>Copiii pot seta o noua rază de acțiune a walkie-talkie când Dorel intră în joc</li>
+	<li>Pentru prima cerință se acordă <code>40</code> puncte</li>
+	<li>Pentru a doua cerință se acordă <code>60</code> puncte</li>
+	<li>Pentru teste în valoare de <code>15</code> puncte <code>N, B ≤ 100</code></li>
+	<li>Pentru alte teste în valoare de <code>35</code> puncte <code>N ≤ 1000</code>, <code>B ≤ 10.000</code></li>
+	<li>Pentru alte teste în valoare de <code>20</code> puncte <code>N ≤ 100.000</code>, <code>B ≤ 100.000</code></li>
+	<li>Pentru alte teste în valoare de <code>30</code> puncte <code>N ≤ 100.000</code>, <code>B ≤ 1.000.000.000</code></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>telefon.in</code></p>
+
+<pre>6 15
+7 9 12 16 21 27</pre>
+
+<p><code>telefon.out</code></p>
+
+<pre>8 6</pre>
+
+<h3>Explicație</h3>
+
+<p><code>N = 6</code>, <code>B = 15</code>, <code>X</code><sub><code>[1-6]</code></sub> <code>= [7, 9, 12, 16, 21, 27]</code></p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-telefon-jpg.jpg"></p>
+
+<p>1.Dacă Dorel nu participă la joc atunci copiii vor alege raza de acțiune <code>R = 5</code> și al doilea, al treilea și al patrulea copil vor folosi sistemul de comunicare. În consecință durata jocului va fi <code>(9-7)+(27-21)= 2+6 = 8</code>.<br>
+2.Dacă Dorel participă la joc se va poziționa la distanța <code>26</code> față de origine. În această situație copiii vor alege raza de acțiune <code>R</code> tot <code>5</code> și al treilea, al patrulea și al cincilea copil vor folosi sistemul de comunicare.<br>
+În consecință durata jocului va fi <code>(9-7)+(12-9)+(27-26) = 2+3+1 = 6</code>.</p>		</article>
+		</body></html>

@@ -1,0 +1,308 @@
+{
+  "id": 2193,
+  "slug": "100m",
+  "name": "100m",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/2193/100m",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 91,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=91"
+    },
+    {
+      "id": 93,
+      "name": "Combinatorică",
+      "slug": "combinatoric",
+      "href": "/?pagina=probleme-lista&tag=93"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Considerând <code>N</code> atleți, ce participă la o cursă de 100 metri plat, identificați prin numerele <code>1</code>, <code>2</code>, …, <code>N</code>, să se scrie un program care determină numărul <code>P</code> al clasamentelor distincte care pot fi obținute după finalizarea cursei. De exemplu, pentru <code>N = 2</code>, se pot obține <code>3</code> clasamente distincte: <code>(1,2)</code>, <code>(2,1)</code>, <code>(1=2)</code>; unde <code>(1=2)</code> reprezintă situația când ambii atleți s-au clasat la egalitate.</p>",
+      "text": "Considerând N atleți, ce participă la o cursă de 100 metri plat, identificați prin numerele 1, 2, …, N, să se scrie un program care determină numărul P al clasamentelor distincte care pot fi obținute după finalizarea cursei. De exemplu, pentru N = 2, se pot obține 3 clasamente distincte: (1,2), (2,1), (1=2); unde (1=2) reprezintă situația când ambii atleți s-au clasat la egalitate."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>100m.in</code> conţine pe prima linie numărul natural <code>N</code>, cu semnificația de mai sus.</p>",
+      "text": "Fișierul de intrare 100m.in conţine pe prima linie numărul natural N, cu semnificația de mai sus."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>100m.out</code> va conţine pe prima linie restul împărţirii numărului <code>P</code> la <code>666013</code>.</p>",
+      "text": "Fișierul de ieșire 100m.out va conţine pe prima linie restul împărţirii numărului P la 666013."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2 ≤ N ≤ 5 000</code></li>\n\t<li>Două clasamente se consideră distincte dacă diferă prin cel puțin o poziție</li>\n\t<li>Pentru teste în valoare de <code>32</code> de puncte <code>N ≤ 500</code></li>\n</ul>",
+      "text": "2 ≤ N ≤ 5 000 Două clasamente se consideră distincte dacă diferă prin cel puțin o poziție Pentru teste în valoare de 32 de puncte N ≤ 500"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>100m.in</code></p><pre>3</pre><p><code>100m.out</code></p><pre>13</pre><h3>Explicație</h3><p><code>N = 3</code> atleți. Numerotând atleții cu <code>1</code>, <code>2</code> și <code>3</code> există <code>13</code> clasamente distincte:<br>\n<code>(1, 2, 3)</code> ; <code>(1, 3, 2)</code> ; <code>(2, 1, 3)</code> ; <code>(2, 3, 1)</code> ; <code>(3, 1, 2)</code> ; <code>(3, 2, 1)</code><br>\n<code>(1 și (2=3))</code> ; <code>(2 și (1=3))</code> ; <code>(3 și (1=2))</code> ; <code>((2=3) și 1)</code> ; <code>((1=3) și 2)</code> ; <code>((1=2) și 3)</code> ; <code>(1=2=3)</code>.<br>\nPrin <code>(i=j)</code> am notat posibilitatea ca atleții <code>i</code> și <code>j</code> să termine cursa în același timp.<br>\nPrin <code>(i=j=k)</code> am notat posibilitatea ca atleții <code>i</code>, <code>j</code> și <code>k</code> să termine cursa în același timp.</p>",
+      "text": "100m.in3100m.out13ExplicațieN = 3 atleți. Numerotând atleții cu 1, 2 și 3 există 13 clasamente distincte: (1, 2, 3) ; (1, 3, 2) ; (2, 1, 3) ; (2, 3, 1) ; (3, 1, 2) ; (3, 2, 1) (1 și (2=3)) ; (2 și (1=3)) ; (3 și (1=2)) ; ((2=3) și 1) ; ((1=3) și 2) ; ((1=2) și 3) ; (1=2=3). Prin (i=j) am notat posibilitatea ca atleții i și j să termine cursa în același timp. Prin (i=j=k) am notat posibilitatea ca atleții i, j și k să termine cursa în același timp."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>100m.in</code></p><pre>1771</pre><p><code>100m.out</code></p><pre>74140</pre><h3>Explicație</h3><p><code>N = 1771</code> atleți. Numărul de clasamente distincte în care atleții pot termina cursa, modulo <code>666013</code>, este <code>74140</code>.</p>",
+      "text": "100m.in1771100m.out74140ExplicațieN = 1771 atleți. Numărul de clasamente distincte în care atleții pot termina cursa, modulo 666013, este 74140."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "N = 3 atleți. Numerotând atleții cu 1, 2 și 3 există 13 clasamente distincte: (1, 2, 3) ; (1, 3, 2) ; (2, 1, 3) ; (2, 3, 1) ; (3, 1, 2) ; (3, 2, 1) (1 și (2=3)) ; (2 și (1=3)) ; (3 și (1=2)) ; ((2=3) și 1) ; ((1=3) și 2) ; ((1=2) și 3) ; (1=2=3). Prin (i=j) am notat posibilitatea ca atleții i și j să termine cursa în același timp. Prin (i=j=k) am notat posibilitatea ca atleții i, j și k să termine cursa în același timp."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "N = 1771 atleți. Numărul de clasamente distincte în care atleții pot termina cursa, modulo 666013, este 74140."
+    }
+  ],
+  "constraints": [
+    "2 ≤ N ≤ 5 000",
+    "Două clasamente se consideră distincte dacă diferă prin cel puțin o poziție",
+    "Pentru teste în valoare de 32 de puncte N ≤ 500"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qa0cb6b4302.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "10",
+    "intrare/ieșire": "100m.in / 100m.out",
+    "limită timp": "0.6 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "ONI 2017, clasa a X-a",
+    "autor": "Ciprian Cheșcă",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.6,
+  "memoryLimitMb": 64,
+  "author": "Ciprian Cheșcă",
+  "sourceAttribution": "ONI 2017, clasa a X-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/2193/100m"
+}

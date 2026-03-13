@@ -1,0 +1,89 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1089"><article id="enunt">
+			<p>Institutul de Fizică a Pământului studiază efectele unui potenţial cutremur folosind simulări computerizate. Harta plană a clădirilor de pe un teritoriu oarecare este reprezentată folosind coordonatele <span class="caps">GPS</span> în plan, longitudine şi latitudine, faţă de un reper considerat de coordonate <code>(0,0)</code>, ca în figura de mai jos.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1051-1075-cladiri1-png.png"></p>
+
+<p>Fiecare dintre clădirile aflate pe hartă, au două coordonate <span class="caps">GPS</span>, (Longitudine, Latitudine) şi un Grad de rezistenţă la cutremure. </p>
+
+<p>Un cutremur se poate produce în orice punct de coordonate de pe hartă, numit centrul seismului şi are o anumită intensitate. Unda de şoc se propagă sub forma unor pătrate concentrice cu centrul seismului, numite nivele (nivelul <code>0</code> reprezintă centrul seismului, nivelul <code>1</code> primul pătrat concentric, nivelul <code>2</code> al doilea pătrat concentric şi aşa mai departe). Intensitatea slăbeşte la fiecare pătrat concentric cu centrul seismului cu câte o unitate. Clădirile sunt afectate de cutremur doar dacă gradul lor de rezistenţă la cutremur este mai mic sau egal cu intensitatea cutremurului în poziţia clădirii.</p>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care să citească coordonatele centrului seismului şi intensitatea sa în acel punct, precum şi coordonatele clădirilor şi gradul lor de rezistenţă la cutremur, şi apoi să determine:</p>
+
+<p>a) numărul <code>N</code> total de clădiri afectate;<br>
+b) numărul <code>M</code> maxim de clădiri afectate pe un nivel;<br>
+c) numerele nivelelor cu <code>M</code> clădiri afectate, în ordinea crescătoare a numerelor acestor nivele.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>cladiri1.in</code> conține:</p>
+
+<ul>
+	<li>pe prima linie, trei numere naturale <code>Long Lat Intensitate</code>, separate prin câte un spaţiu, reprezentând coordonatele centrului seismului şi respectiv intensitatea sa;</li>
+	<li>pe fiecare dintre următoarele linii, până la sfârşitul fişierului, câte <code>trei</code> numere naturale  <code>Long Lat Grad</code>,  separate prin câte un spaţiu, reprezentând coordonatele unei clădiri, respectiv gradul de rezistenţă la cutremur.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>cladiri1.out</code> va conține trei linii:</p>
+
+<ul>
+	<li>pe prima linie se va scrie numărul natural <code>N</code> reprezentând numărul total de clădiri afectate;</li>
+	<li>pe a doua linie se va scrie numărul natural <code>M</code> reprezentând numărul maxim de clădiri afectate pe un nivel;</li>
+	<li>pe a treia linie se vor scrie numerele nivelelor cu <code>M</code> clădiri afectate, în ordinea crescătoare a numerelor acestor nivele.</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>0 ≤ Long, Lat, Grad, Intensitate ≤ 10000</code></li>
+	<li><code>0 &lt;</code>  număr clădiri <code>≤ 100000</code></li>
+	<li>în centrul seismului se pot afla clădiri;</li>
+	<li>nu există mai multe clădiri cu aceleaşi coordonate;</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>cladiri1.in</code></p>
+
+<pre>12 7 11
+10 9 2
+10 7 3
+13 5 1
+8 11 4
+8 7 6
+15 4 3
+15 9 10
+13 10 1
+16 8 4</pre>
+
+<p><code>cladiri1.out</code></p>
+
+<pre>8
+3
+2 4</pre>
+
+<h1>Explicație</h1>
+
+<p>Numărul <code>N</code> total al clădirilor afectate este <code>8</code>.<br>
+Numărul <code>M</code> maxim de clădiri afectate pe acelaşi nivel este <code>3</code> şi este atins pe nivelele <code>2</code> şi <code>4</code>.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>cladiri1.in</code></p>
+
+<pre>3 3 3
+1 3 5
+2 4 7
+3 2 9</pre>
+
+<p><code>cladiri1.out</code></p>
+
+<pre>0
+0</pre>
+
+<h1>Explicație</h1>
+
+<p>Intensitatea cutremurului este <code>3</code> şi nu poate afecta cele <code>3</code> clădiri, deci avem <code>N=0</code> clădiri afectate, iar maximul clădirilor afectate pe un nivel este, evident, <code>M=0</code>.</p>		</article>
+		</body></html>

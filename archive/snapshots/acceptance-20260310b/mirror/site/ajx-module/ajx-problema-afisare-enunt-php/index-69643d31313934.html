@@ -1,0 +1,85 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1194"><article id="enunt">
+			<p>Un proprietar vinde un teren de formă dreptunghiulară împărțit în <code>MxN</code> parcele de formă pătrată cu lungimea laturii de o unitate. Fiecare parcelă costă <code>V</code> lei. Vlad s-a interesat și a aflat pentru fiecare din parcelele terenului care este valoarea de revânzare. El constată că unele parcele i-ar putea aduce profit, iar altele i-ar aduce pierdere. Fiind isteț, negociază cu proprietarul să cumpere atâtea parcele de teren câte pot fi împrejmuite cu un singur gard de lungime egală cu <code>2M+2N</code> unități. Terenul are pe fiecare din cele patru laturi acces la drumul exterior, pe o porțiune de lungime egală cu o unitate. Vlad negociază astfel încât terenul achiziționat să conțină și cele patru parcele de acces la exterior.</p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând <code>M</code> și <code>N</code> – dimensiunile terenului, <code>V</code> – prețul de cumpărare al fiecărei parcele, <code>x_nord</code>, <code>x_sud</code>, <code>y_vest</code> și <code>y_est</code> –  pozițiile parcelelor cu acces la drumul exterior și <code>A[i][j]</code>, <code>1≤i≤M</code> și <code>1≤j≤N</code> – valorile de revânzare pentru fiecare parcelă, să se determine:</p>
+
+<p>a) Profitul <code>P_arie_minimă</code> pe care-l poate obține Vlad după cumpărarea și apoi revânzarea suprafeței de teren de arie minimă,  împrejmuită conform condițiilor negociate.<br>
+b) Profitul maxim <code>P_max</code> pe care-l poate obține Vlad după cumpărarea și apoi revânzarea unei suprafețe de teren împrejmuită conform condițiilor negociate.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul <code>fence.in</code> conține pe prima linie numărul <code>t</code>.<br>
+Pentru toate testele de intrare numărul <code>t</code> poate avea doar valoarea <code>1</code> sau valoarea <code>2</code>.<br>
+Pe linia a doua se găsesc numerele <code>M</code>, <code>N</code>, <code>V</code>, <code>x_nord</code>, <code>x_sud</code>, <code>y_vest</code> și <code>y_est</code> separate prin câte un spațiu, iar pe următoarele <code>M</code> linii se află câte <code>N</code> numere naturale separate prin câte un spațiu, reprezentând valorile de revânzare ale celor <code>MxN</code> parcele de teren.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă valoarea lui <code>t</code> este <code>1</code>, atunci se va rezolva numai punctul a) din cerință.<br>
+În acest caz în fișierul de ieșire <code>fence.out</code> se va scrie pe prima linie numărul <code>P_arie_minimă</code>.<br>
+Dacă valoarea lui <code>t</code> este <code>2</code>, atunci se va rezolva numai punctul b) din cerință. <br>
+În acest caz în fișierul de ieșire <code>fence.out</code> se va scrie pe prima linie numărul <code>P_max</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>3 ≤ M ≤ 1 000</code></li>
+	<li><code>3 ≤ N ≤ 1 000</code></li>
+	<li><code>1 000 ≤ V ≤ 10 000</code></li>
+	<li><code>2 ≤ x_nord ≤ N-1</code>, <code>2 ≤ x_sud ≤ N-1</code>, <code>2 ≤ y_vest ≤ M-1</code>, <code>2 ≤ y_est ≤ M-1</code></li>
+	<li><code>(x_nord-x_sud)∙(y_est-y_vest) ≥ 0</code></li>
+	<li><code>1 ≤ A[i][j] ≤ 20 000</code></li>
+	<li>Prin profit se înțelege suma valorilor de revânzare corespunzătoare parcelelor din suprafața împrejmuită din care se scade produsul dintre prețul de cumpărare <code>V</code> și numărul parcelelor împrejmuite, care  poate fi și negativ.</li>
+	<li>Pentru rezolvarea corectă a primei cerințe se va obține 20% din punctaj.</li>
+	<li>Pentru 33% din testele corespunzătoare cerinței b) va fi îndeplinită condiția <code>M ≤ 15</code> și <code>N ≤ 15</code>.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>fence.in</code></p>
+
+<pre>1
+5 7 6 3 5 3 2
+3 5 8 4 9 8 7
+9 3 7 6 4 5 9
+6 6 8 2 5 4 8
+3 3 4 7 7 2 1
+8 7 9 2 8 4 2</pre>
+
+<p><code>fence.out</code></p>
+
+<pre>3</pre>
+
+<h1>Explicație</h1>
+
+<p><code>M=5</code>, <code>N=7</code>, <code>V=6</code>, <code>x_nord=3</code>, <code>x_sud=5</code>, <code>y_vest=3</code>, <code>y_est=2</code>.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-fence-1-png.png"></p>
+
+<p><code>P_arie_minimă = (8+7+6+4+5+9+6+6+8+2+5+7+8)-6∙13 = 81-78 = 3</code></p>
+
+<h1>Exemplul 1</h1>
+
+<p><code>fence.in</code></p>
+
+<pre>2
+5 7 6 3 5 3 2
+3 5 8 4 9 8 7
+9 3 7 6 4 5 9
+6 6 8 2 5 4 8
+3 3 4 7 7 2 1
+8 7 9 2 8 4 2</pre>
+
+<p><code>fence.out</code></p>
+
+<pre>8</pre>
+
+<h1>Explicație</h1>
+
+<p><code>M=5</code>, <code>N=7</code>, <code>V=6</code>, <code>x_nord=3</code>, <code>x_sud=5</code>, <code>y_vest=3</code>, <code>y_est=2</code></p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-fence-2-png.png"></p>
+
+<p><code>P_max = ( 8+4+9+8+7+7+6+4+5+9+6+6+8+2+5+7+7+8)-6∙18 = 116 - 108 = 8</code></p>		</article>
+		</body></html>

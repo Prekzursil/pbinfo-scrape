@@ -1,0 +1,52 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3717"><article id="enunt">
+			<p>Un labirint este descris ca fiind o matrice binară cu <code>N</code> linii și <code>M</code> coloane, cu semnificația că <code>0</code> reprezintă o poziție liberă, iar <code>1</code> reprezintă o poziție în care se află un zid. Un drum în labirint este un traseu în matrice care începe cu poziția <code>(1, 1)</code> și ajunge în poziția <code>(N, M)</code> prin deplasare doar pe poziții care au valoarea <code>0</code> și sunt vecine cu poziția curentă, pe una din cele patru direcții: sus, jos, stânga, dreapta. Lungimea unui drum este egală cu numărul de poziții vizitate. </p>
+
+<p>Notăm cu <code>d0</code> lungimea drumului minim de la poziția <code>(1, 1)</code> la poziția <code>(N,M)</code>. Fie <code>d(i, j)</code> lungimea drumului minim de la poziția <code>(1, 1)</code> la poziția <code>(N, M)</code>, dacă poziției <code>(i, j)</code> i se atribuie valoarea <code>0</code>. Observăm că dacă poziția <code>(i, j)</code> conține inițial un <code>0</code>, atunci <code>d0 = d(i, j)</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Pentru fiecare poziție <code>(i, j)</code> să se verifice dacă <code>d(i, j) &lt; d0</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului de intrare <code>labirint.in</code> se află două numere naturale <code>N</code> și <code>M</code>, dimensiunile matricei binare ce descrie labirintul, apoi pe următoarele <code>N</code> linii se vor afla câte <code>M</code> valori binare, ce reprezintă elementele matricei care descrie labirintul, neseparate prin spații.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>În fișierul de ieșire <code>labirint.out</code> se vor scrie <code>N</code> linii, iar pe fiecare linie se vor scrie <code>M</code> cifre, neseparate prin spații. Cifra a <code>j</code>-a de pe linia a <code>i</code>-a este <code>1</code> dacă și numai dacă <code>d(i, j) &lt; d0</code>, altfel este <code>0</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 1000</code></li>
+	<li><code>1 ≤ M ≤ 1000</code></li>
+	<li>Pe pozițiile <code>(1, 1)</code> și <code>(N, M)</code> se vor afla valori <code>0</code>.</li>
+	<li>Se garantează că există un drum în matricea inițială între pozițiile <code>(1, 1)</code> și <code>(N, M)</code>.</li>
+	<li>Pentru 10 puncte, <code>1 ≤ N ≤ 50</code>, <code>1 ≤ M ≤ 50</code>, <code>d0 = N + M - 1</code>.</li>
+	<li>Pentru alte 30 de puncte, <code>1 ≤ N ≤ 50</code>, <code>1 ≤ M ≤ 50</code></li>
+	<li>Pentru alte 60 de puncte, fără alte restricții</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>labirint.in</code></p>
+
+<pre>5 6
+010001
+000101
+011001
+010010
+001000</pre>
+
+<p><code>labirint.out</code></p>
+
+<pre>010000
+000100
+001001
+010010
+001000</pre>
+
+<h3>Explicație</h3>
+
+<p>Sunt <code>7</code> poziții cu valoarea <code>1</code> în labirint care dacă se înlocuiesc cu <code>0</code> determină obținerea unui drum de lungime mai mică decât <code>d0 = 14</code>. De exemplu, dacă am înlocui valoarea din <code>(1, 2)</code> cu <code>0</code>, am obține un drum de lungime <code>d(1, 2) = 12</code>.</p>		</article>
+		</body></html>

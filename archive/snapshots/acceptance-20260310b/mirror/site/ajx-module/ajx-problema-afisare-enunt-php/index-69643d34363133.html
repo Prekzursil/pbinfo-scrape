@@ -1,0 +1,72 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4613"><article id="enunt">
+			<p>Dominic este un alchimist renumit pentru experimentele sale cu pietre preţioase. De-a lungul carierei sale a reușit să strângă o colecție de <code>N</code> nestemate pe care le-a numerotat de la <code>1</code> la <code>N</code>. Conform studiilor sale, aspectul fiecărei nestemate este caracterizat prin trei întregi <code>X, Y</code> și <code>Z</code> reprezentând culoarea, claritatea şi strălucirea acesteia. </p>
+
+<p>Dominic a descoperit o metodă secretă prin care poate face o nestemată din colecția sa să capete aspectul unei alte nestemate din colecţie. Metoda are însă o slăbiciune, reuşind dacă şi numai dacă cel puţin una din valorile primei nestemate este egală cu cel puţin una dintre valorile celeilalte nestemate, dar este irelevant dacă proprietatea pe care o reprezintă cele două valori coincide. De exemplu, nestemata <code>(1, 3, 4)</code> poate fi transformată în nestemata <code>(3, 2, 2)</code> deoarece ambele au una din proprietăţi egală cu <code>3</code>.</p>
+
+<p>Curioasă să-i testeze abilităţile de alchimist, Regina a ales două pietre din colecţie numerotate cu <code>A</code> şi <code>B</code> şi i-a ordonat să facă piatra <code>A</code> să capete aspectul pietrei <code>B</code>.<br>
+Dominic trebuie să îndeplinească sarcina aplicând transformări succesive asupra pietrei <code>A</code>, căreia îi va schimba proprietățile de fiecare dată. Deoarece regina pare un pic nerăbdătoare, el speră să reuşească folosind un număr cât mai mic de transformări. Dominic vă roagă pe voi să aflaţi dacă porunca reginei poate fi realizată, iar în caz afirmativ, care este numărul minim de transformări necesare în acest sens.</p>
+
+<p><strong>Atenţie!</strong> În cazul în care procesul este posibil, aspectele intermediare ale pietrei <code>A</code> până când ajunge să arate ca <code>B</code> vor corespunde altor pietre din colecţie.</p>
+
+<h1>Cerința</h1>
+
+<p>Se dau numărul de teste <code>T</code> şi pentru fiecare test <code>N</code>, <code>A</code> şi <code>B</code> şi proprietăţilor celor <code>N</code> nestemate din colecţia lui Dominic. Se cere să se afle numărul minim de transformări necesare (dacă este posibil).</p>
+
+<h1>Date de intrare</h1>
+
+<p>Prima linie a fişierului de intrare <code>nestemate.in</code> conţine <code>T</code>, numărul de teste. Pentru fiecare test regăsim pe prima linie numărul întreg <code>N</code>, pe a doua linie numerele întregi <code>A</code> şi <code>B</code>, iar pe următoarele <code>N</code> linii câte trei valori întregi <code>X, Y</code> și <code>Z</code> descriind nestematele.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>nestemate.out</code> trebuie să conțină <code>T</code> linii, câte una pentru fiecare test dat, conţinând numărul minim de transformări necesare sau <code>-1</code> dacă procesul nu poate fi realizat.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ T ≤ 5</code></li>
+	<li><code>2 ≤ N ≤ 100.000</code></li>
+	<li><code>1 ≤ A, B ≤ N</code> și <code>A ≠ B</code></li>
+	<li><code>1 ≤ X, Y, Z ≤ 500.000</code></li>
+	<li><code>1 ≤ suma valorilor N din toate cele T teste ≤ 300.000</code></li>
+	<li>Se garantează că este necesară cel puţin o transformare (pietrele <code>A</code> şi <code>B</code> nu au acelaşi aspect).</li>
+	<li>Pentru 11 puncte, se garantează că, dacă există soluție, se poate ajunge la rezultat prin exact o transformare şi <code>N ≤ 10</code></li>
+	<li>Pentru 13 puncte, se garantează că, dacă există soluție, se poate ajunge la rezultat prin maximum două transformări şi <code>N ≤ 10</code></li>
+	<li>Pentru 16 puncte, se garantează că, dacă există soluție, se poate ajunge la rezultat prin maximum trei transformări şi <code>N ≤ 10</code></li>
+	<li>Pentru 10 puncte, <code>N ≤ 10</code></li>
+	<li>Pentru 10 puncte, <code>N ≤ 1000</code></li>
+	<li>Pentru 13 puncte, se garantează că o valoare apare în configuraţia a maximum <code>3</code> nestemate distincte.</li>
+	<li>Pentru 27 puncte, fără restricţii suplimentare.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>nestemate.in</code></p>
+
+<pre>2
+4
+1 2
+2 1 1
+5 3 6
+4 3 5
+3 2 7
+4
+1 3
+2 1 1
+2 2 2
+4 3 5
+2 2 7</pre>
+
+<p><code>nestemate.out</code></p>
+
+<pre>2
+-1</pre>
+
+<h3>Explicație</h3>
+
+<p>Pentru primul test se foloseşte nestemata <code>4</code> aşa cum este reprezentat în desenul de mai jos pentru a transforma piatra <code>1</code> în piatra <code>2</code>. Pentru al doilea test procesul de transformare nu poate fi realizat, deci se afişează <code>-1</code>.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-nestemate-001-jpg.jpg"></p>
+
+<p>Transformarea <code>(2, 1, 1) → (3, 2, 7)</code> este validă deoarece <code>2 ∈ {2, 1, 1} ∩ {3, 2, 7}</code>.<br>
+Transformarea <code>(3, 2, 7) → (5, 3, 6)</code> este validă deoarece <code>3 ∈ {3, 2, 7} ∩ {5, 3, 6}</code>.</p>		</article>
+		</body></html>

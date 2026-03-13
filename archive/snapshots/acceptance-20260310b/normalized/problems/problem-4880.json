@@ -1,0 +1,341 @@
+{
+  "id": 4880,
+  "slug": "medwalk",
+  "name": "Medwalk",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4880/medwalk",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 65,
+      "name": "Structuri de date arborescente",
+      "slug": "structuri-de-date-arborescente",
+      "href": "/?pagina=probleme-lista&tag=65"
+    },
+    {
+      "id": 148,
+      "name": "Structuri de date",
+      "slug": "structuri-de-date",
+      "href": "/?pagina=probleme-lista&tag=148"
+    }
+  ],
+  "tags": [
+    "Șmenul lui Batog (Square Root Decomposition)",
+    "Arbori indexați binar",
+    "2DRQ"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Se cere să se determine scorul submatricei date pentru fiecare operație de tip \\(2\\).</p>",
+      "text": "Se cere să se determine scorul submatricei date pentru fiecare operație de tip \\(2\\)."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie se va afla numărul \\(T\\), reprezentând numărul de teste.</p><p>Pe prima linie a celui de-al \\(i\\)-lea test se vor afla două numere \\(N\\) și \\(Q\\) – numărul de coloane din matrice, respectiv numărul de operații.</p><p>Pe a doua linie a celui de-al \\(i\\)-lea test se vor afla \\(N\\) numere, reprezentând valorile inițiale ale elementelor de pe prima linie a matricei.</p><p>Pe a treia linie a celui de-al \\(i\\)-lea test se vor afla \\(N\\) numere, reprezentând valorile inițiale ale elementelor de pe a doua linie a matricei.</p><p>Pe următoarele \\(Q\\) linii ale celui de-al \\(i\\)-lea test se vor afla descrierile operațiilor, câte un una pe fiecare pe linie. Fiecare dintre următoarele \\(Q\\) linii va avea unul dintre următoarele formaturi:</p><ul>\n\t<li>\\(1\\) \\(lin\\) \\(col\\) \\(x\\)</li>\n\t<li>\\(2\\) \\(st\\) \\(dr\\).</li>\n</ul><p>Toate valorile de pe aceeași linie sunt separate prin câte un spațiu.</p>",
+      "text": "Pe prima linie se va afla numărul \\(T\\), reprezentând numărul de teste.Pe prima linie a celui de-al \\(i\\)-lea test se vor afla două numere \\(N\\) și \\(Q\\) – numărul de coloane din matrice, respectiv numărul de operații.Pe a doua linie a celui de-al \\(i\\)-lea test se vor afla \\(N\\) numere, reprezentând valorile inițiale ale elementelor de pe prima linie a matricei.Pe a treia linie a celui de-al \\(i\\)-lea test se vor afla \\(N\\) numere, reprezentând valorile inițiale ale elementelor de pe a doua linie a matricei.Pe următoarele \\(Q\\) linii ale celui de-al \\(i\\)-lea test se vor afla descrierile operațiilor, câte un una pe fiecare pe linie. Fiecare dintre următoarele \\(Q\\) linii va avea unul dintre următoarele formaturi: \\(1\\) \\(lin\\) \\(col\\) \\(x\\) \\(2\\) \\(st\\) \\(dr\\). Toate valorile de pe aceeași linie sunt separate prin câte un spațiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Pentru fiecare operație de tipul \\(2\\) se va afișa răspunsul pe câte o linie.</p>",
+      "text": "Pentru fiecare operație de tipul \\(2\\) se va afișa răspunsul pe câte o linie."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li>\\(1 \\leq T \\leq 8\\)</li>\n\t<li>\\(1 \\leq N,Q \\leq 10^5\\)</li>\n\t<li>\\(1 \\leq \\text{numerele din matrice} \\leq 3 \\cdot 10^5\\)</li>\n\t<li>Pentru toate operațiile de tipul \\(1\\):\n\t<ul>\n\t\t<li>\\(1 \\le lin \\le 2\\), \\(1 \\le col \\le N\\)</li>\n\t\t<li>\\(1 \\le x \\le 3 \\cdot 10^5\\)</li>\n\t</ul></li>\n\t<li>Pentru toate operațiile de tipul \\(2\\):\n\t<ul>\n\t\t<li>\\(1 \\le st \\le dr \\le N\\)</li>\n\t</ul></li>\n\t</ul>",
+      "text": "\\(1 \\leq T \\leq 8\\) \\(1 \\leq N,Q \\leq 10^5\\) \\(1 \\leq \\text{numerele din matrice} \\leq 3 \\cdot 10^5\\) Pentru toate operațiile de tipul \\(1\\): \\(1 \\le lin \\le 2\\), \\(1 \\le col \\le N\\) \\(1 \\le x \\le 3 \\cdot 10^5\\) Pentru toate operațiile de tipul \\(2\\): \\(1 \\le st \\le dr \\le N\\)"
+    },
+    {
+      "title": "Subtask-uri",
+      "html": "<p><strong>Notă</strong>: testele sunt grupate în subtask-uri.</p><table>\n\t<colgroup span=\"1\">\n\t<col width=\"200\">\n\t<col width=\"100\">\n\t</colgroup>\n\t\t<tbody><tr>\n\t\t\t<td> <strong>Subtask</strong>            </td>\n\t\t\t<td> <strong>Puncte</strong> </td>\n\t\t\t<td> <strong>Restricții suplimentare</strong>                               </td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td> <code>1</code>   </td>\n\t\t\t<td> <code>7</code>      </td>\n\t\t\t<td> \\(N \\leq 7, Q \\leq 1 \\ 000\\)                                </td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td> <code>2</code>  </td>\n\t\t\t<td> <code>12</code>      </td>\n\t\t\t<td> \\(N,Q \\leq 5 \\ 000\\)                                    </td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td> <code>3</code>  </td>\n\t\t\t<td> <code>5</code>     </td>\n\t\t\t<td> \\(\\text{numerele din matrice} \\leq 2\\); pentru toate operațiile de tipul \\(1\\), \\(x \\le 2\\) </td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td> <code>4</code>  </td>\n\t\t\t<td> <code>28</code>     </td>\n\t\t\t<td> Nu există operații de tipul \\(1\\)                       </td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td> <code>5</code>  </td>\n\t\t\t<td> <code>23</code>     </td>\n\t\t\t<td> \\(N, Q \\leq 60\\ 000\\)                            </td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td> <code>6</code>  </td>\n\t\t\t<td> <code>16</code>     </td>\n\t\t\t<td> \\(N, Q \\leq 80\\ 000\\)                        </td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td> <code>7</code> </td>\n\t\t\t<td> <code>9</code>     </td>\n\t\t\t<td> Nicio restricție suplimentară                           </td>\n\t\t</tr>\n</tbody></table>",
+      "text": "Notă: testele sunt grupate în subtask-uri. Subtask Puncte Restricții suplimentare 1 7 \\(N \\leq 7, Q \\leq 1 \\ 000\\) 2 12 \\(N,Q \\leq 5 \\ 000\\) 3 5 \\(\\text{numerele din matrice} \\leq 2\\); pentru toate operațiile de tipul \\(1\\), \\(x \\le 2\\) 4 28 Nu există operații de tipul \\(1\\) 5 23 \\(N, Q \\leq 60\\ 000\\) 6 16 \\(N, Q \\leq 80\\ 000\\) 7 9 Nicio restricție suplimentară"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><strong>Intrare</strong></p><pre>1\n6 7\n10 6 9 5 1 6\n6 9 10 3 3 1\n2 1 6\n2 3 3\n1 2 4 6\n2 1 6\n1 2 5 4\n1 1 5 9\n2 4 6</pre><p><strong>Ieșire</strong></p><pre>3\n9\n5\n4</pre><h3>Explicație</h3><p>Pentru prima operație este optim să permutăm coloanele matricei în următorul mod:</p><p>$$\\begin{bmatrix}<br>\n\\textbf{6} &amp; \\textbf{9} &amp; \\textbf{1} &amp; 5 &amp; 6 &amp; 10 \\\\<br>\n9 &amp; 10 &amp; \\textbf{3} &amp; \\textbf{3} &amp; \\textbf{1} &amp; \\textbf{6}<br>\n\\end{bmatrix}$$</p><p>Mediana minimă a unui drum din celula \\((1,1)\\) în celula \\((2,6)\\) este \\(3\\), obținută din drumul conținând celulele cu valorile \\([6,9,1,3,3,1,6]\\).</p>",
+      "text": "Intrare1 6 7 10 6 9 5 1 6 6 9 10 3 3 1 2 1 6 2 3 3 1 2 4 6 2 1 6 1 2 5 4 1 1 5 9 2 4 6Ieșire3 9 5 4ExplicațiePentru prima operație este optim să permutăm coloanele matricei în următorul mod:$$\\begin{bmatrix} \\textbf{6} & \\textbf{9} & \\textbf{1} & 5 & 6 & 10 \\\\ 9 & 10 & \\textbf{3} & \\textbf{3} & \\textbf{1} & \\textbf{6} \\end{bmatrix}$$Mediana minimă a unui drum din celula \\((1,1)\\) în celula \\((2,6)\\) este \\(3\\), obținută din drumul conținând celulele cu valorile \\([6,9,1,3,3,1,6]\\)."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><strong>Intrare</strong></p><pre>1\n8 9\n2 1 2 2 1 1 2 2\n1 2 1 2 2 1 2 1\n2 1 8\n1 1 2 2\n2 4 5\n2 5 5\n1 1 6 2\n2 4 7\n2 5 8\n1 2 3 2\n2 1 3</pre><p><strong>Ieșire</strong></p><pre>1\n2\n1\n2\n1\n2</pre><h3>Explicație</h3><p>Acest test se încadrează în subtask-ul \\(3\\).</p>",
+      "text": "Intrare1 8 9 2 1 2 2 1 1 2 2 1 2 1 2 2 1 2 1 2 1 8 1 1 2 2 2 4 5 2 5 5 1 1 6 2 2 4 7 2 5 8 1 2 3 2 2 1 3Ieșire1 2 1 2 1 2ExplicațieAcest test se încadrează în subtask-ul \\(3\\)."
+    },
+    {
+      "title": "Exemplul 3",
+      "html": "<p><strong>Intrare</strong></p><pre>1\n7 6\n5 1 4 9 10 3 3\n4 1 9 6 5 10 4\n2 1 7\n2 2 4\n2 5 6\n2 3 3\n2 4 6\n2 6 7</pre><p><strong>Ieșire</strong></p><pre>3\n1\n5\n4\n5\n3</pre><h3>Explicație</h3><p>Acest test se încadrează în subtask-ul \\(4\\).</p>",
+      "text": "Intrare1 7 6 5 1 4 9 10 3 3 4 1 9 6 5 10 4 2 1 7 2 2 4 2 5 6 2 3 3 2 4 6 2 6 7Ieșire3 1 5 4 5 3ExplicațieAcest test se încadrează în subtask-ul \\(4\\)."
+    },
+    {
+      "title": "Exemplul 4",
+      "html": "<pre>3\n6 7\n10 6 9 5 1 6\n6 9 10 3 3 1\n2 1 6\n2 3 3\n1 2 4 6\n2 1 6\n1 2 5 4\n1 1 5 9\n2 4 6\n8 9\n2 1 2 2 1 1 2 2\n1 2 1 2 2 1 2 1\n2 1 8\n1 1 2 2\n2 4 5\n2 5 5\n1 1 6 2\n2 4 7\n2 5 8\n1 2 3 2\n2 1 3\n7 6\n5 1 4 9 10 3 3\n4 1 9 6 5 10 4\n2 1 7\n2 2 4\n2 5 6\n2 3 3\n2 4 6\n2 6 7</pre><p><strong>Ieșire</strong></p><pre>3\n9\n5\n4\n1\n2\n1\n2\n1\n2\n3\n1\n5\n4\n5\n3</pre>",
+      "text": "3 6 7 10 6 9 5 1 6 6 9 10 3 3 1 2 1 6 2 3 3 1 2 4 6 2 1 6 1 2 5 4 1 1 5 9 2 4 6 8 9 2 1 2 2 1 1 2 2 1 2 1 2 2 1 2 1 2 1 8 1 1 2 2 2 4 5 2 5 5 1 1 6 2 2 4 7 2 5 8 1 2 3 2 2 1 3 7 6 5 1 4 9 10 3 3 4 1 9 6 5 10 4 2 1 7 2 2 4 2 5 6 2 3 3 2 4 6 2 6 7Ieșire3 9 5 4 1 2 1 2 1 2 3 1 5 4 5 3"
+    }
+  ],
+  "examples": [
+    {
+      "input": "1\n6 7\n10 6 9 5 1 6\n6 9 10 3 3 1\n2 1 6\n2 3 3\n1 2 4 6\n2 1 6\n1 2 5 4\n1 1 5 9\n2 4 6",
+      "output": "3\n9\n5\n4",
+      "explanation": "Pentru prima operație este optim să permutăm coloanele matricei în următorul mod:"
+    },
+    {
+      "input": "1\n8 9\n2 1 2 2 1 1 2 2\n1 2 1 2 2 1 2 1\n2 1 8\n1 1 2 2\n2 4 5\n2 5 5\n1 1 6 2\n2 4 7\n2 5 8\n1 2 3 2\n2 1 3",
+      "output": "1\n2\n1\n2\n1\n2",
+      "explanation": "Acest test se încadrează în subtask-ul \\(3\\)."
+    },
+    {
+      "input": "1\n7 6\n5 1 4 9 10 3 3\n4 1 9 6 5 10 4\n2 1 7\n2 2 4\n2 5 6\n2 3 3\n2 4 6\n2 6 7",
+      "output": "3\n1\n5\n4\n5\n3",
+      "explanation": "Acest test se încadrează în subtask-ul \\(4\\)."
+    },
+    {
+      "input": "",
+      "output": "3\n9\n5\n4\n1\n2\n1\n2\n1\n2\n3\n1\n5\n4\n5\n3"
+    }
+  ],
+  "constraints": [
+    "\\(1 \\leq T \\leq 8\\)",
+    "\\(1 \\leq N,Q \\leq 10^5\\)",
+    "\\(1 \\leq \\text{numerele din matrice} \\leq 3 \\cdot 10^5\\)",
+    "Pentru toate operațiile de tipul \\(1\\): \\(1 \\le lin \\le 2\\), \\(1 \\le col \\le N\\) \\(1 \\le x \\le 3 \\cdot 10^5\\)",
+    "\\(1 \\le lin \\le 2\\), \\(1 \\le col \\le N\\)",
+    "\\(1 \\le x \\le 3 \\cdot 10^5\\)",
+    "Pentru toate operațiile de tipul \\(2\\): \\(1 \\le st \\le dr \\le N\\)",
+    "\\(1 \\le st \\le dr \\le N\\)"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q67d9496c4a.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Moldovan Robert (moldovan_robert_lol)",
+    "clasa": "11",
+    "intrare/ieșire": "tastatură / ecran",
+    "limită timp": "30 secunde",
+    "limită memorie": "256 MB / 8 MB",
+    "sursa problemei": "Lot 2025 Baraj 1 Seniori: Problema 2",
+    "autor": "Alin-Gabriel Răileanu, Gheorghieș Alexandru",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 30,
+  "memoryLimitMb": 256,
+  "author": "Alin-Gabriel Răileanu, Gheorghieș Alexandru",
+  "sourceAttribution": "Lot 2025 Baraj 1 Seniori: Problema 2",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4880/medwalk"
+}

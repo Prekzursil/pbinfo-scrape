@@ -1,0 +1,315 @@
+{
+  "id": 4836,
+  "slug": "joc16",
+  "name": "joc16",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4836/joc16",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 81,
+      "name": "Recursivitate",
+      "slug": "recursivitate",
+      "href": "/?pagina=probleme-lista&tag=81"
+    },
+    {
+      "id": 83,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=83"
+    }
+  ],
+  "tags": [
+    "Numere mari"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Cunoscând numărul de copii şi triunghiul de numere:<br>\n1.  determinați o soluţie posibilă; dacă există mai multe soluţii posibile se va afişa cea mai mică din punctul de vedere lexicografic;<br>\n2. determinați numărul de soluţii posibile.</p>",
+      "text": "Cunoscând numărul de copii şi triunghiul de numere: 1. determinați o soluţie posibilă; dacă există mai multe soluţii posibile se va afişa cea mai mică din punctul de vedere lexicografic; 2. determinați numărul de soluţii posibile."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>joc.in</code> conţine pe prima linie numărul natural <code>C</code> reprezentând cerinţa care trebuie să fie rezolvată (1 sau 2). Pe linia a doua se află numărul natural <code>N</code> cu semnificația din enunț. Pe următoarele <code>N</code> linii se află numerele din triunghi. Pe linia <code>i</code> dintre cele <code>N</code> sunt scrise <code>N-i+1</code> numere separate prin câte un spaţiu, reprezentând numerele de pe linia <code>i</code> din triunghi, situate pe coloanele <code>i</code>, <code>i+1</code>, … <code>N</code>.</p>",
+      "text": "Fișierul de intrare joc.in conţine pe prima linie numărul natural C reprezentând cerinţa care trebuie să fie rezolvată (1 sau 2). Pe linia a doua se află numărul natural N cu semnificația din enunț. Pe următoarele N linii se află numerele din triunghi. Pe linia i dintre cele N sunt scrise N-i+1 numere separate prin câte un spaţiu, reprezentând numerele de pe linia i din triunghi, situate pe coloanele i, i+1, … N."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>joc.out</code> conţine o singură linie. Dacă <code>C=1</code> linia conţine <code>N</code> numere naturale distincte cuprinse între 1 şi <code>N</code>, separate prin câte un spaţiu, reprezentând soluţia cea mai mică din punct de vedere lexicografic determinată pentru cerința 1. Dacă <code>C=2</code> linia conţine numărul de soluţii posibile determinat pentru cerința 2. </p>",
+      "text": "Fișierul de ieșire joc.out conţine o singură linie. Dacă C=1 linia conţine N numere naturale distincte cuprinse între 1 şi N, separate prin câte un spaţiu, reprezentând soluţia cea mai mică din punct de vedere lexicografic determinată pentru cerința 1. Dacă C=2 linia conţine numărul de soluţii posibile determinat pentru cerința 2."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 1000</code></li>\n\t<li>Spunem că șirul <code>a[1]</code>, <code>a[2]</code>, …, <code>a[N]</code> este mai mic din punctul de vedere lexicografic decât șirul <code>b[1]</code>, <code>b[2]</code>, …, <code>b[N]</code> dacă există <code>k</code> (<code>1 ≤ k ≤ N</code>), astfel încât <code>a[i] = b[i]</code>, pentru orice <code>1 ≤ i &lt; k</code> şi <code>a[k] &lt; b[k]</code>.</li>\n\t<li>Se garantează că, pentru datele de test, există cel puțin o soluție.</li>\n\t<li>Pentru 9 puncte, <code>C=1</code>, <code>1 ≤ N &lt; 10</code></li>\n\t<li>Pentru 9 puncte, <code>C=2</code>, <code>1 ≤ N &lt; 10</code></li>\n\t<li>Pentru 22 de puncte, <code>C=1</code>, <code>10 ≤ N ≤ 1000</code></li>\n\t<li>Pentru 24 de puncte, <code>C=2</code>, <code>10 ≤ N &lt; 28</code></li>\n\t<li>Pentru 36 de puncte, <code>C=2</code>, fără restricții suplimentare</li>\n</ul>",
+      "text": "1 ≤ N ≤ 1000 Spunem că șirul a[1], a[2], …, a[N] este mai mic din punctul de vedere lexicografic decât șirul b[1], b[2], …, b[N] dacă există k (1 ≤ k ≤ N), astfel încât a[i] = b[i], pentru orice 1 ≤ i < k şi a[k] < b[k]. Se garantează că, pentru datele de test, există cel puțin o soluție. Pentru 9 puncte, C=1, 1 ≤ N < 10 Pentru 9 puncte, C=2, 1 ≤ N < 10 Pentru 22 de puncte, C=1, 10 ≤ N ≤ 1000 Pentru 24 de puncte, C=2, 10 ≤ N < 28 Pentru 36 de puncte, C=2, fără restricții suplimentare"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>joc.in</code></p><pre>1\n3\n1 2 2\n2 2\n3</pre><p><code>joc.out</code></p><pre>2 1 3</pre><h3>Explicație</h3><p>O soluţie posibilă este <code>2 1 3</code>.<br>\nPe secvenţa de scaune <code>1..1</code> copilul cu număr minim pe tricou este pe scaunul <code>1.</code><br>\nPe secvenţa de scaune <code>1..2</code> copilul cu număr minim pe tricou este pe scaunul <code>2</code>.<br>\nPe secvenţa de scaune <code>1..3</code> copilul cu număr minim pe tricou este pe scaunul <code>2</code>.<br>\nPe secvenţa de scaune <code>2..2</code> copilul cu număr minim pe tricou este pe scaunul <code>2</code>.<br>\nPe secvenţa de scaune <code>2..3</code> copilul cu număr minim pe tricou este pe scaunul <code>2</code>.<br>\nPe secvenţa de scaune <code>3..3</code> copilul cu număr minim pe tricou este pe scaunul <code>3</code>.<br>\nO altă soluţie posibilă este <code>3 1 2</code>, dar <code>2 1 3</code> este mai mică din punct de vedere lexicografic.</p>",
+      "text": "joc.in1 3 1 2 2 2 2 3joc.out2 1 3ExplicațieO soluţie posibilă este 2 1 3. Pe secvenţa de scaune 1..1 copilul cu număr minim pe tricou este pe scaunul 1. Pe secvenţa de scaune 1..2 copilul cu număr minim pe tricou este pe scaunul 2. Pe secvenţa de scaune 1..3 copilul cu număr minim pe tricou este pe scaunul 2. Pe secvenţa de scaune 2..2 copilul cu număr minim pe tricou este pe scaunul 2. Pe secvenţa de scaune 2..3 copilul cu număr minim pe tricou este pe scaunul 2. Pe secvenţa de scaune 3..3 copilul cu număr minim pe tricou este pe scaunul 3. O altă soluţie posibilă este 3 1 2, dar 2 1 3 este mai mică din punct de vedere lexicografic."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>joc.in</code></p><pre>2\n3\n1 2 2\n2 2\n3</pre><p><code>joc.out</code></p><pre>2</pre>",
+      "text": "joc.in2 3 1 2 2 2 2 3joc.out2"
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "O soluţie posibilă este 2 1 3. Pe secvenţa de scaune 1..1 copilul cu număr minim pe tricou este pe scaunul 1. Pe secvenţa de scaune 1..2 copilul cu număr minim pe tricou este pe scaunul 2. Pe secvenţa de scaune 1..3 copilul cu număr minim pe tricou este pe scaunul 2. Pe secvenţa de scaune 2..2 copilul cu număr minim pe tricou este pe scaunul 2. Pe secvenţa de scaune 2..3 copilul cu număr minim pe tricou este pe scaunul 2. Pe secvenţa de scaune 3..3 copilul cu număr minim pe tricou este pe scaunul 3. O altă soluţie posibilă este 3 1 2, dar 2 1 3 este mai mică din punct de vedere lexicografic."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 1000",
+    "Spunem că șirul a[1], a[2], …, a[N] este mai mic din punctul de vedere lexicografic decât șirul b[1], b[2], …, b[N] dacă există k (1 ≤ k ≤ N), astfel încât a[i] = b[i], pentru orice 1 ≤ i < k şi a[k] < b[k].",
+    "Se garantează că, pentru datele de test, există cel puțin o soluție.",
+    "Pentru 9 puncte, C=1, 1 ≤ N < 10",
+    "Pentru 9 puncte, C=2, 1 ≤ N < 10",
+    "Pentru 22 de puncte, C=1, 10 ≤ N ≤ 1000",
+    "Pentru 24 de puncte, C=2, 10 ≤ N < 28",
+    "Pentru 36 de puncte, C=2, fără restricții suplimentare"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q14d4b3af5f.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/joc16_001.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-joc16-001-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "10",
+    "intrare/ieșire": "joc.in / joc.out",
+    "limită timp": "0.15 secunde",
+    "limită memorie": "8 MB / 4 MB",
+    "sursa problemei": "ONI 2025, baraj juniori",
+    "autor": "Emanuela Cerchez",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.15,
+  "memoryLimitMb": 8,
+  "author": "Emanuela Cerchez",
+  "sourceAttribution": "ONI 2025, baraj juniori",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4836/joc16"
+}

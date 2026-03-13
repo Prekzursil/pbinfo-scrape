@@ -1,0 +1,310 @@
+{
+  "id": 4771,
+  "slug": "institut",
+  "name": "institut",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4771/institut",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 89,
+      "name": "Structuri de date neomogene",
+      "slug": "structuri-de-date-neomogene",
+      "href": "/?pagina=probleme-lista&tag=89"
+    },
+    {
+      "id": 90,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=90"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Scrieţi un program care determină și afișează pentru datele trimise de <code>n</code> șantiere către institut:<br>\n1. Lista obiectelor în ordine crescătoare după categorie: se va afișa categoria și numărul total de exemplare descoperite pe toate șantierele la acea categorie.<br>\n2. Lista obiectelor descoperite în ordine crescătoare după categorie: pentru fiecare obiect se afișează categoria, materialul și numărul de exemplare descoperite, ce au aceste caracteristici.</p>",
+      "text": "Scrieţi un program care determină și afișează pentru datele trimise de n șantiere către institut: 1. Lista obiectelor în ordine crescătoare după categorie: se va afișa categoria și numărul total de exemplare descoperite pe toate șantierele la acea categorie. 2. Lista obiectelor descoperite în ordine crescătoare după categorie: pentru fiecare obiect se afișează categoria, materialul și numărul de exemplare descoperite, ce au aceste caracteristici."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>institut.in</code> conține pe prima linie două numere naturale <code>c</code> și <code>n</code>: <code>c</code> reprezintă cerința și are una din valorile <code>1</code> sau <code>2</code> și <code>n</code> reprezintă numărul de șantiere arheologice. Fiecare dintre următoarele <code>n</code> linii din fișier conține un șir de numere întregi, separate prin spațiu, ce reprezintă datele trimise de un șantier, în ordinea următoare: numărul total de valori, șiruri formate din <code>2</code> sau <code>3</code> numere naturale nenule urmate de un număr negativ, ce codifică pentru descoperirea făcută: categoria, materialul și numărul de exemplare cu aceste caracteristici pentru obiectele descoperite.</p>",
+      "text": "Fișierul de intrare institut.in conține pe prima linie două numere naturale c și n: c reprezintă cerința și are una din valorile 1 sau 2 și n reprezintă numărul de șantiere arheologice. Fiecare dintre următoarele n linii din fișier conține un șir de numere întregi, separate prin spațiu, ce reprezintă datele trimise de un șantier, în ordinea următoare: numărul total de valori, șiruri formate din 2 sau 3 numere naturale nenule urmate de un număr negativ, ce codifică pentru descoperirea făcută: categoria, materialul și numărul de exemplare cu aceste caracteristici pentru obiectele descoperite."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>institut.out</code> va conține :<br>\n1. Dacă c = 1, fișierul de ieșire <code>institut.out</code> va conține pe fiecare linie două numere naturale, separate printr-un spațiu, ce reprezintă categoria și numărul total de exemplare descoperite la acea categorie, pe toate șantierele, în ordinea crescătoare a categoriilor .<br>\n2. Dacă c = 2, fișierul de ieșire <code>institut.out</code> va conține pe prima linie un număr natural d ce reprezintă numărul total de descoperiri de pe toate șantierele și pe fiecare dintre următoarele d linii câte trei numere naturale, separate prin spațiu, ce reprezintă în această ordine: categoria obiectului descoperit, materialul obiectului și numărul de exemplare descoperite. Cele d linii vor fi afișate în ordinea crescătoare a categoriilor obiectelor și pentru obiecte cu aceeași categorie, în ordinea crescătoare a materialului.</p>",
+      "text": "Fișierul de ieșire institut.out va conține : 1. Dacă c = 1, fișierul de ieșire institut.out va conține pe fiecare linie două numere naturale, separate printr-un spațiu, ce reprezintă categoria și numărul total de exemplare descoperite la acea categorie, pe toate șantierele, în ordinea crescătoare a categoriilor . 2. Dacă c = 2, fișierul de ieșire institut.out va conține pe prima linie un număr natural d ce reprezintă numărul total de descoperiri de pe toate șantierele și pe fiecare dintre următoarele d linii câte trei numere naturale, separate prin spațiu, ce reprezintă în această ordine: categoria obiectului descoperit, materialul obiectului și numărul de exemplare descoperite. Cele d linii vor fi afișate în ordinea crescătoare a categoriilor obiectelor și pentru obiecte cu aceeași categorie, în ordinea crescătoare a materialului."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>4 ≤ n ≤ 400</code></li>\n\t<li>Categoria, materialul și numărul de exemplare ale unui obiect sunt numere naturale nenule cu cel mult <code>2</code> cifre</li>\n\t<li>Numărul total de valori transmise de un șantier institutului este cel mult <code>600</code></li>\n\t<li>Numărul de descoperiri de pe toate șantierele este cel mult <code>10000</code></li>\n\t<li>Pentru datele de test, se consideră că obiectele oricăror două descoperiri diferite nu au aceeași categorie și același material</li>\n</ul>",
+      "text": "4 ≤ n ≤ 400 Categoria, materialul și numărul de exemplare ale unui obiect sunt numere naturale nenule cu cel mult 2 cifre Numărul total de valori transmise de un șantier institutului este cel mult 600 Numărul de descoperiri de pe toate șantierele este cel mult 10000 Pentru datele de test, se consideră că obiectele oricăror două descoperiri diferite nu au aceeași categorie și același material"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>institut.in</code></p><pre>1 4\n10 1 6 -5 7 2 -8 2 10 3 -4\n10 2 5 -7 2 6 2 -4 1 5 -7\n6 3 8 -6 7 5 -1\n4 2 1 5 -6</pre><p><code>institut.out</code></p><pre>1 2\n2 11\n3 1\n7 2</pre><h3>Explicație</h3><p>Sunt <code>4</code> șantiere arheologice, pentru fiecare se cunoaște numărul de valori trimise: pentru primul șantier sunt <code>10</code> valori, cu șirurile următoare ce reprezintă descoperiri efectuate :<br>\n- șirul <code>(1,6,-5)</code> reprezintă categoria <code>1</code>, materialul <code>6</code>, <code>1</code> exemplar;<br>\n- șirul <code>(7,2,-8)</code> reprezintă categoria <code>7</code>, materialul <code>2</code>, <code>1</code> exemplar;<br>\n- șirul <code>(2,10,3,-4)</code> reprezintă categoria <code>2</code>, materialul <code>10</code>, <code>3</code> exemplare etc.</p><p>Se afișează pe categorii, obiectele descoperite de pe toate șantierele, în ordinea crescătoare a categoriilor: sunt <code>2</code> exemplare la categoria <code>1</code>, <code>11</code> exemplare la categoria <code>2</code>: <code>(2,10,3,-4)</code>, <code>(2,5,-7)</code>, <code>(2,6,2,-4)</code>, <code>(2,1,5,-6)</code>, <code>1</code> exemplar la categoria <code>3</code> și <code>2</code> exemplare la categoria <code>7</code>.</p>",
+      "text": "institut.in1 4 10 1 6 -5 7 2 -8 2 10 3 -4 10 2 5 -7 2 6 2 -4 1 5 -7 6 3 8 -6 7 5 -1 4 2 1 5 -6institut.out1 2 2 11 3 1 7 2ExplicațieSunt 4 șantiere arheologice, pentru fiecare se cunoaște numărul de valori trimise: pentru primul șantier sunt 10 valori, cu șirurile următoare ce reprezintă descoperiri efectuate : - șirul (1,6,-5) reprezintă categoria 1, materialul 6, 1 exemplar; - șirul (7,2,-8) reprezintă categoria 7, materialul 2, 1 exemplar; - șirul (2,10,3,-4) reprezintă categoria 2, materialul 10, 3 exemplare etc.Se afișează pe categorii, obiectele descoperite de pe toate șantierele, în ordinea crescătoare a categoriilor: sunt 2 exemplare la categoria 1, 11 exemplare la categoria 2: (2,10,3,-4), (2,5,-7), (2,6,2,-4), (2,1,5,-6), 1 exemplar la categoria 3 și 2 exemplare la categoria 7."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>institut.in</code></p><pre>2 4\n10 1 6 -5 7 2 -8 2 10 3 -4\n10 2 5 -7 2 6 2 -4 1 5 -7\n6 3 8 -6 7 5 -1\n4 2 1 7 -6</pre><p><code>institut.out</code></p><pre>9\n1 5 1\n1 6 1\n2 1 7\n2 5 1\n2 6 2\n2 10 3\n3 8 1\n7 2 1\n7 5 1</pre><h3>Explicație</h3><p>Sunt <code>9</code> descoperiri de obiecte, ce sunt afișate pe categorii în sens crescător: la aceeași categorie, se afișează după material, în sens crescator.</p>",
+      "text": "institut.in2 4 10 1 6 -5 7 2 -8 2 10 3 -4 10 2 5 -7 2 6 2 -4 1 5 -7 6 3 8 -6 7 5 -1 4 2 1 7 -6institut.out9 1 5 1 1 6 1 2 1 7 2 5 1 2 6 2 2 10 3 3 8 1 7 2 1 7 5 1ExplicațieSunt 9 descoperiri de obiecte, ce sunt afișate pe categorii în sens crescător: la aceeași categorie, se afișează după material, în sens crescator."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Sunt 4 șantiere arheologice, pentru fiecare se cunoaște numărul de valori trimise: pentru primul șantier sunt 10 valori, cu șirurile următoare ce reprezintă descoperiri efectuate : - șirul (1,6,-5) reprezintă categoria 1, materialul 6, 1 exemplar; - șirul (7,2,-8) reprezintă categoria 7, materialul 2, 1 exemplar; - șirul (2,10,3,-4) reprezintă categoria 2, materialul 10, 3 exemplare etc."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Sunt 9 descoperiri de obiecte, ce sunt afișate pe categorii în sens crescător: la aceeași categorie, se afișează după material, în sens crescator."
+    }
+  ],
+  "constraints": [
+    "4 ≤ n ≤ 400",
+    "Categoria, materialul și numărul de exemplare ale unui obiect sunt numere naturale nenule cu cel mult 2 cifre",
+    "Numărul total de valori transmise de un șantier institutului este cel mult 600",
+    "Numărul de descoperiri de pe toate șantierele este cel mult 10000",
+    "Pentru datele de test, se consideră că obiectele oricăror două descoperiri diferite nu au aceeași categorie și același material"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qdab257e7c6.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "10",
+    "intrare/ieșire": "institut.in / institut.out",
+    "limită timp": "1 secunde",
+    "limită memorie": "32 MB / 4 MB",
+    "sursa problemei": "OMI 2025, clasele 7-8",
+    "autor": "Silvia Grecu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 1,
+  "memoryLimitMb": 32,
+  "author": "Silvia Grecu",
+  "sourceAttribution": "OMI 2025, clasele 7-8",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4771/institut"
+}

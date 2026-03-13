@@ -1,0 +1,73 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1538"><article id="enunt">
+			<p>Fermierul Ion deţine un teren de formă pătrată, împărţit în <code>NxN</code> pătrate de latură unitate, pe care cultivă cartofi. Pentru recoltarea cartofilor fermierul foloseşte un robot special proiectat în acest scop. Robotul porneşte din pătratul din stânga sus, de coordonate <code>(1,1)</code> şi trebuie să ajungă în pătratul din dreapta jos, de coordonate <code>(N, N)</code>. Traseul robotului este programat prin memorarea unor comenzi pe o cartelă magnetică. Fiecare comandă specifică direcţia de deplasare (<code>sud</code> sau <code>est</code>) şi  numărul de pătrate pe care le parcurge în direcţia respectivă. Robotul strânge recolta doar din pătratele în care se opreşte între două comenzi.</p>
+
+<p>Din păcate, cartela pe care se află programul s-a deteriorat şi unitatea de citire a robotului nu mai poate distinge direcţia de deplasare, ci numai numărul de paşi pe care trebuie să-i facă robotul la fiecare comandă. Fermierul Ion trebuie să introducă manual, pentru fiecare comandă, direcţia de deplasare.</p>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care să determine cantitatea maximă de cartofi pe care o poate culege robotul, în ipoteza în care Ion specifică manual, pentru fiecare comandă, direcţia urmată de robot. Se va determina şi traseul pe care se obţine la recolta maximă.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>sudest.in</code> are următoarea structură:</p>
+
+<ul>
+	<li>Pe linia <code>1</code> se află  numărul natural <code>N</code>, reprezentând  dimensiunea parcelei de teren.</li>
+	<li>Pe următoarele <code>N</code> linii se află câte <code>N</code> numere naturale, separate prin spaţii, reprezentând cantitatea de cartofi din fiecare pătrat unitate.</li>
+	<li>Pe linia <code>N+2</code> se află un număr natural <code>K</code> reprezentând numărul de comenzi aflate pe cartela magnetică.</li>
+	<li>Pe linia <code>N+3</code> se află <code>K</code> numerele naturale <code>C</code><sub><code>1</code></sub>, …, <code>C</code><sub><code>k</code></sub>, separate prin spaţii, reprezentând numărul de paşi pe care trebuie să-i efectueze robotul la fiecare comandă.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>sudest.out</code> va conține pe prima linie cantitatea maximă de cartofi recoltată de robot. Pe următoarele <code>K+1</code> linii vor fi scrise, în ordine, coordonatele pătratelor unitate ce constituie traseul pentru care se obţine cantitate maximă de cartofi, câte un pătrat unitate pe o linie. Coordonatele scrise pe aceeaşi linie vor fi separate printr-un spaţiu. Primul pătrat de pe traseu va avea coordonatele <code>1 1</code>, iar ultimul va avea coordonatele <code>N N</code>. Dacă sunt mai multe trasee pe care se obţine o cantitate maximă de cartofi recoltată se va afişa unul dintre acestea.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>5 ≤ N ≤ 100</code></li>
+	<li><code>2 ≤ K ≤ 2*N-2</code></li>
+	<li><code>1 ≤ C</code><sub><code>1</code></sub>, …, <code>C</code><sub><code>k</code></sub><code> ≤ 10</code></li>
+	<li>Cantitatea de cartofi dintr-un pătrat de teren este număr natural între <code>0</code> şi <code>100</code>.</li>
+	<li>Pentru fiecare set de date de intrare se garantează că există cel puţin un traseu.</li>
+	<li>Se consideră că robotul strânge recolta şi din pătratul de plecare <code>(1,1)</code> şi din cel de sosire <code>(N,N)</code>.</li>
+	<li>Pentru determinarea corectă a cantităţii maxime recoltate se acordă <code>50%</code> din punctajul alocat testului respectiv; pentru cantitate maximă recoltată şi traseu corect se acordă <code>100%</code>.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>sudest.in</code></p>
+
+<pre>6
+1 2 1 0 4 1
+1 3 3 5 1 1
+2 2 1 2 1 10
+4 5 3 9 2 6
+1 1 3 2 0 1
+10 2 4 6 5 10
+5
+2 2 1 4 1</pre>
+
+<p><code>sudest.out</code></p>
+
+<pre>29
+1  1
+3  1
+5  1
+6  1
+6  5
+6  6</pre>
+
+<h3>Explicație</h3>
+
+<p>Un alt traseu posibil este:</p>
+
+<pre>1 1
+1 3
+1 5
+2 5
+6 5
+6 6</pre>
+
+<p>dar costul sau este <code>1+1+4+1+5+10=22</code>.</p>		</article>
+		</body></html>

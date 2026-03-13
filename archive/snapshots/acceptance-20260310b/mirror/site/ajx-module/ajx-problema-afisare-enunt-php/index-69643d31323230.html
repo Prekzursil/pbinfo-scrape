@@ -1,0 +1,77 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1220"><article id="enunt">
+			<p>Fie <code>n</code> un număr natural nenul.</p>
+
+<p>Să considerăm o expresie de forma: <code>x[1]-x[2]-x[3]-...-x[n]</code></p>
+
+<p>Se ştie că scăderea nu este o operaţie asociativă, adică <code>x[1]-(x[2]-x[3])≠(x[1]-x[2])-x[3]</code>.</p>
+
+<p>Ca urmare, prin plasarea unor perechi de paranteze în expresie, putem obţine diferite valori.<br>
+Pentru problema noastră, vom denumi scădere o expresie de forma de mai sus în care pot apărea şi paranteze rotunde care se închid corect. Valoarea unei scăderi se obţine efectuând operaţiile de scădere în ordine de la stânga la dreapta; dacă apar paranteze, se efectuează mai întâi operaţiile din paranteze.</p>
+
+<h1>Cerinţe</h1>
+
+<p>Date fiind valorile <code>x[1]</code>, <code>x[2]</code>, …, <code>x[n]</code> care intervin în scădere, scrieţi un program care să rezolve următoarele două cerinţe:</p>
+
+<ol>
+	<li>să se determine valoarea maximă a unei scăderi (obţinută prin inserarea convenabilă a unor paranteze rotunde în expresia <code>x[1]-x[2]-x[3]-...-x[n]</code>), precum şi o scădere având valoare maximă.</li>
+	<li>să se determine valoarea unei scăderi specificate.</li>
+</ol>
+
+<h1>Date de intrare</h1>
+
+<p>Fişierul de intrare <code>scadere.in</code> conţine pe prima linie un număr natural <code>c</code> indicând cerinţa care trebuie să fie rezolvată (<code>1</code> sau <code>2</code>). Pe a doua linie este scris numărul natural <code>n</code>, care reprezintă numărul de variabile care intervin în scădere. Variabilele sunt numerotate de la <code>1</code> la <code>n</code> în ordinea în care intervin în scădere. Pe următoarele <code>n</code> linii sunt scrise în ordine valorile variabilelor <code>x[1], x[2], ..., x[n]</code>, câte o valoare pe o linie. Dacă cerinţa este <code>2</code>, fişierul mai conţine o linie pe care este scris un şir de caractere reprezentând o scădere.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fişierul de ieşire <code>scadere.out</code> va conţine pentru <code>c=1</code> două linii; pe prima linie va fi scris un număr întreg reprezentând valoarea maximă a unei scăderi (obţinută prin inserarea convenabilă a unor paranteze rotunde în expresia <code>x[1]-x[2]-x[3]-...-x[n]</code>), iar pe a doua linie o scădere având valoare maximă. Dacă <code>c=2</code> fişierul de ieşire va conţine o singură linie pe care va fi scris un număr întreg reprezentând valoarea scăderii specificate pe ultima linie a fişierului de intrare.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>3 ≤ n ≤ 5000</code></li>
+	<li>Valorile variabilelor <code>x[1]</code>, <code>x[2]</code>, …, <code>x[n]</code> sunt numere întregi din intervalul <code>[-100, 100]</code>.</li>
+	<li>Scăderea din fişierul de intrare, respectiv scăderea de valoare maximă afişată în fişierul de ieşire vor avea maxim <code>40000</code> de caractere care pot fi doar cifre, litera mică <code>'x'</code>, paranteze rotunde şi operatorul <code>'-'</code> (minus).</li>
+	<li>Pentru teste valorând 50% din punctaj cerinţa va fi <code>1</code>. Pentru afişarea corectă a valorii maxime se acordă 40% din punctajul pe test. Punctajul integral se acordă pentru afişarea corectă a valorii maxime şi a unei scăderi de valoare maximă.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>scadere.in</code></p>
+
+<pre>1
+4
+-7
+5
+-10
+19</pre>
+
+<p><code>scadere.out</code></p>
+
+<pre>17
+x1-x2-(x3-x4)</pre>
+
+
+<h1>Exemplul 2</h1>
+
+<p><code>scadere.in</code></p>
+
+<pre>2
+4
+-7
+5
+-10
+19
+x1-((x2-x3)-x4)</pre>
+
+<p><code>scadere.out</code></p>
+
+<pre>-3</pre>
+
+<h1>Explicație</h1>
+
+<p>Parantezarea care conduce la valoarea maximă este:</p>
+
+<p><code>x1-x2-(x3-x4) = -7-5-(-10-19) = -12-(-29) = -12+29 = 17</code></p>
+
+<p><code>x1-((x2-x3)-x4) = -7-((5-10)-19) = -7-(15-19) = -7-(-4) = -7+4 = -3</code></p>		</article>
+		</body></html>

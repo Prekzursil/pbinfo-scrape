@@ -1,0 +1,107 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3539"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>Ai primit definiția clasei de mai jos. Implementează toate metodele clasei.</p>
+
+<pre class="code_cpp">class Complex
+{
+    // i - partea imaginara, r - partea reala
+    int i, r;
+public:
+    // constructor stabileste valoare partii reale si acelei imaginare
+    Complex(int pr, int pi);
+    // constructor creeaza numarul complex nul
+    Complex();
+    // seteaza valorile partii reale si a celei imaginare
+    void set(int pr, int pi);
+    //returneaza modulul
+    double modul();
+    //returneaza partea reala
+    int real();
+    //returneaza partea imaginara
+    int imag();
+    //supraincarcare operator pentru afisarea numarului complex
+    friend ostream&amp; operator&lt;&lt;(ostream&amp;, const Complex&amp;);
+    // supraincarcare operator adunare
+    Complex operator +(Complex );
+    // supraincarcare operator scadere
+    Complex operator -(Complex );
+    // supraincarcare operator inmultire
+    Complex operator *(Complex );
+};</pre>
+
+<p>Codul scris de tine va fi încărcat într-un program de forma:</p>
+
+<pre class="code_cpp">#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+using namespace std;
+
+class Complex
+{
+    // i - partea imaginara, r - partea reala
+    int i, r;
+public:
+    // constructor stabileste valoare partii reale si acelei imaginare
+    Complex(int pr, int pi);
+    // constructor creeaza numarul complex nul
+    Complex();
+    // seteaza valorile partii reale si a celei imaginare
+    void set(int pr, int pi);
+    //returneaza modulul
+    double modul();
+    //returneaza partea reala
+    int real();
+    //returneaza partea imaginara
+    int imag();
+    //supraincarcare operator pentru afisarea numarului complex
+    friend ostream&amp; operator&lt;&lt;(ostream&amp;, const Complex&amp;);
+    // supraincarcare operator adunare
+    Complex operator +(Complex );
+    // supraincarcare operator scadere
+    Complex operator -(Complex );
+    // supraincarcare operator inmultire
+    Complex operator *(Complex );
+};
+
+// codul scris de tine
+
+int main()
+{
+    Complex a, b(4,5),c;
+    int x, y;
+    cin &gt;&gt; x &gt;&gt; y;
+    a.set(x,y);
+    cout &lt;&lt; a.modul()&lt;&lt;" "&lt;&lt; a*b &lt;&lt; " " &lt;&lt; a+b &lt;&lt; " " &lt;&lt; a-b;
+    return 0;
+}</pre>
+
+<h1>Exemplul 1:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>4 5</pre>
+
+
+<p><strong>Ieșire</strong></p>
+
+<pre>6.40312 -9+40i 8+10i 0</pre>
+
+<h3>Explicație</h3>
+
+<p>S-a afișat modulul numărului complex 4+5i, produsul, suma și diferența numerelor complexe 4+5i și 4+5i.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>4 -5</pre>
+
+
+<p><strong>Ieșire</strong></p>
+
+<pre>6.40312 41 8 -10i</pre>
+
+<h3>Explicație</h3>
+
+<p>S-a afișat modulul numărului complex 4-5i, produsul, suma și diferența numerelor complexe 4-5i și 4+5i.</p>		</article>
+		</body></html>

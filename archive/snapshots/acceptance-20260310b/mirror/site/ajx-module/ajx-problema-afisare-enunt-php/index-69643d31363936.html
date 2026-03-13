@@ -1,0 +1,114 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1696"><article id="enunt">
+			<p>Fie un şir <code>a[1]</code>, <code>a[2]</code>, …, <code>a[n]</code> de numere naturale, unde <code>n</code> este impar. Avem la dispoziţie o singură operaţie admisă şi anume: putem aduna la două poziţii diferite din şir o aceeaşi valoare naturală nenulă.</p>
+
+<h1>Cerința</h1>
+
+<ol>
+	<li>Să se verifice dacă șirul poate să aibă toate elementele egale după aplicarea unei singure operații.</li>
+	<li>Folosind de mai multe ori operaţia admisă, să se obţină șirul cu toate elementele egale, dar valoarea egală obţinută să nu depăşească dublul valorii maxime din şirul iniţial.</li>
+</ol>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>perechi2.in</code> conține pe prima linie un număr natural <code>C</code>, pe a doua linie numărul <code>n</code>, iar pe linia a treia, separate prin câte un spațiu, valorile <code>a[1]</code>, <code>a[2]</code>, …, <code>a[n]</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>perechi2.out</code> va conține:</p>
+
+<ol>
+	<li>Dacă <code>C=1</code>, atunci se va rezolva doar prima cerință, deci se va afișa pe prima linie valoarea <code>0</code> dacă nu se pot obține în șir toate elementele egale, sau se vor afișa trei numere naturale <code>i j v</code> cu semnificația: la pozițiile <code>i</code> și <code>j</code> din șir se adaugă valoarea <code>v</code> și astfel toate elementele vectorului vor deveni egale.</li>
+	<li>Dacă <code>C=2</code>, atunci se va rezolva doar a doua cerință. Pe fiecare linie a fișierului de ieșire se vor afișa exact trei valori <code>i j v</code> cu semnificația: se adună valoarea <code>v</code> la <code>a[i]</code> și la <code>a[j]</code> (unde <code>i</code> și <code>j</code> sunt distincte și sunt cuprinse între <code>1</code> și <code>n</code>).</li>
+</ol>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>5 ≤ n &lt; 2000</code>, <code>n</code> este impar</li>
+	<li><code>0 ≤ a[i] ≤ 100 000 000</code>, pentru orice <code>i=1..n</code></li>
+	<li>Elementele șirului inițial nu sunt neapărat distincte, dar nu sunt nici toate egale</li>
+	<li>Dacă există mai multe soluții, puteți afișa oricare dintre ele.</li>
+	<li>Dacă numărul operațiilor aplicate este mai mic sau egal decât <code>n</code>, iar valoarea finală este de cel mult două ori cât maximul inițial și rezultatul aplicării operațiilor furnizează în șir aceeași valoare, atunci veți primi 100% din punctaj.</li>
+	<li>Dacă numărul operațiilor este cuprins între <code>n+1</code> și <code>2n</code>, iar valoarea finală este de cel mult două ori cât maximul inițial și rezultatul aplicării operațiilor furnizează în șir aceeași valoare, atunci veți primi 70% din punctaj.</li>
+	<li>Dacă numărul operațiilor este mai mare de <code>2n</code> sau dacă valoarea finală depășește dublul valorii maxime inițiale, atunci veți primi 0 puncte. De asemenea, dacă în urma operațiilor aplicate nu se obține un șir cu aceeași valoare peste tot, sau dacă aplicați o operație în care pozițiile <code>i</code> și <code>j</code> nu sunt din intervalul <code>1..n</code>, atunci de asemenea veți primi 0 puncte.</li>
+	<li>Pentru teste valorând 20 de puncte vom avea <code>C=1</code>. Pentru restul testelor vom avea <code>C=2</code>, din care pentru 30 de puncte șirul va fi format din numere distincte cuprinse între <code>1</code> și <code>n</code>.</li>
+</ul>
+
+<h1>Exemplu 1</h1>
+
+<p><code>perechi2.in</code></p>
+
+<pre>1
+5
+8 2 8 8 2</pre>
+
+<p><code>perechi2.out</code></p>
+
+<pre>2 5 6</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C=1</code>, deci se va rezolva doar prima cerință! Adunând valoarea <code>6</code> la pozițiile <code>2</code> și <code>5</code> se va obține șirul constant <code>8 8 8 8 8</code>.</p>
+
+<h1>Exemplu 2</h1>
+
+<p><code>perechi2.in</code></p>
+
+<pre>2
+5
+8 5 6 3 10</pre>
+
+<p><code>perechi2.out</code></p>
+
+<pre>1 2 2
+3 4 4
+2 4 3</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C=2</code>, deci se va rezolva doar a doua cerință! Valoarea maximă din șir este <code>10</code>, deci valoarea finală trebuie să fie maximum <code>20</code>. Trebuie efectuate cel mult <code>5</code> operații pentru 100 puncte.</p>
+
+<ul>
+	<li>Aplicând operația <code>1 2 2</code>, obținem șirul <code>10 7 6 3 10</code></li>
+	<li>Aplicând operația <code>3 4 4</code>, obținem șirul <code>10 7 10 7 10</code></li>
+	<li>Aplicând operația <code>2 4 3</code>, obținem șirul <code>10 10 10 10 10</code></li>
+</ul>
+
+<h1>Exemplu 3</h1>
+
+<p><code>perechi2.in</code></p>
+
+<pre>1
+5
+8 2 7 8 2</pre>
+
+<p><code>perechi2.out</code></p>
+
+<pre>0</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C=1</code>, deci se va rezolva doar prima cerință! Nu se poate efectua o singură operație astfel încât toate elementele șirului să devină egale.</p>
+
+<h1>Exemplu 4</h1>
+
+<p><code>perechi2.in</code></p>
+
+<pre>2
+3
+1 2 3</pre>
+
+<p><code>perechi2.out</code></p>
+
+<pre>1 3 1
+1 2 2</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C=2</code>, deci se va rezolva doar a doua cerință! Valoarea maximă din șir este <code>3</code>, deci valoarea finală trebuie să fie maximum <code>6</code>. Trebuie efectuate cel mult <code>3</code> operații pentru 100 puncte.</p>
+
+<ul>
+	<li>Aplicând operația <code>1 3 1</code>, obținem șirul <code>2 2 4</code></li>
+	<li>Aplicând operația <code>1 2 2</code>, obținem șirul <code>4 4 4</code></li>
+</ul>		</article>
+		</body></html>

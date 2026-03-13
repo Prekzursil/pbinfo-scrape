@@ -1,0 +1,320 @@
+{
+  "id": 3748,
+  "slug": "secvente5",
+  "name": "Secvente5",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3748/secvente5",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 21,
+      "name": "Probleme cu secvențe",
+      "slug": "probleme-cu-secven-e",
+      "href": "/?pagina=probleme-lista&tag=21"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerințe",
+      "html": "<p>Scrieți un program care să citească numărul natural <code>N</code>  și apoi șirul de <code>N</code> elemente. Programul determină:</p><ol>\n\t<li>numărul de <strong>N-secvențe nebanale</strong>, din șir;</li>\n\t<li>cea mai mare lungime a unei <strong>N-secvențe</strong> din șir;</li>\n\t<li>cea mai mare sumă a unei <strong>N-secvențe</strong> din șir.</li>\n</ol>",
+      "text": "Scrieți un program care să citească numărul natural N și apoi șirul de N elemente. Programul determină: numărul de N-secvențe nebanale, din șir; cea mai mare lungime a unei N-secvențe din șir; cea mai mare sumă a unei N-secvențe din șir."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>secvente5.in</code> conține pe prima linie numere naturale <code>C</code> și <code>N</code> separate printr-un singur spațiu. <code>C</code> reprezentând cerința care trebuie rezolvată (<code>1</code>, <code>2</code> sau <code>3</code>). </p>",
+      "text": "Fișierul de intrare secvente5.in conține pe prima linie numere naturale C și N separate printr-un singur spațiu. C reprezentând cerința care trebuie rezolvată (1, 2 sau 3)."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul <code>secvente5.out</code> va conține pe prima linie un număr natural reprezentând:</p><ul>\n\t<li>dacă <code>C = 1</code>, numărul de <code>N-secvențe nebanale</code> din șir (răspunsul la cerința <code>1</code>);</li>\n\t<li>dacă <code>C = 2</code>, cea mai mare lungime a unei <code>N-secvențe</code> din șir (răspunsul la cerința <code>2</code>);</li>\n\t<li>dacă <code>C = 3</code>, cea mai mare sumă a unei <code>N-secvențe</code> din șir (răspunsul la cerința <code>3</code>).</li>\n</ul>",
+      "text": "Fișierul secvente5.out va conține pe prima linie un număr natural reprezentând: dacă C = 1, numărul de N-secvențe nebanale din șir (răspunsul la cerința 1); dacă C = 2, cea mai mare lungime a unei N-secvențe din șir (răspunsul la cerința 2); dacă C = 3, cea mai mare sumă a unei N-secvențe din șir (răspunsul la cerința 3)."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2 ≤ N ≤ 100.000</code></li>\n\t<li>elementele șirului sunt numere întregi din interval închis <code>[-10</code><sup><code>9</code></sup> , <code>10</code><sup><code>9</code></sup><code>]</code></li>\n\t<li>în șirul de numere dat există cel puțin o <strong>N-secvență</strong> a cărei sumă este un număr natural</li>\n\t<li>numărul întreg negativ <code>X</code> este divizibil cu numărul natural nenul <code>N</code> dacă restul împărțirii  modulului lui <code>X</code> la <code>N</code> este <code>0</code> (de exemplu, <code>X=-30</code> este divizibil cu <code>N=6</code>, iar <code>X=-45</code> nu este divizibil cu <code>N=6</code>)</li>\n\t<li>Pentru cerințele <code>1</code> și <code>2</code> se acordă câte <code>30p</code>, iar pentru cerința <code>3</code> se acordă <code>40p</code>.</li>\n</ul>",
+      "text": "2 ≤ N ≤ 100.000 elementele șirului sunt numere întregi din interval închis [-109 , 109] în șirul de numere dat există cel puțin o N-secvență a cărei sumă este un număr natural numărul întreg negativ X este divizibil cu numărul natural nenul N dacă restul împărțirii modulului lui X la N este 0 (de exemplu, X=-30 este divizibil cu N=6, iar X=-45 nu este divizibil cu N=6) Pentru cerințele 1 și 2 se acordă câte 30p, iar pentru cerința 3 se acordă 40p."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>secvente5.in</code></p><pre>1 10\n-9 -3 4 -10 -1 -16 18 18 -10 50</pre><p><code>secvente5.out</code></p><pre>8</pre><h3>Explicație</h3><p>Se rezolvă cerința <code>1</code>. Șirul are <code>N=10</code> elemente întregi:  <code>-9, -3, 4, -10, -1, -16, 18, 18, -10, 50</code>. </p><p>Cele <code>N-secvențe nebanale</code> sunt <code>(-3, 4, -10, -1)</code>, <code>(-16, 18, 18)</code>, <code>(-10, 50)</code>, <code>(-16, 18, 18, -10)</code>, <code>(-16, 18, 18, -10, 50)</code>, <code>(-3, 4, -10, -1, -16, 18, 18)</code>, <code>(-3, 4, -10, -1, -16, 18, 18, -10)</code>, <code>(-3, 4, -10, -1, -16, 18, 18, -10, 50)</code>.</p>",
+      "text": "secvente5.in1 10 -9 -3 4 -10 -1 -16 18 18 -10 50secvente5.out8ExplicațieSe rezolvă cerința 1. Șirul are N=10 elemente întregi: -9, -3, 4, -10, -1, -16, 18, 18, -10, 50. Cele N-secvențe nebanale sunt (-3, 4, -10, -1), (-16, 18, 18), (-10, 50), (-16, 18, 18, -10), (-16, 18, 18, -10, 50), (-3, 4, -10, -1, -16, 18, 18), (-3, 4, -10, -1, -16, 18, 18, -10), (-3, 4, -10, -1, -16, 18, 18, -10, 50)."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>secvente5.in</code></p><pre>2 10\n-9 -3 4 -10 -1 -16 18 18 -10 50</pre><p><code>secvente5.out</code></p><pre>9</pre><h3>Explicație</h3><p>Se rezolvă cerința <code>2</code>. Șirul are <code>N=10</code> elemente întregi:  <code>-9, -3, 4, -10, -1, -16, 18, 18, -10, 50</code>. </p><p>Cea mai lungă dintre aceste secvențe este N-secvența <code>(-3, 4,-10,-1,-16,18,18,-10,50)</code>. Lungimea acestei secvențe este <code>9</code>.</p>",
+      "text": "secvente5.in2 10 -9 -3 4 -10 -1 -16 18 18 -10 50secvente5.out9ExplicațieSe rezolvă cerința 2. Șirul are N=10 elemente întregi: -9, -3, 4, -10, -1, -16, 18, 18, -10, 50. Cea mai lungă dintre aceste secvențe este N-secvența (-3, 4,-10,-1,-16,18,18,-10,50). Lungimea acestei secvențe este 9."
+    },
+    {
+      "title": "Exemplul 3:",
+      "html": "<p><code>secvente5.in</code></p><pre>3 10\n-9 -3 4 -10 -1 -16 18 18 -10 50</pre><p><code>secvente5.out</code></p><pre>60</pre><h3>Explicație</h3><p>Se rezolvă cerința <code>3</code>. Șirul are <code>N=10</code> elemente întregi:  <code>-9, -3, 4, -10, -1, -16, 18, 18, -10, 50</code>.</p><p>Suma maximă a unei secvente este <code>60</code> ( suma N-secvenței: <code>-16,18,18,-10,50</code>).</p>",
+      "text": "secvente5.in3 10 -9 -3 4 -10 -1 -16 18 18 -10 50secvente5.out60ExplicațieSe rezolvă cerința 3. Șirul are N=10 elemente întregi: -9, -3, 4, -10, -1, -16, 18, 18, -10, 50.Suma maximă a unei secvente este 60 ( suma N-secvenței: -16,18,18,-10,50)."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Se rezolvă cerința 1. Șirul are N=10 elemente întregi: -9, -3, 4, -10, -1, -16, 18, 18, -10, 50."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Se rezolvă cerința 2. Șirul are N=10 elemente întregi: -9, -3, 4, -10, -1, -16, 18, 18, -10, 50."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Se rezolvă cerința 3. Șirul are N=10 elemente întregi: -9, -3, 4, -10, -1, -16, 18, 18, -10, 50."
+    }
+  ],
+  "constraints": [
+    "2 ≤ N ≤ 100.000",
+    "elementele șirului sunt numere întregi din interval închis [-109 , 109]",
+    "în șirul de numere dat există cel puțin o N-secvență a cărei sumă este un număr natural",
+    "numărul întreg negativ X este divizibil cu numărul natural nenul N dacă restul împărțirii modulului lui X la N este 0 (de exemplu, X=-30 este divizibil cu N=6, iar X=-45 nu este divizibil cu N=6)",
+    "Pentru cerințele 1 și 2 se acordă câte 30p, iar pentru cerința 3 se acordă 40p."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q04d4e03dfc.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Minca Carmen (carmen)",
+    "clasa": "9",
+    "intrare/ieșire": "secvente5.in / secvente5.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 64 MB",
+    "sursa problemei": "ONI GIM 2021 clasa a 8-a",
+    "autor": "Stelian Ciurea",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "author": "Stelian Ciurea",
+  "sourceAttribution": "ONI GIM 2021 clasa a 8-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3748/secvente5"
+}

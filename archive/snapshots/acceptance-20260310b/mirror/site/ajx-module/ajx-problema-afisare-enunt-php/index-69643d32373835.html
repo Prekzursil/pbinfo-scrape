@@ -1,0 +1,74 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2785"><article id="enunt">
+			<h1>Găleți</h1>
+
+<p>Avem <code>n</code> găleți numerotate de la stânga la dreapta numere de la <code>1</code> la <code>n</code>. Fiecare găleată conține inițial <code>1</code> litru de apă. Capacitatea fiecărei găleți se consideră nelimitată. Vărsăm gălețile una în alta, respectând o anumită regulă, până când toată apa ajunge în prima găleată din stânga. Vărsarea unei găleți presupune un anumit efort.</p>
+
+<p>Regula după care se răstoarnă gălețile este următoarea: se aleg două găleți astfel încât orice găleată situată între ele să fie goală. Se varsă apa din găleata din dreapta în găleata din stânga. Efortul depus este egal cu volumul de apă din găleata din dreapta (cea care se varsă). Formal, dacă notăm cu \( a_i \) volumul de apă conținut în găleata cu numrăul <code>i</code>, regula de vărsare a acestei găleți în găleata cu numărul <code>j</code> poate fi descrisă astfel:</p>
+
+<ul>
+	<li>1. <code>j &lt; i</code>;</li>
+	<li>2. \( a_k = 0,\forall \) <code>k</code> a.î. <code>j &lt; k &lt; i</code> (dacă <code>j + 1 = k</code>, atunci această regulă nu va putea exista);</li>
+	<li>3. efortul depus este \(  a_i \);</li>
+	<li>4. după vărsare \(  a_j = a_j + a_i \) și \(  a_i=0 \).</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând numărul de găleți <code>n</code> și un număr natural <code>e</code>, să se determine o succesiune de vărsări în urma căreia toată apa ajunge în găleata cea mai din stânga și efortul total depus este <strong>exact <code>e</code></strong>. </p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>galeti.in</code> conține pe prima linie două numere naturale, <code>n</code> și <code>e</code>, în această ordine, separate printr-un spațiu. Primul număr, <code>n</code>, reprezintă numărul de găleți. Al doilea număr, <code>e</code>, reprezintă efortul care trebuie depus pentru a vărsa toată apa în găleata din stânga.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>galeti.out</code> trebuie să  conțină <code>n-1</code> linii care descriu vărsările, în ordinea în care acestea se efectuează, pentru a vărsa toată apa în găleata din stânga cu efortul total <code>e</code>. Fiecare dintre aceste linii trebuie să conțină două numere, <code>i</code> și <code>j</code>, separate printr-un spațiu, cu semnificația că apa din găleata cu numărul <code>i</code> se varsă în găleata cu numărul <code>j</code>. </p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 100.000</code></li>
+	<li><code>1 ≤ e ≤ 5.000.000.000</code></li>
+	<li>Se asigură faptul că există cel puțin o soluție posibilă pentru fiecare test în parte;</li>
+	<li>Dacă există mai multe soluții, oricare dintre ele se va considera validă;</li>
+	<li>Pentru teste în valoare de <code>18</code> puncte, datele de intrare sunt cunoscute. Mai precis:</li>
+	<li>Testul 0: <strong>n</strong> = <code>91</code>, <strong>e</strong> = <code>90</code>.</li>
+	<li>Testul 1: <strong>n</strong> = <code>30</code>, <strong>e</strong> = <code>435</code>.</li>
+	<li>Testul 2: <strong>n</strong> = <code>7</code>, <strong>e</strong> = <code>16</code>.</li>
+	<li>Pentru alte teste în valoare de <code>15</code> puncte, <code>n ≤ 9</code>.</li>
+</ul>
+
+<p>În concurs s-au acordat <code>10p</code> din oficiu. Aici, exemplul va valora exact <code>10p</code>.</p>
+
+<h1>Exemplu:</h1>
+
+<p><code>galeti.in</code></p>
+
+<pre>4 4</pre>
+
+<p><code>galeti.out</code></p>
+
+<pre>2 1
+4 3
+3 1</pre>
+
+<h3>Explicație</h3>
+
+<p>Inițial, fiecare găleată conține câte un litru de apă.<br>
+<code>1 1 1 1</code>.<br>
+Prima dată vărsăm un litru de apa din găleata 2 în găleata 1 cu efort 1 =&gt;<br>
+<code>2 0 1 1</code>.<br>
+Apoi vărsăm un litru de apă din găleata 4 în găleata 3 cu efort 1 =&gt;<br>
+<code>2 0 2 0</code>.<br>
+În final vărsăm cei doi litri de apă din găleata 3 în găleata 1 cu efort 2 =&gt;<br>
+<code>4 0 0 0</code><br>
+O altă variantă corectă ar fi fost:<br>
+<code>4 3</code><br>
+<code>2 1</code><br>
+<code>3 1</code><br>
+Observați că următoarea succesiune de vărsări este <strong>greșită</strong>:<br>
+<code>4 2</code><br>
+<code>2 1</code><br>
+<code>3 1</code><br>
+Deși efortul depus este 4 si cei 4 litri ajung în prima găleata, la primul pas vărsarea unui litru de apă din găleata 4 în găleata 2 nu este permisă deoarece între acestea se găsește găleata 3 care conține apă.</p>		</article>
+		</body></html>

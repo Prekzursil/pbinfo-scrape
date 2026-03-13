@@ -1,0 +1,60 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3632"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>Aky, un elev pasionat de matematică, analiza într-o zi curios o matrice pătratică de dimensiune <code>N</code>. Acesta a observat că această matrice are anumite submatrice, la rândul lor pătratice, ale căror elemente sunt egale. Astfel și-a pus o întrebare: pentru o matrice dată, care este submatricea pătratică de dimensiune maximă a acesteia cu toate elementele egale pe care o pot obține, știind că am voie să schimb valoarea a maxim <code>K</code> elemente din matricea dată cu orice valoare consider și care este numărul minim de elemente ce trebuie schimbate pentru a obține o astfel de submatrice. Acesta ar rezolva problema de unul singur, dar este ocupat chiar acum deci vă cere vouă ajutorul!</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>matrix_replace.in</code> conține pe prima linie numerele <code>N</code> și <code>K</code>, reprezentând dimensiunea matricei inițiale, respectiv câte elemente am voie maxim să schimb din aceasta, iar pe următoarele <code>N</code> linii câte <code>N</code> numere naturale reprezentând elementele matricei inițiale.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>matrix_replace.out</code> va conține pe prima linie numărele <code>D M</code>, reprezentând dimesiunea maximă a unei submatrice cu proprietatea din enunț, respectiv numărul minim de elemente ale căror valori trebuie schimbate pentru a obține această submatrice.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 150</code></li>
+	<li><code>0 ≤ K ≤ N * N</code></li>
+	<li>elementele matricei vor fi numere naturale mai mici sau egale ca <code>100</code></li>
+	<li>pentru o matrice dată, o submatrice a acesteia având coordonatele colțului stânga-sus <code>x1 y1</code> și coordonatele colțului dreapta-jos <code>x2 y2</code> este formată din toate elementele din matrice având indicele liniei în intervalul <code>[x1, x2]</code> și indicele coloanei în intervalul <code>[y1, y2]</code>. Această submatrice se numește submatrice pătratică dacă are același număr de linii și coloane</li>
+	<li><strong>Subtask 1</strong>: pentru <code>20</code> de puncte <code>N ≤ 20</code></li>
+	<li><strong>Subtask 2</strong>: pentru alte <code>10</code> de puncte numărul de valori distince din matrice este <code>2</code>, <code>K = 0</code> și <code>N ≤ 150</code></li>
+	<li><strong>Subtask 3</strong>: pentru alte <code>20</code> de puncte pot exista oricâte valori distincte în matrice, <code>N ≤ 100</code>, <code>K ≤ N * N</code> și valoarea maximă din matrice este mai mică sau egală decât <code>10</code></li>
+	<li><strong>Subtask 4</strong>: pentru restul punctelor se păstrează condițiile inițiale: <code>1 ≤ N ≤ 150</code>, <code>0 ≤ K ≤ N * N</code> și elementele matricei vor fi numere naturale nenule mai mici sau egale ca <code>100</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>matrix_replace.in</code></p>
+
+<pre>3 5
+1 2 3
+4 5 6
+7 8 9</pre>
+
+<p><code>matrix_replace.out</code></p>
+
+<pre>2 3</pre>
+
+<h3>Explicație</h3>
+
+<p>Putem de exemplu obține o submatrice pătratică de dimenisiune <code>2</code> schimbând valorile elementelor de coordonate: <code>1 2</code>, <code>2 1</code>, respectiv <code>2 2</code> cu <code>1</code>. Observăm că numărul minim de schimbări de elemente este <code>3</code>, deci în acest caz <code>K = 5</code>, numărul de schimbări maxime pe care le putem efectua, nu este atins.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>matrix_replace.in</code></p>
+
+<pre>3 8
+1 1 3
+1 1 6
+7 8 9</pre>
+
+<p><code>matrix_replace.out</code></p>
+
+<pre>3 5</pre>
+
+<h3>Explicație</h3>
+
+<p>Putem transforma toată matricea într-o matrice cu toate elementele egale cu un număr minim de schimbări egal cu <code>5</code>, schimbând valorile elementelor diferite <code>1</code> cu <code>1</code>. Similar cu exemplul anterior, nici în această situație nu se atinge valoarea maximă <code>K = 8</code> de elemente ale căror valori le putem schimba. </p>		</article>
+		</body></html>

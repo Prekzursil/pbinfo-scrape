@@ -1,0 +1,49 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3744"><article id="enunt">
+			<p>După șase ani de lucru, Charles a terminat de curățat instalațiile pentru producerea negrului de fum din Copșa Mică. Pentru a se ține departe de mesele de Blackjack, el s-a angajat la <span class="caps">CERN</span>, unde va lucra la noul accelerator de particule numit Even Larger Hadron Collider (<span class="caps">ELHC</span>). <span class="caps">ELHC</span> are forma unui tunel circular cu o circumferință de <code>P</code> kilometri, <code>P</code> fiind un număr prim. De-a lungul tunelului sunt plasați <code>P</code> senzori numerotați de la <code>0</code> la <code>P - 1</code>, distanța dintre doi senzori consecutivi fiind de exact <code>1</code> kilometru.</p>
+
+<p>Un experiment efectuat în <span class="caps">ELHC</span> constă în studierea unei particule de tip <code>G</code>, <code>1 ≤ G &lt; P</code>. Dacă această particulă este ridicată la nivelul de energie <code>k</code> și este lansată din dreptul senzorului <code>0</code> în direcția senzorului <code>1</code>, ea va parcurge exact <code>G</code><sup><code>k</code></sup> kilometri prin tunel și apoi se va dezintegra, declanșând în acel moment senzorul <code>s</code> în dreptul căruia are loc dezintegrarea particulei. Se consideră că experimentul are date complete dacă, lansând <code>P - 1</code> particule de tip <code>G</code> ridicate la toate nivelurile de energie <code>k</code> de la <code>1</code> la <code>P - 1</code>, este posibil să declanșăm toți senzorii <code>s</code> numerotați cu valori între <code>1</code> și <code>P - 1</code>, adică toți senzorii din tunel mai puțin senzorul <code>0</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Dându-se <code>T</code> perechi de numere <code>G</code> și <code>P</code>, determinați dacă experimentul pentru studierea particulei de tip <code>G</code> într-un tunel de circumferință <code>P</code> produce date complete.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>elhc.in</code> conține pe prima linie un număr <code>T</code>, reprezentând numărul de experimente care vor fi efectuate. Pe fiecare din următoarele <code>T</code> linii se află câte două numere <code>G</code> și <code>P</code> separate printr-un spațiu, reprezentând efectuarea unui experiment cu o particulă de tip <code>G</code> într-un tunel de circumferință <code>P</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>În fișierul de ieșire <code>elhc.out</code> se va afla o singură linie cu <code>T</code> biți scriși unul după altul, adică fără spații între ei. Al <code>i</code>-ulea bit este <code>1</code> dacă pentru cel de-al <code>i</code>-lea experiment putem obține date complete, și <code>0</code> în<br>
+caz contrar.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ T ≤ 1 000</code></li>
+	<li><code>1 ≤ G &lt; P &lt; 1 000 000 000</code></li>
+	<li><code>P</code> este un număr prim</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>elhc.in</code></p>
+
+<pre>6
+2 3
+3 5
+2 7
+3 7
+3 11
+5 11</pre>
+
+<p><code>elhc.out</code></p>
+
+<pre>110100</pre>
+
+<h3>Explicație</h3>
+
+<p>Fișierul de intrare conține <code>T = 6</code> experimente.<br>
+A doua particulă are tipul <code>3</code> și va fi lansată printr-un tunel de circumferință <code>5</code>, cu <code>5</code> senzori numerotați de la <code>0</code> la <code>4</code>. Ridicată la nivelurile de energie <code>1</code>, <code>2</code>, <code>3</code>, respectiv <code>4</code>, și lansată de fiecare dată din dreptul senzorului <code>0</code>, particula va călători <code>3</code>, <code>9</code>, <code>27</code>, respectiv <code>81</code> de kilometri și va declanșa senzorii <code>3</code>, <code>4</code>, <code>2</code>, respectiv <code>1</code>. Aceștia sunt toți senzorii pe care trebuie să-i declanșăm, prin urmare experimentul produce date valide, deci al doilea bit din șirul afișat este <code>1</code>.</p>
+
+<p>A treia particulă are tipul <code>2</code> și va fi lansată printr-un tunel de circumferință <code>7</code>. Ridicată la nivelurile de energie <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, respectiv <code>6</code>, și lansată de fiecare dată din dreptul senzorului <code>0</code>, particula va declanșa senzorii <code>2</code>, <code>4</code>, <code>1</code>, <code>2</code>, <code>4</code>, respectiv <code>1</code>. Deoarece nu declanșăm senzorii <code>3</code>, <code>5</code> și <code>6</code>, experimentul nu are date complete, deci al treilea bit din șirul afișat este <code>0</code>.</p>		</article>
+		</body></html>

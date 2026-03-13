@@ -1,0 +1,83 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2980"><article id="enunt">
+			<p>Valutar este un joc care poate fi jucat de oricâți jucători. La începutul jocului, fiecare jucător primește <code>L</code> lei și <code>E</code> euro, precum și un jeton numerotat cu numărul jucătorului. Mai exact, dacă există <code>M</code> jucători, vor fi <code>M</code> jetoane, numerotate de la <code>1</code> la <code>M</code>. Tabla de joc este harta unui oraș pe care este ilustrat un traseu circular ce conține <code>N</code> case de schimb valutar, numerotate în ordinea de pe traseu de la <code>1</code> la <code>N</code>. Fiind circular, după casa <code>N</code> urmează casa <code>1</code>. Pentru fiecare casă de schimb valutar se cunosc două valori <code>C</code> și <code>V</code> (<code>C</code> reprezintă câți lei plătește un jucător dacă vrea să cumpere <code>1</code> euro de la casa respectivă, iar <code>V</code> reprezintă câți lei primește jucătorul dacă vrea să vândă <code>1</code> euro). Fiecare casă are o anumită culoare în funcție de care jucătorul ajuns în punctul respectiv trebuie să efectueze o anumită acțiune astfel:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-valutar-1-jpg.jpg"></p>
+
+<p>Inițial toți jucătorii pornesc de la casa de schimb valutar <code>1</code> care este albă. Jucătorii mută pe rând în ordinea jetoanelor. Mai întâi mută jucătorul <code>1</code>, apoi <code>2</code>, <code>3</code>, …, <code>N</code>. După jucătorul <code>N</code> va muta din nou <code>1</code> etc. La o mutare, un jucător care nu a fost eliminat din joc:<br>
+- “dă” cu zarul electronic; zarul va afișa un număr întreg <code>nr</code>;<br>
+- avansează cu <code>nr</code> poziții (adică dacă jetonul său este la casa <code>i</code> va ajunge la casa <code>i + nr</code>);<br>
+- execută acțiunea asociată casei de schimb valutar în care a ajuns, în funcție de culoarea acesteia.<br>
+Zarul electronic funcționează astfel: la mutarea cu numărul <code>j</code> este generat numărul <code>nr</code><sub><code>j</code></sub> calculat după formula</p>
+
+<p><code>nr</code><sub><code>j</code></sub> <code>= ( a * nr</code><sub><code>j-1</code></sub> <code>+ b) % N + 1</code>, </p>
+
+<p>unde <code>nr</code><sub><code>j-1</code></sub> este numărul generat la mutarea <code>j-1</code>; <code>a</code>, <code>b</code> și <code>nr</code><sub><code>0</code></sub> sunt trei valori cunoscute, iar <code>%</code> reprezintă restul împărțirii întregi (<code>mod</code>).</p>
+
+<h1>Cerința</h1>
+
+<p>Scrieți un program care să rezolve următoarele cerințe:<br>
+1. determină numărul de jucători existenți în joc după <code>X</code> mutări;<br>
+2. determină jucătorul care a rămas în joc și care are cea mai mare sumă de Euro după <code>X</code> mutări.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>valutar.in</code> conține pe prima linie cerința care trebuie să fie rezolvată (<code>1</code> sau <code>2</code>). Pe a doua linie se află numerele naturale <code>a</code>, <code>b</code> și <code>nr</code><sub><code>0</code></sub>, cu semnificația din enunț. Pe a treia linie se află numerele naturale <code>N M L E X</code>, reprezentând numărul de case de schimb valutar, numărul de jucători, câți lei și câți euro primește fiecare jucător la începutul jocului, respectiv numărul de mutări din joc. Pe următoarele <code>N</code> linii sunt descrise casele de schimb valutar, câte o casă pe o linie, în ordinea de la <code>1</code> la <code>N</code>, sub forma <code>Cod C V</code>, cu semnificațiile din enunț. Valorile scrise pe aceeași linie sunt separate prin câte un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>valutar.out</code> va conține o singură linie. Dacă cerința este <code>1</code>, linia va conține un număr natural reprezentând numărul de jucători existenți în joc după <code>X</code> mutări. Dacă cerința este <code>2</code>, linia va conține numărul jetonului jucătorului rămas în joc și care are cea mai mare sumă de euro după <code>X</code> mutări.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ M, C, V ≤ 100</code></li>
+	<li><code>1 ≤ a, b, nr0, N, X ≤ 10.000</code></li>
+	<li><code>1 ≤ L, E ≤ 1.000.000</code></li>
+	<li>Toate casele de schimb valutar au suficienți lei și euro pentru efectuarea oricărei acțiuni.</li>
+	<li>Se garantează că pentru datele de test la cerința 2 va rămâne în joc după <code>X</code> mutări un singur jucător cu suma maximă de euro.</li>
+	<li>Pentru fiecare cerință se acordă <code>50%</code> din punctajul obținut pe teste.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>valutar.in</code></p>
+
+<pre>1
+3 2 7
+5 3 2 3 8
+A 1 1
+G 5 4
+G 6 4
+V 6 5
+R 2 3</pre>
+
+<p><code>valutar.out</code></p>
+
+<pre>1</pre>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>valutar.in</code></p>
+
+<pre>2
+3 2 7
+5 3 2 3 8
+A 1 1
+G 5 4
+G 6 4
+V 6 5
+R 2 3</pre>
+
+<p><code>valutar.out</code></p>
+
+<pre>2</pre>
+
+<h3>Explicație</h3>
+
+<p>Numerele care se obțin când se dă cu zarul se generează astfel: <code>nr</code><sub><code>j</code></sub> <code>= (3 * nr</code><sub><code>j-1</code></sub> <code>+ 2) % 5 + 1</code>, unde <code>nr</code><sub><code>0</code></sub> <code>= 7</code>.<br>
+Există în joc <code>5</code> case de schimb valutar și <code>3</code> jucători. Toți jucătorii au inițial <code>2</code> lei Și <code>3</code> euro și se află la casa de schimb valutar <code>1</code> care este albă. Se efectuează <code>8</code> mutări astfel:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-valutar-2-jpg.jpg"></p>
+
+<p>Singurul jucător rămas în joc este <code>2</code>, deci el are și suma maximă de euro.</p>		</article>
+		</body></html>

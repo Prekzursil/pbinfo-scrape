@@ -1,0 +1,61 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1033"><article id="enunt">
+			<p>Un teren de fotbal este folosit pentru aterizarea elicopterelor. Gazonul de pe stadion este parcelat în pătrăţele de aceeaşi dimensiune, cu laturile paralele cu marginile terenului. Liniile cu pătrăţele de gazon sunt numerotate de sus în jos cu numerele <code>1</code>, <code>2</code>, …, <code>m</code>, iar coloanele cu pătrăţele de gazon sunt numerotate de la stânga la dreapta cu numerele <code>1</code>, <code>2</code>, …, <code>n</code>. Din cauza tipului diferit de iarbă se ştie care dintre pătrăţele de gazon  sunt afectate sau nu de umbră. Acest lucru este precizat printr-un tablou bidimensional a cu <code>m</code> linii şi <code>n</code> coloane, cu elemente <code>0</code> şi <code>1</code> (<code>a</code><sub><code>ij</code></sub> <code>= 0</code> înseamnă că pătrăţelul aflat pe linia <code>i</code> şi coloana <code>j</code> este afectat de umbră, iar  <code>a</code><sub><code>ij</code></sub> <code>= 1</code> înseamnă că pătrăţelul aflat pe linia <code>i</code> şi coloana <code>j</code> nu este afectat de umbră).  Fiecare elicopter are <code>3</code> roţi pe care se sprijină. Roţile fiecărui elicopter determină un triunghi dreptunghic isoscel. Elicopterele aterizează, astfel încât triunghiurile formate să fie cu catetele paralele cu marginile terenului. În exemplul următor avem patru elicoptere.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1001-1050-elicop-png.png"></p>
+
+<p>Pentru a preciza poziţia unui elicopter pe teren este suficient să cunoaştem linia şi coloana vărfurilor ipotenuzei şi poziţia vârfului deasupra (codificată prin <code>1</code>) sau dedesubtul ipotenuzei (codificată prin <code>-1</code>). Pentru exemplu, elicopterul din stânga sus este dat prin <code>(1,1)</code>, <code>(3,3)</code> şi <code>-1</code>, cel din dreapta sus prin <code>(1,9)</code>, <code>(5,5)</code> şi <code>1</code>, cel din stânga jos prin <code>(5,1)</code>, <code>(6,2)</code> şi <code>1</code>, iar cel din dreapta jos prin <code>(5,9)</code>, <code>(6,8)</code> şi <code>1</code>. </p>
+
+<p>Un elicopter se consideră că a aterizat <em>greşit</em>, dacă triunghiul format sub el (definit mai sus) are mai mult de jumătate din pătrăţele afectate de umbră.</p>
+
+<p>Administratorul terenului de fotbal doreşte să determine numărul <code>N1</code> de elicoptere, care nu afectează nici un pătrăţel din teren şi numerele de ordine al elicopterelor, care au aterizat <em>greşit</em> în ordine crescătoare: <code>e</code><sub><code>1</code></sub>, <code>e</code><sub><code>2</code></sub>, …, <code>e</code><sub><code>N2</code></sub>, ştiind că există <code>k</code> elicoptere codificate prin numerele <code>1</code>, <code>2</code>, …, <code>k</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care să determine, pentru fişierul cu datele din enunţ: numărul de elicoptere <code>N1</code>, care nu afectează nici un pătrăţel din teren şi numerele de ordine al elicopterelor, care au aterizat <em>greşit</em> în ordine crescătoare, precedate de numărul lor <code>N2</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>elicop.in</code> conține pe prima linie două numere naturale <code>m</code> şi <code>n</code>, separate printr-un spaţiu, cu semnificaţia din enunţ. Următoarele <code>m</code> linii conţin câte <code>n</code> numere <code>0</code> sau <code>1</code>, separate prin câte un spaţiu cu semnificaţia <code>0</code> – pătrăţel de gazon care este afectat de umbră, respectiv <code>1</code>- pătrăţel care nu este afectat de umbră. Pe linia <code>m+2</code> se află numărul de elicoptere <code>k</code>, iar pe următoarele <code>k</code> linii (în ordinea codificării lor <code>1</code>, <code>2</code>, …, <code>k</code>) câte cinci numere separate prin cate un spaţiu, pentru liniile şi coloanele ipotenuzelor şi poziţia vârfului (<code>1</code> sau <code>-1</code>), triunghiurilor dreptunghice asociate elicopterelor: <br>
+<code>L1 C1 L2 C2 p</code>. </p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>elicop.out</code> va conține două linii: prima linie numărul <code>N1</code> de elicoptere, care nu afectează nici un pătrăţel din teren, a doua linie cu numerele naturale <code>N2</code>, <code>e</code><sub><code>1</code></sub>, <code>e</code><sub><code>2</code></sub>, …, <code>e</code><sub><code>N2</code></sub> separate prin câte un spaţiu, în ordine crescătoare.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ m,n ≤ 100</code>; <code>1 ≤ k ≤ 40</code></li>
+	<li>Nu există suprapuneri de triunghiuri asociate la două elicoptere. Triunghiurile asociate elicopterelor conţin cel puţin trei pătrăţele.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>elicop.in</code></p>
+
+<pre>7 9
+1 1 1 1 1 1 1 1 1
+0 0 0 0 1 1 1 1 0
+0 0 1 0 1 1 1 0 0
+1 1 1 0 1 1 0 1 1
+0 0 1 1 1 1 0 1 1
+1 1 1 1 1 1 0 1 1
+1 1 1 1 1 1 0 0 1
+4
+1 1 3 3 -1
+1 9 5 5 1
+5 1 6 2 1
+5 9 6 8 1 </pre>
+
+<p><code>elicop.out</code></p>
+
+<pre>2
+2 1 3</pre>
+
+<h1>Explicație</h1>
+
+<p>Elicopterele <code>2</code> şi <code>4</code> nu afectează niciun pătrăţel de gazon. </p>
+
+<p>Elicopterele <code>1</code> şi <code>3</code> afectează fiecare mai mult de jumătate din numărul pătrăţelelor asociate triunghiurilor dreptunghice şi deci aterizează greşit. Elicopterul <code>1</code> face umbră la <code>6</code> pătrăţele, din care afectate sunt <code>4</code>.<br>
+Elicopterul <code>3</code> face umbră la <code>3</code> pătrăţele, din care afectate sunt două.</p>		</article>
+		</body></html>

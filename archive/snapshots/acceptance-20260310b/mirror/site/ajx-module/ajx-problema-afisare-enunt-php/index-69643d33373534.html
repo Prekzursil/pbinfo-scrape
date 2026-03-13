@@ -1,0 +1,105 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3754"><article id="enunt">
+			<p>Definim o expresie ca fiind un șir de caractere <code>e</code> care respectă una dintre următoarele:</p>
+
+<ul>
+	<li><code>e = "x";</code></li>
+	<li><code>e</code> reprezintă un număr natural (constantă); (ex. <code>e ∊ {"1", "2"; "200"; ...}</code>)</li>
+	<li><code>e = "[e1,e2]"</code> sau <code>e = "(e1,e2)"</code>, unde <code>e1</code>, <code>e2</code> sunt (sub-)expresii. Aici, <code>(•, •)</code> semnifică cel mai mare<br>
+divizor comun a două numere, iar <code>[•,•]</code> semnifică cel mai mic multiplu comun a două numere. De exemplu, avem că <code>(6, 8) = 2</code>, <code>[6, 8] = 24</code>.</li>
+</ul>
+
+<p>De exemplu, <code>"x"</code>, <code>"13"</code>, <code>"(5,2)"</code>, <code>"[3,[x,(14,1)]]"</code>, <code>"[x,x]"</code> sunt expresii, pe când <code>"0"</code>, <code>"(5,2,3)"</code>, <code>"[x,2)"</code> nu sunt expresii. Observați că expresiile nu conțin niciodată spații.</p>
+
+<p>Pentru o expresie e dată și un număr natural pozitiv <code>a</code>, definim <code>eval(e, a)</code> ca fiind rezultatul evaluării expresiei <code>e</code>, unde tuturor aparițiilor lui <code>x</code> le vor fi asociate valoarea <code>a</code>. De exemplu:</p>
+
+<ul>
+	<li><code>eval("([x,3], [x,2])", 10) = ([10, 3], [10, 2]) = (30, 10) = 10</code></li>
+	<li><code>eval("(6,14)", 5) = (6, 14) = 2</code></li>
+	<li><code>eval("x", 12) = 12</code></li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Dându-se o expresie <code>e</code> și două numere naturale <code>a</code>, <code>b</code>, să se calculeze <code>eval(e, a) + eval(e, a+1) + ... + eval(e, b)</code>. Rezultatul se va afișa modulo <code>1.000.000.007</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>expresii.in</code> conține pe prima linie o expresie <code>e</code>. Pe a doua linie se găsesc numerele <code>a</code>, <code>b</code>, separate prin spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>expresii.out</code> va conține un număr întreg reprezentând valoarea cerută.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ a ≤ b ≤ 250.000</code>, <code>1 ≤ |e| ≤ 2.000.000</code>, <code>0 ≤ max(e) ≤ 250.000</code>, unde <code>|e|</code> reprezintă lungimea expresiei <code>e</code> (numărul de caractere), iar <code>max(e)</code> reprezintă constanta de valoare maximă din <code>e</code> (sau <code>0</code>, dacă <code>e</code> nu conține constante).</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>expresii.in</code></p>
+
+<pre>(x,6)
+4 4</pre>
+
+<p><code>expresii.out</code></p>
+
+<pre>2</pre>
+
+<h3>Explicație</h3>
+
+<p><code>(4, 6) = 2</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>expresii.in</code></p>
+
+<pre>[x,6]
+1 6</pre>
+
+<p><code>expresii.out</code></p>
+
+<pre>66</pre>
+
+<h3>Explicație</h3>
+
+<p><code>[1, 6] + [2, 6] + [3, 6] + [4, 6] + [5, 6] + [6, 6] = 6 + 6 + 6 + 12 + 30 + 6 = 66</code>.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>expresii.in</code></p>
+
+<pre>(12,(x,(8,6)))
+3 6</pre>
+
+<p><code>expresii.out</code></p>
+
+<pre>6</pre>
+
+<h1>Exemplul 4:</h1>
+
+<p><code>expresii.in</code></p>
+
+<pre>([x,3],[x,2])
+10 10</pre>
+
+<p><code>expresii.out</code></p>
+
+<pre>10</pre>
+
+<h1>Exemplul 5:</h1>
+
+<p><code>expresii.in</code></p>
+
+<pre>[([(x,5),2],[12,5]),(x,16)]
+28 33</pre>
+
+<p><code>expresii.out</code></p>
+
+<pre>36</pre>
+
+<h3>Explicație</h3>
+
+<p>Răspunsurile pentru fiecare valoare din interval sunt <code>4</code>, <code>2</code>, <code>10</code>, <code>2</code>, <code>16</code>, <code>2</code> (în această ordine).</p>		</article>
+		</body></html>

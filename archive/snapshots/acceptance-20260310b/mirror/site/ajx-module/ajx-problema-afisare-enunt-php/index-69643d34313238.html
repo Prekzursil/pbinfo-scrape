@@ -1,0 +1,126 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4128"><article id="enunt">
+			<p>Primarul orașului X dorește să aibă un iluminat public modern. Pentru aceasta, realizează o schiță sub forma unui pătrat cu <code>n</code> linii și <code>n</code> coloane în care fiecare element situat la intersecția unei linii cu o coloană reprezintă un cartier.</p>
+
+<p>Primarul a calculat pentru fiecare cartier care este numărul de stâlpi de iluminat public din acel cartier. Fiecare stâlp are un singur bec care inițial este aprins. Acesta a observat un lucru interesant: toate cartierele au un număr diferit de stâlpi de iluminare, iar valoarea maximă a numărului de stâlpi dintr-un cartier este <code>n</code><sup><code>2</code></sup>.</p>
+
+<p>Pentru a fi realizată într-un mod cât mai eficient, stingerea becurilor se realizează în următorul mod:</p>
+
+<ul>
+	<li>în prima etapă se sting becurile din cartierul cu număr maxim de stâlpi de iluminat, ceea ce duce la stingerea becurilor din cartierele de pe aceeași linie precum și din cele pe aceeași coloană cu cartierul cu număr maxim de stâlpi.</li>
+	<li>procedeul se reia la fiecare etapă pentru toate cartierele în care nu au fost stinse becurile, până când rămâne un singur cartier iluminat.</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând numerele naturale nenule <code>n</code> și <code>k</code>, precum și numărul de stâlpi de iluminat din fiecare cartier, să se determine:</p>
+
+<ul>
+	<li>Câți stâlpi de iluminat se află în cartierul cu număr maxim de stâlpi de iluminat la etapa cu numărul <code>k</code> din procedeul de stingere a becurilor?</li>
+	<li>Câte becuri se sting, în total, la etapa cu numărul <code>k</code>?</li>
+	<li>Care este numărul maxim de becuri aprinse într-o zonă pătratică a orașului de dimensiune <code>k x k</code>, înainte de a începe stingerea becurilor?</li>
+</ul>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>iluminat.in</code> conține pe prima linie o cifră <code>c</code> (<code>1</code>, <code>2</code> sau <code>3</code>), reprezentând cerința cerută. Pe linia următoare se găsesc două numere naturale nenule <code>n</code> și <code>k</code>, separate printr-un spațiu. Pe următoarele <code>n</code> linii se află <code>n</code><sup><code>2</code></sup> numere naturale distincte, câte <code>n</code> pe fiecare linie, separate prin câte un spațiu, cu semnificația din enunț. </p>
+
+<h1>Date de ieșire</h1>
+
+<p>În fișierul de ieșire <code>iluminat.out</code> se va afișa răspunsul în funcție de cerință:</p>
+
+<ul>
+	<li>dacă <code>c = 1</code> se va afișa pe prima linie un singur număr reprezentând numărul de stâlpi de iluminat din cartierul cu număr maxim de stâlpi de iluminat la etapa <code>k</code></li>
+	<li>dacă <code>c = 2</code> se va afișa pe prima linie un singur număr reprezentând câte becuri se sting, în total, la etapa cu numărul <code>k</code></li>
+	<li>dacă <code>c = 3</code> se va afișa numărul maxim de becuri aprinse într-o zonă pătratică de dimensiune <code>k x k</code> înainte de stingerea becurilor</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>c ∈ {1, 2, 3}</code></li>
+	<li><code>1 ≤ k &lt; n ≤ 1000</code></li>
+	<li>Numărul de becuri din fiecare cartier este mai mic sau egal cu <code>n</code><sup><code>2</code></sup></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>iluminat.in</code></p>
+
+<pre>1
+4 2
+1 2 3 4
+16 13 5 6
+12 9 7 14
+10 11 8 15</pre>
+
+<p><code>iluminat.out</code></p>
+
+<pre>15</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerința este <code>1</code>. Se sting becurile din cartierul având <code>16</code> stâlpi de iluminat, ceea ce duce la stingerea becurilor de pe stâlpii din linia <code>2</code> și din coloana <code>1</code>. Tabloul devine:</p>
+
+<p><code>0  2  3  4</code><br>
+<code>0  0  0  0</code><br>
+<code>0  9  7 14</code><br>
+<code>0 11  8 15</code></p>
+
+<p>La etapa a doua, primul cartier în care se sting becurile are <code>15</code> stâlpi de iluminat.</p>
+
+
+<h1>Exemplul 2:</h1>
+
+<p><code>iluminat.in</code></p>
+
+<pre>2
+4 2
+1 2 3 4
+16 13 5 6
+12 9 7 14
+10 11 8 15</pre>
+
+<p><code>iluminat.out</code></p>
+
+<pre>52</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerința este <code>2</code>. Se sting becurile din cartierul având <code>16</code> stâlpi de iluminat, ceea ce duce la stingerea becurilor de pe stâlpii din linia <code>2</code> și din coloana <code>1</code>. Tabloul devine:</p>
+
+<p><code>0  2  3  4</code><br>
+<code>0  0  0  0</code><br>
+<code>0  9  7 14</code><br>
+<code>0 11  8 15</code></p>
+
+<p>La etapa a doua, primul cartier în care se sting becurile are <code>15</code> stâlpi de iluminat, ceea ce duce la stingerea becurilor din linia <code>4</code> și din coloana <code>4</code> din noul tablou. Acesta devine:</p>
+
+<p><code>0 2 3 0</code><br>
+<code>0 0 0 0</code><br>
+<code>0 9 7 0</code><br>
+<code>0 0 0 0</code></p>
+
+<p>Numărul total de becuri stinse la etapa cu numărul <code>k=2</code> este: <code>15+11+8+14+4=52</code>.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>iluminat.in</code></p>
+
+<pre>3
+4 2
+1 2 3 4
+16 13 5 6
+12 9 7 14
+10 11 8 15</pre>
+
+<p><code>iluminat.out</code></p>
+
+<pre>50</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerința este <code>3</code>. Numărul maxim de becuri aprinse într-o zonă pătratică a orașului de dimensiune <code>2 x 2</code> este <code>50</code>, în zona cu colțul stânga-sus pe linia 2 și coloana 2</p>
+
+<p><code>16 13</code><br>
+<code>12  9</code></p>		</article>
+		</body></html>

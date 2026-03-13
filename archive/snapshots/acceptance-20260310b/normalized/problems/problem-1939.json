@@ -1,0 +1,313 @@
+{
+  "id": 1939,
+  "slug": "bare",
+  "name": "Bare",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1939/bare",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 151,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=151"
+    },
+    {
+      "id": 152,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=152"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Pe o tablă de joc cu <code>N</code> linii și <code>M</code> coloane se află un roboțel pe poziția <code>1,1</code>. El știe să meargă doar pe conturul tablei (prima și ultima linie, respectiv prima și ultima coloană). Robotul dorește să ajungă pe poziția <code>N, M</code> dar nu este așa simplu. Pe tabla de joc se află <code>Q</code> bare de lungimi infinite. Barele sunt fixate în colțul din dreapta jos a unor căsuțe. La început, o bară se poate afla fie în poziție verticală, fie în poziție orizontală. Robotul poate schimba orientarea acestor bare din poziție verticală în poziție orizontală și invers. El nu poate trece printr-o bară. <br>\nDe exemplu, dacă avem <code>N=4</code>, <code>M=4</code>, <code>Q=1</code> și bara se află la coordonatele <code>3,3</code>  în poziție verticală, robotul nu poate ajunge la căsuțele de pe coloana <code>4</code>. Dar dacă el învârte bara poate merge pe coloana <code>4</code>, apoi pentru a merge pe linia <code>4</code> poate să învârtă bara din nou.</p><p><img alt=\"\" src=\"/resurse/9dc152/p-1700/1939-bare.png\"></p><p>Această soluție nu este optimă deoarece robotul putea ajunge în poziția <code>4,4</code> învârtind o singură dată bara. Mai întâi se poziționează pe linia <code>4</code>, apoi învârte bara și se duce pe coloana <code>4</code>.</p><p>Să se afle numărul minim de rotiri ale barelor pentru ca robotul să ajungă din poziția <code>1,1</code> în poziția <code>N,M</code>, mergând numai în dreapta și în jos.</p>",
+      "text": "Pe o tablă de joc cu N linii și M coloane se află un roboțel pe poziția 1,1. El știe să meargă doar pe conturul tablei (prima și ultima linie, respectiv prima și ultima coloană). Robotul dorește să ajungă pe poziția N, M dar nu este așa simplu. Pe tabla de joc se află Q bare de lungimi infinite. Barele sunt fixate în colțul din dreapta jos a unor căsuțe. La început, o bară se poate afla fie în poziție verticală, fie în poziție orizontală. Robotul poate schimba orientarea acestor bare din poziție verticală în poziție orizontală și invers. El nu poate trece printr-o bară. De exemplu, dacă avem N=4, M=4, Q=1 și bara se află la coordonatele 3,3 în poziție verticală, robotul nu poate ajunge la căsuțele de pe coloana 4. Dar dacă el învârte bara poate merge pe coloana 4, apoi pentru a merge pe linia 4 poate să învârtă bara din nou.Această soluție nu este optimă deoarece robotul putea ajunge în poziția 4,4 învârtind o singură dată bara. Mai întâi se poziționează pe linia 4, apoi învârte bara și se duce pe coloana 4.Să se afle numărul minim de rotiri ale barelor pentru ca robotul să ajungă din poziția 1,1 în poziția N,M, mergând numai în dreapta și în jos."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>bare.in</code> conține pe prima linie trei numere <code>N</code>, <code>M</code> și <code>Q</code> reprezentând numărul de coloane și numărul de linii pe care îl are tabla de joc, respectiv numărul de bare care se află pe tablă. Pe următoarele <code>Q</code> linii se găsesc câte trei valori <code>X[i] Y[i]  K[i]</code>, unde <code>X[i] Y[i]</code> reprezintă linia și coloana căsuței în care se află bara, iar <code>K[i]</code> reprezintă orientarea barei (poate fi verticală <code>V</code> sau orizontală <code>O</code>).</p>",
+      "text": "Fișierul de intrare bare.in conține pe prima linie trei numere N, M și Q reprezentând numărul de coloane și numărul de linii pe care îl are tabla de joc, respectiv numărul de bare care se află pe tablă. Pe următoarele Q linii se găsesc câte trei valori X[i] Y[i] K[i], unde X[i] Y[i] reprezintă linia și coloana căsuței în care se află bara, iar K[i] reprezintă orientarea barei (poate fi verticală V sau orizontală O)."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>bare.out</code> va conține pe prima linie o singură valoare ce reprezintă numărul minim de rotiri ale barelor pentru ca robotul să ajungă din poziția <code>1,1</code> în poziția <code>N,M</code>.</p>",
+      "text": "Fișierul de ieșire bare.out va conține pe prima linie o singură valoare ce reprezintă numărul minim de rotiri ale barelor pentru ca robotul să ajungă din poziția 1,1 în poziția N,M."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>3 ≤ N,M ≤ 10000</code></li>\n\t<li><code>0 ≤ Q ≤ min(N,M)</code></li>\n\t<li>Oricare două bare nu vor fi fixate pe aceeași linie sau pe aceeași coloană.</li>\n</ul>",
+      "text": "3 ≤ N,M ≤ 10000 0 ≤ Q ≤ min(N,M) Oricare două bare nu vor fi fixate pe aceeași linie sau pe aceeași coloană."
+    },
+    {
+      "title": "Exemplul 1",
+      "html": "<p><code>bare.in</code></p><pre>4 4 1\n3 3 V</pre><p><code>bare.out</code></p><pre>1</pre><h3>Explicație</h3><p>Robotul pornește din <code>1, 1</code>, apoi se duce în căsuța <code>4,1</code> → învârte bara apoi se poate duce în <code>4,4</code>.</p>",
+      "text": "bare.in4 4 1 3 3 Vbare.out1ExplicațieRobotul pornește din 1, 1, apoi se duce în căsuța 4,1 → învârte bara apoi se poate duce în 4,4."
+    },
+    {
+      "title": "Exemplul 2",
+      "html": "<p><code>bare.in</code></p><pre>4 5 3\n3 4 V\n2 1 O\n1 2 V</pre><p><code>bare.out</code></p><pre>4</pre><h3>Explicație</h3><p>Robotul pornește din <code>1, 1</code> întoarce bara din căsuța <code>2,1</code> → se duce în căsuța <code>4,1</code> apoi întoarce toate cele <code>3</code> bare și se duce în căsuța <code>4,4</code>.</p>",
+      "text": "bare.in4 5 3 3 4 V 2 1 O 1 2 Vbare.out4ExplicațieRobotul pornește din 1, 1 întoarce bara din căsuța 2,1 → se duce în căsuța 4,1 apoi întoarce toate cele 3 bare și se duce în căsuța 4,4."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Robotul pornește din 1, 1, apoi se duce în căsuța 4,1 → învârte bara apoi se poate duce în 4,4."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Robotul pornește din 1, 1 întoarce bara din căsuța 2,1 → se duce în căsuța 4,1 apoi întoarce toate cele 3 bare și se duce în căsuța 4,4."
+    }
+  ],
+  "constraints": [
+    "3 ≤ N,M ≤ 10000",
+    "0 ≤ Q ≤ min(N,M)",
+    "Oricare două bare nu vor fi fixate pe aceeași linie sau pe aceeași coloană."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qff157397f6.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1700/1939-bare.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1700-1939-bare-png.png",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "9",
+    "intrare/ieșire": "bare.in / bare.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "Moisil++, 2016",
+    "autor": "Banu Denis",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "author": "Banu Denis",
+  "sourceAttribution": "Moisil++, 2016",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1939/bare"
+}

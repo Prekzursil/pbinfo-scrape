@@ -1,0 +1,114 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4833"><article id="enunt">
+			<p>Alina, managerul unui lanț de magazine, este responsabilă de gestiunea tranzacțiilor bancare din cadrul acestora. Ea lucrează cu conturi bancare și cunoaște sumele de bani (soldul) existente în fiecare dintre acestea. După ce a ales banca cu care va colabora, stabilește următoarele reguli:</p>
+
+<ul>
+	<li>tranzacțiile trebuie efectuate în ordinea în care apar;</li>
+	<li>trebuie să deschidă cât mai puține conturi;</li>
+	<li>fiecărui cont nou deschis i se asociază un cod unic egal cu numărul conturilor care au fost deschise de Alina până atunci;</li>
+	<li>la o tranzacție de <strong>depunere</strong> suma trebuie depusă în întregime într-un singur cont; contul se alege astfel încât această sumă să fie strict mai mare decât ultima sumă depusă în acest cont. Dacă  există mai multe astfel de conturi se alege cel pentru care ultima sumă depusă este maximă, iar dacă există mai multe astfel de conturi se alege cel care are codul asociat minim. Dacă în niciunul dintre conturile existente nu poate fi depusă suma conform precizărilor, se deschide un nou cont și se depune suma în acesta.</li>
+	<li>la o tranzacție de <strong>retragere</strong> suma necesară se poate obține din unul sau mai multe conturi. Se alege pentru retragere contul care are soldul cel mai mic, iar dacă aceasta este mai mare decât suma necesară se actualizează soldul (prin scăderea din acesta a sumei necesare), iar procesul se încheie. Dacă soldul este insuficient, se actualizează suma necesară (prin scăderea din aceasta a soldului), iar contul respectiv se închide și procesul se reia cu alegerea unui alt cont adecvat. Dacă există mai multe conturi cu același sold minim se alege pentru retragere cel în care ultima sumă depusă este maximă; dacă sunt mai multe astfel de conturi se alege cel care are codul asociat maxim.</li>
+</ul>
+
+<p>Se cunosc <code>N</code>, numărul tranzacțiilor și <code>N</code> numere întregi nenule <code>a[1]</code>, <code>a[2]</code>, …, <code>a[N]</code>, reprezentând, în această ordine, sumele de tranzacționat (un număr pozitiv indică o sumă care urmează a fi depusă, iar un număr negativ reprezintă o sumă care urmează a fi retrasă).</p>
+
+<h1>Cerința</h1>
+
+<p>După procesarea celor <code>N</code> tranzacții, ajutați-o pe Alina să determine:<br>
+1) numărul de conturi rămase active.<br>
+2) soldul maxim care se găsește într-un cont dintre cele rămase active.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>conturi.in</code> conține pe prima linie două numere naturale, <code>C</code>  și <code>N</code>, unde <code>C</code> este numărul cerinței care trebuie rezolvată (care poate fi doar <code>1</code> sau <code>2</code>), iar <code>N</code> are semnificația din enunț. Pe a doua linie, separate prin câte un spațiu se află cele <code>N</code> valori întregi nenule <code>a[1]</code>, <code>a[2]</code>, …, <code>a[N]</code> cu semnificația din enunț.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>conturi.out</code> conține numărul determinat pentru cerința <code>C</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 100.000</code></li>
+	<li><code>-10</code><sup><code>18</code></sup> <code>≤ a[i] ≤ 10</code><sup><code>18</code></sup>, pentru oricare <code>1 ≤ i ≤ N</code></li>
+	<li><code>a[i] ≠ 0</code>, pentru oricare <code>1 ≤ i ≤ N</code></li>
+	<li>sumele care trebuie retrase nu depășesc totalul soldurilor din conturile active la momentul retragerii</li>
+	<li>sunt cel mult <code>10</code> retrageri</li>
+	<li>Pentru 39 de puncte, <code>C=1</code></li>
+	<li>Pentru 61 de puncte, <code>C=2</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>conturi.in</code></p>
+
+<pre>1 5
+10 15 5 10 20</pre>
+
+<p><code>conturi.out</code></p>
+
+<pre>2</pre>
+
+<h3>Explicație</h3>
+
+<p>În contul cu codul <code>1</code> se depun sumele: <code>10</code>, <code>15</code>, <code>20</code>, deci acesta are soldul <code>10 + 15 + 20 = 45</code>, iar în contul cu codul <code>2</code> se depun sumele <code>5</code>, <code>10</code>, deci acesta are soldul <code>5 + 10 = 15</code>. Sunt <code>2</code> conturi active.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>conturi.in</code></p>
+
+<pre>2 5
+10 15 5 10 20</pre>
+
+<p><code>conturi.out</code></p>
+
+<pre>45</pre>
+
+<h3>Explicație</h3>
+
+<p>Tranzacțiile sunt conform descrierii de mai sus, iar soldul maxim este <code>45</code>, în contul <code>1</code>.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>conturi.in</code></p>
+
+<pre>1 7
+10 15 5 10 20 -15 35</pre>
+
+<p><code>conturi.out</code></p>
+
+<pre>1</pre>
+
+<h3>Explicație</h3>
+
+<p>Până în momentul tranzacției de retragere, se procedează ca la exemplul 1. Suma <code>15</code> se retrage din contul al doilea care astfel se închide (<code>15 - 15 = 0</code>), iar în singurul cont rămas activ se depune suma <code>35</code>.</p>
+
+<h1>Exemplul 4:</h1>
+
+<p><code>conturi.in</code></p>
+
+<pre>2 7
+10 15 5 10 20 -15 35</pre>
+
+<p><code>conturi.out</code></p>
+
+<pre>80</pre>
+
+<h3>Explicație</h3>
+
+<p>Se procedează ca la exemplul 3 deci în contul activ soldul devine <code>45 + 35 = 80</code>.</p>
+
+<h1>Exemplul 5:</h1>
+
+<p><code>conturi.in</code></p>
+
+<pre>2 7
+10 15 5 10 20 -45 35</pre>
+
+<p><code>conturi.out</code></p>
+
+<pre>50</pre>
+
+<h3>Explicație</h3>
+
+<p>Până în momentul tranzacției de retragere, se procedează ca la exemplul 1. Pentru a retrage suma <code>45</code> se efectuează o retragere din contul 2 (cu soldul <code>15</code>) care se închide; suma de retras actualizată (<code>45 - 15 = 30</code>) este extrasă în continuare din contul 1 (cu soldul <code>45</code>), iar după depunerea următoare (de <code>35</code>) soldul final al acestuia va fi <code>50</code>.</p>		</article>
+		</body></html>

@@ -1,0 +1,70 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4369"><article id="enunt">
+			<p>Împăratul Tiberius Claudius Caesar Augustus Germanicus, pasionat de luptele de gladiatori, a decis să organizeze cele mai mari jocuri care s-au organizat vreodată în Roma Antică.</p>
+
+ Pentru a realiza aceste jocuri, Tiberius a chemat la Roma <code>N</code> gladiatori. Apoi, pentru a îi organiza, a decis să aranjeze cei <code>N</code> gladiatori în felul următor: primul gladiator are la dreapta lui gladiatorul <code>2</code>, iar la stângă lui pe nimeni, gladiatorul <code>2</code> are la stângă lui gladiatorul <code>1</code> și la dreapta lui gladiatorul <code>3</code>, …, gladiatorul <code>N-1</code> are la dreapta lui gladiatorul <code>N</code> și la stângă lui gladiatorul <code>N-2</code>, iar gladiatorul <code>N</code> are la stânga lui gladiatorul <code>N-1</code>, iar la dreapta lui pe nimeni. 
+
+ Împăratul Tiberius poate decide ca doi gladiatori să poarte o bătălie doar dacă se află unul lângă altul. După ce această bătălie se termină, gladiatorul care câștigă se întoarce în șir, iar gladiatorul care pierde părăsește șirul. Atunci când un gladiator pierde o bătălie și părăsește șirul, toți gladiatorii din dreapta lui se mută cu o poziție mai la stânga. 
+
+ Fiecare gladiator are un nivel de faimă egal cu un număr natural, iar pentru a face jocurile mai spectaculoase, împăratul a decis ca atunci când doi gladiatori poartă o bătălie, mereu gladiatorul cu un nivel de faimă mai mic va câștiga. Dacă doi gladiatori au nivelul de faimă egal, atunci va câștiga cel din stânga.
+
+ Pentru a măsura cât de spectaculoase sunt jocurile, împăratul a inventat un număr, numit “coeficientul de entuziasm”. Acest număr este egal cu <code>0</code> înainte să înceapă jocurile. În urma unei bătălii coeficientul de entuziasm crește cu diferența dintre nivelul de faimă al celor doi gladiatori. De exemplu, dacă doi gladiatori poartă o bătălie, iar unul dintre gladiatori are nivelul de faimă egal cu <code>7</code> și celălalt are nivelul de faimă egal cu <code>5</code>, atunci coeficientul va crește cu <code>7 - 5 = 2</code>. Jocurile se termină atunci când mai rămâne un singur gladiator în picioare. 
+
+<h1>Cerința</h1>
+
+<p> Ajutați-l pe Împăratul Tiberius și spuneți-i care este cel mai mare coeficient de entuziasm pe care îl poate obține atunci când se termină jocurile.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a intrării standard se află numărul <code>N</code>, iar pe a doua linie se afla <code>N</code> numere naturale separate prin câte un spaţiu, reprezentând nivelul de faimă al fiecărui gladiator.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>La ecran se va afișa pe o singură linie un număr natural, care reprezintă coeficientul de entuziasm maxim care poate fi obținut.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 100.000</code></li>
+	<li>Nivelul de faimă al unui gladiator este un număr natural mai mic decât <code>1.000.000.000</code>.</li>
+	<li>Pentru teste în valoare de 15 puncte, toți gladiatorii au același nivel de faimă.</li>
+	<li>Pentru teste în valoare de alte 25 puncte, primul gladiator are cel mai mic nivel de faimă, iar restul gladiatorilor sunt așezați în ordine descrescătoare</li>
+	<li>Pentru teste în valoare de alte 20 de puncte, gladiatorii sunt așezați în ordine crescătoare după nivelul de faimă</li>
+	<li>Pentru teste în valoare de 55 de puncte, <code>N ≤ 1000</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>5
+1 2 3 1 7</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>9</pre>
+
+<h3>Explicație</h3>
+
+<p>Putem obține coeficientul de faimă <code>9</code> în modul următor:</p>
+
+<ul>
+	<li>Inițial coeficientul de faimă este egal cu <code>0</code>.</li>
+	<li>Alegem ca prima bătălie să fie între gladiatorul <code>4</code> și gladiatorul <code>5</code>. Nivelul de entuziasm crește cu <code>7-1=6</code>, devenind <code>6</code>, iar gladiatorul <code>5</code> părăseșe șirul. Astfel rămânem cu gladiatorii: <code>1, 2, 3, 4</code>.</li>
+	<li>A doua bătălie va fi între gladiatorul <code>1</code> și gladiatorul <code>2</code>. Nivelul de entuziasm crește cu <code>2-1=1</code>,  devenind <code>7</code>, iar gladiatorul <code>2</code> părăseșe șirul. Astfel rămânem cu gladiatorii: <code>1, 3, 4</code>.</li>
+	<li>A treia bătălie va fi între gladiatorul <code>1</code> și gladiatorul <code>3</code>. Nivelul de entuziasm crește cu <code>3-1=2</code>,  devenind <code>9</code>, iar gladiatorul <code>3</code> părăseșe șirul. Astfel rămânem cu gladiatorii: <code>1, 4</code>.</li>
+	<li>Ultima bătălie va fi între gladiatorul <code>1</code> și gladiatorul <code>4</code>. Nivelul de entuziasm crește cu <code>1-1=0</code>, devenind <code>9</code>, iar pentru că gladiatorii au nivel de faimă egal și gladiatorul <code>1</code> se află mai în stânga, gladiatorul <code>4</code> părăsește șirul. Astfel rămânem cu gladiatorul: <code>1</code>.</li>
+</ul>
+
+<p>Modul de a alege bătăliile nu este neaparat unic.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>5
+1 2 5 6 8</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>17</pre>		</article>
+		</body></html>

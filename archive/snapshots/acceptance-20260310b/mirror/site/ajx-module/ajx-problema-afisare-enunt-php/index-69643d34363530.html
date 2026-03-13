@@ -1,0 +1,82 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4650"><article id="enunt">
+			<p>Paftenie trăiește într-un oraș pătratic, împărțit în <code>n x n</code> regiuni pătratice, așezate pe <code>n</code> linii, numerotate de la <code>1</code> la <code>n</code>, și <code>n</code> coloane, numerotate de la <code>1</code> la <code>n</code>. În fiecare astfel de regiune există o cafenea, iar în dreptul fiecărei cafenele se află un indicator către nord (↑), sud (↓), vest (←) sau est (→). Prin cafeneaua <code>(i, j)</code> ne vom referi la cafeneaua de la linia <code>i</code> și coloana <code>j</code>.</p>
+
+<p>În prima zi, în fiecare cafenea își ia micul dejun exact unul dintre cei <code>n^2</code> cetățeni ai orașului. Începând cu a doua zi, fiecare cetățean își va lua micul dejun în cafeneaua vecină celei în care și-a luat micul dejun în ziua precedentă, conform direcției de pe indicatorul asociat acesteia. Procesul se repetă timp de <code>k</code> zile.</p>
+
+<p>Pornind într-o zi de la cafeneaua <code>(i, j)</code>, cafeneaua vecină la care se ajunge în ziua următoare este <code>(i - 1, j)</code> dacă direcția indicatorului este nord sau <code>(i + 1, j)</code> dacă direcția indicatorului este sud sau <code>(i, j - 1)</code> dacă direcția indicatorului este vest sau <code>(i, j + 1)</code> dacă direcția indicatorului este est.</p>
+
+<p>Paftenie definește <strong>gradul de fericire al unui cetățean</strong> ca fiind numărul de cetățeni cu care a luat micul dejun împreună cel puțin o dată în timpul celor <code>k</code> zile. Mai mult, Paftenie definește <strong>gradul de fericire al orașului</strong> drept suma gradelor de fericire ale cetățenilor săi.</p>
+
+<h1>Cerința</h1>
+
+<p>Cum Paftenie este prea distras de micul său dejun englezesc cu cârnăciori și fasole fiartă, apelează la voi pentru a determina:</p>
+
+<p>1) Numărul maxim de cetățeni care iau micul dejun împreună în cea de-a doua zi.<br>
+2) Gradul de fericire al orașului său.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>sim.in</code> conține conține pe prima linie un număr natural <code>C</code>, iar pe a doua linie numerele naturale <code>n</code> și <code>k</code>, separate printr-un spațiu. Următoarele <code>n</code> linii din fișier conțin câte <code>n</code> numere naturale din mulțimea <code>{1, 2, 3, 4}</code> (<code>1</code> pentru nord, <code>2</code> pentru sud, <code>3</code> pentru vest, <code>4</code> pentru est), separate prin câte un spațiu. Al <code>j</code>-lea număr de pe linia <code>i + 2</code> din fișier reprezintă direcția indicatorului asociat cafenelei <code>(i, j)</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>sim.out</code> va conține un singur număr natural <code>X</code>:</p>
+
+<ul>
+	<li>Dacă <code>C = 1</code>, atunci <code>X</code> va fi numărul maxim de cetățeni care iau micul dejun împreună în cea de-a doua zi.</li>
+	<li>Dacă <code>C = 2</code>, atunci <code>X</code> va fi gradul de fericire al orașului lui Paftenie.</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>C ∊ {1, 2}</code></li>
+	<li><code>2 ≤ n ≤ 1.000</code></li>
+	<li><code>k ∊ {1.000, 1.000.000.000}</code></li>
+	<li>Se garantează că nu există niciun indicator care, odată urmat, duce la părăsirea orașului.</li>
+	<li>Pentru 20 de puncte, <code>C = 1</code>, <code>n ≤ 30</code>, <code>k = 1.000</code></li>
+	<li>Pentru 30 de puncte, <code>C = 2</code>, <code>n ≤ 30</code>, <code>k = 1.000</code></li>
+	<li>Pentru 20 de puncte, <code>C = 2</code>, <code>n ≤ 30</code>, <code>k = 1.000.000.000</code></li>
+	<li>Pentru 30 de puncte, <code>C = 2</code>, <code>30 &lt; n ≤ 1.000</code>, <code>k = 1.000.000.000</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>sim.in</code></p>
+
+<pre>1
+3 1000
+4 3 2
+4 2 2
+4 3 3</pre>
+
+<p><code>sim.out</code></p>
+
+<pre>3</pre>
+
+<h3>Explicație</h3>
+
+<p>Orașul este reprezentat grafic în tabloul bidimensional (matricea) <code>A</code>, iar cetățenii săi sunt numerotați precum în matricea <code>A</code><sub><code>1</code></sub>. În fiecare celulă a matricei <code>A</code><sub><code>i</code></sub>, cu <code>1 ≤ i ≤ 2</code>, sunt cetățenii care, în ziua <code>i</code>, iau micul dejun în cafeneaua respectivă. Numărul maxim de cetățeni care iau masa împreună în a doua zi este <code>3</code>, aceștia fiind situați în cafeneaua <code>(3, 2)</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>sim.in</code></p>
+
+<pre>25
+1000
+4 3 2 4 2
+4 2 2 3 2
+1 4 4 2 1
+1 4 1 2 1
+1 3 3 3 1</pre>
+
+<p><code>sim.out</code></p>
+
+<pre>30</pre>
+
+<h3>Explicație</h3>
+
+<p>Orașul este reprezentat grafic în tabloul bidimensional (matricea) <code>B</code>, iar cetățenii săi sunt numerotați precum în matricea <code>B</code><sub><code>1</code></sub>. În fiecare celulă a matricei <code>B</code><sub><code>i</code></sub>, cu <code>1 ≤ i ≤ 4</code>, sunt cetățenii care, în ziua <code>i</code>, iau micul dejun în cafeneaua respectivă. Tabelul <code>T</code> conține întâlnirile care au loc până la finalul celor <code>1000</code> de zile. A doua coloană conține lista cetățenilor cu care se întâlnește cetățeanul din prima coloană. Răspunsul este <code>3 + 2 + 2 + 3 + 2 + 3 + 2 + 2 + 2 + 3 + 2 + 2 + 2 = 30</code>.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-sim-01-jpg.jpg"></p>		</article>
+		</body></html>

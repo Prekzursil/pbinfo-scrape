@@ -1,0 +1,98 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3735"><article id="enunt">
+			<p>În orașul X va avea loc o nouă ediție a concursului Y, la care participă trei echipe având numerele de concurs <code>1</code>, <code>2</code> și <code>3</code>. Echipele pot avea număr diferit de concurenți. Ordinea în care participanții intră în concurs este una oarecare. Fiecare concurent are de susținut <code>9</code> probe. La fiecare probă, un concurent obține un punctaj exprimat printr-un număr natural, cuprins între <code>0</code> și <code>10</code>, inclusiv.</p>
+
+<p>La scurt timp după ce un concurent a susținut toate cele 9 probe, se afișează performanța concurentului sub forma a două numere naturale, astfel:</p>
+
+<ul>
+	<li>primul număr poate fi <code>1</code>, <code>2</code> sau <code>3</code> și reprezintă echipa din care face parte concurentul;</li>
+	<li>al doilea număr este obținut prin concatenarea (alipirea) numerelor ce reprezintă punctajele nenule obținute de concurent la cele 9 probe. Dacă un concurent are punctaj <code>0</code> la toate probele atunci al doilea număr este <code>0</code>.</li>
+</ul>
+
+<p>Punctajul total al unui concurent se obține adunând punctajele obținute de acesta la cele 9 probe. Punctajul unei echipe se obține adunând punctajele totale obt,inute de membrii acesteia. De exemplu, afișajul <code>2 14102172</code> semnifică faptul că acest concurent face parte din echipa <code>2</code> și are punctajele nenule <code>1</code>, <code>4</code>, <code>10</code>, <code>2</code>, <code>1</code>, <code>7</code> și <code>2</code>, la 7 dintre cele 9 probe susținute. La celelalte două probe a avut punctajul <code>0</code>. Punctajul său total este <code>27</code>, contribuția sa la punctajul echipei <code>2</code> fiind de <code>27</code> de puncte.</p>
+
+<p>Este declarată campioană echipa cu punctajul cel mai mare. Dacă mai multe echipe au obținut cel mai mare punctaj, atunci toate aceste echipe sunt declarate campioane. Totuși, dacă toate echipele au totalizat <code>0</code> puncte, atunci nicio echipă nu este declarată campioană.</p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând numărul <code>N</code> de concurenți, echipele din care fac parte precum și punctajele obținute de fiecare dintre ei, să se determine:<br>
+1. punctajul maxim obținut de un concurent și numărul de concurenți care au obținut acest punctaj;<br>
+2. numărul sau numerele de concurs ale echipelor declarate campioane, în ordine crescătoare, și punctajul obținut de acestea. Dacă toate echipele au punctajul final <code>0</code>, se va afișa textul <code>FARA CAMPION</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>concurs.in</code> conține pe prima linie un număr <code>C</code> (care poate fi <code>1</code> sau <code>2</code>), indicând cerința de rezolvat. Pe a doua linie se găsește un număr natural <code>N</code> reprezentând numărul de concurenți, iar pe fiecare dintre următoarele <code>N</code> linii se găsesc câte două numere naturale, separate printr-un spațiu, reprezentând echipa și punctajele fiecăruia dintre cei <code>N</code> concurenți, în ordinea intrării în concurs.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>1. Dacă <code>C = 1</code>, fișierul de ieșire <code>concurs.out</code> va conține pe o singură linie două numere naturale, separate printr-un spațiu, reprezentând punctajul maxim obținut de un concurent și numărul de concurenți care au obținut acest punctaj. <br>
+2. Dacă <code>C = 2</code>, fișierul de ieșire va conține pe o singură linie textul <code>FARA CAMPION</code> dacă toate echipele au la final punctajul <code>0</code>. În caz contrar linia va conține două, trei sau patru numere naturale separate prin câte un spațiu, reprezentând numărul sau numerele de concurs ale echipelor declarate campioane, în ordine crescătoare, și apoi punctajul obținut de acestea.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>Se garantează că datele din fișier respectă formatul precizat.</li>
+	<li><code>1 ≤ N ≤ 100.000</code></li>
+	<li>Pentru teste în valoare de 35 de puncte avem <code>C = 1</code>.</li>
+	<li>Pentru teste în valoare de 65 de puncte avem <code>C = 2</code>.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>concurs.in</code></p>
+
+<pre>1
+7
+1 1111973
+2 3101971
+1 1999
+2 1010101
+3 1010101
+3 0
+3 1371910</pre>
+
+<p><code>concurs.out</code></p>
+
+<pre>31 4</pre>
+
+<h3>Explicație</h3>
+
+<p>Punctajele obținute de concurenți sunt: <code>23</code>, <code>31</code>, <code>28</code>, <code>31</code>, <code>31</code>, <code>0</code>, <code>31</code> deci punctajul maxim este <code>31</code> și sunt <code>4</code> concurenți cu acest punctaj.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>concurs.in</code></p>
+
+<pre>2
+5
+1 1111973
+2 3101971
+1 1999
+3 1010101
+3 1371910</pre>
+
+<p><code>concurs.out</code></p>
+
+<pre>3 62</pre>
+
+<h3>Explicație</h3>
+
+<p>Sunt <code>5</code> concurenți, primul concurent este din echipa <code>1</code> și are punctajul <code>23</code>, cel de-al doilea concurent este din echipa <code>2</code> și are punctajul <code>31</code>, cel de-al treilea este din echipa <code>1</code> și are punctajul <code>28</code>, al patrulea este din echipa <code>3</code> și are <code>31</code> de puncte, iar al cincilea este din echipa <code>3</code> și are <code>31</code> de puncte. Punctajul total al echipei <code>1</code> este <code>51</code>, punctajul total al echipei <code>2</code> este <code>31</code>, punctajul total al echipei <code>3</code> este <code>62</code>. Deci va câștiga echipa <code>3</code> cu <code>62</code> de puncte.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>concurs.in</code></p>
+
+<pre>2
+3
+2 1111973
+3 31019
+1 1010111</pre>
+
+<p><code>concurs.out</code></p>
+
+<pre>1 2 3 23</pre>
+
+<h3>Explicație</h3>
+
+<p>Sunt <code>3</code> concurenți, primul concurent este din echipa <code>2</code> și are punctajul <code>23</code>, cel de-al doilea concurent este din echipa <code>3</code> și are punctajul <code>23</code>, cel de-al treilea este din echipa <code>1</code> și are punctajul <code>23</code>, Deci, toate cele <code>3</code> echipe au punctaj maxim <code>23</code>.</p>		</article>
+		</body></html>

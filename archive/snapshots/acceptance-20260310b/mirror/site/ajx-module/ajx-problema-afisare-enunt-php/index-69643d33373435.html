@@ -1,0 +1,73 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3745"><article id="enunt">
+			<p>O familie de oposumi are o vizuină cu <code>N</code> niveluri și <code>N * (N + 1) / 2</code> camere dispuse în formă de matrice triunghiulară cu <code>N</code> linii. În fiecare cameră poate locui un singur oposum. Vizuina a fost săpată în pământ de către oposumi, iar nivelul <code>1</code> (cel mai de sus) este cel mai apropiat de suprafața solului. Pe fiecare nivel <code>I</code> se află <code>I</code> camere. Dacă avem <code>I &lt; J</code>, atunci nivelul <code>I</code> va fi poziționat mai sus decât nivelul <code>J</code>, adică nivelul <code>I</code> va fi mai aproape de suprafața solului decât nivelul <code>J</code>. În familia de oposumi se află exact <code>N * (N + 1) / 2</code> membri cu vârste cuprinse între <code>1</code> și <code>N * (N + 1) / 2</code>, vârste distincte. Regula de bază în vizuina familiei de oposumi este următoarea: în camera de pe linia <code>I</code> și coloana <code>J</code> trebuie să locuiască un oposum mai tânăr decât în camerele de pe pozițiile <code>(I + 1, J)</code> respectiv <code>(I + 1, J + 1)</code>. Un oposum de vârsta <code>X</code> se consideră mai tânăr decât un oposum de vârsta <code>Y</code> dacă <code>X &lt; Y</code>. Fiecare oposum vrea să știe care e cel mai de sus nivel pe care se poate poziționa. Din păcate, ei nu au lăbuțele făcute să programeze, așa că membrii familiei de oposumi vă cer vouă ajutorul.</p>
+
+<h1>Cerința</h1>
+
+<p>Dându-se numărul natural <code>N</code> ei vă cer să răspundeți la două întrebări:<br>
+1. Pentru fiecare oposum să se afle nivelul cel mai de sus (cel mai aproapiat de suprafața solului) pe care se poate afla respectând regulile de vârstă.<br>
+2. Pentru un oposum dat de vârsta <code>K</code> să se afișeze matricea astfel încât oposumul să stea într-o cameră pe un nivel cât mai de sus respectând regulile de vârstă.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului de intrare <code>oposumi.in</code> se găsește numărul <code>T</code> ce poate avea valoarea <code>1</code> sau <code>2</code><br>
+astfel încât:</p>
+
+<ul>
+	<li>Dacă <code>T</code> are valoarea <code>1</code>, atunci se cere rezolvarea cerinței <code>1</code>, iar în continuare se va regăsi numărul natural <code>N</code> reprezentând numărul de niveluri ale vizuinii.</li>
+	<li>Daca <code>T</code> are valoarea <code>2</code>, atunci se cere rezolvarea cerinței <code>2</code>, iar în continuare se va regăsi numărul natural <code>N</code> reprezentând numărul de niveluri ale vizuinii, urmat de numărul natural <code>K</code> ce reprezintă vârsta oposumului ce se dorește poziționat pe un nivel cât mai de sus.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>În fișierul de ieșire <code>oposumi.out</code> se cere să se tipărească:</p>
+
+<ul>
+	<li>Pentru <code>T = 1</code> se va afișa un șir de <code>N * (N +1) / 2</code> numere, unde cel de al <code>I</code>-lea număr reprezintă cel mai de sus nivel pe care se poate afla oposumul de vârstă <code>I</code>.</li>
+	<li>Pentru <code>T = 2</code> se vor afișa <code>N</code> linii, reprezentând modul în care sunt așezați oposumii în vizuină în funcție de  vârstă, astfel ca oposumul de vârsta <code>K</code> să fie poziționat pe un nivel cât mai de sus posibil. Pe linia <code>I</code> se vor afișa <code>I</code> numere separate prin câte un spațiu reprezentând vârstele oposumilor așezați pe nivelul <code>I</code>.</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 1000</code></li>
+	<li><code>1 ≤ K ≤ N * (N + 1) / 2</code></li>
+	<li>Pentru cerința <code>T = 2</code> soluția nu este unică. Se acceptă orice soluție corectă</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>oposumi.in</code></p>
+
+<pre>1 3</pre>
+
+<p><code>oposumi.out</code></p>
+
+<pre>1 2 2 2 3 3</pre>
+
+<h3>Explicație</h3>
+
+<p>Cel mai de sus nivel la care poate locui un oposum este:</p>
+
+<ul>
+	<li>Oposumul de vîrsta <code>1</code> poate locui la nivelul <code>1</code>.</li>
+	<li>Fiecare oposum cu vârsta <code>2</code>, <code>3</code> sau <code>4</code> ar putea locui la nivelul <code>2</code>.</li>
+	<li>Oposumii care au vârsta <code>5</code> sau <code>6</code> vor locui la nivelul <code>3</code>.</li>
+</ul>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>oposumi.in</code></p>
+
+<pre>2 4 7</pre>
+
+<p><code>oposumi.out</code></p>
+
+<pre>1
+2 3
+4 5 7
+6 8 10 9</pre>
+
+<h3>Explicație</h3>
+
+<p>Cel mai de sus nivel, unde poate locui oposumul cu vârsta de <code>K = 7</code> ani este nivelul <code>3</code>, iar o așezare posibilă a oposumilor în camere este prezentată mai sus.</p>		</article>
+		</body></html>

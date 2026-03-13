@@ -1,0 +1,132 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3723"><article id="enunt">
+			<p>Dezamăgiți de lipsa fotbalului din ultima perioadă, Ștefan și Georgian și-au deschis (în secret) o afacere cu boabe de cafea, comercializând <code>K</code> tipuri diferite de cafea. Astfel, timp de <code>N</code> zile ei produc cafea, urmând să formeze din boabele obținute în zile consecutive pachete ce conțin toate tipurile de cafea. Concret, cei doi știu pentru fiecare zi ce tipuri de cafea produc în acea zi (posibil niciun tip, caz în care afacerea ia o pauză), după care ei împart zilele în secvențe continue astfel încât, pentru fiecare tip de cafea, fiecare secvență de zile să conțină cel puțin o zi în care să fie produs acel tip de cafea.</p>
+
+<h1>Cerința</h1>
+
+<p>Înainte de a se apuca de împachetat boabele, Ștefan și Georgian își pun două întrebări:<br>
+1. Care este numărul maxim de pachete ce pot fi formate?<br>
+2. Care este numărul de moduri de a împărți zilele astfel încât să se formeze număr maxim de pachete valide (ce conțin toate tipurile de cafea)?</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie se găsește un număr întreg <code>P</code>, reprezentând numărul cerinței de rezolvat. Pe cea de-a doua linie se găsește un număr întreg <code>T</code>, reprezentând numărul de scenarii pentru care va trebui să rezolvați problema. Urmează cele <code>T</code> instanțe ale problemei, fiecare fiind compusă din <code>N + 1</code> linii: pe prima linie se vor afla două numere întregi <code>N</code> și <code>K</code>, reprezentând numărul de zile, respectiv numărul de tipuri diferite de cafea; pe următoarele <code>N</code> linii câte <code>K</code> cifre binare, cea de-a <code>j</code>-a cifră de pe linia <code>i</code> fiind <code>0</code> dacă în ziua <code>i</code> tipul <code>j</code> de cafea nu este produs, sau fiind <code>1</code> dacă în ziua <code>i</code> tipul <code>j</code> de cafea este produs.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Pentru fiecare dintre cele <code>T</code> instanțe se va afișa răspunsul, începând de la o linie nouă, după cum urmează:<br>
+1. Daca <code>P = 1</code>, atunci se va afișa pe o singură linie numărul maxim de pachete valide ce pot fi formate.<br>
+2. Daca <code>P = 2</code>, atunci se va afișa pe o singură linie numărul de moduri de a împărți zilele în secvențe continue astfel încât să se formeze număr maxim de pachete. Răspunsul va fi afișat modulo <code>1.000.000.007</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ P ≤ 2</code></li>
+	<li><code>1 ≤ T ≤ 3</code></li>
+	<li><code>1 ≤ N ≤ 200.000</code></li>
+	<li><code>1 ≤ K ≤ 20</code></li>
+	<li>Se garantează că fiecare tip de cafea apare în cel puțin una dintre cele <code>N</code> zile.</li>
+</ul>
+
+<h1>Punctare:</h1>
+
+<ul>
+	<li>Pentru 6 puncte: <code>P = 1, N ≤ 15</code></li>
+	<li>Pentru alte 6 puncte: <code>P = 1, N ≤ 100</code></li>
+	<li>Pentru alte 9 puncte: <code>P = 1, N ≤ 2.000</code></li>
+	<li>Pentru alte 10 puncte: <code>P = 1, N ≤ 200.000</code></li>
+	<li>Pentru alte 10 puncte: <code>P = 2, K = 1, N ≤ 200.000</code></li>
+	<li>Pentru alte 4 puncte: <code>P = 2, N ≤ 15</code></li>
+	<li>Pentru alte 4 puncte: <code>P = 2, N ≤ 20</code></li>
+	<li>Pentru alte 9 puncte: <code>P = 2, N ≤ 100</code></li>
+	<li>Pentru alte 8 puncte: <code>P = 2, N ≤ 700</code></li>
+	<li>Pentru alte 8 puncte: <code>P = 2, N ≤ 2.000</code></li>
+	<li>Pentru alte 8 puncte: <code>P = 2, N ≤ 10.000</code></li>
+	<li>Pentru alte 9 puncte: <code>P = 2, N ≤ 70.000</code></li>
+	<li>Pentru alte 9 puncte: <code>P = 2, N ≤ 200.000</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>1
+3
+3 3
+010
+101
+111
+6 2
+10
+01
+00
+10
+11
+01
+5 4
+0100
+1010
+0000
+1110
+0001</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>2
+2
+1</pre>
+
+<h3>Explicație</h3>
+
+<p>Tipurile de cafea produse în fiecare zi sunt:</p>
+
+<ul>
+	<li>În prima zi se va produce doar tipul <code>2</code> de cafea</li>
+	<li>În cea de-a doua zi se vor produce tipurile <code>1</code> și <code>3</code> de cafea</li>
+	<li>În ultima zi se vor produce toate cele <code>3</code> tipuri de cafea</li>
+</ul>
+
+<p>Numărul maxim de pachete este <code>2</code> și este obținut în mod unic grupând zilele în următorul fel: <code>[1, 2]</code>, <code>[3]</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>2
+3
+3 3
+010
+101
+111
+6 2
+10
+01
+00
+10
+11
+01
+5 4
+0100
+1010
+0000
+1110
+0001</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>1
+3
+1</pre>
+
+<h3>Explicație</h3>
+
+<p>Numărul maxim de pachete este <code>2</code>, fiind obținut în urmatoarele <code>3</code> moduri:</p>
+
+<ul>
+	<li><code>[1, 2]</code>, <code>[3, 4, 5, 6]</code></li>
+	<li><code>[1, 2, 3]</code>, <code>[4, 5, 6]</code></li>
+	<li><code>[1, 2, 3, 4]</code>, <code>[5, 6]</code></li>
+</ul>
+
+<p>În cel de-al treilea exemplu, numărul maxim de pachete este <code>1</code>, fiind obținut prin gruparea tuturor zilelor<br>
+într-o singură secvență (<code>[1, 2, 3, 4, 5]</code>).</p>		</article>
+		</body></html>

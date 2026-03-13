@@ -1,0 +1,108 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=720"><article id="enunt">
+			<p>Matca cea tânără a decis să părăsească stupul şi să îşi facă propria familie de albine, lucru nu tocmai uşor. Ea, împreună cu albinele sale trebuie să meargă din floare în floare până la marginea plantaţiei. Plantaţia are formă dreptunghiulară cu <code>N</code> linii (numerotate de la <code>1</code> la <code>N</code>) şi <code>M</code> coloane (numerotate de la <code>1</code> la <code>M</code>). În fiecare punct este o floare. Florile sunt codificate cu <code>0</code> sau <code>1</code>, cele codificate cu <code>0</code> putând fi ocupate doar de matcă, cele cu valoarea <code>1</code> doar de câte o albină. Roiul de albine pleacă de la marginea stângă a plantaţiei (coloana <code>1</code>) şi trebuie să ajungă în marginea din dreapta (coloana <code>M</code>). La un pas, toate albinele (inclusiv matca) trebuie să se afle pe poziţii consecutive pe aceeaşi coloană. La pasul următor ele se pot deplasa doar pe coloana următoare, dar tot pe poziţii vecine (eventual îşi pot schimba ordinea). Efortul depus pentru deplasarea de pe o coloană pe alta este egal cu diferenţa dintre prima linie ocupată de un membru al roiului de albine (matca sau albină) la pasul anterior şi prima linie ocupată de un membru al roiului albine (matca sau albină) după mutare.</p>
+
+<h1>Cerința</h1>
+
+<p>Determinaţi numărul maxim de membri ai roiului de albine (matcă + albine) care pot părăsi stupul pentru a traversa toată plantaţia în scopul formării unei noi familii. Determinaţi, de asemenea efortul total minim cu care matca poate traversa plantaţia cu numărul maxim de albine determinat.</p>
+
+
+<h1>Date de intrare</h1>
+
+
+<p>Prima linie a fişierului de intrare <code>albine.in</code> conţine două numere naturale <code>N</code> şi <code>M</code> separate printr-un spaţiu reprezentând numărul de linii, respectiv numărul de coloane ale plantaţiei.</p>
+
+<p>Următoarele <code>N</code> linii conţin câte <code>M</code> numere din mulţimea <code>{0,1}</code>, separate prin câte un spaţiu, reprezentând codurile florilor de pe fiecare linie a plantaţiei.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Prima linie a fişierului de ieşire <code>albine.out</code> conţine <code>2</code> numere naturale separate printr-un spaţiu, reprezentând numărul maxim de membri ai familiei de albine (matcă + albine) care pot traversa plantaţia (inclusiv matca) şi costul minim al traversării plantaţiei.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1&lt;=N, M &lt;=1000</code></li>
+	<li>Pentru <code>50%</code> din teste <code>1&lt;=N, M &lt;=300</code></li>
+	<li>Un roi de albine este format dintr-o matcă şi <code>0</code> sau mai multe albine.</li>
+	<li>Se garantează existenţa unui traseu.</li>
+	<li>Matca poate parcurge plantaţia şi singură.</li>
+	<li>Pentru rezolvarea corectă doar a primei cerinţe se acordă <code>30%</code> din punctaj.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>albine.in</code></p>
+
+<pre>5 3
+0 1 0
+0 0 1
+1 1 0
+1 1 1
+0 0 0</pre>
+
+<p><code>albine.out</code></p>
+
+<pre>3 0</pre>
+
+<h1>Explicație</h1>
+
+<p>Numărul maxim de membri ai familiei de albine care pot traversa plantația este <code>3</code> (matca și <code>2</code> albine). O posibilitate de traversare a plantației cu cost <code>0</code> este evidențiată mai jos.</p>
+
+<table>
+		<tbody><tr>
+			<td>0 </td>
+			<td>1 </td>
+			<td>0</td>
+		</tr>
+		<tr>
+			<td><strong>0</strong> </td>
+			<td><strong>0</strong> </td>
+			<td><strong>1</strong></td>
+		</tr>
+		<tr>
+			<td><strong>1</strong> </td>
+			<td><strong>1</strong> </td>
+			<td><strong>0</strong></td>
+		</tr>
+		<tr>
+			<td><strong>1</strong> </td>
+			<td><strong>1</strong> </td>
+			<td><strong>1</strong></td>
+		</tr>
+		<tr>
+			<td>0 </td>
+			<td>0 </td>
+			<td>0</td>
+		</tr>
+</tbody></table>
+
+<p>O altă posibilitate (nu şi singura) de a parcurge plantaţia ar fi fost ca grupul de <code>3</code> albine sa se aşeze pe prima coloană începând cu poziţia <code>3</code>, pe coloana a <code>2</code>–a începând cu poziţia <code>1</code>, iar pe coloana a <code>3</code>–a începând cu poziţia <code>2</code>. În acest caz costul total ar fi fost <code>3</code>. Această posibilitate este evidențiată mai jos:</p>
+
+
+<table>
+		<tbody><tr>
+			<td>0 </td>
+			<td><strong>1</strong> </td>
+			<td>0</td>
+		</tr>
+		<tr>
+			<td>0 </td>
+			<td><strong>0</strong> </td>
+			<td><strong>1</strong></td>
+		</tr>
+		<tr>
+			<td><strong>1</strong> </td>
+			<td><strong>1</strong> </td>
+			<td><strong>0</strong></td>
+		</tr>
+		<tr>
+			<td><strong>1</strong> </td>
+			<td>1 </td>
+			<td><strong>1</strong></td>
+		</tr>
+		<tr>
+			<td><strong>0</strong> </td>
+			<td>0 </td>
+			<td>0</td>
+		</tr>
+</tbody></table>		</article>
+		</body></html>

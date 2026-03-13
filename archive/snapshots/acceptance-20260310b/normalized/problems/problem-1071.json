@@ -1,0 +1,307 @@
+{
+  "id": 1071,
+  "slug": "ozn",
+  "name": "OZN",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1071/ozn",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 44,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=44"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerinţă",
+      "html": "<p>Ajutaţi autorităţile să determine numărul de extratereştri care pot fi anihilaţi cu fiecare armă din dotare.</p>",
+      "text": "Ajutaţi autorităţile să determine numărul de extratereştri care pot fi anihilaţi cu fiecare armă din dotare."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>ozn.in</code> conține pe prima linie două numere naturale separate prin spaţiu <code>N K</code> reprezentând numărul de <span class=\"caps\">OZN</span>-uri şi respectiv numărul de arme laser. Pe următoarele <code>N</code> linii sunt descrise cele N <span class=\"caps\">OZN</span>-uri, câte unul pe linie. Un <span class=\"caps\">OZN</span> este descris prin <code>5</code> numere naturale separate prin câte un spaţiu <code>x1 y1 x2 y2 nr</code>, reprezentând în ordine coordonatele capetelor segmentului corespunzător <code>(x1, y1)</code>, <code>(x2, y2)</code>, iar <code>nr</code> – numărul de extratereştri din el. Pe ultima linie se găsesc <code>K</code> numere naturale <code>a</code><sub><code>1</code></sub> <code>a</code><sub><code>2</code></sub> <code>a</code><sub><code>3</code></sub> … <code>a</code><sub><code>K</code></sub>, separate prin câte un spaţiu, reprezentând coordonatele pe axa <code>OX</code> (abscisele) unde sunt amplasate armele laser.</p>",
+      "text": "Fișierul de intrare ozn.in conține pe prima linie două numere naturale separate prin spaţiu N K reprezentând numărul de OZN-uri şi respectiv numărul de arme laser. Pe următoarele N linii sunt descrise cele N OZN-uri, câte unul pe linie. Un OZN este descris prin 5 numere naturale separate prin câte un spaţiu x1 y1 x2 y2 nr, reprezentând în ordine coordonatele capetelor segmentului corespunzător (x1, y1), (x2, y2), iar nr – numărul de extratereştri din el. Pe ultima linie se găsesc K numere naturale a1 a2 a3 … aK, separate prin câte un spaţiu, reprezentând coordonatele pe axa OX (abscisele) unde sunt amplasate armele laser."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>ozn.out</code> va conține <code>K</code> linii. Pe linia <code>i</code> va fi scris numărul total de extratereştri care pot fi distruşi cu arma <code>i</code>, considerând armele numerotate în ordinea în care acestea apar în fişierul de intrare.</p>",
+      "text": "Fișierul de ieșire ozn.out va conține K linii. Pe linia i va fi scris numărul total de extratereştri care pot fi distruşi cu arma i, considerând armele numerotate în ordinea în care acestea apar în fişierul de intrare."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 20 000</code></li>\n\t<li><code>1 ≤ K ≤ 20 000</code></li>\n\t<li><code>1 ≤</code> orice coordonată din fişierul de intrare <code>≤ 2 000 000</code></li>\n\t<li><code>1 ≤ nr ≤ 100</code>, pentru orice <span class=\"caps\">OZN</span></li>\n\t<li><code>x</code><sub><code>1</code></sub> <code>&lt; x</code><sub><code>2</code></sub>, pentru orice <span class=\"caps\">OZN</span></li>\n\t<li>Pe ecranul radarului segmentele ce descriu navele se pot intersecta.</li>\n\t<li>Dacă raza laser trece prin unul dintre capetele unui <span class=\"caps\">OZN</span> atunci acesta este distrus.</li>\n\t<li>Pentru 50% dintre testele de intrare <code>1 ≤ N*K ≤ 10 000 000</code></li>\n</ul>",
+      "text": "1 ≤ N ≤ 20 000 1 ≤ K ≤ 20 000 1 ≤ orice coordonată din fişierul de intrare ≤ 2 000 000 1 ≤ nr ≤ 100, pentru orice OZN x1 < x2, pentru orice OZN Pe ecranul radarului segmentele ce descriu navele se pot intersecta. Dacă raza laser trece prin unul dintre capetele unui OZN atunci acesta este distrus. Pentru 50% dintre testele de intrare 1 ≤ N*K ≤ 10 000 000"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>ozn.in</code></p><pre>5 3\n1 1 3 2 2\n2 3 4 1 3\n6 5 8 5 8\n5 1 7 1 6\n6 2 7 4 1\n3 7 5</pre><p><code>ozn.out</code></p><pre>5\n15\n6</pre>",
+      "text": "ozn.in5 3 1 1 3 2 2 2 3 4 1 3 6 5 8 5 8 5 1 7 1 6 6 2 7 4 1 3 7 5ozn.out5 15 6"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p><img alt=\"\" src=\"/resurse/9dc152/p-1051-1075/ozn.png\"></p><p>Arma care emite din punctul <code>(3,0)</code> doboară farfuriile reprezentate de segmentele <code>{(1,1)(3,2)}</code> şi <code>{(2,3)(4,1)}</code> distrugând în total <code>5</code> extratereştri.</p><p>Arma care emite din punctul <code>(7,0)</code> doboară farfuriile reprezentate de segmentele <code>{(5,1)(7,1)}, {(6,2)(7,4)}</code> şi <code>{(6,5)(8,5)}</code> distrugând în total <code>15</code> extratereştri.</p><p>Arma care emite din punctul <code>(5,0)</code> doboară farfuria reprezentată de segmentul <code>{(5,1)(7,1)}</code> şi distruge <code>6</code> extratereştri.</p>",
+      "text": "Arma care emite din punctul (3,0) doboară farfuriile reprezentate de segmentele {(1,1)(3,2)} şi {(2,3)(4,1)} distrugând în total 5 extratereştri.Arma care emite din punctul (7,0) doboară farfuriile reprezentate de segmentele {(5,1)(7,1)}, {(6,2)(7,4)} şi {(6,5)(8,5)} distrugând în total 15 extratereştri.Arma care emite din punctul (5,0) doboară farfuria reprezentată de segmentul {(5,1)(7,1)} şi distruge 6 extratereştri."
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "1 ≤ N ≤ 20 000",
+    "1 ≤ K ≤ 20 000",
+    "1 ≤ orice coordonată din fişierul de intrare ≤ 2 000 000",
+    "1 ≤ nr ≤ 100, pentru orice OZN",
+    "x1 < x2, pentru orice OZN",
+    "Pe ecranul radarului segmentele ce descriu navele se pot intersecta.",
+    "Dacă raza laser trece prin unul dintre capetele unui OZN atunci acesta este distrus.",
+    "Pentru 50% dintre testele de intrare 1 ≤ N*K ≤ 10 000 000"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q3ee6ec9d8d.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1051-1075/ozn.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1051-1075-ozn-png.png",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "9",
+    "intrare/ieșire": "ozn.in / ozn.out",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "20 MB / 8 MB",
+    "sursa problemei": "OJI 2012, Clasa a VIII-a",
+    "autor": "Daniela Lica",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 20,
+  "author": "Daniela Lica",
+  "sourceAttribution": "OJI 2012, Clasa a VIII-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1071/ozn"
+}

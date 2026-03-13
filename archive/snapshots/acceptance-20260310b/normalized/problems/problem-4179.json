@@ -1,0 +1,300 @@
+{
+  "id": 4179,
+  "slug": "barliga",
+  "name": "barliga",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4179/barliga",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 45,
+      "name": "Vectori caracteristici / de frecventa",
+      "slug": "vectori-caracteristici-de-frecventa",
+      "href": "/?pagina=probleme-lista&tag=45"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Scrieți un program care cunoscând <code>N</code>, numărul de jucători din echipă, precum și valorile scrise pe fața roșie a scândurii primite de fiecare jucător, determină punctajul maxim pe care îl poate obține echipa, precum și numerele de ordine ale jucătorilor care trebuie să întoarcă scândura cu față galbenă în sus, pentru a obține acest punctaj maxim.</p>",
+      "text": "Scrieți un program care cunoscând N, numărul de jucători din echipă, precum și valorile scrise pe fața roșie a scândurii primite de fiecare jucător, determină punctajul maxim pe care îl poate obține echipa, precum și numerele de ordine ale jucătorilor care trebuie să întoarcă scândura cu față galbenă în sus, pentru a obține acest punctaj maxim."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>barliga.in</code> conține pe prima linie numerele naturale <code>N</code> și <code>V</code>, cu semnificația din enunț. Pe următoarele <code>N</code> linii se află informațiile despre scândurile celor <code>N</code> jucători, în ordinea de la <code>1</code> la <code>N</code>. Linia care descrie o scândură are forma <code>nr</code> <code>r</code><sub><code>1</code></sub> <code>r</code><sub><code>2</code></sub> … <code>r</code><sub><code>nr</code></sub>, cu semnificația: pe fața roșie a scândurii sunt scrise <code>nr</code> numere naturale distincte cuprinse între 1 și <code>V</code>, acestea fiind <code>r</code><sub><code>1</code></sub>, <code>r</code><sub><code>2</code></sub>, …, <code>r</code><sub><code>nr</code></sub>. </p>",
+      "text": "Fișierul de intrare barliga.in conține pe prima linie numerele naturale N și V, cu semnificația din enunț. Pe următoarele N linii se află informațiile despre scândurile celor N jucători, în ordinea de la 1 la N. Linia care descrie o scândură are forma nr r1 r2 … rnr, cu semnificația: pe fața roșie a scândurii sunt scrise nr numere naturale distincte cuprinse între 1 și V, acestea fiind r1, r2, …, rnr."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>În fișierul de ieșire <code>barliga.out</code> se va scrie pe prima linie un număr natural reprezentând punctajul maxim pe care îl poate obține echipa. Pe cea de a doua linie va fi scris un număr natural <code>T</code>, reprezentând numărul de jucători care trebuie să întoarcă scândura cu fața galbenă în sus, urmat de <code>T</code> numere naturale distincte cuprinse între 1 și <code>N</code>, reprezentând numerele de ordine ale jucătorilor care trebuie să întoarcă scândura cu fața galbenă în sus.</p>",
+      "text": "În fișierul de ieșire barliga.out se va scrie pe prima linie un număr natural reprezentând punctajul maxim pe care îl poate obține echipa. Pe cea de a doua linie va fi scris un număr natural T, reprezentând numărul de jucători care trebuie să întoarcă scândura cu fața galbenă în sus, urmat de T numere naturale distincte cuprinse între 1 și N, reprezentând numerele de ordine ale jucătorilor care trebuie să întoarcă scândura cu fața galbenă în sus."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2 ≤ N ≤ 16</code></li>\n\t<li><code>3 ≤ V ≤ 80.000</code></li>\n\t<li>Valorile aflate pe aceeași linie în fișierul de intrare, respectiv în fișierul de ieșire sunt separate printr-un singur spațiu.</li>\n\t<li>Dacă există mai multe soluții pentru ca echipa să obțină punctaj maxim, se va afișa oricare dintre acestea.</li>\n\t<li>Punctajul pe test se obține dacă sunt afișate corect atât punctajul maxim, cât și o  modalitate de obținere a punctajului maxim.</li>\n</ul>",
+      "text": "2 ≤ N ≤ 16 3 ≤ V ≤ 80.000 Valorile aflate pe aceeași linie în fișierul de intrare, respectiv în fișierul de ieșire sunt separate printr-un singur spațiu. Dacă există mai multe soluții pentru ca echipa să obțină punctaj maxim, se va afișa oricare dintre acestea. Punctajul pe test se obține dacă sunt afișate corect atât punctajul maxim, cât și o modalitate de obținere a punctajului maxim."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>barliga.in</code></p><pre>2 10\n3 7 5 10\n4 1 5 10 2</pre><p><code>barliga.out</code></p><pre>9\n1 1</pre><h3>Explicație</h3><p>Există două scânduri, pe fiecare dintre ele fiind scrise numerele naturale de la <code>1</code> la <code>10</code>. Pe scândura <code>1</code> sunt scrise pe fața roșie <code>3</code> valori <code>(7, 5, 10)</code>, celelalte <code>7</code> valori fiind scrise pe fața galbenă <code>(1, 2, 3, 4, 6, 8, 9)</code>. Pe scândura <code>2</code> sunt scrise pe fața roșie <code>4</code> valori <code>(1, 5, 10, 2)</code>, celelalte <code>6</code> valori fiind scrise pe fața galbenă <code>(3, 4, 6, 7, 8, 9)</code>. Punctajul maxim care se poate obține este <code>9</code>.</p><p>O modalitate prin care obținem punctajul maxim este de a întoarce cu fața galbenă în sus scândura cu numărul <code>1</code>. Vor deveni astfel vizibile numerele <code>1, 2, 3, 4, 6, 8, 9</code> pe scândura <code>1</code> și rămân vizibile numerele <code>1, 2, 5, 10</code> pe scândura <code>2</code>, în total <code>9</code> numere distincte.</p>",
+      "text": "barliga.in2 10 3 7 5 10 4 1 5 10 2barliga.out9 1 1ExplicațieExistă două scânduri, pe fiecare dintre ele fiind scrise numerele naturale de la 1 la 10. Pe scândura 1 sunt scrise pe fața roșie 3 valori (7, 5, 10), celelalte 7 valori fiind scrise pe fața galbenă (1, 2, 3, 4, 6, 8, 9). Pe scândura 2 sunt scrise pe fața roșie 4 valori (1, 5, 10, 2), celelalte 6 valori fiind scrise pe fața galbenă (3, 4, 6, 7, 8, 9). Punctajul maxim care se poate obține este 9.O modalitate prin care obținem punctajul maxim este de a întoarce cu fața galbenă în sus scândura cu numărul 1. Vor deveni astfel vizibile numerele 1, 2, 3, 4, 6, 8, 9 pe scândura 1 și rămân vizibile numerele 1, 2, 5, 10 pe scândura 2, în total 9 numere distincte."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Există două scânduri, pe fiecare dintre ele fiind scrise numerele naturale de la 1 la 10. Pe scândura 1 sunt scrise pe fața roșie 3 valori (7, 5, 10), celelalte 7 valori fiind scrise pe fața galbenă (1, 2, 3, 4, 6, 8, 9). Pe scândura 2 sunt scrise pe fața roșie 4 valori (1, 5, 10, 2), celelalte 6 valori fiind scrise pe fața galbenă (3, 4, 6, 7, 8, 9). Punctajul maxim care se poate obține este 9."
+    }
+  ],
+  "constraints": [
+    "2 ≤ N ≤ 16",
+    "3 ≤ V ≤ 80.000",
+    "Valorile aflate pe aceeași linie în fișierul de intrare, respectiv în fișierul de ieșire sunt separate printr-un singur spațiu.",
+    "Dacă există mai multe soluții pentru ca echipa să obțină punctaj maxim, se va afișa oricare dintre acestea.",
+    "Punctajul pe test se obține dacă sunt afișate corect atât punctajul maxim, cât și o modalitate de obținere a punctajului maxim."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q4469740dad.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "barliga.in / barliga.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "1 MB / 1 MB",
+    "sursa problemei": "Lot juniori, Cluj-Napoca 2022",
+    "autor": "Emanuela Cerchez",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 1,
+  "author": "Emanuela Cerchez",
+  "sourceAttribution": "Lot juniori, Cluj-Napoca 2022",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4179/barliga"
+}

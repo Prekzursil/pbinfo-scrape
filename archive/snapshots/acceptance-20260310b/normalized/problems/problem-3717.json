@@ -1,0 +1,304 @@
+{
+  "id": 3717,
+  "slug": "labirint5",
+  "name": "Labirint5",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3717/labirint5",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 85,
+      "name": "Structuri de date liniare",
+      "slug": "structuri-de-date-liniare",
+      "href": "/?pagina=probleme-lista&tag=85"
+    },
+    {
+      "id": 87,
+      "name": "Coada",
+      "slug": "coada",
+      "href": "/?pagina=probleme-lista&tag=87"
+    }
+  ],
+  "tags": [
+    "Algoritmul lui Lee"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Pentru fiecare poziție <code>(i, j)</code> să se verifice dacă <code>d(i, j) &lt; d0</code>.</p>",
+      "text": "Pentru fiecare poziție (i, j) să se verifice dacă d(i, j) < d0."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie a fișierului de intrare <code>labirint.in</code> se află două numere naturale <code>N</code> și <code>M</code>, dimensiunile matricei binare ce descrie labirintul, apoi pe următoarele <code>N</code> linii se vor afla câte <code>M</code> valori binare, ce reprezintă elementele matricei care descrie labirintul, neseparate prin spații.</p>",
+      "text": "Pe prima linie a fișierului de intrare labirint.in se află două numere naturale N și M, dimensiunile matricei binare ce descrie labirintul, apoi pe următoarele N linii se vor afla câte M valori binare, ce reprezintă elementele matricei care descrie labirintul, neseparate prin spații."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>În fișierul de ieșire <code>labirint.out</code> se vor scrie <code>N</code> linii, iar pe fiecare linie se vor scrie <code>M</code> cifre, neseparate prin spații. Cifra a <code>j</code>-a de pe linia a <code>i</code>-a este <code>1</code> dacă și numai dacă <code>d(i, j) &lt; d0</code>, altfel este <code>0</code>.</p>",
+      "text": "În fișierul de ieșire labirint.out se vor scrie N linii, iar pe fiecare linie se vor scrie M cifre, neseparate prin spații. Cifra a j-a de pe linia a i-a este 1 dacă și numai dacă d(i, j) < d0, altfel este 0."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 1000</code></li>\n\t<li><code>1 ≤ M ≤ 1000</code></li>\n\t<li>Pe pozițiile <code>(1, 1)</code> și <code>(N, M)</code> se vor afla valori <code>0</code>.</li>\n\t<li>Se garantează că există un drum în matricea inițială între pozițiile <code>(1, 1)</code> și <code>(N, M)</code>.</li>\n\t<li>Pentru 10 puncte, <code>1 ≤ N ≤ 50</code>, <code>1 ≤ M ≤ 50</code>, <code>d0 = N + M - 1</code>.</li>\n\t<li>Pentru alte 30 de puncte, <code>1 ≤ N ≤ 50</code>, <code>1 ≤ M ≤ 50</code></li>\n\t<li>Pentru alte 60 de puncte, fără alte restricții</li>\n</ul>",
+      "text": "1 ≤ N ≤ 1000 1 ≤ M ≤ 1000 Pe pozițiile (1, 1) și (N, M) se vor afla valori 0. Se garantează că există un drum în matricea inițială între pozițiile (1, 1) și (N, M). Pentru 10 puncte, 1 ≤ N ≤ 50, 1 ≤ M ≤ 50, d0 = N + M - 1. Pentru alte 30 de puncte, 1 ≤ N ≤ 50, 1 ≤ M ≤ 50 Pentru alte 60 de puncte, fără alte restricții"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>labirint.in</code></p><pre>5 6\n010001\n000101\n011001\n010010\n001000</pre><p><code>labirint.out</code></p><pre>010000\n000100\n001001\n010010\n001000</pre><h3>Explicație</h3><p>Sunt <code>7</code> poziții cu valoarea <code>1</code> în labirint care dacă se înlocuiesc cu <code>0</code> determină obținerea unui drum de lungime mai mică decât <code>d0 = 14</code>. De exemplu, dacă am înlocui valoarea din <code>(1, 2)</code> cu <code>0</code>, am obține un drum de lungime <code>d(1, 2) = 12</code>.</p>",
+      "text": "labirint.in5 6 010001 000101 011001 010010 001000labirint.out010000 000100 001001 010010 001000ExplicațieSunt 7 poziții cu valoarea 1 în labirint care dacă se înlocuiesc cu 0 determină obținerea unui drum de lungime mai mică decât d0 = 14. De exemplu, dacă am înlocui valoarea din (1, 2) cu 0, am obține un drum de lungime d(1, 2) = 12."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Sunt 7 poziții cu valoarea 1 în labirint care dacă se înlocuiesc cu 0 determină obținerea unui drum de lungime mai mică decât d0 = 14. De exemplu, dacă am înlocui valoarea din (1, 2) cu 0, am obține un drum de lungime d(1, 2) = 12."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 1000",
+    "1 ≤ M ≤ 1000",
+    "Pe pozițiile (1, 1) și (N, M) se vor afla valori 0.",
+    "Se garantează că există un drum în matricea inițială între pozițiile (1, 1) și (N, M).",
+    "Pentru 10 puncte, 1 ≤ N ≤ 50, 1 ≤ M ≤ 50, d0 = N + M - 1.",
+    "Pentru alte 30 de puncte, 1 ≤ N ≤ 50, 1 ≤ M ≤ 50",
+    "Pentru alte 60 de puncte, fără alte restricții"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q430d8cfef7.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "10",
+    "intrare/ieșire": "labirint.in / labirint.out",
+    "limită timp": "0.2 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "OJI 2021, clasa a X-a",
+    "autor": "Gheorghe Manolache, Ștefan-Cosmin Dăscălescu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.2,
+  "memoryLimitMb": 64,
+  "author": "Gheorghe Manolache, Ștefan-Cosmin Dăscălescu",
+  "sourceAttribution": "OJI 2021, clasa a X-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3717/labirint5"
+}

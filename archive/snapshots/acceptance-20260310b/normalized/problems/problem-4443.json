@@ -1,0 +1,315 @@
+{
+  "id": 4443,
+  "slug": "biom",
+  "name": "biom",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4443/biom",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 16,
+      "name": "Teoria Grafurilor",
+      "slug": "teoria-grafurilor",
+      "href": "/?pagina=probleme-lista&tag=16"
+    },
+    {
+      "id": 60,
+      "name": "Grafuri cu costuri",
+      "slug": "grafuri-cu-costuri",
+      "href": "/?pagina=probleme-lista&tag=60"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Începând de la cubul <code>1</code>, Steve dorește să ajungă la cubul <code>N</code> cu cost minim, așa că vă roagă pe voi să aflați care este acest cost.</p>",
+      "text": "Începând de la cubul 1, Steve dorește să ajungă la cubul N cu cost minim, așa că vă roagă pe voi să aflați care este acest cost."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>În fișierul de intrare <code>biom.in</code> pe prima linie se găsește un singur număr <code>N</code>, reprezentând numărul de cuburi din lumea în care se află Steve. Pe a doua linie se află patru numere <code>A</code>, <code>B</code>, <code>C</code> și <code>D</code> reprezentând costurile fiecărei operații pe care o poate face Steve. Pe a treia linie se află șirul de caractere <code>S</code> de lungime <code>N</code> ce reprezintă harta biomurilor lumii.</p>",
+      "text": "În fișierul de intrare biom.in pe prima linie se găsește un singur număr N, reprezentând numărul de cuburi din lumea în care se află Steve. Pe a doua linie se află patru numere A, B, C și D reprezentând costurile fiecărei operații pe care o poate face Steve. Pe a treia linie se află șirul de caractere S de lungime N ce reprezintă harta biomurilor lumii."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>În fișierul de ieșire <code>biom.out</code> se va afla un singur număr ce reprezintă costul minim de a ajunge de la cubul <code>1</code> la cubul <code>N</code>.</p>",
+      "text": "În fișierul de ieșire biom.out se va afla un singur număr ce reprezintă costul minim de a ajunge de la cubul 1 la cubul N."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 1.000.000</code></li>\n\t<li><code>0 ≤ A, B, C, D ≤ 1.000.000.000</code></li>\n\t<li>Pentru 12 puncte, <code>N ≤ 10</code></li>\n\t<li>Pentru 8 puncte, pentru orice <code>i &lt; j &lt; k</code>, dacă <code>S[i] = S[k]</code>, atunci <code>S[i] = S[j]</code></li>\n\t<li>Pentru 11 puncte, <code>B = D = 1.000.000.000</code>, iar <code>A, C ≤ 1000</code></li>\n\t<li>Pentru 19 puncte, <code>A = 1</code>, iar fiecare dintre <code>B</code>, <code>C</code> și <code>D</code> poate să fie <code>1</code> sau <code>1.000.000.000</code></li>\n\t<li>Pentru 10 puncte, <code>A ≤ 1</code>, iar fiecare dintre <code>B</code>, <code>C</code> și <code>D</code> poate să fie <code>0</code>, <code>1</code> sau <code>1.000.000.000</code></li>\n\t<li>Pentru 11 puncte, <code>N &lt;= 500</code></li>\n\t<li>Pentru 8 puncte, <code>N ≤ 100.000</code></li>\n\t<li>Pentru 21 puncte, restricții inițiale.</li>\n</ul>",
+      "text": "1 ≤ N ≤ 1.000.000 0 ≤ A, B, C, D ≤ 1.000.000.000 Pentru 12 puncte, N ≤ 10 Pentru 8 puncte, pentru orice i < j < k, dacă S[i] = S[k], atunci S[i] = S[j] Pentru 11 puncte, B = D = 1.000.000.000, iar A, C ≤ 1000 Pentru 19 puncte, A = 1, iar fiecare dintre B, C și D poate să fie 1 sau 1.000.000.000 Pentru 10 puncte, A ≤ 1, iar fiecare dintre B, C și D poate să fie 0, 1 sau 1.000.000.000 Pentru 11 puncte, N <= 500 Pentru 8 puncte, N ≤ 100.000 Pentru 21 puncte, restricții inițiale."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>biom.in</code></p><pre>6\n3 5 4 2\nabccbc</pre><p><code>biom.out</code></p><pre>10</pre><h3>Explicație</h3><p>Steve se poate mișca cu o poziție la dreapta cu cost <code>3</code>. De la cubul <code>2</code>, acesta se poate deplasa spre cubul <code>5</code> cu cost <code>4</code>. La sfârșit, acesta se deplasează din nou cu o poziție la dreapta pentru a ajunge la destinație, cubul <code>6</code>. Costul total va fi <code>3 + 4 + 3 = 10</code>.</p>",
+      "text": "biom.in6 3 5 4 2 abccbcbiom.out10ExplicațieSteve se poate mișca cu o poziție la dreapta cu cost 3. De la cubul 2, acesta se poate deplasa spre cubul 5 cu cost 4. La sfârșit, acesta se deplasează din nou cu o poziție la dreapta pentru a ajunge la destinație, cubul 6. Costul total va fi 3 + 4 + 3 = 10."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>biom.in</code></p><pre>15\n1 2 3 4\nabccabcbacbabcb</pre><p><code>biom.out</code></p><pre>11</pre><h3>Explicație</h3><p>Steve se poate deplasa de la cubul <code>1</code> la cubul <code>5</code>, iar pe urmă la cubul <code>9</code>, ambele deplasări având fiecare costul <code>3</code>. Pe urmă, de la cubul <code>9</code> se poate deplasa la cubul <code>10</code> cu cost <code>1</code>. De la cubul <code>10</code>, se poate deplasa la cubul <code>14</code> cu cost <code>3</code>, ca în final să ajungă la destinație, în cubul <code>15</code>, cu cost <code>1</code>. Costul total de deplasare va fi <code>3 + 3 + 1 + 3 + 1 = 11</code>.</p>",
+      "text": "biom.in15 1 2 3 4 abccabcbacbabcbbiom.out11ExplicațieSteve se poate deplasa de la cubul 1 la cubul 5, iar pe urmă la cubul 9, ambele deplasări având fiecare costul 3. Pe urmă, de la cubul 9 se poate deplasa la cubul 10 cu cost 1. De la cubul 10, se poate deplasa la cubul 14 cu cost 3, ca în final să ajungă la destinație, în cubul 15, cu cost 1. Costul total de deplasare va fi 3 + 3 + 1 + 3 + 1 = 11."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Steve se poate mișca cu o poziție la dreapta cu cost 3. De la cubul 2, acesta se poate deplasa spre cubul 5 cu cost 4. La sfârșit, acesta se deplasează din nou cu o poziție la dreapta pentru a ajunge la destinație, cubul 6. Costul total va fi 3 + 4 + 3 = 10."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Steve se poate deplasa de la cubul 1 la cubul 5, iar pe urmă la cubul 9, ambele deplasări având fiecare costul 3. Pe urmă, de la cubul 9 se poate deplasa la cubul 10 cu cost 1. De la cubul 10, se poate deplasa la cubul 14 cu cost 3, ca în final să ajungă la destinație, în cubul 15, cu cost 1. Costul total de deplasare va fi 3 + 3 + 1 + 3 + 1 = 11."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 1.000.000",
+    "0 ≤ A, B, C, D ≤ 1.000.000.000",
+    "Pentru 12 puncte, N ≤ 10",
+    "Pentru 8 puncte, pentru orice i < j < k, dacă S[i] = S[k], atunci S[i] = S[j]",
+    "Pentru 11 puncte, B = D = 1.000.000.000, iar A, C ≤ 1000",
+    "Pentru 19 puncte, A = 1, iar fiecare dintre B, C și D poate să fie 1 sau 1.000.000.000",
+    "Pentru 10 puncte, A ≤ 1, iar fiecare dintre B, C și D poate să fie 0, 1 sau 1.000.000.000",
+    "Pentru 11 puncte, N <= 500",
+    "Pentru 8 puncte, N ≤ 100.000",
+    "Pentru 21 puncte, restricții inițiale."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q9940344c69.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "11",
+    "intrare/ieșire": "biom.in / biom.out",
+    "limită timp": "0.6 secunde",
+    "limită memorie": "256 MB / 64 MB",
+    "sursa problemei": "ONI 2023 clasele XI-XII",
+    "autor": "Matei Tinca",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.6,
+  "memoryLimitMb": 256,
+  "author": "Matei Tinca",
+  "sourceAttribution": "ONI 2023 clasele XI-XII",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4443/biom"
+}

@@ -1,0 +1,308 @@
+{
+  "id": 3745,
+  "slug": "oposumi",
+  "name": "Oposumi",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3745/oposumi",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 46,
+      "name": "Tablouri bidimensionale (matrice)",
+      "slug": "tablouri-bidimensionale-matrice",
+      "href": "/?pagina=probleme-lista&tag=46"
+    },
+    {
+      "id": 80,
+      "name": "Parcurgerea matricelor pătratice",
+      "slug": "parcurgerea-matricelor-p-tratice",
+      "href": "/?pagina=probleme-lista&tag=80"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Dându-se numărul natural <code>N</code> ei vă cer să răspundeți la două întrebări:<br>\n1. Pentru fiecare oposum să se afle nivelul cel mai de sus (cel mai aproapiat de suprafața solului) pe care se poate afla respectând regulile de vârstă.<br>\n2. Pentru un oposum dat de vârsta <code>K</code> să se afișeze matricea astfel încât oposumul să stea într-o cameră pe un nivel cât mai de sus respectând regulile de vârstă.</p>",
+      "text": "Dându-se numărul natural N ei vă cer să răspundeți la două întrebări: 1. Pentru fiecare oposum să se afle nivelul cel mai de sus (cel mai aproapiat de suprafața solului) pe care se poate afla respectând regulile de vârstă. 2. Pentru un oposum dat de vârsta K să se afișeze matricea astfel încât oposumul să stea într-o cameră pe un nivel cât mai de sus respectând regulile de vârstă."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie a fișierului de intrare <code>oposumi.in</code> se găsește numărul <code>T</code> ce poate avea valoarea <code>1</code> sau <code>2</code><br>\nastfel încât:</p><ul>\n\t<li>Dacă <code>T</code> are valoarea <code>1</code>, atunci se cere rezolvarea cerinței <code>1</code>, iar în continuare se va regăsi numărul natural <code>N</code> reprezentând numărul de niveluri ale vizuinii.</li>\n\t<li>Daca <code>T</code> are valoarea <code>2</code>, atunci se cere rezolvarea cerinței <code>2</code>, iar în continuare se va regăsi numărul natural <code>N</code> reprezentând numărul de niveluri ale vizuinii, urmat de numărul natural <code>K</code> ce reprezintă vârsta oposumului ce se dorește poziționat pe un nivel cât mai de sus.</li>\n</ul>",
+      "text": "Pe prima linie a fișierului de intrare oposumi.in se găsește numărul T ce poate avea valoarea 1 sau 2 astfel încât: Dacă T are valoarea 1, atunci se cere rezolvarea cerinței 1, iar în continuare se va regăsi numărul natural N reprezentând numărul de niveluri ale vizuinii. Daca T are valoarea 2, atunci se cere rezolvarea cerinței 2, iar în continuare se va regăsi numărul natural N reprezentând numărul de niveluri ale vizuinii, urmat de numărul natural K ce reprezintă vârsta oposumului ce se dorește poziționat pe un nivel cât mai de sus."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>În fișierul de ieșire <code>oposumi.out</code> se cere să se tipărească:</p><ul>\n\t<li>Pentru <code>T = 1</code> se va afișa un șir de <code>N * (N +1) / 2</code> numere, unde cel de al <code>I</code>-lea număr reprezintă cel mai de sus nivel pe care se poate afla oposumul de vârstă <code>I</code>.</li>\n\t<li>Pentru <code>T = 2</code> se vor afișa <code>N</code> linii, reprezentând modul în care sunt așezați oposumii în vizuină în funcție de  vârstă, astfel ca oposumul de vârsta <code>K</code> să fie poziționat pe un nivel cât mai de sus posibil. Pe linia <code>I</code> se vor afișa <code>I</code> numere separate prin câte un spațiu reprezentând vârstele oposumilor așezați pe nivelul <code>I</code>.</li>\n</ul>",
+      "text": "În fișierul de ieșire oposumi.out se cere să se tipărească: Pentru T = 1 se va afișa un șir de N * (N +1) / 2 numere, unde cel de al I-lea număr reprezintă cel mai de sus nivel pe care se poate afla oposumul de vârstă I. Pentru T = 2 se vor afișa N linii, reprezentând modul în care sunt așezați oposumii în vizuină în funcție de vârstă, astfel ca oposumul de vârsta K să fie poziționat pe un nivel cât mai de sus posibil. Pe linia I se vor afișa I numere separate prin câte un spațiu reprezentând vârstele oposumilor așezați pe nivelul I."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 1000</code></li>\n\t<li><code>1 ≤ K ≤ N * (N + 1) / 2</code></li>\n\t<li>Pentru cerința <code>T = 2</code> soluția nu este unică. Se acceptă orice soluție corectă</li>\n</ul>",
+      "text": "1 ≤ N ≤ 1000 1 ≤ K ≤ N * (N + 1) / 2 Pentru cerința T = 2 soluția nu este unică. Se acceptă orice soluție corectă"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>oposumi.in</code></p><pre>1 3</pre><p><code>oposumi.out</code></p><pre>1 2 2 2 3 3</pre><h3>Explicație</h3><p>Cel mai de sus nivel la care poate locui un oposum este:</p><ul>\n\t<li>Oposumul de vîrsta <code>1</code> poate locui la nivelul <code>1</code>.</li>\n\t<li>Fiecare oposum cu vârsta <code>2</code>, <code>3</code> sau <code>4</code> ar putea locui la nivelul <code>2</code>.</li>\n\t<li>Oposumii care au vârsta <code>5</code> sau <code>6</code> vor locui la nivelul <code>3</code>.</li>\n</ul>",
+      "text": "oposumi.in1 3oposumi.out1 2 2 2 3 3ExplicațieCel mai de sus nivel la care poate locui un oposum este: Oposumul de vîrsta 1 poate locui la nivelul 1. Fiecare oposum cu vârsta 2, 3 sau 4 ar putea locui la nivelul 2. Oposumii care au vârsta 5 sau 6 vor locui la nivelul 3."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>oposumi.in</code></p><pre>2 4 7</pre><p><code>oposumi.out</code></p><pre>1\n2 3\n4 5 7\n6 8 10 9</pre><h3>Explicație</h3><p>Cel mai de sus nivel, unde poate locui oposumul cu vârsta de <code>K = 7</code> ani este nivelul <code>3</code>, iar o așezare posibilă a oposumilor în camere este prezentată mai sus.</p>",
+      "text": "oposumi.in2 4 7oposumi.out1 2 3 4 5 7 6 8 10 9ExplicațieCel mai de sus nivel, unde poate locui oposumul cu vârsta de K = 7 ani este nivelul 3, iar o așezare posibilă a oposumilor în camere este prezentată mai sus."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cel mai de sus nivel la care poate locui un oposum este:"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cel mai de sus nivel, unde poate locui oposumul cu vârsta de K = 7 ani este nivelul 3, iar o așezare posibilă a oposumilor în camere este prezentată mai sus."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 1000",
+    "1 ≤ K ≤ N * (N + 1) / 2",
+    "Pentru cerința T = 2 soluția nu este unică. Se acceptă orice soluție corectă"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q9c4614e0fe.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "oposumi.in / oposumi.out",
+    "limită timp": "0.2 secunde",
+    "limită memorie": "256 MB / 8 MB",
+    "sursa problemei": "ONSEPI, 2021, clasa a IX-a",
+    "autor": "Mihaela Cismaru",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.2,
+  "memoryLimitMb": 256,
+  "author": "Mihaela Cismaru",
+  "sourceAttribution": "ONSEPI, 2021, clasa a IX-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3745/oposumi"
+}

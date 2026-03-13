@@ -1,0 +1,92 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4125"><article id="enunt">
+			<p>Ultimul sezon rece a fost unul cu multa zăpadă căzută în zona montană, prin urmare magazinul de articole sportive din stațiunea de schi Semenic a avut vânzări mari, mai ales de clăpari (bocanci speciali pentru schiat). Acum fiind sfârșit de sezon, angajații magazinului constată că le-au rămas <code>N</code> cutii goale în care au fost ambalate perechile de clăpari vândute. Aceste cutii au forma unui paralelipiped dreptunghic la care fața superioară constituie capacul. Capacul și (evident) fața opusă capacului sunt de formă pătrată, iar înălțimea este una oarecare, ea depinzând de modelul de clăpari. La unele cutii capacul este prezent, la altele capacul a dispărut.</p>
+
+<p>Aceste cutii trebuie predate unei firme de reciclare, dar până ajunge mașina pentru reciclat în Semenic, cutiile trebuie depozitate. Prin urmare unul dintre angajații magazinului primește sarcina să depoziteze cutiile punându-le una peste alta sub forma unui turn. Angajatul ia cutiile în ordinea în care le găsește în magazin și le pune una peste alta. Pentru a asigura o oarecare stabilitate a turnului, el le așează astfel încât axele care unesc centrul capacului cu centrul feței opuse capacului de la fiecare cutie să fie coliniare. Cutiile sunt astfel lăsate pe rând să cadă de la o înălțime suficient de mare, cu fețele laterale perpendiculare pe podea și paralele cu cele ale cutiilor deja plasate, până când întâlnesc una dintre aceste cutii sau podeaua. În ceea ce privește așezarea cutiilor care au capacul lipsă, angajatul le așează fie cu golul format prin lipsa capacului în sus, fie în jos.</p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând <code>N</code> (numărul de cutii din magazin), ordinea în care cutiile sunt așezate în turn, iar pentru fiecare cutie latura capacului, înălțimea cutiei și dacă are capac sau, în cazul în care capacul lipsește, dacă cutia este așezată cu golul în sus sau cu golul în jos determinați:</p>
+
+<ul>
+	<li>înălțimea turnului astfel format;</li>
+	<li>numărul de cutii ale căror fețe laterale sunt vizibile dacă se privește turnul din lateral.</li>
+</ul>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului de intrare <code>schi.in</code> se află numărul <code>C</code>, număr care poate fi <code>1</code> sau <code>2</code> și reprezintă cerința care trebuie rezolvată.</p>
+
+<p>Pe ce de-a doua linie se află numărul natural <code>N</code>, reprezentând numărul de cutii care sunt așezate în turn.</p>
+
+<p>Pe fiecare dintre următoarele <code>N</code> linii se află câte trei valori <code>L</code>, <code>H</code> și <code>M</code>, separate prin câte un spațiu. Valorile de pe linia <code>i + 2</code> (<code>1 ≤ i ≤ N</code>)  reprezintă informații referitoare la cea de-a <code>i</code>-a cutie adăugată în turn, și anume:</p>
+
+<ul>
+	<li><code>L</code> – latura capacului cutiei;</li>
+	<li><code>H</code> – înălțimea cutiei;</li>
+	<li><code>M</code> – o valoare egală cu <code>0</code>, <code>1</code> sau <code>2</code>, având următoarea semnificație: <code>M = 0</code> – cutia are capacul lipsă și este așezată cu golul în jos; <code>M = 1</code> – cutia are capac; <code>M = 2</code> – cutia are capacul lipsă și este așezată cu golul în sus.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă <code>C</code> este <code>1</code>, fișierul de ieșire  <code>schi.out</code> va conține pe prima linie răspunsul pentru cerința <code>1</code> (înălțimea turnului format). Dacă <code>C</code> este <code>2</code>, fișierul de ieșire <code>schi.out</code> va conține pe prima linie răspunsul pentru cerința <code>2</code> (numărul de cutii ale căror fețe laterale sunt vizibile dacă se privește turnul din lateral).</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 200.000</code>.</li>
+	<li>Dimensiunile cutiilor sunt numere naturale din intervalul <code>[1, 1.000.000.000]</code>.</li>
+	<li>Laturile capacelor cutiilor sunt distincte două câte două.</li>
+	<li>Grosimea pereților care formează fețele cutiilor (inclusiv capacul) este neglijabilă.</li>
+	<li>Construcția turnului se realizează pe o podea plană de dimensiuni infinite.</li>
+	<li>Pentru 12 puncte, <code>C = 1</code> și <code>N ≤ 2000</code></li>
+	<li>Pentru 12 puncte, <code>C = 2</code> și <code>N ≤ 2000</code></li>
+	<li>Pentru 8 puncte, <code>C = 1</code> și nu avem nicio cutie așezată cu golul în sus</li>
+	<li>Pentru 8 puncte, <code>C = 2</code> și nu avem nicio cutie așezată cu golul în sus</li>
+	<li>Pentru 8 puncte, <code>C = 1</code> și nu avem nicio cutie așezată cu golul în jos</li>
+	<li>Pentru 8 puncte, <code>C = 2</code> și nu avem nicio cutie așezată cu golul în jos</li>
+	<li>Pentru 22 puncte, <code>C = 1</code></li>
+	<li>Pentru 22 puncte, <code>C = 2</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>schi.in</code></p>
+
+<pre>1
+5
+20 3 2
+3 7 1
+9 1 1
+11 5 1
+12 6 0</pre>
+
+<p><code>schi.out</code></p>
+
+<pre>13</pre>
+
+<h3>Explicație</h3>
+
+<p>Înălțimea turnului de cutii este <code>13</code>. </p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>schi.in</code></p>
+
+<pre>2
+5
+20 3 2
+3 7 1
+9 1 1
+11 5 1
+12 6 0</pre>
+
+<p><code>schi.out</code></p>
+
+<pre>13</pre>
+
+<h3>Explicație</h3>
+
+<p>Înălțimea turnului de cutii este <code>13</code>. Privind din lateral sunt vizibile <code>3</code> cutii, și anume cele care au capacele cu laturile <code>20</code>, <code>3</code> și <code>12</code>.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-schi1-01-jpg.jpg"></p>		</article>
+		</body></html>

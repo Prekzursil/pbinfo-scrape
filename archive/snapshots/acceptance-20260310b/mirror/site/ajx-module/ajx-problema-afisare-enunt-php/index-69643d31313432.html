@@ -1,0 +1,117 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1142"><article id="enunt">
+			<p>Se consideră un teren reprezentat printr-o matrice cu <code>n</code> linii şi <code>n</code> coloane având elemente numere naturale. În fiecare element al matricei este memorată înălţimea zonei de teren corespunzătoare ca poziţie elementului respectiv. Pe acest teren sunt amplasate <code>m</code> lasere, în poziţii cunoscute. Un laser este îndreptat spre unul dintre cele <code>4</code> puncte cardinale, codificate prin numere astfel: <code>Nord</code> prin valoarea <code>1</code>, <code>Est</code> prin valoarea <code>2</code>, <code>Sud</code> prin valoarea <code>3</code> şi respectiv <code>Vest</code> prin valoarea <code>4</code>. Fiecare laser va executa o singură tragere şi ca urmare va scădea cu <code>1</code> valorile tuturor elementelor din matrice din direcţia sa de tragere, exceptând poziţia laserului respectiv. </p>
+
+<p>După efectuarea tuturor tragerilor, se caută poziţiile tuturor  gropilor şi ale tranşeelor.</p>
+
+<p>Numim <em>groapă</em> un element din matrice pentru care toate cele <code>8</code> elemente învecinate pe linie, coloană sau diagonale au valori mai mari sau egale decât el. </p>
+
+<p>Numim <em>tranşee</em> o secvenţă maximală formată din două sau mai multe gropi situate pe aceeaşi linie, pe coloane consecutive. Secvenţa se numeşte maximală dacă nu mai poate fi prelungită la niciunul dintre capete.</p>
+
+<h1>Cerinţe</h1>
+
+<p>Cunoscând configuraţia terenului şi amplasarea laserelor, să se rezolve una dintre următoarele două cerinţe: </p>
+
+<p><strong>1.</strong> să se determine numărul de gropi din teren, după executarea tragerilor;<br>
+<strong>2.</strong> să se determine numărul de tranşee existente, după executarea tragerilor.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>lasere.in</code> conține pe prima linie un număr natural <code>c</code> care reprezintă cerinţa ce urmează să fie rezolvată (<code>1</code> sau <code>2</code>). Pe a doua linie se află două numere naturale <code>n</code> şi <code>m</code>, reprezentând numărul de linii şi de coloane ale matricei, respectiv numărul de lasere. Pe următoarele <code>n</code> linii se află câte <code>n</code> numere naturale, reprezentând elementele matricei. Pe următoarele <code>m</code> linii sunt descrise cele <code>m</code> lasere, câte un laser pe o linie. Pe o linie care descrie un laser se află <code>3</code> numere naturale <code>i j d</code>, cu semnificaţia că se află un laser pe linia <code>i</code> şi coloana <code>j</code> (<code>1≤i,j≤n</code>), care trage în direcţia <code>d</code> (<code>1≤d≤4</code>). Valorile situate pe aceeaşi linie sunt separate prin spaţiu. </p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>lasere.out</code> va conține pe prima linie un singur număr natural. Acest număr reprezintă numărul de gropi (dacă <code>c=1</code>) sau numărul de tranşee (dacă <code>c=2</code>).</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>4 ≤ n ≤ 200</code></li>
+	<li><code>1 ≤ m ≤ 200</code></li>
+	<li>Numerotarea liniilor şi a coloanelor este de la <code>1</code> la <code>n</code>.</li>
+	<li>Elementele matricei din fişierul de intrare sunt numere naturale de maxim <code>4</code> cifre.</li>
+	<li>Poziţiile laserelor sunt distincte.</li>
+	<li>Pentru teste valorând 30% din punctaj cerinţa este 1.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>lasere.in</code></p>
+
+<pre>1
+5 3
+1 1 3 4 5
+8 7 6 5 4
+9 3 5 6 7
+1 1 1 9 8
+1 1 1 5 6
+2 3 3
+4 4 4
+1 4 2</pre>
+
+<p><code>lasere.out</code></p>
+
+<pre>6</pre>
+
+<h1>Exemplul 2</h1>
+
+<p><code>lasere.in</code></p>
+
+<pre>2
+5 3
+1 1 3 4 5
+8 7 6 5 4
+9 3 5 6 7
+1 1 1 9 8
+1 1 1 5 6
+2 3 3
+4 4 4
+1 4 2</pre>
+
+<p><code>lasere.out</code></p>
+
+<pre>1</pre>
+
+<h1>Explicație</h1>
+
+<p>După ce acţionează laserele terenul arată astfel:</p>
+
+<table>
+		<tbody><tr>
+			<td> <strong>1</strong> </td>
+			<td> <strong>1</strong> </td>
+			<td> 3 </td>
+			<td> 4 </td>
+			<td> <strong>4</strong> </td>
+		</tr>
+		<tr>
+			<td> 8 </td>
+			<td> 7 </td>
+			<td> 6 </td>
+			<td> 5 </td>
+			<td> <strong>4</strong> </td>
+		</tr>
+		<tr>
+			<td> 9 </td>
+			<td> 3 </td>
+			<td> 4 </td>
+			<td> 6 </td>
+			<td> 7 </td>
+		</tr>
+		<tr>
+			<td> <strong>0</strong> </td>
+			<td> 0 </td>
+			<td> <strong>-1</strong> </td>
+			<td> 9 </td>
+			<td> 8 </td>
+		</tr>
+		<tr>
+			<td> 1 </td>
+			<td> 1 </td>
+			<td> 0 </td>
+			<td> 5 </td>
+			<td> 6 </td>
+		</tr>
+</tbody></table>
+
+<p>Există <code>6</code> gropi şi o tranşee. Se număra gropile chiar dacă fac parte dintr-o tranşee.</p>		</article>
+		</body></html>

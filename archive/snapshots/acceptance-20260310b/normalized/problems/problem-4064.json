@@ -1,0 +1,298 @@
+{
+  "id": 4064,
+  "slug": "ghiocel",
+  "name": "Ghiocel",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4064/ghiocel",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 16,
+      "name": "Teoria Grafurilor",
+      "slug": "teoria-grafurilor",
+      "href": "/?pagina=probleme-lista&tag=16"
+    },
+    {
+      "id": 17,
+      "name": "Parcurgerea grafurilor neorientate",
+      "slug": "parcurgerea-grafurilor-neorientate",
+      "href": "/?pagina=probleme-lista&tag=17"
+    }
+  ],
+  "tags": [
+    "Parcurgere in latime"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Într-un oraș sunt <code>n</code> case numerotate de la <code>1</code> la <code>n</code>. Între anumite case sunt străzi bidirecționale. În casa cu numărul <code>g</code> locuiește Ghiocel. El are <code>k</code> colege ale căror numere de casă îi sunt cunoscute și Ghiocel dorește să le ducă ghiocei la inceputul lunii martie. Pentru că este leneș, Ghiocel se decide să ducă ghiocei colegei sau colegelor care stă (stau) la o casă până la care Ghiocel are de parcurs un număr minim de străzi. Ajutați-l pe Ghiocel să determine numerele acestor case. </p>",
+      "text": "Într-un oraș sunt n case numerotate de la 1 la n. Între anumite case sunt străzi bidirecționale. În casa cu numărul g locuiește Ghiocel. El are k colege ale căror numere de casă îi sunt cunoscute și Ghiocel dorește să le ducă ghiocei la inceputul lunii martie. Pentru că este leneș, Ghiocel se decide să ducă ghiocei colegei sau colegelor care stă (stau) la o casă până la care Ghiocel are de parcurs un număr minim de străzi. Ajutați-l pe Ghiocel să determine numerele acestor case."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>ghiocel.in</code> conține pe prima linie numerele <code>n m g</code>, reprezentând numărul de case, numărul de străzi și numărul casei în care locuiește Ghiocel. Urmează <code>m</code> linii cu câte două numere <code>i j</code>, cu semnificația: casele <code>i</code> și <code>j</code> sunt legate printr-o stradă bidirecțională. Pe următoarea linie se află numărul <code>k</code> a colegelor lui Ghiocel, iar pe ultima linie se află <code>k</code> numere distincte cuprinse între <code>1</code> și <code>n</code>, reprezentând numerele caselor unde locuiesc colegele lui Ghiocel.</p>",
+      "text": "Fișierul de intrare ghiocel.in conține pe prima linie numerele n m g, reprezentând numărul de case, numărul de străzi și numărul casei în care locuiește Ghiocel. Urmează m linii cu câte două numere i j, cu semnificația: casele i și j sunt legate printr-o stradă bidirecțională. Pe următoarea linie se află numărul k a colegelor lui Ghiocel, iar pe ultima linie se află k numere distincte cuprinse între 1 și n, reprezentând numerele caselor unde locuiesc colegele lui Ghiocel."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>ghiocel.out</code> va conține pe prima linie numerele caselor unde locuiesc colege de-ale lui Ghicel până la care acesta are de parcurs un număr minim de străzi. Numerele se vor afișa în ordine crescătoare și separate prin câte un spațiu.</p>",
+      "text": "Fișierul de ieșire ghiocel.out va conține pe prima linie numerele caselor unde locuiesc colege de-ale lui Ghicel până la care acesta are de parcurs un număr minim de străzi. Numerele se vor afișa în ordine crescătoare și separate prin câte un spațiu."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ n ≤ 100</code></li>\n\t<li><code>1 ≤ m ≤ n * (n - 1) / 2</code></li>\n\t<li><code>1 ≤ i, j ≤ n</code></li>\n\t<li><code>1 ≤ k ≤ n</code></li>\n</ul>",
+      "text": "1 ≤ n ≤ 100 1 ≤ m ≤ n * (n - 1) / 2 1 ≤ i, j ≤ n 1 ≤ k ≤ n"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>ghiocel.in</code></p><pre>10 12 6\n1 2\n1 7\n1 10\n2 4\n2 5\n2 6\n3 4\n4 5\n5 6\n7 8\n8 10\n9 10\n4\n1 4 8 10</pre><p><code>ghiocel.out</code></p><pre>1 4</pre>",
+      "text": "ghiocel.in10 12 6 1 2 1 7 1 10 2 4 2 5 2 6 3 4 4 5 5 6 7 8 8 10 9 10 4 1 4 8 10ghiocel.out1 4"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p>Ghiocel locuiește în casa cu numărul <code>6</code>. Colegele lui stau în casele  <code>1 4 8 10</code>. Până la casele <code>1</code> și <code>4</code> ajunge mergând pe un număr minim de străzi.</p>",
+      "text": "Ghiocel locuiește în casa cu numărul 6. Colegele lui stau în casele 1 4 8 10. Până la casele 1 și 4 ajunge mergând pe un număr minim de străzi."
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "1 ≤ n ≤ 100",
+    "1 ≤ m ≤ n * (n - 1) / 2",
+    "1 ≤ i, j ≤ n",
+    "1 ≤ k ≤ n"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qab9550ae69.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Muresan Ciprian (mcip1977)",
+    "clasa": "11",
+    "intrare/ieșire": "ghiocel.in / ghiocel.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "-",
+    "autor": "-",
+    "dificultate": "medie"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4064/ghiocel"
+}

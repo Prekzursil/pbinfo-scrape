@@ -1,0 +1,327 @@
+{
+  "id": 2959,
+  "slug": "minecraft",
+  "name": "minecraft",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/2959/minecraft",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 85,
+      "name": "Structuri de date liniare",
+      "slug": "structuri-de-date-liniare",
+      "href": "/?pagina=probleme-lista&tag=85"
+    },
+    {
+      "id": 86,
+      "name": "Stiva",
+      "slug": "stiva",
+      "href": "/?pagina=probleme-lista&tag=86"
+    }
+  ],
+  "tags": [
+    "Stiva",
+    "Algoritmul lui Lee",
+    "Smenul lui Mars (Difference Arrays)"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Cunoscând harta ce corespunde lumii lui Tommy, să se determine:</p><ul>\n\t<li>numărul zonelor dreptunghiulare pe care poate construi casa în modul <strong>Supraviețuire</strong>;</li>\n\t<li>aria suprafeței pe care-și construiește casa și costul acesteia în modul <strong>Creativ</strong>.</li>\n</ul>",
+      "text": "Cunoscând harta ce corespunde lumii lui Tommy, să se determine: numărul zonelor dreptunghiulare pe care poate construi casa în modul Supraviețuire; aria suprafeței pe care-și construiește casa și costul acesteia în modul Creativ."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul standard de intrare conține pe prima linie un număr natural <code>C</code>, pe a doua linie, numărul natural nenul <code>N</code> ce caracterizează o hartă formată din <code>N x N</code> pătrate alăturate. Pe următoarele <code>N</code> linii se află câte un șir de <code>N</code> caractere ce aparțin mulțimii <code>{V, A}</code>, ce reprezintă codificarea hărții. Un caracter <code>A</code> reprezintă un pătrat ce aparține unei surse de apă.</p>",
+      "text": "Fișierul standard de intrare conține pe prima linie un număr natural C, pe a doua linie, numărul natural nenul N ce caracterizează o hartă formată din N x N pătrate alăturate. Pe următoarele N linii se află câte un șir de N caractere ce aparțin mulțimii {V, A}, ce reprezintă codificarea hărții. Un caracter A reprezintă un pătrat ce aparține unei surse de apă."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul standard de ieșire are o singură linie ce conține:</p><ul>\n\t<li>dacă <code>C = 1</code>, un singur număr ce reprezintă numărul zonelor dreptunghiulare pe care poate construi casa în modul <strong>Supraviețuire</strong>;</li>\n\t<li>dacă <code>C = 2</code>, două numere naturale separate prin spațiu, ce reprezintă aria suprafeței pe care construiește casa și costul acesteia, în modul <strong>Creativ</strong>.</li>\n</ul>",
+      "text": "Fișierul standard de ieșire are o singură linie ce conține: dacă C = 1, un singur număr ce reprezintă numărul zonelor dreptunghiulare pe care poate construi casa în modul Supraviețuire; dacă C = 2, două numere naturale separate prin spațiu, ce reprezintă aria suprafeței pe care construiește casa și costul acesteia, în modul Creativ."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2 ≤ N ≤ 1000</code></li>\n\t<li>Harta conține cel puțin o sursă de apă și cel puțin o zonă verde.</li>\n\t<li>Se acordă <code>50</code> de puncte pentru rezolvarea primei cerințe și <code>50</code> de puncte pentru rezolvarea celei de-a doua cerințe.</li>\n</ul>",
+      "text": "2 ≤ N ≤ 1000 Harta conține cel puțin o sursă de apă și cel puțin o zonă verde. Se acordă 50 de puncte pentru rezolvarea primei cerințe și 50 de puncte pentru rezolvarea celei de-a doua cerințe."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><strong>Intrare</strong></p><pre>1\n3\nVVA\nAVV\nVVV</pre><p><strong>Ieșire</strong></p><pre>19</pre><h3>Explicație</h3><p>Sunt <code>19</code> zone dreptunghiulare ce conțin cel puțin o sursă de apă și pot fi utilizate în construcția unei case în modul <strong>Supraviețuire</strong>.</p><p><img alt=\"\" src=\"/resurse/16a4b0/minecraft_02.jpg\"></p>",
+      "text": "Intrare1 3 VVA AVV VVVIeșire19ExplicațieSunt 19 zone dreptunghiulare ce conțin cel puțin o sursă de apă și pot fi utilizate în construcția unei case în modul Supraviețuire."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><strong>Intrare</strong></p><pre>2\n6\nVVVVVV\nVAAVVV\nVVVVAV\nVVVVAV\nVVAVVV\nVVVVVV</pre><p><strong>Ieșire</strong></p><pre>4 4</pre><h3>Explicație</h3><p>În modul <strong>Creativ</strong>, Tommy alege o suprafață pătrată ce conține <code>4</code> pătrate verzi. Dintre toate aceste zone o alege pe cea care are cost minim (<code>4</code>).</p><p><img alt=\"\" src=\"/resurse/16a4b0/minecraft_03.jpg\"></p>",
+      "text": "Intrare2 6 VVVVVV VAAVVV VVVVAV VVVVAV VVAVVV VVVVVVIeșire4 4ExplicațieÎn modul Creativ, Tommy alege o suprafață pătrată ce conține 4 pătrate verzi. Dintre toate aceste zone o alege pe cea care are cost minim (4)."
+    }
+  ],
+  "examples": [
+    {
+      "input": "1\n3\nVVA\nAVV\nVVV",
+      "output": "19",
+      "explanation": "Sunt 19 zone dreptunghiulare ce conțin cel puțin o sursă de apă și pot fi utilizate în construcția unei case în modul Supraviețuire."
+    },
+    {
+      "input": "2\n6\nVVVVVV\nVAAVVV\nVVVVAV\nVVVVAV\nVVAVVV\nVVVVVV",
+      "output": "4 4",
+      "explanation": "În modul Creativ, Tommy alege o suprafață pătrată ce conține 4 pătrate verzi. Dintre toate aceste zone o alege pe cea care are cost minim (4)."
+    }
+  ],
+  "constraints": [
+    "2 ≤ N ≤ 1000",
+    "Harta conține cel puțin o sursă de apă și cel puțin o zonă verde.",
+    "Se acordă 50 de puncte pentru rezolvarea primei cerințe și 50 de puncte pentru rezolvarea celei de-a doua cerințe."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qa6221af4c3.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/minecraft_01.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-minecraft-01-jpg.jpg",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/minecraft_02.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-minecraft-02-jpg.jpg",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/minecraft_03.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-minecraft-03-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "10",
+    "intrare/ieșire": "tastatură / ecran",
+    "limită timp": "0.3 secunde",
+    "limită memorie": "32 MB / 32 MB",
+    "sursa problemei": "Prosoft@NT Piatra Neamț 2019",
+    "autor": "Cristina Sichim",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.3,
+  "memoryLimitMb": 32,
+  "author": "Cristina Sichim",
+  "sourceAttribution": "Prosoft@NT Piatra Neamț 2019",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/2959/minecraft"
+}

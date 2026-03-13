@@ -1,0 +1,123 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2979"><article id="enunt">
+			<p>Într-o școală există un sistem de acces cu ajutorul cartelelor, conectat la un calculator și o imprimantă. Fiecare elev al școlii are câte o cartelă. Într-o zi, la utilizarea fiecărei cartele, sistemul imprimă următoarele informații pe hârtie, pe câte o linie, după regula următoare:<br>
+- Caracterul <code>b</code> dacă elevul este băiat sau caracterul <code>f</code> dacă este fată. Caracterul va fi urmat de un spațiu;<br>
+- Caracterul <code>i</code> dacă elevul a intrat în școală sau caracterul <code>e</code> dacă a ieșit din școală. De asemenea, acest caracter va fi urmat de un spațiu;<br>
+- Momentul utilizării cartelei, exprimat prin oră, minute și secunde. Acestea vor fi reprezentate în cadrul liniei, exact în această ordine, prin trei numere naturale, separate între ele prin câte un spațiu.</p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscându-se toate cele <code>N</code> linii imprimate într-o zi determinați:<br>
+1. Câți băieți și câte fete sunt la școală după cele <code>N</code> acțiuni imprimate de sistem.<br>
+2. Care este numărul total de secunde în care, în școală, s-au aflat un număr egal, nenul, de fete și băieți, până în momentul utilizării ultimei cartele. Dacă nu există această situație se afișează <code>0</code>.<br>
+3. Care este numărul maxim de secunde în care, în școală, până în momentul utilizării ultimei cartele, s-au aflat neîntrerupt un număr impar de băieți. Dacă nu există o astfel de situație se afișează <code>0</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>cartele.in</code> conține pe prima linie un număr natural <code>C</code> reprezentând numărul cerinței care poate avea valorile <code>1</code>, <code>2</code> sau <code>3</code>, pe a doua linie numărul natural <code>N</code>, iar pe următoarele <code>N</code> linii informațiile imprimate de sistem sub forma descrisă în enunț, în ordinea strict crescătoare a momentului folosirii cartelei.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă <code>C = 1</code>, atunci fișierul de ieșire <code>cartele.out</code> va conține, în această ordine, separate printr-un spațiu, numărul de băieți și numărul de fete determinat conform cerinței 1.<br>
+Dacă <code>C = 2</code> sau <code>C = 3</code>, atunci fișierul de ieșire <code>cartele.out</code> va conține pe prima linie un singur număr natural ce reprezintă rezultatul determinat conform cerinței.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 10.000</code></li>
+	<li>La momentul utilizării primei cartele, în școală nu se află niciun elev</li>
+	<li>Sistemul de acces nu permite folosirea simultană a două cartele</li>
+	<li>Pentru orice linie imprimată de sistem <code>0 ≤ ora ≤ 23</code>, <code>0 ≤ minute ≤ 59</code> și <code>0 ≤ secunde ≤ 59</code></li>
+	<li>Pe fiecare linie a fișierului de intrare, după ultimul număr, reprezentând secundele, nu există spațiu.</li>
+	<li>Pentru rezolvarea corectă a primei cerințe se acordă <code>20</code> de puncte, pentru rezolvarea corectă a celei de-a doua cerințe se acordă <code>30</code> de puncte iar pentru rezolvarea corectă a celei de-a treia cerințe se acordă <code>40</code> de puncte.</li>
+	<li>În concurs s-au acordat <code>10</code> puncte din oficiu. Aici se acordă pentru exemplele din enunț.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>cartele.in</code></p>
+
+<pre>1
+3
+b i 0 0 24
+f i 0 0 26
+b e 0 0 29</pre>
+
+<p><code>cartele.out</code></p>
+
+<pre>0 1</pre>
+
+<h3>Explicație</h3>
+
+<p>Un băiat a intrat la momentul <code>0 0 24</code> (adică ora <code>0</code>, minutul <code>0</code> și secunda <code>24</code>) și ieșit la momentul <code>0 0 29</code>. O fată a intrat la momentul <code>0 0 26</code>. După cele <code>3</code> acțiuni, în școală a rămas o fată.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>cartele.in</code></p>
+
+<pre>2
+3
+b i 0 0 24
+f i 0 0 26
+b e 0 0 29</pre>
+
+<p><code>cartele.out</code></p>
+
+<pre>3</pre>
+
+<h3>Explicație</h3>
+
+<p>Între momentul <code>0 0 24</code> și <code>0 0 26</code> în școală este doar un băiat. Între momentul <code>0 0 26</code> și <code>0 0 29</code> în școală se află un băiat și o fată adică un număr nenul egal de fete și băieți. Deci, numărul de secunde determinat este <code>3</code>.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>cartele.in</code></p>
+
+<pre>2
+8
+f i 8 19 10
+b i 8 19 12
+b e 8 19 15
+b i 8 20 0
+b e 8 20 4
+b i 8 20 10
+b i 8 20 50
+b i 8 20 51</pre>
+
+<p><code>cartele.out</code></p>
+
+<pre>47</pre>
+
+<h3>Explicație</h3>
+
+<p>Între momentele <code>8 19 12</code> și <code>8 19 15</code> în școală se află <code>1</code> băiat și <code>1</code> fată, deci durata este <code>3</code> secunde. <br>
+Între momentele <code>8 20 0</code> și <code>8 20 4</code> în școală se află <code>1</code> băiat și <code>1</code> fată, deci durata este <code>4</code> secunde.<br>
+Între momentele <code>8 20 10</code> și <code>8 20 50</code> în școală se află <code>1</code> băiat și <code>1</code> fată, deci durata este <code>40</code> de secunde.<br>
+Durata totală este <code>3 + 4 + 40 = 47</code> de secunde.</p>
+
+<h1>Exemplul 4:</h1>
+
+<p><code>cartele.in</code></p>
+
+<pre>3
+9
+f i 8 19 10
+b i 8 19 12
+f e 8 19 13
+b e 8 19 15
+b i 8 20 0
+b i 8 20 1
+b i 8 20 10
+b i 8 20 12
+b i 8 20 13</pre>
+
+<p><code>cartele.out</code></p>
+
+<pre>3</pre>
+
+<h3>Explicație</h3>
+
+<p>Între momentele <code>8 19 12</code> și <code>8 19 15</code> în școală se află <code>1</code> băiat, deci durata este <code>3</code> secunde.<br>
+Între momentele <code>8 20 0</code> și <code>8 20 1</code> în școală se află <code>1</code> băiat, deci durata este <code>1</code> secundă.<br>
+Între momentele <code>8 20 10</code> și <code>8 20 12</code> în școală se află <code>3</code> băieți, deci durata este <code>2</code> secunde.<br>
+Durata maximă cerută este de <code>3</code> secunde.</p>		</article>
+		</body></html>

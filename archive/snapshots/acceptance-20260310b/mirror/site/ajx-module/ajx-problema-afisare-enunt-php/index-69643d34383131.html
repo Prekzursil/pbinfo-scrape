@@ -1,0 +1,100 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4811"><article id="enunt">
+			<p>Avionul cu care am zburat ultima dată are o organizare foarte simplă. Pe fiecare rând sunt <code>6</code> scaune, câte <code>3</code> pe fiecare parte, având la mijloc culoarul pe care intră și ies pasagerii. Rândurile de scaune pentru pasageri sunt numerotate de la <code>1</code> la <code>NR</code>, începând dinspre cabina piloților avionului. Pe fiecare rând, scaunele sunt numerotate cu cifre de la <code>1</code> la <code>6</code>.</p>
+
+<p>Urcarea în avion se face pe una dintre cele două scări: scara <code>1</code>, situată în partea din față a avionului, și scara <code>2</code>, situată în partea din spate a acestuia.</p>
+
+<p>De la intrarea în avion fiecare pasager parcurge <code>3</code> metri până la culoarul principal, după care înaintează pe culoar parcurgând câte <code>1</code> metru pentru fiecare rând de scaune. De pe culoar până la scaunele <code>3</code> sau <code>4</code> se parcurge <code>1</code> metru, până la scaunele <code>2</code> sau <code>5</code> se parcurg <code>2</code> metri, iar până la scaunele <code>1</code> sau <code>6</code> se parcurg <code>3</code> metri.</p>
+
+<p>În așteptare sunt <code>n</code> pasageri, care trebuie să urce în avion pe una din cele două scări. Pe biletul fiecărui pasager este scris locul pe care trebuie să îl ocupe în avion, sub forma perechii <code>rând scaun</code> (de exemplu <code>5</code> <code>2</code> – rândul <code>5</code> scaunul <code>2</code>).</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-avion-001-jpg.jpg"></p>
+
+<p>Se cunosc numărul de rânduri de scaune <code>NR</code> din avion, numărul <code>n</code> de pasageri și locul fiecărui pasager.</p>
+
+<h1>Cerința</h1>
+
+<p>1) Determinați pentru fiecare dintre cei <code>n</code> pasageri, scara pe care trebuie să urce în avion, astfel încât distanța parcursă de el până la locul său să fie minimă.<br>
+2) Determinați distanța totală minimă parcursă de pasageri în avion. Distanța totală parcursă este egală cu suma distanțelor minime parcurse de cei n pasageri până la locuurile lor.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>avion.in</code> conține pe prima linie trei numere naturale: <code>c</code>, reprezentând cerința care trebuie rezolvată (<code>c ∈ {1, 2}</code>), <code>NR</code> și <code>n</code>, cu semnificațiile din enunț. <br>
+Fiecare dintre următoarele <code>n</code> linii conține câte o pereche de numere naturale, reprezentând locul unui pasager, în ordinea în care aceștia stau în așteptare. Numerele aflate pe aceeași linie a fișierului sunt separate prin câte un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Pentru cerința <code>1</code> (dacă <code>c=1</code>) fișierul de ieșire <code>avion.out</code> conține <code>n</code> linii, pe fiecare linie fiind cifra <code>1</code> sau cifra <code>2</code>, reprezentând scara pe care urcă fiecare pasager, în ordinea în care aceștia au stat în așteptare.</p>
+
+<p>Pentru cerința <code>2</code> (dacă <code>c=2</code>) fișierul de ieșire <code>avion.out</code> conține un număr natural, reprezentând distanța totală minimă determinată la cerința <code>2</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>c ∈ {1, 2}</code></li>
+	<li><code>6 ≤ NR ≤ 50</code>, <code>NR</code> este număr par</li>
+	<li><code>1 ≤ n ≤ 6 * NR</code></li>
+	<li>Există zboruri în care nu sunt ocupate toate locurile</li>
+	<li>Se acordă 50 de puncte pentru cerința 1 și 50 de puncte pentru cerința 2</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>avion.in</code></p>
+
+<pre>1 10 7
+5 2
+9 4
+5 1
+7 5
+1 6
+8 3
+10 1</pre>
+
+<p><code>avion.out</code></p>
+
+<pre>1
+2
+1
+2
+1
+2
+2</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința <code>1</code>. Este un avion cu <code>10</code> rânduri de scaune și sunt <code>7</code> pasageri. Dacă ar urca pe scara <code>1</code>, primul pasager ar parcurge <code>3+5+2</code> metri, iar dacă ar urca pe scara <code>2</code> ar parcurge <code>3+6+2</code> metri. Ca urmare, va alege să urce pe scara <code>1</code>. Analog se procedează și pentru ceilalți pasageri. Astfel, pasagerii cu numerele de ordine <code>1</code>, <code>3</code> și <code>5</code> urcă pe scara <code>1</code>, iar pasagerii cu numerele de ordine <code>2</code>, <code>4</code>, <code>6</code> și <code>7</code> urcă pe scara <code>2</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>avion.in</code></p>
+
+<pre>2 10 7
+5 2
+9 4
+5 1
+7 5
+1 6
+8 3
+10 1</pre>
+
+<p><code>avion.out</code></p>
+
+<pre>57</pre>
+
+<h3>Explicație</h3>
+
+<p>Este un avion cu <code>10</code> rânduri de scaune și sunt <code>7</code> pasageri. </p>
+
+<p>Pentru a parcurge distanța minimă până la locul său, pasagerul <code>1</code> urcă pe scara <code>1</code>, parcurge <code>3</code> metri până la culoarul central apoi parcurge <code>5</code> metri pe culoar, apoi <code>2</code> metri până la scaunul alocat (<code>5+2</code>). El parcurge astfel <code>10</code> metri până la locul său.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-avion-002-jpg.jpg"></p>
+
+<p>Pasagerul <code>2</code> urcă pe scara <code>2</code> și parcurge <code>6</code> metri (<code>3+2+1</code>). <br>
+Pasagerul <code>3</code> urcă pe scara <code>1</code> și parcurge <code>11</code> metri (<code>3+5+3</code>).<br>
+Pasagerul <code>4</code> urcă pe scara <code>2</code> și parcurge <code>9</code> metri (<code>3+4+2</code>). <br>
+Pasagerul <code>5</code> urcă pe scara <code>1</code> și parcurge <code>7</code> metri. <br>
+Pasagerul <code>6</code> urcă pe scara <code>2</code> și parcurge <code>7</code> metri. <br>
+Pasagerul <code>7</code> urcă pe scara <code>2</code> și parcurge <code>7</code> metri.</p>
+
+<p>În total au fost parcurși <code>57</code> de metri.</p>		</article>
+		</body></html>

@@ -1,0 +1,307 @@
+{
+  "id": 1674,
+  "slug": "livada1",
+  "name": "Livada1",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1674/livada1",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 46,
+      "name": "Tablouri bidimensionale (matrice)",
+      "slug": "tablouri-bidimensionale-matrice",
+      "href": "/?pagina=probleme-lista&tag=46"
+    },
+    {
+      "id": 58,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=58"
+    }
+  ],
+  "tags": [
+    "Cautare binara",
+    "Sume parțiale"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Determinaţi cea mai mică valoare <code>X</code> posibilă astfel încât să se poată culege, în condițiile de mai sus, o cantitate de cel puțin <code>C</code> kg de fructe și orice pom din care se culeg fructe să conțină cel mult <code>X</code> kg de fructe.</p>",
+      "text": "Determinaţi cea mai mică valoare X posibilă astfel încât să se poată culege, în condițiile de mai sus, o cantitate de cel puțin C kg de fructe și orice pom din care se culeg fructe să conțină cel mult X kg de fructe."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<ul>\n\t<li>Pe prima linie a fişierului <code>livada1.in</code> se află <code>4</code> numere naturale <code>N M C R</code> cu semnificaţia din enunţ.</li>\n\t<li>Pe a doua linie din fişierul de intrare se află <code>5</code> numere naturale <code>x y z w u</code>, separate printr-un spaţiu.</li>\n\t<li>Dacă notăm cu <code>A[i][j]</code> cantitatea de fructe (exprimată în kg) din cel de-al <code>j</code>-lea pom de pe linia <code>i</code>, atunci:\n\t<ul>\n\t\t<li>Linia a treia din fişierul de intrare conţine <code>M</code> valori <code>A[1][i]</code>, <code>1≤i≤M</code>, separate printr-un spaţiu</li>\n\t\t<li>Linia a patra din fişierul de intrare conţine <code>N-1</code> valori <code>A[i][1]</code>, <code>2≤i≤N</code>, separate printr-un spaţiu</li>\n\t\t<li>Celelalte valori <code>A[i][j]</code>, <code>2≤i≤N</code>, <code>2≤j≤M</code>, se calculează conform formulei:<br>\n<code>A[i][j] = (x*A[i-1][j] + y*A[i][j-1] + z*A[i-1][j-1] + w) % u</code>.</li>\n\t</ul></li>\n\t</ul>",
+      "text": "Pe prima linie a fişierului livada1.in se află 4 numere naturale N M C R cu semnificaţia din enunţ. Pe a doua linie din fişierul de intrare se află 5 numere naturale x y z w u, separate printr-un spaţiu. Dacă notăm cu A[i][j] cantitatea de fructe (exprimată în kg) din cel de-al j-lea pom de pe linia i, atunci: Linia a treia din fişierul de intrare conţine M valori A[1][i], 1≤i≤M, separate printr-un spaţiu Linia a patra din fişierul de intrare conţine N-1 valori A[i][1], 2≤i≤N, separate printr-un spaţiu Celelalte valori A[i][j], 2≤i≤N, 2≤j≤M, se calculează conform formulei: A[i][j] = (x*A[i-1][j] + y*A[i][j-1] + z*A[i-1][j-1] + w) % u."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>livada1.out</code> va conține o singură valoare scrisă pe prima linie, care reprezintă cea mai mică valoare a cantităţii de fructe (exprimată în kg) dintr-un pom cules, astfel încât să fie respectate toate restricţiile problemei.</p>",
+      "text": "Fișierul de ieșire livada1.out va conține o singură valoare scrisă pe prima linie, care reprezintă cea mai mică valoare a cantităţii de fructe (exprimată în kg) dintr-un pom cules, astfel încât să fie respectate toate restricţiile problemei."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ R ≤ N ≤ 100</code></li>\n\t<li><code>1 ≤ M ≤ 25000</code></li>\n\t<li><code>0 ≤ x,y,z,w,u ≤ 10^9</code></li>\n\t<li><code>0 ≤ A[i][j] ≤ 10^9</code></li>\n\t<li>Atenție la determinarea fiecărei valori <code>A[i][j]</code> pentru că în formulă sunt produse care pot să furnizeze valori mai mari decât <code>2^32-1</code>.</li>\n\t<li><code>1 ≤ C ≤ 10^18</code></li>\n\t<li>Se garantează că pentru toate testele problema are soluție</li>\n\t<li>Pentru 30% din teste se garantează faptul că <code>1 ≤ M ≤ 100</code> şi <code>1 ≤ A[i][j] ≤ 100</code></li>\n\t<li>Pentru 70% din teste se garantează faptul că <code>1 ≤ M ≤ 4000</code></li>\n</ul>",
+      "text": "1 ≤ R ≤ N ≤ 100 1 ≤ M ≤ 25000 0 ≤ x,y,z,w,u ≤ 10^9 0 ≤ A[i][j] ≤ 10^9 Atenție la determinarea fiecărei valori A[i][j] pentru că în formulă sunt produse care pot să furnizeze valori mai mari decât 2^32-1. 1 ≤ C ≤ 10^18 Se garantează că pentru toate testele problema are soluție Pentru 30% din teste se garantează faptul că 1 ≤ M ≤ 100 şi 1 ≤ A[i][j] ≤ 100 Pentru 70% din teste se garantează faptul că 1 ≤ M ≤ 4000"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>livada1.in</code></p><pre>5 6 18 4\n3 6 5 2 7\n4 1 3 5 1 2\n5 2 6 3</pre><p><code>livada1.out</code></p><pre>4</pre><h3>Explicație</h3><p>Sunt <code>5</code> rânduri cu câte <code>6</code> pomi pe fiecare rând. Figura de mai jos arată matricea care se obține conform formulelor precizate.</p><table class=\"explicatie\">\n\t\t<tbody><tr>\n\t\t\t<td style=\"background:gray;\">4 </td>\n\t\t\t<td style=\"background:gray;\">1 </td>\n\t\t\t<td style=\"background:gray;\">3 </td>\n\t\t\t<td> 5 </td>\n\t\t\t<td> 1 </td>\n\t\t\t<td> 2 </td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td> 5 </td>\n\t\t\t<td> 6 </td>\n\t\t\t<td> 3 </td>\n\t\t\t<td> 1 </td>\n\t\t\t<td> 1 </td>\n\t\t\t<td> 5 </td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td style=\"background:gray;\">2 </td>\n\t\t\t<td style=\"background:gray;\">1 </td>\n\t\t\t<td> 5 </td>\n\t\t\t<td> 1 </td>\n\t\t\t<td> 2 </td>\n\t\t\t<td> 6 </td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td> 6 </td>\n\t\t\t<td> 2 </td>\n\t\t\t<td> 6 </td>\n\t\t\t<td> 3 </td>\n\t\t\t<td> 3 </td>\n\t\t\t<td> 6 </td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td style=\"background:gray;\">3 </td>\n\t\t\t<td style=\"background:gray;\">0 </td>\n\t\t\t<td style=\"background:gray;\">2 </td>\n\t\t\t<td style=\"background:gray;\">4 </td>\n\t\t\t<td style=\"background:gray;\">1 </td>\n\t\t\t<td> 6 </td>\n\t\t</tr>\n</tbody></table><p>Se doreşte culegerea a cel puţin <code>18</code> de kg de fructe de pe maxim <code>4</code> rânduri din cele <code>5</code>.</p><p>În figura de mai sus, este prezentată o soluţie posibilă în care cantitatea maximă culeasă dintr-un pom este de <code>4</code> kg.</p><p>Nu se pot culege <code>18</code> de kg de fructe de pe maxim <code>4</code> rânduri astfel încât să fie culeşi doar pomi cu cantitate de fructe <code>3</code> kg (în acest caz se pot culege cel mult <code>8</code> kg).</p><style>\ntable.explicatie{border-collapse: collapse;}\ntable.explicatie td{border: solid 1px lightgray; width:1.5em; height:1.5em; text-align:center}\n</style>",
+      "text": "livada1.in5 6 18 4 3 6 5 2 7 4 1 3 5 1 2 5 2 6 3livada1.out4ExplicațieSunt 5 rânduri cu câte 6 pomi pe fiecare rând. Figura de mai jos arată matricea care se obține conform formulelor precizate. 4 1 3 5 1 2 5 6 3 1 1 5 2 1 5 1 2 6 6 2 6 3 3 6 3 0 2 4 1 6 Se doreşte culegerea a cel puţin 18 de kg de fructe de pe maxim 4 rânduri din cele 5.În figura de mai sus, este prezentată o soluţie posibilă în care cantitatea maximă culeasă dintr-un pom este de 4 kg.Nu se pot culege 18 de kg de fructe de pe maxim 4 rânduri astfel încât să fie culeşi doar pomi cu cantitate de fructe 3 kg (în acest caz se pot culege cel mult 8 kg). table.explicatie{border-collapse: collapse;} table.explicatie td{border: solid 1px lightgray; width:1.5em; height:1.5em; text-align:center}"
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Sunt 5 rânduri cu câte 6 pomi pe fiecare rând. Figura de mai jos arată matricea care se obține conform formulelor precizate."
+    }
+  ],
+  "constraints": [
+    "1 ≤ R ≤ N ≤ 100",
+    "1 ≤ M ≤ 25000",
+    "0 ≤ x,y,z,w,u ≤ 10^9",
+    "0 ≤ A[i][j] ≤ 10^9",
+    "Atenție la determinarea fiecărei valori A[i][j] pentru că în formulă sunt produse care pot să furnizeze valori mai mari decât 2^32-1.",
+    "1 ≤ C ≤ 10^18",
+    "Se garantează că pentru toate testele problema are soluție",
+    "Pentru 30% din teste se garantează faptul că 1 ≤ M ≤ 100 şi 1 ≤ A[i][j] ≤ 100",
+    "Pentru 70% din teste se garantează faptul că 1 ≤ M ≤ 4000"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q2879d1f9b9.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "9",
+    "intrare/ieșire": "livada1.in / livada1.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "ONI 2016, clasa a IX-a",
+    "autor": "Mircea Lupșe Turpan",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "author": "Mircea Lupșe Turpan",
+  "sourceAttribution": "ONI 2016, clasa a IX-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1674/livada1"
+}

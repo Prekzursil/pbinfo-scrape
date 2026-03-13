@@ -1,0 +1,260 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4880"><article id="enunt">
+			<p>Se dă o matrice cu \(2\) linii și \(N\) coloane. De asemenea, se dau \(Q\) operații de \(2\) tipuri, pe care va trebui să le procesați în ordine. Cele \(2\) tipuri de operații sunt definite astfel:</p>
+
+<ul>
+	<li>\(1\) \(lin\) \(col\) \(x\) – valoarea elementului aflat pe linia \(lin\) și coloana \(col\) va deveni \(x\).</li>
+	<li>\(2\) \(st\) \(dr\) – afișați scorul submatricei cu colțurile în celulele \((1,st)\), respectiv \((2,dr)\).</li>
+</ul>
+
+<p>Scorul unei submatrice cu colțurile în celulele \((1,st)\), respectiv \((2,dr)\) este calculat astfel:</p>
+
+<ol>
+	<li>Se pot permuta oricum coloanele submatricei. (Această permutare nu va persista la următoarele operații.)</li>
+	<li>După pasul anterior, se va alege un drum de lungime minimă cu capetele în celulele \((1,st)\), respectiv \((2,dr)\). Un drum este format dintr-o succesiune de celule distincte, unde oricare două celule consecutive din drum sunt adiacente pe linie sau pe coloană.</li>
+	<li>Scorul submatricei este egal cu valoarea minimă posibilă a <b>medianei</b> numerelor dintr-un drum construit la pasul anterior.</li>
+</ol>
+
+<p>Definim mediana unui șir de numere \(A\) cu \(M\) elemente, numerotate de la \(1\) la \(M\), ca fiind elementul aflat pe poziția \(\lceil\frac{M}{2} \rceil\) în urma sortării șirului. De exemplu, mediana șirului \([1,3,1,2]\) este \(1\), iar mediana șirului \([1,2,3]\) este \(2\).</p>
+
+<h1>Cerința</h1>
+
+<p>Se cere să se determine scorul submatricei date pentru fiecare operație de tip \(2\).</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie se va afla numărul \(T\), reprezentând numărul de teste.</p>
+
+<p>Pe prima linie a celui de-al \(i\)-lea test se vor afla două numere \(N\) și \(Q\) – numărul de coloane din matrice, respectiv numărul de operații.</p>
+
+<p>Pe a doua linie a celui de-al \(i\)-lea test se vor afla \(N\) numere, reprezentând valorile inițiale ale elementelor de pe prima linie a matricei.</p>
+
+<p>Pe a treia linie a celui de-al \(i\)-lea test se vor afla \(N\) numere, reprezentând valorile inițiale ale elementelor de pe a doua linie a matricei.</p>
+
+<p>Pe următoarele \(Q\) linii ale celui de-al \(i\)-lea test se vor afla descrierile operațiilor, câte un una pe fiecare pe linie. Fiecare dintre următoarele \(Q\) linii va avea unul dintre următoarele formaturi:</p>
+
+<ul>
+	<li>\(1\) \(lin\) \(col\) \(x\)</li>
+	<li>\(2\) \(st\) \(dr\).</li>
+</ul>
+
+<p>Toate valorile de pe aceeași linie sunt separate prin câte un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Pentru fiecare operație de tipul \(2\) se va afișa răspunsul pe câte o linie.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>\(1 \leq T \leq 8\)</li>
+	<li>\(1 \leq N,Q \leq 10^5\)</li>
+	<li>\(1 \leq \text{numerele din matrice} \leq 3 \cdot 10^5\)</li>
+	<li>Pentru toate operațiile de tipul \(1\):
+	<ul>
+		<li>\(1 \le lin \le 2\), \(1 \le col \le N\)</li>
+		<li>\(1 \le x \le 3 \cdot 10^5\)</li>
+	</ul></li>
+	<li>Pentru toate operațiile de tipul \(2\):
+	<ul>
+		<li>\(1 \le st \le dr \le N\)</li>
+	</ul></li>
+	</ul>
+
+<h1>Subtask-uri</h1>
+
+<p><strong>Notă</strong>: testele sunt grupate în subtask-uri.</p>
+
+<table>
+	<colgroup span="1">
+	<col width="200">
+	<col width="100">
+	</colgroup>
+		<tbody><tr>
+			<td> <strong>Subtask</strong>            </td>
+			<td> <strong>Puncte</strong> </td>
+			<td> <strong>Restricții suplimentare</strong>                               </td>
+		</tr>
+		<tr>
+			<td> <code>1</code>   </td>
+			<td> <code>7</code>      </td>
+			<td> \(N \leq 7, Q \leq 1 \ 000\)                                </td>
+		</tr>
+		<tr>
+			<td> <code>2</code>  </td>
+			<td> <code>12</code>      </td>
+			<td> \(N,Q \leq 5 \ 000\)                                    </td>
+		</tr>
+		<tr>
+			<td> <code>3</code>  </td>
+			<td> <code>5</code>     </td>
+			<td> \(\text{numerele din matrice} \leq 2\); pentru toate operațiile de tipul \(1\), \(x \le 2\) </td>
+		</tr>
+		<tr>
+			<td> <code>4</code>  </td>
+			<td> <code>28</code>     </td>
+			<td> Nu există operații de tipul \(1\)                       </td>
+		</tr>
+		<tr>
+			<td> <code>5</code>  </td>
+			<td> <code>23</code>     </td>
+			<td> \(N, Q \leq 60\ 000\)                            </td>
+		</tr>
+		<tr>
+			<td> <code>6</code>  </td>
+			<td> <code>16</code>     </td>
+			<td> \(N, Q \leq 80\ 000\)                        </td>
+		</tr>
+		<tr>
+			<td> <code>7</code> </td>
+			<td> <code>9</code>     </td>
+			<td> Nicio restricție suplimentară                           </td>
+		</tr>
+</tbody></table>
+
+<h1>Exemplul 1:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>1
+6 7
+10 6 9 5 1 6
+6 9 10 3 3 1
+2 1 6
+2 3 3
+1 2 4 6
+2 1 6
+1 2 5 4
+1 1 5 9
+2 4 6</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>3
+9
+5
+4</pre>
+
+<h3>Explicație</h3>
+
+<p>Pentru prima operație este optim să permutăm coloanele matricei în următorul mod:</p>
+
+<p>$$\begin{bmatrix}<br>
+\textbf{6} &amp; \textbf{9} &amp; \textbf{1} &amp; 5 &amp; 6 &amp; 10 \\<br>
+9 &amp; 10 &amp; \textbf{3} &amp; \textbf{3} &amp; \textbf{1} &amp; \textbf{6}<br>
+\end{bmatrix}$$</p>
+
+<p>Mediana minimă a unui drum din celula \((1,1)\) în celula \((2,6)\) este \(3\), obținută din drumul conținând celulele cu valorile \([6,9,1,3,3,1,6]\).</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>1
+8 9
+2 1 2 2 1 1 2 2
+1 2 1 2 2 1 2 1
+2 1 8
+1 1 2 2
+2 4 5
+2 5 5
+1 1 6 2
+2 4 7
+2 5 8
+1 2 3 2
+2 1 3</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>1
+2
+1
+2
+1
+2</pre>
+
+<h3>Explicație</h3>
+
+<p>Acest test se încadrează în subtask-ul \(3\).</p>
+
+<h1>Exemplul 3</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>1
+7 6
+5 1 4 9 10 3 3
+4 1 9 6 5 10 4
+2 1 7
+2 2 4
+2 5 6
+2 3 3
+2 4 6
+2 6 7</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>3
+1
+5
+4
+5
+3</pre>
+
+<h3>Explicație</h3>
+
+<p>Acest test se încadrează în subtask-ul \(4\).</p>
+
+<h1>Exemplul 4</h1>
+
+<pre>3
+6 7
+10 6 9 5 1 6
+6 9 10 3 3 1
+2 1 6
+2 3 3
+1 2 4 6
+2 1 6
+1 2 5 4
+1 1 5 9
+2 4 6
+8 9
+2 1 2 2 1 1 2 2
+1 2 1 2 2 1 2 1
+2 1 8
+1 1 2 2
+2 4 5
+2 5 5
+1 1 6 2
+2 4 7
+2 5 8
+1 2 3 2
+2 1 3
+7 6
+5 1 4 9 10 3 3
+4 1 9 6 5 10 4
+2 1 7
+2 2 4
+2 5 6
+2 3 3
+2 4 6
+2 6 7</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>3
+9
+5
+4
+1
+2
+1
+2
+1
+2
+3
+1
+5
+4
+5
+3</pre>		</article>
+		</body></html>

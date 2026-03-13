@@ -1,0 +1,100 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2963"><article id="enunt">
+			<p>Împăratul cel bătrân vrea să împartă sacii cu galbeni din vistieria palatului celor <code>K</code> feciori ai săi, numerotați de la <code>1</code> la <code>K</code> în ordinea vârstei. Feciorul cu numărul <code>1</code> este cel mai mare, iar mezinul are numărul <code>K</code>. În vistierie sunt <code>N</code> saci plini cu galbeni, așezați în linie, atât de grei încât nu li se poate schimba ordinea, iar pe fiecare sac este scris numărul de galbeni pe care îi conține. Împăratul îl cheamă pe unul dintre feciori și îi spune: “Fiule, a ta este averea primilor <code>x1</code> saci!”. Feciorul ia sacii și pleacă fericit. Apoi, împăratul cheamă alt fecior și îi spune: “Fiule, a ta este averea primilor <code>x2</code> saci dintre cei rămași!”. Și așa mai departe, până ajunge la ultimul fecior chemat, căruia îi dă toți sacii rămași.<br>
+El nu are o ordine anume în care își cheamă feciorii dar are grijă să cheme fiecare fecior exact o dată. Totodată, pentru a evita certurile între ei, este atent ca fiecare fecior să primească cel puțin un sac cu galbeni, dar să NU primească în total mai mulți galbeni ca un frate mai mare decât el. Cel mai mic dintre feciorii împăratului este și cel mai viteaz, așa că împăratul ar vrea să îi dea lui o sumă de bani cât mai mare, fără a-i supăra pe ceilalți feciori ai săi.</p>
+
+<h1>Cerința</h1>
+
+<p>Cum ar putea împărți împăratul sacii?</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>mostenire.in</code> conține pe prima linie numerele naturale <code>N</code>, <code>K</code>, separate de un spațiu, cu semnificația din enunț. Pe următoarele <code>N</code> linii se găsește câte un număr natural, reprezentând numărul de galbeni din fiecare sac, în ordinea în care aceștia urmează să fie distribuiți fiilor.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>mostenire.out</code> va conține pe prima linie suma de galbeni pe care o va primi fiul cel mic de la împărat. Pe următoarele <code>K</code> linii se vor afla câte două numere naturale ce reprezintă numărul de ordine al feciorului, respectiv numărul de saci <code>x</code><sub><code>i</code></sub> pe care îi primește acesta, în ordinea în care au fost chemați de împărat.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ K ≤ 100</code></li>
+	<li><code>K ≤ N ≤ 100 000</code></li>
+	<li><code>1 ≤ Numărul de galbeni din fiecare sac ≤ 100 000</code></li>
+	<li>Galbenii din oricare dintre saci nu pot fi împărțiți mai multor frați</li>
+	<li>Numărul total de galbeni aflați în vistierie este mai mic sau egal cu <code>1.000.000.000</code></li>
+	<li>Împăratul cel bătrân nu are doi feciori cu aceeași vârstă</li>
+	<li>Puteți afișa orice soluție în care mezinul primește numărul maxim posibil de galbeni</li>
+	<li>Pentru fiecare test, afișarea corectă a numărului maxim de galbeni primiți de mezin este notată cu <code>40%</code> din punctajul alocat testului</li>
+	<li>Pentru teste valorând <code>10</code> puncte <code>N = K</code>, <code>N ≤ 100</code></li>
+	<li>Pentru teste valorând <code>30</code> de puncte <code>2 ≤ K &lt; N ≤ 15</code></li>
+	<li>Pentru teste valorând <code>50</code> de puncte <code>2 ≤ K &lt; N ≤ 100</code></li>
+	<li>În concurs s-au acordat <code>10</code> puncte din oficiu. Aici se acodră pentru exemplele din enunț.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>mostenire.in</code></p>
+
+<pre>8 3
+1
+2
+3
+4
+5
+6
+7
+8</pre>
+
+<p><code>mostenire.out</code></p>
+
+<pre>10
+3 4
+2 2
+1 2</pre>
+
+<h3>Explicație</h3>
+
+<p>Fiul cel mic este chemat primul și ia primii <code>4</code> saci, primind astfel <code>1 + 2 + 3 + 4 = 10</code> galbeni.<br>
+Fiul cel mijlociu este chemat al doilea și ia următorii <code>2</code> saci, primind astfel <code>5 + 6 = 11</code> galbeni.<br>
+Fiul cel mare este chemat ultimul și ia restul de <code>2</code> saci, primind astfel <code>7 + 8 = 15</code> galbeni.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>mostenire.in</code></p>
+
+<pre>12 4
+10
+5
+23
+1
+20
+4
+10
+12
+6
+23
+18
+17</pre>
+
+<p><code>mostenire.out</code></p>
+
+<pre>35
+2 3
+4 4
+1 3
+3 2</pre>
+
+<h3>Explicație</h3>
+
+<p>Al doilea fiu în ordinea vârstei este chemat primul și ia primii <code>3</code> saci, primind astfel <code>10 + 5 + 23 = 38</code> de galbeni.<br>
+Fiul cel mic este chemat al doilea și ia următorii <code>4</code> saci, primind astfel <code>1 + 20 + 4 + 10 = 35</code> de galbeni.<br>
+Fiul cel mare este chemat al treilea și ia următorii <code>3</code> saci, primind astfel <code>12 + 6 + 23 = 41</code> de galbeni.<br>
+Al treilea fiu în ordinea vârstei este chemat ultimul și ia restul de <code>2</code> saci, primind astfel <code>18 + 17 = 35</code> de galbeni.<br>
+O altă soluție corectă este:</p>
+
+<pre>35
+2 3
+3 4
+1 3
+4 2</pre>		</article>
+		</body></html>

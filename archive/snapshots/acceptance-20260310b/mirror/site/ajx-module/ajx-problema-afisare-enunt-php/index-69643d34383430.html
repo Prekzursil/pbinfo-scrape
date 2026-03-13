@@ -1,0 +1,83 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4840"><article id="enunt">
+			<p><span class="caps">RAU</span>-Gigel și Praștie împodobeau bradul de Crăciun și s-au gândit că ar merge niște colinde. Căutând, au dat de cuvântul “carol”, care evident le-a amintit de orele de informatică. Cu asta și copacul din fața lor în minte, s-au gândit la următoarea problemă, pe care vă roagă să o rezolvați.</p>
+
+<h1>Cerința</h1>
+
+<p>Se dă un arbore cu <code>N</code> noduri înrădăcinat în <code>1</code> și un șir <code>A</code> de lungime <code>M</code> , cu <code>1≤A[i]≤N</code>. Definim nivelul unui nod ca fiind distanța față de rădăcină și strămoșul unui nod <code>x</code> ca fiind oricare nod <code>y</code> de pe drumul de la <code>x</code> la rădăcină. De asemenea, <code>lca(V)</code>, unde <code>V</code> este un șir, reprezintă nodul de nivel maxim care este strămoș pentru toate nodurile din șirul <code>V</code>. Să se calculeze sumă după <code>lca(V)</code>, unde <code>V</code> este fiecare subsecvență a șirului <code>A</code>. Mai formal, să se afle:</p>
+
+<p>\[<br>
+\sum_{st = 1}^{M} \sum_{dr = st}^{M} \operatorname{lca}(A[st], A[st+1], \ldots, A[dr])<br>
+\] </p>
+
+
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>allca.in</code> conține pe prima linie numărul <code>N</code> de noduri din arbore. Pe următoarele <code>N - 1</code> linii avem descrierea arborelui, câte o muchie pe fiecare linie. Pe linia <code>N + 1</code> se află <code>M</code>, iar pe linia <code>N + 2</code> șirul <code>A</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul <code>allca.out</code> va conține, pe prima linie, un singur număr întreg, suma căutată.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 200000</code></li>
+	<li><code>1 ≤ M ≤ 400000</code></li>
+	<li>Pentru teste în valoare de <code>10</code> de puncte,  pentru oricare <code>i&gt;1</code>, <code>A[i]</code> este strămoșul lui <code>A[i-1]</code></li>
+	<li>Pentru alte teste în valoare de <code>20</code> de puncte, arborele este un lanț</li>
+	<li>Pentru teste în valoare de <code>10</code> de puncte, <code>1 ≤ N, M ≤ 1000</code></li>
+	<li>Pentru teste în valoare de <code>10</code> de puncte, <code>1000 ≤ N, M ≤ 3000</code></li>
+	<li>Pentru teste în valoare de <code>25</code> de puncte, <code>3000 ≤ N, M ≤ 100000</code></li>
+	<li>Pentru restul testelor se păstrează restricțiile inițiale din enunț</li>
+	<li>În varianta publicată pe platforma <span class="caps">PBI</span>nfo, față de cea utilizată în concurs, a fost adăugat <code>Testul 12</code>, în valoare de <code>1</code> punct. Această modificare are scopul de a încuraja o abordare mai eficientă a problemei și nu a afectat evaluarea soluțiilor trimise în timpul concursului.</li>
+</ul>
+
+
+<h1>Exemplul 1:</h1>
+
+<p><code>allca.in</code></p>
+
+<pre>2
+1 2
+2
+2 1</pre>
+
+<p><code>allca.out</code></p>
+
+<pre>4</pre>
+
+<h3>Explicație</h3>
+
+<p><code>lca(2)+lca(1)+lca(2,1)=2+1+1=4</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>allca.in</code></p>
+
+<pre>5
+1 2
+2 3
+3 4
+4 5
+8
+4 1 2 4 2 4 2 2</pre>
+
+<p><code>allca.out</code></p>
+
+<pre>64</pre>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>allca.in</code></p>
+
+<pre>3	
+1 2
+1 3
+5
+1 3 2 2 1</pre>
+
+<p><code>allca.out</code></p>
+
+<pre>20</pre>		</article>
+		</body></html>

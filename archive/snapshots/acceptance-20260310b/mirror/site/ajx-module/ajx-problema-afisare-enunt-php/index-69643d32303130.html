@@ -1,0 +1,46 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2010"><article id="enunt">
+			<p>Dorel și-a achiziționat o fermă cu <code>n</code> plantații și o mașină de transport cu o capacitate <code>c</code>, pentru transportul de îngrășăminte la toate plantațiile. Îngrășămintele se află într-un depozit, în cantitate suficientă pentru scopul propus. Plantațiile și depozitul sunt dispuse sub forma unui cerc. Există drumuri doar între plantația <code>i</code> și plantația <code>i+1</code> (<code>1≤i≤n-1</code>), precum și între depozit și plantația <code>1</code> și depozit și plantația <code>n</code>, ca în figură. </p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1700-2010-fermier-png.png"></p>
+
+<p>La o plantație <code>i</code> se poate ajunge de la depozit trecând prin plantațiile <code>1</code>, <code>2</code>,…, <code>i-1</code> sau prin plantațiile <code>n</code>, <code>n-1</code>, …, <code>i+1</code>, alegerea făcându-se în funcție de traseul cel mai scurt. Se cunosc aceste distanțe, precum și cantitatea de îngrășăminte necesară pentru fiecare plantație. La fiecare încărcare, Dorel ia din depozit exact cantitatea <code>c</code>. Dorel vrea să-și organizeze bine munca la fermă și să consume cât mai puțină benzină prin alegerea celor mai scurte trasee de parcurs. Plantațiile trebuie să fie aprovizionate obligatoriu în ordinea următoare: mai întâi plantația <code>1</code>, apoi plantația <code>2</code>, plantația <code>3</code>,…, plantația <code>n</code>.  În plus, și-a propus să încarce o nouă cantitate de îngrășământ doar după ce a folosit toată cantitatea încărcată anterior. Transportarea îngrășămintelor pe plantații se face deci, începând cu plantația <code>1</code>. După ce se transportă toată cantitatea necesară pentru această plantație, se trece la plantația <code>2</code>, și tot așa în ordine la <code>3</code>, <code>4</code> etc. până se deservește ultima plantație. Dacă după ce s-au transportat îngrășămintele necesare pentru plantația <code>i</code> în mașină au mai rămas încă îngrășăminte, acestea trebuie utilizate în continuare pentru alte plantații, alese în ordinea impusă (începând cu plantația <code>i+1</code>, apoi <code>i+2</code> etc.), până se epuizează toată cantitatea transportată de mașină.  Astfel, dacă de la plantația <code>i</code> trebuie să ajungă la plantația <code>i+1</code>, va alege cel mai scurt traseu dintre traseul direct de la plantația <code>i</code> la <code>i+1</code> și traseul care trece prin plantațiile <code>i-1</code>, <code>i-2</code>, …, <code>1</code>, depozit, <code>n</code>, <code>n-1</code>, …, <code>i+1</code>. La final, mașina trebuie să se întoarcă la depozit, goală sau cu cantitatea rămasă după aprovizionarea cu îngrășăminte a plantației <code>n</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Ajutați-l pe Dorel să calculeze distanța parcursă pentru a transporta îngrășăminte la toate cele <code>n</code> plantații, conform cerințelor.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>fermier.in</code> conține pe prima linie numerele naturale <code>n</code> și <code>c</code>, separate printr-un spațiu. A doua linie conține numerele naturale <code>d[0]</code>, <code>d[1]</code>, <code>d[2]</code>, …, <code>d[n-1]</code>, <code>d[n]</code> separate două câte două prin câte un spaţiu, unde <code>d[0]</code> este distanța dintre prima plantație și depozit, <code>d[i]</code> (<code>1≤i≤n-1</code>) este distanța între plantația <code>i</code> și plantația <code>i+1</code>, iar <code>d[n]</code> este distanța dintre plantația <code>n</code> și depozit. Pe linia a treia se găsesc numerele naturale <code>q[1]</code>, <code>q[2]</code>,…, <code>q[n-1]</code>, <code>q[n]</code> separate  două câte două prin câte un spaţiu, <code>q[i]</code> reprezentând cantitatea de îngrășăminte necesară pentru plantația <code>i</code> (<code>1≤i≤n</code>).</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>fermier.out</code> va conține pe prima linie un număr natural conform cerinţei. </p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 100</code></li>
+	<li><code>1 ≤ n ≤ 2</code>, pentru teste în valoare de 20 de puncte;</li>
+	<li><code>1 ≤ d[i] ≤ 1000</code>, <code>1 ≤ i ≤ n</code>;</li>
+	<li><code>1 ≤ q[i] ≤ 1000</code>, <code>1 ≤ i ≤ n</code>;</li>
+	<li><code>1 ≤  c ≤ 1000</code>;</li>
+	<li>În concurs s-au acordat  10 puncte din oficiu. Pe site se acordă 10 puncte pentru exemplu.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>fermier.in</code></p>
+
+<pre>3 6
+1 10 2 3
+13 2 7</pre>
+
+<p><code>fermier.out</code></p>
+
+<pre>22</pre>
+
+<h3>Explicație</h3>
+
+<p>La plantația <code>1</code> trebuie transportată o cantitate egală cu <code>13</code>, valoarea maximă pe care o poate transporta mașina fiind de <code>6</code>. La plantația <code>1</code> se ajunge pe drumul cel mai scurt direct de la depozit. Astfel se va merge mai întâi cu cantitatea <code>6</code>, ne întoarcem la depozit, încărcam iar mașina, ducem <code>6</code>, ne întoarcem, încărcăm și lăsăm doar <code>1</code> (atât mai este necesar). Pentru aceasta, s-a parcurs distanța de <code>1+1+1+1+1=5</code>. În mașină a mai rămas acum o cantitate egală cu <code>5</code>. Trebuie să mergem acum la plantația <code>2</code> pe drumul cel mai scurt. Pe drumul direct distanța este <code>10</code>, iar pe drumul invers care trece iar prin depozit este <code>6</code> (<code>1+3+2</code>). Vom alege drumul cu distanța <code>6</code>. Lăsăm cantitatea <code>2</code> (atât e necesar plantației <code>2</code>), ne mai rămân <code>3</code> și pentru plantația <code>3</code>. De la plantația <code>2</code> se ajunge direct la plantația <code>3</code> pe o distanță egală cu <code>2</code> sau invers, trecând prin depozit pe o distanță de <code>14</code> (<code>10+1+3</code>). Alegem drumul cu distanța <code>2</code>. Lăsăm îngrășămintele rămase și mai mergem iar la depozit, încărcăm și lăsăm <code>4</code> la plantația <code>3</code>. Pentru aceasta mai parcurgem distanța <code>3+3</code>. La final mașina trebuie să se întoarcă la depozit, deci încă un drum cu distanța <code>3</code>. În total: <code>5+6+2+6+3=22</code>.</p>		</article>
+		</body></html>

@@ -1,0 +1,302 @@
+{
+  "id": 3771,
+  "slug": "pandemia",
+  "name": "Pandemia",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3771/pandemia",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 91,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=91"
+    },
+    {
+      "id": 115,
+      "name": "Diverse",
+      "slug": "diverse",
+      "href": "/?pagina=probleme-lista&tag=115"
+    }
+  ],
+  "tags": [
+    "Aritmetica modulara",
+    "Exponentiere rapida"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>In plină perioadă de pandemie, cercetătorii unui institut vor să facă o serie de experimente pe culturi de celule. S-a observat deja că celula cercetată are o creștere liniară dependentă de cele trei zile imediat anterioare: dacă acum două zile aveam <code>x</code> celule, ieri aveam <code>y</code> iar astăzi avem <code>z</code> celule, atunci mâine vom avea <code>x+ay+bz</code> celule. Dacă într-o zi, numărul de celule depășește o valoare <code>k</code>, cercetătorii reduc cultura la valoarea <code>modulo K</code>. </p><p>Dacă, pentru un <code>n</code> dat, se cunoaște numărul de celule din zilele <code>n</code>, <code>n-1</code>, <code>n-2</code> și se cunosc factorii de multiplicare <code>a</code> și <code>b</code>, care este numărul de celule care trebuie cultivate în primele <code>3</code> zile ale experimentului?</p>",
+      "text": "In plină perioadă de pandemie, cercetătorii unui institut vor să facă o serie de experimente pe culturi de celule. S-a observat deja că celula cercetată are o creștere liniară dependentă de cele trei zile imediat anterioare: dacă acum două zile aveam x celule, ieri aveam y iar astăzi avem z celule, atunci mâine vom avea x+ay+bz celule. Dacă într-o zi, numărul de celule depășește o valoare k, cercetătorii reduc cultura la valoarea modulo K. Dacă, pentru un n dat, se cunoaște numărul de celule din zilele n, n-1, n-2 și se cunosc factorii de multiplicare a și b, care este numărul de celule care trebuie cultivate în primele 3 zile ale experimentului?"
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>pandemia.in</code> conține mai multe seturi de date. Pe prima linie se va găsi un număr întreg <code>T</code> reprezentând numărul de experimente pentru care se cere răspunsul. Pe următoarele <code>T</code> linii se vor găsi experimentele: câte șase numere întregi separate prin spații, în ordinea următoare: <code>N A B U V W</code>, unde <code>N</code> este numărul de zile ale experimentului, <code>A</code> și <code>B</code> sunt factorii de multiplicare din enunț, iar <code>U</code>, <code>V</code>, respectiv <code>W</code> reprezintă numărul de bacterii din zilele <code>N</code>, <code>N-1</code> și, respectiv, <code>N-2</code>.</p>",
+      "text": "Fișierul de intrare pandemia.in conține mai multe seturi de date. Pe prima linie se va găsi un număr întreg T reprezentând numărul de experimente pentru care se cere răspunsul. Pe următoarele T linii se vor găsi experimentele: câte șase numere întregi separate prin spații, în ordinea următoare: N A B U V W, unde N este numărul de zile ale experimentului, A și B sunt factorii de multiplicare din enunț, iar U, V, respectiv W reprezintă numărul de bacterii din zilele N, N-1 și, respectiv, N-2."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>pandemia.out</code> va conține <code>T</code> linii cu răspunsurile, în ordine, la cele <code>T</code> experimente din fișierul de intrare, și anume trei numere naturale mai mici decât <code>K</code> separate prin câte un spațiu, reprezentând numărul de bacterii din ziua <code>0</code>, ziua <code>1</code> și, respectiv ziua <code>2</code> (în această ordine). </p>",
+      "text": "Fișierul de ieșire pandemia.out va conține T linii cu răspunsurile, în ordine, la cele T experimente din fișierul de intrare, și anume trei numere naturale mai mici decât K separate prin câte un spațiu, reprezentând numărul de bacterii din ziua 0, ziua 1 și, respectiv ziua 2 (în această ordine)."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ T ≤ 50</code>, <code>3 ≤ N ≤ 100.000</code>, unde <code>T</code>, <code>N</code> numere naturale</li>\n\t<li><code>1 ≤ A, B ≤ 100</code>, <code>1 ≤ U, V, W &lt; K</code>, unde <code>A, B, U, V, W</code> numere naturale</li>\n\t<li><code>K = 10.000.007</code></li>\n\t<li>prima zi se consideră ziua <code>0</code></li>\n</ul>",
+      "text": "1 ≤ T ≤ 50, 3 ≤ N ≤ 100.000, unde T, N numere naturale 1 ≤ A, B ≤ 100, 1 ≤ U, V, W < K, unde A, B, U, V, W numere naturale K = 10.000.007 prima zi se consideră ziua 0"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>pandemia.in</code></p><pre>2\n6 1 1 37 20 11\n5 1 2 58 23 9</pre><p><code>pandemia.out</code></p><pre>1 2 3\n1 2 3</pre><h3>Explicație</h3><ul>\n\t<li>ziua 0: 1 celulă</li>\n\t<li>ziua 1: 2 celule</li>\n\t<li>ziua 2: 3 celule</li>\n</ul><ul>\n\t<li>ziua 3: 1 + 1*2 + 1*3 = 6 celule</li>\n\t<li>ziua 4: 2 + 1*3 + 1*6 = 11  celule</li>\n\t<li>ziua 5: 3 + 1*6 + 1*11 = 20  celule</li>\n\t<li>ziua 6: 6 + 1*11 + 1*20 = 37  celule</li>\n</ul><ul>\n\t<li>ziua 0: 1 celulă</li>\n\t<li>ziua 1: 2 celule</li>\n\t<li>ziua 2: 3 celule</li>\n</ul><ul>\n\t<li>ziua 3: 1 + 1*2 + 2*3 = 9 celule</li>\n\t<li>ziua 4: 2 + 1*3 + 2*9 = 23  celule</li>\n\t<li>ziua 5: 3 + 1*9 + 2*23 = 58  celule</li>\n</ul>",
+      "text": "pandemia.in2 6 1 1 37 20 11 5 1 2 58 23 9pandemia.out1 2 3 1 2 3Explicație ziua 0: 1 celulă ziua 1: 2 celule ziua 2: 3 celule ziua 3: 1 + 1*2 + 1*3 = 6 celule ziua 4: 2 + 1*3 + 1*6 = 11 celule ziua 5: 3 + 1*6 + 1*11 = 20 celule ziua 6: 6 + 1*11 + 1*20 = 37 celule ziua 0: 1 celulă ziua 1: 2 celule ziua 2: 3 celule ziua 3: 1 + 1*2 + 2*3 = 9 celule ziua 4: 2 + 1*3 + 2*9 = 23 celule ziua 5: 3 + 1*9 + 2*23 = 58 celule"
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "ziua 0: 1 celulă ziua 1: 2 celule ziua 2: 3 celule"
+    }
+  ],
+  "constraints": [
+    "1 ≤ T ≤ 50, 3 ≤ N ≤ 100.000, unde T, N numere naturale",
+    "1 ≤ A, B ≤ 100, 1 ≤ U, V, W < K, unde A, B, U, V, W numere naturale",
+    "K = 10.000.007",
+    "prima zi se consideră ziua 0"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qf7d3f1d1c9.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Crisan Daniela Alexandra (URA)",
+    "clasa": "10",
+    "intrare/ieșire": "pandemia.in / pandemia.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "RAU-Coder 2021",
+    "autor": "Daniela Alexandra Crisan",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "author": "Daniela Alexandra Crisan",
+  "sourceAttribution": "RAU-Coder 2021",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3771/pandemia"
+}

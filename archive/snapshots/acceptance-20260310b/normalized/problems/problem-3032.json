@@ -1,0 +1,302 @@
+{
+  "id": 3032,
+  "slug": "sufle",
+  "name": "sufle",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3032/sufle",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 25,
+      "name": "Metoda Greedy",
+      "slug": "metoda-greedy",
+      "href": "/?pagina=probleme-lista&tag=25"
+    },
+    {
+      "id": 24,
+      "name": "Probleme diverse cu metoda Greedy",
+      "slug": "probleme-diverse-cu-metoda-greedy",
+      "href": "/?pagina=probleme-lista&tag=24"
+    }
+  ],
+  "tags": [
+    "Greedy"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Pentru un șir cunoscut și pentru mai multe subsecvențe date să se calculeze suma minimă a pătratelor numerelor din subsecvență după aplicare a operației descrise, de oricâte ori se consideră necesar și asupra oricăror numere din subsecvență. </p>",
+      "text": "Pentru un șir cunoscut și pentru mai multe subsecvențe date să se calculeze suma minimă a pătratelor numerelor din subsecvență după aplicare a operației descrise, de oricâte ori se consideră necesar și asupra oricăror numere din subsecvență."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul <code>sufle.in</code> conține pe prima linie numerele natural <code>N</code> și <code>Q</code>, reprezentând numărul de termeni din șir respective numărul de interogări. A doua linie conține <code>N</code> numere naturale, termenii șirului. Pe următoarele <code>Q</code> linii sunt descries interogările. Fiecare dintre aceste linii va conține câte două numere natural <code>L</code> și <code>R</code> capetele subsecvenței corespunzătoare unei interogări.</p>",
+      "text": "Fișierul sufle.in conține pe prima linie numerele natural N și Q, reprezentând numărul de termeni din șir respective numărul de interogări. A doua linie conține N numere naturale, termenii șirului. Pe următoarele Q linii sunt descries interogările. Fiecare dintre aceste linii va conține câte două numere natural L și R capetele subsecvenței corespunzătoare unei interogări."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fişierul <code>sufle.out</code> va conţine <code>Q</code> linii. Pe fiecare dintre aceste linii se va afişa câte un număr, reprezentând răspunsul la interogarea corespunzătoare din fişierul de intrare.</p>",
+      "text": "Fişierul sufle.out va conţine Q linii. Pe fiecare dintre aceste linii se va afişa câte un număr, reprezentând răspunsul la interogarea corespunzătoare din fişierul de intrare."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 100 000</code></li>\n\t<li><code>1 ≤ Q ≤ 100.000</code></li>\n\t<li><code>1 ≤ L ≤ R ≤ N</code></li>\n\t<li>Pentru toate interogările se va considera că operaţiile se vor aplica pe şirul iniţial, fără a ţine cont de modificările rezultate din alte interogări precedente.</li>\n\t<li>Toţi termenii din şir sunt numere naturale mai mici sau egale cu <code>1.000.000</code>.</li>\n</ul>",
+      "text": "1 ≤ N ≤ 100 000 1 ≤ Q ≤ 100.000 1 ≤ L ≤ R ≤ N Pentru toate interogările se va considera că operaţiile se vor aplica pe şirul iniţial, fără a ţine cont de modificările rezultate din alte interogări precedente. Toţi termenii din şir sunt numere naturale mai mici sau egale cu 1.000.000."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>sufle.in</code></p><pre>6 2\n8 10 5 6 0 5\n2 5\n1 1</pre><p><code>sufle.out</code></p><pre>125\n64</pre><h3>Explicație</h3><p>Se solicită răspunsul pentru două interogări:</p><p>Pentru prima interogare numerele din subsecvenţă sunt <b>10, 5, 6</b> şi <b>0</b> care au reprezentările binare <code>1010, 101, 110, 0</code>.</p><p>Vom numerota poziţiile începând cu 1 care corespunde ultimei cifre crescător spre cea mai semnificativă cifră. </p><p>Aplic operaţia pentru al doilea şi al patrulea număr pentru poziţia <b>1</b>. Obţin numerele <code>1010,100,110,1</code>.</p><p>Aplic operaţia pentru primul şi ultimul număr la poziţia <b>2</b>. Obţin numerele <code>1000, 100, 110, 11</code>.</p><p>Numerele în baza zece sunt <b>8, 4, 6, 3</b>. Suma pătratelor <code>125</code> este minimă. Nu se poate obţine o sumă mai mică. </p><p>La a doua interogare secvenţa conţine doar numărul 8 deci nu se poate aplica niciodată operaţia. Suma pătratelor se reduce la un singur număr, pătratul lui 8 care este <code>64</code>.</p>",
+      "text": "sufle.in6 2 8 10 5 6 0 5 2 5 1 1sufle.out125 64ExplicațieSe solicită răspunsul pentru două interogări:Pentru prima interogare numerele din subsecvenţă sunt 10, 5, 6 şi 0 care au reprezentările binare 1010, 101, 110, 0.Vom numerota poziţiile începând cu 1 care corespunde ultimei cifre crescător spre cea mai semnificativă cifră. Aplic operaţia pentru al doilea şi al patrulea număr pentru poziţia 1. Obţin numerele 1010,100,110,1.Aplic operaţia pentru primul şi ultimul număr la poziţia 2. Obţin numerele 1000, 100, 110, 11.Numerele în baza zece sunt 8, 4, 6, 3. Suma pătratelor 125 este minimă. Nu se poate obţine o sumă mai mică. La a doua interogare secvenţa conţine doar numărul 8 deci nu se poate aplica niciodată operaţia. Suma pătratelor se reduce la un singur număr, pătratul lui 8 care este 64."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Se solicită răspunsul pentru două interogări:"
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 100 000",
+    "1 ≤ Q ≤ 100.000",
+    "1 ≤ L ≤ R ≤ N",
+    "Pentru toate interogările se va considera că operaţiile se vor aplica pe şirul iniţial, fără a ţine cont de modificările rezultate din alte interogări precedente.",
+    "Toţi termenii din şir sunt numere naturale mai mici sau egale cu 1.000.000."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q3d9be0a011.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Costache Radu - Mihai (radu_msk)",
+    "clasa": "11",
+    "intrare/ieșire": "sufle.in / sufle.out",
+    "limită timp": "2 secunde",
+    "limită memorie": "256 MB / 256 MB",
+    "sursa problemei": "Baraj ONI 2017",
+    "autor": "Adrian Panaete, Radu Vișan",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 2,
+  "memoryLimitMb": 256,
+  "author": "Adrian Panaete, Radu Vișan",
+  "sourceAttribution": "Baraj ONI 2017",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3032/sufle"
+}

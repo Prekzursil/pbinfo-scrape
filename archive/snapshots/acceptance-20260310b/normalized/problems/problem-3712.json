@@ -1,0 +1,302 @@
+{
+  "id": 3712,
+  "slug": "median-query",
+  "name": "median_query",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3712/median-query",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 65,
+      "name": "Structuri de date arborescente",
+      "slug": "structuri-de-date-arborescente",
+      "href": "/?pagina=probleme-lista&tag=65"
+    },
+    {
+      "id": 148,
+      "name": "Structuri de date",
+      "slug": "structuri-de-date",
+      "href": "/?pagina=probleme-lista&tag=148"
+    }
+  ],
+  "tags": [
+    "Șmenul lui Batog (Square Root Decomposition)",
+    "Arbori indexați binar",
+    "Cautare binara"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Se dau un șir de <code>N</code> numere naturale nenule indexat de la <code>1</code> și <code>Q</code> query-uri de forma <code>l r</code>. Să se afișeze pentru fiecare query <code>l r</code> medianul secvenței <code>l r</code> din șir.</p>",
+      "text": "Se dau un șir de N numere naturale nenule indexat de la 1 și Q query-uri de forma l r. Să se afișeze pentru fiecare query l r medianul secvenței l r din șir."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>median_query.in</code> conține pe prima linie numerele <code>N</code> și <code>Q</code>, iar pe a doua linie <code>N</code> numere naturale nenule separate prin spații. Pe următoarele <code>Q</code> linii se va afla câte o pereche de numere <code>l r</code> reprezentând query-urile.</p>",
+      "text": "Fișierul de intrare median_query.in conține pe prima linie numerele N și Q, iar pe a doua linie N numere naturale nenule separate prin spații. Pe următoarele Q linii se va afla câte o pereche de numere l r reprezentând query-urile."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>median_query.out</code> va conține răspunsurile la cele <code>Q</code> query-uri, câte unul pe fiecare linie.</p>",
+      "text": "Fișierul de ieșire median_query.out va conține răspunsurile la cele Q query-uri, câte unul pe fiecare linie."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N, Q ≤ 100.000</code></li>\n\t<li>numerele de pe a doua linie a fișierului de intrare vor fi mai mici decât <code>1.000.000.000</code></li>\n\t<li><code>1 ≤ l ≤ r ≤ N</code></li>\n\t<li>medianul unei secvențe <code>l r</code> este valoarea care s-ar afla pe poziția <code>[(r - l + 2) / 2]</code> în secvența <code>l r</code> dacă aceasta ar fi sortată crescător, unde <code>[x]</code> = partea întreagă a numărului <code>x</code>.</li>\n</ul>",
+      "text": "1 ≤ N, Q ≤ 100.000 numerele de pe a doua linie a fișierului de intrare vor fi mai mici decât 1.000.000.000 1 ≤ l ≤ r ≤ N medianul unei secvențe l r este valoarea care s-ar afla pe poziția [(r - l + 2) / 2] în secvența l r dacă aceasta ar fi sortată crescător, unde [x] = partea întreagă a numărului x."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>median_query.in</code></p><pre>7 4\n1 3 2 5 10 2 3\n1 3\n4 6\n1 7\n2 5</pre><p><code>median_query.out</code></p><pre>2\n5\n3\n3</pre><h3>Explicație</h3><p>Secvența <code>1 3</code> sortată crescător este: <code>1 2 3</code>. Medianul acesteia este <code>2</code>.</p><p>Secvența <code>4 6</code> sortată crescător este: <code>2 5 10</code>. Medianul acesteia este <code>5</code>.</p><p>Secvența <code>1 7</code> sortată crescător este: <code>1 2 2 3 3 5 10</code>. Medianul acesteia este <code>3</code>.</p><p>Secvența <code>2 5</code> sortată crescător este: <code>2 3 5 10</code>. Medianul acesteia este <code>3</code>.</p>",
+      "text": "median_query.in7 4 1 3 2 5 10 2 3 1 3 4 6 1 7 2 5median_query.out2 5 3 3ExplicațieSecvența 1 3 sortată crescător este: 1 2 3. Medianul acesteia este 2.Secvența 4 6 sortată crescător este: 2 5 10. Medianul acesteia este 5.Secvența 1 7 sortată crescător este: 1 2 2 3 3 5 10. Medianul acesteia este 3.Secvența 2 5 sortată crescător este: 2 3 5 10. Medianul acesteia este 3."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Secvența 1 3 sortată crescător este: 1 2 3. Medianul acesteia este 2."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N, Q ≤ 100.000",
+    "numerele de pe a doua linie a fișierului de intrare vor fi mai mici decât 1.000.000.000",
+    "1 ≤ l ≤ r ≤ N",
+    "medianul unei secvențe l r este valoarea care s-ar afla pe poziția [(r - l + 2) / 2] în secvența l r dacă aceasta ar fi sortată crescător, unde [x] = partea întreagă a numărului x."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q2350c8a560.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Lorintz Alexandru (Alex_tz307)",
+    "clasa": "11",
+    "intrare/ieșire": "median_query.in / median_query.out",
+    "limită timp": "1 secunde",
+    "limită memorie": "7 MB / 1 MB",
+    "sursa problemei": "-",
+    "autor": "Alexandru Lorintz",
+    "dificultate": "dificilă"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 1,
+  "memoryLimitMb": 7,
+  "author": "Alexandru Lorintz",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3712/median-query"
+}

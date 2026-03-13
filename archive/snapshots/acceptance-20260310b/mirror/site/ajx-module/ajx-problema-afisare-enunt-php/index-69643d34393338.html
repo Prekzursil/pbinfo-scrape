@@ -1,0 +1,64 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4938"><article id="enunt">
+			<p><strong>Polygon</strong> este un joc pentru un singur jucător care începe pe un poligon cu <code>N</code> vârfuri, precum cel din Figura 1, unde <code>N = 4</code>. Fiecare vârf este etichetat cu un număr întreg, iar fiecare muchie este etichetată fie cu simbolul <code>+</code> (adunare), fie cu simbolul <code>*</code> (produs). Muchiile sunt numerotate de la <code>1</code> la <code>N</code>.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-polygon-01-jpg.jpg"></p>
+
+<p>La prima mutare, una dintre muchii este eliminată. Mutările ulterioare implică următorii pași:</p>
+
+<ul>
+	<li>alegerea unei muchii <code>E</code> și a celor două extremități <code>V1</code> și <code>V2</code> care sunt legate prin <code>E</code></li>
+	<li>înlocuirea lor cu un vârf nou, etichetat cu rezultatul efectuării operației indicate în <code>E</code> pe etichetele lui <code>V1</code> și <code>V2</code>.</li>
+</ul>
+
+<p>Jocul se termină când nu mai există muchii, iar scorul său este eticheta vârfului unic rămas.</p>
+
+<p>Exemplu de joc: Luați în considerare poligonul din Figura 1. Jucătorul a început prin a îndepărta muchia 3. Efectele sunt prezentate în Figura 2.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-polygon-02-jpg.jpg"></p>
+
+<p>Apoi să presupunem că alegem muchia etichetată cu <code>1</code>. Obținem </p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-polygon-03-jpg.jpg"></p>
+
+<p>Apoi muchia <code>4</code> și rămâne:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-polygon-04-jpg.jpg"></p>
+
+<p>În final, eliminăm muchia <code>2</code> și rămâne un singur nod de etichetă <code>0</code>. Deci scorul este <code>0</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Scrieți un program care, dat fiind un poligon, calculează cel mai mare scor posibil și listează toate muchiile care, dacă sunt eliminate din prima mutare, pot conduce la un joc cu scorul maxim.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>polygon.in</code> descrie un poligon cu <code>N</code> vârfuri și <code>N</code> muchii. În fișier sunt două linii. Pe prima linie este <code>N</code>. A doua linie conține etichetele muchiilor <code>1</code>, <code>2</code>, …, <code>N</code>, intercalate cu etichetele vârfurilor (mai întâi cea a vârfului dintre muchiile <code>1</code> și <code>2</code>, apoi cea a vârfului dintre muchiile <code>2</code> și <code>3</code> și așa mai departe, până la cea a vârfului dintre muchiile <code>N</code> și <code>1</code>), toate separate de un spațiu. O etichetă de muchie este fie litera <code>t</code> (reprezentând adunarea), fie litera <code>x</code> (reprezentând produsul).</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Pe prima linie a fișierului <code>polygon.out</code> programul trebuie să scrie cel mai mare scor care se poate obține pentru poligonul de intrare. Pe a doua linie trebuie să scrie lista tuturor muchiilor care, dacă sunt eliminate la prima mutare, pot duce la un joc cu acel<br>
+scor. Muchiile trebuie scrise în ordine crescătoare, separate câte un spațiu.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>3 ≤ n ≤ 50</code></li>
+	<li>Pentru orice secvență de mutări, valorile etichetelor sunt întregi din intervalul <code>[-32768, 32767]</code>.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>polygon.in</code></p>
+
+<pre>4
+t -7 t 4 x 2 x 5</pre>
+
+<p><code>polygon.out</code></p>
+
+<pre>33
+1 2</pre>
+
+<h3>Explicație</h3>
+
+<p>Datele din fișierul de intrare corespund cu imaginea din prima figură. A doua linie din intrare începe cu eticheta de pe muchia <code>1</code>.</p>		</article>
+		</body></html>

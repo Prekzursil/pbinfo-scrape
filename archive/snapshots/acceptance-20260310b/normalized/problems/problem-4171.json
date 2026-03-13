@@ -1,0 +1,329 @@
+{
+  "id": 4171,
+  "slug": "loopover",
+  "name": "LoopOver",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4171/loopover",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 46,
+      "name": "Tablouri bidimensionale (matrice)",
+      "slug": "tablouri-bidimensionale-matrice",
+      "href": "/?pagina=probleme-lista&tag=46"
+    },
+    {
+      "id": 47,
+      "name": "Parcurgerea matricelor oarecare",
+      "slug": "parcurgerea-matricelor-oarecare",
+      "href": "/?pagina=probleme-lista&tag=47"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Cum Baxibilian nu are timp să analizeze prea mult jocul Loopover, deoarece are de învățat, el dorește să știe următoarele lucruri:</p><ul>\n\t<li>Fiind dată starea unei tabele asupra căreia s-au făcut fie doar operații asupra liniilor, fie doar operații asupra coloanelor, care este numărul minim de operații pe care Baxibilian ar trebui să le aplice pentru a reveni în starea inițială?</li>\n\t<li>Fiind dată o secvență de <code>m</code> operații, care este numărul minim de aplicări ale acestei secvențe asupra unei tabele de dimensiune <code>n x n</code> aflate în starea inițială astfel încât starea finală să fie aceeași ca starea inițială? Întrucât rezultatul poate fi un număr foarte mare, Baxibilian este mulțumit dacă află doar restul împărțirii acestui număr la <code>1.000.000.007</code>.</li>\n</ul>",
+      "text": "Cum Baxibilian nu are timp să analizeze prea mult jocul Loopover, deoarece are de învățat, el dorește să știe următoarele lucruri: Fiind dată starea unei tabele asupra căreia s-au făcut fie doar operații asupra liniilor, fie doar operații asupra coloanelor, care este numărul minim de operații pe care Baxibilian ar trebui să le aplice pentru a reveni în starea inițială? Fiind dată o secvență de m operații, care este numărul minim de aplicări ale acestei secvențe asupra unei tabele de dimensiune n x n aflate în starea inițială astfel încât starea finală să fie aceeași ca starea inițială? Întrucât rezultatul poate fi un număr foarte mare, Baxibilian este mulțumit dacă află doar restul împărțirii acestui număr la 1.000.000.007."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>De pe prima linie a fișierului <code>loopover.in</code> se vor afla două numere separate printr-un spațiu <code>t</code>  cerința care trebuie rezolvată și <code>n</code> dimensiunea tabelei. În continuare:</p><ul>\n\t<li>Dacă <code>t = 1</code>, pe următoarele <code>n</code> linii se vor afla, câte <code>n</code> numere separate prin câte un spațiu, reprezentând configurația tabelei.</li>\n\t<li>Dacă <code>t = 2</code>, pe ce-a de-a doua linie se va afla un singur număr <code>m</code>, iar pe următoarele <code>m</code> linii se vor afla, separate prin câte un spațiu, un caracter <code>c</code><sub><code>i</code></sub> <code>∈ {L,R,U,D}</code> reprezentând tipul operației și un număr <code>x</code><sub><code>i</code></sub> reprezentând indexul liniei sau coloanei asupra căreia se aplică operația <code>i</code>.</li>\n</ul>",
+      "text": "De pe prima linie a fișierului loopover.in se vor afla două numere separate printr-un spațiu t cerința care trebuie rezolvată și n dimensiunea tabelei. În continuare: Dacă t = 1, pe următoarele n linii se vor afla, câte n numere separate prin câte un spațiu, reprezentând configurația tabelei. Dacă t = 2, pe ce-a de-a doua linie se va afla un singur număr m, iar pe următoarele m linii se vor afla, separate prin câte un spațiu, un caracter ci ∈ {L,R,U,D} reprezentând tipul operației și un număr xi reprezentând indexul liniei sau coloanei asupra căreia se aplică operația i."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>În fișierul <code>loopover.out</code> se va afișa în funcție de cerință:</p><ul>\n\t<li>dacă <code>t = 1</code>, un singur număr reprezentând numărul minim de operații pentru a aduce tabela în starea inițială.</li>\n\t<li>dacă <code>t = 2</code>, un singur număr reprezentând restul împărțirii la <code>1.000.000.007</code> al numărului minim de aplicări ale secvenței de operații asupra tabelei pentru ca aceasta să ajungă înapoi în starea inițială.</li>\n</ul>",
+      "text": "În fișierul loopover.out se va afișa în funcție de cerință: dacă t = 1, un singur număr reprezentând numărul minim de operații pentru a aduce tabela în starea inițială. dacă t = 2, un singur număr reprezentând restul împărțirii la 1.000.000.007 al numărului minim de aplicări ale secvenței de operații asupra tabelei pentru ca aceasta să ajungă înapoi în starea inițială."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2 ≤ n ≤ 1000</code></li>\n\t<li><code>1 ≤ m ≤ 1000</code></li>\n\t<li><code>t ∈ {1, 2}</code></li>\n\t<li><code>1 ≤ x</code><sub><code>i</code></sub> <code>≤ n</code> pentru orice <code>1 ≤ i ≤ m</code></li>\n</ul>",
+      "text": "2 ≤ n ≤ 1000 1 ≤ m ≤ 1000 t ∈ {1, 2} 1 ≤ xi ≤ n pentru orice 1 ≤ i ≤ m"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>loopover.in</code></p><pre>1 4\n2 3 4 1\n8 5 6 7\n11 12 9 10\n13 14 15 16</pre><p><code>loopover.out</code></p><pre>4</pre><h3>Explicație</h3><p>Operațiile ce trebuie aplicate sunt:<br>\n<code>R 1</code><br>\n<code>L 2</code><br>\n<code>L 3</code><br>\n<code>L 3</code></p>",
+      "text": "loopover.in1 4 2 3 4 1 8 5 6 7 11 12 9 10 13 14 15 16loopover.out4ExplicațieOperațiile ce trebuie aplicate sunt: R 1 L 2 L 3 L 3"
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>loopover.in</code></p><pre>1 3\n7 8 6\n1 2 9\n4 5 3</pre><p><code>loopover.out</code></p><pre>3</pre><h3>Explicație</h3><p>Operațiile ce trebuie aplicate sunt:<br>\n<code>U 1</code><br>\n<code>U 2</code><br>\n<code>D 3</code></p>",
+      "text": "loopover.in1 3 7 8 6 1 2 9 4 5 3loopover.out3ExplicațieOperațiile ce trebuie aplicate sunt: U 1 U 2 D 3"
+    },
+    {
+      "title": "Exemplul 3:",
+      "html": "<p><code>loopover.in</code></p><pre>2 3\n5\nU 1\nR 1\nU 2\nR 1\nL 2</pre><p><code>loopover.out</code></p><pre>6</pre><h3>Explicație</h3><p>După aplicarea secvenței de <code>5</code> operații, matricea obținută de Baxibilian este:<br>\n<code>2 3 5</code><br>\n<code>8 6 7</code><br>\n<code>1 4 9</code><br>\nNumărul minim de aplicări ale secvenței pentru a ajunge la matricea identitate este <code>6</code>.</p>",
+      "text": "loopover.in2 3 5 U 1 R 1 U 2 R 1 L 2loopover.out6ExplicațieDupă aplicarea secvenței de 5 operații, matricea obținută de Baxibilian este: 2 3 5 8 6 7 1 4 9 Numărul minim de aplicări ale secvenței pentru a ajunge la matricea identitate este 6."
+    },
+    {
+      "title": "Exemplul 4:",
+      "html": "<p><code>loopover.in</code></p><pre>2 8\n10\nR 6\nL 8\nR 4\nU 3\nL 3\nL 1\nR 3\nU 5\nU 6\nU 3</pre><p><code>loopover.out</code></p><pre>4284</pre><h3>Explicație</h3><p>Sunt necesare <code>4284</code> de aplicări ale secvenței pentru a reveni în starea inițială.</p>",
+      "text": "loopover.in2 8 10 R 6 L 8 R 4 U 3 L 3 L 1 R 3 U 5 U 6 U 3loopover.out4284ExplicațieSunt necesare 4284 de aplicări ale secvenței pentru a reveni în starea inițială."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Operațiile ce trebuie aplicate sunt: R 1 L 2 L 3 L 3"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Operațiile ce trebuie aplicate sunt: U 1 U 2 D 3"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "După aplicarea secvenței de 5 operații, matricea obținută de Baxibilian este: 2 3 5 8 6 7 1 4 9 Numărul minim de aplicări ale secvenței pentru a ajunge la matricea identitate este 6."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Sunt necesare 4284 de aplicări ale secvenței pentru a reveni în starea inițială."
+    }
+  ],
+  "constraints": [
+    "2 ≤ n ≤ 1000",
+    "1 ≤ m ≤ 1000",
+    "t ∈ {1, 2}",
+    "1 ≤ xi ≤ n pentru orice 1 ≤ i ≤ m"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q2c5e8fb552.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "loopover.in / loopover.out",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "128 MB / 64 MB",
+    "sursa problemei": "Lot juniori, Cluj-Napoca 2022",
+    "autor": "Theodor-Gabriel Tulba-Lecu, Ioan Cristian Pop",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 128,
+  "author": "Theodor-Gabriel Tulba-Lecu, Ioan Cristian Pop",
+  "sourceAttribution": "Lot juniori, Cluj-Napoca 2022",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4171/loopover"
+}

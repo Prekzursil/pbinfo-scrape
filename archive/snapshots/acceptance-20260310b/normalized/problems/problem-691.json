@@ -1,0 +1,309 @@
+{
+  "id": 691,
+  "slug": "drumuri1",
+  "name": "Drumuri1",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/691/drumuri1",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 53,
+      "name": "Programare dinamică",
+      "slug": "programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=53"
+    },
+    {
+      "id": 54,
+      "name": "Probleme diverse de programare dinamică",
+      "slug": "probleme-diverse-de-programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=54"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Cunoscând dimensiunea tablei <code>N</code>, numărul total de jetoane <code>m</code> şi două numere naturale <code>L</code> şi <code>K</code>, să se determine un număr <code>d</code>, reprezentând numărul de drumuri distincte modulo <code>31607</code> de lungime <code>L</code> care pornesc din celula <code>(1, 1)</code> şi care conţin fiecare câte <code>K</code> jetoane.</p>",
+      "text": "Cunoscând dimensiunea tablei N, numărul total de jetoane m şi două numere naturale L şi K, să se determine un număr d, reprezentând numărul de drumuri distincte modulo 31607 de lungime L care pornesc din celula (1, 1) şi care conţin fiecare câte K jetoane."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fişierul de intrare <code>drumuri1.in</code> conţine pe prima linie patru numere naturale <code>N m K L</code> separate prin câte un spaţiu, cu semnificația descrisă anterior.</p><p>Pe fiecare dintre următoarele <code>m</code> linii, se găsesc câte două numere naturale <code>x y</code> separate printr-un spaţiu, reprezentând linia şi coloana pe care se găseşte un jeton. </p>",
+      "text": "Fişierul de intrare drumuri1.in conţine pe prima linie patru numere naturale N m K L separate prin câte un spaţiu, cu semnificația descrisă anterior.Pe fiecare dintre următoarele m linii, se găsesc câte două numere naturale x y separate printr-un spaţiu, reprezentând linia şi coloana pe care se găseşte un jeton."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Pe prima linie a fişierului <code>drumuri.out</code> se va scrie un singur număr natural <code>D</code> reprezentând numărul de drumuri modulo <code>31607</code> care pornesc din celula <code>(1, 1)</code>,  au lungimea <code>L</code> şi trec prin <code>K</code> celule care conțin jetoane.</p>",
+      "text": "Pe prima linie a fişierului drumuri.out se va scrie un singur număr natural D reprezentând numărul de drumuri modulo 31607 care pornesc din celula (1, 1), au lungimea L şi trec prin K celule care conțin jetoane."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ K ≤ N ≤ 250</code></li>\n\t<li><code>1 ≤ m ≤ 10 000</code></li>\n\t<li><code>1 ≤ L &lt; 500</code></li>\n\t<li>Două drumuri se consideră distincte dacă diferă prin cel puţin o celulă.</li>\n\t<li>Într-o celulă se găsește cel mult un jeton.</li>\n</ul>",
+      "text": "1 ≤ K ≤ N ≤ 250 1 ≤ m ≤ 10 000 1 ≤ L < 500 Două drumuri se consideră distincte dacă diferă prin cel puţin o celulă. Într-o celulă se găsește cel mult un jeton."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>drumuri1.in</code></p><pre>3 4 3 4\n1 1\n1 3\n2 2 \n2 3</pre><p><code>drumuri1.out</code></p><pre>3</pre>",
+      "text": "drumuri1.in3 4 3 4 1 1 1 3 2 2 2 3drumuri1.out3"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p>Sunt <code>3</code> drumuri de lungime <code>4</code> care conțin <code>3</code> jetoane:<br>\n<code>(1, 1), (1, 2), (1, 3), (2, 3)</code><br>\n<code>(1, 1), (1, 2), (2, 2), (2, 3)</code><br>\n<code>(1, 1), (2, 1), (2, 2), (2, 3)</code></p>",
+      "text": "Sunt 3 drumuri de lungime 4 care conțin 3 jetoane: (1, 1), (1, 2), (1, 3), (2, 3) (1, 1), (1, 2), (2, 2), (2, 3) (1, 1), (2, 1), (2, 2), (2, 3)"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>drumuri1.in</code></p><pre>4 5 2 4\n1 2\n2 1\n1 3\n3 2\n4 3</pre><p><code>drumuri1.out</code></p><pre>5</pre>",
+      "text": "drumuri1.in4 5 2 4 1 2 2 1 1 3 3 2 4 3drumuri1.out5"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p>Sunt <code>5</code> drumuri de lungime <code>4</code> care conțin <code>2</code> jetoane:<br>\n<code>(1, 1), (1, 2), (1, 3), (1, 4)</code><br>\n<code>(1, 1), (1, 2), (1, 3), (2, 3)</code><br>\n<code>(1, 1), (1, 2), (2, 2), (3, 2)</code><br>\n<code>(1, 1), (2, 1), (2, 2), (3, 2)</code><br>\n<code>(1, 1), (2, 1), (3, 1), (3, 2)</code></p>",
+      "text": "Sunt 5 drumuri de lungime 4 care conțin 2 jetoane: (1, 1), (1, 2), (1, 3), (1, 4) (1, 1), (1, 2), (1, 3), (2, 3) (1, 1), (1, 2), (2, 2), (3, 2) (1, 1), (2, 1), (2, 2), (3, 2) (1, 1), (2, 1), (3, 1), (3, 2)"
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "1 ≤ K ≤ N ≤ 250",
+    "1 ≤ m ≤ 10 000",
+    "1 ≤ L < 500",
+    "Două drumuri se consideră distincte dacă diferă prin cel puţin o celulă.",
+    "Într-o celulă se găsește cel mult un jeton."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q4c463fc7b5.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "11",
+    "intrare/ieșire": "drumuri1.in / drumuri1.out",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "128 MB / 128 MB",
+    "sursa problemei": "Lot Juniori, Sovata, 2014",
+    "autor": "Constantin Galatan",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 128,
+  "author": "Constantin Galatan",
+  "sourceAttribution": "Lot Juniori, Sovata, 2014",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/691/drumuri1"
+}

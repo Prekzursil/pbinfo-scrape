@@ -1,0 +1,102 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1492"><article id="enunt">
+			<p>_”Se scutură din salcâmi o ploaie de miresme. <br>
+Bunicul stă pe prispă. Se gândește. La ce se gândește? La nimic. Înnumără florile care cad. Se uită-n fundul grădinii. Se scarpină-n cap. Iar înnumără florile scuturate de adiere. Pletele lui albe și crețe parcă sunt niște ciorchini de flori albe; sprâncenele, mustățile, barba… peste toate au nins anii mulți și grei.<br>
+Numai ochii bunicului au rămas ca odinioară: blânzi și mângâietori. Cine trânti poarta?<br>
+– O, voinicii moșului!… <br>
+Un băietan ș-o fetiță, roșii și bucălai, sărutară mânele lui „tata-moșu”. Bătrânul coprinse într-o mână pe fată și în cealaltă pe băiat.<br>
+– La ce te gândești bunicule?” (Barbu Ștefănescu Delavrancea – <strong>”Bunicul”</strong>)_</p>
+
+<p>Numărând florile, mă gândeam la execuția unui program care calculează formula fericirii. Am o problemă cu alocarea memoriei. În unele cazuri programul poate rula, iar în altele nu. Programul funcționează corect dacă se alocă memorie în primul spațiu liber din zona de date, în ordinea în care variabilele sunt declarate. De asemenea, adresa de memorie a unei variabile succede adresa de memorie a oricărei variabile declarate înaintea ei. </p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1200-1492-bunicul-png.png"></p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând dimensiunea memoriei <code>M</code>, numărul de zone ocupate <code>N</code>, numărul <code>R</code> de variabile declarate, cele <code>N</code> intervalele de memorie ocupate, precum și spațiul ocupat de fiecare din cele <code>R</code> variabile, să se determine:</p>
+
+<p>a) Dimensiunea totală disponibilă pentru variabilele folosite.<br>
+b) Adresele de memorie pentru fiecare variabilă în parte în cazul în care alocarea memoriei este posibilă, respectând cerința problemei, sau numărul de variabile ce au putut fi alocate și adresa maximă la care este salvată o variabilă de memorie.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>bunicul.in</code> conține pe prima linie , despărțite printr-un spațiu, trei numere naturale <code>M</code>, <code>N</code> și <code>R</code>. Pe următoarele <code>N</code> linii câte două numere reprezentând intervalele de memorie ocupată. Pe linia <code>N+2</code> sunt cele <code>R</code> numere reprezentând spațiul ocupat de fiecare variabilă în parte în ordinea în care vor fi alocate.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>bunicul.out</code> va conține dimensiunea totală disponibilă pentru variabilele folosite, iar pe a doua linie <code>2*R</code> numere reprezentând intervalul de memorie pentru fiecare variabilă în parte sau două numere reprezentând numărul de variabile pentru care s-a putut aloca memorie și ultima locație de memorie ocupată de variabilele pentru care s-a alocat memorie.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ M ≤ 2.000.000.000</code>, <code>1 ≤ N ≤ 10.000</code>, <code>1 ≤ R ≤ 10.000</code></li>
+	<li>Variabilele ocupă cel mult <code>1000</code> bytes.</li>
+	<li>Prima adresă la care pot fi încărcate datele este <code>0</code>.</li>
+	<li>Toate variabilele sunt declarate în așa fel încât să nu depășească memoria disponibilă.</li>
+	<li>Intervalele de memorie ocupată nu sunt date obligatoriu în ordinea adreselor lor.</li>
+	<li>Intervalele ale memorie ocupată nu se suprapun.</li>
+	<li>Dimensiunea <code>M</code> a memoriei este exprimată în bytes. Dimensiunile variabilelor sunt exprimate de asemenea în bytes. Toate aceste valori sunt numere naturale.</li>
+	<li>Pentru rezolvarea corectă a primei cerințe, se acordă 20% din punctaj, iar pentru rezolvarea corectă a celei de-a doua cerințe, se acordă 80% din punctaj.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>bunicul.in</code></p>
+
+<pre>1300 9 7
+46 100
+130 180
+200 300
+349 450
+501 607
+670 750
+800 802
+900 902
+1010 1050
+30 20 50 35 60 100 100</pre>
+
+<p><code>bunicul.out</code></p>
+
+<pre>757
+0 29 101 120 451 500 608 642 803 862 903 1002 1051 1150</pre>
+
+<h3>Explicație</h3>
+
+<p>Spațiul total liber este de <code>757</code> bytes.</p>
+
+<ul>
+	<li>Prima zonă liberă este cuprinsă între adresele <code>0 45</code>. Prima variabilă ocupă <code>30</code> bytes, spațiul alocat este intervalul <code>0,29</code>.</li>
+	<li>A doua variabilă are <code>20</code> bytes. Prima zonă liberă de dimensiunea dorită este cuprinsă în intervalul <code>101,120</code>.</li>
+	<li>Pentru a treia variabilă, care are <code>50</code> bytes, se va aloca memoria cuprinsă între <code>451,500</code>.</li>
+	<li>Pentru a patra variabilă se vor aloca <code>35</code> bytes între adresele <code>608,642</code>.</li>
+	<li>Pentru a cincea variabilă se alocă memorie în intervalul <code>803,862</code> (60 byes).</li>
+	<li>Pentru a șasea variabilă se alocă spațiul de memorie cuprins între <code>903,1002</code> (<code>100</code> bytes).</li>
+	<li>Pentru ultima variabilă se alocă spațiul de memorie de <code>100</code> bytes, cuprins între <code>1051,1150</code>.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>bunicul.in</code></p>
+
+<pre>500 5 4
+461 480
+101 200
+11 80
+280 399
+411 450
+70 20 50 100</pre>
+
+<p><code>bunicul.out</code></p>
+
+<pre>151
+2 500</pre>
+
+<h3>Explicație</h3>
+
+<p>Spațiul total liber este de <code>151</code> bytes.</p>
+
+<ul>
+	<li>Prima variabilă ocupă <code>70</code> bytes, spațiul alocat este intervalul <code>200,269</code>.</li>
+	<li>A doua variabilă are <code>20</code> bytes. Prima zonă liberă de dimensiunea dorită este cuprinsă în intervalul <code>481,500</code>.</li>
+	<li>Pentru restul variabilelor nu se poate aloca memorie. În concluzie, a fost alocată memorie pentru <code>2</code> variabile, iar ultima adresă de memorie ocupată cu variabile este <code>500</code>.</li>
+</ul>		</article>
+		</body></html>

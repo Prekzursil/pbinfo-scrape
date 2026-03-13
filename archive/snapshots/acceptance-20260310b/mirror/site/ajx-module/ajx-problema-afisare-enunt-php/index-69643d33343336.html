@@ -1,0 +1,87 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3436"><article id="enunt">
+			<p>Domnul Vânt a pus pe marginea unei șosele <code>N</code> centrale eoliene, dintre care unele produc energie electrică, iar altele, deocamdată, doar consumă energie. El a etichetat centralele cu numerele naturale distincte de la <code>1</code> la <code>N</code>, în ordinea poziționării lor pe șosea. Fiecare centrală eoliană are la bază un ecran pe care este afișat un număr întreg, reprezentând cantitatea de energie pe care o produce (dacă numărul este pozitiv) sau pe care o consumă (dacă numărul este negativ).</p>
+
+<p>Pentru <strong>a construi corect <code>k</code> orașe</strong> de-a lungul acestei șosele, un arhitect trebuie să aibă în vedere că:</p>
+
+<ul>
+	<li>fiecărui oraș îi va fi atribuit câte un grup format din centrale eoliene vecine pe șosea, toate grupurile având același număr de centrale;</li>
+	<li>cantitatea de energie repartizată unui oraș este egală cu suma numerelor afișate pe ecranele centralelor<br>
+eoliene din grupul atribuit; uneori este posibil ca, deocamdată, suma obținută să fie negativă;</li>
+	<li>fiecare dintre cele <code>N</code> centrale eoliene trebuie să fie atribuită unui oraș;</li>
+	<li>factorul de dezechilibru, notat cu <code>P(k)</code>, este valoarea maximă a diferenței dintre energiile repartizate oricăror două orașe diferite, dintre cele <code>k</code>.</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Scrieți un program care citește numărul <code>N</code>, valorile afișate pe cele <code>N</code> ecrane ale centralelor eoliene și rezolvă următoarele două cerinţe:</p>
+
+<ol>
+	<li>afișează numărul <code>M</code> de moduri în care se pot grupa cele <code>N</code> centrale pentru construcția corectă de orașe;</li>
+	<li>afișează numărul maxim <code>X</code> de orașe ce pot fi construite corect, dintre cele care au factorul de dezechilibru minim, precum și eticheta <code>E</code> a primei centrale eoliene atribuită orașului cu cea mai mare cantitate de energie repartizată, dintre cele <code>X</code> orașe; dacă sunt mai multe astfel de orașe, se ia în considerare cel care are atribuite centrale etichetate cu numere mai mari.</li>
+</ol>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>wind.in</code> conține pe prima linie un număr natural <code>C</code> reprezentând cerința care trebuie rezolvată (<code>1</code> sau <code>2</code>). A doua linie a fișierului conține un număr natural <code>N</code>, cu semnificația din enunț. A treia linie din fișier conține <code>N</code> numere întregi, separate prin câte un spațiu, reprezentând valorile afișate pe cele <code>N</code> ecrane ale centralelor eoliene, în ordinea poziționării acestora pe șosea.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>wind.out</code> va conține pe prima linie:</p>
+
+<ul>
+	<li>dacă <code>C=1</code>, numărul natural <code>M</code>, reprezentând răspunsul la cerința <code>1</code>;</li>
+	<li>dacă <code>C=2</code>, cele două numere naturale <code>X</code> și <code>E</code>, în această ordine, separate printr-un singur spațiu,<br>
+reprezentând răspunsul la cerința <code>2</code>.</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N ≤ 100000</code>, <code>N</code> număr natural;</li>
+	<li>Numerele afișate pe ecranele centralelor sunt numere întregi formate din cel mult nouă cifre;</li>
+	<li>Se vor construi minimum <code>2</code> orașe;</li>
+	<li>În concurs, pentru rezolvarea cerinței 1 s-au acordat 20 de puncte, pentru rezolvarea cerinței 2 s-au acordat 70 de puncte. Pe site se acordă 10 puncte pentru exemple.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>wind.in</code></p>
+
+<pre>1
+12
+2 4 -5 12 3 5 -6 4 5 7 -8 2</pre>
+
+<p><code>wind.out</code></p>
+
+<pre>5</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerința este <code>1</code>. Centralele eoliene se pot grupa câte <code>1</code>, câte <code>2</code>, câte <code>3</code>, câte <code>4</code> sau câte <code>6</code>.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>wind.in</code></p>
+
+<pre>2
+12
+2 4 -5 12 3 5 -6 4 5 7 -8 2</pre>
+
+<p><code>wind.out</code></p>
+
+<pre>3 1</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerința este <code>2</code>. Posibilitățile de grupare:</p>
+
+<ul>
+	<li>câte <code>1</code> centrală/oraș (sumele sunt <code>2</code>, <code>4</code>, <code>-5</code>, …, <code>2</code>; <code>P(12)=20=12-(-8)</code>);</li>
+	<li>câte <code>2</code> centrale/oraș (sumele sunt: <code>6</code>, <code>7</code>, <code>8</code>, <code>-2</code>, <code>12</code>, <code>-6</code>; <code>P(6)=18=12-(-6)</code>);</li>
+	<li>câte <code>3</code> centrale/oraș (sumele sunt: <code>1</code>, <code>20</code>, <code>3</code>, <code>1</code>; <code>P(4)=19=20-1</code>);</li>
+	<li>câte <code>4</code> centrale/oraș (sumele sunt: <code>13</code>, <code>6</code>, <code>6</code>; <code>P(3)=7=13-6)</code>;</li>
+	<li>câte <code>6</code> centrale/oraș (sumele sunt: <code>21</code> si <code>4</code>; <code>P(2)=17=21-4</code>).</li>
+</ul>
+
+<p>Astfel, factorul de dezechilibru minim este <code>P(3)=7</code>, deci <code>X=3</code>. Pentru această grupare a centralelor, orașul cu cantitatea maximă de energie (<code>13</code>) corespunde primului grup, care începe cu centrala etichetată cu <code>E=1</code>.</p>		</article>
+		</body></html>

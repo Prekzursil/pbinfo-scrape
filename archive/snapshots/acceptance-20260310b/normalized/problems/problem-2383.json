@@ -1,0 +1,309 @@
+{
+  "id": 2383,
+  "slug": "plaja1",
+  "name": "plaja1",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/2383/plaja1",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 46,
+      "name": "Tablouri bidimensionale (matrice)",
+      "slug": "tablouri-bidimensionale-matrice",
+      "href": "/?pagina=probleme-lista&tag=46"
+    },
+    {
+      "id": 58,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=58"
+    }
+  ],
+  "tags": [
+    "Smenul lui Mars (Difference Arrays)",
+    "Sume parțiale"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Scrieţi un program care să determine numărul de turişti care au reuşit să îşi aşeze prosoapele pe plajă, precum și numărul de localnici ale căror zone favorite sunt libere.</p>",
+      "text": "Scrieţi un program care să determine numărul de turişti care au reuşit să îşi aşeze prosoapele pe plajă, precum și numărul de localnici ale căror zone favorite sunt libere."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>plaja1.in</code> conține pe prima linie trei numere naturale, separate prin câte un spațiu, <code>a</code>, <code>b</code> şi <code>u</code>, având semnificația din enunț. Fiecare din următoarele <code>u</code> linii conține o pereche de numere naturale <code>x y</code>, reprezentând o zonă în care se găsește o umbrelă. Următoarea linie din fișier conține un număr natural <code>N</code>, reprezentând numărul de turiști. Următoarele <code>N</code> linii descriu prosoapele turiștilor. Fiecare linie conține patru numere naturale <code>x1 y1 x2 y2</code>, ce reprezintă colțurile unui prosop. Linia următoare conține o singură valoare, <code>M</code>, reprezentând numărul de localnici. Pe următoarele <code>M</code> linii se află câte patru numere, separate prin câte un spațiu, <code>x1’ y1’ x2’ y2’</code>, ce reprezintă colțurile unei suprafețe favorite.</p>",
+      "text": "Fișierul de intrare plaja1.in conține pe prima linie trei numere naturale, separate prin câte un spațiu, a, b şi u, având semnificația din enunț. Fiecare din următoarele u linii conține o pereche de numere naturale x y, reprezentând o zonă în care se găsește o umbrelă. Următoarea linie din fișier conține un număr natural N, reprezentând numărul de turiști. Următoarele N linii descriu prosoapele turiștilor. Fiecare linie conține patru numere naturale x1 y1 x2 y2, ce reprezintă colțurile unui prosop. Linia următoare conține o singură valoare, M, reprezentând numărul de localnici. Pe următoarele M linii se află câte patru numere, separate prin câte un spațiu, x1’ y1’ x2’ y2’, ce reprezintă colțurile unei suprafețe favorite."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>plaja1.out</code> conţine pe prima linie două numere naturale separate printr-un spaţiu. Primul număr reprezintă numărul de turişti care şi-au aşezat prosoapele pe plajă, iar cel de-al doilea număr reprezintă numărul de localnici ale căror zone favorite sunt libere.</p>",
+      "text": "Fișierul de ieșire plaja1.out conţine pe prima linie două numere naturale separate printr-un spaţiu. Primul număr reprezintă numărul de turişti care şi-au aşezat prosoapele pe plajă, iar cel de-al doilea număr reprezintă numărul de localnici ale căror zone favorite sunt libere."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li>Colţul din stânga sus al zonei dreptunghiulare are coordonatele <code>(1,1)</code></li>\n\t<li><code>3 ≤ a, b ≤ 2.000</code></li>\n\t<li><code>0 ≤ u ≤ 100</code></li>\n\t<li><code>3 ≤ m, n ≤ 100.000</code></li>\n\t<li>Un prosop descris de <code>(x1, y1, x2, y2)</code> va avea <code>1 ≤ x1 ≤ x2 ≤ a</code> şi <code>1 ≤ y1 ≤ y2 ≤ b</code></li>\n\t<li>O suprafaţă favorită descrisă de <code>(x1’, y1’, x2’, y2’)</code> va avea <code>1 ≤ x1’ ≤ x2’ ≤ a</code> şi <code>1 ≤ y1’ ≤ y2’ ≤ b</code></li>\n</ul>",
+      "text": "Colţul din stânga sus al zonei dreptunghiulare are coordonatele (1,1) 3 ≤ a, b ≤ 2.000 0 ≤ u ≤ 100 3 ≤ m, n ≤ 100.000 Un prosop descris de (x1, y1, x2, y2) va avea 1 ≤ x1 ≤ x2 ≤ a şi 1 ≤ y1 ≤ y2 ≤ b O suprafaţă favorită descrisă de (x1’, y1’, x2’, y2’) va avea 1 ≤ x1’ ≤ x2’ ≤ a şi 1 ≤ y1’ ≤ y2’ ≤ b"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>plaja1.in</code></p><pre>12 13 1\n6 11\n4\n3 4 7 7\n5 6 8 8\n9 2 10 3\n5 10 8 12\n3\n1 8 3 13\n10 3 12 4\n2 10 5 12</pre><p><code>plaja1.out</code></p><pre>3 2</pre><h3>Explicație</h3><p>Ultimul turist nu îşi poate aşeza prosopul. Zona favorită al celui de-al doilea localnic nu este liberă.</p><p><img alt=\"\" src=\"/resurse/16a4b0/plaja1.jpg\"></p>",
+      "text": "plaja1.in12 13 1 6 11 4 3 4 7 7 5 6 8 8 9 2 10 3 5 10 8 12 3 1 8 3 13 10 3 12 4 2 10 5 12plaja1.out3 2ExplicațieUltimul turist nu îşi poate aşeza prosopul. Zona favorită al celui de-al doilea localnic nu este liberă."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Ultimul turist nu îşi poate aşeza prosopul. Zona favorită al celui de-al doilea localnic nu este liberă."
+    }
+  ],
+  "constraints": [
+    "Colţul din stânga sus al zonei dreptunghiulare are coordonatele (1,1)",
+    "3 ≤ a, b ≤ 2.000",
+    "0 ≤ u ≤ 100",
+    "3 ≤ m, n ≤ 100.000",
+    "Un prosop descris de (x1, y1, x2, y2) va avea 1 ≤ x1 ≤ x2 ≤ a şi 1 ≤ y1 ≤ y2 ≤ b",
+    "O suprafaţă favorită descrisă de (x1’, y1’, x2’, y2’) va avea 1 ≤ x1’ ≤ x2’ ≤ a şi 1 ≤ y1’ ≤ y2’ ≤ b"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q7e1f10c9d4.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/plaja1.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-plaja1-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "plaja1.in / plaja1.out",
+    "limită timp": "1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "ONI 2010",
+    "autor": "Cristina Sichim",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 1,
+  "memoryLimitMb": 64,
+  "author": "Cristina Sichim",
+  "sourceAttribution": "ONI 2010",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/2383/plaja1"
+}

@@ -1,0 +1,297 @@
+{
+  "id": 4849,
+  "slug": "trixie2",
+  "name": "Trixie2",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4849/trixie2",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 116,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=116"
+    },
+    {
+      "id": 150,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=150"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Enunț",
+      "html": "<p>Cu ocazia intrării în sezonul 8 al competiției de robotică <span class=\"caps\">FTC</span>, Trixie se decide să își ajute echipa și să curețe terenul pe care au loc sesiunile de antrenament ale echipei. Tema sezonului acesta implică un teren de dimensiuni nemaivăzute până acum, care poate fi reprezentat sub forma de matrice cu <code>n</code> linii și <code>m</code> coloane, matrice cu <code>n * m</code> tile-uri (bucăți de teren cu o formă asemănătoare unei piese de puzzle) pe care Trixie scrie <code>n * m</code> numere naturale notate <code>t[i][j]</code>, câte unul pentru fiecare tile. De asemenea, este important să menționăm că terenul este prevăzut cu pereți laterali pe toate cele 4 laturi, astfel încât Trixie nu poate ieși din perimetrul terenului.</p><p>Pentru a începe curățenia, aceasta folosește o dronă de ultimă generație care plutește deasupra terenului și efectuează <code>q</code> scanări. O scanare este descrisă prin colțul stânga-sus de coordonate <code>(is, js)</code> și colțul dreapta-jos de coordonate <code>(ij, jj)</code>. Din cauza unui defect, drona adaugă <code>1</code> la fiecare element din submatricea scanată.</p><p><strong><span class=\"caps\">ATENȚIE</span>!</strong> Trixie poate să greșească și să aleagă colțul dreapta-jos în afara terenului. În acest caz, scanarea se aplică doar pe intersecția cu terenul:<br>\n<code>i2 = min(ij, n)</code>, <code>j2 = min(jj, m)</code>;<br>\nse adaugă <code>1</code> tuturor celulelor <code>(i, j)</code> cu <code>is ≤ i ≤ i2</code> și <code>js ≤ j ≤ j2</code>;<br>\ndacă după tăiere rezultă un dreptunghi vid (adică <code>is &gt; i2</code> sau <code>js &gt; j2</code>), scanarea nu are efect.</p><p>După ce toate scanările au fost aplicate, Trixie parcurge terenul și, pentru fiecare pereche de linii consecutive <code>(i, i+1)</code>, cu <code>1 ≤ i ≤ n-1</code>, procedează astfel: ia tile-urile <strong>alunecoase</strong> de pe linia <code>i</code> și tile-urile <strong>super-alunecoase</strong> de pe linia <code>i+1</code>, apoi înmulțește fiecare număr de pe tile-urile <strong>alunecoase</strong> cu fiecare număr de pe tile-urile <strong>super-alunecoase</strong>. Fiecare astfel de produs se numește <strong>nivel de alunecare</strong> și corespunde unui <strong><span class=\"caps\">OMEGA</span>-tile</strong>.</p><p>Un tile <strong>alunecos</strong> este definit ca un tile pe care este scris un număr <strong>prim</strong>. (Numerele <code>0</code> și <code>1</code> nu sunt prime.)</p><p>Un tile <strong>super-alunecos</strong> este definit ca un tile pe care este scris un număr <strong>aprim</strong>. Numim un număr <strong>aprim</strong> dacă acesta se poate scrie <strong>exact</strong> ca produsul a <strong>două</strong> numere prime <strong>distincte</strong>: <code>x = p * q</code>, unde <code>p</code> și <code>q</code> sunt prime și <code>p ≠ q</code>. (De exemplu <code>6=2*3</code> și <code>10=2*5</code> sunt aprime, dar <code>4=2*2</code> nu este aprim, iar <code>12=2*2*3</code> nu este aprim.)</p><p>Pentru o pereche de linii <code>(i, i+1)</code>, notăm cu <code>P</code> mulțimea valorilor prime din linia <code>i</code> și cu <code>S</code> mulțimea valorilor aprime din linia <code>i+1</code>. Trixie formează toate <strong><span class=\"caps\">OMEGA</span>-tile-urile</strong> posibile, alegând orice <code>p ∈ P</code> și orice <code>s ∈ S</code>. Nivelul de alunecare este <code>p * s</code>.</p><p><strong>Important:</strong> dacă există mai multe perechi <code>(p, s)</code> care dau același produs, acel produs apare de mai multe ori (se lucrează cu un multiset de produse).</p><p>Trixie își pune <code>n - 1</code> întrebări (o întrebare pentru fiecare pereche de linii consecutive), de tipul:<br>\n<strong>„Care este nivelul de alunecare pentru al k-lea cel mai puțin alunecos <span class=\"caps\">OMEGA</span>-tile?”</strong><br>\n(adică al <code>k</code>-lea produs în ordine crescătoare).</p>",
+      "text": "Cu ocazia intrării în sezonul 8 al competiției de robotică FTC, Trixie se decide să își ajute echipa și să curețe terenul pe care au loc sesiunile de antrenament ale echipei. Tema sezonului acesta implică un teren de dimensiuni nemaivăzute până acum, care poate fi reprezentat sub forma de matrice cu n linii și m coloane, matrice cu n * m tile-uri (bucăți de teren cu o formă asemănătoare unei piese de puzzle) pe care Trixie scrie n * m numere naturale notate t[i][j], câte unul pentru fiecare tile. De asemenea, este important să menționăm că terenul este prevăzut cu pereți laterali pe toate cele 4 laturi, astfel încât Trixie nu poate ieși din perimetrul terenului.Pentru a începe curățenia, aceasta folosește o dronă de ultimă generație care plutește deasupra terenului și efectuează q scanări. O scanare este descrisă prin colțul stânga-sus de coordonate (is, js) și colțul dreapta-jos de coordonate (ij, jj). Din cauza unui defect, drona adaugă 1 la fiecare element din submatricea scanată.ATENȚIE! Trixie poate să greșească și să aleagă colțul dreapta-jos în afara terenului. În acest caz, scanarea se aplică doar pe intersecția cu terenul: i2 = min(ij, n), j2 = min(jj, m); se adaugă 1 tuturor celulelor (i, j) cu is ≤ i ≤ i2 și js ≤ j ≤ j2; dacă după tăiere rezultă un dreptunghi vid (adică is > i2 sau js > j2), scanarea nu are efect.După ce toate scanările au fost aplicate, Trixie parcurge terenul și, pentru fiecare pereche de linii consecutive (i, i+1), cu 1 ≤ i ≤ n-1, procedează astfel: ia tile-urile alunecoase de pe linia i și tile-urile super-alunecoase de pe linia i+1, apoi înmulțește fiecare număr de pe tile-urile alunecoase cu fiecare număr de pe tile-urile super-alunecoase. Fiecare astfel de produs se numește nivel de alunecare și corespunde unui OMEGA-tile.Un tile alunecos este definit ca un tile pe care este scris un număr prim. (Numerele 0 și 1 nu sunt prime.)Un tile super-alunecos este definit ca un tile pe care este scris un număr aprim. Numim un număr aprim dacă acesta se poate scrie exact ca produsul a două numere prime distincte: x = p * q, unde p și q sunt prime și p ≠ q. (De exemplu 6=2*3 și 10=2*5 sunt aprime, dar 4=2*2 nu este aprim, iar 12=2*2*3 nu este aprim.)Pentru o pereche de linii (i, i+1), notăm cu P mulțimea valorilor prime din linia i și cu S mulțimea valorilor aprime din linia i+1. Trixie formează toate OMEGA-tile-urile posibile, alegând orice p ∈ P și orice s ∈ S. Nivelul de alunecare este p * s.Important: dacă există mai multe perechi (p, s) care dau același produs, acel produs apare de mai multe ori (se lucrează cu un multiset de produse).Trixie își pune n - 1 întrebări (o întrebare pentru fiecare pereche de linii consecutive), de tipul: „Care este nivelul de alunecare pentru al k-lea cel mai puțin alunecos OMEGA-tile?” (adică al k-lea produs în ordine crescătoare)."
+    },
+    {
+      "title": "Cerința",
+      "html": "<p>Din pricina unei actualizări neșteptate ale sistemului pe care operează Trixie, aceasta uită de <strong><span class=\"caps\">OMEGA</span>-tile-urile</strong> căutate. Aceasta vă roagă să scrieți un algoritm care:<br>\naplică cele <code>q</code> scanări asupra matricei;<br>\npentru fiecare pereche de linii consecutive <code>(i, i+1)</code>, cu <code>1 ≤ i ≤ n-1</code>, afișează răspunsul la întrebarea corespunzătoare.</p><p>Dacă pentru o pereche de linii numărul de <strong><span class=\"caps\">OMEGA</span>-tile-uri</strong> este insuficient (adică <code>k &gt; |P| * |S|</code>), se afișează <code>„-”</code>.</p><p><strong>Caz special:</strong> dacă <code>n = 1</code> nu există nicio pereche de linii și deci nu există întrebări; în acest caz se afișează o singură linie cu textul <code>nu exista</code>.</p>",
+      "text": "Din pricina unei actualizări neșteptate ale sistemului pe care operează Trixie, aceasta uită de OMEGA-tile-urile căutate. Aceasta vă roagă să scrieți un algoritm care: aplică cele q scanări asupra matricei; pentru fiecare pereche de linii consecutive (i, i+1), cu 1 ≤ i ≤ n-1, afișează răspunsul la întrebarea corespunzătoare.Dacă pentru o pereche de linii numărul de OMEGA-tile-uri este insuficient (adică k > |P| * |S|), se afișează „-”.Caz special: dacă n = 1 nu există nicio pereche de linii și deci nu există întrebări; în acest caz se afișează o singură linie cu textul nu exista."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>\"trixie2.in\"</code> va conține pe prima linie <code>n</code> și <code>m</code> cu semnificația din enunț. Pe următoarele <code>n</code> linii se află matricea de <code>n * m</code> elemente. Pe următoarea linie se află <code>q</code> cu semnificația din enunț. Pe următoarele <code>q</code> linii se află <code>is, js, ij, jj</code>, însemnând că se scanează submatricea cu colțul stânga-sus <code>(is, js)</code> și colțul dreapta-jos <code>(ij, jj)</code>. Iar pe următoarele <code>n - 1</code> linii se citește câte un <code>k</code> (în ordine, pentru perechile <code>(1,2), (2,3), ..., (n-1,n)</code>).<br>\np. Coordonatele sunt <code>1-indexate</code>.</p>",
+      "text": "Fișierul de intrare \"trixie2.in\" va conține pe prima linie n și m cu semnificația din enunț. Pe următoarele n linii se află matricea de n * m elemente. Pe următoarea linie se află q cu semnificația din enunț. Pe următoarele q linii se află is, js, ij, jj, însemnând că se scanează submatricea cu colțul stânga-sus (is, js) și colțul dreapta-jos (ij, jj). Iar pe următoarele n - 1 linii se citește câte un k (în ordine, pentru perechile (1,2), (2,3), ..., (n-1,n)). p. Coordonatele sunt 1-indexate."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>\"trixie2.out\"</code>:<br>\ndacă <code>n = 1</code>, conține o singură linie: <code>nu exista</code><br>\naltfel, conține <code>n - 1</code> linii; pe linia <code>i</code> se află un singur număr sau <code>„-”</code> ce reprezintă răspunsul pentru întrebarea asociată perechii de linii <code>(i, i+1)</code>.</p>",
+      "text": "Fișierul de ieșire \"trixie2.out\": dacă n = 1, conține o singură linie: nu exista altfel, conține n - 1 linii; pe linia i se află un singur număr sau „-” ce reprezintă răspunsul pentru întrebarea asociată perechii de linii (i, i+1)."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<p><code>1 ≤ n ≤ 1000</code><br>\n<code>1 ≤ m ≤ 1000</code><br>\n<code>0 ≤ q ≤ 200 000</code><br>\nfiecare număr din matrice este <code>0 ≤ t[i][j] &lt; 1 000 000 000</code><br>\npentru scanări: <code>1 ≤ is ≤ n</code>, <code>1 ≤ js ≤ m</code>, <code>is ≤ ij</code>, <code>js ≤ jj</code> (dar <code>ij</code> poate depăși <code>n</code> și/sau <code>jj</code> poate depăși <code>m</code>)<br>\npentru fiecare pereche de linii se dă un <code>k</code> cu <code>1 ≤ k ≤ m * m + 1</code>; dacă <code>k</code> depășește numărul de <strong><span class=\"caps\">OMEGA</span>-tiles</strong> se afișează <code>„-”</code><br>\n<strong>Atenție:</strong> răspunsurile pot depăși <code>2^31 - 1</code>, folosiți tipuri pe <strong>64 de biți</strong>.</p>",
+      "text": "1 ≤ n ≤ 1000 1 ≤ m ≤ 1000 0 ≤ q ≤ 200 000 fiecare număr din matrice este 0 ≤ t[i][j] < 1 000 000 000 pentru scanări: 1 ≤ is ≤ n, 1 ≤ js ≤ m, is ≤ ij, js ≤ jj (dar ij poate depăși n și/sau jj poate depăși m) pentru fiecare pereche de linii se dă un k cu 1 ≤ k ≤ m * m + 1; dacă k depășește numărul de OMEGA-tiles se afișează „-” Atenție: răspunsurile pot depăși 2^31 - 1, folosiți tipuri pe 64 de biți."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>trixie2.in</code></p><pre>3 4\n3 5 7 9\n6 10 16 18\n2 3 4 5\n1\n2 4 3 4\n5\n6</pre><p><code>trixie2.out</code></p><pre>50\n-</pre><h3>Explicație</h3><pre>Valorile terenului după scanarea efectuată de dronă:\n3 5 7 9\n6 10 16 19\n2 3 4 6\nPentru perechea (1,2):\nValorile ordonate scrise pe tile-urile alunecoase (prime), respectiv super-alunecoase (aprime):\n3 5 7\n6 10\nȘirul ordonat cu nivelul de alunecare de pe OMEGA-tiles:\n18 30 30 42 50 70\nAl 5-lea cel mai puțin alunecos OMEGA-tile este cel cu nivelul de alunecare 50.\nPentru perechea (2,3):\nPrime în linia 2: 19\nAprime în linia 3: 6\nExistă doar 1 OMEGA-tile, deci nu există al 6-lea; se afișează „-”.</pre>",
+      "text": "trixie2.in3 4 3 5 7 9 6 10 16 18 2 3 4 5 1 2 4 3 4 5 6trixie2.out50 -ExplicațieValorile terenului după scanarea efectuată de dronă: 3 5 7 9 6 10 16 19 2 3 4 6 Pentru perechea (1,2): Valorile ordonate scrise pe tile-urile alunecoase (prime), respectiv super-alunecoase (aprime): 3 5 7 6 10 Șirul ordonat cu nivelul de alunecare de pe OMEGA-tiles: 18 30 30 42 50 70 Al 5-lea cel mai puțin alunecos OMEGA-tile este cel cu nivelul de alunecare 50. Pentru perechea (2,3): Prime în linia 2: 19 Aprime în linia 3: 6 Există doar 1 OMEGA-tile, deci nu există al 6-lea; se afișează „-”."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>trixie2.in</code></p><pre>5 6\n0 1 4 19 19 19\n19 26 0 1 2 2\n1 5 13 29 61 61\n7 11 0 6 24 24\n4 8 11 18 30 30\n3\n1 1 7 7\n1 1 7 7\n1 1 7 7\n1\n1\n1\n1</pre><p><code>trixie2.out</code></p><pre>66\n-\n-\n42</pre><h3>Explicație</h3><pre>Valorile terenului după scanări:\n3 4 7 22 22 22\n22 29 3 4 5 5\n4 8 16 32 64 64\n10 14 3 9 27 27\n7 11 14 21 33 33\nPentru perechea (1,2):\nTile-uri alunecoase (prime) în linia 1: 3 7\nTile-uri super-alunecoase (aprime) în linia 2: 22\nProdusele posibile: 66 154\nCel mai puțin alunecos este 66.\nPentru perechea (2,3):\nÎn linia 3 nu există aprime, deci nu există OMEGA-tiles -&gt; „-”.\nPentru perechea (3,4):\nÎn linia 3 nu există prime, deci nu există OMEGA-tiles -&gt; „-”.\nPentru perechea (4,5):\nPrime în linia 4: 3\nAprime în linia 5: 14 21 33 33\nProdusele: 42 63 99 99\nCel mai puțin alunecos este 42.</pre>",
+      "text": "trixie2.in5 6 0 1 4 19 19 19 19 26 0 1 2 2 1 5 13 29 61 61 7 11 0 6 24 24 4 8 11 18 30 30 3 1 1 7 7 1 1 7 7 1 1 7 7 1 1 1 1trixie2.out66 - - 42ExplicațieValorile terenului după scanări: 3 4 7 22 22 22 22 29 3 4 5 5 4 8 16 32 64 64 10 14 3 9 27 27 7 11 14 21 33 33 Pentru perechea (1,2): Tile-uri alunecoase (prime) în linia 1: 3 7 Tile-uri super-alunecoase (aprime) în linia 2: 22 Produsele posibile: 66 154 Cel mai puțin alunecos este 66. Pentru perechea (2,3): În linia 3 nu există aprime, deci nu există OMEGA-tiles -> „-”. Pentru perechea (3,4): În linia 3 nu există prime, deci nu există OMEGA-tiles -> „-”. Pentru perechea (4,5): Prime în linia 4: 3 Aprime în linia 5: 14 21 33 33 Produsele: 42 63 99 99 Cel mai puțin alunecos este 42."
+    }
+  ],
+  "examples": [],
+  "constraints": [],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q86ece3a6ed.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Andrei Visalon (Prekzursil)",
+    "clasa": "11",
+    "intrare/ieșire": "trixie2.in / trixie2.out",
+    "limită timp": "1.6 secunde",
+    "limită memorie": "64 MB / 64 MB",
+    "sursa problemei": "-",
+    "autor": "Mirela Mlisan, Andrei Lita, Andrei Visalon",
+    "dificultate": "dificilă"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 1.6,
+  "memoryLimitMb": 64,
+  "author": "Mirela Mlisan, Andrei Lita, Andrei Visalon",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4849/trixie2"
+}

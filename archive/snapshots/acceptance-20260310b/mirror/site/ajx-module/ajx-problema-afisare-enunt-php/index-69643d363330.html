@@ -1,0 +1,83 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=630"><article id="enunt">
+			<p>Mihai, fiind un mare pasionat al jocurilor în aer liber, a inventat un joc nou în speranța că își va convinge colegii să iasă afară să se joace. Jocul lui Mihai spune că se dau <code>N</code> pătrate ce se află la anumite nivele iar din fiecare pătrat se poate sări doar în anumite pătrate stabilite la începutul jocului. Dacă un jucător sare dintr-un pătrat aflat la nivelul <code>X</code> într-un pătrat aflat la un nivel mai mare <code>Y</code>, acesta folosește un efort egal cu <code>[Y/X]</code>, iar dacă sare într-un pătrat aflat la un nivel mai mic sau egal <code>Y</code>, efortul folosit este <code>[X/Y]</code>. Jucătorul se află la început în pătratul de start <code>S</code> și scopul jocului este să ajungă în pătratul final <code>F</code>, depunând un efort minim.</p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând numărul de pătrate <code>N</code>, pătratul de start <code>S</code>, pătratul final <code>F</code> și pentru fiecare pătrat, pătratele în care jucătorul poate sări, se cere:</p>
+
+<p>a) Efortul minim necesar pentru a ajunge în pătratul final.<br>
+b) Pătratele pe care jucătorul le sare până ajunge la pătratul final.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fişierul de intrare <code>joc.in</code> conține pe prima linie un număr natural <code>p</code>. Pentru toate testele de intrare, numărul <code>p</code> poate avea doar valoarea <code>1</code> sau valoarea <code>2</code>. Pe a doua linie se află trei numere naturale  <code>N</code>, <code>S</code> și <code>F</code> cu semnificația din enunț. Pe următoarea linie se află <code>N</code> numere naturale reprezentând nivelul la care se află fiecare pătrat. Pe următoarele <code>N</code> linii se află  pătratele în care se poate sări din fiecare pătrat. Astfel, pe linia <code>i</code> se află numărul de pătrate în care se poate sări din pătratul <code>i-3</code> urmat de pătratele în care se poate sări. Dacă dintr-un pătrat nu se poate sări în niciun alt pătrat atunci pe linia lui se află <code>0</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă valoarea lui <code>p</code> este <code>1</code>, <strong>se va rezolva numai punctul a)</strong> din cerintă. În acest caz, în fişierul de ieşire <code>joc.out</code>  se va scrie un singur număr întreg reprezentând efortul minim necesar pentru a ajunge în pătratul final.</p>
+
+<p>Dacă valoarea lui <code>p</code> este <code>2</code>, <strong>se va rezolva numai punctul b)</strong> din cerintă. În acest caz, în fișierul de iesire  joc.out  se va scrie pe prima linie un număr natural <code>M</code> reprezentând numărul de pătrate necesare pentru a ajunge în pătratul final iar pe linia a doua se vor scrie cele <code>M</code> pătrate.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ S, F ≤ N ≤ 50 000</code></li>
+	<li><code>S ≠ F</code></li>
+	<li>numărul total al săriturilor stabilite la începutul jocului nu depăşeşte <code>500 000</code>;</li>
+	<li>nivelul maxim al unui pătrat <code>≤ 50 000</code>;</li>
+	<li>va exista întotdeauna o modalitate printr-un număr nenul de pași de a ajunge de la pătratul <code>S</code> la pătratul <code>F</code>;</li>
+	<li>pentru rezolvarea corectă a primei cerinţe se acordă 40 de puncte, iar pentru cerința a doua se acordă 60 de puncte.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>joc.in</code></p>
+
+<pre>1
+5 1 4
+20 10 34 45 5
+2 2 3
+2 4 5
+0
+2 1 3
+2 4 1</pre>
+
+<p><code>joc.out</code></p>
+
+<pre>6</pre>
+
+<h1>Explicație</h1>
+
+<p><code>p = 1</code></p>
+
+<p>Pentru a ajunge din primul pătrat adică pătratul aflat la nivelul <code>20</code> în cel de-al patrulea pătrat adică pătratul aflat la nivelul <code>45</code> cu un efort minim jucătorul sare de pe pătratul aflat la nivelul <code>20</code> pe pătratul aflat la nivelul <code>10</code> cu  efortul 2  iar de pe pătratul aflat la nivelul <code>10</code> pe pătratul aflat la nivelul <code>45</code> cu  efortul <code>4</code> obținând efortul <code>6</code>.</p>
+
+<p><strong>Atenție! Pentru acest test se rezolvă doar cerința a).</strong></p>
+
+
+<h1>Exemplul 2:</h1>
+
+<p><code>joc.in</code></p>
+
+<pre>2
+5 1 4
+20 10 34 45 5
+2 2 3
+2 4 5
+0
+2 1 3
+2 4 1</pre>
+
+<p><code>joc.out</code></p>
+
+<pre>3
+1 2 4</pre>
+
+<h1>Explicație</h1>
+
+<p><code>p = 2</code></p>
+
+<p>Pentru a ajunge din primul pătrat adică pătratul aflat la nivelul <code>20</code> în cel de-al patrulea pătrat adică pătratul aflat la nivelul <code>45</code> cu un efort minim jucătorul sare de pe pătratul aflat la nivelul <code>20</code> pe pătratul aflat la nivelul <code>10</code> iar de pe pătratul aflat la nivelul <code>10</code> pe pătratul aflat la nivelul <code>45</code>.</p>
+
+<p><strong>Atenție! Pentru acest test se rezolvă doar cerința b).</strong></p>		</article>
+		</body></html>

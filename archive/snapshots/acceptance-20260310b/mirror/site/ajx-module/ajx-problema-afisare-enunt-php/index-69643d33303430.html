@@ -1,0 +1,69 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3040"><article id="enunt">
+			<p>Într-un joc de domino, fiecare piesă este împărțită în două zone, în fiecare zonă fiind înscris un număr natural. Dacă jocul are dimensiunea <code>d</code>, în joc vor exista toate piesele distincte care se pot forma cu numere cuprinse între <code>0</code> și <code>d</code>. Două piese sunt considerate identice dacă au înscrise aceleași numere, indiferent de ordinea lor. Astfel, piesele <code>(3,7)</code> și <code>(7,3)</code> sunt identice. De exemplu, jocul de dimensiune <code>d = 2</code> va avea <code>6</code> piese distincte:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-domino2-001-jpg.jpg"></p>
+
+<p>Suma tuturor numerelor de pe aceste piese este <code>12</code>. Problema are două cerințe:<br>
+1. Dat fiind un șir format din <code>N</code> numere naturale nenule reprezentând dimensiunile unor jocuri de domino, să se determine pentru fiecare joc suma tuturor numerelor înscrise pe piesele din jocul respectiv.<br>
+2. Dat fiind un șir format din <code>N</code> numere naturale nenule reprezentând sumele tuturor numerelor de pe piesele unor jocuri de domino, se construiește mai întâi un șir de cifre, notat cu <code>A</code>, scriind în ordine toate numerele din șirul dat, fără spații între ele. Se cere să se construiască un șir strict crescător de numere naturale, notat cu <code>B</code>, parcurgând alternativ cifrele din șirul <code>A</code> de la stânga la dreapta și de la dreapta la stânga după cum urmează:<br>
+– primul număr din <code>B</code> este format din prima cifră din șirul <code>A</code>;<br>
+– al doilea număr din <code>B</code> se construiește concatenând (alipind) cifrele din <code>A</code>, începând de la dreapta către stânga, până când obținem un număr strict mai mare decât primul număr din <code>B</code>;<br>
+– al treilea număr din <code>B</code> se construiește concatenând cifrele din <code>A</code> de la stânga către dreapta (începând cu prima cifră care nu a fost deja utilizată), până când obținem un număr strict mai mare decât precedentul din <code>B</code>;<br>
+– al patrulea număr din <code>B</code> se construiește concatenând din nou cifrele din <code>A</code> de la dreapta la stânga (începând cu cea mai din dreapta cifră care nu a fost deja utilizată), până când obținem un număr strict mai mare decât al treilea din <code>B</code>;<br>
+– se continuă astfel alternativ, până când nu se mai poate forma un număr strict mai mare decât ultimul număr adăugat în <code>B</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Scrieți un program care rezolvă cerințele 1 și 2 descrise în enunț.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>domino.in</code> conține pe prima linie un număr natural <code>C</code> reprezentând cerința care trebuie rezolvată (<code>1</code> sau <code>2</code>). Pe a doua linie se află numărul natural <code>N</code>. Pe a treia linie se află <code>N</code> numere naturale nenule separate prin câte un spațiu <code>d</code><sub><code>1</code></sub>, <code>d</code><sub><code>2</code></sub>, …, <code>d</code><sub><code>N</code></sub>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>domino.out</code> va conține o singură linie. Dacă <code>C = 1</code>, pe prima linie se vor afișa <code>N</code> numere naturale separate prin câte un spațiu; al <code>i</code>-lea număr afișat reprezintă suma numerelor din jocul de domino având dimensiunea <code>d</code><sub><code>i</code></sub> (<code>1 ≤ i ≤ N</code>). Dacă <code>C = 2</code>, pe prima linie se vor afișa în ordine, separate prin câte un spațiu, valorile din șirul <code>B</code> determinat conform regulilor din enunț.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 10.000</code></li>
+	<li>Dacă <code>C = 1</code>, <code>1 ≤ d</code><sub><code>i</code></sub> <code>≤ 1000</code>, iar dacă <code>C = 2</code>, <code>1 ≤ d</code><sub><code>i</code></sub> <code>≤ 10</code><sup><code>9</code></sup>, pentru <code>1 ≤ i ≤ N</code>.</li>
+	<li>Numerele din șirul <code>B</code> vor fi afișate fără zerouri nesemnificative (de exemplu, dacă în urma aplicării regulilor din enunț în șirul <code>B</code> se obține numărul <code>0204</code> se afișează <code>204</code>).</li>
+	<li>Pentru teste în valoare de <code>30</code> de puncte cerința este 1.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>domino.in</code></p>
+
+<pre>1
+5
+2 3 15 4 7</pre>
+
+<p><code>domino.out</code></p>
+
+<pre>12 30 2040 60 252</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerinţa este <code>1</code>, deci trebuie să determinăm sumele numerelor din jocurile de dimensiune <code>2</code>, <code>3</code>, <code>15</code>, <code>4</code> și <code>7</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>domino.in</code></p>
+
+<pre>2
+5
+12 30 2040 60 252</pre>
+
+<p><code>domino.out</code></p>
+
+<pre>1 2 23 52 204</pre>
+
+<h3>Explicație</h3>
+
+<p>Din șirul <code>12 30 2040 60 252</code> se formează:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-domino2-002-jpg.jpg"></p>		</article>
+		</body></html>

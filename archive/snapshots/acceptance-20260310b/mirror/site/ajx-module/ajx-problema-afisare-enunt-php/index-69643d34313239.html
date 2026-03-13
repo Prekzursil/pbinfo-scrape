@@ -1,0 +1,106 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4129"><article id="enunt">
+			<p>Fie un șir de <code>N</code> coloane de ciment (pozițiile lor fiind numerotate de la <code>1</code> la <code>N</code>) de aceeași lățime și diverse înălțimi. Ele sunt încadrate la stânga (poziția <code>0</code>) și la dreapta (poziția <code>N+1</code>) de ziduri foarte înalte. Apa începe să curgă de deasupra primei coloane, câte o pătrățică de apă pe secundă. Apa se acumulează dacă are pereți în stânga și în dreapta, altfel curge mai jos către dreapta. Deasupra fiecărei coloane de ciment se poate forma astfel o coloană de apă, cu înălțimea egală cu numărul de pătrățele de la nivelul apei până la zona de contact cu coloana de ciment.</p>
+
+<h1>Cerința</h1>
+
+<ul>
+	<li>Care este înălțimea <code>H</code> a celei mai înalte coloane de apă după ce apa a ajuns peste tot la înălțimea celei mai înalte coloane de ciment?</li>
+	<li>Care este numărul <code>T</code> de secunde în care apa ajunge să acopere coloana numărul <code>P</code>?</li>
+	<li>Care este poziția <code>D</code> a celei mai din dreapta coloane acoperită de apă după <code>S</code> secunde?</li>
+	<li>Care este poziția <code>R</code> a celei mai din stânga coloane pe care o putem reduce cu o unitate astfel încât apa să ajungă cât mai repede la coloana <code>P</code>?</li>
+</ul>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>inundatie.in</code> conține pe prima linie un număr natural <code>C</code>, reprezentând cerința ce trebuie rezolvată(<code>1</code>, <code>2</code>, <code>3</code>, sau <code>4</code>). Pe a doua linie numerele <code>N</code>, <code>P</code> și <code>S</code> despărțite prin câte un spațiu cu semnificația din enunț. Pe a treia linie se găsesc <code>N</code> numere naturale separate prin câte un spațiu ce reprezintă înălțimile coloanelor. </p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>inundatie.out</code> va conține un singur număr, astfel:</p>
+
+<ul>
+	<li>Dacă <code>C=1</code>: înălțimea <code>H</code> cu semnificația de mai sus.</li>
+	<li>Dacă <code>C=2</code>: timpul <code>T</code> cu semnificația de mai sus.</li>
+	<li>Dacă <code>C=3</code>: poziția <code>D</code> cu semnificația de mai sus.</li>
+	<li>Dacă <code>C=4</code>: poziția <code>R</code> cu semnificația de mai sus.</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>C ≤ {1, 2, 3, 4}</code></li>
+	<li><code>3 ≤ N ≤ 100.000</code></li>
+	<li><code>1 ≤ </code> înălțimea oricărei coloane din șir <code>≤ 20.000</code></li>
+	<li><code>1 ≤ P ≤ N</code></li>
+	<li><code>1 ≤ S ≤ 100.000</code></li>
+	<li>O coloană de înălțime <code>h</code> este acoperită de apă dacă apa a ajuns la înălțimea <code>h</code>.</li>
+	<li>Pentru 11 puncte, <code>C = 1</code></li>
+	<li>Pentru 25 puncte, <code>C = 2</code></li>
+	<li>Pentru 33 puncte, <code>C = 3</code></li>
+	<li>Pentru 31 puncte, <code>C = 4</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>inundatie.in</code></p>
+
+<pre>1
+32 15 45
+8 5 5 4 3 3 7 5 4 3 3 5 4 3 4 5 6 5 4 4 3 4 5 4 3 2 1 2 3 4 5 9</pre>
+
+<p><code>inundatie.out</code></p>
+
+<pre>8</pre>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>inundatie.in</code></p>
+
+<pre>2
+32 15 45
+8 5 5 4 3 3 7 5 4 3 3 5 4 3 4 5 6 5 4 4 3 4 5 4 3 2 1 2 3 4 5 9</pre>
+
+<p><code>inundatie.out</code></p>
+
+<pre>21</pre>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>inundatie.in</code></p>
+
+<pre>3
+32 15 45
+8 5 5 4 3 3 7 5 4 3 3 5 4 3 4 5 6 5 4 4 3 4 5 4 3 2 1 2 3 4 5 9</pre>
+
+<p><code>inundatie.out</code></p>
+
+<pre>29</pre>
+
+<h1>Exemplul 4:</h1>
+
+<p><code>inundatie.in</code></p>
+
+<pre>4
+32 15 45
+8 5 5 4 3 3 7 5 4 3 3 5 4 3 4 5 6 5 4 4 3 4 5 4 3 2 1 2 3 4 5 9</pre>
+
+<p><code>inundatie.out</code></p>
+
+<pre>7</pre>
+
+<h3>Explicații</h3>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-inundatie1-001-jpg.jpg"></p>
+
+<p>Toate exemplele se referă la figura de mai sus, diferă doar numărul cerinței. În toate <code>N=32</code>, <code>P=15</code> și <code>S=45</code>.</p>
+
+<p><strong>Primul exemplu:</strong> Linia portocalie de înălțime <code>9</code> este nivelul apei la momentul când toate coloanele devin acoperite de apă.<br>
+Cea mai înaltă coloană de apă este cea cu numărul <code>27</code>, având <code>8</code> pătrățele de apă.</p>
+
+<p><strong>Al doilea exemplu:</strong> În imaginea de mai sus, liniile roșii arată nivelurile apei la momentul când apa acoperă coloana de la poziția <code>P=15</code>. Observăm că sunt <code>21</code> de pătrățele de apă sub linie, deci este nevoie de <code>21</code> de secunde pentru a acoperi coloana <code>15</code>.</p>
+
+<p><strong>Al treilea exemplu:</strong> Linia verde arată nivelul apei după <code>42</code> de secunde. Ea acoperă coloana numărul <code>29</code>. Lăsând apa să curgă încă <code>3</code> secunde (până la cele <code>S=45</code> secunde) nivelul nu se ridică suficient pentru a ajunge la coloana <code>30</code> deoarece ar mai fi nevoie de <code>5</code> pătrățele de apă, adică încă <code>5</code> secunde.</p>
+
+<p><strong>Al patrulea exemplu:</strong> Cea mai din stânga coloană pe care o vom reduce cu unu este coloana numărul <code>7</code>. Astfel apa va ajunge cu <code>5</code> secunde mai devreme la coloana <code>P=15</code>. Linia maro (linia de apă de înălțime <code>6</code> care se întinde de la coloana 2 la coloana 6) arată cele <code>5</code> pătrățele cu care reducem timpul. Orice altă coloană am<br>
+reduce nu va ajunge așa repede.</p>		</article>
+		</body></html>

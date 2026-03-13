@@ -1,0 +1,101 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3550"><article id="enunt">
+			<p>Marciuc este un băiat foarte neastâmpărat. El refuză să învețe informatică, așa că înainte de fiecare oră el pleacă pentru a explora noul său liceu. La plecare le promite colegilor lui că o să treacă pe la <strong>magazin</strong> înainte de a se întoarce în <strong>clasă</strong>, pentru a avea ce să mănânce în pauza următoare. Însă, dacă va ajunge în clasă în mai mult de <code>T</code> secunde, va întarza la ora așa că în acest caz va folosi o ruta directă spre <code>clasă</code>.</p>
+
+<p>Liceul poate fi reprezentat sub forma unei matrice cu <code>n</code> linii și <code>n</code> coloane. Există <code>3</code> tipuri de celule:</p>
+
+<ul>
+	<li>celulă liberă, pe unde băiatul poate avansa, o mutare durând o secundă;</li>
+	<li>celulă ocupată de un zid, pe unde băiatul nu poate avansa;</li>
+	<li>celulă în care se află o <strong>scurtătură</strong>, ce îl duce într-o secundă de la poziția, <code>x</code><sub><code>1</code></sub><code> y</code><sub><code>1</code></sub>, la poziția <code>x</code><sub><code>2</code></sub><code> y</code><sub><code>2</code></sub> sau invers;</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Fiind dat numărul <code>n</code> de linii și de coloane, coordonatele celulelor ocupate de zid și coordonatele scurtăturilor, se cere să se afișeze numărul minim de secunde în care Marciuc reușește să ajungă în clasă, trecând și pe la magazin. Dacă magazinul nu este accesibil sau daca va ajunge în clasă in mai mult de <code>T</code> secunde, atunci el nu va mai merge la magazin și se va afișa numărul minim de secunde în care acesta ajunge de la poziția lui la clasă. De asemenea, se va afișa și traseul folosit.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului <code>liceu.in</code> se vor afla <code>4</code> numere naturale: <code>n</code> – numărul de linii și de coloane ale matricei, <code>z</code> – numărul de ziduri ce blochează calea băiatului, <code>s</code> – numărul de scurtături și <code>t</code> – numărul de secunde în care Marciuc poate ajunge în clasă dacă vrea să treacă și pe la magazin.</p>
+
+<p>Pe următoarele <code>Z</code> linii se află câte <code>2</code> numere reprezentânt coordonatele celulelor ocupate de zid.</p>
+
+<p>Pe următoarele <code>S</code> linii se află câte <code>4</code> numere naturale reprezentând coordonatele a două celule ce formează o scurtătură.</p>
+
+<p>Pe ultima linie se află <code>2</code> numere ce reprezintă coordonatele magazinului.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>liceu.out</code> va conține pe prima linie numărul minim de secunde în care băiatul ajunge în clasă, iar pe următoarele linii traseul complet al băiatului, celule fiind afișate în ordinea parcurgerii.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 400</code></li>
+	<li><code>5 ≤ z ≤ 100000</code></li>
+	<li><code>0 ≤ s ≤ 15500</code></li>
+	<li>Poziția inițială a lui Marciuc este <code>1 1</code>, iar poziția clasei este <code>n n</code></li>
+	<li>Orice traseu de durată minimă este corect. Dacă băiatul poate merge pe la magazin, în traseu trebuie să apară obligatoriu coordonatele magazinului.</li>
+	<li>Daca numărul minim de secunde este corect dar traseul nu este curect se acordă <strong>40%</strong> din punctaj.</li>
+	<li>Pentru teste în valoare de <strong>20</strong> de puncte, <code>s = 0</code>.</li>
+	<li>Pentru teste în valoare de <strong>40</strong> de puncte, <code>n ≤ 100</code>.</li>
+	<li>Marciuc poate trece de mai multe ori prin același loc.</li>
+	<li>O celula surtătură poate fi folosită și ca o celula libera.</li>
+	<li>Fiecare celulă are un singur tip. Nu există scurtături spre celule blocate; celulele <code>1 1</code>, <code>n n</code> și celula pe care este situat magazinul nu sunt blocate.</li>
+	<li>O scurtatură poate fi traversată prin ambele sensuri.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>liceu.in</code></p>
+
+<pre>5 5 2 10
+1 5
+3 3
+4 5
+5 2
+2 2
+3 1 5 4
+4 3 1 2
+4 4</pre>
+
+<p><code>liceu.out</code></p>
+
+<pre>6
+1 1
+1 2
+4 3
+4 4
+5 4
+5 5</pre>
+
+<p>Marciuc începe din celula <code>1 1</code>. De-acolo se deplasează până în celula <code>1 2</code>, de unde folosește scurtătura ca să ajungă la <code>4 3</code>. De la <code>4 3</code> se deplasează în celula <code>4 4</code>, unde este magazinul, iar de acolo se deplasează în celulele <code>5 4</code>, <code>5 5</code>, ajungând astfel în <code>clasă</code>. În total, baiatul ajunge în clasă in <code>6</code> secunde, iar <code>6&lt;=T</code>.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>liceu.in</code></p>
+
+<pre>5 5 2 10
+2 1
+3 3
+4 5
+5 2
+2 2
+1 4 4 1
+2 3 3 2
+1 5</pre>
+
+<p><code>liceu.out</code></p>
+
+<pre>9
+1 1
+1 2
+1 3
+1 4
+2 4
+3 4
+4 4
+5 4
+5 5</pre>
+
+<p>Dacă ar merge pe la magazin, Marciuc ar ajunge în clasă în <code>11</code> secunde. Dar <code>11&gt;T</code> așa că alege să meargă direct la clasa. O să parcurga urmatorul drum: <code>1 1</code>, <code>1 2</code>, <code>1 3</code>, <code>1 4</code>, <code>2 4</code>, <code>3 4</code>, <code>4 4</code>, <code>5 4</code>, <code>5 5</code>. Puteam observa ca în celula <code>1 4</code> este o scurtătura dar Marciuc a preferat sa nu mearga prin ea. O să ajunge în clasă în <code>9</code> secunde.</p>		</article>
+		</body></html>

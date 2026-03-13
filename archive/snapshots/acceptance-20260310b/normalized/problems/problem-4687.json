@@ -1,0 +1,327 @@
+{
+  "id": 4687,
+  "slug": "feast",
+  "name": "Feast",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4687/feast",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 116,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=116"
+    },
+    {
+      "id": 150,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=150"
+    }
+  ],
+  "tags": [
+    "Relaxare lagrangiană",
+    "Programare dinamică",
+    "Greedy"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Gug pregătește un festin pentru prietenii săi. Festinul constă în \\(N\\) mâncăruri aranjate într-un rând. Mâncarea \\(i\\) dă valoarea de satisfacție \\(A_i\\) când este consumată. Cum unele mâncăruri pot fi expirate, ele pot avea valoarea de satisfacție \\(A_i\\) negativă.</p><p>Există un total de \\(K\\) persoane care participă la festin și fiecărei persoană îi va fi desemnată o secvență de mâncăruri pe care le poate consuma. Această secvență poate fi și vidă. Două secvențe nu se pot suprapune, fiindcă mâncarea nu poate fi consumată de mai multe ori. Gug dorește să aleagă secvențele de mâncăruri pentru fiecare persoană în așa fel încât valoarea totală de satisfacție să fie maximizată.</p>",
+      "text": "Gug pregătește un festin pentru prietenii săi. Festinul constă în \\(N\\) mâncăruri aranjate într-un rând. Mâncarea \\(i\\) dă valoarea de satisfacție \\(A_i\\) când este consumată. Cum unele mâncăruri pot fi expirate, ele pot avea valoarea de satisfacție \\(A_i\\) negativă.Există un total de \\(K\\) persoane care participă la festin și fiecărei persoană îi va fi desemnată o secvență de mâncăruri pe care le poate consuma. Această secvență poate fi și vidă. Două secvențe nu se pot suprapune, fiindcă mâncarea nu poate fi consumată de mai multe ori. Gug dorește să aleagă secvențele de mâncăruri pentru fiecare persoană în așa fel încât valoarea totală de satisfacție să fie maximizată."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie se vor afla numerele \\(N\\) și \\(K\\), cu semnificația din enunț.</p><p>Pe a doua linie se vor afla \\(N\\) numere întregi, reprezentând elementele șirului.</p>",
+      "text": "Pe prima linie se vor afla numerele \\(N\\) și \\(K\\), cu semnificația din enunț.Pe a doua linie se vor afla \\(N\\) numere întregi, reprezentând elementele șirului."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Se va afișa suma maximă care se poate obține alegând maxim \\(K\\) secvențe disjuncte.</p>",
+      "text": "Se va afișa suma maximă care se poate obține alegând maxim \\(K\\) secvențe disjuncte."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li>Se recomandă folosirea <a href=\"https://www.geeksforgeeks.org/fast-io-for-competitive-programming/\">fastio</a></li>\n\t<li>\\(1 \\leq K \\leq N \\leq 3 \\cdot {10}^{5}\\)</li>\n\t<li>\\(0 \\leq |A_i| \\leq {10}^{9}\\)</li>\n</ul>",
+      "text": "Se recomandă folosirea fastio \\(1 \\leq K \\leq N \\leq 3 \\cdot {10}^{5}\\) \\(0 \\leq |A_i| \\leq {10}^{9}\\)"
+    },
+    {
+      "title": "Subtask-uri",
+      "html": "<table>\n\t<colgroup span=\"1\">\n\t<col width=\"200\">\n\t<col width=\"100\">\n\t</colgroup>\n\t\t<tbody><tr>\n\t\t\t<td> <strong>Subtask</strong>            </td>\n\t\t\t<td> <strong>Puncte</strong> </td>\n\t\t\t<td> <strong>Restricții suplimentare</strong>                               </td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td> <code>1 (testele 1-10)</code>   </td>\n\t\t\t<td> <code>4</code>      </td>\n\t\t\t<td> \\(A_i \\geq 0\\)                                          </td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td> <code>2 (testele 11-20)</code>  </td>\n\t\t\t<td> <code>8</code>      </td>\n\t\t\t<td> \\(\\vert S \\vert = 1, S = \\left\\{ i, A_i &lt; 0 \\right\\}\\)  </td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td> <code>3 (testele 21-30)</code>  </td>\n\t\t\t<td> <code>18</code>     </td>\n\t\t\t<td> \\(K = 1\\)                                               </td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td> <code>4 (testele 31-40)</code>  </td>\n\t\t\t<td> <code>10</code>     </td>\n\t\t\t<td> \\(1 \\leq K \\leq N \\leq 80\\)                             </td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td> <code>5 (testele 41-50)</code>  </td>\n\t\t\t<td> <code>11</code>     </td>\n\t\t\t<td> \\(1 \\leq K \\leq N \\leq 300\\)                            </td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td> <code>6 (testele 51-60)</code>  </td>\n\t\t\t<td> <code>20</code>     </td>\n\t\t\t<td> \\(1 \\leq K \\leq N \\leq 2 \\ 000\\)                        </td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td> <code>7 (testele 61-70)</code>  </td>\n\t\t\t<td> <code>29</code>     </td>\n\t\t\t<td> Nicio restricție suplimentară                           </td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<td> <code>0 (testele 71-73)</code>  </td>\n\t\t\t<td> <code>0</code>     </td>\n\t\t\t<td> Exemple                                                  </td>\n\t\t</tr>\n</tbody></table>",
+      "text": "Subtask Puncte Restricții suplimentare 1 (testele 1-10) 4 \\(A_i \\geq 0\\) 2 (testele 11-20) 8 \\(\\vert S \\vert = 1, S = \\left\\{ i, A_i < 0 \\right\\}\\) 3 (testele 21-30) 18 \\(K = 1\\) 4 (testele 31-40) 10 \\(1 \\leq K \\leq N \\leq 80\\) 5 (testele 41-50) 11 \\(1 \\leq K \\leq N \\leq 300\\) 6 (testele 51-60) 20 \\(1 \\leq K \\leq N \\leq 2 \\ 000\\) 7 (testele 61-70) 29 Nicio restricție suplimentară 0 (testele 71-73) 0 Exemple"
+    },
+    {
+      "title": "Exemplu 1:",
+      "html": "<p><strong>Intrare</strong></p><pre>6 1\n1 -2 3 -1 5 -6</pre><p><strong>Ieșire</strong></p><pre>7</pre><h3>Explicație</h3><p>Soluția optimă este să alegem secvența \\([3, \\ -1, \\ 5]\\), obținând astfel suma \\(7\\).</p>",
+      "text": "Intrare6 1 1 -2 3 -1 5 -6Ieșire7ExplicațieSoluția optimă este să alegem secvența \\([3, \\ -1, \\ 5]\\), obținând astfel suma \\(7\\)."
+    },
+    {
+      "title": "Exemplu 2:",
+      "html": "<p><strong>Intrare</strong></p><pre>6 2\n1 2 3 -10 5 6</pre><p><strong>Ieșire</strong></p><pre>17</pre><h3>Explicație</h3><p>Soluția optimă este să alegem secvențele \\([1, \\ 2, \\ 3]\\) și \\([5, \\ 6]\\), obținând astfel suma \\(17\\).</p>",
+      "text": "Intrare6 2 1 2 3 -10 5 6Ieșire17ExplicațieSoluția optimă este să alegem secvențele \\([1, \\ 2, \\ 3]\\) și \\([5, \\ 6]\\), obținând astfel suma \\(17\\)."
+    },
+    {
+      "title": "Exemplu 3:",
+      "html": "<p><strong>Intrare</strong></p><pre>6 4\n-1 -2 -1 0 -5 -1</pre><p><strong>Ieșire</strong></p><pre>0</pre><h3>Explicație</h3><p>Fiindcă toate secvențele au sumă non-pozitivă, este optim să nu alegem nicio secvență, obținând astfel suma \\(0\\).</p>",
+      "text": "Intrare6 4 -1 -2 -1 0 -5 -1Ieșire0ExplicațieFiindcă toate secvențele au sumă non-pozitivă, este optim să nu alegem nicio secvență, obținând astfel suma \\(0\\)."
+    }
+  ],
+  "examples": [
+    {
+      "input": "6 1\n1 -2 3 -1 5 -6",
+      "output": "7",
+      "explanation": "Soluția optimă este să alegem secvența \\([3, \\ -1, \\ 5]\\), obținând astfel suma \\(7\\)."
+    },
+    {
+      "input": "6 2\n1 2 3 -10 5 6",
+      "output": "17",
+      "explanation": "Soluția optimă este să alegem secvențele \\([1, \\ 2, \\ 3]\\) și \\([5, \\ 6]\\), obținând astfel suma \\(17\\)."
+    },
+    {
+      "input": "6 4\n-1 -2 -1 0 -5 -1",
+      "output": "0",
+      "explanation": "Fiindcă toate secvențele au sumă non-pozitivă, este optim să nu alegem nicio secvență, obținând astfel suma \\(0\\)."
+    }
+  ],
+  "constraints": [
+    "Se recomandă folosirea fastio",
+    "\\(1 \\leq K \\leq N \\leq 3 \\cdot {10}^{5}\\)",
+    "\\(0 \\leq |A_i| \\leq {10}^{9}\\)"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qa6815a0f8e.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Moldovan Robert (moldovan_robert_lol)",
+    "clasa": "11",
+    "intrare/ieșire": "tastatură / ecran",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "256 MB / 256 MB",
+    "sursa problemei": "NOISG 2019, problema 3",
+    "autor": "Zhang Guangxuan",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 256,
+  "author": "Zhang Guangxuan",
+  "sourceAttribution": "NOISG 2019, problema 3",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4687/feast"
+}

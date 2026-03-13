@@ -1,0 +1,330 @@
+{
+  "id": 3889,
+  "slug": "cntsubsirmax",
+  "name": "CntSubsirMax",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3889/cntsubsirmax",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 116,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=116"
+    },
+    {
+      "id": 150,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=150"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Felicia este interesată de subșirul maxim lexicografic al unui șir de caractere. Rețineți că un șir <code>a</code> este considerat mai mic în ordine lexicografică decât un șir <code>b</code> dacă <code>a</code> este prefix al lui <code>b</code>, sau dacă există o poziție <code>i</code> pentru care avem <code>a[1] = b[1], ..., a[i − 1] = b[i − 1], și a[i] &lt; b[i]</code>. Astfel, subșirul maxim lexicografic al unui șir de caractere este cel mai mare subșir, în ordinea lexicografică, al unui șir de caractere (de exemplu <code>zzxx</code> pentru <code>azbxazbxaax</code>). Pentru un șir <code>s</code> de caractere vom nota cu <code>m(s)</code> subșirul maxim lexicografic al lui <code>s</code>, și cu <code>v(s) = |m(s)|</code> lungimea acestui subșir. Felicia vă dă un șir <code>s</code> format din caractere mici ale alfabetului englez. Considerați toate subsecvențele continue <code>s'</code> ale lui <code>s</code>. Felicia vrea să calculați suma valorilor <code>v(s')</code> pentru toate subsecvențele posibile <code>s'</code> amintite anterior.</p>",
+      "text": "Felicia este interesată de subșirul maxim lexicografic al unui șir de caractere. Rețineți că un șir a este considerat mai mic în ordine lexicografică decât un șir b dacă a este prefix al lui b, sau dacă există o poziție i pentru care avem a[1] = b[1], ..., a[i − 1] = b[i − 1], și a[i] < b[i]. Astfel, subșirul maxim lexicografic al unui șir de caractere este cel mai mare subșir, în ordinea lexicografică, al unui șir de caractere (de exemplu zzxx pentru azbxazbxaax). Pentru un șir s de caractere vom nota cu m(s) subșirul maxim lexicografic al lui s, și cu v(s) = |m(s)| lungimea acestui subșir. Felicia vă dă un șir s format din caractere mici ale alfabetului englez. Considerați toate subsecvențele continue s' ale lui s. Felicia vrea să calculați suma valorilor v(s') pentru toate subsecvențele posibile s' amintite anterior."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe singura linie citită de la tastatură se va găsi șirul <code>s</code>.</p>",
+      "text": "Pe singura linie citită de la tastatură se va găsi șirul s."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Să se afișeze suma cerută, modulo \\(10^9 + 7\\).</p>",
+      "text": "Să se afișeze suma cerută, modulo \\(10^9 + 7\\)."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li>\\(1 ≤ N ≤ 10^6\\).</li>\n</ul>",
+      "text": "\\(1 ≤ N ≤ 10^6\\)."
+    },
+    {
+      "title": "Subtask (20 puncte)",
+      "html": "<ul>\n\t<li>\\(N ≤ 15\\).</li>\n</ul>",
+      "text": "\\(N ≤ 15\\)."
+    },
+    {
+      "title": "Subtask (10 puncte)",
+      "html": "<ul>\n\t<li>\\(N ≤ 200\\).</li>\n</ul>",
+      "text": "\\(N ≤ 200\\)."
+    },
+    {
+      "title": "Subtask (20 puncte)",
+      "html": "<ul>\n\t<li>\\(N ≤ 2 000\\).</li>\n</ul>",
+      "text": "\\(N ≤ 2 000\\)."
+    },
+    {
+      "title": "Subtask (20 puncte)",
+      "html": "<ul>\n\t<li>\\(N ≤ 5 · 10^4\\).</li>\n</ul>",
+      "text": "\\(N ≤ 5 · 10^4\\)."
+    },
+    {
+      "title": "Subtask (30 puncte)",
+      "html": "<ul>\n\t<li>Fară restricții suplimentare.</li>\n</ul>",
+      "text": "Fară restricții suplimentare."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><strong>Intrare</strong></p><pre>cab</pre><p><strong>Ieșire</strong></p><pre>8</pre><h3>Explicație</h3><p>Pentru primul exemplu, observăm că <code>m(c) = c</code>, <code>m(a) = a</code>, <code>m(b) = b</code>, <code>m(ca) = ca</code>, <code>m(ab) = b</code>, <code>m(cab) = cb</code>.<br>\nAstfel, răspunsul este <code>1 + 1 + 1 + 2 + 1 + 2 = 8</code>.</p>",
+      "text": "IntrarecabIeșire8ExplicațiePentru primul exemplu, observăm că m(c) = c, m(a) = a, m(b) = b, m(ca) = ca, m(ab) = b, m(cab) = cb. Astfel, răspunsul este 1 + 1 + 1 + 2 + 1 + 2 = 8."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><strong>Intrare</strong></p><pre>felicia</pre><p><strong>Ieșire</strong></p><pre>59</pre>",
+      "text": "IntrarefeliciaIeșire59"
+    }
+  ],
+  "examples": [
+    {
+      "input": "cab",
+      "output": "8",
+      "explanation": "Pentru primul exemplu, observăm că m(c) = c, m(a) = a, m(b) = b, m(ca) = ca, m(ab) = b, m(cab) = cb. Astfel, răspunsul este 1 + 1 + 1 + 2 + 1 + 2 = 8."
+    },
+    {
+      "input": "felicia",
+      "output": "59"
+    }
+  ],
+  "constraints": [
+    "\\(1 ≤ N ≤ 10^6\\)."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q2d73d1878f.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Iacob Tudor (IacobTudor)",
+    "clasa": "11",
+    "intrare/ieșire": "tastatură / ecran",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "Concursul Național Info Pro, Etapa II",
+    "autor": "Tamio-Vesa Nakajima",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "author": "Tamio-Vesa Nakajima",
+  "sourceAttribution": "Concursul Național Info Pro, Etapa II",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3889/cntsubsirmax"
+}

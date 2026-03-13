@@ -1,0 +1,296 @@
+{
+  "id": 1974,
+  "slug": "trumplandia",
+  "name": "TrumpLandia",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1974/trumplandia",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 16,
+      "name": "Teoria Grafurilor",
+      "slug": "teoria-grafurilor",
+      "href": "/?pagina=probleme-lista&tag=16"
+    },
+    {
+      "id": 60,
+      "name": "Grafuri cu costuri",
+      "slug": "grafuri-cu-costuri",
+      "href": "/?pagina=probleme-lista&tag=60"
+    }
+  ],
+  "tags": [
+    "Algoritmul lui Kruskal",
+    "Păduri de mulțimi disjuncte"
+  ],
+  "sections": [
+    {
+      "title": "Date de intrare",
+      "html": "<p>Datele de intrare vor fi citite din fișierul <code>trumplandia.in</code>. Pe prima linie se află trei numere separate prin spațiu: <code>N</code> (numărul de buncăre), <code>M</code> (numărul de rute posibile), <code>Q</code> (numărul de soluții de rezervă). <br>\nPe următoarele <code>M</code> linii se află triplete de forma (<code>nod1</code>, <code>nod2</code>, <code>dist12</code>) ce descriu o posibilă legătură între nodurile <code>nod1</code> și <code>nod2</code> cu distanța <code>dist12</code>. <br>\nPe următoarele <code>Q</code> linii se află câte un număr <code>Qi</code>, reprezentând indexul unei muchii care trebuie inclusă într-un plan de rezervă. (<b>valorile se pot repeta</b>)</p>",
+      "text": "Datele de intrare vor fi citite din fișierul trumplandia.in. Pe prima linie se află trei numere separate prin spațiu: N (numărul de buncăre), M (numărul de rute posibile), Q (numărul de soluții de rezervă). Pe următoarele M linii se află triplete de forma (nod1, nod2, dist12) ce descriu o posibilă legătură între nodurile nod1 și nod2 cu distanța dist12. Pe următoarele Q linii se află câte un număr Qi, reprezentând indexul unei muchii care trebuie inclusă într-un plan de rezervă. (valorile se pot repeta)"
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Datele de ieșire vor fi afișate în fișierul <code>trumplandia.out</code>. <br>\nPe prima linie se va afla un număr reprezentând costul celui mai bun plan, pentru situația în care pot fi folosite oricare dintre cele <code>M</code> rute. <br>\nPe următoarele <code>Q</code> linii se află un număr <code>Ci</code> reprezentând costul minim al unui plan care conține muchia <code>Qi</code>.</p>",
+      "text": "Datele de ieșire vor fi afișate în fișierul trumplandia.out. Pe prima linie se va afla un număr reprezentând costul celui mai bun plan, pentru situația în care pot fi folosite oricare dintre cele M rute. Pe următoarele Q linii se află un număr Ci reprezentând costul minim al unui plan care conține muchia Qi."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 200.000</code> (pentru <code>30%</code> din teste <code>N ≤ 1000</code>)</li>\n\t<li><code>N-1 ≤ M ≤ 200.000</code> (pentru <code>30%</code> din teste <code>M ≤ 1000</code>)</li>\n\t<li><code>1 ≤ Q ≤ 300.000</code> (pentru <code>30%</code> din teste <code>Q ≤ 1000</code>)</li>\n\t<li>distanța asociată unei rute este o valoare întreagă din intervalul <code>[1, 1.000.000.000]</code>.</li>\n</ul><p><b><span class=\"caps\">ATENȚIE</span>!!!</b> Între oricare două buncăre pot exista <b><span class=\"caps\">MAI</span> <span class=\"caps\">MULTE</span></b> rute de distanțe diferite sau nu. Exemplu: <code>(1 2 4)</code> și <code>(1 2 6)</code> sunt două muchii între buncărele <code>1</code> și <code>2</code> de distanțe <code>4</code>, respectiv <code>6</code>.</p>",
+      "text": "1 ≤ N ≤ 200.000 (pentru 30% din teste N ≤ 1000) N-1 ≤ M ≤ 200.000 (pentru 30% din teste M ≤ 1000) 1 ≤ Q ≤ 300.000 (pentru 30% din teste Q ≤ 1000) distanța asociată unei rute este o valoare întreagă din intervalul [1, 1.000.000.000]. ATENȚIE!!! Între oricare două buncăre pot exista MAI MULTE rute de distanțe diferite sau nu. Exemplu: (1 2 4) și (1 2 6) sunt două muchii între buncărele 1 și 2 de distanțe 4, respectiv 6."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>trumplandia.in</code></p><pre>6 8 8\n1 2 4\n4 1 6\n3 1 2\n2 3 3\n5 2 4\n3 4 3\n4 5 5\n5 6 1\n1\n2\n3\n4\n5\n6\n7\n8</pre><p><code>trumplandia.out</code></p><pre>13\n14\n16\n13\n13\n13\n13\n14\n13</pre><h3>Explicație</h3><p></p><p><img alt=\"\" height=\"180\" src=\"https://www.pbinfo.ro/resurse/d7bfda/trumplandia.jpg\" width=\"250\"></p><p></p>",
+      "text": "trumplandia.in6 8 8 1 2 4 4 1 6 3 1 2 2 3 3 5 2 4 3 4 3 4 5 5 5 6 1 1 2 3 4 5 6 7 8trumplandia.out13 14 16 13 13 13 13 14 13Explicație"
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "1 ≤ N ≤ 200.000 (pentru 30% din teste N ≤ 1000)",
+    "N-1 ≤ M ≤ 200.000 (pentru 30% din teste M ≤ 1000)",
+    "1 ≤ Q ≤ 300.000 (pentru 30% din teste Q ≤ 1000)",
+    "distanța asociată unei rute este o valoare întreagă din intervalul [1, 1.000.000.000]."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qf25181d795.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/d7bfda/trumplandia.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-d7bfda-trumplandia-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Nodea Eugen (eugen_nodea)",
+    "clasa": "11",
+    "intrare/ieșire": "trumplandia.in / trumplandia.out",
+    "limită timp": "0.4 secunde",
+    "limită memorie": "256 MB / 8 MB",
+    "sursa problemei": "Info Oltenia 2017, Clasele XI-XII, echipaje",
+    "autor": "student Radu Stochițoiu, Fac. de Calculatoare, Bucuresti",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.4,
+  "memoryLimitMb": 256,
+  "author": "student Radu Stochițoiu, Fac. de Calculatoare, Bucuresti",
+  "sourceAttribution": "Info Oltenia 2017, Clasele XI-XII, echipaje",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1974/trumplandia"
+}

@@ -1,0 +1,72 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3534"><article id="enunt">
+			<p>Definiți în C++ clasa <strong>Multiset</strong> care va implementa multiset-uri de numere naturale în care se definesc operațiile:</p>
+
+<ul>
+	<li><code>Insert(x)</code> – inserează <code>x</code> în multiset</li>
+	<li><code>Erase(x)</code> – elimină elementul de pe pozitia <code>x</code> din multiset</li>
+	<li><code>Find(x)</code> – returnează valoarea de pe pozitia <code>x</code> din multiset<br>
+De asemenea, trebuie definit si constructorul pentru un număr natural <code>n</code> dat.</li>
+</ul>
+
+<h1>Cerinţa</h1>
+
+<p>Definiți clasa <code>Multiset</code>. Aceasta va fi integrată într-un program de forma:</p>
+
+<pre class="code_c">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+// aici va aparea definitia scrisa de voi a clasei Multiset
+int n, q, op, x;
+int main()
+{
+    cin &gt;&gt; n;
+    Multiset ms(n);    
+    for (int i = 1; i &lt;= n; ++i)
+	{
+    	cin &gt;&gt; x;
+        ms.Insert(x);    
+    }
+    cin &gt;&gt; q;
+    for (int i = 1; i &lt;= q; ++i) 
+    {
+    	cin &gt;&gt; op &gt;&gt; x;  
+        if (op == 1)
+        	ms.Insert(x);
+        else if (op == 2)
+        	ms.Erase(x);
+        else cout &lt;&lt; ms.Find(x) &lt;&lt; '\n';
+    }
+    return 0;
+}</pre>
+
+<h1>Restricţii şi precizări</h1>
+
+<ul>
+	<li>Numele clasei este <code>Multiset</code></li>
+	<li>Puteți defini ce variabile membre doriți, dar numai funcțiile membre descrise mai sus vor fi apelate</li>
+	<li>Elementul de pe pozitia <code>x</code> din multiset reprezinta al <code>x</code>-lea cel mai mic număr inserat</li>
+	<li><code>n</code> este mai mic sau egal cu <code>1.000.000</code></li>
+	<li>Numerele introduse in multiset sunt strict pozitive si mai mici sau egale decat <code>n</code></li>
+	<li>Mai multe informații despre multiset: http://www.cplusplus.com/reference/set/multiset/</li>
+</ul>
+
+
+<h1>Exemplu:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>5
+1 2 3 4 5
+4
+1 3
+2 2
+2 1
+3 4</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>5</pre>
+
+<h3>Explicație</h3>
+
+<p>Dupa primele <code>3</code> operatii, elementele din <code>ms</code> sunt <code>3 3 4 5</code>.</p>		</article>
+		</body></html>

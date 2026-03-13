@@ -1,0 +1,37 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2945"><article id="enunt">
+			<p>Tu și <strong>Silion</strong> vreți să vă jucați un joc. Veți spune, pe rând, numere naturale nenule mai mici sau egale cu <code>10</code>. Suma numerelor <strong>ambilor</strong> jucători se va reține pe parcursul jocului. Câștigătorul este acela care spune ultimul un număr astfel încât suma totală să devină <code>10 000</code>. Dovedește-i lui Silion că, dacă ai avantajul de a începe, poți găsi o strategie optimă cu care să câștigi de fiecare dată!</p>
+
+<h1>Intrare și ieșire</h1>
+
+<p>Pentru o comunicare eficientă, vei apela din <strong>main</strong> funcția predefinită cu antetul <span style="color: #c7254e; background-color: #f9f2f4; border-radius: 4px; font-family: monospace !important">unsigned <span style="font-weight: bold">comunica</span>(unsigned x)</span>. Parametrul <code>x</code> reprezintă valoarea transmisă lui Silion, iar funcția va întoarce răspunsul său, cu excepția momentului în care jocul se încheie, când Silion va transmite valoarea <code>0</code>. </p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>În <code>30%</code> din cazuri, Silion va juca cu un număr constant;</li>
+	<li>În alte <code>30%</code> din cazuri, adversarul va juca cu numere alese la întâmplare;</li>
+	<li>În restul de <code>40%</code> din cazuri, Silion joacă conform propriei sale strategii.</li>
+</ul>
+
+<p><strong>Notă:</strong> Dacă Silion poate câștiga meciul într-o singură mutare, indiferent de cazurile de mai sus, atunci acesta o va face!</p>
+
+<h1>Atenție!</h1>
+
+<p>Soluția propusă va conține doar funcția <strong>main</strong>. Aceasta poate apela numai funcția <strong>comunica</strong>. Prezența altor instrucțiuni poate fi interpretată drept încălcareea regulilor. De asemenea, regulile pot fi considerate încălcate dacă:</p>
+
+<ul>
+	<li>Sunt afișate pe ecran diverse mesaje sau sunt citite date din consolă;</li>
+	<li>Funcția <span style="color: #c7254e; background-color: #f9f2f4; border-radius: 4px; font-family: monospace !important; font-weight: bold">comunica</span> este apelată cu un parametru ce nu se încadrează în intervalul <code>[1, 10]</code>.</li>
+</ul>
+
+<p>Jocul se încheie automat dacă regulile au fost încălcate sau dacă unul din jucători iese învingător.</p>
+
+<h1>Exemplu:</h1>
+
+<p>Un exemplu de joc restrâns, în care tu și Silion jucați aleatoriu până la <code>100</code>, este următorul:</p>
+
+<table style="border-collapse:collapse!important;width: 500px;"><tbody><tr><th style="text-align:left; padding:8px;">Mutare</th><th style="text-align:left;padding:8px;">Jucător</th><th style="text-align:left; padding:8px;">Număr</th><th style="text-align:left; padding:8px;">Total curent</th></tr><tr><td style="text-align:left;background-color:#f2f2f2; padding:8px;">1</td><td style="text-align:left;background-color:#f2f2f2; padding:8px;">Tu</td><td style="text-align:left;background-color:#f2f2f2; padding:8px;">10</td><td style="text-align:left;background-color:#f2f2f2; padding:8px;">10</td></tr><tr><td style="text-align:left;padding:8px;">2</td><td style="text-align:left;padding:8px;">Silion</td><td style="text-align:left;padding:8px;">7</td><td style="text-align:left;padding:8px;">17</td></tr><tr><td style="text-align:left;background-color:#f2f2f2; padding:8px;">3</td><td style="text-align:left;background-color:#f2f2f2; padding:8px;">Tu</td><td style="text-align:left;background-color:#f2f2f2; padding:8px;">6</td><td style="text-align:left;background-color:#f2f2f2; padding:8px;">23</td></tr><tr><td style="text-align:left;padding:8px;">4</td><td style="text-align:left;padding:8px;">Silion</td><td style="text-align:left;padding:8px;">1</td><td style="text-align:left;padding:8px;">24</td></tr><tr><td style="text-align:left;background-color:#f2f2f2; padding:8px;">5</td><td style="text-align:left;background-color:#f2f2f2; padding:8px;">Tu</td><td style="text-align:left;background-color:#f2f2f2; padding:8px;">2</td><td style="text-align:left;background-color:#f2f2f2; padding:8px;">26</td></tr><tr><td style="text-align:left;padding:8px;">6</td><td style="text-align:left;padding:8px;">Silion</td><td style="text-align:left;padding:8px;">2</td><td style="text-align:left;padding:8px;">28</td></tr><tr><td style="text-align:left;background-color:#f2f2f2; padding:8px;">7 / 8</td><td style="text-align:left;background-color:#f2f2f2; padding:8px;">Tu / Silion</td><td style="text-align:left;background-color:#f2f2f2; padding:8px;">2 / 9</td><td style="text-align:left;background-color:#f2f2f2; padding:8px;">30 / 39</td></tr><tr><td style="text-align:left;padding:8px;">9 / 10</td><td style="text-align:left;padding:8px;">Tu / Silion</td><td style="text-align:left;padding:8px;">7 / 5</td><td style="text-align:left;padding:8px;">46 / 51</td></tr><tr><td style="text-align:left;background-color:#f2f2f2; padding:8px;">11 / 12</td><td style="text-align:left;background-color:#f2f2f2; padding:8px;">Tu / Silion</td><td style="text-align:left;background-color:#f2f2f2; padding:8px;">1 / 10</td><td style="text-align:left;background-color:#f2f2f2; padding:8px;">52 / 62</td></tr><tr><td style="text-align:left;padding:8px;">13 / 14</td><td style="text-align:left;padding:8px;">Tu / Silion</td><td style="text-align:left;padding:8px;">10 / 8</td><td style="text-align:left;padding:8px;">72 / 80</td></tr><tr><td style="text-align:left;background-color:#f2f2f2; padding:8px;">15 / 16</td><td style="text-align:left;background-color:#f2f2f2; padding:8px;">Tu / Silion</td><td style="text-align:left;background-color:#f2f2f2; padding:8px;">4 / 4</td><td style="text-align:left;background-color:#f2f2f2; padding:8px;">84 / 88</td></tr><tr><td style="text-align:left;padding:8px;">17 / <span style="color: #0d0">18</span></td><td style="text-align:left;padding:8px;"><span style="color: #f00">Tu</span> / <span style="color: #0d0">Silion</span></td><td style="text-align:left;padding:8px;">3 / 9</td><td style="text-align:left;padding:8px;">91 / <span style="color: #0d0">100</span></td></tr></tbody></table><br>
+
+
+<p>Silion câștigă meciul, ajungând primul la <code>100</code>.</p>		</article>
+		</body></html>

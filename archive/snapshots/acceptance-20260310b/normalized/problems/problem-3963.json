@@ -1,0 +1,304 @@
+{
+  "id": 3963,
+  "slug": "maxq",
+  "name": "maxq",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3963/maxq",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 65,
+      "name": "Structuri de date arborescente",
+      "slug": "structuri-de-date-arborescente",
+      "href": "/?pagina=probleme-lista&tag=65"
+    },
+    {
+      "id": 148,
+      "name": "Structuri de date",
+      "slug": "structuri-de-date",
+      "href": "/?pagina=probleme-lista&tag=148"
+    }
+  ],
+  "tags": [
+    "Arbori de intervale",
+    "Șmenul lui Batog (Square Root Decomposition)"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Ajutaţil pe Johnie să efectueze repede operaţiile de mai sus. </p>",
+      "text": "Ajutaţil pe Johnie să efectueze repede operaţiile de mai sus."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul <code>maxq.in</code> conţine pe prima linie numărul <code>N</code> reprezentând dimensiunea vectorului. Pe următoarea linie se găsesc <code>N</code> elemente reprezentând valorile iniţiale ale vectorului. Urmatoarea linie conţine <code>M</code>, reprezentând numărul de operaţii. Pe fiecare dintre următoarele <code>M</code> linii sunt descrise cele <code>M</code> operaţii în forma următoare:</p><ul>\n\t<li><code>0 i p</code>: numărul <code>0</code> de la început codifică faptul că operaţia curentă este una de schimbare; astfel elementul de pe poziţia <code>i</code> a vectorului se înlocuieşte cu numarul întreg <code>p</code>;</li>\n</ul><ul>\n\t<li><code>1 a b</code>: numărul <code>1</code> de la început codifică faptul că operaţia curentă este o întrebare; astfel se cere să se afle subsecvenţa de sumă maximă din vector inclusă între indicii <code>a</code> şi <code>b</code> <code>(a ≤ b)</code>;</li>\n</ul>",
+      "text": "Fișierul maxq.in conţine pe prima linie numărul N reprezentând dimensiunea vectorului. Pe următoarea linie se găsesc N elemente reprezentând valorile iniţiale ale vectorului. Urmatoarea linie conţine M, reprezentând numărul de operaţii. Pe fiecare dintre următoarele M linii sunt descrise cele M operaţii în forma următoare: 0 i p: numărul 0 de la început codifică faptul că operaţia curentă este una de schimbare; astfel elementul de pe poziţia i a vectorului se înlocuieşte cu numarul întreg p; 1 a b: numărul 1 de la început codifică faptul că operaţia curentă este o întrebare; astfel se cere să se afle subsecvenţa de sumă maximă din vector inclusă între indicii a şi b (a ≤ b);"
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fişierul <code>maxq.out</code> trebuie să conţină un număr de linii egal cu numărul de întrebări din fişierul de intrare. Pe linia i se cere să se afişeze un singur număr reprezentând suma maximă ce se poate obţine în contextul întrebării <code>i</code> din fişierul de intrare <code>(i = 1, 2, ...)</code>; în cazul în care vor exista doar subsecvenţe de sumă negativă se va afişa <code>0</code>.</p>",
+      "text": "Fişierul maxq.out trebuie să conţină un număr de linii egal cu numărul de întrebări din fişierul de intrare. Pe linia i se cere să se afişeze un singur număr reprezentând suma maximă ce se poate obţine în contextul întrebării i din fişierul de intrare (i = 1, 2, ...); în cazul în care vor exista doar subsecvenţe de sumă negativă se va afişa 0."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 200.000</code>;</li>\n\t<li><code>1 ≤ M ≤ 200.000</code>;</li>\n\t<li>toate elementele vectorului aparţin intervalului <code>[-100.000, 100.000]</code>;</li>\n\t<li>definim o subsecvenţă ca fiind un şir de termeni consecutivi din vector, iar suma ei se obţine adunând elementele ce o compun;</li>\n\t<li>există cel puţin o întrebare.</li>\n\t<li>pentru <code>20%</code> din teste se garantează <code>N ≤ 5.000</code></li>\n</ul>",
+      "text": "1 ≤ N ≤ 200.000; 1 ≤ M ≤ 200.000; toate elementele vectorului aparţin intervalului [-100.000, 100.000]; definim o subsecvenţă ca fiind un şir de termeni consecutivi din vector, iar suma ei se obţine adunând elementele ce o compun; există cel puţin o întrebare. pentru 20% din teste se garantează N ≤ 5.000"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>maxq.in</code></p><pre>5\n1 -10 4 -1 9\n4\n1 0 3\n0 1 1\n1 0 3\n1 2 4\n1 2 4</pre><p><code>maxq.out</code></p><pre>4 \n6 \n12 </pre><h3>Explicație</h3><p>Pentru prima întrebare se alege subsecvenţa formată de elementul pe poziţia <code>2</code> din vector. Pentru a <code>2-a</code> întrebare se aleg primele <code>3</code> elemente din vector (elementul de pe poziţia <code>1</code> a fost schimbat). Pentru a <code>3-a</code> întrebare se aleg toate elementele din intervalul cerut. </p>",
+      "text": "maxq.in5 1 -10 4 -1 9 4 1 0 3 0 1 1 1 0 3 1 2 4 1 2 4maxq.out4 6 12 ExplicațiePentru prima întrebare se alege subsecvenţa formată de elementul pe poziţia 2 din vector. Pentru a 2-a întrebare se aleg primele 3 elemente din vector (elementul de pe poziţia 1 a fost schimbat). Pentru a 3-a întrebare se aleg toate elementele din intervalul cerut."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Pentru prima întrebare se alege subsecvenţa formată de elementul pe poziţia 2 din vector. Pentru a 2-a întrebare se aleg primele 3 elemente din vector (elementul de pe poziţia 1 a fost schimbat). Pentru a 3-a întrebare se aleg toate elementele din intervalul cerut."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 200.000;",
+    "1 ≤ M ≤ 200.000;",
+    "toate elementele vectorului aparţin intervalului [-100.000, 100.000];",
+    "definim o subsecvenţă ca fiind un şir de termeni consecutivi din vector, iar suma ei se obţine adunând elementele ce o compun;",
+    "există cel puţin o întrebare.",
+    "pentru 20% din teste se garantează N ≤ 5.000"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q69c2710e13.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Dumitrescu Ovidiu Mihail (dovidiu)",
+    "clasa": "11",
+    "intrare/ieșire": "maxq.in / maxq.out",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "32 MB / 1 MB",
+    "sursa problemei": "ONI 2007, clasele 11-12",
+    "autor": "Daniel Păsăilă",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 32,
+  "author": "Daniel Păsăilă",
+  "sourceAttribution": "ONI 2007, clasele 11-12",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3963/maxq"
+}

@@ -1,0 +1,323 @@
+{
+  "id": 4131,
+  "slug": "joc13",
+  "name": "joc13",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4131/joc13",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 49,
+      "name": "Verificarea unor proprietăţi",
+      "slug": "verificarea-unor-propriet-i",
+      "href": "/?pagina=probleme-lista&tag=49"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Dându-se numărul <code>N</code>, determinați: </p><ul>\n\t<li>Numărul divizorilor lui <code>N</code>;</li>\n\t<li>Numărul maxim de apariții ale unei valori calculate în timpul jocului prin formulele descrise;</li>\n\t<li>Numerele căsuțelor ocupate, în timpul jocului, de pionul câștigătorului în ordinea în care acestea sunt vizitate.</li>\n</ul>",
+      "text": "Dându-se numărul N, determinați: Numărul divizorilor lui N; Numărul maxim de apariții ale unei valori calculate în timpul jocului prin formulele descrise; Numerele căsuțelor ocupate, în timpul jocului, de pionul câștigătorului în ordinea în care acestea sunt vizitate."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie a fișierului <code>joc.in</code> se află două numere naturale, <code>C</code> și <code>N</code> separate printr-un spațiu. Dacă <code>C=1</code>, atunci se rezolvă doar prima cerință, dacă <code>C=2</code>, atunci se rezolvă doar a doua cerință iar dacă <code>C=3</code>, atunci se rezolvă doar cea de-a treia cerință.</p>",
+      "text": "Pe prima linie a fișierului joc.in se află două numere naturale, C și N separate printr-un spațiu. Dacă C=1, atunci se rezolvă doar prima cerință, dacă C=2, atunci se rezolvă doar a doua cerință iar dacă C=3, atunci se rezolvă doar cea de-a treia cerință."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire este <code>joc.out</code>. Dacă <code>C=1</code> sau <code>C=2</code>, acesta conține un număr natural ce reprezintă răspunsul pentru cerința respectivă. Dacă <code>C=3</code>, acesta conține un șir de numere naturale, separate prin câte un spațiu, care reprezintă răspunsul pentru a treia cerință.</p>",
+      "text": "Fișierul de ieșire este joc.out. Dacă C=1 sau C=2, acesta conține un număr natural ce reprezintă răspunsul pentru cerința respectivă. Dacă C=3, acesta conține un șir de numere naturale, separate prin câte un spațiu, care reprezintă răspunsul pentru a treia cerință."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2 ≤ N ≤ 10.000</code></li>\n\t<li>Pentru teste în valoare de <code>23</code> de puncte, <code>C=1</code></li>\n\t<li>Pentru alte teste în valoare de <code>33</code> de puncte, <code>C=2</code></li>\n\t<li>Pentru alte teste în valoare de <code>44</code> de puncte, <code>C=3</code></li>\n\t<li>Se garantează că există un câștigător</li>\n\t<li>Pe parcursul jocului, copii pot ajunge pe căsuțe pe care le-au mai vizitat</li>\n\t<li>Se garantează că numărul căsuțelor ocupate de copii este mai mic decât <code>100.000</code></li>\n\t<li>Problema nu urmăreşte găsirea vreunei proprietăţi speciale pentru șirurile de valori calculate prin formulele date.</li>\n</ul>",
+      "text": "2 ≤ N ≤ 10.000 Pentru teste în valoare de 23 de puncte, C=1 Pentru alte teste în valoare de 33 de puncte, C=2 Pentru alte teste în valoare de 44 de puncte, C=3 Se garantează că există un câștigător Pe parcursul jocului, copii pot ajunge pe căsuțe pe care le-au mai vizitat Se garantează că numărul căsuțelor ocupate de copii este mai mic decât 100.000 Problema nu urmăreşte găsirea vreunei proprietăţi speciale pentru șirurile de valori calculate prin formulele date."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>joc.in</code></p><pre>1 10</pre><p><code>joc.out</code></p><pre>4</pre><h3>Explicație</h3><p><code>C=1</code> deci se rezolvă prima cerință. <code>N=10</code> are <code>4</code> divizori.</p>",
+      "text": "joc.in1 10joc.out4ExplicațieC=1 deci se rezolvă prima cerință. N=10 are 4 divizori."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>joc.in</code></p><pre>2 10</pre><p><code>joc.out</code></p><pre>2</pre><h3>Explicație</h3><p><code>C=2</code> deci se rezolvă a doua cerință. Ambii pioni se află la căsuța 1. Mută primul copil (pionul acestuia se află la căsuța <code>1</code>). </p><ul>\n\t<li>suntem la prima mutare (număr impar);</li>\n\t<li>se calculează cifra pentru înaintarea pionului: <code>X = (1 + (1 + 10) mod 10) mod 6 + 1 = 3</code></li>\n\t<li>primul jucător înaintează pionul de la căsuța <code>1</code> la  căsuța <code>4</code></li>\n</ul><p>Mută al doilea copil (pionul acestuia se află la căsuța <code>1</code>)</p><ul>\n\t<li>suntem la a doua mutare (număr par);</li>\n\t<li>se calculează cifra pentru înaintarea pionului: <code>X = ((((2 + 1) mod 5) + ((1+10) mod 10)) mod 6) + 1 = 5</code></li>\n\t<li>al doilea copil înaintează pionul de la căsuța <code>1</code> la căsuța <code>6</code></li>\n</ul><p>Mută primul copil (pionul acestuia se află la căsuța <code>4</code>)</p><ul>\n\t<li>suntem la a treia mutare (număr impar);</li>\n\t<li>se calculează cifra pentru înaintarea pionului: <code>X= (3 + (4 + 10) mod 10) mod 6 + 1 = 2</code></li>\n\t<li>primul copil înaintează pionul de la căsuța <code>4</code> la căsuța <code>6</code></li>\n\t<li>cum pionul celui de-al doilea copil se află la căsuța <code>6</code> el este întors la prima căsuță, deci pionul celui de-al doilea copil ocupă acum căsuța <code>1</code></li>\n</ul><p>Mută al doilea copil (pionul acestuia se află la căsuța <code>1</code>)</p><ul>\n\t<li>suntem la a patra mutare (număr par);</li>\n\t<li>se calculează cifra pentru înaintarea pionului: <code>X = ((4 + 1) mod 5 + (1 + 10) mod 10) mod 6 + 1 = 2</code></li>\n\t<li>al doilea copil deplasează pionul de la căsuța <code>1</code> la căsuța <code>3</code></li>\n</ul><p>Mută primul copil (pionul acestuia se află la căsuța <code>6</code>)</p><ul>\n\t<li>suntem la a cincea mutare (număr impar);</li>\n\t<li>se calculează cifra pentru înaintarea pionului: <code>X = (5 + (6 + 10) mod 10) mod 6 + 1 = 6</code></li>\n\t<li>primul copil deplasează pionul de la căsuța <code>6</code> la căsuța <code>10</code> (ar trebui <br>\nsă se deplaseze la căsuța <code>12</code> care este în afara tablei de joc)</li>\n\t<li>cifra este <code>6</code>, copilul are dreptul la încă o mutare dar a ajuns deja cu <br>\npionul la căsuța de final și se termină jocul.</li>\n</ul><p>Primul copil este câștigător. Cifrele calculate au fost, în ordine, <code>3</code> <code>5</code> <code>2</code> <code>2</code> <code>6</code>, cifra <code>2</code> a apărut de cele mai multe ori adică de <code>2</code> ori.</p>",
+      "text": "joc.in2 10joc.out2ExplicațieC=2 deci se rezolvă a doua cerință. Ambii pioni se află la căsuța 1. Mută primul copil (pionul acestuia se află la căsuța 1). suntem la prima mutare (număr impar); se calculează cifra pentru înaintarea pionului: X = (1 + (1 + 10) mod 10) mod 6 + 1 = 3 primul jucător înaintează pionul de la căsuța 1 la căsuța 4 Mută al doilea copil (pionul acestuia se află la căsuța 1) suntem la a doua mutare (număr par); se calculează cifra pentru înaintarea pionului: X = ((((2 + 1) mod 5) + ((1+10) mod 10)) mod 6) + 1 = 5 al doilea copil înaintează pionul de la căsuța 1 la căsuța 6 Mută primul copil (pionul acestuia se află la căsuța 4) suntem la a treia mutare (număr impar); se calculează cifra pentru înaintarea pionului: X= (3 + (4 + 10) mod 10) mod 6 + 1 = 2 primul copil înaintează pionul de la căsuța 4 la căsuța 6 cum pionul celui de-al doilea copil se află la căsuța 6 el este întors la prima căsuță, deci pionul celui de-al doilea copil ocupă acum căsuța 1 Mută al doilea copil (pionul acestuia se află la căsuța 1) suntem la a patra mutare (număr par); se calculează cifra pentru înaintarea pionului: X = ((4 + 1) mod 5 + (1 + 10) mod 10) mod 6 + 1 = 2 al doilea copil deplasează pionul de la căsuța 1 la căsuța 3 Mută primul copil (pionul acestuia se află la căsuța 6) suntem la a cincea mutare (număr impar); se calculează cifra pentru înaintarea pionului: X = (5 + (6 + 10) mod 10) mod 6 + 1 = 6 primul copil deplasează pionul de la căsuța 6 la căsuța 10 (ar trebui să se deplaseze la căsuța 12 care este în afara tablei de joc) cifra este 6, copilul are dreptul la încă o mutare dar a ajuns deja cu pionul la căsuța de final și se termină jocul. Primul copil este câștigător. Cifrele calculate au fost, în ordine, 3 5 2 2 6, cifra 2 a apărut de cele mai multe ori adică de 2 ori."
+    },
+    {
+      "title": "Exemplul 3:",
+      "html": "<p><code>joc.in</code></p><pre>3 10</pre><p><code>joc.out</code></p><pre>1 4 6 10</pre><h3>Explicație</h3><p><code>C = 3</code> deci se rezolvă a treia cerință. Primul copil este câștigător, el a ocupat în această ordine căsuțele:<br>\n<code>1</code> <code>4</code> <code>6</code> <code>10</code>.</p>",
+      "text": "joc.in3 10joc.out1 4 6 10ExplicațieC = 3 deci se rezolvă a treia cerință. Primul copil este câștigător, el a ocupat în această ordine căsuțele: 1 4 6 10."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "C=1 deci se rezolvă prima cerință. N=10 are 4 divizori."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "C=2 deci se rezolvă a doua cerință. Ambii pioni se află la căsuța 1. Mută primul copil (pionul acestuia se află la căsuța 1)."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "C = 3 deci se rezolvă a treia cerință. Primul copil este câștigător, el a ocupat în această ordine căsuțele: 1 4 6 10."
+    }
+  ],
+  "constraints": [
+    "2 ≤ N ≤ 10.000",
+    "Pentru teste în valoare de 23 de puncte, C=1",
+    "Pentru alte teste în valoare de 33 de puncte, C=2",
+    "Pentru alte teste în valoare de 44 de puncte, C=3",
+    "Se garantează că există un câștigător",
+    "Pe parcursul jocului, copii pot ajunge pe căsuțe pe care le-au mai vizitat",
+    "Se garantează că numărul căsuțelor ocupate de copii este mai mic decât 100.000",
+    "Problema nu urmăreşte găsirea vreunei proprietăţi speciale pentru șirurile de valori calculate prin formulele date."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qaf10b16553.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "joc.in / joc.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "ONI 2022, clasa a V-a",
+    "autor": "Delia Dabelea",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "author": "Delia Dabelea",
+  "sourceAttribution": "ONI 2022, clasa a V-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4131/joc13"
+}

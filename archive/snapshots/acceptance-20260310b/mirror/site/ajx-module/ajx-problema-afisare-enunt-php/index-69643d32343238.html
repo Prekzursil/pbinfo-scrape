@@ -1,0 +1,41 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2428"><article id="enunt">
+			<p>Balaurului Arhirel nu îi plac prea mult şirurile care nu sunt ordonate. Din acest motiv, nu poate să suporte permutările de <code>N</code> elemente, aşa că se decide să le sorteze şi pentru asta inventează o metodă proprie de sortare. <br>
+El ia iniţial un şir <code>S</code> care reprezintă o permutare de ordin <code>N</code>.  Caută în şirul <code>S</code> cel mai mic (<code>min</code>) şi cel mai mare element (<code>max</code>). Să considerăm că <code>min</code> se află în şirul <code>S</code> pe poziţia <code>pmin</code>, iar <code>max</code> pe poziţia <code>pmax</code>. Să notăm cu <code>x</code> minimul dintre <code>pmin</code> şi <code>pmax</code>, iar cu <code>y</code> maximul dintre <code>pmin</code> şi <code>pmax</code>. Şirul <code>S</code> a fost astfel partiționat în alte trei şiruri, <code>S1</code>, <code>S2</code>, <code>S3</code> care pot avea fiecare zero elemente, un element sau mai multe elemente. Şirul <code>S1</code> începe la prima poziţie din şir şi se termină la poziţia <code>x-1</code>. Şirul <code>S2</code> începe la poziţia <code>x+1</code> şi se termină la poziţia <code>y-1</code>. Şirul <code>S3</code> începe la poziţia <code>y+1</code> şi se termină la ultima poziţie din şir.<br>
+Balaurul Arhirel mută valoarea <code>min</code> la capătul din stânga al lui <code>S</code>, iar valoarea <code>max</code> la capătul din dreapta al şirului <code>S</code> şi reia sortarea pentru fiecare din şirurile <code>S1</code>, <code>S2</code>, <code>S3</code>. <br>
+De exemplu să considerăm <code>N = 6</code> şi şirul <code>S = (3 4 2 1 6 5)</code>. La primul pas, <code>min = 1</code> şi <code>max = 6</code>. Deci <code>S1 = (3 4 2)</code>; <code>S2 = ()</code>; <code>S3 = (5)</code>. Se mută <code>min</code> şi <code>max</code> la capetele şirului şi se obţine <code>S = (1 3 4 2 5 6)</code> şi se sortează în acelaşi mod <code>S1</code>, <code>S2</code> şi <code>S3</code>. <code>S2</code> şi <code>S3</code> au <code>0</code>, respectiv <code>1</code> element, deci sunt deja sortate. Pentru <code>S1</code>, se găseşte <code>min = 2</code> şi <code>max = 4</code> şi vom avea şirurile <code>(3)</code>; <code>()</code>; <code>()</code>. Se mută <code>min</code> şi <code>max</code> la capete şi se obține <code>S1 = (2 3 4)</code>. În final, vom avea şirul <code>S = (1 2 3 4 5 6)</code>. <br>
+Evident, această metodă nu va funcţiona întotdeauna pentru sortarea unei permutări.<br>
+Spre exemplu, pentru şirul <code>S = (3 4 1 6 5 2)</code>, se găseşte <code>min = 1</code> şi <code>max = 6</code>, iar <code>S1 = (3 4)</code>, <code>S2 = ()</code>, <code>S3 = (5 2)</code>. Se mută <code>min</code> şi <code>max</code> la capetele lui <code>S</code>: <code>S = (1 3 4 5 2 6)</code> şi se procedează la sortarea pe rând a şirurilor <code>S1</code>, <code>S2</code>, <code>S3</code>. <code>S1</code> este sortat, <code>S2</code> nu are elemente, iar <code>S3</code> va deveni <code>S3 = (2 5)</code>. În final, <code>S = (1 3 4 2 5 6)</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Ajutaţi-l pe Balaurul Arhirel să afle câte dintre permutările de <code>N</code> elemente pot fi sortate prin metoda sa.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>sortari.in</code> conține o singură linie pe care se află numărul <code>N</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>sortari.out</code> va conţine o singură linie pe care se află numărul de permutări de ordin <code>N</code> ce pot fi sortate prin metoda balaurului modulo <code>19573</code> (restul împărţirii numărului de permutări la <code>19573</code>).</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 200</code></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>sortari.in</code></p>
+
+<pre>4</pre>
+
+<p><code>sortari.out</code></p>
+
+<pre>18</pre>
+
+<h3>Explicație</h3>
+
+<p>În cazul permutărilor de câte 4 elemente, şirurile <code>(1 3 4 2)</code>; <code>(3 1 2 4)</code>; <code>(3 1 4 2)</code>; <code>(3 4 1 2)</code>; <code>(3 4 2 1)</code>; <code>(4 3 1 2)</code> nu vor putea fi sortate crescător. Celelalte <code>24 - 6 = 18</code> permutări pot fi sortate crescător.<br>
+De exemplu, pentru şirul <code>(1 3 4 2)</code>, după găsirea <code>min = 1</code>, <code>max = 4</code>, se obţin şirurile: <code>S1 = ()</code>; <code>S2 = (3)</code>; <code>S3 = (2)</code>, care, având câte un element sunt sortate. Astfel, după mutarea la capete a lui <code>min</code> şi <code>max</code> vom avea: <code>(1 3 2 4)</code></p>		</article>
+		</body></html>

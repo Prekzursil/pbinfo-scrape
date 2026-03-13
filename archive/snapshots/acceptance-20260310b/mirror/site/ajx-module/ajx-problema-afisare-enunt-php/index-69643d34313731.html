@@ -1,0 +1,141 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4171"><article id="enunt">
+			<p>Baxibilian în timp ce învață la informatică a descoperit jocul <strong>Loopover</strong>. Acest joc poate fi descris prin următoarele reguli:</p>
+
+<ul>
+	<li>Jocul se desfășoară pe o tabelă pătratică de <code>n x n</code> celule, în care atât rândurile cât și coloanele sunt numerotate de la <code>1</code>;</li>
+	<li>În starea inițială a tabelei, în fiecare celulă se află câte un număr de la <code>1</code> la <code>n^2</code>, astfel încât <code>M[i,j] = (i - 1) * n + j</code></li>
+	<li>Asupra tabelei se pot aplica patru tipuri de operații de oricâte ori:</li>
+</ul>
+
+<p>- <code>L x</code> – Toate valorile din celulele de pe linia <code>x</code> se vor deplasa ciclic la stânga cu o unitate, adică <code>M[x,i] = M[x,i+1]</code> pentru <code>i &lt; n</code> și <code>M[x,n] = M[x,1]</code><br>
+- <code>R x</code> – Toate valorile din celulele de pe linia <code>x</code> se vor deplasa ciclic la dreapta cu o unitate, adică <code>M[x,i] = M[x,i-1]</code> pentru <code>i &gt; 1</code> și <code>M[x,1] = M[x,n]</code><br>
+- <code>U x</code> – Toate valorile din celulele de pe coloana <code>x</code> se vor deplasa ciclic în sus cu o unitate, adică <code>M[i,x] = M[i+1,x]</code> pentru <code>i &lt; n</code> și <code>M[n,x] = M[1,x]</code><br>
+- <code>D x</code> – Toate valorile din celulele de pe coloana <code>x</code> se vor deplasa ciclic în jos cu o unitate, adică <code>M[i,x] = M[i-1,x]</code> pentru <code>i &gt; 1</code> și <code>M[1,x] = M[n,x]</code></p>
+
+<h1>Cerința</h1>
+
+<p>Cum Baxibilian nu are timp să analizeze prea mult jocul Loopover, deoarece are de învățat, el dorește să știe următoarele lucruri:</p>
+
+<ul>
+	<li>Fiind dată starea unei tabele asupra căreia s-au făcut fie doar operații asupra liniilor, fie doar operații asupra coloanelor, care este numărul minim de operații pe care Baxibilian ar trebui să le aplice pentru a reveni în starea inițială?</li>
+	<li>Fiind dată o secvență de <code>m</code> operații, care este numărul minim de aplicări ale acestei secvențe asupra unei tabele de dimensiune <code>n x n</code> aflate în starea inițială astfel încât starea finală să fie aceeași ca starea inițială? Întrucât rezultatul poate fi un număr foarte mare, Baxibilian este mulțumit dacă află doar restul împărțirii acestui număr la <code>1.000.000.007</code>.</li>
+</ul>
+
+<h1>Date de intrare</h1>
+
+<p>De pe prima linie a fișierului <code>loopover.in</code> se vor afla două numere separate printr-un spațiu <code>t</code>  cerința care trebuie rezolvată și <code>n</code> dimensiunea tabelei. În continuare:</p>
+
+<ul>
+	<li>Dacă <code>t = 1</code>, pe următoarele <code>n</code> linii se vor afla, câte <code>n</code> numere separate prin câte un spațiu, reprezentând configurația tabelei.</li>
+	<li>Dacă <code>t = 2</code>, pe ce-a de-a doua linie se va afla un singur număr <code>m</code>, iar pe următoarele <code>m</code> linii se vor afla, separate prin câte un spațiu, un caracter <code>c</code><sub><code>i</code></sub> <code>∈ {L,R,U,D}</code> reprezentând tipul operației și un număr <code>x</code><sub><code>i</code></sub> reprezentând indexul liniei sau coloanei asupra căreia se aplică operația <code>i</code>.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>În fișierul <code>loopover.out</code> se va afișa în funcție de cerință:</p>
+
+<ul>
+	<li>dacă <code>t = 1</code>, un singur număr reprezentând numărul minim de operații pentru a aduce tabela în starea inițială.</li>
+	<li>dacă <code>t = 2</code>, un singur număr reprezentând restul împărțirii la <code>1.000.000.007</code> al numărului minim de aplicări ale secvenței de operații asupra tabelei pentru ca aceasta să ajungă înapoi în starea inițială.</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ n ≤ 1000</code></li>
+	<li><code>1 ≤ m ≤ 1000</code></li>
+	<li><code>t ∈ {1, 2}</code></li>
+	<li><code>1 ≤ x</code><sub><code>i</code></sub> <code>≤ n</code> pentru orice <code>1 ≤ i ≤ m</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>loopover.in</code></p>
+
+<pre>1 4
+2 3 4 1
+8 5 6 7
+11 12 9 10
+13 14 15 16</pre>
+
+<p><code>loopover.out</code></p>
+
+<pre>4</pre>
+
+<h3>Explicație</h3>
+
+<p>Operațiile ce trebuie aplicate sunt:<br>
+<code>R 1</code><br>
+<code>L 2</code><br>
+<code>L 3</code><br>
+<code>L 3</code></p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>loopover.in</code></p>
+
+<pre>1 3
+7 8 6
+1 2 9
+4 5 3</pre>
+
+<p><code>loopover.out</code></p>
+
+<pre>3</pre>
+
+<h3>Explicație</h3>
+
+<p>Operațiile ce trebuie aplicate sunt:<br>
+<code>U 1</code><br>
+<code>U 2</code><br>
+<code>D 3</code></p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>loopover.in</code></p>
+
+<pre>2 3
+5
+U 1
+R 1
+U 2
+R 1
+L 2</pre>
+
+<p><code>loopover.out</code></p>
+
+<pre>6</pre>
+
+<h3>Explicație</h3>
+
+<p>După aplicarea secvenței de <code>5</code> operații, matricea obținută de Baxibilian este:<br>
+<code>2 3 5</code><br>
+<code>8 6 7</code><br>
+<code>1 4 9</code><br>
+Numărul minim de aplicări ale secvenței pentru a ajunge la matricea identitate este <code>6</code>.</p>
+
+<h1>Exemplul 4:</h1>
+
+<p><code>loopover.in</code></p>
+
+<pre>2 8
+10
+R 6
+L 8
+R 4
+U 3
+L 3
+L 1
+R 3
+U 5
+U 6
+U 3</pre>
+
+<p><code>loopover.out</code></p>
+
+<pre>4284</pre>
+
+<h3>Explicație</h3>
+
+<p>Sunt necesare <code>4284</code> de aplicări ale secvenței pentru a reveni în starea inițială.</p>		</article>
+		</body></html>

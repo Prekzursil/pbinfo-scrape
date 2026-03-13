@@ -1,0 +1,55 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2879"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>Pe Aeroportul Internaţional Iaşi urmează să se organizeze un spectacol de acrobatiuni aviatice, cu ocazia sărbătoririi centenarului României.</p>
+
+<p>Fiecare dintre cei <code>n</code> piloţi înscrişi va pilota câte un avion. La înscriere, pilotul primeşte un cod <code>p</code><sub><code>i</code></sub>  şi  avionul său un cod <code>a</code><sub><code>i</code></sub>. Astfel, fiecare pilot <code>i</code> poate afla codul spectacolului pe care îl va prezenta publicului, calculând cel mai mare divizor comun dintre codul său şi cel al avionului pe care îl pilotează: <code>cmmdc(p</code><sub><code>i</code></sub><code>, a</code><sub><code>i</code></sub><code>)</code>.</p>
+
+<p>Un pilot poate fi considerat „spectaculos” dacă codul spectacolului său este multiplul unui număr <code>x</code> dat. Organizatorul evenimentului a vrut să le facă spectatorilor o surpriză şi a infiltrat printre piloţii spectaculoşi nişte piloţi „legendari” (ale caror spectacole vor fi de asemenea multiplu al numărului <code>x</code>). Totodată, organizatorul concursului a stabilit o metodă prin care un pilot „legendar” să poată fi identificat: pe lângă caracteristicile unui pilot special, spectacolul unui pilot legendar va avea <code>exact 2</code> divizori primi. </p>
+
+<p>Fiind mult prea concentrat pe organizarea spectacolului acrobatic, organizatorul a pierdut din greşeală lista cu numele piloţilor care sunt „spectaculoşi” şi  „legendari”, însă încă mai are lista cu toate codurile participanţilor. Având la dispoziţie o singură zi până la finalizarea înscrierilor el vă cere ajutorul pentru a găsi numărul de piloţi „spectaculoşi” şi „legendari”.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fişierului de intrare <code>pilot.in</code> se găsesc două  numere: <code>n</code> (numărul total de piloţi care sunt pe listă), <code>x</code> (numărul cu care trebuie să fie divizibil codul unui spectacol pentru ca acel pilot să fie „spectaculos”).<br>
+Pe fiecare din următoarele <code>n</code> linii ale fişierului de intrare se va citi câte o pereche de numere <code>p</code><sub><code>i</code></sub><code> a</code><sub><code>i</code></sub>, reprezentând codul pilotului, respectiv al avionului pe care acesta îl va pilota.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>În fişierul de ieşire <code>pilot.out</code> se vor afişa două numere, primul număr reprezentând numărul de piloţi care sunt „spectaculoşi” şi al doilea, numărul de piloţi „legendari”. Cele două numere vor fi separate printr-un spaţiu.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ x ≤ 100, x număr prim</code></li>
+	<li><code>2 ≤ n ≤ 10000</code></li>
+	<li><code>1 ≤ p</code><sub><code>i</code></sub><code>, a</code><sub><code>i</code></sub> <code> ≤ 1000000000</code></li>
+	<li>un pilot “legendar” va fi considerat întotdeauna şi “spectaculos”, dar invers nu.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>pilot.in</code></p>
+
+<pre>5 3 
+3 61
+27 7
+15 60
+66 45
+90 30</pre>
+
+
+<p><code>pilot.out</code></p>
+
+<pre>3 1</pre>
+
+<h3>Explicație</h3>
+
+<p><code>cmmdc(3, 61) = 1</code>, care nu este divizibil cu <code>3</code>. Astfel, pilotul este normal.<br>
+<code>cmmdc(27, 7) = 1</code>, care nu este divizibil cu <code>3</code>. Astfel, pilotul este normal.<br>
+<code>cmmdc(15, 60) = 15</code>, care este divizibil cu <code>3</code>, deci pilotul este „spectaculos”. <code>15 = 3 * 5</code>.<br>
+<code>3</code> şi <code>5</code> sunt numere prime, deci acest spectacol are exact <code>2</code> divizori primi. Astfel, pilotul este şi „spectaculos”, şi „legendar”.<br>
+<code>cmmdc(66, 45) = 3</code>, care este divizibil cu <code>3</code> şi are doar un singur divizor prim. Astfel, pilotul este „spectaculos”.<br>
+<code>cmmdc(90, 30) = 30</code>, care este divizibil cu <code>3</code>. <code>30 = 2 * 3 * 5</code>, iar <code>2</code>, <code>3</code> şi <code>5</code> sunt divizori primi. Astfel, spectacolul are <span>3</span> divizori primi, deci pilotul este „spectaculos”.<br>
+Aşadar, la spectacol participa <code>3</code> piloţi „speciali”, dintre care doar <code>1</code> este „legendar”.</p>		</article>
+		</body></html>

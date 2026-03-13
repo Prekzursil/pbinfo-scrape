@@ -1,0 +1,299 @@
+{
+  "id": 4584,
+  "slug": "potcoave",
+  "name": "potcoave",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4584/potcoave",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 155,
+      "name": "Căutare binară",
+      "slug": "c-utare-binar",
+      "href": "/?pagina=probleme-lista&tag=155"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Scrieţi un program care să determine numărul minim de zile după care comanda poate fi integral livrată.</p>",
+      "text": "Scrieţi un program care să determine numărul minim de zile după care comanda poate fi integral livrată."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>potcoave.in</code> conține pe prima linie numărul natural <code>M</code> reprezentând numărul de potcoave care trebuie să fie livrate. Pe cea de a doua linie se află numărul natural <code>N</code> reprezentând numărul de muncitori. Pe următoarele <code>N</code> linii sunt scrise datele contractuale ale celor <code>N</code> muncitori. Pe a <code>i</code>-a linie dintre cele <code>N</code> se află două numere naturale separate prin spaţiu <code>p</code><sub><code>i</code></sub> <code>k</code><sub><code>i</code></sub>, cu semnificaţia din enunţ (<code>1 ≤ i ≤ N</code>). </p>",
+      "text": "Fișierul de intrare potcoave.in conține pe prima linie numărul natural M reprezentând numărul de potcoave care trebuie să fie livrate. Pe cea de a doua linie se află numărul natural N reprezentând numărul de muncitori. Pe următoarele N linii sunt scrise datele contractuale ale celor N muncitori. Pe a i-a linie dintre cele N se află două numere naturale separate prin spaţiu pi ki, cu semnificaţia din enunţ (1 ≤ i ≤ N)."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>potcoave.out</code> va conține o singură linie pe care va fi scris numărul minim de zile după pot fi livrate cele <code>M</code> potcoave din comanda primită.</p>",
+      "text": "Fișierul de ieșire potcoave.out va conține o singură linie pe care va fi scris numărul minim de zile după pot fi livrate cele M potcoave din comanda primită."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ M ≤ 10</code><sup><code>18</code></sup></li>\n\t<li><code>1 ≤ N ≤ 10.000</code></li>\n\t<li><code>1 ≤ p</code><sub><code>i</code></sub> <code>≤ 10</code><sup><code>18</code></sup> (<code>1 ≤ i ≤ N</code>)</li>\n\t<li><code>2 ≤ k</code><sub><code>i</code></sub> <code>≤ 10</code><sup><code>18</code></sup> (<code>1 ≤ i ≤ N</code>)</li>\n</ul>",
+      "text": "1 ≤ M ≤ 1018 1 ≤ N ≤ 10.000 1 ≤ pi ≤ 1018 (1 ≤ i ≤ N) 2 ≤ ki ≤ 1018 (1 ≤ i ≤ N)"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>potcoave.in</code></p><pre>100\n3\n2 3\n3 4\n5 7</pre><p><code>potcoave.out</code></p><pre>13</pre><h3>Explicație</h3><p>Ziua 1: lucrează toţi cei 3 muncitori şi produc <code>2 + 3 + 5 = 10</code> potcoave.<br>\nZiua 2: lucrează toţi cei 3 muncitori şi produc <code>2 + 3 + 5 = 10</code> potcoave.<br>\nZiua 3: lucrează muncitorii 2 şi 3 şi produc <code>3 + 5 = 8</code> potcoave.<br>\nZiua 4: lucrează muncitorii 1 şi 3 şi produc <code>2 + 5 = 7</code> potcoave.<br>\nZiua 5: lucrează toţi cei 3 muncitori şi produc <code>2 + 3 + 5 = 10</code> potcoave.<br>\nZiua 6: lucrează muncitorii 2 şi 3 şi produc <code>3 + 5 = 8</code> potcoave.<br>\nZiua 7: lucrează muncitorii 1 şi 2 şi produc <code>2 + 3 = 5</code> potcoave.<br>\nZiua 8: lucrează muncitorii 1 şi 3 şi produc <code>2 + 5 = 7</code> potcoave.<br>\nZiua 9: lucrează muncitorii 2 şi 3 şi produc <code>3 + 5 = 8</code> potcoave.<br>\nZiua 10: lucrează toţi cei 3 muncitori şi produc <code>2 + 3 + 5 = 10</code> potcoave.<br>\nZiua 11: lucrează toţi cei 3 muncitori şi produc <code>2 + 3 + 5 = 10</code> potcoave.<br>\nZiua 12: lucrează doar muncitorul 3 şi produce <code>5</code> potcoave.<br>\nZiua 13: lucrează toţi cei 3 muncitori şi produc <code>2 + 3 + 5 = 10</code> potcoave.<br>\nDupă 13 zile numărul total de potcoave produse este <code>10 + 10 + 8 + 7 + 10 + 8 + 5 + 7 + 8 + 10 + 10 + 5 + 10 = 108</code>, suficient pentru a onora comanda. </p>",
+      "text": "potcoave.in100 3 2 3 3 4 5 7potcoave.out13ExplicațieZiua 1: lucrează toţi cei 3 muncitori şi produc 2 + 3 + 5 = 10 potcoave. Ziua 2: lucrează toţi cei 3 muncitori şi produc 2 + 3 + 5 = 10 potcoave. Ziua 3: lucrează muncitorii 2 şi 3 şi produc 3 + 5 = 8 potcoave. Ziua 4: lucrează muncitorii 1 şi 3 şi produc 2 + 5 = 7 potcoave. Ziua 5: lucrează toţi cei 3 muncitori şi produc 2 + 3 + 5 = 10 potcoave. Ziua 6: lucrează muncitorii 2 şi 3 şi produc 3 + 5 = 8 potcoave. Ziua 7: lucrează muncitorii 1 şi 2 şi produc 2 + 3 = 5 potcoave. Ziua 8: lucrează muncitorii 1 şi 3 şi produc 2 + 5 = 7 potcoave. Ziua 9: lucrează muncitorii 2 şi 3 şi produc 3 + 5 = 8 potcoave. Ziua 10: lucrează toţi cei 3 muncitori şi produc 2 + 3 + 5 = 10 potcoave. Ziua 11: lucrează toţi cei 3 muncitori şi produc 2 + 3 + 5 = 10 potcoave. Ziua 12: lucrează doar muncitorul 3 şi produce 5 potcoave. Ziua 13: lucrează toţi cei 3 muncitori şi produc 2 + 3 + 5 = 10 potcoave. După 13 zile numărul total de potcoave produse este 10 + 10 + 8 + 7 + 10 + 8 + 5 + 7 + 8 + 10 + 10 + 5 + 10 = 108, suficient pentru a onora comanda."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Ziua 1: lucrează toţi cei 3 muncitori şi produc 2 + 3 + 5 = 10 potcoave. Ziua 2: lucrează toţi cei 3 muncitori şi produc 2 + 3 + 5 = 10 potcoave. Ziua 3: lucrează muncitorii 2 şi 3 şi produc 3 + 5 = 8 potcoave. Ziua 4: lucrează muncitorii 1 şi 3 şi produc 2 + 5 = 7 potcoave. Ziua 5: lucrează toţi cei 3 muncitori şi produc 2 + 3 + 5 = 10 potcoave. Ziua 6: lucrează muncitorii 2 şi 3 şi produc 3 + 5 = 8 potcoave. Ziua 7: lucrează muncitorii 1 şi 2 şi produc 2 + 3 = 5 potcoave. Ziua 8: lucrează muncitorii 1 şi 3 şi produc 2 + 5 = 7 potcoave. Ziua 9: lucrează muncitorii 2 şi 3 şi produc 3 + 5 = 8 potcoave. Ziua 10: lucrează toţi cei 3 muncitori şi produc 2 + 3 + 5 = 10 potcoave. Ziua 11: lucrează toţi cei 3 muncitori şi produc 2 + 3 + 5 = 10 potcoave. Ziua 12: lucrează doar muncitorul 3 şi produce 5 potcoave. Ziua 13: lucrează toţi cei 3 muncitori şi produc 2 + 3 + 5 = 10 potcoave. După 13 zile numărul total de potcoave produse este 10 + 10 + 8 + 7 + 10 + 8 + 5 + 7 + 8 + 10 + 10 + 5 + 10 = 108, suficient pentru a onora comanda."
+    }
+  ],
+  "constraints": [
+    "1 ≤ M ≤ 1018",
+    "1 ≤ N ≤ 10.000",
+    "1 ≤ pi ≤ 1018 (1 ≤ i ≤ N)",
+    "2 ≤ ki ≤ 1018 (1 ≤ i ≤ N)"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qf3eb33c5cc.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "potcoave.in / potcoave.out",
+    "limită timp": "0.15 secunde",
+    "limită memorie": "4 MB / 2 MB",
+    "sursa problemei": "OMI Iasi 2024",
+    "autor": "Emanuela Cerchez",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.15,
+  "memoryLimitMb": 4,
+  "author": "Emanuela Cerchez",
+  "sourceAttribution": "OMI Iasi 2024",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4584/potcoave"
+}

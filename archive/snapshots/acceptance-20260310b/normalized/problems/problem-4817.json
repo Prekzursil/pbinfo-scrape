@@ -1,0 +1,329 @@
+{
+  "id": 4817,
+  "slug": "cromatic",
+  "name": "cromatic",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4817/cromatic",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 91,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=91"
+    },
+    {
+      "id": 93,
+      "name": "Combinatorică",
+      "slug": "combinatoric",
+      "href": "/?pagina=probleme-lista&tag=93"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Dându-se un șir <code>a</code>, nu neapărat cromatic, să se determine:</p><ul>\n\t<li>Numărul de șiruri cromatice <code>NSC</code> ce se pot forma prin rearanjarea elementelor șirului <code>a</code>. Întrucât acest număr poate fi foarte mare, se cere <code>NSC</code> modulo <code>1.000.000.007</code>.</li>\n\t<li>Știind că șirul <code>a</code> este cromatic, să se determine poziția <code>p ∈ {1, 2, ..., NSC}</code> a șirului <code>a</code> în lista ordonată lexicografic a tuturor permutărilor cromatice ale lui <code>a</code>.</li>\n\t<li>Dat fiind <code>q ∈ {1, 2, ..., NSC}</code>, să se determine cel de-al <code>q</code>-lea șir cromatic în ordine lexicografică ce se poate obține prin rearanjarea elementelor șirului <code>a</code>.</li>\n</ul>",
+      "text": "Dându-se un șir a, nu neapărat cromatic, să se determine: Numărul de șiruri cromatice NSC ce se pot forma prin rearanjarea elementelor șirului a. Întrucât acest număr poate fi foarte mare, se cere NSC modulo 1.000.000.007. Știind că șirul a este cromatic, să se determine poziția p ∈ {1, 2, ..., NSC} a șirului a în lista ordonată lexicografic a tuturor permutărilor cromatice ale lui a. Dat fiind q ∈ {1, 2, ..., NSC}, să se determine cel de-al q-lea șir cromatic în ordine lexicografică ce se poate obține prin rearanjarea elementelor șirului a."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>cromatic.in</code> conține pe prima linie un număr natural <code>c ∈ {1, 2, 3}</code>, reprezentând numărul cerinței de rezolvat: </p><ul>\n\t<li>Dacă <code>c = 1</code>, pe linia a doua vom avea un număr natural <code>n</code>, iar pe linia a treia vom avea <code>n</code> numere naturale separate prin spații, reprezentând un șir <strong>nu neapărat cromatic</strong>.</li>\n\t<li>Dacă <code>c = 2</code>, pe linia a doua vom avea un număr natural <code>n</code>, iar pe linia a treia vom avea <code>n</code> numere naturale separate prin spații, reprezentând un șir cromatic.</li>\n\t<li>Dacă  <code>c</code> = <code>3</code>, linia a doua va conține numerele <code>n</code> și <code>p</code> separate prin spații, iar linia a treia va conține <code>n</code> numere distincte separate prin spații, reprezentând un șir <strong>nu neapărat cromatic</strong>.</li>\n</ul>",
+      "text": "Fișierul de intrare cromatic.in conține pe prima linie un număr natural c ∈ {1, 2, 3}, reprezentând numărul cerinței de rezolvat: Dacă c = 1, pe linia a doua vom avea un număr natural n, iar pe linia a treia vom avea n numere naturale separate prin spații, reprezentând un șir nu neapărat cromatic. Dacă c = 2, pe linia a doua vom avea un număr natural n, iar pe linia a treia vom avea n numere naturale separate prin spații, reprezentând un șir cromatic. Dacă c = 3, linia a doua va conține numerele n și p separate prin spații, iar linia a treia va conține n numere distincte separate prin spații, reprezentând un șir nu neapărat cromatic."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>cromatic.out</code> trebuie să conțină o singură linie, pe care se va afișa, în funcție de numărul cerinței de rezolvat:</p><ul>\n\t<li>Dacă <code>c = 1</code>, numărul natural <code>NSC</code> modulo <code>1.000.000.007</code>;</li>\n\t<li>Dacă <code>c = 2</code>, numărul natural <code>p</code>, ce reprezintă poziția șirului <code>a</code> în lista ordonată lexicografic a tuturor șirurilor cromatice obținute prin rearanjarea elementelor șirului citit;</li>\n\t<li>Dacă <code>c = 3</code>, un șir de <code>n</code> numere naturale, separate prin spații, ce reprezintă cel de-al <code>q</code>-lea șir cromatic în ordine lexicografică care se poate obține prin rearanjarea elementelor șirului <code>a</code>.</li>\n</ul>",
+      "text": "Fișierul de ieșire cromatic.out trebuie să conțină o singură linie, pe care se va afișa, în funcție de numărul cerinței de rezolvat: Dacă c = 1, numărul natural NSC modulo 1.000.000.007; Dacă c = 2, numărul natural p, ce reprezintă poziția șirului a în lista ordonată lexicografic a tuturor șirurilor cromatice obținute prin rearanjarea elementelor șirului citit; Dacă c = 3, un șir de n numere naturale, separate prin spații, ce reprezintă cel de-al q-lea șir cromatic în ordine lexicografică care se poate obține prin rearanjarea elementelor șirului a."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2  ≤ n ≤ 300.000</code>;</li>\n\t<li><code>-1.000.000.000 ≤ a[i] ≤ 1.000.000.000</code>;</li>\n\t<li><code>1 ≤ p, q ≤ 1.000.000.000</code>;</li>\n\t<li><code>p, q ∈ {1, 2, ..., NSC}</code>.</li>\n\t<li>Pentru 9 puncte, <code>c=1</code>, <code>n ≤ 20</code></li>\n\t<li>Pentru 7 puncte, <code>c=1</code>,  <code>21 ≤ n ≤ 300.000</code></li>\n\t<li>Pentru 10 puncte, <code>c=2</code>, <code>1 ≤ p ≤ n</code></li>\n\t<li>Pentru 10 puncte, <code>c=2</code>, <code>NSC - p ≤ n</code></li>\n\t<li>Pentru 10 puncte, <code>c=2</code>, <code>n ≤ 20</code></li>\n\t<li>Pentru 12 puncte, <code>c=2</code>,  <code>21 ≤ n ≤ 300.000</code></li>\n\t<li>Pentru 10 puncte, <code>c=3</code>, <code>1 ≤ q ≤ n</code></li>\n\t<li>Pentru 10 puncte, <code>c=3</code>, <code>NSC - q ≤ n</code></li>\n\t<li>Pentru 10 puncte, <code>c=3</code>, <code>n ≤ 20</code></li>\n\t<li>Pentru 12 puncte, <code>c=3</code>, <code>21 ≤ n ≤ 300.000</code></li>\n</ul>",
+      "text": "2 ≤ n ≤ 300.000; -1.000.000.000 ≤ a[i] ≤ 1.000.000.000; 1 ≤ p, q ≤ 1.000.000.000; p, q ∈ {1, 2, ..., NSC}. Pentru 9 puncte, c=1, n ≤ 20 Pentru 7 puncte, c=1, 21 ≤ n ≤ 300.000 Pentru 10 puncte, c=2, 1 ≤ p ≤ n Pentru 10 puncte, c=2, NSC - p ≤ n Pentru 10 puncte, c=2, n ≤ 20 Pentru 12 puncte, c=2, 21 ≤ n ≤ 300.000 Pentru 10 puncte, c=3, 1 ≤ q ≤ n Pentru 10 puncte, c=3, NSC - q ≤ n Pentru 10 puncte, c=3, n ≤ 20 Pentru 12 puncte, c=3, 21 ≤ n ≤ 300.000"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>cromatic.in</code></p><pre>1\n4\n1 5 3 8</pre><p><code>cromatic.out</code></p><pre>8</pre><h3>Explicație</h3><p>Avem 8 șiruri cromatice distincte:</p><p>1: <code>1 3 5 8</code><br>\n2: <code>3 1 5 8</code><br>\n3: <code>3 5 1 8</code><br>\n4: <code>3 5 8 1</code><br>\n5: <code>5 3 1 8</code><br>\n6: <code>5 3 8 1</code><br>\n7: <code>5 8 3 1</code><br>\n8: <code>8 5 3 1</code></p>",
+      "text": "cromatic.in1 4 1 5 3 8cromatic.out8ExplicațieAvem 8 șiruri cromatice distincte:1: 1 3 5 8 2: 3 1 5 8 3: 3 5 1 8 4: 3 5 8 1 5: 5 3 1 8 6: 5 3 8 1 7: 5 8 3 1 8: 8 5 3 1"
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>cromatic.in</code></p><pre>2\n4\n5 3 1 8</pre><p><code>cromatic.out</code></p><pre>5</pre><h3>Explicație</h3><p>În lista ordonată lexicografic, șirul citit se găsește pe poziția <code>5</code>.</p>",
+      "text": "cromatic.in2 4 5 3 1 8cromatic.out5ExplicațieÎn lista ordonată lexicografic, șirul citit se găsește pe poziția 5."
+    },
+    {
+      "title": "Exemplul 3:",
+      "html": "<p><code>cromatic.in</code></p><pre>3\n4 7\n5 3 1 8</pre><p><code>cromatic.out</code></p><pre>5 8 3 1</pre><h3>Explicație</h3><p>A șaptea soluție în ordine lexicografică este <code>5 8 3 1</code></p>",
+      "text": "cromatic.in3 4 7 5 3 1 8cromatic.out5 8 3 1ExplicațieA șaptea soluție în ordine lexicografică este 5 8 3 1"
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Avem 8 șiruri cromatice distincte:"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "În lista ordonată lexicografic, șirul citit se găsește pe poziția 5."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "A șaptea soluție în ordine lexicografică este 5 8 3 1"
+    }
+  ],
+  "constraints": [
+    "2 ≤ n ≤ 300.000;",
+    "-1.000.000.000 ≤ a[i] ≤ 1.000.000.000;",
+    "1 ≤ p, q ≤ 1.000.000.000;",
+    "p, q ∈ {1, 2, ..., NSC}.",
+    "Pentru 9 puncte, c=1, n ≤ 20",
+    "Pentru 7 puncte, c=1, 21 ≤ n ≤ 300.000",
+    "Pentru 10 puncte, c=2, 1 ≤ p ≤ n",
+    "Pentru 10 puncte, c=2, NSC - p ≤ n",
+    "Pentru 10 puncte, c=2, n ≤ 20",
+    "Pentru 12 puncte, c=2, 21 ≤ n ≤ 300.000",
+    "Pentru 10 puncte, c=3, 1 ≤ q ≤ n",
+    "Pentru 10 puncte, c=3, NSC - q ≤ n",
+    "Pentru 10 puncte, c=3, n ≤ 20",
+    "Pentru 12 puncte, c=3, 21 ≤ n ≤ 300.000"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q385ca64086.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "10",
+    "intrare/ieșire": "cromatic.in / cromatic.out",
+    "limită timp": "1.5 secunde",
+    "limită memorie": "256 MB / 64 MB",
+    "sursa problemei": "OJI 2025, clasele 11-12",
+    "autor": "Szabo Zoltan",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 1.5,
+  "memoryLimitMb": 256,
+  "author": "Szabo Zoltan",
+  "sourceAttribution": "OJI 2025, clasele 11-12",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4817/cromatic"
+}

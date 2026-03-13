@@ -1,0 +1,61 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4364"><article id="enunt">
+			<p>Cercetătorii din cadrul proiectului <span class="caps">LHC</span> (Large Hadron Collider) de la Geneva au anunțat descoperirea unei noi forme a materiei: flatquarkon. Aceasta este caracterizată printr-o structură bidimensională formată din quarci (particule elementare din modelul standard) menținuți în loc prin intermediul forței nucleare tari – similar solidelor ce își capătă proprietățile datorită legăturilor chimice dintre atomii constituenți. Fiecare quark posedă o proprietate numită masă efectivă (denumită mai departe masă), ce include atât masa proprie, cât și efectele produse de interacțiunea cu ceilați quarci. Putem reprezenta masa întregului sistem printr-o matrice cu <code>N</code> linii și <code>M</code> coloane unde <code>m</code><sub><code>ij</code></sub> reprezintă masa quarcului aflat pe linia <code>i</code> și coloana <code>j</code>.<br>
+Aplicând un câmp magnetic perpendicular pe planul unui flatquarkon, putem activa energetic unul sau mai mulți quarci, aceștia devenind capabili să participe în reacții nucleare. Dacă doi quarci activi sunt adiacenți (se învecinează pe linie sau pe coloană), atunci vor participa împreună în orice reacție nucleară.</p>
+
+<h1>Cerința</h1>
+
+<p>Considerăm un flatquarkon aflat într-un mediul lipsit de câmpuri magnetice. Se dă o listă de <code>Q</code> instrucțiuni de două tipuri:</p>
+
+<p>1. Se aplică un câmp magnetic asupra quarkului de pe linia <code>i</code> și coloana <code>j</code>. Dacă quarkul este inactiv, acesta va fi activat de câmpul magnetic. Dacă este deja activ, nu se va întâmpla nimic.<br>
+2. Să se afle energia maximă degajată într-o reacție nucleară între două zone active ale flatquarkon-ului. O zonă activă este o porțiune conexă a matricii (toți quarcii incluși sunt adiacenți) ce conține doar quarci activi și are dimensiune maximă (nu se mai poate adăuga niciun alt quark activ fără a încălca proprietatea de conexitate).</p>
+
+<p>Reamintiți-vă faimoasa formulă pentru echivalența masă-energie, <code>E = mc</code><sup><code>2</code></sup>. Astfel, energia degajată într-o reacție nucleară este egală cu suma maselor tuturor quarcilor din cele două zone (în <code>MeV</code>).</p>
+
+<h1>Date de intrare</h1>
+
+<p>Intrarea standard conține pe prima linie două numere întregi <code>N</code> și <code>M</code>, separate printr-un spațiu, reprezentând dimensiunile matricei maselor. Pe următoarele <code>N</code> linii se află câte <code>M</code> numere întregi, separate prin spații, reprezentând descrierea matricei maselor. Următoarea linie conține numărul întreg <code>Q</code>, reprezentând numărul de instrucțiuni. Următoarele <code>Q</code> linii conțin un număr întreg <code>t</code>, sau 3 numere întregi separate prin spații <code>t</code>, <code>i</code> și <code>j</code>. Dacă <code>t = 1</code>, atunci se aplică un câmp magnetic asupra quarcului aflat pe linia <code>i</code> și coloana <code>j</code>. Dacă <code>t = 2</code>, se va afișa energia maximă degajată într-o reacție nucleară folosindu-ne de configurația actuală a flatquarkon-ului. Dacă o reacție este imposibilă, se va afișa <code>−1</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire va conține răspunsul la toate instrucțiunile de tipul 2, fiecare pe câte o linie.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ∗ M ≤ 400.000</code></li>
+	<li><code>1 ≤ Q ≤ 200.000</code></li>
+	<li><code>1 ≤ m</code><sub><code>ij</code></sub> <code>≤ 1000</code></li>
+	<li>o zonă nu poate reacționa cu ea însăși</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>2 3
+1 2 3
+4 5 6
+8
+2
+1 1 1
+1 2 2
+2
+1 2 1
+2
+1 1 3
+2</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>-1
+6
+-1
+13</pre>
+
+<h3>Explicație</h3>
+
+<p>La prima instrucțiune de tipul <code>2</code> nu avem nicio zonă activă, deci o reacție este imposibilă.<br>
+La a doua instrucțiune de tipul <code>2</code> avem două zone active <code>[1, 1]</code> și <code>[2, 2]</code>. Energia degajată <code>1 + 5 = 6 MeV</code>.<br>
+La a treia instrucțiune de tipul <code>2</code> avem o singură zonă activă <code>[[1, 1], [2, 1], [2, 2]]</code>, o reacție este imposibilă.<br>
+La a patra instrucțiune de tipul <code>2</code> avem două zone active <code>[[1, 1], [2, 1], [2, 2]]</code> și <code>[1, 3]</code>. Energia degajată este <code>1 + 4 + 5 + 3 = 13 MeV</code>.</p>		</article>
+		</body></html>

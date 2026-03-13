@@ -1,0 +1,320 @@
+{
+  "id": 3042,
+  "slug": "amat",
+  "name": "amat",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3042/amat",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 46,
+      "name": "Tablouri bidimensionale (matrice)",
+      "slug": "tablouri-bidimensionale-matrice",
+      "href": "/?pagina=probleme-lista&tag=46"
+    },
+    {
+      "id": 58,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=58"
+    }
+  ],
+  "tags": [
+    "Cautare binara",
+    "Smenul lui Mars (Difference Arrays)"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Cum priceperea lui Dorel este proverbială, trebuie să îl ajutați în rezolvarea următoarelor cerințe:<br>\n1) determinarea coordonatelor piesei cu număr maxim de elemente înainte ca Dorel să efectueze operațiile de upgrade;<br>\n2) determinarea numărului minim de operații de upgrade după care toate elementele matricei au valoarea mai mare sau egală cu <code>K</code>.</p>",
+      "text": "Cum priceperea lui Dorel este proverbială, trebuie să îl ajutați în rezolvarea următoarelor cerințe: 1) determinarea coordonatelor piesei cu număr maxim de elemente înainte ca Dorel să efectueze operațiile de upgrade; 2) determinarea numărului minim de operații de upgrade după care toate elementele matricei au valoarea mai mare sau egală cu K."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Datele de intrare se citesc din fișierul <code>amat.in</code>, care are următoarea structură:<br>\n</p><ul>\n\t<li>pe prima linie se află numărul natural <code>C</code>, care poate fi egal cu <code>1</code> sau <code>2</code>, în funcție de cerința ce trebuie rezolvată;</li>\n\t<li>pe linia următoare se află două numerele naturale <code>N</code> și <code>M</code> cu semnificația din enunț;</li>\n\t<li>pe următoarele <code>N</code> linii se găsesc elementele matricei <code>A</code>.</li>\n\t<li>dacă <code>C = 2</code> atunci fișierul de intrare mai conține: pe linia <code>N+2</code> numerele naturale <code>Q K</code> cu semnificațiile din enunț; pe următoarele <code>Q</code> linii descrierea submatricelor asupra cărora se efectuează operații de upgrade de forma: <code>x1 y1 x2 y2 V</code>.</li><br>\n</ul><p></p>",
+      "text": "Datele de intrare se citesc din fișierul amat.in, care are următoarea structură: pe prima linie se află numărul natural C, care poate fi egal cu 1 sau 2, în funcție de cerința ce trebuie rezolvată; pe linia următoare se află două numerele naturale N și M cu semnificația din enunț; pe următoarele N linii se găsesc elementele matricei A. dacă C = 2 atunci fișierul de intrare mai conține: pe linia N+2 numerele naturale Q K cu semnificațiile din enunț; pe următoarele Q linii descrierea submatricelor asupra cărora se efectuează operații de upgrade de forma: x1 y1 x2 y2 V."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Datele de ieșire se vor scrie în fișierul <code>amat.out</code>, astfel:<br>\nDacă <code>C = 1</code> se vor scrie, separate prin spațiu patru numere naturale nenule <code>x1 y1 x2 y2</code> ce reprezintă coordonatele colțului stânga-sus, respectiv colțului dreapta-jos unde este plasată piesa cu număr maxim de elemente înainte de upgrade. Dacă există mai multe astfel de piese, atunci vor fi scrise coordonatele piesei pentru care coordonatele colțului stânga-sus are valoarea liniei cea mai mare, iar la linii egale, se va alege piesa cu coordonata coloanei cea mai mare.<br>\nDacă <code>C = 2</code> se va scrie numărul natural nenul <code>NR</code> ce reprezintă numărului minim de operații de upgrade după care toate elementele matricei au valoarea mai mare sau egală cu <code>K</code>.</p>",
+      "text": "Datele de ieșire se vor scrie în fișierul amat.out, astfel: Dacă C = 1 se vor scrie, separate prin spațiu patru numere naturale nenule x1 y1 x2 y2 ce reprezintă coordonatele colțului stânga-sus, respectiv colțului dreapta-jos unde este plasată piesa cu număr maxim de elemente înainte de upgrade. Dacă există mai multe astfel de piese, atunci vor fi scrise coordonatele piesei pentru care coordonatele colțului stânga-sus are valoarea liniei cea mai mare, iar la linii egale, se va alege piesa cu coordonata coloanei cea mai mare. Dacă C = 2 se va scrie numărul natural nenul NR ce reprezintă numărului minim de operații de upgrade după care toate elementele matricei au valoarea mai mare sau egală cu K."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2 ≤ N, M ≤ 1000</code>; <code>1 ≤ Q ≤ 100.000</code>; <code>1 ≤ V ≤ 1000</code></li>\n\t<li><code>-1000 ≤ elementele matricei A înainte de upgrade ≤ 1000</code></li>\n\t<li>Operațiile de upgrade se efectuează obligatoriu în ordinea citirii</li>\n\t<li>Pentru teste în valoare de <code>30</code> de puncte, <code>C = 1</code></li>\n\t<li>Pentru teste în valoare de <code>30</code> de puncte, <code>C = 2</code> şi <code>N, M, Q ≤ 250</code></li>\n\t<li>Pentru teste în valoare de <code>50</code> de puncte, <code>C = 2</code> şi <code>Q ≤ 4000</code></li>\n\t<li>Pentru teste în valoare de <code>70</code> de puncte, <code>C = 2</code>.</li>\n</ul>",
+      "text": "2 ≤ N, M ≤ 1000; 1 ≤ Q ≤ 100.000; 1 ≤ V ≤ 1000 -1000 ≤ elementele matricei A înainte de upgrade ≤ 1000 Operațiile de upgrade se efectuează obligatoriu în ordinea citirii Pentru teste în valoare de 30 de puncte, C = 1 Pentru teste în valoare de 30 de puncte, C = 2 şi N, M, Q ≤ 250 Pentru teste în valoare de 50 de puncte, C = 2 şi Q ≤ 4000 Pentru teste în valoare de 70 de puncte, C = 2."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>amat.in</code></p><pre>1\n4 6\n1 1 1 3 2 2\n1 1 1 3 2 2\n6 4 4 4 2 2\n6 4 4 4 5 7</pre><p><code>amat.out</code></p><pre>3 2 4 4</pre><h3>Explicație</h3><p>Se rezolvă cerința 1. Matricea inițială construită de Dorel este:</p><p><img alt=\"\" src=\"/resurse/16a4b0/amat.jpg\"></p><p>Există <code>3</code> piese cu număr maxim de valori egale, dar piesa care corespunde cerințelor are coordonatele: <code>3 2 4 4</code>.</p>",
+      "text": "amat.in1 4 6 1 1 1 3 2 2 1 1 1 3 2 2 6 4 4 4 2 2 6 4 4 4 5 7amat.out3 2 4 4ExplicațieSe rezolvă cerința 1. Matricea inițială construită de Dorel este:Există 3 piese cu număr maxim de valori egale, dar piesa care corespunde cerințelor are coordonatele: 3 2 4 4."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>amat.in</code></p><pre>2\n4 6\n1 1 1 3 2 2\n1 1 1 3 2 2\n6 4 4 4 2 2\n6 4 4 4 5 7\n3 6\n1 1 3 3 5\n1 2 4 6 5\n4 1 4 3 1</pre><p><code>amat.out</code></p><pre>2</pre><h3>Explicație</h3><p>Se rezolvă cerința 2. Matricea inițială construită este cea prezentată mai sus.<br>\nDorel efectuează <code>3</code> operații de upgrade.<br>\nMatricea obținută după efectuarea primului upgrade:<br>\n<code>6 6 6 3 2 2</code><br>\n<code>6 6 6 3 2 2</code><br>\n<code>11 9 9 4 2 2</code><br>\n<code>6 4 4 4 5 7</code><br>\nMatricea obținută după efectuarea celui de-al doilea upgrade:<br>\n<code>6 11 11 8 7 7</code><br>\n<code>6 11 11 8 7 7</code><br>\n<code>11 14 14 9 7 7</code><br>\n<code>6 9 9 9 10 12</code><br>\nMatricea obținută după efectuarea celui de-al treilea upgrade:<br>\n<code>6 11 11 8 7 7</code><br>\n<code>6 11 11 8 7 7</code><br>\n<code>11 14 14 9 7 7</code><br>\n<code>7 10 10 9 10 12</code><br>\nLa final tuturor operațiilor de upgrade, matricea are toate valorile mai mari sau egale <code>6</code>.<br>\nSe observă că sunt suficiente primele două operații de upgrade pentru că toate elementele matricei să fie mai mari sau egale cu <code>6</code>.</p>",
+      "text": "amat.in2 4 6 1 1 1 3 2 2 1 1 1 3 2 2 6 4 4 4 2 2 6 4 4 4 5 7 3 6 1 1 3 3 5 1 2 4 6 5 4 1 4 3 1amat.out2ExplicațieSe rezolvă cerința 2. Matricea inițială construită este cea prezentată mai sus. Dorel efectuează 3 operații de upgrade. Matricea obținută după efectuarea primului upgrade: 6 6 6 3 2 2 6 6 6 3 2 2 11 9 9 4 2 2 6 4 4 4 5 7 Matricea obținută după efectuarea celui de-al doilea upgrade: 6 11 11 8 7 7 6 11 11 8 7 7 11 14 14 9 7 7 6 9 9 9 10 12 Matricea obținută după efectuarea celui de-al treilea upgrade: 6 11 11 8 7 7 6 11 11 8 7 7 11 14 14 9 7 7 7 10 10 9 10 12 La final tuturor operațiilor de upgrade, matricea are toate valorile mai mari sau egale 6. Se observă că sunt suficiente primele două operații de upgrade pentru că toate elementele matricei să fie mai mari sau egale cu 6."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Se rezolvă cerința 1. Matricea inițială construită de Dorel este:"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Se rezolvă cerința 2. Matricea inițială construită este cea prezentată mai sus. Dorel efectuează 3 operații de upgrade. Matricea obținută după efectuarea primului upgrade: 6 6 6 3 2 2 6 6 6 3 2 2 11 9 9 4 2 2 6 4 4 4 5 7 Matricea obținută după efectuarea celui de-al doilea upgrade: 6 11 11 8 7 7 6 11 11 8 7 7 11 14 14 9 7 7 6 9 9 9 10 12 Matricea obținută după efectuarea celui de-al treilea upgrade: 6 11 11 8 7 7 6 11 11 8 7 7 11 14 14 9 7 7 7 10 10 9 10 12 La final tuturor operațiilor de upgrade, matricea are toate valorile mai mari sau egale 6. Se observă că sunt suficiente primele două operații de upgrade pentru că toate elementele matricei să fie mai mari sau egale cu 6."
+    }
+  ],
+  "constraints": [
+    "2 ≤ N, M ≤ 1000; 1 ≤ Q ≤ 100.000; 1 ≤ V ≤ 1000",
+    "-1000 ≤ elementele matricei A înainte de upgrade ≤ 1000",
+    "Operațiile de upgrade se efectuează obligatoriu în ordinea citirii",
+    "Pentru teste în valoare de 30 de puncte, C = 1",
+    "Pentru teste în valoare de 30 de puncte, C = 2 şi N, M, Q ≤ 250",
+    "Pentru teste în valoare de 50 de puncte, C = 2 şi Q ≤ 4000",
+    "Pentru teste în valoare de 70 de puncte, C = 2."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q6ef6993f37.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/amat.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-amat-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "amat.in / amat.out",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "ONI 2019 clasa a IX-a",
+    "autor": "Eugen Nodea",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 64,
+  "author": "Eugen Nodea",
+  "sourceAttribution": "ONI 2019 clasa a IX-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3042/amat"
+}

@@ -1,0 +1,72 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4366"><article id="enunt">
+			<p>Quantum Computing este o tehnologie nouă ce folosește proprietățile mecanicii cuantice pentru a efectua anumite calcule într-un timp mult mai scurt decât este capabil să le facă un calculator clasic. Diferența fundamentală dintre un calculator clasic și unul cuantic este modul în care procesează informația. Un calculator clasic procesează informația folosind biți, care pot fi <code>0</code> sau <code>1</code>. Pe de altă parte, un calculator cuantic utilizează qubiți, care pot avea în același timp și valoarea <code>0</code> (notată cu <code>|0⟩</code>) și valoarea <code>1</code> (notată cu <code>|1⟩</code>) – spunem că qubitul se află în starea cuantică <code>|ψ⟩ = α|0⟩ + β|1⟩</code>. Efectuând modificări asupra acestor qubiți, putem dezvolta algoritmi cuantici cu o complexitate mai bună decât a celor mai buni algoritmi clasici existenți. Totuși, calculatoarele cuantice nu au încă utilitate practică deoarece nu dispun de un număr suficient de mare de qubiți (la ora actuală cele mai puternice calculatoare cuantice au câteva sute de qubiți). Pentru simplitate, vom lucra doar cu stări pure (<code>|0⟩</code> sau <code>|1⟩</code>).</p>
+
+<p>Să considerăm un calculator cuantic cu <code>N</code> qubiți setați inițial la <code>|q1⟩|q2⟩..|qN⟩</code>. Asupra acestor qubiți se poate efectua un singur tip de operații: se inversează toți qubiții (<code>|0⟩</code> devine <code>|1⟩</code> și viceversa) dintr-o subsecvență (qubiți aflați pe poziții consecutive). Exemplu: <code>|0⟩|0⟩|1⟩|0⟩</code> devine <code>|0⟩|1⟩|0⟩|1⟩</code> dacă se inversează qubiții de pe pozițiile <code>2</code>, <code>3</code> și <code>4</code>. O particularitate nefericită a unui calculator cuantic este că fiecare operație introduce erori (de exemplu, este posibil ca un qubit să nu se inverseze, deși ar trebui să o facă). De aceea, este necesar ca un algoritm cuantic să efectueze un număr cât mai mic de operații.</p>
+
+<h1>Cerința</h1>
+
+<p>Aflați numărul minim de operații necesare pentru a seta toți qubiții la <code>|1⟩</code> în situațiile:<br>
+1. Operațiile se pot efectua asupra subsecvențelor de orice lungime<br>
+2. Operațiile se pot efectua doar asupra subsecvențelor de lungime <code>K</code></p>
+
+<h1>Date de intrare</h1>
+
+<p>Intrarea standard conține pe prima linie două numere întregi <code>C</code> și <code>T</code>, separate printr-un spațiu, unde <code>C</code> reprezintă tipul cerinței și <code>T</code> numărul de teste. Pe următoarele linii se află descrierea testelor. Dacă <code>C = 1</code> atunci pe prima linie a fiecărui test se află numărul întreg <code>N</code>, reprezentând numărul de qubiți, iar pe a doua linie se află <code>N</code> caractere reprezentând starea inițială a qubiților (<code>|0⟩</code> este reprezentat prin <code>0</code> și <code>|1⟩</code> este reprezentat prin <code>1</code>). Dacă <code>C = 2</code> atunci pe prima linie a fiecărui test se află două numere întregi <code>N</code> și <code>K</code>, separate printr-un spațiu, reprezentând numărul de qubiți și lungimea unei subsecvențe pe care se poate efectua o operație, iar pe a doua linie starea inițială a qubiților, descrisă la fel ca pentru <code>C = 1</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Ieșirea standard va conține <code>T</code> linii, pe fiecare linie aflându-se numărul minim de operații necesare pentru a seta toți qubiții la <code>|1⟩</code>. Pentru <code>C = 1</code> se garantează că există mereu o soluție. Pentru <code>C = 2</code>, dacă nu există soluție, se va afișa <code>−1</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ T ≤ 10</code></li>
+	<li><code>1 ≤ K ≤ N ≤ 1.000.000</code></li>
+	<li>suma valorilor lui <code>N</code> pe toate testele nu va depăși <code>1.000.000</code></li>
+	<li>Pentru 40 de puncte, <code>C = 1</code></li>
+	<li>Pentru 20 de puncte, <code>C = 2</code> și <code>N ≤ 1.000</code></li>
+	<li>Pentru 40 de puncte, <code>C = 2</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>1 2
+4
+0101
+7
+0010110</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>2
+3</pre>
+
+<h3>Explicație</h3>
+
+<p>Pentru primul test din primul exemplu, putem obține un număr minim de operații în următorul mod: <code>|0⟩|1⟩|0⟩|1⟩ → |1⟩|0⟩|0⟩|1⟩ → |1⟩|1⟩|1⟩|1⟩</code>.<br>
+Pentru al doilea test din primul exemplu, putem obține un număr minim de operații în următorul mod: <code>|0⟩|0⟩|1⟩|0⟩|1⟩|1⟩|0⟩ → |0⟩|0⟩|1⟩|0⟩|0⟩|0⟩|1⟩ → |1⟩|1⟩|0⟩|0⟩|0⟩|0⟩|1⟩ → |1⟩|1⟩|1⟩|1⟩|1⟩|1⟩|1⟩</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>2 2
+12 4
+110100100000
+5 2
+01100</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>4
+-1</pre>
+
+<h3>Explicație</h3>
+
+<p>Pentru primul test din al doilea exemplu, putem obține un număr minim de operații în următorul mod:<br>
+<code>|1⟩|1⟩|0⟩|1⟩|0⟩|0⟩|1⟩|0⟩|0⟩|0⟩|0⟩|0⟩ → |1⟩|1⟩|0⟩|1⟩|0⟩|0⟩|1⟩|0⟩|1⟩|1⟩|1⟩|1⟩ → |1⟩|1⟩|0⟩|0⟩|1⟩|1⟩|0⟩|0⟩|1⟩|1⟩|1⟩|1⟩</code> <code>→
+|1⟩|1⟩|1⟩|1⟩|0⟩|0⟩|0⟩|0⟩|1⟩|1⟩|1⟩|1⟩ → |1⟩|1⟩|1⟩|1⟩|1⟩|1⟩|1⟩|1⟩|1⟩|1⟩|1⟩|1⟩</code>.<br>
+Pentru al doilea test din al doilea exemplu, se poate demonstra că nu există soluție.</p>		</article>
+		</body></html>

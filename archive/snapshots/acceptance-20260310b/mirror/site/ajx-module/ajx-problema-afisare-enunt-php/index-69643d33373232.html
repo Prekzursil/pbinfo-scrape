@@ -1,0 +1,125 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3722"><article id="enunt">
+			<p>Costel este pasionat de circuitele logice. El are la dispoziție două tipuri de circuite logice simple: circuit <code>ȘI</code>, respectiv circuit <code>SAU</code>. Circuitele logice simple au două intrări și o ieșire.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-logic-01-jpg.jpg" style="width:300px;"></p>
+
+<p>La fiecare intrare în circuit se poate introduce un bit <code>0</code> sau un bit <code>1</code>, iar circuitul este capabil să calculeze operația logică respectivă (<code>ȘI</code> ori <code>SAU</code>) și să trimită rezultatul obținut la ieșire. Costel a învățat că poate combina mai multe circuite simple pentru a obține circuite complexe astfel: leagă ieșirea unui circuit de orice tip la una din intrările altui circuit, deci rezultatul obținut la ieșirea dintr-un circuit se transmite la intrarea celuilalt. În acest fel se pot construi circuite complexe, care au mai multe intrări și o singură ieșire.</p>
+
+<p>Ultima descoperire a lui Costel este circuitul logic piramidal (prescurtat <span class="caps">CLP</span>), care are structura următoare:</p>
+
+<ul>
+	<li>Circuitul cu un singur nivel este cel mai simplu tip de circuit și este compus dintr-un circuit <code>ȘI</code> ori dintr-un circuit <code>SAU</code>;</li>
+	<li>Pentru un circuit cu mai multe nivele avem:</li>
+</ul>
+
+<p>- pe nivelul <code>1</code> se găsește un singur circuit (<code>ȘI</code> ori <code>SAU</code>);</p>
+
+<p> – pe nivelul <code>2</code> se găsesc două circuite simple de oricare tip; ieșirea primului circuit este conectată la intrarea <code>1</code> a circuitului de pe nivelul <code>1</code>, iar ieșirea celui de-al doilea circuit este conectată la intrarea <code>2</code> a circuitului de pe nivelul <code>1</code>;</p>
+
+<p> – pe nivelul <code>N</code> sunt <code>2</code><sup><code>N-1</code></sup> circuite simple; ieșirile primelor două circuite de pe linia <code>N</code> sunt conectate la intrările primului circuit de pe nivelul <code>N - 1</code>, ieșirile următoarelor două sunt conectate la intrările celui de-al doilea circuit de pe linia <code>N - 1</code> etc;</p>
+
+<p>Exemplu de <span class="caps">CLP</span> cu 2 nivele:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-logic-02-jpg.jpg" style="width:300px;"></p>
+
+<p>Într-un <span class="caps">CLP</span> cu <code>N</code> nivele avem <code>2</code><sup><code>N</code></sup> intrări, corespunzătoare circuitelor de pe nivelul <code>N</code>. La fiecare intrare se poate introduce un bit <code>0</code> sau un bit <code>1</code>, deci un șir de <code>2</code><sup><code>N</code></sup> biți.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-logic-03-jpg.jpg" style="width:300px;"></p>
+
+<p>Pentru circuitul din figura de mai sus presupunem că la cele patru intrări ale circuitelor de pe nivelul <code>2</code> avem, în ordine, biții <code>0111</code>. La ieșirea din circuit (ieșirea circuitului simplu de pe primul nivel) se obține valoarea <code>0</code>, deoarece acest circuit este echivalent cu expresia logică ((<code>0 și 1</code>) și (<code>1 sau 1</code>)).</p>
+
+<h1>Cerința 1 (30 de puncte)</h1>
+
+<p>Pentru un <span class="caps">CLP</span> dat, cu <code>N</code> nivele și pentru <code>K</code> șiruri de biți date la intrarea circuitului, să se determine, pentru fiecare șir, valoarea calculată la ieșirea din circuit.</p>
+
+<h1>Cerința 2 (70 de puncte)</h1>
+
+<p>Pentru un <span class="caps">CLP</span> dat, cu <code>N</code> nivele și cunoscând valoarea obținută la ieșire (<code>0</code> sau <code>1</code>), să se determine numărul șirurilor de biți distincte ce pot fi date la intrare pentru a se obține valoarea specificată la ieșire. Rezultatul poate fi un număr foarte mare, de aceea el se va afișa modulo <code>666013</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului <code>logic.in</code> se găsește un număr natural <code>C</code> (<code>C = 1</code> pentru cerința <code>1</code>, respectiv <code>C = 2</code> pentru cerința <code>2</code>). Pe a doua linie se găsește numărul natural <code>N</code>, reprezentând numărul de nivele ale circuitului; Pe următoarele <code>N</code> linii (linii de la <code>3</code> la <code>N + 2</code>) se găsește descrierea circuitului, fără spații între caractere, astfel:</p>
+
+<ul>
+	<li>pe linia 3 un caracter <code>&amp;</code> sau <code>|</code>, unde prin caracterul ‘&amp;’ se codifică un circuit <code>ȘI</code>, iar prin caracterul <code>|</code> se codifică un circuit <code>SAU</code>;</li>
+	<li>pe linia 4 două caractere din mulțimea <code>{&amp;, |}</code>;</li>
+	<li>pe linia 5 patru caractere din mulțimea <code>{&amp;, |}</code>;</li>
+	<li>…</li>
+	<li>pe linia N + 2 avem <code>2</code><sup><code>N-1</code></sup> caractere mulțimea <code>{&amp;, |}</code>;</li>
+</ul>
+
+<p>Pentru cerința 1:</p>
+
+<ul>
+	<li>Pe linia N + 3 avem un număr natural <code>K</code>, reprezentând numărul șirurilor de biți date la intrarea în circuit;</li>
+	<li>Pe fiecare dintre următoarele <code>K</code> linii avem câte un șir compus din <code>2</code><sup><code>N</code></sup> biți (caractere <code>0</code> sau <code>1</code>), reprezentând șirul de biți dat la intrare;</li>
+</ul>
+
+<p>Pentru cerința 2:</p>
+
+<ul>
+	<li>Pe linia N + 3 avem un număr natural din mulțimea <code>{0, 1}</code>, reprezentând valoarea pe care circuitul trebuie să o scoată la ieșire.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>Pentru cerința 1 se vor afișa în fișierul <code>logic.out</code>, pe linii separate, <code>K</code> numere naturale din mulțimea <code>{0, 1}</code>, cu semnificația din enunț. Pentru cerința 2 se va afișa în fișierul <code>logic.out</code> un număr natural cu semnificația din enunț.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 8</code></li>
+	<li><code>1 ≤ K ≤ 10</code></li>
+	<li>Tabelele operațiilor logice sunt:</li>
+</ul>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-logic-04-jpg.jpg" style="width:300px;"></p>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>logic.in</code></p>
+
+<pre>1
+2
+&amp;
+&amp;|
+3
+1101
+0100
+1000</pre>
+
+<p><code>logic.out</code></p>
+
+<pre>1
+0
+0</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C = 1</code>, deci rezovăm cerința 1. Pentru șirul de biți <code>1101</code> valoarea obținută la ieșirea din circuit este rezultatul evaluării expresiei: <code>((1 și 1) și (1 sau 0)) = (1 și 1) = 1</code>.</p>
+
+<p>Pentru șirul de biți <code>0100</code> valoarea obținută la ieșirea din circuit este rezultatul evaluării expresiei:<br>
+<code>((0 și 1) și (0 sau 0)) = (0 și 0) = 0</code></p>
+
+<p>Pentru șirul de biți <code>1000</code> valoarea obținută la ieșirea din circuit este rezultatul evaluării expresiei:<br>
+<code>((1 și 0) și (0 sau 0) = (0 și 0) = 0</code></p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>logic.in</code></p>
+
+<pre>2
+2
+&amp;
+&amp;|
+1</pre>
+
+<p><code>logic.out</code></p>
+
+<pre>3</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C = 2</code>, deci rezovăm cerința 1. Sunt <code>3</code> șiruri de <code>4</code> biți pentru care se obține valoarea <code>1</code> la ieșirea din<br>
+circuit: <code>1101</code>, <code>1110</code>, <code>1111</code>.</p>		</article>
+		</body></html>

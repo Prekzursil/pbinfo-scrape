@@ -1,0 +1,323 @@
+{
+  "id": 4174,
+  "slug": "tupleco",
+  "name": "tupleco",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4174/tupleco",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 91,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=91"
+    },
+    {
+      "id": 93,
+      "name": "Combinatorică",
+      "slug": "combinatoric",
+      "href": "/?pagina=probleme-lista&tag=93"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Să se determine numărul <code>T</code> al tuplelor formate din <code>K</code> numere naturale <code>(X</code><sub><code>1</code></sub>, <code>X</code><sub><code>2</code></sub>, <code>X</code><sub><code>3</code></sub>, …, <code>X</code><sub><code>K</code></sub><code>)</code> cu proprietățile:</p><ul>\n\t<li><code>1 ≤ X</code><sub><code>1</code></sub> <code>≤ X</code><sub><code>2</code></sub> <code>≤ X</code><sub><code>3</code></sub> <code>≤ ... ≤ X</code><sub><code>K</code></sub> <code>≤ N</code></li>\n\t<li>cel mai mare divizor comun al numerelor <code>X</code><sub><code>1</code></sub>, <code>X</code><sub><code>2</code></sub>, …, <code>X</code><sub><code>K</code></sub> este <code>1</code>.</li>\n</ul>",
+      "text": "Să se determine numărul T al tuplelor formate din K numere naturale (X1, X2, X3, …, XK) cu proprietățile: 1 ≤ X1 ≤ X2 ≤ X3 ≤ ... ≤ XK ≤ N cel mai mare divizor comun al numerelor X1, X2, …, XK este 1."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>tupleco.in</code> conține pe prima linie numerele naturale <code>K</code> și <code>N</code>, separate printr-un spațiu.</p>",
+      "text": "Fișierul de intrare tupleco.in conține pe prima linie numerele naturale K și N, separate printr-un spațiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>tupleco.out</code> va conține restul împărțirii numărului <code>T</code> la <code>3000017</code>.</p>",
+      "text": "Fișierul de ieșire tupleco.out va conține restul împărțirii numărului T la 3000017."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2 ≤ K ≤ 10.000.000</code>.</li>\n\t<li><code>1 ≤ N ≤ 10.000.000</code>.</li>\n\t<li>Pentru teste în valoare de <code>32</code> puncte, <code>N ≤ 1000</code></li>\n\t<li>Pentru 11 puncte, <code>K = 2</code></li>\n\t<li>Pentru 44 de puncte, <code>3 ≤ K ≤ 1000</code></li>\n\t<li>Pentru 30 de puncte, <code>1001 ≤ K ≤ 1.000.000</code></li>\n\t<li>Pentru 15 puncte, <code>1.000.001 ≤ K ≤ 10.000.000</code></li>\n\t<li>Pentru 8 puncte, <code>10.000.000 ≤ K + N ≤ 20.000.000</code></li>\n</ul>",
+      "text": "2 ≤ K ≤ 10.000.000. 1 ≤ N ≤ 10.000.000. Pentru teste în valoare de 32 puncte, N ≤ 1000 Pentru 11 puncte, K = 2 Pentru 44 de puncte, 3 ≤ K ≤ 1000 Pentru 30 de puncte, 1001 ≤ K ≤ 1.000.000 Pentru 15 puncte, 1.000.001 ≤ K ≤ 10.000.000 Pentru 8 puncte, 10.000.000 ≤ K + N ≤ 20.000.000"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>tupleco.in</code></p><pre>2 6</pre><p><code>tupleco.out</code></p><pre>12</pre><h3>Explicație</h3><p><code>K = 2</code> și <code>N = 6</code>. Există <code>12</code> perechi de numere naturale ce respectă condițiile din enunț: <code>(1,1)</code>,  <code>(1,2)</code>,  <code>(1,3)</code>, <code>(1,4)</code>, <code>(1,5)</code>, <code>(1,6)</code>, <code>(2,3)</code>, <code>(2,5)</code>, <code>(3,4)</code>, <code>(3,5)</code>, <code>(4,5)</code> și  <code>(5,6)</code> </p>",
+      "text": "tupleco.in2 6tupleco.out12ExplicațieK = 2 și N = 6. Există 12 perechi de numere naturale ce respectă condițiile din enunț: (1,1), (1,2), (1,3), (1,4), (1,5), (1,6), (2,3), (2,5), (3,4), (3,5), (4,5) și (5,6)"
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>tupleco.in</code></p><pre>4 3</pre><p><code>tupleco.out</code></p><pre>13</pre><h3>Explicație</h3><p><code>K = 4</code> și <code>N = 3</code>. Există <code>13</code> tuple formate din câte 4 numere naturale ce respectă condițiile din enunț: <code>(1,1,1,1)</code>, <code>(1,1,1,2)</code>, <code>(1,1,1,3)</code>, <code>(1,1,2,2)</code>, <code>(1,1,2,3)</code>, <code>(1,1,3,3)</code>, <code>(1,2,2,2)</code>, <code>(1,2,2,3)</code>, <code>(1,2,3,3)</code>, <code>(1,3,3,3)</code>, <code>(2,2,2,3)</code>, <code>(2,2,3,3)</code> și <code>(2,3,3,3)</code>.</p>",
+      "text": "tupleco.in4 3tupleco.out13ExplicațieK = 4 și N = 3. Există 13 tuple formate din câte 4 numere naturale ce respectă condițiile din enunț: (1,1,1,1), (1,1,1,2), (1,1,1,3), (1,1,2,2), (1,1,2,3), (1,1,3,3), (1,2,2,2), (1,2,2,3), (1,2,3,3), (1,3,3,3), (2,2,2,3), (2,2,3,3) și (2,3,3,3)."
+    },
+    {
+      "title": "Exemplul 3:",
+      "html": "<p><code>tupleco.in</code></p><pre>2022 2023</pre><p><code>tupleco.out</code></p><pre>981889</pre><h3>Explicație</h3><p><code>K = 2022</code> și <code>N = 2023</code>. Restul împărțirii numărului <code>T</code> la <code>3000017</code> este <code>981889</code>.</p>",
+      "text": "tupleco.in2022 2023tupleco.out981889ExplicațieK = 2022 și N = 2023. Restul împărțirii numărului T la 3000017 este 981889."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "K = 2 și N = 6. Există 12 perechi de numere naturale ce respectă condițiile din enunț: (1,1), (1,2), (1,3), (1,4), (1,5), (1,6), (2,3), (2,5), (3,4), (3,5), (4,5) și (5,6)"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "K = 4 și N = 3. Există 13 tuple formate din câte 4 numere naturale ce respectă condițiile din enunț: (1,1,1,1), (1,1,1,2), (1,1,1,3), (1,1,2,2), (1,1,2,3), (1,1,3,3), (1,2,2,2), (1,2,2,3), (1,2,3,3), (1,3,3,3), (2,2,2,3), (2,2,3,3) și (2,3,3,3)."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "K = 2022 și N = 2023. Restul împărțirii numărului T la 3000017 este 981889."
+    }
+  ],
+  "constraints": [
+    "2 ≤ K ≤ 10.000.000.",
+    "1 ≤ N ≤ 10.000.000.",
+    "Pentru teste în valoare de 32 puncte, N ≤ 1000",
+    "Pentru 11 puncte, K = 2",
+    "Pentru 44 de puncte, 3 ≤ K ≤ 1000",
+    "Pentru 30 de puncte, 1001 ≤ K ≤ 1.000.000",
+    "Pentru 15 puncte, 1.000.001 ≤ K ≤ 10.000.000",
+    "Pentru 8 puncte, 10.000.000 ≤ K + N ≤ 20.000.000"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qa75c644143.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "10",
+    "intrare/ieșire": "tupleco.in / tupleco.out",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "256 MB / 64 MB",
+    "sursa problemei": "Lot juniori, Cluj-Napoca 2022",
+    "autor": "Ciprian Cheșcă, Ionel Vasile Piț-Rada",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 256,
+  "author": "Ciprian Cheșcă, Ionel Vasile Piț-Rada",
+  "sourceAttribution": "Lot juniori, Cluj-Napoca 2022",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4174/tupleco"
+}

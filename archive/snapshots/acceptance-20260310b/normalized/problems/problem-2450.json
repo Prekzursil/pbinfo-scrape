@@ -1,0 +1,324 @@
+{
+  "id": 2450,
+  "slug": "ramen",
+  "name": "ramen",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/2450/ramen",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 65,
+      "name": "Structuri de date arborescente",
+      "slug": "structuri-de-date-arborescente",
+      "href": "/?pagina=probleme-lista&tag=65"
+    },
+    {
+      "id": 148,
+      "name": "Structuri de date",
+      "slug": "structuri-de-date",
+      "href": "/?pagina=probleme-lista&tag=148"
+    }
+  ],
+  "tags": [
+    "Heapuri"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Pentru a evalua impactul acestui obicei asupra timpilor de așteptare, ai obținut date despre toate comenzile date în ziua curentă. Îți propui să afli, pentru fiecare comandă următoarea valoare: dacă respectiva comandă este a <code>NR</code>-a făcută de clientul respectiv, care este secunda la care clientul în cauză va mânca pentru a <code>NR</code>-a oară?</p>",
+      "text": "Pentru a evalua impactul acestui obicei asupra timpilor de așteptare, ai obținut date despre toate comenzile date în ziua curentă. Îți propui să afli, pentru fiecare comandă următoarea valoare: dacă respectiva comandă este a NR-a făcută de clientul respectiv, care este secunda la care clientul în cauză va mânca pentru a NR-a oară?"
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>ramen.in</code> va conține pe prima linie numărul de comenzi <code>N</code>, respectiv timpul de preparare a unei porții de ramen <code>D</code>. Următoarele <code>N</code> linii vor conține câte o pereche de numere: <code>T[i]</code>, secunda la care este făcută a <code>i</code>-a comandă, respectiv <code>P[i]</code>, numărul scaunului de la care s-a făcut a <code>i</code>-a comandă. Se garantează că timpii de comandă sunt distincți și sunt crescători în ordinea citirii lor.</p>",
+      "text": "Fișierul de intrare ramen.in va conține pe prima linie numărul de comenzi N, respectiv timpul de preparare a unei porții de ramen D. Următoarele N linii vor conține câte o pereche de numere: T[i], secunda la care este făcută a i-a comandă, respectiv P[i], numărul scaunului de la care s-a făcut a i-a comandă. Se garantează că timpii de comandă sunt distincți și sunt crescători în ordinea citirii lor."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>ramen.out</code> va conține <code>N</code> linii, fiecare conținând o singură valoare naturală: a <code>i</code>-a valoare va reprezenta răspunsul cerut pentru a <code>i</code>-a comandă în ordinea citirii.</p>",
+      "text": "Fișierul de ieșire ramen.out va conține N linii, fiecare conținând o singură valoare naturală: a i-a valoare va reprezenta răspunsul cerut pentru a i-a comandă în ordinea citirii."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 100.000</code></li>\n\t<li><code>0 ≤ D, T[i] ≤ 500.000.000</code>, pentru orice <code>1 ≤ i ≤ N</code></li>\n\t<li><code>1 ≤ P[i] ≤ 500.000.000</code>, pentru orice <code>1 ≤ i ≤ N</code></li>\n\n\t<li>Se garantează că <code>T[i] &lt; T[i+1]</code>, pentru orice <code>1 ≤ i &lt; N</code></li>\n\t<li>Pentru teste în valoare totală de <code>22</code> de puncte, se garantează în plus faţă de restricţiile generale că <code>N ≤ 2000</code> şi <code>D, T[i], P[i] ≤ 5000</code></li>\n\t<li>Pentru alte teste în valoare totală de <code>25</code> de puncte, se garantează în plus faţă de restricţiile generale că <code>N ≤ 2000</code>.</li>\n\t<li>În concurs s-au acordat <code>10</code> puncte din oficiu. Aici se acordă <code>10</code> puncte pentru exemplele din enunț.</li>\n</ul>",
+      "text": "1 ≤ N ≤ 100.000 0 ≤ D, T[i] ≤ 500.000.000, pentru orice 1 ≤ i ≤ N 1 ≤ P[i] ≤ 500.000.000, pentru orice 1 ≤ i ≤ N Se garantează că T[i] < T[i+1], pentru orice 1 ≤ i < N Pentru teste în valoare totală de 22 de puncte, se garantează în plus faţă de restricţiile generale că N ≤ 2000 şi D, T[i], P[i] ≤ 5000 Pentru alte teste în valoare totală de 25 de puncte, se garantează în plus faţă de restricţiile generale că N ≤ 2000. În concurs s-au acordat 10 puncte din oficiu. Aici se acordă 10 puncte pentru exemplele din enunț."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>ramen.in</code></p><pre>2 2\n10 8\n16 6</pre><p><code>ramen.out</code></p><pre>26\n18</pre><h3>Explicație</h3><p>Exemplul descris în enunț.</p>",
+      "text": "ramen.in2 2 10 8 16 6ramen.out26 18ExplicațieExemplul descris în enunț."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>ramen.in</code></p><pre>3 2\n5 4\n6 4\n7 3</pre><p><code>ramen.out</code></p><pre>12\n13\n10</pre><h3>Explicație</h3><p>Observaţi că în acest exemplu clientul de pe scaunul cu numărul <code>4</code> face două comenzi. Răspunsul corespunzător primei comenzi este secunda în care clientul mănâncă pentru prima oară, iar răspunsul corespunzător comenzii cu numărul doi este secunda în care clientul mănâncă pentru a doua oară.</p>",
+      "text": "ramen.in3 2 5 4 6 4 7 3ramen.out12 13 10ExplicațieObservaţi că în acest exemplu clientul de pe scaunul cu numărul 4 face două comenzi. Răspunsul corespunzător primei comenzi este secunda în care clientul mănâncă pentru prima oară, iar răspunsul corespunzător comenzii cu numărul doi este secunda în care clientul mănâncă pentru a doua oară."
+    },
+    {
+      "title": "Exemplul 3:",
+      "html": "<p><code>ramen.in</code></p><pre>3 0\n0 6\n3 3\n4 5</pre><p><code>ramen.out</code></p><pre>10\n3\n8</pre><h3>Explicație</h3><p>Observaţi că în acest exemplu clientul de pe scaunul cu numărul <code>3</code> face o comandă la secunda <code>3</code>. Exact în acelaşi moment, îi apare o porţie de ramen în faţă, iar el o consumă imediat.</p>",
+      "text": "ramen.in3 0 0 6 3 3 4 5ramen.out10 3 8ExplicațieObservaţi că în acest exemplu clientul de pe scaunul cu numărul 3 face o comandă la secunda 3. Exact în acelaşi moment, îi apare o porţie de ramen în faţă, iar el o consumă imediat."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Exemplul descris în enunț."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Observaţi că în acest exemplu clientul de pe scaunul cu numărul 4 face două comenzi. Răspunsul corespunzător primei comenzi este secunda în care clientul mănâncă pentru prima oară, iar răspunsul corespunzător comenzii cu numărul doi este secunda în care clientul mănâncă pentru a doua oară."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Observaţi că în acest exemplu clientul de pe scaunul cu numărul 3 face o comandă la secunda 3. Exact în acelaşi moment, îi apare o porţie de ramen în faţă, iar el o consumă imediat."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 100.000",
+    "0 ≤ D, T[i] ≤ 500.000.000, pentru orice 1 ≤ i ≤ N",
+    "1 ≤ P[i] ≤ 500.000.000, pentru orice 1 ≤ i ≤ N",
+    "Se garantează că T[i] < T[i+1], pentru orice 1 ≤ i < N",
+    "Pentru teste în valoare totală de 22 de puncte, se garantează în plus faţă de restricţiile generale că N ≤ 2000 şi D, T[i], P[i] ≤ 5000",
+    "Pentru alte teste în valoare totală de 25 de puncte, se garantează în plus faţă de restricţiile generale că N ≤ 2000.",
+    "În concurs s-au acordat 10 puncte din oficiu. Aici se acordă 10 puncte pentru exemplele din enunț."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qc5f1f56ba4.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "11",
+    "intrare/ieșire": "ramen.in / ramen.out",
+    "limită timp": "1.8 secunde",
+    "limită memorie": "128 MB / 32 MB",
+    "sursa problemei": "OJI 2018",
+    "autor": "Mihai Calancea",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 1.8,
+  "memoryLimitMb": 128,
+  "author": "Mihai Calancea",
+  "sourceAttribution": "OJI 2018",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/2450/ramen"
+}

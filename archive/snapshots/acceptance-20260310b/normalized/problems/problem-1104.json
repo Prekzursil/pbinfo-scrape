@@ -1,0 +1,305 @@
+{
+  "id": 1104,
+  "slug": "qvect",
+  "name": "qvect",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1104/qvect",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 151,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=151"
+    },
+    {
+      "id": 152,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=152"
+    }
+  ],
+  "tags": [
+    "Interclasare",
+    "Cautare binara"
+  ],
+  "sections": [
+    {
+      "title": "Cerinţă",
+      "html": "<p>Să se răspundă la <code>Q</code> întrebări de tipul:<br>\na) <code>1 i j</code>, cu semnificaţia: care este minimul dintre modulele diferențelor oricăror două elemente, primul element aparținând vectorului numerotat cu <code>i</code>, iar cel de al doilea element aparținând vectorului numerotat cu <code>j</code> ?<br>\nb) <code>2 i j</code>, cu semnificația: care este valoarea ce se găsește pe poziția mediană în vectorul obținut prin interclasarea vectorilor având numerele de ordine <code>i,i+1,…,j</code>  (<code>i&lt;j</code>).</p>",
+      "text": "Să se răspundă la Q întrebări de tipul: a) 1 i j, cu semnificaţia: care este minimul dintre modulele diferențelor oricăror două elemente, primul element aparținând vectorului numerotat cu i, iar cel de al doilea element aparținând vectorului numerotat cu j ? b) 2 i j, cu semnificația: care este valoarea ce se găsește pe poziția mediană în vectorul obținut prin interclasarea vectorilor având numerele de ordine i,i+1,…,j (i<j)."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fişierul de intrare <code>qvect.in</code> conţine pe prima linie două numerele naturale <code>N Q</code>, separate printr-un spațiu, ce reprezintă numărul de vectori, respectiv numărul de întrebări. </p><p>Pe fiecare dintre următoarele <code>N</code> linii se găsește descrierea unui vector sub forma: <code>k a</code><sub><code>1</code></sub><code> a</code><sub><code>2</code></sub><code> … a</code><sub><code>k</code></sub>, unde <code>k</code> reprezintă numărul de elemente, iar <code>a</code><sub><code>1</code></sub><code> a</code><sub><code>2</code></sub><code> … a</code><sub><code>k</code></sub> reprezintă elementele vectorului, separate prin câte un spațiu.</p><p>Pe fiecare dintre următoarele <code>Q</code> linii se găsește descrierea unei întrebări sub forma unui triplet de numere naturale: <code>t i j</code>, separate prin câte un spațiu, unde <code>t</code> reprezintă tipul întrebării şi poate lua numai valorile <code>1</code> sau <code>2</code>, iar <code>i</code> și <code>j</code> au semnificația precizată în cerinţă.</p>",
+      "text": "Fişierul de intrare qvect.in conţine pe prima linie două numerele naturale N Q, separate printr-un spațiu, ce reprezintă numărul de vectori, respectiv numărul de întrebări. Pe fiecare dintre următoarele N linii se găsește descrierea unui vector sub forma: k a1 a2 … ak, unde k reprezintă numărul de elemente, iar a1 a2 … ak reprezintă elementele vectorului, separate prin câte un spațiu.Pe fiecare dintre următoarele Q linii se găsește descrierea unei întrebări sub forma unui triplet de numere naturale: t i j, separate prin câte un spațiu, unde t reprezintă tipul întrebării şi poate lua numai valorile 1 sau 2, iar i și j au semnificația precizată în cerinţă."
+    },
+    {
+      "title": "Date de ieşire",
+      "html": "<p>Fişierul de ieşire <code>qvect.out</code> va  conţine <code>Q</code> numere întregi, câte unul pe linie, reprezentând în ordine, răspunsurile la cele <code>Q</code> întrebări.</p>",
+      "text": "Fişierul de ieşire qvect.out va conţine Q numere întregi, câte unul pe linie, reprezentând în ordine, răspunsurile la cele Q întrebări."
+    },
+    {
+      "title": "Restricţii:",
+      "html": "<ul>\n\t<li><code>1 ≤ N, i, j ≤ 100</code></li>\n\t<li><code>1 ≤ Q ≤ 1000</code></li>\n\t<li><code>1 ≤ t ≤ 2</code></li>\n\t<li><code>1 ≤ k ≤ 5000</code></li>\n\t<li><code>-1 000 000 000 ≤ a</code><sub><code>p</code></sub><code> ≤ 1 000 000 000</code></li>\n\t<li>Prin valoarea aflată pe poziția mediană a unui vector <code>a</code> cu <code>k</code> elemente se înțelege valoarea elementului situat pe poziţia  <code>[k/2]</code>, adică partea întreagă a lui <code>k / 2</code>.</li>\n\t<li>15% dintre teste vor conține numai întrebări de tipul <code>1</code></li>\n\t<li>15% dintre teste vor conține numai întrebări de tipul <code>2</code></li>\n</ul>",
+      "text": "1 ≤ N, i, j ≤ 100 1 ≤ Q ≤ 1000 1 ≤ t ≤ 2 1 ≤ k ≤ 5000 -1 000 000 000 ≤ ap ≤ 1 000 000 000 Prin valoarea aflată pe poziția mediană a unui vector a cu k elemente se înțelege valoarea elementului situat pe poziţia [k/2], adică partea întreagă a lui k / 2. 15% dintre teste vor conține numai întrebări de tipul 1 15% dintre teste vor conține numai întrebări de tipul 2"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>qvect.in</code></p><pre>3 3\n7 1 4 5 8 11 18 19\n6 2 4 5 10 21 29\n4 13 14 15 15\n2 2 3\n1 2 3\n2 1 3</pre><p><code>qvect.out</code></p><pre>13\n3\n10</pre>",
+      "text": "qvect.in3 3 7 1 4 5 8 11 18 19 6 2 4 5 10 21 29 4 13 14 15 15 2 2 3 1 2 3 2 1 3qvect.out13 3 10"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p>Prima întrebare este de tipul <code>2</code>. Vectorul nou obținut prin interclasarea vectorilor numerotați cu <code>2</code> și cu <code>3</code> este următorul: <code>2,4,5,10,13,14,15,15,21,29</code> și conține <code>6+4=10</code> elemente, valoarea elementului median este <code>13</code></p><p>A doua întrebare este de tipul <code>1</code>. Diferența minimă se obține pentru perechea <code>(10,13)</code>, unde valoarea <code>10</code> aparține vectorului numerotat cu <code>2</code>, iar valoarea <code>13</code> aparține vectorului numerotat cu <code>3</code>.</p><p>A treia întrebare este de tipul <code>2</code>. Poziția mediană în vectorul nou obținut prin interclasare este <code>(7+6+4)/2 = 8</code>, deci  valoarea ce se găsește pe poziția mediană este <code>10</code>.</p>",
+      "text": "Prima întrebare este de tipul 2. Vectorul nou obținut prin interclasarea vectorilor numerotați cu 2 și cu 3 este următorul: 2,4,5,10,13,14,15,15,21,29 și conține 6+4=10 elemente, valoarea elementului median este 13A doua întrebare este de tipul 1. Diferența minimă se obține pentru perechea (10,13), unde valoarea 10 aparține vectorului numerotat cu 2, iar valoarea 13 aparține vectorului numerotat cu 3.A treia întrebare este de tipul 2. Poziția mediană în vectorul nou obținut prin interclasare este (7+6+4)/2 = 8, deci valoarea ce se găsește pe poziția mediană este 10."
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "1 ≤ N, i, j ≤ 100",
+    "1 ≤ Q ≤ 1000",
+    "1 ≤ t ≤ 2",
+    "1 ≤ k ≤ 5000",
+    "-1 000 000 000 ≤ ap ≤ 1 000 000 000",
+    "Prin valoarea aflată pe poziția mediană a unui vector a cu k elemente se înțelege valoarea elementului situat pe poziţia [k/2], adică partea întreagă a lui k / 2.",
+    "15% dintre teste vor conține numai întrebări de tipul 1",
+    "15% dintre teste vor conține numai întrebări de tipul 2"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q63dbc75257.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "9",
+    "intrare/ieșire": "qvect.in / qvect.out",
+    "limită timp": "1 secunde",
+    "limită memorie": "8 MB / 2 MB",
+    "sursa problemei": "ONI 2014, Clasa a IX-a",
+    "autor": "Eugen Nodea",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 1,
+  "memoryLimitMb": 8,
+  "author": "Eugen Nodea",
+  "sourceAttribution": "ONI 2014, Clasa a IX-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1104/qvect"
+}

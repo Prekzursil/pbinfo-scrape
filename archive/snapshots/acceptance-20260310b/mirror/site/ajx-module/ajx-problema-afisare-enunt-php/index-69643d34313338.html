@@ -1,0 +1,68 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4138"><article id="enunt">
+			<p>Cea mai cunoscută măsură a unui vârf de munte este altitudinea sa. Vârfuri secundare ale unui munte înalt pot avea altitudini considerabile, dar în general acestea nu sunt atât de relevante. Din acest motiv, geografii au introdus o nouă măsură pentru un vârf: <strong>proeminenţa</strong>. Un <strong>profil</strong> este o reprezentare a altitudinilor în puncte succesive, între care ne putem deplasa la stânga sau dreapta. </p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-proeminenta-01-jpg.jpg"></p>
+
+<p>În desen avem profilul munţilor Făgăraş, pe care exemplificăm următoarele definiţii:</p>
+
+<ul>
+	<li>Un <strong>vârf</strong> este un punct (sau o succesiune de puncte consecutive cu aceeaşi altitudine), pentru care altitudinile punctelor alăturate în stânga, respectiv în dreapta sunt strict mai mici decât altitudinea vârfului. De exemplu, Negoiu este un vârf (altitudinea sa este 2535m, punctul de pe profil situat în stânga sa are altitudinea 2306m, iar punctul de pe profil situat în dreapta sa are altitudinea 2030m). Un alt exemplu de vârf este Urlea, fiind reprezentat pe profil prin două puncte consecutive cu altitudinea 2473m, având în stânga un punct cu altitudinea 2160m, iar în dreapta un punct cu altitudinea 1511m.</li>
+	<li><strong>Cea mai adâncă vale</strong> dintre două vârfuri este altitudinea minimă a unui punct care se află între cele două vârfuri. De exemplu, în desen între Negoiu şi Moldoveanu cea mai adâncă vale este la 2030m.</li>
+	<li><strong>Proeminenţa</strong> unui vârf este diferenţa minimă dintre altitudinea lui şi cea mai adâncă vale dintre el şi un vârf strict mai înalt decât el. Dacă nu există un vârf strict mai înalt, proeminenţa este altitudinea vârfului. De exemplu, pentru a determina proeminenţa vârfului Gălăşescu Mare putem considera vârfurile strict mai înalte (în ordine de la stânga la dreapta: Negoiu, Moldoveanu şi Urlea). Dacă plecăm de pe Negoiu, diferenţa dintre cea mai adâncă vale şi Gălăşescu Mare este 2470-2030=440m. Dacă plecăm de pe Moldoveanu, diferenţa dintre cea mai adâncă vale şi Gălăşescu Mare este 2470-2213=257m. Dacă plecăm de pe Urlea, diferenţa dintre cea mai adâncă vale şi Gălăşescu Mare este 2470-2160=310m. Diferenţa minimă este 257m, deci proeminenţa vârfului Gălăşescu Mare este dată de vârful Moldoveanu.</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care, cunoscând configuraţia unui profil, rezolvă următoarele două cerinţe:<br>
+1) determină numărul de vârfuri existente pe profilul respectiv;<br>
+2) determină proeminenţa fiecărui vârf de pe profil.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>proeminenta.in</code> conține pe prima linie numărul natural <code>C</code>, reprezentând cerinţa care trebuie să fie rezolvată: <code>1</code> sau <code>2</code>. Pe cea de a doua linie se află numărul natural <code>N</code>, reprezentând numărul de puncte din profil. Pe a treia linie se află <code>N</code> numere naturale separate prin câte un spaţiu <code>a[1]</code>, <code>a[2]</code>, …, <code>a[N]</code>, reprezentând altitudinile celor <code>N</code> puncte de pe profil, în ordine de la stânga la dreapta.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>proeminenta.out</code> va conține o singură linie pe care va fi scris răspunsul la cerinţa <code>C</code>. Dacă <code>C = 1</code> răspunsul va fi numărul natural <code>Nr</code>, reprezentând numărul de vârfuri. Dacă <code>C = 2</code> răspunsul va fi o succesiune de <code>Nr</code> valori naturale separate prin câte un singur spaţiu, reprezentând proeminenţele celor <code>Nr</code> vârfuri, în ordinea din fişierul de intrare.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>3 ≤ N ≤ 1.000.000</code></li>
+	<li><code>0 ≤ a[i] &lt; 2</code><sup><code>31</code></sup>, pentru <code>1 ≤ i ≤ N</code></li>
+	<li><code>a[1] &lt; a[2]</code> și <code>a[N-1] &gt; a[N]</code></li>
+	<li>Datorită dimensiunii testelor, unele nu au fost incluse</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>proeminenta.in</code></p>
+
+<pre>1
+19
+1387 1890 2306 2535 2030 2391 2079
+2544 2213 2470 2305 2433 2160 2473
+2473 1511 1735 1621 1367</pre>
+
+<p><code>proeminenta.out</code></p>
+
+<pre>7</pre>
+
+<h3>Explicație</h3>
+
+<p>Profilul din fişierele de intrare este cel reprezentat în desen. Cele <code>7</code> vârfuri sunt denumite pe desen. Deși altitudinile apar în tabel pe mai multe linii, ele vor fi scrise pe o singură linie în fișierul de intrare.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>proeminenta.in</code></p>
+
+<pre>2
+19
+1387 1890 2306 2535 2030 2391 2079
+2544 2213 2470 2305 2433 2160 2473
+2473 1511 1735 1621 1367</pre>
+
+<p><code>proeminenta.out</code></p>
+
+<pre>505 312 2544 257 128 313 224</pre>		</article>
+		</body></html>

@@ -1,0 +1,89 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1697"><article id="enunt">
+			<p>Ionel și Georgel sunt colegi de clasă și doresc să facă schimb de fișiere prin email. Fiecare dintre ei își arhivează fișierele cu câte o parolă. Fiecare copil își construiește parola pe baza unui șir format din <code>N</code> numere naturale.</p>
+
+<p>Numerele din șir care se folosesc efectiv pentru construirea parolelor sunt <strong>doar</strong> cele divizibile cu numerele din mulțimea <code>{2,3,4,5,6,7,8,9,10,11,12,13,14,15}</code>. Copiii numără câte din valorile din șir sunt divizibile cu fiecare din aceste numere.</p>
+
+<p>Parola folosită de Ionel se obține prin însumarea numărului de valori din șir care sunt divizibile cu numerele din mulțimea <code>{2,3,4,5,6,7,8,9}</code>. Parola folosită de Georgel se obține prin însumarea numărului de valori din șir care sunt divizibile cu numerele din mulțimea <code>{10,11,12,13,14,15}</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care citește șirul celor <code>N</code> numere și determină: </p>
+
+<ol>
+	<li>câte numere din șir nu se vor folosi în construirea parolelor celor doi copii;</li>
+	<li>parola construită de Ionel;</li>
+	<li>parola construită de Georgel.</li>
+</ol>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>cod1.in</code> conține pe prima linie un număr natural <code>P</code>. Pentru toate testele de intrare, numărul <code>P</code> poate avea doar valoarea <code>1</code>, <code>2</code> sau <code>3</code>. Pe a doua linie numărul natural <code>N</code>, iar pe a treia linie, <code>N</code> numere naturale separate prin câte un caracter <code>#</code>. </p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă valoarea lui <code>P</code> este <code>1</code>, se va rezolva numai punctul 1) din cerințe. În acest caz, fişierul de ieşire <code>cod1.out</code> va conţine pe prima linie un număr natural nenul reprezentând câte numere din șir nu s-au folosit la construirea parolelor sau <code>0</code> dacă nu există astfel de numere.</p>
+
+<p>Dacă valoarea lui <code>P</code> este <code>2</code>, se va rezolva numai punctul 2) din cerințe. În acest caz, fişierul de ieşire <code>cod1.out</code> va conţine pe prima linie un număr natural reprezentând parola construită de Ionel.</p>
+
+<p>Dacă valoarea lui <code>P</code> este <code>3</code>, se va rezolva numai punctul 3) din cerințe. În acest caz, fişierul de ieşire <code>cod1.out</code> va conţine pe prima linie un număr natural reprezentând parola construită de Georgel.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>0 &lt; N ≤ 100 000</code></li>
+	<li><code>2 ≤</code> numărul de cifre ale unui număr <code>≤  100</code></li>
+	<li>Se garantează că toate parolele pe care copiii le vor obține sunt nenule</li>
+	<li>În fișierul de intrare ultimul număr nu este urmat de caracterul <code>#</code></li>
+	<li>16% din teste conțin doar numere formate din cel mult <code>9</code> cifre</li>
+	<li>Pentru rezolvarea corectă a cerinţei 1 se obțin 20 de puncte, pentru rezolvarea corectă a cerinţei 2 se obțin 40 de puncte iar pentru rezolvarea corectă a cerinţei 3 se obțin 40 de puncte</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>cod1.in</code></p>
+
+<pre>1
+6
+10#20#12#34#15#23</pre>
+
+<p><code>cod1.out</code></p>
+
+<pre>1</pre>
+
+<h3>Explicație</h3>
+
+<p>Doar numărul <code>23</code> nu este divizibil cu niciun număr din mulțimea <code>{2,3,…15}</code></p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>cod1.in</code></p>
+
+<pre>2
+5
+16#61#12#385#31</pre>
+
+<p><code>cod1.out</code></p>
+
+<pre>9</pre>
+
+<h3>Explicație</h3>
+
+<p>Pentru parola lui Ionel trebuie sa verificăm divizibilitatea cu numerele <code>2,3,4,5,6,7,8,9</code>.  Două numere sunt divizibile cu <code>2</code> (<code>16</code> și <code>12</code>), un număr este divizibil cu <code>3</code> (<code>12</code>), două numere sunt divizibile cu <code>4</code> (<code>16</code> și <code>12</code>), un număr este divizibil cu <code>5</code> (<code>385</code>), un număr este divizibil cu <code>6</code> (<code>12</code>), un număr este divizibil <code>7</code> (<code>385</code>), un număr este divizibil cu <code>8</code> (<code>16</code>). Parola este <code>2+1+2+1+1+1+1=9</code></p>
+
+<h1>Exemplul 3</h1>
+
+<p><code>cod1.in</code></p>
+
+<pre>3
+5
+30#1100#11#85#121</pre>
+
+<p><code>cod1.out</code></p>
+
+<pre>6</pre>
+
+<h3>Explicație</h3>
+
+<p>Pentru parola lui Georgel trebuie sa verificăm divizibilitatea cu numerele <code>10</code>, <code>11</code>, <code>12</code>, <code>13</code>, <code>14</code>, <code>15</code>. <br>
+Două numere sunt divizibile cu <code>10</code> (<code>30</code> și <code>1100</code>), trei numere sunt divizibile cu <code>11</code> (<code>1100</code>, <code>11</code> și <code>121</code>), și un număr este divizibil cu <code>15</code> (<code>30</code>). Parola este <code>2+3+1=6</code></p>		</article>
+		</body></html>

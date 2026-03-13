@@ -1,0 +1,66 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1685"><article id="enunt">
+			<p>Sandu a studiat la ora de informatică mai multe aplicații cu vectori de numere naturale, iar acum are de rezolvat o problemă interesantă. Se dă un șir  <code>X=(X[1],X[2],…,X[n])</code> de numere naturale nenule și două numere naturale <code>p1</code> și <code>p2</code>, unde <code>p1&lt;p2</code>. Sandu trebuie să construiască un nou șir <code>Y=(Y[1],Y[2],…,Y[n*n])</code> cu <code>n*n</code> elemente obținute din toate produsele de câte două elemente din șirul <code>X</code> (fiecare element din șirul <code>Y</code> este de forma <code>X[i]*X[j]</code>, <code>1&lt;=i</code>, <code>j&lt;=n</code>). Sandu are de calculat două valori naturale <code>d1</code> și <code>d2</code> obținute din șirul <code>Y</code>. Valoarea <code>d1</code> este egală cu diferența maximă posibilă dintre două valori ale șirului <code>Y</code>. Pentru a obține valoarea <code>d2</code>, Sandu trebuie să considere că șirul <code>Y</code> are elementele ordonate descrescător iar <code>d2</code> va fi diferența dintre valorile aflate pe pozițiile <code>p1</code> și <code>p2</code> în șirul ordonat descrescător. Sandu a găsit rapid valorile <code>d1</code> și <code>d2</code> și, pentru a le verifica, vă roagă să le determinați și voi. </p>
+
+<h1>Cerința</h1>
+
+<p>Dându-se șirul <code>X</code> cu <code>n</code> elemente și valorile <code>p1</code> și <code>p2</code>, determinați valorile <code>d1</code> și <code>d2</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>dif2.in</code> conține pe prima linie un număr natural <code>C</code> care poate fi doar <code>1</code> sau <code>2</code>. Dacă <code>C=1</code>, atunci pe linia a doua se va afla numărul natural <code>n</code>. Dacă <code>C=2</code>, atunci pe linia a doua se vor afla numerele naturale <code>n p1 p2</code> separate prin câte un spațiu. În ambele cazuri, pe următoarele <code>n</code> linii se vor afla elementele șirului <code>X</code>, câte un număr natural pe fiecare linie a fișierului.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>În cazul <code>C=1</code>, fișierul de ieșire <code>dif2.out</code> va conține pe prima linie valoarea <code>d1</code> egală cu diferența maximă dintre oricare două valori din șirul <code>Y</code>. În cazul <code>C=2</code> fișierul de ieșire va conține pe prima linie un număr natural <code>d2</code> reprezentând diferența dintre valorile aflate pe pozițiile <code>p1</code> și <code>p2</code> din șirul <code>Y</code>, presupunând că ar fi ordonat descrescător.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>3 &lt; n &lt; 300 000</code></li>
+	<li><code>1 ≤ p1 &lt; p2 ≤ n</code><sup><code>2</code></sup></li>
+	<li><code>1 ≤ X[i] &lt; 300 000, i=1..n</code></li>
+	<li>Pentru teste valorând 30 de puncte vom avea <code>C=1</code>, iar pentru teste valorând 70 de puncte vom avea <code>C=2</code>.</li>
+	<li>Pentru teste valorând 10 puncte vom avea <code>C=2</code> și <code>n≤100</code></li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>dif2.in</code></p>
+
+<pre>1
+4
+3
+5
+2
+6</pre>
+
+<p><code>dif2.out</code></p>
+
+<pre>32</pre>
+
+<h3>Explicație</h3>
+
+<p>Atenție, <code>C=1</code>, deci se rezolvă doar cerința 1!<br>
+Valoarea maximă <code>d1</code> va fi <code>32</code> și se obține efectuând diferența dintre <code>6*6</code> și <code>2*2</code>.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>dif2.in</code></p>
+
+<pre>2
+4 5 11
+3
+5
+2
+6</pre>
+
+<p><code>dif2.out</code></p>
+
+<pre>8</pre>
+
+<h3>Explicație</h3>
+
+<p>Atenție, <code>C=2</code>, deci se rezolvă doar cerința 2! <br>
+Se obțin în <code>Y</code> următoarele <code>16</code> valori: <code>3*3</code>, <code>3*5</code>, <code>3*2</code>, <code>3*6</code>, <code>5*3</code>, <code>5*5</code>, <code>5*2</code>, <code>5*6</code>, <code>2*3</code>, <code>2*5</code>, <code>2*2</code>, <code>2*6</code>, <code>6*3</code>, <code>6*5</code>, <code>6*2</code>, <code>6*6</code>.<br>
+Valoarea <code>d2</code> va fi <code>8</code>, deoarece dacă vom considera șirul <code>Y</code> ordonat descrescător <code>(36, 30, 30, 25, 18, 18, 15, 15, 12, 12, 10, 10,  9, 6, 6, 4)</code>, atunci <code>Y[5]-Y[11]=18-10=8</code></p>		</article>
+		</body></html>

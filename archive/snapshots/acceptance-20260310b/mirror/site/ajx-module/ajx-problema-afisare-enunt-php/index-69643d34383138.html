@@ -1,0 +1,121 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4818"><article id="enunt">
+			<p><img align="right" alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-4400-4818-golf-png.png"><br>
+Privit din satelit, Golful Biscayne (Florida) este format din <code>n × m</code> celule pătratice, fiecare celulă fiind umplută fie cu pământ, fie cu apă. Celulele umplute cu pământ sunt grupate în insule: două celule umplute cu pământ fac parte din aceeași insulă dacă și numai dacă se poate ajunge de la una la cealaltă prin deplasare (în sus, jos, stânga sau dreapta) doar pe pământ.</p>
+
+<p>Golful poate fi văzut, astfel, ca o matrice <code>A</code> cu <code>n</code> linii și <code>m</code> coloane (numerotate de la <code>1</code>), unde <code>A[i][j] = 1</code> dacă celula de pe linia <code>i</code> și coloana <code>j</code> este umplută cu pământ și <code>A[i][j] = 0</code> dacă este umplută cu apă.</p>
+
+<p>Spunem că o insulă se află la stânga unei coloane <code>c</code> dacă și numai dacă toate celulele ce intră în alcătuirea insulei sunt strict la stânga coloanei <code>c</code>, adică sunt situate pe coloane strict mai mici decât <code>c</code>. Analog, stabilim dacă o insulă se află la dreapta unei coloane <code>c</code>, respectiv deasupra sau dedesubtul unei linii <code>l</code>. De exemplu, în desenul de mai sus, insulele A, B și C sunt la stânga coloanei <code>7</code>, insula E este la dreapta coloanei <code>7</code>, iar insula <code>D</code> nu este nici la stânga, nici la dreapta coloanei <code>7</code>. De asemenea, insulele A și B sunt deasupra liniei <code>3</code>, iar insulele C, D și E sunt dedesubtul liniei <code>4</code>. Mai mult, insulele C, D și E nu sunt nici deasupra, nici dedesubtul liniei <code>5</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Problema are trei cerințe, cerința de rezolvat fiind dată de <code>T ∈ {1, 2, 3}</code>.</p>
+
+<ul>
+	<li><code>T = 1</code>. Determinați numărul de celule din golf ce sunt umplute cu pământ.</li>
+	<li><code>T = 2</code>. Determinați numărul de insule din golf ce conțin un număr maxim de celule. Dacă nu există nicio insulă, atunci valoarea acestui număr este <code>0</code>.</li>
+	<li><code>T = 3</code>. Se dau, în ordine, <code>Q</code> interogări, fiecare fiind descrisă printr-o literă și un număr natural<br>
+nenul <code>p</code>. Determinați valoarea produsului <code>a × b</code>, știind că:
+	<ul>
+		<li>Dacă litera este <code>C</code>, atunci <code>a</code> reprezintă numărul de celule din toate insulele ce se află la stânga coloanei <code>p</code> (<code>1 ≤ p ≤ m</code>) și <code>b</code> numărul de celule din toate insulele ce se află la dreapta coloanei <code>p</code>.</li>
+		<li>Dacă litera este <code>L</code>, atunci <code>a</code> reprezintă numărul de celule din toate insulele ce se află deasupra liniei <code>p</code> (<code>1 ≤ p ≤ n</code>) și <code>b</code> numărul de celule din toate insulele ce se află dedesubtul liniei <code>p</code>.</li>
+	</ul></li>
+	</ul>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>golf.in</code> conține pe prima linie, separate prin câte un spațiu, numerele <code>T n m</code>, unde <code>T</code> reprezintă numărul cerinței care trebuie rezolvată, iar <code>N</code> și <code>m</code> au semnificația din enunț. </p>
+
+<p>Pe următoarele <code>n</code> linii se află valorile matricei <code>A</code>; în cadrul unei linii a matricei, valorile nu sunt separate între ele prin spații. Dacă <code>T = 3</code>, următoarea linie conține numărul natural nenul <code>Q</code>, iar pe fiecare dintre următoarele <code>Q</code> linii se află câte o literă și un număr natural nenul, separate prin câte un spațiu, reprezentând descrierile celor <code>Q</code> interogări.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Conținutul fișierului de ieșire <code>golf.out</code> depinde de <code>T</code> . Dacă <code>T ∈ {1, 2}</code>, fișierul conține doar numărul determinat pentru cerința <code>T</code>. Dacă <code>T = 3</code>, fișierul conține <code>Q</code> numere, fiecare pe câte o linie, reprezentând, în ordine, valorile produselor determinate pentru interogările date.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n,m ≤ 1000</code></li>
+	<li><code>A[i][j] ∈ {0, 1}</code>, pentru fiecare <code>(i, j)</code>: <code>1 ≤ i ≤ n</code> și <code>1 ≤ j ≤ m</code>.</li>
+	<li>Dacă <code>T = 3</code>, atunci <code>1 ≤ Q ≤ 600 000</code>.</li>
+	<li>O insulă poate fi formată dintr-o singură celulă.</li>
+</ul>
+
+<ul>
+	<li>pentru 27 de puncte, <code>T =1</code></li>
+	<li>pentru 7 puncte, <code>T = 2</code> și există o singură insulă în golf</li>
+	<li>pentru 15 puncte, <code>T =2</code></li>
+	<li>pentru 14 puncte <code>T = 3</code> și <code>n, m, Q ≤ 200</code></li>
+	<li>pentru 9 puncte, <code>T = 3</code> și <code>Q ≤ 2 000</code></li>
+	<li>pentru 28 de puncte <code>T = 3</code></li>
+	<li>datorită dimensiunilor mari ale fișierelor, nu au fost adăugate toate testele folosite în concurs</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>golf.in</code></p>
+
+<pre>1 7 11
+11110000000
+01101100000
+00000000000
+00000000000
+11100111011
+01000100001
+01000000000</pre>
+
+<p><code>golf.out</code></p>
+
+<pre>20</pre>
+
+<h3>Explicație</h3>
+
+<p>Exemplul corespunde cu desenul de mai sus. Golful Biscayne are <code>20</code> de celule umplute cu pământ.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>golf.in</code></p>
+
+<pre>2 7 11
+11110000000
+01101100000
+00000000000
+00000000000
+11100111011
+01000100001
+01000000000</pre>
+
+<p><code>golf.out</code></p>
+
+<pre>20</pre>
+
+<h3>Explicație</h3>
+
+<p>Insula A conține <code>6</code> celule, iar toate celelalte insule conțin cel mult <code>5</code> celule, așadar răspunsul este <code>1</code>.</p>
+
+<h1>Exemplul 3</h1>
+
+<p><code>golf.in</code></p>
+
+<pre>3 7 11
+11110000000
+01101100000
+00000000000
+00000000000
+11100111011
+01000100001
+01000000000
+2
+C 7
+L 4</pre>
+
+<p><code>golf.out</code></p>
+
+<pre>39
+96</pre>
+
+<h3>Explicație</h3>
+
+<p>Pentru prima interogare, insulele A, B și C, cu <code>13</code> celule (în total), sunt la stânga coloanei <code>7</code>, iar insula E, cu <code>3</code> celule, este la dreapta coloanei <code>7</code>. Deci, produsul cerut este <code>13 × 3 = 39</code>.</p>
+
+<p>Pentru a doua interogare, insulele A și B, cu <code>8</code> celule, sunt deasupra liniei <code>4</code>, iar insulele C, D și E, cu <code>12</code> celule, sunt dedesubtul liniei. Deci, produsul cerut este <code>8 × 12 = 96</code>.</p>		</article>
+		</body></html>

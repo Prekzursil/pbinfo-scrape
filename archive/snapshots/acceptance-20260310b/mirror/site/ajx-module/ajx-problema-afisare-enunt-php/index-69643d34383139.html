@@ -1,0 +1,77 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4819"><article id="enunt">
+			<p>Gușteru’ a descoperit într-un dulap un vechi joc de aventură, numit <em>Ijnamuj</em>. Jocul inițial pornește de la nivelul <code>1</code>, iar scopul este completarea a cât mai multor nivele. Fiecare nivel <code>i</code> are asociată o listă <code>L(i)</code> care conține alte nivele din joc. Pentru a completa nivelul <code>i</code>, Gușteru’ va trebui mai întâi să completeze toate nivelele din lista <code>L(i)</code>, în orice ordine dorește el. După completarea oricărui nivel, el poate să completeze orice alt nivel a cărui listă conține numai nivele completate. Pentru că jocul începe de la nivelul <code>1</code>, lista <code>L(1)</code> va fi mereu vidă, adică completarea lui nu este restricționată de niciun alt nivel.</p>
+
+<h1>Cerința</h1>
+
+<p>Care este numărul maxim de nivele pe care le poate completa Gușteru’?</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe primul rând din fișierul de intrare <code>aventura.in</code> se va afla numărul <code>T</code>, care reprezintă numărul de scenarii distincte din test.</p>
+
+<p>Pentru fiecare dintre cele <code>T</code> scenarii, intrarea va fi de forma următoare:</p>
+
+<ul>
+	<li>pe primul rând se va afla <code>N</code>, numărul de nivele din scenariu;</li>
+	<li>pe următoarele <code>N</code> rânduri, se vor afla descrierile celor <code>N</code> liste: fiecare rând va începe cu <code>k[i]</code> (<code>1 ≤ i ≤ N</code>), care reprezintă numărul de nivele din lista nivelului <code>i</code>, urmat de <code>k[i]</code> numere, care reprezintă indicele nivelelor.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>Pe linia <code>i</code> din fișierul de ieșire <code>aventura.out</code> se va afișa răspunsul la al <code>i</code>-lea scenariu (<code>1 ≤ i ≤ T</code>).</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ T ≤ 5</code>;</li>
+	<li><code>1 ≤ 𝑁 ≤ 500.000</code>;</li>
+	<li><code>k[1 ] = 0</code>;</li>
+	<li><code>0 ≤ k[i] ≤ N − 1</code>;</li>
+	<li><code>i ∉ L(i)</code>, pentru oricare <code>1 ≤ i ≤ N</code>;</li>
+	<li>Într-un scenariu, <code>k[1] + k[2] + . . . + k[N] ≤ 4×N</code>;</li>
+	<li>Per totalul celor <code>T</code> scenarii, suma tuturor sumelor <code>k[1] + k[2] + . . . + k[N]</code> nu depășește <code>5.000.000</code>;</li>
+	<li>Definim o <em>dependență circulară</em> un șir de nivele <code>a[1], a[2], ... , a[p]</code> , <code>2 ≤ p ≤ N</code> , cu proprietatea că <code>a[1] ∈ L(a[2])</code>, <code>a[2] ∈ L(a[3])</code>, … , <code>a[p−1] ∈ L(a[p])</code>,  <code>a[p] ∈ L(a[1])</code>.</li>
+	<li>datorită dimensiunilor mari ale fișierelor, nu au fost adăugate toate testele folosite în concurs!</li>
+</ul>
+
+<p>Subtaskuri:</p>
+
+<ul>
+	<li>pentru anumite teste, <code>1 ≤ N ≤ 10</code></li>
+	<li>pentru anumite teste, dependențele circulare sunt de lungime exact <code>2</code>, <code>N ≤ 2.000</code></li>
+	<li>pentru anumite teste, <code>1 ≤ N ≤ 2.000</code></li>
+	<li>pentru restul testelor, fără restricții suplimentare</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>aventura.in</code></p>
+
+<pre>2
+5
+0
+1 1
+1 2
+2 3 5
+1 4
+6
+0
+2 4 6
+2 2 5
+1 3
+1 1
+1 5</pre>
+
+<p><code>aventura.out</code></p>
+
+<pre>3
+3</pre>
+
+<h3>Explicație</h3>
+
+<p><code>T = 2</code> deci se rezolvă două scenarii.</p>
+
+<p>În primul scenariu, singurul nivel în care putem ajunge necondiționat este nivelul <code>1</code>. Nivelul <code>1</code> deblochează nivelul <code>2</code>, care la rândul său deblochează nivelul <code>3</code>. Nu mai putem debloca nimic, pentru că nivelul <code>4</code> este condiționat și de nivelul <code>3</code>, dar și de nivelul <code>5</code>, care, la rândul său, este condiționat de nivelul <code>4</code>. Astfel, putem debloca doar <code>3</code> nivele, respectiv nivelele <code>1</code>, <code>2</code> și <code>3</code>.</p>
+
+<p>Al doilea scenariu se rezolvă similar cu primul. În acest caz putem debloca <code>3</code> nivele, respectiv nivele <code>1</code>, <code>5</code> și <code>6</code>.</p>		</article>
+		</body></html>

@@ -1,0 +1,61 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1054"><article id="enunt">
+			<p>După ce au descoperit ascunzătoarea piratului Spânu, marinarii de pe corabia “Speranţa” au hotărât să ofere sătenilor o parte din comoara acestuia. Întrucât comoara avea un număr nelimitat de bani din aur, numiţi galbeni, singura problemă a marinarilor a fost regula după care să împartă banii. </p>
+
+<p>După îndelungi discuţii au procedat astfel: i-au rugat pe săteni să se aşeze în ordine la coadă şi să vină, pe rând, unul câte unul pentru a-şi ridica galbenii cuveniţi. Primul sătean a fost rugat să îşi aleagă numărul de galbeni, cu condiţia ca acest număr să fie format din exact <code>K</code> cifre. Al doilea sătean va primi un număr de galbeni calculat astfel: se înmulţeşte numărul de galbeni ai primului sătean cu toate cifrele nenule ale acelui număr, rezultatul se înmulţeşte cu <code>8</code> şi apoi se împarte la <code>9</code> păstrându-se doar ultimele <code>K</code> cifre ale câtului împărţirii. Dacă numărul obţinut are mai puţin de <code>K</code> cifre, atunci acestuia i se adaugă la final cifra <code>9</code>, până când se completează <code>K</code> cifre.</p>
+
+<p>Pentru a stabili câţi galbeni primeşte al treilea sătean, se aplică aceeaşi regulă, dar pornind de la numărul de galbeni ai celui de-al doilea sătean. Regula se aplică în continuare fiecărui sătean, plecând de la numărul de galbeni primiţi de săteanul care a stat la coadă exact în faţa lui. </p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând numărul de galbeni aleşi de primul sătean, determinaţi numărul de galbeni pe care îl va primi al <code>N</code>-lea sătean.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>galbeni.in</code> conține pe prima linie cele <code>3</code> numere naturale nenule <code>S</code>, <code>K</code>, <code>N</code> separate prin câte un spaţiu, unde <code>S</code> reprezintă numărul de galbeni ales de primul sătean, <code>K</code> este numărul de cifre ale numărului <code>S</code>, iar <code>N</code> reprezintă numărul de ordine al săteanului pentru care se cere să determinaţi numărul de galbeni primiţi.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>galbeni.out</code> va conține pe unica sa linie un număr natural reprezentând rezultatul determinat.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N ≤ 1 000 000 000</code></li>
+	<li><code>1 ≤ K ≤ 3</code></li>
+	<li>Se garantează că <code>S</code> are exact <code>K</code> cifre.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>galbeni.in</code></p>
+
+<pre>51 2 3</pre>
+
+<p><code>galbeni.out</code></p>
+
+<pre>77</pre>
+
+<h1>Explicație</h1>
+
+<p>Primul sătean a luat <code>51</code> de galbeni. Cel de al doilea sătean va primi <code>26</code> de galbeni<br>
+(<code>51</code> se înmulţeşte cu cifrele nenule <code>51*5*1=255</code>, <code>255</code> se înmulţeşte cu <code>8 =2040</code>. Câtul împărţirii lui <code>2040</code> la <code>9</code> este <code>226</code>, ultimele două cifre fiind <code>26</code>).</p>
+
+<p>Cel de al treilea sătean va primi <code>77</code> de galbeni (<code>26</code> se înmulţeşte cu cifrele nenule <code>26*2*6=312</code>, <code>312</code> se înmulţeşte cu <code>8</code> şi obţinem numărul <code>2496</code>. Câtul împărţirii dintre <code>2469</code> şi <code>9</code> este <code>277</code>, ultimele două cifre fiind <code>77</code>)</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>galbeni.in</code></p>
+
+<pre>10 2 3</pre>
+
+<p><code>galbeni.out</code></p>
+
+<pre>96</pre>
+
+<h1>Explicație</h1>
+
+<p>Primul sătean primeşte <code>10</code> galbeni. Pentru a calcula câţi galbeni primeşte al doilea sătean procedăm astfel: înmulţim <code>10</code> cu cifele sale nenule: <code>10*1 = 10</code>, apoi cu <code>8</code>,<br>
+<code>10*8 = 80</code>. Câtul împărţirii lui <code>80</code> la <code>9</code> este <code>8</code>. Acest număr având mai puţin de <code>K=2</code> cifre, se adaugă la finalul său cifra <code>9</code> şi se obţine <code>89</code>.</p>
+
+<p>Pentru al treilea sătean se pleacă de la <code>89</code> (<code>89*8*9=6408</code>, <code>6408*8=51264</code>, câtul împărţirii lui <code>51264</code> la <code>9</code> este <code>5696</code>, ultimele două cifre sunt <code>96</code>)</p>		</article>
+		</body></html>

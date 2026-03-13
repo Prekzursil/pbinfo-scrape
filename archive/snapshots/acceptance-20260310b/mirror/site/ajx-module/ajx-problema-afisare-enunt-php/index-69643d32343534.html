@@ -1,0 +1,83 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2454"><article id="enunt">
+			<p>Fie un vector <code>v</code> sortat crescător cu <code>N</code> elemente naturale nenule distincte pe care nu le cunoaştem, dar pe care ne propunem să le determinăm. Având la dispoziţie acest vector <code>v</code>, cu ajutorul următorului algoritm de căutare binară (vezi Figura 1)</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-bsrec-jpg.jpg"></p>
+
+<p>putem răspunde la queryuri de forma: Dându-se un număr <code>X</code> şi un interval <code>[a, b]</code> se cere să se determine cel mai mic element mai mare decât <code>X</code> aflat în intervalul determinat de indicii <code>a</code> şi <code>b</code>, interval din vectorul <code>v</code>. Se cunosc paşii pe care algoritmul de cautare binară i-a urmat pentru diferite valori ale tripletului <code>(X, a, b)</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Dându-se <code>N</code> (lungimea vectorului), <code>Q</code> (numărul de query-uri apelate) şi cele <code>Q</code> query-uri, să se determine vectorul iniţial. Dacă există mai multe soluţii se va afişa soluţia minim lexicografică. Dacă nu există soluţie se va afişa valoarea <code>-1</code>. Un vector <code>V1</code> se consideră mai mic lexicografic decât un alt vector <code>V2</code> dacă există un indice <code>i</code> astfel încât: <code>V1[1] = V2[1]</code>, <code>V1[2] = V2[2]</code>, …, <code>V1[i-1] = V2[i-1]</code> și <code>V1[i] &lt; V2[i]</code>. Cele <code>Q</code> query-uri sunt formate din:</p>
+
+<ul>
+	<li><code>X</code> – valoarea pe care o căutăm binar în vector</li>
+	<li><code>M</code> – numărul de iteraţii în algoritmul de căutare binară</li>
+	<li><code>[a, b]</code> – intervalul în care se aplică algoritmul de cautare binară (perechea <code>(a, b)</code> este considerată prima iteraţie în algoritm)</li>
+	<li><code>M-1</code> perechi de indici reprezentând valorile afişate de algoritmul de căutare binară în urma fiecărei iteraţii</li>
+</ul>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>bsrec.in</code> conține pe prima linie o valoare <code>T</code> reprezentând numărul de teste ce vor fi efectuate. Pentru fiecare din cele <code>T</code> teste se va citi de pe prima linie valoarea <code>N</code> (numărul de elemente ale vectorului), respectiv <code>Q</code> (numărul de query-uri), despărţite prin câte un spaţiu. Următoarele linii descriu cele <code>Q</code> query-uri. În cadrul unui query, prima linie va conține o pereche de numere <code>(X, M)</code> despărţite printr-un spaţiu, unde <code>X</code> reprezintă valoarea căutată în vector, iar <code>M</code> numărul de paşi efectuaţi în căutarea binară a celei mai mici valori din vector care este mai mare decât <code>X</code>. Pe următoarea linie a query-ului se găseşte perechea de valori <code>(a, b)</code> având semnificaţia de mai sus. Următoarele <code>M-1</code> linii conţin perechi <code>(st, dr)</code> de valori naturale despărţite prin câte un spaţiu care reprezintă indicii stânga, respectiv dreapta ce sunt afişaţi în urma fiecărei iteraţii a algoritmului de mai sus.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>bsrec.out</code> va conține <code>T</code> linii, linia <code>i</code> conţinând răspunsul pentru testul <code>i</code>. Dacă testul admite soluţie, se vor afişa <code>N</code> numere naturale nenule strict crescătoare ce vor reprezenta valorile vectorului <code>v</code>. Deoarece există mai multe soluţii, se va afişa soluţia minim lexicografică. Dacă testul NU admite soluţie, se va afişa <code>-1</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ T ≤ 10</code></li>
+	<li><code>1 ≤ N, Q ≤ 1000</code></li>
+	<li><code>1 ≤ X ≤ 1 000 000 000</code></li>
+	<li><code>1 ≤ st ≤ dr ≤ N</code>, cu excepţia ultimei perechi din căutarea binară unde <code>st &gt; dr</code>.</li>
+	<li>Pentru <code>20%</code> din punctajul total există teste cu <code>1 ≤ N, Q ≤ 10</code> şi soluţia minim lexicografică admite valori până în <code>20</code>.</li>
+	<li>Se garantează că <code>M ≤ 15</code>.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>bsrec.in</code></p>
+
+<pre>2
+5 3
+3 4
+1 5
+1 2
+2 2
+2 1
+30 3
+2 4
+4 4
+5 4
+25 2
+4 5
+4 3
+5 3
+30 4
+1 5
+1 2
+2 2
+2 1
+3 3
+2 4
+4 4
+5 4
+5 2
+4 5
+4 3</pre>
+
+<p><code>bsrec.out</code></p>
+
+<pre>1 3 4 25 26
+-1</pre>
+
+<h3>Explicație</h3>
+
+<p>Fișierul conține două teste.<br>
+Primul test are trei query-uri:<br>
+- Primul query caută binar valoarea <code>3</code> în intervalul <code>[1,5]</code> și face <code>4</code> iterații<br>
+- Cel de al doilea query caută binar valoarea <code>30</code> pe intervalul <code>[2,4]</code> și face <code>3</code> iterații<br>
+- Cel de al treilea query caută binar valoarea <code>25</code> pe intervalul <code>[4,5]</code> și face <code>2</code> iterații<br>
+Cel de al doilea test are <code>3</code> query-uri, dar NU admite soluție.</p>		</article>
+		</body></html>

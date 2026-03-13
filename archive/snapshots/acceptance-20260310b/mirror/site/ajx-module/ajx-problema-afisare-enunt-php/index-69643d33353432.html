@@ -1,0 +1,105 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3542"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p><span class="caps">RAU</span>-Gigel se gândește la un joc cu piesele de șah. El desenează o tablă de șah sub forma unei matrici pătratice de latură <code>N</code> și așează în fiecare dintre cele <code>N x N</code> celule câte o piesă de șah. Se consideră că dispune de <code>N X N</code> exemplare din fiecare piesă posibilă (regi, regine, ture, nebuni, cai, pioni), iar culoarea nu este relevantă. <span class="caps">RAU</span>-Gigel se întreabă care este numărul minim de căsuțe (celule) prin care trebuie să treacă un rege oarecare ca să ajungă la o regină oarecare. Regele se poate deplasa câte o celulă în patru direcții posibile: N, E, S, V.</p>
+
+<p>Dar asta nu e tot. La începutul jocului, toți regii au <code>16</code> vieți. Atunci când <span class="caps">RAU</span>-Gigel mută un rege (oarecare) peste primul pion, acesta pierde o viață. Vestea bună este că, după aceea, regele respectiv poate lua oricâți pioni fără ca numărul său de vieți să fie afectat. Când ia un cal, regele pierde două vieți, dar după aceea poate lua, fără pierderi, oricâți cai. La fel se întâmplă și în cazul nebunilor, primul nebun îl costa patru vieți și, respectiv al turelor, care îl costă opt vieți.</p>
+
+<p><span class="caps">RAU</span>-Gigel dorește să afle ce rege să aleagă și pe ce traseu trebuie să meargă acesta către o regină oarecare, astfel încât la sfârșitul jocului să îi rămână cât mai multe vieți, iar traseul să fie cât mai scurt. </p>
+
+<p>Se cer:<br>
+a) Care este numărul maxim de vieți cu care rămâne regele ales? <br>
+b) Prin câte căsuțe trece traseul de lungime minimă? Ce rege mută și pe ce traseu? Dacă există mai multe drumuri de lungime minimă, atunci se va determina drumul mai mic alfanumeric. (O celulă este mai mică alfanumeric decât altă celulă dacă se află pe un rând cu indice mai mic sau se află pe același rând cu cea de-a doua, dar pe o coloană cu indice mai mic)</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>jocdesah.in</code> conține pe prima linie un număr natural <code>A</code>. Pentru toate testele de intrare, numărul <code>A</code> poate avea doar valoarea <code>1</code> sau valoarea <code>2</code>. Pe al doilea rând se găsește numărul natural <code>N</code>, cu semnificația din enunț. Pe următoarele <code>N</code> linii se află câte <code>N</code> litere mari cu următoarea semnificație: <code>P</code> – pion, <code>C</code> – cal, <code>N</code> – nebun, <code>T</code> – tură, <code>Q</code> – regină și <code>K</code> – rege. Caracterele de pe fiecare rând nu au spații între ele. </p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă valoarea lui <code>A</code> este <code>1</code>, se va rezolva numai punctul a) din cerință. În acest caz, fișierul de ieșire <code>jocdesah.out</code> va conține un singur număr natural ce reprezintă numărul de vieți care îi rămân la sfârșitul jocului regelui ales de <span class="caps">RAU</span>-Gigel.</p>
+
+<p>Dacă valoarea lui <code>A</code> este <code>2</code>, se va rezolva numai punctul b) din cerință. În acest caz, fişierul de ieşire <code>jocdesah.out</code> va conține pe prima linie numărul natural <code>K</code> ce reprezintă numărul de căsuțe prin care trece regele ales (se numără atât căsuța din care pleacă, cât și cea în care ajunge), apoi pe următoarele <code>K</code> rânduri sunt perechi de forma <code>i j</code> (separate cu un singur spațiu) unde <code>i</code> și <code>j</code> reprezintă linia, respectiv coloana celulelor prin care trece regele (în ordinea de deplasare). Indexarea rândurilor și coloanelor se face de la <code>1</code> la <code>N</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N ≤ 100</code></li>
+	<li>In fiecare test există cel puțin o literă <code>K</code> și cel puțin o literă <code>Q</code></li>
+	<li>Pentru rezolvarea corectă a primei cerinţe se acordă <code>45</code> de puncte</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>jocdesah.in</code></p>
+
+<pre>2
+6
+PCQPNP
+PCCCCP
+QNPKPK
+PCKPPP
+NKPPPP
+NNPPQP</pre>
+
+<p><code>jocdesah.out</code></p>
+
+<pre>5
+3 4
+3 5
+4 5
+5 5
+6 5</pre>
+
+<h3>Explicație</h3>
+
+<p><span class="caps">RAU</span>-Gigel va alege să mute regele de pe poziția <code>3 4</code>. Drumul va trece prin <code>5</code> celule (va număra inclusiv celulele de plecare și sosire), iar acestea sunt: <code>3 4</code>, <code>3 5</code>, <code>4 5</code>, <code>5 5</code>, <code>6 5</code>. În drumul său a luat doar pioni, deci a pierdut o singură viață, i-au rămas 15:</p>
+
+<p>\( \star \star \star \star \star \star \)<br>
+\( \star \star \star \star \star \star \)<br>
+\( \star \star \star \) K P\( \star \)<br>
+\( \star \star \star \star \)  P\( \star \)<br>
+\( \star \star \star  \star \) P \( \star \)<br>
+\( \star \star \star  \star \) Q \( \star \)</p>
+
+<p>Se observă că mai există un drum de lungime <code>5</code> care îl costă tot o singură viață:</p>
+
+<p>\( \star \star \star \star \star \star \)<br>
+\( \star \star \star \star \star \star \)<br>
+\( \star \star \star \) K \( \star \star \)<br>
+\( \star \star \star \) P P\( \star \)<br>
+\( \star \star \star  \star \) P \( \star \)<br>
+\( \star \star \star  \star \) Q \( \star \)</p>
+
+<p>Drumul este:<br>
+<code>3 4</code>, <code>4 4</code>, <code>4 5</code>, <code>5 5</code>, <code>6 5</code>, dar el este mai mic alfanumeric decât:<br>
+<code>3 4</code>, <code>3 5</code>, <code>4 5</code>, <code>5 5</code>, <code>6 5</code>  (perechea <code>3 5</code> e mai mică alfanumeric decât perechea <code>4 4</code>).</p>
+
+<p>De asemenea, un alt drum este: <code>3 4</code>, <code>3 3</code>, <code>3 2</code>, <code>3 1</code>:</p>
+
+<p>\( \star \star \star \star \star \star \)<br>
+\( \star \star \star \star \star \star \)<br>
+QN P K \( \star \star\)<br>
+\( \star \star \star \star \star \star \)<br>
+\( \star \star \star \star \star \star \)<br>
+\( \star \star \star \star \star \star \)</p>
+
+<p>acesta chiar mai scurt (trece prin numai <code>4</code> căsuțe), totuși pe acest drum regele ar ataca un pion și un nebun, care l-ar costa <code>1 + 4 = 5</code> vieți și ar rămâne cu numai <code>11</code>, de aceea nu îl va alege.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>jocdesah.in</code></p>
+
+<pre>1
+6
+PCQPNP
+PCCCCP
+QNPKPK
+PCKPPP
+NKPPPP
+NNPPQP</pre>
+
+<p><code>jocdesah.out</code></p>
+
+<pre>15</pre>		</article>
+		</body></html>

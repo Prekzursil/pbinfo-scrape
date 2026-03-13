@@ -1,0 +1,314 @@
+{
+  "id": 1734,
+  "slug": "smax",
+  "name": "smax",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1734/smax",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 53,
+      "name": "Programare dinamică",
+      "slug": "programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=53"
+    },
+    {
+      "id": 54,
+      "name": "Probleme diverse de programare dinamică",
+      "slug": "probleme-diverse-de-programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=54"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Enunț",
+      "html": "<p>Un muzeu al diamantelor își are sediul într-o clădire cu formă cubică cu <code>N</code> etaje, numerotate de la <code>1</code> la <code>N</code>. Suprafața fiecărui etaj <code>K</code> (<code>1 ≤ K ≤ N</code>) este pătratică și este împărțită în <code>N * N</code> camere identice alăturate, dispuse pe <code>N</code> linii și <code>N</code> coloane, etichetate fiecare cu câte trei numere <code>K L C</code> (<code>K</code> = etajul, <code>L</code>= linia, <code>C</code> = coloana, <code>1 ≤  L</code>, <code>C ≤ N</code>) ca în imaginea de mai jos.</p><p><img alt=\"\" src=\"/resurse/9dc152/p-1700/1734-smax.png\"></p><p>În fiecare cameră se află câte un diamant veritabil, cu valoarea cunoscută. Mulți hoți râvnesc la aceste diamante! Așa că… s-au apucat să studieze cu mare atenție planul clădirii. </p><p>Ei au aflat că intrarea în clădire se face prin camera cu eticheta <code>1 1 1</code> și că din fiecare cameră cu eticheta <code>K L C</code> a clădirii se poate intra în cel mult trei camere: </p><ul>\n\t<li>camera cu eticheta <code>K L C+1</code>, dacă <code>C &lt; N</code></li>\n\t<li>camera cu eticheta <code>K L+1 C</code>, dacă <code>L &lt; N</code></li>\n\t<li>camera cu eticheta <code>K+1 L C</code>, dacă <code>K &lt; N</code></li>\n</ul><p>Hoții au descoperit că din camera cu eticheta <code>N N N</code> se ajunge direct pe acoperișul clădirii unde se află un elicopter gata de zbor (cu el vor pleca). Ei trebuie să aleagă cel mai profitabil traseu care să pornească din camera cu eticheta <code>1 1 1</code> și să ajungă în camera cu eticheta <code>N N N</code> și care, bineînțeles, să le permită să obțină o sumă maximă din vânzarea diamantelor furate din camerele prin care au trecut în traseu ales.</p>",
+      "text": "Un muzeu al diamantelor își are sediul într-o clădire cu formă cubică cu N etaje, numerotate de la 1 la N. Suprafața fiecărui etaj K (1 ≤ K ≤ N) este pătratică și este împărțită în N * N camere identice alăturate, dispuse pe N linii și N coloane, etichetate fiecare cu câte trei numere K L C (K = etajul, L= linia, C = coloana, 1 ≤ L, C ≤ N) ca în imaginea de mai jos.În fiecare cameră se află câte un diamant veritabil, cu valoarea cunoscută. Mulți hoți râvnesc la aceste diamante! Așa că… s-au apucat să studieze cu mare atenție planul clădirii. Ei au aflat că intrarea în clădire se face prin camera cu eticheta 1 1 1 și că din fiecare cameră cu eticheta K L C a clădirii se poate intra în cel mult trei camere: camera cu eticheta K L C+1, dacă C < N camera cu eticheta K L+1 C, dacă L < N camera cu eticheta K+1 L C, dacă K < N Hoții au descoperit că din camera cu eticheta N N N se ajunge direct pe acoperișul clădirii unde se află un elicopter gata de zbor (cu el vor pleca). Ei trebuie să aleagă cel mai profitabil traseu care să pornească din camera cu eticheta 1 1 1 și să ajungă în camera cu eticheta N N N și care, bineînțeles, să le permită să obțină o sumă maximă din vânzarea diamantelor furate din camerele prin care au trecut în traseu ales."
+    },
+    {
+      "title": "Cerințe",
+      "html": "<p>Cunoscându-se numărul <code>N</code> și valoarea de vânzare a fiecărui diamant din cele <code>N*N*N</code> camere, să se determine:</p><p>a) numărul <code>D</code> de diamante furate de hoți din camerele parcurse în traseul ales;<br>\nb) suma maximă <code>S</code> pe care o vor obține din vânzarea diamantelor furate;<br>\nc) etichetele camerelor prin care trece traseul ales, în ordinea în care sunt parcurse camerele.</p>",
+      "text": "Cunoscându-se numărul N și valoarea de vânzare a fiecărui diamant din cele N*N*N camere, să se determine:a) numărul D de diamante furate de hoți din camerele parcurse în traseul ales; b) suma maximă S pe care o vor obține din vânzarea diamantelor furate; c) etichetele camerelor prin care trece traseul ales, în ordinea în care sunt parcurse camerele."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>smax.in</code> conține pe prima linie numărul <code>N</code>, iar pe a doua linie <code>N*N*N</code> numere naturale separate prin câte un spațiu, reprezentând valoarea de vânzare a fiecărui diamant din fiecare cameră, în ordinea lexicografică a etichetelor camerelor.</p>",
+      "text": "Fișierul de intrare smax.in conține pe prima linie numărul N, iar pe a doua linie N*N*N numere naturale separate prin câte un spațiu, reprezentând valoarea de vânzare a fiecărui diamant din fiecare cameră, în ordinea lexicografică a etichetelor camerelor."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>smax.out</code> va conține:</p><ul>\n\t<li>pe prima linie numărul <code>D</code>, reprezentând numărul diamantelor furate de hoți (răspunsul la cerința a);</li>\n\t<li>pe a doua linie, fișierul va conține un număr natural <code>S</code> reprezentând suma maximă (răspunsul la cerința b);</li>\n\t<li>pe fiecare din următoarele <code>D</code> linii, se vor scrie câte trei numere naturale <code>X Y Z</code>, separate prin câte un spaţiu, reprezentând etichetele camerelor prin care trece traseul ales de hoți, în ordinea în care sunt parcurse camerele (răspunsul la cerința c).</li>\n</ul>",
+      "text": "Fișierul de ieșire smax.out va conține: pe prima linie numărul D, reprezentând numărul diamantelor furate de hoți (răspunsul la cerința a); pe a doua linie, fișierul va conține un număr natural S reprezentând suma maximă (răspunsul la cerința b); pe fiecare din următoarele D linii, se vor scrie câte trei numere naturale X Y Z, separate prin câte un spaţiu, reprezentând etichetele camerelor prin care trece traseul ales de hoți, în ordinea în care sunt parcurse camerele (răspunsul la cerința c)."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>3 ≤ N ≤ 100</code></li>\n\t<li>Valoarea de vânzare a fiecărui diamant este un număr natural nenul cel mult egal cu <code>100</code>.</li>\n\t<li>Dacă suma maximă <code>S</code> se poate obține pentru mai multe trasee, atunci traseul scris în fișierul <code>smax.out</code> va fi cel mai mic traseu din punct de vedere lexicografic.</li>\n\t<li>Se acordă: 20% din punctaj pentru cerința a); 20% din punctaj  pentru cerinta b) și 60% din punctaj pentru cerința c).</li>\n</ul>",
+      "text": "3 ≤ N ≤ 100 Valoarea de vânzare a fiecărui diamant este un număr natural nenul cel mult egal cu 100. Dacă suma maximă S se poate obține pentru mai multe trasee, atunci traseul scris în fișierul smax.out va fi cel mai mic traseu din punct de vedere lexicografic. Se acordă: 20% din punctaj pentru cerința a); 20% din punctaj pentru cerinta b) și 60% din punctaj pentru cerința c)."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>smax.in</code></p><pre>3\n1 2 5 2 3 1 4 1 2 2 1 1 1 2 2 1 1 1 1 4 2 1 3 1 1 1 2</pre><p><code>smax.out</code></p><pre>7\n14\n1 1 1\n1 1 2\n1 1 3\n1 2 3\n1 3 3\n2 3 3\n3 3 3</pre><h3>Explicație</h3><p>Clădirea are trei etaje (1,2 şi 3). Pe fiecare etaj sunt 3*3 camere. Hoții vor fura D=7 diamante, suma maximă obținută fiind S=14. Traseul va trece prin 7 camere. Sunt mai multe trasee pentru care se poate obține suma maximă, de exemplu:<br>\n1)\t(1 1 1, 1 1 2, 1 1 3, 1 2 3, 1 3 3, 2 3 3, 3 3 3)<br>\n2)\t(1 1 1, 1 1 2, 1 1 3, 1 2 3, 2 2 3, 2 3 3, 3 3 3)<br>\n3)\t(1 1 1, 1 1 2, 1 1 3, 1 2 3, 2 2 3, 3 2 3, 3 3 3)<br>\n4)\t(1 1 1, 1 1 2, 1 1 3, 2 1 3, 2 2 3, 3 2 3, 3 3 3)<br>\n5)\t(1 1 1, 2 1 1, 3 1 1, 3 1 2, 3 2 2, 3 3 2, 3 3 3)<br>\n6)\t(1 1 1, 1 1 2, 2 1 2, 3 1 2, 3 2 2, 3 3 2, 3 3 3)<br>\n7)\t(1 1 1, 1 1 2, 1 2 2, 2 2 2, 3 2 2, 3 3 2, 3 3 3) etc.</p><p><img alt=\"\" src=\"/resurse/9dc152/p-1700/1734-smax-1.png\"></p>",
+      "text": "smax.in3 1 2 5 2 3 1 4 1 2 2 1 1 1 2 2 1 1 1 1 4 2 1 3 1 1 1 2smax.out7 14 1 1 1 1 1 2 1 1 3 1 2 3 1 3 3 2 3 3 3 3 3ExplicațieClădirea are trei etaje (1,2 şi 3). Pe fiecare etaj sunt 3*3 camere. Hoții vor fura D=7 diamante, suma maximă obținută fiind S=14. Traseul va trece prin 7 camere. Sunt mai multe trasee pentru care se poate obține suma maximă, de exemplu: 1) (1 1 1, 1 1 2, 1 1 3, 1 2 3, 1 3 3, 2 3 3, 3 3 3) 2) (1 1 1, 1 1 2, 1 1 3, 1 2 3, 2 2 3, 2 3 3, 3 3 3) 3) (1 1 1, 1 1 2, 1 1 3, 1 2 3, 2 2 3, 3 2 3, 3 3 3) 4) (1 1 1, 1 1 2, 1 1 3, 2 1 3, 2 2 3, 3 2 3, 3 3 3) 5) (1 1 1, 2 1 1, 3 1 1, 3 1 2, 3 2 2, 3 3 2, 3 3 3) 6) (1 1 1, 1 1 2, 2 1 2, 3 1 2, 3 2 2, 3 3 2, 3 3 3) 7) (1 1 1, 1 1 2, 1 2 2, 2 2 2, 3 2 2, 3 3 2, 3 3 3) etc."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Clădirea are trei etaje (1,2 şi 3). Pe fiecare etaj sunt 3*3 camere. Hoții vor fura D=7 diamante, suma maximă obținută fiind S=14. Traseul va trece prin 7 camere. Sunt mai multe trasee pentru care se poate obține suma maximă, de exemplu: 1) (1 1 1, 1 1 2, 1 1 3, 1 2 3, 1 3 3, 2 3 3, 3 3 3) 2) (1 1 1, 1 1 2, 1 1 3, 1 2 3, 2 2 3, 2 3 3, 3 3 3) 3) (1 1 1, 1 1 2, 1 1 3, 1 2 3, 2 2 3, 3 2 3, 3 3 3) 4) (1 1 1, 1 1 2, 1 1 3, 2 1 3, 2 2 3, 3 2 3, 3 3 3) 5) (1 1 1, 2 1 1, 3 1 1, 3 1 2, 3 2 2, 3 3 2, 3 3 3) 6) (1 1 1, 1 1 2, 2 1 2, 3 1 2, 3 2 2, 3 3 2, 3 3 3) 7) (1 1 1, 1 1 2, 1 2 2, 2 2 2, 3 2 2, 3 3 2, 3 3 3) etc."
+    }
+  ],
+  "constraints": [
+    "3 ≤ N ≤ 100",
+    "Valoarea de vânzare a fiecărui diamant este un număr natural nenul cel mult egal cu 100.",
+    "Dacă suma maximă S se poate obține pentru mai multe trasee, atunci traseul scris în fișierul smax.out va fi cel mai mic traseu din punct de vedere lexicografic.",
+    "Se acordă: 20% din punctaj pentru cerința a); 20% din punctaj pentru cerinta b) și 60% din punctaj pentru cerința c)."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qe662b480d2.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1700/1734-smax.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1700-1734-smax-png.png",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1700/1734-smax-1.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1700-1734-smax-1-png.png",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Minca Carmen (carmen)",
+    "clasa": "11",
+    "intrare/ieșire": "smax.in / smax.out",
+    "limită timp": "0.2 secunde",
+    "limită memorie": "6 MB / 6 MB",
+    "sursa problemei": "Concursul Național de Soft Grigore Moisil - Lugoj, 2016",
+    "autor": "Carmen Minca",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.2,
+  "memoryLimitMb": 6,
+  "author": "Carmen Minca",
+  "sourceAttribution": "Concursul Național de Soft Grigore Moisil - Lugoj, 2016",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1734/smax"
+}

@@ -1,0 +1,94 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2070"><article id="enunt">
+			<p>Se consideră un tablou cu <code>N</code> linii şi <code>N</code> coloane (numerotate de la <code>1</code> la <code>N</code>) care conţine valoarea <code>1</code> în fiecare dintre cele <code>NxN</code> celule. Valorile din tablou pot fi modificate prin aplicarea a două operații codificate astfel:</p>
+
+<ul>
+	<li><code>L  nr</code>, prin care se schimbă simultan toate semnele numerelor din linia cu numărul <code>nr</code>.</li>
+	<li><code>C  nr</code>, prin care se schimbă simultan toate semnele numerelor din coloana cu numărul <code>nr</code>.</li>
+</ul>
+
+<h1>Cerințe</h1>
+
+<p>1) Dându-se o succesiune de <code>K</code> operații (<code>L nr</code>  sau <code>C nr</code>)  asupra liniilor/coloanelor tabloului inițial (în care toate celulele conțin valoarea <code>1</code>) să se determine numărul valorilor pozitive din tablou la finalul executării celor <code>K</code> operații.<br>
+2) Să se determine numărul minim de operații <code>L nr</code> sau <code>C nr</code>, care, aplicate tabloului inițial, îl modifică astfel încât tabloul obținut să conțină exact <code>Z</code> valori negative.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>tablou.in</code> conține pe prima linie numărul <code>p=1</code> sau <code>p=2</code>, reprezentând numărul cerinței ce trebuie rezolvată.</p>
+
+<ul>
+	<li>Dacă <code>p=1</code> atunci linia a doua a fișierului de intrare conține numerele <code>N</code> și <code>K</code>, separate printr-un spațiu, iar următoarele <code>K</code> linii conțin fiecare câte o literă mare (<code>L</code> sau <code>C</code>) și un număr <code>nr</code>, separate printr-un spațiu, reprezentând codificarea uneia dintre cele două operații (<code>L nr</code> sau <code>C nr</code>).</li>
+	<li>Dacă <code>p=2</code> atunci linia a doua a fișierului de intrare conține numerele <code>N</code> și <code>Z</code>, separate printr-un spațiu.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<ul>
+	<li>Dacă <code>p=1</code>, atunci fișierul de ieșire <code>tablou.out</code> conține pe prima linie un număr natural, reprezentând numărul valorilor pozitive din tabloul obținut la finalul executării celor <code>K</code> operații asupra tabloului inițial (răspunsul la cerința 1).</li>
+	<li>Dacă <code>p=2</code>, atunci fișierul de ieșire <code>tablou.out</code> conține pe prima linie un număr natural reprezentând numărul minim de operații <code>L nr</code> sau <code>C nr</code>, care, aplicate tabloului inițial, îl modifică astfel încât tabloul obținut să conțină exact <code>Z</code> valori negative (răspunsul la cerința 2). Dacă prin aplicarea de operații <code>L nr</code> sau <code>C nr</code> tabloului inițial nu se poate obține un tablou cu <code>Z</code> valori negative, atunci, fișierul va conține pe prima linie valoarea <code>0</code> (zero).</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>N</code>, <code>K</code>, <code>Z</code> și <code>nr</code> sunt numere naturale</li>
+	<li><code>3 ≤ N  ≤ 20000</code>; <code>1 ≤ K  ≤ 43000</code>; <code>1 ≤ Z  ≤ N*N</code>; <code>1 ≤ nr ≤ N</code></li>
+	<li>Prin schimbare de semn, valoarea <code>-1</code> se transformă în <code>1</code> și valoarea <code>1</code> se transformă în <code>-1</code></li>
+	<li>În concurs s-au acordat 10 puncte din oficiu și câte 45 puncte pentru rezolvarea corectă a fiecărei cerințe. Pe site se acordă 10 puncte pentru rezolvarea corectă a exemplelor.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>tablou.in</code></p>
+
+<pre>1
+4 4
+L 1
+L 3
+C 1
+L 1</pre>
+
+<p><code>tablou.out</code></p>
+
+<pre>10</pre>
+
+<h3>Explicație</h3>
+
+<p><code>N=4</code>. La finalul aplicării succesiunii de <code>K=4</code> operații, tablou modificat are conținutul:</p>
+
+<pre>-1  1  1  1
+-1  1  1  1
+ 1 -1 -1 -1
+-1  1  1  1  </pre>
+
+<p>Astfel, tabloul conține <code>10</code> valori pozitive.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>tablou.in</code></p>
+
+<pre>2
+3 5</pre>
+
+<p><code>tablou.out</code></p>
+
+<pre>3</pre>
+
+<h3>Explicație</h3>
+
+<p>Sunt necesare minimum <code>3</code> operații, de exemplu: <code>L 3</code>, <code>L 1</code>, <code>C 1</code></p>
+
+<h1>Exemplul 3</h1>
+
+<p><code>tablou.in</code></p>
+
+<pre>2
+4 7</pre>
+
+<p><code>tablou.out</code></p>
+
+<pre>0</pre>
+
+<h3>Explicație</h3>
+
+<p>Nu există nicio succesiune de operații pentru care să se obțină <code>Z=7</code> valori negative.</p>		</article>
+		</body></html>

@@ -1,0 +1,326 @@
+{
+  "id": 1103,
+  "slug": "harta",
+  "name": "Harta",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1103/harta",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 46,
+      "name": "Tablouri bidimensionale (matrice)",
+      "slug": "tablouri-bidimensionale-matrice",
+      "href": "/?pagina=probleme-lista&tag=46"
+    },
+    {
+      "id": 58,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=58"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerinţe",
+      "html": "<p>Cunoscând <code>n</code>, <code>m</code> și <code>k</code>, precum și tabloul care codifică imaginea, se cere să se determine:</p><p><strong>1.</strong> Numărul <code>S</code> de celule ocupate de către clădirea pătratică cu latura maximă și numărul de clădiri <code>C</code> alese dintre celelalte <code>k – 1</code> clădiri, cu proprietatea că fiecare dintre ele “încape” în interiorul clădirii pătratice cu latură maximă, fără să se suprapună peste celulele marginale ale acesteia.<br>\n<strong>2.</strong> Tabloul care reprezintă harta, în urma prelucrării imaginii inițiale.</p>",
+      "text": "Cunoscând n, m și k, precum și tabloul care codifică imaginea, se cere să se determine:1. Numărul S de celule ocupate de către clădirea pătratică cu latura maximă și numărul de clădiri C alese dintre celelalte k – 1 clădiri, cu proprietatea că fiecare dintre ele “încape” în interiorul clădirii pătratice cu latură maximă, fără să se suprapună peste celulele marginale ale acesteia. 2. Tabloul care reprezintă harta, în urma prelucrării imaginii inițiale."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fişierul de intrare <code>harta.in</code> conţine pe prima linie un număr natural <code>p</code>. Pentru toate testele de intrare, numărul <code>p</code> poate avea doar valoarea <code>1</code> sau valoarea <code>2</code>.</p><p>Pe linia a doua se găsesc numerele naturale <code>n</code>, <code>m</code> și <code>k</code> separate prin câte un spațiu.</p><p>Pe fiecare dintre următoarele <code>k</code> linii, se găsesc câte patru numere naturale <code>i1 j1 i2 j2</code><br>\nseparate prin câte un spațiu, primele două numere reprezentând coordonatele celulei din extremitatea Nord-Vest, iar ultimele două, coordonatele celulei din extremitatea Sud-Est pentru fiecare dintre cele <code>k</code> clădiri.</p>",
+      "text": "Fişierul de intrare harta.in conţine pe prima linie un număr natural p. Pentru toate testele de intrare, numărul p poate avea doar valoarea 1 sau valoarea 2.Pe linia a doua se găsesc numerele naturale n, m și k separate prin câte un spațiu.Pe fiecare dintre următoarele k linii, se găsesc câte patru numere naturale i1 j1 i2 j2 separate prin câte un spațiu, primele două numere reprezentând coordonatele celulei din extremitatea Nord-Vest, iar ultimele două, coordonatele celulei din extremitatea Sud-Est pentru fiecare dintre cele k clădiri."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<ul>\n\t<li>Dacă valoarea lui <code>p</code> este <code>1</code>, atunci se va rezolva numai cerința <code>1</code>. În acest caz, în fişierul de ieşire <code>harta.out</code> se vor scrie cele două numere <code>S</code> și <code>C</code> având semnificația descrisă la cerința <code>1</code>, separate printr-un singur spațiu.</li>\n\t<li>Dacă valoarea lui <code>p</code> este <code>2</code>, atunci se va rezolva numai cerința <code>2</code>. În acest caz, fişierul de ieşire <code>harta.out</code> va conține tabloul care reprezintă harta obținută pe<br>\nbaza imaginii din satelit. Fișierul va avea <code>n1</code> linii. Pe fiecare linie se vor găsi câte <code>m1</code> valori <code>0</code> sau <code>1</code> separate prin câte un singur spațiu. Celulele situate pe marginile clădirilor vor avea valoarea <code>1</code>. Celulele din interiorul clădirilor, ca și cele din exterior, vor avea valoarea <code>0</code>.</li>\n</ul>",
+      "text": "Dacă valoarea lui p este 1, atunci se va rezolva numai cerința 1. În acest caz, în fişierul de ieşire harta.out se vor scrie cele două numere S și C având semnificația descrisă la cerința 1, separate printr-un singur spațiu. Dacă valoarea lui p este 2, atunci se va rezolva numai cerința 2. În acest caz, fişierul de ieşire harta.out va conține tabloul care reprezintă harta obținută pe baza imaginii din satelit. Fișierul va avea n1 linii. Pe fiecare linie se vor găsi câte m1 valori 0 sau 1 separate prin câte un singur spațiu. Celulele situate pe marginile clădirilor vor avea valoarea 1. Celulele din interiorul clădirilor, ca și cele din exterior, vor avea valoarea 0."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>3 ≤ n, m ≤ 1500</code></li>\n\t<li><code>1 ≤ i1 ≤ i2 ≤ n</code></li>\n\t<li><code>1 ≤ j1 ≤ j2 ≤ m</code></li>\n\t<li><code>1 ≤ k ≤ 1000</code></li>\n\t<li><code>1 ≤ Lmax ≤ 50</code> (<code>Lmax</code> – latura maximă a unui dreptunghi)</li>\n\t<li>Se garantează că există soluție pentru ambele cerințe, pentru toate datele de test.</li>\n\t<li>Pentru rezolvarea corectă a primei cerinţe se acordă 20 de puncte, iar pentru cerința a doua se acordă 80 de puncte.</li>\n</ul>",
+      "text": "3 ≤ n, m ≤ 1500 1 ≤ i1 ≤ i2 ≤ n 1 ≤ j1 ≤ j2 ≤ m 1 ≤ k ≤ 1000 1 ≤ Lmax ≤ 50 (Lmax – latura maximă a unui dreptunghi) Se garantează că există soluție pentru ambele cerințe, pentru toate datele de test. Pentru rezolvarea corectă a primei cerinţe se acordă 20 de puncte, iar pentru cerința a doua se acordă 80 de puncte."
+    },
+    {
+      "title": "Exemplul 1",
+      "html": "<p><code>harta.in</code></p><pre>1\n7 7 4\n1 1 4 4\n6 2 6 4\n3 6 3 6\n6 6 7 7</pre><p><code>harta.out</code></p><pre>16 2</pre>",
+      "text": "harta.in1 7 7 4 1 1 4 4 6 2 6 4 3 6 3 6 6 6 7 7harta.out16 2"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p><img alt=\"\" src=\"/resurse/9dc152/p-1051-1075/harta1.png\"></p><p>Clădirea de coordonate <code>1 1 4 4</code> este cel mai mare pătrat și ocupă <code>S = 4•4 = 16</code> celule. <br>\nClădirile de coordonate <code>3 6 3 6</code> și <code>6 6 7 7</code> “încap” în interiorul clădirii <code>1 1 4 4</code> fără să se suprapună peste celulele sale marginale. Deci <code>C = 2</code>.</p>",
+      "text": "Clădirea de coordonate 1 1 4 4 este cel mai mare pătrat și ocupă S = 4•4 = 16 celule. Clădirile de coordonate 3 6 3 6 și 6 6 7 7 “încap” în interiorul clădirii 1 1 4 4 fără să se suprapună peste celulele sale marginale. Deci C = 2."
+    },
+    {
+      "title": "Exemplul 2",
+      "html": "<p><code>harta.in</code></p><pre>2\n10 11 4\n1 2 4 4\n8 9 8 9\n7 3 9 5\n2 9 3 9</pre><p><code>harta.out</code></p><pre>0 1 1 1 0 0 0 0\n0 1 0 1 0 0 1 0\n0 1 0 1 0 0 1 0\n0 1 1 1 0 0 0 0\n0 0 0 0 0 0 0 0 \n0 0 1 1 1 0 0 0\n0 0 1 0 1 0 1 0\n0 0 1 1 1 0 0 0\n0 0 0 0 0 0 0 0</pre>",
+      "text": "harta.in2 10 11 4 1 2 4 4 8 9 8 9 7 3 9 5 2 9 3 9harta.out0 1 1 1 0 0 0 0 0 1 0 1 0 0 1 0 0 1 0 1 0 0 1 0 0 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 0 0 0 0 0 1 0 1 0 1 0 0 0 1 1 1 0 0 0 0 0 0 0 0 0 0 0"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p><img alt=\"\" src=\"/resurse/9dc152/p-1051-1075/harta2.png\"></p><p>În imagine sunt cinci drumuri determinate de  dreptunghiurile: <code>1 1 10 1</code>, <code>1 6 10 8</code>, <code>1 10 10 11</code>, <code>5 1 6 11</code> și <code>10 1 10 11</code>.</p><p><img alt=\"\" src=\"/resurse/9dc152/p-1051-1075/harta3.png\"></p><p>Pe hartă, cele cinci drumuri vor avea coordonatele: <code>1 1 9 1</code>, <code>1 6 9 6</code>, <code>1 8 9 8</code>, <code>5 1 5 8</code> și <code>9 1 9 8</code>.</p>",
+      "text": "În imagine sunt cinci drumuri determinate de dreptunghiurile: 1 1 10 1, 1 6 10 8, 1 10 10 11, 5 1 6 11 și 10 1 10 11.Pe hartă, cele cinci drumuri vor avea coordonatele: 1 1 9 1, 1 6 9 6, 1 8 9 8, 5 1 5 8 și 9 1 9 8."
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "3 ≤ n, m ≤ 1500",
+    "1 ≤ i1 ≤ i2 ≤ n",
+    "1 ≤ j1 ≤ j2 ≤ m",
+    "1 ≤ k ≤ 1000",
+    "1 ≤ Lmax ≤ 50 (Lmax – latura maximă a unui dreptunghi)",
+    "Se garantează că există soluție pentru ambele cerințe, pentru toate datele de test.",
+    "Pentru rezolvarea corectă a primei cerinţe se acordă 20 de puncte, iar pentru cerința a doua se acordă 80 de puncte."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qf12ace8cef.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1051-1075/harta1.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1051-1075-harta1-png.png",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1051-1075/harta2.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1051-1075-harta2-png.png",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1051-1075/harta3.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1051-1075-harta3-png.png",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "9",
+    "intrare/ieșire": "harta.in / harta.out",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "16 MB / 8 MB",
+    "sursa problemei": "ONI 2014, Clasa a IX-a",
+    "autor": "Constantin Galatan",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 16,
+  "author": "Constantin Galatan",
+  "sourceAttribution": "ONI 2014, Clasa a IX-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1103/harta"
+}

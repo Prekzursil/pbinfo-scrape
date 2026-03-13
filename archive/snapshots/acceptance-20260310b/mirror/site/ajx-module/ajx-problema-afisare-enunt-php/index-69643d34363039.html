@@ -1,0 +1,132 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4609"><article id="enunt">
+			<p>Se consideră o pereche de șiruri de caractere, <code>𝑆</code> și <code>𝑇</code> , de lungime <code>𝑛</code>, respectiv <code>𝑚</code>, formate exclusiv din litere mici ale alfabetului englez. Pozițiile literelor sunt numerotate în șir începând de la <code>1</code>.</p>
+
+<p>Sunt două tipuri de operații ce se pot efectua asupra șirului <code>𝑇</code>:</p>
+
+<ul>
+	<li><code>1 𝑝</code>: se șterge litera de pe poziția <code>𝑝</code>;</li>
+	<li><code>2 𝑠𝑡 𝑑𝑟</code> (cu <code>𝑠𝑡 ≤ 𝑑𝑟</code>): se sortează crescător (alfabetic) literele din subsecvența ce corespunde intervalului de poziții <code>[𝑠𝑡, 𝑑𝑟]</code>;</li>
+</ul>
+
+<p>unde <code>𝑝</code>, <code>𝑠𝑡</code> și <code>𝑑𝑟</code> sunt poziții ale unor litere din șirul <code>𝑇</code>.</p>
+
+<p>Inițial, toate literele șirului <code>𝑇</code> sunt necolorate. O operație de tip 2 poate fi realizată doar dacă toate literele din subsecvența corespunzătoare intervalului de poziții <code>[𝑠𝑡,𝑑𝑟]</code> sunt necolorate. După efectuarea sortării, toate literele din această subsecvență devin colorate.</p>
+
+<h1>Cerința</h1>
+
+<p>Pentru fiecare dintre perechile de șiruri de tipul <code>𝑆</code> și <code>𝑇</code> date:</p>
+
+<ol>
+	<li>Să se afișeze literele distincte care apar în cel puțin unul dintre șiruri și, pentru fiecare dintre acestea, sim-<br>
+bolul șirului (literele <code>𝑆</code> sau <code>𝑇</code>) în care apare de mai multe ori. În caz de egalitate, se alege șirul <code>𝑇</code>.</li>
+	<li>Să se determine o succesiune de operații de tipul 1 și/sau 2 ce pot fi aplicate șirului <code>𝑇</code>, care să îl transforme<br>
+într-un șir egal cu <code>𝑆</code>. Să se afișeze <code>DA</code> în cazul în care există o astfel de succesiune de operații, sau <code>NU</code> în<br>
+caz contrar.</li>
+</ol>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>opsir.in</code> conține pe prima linie numărul natural <code>𝑐</code>, reprezentând cerința care trebuie rezolvată<br>
+(1 sau 2) pentru fiecare dintre perechile de șiruri date. </p>
+
+<p>Pe a doua linie a fișierului se găsește numărul natural <code>𝑘</code>, ce reprezintă numărul de teste. Fiecare test cuprinde datele specifice pentru o pereche de șiruri de tipul celei precizate în enunț, date care se găsesc pe câte trei linii în fișier, astfel: pe prima linie <code>𝑛</code> și <code>𝑚</code>, în această ordine, cu semnificația din enunț, pe a doua linie șirul <code>𝑆</code>, iar pe a treia linie șirul <code>𝑇</code>. </p>
+
+<h1>Date de ieșire</h1>
+
+<p>Pentru <code>𝑐 = 1</code>, fișierul de ieșire <code>opsir.out</code> va conține, pentru fiecare test, câte un număr natural <code>𝑛𝑟</code>, ce reprezintă<br>
+numărul de litere distincte ce apar în cel puțin unul dintre șiruri, iar pe următoarele <code>𝑛𝑟</code> linii, câte o astfel de litera, precum și litera mare <code>𝑆</code> sau <code>𝑇</code>, corespunzătoare șirului în care apare de mai multe ori. Literele mici vor fi afișate în ordine alfabetică.</p>
+
+<p>Pentru <code>𝑐 = 2</code>, fișierul de ieșire <code>opsir.out</code> va conține <code>𝑘</code> linii, pe fiecare linie aflându-se răspunsul (<code>DA</code> sau <code>NU</code>) corespunzător câte unui test, în ordinea în care acestea se găsesc în fișierul de intrare.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ 𝑘 ≤ 100</code></li>
+	<li><code>1 ≤ 𝑛 ≤ 𝑚 ≤ 200 000</code></li>
+	<li>Suma lungimilor șirurilor de tip <code>𝑆</code> din cele <code>𝑘</code> teste nu depășește <code>200 000</code>.</li>
+	<li>Suma lungimilor șirurilor de tip <code>𝑇</code> din cele <code>𝑘</code> teste nu depășește <code>200 000</code>.</li>
+	<li>Punctaj:
+	<ol>
+		<li>pentru 20 de puncte, <code>𝑐 = 1</code></li>
+		<li>pentru 15 puncte, <code>𝑐 = 2</code> șirurile de tip <code>𝑆</code> din fiecare test au literele sortate crescător/alfabetic.</li>
+		<li>pentru 25 de puncte, <code>𝑐 = 2</code> șirurile de tip <code>𝑇</code> din fiecare test pot fi transformate în șirul corespunzător de tip <code>𝑆</code> aplicând doar operații de tip 1.</li>
+		<li>pentru 40 de puncte, <code>𝑐 = 2</code> fără alte restricții.</li>
+	</ol></li>
+	</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>opsir.in</code></p>
+
+<pre>1
+3
+2 4
+cc
+cbbd
+3 2
+aab
+aa
+2 2
+ac
+da</pre>
+
+<p><code>opsir.out</code></p>
+
+<pre>3
+b T
+c S
+d T
+2
+a T
+b S
+3
+a T
+c S
+d T</pre>
+
+<h3>Explicație</h3>
+
+<p>Pentru primul test sunt <code>3</code> litere distincte conform cerinței: litera <code>𝑏</code> apare de mai multe ori în <code>𝑇</code> , <code>𝑐</code> apare de mai multe ori în <code>𝑆</code>, iar <code>𝑑</code> apare doar în <code>𝑇</code>.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>opsir.in</code></p>
+
+<pre>2
+1
+2 2
+zx
+zx</pre>
+
+<p><code>opsir.out</code></p>
+
+<pre>DA</pre>
+
+<h3>Explicație</h3>
+
+<p>Șirurile sunt egale fără a fi necesară aplicarea vreunei operații.</p>
+
+<h1>Exemplul 3</h1>
+
+<p><code>opsir.in</code></p>
+
+<pre>2
+2
+2 3
+ab
+bca
+4 4
+bacc
+cbac</pre>
+
+<p><code>opsir.out</code></p>
+
+<pre>DA
+NU</pre>
+
+<h3>Explicație</h3>
+
+<p>Pentru primul test putem sorta întregul șir <code>𝑇</code> , obținând <code>"abc"</code>. Putem șterge apoi a treia literă, obținând un șir egal cu <code>𝑆</code>.</p>
+
+<p>Pentru al doilea test, dacă aplicăm o operație de tip 2 pentru subsecvența formată din primele <code>2</code> litere, obținem <code>"bcac"</code>. Având în vedere că primele <code>2</code> litere devin colorate în urma sortării, nu mai putem aplica o operație de tip <code>2</code> pentru subsecvența <code>"ca"</code>. Prin urmare, nu putem transforma șirul <code>𝑇</code> într-un șir egal cu <code>𝑆</code>.</p>		</article>
+		</body></html>

@@ -1,0 +1,311 @@
+{
+  "id": 1471,
+  "slug": "maxdiv",
+  "name": "maxdiv",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1471/maxdiv",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 21,
+      "name": "Probleme cu secvențe",
+      "slug": "probleme-cu-secven-e",
+      "href": "/?pagina=probleme-lista&tag=21"
+    }
+  ],
+  "tags": [
+    "Two Pointers"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Scrieţi un program care afişează, pentru un şir dat format din <code>n</code> numere naturale numărul de secvenţe maxdiv şi cea mai lungă secvenţă  maxdiv.</p>",
+      "text": "Scrieţi un program care afişează, pentru un şir dat format din n numere naturale numărul de secvenţe maxdiv şi cea mai lungă secvenţă maxdiv."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fişierul de intrare <code>maxdiv.in</code> conţine pe prima linie numărul <code>n</code> separat printr-un spaţiu de un număr natural <code>t</code>, care reprezintă cerinţa: <code>1</code>, dacă se cere numărul de secvenţe maxdiv, respectiv <code>2</code> dacă se cere cea mai lungă secvenţă maxdiv. Linia a doua din fişier conţine cele <code>n</code> numere naturale ale şirului dat.</p>",
+      "text": "Fişierul de intrare maxdiv.in conţine pe prima linie numărul n separat printr-un spaţiu de un număr natural t, care reprezintă cerinţa: 1, dacă se cere numărul de secvenţe maxdiv, respectiv 2 dacă se cere cea mai lungă secvenţă maxdiv. Linia a doua din fişier conţine cele n numere naturale ale şirului dat."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fişierul de ieșire <code>maxdiv.out</code> va conţine pe prima linie un număr natural ce reprezintă numărul de secvenţe maxdiv, pentru şirul de numere dat, dacă cerinţa este <code>1</code>. Dacă cerinţa este <code>2</code>, fişierul de ieşire va conţine un şir de numere naturale, separate între ele prin câte un spaţiu, ce reprezintă cea mai lungă secvenţă maxdiv din şirul dat.</p>",
+      "text": "Fişierul de ieșire maxdiv.out va conţine pe prima linie un număr natural ce reprezintă numărul de secvenţe maxdiv, pentru şirul de numere dat, dacă cerinţa este 1. Dacă cerinţa este 2, fişierul de ieşire va conţine un şir de numere naturale, separate între ele prin câte un spaţiu, ce reprezintă cea mai lungă secvenţă maxdiv din şirul dat."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2 ≤ n ≤ 1000</code></li>\n\t<li><code>2 ≤ x[i] ≤ 1.000.000</code>, unde <code>x[i]</code>  reprezintă un număr din şirul dat</li>\n\t<li>Şirul de numere conţine cel puţin o secvenţă care începe şi se încheie cu un număr maxdiv</li>\n\t<li>Pentru cerința 1 se acordă 40% din punctaj, iar pentru cerința 2 se acordă  60% din punctaj.</li>\n</ul>",
+      "text": "2 ≤ n ≤ 1000 2 ≤ x[i] ≤ 1.000.000, unde x[i] reprezintă un număr din şirul dat Şirul de numere conţine cel puţin o secvenţă care începe şi se încheie cu un număr maxdiv Pentru cerința 1 se acordă 40% din punctaj, iar pentru cerința 2 se acordă 60% din punctaj."
+    },
+    {
+      "title": "Exemplu 1:",
+      "html": "<p><code>maxdiv.in</code></p><pre>7 1\n22 60 64 125 315 24 150</pre><p><code>maxdiv.out</code></p><pre>2</pre><h3>Explicație</h3><p><strong>Cerinţa 1:</strong> Şirul de numere dat conţine <code>3</code> numere maxdiv: <code>60</code>, <code>315</code> şi <code>150</code> (au fiecare <code>12</code> divizori) și <code>2</code> secvenţe maxdiv : <code>60 64 125 315</code> şi <code>315 24 150</code>. </p>",
+      "text": "maxdiv.in7 1 22 60 64 125 315 24 150maxdiv.out2ExplicațieCerinţa 1: Şirul de numere dat conţine 3 numere maxdiv: 60, 315 şi 150 (au fiecare 12 divizori) și 2 secvenţe maxdiv : 60 64 125 315 şi 315 24 150."
+    },
+    {
+      "title": "Exemplu 2:",
+      "html": "<p><code>maxdiv.in</code></p><pre>7 2\n22 60 64 125 315 24 150</pre><p><code>maxdiv.out</code></p><pre>60 64 125 315</pre><h3>Explicație</h3><p><strong>Cerinţa 2:</strong> Şirul de numere dat conţine <code>2</code> secvenţe maxdiv: <code>60 64 125 315</code> şi <code>315 24 150</code>. Cea mai lungă secvenţă este  <code>60 64 125 315</code>.</p>",
+      "text": "maxdiv.in7 2 22 60 64 125 315 24 150maxdiv.out60 64 125 315ExplicațieCerinţa 2: Şirul de numere dat conţine 2 secvenţe maxdiv: 60 64 125 315 şi 315 24 150. Cea mai lungă secvenţă este 60 64 125 315."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cerinţa 1: Şirul de numere dat conţine 3 numere maxdiv: 60, 315 şi 150 (au fiecare 12 divizori) și 2 secvenţe maxdiv : 60 64 125 315 şi 315 24 150."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cerinţa 2: Şirul de numere dat conţine 2 secvenţe maxdiv: 60 64 125 315 şi 315 24 150. Cea mai lungă secvenţă este 60 64 125 315."
+    }
+  ],
+  "constraints": [
+    "2 ≤ n ≤ 1000",
+    "2 ≤ x[i] ≤ 1.000.000, unde x[i] reprezintă un număr din şirul dat",
+    "Şirul de numere conţine cel puţin o secvenţă care începe şi se încheie cu un număr maxdiv",
+    "Pentru cerința 1 se acordă 40% din punctaj, iar pentru cerința 2 se acordă 60% din punctaj."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qe2d6df4a86.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Costache Radu - Mihai (radu_msk)",
+    "clasa": "9",
+    "intrare/ieșire": "maxdiv.in / maxdiv.out",
+    "limită timp": "1 secunde",
+    "limită memorie": "2 MB / 1 MB",
+    "sursa problemei": "Olimpiada Municipala Informatica Iasi 2016",
+    "autor": "Silvia Grecu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 1,
+  "memoryLimitMb": 2,
+  "author": "Silvia Grecu",
+  "sourceAttribution": "Olimpiada Municipala Informatica Iasi 2016",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1471/maxdiv"
+}

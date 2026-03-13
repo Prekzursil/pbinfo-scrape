@@ -1,0 +1,81 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1222"><article id="enunt">
+			<p>Comisia Naţională a Audiovizualului (<span class="caps">CNA</span>) este autoritatea care coordonează activitatea posturilor media din România. Șeful <span class="caps">CNA</span>-ului dorește o statistică referitoare la publicitatea transmisă de posturile de televiziune. În acest scop, el primește pentru fiecare zi informații în următorul format: <code>d hh:mm:ss</code>, unde <code>d</code> este durata exprimată în secunde a publicității, iar <code>hh:mm:ss</code> este momentul de start al publicității (<code>hh</code> este ora, <code>mm</code> este minutul, iar <code>ss</code> este secunda). Observaţi că <code>d</code> este separat de <code>hh</code> printr-un singur spaţiu, iar următoarele valori sunt separate prin caracterul <code>':'</code>.</p>
+
+<p>De exemplu o linie de forma:</p>
+
+<p><code>150 05:02:45</code></p>
+
+<p>se interpretează astfel: există un post TV care a transmis publicitate cu durata de <code>150</code> secunde, ora de început fiind <code>5</code>, <code>2</code> minute și <code>45</code> de secunde.</p>
+
+<p>”Secunda de aur” este o secundă în care se difuzează cât mai multă publicitate, adică pe un număr maxim de posturi în acea secundă se transmite publicitate. Dacă sunt mai multe astfel de secunde, “secunda de aur” este considerată prima secundă cu această proprietate în derularea zilei.</p>
+
+<p>Șeful <span class="caps">CNA</span> primește în fiecare dimineață lista cu activitatea din ziua anterioară ca o succesiune de linii, fiecare linie având forma descrisă mai sus. </p>
+
+<h1>Cerinţe</h1>
+
+<p>Scrieţi un program care, cunoscând lista din ziua anterioară, să rezolve următoarele cerinţe:</p>
+
+<ol>
+	<li>să determine durata totală în care niciun post de televiziune nu a difuzat publicitate;</li>
+	<li>să determine care este “secunda de aur”.</li>
+</ol>
+
+<h1>Date de intrare</h1>
+
+<p>Fişierul de intrare <code>tv.in</code> conţine pe prima linie numărul natural <code>c</code>, care poate fi <code>1</code> sau <code>2</code>, reprezentând cerinţa care urmează să fie rezolvată. Pe a doua linie se află numărul natural <code>N</code>, reprezentând numărul de linii din lista cu informații primită de șef. Pe următoarele <code>N</code> linii sunt descrise informațiile, în formatul specificat în enunţ.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fişierul de ieşire <code>tv.out</code> va conţine o singură linie pe care vor fi scrise <code>3</code> numere naturale separate prin caracterul <code>':'</code> în formatul următor:<br>
+<code>hh:mm:ss</code><br>
+semnificând durata totală exprimată în ore (<code>hh</code>), minute (<code>mm</code>) şi secunde (<code>ss</code>) pe parcursul căreia niciun post de televiziune nu a difuzat publicitate în ziua respectivă (dacă <code>c=1</code>), respectiv “secunda de aur” (dacă <code>c=2</code>). </p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 100000 </code></li>
+	<li><code>hh</code> va fi un număr de exact două cifre, cuprins între <code>00</code> şi <code>23</code></li>
+	<li><code>mm</code>, respectiv <code>ss</code> vor fi numere de exact două cifre, cuprinse între <code>00</code> şi <code>59</code></li>
+	<li>Durata <code>d</code> este nenulă şi sfârşitul transmisiei publicităţii se află în cadrul zilei curente.</li>
+	<li>Pentru teste valorând 60% din punctaj cerinţa este 1.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>tv.in</code></p>
+
+<pre>1
+6
+120 12:00:00
+200 12:01:50
+1000 13:00:00
+2000 13:01:00
+100 14:05:05
+10 23:59:49</pre>
+
+<p><code>tv.out</code></p>
+
+<pre>23:18:40</pre>
+
+
+<h1>Exemplul 2</h1>
+
+<p><code>tv.in</code></p>
+
+<pre>2
+6
+1200 12:00:00
+2000 12:01:50
+1000 12:00:00
+2000 13:01:00
+100 14:05:05
+10 23:59:49</pre>
+
+<p><code>tv.out</code></p>
+
+<pre>12:01:50</pre>
+
+<h1>Explicații</h1>
+
+<p>Pentru exemplul <code>1</code>, cerinţa este <code>1</code>. Pe parcursul zilei, timp de <code>23</code> de ore, <code>18</code> minute şi <code>40</code> de secunde nu s-a difuzat publicitate. Pentru exemplul <code>2</code>, cerinţa este <code>2</code>. Secunda de aur este <code>12:01:50</code> pentru că există un număr maxim  posturi care difuzează publicitate (<code>3</code> posturi).</p>		</article>
+		</body></html>

@@ -1,0 +1,309 @@
+{
+  "id": 1913,
+  "slug": "mr",
+  "name": "mr",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1913/mr",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 85,
+      "name": "Structuri de date liniare",
+      "slug": "structuri-de-date-liniare",
+      "href": "/?pagina=probleme-lista&tag=85"
+    },
+    {
+      "id": 87,
+      "name": "Coada",
+      "slug": "coada",
+      "href": "/?pagina=probleme-lista&tag=87"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Rică se joacă în fiecare seară The MazeRunnerVladVersion, joc pe care îl vom numi pentru simplitatea problemei MR. Jocul constă în găsirea unei căi de scăpare dintr-un labirint care conține:</p><ul>\n\t<li>ziduri prin care Rică nu va putea să treacă;</li>\n\t<li>zero sau mai multe teleporturi cu ajutorul cărora deplasarea între două puncte precizate <code>p1(x1, y1)</code> și <code>p2(x2, y2)</code> se face într-un minut, dacă se doreşte acest lucru;</li>\n\t<li>zone libere, trecerea din zona curentă într-o zonă învecinată se poate face pe direcția celor patru puncte cardinale. Deplasarea se va face într-un minut.</li>\n</ul><p>Rică pleacă din colțul stânga-sus al labirintului și doreşte să ajungă în colțul dreapta-jos.</p><p>El știe că are o teză în ziua următoare, așa că vă cere ajutorul vouă, programatorilor, și vă roagă să aflați timpul minim în care poate să ajungă din colțul stânga-sus în colțul dreapta-jos al labirintului.</p>",
+      "text": "Rică se joacă în fiecare seară The MazeRunnerVladVersion, joc pe care îl vom numi pentru simplitatea problemei MR. Jocul constă în găsirea unei căi de scăpare dintr-un labirint care conține: ziduri prin care Rică nu va putea să treacă; zero sau mai multe teleporturi cu ajutorul cărora deplasarea între două puncte precizate p1(x1, y1) și p2(x2, y2) se face într-un minut, dacă se doreşte acest lucru; zone libere, trecerea din zona curentă într-o zonă învecinată se poate face pe direcția celor patru puncte cardinale. Deplasarea se va face într-un minut. Rică pleacă din colțul stânga-sus al labirintului și doreşte să ajungă în colțul dreapta-jos.El știe că are o teză în ziua următoare, așa că vă cere ajutorul vouă, programatorilor, și vă roagă să aflați timpul minim în care poate să ajungă din colțul stânga-sus în colțul dreapta-jos al labirintului."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>mr.in</code> conține:</p><ul>\n\t<li>numărul <code>L</code> de linii și numărul <code>C</code> de coloane pentru harta labirintului, separate printr-un spațiu</li>\n\t<li>pe următoarele <code>L</code> linii se vor găsi <code>C</code> valori de <code>-1</code> (reprezentând zid) sau <code>0</code> separate printr-un spațiu</li>\n\t<li>pe linia <code>L+2</code> se va găsi numărul de teleporturi <code>T</code></li>\n\t<li>pe fiecare dintre următoarele <code>T</code> linii se vor găsi câte patru numere de forma: <code>L1 C1 L2 C2</code> separate printr-un spațiu, reprezentând poziţiile de pe hartă ale teleporturilor. Rică poate să aleagă să se teleporteze din poziția <code>L1 C1</code> în poziția <code>L2 C2</code>.</li>\n</ul>",
+      "text": "Fișierul de intrare mr.in conține: numărul L de linii și numărul C de coloane pentru harta labirintului, separate printr-un spațiu pe următoarele L linii se vor găsi C valori de -1 (reprezentând zid) sau 0 separate printr-un spațiu pe linia L+2 se va găsi numărul de teleporturi T pe fiecare dintre următoarele T linii se vor găsi câte patru numere de forma: L1 C1 L2 C2 separate printr-un spațiu, reprezentând poziţiile de pe hartă ale teleporturilor. Rică poate să aleagă să se teleporteze din poziția L1 C1 în poziția L2 C2."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>mr.out</code> va conține pe prima linie timpul minim necesar lui Rică pentru a parcurge labirintul.</p>",
+      "text": "Fișierul de ieșire mr.out va conține pe prima linie timpul minim necesar lui Rică pentru a parcurge labirintul."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2 ≤ n, m ≤ 100</code></li>\n\t<li><code>0 ≤ T ≤ 100</code></li>\n\t<li>Pentru fiecare set de date de intrare există soluție.</li>\n\t<li>Pentru 50% din teste nu există teleporturi.</li>\n</ul>",
+      "text": "2 ≤ n, m ≤ 100 0 ≤ T ≤ 100 Pentru fiecare set de date de intrare există soluție. Pentru 50% din teste nu există teleporturi."
+    },
+    {
+      "title": "Exemplul 1",
+      "html": "<p><code>mr.in</code></p><pre>5 5\n 0  0 -1 0 0 \n 0 -1  0 0 0 \n 0  0  0 0 0\n-1 -1  0 0 0\n 0  0  0 0 0\n 0</pre><p><code>mr.out</code></p><pre>8</pre><h3>Explicație</h3><p>Un drum minim posibil este:</p><pre>(1, 1) → (2, 1) → (3, 1) → (3, 2) → (3, 3) → (4, 3) → (5, 3) → (5, 4) → (5, 5)</pre>",
+      "text": "mr.in5 5 0 0 -1 0 0 0 -1 0 0 0 0 0 0 0 0 -1 -1 0 0 0 0 0 0 0 0 0mr.out8ExplicațieUn drum minim posibil este:(1, 1) → (2, 1) → (3, 1) → (3, 2) → (3, 3) → (4, 3) → (5, 3) → (5, 4) → (5, 5)"
+    },
+    {
+      "title": "Exemplul 2",
+      "html": "<p><code>mr.in</code></p><pre>5 6\t\n 0  0  0  0 -1  0\n 0  0 -1 -1  0  0\n-1  0  0  0 -1  0\n-1  0 -1  0  0  0\n-1 -1 -1  0  0  0\n2\n2 2 4 5\n4 2 2 5</pre><p><code>mr.out</code></p><pre>5</pre><h3>Explicație</h3><p>Un drum minim posibil este:</p><pre>(1, 1) → (1, 2) → (2, 2) → (4, 5) → (4, 6) → (5, 6).</pre><p>Între pozițiile <code>(2,2)</code> și <code>(4,5)</code> s-a utilizat primul teleport.</p>",
+      "text": "mr.in5 6 0 0 0 0 -1 0 0 0 -1 -1 0 0 -1 0 0 0 -1 0 -1 0 -1 0 0 0 -1 -1 -1 0 0 0 2 2 2 4 5 4 2 2 5mr.out5ExplicațieUn drum minim posibil este:(1, 1) → (1, 2) → (2, 2) → (4, 5) → (4, 6) → (5, 6).Între pozițiile (2,2) și (4,5) s-a utilizat primul teleport."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Un drum minim posibil este:"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Un drum minim posibil este:"
+    }
+  ],
+  "constraints": [
+    "2 ≤ n, m ≤ 100",
+    "0 ≤ T ≤ 100",
+    "Pentru fiecare set de date de intrare există soluție.",
+    "Pentru 50% din teste nu există teleporturi."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q64069720c7.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "10",
+    "intrare/ieșire": "mr.in / mr.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "Moisil++, 2016",
+    "autor": "Pintilie Vlad",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "author": "Pintilie Vlad",
+  "sourceAttribution": "Moisil++, 2016",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1913/mr"
+}

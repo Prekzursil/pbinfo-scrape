@@ -1,0 +1,86 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3038"><article id="enunt">
+			<p>Aflat într-o vizită cu părinții, Iliuță primește un bilet la tombolă pe care este scris un număr natural <code>S</code>. Pentru a câștiga un premiu, Iliuță trebuie să afle, plecând de la numărul <code>S</code>, un număr câștigător <code>X</code>. Pentru a-l ajuta să ghicească numărul câștigător, mama îi spune lui Iliuță că numărul <code>S</code> de pe biletul său este suma dintre numărul câștigător <code>X</code> și toate numerele obținute plecând de la numărul câștigător <code>X</code>, prin ștergerea cifrei unităților numărului <code>X</code>, apoi, succesiv, prin ștergerea cifrei unităților numărului obținut la pasul anterior, până se ajunge la un număr de o singură cifră.<br>
+De exemplu, dacă numărul <code>X</code> este <code>2019</code>, atunci din <code>X</code> se pot obține după regula de mai sus trei numere: <code>201</code>, <code>20</code> și <code>2</code>. Suma tuturor acestor numere este <code>S = 2019 + 201 + 20 + 2 = 2242</code>. Deci, dacă pe biletul lui Iliuță se află numărul <code>S=2242</code>, atunci numărul câștigător corespunzător lui <code>S</code> este <code>X = 2019</code>.<br>
+Din păcate, nu toate numerele naturale permit determinarea unui număr câștigător. De exemplu, pentru numărul <code>21</code> nu există niciun număr natural <code>X</code> din care să putem obține <code>21</code> după regula descrisă de mama lui Iliuță.<br>
+Cu ajutorul unui program a fost generat automat un șir de <code>N</code> numere, numerotate în ordinea generării <code>S</code><sub><code>1</code></sub>, <code>S</code><sub><code>2</code></sub>, …, <code>S</code><sub><code>N</code></sub>. Programul respectiv primește patru numere naturale <code>A</code>, <code>B</code>, <code>C</code>, <code>D</code> și primul număr din șir <code>S</code><sub><code>1</code></sub>. Al <code>i</code>-lea număr generat se obține după regula <br>
+<code>S</code><sub><code>i</code></sub> <code>=((S</code><sub><code>i-1</code></sub> <code>% A) * B + C) % D</code>, <br>
+unde <code>1 &lt; i ≤ N</code>, iar <code>a % b</code> reprezintă restul împărțirii lui <code>a</code> la <code>b</code> (<code>b ≠ 0</code>).</p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscându-se numerele naturale <code>N</code>, <code>S</code><sub><code>1</code></sub>, <code>A</code>, <code>B</code>, <code>C</code>, <code>D</code>, scrieți un program care rezolvă următoarele cerințe:<br>
+1) pentru fiecare dintre termenii șirului <code>S</code><sub><code>1</code></sub>, <code>S</code><sub><code>2</code></sub>, …, <code>S</code><sub><code>N</code></sub>, determină cel mai mare număr natural mai mic strict decât termenul respectiv, pentru care există un număr câștigător; programul va afișa restul împărțirii sumei numerelor obținute la <code>10</code><sup><code>18</code></sup><code>+31</code>;<br>
+2) pentru fiecare dintre termenii șirului <code>S</code><sub><code>1</code></sub>, <code>S</code><sub><code>2</code></sub>, …, <code>S</code><sub><code>N</code></sub>, determină câte numere naturale mai mici sau egale cu termenul respectiv NU au număr câștigător; programul va afișa restul împărțirii sumei rezultatelor obținute la <code>10</code><sup><code>18</code></sup><code>+31</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>tombola.in</code> conține pe prima linie numărul natural <code>p</code>, reprezentând cerința care trebuie rezolvată (<code>1</code> sau <code>2</code>). Pe a doua linie se află, în această ordine, numerele naturale <code>N S1 A B C D</code>, separate prin câte un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>tombola.out</code> va conține un singur număr natural care reprezintă rezultatul la cerința <code>p</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 500.000</code></li>
+	<li><code>1 &lt; S1, C, D ≤ 10</code><sup><code>17</code></sup></li>
+	<li><code>1 &lt; A, B ≤ 10</code><sup><code>9</code></sup></li>
+	<li>Se garantează că <code>S</code><sub><code>i</code></sub> <code>&gt; 1</code>, oricare <code>1 ≤ i ≤ N</code></li>
+	<li>Pentru teste valorând <code>50</code> de puncte cerința este <code>1</code>.</li>
+	<li>Pentru <code>30%</code> din numărul total de teste, <code>N * D ≤ 10</code><sup><code>6</code></sup> și <code>N * S</code><sub><code>1</code></sub> <code>≤ 10</code><sup><code>6</code></sup> (<code>50%</code> dintre acestea fiind pentru cerința <code>1</code>)</li>
+	<li>Pentru <code>60%</code> din numărul total de teste, <code>N ≤ 30.000</code> (<code>50%</code> dintre acestea fiind pentru cerința <code>1</code>).</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>tombola.in</code></p>
+
+<pre>1
+1 22 3 3 3 3</pre>
+
+<p><code>tombola.out</code></p>
+
+<pre>20</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința <code>1</code>. Avem un singur termen în șir <code>S1 = 22</code>. Numărul <code>20</code> este cel mai mare număr strict mai mic decât <code>22</code> care acceptă un număr câștigător (<code>X = 19</code> deoarece <code>20 = 19 + 1</code>).</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>tombola.in</code></p>
+
+<pre>2
+1 22 3 3 3 3</pre>
+
+<p><code>tombola.out</code></p>
+
+<pre>2</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința <code>2</code>. Avem un singur termen în șir <code>S1=22</code>. Există două numere mai mici sau egale cu <code>22</code> care NU acceptă număr câștigător, <code>10</code> și respectiv <code>21</code>.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>tombola.in</code></p>
+
+<pre>1
+3 12345678901234567 999999999 123456789 98765432109876543 1020304050607080</pre>
+
+<p><code>tombola.out</code></p>
+
+<pre>12805467424792840</pre>
+
+<h1>Exemplul 4:</h1>
+
+<p><code>tombola.in</code></p>
+
+<pre>2
+3 98765432109876543 999999999 123456789 12345678901234567 1020304050607080</pre>
+
+<p><code>tombola.out</code></p>
+
+<pre>9912065223185559</pre>		</article>
+		</body></html>

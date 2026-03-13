@@ -1,0 +1,101 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1187"><article id="enunt">
+			<p>O firmă de construcţii imobiliare a achiziţionat recent un teren dreptunghiular de dimensiuni <code>N×M</code>. Terenul este împărțit în parcele de dimensiune <code>1x1</code>. Pe unele dintre cele <code>N×M</code> parcele sunt plantați copaci. Firma dorește construirea unui grandios complex comercial și este necesară defrișarea întregului teren. În acest scop sunt utilizați roboți, fiecare robot având baza un pătrat de latură <code>L</code>. Suprafața defrișată de fiecare robot la un moment dat este chiar aria de acoperire a robotului, <code>L×L</code>. Fiecare robot pătrunde prin colțul stânga sus de coordonate <code>(1, 1)</code>, se poate deplasa doar în dreapta și în jos și poate părăsi suprafața numai prin colțul dreapta jos, de coordonate <code>(N, M)</code>.</p>
+
+<h1>Cerinţe</h1>
+
+<p>Cunoscând dimensiunile <code>N</code>,  <code>M</code> ale terenului și coordonatele parcelelor în care sunt plantați copaci se cere:</p>
+
+<p>1. Numărul minim de roboți necesari defrișării întregului teren.<br>
+2. Să se răspundă la <code>Q</code> interogări de forma <code>k</code>, unde <code>k</code> este un număr natural. Pentru fiecare interogare de această formă va trebui determinată latura minimă a unui robot astfel încât să fie necesari pentru defrișare cel mult <code>k</code> roboți.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fişierul de intrare <code>roboti1.in</code> conţine:</p>
+
+<ul>
+	<li>Pe prima linie un număr natural <code>p</code> reprezentând varianta cerinței de rezolvare. Pentru toate testele de intrare, numărul <code>p</code> poate avea doar valoarea <code>1</code> sau valoarea <code>2</code>.</li>
+	<li>Pe a doua linie se află <code>3</code> numere naturale <code>N</code>, <code>M</code>, <code>T</code> separate prin câte un spațiu reprezentând numărul liniilor, numărul coloanelor terenului dreptunghiular, respectiv numărul copacilor plantați.</li>
+	<li>Următoarele <code>T</code> linii conțin fiecare câte două numere naturale <code>x y</code> separate prin câte un spațiu, reprezentând linia, respectiv coloana parcelei în care este plantat un copac.</li>
+	<li>În cazul cerinței <code>1</code>, ultima linie conține un singur număr natural <code>L</code>, reprezentând latura unui robot.</li>
+	<li>În cazul cerinței <code>2</code>, penultima linie va conține un număr natural <code>Q</code>, iar ultima linie <code>Q</code> numere naturale  <code>k[1]</code>, <code>k[2]</code>, …, <code>k[Q]</code> separate prin câte un spațiu, reprezentând numărul maxim de roboți ce pot fi utilizați în fiecare dintre cele <code>Q</code> interogări.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<ul>
+	<li>Dacă valoarea lui <code>p</code> este <code>1</code>,  se va rezolva numai cerința 1. În acest caz, în fişierul de ieşire <code>roboti1.out</code> se va scrie un singur număr natural <code>n1</code>, reprezentând numărul minim de roboți utilizați.</li>
+	<li>Dacă valoarea lui <code>p</code> este <code>2</code>, se va rezolva numai cerința 2. În acest caz, în fişierul de ieşire <code>roboti1.out</code> se vor scrie <code>Q</code> linii. Fiecare linie <code>i</code> va conţine câte un număr natural <code>ni</code>, reprezentând latura minimă a unui robot astfel încât pentru defrișare să fie utilizați cel mult <code>ki</code> roboți.</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N, M, L ≤ 150</code></li>
+	<li><code>1 ≤ Q ≤ 150</code></li>
+	<li><code>1 ≤ k[i] ≤ 150</code>,  <code>1 ≤ i ≤ Q</code></li>
+	<li><code>1 ≤ T ≤ 1000</code></li>
+	<li>Latura robotului nu poate fi mai mare decât dimensiunile terenului</li>
+	<li>Pe tot parcursul deplasării, fiecare robot se va afla în interiorul suprafeţei terenului.</li>
+	<li>În orice moment în interiorul suprafeţei terenului se va afla cel mult un robot.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>roboti1.in</code></p>
+
+<pre>1
+6 8 8
+4 1
+5 3
+3 5
+2 6
+5 5
+4 7
+3 8
+6 8
+4</pre>
+
+<p><code>roboti1.out</code></p>
+
+<pre>1</pre>
+
+<h1>Explicație</h1>
+
+<p><code>p = 1</code></p>
+
+<p>Dacă roboții au latura <code>4</code>, pentru defrișarea întregului teren este necesar un singur robot.</p>
+
+<p><strong>Atenție! Pentru acest test se rezolvă doar cerința 1.</strong></p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>roboti1.in</code></p>
+
+<pre>2
+6 8 8
+4 1
+5 3
+3 5
+2 6
+5 5
+4 7
+3 8
+6 8
+2
+1 3</pre>
+
+<p><code>roboti1.out</code></p>
+
+<pre>4
+1</pre>
+
+<h1>Explicație</h1>
+
+<p><code>p = 2</code></p>
+
+<p>Prima valoare din fișierul de ieșire reprezintă latura minimă pe care o pot avea roboții astfel încât pentru defrișarea întregului teren să fie necesar un singur robot, conform primei interogări.</p>
+
+<p>A doua valoare din fișierul de ieșire reprezintă latura minimă pe care o pot avea roboții astfel încât pentru defrișarea întregului teren să fie necesari cel mult trei roboți, conform celei de-a doua interogări.</p>
+
+<p><strong>Atenție! Pentru acest test se rezolvă doar cerința 2.</strong></p>		</article>
+		</body></html>

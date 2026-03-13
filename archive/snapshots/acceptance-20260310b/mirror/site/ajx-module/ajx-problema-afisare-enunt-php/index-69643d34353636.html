@@ -1,0 +1,174 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4566"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>Alex, un mare entuziast al turismului, a decis să-și transforme pasiunea într-o afacere și să organizeze tururi ale orașului Bistrița. Orașul poate fi reprezentat ca un graf orientat al obiectivelor turistice, conectate direct de străzi. Totuși, dat fiind că abilitatea de a se orienta a lui Alex nu este comparabilă cu entuziasmul lui, organizarea traseelor este dificilă pentru el. În primul rând, el vrea să numere câte astfel de trasee există în oraș. Un traseu reprezintă o listă ordonată \(a\) de \(k\) obiective turistice, cu următoarele proprietăți:</p>
+
+<ul>
+	<li>De la nodul \( {a}_{i} \) se poate ajunge în nodul \( {a}_{i+1} \)</li>
+	<li>De la nodul \( {a}_{k} \) se poate ajunge în nodul \( {a}_{1} \)</li>
+</ul>
+
+<p>Spunem că se poate ajunge de la nodul <code>x</code> la nodul <code>y</code> dacă există un drum de <code>0</code> sau mai multe străzi care începe în nodul <code>x</code> și se termină în nodul <code>y</code>. Există <code>2</code> tipuri de trasee turistice:</p>
+
+<ul>
+	<li>Tipul 1, în care obiectivele se pot repeta</li>
+	<li>Tipul 2, în care obiectivele trebuie să fie distincte</li>
+</ul>
+
+<p>Graful obiectivelor turistice este un graf orientat în care o muchie de la <code>x</code> la <code>y</code> reprezintă un drum direct de la nodul <code>x</code> la nodul <code>y</code>. Alex are nevoie de ajutorul vostru, pentru a determina câte trasee de lungime <code>k</code> există pentru un tip dat de trasee turistice (Tipul 1 sau Tipul 2), pentru fiecare <code>k</code> de la <code>1</code> la <code>Q</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Prima linie conține <code>T</code>, tipul traseului.</p>
+
+<p>A doua linie conține <code>N</code>, <code>M</code> și <code>Q</code>, reprezentând numărul de noduri și de muchii ale grafului, respectiv <code>k</code>-ul maxim pentru care Alex vrea să afle numărul de trasee. Următoarele <code>M</code> linii conțin câte <code>2</code> numere <code>x</code>, <code>y</code>, reprezentând o muchie orientată de la <code>x</code> la <code>y</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Pentru fiecare linie <code>k</code>, de la <code>1</code> la <code>Q</code>, se va afișa numărul de trasee de lungime <code>k</code>, modulo \( 10^9+7 \).</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 300 000</code></li>
+	<li><code>1 ≤ M, Q ≤ 1 000 000</code></li>
+</ul>
+
+<h1>Punctare</h1>
+
+<ul>
+	<li>Pentru <code>7</code> puncte, <code>T = 1, 1 ≤ N ≤ 6, 1 ≤ M ≤ 30, 1 ≤ Q ≤ 30</code>.</li>
+	<li>Pentru alte <code>15</code> puncte, <code>T = 1, 1 ≤ N, Q ≤ 50, 1 ≤ M ≤ 100</code>.</li>
+	<li>Pentru alte <code>17</code> puncte, <code>T = 1, 1 ≤ N, Q ≤ 1000, 1 ≤ M ≤ 2000</code>.</li>
+	<li>Pentru alte <code>21</code> de puncte, <code>T = 1, 1 ≤ N, Q ≤ 100 000, 1 ≤ M ≤ 200 000</code>.</li>
+	<li>Pentru alte <code>8</code> puncte, <code>T = 2, 1 ≤ N, Q ≤ 1000, 1 ≤ M ≤ 2000</code>.</li>
+	<li>Pentru alte <code>20</code> de puncte, <code>T = 2, 1 ≤ N, Q ≤ 100 000, 1 ≤ M ≤ 200 000</code>.</li>
+	<li>Pentru restul de <code>12</code> puncte, <code>T = 2, 1 ≤ N ≤ 300 000, 1 ≤ M, Q ≤ 1 000 000</code>.</li>
+</ul>
+
+<h1>Exemplu 1:</h1>
+
+<p><code>turism.in</code></p>
+
+<pre>1
+3 2 3
+1 2
+2 1</pre>
+
+<p><code>turism.out</code></p>
+
+<pre>3
+5
+9</pre>
+
+<h1>Exemplu 2:</h1>
+
+<p><code>turism.in</code></p>
+
+<pre>2
+3 2 3
+1 2
+2 1</pre>
+
+<p><code>turism.out</code></p>
+
+<pre>3
+2
+0</pre>
+
+<h1>Exemplu 3:</h1>
+
+<p><code>turism.in</code></p>
+
+<pre>1
+5 4 10
+1 2
+2 3
+3 1
+3 4</pre>
+
+<p><code>turism.out</code></p>
+
+<pre>5
+11
+29
+83
+245
+731
+2189
+6563
+19685
+59051</pre>
+
+<h1>Exemplu 4:</h1>
+
+<p><code>turism.in</code></p>
+
+<pre>2
+6 7 4
+1 2
+2 3
+3 4
+4 5
+5 3
+3 1
+3 6</pre>
+
+<p><code>turism.out</code></p>
+
+<pre>6
+20
+60
+120</pre>
+
+<h1>Exemplu 5:</h1>
+
+<p><code>turism.in</code></p>
+
+<pre>1
+8 9 15
+1 2
+2 3
+3 4
+2 1
+4 5
+5 6
+6 7
+7 8
+8 2</pre>
+
+<p><code>turism.out</code></p>
+
+<pre>8
+64
+512
+4096
+32768
+262144
+2097152
+16777216
+134217728
+73741817
+589934536
+719476260
+755810045
+46480318
+371842544</pre>
+
+<h3>Explicații</h3>
+
+<p>Pentru primul exemplu, traseele sunt:</p>
+
+<ul>
+	<li><code>(1)</code>, <code>(2)</code>, <code>(3)</code> – lungime <code>1</code></li>
+	<li><code>(1, 1)</code>, <code>(1, 2)</code>, <code>(2, 1)</code>, <code>(2, 2)</code>, <code>(3, 3)</code> – lungime <code>2</code></li>
+	<li><code>(1, 1, 1)</code>, <code>(1, 1, 2)</code>, <code>(1, 2, 1)</code>, <code>(2, 1, 1)</code>, <code>(1, 2, 2)</code>, <code>(2, 1, 2)</code>, <code>(2, 2, 1)</code>, <code>(2, 2, 2)</code>, <code>(3, 3, 3)</code> – lungime <code>3</code></li>
+</ul>
+
+<p>Pentru al doilea exemplu, traseele sunt:</p>
+
+<ul>
+	<li><code>(1)</code>, <code>(2)</code>, <code>(3)</code> – lungime <code>1</code></li>
+	<li><code>(1, 2)</code>, <code>(2, 1)</code> – lungime <code>2</code></li>
+</ul>		</article>
+		</body></html>

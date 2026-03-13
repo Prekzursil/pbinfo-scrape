@@ -1,0 +1,156 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1706"><article id="enunt">
+			Pasionată de astronomie, Teodora dorește să țină evidența numărului de stele din galaxii. Pentru a face lucrurile mai interesante, ea codifică aceste numere într-un sistem propriu, transformându-le într-o înșiruire de litere și cifre după algoritmul următor: 
+<ul>
+	<li>notează fiecare putere a lui <code>2</code>, strict mai mică decât <code>2</code><sup><code>26</code></sup>, cu o literă a alfabetului, astfel:</li>
+</ul>
+
+<table class="table table-bordered">
+		<tbody><tr>
+			<td> <code>2</code><sup><code>0</code></sup> </td>
+			<td> <code>2</code><sup><code>1</code></sup> </td>
+			<td> <code>2</code><sup><code>2</code></sup> </td>
+			<td> <code>2</code><sup><code>3</code></sup> </td>
+			<td> <code>2</code><sup><code>4</code></sup> </td>
+			<td> <code>2</code><sup><code>5</code></sup> </td>
+			<td> <code>2</code><sup><code>6</code></sup> </td>
+			<td> <code>2</code><sup><code>7</code></sup> </td>
+			<td> <code>2</code><sup><code>8</code></sup> </td>
+			<td> <code>2</code><sup><code>9</code></sup> </td>
+			<td> <code>2</code><sup><code>10</code></sup> </td>
+			<td> <code>2</code><sup><code>11</code></sup> </td>
+			<td> <code>2</code><sup><code>12</code></sup> </td>
+		</tr>
+		<tr>
+			<td> a </td>
+			<td> b </td>
+			<td> c </td>
+			<td> d </td>
+			<td> e </td>
+			<td> f </td>
+			<td> g </td>
+			<td> h </td>
+			<td> i </td>
+			<td> j </td>
+			<td> k </td>
+			<td> l </td>
+			<td> m </td>
+		</tr>
+		<tr>
+			<td> <code>2</code><sup><code>13</code></sup> </td>
+			<td> <code>2</code><sup><code>14</code></sup> </td>
+			<td> <code>2</code><sup><code>15</code></sup> </td>
+			<td> <code>2</code><sup><code>16</code></sup> </td>
+			<td> <code>2</code><sup><code>17</code></sup> </td>
+			<td> <code>2</code><sup><code>18</code></sup> </td>
+			<td> <code>2</code><sup><code>19</code></sup> </td>
+			<td> <code>2</code><sup><code>20</code></sup> </td>
+			<td> <code>2</code><sup><code>21</code></sup> </td>
+			<td> <code>2</code><sup><code>22</code></sup> </td>
+			<td> <code>2</code><sup><code>23</code></sup> </td>
+			<td> <code>2</code><sup><code>24</code></sup> </td>
+			<td> <code>2</code><sup><code>25</code></sup> </td>
+		</tr>
+		<tr>
+			<td> n </td>
+			<td> o </td>
+			<td> p </td>
+			<td> q </td>
+			<td> r </td>
+			<td> s </td>
+			<td> t </td>
+			<td> u </td>
+			<td> v </td>
+			<td> w </td>
+			<td> x </td>
+			<td> y </td>
+			<td> z </td>
+		</tr>
+</tbody></table>
+
+<ul>
+	<li>reprezintă fiecare număr ca un șir de cifre și litere obținut din scrierea acelui număr ca sumă de puteri ale lui <code>2</code>; dacă o putere este folosită de mai multe ori în descompunerea numărului atunci ea va fi precedată în șir de numărul de utilizări.</li>
+</ul>
+
+<p>Un număr poate fi reprezentat astfel în mai multe moduri. De exemplu, pentru numărul <code>100</code> printre variantele de reprezentare avem:</p>
+
+<ul>
+	<li><code>100 = cfg = 2</code><sup><code>2</code></sup><code>+2</code><sup><code>5</code></sup><code>+2</code><sup><code>6</code></sup><code> = 4+32+64 = 100</code></li>
+	<li><code>100 = 2ab2cde2f = 2*2</code><sup><code>0</code></sup><code>+2</code><sup><code>1</code></sup><code>+2*2</code><sup><code>2</code></sup><code>+2</code><sup><code>3</code></sup><code>+2</code><code>4</code><code>+2*2</code><sup><code>5</code></sup><code> = 2*1+2+2*4+8+16+2*32 = 100</code></li>
+	<li><code>100 = 16bcg = 16*2</code><sup><code>1</code></sup><code>+2</code><sup><code>2</code></sup><code>+2</code><sup><code>6</code></sup><code> = 16*2+4+64 = 100</code></li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Scrieți un program care rezolvă următoarele cerinţe:</p>
+
+<ol>
+	<li>cunoscând <code>s</code> numărul de stele dintr-o galaxie, determină o reprezentare codificată a acestui număr formată doar din litere mici distincte ordonate alfabetic;</li>
+	<li>cunoscând <code>g</code>, reprezentând numărul de galaxii și <code>g</code> numere în scriere codificată, reprezentând numărul de stele din fiecare galaxie, determină scrierea zecimală a numărului total de stele din cele <code>g</code> galaxii.</li>
+</ol>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>stele.in</code> conține pe prima linie un număr natural <code>c</code>, reprezentând cerinţa care trebuie rezolvată (1 sau 2). Dacă cerinţa este 1, pe a doua linie se află un număr natural <code>s</code>, ce reprezintă numărul care trebuie codificat. </p>
+
+<p>Dacă cerinţa este 2, pe a doua linie se află un număr natural <code>g</code> reprezentând numărul de galaxii, iar pe următoarele <code>g</code> linii câte un șir de caractere reprezentând numărul de stele dintr-o galaxie, codificat folosind algoritmul descris mai sus.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>stele.out</code> va conţine o singură linie pe care va fi scris un șir de litere mici distincte, ordonate alfabetic, reprezentând scrierea codificată a numărului <code>s</code> (dacă cerinţa este 1) sau un număr natural în scriere zecimală ce reprezintă numărul total de stele din cele <code>g</code> galaxii (dacă cerinţa este 2).</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ s ≤ 2</code><sup><code>26</code></sup><code>-1</code></li>
+	<li><code>1 ≤ g ≤ 1000</code></li>
+	<li>Reprezentările codificate din fişierul de intrare pot avea maximum <code>420</code> caractere.</li>
+	<li>Numărul care poate apărea în fața unei litere poate avea maximum <code>15</code> cifre.</li>
+	<li>Pentru teste valorând 30% din punctaj cerinţa este 1.</li>
+	<li>Pentru teste corespunzătoare cerinţei 2 valorând 20% din punctaj valoarea obținută nu depășește <code>10</code><sup><code>18</code></sup></li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>stele.in</code></p>
+
+<pre>1
+100</pre>
+
+<p><code>stele.out</code></p>
+
+<pre>cfg</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerința este 1. Reprezentarea numărului <code>100</code>  care respectă cerinţa este: <code>cfg = 2</code><sup><code>2</code></sup><code>+2</code><sup><code>5</code></sup><code>+2</code><sup><code>6</code></sup><code> = 4+32+64 = 100</code></p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>stele.in</code></p>
+
+<pre>2
+5
+2a7g
+17b5d14g
+100a2000b
+7e15f
+2d6f</pre>
+
+<p><code>stele.out</code></p>
+
+<pre>6320</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerința este 2 și avem <code>5</code> numere:</p>
+
+<ul>
+	<li><code>2a7g = 450</code></li>
+	<li><code>17b5d14g = 970</code></li>
+	<li><code>100a2000b = 4100</code></li>
+	<li><code>7e15f = 592</code></li>
+	<li><code>2d6f = 208</code></li>
+</ul>
+
+<p>Suma lor este: <code>450 + 970 + 4100 + 592 + 208 = 6320</code></p>		</article>
+		</body></html>

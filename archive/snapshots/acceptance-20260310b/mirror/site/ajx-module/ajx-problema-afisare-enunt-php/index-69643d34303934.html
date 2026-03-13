@@ -1,0 +1,100 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4094"><article id="enunt">
+			<p>Definim un număr <strong>liber de pătrate</strong> ca fiind un număr natural care nu are ca divizor niciun pătrat perfect mai mare ca <code>1</code>. Prin convenție, <code>1</code> este considerat liber de pătrate.</p>
+
+<p>Așadar, șirul numerelor libere de pătrate este: <code>1,2,3,5,6,7,10,11,13,14,15,17, ...</code></p>
+
+<p>Se consideră un șir de <code>N</code> numere naturale <code>X[i]</code>, <code>1 ≤ i ≤ N</code>, unde <code>N</code> este un număr natural. O secvență este un subșir format din numere aflate pe poziții consecutive în șirul dat. Definim o bisecvență ca un subșir nevid obținut prin eliminarea dintr-o secvență a unui număr care nu este la începutul sau la sfârșitul secvenței.</p>
+
+<h1>Cerința</h1>
+
+<p>1) Să se determine câte numere libere de pătrate conține șirul dat.<br>
+2) Să se determine cea mai lungă bisecvență din șir formată din numere libere de pătrate, obținută prin eliminarea unui număr care nu este liber de pătrate.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>oneout.in</code> conține pe primul rând un număr natural <code>C</code>, care poate fi doar <code>1</code> sau <code>2</code>, reprezentând cerința, pe a doua linie numărul natural <code>N</code> iar pe a treia linie <code>N</code> numere naturale, separate prin câte un spațiu, cu semnificația de mai sus.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă <code>C = 1</code>, în fișierul de ieșire <code>oneout.out</code> se va scrie numărul de numere libere de pătrate din șir. Dacă <code>C = 2</code>:<br>
+- pe prima linie a fișierului de ieșire <code>oneout.out</code> se vor scrie două numere <code>L</code> și <code>K</code> despărțite printr-un spațiu, unde <code>L</code> reprezintă lungimea maximă a unei bisecvențe cu proprietățile cerute, iar <code>K</code> reprezintă numărul de bisecvențe de lungime maximă existente în șir<br>
+- pe următoarele <code>K</code> linii se vor scrie indicii de început și de sfârșit ai fiecărei bisecvențe de lungime maximă găsite, în ordinea crescătoare a indicelui de start, despărțite printr-un spațiu<br>
+- dacă șirul nu conține nicio bisecvență cu proprietățile cerute, în fișierul de ieșire se va scrie <code>-1</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>3 ≤ N ≤ 1.000.000</code></li>
+	<li><code>2 ≤ X[i] ≤ 1.000.000</code>, <code>1 ≤ i ≤ N</code></li>
+	<li>Lungimea unei bisecvențe reprezintă numărul de numere din aceasta.</li>
+	<li>Datorită dimensiunilor prea mari ale testelor, s-au adăugat doar o parte din ele</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>oneout.in</code></p>
+
+<pre>1
+6
+10 2 12 7 8 15</pre>
+
+<p><code>oneout.out</code></p>
+
+<pre>4</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C = 1</code>, <code>N = 6</code>, <code>X</code><sub><code>1-6</code></sub> = <code>{10,2,12,7,8,15}</code>. Se rezolvă prima cerință. Sunt <code>4</code> numere libere de pătrate în șirul <code>X</code><sub><code>1-6</code></sub> și anume <code>10, 2, 7, 15</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>oneout.in</code></p>
+
+<pre>2
+6
+10 2 12 7 8 15</pre>
+
+<p><code>oneout.out</code></p>
+
+<pre>3 1
+1 4</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C = 2</code>, <code>N = 6</code>, <code>X</code><sub><code>1-6</code></sub> = <code>{10,2,12,7,8,15}</code>. Se rezolvă a doua cerință. Dacă se elimină <code>12</code> se obține bisecvența <code>10,2,7</code> de lungime <code>3</code>. Dacă se elimină <code>8</code> se obține bisecvența <code>7,15</code> de lungime <code>2</code>. Deci există o singură bisecvență de lungime maximă egală cu <code>3</code>, care începe în poziția <code>1</code> și se termină în poziția <code>4</code>.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>oneout.in</code></p>
+
+<pre>2
+7
+5 28 17 24 15 20 18</pre>
+
+<p><code>oneout.out</code></p>
+
+<pre>2 2
+1 3
+3 5</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C = 2</code>, <code>N = 7</code>, <code>X</code><sub><code>1-7</code></sub> = <code>{5,28,17,24,15,20,18}</code>. Se rezolvă a doua cerință. Dacă se elimină <code>28</code> se obține bisecvența <code>5,17</code> de lungime <code>2</code>. Dacă se elimină <code>24</code> se obține bisecvența <code>17,15</code> tot de lungime <code>2</code>. Deci există două bisecvențe de lungime maximă egală cu <code>2</code>. Prima începe în poziția <code>1</code> și se termină în poziția <code>3</code>. A doua începe în poziția <code>3</code> și se termină în poziția <code>5</code>.</p>
+
+<h1>Exemplul 4:</h1>
+
+<p><code>oneout.in</code></p>
+
+<pre>2
+9
+3 10 5 8 9 11 4 15 21</pre>
+
+<p><code>oneout.out</code></p>
+
+<pre>3 1
+6 9</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C = 2</code>, <code>N = 9</code>, <code>X</code><sub><code>1-9</code></sub> = <code>{3,10,5,8,9,11,4,15,21}</code>. Se rezolvă a doua cerință. <code>8</code> nu poate fi eliminat deoarece este situat la sfârșitul unei bisecvențe iar <code>9</code> nu poate fi eliminat pentru că ar fi începutul unei bisecvențe. Singurul număr care nu este liber de pătrate ce poate fi eliminat este <code>4</code> și se va obține bisecvența <code>11,15,21</code> de lungime <code>3</code> care începe în poziția <code>6</code> și se termină în poziția <code>9</code>.</p>		</article>
+		</body></html>

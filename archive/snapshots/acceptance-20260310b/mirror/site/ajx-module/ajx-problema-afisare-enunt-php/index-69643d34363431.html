@@ -1,0 +1,61 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4641"><article id="enunt">
+			<p>Domnișoara R este o tânără foarte pasionată de medicină. Aceasta, pregătindu-se constant pentru admiterea la <span class="caps">UMF</span>, constată că are un obstacol – Stresu’. Domnișoara R are o casă cu <code>N x M</code> camere, aranjate pe <code>N</code> linii (numerotate de la <code>1</code> la <code>N</code>) și <code>M</code> coloane (numerotate de la <code>1</code> la <code>M</code>), dintre care <code>B</code> camere sunt inaccesibile (nu este permis accesul în acestea). Vom nota cu <code>[i, j]</code> (<code>1 ≤ i ≤ N</code>, <code>1 ≤ j ≤ M</code>) camera situată pe linia <code>i</code> și coloana <code>j</code>. Pentru că Universul este neprietenos, vrea să îi pună bețe în roate d-rei. R și astfel îl trimite pe Stresu’ în casa acesteia în camera <code>[X,Y]</code>, care este o cameră accesibilă. Stresu’ se poate deplasa în orice cameră adiacentă camerei în care se află (situată pe aceeași linie pe o coloană alăturată sau pe aceeași coloană pe o linie alăturată) sau își poate folosi unul dintre așii din mânecă. Stresu’ dispune de <code>Q</code> ași. Când utilizează asul cu numărul <code>i</code> (<code>1 ≤ i ≤ Q</code>) Stresu’ se poate deplasa din camera <code>[L1</code><sub><code>i</code></sub>, <code>C1</code><sub><code>i</code></sub><code>]</code> în camera <code>[L2</code><sub><code>i</code></sub>, <code>C2</code><sub><code>i</code></sub><code>]</code>. Orice deplasare (utilizând un as sau într-o cameră adiacentă) necesită o secundă și deplasarea nu poate fi efectuată dacă presupune revenirea în ultima cameră care a fost vizitată. Se garantează că dacă există un as în mânecă de la camera <code>[L1,C1]</code> la camera <code>[L2,C2]</code>, nu va exista un alt as de la camera <code>[L2,C2]</code> la camera <code>[L1,C1]</code>. </p>
+
+<p>Dra. R se află inițial în camera <code>[1, 1]</code>. Când aceasta constată că Stresu’ a intrat în casă, se panichează și urmează un traseu ilustrat printr-un șir de caractere care descrie direcțiile de deplasare:</p>
+
+<ul>
+	<li><code>L</code> – din camera <code>[i, j]</code> se va deplasa în camera <code>[i, j − 1]</code></li>
+	<li><code>R</code> – din camera <code>[i, j]</code> se va deplasa în camera <code>[i, j + 1]</code></li>
+	<li><code>U</code> – din camera <code>[i, j]</code> se va deplasa în camera <code>[i − 1, j]</code></li>
+	<li><code>D</code> – din camera <code>[i, j]</code> se va deplasa în camera <code>[i + 1, j]</code></li>
+</ul>
+
+<p>Se garantează că d-ra R nu va trece prin camere inaccesibile. Stresu’ și d-ra R nu pot staționa în camere, fiecare dintre ei trebuie să efectueze o deplasare la fiecare secundă.</p>
+
+<h1>Cerința</h1>
+
+<p>Știind că scopul lui Stresu’ este să o prindă pe d-ra R, scrieți un program care să determine timpul minim în care Stresu’ poate ajunge în aceeași cameră cu d-ra R.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>drar.in</code> conține pe prima linie numerele <code>N M Q X Y B</code>, reprezentând dimensiunile casei d-rei R, numărul de ași din mâneca lui Stresu’, coordonatele camerei pe unde intră Stresu’, respectiv numărul de camere inaccesibile. Următoarele <code>B</code> linii conțin camerele inaccesibile, câte o cameră pe o linie. Pe următoarele <code>Q</code> linii sunt descriși așii, câte un as pe o linie, sub forma celor 4 numere <code>L1</code><sub><code>i</code></sub> <code>C1</code><sub><code>i</code></sub> <code>L2</code><sub><code>i</code></sub> <code>C2</code><sub><code>i</code></sub>, (<code>1 ≤ i ≤ Q</code>) cu semnificația din enunț. Pe ultima linie din fișier se va afla șirul de caractere care descrie modul în care se deplasează d-ra R. Numerele scrise pe aceeași linie sunt separate prin câte un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>drar.out</code> va conține o singură linie pe care va fi scris timpul minim în care Stresu’ poate ajunge în aceeași cameră cu d-ra R sau valoarea <code>−1</code> dacă acest lucru nu este posibil.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N, M ≤ 200</code></li>
+	<li><code>1 ≤ X ≤ N</code>, <code>1 ≤ Y ≤ M</code></li>
+	<li><code>0 ≤ Q ≤ 1000</code></li>
+	<li><code>0 ≤ B ≤ N x M</code></li>
+	<li><code>1 ≤ L1i, L2i ≤ N</code>, <code>1 ≤ C1i, C2i ≤ M</code></li>
+	<li><code>1 ≤ lungimea traseului ≤ 200</code></li>
+	<li>Pentru 10 puncte, <code>X = Y = 1</code></li>
+	<li>Pentru 30 de puncte, <code>1 ≤ N, M ≤ 6</code>, <code>0 ≤ Q ≤ 3</code></li>
+	<li>Pentru 30 de puncte, <code>7 ≤ N, M ≤ 50</code></li>
+	<li>Pentru 30 de puncte, nu există restricții suplimentare.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>drar.in</code></p>
+
+<pre>6 6 4 5 2 5
+2 1
+4 4
+2 4
+3 2
+2 6
+6 4 2 2
+3 4 2 3
+5 1 2 5
+3 5 3 3
+RRRRDD</pre>
+
+<p><code>drar.out</code></p>
+
+<pre>6</pre>		</article>
+		</body></html>

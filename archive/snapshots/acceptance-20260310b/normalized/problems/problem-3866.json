@@ -1,0 +1,315 @@
+{
+  "id": 3866,
+  "slug": "xcopy",
+  "name": "xcopy",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3866/xcopy",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 25,
+      "name": "Metoda Greedy",
+      "slug": "metoda-greedy",
+      "href": "/?pagina=probleme-lista&tag=25"
+    },
+    {
+      "id": 24,
+      "name": "Probleme diverse cu metoda Greedy",
+      "slug": "probleme-diverse-cu-metoda-greedy",
+      "href": "/?pagina=probleme-lista&tag=24"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Pentru a nu ridica suspiciuni prea mari, elevii doresc să creeze temele astfel încât cea mai mare valoare a unei teme să fie cât mai mică posibil. Fiind date dimensiunile clasei, <code>N</code> și <code>M</code>, contruiți o configurație a valorilor temelor fiecarui elev din clasă astfel încât profesorul să nu își dea seama că aceștia au copiat.</p>",
+      "text": "Pentru a nu ridica suspiciuni prea mari, elevii doresc să creeze temele astfel încât cea mai mare valoare a unei teme să fie cât mai mică posibil. Fiind date dimensiunile clasei, N și M, contruiți o configurație a valorilor temelor fiecarui elev din clasă astfel încât profesorul să nu își dea seama că aceștia au copiat."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Programul citește de la tastatură două numere separate printr-un singur spațiu, <code>N</code> și <code>M</code> cu semnificația de mai sus.</p>",
+      "text": "Programul citește de la tastatură două numere separate printr-un singur spațiu, N și M cu semnificația de mai sus."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Datele de ieșire constau în afișarea configurației temelor fiecărui elev. La ecran se vor afla <code>N</code> rânduri, iar pe fiecare rând se vor afla <code>M</code> numere naturale separate printr-un spațiu. Acestea reprezintă răspunsurile copiilor, corespunzătoare poziției lor în clasă.</p>",
+      "text": "Datele de ieșire constau în afișarea configurației temelor fiecărui elev. La ecran se vor afla N rânduri, iar pe fiecare rând se vor afla M numere naturale separate printr-un spațiu. Acestea reprezintă răspunsurile copiilor, corespunzătoare poziției lor în clasă."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N, M ≤ 2000</code></li>\n\t<li>Subtask 1 (7 puncte) – <code>N = 1</code></li>\n\t<li>Subtask 2 (9 puncte) – <code>N</code> și <code>M</code> sunt puteri ale lui 2</li>\n\t<li>Subtask 3 (14 puncte) – <code>N</code> este putere a lui 2</li>\n\t<li>Subtask 1 (70 de puncte) – fără restricții suplimentare</li>\n</ul>",
+      "text": "1 ≤ N, M ≤ 2000 Subtask 1 (7 puncte) – N = 1 Subtask 2 (9 puncte) – N și M sunt puteri ale lui 2 Subtask 3 (14 puncte) – N este putere a lui 2 Subtask 1 (70 de puncte) – fără restricții suplimentare"
+    },
+    {
+      "title": "Punctare",
+      "html": "<p>Această problemă acceptă și soluții parțiale, astfel se va acorda punctaj parțial pentru fiecare test, în funcție de cât de aproape de răspunsul optim este soluția dată folosind următoarea formulă:</p><p>\\( S \\cdot max(1 – \\sqrt{\\frac{\\frac{G}{O} – 1}{3}}, 0) \\)</p><p>Unde:</p><ul>\n\t<li><code>S</code> este punctajul testului</li>\n\t<li><code>G</code> este răspunsul dat</li>\n\t<li><code>O</code> este răspunsul optim</li>\n</ul><p><strong>Atenție!</strong> O soluție care nu respectă toate cerințele problemei pentru un anumit test (toate numerele să fie distincte și oricare două numere adiacente să difere printr-un singur bit) va fi punctată cu <code>0</code> pe acel test.</p>",
+      "text": "Această problemă acceptă și soluții parțiale, astfel se va acorda punctaj parțial pentru fiecare test, în funcție de cât de aproape de răspunsul optim este soluția dată folosind următoarea formulă:\\( S \\cdot max(1 – \\sqrt{\\frac{\\frac{G}{O} – 1}{3}}, 0) \\)Unde: S este punctajul testului G este răspunsul dat O este răspunsul optim Atenție! O soluție care nu respectă toate cerințele problemei pentru un anumit test (toate numerele să fie distincte și oricare două numere adiacente să difere printr-un singur bit) va fi punctată cu 0 pe acel test."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><strong>Intrare</strong></p><pre>3 3</pre><p><strong>Ieșire</strong></p><pre>5 4 6\n1 0 2\n9 8 10</pre><h3>Explicație</h3><p>În această secțiune, indicele poziționat in dreapta-jos a numărului reprezintă baza în care este scris. Spre exemplu, opt poate fi scris drept <code>8</code><sub><code>10</code></sub> = <code>1000</code><sub><code>2</code></sub>. Unul dintre răspunsurile optime pentru copii sunt date în urmatorul tabel:</p><p><img alt=\"\" src=\"/resurse/16a4b0/xcopy_1.jpg\"></p><p>Putem observa că între oricare două bănci adiacente numerele elevilor din acele bănci diferă cu exact un bit. Valoarea maximă a soluției este <code>10</code> și este răspunsul optim. Este evident că există și alte răspunsuri optime, spre exemplu soluția propusă dar oglindită vertical sau orizontal.</p><p>Una dintre soluțiile parțiale posibile în care maximul este <code>15</code> este:</p><p><img alt=\"\" src=\"/resurse/16a4b0/xcopy_2.jpg\"></p><p>Această soluție ar fi punctată, conform formulei de punctare, cu <code>59,1%</code> din punctajul testului.</p>",
+      "text": "Intrare3 3Ieșire5 4 6 1 0 2 9 8 10ExplicațieÎn această secțiune, indicele poziționat in dreapta-jos a numărului reprezintă baza în care este scris. Spre exemplu, opt poate fi scris drept 810 = 10002. Unul dintre răspunsurile optime pentru copii sunt date în urmatorul tabel:Putem observa că între oricare două bănci adiacente numerele elevilor din acele bănci diferă cu exact un bit. Valoarea maximă a soluției este 10 și este răspunsul optim. Este evident că există și alte răspunsuri optime, spre exemplu soluția propusă dar oglindită vertical sau orizontal.Una dintre soluțiile parțiale posibile în care maximul este 15 este:Această soluție ar fi punctată, conform formulei de punctare, cu 59,1% din punctajul testului."
+    }
+  ],
+  "examples": [
+    {
+      "input": "3 3",
+      "output": "5 4 6\n1 0 2\n9 8 10",
+      "explanation": "În această secțiune, indicele poziționat in dreapta-jos a numărului reprezintă baza în care este scris. Spre exemplu, opt poate fi scris drept 810 = 10002. Unul dintre răspunsurile optime pentru copii sunt date în urmatorul tabel:"
+    }
+  ],
+  "constraints": [
+    "1 ≤ N, M ≤ 2000",
+    "Subtask 1 (7 puncte) – N = 1",
+    "Subtask 2 (9 puncte) – N și M sunt puteri ale lui 2",
+    "Subtask 3 (14 puncte) – N este putere a lui 2",
+    "Subtask 1 (70 de puncte) – fără restricții suplimentare"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q854e00b32d.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/xcopy_1.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-xcopy-1-jpg.jpg",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/xcopy_2.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-xcopy-2-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "11",
+    "intrare/ieșire": "tastatură / ecran",
+    "limită timp": "1 secunde",
+    "limită memorie": "256 MB / 8 MB",
+    "sursa problemei": "EJOI 2021, ziua 1",
+    "autor": "Theodor-Gabriel Tulba-Lecu, Ioan Cristian Pop",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 1,
+  "memoryLimitMb": 256,
+  "author": "Theodor-Gabriel Tulba-Lecu, Ioan Cristian Pop",
+  "sourceAttribution": "EJOI 2021, ziua 1",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3866/xcopy"
+}

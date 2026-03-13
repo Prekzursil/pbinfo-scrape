@@ -1,0 +1,299 @@
+{
+  "id": 3640,
+  "slug": "xor-tree",
+  "name": "Xor Tree",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3640/xor-tree",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 53,
+      "name": "Programare dinamică",
+      "slug": "programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=53"
+    },
+    {
+      "id": 54,
+      "name": "Probleme diverse de programare dinamică",
+      "slug": "probleme-diverse-de-programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=54"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p><em>Combatanții ti-au dat acum un arbore ce a prins o nouă viață algoritmică</em></p><p>Se dă un arbore cu <code>n</code> noduri, cu rădăcina în nodul <code>1</code>. Rădăcina nu este considerată frunză chiar dacă are gradul <code>1</code>. Fiecare nod are un cost asociat și o stare(activ sau inactiv), la început toate nodurile fiind active.</p><p>La o operație putem alege o frunză și schimba starea tuturor nodurilor pe drumul de la rădăcină la frunză.</p><p>Scopul este să aflați suma maximă a nodurilor active pe care o putem obține, știind că putem realiza operația dată de câte ori vrem pentru fiecare frunză.</p>",
+      "text": "Combatanții ti-au dat acum un arbore ce a prins o nouă viață algoritmicăSe dă un arbore cu n noduri, cu rădăcina în nodul 1. Rădăcina nu este considerată frunză chiar dacă are gradul 1. Fiecare nod are un cost asociat și o stare(activ sau inactiv), la început toate nodurile fiind active.La o operație putem alege o frunză și schimba starea tuturor nodurilor pe drumul de la rădăcină la frunză.Scopul este să aflați suma maximă a nodurilor active pe care o putem obține, știind că putem realiza operația dată de câte ori vrem pentru fiecare frunză."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Programul citește pe prima linie de la tastatură numărul <code>n</code>. </p><p>Pe următoarele <code>n-1</code> linii se vor citi muchiile arborelui, <code>a b</code> reprezentând faptul că există o muchie de la <code>a</code> la <code>b</code>. </p><p>Pe următoarea linie se vor citi cele <code>n</code> costuri. </p>",
+      "text": "Programul citește pe prima linie de la tastatură numărul n. Pe următoarele n-1 linii se vor citi muchiile arborelui, a b reprezentând faptul că există o muchie de la a la b. Pe următoarea linie se vor citi cele n costuri."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Programul va afișa pe ecran suma maximă ce se poate obține.</p>",
+      "text": "Programul va afișa pe ecran suma maximă ce se poate obține."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ n ≤ 200000</code></li>\n\t<li>cele <code>n</code> costuri vor fi cuprinse între <code>-1.000.000.000</code> și <code>1.000.000.000</code></li>\n\t<li>Pentru <code>10</code> puncte, <code>1 ≤ n ≤ 20</code></li>\n\t<li>Pentru <code>20</code> de puncte, <code>1 ≤ n ≤ 1000</code></li>\n</ul>",
+      "text": "1 ≤ n ≤ 200000 cele n costuri vor fi cuprinse între -1.000.000.000 și 1.000.000.000 Pentru 10 puncte, 1 ≤ n ≤ 20 Pentru 20 de puncte, 1 ≤ n ≤ 1000"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><strong>Intrare</strong></p><pre>5\n1 2\n1 3\n2 4\n2 5\n1 2 4 -4 -5</pre><p><strong>Ieșire</strong></p><pre>7</pre><h3>Explicație</h3><p>În exemplu putem alege mai întâi nodul <code>4</code>, care va schimba starea nodurilor <code>4, 2 și 1</code>. Apoi, alegem nodul <code>5</code> care va schimba starea nodurilor <code>5, 2 și 1</code>. Astfel, nodurile <code>1, 2 și 3</code> vor rămâne active, iar suma lor este <code>7</code>.</p>",
+      "text": "Intrare5 1 2 1 3 2 4 2 5 1 2 4 -4 -5Ieșire7ExplicațieÎn exemplu putem alege mai întâi nodul 4, care va schimba starea nodurilor 4, 2 și 1. Apoi, alegem nodul 5 care va schimba starea nodurilor 5, 2 și 1. Astfel, nodurile 1, 2 și 3 vor rămâne active, iar suma lor este 7."
+    }
+  ],
+  "examples": [
+    {
+      "input": "5\n1 2\n1 3\n2 4\n2 5\n1 2 4 -4 -5",
+      "output": "7",
+      "explanation": "În exemplu putem alege mai întâi nodul 4, care va schimba starea nodurilor 4, 2 și 1. Apoi, alegem nodul 5 care va schimba starea nodurilor 5, 2 și 1. Astfel, nodurile 1, 2 și 3 vor rămâne active, iar suma lor este 7."
+    }
+  ],
+  "constraints": [
+    "1 ≤ n ≤ 200000",
+    "cele n costuri vor fi cuprinse între -1.000.000.000 și 1.000.000.000",
+    "Pentru 10 puncte, 1 ≤ n ≤ 20",
+    "Pentru 20 de puncte, 1 ≤ n ≤ 1000"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q5384142b3d.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Stefan Dascalescu stefdasca.ro (stefdasca)",
+    "clasa": "11",
+    "intrare/ieșire": "tastatură / ecran",
+    "limită timp": "2 secunde",
+    "limită memorie": "64 MB / 64 MB",
+    "sursa problemei": "IOIT 2020-21, Runda 1",
+    "autor": "Flaviu Craciun",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 2,
+  "memoryLimitMb": 64,
+  "author": "Flaviu Craciun",
+  "sourceAttribution": "IOIT 2020-21, Runda 1",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3640/xor-tree"
+}

@@ -1,0 +1,114 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1131"><article id="enunt">
+			<p>Irinuca a descoperit un nou joc pe calculator. Pe ecran sunt plasate pe o linie <code>n</code> bile colorate. Culorile bilelor sunt codificate cu numere naturale. Un subșir de bile alăturate având toate aceeași culoare se numește secvență. O secvență va conține numărul maxim de bile alăturate având aceeași culoare. Lungimea unei secvențe este egală cu numărul de bile din care este compusă.</p>
+
+<p>Irinuca are la dispoziție un arc special. Trăgând cu arcul asupra unei bile, dacă aceasta face parte dintr-o secvență de lungime cel puțin egală cu <code>3</code>, întreaga secvență va fi eliminată, iar bilele din dreapta secvenței se vor deplasa spre stânga pentru a umple “golul” lăsat de bilele eliminate. Dacă imediat în stânga și în dreapta secvenței eliminate se găseau două secvențe având aceeași culoare și dacă secvența obținută din unirea acestora după eliminare are o lungime cel puțin egală cu <code>3</code>, atunci va fi și ea eliminată la rândul ei. Procesul continuă până când secvențele din stânga și dreapta unei secvențe tocmai eliminate au culori diferite sau până când lungimea secvenței obținute prin alăturare este mai mică decât <code>3</code> sau până când în stânga ori în dreapta unei secvențe eliminate nu se mai găsesc bile sau până sunt eliminate toate bilele de pe ecran.</p>
+
+<p>Scopul jocului este de a elimina cât mai multe bile de pe ecran. Cum Irinuca încă nu se pricepe prea bine la acest joc și-a stabilit o strategie. Va trage cu arcul întotdeauna asupra unei bile ce face parte din secvența de lungime maximă de pe ecran. Dacă sunt mai multe astfel de secvențe, ea va alege cea mai din stânga secvență de lungime maximă. Dacă toate secvențele de pe ecran au lungimi mai mici decât 3, Irinuca nu va mai putea elimina nici una din ele și jocul se încheie.</p>
+
+<p>De exemplu, dacă șirul inițial de bile este <br>
+<code>5 1 3 3 </code><u><code>2 2 2 2</code></u><code> 3 1 1 5 6 4 4 4 4 7</code><br>
+Irinuca va acționa asupra unei bile de culoare <code>2</code>.  Prin eliminare se obține șirul de bile<br>
+<code>5 1 </code><u><code>3 3 3</code></u><code> 1 1 5 6 4 4 4 4 7</code><br>
+din care se elimină și secvența de bile de culoare <code>3</code> obținându-se șirul de bile<br>
+<code>5 1 1 1 5 6 </code><u><code>4 4 4 4</code></u><code> 7</code><br>
+din care se elimină și secvența de culoare <code>1</code>.<br>
+<code>5 5 6 </code><u><code>4 4 4 4</code></u><code> 7</code><br>
+Cum secvența de bile de culoare <code>5</code> nu este suficient de lungă, aceasta nu se mai elimină. Acum Irinuca trage asupra unei bile de culoare <code>4</code> și obține<br>
+<code>5 5 6 7</code><br>
+dar cum în stânga și în dreapta secvenței eliminate sunt secvențe de culori diferite, nu se va mai elimina nici o secvență. Jocul se încheie deoarece nu mai există nici o secvență de lungime cel puțin <code>3</code> asupra căreia să se poată trage.</p>
+
+<h1>Cerinţă</h1>
+
+<p>Cunoscând numărul de bile și culorile fiecărei bile de pe ecran se cere să se determine:</p>
+
+<p><strong>1.</strong> numărul de secvențe de bile care se aflau inițial pe ecran;<br>
+<strong>2.</strong> numărul de bile care rămân neeliminate de pe ecran și culorile bilelor rămase în ordine pe ecran la finalul jocului.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>arc.in</code> conține pe prima linie un număr natural <code>V</code>. Pentru toate testele de intrare, numărul <code>V</code> poate avea doar valoarea <code>1</code> sau <code>2</code>.</p>
+
+<p>A doua linie conține un număr natural <code>n</code> reprezentând numărul de bile, iar a treia linie conține <code>n</code> numere naturale <code>c</code><sub><code>1</code></sub>, <code>c</code><sub><code>2</code></sub>, …, <code>c</code><sub><code>n</code></sub>  separate prin câte un spațiu, reprezentând culorile celor <code>n</code> bile de pe ecran.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă valoarea lui <code>V</code> este <code>1</code>,  se va rezolva numai punctul <code>1</code> din cerință. </p>
+
+<p>În acest caz, în fişierul de ieşire <code>arc.out</code> se va scrie un singur număr natural <code>n</code><sub><code>1</code></sub>, reprezentând numărul de secvențe de bile aflate inițial pe ecran. </p>
+
+<p>Dacă valoarea lui <code>V</code> este <code>2</code>, se va rezolva numai punctul <code>2</code> din cerință.</p>
+
+<p>În acest caz, în fişierul de ieşire <code>arc.out</code> se va scrie pe prima linie un singur număr natural <code>n</code><sub><code>2</code></sub>, reprezentând numărul de bile care rămân neeliminate de pe ecran la finalul jocului, iar pe următoarele <code>n</code><sub><code>2</code></sub> linii se va scrie câte un număr natural reprezentând în ordine culorile bilelor rămase neeliminate la finalul jocului.</p>
+
+<p>Dacă la finalul jocului nu mai rămâne nici o bilă neeliminată, fișierul de ieșire va conține pe prima sa linie valoarea <code>0</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 10 000</code></li>
+	<li><code>1 ≤ c</code><sub><code>1</code></sub>, <code>c</code><sub><code>2</code></sub>, …, <code>c</code><sub><code>n</code></sub><code> ≤ 100 000</code></li>
+	<li>Pentru rezolvarea corectă a primei cerinţe se acordă 20 de puncte, iar pentru cerința a doua se acordă 80 de puncte.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>arc.in</code></p>
+
+<pre>1
+18
+5 1 3 3 2 2 2 2 3 1 1 5 6 4 4 4 4 7</pre>
+
+<p><code>arc.out</code></p>
+
+<pre>10</pre>
+
+<h1>Explicație</h1>
+
+<p><code>V = 1</code></p>
+
+<p><strong>Atenție!</strong> Pentru acest test se rezolvă doar cerința 1.</p>
+
+<p>Secvențele sunt <code>(5)</code>, <code>(1)</code>, <code>(3, 3)</code>, <code>(2,2,2,2)</code>, <code>(3)</code>, <code>(1,1)</code>, <code>(5)</code>, <code>(6)</code>, <code>(4,4,4,4)</code>, <code>(7)</code>.</p>
+
+
+<h1>Exemplul 2</h1>
+
+<p><code>arc.in</code></p>
+
+<pre>2
+18
+5 1 3 3 2 2 2 2 3 1 1 5 6 4 4 4 4 7</pre>
+
+<p><code>arc.out</code></p>
+
+<pre>4
+5
+5
+6
+7</pre>
+
+<h1>Explicație</h1>
+
+<p><code>V = 2</code></p>
+
+<p><strong>Atenție!</strong> Pentru acest test se rezolvă doar cerința 2.</p>
+
+
+<h1>Exemplul 3</h1>
+
+<p><code>arc.in</code></p>
+
+<pre>2
+15
+1 2 2 2 2 1 1 3 3 3 4 4 4 4 3</pre>
+
+<p><code>arc.out</code></p>
+
+<pre>0</pre>
+
+<h1>Explicație</h1>
+
+<p><code>V = 2</code></p>
+
+<p><strong>Atenție!</strong> Pentru acest test se rezolvă doar cerința 2.</p>		</article>
+		</body></html>

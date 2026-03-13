@@ -1,0 +1,69 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1121"><article id="enunt">
+			<p><img align="right" alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-p2048-png.png"> Ada și Ben sunt pasionați de jocurile pe calculator și tocmai au descoperit cea mai recentă versiune a jocului <strong>2048</strong>.</p>
+
+<p>Regulile jocului sunt foarte simple:</p>
+
+<ul>
+	<li>se pornește de la un șir de <code>N</code> piese pe care sunt înscrise numere din mulțimea <code>{2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048}</code>;</li>
+	<li>piesele sunt așezate în locații numerotate consecutiv cu numerele  <code>1,2,…, N</code>;</li>
+	<li>la fiecare pas, poate avea loc o <span class="caps">MUTARE</span> la <span class="caps">STÂNGA</span> sau o <span class="caps">MUTARE</span> la <span class="caps">DREAPTA</span>;</li>
+	<li>pentru fiecare joc este stabilit un număr maxim de mutări <code>M</code>;</li>
+	<li>dacă are loc o <span class="caps">MUTARE</span> la <span class="caps">DREAPTA</span>, atunci:
+	<ul>
+		<li>piesele pot fuziona la dreapta, începând cu penultima piesă din şir: dacă o piesă se află pe o poziție <code>i</code> și are înscrisă valoarea <code>k</code>, iar pe poziția <code>i+1</code> se află o piesă cu aceeași valoare <code>k</code>, atunci aceste piese vor “fuziona”, pe poziția <code>i+1</code> se va obține o piesă cu valoarea <code>2•k</code>, iar pe poziția <code>i</code> rămâne o locație liberă;</li>
+		<li>după efectuarea fuzionărilor, piesele se aliniază la dreapta, astfel încât ultima piesă să se afle pe poziția n;</li>
+	</ul></li>
+	<li>dacă are loc o <span class="caps">MUTARE</span> la <span class="caps">STÂNGA</span>, atunci:
+	<ul>
+		<li>piesele pot fuziona la stânga, începând cu a doua piesă din șir: dacă o piesă se află pe o poziție <code>i</code> și are înscrisă valoarea <code>k</code>, iar pe poziția <code>i-1</code> se află o piesă cu aceeași valoare <code>k</code> , atunci aceste piese vor “fuziona”, pe poziția <code>i-1</code> se va obține o piesă cu valoarea <code>2•k</code>, iar pe poziția <code>i</code> rămâne o locație liberă;</li>
+		<li>după efectuarea fuzionărilor, piesele se aliniază la stânga, astfel încât prima piesă să se afle pe poziția <code>1</code>;</li>
+	</ul></li>
+	<li>jocul se încheie atunci când se ajunge în una dintre următoarele situații:
+	<ul>
+		<li>pe cel puțin una dintre piese se află înscrisă valoarea <code>2048</code>;</li>
+		<li>valorile înscrise nu se mai pot modifica prin mutarea pieselor;</li>
+		<li>s-au efectuat toate cele <code>M</code> mutări.</li>
+	</ul></li>
+	</ul>
+
+<h1>Cerinţe</h1>
+
+<p>Scrieţi un program care să citească numerele naturale <code>N</code> (numărul inițial de piese) și <code>M</code> (numărul maxim de mutări),  un șir de <code>N</code> numere reprezentând, în ordine, numerele înscrise pe cele <code>N</code> piese și cel mult <code>M</code> caractere din mulțimea <code>{S, D}</code> ce reprezintă mutările fixate de către Ada și Ben, și care determină: <br>
+a) numărul <code>X</code> de mutări efectuate până la încheierea jocului;  <br>
+b) numărul maxim <code>Y</code> înscris pe una dintre piese la încheierea jocului;  <br>
+c) numărul maxim <code>Z</code> de fuzionări efectuate la o mutare.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>p2048.in</code> conține pe prima linie, separate  prin câte un spaţiu, numerele <code>N</code> și <code>M</code>. A doua linie a fişierului conţine cele <code>N</code> numere înscrise, în ordine, pe piese, separate prin câte un spaţiu. A treia linie a fișierului conține cele <code>M</code> caractere, separate prin câte un spaţiu, ce reprezintă cele <code>M</code> direcții de mutare.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>p2048.out</code> va conține pe prima linie numărul <code>X</code>, pe a doua linie numărul <code>Y</code> și pe a treia linie numărul <code>Z</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N,M ≤ 10000</code>;</li>
+	<li>caracterul <code>D</code> indică o mutare la dreapta, iar caracterul <code>S</code> indică o mutare la stânga;<br>
+pentru rezolvarea cerinţei a) se acordă 40% din punctaj, pentru cerinţa b) 40% din punctaj și pentru cerinţa c) 20% din punctaj.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>p2048.in</code></p>
+
+<pre>7 10 
+16 4 4 2 2 4 8
+D D S D S D S S D D</pre>
+
+<p><code>p2048.out</code></p>
+
+<pre>4
+32
+2</pre>
+
+<h1>Explicație</h1>
+
+<p>Succesiunea de mutări este reprezentată în figura de mai sus. Au fost efectuate <code>4</code> mutări până la încheierea jocului, cea mai mare valoare înscrisă pe una dintre piese fiind <code>32</code>. Numărul maxim de fuzionări, două, a fost obținut la prima mutare.</p>		</article>
+		</body></html>

@@ -1,0 +1,77 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4449"><article id="enunt">
+			<p>Clubul Sportiv <span class="caps">SEPI</span> are și o secție de patinaj artistic. Conducerea clubului și-a propus să participe la proba de perechi a următoarei olimpiade și are de luat unele decizii privind echipele pe care le poate înscrie. </p>
+
+<p>Fiecare echipă participantă la olimpiadă trebuie să fie formată dintr-o pereche de patinatori (o fată și un băiat) și un antrenor. În plus, valorile membrilor unei echipe trebuie să fie cât mai apropiate. Valoarea unui sportiv și respectiv a unui antrenor este calculată pe baza rezultatelor obținute la competițiile anterioare. Acestea sunt codificate sub forma unui singur număr cu cel mult <code>9</code> cifre. Fiecare cifră a numărului reprezintă un rezultat anterior, iar \textbf{suma cifrelor reprezintă valoarea sportivului, respectiv antrenorului}. De exemplu, numărul <code>18305</code> codifică  rezultatele <code>1</code>, <code>8</code>, <code>3</code>, <code>0</code>, <code>5</code>, obținute la ultimele <code>5</code> concursuri, ceea ce corespunde valorii <code>17 (= 1 + 8 + 3 + 0 + 5)</code>.</p>
+
+<p>La olimpiadă fiecare sportiv și fiecare antrenor poate să facă parte din cel mult o echipă înscrisă. În plus, pentru fiecare echipă, dacă notăm cu <code>VM</code> maximul dintre valorile antrenorului, fetei și băiatului și cu <code>Vm</code> minimul dintre valorile antrenorului, fetei și băiatului, înscrierea în concurs este permisă doar dacă <code>VM - Vm ≤ 1</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând numerele care codifică rezultatele antrenorilor, fetelor și băieților, scrieți un program care să determine:<br>
+1) Numărul maxim de echipe, <code>NP</code>, pe care le poate înscrie Clubul Sportiv <span class="caps">SEPI</span> la olimpiadă astfel încât acestea să respecte regulile de mai sus.<br>
+2) Valoarea maximă, <code>V</code>, a unui antrenor al clubului care poate antrena o pereche de patinatori (fată, băiat), ce poate fi înscrisă la olimpiadă conform regulilor de mai sus și numărul de variante <code>NV</code> în care se poate alege o echipă care poate fi pregătită de un antrenor de valoare <code>V</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>patinaj.in</code> conține:</p>
+
+<ul>
+	<li>pe prima linie numărul natural <code>C</code> care reprezintă numărul cerinței și poate avea una dintre valorile <code>1</code> sau <code>2</code>;</li>
+	<li>pe cea de-a doua linie, un număr natural <code>N</code>, care reprezintă atât numărul antrenorilor angajați, cât și al fetelor și al băieților legitimați la club;</li>
+	<li>pe fiecare dintre următoarele trei linii câte <code>N</code> valori, despărțite prin câte un spațiu. Pe cea de-a treia linie, acestea reprezintă codificările rezultatelor anterioare ale celor <code>N</code> antrenori, pe cea de-a patra linie ele reprezintă codificările rezultatelor anterioare ale celor <code>N</code> fete, iar valorile de pe cea de-a cincea linie reprezintă codificările rezultatelor anterioare ale celor <code>N</code> băieți.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>În fișierul text <code>patinaj.out</code> se va afișa:</p>
+
+<ul>
+	<li>pentru cerința <code>1</code>: numărul maxim de echipe <code>NP</code> care pot fi înscrise la olimpiadă conform regulilor precizate mai sus;</li>
+	<li>pentru cerința <code>2</code>: două numere naturale, <code>V</code> și <code>NV</code>, separate printr-un spațiu, reprezentând valoarea maximă a unui antrenor al clubului <strong>pentru care există cel puțin o pereche pe care o poate antrena</strong> și respectiv numărul variantelor în care clubul poate alege o echipă care poate fi pregătită de un antrenor cu valoarea <code>V</code>, dacă se rezolvă cerința <code>2</code>. În cazul în care clubul nu poate înscrie nicio pereche, se va afișa <strong>un singur număr</strong>: <code>-1</code>.</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 100.000</code></li>
+	<li>fiecare dintre numerele citite de pe a treia, a patra și a cincea linie a fișierului este un număr natural cu cel mult 9 cifre.</li>
+	<li>Pentru 51 de puncte, <code>C = 1</code></li>
+	<li>Pentru 49 de puncte, <code>C = 2</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>patinaj.in</code></p>
+
+<pre>1
+4
+8093 18305 20009 188
+1803 3303331 909 91995
+8017 20009 0 8017</pre>
+
+<p><code>patinaj.out</code></p>
+
+<pre>2</pre>
+
+<h3>Explicație</h3>
+
+<p>Se pot forma cel mult <code>2</code> echipe. Prima ar putea fi formată din fata cu codificarea <code>1803</code> și băiatul cu codificarea <code>20009</code> și pregătită de antrenorul cu codificarea <code>20009</code>. A doua poate fi formată din fata <code>3303331</code>, băiatul <code>8017</code> și pregătită de antrenorul <code>18305</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>patinaj.in</code></p>
+
+<pre>2
+4
+8093 18305 20009 188
+1803 3303331 909 91995
+8017 20009 0 8017</pre>
+
+<p><code>patinaj.out</code></p>
+
+<pre>17 4</pre>
+
+<h3>Explicație</h3>
+
+<p>Clubul are <code>4</code> antrenori cu valorile <code>20=8+0+9+3</code>, <code>17=1+8+3+0+5</code>, <code>11=2+0+0+0+9</code> și <code>17=1+8+8</code>. Valoarea maximă este <code>20</code>, dar nu există o pereche pe care să o poată pregăti antrenorul cu valoarea <code>20</code> conform regulilor impuse. În schimb, un antrenor cu valoarea <code>17</code> ar putea pregăti o pereche înscrisă la olimpiadă. Sunt <code>4</code> variante de alegere a unei echipe pregătite de un antrenor cu valoarea <code>17</code>. Acestea ar putea avea în componență fata <code>3303331</code> și unul dintre cei doi băieți cu codificarea rezultatelor anterioare <code>8017</code>. O astfel de pereche ar putea fi pregătită de antrenorul <code>18305</code> sau de <code>188</code>.</p>		</article>
+		</body></html>

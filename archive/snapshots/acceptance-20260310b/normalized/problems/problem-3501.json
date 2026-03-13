@@ -1,0 +1,308 @@
+{
+  "id": 3501,
+  "slug": "orademate",
+  "name": "OraDeMate",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3501/orademate",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 27,
+      "name": "Backtracking",
+      "slug": "backtracking",
+      "href": "/?pagina=probleme-lista&tag=27"
+    },
+    {
+      "id": 28,
+      "name": "Elemente de combinatorică",
+      "slug": "elemente-de-combinatoric",
+      "href": "/?pagina=probleme-lista&tag=28"
+    }
+  ],
+  "tags": [
+    "Backtracking"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Astăzi la ora de mate, Gigel și Ionel nu au fost atenți deloc la explicațiile domnului profesor, iar acesta a hotărât să le dea la finalul orei o tema consistentă pentru ca acest lucru să nu se mai repete. Astfel, fiecare elev a primit pe lângă tema de casă obișnuită încă un exercițiu. Acestea sună în felul următor:</p><p>Exercițiul lui Gigel : pentru o cifră <code>n</code> să se genereze în ordine strict crescătoare toate numerele diferite de <code>n</code> cifre astfel încât oricare ar fi <code>i</code>, <code>1 ≤ i ≤ n</code>, cifra de pe poziția <code>i</code> și <code>i</code> au parități diferite (pozițiile cifrelor sunt numerotate de la stânga la dreapta și sunt indexate de la <code>1</code>).</p><p>Exercițiul lui Ionel : pentru o cifră <code>n</code> să se genereze în ordine strict crescătoare toate numerele diferite de <code>n</code> cifre care au cifrele în ordine crescătoare (pot fi și cifre egale alăturate) astfel încât oricare ar fi <code>i</code>, <code>1 ≤ i ≤ n</code>, cifra de pe poziția <code>i</code> și <code>i</code> sunt diferite (pozițiile cifrelor sunt numerotate de la stânga la dreapta și sunt indexate de la <code>1</code>).</p><p>Cei doi nu au răbdare să scrie toate numerele deci vă roagă pe voi să realizați un program care le afișează pentru o valoare cunoscută a lui <code>n</code>.</p>",
+      "text": "Astăzi la ora de mate, Gigel și Ionel nu au fost atenți deloc la explicațiile domnului profesor, iar acesta a hotărât să le dea la finalul orei o tema consistentă pentru ca acest lucru să nu se mai repete. Astfel, fiecare elev a primit pe lângă tema de casă obișnuită încă un exercițiu. Acestea sună în felul următor:Exercițiul lui Gigel : pentru o cifră n să se genereze în ordine strict crescătoare toate numerele diferite de n cifre astfel încât oricare ar fi i, 1 ≤ i ≤ n, cifra de pe poziția i și i au parități diferite (pozițiile cifrelor sunt numerotate de la stânga la dreapta și sunt indexate de la 1).Exercițiul lui Ionel : pentru o cifră n să se genereze în ordine strict crescătoare toate numerele diferite de n cifre care au cifrele în ordine crescătoare (pot fi și cifre egale alăturate) astfel încât oricare ar fi i, 1 ≤ i ≤ n, cifra de pe poziția i și i sunt diferite (pozițiile cifrelor sunt numerotate de la stânga la dreapta și sunt indexate de la 1).Cei doi nu au răbdare să scrie toate numerele deci vă roagă pe voi să realizați un program care le afișează pentru o valoare cunoscută a lui n."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>orademate.in</code> conține pe prima linie numerele <code>C</code> și <code>n</code> separate printr-un spațiu. Dacă <code>C</code> este <code>1</code>, atunci se va rezolva exercițiul lui Gigel, iar dacă este <code>2</code> cel al lui Ionel.</p>",
+      "text": "Fișierul de intrare orademate.in conține pe prima linie numerele C și n separate printr-un spațiu. Dacă C este 1, atunci se va rezolva exercițiul lui Gigel, iar dacă este 2 cel al lui Ionel."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>orademate.out</code> va conține pe fiecare linie a acestuia numerele obținute, în ordine strict crescătoare.</p>",
+      "text": "Fișierul de ieșire orademate.out va conține pe fiecare linie a acestuia numerele obținute, în ordine strict crescătoare."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ n ≤ 8</code></li>\n\t<li><code>1 ≤ C ≤ 2</code></li>\n</ul>",
+      "text": "1 ≤ n ≤ 8 1 ≤ C ≤ 2"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>orademate.in</code></p><pre>1 2</pre><p><code>orademate.out</code></p><pre>21\n23\n25\n27\n29\n41\n43\n45\n47\n49\n61\n63\n65\n67\n69\n81\n83\n85\n87\n89</pre><h3>Explicație</h3><p><code>C</code> este <code>1</code>, deci s-a rezolvat exercițiul lui Gigel.</p>",
+      "text": "orademate.in1 2orademate.out21 23 25 27 29 41 43 45 47 49 61 63 65 67 69 81 83 85 87 89ExplicațieC este 1, deci s-a rezolvat exercițiul lui Gigel."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>orademate.in</code></p><pre>2 2</pre><p><code>orademate.out</code></p><pre>23\n24\n25\n26\n27\n28\n29\n33\n34\n35\n36\n37\n38\n39\n44\n45\n46\n47\n48\n49\n55\n56\n57\n58\n59\n66\n67\n68\n69\n77\n78\n79\n88\n89\n99</pre><h3>Explicație</h3><p><code>C</code> este <code>2</code>, deci s-a rezolvat exercițiul lui Ionel.</p>",
+      "text": "orademate.in2 2orademate.out23 24 25 26 27 28 29 33 34 35 36 37 38 39 44 45 46 47 48 49 55 56 57 58 59 66 67 68 69 77 78 79 88 89 99ExplicațieC este 2, deci s-a rezolvat exercițiul lui Ionel."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "C este 1, deci s-a rezolvat exercițiul lui Gigel."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "C este 2, deci s-a rezolvat exercițiul lui Ionel."
+    }
+  ],
+  "constraints": [
+    "1 ≤ n ≤ 8",
+    "1 ≤ C ≤ 2"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q98feabbf79.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Lorintz Alexandru (Alex_tz307)",
+    "clasa": "11",
+    "intrare/ieșire": "orademate.in / orademate.out",
+    "limită timp": "0.2 secunde",
+    "limită memorie": "1 MB / 1 MB",
+    "sursa problemei": "-",
+    "autor": "Alexandru Lorintz",
+    "dificultate": "ușoară"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.2,
+  "memoryLimitMb": 1,
+  "author": "Alexandru Lorintz",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3501/orademate"
+}

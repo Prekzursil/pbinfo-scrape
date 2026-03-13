@@ -1,0 +1,78 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1470"><article id="enunt">
+			<p>În parcările din Iași, intrarea în parcare este permisă dacă șoferul care dorește să parcheze solicită acest lucru.</p>
+
+<p>Solicitarea se face prin apăsarea unui buton la automatul aflat la intrarea în parcare, acțiune care are ca efect eliberarea unui tichet de parcare și deschiderea barierei. Pe tichet sunt trecute data și ora intrării în parcare.</p>
+
+<p>La plecare, șoferul scanează tichetul la automatul de plată. În urma scanării automatul calculează şi afișează suma de plată. Calculul sumei se face astfel:</p>
+
+<ul>
+	<li>se citește de la ceasul automatului data și ora plecării</li>
+	<li>se calculează diferența de timp dintre ora plecării și ora intrării în parcare</li>
+	<li>diferența calculată se rotunjește la număr întreg de ore, în sus</li>
+	<li>se înmulțește timpul exprimat în ore cu tariful orar</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Cunoscându-se data și ora intrării în parcare, data și ora plecării din parcare și tariful orar, să se determine timpul cât a stat mașina în parcare și suma de plată. </p>
+
+<h1>Date de intrare</h1>
+
+<p>Fişierul de intrare <code>parcare.in</code> conţine pe prima linie data și ora intrării în parcare, separate printr-un spațiu, sub forma <code>zz ll hh mm</code>.</p>
+
+<p>Pe linia a doua a fişierului de intrare se găsesc data și ora plecării din parcare, separate printr-un spațiu, sub forma <code>zz ll hh mm</code>.</p>
+
+<p>Linia a treia conţine un număr natural <code>t</code> reprezentând tariful orar exprimat în lei. </p>
+
+<p>Pe linia a patra a fișierului de intrare se găsește una dintre valorile <code>1</code> sau <code>2</code> reprezentând cerinţa: <code>1</code>, dacă se cere determinarea timpului cât a stat mașina în parcare, timp exprimat în minute, respectiv <code>2</code>, dacă se cere determinarea sumei de plată pentru parcare.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fişierul de ieşire <code>parcare.out</code> conţine pe prima linie o valoarea naturală reprezentând timpul cât mașina a stat în parcare, exprimat în minute, dacă cerinţa a fost <code>1</code>, respectiv suma de plată, dacă cerinţa a fost <code>2</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>Mașina stă în parcare cel puţin <code>1</code> minut dar nu poate sta mai mult de <code>7</code> zile.</li>
+	<li>Dacă timpul de staţionare nu depăşeşte <code>15</code> minute, nu se percepe taxă.</li>
+	<li>Cele două date sunt din același an, care nu este bisect.</li>
+	<li>Minutul de plecare din parcare nu se contorizează.</li>
+	<li>Minutele unei ore sunt numerotate  de la <code>0</code> la <code>59</code>.</li>
+	<li><code>1 &lt;= t &lt;= 100</code></li>
+	<li>Pentru cerinţa 1 se acordă 50% din punctaj, iar pentru cerinţa 2 se acordă încă 50% din punctaj.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>parcare.in</code></p>
+
+<pre>30 01 17 33
+30 01 21 01
+3
+1</pre>
+
+<p><code>parcare.out</code></p>
+
+<pre>208</pre>
+
+<h3>Explicație</h3>
+
+<p>Intrarea în parcare s-a făcut în data de 30 ianuarie ora 17:33. Plecarea s-a făcut în aceeași zi la ora 21:01. Deci timpul cât mașina a stat în parcare este <code>27 + 3*60 + 1 = 208</code> minute</p>
+
+<h1>Exemplu 2</h1>
+
+<p><code>parcare.in</code></p>
+
+<pre>30 01 17 33
+30 01 21 01
+3
+2</pre>
+
+<p><code>parcare.out</code></p>
+
+<pre>12</pre>
+
+<h3>Explicație</h3>
+
+<p>Tariful orar este 3 lei/oră. Se deduce că 208 minute = 3 ore și 28 minute, deci se plătesc 4 ore, <code>4 * 3 = 12</code>.</p>		</article>
+		</body></html>

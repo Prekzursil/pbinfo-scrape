@@ -1,0 +1,68 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4532"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>Se dă un vector de <code>N</code> numere naturale. Se dau de asemenea <code>Q</code> query-uri de forma <code>l r</code>, unde se cere suma tuturor subsecvențelor de elemente consecutive. Mai formal, pentru fiecare query <code>[l, r]</code>, se cere rezultatul funcției <code>F(l, r)</code> = \( \sum_{i=l}^{r} \sum_{j=i}^{r}  \) <code>S(i, j)</code>, unde <code>S(l, r)</code> este suma tuturor elementelor din secvența <code>[l, r]</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>Se recomanda folosirea <a href="https://www.geeksforgeeks.org/fast-io-for-competitive-programming/">fastio</a></li>
+	<li><code>1 ≤ N, Q ≤ 500.000</code></li>
+	<li><code>0 ≤ A[i] ≤ 1.000.000.000</code></li>
+	<li><code>1 ≤ l ≤ r ≤ N</code></li>
+	<li>Deoarece răspunsurile sunt prea mari pentru a fi reprezentate de tipurile de date implicite din limbajul C++, se vor afișa modulo \( {2}^{32}  \)</li>
+</ul>
+
+<h1>Subtask-uri</h1>
+
+<ul>
+	<li><code>20</code> puncte: <code>1 ≤ N, Q ≤ 500</code></li>
+	<li><code>10</code> puncte: <code>1 ≤ N, Q ≤ 2.500</code></li>
+	<li><code>20</code> puncte: <code>1 ≤ N, Q ≤ 50.000</code></li>
+	<li><code>50</code> puncte: <code>1 ≤ N, Q ≤ 500.000</code></li>
+</ul>
+
+<h1>Formatul input-ului</h1>
+
+<pre>N Q
+A[1] A[2] ... A[N]
+L[1] R[1]
+L[2] R[2]
+...
+L[Q] R[Q]</pre>
+
+<h1>Formatul output-ului</h1>
+
+<pre>S[1]
+S[2]
+...
+S[Q]</pre>
+
+<h1>Exemplu:</h1>
+
+<p><b>Intrare</b></p>
+
+<pre>5 4
+5 3 2 4 2
+3 4
+3 5
+4 5
+1 5</pre>
+
+<p><b>Iesire</b></p>
+
+<pre>12
+28
+12
+109</pre>
+
+<h3>Explicație</h3>
+
+<p>Pentru primul query (secvența <code>[3, 4]</code>), suma este <code>2</code> + <code>4</code> + <code>2 + 4</code> = <code>12</code>.</p>
+
+<p>Pentru al doilea query (secvența <code>[3, 5]</code>), suma este <code>2</code> + <code>4</code> + <code>2</code> + <code>2 + 4</code> + <code>4 + 2</code> + <code>2 + 4 + 2</code> = <code>28</code>.</p>
+
+<p>Pentru al treilea query (secvența <code>[4, 5]</code>), suma este <code>4</code> + <code>2</code> + <code>4 + 2</code> = <code>12</code>.</p>
+
+<p>Pentru al patrulea query (secvența <code>[1, 5]</code>), suma este <code>5</code> + <code>3</code> + <code>2</code> + <code>4</code> + <code>2</code> + <code>5 + 3</code> + <code>3 + 2</code> + <code>2 + 4</code> + <code>4 + 2</code> + <code>5 + 3 + 2</code> + <code>3 + 2 + 4</code> + <code>2 + 4 + 2</code> + <code>5 + 3 + 2 + 4</code> + <code>3 + 2 + 4 + 2</code> + <code>5 + 3 + 2 + 4 + 2</code> = <code>109</code>.</p>		</article>
+		</body></html>

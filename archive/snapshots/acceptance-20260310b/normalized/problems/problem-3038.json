@@ -1,0 +1,322 @@
+{
+  "id": 3038,
+  "slug": "tombola",
+  "name": "tombola",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3038/tombola",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 151,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=151"
+    },
+    {
+      "id": 152,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=152"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Cunoscându-se numerele naturale <code>N</code>, <code>S</code><sub><code>1</code></sub>, <code>A</code>, <code>B</code>, <code>C</code>, <code>D</code>, scrieți un program care rezolvă următoarele cerințe:<br>\n1) pentru fiecare dintre termenii șirului <code>S</code><sub><code>1</code></sub>, <code>S</code><sub><code>2</code></sub>, …, <code>S</code><sub><code>N</code></sub>, determină cel mai mare număr natural mai mic strict decât termenul respectiv, pentru care există un număr câștigător; programul va afișa restul împărțirii sumei numerelor obținute la <code>10</code><sup><code>18</code></sup><code>+31</code>;<br>\n2) pentru fiecare dintre termenii șirului <code>S</code><sub><code>1</code></sub>, <code>S</code><sub><code>2</code></sub>, …, <code>S</code><sub><code>N</code></sub>, determină câte numere naturale mai mici sau egale cu termenul respectiv NU au număr câștigător; programul va afișa restul împărțirii sumei rezultatelor obținute la <code>10</code><sup><code>18</code></sup><code>+31</code>.</p>",
+      "text": "Cunoscându-se numerele naturale N, S1, A, B, C, D, scrieți un program care rezolvă următoarele cerințe: 1) pentru fiecare dintre termenii șirului S1, S2, …, SN, determină cel mai mare număr natural mai mic strict decât termenul respectiv, pentru care există un număr câștigător; programul va afișa restul împărțirii sumei numerelor obținute la 1018+31; 2) pentru fiecare dintre termenii șirului S1, S2, …, SN, determină câte numere naturale mai mici sau egale cu termenul respectiv NU au număr câștigător; programul va afișa restul împărțirii sumei rezultatelor obținute la 1018+31."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>tombola.in</code> conține pe prima linie numărul natural <code>p</code>, reprezentând cerința care trebuie rezolvată (<code>1</code> sau <code>2</code>). Pe a doua linie se află, în această ordine, numerele naturale <code>N S1 A B C D</code>, separate prin câte un spațiu.</p>",
+      "text": "Fișierul de intrare tombola.in conține pe prima linie numărul natural p, reprezentând cerința care trebuie rezolvată (1 sau 2). Pe a doua linie se află, în această ordine, numerele naturale N S1 A B C D, separate prin câte un spațiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>tombola.out</code> va conține un singur număr natural care reprezintă rezultatul la cerința <code>p</code>.</p>",
+      "text": "Fișierul de ieșire tombola.out va conține un singur număr natural care reprezintă rezultatul la cerința p."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 500.000</code></li>\n\t<li><code>1 &lt; S1, C, D ≤ 10</code><sup><code>17</code></sup></li>\n\t<li><code>1 &lt; A, B ≤ 10</code><sup><code>9</code></sup></li>\n\t<li>Se garantează că <code>S</code><sub><code>i</code></sub> <code>&gt; 1</code>, oricare <code>1 ≤ i ≤ N</code></li>\n\t<li>Pentru teste valorând <code>50</code> de puncte cerința este <code>1</code>.</li>\n\t<li>Pentru <code>30%</code> din numărul total de teste, <code>N * D ≤ 10</code><sup><code>6</code></sup> și <code>N * S</code><sub><code>1</code></sub> <code>≤ 10</code><sup><code>6</code></sup> (<code>50%</code> dintre acestea fiind pentru cerința <code>1</code>)</li>\n\t<li>Pentru <code>60%</code> din numărul total de teste, <code>N ≤ 30.000</code> (<code>50%</code> dintre acestea fiind pentru cerința <code>1</code>).</li>\n</ul>",
+      "text": "1 ≤ N ≤ 500.000 1 < S1, C, D ≤ 1017 1 < A, B ≤ 109 Se garantează că Si > 1, oricare 1 ≤ i ≤ N Pentru teste valorând 50 de puncte cerința este 1. Pentru 30% din numărul total de teste, N * D ≤ 106 și N * S1 ≤ 106 (50% dintre acestea fiind pentru cerința 1) Pentru 60% din numărul total de teste, N ≤ 30.000 (50% dintre acestea fiind pentru cerința 1)."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>tombola.in</code></p><pre>1\n1 22 3 3 3 3</pre><p><code>tombola.out</code></p><pre>20</pre><h3>Explicație</h3><p>Se rezolvă cerința <code>1</code>. Avem un singur termen în șir <code>S1 = 22</code>. Numărul <code>20</code> este cel mai mare număr strict mai mic decât <code>22</code> care acceptă un număr câștigător (<code>X = 19</code> deoarece <code>20 = 19 + 1</code>).</p>",
+      "text": "tombola.in1 1 22 3 3 3 3tombola.out20ExplicațieSe rezolvă cerința 1. Avem un singur termen în șir S1 = 22. Numărul 20 este cel mai mare număr strict mai mic decât 22 care acceptă un număr câștigător (X = 19 deoarece 20 = 19 + 1)."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>tombola.in</code></p><pre>2\n1 22 3 3 3 3</pre><p><code>tombola.out</code></p><pre>2</pre><h3>Explicație</h3><p>Se rezolvă cerința <code>2</code>. Avem un singur termen în șir <code>S1=22</code>. Există două numere mai mici sau egale cu <code>22</code> care NU acceptă număr câștigător, <code>10</code> și respectiv <code>21</code>.</p>",
+      "text": "tombola.in2 1 22 3 3 3 3tombola.out2ExplicațieSe rezolvă cerința 2. Avem un singur termen în șir S1=22. Există două numere mai mici sau egale cu 22 care NU acceptă număr câștigător, 10 și respectiv 21."
+    },
+    {
+      "title": "Exemplul 3:",
+      "html": "<p><code>tombola.in</code></p><pre>1\n3 12345678901234567 999999999 123456789 98765432109876543 1020304050607080</pre><p><code>tombola.out</code></p><pre>12805467424792840</pre>",
+      "text": "tombola.in1 3 12345678901234567 999999999 123456789 98765432109876543 1020304050607080tombola.out12805467424792840"
+    },
+    {
+      "title": "Exemplul 4:",
+      "html": "<p><code>tombola.in</code></p><pre>2\n3 98765432109876543 999999999 123456789 12345678901234567 1020304050607080</pre><p><code>tombola.out</code></p><pre>9912065223185559</pre>",
+      "text": "tombola.in2 3 98765432109876543 999999999 123456789 12345678901234567 1020304050607080tombola.out9912065223185559"
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Se rezolvă cerința 1. Avem un singur termen în șir S1 = 22. Numărul 20 este cel mai mare număr strict mai mic decât 22 care acceptă un număr câștigător (X = 19 deoarece 20 = 19 + 1)."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Se rezolvă cerința 2. Avem un singur termen în șir S1=22. Există două numere mai mici sau egale cu 22 care NU acceptă număr câștigător, 10 și respectiv 21."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 500.000",
+    "1 < S1, C, D ≤ 1017",
+    "1 < A, B ≤ 109",
+    "Se garantează că Si > 1, oricare 1 ≤ i ≤ N",
+    "Pentru teste valorând 50 de puncte cerința este 1.",
+    "Pentru 30% din numărul total de teste, N * D ≤ 106 și N * S1 ≤ 106 (50% dintre acestea fiind pentru cerința 1)",
+    "Pentru 60% din numărul total de teste, N ≤ 30.000 (50% dintre acestea fiind pentru cerința 1)."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q19b76df971.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "tombola.in / tombola.out",
+    "limită timp": "1 secunde",
+    "limită memorie": "64 MB / 64 MB",
+    "sursa problemei": "ONIGIM 2019, baraj",
+    "autor": "Daniela Lica",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 1,
+  "memoryLimitMb": 64,
+  "author": "Daniela Lica",
+  "sourceAttribution": "ONIGIM 2019, baraj",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3038/tombola"
+}

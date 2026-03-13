@@ -1,0 +1,69 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3767"><article id="enunt">
+			<p>Două echipe, <strong>F</strong> și <strong>R</strong>, formate din <code>n</code> jucători fiecare, au participat în cadrul noii ediții ktlon la <code>k</code> probe. După fiecare probă s-au înregistrat în registrul ktlon <code>2*n</code> valori: primele <code>n</code> reprezintă numărul de puncte câștigate în cadrul probei de jucătorii echipei F și următoarele <code>n</code> reprezintă numărul de puncte câștigate în cadrul probei de jucătorii echipei R. Pentru ca o echipă să câștige o probă este necesar ca cel puțin unul din jucătorii săi să obțină un număr de puncte strict mai mare decât fiecare din punctajele obținute de către jucătorii celeilalte echipe. Echipa câștigătoare a probei primește un număr de stele. Pentru a stabili numărul de stele primite, mai întâi se determină numărul <code>M</code> de jucători care au obținut un număr de puncte strict mai mare decât fiecare din punctajele obținute de jucătorii celeilalte echipe. Apoi echipa câștigătoare primește un număr de stele egal cu diferența dintre suma celor mai mari <code>M</code> punctaje obținute de jucătorii echipei câștigătoare și suma celor mai mari <code>M</code> punctaje obținute de jucătorii celeilalte echipe.</p>
+
+<p>De exemplu, dacă jucătorii celor două echipe au obținut punctajele <code>(8, 5, 8, 3, 9, 7)</code> și <code>(5, 7, 5, 4, 5, 1)</code>, atunci <code>M = 3</code> deoarece trei punctaje ale jucătorilor echipei F <code>(8, 8, 9)</code> sunt mai mari decât toate punctajele obținute de jucătorii echipei R. Echipa F câștigă proba și primește <code>8 stele = (9 + 8 + 8) - (7 + 5 + 5)</code>. Dacă niciun jucător al niciunei echipe nu obține un număr de puncte strict mai mare decât toate punctajele obținute de jucătorii celeilalte echipe, proba se încheie cu remiză și nicio echipă nu primește nicio stea (<code>M = 0</code>).</p>
+
+<p>Competiția este câștigată de echipa care acumulează un număr maxim de stele la finalul tuturor probelor.</p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând <code>n</code> – numărul de jucători din fiecare echipă, <code>k</code> – numărul de probe și pentru fiecare probă punctajele obținute de cei <code>2 * n</code> jucători ai celor două echipe, determinați:</p>
+
+<p>1. numărul de probe câștigate de echipa R;<br>
+2. numărul de stele obținut de echipa câștigătoare.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>ktlon.in</code> conține pe prima linie un număr <code>C</code> reprezentând cerința care trebuie să fie rezolvată (<code>1</code> sau <code>2</code>). Pe a doua linie se află două numere naturale <code>n</code> și <code>k</code>, care reprezintă numărul de jucători ai fiecărei echipe, respectiv numărul de probe, iar pe fiecare din următoarele <code>k</code> linii, câte <code>2 * n</code> numere naturale: primele <code>n</code> reprezintă numărul de puncte câștigate în cadrul probei curente de jucătorii echipei F și următoarele <code>n</code> reprezintă numărul de puncte câștigate în cadrul probei curente de jucătorii echipei R. Numerele de pe aceeași linie sunt separate prin câte un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă <code>C = 1</code>, fișierul de ieșire <code>ktlon.out</code> va conține numărul de probe câștigate de echipa R. Dacă <code>C = 2</code>, fișierul de ieșire va conține numărul de stele obținute de echipa câștigătoare.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ C ≤ 2</code></li>
+	<li><code>1 ≤ n ≤ 10.000</code></li>
+	<li><code>1 ≤ k ≤ 50</code></li>
+	<li>Punctajele obținute de concurenți sunt numere naturale cuprinse între <code>0</code> și <code>200.000</code> inclusiv.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>ktlon.in</code></p>
+
+<pre>1
+3 4
+6 8 3 7 7 6
+1 2 3 4 5 3
+1 5 3 4 5 2
+1 5 3 4 5 2</pre>
+
+<p><code>ktlon.out</code></p>
+
+<pre>1</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința <code>1</code>. Prima probă este câștigată de echipa F deoarece există un jucător care a obținut mai multe puncte (<code>8</code>) decât numărul de puncte câștigat de fiecare din jucătorii echipei R (<code>7</code>, <code>7</code>, <code>6</code>). A doua probă este câștigată de echipa R deoarece există doi jucători care au obținut mai multe puncte (<code>4</code> respectiv <code>5</code>) decât numărul de puncte câștigate de fiecare din jucătorii echipei F (<code>1</code>, <code>2</code>, <code>3</code>). A treia probă s-a încheiat cu remiză deoarece niciun jucător al niciunei echipe nu obține un număr de puncte strict mai mare decât toate punctajele obținute de jucătorii celeilalte echipe. A patra probă s-a încheiat tot cu remiză, deoarece toți jucătorii au obținut exact aceleași punctaje ca și la proba a treia. Răspunsul este <code>1</code> deoarece echipa R a câștigat o singură probă.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>ktlon.in</code></p>
+
+<pre>2
+3 3
+8 8 5 7 7 7
+1 2 3 3 5 3
+4 1 2 6 5 1</pre>
+
+<p><code>ktlon.out</code></p>
+
+<pre>7</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința <code>2</code>. Echipa F câștigă prima probă și primește <code>2</code> stele (<code>M = 2</code>, <code>(8 + 8) - (7 + 7) = 2</code>).<br>
+Echipa R câștigă a doua probă și primește <code>2</code> stele (<code>M = 1</code>, <code>5 - 3 = 2</code>). Echipa R câștigă a treia probă și primește <code>5</code> stele (<code>M = 2</code>, <code>(6 + 5) - (4 + 2) = 5</code>). În total, echipa F a primit <code>2</code> stele iar echipa R a primit <code>7</code> stele. Competiția este câștigată de echipa R cu <code>7</code> stele.</p>		</article>
+		</body></html>

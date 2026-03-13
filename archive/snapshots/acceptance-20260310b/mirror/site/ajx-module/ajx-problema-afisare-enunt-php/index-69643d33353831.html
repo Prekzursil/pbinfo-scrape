@@ -1,0 +1,45 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3581"><article id="enunt">
+			<p>O firmă producătoare de software organizează un interviu pentru ocuparea unui post de programator, la care s-au prezentat <code>N</code> candidaţi. Aceştia sunt ordonaţi în funcţie de momentul la care şi-au trimis CV-ul şi numerotaţi cu numere consecutive de la <code>1</code> la <code>N</code>. Fiecărui candidat i-a fost realizat în prealabil un profil psihologic şi i s-a determinat nivelul de agitaţie provocat de interviul care urmează să aibă loc, precum şi un sens (crescător sau descrescător) de modificare a acestui nivel. Astfel, la ora la care s-a anunţat începerea interviului (pe care o vom considera momentul <code>0</code>), fiecare candidat are un nivel de agitaţie iniţial. Pentru fiecare unitate de timp după momentul <code>0</code> şi până în momentul în care candidatul este invitat pentru interviu (până atunci el trebuind să aştepte), nivelul său de agitaţie se modifică cu <code>1</code>: pentru o parte din candidaţi nivelul creşte cu <code>1</code> unitate, iar pentru ceilalţi nivelul scade cu <code>1</code> unitate. Dacă nivelul de agitaţie a unui candidat ajunge la <code>0</code>, din acel moment, pentru fiecare unitate de timp următoare, nivelul de agitaţie va creşte cu <code>1</code> (se schimbă sensul de modificare a nivelului de agitaţie). </p>
+
+<p>Firma va invita candidaţii la interviu în grupuri, în ordinea numerotării (toţi candidaţii având numere de ordine mai mici decât un candidat <code>K</code> vor fi invitaţi într-un grup anterior sau în acelaşi grup cu candidatul <code>K</code>). Înainte de a invita un grup, comisia ce conduce interviul poate decide să aştepte un număr întreg de unităţi de timp (zero sau mai multe). Pentru un grup, durata interviului se consideră neglijabilă (fiecare candidat trebuie doar să răspundă la câteva întrebări de tip grilă). Din momentul în care un candidat este invitat la interviu, nivelul de agitaţie a acestuia rămâne constant. Deoarece firma doreşte ca, indiferent de rezultatul interviului, toţi candidaţii să rămână cu o părere bună, comisia va forma grupurile şi va alege timpii de aşteptare în aşa fel încât suma totală a nivelelor de agitaţie a candidaţilor la sfârşitul interviului să fie minimă.</p>
+
+<h1>Cerința</h1>
+
+<p>Să se scrie un program care să determine suma totală minimă a nivelelor de agitaţie a candidaţilor la sfârşitul interviului.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fişierul de intrare <code>agitatie.in</code> are pe prima linie numărul natural <code>N</code>, reprezentând numărul de candidaţi. Pe următoarele <code>N</code> linii se află câte două numere întregi <code>A</code> şi <code>B</code>, separate printr-un spaţiu. <code>A</code> reprezintă nivelul iniţial de agitaţie a candidatului, iar <code>B</code> reprezintă sensul de modificare a agitaţiei pentru fiecare unitate de timp în care acesta aşteaptă (dacă <code>B</code> este <code>1</code>, atunci nivelul de agitaţie creşte, iar dacă <code>B</code> este <code>-1</code>, nivelul de agitaţie scade). Linia <code>k+1</code> din fişier va conţine valorile corespunzătoare candidatului cu numărul <code>k</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fişierul de ieşire <code>agitatie.out</code> va conţine pe prima (şi singura) linie suma totală minimă a nivelelor de agitaţie a candidaţilor la sfârşitul interviului.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 3000</code></li>
+	<li><code>1 ≤ nivelul iniţial de agitaţie a fiecărui candidat ≤ 3000</code></li>
+</ul>
+
+
+<h1>Exemplu:</h1>
+
+<p><code>agitatie.in</code></p>
+
+<pre>6
+10 1
+3 -1
+2 -1
+1 -1
+9 1
+6 -1</pre>
+
+<p><code>agitatie.out</code></p>
+
+<pre>23</pre>
+
+<h3>Explicație</h3>
+
+<p>Suma totală minimă este <code>23</code>. O posibilă soluţie este următoarea: Se formează <code>3</code> grupuri. Primul grup este format doar din candidatul <code>1</code> şi aşteaptă <code>0</code> unităţi de timp. Prin urmare, nivelul final de agitaţie a candidatului <code>1</code> va fi <code>10</code>. Al doilea grup va aştepta <code>22</code> unităţi de timp din momentul în care a terminat interviul primul grup (deci va începe interviul la momentul <code>2</code>), iar din grup vor face parte candidaţii <code>2</code>, <code>3</code>, <code>4</code> şi <code>5</code>. Nivelele finale de agitaţie a acestor candidaţi vor fi: <code>1</code>, <code>0</code>, <code>1</code> şi <code>11</code>. Observaţi că nivelul de agitaţie a candidatului <code>4</code> a scăzut întâi până la <code>0</code>, apoi a crescut la <code>1</code>. Al <code>3</code>-lea grup va mai aştepta <code>4</code> unităţi de timp (deci va începe interviul la momentul <code>6</code>), iar din grup va face parte doar candidatul <code>6</code>. Nivelul final de agitaţie a acestuia va fi <code>0</code>.</p>		</article>
+		</body></html>

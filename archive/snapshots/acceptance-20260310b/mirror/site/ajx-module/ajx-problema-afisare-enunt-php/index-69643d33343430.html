@@ -1,0 +1,50 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3440"><article id="enunt">
+			<p>Dorești să nivelezi terenul pe care l-ai cumpărat, care are lățimea de <code>1</code> metru și lungimea de <code>N</code> metri, fiind alcătuit din <code>N</code> zone succesive, fiecare zonă având lungimea de <code>1</code> metru. Terenul se reprezintă ca un șir de <code>N</code> numere naturale <code>h</code><sub><code>1</code></sub>, <code>h</code><sub><code>2</code></sub>, <code>h</code><sub><code>3</code></sub>, …, <code>h</code><sub><code>N</code></sub> reprezentând înălțimile în metri pe care le au zonele din terenul inițial, privite de la stânga spre dreapta.</p>
+
+<p>Pentru a nivela terenul ai închiriat un buldozer care funcționează astfel. Se alege o înălțime <code>H</code> (număr natural) la care ridicăm lama buldozerului. Inițial buldozerul are pe lamă o cantitate <code>C=0</code> metri cubi de pământ. Buldozerul începe să mergă de la stânga la dreapta și când ajunge la zona <code>i</code>, în funcție de înălțimea <code>h</code><sub><code>i</code></sub> a acesteia, se va afla în una dintre următoarele situații:</p>
+
+<ul>
+	<li>dacă <code>h</code><sub><code>i</code></sub><code> ≥ H</code> atunci cantitatea suplimentară <code>h</code><sub><code>i</code></sub><code> - H</code> se adaugă la <code>C</code> și nivelul zonei ajunge la <code>H</code>.</li>
+	<li>dacă <code>h</code><sub><code>i</code></sub><code> &lt; H</code> atunci se scade din <code>C</code> diferența <code>H - h</code><sub><code>i</code></sub> pentru a aduce nivelul zonei la nivelul <code>H</code>.</li>
+</ul>
+
+<p>Remarcăm faptul că <code>H</code> trebuie ales inițial astfel încât de fiecare dată când buldozerul ajunge în a doua situație să aibă pe lamă suficient pământ (<code>C ≥ H - h</code><sub><code>i</code></sub>). După ce buldozerul parcurge cele <code>N</code> zone de lungime <code>1</code> pe lama buldozerului e posibil să mai rămână pământ, dar asta nu te interesează, pentru că la capătul din dreapta al terenului este un râu, și pământul rămas se va vărsa acolo.</p>
+
+<h1>Cerință</h1>
+
+<p>Scrieţi un program care calculează înălțimea maximă <code>H</code> la care poate fi ridicată lama, astfel încât terenul să poată fi nivelat la acea înălțime.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>buldo.in</code> conține pe prima linie numărul natural <code>N</code>, iar pe a doua linie, separate prin câte un spațiu, cele <code>N</code> numere naturale <code>h</code><sub><code>1</code></sub>, <code>h</code><sub><code>2</code></sub>, <code>h</code><sub><code>3</code></sub>, …, <code>h</code><sub><code>N</code></sub>, cu semnificația din enunț.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>buldo.out</code> va conține o singură linie, pe care va fi scris numărul natural <code>H</code> cerut.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 100.000</code></li>
+	<li>Înălțimile sunt numere naturale, <code>1 ≤ h</code><sub><code>i</code></sub> <code>≤ 1.000.000.000</code>, pentru orice <code>i</code>, <code>1≤i≤N</code>.</li>
+	<li>Pentru teste în valoare de 50 de puncte, <code>N ≤ 1000</code> și <code>h</code><sub><code>i</code></sub><code> ≤ 1000</code>, pentru orice <code>i</code>, <code>1≤i≤N</code>.</li>
+	<li>În concurs s-au acordat 90 de puncte, și 10 punte din oficiu. Pe site se acordă 10 puncte pentru exemplu.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>buldo.in</code></p>
+
+<pre>4
+5 2 1 6</pre>
+
+<p><code>buldo.out</code></p>
+
+<pre>2</pre>
+
+<h3>Explicație</h3>
+
+<p>Dacă se fixează lama la înălțimea <code>H=2</code>, după ce se trece de zona <code>1</code> (primul metru pe lungime), această zonă rămâne la înălțimea <code>2</code> și <code>C=3</code> metri cubi de pământ sunt duși de lamă la zona <code>2</code>. Acolo se vor obține în total <code>2+3=5</code> metri cubi de pământ, dar se păstrează doar <code>2</code>, iar restul de <code>C=3</code> se transportă la zona <code>3</code>. La zona <code>3</code> se vor obține în total <code>1+3=4</code> metri cubi de pământ, dar se păstrează doar <code>2</code>, iar restul de <code>C=2</code> se transportă la zona <code>4</code>. La zona <code>4</code> se vor obține în total <code>6+2=8</code> metri cubi de pământ, dar se păstrează doar <code>2</code>, iar restul de <code>C=6</code> se aruncă în râu.</p>
+
+<p>Dacă s-ar fixa lama la înălțimea <code>H=3</code>, la zona <code>3</code> se poate ajunge doar la înălțimea <code>2</code> și încercarea eșuează (fiind o înălțime mai mică decât cea propusă).</p>		</article>
+		</body></html>

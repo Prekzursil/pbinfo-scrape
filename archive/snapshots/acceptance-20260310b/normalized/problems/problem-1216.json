@@ -1,0 +1,325 @@
+{
+  "id": 1216,
+  "slug": "echer",
+  "name": "Echer",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1216/echer",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 1,
+      "name": "Algoritmi elementari",
+      "slug": "algoritmi-elementari",
+      "href": "/?pagina=probleme-lista&tag=1"
+    },
+    {
+      "id": 52,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=52"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Scrieţi un program care citeşte lungimile catetelor echerului, numărul de rânduri, respectiv numărul de coloane ale foii de hârtie și determină:</p><p>1. numărul minim de mutări <code>K</code>, prin care poate muta echerul din colțul din stânga sus al foii de matematică, astfel încât echerul să atingă colțul din dreapta jos al foii;<br>\n2. cele <code>K</code> mutări efectuate pentru a deplasa echerul din colțul din stânga sus al foii, până când un colț al echerului atinge colțul din dreapta jos al foii; dacă există mai multe soluții, se va afișa soluția minimă în sens lexicografic. Un șir de mutări <code>X=(X</code><sub><code>1</code></sub><code>, X</code><sub><code>2</code></sub><code>, …, X</code><sub><code>K</code></sub><code>)</code> este mai mic în sens lexicografic decât alt șir de mutări <code>Y=(Y</code><sub><code>1</code></sub><code>, Y</code><sub><code>2</code></sub><code>, …, Y</code><sub><code>K</code></sub><code>)</code> dacă există <code>P</code> (<code>1 ≤ P ≤ K</code>) a.î. <code>X</code><sub><code>I</code></sub><code> = Y</code><sub><code>I</code></sub>, cu <code>I</code> din <code>{1, 2, …, P-1}</code> și <code>X</code><sub><code>P</code></sub><code> &lt; Y</code><sub><code>P</code></sub>.</p><p>De exemplu șirul de mutări <code>1 2 </code><u><code>3</code></u><code> 1</code> este mai mic în sens lexicografic decât șirul de mutări <code>1 2 </code><u><code>4</code></u><code> 1</code>.</p>",
+      "text": "Scrieţi un program care citeşte lungimile catetelor echerului, numărul de rânduri, respectiv numărul de coloane ale foii de hârtie și determină:1. numărul minim de mutări K, prin care poate muta echerul din colțul din stânga sus al foii de matematică, astfel încât echerul să atingă colțul din dreapta jos al foii; 2. cele K mutări efectuate pentru a deplasa echerul din colțul din stânga sus al foii, până când un colț al echerului atinge colțul din dreapta jos al foii; dacă există mai multe soluții, se va afișa soluția minimă în sens lexicografic. Un șir de mutări X=(X1, X2, …, XK) este mai mic în sens lexicografic decât alt șir de mutări Y=(Y1, Y2, …, YK) dacă există P (1 ≤ P ≤ K) a.î. XI = YI, cu I din {1, 2, …, P-1} și XP < YP.De exemplu șirul de mutări 1 2 3 1 este mai mic în sens lexicografic decât șirul de mutări 1 2 4 1."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fişierul de intrare <code>echer.in</code> conţine pe prima linie una dintre valorile <code>1</code> sau <code>2</code>, reprezentând cerinţa 1 dacă se cere determinarea numărului minim de mutări prin care poate muta echerul din colțul din stânga sus al foii de matematică astfel încât să atingă colțul din dreapta jos al foii, respectiv cerinţa 2, dacă se cere determinarea mutărilor efectuate pentru a deplasa echerul din colțul din stânga sus al foii până când un colț al echerului atinge colțul din dreapta jos al foii.</p><p>A doua linie a fișierului conține patru numere naturale, separate prin câte un spațiu, reprezentând valorile <code>L1</code>, <code>L2</code>, <code>M</code> și <code>N</code>, în această ordine.</p>",
+      "text": "Fişierul de intrare echer.in conţine pe prima linie una dintre valorile 1 sau 2, reprezentând cerinţa 1 dacă se cere determinarea numărului minim de mutări prin care poate muta echerul din colțul din stânga sus al foii de matematică astfel încât să atingă colțul din dreapta jos al foii, respectiv cerinţa 2, dacă se cere determinarea mutărilor efectuate pentru a deplasa echerul din colțul din stânga sus al foii până când un colț al echerului atinge colțul din dreapta jos al foii.A doua linie a fișierului conține patru numere naturale, separate prin câte un spațiu, reprezentând valorile L1, L2, M și N, în această ordine."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fişierul de ieşire <code>echer.out</code> va conţine pe prima linie un număr natural <code>K</code> reprezentând numărul minim de mutări dacă cerința a fost <code>1</code>, respectiv <code>K</code> numere naturale separate prin câte un spațiu reprezentând mutările efectuate pentru a deplasa echerul din colțul din stânga sus al foii de matematică până când un colț al echerului atinge colțul din dreapta jos al foii, dacă cerința a fost <code>2</code>.</p>",
+      "text": "Fişierul de ieşire echer.out va conţine pe prima linie un număr natural K reprezentând numărul minim de mutări dacă cerința a fost 1, respectiv K numere naturale separate prin câte un spațiu reprezentând mutările efectuate pentru a deplasa echerul din colțul din stânga sus al foii de matematică până când un colț al echerului atinge colțul din dreapta jos al foii, dacă cerința a fost 2."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ L1,L2 ≤ 1000</code>.</li>\n\t<li><code>1 ≤  M,N ≤ 1000000</code>.</li>\n\t<li>Se garantează că există soluție pentru orice set de date de intrare.</li>\n\t<li>Pentru rezolvarea corectă a cerinţei 1  se obţine 30% din punctaj.</li>\n\t<li>Pentru rezolvarea corectă a cerinţei 2  se obţine 70% din punctaj.</li>\n</ul>",
+      "text": "1 ≤ L1,L2 ≤ 1000. 1 ≤ M,N ≤ 1000000. Se garantează că există soluție pentru orice set de date de intrare. Pentru rezolvarea corectă a cerinţei 1 se obţine 30% din punctaj. Pentru rezolvarea corectă a cerinţei 2 se obţine 70% din punctaj."
+    },
+    {
+      "title": "Exemplul 1",
+      "html": "<p><code>echer.in</code></p><pre>1\n2 3 8 9</pre><p><code>echer.out</code></p><pre>8</pre><h3>Explicație</h3><p>Sunt necesare <code>8</code> mutări, ca în imagine.</p><p><img alt=\"\" src=\"/resurse/9dc152/p-1200/echer-3.png\"></p>",
+      "text": "echer.in1 2 3 8 9echer.out8ExplicațieSunt necesare 8 mutări, ca în imagine."
+    },
+    {
+      "title": "Exemplul 2",
+      "html": "<p><code>echer.in</code></p><pre>2\n2 3 8 9</pre><p><code>echer.out</code></p><pre>1 2 3 1 2 3 1 4</pre><h3>Explicație</h3><p>Mutările sunt cele ilustrate în imaginea de mai sus.</p>",
+      "text": "echer.in2 2 3 8 9echer.out1 2 3 1 2 3 1 4ExplicațieMutările sunt cele ilustrate în imaginea de mai sus."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Sunt necesare 8 mutări, ca în imagine."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Mutările sunt cele ilustrate în imaginea de mai sus."
+    }
+  ],
+  "constraints": [
+    "1 ≤ L1,L2 ≤ 1000.",
+    "1 ≤ M,N ≤ 1000000.",
+    "Se garantează că există soluție pentru orice set de date de intrare.",
+    "Pentru rezolvarea corectă a cerinţei 1 se obţine 30% din punctaj.",
+    "Pentru rezolvarea corectă a cerinţei 2 se obţine 70% din punctaj."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q449de71181.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1200/echer-1.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1200-echer-1-png.png",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1200/echer-2.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1200-echer-2-png.png",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1200/echer-3.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1200-echer-3-png.png",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "9",
+    "intrare/ieșire": "echer.in / echer.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "1 MB / 1 MB",
+    "sursa problemei": "ONI GIM 2015, Clasa a VI-a",
+    "autor": "Florentina Ungureanu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 1,
+  "author": "Florentina Ungureanu",
+  "sourceAttribution": "ONI GIM 2015, Clasa a VI-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1216/echer"
+}

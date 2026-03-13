@@ -1,0 +1,317 @@
+{
+  "id": 4371,
+  "slug": "foc",
+  "name": "foc",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4371/foc",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 81,
+      "name": "Recursivitate",
+      "slug": "recursivitate",
+      "href": "/?pagina=probleme-lista&tag=81"
+    },
+    {
+      "id": 83,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=83"
+    }
+  ],
+  "tags": [
+    "Smenul lui Mars (Difference Arrays)",
+    "Fill"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Având în vedere că Gosu își poate folosi superputerea o singură dată, aflați toate perechile de coordonate <code>(x, y)</code> posibile pe care se poate plasa acesta, astfel încât să salveze toate casele care sunt în pericol.</p>",
+      "text": "Având în vedere că Gosu își poate folosi superputerea o singură dată, aflați toate perechile de coordonate (x, y) posibile pe care se poate plasa acesta, astfel încât să salveze toate casele care sunt în pericol."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie se găsesc două numere întregi <code>N</code> și <code>M</code>, separate printr-un spațiu, reprezentând dimensiunile matricei. Pe următoarele <code>N</code> linii se află câte <code>M</code> valori de <code>0</code> sau <code>1</code>, separate prin spații, reprezentând descrierea matricei satului.</p>",
+      "text": "Pe prima linie se găsesc două numere întregi N și M, separate printr-un spațiu, reprezentând dimensiunile matricei. Pe următoarele N linii se află câte M valori de 0 sau 1, separate prin spații, reprezentând descrierea matricei satului."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Se vor afișa la ecran, pe linii diferite și separate printr-un spațiu, coordonatele celulelor pe care se poate plasa Gosu pentru a salva toate casele. Perechile de coordonate vor fi afișate în ordine lexicografică. Dacă nu există o soluție, se va afișa <code>-1</code>. </p>",
+      "text": "Se vor afișa la ecran, pe linii diferite și separate printr-un spațiu, coordonatele celulelor pe care se poate plasa Gosu pentru a salva toate casele. Perechile de coordonate vor fi afișate în ordine lexicografică. Dacă nu există o soluție, se va afișa -1."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>3 ≤ N, M ≤ 1000</code></li>\n\t<li><code>A[i][j] ∈ {0, 1}</code>, <code>1 ≤ i ≤ N</code>, <code>1 ≤ j ≤ M</code></li>\n\t<li>Se garantează că există cel puțin o casă care se află în pericol.</li>\n\t<li>Pentru 30 de puncte, <code>1 ≤ N, M ≤ 100</code></li>\n</ul>",
+      "text": "3 ≤ N, M ≤ 1000 A[i][j] ∈ {0, 1}, 1 ≤ i ≤ N, 1 ≤ j ≤ M Se garantează că există cel puțin o casă care se află în pericol. Pentru 30 de puncte, 1 ≤ N, M ≤ 100"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><strong>Intrare</strong></p><pre>7 8\n0 0 0 0 1 1 0 0\n0 1 0 0 0 0 0 0\n0 0 0 0 0 0 0 1\n0 0 0 0 0 0 0 1\n0 0 0 1 0 0 0 1\n0 0 0 0 0 0 1 0\n1 0 0 0 0 0 0 0</pre><p><strong>Ieșire</strong></p><pre>5 1\n5 2\n5 3\n6 1\n6 2\n6 3\n7 3</pre><h3>Explicație</h3><p>Satul este alcătuit din <code>9</code> case, dintre care doar <code>6</code> sunt <code>\"safe\"</code>. Casele aflate în pericol sunt situate pe celulele <code>(2, 2)</code>, <code>(5, 4)</code>, respectiv <code>(6, 7)</code>. Soluția conține 7 perechi de coordonate, afișate în ordine lexicografică. Dacă alege, spre exemplu, celula <code>(5, 1)</code>, Gosu va stinge focul în: </p><ul>\n\t<li>celula vecină din <code>V</code> a casei din celula <code>(2, 2)</code>;</li>\n\t<li>celulele vecine din <code>V</code>, respectiv <code>E</code> ale casei situate pe <code>(5, 4)</code>;</li>\n\t<li>celula vecină din <code>N</code> a ultimei case.</li>\n</ul><p>Toți acești vecini devin, la rândul lor, <code>\"safe\"</code>.</p><p>Pe linia <code>7</code> există o singură celulă din care Gosu poate stinge focul în cel puțin una din celulele vecine ale fiecărei case aflate în pericol: <code>(7, 3)</code>. După folosirea superputerii sale din această celulă, matricea devine:</p><p><img alt=\"\" src=\"/resurse/16a4b0/foc_01.jpg\"></p>",
+      "text": "Intrare7 8 0 0 0 0 1 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0Ieșire5 1 5 2 5 3 6 1 6 2 6 3 7 3ExplicațieSatul este alcătuit din 9 case, dintre care doar 6 sunt \"safe\". Casele aflate în pericol sunt situate pe celulele (2, 2), (5, 4), respectiv (6, 7). Soluția conține 7 perechi de coordonate, afișate în ordine lexicografică. Dacă alege, spre exemplu, celula (5, 1), Gosu va stinge focul în: celula vecină din V a casei din celula (2, 2); celulele vecine din V, respectiv E ale casei situate pe (5, 4); celula vecină din N a ultimei case. Toți acești vecini devin, la rândul lor, \"safe\".Pe linia 7 există o singură celulă din care Gosu poate stinge focul în cel puțin una din celulele vecine ale fiecărei case aflate în pericol: (7, 3). După folosirea superputerii sale din această celulă, matricea devine:"
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><strong>Intrare</strong></p><pre>9 9\n0 0 0 0 0 0 1 0 1\n0 1 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0 1\n0 0 0 0 0 0 0 0 1\n0 0 0 0 1 0 0 0 1\n0 0 0 0 0 0 0 0 1\n1 0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 1 0\n0 0 0 0 0 0 0 0 0</pre><p><strong>Ieșire</strong></p><pre>-1</pre><h3>Explicație</h3><p>În cazul celui de-al doilea exemplu, există <code>3</code> case aflate în pericol, în celulele <code>(2, 2)</code>, <code>(5, 5)</code>, respectiv <code>(8, 8)</code>. Nu există nicio pereche de coordonate pe care Gosu se poate plasa, astfel încât să salveze toate cele <code>3</code> case.</p>",
+      "text": "Intrare9 9 0 0 0 0 0 0 1 0 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0Ieșire-1ExplicațieÎn cazul celui de-al doilea exemplu, există 3 case aflate în pericol, în celulele (2, 2), (5, 5), respectiv (8, 8). Nu există nicio pereche de coordonate pe care Gosu se poate plasa, astfel încât să salveze toate cele 3 case."
+    }
+  ],
+  "examples": [
+    {
+      "input": "7 8\n0 0 0 0 1 1 0 0\n0 1 0 0 0 0 0 0\n0 0 0 0 0 0 0 1\n0 0 0 0 0 0 0 1\n0 0 0 1 0 0 0 1\n0 0 0 0 0 0 1 0\n1 0 0 0 0 0 0 0",
+      "output": "5 1\n5 2\n5 3\n6 1\n6 2\n6 3\n7 3",
+      "explanation": "Satul este alcătuit din 9 case, dintre care doar 6 sunt \"safe\". Casele aflate în pericol sunt situate pe celulele (2, 2), (5, 4), respectiv (6, 7). Soluția conține 7 perechi de coordonate, afișate în ordine lexicografică. Dacă alege, spre exemplu, celula (5, 1), Gosu va stinge focul în:"
+    },
+    {
+      "input": "9 9\n0 0 0 0 0 0 1 0 1\n0 1 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0 1\n0 0 0 0 0 0 0 0 1\n0 0 0 0 1 0 0 0 1\n0 0 0 0 0 0 0 0 1\n1 0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 1 0\n0 0 0 0 0 0 0 0 0",
+      "output": "-1",
+      "explanation": "În cazul celui de-al doilea exemplu, există 3 case aflate în pericol, în celulele (2, 2), (5, 5), respectiv (8, 8). Nu există nicio pereche de coordonate pe care Gosu se poate plasa, astfel încât să salveze toate cele 3 case."
+    }
+  ],
+  "constraints": [
+    "3 ≤ N, M ≤ 1000",
+    "A[i][j] ∈ {0, 1}, 1 ≤ i ≤ N, 1 ≤ j ≤ M",
+    "Se garantează că există cel puțin o casă care se află în pericol.",
+    "Pentru 30 de puncte, 1 ≤ N, M ≤ 100"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q6340ddbc2d.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/foc_01.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-foc-01-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "10",
+    "intrare/ieșire": "tastatură / ecran",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "256 MB / 64 MB",
+    "sursa problemei": "Info-Oltenia 2023, individual 10",
+    "autor": "Iulia Groza",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 256,
+  "author": "Iulia Groza",
+  "sourceAttribution": "Info-Oltenia 2023, individual 10",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4371/foc"
+}

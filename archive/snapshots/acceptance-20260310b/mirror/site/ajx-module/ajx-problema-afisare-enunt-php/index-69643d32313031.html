@@ -1,0 +1,70 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2101"><article id="enunt">
+			<p>Fie un labirint reprezentat ca o matrice pătratică cu <code>n</code> linii (numerotate de sus în jos de la <code>1</code> la <code>n</code>) şi <code>n</code> coloane (numerotate de la stânga la dreapta de la <code>1</code> la <code>n</code>). Elementele matricei pot fi <code>0</code> (semnificând culoar de trecere) sau <code>1</code> (semnificând zid). Un roboţel se mişcă prin labirint după un anumit traseu, specificat ca o succesiune de direcţii de mişcare. Direcţiile pot fi:</p>
+
+<p>• <code>N (nord)</code>, adică din poziţia curentă <code>(x,y)</code> robotul se deplasează în poziţia <code>(x-1,y)</code>, dacă nu este zid;<br>
+• <code>S (sud)</code>, adică din poziţia curentă <code>(x,y)</code> robotul se deplasează în poziţia <code>(x+1,y)</code>, dacă nu este zid;<br>
+• <code>E (est)</code>, adică din poziţia curentă <code>(x,y)</code> robotul se deplasează în poziţia <code>(x,y+1)</code>, dacă nu este zid;<br>
+• <code>V (vest)</code>, adică din poziţia curentă <code>(x,y)</code> robotul se deplasează în poziţia <code>(x,y-1)</code>, dacă nu este zid;</p>
+
+<p>Observaţi că roboţelul nu poate trece prin ziduri, prin urmare, dacă în direcţia de mişcare curentă se află un zid, el nu va efectua deplasarea respectivă. </p>
+
+<h1>Cerința</h1>
+
+<p>Dată fiind configuraţia labirintului, poziţia iniţială a roboţelului şi traseul pe care se deplasează acesta, să se determine poziţia finală a robotului.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fişierul de intrare <code>traseu2.in</code> conţine pe prima linie numărul natural <code>n</code>, reprezentând dimensiunea labirintului. Pe cea de a doua linie sunt scrise două numere naturale <code>L C</code> (cuprinse între <code>1</code> şi <code>n</code>), reprezentând poziţia iniţială a roboţelului (<code>L</code> fiind linia, iar <code>C</code> fiind coloana). Pe următoarele <code>n</code> linii se află câte <code>n</code> valori din mulţimea <code>{0,1}</code>, reprezentând configuraţia labirintului. Pe ultima linie se află un şir de caractere din mulţimea <code>{′N′, ′S′, ′E′, ′V′}</code>, reprezentând traseul roboţelului.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fişierul de ieşire <code>traseu2.out</code> va conţine o singură linie pe care vor fi scrise două numere naturale cuprinse între <code>1</code> şi <code>n</code> reprezentând linia, respectiv coloana poziţiei în care se află roboţelul după parcurgerea traseului. Dacă în timpul deplasării pe traseu roboţelul părăseşte labirintul, pe prima linie vor fi scrise linia, respectiv coloana ultimei poziţii pe care a avut-o roboţelul în labirint.</p>
+
+<h1>Restricții și precizări</h1>
+
+<p>• <code>1 ≤ n ≤ 100</code><br>
+• Traseul are lungimea <code>≤ 250</code><br>
+• Valorile numerice scrise pe aceeaşi linie în fişierul de intrare şi în fişierul de ieşire vor fi separate prin câte un spaţiu.<br>
+• Poziţia iniţială a roboţelului se află pe culoar.</p>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>traseu2.in</code></p>
+
+<pre>5
+2 1
+1 0 0 0 1
+0 0 1 0 1
+1 0 0 0 0
+1 0 0 1 1
+1 1 0 0 0
+ENESES</pre>
+
+<p><code>traseu2.out</code></p>
+
+<pre>2 4</pre>
+
+<h3>Explicație</h3>
+
+<p>Din poziţia <code>(2,1)</code> roboţelul face o deplasare spre <code>Est</code> şi ajunge în poziţia <code>(2,2)</code>. Următoarea deplasare este spre <code>Nord</code> şi ajunge în poziţia <code>(1,2)</code>. Următoarea deplasare este spre <code>Est</code> şi ajunge în poziţia <code>(1,3)</code>. Următoarea deplasare ar fi trebuit să fie spre <code>Sud</code>, dar aceasta nu poate fi efectuată, fiindcă la sud este zid. Următoarea deplasare este spre <code>Est</code> şi ajunge în <code>(1,4)</code>, apoi la <code>Sud</code>, şi ajunge în <code>(2,4)</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>traseu2.in</code></p>
+
+<pre>3
+2 2
+1 0 0
+0 0 1
+1 0 0
+VVV</pre>
+
+<p><code>traseu2.out</code></p>
+
+<pre>2 1</pre>
+
+<h3>Explicație</h3>
+
+<p>Din poziţia <code>(2,2)</code> roboţelul se deplasează spre <code>Vest</code>, ajunge în poziţia <code>(2,1)</code>.<br>
+La următoarea deplasare spre <code>Vest</code>, roboţelul părăseşte labirintul.</p>		</article>
+		</body></html>

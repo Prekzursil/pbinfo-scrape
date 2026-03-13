@@ -1,0 +1,103 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4429"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>Andino și-a găsit o nouă pasiune – muzica. După cum se spune, munca întotdeauna dă roade, așa că iată-l la primul lui concert! Andino, fiind un artist care a devenit popular foarte rapid, a adunat un public numeros la concertul lui, dispus sub forma unei matrice cu <code>N</code> linii și <code>M</code> coloane.</p>
+
+<p>Fiecare fan al lui Andino poate avea una din cele două stări: <strong>pe vibe</strong>, codificată în structura matricei cu <code>1</code> și <strong>pe plictiseală</strong>, codificată în structura matricei cu <code>0</code>. Andino a observat asta prin mulțime și dorește să schimbe starea oamenilor, așa că ia următoarea decizie: de-a lungul concertului său, Andino <strong>schimbă vibe-ul</strong> fanilor lui situați într-o submatrice definită prin colțul stânga-sus de coordonate <code>(x1,y1)</code> și, respectiv, prin colțul dreapta-jos de coordonate <code>(x2,y2)</code>.</p>
+
+<p>Prin <strong>schimbă vibe-ul</strong> înțelegem că starea oricărui fan se schimbă (starea devine pe vibe din pe plictiseală și vice-versa). Pe toată durata concertului, Andino schimbă vibe-ul fanilor săi de exact <code>T</code> ori.</p>
+
+<p>La finalul concertului, Andino vrea să știe cum s-a simțit lumea la concert și îi întreabă pe <code>Q</code> dintre fanii săi care e starea lor. O întrebare are următoarea formă: „Care este starea fanului de coordonata <code>xQ,yQ</code>?”. Fiind ocupat, Andino vă roagă pe voi să-l ajutați să obțină răspunsurile la aceste întrebări.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>concert.in</code> conține pe prima linie două numere întregi, <code>N M</code>, reprezentând numărul de linii și, respectiv, numărul de coloane a matricei ce reprezintă stările fanilor lui Andino.</p>
+
+<p>Următoarele <code>N</code> linii conțin câte <code>M</code> numere din mulțimea <code>{0, 1}</code>, reprezentând stările fanilor lui Andino în modul în care sunt descrise în enunț.</p>
+
+<p>Cea de-a <code>N+2</code>-a linie conține numărul <code>T</code>, reprezentând numărul de schimbări de vibe pe care Andino le face de-a lungul concertului. Următoarele <code>T</code> linii conțin câte patru numere <code>x1 y1 x2 y2</code> ce reprezintă submatricea aleasă pentru schimbarea de vibe definită prin colțul stânga-sus de coordonate <code>(x1,y1)</code> și, respectiv, prin colțul dreapta-jos de coordonate <code>(x2,y2)</code>.</p>
+
+<p>Următoarea linie conține numărul <code>Q</code> reprezentând numărul de întrebări pe care Andino le are, iar următoarele <code>Q</code> linii conțin câte două numere <code>xQ yQ</code> care corespund întrebării de forma „Care este starea fanului aflat la coordonatele <code>(xQ, yQ</code>?”</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>concert.out</code> va conține <code>Q</code> linii care conțin răspunsurile la întrebările lui Andino definite mai sus.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N, M ≤ 2 000</code>.</li>
+	<li><code>1 ≤ T ≤ 100 000</code>.</li>
+	<li><code>1 ≤ Q ≤ 100 000</code>.</li>
+	<li>Pentru fiecare schimbare de vibe, <code>1 ≤ x1 , y1 , x2 , y2 ≤ 2 000</code>, <code>x1 ≤ x2</code> și <code>y1 ≤ y2</code>.</li>
+	<li>Pentru fiecare întrebare a lui Andino, <code>1 ≤ xQ ≤ N</code> și <code>1 ≤ yQ ≤ M</code>.</li>
+	<li>Andino va pune întrebările doar după ce se termină concertul.</li>
+	<li>Pentru teste în valoare de 20 de puncte, <code>1 ≤ N, M ≤ 100</code>.</li>
+	<li>Pentru teste în valoare de 50 de puncte, <code>1 ≤ N, M ≤ 800</code>.</li>
+	<li>Pentru teste în valoare de 100 de puncte, <code>1 ≤ N, M ≤ 2 000</code>.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>concert.in</code></p>
+
+<pre>2 4
+0 1 1 0
+1 0 1 0
+2
+1 1 2 3
+1 2 1 4
+3
+1 1
+1 3
+2 4</pre>
+
+<p><code>concert.out</code></p>
+
+<pre>1
+1
+0</pre>
+
+<h2>Explicație</h2>
+
+<p>După prima schimbare de vibe, starea fanilor e definită în felul următor:</p>
+
+<pre>1 0 0 0
+0 1 0 0</pre>
+
+<p>După cea de-a doua schimbare de vibe, starea fanilor e definită în felul următor:</p>
+
+<pre>1 1 1 1
+0 1 0 0</pre>
+
+<p>Starea definită mai sus e și starea fanilor la sfârșitul concertului de unde avem răspunsul din exemplu.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>concert.in</code></p>
+
+<pre>5 5
+0 0 0 1 0
+1 0 0 1 1
+1 1 0 1 1 
+0 1 0 1 1
+1 1 0 1 0
+3
+2 2 4 4
+1 3 2 4
+4 3 5 5
+5
+1 1 
+3 3
+4 3
+1 3
+2 4</pre>
+
+<p><code>concert.out</code></p>
+
+<pre>0
+1
+0
+1
+1</pre>		</article>
+		</body></html>

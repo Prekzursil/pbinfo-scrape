@@ -1,0 +1,95 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1197"><article id="enunt">
+			<p>Ne aflăm în secția de vopsitorie a uzinei <em>Toyota Motor</em> unde inginerii japonezi prezintă ultimul tip de robot industrial de vopsire. În dorința de a evidenția calitatea și viteza de execuție a roboților, inginerii folosesc pentru demonstrație o tablă de dimensiunea <code>n×n</code>, împărțită în pătrate cu latura egală cu <code>1</code>, reprezentată sub forma unui tablou bidimensional cu <code>n</code> linii, respectiv <code>n</code> coloane.</p>
+
+<p>Un robot utilizat pentru vopsire are două brațe telescopice care se deplasează de-a lungul unei axe. Fiecare braț poate vopsi într-o unitate de timp un singur pătrat. La momentul de timp <code>t=0</code> robotul primește comanda de a se poziționa într-un pătrat specificat prin coordonatele <code>(x,y)</code>. </p>
+
+<p>În funcție de traiectoria de deplasare roboții folosiți sunt de două tipuri. La momentul de timp <code>t</code> robotul de tip <code>1</code> vopsește pătratele aflate la coordonatele: <code>(x-t,y+t)</code> și <code>(x+t,y-t)</code>, iar robotul de tip 2 vopsește pătratele aflate la coordonatele: <code>(x+t,y+t)</code> și <code>(x-t,y-t)</code>. Pentru vopsirea unui pătrat se consumă 1 litru de vopsea.</p>
+
+<p>Pe tablă sunt așezați <code>m</code> roboți.</p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând pentru cei <code>m</code> roboți coordonatele inițiale <code>(x[i],y[i])</code>, <code>i=1,…,m</code>, se cere să se determine:</p>
+
+<p>a) Cantitatea totală de vopsea care a fost folosită de roboți după <code>t</code> unități de timp<br>
+b) Numărul minim de unități de timp necesare formării primului dreptunghi cu arie nenulă. Un dreptunghi corect format este rezultatul intersecției a două traiectorii paralele a doi roboți de tip <code>1</code> cu două traiectorii paralele a doi roboți de tip <code>2</code>, iar colțurile dreptunghiului sunt <code>4</code> pătrate care au fost vopsite de doi roboți de tipuri diferite.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>robotics.in</code> conține pe prima linie trei valori naturale nenule <code>n</code>, <code>m</code> și <code>t</code>, cu semnificațiile din enunț, despărțite prin câte un singur spațiu.<br>
+Pe fiecare dintre următoarele m linii se află câte trei valori naturale nenule  <code>x[i] y[i] z[i]</code>, despărțite prin câte un spațiu, unde: <code>x[i] y[i]</code> reprezintă coordonatele inițiale unde se poziționează robotul <code>i</code>, iar <code>z[i]</code> reprezintă tipul robotului.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>robotics.out</code> va avea două linii. </p>
+
+<p>Prima linie va conține un număr natural <code>C</code> nenul ce reprezintă cantitatea totală de vopsea care este folosită de roboți după <code>t</code> unități de timp.</p>
+
+<p>A doua linie conține un număr natural nenul <code>Tmin</code> ce reprezintă numărul minim de unități de timp necesare formării primului dreptunghi de arie nenulă.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ t &lt; n ≤ 1 000</code></li>
+	<li><code>1 ≤ m ≤ 2*n</code></li>
+	<li><code>1 ≤ x, y ≤ n</code></li>
+	<li>Coordonatele celor <code>m</code> roboți sunt distincte două câte două.</li>
+	<li>Doi roboți nu se pot afla pe aceeași traiectorie la un moment dat.</li>
+	<li>La momentul <code>t=0</code> robotul se poziționează în pătratul specificat prin coordonatele <code>(x,y)</code> și vopsește o singură dată acest pătrat.</li>
+	<li>Doi roboți de tipuri diferite care ajung în același timp pe un pătrat pot vopsi simultan pătratul.</li>
+	<li>Dacă brațul unui robot părăsește tabla dreptunghiulară, brațul își încetează activitatea.</li>
+	<li>Pentru rezolvarea corectă a primei cerinţe se acordă 20 de puncte, iar pentru cerința a doua se acordă 80 de puncte.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>robotics.in</code></p>
+
+<pre>13 3 6
+3 5 1
+7 5 2
+7 9 1</pre>
+
+<p><code>robotics.out</code></p>
+
+<pre>29
+0</pre>
+
+<h1>Explicație</h1>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-robotics-1-png.png"></p>
+
+<p>Cantitatea de vopsea care este folosită de roboți după <code>t</code> unități de timp este <code>29</code>.<br>
+Nu se pot forma dreptunghiuri.</p>
+
+
+<h1>Exemplul 2</h1>
+
+<p><code>robotics.in</code></p>
+
+<pre>19 9 4
+4 5 1
+4 14 2
+2 11 1
+14 7 2
+5 10 2
+14 13 1
+7 4 2
+7 10 1
+12 13 2</pre>
+
+<p><code>robotics.out</code></p>
+
+<pre>75
+3</pre>
+
+<h1>Explicație</h1>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-robotics-2-png.png"></p>
+
+<p>Cantitatea de vopsea care este folosită de roboți după <code>t</code> unități de timp este <code>75</code>.<br>
+Singurele dreptunghiuri corect formate după <code>t=4</code> au colțurile în pătratele de coordonate: <br>
+<code>(2,7)</code>, <code>(6,11)</code>, <code>(10,7)</code>, <code>(6,3)</code>, respectiv<br>
+<code>(8,9)</code>, <code>(13,14)</code>, <code>(17,10)</code>, <code>(12,5)</code>.<br>
+Observăm faptul că primul dreptunghi se formează după <code>t=3</code> (timpul minim)</p>		</article>
+		</body></html>

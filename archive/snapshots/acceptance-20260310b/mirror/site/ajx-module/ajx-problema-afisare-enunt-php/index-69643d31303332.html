@@ -1,0 +1,136 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1032"><article id="enunt">
+			<p>Se consideră un text memorat într-o matrice <code>M</code>, definită prin coordonatele colţului stânga sus <code>(x1,y1)</code> şi coordonatele colţului dreapta jos <code>(x2,y2)</code>.</p>
+
+<p>Prin aplicarea unui algoritm de compresie, matricei <code>M</code> i se asociază un şir de caractere, notat <code>C</code><sub><code>M</code></sub>. Şirul de caractere <code>C</code><sub><code>M</code></sub>  este construit prin aplicarea următoarelor reguli:</p>
+
+<ol>
+	<li>dacă matricea <code>M</code> are o singură linie şi o singură coloană atunci <code>C</code><sub><code>M</code></sub> conţine numai caracterul memorat în matrice;</li>
+	<li>dacă toate elementele matricei sunt identice atunci întreaga matrice <code>M</code> se comprimă şi <code>C</code><sub><code>M</code></sub> este şirul <code>kc</code>, unde <code>k</code> reprezintă numărul de caractere din matrice, iar <code>c</code> caracterul memorat;</li>
+	<li>dacă matricea este formată din caractere diferite şi are cel puţin două linii şi două coloane atunci:
+	<ul>
+		<li><img align="right" alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1001-1050-compresie-r-png.png"> matricea este împărţită în <code>4</code> submatrice <code>A</code>, <code>B</code>, <code>C</code>, <code>D</code> după cum este ilustrat în figura alăturată, unde coordonatele colţului stânga sus ale submatricei <code>A</code> sunt <code>(x1,y1)</code>, iar coordonatele colţului dreapta jos sunt <code>((x2+x1)/2,(y2+y1)/2)</code>;</li>
+		<li><code>C</code><sub><code>M</code></sub> este şirul <code>*C</code><sub><code>A</code></sub><code>C</code><sub><code>B</code></sub><code>C</code><sub><code>C</code></sub><code>C</code><sub><code>D</code></sub>  unde <code>C</code><sub><code>A</code></sub>, <code>C</code><sub><code>B</code></sub>, <code>C</code><sub><code>C</code></sub>, <code>C</code><sub><code>D</code></sub> sunt şirurile de caractere obţinute, în ordine, prin compresia matricelor <code>A</code>, <code>B</code>, <code>C</code>, <code>D</code> utilizând acelaşi algoritm;</li>
+	</ul></li>
+	<li>dacă matricea este formată din caractere diferite, are o singură linie şi mai multe coloane atunci <code>C</code><sub><code>M</code></sub> este şirul <code>*C</code><sub><code>A</code></sub><code>C</code><sub><code>B</code></sub>  unde <code>A</code>, <code>B</code>, <code>C</code><sub><code>A</code></sub>, <code>C</code><sub><code>B</code></sub> au semnificaţia descrisă la punctul 3.;</li>
+	<li>dacă matricea este formată din caractere diferite, are mai multe linii şi o singură coloană atunci <code>C</code><sub><code>M</code></sub> este şirul <code>*C</code><sub><code>A</code></sub><code>C</code><sub><code>C</code></sub>  unde <code>A</code>, <code>C</code>, <code>C</code><sub><code>A</code></sub>, <code>C</code><sub><code>C</code></sub> au semnificaţia descrisă la punctul 3.;</li>
+</ol>
+
+<h1>Cerinţă</h1>
+
+<p>Dat fiind şirul de caractere <code>C</code><sub><code>M</code></sub> ce se obţine în urma aplicării algoritmului de compresie asupra unei matrice M de dimensiune <code>NxN</code> să se determine: </p>
+
+<ol>
+	<li>numărul de împărţiri care au fost necesare pentru obţinerea textului compresat;</li>
+	<li>matricea iniţială din care provine textul compresat.</li>
+</ol>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>compresie.in</code> conţine pe prima linie un şir de caractere ce reprezintă textul compresat.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>compresie.out</code> va conține:</p>
+
+<ol>
+	<li>pe prima linie un număr natural ce reprezintă  numărul  <code>nr</code> de împărţiri care au fost necesare pentru obţinerea textului compresat;</li>
+	<li>pe următoarele <code>N</code> linii se găsesc câte <code>N</code> caractere, litere mici ale alfabetului englez, neseparate prin spații, ce reprezintă, în ordine, liniile matricei iniţiale.</li>
+</ol>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N ≤ 1000</code></li>
+	<li><code>0 ≤ nr ≤ 1000000</code></li>
+	<li><code>2 ≤</code> lungimea şirului compresat <code>≤ 1000000</code></li>
+	<li>Textul memorat iniţial în matricea <code>M</code> conţine numai caractere din mulţimea literelor mici <code>{a...z}</code>.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>compresie.in</code></p>
+
+<pre>*4b*bbab4a*abbb</pre>
+
+<p><code>compresie.out</code></p>
+
+<pre>3 
+bbbb
+bbab
+aaab
+aabb</pre>
+
+<h1>Explicație</h1>
+
+<p>Au fost efectuate 3 împărţiri:</p>
+
+<ol>
+	<li>\( M = * \left( \begin{array}{cc}<br>
+b &amp; b  \\<br>
+b &amp; b \end{array} \right)<br>
+\left( \begin{array}{cc}<br>
+b &amp; b  \\<br>
+a &amp; b \end{array} \right)<br>
+\left( \begin{array}{cc}<br>
+a &amp; a  \\<br>
+a &amp; a \end{array} \right)<br>
+\left( \begin{array}{cc}<br>
+a &amp; b  \\<br>
+b &amp; b \end{array} \right)
+  \)</li>
+	<li>\( <br>
+\left( \begin{array}{cc}<br>
+b &amp; b  \\<br>
+a &amp; b \end{array} \right)<br>
+= * (b)(b)(a)(b)
+ \)</li>
+	<li>\( <br>
+\left( \begin{array}{cc}<br>
+a &amp; b  \\<br>
+b &amp; b \end{array} \right)<br>
+= * (a)(b)(b)(b)
+ \)</li>
+</ol>
+
+<h1>Exemplul 2</h1>
+
+<p><code>compresie.in</code></p>
+
+<pre>*4a*ab*aba</pre>
+
+<p><code>compresie.out</code></p>
+
+<pre>3 
+aaa
+aab
+aba</pre>
+
+<h1>Explicație</h1>
+
+<p>Au fost efectuate 3 împărţiri:</p>
+
+<ol>
+	<li>\( M = * \left( \begin{array}{cc}<br>
+a &amp; a  \\<br>
+a &amp; a \end{array} \right)<br>
+\left( \begin{array}{c}<br>
+a  \\<br>
+b \end{array} \right)<br>
+\left( \begin{array}{cc}<br>
+a &amp; b \end{array} \right)<br>
+\left( \begin{array}{c}<br>
+a \end{array} \right)
+  \)</li>
+	<li>\( <br>
+\left( \begin{array}{c}<br>
+a  \\<br>
+b \end{array} \right)<br>
+= * (a)(b)
+ \)</li>
+	<li>\( <br>
+\left( \begin{array}{cc}<br>
+a &amp; b \end{array} \right)<br>
+= * (a)(b)
+ \)</li>
+</ol>		</article>
+		</body></html>

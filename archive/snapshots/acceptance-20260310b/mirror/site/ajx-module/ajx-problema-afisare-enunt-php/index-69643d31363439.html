@@ -1,0 +1,57 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1649"><article id="enunt">
+			<p>Un showroom din Strasbourg comercializează o gamă foarte mare de modele de autoturisme, aşezate pe <code>n</code> linii. Pe câte o linie se găsesc numai modele de autoturisme comercializate de acelaşi dealer. Un dealer poate avea modele pe mai multe linii. Parlamentul European doreşte să-şi înnoiască parcul auto şi trimite responsabilul cu activitatea de transport la showroom pentru a se informa cu privire la variantele pe care le are pentru rezolvarea acestei probleme de achiziţie. Responsabilul trebuie să aleagă de la primul dealer \(f_1\) modele, de la al doilea dealer \(f_2\) modele, etc. Şirul de numere \(f_1, f_2, f_3, …\) reprezintă termenii modulo <code>k</code> ai unei progresii aritmetice cu primul termen <code>a</code> şi raţia <code>r</code>. Dacă valoarea din şirul de numere este mai mare decât numărul de modele al dealerului corespunzător, atunci responsabilul nu mai alege nici un model al dealerului. Primul dealer este cel care are modelele pe prima linie şi, eventual, pe alte linii care urmează primei linii (dar nu neapărat consecutive!), al doilea dealer este cel care are modelele pe prima linie ce conţine modele diferite de cele ale primului dealer etc.   </p>
+
+<h1>Cerința</h1>
+
+<p>Să se scrie un program care determină:</p>
+
+<p>a) Numărul de dealeri prezenţi în showroom;<br>
+b) Numărul de modalităţi de achiziţie al modelelor de către Parlamentul European, <code>modulo 9001</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fişierul de intrare <code>showroom.in</code> conţine pe prima linie numerele <code>n</code>, <code>a</code>, <code>r</code>, <code>k</code> separate prin exact un spaţiu, cu semnificaţia de mai sus, iar pe următoarele <code>n</code> linii se află denumirile modelelor din enunţ, separate prin unul sau mai multe spaţii. Fiecare linie se termină cu caracterul sfârşit de linie. </p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fişierul de ieşire <code>showroom.out</code> va conţine pe prima linie numărul cerut la subpunctul a), iar pe a doua linie numărul cerut la subpunctul b).</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 500</code>;</li>
+	<li><code>1 ≤  a, r, k ≤ 10.000</code>;</li>
+	<li>Denumirea unui model are cel mult <code>20</code> de litere mici şi/sau cifre;</li>
+	<li>Pe o linie sunt cel mult <code>100</code> de denumiri de modele şi nu pot exista mai mult de <code>10</code> spaţii între două modele;</li>
+	<li>Pot exista linii cu numerele de ordine \(i_1, i_2, …, i_p\) cu modele ale aceluiaşi dealer, astfel încât perechile de linii  \((i_1, i_2) , …, (i_{p-1}, i_p)\) au cel puțin un model de mașină în comun;</li>
+	<li>Pentru <code>60%</code> din teste se garantează că valoarea <code>k</code> este mai mică sau egală decât <code>10</code>.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>showroom.in</code></p>
+
+<pre>6 1 2 3
+logan duster logan
+peugeot207    peugeot307
+sandero    sandero
+opelcorsa opelastra  opelcorsa
+peugeot207
+sandero duster</pre>
+
+
+<p><code>showroom.out</code></p>
+
+<pre>3
+3</pre>
+
+<h3>Explicație</h3>
+
+<p>La showroom sunt 3 dealeri.<br>
+Dealerul 1: <code>logan, duster, sandero</code>.<br>
+Dealerul 2: <code>peugeot207, peugeot307</code>.<br>
+Dealerul 3: <code>opelcorsa, opelastra</code>.<br>
+Primii trei termeni din progresia aritmetică sunt <code>1, 3, 5</code>.<br>
+\(f_1\) <code>= 1 modulo 3 = 1</code>; \(f_2\) <code>= 3 modulo 3 = 0</code>; \(f_3\) <code>= 5 modulo 3 = 2</code>.<br>
+Modalităţile de achiziţie ale modelelor de la dealerul 1, a niciunui model de la dealerul 2 şi a două modele de la dealerul 3 sunt următoarele: <code>logan, opelcorsa, opelastra</code>; <code>duster, opelcorsa, opelastra</code>; <code>sandero, opelcorsa, opelastra</code>.</p>		</article>
+		</body></html>

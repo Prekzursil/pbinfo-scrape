@@ -1,0 +1,81 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2044"><article id="enunt">
+			<p>Într-o tabără de vară se programează susținerea unor cursuri în <code>K</code> săli de clasă. Sunt <code>N</code> profesori care și-au exprimat dorința de a participa, fiecare dintre ei specificând intervalul de timp <code>[a</code><sub><code>i</code></sub><code>, b</code><sub><code>i</code></sub><code>]</code> în care își poate susține cursul. Programarea pe săli a profesorilor trebuie să țină cont de faptul că într-o clasă, la un moment dat, nu poate preda decât un singur profesor.</p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscându-se faptul că organizatorii doresc susținerea a cât mai multor cursuri, să se determine:</p>
+
+<p>1) Numărul maxim de cursuri care pot fi programate în cele <code>K</code> săli de clasă, ținând cont de restricția indicată.  <br>
+2) În dorința de a programa toate cursurile, în cele <code>K</code> săli, organizatorii decid să modifice durata cursurilor, păstrând însă neschimbată ora de început a lor. Astfel, ei hotărăsc ca toate cursurile să dureze un interval egal de timp, care însă nu va depăși durata celui mai lung curs propus inițial de unul dintre cei <code>N</code> profesori. Determinați care poate fi durata maximă pe care o pot avea cursurile în aceste condiții.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>cursuri.in</code> conține pe prima linie un număr natural <code>C</code>. Pentru toate testele, <code>C</code> poate lua numai valorile <code>1</code> sau <code>2</code>. Pe linia a doua se găsește o pereche de numere naturale <code>N K</code>, separate printr-un spațiu, reprezentând numărul profesorilor și numărul de săli de clasă. Pe următoarele <code>N</code> linii se găsesc perechi de numere naturale <code>a</code><sub><code>i</code></sub><code>, b</code><sub><code>i</code></sub>, care reprezintă intervalele de timp în care cei <code>N</code> profesori își susțin cursurile. Numerele în cadrul unei linii sunt separate printr-un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă valoarea lui <code>C</code> este <code>1</code>, se va rezolva numai punctul 1) din cerințe. În acest caz, fişierul de ieşire <code>cursuri.out</code> va conține pe prima linie un număr natural reprezentând numărul maxim de cursuri care pot fi programate în cele <code>K</code> săli de clasă, ținând cont de restricția indicată.</p>
+
+<p>Dacă valoarea lui <code>C</code> este <code>2</code>, se va rezolva numai punctul 2) din cerințe. În acest caz, fişierul de ieşire <code>cursuri.out</code> va conține pe prima linie un număr natural reprezentând durata maximă pe care o pot avea cele <code>N</code> cursuri, astfel încât toate să poată fi susținute în cele <code>K</code> săli disponibile. </p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 1000</code></li>
+	<li><code>1 ≤ K ≤ 1 000</code></li>
+	<li><code>1 ≤ a</code><sub><code>i</code></sub><code> &lt; b</code><sub><code>i</code></sub><code> ≤ 100 000</code>, unde  <code>1 ≤ i ≤ N</code></li>
+	<li>În cazul cerinței 2) se garantează că pentru toate testele există soluție</li>
+	<li>Pentru rezolvarea corectă a primei cerinţe se acordă 45 de puncte, iar pentru rezolvarea corectă a celei de a doua cerințe se acordă 45 de puncte. Se acordă 10 puncte pentru exemple.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>cursuri.in</code></p>
+
+<pre>1
+4 2
+2 16
+1 3
+3 18
+1 20</pre>
+
+<p><code>cursuri.out</code></p>
+
+<pre>3</pre>
+
+<h3>Explicație</h3>
+
+<p>O variantă de programare optimă este următoarea:</p>
+
+<ul>
+	<li>în prima sală se vor susține cursurile programate între <code>[1,3]</code> şi <code>[3,18]</code></li>
+	<li>în a doua clasă se susține cursul programat între <code>[1,20]</code></li>
+</ul>
+
+
+<h1>Exemplul 2</h1>
+
+<p><code>cursuri.in</code></p>
+
+<pre>2
+4 2
+5 12
+9 18
+1 3
+1 7</pre>
+
+<p><code>cursuri.out</code></p>
+
+<pre>4</pre>
+
+<h3>Explicație</h3>
+
+<p>Durata maximă pe care o pot avea toate cursurile este <code>4</code>.</p>
+
+<p>Cursul al treilea se va mări și se va desfășura între <code>[1,5]</code>, celelalte se vor micșora. Cursurile vor fi distribuite în cele două săli astfel:</p>
+
+<ul>
+	<li>Sala 1: al treilea și primul profesor programați între <code>[1,5]</code> respectiv <code>[5,9]</code>;<br>
+Sala 2: al patrulea și al doilea profesor programați între <code>[1,5]</code> respectiv <code>[9,13]</code>;</li>
+</ul>		</article>
+		</body></html>

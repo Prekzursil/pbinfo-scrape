@@ -1,0 +1,92 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1491"><article id="enunt">
+			<p>În urma inundațiilor din această iarnă, <span class="caps">COFFESHOP</span> a suferit câteva pierderi esențiale. Unele materiale au fost luate de ape, iar documentele de înregistrare deteriorate. Pentru estimarea pagubelor s-a pornit la realizarea unor liste cu produsele existente în depozit. Singurele documente recuperate parțial au fost listingurile codurilor produselor și ale codurilor de bare. </p>
+
+<p>Fiecare produs are un un cod reprezentând un număr în bază <code>16</code>. Codul de bare asociat fiecărui produs este numărul obținut prin conversia codului produsului în baza <code>2</code>. Pentru un produs se cunoaște fie codul produsului, fie codul de bare. În cazul produselor ale căror coduri nu sunt total vizibile, cifrele care nu se vad sunt marcate cu <code>X</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Fiind date numerele naturale <code>N</code>, <code>H</code> și <code>D</code>, reprezentând numărul de produse, numărul de cifre pentru codurile produselor, respectiv numărul de cifre pentru codurile de bare și cele <code>N</code> coduri, să se determine:</p>
+
+<p>a) Pentru fiecare produs pentru care se cunoaște unul dintre cele două coduri, codul care lipsește, adică codul de bare – dacă este specificat codul produsului, respectiv codul produsului – dacă este precizat codul de bare. Pentru produsele pentru care nu se cunoaște cu exactitate niciunul dintre coduri, se va determina, dacă este posibil, codul produsului.<br>
+b) Numărul de coduri indescifrabile.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>coduri.in</code> conține pe prima linie despărțite printr-un spațiu, trei numere naturale <code>N H D</code>. Începând cu a doua linie, pe următoarele <code>N</code> linii se găsesc <code>N</code> coduri, precedate de caracterul <code>'H'</code> pentru codurile produselor, <code>'D'</code> pentru codurile de bare sau <code>'U'</code> (unknown) pentru produsele ale căror coduri sunt indescifrabile. În cazul în care, pentru un produs nu se cunoaște cu exactitate niciunul din coduri, fișierul de intrare conține pe linia corespunzătoare caracterul <code>'U'</code>, urmat de codul produsului și codul de bare, cifrele indescifrabile fiind marcate cu <code>'X'</code>. Pentru codurile indescifrabile, în fișierul de intrare, este scris caracterul <code>'U'</code>, urmat de <code>H</code> cifre hexazecimale și <code>D</code> cifre binare.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>coduri.out</code> va conține <code>N+1</code> linii. Pe primele <code>N</code> linii vor fi trecute codurile lipsă ale produselor în ordinea citirii din fișierul de intrare, codul produsului în cazul în care o parte din cifre sunt indescifrabile, dar pot fi reconstituite din codul de bare, respectiv <code>0</code> în cazul în care codul nu poate fi reconstituit. Pe ultima linie se va afișa numărul de coduri indescifrabile.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 60000</code>; <code>1 ≤ H ≤ 8</code>; <code>1 ≤ D ≤ 32</code></li>
+	<li>Codurile produselor sunt cuprinse în intervalul <code>[0,7FFFFFFF]</code></li>
+	<li>Pentru reprezentarea codurilor în hexazecimal se folosesc majuscule.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>coduri.in</code></p>
+
+<pre>5 2 8
+HB1
+D01011100
+D00110101
+H23
+HA3</pre>
+
+<p><code>coduri.out</code></p>
+
+<pre>10110001
+5C
+35
+00100011
+10100011
+0</pre>
+
+<h3>Explicație</h3>
+
+<p>Pe al doilea rând, numărul este în bază <code>16</code>, adică reprezintă codul produsului, iar \( {B1}_{16} = {177}_{10} = {10110001}_{2} \).<br>
+Pe al treilea rând  numărul este în bază <code>2</code>, adică reprezintă codul de bare, iar \( {01011100}_{2} = {92}_{10} = {5C}_{16} \).<br>
+Pe al patrulea rând,  numărul este în bază <code>2</code>, adică reprezintă codul de bare, iar \( {00110101}_{2} = {53}_{10} = {35}_{16} \).<br>
+Pe al cincelea rând, numărul este în bază <code>16</code>, adică reprezintă codul produsului, iar \( {23}_{16} = {35}_{10} = {00100011}_{2} \).<br>
+Pe al șaselea rând, număr este în bază 16, adică reprezintă codul produsului, iar \( {A3}_{16} = {163}_{10} = {10100011}_{2} \).<br>
+Pe ultimul rând se afișează 0, deoarece nu sunt coduri indescifrabile.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>coduri.in</code></p>
+
+<pre>7 2 8
+HB1
+D11111111
+UX00000X000
+HA3
+UBX1011X010
+UBX10110011
+UX1X0000001</pre>
+
+<p><code>coduri.out</code></p>
+
+<pre>10110001
+FF
+00
+10100011
+0
+B3
+0
+2</pre>
+
+<h3>Explicație</h3>
+
+<p>Pe al doilea rând, numărul este în bază <code>16</code>, adică reprezintă codul produsului, iar \( {B1}_{16} = {177}_{10} = {10110001}_{2} \).<br>
+Pe al treilea rând  numărul este în bază <code>2</code>, adică reprezintă codul de bare, iar \( {11111111}_{2} = {255}_{10} = {FF}_{16} \).<br>
+Pe al patrulea rând,  numărul este parțial indescifrabil, adică prima cifră din codul produsului nu este vizibilă, dar poate fi reconstituită din codul de bare, codul produsului fiind \( {00}_{16} = {0}_{10} = {00000000}_{2} \).<br>
+Pe al cincelea rând, numărul este în bază 16, adică reprezintă codul produsului, iar \( {A3}_{16} =16 {3}_{10} = {10100011}_{2} \).<br>
+Pe al șaselea rând, numărul este parțial indescifrabil, adică a doua cifră din codul produsului nu este vizibilă și nu poate fi reconstituită din codul de bare, deoarece cifra a cincea este de asemenea indescifrabilă. Se afișează <code>0</code>.<br>
+Pe al șaptelea rând,  numărul este parțial indescifrabil, adică a doua cifră din codul produsului nu este vizibilă, dar poate fi reconstituită din codul de bare, codul produsului fiind \( {B3}_{16} = {179}_{10} = {10110011}_{2} \).<br>
+Pe al optulea rând, numărul este parțial indescifrabil, adică prima cifră din codul produsului nu este vizibilă și nu poate fi reconstituită din codul de bare, deoarece prima cifră a acestuia este de asemenea indescifrabilă. Se afișează <code>0</code>.<br>
+Pe ultimul rând se afișează <code>2</code>, deoarece sunt <code>2</code> coduri indescifrabile.</p>		</article>
+		</body></html>

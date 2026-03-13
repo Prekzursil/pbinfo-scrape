@@ -1,0 +1,70 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4177"><article id="enunt">
+			<p>Fiind un băiat aventurier, călărețul Jonathan obișnuia să umble prin pădurile magice ale împărăției tatălui său. În interiorul meleagurilor lui, împăratul avea o livadă specială, în cadrul căreia se aflau <code>n</code> meri magici, numerotați de la <code>1</code> la <code>n</code>, fiecare măr <code>i</code> conținând o cantitate cunoscută <code>m[i]</code> de fructe. Fiind speciali, cantitatea de fructe din acești meri putea fi modificată. Ca în orice poveste, împăratul avea un dușman, pe vrăjitorul Afida, care dorea să-i atace livada. Cunoscând acest fapt, Jonathan, fiul împăratului, dorește să protejeze livada tatălui său. Cei doi se confruntă în livadă, fiecare făcând modificări asupra merilor. Există în total <code>q</code> modificări, fiind de două tipuri:</p>
+
+<p><code>1 x y p</code>: cantitatea de fructe din merii cu indici cuprinși între <code>x</code> și <code>y</code> crește cu <code>p</code>, fiind o modificare făcută de Jonathan</p>
+
+<p><code>2 x y p</code>: cantitatea de fructe din merii cu indici cuprinși între <code>x</code> și <code>y</code> scade cu <code>p</code>, fiind o modificare făcută de vrăjitorul Afida</p>
+
+<p><code>Mai mult</code>: În cadrul livezii împăratului, există câțiva meri extra magici care influențează modificările pe care le fac cei doi. Dacă în cadrul unei modificări a lui Jonathan, după <code>y</code> există un măr extra magic <code>t</code>, astfel încât între <code>y</code> și <code>t</code> nu există alt măr extra magic, interogarea cuprinsă între <code>x</code> și <code>y</code> se va transforma în interogare între <code>x</code> și <code>t</code>. Dacă în cadrul unei modificări a lui Afida, înaintea lui <code>x</code> există un măr extra magic <code>t</code>, astfel încât între <code>t</code> și <code>x</code> nu există alt măr extra magic, interogarea cuprinsă între <code>x</code> și <code>y</code> se va transforma în interogare între <code>t</code> și <code>y</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Să se afișeze cantitatea de fructe din fiecare măr după cele <code>q</code> modificări.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului <code>livada2.in</code> se găsește numărul <code>n</code>. Pe următoarea linie se găsesc <code>n</code> numere întregi, separate printr-un spațiu, al <code>i</code>-lea număr reprezentând cantitatea de fructe din mărul corespunzător. Pe următoarea linie se găsesc <code>n</code> numere, <code>0</code> sau <code>1</code>, separate printr-un spațiu, valorile <code>1</code> indicând faptul că mărul de pe poziția <code>i</code> este extra special. Pe a <code>4</code>-a linie se află numărul <code>q</code> de modificări. Următoarele <code>q</code> linii vor conține interogările, fiind de forma: <code>c x y p</code>. Dacă <code>c=1</code>, modificarea este făcută de Jonathan. Dacă <code>c=2</code>, modificarea este făcută de vrăjitorul Afida.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>n fișierul <code>livada2.out</code> vor fi afișate <code>n</code> numere întregi separate prin câte un spațiu, reprezentând valorile din <code>m</code>, adică cantitatea de fructe a fiecărui măr. </p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 100.000</code></li>
+	<li><code>1 ≤ q ≤ 250.000</code></li>
+	<li><code>1 ≤ m[i] ≤ 1000</code>, pentru <code>1 ≤ i ≤ n</code></li>
+	<li>Pentru 40 de puncte, <code>q ≤ 1000</code> și <code>n ≤ 1000</code></li>
+	<li>Pentru alte 20 de puncte, nu vor exista meri extra speciali</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>livada2.in</code></p>
+
+<pre>10
+17 18 2 21 14 6 13 14 8 10 
+1 1 0 0 0 0 1 0 0 0 
+7
+2 4 7 3 
+1 8 9 16 
+2 8 8 25 
+2 4 4 8 
+1 2 8 1 
+2 8 9 21 
+1 5 6 19</pre>
+
+
+<p><code>livada2.out</code></p>
+
+<pre>17 8 -8 11 31 23 -16 -15 3 10</pre>
+
+<h3>Explicație</h3>
+
+<p>Modificările efectuate sunt:</p>
+
+<p><code>2 4 7 3</code>: Modificare făcută de Afida între indicii <code>4</code> și <code>7</code>. În stânga lui <code>4</code>, se află mărul extra special <code>2</code>. Modificarea se va face între indicii <code>2</code> și <code>7</code>, și se va scădea <code>3</code> din fiecare număr, rezultând valorile <code>17 15 -1 18 11 3 10 14 8 10</code></p>
+
+<p><code>1 8 9 16</code>: Modificare făcută de Jonathan între indicii <code>8</code> și <code>9</code>. În dreapta lui <code>9</code> nu există alt măr extra special. Modificarea se va face între indicii <code>8</code> și <code>9</code>, și se va adăuga <code>16</code> la fiecare număr, rezultând valorile <code>17 15 -1 18 11 3 10 30 24 10</code></p>
+
+<p><code>2 8 8 25</code>: Modificare făcută de Afida între indicii <code>8</code> și <code>8</code>. În stânga lui <code>8</code>, se află mărul extra special <code>7</code>. Modificarea se va face între indicii <code>7</code> și <code>8</code>, și se va scădea <code>25</code> din fiecare număr, rezultând valorile <code>17 15 -1 18 11 3 -15 5 24 10</code></p>
+
+<p><code>2 4 4 8</code>: Modificare făcută de Afida între indicii <code>4</code> și <code>4</code>. În stânga lui <code>4</code>, se află mărul extra special <code>2</code>. Modificarea se va face între indicii <code>2</code> și <code>7</code>, și se va scădea <code>8</code> din fiecare număr, rezultând valorile <code>17 7 -9 10 11 3 -15 5 24 10</code></p>
+
+<p><code>1 2 8 1</code>: Modificare făcută de Jonathan între indicii <code>2</code> și <code>8</code>. În dreapta lui <code>8</code> nu există alt măr extra special. Modificarea se va face între indicii <code>2</code> și <code>8</code>, și se va adăuga <code>1</code> la fiecare număr, rezultând valorile <code>17 8 -8 11 12 4 -14 6 24 10</code></p>
+
+<p><code>2 8 9 21</code>: Modificare făcută de Afida între indicii <code>8</code> și <code>9</code>. În stânga lui <code>8</code>, se află mărul extra special <code>7</code>. Modificarea se va face între indicii <code>7</code> și <code>9</code>, și se va scădea <code>21</code> din fiecare număr, rezultând valorile <code>17 8 -8 11 12 4 -35 -15 3 10</code></p>
+
+<p><code>1 5 6 19</code>: Modificare făcută de Jonathan între indicii <code>5</code> și <code>6</code>. În dreapta lui <code>6</code> se află mărul extra special <code>7</code>. Modificarea se va face între indicii <code>5</code> și <code>7</code>, și se va adăuga <code>19</code> la fiecare număr, rezultând valorile <code>17 8 -8 11 31 23 -16 -15 3 10</code></p>		</article>
+		</body></html>

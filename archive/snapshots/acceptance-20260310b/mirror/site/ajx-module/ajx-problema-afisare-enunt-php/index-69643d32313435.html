@@ -1,0 +1,88 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2145"><article id="enunt">
+			<p>Șoricelul Remy dorește să depoziteze cubulețele de cașcaval pe care le-a adunat. El a construit un depozit pe o suprafață dreptunghiulară și l-a compartimentat în <code>N*M</code> camere identice. În fiecare cameră șoricelul a depozitat o cantitate de cubulețe de cașcaval (ca în Figura A) și a stabilit că va mânca în fiecare zi câte un cubuleț de cașcaval din fiecare cameră în care există cașcaval. Planul său este stricat de John, șoricelul leneș din casa vecină, căruia nu-i place să-și strângă singur cașcaval, așa că s-a hotărât să fure din depozitul lui Remy. Pentru că John este pasionat de matematică s-a hotărât ca în fiecare seară, <strong>după ce vecinul său a terminat de mâncat</strong>, să se plimbe prin depozit și să fure tot cașcavalul din camerele în care găsește un număr <strong>pătrat perfect</strong> de cubulețe de cașcaval. John intră în depozit prin camera din colțul stânga sus, de coordonate <code>(1,1)</code>, parcurge prima linie de la prima la ultima coloană, apoi a doua linie de la ultima coloană, până la prima și așa mai departe, până când termină de vizitat toate camerele (ca în Figura B).</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1700-2145-soricel-png.png"></p>
+
+<h1>Cerința</h1>
+
+<p>Scrieți un program care să determine:</p>
+
+<ol>
+	<li>Numărul de zile în care se va goli depozitul lui Remy și câte camere va goli John în ziua <code>K</code>.</li>
+	<li>Numărul maxim de camere consecutive golite de acesta într-o zi și ziua în care se va întâmpla acest lucru.</li>
+</ol>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>soricel.in</code> conține pe prima linie numărul natural <code>P</code> reprezentând cerința din problemă care trebuie rezolvată. Pe a doua linie vor fi cele trei numere naturale nenule <code>N</code>, <code>M</code> și <code>K</code>, separate prin câte un spațiu, cu semnificațiile din enunț. Pe fiecare dintre următoarele <code>N</code> linii se află câte M numere naturale separate prin câte un spațiu, reprezentând numărul de cubulețe de cașcaval <code>C[i,j]</code> depozitate în camera de coordonate <code>(i,j)</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă valoarea lui <code>P</code> este <code>1</code>, fişierul de ieșire <code>soricel.out</code> va conține pe prima linie cele două valori conform cerinței 1, adică numărul de zile în care se va goli depozitul și numărul de camere golite de John în ziua <code>K</code>. Valorile vor fi afișate în ordinea cerută și separate printr-un spațiu.</p>
+
+<p>Dacă valoarea lui <code>P</code> este <code>2</code>, fişierul de ieșire <code>soricel.out</code> va conține pe prima linie cele două valori conform cerinței 2, adică numărul maxim de camere consecutive golite de John într-o zi și numărul zilei în care se va întâmpla acest lucru. Valorile vor fi afișate în ordinea cerută și separate printr-un spațiu.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 200</code></li>
+	<li><code>1 ≤ M ≤ 200</code></li>
+	<li><code>0 ≤ C[i,j] ≤ 10</code><sup><code>8</code></sup></li>
+	<li><code>1 ≤ K ≤</code> numărul de zile până când depozitul va fi gol;</li>
+	<li>există cel puțin o cameră care conține mai mult de un cubuleț de cașcaval;</li>
+	<li>numărul total de bucăți de cașcaval furate din camere consecutive într-o zi nu va depăși <code>10</code><sup><code>9</code></sup> ;</li>
+	<li>ziua în care începe să mănânce Remy este considerată ziua 1;</li>
+	<li>dacă există două sau mai multe zile în care John golește un număr egal de camere consecutive, se va afișa ziua în care a mâncat cele mai multe cubulețe de cașcaval, iar dacă și aceste cantități sunt egale, se va afișa numărul zilei cu valoarea cea mai mare;</li>
+	<li>considerăm că liniile se numerotează de sus în jos începând cu <code>1</code>, iar coloanele de la stânga la dreapta începând cu <code>1</code>;</li>
+	<li>pentru rezolvarea corectă a cerinței 1 se acordă 40 de puncte, iar pentru rezolvarea corectă a cerinței 2 se acordă 60 de puncte;</li>
+	<li>pentru prima cerință vor exista și teste în valoare de 20 de puncte, pentru care <code>0 ≤ C[i,j] ≤ 1000</code>, iar <code>N,M ≤ 30</code>;</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>soricel.in</code></p>
+
+<pre>1
+5 4 1
+2 6 5 10
+25 16 0 5
+100 17 67 3
+20 104 8 13
+53 13 55 47</pre>
+
+<p><code>soricel.out</code></p>
+
+<pre>19 5</pre>
+
+<h3>Explicație</h3>
+
+<p>La finalul primei zile, depozitul va arăta astfel:</p>
+
+<pre>0 5 0 0
+24 15 0 0
+99 0 66 2
+19 103 7 12
+52 12 54 46</pre>
+
+<p>deoarece Remy a mâncat câte un cubuleț din fiecare cameră și apoi John a golit camerele în care numărul de cubulețe rămase era pătrat perfect. Urmând aceleași etape, în fiecare zi Remy va putea să mănânce timp de <code>19</code> zile din depozit (după <code>19</code> zile toate camerele sunt goale deoarece toate numerele au ajuns să fie pătrate perfecte sau valori nule). În ziua <code>1</code> John va fura cașcavalul din <code>5</code> camere, cele care au coordonatele: <code>(1,1)</code>, <code>(1,3)</code>, <code>(1,4)</code>, <code>(2,4)</code>, <code>(3,2)</code>.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>soricel.in</code></p>
+
+<pre>2
+5 4 1
+2 6 5 10
+25 16 0 5
+100 17 67 3
+20 104 8 13
+53 13 55 47</pre>
+
+<p><code>soricel.out</code></p>
+
+<pre>6 4</pre>
+
+<h3>Explicație</h3>
+
+<p>În ziua a 4-a John va goli <code>6</code> camere, cele cu coordonatele: <code>(4,4)</code>, <code>(4,3)</code>, <code>(4,2)</code>, <code>(4,1)</code>, <code>(5,1)</code> și <code>(5,2)</code>. Aceasta este cea mai lungă secvență de camere consecutive golite în aceeași zi.</p>		</article>
+		</body></html>

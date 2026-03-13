@@ -1,0 +1,114 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=628"><article id="enunt">
+			<p>Lui Andrei îi plac foarte mult jocurile de tip puzzle. De curând, el a descoperit un joc nou: un cub de dimensiune <code>n</code> format din <code>n•n•n</code> cuburi unitate sub forma unor cămăruţe. Cubul poate fi văzut ca o matrice tridimensionala ale cărei elemente sunt cămăruţele. Două cămăruţe se numesc adiacente dacă au o faţă comună. Astfel, o cămăruţă poate fi adiacentă cu maxim <code>6</code> cămăruţe. Scopul jocului este acela de a duce o bilă din cămăruţa de coordonate <code>(1,1,1)</code> în cămăruţa de coordonate <code>(n,n,n)</code>. Bila poate trece dintr-o cămăruţă în alta doar dacă acestea sunt adiacente, iar noua cămăruţă este accesibilă din cămăruţa curentă. Fiecare cămăruţă <code>(i,j,k)</code> are asociat un număr <code>x<sub>ijk</sub></code>  a cărui reprezentare binară codifică in ce cămăruţe se poate deplasa bila din aceasta, astfel:</p>
+
+<ul>
+	<li>Dacă bitul <code>0</code> din <code>x<sub>ijk</sub></code>  este <code>1</code> atunci bila se poate deplasa în <code>(i+1,j,k)</code>, altfel nu</li>
+	<li>Dacă bitul <code>1</code> din <code>x<sub>ijk</sub></code>  este <code>1</code> atunci bila se poate deplasa în <code>(i-1,j,k)</code>, altfel nu</li>
+	<li>Dacă bitul <code>2</code> din <code>x<sub>ijk</sub></code>  este <code>1</code> atunci bila se poate deplasa în <code>(i,j+1,k)</code>, altfel nu</li>
+	<li>Dacă bitul <code>3</code> din <code>x<sub>ijk</sub></code>  este <code>1</code> atunci bila se poate deplasa în <code>(i,j,k+1)</code>, altfel nu</li>
+	<li>Dacă bitul <code>4</code> din <code>x<sub>ijk</sub></code>  este <code>1</code> atunci bila se poate deplasa în <code>(i,j-1,k)</code>, altfel nu</li>
+	<li>Dacă bitul <code>5</code> din <code>x<sub>ijk</sub></code>  este <code>1</code> atunci bila se poate deplasa în <code>(i,j,k-1)</code>, altfel nu</li>
+</ul>
+
+<p>Lungimea unui drum este dată de numărul de cămăruţe prin care trece bila.</p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând <code>n</code>, dimensiunea cubului şi valorile asociate fiecărei cămăruţe, determinaţi:</p>
+
+<p>a) cămăruța cu un număr maxim de cămăruțe ce pot fi accesate din ea;<br>
+b) un drum de lungime minimă de la cămăruţa <code>(1,1,1)</code> la cămăruţa <code>(n,n,n)</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fişierul de intrare <code>cub1.in</code> conţine pe prima linie un număr natural <code>p</code>. Pentru toate testele de intrare, numărul <code>p</code> poate avea doar valoarea <code>1</code> sau valoarea <code>2</code>.</p>
+
+<p>Pe a doua linie se găseşte un număr natural <code>n</code> care reprezintă dimensiunea cubului. Următoarele linii conţin <code>n</code> matrice pătratice de dimensiune <code>n</code>, reprezentând valorile <code>x<sub>ijk</sub></code> asociate cămăruţelor, astfel: primele <code>n</code> linii reprezintă valorile <code>x<sub>1jk</sub></code> , următoarele <code>n</code> linii valorile <code>x<sub>2jk</sub></code> , ş.a.m.d.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă valoarea lui <code>p</code> este <code>1</code>, <strong>se va rezolva numai punctul a)</strong> din cerință. </p>
+
+<p>În acest caz, în fişierul de ieşire <code>cub1.out</code> se vor scrie pe prima linie trei numere naturale reprezentând coordonatele cămăruței din care pot fi accesate un număr maxim de cămăruțe.</p>
+
+<p>Dacă valoarea lui <code>p</code> este <code>2</code>, <strong>se va rezolva numai punctul b)</strong> din cerință. </p>
+
+<p>În acest caz, în fişierul de ieşire <code>cub1.out</code> se va scrie pe prima linie un singur număr natural <code>L</code>,  reprezentând lungimea drumului de lungime minimă găsit. Dacă nu există drum, se va afişa <code>-1</code>. Următoarele <code>L</code> linii vor conţine câte <code>3</code> numere naturale reprezentând coordonatele cămăruţelor care alcătuiesc drumul găsit.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 100</code></li>
+	<li><code>0 ≤ <code>x<sub>ijk</sub></code> ≤ 63</code></li>
+	<li>Pentru rezolvarea corectă a primei cerinţe se acordă 20 de puncte, iar pentru cerința a doua se acordă 80 de puncte.</li>
+	<li>La cerința a), dacă există mai multe cămăruțe care respectă cerința dată, se va afișa oricare dintre ele.</li>
+	<li>La cerinţa b), dacă există mai multe drumuri de lungime minimă, se poate afişa oricare dintre ele.</li>
+	<li>Coordonatele cămăruţelor se afişează în ordinea în care sunt parcurse de către bilă.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>cub1.in</code></p>
+
+<pre>1
+3
+23 6 2
+57 1 10
+12 23 12
+12 1 17
+1 48 3
+2 7 17
+8 8 4
+16 4 4
+5 8 6</pre>
+
+<p><code>cub1.out</code></p>
+
+<pre>1 2 1</pre>
+
+<h1>Explicație</h1>
+
+<p><code>p = 1</code></p>
+
+<p><code>x<sub><small>121</small></sub>= 57 [111001]</code><br>
+Din cămăruța <code>(1,2,1)</code> se poate ajunge în <code>(2,2,1)</code>, <code>(1,2,2)</code> și <code>(1,1,1)</code>. Valoarea 3 este numărul maxim de cămăruțe accesibile dintr-o cămăruță.</p>
+
+<p><strong>Atenție! Pentru acest test se rezolvă doar cerința a).</strong></p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>cub1.in</code></p>
+
+<pre>2
+3
+23 6 2
+57 1 10
+12 23 12
+12 1 17
+1 48 3
+2 7 17
+8 8 4
+16 4 4
+5 8 6</pre>
+
+<p><code>cub1.out</code></p>
+
+<pre>7
+1 1 1
+2 1 1
+2 1 2
+3 1 2
+3 1 3
+3 2 3
+3 3 3</pre>
+
+<h1>Explicație</h1>
+
+<p><code>p = 2</code></p>
+
+<p>Lungimea minimă a unui drum este <code>7</code>.</p>
+
+<p>Iniţial bila se află în <code>(1,1,1)</code>. <code>x<sub><small>111</small></sub>= 23 [010111]</code> (bitul de pe poziția <code>0</code> este <code>1</code>) deci bila se poate deplasa în <code>(2,1,1)</code>. <code>x<sub><small>211</small></sub>= 12 [001100]</code> (bitul de pe pozitia <code>3</code> este <code>1</code>) deci bila se poate deplasa în <code>(2,1,2)</code>. <code>x<sub><small>212</small></sub>= 1 [000001]</code> (bitul de pe pozitia <code>0</code> este <code>1</code>) deci bila se poate deplasa în <code>(3,1,2)</code>, ș.a.m.d.</p>
+
+<p><strong>Atenție! Pentru acest test se rezolvă doar cerința b).</strong></p>		</article>
+		</body></html>

@@ -1,0 +1,78 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1204"><article id="enunt">
+			<p>Gara de Nord este cea mai vestită gară din lume. Japonezii, invidioşi pe sistemul performant de întârziere al trenurilor din Gara de Nord, s-au hotărât să analizeze motivul realizării unei astfel de performanțe.</p>
+
+<p>În Gara de Nord (considerată stația <code>0</code>) există <code>N</code> trenuri. Pentru fiecare tren <code>i</code> știm că va pleca din Gara noastră protagonistă (stația <code>0</code>) și o să meargă până la stația <code>statie[i]</code>. Staţiile <code>x</code> şi <code>x+1</code> sunt legate în mod direct pentru orice <code>x</code>, astfel că trenul <code>i</code> va opri în toate stațiile din intervalul <code>[0, statie[i]]</code>. De asemenea, știm că trenul <code>i</code> are o capacitate egală cu numărul maxim de oameni pe care îl poate transporta. Această capacitate este notată cu <code>capacitate[i]</code>.</p>
+
+<p>Avem <code>M</code> pasageri dornici sa folosească magnificul traseu. Pentru fiecare pasager <code>i</code> știm intervalul de stații <code>[a[i], b[i]]</code> pe care vrea să îl parcurgă. Mai exact, acesta vrea să se urce într-un tren în stația <code>a[i]</code> și să coboare în stația <code>b[i]</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Din cauza capacității limitate a trenurilor, este posibil ca nu toți pasagerii sa poată obțină un loc și să ajungă în destinația dorită. Să se determine numărul maxim de pasageri care pot ajunge din stația de plecare în stația de sosire, precum și o configurație în care aceștia se pot urca în trenuri.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului <code>trenuri.in</code> se află 2 numere naturale <code>N</code> și <code>M</code>, separate printr-un spațiu, cu semnificația din enunț. Următoarele <code>N</code> linii vor descrie cele <code>N</code> trenuri. Pe linia <code>i + 1</code> se vor afla două valori întregi separate prin câte un spațiu: <code>statie[i]</code> și <code>capacitate[i]</code> care descriu trenul cu numărul <code>i</code>. Urmatoarele <code>M</code> linii vor descrie itinerariile celor <code>M</code> pasageri. Astfel, pe linia <code>N + i + 1</code> se vor afla două valori întregi <code>a[i]</code> și <code>b[i]</code> , separate printr-un spațiu reprezentând stațiile între care dorește să circule pasagerul cu numărul <code>i</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Pe prima linie a fișierului <code>trenuri.out</code> se va afișa un număr natural <code>P</code>, reprezentând numărul maxim de pasageri care pot să își realizeze traseul propus. Pe următoarele <code>M</code> linii se vor afișa <code>M</code> numere naturale. Astfel, pe linia <code>i + 1</code> se va afișa trenul în care va urca pasagerul <code>i</code>. Dacă pasagerul <code>i</code> nu poate să se urce în niciun tren, se va afișa valoarea <code>0</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N, M ≤ 100 000</code></li>
+	<li><code>1 ≤ statie[i], capacitate[i] ≤ 1 000 000 000</code> pentru orice <code>i</code>, <code>1 ≤ i ≤ N</code>.</li>
+	<li><code>1 ≤ a[i] ≤ b[i] ≤ 1 000 000 000</code> pentru orice <code>i</code>, <code>1 ≤ i ≤ M</code>.</li>
+	<li>Un pasager nu poate să coboare dintr-un tren și să ia alt tren. Pasagerul <code>i</code> poate să urce doar în stația <code>a[i]</code> și să coboare doar la stația <code>b[i]</code>.</li>
+	<li>Pot exista mai multe soluții pentru repartizarea pasagerilor în trenuri. Orice soluție cu număr maxim de pasageri posibil va obține punctaj maxim.</li>
+	<li>Pentru afișarea numărului corect de pasageri se va acorda 30% din punctajul pe un test.</li>
+	<li>Pentru 20% din teste <code>N = 1</code>.</li>
+	<li>Pentru 60% din teste <code>N, M ≤ 2000</code>.</li>
+	<li>Trenurile sunt indexate de la <code>1</code> la <code>N</code>.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>trenuri.in</code></p>
+
+<pre>2 3
+10 1
+15 1
+2 8
+7 10
+8 13</pre>
+
+<p><code>trenuri.out</code></p>
+
+<pre>3
+2
+1
+2</pre>
+
+<h3>Explicație</h3>
+
+<p>Primul și ultimul pasager vor urca în trenul <code>2</code>, iar pasagerul <code>2</code> în trenul <code>1</code>. </p>
+
+<p>Dacă pasagerul <code>1</code> s-ar fi urcat în trenul <code>1</code>, ar fi trebuit sa alegem care dintre pasagerul <code>2</code> și <code>3</code> să se urce în trenul <code>2</code> deoarece cele <code>2</code> itinerarii se intersectează, iar cei doi pasageri nu ar avea loc în același tren.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>trenuri.in</code></p>
+
+<pre>1 3
+10 2
+1 5
+3 7
+4 9</pre>
+
+<p><code>trenuri.out</code></p>
+
+<pre>2
+1
+0
+1</pre>
+
+<h3>Explicație</h3>
+
+<p>Orice combinație în care selectăm <code>2</code> din cei <code>3</code> pasageri se consideră validă.</p>		</article>
+		</body></html>

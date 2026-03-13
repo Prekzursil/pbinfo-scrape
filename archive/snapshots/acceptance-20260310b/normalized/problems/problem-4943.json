@@ -1,0 +1,312 @@
+{
+  "id": 4943,
+  "slug": "lumini3",
+  "name": "lumini3",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4943/lumini3",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 21,
+      "name": "Probleme cu secvențe",
+      "slug": "probleme-cu-secven-e",
+      "href": "/?pagina=probleme-lista&tag=21"
+    }
+  ],
+  "tags": [
+    "Smenul lui Mars (Difference Arrays)"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Scrieți un program care, cunoscând <code>N</code>, <code>M</code> și cele <code>M</code> efecte, determină:<br>\n1.\tSuma totală a intensităților tuturor celor <code>N</code> lumini, după aplicarea tuturor celor <code>M</code> efecte.<br>\n2.\tIntensitatea maximă atinsă de oricare lumină de pe scenă, după aplicarea celor <code>M</code> efecte.</p>",
+      "text": "Scrieți un program care, cunoscând N, M și cele M efecte, determină: 1. Suma totală a intensităților tuturor celor N lumini, după aplicarea tuturor celor M efecte. 2. Intensitatea maximă atinsă de oricare lumină de pe scenă, după aplicarea celor M efecte."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>lumini.in</code> conține pe prima linie un număr <code>c</code>, reprezentând cerința (<code>1</code> sau <code>2</code>). Pe a doua linie se află două numere naturale <code>N</code> și <code>M</code>, separate printr-un spațiu, reprezentând numărul de lumini și, respectiv, numărul de efecte. Pe următoarele <code>M</code> linii se află câte trei numere naturale <code>st</code><sub><code>i</code></sub>, <code>dr</code><sub><code>i</code></sub> și <code>val</code><sub><code>i</code></sub>, separate prin spații, reprezentând descrierea fiecărui efect <code>i</code>.</p>",
+      "text": "Fișierul de intrare lumini.in conține pe prima linie un număr c, reprezentând cerința (1 sau 2). Pe a doua linie se află două numere naturale N și M, separate printr-un spațiu, reprezentând numărul de lumini și, respectiv, numărul de efecte. Pe următoarele M linii se află câte trei numere naturale sti, dri și vali, separate prin spații, reprezentând descrierea fiecărui efect i."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>lumini.out</code> va conține o singură linie pe care va fi scris:</p><ul>\n\t<li>dacă <code>c = 1</code>: un singur număr reprezentând suma totală a intensităților.</li>\n\t<li>dacă <code>c = 2</code>: un singur număr reprezentând intensitatea maximă atinsă.</li>\n</ul>",
+      "text": "Fișierul de ieșire lumini.out va conține o singură linie pe care va fi scris: dacă c = 1: un singur număr reprezentând suma totală a intensităților. dacă c = 2: un singur număr reprezentând intensitatea maximă atinsă."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N, M ≤ 200 000</code></li>\n\t<li><code>1 ≤ st</code><sub><code>i</code></sub> <code>≤ dr</code><sub><code>i</code></sub> <code>≤ N</code></li>\n\t<li><code>1 ≤ val</code><sub><code>i</code></sub> <code>≤ 1000</code></li>\n\t<li>Se garantează că intensitatea maximă (pentru cerința 2) nu va depăși <code>2</code><sup><code>31</code></sup> <code>- 1</code>.</li>\n\t<li>Se garantează că suma totală (pentru cerința 1) nu va depăși <code>2</code><sup><code>63</code></sup> <code>- 1</code>.</li>\n</ul>",
+      "text": "1 ≤ N, M ≤ 200 000 1 ≤ sti ≤ dri ≤ N 1 ≤ vali ≤ 1000 Se garantează că intensitatea maximă (pentru cerința 2) nu va depăși 231 - 1. Se garantează că suma totală (pentru cerința 1) nu va depăși 263 - 1."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>lumini.in</code></p><pre>1\n8 4\n1 4 10\n3 6 5\n2 5 20\n7 8 8</pre><p><code>lumini.out</code></p><pre>156</pre><h3>Explicație</h3><p>Cerința 1 (Suma)<br>\nAvem <code>N = 8</code> lumini și <code>4</code> actualizări:<br>\n1. <code>1 4 10 → 10 10 10 10 0 0 0 0</code><br>\n2. <code>3 6 5 → 10 10 15 15 5 5 0 0</code><br>\n3. <code>2 5 20 → 10 30 35 35 25 5 0 0</code><br>\n4. <code>7 8 8 → 10 30 35 35 25 5 8 8</code><br>\nȘirul final de intensități este: <code>[10, 30, 35, 35, 25, 5, 8, 8]</code><br>\nSuma totală este: <code>10 + 30 + 35 + 35 + 25 + 5 + 8 + 8 = 156</code>.</p>",
+      "text": "lumini.in1 8 4 1 4 10 3 6 5 2 5 20 7 8 8lumini.out156ExplicațieCerința 1 (Suma) Avem N = 8 lumini și 4 actualizări: 1. 1 4 10 → 10 10 10 10 0 0 0 0 2. 3 6 5 → 10 10 15 15 5 5 0 0 3. 2 5 20 → 10 30 35 35 25 5 0 0 4. 7 8 8 → 10 30 35 35 25 5 8 8 Șirul final de intensități este: [10, 30, 35, 35, 25, 5, 8, 8] Suma totală este: 10 + 30 + 35 + 35 + 25 + 5 + 8 + 8 = 156."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>lumini.in</code></p><pre>2\n8 4\n1 4 10\n3 6 5\n2 5 20\n7 8 8</pre><p><code>lumini.out</code></p><pre>35</pre><h3>Explicație</h3><p>Cerința 2 (Maximul). Se aplică aceleași actualizări ca mai sus. Șirul final de intensități este:<br>\n<code>[10, 30, 35, 35, 25, 5, 8, 8]</code><br>\nValoarea maximă din șir este <code>35</code>.</p>",
+      "text": "lumini.in2 8 4 1 4 10 3 6 5 2 5 20 7 8 8lumini.out35ExplicațieCerința 2 (Maximul). Se aplică aceleași actualizări ca mai sus. Șirul final de intensități este: [10, 30, 35, 35, 25, 5, 8, 8] Valoarea maximă din șir este 35."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cerința 1 (Suma) Avem N = 8 lumini și 4 actualizări: 1. 1 4 10 → 10 10 10 10 0 0 0 0 2. 3 6 5 → 10 10 15 15 5 5 0 0 3. 2 5 20 → 10 30 35 35 25 5 0 0 4. 7 8 8 → 10 30 35 35 25 5 8 8 Șirul final de intensități este: [10, 30, 35, 35, 25, 5, 8, 8] Suma totală este: 10 + 30 + 35 + 35 + 25 + 5 + 8 + 8 = 156."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cerința 2 (Maximul). Se aplică aceleași actualizări ca mai sus. Șirul final de intensități este: [10, 30, 35, 35, 25, 5, 8, 8] Valoarea maximă din șir este 35."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N, M ≤ 200 000",
+    "1 ≤ sti ≤ dri ≤ N",
+    "1 ≤ vali ≤ 1000",
+    "Se garantează că intensitatea maximă (pentru cerința 2) nu va depăși 231 - 1.",
+    "Se garantează că suma totală (pentru cerința 1) nu va depăși 263 - 1."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q9eb4905fa9.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "lumini.in / lumini.out",
+    "limită timp": "0.3 secunde",
+    "limită memorie": "16 MB / 2 MB",
+    "sursa problemei": "OMI Iasi 2026, clasele 7-8",
+    "autor": "Silviu Muraru",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.3,
+  "memoryLimitMb": 16,
+  "author": "Silviu Muraru",
+  "sourceAttribution": "OMI Iasi 2026, clasele 7-8",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4943/lumini3"
+}

@@ -1,0 +1,80 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4816"><article id="enunt">
+			<p>Dexter și-a deschis un laborator nou în care vrea să efectueze o serie de experimente pe șoareci pentru a descoperi leacul pentru cancer. În laborator există <code>N</code> șoareci, care se află așezați într-un cerc și sunt numerotați în ordine de la <code>0</code> la <code>N-1</code>. </p>
+
+<p>Dexter efectuează, pe rând, <code>M</code> experimente. Pentru fiecare experiment șoarecii care participă la al <code>i</code>-lea experiment formează întotdeauna un interval continuu, exprimat sub forma unei perechi de numere <code>(S[i], F[i])</code>, având semnificația:</p>
+
+<ul>
+	<li>dacă <code>S[i] ≤ F[i]</code>, atunci șoarecii <code>S[i], S[i]+1, ..., F[i]</code> participă la experimentul <code>i</code>;</li>
+	<li>dacă <code>S[i] &gt; F[i]</code>, atunci șoarecii <code>S[i], S[i]+1, ..., N-2, N-1, 0, ..., F[i]</code> participă la experimentul <code>i</code>.</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>La fiecare pas, Dexter vrea să știe câți din cei <code>N</code> șoareci au participat la toate experimentele efectuate până atunci. Altfel spus, după fiecare al <code>i</code>-lea experiment efectuat, să se determine numărul de șoareci care au participat la  toate experimentele <code>1, 2, ..., i</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>experimente.in</code> conține pe prima linie două numere <code>N</code> și <code>M</code>. Fiecare din următoarele <code>M</code> linii conține două numere <code>A[i]</code> și <code>B[i]</code>, având următoarea semnificație:</p>
+
+<ul>
+	<li>dacă <code>i = 1</code>, atunci <code>S[i] = A[i]</code> și <code>F[i] = B[i]</code>;</li>
+	<li>dacă <code>i &gt; 1</code> și notând cu <code>R[i-1]</code> răspunsul pentru cel de al <code>(i-1)</code>-lea experiment, atunci <code>S[i] = (R[i-1] + A[i]) mod N</code> și <code>F[i] = (R[i-1] + B[i]) mod N</code>.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>experimente.out</code> trebuie să conțină <code>M</code> linii. Pe cea de a <code>i</code>-a linie se va afișa un singur număr reprezentând numărul de șoareci care au participat la toate experimentele <code>1, 2, ..., i</code>.<br>
+% numărul de șoareci care participă la primele <code>i</code> experimente.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 1.000.000.000</code>;</li>
+	<li><code>1 ≤ M ≤ 100.000</code>;</li>
+	<li><code>0 ≤ A[i], B[i] &lt; N</code>.</li>
+	<li>Pentru 18 puncte, <code>S[i] ≤ F[i]</code> pentru <code>1 ≤ i ≤ M</code></li>
+	<li>Pentru 20 de puncte, <code>1 ≤ N, M ≤ 1000</code></li>
+	<li>Pentru 22 de puncte, <code>1 ≤ N ≤ 100.000, 1 ≤ M ≤ 1000</code></li>
+	<li>Pentru 20 de puncte, <code>1 ≤ N, M ≤ 100.000</code></li>
+	<li>Pentru 20 de puncte, fără restricţii suplimentare</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>experimente.in</code></p>
+
+<pre>5 3
+1 4
+3 0
+2 0</pre>
+
+<p><code>experimente.out</code></p>
+
+<pre>4
+3
+2</pre>
+
+<h3>Explicație</h3>
+
+<p>Pentru primul experiment <code>S[1] = 1</code> și <code>F[1] = 4</code>; participă șoarecii <code>1</code>, <code>2</code>, <code>3</code> și <code>4</code>, deci <code>R[1] = 4</code>.<br>
+Pentru al doilea experiment, <code>S[2] = (3 + 4) mod 5 = 2</code>, iar <code>F[2] = (0 + 4) mod 5 = 4</code>. La primele două experimente participă șoarecii <code>2</code>, <code>3</code> și <code>4</code>, deci <code>R[2] = 3</code>.<br>
+Pentru al treilea experiment, <code>S[3] = (2 + 3) mod 5 = 0</code>, iar <code>F[3] = (0 + 3) mod 5 = 3</code>. La primele trei experimente participă șoarecii <code>2</code> și <code>3</code>, deci <code>R[3] = 2</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>experimente.in</code></p>
+
+<pre>6 2
+4 1
+2 5</pre>
+
+<p><code>experimente.out</code></p>
+
+<pre>4
+2</pre>
+
+<h3>Explicație</h3>
+
+<p>Pentru primul experiment <code>S[1] = 4</code> și <code>F[1] = 1</code>; participă șoarecii <code>0</code>, <code>1</code>, <code>4</code> și <code>5</code>, deci <code>R[1] = 4</code>.<br>
+Pentru al doilea experiment, <code>S[2] = (2 + 4) mod 6 = 0</code>, iar <code>F[2] = (5 + 4) mod 6 = 3</code>. La primele două experimente participă șoarecii <code>0</code> și <code>1</code>, deci <code>R[2] = 2</code>.</p>		</article>
+		</body></html>

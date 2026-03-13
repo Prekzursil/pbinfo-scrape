@@ -1,0 +1,68 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4611"><article id="enunt">
+			<p>Boris este un afacerist de succes, având contracte care aduc pe de o parte venituri (dobânzi, comisioane etc.) dar și obligații la taxe (impozite, rate etc.).  </p>
+
+<p>Boris s-a hotărât să viziteze o clădire de birouri. Clădirea are un singur nivel în care birourile sunt lipite unele de altele formând un caroiaj pătratic de dimensiune <code>N x N</code>. Planul birourilor se poate reprezenta ca o matrice pătratică, unde birourile sunt elemente din matrice cu liniile și coloanele numerotate de la <code>1</code> la <code>N</code>. Mai exact, la linia <code>i</code>, coloana <code>j</code> se găsește biroul <code>(i, j)</code>. </p>
+
+<p>Boris va intra în clădire prin biroul <code>(1, 1)</code> și va trece printr-o serie de birouri. Traseul se va termina în biroul <code>(N, N).</code> La trecerea dintr-un birou în altul se permite:</p>
+
+<ul>
+	<li>pe același rând doar de la stânga la dreapta: <code>(i, j) → (i, j+1)</code>;</li>
+	<li>pe aceeași coloană doar de sus în jos: <code>(i, j) → (i+1, j)</code>;</li>
+	<li>în sens diagonal în următoarele două direcții: <code>(i, j) → (i+1, j-1)</code>, dar și <code>(i, j) → (i-1, j+1)</code>.</li>
+</ul>
+
+<p>Totuși, Boris nu se va mai întoarce niciodată într-un birou din care a ieșit.</p>
+
+<p>De câte ori Boris vizitează un birou <code>(i, j)</code> el încheie un contract în valoare de <code>B(i, j)</code> lei. Dacă <code>B(i, j) &gt; 0</code>, atunci el primește <code>B(i, j)</code> lei, iar dacă <code>B(i, j) &lt; 0,</code> el plătește <code>-B(i, j)</code> lei. Scopul lui Boris este acela de a ieși din clădire cu un câștig total maxim. Câștigul se definește ca fiind totalul de bani primiți minus totalul de bani plătiți pe traseu.</p>
+
+<p><strong>Atenție!</strong> Câștigul poate să fie și negativ dacă Boris plătește mai mult decât primește.</p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând planul birourilor și valorile <code>B(i, j)</code> pentru <code>1 ≤ i, j ≤ N</code> care îl așteaptă pe Boris în fiecare birou, ajutați-l să calculeze câștigul maxim pe care îl poate avea la ieșirea din clădire.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>birocratie.in</code> conține pe prima linie numărul <code>N</code>, iar pe următoarele <code>N</code> linii câte <code>N</code> numere întregi separate prin spații, reprezentând valorile <code>B(i, j)</code> pentru <code>1 ≤ i, j ≤ N</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>birocratie.out</code> va conține o singură linie pe care se află un singur număr întreg reprezentând câștigul maxim posibil.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>5 ≤ N ≤ 1000</code></li>
+	<li><code>-1000 ≤ B(i,j) ≤ 1000</code> pentru <code>1 ≤ i, j ≤ N</code></li>
+	<li>Pentru 12 puncte, <code>B</code> are toate elementele pozitive, <code>N ≤ 300</code></li>
+	<li>Pentru 12 puncte, <code>B</code> are toate elementele egale și negative, <code>N ≤ 300</code></li>
+	<li>Pentru 15 puncte, Pe fiecare diagonală paralelă cu diagonala secundară elementele din <code>B</code> sunt egale, <code>N ≤ 300</code></li>
+	<li>Pentru 13 puncte, Elementele de pe chenarul lui <code>B</code> sunt negative, iar celelalte elemente sunt pozitive, <code>N ≤ 300</code></li>
+	<li>Pentru 13 puncte, Toate elementele din <code>B</code> sunt egale în valoare absolută (modul), elementele de pe chenar sunt pozitive, iar celelalte  elemente sunt negative, <code>N ≤ 300</code></li>
+	<li>Pentru 16 puncte, <code>N ≤ 300</code></li>
+	<li>Pentru 19 puncte, Fără restricții suplimentare.</li>
+</ul>
+
+<p>Mai sus prin <strong>chenarul</strong> lui <code>B</code> ne referim la elementele care se află pe prima/ultima linie și prima/ultima coloană.</p>
+
+<h1>Exemplu:</h1>
+
+<p><code>birocratie.in</code></p>
+
+<pre>5
+1 2 5 8 2
+1 3 -10 2 1
+0 9 1 -7 3
+-2 3 4 -1 2
+3 -4 2 3 1</pre>
+
+<p><code>birocratie.out</code></p>
+
+<pre>42</pre>
+
+<h3>Explicație</h3>
+
+<p>Câștigul maxim este 42, obținut adunând elementele evidențiate în traseul ilustrat mai jos.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-birocratie2-001-jpg.jpg"></p>		</article>
+		</body></html>

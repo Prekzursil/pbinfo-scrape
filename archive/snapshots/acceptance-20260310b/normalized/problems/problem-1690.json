@@ -1,0 +1,303 @@
+{
+  "id": 1690,
+  "slug": "undo",
+  "name": "Undo",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1690/undo",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 85,
+      "name": "Structuri de date liniare",
+      "slug": "structuri-de-date-liniare",
+      "href": "/?pagina=probleme-lista&tag=85"
+    },
+    {
+      "id": 86,
+      "name": "Stiva",
+      "slug": "stiva",
+      "href": "/?pagina=probleme-lista&tag=86"
+    }
+  ],
+  "tags": [
+    "Stiva",
+    "Cautare binara"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p><strong><span class=\"caps\">XOR</span>in</strong> este nemulțumit de problemele primite în prima zi de concurs de la Olimpiada Națională de Informatică și decide astfel să se implice în comisie. În scurt timp devine specialistul comisiei în generarea de teste formate din șiruri de numere. Din când în când el trebuie să adauge sau să șteargă elemente din șir. Câteodată el decide să readauge dintre elemente șterse anterior. Fie șirul de numere <code>a=(a[1], a[2], … ,a[N])</code> și <code>N</code> numărul de elemente din șir după fiecare operație.</p><p>Astfel el are de realizat următoarele operații pornind de la un șir vid:</p><ul>\n\t<li>Inserează la sfârșitul șirului o valoare <code>x</code>;</li>\n\t<li>Șterge ultimele <code>x</code> elemente din șir;</li>\n\t<li>Readaugă la sfârșitul șirului primele <code>x</code> elemente șterse. Dacă, de exemplu, în operația anterioară de ștergere a unui număr <code>y</code> de elemente, am șters elementele <code>a[N-y+1]</code>, <code>a[N-y+2]</code>,…, <code>a[N]</code>, iar acum urmează o operație de readăugare a <code>x</code> elemente, vor fi adăugate în ordine elementele <code>a[N-y+1]</code>, <code>a[N-y+2]</code>,…, <code>a[N-y+x]</code> la sfârșitul șirului.</li>\n</ul><p>Din când în când <span class=\"caps\">XOR</span>in își pune următoarea întrebare: de câte ori există valoarea <code>x</code> în șir?</p>",
+      "text": "XORin este nemulțumit de problemele primite în prima zi de concurs de la Olimpiada Națională de Informatică și decide astfel să se implice în comisie. În scurt timp devine specialistul comisiei în generarea de teste formate din șiruri de numere. Din când în când el trebuie să adauge sau să șteargă elemente din șir. Câteodată el decide să readauge dintre elemente șterse anterior. Fie șirul de numere a=(a[1], a[2], … ,a[N]) și N numărul de elemente din șir după fiecare operație.Astfel el are de realizat următoarele operații pornind de la un șir vid: Inserează la sfârșitul șirului o valoare x; Șterge ultimele x elemente din șir; Readaugă la sfârșitul șirului primele x elemente șterse. Dacă, de exemplu, în operația anterioară de ștergere a unui număr y de elemente, am șters elementele a[N-y+1], a[N-y+2],…, a[N], iar acum urmează o operație de readăugare a x elemente, vor fi adăugate în ordine elementele a[N-y+1], a[N-y+2],…, a[N-y+x] la sfârșitul șirului. Din când în când XORin își pune următoarea întrebare: de câte ori există valoarea x în șir?"
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>undo.in</code> conține pe prima linie numărul <code>M</code> ce reprezintă numărul de operații.</p><p>Pe următoarele <code>M</code> linii se vor afla operațiile codificate astfel:</p><ul>\n\t<li><code>1 x</code> – se inserează elementul <code>x</code> la sfârșitul șirului</li>\n\t<li><code>2 y</code> – se șterg ultimele <code>y</code> elemente adăugate în șir</li>\n\t<li><code>3 z</code> – se adaugă înapoi la sfârșitul șirului primele <code>z</code> elemente șterse</li>\n\t<li><code>4 t</code> – se afișează numărul de elemente cu valoarea <code>t</code> din șir</li>\n</ul>",
+      "text": "Fișierul de intrare undo.in conține pe prima linie numărul M ce reprezintă numărul de operații.Pe următoarele M linii se vor afla operațiile codificate astfel: 1 x – se inserează elementul x la sfârșitul șirului 2 y – se șterg ultimele y elemente adăugate în șir 3 z – se adaugă înapoi la sfârșitul șirului primele z elemente șterse 4 t – se afișează numărul de elemente cu valoarea t din șir"
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Pe fiecare linie a fișierului <code>undo.out</code> se scriu răspunsurile la întrebările lui <strong><span class=\"caps\">XOR</span>in</strong>, fiecare răspuns pe câte o linie.</p>",
+      "text": "Pe fiecare linie a fișierului undo.out se scriu răspunsurile la întrebările lui XORin, fiecare răspuns pe câte o linie."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li>Toate numerele din fișierul de intrare sunt cuprinse între <code>1</code> și  <code>200000</code>;</li>\n\t<li>Pentru 20% din teste se garantează  <code>M ≤ 1000</code>,  pentru alte 40% din teste, se garantează că numerele inserate vor fi distincte;</li>\n\t<li>Între o operație de ștergere și una de readăugare sau între două de readăugare nu se vor afla alte operații de inserare</li>\n\t<li>Numărul de elemente readăugate nu va fi mai mare decât numărul de elemente șterse la ultima operație.</li>\n\t<li>Între două operații de readăugare va exista cel puțin o operație de ștergere.</li>\n</ul>",
+      "text": "Toate numerele din fișierul de intrare sunt cuprinse între 1 și 200000; Pentru 20% din teste se garantează M ≤ 1000, pentru alte 40% din teste, se garantează că numerele inserate vor fi distincte; Între o operație de ștergere și una de readăugare sau între două de readăugare nu se vor afla alte operații de inserare Numărul de elemente readăugate nu va fi mai mare decât numărul de elemente șterse la ultima operație. Între două operații de readăugare va exista cel puțin o operație de ștergere."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>undo.in</code></p><pre>16\n1 1\n1 2\n1 3\n1 4\n4 4\n2 2\n4 3\n3 1\n4 4\n4 3\n1 7\n1 7\n1 7\n4 7\n2 2\n4 7</pre><p><code>undo.out</code></p><pre>1\n0\n0\n1\n3\n1</pre><h3>Explicație</h3><p>Inițial șirul este vid.<br>\nDupă primele <code>4</code> operații de inserare șirul este <code>1, 2, 3, 4</code>.  <br>\nOperația <code>4 4</code> va afișa <code>1</code>.<br>\nOperația <code>2 2</code> va șterge ultimele două elemente șirul devenind <code>1, 2</code>.<br>\nDin cauză că elementul <code>3</code> a fost șters, a șaptea operație va afișa <code>0</code>.<br>\nOperația <code>3 1</code> va readăuga la sfârșitul șirului elementul <code>3</code>. <br>\nÎn urma acestei operații șirul devine <code>1, 2, 3</code>.<br>\nOperația <code>4 4</code> va afișa 0, iar operația <code>4 3</code> va afișa <code>1</code>.<br>\nș.a.m.d.</p>",
+      "text": "undo.in16 1 1 1 2 1 3 1 4 4 4 2 2 4 3 3 1 4 4 4 3 1 7 1 7 1 7 4 7 2 2 4 7undo.out1 0 0 1 3 1ExplicațieInițial șirul este vid. După primele 4 operații de inserare șirul este 1, 2, 3, 4. Operația 4 4 va afișa 1. Operația 2 2 va șterge ultimele două elemente șirul devenind 1, 2. Din cauză că elementul 3 a fost șters, a șaptea operație va afișa 0. Operația 3 1 va readăuga la sfârșitul șirului elementul 3. În urma acestei operații șirul devine 1, 2, 3. Operația 4 4 va afișa 0, iar operația 4 3 va afișa 1. ș.a.m.d."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Inițial șirul este vid. După primele 4 operații de inserare șirul este 1, 2, 3, 4. Operația 4 4 va afișa 1. Operația 2 2 va șterge ultimele două elemente șirul devenind 1, 2. Din cauză că elementul 3 a fost șters, a șaptea operație va afișa 0. Operația 3 1 va readăuga la sfârșitul șirului elementul 3. În urma acestei operații șirul devine 1, 2, 3. Operația 4 4 va afișa 0, iar operația 4 3 va afișa 1. ș.a.m.d."
+    }
+  ],
+  "constraints": [
+    "Toate numerele din fișierul de intrare sunt cuprinse între 1 și 200000;",
+    "Pentru 20% din teste se garantează M ≤ 1000, pentru alte 40% din teste, se garantează că numerele inserate vor fi distincte;",
+    "Între o operație de ștergere și una de readăugare sau între două de readăugare nu se vor afla alte operații de inserare",
+    "Numărul de elemente readăugate nu va fi mai mare decât numărul de elemente șterse la ultima operație.",
+    "Între două operații de readăugare va exista cel puțin o operație de ștergere."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qb827f17d25.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "10",
+    "intrare/ieșire": "undo.in / undo.out",
+    "limită timp": "0.3 secunde",
+    "limită memorie": "16 MB / 8 MB",
+    "sursa problemei": "ONI 2016, clasa a X-a",
+    "autor": "Petru Trimbitas",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.3,
+  "memoryLimitMb": 16,
+  "author": "Petru Trimbitas",
+  "sourceAttribution": "ONI 2016, clasa a X-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1690/undo"
+}

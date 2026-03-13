@@ -1,0 +1,77 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4664"><article id="enunt">
+			<p>Comisarul Roman se află în fața unui dispozitiv exploziv constând dintr-o piramidă cu <code>N</code> nivele numerotate de la <code>1</code> la <code>N</code>. Fiecare nivel <code>i</code> conține <code>i</code> bombe numerotate de la <code>1</code> la <code>i</code>. Notăm bomba <code>j</code> de pe nivelul <code>i</code> cu <code>B[i, j].</code> Pentru fiecare bombă <code>B[i, j]</code> se cunoaște timpul în secunde <code>T[i, j]</code> de la momentul inițial după care aceasta explodează. Roman trebuie să dezamorseze dispozitivul după următoarele reguli:</p>
+
+<ul>
+	<li>Dezamorsarea unei bombe durează o secundă;</li>
+	<li>Pentru a dezamorsa bombă <code>B[i, j]</code> trebuie întâi dezamorsate cele două bombe peste care aceasta este așezată, adică <code>B[i + 1, j]</code> și <code>B[i + 1, j + 1]</code>. Bombele de pe nivelul <code>N</code> nu au bombe dedesubt și deci nu se supun acestei reguli.</li>
+</ul>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-detonator-001-png.png"></p>
+
+<p>Dispozitivul se consideră dezamorsat odată ce toate bombele au fost dezamorsate. Roman nu vrea să se grăbească, așa că ar vrea să știe care este numărul maxim de secunde <code>X</code> astfel încât, dacă ar începe operațiunea de dezamorsare cu o întârziere inițială de <code>X</code> secunde, dispozitivul ar putea fi încă dezamorsat cu succes. Cu alte cuvinte, se cere cel mai mare număr <code>X</code> astfel încât dezamorsarea ar fi posibilă dacă am înlocui numerele <code>T[i, j]</code> cu <code>T[i, j] - X</code> pentru <code>1 ≤ j ≤ i ≤ N.</code> Este posibil și ca <code>X</code> să fie negativ dacă Roman a ajuns prea târziu la dispozitiv. De exemplu, dacă dezamorsarea nu este posibilă în condițiile date dar ar fi fost posibilă dacă s-ar fi ajuns la fața locului cu o secundă mai devreme, atunci <code>X = -1</code>. Dacă nici cu o secundă mai devreme nu s-ar fi putut, dar s-ar fi putut cu două secunde mai devreme, atunci <code>X = -2</code>, și așa mai departe.  </p>
+
+<h1>Cerința</h1>
+
+<p>Pentru <code>Q</code> teste, date fiind <code>N</code> și valorile <code>T[i, j]</code> pentru <code>1 ≤ j ≤ i ≤ N</code>, se cere numărul <code>X</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Prima linie a fişierului de intrare <code>detonator.in</code> conţine <code>Q</code>, reprezentând numărul de teste. Urmează descrierea celor <code>Q</code> teste, fiecare test fiind descris după cum urmează. Prima linie conține numărul întreg <code>N</code>. Următoarele <code>N</code> linii, numerotate în cadrul testului de la <code>1</code> la <code>N</code>, conțin numere întregi astfel încât al <code>j</code>-lea număr de pe linia <code>i</code> este <code>T[i, j]</code>. Observați că linia <code>i</code> conține <code>i</code> numere.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>detonator.out</code> trebuie să conțină <code>Q</code> linii, reprezentând numărul <code>X</code> pentru fiecare test dat.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ Q ≤ 5</code></li>
+	<li><code>1 ≤ N ≤ 1000</code></li>
+	<li><code>1 ≤ T[i, j] ≤ 1.000.000.000</code> pentru <code>1 ≤ j ≤ i ≤ N</code></li>
+	<li>Pentru 7 puncte, Valorile <code>T[i, j]</code> pentru <code>1 ≤ j ≤ i ≤ N</code> sunt egale (toate bombele sunt programate să explodeze în același timp)</li>
+	<li>Pentru 13 puncte, <code>N ≤ 5</code>, <code>|X| ≤ 10</code></li>
+	<li>Pentru 9 puncte, <code>N ≤ 5</code></li>
+	<li>Pentru 14 puncte, <code>N ≤ 50</code>, <code>|X| ≤ 10</code> si <code>T[i, j] ≥ max{T[i + 1, j], T[i + 1, j + 1]}</code> pentru <code>1 ≤ j ≤ i &lt; N</code></li>
+	<li>Pentru 13 puncte, <code>N ≤ 50</code>, <code>|X| ≤ 10</code></li>
+	<li>Pentru 2 puncte, <code>N ≤ 50</code></li>
+	<li>Pentru 9 puncte, <code>N ≤ 200</code>, <code>|X| ≤ 10</code></li>
+	<li>Pentru 2 puncte, <code>N ≤ 200</code></li>
+	<li>Pentru 19 puncte, <code>N ≤ 500</code></li>
+	<li>Pentru 12 puncte, fără restricţii suplimentare.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>detonator.in</code></p>
+
+<pre>4
+2
+10
+10 10
+4
+10
+7 9
+4 6 8
+1 3 2 5
+3
+9
+9 9
+1 1 1
+3
+6
+5 3
+4 4 4</pre>
+
+<p><code>detonator.out</code></p>
+
+<pre>7
+0
+-2
+0</pre>
+
+<h3>Explicație</h3>
+
+<p>Primul test are <code>N = 2</code>, iar cele <code>N • (N + 1) / 2 = 3</code> bombe toate explodează după <code>10</code> secunde. Astfel, Roman poate aștepta maxim <code>7</code> secunde după care să înceapă procesul, dezamorsând cele trei bombe după <code>8</code>, <code>9</code> și respectiv <code>10</code> secunde.<br>
+Al doilea test este ilustrat în figura de mai sus. În acest caz, Roman trebuie să înceapă dezamorsarea imediat, deoarece bomba <code>B_{4, 1}</code> ar exploda după o secundă. Singura ordine de dezamorsare validă este dată de valorile <code>B_{i, j}</code> în ordinea <code>1, 2, ..., 10</code>.<br>
+Al treilea test are trei bombe ce explodează imediat, așa că Roman ar fi trebuit să ajungă cu 2 secunde mai devreme la dispozitiv.</p>		</article>
+		</body></html>

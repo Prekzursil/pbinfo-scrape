@@ -1,0 +1,295 @@
+{
+  "id": 1955,
+  "slug": "plimbare1",
+  "name": "plimbare1",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1955/plimbare1",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 16,
+      "name": "Teoria Grafurilor",
+      "slug": "teoria-grafurilor",
+      "href": "/?pagina=probleme-lista&tag=16"
+    },
+    {
+      "id": 60,
+      "name": "Grafuri cu costuri",
+      "slug": "grafuri-cu-costuri",
+      "href": "/?pagina=probleme-lista&tag=60"
+    }
+  ],
+  "tags": [
+    "Algoritmul lui Kruskal"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Personajul acestei probleme este Lucian. Lucian locuiește în tara lui Verde Împărat, această tară având <code>n</code> orașe, numerotate de la <code>1</code> la <code>n</code>. Cum în orice poveste cu împărați există și o prințesă, și în problema noastră avem o prințesă, să o numim Maria. Maria este fiica lui Verde Împărat și în același timp prietena lui Lucian. </p><p>În tara lui Verde Împărat se apropie sărbătorile, iar ca să fie sigur de un nou mandat, împăratul a promis că va repara câteva drumuri, astfel încât să se poată ajunge din orice oraș, în oricare alt oraș, mergând doar pe drumuri care nu sunt stricate. Fiecare drum care este stricat are un cost de reparație , și având în vedere că se apropie sărbătorile, Împăratul ar vrea să repare drumurile optim, astfel încât să obțină un cost cât mai mic. Știind că Lucian vrea să-i ceară mâna Mariei, Împăratul i-a încredințat lui Lucian această sarcină, iar în cazul în care nu va putea să o îndeplinească îl va izgoni din tară. Lucian nu a fost prezent mai deloc la orele de algoritmică din liceu și vă cere vouă ajutorul pentru această problema complicată. Având la dispoziție lista drumurilor, precum și lista drumurilor stricate, voi trebuie să-i spuneți lui Lucian care este suma minimă pe care trebuie să o folosească pentru a se putea ajunge din orice oraș în oricare alt oraș.</p>",
+      "text": "Personajul acestei probleme este Lucian. Lucian locuiește în tara lui Verde Împărat, această tară având n orașe, numerotate de la 1 la n. Cum în orice poveste cu împărați există și o prințesă, și în problema noastră avem o prințesă, să o numim Maria. Maria este fiica lui Verde Împărat și în același timp prietena lui Lucian. În tara lui Verde Împărat se apropie sărbătorile, iar ca să fie sigur de un nou mandat, împăratul a promis că va repara câteva drumuri, astfel încât să se poată ajunge din orice oraș, în oricare alt oraș, mergând doar pe drumuri care nu sunt stricate. Fiecare drum care este stricat are un cost de reparație , și având în vedere că se apropie sărbătorile, Împăratul ar vrea să repare drumurile optim, astfel încât să obțină un cost cât mai mic. Știind că Lucian vrea să-i ceară mâna Mariei, Împăratul i-a încredințat lui Lucian această sarcină, iar în cazul în care nu va putea să o îndeplinească îl va izgoni din tară. Lucian nu a fost prezent mai deloc la orele de algoritmică din liceu și vă cere vouă ajutorul pentru această problema complicată. Având la dispoziție lista drumurilor, precum și lista drumurilor stricate, voi trebuie să-i spuneți lui Lucian care este suma minimă pe care trebuie să o folosească pentru a se putea ajunge din orice oraș în oricare alt oraș."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul <code>plimbare1.in</code> conține pe prima linie două numere <code>N</code> și <code>M</code>, reprezentând numărul de orașe și numărul de drumuri din tara lui Verde Împărat. Pe următoarele <code>M</code> linii vor fi descrise drumurile sub următoarea formă:</p><ul>\n\t<li><code>1 a b</code>   – există un drum între <code>a</code> și <code>b</code>;</li>\n\t<li><code>2 a b c</code> – există un drum între <code>a</code> și <code>b</code> care poate fi reparat cu costul <code>c</code>.</li>\n</ul>",
+      "text": "Fișierul plimbare1.in conține pe prima linie două numere N și M, reprezentând numărul de orașe și numărul de drumuri din tara lui Verde Împărat. Pe următoarele M linii vor fi descrise drumurile sub următoarea formă: 1 a b – există un drum între a și b; 2 a b c – există un drum între a și b care poate fi reparat cu costul c."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul <code>plimbare1.out</code> conține pe prima linie un număr <code>S</code>, reprezentând costul minim al reparării drumurilor, pentru a se putea ajunge din orice oraș în oricare alt oraș.</p>",
+      "text": "Fișierul plimbare1.out conține pe prima linie un număr S, reprezentând costul minim al reparării drumurilor, pentru a se putea ajunge din orice oraș în oricare alt oraș."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<p>• <code>1 ≤ N ≤ 100.000</code><br>\n• <code>1 ≤ M ≤ 120.000</code><br>\n• <code>1 ≤ c ≤ 250</code> – număr natural<br>\n• drumurile sunt bidirecționale</p>",
+      "text": "• 1 ≤ N ≤ 100.000 • 1 ≤ M ≤ 120.000 • 1 ≤ c ≤ 250 – număr natural • drumurile sunt bidirecționale"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>plimbare1.in</code></p><pre>5 5\n1 1 2 \n1 3 4\n2 2 3 6\n2 3 5 9\n2 4 5 6</pre><p><code>plimbare1.out</code></p><pre>12</pre><h3>Explicație</h3><p>Observăm că nu putem ajunge în orașul <code>3</code> din orașul <code>1</code>, sau din orașul <code>2</code> în orașul <code>3</code>, de aceea trebuie să reparăm un drum, astfel încât să fie posibil să ajungem în orașul <code>3</code>. Astfel, selectam drumul <code>2 3</code> cu costul <code>6</code>. După ce am reparat acest drum observăm că nu putem ajunge în orașul <code>5</code>. Avem două drumuri posibile de reparat pentru a ajunge apoi în orașul <code>5</code>  , <code>3 5</code> cu costul <code>9</code> si <code>4 5</code> cu costul <code>6</code>. Îl vom alege pe cel mai mic (cel cu costul <code>6</code>), astfel după ce reparăm și acest drum putem ajunge din orice oraș în oricare altul.</p>",
+      "text": "plimbare1.in5 5 1 1 2 1 3 4 2 2 3 6 2 3 5 9 2 4 5 6plimbare1.out12ExplicațieObservăm că nu putem ajunge în orașul 3 din orașul 1, sau din orașul 2 în orașul 3, de aceea trebuie să reparăm un drum, astfel încât să fie posibil să ajungem în orașul 3. Astfel, selectam drumul 2 3 cu costul 6. După ce am reparat acest drum observăm că nu putem ajunge în orașul 5. Avem două drumuri posibile de reparat pentru a ajunge apoi în orașul 5 , 3 5 cu costul 9 si 4 5 cu costul 6. Îl vom alege pe cel mai mic (cel cu costul 6), astfel după ce reparăm și acest drum putem ajunge din orice oraș în oricare altul."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Observăm că nu putem ajunge în orașul 3 din orașul 1, sau din orașul 2 în orașul 3, de aceea trebuie să reparăm un drum, astfel încât să fie posibil să ajungem în orașul 3. Astfel, selectam drumul 2 3 cu costul 6. După ce am reparat acest drum observăm că nu putem ajunge în orașul 5. Avem două drumuri posibile de reparat pentru a ajunge apoi în orașul 5 , 3 5 cu costul 9 si 4 5 cu costul 6. Îl vom alege pe cel mai mic (cel cu costul 6), astfel după ce reparăm și acest drum putem ajunge din orice oraș în oricare altul."
+    }
+  ],
+  "constraints": [],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qb1a0c006d4.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Mihalut Filip (mihalutafilip)",
+    "clasa": "11",
+    "intrare/ieșire": "plimbare1.in / plimbare1.out",
+    "limită timp": "0.35 secunde",
+    "limită memorie": "64 MB / 4 MB",
+    "sursa problemei": "Concurs \"Stefan Dartu\" Vatra Dornei",
+    "autor": "-",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.35,
+  "memoryLimitMb": 64,
+  "sourceAttribution": "Concurs \"Stefan Dartu\" Vatra Dornei",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1955/plimbare1"
+}

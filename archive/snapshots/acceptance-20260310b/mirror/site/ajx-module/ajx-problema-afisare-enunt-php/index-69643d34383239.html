@@ -1,0 +1,92 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4829"><article id="enunt">
+			<p>Maria inventează mereu câte ceva și îl provoacă la joacă pe fratele ei mai mic Petru. De data aceasta alege <code>N</code> cartonașe, pe care sunt înscrise valorile naturale distincte de la <code>1</code> la <code>N</code> (fiecare astfel de număr apare pe câte un singur cartonaș), le amestecă și le așează unul lângă altul într-un șir. După amestecare numerotează cartonașele cu valori de la <code>1</code> la <code>N</code>, după ordinea așezării în șir. Apoi îi formulează diverse cerințe lui Petru. Petru a învățat să programeze și acum dorește să scrie un program pentru a-i răspunde Mariei repede și fără să se mai gândească mult.</p>
+
+<h1>Cerința</h1>
+
+<p>Maria formulează lui Petru cerințe de următoarele tipuri:<br>
+1) Îți spun un număr <code>poz</code> și trebuie să determini cartonașul numerotat cu cea mai mare valoare <code>r</code> astfel încât primele <code>r</code> cartonașe din șir au înscrisă o valoare strict mai mică decât cea scrisă pe cartonașul numerotat cu <code>poz</code>. Dacă nu există niciun astfel de cartonaș, pentru <code>r</code> se stabilește valoarea <code>0</code>.<br>
+2) Determină toate valorile <code>p</code> cu proprietatea că pe primele <code>p</code> cartonașe se află înscrise toate numerele naturale de la <code>1</code> la <code>p</code>.<br>
+3) Determină toate valorile <code>p</code> cu proprietatea că pe primele <code>p</code> cartonașe se află înscrise exact <code>p-1</code> dintre numerele naturale de la <code>1</code> la <code>p</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>cartonase.in</code> conține:</p>
+
+<ul>
+	<li>pe prima linie numărul <code>C</code>, reprezentând cerința de rezolvat (<code>1</code>, <code>2</code> sau <code>3</code>);</li>
+	<li>pe linia a doua se află numărul <code>N</code>, cu semnificația din enunț;</li>
+	<li>pe linia a treia, se află, separate prin câte un spațiu, <code>N</code> valori naturale distincte, cuprinse între <code>1</code> și <code>N</code>, reprezentând valorile înscrise pe cartonașe în ordinea din șir, după amestecare;</li>
+	<li>dacă <code>C = 1</code>, pe linia a patra se află valoarea <code>poz</code>.</li>
+</ul>
+
+<p>Numerele aflate pe aceeași linie sunt separate prin câte un spațiu. spații.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>cartonase.out</code> va conține:</p>
+
+<ul>
+	<li>Dacă <code>C = 1</code>, în fișierul de ieșire se va afla valoarea <code>r</code> cu semnificația din enunț.</li>
+	<li>Dacă <code>C = 2</code> sau <code>C = 3</code>, în fișierul de ieșire se vor afișa, separate prin câte un spațiu, valorile lui <code>p</code> care îndeplinesc condițiile din cerința corespunzătoare, în ordine crescătoare. Se garantează că există cel puțin o astfel de valoare.</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ C ≤ 3</code></li>
+	<li><code>1 ≤ N ≤ 100.000</code></li>
+	<li><code>1 ≤ poz ≤ N</code></li>
+	<li>Pentru 23 de puncte, <code>C = 1</code></li>
+	<li>Pentru 41 de puncte, <code>C = 2</code></li>
+	<li>Pentru 36 de puncte, <code>C = 3</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>cartonase.in</code></p>
+
+<pre>1
+6
+3 1 6 2 4 5
+5</pre>
+
+<p><code>cartonase.out</code></p>
+
+<pre>2</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C = 1</code>, <code>poz = 5</code>, pe cartonașul <code>5</code> se află valoarea <code>4</code>. Primele două cartonașe din șirul dat au înscrise valori mai mici decât <code>4</code> iar al treilea are o valoare mai mare.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>cartonase.in</code></p>
+
+<pre>2
+6
+3 1 2 6 4 5</pre>
+
+<p><code>cartonase.out</code></p>
+
+<pre>3 6</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C = 2</code>, pe primele <code>3</code> cartonașe se află valorile <code>1</code>, <code>2</code>, <code>3</code> și, de asemenea, pe primele <code>6</code> cartonașe se află valorile <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>cartonase.in</code></p>
+
+<pre>3
+6
+3 1 2 6 5 4</pre>
+
+<p><code>cartonase.out</code></p>
+
+<pre>1 2 4 5</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C = 3</code>, pe primul cartonaș (<code>p = 1</code>) se află <code>p - 1 = 0</code> valori conform cerinței. Pe primele <code>p = 2</code> cartonașe se află <code>p - 1 = 1</code> valori conform cerinței (1). Pe primele <code>p = 3</code> cartonașe se află <code>3</code> valori conform cerinței (1, 2, 3). Pe primele <code>p = 4</code> cartonașe se află <code>p - 1 = 3</code> valori conform cerinței <code>(1, 2, 3)</code>. Pe primele <code>p = 5</code> cartonașe se află <code>p - 1 = 4</code> valori conform cerinței <code>(1, 2, 3, 5)</code>. Pe primele <code>p = 6</code> cartonașe se află <code>6</code> valori conform cerinței <code>(1, 2, 3, 4, 5, 6)</code>.</p>		</article>
+		</body></html>

@@ -1,0 +1,101 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1623"><article id="enunt">
+			<p>Avem o matrice triunghiulară cu <code>n</code> linii, cu elemente numere întregi. În această matrice putem construi un traseu după următoarea regulă:</p>
+
+<ul>
+	<li>primul element al traseului este elementul <code>a</code><sub><code>1,1</code></sub></li>
+	<li>dacă elementul <code>a</code><sub><code>i,j</code></sub> aparţine traseului, atunci următorul element al traseului poate fi doar <code>a</code><sub><code>i+1,j</code></sub> sau <code>a</code><sub><code>i+1,j+1</code>,</sub> pentru orice <code>1≤j≤i&lt;n</code>.</li>
+	<li>traseul se va codifica cu numerele de ordine ale coloanelor, parcurgând liniile de la <code>1</code> la <code>n</code>. Valoarea traseului este egală cu suma elementelor ce îl formează.<br>
+Traseul evidenţiat în exemplul din dreapta are valoarea <code>5+4+6+5+4=24</code>, şi se codifică cu <code>1,2,3,3,4</code>.</li>
+</ul>
+
+<img src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1200-1623-summax1-png.png">
+
+<p>Fie mulţimea tuturor traseelor de valoare maximă generate în ordine lexicografică și numerotate. Pentru exemplul de mai sus avem șase trasee de lungime maximă:</p>
+
+<ul>
+	<li>traseul 1. <code>1 1 1 1 2     (5+2+7+6+4=24)</code></li>
+	<li>traseul 2. <code>1 1 1 2 2     (5+2+7+6+4=24)</code></li>
+	<li>traseul 3. <code>1 2 2 2 2     (5+4+5+6+4=24)</code></li>
+	<li>traseul 4. <code>1 2 3 3 4     (5+4+6+5+4=24)</code></li>
+	<li>traseul 5. <code>1 2 3 4 4     (5+4+6+5+4=24)</code></li>
+	<li>traseul 6. <code>1 2 3 4 5     (5+4+6+5+4=24)</code></li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând dimensiunea și elementele unei matrice triunghiulare, respectiv două numere naturale <code>st</code> şi <code>dr</code> (<code>st≤dr</code>), se cere să se determine:</p>
+
+<ol>
+	<li>Numărul total al traseelor de valoare maximă. În cazul în care această valoare depășește <code>2.000.000.000</code>, se va tipări valoarea <code>2.000.000.001</code>;</li>
+	<li>Traseele cu numerele de ordine <code>st</code>, <code>st+1</code>, … , <code>dr</code>.</li>
+</ol>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>summax1.in</code> conține pe prima linie un număr <code>v</code>. Pentru toate testele de intrare, numărul <code>v</code> poate avea doar valoarea <code>1</code> sau <code>2</code>.</p>
+
+<p>A doua linie conține trei numere naturale <code>n</code>, <code>st</code> şi <code>dr</code>, separate prin spaţiu. Următoarele <code>n</code> linii conțin câte o linie a matricei triunghiulare astfel: linia <code>i</code> conține <code>i</code> elemente, și anume valorile <code>a</code><sub><code>i,1</code></sub> <code>a</code><sub><code>i,2</code></sub> … <code>a</code><sub><code>i,i</code></sub> pentru orice <code>1≤i≤n</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă valoarea lui <code>v</code> este <code>1</code>, se va rezolva numai punctul 1 din cerință.<br>
+În acest caz, în fişierul de ieşire <code>summax1.out</code> se va scrie un singur număr natural ce reprezintă numărul traseelor de lungime maximă.</p>
+
+<p>Dacă valoarea lui <code>v</code> este <code>2</code>, se va rezolva numai punctul <code>2</code> din cerință.<br>
+În acest caz, în fişierul de ieşire <code>summax1.out</code> se vor tipări pe câte o linie <code>n</code> numere naturale separate prin spațiu, reprezentând codificările traseelor de valoare maximă cu numerele de ordine <code>st</code>, <code>st+1</code>, … , <code>dr</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 2000</code></li>
+	<li><code>1 ≤ st ≤ dr ≤ 2.000.000.000</code></li>
+	<li><code>1 ≤ dr – st ≤ 1000</code></li>
+	<li>elementele matricei triunghiulare sunt numere naturale strict pozitive</li>
+	<li>valoarea maximă a traseului nu depășește <code>1.000.000.000</code></li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>summax1.in</code></p>
+
+<pre>1
+5 2 4
+5
+2 4
+7 5 6
+6 6 5 5
+3 4 3 4 4</pre>
+
+<p><code>summax1.out</code></p>
+
+<pre>6</pre>
+
+<h3>Explicație</h3>
+
+<p><code>v=1</code><br>
+Numărul traseelor de valoare maximă este <code>6</code>. (vezi exemplul de mai sus).</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>summax1.in</code></p>
+
+<pre>2
+5 2 4
+5
+2 4
+7 5 6
+6 6 5 5
+3 4 3 4 4</pre>
+
+<p><code>summax1.out</code></p>
+
+<pre>1 1 1 2 2
+1 2 2 2 2
+1 2 3 3 4</pre>
+
+<h3>Explicație</h3>
+
+<p><code>v=2</code><br>
+<code>st=2 dr=4</code><br>
+S-au tipărit traseele cu numerele de ordine <code>2</code>, <code>3</code> și <code>4</code>. (vezi exemplul de mai sus).</p>		</article>
+		</body></html>

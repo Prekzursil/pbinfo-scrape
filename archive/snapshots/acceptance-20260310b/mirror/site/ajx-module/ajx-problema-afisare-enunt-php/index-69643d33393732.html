@@ -1,0 +1,91 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3972"><article id="enunt">
+			<p>În timpul vacanței cu familia Maria a vizitat multe obiective turistice. Ce a impresionat-o cel mai mult a fost un zid imens făcut din pietre. Zidul avea o formă dreptunghiulară și era format din pietre individuale de aceeași înălțime (cu lățimi nu neapărat egale), aranjate pe linii, una deasupra celeilalte. Numărul de pietre din zid era <code>N</code>, ele fiind numerotate cu numere întregi de la <code>1</code> la <code>N</code>. Pe fiecare piatră era scris numărul ei de ordine. Maria a constatat că pietrele de pe o linie nu sunt neapărat așezate (de la stânga la dreapta) în ordinea crescătoare a numerelor de ordine.</p>
+
+<p>Ce a impresionat-o și mai tare pe fetiță a fost faptul că marginile dintre pietrele de pe două linii adiacente<br>
+nu coincideau, altfel spus, marginile dintre pietre nu sunt exact una deasupra celeilalte. În plus, ea și-a notat într-o listă toate cele <code>M</code> perechi de numere întregi <code>u</code><sub><code>i</code></sub> și <code>d</code><sub><code>i</code></sub>, astfel încât piatra cu numărul de ordine <code>u</code><sub><code>i</code></sub> stă pe piatra cu numărul de ordine <code>d</code><sub><code>i</code></sub>. Spunem că o piatră stă pe altă piatră dacă prima piatră se află pe linia imediat deasupra liniei celei de-a doua pietre și latura de jos a primei pietre se suprapune peste latura de sus a celei de-a doua pietre pe un segment de lungime naturală nenulă.</p>
+
+<p>Odată ajunsă acasă, fetița l-a rugat pe tatăl ei să reproducă această capodoperă arhitecturală pe o foaie<br>
+mare de hârtie, împărțită în pătrățele unitare, respectând următoarele condiții:</p>
+
+<ul>
+	<li>Numărul de pietre să rămână neschimbat;</li>
+	<li>Zidul desenat să fie perfect în forma unui dreptunghi;</li>
+	<li>Să nu existe două laturi verticale, pe linii adiacente, fix una deasupra celeilalte;</li>
+	<li>Înălțimea fiecărei pietre trebuie sa fie o unitate;</li>
+	<li>Lățimea fiecărei pietre poate fi aleasă de către tatăl ei, dar trebuie să fie un număr natural nenul;</li>
+	<li>Dacă o piatră se afla, în zidul inițial, peste o altă piatră, acest lucru se va păstra și în reproducere;</li>
+	<li>Pentru fiecare pereche de pietre descrisă, latura de jos a pietrei de sus se va suprapune peste latura de<br>
+sus a pietrei de jos pe un segment de lungime naturală nenulă.</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Scrieți un program care determină dimensiunile dreptunghiului de arie minimă, care să reproducă zidul, conform cerințelor Mariei.</p>
+
+<h1>Date de intrare</h1>
+
+<p>De pe prima linie a intrării standard se vor citi doi întregi <code>N</code> și <code>M</code> – numărul pietrelor și numărul perechilor din listă. De pe fiecare dintre următoare <code>M</code> linii se vor citi doi întregi <code>u</code><sub><code>i</code></sub> și <code>d</code><sub><code>i</code></sub> cu semnificația că piatra cu numărul de ordine <code>u</code><sub><code>i</code></sub> stă pe piatra <code>d</code><sub><code>i</code></sub>. De pe ultima linie se va citi un întreg cu valoare de <code>0</code> sau <code>1</code>. Dacă valoarea respectivă este <code>1</code>, atunci este garantat că numerele de ordine ale pietrelor de pe fiecare linie erau ordonate crescător, de la stânga la dreapta, în zidul original. Acest lucru nu înseamnă că este necesar ca reproducerea să respecte această proprietate.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Pe prima linie a ieșirii standard, se vor afișa doi întregi <code>H</code> și <code>W</code>, reprezentând înălțimea și respectiv lățimea dreptunghiului de arie minimă a reproducerii zidului. Pe fiecare dintre următoarele <code>H</code> linii afișați o descriere a unei posibile aranjări a pietrelor din reproducerea zidului – a <code>i</code>-a astfel de linie va conține un singur număr <code>k</code><sub><code>i</code></sub> – numărul de pietre de pe a <code>i</code>-a linie a zidului, urmat de <code>k</code><sub><code>i</code></sub> perechi de întregi reprezentând pietrele de pe linia respectivă, fiecare dată prin numărul de ordine al pietrei respective și lățimea ei în unități. Fiecare două numere consecutive trebuie să fie separate printr-un singur spațiu. Pietrele trebuie afișate pe linii de la cea mai de sus, la cea mai de jos. Dacă există mai multe soluții, poate fi afișată oricare dintre ele.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 200.000</code></li>
+	<li>În aproximativ 15% dintre teste, <code>1 ≤ N ≤ 10</code></li>
+	<li>În alte aproximativ 40% dintre teste, numerele pietrelor de pe fiecare rând al zidului original sunt în ordine<br>
+crescătoare de la stânga la dreapta.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>11 14
+1 4
+1 8
+2 6
+4 3
+4 11
+5 2
+5 4
+5 7
+5 10
+7 6
+7 11
+8 3
+9 4
+10 6
+0</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>3 8
+3 1 2 9 1 5 5
+5 8 1 4 3 7 2 10 1 2 1
+3 3 2 11 3 6 3</pre>
+
+<h3>Explicație</h3>
+
+<p>Diagrama arată un aranjament posibil al pietrelor în zidul reprodus în cadrul primului exemplu, în care o arie minimă a dreptunghiului reprezentând zidul este obținută, astfel încât toate condițiile impuse sunt respectate.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-wall-jpg.jpg"></p>
+
+<h1>Exemplul 2:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>4 3
+1 4
+2 4
+3 4
+1</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>2 3
+3 1 1 3 1 2 1
+1 4 3</pre>		</article>
+		</body></html>

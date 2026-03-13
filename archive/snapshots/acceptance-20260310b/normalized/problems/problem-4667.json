@@ -1,0 +1,310 @@
+{
+  "id": 4667,
+  "slug": "eras",
+  "name": "eras",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4667/eras",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 46,
+      "name": "Tablouri bidimensionale (matrice)",
+      "slug": "tablouri-bidimensionale-matrice",
+      "href": "/?pagina=probleme-lista&tag=46"
+    },
+    {
+      "id": 58,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=58"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Ajutați-l pe Steven să răspundă corect la toate cele <code>Q</code> întrebări puse de Caroline!</p>",
+      "text": "Ajutați-l pe Steven să răspundă corect la toate cele Q întrebări puse de Caroline!"
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie a fișierului de intrare <code>eras.in</code> se află numerele naturale <code>N</code>, <code>M</code> și <code>U</code>, în această ordine. Pe fiecare dintre următoarele <code>U</code> linii se află, în ordine, câte un caracter (care poate fi fie <code>L</code>, fie <code>C</code>), urmat de câte două numere naturale, reprezentând descrierile celor <code>U</code> modificări, în ordinea efectuării lor. Pe următoarea linie se află numărul natural <code>Q</code>. Pe fiecare dintre următoarele <code>Q</code> linii se află câte un număr natural <code>K</code>, urmat de câte <code>4 x K</code> numere naturale, reprezentând, în ordine, perechile de câte două colțuri ale celor <code>K</code> submatrice din întrebarea descrisă, adică: <code>x</code><sub><code>1,1</code></sub>, <code>y</code><sub><code>1,1</code></sub>, <code>x</code><sub><code>1,2</code></sub>, <code>y</code><sub><code>1,2</code></sub>, …, <code>x</code><sub><code>k,1</code></sub>, <code>y</code><sub><code>k,1</code></sub>, <code>x</code><sub><code>k,2</code></sub>, respectiv <code>y</code><sub><code>k,2</code></sub>. Cele <code>Q</code> linii reprezintă, în ordine, descrierile celor <code>Q</code> întrebări. Numerele și literele (<code>L</code> sau <code>C</code>) aflate pe aceeași linie a fișierului de intrare sunt separate prin câte un spațiu.</p>",
+      "text": "Pe prima linie a fișierului de intrare eras.in se află numerele naturale N, M și U, în această ordine. Pe fiecare dintre următoarele U linii se află, în ordine, câte un caracter (care poate fi fie L, fie C), urmat de câte două numere naturale, reprezentând descrierile celor U modificări, în ordinea efectuării lor. Pe următoarea linie se află numărul natural Q. Pe fiecare dintre următoarele Q linii se află câte un număr natural K, urmat de câte 4 x K numere naturale, reprezentând, în ordine, perechile de câte două colțuri ale celor K submatrice din întrebarea descrisă, adică: x1,1, y1,1, x1,2, y1,2, …, xk,1, yk,1, xk,2, respectiv yk,2. Cele Q linii reprezintă, în ordine, descrierile celor Q întrebări. Numerele și literele (L sau C) aflate pe aceeași linie a fișierului de intrare sunt separate prin câte un spațiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>eras.out</code> va conține <code>Q</code> linii, pe cea de a <code>i</code>-a linie aflându-se răspunsul corect pentru cea de a <code>i</code>-a întrebare pusă de Caroline lui Steven.</p>",
+      "text": "Fișierul de ieșire eras.out va conține Q linii, pe cea de a i-a linie aflându-se răspunsul corect pentru cea de a i-a întrebare pusă de Caroline lui Steven."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N, M ≤ 1.000.000.000</code>.</li>\n\t<li><code>1 ≤ U ≤ 500.000</code> și <code>1 ≤ v ≤ 1000</code> pentru fiecare dintre cele <code>U</code> modificări.</li>\n\t<li><code>1 ≤ Q ≤ 1000</code> și <code>1 ≤ K ≤ 100</code> pentru fiecare dintre cele <code>Q</code> întrebări.</li>\n\t<li>Pe fiecare scaun pot fi așezate oricât de multe brățări.</li>\n\t<li>Se recomandă folosirea tipului de date <code>long long</code>.</li>\n</ul>",
+      "text": "1 ≤ N, M ≤ 1.000.000.000. 1 ≤ U ≤ 500.000 și 1 ≤ v ≤ 1000 pentru fiecare dintre cele U modificări. 1 ≤ Q ≤ 1000 și 1 ≤ K ≤ 100 pentru fiecare dintre cele Q întrebări. Pe fiecare scaun pot fi așezate oricât de multe brățări. Se recomandă folosirea tipului de date long long."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>eras.in</code></p><pre>6 6 3\nL 1 4\nC 3 5\nL 5 2\n2\n2 1 2 4 3 1 2 2 4\n2 5 1 6 6 1 6 1 6</pre><p><code>eras.out</code></p><pre>32\n26</pre><h3>Explicație</h3><p>Matricea care reprezintă stadionul are <code>N = 6</code> linii și <code>M = 6</code> coloane. Steven efectuează <code>U = 3</code> modificări, după cum urmează: în cadrul primei modificări, adaugă câte <code>v = 4</code> brățări pe fiecare dintre cele șase scaune de pe prima linie, în cadrul celei de a doua modificări, adaugă câte <code>v = 5</code> brățări pe fiecare dintre cele șase scaune de pe a treia coloană, iar în cadrul celei de a treia modificări, adaugă câte <code>v = 2</code> brățări pe fiecare dintre cele șase scaune de pe a cincea linie.</p><p>Caroline îi pune, în ordine, <code>Q = 2</code> întrebări lui Steven:</p><ul>\n\t<li>În cadrul primei întrebări, se consideră descrierile a <code>K = 2</code> submatrice: <code>x</code><sub><code>1,1</code></sub> <code>= 1</code>, <code>y</code><sub><code>1,1</code></sub> <code>= 2</code>, <code>x</code><sub><code>1,2</code></sub> <code>= 4</code>, <code>y</code><sub><code>1,2</code></sub> <code>= 3</code> (pentru prima submatrice: <code>i = 1</code>) și <code>x</code><sub><code>2,1</code></sub> <code>= 1</code>, <code>y</code><sub><code>2,1</code></sub> <code>= 2</code>, <code>x</code><sub><code>2,2</code></sub> <code>= 2</code>, <code>y</code><sub><code>2,2</code></sub> <code>= 4</code> (pentru a doua submatrice: <code>i = 2</code>).</li>\n\t<li>În cadrul celei de a doua întrebări, se consideră, de asemenea, descrierile a <code>K = 2</code> submatrice.</li>\n</ul>",
+      "text": "eras.in6 6 3 L 1 4 C 3 5 L 5 2 2 2 1 2 4 3 1 2 2 4 2 5 1 6 6 1 6 1 6eras.out32 26ExplicațieMatricea care reprezintă stadionul are N = 6 linii și M = 6 coloane. Steven efectuează U = 3 modificări, după cum urmează: în cadrul primei modificări, adaugă câte v = 4 brățări pe fiecare dintre cele șase scaune de pe prima linie, în cadrul celei de a doua modificări, adaugă câte v = 5 brățări pe fiecare dintre cele șase scaune de pe a treia coloană, iar în cadrul celei de a treia modificări, adaugă câte v = 2 brățări pe fiecare dintre cele șase scaune de pe a cincea linie.Caroline îi pune, în ordine, Q = 2 întrebări lui Steven: În cadrul primei întrebări, se consideră descrierile a K = 2 submatrice: x1,1 = 1, y1,1 = 2, x1,2 = 4, y1,2 = 3 (pentru prima submatrice: i = 1) și x2,1 = 1, y2,1 = 2, x2,2 = 2, y2,2 = 4 (pentru a doua submatrice: i = 2). În cadrul celei de a doua întrebări, se consideră, de asemenea, descrierile a K = 2 submatrice."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>eras.in</code></p><pre>5 4 4\nL 2 50\nC 2 4\nL 3 23\nC 2 3\n3\n1 1 1 5 4\n3 1 2 1 2 2 2 5 4 1 3 5 3\n1 1 3 1 4</pre><p><code>eras.out</code></p><pre>327\n254\n0</pre><h3>Explicație</h3><p>Matricea are <code>N = 5</code> linii și <code>M = 4</code> coloane. Steven efectuează <code>U = 4</code> modificări, iar Caroline îi pune <code>Q = 3</code> întrebări.</p>",
+      "text": "eras.in5 4 4 L 2 50 C 2 4 L 3 23 C 2 3 3 1 1 1 5 4 3 1 2 1 2 2 2 5 4 1 3 5 3 1 1 3 1 4eras.out327 254 0ExplicațieMatricea are N = 5 linii și M = 4 coloane. Steven efectuează U = 4 modificări, iar Caroline îi pune Q = 3 întrebări."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Matricea care reprezintă stadionul are N = 6 linii și M = 6 coloane. Steven efectuează U = 3 modificări, după cum urmează: în cadrul primei modificări, adaugă câte v = 4 brățări pe fiecare dintre cele șase scaune de pe prima linie, în cadrul celei de a doua modificări, adaugă câte v = 5 brățări pe fiecare dintre cele șase scaune de pe a treia coloană, iar în cadrul celei de a treia modificări, adaugă câte v = 2 brățări pe fiecare dintre cele șase scaune de pe a cincea linie."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Matricea are N = 5 linii și M = 4 coloane. Steven efectuează U = 4 modificări, iar Caroline îi pune Q = 3 întrebări."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N, M ≤ 1.000.000.000.",
+    "1 ≤ U ≤ 500.000 și 1 ≤ v ≤ 1000 pentru fiecare dintre cele U modificări.",
+    "1 ≤ Q ≤ 1000 și 1 ≤ K ≤ 100 pentru fiecare dintre cele Q întrebări.",
+    "Pe fiecare scaun pot fi așezate oricât de multe brățări.",
+    "Se recomandă folosirea tipului de date long long."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q8a9e1716fc.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "eras.in / eras.out",
+    "limită timp": "1.1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "ONI 2024, clasa a 9-a",
+    "autor": "Andrei Onuț",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 1.1,
+  "memoryLimitMb": 64,
+  "author": "Andrei Onuț",
+  "sourceAttribution": "ONI 2024, clasa a 9-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4667/eras"
+}

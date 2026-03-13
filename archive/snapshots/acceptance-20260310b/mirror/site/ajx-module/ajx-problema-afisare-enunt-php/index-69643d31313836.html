@@ -1,0 +1,117 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1186"><article id="enunt">
+			<p>Pentru a participa la un concert, <code>n</code> persoane s-au așezat la coadă pe un singur rând în așteptarea deschiderii casei de bilete. Înălțimile celor <code>n</code> persoane sunt toate distincte. Pe baza acestei informații cruciale, agenții de securitate au decis ca din motive de … securitate, ordinea persoanelor care așteaptă la coadă trebuie schimbată în funcție de înălțimile lor. </p>
+
+<p>Astfel, agentii de pază vor alege, pe rând, câte o persoană și o vor trimite la sfârșitul rândului. După fiecare operație de tipul acesta, să-i spunem “de mutare”, rândul se restrânge, ocupându-se poziția rămasă liberă. Strategia agenților de pază este aceasta: la terminarea tuturor operațiilor de mutare, riscul minim de securitate se obține dacă toate persoanele aflate în dreapta persoanei celei mai înalte vor fi mai înalte decât cele aflate în stânga persoanei cele mai înalte. În plus, înalțimile persoanelor vor fi crescătoare până la poziția <code>k</code> a persoanei celei mai înalte și descrescătoare după poziția <code>k</code>. </p>
+
+<p>Mai exact: dacă <code>h[1]</code>, <code>h[2]</code>, …, <code>h[n]</code> sunt înălțimile persoanelor după finalizarea operațiilor de mutare, atunci: există o poziție <code>k</code>, cu <code>1 ≤ k ≤ n</code> astfel încât <code>h[1] &lt; h[2] &lt; ... h[k-1] &lt; h[k] &gt; h[k+1] &gt; … &gt; h[n-1] &gt; h[n]</code>  și în plus <code>h[i] &lt; h[j]</code> pentru oricare <code>i &lt; k</code> și <code>k &lt; j</code>.</p>
+
+<p>Deoarece o asemenea logică este greu de combătut, iar agenții nu au aerul că vor să glumească, persoanele care așteaptă la coadă vor accepta toate mutările impuse de către aceștia.</p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând numărul de persoane <code>n</code> și înălțimile <code>h[1]</code>, <code>h[2]</code>, …, <code>h[n]</code> ale acestora să se scrie un program care determină :</p>
+
+<p>1. Poziția persoanei celei mai înalte în rândul inițial, în cazul în care nu sunt necesare operații de mutare.<br>
+2. Numărul minim de mutări necesare pentru ca rândul de persoane să prezinte un risc minim de securitate.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fişierului de intrare <code>risc.in</code> se găsește numărul natural <code>p</code> a cărui valoare poate fi doar <code>1</code> sau <code>2</code>. </p>
+
+<p>Pe a doua linie a fișierului de intrare se află numărul natural <code>n</code> cu semnificaţia din enunţ. </p>
+
+<p>Pe a treia linie se găsesc <code>n</code> numere naturale, distincte: <code>h[1]</code>, <code>h[2]</code>, …, <code>h[n]</code>, separate prin câte un singur spaţiu, reprezentând înălțimile persoanelor.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire este <code>risc.out</code>.</p>
+
+<ul>
+	<li>Dacă valoarea lui <code>p</code> este <code>1</code> atunci <strong>se va rezolva numai cerinţa 1</strong>. În acest caz, fişierul de ieşire va conţine pe prima linie un număr natural <code>poz</code> ce reprezintă poziția persoanei celei mai înalte în rândul inițial. Dacă rândul inițial nu respectă condițiile de risc minim de securitate, atunci <code>poz</code> este <code>-1</code>.</li>
+	<li>Dacă valoarea lui <code>p</code> este <code>2</code> <strong>se va rezolva numai cerinţa 2</strong>. În acest caz fişierul de ieşire va conține pe prima linie un număr natural <code>m</code>, reprezentând numărul minim de mutări necesare pentru a obține risc minim de securitate.</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 100 000</code></li>
+	<li><code>1 ≤ h[1], h[2], … h[n] ≤ 100 000</code></li>
+	<li>Persoana cea mai înaltă într-o configurație cu risc minim de securitate poate fi plasată pe oricare dintre pozițiile  <code>1...n</code></li>
+	<li>Pentru 50% din teste, <code>n ≤ 2000</code>, iar pentru alte 40% din teste, <code>n ≤ 10 000</code></li>
+	<li>Pentru rezolvarea corectă a primei cerinţe se acordă 20 de puncte, iar pentru cerința a doua se acordă 80 de puncte.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>risc.in</code></p>
+
+<pre>1
+4
+35 20 10 1 </pre>
+
+<p><code>risc.out</code></p>
+
+<pre>1</pre>
+
+<h1>Explicație</h1>
+
+<p><code>p = 1</code>, deci se rezolvă numai cerinţa 1.<br>
+Rândul îndeplinește condițiile de risc minim de securitate.<br>
+Persoana cea mai înaltă se găseste pe poziția <code>poz = 1</code>.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>risc.in</code></p>
+
+<pre>1
+6
+1 8 12 20 15 10</pre>
+
+<p><code>risc.out</code></p>
+
+<pre>-1</pre>
+
+<h1>Explicație</h1>
+
+<p><code>p = 1</code>, deci se rezolvă numai cerinţa 1.<br>
+Rândul <strong>NU</strong> îndeplinește condițiile de <em>risc minim de securitate</em>.<br>
+Șirul înălțimilor nu respectă condiția ca toate valorile înălțimilor din dreapta poziției persoanei celei mai înalte să fie mai mari decât toate valorile înălțimilor din stânga acesteia. Deci <code>poz = -1</code>.</p>
+
+<h1>Exemplul 3</h1>
+
+<p><code>risc.in</code></p>
+
+<pre>2
+5
+2 8 4 20 16 </pre>
+
+<p><code>risc.out</code></p>
+
+<pre>1</pre>
+
+<h1>Explicație</h1>
+
+<p><code>p = 2</code>, deci se rezolvă numai cerinţa 2.<br>
+Se mută persoana de înălțime <code>8</code> la sfârșitul rândului.<br>
+Deci <code>m = 1</code>.</p>
+
+<h1>Exemplul 4</h1>
+
+<p><code>risc.in</code></p>
+
+<pre>2
+6
+3 19 7 30 10 25</pre>
+
+<p><code>risc.out</code></p>
+
+<pre>2</pre>
+
+<h1>Explicație</h1>
+
+<p><code>p = 2</code>, deci se rezolvă numai cerinţa 2.<br>
+Prima operație: se mută persoana de înălțime <code>19</code> la sfârșitul rândului. Rândul devine: <code>3 7 30 10 25 19</code><br>
+A doua operație: se mută persoana de înălțime <code>10</code> la sfârșitul rândului.<br>
+Rândul devine: <code>3 7 30 25 19 10</code><br>
+Deci <code>m = 2</code></p>		</article>
+		</body></html>

@@ -1,0 +1,102 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4787"><article id="enunt">
+			<p>Elevii celor două clase de a șaptea din școală merg în excursie. În fiecare clasă sunt câte <code>N</code> elevi. Ovidiu și Mihnea, fiind liderii celor două clase din care fac parte, doresc să analizeze reușita excursiei, în funcție de gradul de compatibilitate dintre elevii participanți la excursie. Pentru a determina acest grad, fiecărui elev din cele două clase îi este atribuit un coeficient de amabilitate. Astfel, elevii din clasa lui Ovidiu au, în ordinea din catalog, coeficienții <code>a</code><sub><code>1</code></sub>, <code>a</code><sub><code>2</code></sub>, …, <code>a</code><sub><code>N</code></sub>, iar elevii din clasa lui Mihnea au, în ordinea din catalog, coeficienții <code>b</code><sub><code>1</code></sub>, <code>b</code><sub><code>2</code></sub>, …, <code>b</code><sub><code>N</code></sub>.</p>
+
+<p><strong>Gradul de compatibilitate dintre doi elevi</strong> din clase diferite este definit ca pătratul diferenței dintre coeficienții de amabilitate atribuiți fiecăruia. Astfel, gradul de compatibilitate <code>G</code><sub><code>i,j</code></sub> dintre<br>
+al <code>i</code>-lea elev din clasa lui Ovidiu și al <code>j</code>-lea elev din clasa lui Mihnea este egal cu (<code>a</code><sub><code>i</code></sub> − <code>b</code><sub><code>j</code></sub>)<sup><code>2</code></sup>, cu <code>1 ≤ i ≤ N</code> și <code>1 ≤ j ≤ N</code>.</p>
+
+<p><strong>Gradul de compatibilitate dintre cele două clase</strong> este suma tuturor gradelor de compatibilitate dintre oricare doi elevi din clase diferite, adică suma tuturor valorilor <code>G</code><sub><code>i,j</code></sub> cu <code>1 ≤ i ≤ N</code> și <code>1 ≤ j ≤ N</code>.</p>
+
+<p>Pentru a lega o <strong>prietenie durabilă</strong> doi elevi din clase diferite trebuie să aibă gradul de compatibilitate<br>
+fie mai mic sau egal cu <code>X</code>, fie mai mare sau egal cu <code>Y</code>, unde <code>X</code> și <code>Y</code> sunt valori date (adică <code>G</code><sub><code>i,j</code></sub> <code>≤ X</code> sau <code>Y ≤ G</code><sub><code>i,j</code></sub>).</p>
+
+<p>Se cunosc <code>N</code>, coeficienții <code>a</code><sub><code>1</code></sub>, <code>a</code><sub><code>2</code></sub>, …, <code>a</code><sub><code>N</code></sub> și <code>b</code><sub><code>1</code></sub>, <code>b</code><sub><code>2</code></sub>, …, <code>b</code><sub><code>N</code></sub>, precum și valorile <code>X</code> și <code>Y</code>, cu semnificația din enunț.</p>
+
+<h1>Cerința</h1>
+
+<p>1. Determinați gradul de compatibilitate dintre cele două clase.<br>
+2. Determinați, pentru fiecare elev din clasa lui Ovidiu, numărul de elevi din clasa lui Mihnea cu care acesta poate lega o prietenie durabilă.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>prietenie.in</code> conține pe prima linie un singur număr natural <code>C</code>, reprezentând cerința<br>
+care trebuie rezolvată (care poate fi doar <code>1</code> sau <code>2</code>). Pe a doua linie se găsesc trei numere naturale <code>N X Y</code>, cu semnificația din enunț. Pe a treia linie se găsesc <code>N</code> numere naturale <code>a</code><sub><code>1</code></sub>, <code>a</code><sub><code>2</code></sub>, …, <code>a</code><sub><code>N</code></sub>, cu semnificația din enunț. Pe a patra linie se găsesc <code>N</code> numere naturale <code>b</code><sub><code>1</code></sub>, <code>b</code><sub><code>2</code></sub>, …, <code>b</code><sub><code>N</code></sub>, cu semnificația din enunț. Numerele aflate pe aceeași linie a fișierului sunt separate prin câte un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>prietenie.out</code> va conține:</p>
+
+<ul>
+	<li>dacă <code>C = 1</code>, numărul natural determinat pentru cerința <code>1</code>;</li>
+	<li>dacă <code>C = 2</code>, <code>N</code> numere naturale, separate prin câte un spațiu, reprezentând numerele determinate pentru cerința <code>2</code>, corespunzătoare ordinii în care elevii apar în catalogul clasei.</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 200.000</code></li>
+	<li><code>0 ≤ a</code><sub><code>i</code></sub>, <code>b</code><sub><code>j</code></sub> <code>≤ 30.000</code></li>
+	<li><code>0 ≤ X ≤ Y ≤ 900.000.000</code></li>
+	<li>Ovidiu a observat că <code>(a</code><sub><code>i</code></sub> <code>-b</code><sub><code>j</code></sub><code>)</code><sup><code>2</code></sup> se poate scrie și sub forma <code>a</code><sub><code>i</code></sub><sup><code>2</code></sup> <code>+ b</code><sub><code>j</code></sub><sup><code>2</code></sup> <code>- 2 * a</code><sub><code>i</code></sub> <code>* b</code><sub><code>j</code></sub>.</li>
+	<li>Pentru 25 de puncte, <code>C = 1</code> și <code>1 ≤ N ≤ 2.500</code></li>
+	<li>Pentru 10 puncte, <code>C = 1</code> și <code>2.500 &lt; N ≤ 200.000</code> și <code>0 ≤ a</code><sub><code>i</code></sub>, <code>b</code><sub><code>j</code></sub> <code>≤ 5.000</code>, pentru orice <code>1 ≤ i, j ≤ N</code></li>
+	<li>Pentru 10 puncte, <code>C = 1</code> și <code>2.500 &lt; N ≤ 200.000</code></li>
+	<li>Pentru 25 de puncte, <code>C = 2</code> și <code>1 ≤ N ≤ 2.500</code></li>
+	<li>Pentru 15 puncte, <code>C = 2</code> și și <code>2.500 &lt; N ≤ 200.000</code> și <code>0 ≤ a</code><sub><code>i</code></sub>, <code>b</code><sub><code>j</code></sub> <code>≤ 5.000</code>, pentru orice <code>1 ≤ i, j ≤ N</code></li>
+	<li>Pentru 15 puncte, <code>C = 2</code> și <code>2.500 &lt; N ≤ 200.000</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>prietenie.in</code></p>
+
+<pre>1
+4 3 10
+1 3 5 7
+5 1 4 2</pre>
+
+<p><code>prietenie.out</code></p>
+
+<pre>136</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința <code>C = 1</code>. Avem <code>N = 4</code>.<br>
+<code>G11 = (a1 − b1)^2 = (1 − 5)^2 = 16</code>;<br>
+<code>G12 = (a1 − b2)^2 = (1 − 1)^2 = 0</code>;<br>
+. . .<br>
+Gradul de compatibilitate dintre cele două clase este egal cu:<br>
+<code>(1 − 5)^2 + (1 − 1)^2 + (1 − 4)^2 + (1 − 2)^2 +</code><br>
+<code>(3 − 5)^2 + (3 − 1)^2 + (3 − 4)^2 + (3 − 2)^2 +</code> <br>
+<code>(5 − 5)^2 + (5 − 1)^2 + (5 − 4)^2 + (5 − 2)^2 +</code><br>
+<code>(7 − 5)^2 + (7 − 1)^2 + (7 − 4)^2 + (7 − 2)^2 =</code><br>
+<code>16 + 0 + 9 + 1 + 4 + 4 + 1 + 1 + 0 + 16 + 1 + 9 + 4 + 36 + 9 + 25 = 136</code></p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>prietenie.in</code></p>
+
+<pre>2
+4 3 10
+1 3 5 7
+5 1 4 2</pre>
+
+<p><code>prietenie.out</code></p>
+
+<pre>3 2 3 2</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința <code>C = 2</code>, pentru care <code>N = 4</code>, <code>X = 3</code> și <code>Y = 10</code>. Pentru primul elev din clasa lui Ovidiu,<br>
+care are coeficientul <code>a1 = 1</code>, gradele de compatibilitate cu elevii din cealaltă clasă sunt:</p>
+
+<ul>
+	<li><code>(𝑎1 − 𝑏1)^2 = (1 − 5)^2 = 16</code>, iar <code>16 ≥ Y</code>;</li>
+	<li><code>(𝑎1 − 𝑏2)^2 = (1 − 1)^2 = 0</code>, iar <code>0 ≤ X</code>;</li>
+	<li><code>(𝑎1 − 𝑏3)^2 = (1 − 4)^2 = 9</code>, iar <code>X &lt; 9 &lt; Y</code>;</li>
+	<li><code>(𝑎1 − 𝑏4)^2 = (1 − 2)^2 = 1</code>, iar <code>1 ≤ X</code>;</li>
+</ul>
+
+<p>Astfel, el poate lega o prietenie de lungă durata cu <code>3</code> elevi din clasa lui Mihnea: cu primul, cu al doilea și cu al patrulea.<br>
+Al doilea elev din clasa lui Ovidiu poate lega o prietenie de lungă durata cu doi elevi din clasa lui Mihnea: cu al treilea și cu al patrulea.<br>
+Analog, al treilea și al patrulea elev din clasa lui Ovidiu pot lega o prietenie de lungă durată cu <code>3</code> elevi, respectiv cu <code>2</code> elevi din clasa lui Mihnea.</p>		</article>
+		</body></html>

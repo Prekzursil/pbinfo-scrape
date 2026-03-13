@@ -1,0 +1,333 @@
+{
+  "id": 4141,
+  "slug": "autostrada1",
+  "name": "autostrada1",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4141/autostrada1",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 46,
+      "name": "Tablouri bidimensionale (matrice)",
+      "slug": "tablouri-bidimensionale-matrice",
+      "href": "/?pagina=probleme-lista&tag=46"
+    },
+    {
+      "id": 80,
+      "name": "Parcurgerea matricelor pătratice",
+      "slug": "parcurgerea-matricelor-p-tratice",
+      "href": "/?pagina=probleme-lista&tag=80"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Având aceste informații, Gimi vrea să verifice dacă traseul dronei este valid, adică drona nu va părăsi niciodată suprafața de care este responsabilă firma lui Gimi. În cazul în care traseul este invalid Gimi vrea să știe a câta instrucțiune dintre cele <code>K</code> a determinat mutarea dronei în afara suprafeței. Dacă traseul este valid, el vrea să determine costul total de asfaltare al autostrăzii.</p>",
+      "text": "Având aceste informații, Gimi vrea să verifice dacă traseul dronei este valid, adică drona nu va părăsi niciodată suprafața de care este responsabilă firma lui Gimi. În cazul în care traseul este invalid Gimi vrea să știe a câta instrucțiune dintre cele K a determinat mutarea dronei în afara suprafeței. Dacă traseul este valid, el vrea să determine costul total de asfaltare al autostrăzii."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Prima linie din fișierul de intrare <code>autostrada.in</code> va conține patru numere naturale <code>N</code>, <code>K</code>, <code>ls</code> și <code>cs</code>, unde <code>N</code> este dimensiunea suprafeței, <code>K</code> este numărul de instrucțiuni aplicate dronei, iar <code>(ls, cs)</code> reprezintă linia și coloana zonei în care se află inițial drona. A doua linie va conține trei numere naturale <code>C</code><sub><code>z</code></sub>, <code>C</code><sub><code>t</code></sub> și <code>C</code><sub><code>p</code></sub>, reprezentând costurile de asfaltare ale unei zone simple, unei intersecții de tip <code>⊤</code>, respectiv unei intersecții de tip <code>+</code>. Următoarele <code>K</code> linii vor conține câte două numere naturale <code>dir</code><sub><code>i</code></sub> și <code>p</code><sub><code>i</code></sub>, reprezentând valorile specifice celei de-a <code>i</code>-a instrucțiuni primite de dronă. Numerele scrise pe aceeași linie sunt separate printr-un singur spațiu.</p>",
+      "text": "Prima linie din fișierul de intrare autostrada.in va conține patru numere naturale N, K, ls și cs, unde N este dimensiunea suprafeței, K este numărul de instrucțiuni aplicate dronei, iar (ls, cs) reprezintă linia și coloana zonei în care se află inițial drona. A doua linie va conține trei numere naturale Cz, Ct și Cp, reprezentând costurile de asfaltare ale unei zone simple, unei intersecții de tip ⊤, respectiv unei intersecții de tip +. Următoarele K linii vor conține câte două numere naturale diri și pi, reprezentând valorile specifice celei de-a i-a instrucțiuni primite de dronă. Numerele scrise pe aceeași linie sunt separate printr-un singur spațiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Dacă traseul dronei este invalid, pe prima linie din fișierul de ieșire <code>autostrada.out</code> se va afișa textul<br>\n<code>TRASEU INVALID</code>, iar apoi, pe a doua linie, un singur număr natural, reprezentând a câta instrucțiune dintre cele <code>K</code> a determinat mutarea dronei în afara suprafeței. Altfel, pe prima linie din fișierul de ieșire se va afișa textul <code>TRASEU VALID</code>, iar apoi, pe a doua linie, un singur număr natural reprezentând costul total necesar pentru asfaltarea autostrăzii.</p>",
+      "text": "Dacă traseul dronei este invalid, pe prima linie din fișierul de ieșire autostrada.out se va afișa textul TRASEU INVALID, iar apoi, pe a doua linie, un singur număr natural, reprezentând a câta instrucțiune dintre cele K a determinat mutarea dronei în afara suprafeței. Altfel, pe prima linie din fișierul de ieșire se va afișa textul TRASEU VALID, iar apoi, pe a doua linie, un singur număr natural reprezentând costul total necesar pentru asfaltarea autostrăzii."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2 ≤ N ≤ 2000</code></li>\n\t<li><code>1 ≤ K ≤ 1.000.000</code></li>\n\t<li><code>1 ≤ ls, cs ≤ N</code></li>\n\t<li><code>1 ≤ Cz, Ct, Cp ≤ 100</code></li>\n\t<li><code>dir</code><sub><code>i</code></sub> <code>∈ {0, 1, 2, 3}</code> pentru orice <code>1 ≤ i ≤ K</code></li>\n\t<li><code>1 ≤ p</code><sub><code>i</code></sub> <code>≤ N</code> pentru orice <code>1 ≤ i ≤ K</code></li>\n\t<li>Poziția inițială și poziția finală a dronei trebuie asfaltate.</li>\n\t<li>Datorită testelor mari, doar unele au fost adăugate</li>\n</ul>",
+      "text": "2 ≤ N ≤ 2000 1 ≤ K ≤ 1.000.000 1 ≤ ls, cs ≤ N 1 ≤ Cz, Ct, Cp ≤ 100 diri ∈ {0, 1, 2, 3} pentru orice 1 ≤ i ≤ K 1 ≤ pi ≤ N pentru orice 1 ≤ i ≤ K Poziția inițială și poziția finală a dronei trebuie asfaltate. Datorită testelor mari, doar unele au fost adăugate"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>autostrada.in</code></p><pre>3 3 1 1\n1 2 3\n1 2\n2 3\n3 1</pre><p><code>autostrada.out</code></p><pre>TRASEU INVALID\n2</pre><h3>Explicație</h3><p>Cu verde s-au marcat zonele ce trebuiesc asfaltate, iar cu linii albe s-a indicat traseul dronei. Zonele gri sunt zone nevizitate de traseul dronei. A doua instrucțiune este invalidă, drona ieșind din suprafață întrucât ar ajunge in coordonatele <code>(4, 3)</code>.</p><p><img alt=\"\" src=\"/resurse/16a4b0/autostrada1_003.jpg\"></p>",
+      "text": "autostrada.in3 3 1 1 1 2 3 1 2 2 3 3 1autostrada.outTRASEU INVALID 2ExplicațieCu verde s-au marcat zonele ce trebuiesc asfaltate, iar cu linii albe s-a indicat traseul dronei. Zonele gri sunt zone nevizitate de traseul dronei. A doua instrucțiune este invalidă, drona ieșind din suprafață întrucât ar ajunge in coordonatele (4, 3)."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>autostrada.in</code></p><pre>5 7 2 1\n1 2 3\n1 4\n2 2\n3 3\n0 3\n1 2\n2 1\n3 3</pre><p><code>autostrada.out</code></p><pre>TRASEU VALID\n17</pre><h3>Explicație</h3><p>Traseul determinat de dronă este:</p><p><img alt=\"\" src=\"/resurse/16a4b0/autostrada1_004.jpg\"></p><p>Se observă că toate zonele, mai puțin <code>(2, 2)</code> și <code>(2, 4)</code> sunt simple, adică nu sunt intersecții, și fiecare au<br>\ncostul de asfaltare <code>Cz = 1</code>. În <code>(2, 2)</code> avem o intersecție de tip <code>+</code>, deci costul de asfaltare va fi <code>Cp = 3</code>.<br>\nÎn <code>(2, 4)</code> avem o intersecție de tip <code>⊤</code>, deci costul de asfaltare va fi <code>Ct = 2</code>. În total, costul este <code>12 × 1 + 1 × 2 + 1 × 3 = 17</code>.</p>",
+      "text": "autostrada.in5 7 2 1 1 2 3 1 4 2 2 3 3 0 3 1 2 2 1 3 3autostrada.outTRASEU VALID 17ExplicațieTraseul determinat de dronă este:Se observă că toate zonele, mai puțin (2, 2) și (2, 4) sunt simple, adică nu sunt intersecții, și fiecare au costul de asfaltare Cz = 1. În (2, 2) avem o intersecție de tip +, deci costul de asfaltare va fi Cp = 3. În (2, 4) avem o intersecție de tip ⊤, deci costul de asfaltare va fi Ct = 2. În total, costul este 12 × 1 + 1 × 2 + 1 × 3 = 17."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cu verde s-au marcat zonele ce trebuiesc asfaltate, iar cu linii albe s-a indicat traseul dronei. Zonele gri sunt zone nevizitate de traseul dronei. A doua instrucțiune este invalidă, drona ieșind din suprafață întrucât ar ajunge in coordonatele (4, 3)."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Traseul determinat de dronă este:"
+    }
+  ],
+  "constraints": [
+    "2 ≤ N ≤ 2000",
+    "1 ≤ K ≤ 1.000.000",
+    "1 ≤ ls, cs ≤ N",
+    "1 ≤ Cz, Ct, Cp ≤ 100",
+    "diri ∈ {0, 1, 2, 3} pentru orice 1 ≤ i ≤ K",
+    "1 ≤ pi ≤ N pentru orice 1 ≤ i ≤ K",
+    "Poziția inițială și poziția finală a dronei trebuie asfaltate.",
+    "Datorită testelor mari, doar unele au fost adăugate"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qfae4bd3941.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/autostrada1_001.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-autostrada1-001-jpg.jpg",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/autostrada1_002.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-autostrada1-002-jpg.jpg",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/autostrada1_003.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-autostrada1-003-jpg.jpg",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/autostrada1_004.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-autostrada1-004-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "autostrada.in / autostrada.out",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "128 MB / 64 MB",
+    "sursa problemei": "ONI 2022, baraj juniori",
+    "autor": "Theodor-Gabriel Tulbă-Lecu, Ioan-Cristian Pop",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 128,
+  "author": "Theodor-Gabriel Tulbă-Lecu, Ioan-Cristian Pop",
+  "sourceAttribution": "ONI 2022, baraj juniori",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4141/autostrada1"
+}

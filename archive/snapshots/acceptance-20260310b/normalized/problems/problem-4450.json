@@ -1,0 +1,304 @@
+{
+  "id": 4450,
+  "slug": "extrapare",
+  "name": "extrapare",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4450/extrapare",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 10,
+      "name": "Şiruri de caractere",
+      "slug": "iruri-de-caractere",
+      "href": "/?pagina=probleme-lista&tag=10"
+    },
+    {
+      "id": 11,
+      "name": "Prelucrări elementare pe șiruri de caractere",
+      "slug": "prelucr-ri-elementare-pe-iruri-de-caractere",
+      "href": "/?pagina=probleme-lista&tag=11"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Fiind date reprezentările în baza 2 pentru <code>N</code> numere naturale, să se determine pentru fiecare dintre ele dacă se poate obține un număr extrapar în condițiile de mai sus. </p>",
+      "text": "Fiind date reprezentările în baza 2 pentru N numere naturale, să se determine pentru fiecare dintre ele dacă se poate obține un număr extrapar în condițiile de mai sus."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>extrapare.in</code> conține pe prima linie două numere naturale <code>N</code> <code>K</code>, separate printr-un spațiu. Pe fiecare dintre următoarele <code>N</code> linii se află reprezentarea în baza 2 a unui număr natural.</p>",
+      "text": "Fișierul de intrare extrapare.in conține pe prima linie două numere naturale N K, separate printr-un spațiu. Pe fiecare dintre următoarele N linii se află reprezentarea în baza 2 a unui număr natural."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>extrapare.out</code> va conține <code>N</code> linii. Pe cea de a <code>i</code>-a linie (<code>1 ≤ i ≤ N</code>) se va afișa reprezentarea în baza 2 a numărului extrapar obținut prin efectuarea unei singure operații asupra celei de a <code>i</code>-a reprezentări din fișierul de intrare, sau valoarea <code>-1</code> dacă obținerea unui număr extrapar nu este posibilă în acest mod. </p>",
+      "text": "Fișierul de ieșire extrapare.out va conține N linii. Pe cea de a i-a linie (1 ≤ i ≤ N) se va afișa reprezentarea în baza 2 a numărului extrapar obținut prin efectuarea unei singure operații asupra celei de a i-a reprezentări din fișierul de intrare, sau valoarea -1 dacă obținerea unui număr extrapar nu este posibilă în acest mod."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>0 &lt; N ≤ 10</code></li>\n\t<li><code>0 ≤ K &lt; numărul de cifre din oricare reprezentare din fișierul de intrare</code></li>\n\t<li>Orice reprezentare din fișierul de intrare are cel mult <code>1.000.000</code> de cifre.</li>\n\t<li>Dacă există mai multe modalități de a efectua o operație astfel încât rezultatul să fie un număr extrapar, se va afișa rezultatul pentru acea operație în care poziția primei cifre eliminate este cea mai mare (cea mai din stânga poziție).</li>\n\t<li>Se garantează că reprezentările în baza 2 din fișierul de intrare au cifra cea mai din stânga egală cu 1.</li>\n\t<li>Reprezentarea în baza 2 a numărului rezultat în urma efectuării operației se va afișa fără zerourile nesemnificative ce se pot forma la stânga lui.</li>\n\t<li>Pentru 19 puncte, <code>K = 0</code></li>\n\t<li>Pentru 32 puncte, <code>K &gt; 0</code> și lungimea șirurilor <code>≤ 1000</code>.</li>\n\t<li>Pentru 49 puncte, <code>K &gt; 0</code> și lungimea șirurilor <code>≤ 1.000.000</code>.</li>\n</ul>",
+      "text": "0 < N ≤ 10 0 ≤ K < numărul de cifre din oricare reprezentare din fișierul de intrare Orice reprezentare din fișierul de intrare are cel mult 1.000.000 de cifre. Dacă există mai multe modalități de a efectua o operație astfel încât rezultatul să fie un număr extrapar, se va afișa rezultatul pentru acea operație în care poziția primei cifre eliminate este cea mai mare (cea mai din stânga poziție). Se garantează că reprezentările în baza 2 din fișierul de intrare au cifra cea mai din stânga egală cu 1. Reprezentarea în baza 2 a numărului rezultat în urma efectuării operației se va afișa fără zerourile nesemnificative ce se pot forma la stânga lui. Pentru 19 puncte, K = 0 Pentru 32 puncte, K > 0 și lungimea șirurilor ≤ 1000. Pentru 49 puncte, K > 0 și lungimea șirurilor ≤ 1.000.000."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>extrapare.in</code></p><pre>9 3\n1001101\n1010000010\n101010001\n111010100\n100100\n100010100\n101000001\n11110\n101000</pre><p><code>extrapare.out</code></p><pre>-1\n1010000\n10001\n10100\n100\n10100\n1\n-1\n0</pre><h3>Explicație</h3><p>Trebuie să eliminăm <code>3</code> cifre pentru a forma numere extrapare.<br>\n- Numerele pentru care nu se poate obține un număr extrapar prin eliminarea a trei cifre de pe poziții consecutive sunt primul și al optulea.<br>\n- Din <code>1010000010</code> tăiem cifrele de pe pozițiile <code>0</code>, <code>1</code> și <code>2</code> și obținem <code>1010000</code>.<br>\n- <code>101010001</code> este deja extrapar și vom elimina cele mai din stânga trei cifre.<br>\n- Observăm că dacă rezultatul este format doar din cifre egale cu <code>0</code> se va afișa un singur <code>0</code>.<br>\nȘi așa mai departe.</p>",
+      "text": "extrapare.in9 3 1001101 1010000010 101010001 111010100 100100 100010100 101000001 11110 101000extrapare.out-1 1010000 10001 10100 100 10100 1 -1 0ExplicațieTrebuie să eliminăm 3 cifre pentru a forma numere extrapare. - Numerele pentru care nu se poate obține un număr extrapar prin eliminarea a trei cifre de pe poziții consecutive sunt primul și al optulea. - Din 1010000010 tăiem cifrele de pe pozițiile 0, 1 și 2 și obținem 1010000. - 101010001 este deja extrapar și vom elimina cele mai din stânga trei cifre. - Observăm că dacă rezultatul este format doar din cifre egale cu 0 se va afișa un singur 0. Și așa mai departe."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Trebuie să eliminăm 3 cifre pentru a forma numere extrapare. - Numerele pentru care nu se poate obține un număr extrapar prin eliminarea a trei cifre de pe poziții consecutive sunt primul și al optulea. - Din 1010000010 tăiem cifrele de pe pozițiile 0, 1 și 2 și obținem 1010000. - 101010001 este deja extrapar și vom elimina cele mai din stânga trei cifre. - Observăm că dacă rezultatul este format doar din cifre egale cu 0 se va afișa un singur 0. Și așa mai departe."
+    }
+  ],
+  "constraints": [
+    "0 < N ≤ 10",
+    "0 ≤ K < numărul de cifre din oricare reprezentare din fișierul de intrare",
+    "Orice reprezentare din fișierul de intrare are cel mult 1.000.000 de cifre.",
+    "Dacă există mai multe modalități de a efectua o operație astfel încât rezultatul să fie un număr extrapar, se va afișa rezultatul pentru acea operație în care poziția primei cifre eliminate este cea mai mare (cea mai din stânga poziție).",
+    "Se garantează că reprezentările în baza 2 din fișierul de intrare au cifra cea mai din stânga egală cu 1.",
+    "Reprezentarea în baza 2 a numărului rezultat în urma efectuării operației se va afișa fără zerourile nesemnificative ce se pot forma la stânga lui.",
+    "Pentru 19 puncte, K = 0",
+    "Pentru 32 puncte, K > 0 și lungimea șirurilor ≤ 1000.",
+    "Pentru 49 puncte, K > 0 și lungimea șirurilor ≤ 1.000.000."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qeb2a416e68.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "10",
+    "intrare/ieșire": "extrapare.in / extrapare.out",
+    "limită timp": "0.3 secunde",
+    "limită memorie": "128 MB / 64 MB",
+    "sursa problemei": "ONI 2023 baraj juniori",
+    "autor": "Marinel Șerban",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.3,
+  "memoryLimitMb": 128,
+  "author": "Marinel Șerban",
+  "sourceAttribution": "ONI 2023 baraj juniori",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4450/extrapare"
+}

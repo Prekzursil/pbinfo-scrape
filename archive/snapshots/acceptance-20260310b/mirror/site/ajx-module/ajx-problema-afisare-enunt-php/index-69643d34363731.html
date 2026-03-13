@@ -1,0 +1,70 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4671"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>Fiind în vacanță, <span class="caps">RAU</span>-Gigel petrece mult timp jucându-se pe telefon. El are un joc cu cuvinte, de tip Scrabble, în care piesele sunt inscripționate cu litere (mici sau mari, ale alfabetului englez), fiecare literă din alfabet având o valoare cunoscută, număr natural. Valoarea unui cuvânt este egală cu suma valorilor literelor din cuvânt, fără a se ține cont de frecvența lor. </p>
+
+<p>Valori litere: A,a = 1; B,b = 2; C,c = 4; D,d = 8; E,e = 16; F,f = 32; … ; Z,z = 33.554.432</p>
+
+<p>De exemplu, valoarea cuvântului <code>Abac</code> este <code>Val(Abac)</code> = <code>Val(A)</code> + <code>Val(b)</code> + <code>Val(c)</code> = <code>1</code> + <code>2</code> + <code>4</code> = <code>7</code>. </p>
+
+<p>Prin <i>unirea</i> a două cuvinte se obține cel mai mic (alfanumeric) cuvânt format din toate literele prezente în cele două cuvinte, fără să ținem cont de tipul literei (mică/mare) sau de numărul de apariții. Notăm acest cuvânt cu <code>a*b</code>.</p>
+
+<p><i>Costul</i> unirii dintre două cuvinte este obținut prin însumarea valorilor literelor prezente în <code>a*b</code>, dar care nu sunt în <code>a</code>, respectiv, care nu sunt în <code>b</code>, ignorând tipul lor.</p>
+
+<p>De exemplu, prin unirea cuvintelor <code>a</code> = <code>Abac</code> și <code>b</code> = <code>cade</code> se obține cuvântul <code>a*b</code> = <code>ABCDE</code>, iar costul unirii poate fi calculat astfel: <code>Val(DE)</code> + <code>Valoare(B)</code>  =  <code>24</code> + <code>2</code> = <code>26</code>.</p>
+
+<p>Aplicația lui <span class="caps">RAU</span>-Gigel generează un șir liniar cu <code>N</code> cuvinte, iar <span class="caps">RAU</span>-Gigel trebuie să unească două câte două cuvinte alăturate din șir, oricare, plătește costul necesar unirii lor, apoi înlocuiește în șir cele două cuvinte cu cuvântul obținut prin unire. La final, din șirul dat va rămâne un singur cuvânt, iar, pentru obținerea lui, <span class="caps">RAU</span>-Gigel va plăti suma tuturor costurilor generate pe parcurs. </p>
+
+<p>Dacă, de exemplu, avem <code>3</code> cuvinte: <code>Abac</code>, <code>cade</code>, <code>DAC</code> , mai jos este ilustrată una dintre posibilitățile de unire:</p>
+
+<p>Șir inițial cuvinte: <code>Abac</code>, <code>cade</code>, <code>DAC</code>. Se unesc mai întâi cuvintele <code>Abac</code> și <code>cade</code> și se obține <code>ABCDE</code>, cu costul <code>26</code>, iar șirul devine <code>ABCDE</code>, <code>DAC</code>. Cost parțial: <code>26</code></p>
+
+<p>Șir actualizat de cuvinte: <code>ABCDE</code>, <code>DAC</code>. Se unesc <code>ABCDE</code> și <code>DAC</code> și se obține <code>ABCDE</code>, cu costul <code>18</code> , calculat prin însumarea valorilor literelor <code>B</code> și <code>E</code>. Cost parțial: <code>18</code></p>
+
+<p>Cuvânt final: <code>ABCDE</code>. Cost total: <code>26</code> + <code>18</code> = <code>44</code>.</p>
+
+<p>Cel mai mic cuvânt alcătuit prin unirea celor <code>3</code> cuvinte, fără a ține cont de tipul literei (mică/mare) sau frecvență, va fi <code>ABCDE</code>, iar costul total necesar obținerii lui, conform alegerilor de mai sus, va fi <code>26 + 18 = 44</code>.</p>
+
+<p>Dar mai este o variantă: <span class="caps">RAU</span>-Gigel poate uni mai întâi cuvintele <code>cade</code> și <code>DAC</code> și obține <code>ACDE</code>, cu costul <code>16</code>, apoi unește <code>Abac</code> și <code>ACDE</code> și obține <code>ABCDE</code>, cu costul <code>26</code> . Costul total va fi de această dată: <code>16</code> + <code>26</code> = <code>42</code>.</p>
+
+<p>Așadar, costul total minim este dat de cea de-a doua variantă și este <code>42</code>.</p>
+
+<p>Observație: Nu se pot uni cuvintele <code>Abac</code> și <code>DAC</code> din șirul inițial, pentru că nu sunt alăturate, șirul de cuvinte fiind liniar.</p>
+
+<p>Cerința este, ca, pentru un șir de <code>N</code> cuvinte, să se afle cuvântul final rezultat în urma unirii a două câte două cuvinte alăturate și costul total minim necesar obținerii acestuia.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>scrabble.in</code> conține pe prima linie numărul natural nenul <code>N</code>, reprezentând numărul de cuvinte. Pe următoarele <code>N</code> rânduri se află cele <code>N</code> cuvinte.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>scrabble.out</code> va conține pe un sigur rând, cele două valori: cuvântul final și costul total minim necesar obținerii lui, conform cerinței. Cele două valori sunt separate printr-un spațiu.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N ≤ 100</code>, cuvintele nu au mai mult de <code>100</code> de litere</li>
+	<li>Pentru teste în valoare de <code>20</code> de puncte, <code>N &lt;= 4</code></li>
+	<li>Pentru teste în valoare de încă <code>10</code> de puncte, toate cele <code>N</code> cuvinte au aceeași valoare</li>
+	<li>Pentru teste în valoare de încă <code>20</code> de puncte, orice cuvânt include, în componența sa, literele cuvintelor din stânga lui (ignorând tipul literei), plus, eventual, alte litere</li>
+	<li>Tipul literei = literă mică sau mare</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>scrabble.in</code></p>
+
+<pre>3
+Abac 
+cade
+DAC</pre>
+
+<p><code>scrabble.out</code></p>
+
+<pre>ABCDE 42</pre>
+
+<h3>Explicație</h3>
+
+<p>Cel mai mic cuvânt alcătuit prin unirea celor <code>3</code> cuvinte, fără a ține cont de tipul literei (mică/mare) sau frecvență, este: <code>ABCDE</code>, iar costul total minim necesar obținerii lui este <code>42</code>.</p>		</article>
+		</body></html>

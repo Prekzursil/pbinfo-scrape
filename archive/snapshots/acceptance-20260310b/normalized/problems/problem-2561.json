@@ -1,0 +1,301 @@
+{
+  "id": 2561,
+  "slug": "addchar",
+  "name": "addchar",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/2561/addchar",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 53,
+      "name": "Programare dinamică",
+      "slug": "programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=53"
+    },
+    {
+      "id": 54,
+      "name": "Probleme diverse de programare dinamică",
+      "slug": "probleme-diverse-de-programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=54"
+    }
+  ],
+  "tags": [
+    "Subșir crescător de lungime maximă"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Fiind date <code>N</code> seturi de câte două șiruri fiecare, (<code>X</code><sub><code>1</code></sub>, <code>Y</code><sub><code>1</code></sub>), (<code>X</code><sub><code>2</code></sub>, <code>Y</code><sub><code>2</code></sub>), …, (<code>X</code><sub><code>N</code></sub>, <code>Y</code><sub><code>N</code></sub>), să se determine lungimea celui mai lung subșir strict crescător ce se poate forma în <code>X</code><sub><code>i</code></sub> prin înlocuirea caracterelor <code>*</code> cu caractere din <code>Y</code><sub><code>i</code></sub>, <code>1 ≤ i ≤ N</code>.</p>",
+      "text": "Fiind date N seturi de câte două șiruri fiecare, (X1, Y1), (X2, Y2), …, (XN, YN), să se determine lungimea celui mai lung subșir strict crescător ce se poate forma în Xi prin înlocuirea caracterelor * cu caractere din Yi, 1 ≤ i ≤ N."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>addchar.in</code> conține pe prima linie numărul natural nenul <code>N</code>, iar apoi pe linii distincte, cele <code>N</code> seturi de câte două șiruri: (<code>X</code><sub><code>1</code></sub>, <code>Y</code><sub><code>1</code></sub>), (<code>X</code><sub><code>2</code></sub>, <code>Y</code><sub><code>2</code></sub>), …, (<code>X</code><sub><code>N</code></sub>, <code>Y</code><sub><code>N</code></sub>).</p>",
+      "text": "Fișierul de intrare addchar.in conține pe prima linie numărul natural nenul N, iar apoi pe linii distincte, cele N seturi de câte două șiruri: (X1, Y1), (X2, Y2), …, (XN, YN)."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>addchar.out</code> va avea <code>N</code> linii. Fiecare linie conține o singură valoare naturală ce reprezintă lungimea celui mai lung subșir strict crescător ce se poate forma în <code>X</code><sub><code>i</code></sub> prin înlocuirea caracterelor <code>*</code> cu caractere din <code>Y</code><sub><code>i</code></sub>, <code>1 ≤ i ≤ N</code>.</p>",
+      "text": "Fișierul de ieșire addchar.out va avea N linii. Fiecare linie conține o singură valoare naturală ce reprezintă lungimea celui mai lung subșir strict crescător ce se poate forma în Xi prin înlocuirea caracterelor * cu caractere din Yi, 1 ≤ i ≤ N."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 20</code></li>\n\t<li><code>2 ≤ lungimea(X</code><sub><code>i</code></sub><code>) ≤ 10000</code></li>\n\t<li><code>1 ≤ lungimea(Y</code><sub><code>i</code></sub><code>) &lt; 10000</code></li>\n\t<li><code>1 ≤ număr maxim de caractere '*' ≤ min(5000, lungimea(Y</code><sub><code>i</code></sub><code>))</code></li>\n</ul>",
+      "text": "1 ≤ N ≤ 20 2 ≤ lungimea(Xi) ≤ 10000 1 ≤ lungimea(Yi) < 10000 1 ≤ număr maxim de caractere '*' ≤ min(5000, lungimea(Yi))"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>addchar.in</code></p><pre>2\nC*a**Fceb*B\nDbaAaBA\nz*y*tm**\nceAB</pre><p><code>addchar.out</code></p><pre>6\n4</pre><h3>Explicație</h3><p>Sunt două perechi de șiruri. Prima pereche este <code>X1 = C*a**Fceb*B</code>, <code>Y1 = DbaAaBA</code>.</p><p>Se pot forma mai multe secvențe: <code>CBaAAFcebaB</code>, <code>CAaBDFcebAB</code>, <code>CAaBDFcebaB</code>, …<br>\nCel mai lung subșir strict crescător se obține din șirul <code>CAaBDFcebAB</code>, este <code>ABDFce</code> și are lungimea 6.</p><p>A doua pereche de șiruri este <code>X2 = z*y*tm**</code>, <code>Y2 = ceAB</code>. Cel mai lung subșir strict crescător se obține din șirul <code>zAyBtmce</code> și are lungimea <code>4</code>: <code>ABce</code>.</p>",
+      "text": "addchar.in2 C*a**Fceb*B DbaAaBA z*y*tm** ceABaddchar.out6 4ExplicațieSunt două perechi de șiruri. Prima pereche este X1 = C*a**Fceb*B, Y1 = DbaAaBA.Se pot forma mai multe secvențe: CBaAAFcebaB, CAaBDFcebAB, CAaBDFcebaB, … Cel mai lung subșir strict crescător se obține din șirul CAaBDFcebAB, este ABDFce și are lungimea 6.A doua pereche de șiruri este X2 = z*y*tm**, Y2 = ceAB. Cel mai lung subșir strict crescător se obține din șirul zAyBtmce și are lungimea 4: ABce."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Sunt două perechi de șiruri. Prima pereche este X1 = C*a**Fceb*B, Y1 = DbaAaBA."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 20",
+    "2 ≤ lungimea(Xi) ≤ 10000",
+    "1 ≤ lungimea(Yi) < 10000",
+    "1 ≤ număr maxim de caractere '*' ≤ min(5000, lungimea(Yi))"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qf34a7ae8bf.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "11",
+    "intrare/ieșire": "addchar.in / addchar.out",
+    "limită timp": "0.2 secunde",
+    "limită memorie": "128 MB / 32 MB",
+    "sursa problemei": "Balcaniada de Informatică 2018, ziua de antrenament",
+    "autor": "Eugen Nodea",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.2,
+  "memoryLimitMb": 128,
+  "author": "Eugen Nodea",
+  "sourceAttribution": "Balcaniada de Informatică 2018, ziua de antrenament",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/2561/addchar"
+}

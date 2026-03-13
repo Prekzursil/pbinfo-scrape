@@ -1,0 +1,318 @@
+{
+  "id": 4095,
+  "slug": "pergament",
+  "name": "pergament",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4095/pergament",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 46,
+      "name": "Tablouri bidimensionale (matrice)",
+      "slug": "tablouri-bidimensionale-matrice",
+      "href": "/?pagina=probleme-lista&tag=46"
+    },
+    {
+      "id": 58,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=58"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Cunoscând numerele <code>N</code>, <code>K</code>, <code>Q</code>, precum și poziționarea celor <code>N</code> străzi orizontale și a celor <code>Q</code> străzi verticale, să se determine numărul de pătrate mov din pergament.</p>",
+      "text": "Cunoscând numerele N, K, Q, precum și poziționarea celor N străzi orizontale și a celor Q străzi verticale, să se determine numărul de pătrate mov din pergament."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie a fișierului de intrare <code>pergament.in</code> se află trei numere naturale separate prin cate un spațiu: <code>N K Q</code>, cu semnificația din enunț.</p><p>Pe a doua linie se află patru numere naturale separate prin câte un spațiu: <code>A</code> <code>B</code> <code>C</code> <code>D</code>.</p><p>Pe a treia linie se află două numere naturale <code>X[1]</code> <code>Y[1]</code>, unde <code>X[1]</code> reprezintă coloana pătratului de început al străzii orizontale de pe rândul <code>1</code>, iar <code>Y[1]</code> reprezintă lungimea acesteia. </p><p>Datele următoarelor <code>N-1</code> străzi se vor calcula prin formulele de mai jos, unde <code>X[i]</code> reprezintă coloana pătratului de început al străzii orizontale de pe rândul <code>i</code> (<code>2 ≤ i ≤ N</code>), iar <code>Y[i]</code> reprezintă lungimea acesteia:</p><ul>\n\t<li><code>X[i] = 1 + (X[i - 1] * A + B) % K</code></li>\n\t<li><code>Y[i] = 1 + (Y[i - 1] * C + D) % (K - X[i] + 1)</code></li>\n</ul><p>Pe următoarele <code>Q</code> linii se află câte trei numere naturale <code>J</code> <code>R</code> <code>L</code>, unde <code>J</code> reprezintă coloana pe care se află strada verticală, <code>R</code> reprezintă rândul pe care se află pătratul de început al străzii, iar <code>L</code> reprezintă lungimea străzii.</p>",
+      "text": "Pe prima linie a fișierului de intrare pergament.in se află trei numere naturale separate prin cate un spațiu: N K Q, cu semnificația din enunț.Pe a doua linie se află patru numere naturale separate prin câte un spațiu: A B C D.Pe a treia linie se află două numere naturale X[1] Y[1], unde X[1] reprezintă coloana pătratului de început al străzii orizontale de pe rândul 1, iar Y[1] reprezintă lungimea acesteia. Datele următoarelor N-1 străzi se vor calcula prin formulele de mai jos, unde X[i] reprezintă coloana pătratului de început al străzii orizontale de pe rândul i (2 ≤ i ≤ N), iar Y[i] reprezintă lungimea acesteia: X[i] = 1 + (X[i - 1] * A + B) % K Y[i] = 1 + (Y[i - 1] * C + D) % (K - X[i] + 1) Pe următoarele Q linii se află câte trei numere naturale J R L, unde J reprezintă coloana pe care se află strada verticală, R reprezintă rândul pe care se află pătratul de început al străzii, iar L reprezintă lungimea străzii."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>În fișierul de ieșire <code>pergament.out</code> se va afla un singur număr natural ce reprezintă numărul de pătrate mov din desenul lui Adrian.</p>",
+      "text": "În fișierul de ieșire pergament.out se va afla un singur număr natural ce reprezintă numărul de pătrate mov din desenul lui Adrian."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 10.000.000</code></li>\n\t<li><code>1 ≤ K ≤ 50</code></li>\n\t<li><code>1 ≤ Q ≤ 100.000</code></li>\n\t<li><code>1 ≤ A, B, C, D ≤ 10.000.000</code></li>\n\t<li><code>1 ≤ X[i] ≤ K</code></li>\n\t<li><code>1 ≤ Y[i] ≤ K - X + 1</code></li>\n\t<li><code>1 ≤ J ≤ K</code></li>\n\t<li><code>1 ≤ R ≤ N</code></li>\n\t<li><code>1 ≤ L ≤ N - R + 1</code></li>\n\t<li>Rândurile sunt numerotate de la <code>1</code> la <code>N</code>, iar coloanele sunt numerotate de la <code>1</code> la <code>K</code></li>\n\t<li>Pentru <code>40</code> puncte <code>N ≤ 20.000</code></li>\n\t<li>Pentru <code>70</code> de puncte <code>N ≤ 500.000</code></li>\n\t<li>Pentru <code>100</code> de puncte nu există condiții adiționale.</li>\n</ul>",
+      "text": "1 ≤ N ≤ 10.000.000 1 ≤ K ≤ 50 1 ≤ Q ≤ 100.000 1 ≤ A, B, C, D ≤ 10.000.000 1 ≤ X[i] ≤ K 1 ≤ Y[i] ≤ K - X + 1 1 ≤ J ≤ K 1 ≤ R ≤ N 1 ≤ L ≤ N - R + 1 Rândurile sunt numerotate de la 1 la N, iar coloanele sunt numerotate de la 1 la K Pentru 40 puncte N ≤ 20.000 Pentru 70 de puncte N ≤ 500.000 Pentru 100 de puncte nu există condiții adiționale."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>pergament.in</code></p><pre>6 3 2\n1 1 1 1\n1 2\n2 2 4\n1 4 3</pre><p><code>pergament.out</code></p><pre>3</pre><h3>Explicație</h3><p>Imaginea reprezintă pergamentul desenat de Adrian din exemplu.</p><p><img alt=\"\" src=\"/resurse/16a4b0/pergament_2.jpg\"></p><p>Conform formulelor, vom avea următoarele străzi orizontale:<br>\nLinia 1: <code>X[ 1 ] = 1</code> și <code>Y[ 1 ] = 2</code><br>\nLinia 2: <code>X[ 2 ] = 3</code> și <code>Y[ 2 ] = 1</code><br>\nLinia 3: <code>X[ 3 ] = 2</code> și <code>Y[ 3 ] = 1</code><br>\nLinia 4: <code>X[ 4 ] = 1</code> și <code>Y[ 4 ] = 3</code><br>\nLinia 5: <code>X[ 5 ] = 3</code> și <code>Y[ 5 ] = 1</code><br>\nLinia 6: <code>X[ 6 ] = 2</code> și <code>Y[ 6 ] = 1</code></p>",
+      "text": "pergament.in6 3 2 1 1 1 1 1 2 2 2 4 1 4 3pergament.out3ExplicațieImaginea reprezintă pergamentul desenat de Adrian din exemplu.Conform formulelor, vom avea următoarele străzi orizontale: Linia 1: X[ 1 ] = 1 și Y[ 1 ] = 2 Linia 2: X[ 2 ] = 3 și Y[ 2 ] = 1 Linia 3: X[ 3 ] = 2 și Y[ 3 ] = 1 Linia 4: X[ 4 ] = 1 și Y[ 4 ] = 3 Linia 5: X[ 5 ] = 3 și Y[ 5 ] = 1 Linia 6: X[ 6 ] = 2 și Y[ 6 ] = 1"
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Imaginea reprezintă pergamentul desenat de Adrian din exemplu."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 10.000.000",
+    "1 ≤ K ≤ 50",
+    "1 ≤ Q ≤ 100.000",
+    "1 ≤ A, B, C, D ≤ 10.000.000",
+    "1 ≤ X[i] ≤ K",
+    "1 ≤ Y[i] ≤ K - X + 1",
+    "1 ≤ J ≤ K",
+    "1 ≤ R ≤ N",
+    "1 ≤ L ≤ N - R + 1",
+    "Rândurile sunt numerotate de la 1 la N, iar coloanele sunt numerotate de la 1 la K",
+    "Pentru 40 puncte N ≤ 20.000",
+    "Pentru 70 de puncte N ≤ 500.000",
+    "Pentru 100 de puncte nu există condiții adiționale."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qdddd0aca42.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/pergament_1.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-pergament-1-jpg.jpg",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/pergament_2.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-pergament-2-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "pergament.in / pergament.out",
+    "limită timp": "0.4 secunde",
+    "limită memorie": "16 MB / 8 MB",
+    "sursa problemei": "OJI 2022 clasa a IX-a",
+    "autor": "Mihaela Cismaru",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.4,
+  "memoryLimitMb": 16,
+  "author": "Mihaela Cismaru",
+  "sourceAttribution": "OJI 2022 clasa a IX-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4095/pergament"
+}

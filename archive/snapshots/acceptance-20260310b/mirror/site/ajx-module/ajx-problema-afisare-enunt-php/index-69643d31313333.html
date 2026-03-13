@@ -1,0 +1,88 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1133"><article id="enunt">
+			<p>Charlie a decis să se joace cu literele dintr-un șir de caractere, șir ce conține doar literele mici ale alfabetului englez <code>'a'...'z'</code>. Jocul constă în a elimina litere din șir după următoarea regulă: fie <code>L1</code>, <code>L2</code>, <code>L3</code> trei litere aflate pe poziții consecutive în șir, atunci litera <code>L2</code> poate fi eliminată dacă și numai dacă este strict mai mică lexicografic decât literele <code>L1</code> și <code>L3</code>.</p>
+
+<p>Pentru a face jocul mai interesant, Charlie atașează eliminării literei <code>L2</code> un cost egal cu valoarea maximă dintre <code>ō(L1)</code> și <code>ō(L3)</code>, unde prin <code>ō(litera)</code> înțelegem numărul de ordine al literei respective în alfabet (<code>ō('a') = 1</code>, <code>ō('b') = 2</code>, …, <code>ō('z') = 26</code>). Charlie aplică în mod repetat procedeul de eliminare și calculează suma costurilor eliminărilor efectuate.</p>
+
+<h1>Cerinţe	</h1>
+
+<p>Fiind dat un șir de caractere să se determine:</p>
+
+<p><strong>a)</strong> Lungimea maximă a unei secvențe de litere alternante, adică o secvență pentru care literele aflate pe poziții consecutive sunt de forma:  <code>L</code><sub><code>i</code></sub> <code>&gt; L</code><sub><code>i+1</code></sub> <code>&lt; L</code><sub><code>i+2</code></sub> <code>&gt; L</code><sub><code>i+3</code></sub> <code>&lt; L</code><sub><code>i+4</code></sub> <code>&gt; … &lt; L</code><sub><code>j</code></sub>.<br>
+<strong>b)</strong> Suma maximă pe care o poate obține Charlie aplicând în mod repetat procedeul de eliminare a literelor, precum și șirul obținut în final.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>charlie.in</code> conține pe prima linie numărul <code>n</code>, iar pe a doua linie <code>n</code> numere naturale separate prin spații.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă valoarea lui <code>p</code> este <code>1</code>,  se va rezolva numai punctul a) din cerință. </p>
+
+<p>În acest caz, în fişierul de ieşire <code>charlie.out</code> se va scrie un singur număr natural <code>L</code> ce reprezintă lungimea maximă a unei secvențe de litere alternante. </p>
+
+<p>Dacă valoarea lui <code>p</code> este <code>2</code>, se va rezolva numai punctul b) din cerință. </p>
+
+<p>În acest caz, fişierul de ieşire <code>charlie.out</code> va conține două linii. Pe prima linie se va afla șirul rezultat în urma eliminărilor repetate de litere respectând regula enunțată, iar pe cea de-a doua linie suma maximă obținută.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>3 ≤</code> numărul de litere ale șirului inițial <code>≤ 100000</code></li>
+	<li>Pentru rezolvarea corectă a primei cerinţe se acordă 25 de puncte, iar pentru cerința a doua se acordă 75 de puncte.<br>
+Pentru 30% dintre teste numărul de litere ale șirului <code>≤ 1000</code></li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>charlie.in</code></p>
+
+<pre>1
+cadgfacbda</pre>
+
+<p><code>charlie.out</code></p>
+
+<pre>5</pre>
+
+<h1>Explicație</h1>
+
+<p><code>p = 1</code></p>
+
+<p>Secvențele alternante corect formate sunt: <code>cad</code>, <code>facbd</code>. Lungimea maximă este <code>5</code>.</p>
+
+<p><strong>Atenție! Pentru acest test se rezolvă doar cerința a).</strong></p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>charlie.in</code></p>
+
+<pre>2
+cbcabadbac</pre>
+
+<p><code>charlie.out</code></p>
+
+<pre>ccdc
+21</pre>
+
+<h1>Explicație</h1>
+
+<p><code>p = 2</code></p>
+
+<ul>
+	<li>Șirul inițial: <code>cbcabadbac</code></li>
+	<li>Eliminăm din secvența <code>bad</code> litera <code>a</code> și adăugăm la suma valoarea <code>4</code></li>
+	<li>Șirul rezultat în urma eliminării este: <code>cbcabdbac</code></li>
+	<li>Eliminăm din secvența <code>bac</code> litera <code>a</code> și adăugăm la suma valoarea <code>3</code></li>
+	<li>Șirul rezultat în urma eliminării este: <code>cbcabdbc</code></li>
+	<li>Eliminăm din secvența <code>dbc</code> litera <code>b</code> și adăugăm la suma valoarea <code>4</code></li>
+	<li>Șirul rezultat în urma eliminării este: <code>cbcabdc</code></li>
+	<li>Eliminăm din secvența <code>cab</code> litera <code>a</code> și adăugăm la suma valoarea <code>3</code></li>
+	<li>Șirul rezultat în urma eliminării este: <code>cbcbdc</code></li>
+	<li>Eliminăm din secvența <code>cbd</code> litera <code>b</code> și adăugăm la suma valoarea <code>4</code></li>
+	<li>Șirul rezultat în urma eliminării este: <code>cbcdc</code></li>
+	<li>Eliminăm din secvența <code>cbc</code> litera <code>b</code> și adăugăm la suma valoarea <code>3</code></li>
+	<li>Șirul rezultat în urma eliminării este: <code>ccdc</code></li>
+	<li>Nu mai sunt posibile eliminări. Suma maximă obținută este <code>21</code>.</li>
+</ul>
+
+<p><strong>Atenție! Pentru acest test se rezolvă doar cerința b).</strong></p>		</article>
+		</body></html>

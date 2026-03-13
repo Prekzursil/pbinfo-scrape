@@ -1,0 +1,115 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1680"><article id="enunt">
+			<p>După o zi productivă de făcut curățenie, Henry și Hetty au ieșit în oraș la un restaurant de sushi. În acest restaurant există <code>N</code> mese unite între ele prin <code>N-1</code> benzi rulante cu dublu sens, astfel încât oricare două mese sunt conectate direct sau indirect prin benzi rulante. Pentru fiecare masă <code>i</code>, <code>1 ≤ i ≤ N</code>, cunoaștem atât numărul <code>K[i]</code> de mese cu care este conectată direct, cât și lista ordonată de mese vecine acesteia: <code>V[i,1]</code>, <code>V[i,2]</code> … <code>V[i,K[i]]</code>.</p>
+
+<p>Benzile rulante au rolul de a transporta preparatele la clienți. Acestea urmează un traseu unic, definit după următoarea regulă: pentru orice masă <code>i</code>, un preparat aflat la masa <code>i</code> care tocmai a venit dinspre masa <code>V[i,j]</code>, va pleca de la masa <code>i</code> spre masa:</p>
+
+<ul>
+	<li><code>V[i,j+1]</code>, dacă <code>1 ≤ j &lt; K[i]</code></li>
+	<li><code>V[i,1]</code>, dacă <code>j = K[i]</code>.</li>
+</ul>
+
+<p>În plus, dacă un preparat nou este trimis de la masa <code>1</code> spre masa <code>V[1,1]</code>, știm că acesta va ajunge la masa <code>i</code> pentru prima oară venind dinspre masa <code>V[i,1]</code>, pentru orice <code>i</code>, <code>1 ≤ i ≤ N</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Henry și Hetty au intrat în restaurant la momentul de timp <code>0</code>. Ei știu că pe parcursul vizitei lor pe benzile rulante  vor fi așezate <code>M</code> preparate. Pentru fiecare din cele <code>M</code> preparate ei cunosc tripletul <code>(x, y, t)</code>, semnificând faptul că la momentul de timp <code>t</code> preparatul va fi așezat pe bandă în dreptul mesei <code>x</code> pentru a pleca spre spre masa <code>V[x,y]</code>. Ei mai știu și că timpul necesar unui preparat de a parcurge distanța dintre două mese vecine este de o unitate. Cei doi se vor așeza la o masă și vor lua de pe bandă toate preparatele care trec prin dreptul mesei respective. Henry și Hetty se întreabă: pentru fiecare masă <code>i</code>, care este timpul minim după care culeg toate cele <code>M</code> preparate ce vor fi puse pe bandă?</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>sushi.in</code> conține pe prima linie două numere naturale <code>N</code> și <code>M</code>, reprezentând numărul de mese, respectiv numărul de preparate aflate în restaurant. Pe următoarele <code>N</code> linii se vor afla descrierile listelor de vecini ale fiecărei mese. Astfel, pe linia <code>i+1</code>, se va afla numărul natural <code>K[i]</code>, urmat de <code>K[i]</code> numere naturale: <code>V[i,1]</code>, <code>V[i,2]</code> … <code>V[i,K[i]]</code>, cu semnificația din enunț. Pe fiecare din următoarele <code>M</code> linii se va afla cate un triplet de numere naturale <code>(x, y, t)</code>, semnificând faptul că la momentul de timp <code>t</code> un preparat va fi așezat pe bandă în dreptul mesei <code>x</code> pentru a pleca spre masa <code>V[x,y]</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>sushi.out</code> va conține pe prima linie <code>N</code> numere naturale, al <code>i</code>-lea dintre acestea reprezentând timpul necesar pentru culegerea tuturor preparatelor de pe bandă dacă Henry și Hetty s-ar așeza la masa cu indice <code>i</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 100 000</code></li>
+	<li><code>1 ≤ M ≤ 100 000</code></li>
+	<li>Pentru fiecare triplet <code>(x, y, t)</code> avem <code>1 ≤ x ≤ N</code>, <code>1 ≤ y ≤ K[x]</code> și <code>0 ≤ t ≤ 100 000</code></li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>sushi.in</code></p>
+
+<pre>5 1
+3 2 3 4
+1 1
+2 1 5
+1 1
+1 3
+3 1 0</pre>
+
+<p><code>sushi.out</code></p>
+
+<pre>1 4 0 2 7</pre>
+
+<h3>Explicație</h3>
+
+<p>Avem <code>N = 5</code> mese și <code>M = 1</code> preparate.</p>
+
+<ul>
+	<li>Masa <code>1</code> se învecinează cu <code>3</code> mese: <code>(2, 3, 4)</code></li>
+	<li>Masa <code>2</code> se învecinează cu <code>1</code> masă: <code>(1)</code></li>
+	<li>Masa <code>3</code> se învecinează cu <code>2</code> mese: <code>(1, 5)</code></li>
+	<li>Masa <code>4</code> se învecinează cu <code>1</code> masă: <code>(1)</code></li>
+	<li>Masa <code>5</code> se învecinează cu <code>1</code> masă: <code>(3)</code></li>
+</ul>
+
+<p>Singurul preparat va fi pus la momentul <code>0</code> la masa <code>3</code> pentru a pleca spre prima masă din lista de vecini a lui <code>3</code>: masa cu indicele <code>1</code>.</p>
+
+<p>Preparatul va avea următorul traseu: <code>3, 1, 4, 1, 2, 1, 3, 5, 3 ...</code></p>
+
+<p>El poate fi ridicat de la:</p>
+
+<ul>
+	<li>masa <code>1</code> la momentul <code>1</code></li>
+	<li>masa <code>2</code> la momentul <code>4</code></li>
+	<li>masa <code>3</code> la momentul <code>0</code></li>
+	<li>masa <code>4</code> la momentul <code>2</code></li>
+	<li>masa <code>5</code> la momentul <code>7</code></li>
+</ul>
+
+<h1>Exemplul 2</h1>
+
+<p><code>sushi.in</code></p>
+
+<pre>3 2
+2 2 3
+1 1
+1 1
+2 1 0
+3 1 1</pre>
+
+<p><code>sushi.out</code></p>
+
+<pre>2 3 2</pre>
+
+<h3>Explicație</h3>
+
+<p>Avem <code>N = 3</code> mese și <code>M = 2</code> preparate.</p>
+
+<ul>
+	<li>Masa <code>1</code> se învecinează cu <code>2</code> mese: <code>(2, 3)</code></li>
+	<li>Masa <code>2</code> se învecinează cu <code>1</code> masă: <code>(1)</code></li>
+	<li>Masa <code>3</code> se învecinează cu <code>1</code> masă: <code>(1)</code></li>
+</ul>
+
+<p>Un preparat este pus la momentul <code>0</code> la masa <code>2</code> plecând spre prima masă din lista de vecini a lui <code>2</code>: masa cu indicele <code>1</code>. El poate fi ridicat de la:</p>
+
+<ul>
+	<li>masa <code>1</code> la momentul <code>1</code></li>
+	<li>masa <code>2</code> la momentul <code>0</code></li>
+	<li>masa <code>3</code> la momentul <code>2</code></li>
+</ul>
+
+<p>Celălalt preparat este pus la momentul <code>1</code> la masa <code>3</code> plecând spre prima masă din lista de vecini a lui <code>3</code>: masa cu indicele <code>1</code>. El poate fi ridicat de la:</p>
+
+<ul>
+	<li>masa <code>1</code> la momentul <code>2</code></li>
+	<li>masa <code>2</code> la momentul <code>3</code></li>
+	<li>masa <code>3</code> la momentul <code>1</code></li>
+</ul>		</article>
+		</body></html>

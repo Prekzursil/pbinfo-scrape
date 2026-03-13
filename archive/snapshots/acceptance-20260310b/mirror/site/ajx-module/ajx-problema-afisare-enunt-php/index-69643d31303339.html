@@ -1,0 +1,90 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1039"><article id="enunt">
+			<p>Jocul <strong>betaşah</strong> se joacă folosindu-se doar piese asemănătoare damelor clasicului şah, numite tot <em>dame</em>. Suprafaţa de joc are o formă triunghiulară şi este formată din  <code>N*(N+1)/2</code>  pătrate identice dispuse pe <code>N</code> rânduri şi <code>N</code> coloane. Rândurile se numerotează de sus în jos, de la <code>1</code> la <code>N</code>. Coloanele se numerotează de la stânga la dreapta, de la <code>1</code> la <code>N</code>. Primul rând conţine un singur pătrat, al doilea rând conţine două pătrate alăturate,…, al <code>N</code>-lea rând conţine <code>N</code> pătrate alăturate, ca în suprafeţele de joc cu <code>N=6</code> din figurile de mai jos.  Din cele <code>N*(N+1)/2</code> pătrate,  <code>K</code> sunt gri, iar restul sunt albe. Poziţia fiecărui pătrat de pe suprafaţa de joc este dată de rândul şi coloana în care acesta este situat.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1001-1050-betasah-png.png"></p>
+
+<p>Pe suprafaţa de joc sunt aşezate <code>D</code> dame în <code>D</code> pătrate albe distincte, ocupându-le. Într-un pătrat alb poate fi aşezată o singură damă, iar într-un pătrat gri nu poate fi aşezată nicio damă. Poziţia unei dame pe suprafaţa de joc este dată de poziţia pătratului alb în care este aşezată dama.</p>
+
+<p>Damele pot accesa orice pătrat alb neocupat situat pe direcţiile: verticală, orizontală sau diagonală, numerotate de la <code>1</code> la <code>8</code> în figura b). Accesul pe o direcţie se face trecând din pătrat alb în pătrat alb (doar pătrate albe neocupate) până la întâlnirea unui pătrat gri sau a unui pătrat alb ocupat de o altă damă sau până la terminarea suprafeţei de joc. </p>
+
+<p>Numim pătrat accesibil orice pătrat alb neocupat (de pe suprafaţa de joc) care ar putea fi accesat de cel puţin una din cele <code>D</code> dame. </p>
+
+<p>De exemplu, pentru suprafaţa de joc din figura c) numărul de pătrate accesibile (marcate cu <code>X</code>) de pe suprafaţă este <code>11</code>; pentru suprafaţa de joc cu <code>N=6</code>, <code>D=3</code> şi <code>K=4</code> din figura d) numărul de pătrate accesibile de pe suprafaţă este <code>13</code>.  În figura e) sunt marcate cu <code>X</code> pătratele accesibile fiecărei dame de pe suprafaţa de joc din figura d). </p>
+
+<table class="table table-bordered">
+<tbody><tr>
+ <td> <strong>Pătratele accesibile damei din rândul 3 şi coloana 2</strong> </td> 
+ <td> <strong>Pătratele accesibile damei din rândul 5 şi coloana 2</strong> </td>
+ <td> <strong>Pătratele accesibile damei din rândul 5 şi coloana 4</strong> </td>
+ <td> <strong>Pătratele accesibile de pe suprafaţa de joc</strong> </td>
+</tr>
+<tr>
+ <td> <img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1001-1050-betasah1-png.png"> </td>
+ <td> <img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1001-1050-betasah2-png.png"> </td>
+ <td> <img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1001-1050-betasah3-png.png"> </td>
+ <td> <img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1001-1050-betasah4-png.png"> </td>
+</tr>
+<tr> <td colspan="4"> Figura e) </td> </tr>
+</tbody></table>
+
+
+<h1>Cerințe</h1>
+
+<p>Scrieţi un program care să citească numerele naturale <code>N</code>, <code>D</code>, <code>K</code>, poziţiile damelor şi ale pătratelor gri pe suprafaţa de joc şi care să determine: <br>
+a) numărul maxim <code>M</code> de pătrate albe conţinute de un rând al suprafeţei de joc;<br>
+b) numărul <code>P</code> de pătrate accesibile de pe suprafaţa de joc.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>betasah.in</code> conține:</p>
+
+<ul>
+	<li>pe prima linie cele trei numere naturale <code>N</code>, <code>D</code> şi <code>K</code>, separate prin câte un spaţiu, cu semnificaţia din enunţ;</li>
+	<li>pe linia <code>i+1</code> două numere naturale nenule <code>x</code><sub><code>i</code></sub> şi <code>y</code><sub><code>i</code></sub>, separate printr-un singur spaţiu, reprezentând poziţia damei <code>i</code> pe suprafaţa de joc (rândul <code>x</code><sub><code>i</code></sub> şi coloana <code>y</code><sub><code>i</code></sub>), pentru <code>i=1,2,3,…,D</code>;</li>
+	<li>pe linia <code>D+1+j</code> două numere naturale nenule <code>z</code><sub><code>j</code></sub> şi <code>t</code><sub><code>j</code></sub>, separate printr-un singur spaţiu, reprezentând poziţia pătratului gri <code>j</code> pe suprafaţa de joc (rândul <code>z</code><sub><code>j</code></sub> şi coloana <code>t</code><sub><code>j</code></sub>), pentru <code>j=1,2,3,…,K</code>.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>betasah.out</code> va conține pe prima linie numărul natural <code>M</code> şi pe a doua linie numărul natural <code>P</code>, cu semnificaţia din enunţ.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N ≤ 1000</code>;</li>
+	<li><code>1 ≤ D ≤ 100</code>;</li>
+	<li><code>1 ≤ K ≤ 50</code>;</li>
+	<li><code>D + K ≤ N*(N+1)/2</code>;</li>
+	<li><code>1 ≤ y</code><sub><code>i</code></sub><code> ≤ x</code><sub><code>i</code></sub><code> ≤ N</code> pentru <code>i=1,2,3,...,D</code>;</li>
+	<li><code>1 ≤ t</code><sub><code>j</code></sub><code> ≤ z</code><sub><code>j</code></sub><code> ≤ N</code> pentru <code>j=1,2,3,...,K</code>;</li>
+	<li>pentru rezolvarea corectă a cerinţei a) se acordă <code>20% </code>din punctaj, iar pentru rezolvarea corectă a cerinţei b) se acordă <code>80%</code> din punctaj.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>betasah.in</code></p>
+
+<pre>6 3 4
+3 2 
+5 2
+5 4
+3 1
+4 3
+6 4
+1 1</pre>
+
+<p><code>betasah.out</code></p>
+
+<pre>5
+13</pre>
+
+<h1>Explicație</h1>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1001-1050-betasah5-png.png"></p>
+
+<p><code>N=6</code>, <code>D=3</code>, <code>K=4</code>.<br>
+Rândurile <code>5</code> şi <code>6</code> conţin numărul maxim <code>M=5</code> de pătrate albe. <br>
+Numărul de pătrate accesibile de pe suprafaţa de joc este <code>P=13</code>.</p>
+
+<p>În desenul de mai sus corespunzător suprafeţei date, cele <code>13</code> pătrate accesibile sunt marcate cu <code>X</code>.</p>		</article>
+		</body></html>

@@ -1,0 +1,68 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3037"><article id="enunt">
+			<p>Există azi mulți viruși care acționează în diferite moduri asupra informației stocate într-un calculator. Printre aceștia există și unii mai puțin periculoși, care se mulțumesc doar să simuleze o anumită alterare a informației. Să presupunem că dorim să scriem un astfel de virus care acționează doar asupra informației de tip text de pe ecranul calculatorului. În mod text, ecranul este constituit din <code>n</code> linii pe fiecare aflându-se câte <code>m</code> caractere. Caracterele sunt reținute în memoria calculatorului prin codul lor <span class="caps">ASCII</span>, reprezentat în binar pe <code>8</code> biți. Biții sunt numerotați de la <code>0</code> la <code>7</code> de la dreapta către stânga, cel din stânga fiind cel mai semnificativ bit.<br>
+La fiecare secundă, virusul transformă simultan toate caracterele de pe ecran după următoarele reguli:<br>
+1. virusul afectează doar caracterele ale căror coduri nu are toți biții egali cu <code>0</code>; caracterul al cărui cod are toți biții egali cu <code>0</code> se numește inatacabil;<br>
+2. se determină caracterele ale căror coduri au număr maxim de biți egali cu <code>1</code>; pentru fiecare astfel de caracter cei mai semnificativi <code>2</code> biți egali cu <code>1</code> din cod se transformă în <code>0</code>, iar dacă nu are în cod <code>2</code> biți egali cu <code>1</code>, se va transforma în <code>0</code> singurul bit <code>1</code> existent;<br>
+3. pentru toate celelalte caractere atacabile, bitul cel mai puțin semnificativ egal cu <code>0</code> al codului se transformă în <code>1</code>;<br>
+4. unele caractere pot genera erori în execuția virusului deoarece transformând succesiv codurile lor se pot obține cicluri; aceste caractere au codurile <span class="caps">ASCII</span> <code>1</code>, <code>3</code>, <code>7</code>, <code>15</code>, <code>31</code>, <code>63</code>, <code>127</code> și virusul le transformă imediat în <code>0</code> (adică devin inatacabile), indiferent când un astfel de caracter apare (adică dacă el există inițial pe ecran sau apare după o transformare).</p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând configurația inițială a ecranului, scrieți un program care să rezolve următoarele două cerințe:<br>
+1. determină numărul de caractere inatacabile obținute în prima secundă (adică după prima transformare);<br>
+2. determină după câte secunde toate caracterele de pe ecran sunt inatacabile.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>virus.in</code> conține pe prima linie două numere naturale separate printr-un spațiu <code>n m</code>, reprezentând dimensiunile ecranului. Pe fiecare dintre următoarele <code>n</code> linii se află câte <code>m</code> caractere, reprezentând caracterele existente inițial pe ecran. Ultima linie a fișierului de intrare conține cerința care trebuie să fie rezolvată (<code>1</code> sau <code>2</code>).</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>virus.out</code> va conține o singură linie pe care va fi scris un număr natural, reprezentând răspunsul la cerința specificată în fișierul de intrare.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n, m ≤ 100</code></li>
+	<li>Caracterele aflate inițial pe ecran au coduri cuprinse între <code>32</code> și <code>127</code>.</li>
+	<li>Pentru teste valorând <code>30</code> de puncte, cerința este <code>1</code>.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>virus.in</code></p>
+
+<pre>2 2
+AA
+AA
+1</pre>
+
+<p><code>virus.out</code></p>
+
+<pre>4</pre>
+
+<h3>Explicație</h3>
+
+<p>Caracterul <code>A</code> are codul <code>01000001</code>, deci numărul maxim de biți egali cu <code>1</code> este <code>2</code> (egal pentru toate caracterele); după o secundă toate cele <code>4</code> caractere vor avea codul <code>00000000</code> (deci devin inatacabile).</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>virus.in</code></p>
+
+<pre>3 3
+AAC
+AAC
+CCC
+2</pre>
+
+<p><code>virus.out</code></p>
+
+<pre>2</pre>
+
+<h3>Explicație</h3>
+
+<p>În prima secundă:<br>
+- numărul maxim de biți egali cu <code>1</code> în codurile caracterelor este <code>3</code> (<code>C</code> având codul <code>01000011</code>); după eliminarea celor mai semnificativi doi biți <code>1</code> codul lui <code>C</code> devine <code>00000001</code>, deci devine un caracter care generează erori și virusul îl transformă imediat în <code>00000000</code> (inatacabil);<br>
+- celelalte caractere <code>A</code> (cu codul <code>01000001</code>) devin <code>C</code> (codul <code>01000011</code>).<br>
+În a doua secundă numărul maxim de biți egali cu <code>1</code> este <code>3</code>, se elimină cei mai semnificativi doi biți <code>1</code>, codul devine <code>00000001</code> rezultă un caracter care generează erori, deci virusul îl transformă în inatacabil. Astfel, după două secunde toate caracterele sunt inatacabile.</p>		</article>
+		</body></html>

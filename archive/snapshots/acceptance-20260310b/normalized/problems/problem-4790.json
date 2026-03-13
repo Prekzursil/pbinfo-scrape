@@ -1,0 +1,323 @@
+{
+  "id": 4790,
+  "slug": "palindrom1",
+  "name": "palindrom1",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4790/palindrom1",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 1,
+      "name": "Algoritmi elementari",
+      "slug": "algoritmi-elementari",
+      "href": "/?pagina=probleme-lista&tag=1"
+    },
+    {
+      "id": 5,
+      "name": "Cifrele unui număr",
+      "slug": "cifrele-unui-num-r",
+      "href": "/?pagina=probleme-lista&tag=5"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerințe",
+      "html": "<p>1) Determinați câte dintre cele <code>N</code> numere sunt palindrom.<br>\n2) Determinați câte dintre cele <code>N</code> numere pot deveni palindrom prin inserarea în acestea a câte unei cifre.<br>\n3) Determinați câte dintre cele <code>N</code> numere pot deveni palindrom prin inserarea în acestea a câte două cifre.</p>",
+      "text": "1) Determinați câte dintre cele N numere sunt palindrom. 2) Determinați câte dintre cele N numere pot deveni palindrom prin inserarea în acestea a câte unei cifre. 3) Determinați câte dintre cele N numere pot deveni palindrom prin inserarea în acestea a câte două cifre."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>palindrom.in</code> conține </p><ul>\n\t<li>pe prima linie un număr natural <code>C</code>, reprezentând numărul cerinței, care poate avea valorile <code>1</code>, <code>2</code> sau <code>3</code>;</li>\n\t<li>pe a doua linie un număr natural <code>N</code>, având semnificația din enunț;</li>\n\t<li>pe a treia linie <code>N</code> numere naturale, despărțite prin câte un spațiu, având semnificația din enunț.</li>\n</ul>",
+      "text": "Fișierul de intrare palindrom.in conține pe prima linie un număr natural C, reprezentând numărul cerinței, care poate avea valorile 1, 2 sau 3; pe a doua linie un număr natural N, având semnificația din enunț; pe a treia linie N numere naturale, despărțite prin câte un spațiu, având semnificația din enunț."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>În fișierul de ieșire <code>palindrom.out</code> se afișează, pe prima linie, un număr natural reprezentând rezultatul determinat conform cerinței <code>C</code>.</p>",
+      "text": "În fișierul de ieșire palindrom.out se afișează, pe prima linie, un număr natural reprezentând rezultatul determinat conform cerinței C."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ n ≤ 100.000</code></li>\n\t<li>Toate numerele de pe a treia linie au același număr de cifre, notat cu <code>X</code></li>\n\t<li><code>2 ≤ X ≤ 9</code></li>\n\t<li>Pentru 41 de puncte, <code>C = 1</code></li>\n\t<li>Pentru 11 puncte, <code>C = 2</code>, <code>X ≤ 3</code></li>\n\t<li>Pentru 18 puncte, <code>C = 2</code>, <code>X &gt; 3</code></li>\n\t<li>Pentru 11 puncte, <code>C = 3</code>, <code>X ≤ 4</code></li>\n\t<li>Pentru 19 puncte, <code>C = 3</code>, <code>X &gt; 4</code></li>\n</ul>",
+      "text": "1 ≤ n ≤ 100.000 Toate numerele de pe a treia linie au același număr de cifre, notat cu X 2 ≤ X ≤ 9 Pentru 41 de puncte, C = 1 Pentru 11 puncte, C = 2, X ≤ 3 Pentru 18 puncte, C = 2, X > 3 Pentru 11 puncte, C = 3, X ≤ 4 Pentru 19 puncte, C = 3, X > 4"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>palindrom.in</code></p><pre>1\n3\n12321 10301 10331</pre><p><code>palindrom.out</code></p><pre>2</pre><h3>Explicație</h3><p><code>12321</code> și <code>10301</code> sunt palindrom. <code>10331</code> nu este palindrom.</p>",
+      "text": "palindrom.in1 3 12321 10301 10331palindrom.out2Explicație12321 și 10301 sunt palindrom. 10331 nu este palindrom."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>palindrom.in</code></p><pre>2\n4\n232 233 243 990</pre><p><code>palindrom.out</code></p><pre>2</pre><h3>Explicație</h3><p><code>232</code> devine <code>2332</code> prin inserarea unei cifre, care este palindrom. <code>233</code> devine <code>2332</code> prin inserarea unei cifre, care este palindrom. <code>243</code> nu poate deveni palindrom prin inserarea unei singure cifre. <code>990</code> nu poate deveni palindrom prin inserarea unei singure cifre (nu se permite inserarea cifrei <code>0</code> înainte de prima cifră<br>\na numărului).</p>",
+      "text": "palindrom.in2 4 232 233 243 990palindrom.out2Explicație232 devine 2332 prin inserarea unei cifre, care este palindrom. 233 devine 2332 prin inserarea unei cifre, care este palindrom. 243 nu poate deveni palindrom prin inserarea unei singure cifre. 990 nu poate deveni palindrom prin inserarea unei singure cifre (nu se permite inserarea cifrei 0 înainte de prima cifră a numărului)."
+    },
+    {
+      "title": "Exemplul 3:",
+      "html": "<p><code>palindrom.in</code></p><pre>3\n5\n1221 1231 3112 9880\n9890</pre><p><code>palindrom.out</code></p><pre>4</pre><h3>Explicație</h3><p><code>1221</code> devine <code>123321</code>, care este palindrom. <code>1231</code> devine <code>123321</code>, care este palindrom. <code>3112</code> devine <code>231132</code>, care este palindrom. <code>9880</code> devine <code>908809</code>, care este palindrom. <code>9890</code> nu poate deveni palindrom prin inserarea a două cifre.</p>",
+      "text": "palindrom.in3 5 1221 1231 3112 9880 9890palindrom.out4Explicație1221 devine 123321, care este palindrom. 1231 devine 123321, care este palindrom. 3112 devine 231132, care este palindrom. 9880 devine 908809, care este palindrom. 9890 nu poate deveni palindrom prin inserarea a două cifre."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "12321 și 10301 sunt palindrom. 10331 nu este palindrom."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "232 devine 2332 prin inserarea unei cifre, care este palindrom. 233 devine 2332 prin inserarea unei cifre, care este palindrom. 243 nu poate deveni palindrom prin inserarea unei singure cifre. 990 nu poate deveni palindrom prin inserarea unei singure cifre (nu se permite inserarea cifrei 0 înainte de prima cifră a numărului)."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "1221 devine 123321, care este palindrom. 1231 devine 123321, care este palindrom. 3112 devine 231132, care este palindrom. 9880 devine 908809, care este palindrom. 9890 nu poate deveni palindrom prin inserarea a două cifre."
+    }
+  ],
+  "constraints": [
+    "1 ≤ n ≤ 100.000",
+    "Toate numerele de pe a treia linie au același număr de cifre, notat cu X",
+    "2 ≤ X ≤ 9",
+    "Pentru 41 de puncte, C = 1",
+    "Pentru 11 puncte, C = 2, X ≤ 3",
+    "Pentru 18 puncte, C = 2, X > 3",
+    "Pentru 11 puncte, C = 3, X ≤ 4",
+    "Pentru 19 puncte, C = 3, X > 4"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q27c7ca227c.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "palindrom.in / palindrom.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "OJI 2025, clasa a 5-a",
+    "autor": "Dan Constantin Spătărel",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "author": "Dan Constantin Spătărel",
+  "sourceAttribution": "OJI 2025, clasa a 5-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4790/palindrom1"
+}

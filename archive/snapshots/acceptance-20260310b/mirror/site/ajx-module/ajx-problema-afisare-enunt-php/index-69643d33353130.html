@@ -1,0 +1,60 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3510"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>Specialiștii de la <span class="caps">WHO</span> (World Health Organization) trebuie să realizeze o statistică a numărului de cazuri de <span class="caps">COVID</span> 19 în anumite zone ale planetei. Aceștia își delimitează zonele respective și fiecare zonă o codifică printr-un element într-o matrice pătratică de dimensiune <code>N</code>, a cărui valoare reprezintă câte cazuri există în acea zonă. Inițial, se cunoaște câte cazuri există în fiecare zonă înainte de realizarea statisticii. Asupra matricei inițiale alcătuită din aceste valori se aplică <code>2</code> tipuri de operații:<br>
+</p><ul>
+	<li><code>1 x y val</code> – în zona codificată în matrice prin elementul de coordonate <code>x y</code> apar <code>val</code> cazuri noi, deci elementul de coordonate <code>x y</code> din matrice crește cu <code>val</code>.</li>
+	<li><code>2 x1 y1 x2 y2</code> – se cere numărul total de cazuri din toate zonele codificate printr-un element aflat în submatricea cu colțul stânga-sus de coordonate <code>x1 y1</code> și cel drepta-jos de coordonate <code>x2 y2</code> (adică suma elementelor submatricei cu colțul stânga-sus de coordonate <code>x1 y1</code> și cel drepta-jos de coordonate <code>x2 y2</code>).</li><br>
+</ul><p></p>
+
+<p>Dându-se <code>Q</code> operații, să se raspundă în ordine la cele de tip <code>2</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>aib2d.in</code> conține pe prima linie numărul <code>N</code>, iar pe următoarele <code>N</code> linii câte <code>N</code> numere naturale separate prin câte un spațiu reprezentând elementele matricei. Pe linia <code>N + 2</code> se află numărul <code>Q</code> reprezentând numărul de operații, iar pe următoarele <code>Q</code> linii sunt descrise operațiile.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>aib2d.out</code> va conține pe câte o linie răspunsurile la operațiile de tip <code>2</code> în ordinea în care apar în fișierul de intrare.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 1.000</code></li>
+	<li><code>1 ≤ Q ≤ 100.000</code></li>
+	<li><code>1 ≤ x, y, x1, y1, x2, y2 ≤ N</code></li>
+	<li><code>x1 ≤ x2</code></li>
+	<li><code>y1 ≤ y2</code></li>
+	<li><code>1 ≤ val ≤ 2.500</code></li>
+	<li>elementele matricei inițiale vor fi mai mici sau egale decât <code>2.500</code></li>
+	<li>orice sumă care va trebui calculată va putea fi reprezentată pe <code>32</code> de biți</li>
+	<li>datorită dimensiunilor mari ale fișierelor se recomandă parsarea acestora</li>
+	<li><a href="https://www.infoarena.ro/parsare-fisier-intrare">InParser</a></li>
+	<li><a href="https://www.infoarena.ro/parsare-fisier-iesire">OutParser</a></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>aib2d.in</code></p>
+
+<pre>5
+1 4 5 6 7
+8 4 9 10 11
+2 5 8 9 2
+1 3 7 9 4
+2 3 4 5 6
+4
+1 1 3 4
+2 1 2 3 4
+1 5 3 10
+2 1 1 5 3</pre>
+
+<p><code>aib2d.out</code></p>
+
+<pre>64
+80</pre>
+
+<h3>Explicație</h3>
+
+<p>Dupa prima operatie elementul de pe linia <code>1</code> și coloana <code>3</code> va avea valoarea <code>9</code>, iar rezultatul operatiei de tip <code>2</code> imediat următoare va fi <code>64</code> (inițial ar fi fost <code>60</code> dar elementul de pe linia <code>1</code> și coloana <code>3</code> a crescut cu <code>4</code>).</p>		</article>
+		</body></html>

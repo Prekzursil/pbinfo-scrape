@@ -1,0 +1,55 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4668"><article id="enunt">
+			<p>O matrice pătratică <code>A[i,j]</code> de dimensiuni <code>N x N</code> cu <code>N</code> impar se numește matrice <strong>spirală</strong> dacă respectă următoarele proprietăți când este parcursă în spirală conform imaginii de mai jos:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-spirala3-02-jpg.jpg"></p>
+
+<ul>
+	<li>Pentru oricare celulă <code>(i, j)</code> din matrice, fie <code>A[i, j] = 0</code>, fie <code>A[i,j]</code> <strong>nu</strong> conține cifra 0.</li>
+	<li>Fie <code>(i, j)</code> oricare celulă mai puțin cea din centru și <code>(k, l)</code> celula parcursă anterior din matrice, și fie <code>c</code> oricare cifră nenulă, adică de la <code>1</code> la <code>9</code>:<br>
+a) Dacă <code>c</code> divide <code>i + j</code>, atunci <code>A[i, j]</code> conține cifra <code>c</code> dacă și numai dacă <code>A[k, l]</code> <strong>nu</strong> conține cifra <code>c</code>.<br>
+b) Dacă <code>c</code> <strong>nu</strong> divide <code>i + j</code>, atunci <code>A[i, j]</code> conține cifra <code>c</code> dacă și numai dacă <code>A[k, l]</code> conține cifra <code>c</code>.<br>
+c) Pentru numărul aflat în celula din centru, fiind prima parcursă, nu avem astfel de restricții.</li>
+</ul>
+
+<ul>
+	<li>Un element din matrice va fi <code>0</code> dacă și numai dacă acesta nu are voie să conțină nicio cifră de la <code>1</code> la <code>9</code> conform regulilor de mai sus.</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Dându-se o matrice pătratică <code>A</code> de dimensiune <code>N</code>, trebuie să determinați care este numărul minim de elemente din matrice care ar trebui înlocuite (în celulele respective pot fi scrise orice alte numere naturale) pentru ca <code>A</code> să devină o matrice spirală.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului de intrare <code>spirala.in</code> se va afla un singur număr natural <code>N</code>, reprezentând dimensiunile matricii. Pe următoarele <code>N</code> linii se vor afla câte <code>N</code> numere naturale separate prin câte un spațiu reprezentând elementele matricii <code>A</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>spirala.out</code> va conține un singur număr reprezentând minimul de elemente ce vor trebui înlocuite pentru ca <code>A</code> să devină o matrice spirală.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 999</code>, <code>N</code> impar.</li>
+	<li>Elementele matricii <code>A</code> sunt numere naturale mai mici decât <code>1.000.000.000</code> ce conțin doar cifre de la <code>1</code> la <code>9</code>, cu excepția elementelor egale cu <code>0</code>.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>spirala.in</code></p>
+
+<pre>5
+16 36 1234 23456 145
+26 1469 4569 123459 457
+1236 269 13579 234579 12578
+346 12569 359 135789 235789
+13456 245 12457 578 45789</pre>
+
+<p><code>spirala.out</code></p>
+
+<pre>2</pre>
+
+<h3>Explicație</h3>
+
+<p>Pentru a obține o matrice spirală, ar trebui înlocuite numerele din celulele <code>(1,3)</code> și <code>(5, 5)</code>. În celula <code>(1, 3)</code> ar putea fi scris numărul <code>12345</code> și în celula <code>(5, 5)</code>, numărul <code>13789</code>.</p>		</article>
+		</body></html>

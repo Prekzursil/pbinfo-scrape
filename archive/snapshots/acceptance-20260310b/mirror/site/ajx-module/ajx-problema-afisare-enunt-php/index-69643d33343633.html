@@ -1,0 +1,79 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3463"><article id="enunt">
+			<p>Se dă o instalație de <code>N * M</code> lumini. Fiecare lumină este dată prin culoare, în format <span class="caps">RGB</span>. Astfel, un element din matrice poate fi considerat un triplet <code>(x</code><sub><code>R</code></sub> <code>, x</code><sub><code>G</code></sub> <code>, x</code><sub><code>B</code></sub><code>)</code>. Fiecare valoare este de la <code>0</code> la <code>255</code>.</p>
+
+<p>Dispersia unei culori se definește ca numărul</p>
+
+<p>$$ \left( \left[ \frac{x_G}{x_R}\right]^2 + \left[ \frac{x_B}{x_G}\right]^2 + \left[ \frac{x_R}{x_B}\right]^2 \right) \cdot 1000 $$</p>
+
+<p>(Întâi se calculează partea întreagă, urmând apoi celelalte operații în ordinea cunoscută). Dacă numitorul unei fracții este <code>0</code>, fracția este nulă. De exemplu, pentru <code>(64, 128, 0)</code>, dispersia este <code>(2</code><sup><code>2</code></sup> <code>+ 0</code><sup><code>2</code></sup> <code>+ 0</code><sup><code>2</code></sup><code>) ∗ 1000 = 4 ∗ 1000 = 4000</code>.</p>
+
+<p>Se știe că dintr-o lumină în alta se poate ajunge dacă sunt adiacente (în una din cele patru direcții) și diferența dispersiilor celor două elemente din matrice, în modul, este mai mică sau egală cu un număr întreg <code>P</code>.</p>
+
+<p>Se știe că formatul <span class="caps">RGB</span> este aditiv și culoarea negru = <code>(0,0,0)</code>. Pentru fiecare lumină, poate exista alta lumină în matrice astfel încât adunate să dea culoarea negru. Se știe că dacă aceste lumini sunt conectate (adică se poate ajunge direct sau indirect din una in cealaltă), toata instalația se blochează.</p>
+
+<p>De exemplu, dacă adunăm <code>(0, 128, 64)</code> cu <code>(128, 128, 128)</code> vom avea ca rezultat: <code>(128, 0, 196)</code> – adică se adună fiecare indice cu fiecare, iar dacă rezultatul este mai mare decât <code>255</code>, se scade <code>256</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>1) Câte perechi există în matrice, pentru care conexiunea lor ar determina culoarea negru? <br>
+2) Pentru o astfel de instalație dată, care este numărul maxim <code>P</code>, pentru care instalația nu se blochează?</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie  din fișierul <code>lumini.in</code> se află trei numere naturale <code>N</code>, <code>M</code>, <code>C</code>. Ultimul număr reprezintă indicele cerinței care trebuie rezolvate. Pe următoarele <code>N</code> linii ale fișierului se găsesc câte <code>3 * M</code> numere, separate prin câte un spațiu, care definesc fiecare lumină din matrice. Astfel, dintr-un triplet, primul număr este intensitatea <code>R</code>, al doilea <code>G</code>, și al treilea <code>B</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>lumini.out</code> va conţine pe prima linie, numărul de perechi formate, dacă trebuie rezolvată prima cerință. Dacă trebuie rezolvată a doua, se va afișa, <code>P</code>-ul găsit.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>N, M ≤ 1000</code></li>
+	<li><code>1 ≤ C ≤ 2</code></li>
+	<li>Prima cerință valoreaza 30 de puncte, iar a doua cerință 70.</li>
+	<li>Pentru a doua cerință, pentru 20 din cele 70 de puncte, <code>N, M ≤ 50</code></li>
+	<li>Pentru citire se recomandă folosirea biblitotecii <code>&lt;cstdio&gt;</code> din C++.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>lumini.in</code></p>
+
+<pre>3 2 1
+0 64 64 64 64 0
+128 128 128 192 192 192
+0 192 192 192 192 0</pre>
+
+<p><code>lumini.out</code></p>
+
+<pre>2</pre>
+
+<h3>Explicație</h3>
+
+<p>Se va rezolva doar prima cerință:</p>
+
+<p>Primele <code>2</code> becuri sunt <code>(0, 64, 64)</code>, <code>(64, 64, 0)</code>. Acestea au intensitate <code>1000</code>. <code>(128, 128, 128)</code> și <code>(192, 192, 192)</code> au intensitate <code>3000</code>. <code>(0, 192, 192)</code> și <code>(192, 192, 0)</code> au intensitate <code>1000</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>lumini.in</code></p>
+
+<pre>3 2 2	
+0 64 64 64 64 0
+128 128 128 192 192 192
+0 192 192 192 192 0</pre>
+
+<p><code>lumini.out</code></p>
+
+<pre>1999</pre>
+
+<h3>Explicație</h3>
+
+<p>Se va rezolva doar cerința a doua:</p>
+
+<p><code>(0, 64, 64) + (0, 192, 192) = (0, 0, 0)</code><br>
+<code>(64, 64, 0) + (192, 192, 0) = (0, 0, 0)</code><br>
+Deci, în total, <code>2</code> perechi formează negru.<br>
+Pentru <code>P = 2000</code> se poate forma oricare dintre cele două perechi</p>		</article>
+		</body></html>

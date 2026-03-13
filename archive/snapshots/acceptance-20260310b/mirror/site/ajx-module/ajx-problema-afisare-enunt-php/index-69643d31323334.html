@@ -1,0 +1,49 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1234"><article id="enunt">
+			<p>Victor are la dispoziție  multe cuburi din lemn, toate de aceeași dimensiune, fiecare fiind colorat cu una din culorile <code>0</code>, <code>1</code>, <code>2</code>, …, <code>9</code>. El a inventat un joc sub forma unui algoritm:</p>
+
+<ul>
+	<li><em>Pasul 0</em> – Se inițializează variabila <code>X</code> cu zero.</li>
+	<li><em>Pasul 1</em> – Se aleg la întâmplare un număr de cuburi și se formează cu ele un șir. Cuburile  din șir sunt lipite unul de altul.</li>
+	<li><em>Pasul 2</em> – Dacă toate cuburile din șir au aceeași culoare, atunci se afișează valoarea variabilei <code>X</code> și jocul se oprește. În caz contrar se trece la <em>pasul 3</em>.</li>
+	<li><em>Pasul 3</em> – Se alege o culoare <code>C</code> și apoi toate cuburile de culoarea <code>C</code> se elimină din șir. Locurile cuburilor eliminate rămân temporar  libere.</li>
+	<li><em>Pasul 4</em> – Orice cub din șir va fi deplasat spre stânga lui, cât timp pozițiile vecine sunt libere. Se mărește <code>X</code> cu <code>1</code> la fiecare deplasare cu o poziție. Operațiile de deplasare se încheie când nu se mai pot efectua mutări spre stânga. Apoi se revine la <em>pasul 2</em>.</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Se consideră un șir cu cel puțin două elemente reprezentând culorile cuburilor din șir. Se cere să se calculeze valoarea maximă pe care o poate avea <code>X</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>În fișierul <code>easydel.in</code> se află pe prima linie șirul dat. Cifrele din șir sunt scrise fără spații între ele.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>În fișierul <code>easydel.out</code>  se va scrie un singur număr reprezentând valoarea maximă pe care o poate avea <code>X</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>Lungimea maximă a șirului de culori este  <code>20000</code>.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>easydel.in</code></p>
+
+<pre>12132131123221</pre>
+
+<p><code>easydel.out</code></p>
+
+<pre>37</pre>
+
+<h3>Explicație</h3>
+
+<p>Se elimină toate cuburile de culoare <code>1</code>. Șirul rămas este <code>_2_32_3__2322_</code>. Numărul de mutări spre stânga va fi <code>1+2+2+3+5+5+5+5</code>, deci <code>X</code> va crește cu <code>28</code>. Șirul devine <code>23232322</code>.</p>
+
+<p>Dacă se vor elimina apoi cuburile de culoare <code>3</code>, atunci  șirul rămas va fi <code>2_2_2_22</code>. Numărul de mutări spre stânga va fi <code>1+2+3+3</code>, deci <code>X</code> va crește cu <code>9</code>. Șirul va deveni <code>22222</code> și jocul se va opri. Valoarea lui <code>X</code> va fi <code>37</code>.</p>
+
+<p>Dacă la început se elimină cuburile de culoare <code>2</code>, atunci se va obtine sirul <code>1_13_1311_3__1</code>. <code>X</code> va crește cu <code>18</code>. Șirul va deveni <code>113131131</code> și X va putea crește cu cel mult <code>10</code>.</p>
+
+<p>Dacă la început se elimină cuburile de culoare <code>3</code>, atunci se va obține șirul <code>121_21_112_221</code>, iar <code>X</code> va crește cu <code>17</code>. Șirul va deveni <code>12121112221</code>, iar <code>X</code> va putea crește cu cel mult <code>18</code>.</p>		</article>
+		</body></html>

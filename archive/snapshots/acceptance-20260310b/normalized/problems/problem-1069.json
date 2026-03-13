@@ -1,0 +1,306 @@
+{
+  "id": 1069,
+  "slug": "ubuntzei",
+  "name": "Ubuntzei",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1069/ubuntzei",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 16,
+      "name": "Teoria Grafurilor",
+      "slug": "teoria-grafurilor",
+      "href": "/?pagina=probleme-lista&tag=16"
+    },
+    {
+      "id": 60,
+      "name": "Grafuri cu costuri",
+      "slug": "grafuri-cu-costuri",
+      "href": "/?pagina=probleme-lista&tag=60"
+    }
+  ],
+  "tags": [
+    "Algoritmul lui Dijkstra",
+    "Programare dinamica pe stari exponentiale"
+  ],
+  "sections": [
+    {
+      "title": "Cerinţă",
+      "html": "<p>Scrieţi un program care să determine, pentru ubuntzei, lungimea minimă <code>L</code> a unui traseu de la Cluj-Napoca la Vama Veche ce trece prin toate cele <code>K</code> localităţi.</p>",
+      "text": "Scrieţi un program care să determine, pentru ubuntzei, lungimea minimă L a unui traseu de la Cluj-Napoca la Vama Veche ce trece prin toate cele K localităţi."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Prima linie a fişierului de intrare <code>ubuntzei.in</code> conţine două numere naturale <code>N M</code>, separate printr-un spaţiu, cu semnificaţia din enunţ. A doua linie a fişierului conţine <code>K+1</code> numere naturale distincte: <code>K C</code><sub><code>1</code></sub> <code>C</code><sub><code>2</code></sub> … <code>C</code><sub><code>K</code></sub>, separate prin câte un spaţiu, <code>K</code> având semnificaţia din enunţ iar <code>C</code><sub><code>1</code></sub> <code>C</code><sub><code>2</code></sub> … <code>C</code><sub><code>K</code></sub> reprezentând cele <code>K</code> localităţi în care locuiesc prietenii. Fiecare din următoarele <code>M</code> linii conţine câte trei numere naturale <code>x y z</code>, separate prin câte un spaţiu, reprezentând o şosea care leagă localitatea <code>x</code> de localitatea <code>y</code> şi are lungimea <code>z</code>.</p>",
+      "text": "Prima linie a fişierului de intrare ubuntzei.in conţine două numere naturale N M, separate printr-un spaţiu, cu semnificaţia din enunţ. A doua linie a fişierului conţine K+1 numere naturale distincte: K C1 C2 … CK, separate prin câte un spaţiu, K având semnificaţia din enunţ iar C1 C2 … CK reprezentând cele K localităţi în care locuiesc prietenii. Fiecare din următoarele M linii conţine câte trei numere naturale x y z, separate prin câte un spaţiu, reprezentând o şosea care leagă localitatea x de localitatea y şi are lungimea z."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>ubuntzei.out</code> va conține numărul natural <code>L</code> reprezentând lungimea minimă căutată.</p>",
+      "text": "Fișierul de ieșire ubuntzei.out va conține numărul natural L reprezentând lungimea minimă căutată."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 2 000</code></li>\n\t<li><code>1 ≤ M ≤ 10 000</code></li>\n\t<li><code>0 ≤ K ≤ min{15, N – 2}</code></li>\n\t<li><code>2 ≤ C</code><sub><code>1</code></sub> <code>C</code><sub><code>2</code></sub> … <code>C</code><sub><code>K</code></sub><code> ≤ N – 1</code></li>\n\t<li>Traseul poate trece de mai multe ori prin oricare localitate.</li>\n\t<li>Costul unei muchii va fi cuprins între <code>1</code> şi <code>10</code><sup><code>5</code></sup>.</li>\n\t<li>Pentru primele 20% din teste <code>K = 0</code>.</li>\n\t<li>Pentru primele 50% din teste <code>K ≤ 10</code>.</li>\n\t<li>Pentru primele 70% din teste <code>N ≤ 200</code>.</li>\n</ul>",
+      "text": "1 ≤ N ≤ 2 000 1 ≤ M ≤ 10 000 0 ≤ K ≤ min{15, N – 2} 2 ≤ C1 C2 … CK ≤ N – 1 Traseul poate trece de mai multe ori prin oricare localitate. Costul unei muchii va fi cuprins între 1 şi 105. Pentru primele 20% din teste K = 0. Pentru primele 50% din teste K ≤ 10. Pentru primele 70% din teste N ≤ 200."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>ubuntzei.in</code></p><pre>4 5 \n1 2\n1 2 1\n1 3 1\n2 3 1\n2 4 4\n3 4 2</pre><p><code>ubuntzei.out</code></p><pre>4</pre>",
+      "text": "ubuntzei.in4 5 1 2 1 2 1 1 3 1 2 3 1 2 4 4 3 4 2ubuntzei.out4"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p>Există un singur traseu de lungime minimă de la localitatea <code>1</code> la localitatea <code>4</code> şi care trece prin localitatea <code>2</code>, şi anume: <code>[1,2,3,4]</code>. Lungimea <code>L</code> a acestui traseu este <code>4</code>.</p>",
+      "text": "Există un singur traseu de lungime minimă de la localitatea 1 la localitatea 4 şi care trece prin localitatea 2, şi anume: [1,2,3,4]. Lungimea L a acestui traseu este 4."
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "1 ≤ N ≤ 2 000",
+    "1 ≤ M ≤ 10 000",
+    "0 ≤ K ≤ min{15, N – 2}",
+    "2 ≤ C1 C2 … CK ≤ N – 1",
+    "Traseul poate trece de mai multe ori prin oricare localitate.",
+    "Costul unei muchii va fi cuprins între 1 şi 105.",
+    "Pentru primele 20% din teste K = 0.",
+    "Pentru primele 50% din teste K ≤ 10.",
+    "Pentru primele 70% din teste N ≤ 200."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q694cddc0b5.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "11",
+    "intrare/ieșire": "ubuntzei.in / ubuntzei.out",
+    "limită timp": "1 secunde",
+    "limită memorie": "32 MB / 20 MB",
+    "sursa problemei": "OJI 2011, Clasele XI-XII",
+    "autor": "Marius Stroe",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 1,
+  "memoryLimitMb": 32,
+  "author": "Marius Stroe",
+  "sourceAttribution": "OJI 2011, Clasele XI-XII",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1069/ubuntzei"
+}

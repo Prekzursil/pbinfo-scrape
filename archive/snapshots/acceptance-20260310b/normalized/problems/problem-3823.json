@@ -1,0 +1,306 @@
+{
+  "id": 3823,
+  "slug": "a-flippedcards",
+  "name": "A-FlippedCards",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3823/a-flippedcards",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 151,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=151"
+    },
+    {
+      "id": 152,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=152"
+    }
+  ],
+  "tags": [
+    "Two Pointers",
+    "Cautare binara",
+    "ad-hoc"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>După ce Le Quack și-a pierdut toți banii dați de mama lui să cumpere pâine la Blackjack, acesta a decis să își creeze propriul joc de cărți unde își poate bate prietenii și să câștige banii înapoi. Jocul se joacă cu un pachet de <code>N</code> cărți. Pachetul de cărți este reprezentat că un șir binar cum va fi descris în cele ce urmează.Cărțile pot fi așezate pe față sau pe spate fără a conta culoarea sau valoarea cărții, pentru simplitate codificăm o care întoarsă prin cifra <code>0</code> și o carte pe față prin cifra <code>1</code> . Fiecare jucător poate face un număr nelimitat de operații de următorul tip: se alege un index <code>i</code> și se întorc toate cărțile din secvență de cărți <code>i...n,</code> adică o carte de valoare <code>0</code> se transformă în carte de valoare <code>1</code> și invers. Acum este rândul lui Le Quack, el va prezintă configurația curentă a cărților și voi trebuie să îl ajutați cu <code>2</code> cerințe, el va poate răsplăti cu un posibil loc <code>I</code> la concurs.</p><p><code>Cerinta 1</code>: Stiind configuratia cartilor sunteti rugati sa aflati lungimea maxima a unei secvente de carti, astfel incat costul de a transforma aceasta secventa intr-o secventa de carti care contin doar valori de <code>1</code> este maxim <code>K</code>.</p><p><code>Certina 2</code>: Stiind configuratia cartilor sunteti intrebati care este numarul secventelor de carti pentru care numarul minim de operatii pentru a devni o secventa care contine numai valori de <code>1</code> este fix <code>K</code>.</p>",
+      "text": "După ce Le Quack și-a pierdut toți banii dați de mama lui să cumpere pâine la Blackjack, acesta a decis să își creeze propriul joc de cărți unde își poate bate prietenii și să câștige banii înapoi. Jocul se joacă cu un pachet de N cărți. Pachetul de cărți este reprezentat că un șir binar cum va fi descris în cele ce urmează.Cărțile pot fi așezate pe față sau pe spate fără a conta culoarea sau valoarea cărții, pentru simplitate codificăm o care întoarsă prin cifra 0 și o carte pe față prin cifra 1 . Fiecare jucător poate face un număr nelimitat de operații de următorul tip: se alege un index i și se întorc toate cărțile din secvență de cărți i...n, adică o carte de valoare 0 se transformă în carte de valoare 1 și invers. Acum este rândul lui Le Quack, el va prezintă configurația curentă a cărților și voi trebuie să îl ajutați cu 2 cerințe, el va poate răsplăti cu un posibil loc I la concurs.Cerinta 1: Stiind configuratia cartilor sunteti rugati sa aflati lungimea maxima a unei secvente de carti, astfel incat costul de a transforma aceasta secventa intr-o secventa de carti care contin doar valori de 1 este maxim K.Certina 2: Stiind configuratia cartilor sunteti intrebati care este numarul secventelor de carti pentru care numarul minim de operatii pentru a devni o secventa care contine numai valori de 1 este fix K."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie sunt scrise valorile <code>C, N</code> si <code>K</code>, reprezentand numarul cerintei, numarul de carti respectiv valoarea <code>K</code> descrisa in enunt. Pe a doua linie sunt <code>N</code> valori binare reprezentand sirul de carti. Numerele se citesc din fisierul <code>flipc.in</code>.</p>",
+      "text": "Pe prima linie sunt scrise valorile C, N si K, reprezentand numarul cerintei, numarul de carti respectiv valoarea K descrisa in enunt. Pe a doua linie sunt N valori binare reprezentand sirul de carti. Numerele se citesc din fisierul flipc.in."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Se va tiparii un singur numar, reprezentand raspunul la cerinta aferenta. Numerele se tiparesc in fisieru <code>flipc.out</code>.</p>",
+      "text": "Se va tiparii un singur numar, reprezentand raspunul la cerinta aferenta. Numerele se tiparesc in fisieru flipc.out."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<code>Cerinta I:</code><ul>\n\t<li>Pentru <code>40/40 p</code> : <code>N &lt;= 1.000.000 , K &lt;= N</code></li>\n\t<li>Pentru <code>30/40 p : N &lt;= 200.000 , K &lt;= N</code></li>\n\t<li>Pentru <code>10/40 p : N &lt;= 10.000 , K &lt;= min(N , 100)</code></li>\n</ul><code>Cerinta II:</code><ul>\n\t<li>Pentru <code>60/60 p : N &lt;= 1.000.000 , K &lt;= N</code></li>\n\t<li>Pentru <code>50/60 p : N &lt;= 200.000 , K &lt;= N</code></li>\n\t<li>Pentru <code>15/60 p : N &lt;= 10.000 , K &lt;= min(N , 100)</code></li>\n</ul><ul>\n\t<li>O carte <code>NU</code> se poate roti de <code>2</code> ori in aceasi mutare !</li>\n</ul>",
+      "text": "Cerinta I: Pentru 40/40 p : N <= 1.000.000 , K <= N Pentru 30/40 p : N <= 200.000 , K <= N Pentru 10/40 p : N <= 10.000 , K <= min(N , 100) Cerinta II: Pentru 60/60 p : N <= 1.000.000 , K <= N Pentru 50/60 p : N <= 200.000 , K <= N Pentru 15/60 p : N <= 10.000 , K <= min(N , 100) O carte NU se poate roti de 2 ori in aceasi mutare !"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>flipc.in</code></p><pre>1 5 2\n10001</pre><p><code>flipc.out</code></p><pre>5</pre><p><code>flipc.in</code></p><pre>2 13 4\n1010011111101</pre><p><code>flipc.out</code></p><pre>15</pre><h3>Explicație</h3><p><code>Pentru primul exemplu :</code> putem transforma tot stringul in valori de <code>1</code> in <code>2</code> operatii, prima operatie la<br>\npozitia <code>2</code> si a doua la pozitia <code>5</code>.</p><p><code>Pentru al doilea exemplu :</code> niste exemple de secvente care contin doar valori de <code>1</code> si sunt formate prin<br>\n<code>4</code> operatii ar avea capetele: <code>{1,6}, {2,6}, {1,9} ....</code>.</p>",
+      "text": "flipc.in1 5 2 10001flipc.out5flipc.in2 13 4 1010011111101flipc.out15ExplicațiePentru primul exemplu : putem transforma tot stringul in valori de 1 in 2 operatii, prima operatie la pozitia 2 si a doua la pozitia 5.Pentru al doilea exemplu : niste exemple de secvente care contin doar valori de 1 si sunt formate prin 4 operatii ar avea capetele: {1,6}, {2,6}, {1,9} ....."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Pentru primul exemplu : putem transforma tot stringul in valori de 1 in 2 operatii, prima operatie la pozitia 2 si a doua la pozitia 5."
+    }
+  ],
+  "constraints": [
+    "Pentru 40/40 p : N <= 1.000.000 , K <= N",
+    "Pentru 30/40 p : N <= 200.000 , K <= N",
+    "Pentru 10/40 p : N <= 10.000 , K <= min(N , 100)",
+    "Pentru 60/60 p : N <= 1.000.000 , K <= N",
+    "Pentru 50/60 p : N <= 200.000 , K <= N",
+    "Pentru 15/60 p : N <= 10.000 , K <= min(N , 100)",
+    "O carte NU se poate roti de 2 ori in aceasi mutare !"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qcd27f87be9.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Iacob Tudor (IacobTudor)",
+    "clasa": "9",
+    "intrare/ieșire": "flipc.in / flipc.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 16 MB",
+    "sursa problemei": "infoleague.net runda de antrenament, problema A.",
+    "autor": "Tudor Iacob",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "author": "Tudor Iacob",
+  "sourceAttribution": "infoleague.net runda de antrenament, problema A.",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3823/a-flippedcards"
+}

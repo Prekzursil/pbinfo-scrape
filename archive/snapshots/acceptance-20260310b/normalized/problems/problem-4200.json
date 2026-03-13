@@ -1,0 +1,325 @@
+{
+  "id": 4200,
+  "slug": "roboclean",
+  "name": "roboclean",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4200/roboclean",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 46,
+      "name": "Tablouri bidimensionale (matrice)",
+      "slug": "tablouri-bidimensionale-matrice",
+      "href": "/?pagina=probleme-lista&tag=46"
+    },
+    {
+      "id": 58,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=58"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Scrieți un program care să afișeze o listă de instrucțiuni pentru aspirator astfel încât:</p><ul>\n\t<li>să aspire o suprafață maximă în cameră</li>\n\t<li>să nu treacă de două ori prin aceeași celulă</li>\n\t<li>în final să ajungă în colțul camerei unde se află ușa.</li>\n</ul>",
+      "text": "Scrieți un program care să afișeze o listă de instrucțiuni pentru aspirator astfel încât: să aspire o suprafață maximă în cameră să nu treacă de două ori prin aceeași celulă în final să ajungă în colțul camerei unde se află ușa."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Datele de intrare conțin pe prima linie numerele naturale <code>N</code> și <code>M</code> reprezentând dimensiunile camerei. Pe cea de a doua linie se află numerele naturale <code>L1</code>, <code>C1</code>, <code>L2</code>, <code>C2</code>, reprezentând coordonatele poziției inițiale a robotului, respectiv coordonatele colțului în care se află ușa camerei. Valorile scrise pe aceeași linie sunt separate prin câte un spațiu.</p>",
+      "text": "Datele de intrare conțin pe prima linie numerele naturale N și M reprezentând dimensiunile camerei. Pe cea de a doua linie se află numerele naturale L1, C1, L2, C2, reprezentând coordonatele poziției inițiale a robotului, respectiv coordonatele colțului în care se află ușa camerei. Valorile scrise pe aceeași linie sunt separate prin câte un spațiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Afișați o singură linie pe care va fi scrisă o succesiune de caractere din mulțimea <code>{N, S, E, W}</code>, codificând direcțiile de deplasare a robotului astfel încât să aspire o suprafață maximă în cameră, fără să treacă de două ori prin aceeași poziție, iar în final să ajungă în colțul camerei unde se află ușa. Problema poate permite mai multe soluții. Orice soluție corectă se acceptă.</p>",
+      "text": "Afișați o singură linie pe care va fi scrisă o succesiune de caractere din mulțimea {N, S, E, W}, codificând direcțiile de deplasare a robotului astfel încât să aspire o suprafață maximă în cameră, fără să treacă de două ori prin aceeași poziție, iar în final să ajungă în colțul camerei unde se află ușa. Problema poate permite mai multe soluții. Orice soluție corectă se acceptă."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>4 ≤ N, M ≤ 1.000</code></li>\n\t<li><code>2 ≤ L1 ≤ N − 1</code></li>\n\t<li><code>2 ≤ C1 ≤ M − 1</code></li>\n\t<li><code>L2 = 1</code> sau <code>L2 = N</code></li>\n\t<li><code>C2 = 1</code> sau <code>C2 = M</code></li>\n</ul>",
+      "text": "4 ≤ N, M ≤ 1.000 2 ≤ L1 ≤ N − 1 2 ≤ C1 ≤ M − 1 L2 = 1 sau L2 = N C2 = 1 sau C2 = M"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><strong>Intrare</strong></p><pre>4 4\n2 2 1 1</pre><p><strong>Ieșire</strong></p><pre>WSSENESENNNWWW</pre><h3>Explicație</h3><p>Ordinea în care robotul parcurge pozițiile din matricea care reprezintă camera (unde cu <code>O</code> am reprezentat o poziție pe care robotul nu a aspirat-o) este următoarea</p><p><img alt=\"\" src=\"/resurse/16a4b0/roboclean_02.jpg\"></p>",
+      "text": "Intrare4 4 2 2 1 1IeșireWSSENESENNNWWWExplicațieOrdinea în care robotul parcurge pozițiile din matricea care reprezintă camera (unde cu O am reprezentat o poziție pe care robotul nu a aspirat-o) este următoarea"
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><strong>Intrare</strong></p><pre>5 6\n3 3 5 1</pre><p><strong>Ieșire</strong></p><pre>EESSENNNNWSWNWSWNWSSESEESWWW</pre><h3>Explicație</h3><p>Ordinea în care robotul parcurge poziț iile din matrice este următoarea</p><p><img alt=\"\" src=\"/resurse/16a4b0/roboclean_03.jpg\"></p>",
+      "text": "Intrare5 6 3 3 5 1IeșireEESSENNNNWSWNWSWNWSSESEESWWWExplicațieOrdinea în care robotul parcurge poziț iile din matrice este următoarea"
+    }
+  ],
+  "examples": [
+    {
+      "input": "4 4\n2 2 1 1",
+      "output": "WSSENESENNNWWW",
+      "explanation": "Ordinea în care robotul parcurge pozițiile din matricea care reprezintă camera (unde cu O am reprezentat o poziție pe care robotul nu a aspirat-o) este următoarea"
+    },
+    {
+      "input": "5 6\n3 3 5 1",
+      "output": "EESSENNNNWSWNWSWNWSSESEESWWW",
+      "explanation": "Ordinea în care robotul parcurge poziț iile din matrice este următoarea"
+    }
+  ],
+  "constraints": [
+    "4 ≤ N, M ≤ 1.000",
+    "2 ≤ L1 ≤ N − 1",
+    "2 ≤ C1 ≤ M − 1",
+    "L2 = 1 sau L2 = N",
+    "C2 = 1 sau C2 = M"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qb2ea2851a0.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/roboclean_01.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-roboclean-01-jpg.jpg",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/roboclean_02.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-roboclean-02-jpg.jpg",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/roboclean_03.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-roboclean-03-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "tastatură / ecran",
+    "limită timp": "0.3 secunde",
+    "limită memorie": "512 MB / 512 MB",
+    "sursa problemei": "JBOI 2022",
+    "autor": "Szabo Zoltan",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.3,
+  "memoryLimitMb": 512,
+  "author": "Szabo Zoltan",
+  "sourceAttribution": "JBOI 2022",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4200/roboclean"
+}

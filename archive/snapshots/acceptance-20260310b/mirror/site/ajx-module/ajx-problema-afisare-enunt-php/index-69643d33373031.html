@@ -1,0 +1,101 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3701"><article id="enunt">
+			<p>Fie o matrice <code>A</code> de dimensiuni <code>2</code><sup><code>N</code></sup> <code>x 2</code><sup><code>N</code></sup> date. Aceasta se construiește astfel:<br>
+Se pornește de la o matrice de dimensiune <code>2 x 2</code> având ca elemente litere mici ale alfabetului englez. Matricea <code>B</code> de dimensiune <code>2</code><sup><code>k</code></sup> <code>x 2</code><sup><code>k</code></sup> se formează din patru submatrice de dimensiune <code>2</code><sup><code>k-1</code></sup> <code>x 2</code><sup><code>k-1</code></sup> și se obține din matricea <code>C</code> de dimensiune <code>2</code><sup><code>k-1</code></sup> <code>x 2</code><sup><code>k-1</code></sup>,  astfel: </p>
+
+<ul>
+	<li>Submatricea din stânga sus va fi <code>C</code></li>
+	<li>Submatricea din dreapta sus va fi formată din <code>C</code>, crescând fiecare element cu <code>3</code> (<code>a</code> devine <code>d</code>, <code>b</code> devine <code>e</code>, <code>z</code> devine <code>c</code>)</li>
+	<li>Submatricea din stânga jos va fi formată din <code>C</code>, scăzând fiecare element cu <code>4</code> (<code>a</code> devine <code>v</code>, <code>b</code> devine <code>x</code>, …, <code>z</code> devine <code>u</code>)</li>
+	<li>Submatricea din dreapta jos este <code>C</code> rotită cu <code>180</code> de grade</li>
+</ul>
+
+<p>De exemplu dacă <code>C</code> de dimensiune <code>2 x 2</code> are valoarea:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-expandmat-1-jpg.jpg"></p>
+
+<p>Atunci matricea <code>B</code> de dimensiune <code>2</code><sup><code>2</code></sup> <code>x 2</code><sup><code>2</code></sup> are valoarea:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-expandmat-3-jpg.jpg"></p>
+
+<h1>Cerința</h1>
+
+<p>Se dau <code>Q</code> triplete <code>(i, j, L)</code>, cu semnificația: pe poziția <code>A[i][j]</code> se află litera <code>L</code>. Care este numărul maxim de triplete care se pot selecta astfel încât toate să fie adevărate?<br>
+Exemplu:<br>
+<code>N = 2</code>, <code>Q = 7</code><br>
+<code>(1, 2, b)</code><br>
+<code>(2, 3, f)</code><br>
+<code>(2, 1, d)</code><br>
+<code>(1, 2, z)</code><br>
+<code>(4, 1, y)</code><br>
+<code>(4, 4, a)</code><br>
+<code>(3, 3, d)</code><br>
+Răspunsul este <code>5</code> (prima, a doua și ultimele trei). De exemplu, dacă matricea de pornire este:<br>
+<code>ab</code><br>
+<code>cd</code><br>
+Atunci matricea <code>A</code> va fi:<br>
+<code>abde</code><br>
+<code>cdfg</code><br>
+<code>vxdc</code><br>
+<code>yzba</code></p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>expandmat.in</code> conține pe prima linie numerele <code>N</code> și <code>Q</code>, despărțite printr-un spațiu, cu semnificaţia de mai sus, iar pe fiecare din următoarele <code>Q</code> linii va fi câte un triplet de numere <code>i</code>, <code>j</code>, <code>L</code> cu semnificațiile din enunț.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>expandmat.out</code> va conține pe prima linie numărul maxim de triplete care se pot selecta astfel încât toate să fie adevărate.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 60</code></li>
+	<li><code>1 ≤ Q ≤ 100.000</code></li>
+	<li>Matricea este indexată de la <code>1</code>.</li>
+	<li><strong>Subtask 1</strong>, în valoare de 21 puncte: matricea inițială conține doar literele <code>a</code>, <code>b</code>, <code>c</code>, <code>d</code> şi <code>N ≤ 8</code>, <code>Q ≤ 100</code></li>
+	<li><strong>Subtask 2</strong>, în valoare de 19 de puncte: matricea inițială conține doar literele <code>a</code>, <code>b</code>, <code>c</code>, <code>d</code> şi <code>N ≤ 60</code>, <code>Q ≤ 300</code></li>
+	<li><strong>Subtask 3</strong>, în valoare de 13 puncte: literele matricei inițiale sunt egale</li>
+	<li><strong>Subtask 4</strong>, în valoare de 21 puncte: în matricea inițială literele de pe aceeași linie sunt egale</li>
+	<li><strong>Subtask 5</strong>, în valoare de 9 puncte: se garantează că răspunsul este cel puțin <code>Q / 2</code>.</li>
+	<li><strong>Subtask 6</strong>, în valoare de 17 puncte: fără restricții suplimentare.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>expandmat.in</code></p>
+
+<pre>2 7
+1 2 b
+2 3 f
+2 1 d
+1 2 z
+4 1 y
+4 4 a
+3 3 d</pre>
+
+<p><code>expandmat.out</code></p>
+
+<pre>5</pre>
+
+<h3>Explicație</h3>
+
+<p><code>N = 2</code> și <code>Q = 7</code>.</p>
+
+<p>Cele <code>5</code> triplete care se pot alege sunt:<br>
+<code>1 2 b</code><br>
+<code>2 3 f</code><br>
+<code>4 1 y</code><br>
+<code>4 4 a</code><br>
+<code>3 3 d</code></p>
+
+<p>Dacă matricea inițială este:<br>
+<code>ab</code><br>
+<code>cd</code><br>
+Atunci matricea finală este:<br>
+<code>abde</code><br>
+<code>cdfg</code><br>
+<code>wxdc</code><br>
+<code>yzba</code></p>
+
+<p>Această matrice satisface toate cele <code>5</code> triplete.</p>		</article>
+		</body></html>

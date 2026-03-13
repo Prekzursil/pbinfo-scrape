@@ -1,0 +1,86 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4810"><article id="enunt">
+			<p>Se consideră șirul <code>A=(A[1], A[2],..., A[n])</code> cu <code>n</code> numere naturale nenule. Pe baza șirului <code>A</code> se construiește șirul <code>B</code>, unde fiecare element <code>B[i]</code> este cel mai mic număr natural care are aceiași factori primi cu <code>A[i]</code>, cu <code>1 ≤ i ≤ n</code>. </p>
+
+<p>Exemplu: Dacă <code>A[1] = 24</code>, acesta se descompune în <code>2^3 * 3^1</code> și are factorii primi <code>2</code> și <code>3</code>. Ca urmare, <code>B[1] = 6</code> (<code>6 = 2^1 * 3^1</code>) este cel mai mic număr natural care are aceiași factori primi cu <code>24</code>. </p>
+
+<p>O secvență de cel puțin două numere aflate pe poziții consecutive în șirul <code>B</code> este <strong>mandatorie</strong> dacă există un număr <code>x</code> (<code>2 ≤ x ≤ 9</code>) în această secvență care divide fiecare dintre elementele secvenței. Numim acest număr <code>x - mandatar</code> al secvenței. Lungimea secvenței este egală cu numărul de elemente ale acesteia.</p>
+
+<p>Exemplu: secvența <code>6</code>, <code>14</code>, <code>2</code>, <code>22</code>, <code>2</code>, <code>70</code> este o secvență mandatorie pentru că toate numerele care o compun sunt divizibile cu <code>x=2</code>, număr cuprins între <code>2</code> și <code>9</code>, ce aparține secvenței. Lungimea secvenței este <code>6</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>1) Determinați cel mai mare număr prim din șirul <code>A</code>.<br>
+2) Determinați cel mai mare număr al șirului <code>B</code> ce are un număr maxim de factori primi.<br>
+3) Determinați lungimea maximă a unei secvențe mandatorii din șirul <code>B</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>mandatar.in</code> conține pe prima linie numărul natural <code>c</code>, reprezentând cerința care trebuie rezolvată (1,2 sau 3), pe linia a doua numărul natural <code>n</code>, cu semnificația din enunț, iar pe următoarea linie <code>n</code> numere naturale, separate prin câte un spațiu, reprezentând elementele șirului <code>A</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>mandatar.out</code> conține numărul determinat pentru cerința <code>c</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>c ∈ {1, 2, 3}</code></li>
+	<li><code>1 ≤ n ≤ 100.000</code></li>
+	<li><code>2 ≤ A[i] ≤ 10.000.000</code>, <code>1 ≤ i ≤ n</code></li>
+	<li><code>2 ≤ x ≤ 9</code></li>
+	<li>Pentru 50 de puncte, <code>c = 1</code>, iar șirul <code>A</code> conține cel puțin un număr prim.</li>
+	<li>Pentru 30 de puncte, <code>c = 2</code></li>
+	<li>Pentru 20 de puncte, <code>c = 3</code>, iar șirul <code>B</code> conține cel puțin o secvență mandatorie.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>mandatar.in</code></p>
+
+<pre>1
+10
+17 45 9 90 66 24 2 40 29 4</pre>
+
+<p><code>mandatar.out</code></p>
+
+<pre>29</pre>
+
+<h3>Explicație</h3>
+
+<p><code>c=1</code>, <code>n=10</code>. Se rezolvă cerința <code>1</code>. Dintre cele <code>10</code> elemente ale șirului <code>A</code>, numerele <code>17</code>, <code>2</code>, <code>29</code> sunt numere prime, iar numărul <code>29</code> este cel mai mare dintre acestea.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>mandatar.in</code></p>
+
+<pre>2
+10
+17 45 9 90 66 24 2 40 29 4</pre>
+
+<p><code>mandatar.out</code></p>
+
+<pre>66</pre>
+
+<h3>Explicație</h3>
+
+<p><code>c=2</code>, <code>n=10</code>. Se rezolvă cerința <code>2</code>. Se construiește șirul <code>B</code> pe baza șirului <code>A</code>, după cum urmează: <code>17</code> <code>15</code> <code>3</code> <code>30</code> <code>66</code> <code>6</code> <code>2</code> <code>10</code> <code>29</code> <code>2</code>. Sunt două elemente care au număr maxim de factori primi (câte <code>3</code> factori primi): <code>30</code> și <code>66</code>, iar <code>66</code> este cel mai mare.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>mandatar.in</code></p>
+
+<pre>3
+10
+17 45 9 90 66 24 2 40 29 4</pre>
+
+<p><code>mandatar.out</code></p>
+
+<pre>5</pre>
+
+<h3>Explicație</h3>
+
+<p><code>c=3</code>, <code>n=10</code>. Se rezolvă cerința <code>3</code>. Se construiește șirul <code>B</code> pe baza șirului <code>A</code>, după cum urmează: <code>17</code> <code>15</code> <code>3</code> <code>30</code> <code>66</code> <code>6</code> <code>2</code> <code>10</code> <code>29</code> <code>2</code>. Sunt două secvențe mandatorii de lungime maximă, care este egală cu <code>5</code>:
+ <code>15 3 30 66 6</code>;
+ <code>30 66 6 2 10</code>.
+ </p>		</article>
+		</body></html>

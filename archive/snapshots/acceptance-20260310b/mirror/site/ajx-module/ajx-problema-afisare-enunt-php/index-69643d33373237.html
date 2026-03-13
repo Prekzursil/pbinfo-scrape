@@ -1,0 +1,128 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3727"><article id="enunt">
+			<p>O matrice pătratică de dimensiuni <code>N * N</code> cu <code>N</code> par și elemente din mulțimea <code>{0,1}</code> se numește tablă de șah dacă oricare două celule vecine pe o linie sau pe o coloană au valori diferite (cu alte cuvinte, dacă nu există două valori egale alăturate). </p>
+
+<p>De ziua ei, Victor i-a cumpărat Elisabetei o astfel de matrice <code>A</code>, care nu este neapărat tablă de șah. Aflând despre pasiunea ei, acesta vrea acum să transforme matricea <code>A</code> într-o tablă de șah. Timpul fiind limitat, el poate efectua doar următoarele tipuri de operații asupra matricei:<br>
+1. Interschimbă liniile <code>i</code> și <code>j</code> din <code>A</code> (celelalte linii rămân neschimbate, iar valorile din interiorul liniilor <code>i</code> și <code>j</code> rămân neschimbate și își păstrează ordinea). Operația are sens pentru <code>1 ≤ i, j ≤ N</code>.<br>
+2. Interschimbă coloanele <code>i</code> și <code>j</code> din <code>A</code> (celelalte coloane rămân neschimbate, iar valorile din interiorul coloanelor <code>i</code> și <code>j</code> rămân neschimbate și își păstrează ordinea). Operația are sens pentru <code>1 ≤ i, j ≤ N</code>.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-polihroniade-01-jpg.jpg"></p>
+
+<h1>Cerința</h1>
+
+<p>Dorind s-o impresioneze pe Elisabeta, Victor apelează la voi, programatori renumiți, să-l ajutați în a transforma matricea <code>A</code> într-o tablă de șah. Pentru aceasta, Victor are nevoie de următoarele informații:<br>
+1. Poate fi transformată matricea <code>A</code> în tablă de șah?<br>
+2. Care este numărul minim de operații necesare pentru a duce la îndeplinire acest scop?<br>
+3. Care ar fi o succesiune de operații care transformă matricea <code>A</code> într-o tablă de șah?</p>
+
+<p>În cazul ultimei cerințe, pentru a intra în grațiile lui Victor va trebui ca numărul de operații efectuate să fie minim. Totuși, chiar și un număr neminim de operații va fi răsplătit, însă nu într-atât de mult.</p>
+
+<p>Vi se dau două numere <code>P</code>, <code>T</code> și <code>T</code> matrice <code>A</code>, reprezentând mai multe instanțe ale problemei. Pentru fiecare matrice <code>A</code> dintre cele <code>T</code> va trebui să rezolvați cerința cu numărul <code>P∊{1,2,3}</code> dintre cele listate mai sus.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie se găsesc două numere întregi pozitive <code>P</code> și <code>T</code>, reprezentând numarul cerinței de rezolvat și, respectiv, numărul de scenarii pentru care va trebui să rezolvați problema. Urmează cele <code>T</code> instanțe ale problemei, fiecare fiind compusă din <code>N + 1</code> linii: pe prima linie se va afla numarul <code>N</code>, iar pe următoarele <code>N</code> linii câte <code>N</code> cifre binare neseparate prin spații, reprezentând câte o linie a matricei <code>A</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Pentru fiecare dintre cele <code>T</code> instanțe se va afișa răspunsul, începând de la o linie nouă, după cum urmează:<br>
+1. Dacă <code>P = 1</code>, atunci se va afișa pe o singură linie <code>1</code> dacă matricea <code>A</code> poate fi transformată în tablă de șah, și <code>0</code> altfel.<br>
+2. Dacă <code>P = 2</code>, atunci se va afișa pe o singură linie un întreg reprezentând numărul minim de interschimbări de linii și/sau coloane necesare pentru a transforma matricea <code>A</code> în tablă de șah.<br>
+3. Dacă <code>P = 3</code>, atunci se va afișa pe o linie un număr <code>X</code>. Apoi, pe fiecare dintre următoarele <code>X</code> linii se va afișa câte o interschimbare de linii sau coloane, după următorul format: <code>L i j</code> are semnificația că liniile <code>i</code> și <code>j</code> se interschimbă, iar <code>C i j</code> are semnificația că se interschimbă coloanele <code>i</code> și <code>j</code>. Matricea obținută după aplicarea celor <code>X</code> operații asupra lui <code>A</code> în ordinea dată trebuie să fie o tablă de șah.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ T ≤ 350</code></li>
+	<li><code>1 ≤ N ≤ 1 000</code></li>
+	<li><code>N</code> este par.</li>
+	<li>Pentru cerințele de tip <code>P = 2</code> și <code>P = 3</code> se garantează că matricea <code>A</code> poate fi transformată în tablă de șah folosind interschimbări de linii și/sau coloane.</li>
+	<li>Suma valorilor <code>N</code> pentru cele <code>T</code> scenarii nu depășește <code>2.000</code>.</li>
+	<li>Pentru 40 de puncte, <code>P = 1</code></li>
+	<li>Pentru alte 34 de puncte, <code>P = 2</code></li>
+	<li>Pentru alte 26 de puncte, <code>P = 3</code></li>
+	<li>Dacă există mai multe soluții, oricare este considerată corectă.</li>
+	<li>Dacă numărul <code>X</code> de operații folosite nu este minim, atunci se acordă 50% din punctajul pe test.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>1 3
+2
+11
+11
+4
+1100
+1100
+0011
+0011
+2
+10
+01</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>0
+1
+1</pre>
+
+<h3>Explicație</h3>
+
+<p>Avem <code>P = 1</code>, deci pentru cele <code>T = 3</code> instanțe se cere numai dacă se pot transforma în tablă de șah prin interschimbări de linii și/sau coloane. Pentru prima instanță acest lucru nu este posibil, deoarece nu avem niciun <code>0</code> în matrice. Pentru cea de-a doua instanță, putem efectua următoarele operații:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-polihroniade-02-jpg.jpg"></p>
+
+<p>Pentru ultima instanță, matricea <code>A</code> este deja tablă de șah.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>2 2
+4
+1100
+1100
+0011
+0011
+2
+10
+01</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>2
+0</pre>
+
+<h3>Explicație</h3>
+
+<p>Pentru al doilea exemplu avem <code>P = 2</code>, deci pentru cele <code>T = 2</code> instanțe se cere numărul minim de operații pentru a le transforma în tablă de șah. Pentru prima instanță, o soluție cu <code>2</code> operații este prezentată mai sus, și nu există soluții mai scurte. Pentru cea de-a doua instanță, matricea este deja tablă de șah, deci răspunsul este <code>0</code>.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>3 2
+4
+1100
+1100
+0011
+0011
+2
+10
+01</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>3
+L 2 4
+C 2 3
+L 1 2
+0</pre>
+
+<h3>Explicație</h3>
+
+<p>Al treilea exemplu este exact ca anteriorul, numai că avem <code>P = 3</code>, deci trebuie tipărite exact care sunt operațiile ce aduc matricea la forma de tablă de șah. Pentru punctaj maxim pe acest exemplu, ar fi obligatoriu să afișăm o soluție cu <code>2</code> operații (adică număr minim), cum ar fi cea de mai sus. Cu toate acestea, cu scop demonstrativ, noi venim cu o soluție compusa din <code>3</code> operații prin care obținem doar 50% din punctaj:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-polihroniade-03-jpg.jpg"></p>		</article>
+		</body></html>

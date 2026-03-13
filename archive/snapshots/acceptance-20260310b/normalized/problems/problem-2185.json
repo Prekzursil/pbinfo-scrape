@@ -1,0 +1,314 @@
+{
+  "id": 2185,
+  "slug": "expresie9",
+  "name": "expresie9",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/2185/expresie9",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 10,
+      "name": "Şiruri de caractere",
+      "slug": "iruri-de-caractere",
+      "href": "/?pagina=probleme-lista&tag=10"
+    },
+    {
+      "id": 84,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=84"
+    }
+  ],
+  "tags": [
+    "Numere mari"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Scrieţi un program care determină pentru un şir de <code>n</code> expresii, formate din litere mici şi operatorii: <code>+</code>, <code>&lt;</code>, <code>&gt;</code>, două cerinţe:<br>\n-cerinţa <code>1</code>: să determine numărul cel mai mare, obținut dintr-un șir de litere, din expresiile date;<br>\n-cerinţa <code>2</code>: să evalueze fiecare expresie și să afișeze valoarea ei.</p>",
+      "text": "Scrieţi un program care determină pentru un şir de n expresii, formate din litere mici şi operatorii: +, <, >, două cerinţe: -cerinţa 1: să determine numărul cel mai mare, obținut dintr-un șir de litere, din expresiile date; -cerinţa 2: să evalueze fiecare expresie și să afișeze valoarea ei."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>expresie9.in</code> conţine pe prima linie două numere naturale <code>t</code> şi <code>n</code>, care reprezintă cerinţa (dacă <code>t=1</code> se va rezolva cerinţa <code>1</code>, dacă <code>t=2</code> se va rezolva cerinţa <code>2</code>) şi respectiv, numărul de expresii date. Pe fiecare dintre următoarele <code>n</code> linii se află o expresie, formată din litere mici şi operatorii <code>: +, &lt;, &gt;</code>.</p>",
+      "text": "Fișierul de intrare expresie9.in conţine pe prima linie două numere naturale t şi n, care reprezintă cerinţa (dacă t=1 se va rezolva cerinţa 1, dacă t=2 se va rezolva cerinţa 2) şi respectiv, numărul de expresii date. Pe fiecare dintre următoarele n linii se află o expresie, formată din litere mici şi operatorii : +, <, >."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>expresie9.out</code> va conține, pentru cerința <code>1</code> numărul cel mai mare, obținut dintr-un șir de litere, din toate expresiile date în fișierul de intrare. Pentru cerința <code>2</code>, pe fiecare dintre primele <code>n</code> linii ca fi valoarea fiecărei expresii, în ordinea dată în fișierul de intrare.</p>",
+      "text": "Fișierul de ieșire expresie9.out va conține, pentru cerința 1 numărul cel mai mare, obținut dintr-un șir de litere, din toate expresiile date în fișierul de intrare. Pentru cerința 2, pe fiecare dintre primele n linii ca fi valoarea fiecărei expresii, în ordinea dată în fișierul de intrare."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>0 &lt; n ≤ 100</code></li>\n\t<li>Fiecare expresie conţine cel mult <code>80</code> de caractere ce pot fi litere mici ale alfabetului englez, unul sau mai mulți operatori <code>+</code>, <code>&lt;</code>, <code>&gt;</code></li>\n\t<li>Fiecare expresie conţine cel puţin un operator</li>\n\t<li>Fiecare şir de litere din expresiile date conţine cel mult <code>60</code> de litere mici ale alfabetului englez</li>\n\t<li>O expresie va conţine cel mult un operator de tipul: <code>&lt;</code>, <code>&gt;</code></li>\n\t<li>O expresie ce conţine un operator de tipul: <code>&lt;</code>, <code>&gt;</code> va avea valoarea <code>0</code> sau <code>1</code></li>\n\t<li>Expresiile date sunt corecte</li>\n</ul>",
+      "text": "0 < n ≤ 100 Fiecare expresie conţine cel mult 80 de caractere ce pot fi litere mici ale alfabetului englez, unul sau mai mulți operatori +, <, > Fiecare expresie conţine cel puţin un operator Fiecare şir de litere din expresiile date conţine cel mult 60 de litere mici ale alfabetului englez O expresie va conţine cel mult un operator de tipul: <, > O expresie ce conţine un operator de tipul: <, > va avea valoarea 0 sau 1 Expresiile date sunt corecte"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>expresie9.in</code></p><pre>1 2\nabcd+cde\na+cd+dbcd&gt;abc</pre><p><code>expresie9.out</code></p><pre>4234</pre><h3>Explicație</h3><p>Cerința este <code>1</code>. Numerele din expresiile date sunt în ordine: <code>1234</code>, <code>345</code>, <code>1</code>, <code>34</code>, <code>4234</code>, <code>123</code>. Cel mai mare este <code>4234</code>.</p>",
+      "text": "expresie9.in1 2 abcd+cde a+cd+dbcd>abcexpresie9.out4234ExplicațieCerința este 1. Numerele din expresiile date sunt în ordine: 1234, 345, 1, 34, 4234, 123. Cel mai mare este 4234."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>expresie9.in</code></p><pre>2 3\na+b&lt;c\nabc+xy\nabc&gt;ab+d</pre><p><code>expresie9.out</code></p><pre>0\n2548\n1</pre><h3>Explicație</h3><p>Cerința este <code>2</code>: expresiile sunt:<br>\n<code>a + b &lt; c</code> echivalentă cu <code>1 + 2 &lt; 3</code>, (<code>a = 1</code>, <code>b = 2</code>, <code>c = 3</code>), <code>3 &lt; 3</code> este fals, deci expresia are valoarea <code>0</code><br>\n<code>abc + xy</code> , echivalentă cu <code>123 + 2425</code> are valoarea <code>2548</code> (<code>abc = 123</code>, <code>x = 24</code>, <code>y = 25</code>)<br>\n<code>abc &gt; ab + d</code>, echivalentă cu <code>123 &gt; 12 + 4</code>, are valoarea <code>1</code></p>",
+      "text": "expresie9.in2 3 a+b<c abc+xy abc>ab+dexpresie9.out0 2548 1ExplicațieCerința este 2: expresiile sunt: a + b < c echivalentă cu 1 + 2 < 3, (a = 1, b = 2, c = 3), 3 < 3 este fals, deci expresia are valoarea 0 abc + xy , echivalentă cu 123 + 2425 are valoarea 2548 (abc = 123, x = 24, y = 25) abc > ab + d, echivalentă cu 123 > 12 + 4, are valoarea 1"
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cerința este 1. Numerele din expresiile date sunt în ordine: 1234, 345, 1, 34, 4234, 123. Cel mai mare este 4234."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cerința este 2: expresiile sunt: a + b < c echivalentă cu 1 + 2 < 3, (a = 1, b = 2, c = 3), 3 < 3 este fals, deci expresia are valoarea 0 abc + xy , echivalentă cu 123 + 2425 are valoarea 2548 (abc = 123, x = 24, y = 25) abc > ab + d, echivalentă cu 123 > 12 + 4, are valoarea 1"
+    }
+  ],
+  "constraints": [
+    "0 < n ≤ 100",
+    "Fiecare expresie conţine cel mult 80 de caractere ce pot fi litere mici ale alfabetului englez, unul sau mai mulți operatori +, <, >",
+    "Fiecare expresie conţine cel puţin un operator",
+    "Fiecare şir de litere din expresiile date conţine cel mult 60 de litere mici ale alfabetului englez",
+    "O expresie va conţine cel mult un operator de tipul: <, >",
+    "O expresie ce conţine un operator de tipul: <, > va avea valoarea 0 sau 1",
+    "Expresiile date sunt corecte"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qa0675e6024.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "10",
+    "intrare/ieșire": "expresie9.in / expresie9.out",
+    "limită timp": "1 secunde",
+    "limită memorie": "16 MB / 8 MB",
+    "sursa problemei": "Olimpiada Municipala de Informatica, Iasi, 2017",
+    "autor": "Silvia Grecu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 1,
+  "memoryLimitMb": 16,
+  "author": "Silvia Grecu",
+  "sourceAttribution": "Olimpiada Municipala de Informatica, Iasi, 2017",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/2185/expresie9"
+}

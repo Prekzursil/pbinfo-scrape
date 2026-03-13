@@ -1,0 +1,291 @@
+{
+  "id": 4161,
+  "slug": "picard",
+  "name": "Picard",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4161/picard",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 16,
+      "name": "Teoria Grafurilor",
+      "slug": "teoria-grafurilor",
+      "href": "/?pagina=probleme-lista&tag=16"
+    },
+    {
+      "id": 60,
+      "name": "Grafuri cu costuri",
+      "slug": "grafuri-cu-costuri",
+      "href": "/?pagina=probleme-lista&tag=60"
+    }
+  ],
+  "tags": [
+    "Roy-Warshall-Floyd"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>În galaxia noastră sunt <code>n</code> planete, numerotate de la <code>1</code> la <code>n</code>. Între unele dintre ele sunt calculate și cunoscute salturi warp bidirecționale de durate cunoscute, existând în total <code>m</code> astfel de salturi warp. Prin aceste salturi warp se asigură posibilitatea de navigare între oricare două planete, direct sau prin intermediul mai multor salturi warp intermediare. Flota stelară folosește foarte eficient aceste salturi pentru a naviga între planete, adică folosește trasee formate din unul sau mai multe salturi warp astfel încât durata obținută ca sumă a duratelor salturilor warp componente să fie întotdeauna minimă pentru oricare pereche de planete. </p><p>Proaspăt pensionat din Flota stelară, sătul de ferenghi și romulani, Jean Luc Picard dorește să se retragă pe o planetă cât mai izolată, adică o planetă pentru care suma duratelor salturilor warp folosite de Flota stelară de la ea la toate celelaltele planete din galaxie să fie maximă. Determinați planetele pe care se poate retrage Picard pentru a obține liniștea dorită. Dacă sunt mai multe planete care pot fi alese, acestea se vor afișa în ordine crescătoare a numerotării și separate prin câte un spațiu.</p>",
+      "text": "În galaxia noastră sunt n planete, numerotate de la 1 la n. Între unele dintre ele sunt calculate și cunoscute salturi warp bidirecționale de durate cunoscute, existând în total m astfel de salturi warp. Prin aceste salturi warp se asigură posibilitatea de navigare între oricare două planete, direct sau prin intermediul mai multor salturi warp intermediare. Flota stelară folosește foarte eficient aceste salturi pentru a naviga între planete, adică folosește trasee formate din unul sau mai multe salturi warp astfel încât durata obținută ca sumă a duratelor salturilor warp componente să fie întotdeauna minimă pentru oricare pereche de planete. Proaspăt pensionat din Flota stelară, sătul de ferenghi și romulani, Jean Luc Picard dorește să se retragă pe o planetă cât mai izolată, adică o planetă pentru care suma duratelor salturilor warp folosite de Flota stelară de la ea la toate celelaltele planete din galaxie să fie maximă. Determinați planetele pe care se poate retrage Picard pentru a obține liniștea dorită. Dacă sunt mai multe planete care pot fi alese, acestea se vor afișa în ordine crescătoare a numerotării și separate prin câte un spațiu."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>picard.in</code> conține pe prima linie numerele <code>n m</code>, iar următoarele <code>m</code> linii câte trei numere <code>i j L</code>, cu semnificatia: între planetele <code>i</code> și <code>j</code> există un salt warp bidirecțional de durată <code>L</code>.</p>",
+      "text": "Fișierul de intrare picard.in conține pe prima linie numerele n m, iar următoarele m linii câte trei numere i j L, cu semnificatia: între planetele i și j există un salt warp bidirecțional de durată L."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>picard.out</code> va conține planetele cerute în ordine crescătoare a numerotării și separate prin câte un spațiu.</p>",
+      "text": "Fișierul de ieșire picard.out va conține planetele cerute în ordine crescătoare a numerotării și separate prin câte un spațiu."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ n ≤ 100</code></li>\n\t<li><code>durata oricărui salt este număr întreg din intervalul [1,1000]</code></li>\n</ul>",
+      "text": "1 ≤ n ≤ 100 durata oricărui salt este număr întreg din intervalul [1,1000]"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>picard.in</code></p><pre>6 9\n1 3 5\n1 4 5\n1 5 4\n2 3 5\n2 4 1\n2 5 2\n3 6 2\n4 6 4\n5 6 4</pre><p><code>picard.out</code></p><pre>1</pre><h2>Explicație</h2><pre>Sumele duratelor minime de la fiecare planetă la toate celelale sunt:\nDe la planeta 1 la toate celelalte: 27 \nDe la planeta 2 la toate celelalte: 19 \nDe la planeta 3 la toate celelalte: 24 \nDe la planeta 4 la toate celelalte: 19 \nDe la planeta 5 la toate celelalte: 19 \nDe la planeta 6 la toate celelalte: 22\nPrin urmare, Jean Luc Picard alege planeta 1.</pre>",
+      "text": "picard.in6 9 1 3 5 1 4 5 1 5 4 2 3 5 2 4 1 2 5 2 3 6 2 4 6 4 5 6 4picard.out1ExplicațieSumele duratelor minime de la fiecare planetă la toate celelale sunt: De la planeta 1 la toate celelalte: 27 De la planeta 2 la toate celelalte: 19 De la planeta 3 la toate celelalte: 24 De la planeta 4 la toate celelalte: 19 De la planeta 5 la toate celelalte: 19 De la planeta 6 la toate celelalte: 22 Prin urmare, Jean Luc Picard alege planeta 1."
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "1 ≤ n ≤ 100",
+    "durata oricărui salt este număr întreg din intervalul [1,1000]"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q3067e0278a.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Muresan Ciprian (mcip1977)",
+    "clasa": "11",
+    "intrare/ieșire": "picard.in / picard.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "-",
+    "autor": "-",
+    "dificultate": "medie"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4161/picard"
+}

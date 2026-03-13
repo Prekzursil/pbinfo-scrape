@@ -1,0 +1,300 @@
+{
+  "id": 1829,
+  "slug": "cuvinteascunse",
+  "name": "CuvinteAscunse",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1829/cuvinteascunse",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 116,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=116"
+    },
+    {
+      "id": 150,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=150"
+    }
+  ],
+  "tags": [
+    "Trie"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Dat fiind un tabel de litere de dimensiuni <code>N x M</code>, şi o listă a cuvintelor din dicţionar, să se afişeze lista sortată de <code>T</code> perechi de forma <code>'ci: ai'</code> şi parola Petrei.</p>",
+      "text": "Dat fiind un tabel de litere de dimensiuni N x M, şi o listă a cuvintelor din dicţionar, să se afişeze lista sortată de T perechi de forma 'ci: ai' şi parola Petrei."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fişierul <code>cuvinteascunse.in</code> va conţine <code>N + C + 1</code> linii. Pe prima linie <code>N, M, C</code> – dimensiunile tabelului, şi numărul de cuvinte din dicţionar. Apoi cele <code>N</code> linii ale tabelului:</p><p><code>t</code><sub><code>1,1</code></sub> <code>...t</code><sub><code>1,m</code></sub><br>\n<code>t</code><sub><code>2,1</code></sub> <code>...t</code><sub><code>2,m</code></sub><br>\n<code>. . .</code><br>\n<code>t</code><sub><code>n,1</code></sub> <code>...t</code><sub><code>n,m</code></sub></p><p>urmate de cele <code>C</code> cuvinte din dicţionar, fiecare pe o linie:<br>\n<code>cuvânt</code><sub><code>1</code></sub><br>\n<code>cuvânt</code><sub><code>2</code></sub><br>\n<code>. . .</code><br>\n<code>cuvânt</code><sub><code>C</code></sub></p>",
+      "text": "Fişierul cuvinteascunse.in va conţine N + C + 1 linii. Pe prima linie N, M, C – dimensiunile tabelului, şi numărul de cuvinte din dicţionar. Apoi cele N linii ale tabelului:t1,1 ...t1,m t2,1 ...t2,m . . . tn,1 ...tn,murmate de cele C cuvinte din dicţionar, fiecare pe o linie: cuvânt1 cuvânt2 . . . cuvântC"
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fişierul <code>cuvinteascunse.out</code> va conţine pe prima linie <code>T</code>, numărul de cuvinte distincte găsite în tabel. Pe următoarele <code>T</code> linii se vor afla perechi cuvânti ai separate printr-un spaţiu. Pe ultima linie se va afla un şir de caractere reprezentand parola Petrei.</p>",
+      "text": "Fişierul cuvinteascunse.out va conţine pe prima linie T, numărul de cuvinte distincte găsite în tabel. Pe următoarele T linii se vor afla perechi cuvânti ai separate printr-un spaţiu. Pe ultima linie se va afla un şir de caractere reprezentand parola Petrei."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<p>O secvenţă de litere reprezintă un cuvânt dacă se află în dicţionarul dat ca date de intrare. Dicţionarul conţine cuvinte formate din litere aparţinând mulţimii <code>{‘a’...’z’}U{‘A’...’Z’}</code>. Literele mici şi cele mari se consideră egale. Două litere sunt vecine în tabel, dacă celulele lor au o latura sau un colţ comun. Aceeaşi litera din tabel se poate folosi de mai multe ori într-un cuvânt. Dacă acelaşi semn <code>'?'</code> este folosit de mai multe ori într-un cuvânt, trebuie să reprezinte aceeaşi literă de fiecare dată.<br>\n</p><ul>\n\t<li><code>0 &lt; N &lt; 6</code></li>\n\t<li><code>0 &lt; M &lt; 6</code></li>\n\t<li><code>0 &lt; C &lt; 20000</code></li><br>\n</ul><p></p>",
+      "text": "O secvenţă de litere reprezintă un cuvânt dacă se află în dicţionarul dat ca date de intrare. Dicţionarul conţine cuvinte formate din litere aparţinând mulţimii {‘a’...’z’}U{‘A’...’Z’}. Literele mici şi cele mari se consideră egale. Două litere sunt vecine în tabel, dacă celulele lor au o latura sau un colţ comun. Aceeaşi litera din tabel se poate folosi de mai multe ori într-un cuvânt. Dacă acelaşi semn '?' este folosit de mai multe ori într-un cuvânt, trebuie să reprezinte aceeaşi literă de fiecare dată. 0 < N < 6 0 < M < 6 0 < C < 20000"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>cuvinteascunse.in</code></p><pre>2 2 3\ne a\nl ?\nea\nelena\narc</pre><p><code>cuvinteascunse.out</code></p><pre>2\nea 3\nelena 1\ndb</pre><h3>Explicație</h3><p>Am gasit cuvântul <code>“ea”</code> de <code>3</code> ori: o data pe prima linie a tabelului, o data pe diagonala principală, inlocuind <code>'?'</code> cu <code>'a'</code>, şi o data ca <code>“?a\"</code> inlocuind <code>'?'</code> cu <code>'e'</code>. Am gasit cuvântul <code>“elena”</code> o data, inlocuind <code>'?'</code> cu <code>'n'</code>.</p>",
+      "text": "cuvinteascunse.in2 2 3 e a l ? ea elena arccuvinteascunse.out2 ea 3 elena 1 dbExplicațieAm gasit cuvântul “ea” de 3 ori: o data pe prima linie a tabelului, o data pe diagonala principală, inlocuind '?' cu 'a', şi o data ca “?a\" inlocuind '?' cu 'e'. Am gasit cuvântul “elena” o data, inlocuind '?' cu 'n'."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Am gasit cuvântul “ea” de 3 ori: o data pe prima linie a tabelului, o data pe diagonala principală, inlocuind '?' cu 'a', şi o data ca “?a\" inlocuind '?' cu 'e'. Am gasit cuvântul “elena” o data, inlocuind '?' cu 'n'."
+    }
+  ],
+  "constraints": [
+    "0 < N < 6",
+    "0 < M < 6",
+    "0 < C < 20000"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q8d7705ecc1.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Paul Andrei (Paul_Andrei)",
+    "clasa": "11",
+    "intrare/ieșire": "cuvinteascunse.in / cuvinteascunse.out",
+    "limită timp": "0.3 secunde",
+    "limită memorie": "8 MB / 8 MB",
+    "sursa problemei": "Concursul EMPOWERSOFT, 2016",
+    "autor": "Iulia Tamaș",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.3,
+  "memoryLimitMb": 8,
+  "author": "Iulia Tamaș",
+  "sourceAttribution": "Concursul EMPOWERSOFT, 2016",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1829/cuvinteascunse"
+}

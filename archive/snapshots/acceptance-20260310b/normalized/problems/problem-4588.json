@@ -1,0 +1,312 @@
+{
+  "id": 4588,
+  "slug": "pin",
+  "name": "pin",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4588/pin",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 9,
+      "name": "Parcurgerea vectorilor",
+      "slug": "parcurgerea-vectorilor",
+      "href": "/?pagina=probleme-lista&tag=9"
+    }
+  ],
+  "tags": [
+    "Element majoritar"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Cunoscând numărul <code>R</code> de rânduri și numerele de pe fiecare rând, scrieţi un program care să determine pin-ul lui Doc.</p>",
+      "text": "Cunoscând numărul R de rânduri și numerele de pe fiecare rând, scrieţi un program care să determine pin-ul lui Doc."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>pin.in</code> conține pe prima linie numărul <code>R</code> care reprezintă numărul de rânduri. Pe fiecare dintre următoarele <code>R</code> linii se află un set de maxim <code>2024</code> de numere naturale.</p>",
+      "text": "Fișierul de intrare pin.in conține pe prima linie numărul R care reprezintă numărul de rânduri. Pe fiecare dintre următoarele R linii se află un set de maxim 2024 de numere naturale."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>pin.out</code> va conține o singură linie pe care va fi scris mesajul <code>PIN CORECT</code> urmat de un număr natural reprezentând pin-ul lui Doc sau mesajul <code>PIN INCORECT</code> urmat de un număr reprezentând greșeala lui Doc în securizarea pin-ului.</p>",
+      "text": "Fișierul de ieșire pin.out va conține o singură linie pe care va fi scris mesajul PIN CORECT urmat de un număr natural reprezentând pin-ul lui Doc sau mesajul PIN INCORECT urmat de un număr reprezentând greșeala lui Doc în securizarea pin-ului."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>R</code> este un număr natural, <code>4 ≤ R ≤ 1000</code>.</li>\n\t<li>numerele din fiecare rând au maximum <code>9</code> cifre și sunt separate printr-un singur spațiu.</li>\n\t<li>se garantează existența cel puțin a unei cifre majoritare.</li>\n\t<li>cifrele pin-ului sunt alese în ordinea parcurgerii rândurilor de la rândul <code>1</code> la <code>R</code>.</li>\n\t<li>datorită dimensiunilor prea mari, nu au fost adăugate toate testele</li>\n</ul>",
+      "text": "R este un număr natural, 4 ≤ R ≤ 1000. numerele din fiecare rând au maximum 9 cifre și sunt separate printr-un singur spațiu. se garantează existența cel puțin a unei cifre majoritare. cifrele pin-ului sunt alese în ordinea parcurgerii rândurilor de la rândul 1 la R. datorită dimensiunilor prea mari, nu au fost adăugate toate testele"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>pin.in</code></p><pre>5\n17 111 4112 1019 1 23\n45 3033 3 8 3033 48899\n45 3033 3 8 3033\n100 200 300\n77777</pre><p><code>pin.out</code></p><pre>PIN CORECT 1307</pre><h3>Explicație</h3><p>Prima cifră a pin-ului este <code>1</code> aflată din rândul <code>1</code>.<br>\nA doua cifră din pin-ul lui Doc este <code>3</code> (rândul <code>3</code>).<br>\nA treia cifră este <code>0</code> aflată din rândul <code>4</code>.<br>\nUltima cifră, a <code>4</code>-a, este dedusă din rândul <code>5</code>.<br>\nPin-ul are <span class=\"caps\">EXACT</span> <code>4</code> cifre deci este corect.</p>",
+      "text": "pin.in5 17 111 4112 1019 1 23 45 3033 3 8 3033 48899 45 3033 3 8 3033 100 200 300 77777pin.outPIN CORECT 1307ExplicațiePrima cifră a pin-ului este 1 aflată din rândul 1. A doua cifră din pin-ul lui Doc este 3 (rândul 3). A treia cifră este 0 aflată din rândul 4. Ultima cifră, a 4-a, este dedusă din rândul 5. Pin-ul are EXACT 4 cifre deci este corect."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>pin.in</code></p><pre>7\n17 123 4112 4049 8 23 6788\n45 3033 3 8 3033 48899\n45 3033 3 8 3033\n100 200 300\n7890\n1 2 3 4 5 6 7 8 9\n0 0 0 9 9 9 888 666</pre><p><code>pin.out</code></p><pre>PIN INCORECT 30</pre><h3>Explicație</h3><p>Doc a greșit în securizarea pin-ului deoarece pin-ul are doar <code>2</code> cifre:<br>\nCifra <code>3</code> aflată din rândul <code>3</code> și <br>\nCifra <code>0</code> aflată din rândul <code>4</code>. </p>",
+      "text": "pin.in7 17 123 4112 4049 8 23 6788 45 3033 3 8 3033 48899 45 3033 3 8 3033 100 200 300 7890 1 2 3 4 5 6 7 8 9 0 0 0 9 9 9 888 666pin.outPIN INCORECT 30ExplicațieDoc a greșit în securizarea pin-ului deoarece pin-ul are doar 2 cifre: Cifra 3 aflată din rândul 3 și Cifra 0 aflată din rândul 4."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Prima cifră a pin-ului este 1 aflată din rândul 1. A doua cifră din pin-ul lui Doc este 3 (rândul 3). A treia cifră este 0 aflată din rândul 4. Ultima cifră, a 4-a, este dedusă din rândul 5. Pin-ul are EXACT 4 cifre deci este corect."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Doc a greșit în securizarea pin-ului deoarece pin-ul are doar 2 cifre: Cifra 3 aflată din rândul 3 și Cifra 0 aflată din rândul 4."
+    }
+  ],
+  "constraints": [
+    "R este un număr natural, 4 ≤ R ≤ 1000.",
+    "numerele din fiecare rând au maximum 9 cifre și sunt separate printr-un singur spațiu.",
+    "se garantează existența cel puțin a unei cifre majoritare.",
+    "cifrele pin-ului sunt alese în ordinea parcurgerii rândurilor de la rândul 1 la R.",
+    "datorită dimensiunilor prea mari, nu au fost adăugate toate testele"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q2b3f0d1085.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "pin.in / pin.out",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "64 MB / 2 MB",
+    "sursa problemei": "OMI Iasi 2024",
+    "autor": "Lucian Neagu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 64,
+  "author": "Lucian Neagu",
+  "sourceAttribution": "OMI Iasi 2024",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4588/pin"
+}

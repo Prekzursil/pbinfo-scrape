@@ -1,0 +1,307 @@
+{
+  "id": 1788,
+  "slug": "rege1",
+  "name": "Rege1",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1788/rege1",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 16,
+      "name": "Teoria Grafurilor",
+      "slug": "teoria-grafurilor",
+      "href": "/?pagina=probleme-lista&tag=16"
+    },
+    {
+      "id": 64,
+      "name": "Arbori cu rădăcină",
+      "slug": "arbori-cu-r-d-cin",
+      "href": "/?pagina=probleme-lista&tag=64"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Regele Leonidas trebuie să-și aleagă o armată de 300 de spartani. Surprins de mulțimea mare de voluntari care vor să-l urmeze în viitoarea luptă de la Termopile, regele are nevoie să facă o selecție a războinicilor. Astfel, el a decis să le dea următoarea problemă:&nbsp;</p><p>Se dă un arbore cu <code>N</code> noduri (etichetate cu numere consecutive începând de la <code>1</code>) cu rădăcina în nodul <code>1</code>, în care fiecare muchie are asociat un cost. Se definește un <strong>lanț în jos</strong> în arbore ca fiind orice lanț simplu ce unește un nod <code>A</code> cu alt nod <code>B</code> din subarborele lui <code>A</code>. Cu alte cuvinte, un lanț în jos este un lanț de la <code>A</code> la <code>B</code> în care <code>A</code> este strămoș al lui <code>B</code>. Definim <strong>costul unui lanț în jos</strong> ca fiind suma costurilor muchiilor din care este format lanțul.</p><p>Numim <strong>acoperire</strong> a unui arbore o partiționare a muchiilor în lanțuri disjuncte, a căror reuniune este arborele inițial. Regele Leonidas dorește să acopere întreg arborele cu lanțuri în jos, însa are un număr limitat de lanțuri, notat în continuare cu <code>S</code>.&nbsp;</p><p>Se cere să se determine cel mai mic număr <code>K</code> pentru care să existe o partiționare completă a arborelui cu maxim <code>S</code> lanțuri astfel încât costul fiecărui lanț să fie cel mult <code>K</code>. Dacă nu există un astfel de număr <code>K</code>, să se afișeze <code>-1</code>.</p><p>Pentru că și tu vrei să lupți alături de Leonidas pentru libertatea Spartei, trebuie să rezolvi această problemă ca să-ți asiguri un loc în primii 300 de spartani.&nbsp;Leonidas este un rege înțelept. Ca să se asigure că nu vor exista Spartani care vor încerca să ghicească rezultatul, el vă cere să răspundeți la <code>T</code> astfel de probleme.&nbsp;</p>",
+      "text": "Regele Leonidas trebuie să-și aleagă o armată de 300 de spartani. Surprins de mulțimea mare de voluntari care vor să-l urmeze în viitoarea luptă de la Termopile, regele are nevoie să facă o selecție a războinicilor. Astfel, el a decis să le dea următoarea problemă: Se dă un arbore cu N noduri (etichetate cu numere consecutive începând de la 1) cu rădăcina în nodul 1, în care fiecare muchie are asociat un cost. Se definește un lanț în jos în arbore ca fiind orice lanț simplu ce unește un nod A cu alt nod B din subarborele lui A. Cu alte cuvinte, un lanț în jos este un lanț de la A la B în care A este strămoș al lui B. Definim costul unui lanț în jos ca fiind suma costurilor muchiilor din care este format lanțul.Numim acoperire a unui arbore o partiționare a muchiilor în lanțuri disjuncte, a căror reuniune este arborele inițial. Regele Leonidas dorește să acopere întreg arborele cu lanțuri în jos, însa are un număr limitat de lanțuri, notat în continuare cu S. Se cere să se determine cel mai mic număr K pentru care să existe o partiționare completă a arborelui cu maxim S lanțuri astfel încât costul fiecărui lanț să fie cel mult K. Dacă nu există un astfel de număr K, să se afișeze -1.Pentru că și tu vrei să lupți alături de Leonidas pentru libertatea Spartei, trebuie să rezolvi această problemă ca să-ți asiguri un loc în primii 300 de spartani. Leonidas este un rege înțelept. Ca să se asigure că nu vor exista Spartani care vor încerca să ghicească rezultatul, el vă cere să răspundeți la T astfel de probleme."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fişierul de intrare <code>rege1.in</code> conține pe prima linie numărul <code>T</code>, reprezentând numărul de teste din fişier. Urmează apoi cele <code>T</code> teste. Fiecare test este descris pe mai multe linii din fişier. Pe prima linie se află numerele <code>N</code> și <code>S</code>. Pe următoarele <code>N-1</code> linii se află câte trei numere <code>x y z</code>, cu semnificația că există o muchie între nodurile <code>x</code> și <code>y</code> de cost <code>z</code>.</p>",
+      "text": "Fişierul de intrare rege1.in conține pe prima linie numărul T, reprezentând numărul de teste din fişier. Urmează apoi cele T teste. Fiecare test este descris pe mai multe linii din fişier. Pe prima linie se află numerele N și S. Pe următoarele N-1 linii se află câte trei numere x y z, cu semnificația că există o muchie între nodurile x și y de cost z."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul <code>rege1.out</code> trebuie să conțină <code>T</code> linii, pe linia <code>i</code> se află răspunsul pentru testul <code>i</code>.&nbsp;</p>",
+      "text": "Fișierul rege1.out trebuie să conțină T linii, pe linia i se află răspunsul pentru testul i."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ T ≤ 5</code></li>\n\t<li><code>1 ≤ N ≤ 100 000</code></li>\n\t<li><code>1 ≤ S ≤ 100 000</code></li>\n\t<li><code>1 ≤</code> costul oricărei muchii <code>≤ 10 000</code></li>\n</ul>",
+      "text": "1 ≤ T ≤ 5 1 ≤ N ≤ 100 000 1 ≤ S ≤ 100 000 1 ≤ costul oricărei muchii ≤ 10 000"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>rege1.in</code></p><pre>2&nbsp;\n10 6&nbsp;\n2 1 1&nbsp;\n3 2 1&nbsp;\n4 1 3&nbsp;\n5 3 1&nbsp;\n6 5 2&nbsp;\n7 5 3&nbsp;\n8 2 2&nbsp;\n9 8 3&nbsp;\n10 5 2&nbsp;\n6 4&nbsp;\n2 1 4&nbsp;\n3 2 3&nbsp;\n4 3 2&nbsp;\n5 4 2&nbsp;\n6 4 4</pre><p><code>rege1.out</code></p><pre>4\n4</pre>",
+      "text": "rege1.in2 10 6 2 1 1 3 2 1 4 1 3 5 3 1 6 5 2 7 5 3 8 2 2 9 8 3 10 5 2 6 4 2 1 4 3 2 3 4 3 2 5 4 2 6 4 4rege1.out4 4"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p>Avem <code>T = 2</code> teste.&nbsp;</p><p>Pentru primul test, avem un arbore cu <code>N = 10</code> noduri.</p><p><img alt=\"\" src=\"/resurse/9dc152/p-1700/1788-rege1.png\"></p><p>Dorim să acoperim arborele cu maxim <code>S = 6</code> lanțuri. Arborele se poate acoperi cu următoarele lanțuri:<br>\n&nbsp;<br>\n<code>1-4</code> (<code>cost 3</code>)<br>\n<code>1-2-8</code> (cost <code>3</code>)<br>\n<code>8-9</code> (cost <code>3</code>)<br>\n<code>2-3-5-6</code> (cost <code>4</code>)<br>\n<code>5-10</code> (cost <code>2</code>)<br>\n<code>5-7</code> (cost <code>3</code>)</p><p>Sunt exact <code>6</code> lanțuri (maxim <code>6</code> avem voie), iar costul cel mai mare al unui lanț e <code>4</code>. Nu se poate face o acoperire cu cost maxim mai mic cu cel mult <code>6</code> lanțuri.</p><p>Pentru cel de-al doilea test, arborele are <code>N = 6</code> noduri și dorim să-l acoperim cu maxim <code>4</code> lanțuri. Arborele se poate acoperi cu următoarele lanțuri:&nbsp;</p><p><code>1-2</code> (cost <code>4</code>)&nbsp;<br>\n<code>2-3</code> (cost <code>3</code>)&nbsp;<br>\n<code>3-4-5</code> (cost <code>4</code>)&nbsp;<br>\n<code>4-6</code> (cost <code>4</code>)&nbsp;</p><p>Sunt exact <code>4</code> lanțuri (maxim <code>4</code> avem voie), iar costul cel mai mare al unui lanț e <code>4</code>. Nu se poate face o acoperire cu cost maxim mai mic cu cel mult <code>4</code> lanțuri.</p><p><img alt=\"\" src=\"/resurse/9dc152/p-1700/1788-rege1-1.png\"></p>",
+      "text": "Avem T = 2 teste. Pentru primul test, avem un arbore cu N = 10 noduri.Dorim să acoperim arborele cu maxim S = 6 lanțuri. Arborele se poate acoperi cu următoarele lanțuri: 1-4 (cost 3) 1-2-8 (cost 3) 8-9 (cost 3) 2-3-5-6 (cost 4) 5-10 (cost 2) 5-7 (cost 3)Sunt exact 6 lanțuri (maxim 6 avem voie), iar costul cel mai mare al unui lanț e 4. Nu se poate face o acoperire cu cost maxim mai mic cu cel mult 6 lanțuri.Pentru cel de-al doilea test, arborele are N = 6 noduri și dorim să-l acoperim cu maxim 4 lanțuri. Arborele se poate acoperi cu următoarele lanțuri: 1-2 (cost 4) 2-3 (cost 3) 3-4-5 (cost 4) 4-6 (cost 4) Sunt exact 4 lanțuri (maxim 4 avem voie), iar costul cel mai mare al unui lanț e 4. Nu se poate face o acoperire cu cost maxim mai mic cu cel mult 4 lanțuri."
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "1 ≤ T ≤ 5",
+    "1 ≤ N ≤ 100 000",
+    "1 ≤ S ≤ 100 000",
+    "1 ≤ costul oricărei muchii ≤ 10 000"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qeaaadd819d.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1700/1788-rege1.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1700-1788-rege1-png.png",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1700/1788-rege1-1.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1700-1788-rege1-1-png.png",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "11",
+    "intrare/ieșire": "rege1.in / rege1.out",
+    "limită timp": "1.5 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "Concursul Interjudeţean de Matematică şi Informatică Grigore Moisil, 2016",
+    "autor": "-",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 1.5,
+  "memoryLimitMb": 64,
+  "sourceAttribution": "Concursul Interjudeţean de Matematică şi Informatică Grigore Moisil, 2016",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1788/rege1"
+}

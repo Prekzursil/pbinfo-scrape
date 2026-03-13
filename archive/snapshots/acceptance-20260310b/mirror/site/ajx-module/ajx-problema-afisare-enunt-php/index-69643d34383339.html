@@ -1,0 +1,131 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4839"><article id="enunt">
+			<p>Se va prezenta în continuare un limbaj minimal de programare: <strong>minishell</strong>.</p>
+
+<p><strong>Documentație</strong></p>
+
+<p><strong>Variabile</strong></p>
+
+<p>Acest limbaj admite 26 de variabile, notate: <code>a</code>, <code>b</code>, …, <code>z</code>.</p>
+
+<p>La începutul unui program, toate variabilele sunt inițializate cu <code>0</code>.</p>
+
+<p>Într-un program valid, variabilele pot reține doar valori întregi din intervalul <code>[0, 2</code><sup><code>31</code></sup><code>)</code>.</p>
+
+<p><strong>Operații</strong></p>
+
+<br><br><br><br><br><br><br><br><p></p><table class="table"><tbody><tr><th>Operație</th><th>Explicație</th><th>Exemple</th><th>Restricții</th></tr>
+<tr>
+<td>Atribuire constantă</td>
+<td>Atribuie unei variabile o valoare constantă.</td>
+<td>
+
+<p><code>a=6</code><br>
+<code>t=0</code><br>
+<code>z=2147483647</code></p>
+
+<p></p></td>
+<td><p></p>
+
+<p>Valoarea constantă atribuită trebuie să fie cuprinsă în intervalul \( [0,2^{31}) \)</p>
+
+<p></p></td>
+</tr>
+<tr>
+<td>Atribuire și adunare</td>
+<td>Schimbă valoare unei variabile cu suma dintre aceasta și o altă variabilă la alegere.</td>
+<td><p></p>
+
+<p><code>a+=b</code><br>
+<code>t+=c</code><br>
+<code>m+=m</code></p>
+
+<p></p></td>
+<td>Variabilele folosite în această operație trebuie să aparțină celor 26 menționate mai sus.</td>
+</tr>
+
+</tbody></table>
+
+<p><strong>Exemplu de program</strong></p>
+
+<pre>a=1
+c+=a
+b=2
+b+=c
+c+=c
+a=7</pre>
+
+<p>După rularea acestui program, <code>a</code> conține valoarea <code>7</code>, <code>b</code> conține valoarea <code>3</code>, <code>c</code> conține valoarea <code>2</code>, și variabilele <code>d</code>, …, <code>z</code> conțin valoarea <code>0</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Se dă un vector <code>val[a]</code>, …, <code>val[z]</code>. Să se construiască un program <strong>minishell</strong> care folosește cât mai puține atribuiri constante și care, prin rularea sa, face ca variabilele <code>a</code>, …, <code>z</code> să conțină valorile <code>val[a]</code>, …, <code>val[z]</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>minish.in</code> va conține numerele <code>val[a]</code>, …, <code>val[z]</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>minish.out</code> va conține un program <strong>minishell</strong> corect alcătuit, care rezolvă cerința. Programul afișat poate conține linii goale, dar nu are voie să conțină spații.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>0 ≤ val[a], ..., val[z] &lt; 2</code><sup><code>31</code></sup>.</li>
+	<li>Fiecare linie afișată trebuie sa conțină <strong>exact</strong> o singură operație. De asemenea, ea trebuie să nu conțină spații.</li>
+	<li>Se garantează că cel puțin o valoare dintre <code>val[a]</code>, …, <code>val[z]</code> este nenulă.</li>
+	<li>Se poate demonstra că întotdeauna există o soluție validă care respectă restricțiile.</li>
+	<li>Notăm cu <code>cnt</code> numărul de elemente nenule din vectorul <code>val[]</code>.</li>
+	<li>Pentru 5 puncte, <code>0 ≤ val[a], ..., val[z] ≤ 1</code></li>
+	<li>Pentru 15 puncte, cel puțin una dintre valorile <code>val[a], ..., val[z]</code> este 1</li>
+	<li>Pentru 10 puncte, <code>0 ≤ val[a], ..., val[z] &lt; 2</code><sup><code>12</code></sup>, <code>cnt = 2</code></li>
+	<li>Pentru 10 puncte, <code>cnt = 2</code></li>
+	<li>Pentru 10 puncte, <code>0 ≤ val[a], ..., val[z] &lt; 2</code><sup><code>20</code></sup></li>
+	<li>Pentru 15 puncte, <code>val[a] = val[b] - 1</code></li>
+	<li>Pentru 35 de puncte, fără restricții suplimentare</li>
+</ul>
+
+<h1>Punctare</h1>
+
+<p>Problema admite punctaje parțiale. Punctajul procentual pentru un test este dat de formula</p>
+
+<p>$$ \frac{1}{K\sqrt{K}} \times \begin{cases}0, &amp; N &gt; 10000,
+  \\
+  20+\frac{1}{20}\times (10000- N), &amp; 2000 &lt; N \leq 10000,<br>
+\\<br>
+60+\frac{4}{167}\times (2000- N), &amp; 330 &lt; N \leq 2000,<br>
+\\<br>
+100, &amp; N \leq 330<br>
+\end{cases} $$</p>
+
+<p>unde <code>K</code> reprezintă numărul de atribuiri constante din program, și <code>N</code> reprezintă numărul de linii de cod al programului din output.</p>
+
+<p>Veți primi punctaj pe un test numai dacă:</p>
+
+<ul>
+	<li>Programul este corect alcătuit.</li>
+	<li>După execuția întregului program, variabilele conțin valorile cerute.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>minish.in</code></p>
+
+<pre>1 2 3 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 1</pre>
+
+<p><code>minish.out</code></p>
+
+<pre>a=1
+b+=a
+b+=a
+c+=a
+c+=a
+c+=a
+z+=a</pre>
+
+<h3>Explicație</h3>
+
+<p>Acesta reprezintă un program valid care rezolvă problema.</p>		</article>
+		</body></html>

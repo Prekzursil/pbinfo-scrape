@@ -1,0 +1,67 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1712"><article id="enunt">
+			<p>Pe șoseaua care duce spre intrarea în oraș se află <code>n</code> autovehicule, dintre care <code>m</code><br>
+sunt autovehicule de gabarit redus, pe care le vom numi în continuare autoturisme, iar restul sunt de gabarit mare și le vom numi camioane. Orașul are o șosea ocolitoare, numită popular <em>centură</em>. Camioanele trebuie să ocolească orașul<br>
+trecând în mod obligatoriu pe drumul de centură. Autoturismele pot continua drumul pe șoseaua care intră în oraș sau pot ocoli orașul intrând pe șoseaua de centură. Pe centură, camioanele circulă cu viteză redusă îngreunând traficul. </p>
+
+<p>De aceea s-a impus restricția <code>R</code>: nu vor fi admise pe drumul de centură coloane formate din mai mult decât <code>k</code> camioane consecutive. </p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând <code>n</code>, <code>k</code> și distribuția autovehiculelor pe șosea, să se determine două numere naturale <code>V</code> și <code>T</code>, unde <code>V</code> reprezintă numărul de variante de dirijare a traficului astfel încât să fie respectată restricția <code>R</code>, iar <code>T</code> reprezintă numărul minim de autoturisme care trebuie să fie deviate pe drumul de centură  pentru a se respecta aceeași restricție <code>R</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>centura.in</code> conține pe prima linie trei numere naturale nenule <code>n m k</code>. Pe următoarea linie un șir de caractere format doar din caracterele <code>A</code> și <code>C</code>. Caracterul <code>A</code> reprezintă un autoturism, iar caracterul <code>C</code> reprezintă un camion.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>centura.out</code> va conține pe prima linie numerele naturale nenule <code>V</code> și <code>T</code> separate prin spațiu, cu semnificația din enunț.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ k &lt; n ≤ 100000</code></li>
+	<li><code>1 &lt; m ≤ 30</code></li>
+	<li>Atenție, dacă inițial avem un șir de forma <code>CCAAC</code> și <code>k=2</code>, atunci sunt două soluții distincte pentru mersul pe centură: <code>CCAC</code> (primul <code>A</code> merge prin oraș) și din nou <code>CCAC</code> (al doilea <code>A</code> merge prin oraș).</li>
+	<li>Se garantează că, pentru toate datele de test, șirul inițial de autovehicule respectă restricția <code>R</code>.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>centura.in</code></p>
+
+<pre>8 3 2
+CCAACACC</pre>
+
+<p><code>centura.out</code></p>
+
+<pre>3 2</pre>
+
+<h3>Explicație</h3>
+
+<p>Sunt posibile următoarele trei variante de separare a coloanei inițiale de autovehicule:</p>
+
+<ol>
+	<li>prin oraș: <code>A1</code>; pe centură: <code>C1C2A2C3A3C4C5</code></li>
+	<li>prin oraș: <code>A2</code>; pe centură: <code>C1C2A1C3A3C4C5</code></li>
+	<li>prin oraș: nici unul; pe centură:  <code>C1C2A1A2C3A3C4C5</code> (toate)</li>
+</ol>
+
+<p>Este necesar ca minimum două autoturisme să fie deviate pe drumul de centură. Prin urmare: <code>V = 3</code> și <code>T = 2</code>.</p>
+
+
+<h1>Exemplul 2</h1>
+
+<p><code>centura.in</code></p>
+
+<pre>7 2 2
+CCACCAC</pre>
+
+<p><code>centura.out</code></p>
+
+<pre>1 2</pre>
+
+<h3>Explicație</h3>
+
+<p>Există o singură variantă: toate autovehiculele vor fi deviate pe drumul de centură: <code>C1C2A1C3C4A2C5</code> Prin urmare: <code>V = 1</code> și <code>T = 2</code>.</p>		</article>
+		</body></html>

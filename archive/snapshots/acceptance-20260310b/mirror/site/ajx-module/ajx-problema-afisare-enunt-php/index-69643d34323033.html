@@ -1,0 +1,47 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4203"><article id="enunt">
+			<p>În planul <code>xOy</code> se găsesc <code>n</code> puncte de coordonate numere naturale nenule, nu neapărat aflate pe poziții distincte.</p>
+
+<h1>Cerința</h1>
+
+<p>Pentru fiecare punct din plan de coordonate <code>(x, y)</code> trebuie să spuneți câte alte puncte au coordonatele <code>(p, q)</code> cu proprietatea că <code>1 ≤ p &lt; x</code> și <code>1 ≤ q ≤ y</code> (atenție, <code>p</code> este strict mai mic decât <code>x</code>, iar <code>q</code> este mai mic sau egal cu <code>y</code>).</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>numberofpoints.in</code> conține pe prima linie, separate prin câte un spațiu, numerele <code>n</code>, <code>A</code>, <code>B</code>, <code>C</code>, <code>D</code>, <code>x1</code>, <code>y1</code>, <code>x2</code>, <code>y2</code>, unde <code>n</code> este numărul de puncte din plan, <code>(x1, y1)</code> sunt coordonatele primului punct din plan, iar <code>(x2, y2)</code> sunt coordonatele celui de-al doilea punct. Coordonatele restului punctelor se generează după formulele: </p>
+
+<ul>
+	<li><code>x</code><sub><code>i</code></sub> <code>= (x</code><sub><code>i-2</code></sub> <code>* A + x</code><sub><code>i-1</code></sub> <code>* B + C) % D + 1</code>, pentru orice <code>i=3..n</code></li>
+	<li><code>y</code><sub><code>i</code></sub> <code>= (y</code><sub><code>i-2</code></sub> <code>* A + y</code><sub><code>i-1</code></sub> <code>* B + C) % D + 1</code>, pentru orice <code>i=3..n</code></li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>numberofpoints.out</code> va conține exact <code>n</code> linii, pe linia <code>i</code> (cu <code>i = 1..n</code>) se va afla un singur număr natural reprezentând numărul de puncte care au abscisa strict mai mică decât <code>x</code><sub><code>i</code></sub> și ordonata mai mică sau egală decât <code>y</code><sub><code>i</code></sub>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 200.000</code></li>
+	<li><code>1 ≤ A, B, C, D, x1, y1, x2, y2 ≤ 1.000.000</code></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>numberofpoints.in</code></p>
+
+<pre>7 19 17 11 23 4 5 7 2</pre>
+
+<p><code>numberofpoints.out</code></p>
+
+<pre>1
+1
+2
+2
+4
+0
+5</pre>
+
+<h3>Explicații</h3>
+
+<p>Cele șapte puncte generate au coordonatele: <code>(4, 5)</code>, <code>(7, 2)</code>, <code>(23, 3)</code>, <code>(7, 9)</code>, <code>(16, 15)</code>, <code>(3, 1)</code> și <code>(22, 15)</code>. Primul punct, de coordonate <code>(4, 5)</code> are un singur punct care îndeplinește cerințele, anume cel de coordonate <code>(3, 1)</code>. Al cincilea punct, de coordonate <code>(16, 15)</code> are <code>4</code> puncte care îndeplinesc condițiile, anume <code>(4, 5)</code>, <code>(7, 2)</code>,  <code>(7, 9)</code> și <code>(3, 1)</code>.</p>		</article>
+		</body></html>

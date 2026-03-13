@@ -1,0 +1,90 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3444"><article id="enunt">
+			<p>Dexter și-a definit propriul algoritm de arhivare a șirului favorit <code>T</code>, șir format numai din litere mici ale alfabetului englez. Șirul arhivat, notat cu <code>S</code>, poate fi format din cifre, litere mici ale alfabetului englez, parantezele drepte <code>'['</code> și <code>']'</code> și parantezele rotunde <code>'('</code> și <code>')'</code>, precum și caractere <code>'*'</code>. </p>
+
+<p>Fixi, curios din fire, descoperă algoritmul și încearcă să dezarhiveze șirul <code>S</code>, prin efectuarea unor transformări repetate. O transformare poate fi de unul dintre cele <code>3</code> tipuri de mai jos, unde s-a notat cu <code>C</code> o secvență din <code>S</code> formată <strong>numai din litere</strong>.</p>
+
+<ol>
+	<li>O secvență a lui <code>S</code> de forma <code>n(C)</code>, unde <code>n</code> este numărul natural poziționat imediat înaintea parantezei rotunde, se transformă într-o secvență <code>D</code> obținută prin scrierea concatenată, de <code>n</code> ori, a șirului <code>C</code>. Exemplu: pentru secvența <code>10(ab)</code> avem <code>n=10</code> și se obține secvența <code>D=abababababababababab</code>.</li>
+	<li>O secvență a lui <code>S</code> de forma <code>[*C]</code> se transformă într-o secvență palindromică de lungime pară, obținută prin concatenarea secvenței <code>C</code> cu oglinditul lui <code>C</code>. Exemplu: din secvența <code>[*abc]</code> se obține secvența palindromică de lungime pară <code>abccba</code></li>
+	<li>O secvență a lui <code>S</code> de forma <code>[C*]</code> se transformă într-o secvență palindromică de lungime impară, obținută prin concatenarea secvenței <code>C</code> cu oglinditul lui <code>C</code> din care s-a eliminat primul caracter. Exemplu: din secvența <code>[abc*]</code> se obține secvența palindromică de lungime impară <code>abcba</code>.</li>
+</ol>
+
+<p>Un șir se consideră dezarhivat dacă este format numai din litere mici ale alfabetului englez.</p>
+
+<h1>Cerința</h1>
+
+<p>Fiind dat șirul arhivat <code>S</code> să se determine numărul de transformări, de cele <code>3</code> tipuri de mai sus, realizate de Fixi în cadrul algoritmului de dezarhivare, precum și forma finală dezarhivată <code>T</code> a șirului <code>S</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>arh.in</code> conține șirul de caractere arhivat <code>S</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>arh.out</code> va conține <strong>obligatoriu</strong> două linii. Pe prima linie numărul de transformări cerut, iar pe linia a doua șirul de caractere cerut, <code>T</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>0 &lt;</code> lungimea șirului arhivat <code>S ≤ 10000</code>; <code>0 &lt;</code> lungimea șirului dezarhivat <code>T ≤ 100000</code>;</li>
+	<li><code>1 &lt; n ≤ 1000</code>;</li>
+	<li>O secvență a unui șir este o succesiune de caractere aflate pe poziții consecutive în şir;</li>
+	<li>În șirul <code>S</code> o cifră poate apărea numai imediat înaintea unei paranteze rotunde deschise sau imediat înaintea unei alte cifre; fiecare paranteză rotundă deschisă are imediat înaintea sa cel puțin o cifră; toate parantezele, drepte sau rotunde, se închid corect. Caracterul <code>*</code> poate apărea numai imediat după o paranteză dreaptă deschisă sau imediat înaintea unei paranteze drepte închise;</li>
+	<li>O secvenţă a unui șir este palindromică dacă primul element al secvenţei este egal cu ultimul, al doilea cu penultimul etc; oglinditul unei secvențe se obține prin scriere în ordine inversă a caracterelor sale;</li>
+	<li>Se acordă 20% din punctajul fiecărui test pentru scrierea corectă a numărului cerut și 80% din punctajul fiecărui test pentru scrierea corectă a șirului cerut;</li>
+	<li>Pentru 30 de puncte șirul arhivat <code>S</code> poate fi dezarhivat numai cu transformări de tipul <code>1</code>;</li>
+	<li>Pentru alte 30 de puncte șirul arhivat <code>S</code> poate fi dezarhivat numai cu transformări de tipurile <code>2</code> și <code>3</code>.</li>
+	<li>În concurs s-au acordat 10 puncte din oficiu. Pe site se acordă 10 puncte pentru exemple.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>arh.in</code></p>
+
+<pre>2(a)[*a2(b)]xy[2(c)b*]d</pre>
+
+<p><code>arh.out</code></p>
+
+<pre>5
+aaabbbbaxyccbccd</pre>
+
+<h3>Explicație</h3>
+
+<p><code>2(a)</code> =&gt; <code>aa</code><br>
+<code>2(b)</code> =&gt; <code>bb</code><br>
+<code>[*a2(b)]</code> =&gt; <code>[*abb]</code> =&gt; <code>abbbba</code><br>
+<code>2(c)</code> =&gt; <code>cc</code><br>
+<code>[2(c)b*]</code> =&gt; <code>[ccb*]</code> =&gt; <code>ccbcc</code></p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>arh.in</code></p>
+
+<pre>2(ab[cd*])a3(xyz)</pre>
+
+<p><code>arh.out</code></p>
+
+<pre>3
+abcdcabcdcaxyzxyzxyz</pre>
+
+<h3>Explicație</h3>
+
+<p><code>3(xyz)</code> =&gt; <code>xyzxyzxyz</code><br>
+<code>[cd*]</code> =&gt; <code>cdc</code><br>
+<code>2(ab[cd*])</code> =&gt; <code>2(abcdc)</code> =&gt; <code>abcdcabcdc</code></p>
+
+<h1>Exemplul 3</h1>
+
+<p><code>arh.in</code></p>
+
+<pre>abcd</pre>
+
+<p><code>arh.out</code></p>
+
+<pre>0
+abcd</pre>
+
+<h3>Explicație</h3>
+
+<p>Nu este nevoie de nicio transformare, iar șirul dezarhivat este identic cu cel arhivat.</p>		</article>
+		</body></html>

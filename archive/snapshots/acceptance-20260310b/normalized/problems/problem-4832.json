@@ -1,0 +1,331 @@
+{
+  "id": 4832,
+  "slug": "alvn",
+  "name": "alvn",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4832/alvn",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 46,
+      "name": "Tablouri bidimensionale (matrice)",
+      "slug": "tablouri-bidimensionale-matrice",
+      "href": "/?pagina=probleme-lista&tag=46"
+    },
+    {
+      "id": 47,
+      "name": "Parcurgerea matricelor oarecare",
+      "slug": "parcurgerea-matricelor-oarecare",
+      "href": "/?pagina=probleme-lista&tag=47"
+    }
+  ],
+  "tags": [
+    "Sume parțiale"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>1. Determinați <code>S</code>, numărul maxim de ghinde pe care le poate consuma grupul lui <span class=\"caps\">ALVN</span>, când ei sunt singuri în grădină.<br>\n2. Determinați <code>T</code>, numărul total de ghinde consumate de două grupuri de veverițe aflate în grădină.</p>",
+      "text": "1. Determinați S, numărul maxim de ghinde pe care le poate consuma grupul lui ALVN, când ei sunt singuri în grădină. 2. Determinați T, numărul total de ghinde consumate de două grupuri de veverițe aflate în grădină."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie a fișierului <code>alvn.in</code> se află un număr natural <code>p</code>, care reprezintă cerința (<code>1</code> sau <code>2</code>). Pe a doua linie se află două numere naturale <code>N</code> și <code>M</code>, cu semnificația din enunț. Următoarele <code>N</code> linii conțin câte <code>M</code> valori, reprezentând coeficienții de ghinde produse de fiecare stejar, în ordine, rând după rând și pentru fiecare rând, în ordinea parcelelor pe care se află. Pe linia <code>N+3</code> se află valoarea <code>k</code>, cu semnificația din enunț. Pe linia următoare, se află <code>k</code> valori, reprezentând coeficienții <code>x[1], x[2], ..., x[k]</code>, cu semnificația din enunț.</p>",
+      "text": "Pe prima linie a fișierului alvn.in se află un număr natural p, care reprezintă cerința (1 sau 2). Pe a doua linie se află două numere naturale N și M, cu semnificația din enunț. Următoarele N linii conțin câte M valori, reprezentând coeficienții de ghinde produse de fiecare stejar, în ordine, rând după rând și pentru fiecare rând, în ordinea parcelelor pe care se află. Pe linia N+3 se află valoarea k, cu semnificația din enunț. Pe linia următoare, se află k valori, reprezentând coeficienții x[1], x[2], ..., x[k], cu semnificația din enunț."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>alvn.out</code> va conține un singur număr natural, astfel:</p><ul>\n\t<li>Dacă <code>p=1</code>, atunci se va afișa numărul <code>S</code>, determinat la cerința 1.</li>\n\t<li>Dacă <code>p=2</code>, se va afișa numărul <code>T</code>, determinat la cerința 2.</li>\n</ul>",
+      "text": "Fișierul de ieșire alvn.out va conține un singur număr natural, astfel: Dacă p=1, atunci se va afișa numărul S, determinat la cerința 1. Dacă p=2, se va afișa numărul T, determinat la cerința 2."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N, M ≤ 700</code></li>\n\t<li><code>1 ≤ K ≤ min(N, M, 200)</code></li>\n\t<li><code>0 ≤ x[k] ≤ 100</code>, pentru orice <code>k ∈ {1, 2, ..., K}</code></li>\n\t<li><code>0 ≤ coeficientul fiecărui stejar ≤ 100</code></li>\n\t<li>Valorile <code>x[1], x[2], ..., x[k]</code> respectă relația <code>x[1] ≥ x[2] ≥ x[3] ≥ ... ≥ x[k]</code></li>\n\t<li>Pentru 10 puncte, <code>p=1</code> și <code>N, M ≤ 100, K ≤ 10</code></li>\n\t<li>Pentru 35 de puncte, <code>p=1</code> și nu există restricții suplimentare</li>\n\t<li>Pentru 20 de puncte, <code>p=2</code> și <code>K ≤ 10</code></li>\n\t<li>Pentru 35 de puncte, <code>p=2</code> și nu există restricții suplimentare</li>\n</ul>",
+      "text": "1 ≤ N, M ≤ 700 1 ≤ K ≤ min(N, M, 200) 0 ≤ x[k] ≤ 100, pentru orice k ∈ {1, 2, ..., K} 0 ≤ coeficientul fiecărui stejar ≤ 100 Valorile x[1], x[2], ..., x[k] respectă relația x[1] ≥ x[2] ≥ x[3] ≥ ... ≥ x[k] Pentru 10 puncte, p=1 și N, M ≤ 100, K ≤ 10 Pentru 35 de puncte, p=1 și nu există restricții suplimentare Pentru 20 de puncte, p=2 și K ≤ 10 Pentru 35 de puncte, p=2 și nu există restricții suplimentare"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>alvn.in</code></p><pre>1\n4 4\n1 0 1 0\n0 2 0 1\n1 0 3 0\n0 1 0 1\n3\n4 2 1</pre><p><code>alvn.out</code></p><pre>25</pre><h3>Explicație</h3><p>Numărul de ghinde din fiecare celulă este:<br>\n<code>13 13 15 9</code><br>\n<code>13 23 18 16</code><br>\n<code>15 18 25 14</code> <br>\n<code>9 16 14 14</code><br>\nÎn parcela <code>(3, 3)</code> sunt ghinde din următorii stejari, din parcelele:  <code>(3, 3)</code>: <code>3 * 4 = 12</code>,  <code>(2, 2)</code>: <code>2 * 2 = 4</code>,  <code>(2, 4)</code>: <code>2 * 1 = 2</code>,  <code>(4, 2)</code>: <code>2 * 1 = 2</code>,  <code>(4, 4)</code>: <code>2 * 1 = 2</code>,  <code>(1, 1)</code>: <code>1 * 1 = 1</code>,  <code>(1, 3)</code>: <code>1 * 1 = 1</code>,  <code>(3, 1)</code>: <code>1 * 1 = 1</code>. Deci, în total sunt <code>25</code> de ghinde.</p>",
+      "text": "alvn.in1 4 4 1 0 1 0 0 2 0 1 1 0 3 0 0 1 0 1 3 4 2 1alvn.out25ExplicațieNumărul de ghinde din fiecare celulă este: 13 13 15 9 13 23 18 16 15 18 25 14 9 16 14 14 În parcela (3, 3) sunt ghinde din următorii stejari, din parcelele: (3, 3): 3 * 4 = 12, (2, 2): 2 * 2 = 4, (2, 4): 2 * 1 = 2, (4, 2): 2 * 1 = 2, (4, 4): 2 * 1 = 2, (1, 1): 1 * 1 = 1, (1, 3): 1 * 1 = 1, (3, 1): 1 * 1 = 1. Deci, în total sunt 25 de ghinde."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>alvn.in</code></p><pre>2\n4 4\n1 0 1 0\n0 2 0 1\n1 0 3 0\n0 1 0 1\n2\n2 1</pre><p><code>alvn.out</code></p><pre>11</pre><h3>Explicație</h3><p>Veverițele se vor așeza în parcelele <code>(1,3)</code> și <code>(4,2)</code>. Inelele acestor copaci nu se vor intersecta. Parcelele din inelele stejarului din <code>(1, 3)</code> sunt verzi, iar cele ale stejarului din <code>(4, 2)</code> sunt mov. Parcela <code>(1,3)</code> va avea valoarea <code>5</code>, iar parcela <code>(4,2)</code> va avea valoarea <code>6</code>.</p><p><img alt=\"\" src=\"/resurse/16a4b0/alvn_003.jpg\"></p>",
+      "text": "alvn.in2 4 4 1 0 1 0 0 2 0 1 1 0 3 0 0 1 0 1 2 2 1alvn.out11ExplicațieVeverițele se vor așeza în parcelele (1,3) și (4,2). Inelele acestor copaci nu se vor intersecta. Parcelele din inelele stejarului din (1, 3) sunt verzi, iar cele ale stejarului din (4, 2) sunt mov. Parcela (1,3) va avea valoarea 5, iar parcela (4,2) va avea valoarea 6."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Numărul de ghinde din fiecare celulă este: 13 13 15 9 13 23 18 16 15 18 25 14 9 16 14 14 În parcela (3, 3) sunt ghinde din următorii stejari, din parcelele: (3, 3): 3 * 4 = 12, (2, 2): 2 * 2 = 4, (2, 4): 2 * 1 = 2, (4, 2): 2 * 1 = 2, (4, 4): 2 * 1 = 2, (1, 1): 1 * 1 = 1, (1, 3): 1 * 1 = 1, (3, 1): 1 * 1 = 1. Deci, în total sunt 25 de ghinde."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Veverițele se vor așeza în parcelele (1,3) și (4,2). Inelele acestor copaci nu se vor intersecta. Parcelele din inelele stejarului din (1, 3) sunt verzi, iar cele ale stejarului din (4, 2) sunt mov. Parcela (1,3) va avea valoarea 5, iar parcela (4,2) va avea valoarea 6."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N, M ≤ 700",
+    "1 ≤ K ≤ min(N, M, 200)",
+    "0 ≤ x[k] ≤ 100, pentru orice k ∈ {1, 2, ..., K}",
+    "0 ≤ coeficientul fiecărui stejar ≤ 100",
+    "Valorile x[1], x[2], ..., x[k] respectă relația x[1] ≥ x[2] ≥ x[3] ≥ ... ≥ x[k]",
+    "Pentru 10 puncte, p=1 și N, M ≤ 100, K ≤ 10",
+    "Pentru 35 de puncte, p=1 și nu există restricții suplimentare",
+    "Pentru 20 de puncte, p=2 și K ≤ 10",
+    "Pentru 35 de puncte, p=2 și nu există restricții suplimentare"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qf14afdf743.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/alvn_001.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-alvn-001-jpg.jpg",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/alvn_002.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-alvn-002-jpg.jpg",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/alvn_003.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-alvn-003-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "alvn.in / alvn.out",
+    "limită timp": "2 secunde",
+    "limită memorie": "32 MB / 8 MB",
+    "sursa problemei": "ONI 2025, clasa a 7-a",
+    "autor": "Mihai Marcu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 2,
+  "memoryLimitMb": 32,
+  "author": "Mihai Marcu",
+  "sourceAttribution": "ONI 2025, clasa a 7-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4832/alvn"
+}

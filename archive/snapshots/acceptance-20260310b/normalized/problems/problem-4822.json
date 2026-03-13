@@ -1,0 +1,324 @@
+{
+  "id": 4822,
+  "slug": "diff",
+  "name": "diff",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4822/diff",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 21,
+      "name": "Probleme cu secvențe",
+      "slug": "probleme-cu-secven-e",
+      "href": "/?pagina=probleme-lista&tag=21"
+    }
+  ],
+  "tags": [
+    "Secventa de suma maxima",
+    "Vector de frecvență"
+  ],
+  "sections": [
+    {
+      "title": "Cerințe",
+      "html": "<p>1) Determinați frecvența maximă de apariție a unei cifre din șirul <code>a</code>.<br>\n2) Determinați diff-ul maxim posibil al unei secvențe care începe de la prima poziție din șirul <code>a</code>.<br>\n3) Determinați diff-ul maxim al unei secvențe din șirul <code>a</code>.</p>",
+      "text": "1) Determinați frecvența maximă de apariție a unei cifre din șirul a. 2) Determinați diff-ul maxim posibil al unei secvențe care începe de la prima poziție din șirul a. 3) Determinați diff-ul maxim al unei secvențe din șirul a."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>diff.in</code> conține pe prima linie numerele naturale <code>C</code> și <code>N</code>, unde <code>C</code> este cerința care trebuie rezolvată (<code>1</code>, <code>2</code> sau <code>3</code>) și <code>N</code> are semnificația din enunț, iar pe următoarea linie <code>N</code> cifre nenule, separate prin câte un spațiu, reprezentând termenii șirului <code>a</code>.</p>",
+      "text": "Fișierul de intrare diff.in conține pe prima linie numerele naturale C și N, unde C este cerința care trebuie rezolvată (1, 2 sau 3) și N are semnificația din enunț, iar pe următoarea linie N cifre nenule, separate prin câte un spațiu, reprezentând termenii șirului a."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>diff.out</code> numărul determinat pentru cerința <code>C</code>.</p>",
+      "text": "Fișierul de ieșire diff.out numărul determinat pentru cerința C."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>C ∈ {1, 2, 3}</code></li>\n\t<li><code>3 ≤ N ≤ 100.000</code></li>\n\t<li>Se garantează că, pentru toate testele, în șir există cel puțin două cifre distincte.</li>\n\t<li>Pentru 30 de puncte, <code>C = 1</code></li>\n\t<li>Pentru 30 de puncte, <code>C = 2</code></li>\n\t<li>Pentru 40 de puncte, <code>C = 3</code></li>\n</ul>",
+      "text": "C ∈ {1, 2, 3} 3 ≤ N ≤ 100.000 Se garantează că, pentru toate testele, în șir există cel puțin două cifre distincte. Pentru 30 de puncte, C = 1 Pentru 30 de puncte, C = 2 Pentru 40 de puncte, C = 3"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>diff.in</code></p><pre>1 9\n1 7 7 9 7 7 1 9 1</pre><p><code>diff.out</code></p><pre>4</pre><h3>Explicație</h3><p><code>C = 1</code>, <code>N = 9</code>. Se rezolvă cerința <code>1</code>. Șirul <code>a=(1,7,7,9,7,7,1,9,1)</code> conține cifra <code>1</code> de <code>3</code> ori, cifra <code>7</code> de <code>4</code> ori, cifra <code>9</code> de <code>2</code> ori. Frecvența maximă de apariție este <code>4</code>, corespunzătoare cifrei <code>7</code>.</p>",
+      "text": "diff.in1 9 1 7 7 9 7 7 1 9 1diff.out4ExplicațieC = 1, N = 9. Se rezolvă cerința 1. Șirul a=(1,7,7,9,7,7,1,9,1) conține cifra 1 de 3 ori, cifra 7 de 4 ori, cifra 9 de 2 ori. Frecvența maximă de apariție este 4, corespunzătoare cifrei 7."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>diff.in</code></p><pre>2 9\n1 7 7 9 7 7 1 9 1</pre><p><code>diff.out</code></p><pre>3</pre><h3>Explicație</h3><p><code>C = 2</code>, <code>N = 9</code>. Se rezolvă cerința <code>2</code>; diff-ul maxim al unei secvențe care începe de la poziția <code>1</code> este <code>3</code> și aparține secvenței: <br>\n<code>1 7 7 9 7 7</code>.</p>",
+      "text": "diff.in2 9 1 7 7 9 7 7 1 9 1diff.out3ExplicațieC = 2, N = 9. Se rezolvă cerința 2; diff-ul maxim al unei secvențe care începe de la poziția 1 este 3 și aparține secvenței: 1 7 7 9 7 7."
+    },
+    {
+      "title": "Exemplul 3:",
+      "html": "<p><code>diff.in</code></p><pre>3 10 \n9 7 7 9 7 7 9 7 7 9</pre><p><code>diff.out</code></p><pre>4</pre><h3>Explicație</h3><p><code>C = 3</code>, <code>N = 10</code>. Se rezolvă cerința <code>3</code>; diff-ul maxim este <code>4</code>, corespunzător secvenței: <code>7 7 9 7 7 9 7 7</code>.</p>",
+      "text": "diff.in3 10 9 7 7 9 7 7 9 7 7 9diff.out4ExplicațieC = 3, N = 10. Se rezolvă cerința 3; diff-ul maxim este 4, corespunzător secvenței: 7 7 9 7 7 9 7 7."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "C = 1, N = 9. Se rezolvă cerința 1. Șirul a=(1,7,7,9,7,7,1,9,1) conține cifra 1 de 3 ori, cifra 7 de 4 ori, cifra 9 de 2 ori. Frecvența maximă de apariție este 4, corespunzătoare cifrei 7."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "C = 2, N = 9. Se rezolvă cerința 2; diff-ul maxim al unei secvențe care începe de la poziția 1 este 3 și aparține secvenței: 1 7 7 9 7 7."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "C = 3, N = 10. Se rezolvă cerința 3; diff-ul maxim este 4, corespunzător secvenței: 7 7 9 7 7 9 7 7."
+    }
+  ],
+  "constraints": [
+    "C ∈ {1, 2, 3}",
+    "3 ≤ N ≤ 100.000",
+    "Se garantează că, pentru toate testele, în șir există cel puțin două cifre distincte.",
+    "Pentru 30 de puncte, C = 1",
+    "Pentru 30 de puncte, C = 2",
+    "Pentru 40 de puncte, C = 3"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qc634d59ce1.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "diff.in / diff.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "ONI 2025, clasa a 6-a",
+    "autor": "Dan Pracsiu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "author": "Dan Pracsiu",
+  "sourceAttribution": "ONI 2025, clasa a 6-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4822/diff"
+}

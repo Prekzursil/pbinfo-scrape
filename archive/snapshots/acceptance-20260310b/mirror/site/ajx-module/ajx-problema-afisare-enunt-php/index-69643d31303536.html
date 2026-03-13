@@ -1,0 +1,73 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1056"><article id="enunt">
+			<p>Se consideră un şir <code>A=(A</code><sub><code>1</code></sub><code>, A</code><sub><code>2</code></sub><code>, ..., A</code><sub><code>N</code></sub><code>)</code>, format din <code>N</code> numere naturale nenule. Două numere se consideră vecine dacă se află pe poziţii alăturate (<code>A</code><sub><code>i</code></sub> are ca vecini pe <code>A</code><sub><code>i-1</code></sub> şi <code>A</code><sub><code>i+1</code></sub>, pentru orice <code>1&lt;i&lt;N</code>, <code>A</code><sub><code>1</code></sub> are ca vecin doar pe <code>A</code><sub><code>2</code></sub>, iar <code>A</code><sub><code>N</code></sub> are ca vecin doar pe <code>A</code><sub><code>N-1</code></sub>).</p>
+
+<p>Dacă două elemente vecine <code>A</code><sub><code>i</code></sub>, <code>A</code><sub><code>i+1</code></sub> (<code>1≤i&lt;N</code>) au cel puţin o cifră comună, ele se pot unifica. Procedeul de unificare constă în eliminarea din numerele <code>A</code><sub><code>i</code></sub> şi <code>A</code><sub><code>i+1</code></sub> a tuturor cifrelor comune şi adăugarea prin alipirea numărului obţinut din <code>A</code><sub><code>i+1</code></sub> la numărul obţinut din <code>A</code><sub><code>i</code></sub>, formându-se astfel un nou număr. Numărul <code>A</code><sub><code>i</code></sub> va fi înlocuit cu noul număr, iar numărul <code>A</code><sub><code>i+1</code></sub> va fi eliminat din şir. </p>
+
+<p>De exemplu, numerele <code>A</code><sub><code>i</code></sub><code>=23814</code> şi <code>A</code><sub><code>i+1</code></sub><code>=40273</code> au cifrele <code>2</code>, <code>3</code>, <code>4</code> comune, după unificare obţinem <code>A</code><sub><code>i</code></sub><code>=817</code>, iar <code>A</code><sub><code>i+1</code></sub> este eliminat; observaţi că dacă după eliminarea cifrelor comune, numerele încep cu zerouri nesemnificative, acestea vor fi eliminate, apoi se realizează alipirea.</p>
+
+<p>Dacă în urma eliminării cifrelor comune, unul dintre numere nu mai are cifre, atunci numărul rezultat va avea cifrele rămase în celălalt. Dacă în urma eliminării cifrelor comune atât <code>A</code><sub><code>i</code></sub> cât şi <code>A</code><sub><code>i+1</code></sub> nu mai au cifre, atunci ambele numere vor fi eliminate din şir, fără a fi înlocuite cu o altă valoare.</p>
+
+<p>Ordinea în care se fac unificările în şir este importantă: la fiecare pas se alege prima pereche de elemente vecine <code>A</code><sub><code>i</code></sub> <code>A</code><sub><code>i+1</code></sub> care poate fi unificată, considerând şirul parcurs de la stânga la dreapta. (De exemplu, considerând <code>A</code><sub><code>i</code></sub><code>=123</code>, <code>A</code><sub><code>i+1</code></sub><code>=234</code>, <code>A</code><sub><code>i+2</code></sub><code>=235</code>, se unifică <code>A</code><sub><code>i</code></sub> cu <code>A</code><sub><code>i+1</code></sub> =&gt; <code>A</code><sub><code>i</code></sub><code>=14</code>, iar unificarea cu următorul număr nu mai este posibilă). </p>
+
+<h1>Cerinţă</h1>
+
+<p>Cunoscându-se şirul celor <code>N</code> numere naturale, să se determine:</p>
+
+<p>a) cifra care apare cel mai frecvent în scrierea tuturor celor <code>N</code> numere; dacă există mai multe cifre cu aceeaşi frecvenţă de apariţie maximă, se va reţine cea mai mică cifră.   <br>
+b) şirul obţinut prin efectuarea unui număr maxim de unificări, după regulile descrise în enunţ.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>unific.in</code> conține pe prima linie o valoare naturală <code>N</code>, iar pe următoarele <code>N</code> linii, în ordine, cele <code>N</code> numere naturale din şirul <code>A</code>, câte un număr pe o linie.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>unific.out</code> va conține pe prima linie un număr natural c reprezentând cifra care apare cel mai frecvent în scrierea celor <code>N</code> numere naturale. Pe cea de a doua linie un număr natural <code>Nr</code> reprezentând numărul de numere naturale rămase în şir după efectuarea unui număr maxim de unificări. Pe cea de a treia linie se vor scrie cele <code>Nr</code> numere naturale rămase, în ordinea din şir, separate prin câte un spaţiu.</p>
+
+<p>Dacă în urma procedeului de unificare, toate numerele vor fi eliminate, fişierul de ieşire va conţine o singură linie, pe care se va scrie cifra care apare cel mai frecvent în scrierea celor <code>N</code> numere naturale.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 100 000</code></li>
+	<li>Numerele din şirul iniţial, precum şi numerele obţinute în urma unificărilor, nu vor depăşi  <code>10</code><sup><code>18</code></sup></li>
+	<li>Pentru datele de test şirul obţinut în urma unificărilor este nevid.</li>
+	<li>Pentru 30% dintre teste <code>N ≤ 1000</code></li>
+	<li>Pentru 70% dintre teste numere naturale din şir au cifrele nenule.</li>
+	<li>Pentru determinarea corectă a primei cerinţe se acordă 10% din punctajul pe test. Punctajul integral se acordă pe ambele cerinţe rezolvate corect.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>unific.in</code></p>
+
+<pre>10
+6
+47
+67
+40
+123
+231
+1238
+331
+2035
+50007</pre>
+
+<p><code>unific.out</code></p>
+
+<pre>3
+2
+0 837</pre>
+
+<h1>Explicație</h1>
+
+<p>Cifra care apare cel mai frecvent este <code>3</code> (de <code>6</code> ori).</p>
+
+<p>Se unifică:  <code>47</code> cu <code>67  =&gt; 46</code>. Şirul rămas: <code>6 46 40 123 231 1238 331 2035 50007</code><br>
+Se unifică: <code>6</code> cu <code>46  =&gt; 4</code>.       Şirul rămas: <code>4 40 123 231 1238 331 2035 50007</code><br>
+Se unifică: <code>4</code> cu <code>40 =&gt; 0</code>.        Şirul rămas: <code>0 123 231 1238 331 2035 50007</code><br>
+Se unifică: <code>123</code> cu <code>231</code>, ambele numere rămân fără cifre, deci vor fi ambele eliminate. Şirul rămas: <code>0 1238 331 2035 50007</code><br>
+Se unifică: <code>1238</code> cu <code>331 =&gt; 28</code>.      Şirul rămas: <code>0 28 2035 50007</code><br>
+Se unifică: <code>28</code> cu <code>2035 =&gt; 835</code>.      Şirul rămas: <code>0 835 50007</code><br>
+Se unifică: <code>835</code> cu <code>50007 =&gt; 837</code>. Şirul rămas: <code>0 837</code></p>		</article>
+		</body></html>

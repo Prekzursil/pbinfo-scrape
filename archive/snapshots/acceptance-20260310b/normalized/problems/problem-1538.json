@@ -1,0 +1,303 @@
+{
+  "id": 1538,
+  "slug": "sudest",
+  "name": "SudEst",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1538/sudest",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 91,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=91"
+    },
+    {
+      "id": 115,
+      "name": "Diverse",
+      "slug": "diverse",
+      "href": "/?pagina=probleme-lista&tag=115"
+    }
+  ],
+  "tags": [
+    "Algoritmul lui Lee"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Scrieţi un program care să determine cantitatea maximă de cartofi pe care o poate culege robotul, în ipoteza în care Ion specifică manual, pentru fiecare comandă, direcţia urmată de robot. Se va determina şi traseul pe care se obţine la recolta maximă.</p>",
+      "text": "Scrieţi un program care să determine cantitatea maximă de cartofi pe care o poate culege robotul, în ipoteza în care Ion specifică manual, pentru fiecare comandă, direcţia urmată de robot. Se va determina şi traseul pe care se obţine la recolta maximă."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>sudest.in</code> are următoarea structură:</p><ul>\n\t<li>Pe linia <code>1</code> se află  numărul natural <code>N</code>, reprezentând  dimensiunea parcelei de teren.</li>\n\t<li>Pe următoarele <code>N</code> linii se află câte <code>N</code> numere naturale, separate prin spaţii, reprezentând cantitatea de cartofi din fiecare pătrat unitate.</li>\n\t<li>Pe linia <code>N+2</code> se află un număr natural <code>K</code> reprezentând numărul de comenzi aflate pe cartela magnetică.</li>\n\t<li>Pe linia <code>N+3</code> se află <code>K</code> numerele naturale <code>C</code><sub><code>1</code></sub>, …, <code>C</code><sub><code>k</code></sub>, separate prin spaţii, reprezentând numărul de paşi pe care trebuie să-i efectueze robotul la fiecare comandă.</li>\n</ul>",
+      "text": "Fișierul de intrare sudest.in are următoarea structură: Pe linia 1 se află numărul natural N, reprezentând dimensiunea parcelei de teren. Pe următoarele N linii se află câte N numere naturale, separate prin spaţii, reprezentând cantitatea de cartofi din fiecare pătrat unitate. Pe linia N+2 se află un număr natural K reprezentând numărul de comenzi aflate pe cartela magnetică. Pe linia N+3 se află K numerele naturale C1, …, Ck, separate prin spaţii, reprezentând numărul de paşi pe care trebuie să-i efectueze robotul la fiecare comandă."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>sudest.out</code> va conține pe prima linie cantitatea maximă de cartofi recoltată de robot. Pe următoarele <code>K+1</code> linii vor fi scrise, în ordine, coordonatele pătratelor unitate ce constituie traseul pentru care se obţine cantitate maximă de cartofi, câte un pătrat unitate pe o linie. Coordonatele scrise pe aceeaşi linie vor fi separate printr-un spaţiu. Primul pătrat de pe traseu va avea coordonatele <code>1 1</code>, iar ultimul va avea coordonatele <code>N N</code>. Dacă sunt mai multe trasee pe care se obţine o cantitate maximă de cartofi recoltată se va afişa unul dintre acestea.</p>",
+      "text": "Fișierul de ieșire sudest.out va conține pe prima linie cantitatea maximă de cartofi recoltată de robot. Pe următoarele K+1 linii vor fi scrise, în ordine, coordonatele pătratelor unitate ce constituie traseul pentru care se obţine cantitate maximă de cartofi, câte un pătrat unitate pe o linie. Coordonatele scrise pe aceeaşi linie vor fi separate printr-un spaţiu. Primul pătrat de pe traseu va avea coordonatele 1 1, iar ultimul va avea coordonatele N N. Dacă sunt mai multe trasee pe care se obţine o cantitate maximă de cartofi recoltată se va afişa unul dintre acestea."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>5 ≤ N ≤ 100</code></li>\n\t<li><code>2 ≤ K ≤ 2*N-2</code></li>\n\t<li><code>1 ≤ C</code><sub><code>1</code></sub>, …, <code>C</code><sub><code>k</code></sub><code> ≤ 10</code></li>\n\t<li>Cantitatea de cartofi dintr-un pătrat de teren este număr natural între <code>0</code> şi <code>100</code>.</li>\n\t<li>Pentru fiecare set de date de intrare se garantează că există cel puţin un traseu.</li>\n\t<li>Se consideră că robotul strânge recolta şi din pătratul de plecare <code>(1,1)</code> şi din cel de sosire <code>(N,N)</code>.</li>\n\t<li>Pentru determinarea corectă a cantităţii maxime recoltate se acordă <code>50%</code> din punctajul alocat testului respectiv; pentru cantitate maximă recoltată şi traseu corect se acordă <code>100%</code>.</li>\n</ul>",
+      "text": "5 ≤ N ≤ 100 2 ≤ K ≤ 2*N-2 1 ≤ C1, …, Ck ≤ 10 Cantitatea de cartofi dintr-un pătrat de teren este număr natural între 0 şi 100. Pentru fiecare set de date de intrare se garantează că există cel puţin un traseu. Se consideră că robotul strânge recolta şi din pătratul de plecare (1,1) şi din cel de sosire (N,N). Pentru determinarea corectă a cantităţii maxime recoltate se acordă 50% din punctajul alocat testului respectiv; pentru cantitate maximă recoltată şi traseu corect se acordă 100%."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>sudest.in</code></p><pre>6\n1 2 1 0 4 1\n1 3 3 5 1 1\n2 2 1 2 1 10\n4 5 3 9 2 6\n1 1 3 2 0 1\n10 2 4 6 5 10\n5\n2 2 1 4 1</pre><p><code>sudest.out</code></p><pre>29\n1  1\n3  1\n5  1\n6  1\n6  5\n6  6</pre><h3>Explicație</h3><p>Un alt traseu posibil este:</p><pre>1 1\n1 3\n1 5\n2 5\n6 5\n6 6</pre><p>dar costul sau este <code>1+1+4+1+5+10=22</code>.</p>",
+      "text": "sudest.in6 1 2 1 0 4 1 1 3 3 5 1 1 2 2 1 2 1 10 4 5 3 9 2 6 1 1 3 2 0 1 10 2 4 6 5 10 5 2 2 1 4 1sudest.out29 1 1 3 1 5 1 6 1 6 5 6 6ExplicațieUn alt traseu posibil este:1 1 1 3 1 5 2 5 6 5 6 6dar costul sau este 1+1+4+1+5+10=22."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Un alt traseu posibil este:"
+    }
+  ],
+  "constraints": [
+    "5 ≤ N ≤ 100",
+    "2 ≤ K ≤ 2*N-2",
+    "1 ≤ C1, …, Ck ≤ 10",
+    "Cantitatea de cartofi dintr-un pătrat de teren este număr natural între 0 şi 100.",
+    "Pentru fiecare set de date de intrare se garantează că există cel puţin un traseu.",
+    "Se consideră că robotul strânge recolta şi din pătratul de plecare (1,1) şi din cel de sosire (N,N).",
+    "Pentru determinarea corectă a cantităţii maxime recoltate se acordă 50% din punctajul alocat testului respectiv; pentru cantitate maximă recoltată şi traseu corect se acordă 100%."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q1999d22a68.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "10",
+    "intrare/ieșire": "sudest.in / sudest.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "OJI 2006, Clasa a X-a",
+    "autor": "-",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "sourceAttribution": "OJI 2006, Clasa a X-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1538/sudest"
+}

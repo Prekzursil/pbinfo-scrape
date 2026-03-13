@@ -1,0 +1,44 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3282"><article id="enunt">
+			<p>Fie un șir <code>a = a</code><sub><code>1</code></sub>, <code>a</code><sub><code>2</code></sub>, …, <code>a</code><sub><code>N</code></sub> de numere naturale, nu neapărat distincte, cuprinse între <code>1</code> și <code>N</code>. Fie de asemenea două numere naturale <code>x</code> și <code>y</code>. Se definește operația <code>transform(i)</code> astfel: se determină valoarea <code>w = 1 + (x * i + y * a</code><sub><code>i</code></sub><code>) mod N</code>, apoi toate elementele egale cu <code>a</code><sub><code>i</code></sub> din secvența <code>a</code><sub><code>i</code></sub>, <code>a</code><sub><code>i+1</code></sub>, …, <code>a</code><sub><code>N</code></sub> își modifică valoarea în <code>w</code>. De exemplu, pentru șirul <code>a=1, 7, 1, 7, 3, 4, 7</code>, <code>x = 4</code>, <code>y = 5</code>, operația <code>transform(4)</code> înseamnă că <code>w = 1+(4*4+5*7) mod 7 = 3</code>, deci șirul devine  <code>1</code>, <code>7</code>, <code>1</code>, <code>3</code>, <code>3</code>, <code>4</code>, <code>3</code> (toate elementele de la poziția <code>4</code> la <code>7</code> și egale cu <code>7</code> s-au modificat în <code>3</code>). După fiecare operație de tip transform se calculează suma elementelor șirului obținut.</p>
+
+<h1>Cerința</h1>
+
+<p>Să se determine suma maximă care s-a obținut în șirul <code>a</code> efectuând pe rând asupra șirului operațiile <code>transform(1)</code>, <code>transform(2)</code>, …, <code>transform(N)</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>transform.in</code> conține pe prima linie numerele naturale <code>N</code>, <code>x</code> și <code>y</code>. Pe linia a doua se găsesc, separate prin spațiu, elementele șirului <code>a</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>transform.out</code> va conține pe prima linie un singur număr natural reprezentând suma maximă obținută.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>3 ≤ N ≤ 256.000</code></li>
+	<li><code>1 ≤ x, y ≤ N</code></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>transform.in</code></p>
+
+<pre>7 4 5
+1 7 1 7 3 4 7</pre>
+
+<p><code>transform.out</code></p>
+
+<pre>35</pre>
+
+<h3>Explicație</h3>
+
+<p>După <code>transform(1)</code>, în care w = 3, șirul devine <code>3</code>, <code>7</code>, <code>3</code>, <code>7</code>, <code>3</code>, <code>4</code>, <code>7</code> care are suma <code>34</code>.<br>
+După <code>transform(2)</code>, în care <code>w = 2</code>, șirul devine <code>3</code>, <code>2</code>, <code>3</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>2</code> care are suma <code>19</code>.<br>
+După <code>transform(3)</code>, în care <code>w = 7</code>, șirul devine <code>3</code>, <code>2</code>, <code>7</code>, <code>2</code>, <code>7</code>, <code>4</code>, <code>2</code> care are suma <code>27</code>.<br>
+După <code>transform(4)</code>, în care <code>w = 6</code>, șirul devine <code>3</code>, <code>2</code>, <code>7</code>, <code>6</code>, <code>7</code>, <code>4</code>, <code>6</code> care are suma <code>35</code>.<br>
+După <code>transform(5)</code>, în care <code>w = 7</code>, șirul devine <code>3</code>, <code>2</code>, <code>7</code>, <code>6</code>, <code>7</code>, <code>4</code>, <code>6</code> care are suma <code>35</code>.<br>
+După <code>transform(6)</code>, în care <code>w = 3</code>, șirul devine <code>3</code>, <code>2</code>, <code>7</code>, <code>6</code>, <code>7</code>, <code>3</code>, <code>6</code> care are suma <code>34</code>.<br>
+După <code>transform(7)</code>, în care <code>w = 3</code>, șirul devine <code>3</code>, <code>2</code>, <code>7</code>, <code>6</code>, <code>7</code>, <code>3</code>, <code>3</code> care are suma <code>31</code>.<br>
+Suma maximă care s-a obținut este <code>35</code>.</p>		</article>
+		</body></html>

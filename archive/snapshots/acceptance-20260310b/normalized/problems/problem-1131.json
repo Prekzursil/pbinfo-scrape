@@ -1,0 +1,317 @@
+{
+  "id": 1131,
+  "slug": "arc",
+  "name": "Arc",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1131/arc",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 21,
+      "name": "Probleme cu secvențe",
+      "slug": "probleme-cu-secven-e",
+      "href": "/?pagina=probleme-lista&tag=21"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerinţă",
+      "html": "<p>Cunoscând numărul de bile și culorile fiecărei bile de pe ecran se cere să se determine:</p><p><strong>1.</strong> numărul de secvențe de bile care se aflau inițial pe ecran;<br>\n<strong>2.</strong> numărul de bile care rămân neeliminate de pe ecran și culorile bilelor rămase în ordine pe ecran la finalul jocului.</p>",
+      "text": "Cunoscând numărul de bile și culorile fiecărei bile de pe ecran se cere să se determine:1. numărul de secvențe de bile care se aflau inițial pe ecran; 2. numărul de bile care rămân neeliminate de pe ecran și culorile bilelor rămase în ordine pe ecran la finalul jocului."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>arc.in</code> conține pe prima linie un număr natural <code>V</code>. Pentru toate testele de intrare, numărul <code>V</code> poate avea doar valoarea <code>1</code> sau <code>2</code>.</p><p>A doua linie conține un număr natural <code>n</code> reprezentând numărul de bile, iar a treia linie conține <code>n</code> numere naturale <code>c</code><sub><code>1</code></sub>, <code>c</code><sub><code>2</code></sub>, …, <code>c</code><sub><code>n</code></sub>  separate prin câte un spațiu, reprezentând culorile celor <code>n</code> bile de pe ecran.</p>",
+      "text": "Fișierul de intrare arc.in conține pe prima linie un număr natural V. Pentru toate testele de intrare, numărul V poate avea doar valoarea 1 sau 2.A doua linie conține un număr natural n reprezentând numărul de bile, iar a treia linie conține n numere naturale c1, c2, …, cn separate prin câte un spațiu, reprezentând culorile celor n bile de pe ecran."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Dacă valoarea lui <code>V</code> este <code>1</code>,  se va rezolva numai punctul <code>1</code> din cerință. </p><p>În acest caz, în fişierul de ieşire <code>arc.out</code> se va scrie un singur număr natural <code>n</code><sub><code>1</code></sub>, reprezentând numărul de secvențe de bile aflate inițial pe ecran. </p><p>Dacă valoarea lui <code>V</code> este <code>2</code>, se va rezolva numai punctul <code>2</code> din cerință.</p><p>În acest caz, în fişierul de ieşire <code>arc.out</code> se va scrie pe prima linie un singur număr natural <code>n</code><sub><code>2</code></sub>, reprezentând numărul de bile care rămân neeliminate de pe ecran la finalul jocului, iar pe următoarele <code>n</code><sub><code>2</code></sub> linii se va scrie câte un număr natural reprezentând în ordine culorile bilelor rămase neeliminate la finalul jocului.</p><p>Dacă la finalul jocului nu mai rămâne nici o bilă neeliminată, fișierul de ieșire va conține pe prima sa linie valoarea <code>0</code>.</p>",
+      "text": "Dacă valoarea lui V este 1, se va rezolva numai punctul 1 din cerință. În acest caz, în fişierul de ieşire arc.out se va scrie un singur număr natural n1, reprezentând numărul de secvențe de bile aflate inițial pe ecran. Dacă valoarea lui V este 2, se va rezolva numai punctul 2 din cerință.În acest caz, în fişierul de ieşire arc.out se va scrie pe prima linie un singur număr natural n2, reprezentând numărul de bile care rămân neeliminate de pe ecran la finalul jocului, iar pe următoarele n2 linii se va scrie câte un număr natural reprezentând în ordine culorile bilelor rămase neeliminate la finalul jocului.Dacă la finalul jocului nu mai rămâne nici o bilă neeliminată, fișierul de ieșire va conține pe prima sa linie valoarea 0."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ n ≤ 10 000</code></li>\n\t<li><code>1 ≤ c</code><sub><code>1</code></sub>, <code>c</code><sub><code>2</code></sub>, …, <code>c</code><sub><code>n</code></sub><code> ≤ 100 000</code></li>\n\t<li>Pentru rezolvarea corectă a primei cerinţe se acordă 20 de puncte, iar pentru cerința a doua se acordă 80 de puncte.</li>\n</ul>",
+      "text": "1 ≤ n ≤ 10 000 1 ≤ c1, c2, …, cn ≤ 100 000 Pentru rezolvarea corectă a primei cerinţe se acordă 20 de puncte, iar pentru cerința a doua se acordă 80 de puncte."
+    },
+    {
+      "title": "Exemplul 1",
+      "html": "<p><code>arc.in</code></p><pre>1\n18\n5 1 3 3 2 2 2 2 3 1 1 5 6 4 4 4 4 7</pre><p><code>arc.out</code></p><pre>10</pre>",
+      "text": "arc.in1 18 5 1 3 3 2 2 2 2 3 1 1 5 6 4 4 4 4 7arc.out10"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p><code>V = 1</code></p><p><strong>Atenție!</strong> Pentru acest test se rezolvă doar cerința 1.</p><p>Secvențele sunt <code>(5)</code>, <code>(1)</code>, <code>(3, 3)</code>, <code>(2,2,2,2)</code>, <code>(3)</code>, <code>(1,1)</code>, <code>(5)</code>, <code>(6)</code>, <code>(4,4,4,4)</code>, <code>(7)</code>.</p>",
+      "text": "V = 1Atenție! Pentru acest test se rezolvă doar cerința 1.Secvențele sunt (5), (1), (3, 3), (2,2,2,2), (3), (1,1), (5), (6), (4,4,4,4), (7)."
+    },
+    {
+      "title": "Exemplul 2",
+      "html": "<p><code>arc.in</code></p><pre>2\n18\n5 1 3 3 2 2 2 2 3 1 1 5 6 4 4 4 4 7</pre><p><code>arc.out</code></p><pre>4\n5\n5\n6\n7</pre>",
+      "text": "arc.in2 18 5 1 3 3 2 2 2 2 3 1 1 5 6 4 4 4 4 7arc.out4 5 5 6 7"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p><code>V = 2</code></p><p><strong>Atenție!</strong> Pentru acest test se rezolvă doar cerința 2.</p>",
+      "text": "V = 2Atenție! Pentru acest test se rezolvă doar cerința 2."
+    },
+    {
+      "title": "Exemplul 3",
+      "html": "<p><code>arc.in</code></p><pre>2\n15\n1 2 2 2 2 1 1 3 3 3 4 4 4 4 3</pre><p><code>arc.out</code></p><pre>0</pre>",
+      "text": "arc.in2 15 1 2 2 2 2 1 1 3 3 3 4 4 4 4 3arc.out0"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p><code>V = 2</code></p><p><strong>Atenție!</strong> Pentru acest test se rezolvă doar cerința 2.</p>",
+      "text": "V = 2Atenție! Pentru acest test se rezolvă doar cerința 2."
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "1 ≤ n ≤ 10 000",
+    "1 ≤ c1, c2, …, cn ≤ 100 000",
+    "Pentru rezolvarea corectă a primei cerinţe se acordă 20 de puncte, iar pentru cerința a doua se acordă 80 de puncte."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q259b586f37.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "9",
+    "intrare/ieșire": "arc.in / arc.out",
+    "limită timp": "0.2 secunde",
+    "limită memorie": "4 MB / 4 MB",
+    "sursa problemei": "OJI 2015, Clasa a IX-a",
+    "autor": "Carmen Popescu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.2,
+  "memoryLimitMb": 4,
+  "author": "Carmen Popescu",
+  "sourceAttribution": "OJI 2015, Clasa a IX-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1131/arc"
+}

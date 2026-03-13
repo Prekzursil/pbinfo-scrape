@@ -1,0 +1,71 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=965"><article id="enunt">
+			<p>Rareş şi Bogdan vor să facă mişcare în aer liber aşa că s-au gândit la un nou joc. <br>
+Pe terenul de fotbal, ei au desenat două cercuri concentrice (cu acelaşi centru) şi au împărţit pista cuprinsă între cele două cercuri în <code>n</code> sectoare congruente, ca în desenul de mai jos unde <code>n=16</code>. </p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-probleme-950-1000-joc3-enunt-1-png.png"></p>
+
+<p>Ei au etichetat cele n sectoare cu numerele distincte de la <code>1</code> la <code>n</code>, în ordinea acelor de ceasornic. Au stabilit ca jocul să se desfăşoare astfel:</p>
+
+<ul>
+	<li>Se vor aşeza amândoi în sectorul numerotat cu <code>1</code>, spate în spate.</li>
+	<li>Prin sărituri executate simultan în anumite sectoare, copii se vor deplasa pe pistă în sensuri contrare. Bogdan se va deplasa în sensul acelor de ceasornic iar Rareş în sensul contrar. Copii vor executa un număr egal de sărituri.</li>
+	<li>O săritură a lui Bogdan are efect deplasarea acestuia din sectorul curent, în sensul acelor de ceasornic,  direct în cel de-al <code>x</code>-lea sector de pe pistă. De exemplu, dacă <code>n=16</code> şi <code>x=2</code> atunci, pornind din sectorul <code>1</code>, Bogdan se va deplasa sărind succesiv, în această ordine, în sectoarele etichetate cu: <code>3,5,7,9,...</code></li>
+	<li>O săritură a lui Rareş are efect deplasarea acestuia din sectorul curent, în sens contrar acelor de ceasornic,  direct în cel de-al <code>y</code>-lea sector de pe pistă. De exemplu, dacă <code>n=16</code> şi <code>y=3</code> atunci, pornind din sectorul <code>1</code>, Rareş se va deplasa sărind succesiv, în această ordine,  în sectoarele: <code>14,11,8,5,...</code></li>
+	<li>Jocul se termină când cei doi copii ajung în urma săriturilor într-un acelaşi sector de pe pistă sau dacă unul din cei doi copii ajunge pentru a doua oară într-un acelaşi sector.</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care să citească cele trei numere naturale nenule <code>n</code>, <code>x</code> şi <code>y</code>, şi apoi să determine:<br>
+a) numărul <code>t</code> al sectoarelor de pe pistă prin care nu trece niciunul din cei doi copii în urma săriturilor executate până la terminarea jocului;<br>
+b) numărul <code>s</code> de sărituri executate de fiecare copil până la terminarea jocului;<br>
+c) etichetele <code>b</code> şi <code>r</code> ale sectoarelor în care ajung cei doi copii la terminarea jocului (Bogdan ajunge la finalul jocului în sectorul cu eticheta <code>b</code>, iar Rareş în cel cu eticheta <code>r</code>).   </p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>joc3.in</code> conține conţine pe prima linie trei numere naturale <code>n</code>, <code>x</code> şi <code>y</code>, separate prin câte un spaţiu, cu semnificaţia din enunţ.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>joc3.out</code> va conține pe prima linie cele patru numere naturale determinate de program: <code>t</code>, <code>s</code>, <code>b</code> şi <code>r</code>, separate prin câte un spaţiu, în această ordine, cu semnificaţia din enunţ.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>20 ≤ n&nbsp;≤ 30000</code></li>
+	<li><code>1 ≤ x &lt; n; 1 ≤ y &lt; n</code></li>
+	<li>pentru rezolvarea corectă a primei cerinţe se acordă <code>20%</code> din punctaj, pentru rezolvarea corectă a celei de a doua cerinţe <code>40%</code> din punctaj şi pentru rezolvarea corectă a celei de a treia cerinţe <code>40%</code> din punctaj.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>joc3.in</code></p>
+
+<pre>16 2 3</pre>
+
+<p><code>joc3.out</code></p>
+
+<pre>4 8 1 9</pre>
+
+<h1>Explicație</h1>
+
+<p>Cei doi copii, executând simultan sărituri, trec până la terminarea jocului prin sectoarele:<br>
+<img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-probleme-950-1000-joc3-enunt-2-png.png"><br>
+Jocul se termină după <code>s=8</code> sărituri deoarece Bodgan ajunge din nou în sectorul cu eticheta cu <code>b=1</code>. La finalul jocului Rareş se află în sectorul cu eticheta cu <code>r=9</code>. Cei doi copii nu au trecut prin <code>t=4</code> sectoare ale căror etichete sunt: <code>4,6,10,16</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>joc3.in</code></p>
+
+<pre>16 6 2</pre>
+
+<p><code>joc3.out</code></p>
+
+<pre>12 2 13 13</pre>
+
+<h1>Explicație</h1>
+
+<p>Cei doi copii, executând simultan  sărituri, trec până la terminarea jocului prin sectoarele:  <br>
+<img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-probleme-950-1000-joc3-enunt-3-png.png"><br>
+Jocul se termină după <code>s=2</code> sărituri deoarece Bodgan şi Rareş ajung amândoi în sectorul cu eticheta cu <code>b=r=13</code>. Cei doi copii nu au trecut prin <code>t=12</code> sectoare ale căror etichete sunt: <code>2,3,4,5,6,8,9,10,11,12,14,16</code>.</p>		</article>
+		</body></html>

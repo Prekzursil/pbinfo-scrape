@@ -1,0 +1,326 @@
+{
+  "id": 4402,
+  "slug": "ciocolata1",
+  "name": "ciocolata1",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4402/ciocolata1",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 9,
+      "name": "Parcurgerea vectorilor",
+      "slug": "parcurgerea-vectorilor",
+      "href": "/?pagina=probleme-lista&tag=9"
+    }
+  ],
+  "tags": [
+    "Sume parțiale"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Determinați și afișați:<br>\n1. cel mai des întâlnit gramaj în șirul de tablete așezate inițial pe poliță, iar dacă sunt mai multe gramaje care apar de un număr maxim de ori, se alege cel mai mic dintre acestea;<br>\n2. diferența minimă dintre cantitatea totală de ciocolată consumată de Irina și cantitatea totală de ciocolată consumată de Mihaela.</p>",
+      "text": "Determinați și afișați: 1. cel mai des întâlnit gramaj în șirul de tablete așezate inițial pe poliță, iar dacă sunt mai multe gramaje care apar de un număr maxim de ori, se alege cel mai mic dintre acestea; 2. diferența minimă dintre cantitatea totală de ciocolată consumată de Irina și cantitatea totală de ciocolată consumată de Mihaela."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie din fișierul <code>ciocolata.in</code> se găsește numărul <code>C</code>, reprezentând cerința ce trebuie rezolvată (<code>1</code> sau <code>2</code>), urmat de numărul <code>N</code>, cu semnificația din enunț, iar pe a doua linie <code>N</code> numere naturale, reprezentând gramajele celor <code>N</code> tablete de ciocolată, în ordinea numerotării lor. Numerele aflate pe aceeași linie a fișierului sunt separate prin câte un spațiu.</p>",
+      "text": "Pe prima linie din fișierul ciocolata.in se găsește numărul C, reprezentând cerința ce trebuie rezolvată (1 sau 2), urmat de numărul N, cu semnificația din enunț, iar pe a doua linie N numere naturale, reprezentând gramajele celor N tablete de ciocolată, în ordinea numerotării lor. Numerele aflate pe aceeași linie a fișierului sunt separate prin câte un spațiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Pe prima linie a fișierului de ieșire <code>ciocolata.out</code> se va afla un singur număr reprezentând gramajul determinat la cerința <code>1</code> (dacă <code>C = 1</code>), respectiv, diferența minimă determinată la cerința <code>2</code> (dacă <code>C = 2</code>).</p>",
+      "text": "Pe prima linie a fișierului de ieșire ciocolata.out se va afla un singur număr reprezentând gramajul determinat la cerința 1 (dacă C = 1), respectiv, diferența minimă determinată la cerința 2 (dacă C = 2)."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>C ∈ {1, 2}</code></li>\n\t<li><code>1 ≤ N ≤ 100.000</code></li>\n\t<li>gramajul fiecărei tablete este un număr natural nenul mai mic sau egal cu <code>10.000</code></li>\n\t<li>se garantează că există întodeauna soluție.</li>\n\t<li>Pentru 30 de puncte, <code>C = 1</code></li>\n\t<li>Pentru 5 de puncte, <code>C = 2</code> și <code>N = 2</code></li>\n\t<li>Pentru 10 de puncte, <code>C = 2</code> și <code>1 ≤ N ≤ 100</code></li>\n\t<li>Pentru 25 de puncte, <code>C = 2</code> și <code>1 ≤ N ≤ 1000</code></li>\n\t<li>Pentru 30 de puncte, <code>C = 2</code>, fără restricții suplimentare</li>\n</ul>",
+      "text": "C ∈ {1, 2} 1 ≤ N ≤ 100.000 gramajul fiecărei tablete este un număr natural nenul mai mic sau egal cu 10.000 se garantează că există întodeauna soluție. Pentru 30 de puncte, C = 1 Pentru 5 de puncte, C = 2 și N = 2 Pentru 10 de puncte, C = 2 și 1 ≤ N ≤ 100 Pentru 25 de puncte, C = 2 și 1 ≤ N ≤ 1000 Pentru 30 de puncte, C = 2, fără restricții suplimentare"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>ciocolata.in</code></p><pre>1 6\n1 4 3 3 5 4</pre><p><code>ciocolata.out</code></p><pre>3</pre><h3>Explicație</h3><p><code>C = 1</code>, <code>N = 6</code>, iar cele mai frecvente gramaje de ciocolată dintre cele <code>6</code> sunt <code>3</code> și <code>4</code>, fiecare apărând de câte două ori. Se va alege gramajul <code>3</code>.</p>",
+      "text": "ciocolata.in1 6 1 4 3 3 5 4ciocolata.out3ExplicațieC = 1, N = 6, iar cele mai frecvente gramaje de ciocolată dintre cele 6 sunt 3 și 4, fiecare apărând de câte două ori. Se va alege gramajul 3."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>ciocolata.in</code></p><pre>2 5\n14 4 25 2 9</pre><p><code>ciocolata.out</code></p><pre>3</pre><h3>Explicație</h3><p><code>C = 2</code>, <code>N = 5</code>, iar Irina a consumat prima tabletă de ciocolată (în cantitate totală<br>\nde <code>14</code> grame), iar Mihaela ultimele două tablete (în cantitate totală de <code>11</code> grame),<br>\ndeci diferența de cantitate este de <code>3</code> grame.</p>",
+      "text": "ciocolata.in2 5 14 4 25 2 9ciocolata.out3ExplicațieC = 2, N = 5, iar Irina a consumat prima tabletă de ciocolată (în cantitate totală de 14 grame), iar Mihaela ultimele două tablete (în cantitate totală de 11 grame), deci diferența de cantitate este de 3 grame."
+    },
+    {
+      "title": "Exemplul 3:",
+      "html": "<p><code>ciocolata.in</code></p><pre>2 11\n3 7 3 12 4 9 4 2 6 5 17</pre><p><code>ciocolata.out</code></p><pre>1</pre><h3>Explicație</h3><p><code>C = 2</code>, <code>N = 11</code>, Irina va consuma primele cinci tablete de ciocolată (în cantitate totală de <code>29</code> grame), iar Mihaela ultimele trei tablete (în cantitate totală de <code>28</code> grame).</p>",
+      "text": "ciocolata.in2 11 3 7 3 12 4 9 4 2 6 5 17ciocolata.out1ExplicațieC = 2, N = 11, Irina va consuma primele cinci tablete de ciocolată (în cantitate totală de 29 grame), iar Mihaela ultimele trei tablete (în cantitate totală de 28 grame)."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "C = 1, N = 6, iar cele mai frecvente gramaje de ciocolată dintre cele 6 sunt 3 și 4, fiecare apărând de câte două ori. Se va alege gramajul 3."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "C = 2, N = 5, iar Irina a consumat prima tabletă de ciocolată (în cantitate totală de 14 grame), iar Mihaela ultimele două tablete (în cantitate totală de 11 grame), deci diferența de cantitate este de 3 grame."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "C = 2, N = 11, Irina va consuma primele cinci tablete de ciocolată (în cantitate totală de 29 grame), iar Mihaela ultimele trei tablete (în cantitate totală de 28 grame)."
+    }
+  ],
+  "constraints": [
+    "C ∈ {1, 2}",
+    "1 ≤ N ≤ 100.000",
+    "gramajul fiecărei tablete este un număr natural nenul mai mic sau egal cu 10.000",
+    "se garantează că există întodeauna soluție.",
+    "Pentru 30 de puncte, C = 1",
+    "Pentru 5 de puncte, C = 2 și N = 2",
+    "Pentru 10 de puncte, C = 2 și 1 ≤ N ≤ 100",
+    "Pentru 25 de puncte, C = 2 și 1 ≤ N ≤ 1000",
+    "Pentru 30 de puncte, C = 2, fără restricții suplimentare"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q6379052c97.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "ciocolata.in / ciocolata.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "OJI 2023, clasa a VI-a",
+    "autor": "Bogdan-Vlad Mihai",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "author": "Bogdan-Vlad Mihai",
+  "sourceAttribution": "OJI 2023, clasa a VI-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4402/ciocolata1"
+}

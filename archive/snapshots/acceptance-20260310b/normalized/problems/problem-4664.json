@@ -1,0 +1,313 @@
+{
+  "id": 4664,
+  "slug": "detonator",
+  "name": "detonator",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4664/detonator",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 25,
+      "name": "Metoda Greedy",
+      "slug": "metoda-greedy",
+      "href": "/?pagina=probleme-lista&tag=25"
+    },
+    {
+      "id": 24,
+      "name": "Probleme diverse cu metoda Greedy",
+      "slug": "probleme-diverse-cu-metoda-greedy",
+      "href": "/?pagina=probleme-lista&tag=24"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Pentru <code>Q</code> teste, date fiind <code>N</code> și valorile <code>T[i, j]</code> pentru <code>1 ≤ j ≤ i ≤ N</code>, se cere numărul <code>X</code>.</p>",
+      "text": "Pentru Q teste, date fiind N și valorile T[i, j] pentru 1 ≤ j ≤ i ≤ N, se cere numărul X."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Prima linie a fişierului de intrare <code>detonator.in</code> conţine <code>Q</code>, reprezentând numărul de teste. Urmează descrierea celor <code>Q</code> teste, fiecare test fiind descris după cum urmează. Prima linie conține numărul întreg <code>N</code>. Următoarele <code>N</code> linii, numerotate în cadrul testului de la <code>1</code> la <code>N</code>, conțin numere întregi astfel încât al <code>j</code>-lea număr de pe linia <code>i</code> este <code>T[i, j]</code>. Observați că linia <code>i</code> conține <code>i</code> numere.</p>",
+      "text": "Prima linie a fişierului de intrare detonator.in conţine Q, reprezentând numărul de teste. Urmează descrierea celor Q teste, fiecare test fiind descris după cum urmează. Prima linie conține numărul întreg N. Următoarele N linii, numerotate în cadrul testului de la 1 la N, conțin numere întregi astfel încât al j-lea număr de pe linia i este T[i, j]. Observați că linia i conține i numere."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>detonator.out</code> trebuie să conțină <code>Q</code> linii, reprezentând numărul <code>X</code> pentru fiecare test dat.</p>",
+      "text": "Fișierul de ieșire detonator.out trebuie să conțină Q linii, reprezentând numărul X pentru fiecare test dat."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ Q ≤ 5</code></li>\n\t<li><code>1 ≤ N ≤ 1000</code></li>\n\t<li><code>1 ≤ T[i, j] ≤ 1.000.000.000</code> pentru <code>1 ≤ j ≤ i ≤ N</code></li>\n\t<li>Pentru 7 puncte, Valorile <code>T[i, j]</code> pentru <code>1 ≤ j ≤ i ≤ N</code> sunt egale (toate bombele sunt programate să explodeze în același timp)</li>\n\t<li>Pentru 13 puncte, <code>N ≤ 5</code>, <code>|X| ≤ 10</code></li>\n\t<li>Pentru 9 puncte, <code>N ≤ 5</code></li>\n\t<li>Pentru 14 puncte, <code>N ≤ 50</code>, <code>|X| ≤ 10</code> si <code>T[i, j] ≥ max{T[i + 1, j], T[i + 1, j + 1]}</code> pentru <code>1 ≤ j ≤ i &lt; N</code></li>\n\t<li>Pentru 13 puncte, <code>N ≤ 50</code>, <code>|X| ≤ 10</code></li>\n\t<li>Pentru 2 puncte, <code>N ≤ 50</code></li>\n\t<li>Pentru 9 puncte, <code>N ≤ 200</code>, <code>|X| ≤ 10</code></li>\n\t<li>Pentru 2 puncte, <code>N ≤ 200</code></li>\n\t<li>Pentru 19 puncte, <code>N ≤ 500</code></li>\n\t<li>Pentru 12 puncte, fără restricţii suplimentare.</li>\n</ul>",
+      "text": "1 ≤ Q ≤ 5 1 ≤ N ≤ 1000 1 ≤ T[i, j] ≤ 1.000.000.000 pentru 1 ≤ j ≤ i ≤ N Pentru 7 puncte, Valorile T[i, j] pentru 1 ≤ j ≤ i ≤ N sunt egale (toate bombele sunt programate să explodeze în același timp) Pentru 13 puncte, N ≤ 5, |X| ≤ 10 Pentru 9 puncte, N ≤ 5 Pentru 14 puncte, N ≤ 50, |X| ≤ 10 si T[i, j] ≥ max{T[i + 1, j], T[i + 1, j + 1]} pentru 1 ≤ j ≤ i < N Pentru 13 puncte, N ≤ 50, |X| ≤ 10 Pentru 2 puncte, N ≤ 50 Pentru 9 puncte, N ≤ 200, |X| ≤ 10 Pentru 2 puncte, N ≤ 200 Pentru 19 puncte, N ≤ 500 Pentru 12 puncte, fără restricţii suplimentare."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>detonator.in</code></p><pre>4\n2\n10\n10 10\n4\n10\n7 9\n4 6 8\n1 3 2 5\n3\n9\n9 9\n1 1 1\n3\n6\n5 3\n4 4 4</pre><p><code>detonator.out</code></p><pre>7\n0\n-2\n0</pre><h3>Explicație</h3><p>Primul test are <code>N = 2</code>, iar cele <code>N • (N + 1) / 2 = 3</code> bombe toate explodează după <code>10</code> secunde. Astfel, Roman poate aștepta maxim <code>7</code> secunde după care să înceapă procesul, dezamorsând cele trei bombe după <code>8</code>, <code>9</code> și respectiv <code>10</code> secunde.<br>\nAl doilea test este ilustrat în figura de mai sus. În acest caz, Roman trebuie să înceapă dezamorsarea imediat, deoarece bomba <code>B_{4, 1}</code> ar exploda după o secundă. Singura ordine de dezamorsare validă este dată de valorile <code>B_{i, j}</code> în ordinea <code>1, 2, ..., 10</code>.<br>\nAl treilea test are trei bombe ce explodează imediat, așa că Roman ar fi trebuit să ajungă cu 2 secunde mai devreme la dispozitiv.</p>",
+      "text": "detonator.in4 2 10 10 10 4 10 7 9 4 6 8 1 3 2 5 3 9 9 9 1 1 1 3 6 5 3 4 4 4detonator.out7 0 -2 0ExplicațiePrimul test are N = 2, iar cele N • (N + 1) / 2 = 3 bombe toate explodează după 10 secunde. Astfel, Roman poate aștepta maxim 7 secunde după care să înceapă procesul, dezamorsând cele trei bombe după 8, 9 și respectiv 10 secunde. Al doilea test este ilustrat în figura de mai sus. În acest caz, Roman trebuie să înceapă dezamorsarea imediat, deoarece bomba B_{4, 1} ar exploda după o secundă. Singura ordine de dezamorsare validă este dată de valorile B_{i, j} în ordinea 1, 2, ..., 10. Al treilea test are trei bombe ce explodează imediat, așa că Roman ar fi trebuit să ajungă cu 2 secunde mai devreme la dispozitiv."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Primul test are N = 2, iar cele N • (N + 1) / 2 = 3 bombe toate explodează după 10 secunde. Astfel, Roman poate aștepta maxim 7 secunde după care să înceapă procesul, dezamorsând cele trei bombe după 8, 9 și respectiv 10 secunde. Al doilea test este ilustrat în figura de mai sus. În acest caz, Roman trebuie să înceapă dezamorsarea imediat, deoarece bomba B_{4, 1} ar exploda după o secundă. Singura ordine de dezamorsare validă este dată de valorile B_{i, j} în ordinea 1, 2, ..., 10. Al treilea test are trei bombe ce explodează imediat, așa că Roman ar fi trebuit să ajungă cu 2 secunde mai devreme la dispozitiv."
+    }
+  ],
+  "constraints": [
+    "1 ≤ Q ≤ 5",
+    "1 ≤ N ≤ 1000",
+    "1 ≤ T[i, j] ≤ 1.000.000.000 pentru 1 ≤ j ≤ i ≤ N",
+    "Pentru 7 puncte, Valorile T[i, j] pentru 1 ≤ j ≤ i ≤ N sunt egale (toate bombele sunt programate să explodeze în același timp)",
+    "Pentru 13 puncte, N ≤ 5, |X| ≤ 10",
+    "Pentru 9 puncte, N ≤ 5",
+    "Pentru 14 puncte, N ≤ 50, |X| ≤ 10 si T[i, j] ≥ max{T[i + 1, j], T[i + 1, j + 1]} pentru 1 ≤ j ≤ i < N",
+    "Pentru 13 puncte, N ≤ 50, |X| ≤ 10",
+    "Pentru 2 puncte, N ≤ 50",
+    "Pentru 9 puncte, N ≤ 200, |X| ≤ 10",
+    "Pentru 2 puncte, N ≤ 200",
+    "Pentru 19 puncte, N ≤ 500",
+    "Pentru 12 puncte, fără restricţii suplimentare."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qe7ebf8a996.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/detonator_001.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-detonator-001-png.png",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "11",
+    "intrare/ieșire": "detonator.in / detonator.out",
+    "limită timp": "1.6 secunde",
+    "limită memorie": "128 MB / 32 MB",
+    "sursa problemei": "ONI 2024, clasele 11-12",
+    "autor": "Andrei Costin Constantinescu",
+    "dificultate": "concurs"
+  },
+  "timeLimitSeconds": 1.6,
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "memoryLimitMb": 128,
+  "author": "Andrei Costin Constantinescu",
+  "sourceAttribution": "ONI 2024, clasele 11-12",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4664/detonator"
+}

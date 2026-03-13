@@ -1,0 +1,72 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1976"><article id="enunt">
+			<p>Definim recursiv <em>nivelul unui nod</em> într-un arbore cu rădăcină astfel:</p>
+
+<ul>
+	<li>nivelul rădăcinii este <code>0</code></li>
+	<li>nivelul fiilor unui nod cu adâncimea <code>H</code> este <code>H+1</code></li>
+</ul>
+
+<p>Fie <code>S(R,H)</code> numărul de noduri din subarborele cu rădăcina în <code>R</code> și care au adâncimea <code>H</code>. Subarborele nodului <code>R</code> îl include și pe el însuși. Doi arbori cu rădăcinile <code>R</code> și <code>R’</code> sunt similari numai dacă <code>S(R,H)</code> este egal cu <code>S(R’,H)</code>, pentru oricare număr natural <code>H</code>.</p>
+
+
+<h1>Cerința</h1>
+
+<p>Se consideră un arbore cu <code>N</code> noduri și rădăcina în nodul <code>1</code>. Nodurile sunt numerotate de la <code>1</code> la <code>N</code>. <br>
+Fie <code>TX</code> = subarborele cu rădăcina în nodul <code>X</code>. Se cere să se calculeze numărul de perechi <code>(X,Y)</code> astfel încât subarborii <code>TX</code> și <code>TY</code> sunt similari și <code>X&lt;Y</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>srh.in</code> conține pe prima linie un număr natural <code>N</code>, reprezentând numărul de noduri al arborelui. Următoarele <code>N-1</code> linii care conțin muchile arborelui: pe linia <code>i+1</code> se găsesc două numere <code>a</code><sub><code>i</code></sub> și <code>b</code><sub><code>i</code></sub>, care înseamnă că <code>a</code><sub><code>i</code></sub> este părintele lui <code>b</code><sub><code>i</code></sub>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>srh.out</code> conține o singură linie pe care se află numărul de perechi de noduri <code>(X, Y)</code> astfel încât subarborele cu rădăcina în nodul <code>X</code> să fie similar cu subarborele cu rădăcina în nodul <code>Y</code> și <code>(X &lt; Y)</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 100.000</code></li>
+	<li>Se garantează că arborele este bine format și fiecare nod are un singur părinte (în afară de rădăcina).</li>
+</ul>
+
+<h1>Exemple:</h1>
+
+<p><code>srh.in</code></p>
+
+<pre>6
+1 5
+5 6
+6 3
+1 2
+2 4</pre>
+
+<p><code>srh.out</code></p>
+
+<pre>2</pre>
+
+<pre>13
+1 5
+1 6
+5 7
+5 8
+6 2
+6 3
+7 4
+7 9
+4 10
+2 11
+11 13
+3 12</pre>
+
+<p><code>srh.out</code></p>
+
+<pre>14</pre>
+
+<h3>Explicație</h3>
+
+<p>Pentru ultimul exemplu, comparăm subarborii din nodul <code>5</code> și nodul <code>6</code>.<br>
+Subarborele nodului <code>5</code> conține următoarele noduri: nivel <code>0</code> – nod <code>5</code>, nivel <code>1</code> – nod <code>7</code>, nod <code>8</code>, nivel <code>2</code> – nod <code>4</code>, nod <code>9</code>, nivel <code>3</code> – nod <code>10</code>.<br>
+Subarborele nodului <code>6</code> conține următoarele noduri:nivel <code>0</code> – nod <code>6</code>, nivel <code>1</code> – nod <code>2</code>, nod <code>3</code>, nivel <code>2</code> – nod <code>11</code>, nod <code>12</code>, nivel <code>3</code> – nod <code>13</code>.<br>
+Se observă că subarborii nodului <code>5</code> și nodului <code>6</code> au același număr de noduri pe fiecare nivel și astfel sunt similari. Prin urmare prima pereche de subarbori similari este <code>(5,6)</code>. <br>
+Urmatoarele <code>13</code> perechi sunt <code>(8,9)</code>, <code>(8,10)</code>, <code>(8,12)</code>, <code>(8,13)</code>, <code>(9,10)</code>, <code>(9,12)</code>, <code>(9,13)</code>, <code>(10,12)</code>, <code>(10,13)</code>, <code>(12,13)</code>, <code>(3,4)</code>, <code>(3,11)</code>, <code>(4,11)</code>.</p>		</article>
+		</body></html>

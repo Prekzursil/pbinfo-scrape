@@ -1,0 +1,96 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3732"><article id="enunt">
+			<p>Cercetătorii de la <span class="caps">NASA</span> au instalat pe Marte un seismograf cu ajutorul căruia s-au înregistrat mișcările la nivelul solului planetei. Seismograful a trimis în fiecare din cele <code>N</code> secunde ce definesc perioada de timp analizată, câte un semnal pe Pământ ce a fost codificat de cercetători cu valoarea <code>1</code>, dacă seismograful a detectat mișcare și <code>0</code>, în cazul în care nu s-a înregistrat mișcare la nivelul solului planetei. Astfel, un seism de pe Marte a fost definit de cercetători ca fiind o perioadă continuă de timp în care seismograful a trimis, din secundă în secundă, câte un semnal codificat cu <code>1</code> și care începe după cel puțin două semnale codificate cu <code>0</code>, iar la sfârșitul ei sunt înregistrate cel puțin două semnale codificate cu <code>0</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând șirul celor <code>N</code> valori transmise în ordine de seismograf, scrieți un program care să determine:<br>
+1. Care a fost durata maximă, exprimată în secunde a unui seism;<br>
+2. Câte seisme au avut loc în perioada de timp analizată;<br>
+3. Din cauza unei erori tehnice, o perioadă continuă de timp seismograful a transmis eronat. Astfel, în șirul inițial format din cele <code>N</code> semnale, trebuie să înlocuim valoarea <code>0</code> cu valoarea <code>1</code>, într-o singură secvență, de lungime nevidă, de elemente nule alăturate. Analizând toate posibilitățile de a face această modificare, determinați durata maximă a unui seism care se obține după modificarea șirului inițial de semnale.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>seism.in</code> conține pe prima linie un număr natural <code>C</code> care poate avea valorile <code>1</code>, <code>2</code> sau <br>
+<code>3</code> și reprezintă numărul cerinței. Pe cea de-a doua linie, un număr natural <code>N</code> având semnificația din enunț. Pe următoarea linie, <code>N</code> numere naturale despărțite prin câte un spațiu, reprezentând codificarea semnalului transmis de seismograf, din secundă în secundă, începând cu secunda <code>1</code> și până la secunda <code>N</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>seism.out</code> va conține pe prima linie un singur număr natural reprezentând rezultatul<br>
+determinat conform cerinței.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>5 ≤ N ≤ 100.000</code></li>
+	<li>Un seism durează între <code>1</code> și <code>N - 4</code> secunde</li>
+	<li>Pentru cerințele <code>1</code> și <code>2</code> se garantează că seismograful a detectat cel puțin un seism.</li>
+	<li>La cerința 3 se garantează că există cel puțin o secvență nevidă de elemente egale cu <code>0</code> ce pot fi schimbate în <code>1</code> pentru a avea cel puțin un seism în tot șirul.</li>
+	<li>Pentru rezolvarea corectă a primei cerințe se obțin 40 de puncte, pentru rezolvarea corectă a celei de a doua cerințe se obțin 40 de puncte, iar pentru rezolvarea corectă a celei de a treia cerințe se obțin 20 de puncte.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>seism.in</code></p>
+
+<pre>1
+21
+0 0 1 1 1 1 0 0 0 0 0 1 0 1 0 0 1 1 0
+0 1</pre>
+
+<p><code>seism.out</code></p>
+
+<pre>4</pre>
+
+<h3>Explicație</h3>
+
+<p>Durata maximă a unui seism este de <code>4</code> secunde.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>seism.in</code></p>
+
+<pre>2
+21
+0 0 1 1 1 1 0 0 1 0 0 1 0 1 0 0 1 1 0
+0 1</pre>
+
+<p><code>seism.out</code></p>
+
+<pre>3</pre>
+
+<h3>Explicație</h3>
+
+<p>Seismograful a înregistrat <code>3</code> seisme. Primul seism are durata de <code>4</code> secunde, al doilea are durata de <code>1</code> secundă și ultimul are durata de <code>2</code> secunde.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>seism.in</code></p>
+
+<pre>3
+8
+0 0 1 1 0 1 0 0</pre>
+
+<p><code>seism.out</code></p>
+
+<pre>4</pre>
+
+<h3>Explicație</h3>
+
+<p>Elementul din șir de pe poziția <code>5</code> se schimbă în <code>1</code> și se obține un seism de durată <code>4</code> secunde.</p>
+
+<h1>Exemplul 4:</h1>
+
+<p><code>seism.in</code></p>
+
+<pre>3
+14
+0 1 1 0 0 0 0 0 0 0 0 0 1 0</pre>
+
+<p><code>seism.out</code></p>
+
+<pre>5</pre>
+
+<h3>Explicație</h3>
+
+<p>Se schimbă în <code>1</code> semnalele asociate secundelor <code>6</code>, <code>7</code>, <code>8</code>, <code>9</code> și <code>10</code> și se obține un seism de durată <code>5</code> secunde.</p>		</article>
+		</body></html>

@@ -1,0 +1,312 @@
+{
+  "id": 2494,
+  "slug": "descmult",
+  "name": "descmult",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/2494/descmult",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 44,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=44"
+    }
+  ],
+  "tags": [
+    "Determinarea divizorilor"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Să se determine: <br>\n1.\tnumărul total de divizori naturali ai lui <code>X</code>  <br>\n2.\tdivizorii lui <code>X</code> care aparțin intervalului <code>[A,B]</code>, unde <code>A</code> și <code>B</code> sunt două numere naturale date.</p>",
+      "text": "Să se determine: 1. numărul total de divizori naturali ai lui X 2. divizorii lui X care aparțin intervalului [A,B], unde A și B sunt două numere naturale date."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de ieșire <code>descmult.in</code> conține pe prima linie un număr natural <code>C</code> care reprezintă cerința ce trebuie rezolvată (<code>C=1</code> sau <code>C=2</code>). </p><p>A doua linie conține, despărțite prin câte un spațiu, trei numere naturale <code>n A B</code>, cu semnificația din enunț. </p><p>Pe linie a treia se află <code>n</code> numere naturale, separate prin câte un spațiu, ce reprezintă factorii primi <code>D1 D2 ... Dn</code> din descompunerea lui <code>X</code>.</p><p>Pe linia a patra se află <code>n</code> numere naturale, separate prin câte un spațiu, ce reprezintă puterile la care apar acești factori <code>E1 E2 ... En</code>. </p>",
+      "text": "Fișierul de ieșire descmult.in conține pe prima linie un număr natural C care reprezintă cerința ce trebuie rezolvată (C=1 sau C=2). A doua linie conține, despărțite prin câte un spațiu, trei numere naturale n A B, cu semnificația din enunț. Pe linie a treia se află n numere naturale, separate prin câte un spațiu, ce reprezintă factorii primi D1 D2 ... Dn din descompunerea lui X.Pe linia a patra se află n numere naturale, separate prin câte un spațiu, ce reprezintă puterile la care apar acești factori E1 E2 ... En."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Pentru <code>C=1</code> se va rezolva doar prima cerință. În acest caz, fișierul de ieșire <code>descmult.out</code> va conține pe prima linie un singur număr natural nenul ce reprezintă numărul total de divizori naturali ai lui <code>X</code>. <br>\nPentru <code>C=2</code> se va rezolva cea de-a doua cerință. În acest caz, fișierul de ieșire <code>descmult.out</code> va conține, separați prin câte un spațiu, divizorii lui <code>X</code> ce aparțin intervalului <code>[A,B]</code>.</p>",
+      "text": "Pentru C=1 se va rezolva doar prima cerință. În acest caz, fișierul de ieșire descmult.out va conține pe prima linie un singur număr natural nenul ce reprezintă numărul total de divizori naturali ai lui X. Pentru C=2 se va rezolva cea de-a doua cerință. În acest caz, fișierul de ieșire descmult.out va conține, separați prin câte un spațiu, divizorii lui X ce aparțin intervalului [A,B]."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2 ≤ n ≤ 20</code></li>\n\t<li><code>1 ≤ A ≤ B ≤ 10</code><sup><code>7</code></sup></li>\n\t<li><code>2 ≤ Di &lt; 1000</code> (numere prime distincte), <code>1≤i≤n</code></li>\n\t<li><code>1 ≤ Ei ≤ 10</code>, <code>1≤i≤n</code></li>\n\t<li>Factorii primi <code>D1, D2,...,Dn</code> nu sunt obligatoriu în ordine crescătoare</li>\n\t<li>Se garantează că numărul maxim de divizori naturali ai lui <code>X ≤ 10</code> <sup><code>19</code></sup></li>\n\t<li>Intervalul <code>[A,B]</code> conține cel puțin un divizor</li>\n\t<li>Numărul maxim de divizori aflați în intervalul <code>[A,B]</code> este <code>≤ 10</code> <sup><code>6</code></sup></li>\n\t<li>Ordinea de afișare a divizorilor nu este importantă</li>\n\t<li>Pentru rezolvarea corectă a cerinței <code>1</code> se acordă <code>20</code> de puncte, iar pentru cea de-a doua cerință se acordă <code>80</code> de puncte.</li>\n</ul>",
+      "text": "2 ≤ n ≤ 20 1 ≤ A ≤ B ≤ 107 2 ≤ Di < 1000 (numere prime distincte), 1≤i≤n 1 ≤ Ei ≤ 10, 1≤i≤n Factorii primi D1, D2,...,Dn nu sunt obligatoriu în ordine crescătoare Se garantează că numărul maxim de divizori naturali ai lui X ≤ 10 19 Intervalul [A,B] conține cel puțin un divizor Numărul maxim de divizori aflați în intervalul [A,B] este ≤ 10 6 Ordinea de afișare a divizorilor nu este importantă Pentru rezolvarea corectă a cerinței 1 se acordă 20 de puncte, iar pentru cea de-a doua cerință se acordă 80 de puncte."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>descmult.in</code></p><pre>1\n4 30 50\n3 2 5 11\n1 3 2 1</pre><p><code>descmult.out</code></p><pre>48</pre>",
+      "text": "descmult.in1 4 30 50 3 2 5 11 1 3 2 1descmult.out48"
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>descmult.in</code></p><pre>2\n4 30 50\n3 2 5 11\n1 3 2 1</pre><p><code>descmult.out</code></p><pre>30 44 50 40 33</pre><h3>Explicație</h3><p>Pentru primul exemplu <code>C=1</code>.<br>\n<code>X=31*23*52*111=6600</code> și are <code>48</code> de divizori: <code>1, 2, 3, 4, 5, 6, 8, 10, 11, 12, 15, 20, 22, 24, 25, 30, 33, 40, 44, 50, 55, 60, 66, 75, 88, 100, 110, 120, 132, 150, 165, 200, 220, 264, 275, 300, 330, 440, 550, 600, 660, 825, 1100, 1320, 1650, 2200, 3300, 6600</code>.</p><p>Pentru cel de-al doilea exemplu <code>C=2</code>.<br>\n<code>X=31*23*52*111=6600</code>.<br>\nDivizorii ce aparțin intervalului <code>[30,50]</code> sunt: <code>30,33,40,44,50</code>. Ordinea de afișare a divizorilor nu este importantă.</p>",
+      "text": "descmult.in2 4 30 50 3 2 5 11 1 3 2 1descmult.out30 44 50 40 33ExplicațiePentru primul exemplu C=1. X=31*23*52*111=6600 și are 48 de divizori: 1, 2, 3, 4, 5, 6, 8, 10, 11, 12, 15, 20, 22, 24, 25, 30, 33, 40, 44, 50, 55, 60, 66, 75, 88, 100, 110, 120, 132, 150, 165, 200, 220, 264, 275, 300, 330, 440, 550, 600, 660, 825, 1100, 1320, 1650, 2200, 3300, 6600.Pentru cel de-al doilea exemplu C=2. X=31*23*52*111=6600. Divizorii ce aparțin intervalului [30,50] sunt: 30,33,40,44,50. Ordinea de afișare a divizorilor nu este importantă."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Pentru primul exemplu C=1. X=31*23*52*111=6600 și are 48 de divizori: 1, 2, 3, 4, 5, 6, 8, 10, 11, 12, 15, 20, 22, 24, 25, 30, 33, 40, 44, 50, 55, 60, 66, 75, 88, 100, 110, 120, 132, 150, 165, 200, 220, 264, 275, 300, 330, 440, 550, 600, 660, 825, 1100, 1320, 1650, 2200, 3300, 6600."
+    }
+  ],
+  "constraints": [
+    "2 ≤ n ≤ 20",
+    "1 ≤ A ≤ B ≤ 107",
+    "2 ≤ Di < 1000 (numere prime distincte), 1≤i≤n",
+    "1 ≤ Ei ≤ 10, 1≤i≤n",
+    "Factorii primi D1, D2,...,Dn nu sunt obligatoriu în ordine crescătoare",
+    "Se garantează că numărul maxim de divizori naturali ai lui X ≤ 10 19",
+    "Intervalul [A,B] conține cel puțin un divizor",
+    "Numărul maxim de divizori aflați în intervalul [A,B] este ≤ 10 6",
+    "Ordinea de afișare a divizorilor nu este importantă",
+    "Pentru rezolvarea corectă a cerinței 1 se acordă 20 de puncte, iar pentru cea de-a doua cerință se acordă 80 de puncte."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qc0533c0fc4.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Nodea Eugen (eugen_nodea)",
+    "clasa": "9",
+    "intrare/ieșire": "descmult.in / descmult.out",
+    "limită timp": "0.2 secunde",
+    "limită memorie": "32 MB / 32 MB",
+    "sursa problemei": "ONIG 2018, clasa a VI-a",
+    "autor": "Eugen Nodea",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.2,
+  "memoryLimitMb": 32,
+  "author": "Eugen Nodea",
+  "sourceAttribution": "ONIG 2018, clasa a VI-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/2494/descmult"
+}

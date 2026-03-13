@@ -1,0 +1,79 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3759"><article id="enunt">
+			<p>În grădina lui Macarie există un șir de <code>N</code> morcovi, numerotați de la <code>1</code> la <code>N</code>. Ca să știe unde sunt plantați, Macarie a făcut câte o grămăjoară de pământ în dreptul fiecărui morcov și a notat înălțimea fiecăreia exprimată în centimetri. Astfel morcovul <code>i</code> are în dreptul său o grămăjoară de pământ cu înălțimea de <code>h[i]</code> centimetri.</p>
+
+<p>O cârtiță neastâmpărată sapă galerii subterane pe sub morcovii lui Macarie. Când sapă o galerie către un morcov, tot pământul rezultat îl scoate afară modificând astfel înălțimea grămăjoarei corespunzătoare acelui morcov, dar și ale celorlalți morcovi din grădină.</p>
+
+<p>Dacă în urma săpării unei galerii către morcovul de pe poziția <code>pos</code> înălțimea grămăjoarei lui a crescut cu <code>x</code> centimetri, atunci înălțimile grămăjoarelor tuturor morcovilor se modifică după următoarea regulă ce depinde de un număr <code>K</code>: </p>
+
+<ul>
+	<li>înălțimea grămăjoarei morcovului <code>pos - 1</code> se modifică cu <code>x - K</code> centimetri iar a morcovului <code>pos + 1</code> cu <code>x + K</code> centimetri,</li>
+	<li>înălțimile gramăjoarelor morcovilor <code>pos - 2</code> și <code>pos + 2</code> se modifică cu <code>x - 2 * K</code> respectiv <code>x + 2 * K</code> centimetri</li>
+	<li>În caz general, înălțimea se modifică după următoarele reguli pentru fiecare morcov din grădină:</li>
+</ul>
+
+<p>- Înălțimea <code>h[pos - i]</code> devine <code>h[pos - i] + x - i * K</code>, pentru fiecare <code>i</code>, <code>1 ≤ i ≤ pos-1</code><br>
+- Înălțimea <code>h[pos + i]</code> devine <code>h[pos + i] + x + i * K</code>, pentru fiecare <code>i</code>, <code>1 ≤ i ≤ N-pos</code></p>
+
+<h1>Cerința</h1>
+
+<p>Se cunosc înălțimile inițiale ale tuturor celor <code>N</code> grămăjoare și cele <code>U</code> modificări făcute de cârtiță asupra înălțimilor grămăjoarelor de pământ ale morcovilor. Știm că în cadrul unei secvențe continue de morcovi cel mai tentant pentru cârtiță este morcovul cu cea mai mică înălțime a grămăjoarei de pământ. Ajutați-l pe Macarie să identifice înălțimea grămăjoarei celui mai tentant morcov, pentru mai multe intervale date, după efectuarea tuturor modificărilor realizate de cârtiță.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>cartita.in</code> conţine pe prima linie un număr natural <code>N</code> având semnificația din enunț.</p>
+
+<p>Pe următoarea linie se află <code>N</code> numere naturale despărțite prin câte un spațiu, reprezentând în ordine, înălțimile grămăjoarelor de pământ, al <code>i</code>-lea număr reprezentând înălțimea inițială <code>h[i]</code>, a grămăjoarei din dreptul morcovului <code>i</code>. </p>
+
+<p>Pe a treia linie se află un număr natural <code>U</code> reprezentând numărul de morcovi către care cărtița a săpat galerii. </p>
+
+<p>Pe următoarele <code>U</code> linii se află câte un triplet de numere naturale <code>pos, x, K</code>, separate între ele prin câte un spațiu, cu semnificația că în urma săpării unei galerii către morcovul <code>pos</code> înălțimea grămăjoarei lui a crescut cu <code>x</code> centimetri, iar celelalte înălțimi se modifică, după regula descrisă în enunț.</p>
+
+<p>Pe următoarea linie se găsește numărul <code>Q</code> reprezentând numărul de intervale unde se dorește identificarea înălțimii minime a unei grămăjoare corespunzătoare celui mai tentant morcov.</p>
+
+<p>Pe următoarele <code>Q</code> linii sunt câte două numere naturale <code>L, R</code>, separate între ele printr-un spațiu, reprezentând capetele intervalului de morcovi investigat.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fişierul de ieşire <code>cartita.out</code> va conţine <code>Q</code> linii, pe fiecare găsindu-se, în ordine, răspunsul la intervalele investigate.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 100.000</code></li>
+	<li><code>1 ≤ U ≤ 300.000</code></li>
+	<li><code>1 ≤ Q ≤ 200.000</code></li>
+	<li><code>1 ≤ L ≤ R ≤ N</code></li>
+	<li>Inițial <code>1 ≤ h[i] ≤ N</code>, pentru fiecare <code>i</code>, <code>1 ≤ i ≤ N</code></li>
+	<li><code>1 ≤ pos ≤ N</code>, <code>1 ≤ x ≤ 400</code> și <code>-21 ≤ K ≤ 21</code>, <code>K ≠ 0</code></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>cartita.in</code></p>
+
+<pre>6
+1 6 2 4 3 4
+3
+4 5 2
+2 4 1
+4 2 8
+3
+1 6
+2 4
+4 4</pre>
+
+<p><code>cartita.out</code></p>
+
+<pre>-19
+-3
+17</pre>
+
+<h3>Explicație</h3>
+
+<ul>
+	<li>După prima galerie săpată către morcovul <code>4</code>, șirul înălțimilor celor <code>N=6</code> grămăjoare a devenit <code>(0, 7, 5, 9, 10, 13)</code>.</li>
+	<li>După a doua galerie săpată către morcovul <code>2</code>, șirul înălțimilor celor <code>N=6</code> grămăjoare a devenit <code>(3, 11, 10, 15, 17, 21)</code>.</li>
+	<li>După a treia galerie săpată către morcovul <code>4</code>, șirul înălțimilor celor <code>N=6</code> grămăjoare a devenit <code>(-19, -3, 4, 17, 27, 39)</code></li>
+	<li>Pe intervalul <code>[1,6]</code>, înălțimea minimă este <code>-19</code>, pe intervalul <code>[2,4]</code>, înălțimea minimă este <code>-3</code>, iar pentru ultimul interval investigat <code>[4,4]</code> înălțimea minimă este <code>17</code>.</li>
+</ul>		</article>
+		</body></html>

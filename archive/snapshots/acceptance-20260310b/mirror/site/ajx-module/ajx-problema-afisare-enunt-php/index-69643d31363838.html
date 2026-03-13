@@ -1,0 +1,71 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1688"><article id="enunt">
+			<p>Terminalul unui aeroport este o sală foarte mare având forma unui dreptunghi împărțit în pătrate cu latură unitară. Aici se află mai multe persoane, care trebuie să  poarte la vedere un ecuson cu un cod de bare care poate fi citit în orice moment de camerele de supraveghere și decodificat de calculatoarele serviciului de protecție și pază. Într-un pătrat cu latură unitară poate să se afle doar o singură persoană la un moment dat. Sala este reprezentată printr-o matrice cu <code>R</code> linii și <code>C</code> coloane, elementele sale fiind numere naturale de cel mult <code>6</code> cifre cu valorile: <code>0</code> – pentru spațiu neocupat, respectiv numere naturale nenule, care reprezintă identificatorul (ID-ul) persoanelor. Printre aceste persoane există persoane infiltrate (intruși) care au ID-uri cu valori identice cu ale altor persoane. Dacă există două sau mai multe persoane cu același ID, acestea sunt considerate toate suspecte.</p>
+
+<p><img src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1200-intrus-png.png" style="float:right;"> Intrușii vor să ajungă în apropierea unor <span class="caps">VIP</span>-uri (persoane importante), pentru a le înregistra discuțiile cu un microfon care poate înregistra sunete în interiorul unui pătrat cu latura <code>D</code>, în centrul căruia se află chiar el. Acest pătrat nu este cuprins neapărat integral în matricea sălii (vedeți figura alăturată)!</p>
+
+<p>Prin convenție, ID-urile <span class="caps">VIP</span>-urilor sunt numere prime distincte. În plus, și un ID al unui <span class="caps">VIP</span> poate fi copiat, crescând astfel numărul suspecților. Un <span class="caps">VIP</span> se caracterizează printr-un nivel de importanță: cu cât ID-ul este un număr mai mare, cu atât nivelul de importanță este mai mare (este „mai importantă”).</p>
+
+<p>Persoanele suspecte au asociat un „grad de periculozitate”. Acesta este cu atât mai mare cu cât numărul de <span class="caps">VIP</span>-uri aflate în interiorul pătratului de latură <code>D</code>, în centrul căruia se află suspectul, este mai mare. Dacă există doi suspecți cu același grad de periculozitate, se consideră „mai periculoasă” persoana care are în pătratul său <span class="caps">VIP</span>-ul cu ID-ul cel mai mare. În caz de egalitate, se consideră „mai periculoasă” persoana care este așezată pe o linie cu un indice mai mic, iar la egalitate de indici de linii, pe o coloană cu indice mai mic. Există și persoane suspecte cu gradul de periculozitate <code>0</code>, dacă în interiorul pătratului în centrul căruia se plasează nu există niciun număr prim.</p>
+
+<h1>Cerința</h1>
+
+<p>1) Să se determine numărul persoanelor suspecte aflate în sala de așteptare.<br>
+2) Să se determine ID-ul și coordonatele persoanelor suspecte, (<code>RS</code><sub><code>i</code></sub> -linia suspectului <code>i</code>, <code>CS</code><sub><code>i</code></sub> -coloana suspectului <code>i</code>) în ordinea descrescătoare a „gradului de periculozitate”.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>intrus.in</code> conține pe prima linie valoarea <code>p</code>, care poate fi doar <code>1</code> sau <code>2</code>. Linia a doua va conține valorile <code>R</code>, <code>C</code> și <code>D</code>, separate prin câte un spațiu. Pe următoarele <code>R</code> linii, câte <code>C</code> numere naturale de cel mult <code>6</code> cifre, separate prin câte un spațiu, reprezentând elementele matricei descrise în enunț.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă <code>p=1</code>, se cere doar rezolvarea primei cerințe. În acest caz, fișierul de ieșire <code>intrus.out</code> va conține o singură valoare <code>T</code> (care poate fi și <code>0</code>), reprezentând numărul persoanelor suspecte. Dacă <code>p=2</code>, se va rezolva numai a doua cerință. În acest caz fișierul de ieșire <code>intrus.out</code> va conține pe fiecare linie câte <code>3</code> numere naturale nenule: <code>ID</code><sub><code>i</code></sub> (ID-ul intrusului <code>i</code>), <code>R</code><sub><code>i</code></sub>, <code>C</code><sub><code>i</code></sub> (linia, respectiv coloana în care se află intrusul), separate prin câte un spațiu. Dacă nu există niciun suspect, în prima linie a fișierului de ieșire <code>intrus.out</code> se va scrie <code>-1</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>0 &lt; R, C ≤ 1000</code></li>
+	<li><code>3 ≤ D ≤ 9</code>, <code>D</code> număr impar.</li>
+	<li>Pentru <code>p=2</code> se garantează că numărul suspecților nu depășește 10% din totalul persoanelor aflate în sală.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>intrus.in</code></p>
+
+<pre>1
+3 4 3
+1 0 7 3
+5 2 3 0
+3 2 0 1</pre>
+
+<p><code>intrus.out</code></p>
+
+<pre>7</pre>
+
+<h3>Explicație</h3>
+
+<p><code>p=1</code>, se rezolvă doar cerința 1.<br>
+Există <code>2</code> ID-uri egale cu <code>2</code> și <code>3</code> ID-uri egale cu <code>3</code>, deci avem <code>5</code> suspecți.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>intrus.in</code></p>
+
+<pre>2
+3 4 3
+1 0 7 8
+5 2 3 0
+3 2 0 9</pre>
+
+<p><code>intrus.out</code></p>
+
+<pre>2 2 2
+2 3 2
+3 2 3
+3 3 1</pre>
+
+<h3>Explicație</h3>
+
+<p><code>p=2</code>, se rezolvă doar cerința 2.<br>
+Persoana cu ID-ul <code>2</code>, aflată pe linia <code>2</code> și coloana <code>2</code> are cel mai mare grad de periculozitate. Urmează ID-ul <code>2</code> din <code>(3, 2)</code>, <code>3</code> din <code>(2, 3)</code> și <code>3</code> din <code>(3, 1)</code>, care reprezintă o persoană suspectă, deși zona sa de latură <code>D</code> nu este cuprinsă în întregime în matricea sălii!</p>		</article>
+		</body></html>

@@ -1,0 +1,90 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4406"><article id="enunt">
+			<p><img align="right" alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-Fibosnek-01-jpg.jpg" style="width:250px;"></p>
+
+<p>Se consideră o matrice cu <code>n</code> linii și <code>m</code> coloane ce conține numere naturale nenule. Se definește o parcurgere <strong>snek</strong> a matricei un șir de valori obținut astfel: se parcurg elementele matricei coloană cu coloană, de la prima până la ultima, și, în cadrul fiecărei coloane, de sus în jos, de la elementul aflat pe prima linie, până la cel aflat pe ultima linie, ca în exemplu.</p>
+
+<p>Șirul numerelor Fibonacci este definit mai jos, unde <code>fib[k]</code> reprezintă al <code>k</code>-lea număr Fibonacci:</p>
+
+<ul>
+	<li><code>fib[1] = 1</code>, <code>fib[2] = 1</code></li>
+	<li><code>fib[k] = fib[k - 1] + fib[k - 2]</code>, pentru orice <code>k &gt; 2</code></li>
+</ul>
+
+<p>Se numește secvență <strong>fibosnek</strong> un termen sau o succesiune de termeni aflați pe poziții consecutive în parcurgerea snek, cu proprietatea că fiecare dintre ei este număr Fibonacci. Similar, se numește secvență non-fibosnek un termen sau o succesiune de termeni aflați pe poziții consecutive în parcurgerea snek, cu proprietatea că niciunul dintre ei nu este număr Fibonacci. Lungimea secvenței este egală cu numărul termenilor săi. Suma secvenței este egală cu suma termenilor săi.<br>
+O secvență non-fibosnek poate fi transformată în una fibosnek prin înlocuirea fiecărui număr din secvență cu un număr Fibonacci aflat cel mai aproape de el în șirul numerelor Fibonacci. Dacă există două numere Fibonacci la fel de apropiate de numărul dat, se va alege mereu cel mai mic. De exemplu, secvența <code>(4)</code> se transformă în secvența <code>(3)</code>, iar secvența <code>(9, 11)</code> în secvența <code>(8, 13)</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Fiind date elementele matricei cu <code>n</code> linii și <code>m</code> coloane, să se determine:<br>
+1. numărul de numere Fibonacci din matricea dată inițial;<br>
+2. suma celei mai lungi secvențe fibosnek ce poate fi obținută, știind că se poate transforma cel mult o secvență non-fibosnek în una fibosnek folosind procedeul explicat mai sus. Dacă se pot obține mai multe astfel de secvențe de lungime maximă, se va alege prima întâlnită în parcurgerea snek a matricei.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>fibosnek.in</code> conține pe prima linie numerele naturale <code>c</code>, <code>n</code> și <code>m</code>, unde <code>c</code> reprezintăa cerința care trebuie rezolvată (<code>1</code> sau <code>2</code>), iar <code>n</code> și <code>m</code> au semnificația din enunț, pe urmăatoarele <code>n</code> linii conține elementele matricei, parcurse în ordine, linie cu linie și în cadrul fiecărei linii, de la stânga la dreapta. Valorile aflate pe aceeași linie a fișierului sunt separate prin câte un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>fibosnek.out</code> va conține fie doar numărul determinat pentru cerința <code>1</code> (dacă <code>c = 1</code>), fie doar suma determinată pentru cerința <code>2</code> (dacă <code>c = 2</code>).</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>c ∈ {1, 2}</code></li>
+	<li><code>1 ≤ n, m ≤ 1500</code></li>
+	<li>Elementele matricei au valori în intervalul <code>[1, 2</code><sup><code>31</code></sup> <code>− 1]</code>.</li>
+	<li>Datorită dimensiunilor mari ale testelor de intrare, nu au fost adăugate toate.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>fibosnek.in</code></p>
+
+<pre>1 3 4
+1 5 3 11
+2 8 1 13
+4 2 9 8</pre>
+
+<p><code>fibosnek.out</code></p>
+
+<pre>9</pre>
+
+<h3>Explicație</h3>
+
+<p><code>c = 1</code>, <code>n = 3</code>, <code>m = 4</code>, iar matricea corespunde celei din Fig. 1. Există <code>9</code> numere Fibonacci în matrice: <code>1</code>, <code>5</code>, <code>3</code>, <code>2</code>, <code>8</code>, <code>1</code>, <code>13</code>, <code>2</code>, <code>8</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>fibosnek.in</code></p>
+
+<pre>2 3 4
+1 5 3 11
+2 8 1 13
+4 2 9 8</pre>
+
+<p><code>fibosnek.out</code></p>
+
+<pre>61</pre>
+
+<h3>Explicație</h3>
+
+<p><code>c = 2</code>, <code>n = 3</code>, <code>m = 4</code>, iar matricea corespunde celei din Fig. 1. Dacă se transformă secvența non-fibosnek <code>(9, 11)</code> în secvența fibosnek <code>(8, 13)</code>, atunci cea mai lungă secvență fibosnek este <code>(5, 8, 2, 3, 1, 8, 13, 13, 8)</code>, de lungime <code>9</code> și sumă <code>61</code>.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>fibosnek.in</code></p>
+
+<pre>2 4 4
+2 4 7 1
+3 3 6 7
+5 5 8 4
+11 8 13 6</pre>
+
+<p><code>fibosnek.out</code></p>
+
+<pre>42</pre>
+
+<h3>Explicație</h3>
+
+<p>Se transformă secvența non-fibosnek <code>(11, 4)</code> în secvența fibosnek <code>(13, 3)</code> și se obține secvența fibosnek <code>(2, 3, 5, 13, 3, 3, 5, 8)</code> de lungime <code>8</code> și sumă <code>42</code>. Deși mai există o secvență fibosnek de lungime <code>8</code> ce se poate obține prin transformarea secvenței non-fibosnek <code>(7, 6)</code>, aceasta nu a fost aleasă deoarece nu este prima secvență ce poate fi obținută.</p>		</article>
+		</body></html>

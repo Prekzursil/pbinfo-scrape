@@ -1,0 +1,314 @@
+{
+  "id": 4658,
+  "slug": "puzzle1",
+  "name": "puzzle1",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4658/puzzle1",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 3,
+      "name": "Sortarea vectorilor",
+      "slug": "sortarea-vectorilor",
+      "href": "/?pagina=probleme-lista&tag=3"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>1. Numărul de grupuri pe care le obține Maria după ce rezolvă jocul de puzzle;<br>\n2. Cele <code>K</code> numere înscrise pe etichetele grupurilor alese de Maria.</p>",
+      "text": "1. Numărul de grupuri pe care le obține Maria după ce rezolvă jocul de puzzle; 2. Cele K numere înscrise pe etichetele grupurilor alese de Maria."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>În fișierul de intrare <code>puzzle.in</code> se găsesc pe prima linie, separate prin câte un spațiu, <code>C</code>, <code>N</code> și <code>K</code>, unde <code>C</code> reprezintă cerința ce trebuie rezolvată, <code>N</code> numărul de piese din joc, <code>K</code> numărul de valori cerute la cerința 2. Pe linia următoare, separate prin câte un spațiu, sunt cele <code>N</code> numere înscrise pe etichetele pieselor de joc, în ordinea în care se extrag din cutie.  </p>",
+      "text": "În fișierul de intrare puzzle.in se găsesc pe prima linie, separate prin câte un spațiu, C, N și K, unde C reprezintă cerința ce trebuie rezolvată, N numărul de piese din joc, K numărul de valori cerute la cerința 2. Pe linia următoare, separate prin câte un spațiu, sunt cele N numere înscrise pe etichetele pieselor de joc, în ordinea în care se extrag din cutie."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Dacă cerința este <code>1</code>, fişierul de ieşire <code>puzzle.out</code> va conţine pe prima linie un număr natural <code>G</code>, reprezentând numărul de grupuri obținut după finalizarea jocului.</p><p>Dacă cerința este <code>2</code> pe prima linie a fișierului de ieșire <code>puzzle.out</code> se vor scrie, separate prin câte un spațiu, cele <code>K</code> numere înscrise pe etichetele grupurilor alese de Maria.</p>",
+      "text": "Dacă cerința este 1, fişierul de ieşire puzzle.out va conţine pe prima linie un număr natural G, reprezentând numărul de grupuri obținut după finalizarea jocului.Dacă cerința este 2 pe prima linie a fișierului de ieșire puzzle.out se vor scrie, separate prin câte un spațiu, cele K numere înscrise pe etichetele grupurilor alese de Maria."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ C ≤ 2</code></li>\n\t<li><code>1 ≤ N ≤ 100.000</code></li>\n\t<li><code>1 ≤ K ≤ 10</code></li>\n\t<li>Numerele de pe etichetele pieselor sunt numere naturale cu cel mult nouă cifre;</li>\n\t<li>Pentru toate datele de test există soluție.</li>\n\t<li>Pentru 53 de puncte, <code>C = 1</code></li>\n\t<li>Pentru 7 puncte, <code>C = 2</code>, <code>K = 1</code></li>\n\t<li>Pentru 13 puncte, <code>C = 2</code>, <code>K = 2</code></li>\n\t<li>Pentru 27 de puncte, <code>C = 2</code>, <code>K &gt; 2</code></li>\n</ul>",
+      "text": "1 ≤ C ≤ 2 1 ≤ N ≤ 100.000 1 ≤ K ≤ 10 Numerele de pe etichetele pieselor sunt numere naturale cu cel mult nouă cifre; Pentru toate datele de test există soluție. Pentru 53 de puncte, C = 1 Pentru 7 puncte, C = 2, K = 1 Pentru 13 puncte, C = 2, K = 2 Pentru 27 de puncte, C = 2, K > 2"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>puzzle.in</code></p><pre>1 6 1\n13345 23143 4343 784532 432 7826</pre><p><code>puzzle.out</code></p><pre>2</pre><h3>Explicație</h3><p>Piesa cu eticheta <code>13345</code> se poate lipi cu piesa cu eticheta <code>23143</code> obținând astfel grupul cu eticheta <code>13343143</code> la care se poate lipi piesa cu eticheta <code>4343</code> și obținem <code>13344343</code> care nu se mai poate lipi cu următoarea piesă cu eticheta <code>784532</code>, dar această piesă se va lipi cu piesa etichetată cu <code>432</code> și obținem <code>7845432</code> care în continuare se lipește cu piesa <code>7826</code> și obținem a doua etichetă a unui grup <code>78457826</code>.</p>",
+      "text": "puzzle.in1 6 1 13345 23143 4343 784532 432 7826puzzle.out2ExplicațiePiesa cu eticheta 13345 se poate lipi cu piesa cu eticheta 23143 obținând astfel grupul cu eticheta 13343143 la care se poate lipi piesa cu eticheta 4343 și obținem 13344343 care nu se mai poate lipi cu următoarea piesă cu eticheta 784532, dar această piesă se va lipi cu piesa etichetată cu 432 și obținem 7845432 care în continuare se lipește cu piesa 7826 și obținem a doua etichetă a unui grup 78457826."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>puzzle.in</code></p><pre>2 6 1\n13345 23143 4343 784532 432 7826</pre><p><code>puzzle.out</code></p><pre>78457826</pre><h3>Explicație</h3><p>În urma grupării pieselor obținem două grupuri etichetate cu <code>13344343</code> și respectiv <code>78457826</code>. Dintre acestea <code>78457826</code> are <code>6</code> cifre distincte, iar <code>13344343</code> are doar <code>3</code> cifre distincte. Deci valoarea căutată este <code>78457826</code>.</p>",
+      "text": "puzzle.in2 6 1 13345 23143 4343 784532 432 7826puzzle.out78457826ExplicațieÎn urma grupării pieselor obținem două grupuri etichetate cu 13344343 și respectiv 78457826. Dintre acestea 78457826 are 6 cifre distincte, iar 13344343 are doar 3 cifre distincte. Deci valoarea căutată este 78457826."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Piesa cu eticheta 13345 se poate lipi cu piesa cu eticheta 23143 obținând astfel grupul cu eticheta 13343143 la care se poate lipi piesa cu eticheta 4343 și obținem 13344343 care nu se mai poate lipi cu următoarea piesă cu eticheta 784532, dar această piesă se va lipi cu piesa etichetată cu 432 și obținem 7845432 care în continuare se lipește cu piesa 7826 și obținem a doua etichetă a unui grup 78457826."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "În urma grupării pieselor obținem două grupuri etichetate cu 13344343 și respectiv 78457826. Dintre acestea 78457826 are 6 cifre distincte, iar 13344343 are doar 3 cifre distincte. Deci valoarea căutată este 78457826."
+    }
+  ],
+  "constraints": [
+    "1 ≤ C ≤ 2",
+    "1 ≤ N ≤ 100.000",
+    "1 ≤ K ≤ 10",
+    "Numerele de pe etichetele pieselor sunt numere naturale cu cel mult nouă cifre;",
+    "Pentru toate datele de test există soluție.",
+    "Pentru 53 de puncte, C = 1",
+    "Pentru 7 puncte, C = 2, K = 1",
+    "Pentru 13 puncte, C = 2, K = 2",
+    "Pentru 27 de puncte, C = 2, K > 2"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qbcb9275c99.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "puzzle.in / puzzle.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "ONI 2024, clasa a 5-a",
+    "autor": "Raluca Costineanu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "author": "Raluca Costineanu",
+  "sourceAttribution": "ONI 2024, clasa a 5-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4658/puzzle1"
+}

@@ -1,0 +1,314 @@
+{
+  "id": 2785,
+  "slug": "galeti",
+  "name": "galeti",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/2785/galeti",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 25,
+      "name": "Metoda Greedy",
+      "slug": "metoda-greedy",
+      "href": "/?pagina=probleme-lista&tag=25"
+    },
+    {
+      "id": 24,
+      "name": "Probleme diverse cu metoda Greedy",
+      "slug": "probleme-diverse-cu-metoda-greedy",
+      "href": "/?pagina=probleme-lista&tag=24"
+    }
+  ],
+  "tags": [
+    "Greedy",
+    "Two Pointers",
+    "Stiva",
+    "STL"
+  ],
+  "sections": [
+    {
+      "title": "Găleți",
+      "html": "<p>Avem <code>n</code> găleți numerotate de la stânga la dreapta numere de la <code>1</code> la <code>n</code>. Fiecare găleată conține inițial <code>1</code> litru de apă. Capacitatea fiecărei găleți se consideră nelimitată. Vărsăm gălețile una în alta, respectând o anumită regulă, până când toată apa ajunge în prima găleată din stânga. Vărsarea unei găleți presupune un anumit efort.</p><p>Regula după care se răstoarnă gălețile este următoarea: se aleg două găleți astfel încât orice găleată situată între ele să fie goală. Se varsă apa din găleata din dreapta în găleata din stânga. Efortul depus este egal cu volumul de apă din găleata din dreapta (cea care se varsă). Formal, dacă notăm cu \\( a_i \\) volumul de apă conținut în găleata cu numrăul <code>i</code>, regula de vărsare a acestei găleți în găleata cu numărul <code>j</code> poate fi descrisă astfel:</p><ul>\n\t<li>1. <code>j &lt; i</code>;</li>\n\t<li>2. \\( a_k = 0,\\forall \\) <code>k</code> a.î. <code>j &lt; k &lt; i</code> (dacă <code>j + 1 = k</code>, atunci această regulă nu va putea exista);</li>\n\t<li>3. efortul depus este \\(  a_i \\);</li>\n\t<li>4. după vărsare \\(  a_j = a_j + a_i \\) și \\(  a_i=0 \\).</li>\n</ul>",
+      "text": "Avem n găleți numerotate de la stânga la dreapta numere de la 1 la n. Fiecare găleată conține inițial 1 litru de apă. Capacitatea fiecărei găleți se consideră nelimitată. Vărsăm gălețile una în alta, respectând o anumită regulă, până când toată apa ajunge în prima găleată din stânga. Vărsarea unei găleți presupune un anumit efort.Regula după care se răstoarnă gălețile este următoarea: se aleg două găleți astfel încât orice găleată situată între ele să fie goală. Se varsă apa din găleata din dreapta în găleata din stânga. Efortul depus este egal cu volumul de apă din găleata din dreapta (cea care se varsă). Formal, dacă notăm cu \\( a_i \\) volumul de apă conținut în găleata cu numrăul i, regula de vărsare a acestei găleți în găleata cu numărul j poate fi descrisă astfel: 1. j < i; 2. \\( a_k = 0,\\forall \\) k a.î. j < k < i (dacă j + 1 = k, atunci această regulă nu va putea exista); 3. efortul depus este \\( a_i \\); 4. după vărsare \\( a_j = a_j + a_i \\) și \\( a_i=0 \\)."
+    },
+    {
+      "title": "Cerința",
+      "html": "<p>Cunoscând numărul de găleți <code>n</code> și un număr natural <code>e</code>, să se determine o succesiune de vărsări în urma căreia toată apa ajunge în găleata cea mai din stânga și efortul total depus este <strong>exact <code>e</code></strong>. </p>",
+      "text": "Cunoscând numărul de găleți n și un număr natural e, să se determine o succesiune de vărsări în urma căreia toată apa ajunge în găleata cea mai din stânga și efortul total depus este exact e."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>galeti.in</code> conține pe prima linie două numere naturale, <code>n</code> și <code>e</code>, în această ordine, separate printr-un spațiu. Primul număr, <code>n</code>, reprezintă numărul de găleți. Al doilea număr, <code>e</code>, reprezintă efortul care trebuie depus pentru a vărsa toată apa în găleata din stânga.</p>",
+      "text": "Fișierul de intrare galeti.in conține pe prima linie două numere naturale, n și e, în această ordine, separate printr-un spațiu. Primul număr, n, reprezintă numărul de găleți. Al doilea număr, e, reprezintă efortul care trebuie depus pentru a vărsa toată apa în găleata din stânga."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>galeti.out</code> trebuie să  conțină <code>n-1</code> linii care descriu vărsările, în ordinea în care acestea se efectuează, pentru a vărsa toată apa în găleata din stânga cu efortul total <code>e</code>. Fiecare dintre aceste linii trebuie să conțină două numere, <code>i</code> și <code>j</code>, separate printr-un spațiu, cu semnificația că apa din găleata cu numărul <code>i</code> se varsă în găleata cu numărul <code>j</code>. </p>",
+      "text": "Fișierul de ieșire galeti.out trebuie să conțină n-1 linii care descriu vărsările, în ordinea în care acestea se efectuează, pentru a vărsa toată apa în găleata din stânga cu efortul total e. Fiecare dintre aceste linii trebuie să conțină două numere, i și j, separate printr-un spațiu, cu semnificația că apa din găleata cu numărul i se varsă în găleata cu numărul j."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ n ≤ 100.000</code></li>\n\t<li><code>1 ≤ e ≤ 5.000.000.000</code></li>\n\t<li>Se asigură faptul că există cel puțin o soluție posibilă pentru fiecare test în parte;</li>\n\t<li>Dacă există mai multe soluții, oricare dintre ele se va considera validă;</li>\n\t<li>Pentru teste în valoare de <code>18</code> puncte, datele de intrare sunt cunoscute. Mai precis:</li>\n\t<li>Testul 0: <strong>n</strong> = <code>91</code>, <strong>e</strong> = <code>90</code>.</li>\n\t<li>Testul 1: <strong>n</strong> = <code>30</code>, <strong>e</strong> = <code>435</code>.</li>\n\t<li>Testul 2: <strong>n</strong> = <code>7</code>, <strong>e</strong> = <code>16</code>.</li>\n\t<li>Pentru alte teste în valoare de <code>15</code> puncte, <code>n ≤ 9</code>.</li>\n</ul><p>În concurs s-au acordat <code>10p</code> din oficiu. Aici, exemplul va valora exact <code>10p</code>.</p>",
+      "text": "1 ≤ n ≤ 100.000 1 ≤ e ≤ 5.000.000.000 Se asigură faptul că există cel puțin o soluție posibilă pentru fiecare test în parte; Dacă există mai multe soluții, oricare dintre ele se va considera validă; Pentru teste în valoare de 18 puncte, datele de intrare sunt cunoscute. Mai precis: Testul 0: n = 91, e = 90. Testul 1: n = 30, e = 435. Testul 2: n = 7, e = 16. Pentru alte teste în valoare de 15 puncte, n ≤ 9. În concurs s-au acordat 10p din oficiu. Aici, exemplul va valora exact 10p."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>galeti.in</code></p><pre>4 4</pre><p><code>galeti.out</code></p><pre>2 1\n4 3\n3 1</pre><h3>Explicație</h3><p>Inițial, fiecare găleată conține câte un litru de apă.<br>\n<code>1 1 1 1</code>.<br>\nPrima dată vărsăm un litru de apa din găleata 2 în găleata 1 cu efort 1 =&gt;<br>\n<code>2 0 1 1</code>.<br>\nApoi vărsăm un litru de apă din găleata 4 în găleata 3 cu efort 1 =&gt;<br>\n<code>2 0 2 0</code>.<br>\nÎn final vărsăm cei doi litri de apă din găleata 3 în găleata 1 cu efort 2 =&gt;<br>\n<code>4 0 0 0</code><br>\nO altă variantă corectă ar fi fost:<br>\n<code>4 3</code><br>\n<code>2 1</code><br>\n<code>3 1</code><br>\nObservați că următoarea succesiune de vărsări este <strong>greșită</strong>:<br>\n<code>4 2</code><br>\n<code>2 1</code><br>\n<code>3 1</code><br>\nDeși efortul depus este 4 si cei 4 litri ajung în prima găleata, la primul pas vărsarea unui litru de apă din găleata 4 în găleata 2 nu este permisă deoarece între acestea se găsește găleata 3 care conține apă.</p>",
+      "text": "galeti.in4 4galeti.out2 1 4 3 3 1ExplicațieInițial, fiecare găleată conține câte un litru de apă. 1 1 1 1. Prima dată vărsăm un litru de apa din găleata 2 în găleata 1 cu efort 1 => 2 0 1 1. Apoi vărsăm un litru de apă din găleata 4 în găleata 3 cu efort 1 => 2 0 2 0. În final vărsăm cei doi litri de apă din găleata 3 în găleata 1 cu efort 2 => 4 0 0 0 O altă variantă corectă ar fi fost: 4 3 2 1 3 1 Observați că următoarea succesiune de vărsări este greșită: 4 2 2 1 3 1 Deși efortul depus este 4 si cei 4 litri ajung în prima găleata, la primul pas vărsarea unui litru de apă din găleata 4 în găleata 2 nu este permisă deoarece între acestea se găsește găleata 3 care conține apă."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Inițial, fiecare găleată conține câte un litru de apă. 1 1 1 1. Prima dată vărsăm un litru de apa din găleata 2 în găleata 1 cu efort 1 => 2 0 1 1. Apoi vărsăm un litru de apă din găleata 4 în găleata 3 cu efort 1 => 2 0 2 0. În final vărsăm cei doi litri de apă din găleata 3 în găleata 1 cu efort 2 => 4 0 0 0 O altă variantă corectă ar fi fost: 4 3 2 1 3 1 Observați că următoarea succesiune de vărsări este greșită: 4 2 2 1 3 1 Deși efortul depus este 4 si cei 4 litri ajung în prima găleata, la primul pas vărsarea unui litru de apă din găleata 4 în găleata 2 nu este permisă deoarece între acestea se găsește găleata 3 care conține apă."
+    }
+  ],
+  "constraints": [
+    "1 ≤ n ≤ 100.000",
+    "1 ≤ e ≤ 5.000.000.000",
+    "Se asigură faptul că există cel puțin o soluție posibilă pentru fiecare test în parte;",
+    "Dacă există mai multe soluții, oricare dintre ele se va considera validă;",
+    "Pentru teste în valoare de 18 puncte, datele de intrare sunt cunoscute. Mai precis:",
+    "Testul 0: n = 91, e = 90.",
+    "Testul 1: n = 30, e = 435.",
+    "Testul 2: n = 7, e = 16.",
+    "Pentru alte teste în valoare de 15 puncte, n ≤ 9."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q194cc92105.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Vintila Valentin (Wi)",
+    "clasa": "11",
+    "intrare/ieșire": "galeti.in / galeti.out",
+    "limită timp": "1 secunde",
+    "limită memorie": "32 MB / 32 MB",
+    "sursa problemei": "OJI 2018, clasele XII-XII",
+    "autor": "Adrian Panaete",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 1,
+  "memoryLimitMb": 32,
+  "author": "Adrian Panaete",
+  "sourceAttribution": "OJI 2018, clasele XII-XII",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/2785/galeti"
+}

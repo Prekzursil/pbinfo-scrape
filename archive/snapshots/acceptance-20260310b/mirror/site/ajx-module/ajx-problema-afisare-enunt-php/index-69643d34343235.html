@@ -1,0 +1,68 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4425"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>Xorin se plimba pe stradă când a dat peste un șir \(u\) de \(N\) numere naturale. Curios din fire, acesta vrea să aplice operații alchimice fiecărui element din șir. Singura operație alchimică știută de el este ,,solve et coagula’‘ (dizolvă și coagulează), învățată dintr-un eseu despre Harap Alb. Procedeul ,,solve et coagula’‘ este următorul: se ia un număr natural, de exemplu \(84\), se descompune în factori primi: \( 84 = 2^2\cdot3\cdot7  \) iar rezultatul se obține din suma \(xor\) a acestor factori primi, luați o singură dată \(2\oplus3\oplus7=6\)</p>
+
+<p>Xorin aplică procedeul ,,solve et coagula’‘ fiecărui element din șirul \(u\), obținând un nou șir \(v\) (elementului \({u}_{i}\) îi corespunde elementul \({v}_{i}\)).</p>
+
+<p>Roxana găsește noul șir \(v\) și vă adresează o întrebare: câte perechi de indici \((a, b)\), unde \(1 \le  a \le b \le N\), există, cu proprietatea că suma \(xor\) a elementelor \({v}_{i}\), cu \(a \le i \le b\), este \(0\)?</p>
+
+<h1>Date de intrare</h1>
+
+<p>Prima linie a fișierului de intrare <code>basme.in</code> conține numărul natural \(N\). A doua linie conține \(N\) numere naturale, elementele șirului inițial \(u\).</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>basme.out</code> va conține pe prima linie numărul de perechi de indici \((a,b)\), cu proprietatea specificată anterior.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>\( 1 \le N \le 200\ 000 \)</li>
+	<li>\( 2 \le u_i \le V \), oricare ar fi \( 1 \le i \le N \)</li>
+	<li>\( 1 \le V \le 10\ 000\ 000 \),</li>
+	<li>Aplicarea procedeului pentru valoarea \(1\) va da valoarea \(0\)</li>
+	<li>Pentru teste în valoare de 21 de puncte, \(N \le 1\ 000\) și \(V \le 1\ 000\ 000\).</li>
+	<li>Pentru teste în valoare de 39 de puncte, \(N \le 40\ 000\) și \(V \le 10\ 000\ 000\).</li>
+	<li>Pentru teste în valoare de 17 puncte, \(N \le 200\ 000\) și \(V \le 10\ 000\ 000\) și toate numerele sunt prime.</li>
+	<li>Pentru teste în valoare de 23 de puncte, nu există restricții suplimentare.</li>
+</ul>
+
+<h1>Note explicative</h1>
+
+<ul>
+	<li>Operaţia \(xor\) reprezintă operaţia de disjuncţie exclusivă.</li>
+	<li>În cazul acestei probleme, operaţia \(xor\) se realizează pe biţii operanzilor. De exemplu, \(5 \oplus 12 = 9 \ (0101 \oplus 1100 = 1001)\).</li>
+	<li>Prin suma \(xor\) a \(n\) numere \(x_i\), se înțelege rezultatul obținut prin aplicarea succesiva a operației xor între acestea: \(x_1 \oplus x_2 \oplus \ldots \oplus x_{n-1} \oplus x_{n}\)</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>basme.in</code></p>
+
+<pre>3
+236 23 410</pre>
+
+<p><code>basme.out</code></p>
+
+<pre>1</pre>
+
+<h3>Explicație</h3>
+
+<p>\(u_1 = 236\) are factorii primi \(2\) și \(59\), deci \(v_1 = 2 \oplus 59 = 57\). \(u_2 = 23\) este prim, deci \(v_2 = 23\). \(u_3 = 410 = 41 \cdot 2 \cdot 5\), deci \(v_3 = 41 \oplus 2 \oplus 5 = 46\). Astfel, șirul \(v\) este \([57, 23, 46]\). Singura subsecvență continuă care are suma \(xor\ 0\) este \([57, 23, 46]\), deci răspunsul este \(1\).</p>
+
+<h1>Exemplu:</h1>
+
+<p><code>basme.in</code></p>
+
+<pre>10
+84 4 5 6 10 225 2 13 15 26</pre>
+
+<p><code>basme.out</code></p>
+
+<pre>3</pre>
+
+<h3>Explicație</h3>
+
+<p>Șirul inițial \(u\) se transformă în următorul șir \(v\): \([6,2,5,1,7,6,2,13,6,15]\). Subsecvențele \([6, 2, 5, 1]\), \([5,1,7,6]\) și \([7,6,2,13,6,15]\) au suma \(xor\ 0\). Astfel, pentru acest șir, sunt \(3\) perechi de indici care respectă proprietatea cerută: \((1,4)\), \((3,6)\) și \((5,10)\). </p>		</article>
+		</body></html>

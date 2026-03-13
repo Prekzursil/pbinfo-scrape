@@ -1,0 +1,111 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1205"><article id="enunt">
+			<p>Pe vremea maurilor, transmiterea unor mesaje codificate între două persoane se făcea folosind un cifru numit <strong>nod</strong>. Cele două persoane alegeau în secret o poveste. Aceasta era scrisă într-o carte folosind litere mici și mari ale alfabetului englez, pe <code>P</code> pagini, numerotate de la <code>1</code> la <code>P</code>, fiecare conținând exact <code>R</code> rânduri, numerotate în cadrul fiecărei pagini de la <code>1</code> la <code>R</code>, iar fiecare rând fiind format din exact <code>C</code> cuvinte, numerotate în cadrul fiecărui rând de la <code>1</code> la <code>C</code>.</p>
+
+<p>Un cuvânt al mesajului de transmis era codificat prin poziția sa în povestea aleasă de cei doi, folosind trei numere scrise cu cifre romane, ce indicau în ordine: numărul paginii, numărul rândului în cadrul paginii, respectiv al cuvântului în cadrul rândului.<br>
+Mesajul astfel codificat era scris pe trei linii. Pe prima linie erau scrise numerele paginilor, pe a doua linie numerele rândurilor, iar pe a treia linie erau scrise numerele de ordine ale cuvintelor. </p>
+
+<p>Presupunem că mesajul este format din primul cuvânt de pe al cincilea rând al celei de a doua pagini și din al patrulea cuvânt de pe rândul al doilea al primei pagini.  Mesajul putea fi transmis pe trei linii în modul următor:</p>
+
+<ul>
+	<li><code>II I</code>		(numerele paginilor)</li>
+	<li><code>V II</code>		(numerele rândurilor)</li>
+	<li><code>I IV</code>  		(numerele cuvintelor)</li>
+</ul>
+
+<p>Cifrele romane sunt scrise cu majusculele <code>M</code>, <code>D</code>, <code>C</code>, <code>L</code>, <code>X</code>, <code>V</code>, <code>I</code>, iar valorile corespunzătoare lor sunt în ordine: <code>1000</code>, <code>500</code>, <code>100</code>, <code>50</code>, <code>10</code>, <code>5</code>, <code>1</code>. Valoarea unui număr scris cu cifre romane se calculează parcurgând de la stânga la dreapta cifrele numărului astfel:</p>
+
+<ul>
+	<li>cifra curentă se adună la valoarea obținută până în acel moment, dacă cifra următoare este mai mică sau egală cu ea;</li>
+	<li>cifra curentă se scade din valoarea obținută până în acel moment, dacă cifra următoare este mai mare decât ea;</li>
+	<li>ultima cifră se adună întotdeauna la valoarea obținută până în acel moment.</li>
+</ul>
+
+<p>De exemplu pentru numărul <code>MCDXLVI</code> scris cu cifre romane,  se obține valoarea <code>1446</code> în sistem zecimal, astfel: <code>1000-100+500-10+50+5+1</code>, iar pentru numărul <code>XXI</code> scris cu cifre romane se obține valoarea <code>21</code> în sistemul zecimal astfel: <code>10+10+1</code>. </p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscându-se textul poveștii ales de cei doi și mesajul codificat de ei scrieți un program care rezolvă următoarele două cerințe:</p>
+
+<p>a) Rescrie mesajul codificat folosind scrierea cu cifre din sistemul zecimal. <br>
+b) Afișează toate cuvintele mesajului decodificat în ordinea în care acestea apar în poveste.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fişierul <code>nod.in</code> conține:</p>
+
+<ul>
+	<li>pe prima linie numărul <code>1</code>, dacă se cere rezolvarea doar a cerinței a) sau numărul <code>2</code>, dacă se cere rezolvarea cerinței b);</li>
+	<li>pe următoarele trei linii mesajul codificat după regulile descrise în enunț;</li>
+	<li>dacă primul număr din fișier este <code>2</code> atunci a cincea linie conține trei numere naturale <code>P</code>, <code>R</code> și <code>C</code>, separate între ele prin câte un spaţiu, cu semnificaţia din enunţ;</li>
+	<li>pe următoarele <code>PxR</code> linii este scris textul poveștii, fiecare linie conținând <code>C</code> cuvinte, separate prin câte un spațiu.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă primul număr din fișierul de intrare este <code>1</code> atunci fişierul <code>nod.out</code> va conține, în aceeași ordine, pe trei linii, numerele din mesajul codificat scrise în sistem zecimal. Numerele vor fi despărțite în cadrul liniilor prin câte un spațiu.</p>
+
+<p>Dacă primul număr din fișierul de intrare este <code>2</code> atunci fişierul <code>nod.out</code> va conține pe o singură linie cuvintele mesajului decodificat, în ordinea din poveste. Cuvintele vor fi separate prin câte un spațiu.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ P ≤ 2000</code>;  <code>1 ≤  R ≤ 25</code>; <code>1 ≤ C ≤ 15</code></li>
+	<li><code>1 ≤</code> lungimea unui cuvânt din poveste <code>≤ 12</code></li>
+	<li>orice număr scris cu cifre romane are cel mult <code>10</code> majuscule</li>
+	<li>mesajul decodificat va conține cel mult <code>20</code> de cuvinte</li>
+</ul>
+
+
+<h1>Exemplul 1</h1>
+
+<p><code>nod.in</code></p>
+
+<pre>1
+III II I
+II V II
+VI I IV</pre>
+
+<p><code>nod.out</code></p>
+
+<pre>3 2 1
+2 5 2
+6 1 4</pre>
+
+<h3>Explicație</h3>
+
+<p>Testul de intrare indică rezolvarea primei cerințe, adică cerința a).<br>
+Numerele de pe fiecare linie sunt scrise în aceeași ordine, în sistemul zecimal.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>nod.in</code></p>
+
+<pre>2
+I III II I II 
+I I II I II 
+I II II II IV
+3 2 4
+La Olimpiada problemele pot
+avea una sau mai 
+multe cerinte Pentru unele 
+probleme comisia poate decide
+ca prima cerinta sa
+fie evaluata si separat</pre>
+
+<p><code>nod.out</code></p>
+
+<pre>La Olimpiada comisia decide prima</pre>
+
+<h3>Explicație</h3>
+
+<p>Testul de intrare indică rezolvarea celei de a doua cerințe, adică cerința b). Cuvintele identificate în poveste sunt:</p>
+
+<p><code>La</code> – prin <code>(I,I,I)</code><br>
+<code>prima</code> – prin <code>(III,I,II)</code><br>
+<code>comisia</code> – prin <code>(II,II,II)</code><br>
+<code>Olimpiada</code> – prin <code>(I,I,II)</code><br>
+<code>decide</code> – prin <code>(II,II,IV)</code></p>
+
+<p>Cuvintele mesajului decodificat, în ordinea din poveste, sunt:<br>
+<code>La Olimpiada comisia decide prima</code></p>		</article>
+		</body></html>

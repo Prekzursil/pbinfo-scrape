@@ -1,0 +1,94 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2976"><article id="enunt">
+			<p>Dintr-un șir format din <code>N</code> cifre, numerotate de la <code>1</code> la <code>N</code>, Ionel ia exact <code>M</code> cifre aflate pe poziții consecutive. El lipește cifrele luate sau le amestecă și apoi le lipește pentru a obține cu ele un număr cât mai mare.</p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând <code>N</code>, <code>M</code> și cele <code>N</code> cifre din șir, să se determine:<br>
+1) cel mai mare număr care se poate obține din primele <code>M</code> dintre cele <code>N</code> cifre date;<br>
+2) de unde va lua Ionel <code>M</code> cifre aflate pe poziții consecutive pentru a obține un număr maxim; dacă sunt mai multe poziții corespunzătoare unui număr maxim, alegerea se va face astfel încât numărul format din cifrele rămase, în ordinea în care erau, să fie cât mai mare posibil; dacă și în acest caz există mai multe soluții, se alege poziția maximă.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Din fișierul <code>maxim.in</code> se citesc: <code>P</code> de pe prima linie, reprezentând cerința problemei (<code>1</code> sau <code>2</code>), <code>N</code> și <code>M</code> de pe a doua linie, despărțite printr-un spațiu, cu semnificația din enunț, iar de pe linia a treia, se citesc cele <code>N</code> cifre, despărțite prin câte un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>În fișierul <code>maxim.out</code> se scrie:<br>
+- pentru <code>P = 1</code>: numărul maxim care se poate obține cu ajutorul primelor <code>M</code> cifre dintre cele <code>N</code> date, fără spații între cifrele numărului;<br>
+- pentru <code>P = 2</code>: un număr reprezentând poziția cerută.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>M</code>, <code>N</code> numere naturale, <code>1 ≤ N ≤ 500000</code>, <code>1 ≤ M ≤ 1000</code>, <code>M &lt; N</code></li>
+	<li>Cele <code>N</code> valori de pe linia a treia sunt numere naturale între <code>0</code> și <code>9</code></li>
+	<li>Secvența de <code>N</code> cifre poate să înceapă cu cel mult <code>M - 1</code> cifre nule.</li>
+	<li><code>30</code> de puncte se vor obține cu rezolvarea cerinței <code>1</code>, iar <code>60</code> de puncte se vor obține cu rezolvarea cerinței <code>2</code>.</li>
+	<li>Pentru <code>50%</code> dintre teste, <code>N &lt; 1000</code> și <code>M &lt; 10</code>.</li>
+	<li>În concurs s-au acordat <code>10</code> puncte din oficiu. Aici se acordă pentru exemplele din enunț.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>maxim.in</code></p>
+
+<pre>1
+10 3
+7 2 8 1 0 0 4 7 8 1</pre>
+
+<p><code>maxim.out</code></p>
+
+<pre>872</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința <code>1</code>. Cu primele trei cifre dintre cele <code>10</code> cifre date se pot forma numerele: <code>728</code>, <code>782</code>, <code>287</code>, <code>278</code>, <code>827</code>, <code>872</code>, cel mai mare fiind <code>872</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>maxim.in</code></p>
+
+<pre>2
+10 3
+7 2 8 1 0 0 4 7 8 1</pre>
+
+<p><code>maxim.out</code></p>
+
+<pre>7</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința <code>2</code>. Alegând cifrele începând de la poziția a <code>7</code>-a (cifrele <code>4</code>, <code>7</code> și <code>8</code>), se va forma numărul <code>874</code>, care este cel mai mare posibil.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>maxim.in</code></p>
+
+<pre>2
+10 2
+0 7 2 8 4 8 7 1 7 8</pre>
+
+<p><code>maxim.out</code></p>
+
+<pre>9</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința <code>2</code>. Alegând cifrele începând de la poziția a <code>6</code>-a (cifrele <code>8</code> și <code>7</code>) sau cifrele începând cu poziția a <code>9</code>-a (<code>7</code> și <code>8</code>) va forma numărul <code>87</code> care este cel mai mare număr de două cifre consecutive. Dar, eliminând cifrele de pe pozițiile <code>6</code> și <code>7</code>, secvența rămasă este <code>072841781</code> (cu valoarea <code>72841781</code>), pe când eliminând cifrele de pe pozițiile <code>9</code> și <code>10</code> numărul rămas este <code>72848711</code> care este mai mare.</p>
+
+<h1>Exemplul 4:</h1>
+
+<p><code>maxim.in</code></p>
+
+<pre>2
+10 2
+5 9 6 9 6 8 2 6 6 8</pre>
+
+<p><code>maxim.out</code></p>
+
+<pre>4</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința <code>2</code>. Alegând cifrele de pe pozițiile <code>2</code>, <code>3</code> sau <code>3</code>, <code>4</code> sau <code>4</code>, <code>5</code> se va forma numărul <code>96</code> care este cel mai mare număr de două cifre consecutive posibil. Dar, eliminând cifrele de pe pozițiile <code>2</code> și <code>3</code>, numărul rămas este <code>59682668</code>, eliminând cifrele de pe pozițiile <code>3</code> și <code>4</code> numărul rămas este <code>59682668</code>, eliminând cifrele de pe pozițiile <code>4</code> și <code>5</code> numărul rămas este <code>59682668</code>. Se poate afișa poziția <code>2</code> sau <code>3</code> sau <code>4</code>, dar se va alege poziția maximă, <code>4</code>.</p>		</article>
+		</body></html>

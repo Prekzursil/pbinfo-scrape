@@ -1,0 +1,311 @@
+{
+  "id": 3716,
+  "slug": "crossword",
+  "name": "Crossword",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3716/crossword",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 27,
+      "name": "Backtracking",
+      "slug": "backtracking",
+      "href": "/?pagina=probleme-lista&tag=27"
+    },
+    {
+      "id": 50,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=50"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Enunț",
+      "html": "<p>Se dă o matrice de rebus cu <code>n</code> linii și <code>m</code> coloane. Fiecare celulă conține unul dintre caracterele:<br>\n</p><ul>\n\t<li><code>'+'</code> – celulă blocată (nu poate conține literă)</li>\n\t<li><code>'-'</code> – celulă liberă (trebuie completată cu o literă)</li><br>\n</ul><p></p><p>De asemenea, se dă o listă de <code>W</code> cuvinte (formate doar din litere mari <code>A-Z</code>) care trebuie completate în rebus.</p><p>Un cuvânt poate fi plasat:<br>\n</p><ul>\n\t<li>pe orizontală (în aceeași linie), sau</li>\n\t<li>pe verticală (în aceeași coloană),</li><br>\n</ul><p></p><p>într-un segment maximal de celule <code>'-'</code> consecutive (numit <strong>slot</strong>). Lungimea cuvântului trebuie să fie egală cu lungimea slotului.</p><p>Două cuvinte se pot intersecta (o celulă poate aparține atât unui slot orizontal, cât și unuia vertical), dar în acest caz litera rezultată în acea celulă trebuie să coincidă pentru ambele cuvinte.</p><p>Fiecare cuvânt din listă trebuie folosit exact o singură dată.</p>",
+      "text": "Se dă o matrice de rebus cu n linii și m coloane. Fiecare celulă conține unul dintre caracterele: '+' – celulă blocată (nu poate conține literă) '-' – celulă liberă (trebuie completată cu o literă) De asemenea, se dă o listă de W cuvinte (formate doar din litere mari A-Z) care trebuie completate în rebus.Un cuvânt poate fi plasat: pe orizontală (în aceeași linie), sau pe verticală (în aceeași coloană), într-un segment maximal de celule '-' consecutive (numit slot). Lungimea cuvântului trebuie să fie egală cu lungimea slotului.Două cuvinte se pot intersecta (o celulă poate aparține atât unui slot orizontal, cât și unuia vertical), dar în acest caz litera rezultată în acea celulă trebuie să coincidă pentru ambele cuvinte.Fiecare cuvânt din listă trebuie folosit exact o singură dată."
+    },
+    {
+      "title": "Cerința",
+      "html": "<p>Completați rebusul și afișați matricea finală.</p>",
+      "text": "Completați rebusul și afișați matricea finală."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>\"crossword.in\"</code> conține:<br>\n</p><ul>\n\t<li>pe prima linie numerele <code>n</code> și <code>m</code></li>\n\t<li>pe următoarele <code>n</code> linii câte un șir de <code>m</code> caractere din mulțimea <code>{'+', '-'}</code> (fără spații)</li>\n\t<li>pe ultima linie un șir care conține cele <code>W</code> cuvinte ce trebuie plasate, separate prin caracterul <code>;</code>.</li><br>\n</ul><p></p>",
+      "text": "Fișierul de intrare \"crossword.in\" conține: pe prima linie numerele n și m pe următoarele n linii câte un șir de m caractere din mulțimea {'+', '-'} (fără spații) pe ultima linie un șir care conține cele W cuvinte ce trebuie plasate, separate prin caracterul ;."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>\"crossword.out\"</code> va conține <code>n</code> linii, fiecare cu <code>m</code> caractere, reprezentând rebusul completat (celulele <code>'+'</code> rămân neschimbate, iar celulele <code>'-'</code> devin litere mari <code>A-Z</code>).</p>",
+      "text": "Fișierul de ieșire \"crossword.out\" va conține n linii, fiecare cu m caractere, reprezentând rebusul completat (celulele '+' rămân neschimbate, iar celulele '-' devin litere mari A-Z)."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ n, m ≤ 1000</code></li>\n\t<li><code>1 ≤ W ≤ 200</code></li>\n\t<li>fiecare cuvânt are lungimea între <code>2</code> și <code>max(n, m)</code></li>\n\t<li>cuvintele sunt formate doar din caractere <code>A-Z</code></li>\n\t<li>se garantează că fiecare celulă <code>'-'</code> aparține cel puțin unui slot (orizontal sau vertical) de lungime <code>&gt;= 2</code></li>\n\t<li>se garantează că numărul total de sloturi (orizontale + verticale) de lungime <code>&gt;= 2</code> este exact <code>W</code></li>\n\t<li>se garantează că există cel puțin o soluție și că soluția este unică</li>\n</ul>",
+      "text": "1 ≤ n, m ≤ 1000 1 ≤ W ≤ 200 fiecare cuvânt are lungimea între 2 și max(n, m) cuvintele sunt formate doar din caractere A-Z se garantează că fiecare celulă '-' aparține cel puțin unui slot (orizontal sau vertical) de lungime >= 2 se garantează că numărul total de sloturi (orizontale + verticale) de lungime >= 2 este exact W se garantează că există cel puțin o soluție și că soluția este unică"
+    },
+    {
+      "title": "Exemplul 1",
+      "html": "<p><code>crossword.in</code></p><pre>10 10\n+-++++++++\n+-++++++++\n+-++++++++\n+-----++++\n+-+++-++++\n+-+++-++++\n+++++-++++\n++------++\n+++++-++++\n+++++-++++\nLONDON;DELHI;ICELAND;ANKARA</pre><p><code>crossword.out</code></p><pre>+L++++++++\n+O++++++++\n+N++++++++\n+DELHI++++\n+O+++C++++\n+N+++E++++\n+++++L++++\n++ANKARA++\n+++++N++++\n+++++D++++</pre>",
+      "text": "crossword.in10 10 +-++++++++ +-++++++++ +-++++++++ +-----++++ +-+++-++++ +-+++-++++ +++++-++++ ++------++ +++++-++++ +++++-++++ LONDON;DELHI;ICELAND;ANKARAcrossword.out+L++++++++ +O++++++++ +N++++++++ +DELHI++++ +O+++C++++ +N+++E++++ +++++L++++ ++ANKARA++ +++++N++++ +++++D++++"
+    },
+    {
+      "title": "Exemplul 2",
+      "html": "<p><code>crossword.in</code></p><pre>10 10\n+-++++++++\n+-++++++++\n+-------++\n+-++++++++\n+-++++++++\n+------+++\n+-+++-++++\n+++++-++++\n+++++-++++\n++++++++++\nAGRA;NORWAY;ENGLAND;GWALIOR</pre><p><code>crossword.out</code></p><pre>+E++++++++\n+N++++++++\n+GWALIOR++\n+L++++++++\n+A++++++++\n+NORWAY+++\n+D+++G++++\n+++++R++++\n+++++A++++\n++++++++++</pre>",
+      "text": "crossword.in10 10 +-++++++++ +-++++++++ +-------++ +-++++++++ +-++++++++ +------+++ +-+++-++++ +++++-++++ +++++-++++ ++++++++++ AGRA;NORWAY;ENGLAND;GWALIORcrossword.out+E++++++++ +N++++++++ +GWALIOR++ +L++++++++ +A++++++++ +NORWAY+++ +D+++G++++ +++++R++++ +++++A++++ ++++++++++"
+    },
+    {
+      "title": "Exemplul 3",
+      "html": "<p><code>crossword.in</code></p><pre>10 10\n++++++-+++\n++------++\n++++++-+++\n++++++-+++\n+++------+\n++++++-+-+\n++++++-+-+\n++++++++-+\n++++++++-+\n++++++++-+\nICELAND;MEXICO;PANAMA;ALMATY</pre><p><code>crossword.out</code></p><pre>++++++I+++\n++MEXICO++\n++++++E+++\n++++++L+++\n+++PANAMA+\n++++++N+L+\n++++++D+M+\n++++++++A+\n++++++++T+\n++++++++Y+</pre>",
+      "text": "crossword.in10 10 ++++++-+++ ++------++ ++++++-+++ ++++++-+++ +++------+ ++++++-+-+ ++++++-+-+ ++++++++-+ ++++++++-+ ++++++++-+ ICELAND;MEXICO;PANAMA;ALMATYcrossword.out++++++I+++ ++MEXICO++ ++++++E+++ ++++++L+++ +++PANAMA+ ++++++N+L+ ++++++D+M+ ++++++++A+ ++++++++T+ ++++++++Y+"
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "1 ≤ n, m ≤ 1000",
+    "1 ≤ W ≤ 200",
+    "fiecare cuvânt are lungimea între 2 și max(n, m)",
+    "cuvintele sunt formate doar din caractere A-Z",
+    "se garantează că fiecare celulă '-' aparține cel puțin unui slot (orizontal sau vertical) de lungime >= 2",
+    "se garantează că numărul total de sloturi (orizontale + verticale) de lungime >= 2 este exact W",
+    "se garantează că există cel puțin o soluție și că soluția este unică"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q3743bba7e3.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Andrei Visalon (Prekzursil)",
+    "clasa": "11",
+    "intrare/ieșire": "crossword.in / crossword.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 64 MB",
+    "sursa problemei": "hackerrank.com (modificată)",
+    "autor": "Mirela Mlisan, Andrei Visalon",
+    "dificultate": "dificilă"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "author": "Mirela Mlisan, Andrei Visalon",
+  "sourceAttribution": "hackerrank.com (modificată)",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3716/crossword"
+}

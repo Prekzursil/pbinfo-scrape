@@ -1,0 +1,301 @@
+{
+  "id": 4078,
+  "slug": "distanta",
+  "name": "Distanta",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4078/distanta",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 16,
+      "name": "Teoria Grafurilor",
+      "slug": "teoria-grafurilor",
+      "href": "/?pagina=probleme-lista&tag=16"
+    },
+    {
+      "id": 17,
+      "name": "Parcurgerea grafurilor neorientate",
+      "slug": "parcurgerea-grafurilor-neorientate",
+      "href": "/?pagina=probleme-lista&tag=17"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Matei, care locuiește in orașul <code>p</code>, vrea să ajungă in orașul <code>q</code> să il viziteze. El are o hartă pe care se află <code>n</code> orașe și <code>m</code> drumuri prin care poate să treacă pentru a ajunge la destinație. Pe hartă apare și durata de timp <code>td</code> pentru fiecare drum, care reprezintă numărul de minute în care este parcurs drumul și <code>to</code> pentru traversarea orașelor (unele orașe sunt mai aglomerate, iar altele nu). Matei vrea să ajungă cat mai rapid la destinație, dar dacă există mai multe trasee de timp minim, il va alege pe acela care trece prin mai multe orașe. Nu vor exista trasee de timp minim cu același număr de orașe. Ajutati-l pe Matei să gasească drumul cerut.</p>",
+      "text": "Matei, care locuiește in orașul p, vrea să ajungă in orașul q să il viziteze. El are o hartă pe care se află n orașe și m drumuri prin care poate să treacă pentru a ajunge la destinație. Pe hartă apare și durata de timp td pentru fiecare drum, care reprezintă numărul de minute în care este parcurs drumul și to pentru traversarea orașelor (unele orașe sunt mai aglomerate, iar altele nu). Matei vrea să ajungă cat mai rapid la destinație, dar dacă există mai multe trasee de timp minim, il va alege pe acela care trece prin mai multe orașe. Nu vor exista trasee de timp minim cu același număr de orașe. Ajutati-l pe Matei să gasească drumul cerut."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>distanta.in</code> conține pe prima linie numărul <code>n</code>, iar pe următoarele <code>n</code> linii se citesc <code>nume oraș</code> și <code>to</code> al acestuia. Se citește <code>m</code>, iar pe următoarele <code>m</code> linii <code>i</code>, <code>j</code>, <code>td</code> unde <code>i</code> și <code>j</code> reprezintă orașele care sunt legate prin drumul care se parcurge în <code>td</code>. Pe ultima linie se citesc <code>p</code> și <code>q</code>.</p>",
+      "text": "Fișierul de intrare distanta.in conține pe prima linie numărul n, iar pe următoarele n linii se citesc nume oraș și to al acestuia. Se citește m, iar pe următoarele m linii i, j, td unde i și j reprezintă orașele care sunt legate prin drumul care se parcurge în td. Pe ultima linie se citesc p și q."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>distanta.out</code> va conține pe prima linie numărul <code>S</code>, reprezentând durata de timp în care se parcurge traseul cerut, iar pe următoarele linii se afișează traseul. Dacă nu există nici un traseu se va afișa <code>NU EXISTA TRASEU</code>.</p>",
+      "text": "Fișierul de ieșire distanta.out va conține pe prima linie numărul S, reprezentând durata de timp în care se parcurge traseul cerut, iar pe următoarele linii se afișează traseul. Dacă nu există nici un traseu se va afișa NU EXISTA TRASEU."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 &lt; n &lt; 21</code></li>\n\t<li><code>0 ≤ m ≤ 190</code></li>\n\t<li><code>0 &lt; numele orașelor (număr caractere) &lt; 21</code></li>\n\t<li><code>0 ≤ numărul de drumuri dintre oricare 2 orașe ≤ 1</code></li>\n\t<li><code>0 ≤ S ≤ 2.000.000.001</code></li>\n\t<li>Nu există drum de la un oraș la el însuși</li>\n\t<li>Dacă nu există nici un traseu se va afișa <code>NU EXISTA TRASEU</code>.</li>\n</ul>",
+      "text": "1 < n < 21 0 ≤ m ≤ 190 0 < numele orașelor (număr caractere) < 21 0 ≤ numărul de drumuri dintre oricare 2 orașe ≤ 1 0 ≤ S ≤ 2.000.000.001 Nu există drum de la un oraș la el însuși Dacă nu există nici un traseu se va afișa NU EXISTA TRASEU."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>distanta.in</code></p><pre>7 \nBistrita 14\nOradea 80\nBeius 7\nGalatii-Bistritei 1\nReghin 3\nSibiu 15\nCluj-Napoca 30\n10\nBistrita Oradea 223\nCluj-Napoca Sibiu 119\nBistrita Cluj-Napoca 100\nBeius Oradea 50\nBistrita Galatii-Bistritei 15\nReghin Galatii-Bistritei 35\nOradea Cluj-Napoca 100\nSibiu Reghin 154\nBeius Sibiu 130\nReghin Cluj-Napoca 133\nBistrita Beius</pre><p><code>distanta.out</code></p><pre>374\nBistrita\nGalatii-Bistritei\nReghin\nSibiu\nBeius</pre><h3>Explicație</h3><p>Timpul minim calculat este <code>375 minute</code>.<br>\nBistrița Oradea Beiuș este un traseu de timp <code>375 minute</code> cu <code>3 orașe</code>.<br>\nBistrița Galații-Bistriței Reghin Sibiu Beiuș este și el un traseu de <code>375 minute</code> cu <code>5 orașe</code>.<br>\nSe alege al doilea traseu, deoarece conține mai multe orașe.</p><img src=\"https://nomitrax.com/pbinfo/Distanta/distanta_desen.png\" alt=\"desen\">",
+      "text": "distanta.in7 Bistrita 14 Oradea 80 Beius 7 Galatii-Bistritei 1 Reghin 3 Sibiu 15 Cluj-Napoca 30 10 Bistrita Oradea 223 Cluj-Napoca Sibiu 119 Bistrita Cluj-Napoca 100 Beius Oradea 50 Bistrita Galatii-Bistritei 15 Reghin Galatii-Bistritei 35 Oradea Cluj-Napoca 100 Sibiu Reghin 154 Beius Sibiu 130 Reghin Cluj-Napoca 133 Bistrita Beiusdistanta.out374 Bistrita Galatii-Bistritei Reghin Sibiu BeiusExplicațieTimpul minim calculat este 375 minute. Bistrița Oradea Beiuș este un traseu de timp 375 minute cu 3 orașe. Bistrița Galații-Bistriței Reghin Sibiu Beiuș este și el un traseu de 375 minute cu 5 orașe. Se alege al doilea traseu, deoarece conține mai multe orașe."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Timpul minim calculat este 375 minute. Bistrița Oradea Beiuș este un traseu de timp 375 minute cu 3 orașe. Bistrița Galații-Bistriței Reghin Sibiu Beiuș este și el un traseu de 375 minute cu 5 orașe. Se alege al doilea traseu, deoarece conține mai multe orașe."
+    }
+  ],
+  "constraints": [
+    "1 < n < 21",
+    "0 ≤ m ≤ 190",
+    "0 < numele orașelor (număr caractere) < 21",
+    "0 ≤ numărul de drumuri dintre oricare 2 orașe ≤ 1",
+    "0 ≤ S ≤ 2.000.000.001",
+    "Nu există drum de la un oraș la el însuși",
+    "Dacă nu există nici un traseu se va afișa NU EXISTA TRASEU."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q1f57375e04.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Ilovan Cristian Daniel (cristi124349)",
+    "clasa": "11",
+    "intrare/ieșire": "distanta.in / distanta.out",
+    "limită timp": "0.7 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "-",
+    "autor": "Ilovan Cristian Daniel",
+    "dificultate": "medie"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.7,
+  "memoryLimitMb": 64,
+  "author": "Ilovan Cristian Daniel",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4078/distanta"
+}

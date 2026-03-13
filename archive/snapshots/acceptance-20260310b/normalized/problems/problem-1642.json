@@ -1,0 +1,334 @@
+{
+  "id": 1642,
+  "slug": "culegere",
+  "name": "Culegere",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1642/culegere",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 44,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=44"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>În funcţie de finalul poveştii, afişaţi starea lui Snake şi harta pădurii în secunda respectivă. Pe hartă trebuie să fie marcate parcelele ocupate de corpul lui Snake, inclusiv capul.</p>",
+      "text": "În funcţie de finalul poveştii, afişaţi starea lui Snake şi harta pădurii în secunda respectivă. Pe hartă trebuie să fie marcate parcelele ocupate de corpul lui Snake, inclusiv capul."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>culegere.in</code> conține pe prima linie valorile: <code>N</code> – numărul de linii, <code>M</code> – numărul de coloane în care este împărţită pădurea, K- lungimea şarpelui şi <code>E</code> – numărul de evenimente din pădure, separate prin câte un spaţiu.</p><p>Următoarele <code>E</code> linii respectă unul dintre formatele:</p><ul>\n\t<li><code>1 x y st en</code> – Apare un măr la secunda <code>st</code>, pe linia <code>x</code>, coloana <code>y</code> şi dispare la secunda <code>en</code></li>\n\t<li><code>2 x y st en v</code> – Apare un schimbător la secunda <code>st</code>, pe linia <code>x</code>, coloana <code>y</code>, dispare la secunda <code>en</code> şi are valoarea <code>v</code>. Evenimentele sunt sortate crescător în funcţie de <code>st</code>.</li>\n</ul>",
+      "text": "Fișierul de intrare culegere.in conține pe prima linie valorile: N – numărul de linii, M – numărul de coloane în care este împărţită pădurea, K- lungimea şarpelui şi E – numărul de evenimente din pădure, separate prin câte un spaţiu.Următoarele E linii respectă unul dintre formatele: 1 x y st en – Apare un măr la secunda st, pe linia x, coloana y şi dispare la secunda en 2 x y st en v – Apare un schimbător la secunda st, pe linia x, coloana y, dispare la secunda en şi are valoarea v. Evenimentele sunt sortate crescător în funcţie de st."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>culegere.out</code> va conține pe prima linie cuvântul <code>BLOCAT</code> sau <code>LIBER</code>, în funcţie de starea lui Snake la sfârşitul poveştii. Pe fiecare dintre următoarele <code>N</code> linii, se vor afla <code>M</code> caractere din mulţimea <code>{'.', 'O', '#'}</code>, cu<br>\nurmătoarea semnificaţie : <code>'.'</code> – parcelă liberă, majuscula <code>'O'</code> – parcelă în care se află o porţiune din corpul şarpelui, <code>'#'</code> – parcela în care se află capul lui Snake. Caracterul <code>'#'</code> va apărea o singură dată în matrice.</p>",
+      "text": "Fișierul de ieșire culegere.out va conține pe prima linie cuvântul BLOCAT sau LIBER, în funcţie de starea lui Snake la sfârşitul poveştii. Pe fiecare dintre următoarele N linii, se vor afla M caractere din mulţimea {'.', 'O', '#'}, cu următoarea semnificaţie : '.' – parcelă liberă, majuscula 'O' – parcelă în care se află o porţiune din corpul şarpelui, '#' – parcela în care se află capul lui Snake. Caracterul '#' va apărea o singură dată în matrice."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2 ≤ N, M ≤ 2000; 2 ≤ K &lt; M; 1 ≤ E ≤ 500.000;</code></li>\n\t<li><code>1 ≤ x ≤ N; 1 ≤ y ≤ M; 1 ≤ st &lt; en ≤ 500.000; v ∈ {1,2,3,4}</code></li>\n\t<li>Obiectele apar doar în parcele libere.</li>\n\t<li>Povestea începe la secunda <code>0</code>.</li>\n</ul>",
+      "text": "2 ≤ N, M ≤ 2000; 2 ≤ K < M; 1 ≤ E ≤ 500.000; 1 ≤ x ≤ N; 1 ≤ y ≤ M; 1 ≤ st < en ≤ 500.000; v ∈ {1,2,3,4} Obiectele apar doar în parcele libere. Povestea începe la secunda 0."
+    },
+    {
+      "title": "Exemplul 1",
+      "html": "<p><code>culegere.in</code></p><pre>4 5 3 4\n1 1 5 1 5\n2 1 1 2 6 3\n2 2 1 2 5 2\n2 4 4 3 5 4</pre><p><code>culegere.out</code></p><pre>LIBER\nO....\nOO#..\n.....\n.....</pre><h3>Explicație</h3><p><strong>Secunda 0:</strong></p><pre>OO#..\n.....\n.....\n.....</pre><p><strong>Secunda 1:</strong> apare 1 măr, deplasare spre Est</p><pre>.OO#M\n.....\n.....\n.....</pre><p><strong>Secunda 2:</strong> apar <code>2</code> schimbătoare, deplasare spre Est, înghite măr, creşte coada</p><pre>3OOO#\n2....\n.....\n.....</pre><p><strong>Secunda 3:</strong> apare un schimbător pe <code>(4, 4)</code>, deplasare spre Est şi capul apare pe prima coloană peste schimbătorul <code>3</code> din poziţia <code>(1, 1)</code></p><pre>#.OOO\n2....\n.....\n....4</pre><p><strong>Secunda 4:</strong> Nu apar şi nu dispar obiecte, deplasare spre Sud, corpul urmează acelaşi traseu ca şi capul care a fost influenţat la secunda <code>3</code> de schimbătorul cu valoarea <code>3</code>; capul ajunge peste schimbătorul <code>2</code> de la poziţia <code>(2,1)</code></p><pre>O..OO\n#....\n.....\n....4</pre><p><strong>Secunda 5:</strong> dispare schimbătorul de la <code>(4, 4)</code>, deplasare spre Est deoarece capul a fost influenţat de schimbătorul cu valoarea <code>2</code> la secunda <code>4</code>; dacă mărul nu ar fi fost mâncat, acum ar fi dispărut</p><pre>O...O\nO#...\n.....\n.....</pre><p><strong>Secunda 6:</strong> dispare primul schimbător chiar dacă acesta a fost acoperit de corpul lui<br>\nSnake, deplasare spre Est</p><pre>O....\nOO#..\n.....\n.....</pre><p>Aceasta este configuraţia finală deoarece acum a dispărut şi ultimul obiect. Snake nu s-a blocat în propriul corp, deci este <span class=\"caps\">LIBER</span>.</p>",
+      "text": "culegere.in4 5 3 4 1 1 5 1 5 2 1 1 2 6 3 2 2 1 2 5 2 2 4 4 3 5 4culegere.outLIBER O.... OO#.. ..... .....ExplicațieSecunda 0:OO#.. ..... ..... .....Secunda 1: apare 1 măr, deplasare spre Est.OO#M ..... ..... .....Secunda 2: apar 2 schimbătoare, deplasare spre Est, înghite măr, creşte coada3OOO# 2.... ..... .....Secunda 3: apare un schimbător pe (4, 4), deplasare spre Est şi capul apare pe prima coloană peste schimbătorul 3 din poziţia (1, 1)#.OOO 2.... ..... ....4Secunda 4: Nu apar şi nu dispar obiecte, deplasare spre Sud, corpul urmează acelaşi traseu ca şi capul care a fost influenţat la secunda 3 de schimbătorul cu valoarea 3; capul ajunge peste schimbătorul 2 de la poziţia (2,1)O..OO #.... ..... ....4Secunda 5: dispare schimbătorul de la (4, 4), deplasare spre Est deoarece capul a fost influenţat de schimbătorul cu valoarea 2 la secunda 4; dacă mărul nu ar fi fost mâncat, acum ar fi dispărutO...O O#... ..... .....Secunda 6: dispare primul schimbător chiar dacă acesta a fost acoperit de corpul lui Snake, deplasare spre EstO.... OO#.. ..... .....Aceasta este configuraţia finală deoarece acum a dispărut şi ultimul obiect. Snake nu s-a blocat în propriul corp, deci este LIBER."
+    },
+    {
+      "title": "Exemplul 2",
+      "html": "<p><code>culegere.in</code></p><pre>2 6 5 3\n2 1 6 1 20 3\n2 2 6 2 20 4\n2 2 5 1 20 1</pre><p><code>culegere.out</code></p><pre>BLOCAT\n...OOO\n....#O</pre><h3>Explicație</h3><p>Snake s-a blocat în propriul corp înainte să dispară ultimul obiect.</p>",
+      "text": "culegere.in2 6 5 3 2 1 6 1 20 3 2 2 6 2 20 4 2 2 5 1 20 1culegere.outBLOCAT ...OOO ....#OExplicațieSnake s-a blocat în propriul corp înainte să dispară ultimul obiect."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Secunda 0:"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Snake s-a blocat în propriul corp înainte să dispară ultimul obiect."
+    }
+  ],
+  "constraints": [
+    "2 ≤ N, M ≤ 2000; 2 ≤ K < M; 1 ≤ E ≤ 500.000;",
+    "1 ≤ x ≤ N; 1 ≤ y ≤ M; 1 ≤ st < en ≤ 500.000; v ∈ {1,2,3,4}",
+    "Obiectele apar doar în parcele libere.",
+    "Povestea începe la secunda 0."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q8f503ee3d1.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1200/1642-culegere-1.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1200-1642-culegere-1-png.png",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1200/1642-culegere-2.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1200-1642-culegere-2-png.png",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1200/1642-culegere-3.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1200-1642-culegere-3-png.png",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1200/1642-culegere-4.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1200-1642-culegere-4-png.png",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1200/1642-culegere-5.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1200-1642-culegere-5-png.png",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "9",
+    "intrare/ieșire": "culegere.in / culegere.out",
+    "limită timp": "1 secunde",
+    "limită memorie": "128 MB / 8 MB",
+    "sursa problemei": "Urmasii lui Moisil, 2016",
+    "autor": "Stefan Negrus",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 1,
+  "memoryLimitMb": 128,
+  "author": "Stefan Negrus",
+  "sourceAttribution": "Urmasii lui Moisil, 2016",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1642/culegere"
+}

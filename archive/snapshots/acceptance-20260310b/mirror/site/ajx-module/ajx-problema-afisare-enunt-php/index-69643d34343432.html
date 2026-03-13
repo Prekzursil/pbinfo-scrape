@@ -1,0 +1,94 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4442"><article id="enunt">
+			<p>Algoritmul Radix Sort folosit pentru sortarea unui vector format din elemente numere naturale presupune parcurgerea următorilor paşi:</p>
+
+<ul>
+	<li>se sortează elementele vectorului după ultima cifră, iar în caz de egalitate după poziţia iniţială din şir;</li>
+	<li>se sortează elementele vectorului după penultima cifră, iar în caz de egalitate după poziţia de la pasul precedent;</li>
+	<li>se repetă această operaţie până la cifra cea mai semnificativă (de ordin maxim) din scrierea numerelor din şir.</li>
+</ul>
+
+<p>De exemplu, pentru şirul <code>525, 417, 381, 291, 455</code>, algoritmul presupune efectuarea următorilor paşi:</p>
+
+<ul>
+	<li>sortăm după ultima cifră şi obţinem: <code>381, 291, 525, 455, 417</code>;</li>
+	<li>sortăm după penultima cifră şi obţinem: <code>417, 525, 455, 381, 291</code>;</li>
+	<li>sortăm după prima cifră şi obţinem: <code>291, 381, 417, 455 , 525</code>.</li>
+</ul>
+
+<p>Dacă în şirul iniţial elementele au asociaţi indicii <code>1, 2, 3, 4, 5</code>, iar după fiecare pas al algoritmului de sortare aceşti indici se scriu în ordinea corespunzătoare elementelor asociate în şirul iniţial, atunci ordinea indicilor după fiecare etapă va fi:</p>
+
+<ul>
+	<li><code>3, 4, 1, 5, 2</code>;</li>
+	<li><code>2, 1, 5, 3, 4</code>;</li>
+	<li><code>4, 3, 2, 5, 1</code>.</li>
+</ul>
+
+<p>Observăm că valorile acestor șiruri reprezintă indicii inițiali ai vectorului pe care dorim să îl sortăm. Aceștia formează astfel, la fiecare pas, o permutare a numerelor de la <code>1</code> la <code>N</code>.</p>
+
+<p>Asemănător, şirul poate să fie sortat în orice bază de numeraţie B dacă transformăm numerele în baza B şi apoi aplicăm acelaşi procedeu. De exemplu, dacă şirul pe care dorim să îl sortăm este <code>6, 8, 5</code> şi dorim să apelăm Radix Sort în baza <code>2</code>, numerele vor fi transformate în <code>110</code> (<code>6</code>), <code>1000</code> (<code>8</code>) şi <code>101</code> (<code>5</code>). În continuare vom obţine următoarele şiruri pentru fiecare bit:</p>
+
+<ul>
+	<li>sortăm după ultimul bit: <code>110</code>, <code>1000</code>, <code>101</code>;</li>
+	<li>sortăm după penultimul bit: <code>1000</code>, <code>101</code>, <code>110</code>;</li>
+	<li>sortăm după antepenultimul bit: <code>1000</code>, <code>101</code>, <code>110</code>;</li>
+	<li>sortăm după cel mai semnificativ bit: <code>101</code>, <code>110</code>, <code>1000</code>.</li>
+</ul>
+
+<p>Prin urmare, permutările obţinute sunt, în ordine:</p>
+
+<ul>
+	<li><code>1, 2, 3</code>;</li>
+	<li><code>2, 3, 1</code>;</li>
+	<li><code>2, 3, 1</code>;</li>
+	<li><code>3, 1, 2</code>.</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Pisica Pia are un şir iniţial de lungime <code>N</code> asupra căruia a apelat algoritmul Radix Sort în baza <code>B</code>. Din păcate, sora ei Mitzu s-a jucat cu şirul Piei şi acesta a fost pierdut, dar Pia în continuare are permutările obţinute la fiecare pas în urma apelării algoritmului. Ajutaţi-o pe Pia să descopere un posibil şir iniţial.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fişierului de intrare <code>xidartros.in</code> se află numărul <code>T</code>, reprezentând numărul de teste din problemă. Prima linie a fiecărui test va conţine <code>3</code> numere naturale: <code>N</code> – reprezentând numărul elementelor din şir, <code>B</code> – reprezentând baza folosită în apelarea algoritmului de Radix Sort şi <code>K</code> – reprezentând numărul de paşi ai algoritmului. Următoarele <code>K</code> linii conţin câte <code>N</code> numere naturale reprezentând permutarea indicilor  inițiali ai elementelor din şir după fiecare pas al algoritmului.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>În fişierul de ieşire <code>xidartros.out</code> se vor afişa <code>T</code> linii, linia <code>i</code> conţinând răspunsul pentru cel de al <code>i</code>-lea test. Dacă testul admite soluţie, acesta va conţine  <code>N</code> numere naturale reprezentând elementele şirului iniţial (scrise în baza <code>10</code>), astfel încât, aplicând algoritmul Radix Sort în baza dată în test acestui şir, permutările indicilor elementelor din şir după fiecare pas al algoritmului să fie aceleaşi cu cele date în fişierul de intrare. Dacă testul în schimb nu admite soluţie, pe linia <code>i</code> se va afişa <code>-1</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N, T ≤ 1.000.000</code></li>
+	<li><code>2 ≤ B ≤ 1.000.000.000</code></li>
+	<li><code>1 ≤ K ≤ 64</code></li>
+	<li>Numărul total de elemente citite în input din toate permutarile nu depaseste <code>1.000.000</code> (suma de <code>N * K</code> din  fiecare test <code>≤ 1.000.000</code>)</li>
+	<li>Pentru orice test care admite soluţie, există o soluţie care conţine elemente cuprinse între <code>0</code> și <code>10</code><sup><code>18</code></sup> inclusiv. <strong>Se admite orice soluție corectă care conține elemente în acest interval</strong>.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>xidartros.in</code></p>
+
+<pre>3
+5 10 3
+3 4 1 5 2
+2 1 5 3 4
+4 3 2 5 1
+3 2 4
+1 2 3
+2 3 1
+2 3 1
+3 1 2
+3 2 1
+3 2 1</pre>
+
+<p><code>xidartros.out</code></p>
+
+<pre>525 417 381 291 455
+6 8 5
+-1</pre>
+
+<h3>Explicație</h3>
+
+<p>Pentru primele <code>2</code> teste, vezi explicaţiile din enunţul problemei. Pentru al treilea test, nu există niciun şir care, sortat cu Radix Sort în baza <code>2</code>, să fie sortat într-o singură instanţă şi să obţinem permutarea <code>3, 2, 1</code>.</p>		</article>
+		</body></html>

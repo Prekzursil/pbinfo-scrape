@@ -1,0 +1,113 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4135"><article id="enunt">
+			<p>Alexandra citește un text format din litere mici și mari ale alfabetului englez și spații. Fiind interesată de criptografie, ea elimină toate spațiile și apoi încadrează literele, în ordinea în care acestea apar în text, într-un tablou bidimensional, în care numărul de linii este mai mic sau egal decât numărul de coloane. Întrucât pot exista mai multe moduri de încadrare a textului, Alexandra îl alege pe cel pentru care diferența absolută dintre numărul liniilor și al coloanelor tabloului este minimă. Completarea cu literele textului a tabloului bidimensional se face în ordinea crescătoare a liniilor și în cadrul fiecărei linii, în ordinea crescătoare a coloanelor.</p>
+
+<h1>Cerința</h1>
+
+<p>1) Notând cu <code>N</code> numărul de linii și cu <code>M</code> numărul de coloane ale tabloul bidimensional obținut, afișați elementele acestuia  pe primele <code>N</code> linii ale fișierului de ieșire, fiecare linie conținând exact <code>M</code> litere fără spații între ele. Afișarea se va face în ordinea crescătoare a indicilor liniilor și pe fiecare linie în ordinea crescătoare a indicilor coloanelor. </p>
+
+<p>2) Determinați cel mai lung palindrom de pe o linie sau de pe o coloană a tabloului obținut. În cazul în care există mai multe palindromuri de aceeași lungime, se va afișa cel care este cel mai mare din punct de vedere lexicografic conform codului <span class="caps">ASCII</span>.</p>
+
+<p>3) Determinați care este numărul maxim de elemente dintr-un subtablou dreptunghiular, ce conține doar vocale.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Datele de intrare se citesc din fișierul <code>text.in</code>, care are următoarea structură:</p>
+
+<ul>
+	<li>pe prima linie se află numărul natural <code>C</code> care poate avea doar valorile <code>1</code>, <code>2</code>  sau  <code>3</code>, semnificând numărul cerinței de rezolvat;</li>
+	<li>pe a doua linie se află textul pe care îl va prelucra Alexandra.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>Datele de ieșire se vor afișa în fișierul <code>text.out</code>, care are următoarea structură:</p>
+
+<ul>
+	<li>dacă <code>C = 1</code>, <code>N</code> linii, fiecare conținând câte <code>M</code> litere, repezentând elementele tabloului obținut;</li>
+	<li>dacă <code>C = 2</code>, o singură linie conținând cel mai lung palindrom determinat;</li>
+	<li>dacă <code>C = 3</code>, o singură linie conținând un număr natural reprezentând numărul de elemente din subtabloul determinat.</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ numărul total de caractere din textul inițial al Alexandrei ≤ 200.000</code></li>
+	<li>vocalele sunt: <code>{A, E, I, O, U, a, e, i, o, u}</code></li>
+	<li>se garantează că <code>N</code>, numărul de linii ale tabloului obținut este <code>&gt; 1</code></li>
+	<li>Pentru 16 puncte, <code>C = 1</code> și numărul de caractere din șirul inițial <code>≤ 10.000</code></li>
+	<li>Pentru 36 puncte, <code>C = 2</code> și numărul de caractere din șirul inițial <code>≤ 1000</code></li>
+	<li>Pentru 16 puncte, <code>C = 3</code> și numărul de caractere din șirul inițial <code>≤ 1000</code></li>
+	<li>Pentru 16 puncte, <code>C = 3</code> și numărul de caractere din șirul inițial <code>≤ 50.000</code></li>
+	<li>Pentru 16 puncte, <code>C = 3</code>, fără restricții suplimentare</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>text.in</code></p>
+
+<pre>1
+Ana nu are mere</pre>
+
+<p><code>text.out</code></p>
+
+<pre>Anan
+uare
+mere</pre>
+
+<h3>Explicație</h3>
+
+<p>Numărul de caractere după eliminare spațiilor este <code>12</code>. Textul plasat în tablou conține <code>N=3</code> linii și <code>M = 4</code> coloane.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>text.in</code></p>
+
+<pre>1
+A fost odata ca niciodata</pre>
+
+<p><code>text.out</code></p>
+
+<pre>Afostod
+atacani
+ciodata</pre>
+
+<h3>Explicație</h3>
+
+<p>Numărul de caractere după eliminare spațiilor este <code>21</code>. Textul plasat în tablou conține <code>N = 3</code> linii și <code>M = 7</code> coloane.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>text.in</code></p>
+
+<pre>2
+A fost odata ca niciodata</pre>
+
+<p><code>text.out</code></p>
+
+<pre>oao</pre>
+
+<h3>Explicație</h3>
+
+<p><code>Afostod</code><br>
+<code>atacani</code><br>
+<code>ciodata</code><br>
+Tabloul are pe coloana <code>3</code> palindromul <code>oao</code> iar pe liniile <code>2</code> și <code>3</code> palindromul <code>ata</code>.</p>
+
+<h1>Exemplul 4:</h1>
+
+<p><code>text.in</code></p>
+
+<pre>3
+Aceasta oaie e alba</pre>
+
+<p><code>text.out</code></p>
+
+<pre>6</pre>
+
+<h3>Explicație</h3>
+
+<p><code>Acea</code><br>
+<code>stao</code><br>
+<code>aiee</code><br>
+<code>alba</code></p>		</article>
+		</body></html>

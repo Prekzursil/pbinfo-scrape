@@ -1,0 +1,88 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3443"><article id="enunt">
+			<p>Se consideră modelul unui sistem solar format din <code>N</code> planete care se rotesc în jurul unei stele S, în sens trigonometric. Traiectoriile planetelor se consideră circulare și de raze diferite, iar vitezele de rotație ale planetelor în jurul stelei sunt numere naturale și sunt exprimate în grade pe zi (<sup>0</sup>/zi). </p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând numărul de planete <code>N</code> și vitezele lor de rotație <code>V</code><sub><code>i</code></sub>, <code>1≤i≤N</code> precum și două numere naturale <code>P</code> și <code>Z</code>, să se determine numărul <code>A</code> de alinieri a câte minimum <code>P</code> planete, pe o dreaptă ce trece prin centrul stelei <code>S</code>, după trecerea celor <code>Z</code> zile. Evoluția sistemului solar începe cu toate planetele așezate orizontal, în dreapta stelei S.</p>
+
+<h1>Exemplu</h1>
+
+<p>Pentru <code>N=4</code>, <code>P=3</code>, <code>Z=365</code> și <code>V</code><sub><code>1-4</code></sub><code>=[20,11,8,6]</code>, alinierea a minimum <code>3</code> planete din cele <code>4</code> se va face la finalul zilelor <code>60</code>, <code>90</code>, <code>120</code>, <code>180</code>, <code>240</code>, <code>270</code>, <code>300</code>, <code>360</code>. După <code>365</code> de zile vor exista <code>A=8</code> alinieri.</p>
+
+<p style="text-align:center;"><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-2600-3443-alinieri-jpg.jpg" style="height:200px;"></p>
+
+<p style="text-align:center;">Poziția planetelor la prima aliniere.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>alinieri.in</code> conține pe prima linie, în această ordine, numerele naturale <code>N</code>, <code>P</code> și <code>Z</code>, iar pe-a doua linie, <code>N</code> numere naturale <code>V</code><sub><code>i</code></sub>, <code>1≤i≤N</code> cu semnificația de mai sus. Numerele aflate pe aceeași linie a fișierului sunt separate prin câte un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>alinieri.out</code> va conține pe prima linie numărul <code>A</code>, cu semnificația de mai sus.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ P ≤ N ≤ 10</code><sup><code>5</code></sup></li>
+	<li><code>1 ≤ Z ≤ 10</code><sup><code>6</code></sup></li>
+	<li><code>1 ≤ V</code><sub><code>i</code></sub><code> ≤ 10</code><sup><code>3</code></sup>, <code>1≤i≤N</code></li>
+	<li>Pentru teste în valoare de 30 de puncte <code>1 ≤ Z ≤ 1000</code></li>
+	<li>Pentru teste în valoare de 30 de puncte <code>1 ≤ N ≤ 100</code></li>
+	<li>Pentru teste în valoare de 30 de puncte <code>2 ≤ P ≤ 9</code></li>
+	<li>Se vor lua în considerare doar alinierile de la sfârșitul fiecărei zile (ora 24:00), când planetele și-au încheiat parcursul zilnic.</li>
+	<li>În concurs s-au acordat 10 puncte din oficiu. Pe site se acordă 10 puncte pentru exemple.</li>
+</ul>
+
+
+<h1>Exemplul 1</h1>
+
+<p><code>alinieri.in</code></p>
+
+<pre>4 3 365 
+20 11 8 6 </pre>
+
+<p><code>alinieri.out</code></p>
+
+<pre>8</pre>
+
+<h3>Explicație</h3>
+
+<p><code>N=4</code>, <code>P=3</code>, <code>Z=365</code> și <code>V</code><sub><code>1-4</code></sub><code> = [20,11,8,6]</code>. <br>
+Prima aliniere a minimum <code>3</code> planete dintre cele <code>4</code> planete are loc după <code>60</code> de zile (conform figurii de mai sus).</p>
+
+<p>Evoluția celor 4 planete este următoarea: </p>
+
+<ul>
+	<li>planeta <code>1</code> efectuează <code>3</code> rotații complete și încă <code>120</code><sup><code>0</code></sup>,</li>
+	<li>planeta <code>2</code> efectuează o rotație completă și încă <code>300</code><sup><code>0</code></sup>,</li>
+	<li>planeta <code>3</code> efectuează o rotație completă și încă <code>120</code><sup><code>0</code></sup>,</li>
+	<li>planeta <code>4</code> efectuează exact o rotație.</li>
+</ul>
+
+<p>Următoarele alinieri a minimum <code>3</code> din cele <code>4</code> planete au loc după <code>90</code>, <code>120</code>, <code>180</code>, <code>240</code>, <code>270</code>, <code>300</code>, <code>360</code> zile.</p>
+
+<p>Deci în <code>365</code> zile vor avea loc <code>8</code> alinieri.  </p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>alinieri.in</code></p>
+
+<pre>7 3 2020 
+10 20 10 15 20 10 20  </pre>
+
+<p><code>alinieri.out</code></p>
+
+<pre>3928</pre>
+
+<h1>Exemplul 3</h1>
+
+<p><code>alinieri.in</code></p>
+
+<pre>6 3 658903 
+17 24 12 150 200 12 </pre>
+
+<p><code>alinieri.out</code></p>
+
+<pre>58568</pre>		</article>
+		</body></html>

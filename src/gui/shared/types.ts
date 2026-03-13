@@ -1,0 +1,176 @@
+import { z } from 'zod';
+
+export const persistedCookieSchema = z
+  .object({
+    key: z.string().min(1),
+    value: z.string(),
+    domain: z.string().min(1).optional(),
+    path: z.string().min(1).optional(),
+    expires: z.union([z.number(), z.string()]).optional(),
+    httpOnly: z.boolean().optional(),
+    secure: z.boolean().optional(),
+    sameSite: z.string().min(1).optional(),
+  })
+  .strict();
+
+export const profileProvenanceSchema = z.discriminatedUnion('type', [
+  z
+    .object({
+      type: z.literal('login'),
+    })
+    .strict(),
+  z
+    .object({
+      type: z.literal('browser-import'),
+      browser: z.enum(['edge', 'chrome']),
+    })
+    .strict(),
+  z
+    .object({
+      type: z.literal('cookie-import'),
+      sourcePath: z.string().min(1).optional(),
+    })
+    .strict(),
+]);
+
+export const guiNotificationPreferenceSchema = z
+  .object({
+    desktopBanners: z.boolean(),
+    windowsToast: z.boolean(),
+  })
+  .strict();
+
+export const guiVerbosityModeSchema = z.enum(['normal', 'verbose', 'raw']);
+export const guiCrawlModeSchema = z.enum(['incremental', 'fresh']);
+
+export const desktopPreferencesRecordSchema = z
+  .object({
+    workspaceRoot: z.string().min(1).optional(),
+    verbosityMode: guiVerbosityModeSchema,
+  })
+  .strict();
+
+export const guiProfileRecordSchema = z
+  .object({
+    profileId: z.string().min(1),
+    label: z.string().min(1),
+    userHandle: z.string().min(1).optional(),
+    provenance: profileProvenanceSchema,
+    sessionCookiesPath: z.string().min(1),
+    encryptedBundlePath: z.string().min(1).optional(),
+    createdAt: z.string().datetime(),
+    updatedAt: z.string().datetime(),
+  })
+  .strict();
+
+export const guiWorkspaceStateSchema = z
+  .object({
+    version: z.literal(1),
+    workspaceRoot: z.string().min(1),
+    activeProfileId: z.string().min(1).optional(),
+    profiles: z.array(guiProfileRecordSchema),
+    notifications: guiNotificationPreferenceSchema,
+    createdAt: z.string().datetime(),
+    updatedAt: z.string().datetime(),
+  })
+  .strict();
+
+export const guiJobKindSchema = z.enum([
+  'auth-login',
+  'auth-import-browser',
+  'crawl',
+  'normalize',
+  'rank',
+  'mirror-build',
+  'mirror-serve',
+  'snapshot-finalize',
+]);
+
+export const guiJobStatusSchema = z.enum([
+  'queued',
+  'running',
+  'paused',
+  'completed',
+  'failed',
+  'cancelled',
+]);
+
+export const guiJobCountersSchema = z
+  .object({
+    pending: z.number().int().nonnegative(),
+    completed: z.number().int().nonnegative(),
+    inProgress: z.number().int().nonnegative(),
+  })
+  .strict();
+
+export const guiCrawlFailureSchema = z
+  .object({
+    key: z.string().min(1).optional(),
+    id: z.number().int().nonnegative().optional(),
+    url: z.string().min(1),
+    attemptCount: z.number().int().nonnegative(),
+    lastError: z.string().min(1),
+    visibleAt: z.string().datetime().optional(),
+  })
+  .strict();
+
+export const guiCrawlStatusSchema = z
+  .object({
+    snapshotId: z.string().min(1),
+    queuePath: z.string().min(1),
+    status: z.enum(['in_progress', 'completed']).optional(),
+    pending: z.number().int().nonnegative(),
+    completed: z.number().int().nonnegative(),
+    inProgress: z.number().int().nonnegative(),
+    publishEligible: z.boolean(),
+    recentFailures: z.array(guiCrawlFailureSchema),
+  })
+  .strict();
+
+export const guiJobEventSchema = z
+  .object({
+    timestamp: z.string().datetime(),
+    level: z.enum(['debug', 'info', 'warn', 'error']),
+    stage: z.string().min(1),
+    message: z.string().min(1),
+    counters: guiJobCountersSchema.optional(),
+    detail: z.record(z.string(), z.unknown()).optional(),
+  })
+  .strict();
+
+export const guiJobRecordSchema = z
+  .object({
+    jobId: z.string().min(1),
+    kind: guiJobKindSchema,
+    status: guiJobStatusSchema,
+    profileId: z.string().min(1).optional(),
+    snapshotId: z.string().min(1).optional(),
+    detail: z.record(z.string(), z.unknown()).optional(),
+    logPath: z.string().min(1),
+    resumable: z.boolean(),
+    latestCounters: guiJobCountersSchema.optional(),
+    latestEvent: guiJobEventSchema.optional(),
+    createdAt: z.string().datetime(),
+    updatedAt: z.string().datetime(),
+  })
+  .strict();
+
+export type PersistedCookie = z.infer<typeof persistedCookieSchema>;
+export type GuiProfileProvenance = z.infer<typeof profileProvenanceSchema>;
+export type GuiNotificationPreference = z.infer<
+  typeof guiNotificationPreferenceSchema
+>;
+export type GuiVerbosityMode = z.infer<typeof guiVerbosityModeSchema>;
+export type GuiCrawlMode = z.infer<typeof guiCrawlModeSchema>;
+export type DesktopPreferencesRecord = z.infer<
+  typeof desktopPreferencesRecordSchema
+>;
+export type GuiProfileRecord = z.infer<typeof guiProfileRecordSchema>;
+export type GuiWorkspaceState = z.infer<typeof guiWorkspaceStateSchema>;
+export type GuiJobKind = z.infer<typeof guiJobKindSchema>;
+export type GuiJobStatus = z.infer<typeof guiJobStatusSchema>;
+export type GuiJobCounters = z.infer<typeof guiJobCountersSchema>;
+export type GuiCrawlFailure = z.infer<typeof guiCrawlFailureSchema>;
+export type GuiCrawlStatus = z.infer<typeof guiCrawlStatusSchema>;
+export type GuiJobEvent = z.infer<typeof guiJobEventSchema>;
+export type GuiJobRecord = z.infer<typeof guiJobRecordSchema>;

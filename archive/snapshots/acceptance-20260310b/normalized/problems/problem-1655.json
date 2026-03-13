@@ -1,0 +1,307 @@
+{
+  "id": 1655,
+  "slug": "platou",
+  "name": "Platou",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1655/platou",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 45,
+      "name": "Vectori caracteristici / de frecventa",
+      "slug": "vectori-caracteristici-de-frecventa",
+      "href": "/?pagina=probleme-lista&tag=45"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Fiind dat un şir de numere, denumim secvenţă a acestuia o parte dintre termenii şirului luaţi de pe poziţii consecutive. Denumim platou al acestui şir o secvenţă formată din valori identice. Lungimea unui platou este egală cu numărul de elemente care îl formează.</p><p>De exemplu, în şirul de numere <code>1 1 1 7 7 3 4 4 4 7 7</code> avem: </p><ul>\n\t<li>platourile <code>1 1 1</code> şi <code>4 4 4</code>  ambele având lungimea <code>3</code>;</li>\n\t<li>platourile <code>7 7</code>  (cel care începe în poziţia a patra) şi <code>7 7</code> (cel care începe pe poziţia a zecea), ambele având lungimea <code>2</code>;</li>\n\t<li>platoul <code>3</code> care are lungimea <code>1</code>.</li>\n</ul><p>În schimb nu avem platoul <code>7 7 7 7</code> deoarece cele patru elemente egale cu <code>7</code> nu sunt pe poziţii consecutive!</p><p>Se dă un şir de n numere. Fiecare dintre aceste numere aparţine intervalului <code>[0,1000000]</code>. Asupra acestui şir se pot efectua o singură dată următoarele două operaţiuni în această ordine: </p><ol>\n\t<li>se extrage un platou la alegere;</li>\n\t<li>se inserează platoul extras la pasul anterior într-o poziţie la alegere din şirul rezultat după extragere.</li>\n</ol><p>De exemplu, dacă avem următorul şir inițial: <code>2 2 5 0 5 8 8 8 4 9 9 9 0 0 2 2 8</code> extragem platoul <code>2 2</code> format din elementele aflate în penultima şi antepenultima poziţie şi obţinem şirul: <code>2 2 5 0 5 8 8 8 4 9 9 9 0 0 8</code></p><p>În şirul rezultat inserăm platoul <code>2 2</code> (pe care l-am extras în pasul anterior) în poziţia a doua şi obţinem şirul: <code>2 2 2 2 5 0 5 8 8 8 4 9 9 9 0 0 8</code></p><p>Să se scrie un program care pentru un şir dat determină:</p><ol>\n\t<li>Lungimea maximă a unui platou din şirul dat iniţial precum şi valoarea cea mai mare a elementelor care formează un platou de lungime maximă.</li>\n\t<li>Lungimea maximă a unui platou care poate să apară în şir în urma efectuării celor două operaţiuni precum şi valoarea cea mai mare a elementelor care ar putea forma un astfel de platou.</li>\n</ol>",
+      "text": "Fiind dat un şir de numere, denumim secvenţă a acestuia o parte dintre termenii şirului luaţi de pe poziţii consecutive. Denumim platou al acestui şir o secvenţă formată din valori identice. Lungimea unui platou este egală cu numărul de elemente care îl formează.De exemplu, în şirul de numere 1 1 1 7 7 3 4 4 4 7 7 avem: platourile 1 1 1 şi 4 4 4 ambele având lungimea 3; platourile 7 7 (cel care începe în poziţia a patra) şi 7 7 (cel care începe pe poziţia a zecea), ambele având lungimea 2; platoul 3 care are lungimea 1. În schimb nu avem platoul 7 7 7 7 deoarece cele patru elemente egale cu 7 nu sunt pe poziţii consecutive!Se dă un şir de n numere. Fiecare dintre aceste numere aparţine intervalului [0,1000000]. Asupra acestui şir se pot efectua o singură dată următoarele două operaţiuni în această ordine: se extrage un platou la alegere; se inserează platoul extras la pasul anterior într-o poziţie la alegere din şirul rezultat după extragere. De exemplu, dacă avem următorul şir inițial: 2 2 5 0 5 8 8 8 4 9 9 9 0 0 2 2 8 extragem platoul 2 2 format din elementele aflate în penultima şi antepenultima poziţie şi obţinem şirul: 2 2 5 0 5 8 8 8 4 9 9 9 0 0 8În şirul rezultat inserăm platoul 2 2 (pe care l-am extras în pasul anterior) în poziţia a doua şi obţinem şirul: 2 2 2 2 5 0 5 8 8 8 4 9 9 9 0 0 8Să se scrie un program care pentru un şir dat determină: Lungimea maximă a unui platou din şirul dat iniţial precum şi valoarea cea mai mare a elementelor care formează un platou de lungime maximă. Lungimea maximă a unui platou care poate să apară în şir în urma efectuării celor două operaţiuni precum şi valoarea cea mai mare a elementelor care ar putea forma un astfel de platou."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>platou.in</code> conține:</p><ul>\n\t<li>pe prima linie un număr natural <code>V</code> care poate avea valoarea <code>1</code> sau valoarea <code>2</code>;</li>\n\t<li>pe a doua linie un număr natual <code>n</code>;</li>\n\t<li>pe a treia linie un şir de <code>n</code> numere naturale separate prin câte un spaţiu, reprezentând elementele şirului dat. Fiecare dintre aceste numere aparţine intervalului <code>[0,1.000.000]</code>.</li>\n</ul>",
+      "text": "Fișierul de intrare platou.in conține: pe prima linie un număr natural V care poate avea valoarea 1 sau valoarea 2; pe a doua linie un număr natual n; pe a treia linie un şir de n numere naturale separate prin câte un spaţiu, reprezentând elementele şirului dat. Fiecare dintre aceste numere aparţine intervalului [0,1.000.000]."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>platou.out</code> va conține:</p><ul>\n\t<li>dacă <code>V=1</code>, atunci pe această linie se vor scrie cele două numere care reprezintă răspunsul la prima cerinţă.</li>\n\t<li>dacă <code>V=2</code>, atunci pe această linie se vor scrie cele două numere care reprezintă răspunsul la a doua cerinţă.</li>\n</ul>",
+      "text": "Fișierul de ieșire platou.out va conține: dacă V=1, atunci pe această linie se vor scrie cele două numere care reprezintă răspunsul la prima cerinţă. dacă V=2, atunci pe această linie se vor scrie cele două numere care reprezintă răspunsul la a doua cerinţă."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ n ≤ 1.000.000</code></li>\n\t<li>numerele aparțin intervalului <code>[0,1.000.000]</code>.</li>\n\t<li>Pentru rezolvarea corectă a primei cerinţe se obţin 20 de puncte, iar pentru rezolvarea corectă a celei de a doua cerinţe se obţin 80 puncte.</li>\n</ul>",
+      "text": "1 ≤ n ≤ 1.000.000 numerele aparțin intervalului [0,1.000.000]. Pentru rezolvarea corectă a primei cerinţe se obţin 20 de puncte, iar pentru rezolvarea corectă a celei de a doua cerinţe se obţin 80 puncte."
+    },
+    {
+      "title": "Exemplu 1",
+      "html": "<p><code>platou.in</code></p><pre>1\n16 \n2 2 5 0 5 8 8 8 4 9 9 9 0 8 2 2</pre><p><code>platou.out</code></p><pre>3 9</pre><h3>Explicație</h3><p><code>V=1</code>, deci se rezolvă <span class=\"caps\">NUMAI</span> prima cerinţă. Lungimea maximă a unui platou din şirul dat este <code>3</code>. Sunt două astfel de platouri: <code>8 8 8</code> şi <code>9 9 9</code>. Valoarea cea mai mare din care este format unul dintre aceste platouri este <code>9</code>.</p>",
+      "text": "platou.in1 16 2 2 5 0 5 8 8 8 4 9 9 9 0 8 2 2platou.out3 9ExplicațieV=1, deci se rezolvă NUMAI prima cerinţă. Lungimea maximă a unui platou din şirul dat este 3. Sunt două astfel de platouri: 8 8 8 şi 9 9 9. Valoarea cea mai mare din care este format unul dintre aceste platouri este 9."
+    },
+    {
+      "title": "Exemplu 2",
+      "html": "<p><code>platou.in</code></p><pre>2\n16 \n2 2 5 0 5 8 8 8 4 9 9 9 0 8 2 2</pre><p><code>platou.out</code></p><pre>4 8</pre><h3>Explicație</h3><p><code>V=2</code>, deci se rezolvă <span class=\"caps\">NUMAI</span> a doua cerinţă. În urma executării celor două operațiuni pot să apară platouri de lungime maximă <code>4</code> în două moduri: <code>2 2 2 2</code> respectiv <code>8 8 8 8</code>. </p><p>Valoarea cea mai mare din care este format unul dintre aceste platouri este <code>8</code>. </p>",
+      "text": "platou.in2 16 2 2 5 0 5 8 8 8 4 9 9 9 0 8 2 2platou.out4 8ExplicațieV=2, deci se rezolvă NUMAI a doua cerinţă. În urma executării celor două operațiuni pot să apară platouri de lungime maximă 4 în două moduri: 2 2 2 2 respectiv 8 8 8 8. Valoarea cea mai mare din care este format unul dintre aceste platouri este 8."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "V=1, deci se rezolvă NUMAI prima cerinţă. Lungimea maximă a unui platou din şirul dat este 3. Sunt două astfel de platouri: 8 8 8 şi 9 9 9. Valoarea cea mai mare din care este format unul dintre aceste platouri este 9."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "V=2, deci se rezolvă NUMAI a doua cerinţă. În urma executării celor două operațiuni pot să apară platouri de lungime maximă 4 în două moduri: 2 2 2 2 respectiv 8 8 8 8."
+    }
+  ],
+  "constraints": [
+    "1 ≤ n ≤ 1.000.000",
+    "numerele aparțin intervalului [0,1.000.000].",
+    "Pentru rezolvarea corectă a primei cerinţe se obţin 20 de puncte, iar pentru rezolvarea corectă a celei de a doua cerinţe se obţin 80 puncte."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qa5b034ad3d.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Moca Andrei (TREYWAY)",
+    "clasa": "9",
+    "intrare/ieșire": "platou.in / platou.out",
+    "limită timp": "1.5 secunde",
+    "limită memorie": "64 MB / 64 MB",
+    "sursa problemei": "Concursul Interjudeţean de Matematică şi Informatică Grigore Moisil, 2016",
+    "autor": "-",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 1.5,
+  "memoryLimitMb": 64,
+  "sourceAttribution": "Concursul Interjudeţean de Matematică şi Informatică Grigore Moisil, 2016",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1655/platou"
+}

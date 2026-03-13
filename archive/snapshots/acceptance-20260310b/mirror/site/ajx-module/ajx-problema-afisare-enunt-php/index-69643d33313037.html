@@ -1,0 +1,118 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3107"><article id="enunt">
+			În Săptămâna Altfel – <strong>Să știi mai multe, să fi mai bun</strong>, elevii A și B se joacă un joc altfel, joc numit <strong>margi</strong>. Cei doi au la dispoziție o matrice pătratică binară de dimensiune <code>2</code><sup><code>n</code></sup>. 
+Desfășurarea jocului este următoarea:
+<ul>
+	<li>jocul începe la nivelul <code>n</code>,când se împarte matricea inițială în <code>4</code> matrici disjuncte de dimensiunea <code>2</code><sup><code>n-1</code></sup>;</li>
+	<li>fiecare dintre cei doi jucători alege o matrice dintre cele <code>4</code> și adună la punctajul său numărul de valori de <code>1</code> conținut de matricea aleasă. Dacă ambii jucători aleg aceeași matrice doar jucătorul A adună la punctajul său numărul de valori de <code>1</code> din matrice;</li>
+	<li>pentru fiecare nivel, după împărțirea matricei inițiale, matricele rezultate vor fi numerotate asemănător figurii;</li>
+</ul>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-margi-01-jpg.jpg"></p>
+
+<ul>
+	<li>la nivelul <code>n-1</code> fiecare dintre matricele alese de jucători se împart în <code>4</code> matrici disjuncte de dimensiunea <code>2</code><sup><code>n-2</code></sup>. Fiecare dintre cei doi jucători aleg o matrice din cele noi formate.</li>
+	<li>pentru fiecare nivel jucat fiecare jucător trebuie să aleagă o matrice;</li>
+	<li>jocul continua cu nivelele <code>n-2</code>, <code>n-3</code>, etc;</li>
+	<li>jocul se termină când dimensiunea matricelor alese este <code>1</code>;</li>
+</ul>
+
+<p>Scopul jocului este obținerea sumei maxim posibile prin adunarea punctajelor celor doi jucători. Dacă există mai multe posibilități de obținere a acestei sume, fiecare jucător va alege matricele cu număr de ordine mai mic.</p>
+
+<p>Exemplu: pentru <code>n=3</code>, vom simula un joc:<br>
+<strong>Jucătorul A</strong> alege matricea ce are colțul stânga-sus în <code>(1,1)</code>, numerotat cu <code>1</code>, Punctaj <code>Sum_A = 7</code>.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-margi-02-jpg.jpg"></p>
+
+<p><strong>Jucătorul B</strong> alege matricea ce are colțul stânga-sus în <code>(5,1)</code>, numerotat cu <code>3</code>. Punctaj <code>Sum_B = 5</code>.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-margi-03-jpg.jpg"></p>
+
+<p><strong>Jucătorul A</strong> alege matricea ce are colțul stânga-sus în <code>(1,1)</code>, numerotat cu <code>1</code>. Punctaj <code>Sum_A = 7 + 3 = 10</code>.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-margi-04-jpg.jpg"></p>
+
+<p><strong>Jucătorul B</strong> alege matricea ce are colțul stânga-sus în <code>(7,1)</code>, numerotat cu <code>3</code>. Punctaj <code>Sum_B = 5 + 3 = 8</code>.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-margi-05-jpg.jpg"></p>
+
+<p><strong>Jucătorul A</strong> alege matricea ce are colțul stânga-sus în <code>(1,2)</code>, numerotat cu <code>2</code>. Punctaj <code>Sum_A = 10 + 1 = 11</code>.</p>
+
+<p><strong>Jucătorul B</strong> alege matricea ce are colțul stânga-sus în <code>(7,2)</code>, numerotat cu <code>2</code>. Punctaj <code>Sum_B = 8 + 1 = 9</code>.</p>
+
+<p><strong>Jucătorul A</strong> a obținut <code>Sum_A = 11</code>, secvența alegerilor efectuate fiind: <code>1, 1, 2</code>. </p>
+
+<p><strong>Jucătorul B</strong> a obținut <code>Sum_B = 9</code>, secvența alegerilor efectuate fiind: <code>3, 3, 2</code>. </p>
+
+<h1>Cerința</h1>
+
+<p>Pentru un <code>n</code> număr natural dat și o matrice binară de dimensiunea <code>2</code><sup><code>n</code></sup>, se cere să se determine punctajul maxim obținut de cei doi jucători. Se cere și determinarea unei strategii de alegere a matricelor la fiecare pas care să ducă la obținerea punctajului maxim.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>margi.in</code> conține pe prima linie un număr natural <code>C</code>. Pe linia a doua se află un număr natural <code>n</code>. Pe următoarele <code>2</code><sup><code>n</code></sup> linii, elementele matricei binare.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>margi.out</code> conține pe prima linie suma maximă care se poate obține prin însumarea punctajelor celor doi jucători. În cazul în care <code>C = 1</code> în fișierul de ieșire va apărea doar această valoare. Dacă <code>C = 2</code> fișierul  de ieșire va conține, în continuare:<br>
+Pe cea de-a doua linie se vor scrie <code>n</code> numere ce reprezintă secvența de matrici alese de jucătorul A. <br>
+Pe cea de-a treia linie se vor scrie <code>n</code> numere ce reprezintă secvența de matrici alese de jucătorul <code>B</code>.<br>
+Secvențele de matrice alese de cei doi trebuie să respecte următoarele două condiții:<br>
+1) suma celor două punctaje obținute de cei doi jucători este maximă. Pot exista mai multe secvențe de matrici care au suma maximă.<br>
+2) Fie <code>A</code><sub><code>n</code></sub>, <code>A</code><sub><code>n-1</code></sub>, …, <code>A</code><sub><code>1</code></sub> secvențele de matrici  alese de <code>A</code>, respectiv <code>B</code><sub><code>n</code></sub>, <code>B</code><sub><code>n-1</code></sub>, …, <code>B</code><sub><code>1</code></sub>, secvențele de matrici  alese de <code>B</code>, la nivelele <code>n</code>, <code>n-1</code>, …, <code>2</code>, <code>1</code>. Dacă compunem șirul <code>A</code><sub><code>n</code></sub>, <code>B</code><sub><code>n</code></sub>, <code>A</code><sub><code>n-1</code></sub>, <code>B</code><sub><code>n-1</code></sub>, <code>A</code><sub><code>n-2</code></sub>, <code>B</code><sub><code>n-2</code></sub>, …, <code>A</code><sub><code>1</code></sub>, <code>B</code><sub><code>1</code></sub>, dintre toate șirurile posibile care dau suma maximă, trebuie ales cel șirul minim lexicografic.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>C</code> poate fi <code>1</code> sau <code>2</code></li>
+	<li><code>2 ≤ n ≤ 10</code></li>
+	<li>Spunem că șirul <code>X</code> este mai mic lexicografic decât șirul <code>Y</code>, dacă există o poziție <code>i</code>, astfel încât <code>X</code><sub><code>1</code></sub><code>=Y</code><sub><code>1</code></sub>, <code>X</code><sub><code>2</code></sub><code>=Y</code><sub><code>2</code></sub>, …., <code>X</code><sub><code>i-1</code></sub><code>=Y</code><sub><code>i-1</code></sub>, iar  <code>X</code><sub><code>i</code></sub><code>&lt;Y</code><sub><code>i</code></sub></li>
+	<li>Pentru teste în valoare de <code>30</code> de puncte avem <code>C = 1</code>.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>margi.in</code></p>
+
+<pre>1
+2
+0000
+0100
+0000
+0000</pre>
+
+<p><code>margi.out</code></p>
+
+<pre>2</pre>
+
+<h3>Explicație</h3>
+
+<p>Suma maximă este <code>(0 + 1) + (0 + 1) = 2</code>. Dacă am fi avut <code>C = 2</code>, pe liniile <code>2</code> și <code>3</code> ar mai fi apărut:<br>
+<code>1 1</code><br>
+<code>1 4</code></p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>margi.in</code></p>
+
+<pre>2
+3
+01001100
+11100011
+00101000
+11000000
+00000000
+01100100
+01000000
+11000010</pre>
+
+<p><code>margi.out</code></p>
+
+<pre>20
+1 1 2
+3 3 2 </pre>
+
+
+<h3>Explicație</h3>
+
+<p>Suma maximă este <code>(7 + 5) + (3 + 3) + (1 + 1) = 20</code>. Exemplul din figura de mai sus.</p>		</article>
+		</body></html>

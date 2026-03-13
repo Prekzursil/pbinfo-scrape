@@ -1,0 +1,50 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4020"><article id="enunt">
+			<p>Dintr-o regretabilă eroare, redactorul Vasile a şters toate spaţiile din textul la care lucra. Textul este scris într-o limbă necunoscută, numai cu litere mici ale alfabetului englez. Vasile ştie că un cuvânt trebuie să conţină cel puţin o vocală şi că nu poate avea lungimea mai mare de <code>20</code> de litere. De asemenea, fiind un tip meticulos, el ştie că în text erau (înainte de ştergerea spaţiilor) exact <code>N</code> cuvinte. Vasile trebuie să restaureze textul, inserând spaţii între cuvinte. Cum există numeroase modalităţi de restaurare a textului, Vasile a hotărât să aleagă varianta în care literele sunt distribuite în cuvinte într-un mod cât mai armonios. Pentru a măsura armonia, Vasile a calculat suma pătratelor lungimilor cuvintelor. Textul este cu atât mai armonios, cu cât suma obţinută este mai mică.</p>
+
+<h1>Cerința</h1>
+
+<p>Dat fiind textul fără spaţii, să se determine câte posibilităţi de restaurare există (în total, indiferent de armonia lor), precum şi cea mai armonioasă modalitate de restaurare.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>text.in</code> conține pe prima linie textul fără spaţii. Pe cea de a doua linie este scris numărul natural <code>N</code>, reprezentând numărul de cuvinte din textul iniţial.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>text.out</code> va conține pe prima linie un număr natural reprezentând numărul total de posibilităţi de restaurare modulo <code>1.000.003</code> (restul împărţirii la <code>1.000.003</code>). Pe cea de-a doua linie va fi scrisă măsura armoniei textului restaurat (suma minimă a pătratelor lungimilor cuvintelor din text). Pe a treia linie va fi scris cel mai armonios text obţinut după restaurare. Între orice două cuvinte consecutive va fi scris un singur spaţiu.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>0 &lt; Lungimea şirului ≤ 200</code></li>
+	<li>Vocalele alfabetului englez sunt <code>'a'</code>, <code>'e'</code>, <code>'i'</code>, <code>'o'</code>, <code>'u'</code>, <code>'y'</code>.</li>
+	<li>Pentru datele de test există întotdeauna soluţie.</li>
+	<li>Dacă există mai multe soluţii optime de restaurare, va fi scrisă prima variantă în ordine lexicografică (se ştie că <code>' ' &lt; 'a'</code>).</li>
+	<li>Şirul <code>(x1, x2, ..., xn)</code> este mai mic lexicografic decât <code>(y1, y2, ..., yn)</code> dacă există <code>k</code> (<code>1 ≤ k ≤ n</code>) astfel încât <code>xi = yi</code> (pentru orice <code>1 ≤ i &lt; k</code>) şi <code>xk &lt; yk</code>.</li>
+	<li>Pentru 40% dintre teste lungimea textului este  mai mică decât <code>70</code> şi <code>N ≤ 7</code>.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>text.in</code></p>
+
+<pre>bcaeiouxtz
+3</pre>
+
+<p><code>text.out</code></p>
+
+<pre>6
+34
+bca eio uxtz</pre>
+
+<h3>Explicație</h3>
+
+<p>Posibilităţile de restaurare sunt:<br>
+<code>bca eio uxtz</code>  (armonie: <code>9+9+16=34</code>)<br>
+<code>bca ei ouxtz</code> (armonie: <code>9+4+25=38</code>)<br>
+<code>bca e iouxtz</code> (armonie: <code>9+1+36=46</code>)<br>
+<code>bcae io uxtz</code> (armonie: <code>16+4+16=36</code>)<br>
+<code>bcae i ouxtz</code> (armonie: <code>16+1+25=42</code>)<br>
+<code>bcaei o uxtz</code> (armonie: <code>25+1+16=42</code>)<br>
+Varianta cea mai armonioasă este <code>bca eio uxtz</code></p>		</article>
+		</body></html>

@@ -1,0 +1,310 @@
+{
+  "id": 3772,
+  "slug": "jocculasere",
+  "name": "JocCuLasere",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3772/jocculasere",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 65,
+      "name": "Structuri de date arborescente",
+      "slug": "structuri-de-date-arborescente",
+      "href": "/?pagina=probleme-lista&tag=65"
+    },
+    {
+      "id": 154,
+      "name": "Arbori de intervale",
+      "slug": "arbori-de-intervale",
+      "href": "/?pagina=probleme-lista&tag=154"
+    }
+  ],
+  "tags": [
+    "Arbori de intervale",
+    "Map"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p><span class=\"caps\">RAU</span>-Gigel testează un joc cu trageri și premii. Jocul constă într-o serie de acțiuni care au loc la anumite momente de timp. Acțiunile pot fi: (1) aparițiile unor premii sau (2) trageri. Premiile apar la anumite înălțimi, pentru un interval de timp bine definit. Tragerile au loc la anumite momente de timp și se propagă în spațiu instantaneu. <span class=\"caps\">RAU</span>-Gigel câștigă câte un punct pentru fiecare premiu ochit. </p><p>Din păcate, <span class=\"caps\">RAU</span>-Gigel nu și-a calibrat bine trăgătorul, astfel încât fiecare tragere devine activă numai între două înălțimi date: <code>[h1, h2]</code>, interval numit rază de acțiune. Așadar, <span class=\"caps\">RAU</span>-Gigel nu va câștiga puncte decât pentru premiile aflate în raza de acțiune a fiecărei trageri. </p><p>Dacă o tragere are loc exact în același moment în care apare un premiu în raza ei de acțiune, acesta se consideră ”ochit”. Similar, dacă un premiu este programat să dispară la un moment de timp în care are loc o tragere, iar el se află în raza de acțiune a tragerii, atunci punctul se consideră câștigat. Un premiu ochit rămâne în joc și poate genera și alte puncte, până la momentul la care este programat să dispară. Nu pot avea loc două trageri în același moment, dar pot exista mai multe premii la aceeași înălțime în același timp și toate sunt generatoare de puncte.</p><p>Dându-se numărul <code>N</code>  de operații de tipul <code>1</code> sau <code>2</code>, unde:</p><ul>\n\t<li>Operația <code>1 t d h</code>  –  reprezintă un premiu: <code>t</code> este momentul în care apare, <code>d</code> este numărul de unități de timp cât este programat să existe, iar <code>h</code> este înălțimea la care apare;</li>\n\t<li>Operația <code>2 t h1 h2</code> – reprezintă o tragere, <code>t</code> este momentul în care are loc, iar <code>h1</code> și <code>h2</code> reprezintă înălțimile în care tragerea este activă (raza de acțiune). <br>\nSă se afle câte puncte câștigă <span class=\"caps\">RAU</span>-Gigel la fiecare tragere și care este punctajul cu care termină jocul?</li>\n</ul>",
+      "text": "RAU-Gigel testează un joc cu trageri și premii. Jocul constă într-o serie de acțiuni care au loc la anumite momente de timp. Acțiunile pot fi: (1) aparițiile unor premii sau (2) trageri. Premiile apar la anumite înălțimi, pentru un interval de timp bine definit. Tragerile au loc la anumite momente de timp și se propagă în spațiu instantaneu. RAU-Gigel câștigă câte un punct pentru fiecare premiu ochit. Din păcate, RAU-Gigel nu și-a calibrat bine trăgătorul, astfel încât fiecare tragere devine activă numai între două înălțimi date: [h1, h2], interval numit rază de acțiune. Așadar, RAU-Gigel nu va câștiga puncte decât pentru premiile aflate în raza de acțiune a fiecărei trageri. Dacă o tragere are loc exact în același moment în care apare un premiu în raza ei de acțiune, acesta se consideră ”ochit”. Similar, dacă un premiu este programat să dispară la un moment de timp în care are loc o tragere, iar el se află în raza de acțiune a tragerii, atunci punctul se consideră câștigat. Un premiu ochit rămâne în joc și poate genera și alte puncte, până la momentul la care este programat să dispară. Nu pot avea loc două trageri în același moment, dar pot exista mai multe premii la aceeași înălțime în același timp și toate sunt generatoare de puncte.Dându-se numărul N de operații de tipul 1 sau 2, unde: Operația 1 t d h – reprezintă un premiu: t este momentul în care apare, d este numărul de unități de timp cât este programat să existe, iar h este înălțimea la care apare; Operația 2 t h1 h2 – reprezintă o tragere, t este momentul în care are loc, iar h1 și h2 reprezintă înălțimile în care tragerea este activă (raza de acțiune). Să se afle câte puncte câștigă RAU-Gigel la fiecare tragere și care este punctajul cu care termină jocul?"
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>lasere.in</code> conține pe prima linie un număr natural <code>N</code>. Pe următoarele <code>N</code> linii se află operațiile, în ordine crescătoare a momentului <code>t</code> de începere a acțiunii, de tipul <code>1</code> și <code>2</code>, de forma:</p><ul>\n\t<li><code>1 t d h</code> , unde <code>t, d,  h</code> sunt <code>3</code> numere naturale separate cu un spațiu, cu semnificația de mai sus, reprezintă o operație de tipul <code>1</code>;</li>\n\t<li><code>2 t h1 h2</code> , unde <code>t, h1, h2</code> sunt <code>3</code> numere naturale separate cu un spațiu, cu semnificația de mai sus, reprezintă o operație de tipul <code>2</code>.</li>\n</ul>",
+      "text": "Fișierul de intrare lasere.in conține pe prima linie un număr natural N. Pe următoarele N linii se află operațiile, în ordine crescătoare a momentului t de începere a acțiunii, de tipul 1 și 2, de forma: 1 t d h , unde t, d, h sunt 3 numere naturale separate cu un spațiu, cu semnificația de mai sus, reprezintă o operație de tipul 1; 2 t h1 h2 , unde t, h1, h2 sunt 3 numere naturale separate cu un spațiu, cu semnificația de mai sus, reprezintă o operație de tipul 2."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>lasere.out</code> va conține răspunsurile, în ordinea solicitării, pentru operațiile de tip <code>2</code>, câte unul pe linie, iar pe ultimul rând, punctajul lui <span class=\"caps\">RAU</span>-Gigel la sfârșitul jocului.</p>",
+      "text": "Fișierul de ieșire lasere.out va conține răspunsurile, în ordinea solicitării, pentru operațiile de tip 2, câte unul pe linie, iar pe ultimul rând, punctajul lui RAU-Gigel la sfârșitul jocului."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2 ≤ N ≤ 100.000</code></li>\n\t<li><code>1 ≤ t, d, h, h1, h2 ≤ 1.000.000.000, h1&lt;h2</code></li>\n</ul>",
+      "text": "2 ≤ N ≤ 100.000 1 ≤ t, d, h, h1, h2 ≤ 1.000.000.000, h1<h2"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>lasere.in</code></p><pre>4\n1 2 8 4\n2 3 5 10\n1 5 6 7\n2 8 3 8</pre><p><code>lasere.out</code></p><pre>0\n2\n2</pre><h3>Explicație</h3><p>Sunt <code>4</code> acțiuni, dintre care <code>2</code> trageri (tipul <code>2</code>). La prima tragere <span class=\"caps\">RAU</span>-Gigel nu nimerește singurul premiu existent în momentul tragerii (momentul <code>3</code>), pentru că aceasta nu este în raza sa de acțiune. </p><p>La a doua tragere, din momentul <code>8</code>, <span class=\"caps\">RAU</span>-Gigel nimerește ambele premii. </p><p>Total: <code>0+2=2</code>.</p>",
+      "text": "lasere.in4 1 2 8 4 2 3 5 10 1 5 6 7 2 8 3 8lasere.out0 2 2ExplicațieSunt 4 acțiuni, dintre care 2 trageri (tipul 2). La prima tragere RAU-Gigel nu nimerește singurul premiu existent în momentul tragerii (momentul 3), pentru că aceasta nu este în raza sa de acțiune. La a doua tragere, din momentul 8, RAU-Gigel nimerește ambele premii. Total: 0+2=2."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>lasere.in</code></p><pre>6\n2 2 4 5\n1 2 8 4\n2 3 5 10\n1 5 6 7\n2 10 4 8\n1 10 3 7</pre><p><code>lasere.out</code></p><pre>1\n0\n3\n4</pre><h3>Explicație</h3><p>Sunt <code>6</code> acțiuni, dintre care <code>3</code> trageri. În momentul <code>2</code> au loc <code>2</code> acțiuni: o tragere și apariția unui premiu. Pentru că premiul, aflat la înălțimea <code>4</code>, este în raza de acțiune a acestei trageri și anume în intervalul <code>[4-5]</code>, <span class=\"caps\">RAU</span>-Gigel câștigă un punct.</p><p>La a doua tragere, nu nimerește nimic, singurul premiu existent în acel moment nefiind în raza sa de acțiune.</p><p>La a treia tragere, <span class=\"caps\">RAU</span>-Gigel mai câștigă <code>3</code> puncte, acele premii fiind în raza de acțiune a tragerii (intervalul <code>4-8</code>). Se numără inclusiv primul premiu, planificat să existe până în momentul <code>10</code>, care este și momentul tragerii. De asemenea, se numără și ultimul premiu, apărut chiar în momentul tragerii.</p><p>Total: <code>1+0+3=4</code>.</p>",
+      "text": "lasere.in6 2 2 4 5 1 2 8 4 2 3 5 10 1 5 6 7 2 10 4 8 1 10 3 7lasere.out1 0 3 4ExplicațieSunt 6 acțiuni, dintre care 3 trageri. În momentul 2 au loc 2 acțiuni: o tragere și apariția unui premiu. Pentru că premiul, aflat la înălțimea 4, este în raza de acțiune a acestei trageri și anume în intervalul [4-5], RAU-Gigel câștigă un punct.La a doua tragere, nu nimerește nimic, singurul premiu existent în acel moment nefiind în raza sa de acțiune.La a treia tragere, RAU-Gigel mai câștigă 3 puncte, acele premii fiind în raza de acțiune a tragerii (intervalul 4-8). Se numără inclusiv primul premiu, planificat să existe până în momentul 10, care este și momentul tragerii. De asemenea, se numără și ultimul premiu, apărut chiar în momentul tragerii.Total: 1+0+3=4."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Sunt 4 acțiuni, dintre care 2 trageri (tipul 2). La prima tragere RAU-Gigel nu nimerește singurul premiu existent în momentul tragerii (momentul 3), pentru că aceasta nu este în raza sa de acțiune."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Sunt 6 acțiuni, dintre care 3 trageri. În momentul 2 au loc 2 acțiuni: o tragere și apariția unui premiu. Pentru că premiul, aflat la înălțimea 4, este în raza de acțiune a acestei trageri și anume în intervalul [4-5], RAU-Gigel câștigă un punct."
+    }
+  ],
+  "constraints": [
+    "2 ≤ N ≤ 100.000",
+    "1 ≤ t, d, h, h1, h2 ≤ 1.000.000.000, h1<h2"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q376b72020f.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Crisan Daniela Alexandra (URA)",
+    "clasa": "11",
+    "intrare/ieșire": "lasere.in / lasere.out",
+    "limită timp": "1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "RAU-Coder 2021",
+    "autor": "Daniela Alexandra Crisan",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 1,
+  "memoryLimitMb": 64,
+  "author": "Daniela Alexandra Crisan",
+  "sourceAttribution": "RAU-Coder 2021",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3772/jocculasere"
+}

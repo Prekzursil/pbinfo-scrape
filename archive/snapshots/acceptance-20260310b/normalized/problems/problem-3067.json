@@ -1,0 +1,315 @@
+{
+  "id": 3067,
+  "slug": "optime",
+  "name": "optime",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3067/optime",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 45,
+      "name": "Vectori caracteristici / de frecventa",
+      "slug": "vectori-caracteristici-de-frecventa",
+      "href": "/?pagina=probleme-lista&tag=45"
+    }
+  ],
+  "tags": [
+    "Eratostene",
+    "Vector de frecvență"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Cunoscând un număr natural <code>k</code> nenul și un număr natural <code>x</code>, ajutați-o pe Maria:<br>\n1. Să determine suma numerelor din tabel care nu sunt prime. Dacă nu există numere care nu sunt prime, suma are valoarea <code>0</code>.<br>\n2. Să aleagă <code>x</code> coloane consecutive din tabel, astfel încât acestea să conțină, în total, un număr maxim de numere prime. Dacă există mai multe posibilități, se va alege secvența de coloane consecutive care are o valoare cât mai mare a coloanei de început din secvență. Să se determine numărul primei coloane din secvența aleasă, precum și numărul total de numere prime din secvență.</p>",
+      "text": "Cunoscând un număr natural k nenul și un număr natural x, ajutați-o pe Maria: 1. Să determine suma numerelor din tabel care nu sunt prime. Dacă nu există numere care nu sunt prime, suma are valoarea 0. 2. Să aleagă x coloane consecutive din tabel, astfel încât acestea să conțină, în total, un număr maxim de numere prime. Dacă există mai multe posibilități, se va alege secvența de coloane consecutive care are o valoare cât mai mare a coloanei de început din secvență. Să se determine numărul primei coloane din secvența aleasă, precum și numărul total de numere prime din secvență."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>optime.in</code> conține pe prima linie o cifră <code>c</code> care poate să fie doar <code>1</code> sau <code>2</code>. Dacă <code>c = 1</code>, pe linia a doua se găsește un număr natural nenul <code>k</code> cu semnificația din enunț. Dacă <code>c = 2</code>, pe linia a doua se află două numere naturale nenule, <code>k</code> și <code>x</code>, cu semnificația din enunț.</p>",
+      "text": "Fișierul de intrare optime.in conține pe prima linie o cifră c care poate să fie doar 1 sau 2. Dacă c = 1, pe linia a doua se găsește un număr natural nenul k cu semnificația din enunț. Dacă c = 2, pe linia a doua se află două numere naturale nenule, k și x, cu semnificația din enunț."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Dacă valoarea lui <code>c</code> este <code>1</code>, atunci se va rezolva numai punctul 1 din cerință. În acest caz, fișierul de ieșire <code>optime.out</code> va conţine pe prima linie un număr natural reprezentând valoarea sumei determinate.<br>\nDacă valoarea lui <code>c</code> este <code>2</code>, se va rezolva numai punctul 2 din cerință. În acest caz, fișierul de ieșire <code>optime.out</code> va conține pe prima linie un număr natural reprezentând numărul de ordine al primei coloane conform cerinței, iar pe linia a doua numărul de numere prime, conform cerinței.</p>",
+      "text": "Dacă valoarea lui c este 1, atunci se va rezolva numai punctul 1 din cerință. În acest caz, fișierul de ieșire optime.out va conţine pe prima linie un număr natural reprezentând valoarea sumei determinate. Dacă valoarea lui c este 2, se va rezolva numai punctul 2 din cerință. În acest caz, fișierul de ieșire optime.out va conține pe prima linie un număr natural reprezentând numărul de ordine al primei coloane conform cerinței, iar pe linia a doua numărul de numere prime, conform cerinței."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ x ≤ k ≤ 200</code></li>\n\t<li>Pentru rezolvarea primei cerințe se acordă <code>30%</code> din punctaj, iar pentru cerința a doua se acordă <code>70%</code> din punctaj.</li>\n</ul>",
+      "text": "1 ≤ x ≤ k ≤ 200 Pentru rezolvarea primei cerințe se acordă 30% din punctaj, iar pentru cerința a doua se acordă 70% din punctaj."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>optime.in</code></p><pre>1\n4</pre><p><code>optime.out</code></p><pre>286</pre><h3>Explicație</h3><p>Pentru <code>k = 4</code>, în tabel se află următoarele numere neprime: <code>27</code>, <code>39</code>, <code>49</code>, <code>51</code>, <code>57</code>, <code>63</code>, suma lor fiind <code>286</code>.</p>",
+      "text": "optime.in1 4optime.out286ExplicațiePentru k = 4, în tabel se află următoarele numere neprime: 27, 39, 49, 51, 57, 63, suma lor fiind 286."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>optime.in</code></p><pre>2\n4 3</pre><p><code>optime.out</code></p><pre>2\n19</pre><h3>Explicație</h3><p>Coloana <code>1</code> conține <code>7</code> numere prime, coloana <code>2</code> conține <code>6</code> numere prime, coloana <code>3</code> conține <code>6</code> numere prime, iar coloana <code>4</code> conține <code>7</code> numere prime. Putem alege fie coloanele <code>1</code>, <code>2</code>, <code>3</code>, fie coloanele <code>2</code>, <code>3</code>, <code>4</code>, ambele variante conținând câte <code>19</code> numere prime. Se alege a doua variantă, pentru că are valoarea mai mare a coloanei de început a secvenței.</p>",
+      "text": "optime.in2 4 3optime.out2 19ExplicațieColoana 1 conține 7 numere prime, coloana 2 conține 6 numere prime, coloana 3 conține 6 numere prime, iar coloana 4 conține 7 numere prime. Putem alege fie coloanele 1, 2, 3, fie coloanele 2, 3, 4, ambele variante conținând câte 19 numere prime. Se alege a doua variantă, pentru că are valoarea mai mare a coloanei de început a secvenței."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Pentru k = 4, în tabel se află următoarele numere neprime: 27, 39, 49, 51, 57, 63, suma lor fiind 286."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Coloana 1 conține 7 numere prime, coloana 2 conține 6 numere prime, coloana 3 conține 6 numere prime, iar coloana 4 conține 7 numere prime. Putem alege fie coloanele 1, 2, 3, fie coloanele 2, 3, 4, ambele variante conținând câte 19 numere prime. Se alege a doua variantă, pentru că are valoarea mai mare a coloanei de început a secvenței."
+    }
+  ],
+  "constraints": [
+    "1 ≤ x ≤ k ≤ 200",
+    "Pentru rezolvarea primei cerințe se acordă 30% din punctaj, iar pentru cerința a doua se acordă 70% din punctaj."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q9230791688.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/optime.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-optime-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "optime.in / optime.out",
+    "limită timp": "0.2 secunde",
+    "limită memorie": "16 MB / 8 MB",
+    "sursa problemei": "ONI 2019 clasa a VI-a",
+    "autor": "Violeta Grecea",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.2,
+  "memoryLimitMb": 16,
+  "author": "Violeta Grecea",
+  "sourceAttribution": "ONI 2019 clasa a VI-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3067/optime"
+}

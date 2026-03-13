@@ -1,0 +1,73 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4436"><article id="enunt">
+			<p>Loid Forger a primit o nouă misiune: să saboteze o mină importantă de lângă Berlint, Ostania. Mina are forma unei coloane verticale împărțită pe <code>n</code> niveluri, numerotate de la <code>1</code> (cel mai de sus nivel) la <code>n</code> (cel mai de jos). Fiecare nivel conține aer (care are codul <code>0</code>), nisip (care are codul <code>1</code>) sau piatră (care are codul <code>2</code>).</p>
+
+<p>Misiunea lui Loid constă în a dinamita piatra de pe unele niveluri pentru a provoca surparea minei și curgerea nisipului spre nivelurile inferioare. El are de îndeplinit <code>m</code> sarcini numerotate de la <code>1</code> la <code>m</code>. Acestea sunt de două tipuri:</p>
+
+<ul>
+	<li><code>1 t p</code> (dinamitare): Loid trebuie ca, la secunda <code>t</code>, să dinamiteze piatra de pe nivelul <code>p</code> al minei. Pentru orice astfel de sarcină, Loid știe că, la secunda <code>t</code>, nivelul <code>p</code> conține piatră, iar aceasta va fi înlocuită de aer la secunda <code>t+1</code>, după dinamitare.</li>
+	<li><code>2 t p</code> (întrebare): Pentru a i se testa perspicacitatea, Loid este întrebat ce conține nivelul <code>p</code> al minei la secunda <code>t</code>: aer, nisip sau piatră?</li>
+</ul>
+
+<p>În general, conținutul unui nivel la secunda <code>t</code> va fi același și la secunda <code>t+1</code>, cu două excepții:</p>
+
+<ul>
+	<li>Curgerea nisipului: dacă, la secunda <code>t</code>, nivelul <code>p</code> conține nisip și nivelul <code>p+1</code> conține aer, nisipul va curge și, la secunda <code>t+1</code>, nivelul <code>p</code> conține aer și nivelul <code>p+1</code> conține nisip.</li>
+	<li>Dinamitarea de către Loid: un nivel care conține piatră și este dinamitat la secunda <code>t</code> va conține aer la secunda <code>t+1</code>.</li>
+</ul>
+
+<p>Dacă la secunda <code>t</code> fiecare nivel <code>i</code> de la <code>1</code> la <code>n</code> al minei are același conținut ca la secunda <code>t-1</code>, spunem că mina este <strong>stabilă</strong> la secunda <code>t</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Dându-se <code>n</code>, conținuturile tuturor nivelurilor minei la secunda <code>0</code>, <code>m</code> și sarcinile care trebuie îndeplinite, să se determine răspunsurile la sarcinile de tip întrebare.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>nisip.in</code> conține pe prima linie două numere naturale <code>n</code> și <code>m</code> separate printr-un spațiu, reprezentând numărul de niveluri ale minei, respectiv numărul de sarcini. Pe următoarea linie se vor afla <code>n</code> numere naturale separate prin câte un spațiu, al <code>i</code>-ulea dintre acestea reprezentând codul conținutul nivelului <code>i</code> al minei (<code>0</code> pentru aer, <code>1</code> pentru nisip, <code>2</code> pentru piatră). Următoarele <code>m</code> linii conțin descrierile sarcinilor din cadrul misiunii lui Loid. A <code>i</code>-a dintre acestea va conține trei numere naturale <code>c</code><sub><code>i</code></sub>, <code>t</code><sub><code>i</code></sub> și <code>p</code><sub><code>i</code></sub> separate printr-un spațiu, reprezentând, în ordine cronologică, sarcinile date lui Loid: <code>c</code><sub><code>i</code></sub> reprezintă tipul sarcinii <code>i</code> (<code>1</code> pentru dinamitare, <code>2</code> pentru întrebare), <code>t</code><sub><code>i</code></sub> reprezintă secunda și <code>p</code><sub><code>i</code></sub> reprezintă nivelul minei.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>nisip.out</code> va conține codurile corespunzătoare răspunsurilor la sarcinile de tip întrebare (<code>0</code> pentru aer, <code>1</code> pentru nisip, <code>2</code> pentru piatră), în ordinea din fișierul de intrare, câte unul pe fiecare linie.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 1.000.000</code></li>
+	<li><code>1 ≤ m ≤ 1.000.000</code></li>
+	<li><code>1 ≤ t</code><sub><code>i</code></sub> <code>≤ 1.000.000.000</code> și <code>1 ≤ p</code><sub><code>i</code></sub> <code>≤ n</code> pentru orice <code>i</code>, <code>1 ≤ i ≤ m</code>.</li>
+	<li><code>t</code><sub><code>i</code></sub> <code>&lt; t</code><sub><code>i+1</code></sub>, pentru orice <code>i</code>, <code>1 ≤ i &lt; m</code>.</li>
+	<li>Nivelul <code>n</code> conține întotdeauna piatră și Loid nu va avea niciodată sarcina de a dinamita piatra de pe nivelul <code>n</code>.</li>
+	<li>Mina este stabilă la secunda <code>1</code>.</li>
+	<li>Pentru fiecare sarcină <code>i</code> pentru care <code>c</code><sub><code>i</code></sub> <code>= 1</code>, mina este stabilă la secunda <code>t</code><sub><code>i</code></sub>.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>nisip.in</code></p>
+
+<pre>6 4
+0 1 1 2 0 2
+1 1 4
+2 2 3
+2 4 2
+2 5 4</pre>
+
+<p><code>nisip.out</code></p>
+
+<pre>1
+0
+1</pre>
+
+<h3>Explicație</h3>
+
+<p>Conținuturile nivelurilor minei sunt:</p>
+
+<ul>
+	<li><code>0 1 1 2 0 2</code> la secunda <code>1</code>,</li>
+	<li><code>0 1 1 0 0 2</code> la secunda <code>2</code>,</li>
+	<li><code>0 1 0 1 0 2</code> la secunda <code>3</code>,</li>
+	<li><code>0 0 1 0 1 2</code> la secunda <code>4</code>,</li>
+	<li><code>0 0 0 1 1 2</code> la secunda <code>5</code>,</li>
+	<li><code>0 0 0 1 1 2</code> la secunda <code>6</code>, etc.</li>
+</ul>		</article>
+		</body></html>

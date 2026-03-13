@@ -1,0 +1,80 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4612"><article id="enunt">
+			<p>Floricel vrea să facă cât mai mulți bani. Ca să aibă suficienţi bani să-şi poată cumpăra un apartament, are de rezolvat o problemă care se poate modela astfel: El are <code>N</code> intervale inițiale, date prin capetele lor. Floricel mai trebuie să creeze intervale noi, denumite intervale de acoperire.</p>
+
+<p>Un interval inițial se consideră acoperit dacă există cel puțin un interval de acoperire cu intersecția dintre intervalul de acoperire și cel inițial de lungime cel puțin jumătate din lungimea intervalului inițial. De exemplu, intervalul <code>[0,4]</code> este acoperit de mulțimea de intervale <code>{[2,5], [-1, 1]}</code>, dar nu este acoperit de mulțimea de intervale <code>{[0,1], [2,3], [3,4]}</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Prietenul său, Ted, îi spune că are nevoie de mai multe provocări în viață să fie mai fericit, și îi pune <code>Q</code> întrebări de forma: “Dacă ai voie să creezi cel mult <code>K</code> intervale de acoperire, care ar fi lungimea minimă a celui mai lung interval de acoperire astfel încât toate intervalele inițiale să fie acoperite? Și dacă poți, care este soluția minimă lexicografic? O soluție este minimă lexicografic dacă este minimă întâi după numărul intervalelor de acoperire, iar după aceea comparând intervalele după capetele de stânga și de dreapta, ordonând intervalele după capetele din stânga.”</p>
+
+<h1>Date de intrare</h1>
+
+<p>Prima linie a fișierului de intrare <code>acoperire.in</code> conține numărul <code>N</code>. Următoarele <code>N</code> linii conțin câte două numere naturale <code>S[i]</code> și <code>D[i]</code>, unde numerele de pe linia <code>i+1</code> reprezintă capetele stânga și dreapta ale celui de-al <code>i</code>-lea interval. Urmează o linie cu numărul <code>Q</code>, iar pe următoarele <code>Q</code> linii se află câte un număr <code>K</code>, care reprezintă câte o întrebare a lui Ted, unde vrem să aflăm lungimea minimă a celui mai lung interval de acoperire, dacă putem crea cel mult <code>K</code> intervale de acoperire.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>acoperire.out</code> trebuie să conțină <code>Q</code> răspunsuri în ordine. Pentru o întrebare cu <code>K</code> dat, pe prima linie trebuie afișată lungimea celui mai lung interval de acoperire în condițiile cerute, pe următoarea linie trebuie să fie numărul de intervale de acoperire folosite (cel mult <code>K</code>), iar pe următoarele linii capetele stânga și dreapta ale intervalelor, ordonate după capătul stânga. Dacă o valoare este număr întreg, trebuie afișată ca număr întreg, altfel trebuie afișată ca număr real cu fix o zecimală.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 100.000</code></li>
+	<li><code>0 ≤ S[i] &lt; D[i] ≤ 10.000.000</code></li>
+	<li><code>1 ≤ Q ≤ 20</code></li>
+	<li><code>1 ≤ K ≤ N</code> și suma tuturor <code>K</code> este <code>100.000</code></li>
+	<li>Se acordă puncte pentru un test doar dacă toate lungimile minime ale celui mai lung interval de acoperire sunt aflate corect. Dacă o soluție nu este corectă sau minimă lexicografic se va acorda totuși 75% din punctajul unei întrebări. Toate întrebările unui test au aceeași valoare ca punctaj.</li>
+	<li>Dacă vreți să afișați doar lungimea, puteți afișa <code>0</code> ca numărul intervalelor din soluție.</li>
+	<li>Pentru 10 puncte, <code>N = 1</code></li>
+	<li>Pentru 10 puncte, <code>N = 2</code> și intervalele iniţiale sunt disjuncte.</li>
+	<li>Pentru 20 puncte, <code>Q = K = 1</code></li>
+	<li>Pentru 20 puncte, intervalele iniţiale sunt disjuncte, oricare două.</li>
+	<li>Pentru 40 puncte, fără restricţii suplimentare.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>acoperire.in</code></p>
+
+<pre>5
+0 2
+1 4
+1 2
+3 5
+3 6
+3
+1
+2
+3</pre>
+
+<p><code>acoperire.out</code></p>
+
+<pre>3.5
+1
+1 4.5
+1.5
+2
+1 2.5
+4 5.5
+1.5
+2
+1 2.5
+3 4.5</pre>
+
+<h3>Explicație</h3>
+
+<p>Fișierul de intrare contine 5 intervale inițiale, ilustrate cu roșu mai jos.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-acoperire2-001-jpg.jpg"></p>
+
+<p>Pentru <code>K = 1</code> avem un singur interval de acoperire, de lungime <code>3.5</code>, adică <code>[1, 4.5]</code>, și soluţia este minimă lexicografic.</p>
+
+<p>Pentru <code>K = 2</code>, răspunsul din exemplul de mai sus reprezintă o soluție cu cel mai lung interval de acoperire de lungime <code>1.5</code>. Soluția primește doar 75% din punctajul celei de-a doua întrebări, pentru că nu este minimă lexicografic: înlocuirea intervalului <code>[4, 5.5]</code> cu <code>[3, 4.5]</code> reprezintă o soluție mai mică lexicografic.</p>
+
+<p>Pentru <code>K = 3</code> soluția este minimă lexicografic, deoarece sunt necesare doar două intervale de acoperire.</p>
+
+<p>Soluția obține <code>(100 + 75 + 100) / 3 = 91.66%</code> din punctajul testului.</p>
+
+<h3>Epilog</h3>
+
+<p>“În final, Floricel și-a dat seama că lucrurile materiale sunt necesare dar nu suficiente pentru împlinire în viață. Acum că nu se mai ia după ce vede la alții, nu mai urmărește fake lifestyle, cringe și propagandă pe social media, iar scopurile spre care tinde sunt alese de el însuşi, pentru împlinirea sa și a celor din jur. Acum e cu adevărat fericit.”</p>		</article>
+		</body></html>

@@ -1,0 +1,85 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3808"><article id="enunt">
+			<h1><span class="caps">ADFGVX</span></h1>
+
+<p>Cifrul <span class="caps">ADFGVX</span> este un cifru ce folosește o matrice <code>6x6</code> care conţine literele alfabetului englez si cifre. Cifrul functioneaza asa:<br>
+</p><ul>
+	<li>se citeste matricea, un mesajul si o cheie.</li>
+	<li>In matrice, linia <code>1</code> si coloana <code>1</code> au codul <code>A</code>, linia <code>2</code> si coloana <code>2</code> au codul <code>D</code>, linia <code>3</code> si coloana <code>3</code> au codul <code>F</code>, linia <code>4</code> si coloana <code>4</code> au codul <code>G</code>, linia <code>5</code> si coloana <code>5</code> au codul <code>V</code>, iar linia <code>6</code> si coloana <code>6</code> au codul <code>X</code>.</li>
+	<li>Fiecare litera din mesaj este inlocuita cu un codul liniei si coloanei pe care se afla in matrice.</li>
+	<li>literele codurilor obtinute sunt puse intr-o matrice care are atatea coloane cate caractere are cheia(ultima linie a noii matrici poate fi incompleta).</li>
+	<li>coloanele noii matrici au codul literei din cheie de pe pozitia egala cu numarul de ordine al coloanei.</li>
+	<li>coloanele sunt sortate in functie de ordinea alfabetica al literei pe care o au asociata.</li>
+	<li>In final se afiseaza  matricea noua parcursa pe coloane (pentru a fi mai clar, literele se afiseaza fara spatii intre ele, iar cand se trece pe o noua coloana, se va pune un spatiu).</li><br>
+</ul><p></p>
+
+<h1>Cerinta</h1>
+
+<p>Vi se ofera un numar <code>c</code> si matricea pentru criptare.Pentru <code>c=1</code>, vi se ofera un mesaj si o cheie si trebuie sa criptati mesajul. Pentru <code>c=2</code>, vi se ofera mesajul criptat si o cheie si trebuie sa decriptati mesajul.<br>
+h1. Date de intrare</p>
+
+<p>Fișierul de intrare <code>adfgvx.in</code> conține pe prima linie numărul <code>c</code>, iar pe urmatoarele linii matricea, mesajul si cheia.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>adfgvx.out</code> va conține pe prima linie mesajul criptat sau decriptat, in functie de <code>c</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ lungimea mesajului necriptat ≤ 1000000</code></li>
+	<li><code>1≤c≤2</code></li>
+	<li>cheia va avea numai litere distincte<br>
+h1. Exemplul 1:</li>
+</ul>
+
+<p><code>adfgvx.in</code></p>
+
+<pre>1
+NA1C3H
+8TB2OM
+E5WRPD
+4F6G7I
+9J0KLQ
+SUVXYZ
+ATTACKAT1200AM PRIVACY</pre>
+
+<p><code>adfgvx.out</code></p>
+
+<pre>DGDD DAGD DGAF ADDF DADV DVFA ADVX</pre>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>adfgvx.in</code></p>
+
+<pre>2
+NA1C3H
+8TB2OM
+E5WRPD
+4F6G7I
+9J0KLQ
+SUVXYZ
+DGDD DAGD DGAF ADDF DADV DVFA ADVX PRIVACY</pre>
+
+<p><code>adfgvx.out</code></p>
+
+<pre>ATTACKAT1200AM</pre>
+
+<h1>Explicatie:</h1>
+
+<p>*codul literelor va fi: AD,DD,DD,AD,AG,VG,AD,DD,AF,DG,VF,VF,AD,DX.<br>
+*Matricea noua va arata astfel:</p>
+
+<p><b>P	R	I	V	A	C	Y</b><br>
+A	D	D	D	D	D	A<br>
+D	A	G	V	G	A	D<br>
+D	D	A	F	D	G	V<br>
+F	V	F	A	D	D	X</p>
+
+<p>*Dupa ce sortam coloanele, matricea va arata astfel:</p>
+
+<p><b>A	C	I	P	R	V	Y</b><br>
+D	D	D	A	D	D	A<br>
+G	A	G	D	A	V	D<br>
+D	G	A	D	D	F	V<br>
+D	D	F	F	V	A	X</p>		</article>
+		</body></html>

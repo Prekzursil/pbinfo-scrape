@@ -1,0 +1,80 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4345"><article id="enunt">
+			<p>Robotul Vasile s-a angajat la fabrica decoraţiunilor de Crăciun unicat. El trebuie să monteze beculeţe colorate în brăduţi, astfel încât oricare doi brăduţi să fie diferiţi.<br>
+Pe o bandă de asamblare robotul Vasile are la dispoziţie <code>N</code> beculeţe colorate <code>b</code><sub><code>1</code></sub>,  <code>b</code><sub><code>2</code></sub>, …, <code>b</code><sub><code>N</code></sub>, astfel încât oricare două beculeţe sunt colorate diferit. În vârful bradului va pune o steluţă, iar pentru montarea beculeţelor în brăduţ el construieşte lanţuri de becuri în modul următor:<br>
+– pentru primul lanţ selectează <code>3</code> beculeţe <code>b</code><sub><code>i1</code></sub>, <code>b</code><sub><code>i2</code></sub>, <code>b</code><sub><code>i3</code></sub>, în ordinea în care acestea sunt plasate pe bandă (<code>i1 &lt; i2 &lt; i3</code>) şi montează în <code>b</code><sub><code>i2</code></sub> pe tulpina bradului, <code>b</code><sub><code>i1</code></sub> în stânga, iar <code>b</code><sub><code>3i</code></sub> în dreapta;<br>
+– pentru al doilea lanţ selectează apoi <code>5</code> beculeţe <code>b</code><sub><code>j1</code></sub>, <code>b</code><sub><code>j2</code></sub>, <code>b</code><sub><code>j3</code></sub>, <code>b</code><sub><code>j4</code></sub>, <code>b</code><sub><code>j5</code></sub>, în ordinea de pe bandă (<code>j1 &lt; j2 &lt; j3 &lt; j4 &lt; j5</code>) şi montează <code>b</code><sub><code>j3</code></sub> pe tulpina bradului imediat sub <code>b</code><sub><code>i2</code></sub>, în stânga <code>b</code><sub><code>j1</code></sub> şi <code>b</code><sub><code>j2</code></sub> (în această ordine), iar în dreapta <code>b</code><sub><code>j4</code></sub> şi <code>b</code><sub><code>j5</code></sub> (în această ordine);<br>
+– continuă în acelaşi mod, construind la fiecare pas un lanţ în care se selectează două becuri în plus faţă de lanţul precedent, respectând ordinea în care se află becurile pe banda de asamblare; becul situat la mijlocul lanţului este montat pe tulpină, imediat sub becul precedent, celelalte becuri fiind plasate în ordine în partea stângă, respectiv în partea dreaptă;<br>
+– procedeul se repetă până când numărul de becuri rămase pe banda de asamblare este insuficient pentru construirea unui nou lanţ.<br>
+Înălţimea bradului este considerată egală cu numărul de lanţuri construite (egal cu numărul de beculeţe montate pe tulpină). Doi brazi sunt diferiţi dacă există cel puţin o poziţie în care în cei doi brazi se află beculeţe de culori diferite.</p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând numărul <code>N</code> de beculeţe aflate pe banda de asamblare, scrieţi un program care să rezolve următoarele două cerinţe:<br>
+1. determină înălţimea bradului (numărul de lanţuri ce pot fi construite cu cele <code>N</code> beculeţe);<br>
+2. determină numărul de brazi diferiţi ce pot fi construiţi cu cele <code>N</code> beculeţe.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>braduti.in</code> conţine pe prima linie numărul <code>C</code> care reprezintă cerinţa care trebuie să fie rezolvată (<code>1</code> sau <code>2</code>). Pe a doua linie se află numărul natural <code>N</code> care reprezintă numărul de beculeţe colorate de pe linia de asamblare.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>braduti.out</code> va conţine o singură linie pe care va fi scris un număr natural reprezentând rezultatul determinat pentru cerinţa <code>C</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>3 ≤ N ≤ 5555</code></li>
+	<li>Pentru teste valorând 10 puncte <code>C = 1</code></li>
+	<li>Pentru teste valorând 20 de puncte, <code>C = 2</code> şi rezultatul va avea cel mult <code>18</code> cifre</li>
+	<li>Pentru teste valorând 60 de puncte, <code>C = 2</code> şi rezultatul va avea cel mult <code>10.000</code> cifre</li>
+	<li>10 puncte se acordă pentru exemplele din enunț.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>braduti.in</code></p>
+
+<pre>1
+17</pre>
+
+<p><code>braduti.out</code></p>
+
+<pre>3</pre>
+
+<h3>Explicație</h3>
+
+<p>Se va rezolva cerința 1. Numărul de lanţuri ce pot fi construite cu <code>17</code> beculeţe este <code>3</code>. Beculeţele vor fi aranjate ca în desen.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-braduti-1-jpg.jpg"></p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>braduti.in</code></p>
+
+<pre>2
+17</pre>
+
+<p><code>braduti.out</code></p>
+
+<pre>49008960</pre>
+
+<h3>Explicație</h3>
+
+<p>Se va rezolva cerința 2. Se determină numărul de brăduţi diferiţi ce pot fi construiţi cu <code>17</code> beculeţe.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>braduti.in</code></p>
+
+<pre>2
+5</pre>
+
+<p><code>braduti.out</code></p>
+
+<pre>10</pre>
+
+<h3>Explicație</h3>
+
+<p>Se va rezolva cerința 2. Se determină numărul de brăduţi diferiţi ce pot fi construiţi cu <code>5</code> beculeţe.</p>		</article>
+		</body></html>

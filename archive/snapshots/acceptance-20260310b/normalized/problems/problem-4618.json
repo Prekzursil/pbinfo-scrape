@@ -1,0 +1,318 @@
+{
+  "id": 4618,
+  "slug": "ron",
+  "name": "ron",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4618/ron",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 25,
+      "name": "Metoda Greedy",
+      "slug": "metoda-greedy",
+      "href": "/?pagina=probleme-lista&tag=25"
+    },
+    {
+      "id": 24,
+      "name": "Probleme diverse cu metoda Greedy",
+      "slug": "probleme-diverse-cu-metoda-greedy",
+      "href": "/?pagina=probleme-lista&tag=24"
+    }
+  ],
+  "tags": [
+    "ciurul lui Eratostene"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Scrieţi un program care, cunoscând numărul de crengi de soc și pentru fiecare dintre acestea poziția pe riglă la care se plasează capătul din stânga și lungimea crengii măsurată în centimetri, rezolvă următoarele două cerințe:</p><p>1) să se determine puterea cea mai mare pe care o are una dintre crengile folosite de Ron;<br>\n2) să se determine numărul de baghete magice realizate de Ron.</p>",
+      "text": "Scrieţi un program care, cunoscând numărul de crengi de soc și pentru fiecare dintre acestea poziția pe riglă la care se plasează capătul din stânga și lungimea crengii măsurată în centimetri, rezolvă următoarele două cerințe:1) să se determine puterea cea mai mare pe care o are una dintre crengile folosite de Ron; 2) să se determine numărul de baghete magice realizate de Ron."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>ron.in</code> conține pe prima linie numerele <code>c</code> și <code>n</code> reprezentând cerința care trebuie rezolvată (<code>1</code> sau <code>2</code>), respectiv numărul de crengi de soc. Pe următoarele <code>n</code> linii sunt descrise crengile de soc, câte o creangă pe o linie, sub forma a două numere naturale <code>poz</code> și <code>lg</code> reprezentând, în această ordine, numărul natural aflat pe rigla magică în dreptul căruia a fost așezat capătul din stânga al crengii, respectiv lungimea în centimetri a acesteia. Numerele scrise pe aceeaşi linie sunt separate prin câte un spaţiu.</p>",
+      "text": "Fișierul de intrare ron.in conține pe prima linie numerele c și n reprezentând cerința care trebuie rezolvată (1 sau 2), respectiv numărul de crengi de soc. Pe următoarele n linii sunt descrise crengile de soc, câte o creangă pe o linie, sub forma a două numere naturale poz și lg reprezentând, în această ordine, numărul natural aflat pe rigla magică în dreptul căruia a fost așezat capătul din stânga al crengii, respectiv lungimea în centimetri a acesteia. Numerele scrise pe aceeaşi linie sunt separate prin câte un spaţiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>ron.out</code> va conține o singură linie pe care va fi scris un număr natural reprezentând rezultatul la cerința <code>c</code> din fişierul de intrare.</p>",
+      "text": "Fișierul de ieșire ron.out va conține o singură linie pe care va fi scris un număr natural reprezentând rezultatul la cerința c din fişierul de intrare."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ n ≤ 50.000</code></li>\n\t<li><code>1 ≤ poz</code>, <code>lg ≤ 1.000.000.000</code></li>\n\t<li>Pentru 22 de puncte, <code>C=1</code>; <code>n ≤ 1000</code>; <code>poz, lg ≤ 100.000</code></li>\n\t<li>Pentru 20 de puncte, <code>C=1</code> și nu există restricții suplimentare.</li>\n\t<li>Pentru 25 de puncte, <code>C=2</code>; <code> n ≤ 1000</code>; <code> poz, lg ≤ 100.000</code></li>\n\t<li>Pentru 33 de puncte, <code>C=2</code> și nu există restricții suplimentare.</li>\n</ul>",
+      "text": "1 ≤ n ≤ 50.000 1 ≤ poz, lg ≤ 1.000.000.000 Pentru 22 de puncte, C=1; n ≤ 1000; poz, lg ≤ 100.000 Pentru 20 de puncte, C=1 și nu există restricții suplimentare. Pentru 25 de puncte, C=2; n ≤ 1000; poz, lg ≤ 100.000 Pentru 33 de puncte, C=2 și nu există restricții suplimentare."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>ron.in</code></p><pre>1 4\n19 9\n6 1\n9 17\n8 1</pre><p><code>ron.out</code></p><pre>2</pre><h3>Explicație</h3><p>Prima creangă are puterea <code>1</code> (acoperă numărul fermecat <code>25</code>), a doua creangă are puterea <code>0</code>, a treia creangă are puterea <code>2</code> (acoperă numerele fermecate <code>9</code> și <code>25</code>), iar a patra creangă are puterea <code>0</code>. Pentru primul exemplu (<code>c=1</code>), puterea maximă a uneia dintre crengile folosite de Ron este <code>2</code>.</p>",
+      "text": "ron.in1 4 19 9 6 1 9 17 8 1ron.out2ExplicațiePrima creangă are puterea 1 (acoperă numărul fermecat 25), a doua creangă are puterea 0, a treia creangă are puterea 2 (acoperă numerele fermecate 9 și 25), iar a patra creangă are puterea 0. Pentru primul exemplu (c=1), puterea maximă a uneia dintre crengile folosite de Ron este 2."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>ron.in</code></p><pre>2 4\n19 9\n6 1\n9 17\n8 1</pre><p><code>ron.out</code></p><pre>2</pre><h3>Explicație</h3><p>Pentru al doilea exemplu (<code>c=2</code>), se obțin două baghete: prima, a treia și a patra creangă realizează împreună o baghetă pentru că se suprapun sau se ating. A doua creangă realizează singură o baghetă.</p><p><img alt=\"\" src=\"/resurse/16a4b0/ron_01.jpg\"></p>",
+      "text": "ron.in2 4 19 9 6 1 9 17 8 1ron.out2ExplicațiePentru al doilea exemplu (c=2), se obțin două baghete: prima, a treia și a patra creangă realizează împreună o baghetă pentru că se suprapun sau se ating. A doua creangă realizează singură o baghetă."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Prima creangă are puterea 1 (acoperă numărul fermecat 25), a doua creangă are puterea 0, a treia creangă are puterea 2 (acoperă numerele fermecate 9 și 25), iar a patra creangă are puterea 0. Pentru primul exemplu (c=1), puterea maximă a uneia dintre crengile folosite de Ron este 2."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Pentru al doilea exemplu (c=2), se obțin două baghete: prima, a treia și a patra creangă realizează împreună o baghetă pentru că se suprapun sau se ating. A doua creangă realizează singură o baghetă."
+    }
+  ],
+  "constraints": [
+    "1 ≤ n ≤ 50.000",
+    "1 ≤ poz, lg ≤ 1.000.000.000",
+    "Pentru 22 de puncte, C=1; n ≤ 1000; poz, lg ≤ 100.000",
+    "Pentru 20 de puncte, C=1 și nu există restricții suplimentare.",
+    "Pentru 25 de puncte, C=2; n ≤ 1000; poz, lg ≤ 100.000",
+    "Pentru 33 de puncte, C=2 și nu există restricții suplimentare."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q023dd9c090.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/ron_01.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-ron-01-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "11",
+    "intrare/ieșire": "ron.in / ron.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "OJI 2024, clasa a 7-a",
+    "autor": "Filonela Rodica Bălașa",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "author": "Filonela Rodica Bălașa",
+  "sourceAttribution": "OJI 2024, clasa a 7-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4618/ron"
+}

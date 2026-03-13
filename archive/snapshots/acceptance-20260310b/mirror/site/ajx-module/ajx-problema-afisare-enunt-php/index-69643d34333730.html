@@ -1,0 +1,58 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4370"><article id="enunt">
+			<p>League of Legends (LoL) este un popular joc online ce este de cele mai multe ori mult mai plăcut dacă este jucat cu împreuna cu prietenii. În timpul unui meci obiectivele principale ale unui jucător sunt să omoare cât mai mulți inamici (Kill-uri), să fie omorât de cât mai puține ori (Death-uri) și să își ajute coechipierii în a ucide inamici (Assist-uri). Astfel, o metodă comună prin care nivelul unui jucător este aproximat este <span class="caps">KDA</span>-ul (Kills, Deaths, Assists), un număr întreg ce combină cele trei obiective ale unui jucător. <span class="caps">KDA</span>-ul este calculat automat așa că metoda de calcul nu este una de interes.</p>
+
+<p>Gigel are <code>N</code> prieteni, iar pentru fiecare el cunoaște <span class="caps">KDA</span>-ul. Deoarece toți prietenii lui Gigel sunt foarte buni <span class="caps">KDA</span>-ul lor este un număr întreg pozitiv. Pentru un turneu de LoL el vrea să formeze echipe din <code>k</code> prieteni. Pentru ca toată lumea să se distreze, obiectivul lui este să echilibreze cât mai tare echipele, astfel prietenii cu un <span class="caps">KDA</span> mai mare să nu fie în aceeași echipă cu prieteni cu un <span class="caps">KDA</span> scăzut.</p>
+
+<p>Pentru a vedea cât de echilibrată este o echipă, el se gândeste să folosească un <strong>coeficient de echilibru</strong> (<code>qE</code>). Coeficientul de echilibru al unei echipe poate fi aflat astfel: luăm toate perechile posibile de jucători din echipă, calculăm diferența absolută între <span class="caps">KDA</span>-urile celor doi, iar la final coeficientul de echilibru este minimul dintre aceste diferențe calculate. O echipă este cu atât mai echilibrată cu cât <code>qE</code>-ul ei este mai mic.</p>
+
+<h1>Cerința</h1>
+
+<p>Dându-se o listă conținând <span class="caps">KDA</span>-urilor celor <code>N</code> prieteni ai lui Gigel și mărimea unei echipe <code>k</code>, Gigel dorește să afle care este <code>qE</code>-ul celei mai neechilibrate echipe. Astfel el calculează <code>qE</code>-ul tuturor echipelor posibile (\(\frac{N!}{k!(N-k)!}\) la număr) și apoi alege <code>qE</code>-ul maxim posibil.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a intrării standard se află numerele <code>N</code> și <code>k</code>. Pe următoarea linie se află <code>N</code> numere pozitive întregi, reprezentând <span class="caps">KDA</span>-urile celor <code>N</code> prieteni.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Ieșirea standard va conține un singur număr întreg reprezentând <code>qE</code>-ul maxim posibil al unei echipe formate din <code>k</code> prieteni.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ k ≤ N ≤ 100.000</code></li>
+	<li><span class="caps">KDA</span>-ul unui jucator este un număr natural mai mic sau egal decât <code>100.000</code></li>
+	<li>Pentru 10 puncte, <code>k = 2</code></li>
+	<li>Pentru alte 20 de puncte, <code>1 ≤ N ≤ 35</code></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>5 3
+1 3 4 6 7</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>3</pre>
+
+<h3>Explicație</h3>
+
+<p>Echipele posibile sunt:</p>
+
+<ul>
+	<li><code>{1, 3, 4}</code> cu <code>qE</code> 1</li>
+	<li><code>{1, 3, 6}</code> cu <code>qE</code> 2</li>
+	<li><code>{1, 3, 7}</code> cu <code>qE</code> 2</li>
+	<li><code>{1, 4, 6}</code> cu <code>qE</code> 2</li>
+	<li><code>{1, 4, 7}</code> cu <code>qE</code> 3</li>
+	<li><code>{1, 6, 7}</code> cu <code>qE</code> 1</li>
+	<li><code>{3, 4, 6}</code> cu <code>qE</code> 1</li>
+	<li><code>{3, 4, 7}</code> cu <code>qE</code> 1</li>
+	<li><code>{3, 6, 7}</code> cu <code>qE</code> 1</li>
+	<li><code>{4, 6, 7}</code> cu <code>qE</code> 1</li>
+</ul>
+
+<p>Deci <code>qE</code>-ul maxim posibil este 3, obținut formând echipa <code>{1, 4, 7}</code>.</p>		</article>
+		</body></html>

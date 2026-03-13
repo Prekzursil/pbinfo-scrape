@@ -1,0 +1,306 @@
+{
+  "id": 4121,
+  "slug": "dragonfruit",
+  "name": "dragonfruit",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4121/dragonfruit",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 53,
+      "name": "Programare dinamică",
+      "slug": "programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=53"
+    },
+    {
+      "id": 54,
+      "name": "Probleme diverse de programare dinamică",
+      "slug": "probleme-diverse-de-programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=54"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Pentru a-și stabili planul de recoltare, Badinho este interesat de  răspunsurile la următoarele întrebări:<br>\n1) Care este numărul minim total de cactuși care ar trebui survolați într-un plan de recoltare?<br>\n2) Câte planuri de recoltare în care se survolează un număr minim de cactuși există? Deoarece acest număr poate fi foarte mare, se cere doar valoarea sa modulo <code>1.000.000.007</code>.</p><p>Badinho își dorește să afle raspunsurile la cele două întrebări într-un număr <code>T</code> de scenarii. Un scenariu este determinat de valorile <code>N</code>, <code>K</code>, <code>S</code>, <code>A[1]</code>, <code>A[2]</code>, …, <code>A[N]</code>.</p>",
+      "text": "Pentru a-și stabili planul de recoltare, Badinho este interesat de răspunsurile la următoarele întrebări: 1) Care este numărul minim total de cactuși care ar trebui survolați într-un plan de recoltare? 2) Câte planuri de recoltare în care se survolează un număr minim de cactuși există? Deoarece acest număr poate fi foarte mare, se cere doar valoarea sa modulo 1.000.000.007.Badinho își dorește să afle raspunsurile la cele două întrebări într-un număr T de scenarii. Un scenariu este determinat de valorile N, K, S, A[1], A[2], …, A[N]."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie a fișierului <code>dragonfruit.in</code> se află numărul <code>T</code>, urmat de cele <code>T</code> scenarii, fiecare în următorul format:</p><ul>\n\t<li>pe prima linie numerele naturale <code>N</code>, <code>K</code>, <code>S</code>, separate prin spații;</li>\n\t<li>pe a doua linie numerele <code>A[1]</code>, <code>A[2]</code>, …, <code>A[N]</code> separate prin spații.</li>\n</ul>",
+      "text": "Pe prima linie a fișierului dragonfruit.in se află numărul T, urmat de cele T scenarii, fiecare în următorul format: pe prima linie numerele naturale N, K, S, separate prin spații; pe a doua linie numerele A[1], A[2], …, A[N] separate prin spații."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Pentru fiecare scenariu dintre cele <code>T</code> se va afișa câte o linie în fișierul de ieșire <code>dragonfruit.out</code> care va conține două numere naturale separate printr-un spațiu reprezentând, în ordine, răspunsurile la cerințele 1 și 2 din enunț pentru scenariul curent. În cazul în care, pentru un anumit scenariu, nu există niciun plan de recoltare care să satisfacă cerințele date, se va afișa <code>0</code> <code>0</code> pe linia respectivă.</p>",
+      "text": "Pentru fiecare scenariu dintre cele T se va afișa câte o linie în fișierul de ieșire dragonfruit.out care va conține două numere naturale separate printr-un spațiu reprezentând, în ordine, răspunsurile la cerințele 1 și 2 din enunț pentru scenariul curent. În cazul în care, pentru un anumit scenariu, nu există niciun plan de recoltare care să satisfacă cerințele date, se va afișa 0 0 pe linia respectivă."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ T ≤ 5</code></li>\n\t<li><code>1 ≤ K ≤ 1000</code></li>\n\t<li><code>1 ≤ S ≤ 10</code></li>\n\t<li><code>0 ≤ A[i] ≤ 1000</code> pentru oricare <code>1 ≤ i ≤ N</code>.</li>\n\t<li>Pentru 4 puncte, <code>S=1</code> și <code>1 ≤ N ≤ 2000</code></li>\n\t<li>Pentru 7 puncte, <code>S=2</code> și <code>1 ≤ N ≤ 100</code></li>\n\t<li>Pentru 9 puncte, <code>S=3</code> și <code>1 ≤ N ≤ 50</code></li>\n\t<li>Pentru 10 puncte, <code>S=1</code> și <code>1 ≤ N ≤ 100.000</code></li>\n\t<li>Pentru 13 puncte, <code>S=2</code> și <code>1 ≤ N ≤ 2000</code></li>\n\t<li>Pentru 23 puncte, <code>1 ≤ N ≤ 70</code></li>\n\t<li>Pentru 34 puncte, <code>1 ≤ N ≤ 2000</code></li>\n</ul>",
+      "text": "1 ≤ T ≤ 5 1 ≤ K ≤ 1000 1 ≤ S ≤ 10 0 ≤ A[i] ≤ 1000 pentru oricare 1 ≤ i ≤ N. Pentru 4 puncte, S=1 și 1 ≤ N ≤ 2000 Pentru 7 puncte, S=2 și 1 ≤ N ≤ 100 Pentru 9 puncte, S=3 și 1 ≤ N ≤ 50 Pentru 10 puncte, S=1 și 1 ≤ N ≤ 100.000 Pentru 13 puncte, S=2 și 1 ≤ N ≤ 2000 Pentru 23 puncte, 1 ≤ N ≤ 70 Pentru 34 puncte, 1 ≤ N ≤ 2000"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>dragonfruit.in</code></p><pre>4\n8 7 4\n2 1 0 1 0 2 1 99\n2 99 10\n50 50\n3 8 1\n1 8 1\n5 3 2\n2 1 2 1 1</pre><p><code>dragonfruit.out</code></p><pre>5 3\n0 0\n1 1\n2 9</pre><h3>Explicație</h3><p><strong>Scenariul 1</strong> <br>\nUrmătoarele planuri de recoltare recoltează <code>7</code> dragon fruits survolând un număr minim de cactuși:</p><ul>\n\t<li>Planul 1: <code>[1, 2]</code>, <code>[4, 4]</code>, <code>[6, 7]</code>;</li>\n\t<li>Planul 2: <code>[1, 1]</code>, <code>[2, 2]</code>, <code>[4, 4]</code>, <code>[6, 7]</code>;</li>\n\t<li>Planul 3: <code>[1, 2]</code>, <code>[4, 4]</code>, <code>[6, 6]</code>, <code>[7, 7]</code>.</li>\n</ul><p>Observați că planul de recoltare <code>[1, 3]</code>, <code>[4, 4]</code>, <code>[6, 7]</code> nu se consideră valid, deoarece se survolează un număr de <code>6</code> cactuși, care nu este minim, chiar dacă s-au cules <code>K=7</code> dragon fruits.</p><p><strong>Scenariul 2</strong> <br>\nNu există niciun plan de recoltare în care să fie recoltate <code>99</code> dragon fruits.</p><p><strong>Scenariul 3</strong> <br>\nExistă un singur  plan de recoltare în care să fie recoltate <code>8</code> dragon fruits: <code>[2, 2]</code>.</p><p><strong>Scenariul 4</strong> <br>\nUrmătoarele planuri de recoltare recoltează <code>3</code> dragon fruits survolând un număr minim de <code>2</code> cactuși:</p><ul>\n\t<li>Planul 1: <code>[1, 2]</code>;</li>\n\t<li>Planul 2: <code>[2, 3]</code>;</li>\n\t<li>Planul 3: <code>[3, 4]</code>;</li>\n\t<li>Planul 4: <code>[1, 1]</code>, <code>[2, 2]</code>;</li>\n\t<li>Planul 5: <code>[1, 1]</code>, <code>[4, 4]</code>;</li>\n\t<li>Planul 6: <code>[1, 1]</code>, <code>[5, 5]</code>;</li>\n\t<li>Planul 7: <code>[2, 2]</code>, <code>[3, 3]</code>;</li>\n\t<li>Planul 8: <code>[3, 3]</code>, <code>[4, 4]</code>;</li>\n\t<li>Planul 9: <code>[3, 3]</code>, <code>[5, 5]</code>.</li>\n</ul><p>Observați că planul de recoltare <code>[2, 2]</code>, <code>[4, 4]</code>, <code>[5, 5]</code> nu se consideră valid, deoarece se survolează un număr de <code>3</code> cactuși, care nu este minim, chiar dacă s-au cules <code>K=3</code> dragon fruits. </p>",
+      "text": "dragonfruit.in4 8 7 4 2 1 0 1 0 2 1 99 2 99 10 50 50 3 8 1 1 8 1 5 3 2 2 1 2 1 1dragonfruit.out5 3 0 0 1 1 2 9ExplicațieScenariul 1 Următoarele planuri de recoltare recoltează 7 dragon fruits survolând un număr minim de cactuși: Planul 1: [1, 2], [4, 4], [6, 7]; Planul 2: [1, 1], [2, 2], [4, 4], [6, 7]; Planul 3: [1, 2], [4, 4], [6, 6], [7, 7]. Observați că planul de recoltare [1, 3], [4, 4], [6, 7] nu se consideră valid, deoarece se survolează un număr de 6 cactuși, care nu este minim, chiar dacă s-au cules K=7 dragon fruits.Scenariul 2 Nu există niciun plan de recoltare în care să fie recoltate 99 dragon fruits.Scenariul 3 Există un singur plan de recoltare în care să fie recoltate 8 dragon fruits: [2, 2].Scenariul 4 Următoarele planuri de recoltare recoltează 3 dragon fruits survolând un număr minim de 2 cactuși: Planul 1: [1, 2]; Planul 2: [2, 3]; Planul 3: [3, 4]; Planul 4: [1, 1], [2, 2]; Planul 5: [1, 1], [4, 4]; Planul 6: [1, 1], [5, 5]; Planul 7: [2, 2], [3, 3]; Planul 8: [3, 3], [4, 4]; Planul 9: [3, 3], [5, 5]. Observați că planul de recoltare [2, 2], [4, 4], [5, 5] nu se consideră valid, deoarece se survolează un număr de 3 cactuși, care nu este minim, chiar dacă s-au cules K=3 dragon fruits."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Scenariul 1 Următoarele planuri de recoltare recoltează 7 dragon fruits survolând un număr minim de cactuși:"
+    }
+  ],
+  "constraints": [
+    "1 ≤ T ≤ 5",
+    "1 ≤ K ≤ 1000",
+    "1 ≤ S ≤ 10",
+    "0 ≤ A[i] ≤ 1000 pentru oricare 1 ≤ i ≤ N.",
+    "Pentru 4 puncte, S=1 și 1 ≤ N ≤ 2000",
+    "Pentru 7 puncte, S=2 și 1 ≤ N ≤ 100",
+    "Pentru 9 puncte, S=3 și 1 ≤ N ≤ 50",
+    "Pentru 10 puncte, S=1 și 1 ≤ N ≤ 100.000",
+    "Pentru 13 puncte, S=2 și 1 ≤ N ≤ 2000",
+    "Pentru 23 puncte, 1 ≤ N ≤ 70",
+    "Pentru 34 puncte, 1 ≤ N ≤ 2000"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qc6f5e7bfa8.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "11",
+    "intrare/ieșire": "dragonfruit.in / dragonfruit.out",
+    "limită timp": "2 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "ONI 2022, clasa a X-a",
+    "autor": "David Nicolae Coroian",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 2,
+  "memoryLimitMb": 64,
+  "author": "David Nicolae Coroian",
+  "sourceAttribution": "ONI 2022, clasa a X-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4121/dragonfruit"
+}

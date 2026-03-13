@@ -1,0 +1,312 @@
+{
+  "id": 1136,
+  "slug": "dragoni",
+  "name": "Dragoni",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1136/dragoni",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 16,
+      "name": "Teoria Grafurilor",
+      "slug": "teoria-grafurilor",
+      "href": "/?pagina=probleme-lista&tag=16"
+    },
+    {
+      "id": 17,
+      "name": "Parcurgerea grafurilor neorientate",
+      "slug": "parcurgerea-grafurilor-neorientate",
+      "href": "/?pagina=probleme-lista&tag=17"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerințe",
+      "html": "<p><strong>a.</strong> Să se determine distanța maxima <code>Dmax</code><sub><code>i</code></sub> caracteristică unui dragon la care Hiccup poate ajunge fără a schimba dragonul pe care l-a luat inițial de pe insula <code>1</code>.<br>\n<strong>b.</strong> Să se determine distanța minimă pe care Hiccup trebuie să o parcurgă pentru a ajunge de pe insula <code>1</code> pe insula <code>N</code>.</p>",
+      "text": "a. Să se determine distanța maxima Dmaxi caracteristică unui dragon la care Hiccup poate ajunge fără a schimba dragonul pe care l-a luat inițial de pe insula 1. b. Să se determine distanța minimă pe care Hiccup trebuie să o parcurgă pentru a ajunge de pe insula 1 pe insula N."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>dragoni.in</code> conține pe prima linie numărul <code>p</code>. Pentru toate testele de intrare, numărul <code>p</code> poate avea doar valoarea <code>1</code> sau valoarea <code>2</code>. Pe a doua linie se găsesc două numere naturale <code>N</code> și <code>M</code> reprezentând numărul de insule, respectiv numărul de rute directe între insule. Pe a treia linie se găsesc <code>N</code> numere naturale, al <code>i</code>-lea dintre acestea reprezentând distanta maximă <code>Dmax</code><sub><code>i</code></sub> pe care o poate zbura un dragon de pe insula <code>i</code>. Pe următoarele <code>M</code> linii sunt descrise cele <code>M</code> rute directe. Pe fiecare dintre aceste linii se găsesc câte trei numere naturale <code>A</code>, <code>B</code> și <code>D</code> cu semnificația că există rută bidirecțională de lungime <code>D</code> între insulele <code>A</code> și <code>B</code>.</p>",
+      "text": "Fișierul de intrare dragoni.in conține pe prima linie numărul p. Pentru toate testele de intrare, numărul p poate avea doar valoarea 1 sau valoarea 2. Pe a doua linie se găsesc două numere naturale N și M reprezentând numărul de insule, respectiv numărul de rute directe între insule. Pe a treia linie se găsesc N numere naturale, al i-lea dintre acestea reprezentând distanta maximă Dmaxi pe care o poate zbura un dragon de pe insula i. Pe următoarele M linii sunt descrise cele M rute directe. Pe fiecare dintre aceste linii se găsesc câte trei numere naturale A, B și D cu semnificația că există rută bidirecțională de lungime D între insulele A și B."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>n fișierul de ieșire <code>dragoni.out</code> se va afișa un singur număr natural. </p><p><strong>Dacă valoarea lui <code>p</code> este <code>1</code>, se rezolvă numai cerința a.</strong><br>\nÎn acest caz numărul afișat va reprezenta distanța maximă <code>Dmax</code><sub><code>i</code></sub> a unui dragon <code>i</code> la care Hiccup poate ajunge fără a schimba dragonul pe care l-a luat inițial de pe insula <code>1</code>.</p><p><strong>Daca valoarea lui <code>p</code> este <code>2</code>, se va rezolva numai cerința b,</strong><br>\nÎn acest caz numărul afișat va reprezenta distanța minima pe care Hiccup trebuie să o parcurgă pentru a ajunge de pe insula <code>1</code> pe insula <code>N</code>.</p>",
+      "text": "n fișierul de ieșire dragoni.out se va afișa un singur număr natural. Dacă valoarea lui p este 1, se rezolvă numai cerința a. În acest caz numărul afișat va reprezenta distanța maximă Dmaxi a unui dragon i la care Hiccup poate ajunge fără a schimba dragonul pe care l-a luat inițial de pe insula 1.Daca valoarea lui p este 2, se va rezolva numai cerința b, În acest caz numărul afișat va reprezenta distanța minima pe care Hiccup trebuie să o parcurgă pentru a ajunge de pe insula 1 pe insula N."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 800</code></li>\n\t<li><code>1 ≤ M ≤ 6000</code></li>\n\t<li><code>1 ≤ Dmax</code><sub><code>i</code></sub><code> ≤ 50 000</code>, pentru orice <code>1 ≤ i ≤ N</code>.</li>\n\t<li><code>1 ≤ A</code><sub><code>j</code></sub><code>, B</code><sub><code>j</code></sub><code> ≤ N</code>, pentru orice <code>1 ≤ j ≤ M</code>.</li>\n\t<li><code>1 ≤ D</code><sub><code>j</code></sub><code> ≤ 50 000</code>, pentru orice <code>1 ≤ j ≤ M</code>.</li>\n\t<li>Se garantează că Hiccup poate ajunge pe insula <code>N</code>.</li>\n\t<li>Se garantează că răspunsul oricărei cerințe este un număr natural mai mic decât  <code>10</code><sup><code>9</code></sup>.</li>\n\t<li>Pentru rezolvarea corectă a primei cerințe se acordă 20% din punctajul testului respectiv.</li>\n\t<li>Pentru rezolvarea corectă a celei de-a doua cerințe se acordă 80% din punctajul testului respectiv.</li>\n</ul>",
+      "text": "1 ≤ N ≤ 800 1 ≤ M ≤ 6000 1 ≤ Dmaxi ≤ 50 000, pentru orice 1 ≤ i ≤ N. 1 ≤ Aj, Bj ≤ N, pentru orice 1 ≤ j ≤ M. 1 ≤ Dj ≤ 50 000, pentru orice 1 ≤ j ≤ M. Se garantează că Hiccup poate ajunge pe insula N. Se garantează că răspunsul oricărei cerințe este un număr natural mai mic decât 109. Pentru rezolvarea corectă a primei cerințe se acordă 20% din punctajul testului respectiv. Pentru rezolvarea corectă a celei de-a doua cerințe se acordă 80% din punctajul testului respectiv."
+    },
+    {
+      "title": "Exemplul 1",
+      "html": "<p><code>dragoni.in</code></p><pre>1\n5 6\n6 3 13 20 26\n1 2 5\n1 3 7\n1 5 10\n2 3 6\n3 4 5\n3 5 14</pre><p><code>dragoni.out</code></p><pre>20</pre>",
+      "text": "dragoni.in1 5 6 6 3 13 20 26 1 2 5 1 3 7 1 5 10 2 3 6 3 4 5 3 5 14dragoni.out20"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p><code>p = 1</code> deci se va rezolva cerința a).</p><p>Există <code>N = 5</code> insule si <code>M = 6</code> rute între ele. Hiccup pornește de pe insula <code>1</code> având un dragon care poate zbura o distanță de maxim <code>6</code>. Cu acest dragon poate ajunge doar pe insulele <code>1</code>, <code>2</code>, <code>3</code> si <code>4</code>, întrucât pentru a ajunge pe insula <code>5</code> el ar fi obligat sa parcurgă o ruta de lungime mai mare decât <code>6</code>. </p><p>Distanta maxima pe care o poate zbura un dragon aflat pe insulele <code>1</code>, <code>2</code>, <code>3</code> sau <code>4</code> este deci <code>20</code> (dragonul de pe insula <code>4</code>). Se observă că dragonul care poate zbura o distanță de <code>26</code> se afla pe insula 5 și este inaccesibil.</p>",
+      "text": "p = 1 deci se va rezolva cerința a).Există N = 5 insule si M = 6 rute între ele. Hiccup pornește de pe insula 1 având un dragon care poate zbura o distanță de maxim 6. Cu acest dragon poate ajunge doar pe insulele 1, 2, 3 si 4, întrucât pentru a ajunge pe insula 5 el ar fi obligat sa parcurgă o ruta de lungime mai mare decât 6. Distanta maxima pe care o poate zbura un dragon aflat pe insulele 1, 2, 3 sau 4 este deci 20 (dragonul de pe insula 4). Se observă că dragonul care poate zbura o distanță de 26 se afla pe insula 5 și este inaccesibil."
+    },
+    {
+      "title": "Exemplul 1",
+      "html": "<p><code>dragoni.in</code></p><pre>2\n5 6\n6 3 13 20 26\n1 2 5\n1 3 7\n1 5 10\n2 3 6\n3 4 5\n3 5 14</pre><p><code>dragoni.out</code></p><pre>28</pre>",
+      "text": "dragoni.in2 5 6 6 3 13 20 26 1 2 5 1 3 7 1 5 10 2 3 6 3 4 5 3 5 14dragoni.out28"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p><code>p = 2</code> deci se va rezolva cerința a).</p><p>Există <code>N = 5</code> insule și <code>M = 6</code> rute între ele. Pentru a parcurge o distanță minimă de <code>28</code> între insulele <code>1</code> și <code>N</code>, Hiccup face următorii pași:</p><ul>\n\t<li>Zboară de pe insula <code>1</code> pe insula <code>2</code> o distanță de <code>5</code> cu dragonul din specia <code>1</code>.</li>\n\t<li>Zboară de pe insula <code>2</code> pe insula <code>3</code> o distanță de <code>6</code> cu dragonul din specia <code>1</code>.</li>\n\t<li>Schimbă dragonul din specia <code>1</code> cu dragonul aflat pe insula <code>3</code>, care poate zbura o distanță maximă de <code>13</code>.</li>\n\t<li>Zboară de pe insula <code>3</code> pe insula <code>1</code> o distanță de <code>7</code> cu dragonul din specia <code>3</code>.</li>\n\t<li>Zboară de pe insula <code>1</code> pe insula <code>5</code> o distanță de <code>10</code> cu dragonul din specia <code>3</code>.</li>\n</ul><p>În total el parcurge o distanță de <code>5 + 6 + 7 + 10 = 28</code>.</p>",
+      "text": "p = 2 deci se va rezolva cerința a).Există N = 5 insule și M = 6 rute între ele. Pentru a parcurge o distanță minimă de 28 între insulele 1 și N, Hiccup face următorii pași: Zboară de pe insula 1 pe insula 2 o distanță de 5 cu dragonul din specia 1. Zboară de pe insula 2 pe insula 3 o distanță de 6 cu dragonul din specia 1. Schimbă dragonul din specia 1 cu dragonul aflat pe insula 3, care poate zbura o distanță maximă de 13. Zboară de pe insula 3 pe insula 1 o distanță de 7 cu dragonul din specia 3. Zboară de pe insula 1 pe insula 5 o distanță de 10 cu dragonul din specia 3. În total el parcurge o distanță de 5 + 6 + 7 + 10 = 28."
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "1 ≤ N ≤ 800",
+    "1 ≤ M ≤ 6000",
+    "1 ≤ Dmaxi ≤ 50 000, pentru orice 1 ≤ i ≤ N.",
+    "1 ≤ Aj, Bj ≤ N, pentru orice 1 ≤ j ≤ M.",
+    "1 ≤ Dj ≤ 50 000, pentru orice 1 ≤ j ≤ M.",
+    "Se garantează că Hiccup poate ajunge pe insula N.",
+    "Se garantează că răspunsul oricărei cerințe este un număr natural mai mic decât 109.",
+    "Pentru rezolvarea corectă a primei cerințe se acordă 20% din punctajul testului respectiv.",
+    "Pentru rezolvarea corectă a celei de-a doua cerințe se acordă 80% din punctajul testului respectiv."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q355c9ed0fb.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "11",
+    "intrare/ieșire": "dragoni.in / dragoni.out",
+    "limită timp": "1.5 secunde",
+    "limită memorie": "32 MB / 8 MB",
+    "sursa problemei": "OJI 2015, Clasele XI-XII",
+    "autor": "-",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 1.5,
+  "memoryLimitMb": 32,
+  "sourceAttribution": "OJI 2015, Clasele XI-XII",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1136/dragoni"
+}

@@ -1,0 +1,75 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4836"><article id="enunt">
+			<p>Pentru a îmbunătăţi aptitudinile logico-matematice ale elevilor săi, profesorul Vasile a implementat un joc. Pe ecranul principal al jocului se afişează un şir de <code>N</code> scaune, numerotate de la stânga spre dreapta începând cu <code>1</code>, pe fiecare scaun fiind așezat câte un copil. Fiecare copil poartă un tricou pe care este scris, de asemenea, câte un număr de la <code>1</code> la <code>N</code>. Numerele de pe tricouri sunt distincte și sunt scrise pe spate, deci nu sunt vizibile.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-joc16-001-jpg.jpg"></p>
+
+<p>Scopul jocului este de a descoperi numărul scris pe tricoul fiecărui copil. Pentru aceasta, pe ecran mai este afişat un triunghi de numere <code>T</code>, care ne dă informaţii ajutătoare. Triunghiul arată ca o matrice în care liniile sunt numerotate de sus în jos de la <code>1</code> la <code>N</code>, iar coloanele de la stânga la dreapta de la <code>1</code> la <code>N</code>. Numărul scris în triunghi pe linia <code>i</code> şi coloana <code>j</code> (<code>1 ≤ i ≤ j ≤ N</code>) reprezintă numărul scaunului pe care stă copilul având cel mai mic număr pe tricou dintre toţi copiii situaţi pe scaune cu numere cuprinse între <code>i</code> şi <code>j</code> (inclusiv <code>i</code> şi <code>j</code>). Observaţi că poziţiile din triunghi de pe linia <code>i</code> şi coloana <code>j</code> cu <code>1 ≤ j &lt; i ≤ N</code> nu sunt completate.</p>
+
+<p>Numim <strong>soluţie</strong> o succesiune de <code>N</code> numere naturale distincte cuprinse între <code>1</code> şi <code>N</code> care ar putea fi scrise, în ordine, de la stânga la dreapta, pe tricourile celor <code>N</code> copii, astfel încât informaţiile din triunghiul de numere să fie corecte. Două soluţii sunt considerate distincte dacă există cel puţin un copil pentru care numărul scris pe tricoul său în cele două soluţii diferă.</p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând numărul de copii şi triunghiul de numere:<br>
+1.  determinați o soluţie posibilă; dacă există mai multe soluţii posibile se va afişa cea mai mică din punctul de vedere lexicografic;<br>
+2. determinați numărul de soluţii posibile.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>joc.in</code> conţine pe prima linie numărul natural <code>C</code> reprezentând cerinţa care trebuie să fie rezolvată (1 sau 2). Pe linia a doua se află numărul natural <code>N</code> cu semnificația din enunț. Pe următoarele <code>N</code> linii se află numerele din triunghi. Pe linia <code>i</code> dintre cele <code>N</code> sunt scrise <code>N-i+1</code> numere separate prin câte un spaţiu, reprezentând numerele de pe linia <code>i</code> din triunghi, situate pe coloanele <code>i</code>, <code>i+1</code>, … <code>N</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>joc.out</code> conţine o singură linie. Dacă <code>C=1</code> linia conţine <code>N</code> numere naturale distincte cuprinse între 1 şi <code>N</code>, separate prin câte un spaţiu, reprezentând soluţia cea mai mică din punct de vedere lexicografic determinată pentru cerința 1. Dacă <code>C=2</code> linia conţine numărul de soluţii posibile determinat pentru cerința 2. </p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 1000</code></li>
+	<li>Spunem că șirul <code>a[1]</code>, <code>a[2]</code>, …, <code>a[N]</code> este mai mic din punctul de vedere lexicografic decât șirul <code>b[1]</code>, <code>b[2]</code>, …, <code>b[N]</code> dacă există <code>k</code> (<code>1 ≤ k ≤ N</code>), astfel încât <code>a[i] = b[i]</code>, pentru orice <code>1 ≤ i &lt; k</code> şi <code>a[k] &lt; b[k]</code>.</li>
+	<li>Se garantează că, pentru datele de test, există cel puțin o soluție.</li>
+	<li>Pentru 9 puncte, <code>C=1</code>, <code>1 ≤ N &lt; 10</code></li>
+	<li>Pentru 9 puncte, <code>C=2</code>, <code>1 ≤ N &lt; 10</code></li>
+	<li>Pentru 22 de puncte, <code>C=1</code>, <code>10 ≤ N ≤ 1000</code></li>
+	<li>Pentru 24 de puncte, <code>C=2</code>, <code>10 ≤ N &lt; 28</code></li>
+	<li>Pentru 36 de puncte, <code>C=2</code>, fără restricții suplimentare</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>joc.in</code></p>
+
+<pre>1
+3
+1 2 2
+2 2
+3</pre>
+
+<p><code>joc.out</code></p>
+
+<pre>2 1 3</pre>
+
+<h3>Explicație</h3>
+
+<p>O soluţie posibilă este <code>2 1 3</code>.<br>
+Pe secvenţa de scaune <code>1..1</code> copilul cu număr minim pe tricou este pe scaunul <code>1.</code><br>
+Pe secvenţa de scaune <code>1..2</code> copilul cu număr minim pe tricou este pe scaunul <code>2</code>.<br>
+Pe secvenţa de scaune <code>1..3</code> copilul cu număr minim pe tricou este pe scaunul <code>2</code>.<br>
+Pe secvenţa de scaune <code>2..2</code> copilul cu număr minim pe tricou este pe scaunul <code>2</code>.<br>
+Pe secvenţa de scaune <code>2..3</code> copilul cu număr minim pe tricou este pe scaunul <code>2</code>.<br>
+Pe secvenţa de scaune <code>3..3</code> copilul cu număr minim pe tricou este pe scaunul <code>3</code>.<br>
+O altă soluţie posibilă este <code>3 1 2</code>, dar <code>2 1 3</code> este mai mică din punct de vedere lexicografic.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>joc.in</code></p>
+
+<pre>2
+3
+1 2 2
+2 2
+3</pre>
+
+<p><code>joc.out</code></p>
+
+<pre>2</pre>		</article>
+		</body></html>

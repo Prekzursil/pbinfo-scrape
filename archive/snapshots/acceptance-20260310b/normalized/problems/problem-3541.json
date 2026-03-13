@@ -1,0 +1,306 @@
+{
+  "id": 3541,
+  "slug": "pixeli",
+  "name": "Pixeli",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3541/pixeli",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 65,
+      "name": "Structuri de date arborescente",
+      "slug": "structuri-de-date-arborescente",
+      "href": "/?pagina=probleme-lista&tag=65"
+    },
+    {
+      "id": 148,
+      "name": "Structuri de date",
+      "slug": "structuri-de-date",
+      "href": "/?pagina=probleme-lista&tag=148"
+    }
+  ],
+  "tags": [
+    "Trie"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p><span class=\"caps\">RAU</span>-Gigel este pasionat de grafică, așa că se gândește la un joc cu imagini. El creează într-un editor grafic o imagine bitmap binară de dimensiuni <code>N X N</code> pixeli. O imagine bitmap binară este o matrice de pixeli, fiecare pixel fiind un bit. Să considerăm că valoarea 0 (nesetat) înseamnă alb și valoarea 1 (setat) înseamnă negru (în realitate este exact invers!). Apoi <span class=\"caps\">RAU</span>-Gigel împarte imaginea în patru imagini pătrate egale de latură <code>N / 2</code> pe care le notează de la <code>1</code> la <code>4</code> (<code>1</code> este imaginea din colțul dreapta-sus, <code>2</code> este cea din colțul dreapta-jos, <code>3</code>  stânga-jos și <code>4</code>  stânga-sus). El repetă procedeul pentru fiecare dintre cele <code>4</code> imagini obținute, și tot așa, reducând mereu latura la jumătate și notând direcțiile de la <code>1</code> la <code>4</code>, până când ajunge la imagini de mărimea unui pixel. </p><p>Pentru simplitate, să presupunem că <code>N</code> este o putere a lui <code>2</code>, să spunem <code>K</code>. Deci, după <code>K</code> împărțiri succesive de imagini, orice pixel poate fi identificat printr-un șir unic format din cifrele <code>1</code>, <code>2</code>, <code>3</code> și <code>4</code>, de lungime <code>K</code>.</p><p>De exemplu, dacă <code>N = 4</code>, atunci <code>K = 2</code>. Imaginea inițială are <code>16</code> pixeli. Vom avea <code>2</code> împărțiri succesive:</p><p>După prima împărțire rezultă <code>4</code> imagini reduse la jumătate (fiecare are câte <code>4</code> pixeli): \t<br>\n<code>4</code> \\(\\quad\\) <code>1</code><br>\n<code>3</code> \\(\\quad\\) <code>2</code></p><p>După a doua împărțire rezultă <code>16</code> imagini de câte <code>1</code> pixel: \t<br>\n<code>44</code> <code>41</code> \\(\\quad\\) <code>14</code> <code>11</code><br>\n<code>43</code> <code>42</code> \\(\\quad\\) <code>13</code> <code>12</code></p><p><code>34</code> <code>31</code> \\(\\quad\\) <code>24</code> <code>21</code><br>\n<code>33</code> <code>32</code> \\(\\quad\\) <code>23</code> <code>22</code></p><p>Inițial, imaginea este complet albă.</p><p>Acum începe jocul. <span class=\"caps\">RAU</span>-Gigel se gândește la <code>2</code> tipuri de operaţii:<br>\nOperaţia <code>1 x</code> schimbă starea pixelul identificat cu șirul <code>x</code>, descris ca mai sus. Dacă pixelul <code>x</code> nu este setat, îl setează. Dacă pixelul <code>x</code> este deja setat, atunci îl resetează.<br>\nOperaţia <code>2 x</code> , unde <code>x</code> are aceeași semnificație ca mai sus, este o interogare: dacă <code>x</code> este setat, se răspunde cu <code>0</code>. Dacă <code>x</code> nu este setat, se cere determinarea dimensiunii celei mai mari imagini complet albe, dintre cele create de <span class=\"caps\">RAU</span>-Gigel, care conține pixelul <code>x</code>. Dimensiunea este dată de numărul de pixeli conținut.</p><p>Dându-se <code>N</code> cu semnificația de mai sus și <code>M</code>, reprezentând numărul de operaţii şi cele <code>M</code> operaţii de tipul <code>1</code> și <code>2</code>, să se răspundă la operaţiile de tip <code>2</code>.</p>",
+      "text": "RAU-Gigel este pasionat de grafică, așa că se gândește la un joc cu imagini. El creează într-un editor grafic o imagine bitmap binară de dimensiuni N X N pixeli. O imagine bitmap binară este o matrice de pixeli, fiecare pixel fiind un bit. Să considerăm că valoarea 0 (nesetat) înseamnă alb și valoarea 1 (setat) înseamnă negru (în realitate este exact invers!). Apoi RAU-Gigel împarte imaginea în patru imagini pătrate egale de latură N / 2 pe care le notează de la 1 la 4 (1 este imaginea din colțul dreapta-sus, 2 este cea din colțul dreapta-jos, 3 stânga-jos și 4 stânga-sus). El repetă procedeul pentru fiecare dintre cele 4 imagini obținute, și tot așa, reducând mereu latura la jumătate și notând direcțiile de la 1 la 4, până când ajunge la imagini de mărimea unui pixel. Pentru simplitate, să presupunem că N este o putere a lui 2, să spunem K. Deci, după K împărțiri succesive de imagini, orice pixel poate fi identificat printr-un șir unic format din cifrele 1, 2, 3 și 4, de lungime K.De exemplu, dacă N = 4, atunci K = 2. Imaginea inițială are 16 pixeli. Vom avea 2 împărțiri succesive:După prima împărțire rezultă 4 imagini reduse la jumătate (fiecare are câte 4 pixeli): 4 \\(\\quad\\) 1 3 \\(\\quad\\) 2După a doua împărțire rezultă 16 imagini de câte 1 pixel: 44 41 \\(\\quad\\) 14 11 43 42 \\(\\quad\\) 13 1234 31 \\(\\quad\\) 24 21 33 32 \\(\\quad\\) 23 22Inițial, imaginea este complet albă.Acum începe jocul. RAU-Gigel se gândește la 2 tipuri de operaţii: Operaţia 1 x schimbă starea pixelul identificat cu șirul x, descris ca mai sus. Dacă pixelul x nu este setat, îl setează. Dacă pixelul x este deja setat, atunci îl resetează. Operaţia 2 x , unde x are aceeași semnificație ca mai sus, este o interogare: dacă x este setat, se răspunde cu 0. Dacă x nu este setat, se cere determinarea dimensiunii celei mai mari imagini complet albe, dintre cele create de RAU-Gigel, care conține pixelul x. Dimensiunea este dată de numărul de pixeli conținut.Dându-se N cu semnificația de mai sus și M, reprezentând numărul de operaţii şi cele M operaţii de tipul 1 și 2, să se răspundă la operaţiile de tip 2."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>pixeli.in</code> conține pe prima linie numerele naturale <code>N</code> și <code>M</code> separate cu un spațiu. Pe următoarele <code>M</code> linii se află câte o cifră de <code>1</code> sau <code>2</code> și câte un string, de forma <code>tip_operaţie x</code>, reprezentând tipul operaţiei şi șirul <code>x</code>.</p>",
+      "text": "Fișierul de intrare pixeli.in conține pe prima linie numerele naturale N și M separate cu un spațiu. Pe următoarele M linii se află câte o cifră de 1 sau 2 și câte un string, de forma tip_operaţie x, reprezentând tipul operaţiei şi șirul x."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>pixeli.out</code> va conține răspunsurile pentru operaţiile de tip 2, câte unul pe linie.</p>",
+      "text": "Fișierul de ieșire pixeli.out va conține răspunsurile pentru operaţiile de tip 2, câte unul pe linie."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2 ≤ N ≤ 2.000.000.000</code>, <code>1 ≤ M ≤ 10.000</code></li>\n\t<li>In toate testele, <code>N</code> este o putere a lui <code>2</code></li>\n\t<li>Toate șirurile <code>x</code> sunt corect definite</li>\n\t<li>Pentru teste în valoare de <code>30</code> de puncte, <code>N &lt;= 1.000</code> și <code>M &lt;= 50</code></li>\n</ul>",
+      "text": "2 ≤ N ≤ 2.000.000.000, 1 ≤ M ≤ 10.000 In toate testele, N este o putere a lui 2 Toate șirurile x sunt corect definite Pentru teste în valoare de 30 de puncte, N <= 1.000 și M <= 50"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>pixeli.in</code></p><pre>4 11\n1 11\n1 22 \n2 22\n2 33\n2 44\n2 24\n1 22\n2 22\n2 24\n1 11\n2 44</pre><p><code>pixeli.out</code></p><pre>0\n4\n4\n1\n4\n4\n16</pre><h3>Explicație</h3><p>Inițial imaginea este albă:<br>\n<code>0</code> <code>0</code> \\(\\quad\\) <code>0</code> <code>0</code> <br>\n<code>0</code> <code>0</code> \\(\\quad\\) <code>0</code> <code>0</code> </p><p><code>0</code> <code>0</code> \\(\\quad\\) <code>0</code> <code>0</code> <br>\n<code>0</code> <code>0</code> \\(\\quad\\) <code>0</code> <code>0</code> </p><p>După primele <code>2</code> operații de tip <code>1</code>, imaginea va conține:<br>\n<code>0</code> <code>0</code> \\(\\quad\\) <code>0</code> <code>1</code> <br>\n<code>0</code> <code>0</code> \\(\\quad\\) <code>0</code> <code>0</code> </p><p><code>0</code> <code>0</code> \\(\\quad\\) <code>0</code> <code>0</code> <br>\n<code>0</code> <code>0</code> \\(\\quad\\) <code>0</code> <code>1</code> </p><p>Următoarele <code>4</code> interogări vor referi, în ordine, pixelii marcati cu <code>a</code>, <code>b</code>, <code>c</code>, <code>d</code> (imaginea de mai jos). Cum <code>a</code> era setat, răspunsul este <code>0</code>. Cea mai mare imagine albă, creată de <span class=\"caps\">RAU</span>-Gigel, care conține <code>b</code>, este colțul stânga jos cu <code>4</code> pixeli. La fel pentru <code>c</code>. În cazul pixelului <code>d</code>, răspunsul este <code>1</code> (chiar el).<br>\n<code>c</code> <code>0</code> \\(\\quad\\) <code>0</code> <code>e</code> <br>\n<code>0</code> <code>0</code> \\(\\quad\\) <code>0</code> <code>0</code> </p><p><code>0</code> <code>0</code> \\(\\quad\\) <code>d</code> <code>0</code> <br>\n<code>b</code> <code>0</code> \\(\\quad\\) <code>0</code> <code>a</code> </p><p>Urmează o operație de tip <code>1</code> care resetează pixelul notat cu <code>a</code> (șirul <code>22</code>). Următoarele <code>2</code> interogări pentru <code>a</code> și <code>d</code> generează răspunsurile <code>4</code>, respectiv <code>4</code>.</p><p>În final, se resetează și pixelul <code>e</code>, iar ultima interogare, pentru <code>c</code>, va determina răspunsul <code>16</code>, toată imaginea fiind acum complet albă.</p>",
+      "text": "pixeli.in4 11 1 11 1 22 2 22 2 33 2 44 2 24 1 22 2 22 2 24 1 11 2 44pixeli.out0 4 4 1 4 4 16ExplicațieInițial imaginea este albă: 0 0 \\(\\quad\\) 0 0 0 0 \\(\\quad\\) 0 0 0 0 \\(\\quad\\) 0 0 0 0 \\(\\quad\\) 0 0 După primele 2 operații de tip 1, imaginea va conține: 0 0 \\(\\quad\\) 0 1 0 0 \\(\\quad\\) 0 0 0 0 \\(\\quad\\) 0 0 0 0 \\(\\quad\\) 0 1 Următoarele 4 interogări vor referi, în ordine, pixelii marcati cu a, b, c, d (imaginea de mai jos). Cum a era setat, răspunsul este 0. Cea mai mare imagine albă, creată de RAU-Gigel, care conține b, este colțul stânga jos cu 4 pixeli. La fel pentru c. În cazul pixelului d, răspunsul este 1 (chiar el). c 0 \\(\\quad\\) 0 e 0 0 \\(\\quad\\) 0 0 0 0 \\(\\quad\\) d 0 b 0 \\(\\quad\\) 0 a Urmează o operație de tip 1 care resetează pixelul notat cu a (șirul 22). Următoarele 2 interogări pentru a și d generează răspunsurile 4, respectiv 4.În final, se resetează și pixelul e, iar ultima interogare, pentru c, va determina răspunsul 16, toată imaginea fiind acum complet albă."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>pixeli.in</code></p><pre>8 9\n1 111\n1 222\n2 222\n2 333\n2 444\n2 242\n1 222\n2 222\n2 242</pre><p><code>pixeli.out</code></p><pre>0\n16\n16\n4\n16\n16</pre>",
+      "text": "pixeli.in8 9 1 111 1 222 2 222 2 333 2 444 2 242 1 222 2 222 2 242pixeli.out0 16 16 4 16 16"
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Inițial imaginea este albă: 0 0 \\(\\quad\\) 0 0 0 0 \\(\\quad\\) 0 0"
+    }
+  ],
+  "constraints": [
+    "2 ≤ N ≤ 2.000.000.000, 1 ≤ M ≤ 10.000",
+    "In toate testele, N este o putere a lui 2",
+    "Toate șirurile x sunt corect definite",
+    "Pentru teste în valoare de 30 de puncte, N <= 1.000 și M <= 50"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q59af81a2e1.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Crisan Daniela Alexandra (URA)",
+    "clasa": "11",
+    "intrare/ieșire": "pixeli.in / pixeli.out",
+    "limită timp": "0.05 secunde",
+    "limită memorie": "32 MB / 8 MB",
+    "sursa problemei": "RAU-Coder 2020",
+    "autor": "Daniela Alexandra Crisan",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.05,
+  "memoryLimitMb": 32,
+  "author": "Daniela Alexandra Crisan",
+  "sourceAttribution": "RAU-Coder 2020",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3541/pixeli"
+}

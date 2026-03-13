@@ -1,0 +1,302 @@
+{
+  "id": 4118,
+  "slug": "regate",
+  "name": "regate",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4118/regate",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 16,
+      "name": "Teoria Grafurilor",
+      "slug": "teoria-grafurilor",
+      "href": "/?pagina=probleme-lista&tag=16"
+    },
+    {
+      "id": 60,
+      "name": "Grafuri cu costuri",
+      "slug": "grafuri-cu-costuri",
+      "href": "/?pagina=probleme-lista&tag=60"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Pentru fiecare regat trebuie să calculați costul pe care acesta trebuie să-l plătească pentru a fi într-o alianță perfectă. Cu alte cuvinte, pentru fiecare regat <code>i</code>, unde <code>1 ≤ i ≤ N</code>, trebuie să calculați \\( \\sum_{j = 1, j \\neq i}^{N} \\mathit{Cost}(i, j) \\). </p>",
+      "text": "Pentru fiecare regat trebuie să calculați costul pe care acesta trebuie să-l plătească pentru a fi într-o alianță perfectă. Cu alte cuvinte, pentru fiecare regat i, unde 1 ≤ i ≤ N, trebuie să calculați \\( \\sum_{j = 1, j \\neq i}^{N} \\mathit{Cost}(i, j) \\)."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie a fișierului de intrare <code>regate.in</code> se află <code>N</code> și <code>M</code>, numărul de regate, respectiv, numărul de muchii bidirecționale. Pe a doua linie se găsesc numerele <code>r[1]</code>, …, <code>r[N]</code>, separate prin spații, unde <code>r[i]</code> reprezintă costul construcției unui punct de frontieră la intrarea regatului <code>i</code>. Pe următoarele <code>M</code> linii se află câte trei numere naturale <code>a[i]</code>, <code>b[i]</code>, <code>c[i]</code>, separate prin spații, <code>1 ≤ i ≤ M</code>, semnificând că există o muchie bidirecțională între regatul <code>a[i]</code> și regatul <code>b[i]</code>, iar <code>c[i]</code> reprezintă costul construcției unui punct de frontieră pe muchia <code>i</code>.</p>",
+      "text": "Pe prima linie a fișierului de intrare regate.in se află N și M, numărul de regate, respectiv, numărul de muchii bidirecționale. Pe a doua linie se găsesc numerele r[1], …, r[N], separate prin spații, unde r[i] reprezintă costul construcției unui punct de frontieră la intrarea regatului i. Pe următoarele M linii se află câte trei numere naturale a[i], b[i], c[i], separate prin spații, 1 ≤ i ≤ M, semnificând că există o muchie bidirecțională între regatul a[i] și regatul b[i], iar c[i] reprezintă costul construcției unui punct de frontieră pe muchia i."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>În fișierul de ieșire <code>regate.out</code> se vor afișa <code>N</code> linii. Fiecare linie <code>i</code> va conține un singur număr întreg, reprezentând costul ce trebuie plătit pentru ca regatul <code>i</code> să fie într-o alianță perfectă, cu alte cuvinte, \\( \\sum_{j = 1, j \\neq i}^{N} \\mathit{Cost}(i, j) \\).</p>",
+      "text": "În fișierul de ieșire regate.out se vor afișa N linii. Fiecare linie i va conține un singur număr întreg, reprezentând costul ce trebuie plătit pentru ca regatul i să fie într-o alianță perfectă, cu alte cuvinte, \\( \\sum_{j = 1, j \\neq i}^{N} \\mathit{Cost}(i, j) \\)."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 200.000</code></li>\n\t<li><code>1 ≤ M ≤ 200.000</code></li>\n\t<li><code>1 ≤ c[i]≤ 1.000.000.000</code></li>\n\t<li><code>1 ≤ r[i] ≤ 1.000.000.000</code></li>\n\t<li><code>1 ≤ a[i], b[i] ≤ N</code>, <code>a[i] ≠ b[i]</code> (adică nu există muchie de la un regat la el insuși)</li>\n\t<li>Între două regate poate exista cel mult o muchie</li>\n\t<li>Datorită dimensiunilor foarte mari, doar o parte din teste au putut fi folosite.</li>\n</ul>",
+      "text": "1 ≤ N ≤ 200.000 1 ≤ M ≤ 200.000 1 ≤ c[i]≤ 1.000.000.000 1 ≤ r[i] ≤ 1.000.000.000 1 ≤ a[i], b[i] ≤ N, a[i] ≠ b[i] (adică nu există muchie de la un regat la el insuși) Între două regate poate exista cel mult o muchie Datorită dimensiunilor foarte mari, doar o parte din teste au putut fi folosite."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>regate.in</code></p><pre>5 5\n8 13 9 7 12\n1 2 10\n2 3 10\n3 4 10\n4 5 10\n1 3 10</pre><p><code>regate.out</code></p><pre>32\n46\n36\n28\n40</pre><h3>Explicație</h3><p>De exemplu, pentru regatul <code>2</code> avem:<br>\n<code>Cost(2, 1) = 13</code><br>\n<code>Cost(2, 3) = 13</code><br>\n<code>Cost(2, 4) = 10</code><br>\n<code>Cost(2, 5) = 10</code><br>\nSuma acestora este <code>46</code>.<br>\nAtenție că, de exemplu, în calculul lui <code>Cost(2, 1)</code>, nu putem pune un punct de frontieră pe muchia <code>(1 ,2)</code> de cost <code>10</code>, deoarece există drumul <code>2 → 3 → 1</code> care nu trece prin muchia <code>(1, 2)</code>.</p>",
+      "text": "regate.in5 5 8 13 9 7 12 1 2 10 2 3 10 3 4 10 4 5 10 1 3 10regate.out32 46 36 28 40ExplicațieDe exemplu, pentru regatul 2 avem: Cost(2, 1) = 13 Cost(2, 3) = 13 Cost(2, 4) = 10 Cost(2, 5) = 10 Suma acestora este 46. Atenție că, de exemplu, în calculul lui Cost(2, 1), nu putem pune un punct de frontieră pe muchia (1 ,2) de cost 10, deoarece există drumul 2 → 3 → 1 care nu trece prin muchia (1, 2)."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "De exemplu, pentru regatul 2 avem: Cost(2, 1) = 13 Cost(2, 3) = 13 Cost(2, 4) = 10 Cost(2, 5) = 10 Suma acestora este 46. Atenție că, de exemplu, în calculul lui Cost(2, 1), nu putem pune un punct de frontieră pe muchia (1 ,2) de cost 10, deoarece există drumul 2 → 3 → 1 care nu trece prin muchia (1, 2)."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 200.000",
+    "1 ≤ M ≤ 200.000",
+    "1 ≤ c[i]≤ 1.000.000.000",
+    "1 ≤ r[i] ≤ 1.000.000.000",
+    "1 ≤ a[i], b[i] ≤ N, a[i] ≠ b[i] (adică nu există muchie de la un regat la el insuși)",
+    "Între două regate poate exista cel mult o muchie",
+    "Datorită dimensiunilor foarte mari, doar o parte din teste au putut fi folosite."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q9985b80aed.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "11",
+    "intrare/ieșire": "regate.in / regate.out",
+    "limită timp": "1 secunde",
+    "limită memorie": "512 MB / 64 MB",
+    "sursa problemei": "ONI 2022, clasele 11-12",
+    "autor": "Stelian Chichirim",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 1,
+  "memoryLimitMb": 512,
+  "author": "Stelian Chichirim",
+  "sourceAttribution": "ONI 2022, clasele 11-12",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4118/regate"
+}

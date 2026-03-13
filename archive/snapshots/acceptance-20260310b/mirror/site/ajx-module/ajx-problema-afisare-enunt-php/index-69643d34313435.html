@@ -1,0 +1,126 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4145"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p><span class="caps">RAU</span>-Gigel se joacă cu noul său set de cale ferată, primit cadou de ziua lui anul acesta. Setul conține <code>N</code> gări distincte din diverse orașe reprezentative ale României (București, Iași, Sebeș, …), numerotate în continuare, pentru simplitate, cu numere de la <code>1</code> la <code>N</code> și <code>N – 1</code> bucăți de șină care pot conecta între ele câte două gări distincte date (conexiunea este bidirecțională) astfel încât folosind aceste șine există un drum unic alcătuit din șine între oricare două gări distincte. Ca orice jucărie, fiecare din cele <code>N – 1</code> bucăți de șină are un grad de periculozitate asociat acesteia, o valoare exprimată printr-un număr natural nenul (nimeni nu este perfect până la urmă, nici jucăriile), pentru a ști de la ce vârsta ar fi bine să poată fi folosite de copii, de exemplu. De asemenea, toate bucățile de șină au aceeași lungime constantă, de o unitate.</p>
+
+<p><span class="caps">RAU</span>-Gigel își desfășoară joaca pe parcursul a <code>Q</code> zile și în fiecare zi este supravegheat de câte un membru al familiei pentru a fi în siguranță. Din nefericire pentru el, în fiecare din cele <code>Q</code> zile persoana care îl supraveghează îi încurcă puțin planurile, permițându-i să folosească doar șinele care au gradul de periculozitate cel mult <code>M</code> (inclusiv <code>M</code>), o valoare naturală nenulă aleasă de aceasta (de remarcat că poate mereu folosi toate gările). Astfel, folosind toate șinele pe care le are la dispoziție pentru a conecta între ele gările corespunzătoare, va obține una sau mai multe așezări conexe maximale de gări (există un drum unic alcătuit din șine între oricare două gări distincte dintr-o așezare) pe care le va numi în continuare orașe. În fiecare astfel de zi, personajul nostru principal primește de la persoana care îl supraveghează un număr natural nenul <code>K</code> de bucăți de șină considerate perfect sigure pentru joaca copilului de către respectivul supraveghetor, cu care poate conecta oricare două gări distincte dorește. De asemenea, șinele primite îi sunt luate la finalul zilei (poate că persoana respectivă mai supraveghează și alți copii în următoarele zile și mai are nevoie de ele). </p>
+
+<p><span class="caps">RAU</span>-Gigel consideră că un lanț este un șir de una sau mai multe gări distincte astfel încât oricare două gări adiacente din acesta sunt conectate de exact o șină, iar lanțul de lungime maximă este cel format dintr-un număr maxim de bucăți de șină (astfel, lungimea unui lanț este dată de numărul de bucăți de șină din care este alcătuit). Scopul acestuia este ca în fiecare zi să formeze un singur lanț cât mai lung având la dispoziție șinele primite de la supraveghetor și cel mult câte un lanț din fiecare oraș creat de acesta, la alegere (adică pentru fiecare oraș poate să aleagă exact un lanț din el (oricare dorește) sau să nu folosească niciun lanț din acel oraș). </p>
+
+<p><span class="caps">RAU</span>-Gigel cunoaște deja toate detaliile a <code>T</code> astfel de scenarii de joacă independente și vrea pentru fiecare dintre acestea, pe baza informațiilor date, să-l ajutați să afle în fiecare zi care este lungimea maximă a unui lanț de șine pe care îl poate obține în modul descris anterior (prima cerință), respectiv numărul de modalități distincte de obținere a acestui maxim (a doua cerință), calculat modulo <code>1.000.000.007</code>. Două modalități de obținere a maximului sunt considerate distincte dacă cele două submulțimi de orașe din care acesta a selectat lanțurile de lungime maximă sunt diferite.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>cfr.in</code> conține pe prima linie un număr natural nenul <code>T</code>, reprezentând numărul de scenarii. Pentru fiecare scenariu pe prima linie se află un număr <code>C</code> care reprezintă numărul cerinței care trebuie rezolvată. </p>
+
+<p>Pe cea de-a doua linie se află <code>N</code>, numărul de gări, urmat de <code>N – 1</code> linii care reprezintă descrierile șinelor de tren: câte <code>3</code> numere <code>u_i  v_i  w_i</code> pe fiecare linie, care reprezintă gările conectate, respectiv gradul de periculozitate pentru bucata de șină cu numărul <code>i</code>, <code>1 ≤ i &lt; N</code>.</p>
+
+<p>Pe următoarea linie se află numărul <code>Q</code> urmat de descrierile celor <code>Q</code> zile de joacă: câte <code>2</code> numere <code>M_i  K_i</code> pe fiecare linie, având semnificațiile din enunț, <code>1 ≤ i ≤ Q</code>.</p>
+
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>cfr.out</code> va conține răspunsurile, în ordinea solicitării, adică lungimea maximă care poate fi obținută în condițiile zilei corespunzătoare dacă <code>C = 1</code> sau numărul de modalități distincte de a obține această lungime maximă modulo <code>1.000.000.007</code>, dacă <code>C = 2</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ T ≤ 3</code></li>
+	<li><code>1 ≤ C ≤ 2</code></li>
+	<li><code>1 ≤ N, Q ≤ 100.000</code></li>
+	<li><code>1 ≤ u_i, v_i ≤ N</code></li>
+	<li><code>1 ≤ w_i, M_i ≤ 1.000.000.000</code></li>
+	<li><code>1 ≤ K_i ≤ N</code></li>
+	<li>Un lanț poate fi format dintr-o singură gară sau să aibă la cele <code>2</code> capete ale sale câte o gară.</li>
+	<li>Nu este obligatoriu ca într-o zi să se folosească toate cele <code>K_i</code> șine primite (mai ales că acest lucru s-ar putea să fie imposibil, pentru că o bucată de șină primită trebuie să conecteze exact două gări distincte într-un lanț).</li>
+	<li>Pentru teste în valoare de <code>10</code> de puncte, <code>C = 1</code> pentru toate scenariile și <code>1 ≤ N, Q ≤ 1.000</code>.</li>
+	<li>Pentru alte teste în valoare de <code>10</code> de puncte, <code>C = 1</code> pentru toate scenariile și <code>M_i = 1.000.000.000</code>, <code>1 ≤ i ≤ Q</code>.</li>
+	<li>Pentru alte teste în valoare de <code>10</code> de puncte, <code>C = 1</code> pentru toate scenariile și  <code>u_i=i, v_i = i+1</code>, <code>1 ≤ i &lt; N</code>.</li>
+	<li>Pentru alte teste în valoare de <code>10</code> de puncte, <code>C = 1</code> pentru toate scenariile și <code>K_i=1</code>, <code>1 ≤ i ≤ Q</code>.</li>
+	<li>Pentru alte teste în valoare de <code>10</code> de puncte, <code>C = 1</code>  pentru toate scenariile și nu există restricții suplimentare.</li>
+	<li>Pentru alte teste în valoare de <code>10</code> de puncte, <code>C = 2</code> pentru toate scenariile și <code>1 ≤ N, Q ≤ 1.000</code>.</li>
+	<li>Pentru alte teste în valoare de <code>10</code> de puncte, <code>C = 2</code> pentru toate scenariile și <code>M_i=1.000.000.000</code>, <code>1 ≤ i ≤ Q</code>.</li>
+	<li>Pentru alte teste în valoare de <code>10</code> de puncte, <code>C = 2</code> pentru toate scenariile și  <code>u_i=i,v_i=i+1</code>, <code>1 ≤ i &lt; N</code>.</li>
+	<li>Pentru alte teste în valoare de <code>10</code> de puncte, <code>C = 2</code> pentru toate scenariile și <code>K_i=1</code>, <code>1 ≤ i ≤ Q</code>.</li>
+	<li>Pentru alte teste în valoare de <code>10</code> de puncte, <code>C = 2</code> pentru toate scenariile și nu există restricții suplimentare.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>cfr.in</code></p>
+
+<pre>1
+1
+13
+1 2 1
+1 3 2
+1 4 2
+2 5 3
+3 6 1
+4 7 3
+4 8 2
+5 9 4
+5 10 4
+5 11 4
+8 12 3
+8 13 1
+4
+2 10
+3 2
+1 4
+4 3</pre>
+
+<p><code>cfr.out</code></p>
+
+<pre>11
+7
+7
+6</pre>
+
+<h3>Explicație</h3>
+
+<p>La final se află o reprezentarea vizuală a rețelei de gări, respectiv șine corespunzătoare acestui exemplu (pe șine s-a trecut gradul lor de periculozitate, iar lungimea tuturor este, cum s-a precizat și în enunț, constantă, de o unitate).</p>
+
+<p>Să considerăm prima zi. Avem la dispoziție doar șinele de tren cu grad de periculozitate cel mult <code>2</code>, așa că așezările de gări formate sunt: <code>{1, 2, 3, 4, 6, 8, 13}, {5}, {7}, {9}, {10}, {11}, {12}</code>, în total <code>7</code> așezări. <span class="caps">RAU</span>-Gigel poate alege din prima așezare lanțul de gări <code>6 – 3 – 1 – 4 – 8 – 13</code>, de lungime <code>5</code> (șine), iar din restul așezărilor există câte o singură opțiune de alegere, care este mereu un lanț format dintr-un singur nod, de lungime <code>0</code> (șine). Observăm că <span class="caps">RAU</span>-Gigel are la dispoziție destule șine adiționale primite pentru a “lega” toate lanțurile alese, astfel poate obține lanțul: <code>6 – 3 – 1 – 4 – 8 – 13 – 5 – 7 – 9 – 10 – 11 – 12</code>, de lungime <code>11</code> (șine). Oricum ar alege alte lanțuri, <span class="caps">RAU</span>-Gigel nu poate obține un lanț final de lungime strict mai mare, deci răspunsul pentru prima zi este 11. De asemenea, se remarcă faptul că nu s-au folosit toate bucățile de șină primită, ci doar <code>6</code> din cele <code>10</code>. <span class="caps">RAU</span>-Gigel nu mai poate folosi șinele rămase pentru a prelungi lanțul obținut (de exemplu să atașeze încă o șină la unul din capetele lanțului, să zicem la <code>12</code>) pentru că o șină trebuie să unească exact <code>2</code> gări distincte.</p>
+
+
+<h1>Exemplul 2:</h1>
+
+<p><code>cfr.in</code></p>
+
+<pre>1 
+2
+13
+1 2 1
+1 3 2
+1 4 2
+2 5 3
+3 6 1
+4 7 3
+4 8 2
+5 9 4
+5 10 4
+5 11 4
+8 12 3
+8 13 1
+4
+2 10
+3 2
+1 4
+4 3</pre>
+
+<p><code>cfr.out</code></p>
+
+<pre>1
+3
+21
+1</pre>
+
+<h3>Explicație</h3>
+
+<p>Reprezentarea vizuală a rețelei de gări, respectiv șine corespunzătoare acestui exemplu este identică cu cea a primului exemplu și se găsește la final.</p>
+
+<p>Să considerăm a doua zi. Avem la dispoziție doar șinele de tren cu grad de periculozitate cel mult <code>3</code>, așa că așezările de gări formate sunt: <code>{1, 2, 3, 4, 5, 6, 7, 8, 12, 13}, {9}, {10}, {11}</code>, în total <code>4</code> așezări, pe care le numerotăm de la <code>1</code> la <code>4</code> în ordinea în care sunt scrise. Se observă că lungimea maximă a unui lanț pe care îl poate obține <span class="caps">RAU</span>-Gigel în modul descris în enunț este de <code>7</code> șine. De asemenea, se mai observă și că într-o soluție optimă acesta este mereu obligat să aleagă un lanț de lungime <code>5</code> din prima așezare (nu contează care din ele chiar dacă există mai multe), iar apoi poate alege oricare <code>2</code> “lanțuri” distincte din așezările rămase pentru că toate sunt formate dintr-un singur nod și au lungimea <code>0</code> (șine), <span class="caps">RAU</span>-Gigel formând astfel un lanț de lungime <code>7</code> în urma utilizării celor două șine primite adițional în această zi. Astfel, soluțiile optime sunt: <code>{1, 2, 3}, {1, 2, 4}, {1, 3, 4}</code>, în număr de <code>3</code> (de remarcat din nou că “forma” unei soluții este dată de așezările din care s-au ales lanțurile, nu de gările / șinele din care este alcătuit lanțul final).</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-41f38a-cfr-png.png"> </p>		</article>
+		</body></html>

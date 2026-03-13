@@ -1,0 +1,323 @@
+{
+  "id": 1117,
+  "slug": "volum",
+  "name": "Volum",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1117/volum",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 116,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=116"
+    },
+    {
+      "id": 150,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=150"
+    }
+  ],
+  "tags": [
+    "Heapuri",
+    "Păduri de mulțimi disjuncte",
+    "Priority queue"
+  ],
+  "sections": [
+    {
+      "title": "Cerință",
+      "html": "<p>Pentru <code>N</code>, <code>M</code> și gridul <code>A</code> date, să se determine volumul de apă care a rămas în piscină.</p>",
+      "text": "Pentru N, M și gridul A date, să se determine volumul de apă care a rămas în piscină."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>volum.in</code> conține pe prima linie două numere naturale <code>N</code> și <code>M</code>, reprezentând dimensiunile grid-ului, iar pe fiecare dintre următoarele <code>N</code> linii se află câte <code>M</code> numere, reprezentând înălțimile terenului, separate prin câte un spațiu.</p>",
+      "text": "Fișierul de intrare volum.in conține pe prima linie două numere naturale N și M, reprezentând dimensiunile grid-ului, iar pe fiecare dintre următoarele N linii se află câte M numere, reprezentând înălțimile terenului, separate prin câte un spațiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>volum.out</code> va conține un singur număr, reprezentând volumul de apă care a rămas în piscină.</p>",
+      "text": "Fișierul de ieșire volum.out va conține un singur număr, reprezentând volumul de apă care a rămas în piscină."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>3 ≤ N, M ≤ 752</code></li>\n\t<li><code>0 ≤ A</code><sub><code>i,j</code></sub><code> ≤ 10</code><sup><code>9</code></sup><code> + 2</code></li>\n\t<li>Pentru 30% din punctaj, <code>3 ≤ N, M ≤ 82</code>.</li>\n\t<li>Pentru 40% din punctaj, <code>0 ≤ A</code><sub><code>i,j</code></sub><code> ≤ 10</code><sup><code>3</code></sup><code> + 2</code>.</li>\n\t<li>Volumul apei este suma unităţilor de apă care rămâne în celulele piscinei.</li>\n</ul>",
+      "text": "3 ≤ N, M ≤ 752 0 ≤ Ai,j ≤ 109 + 2 Pentru 30% din punctaj, 3 ≤ N, M ≤ 82. Pentru 40% din punctaj, 0 ≤ Ai,j ≤ 103 + 2. Volumul apei este suma unităţilor de apă care rămâne în celulele piscinei."
+    },
+    {
+      "title": "Exemplul 1",
+      "html": "<p><code>volum.in</code></p><pre>3 3\n2 2 2\n2 0 2\n2 2 2</pre><p><code>volum.out</code></p><pre>2</pre>",
+      "text": "volum.in3 3 2 2 2 2 0 2 2 2 2volum.out2"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p>După ploaie rămân două unități de apă în celula cu înălțimea <code>0</code>. Nu pot rămâne <code>3</code> unități, deoarece o unitate s-ar scurge prin una din cele 4 celule vecine în exteriorul piscinei.</p>",
+      "text": "După ploaie rămân două unități de apă în celula cu înălțimea 0. Nu pot rămâne 3 unități, deoarece o unitate s-ar scurge prin una din cele 4 celule vecine în exteriorul piscinei."
+    },
+    {
+      "title": "Exemplul 2",
+      "html": "<p><code>volum.in</code></p><pre>3 3\n3 3 3\n3 0 2\n3 3 3</pre><p><code>volum.out</code></p><pre>2</pre>",
+      "text": "volum.in3 3 3 3 3 3 0 2 3 3 3volum.out2"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p>După ploaie rămân două unități de apă în celula cu înălțimea <code>0</code>. Nu pot rămâne <code>3</code> unități, deoarece o unitate s-ar scurge prin celula vecină cu valoarea <code>2</code> în exteriorul piscinei.</p>",
+      "text": "După ploaie rămân două unități de apă în celula cu înălțimea 0. Nu pot rămâne 3 unități, deoarece o unitate s-ar scurge prin celula vecină cu valoarea 2 în exteriorul piscinei."
+    },
+    {
+      "title": "Exemplul 3",
+      "html": "<p><code>volum.in</code></p><pre>5 5\n2 2 3 3 3\n2 2 3 1 3\n2 3 1 3 3\n2 2 3 2 2\n2 2 2 2 2</pre><p><code>volum.out</code></p><pre>4</pre>",
+      "text": "volum.in5 5 2 2 3 3 3 2 2 3 1 3 2 3 1 3 3 2 2 3 2 2 2 2 2 2 2volum.out4"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p>După ploaie rămân câte două unități de apă în celulele cu înălțimea <code>1</code>. Nu pot rămâne câte <code>3</code> unități. De exemplu, din celula <code>(2,4)</code> apa se poate scurge în celula <code>(2,5)</code> şi apoi în exterior, respectiv din celula <code>(3,3)</code> în şirul de celule <code>(4,3) - (5,3)</code> şi apoi în exterior.</p>",
+      "text": "După ploaie rămân câte două unități de apă în celulele cu înălțimea 1. Nu pot rămâne câte 3 unități. De exemplu, din celula (2,4) apa se poate scurge în celula (2,5) şi apoi în exterior, respectiv din celula (3,3) în şirul de celule (4,3) - (5,3) şi apoi în exterior."
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "3 ≤ N, M ≤ 752",
+    "0 ≤ Ai,j ≤ 109 + 2",
+    "Pentru 30% din punctaj, 3 ≤ N, M ≤ 82.",
+    "Pentru 40% din punctaj, 0 ≤ Ai,j ≤ 103 + 2.",
+    "Volumul apei este suma unităţilor de apă care rămâne în celulele piscinei."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q8693cb5b26.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "11",
+    "intrare/ieșire": "volum.in / volum.out",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "32 MB / 8 MB",
+    "sursa problemei": "ONI 2014, Clasele XI-XII",
+    "autor": "Radu Voroneanu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 32,
+  "author": "Radu Voroneanu",
+  "sourceAttribution": "ONI 2014, Clasele XI-XII",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1117/volum"
+}

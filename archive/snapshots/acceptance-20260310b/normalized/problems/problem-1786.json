@@ -1,0 +1,300 @@
+{
+  "id": 1786,
+  "slug": "nn",
+  "name": "NN",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1786/nn",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 91,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=91"
+    },
+    {
+      "id": 92,
+      "name": "Geometrie",
+      "slug": "geometrie",
+      "href": "/?pagina=probleme-lista&tag=92"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Marele inginer NN, expert în construirea de baraje, a primit de data aceasta o sarcină mai îmbârligată. Acesta are de construit <code>M</code> baraje peste mai multe râuri dintr-o deltă și îşi planifică pe hârtie milimetrică construcţia fiecărui baraj în parte.</p><p>Toate râurile peste care are de construit baraje sunt braţe ale aceluiaşi fluviu şi toate pornesc din exact acelaşi punct pe lungimea fluviului. Pentru a-şi explica schiţa, NN marchează locul de despărţire a tuturor braţelor fluviului printr-un punct <code>O</code>, numit origine. Apoi, din origine pornesc <code>N</code> semidrepte, fiecare reprezentând o porţiune de uscat, astfel încât spaţiul gol dintre 2 semidrepte consecutive va fi considerat un braţ al fluviului.</p><p>După ce a desenat schiţa proiectului, NN se întreabă care e numărul de râuri pe care le acoperă complet fiecare baraj. Un baraj acoperă complet un râu dacă intersectează fiecare dintre malurile acestuia. Sarcina voastră este să îl ajutaţi oferindu-i informaţii precise pentru a-şi putea realiza planul cât mai eficient, păstrându-şi renumele.&nbsp;</p>",
+      "text": "Marele inginer NN, expert în construirea de baraje, a primit de data aceasta o sarcină mai îmbârligată. Acesta are de construit M baraje peste mai multe râuri dintr-o deltă și îşi planifică pe hârtie milimetrică construcţia fiecărui baraj în parte.Toate râurile peste care are de construit baraje sunt braţe ale aceluiaşi fluviu şi toate pornesc din exact acelaşi punct pe lungimea fluviului. Pentru a-şi explica schiţa, NN marchează locul de despărţire a tuturor braţelor fluviului printr-un punct O, numit origine. Apoi, din origine pornesc N semidrepte, fiecare reprezentând o porţiune de uscat, astfel încât spaţiul gol dintre 2 semidrepte consecutive va fi considerat un braţ al fluviului.După ce a desenat schiţa proiectului, NN se întreabă care e numărul de râuri pe care le acoperă complet fiecare baraj. Un baraj acoperă complet un râu dacă intersectează fiecare dintre malurile acestuia. Sarcina voastră este să îl ajutaţi oferindu-i informaţii precise pentru a-şi putea realiza planul cât mai eficient, păstrându-şi renumele."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie a fișierului <code>nn.in</code> se află <code>N</code> și <code>M</code>, reprezentând numărul de semidrepte, respectiv numărul de baraje. Pe fiecare dintre următoarele <code>N</code> linii se vor afla informaţii despre cele <code>N</code> semidrepte, astfel: pe linia <code>i</code> (<code>1&lt;=i&lt;=N</code>) se află o pereche de numere naturale <code>x</code> și <code>y</code>, reprezentând coordonatele unui punct aflat pe semidreapta <code>i</code> (ştim deja că toate semidreptele pornesc din <code>O(0, 0)</code>). Pe fiecare dintre următoarele <code>M</code> linii se vor afla câte <code>4</code> numere <code>x1</code>, <code>y1</code>, <code>x2</code>, <code>y2</code> reprezentând faptul că există un baraj care are extremităţile în punctele de coordonate <code>x1 y1</code> și <code>x2 y2</code>.&nbsp;</p>",
+      "text": "Pe prima linie a fișierului nn.in se află N și M, reprezentând numărul de semidrepte, respectiv numărul de baraje. Pe fiecare dintre următoarele N linii se vor afla informaţii despre cele N semidrepte, astfel: pe linia i (1<=i<=N) se află o pereche de numere naturale x și y, reprezentând coordonatele unui punct aflat pe semidreapta i (ştim deja că toate semidreptele pornesc din O(0, 0)). Pe fiecare dintre următoarele M linii se vor afla câte 4 numere x1, y1, x2, y2 reprezentând faptul că există un baraj care are extremităţile în punctele de coordonate x1 y1 și x2 y2."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>În fișierul de ieșire <code>nn.out</code> se vor afișa <code>M</code> numere, fiecare pe o linie separată, reprezentând numărul de râuri blocate de fiecare dintre cele <code>M</code> baraje. În rezolvarea problemei nu se va ţine cont de grosimea barajului, aceasta fiind neglijabilă.&nbsp;</p>",
+      "text": "În fișierul de ieșire nn.out se vor afișa M numere, fiecare pe o linie separată, reprezentând numărul de râuri blocate de fiecare dintre cele M baraje. În rezolvarea problemei nu se va ţine cont de grosimea barajului, aceasta fiind neglijabilă."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li>Toate numerele din fișierul de intrare sunt naturale <code>&lt;= 10^5</code></li>\n\t<li>Nici un punct din fișier nu coincide cu originea&nbsp;</li>\n\t<li>Pentru 10% din teste <code>N = 2</code>, <code>M = 1</code>&nbsp;</li>\n\t<li>Pentru următoarele 20% din teste, capetele segmentelor (barajelor) se vor afla pe semidreptele din datele de intrare</li>\n\t<li>Pentru primele 50% din teste <code>N, M &lt;= 1000</code></li>\n\t<li><strong>Se recomandă folosirea long double pentru lucrul cu numere raționale!</strong></li>\n</ul>",
+      "text": "Toate numerele din fișierul de intrare sunt naturale <= 10^5 Nici un punct din fișier nu coincide cu originea Pentru 10% din teste N = 2, M = 1 Pentru următoarele 20% din teste, capetele segmentelor (barajelor) se vor afla pe semidreptele din datele de intrare Pentru primele 50% din teste N, M <= 1000 Se recomandă folosirea long double pentru lucrul cu numere raționale!"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>nn.in</code></p><pre>5 3&nbsp; \n5 1&nbsp; \n2 1&nbsp; \n2 5&nbsp; \n5 5&nbsp; \n0 4&nbsp; \n3 0 4 2&nbsp; \n1 4 3 1&nbsp; \n5 3 7 6&nbsp;</pre><p><code>nn.out</code></p><pre>1&nbsp; \n2&nbsp; \n0&nbsp;</pre><h3>Explicație</h3><p><img alt=\"\" src=\"/resurse/9dc152/p-1700/1786-nn.png\"></p>",
+      "text": "nn.in5 3 5 1 2 1 2 5 5 5 0 4 3 0 4 2 1 4 3 1 5 3 7 6 nn.out1 2 0 Explicație"
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "Toate numerele din fișierul de intrare sunt naturale <= 10^5",
+    "Nici un punct din fișier nu coincide cu originea",
+    "Pentru 10% din teste N = 2, M = 1",
+    "Pentru următoarele 20% din teste, capetele segmentelor (barajelor) se vor afla pe semidreptele din datele de intrare",
+    "Pentru primele 50% din teste N, M <= 1000",
+    "Se recomandă folosirea long double pentru lucrul cu numere raționale!"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q6213fd4cbf.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1700/1786-nn.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1700-1786-nn-png.png",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "10",
+    "intrare/ieșire": "nn.in / nn.out",
+    "limită timp": "1.2 secunde",
+    "limită memorie": "32 MB / 8 MB",
+    "sursa problemei": "Concursul Interjudeţean de Matematică şi Informatică Grigore Moisil, 2016",
+    "autor": "Petru Trimbitas",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 1.2,
+  "memoryLimitMb": 32,
+  "author": "Petru Trimbitas",
+  "sourceAttribution": "Concursul Interjudeţean de Matematică şi Informatică Grigore Moisil, 2016",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1786/nn"
+}

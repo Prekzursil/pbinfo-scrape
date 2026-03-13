@@ -1,0 +1,313 @@
+{
+  "id": 4083,
+  "slug": "strips",
+  "name": "strips",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4083/strips",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 151,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=151"
+    },
+    {
+      "id": 152,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=152"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Scrieţi un program care citeşte lungimea tablei de joc, numărul de benzi colorate pe care le are fiecare jucător la începutul jocului, lungimea benzilor, precum şi poziţiile specificate de jucători pe parcursul jocului şi rezolvă următoarele două cerinţe:</p><ul>\n\t<li>determină numărul de puncte de penalizare pentru fiecare dintre cei doi jucători;</li>\n\t<li>determină pentru fiecare jucător care este lungimea maximă a unei zone de pe tabla de joc colorată în culoarea sa la sfârşitul jocului.</li>\n</ul>",
+      "text": "Scrieţi un program care citeşte lungimea tablei de joc, numărul de benzi colorate pe care le are fiecare jucător la începutul jocului, lungimea benzilor, precum şi poziţiile specificate de jucători pe parcursul jocului şi rezolvă următoarele două cerinţe: determină numărul de puncte de penalizare pentru fiecare dintre cei doi jucători; determină pentru fiecare jucător care este lungimea maximă a unei zone de pe tabla de joc colorată în culoarea sa la sfârşitul jocului."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>strips.in</code> conţine pe prima linie un număr natural <code>C</code> care reprezintă cerinţa care urmează a fi rezolvată (<code>1</code> sau <code>2</code>). Pe cea de-a doua linie se află trei numere naturale separate prin câte un spaţiu <code>N</code> <code>Nr</code> <code>L</code>, cu semnificaţia din enunţ. Celelalte linii ale fişierului de intrare conţin în ordine poziţiile specificate de jucători pe parcursul jocului, câte o poziţie pe o linie.</p>",
+      "text": "Fișierul de intrare strips.in conţine pe prima linie un număr natural C care reprezintă cerinţa care urmează a fi rezolvată (1 sau 2). Pe cea de-a doua linie se află trei numere naturale separate prin câte un spaţiu N Nr L, cu semnificaţia din enunţ. Celelalte linii ale fişierului de intrare conţin în ordine poziţiile specificate de jucători pe parcursul jocului, câte o poziţie pe o linie."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>strips.out</code> va conţine o singură linie pe care vor fi scrise două numere naturale <code>rezA</code> <code>rezB</code>, separate printr-un singur spaţiu. Dacă <code>C=1</code> atunci <code>rezA</code> este numărul de puncte de penalizare acumulate de Ana, iar <code>rezB</code> numărul de puncte de penalizare acumulate de Bogdan. Dacă <code>C=2</code> atunci <code>rezA</code> este lungimea maximă a unei zone de culoare roşie la sfârşitul jocului, iar <code>rezB</code> este lungimea maximă a unei zone de culoare verde la sfârşitul jocului.  </p>",
+      "text": "Fișierul de ieșire strips.out va conţine o singură linie pe care vor fi scrise două numere naturale rezA rezB, separate printr-un singur spaţiu. Dacă C=1 atunci rezA este numărul de puncte de penalizare acumulate de Ana, iar rezB numărul de puncte de penalizare acumulate de Bogdan. Dacă C=2 atunci rezA este lungimea maximă a unei zone de culoare roşie la sfârşitul jocului, iar rezB este lungimea maximă a unei zone de culoare verde la sfârşitul jocului."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 1.000.000.000</code></li>\n\t<li><code>1 ≤ Nr ≤ 50.000</code></li>\n\t<li><code>1 ≤ L ≤ 20.000</code></li>\n\t<li>Se garantează că pentru datele de test, la finalul jocului, pentru fiecare dintre cei doi jucători numărul de zone disjuncte de pe tabla de joc colorate în culoarea jucătorului respectiv este  <code>≤ 5000</code>.</li>\n\t<li>Poziţiile sunt numere naturale mai mici decât <code>N</code>.</li>\n\t<li>Fiindcă sunt începători, Ana şi Bogdan încă nu joacă optim.</li>\n\t<li>Pentru teste valorând 50 de puncte cerinţa este <code>1</code>.</li>\n\t<li>Pentru teste valorând 40 de puncte <code>1 ≤ N ≤ 1.000.000</code>, <code>1 ≤ L ≤ 1000</code> şi <code>1 ≤ Nr ≤ 1000</code>.</li>\n</ul>",
+      "text": "1 ≤ N ≤ 1.000.000.000 1 ≤ Nr ≤ 50.000 1 ≤ L ≤ 20.000 Se garantează că pentru datele de test, la finalul jocului, pentru fiecare dintre cei doi jucători numărul de zone disjuncte de pe tabla de joc colorate în culoarea jucătorului respectiv este ≤ 5000. Poziţiile sunt numere naturale mai mici decât N. Fiindcă sunt începători, Ana şi Bogdan încă nu joacă optim. Pentru teste valorând 50 de puncte cerinţa este 1. Pentru teste valorând 40 de puncte 1 ≤ N ≤ 1.000.000, 1 ≤ L ≤ 1000 şi 1 ≤ Nr ≤ 1000."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>strips.in</code></p><pre>1\n20 4 3\n9\n15\n2\n13\n5\n17\n0\n12</pre><p><code>strips.out</code></p><pre>0 1</pre>",
+      "text": "strips.in1 20 4 3 9 15 2 13 5 17 0 12strips.out0 1"
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>strips.in</code></p><pre>2\n20 4 3\n9\n15\n2\n13\n5\n17\n0\n12</pre><p><code>strips.out</code></p><pre>8 7</pre><h3>Explicație</h3><p>Tabla de joc are <code>20</code> de cm, poziţiile fiind numerotate de la <code>0</code> la <code>19</code>.<br>\nJucătorii au fiecare câte <code>4</code> benzi de lungime <code>3</code>.<br>\nLa prima mutare Ana aplică o bandă roşie peste poziţiile <code>9</code>, <code>10</code>, <code>11</code>.<br>\nLa a doua mutare Bogdan aplică o bandă verde peste poziţiile <code>15</code>, <code>16</code>, <code>17</code>.<br>\nLa a treia mutare Ana aplică o bandă roşie peste poziţiile <code>2</code>, <code>3</code>, <code>4</code>.<br>\nLa a patra mutare Bogdan aplică o bandă verde peste poziţiile <code>13</code>, <code>14</code>, <code>15</code>.<br>\nLa a cincea mutare Ana aplică o bandă roşie peste poziţiile <code>5</code>, <code>6</code>, <code>7</code>.<br>\nLa a şasea mutare Bogdan aplică o bandă verde peste poziţiile <code>17</code>, <code>18</code>, <code>19</code>.<br>\nLa a şaptea mutare Ana aplică o bandă roşie peste poziţiile <code>0</code>, <code>1</code>, <code>2</code>.<br>\nLa a opta mutare Bogdan a ales o poziţie invalidă (pentru că atinge o zonă de culoare roşie), ca urmare mutarea nu va fi executată (va avea <code>1</code> punct de penalizare).<br>\nTabla de joc la finalul jocului va arăta astfel:</p><p><img alt=\"\" src=\"/resurse/16a4b0/strips.jpg\"></p>",
+      "text": "strips.in2 20 4 3 9 15 2 13 5 17 0 12strips.out8 7ExplicațieTabla de joc are 20 de cm, poziţiile fiind numerotate de la 0 la 19. Jucătorii au fiecare câte 4 benzi de lungime 3. La prima mutare Ana aplică o bandă roşie peste poziţiile 9, 10, 11. La a doua mutare Bogdan aplică o bandă verde peste poziţiile 15, 16, 17. La a treia mutare Ana aplică o bandă roşie peste poziţiile 2, 3, 4. La a patra mutare Bogdan aplică o bandă verde peste poziţiile 13, 14, 15. La a cincea mutare Ana aplică o bandă roşie peste poziţiile 5, 6, 7. La a şasea mutare Bogdan aplică o bandă verde peste poziţiile 17, 18, 19. La a şaptea mutare Ana aplică o bandă roşie peste poziţiile 0, 1, 2. La a opta mutare Bogdan a ales o poziţie invalidă (pentru că atinge o zonă de culoare roşie), ca urmare mutarea nu va fi executată (va avea 1 punct de penalizare). Tabla de joc la finalul jocului va arăta astfel:"
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Tabla de joc are 20 de cm, poziţiile fiind numerotate de la 0 la 19. Jucătorii au fiecare câte 4 benzi de lungime 3. La prima mutare Ana aplică o bandă roşie peste poziţiile 9, 10, 11. La a doua mutare Bogdan aplică o bandă verde peste poziţiile 15, 16, 17. La a treia mutare Ana aplică o bandă roşie peste poziţiile 2, 3, 4. La a patra mutare Bogdan aplică o bandă verde peste poziţiile 13, 14, 15. La a cincea mutare Ana aplică o bandă roşie peste poziţiile 5, 6, 7. La a şasea mutare Bogdan aplică o bandă verde peste poziţiile 17, 18, 19. La a şaptea mutare Ana aplică o bandă roşie peste poziţiile 0, 1, 2. La a opta mutare Bogdan a ales o poziţie invalidă (pentru că atinge o zonă de culoare roşie), ca urmare mutarea nu va fi executată (va avea 1 punct de penalizare). Tabla de joc la finalul jocului va arăta astfel:"
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 1.000.000.000",
+    "1 ≤ Nr ≤ 50.000",
+    "1 ≤ L ≤ 20.000",
+    "Se garantează că pentru datele de test, la finalul jocului, pentru fiecare dintre cei doi jucători numărul de zone disjuncte de pe tabla de joc colorate în culoarea jucătorului respectiv este ≤ 5000.",
+    "Poziţiile sunt numere naturale mai mici decât N.",
+    "Fiindcă sunt începători, Ana şi Bogdan încă nu joacă optim.",
+    "Pentru teste valorând 50 de puncte cerinţa este 1.",
+    "Pentru teste valorând 40 de puncte 1 ≤ N ≤ 1.000.000, 1 ≤ L ≤ 1000 şi 1 ≤ Nr ≤ 1000."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qb698b1907b.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/strips.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-strips-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "strips.in / strips.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "5 MB / 5 MB",
+    "sursa problemei": "OJI 2022, Clasa a VIII-a",
+    "autor": "Emanuela Cerchez",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 5,
+  "author": "Emanuela Cerchez",
+  "sourceAttribution": "OJI 2022, Clasa a VIII-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4083/strips"
+}

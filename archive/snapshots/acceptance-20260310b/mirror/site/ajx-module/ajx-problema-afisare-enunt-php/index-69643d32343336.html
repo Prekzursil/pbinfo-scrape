@@ -1,0 +1,119 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2436"><article id="enunt">
+			<p>Arheologii au descoperit pe un platou muntos greu accesibil ruinele unui castel medieval, pe care l-au fotografiat din elicopter, obţinând harta digitizată a acestuia. Harta este memorată sub forma unui tablou bidimensional <code>H</code>, compus din <code>N x N</code> pătrate cu latura egală cu unitatea, având ca elemente numere naturale între <code>0</code> și <code>15</code>, care codifică forma pereţilor fiecărui pătrat unitar. Dacă scriem numărul natural <code>H[i][j]</code> în baza <code>2</code>, folosind exact <code>4</code> cifre binare, fiecare bit dă informații despre unul dintre pereții posibil de construit pe fiecare latură a pătratului unitar din poziția <code>(i,j)</code>, astfel: </p>
+
+<ul>
+	<li>dacă bitul de pe poziția <code>0</code> are valoarea <code>1</code>, atunci există perete pe latura vestică (latura din stânga);</li>
+	<li>dacă bitul de pe poziția <code>1</code> are valoarea <code>1</code>, atunci există perete pe latura sudică (latura de jos);</li>
+	<li>dacă bitul de pe poziția <code>2</code> are valoarea <code>1</code>, atunci există perete pe latura estică (latura din dreapta);</li>
+	<li>dacă bitul de pe poziția <code>3</code> are valoarea <code>1</code>, atunci există perete pe latura nordică (latura de sus);</li>
+	<li>un bit de valoare <code>0</code> indică lipsa peretelui corespunzător acestuia;</li>
+</ul>
+
+<p>Pentru un număr scris în baza <code>2</code>, numerotarea cifrelor începe cu poziția <code>0</code>, de la dreapta la stânga. Castelul este interesant deoarece,  pentru realizarea unei mai bune apărări, camerele ce-l compun  sunt construite fie independent,  fie una în interiorul alteia.  Orice camera este construită la o distanţă de cel puţin o unitate faţă de zidul ce împrejmuieşte castelul sau faţă de pereţii altor camere. Folosind harta, arheologii doresc să afle informaţii privind numărul camerelor şi camera de arie maximă. Prin arie a unei camere se înţelege numărul pătratelor unitate cuprinse în interiorul pereților aceasteia, fără a socoti ariile camerelor construite în interiorul ei.</p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând codificarea hărţii castelului, să se determine:<br>
+1. numărul total al camerelor din castel<br>
+2. aria maximă a unei camere<br>
+3. coordonatele colţurilor din stânga-sus, respectiv dreapta-jos a camerei cu aria maximă. Dacă există mai multe camere având aceeaşi arie maximă, atunci se vor afişa coordonatele camerei având colţul din stânga-sus <code>(lin1, col1)</code> cu <code>lin1</code> minimă, iar la linii egale pe aceea cu <code>col1</code> minimă.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Datele de intrare se citesc din fişierul <code>castel1.in</code>, care are următoarea structură:<br>
+- Pe prima linie se află numărul natural <code>C</code>, care poate fi egal cu <code>1</code>, <code>2</code> sau <code>3</code>, în funcţie de cerinţa ce trebuie rezolvată;<br>
+- Pe linia următoare se află numărul natural <code>N</code>, reprezentând dimensiunea hărţii;<br>
+- Pe următoarele <code>N</code> linii se găsesc câte <code>N</code> numere naturale din intervalul <code>[0,15]</code>, separate prin câte un spaţiu,  reprezentând harta castelului.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Datele de ieşire se vor scrie în fişierul <code>castel1.out</code>, astfel:<br>
+- Dacă <code>C = 1</code>, pe prima linie se va scrie numărul total al camerelor din castel;<br>
+- Dacă <code>C = 2</code>, pe prima linie se va scrie aria maximă a unei camere din castel;<br>
+- Dacă <code>C = 3</code>, pe prima linie se vor scrie patru numere naturale <code>lin1 col1 lin2 col2</code>, separate prin câte un spaţiu, reprezentând coordonatele colțurilor din stânga-sus, respectiv dreapta-jos ale camerei de arie maximă.  </p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 &lt; n ≤ 100</code></li>
+	<li>Se garantează că în castel există cel puţin o cameră;</li>
+	<li>Testele care au <code>C = 1</code> totalizează <code>20</code> de puncte;</li>
+	<li>Testele care au <code>C = 2</code> totalizează <code>50</code> de puncte;</li>
+	<li>Testele care au <code>C = 3</code> totalizează <code>20</code> de puncte;</li>
+	<li>În concurs s-au acordat <code>10</code> puncte din oficiu. Aici se vor acorda pentru exemplele din enunț.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>castel1.in</code></p>
+
+<pre>1
+9
+0  2  0  0  0  0  0  0  0 
+4 15  1  0  0  2  2  0  0 
+0 10  2  0  4 11 14  1  0 
+4  9 12  1  2 10 10  2  0 
+4  3  6  5  9  8 10 12  1 
+0 10  8  4  1  4 15  5  1 
+4 13  1  4  3  2 10  6  1 
+4  7  1  0  8  8  8  8  0 
+0  8  0  0  0  0  0  0  0</pre>
+
+<p><code>castel1.out</code></p>
+
+<pre>6</pre>
+
+<h3>Explicație</h3>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-castel1-jpg.jpg"></p>
+
+<p>În figură este reprezentată harta castelului codificat în fișierul de intrare. Acesta conține <code>6</code> camere. </p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>castel1.in</code></p>
+
+<pre>2
+9
+0  2  0  0  0  0  0  0  0 
+4 15  1  0  0  2  2  0  0 
+0 10  2  0  4 11 14  1  0 
+4  9 12  1  2 10 10  2  0 
+4  3  6  5  9  8 10 12  1 
+0 10  8  4  1  4 15  5  1 
+4 13  1  4  3  2 10  6  1 
+4  7  1  0  8  8  8  8  0 
+0  8  0  0  0  0  0  0  0</pre>
+
+<p><code>castel1.out</code></p>
+
+<pre>11</pre>
+
+<h3>Explicație</h3>
+
+<p>Aria maximă a unei camere este <code>11</code>.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>castel1.in</code></p>
+
+<pre>3
+9
+0  2  0  0  0  0  0  0  0 
+4 15  1  0  0  2  2  0  0 
+0 10  2  0  4 11 14  1  0 
+4  9 12  1  2 10 10  2  0 
+4  3  6  5  9  8 10 12  1 
+0 10  8  4  1  4 15  5  1 
+4 13  1  4  3  2 10  6  1 
+4  7  1  0  8  8  8  8  0 
+0  8  0  0  0  0  0  0  0</pre>
+
+<p><code>castel1.out</code></p>
+
+<pre>5 5 7 8</pre>
+
+<h3>Explicație</h3>
+
+<p>Camera cu aria maximă are coordonatele <code>(5,5) – (7,8)</code>.</p>		</article>
+		</body></html>

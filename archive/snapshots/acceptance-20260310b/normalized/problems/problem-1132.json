@@ -1,0 +1,315 @@
+{
+  "id": 1132,
+  "slug": "defrag",
+  "name": "Defrag",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1132/defrag",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 46,
+      "name": "Tablouri bidimensionale (matrice)",
+      "slug": "tablouri-bidimensionale-matrice",
+      "href": "/?pagina=probleme-lista&tag=46"
+    },
+    {
+      "id": 58,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=58"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerință",
+      "html": "<p>Cunoscând numărul de piste <code>P</code> și de sectoare <code>S</code> al unui platan, numărul și poziția clusterilor ocupați, să se scrie un program care determină :</p><p><strong>1.</strong> numărul de piste care au toți clusterii liberi;<br>\n<strong>2.</strong> numărul minim de mutări de clusteri, pentru fiecare pistă în parte, astfel încât platanul să devină defragmentat.</p>",
+      "text": "Cunoscând numărul de piste P și de sectoare S al unui platan, numărul și poziția clusterilor ocupați, să se scrie un program care determină :1. numărul de piste care au toți clusterii liberi; 2. numărul minim de mutări de clusteri, pentru fiecare pistă în parte, astfel încât platanul să devină defragmentat."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>defrag.in</code> conține pe prima linie numărul natural <code>V</code> a cărui valoare poate fi doar <code>1</code> sau <code>2</code>. </p><p>Pe a doua linie a fișierului de intrare se găsesc două numere naturale <code>P</code> și <code>S</code>, separate printr-un spaţiu, cu semnificaţia din enunţ. </p><p>A treia linie conţine un număr natural <code>C</code> reprezentând numărul total de clusteri ocupați de pe platan, iar pe fiecare din următoarele <code>C</code> linii se găsește câte o pereche de valori <code>p</code><sub><code>i</code></sub>  şi <code>s</code><sub><code>i</code></sub>, <code>1 ≤ i ≤ C</code>, separate printr-un spaţiu, reprezentând pista, respectiv sectorul unde se află fiecare cluster ocupat.</p>",
+      "text": "Fișierul de intrare defrag.in conține pe prima linie numărul natural V a cărui valoare poate fi doar 1 sau 2. Pe a doua linie a fișierului de intrare se găsesc două numere naturale P și S, separate printr-un spaţiu, cu semnificaţia din enunţ. A treia linie conţine un număr natural C reprezentând numărul total de clusteri ocupați de pe platan, iar pe fiecare din următoarele C linii se găsește câte o pereche de valori pi şi si, 1 ≤ i ≤ C, separate printr-un spaţiu, reprezentând pista, respectiv sectorul unde se află fiecare cluster ocupat."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire este <code>defrag.out</code>.</p><p>Dacă valoarea lui <code>V</code> este <code>1</code> atunci fişierul de ieşire va conţine pe prima linie un număr natural ce reprezintă numărul de piste care au toți clusterii liberi.</p><p>Dacă valoarea lui <code>V</code> este <code>2</code> atunci fişierul de ieşire va conține pe prima linie <code>P</code> numere naturale notate  <code>M</code><sub><code>i</code></sub>, <code>1 ≤ i ≤ P</code>,  separate prin câte un singur spațiu, unde <code>M</code><sub><code>i</code></sub> reprezintă numărul minim de mutări de clusteri, dintre cei aflați pe pista <code>i</code>, astfel încât pe pista <code>i</code> clusterii ocupați să se găsească într-o ordine consecutivă.</p>",
+      "text": "Fișierul de ieșire este defrag.out.Dacă valoarea lui V este 1 atunci fişierul de ieşire va conţine pe prima linie un număr natural ce reprezintă numărul de piste care au toți clusterii liberi.Dacă valoarea lui V este 2 atunci fişierul de ieşire va conține pe prima linie P numere naturale notate Mi, 1 ≤ i ≤ P, separate prin câte un singur spațiu, unde Mi reprezintă numărul minim de mutări de clusteri, dintre cei aflați pe pista i, astfel încât pe pista i clusterii ocupați să se găsească într-o ordine consecutivă."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ P ≤ 100</code></li>\n\t<li><code>1 ≤ S ≤ 360</code></li>\n\t<li><code>1 ≤ C ≤ P*S</code></li>\n\t<li>pistele sunt numerotate de la <code>1</code> la <code>P</code> începând cu pista exterioară;</li>\n\t<li>sectoarele sunt numerotate de la <code>1</code> la <code>S</code> în sensul acelor de ceasornic începând cu sectorul <code>1</code>;</li>\n\t<li>dacă o pistă are toți clusterii liberi, atunci valoarea cerută la a doua cerință este <code>0</code>;<br>\n20% din teste vor avea valoarea <code>V = 1</code>, iar 80% din teste vor avea valoarea <code>V = 2</code>.</li>\n</ul>",
+      "text": "1 ≤ P ≤ 100 1 ≤ S ≤ 360 1 ≤ C ≤ P*S pistele sunt numerotate de la 1 la P începând cu pista exterioară; sectoarele sunt numerotate de la 1 la S în sensul acelor de ceasornic începând cu sectorul 1; dacă o pistă are toți clusterii liberi, atunci valoarea cerută la a doua cerință este 0; 20% din teste vor avea valoarea V = 1, iar 80% din teste vor avea valoarea V = 2."
+    },
+    {
+      "title": "Exemplul 1",
+      "html": "<p><code>defrag.in</code></p><pre>1 \n4 8\n10\n1 1\n1 3\n1 5\n1 7\n4 5\n4 1\n4 6\n4 8\n2 2\n2 4</pre><p><code>defrag.out</code></p><pre>1</pre>",
+      "text": "defrag.in1 4 8 10 1 1 1 3 1 5 1 7 4 5 4 1 4 6 4 8 2 2 2 4defrag.out1"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p>Datele corespund figurilor anterioare :</p><p><code>V = 1</code>, deci se rezolvă <span class=\"caps\">NUMAI</span> prima cerință.</p><ul>\n\t<li>Numărul de piste <code>P = 4</code>, numărul de sectoare <code>S = 8</code></li>\n\t<li>Numărul total de clusteri ocupați este <code>C = 10</code> (cei marcați cu negru)</li>\n\t<li>Pe prima pistă sunt <code>4</code> clusteri ocupați, în sectoarele <code>1</code>, <code>3</code>, <code>5</code> şi <code>7</code>.</li>\n\t<li>Pe a doua pistă sunt <code>2</code> clusteri ocupați, în sectoarele <code>2</code> și <code>4</code>.</li>\n\t<li>Pe a treia pistă nu sunt clusteri ocupați.</li>\n\t<li>Pe a patra pistă sunt <code>4</code> clusteri ocupați, în sectoarele <code>1</code>, <code>5</code>, <code>6</code> și <code>8</code>.</li>\n</ul><p>O singură pistă are toți clusterii liberi, pista numărul <code>3</code>, deci valoarea cerută este <code>1</code>;</p>",
+      "text": "Datele corespund figurilor anterioare :V = 1, deci se rezolvă NUMAI prima cerință. Numărul de piste P = 4, numărul de sectoare S = 8 Numărul total de clusteri ocupați este C = 10 (cei marcați cu negru) Pe prima pistă sunt 4 clusteri ocupați, în sectoarele 1, 3, 5 şi 7. Pe a doua pistă sunt 2 clusteri ocupați, în sectoarele 2 și 4. Pe a treia pistă nu sunt clusteri ocupați. Pe a patra pistă sunt 4 clusteri ocupați, în sectoarele 1, 5, 6 și 8. O singură pistă are toți clusterii liberi, pista numărul 3, deci valoarea cerută este 1;"
+    },
+    {
+      "title": "Exemplul 2",
+      "html": "<p><code>defrag.in</code></p><pre>2 \n4 8\n10\n1 1\n1 3\n1 5\n1 7\n4 5\n4 1\n4 6\n4 8\n2 2\n2 4</pre><p><code>defrag.out</code></p><pre>2 1 0 1</pre>",
+      "text": "defrag.in2 4 8 10 1 1 1 3 1 5 1 7 4 5 4 1 4 6 4 8 2 2 2 4defrag.out2 1 0 1"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p>Datele corespund figurilor anterioare :</p><p><code>V = 2</code>, deci se rezolvă <span class=\"caps\">NUMAI</span> a doua cerință.</p><ul>\n\t<li>Pe prima pistă sunt necesare minim două mutări de clusteri pentru ca toți clusterii ocupați să se găsească într-o ordine consecutivă, deci valoarea cerută este <code>2</code>.</li>\n\t<li>Pe a doua pistă este suficientă o singură mutare de cluster, pentru ca toți clusterii ocupați să se găsească într-o ordine consecutivă, deci valoarea cerută este <code>1</code>.</li>\n\t<li>Pe a treia pistă nu sunt clusteri ocupați, deci valoarea cerută este <code>0</code>.</li>\n\t<li>Pe a patra pistă este suficientă o singură mutare de cluster, pentru ca toți clusterii ocupați să se găsească într-o ordine consecutivă, deci valoarea cerută este <code>1</code>.</li>\n</ul>",
+      "text": "Datele corespund figurilor anterioare :V = 2, deci se rezolvă NUMAI a doua cerință. Pe prima pistă sunt necesare minim două mutări de clusteri pentru ca toți clusterii ocupați să se găsească într-o ordine consecutivă, deci valoarea cerută este 2. Pe a doua pistă este suficientă o singură mutare de cluster, pentru ca toți clusterii ocupați să se găsească într-o ordine consecutivă, deci valoarea cerută este 1. Pe a treia pistă nu sunt clusteri ocupați, deci valoarea cerută este 0. Pe a patra pistă este suficientă o singură mutare de cluster, pentru ca toți clusterii ocupați să se găsească într-o ordine consecutivă, deci valoarea cerută este 1."
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "1 ≤ P ≤ 100",
+    "1 ≤ S ≤ 360",
+    "1 ≤ C ≤ P*S",
+    "pistele sunt numerotate de la 1 la P începând cu pista exterioară;",
+    "sectoarele sunt numerotate de la 1 la S în sensul acelor de ceasornic începând cu sectorul 1;",
+    "dacă o pistă are toți clusterii liberi, atunci valoarea cerută la a doua cerință este 0; 20% din teste vor avea valoarea V = 1, iar 80% din teste vor avea valoarea V = 2."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qa5c48ae479.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1100/defrag.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-defrag-png.png",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "9",
+    "intrare/ieșire": "defrag.in / defrag.out",
+    "limită timp": "0.2 secunde",
+    "limită memorie": "4 MB / 4 MB",
+    "sursa problemei": "OJI 2015, Clasa a IX-a",
+    "autor": "Ciprian Chesca",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.2,
+  "memoryLimitMb": 4,
+  "author": "Ciprian Chesca",
+  "sourceAttribution": "OJI 2015, Clasa a IX-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1132/defrag"
+}

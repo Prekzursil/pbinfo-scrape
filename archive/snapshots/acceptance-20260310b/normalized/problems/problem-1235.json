@@ -1,0 +1,328 @@
+{
+  "id": 1235,
+  "slug": "nessie",
+  "name": "Nessie",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1235/nessie",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 151,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=151"
+    },
+    {
+      "id": 152,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=152"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerinţă",
+      "html": "<p>Cunoscând prima şi ultima zi de şedere pentru fiecare turist, şi numărul total de zile prevăzute în contract, determinaţi numărul maxim de ieşiri la suprafaţa lacului, pe care Nessie le poate face, astfel încât fiecare turist să-l zărească o singură dată.</p>",
+      "text": "Cunoscând prima şi ultima zi de şedere pentru fiecare turist, şi numărul total de zile prevăzute în contract, determinaţi numărul maxim de ieşiri la suprafaţa lacului, pe care Nessie le poate face, astfel încât fiecare turist să-l zărească o singură dată."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>nessie.in</code> conține pe prima linie numerele naturale <code>N</code> și <code>T</code>, separate printr-un spațiu, unde <code>N</code> este numărul de zile prevăzute în contract iar <code>T</code> este numărul de turişti. Pe următoarele <code>T</code> linii se află câte două valori naturale separate prin câte un spațiu. Numerele <code>a[i]</code> şi <code>b[i]</code> de pe linia <code>i+1</code> reprezintă prima, respectiv ultima zi de şedere în preajma lacului Loch Ness pentru turistul <code>i</code>.</p>",
+      "text": "Fișierul de intrare nessie.in conține pe prima linie numerele naturale N și T, separate printr-un spațiu, unde N este numărul de zile prevăzute în contract iar T este numărul de turişti. Pe următoarele T linii se află câte două valori naturale separate prin câte un spațiu. Numerele a[i] şi b[i] de pe linia i+1 reprezintă prima, respectiv ultima zi de şedere în preajma lacului Loch Ness pentru turistul i."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>nessie.out</code> va conține pe prima linie un număr natural care reprezintă numărul maxim de apariţii ale lui Nessie pe suprafaţa lacului, astfel încât fiecare turist să-l zărească o singură dată.</p>",
+      "text": "Fișierul de ieșire nessie.out va conține pe prima linie un număr natural care reprezintă numărul maxim de apariţii ale lui Nessie pe suprafaţa lacului, astfel încât fiecare turist să-l zărească o singură dată."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2 ≤ N, T ≤ 250 000</code></li>\n\t<li><code>1 ≤ a[i] ≤ b[i] ≤ N2\n* Pot exista mai mulți turiști care vizitează lacul în aceeași perioadă\n* În cazul în care nu există soluţie se va afişa </code>IMPOSIBIL@</li>\n\t<li>Nessie iese la suprafaţa lacului cel mult odată pe zi</li>\n</ul>",
+      "text": "2 ≤ N, T ≤ 250 000 1 ≤ a[i] ≤ b[i] ≤ N2 * Pot exista mai mulți turiști care vizitează lacul în aceeași perioadă * În cazul în care nu există soluţie se va afişa IMPOSIBIL@ Nessie iese la suprafaţa lacului cel mult odată pe zi"
+    },
+    {
+      "title": "Exemplul 1",
+      "html": "<p><code>nessie.in</code></p><pre>5 2\n1 3\n4 5</pre><p><code>nessie.out</code></p><pre>2</pre><h3>Explicație</h3><p>Nessie poate ieşi la suprafaţă o dată în una din zilele <code>1</code>, <code>2</code> sau <code>3</code> pentru primul turist şi încă odată în ziua <code>4</code> sau în ziua <code>5</code> pentru al doilea turist.</p>",
+      "text": "nessie.in5 2 1 3 4 5nessie.out2ExplicațieNessie poate ieşi la suprafaţă o dată în una din zilele 1, 2 sau 3 pentru primul turist şi încă odată în ziua 4 sau în ziua 5 pentru al doilea turist."
+    },
+    {
+      "title": "Exemplul 2",
+      "html": "<p><code>nessie.in</code></p><pre>7 3\n2 5\n3 4\n6 7</pre><p><code>nessie.out</code></p><pre>3</pre><h3>Explicație</h3><p>Nessie poate ieşi în ziua <code>1</code>, când nu sunt turişti, mai poate ieşi odată în ziua <code>3</code> sau ziua <code>4</code> pentru primul şi al doilea turist şi a treia oară în ziua <code>6</code> sau ziua <code>7</code> pentru al treilea turist.</p>",
+      "text": "nessie.in7 3 2 5 3 4 6 7nessie.out3ExplicațieNessie poate ieşi în ziua 1, când nu sunt turişti, mai poate ieşi odată în ziua 3 sau ziua 4 pentru primul şi al doilea turist şi a treia oară în ziua 6 sau ziua 7 pentru al treilea turist."
+    },
+    {
+      "title": "Exemplul 3",
+      "html": "<p><code>nessie.in</code></p><pre>7 3\n3 5\n1 4\n6 7</pre><p><code>nessie.out</code></p><pre>3</pre><h3>Explicație</h3><p>Nessie poate ieşi în ziua <code>1</code> pentru al doilea turist, în ziua <code>5</code> pentru primul turist și în ziua <code>6</code> sau <code>7</code> pentru al treilea turist.</p>",
+      "text": "nessie.in7 3 3 5 1 4 6 7nessie.out3ExplicațieNessie poate ieşi în ziua 1 pentru al doilea turist, în ziua 5 pentru primul turist și în ziua 6 sau 7 pentru al treilea turist."
+    },
+    {
+      "title": "Exemplul 4",
+      "html": "<p><code>nessie.in</code></p><pre>6 3\n1 6\n2 3\n4 5</pre><p><code>nessie.out</code></p><pre>IMPOSIBIL</pre><h3>Explicație</h3><p>Nessie nu poate ieși la suprafață atât pentru turistul <code>2</code> cât și pentru turistul <code>3</code> fără să fie zărit de două ori de către primul turist.</p>",
+      "text": "nessie.in6 3 1 6 2 3 4 5nessie.outIMPOSIBILExplicațieNessie nu poate ieși la suprafață atât pentru turistul 2 cât și pentru turistul 3 fără să fie zărit de două ori de către primul turist."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Nessie poate ieşi la suprafaţă o dată în una din zilele 1, 2 sau 3 pentru primul turist şi încă odată în ziua 4 sau în ziua 5 pentru al doilea turist."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Nessie poate ieşi în ziua 1, când nu sunt turişti, mai poate ieşi odată în ziua 3 sau ziua 4 pentru primul şi al doilea turist şi a treia oară în ziua 6 sau ziua 7 pentru al treilea turist."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Nessie poate ieşi în ziua 1 pentru al doilea turist, în ziua 5 pentru primul turist și în ziua 6 sau 7 pentru al treilea turist."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Nessie nu poate ieși la suprafață atât pentru turistul 2 cât și pentru turistul 3 fără să fie zărit de două ori de către primul turist."
+    }
+  ],
+  "constraints": [
+    "2 ≤ N, T ≤ 250 000",
+    "1 ≤ a[i] ≤ b[i] ≤ N2 * Pot exista mai mulți turiști care vizitează lacul în aceeași perioadă * În cazul în care nu există soluţie se va afişa IMPOSIBIL@",
+    "Nessie iese la suprafaţa lacului cel mult odată pe zi"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q30779e9b99.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "9",
+    "intrare/ieșire": "nessie.in / nessie.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "32 MB / 32 MB",
+    "sursa problemei": "Lot Juniori, Valcea, 2015",
+    "autor": "Constantin Galatan",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 32,
+  "author": "Constantin Galatan",
+  "sourceAttribution": "Lot Juniori, Valcea, 2015",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1235/nessie"
+}

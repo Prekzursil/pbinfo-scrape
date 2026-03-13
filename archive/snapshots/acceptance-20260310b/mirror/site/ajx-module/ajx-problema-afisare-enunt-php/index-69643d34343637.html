@@ -1,0 +1,79 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4467"><article id="enunt">
+			<p>Ultima atracție a lotului național de informatică este șahul. Așa că Gimi s-a decis să-și deschidă o afacere, aceea fiind să vândă culegeri de șah. Aceste culegeri conțin tactici nemaivăzute, deci cererea este ridicată. În avans, el a primit lista de comenzi. Zilnic, timp de <code>N</code> zile, el va trebui să livreze <code>c[i]</code> culegeri la finalul zilei <code>i</code>. Gimi și-a început afacerea prin cumpărarea unei fabrici ce poate produce <code>K</code> culegeri pe zi, stocul inițial de culegeri fiind <code>S = 0</code>.</p>
+
+<p>Zilnic, el poate alege una din următoarele două opțiuni:</p>
+
+<ul>
+	<li>Gimi oprește producția în această zi și modernizează fabrica. În urma îmbunătățirilor, capacitatea de producție a fabricii va crește cu <code>1</code> (<code>K ← K + 1</code>).</li>
+	<li>Gimi urmăreșțe cu atenție procesul de printare. Astfel, stocul de culegeri va crește cu <code>K</code> (<code>S ← S + K</code>).</li>
+</ul>
+
+<p>La finalul zilei <code>i</code>, el va livra <code>c[i]</code> culegeri (<code>S ← S - c[i]</code>). Dacă nu are cel puțin <code>c[i]</code> culegeri în stoc, atunci lipsa lui de punctualitate va fi evidențiată, iar activitatea nu va mai putea continua.</p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând numărul de zile în care se desfășoară activitatea, producția zilnică inițială, respectiv lista cu cele <code>N</code> comenzi, să se rezolve următoarele cerințe:</p>
+
+<ul>
+	<li>dacă <code>T = 1</code>, atunci Gimi vrea să afle numărul maxim de culegeri pe care le poate avea în stoc la finalul ultimei zile (a <code>N</code>-a zi).</li>
+	<li>dacă <code>T = 2</code>, atunci Gimi vrea să afle numărul maxim de culegeri pe care le poate avea în stoc la finalul celei de-a <code>i</code>-a zi, pentru fiecare <code>i</code> de la <code>1</code> la <code>N</code>.</li>
+</ul>
+
+<h1>Date de intrare</h1>
+
+<p>Prima linie din fișierul de intrare <code>culegeri.in</code> conține trei numere <code>T</code>, <code>N</code> și <code>K</code>, separate prin câte un spațiu. A doua linie va conține <code>N</code> numere, unde al <code>i</code>-lea număr reprezintă <code>c[i]</code>, comanda de culegeri din a <code>i</code>-a zi.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă <code>T = 1</code>, atunci fișierul de ieșire <code>culegeri.out</code> va conține un singur număr natural, reprezentând numărul maxim posibil de culegeri rămase în stoc la finalul celei de-a <code>N</code>-a zi. Dacă <code>T = 2</code>, atunci fișierul de ieșire <code>culegeri.out</code> va conține, pe o singură linie, <code>N</code> numere naturale separate prin câte un spațiu, unde al <code>i</code>-lea număr reprezintă numărul maxim posibil de culegeri rămase în stoc la finalul celei de-a <code>i</code>-a zi.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 500.000</code></li>
+	<li><code>0 ≤ K ≤ N</code></li>
+	<li><code>0 ≤ c[i] ≤ N • K</code></li>
+	<li>Se garantează că există o modalitate prin care Gimi își va putea desfășura activitatea până în ultima zi inclusiv.</li>
+	<li>Strategia utilizată pentru ziua <code>i</code> nu trebuie neapărat să fie continuată în ziua <code>i + 1</code>. Se poate folosi o altă strategie, diferită de cea pentru ziua precedentă.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>culegeri.in</code></p>
+
+<pre>2 5 2
+1 1 3 1 3</pre>
+
+<p><code>culegeri.out</code></p>
+
+<pre>1 2 1 2 2</pre>
+
+<h3>Explicație</h3>
+
+<p>Pentru primul exemplu, <code>T = 2</code>, deci se va rezolva a doua cerință. Notăm cu <code>P x</code> zilele în care vom produce <code>x</code> culegeri, iar cu <code>I 1</code> zilele în care vom crește producția cu <code>1</code>. Strategiile optime, pentru fiecare zi, ar putea fi:</p>
+
+<ul>
+	<li>ziua 1: <code>P 2</code></li>
+	<li>zilele 1-2: <code>P 2 → P 2</code></li>
+	<li>zilele 1-3: <code>P 2 → P 2 → P 2</code></li>
+	<li>zilele 1-4: <code>P 2 → I 1 → P 3 → P 3</code></li>
+	<li>zilele 1-5: <code>P 2 → I 1 → P 3 → P 3 → P 3</code></li>
+</ul>
+
+<p>Se observă că strategiile diferă în funcție de ziua în care se vor termina experimentele. Pentru zilele 1-4, capacitatea de producție va crește în a doua zi, dar pentru zilele 1-3, capacitatea de producție nu se va modifica. În plus, este imposibilă creșterea capacității de producție în prima zi, deoarece stocul ar fi zero, iar Gimi trebuie să livreze o culegere.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>culegeri.in</code></p>
+
+<pre>1 5 2
+1 1 3 1 3</pre>
+
+<p><code>culegeri.out</code></p>
+
+<pre>2</pre>
+
+<h3>Explicație</h3>
+
+<p>Pentru al doilea exemplu, <code>T = 1</code>, deci se va rezolva prima cerință. Se va afișa doar stocul maxim posibil la finalul ultimei zile.</p>		</article>
+		</body></html>

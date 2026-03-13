@@ -1,0 +1,47 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3571"><article id="enunt">
+			<p>Un tango este format din fraze muzicale, fiecare dintre acestea având <code>8</code> timpi muzicali. Timpii muzicali au aceeaşi durată. La fel de importantă ca melodia unui tango este şi dansul asociat ei. Mişcările efectuate în timpul dansului se numesc figuri. Succesiunea de figuri efectuate în timpul dansului formează o coregrafie. Două coregrafii se consideră diferite dacă succesiunea figurilor care le alcătuiesc este diferită. O coregrafie frumoasă asociată unui tango are particularitatea următoare: atunci când se termină o frază muzicală trebuie să se termine şi o figură.</p>
+
+<p>D şi S se pregătesc pentru primul lor concurs de dans şi ei lucreaza momentan la coregrafia de tango. Chiar dacă va fi primul lor concurs, ei deja ştiu <code>n</code> figuri de dans şi au calculat pentru fiecare dintre aceste figuri câţi timpi muzicali durează. Fiindcă le place foarte mult să danseze împreună, ei vor să pregătească o coregrafie frumoasă pentru o piesă care durează exact <code>k</code> timpi muzicali.</p>
+
+<h1>Cerința</h1>
+
+<p>Determinaţi numărul coregrafiilor frumoase modulo <code>999983</code> pentru o piesă, care: durează exact <code>k</code> timpi muzicali, respectă condiţiile de mai sus şi sunt formate doar din cele <code>n</code> figuri cunoscute de D şi S (mai este prea puţin timp până la concurs, ca ei să inveţe şi figuri noi).</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fişierului de intrare <code>tango.in</code> se află numerele naturale nenule <code>n</code> şi <code>k</code>, separate printr-un singur spaţiu. Pe a doua linie se află exact <code>n</code> numere separate prin câte un spaţiu, reprezintând lungimile figurilor.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>În fişierul de ieşire <code>tango.out</code> se va afişa numărul de coregrafii posibile modulo <code>999983</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>n ≤ 100 000</code>.</li>
+	<li><code>k ≤ 2 000 000 000</code>.</li>
+	<li><code>k</code> va fi întotdeauna divizibil cu <code>8</code>.</li>
+	<li><code>1 ≤ lungimea unei figuri ≤ 8</code>.</li>
+	<li>Pentru <code>30%</code> din teste va exista o singură figură de o anumită lungime.</li>
+	<li>Pentru <code>50%</code> din teste <code>n ≤ 30</code>.</li>
+	<li>Pentru <code>70%</code> din teste lungimile figurilor vor fi numai valori din mulţimea <code>{2, 4, 6, 8}</code>.</li>
+	<li>Prin <code>a modulo b</code> se înţelege restul împărţirii lui <code>a</code> la <code>b</code>.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>tango.in</code></p>
+
+<pre>3 16
+1 1 8</pre>
+
+<p><code>tango.out</code></p>
+
+<pre>66049</pre>
+
+<h3>Explicație</h3>
+
+<p>Sunt <code>16</code> timpi muzicali deci o coregrafie frumoasă se va dansa pe <code>16 / 8 = 2</code> fraze muzicale.<br>
+Dacă notăm figurile cu litere, avem figura <code>A</code> de lungime <code>1</code>, figura <code>B</code> de lungime <code>1</code> şi figura <code>C</code> de lungime <code>8</code>. Prima frază muzicală poate fi alcătuită din orice secvenţă alcătuită din opt bucăţi de <code>A</code> sau <code>B</code>, deci în total <code>2^8 = 256</code> posibilităţi. Încă o posibilitate de alcătuire a primei fraze este printr-un singur <code>C</code>. Rezultă un total de <code>257</code> posibilităţi. Pentru a doua frază avem tot atâtea posibilităţi, deci în total există <code>257 * 257 = 66049</code> coregrafii frumoase posibile. <br>
+Cum <code>66049 modulo 999983 = 66049</code>, se obţine rezultatul <code>66049</code>.</p>		</article>
+		</body></html>

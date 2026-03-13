@@ -1,0 +1,58 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4348"><article id="enunt">
+			<p>Gigel a descărcat pe telefon un joc nou. Jocul are mai multe camere. Pentru a trece dintr-o cameră a jocului în următoarea cameră este nevoie de o cheie potrivită, care va deschide ușa ei. La începutul jocului se cunosc două chei digitale, ce reprezintă două numere naturale. Cu aceste chei se vor deschide ușile primelor două camere. Pentru a afla cheia ce deschide ușa unei camere următoare, Gigel utilizează ultimele două chei din joc, pe care le notează <code>c1</code> și <code>c2</code>. Cu aceste chei va obține un număr nou, notat <code>c</code>, care conține ultima cifră din <code>c1</code> și prima cifră din <code>c2</code>, în această ordine. Dacă cheia <code>c1</code> se termină cu cifra zero, <code>c</code> va fi egal cu prima cifră din <code>c2</code>. Dacă numărul <code>c</code> este număr prim, va reprezenta cheia cu care se va deschide ușa camerei pentru a trece în altă cameră a jocului. Dacă numărul <code>c</code> nu este prim, cheia camerei va fi egală cu diferența obținută prin scăderea din numărul <code>c</code> a factorilor lui primi. Dacă <code>c</code> este egal cu <code>1</code>, cheia camerei va fi numărul <code>1</code>. Jocul se termină când ultima cheie obținută este egală cu una dintre ultimele trei chei utilizate exact înaintea ei.</p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând primele două chei ale jocului, notate <code>x</code> și <code>y</code>, să se obțină și să se afișeze șirul format din cheile camerelor din joc, în ordinea utilizării lor, până la terminarea jocului.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>chei.in</code> conține pe prima linie două numere naturale <code>x</code> și <code>y</code> ce reprezintă primele două chei digitale din joc.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>chei.out</code> va conține un șir de numere naturale, separate prin spațiu ce reprezintă cheile utilizate pentru deschiderea ușilor camerelor, în ordinea obținerii lor, până la terminarea jocului. Primele două numere din acest șir sunt egale cu primele două chei digitale care se află în fișierul de intrare.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 &lt; x, y ≤ 999</code></li>
+	<li>Pentru o cheie digitală <code>c &lt; 10</code>, prima și ultima cifră a sa sunt egale cu <code>c</code></li>
+	<li>Jocul lui Gigel are cel puțin <code>3</code> camere și cel mult <code>100</code> de camere</li>
+	<li>Ultima cheie obținută pentru joc, care coincide cu una dintre ultimele trei chei utilizate exact înaintea ei, nu se afișează.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>chei.in</code></p>
+
+<pre>20 72</pre>
+
+<p><code>chei.out</code></p>
+
+<pre>20 72 7 24 67 21</pre>
+
+<h3>Explicație</h3>
+
+<p>Primele două chei din joc sunt <code>20</code> și <code>72</code>. Cu acestea se obține numărul <code>7</code> care este prim și reprezintă cheia următoare din joc.<br>
+Din cheile <code>72</code> și <code>7</code>, se obține numărul <code>27</code> care nu este prim și are factor prim pe <code>3</code>. Cheia următoare este egală cu valoarea diferenței <code>27 - 3 = 24</code>.<br>
+Din cheile <code>7</code> și <code>24</code> se obține numărul <code>72</code> care nu este prim și are factorii primi <code>2</code> și <code>3</code>. Cheia nouă este egală cu <code>72 - 2 - 3 = 67</code>.<br>
+Din cheile <code>24</code> și <code>67</code> se obține numărul <code>46</code> care nu este prim și are factorii primi <code>2</code> și <code>23</code>. Cheia nouă este egală cu <code>46 - 2 - 23 = 21</code>.<br>
+Din cheile <code>67</code> și <code>21</code> se obține numărul <code>72</code> care nu este prim și are factorii primi <code>2</code> și <code>3</code>. Cheia nouă este egală cu <code>72 - 2 - 3 = 67</code>. Această cheie coincide cu una dintre ultimele trei chei utilizate în joc: <code>24</code>, <code>67</code> și <code>21</code>. Jocul se termină și această ultimă cheie nu se afișează.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>chei.in</code></p>
+
+<pre>20 17</pre>
+
+<p><code>chei.out</code></p>
+
+<pre>20 17 1 71</pre>
+
+<h3>Explicație</h3>
+
+<p>Primele două chei din joc sunt <code>20</code> și <code>17</code>. Cu acestea se obține numărul <code>1</code> care este cheia următoare din joc.<br>
+Din cheile <code>17</code> și <code>1</code> se obține numărul <code>71</code> care este prim și reprezintă cheia următoare.<br>
+Din cheile <code>1</code> și <code>71</code> se obține numărul <code>17</code> care este prim și a fost utilizat deja, jocul se termină și această ultimă cheie nu se afișează.</p>		</article>
+		</body></html>

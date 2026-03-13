@@ -1,0 +1,107 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1109"><article id="enunt">
+			<p>Costel are o mare pasiune pentru rezolvarea cubului Rubik, atât de mare încât a început să facă cercetări și calcule diverse pornind de la acest joc. Ultima lui idee, inspirată de cubul Rubik, folosește un cub de latură <code>2</code> unități, compus din <code>8</code> cuburi cu latura de o unitate (cub unitate), având fețele exterioare colorate. Fiecare cub unitate are <code>3</code> fețe exterioare şi fiecare dintre acestea este colorată cu una din cele <code>10</code> culori disponibile, codificate prin cifrele de la <code>0</code> la <code>9</code>. </p>
+
+<table><tbody><tr><td>
+<img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-joc5-1-png.png">
+</td>
+<td>
+<img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-joc5-2-png.png">
+</td>
+</tr>
+<tr>
+<td>
+<strong>Figura 1</strong>
+</td>
+<td>
+<strong>Figura 2</strong>
+</td>
+</tr>
+</tbody></table>
+
+<p>Identificarea cuburilor unitate se face conform specificaţiilor din <strong>Figura 1</strong>. Cubul care nu este vizibil în Figura 1 are coordonatele <code>(1, 1, 2)</code>. Cubul lui Costel permite efectuarea următoarelor tipuri de mutări, asemănătoare cu cele din cubul Rubik:</p>
+
+<table><tbody><tr><td>
+<strong>M1:</strong> Paralelipipedul <code>1</code> conține cuburile unitate de coordonate: <code>(1, 1, 1)</code>; <code>(1, 2, 1)</code>; <code>(2, 1, 1)</code>; <code>(2, 2, 1)</code>. Acesta este un disc așezat orizontal și poate fi rotit cu <code>90</code> de grade către dreapta, în sensul acelor de ceasornic. 
+</td><td> <img align="right" alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-joc5-3-png.png"> </td></tr>
+<tr><td>
+<strong>M2:</strong> Paralelipipedul <code>2</code> conține cuburile unitate de coordonate: <code>(1, 1, 2)</code>; <code>(1, 2, 2)</code>; <code>(2, 1, 2); (2, 2, 2)</code>. Acesta este un disc așezat orizontal și poate fi rotit cu <code>90</code> de grade către dreapta, în sens invers acelor de ceasornic.
+</td><td> <img align="right" alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-joc5-4-png.png"> </td></tr>
+<tr><td> <strong>M3:</strong> Paralelipipedul <code>3</code> conține cuburile unitate de coordonate: <code>(1, 1, 1)</code>; <code>(2, 1, 1)</code>; <code>(1, 1, 2)</code>; <code>(2, 1, 2)</code>. Acesta este un disc așezat vertical și poate fi rotit cu <code>90</code> de grade către planul îndepărtat, în sens  invers acelor de ceasornic.
+</td><td> <img align="right" alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-joc5-5-png.png"> </td></tr>
+<tr><td> <strong>M4:</strong> Paralelipipedul <code>4</code> conține cuburile unitate de coordonate: (1, 2, 1); (2, 2, 1); (1, 2, 2); (2, 2, 2). Acesta este un disc așezat vertical și poate fi rotit cu <code>90</code> de grade către planul îndepărtat, în sensul acelor de ceasornic.
+</td><td> <img align="right" alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-joc5-6-png.png"> </td></tr></tbody></table>
+
+<p>Prin configurație se înțelege memorarea culorii fiecărei fețe exterioare a celor <code>8</code> cuburi unitate, deci culorile celor <code>24</code> de feţe exterioare. Aplicând o succesiune validă de mutări  se obține o altă configurație.</p>
+
+<p>Pentru ușurința memorării unei configurații, Costel utilizează desfășurarea în plan a celor <code>6</code> fețe ale cubului său după modelul din <strong>Figura 2</strong>, care ilustrează modul în care sunt dispuse fețele în desfăşurare. Fiecare faţă a cubului conţine patru feţe exterioare ale cuburilor unitate având, în ordine, coordonatele specificate în figură.</p>
+
+<h1>Cerință</h1>
+
+<p>Fiind date o configuraţie iniţială şi o configuraţie finală ale jocului, determinați numărul minim de mutări prin care se poate ajunge de la configurația inițială la configurația finală şi succesiunea corespunzătoare de mutări prin care se poate obţine configuraţia finală.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>joc5.in</code> conține:</p>
+
+<ul>
+	<li><code>12</code> linii corespunzătoare configuraţiei iniţiale – câte două linii pentru fiecare din cele şase feţe; pe fiecare linie sunt memorate câte două cifre, separate prin exact un spaţiu (pe primele două linii se află elementele feței <code>1</code>, pe următoarele două linii se află elementele feței <code>2</code>, … , pe liniile <code>11</code> și <code>12</code> se află elementele feței <code>6</code>).</li>
+	<li>Pe următoarele <code>12</code> linii se află elementele configurației finale – câte două linii pentru fiecare din cele şase feţe; pe fiecare linie sunt memorate câte două cifre, separate prin exact un spaţiu.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>joc5.out</code> va conține: </p>
+
+<ul>
+	<li>Pe prima linie, un număr natural <code>MIN</code>, reprezentând numărul minim de mutări determinat.</li>
+	<li>Pe următoarele <code>MIN</code> linii succesiunea de mutări care transformă configuraţia iniţială în cea finală, pe fiecare linie fiind scris un număr natural cuprins între <code>1</code> și <code>4</code> ce reprezintă numărul asociat unei mutări.</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>Se garantează că pentru toate datele de test există soluție, aceasta având cel mult <code>11</code> mutări.</li>
+	<li>Orice soluţie cu număr minim de mutări care conduce la obţinerea configuraţiei finale va obţine punctajul maxim.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<table class="table table-condensed table-bordered"><tbody><tr>
+<td> <code>joc5.in</code> </td><td> <code>joc5.out</code> </td><td><code>Explicație</code></td></tr><tr><td>
+
+<pre>1 2 
+3 1
+2 7
+5 4
+2 9
+9 4
+2 9
+4 5
+5 8
+2 3
+6 4
+1 7
+2 2
+9 1
+2 7
+5 4
+7 9
+4 4
+1 9
+3 5
+8 3
+5 2
+6 4
+1 2</pre>
+
+<p></p></td><td><p></p>
+
+<pre>1
+3</pre>
+
+<p></p></td><td><p></p>
+
+Se efectuează mutarea discului 3, către planul îndepărtat, adică mutarea 3.
+<img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-joc5-7-png.png"> <img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-joc5-8-png.png"> 
+</td></tr></tbody></table>		</article>
+		</body></html>

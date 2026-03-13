@@ -1,0 +1,103 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4655"><article id="enunt">
+			<p>Andra are un pachet cu <code>n</code> tipuri de buline de ciocolată, cu câte <code>c[i]</code> buline de fiecare tip <code>i</code>. Numărul <code>c[i]</code> depinde de patru factori, notați cu <code>x</code>, <code>y</code>, <code>z</code>, <code>t</code>, și se calculează astfel:</p>
+
+<ul>
+	<li><code>c[1] = x</code></li>
+	<li><code>c[i] = (c[i-1] * y) % t + z</code>, pentru orice <code>i = 2..n</code></li>
+</ul>
+
+<p>unde s-a notat cu <code>a % b</code> restul împărțirii numărului natural <code>a</code> la numărul natural nenul <code>b</code>.</p>
+
+<p>Andra dorește să utilizeze toate bulinele pentru a construi piramide, fiecare fiind formată din unul sau mai multe rânduri, numerotate începând de la <code>1</code>. Pentru fiecare piramidă în parte, pe rândul <code>i</code>, se află <code>2</code><sup><code>i-1</code></sup> buline. Spre exemplu, pe rândul <code>8</code> al unei piramide, se află <code>2</code><sup><code>7</code></sup> <code>= 128</code> de buline de ciocolată. Pe fiecare rând al unei piramide se află unul sau mai multe tipuri de buline, iar același tip de buline se poate folosi pe oricâte rânduri. Dintre piramidele care se pot forma, cele serioase conțin pe fiecare rând doar un tip de buline. </p>
+
+<h1>Cerința</h1>
+
+<p>Folosind toate bulinele, ajutați-o pe Andra să determine:</p>
+
+<p>1) Numărul minim de piramide de ciocolată pe care le poate forma.<br>
+2) Numărul minim de piramide serioase de ciocolată pe care le poate forma, astfel încât toate cele obținute să fie de acest fel.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>mandms.in</code> conține pe prima linie numărul <code>p</code>, care poate fi doar <code>1</code> sau <code>2</code>. Pe a doua linie a fișierului, se află numărul natural <code>n</code>, cu semnificația din enunț. Pe a treia linie se află numerele naturale <code>x</code>, <code>y</code>, <code>z</code>, <code>t</code>, în această ordine, cu semnificația din enunț.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă <code>p=1</code>, fișierul de ieșire <code>mandms.out</code> conține un număr natural, reprezentând valoarea precizată la cerința <code>1</code>. Dacă <code>p=2</code>, fișierul de ieșire <code>mandms.out</code> conține un număr natural, reprezentând valoarea precizată la cerința <code>2</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 2.000.000</code></li>
+	<li><code>1 ≤ x, y, t &lt; 2</code><sup><code>64</code></sup>.</li>
+	<li><code>0 ≤ z &lt; 2</code><sup><code>64</code></sup>.</li>
+	<li><code>1 ≤ c[i] &lt; 2</code><sup><code>64</code></sup>.</li>
+	<li><code>0 ≤ c[i] * y &lt; 2</code><sup><code>64</code></sup>, pentru orice <code>i = 2..n</code>,</li>
+	<li>Pentru 30 de puncte, <code>p = 1</code>, <code>n ≤ 1.500.000</code> și numărul total de buline este strict mai mic decât <code>2</code><sup><code>64</code></sup></li>
+	<li>Pentru 10 puncte, <code>p = 1, n ≤ 1.500.000</code></li>
+	<li>Pentru 40 de puncte, <code>p = 2</code>, <code>n ≤ 100.000</code></li>
+	<li>Pentru 20 de puncte, <code>p = 2</code> și nu există alte restricții suplimentare</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>mandms.in</code></p>
+
+<pre>1
+8
+3 15 18 17</pre>
+
+<p><code>mandms.out</code></p>
+
+<pre>5</pre>
+
+<h3>Explicație</h3>
+
+<p><code>x = 3, y = 15, z = 18, t = 17</code>. Numărul de buline de cele <code>8</code> tipuri se calculează astfel:<br>
+<code>c[1] = x = 3</code><br>
+<code>c[2] = (3 * 15) % 17 + 18 = 29</code><br>
+<code>c[3] = (29 * 15) % 17 + 18 = 28</code><br>
+<code>c[4] = (28 * 15) % 17 + 18 = 30</code><br>
+<code>c[5] = (30 * 15) % 17 + 18 = 26</code><br>
+<code>c[6] = (26 * 15) % 17 + 18 = 34</code><br>
+<code>c[7] = (34 * 15) % 17 + 18 = 18</code><br>
+<code>c[8] = (18 * 15) % 17 + 18 = 33</code></p>
+
+<p>Posibile configurații ale piramidelor:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-mandms-01-png.png"></p>
+
+<p>În această configurație, avem o piramidă cu <code>7</code> rânduri, una cu <code>6</code> rânduri, una cu <code>3</code> rânduri, una cu <code>2</code> rânduri, și una cu un singur rând.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>mandms.in</code></p>
+
+<pre>2
+8
+3 15 18 17</pre>
+
+<p><code>mandms.out</code></p>
+
+<pre>7</pre>
+
+<h3>Explicație</h3>
+
+<p><code>x = 3, y = 15, z = 18, t = 17</code> <br>
+Numărul de buline de cele <code>8</code> tipuri se calculează astfel:<br>
+<code>c[1] = x = 3</code><br>
+<code>c[2] = (3 * 15) % 17 + 18 = 29</code><br>
+<code>c[3] = (29 * 15) % 17 + 18 = 28</code><br>
+<code>c[4] = (28 * 15) % 17 + 18 = 30</code><br>
+<code>c[5] = (30 * 15) % 17 + 18 = 26</code><br>
+<code>c[6] = (26 * 15) % 17 + 18 = 34</code><br>
+<code>c[7] = (34 * 15) % 17 + 18 = 18</code><br>
+<code>c[8] = (18 * 15) % 17 + 18 = 33</code></p>
+
+<p>Numărul minim de piramide serioase care se pot forma, astfel încât toate cele obținute să fie serioase, este <code>7</code>.<br>
+Pentru acest exemplu, trebuie formate doar piramide serioase. Cele <code>7</code> piramide pot fi:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-mandms-02-png.png"></p>
+
+<p>În această configurație, avem două piramide cu <code>6</code> rânduri, două cu <code>5</code> rânduri, una cu <code>3</code> rânduri, și două cu <code>2</code> rânduri.</p>		</article>
+		</body></html>

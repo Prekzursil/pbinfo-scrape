@@ -1,0 +1,329 @@
+{
+  "id": 1186,
+  "slug": "risc",
+  "name": "Risc",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1186/risc",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 151,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=151"
+    },
+    {
+      "id": 152,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=152"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Cunoscând numărul de persoane <code>n</code> și înălțimile <code>h[1]</code>, <code>h[2]</code>, …, <code>h[n]</code> ale acestora să se scrie un program care determină :</p><p>1. Poziția persoanei celei mai înalte în rândul inițial, în cazul în care nu sunt necesare operații de mutare.<br>\n2. Numărul minim de mutări necesare pentru ca rândul de persoane să prezinte un risc minim de securitate.</p>",
+      "text": "Cunoscând numărul de persoane n și înălțimile h[1], h[2], …, h[n] ale acestora să se scrie un program care determină :1. Poziția persoanei celei mai înalte în rândul inițial, în cazul în care nu sunt necesare operații de mutare. 2. Numărul minim de mutări necesare pentru ca rândul de persoane să prezinte un risc minim de securitate."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie a fişierului de intrare <code>risc.in</code> se găsește numărul natural <code>p</code> a cărui valoare poate fi doar <code>1</code> sau <code>2</code>. </p><p>Pe a doua linie a fișierului de intrare se află numărul natural <code>n</code> cu semnificaţia din enunţ. </p><p>Pe a treia linie se găsesc <code>n</code> numere naturale, distincte: <code>h[1]</code>, <code>h[2]</code>, …, <code>h[n]</code>, separate prin câte un singur spaţiu, reprezentând înălțimile persoanelor.</p>",
+      "text": "Pe prima linie a fişierului de intrare risc.in se găsește numărul natural p a cărui valoare poate fi doar 1 sau 2. Pe a doua linie a fișierului de intrare se află numărul natural n cu semnificaţia din enunţ. Pe a treia linie se găsesc n numere naturale, distincte: h[1], h[2], …, h[n], separate prin câte un singur spaţiu, reprezentând înălțimile persoanelor."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire este <code>risc.out</code>.</p><ul>\n\t<li>Dacă valoarea lui <code>p</code> este <code>1</code> atunci <strong>se va rezolva numai cerinţa 1</strong>. În acest caz, fişierul de ieşire va conţine pe prima linie un număr natural <code>poz</code> ce reprezintă poziția persoanei celei mai înalte în rândul inițial. Dacă rândul inițial nu respectă condițiile de risc minim de securitate, atunci <code>poz</code> este <code>-1</code>.</li>\n\t<li>Dacă valoarea lui <code>p</code> este <code>2</code> <strong>se va rezolva numai cerinţa 2</strong>. În acest caz fişierul de ieşire va conține pe prima linie un număr natural <code>m</code>, reprezentând numărul minim de mutări necesare pentru a obține risc minim de securitate.</li>\n</ul>",
+      "text": "Fișierul de ieșire este risc.out. Dacă valoarea lui p este 1 atunci se va rezolva numai cerinţa 1. În acest caz, fişierul de ieşire va conţine pe prima linie un număr natural poz ce reprezintă poziția persoanei celei mai înalte în rândul inițial. Dacă rândul inițial nu respectă condițiile de risc minim de securitate, atunci poz este -1. Dacă valoarea lui p este 2 se va rezolva numai cerinţa 2. În acest caz fişierul de ieşire va conține pe prima linie un număr natural m, reprezentând numărul minim de mutări necesare pentru a obține risc minim de securitate."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ n ≤ 100 000</code></li>\n\t<li><code>1 ≤ h[1], h[2], … h[n] ≤ 100 000</code></li>\n\t<li>Persoana cea mai înaltă într-o configurație cu risc minim de securitate poate fi plasată pe oricare dintre pozițiile  <code>1...n</code></li>\n\t<li>Pentru 50% din teste, <code>n ≤ 2000</code>, iar pentru alte 40% din teste, <code>n ≤ 10 000</code></li>\n\t<li>Pentru rezolvarea corectă a primei cerinţe se acordă 20 de puncte, iar pentru cerința a doua se acordă 80 de puncte.</li>\n</ul>",
+      "text": "1 ≤ n ≤ 100 000 1 ≤ h[1], h[2], … h[n] ≤ 100 000 Persoana cea mai înaltă într-o configurație cu risc minim de securitate poate fi plasată pe oricare dintre pozițiile 1...n Pentru 50% din teste, n ≤ 2000, iar pentru alte 40% din teste, n ≤ 10 000 Pentru rezolvarea corectă a primei cerinţe se acordă 20 de puncte, iar pentru cerința a doua se acordă 80 de puncte."
+    },
+    {
+      "title": "Exemplul 1",
+      "html": "<p><code>risc.in</code></p><pre>1\n4\n35 20 10 1 </pre><p><code>risc.out</code></p><pre>1</pre>",
+      "text": "risc.in1 4 35 20 10 1 risc.out1"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p><code>p = 1</code>, deci se rezolvă numai cerinţa 1.<br>\nRândul îndeplinește condițiile de risc minim de securitate.<br>\nPersoana cea mai înaltă se găseste pe poziția <code>poz = 1</code>.</p>",
+      "text": "p = 1, deci se rezolvă numai cerinţa 1. Rândul îndeplinește condițiile de risc minim de securitate. Persoana cea mai înaltă se găseste pe poziția poz = 1."
+    },
+    {
+      "title": "Exemplul 2",
+      "html": "<p><code>risc.in</code></p><pre>1\n6\n1 8 12 20 15 10</pre><p><code>risc.out</code></p><pre>-1</pre>",
+      "text": "risc.in1 6 1 8 12 20 15 10risc.out-1"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p><code>p = 1</code>, deci se rezolvă numai cerinţa 1.<br>\nRândul <strong>NU</strong> îndeplinește condițiile de <em>risc minim de securitate</em>.<br>\nȘirul înălțimilor nu respectă condiția ca toate valorile înălțimilor din dreapta poziției persoanei celei mai înalte să fie mai mari decât toate valorile înălțimilor din stânga acesteia. Deci <code>poz = -1</code>.</p>",
+      "text": "p = 1, deci se rezolvă numai cerinţa 1. Rândul NU îndeplinește condițiile de risc minim de securitate. Șirul înălțimilor nu respectă condiția ca toate valorile înălțimilor din dreapta poziției persoanei celei mai înalte să fie mai mari decât toate valorile înălțimilor din stânga acesteia. Deci poz = -1."
+    },
+    {
+      "title": "Exemplul 3",
+      "html": "<p><code>risc.in</code></p><pre>2\n5\n2 8 4 20 16 </pre><p><code>risc.out</code></p><pre>1</pre>",
+      "text": "risc.in2 5 2 8 4 20 16 risc.out1"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p><code>p = 2</code>, deci se rezolvă numai cerinţa 2.<br>\nSe mută persoana de înălțime <code>8</code> la sfârșitul rândului.<br>\nDeci <code>m = 1</code>.</p>",
+      "text": "p = 2, deci se rezolvă numai cerinţa 2. Se mută persoana de înălțime 8 la sfârșitul rândului. Deci m = 1."
+    },
+    {
+      "title": "Exemplul 4",
+      "html": "<p><code>risc.in</code></p><pre>2\n6\n3 19 7 30 10 25</pre><p><code>risc.out</code></p><pre>2</pre>",
+      "text": "risc.in2 6 3 19 7 30 10 25risc.out2"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p><code>p = 2</code>, deci se rezolvă numai cerinţa 2.<br>\nPrima operație: se mută persoana de înălțime <code>19</code> la sfârșitul rândului. Rândul devine: <code>3 7 30 10 25 19</code><br>\nA doua operație: se mută persoana de înălțime <code>10</code> la sfârșitul rândului.<br>\nRândul devine: <code>3 7 30 25 19 10</code><br>\nDeci <code>m = 2</code></p>",
+      "text": "p = 2, deci se rezolvă numai cerinţa 2. Prima operație: se mută persoana de înălțime 19 la sfârșitul rândului. Rândul devine: 3 7 30 10 25 19 A doua operație: se mută persoana de înălțime 10 la sfârșitul rândului. Rândul devine: 3 7 30 25 19 10 Deci m = 2"
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "1 ≤ n ≤ 100 000",
+    "1 ≤ h[1], h[2], … h[n] ≤ 100 000",
+    "Persoana cea mai înaltă într-o configurație cu risc minim de securitate poate fi plasată pe oricare dintre pozițiile 1...n",
+    "Pentru 50% din teste, n ≤ 2000, iar pentru alte 40% din teste, n ≤ 10 000",
+    "Pentru rezolvarea corectă a primei cerinţe se acordă 20 de puncte, iar pentru cerința a doua se acordă 80 de puncte."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q9dae37d56e.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "9",
+    "intrare/ieșire": "risc.in / risc.out",
+    "limită timp": "0.02 secunde",
+    "limită memorie": "4 MB / 4 MB",
+    "sursa problemei": "ONI 2015, Clasa a IX-a",
+    "autor": "Constantin Galatan",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.02,
+  "memoryLimitMb": 4,
+  "author": "Constantin Galatan",
+  "sourceAttribution": "ONI 2015, Clasa a IX-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1186/risc"
+}

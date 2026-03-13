@@ -1,0 +1,64 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2362"><article id="enunt">
+			<p>Un grup de copii participă la un Bal Mascat. Participanții nu pot să-și aleagă singuri costumul. Organizatorii au pregătit exact atâtea costume câți copii sunt. Au ambalat costumele în cutii numerotate și le-au așezat într-o cameră. Copiii intră în camera cu costume și își aleg câte o cutie (la întâmplare). Fiind puși pe glume, organizatorii au scos încălțămintea din anumite cutii, după regula: cutia cu numărul <code>p</code> ramâne fără încălțări, apoi cutia cu numărul <code>2*p</code>, apoi cutia cu numărul <code>3*p</code> și așa mai departe  până la terminarea cutiilor. Dacă ultima cutie a rămas cu tot costumul, atunci organizatorii scot încălțămintea și din ea. După ce primesc cutiile cu costume, copiii constată că nu se pot deschide decât cu ajutorul unui cod (același la toate cutiile). Organizatorii le dau indicii despre cum să afle codul: se calculează numărul de cutii care au rămas fără încălțăminte,  se află ultima cifră din acest număr (notată cu <code>c</code>). Apoi se formează un cod intermediar cu exact <code>2*p</code> cifre, astfel: dacă <code>c</code> are o valoare diferită de <code>9</code>, atunci prima cifră (pornind de la stânga numărului) are valoarea <code>(c+1)</code>.  Dacă <code>c</code> are valoarea <code>9</code> atunci prima cifră este <code>(c-1)</code>. A doua cifră are valoarea <code>c</code>. A treia cifră este egală cu prima, cifra a patra urmând să fie egală cu a doua și tot așa până se află toate cele <code>2*p</code> cifre. La final, se taie ultima cifră și ajungem la codul corect cu care se deschid cutiile.</p>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care să îi ajute pe copii să afle codul cu care se deschid cutiile.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>balmascat.in</code> conţine pe prima linie două valori: un număr natural <code>n</code> ce reprezintă numărul de copii ce participă la balul mascat și un număr <code>p</code> ce reprezintă pasul cu care se stabilesc cutiile din care se scot încălțările.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>balmascat.out</code> va conţine codul de acces cu care se deschid cutiile.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>11 ≤  n ≤ 10000</code></li>
+	<li><code>1 ≤ p ≤ 8</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>balmascat.in</code></p>
+
+<pre>15 3</pre>
+
+<p><code>balmascat.out</code></p>
+
+<pre>65656</pre>
+
+<h3>Explicație</h3>
+
+<p>Se află numărul de cutii rămase fără încălțăminte: <code>5</code> (cutiile: <code>3</code>, <code>6</code>, <code>9</code>, <code>12</code> și <code>15</code>). Ultima cifră a lui <code>5</code> este <code>5</code> (<code>c</code> are o valoare diferită de <code>9</code> deci folosim pe pozițiile impare  cifra obținută din expresia <code>c+1</code>, adică <code>6</code>). Valoarea lui <code>p</code> este <code>3</code>, de aceea codul intermediar va avea <code>2 * p = 6</code> cifre: <code>656565</code> Codul final are doar primele cinci cifre din cel intermediar: <code>65656</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>balmascat.in</code></p>
+
+<pre>421 6</pre>
+
+<p><code>balmascat.out</code></p>
+
+<pre>21212121212</pre>
+
+<h3>Explicație</h3>
+
+<p>Numărul de cutii rămase fără încălțăminte: <code>71</code> (cutiile: <code>6</code>, <code>12</code>, <code>18</code>, <code>24</code>, …., <code>414</code>, <code>420</code> și <code>421</code>). Ultima cifră a lui <code>71</code> este <code>1</code>. Valoarea pasului <code>p</code> este <code>6</code>, de aceea codul intermediar va avea <code>12</code> cifre iar cel final va avea <code>11</code> cifre: <code>21212121212</code> (<code>c = 1</code> deci folosim pe poziții impare valoarea <code>c + 1</code>, adică <code>2</code>)</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>balmascat.in</code></p>
+
+<pre>35 4</pre>
+
+<p><code>balmascat.out</code></p>
+
+<pre>8989898</pre>
+
+<h3>Explicație</h3>
+
+<p>Numărul de cutii rămase fără încălțăminte: <code>9</code> (cutiile: <code>4</code>, <code>8</code>, <code>12</code>, <code>16</code>, <code>20</code>, <code>24</code>, <code>28</code>, <code>32</code> și <code>35</code>). Ultima cifră a lui <code>9</code> este <code>9</code>. (<code>c</code> are valoarea <code>9</code>, deci cifrele de pe poziții impare din cod au valoarea <code>c - 1 = 8</code> ) Valoarea pasului <code>p</code> este <code>4</code>, de aceea codul intermediar va avea opt cifre: <code>89898989</code>  iar codul final va avea șapte cifre: <code>8989898</code>.</p>		</article>
+		</body></html>

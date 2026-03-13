@@ -1,0 +1,307 @@
+{
+  "id": 2052,
+  "slug": "curiosity",
+  "name": "curiosity",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/2052/curiosity",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 25,
+      "name": "Metoda Greedy",
+      "slug": "metoda-greedy",
+      "href": "/?pagina=probleme-lista&tag=25"
+    },
+    {
+      "id": 24,
+      "name": "Probleme diverse cu metoda Greedy",
+      "slug": "probleme-diverse-cu-metoda-greedy",
+      "href": "/?pagina=probleme-lista&tag=24"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Dacă se cunosc <code>Xs</code>, <code>Xf</code>, <code>C</code>, precum și descrierea celor <code>N</code> puncte de încărcare să se determine o strategie de deplasare între coordonatele <code>Xs</code> și <code>Xf</code>, optimă din punct de vedere al timpului necesar încărcării bateriilor.</p>",
+      "text": "Dacă se cunosc Xs, Xf, C, precum și descrierea celor N puncte de încărcare să se determine o strategie de deplasare între coordonatele Xs și Xf, optimă din punct de vedere al timpului necesar încărcării bateriilor."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>curiosity.in</code> conţine pe prima linie patru numere naturale <code>Xs</code>, <code>Xf</code>, <code>C</code>, <code>N</code> cu semnificația din enunț. Pe următoarele <code>N</code> linii este descrierea punctelor de oprire: <code>t[i] x[i]</code>, unde <code>t[i]</code> reprezintă tipul de încărcare al punctului <code>i</code>, iar <code>x[i]</code> poziția acestuia pe axă.</p>",
+      "text": "Fișierul de intrare curiosity.in conţine pe prima linie patru numere naturale Xs, Xf, C, N cu semnificația din enunț. Pe următoarele N linii este descrierea punctelor de oprire: t[i] x[i], unde t[i] reprezintă tipul de încărcare al punctului i, iar x[i] poziția acestuia pe axă."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>curiosity.out</code> Fişierul curiosity.out conţine pe o singură linie două numere naturale despărțite printr-un spațiu, ce reprezintă cantitatea totală minimă de energie încărcată în puncte de tipul <code>1</code>, respectiv cantitatea totală minimă de energie încărcată în puncte de tipul <code>2</code>. Dacă nu există soluție se va afișa valoarea <code>-1</code>.</p>",
+      "text": "Fișierul de ieșire curiosity.out Fişierul curiosity.out conţine pe o singură linie două numere naturale despărțite printr-un spațiu, ce reprezintă cantitatea totală minimă de energie încărcată în puncte de tipul 1, respectiv cantitatea totală minimă de energie încărcată în puncte de tipul 2. Dacă nu există soluție se va afișa valoarea -1."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 100000</code></li>\n\t<li><code>1 ≤ C ≤ 1000</code></li>\n\t<li><code>1 ≤ t[i] ≤ 3</code>; <code>-1000000 ≤ x[i] ≤ 1000000</code></li>\n\t<li><code>-1000000 ≤ Xs &lt; Xf ≤ 1000000</code>. Acestea pot coincide cu coordonatele punctelor de încărcare;</li>\n\t<li>Punctele de încărcare sunt distincte. Coordonatele punctelor sunt de tip întreg;</li>\n\t<li>Punctele de încărcare sunt date în ordine crescătoare</li>\n\t<li>Atenție, în momentul plecării din punctul <code>Xs</code> robotul este încărcat la capacitatea maximă <code>C</code>.</li>\n</ul>",
+      "text": "1 ≤ N ≤ 100000 1 ≤ C ≤ 1000 1 ≤ t[i] ≤ 3; -1000000 ≤ x[i] ≤ 1000000 -1000000 ≤ Xs < Xf ≤ 1000000. Acestea pot coincide cu coordonatele punctelor de încărcare; Punctele de încărcare sunt distincte. Coordonatele punctelor sunt de tip întreg; Punctele de încărcare sunt date în ordine crescătoare Atenție, în momentul plecării din punctul Xs robotul este încărcat la capacitatea maximă C."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>curiosity.in</code></p><pre>1 11 5 4\n3 -1\n1 3\n2 7\n3 10</pre><p><code>curiosity.out</code></p><pre>1 3</pre><h3>Explicație</h3><p>Pe axa există <code>n=4</code> puncte de încărcare. Robotul pleaca din punctul <code>xs=1</code> și trebuie să ajungă în punctul <code>xf=11</code>. Inițial robotul are bateria încărcată la capacitatea maximă <code>C=5</code> unități. Robotul oprește în punctul <code>x=3</code>. Pentru deplasarea din <code>x=1</code> în <code>x=3</code> a consumat <code>2</code> unități de energie. Încarcă bateria cu <code>1</code> unitate (tip <code>1</code>). Bateria are în acest moment capacitatea de <code>4</code> unități, suficiente pentru a ajunge în punctul <code>x=7</code> unde încarcă bateria cu <code>3</code> unități (tip <code>2</code>). În punctul <code>x=10</code> încarcă bateria cu <code>1</code> unitate (tip <code>3</code>).</p><p><img alt=\"\" src=\"/resurse/16a4b0/Imagini/curiosity01.jpg\"></p>",
+      "text": "curiosity.in1 11 5 4 3 -1 1 3 2 7 3 10curiosity.out1 3ExplicațiePe axa există n=4 puncte de încărcare. Robotul pleaca din punctul xs=1 și trebuie să ajungă în punctul xf=11. Inițial robotul are bateria încărcată la capacitatea maximă C=5 unități. Robotul oprește în punctul x=3. Pentru deplasarea din x=1 în x=3 a consumat 2 unități de energie. Încarcă bateria cu 1 unitate (tip 1). Bateria are în acest moment capacitatea de 4 unități, suficiente pentru a ajunge în punctul x=7 unde încarcă bateria cu 3 unități (tip 2). În punctul x=10 încarcă bateria cu 1 unitate (tip 3)."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Pe axa există n=4 puncte de încărcare. Robotul pleaca din punctul xs=1 și trebuie să ajungă în punctul xf=11. Inițial robotul are bateria încărcată la capacitatea maximă C=5 unități. Robotul oprește în punctul x=3. Pentru deplasarea din x=1 în x=3 a consumat 2 unități de energie. Încarcă bateria cu 1 unitate (tip 1). Bateria are în acest moment capacitatea de 4 unități, suficiente pentru a ajunge în punctul x=7 unde încarcă bateria cu 3 unități (tip 2). În punctul x=10 încarcă bateria cu 1 unitate (tip 3)."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 100000",
+    "1 ≤ C ≤ 1000",
+    "1 ≤ t[i] ≤ 3; -1000000 ≤ x[i] ≤ 1000000",
+    "-1000000 ≤ Xs < Xf ≤ 1000000. Acestea pot coincide cu coordonatele punctelor de încărcare;",
+    "Punctele de încărcare sunt distincte. Coordonatele punctelor sunt de tip întreg;",
+    "Punctele de încărcare sunt date în ordine crescătoare",
+    "Atenție, în momentul plecării din punctul Xs robotul este încărcat la capacitatea maximă C."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q0ecfd152e9.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/Imagini/curiosity01.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-Imagini-curiosity01-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "11",
+    "intrare/ieșire": "curiosity.in / curiosity.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "128 MB / 8 MB",
+    "sursa problemei": "Lot Covasna 2017",
+    "autor": "Eugen Nodea",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 128,
+  "author": "Eugen Nodea",
+  "sourceAttribution": "Lot Covasna 2017",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/2052/curiosity"
+}

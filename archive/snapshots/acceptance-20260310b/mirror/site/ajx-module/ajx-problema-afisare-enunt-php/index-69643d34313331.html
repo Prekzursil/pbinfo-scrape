@@ -1,0 +1,133 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4131"><article id="enunt">
+			<p>Doi copii vor să joace un joc cu doi pioni și o tablă formată din <code>N</code> căsuțe numerotate de la <code>1</code> la <code>N</code>, așezate una după cealaltă, pe aceeași linie. Jocul are următoarele reguli:</p>
+
+<ul>
+	<li>se așază pionii pe prima căsuță de pe tablă (fiecare copil are propriul pion);</li>
+	<li>primul copil este cel care începe jocul;</li>
+	<li>copiii vin la tabla de joc alternativ;</li>
+	<li>cel care este la rând face, după regula de mai jos, una sau mai multe mutări înainte să cedeze locul celuilalt: calculează o valoare <code>X</code> în modul descris mai jos; își mută pionul înainte cu <code>X</code> poziții iar, dacă valoarea <code>X</code> calculată este <code>6</code>, are dreptul la calcularea unei alte valori <code>X</code>, deci la încă o mutare, necedând încă locul celuilalt copil, iar dacă valoarea <code>X</code> este diferită de <code>6</code> cedează locul la tablă;</li>
+	<li><code>X</code> se calculează după regula: dacă numărul mutării este impar atunci: <code>X=((numărul_mutării + ((numărul_căsuței_pionului + N) mod 10)) mod 6) + 1</code>, iar dacă numărul mutării este par atunci: <code>X=((((numărul_mutării+1) mod 5) + ((numărul_căsuței_pionului + N) mod 10)) mod 6) + 1</code>  <br>
+unde <code>N</code> este numărul căsuțelor tablei de joc, <code>numărul_mutării</code> semnifică a câta mutare este, <code>mod</code> este operația prin care se obține restul împărțirii întregi a două numere, iar valoarea rezultată, <code>X</code>, este una dintre cifrele <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code> sau <code>6</code>, cum de altfel se deduce din formulele de mai sus.</li>
+	<li>în urma înaintării, dacă pionul ajunge pe o căsuță ocupată în acel moment de celălalt pion, îi ia locul acestuia, iar pionul care ocupa căsuţa este trimis la căsuța cu numărul <code>1</code> (întoarcerea acestui pion la poziția <code>1</code> nu se contorizează ca mutare);</li>
+	<li>dacă un pion, după înaintare, ar ajunge în afara tablei de joc, este așezat pe căsuța <code>N</code> (ultima);</li>
+	<li>este câștigător copilul care ajunge primul cu pionul la căsuţa <code>N</code> de pe tabla de joc, și atunci jocul se încheie.</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Dându-se numărul <code>N</code>, determinați: </p>
+
+<ul>
+	<li>Numărul divizorilor lui <code>N</code>;</li>
+	<li>Numărul maxim de apariții ale unei valori calculate în timpul jocului prin formulele descrise;</li>
+	<li>Numerele căsuțelor ocupate, în timpul jocului, de pionul câștigătorului în ordinea în care acestea sunt vizitate.</li>
+</ul>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului <code>joc.in</code> se află două numere naturale, <code>C</code> și <code>N</code> separate printr-un spațiu. Dacă <code>C=1</code>, atunci se rezolvă doar prima cerință, dacă <code>C=2</code>, atunci se rezolvă doar a doua cerință iar dacă <code>C=3</code>, atunci se rezolvă doar cea de-a treia cerință.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire este <code>joc.out</code>. Dacă <code>C=1</code> sau <code>C=2</code>, acesta conține un număr natural ce reprezintă răspunsul pentru cerința respectivă. Dacă <code>C=3</code>, acesta conține un șir de numere naturale, separate prin câte un spațiu, care reprezintă răspunsul pentru a treia cerință.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N ≤ 10.000</code></li>
+	<li>Pentru teste în valoare de <code>23</code> de puncte, <code>C=1</code></li>
+	<li>Pentru alte teste în valoare de <code>33</code> de puncte, <code>C=2</code></li>
+	<li>Pentru alte teste în valoare de <code>44</code> de puncte, <code>C=3</code></li>
+	<li>Se garantează că există un câștigător</li>
+	<li>Pe parcursul jocului, copii pot ajunge pe căsuțe pe care le-au mai vizitat</li>
+	<li>Se garantează că numărul căsuțelor ocupate de copii este mai mic decât <code>100.000</code></li>
+	<li>Problema nu urmăreşte găsirea vreunei proprietăţi speciale pentru șirurile de valori calculate prin formulele date.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>joc.in</code></p>
+
+<pre>1 10</pre>
+
+<p><code>joc.out</code></p>
+
+<pre>4</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C=1</code> deci se rezolvă prima cerință. <code>N=10</code> are <code>4</code> divizori.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>joc.in</code></p>
+
+<pre>2 10</pre>
+
+<p><code>joc.out</code></p>
+
+<pre>2</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C=2</code> deci se rezolvă a doua cerință. Ambii pioni se află la căsuța 1. Mută primul copil (pionul acestuia se află la căsuța <code>1</code>). </p>
+
+<ul>
+	<li>suntem la prima mutare (număr impar);</li>
+	<li>se calculează cifra pentru înaintarea pionului: <code>X = (1 + (1 + 10) mod 10) mod 6 + 1 = 3</code></li>
+	<li>primul jucător înaintează pionul de la căsuța <code>1</code> la  căsuța <code>4</code></li>
+</ul>
+
+<p>Mută al doilea copil (pionul acestuia se află la căsuța <code>1</code>)</p>
+
+<ul>
+	<li>suntem la a doua mutare (număr par);</li>
+	<li>se calculează cifra pentru înaintarea pionului: <code>X = ((((2 + 1) mod 5) + ((1+10) mod 10)) mod 6) + 1 = 5</code></li>
+	<li>al doilea copil înaintează pionul de la căsuța <code>1</code> la căsuța <code>6</code></li>
+</ul>
+
+<p>Mută primul copil (pionul acestuia se află la căsuța <code>4</code>)</p>
+
+<ul>
+	<li>suntem la a treia mutare (număr impar);</li>
+	<li>se calculează cifra pentru înaintarea pionului: <code>X= (3 + (4 + 10) mod 10) mod 6 + 1 = 2</code></li>
+	<li>primul copil înaintează pionul de la căsuța <code>4</code> la căsuța <code>6</code></li>
+	<li>cum pionul celui de-al doilea copil se află la căsuța <code>6</code> el este întors la prima căsuță, deci pionul celui de-al doilea copil ocupă acum căsuța <code>1</code></li>
+</ul>
+
+<p>Mută al doilea copil (pionul acestuia se află la căsuța <code>1</code>)</p>
+
+<ul>
+	<li>suntem la a patra mutare (număr par);</li>
+	<li>se calculează cifra pentru înaintarea pionului: <code>X = ((4 + 1) mod 5 + (1 + 10) mod 10) mod 6 + 1 = 2</code></li>
+	<li>al doilea copil deplasează pionul de la căsuța <code>1</code> la căsuța <code>3</code></li>
+</ul>
+
+<p>Mută primul copil (pionul acestuia se află la căsuța <code>6</code>)</p>
+
+<ul>
+	<li>suntem la a cincea mutare (număr impar);</li>
+	<li>se calculează cifra pentru înaintarea pionului: <code>X = (5 + (6 + 10) mod 10) mod 6 + 1 = 6</code></li>
+	<li>primul copil deplasează pionul de la căsuța <code>6</code> la căsuța <code>10</code> (ar trebui <br>
+să se deplaseze la căsuța <code>12</code> care este în afara tablei de joc)</li>
+	<li>cifra este <code>6</code>, copilul are dreptul la încă o mutare dar a ajuns deja cu <br>
+pionul la căsuța de final și se termină jocul.</li>
+</ul>
+
+<p>Primul copil este câștigător. Cifrele calculate au fost, în ordine, <code>3</code> <code>5</code> <code>2</code> <code>2</code> <code>6</code>, cifra <code>2</code> a apărut de cele mai multe ori adică de <code>2</code> ori.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>joc.in</code></p>
+
+<pre>3 10</pre>
+
+<p><code>joc.out</code></p>
+
+<pre>1 4 6 10</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C = 3</code> deci se rezolvă a treia cerință. Primul copil este câștigător, el a ocupat în această ordine căsuțele:<br>
+<code>1</code> <code>4</code> <code>6</code> <code>10</code>.</p>		</article>
+		</body></html>

@@ -1,0 +1,308 @@
+{
+  "id": 2136,
+  "slug": "peste",
+  "name": "Peste",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/2136/peste",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 44,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=44"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Scrieți un program care citește <code>N</code> numere naturale și determină:</p><ol>\n\t<li>Cel mai mare număr de eliminări efectuate cu aceleași două cifre alăturate.</li>\n\t<li>Cel mai mare număr natural <code>X</code> determinat astfel încât ursul să prindă cât mai mult pește.</li>\n</ol>",
+      "text": "Scrieți un program care citește N numere naturale și determină: Cel mai mare număr de eliminări efectuate cu aceleași două cifre alăturate. Cel mai mare număr natural X determinat astfel încât ursul să prindă cât mai mult pește."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>peste.in</code> conține pe prima linie numărul natural <code>P</code> care poate avea valoarea <code>1</code> sau <code>2</code> și reprezintă numărul cerinței. Cea de-a doua linie conține un număr natural <code>N</code> cu semnificaţia din enunţ, iar pe următoarele <code>N</code> linii, cele <code>N</code> numere scrise pe foaia ce i-a dat-o vulpea ursului, câte un număr natural pe fiecare linie a fișierului.</p>",
+      "text": "Fișierul de intrare peste.in conține pe prima linie numărul natural P care poate avea valoarea 1 sau 2 și reprezintă numărul cerinței. Cea de-a doua linie conține un număr natural N cu semnificaţia din enunţ, iar pe următoarele N linii, cele N numere scrise pe foaia ce i-a dat-o vulpea ursului, câte un număr natural pe fiecare linie a fișierului."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>peste.out</code> va conține pe prima linie un singur număr natural determinat conform cerinței problemei.</p>",
+      "text": "Fișierul de ieșire peste.out va conține pe prima linie un singur număr natural determinat conform cerinței problemei."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ n ≤ 100</code>, fiecare dintre cele <code>N</code> numere au cel puțin <code>3</code> și cel mult <code>18</code> cifre;</li>\n\t<li>pentru rezolvarea corectă a cerinţei 1 se acordă 40 de puncte, iar pentru rezolvarea corectă a cerinţei 2 se acordă<br>\n60 de puncte;</li>\n\t<li>pentru cazul <code>P=2</code>, vor exista și teste în valoare de 25 de puncte în care cele <code>N</code> numere naturale au valori mai mici<br>\ndecât <code>10</code><sup><code>9</code></sup> și alte teste în valoare de 10 puncte în care cele <code>N</code> numere din fișierul de intrare sunt mai mici decât <code>10</code><sup><code>9</code></sup> și au același număr de cifre.</li>\n</ul>",
+      "text": "1 ≤ n ≤ 100, fiecare dintre cele N numere au cel puțin 3 și cel mult 18 cifre; pentru rezolvarea corectă a cerinţei 1 se acordă 40 de puncte, iar pentru rezolvarea corectă a cerinţei 2 se acordă 60 de puncte; pentru cazul P=2, vor exista și teste în valoare de 25 de puncte în care cele N numere naturale au valori mai mici decât 109 și alte teste în valoare de 10 puncte în care cele N numere din fișierul de intrare sunt mai mici decât 109 și au același număr de cifre."
+    },
+    {
+      "title": "Exemplul 1",
+      "html": "<p><code>peste.in</code></p><pre>1\n4\n1791\n802\n777\n77196</pre><p><code>peste.out</code></p><pre>2</pre><h3>Explicație</h3><p>Se va rezolva cerința 1 și în fișier sunt patru numere cu care vom proceda astfel:</p><ul>\n\t<li>din <code>1791</code> eliminăm cifrele <code>1</code> și <code>7</code> iar numărul rezultat este <code>91</code></li>\n\t<li>din <code>802</code> eliminăm cifrele <code>0</code> și <code>2</code> iar numărul rezultat este <code>8</code></li>\n\t<li>din <code>777</code> eliminăm cifrele <code>7</code> și <code>7</code> iar numărul rezultat este <code>7</code></li>\n\t<li>din <code>77196</code> eliminăm <code>7</code> și <code>1</code> iar numărul rezultat este <code>796</code></li>\n</ul><p>S-au efectuat două eliminări cu aceleași două cifre alăturate: <code>1</code> și <code>7</code>.</p>",
+      "text": "peste.in1 4 1791 802 777 77196peste.out2ExplicațieSe va rezolva cerința 1 și în fișier sunt patru numere cu care vom proceda astfel: din 1791 eliminăm cifrele 1 și 7 iar numărul rezultat este 91 din 802 eliminăm cifrele 0 și 2 iar numărul rezultat este 8 din 777 eliminăm cifrele 7 și 7 iar numărul rezultat este 7 din 77196 eliminăm 7 și 1 iar numărul rezultat este 796 S-au efectuat două eliminări cu aceleași două cifre alăturate: 1 și 7."
+    },
+    {
+      "title": "Exemplul 2",
+      "html": "<p><code>peste.in</code></p><pre>2\n4\n1791\n802\n777\n77196</pre><p><code>peste.out</code></p><pre>9187967</pre><h3>Explicație</h3><p>Cu aceleași patru numere din exemplul precedent, vom rezolva cerința 2.<br>\nÎn urma eliminărilor efectuate s-au obținut numerele: <code>91 8 7 796</code><br>\nCel mai mare număr posibil, obținut prin lipirea acestor numere este <code>9187967</code>.</p>",
+      "text": "peste.in2 4 1791 802 777 77196peste.out9187967ExplicațieCu aceleași patru numere din exemplul precedent, vom rezolva cerința 2. În urma eliminărilor efectuate s-au obținut numerele: 91 8 7 796 Cel mai mare număr posibil, obținut prin lipirea acestor numere este 9187967."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Se va rezolva cerința 1 și în fișier sunt patru numere cu care vom proceda astfel:"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cu aceleași patru numere din exemplul precedent, vom rezolva cerința 2. În urma eliminărilor efectuate s-au obținut numerele: 91 8 7 796 Cel mai mare număr posibil, obținut prin lipirea acestor numere este 9187967."
+    }
+  ],
+  "constraints": [
+    "1 ≤ n ≤ 100, fiecare dintre cele N numere au cel puțin 3 și cel mult 18 cifre;",
+    "pentru rezolvarea corectă a cerinţei 1 se acordă 40 de puncte, iar pentru rezolvarea corectă a cerinţei 2 se acordă 60 de puncte;",
+    "pentru cazul P=2, vor exista și teste în valoare de 25 de puncte în care cele N numere naturale au valori mai mici decât 109 și alte teste în valoare de 10 puncte în care cele N numere din fișierul de intrare sunt mai mici decât 109 și au același număr de cifre."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q9b0444fb1e.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "9",
+    "intrare/ieșire": "peste.in / peste.out",
+    "limită timp": "0.3 secunde",
+    "limită memorie": "8 MB / 8 MB",
+    "sursa problemei": "ONIGIM 2017, Clasa a VI-a",
+    "autor": "Cristina Iordaiche",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.3,
+  "memoryLimitMb": 8,
+  "author": "Cristina Iordaiche",
+  "sourceAttribution": "ONIGIM 2017, Clasa a VI-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/2136/peste"
+}

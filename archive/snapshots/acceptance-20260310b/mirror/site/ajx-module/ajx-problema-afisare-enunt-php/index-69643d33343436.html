@@ -1,0 +1,81 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3446"><article id="enunt">
+			<p>Marian se află în galaxia <span class="caps">OJI</span>-2020 și este anul 11235. În această galaxie există <code>N</code> planete diferite și <code>M</code> canale bidirecţionale de transport de tipul <code>(x, y, t)</code> care îţi permit să te deplasezi de pe planeta <code>x</code> pe planeta <code>y</code> (sau invers) în <code>t</code> secunde.</p>
+
+<p>Dar Marian este un adevărat inginer și, pentru că i se pare foarte ineficientă această metodă de transport, a dezvoltat un dispozitiv care îți permite teleportarea de pe o planetă <code>x</code> pe orice altă planetă <code>y</code> în <code>P</code> secunde cu condiţia că ai putea ajunge pornind de pe planeta <code>x</code> pe planeta <code>y</code> folosind maxim <code>L</code> canale de transport.</p>
+
+<p>Acest dispozitiv este momentan doar un prototip, așa că nu îl poate folosi mai mult de <code>K</code> ori. Marian se află pe planeta <code>1</code> și te roagă să îi spui care e timpul minim necesar pentru a ajunge pe planeta <code>N</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Să se scrie un program care calculează timpul minim necesar pentru a ajunge pe planeta <code>N</code> pornind de pe planeta <code>1</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>ateleport.in</code> conține pe prima linie <code>5</code> valori <code>N</code>, <code>M</code>, <code>P</code>, <code>L</code>, <code>K</code>, separate printr-un singur spaţiu, cu semnificaţia din enunţ.</p>
+
+<p>Pe fiecare din următoarele <code>M</code> linii se vor afla câte <code>3</code> valori <code>X</code><sub><code>i</code></sub>, <code>Y</code><sub><code>i</code></sub>, <code>T</code><sub><code>i</code> care descriu un canal de transport.</sub></p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>ateleport.out</code> va conține o singură valoare pe prima linie care reprezintă<br>
+timpul minim necesar pentru a ajunge pe planeta <code>N</code> pornind de pe planeta <code>1</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 &lt; N, M ≤ 10 000</code>;</li>
+	<li><code>0 ≤ L, K ≤ 10</code>;</li>
+	<li><code>1 &lt; T</code><sub><code>i</code></sub> <code>, P ≤ 100 000</code>;</li>
+	<li><code>1 &lt; X</code><sub><code>i</code></sub> <code>, Y</code><sub><code>i</code></sub><code> ≤ N</code>;</li>
+	<li>între oricare două planete există cel mult un canal;</li>
+	<li>pentru teste în valoare de 30 de puncte se garantează că <code>K = 0</code> și toate canalele de comunicare au <code>T</code><sub><code>i</code></sub><code> = 1</code>;</li>
+	<li>pentru <span class="caps">ALTE</span> teste în valoare de 20 de puncte se garantează că <code>K = 0</code>;</li>
+	<li>pentru <span class="caps">ALTE</span> teste în valoare de 20 de puncte se garantează că <code>N ≤ 300</code>;</li>
+	<li>se garantează că pentru toate testele există soluţie;</li>
+	<li>în concurs s-au acordat 10 puncte din oficiu. Pe site se acordă 10 puncte pentru exemple.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>ateleport.in</code></p>
+
+<pre>6 7 3 2 1
+1 2 2
+1 3 5
+2 3 4
+2 4 23
+3 4 6
+5 4 7
+5 6 9</pre>
+
+<p><code>ateleport.out</code></p>
+
+<pre>14</pre>
+
+<h3>Explicație</h3>
+
+<p>Dispozitivul se poate folosi cel mult o dată. Pentru a ajunge pe planeta <code>6</code> în timp minim vom parcurge canalul <code>1 → 2</code> apoi ne vom teleporta până pe planeta <code>5</code> de unde vom mai parcurge canalul <code>5 → 6</code>. Costul final este <code>2 + 3</code>(teleportare) <code> + 9 = 14</code>.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-2600-3446-ateleport-png.png"></p>
+
+<h1>Exemplul 1</h1>
+
+<p><code>ateleport.in</code></p>
+
+<pre>6 7 3 2 0
+1 2 2
+1 3 5
+2 3 4
+2 4 23
+3 4 6
+5 4 7
+5 6 9</pre>
+
+<p><code>ateleport.out</code></p>
+
+<pre>27</pre>
+
+<h3>Explicație</h3>
+
+<p>Dispozitivul nu se poate folosi deloc. Pentru a ajunge pe planeta <code>6</code> de pe planeta <code>1</code> în timp minim, se vor parcurge canalele în ordinea <code>1→3→4→5→6</code> și se obține timpul <code>5+6+7+9=27</code> de secunde.</p>		</article>
+		</body></html>

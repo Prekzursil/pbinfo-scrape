@@ -1,0 +1,52 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1094"><article id="enunt">
+			<p>Cei care au văzut filmul <em>Nemuritorul</em>, ştiu că fraza cu care nemuritorii încep lupta este “Nu poate să rămână decât unul singur”. Să încercăm să simulăm povestea nemuritorilor. </p>
+
+<p>Într-o zonă dreptunghiulară formată din <code>n</code> linii (numerotate de la <code>1</code> la <code>n</code>) şi <code>m</code> coloane (numerotate de la <code>1</code> la <code>m</code>) se află maxim <code>n•m-1</code> nemuritori. Doi nemuritori vecini se “luptă” între ei şi cel care pierde lupta este eliminat. “Lupta” constă în săritura unuia dintre nemuritori peste celălalt, dacă această săritură se poate face. Săritura se poate face pe orizontală sau verticală şi nemuritorul peste care s-a sărit dispare. Prin vecin al nemuritorului din poziţia <code>(i,j)</code> înţelegem un nemuritor din una dintre poziţiile <code>(i-1,j)</code>, <code>(i+1,j)</code>, <code>(i,j-1)</code>, <code>(i,j+1)</code>. Deci, după luptă nemuritorul din câmpul <code>(i,j)</code> se va găsi în una dintre poziţiile: <code>(i-2,j)</code>, <code>(i+2,j)</code>, <code>(i,j-2)</code> sau <code>(i,j+2)</code>, dacă această poziţie este liberă şi este în interiorul zonei.</p>
+
+<h1>Cerinţă</h1>
+
+<p>Se cere să se determine o succesiune a luptelor ce pot fi purtate, astfel încât la final să rămână un singur nemuritor.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>immortal.in</code> conține pe prima linie  trei valori naturale <code>n m I</code>, separate prin câte un spaţiu, reprezentând numărul de linii, numărul de coloane ale zonei descrise şi respectiv numărul de nemuritori existenţi iniţial. Următoarele <code>I</code> linii conţin fiecare câte două numere naturale <code>x y</code> separate printr-un spaţiu, reprezentând poziţiile unde se găsesc iniţial cei <code>I</code> nemuritori (linia şi coloana).</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>immortal.out</code> va conține <code>I-1</code> linii, fiecare linie descriind o “luptă”. Luptele vor fi scrise în ordinea în care au avut loc. O linie va conţine <code>4</code> numere naturale care indică: primele două poziţia de pe care pleacă un nemuritor la “luptă”, ultimele două poziţia pe care acesta ajunge după “luptă”. Pentru ca “lupta” să fie corectă, în poziţia peste care nemuritorul “sare” trebuie să existe un nemuritor care va “muri”. O poziţie va fi specificată prin indicele de linie urmat de indicele de coloană. Valorile scrise pe aceeaşi linie vor fi separate prin spaţii.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 &lt; n, m ≤ 20</code></li>
+	<li><code>1 &lt; I ≤ min{15, n*m-1}</code></li>
+	<li>Pentru datele de test există întotdeauna soluţie.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>immortal.in</code></p>
+
+<pre>3 4 4
+1 2
+2 1
+3 2
+3 3</pre>
+
+<p><code>immortal.out</code></p>
+
+<pre>3 3 3 1
+3 1 1 1
+1 1 1 3</pre>
+
+<h1>Explicație</h1>
+
+<pre>  1   2   3   4
+ =================    (3,3) --&gt; (3,1)  dispare (3,2)
+1|   | * |   |   |    (3,1) --&gt; (1,1)  dispare (2,1)
+ |---------------|    (1,1) --&gt; (1,3)  dispare (1,2)
+2| * |   |   |   |
+ |---------------|
+3|   | * | * |   |
+ =================</pre>		</article>
+		</body></html>

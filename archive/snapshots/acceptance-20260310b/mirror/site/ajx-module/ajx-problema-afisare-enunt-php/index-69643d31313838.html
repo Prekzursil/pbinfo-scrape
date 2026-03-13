@@ -1,0 +1,77 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1188"><article id="enunt">
+			<p>În această poveste este vorba despre o casă cu mai multe camere. O cameră are forma unui pătrat de latură <code>1</code>. Dacă două camere au un perete comun, atunci se poate trece dintr-o cameră în alta. Casa nu are neapărat formă dreptunghiulară.</p>
+
+<p>O asemenea casă poate fi descrisă în povestea noastră în două moduri:</p>
+
+<ul>
+	<li>prin matricea minimală: o matrice cu elemente <code>0</code> şi <code>1</code> în care există <code>N</code> valori egale cu <code>1</code>, ce  corespund camerelor, iar prima linie, ultima linie, prima coloană şi ultima coloană au cel puţin un element egal cu <code>1</code>.</li>
+	<li>prin construcţie: un şir de <code>N-1</code> perechi <code>(a[i], b[i]) 1≤i&lt;n</code>  în care <code>a[i]</code> din <code>{1,2,…,i}</code> şi <code>b[i]</code> din <code>{N, S, E, V}</code>. Camerele vor fi numerotate de la <code>1</code> la <code>n</code>. Perechea <code>(a[i], b[i])</code> precizează poziţia camerei <code>i+1</code> faţă de camera <code>a[i]</code>: <code>E</code> înseamnă la dreapta (est), <code>N</code> deasupra (nord), <code>V</code> la stânga (vest), <code>S</code> dedesubt (sud). Observaţi că pentru prima cameră nu există nicio precizare!</li>
+</ul>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-casa-png.png"></p>
+
+<p>De exemplu, casa de mai sus poate fi descrisă de şirul <code>(1 E) (2 E) (2 S) (3 S)</code>, adică a doua cameră e “lipită” la est de prima cameră, următoarea (a treia) la est de camera 2, a patra la sud de camera 2, iar ultima la sud de camera 3. </p>
+
+<h1>Cerința</h1>
+
+<ol>
+	<li>Se dă descrierea unei case prin construcţie şi se cere descrierea acesteia prin matricea minimală.</li>
+	<li>Se dă descrierea unei case prin matricea minimală şi se cere descrierea acesteia prin construcţie.</li>
+</ol>
+
+<h1>Date de intrare</h1>
+
+<p>Fişierul <code>casa.in</code> conţine:</p>
+
+<ul>
+	<li>Pe prima linie un număr natural <code>p</code> reprezentând cerinţa care trebuie rezolvată. Pentru toate testele de intrare, numărul <code>p</code> poate avea valoarea <code>1</code> sau <code>2</code>.</li>
+	<li>Dacă valoarea lui <code>p</code> este <code>1</code> atunci liniile următoare conţin descrierea unei case prin construcţie astfel: pe linia a doua un număr natural <code>N</code> reprezentând numărul de camere ale casei, iar pe fiecare din următoarele <code>N-1</code> linii câte două valori separate prin câte un spaţiu – un număr natural şi un caracter, cu semnificaţia de mai sus.</li>
+	<li>Dacă valoarea lui <code>p</code> este <code>2</code> atunci liniile următoare conţin descrierea unei case prin matrice minimală astfel: pe linia a doua două numere naturale nenule <code>M</code>, <code>N</code> reprezentând dimensiunile matricei, iar pe următoarele <code>M</code> linii câte <code>N</code>  numere <code>0</code> sau <code>1</code> separate prin câte un spaţiu.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă valoarea lui <code>p</code> este <code>1</code> atunci se va rezolva numai cerinţa <code>1</code>. În acest caz fişierul <code>casa.out</code> va conţine pe prima linie două numere naturale <code>M</code> şi <code>N</code>, separate prin câte un singur spaţiu reprezentând numărul de linii respectiv numărul de coloane ale matricei minimale, iar pe următoarele <code>M</code> linii câte <code>N</code> valori <code>0</code> sau <code>1</code> separate prin câte un singur spaţiu. </p>
+
+<p>Dacă valoarea lui <code>p</code> este <code>2</code> atunci se va rezolva numai cerinţa <code>2</code>. În acest caz fişierul <code>casa.out</code> va conţine pe prima linie două numere naturale <code>Nr</code> şi <code>C</code> separate printr-un singur spaţiu. <code>Nr</code> reprezintă numărul de camere, iar <code>C</code> poziţia camerei <code>1</code> (cel mai mic număr de ordine al unei coloane care conţine valoarea <code>1</code> în prima linie). Următoarele <code>Nr-1</code> linii vor conţine fiecare câte două valori separate printr-un singur spaţiu, reprezentând descrierea unei case prin construcţie conform precizărilor din enunţ. Coloanele vor fi numerotate începând de la <code>1</code>, iar dacă există mai multe soluţii va fi afişată cea mai mică în ordine lexicografică: perechea <code>(k, l)</code> va fi afişată înaintea perechii <code>(k’, l’)</code> dacă <code>k &lt; k’</code> sau dacă <code>k = k’</code> şi <code>l &lt; l’</code> (adică <code>E &lt; N &lt; S &lt; V</code>).</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>Matricea minimală a unei case are maximum <code>100000</code> elemente.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>casa.in</code></p>
+
+<pre>1
+5
+1 E
+2 E
+2 S
+3 S</pre>
+
+<p><code>casa.out</code></p>
+
+<pre>2 3
+1 1 1
+0 1 1</pre>
+
+<h1>Exemplu:</h1>
+
+<p><code>casa.in</code></p>
+
+<pre>2
+2 3
+1 1 1
+1 0 1</pre>
+
+<p><code>casa.out</code></p>
+
+<pre>5 1
+1 E
+1 S
+2 E
+4 S</pre>		</article>
+		</body></html>

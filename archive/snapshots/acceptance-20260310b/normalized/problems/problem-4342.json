@@ -1,0 +1,309 @@
+{
+  "id": 4342,
+  "slug": "pdif",
+  "name": "pdif",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4342/pdif",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 21,
+      "name": "Probleme cu secvențe",
+      "slug": "probleme-cu-secven-e",
+      "href": "/?pagina=probleme-lista&tag=21"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Cunoscând numerele naturale <code>n</code> reprezentând numărul de numere din șir și <code>c</code> reprezentând cerința (<code>1</code> sau <code>2</code>) și un șir de <code>n</code> numere naturale, se cere să se rezolve următoarele cerințe:<br>\n1. dacă <code>c = 1</code>, atunci se cere să se afișeze lungimea maximă a unei secvențe p-dif și numărul de secvențe p-dif de lungime maximă din șir.<br>\n2. dacă <code>c = 2</code>, atunci se cere să se afișeze valorile <code>st</code> și <code>dr</code>, reprezentând poziția de început, respectiv de sfârșit a primei secvențe p-dif de lungime maximă.</p>",
+      "text": "Cunoscând numerele naturale n reprezentând numărul de numere din șir și c reprezentând cerința (1 sau 2) și un șir de n numere naturale, se cere să se rezolve următoarele cerințe: 1. dacă c = 1, atunci se cere să se afișeze lungimea maximă a unei secvențe p-dif și numărul de secvențe p-dif de lungime maximă din șir. 2. dacă c = 2, atunci se cere să se afișeze valorile st și dr, reprezentând poziția de început, respectiv de sfârșit a primei secvențe p-dif de lungime maximă."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>pdif.in</code> conţine pe prima linie, despărțite prin câte un spațiu, numerele naturale <code>n</code> și <code>c</code>, cu semnificaţia din enunţ. A doua linie conține <code>n</code> numere naturale, despărțite prin câte un spațiu.</p>",
+      "text": "Fișierul de intrare pdif.in conţine pe prima linie, despărțite prin câte un spațiu, numerele naturale n și c, cu semnificaţia din enunţ. A doua linie conține n numere naturale, despărțite prin câte un spațiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Dacă <code>c = 1</code>, atunci pe prima linie a fişierului <code>pdif.out</code> vor fi scrise două numere ce reprezintă lungimea maximă a unei secvențe p-dif și numărul de secvențe p-dif de lungime maximă.<br>\nDacă <code>c = 2</code>, atunci fişierul <code>pdif.out</code> va conţine valorile <code>st</code> și <code>dr</code>, reprezentând poziția de început, respectiv de sfârșit a primei secvențe p-dif de lungime maximă.</p>",
+      "text": "Dacă c = 1, atunci pe prima linie a fişierului pdif.out vor fi scrise două numere ce reprezintă lungimea maximă a unei secvențe p-dif și numărul de secvențe p-dif de lungime maximă. Dacă c = 2, atunci fişierul pdif.out va conţine valorile st și dr, reprezentând poziția de început, respectiv de sfârșit a primei secvențe p-dif de lungime maximă."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>0 &lt; n ≤ 100.000</code></li>\n\t<li><code>0 ≤ orice valoare din șir ≤ 1.000.000.000</code></li>\n\t<li>lungimea unei secvențe este mai mare sau egală cu <code>1</code>, iar numerotarea valorilor în șir începe de la <code>1</code></li>\n\t<li>10 puncte se acordă pentru exemplele din enunț.</li>\n</ul>",
+      "text": "0 < n ≤ 100.000 0 ≤ orice valoare din șir ≤ 1.000.000.000 lungimea unei secvențe este mai mare sau egală cu 1, iar numerotarea valorilor în șir începe de la 1 10 puncte se acordă pentru exemplele din enunț."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>pdif.in</code></p><pre>6 1\n14 2 48 3 35 1024</pre><p><code>pdif.out</code></p><pre>3 2</pre><h3>Explicație</h3><p>Cele <code>6</code> numere sunt înlocuite cu valorile: <code>5</code>, <code>2</code>, <code>3</code>, <code>3</code>, <code>8</code>, <code>7</code>. Lungimea celei mai lungi secvențe p-dif este <code>3</code>; numărul de secvențele p-dif cu acestă lungime este <code>2</code>, iar acestea sunt <code>5, 2, 3</code> și <code>3, 8, 7</code>.</p>",
+      "text": "pdif.in6 1 14 2 48 3 35 1024pdif.out3 2ExplicațieCele 6 numere sunt înlocuite cu valorile: 5, 2, 3, 3, 8, 7. Lungimea celei mai lungi secvențe p-dif este 3; numărul de secvențele p-dif cu acestă lungime este 2, iar acestea sunt 5, 2, 3 și 3, 8, 7."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>pdif.in</code></p><pre>10 2\n14 8 3 25 151 24 21 1022 101 21</pre><p><code>pdif.out</code></p><pre>1 3</pre><h3>Explicație</h3><p>Cele <code>10</code> numere sunt înlocuite cu valorile: <code>5</code>, <code>8</code>, <code>3</code>, <code>7</code>, <code>7</code>, <code>6</code>, <code>3</code>, <code>5</code>, <code>2</code>, <code>3</code>. Sunt <code>3</code> secvențe p-dif de lungime maximă <code>3</code>, iar prima dintre ele este: <code>5, 8, 3</code> și cuprinde elementele situate între pozițiile <code>1</code> și <code>3</code>.</p>",
+      "text": "pdif.in10 2 14 8 3 25 151 24 21 1022 101 21pdif.out1 3ExplicațieCele 10 numere sunt înlocuite cu valorile: 5, 8, 3, 7, 7, 6, 3, 5, 2, 3. Sunt 3 secvențe p-dif de lungime maximă 3, iar prima dintre ele este: 5, 8, 3 și cuprinde elementele situate între pozițiile 1 și 3."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cele 6 numere sunt înlocuite cu valorile: 5, 2, 3, 3, 8, 7. Lungimea celei mai lungi secvențe p-dif este 3; numărul de secvențele p-dif cu acestă lungime este 2, iar acestea sunt 5, 2, 3 și 3, 8, 7."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cele 10 numere sunt înlocuite cu valorile: 5, 8, 3, 7, 7, 6, 3, 5, 2, 3. Sunt 3 secvențe p-dif de lungime maximă 3, iar prima dintre ele este: 5, 8, 3 și cuprinde elementele situate între pozițiile 1 și 3."
+    }
+  ],
+  "constraints": [
+    "0 < n ≤ 100.000",
+    "0 ≤ orice valoare din șir ≤ 1.000.000.000",
+    "lungimea unei secvențe este mai mare sau egală cu 1, iar numerotarea valorilor în șir începe de la 1",
+    "10 puncte se acordă pentru exemplele din enunț."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q8e127b8e5f.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "pdif.in / pdif.out",
+    "limită timp": "1 secunde",
+    "limită memorie": "10 MB / 2 MB",
+    "sursa problemei": "Olimpiada Municipală de Informatică, Iași, 2023",
+    "autor": "Oana Cristina Butnărașu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 1,
+  "memoryLimitMb": 10,
+  "author": "Oana Cristina Butnărașu",
+  "sourceAttribution": "Olimpiada Municipală de Informatică, Iași, 2023",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4342/pdif"
+}

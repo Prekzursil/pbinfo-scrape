@@ -1,0 +1,95 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4371"><article id="enunt">
+			<p>Satul Binăreni se află în pericol în urma incendiilor provocate în ultima lună. Acesta este reprezentat printr-o matrice binară cu <code>N</code> linii și <code>M</code> coloane. Toate celulele care au luat foc sunt reprezentate prin valoarea <code>0</code>. Toate celulele în care nu este produs un incendiu, reprezentate prin valori de <code>1</code>, conțin, inițial, câte o casă a unui sătean.</p>
+
+<p>O celulă este considerată <code>"safe"</code> dacă nu a luat foc și se află într-una din cele două situații de mai jos:</p>
+
+<ul>
+	<li>se află la marginea satului (pe linia <code>1</code>, respectiv <code>N</code> sau pe coloana <code>1</code>, respectiv <code>M</code> a matricei);</li>
+	<li>cel puțin una din cele 4 celule vecine pe direcțiile <code>N</code>, <code>V</code>, <code>S</code> și <code>E</code> sunt <code>"safe"</code>.</li>
+</ul>
+
+<p>Gosu, cel mai renumit pompier din sat, își dorește să salveze toate casele care nu se află în celule <code>"safe"</code>, folosindu-și superputerea: acesta poate stinge o singură dată focul din toate celulele care au luat foc pe o linie <code>x</code> și toate celulele care au luat foc pe o coloană <code>y</code>, plasându-se la intersecția acestora, în celula <code>(x, y)</code>. Acesta se poate plasa atât pe o celulă cu incendiu, cât și pe o celulă care conține o casă. Astfel, după utilizarea superputerii sale, toate elementele de pe linia <code>x</code>, respectiv elementele de pe coloana <code>y</code> vor căpăta valoarea <code>1</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Având în vedere că Gosu își poate folosi superputerea o singură dată, aflați toate perechile de coordonate <code>(x, y)</code> posibile pe care se poate plasa acesta, astfel încât să salveze toate casele care sunt în pericol.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie se găsesc două numere întregi <code>N</code> și <code>M</code>, separate printr-un spațiu, reprezentând dimensiunile matricei. Pe următoarele <code>N</code> linii se află câte <code>M</code> valori de <code>0</code> sau <code>1</code>, separate prin spații, reprezentând descrierea matricei satului.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Se vor afișa la ecran, pe linii diferite și separate printr-un spațiu, coordonatele celulelor pe care se poate plasa Gosu pentru a salva toate casele. Perechile de coordonate vor fi afișate în ordine lexicografică. Dacă nu există o soluție, se va afișa <code>-1</code>. </p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>3 ≤ N, M ≤ 1000</code></li>
+	<li><code>A[i][j] ∈ {0, 1}</code>, <code>1 ≤ i ≤ N</code>, <code>1 ≤ j ≤ M</code></li>
+	<li>Se garantează că există cel puțin o casă care se află în pericol.</li>
+	<li>Pentru 30 de puncte, <code>1 ≤ N, M ≤ 100</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>7 8
+0 0 0 0 1 1 0 0
+0 1 0 0 0 0 0 0
+0 0 0 0 0 0 0 1
+0 0 0 0 0 0 0 1
+0 0 0 1 0 0 0 1
+0 0 0 0 0 0 1 0
+1 0 0 0 0 0 0 0</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>5 1
+5 2
+5 3
+6 1
+6 2
+6 3
+7 3</pre>
+
+<h3>Explicație</h3>
+
+<p>Satul este alcătuit din <code>9</code> case, dintre care doar <code>6</code> sunt <code>"safe"</code>. Casele aflate în pericol sunt situate pe celulele <code>(2, 2)</code>, <code>(5, 4)</code>, respectiv <code>(6, 7)</code>. Soluția conține 7 perechi de coordonate, afișate în ordine lexicografică. Dacă alege, spre exemplu, celula <code>(5, 1)</code>, Gosu va stinge focul în: </p>
+
+<ul>
+	<li>celula vecină din <code>V</code> a casei din celula <code>(2, 2)</code>;</li>
+	<li>celulele vecine din <code>V</code>, respectiv <code>E</code> ale casei situate pe <code>(5, 4)</code>;</li>
+	<li>celula vecină din <code>N</code> a ultimei case.</li>
+</ul>
+
+<p>Toți acești vecini devin, la rândul lor, <code>"safe"</code>.</p>
+
+<p>Pe linia <code>7</code> există o singură celulă din care Gosu poate stinge focul în cel puțin una din celulele vecine ale fiecărei case aflate în pericol: <code>(7, 3)</code>. După folosirea superputerii sale din această celulă, matricea devine:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-foc-01-jpg.jpg"></p>
+
+<h1>Exemplul 2:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>9 9
+0 0 0 0 0 0 1 0 1
+0 1 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 1
+0 0 0 0 0 0 0 0 1
+0 0 0 0 1 0 0 0 1
+0 0 0 0 0 0 0 0 1
+1 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 1 0
+0 0 0 0 0 0 0 0 0</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>-1</pre>
+
+<h3>Explicație</h3>
+
+<p>În cazul celui de-al doilea exemplu, există <code>3</code> case aflate în pericol, în celulele <code>(2, 2)</code>, <code>(5, 5)</code>, respectiv <code>(8, 8)</code>. Nu există nicio pereche de coordonate pe care Gosu se poate plasa, astfel încât să salveze toate cele <code>3</code> case.</p>		</article>
+		</body></html>

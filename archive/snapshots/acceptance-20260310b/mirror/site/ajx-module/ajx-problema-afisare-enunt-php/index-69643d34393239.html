@@ -1,0 +1,109 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4929"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>Unul dintre cele mai influente regate din continentul Alaocs este regatul Ofni. Harta regatului poate fi redată ca o matrice cu <code>n</code> linii și <code>m</code> coloane. Regatul este format din munți (<code>^</code>), râuri și lacuri (<code>~</code>), locuri libere de teren (<code>_</code>) și orașe (<code>x</code>). Observăm că se pot forma zone delimitate de munți, ape sau marginile hărții. Numim zonă o porțiune maximă de teren care conține locuri libere de teren și orașe, delimitată de munți, ape și marginea hărții. De asemenea, mai multe orașe învecinate pe linie sau pe coloană formează o cetate. </p>
+
+<p>Din cauza puterii tot mai mari a regatelor rivale Etam și Akizif regele regatului Ofni a decis să înceapă un proces de fortificare a orașelor și cetăților. Pentru a face asta este necesară construcția de drumuri. Regele dorește ca între fiecare oraș și fiecare cetate să existe cel puțin un drum care să le lege și ca între toate cetățile să existe cel puțin un drum. Costul construcției unui drum printr-un loc liber are costul <code>1</code>, construcția unui pod peste apă are costul <code>2</code>, iar al unui tunel prin munte are costul <code>3</code>. Pentru a nu goli trezoreria regală, regele își dorește ca acest cost de construcție a drumurilor să fie minim.</p>
+
+<p>Problema are două cerințe.<br>
+Pentru <code>c = 1</code>, se cere determinarea numărului de cetăți, a numărului de zone și a numărului minim și maxim de cetăți dintr-o zonă.<br>
+Pentru <code>c = 2</code>, se cere costul total, minim, de construcție a drumurilor care conectează cetățile și orașele.</p>
+
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>fortificari.in</code> va conține pe prima linie, separate printr-un spațiu, valorile <code>c</code>, <code>n</code> și <code>m</code>, unde <code>c</code> numărul cerinței și <code>n</code> și <code>m</code> au semnificația din enunț. Pe următoarele <code>n</code> linii se află șiruri de câte <code>m</code> caractere neseparate care reprezintă harta regatului.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă <code>c = 1</code>, fișierul de ieșire <code>fortificari.out</code> ca conține patru valori cu semnficația din enunț. Dacă <code>c = 2</code>, fișierul de ieșire va conține o singură valoare marcând costul minim de construcție a drumurilor.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n, m ≤ 100</code></li>
+	<li>pentru cerința <code>2</code>, numărul de cetăți și orașe separate <code>≤ 10</code></li>
+	<li>o cetate e formată din cel puțin două orașe învecinate pe linie sau coloană</li>
+	<li><code>20</code> puncte pentru cerința <code>1</code></li>
+	<li><code>10</code> puncte pentru cerința <code>2</code> cu <code>n, m ≤ 10</code></li>
+	<li><code>70</code> puncte pentru cerința <code>2</code> fără restricții suplimentare</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>fortificari.in</code></p>
+
+<pre>1 8 7
+^^^^^^^
+~_xxx^x
+_^^^x~x
+x__~x~~
+_______
+^^^^^^_
+x_x_x~~
+x ~~~~~</pre>
+
+<p><code>fortificari.out</code></p>
+
+<pre>3 3 1 1</pre>
+
+<h1>Exemplul 2</h1>
+
+<p><code>fortificari.in</code></p>
+
+<pre>2 8 7
+^^^^^^^
+~_xxx^x
+_^^^x~x
+x__~x~~
+_______
+^^^^^^_
+x_x_x~~
+x_~~~~~</pre>
+
+
+<p><code>fortificari.out</code></p>
+
+<pre>12</pre>
+
+<h1>Exemplul 3</h1>
+
+<p><code>fortificari.in</code></p>
+
+<pre>2 8 7
+^^^^^^^
+~_xxx^x
+_^^^x~x
+x__~x~~
+_______
+^^^^^^_
+x____x~
+x_~~~~~</pre>
+
+
+<p><code>fortificari.out</code></p>
+
+<pre>14</pre>
+
+<h3>Explicație</h3>
+
+<p>Avem <code>3</code> cetăți, <code>3</code> zone, iar numărul minim și maxim de cetăți dintr-o zonă este <code>1</code> și <code>1</code>.<br>
+Pentru exemplul 2, traseul de cost minim este <code>5 * 1 + 2 * 2 + 3 = 12</code>. </p>
+
+<p>~ _ x x x ^ x <br>
+_ ^ ^ ^ x <code>~</code> x<br>
+x <code>_</code> <code>_</code> <code>~</code> x ~ ~<br>
+_ _ _ _ _ <code>_</code> _<br>
+^ ^ ^ ^ <code>^</code> ^ _<br>
+x <code>_</code> x <code>_</code> x ~ ~<br>
+x _ ~ ~ ~ ~ ~</p>
+
+<p>Pentru exemplul 3, traseul de cost minim este <code>7 * 1 + 2 * 2 + 3 = 14</code>. Cetatea de jos și orașul izolat au drum comun pe o porțiune. <br>
+~ _ x x x ^ x  <br>
+_ ^ ^ ^ x <code>~</code> x<br>
+x <code>_</code> <code>_</code> <code>~</code> x ~ ~<br>
+_ _ _ _ _ <code>_</code> _<br>
+^ ^ ^ ^ <code>^</code> ^ _<br>
+x <code>_</code> <code>_</code> <code>_</code> <code>_</code> x ~<br>
+x _ ~ ~ ~ ~ ~</p>		</article>
+		</body></html>

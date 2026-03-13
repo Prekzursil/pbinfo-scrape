@@ -1,0 +1,323 @@
+{
+  "id": 4620,
+  "slug": "perechi7",
+  "name": "perechi7",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4620/perechi7",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 45,
+      "name": "Vectori caracteristici / de frecventa",
+      "slug": "vectori-caracteristici-de-frecventa",
+      "href": "/?pagina=probleme-lista&tag=45"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Fie un șir de numere naturale <code>a[1], a[2], ..., a[n]</code>. Determinați:</p><p>1) Numărul perechilor de indici <code>(i, j)</code>, cu <code>1 ≤ i &lt; j ≤ n</code>, având proprietatea că <code>a[i]</code> și <code>a[j]</code> formează o pereche oglindită.<br>\n2) Cel mai mare număr palindrom care se poate forma prin alipirea a două numere distincte din șir.</p>",
+      "text": "Fie un șir de numere naturale a[1], a[2], ..., a[n]. Determinați:1) Numărul perechilor de indici (i, j), cu 1 ≤ i < j ≤ n, având proprietatea că a[i] și a[j] formează o pereche oglindită. 2) Cel mai mare număr palindrom care se poate forma prin alipirea a două numere distincte din șir."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>perechi.in</code> conține pe prima linie un număr natural <code>C</code>, având valoarea <code>1</code> sau <code>2</code>, reprezentând numărul cerinței. Pe a doua linie se află numărul natural <code>n</code>. A treia linie din fișier conține șirul de numere naturale <code>a[1], a[2], ..., a[n]</code>, separate prin câte un spațiu.</p>",
+      "text": "Fișierul de intrare perechi.in conține pe prima linie un număr natural C, având valoarea 1 sau 2, reprezentând numărul cerinței. Pe a doua linie se află numărul natural n. A treia linie din fișier conține șirul de numere naturale a[1], a[2], ..., a[n], separate prin câte un spațiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>perechi.out</code> va conține un singur număr, reprezentând rezultatul corespunzător pentru cerința dată.</p>",
+      "text": "Fișierul de ieșire perechi.out va conține un singur număr, reprezentând rezultatul corespunzător pentru cerința dată."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ C ≤ 2</code></li>\n\t<li><code>1 ≤ n ≤ 100.000</code></li>\n\t<li><code>1 ≤ a[i] &lt; 10.000</code></li>\n\t<li>Se garantează că pentru cerința 1 există în șirul dat cel puțin o pereche oglindită, iar la cerința 2 există în șirul dat cel puțin un număr palindrom.</li>\n\t<li>Pentru 27 de puncte, <code>C = 1</code>, <code>n ≤ 10.000</code></li>\n\t<li>Pentru 23 de puncte, <code>C = 1</code>, <code>10.000 &lt; n ≤ 100.000</code></li>\n\t<li>Pentru 27 de puncte, <code>C = 2</code>, <code>n ≤ 10.000</code></li>\n\t<li>Pentru 23 de puncte, <code>C = 2</code>, <code>10.000 &lt; n ≤ 100.000</code></li>\n</ul>",
+      "text": "1 ≤ C ≤ 2 1 ≤ n ≤ 100.000 1 ≤ a[i] < 10.000 Se garantează că pentru cerința 1 există în șirul dat cel puțin o pereche oglindită, iar la cerința 2 există în șirul dat cel puțin un număr palindrom. Pentru 27 de puncte, C = 1, n ≤ 10.000 Pentru 23 de puncte, C = 1, 10.000 < n ≤ 100.000 Pentru 27 de puncte, C = 2, n ≤ 10.000 Pentru 23 de puncte, C = 2, 10.000 < n ≤ 100.000"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>perechi.in</code></p><pre>1\n5\n21 12 21 12 21</pre><p><code>perechi.out</code></p><pre>6</pre><h3>Explicație</h3><p>Există <code>6</code> perechi de indici cu proprietatea că valorile corespunzătoare lor formează perechi oglindite: <code>(1, 2)</code>, <code>(1, 4)</code>, <code>(2, 3)</code>, <code>(2, 5)</code>,  <code>(3, 4)</code> și <code>(4, 5)</code>. Fiecare dintre aceste perechi oglindite este compusă din valorile <code>12</code> și <code>21</code>.</p>",
+      "text": "perechi.in1 5 21 12 21 12 21perechi.out6ExplicațieExistă 6 perechi de indici cu proprietatea că valorile corespunzătoare lor formează perechi oglindite: (1, 2), (1, 4), (2, 3), (2, 5), (3, 4) și (4, 5). Fiecare dintre aceste perechi oglindite este compusă din valorile 12 și 21."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>perechi.in</code></p><pre>1\n6\n13 97 76 67 76 31</pre><p><code>perechi.out</code></p><pre>3</pre><h3>Explicație</h3><p>Există <code>3</code> perechi de indici cu proprietatea că valorile corespunzătoare lor formează perechi oglindite: <code>(1, 6)</code>, <code>(3, 4)</code> și <code>(4, 5)</code>. Aceste perechi oglindite formate sunt: <code>(13, 31)</code>, <code>(76, 67)</code>, respectiv, <code>(67, 76)</code>.</p>",
+      "text": "perechi.in1 6 13 97 76 67 76 31perechi.out3ExplicațieExistă 3 perechi de indici cu proprietatea că valorile corespunzătoare lor formează perechi oglindite: (1, 6), (3, 4) și (4, 5). Aceste perechi oglindite formate sunt: (13, 31), (76, 67), respectiv, (67, 76)."
+    },
+    {
+      "title": "Exemplul 3:",
+      "html": "<p><code>perechi.in</code></p><pre>2\n26\n24 79 42 97 123 124</pre><p><code>perechi.out</code></p><pre>42124</pre><h3>Explicație</h3><p>Se pot forma următoarele numere palindrom: <code>2442</code>, <code>4224</code>, <code>7997</code>, <code>9779</code> și <code>42124</code>. Cel mai mare dintre acestea este <code>42124</code>.</p>",
+      "text": "perechi.in2 26 24 79 42 97 123 124perechi.out42124ExplicațieSe pot forma următoarele numere palindrom: 2442, 4224, 7997, 9779 și 42124. Cel mai mare dintre acestea este 42124."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Există 6 perechi de indici cu proprietatea că valorile corespunzătoare lor formează perechi oglindite: (1, 2), (1, 4), (2, 3), (2, 5), (3, 4) și (4, 5). Fiecare dintre aceste perechi oglindite este compusă din valorile 12 și 21."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Există 3 perechi de indici cu proprietatea că valorile corespunzătoare lor formează perechi oglindite: (1, 6), (3, 4) și (4, 5). Aceste perechi oglindite formate sunt: (13, 31), (76, 67), respectiv, (67, 76)."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Se pot forma următoarele numere palindrom: 2442, 4224, 7997, 9779 și 42124. Cel mai mare dintre acestea este 42124."
+    }
+  ],
+  "constraints": [
+    "1 ≤ C ≤ 2",
+    "1 ≤ n ≤ 100.000",
+    "1 ≤ a[i] < 10.000",
+    "Se garantează că pentru cerința 1 există în șirul dat cel puțin o pereche oglindită, iar la cerința 2 există în șirul dat cel puțin un număr palindrom.",
+    "Pentru 27 de puncte, C = 1, n ≤ 10.000",
+    "Pentru 23 de puncte, C = 1, 10.000 < n ≤ 100.000",
+    "Pentru 27 de puncte, C = 2, n ≤ 10.000",
+    "Pentru 23 de puncte, C = 2, 10.000 < n ≤ 100.000"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qaa354b90b7.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "perechi.in / perechi.out",
+    "limită timp": "0.4 secunde",
+    "limită memorie": "128 MB / 8 MB",
+    "sursa problemei": "OJI 2024, clasa a 6-a",
+    "autor": "Alina Boca",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.4,
+  "memoryLimitMb": 128,
+  "author": "Alina Boca",
+  "sourceAttribution": "OJI 2024, clasa a 6-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4620/perechi7"
+}

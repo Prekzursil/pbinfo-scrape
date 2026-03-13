@@ -1,0 +1,68 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3769"><article id="enunt">
+			<p>Pentru că îi plac cifrele, Skippie, iepurașul norocos, a stabilit cum se obține cifra de control a unui număr: se efectuează suma cifrelor sale, apoi suma cifrelor acestei sume, până când suma obținută este un număr format dintr-o singură cifră. Această ultimă cifră, spune Skippie, poartă numele de cifră de control. Skippie a ascuns în păadure <code>n</code> ouă roșii. Pe fiecare ou a pictat câte un număr natural nenul. Iar acum se întreabă care este suma dintre cel mai mare și cel mai mic număr natural care se pot forma din toate cifrele distincte folosite în scrierea numărului pictat. În plus, pentru că lui Skippie îi plac problemele complicate, pentru fiecare număr pictat pe câte un ou el ar vrea să afle și de câte ori apare cifra de control a numărului în scrierea tuturor numerelor naturale mai mici sau egale decât numărul pictat.</p>
+
+<h1>Cerința</h1>
+
+<p>1. Pentru fiecare dintre cele <code>n</code> numere pictate de Skippie aflați suma dintre cel mai mare și cel mai mic număr natural care se pot forma din toate cifrele distincte folosite în scrierea numărului pictat.<br>
+2. Pentru fiecare dintre cele <code>n</code> numere pictate de Skippie aflați de câte ori apare cifra de control a numărului pictat în scrierea tuturor numerelor naturale mai mici sau egale decât numărul pictat.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>iepuras.in</code> conține un număr natural <code>C</code>. Acesta poate avea valorile <code>1</code> sau <code>2</code> și reprezintă cerința problemei. Cea de-a doua linie a fișierului de intrare conține un număr natural <code>n</code> reprezentând numărul de ouă roșii pictate de Skippie. Fiecare dintre următoarele <code>n</code> linii ale fișierului de intrare conține câte un număr natural nenul reprezentând numerele pictate de iepuras, pe cele <code>n</code> ouă roșii.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>iepuras.out</code> va conține <code>n</code> numere întregi, fiecare pe o linie separată. În ordinea apariției numerelor pictate de iepuras în fișierul de intrare, se afișează răspunsurile la cerința <code>C</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ C ≤ 2</code></li>
+	<li><code>1 ≤ n ≤ 100.000</code></li>
+	<li>numerele pictate de iepuraș sunt mai mici sau egale cu <code>10</code><sup><code>18</code></sup></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>iepuras.in</code></p>
+
+<pre>1
+2
+121
+33343</pre>
+
+<p><code>iepuras.out</code></p>
+
+<pre>33
+77</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința <code>1</code>. Sunt <code>2</code> ouă pictate (<code>n = 2</code>). Pentru primul ou, pictat cu numărul <code>121</code>:<br>
+- cel mai mare număr natural cu cifre distincte format cu toate cifrele distincte ale numărului pictat este <code>21</code>;<br>
+- cel mai mic număr natural cu cifre distincte format cu toate cifrele distincte ale numărului pictat este <code>12</code>.<br>
+Deci suma celor două numere este <code>33</code> (<code>21 + 12 = 33</code>).</p>
+
+<p>Pentru al doilea ou, pictat cu numărul <code>33343</code>:<br>
+- cel mai mare număr natural cu cifre distincte format cu toate cifrele distincte ale numărului pictat este <code>43</code>;<br>
+- cel mai mic număr natural cu cifre distincte format cu toate cifrele distincte ale numărului pictat este <code>34</code>.<br>
+Deci suma celor două numere este <code>77</code> (<code>43 + 34 = 77</code>).</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>iepuras.in</code></p>
+
+<pre>2
+2
+123
+191</pre>
+
+<p><code>iepuras.out</code></p>
+
+<pre>22
+39</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința <code>2</code>. Sunt <code>2</code> ouă pictate (<code>n = 2</code>). Pe primul ou este scris numărul <code>123</code> iar pe al doilea ou numărul <code>191</code>. Cifra de control a numărului <code>123</code> este <code>6</code> (<code>1 + 2 + 3 = 6</code>). Numărul de apariții aale cifrei <code>6</code> în scrierea a tuturor numerelor naturale mai mici sau egale cu <code>123</code> este <code>22</code>. Cifra <code>6</code> apare în scrierea numerelor: <code>6</code>, <code>16</code>, <code>26</code>, <code>36</code>, <code>46</code>, <code>56</code>, <code>60</code>, <code>61</code>, <code>62</code>, <code>63</code>, <code>64</code>, <code>65</code>, <code>66</code>, <code>67</code>, <code>68</code>, <code>69</code>, <code>76</code>, <code>86</code>, <code>96</code>, <code>106</code>, <code>116</code> de <code>22</code> de ori. Cifra de control a numărului <code>191</code> este <code>2</code>. (<code>1 + 9 + 1 = 11</code>,  <code>1 + 1 = 2</code>). Numărul de apariții ale cifrei <code>2</code> în scrierea tuturor numerelor naturale mai mici sau egale cu <code>19</code> este <code>39</code>. Cifra <code>2</code> apare în scrierea numerelor <code>2</code>, <code>12</code>, <code>20</code>, <code>21</code>, <code>22</code>, <code>23</code>, <code>24</code>, <code>25</code>, <code>26</code>, <code>27</code>, <code>28</code>, <code>29</code>, <code>32</code>, <code>42</code>, <code>52</code>, <code>62</code>, <code>72</code>, <code>82</code>, <code>92</code>, <code>102</code>, <code>112</code>, <code>120</code>, <code>121</code>, <code>122</code>, <code>123</code>, <code>124</code>, <code>125</code>, <code>126</code>, <code>127</code>, <code>128</code>, <code>129</code>, <code>132</code>, <code>142</code>, <code>152</code>, <code>162</code>, <code>172</code>, <code>182</code> de <code>39</code> de ori.</p>		</article>
+		</body></html>

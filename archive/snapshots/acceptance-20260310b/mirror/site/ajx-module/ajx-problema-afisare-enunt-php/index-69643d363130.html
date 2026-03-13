@@ -1,0 +1,57 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=610"><article id="enunt">
+			<p>Într-un loc îndepărtat amplasat strategic, se află mai mulţi soldați identificaţi prin numere naturale nenule unice. Ordinea și disciplina militară impun aşezarea soldaților în linie la apelul de dimineață. Fiecare soldat a primit la sosirea în unitate numărul său și numerele de identificare ale camarazilor care trebuie să fie în stânga și în dreapta sa la aliniere. Excepţie fac doi soldaţi santinele care primesc doar numărul propriu de identificare şi se vor aşeza pe prima, respectiv pe ultima poziţie din linie. Uneori, unii soldaţi sunt plecați în misiuni, iar apelul de dimineaţă în unitate se face astfel: fiecare dintre cei prezenţi strigă cele trei numere primite – numărul lui, numărul camaradului din stânga lui şi al camaradului din dreapta lui, chiar dacă aceștia lipsesc. </p>
+
+<p>Ei nu ştiu însă că, după un zid, stă pitită spioana Bulbuka, trimisă în recunoaștere. Ea îi ascultă şi înregistrează toate tripletele de numere care sunt strigate. După cele trei numere strigate de fiecare soldat, Bulbuka, fiind foarte inteligentă, deduce corect câte grupuri de soldaţi care și-au strigat prezența sunt până în momentul respectiv. Ea consideră că un grup este format din toţi acei soldaţi care şi-au strigat propriul număr şi care sunt aşezaţi unul lângă celălalt (dacă un soldat a strigat numărul camaradului, acesta din urmă nu este inclus în grup decât dacă a strigat şi el propriul număr). </p>
+
+<h1>Cerința</h1>
+
+<p>Aflați care sunt numerele de grupuri de soldați deduse de Bulbuka în fiecare moment.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fişierului <code>spion.in</code> se află <code>N</code>, numărul de soldaţi ce îşi vor striga prezența. Pe următoarele <code>N</code> linii se află câte <code>3</code> numere <code>x[i]</code>, <code>s[i]</code> și <code>d[i]</code>, separate prin câte un spaţiu, reprezentând tripletele pe care le strigă fiecare soldat (<code>x[i]</code> numărul soldatului, <code>s[i]</code> numărul camaradului din stânga lui şi <code>d[i]</code> numărul camaradului din dreapta lui).</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fişierul de ieşire <code>spion.out</code> va conţine <code>N</code> linii. Pe fiecare dintre cele <code>N</code> linii se va scrie numărul de grupuri dedus de Bulbuka la momentul respectiv.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 &lt; N  &lt; 500000</code></li>
+	<li><code>1 &lt; x[i], s[i], d[i] &lt; 50000000, i=1,2,3,....,N</code></li>
+	<li>Soldaţii santinele sunt mereu prezenţi, nu se strigă singuri (dar pot fi strigaţi de către camarazii vecini) și nu fac parte din niciun grup.</li>
+	<li>Numerele strigate sunt corespunzătoare unei ordini corecte.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>spion.in</code></p>
+
+<pre>6
+9 2 3
+8 5 4
+5 3 8
+7 1 2
+2 7 9
+3 9 5</pre>
+
+<p><code>spion.out</code></p>
+
+<pre>1
+2
+2
+3
+2
+1</pre>
+
+<h1>Explicație</h1>
+
+<p>Prima dată strigă soldatul <code>9</code> care e notat prezent, deci primul grup este format doar din el. Camarazii <code>2</code> și <code>3</code> ar trebui să fie în stânga și dreapta lui dar nu și-au strigat prezența încă. În consecință, nu fac parte în acest moment din grupul lui <code>9</code>. </p>
+
+<p>Strigă soldatul <code>8</code>, se formează două grupuri: <code>{9}</code> și <code>{8}</code>.</p>
+
+<p>Strigă <code>5</code>, el va intra în grupul lui <code>8</code>, deci vor fi tot două grupuri: <code>{9}</code> și <code>{8,5}</code>.</p>
+
+<p>Strigă <code>7</code>, dar pentru că cei doi camarazi nu s-au strigat încă prezenţi, <code>7</code> va forma un grup singur. Vor fi acum trei grupuri: <code>{7}</code>, <code>{9}</code> și @{8,5} etc.</p>		</article>
+		</body></html>

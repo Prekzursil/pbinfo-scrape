@@ -1,0 +1,314 @@
+{
+  "id": 2447,
+  "slug": "forus",
+  "name": "forus",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/2447/forus",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 1,
+      "name": "Algoritmi elementari",
+      "slug": "algoritmi-elementari",
+      "href": "/?pagina=probleme-lista&tag=1"
+    },
+    {
+      "id": 5,
+      "name": "Cifrele unui număr",
+      "slug": "cifrele-unui-num-r",
+      "href": "/?pagina=probleme-lista&tag=5"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Scrieţi un program care citeşte numărul natural <code>N</code> și cele <code>N</code> numere scrise pe cartoanele aduse de profesorul Forus, apoi rezolvă următoarele două cerinţe:<br>\n1. determină numărul de cartoane pe care elevii au voie să le taie de oriunde (NU conțin cifre în fața cărora NU au voie să taie);<br>\n2. determină, în ordinea strângerii cartoanelor, numerele preluate de către profesorul Forus la finalul orei.</p>",
+      "text": "Scrieţi un program care citeşte numărul natural N și cele N numere scrise pe cartoanele aduse de profesorul Forus, apoi rezolvă următoarele două cerinţe: 1. determină numărul de cartoane pe care elevii au voie să le taie de oriunde (NU conțin cifre în fața cărora NU au voie să taie); 2. determină, în ordinea strângerii cartoanelor, numerele preluate de către profesorul Forus la finalul orei."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>forus.in</code> conține pe prima linie un număr natural <code>C</code> reprezentând cerința din problemă care trebuie rezolvată (<code>1</code> sau <code>2</code>). A doua linie din fișier conține un număr natural <code>N</code>, reprezentând numărul de elevi, iar a treia linie din fișier conţine <code>N</code> numere naturale, separate prin câte un spațiu, reprezentând numerele scrise pe cartoanele aduse de profesor, în ordinea distribuirii lor.</p>",
+      "text": "Fișierul de intrare forus.in conține pe prima linie un număr natural C reprezentând cerința din problemă care trebuie rezolvată (1 sau 2). A doua linie din fișier conține un număr natural N, reprezentând numărul de elevi, iar a treia linie din fișier conţine N numere naturale, separate prin câte un spațiu, reprezentând numerele scrise pe cartoanele aduse de profesor, în ordinea distribuirii lor."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Dacă <code>C = 1</code>, fişierul de ieşire <code>forus.out</code> conţine pe prima linie un număr natural reprezentând răspunsul la cerinţa 1.<br>\nDacă <code>C = 2</code>, fişierul de ieşire <code>forus.out</code> conţine pe prima linie <code>N</code> numere naturale, separate prin câte un spațiu, reprezentând răspunsul la cerința 2; numerele sunt scrise în ordinea în care au fost strânse.</p>",
+      "text": "Dacă C = 1, fişierul de ieşire forus.out conţine pe prima linie un număr natural reprezentând răspunsul la cerinţa 1. Dacă C = 2, fişierul de ieşire forus.out conţine pe prima linie N numere naturale, separate prin câte un spațiu, reprezentând răspunsul la cerința 2; numerele sunt scrise în ordinea în care au fost strânse."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2 ≤ N ≤ 30</code></li>\n\t<li><code>1 ≤ numărul natural de pe carton &lt; 1 000 000 000</code></li>\n\t<li>Pentru rezolvarea corectă a cerinţei 1 se acordă <code>20</code> de puncte; pentru rezolvarea corectă a cerinței 2 se acordă <code>70</code> de puncte.</li>\n\t<li>În concurs s-au acordat <code>10</code> puncte din oficiu. Aici se acordă <code>10</code> puncte pentru exemplele din enunț.</li>\n</ul>",
+      "text": "2 ≤ N ≤ 30 1 ≤ numărul natural de pe carton < 1 000 000 000 Pentru rezolvarea corectă a cerinţei 1 se acordă 20 de puncte; pentru rezolvarea corectă a cerinței 2 se acordă 70 de puncte. În concurs s-au acordat 10 puncte din oficiu. Aici se acordă 10 puncte pentru exemplele din enunț."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>forus.in</code></p><pre>1\n5\n1234 25082 543 52 150</pre><p><code>forus.out</code></p><pre>3</pre><h3>Explicație</h3><p>Cerinţa este <code>1</code>. Sunt <code>3</code> numere care pot fi tăiate de oriunde: <code>1234</code>, <code>543</code>, <code>52</code>.</p>",
+      "text": "forus.in1 5 1234 25082 543 52 150forus.out3ExplicațieCerinţa este 1. Sunt 3 numere care pot fi tăiate de oriunde: 1234, 543, 52."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>forus.in</code></p><pre>2\n5\n51 1234 50822 345 150</pre><p><code>forus.out</code></p><pre>15 2341 25082 453 501</pre><h3>Explicație</h3><p>Cerinţa este <code>2</code>. Pentru cartonul cu numărul <code>51</code> se pot obţine numerele <code>15</code> și <code>51</code>. Ambele numere au câte <code>4</code> divizori. Astfel, se va alege numărul <code>15</code>, fiind cel mai mic. Pentru cartonul cu numărul <code>1234</code> (<code>4</code> divizori) pot fi obținute numerele: <code>2341</code> (<code>2</code> divizori), <code>3412</code> (<code>6</code> divizori) și <code>4123</code> (<code>8</code> divizori). Se va alege numărul <code>2341</code> pentru că are numărul minim de divizori. Analog se va proceda pentru toate celelalte numere din șir.</p>",
+      "text": "forus.in2 5 51 1234 50822 345 150forus.out15 2341 25082 453 501ExplicațieCerinţa este 2. Pentru cartonul cu numărul 51 se pot obţine numerele 15 și 51. Ambele numere au câte 4 divizori. Astfel, se va alege numărul 15, fiind cel mai mic. Pentru cartonul cu numărul 1234 (4 divizori) pot fi obținute numerele: 2341 (2 divizori), 3412 (6 divizori) și 4123 (8 divizori). Se va alege numărul 2341 pentru că are numărul minim de divizori. Analog se va proceda pentru toate celelalte numere din șir."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cerinţa este 1. Sunt 3 numere care pot fi tăiate de oriunde: 1234, 543, 52."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cerinţa este 2. Pentru cartonul cu numărul 51 se pot obţine numerele 15 și 51. Ambele numere au câte 4 divizori. Astfel, se va alege numărul 15, fiind cel mai mic. Pentru cartonul cu numărul 1234 (4 divizori) pot fi obținute numerele: 2341 (2 divizori), 3412 (6 divizori) și 4123 (8 divizori). Se va alege numărul 2341 pentru că are numărul minim de divizori. Analog se va proceda pentru toate celelalte numere din șir."
+    }
+  ],
+  "constraints": [
+    "2 ≤ N ≤ 30",
+    "1 ≤ numărul natural de pe carton < 1 000 000 000",
+    "Pentru rezolvarea corectă a cerinţei 1 se acordă 20 de puncte; pentru rezolvarea corectă a cerinței 2 se acordă 70 de puncte.",
+    "În concurs s-au acordat 10 puncte din oficiu. Aici se acordă 10 puncte pentru exemplele din enunț."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q4f79cbbffa.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/forus.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-forus-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "forus.in / forus.out",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "16 MB / 8 MB",
+    "sursa problemei": "OJI 2018",
+    "autor": "Flavius Boian",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 16,
+  "author": "Flavius Boian",
+  "sourceAttribution": "OJI 2018",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/2447/forus"
+}

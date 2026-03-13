@@ -1,0 +1,96 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3733"><article id="enunt">
+			<h1>Enunț</h1>
+
+<p>Se consideră <code>N</code> coșuri numerotate cu numerele distincte de la <code>1</code> la <code>2•N</code>.<br>
+Coșul <code>1</code> conține <code>C</code><sub><code>1</code></sub> mere, coșul <code>2</code> conține <code>C</code><sub><code>2</code></sub> mere,…, coșul <code>2•N</code> conține <code>C</code><sub><code>2•N</code></sub> mere.</p>
+
+<p>Cele <code>2•N</code> coșuri vor fi grupate două câte două, rezultând <code>N</code> perechi de coșuri. Fiecare coș poate face parte dintr-o singură pereche. Numărul de mere dintr-o pereche de coșuri este egal cu suma numerelor de mere din cele două coșuri. Pentru fiecare pereche, valoarea absolută a diferenței numerelor de mere din cele două coșuri ale perechii reprezintă <code>excedentul</code> perechii.</p>
+
+<p>Ionuț, având o fire curioasă, vrea să afle mai multe despre aceste perechi.</p>
+
+<p>Mai întâi vrea să afle numărul minim posibil, respectiv maxim posibil, de mere dintr-o pereche, indiferent de gruparea coșurilor în perechi de câte două.</p>
+
+<p>Apoi, Ionuț vă întreabă dacă este posibil să grupeze cele <code>2•N</code> coșuri în perechi de câte două, astfel încât cele <code>N</code> perechi rezultate să aibă același număr de mere. Dacă este posibil, atunci Ionuț vrea să afle și care este valoarea minimă a excedentelor perechilor din noua grupare.</p>
+
+<p>Voi va trebui să îl ajutați pe Ionuț să afle răspunsurile la întrebările lui.</p>
+
+
+<h1>Cerința</h1>
+
+<p>Scrieți un program care să citească numărul <code>N</code> și cele <code>2•N</code> numere naturale <code>C</code><sub><code>1</code></sub>,  <code>C</code><sub><code>2</code></sub>,…, <code>C</code><sub><code>2•N</code></sub>, iar apoi să determine:</p>
+
+<p><code>1.</code> Numărul minim de mere și numărul maxim de mere pe care le pot avea perechile de coșuri.</p>
+
+<p><code>2.</code> Răspunsul <code>DA</code> sau <code>NU</code> la întrebarea lui Ionuț; dacă răspunsul este <code>DA</code>, se va determina și care este valoarea minimă a excedentelor perechilor din noua grupare.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>cosuri.in</code> conține pe prima linie două numere naturale <code>T</code> și <code>N</code> separate printr-un spațiu. A doua linie a fișierului conține cele <code>2•N</code> numere naturale <code>C</code><sub><code>1</code></sub>,  <code>C</code><sub><code>2</code></sub>,…, <code>C</code><sub><code>2•N</code></sub>, separate prin câte un spațiu.</p>
+
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>cosuri.out</code> va conține:</p>
+
+<ul>
+	<li>Dacă <code>T=1</code>, pe prima linie, două numere naturale separate printr-un singur spațiu reprezentând numărul minim, respectiv maxim de mere pe care le pot avea perechile (răspunsul la cerinţa 1);</li>
+	<li>Dacă <code>T=2</code>, pe prima linie, un șir de două caractere care poate fi <code>DA</code> sau <code>NU</code>, reprezentând răspunsul la întrebarea lui Ionuț; dacă răspunsul este <code>DA</code>, atunci a doua linie a fișierului va conține un număr natural reprezentând valoarea minimă a excedentelor perechilor din noua grupare (răspunsul la cerința 2).</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 500 000</code></li>
+	<li><code>1 ≤ C</code><sub><code>i</code></sub><code> ≤ 1 000 000</code>, pentru oricare <code>1 ≤ i ≤ 2·N</code></li>
+	<li>Pentru teste în valoare de 30 de puncte, <code>T = 1</code></li>
+	<li>Pentru restul de 70 de puncte, <code>T= 2</code></li>
+	<li>Pentru teste în valoare de 20 de puncte, <code>N ≤ 5</code></li>
+	<li>Pentru alte teste în valoare de 40 de puncte, <code>N ≤ 70000</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>cosuri.in</code></p>
+
+<pre>1 3
+1 7 4 10 2 9</pre>
+
+<p><code>cosuri.out</code></p>
+
+<pre>3 19</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința 1. Perechea formată din coșurile <code>1</code> și <code>5</code> are <code>3</code> mere, iar perechea formată din coșurile <code>4</code> și <code>6</code> are <code>19</code> mere. Se observă că aceste valori sunt minimul, respectiv maximul posibil.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>cosuri.in</code></p>
+
+<pre>2 3
+1 7 4 10 2 9</pre>
+
+<p><code>cosuri.out</code></p>
+
+<pre>DA
+3</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința 2. Grupând coșurile <code>1</code> cu <code>4</code>, <code>2</code> cu <code>3</code> și <code>5</code> cu <code>6</code>, obținem <code>3</code> perechi cu câte <code>11</code> mere fiecare (<code>1 + 10</code>, <code>7 + 4</code>, <code>2 + 9</code>) și cu excedentele: <code>9</code> (<code>=|1-10|</code>), <code>3</code> (<code>=|7-4|</code>), <code>7</code> (<code>=|2-9|</code>). Valoarea minimă a excedentelor perechilor din noua grupare este <code>3</code>.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>cosuri.in</code></p>
+
+<pre>2 3
+1 7 5 12 2 9</pre>
+
+<p><code>cosuri.out</code></p>
+
+<pre>NU</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința 2. Este imposibil să formăm perechile de coșuri, deci răspunsul este <code>NU</code>.</p>		</article>
+		</body></html>

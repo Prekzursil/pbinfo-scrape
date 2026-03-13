@@ -1,0 +1,108 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1136"><article id="enunt">
+			<p>Supărați că lansarea părții a treia a filmului lor preferat s-a amânat până în iunie 2018, Henry și Hetty s-au gândit la propriul scenariu pentru finalul trilogiei:</p>
+
+<p>Într-o lume în care vikingii pot zbura cu dragonii există <code>N</code> insule. Hiccup, șeful tribului de vikingi aflat pe insula <code>1</code>, știe <code>M</code> rute directe de zbor bidirecționale între insule. Pentru fiecare <code>j</code> intre <code>1</code> si <code>M</code>, ruta <code>j</code> unește insulele <code>A</code><sub><code>j</code></sub> și <code>B</code><sub><code>j</code></sub> și are lungime <code>D</code><sub><code>j</code></sub>. </p>
+
+<p>Pe fiecare insulă <code>i</code>, (<code>1 ≤ i ≤ n</code>) există dragoni din specia <code>i</code> care pot zbura fără a se opri pentru odihnă o distanță maximă <code>Dmax</code><sub><code>i</code></sub>. Cu alte cuvinte, dragonii de pe insula <code>i</code> vor putea parcurge orice rută <code>j</code>, (<code>1 ≤ j ≤ m</code>) pentru care <code>D</code><sub><code>j</code></sub><code> ≤ Dmax</code><sub><code>i</code></sub>, indiferent de ce alte drumuri au făcut anterior.</p>
+
+<p>Hiccup dorește să ajungă de pe insula <code>1</code> pe insula <code>N</code> pentru a-l salva pe Toothless, dragonul lui. Pentru a ajunge acolo, el va lua inițial un dragon din specia <code>1</code> (de pe insula <code>1</code>). Apoi, dacă la un moment dat Hiccup se află pe o insula <code>i</code>, (<code>1 ≤ i ≤ n</code>) având cu el un dragon din specia <code>t</code>, el poate:</p>
+
+<ol>
+	<li>Să zboare de pe insula <code>i</code> pe o altă insulă <code>x</code> cu dragonul pe care îl are, folosind o rută directă <code>j</code> între insulele <code>i</code> si <code>x</code>, bineînțeles doar dacă <code>D</code><sub><code>j</code></sub><code> ≤ Dmax</code><sub><code>t</code></sub>.</li>
+	<li>Să schimbe dragonul din specia <code>t</code> pe care îl are cu un dragon din specia <code>i</code> aflat pe insula respectivă.</li>
+</ol>
+
+<h1>Cerințe</h1>
+
+<p><strong>a.</strong> Să se determine distanța maxima <code>Dmax</code><sub><code>i</code></sub> caracteristică unui dragon la care Hiccup poate ajunge fără a schimba dragonul pe care l-a luat inițial de pe insula <code>1</code>.<br>
+<strong>b.</strong> Să se determine distanța minimă pe care Hiccup trebuie să o parcurgă pentru a ajunge de pe insula <code>1</code> pe insula <code>N</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>dragoni.in</code> conține pe prima linie numărul <code>p</code>. Pentru toate testele de intrare, numărul <code>p</code> poate avea doar valoarea <code>1</code> sau valoarea <code>2</code>. Pe a doua linie se găsesc două numere naturale <code>N</code> și <code>M</code> reprezentând numărul de insule, respectiv numărul de rute directe între insule. Pe a treia linie se găsesc <code>N</code> numere naturale, al <code>i</code>-lea dintre acestea reprezentând distanta maximă <code>Dmax</code><sub><code>i</code></sub> pe care o poate zbura un dragon de pe insula <code>i</code>. Pe următoarele <code>M</code> linii sunt descrise cele <code>M</code> rute directe. Pe fiecare dintre aceste linii se găsesc câte trei numere naturale <code>A</code>, <code>B</code> și <code>D</code> cu semnificația că există rută bidirecțională de lungime <code>D</code> între insulele <code>A</code> și <code>B</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>n fișierul de ieșire <code>dragoni.out</code> se va afișa un singur număr natural. </p>
+
+<p><strong>Dacă valoarea lui <code>p</code> este <code>1</code>, se rezolvă numai cerința a.</strong><br>
+În acest caz numărul afișat va reprezenta distanța maximă <code>Dmax</code><sub><code>i</code></sub> a unui dragon <code>i</code> la care Hiccup poate ajunge fără a schimba dragonul pe care l-a luat inițial de pe insula <code>1</code>.</p>
+
+<p><strong>Daca valoarea lui <code>p</code> este <code>2</code>, se va rezolva numai cerința b,</strong><br>
+În acest caz numărul afișat va reprezenta distanța minima pe care Hiccup trebuie să o parcurgă pentru a ajunge de pe insula <code>1</code> pe insula <code>N</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 800</code></li>
+	<li><code>1 ≤ M ≤ 6000</code></li>
+	<li><code>1 ≤ Dmax</code><sub><code>i</code></sub><code> ≤ 50 000</code>, pentru orice <code>1 ≤ i ≤ N</code>.</li>
+	<li><code>1 ≤ A</code><sub><code>j</code></sub><code>, B</code><sub><code>j</code></sub><code> ≤ N</code>, pentru orice <code>1 ≤ j ≤ M</code>.</li>
+	<li><code>1 ≤ D</code><sub><code>j</code></sub><code> ≤ 50 000</code>, pentru orice <code>1 ≤ j ≤ M</code>.</li>
+	<li>Se garantează că Hiccup poate ajunge pe insula <code>N</code>.</li>
+	<li>Se garantează că răspunsul oricărei cerințe este un număr natural mai mic decât  <code>10</code><sup><code>9</code></sup>.</li>
+	<li>Pentru rezolvarea corectă a primei cerințe se acordă 20% din punctajul testului respectiv.</li>
+	<li>Pentru rezolvarea corectă a celei de-a doua cerințe se acordă 80% din punctajul testului respectiv.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>dragoni.in</code></p>
+
+<pre>1
+5 6
+6 3 13 20 26
+1 2 5
+1 3 7
+1 5 10
+2 3 6
+3 4 5
+3 5 14</pre>
+
+<p><code>dragoni.out</code></p>
+
+<pre>20</pre>
+
+<h1>Explicație</h1>
+
+<p><code>p = 1</code> deci se va rezolva cerința a).</p>
+
+<p>Există <code>N = 5</code> insule si <code>M = 6</code> rute între ele. Hiccup pornește de pe insula <code>1</code> având un dragon care poate zbura o distanță de maxim <code>6</code>. Cu acest dragon poate ajunge doar pe insulele <code>1</code>, <code>2</code>, <code>3</code> si <code>4</code>, întrucât pentru a ajunge pe insula <code>5</code> el ar fi obligat sa parcurgă o ruta de lungime mai mare decât <code>6</code>. </p>
+
+<p>Distanta maxima pe care o poate zbura un dragon aflat pe insulele <code>1</code>, <code>2</code>, <code>3</code> sau <code>4</code> este deci <code>20</code> (dragonul de pe insula <code>4</code>). Se observă că dragonul care poate zbura o distanță de <code>26</code> se afla pe insula 5 și este inaccesibil.</p>
+
+
+<h1>Exemplul 1</h1>
+
+<p><code>dragoni.in</code></p>
+
+<pre>2
+5 6
+6 3 13 20 26
+1 2 5
+1 3 7
+1 5 10
+2 3 6
+3 4 5
+3 5 14</pre>
+
+<p><code>dragoni.out</code></p>
+
+<pre>28</pre>
+
+<h1>Explicație</h1>
+
+<p><code>p = 2</code> deci se va rezolva cerința a).</p>
+
+<p>Există <code>N = 5</code> insule și <code>M = 6</code> rute între ele. Pentru a parcurge o distanță minimă de <code>28</code> între insulele <code>1</code> și <code>N</code>, Hiccup face următorii pași:</p>
+
+<ul>
+	<li>Zboară de pe insula <code>1</code> pe insula <code>2</code> o distanță de <code>5</code> cu dragonul din specia <code>1</code>.</li>
+	<li>Zboară de pe insula <code>2</code> pe insula <code>3</code> o distanță de <code>6</code> cu dragonul din specia <code>1</code>.</li>
+	<li>Schimbă dragonul din specia <code>1</code> cu dragonul aflat pe insula <code>3</code>, care poate zbura o distanță maximă de <code>13</code>.</li>
+	<li>Zboară de pe insula <code>3</code> pe insula <code>1</code> o distanță de <code>7</code> cu dragonul din specia <code>3</code>.</li>
+	<li>Zboară de pe insula <code>1</code> pe insula <code>5</code> o distanță de <code>10</code> cu dragonul din specia <code>3</code>.</li>
+</ul>
+
+<p>În total el parcurge o distanță de <code>5 + 6 + 7 + 10 = 28</code>.</p>		</article>
+		</body></html>

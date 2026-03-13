@@ -1,0 +1,124 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4393"><article id="enunt">
+			<p>Alex, eroina din Minecraft, este foarte curajoasă și harnică. De-a lungul timpului, ea a depozitat în <code>n</code> cufere tot felul de obiecte fragile (de exemplu ouă) sau dure (de exemplu pietre).</p>
+
+<p>Un cufăr este o cutie de lemn cu <code>27</code> de compartimente dispuse pe <code>3</code> rânduri, câte <code>9</code> pe fiecare rând. Într-un compartiment poate fi depozitat un grup de unul sau mai multe obiecte <strong>identice</strong>: maximum <code>16</code> obiecte fragile sau maximum <code>64</code> de obiecte dure. Pot fi mai multe compartimente care să conțină același tip de obiecte, iar unele compartimente pot fi goale.</p>
+
+<p><img align="right" alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-cufere-01-jpg.jpg" style="width:300px;"></p>
+
+<p>Alex a etichetat atât compartimentele, cât și obiectele, cu numere construite după următoarea regulă:</p>
+
+<ul>
+	<li>un obiect are drept etichetă un număr natural cuprins între <code>10</code> și <code>99</code>, inclusiv, astfel: un număr prim, dacă este fragil, sau un număr compus, dacă este dur;</li>
+	<li>toate obiectele identice primesc aceeași etichetă;</li>
+	<li>un compartiment are drept etichetă un număr natural format din două valori alipite: numărul obiectelor din grupul depozitat în el, urmat de eticheta comună a acestora (de exemplu dacă eticheta compartimentului este <code>1994</code>, înseamnă că în el este depozitat un grup de <code>19</code> obiecte, fiecare având eticheta <code>94</code>);</li>
+	<li>compartimentele goale sunt etichetate cu <code>0</code>.</li>
+</ul>
+
+<p>Alex vrea să rearanjeze obiectele din cufere, astfel încât:</p>
+
+<ul>
+	<li>să fie valorificat spațiul, adică să fie ocupate cât mai puține cufere și, în cadrul unui cufăr, cât mai puține compartimente;</li>
+	<li>să fie ocupate compartimentele din cuferele disponibile la rând, începând cu primul cufăr, și, în cadrul unui cufăr, începând cu primul rând și, în cadrul unui rând, de la stânga la dreapta. Cu alte cuvinte, se umple mai întâi cufărul <code>1</code>, începând cu rândul <code>1</code>, și pe fiecare rând de la stânga la dreapta, apoi cufărul al doilea, în aceeași manieră, și așa mai departe;</li>
+	<li>obiectele sunt preluate în ordinea crescătoare a etichetelor și din totalul obiectelor identice se formează mai întâi grupuri cu număr maxim de obiecte, și doar ultimul grup poate fi, eventual, incomplet;</li>
+	<li>fiecare din aceste grupuri se depozitează, pe măsura formării, în câte un compartiment al cufărului curent, iar dacă acesta se umple, se trece la cufărul următor.</li>
+</ul>
+
+<p>După rearanjarea obiectelor, compartimentele sunt etichetate din nou, după aceeași regulă.</p>
+
+<h1>Cerința</h1>
+
+<p>Dându-se cele <code>n</code> cufere, care conțin obiectele în ordinea inițială, Alex vă roagă să realizați un program care să determine:</p>
+
+<ul>
+	<li>pentru fiecare etichetă distinctă de obiect întâlnit în cele <code>n</code> cufere, numărul total al obiectelor cu acea etichetă;</li>
+	<li>noile etichete ale compartimentelor care compun cele <code>n</code> cufere, după rearanjarea obiectelor.</li>
+</ul>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>cufere.in</code> conține pe prima linie numărul <code>c</code> reprezentând cerința care trebuie să fie rezolvată (<code>1</code> sau <code>2</code>), pe a doua linie numărul natural nenul <code>n</code>, cu semnificația din enunț, iar pe fiecare din următoarele <code>3n</code> linii, câte <code>9</code> numere, reprezentând etichetele inițiale ale compartimentelor aflate pe câte un rând al unui cufăr, în ordinea în care ele se află în cufere, de la primul cufăr, până la ultimul, în cadrul fiecărui cufăr de la primul rând până la al treilea, iar în cadrul fiecărui rând de la stânga la dreapta. Numerele aflate pe aceeași linie a fișierului sunt separate prin câte un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>cufere.out</code> va conține fie răspunsul pentru cerința 1 (dacă <code>c=1</code>), fie răspunsul pentru cerința 2 (dacă <code>c=2</code>).<br>
+Pentru cerința 1, pentru fiecare etichetă distinctă, în ordine strict crescătoare, se va afișa o pereche formată din eticheta respectivă și numărul obiectelor cu această etichetă. Fiecare pereche de numere va fi afișată pe câte o linie.<br>
+Pentru cerința 2, etichetele compartimentelor vor fi afișate corespunzător plasării lor în cufere, câte 9 pe fiecare linie a fișierului, de la primul cufăr până la ultimul, în cadrul fiecărui cufăr de la primul rând până la al treilea, iar în cadrul fiecărui rând de la stânga la dreapta.<br>
+Numerele aflate pe aceeași linie a fișierului sunt separate prin câte un spațiu.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>c ∈ {1, 2}</code></li>
+	<li><code>1 ≤ n ≤ 10.000</code></li>
+	<li>Eticheta unui obiect este cuprinsă între <code>10</code> și <code>99</code>, inclusiv.</li>
+	<li>În cazul cerinței 2 se vor afișa etichetele pentru toate compartimentele, chiar dacă ele sunt goale sau provin din cufere complet goale.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>cufere.in</code></p>
+
+<pre>1
+2
+1488 1573 1437 4465 1099 1073 0 499 765
+537 1173 4288 1273 2299 1555 1241 655 841
+1141 237 5621 199 921 621 3465 1315 4155
+1099 341 4765 6155 355 1099 6088 3988 255
+4955 155 1329 1932 3099 114 3020 855 5555
+1173 1388 673 2533 1488 1473 4033 2099 2065</pre>
+
+<p><code>cufere.out</code></p>
+
+<pre>14 1
+15 13
+20 30
+21 71
+29 13
+32 19
+33 65
+37 21
+41 34
+55 241
+65 152
+73 79
+88 182
+99 107</pre>
+
+<h3>Explicație</h3>
+
+<p>Se va rezolva cerința <code>c=1</code> și există <code>n=2</code> cufere. În cufere există:</p>
+
+<ul>
+	<li><code>1</code> obiect cu eticheta <code>14</code>;</li>
+	<li><code>13</code> obiecte cu eticheta <code>15</code>;</li>
+	<li><code>30</code> de obiecte cu eticheta <code>20</code>;</li>
+	<li><code>...</code></li>
+	<li><code>107</code> obiecte cu eticheta <code>99</code>.</li>
+</ul>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>cufere.in</code></p>
+
+<pre>2
+2
+1488 1573 1437 4465 1099 1073 0 499 765
+537 1173 4288 1273 2299 1555 1241 655 841
+1141 237 5621 199 921 621 3465 1315 4155
+1099 341 4765 6155 355 1099 6088 3988 255
+4955 155 1329 1932 3099 114 3020 855 5555
+1173 1388 673 2533 1488 1473 4033 2099 2065</pre>
+
+<p><code>cufere.out</code></p>
+
+<pre>114 1315 3020 6421 721 1329 1932 6433 133
+1637 537 1641 1641 241 6455 6455 6455 4955
+6465 6465 2465 1673 1673 1673 1673 1573 6488
+6488 5488 6499 4399 0 0 0 0 0
+0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0</pre>
+
+<h3>Explicație</h3>
+
+<p>În acest exemplu se va rezolva cerința <code>c=2</code> și există <code>n=2</code> cufere. După rearanjare, s-au plasat obiectele în ordinea crescătoare a etichetelor. Pentru primele trei etichete se formează câte un singur grup, aceastea fiind plasate în primele trei compartimente ale primului cufăr. Apoi, cele <code>71</code> de obiecte cu eticheta <code>21</code> (dure), sunt împărțite într-un grup de <code>64</code> (în compartimentul al patrulea), și un grup de <code>7</code> (în compartimentul al cincilea). La fel se procedează și cu celelalte obiecte, astfel încât primul cufăr este ocupat complet, primul rând al celui de-al doilea cufăr este parțial ocupat, la stânga, iar ultimele sale două rânduri sunt goale.</p>		</article>
+		</body></html>

@@ -1,0 +1,151 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3863"><article id="enunt">
+			<p><strong>Dungeon Crawl: Paper Soup</strong> tocmai a devenit cel mai popular joc, iar tu eşti pe cale să îl încerci. Jocul se desfăşoară pe un teren dreptunghiular cu <code>N</code> linii și <code>M</code> coloane, unde fiecare celulă este de unul dintre cele cinci tipuri descrise mai jos:</p>
+
+<ul>
+	<li>celulă liberă <code>.</code></li>
+	<li>perete <code>#</code></li>
+	<li>celulă cu monedă <code>o</code></li>
+	<li>celulă cu mină explozivă <code>X</code></li>
+	<li>celulă de start <code>S</code></li>
+</ul>
+
+<p>Se garantează că pe prima, respectiv ultima linie și coloană se află pereţi (de precizat că este imposibilă deplasarea prin pereți). Terenul poate conţine una sau mai multe celule de start. În momentul în care jocul începe, jucătorul va fi poziţionat iniţial într-una dintre celulele de start, marcate cu <code>S</code>. Deoarece jocul se desfăşoară într-un sistem de peşteri cu vizibilitate redusă (vezi numele jocului), jucătorul nu poate vedea toată harta, ci doar o zona de vizibilitate restrânsă, reprezentată de un pătrat de <code>3 x 3</code> centrat în poziţia sa curentă. Mai mult, în această zonă de vizibilitate minele și celulele de start apar drept celule libere (sunt invizibile pentru jucător).</p>
+
+<p>La fiecare pas, jucătorul poate să se mişte pe direcțiile <code>nord</code>, <code>sud</code>, <code>est</code> sau <code>vest</code>. Dacă acesta ajunge pe o poziţie cu o monedă, colectează moneda, iar aceasta dispare de pe hartă. Dacă acesta ajunge pe o poziţie cu mină, sistemul de peşteri se prăbuşeste, jucătorul pierde toate monezile colectate până în acel moment, iar jocul se termină.</p>
+
+<h1>Cerința</h1>
+
+<p>Din fericire, urmărind diverse ghiduri pe internet ai aflat harta exactă a terenului, însă nu ştii în care dintre punctele de start vei fi repartizat. Este garantat însă că vei porni dintr-o celulă de start. Considerând că vei adopta cea mai bună strategie, care este numărul maxim de monezi pe care îl poţi obține garantat, indiferent de unde vei fi poziţionat la început?</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a intrării standard se vor găsi valorile <code>N</code> şi <code>M</code>: dimensiunile terenului pe care se va desfăşura jocul, conform ghidurilor de pe internet. Următoarele <code>N</code> linii conţin fiecare câte un şir de caractere de lungime <code>M</code>, reprezentând harta conform codificării descrise în enunţ.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>La ecran se va afişa un singur număr natural, numărul maxim de monezi care se poate obţine garantat pe acel teren.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>Fie <code>S</code> numărul de celule de start ce se află pe hartă. <code>N ≤ 400</code>, <code>M ≤ 400</code>, <code>S ≤ 60</code>.</li>
+	<li>Pentru 3 puncte, <code>S = 1</code>, nu există mine și cu excepția primei și ultimei coloane și nu există pereți.</li>
+	<li>Pentru 7 puncte, <code>N = 3</code></li>
+	<li>Pentru 12 puncte, <code>S = 1</code></li>
+	<li>Pentru 23 puncte, <code>S = 2</code></li>
+	<li>Pentru 41 puncte, <code>1 ≤ N, M ≤ 250</code>, <code>1 ≤ S ≤ 12</code></li>
+	<li>Pentru 14 puncte, nicio restricție suplimentară</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>3 7
+#######
+#Soooo#
+#######</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>4</pre>
+
+<h3>Explicație</h3>
+
+<p>Există o singură poziție de start, deci știm exact de unde va porni jucătorul. În acest caz, jucătorul poate colecta toate monezile.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>3 8
+########
+#SoXooS#
+########</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>1</pre>
+
+<h3>Explicație</h3>
+
+<p>Sunt două poziții de start, iar jucătorul poate deduce unde este poziționat pe baza zonei de vizibilitate (<code>P</code> este poziția jucătorului):</p>
+
+<p><code>###</code>  <code>###</code><br>
+<code>#Po</code>  <code>oP#</code><br>
+<code>###</code>  <code>###</code></p>
+
+<p>Numărul maxim de monezi pe care le poate colecta jucătorul dacă pornește din partea stângă este <code>1</code>, respectiv <code>2</code> dacă pornește din partea dreaptă. Deci, pe cel mai rău caz, putem colecta o monedă.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>7 18
+##################
+#................#
+#.o...SX.......o.#
+#.o...X..X.....o.#
+#.o.....XS.....o.#
+#................#
+##################</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>0</pre>
+
+<h3>Explicație</h3>
+
+<p>În orice direcţie s-ar mişca iniţial jucătorul, pe caz nefavorabil se va afla o mină în direcţia respectivă.<br>
+Zona de vizibilitate iniţială este (<code>P</code> este poziția jucătorului):</p>
+
+<p><code>...</code><br>
+<code>.P.</code><br>
+<code>...</code></p>
+
+<h1>Exemplul4:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>7 18
+##################
+#....#...........#
+#.o...SX.......o.#
+#.o...X..X.....o.#
+#.o.....XS.....o.#
+#.........#......#
+##################</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>6</pre>
+
+<h3>Explicație</h3>
+
+<p>Jucătorul îşi poate da seama în care celulă a fost plasat iniţial, analizând zona de vizibilitate. Mai exact, acesta se uită dacă iniţial vede un perete în stânga-sus sau dreapta-jos; astfel, ştie exact cum să se poziţioneze pentru a evita minele. Zonele de vizibilitate iniţiale aferente celor două poziţii sunt (<code>P</code> este poziția jucătorului):</p>
+
+<p><code>#..</code> <code>...</code><br>
+<code>.P.</code> <code>.P.</code><br>
+<code>...</code> <code>..#</code></p>
+
+<h1>Exemplul 5:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>7 18
+##################
+#......X..S....oo#
+##################
+#..o..S.X......o.#
+##########X#######
+#o.....S...X.....#
+##################</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>1</pre>
+
+<h3>Explicație</h3>
+
+<p>Jucătorul se mută <code>2</code> paşi la stânga. Dacă vede o monedă la stânga, deduce că este în zona din mijloc, o culege şi termină jocul. Dacă nu, ştie că nu este în zona din mijloc, aşa că se mută la dreapta <code>4</code> pași. Observând mai apoi dacă există spaţiu liber în dreapta-sus (minele sunt văzute drept spaţii libere), poate deduce dacă se află în zona de sus sau zona de jos. În ambele cazuri, este liber să colecteze moneda/monezile corespunzătoare. În cel mai nefavorabil caz, însă, va putea colecta o singură monedă. Se poate observa că jucătorul nu se putea muta iniţial spre dreapta, deoarece ar fi riscat să atingă mina din centru pe caz nefavorabil.</p>		</article>
+		</body></html>

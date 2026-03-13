@@ -1,0 +1,50 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4413"><article id="enunt">
+			<p>În cel mai recent eveniment al companiei Tesla, Paul Musk a anunțat un nou produs inovativ: parcarea autonomă. Fiind cunoscut pentru lansările produselor incomplete, nici parcarea nu este completă, fiind nevoie de o automatizare pentru a atribui  câte un loc mașinilor care vor să folosească parcarea. Parcarea este formată din <code>N</code> locuri, numerotate de la <code>1</code> la <code>N</code>, și este deschisă timp de <code>T</code> secunde, începând cu secunda <code>1</code>. Pe parcursul zilei, sosesc <code>M</code> mașini care vor să folosească parcarea, pentru fiecare dintre acestea știindu-se timpul de sosire <code>s[i]</code> și timpul de plecare <code>p[i]</code>. Mașinile vin în ordinea timpului de sosire <code>s[i]</code> și ocupă locul de parcare în intervalul de timp <code>[ s[i], p[i] ]</code>. Pentru fiecare dintre acestea, trebuie să afișați un loc liber de parcare (dacă sunt mai multe, se poate afișa oricare) în care aceasta se poate așeza sau <code>-1</code> dacă parcarea este plină în momentul venirii mașinii. Dacă o mașină nu are loc în parcare la timpul de sosire, aceasta nu va mai intra în parcare la niciun timp viitor.</p>
+
+<h1>Cerința</h1>
+
+<p>La final, Paul este interesat de mașinile care mai sunt rămase în parcare la închiderea parcării, de aceea vă cere să afișați configurația parcării la timpul <code>T</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului de intrare <code>parcare.in</code> se găsesc trei numere întregi <code>N, M</code> și  <code>T</code>, reprezentând numărul de locuri din parcare, numărul de mașini care vin să folosească parcarea, respectiv numărul de secunde pentru care este deschisă parcarea. Următoarele <code>M</code> linii conțin fiecare câte două numere întregi <code>s[i], p[i]</code>, reprezentând venirea unei mașini la secunda <code>s_i</code> care va pleca la secunda <code>p_i</code>. Mașinile apar în fișierul de intrare în ordine crescătoare după timpul de sosire <code>s_i</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>În fișierul de ieșire <code>parcare.out</code> se vor afișa <code>M + 1</code> linii în total, primele <code>M</code> linii conținând fiecare câte un număr întreg între <code>1</code> și <code>N</code> reprezentând locul de parcare pe care îl va ocupa mașina, sau <code>-1</code> dacă nu există niciun loc de parcare disponibil.</p>
+
+<p>Ultima linie va conține <code>N</code> numere întregi, reprezentând configurația parcării la închidere, unde cel de-al <code>i</code>-lea număr reprezintă <strong>timpul de sosire</strong> al mașinii de pe locul de parcare <code>i</code>, sau <code>-1</code> dacă locul de parcare <code>i</code> este gol.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N, M, T ≤ 200.000</code></li>
+	<li><code>1 ≤ s[i] ≤ T</code></li>
+	<li><code>1 ≤ s[i] &lt; p[i] ≤ 200.000</code></li>
+	<li>Considerând următoarele <code>2M</code> valori: <code>s[1], s[2], ..., s[M], p[1], p[2], ..., p[M]</code>, acestea sunt distincte două câte două.</li>
+	<li>Dacă există mai multe soluții, se poate afișa oricare dintre acestea.</li>
+	<li>Datorită dimensiunilor mari, nu au putut fi adăugate toate testele.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>parcare.in</code></p>
+
+<pre>2 4 6
+1 3
+2 10
+4 6
+5 8</pre>
+
+<p><code>parcare.out</code></p>
+
+<pre>2
+1
+2
+-1
+2 -1</pre>
+
+<h3>Explicație</h3>
+
+<p>Prima mașină sosește în secunda <code>1</code> și este parcată pe locul <code>2</code>. A doua mașină sosește în secunda <code>2</code> și este parcată pe locul <code>1</code>. În secunda <code>3</code> se eliberează locul <code>2</code>. Cea de-a treia mașină sosește în secunda <code>4</code> și ocupă locul <code>2</code>. Mașina sosită în secunda <code>5</code> nu găsește loc liber. În secunda <code>6</code> se eliberează locul <code>2</code>. După închiderea parcării, pe locul <code>1</code> va fi parcată mașina venită în secunda <code>2</code>, locul al doilea fiind liber.</p>		</article>
+		</body></html>

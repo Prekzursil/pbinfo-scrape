@@ -1,0 +1,131 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4966"><article id="enunt">
+			<p>Se consideră un număr natural <code>N</code> și un șir <code>A=(a[1], a[2], a[3], ..., a[N])</code> format din <code>N</code> numere naturale nenule. </p>
+
+<p>Definim <code>S(i,j)</code> ca fiind egal cu suma <code> a[i] + a[i+1] + a[i+2] + ... + a[j]</code>, unde <code>1 ≤ i ≤ j ≤ N</code>. </p>
+
+<h1>Cerința</h1>
+
+<p>Se cunosc numărul <code>N</code> și șirul <code>A</code>. Scrieți un program care să determine răspunsurile pentru următoarele trei întrebări:<br>
+1. Există o poziție <code>i</code> (<code>1 ≤ i &lt; N</code>) cu proprietatea că <code>S(1, i) = S(i+1, N)</code>?<br>
+2. Există o poziție <code>i</code> (<code>1 &lt; i &lt; N</code>) cu proprietatea că <code>S(1,i-1) = S(i+1,N)</code>?<br>
+3. Există două poziții <code>i</code> și <code>j</code> (<code>1 &lt; i</code> și <code>i+1 &lt; j &lt; N</code>) cu proprietatea că <code>S(1,i-1) = S(i+1,j-1) = S(j+1,N)</code>?</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>zudt.in</code> conține:  </p>
+
+<ul>
+	<li>pe prima linie, un număr natural <code>C</code> (<code>1</code>, <code>2</code> sau <code>3</code>) reprezentând cerința care trebuie rezolvată;</li>
+	<li>pe a doua linie, numărul natural <code>N</code> cu semnificația din enunț;</li>
+	<li>pe a treia linie, conține <code>N</code> numere naturale nenule, separate prin câte un spațiu, reprezentând elementele șirului <code>A</code>.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>zudt.out</code> va conține pe prima linie răspunsul determinat pentru cerința <code>C</code>: </p>
+
+<ul>
+	<li>Pentru <code>C = 1</code>, prima linie conține un număr natural reprezentând răspunsul la prima intrebare. Dacă există o astfel de poziție <code>i</code> astfel încât <code>S(1,i) = S(i+1,N)</code>, atunci răspunsul este numărul <code>i</code>. Dacă nu există, atunci răspunsul este numărul <code>0</code>.</li>
+	<li>Pentru <code>C = 2</code>, prima linie conține un număr natural reprezentând răspunsul la a doua intrebare. Dacă există o astfel de poziție <code>i</code> astfel încât <code>S(1,i-1) = S(i+1,N)</code>, atunci răspunsul este numărul <code>i</code>. Dacă nu există, atunci răspunsul este numărul <code>0</code>.</li>
+	<li>Pentru <code>C = 3</code>, prima linie conține două numere naturale, separate printr-un singur spațiu, reprezentând răspunsul la a treia intrebare. Dacă există două poziții distincte <code>i</code> și <code>j</code> astfel încât <code>S(1,i-1) = S(i+1,j-1) = S(j+1, N)</code>, atunci răspunsul este format din numărul <code>i</code> și numărul <code>j</code>, în această ordine. Dacă nu există, atunci răspunsul este numărul <code>0</code>.</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>C ∈ {1, 2, 3}</code></li>
+	<li><code>5 ≤ N ≤ 200.000</code></li>
+	<li><code>1 ≤ a[i] ≤ 1000</code>, <code>i = 1, 2, ..., N</code></li>
+	<li><code>S(i,i) = a[i]</code>, <code>i = 1, 2, ..., N</code></li>
+	<li>Pentru 60 de puncte, <code>C = 1</code> și <code>N ≤ 1000</code></li>
+	<li>Pentru 20 de puncte, <code>C = 2</code> și <code>N ≤ 200.000</code></li>
+	<li>Pentru 20 de puncte, <code>C = 3</code> și <code>N ≤ 200.000</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>zudt.in</code></p>
+
+<pre>1
+9
+2 3 1 4 2 4 4 5 15</pre>
+
+<p><code>zudt.out</code></p>
+
+<pre>7</pre>
+
+<h3>Explicație</h3>
+
+<p><code>i = 7</code>, <code>S(1, 7)=20</code> și <code>S(8,9)=20</code></p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>zudt.in</code></p>
+
+<pre>1
+5
+2 3 1 4 6</pre>
+
+<p><code>zudt.out</code></p>
+
+<pre>0</pre>
+
+<h3>Explicație</h3>
+
+<p>Nu există o poziție <code>i</code> cu proprietatea cerută.<br>
+<code>S(1,1)=2</code>, <code>S(2,5)=14</code>, <code>2 ≠ 14</code><br>
+<code>S(1,2)=3</code>, <code>S(3,5)=13</code>, <code>3 ≠ 13</code><br>
+<code>S(1,3)=6</code>, <code>S(4,5)=10</code>, <code>6 ≠ 10</code><br>
+<code>S(1,4)=10</code>, <code>S(5,5)=6</code>, <code>10 ≠ 5</code></p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>zudt.in</code></p>
+
+<pre>2
+5
+2 3 1 4 2</pre>
+
+<p><code>zudt.out</code></p>
+
+<pre>0</pre>
+
+<h3>Explicație</h3>
+
+<p>Nu există o poziție <code>i</code> cu proprietatea cerută.<br>
+<code>i=2</code>, <code>S(1,1)=2</code>, <code>S(3,5)=7</code>, <code>2 ≠ 7</code><br>
+<code>i=3</code>, <code>S(1,2)=5</code>, <code>S(4,5)=6</code>, <code>5 ≠ 6</code><br>
+<code>i=4</code>, <code>S(1,3)=6</code>, <code>S(5,5)=2</code>, <code>6 ≠ 2</code></p>
+
+<h1>Exemplul 4:</h1>
+
+<p><code>zudt.in</code></p>
+
+<pre>2
+9
+2 3 1 4 202 7 1 1 1</pre>
+
+<p><code>zudt.out</code></p>
+
+<pre>5</pre>
+
+<h3>Explicație</h3>
+
+<p><code>i=5</code>, <code>S(1,4)=10</code> și <code>S(6,9)=10</code></p>
+
+<h1>Exemplul 5:</h1>
+
+<p><code>zudt.in</code></p>
+
+<pre>3
+9
+2 3 1 8 6 7 2 2 2</pre>
+
+<p><code>zudt.out</code></p>
+
+<pre>4 6</pre>
+
+<h3>Explicație</h3>
+
+<p><code>i = 4</code> și <code>j = 6</code>, <code>S(1,3) = 6</code>, <code>S(5,5) = 6</code> și <code>S(7,9) = 6</code></p>		</article>
+		</body></html>

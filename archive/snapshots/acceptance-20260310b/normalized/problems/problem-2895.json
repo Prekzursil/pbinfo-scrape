@@ -1,0 +1,302 @@
+{
+  "id": 2895,
+  "slug": "supermarket",
+  "name": "supermarket",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/2895/supermarket",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 85,
+      "name": "Structuri de date liniare",
+      "slug": "structuri-de-date-liniare",
+      "href": "/?pagina=probleme-lista&tag=85"
+    },
+    {
+      "id": 87,
+      "name": "Coada",
+      "slug": "coada",
+      "href": "/?pagina=probleme-lista&tag=87"
+    }
+  ],
+  "tags": [
+    "Coada"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Scrieți un program care procesează cozile de la casele de marcat. Acest program primește <code>N</code> instrucțiuni pe care trebuie să le execute. Aceste instrucțiuni pot fi de următoarele 4 tipuri:</p><ul>\n\t<li><code>1</code> – S-a eliberat casa de marcat numărul <code>1</code>. Trebuie afișat numărul clientului care urmează la rând; dacă nu este nimeni la coadă la casa respectivă, se va afișa <code>-1</code>.</li>\n\t<li><code>2</code> – S-a eliberat casa de marcat numărul <code>2</code>. Trebuie afișat numărul clientului care urmează la rând; dacă nu este nimeni la coadă la casa respectivă, se va afișa <code>-1</code>.</li>\n\t<li><code>3 x</code> – Clientul cu numărul <code>x</code> se așază la coadă la casa la care așteaptă mai puțini clienți; dacă la ambele case așteaptă același număr de clienți, atunci clientul cu numărul <code>x</code> se va așeza la coadă la casa <code>1</code>; trebuie afișată coada la care se așază clientul <code>x</code>. Se garantează că acest client nu este deja așezat la vreun la rând.</li>\n\t<li><code>4 x</code> – Clientul cu numărul <code>x</code> părăsește rândul la care așteaptă (se garantează că era deja la un rând); în acest caz nu trebuie afișat nimic.</li>\n</ul>",
+      "text": "Scrieți un program care procesează cozile de la casele de marcat. Acest program primește N instrucțiuni pe care trebuie să le execute. Aceste instrucțiuni pot fi de următoarele 4 tipuri: 1 – S-a eliberat casa de marcat numărul 1. Trebuie afișat numărul clientului care urmează la rând; dacă nu este nimeni la coadă la casa respectivă, se va afișa -1. 2 – S-a eliberat casa de marcat numărul 2. Trebuie afișat numărul clientului care urmează la rând; dacă nu este nimeni la coadă la casa respectivă, se va afișa -1. 3 x – Clientul cu numărul x se așază la coadă la casa la care așteaptă mai puțini clienți; dacă la ambele case așteaptă același număr de clienți, atunci clientul cu numărul x se va așeza la coadă la casa 1; trebuie afișată coada la care se așază clientul x. Se garantează că acest client nu este deja așezat la vreun la rând. 4 x – Clientul cu numărul x părăsește rândul la care așteaptă (se garantează că era deja la un rând); în acest caz nu trebuie afișat nimic."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>supermarket.in</code> conţine pe prima linie numărul de instrucțiuni <code>N</code>. Pe fiecare dintre următoarele <code>N</code> linii se află câte o instrucțiune, în forma descrisă la cerinţă.</p>",
+      "text": "Fișierul de intrare supermarket.in conţine pe prima linie numărul de instrucțiuni N. Pe fiecare dintre următoarele N linii se află câte o instrucțiune, în forma descrisă la cerinţă."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>supermarket.out</code> va conţine rezultatele afişate în urma executării instrucţiunilor din fişierul de intrare, în ordinea din fişier, câte un rezultat pe o linie.</p>",
+      "text": "Fișierul de ieșire supermarket.out va conţine rezultatele afişate în urma executării instrucţiunilor din fişierul de intrare, în ordinea din fişier, câte un rezultat pe o linie."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>4 ≤ N ≤ 100.000</code></li>\n\t<li><code>1 ≤ x ≤ 1.000.000</code></li>\n\t<li>Pentru teste valorând <code>30</code> de puncte, <code>4 ≤ N ≤ 1.000</code></li>\n\t<li>Pentru teste valorând <code>30</code> de puncte nu vor exista instrucțiuni de tipul <code>4</code>.</li>\n\t<li>Un client care a părăsit la un moment dat rândul (fie în urma unei instrucțiuni de tipul <code>4</code>, fie datorită faptului că a plătit la casă), se poate întoarce și se poate așeza din nou rând (ca și cum ar fi venit prima dată).</li>\n</ul>",
+      "text": "4 ≤ N ≤ 100.000 1 ≤ x ≤ 1.000.000 Pentru teste valorând 30 de puncte, 4 ≤ N ≤ 1.000 Pentru teste valorând 30 de puncte nu vor exista instrucțiuni de tipul 4. Un client care a părăsit la un moment dat rândul (fie în urma unei instrucțiuni de tipul 4, fie datorită faptului că a plătit la casă), se poate întoarce și se poate așeza din nou rând (ca și cum ar fi venit prima dată)."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>supermarket.in</code></p><pre>10\n3 5\n3 21\n3 7\n2\n1\n2\n3 5\n3 8\n4 7\n1</pre><p><code>supermarket.out</code></p><pre>1\n2\n1\n21\n5\n-1\n2\n1\n8</pre><h3>Explicație</h3><p>Clientul <code>5</code> se aşază la rând la casa <code>1</code><br>\nClientul <code>21</code> se aşază la rând la casa <code>2</code><br>\nClientul <code>7</code> se aşază la rând la casa <code>1</code><br>\nLa casa <code>2</code> intră clientul <code>21</code><br>\nLa casa <code>1</code> intră clientul <code>5</code><br>\nLa casa <code>2</code> nu este nimeni în așteptare <br>\nClientul <code>5</code> se aşază la rând la casa <code>2</code><br>\nClientul <code>8</code> se aşază la rând la casa <code>1</code><br>\nClientul <code>7</code> părăseşte rândul (nu se afişează nimic)<br>\nLa casa <code>1</code> intră clientul <code>8</code></p>",
+      "text": "supermarket.in10 3 5 3 21 3 7 2 1 2 3 5 3 8 4 7 1supermarket.out1 2 1 21 5 -1 2 1 8ExplicațieClientul 5 se aşază la rând la casa 1 Clientul 21 se aşază la rând la casa 2 Clientul 7 se aşază la rând la casa 1 La casa 2 intră clientul 21 La casa 1 intră clientul 5 La casa 2 nu este nimeni în așteptare Clientul 5 se aşază la rând la casa 2 Clientul 8 se aşază la rând la casa 1 Clientul 7 părăseşte rândul (nu se afişează nimic) La casa 1 intră clientul 8"
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Clientul 5 se aşază la rând la casa 1 Clientul 21 se aşază la rând la casa 2 Clientul 7 se aşază la rând la casa 1 La casa 2 intră clientul 21 La casa 1 intră clientul 5 La casa 2 nu este nimeni în așteptare Clientul 5 se aşază la rând la casa 2 Clientul 8 se aşază la rând la casa 1 Clientul 7 părăseşte rândul (nu se afişează nimic) La casa 1 intră clientul 8"
+    }
+  ],
+  "constraints": [
+    "4 ≤ N ≤ 100.000",
+    "1 ≤ x ≤ 1.000.000",
+    "Pentru teste valorând 30 de puncte, 4 ≤ N ≤ 1.000",
+    "Pentru teste valorând 30 de puncte nu vor exista instrucțiuni de tipul 4.",
+    "Un client care a părăsit la un moment dat rândul (fie în urma unei instrucțiuni de tipul 4, fie datorită faptului că a plătit la casă), se poate întoarce și se poate așeza din nou rând (ca și cum ar fi venit prima dată)."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qe2880943ab.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "10",
+    "intrare/ieșire": "supermarket.in / supermarket.out",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "32 MB / 2 MB",
+    "sursa problemei": "Olimpiada Municipală Iași, clasa a X-a",
+    "autor": "Alexandru Ioniță",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 32,
+  "author": "Alexandru Ioniță",
+  "sourceAttribution": "Olimpiada Municipală Iași, clasa a X-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/2895/supermarket"
+}

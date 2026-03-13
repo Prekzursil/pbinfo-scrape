@@ -1,0 +1,149 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1998"><article id="enunt">
+			<p><span class="caps">NASA</span> plănuiește o nouă misiune Rover pe Marte în anul 2020. Principalul obiectiv al acestei misiuni este de a determina, cu ajutorul unui nou Rover, dacă a existat în trecut viață pe Marte. Până când va fi lansată misiunea, Roverul este supus la tot felul de teste în laboratoarele <span class="caps">NASA</span>. Într-unul din teste, Roverul trebuie să parcurgă o suprafață de forma unui caroiaj cu <code>N</code> linii și <code>N</code> coloane. Acesta pornește din zona de coordonate <code>(1,1)</code> și trebuie să ajungă în zona de coordonate <code>(N,N)</code>, la fiecare pas putându-se deplasa din zona în care se află într-una din zonele învecinate la nord, sud, est sau vest. Pentru fiecare zonă de coordonate <code>(i,j)</code> se cunoaște <code>A[i,j]</code>, stabilitatea terenului din acea zonă. Știind că Roverul are o greutate <code>G</code>, o zonă cu stabilitatea terenului cel puțin egală cu <code>G</code> se consideră o zonă sigură pentru deplasarea Roverului, iar o zonă cu stabilitatea terenului mai mică decât <code>G</code> se consideră o zonă periculoasă pentru Rover.</p>
+
+<h1>Cerințe</h1>
+
+<p>1. Determinați numărul minim posibil de zone periculoase pe care le traversează Roverul pentru a ajunge din zona <code>(1,1)</code> în zona <code>(N,N)</code>.<br>
+2. Determinați greutatea maximă pe care o poate avea un Rover care să ajungă din zona <code>(1,1)</code> în zona <code>(N,N)</code>, fără a traversa nicio zonă periculoasă pentru el.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>rover.in</code> conține pe prima linie numărul natural <code>V</code> a cărui valoare poate fi doar <code>1</code> sau <code>2</code>. Dacă <code>V</code> este <code>1</code>, pe a doua linie a fișierului de intrare se găsesc două numere naturale <code>N</code> și <code>G</code> cu semnificația din enunț, iar dacă <code>V</code> este <code>2</code>, pe a doua linie a fișierului de intrare se află doar numărul <code>N</code>.</p>
+
+<p>Pe următoarele <code>N</code> linii se află câte <code>N</code> numere <code>A[i,j]</code>, reprezentând stabilitatea terenului din zona <code>(i,j)</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire este <code>rover.out</code>.</p>
+
+<p>Dacă valoarea lui <code>V</code> este <code>1</code>, atunci fișierul de ieșire va conține pe prima linie un număr natural reprezentând numărul minim de zone periculoase pe care trebuie să le traverseze Roverul de greutate <code>G</code>.</p>
+
+<p>Dacă valoarea lui <code>V</code> este <code>2</code>, atunci fișierul de ieșire va conține pe prima linie un număr natural reprezentând greutatea maximă a unui Rover care poate ajunge din zona <code>(1,1)</code> în zona <code>(N,N)</code> fără a traversa zone periculoase pentru el.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>Pentru 50% din teste <code>V = 1</code>, pentru 50 % din teste <code>V = 2</code>.</li>
+	<li><code>1 ≤ N ≤ 500</code></li>
+	<li><code>1 ≤ G ≤ 5000</code></li>
+	<li><code>1 ≤ A[i,j] ≤ 10000</code></li>
+	<li>Zonele de coordonate <code>(1,1)</code> și <code>(N,N)</code> nu sunt zone periculoase pentru Rover.</li>
+	<li>Roverul nu va trece de mai multe ori prin aceeași zonă.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>rover.in</code></p>
+
+<pre>1
+5 5
+5 1 3 4 7
+5 2 1 8 5
+2 9 5 3 3
+4 1 1 1 9
+5 1 6 1 8</pre>
+
+<p><code>rover.out</code></p>
+
+<pre>3</pre>
+
+<h3>Explicație</h3>
+
+<p>Numărul minim de zone periculoase traversate de la poziția <code>(1,1)</code> până la poziția <code>(5,5)</code> este 3. Un traseu posibil este:</p>
+
+<table class="table table-condensed">
+		<tbody><tr>
+			<td> <strong>5</strong> </td>
+			<td> 1 </td>
+			<td> 3 </td>
+			<td> 4 </td>
+			<td> 7 </td>
+		</tr>
+		<tr>
+			<td> <strong>5</strong> </td>
+			<td> <strong>2</strong> </td>
+			<td> 1 </td>
+			<td> 8 </td>
+			<td> 5 </td>
+		</tr>
+		<tr>
+			<td> 2 </td>
+			<td> <strong>9</strong> </td>
+			<td> <strong>5</strong> </td>
+			<td> <strong>3</strong> </td>
+			<td> <strong>3</strong> </td>
+		</tr>
+		<tr>
+			<td> 4 </td>
+			<td> 1 </td>
+			<td> 1 </td>
+			<td> 1 </td>
+			<td> <strong>9</strong> </td>
+		</tr>
+		<tr>
+			<td> 5 </td>
+			<td> 1 </td>
+			<td> 6 </td>
+			<td> 1 </td>
+			<td> <strong>8</strong> </td>
+		</tr>
+</tbody></table>
+
+<h1>Exemplul 2</h1>
+
+<p><code>rover.in</code></p>
+
+<pre>2
+5
+5 1 3 4 7
+5 2 1 8 5
+2 9 5 3 3
+4 1 1 1 9
+5 1 6 1 8</pre>
+
+<p><code>rover.out</code></p>
+
+<pre>2</pre>
+
+<h3>Explicație</h3>
+
+<p>Greutatea maximă a unui Rover care poate ajunge din zona <code>(1,1)</code> în zona <code>(5,5)</code> fără a trece prin zone periculoase pentru el este <code>2</code>. Un traseu posibil este:</p>
+
+<table class="table table-condensed">
+		<tbody><tr>
+			<td> <strong>5</strong> </td>
+			<td> 1 </td>
+			<td> 3 </td>
+			<td> 4 </td>
+			<td> 7 </td>
+		</tr>
+		<tr>
+			<td> <strong>5</strong> </td>
+			<td> <strong>2</strong> </td>
+			<td> 1 </td>
+			<td> 8 </td>
+			<td> 5 </td>
+		</tr>
+		<tr>
+			<td> 2 </td>
+			<td> <strong>9</strong> </td>
+			<td> <strong>5</strong> </td>
+			<td> <strong>3</strong> </td>
+			<td> <strong>3</strong> </td>
+		</tr>
+		<tr>
+			<td> 4 </td>
+			<td> 1 </td>
+			<td> 1 </td>
+			<td> 1 </td>
+			<td> <strong>9</strong> </td>
+		</tr>
+		<tr>
+			<td> 5 </td>
+			<td> 1 </td>
+			<td> 6 </td>
+			<td> 1 </td>
+			<td> <strong>8</strong> </td>
+		</tr>
+</tbody></table>		</article>
+		</body></html>

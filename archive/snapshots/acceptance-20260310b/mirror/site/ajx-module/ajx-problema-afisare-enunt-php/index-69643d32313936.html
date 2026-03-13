@@ -1,0 +1,96 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2196"><article id="enunt">
+			<p>Orice număr natural mai mare decât <code>2</code> poate fi scris ca sumă de numere naturale nenule aflate în ordine strict crescătoare, astfel încât orice termen al sumei, cu excepția primului termen, este un multiplu al termenului precedent din sumă. De exemplu, <code>27=3+6+18</code>, unde <code>6</code> este multiplul lui <code>3</code>, iar <code>18</code> este multiplul lui <code>6</code>. Cum se dorește o descompunere formată dintr-un număr cât mai mare de termeni, vom obține și descompuneri cu <code>4</code> termeni: <code>27=1+2+8+16</code>, <code>27=1+2+4+20</code>, <code>27=1+2+6+18</code>. Dintre cele trei descompuneri cu <code>4</code> termeni, descompunerea <code>27=1+2+4+20</code> este minimă din punct de vedere lexicografic (<code>1</code> și <code>2</code> sunt la fel în cele trei descompuneri, dar <code>4 &lt; 6</code> și <code>4 &lt; 8</code>). Numărul <code>30</code> poate fi descompus <code>30=2+4+8+16</code>. El are o descompunere tot de lungime <code>4</code>, dar este mai mare din punct de vedere lexicografic decât oricare dintre descompunerile cu patru termeni ale lui <code>27 (2 &gt; 1)</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Pentru mai multe seturi de date formate din câte două numere naturale <code>A</code> și <code>B</code>, <code>A ≤ B</code>, se cere să se determine, pentru fiecare set una dintre următoarele cerințe:<br>
+1. numărul maxim de termeni în care pot fi descompuse numerele din intervalul <code>[A,B]</code> după regula descrisă în enunț;<br>
+2. numărul de numere din intervalul <code>[A,B]</code> care pot fi descompuse cu un număr maxim de termeni;<br>
+3. numărul din intervalul <code>[A,B]</code> care admite o descompunere cu un număr maxim de termeni, minimă din punct de vedere lexicografic.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Din fișierul de intrare <code>multisum.in</code> se citesc, de pe prima linie, două numere <code>N</code> și <code>C</code>, despărțite printr-un spațiu, reprezentând numărul de seturi de date și tipul cerinței: <code>C = 1</code> pentru cerința <code>1</code>, <code>C = 2</code> pentru cerința <code>2</code> și <code>C = 3</code> pentru cerința <code>3</code>. De pe următoarele <code>N</code> linii ale fișierului se citește câte o pereche de numere <code>A</code> și <code>B</code>, separate printr-un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>În fișierul de ieșire <code>multisum.out</code> se va scrie câte o linie pentru fiecare pereche <code>A B</code> din fișierul de intrare, linie care va conține numărul cerut, conform cerinței: dacă <code>C = 1</code>, numărul va reprezenta numărul maxim de termeni dintr-o descompunere, dacă <code>C = 2</code>, numărul va reprezenta numărul de valori din intervalul respectiv care pot fi descompuse cu un număr maxim de termeni, iar dacă <code>C = 3</code>, numărul va reprezenta acea valoare din intervalul respectiv care admite o descompunere cu un număr maxim de termeni, minimă din punct de vedere lexicografic.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>0 &lt; N ≤ 1000</code></li>
+	<li><code>2 &lt; A ≤ B ≤ 100 000</code></li>
+	<li>Suma lungimilor intervalelor din toate seturile unui test nu va depăși <code>100 000</code>.</li>
+	<li>Pentru rezolvarea corectă a cerinței <code>1</code>, se acordă <code>20%</code> din punctaj, pentru cerința <code>2</code> se acordă <code>40%</code> din punctaj, iar pentru cerința <code>3</code> se acordă <code>40%</code> din punctaj.</li>
+	<li>Pentru teste în valoare de <code>30</code> de puncte, <code>N ≤ 50</code>, <code>B ≤ 1000</code> și suma lungimilor intervalelor din teste nu va depăși <code>10 000</code>.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>multisum.in</code></p>
+
+<pre>1 1
+50 60</pre>
+
+<p><code>multisum.out</code></p>
+
+<pre>5</pre>
+
+<h3>Explicație</h3>
+
+<p>Există un singur set de date. Se rezolvă cerința <code>1</code>. Descompunerile maximale ale numerelor din interval au unele <code>4</code> termeni, altele <code>5</code> termeni. Deci cel mai mare număr de termeni este <code>5</code> (și acesta se obține pentru numerele <code>55</code>, <code>57</code>, <code>58</code> și <code>59</code>).</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>multisum.in</code></p>
+
+<pre>1 2
+50 60</pre>
+
+<p><code>multisum.out</code></p>
+
+<pre>4</pre>
+
+<h3>Explicație</h3>
+
+<p>Există un singur set de date. Se rezolvă cerința <code>2</code>. Numerele care se pot descompune într-un număr maxim de termeni sunt <code>55</code>, <code>57</code>, <code>58</code> și <code>59</code>. Deci sunt <code>4</code> numere care admit o descompunere maximală.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>multisum.in</code></p>
+
+<pre>1 3
+50 60</pre>
+
+<p><code>multisum.out</code></p>
+
+<pre>55</pre>
+
+<h3>Explicație</h3>
+
+<p>Există un singur set de date. Se rezolvă cerința <code>3</code>. Cele <code>4</code> numere care admit descompuneri maximale sunt:<br>
+<code>55=1+2+4+16+32</code>, <code>55=1+2+4+12+36</code>, <code>55=1+2+4+8+40</code> <br>
+<code>57=1+2+6+12+36</code>, <code>58=1+3+6+12+36</code>, <code>59=1+2+8+16+32</code><br>
+Cea mai mică sumă din punct de vedere lexicografic este <code>1+2+4+8+40</code> și ea corespunde numărului <code>55</code>.</p>
+
+<h1>Exemplul 4:</h1>
+
+<p><code>multisum.in</code></p>
+
+<pre>3 3
+50 50
+10 13
+16 17</pre>
+
+<p><code>multisum.out</code></p>
+
+<pre>50
+11
+17</pre>
+
+<h3>Explicație</h3>
+
+<p>Sunt <code>3</code> seturi de date. Se rezolvă cerința <code>3</code>: Intervalul <code>[50, 50]</code> conține doar numărul <code>50</code> care admite o singură descompunere maximală (cu <code>4</code> termeni) și aceasta este minimă din punct de vedere lexicografic.<br>
+Dintre numerele din intervalul <code>[10,13]</code>, numerele <code>10</code>, <code>11</code> și <code>13</code> admit o descompunere cu un număr maxim de termeni (<code>3</code> termeni), dar o descompunere maximală a lui <code>11</code> (<code>1+2+8</code>) este minimă din punct de vedere lexicografic. În intervalul <code>[16,17]</code> numerele admit câte două descompuneri maximale: <code>16=1+3+12</code>, <code>16=1+5+10</code>, <code>17=1+2+14</code>, <code>17=1+4+12</code>, iar descompunerea minimă din punct de vedere lexicografic este <code>1+2+14</code> și corespunde valorii <code>17</code>.</p>		</article>
+		</body></html>

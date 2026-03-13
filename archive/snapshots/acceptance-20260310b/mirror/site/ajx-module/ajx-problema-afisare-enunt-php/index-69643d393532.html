@@ -1,0 +1,57 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=952"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>Hackerul Gigel e pus pe șotii. Folosind un pachet de date corupt, acesta încearcă sa suprasolicite o rețea de <code>n*n</code> calculatoare dispuse sub forma unei matrice cu <code>n</code> rânduri și <code>n</code> coloane. El știe că fiecare calculator este conectat la calculatoarele adiacente(sus, dreapta, stânga, jos), fiecare calculator de pe rândul <code>n</code> este conectat la calculatorul de pe rândul <code>1</code> și aceeași coloană, și fiecare calculator de pe coloana <code>n</code> este conectat la cel de pe coloana <code>1</code> și aceeași linie.</p>
+
+<p>Pentru a evita virușii nedoriți, calculatoarele din rețea nu pot prelucra pachete corupte și vor încerca pe cât posibil să le evite. Dacă un calculator primește un pachet corupt de la un calculator vecin, acesta îl va transmite mai departe în aceeași direcție ca cea alesă de calculatorul de la care a primit pachetul.</p>
+
+<p>Se mai știe că administratorul rețelei a criptat câteva calculatoare, iar acestea nu vor accepta pachete corupte. Dacă un calculator încearcă sa trimită un pachet corupt unui calculator criptat operația va eșua, iar calculatorul respectiv va păstra pachetul până va primi o nouă comandă. Hackerul Gigel este foarte inteligent și poate da o comandă fiecărui calculator necriptat prin care să direcționeze pachetul de date corupt în una dintre cele patru direcții: <code>Sus</code>, <code>Dreapta</code>, <code>Jos</code>, <code>Stanga</code>.</p>
+
+<p>Pentru a suprasolicita rețeaua, hackerul Gigel trebuie să găsească o succesiune de <code>n</code> calculatoare necriptate situate pe același rând sau aceeași coloană, pentru ca atunci când va trimite pachetul corupt spre acestea, ele să îl transmită mai departe la infinit.</p>
+
+<p>Pachetul corupt se află inițial în calculatorul aflat pe rândul <code>x</code> și coloana <code>y</code>. Ajutați-l pe hackerul Gigel găsească o succesiune de comenzi prin care să suprasolicite rețeaua!</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>suprasolicitare.in</code> conține pe prima linie numărul <code>n</code>, urmat de <code>n</code> linii, fiecare cu câte <code>n</code> numere având valorile <code>0</code> (calculator necriptat) sau <code>1</code> (calculator criptat). Pe linia <code>n + 2</code> a fișierului se află coordonatele <code>x</code> și <code>y</code> ale calculatorului de unde începe Gigel să transmită pachetul de date corupt, separate printr-un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire va conține un număr natural <code>Sol</code> reprezentând numărul de comenzi pe care le transmite Gigel în rețea pentru a transmite pachetul. Pe următoarele <code>Sol</code> rânduri se află câte un cuvânt din mulțimea <code>{'Sus', 'Dreapta', 'Jos', 'Stanga'}</code> reprezentând direcția înspre care acesta trimite pachetul corupt.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 100</code></li>
+	<li>Orice soluție care duce la înghețarea rețelei este considerată corectă.</li>
+	<li>O altă comandă decât cea din mulțimea <code>{'Sus', 'Dreapta', 'Jos', 'Stanga'}</code> va duce la descoperirea pachetului de către administrator</li>
+	<li>Dacă valoarea lui <code>Sol</code> este mai mare decât numărul de comenzi, se va acorda <code>60%</code> din punctaj.</li>
+	<li>Pentru teste în valoare de <code>50</code> de puncte, <code>n ≤ 10</code></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>suprasolicitare.in</code></p>
+
+<pre>8
+0 0 0 0 0 0 0 0
+0 1 0 1 1 0 1 1
+0 0 0 0 1 0 1 1
+0 0 0 1 1 0 1 1
+1 0 1 0 0 0 0 0
+1 1 1 1 1 1 0 1
+1 1 1 1 1 1 0 1
+1 1 1 1 1 1 0 1
+5 6</pre>
+
+<p><code>suprasolicitare.out</code></p>
+
+<pre>2 
+Sus
+Dreapta</pre>
+
+<h1>Explicație</h1>
+
+<p>Pornind din calculatorul aflat la <code>x = 5</code> și <code>y = 6</code>, pachetul se deplasează la calculatorul cu <code>x = 1</code> și <code>y = 6</code> de unde Gigel îl poate trimite într-un ciclu infinit pe rândul <code>1</code>.<br>
+Succesiunea <code>Sus</code>, <code>Stanga</code> este de asemenea validă.</p>		</article>
+		</body></html>

@@ -1,0 +1,301 @@
+{
+  "id": 1200,
+  "slug": "spiridusi",
+  "name": "Spiridusi",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1200/spiridusi",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 16,
+      "name": "Teoria Grafurilor",
+      "slug": "teoria-grafurilor",
+      "href": "/?pagina=probleme-lista&tag=16"
+    },
+    {
+      "id": 64,
+      "name": "Arbori cu rădăcină",
+      "slug": "arbori-cu-r-d-cin",
+      "href": "/?pagina=probleme-lista&tag=64"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Cunoscând valorile lui <code>N</code> și <code>C</code>, numărul de spiriduși ai prafului <code>s[i]</code>, coeficienții <code>p[i]</code> pentru fiecare cameră <code>i</code>, cât și modul în care sunt unite camerele prin culoare, să se determine suma maximă a coeficienților <code>p</code> ai camerelor alese pentru un spațiu de joacă ce respectă condițiile impuse de Mei și Satsuki.</p>",
+      "text": "Cunoscând valorile lui N și C, numărul de spiriduși ai prafului s[i], coeficienții p[i] pentru fiecare cameră i, cât și modul în care sunt unite camerele prin culoare, să se determine suma maximă a coeficienților p ai camerelor alese pentru un spațiu de joacă ce respectă condițiile impuse de Mei și Satsuki."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie a fișierului de intrare <code>spiridusi.in</code> se vor afla două numere naturale <code>N</code> și <code>C</code> cu semnificația din enunț. Pe a doua linie se vor afla <code>N</code> numere naturale separate prin câte un spațiu, al <code>i</code>-lea dintre acestea reprezentând numărul de spiriduși <code>s[i]</code> aflați în camera <code>i</code>. Pe a treia linie se vor afla <code>N</code> numere întregi separate prin câte un spațiu, al <code>i</code>-lea dintre acestea reprezentând coeficientul <code>p[i]</code> al camerei <code>i</code>. Pe următoarele <code>N-1</code> linii se vor afla câte două numere întregi <code>x</code> și <code>y</code> separate printr-un spațiu, semnificând existența unui culoar ce unește camerele <code>x</code> și <code>y</code>.</p>",
+      "text": "Pe prima linie a fișierului de intrare spiridusi.in se vor afla două numere naturale N și C cu semnificația din enunț. Pe a doua linie se vor afla N numere naturale separate prin câte un spațiu, al i-lea dintre acestea reprezentând numărul de spiriduși s[i] aflați în camera i. Pe a treia linie se vor afla N numere întregi separate prin câte un spațiu, al i-lea dintre acestea reprezentând coeficientul p[i] al camerei i. Pe următoarele N-1 linii se vor afla câte două numere întregi x și y separate printr-un spațiu, semnificând existența unui culoar ce unește camerele x și y."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>În fișierul de ieșire <code>spiridusi.out</code> se va afișa o singură linie conținând un singur număr natural, reprezentând suma maximă a coeficienților <code>p</code> ai camerelor alese pentru un spațiu de joacă ce respectă condițiile impuse de Mei și Satsuki.</p>",
+      "text": "În fișierul de ieșire spiridusi.out se va afișa o singură linie conținând un singur număr natural, reprezentând suma maximă a coeficienților p ai camerelor alese pentru un spațiu de joacă ce respectă condițiile impuse de Mei și Satsuki."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 100 000</code></li>\n\t<li><code>1 ≤ C ≤ 20 000 000</code></li>\n\t<li><code>1 ≤ s[i] ≤ 20 000 000</code>, pentru orice <code>i</code>, <code>1 ≤ i ≤ N</code>.</li>\n\t<li><code>-10 000 ≤ p[i] ≤ 10 000</code>, pentru orice <code>i</code>, <code>1 ≤ i ≤ N</code>.</li>\n\t<li><code>1 ≤ x, y ≤ N</code></li>\n\t<li>Pentru 20% din teste, fiecare cameră are maximum <code>2</code> vecini.</li>\n\t<li>Pentru 30% din teste, <code>N ≤ 1 000</code>.</li>\n\t<li>Se garantează că pentru orice cameră <code>x</code>, numărul total de spiriduși aflați în camerele de pe drumul cel mai scurt de la camera <code>1</code> la camera <code>x</code> nu depășește <code>1 000 000 000</code>.</li>\n</ul>",
+      "text": "1 ≤ N ≤ 100 000 1 ≤ C ≤ 20 000 000 1 ≤ s[i] ≤ 20 000 000, pentru orice i, 1 ≤ i ≤ N. -10 000 ≤ p[i] ≤ 10 000, pentru orice i, 1 ≤ i ≤ N. 1 ≤ x, y ≤ N Pentru 20% din teste, fiecare cameră are maximum 2 vecini. Pentru 30% din teste, N ≤ 1 000. Se garantează că pentru orice cameră x, numărul total de spiriduși aflați în camerele de pe drumul cel mai scurt de la camera 1 la camera x nu depășește 1 000 000 000."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>spiridusi.in</code></p><pre>6 8\n2 4 6 2 4 1 \n3 10 11 -2 4 5\n1 2\n2 3\n2 4\n4 5\n4 6</pre><p><code>spiridusi.out</code></p><pre>13</pre>",
+      "text": "spiridusi.in6 8 2 4 6 2 4 1 3 10 11 -2 4 5 1 2 2 3 2 4 4 5 4 6spiridusi.out13"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p>Dacă alegem camerele <code>a = 2</code> și <code>b = 6</code>, obținem un spațiu de joacă format din camerele <code>2</code>, <code>4</code> și <code>6</code>.</p><p>Numărul total de spiriduși goniți din aceste camere este <code>4 + 2 + 1 = 7</code>, care este mai mic sau egal decât <code>C = 8</code>.</p><p>Suma coeficienților <code>p</code> ai acestor camere este <code>10 + (-2) + 5 = 13</code>, maximul posibil ce se poate obține.</p>",
+      "text": "Dacă alegem camerele a = 2 și b = 6, obținem un spațiu de joacă format din camerele 2, 4 și 6.Numărul total de spiriduși goniți din aceste camere este 4 + 2 + 1 = 7, care este mai mic sau egal decât C = 8.Suma coeficienților p ai acestor camere este 10 + (-2) + 5 = 13, maximul posibil ce se poate obține."
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "1 ≤ N ≤ 100 000",
+    "1 ≤ C ≤ 20 000 000",
+    "1 ≤ s[i] ≤ 20 000 000, pentru orice i, 1 ≤ i ≤ N.",
+    "-10 000 ≤ p[i] ≤ 10 000, pentru orice i, 1 ≤ i ≤ N.",
+    "1 ≤ x, y ≤ N",
+    "Pentru 20% din teste, fiecare cameră are maximum 2 vecini.",
+    "Pentru 30% din teste, N ≤ 1 000.",
+    "Se garantează că pentru orice cameră x, numărul total de spiriduși aflați în camerele de pe drumul cel mai scurt de la camera 1 la camera x nu depășește 1 000 000 000."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q05aaf0b45b.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "11",
+    "intrare/ieșire": "spiridusi.in / spiridusi.out",
+    "limită timp": "0.4 secunde",
+    "limită memorie": "64 MB / 16 MB",
+    "sursa problemei": "ONI 2015, Clasele XI-XII",
+    "autor": "-",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.4,
+  "memoryLimitMb": 64,
+  "sourceAttribution": "ONI 2015, Clasele XI-XII",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1200/spiridusi"
+}

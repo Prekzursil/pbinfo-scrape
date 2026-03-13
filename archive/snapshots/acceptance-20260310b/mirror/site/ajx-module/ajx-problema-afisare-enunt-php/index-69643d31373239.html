@@ -1,0 +1,65 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1729"><article id="enunt">
+			<p>Îl cunoașteți pe Dorel cel ”priceput” la toate. Acesta și-a propus să “strice” armonia unui șir <code>S</code> format din <code>N</code> caractere litere mici ale alfabetului englez, <code>S=(S[1],S[2],…,S[N])</code>. </p>
+
+<p>El alege la întâmplare un caracter din șir, caracter aflat pe poziția <code>k</code> (<code>1≤k≤N</code>) și caută în stânga lui <code>k</code> primul caracter mai mare sau egal cu <code>S[k]</code>, fie acesta aflat pe poziția <code>i</code>, <code>S[k]≤S[i]</code>. Dacă acesta nu există, <code>i=1</code>. Această alegere nu este suficientă. Dorel caută în dreapta lui <code>k</code> primul caracter mai mic sau egal cu <code>S[k]</code>, fie acesta pe poziția <code>j</code>, <code>S[j]≤S[k]</code>. Dacă acesta nu există, <code>j=N</code>. Extrage din șirul <code>S</code> subșirul astfel delimitat. Ca urmare a alegerii făcute, Dorel obține două subșiruri: </p>
+
+<ul>
+	<li><code>X=(S[1],S[2],…,S[i-1],S[j+1],S[j+2],…,S[N])</code></li>
+	<li><code>Y=(S[i],S[i+1],…,S[j])</code></li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând șirul <code>S</code>, ajutați-l pe Dorel să răspundă la <code>Q</code> întrebări de forma:</p>
+
+<ul>
+	<li>Pentru o poziție <code>k</code> din șirul <code>S</code> să se determine lungimea maximă a unei subsecvențe palindromice comune șirurilor <code>X</code> și <code>Y</code>.</li>
+</ul>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>dorel.in</code> conține pe prima linie pe prima linie un șir de caractere. Pe cea de-a doua linie o valoare naturală nenulă <code>Q</code>. Pe următoarea linie cele <code>Q</code> întrebări în formatul precizat în enunț.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>dorel.out</code> va conține pe prima linie răspunsurile la cele <code>Q</code> întrebări, separate prin câte un spațiu.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 10000</code></li>
+	<li><code>1 ≤ Q ≤ 5000</code></li>
+	<li><code>N * Q ≤ 5000000</code></li>
+	<li><code>X</code> și <code>Y</code> sunt șiruri nevide</li>
+	<li>prin subsecvență palindromică a unui șir înțelegem o succesiune de caractere aflate pe poziții consecutive în șir care este palindrom (subsecvența parcursă de la stânga la dreapta este identică cu secvența parcursă de la dreapta la stânga).</li>
+	<li>lungimea maximă a unei subsecvențe palindromice comune ≤ 1000</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>dorel.in</code></p>
+
+<pre>xexxxdexxexaegf
+4
+6 8 15 3</pre>
+
+<p><code>dorel.out</code></p>
+
+<pre>4 2 0 3</pre>
+
+<h3>Explicație</h3>
+
+<p>Răspunsul la cele <code>4</code> întrebări</p>
+
+<p><code>X=”xexxegf”</code>, <code>Y=”xdexxexa”</code>.<br>
+Subsecvența palindromică comună <code>=”exxe”</code> având lungimea <code>=4</code></p>
+
+<p><code>X=”xexxexaegf”</code>, <code>Y=”xdexx”</code><br>
+Subsecvența palindromică comună <code>=”xx”</code> având lungimea <code>=2</code></p>
+
+<p><code>X=”xexxxdexxexae”</code>, <code>Y=”gf”</code><br>
+Subsecvența palindromică comună <code>=””</code> având lungimea <code>=0</code></p>
+
+<p><code>X=”xdexxexaegf”</code>, <code>Y=”xexx”</code><br>
+Subsecvența palindromică comună <code>=”xex”</code> având lungimea <code>=3</code></p>		</article>
+		</body></html>

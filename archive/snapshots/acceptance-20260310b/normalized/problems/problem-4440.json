@@ -1,0 +1,309 @@
+{
+  "id": 4440,
+  "slug": "matrice13",
+  "name": "matrice13",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4440/matrice13",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 53,
+      "name": "Programare dinamică",
+      "slug": "programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=53"
+    },
+    {
+      "id": 54,
+      "name": "Probleme diverse de programare dinamică",
+      "slug": "probleme-diverse-de-programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=54"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Calculați numărul de moduri de a construi o matrice cu <code>N</code> linii și <code>M</code> coloane folosind valori întregi aflate în intervalul închis <code>[0, T]</code>, astfel încât fiecare linie și fiecare coloană a matricei să aibă elementele în progresie aritmetică cu rație strict pozitivă. Progresiile se consideră pentru secvența elementelor de pe linii ca fiind de la stânga la dreapta, iar pentru coloane ca fiind de sus în jos. De asemenea, fiecare linie și fiecare coloană poate avea o rație proprie, distinctă de celelalte, iar rațiile asociate liniilor și coloanelor trebuie să fie crescătoare de sus în jos, respectiv de la stânga la dreapta. Deoarece acest număr poate fi foarte mare, el se va afișa modulo <code>1.000.000.009</code>.</p>",
+      "text": "Calculați numărul de moduri de a construi o matrice cu N linii și M coloane folosind valori întregi aflate în intervalul închis [0, T], astfel încât fiecare linie și fiecare coloană a matricei să aibă elementele în progresie aritmetică cu rație strict pozitivă. Progresiile se consideră pentru secvența elementelor de pe linii ca fiind de la stânga la dreapta, iar pentru coloane ca fiind de sus în jos. De asemenea, fiecare linie și fiecare coloană poate avea o rație proprie, distinctă de celelalte, iar rațiile asociate liniilor și coloanelor trebuie să fie crescătoare de sus în jos, respectiv de la stânga la dreapta. Deoarece acest număr poate fi foarte mare, el se va afișa modulo 1.000.000.009."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie din fișierul <code>matrice.in</code> se găsesc numerele <code>N</code>, <code>M</code> și <code>T</code> cu semnificația din cerință.</p>",
+      "text": "Pe prima linie din fișierul matrice.in se găsesc numerele N, M și T cu semnificația din cerință."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>matrice.out</code> va conține doar numărul de moduri cerut, modulo <code>1.000.000.009</code>.</p>",
+      "text": "Fișierul de ieșire matrice.out va conține doar numărul de moduri cerut, modulo 1.000.000.009."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N, M ≤ 200</code></li>\n\t<li><code>1 ≤ T ≤ 20.000.000</code></li>\n\t<li><strong>Atenție la limita de memorie!</strong></li>\n\t<li>Pentru 11 puncte, <code>N = 1</code> sau <code>M = 1</code> și <code>T ≤ 1000</code></li>\n\t<li>Pentru 9 puncte, <code>N = 1</code> sau <code>M = 1</code></li>\n\t<li>Pentru 15 puncte, <code>T ≤ 100</code></li>\n\t<li>Pentru 17 puncte, <code>T ≤ 1000</code></li>\n\t<li>Pentru 26 puncte, <code>T ≤ 100.000</code></li>\n\t<li>Pentru 22 puncte, fără restricții suplimentare.</li>\n</ul>",
+      "text": "1 ≤ N, M ≤ 200 1 ≤ T ≤ 20.000.000 Atenție la limita de memorie! Pentru 11 puncte, N = 1 sau M = 1 și T ≤ 1000 Pentru 9 puncte, N = 1 sau M = 1 Pentru 15 puncte, T ≤ 100 Pentru 17 puncte, T ≤ 1000 Pentru 26 puncte, T ≤ 100.000 Pentru 22 puncte, fără restricții suplimentare."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>matrice.in</code></p><pre>2 3 5</pre><p><code>matrice.out</code></p><pre>8</pre><h3>Explicație</h3><p>Cele <code>8</code> matrice sunt:</p><p><code>0 1 2</code><br>\n<code>1 2 3</code></p><p><code>1 2 3</code><br>\n<code>2 3 4</code></p><p><code>2 3 4</code><br>\n<code>3 4 5</code></p><p><code>0 1 2</code><br>\n<code>2 3 4</code></p><p><code>1 2 3</code><br>\n<code>3 4 5</code></p><p><code>0 1 2</code><br>\n<code>3 4 5</code></p><p><code>0 1 2</code><br>\n<code>1 3 5</code></p><p><code>0 2 4</code><br>\n<code>1 3 5</code></p><p>Se observă că rațiile de pe linii și coloane <strong>nu</strong> trebuie să fie neapărat <strong>strict</strong> crescătoare.</p>",
+      "text": "matrice.in2 3 5matrice.out8ExplicațieCele 8 matrice sunt:0 1 2 1 2 31 2 3 2 3 42 3 4 3 4 50 1 2 2 3 41 2 3 3 4 50 1 2 3 4 50 1 2 1 3 50 2 4 1 3 5Se observă că rațiile de pe linii și coloane nu trebuie să fie neapărat strict crescătoare."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>matrice.in</code></p><pre>2 3 1000</pre><p><code>matrice.out</code></p><pre>437458160</pre>",
+      "text": "matrice.in2 3 1000matrice.out437458160"
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cele 8 matrice sunt:"
+    }
+  ],
+  "constraints": [
+    "1 ≤ N, M ≤ 200",
+    "1 ≤ T ≤ 20.000.000",
+    "Atenție la limita de memorie!",
+    "Pentru 11 puncte, N = 1 sau M = 1 și T ≤ 1000",
+    "Pentru 9 puncte, N = 1 sau M = 1",
+    "Pentru 15 puncte, T ≤ 100",
+    "Pentru 17 puncte, T ≤ 1000",
+    "Pentru 26 puncte, T ≤ 100.000",
+    "Pentru 22 puncte, fără restricții suplimentare."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q1906658bd7.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "11",
+    "intrare/ieșire": "matrice.in / matrice.out",
+    "limită timp": "1.5 secunde",
+    "limită memorie": "4 MB / 2 MB",
+    "sursa problemei": "ONI 2023 clasa a X-a",
+    "autor": "Ștefan-Alexandru Popescu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 1.5,
+  "memoryLimitMb": 4,
+  "author": "Ștefan-Alexandru Popescu",
+  "sourceAttribution": "ONI 2023 clasa a X-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4440/matrice13"
+}

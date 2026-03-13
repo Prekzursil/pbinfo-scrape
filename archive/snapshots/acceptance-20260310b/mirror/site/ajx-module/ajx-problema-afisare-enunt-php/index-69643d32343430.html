@@ -1,0 +1,58 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2440"><article id="enunt">
+			<p>Mihai a primit de ziua lui un joc de puzzle. Jocul are <code>N</code> piese confecţionate prin lipirea unor bucăţi de dimensiune <code>1x1</code> (ilustrate în figurile de mai jos prin <code>X</code>); aceste bucăţi le vom numi în continuare, pe scurt, <code>X</code>-uri. Pentru confecţionarea unei piese se respectă următoarele reguli:<br>
+1. <code>X</code>-urile sunt aşezate unul peste altul, formând coloane ce pot avea înălţimi diferite, apoi coloanele se aliniază în partea de jos şi se lipesc între ele, una după cealaltă, de la stânga spre dreapta;<br>
+2. pe o coloană sunt cel mult nouă <code>X</code>-uri;<br>
+3. toate piesele au acelaşi număr de coloane.<br>
+Exemple:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-puzzle-jpg.jpg"></p>
+
+<p>În figurile 1, 2, 3, 4 sunt piese de puzzle care respectă regulile descrise, iar în figura 5 și în figura 6 NU sunt piese de puzzle, pentru că nu pot fi obţinute prin lipirea unor coloane de <code>X</code>-uri, una după cealaltă, de la stânga spre dreapta.<br>
+Fiind mic, Mihai nu poate rezolva puzzle-ul, dar poate face o singură operaţie: alege două piese şi le îmbină în dreptul laturilor de sus, răsturnând una dintre piese sus-jos (fără să o rotească sau să o răstoarne stânga-dreapta). Dacă în urma acestei operaţii el obţine un dreptunghi format din coloane complete de <code>X</code>-uri, toate coloanele având aceeaşi înălţime, este mulţumit. De exemplu, piesa din figura 1 și cea din figura 2 pot fi îmbinate în modul descris.<br>
+În figura 7 este piesa din figura 2 răsturnată sus-jos. În figura 8 este ilustrat dreptunghiul care se obţine din piesa din figura 1 şi piesa din figura 2 răsturnată sus-jos.<br>
+Observaţi că, dacă am roti piesa din figura 4, am putea să o îmbinăm cu piesa din figura 1, dar rotaţia nu este permisă.<br>
+Vom codifica o piesă printr-un număr natural, fiecare cifră din număr reprezentând (în ordine de la stânga la dreapta) câte <code>X</code>-uri se află pe coloana corespunzătoare din piesă.<br>
+De exemplu:<br>
+– piesa din figura 1 este codificată <code>4232</code>;<br>
+– piesa din figura 2 este codificată <code>1323</code>;<br>
+– piesa din figura 3 este codificată <code>4444</code>;<br>
+– piesa din figura 4 este codificată <code>3231</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Determinați care este numărul de moduri în care Mihai poate alege câte două piese dintre cele <code>N</code> pentru a face o operaţie în modul descris mai sus.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>puzzle.in</code> conține pe prima linie un număr natural <code>N</code> ce reprezintă numărul de piese din joc. Pe linia a doua se găsesc <code>N</code> numere naturale, separate prin câte un singur spațiu, reprezentând codificările celor <code>N</code> piese.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>puzzle.out</code> va conține o singură linie pe care va fi scris numărul cerut.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N ≤ 100 000</code></li>
+	<li>Numerele care reprezintă codificările pieselor au acelaşi număr de cifre (cel mult <code>5</code>) și nu conțin cifra <code>0</code>.</li>
+	<li>Într-o operaţie nu contează care dintre piese este răsturnată, ca urmare perechea formată din piesa <code>a</code> şi piesa <code>b</code> este considerată ca fiind aceeaşi cu perechea formată din piesa <code>b</code> şi piesa <code>a</code>.</li>
+	<li>Dreptunghiul obţinut în urma unei operaţii poate avea înălţimea mai mare decât <code>9</code>.</li>
+	<li>Pentru teste valorând <code>30</code> de puncte <code>N ≤ 1000</code>.</li>
+	<li>În concurs s-au acordat <code>10</code> puncte din oficiu. Aici se acordă punctele pentru exemplul din enunț.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>puzzle.in</code></p>
+
+<pre>5
+222 432 234 123 111</pre>
+
+<p><code>puzzle.out</code></p>
+
+<pre>3</pre>
+
+<h3>Explicație</h3>
+
+<p>Se pot îmbina <code>3</code> perechi de piese: piesa <code>1</code> cu piesa <code>5</code>, piesa <code>2</code> cu piesa <code>3</code>, piesa <code>2</code> cu piesa <code>4</code>. Piesele <code>3</code> și <code>4</code> s-ar putea îmbina corect dacă una dintre ele ar fi răsturnată stânga-dreapta sau rotită, dar acest lucru nu e permis.</p>		</article>
+		</body></html>

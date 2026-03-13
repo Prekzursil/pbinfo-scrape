@@ -1,0 +1,289 @@
+{
+  "id": 4077,
+  "slug": "numere-mari",
+  "name": "Numere Mari",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4077/numere-mari",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 164,
+      "name": "Programare orientată pe obiecte",
+      "slug": "programare-orientat-pe-obiecte",
+      "href": "/?pagina=probleme-lista&tag=164"
+    },
+    {
+      "id": 165,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=165"
+    }
+  ],
+  "tags": [
+    "POO",
+    "supraincarcare operatori",
+    "Numere mari"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Definiți în <code>C++</code> clasa <code>big_int</code> cu următoarea structură:</p><pre class=\"code_cpp\">class big_int\n{\nprivate:\n    int sign; // -1 daca numarul este negativ, +1 daca este pozitiv\n    string digits; // cifrele numarului, stocate in ordine inversa\npublic:\n    big_int()\n    {\n        // initializare implicita cu 0\n    }\n    big_int(string s)\n    {\n        // initializare prin intermediul unui sir de caractere\n    }\n    big_int(int n)\n    {\n        // initializare prin intermediul unui numar intre -2^31 si 2^31 - 1\n    }\n    operator string() const\n    {\n        // conversie la sir de caractere\n    }\n    friend bool operator == (const big_int&amp; a, const big_int&amp; b)\n    {\n        // comparator ==\n    }\n\tfriend bool operator &lt; (const big_int&amp; a, const big_int&amp; b)\n    {\n        // comparator &lt;\n    }\n    big_int abs() const\n    {\n        // valoarea absoluta\n    }\n    big_int operator - () const\n    {\n        // opusul (inversul in raport cu adunarea)\n    }\n    big_int operator + (const big_int&amp; b) const\n    {\n        // suma a 2 numere\n    }\n    big_int operator - (const big_int&amp; b) const\n    {\n        // diferenta a 2 numere\n    }\n    big_int operator * (const big_int&amp; b) const\n    {\n        // produsul a 2 numere\n    }\n    big_int operator / (const big_int&amp; b) const\n    {\n        // catul impartirii a 2 numere\n    }\n    big_int operator % (const big_int&amp; b) const\n    {\n        // restul impartirii a 2 numere pozitive\n    }\n    friend istream&amp; operator &gt;&gt; (istream&amp; in, big_int&amp; n)\n    {\n        // citire prin intermediul stream-urilor\n    }\n    friend ostream&amp; operator &lt;&lt; (ostream&amp; out, const big_int&amp; n)\n    {\n        // scriere prin intermediul stream-urilor\n    }\n};</pre><p>Această clasă va fi integrată în următorul program:</p><pre class=\"code_cpp\">#include &lt;bits/stdc++.h&gt;\n\nusing namespace std;\n\n// codul scris de tine\n\nint main()\n{\n    big_int a = 96, b(\"420\");\n    cin &gt;&gt; a &gt;&gt; b;\n    cout &lt;&lt; a + b &lt;&lt; \"\\n\";\n    cout &lt;&lt; -a + b &lt;&lt; \"\\n\";\n    cout &lt;&lt; a - b &lt;&lt; \"\\n\";\n    cout &lt;&lt; a * b &lt;&lt; \"\\n\";\n    cout &lt;&lt; a / b &lt;&lt; \"\\n\";\n    cout &lt;&lt; a.abs() % b.abs() &lt;&lt; \"\\n\";\n    if(a &lt; b)\n        cout &lt;&lt; \"a &lt; b\\n\";\n    else if(a == b)\n        cout &lt;&lt; \"a = b\\n\";\n    else cout &lt;&lt; \"a &gt; b\\n\";\n\n    return 0;\n}</pre>",
+      "text": "Definiți în C++ clasa big_int cu următoarea structură:class big_int { private: int sign; // -1 daca numarul este negativ, +1 daca este pozitiv string digits; // cifrele numarului, stocate in ordine inversa public: big_int() { // initializare implicita cu 0 } big_int(string s) { // initializare prin intermediul unui sir de caractere } big_int(int n) { // initializare prin intermediul unui numar intre -2^31 si 2^31 - 1 } operator string() const { // conversie la sir de caractere } friend bool operator == (const big_int& a, const big_int& b) { // comparator == } friend bool operator < (const big_int& a, const big_int& b) { // comparator < } big_int abs() const { // valoarea absoluta } big_int operator - () const { // opusul (inversul in raport cu adunarea) } big_int operator + (const big_int& b) const { // suma a 2 numere } big_int operator - (const big_int& b) const { // diferenta a 2 numere } big_int operator * (const big_int& b) const { // produsul a 2 numere } big_int operator / (const big_int& b) const { // catul impartirii a 2 numere } big_int operator % (const big_int& b) const { // restul impartirii a 2 numere pozitive } friend istream& operator >> (istream& in, big_int& n) { // citire prin intermediul stream-urilor } friend ostream& operator << (ostream& out, const big_int& n) { // scriere prin intermediul stream-urilor } };Această clasă va fi integrată în următorul program:#include <bits/stdc++.h> using namespace std; // codul scris de tine int main() { big_int a = 96, b(\"420\"); cin >> a >> b; cout << a + b << \"\\n\"; cout << -a + b << \"\\n\"; cout << a - b << \"\\n\"; cout << a * b << \"\\n\"; cout << a / b << \"\\n\"; cout << a.abs() % b.abs() << \"\\n\"; if(a < b) cout << \"a < b\\n\"; else if(a == b) cout << \"a = b\\n\"; else cout << \"a > b\\n\"; return 0; }"
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><strong>nu</strong> se vor face împărțiri la <code>0</code></li>\n\t<li>operatorul <code>/</code> funcționează la fel ca omologul standard din <code>C++</code>, adică e.x. <code>-3 / 2 = -1</code></li>\n</ul>",
+      "text": "nu se vor face împărțiri la 0 operatorul / funcționează la fel ca omologul standard din C++, adică e.x. -3 / 2 = -1"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><strong>Intrare</strong></p><pre>71 8</pre><p><strong>Ieșire</strong></p><pre>79\n-63\n63\n568\n8\n7\na &gt; b</pre>",
+      "text": "Intrare71 8Ieșire79 -63 63 568 8 7 a > b"
+    }
+  ],
+  "examples": [
+    {
+      "input": "71 8",
+      "output": "79\n-63\n63\n568\n8\n7\na > b"
+    }
+  ],
+  "constraints": [
+    "nu se vor face împărțiri la 0",
+    "operatorul / funcționează la fel ca omologul standard din C++, adică e.x. -3 / 2 = -1"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q8c2f60ea6f.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Tir Vlad Ioan (Vlad3108)",
+    "clasa": "11",
+    "intrare/ieșire": "tastatură / ecran",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "-",
+    "autor": "Vlad Ioan Țîr",
+    "dificultate": "dificilă"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 64,
+  "author": "Vlad Ioan Țîr",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4077/numere-mari"
+}

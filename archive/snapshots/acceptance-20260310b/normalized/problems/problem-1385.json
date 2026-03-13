@@ -1,0 +1,298 @@
+{
+  "id": 1385,
+  "slug": "joc6",
+  "name": "Joc6",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1385/joc6",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 53,
+      "name": "Programare dinamică",
+      "slug": "programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=53"
+    },
+    {
+      "id": 54,
+      "name": "Probleme diverse de programare dinamică",
+      "slug": "probleme-diverse-de-programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=54"
+    }
+  ],
+  "tags": [
+    "Subșir crescător de lungime maximă"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Dom’ Profesor Unu și Dom’ Profesor Doi au găsit o matrice cu <code>n</code> linii numerotate de la <code>1</code> la <code>n</code> și <code>n</code> coloane numerotate de la <code>1</code> la <code>n</code> și elemente numere naturale. Semnificativ marcați de algoritmul de determinare a celui mai lung subșir crescător, au inventat pe loc un joc:</p><ul>\n\t<li>liniile cu indice impar aparțin lui Dom’ Profesor Unu, cele cu indice par aparțin lui Dom’ Profesor Doi;</li>\n\t<li>pentru fiecare linie a sa, Dom’ Profesor Unu determină lungimea maximă a unui subșir crescător;</li>\n\t<li>pentru fiecare linie a sa, Dom’ Profesor Doi determină lungimea maximă a unui subșir descrescător;</li>\n\t<li>scorul fiecărei linii este lungimea determinată;</li>\n\t<li>scorul total al fiecărui Dom’ Profesor este egal cu suma scorurilor liniilor corespunzătoare;</li>\n\t<li>jocul este câștigat de Dom’ Profesor cu scorul total mai mare.</li>\n</ul><p>Determinați scorului fiecărui Dom’ Profesor și stabiliți câștigătorul.</p>",
+      "text": "Dom’ Profesor Unu și Dom’ Profesor Doi au găsit o matrice cu n linii numerotate de la 1 la n și n coloane numerotate de la 1 la n și elemente numere naturale. Semnificativ marcați de algoritmul de determinare a celui mai lung subșir crescător, au inventat pe loc un joc: liniile cu indice impar aparțin lui Dom’ Profesor Unu, cele cu indice par aparțin lui Dom’ Profesor Doi; pentru fiecare linie a sa, Dom’ Profesor Unu determină lungimea maximă a unui subșir crescător; pentru fiecare linie a sa, Dom’ Profesor Doi determină lungimea maximă a unui subșir descrescător; scorul fiecărei linii este lungimea determinată; scorul total al fiecărui Dom’ Profesor este egal cu suma scorurilor liniilor corespunzătoare; jocul este câștigat de Dom’ Profesor cu scorul total mai mare. Determinați scorului fiecărui Dom’ Profesor și stabiliți câștigătorul."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>joc6.in</code> conține pe prima linie numărul <code>n</code>; fiecare dintre următoarele <code>n</code> linii conține <code>n</code> numere naturale separate prin spații.</p>",
+      "text": "Fișierul de intrare joc6.in conține pe prima linie numărul n; fiecare dintre următoarele n linii conține n numere naturale separate prin spații."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>joc6.out</code> va conține pe prima linie două numere <code>S1 S2</code>, separate prin exact un spațiu, unde <code>S1</code> este scorul lui Dom’ Profesor Unu, iar <code>S2</code> este scorul lui Dom’ Profesor Doi. Linia a doua va conține unul dintre cuvintele:</p><ul>\n\t<li><code>UNU</code> – dacă câștigă Dom’ Profesor Unu;</li>\n\t<li><code>DOI</code> – dacă câștigă Dom’ Profesor Doi;</li>\n\t<li><code>REMIZA</code> – dacă scorurile sunt egale.</li>\n</ul>",
+      "text": "Fișierul de ieșire joc6.out va conține pe prima linie două numere S1 S2, separate prin exact un spațiu, unde S1 este scorul lui Dom’ Profesor Unu, iar S2 este scorul lui Dom’ Profesor Doi. Linia a doua va conține unul dintre cuvintele: UNU – dacă câștigă Dom’ Profesor Unu; DOI – dacă câștigă Dom’ Profesor Doi; REMIZA – dacă scorurile sunt egale."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ n ≤ 150</code></li>\n\t<li>elementele matricei vor fi mai mici decât <code>1.000.000.000</code></li>\n</ul>",
+      "text": "1 ≤ n ≤ 150 elementele matricei vor fi mai mici decât 1.000.000.000"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>joc6.in</code></p><pre>4\n1 4 2 3\n2 9 8 7\n3 6 3 8\n1 2 3 3</pre><p><code>joc6.out</code></p><pre>6 5\nUNU</pre><h3>Explicație</h3><ul>\n\t<li>linia <code>1</code> este a lui Dom’ Profesor Unu. Scorul este <code>3</code> – subșirul <code>1 2 3</code>;</li>\n\t<li>linia <code>2</code> este a lui Dom’ Profesor Dou. Scorul este <code>3</code> – subșirul <code>9 8 7</code>;</li>\n\t<li>linia <code>3</code> este a lui Dom’ Profesor Unu. Scorul este <code>3</code> – subșirul <code>3 3 8</code>;</li>\n\t<li>linia <code>4</code> este a lui Dom’ Profesor Doi. Scorul este <code>2</code> – subșirul <code>3 3</code>.</li>\n</ul><p>Așadar, scorul total a lui Dom’ Profesor Unu este <code>3+3=6</code>, iar scorul total al lui Dom’ Profesor Doi este <code>2+3=5</code>. Câștigă <code>Unu</code>.</p>",
+      "text": "joc6.in4 1 4 2 3 2 9 8 7 3 6 3 8 1 2 3 3joc6.out6 5 UNUExplicație linia 1 este a lui Dom’ Profesor Unu. Scorul este 3 – subșirul 1 2 3; linia 2 este a lui Dom’ Profesor Dou. Scorul este 3 – subșirul 9 8 7; linia 3 este a lui Dom’ Profesor Unu. Scorul este 3 – subșirul 3 3 8; linia 4 este a lui Dom’ Profesor Doi. Scorul este 2 – subșirul 3 3. Așadar, scorul total a lui Dom’ Profesor Unu este 3+3=6, iar scorul total al lui Dom’ Profesor Doi este 2+3=5. Câștigă Unu."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "linia 1 este a lui Dom’ Profesor Unu. Scorul este 3 – subșirul 1 2 3; linia 2 este a lui Dom’ Profesor Dou. Scorul este 3 – subșirul 9 8 7; linia 3 este a lui Dom’ Profesor Unu. Scorul este 3 – subșirul 3 3 8; linia 4 este a lui Dom’ Profesor Doi. Scorul este 2 – subșirul 3 3."
+    }
+  ],
+  "constraints": [
+    "1 ≤ n ≤ 150",
+    "elementele matricei vor fi mai mici decât 1.000.000.000"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q9e9ea285d1.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "11",
+    "intrare/ieșire": "joc6.in / joc6.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "-",
+    "autor": "Silviu Candale",
+    "dificultate": "medie"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "author": "Silviu Candale",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1385/joc6"
+}

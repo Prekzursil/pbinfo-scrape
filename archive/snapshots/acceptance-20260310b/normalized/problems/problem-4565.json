@@ -1,0 +1,310 @@
+{
+  "id": 4565,
+  "slug": "amazon",
+  "name": "Amazon",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4565/amazon",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 16,
+      "name": "Teoria Grafurilor",
+      "slug": "teoria-grafurilor",
+      "href": "/?pagina=probleme-lista&tag=16"
+    },
+    {
+      "id": 64,
+      "name": "Arbori cu rădăcină",
+      "slug": "arbori-cu-r-d-cin",
+      "href": "/?pagina=probleme-lista&tag=64"
+    }
+  ],
+  "tags": [
+    "Lowest Common Ancestor",
+    "Smenul lui Mars (Difference Arrays)",
+    "Heavy-Light Decomposition"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Jeffrey dorește sa își extindă magazinul său online și în România. Pentru a asigura obsesia pentru satisfacția clienților, el stabilește o strategie de livrare a comenzilor eficientă, automată, și într-un timp cât mai scurt.</p><p>România este formată din <code>N</code> orașe conectate între ele, existând un traseu unic între oricare două orașe. Un traseu este o secvență de drumuri care conectează două orașe, astfel încât niciun drum nu se repetă. În total, există <code>N−1</code> drumuri bidirecționale care conectează orașele.</p><p>Fiecare drum are și un cost asociat. Echipa lui Jeffrey a creat o lista de <code>M</code> perechi de orașe între care se va circula foarte des pentru livrarea coletelor. Definim costul unei perechi de orașe <code>(x, y)</code> ca fiind suma costurilor drumurilor din traseul de la orașul <code>x</code> la orașul <code>y</code>. De asemenea, definim costul total ca fiind suma tuturor costurilor celor <code>M</code> perechi de orașe date.</p><p>Jeffrey poate să aplice următorul tip de operație: selectează un drum cu un cost strict pozitiv și îi scade costul cu <code>1</code>. Din motive de “<em>frugality</em>”, această operație poate fi aplicată de cel mult <code>K</code> ori, unde <code>K</code> este un număr natural.</p><p>Se cere să găsiți costul total minim ce poate fi obținut, după aplicarea de cel mult <code>K</code> ori a operației menționate mai sus.</p>",
+      "text": "Jeffrey dorește sa își extindă magazinul său online și în România. Pentru a asigura obsesia pentru satisfacția clienților, el stabilește o strategie de livrare a comenzilor eficientă, automată, și într-un timp cât mai scurt.România este formată din N orașe conectate între ele, existând un traseu unic între oricare două orașe. Un traseu este o secvență de drumuri care conectează două orașe, astfel încât niciun drum nu se repetă. În total, există N−1 drumuri bidirecționale care conectează orașele.Fiecare drum are și un cost asociat. Echipa lui Jeffrey a creat o lista de M perechi de orașe între care se va circula foarte des pentru livrarea coletelor. Definim costul unei perechi de orașe (x, y) ca fiind suma costurilor drumurilor din traseul de la orașul x la orașul y. De asemenea, definim costul total ca fiind suma tuturor costurilor celor M perechi de orașe date.Jeffrey poate să aplice următorul tip de operație: selectează un drum cu un cost strict pozitiv și îi scade costul cu 1. Din motive de “frugality”, această operație poate fi aplicată de cel mult K ori, unde K este un număr natural.Se cere să găsiți costul total minim ce poate fi obținut, după aplicarea de cel mult K ori a operației menționate mai sus."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie a fișierului de intrare se află un număr natural <code>N</code>, reprezentând numărul de orașe.</p><p>Pe următoarele <code>N−1</code> linii se află câte <code>3</code> numere <code>x</code>, <code>y</code> și <code>w</code>, reprezentând faptul că există un drum bidirecțional între orașele <code>x</code> și <code>y</code>, cu costul egal cu <code>w</code>. Orașele sunt numerotate de la <code>0</code> la <code>N−1</code>.</p><p>Pe următoarea linie se află numerele <code>M</code> și <code>K</code>, reprezentând numărul de perechi de orașe, respectiv, numărul de operații ce pot fi aplicate, urmând apoi <code>M</code> linii care conțin fiecare câte două numere <code>x</code> și <code>y</code> reprezentând cele <code>M</code> perechi de orașe.</p>",
+      "text": "Pe prima linie a fișierului de intrare se află un număr natural N, reprezentând numărul de orașe.Pe următoarele N−1 linii se află câte 3 numere x, y și w, reprezentând faptul că există un drum bidirecțional între orașele x și y, cu costul egal cu w. Orașele sunt numerotate de la 0 la N−1.Pe următoarea linie se află numerele M și K, reprezentând numărul de perechi de orașe, respectiv, numărul de operații ce pot fi aplicate, urmând apoi M linii care conțin fiecare câte două numere x și y reprezentând cele M perechi de orașe."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Pe prima linie a fișierului de ieșire se va afla un singur număr, reprezentând costul total minim ce va putea fi obținut, modulo <code>666.013</code>.</p>",
+      "text": "Pe prima linie a fișierului de ieșire se va afla un singur număr, reprezentând costul total minim ce va putea fi obținut, modulo 666.013."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 200 000</code></li>\n\t<li><code>1 ≤ K ≤ 200 000</code></li>\n\t<li><code>1 ≤ M ≤ N</code></li>\n\t<li><code>1 ≤ w ≤ 20</code></li>\n\t<li><code>0 ≤ x, y &lt; N, x ≠ y</code></li>\n\t<li>Operația de scădere a costului unui drum <b>poate fi aplicată de mai multe ori pentru același drum</b>, atât timp cât costul drumului nu devine un număr negativ.</li>\n</ul>",
+      "text": "1 ≤ N ≤ 200 000 1 ≤ K ≤ 200 000 1 ≤ M ≤ N 1 ≤ w ≤ 20 0 ≤ x, y < N, x ≠ y Operația de scădere a costului unui drum poate fi aplicată de mai multe ori pentru același drum, atât timp cât costul drumului nu devine un număr negativ."
+    },
+    {
+      "title": "Punctare",
+      "html": "<ul>\n\t<li>Pentru teste în valoare de <code>20</code> de puncte se garantează că <code>1 ≤ N, K ≤ 1 000</code>.</li>\n\t<li>Pentru alte teste în valoare de <code>30</code> de puncte se garantează că <code>K = 0</code>.</li>\n\t<li>Pentru restul testelor în valoare de <code>50</code> de puncte nu sunt restricții suplimentare.</li>\n</ul>",
+      "text": "Pentru teste în valoare de 20 de puncte se garantează că 1 ≤ N, K ≤ 1 000. Pentru alte teste în valoare de 30 de puncte se garantează că K = 0. Pentru restul testelor în valoare de 50 de puncte nu sunt restricții suplimentare."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>amazon.in</code></p><pre>5\n1 0 4\n0 2 3\n1 3 4\n1 4 4\n3 5\n2 4\n1 4\n3 4</pre><p><code>amazon.out</code></p><pre>10</pre><h3>Explicații</h3><p>Putem alege să aplicăm operația de scădere a costului drumului pe drumul de la orașul <code>1</code> la orașul <code>4</code> de <code>4</code> ori. Astfel, costul drumului va deveni <code>0</code>.</p><p>Mai putem aplica încă o dată operația pentru drumul de la orașul <code>1</code> la <code>3</code>, micșorând costul acestuia la <code>3</code>. Costul traseului între orașele <code>2</code> si <code>4</code> va fi suma costurilor drumurilor <code>2-&gt;0</code>, <code>0-&gt;1</code> și <code>1-&gt;4</code>, adică <code>3 + 4 + 0 = 7</code>. Costul traseului între orașele <code>1</code> si <code>4</code> va fi costul drumului <code>1-&gt;4</code>, adică <code>0</code>. Costul traseului între orașele <code>3</code> si <code>4</code> va fi suma costurilor drumurilor <code>3-&gt;1</code> și <code>1-&gt;4</code>, adică <code>3 + 0 = 3</code>.</p><p>Astfel, costul total este <code>7 + 0 + 3 = 10</code>.</p>",
+      "text": "amazon.in5 1 0 4 0 2 3 1 3 4 1 4 4 3 5 2 4 1 4 3 4amazon.out10ExplicațiiPutem alege să aplicăm operația de scădere a costului drumului pe drumul de la orașul 1 la orașul 4 de 4 ori. Astfel, costul drumului va deveni 0.Mai putem aplica încă o dată operația pentru drumul de la orașul 1 la 3, micșorând costul acestuia la 3. Costul traseului între orașele 2 si 4 va fi suma costurilor drumurilor 2->0, 0->1 și 1->4, adică 3 + 4 + 0 = 7. Costul traseului între orașele 1 si 4 va fi costul drumului 1->4, adică 0. Costul traseului între orașele 3 si 4 va fi suma costurilor drumurilor 3->1 și 1->4, adică 3 + 0 = 3.Astfel, costul total este 7 + 0 + 3 = 10."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Putem alege să aplicăm operația de scădere a costului drumului pe drumul de la orașul 1 la orașul 4 de 4 ori. Astfel, costul drumului va deveni 0."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 200 000",
+    "1 ≤ K ≤ 200 000",
+    "1 ≤ M ≤ N",
+    "1 ≤ w ≤ 20",
+    "0 ≤ x, y < N, x ≠ y",
+    "Operația de scădere a costului unui drum poate fi aplicată de mai multe ori pentru același drum, atât timp cât costul drumului nu devine un număr negativ."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q725d13ac2b.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Moldovan Robert (moldovan_robert_lol)",
+    "clasa": "11",
+    "intrare/ieșire": "amazon.in / amazon.out",
+    "limită timp": "1 secunde",
+    "limită memorie": "256 MB / 64 MB",
+    "sursa problemei": "Concursul Interjudețean de Matematică și Informatică Grigore Moisil, 2023",
+    "autor": "Robert-Raul Borcani, Octavian Trifan, Daniel Todașcă",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 1,
+  "memoryLimitMb": 256,
+  "author": "Robert-Raul Borcani, Octavian Trifan, Daniel Todașcă",
+  "sourceAttribution": "Concursul Interjudețean de Matematică și Informatică Grigore Moisil, 2023",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4565/amazon"
+}

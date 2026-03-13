@@ -1,0 +1,85 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1648"><article id="enunt">
+			<p>Negrimon a găsit într-o culegere această problemă #legendară: peste un şir de caractere de lungime <code>N</code>, alcătuit din litere mici ale alfabetului englez, se efectuează <code>M</code> operaţii de următoarele tipuri:</p>
+
+<ol>
+	<li>Se inserează în şir caracterul <code>x</code>, pe poziţia <code>p</code>, după deplasarea cu o poziţie la dreapta a caracterelor situate pe poziţiile mai mari sau egale cu <code>p</code>. Dacă valoarea <code>p</code> este egală cu lungimea şirului, <code>x</code> este alipit la finalul şirului.</li>
+	<li>Se răspunde cu <code>1</code> dacă secvenţa de litere care începe la poziţia <code>q1</code> şi are lungimea <code>lg</code> coincide literă cu literă, cu secvenţa care începe la poziţia <code>q2</code> şi are aceeaşi lungime <code>lg</code> şi se răspunde cu <code>0</code> în caz contrar. Este posibil ca cele două secvenţe să se suprapună complet sau parţial în şirul din care ele fac parte.</li>
+</ol>
+
+<h1>Cerința</h1>
+
+<p>Fiind dat un şir de <code>N</code> litere mici şi o listă de <code>M</code> operaţii, să se afişeze răspunsurile la operaţiile de tip <code>2</code>, respectând ordinea din succesiunea de operaţii date.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>diez.in</code> conține pe prima linie valorile <code>N</code> şi <code>M</code>, separate printr-un spaţiu cu semnificaţia din enunţ. Pe a doua linie se află un şir de <code>N</code> litere mici ale alfabetului englez iar următoarele <code>M</code> linii conţin câte o operaţie în unul dintre formatele:</p>
+
+<ul>
+	<li><code>1 p x</code> – Datele pentru operaţia de tipul <code>1</code>.</li>
+	<li><code>2 q1 q2 lg</code> – Datele pentru operaţia de tipul <code>2</code>.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>În fișierul de ieșire <code>diez.out</code> se vor scrie valori egale cu <code>0</code> sau <code>1</code>, câte una pe o linie, reprezentând răspunsurile date, în ordine, la operaţiile de tipul <code>2</code> existente în fişierul de intrare.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N, M ≤ 250 000</code></li>
+	<li><code>0 ≤ p ≤</code> lungimea şirului la momentul inserării</li>
+	<li><code>x</code> este literă mică a alfabetului englez</li>
+	<li><code>q1, q2 ≥ 0</code>; se garantează că pentru fiecare operaţie de tipul <code>2</code> există <code>lg</code> caractere în şir începând atât cu poziţia <code>q1</code> cât şi cu poziţia <code>q2</code></li>
+	<li><code>1 &lt; lg ≤</code> lungimea şirului la momentul efectuării operaţiei de tipul <code>2</code></li>
+	<li>Numerotarea caracterelor din şir începe de la poziţia <code>0</code></li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>diez.in</code></p>
+
+<pre>8 6
+abcasfas
+2 0 5 3
+1 3 d
+2 4 7 2
+1 1 s
+1 10 b
+2 0 8 3</pre>
+
+<p><code>diez.out</code></p>
+
+<pre>0
+1
+1</pre>
+
+<h3>Explicație</h3>
+
+<p>Se compară secvenţele <code>abc</code> şi <code>fas</code> care sunt diferite → se afişează <code>0</code><br>
+Caracterul <code>d</code> este inserat înainte de poziţia <code>3</code> şi se obţine şirul <code>abcdasfas</code><br>
+Se compară subşirurile <code>as</code> şi <code>as</code>, sunt identice → se afişează <code>1</code><br>
+Caracterul <code>s</code> este inserat înainte de poziţia <code>1</code>, se obţine şirul <code>asbcdasfas</code><br>
+Caracterul <code>b</code> este inserat pe poziţia <code>10</code>, poziţia este egală cu lungimea şirului, se obţine şirul <code>asbcdasfasb</code><br>
+Se compară subşirurile <code>asb</code> si <code>asb</code> , sunt identice → se afişează <code>1</code></p>
+
+<h1>Exemplu:</h1>
+
+<p><code>diez.in</code></p>
+
+<pre>6 3
+atmatm
+2 0 2 4
+1 6 a
+2 0 3 4</pre>
+
+<p><code>diez.out</code></p>
+
+<pre>0
+1</pre>
+
+<h3>Explicație</h3>
+
+<p>Se compară subşirurile <code>atma</code> şi <code>matm</code>, sunt diferite → se afişează <code>0</code><br>
+Caracterul <code>a</code> se alipeşte la final, se obţine şirul <code>atmatma</code><br>
+Se compară subşirurile <code>atma atma</code>, sunt identice → se afişează <code>1</code></p>		</article>
+		</body></html>

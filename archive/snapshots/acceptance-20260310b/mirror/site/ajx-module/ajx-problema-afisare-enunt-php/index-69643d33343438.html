@@ -1,0 +1,49 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3448"><article id="enunt">
+			<p>Se dă un șir de <code>N</code> numere întregi notat cu <code>A</code>. O subsecvență a șirului <code>A</code> este un șir <code>A</code><sub><code>i</code></sub> <code>A</code><sub><code>i+1</code></sub> <code>A</code><sub><code>i+2</code></sub> <code>... A</code><sub><code>j</code></sub> cu <code>1 ≤ i ≤ j ≤ N</code>, iar lungimea acestei subsecvențe este egală cu <code>j – i + 1</code>. O operație constă în alegerea unei subsecvențe din șir și ștergerea acesteia. În cadrul unei operații, <strong>lungimea subsecvenței alese trebuie să fie o putere de <code>2</code></strong>. În cadrul tuturor operațiilor efectuate pe șir, <strong>lungimile subsecvențelor șterse trebuie să fie distincte</strong>.</p>
+
+<p>Pentru fiecare subsecvență din șir considerăm suma elementelor ei. Definim <em>costul</em> unui șir ca fiind maximul acestor sume, în cazul în care șirul conține cel puțin un număr pozitiv, altfel costul șirului este egal cu <code>0</code>.</p>
+
+<p>Putem aplica o succesiune de operații (eventual niciuna) pe șirul <code>A</code>. În urma acestor operații se vor șterge anumite elemente din șir, obținându-se astfel o mulțime de șiruri <code>M={A, A’</code><sub><code>1</code></sub> <code>, A’</code><sub><code>2</code></sub><code>, A’</code><sub><code>3</code></sub> <code>, ...}</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Să se determine costul maxim posibil ce se poate obține dintr-un șir al mulțimii <code>M</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>recyclebin.in</code> conține pe prima linie un număr întreg <code>N</code>. A doua linie conține <code>N</code> numere întregi, separate prin câte un spațiu, reprezentând valorile șirului <code>A</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>recyclebin.out</code> va conține pe prima linie valoarea costului maxim.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 1000</code></li>
+	<li><code>-10</code><sup><code>6</code></sup><code> ≤ A</code><sub><code>i</code></sub><code> ≤ 10</code><sup><code>6</code></sup> pentru <code>1 ≤ i ≤ N</code></li>
+	<li>Pentru teste în valoare de 10 puncte <code>1 ≤ N ≤ 30</code></li>
+	<li>Pentru alte teste în valoare de 15 puncte se garantează că există o soluție cu cel mult o operație efectuată</li>
+	<li>Pentru alte teste în valoare de 20 puncte se garantează că există o soluție cu cel mult două operații efectuate</li>
+	<li>În concurs s-au acordat 10 puncte din oficiu. Pe site se acordă 10 puncte pentru exemplu.</li>
+</ul>
+
+<h1>Exemplu</h1>
+
+<p><code>recyclebin.in</code></p>
+
+<pre>14
+13 -19 13 -5 -12 11 20 4 -10 1 -7 19 -19 3</pre>
+
+<p><code>recyclebin.out</code></p>
+
+<pre>76</pre>
+
+<h3>Explicație</h3>
+
+<p>Șirul inițial este: <code>[13 -19 13 -5 -12 11 20 (4 -10 1 -7) 19 -19 3]</code>.<br>
+De la poziția <code>8</code> ștergem <code>4</code> elemente, șirul rezultat este <code>[13 -19 13 (-5 -12) 11 20 19 -19 3]</code><br>
+De la poziția <code>4</code> ștergem <code>2</code> elemente, șirul rezultat este <code>[13 (-19) 13 11 20 19 -19 3]</code>.<br>
+De la poziția <code>2</code> ștergem un element, șirul rezultat este <code>[13 13 11 20 19 -19 3]</code>.<br>
+Subsecvența de sumă maximă din șirul final este <code>[13 13 11 20 19]</code>.</p>		</article>
+		</body></html>

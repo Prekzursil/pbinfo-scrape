@@ -1,0 +1,71 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1227"><article id="enunt">
+			<p>Gigel si Ionel se joacă de-a spionii! De aceea ei imaginează o modalitate de a codifica un mesaj astfel încât nimeni să nu îl poată descifra. Toate mesajele lor au lungimea o putere a lui <code>2</code>. Ei numerotează literele mesajului începând cu <code>1</code>. Apoi separă literele în două categorii: cele cu număr de ordine impar în stânga, cele cu număr de ordine par în dreapta, păstrând ordinea lor. Procedeul continuă pentru fiecare grupă nou rezultată începând cu cea din stânga, până când fiecare grupă obţinută conţine un singur caracter. După terminarea operaţiilor alipesc grupele de câte o literă rezultate, începând de la stânga spre dreapta şi obţin mesajul codificat. </p>
+
+<p>De exemplu pentru mesajul <code>MESAJNECODIFICAT</code> procedează astfel:<br>
+1. numerotează</p>
+
+<pre>MESAJNECODIFICAT
+123456789...</pre>
+
+<p>2. separă</p>
+
+<pre>MSJEOIIA                   EANCDFCT            apoi repetă paşii 1 şi 2 pentru 
+12345678                   12345678            fiecare grupă rezultată
+
+MJOI        SEIA           ENDC       ACFT
+1234        1234           1234       1234
+
+MO   JI     SI   EA        ED  NC     AF  CT
+12   12     12   12        12  12     12  12
+
+M O  J I    S I  E A       E D  N C   A F  C T
+1 2  1 2    1 2  1 2       1 2  1 2   1 2  1 2    </pre>
+
+<p>până se obţine un singur caracter în fiecare grupă şi alipind literele de la stânga spre dreapta rezultă mesajul codificat: <code>MOJISIEAEDNCAFCT</code></p>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care să rezolve următoarele două cerinţe:</p>
+
+<ol>
+	<li>dat fiind un mesaj, să determine codificarea acestuia;</li>
+	<li>dat fiind un mesaj codificat, să determine decodificarea acestuia.</li>
+</ol>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fişierului de intrare <code>spioni.in</code> se găseşte un caracter <code>C</code> sau <code>D</code>, indicând faptul că se doreşte <b>C</b>odificarea, respectiv <b>D</b>ecodificarea mesajului de pe linia a doua. Linia a doua a fişierului de intrare conţine un şir de caractere.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>spioni.out</code> va conține o singură linie pe care se va scrie mesajul codificat (în cazul în care prima linie a fişierului de intrare conţine <code>C</code>), respectiv mesajul decodificat (în cazul în care prima linie a fişierului de intrare conţine <code>D</code>).</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>Şirul de caractere din fişierul de intrare conţine caractere având coduri <span class="caps">ASCII</span> cuprinse între <code>33</code> şi <code>127</code>, lungimea şirului fiind o putere a lui <code>2</code> cuprinsă între <code>2</code> şi <code>4096</code>.</li>
+	<li>Pentru teste valorând 50% din punctaj fişierul de intrare conţine pe prima linie <code>C</code>.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>spioni.in</code></p>
+
+<pre>C
+MESAJNECODIFICAT</pre>
+
+<p><code>spioni.out</code></p>
+
+<pre>MOJISIEAEDNCAFCT</pre>
+
+<h1>Exemplul 2</h1>
+
+<p><code>spioni.in</code></p>
+
+<pre>D
+MOJISIEAEDNCAFCT</pre>
+
+<p><code>spioni.out</code></p>
+
+<pre>MESAJNECODIFICAT</pre>		</article>
+		</body></html>

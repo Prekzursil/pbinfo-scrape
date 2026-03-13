@@ -1,0 +1,309 @@
+{
+  "id": 3033,
+  "slug": "criptografie",
+  "name": "criptografie",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3033/criptografie",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 21,
+      "name": "Probleme cu secvențe",
+      "slug": "probleme-cu-secven-e",
+      "href": "/?pagina=probleme-lista&tag=21"
+    }
+  ],
+  "tags": [
+    "Two Pointers"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Cunoscând textul lui Zedd, să se determine:</p><ul>\n\t<li>Numărul de secvențe distincte în care fiecare literă poate să apară de maximum <code>k</code> ori. Două secvențe sunt considerate distincte dacă diferă fie prin poziția de început, fie prin cea de final.</li>\n\t<li>Cea mai lungă secvență care conține doar litere distincte. Dacă sunt mai multe secvențe de lungime maximă formate din litere distincte se alege prima din punct de vedere lexicografic (alfabetic).</li>\n</ul>",
+      "text": "Cunoscând textul lui Zedd, să se determine: Numărul de secvențe distincte în care fiecare literă poate să apară de maximum k ori. Două secvențe sunt considerate distincte dacă diferă fie prin poziția de început, fie prin cea de final. Cea mai lungă secvență care conține doar litere distincte. Dacă sunt mai multe secvențe de lungime maximă formate din litere distincte se alege prima din punct de vedere lexicografic (alfabetic)."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>criptografie.in</code> conține pe prima linie cerința <code>C</code> (care poate fi <code>1</code> sau <code>2</code>), pe linia a doua numărul natural <code>k</code>, cu semnificația de mai sus, precum și un număr natural <code>n</code>, separate printr-un spațiu. Pe a treia linie se află un text format din <code>n</code> litere mici ale alfabetului englez (neseparate prin spații).</p>",
+      "text": "Fișierul de intrare criptografie.in conține pe prima linie cerința C (care poate fi 1 sau 2), pe linia a doua numărul natural k, cu semnificația de mai sus, precum și un număr natural n, separate printr-un spațiu. Pe a treia linie se află un text format din n litere mici ale alfabetului englez (neseparate prin spații)."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>criptografie.out</code> va conține pe prima linie: <br>\nDacă <code>C = 1</code> un număr natural ce reprezintă răspunsul la cerința <code>1</code>. <br>\nDacă <code>C = 2</code> șirul ce reprezintă răspunsul la cerința <code>2</code>.</p>",
+      "text": "Fișierul de ieșire criptografie.out va conține pe prima linie: Dacă C = 1 un număr natural ce reprezintă răspunsul la cerința 1. Dacă C = 2 șirul ce reprezintă răspunsul la cerința 2."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li>o secvență este formată dintr-o succesiune de litere aflate pe poziții consecutive într-un șir.</li>\n\t<li><code>0 &lt; n ≤ 100.000</code></li>\n\t<li><code>0 &lt; k ≤ n</code></li>\n\t<li>Pentru teste în valoare de <code>67</code> de puncte <code>C = 1</code>, iar pentru <code>33</code> de puncte <code>C = 2</code></li>\n\t<li>Pentru teste în valoare de <code>17</code> puncte se garantează <code>C = 1</code>, <code>k = 1</code> și <code>n ≤ 100</code></li>\n\t<li>Pentru teste în valoare de alte <code>17</code> puncte se garantează <code>C = 1</code> și <code>n ≤ 1000</code></li>\n\t<li>Pentru cerința <code>2</code> se garantează că valoarea lui <code>k</code> este <code>1</code>.</li>\n</ul>",
+      "text": "o secvență este formată dintr-o succesiune de litere aflate pe poziții consecutive într-un șir. 0 < n ≤ 100.000 0 < k ≤ n Pentru teste în valoare de 67 de puncte C = 1, iar pentru 33 de puncte C = 2 Pentru teste în valoare de 17 puncte se garantează C = 1, k = 1 și n ≤ 100 Pentru teste în valoare de alte 17 puncte se garantează C = 1 și n ≤ 1000 Pentru cerința 2 se garantează că valoarea lui k este 1."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>criptografie.in</code></p><pre>1 \n1 4 \nabac</pre><p><code>criptografie.out</code></p><pre>8</pre><h3>Explicație</h3><p>Pentru textul dat, variantele care ar putea fi obținute conform cerinței sunt: <code>a</code>, <code>ab</code>, <code>b</code>, <code>ba</code>, <code>bac</code>, <code>a</code>, <code>ac</code>, <code>c</code>. În total numărul de secvențe cu caractere distincte (<code>k = 1</code>) ce pot fi formate este <code>8</code>.</p><p>Exemplul 2:</p><p><code>criptografie.in</code></p><pre>2\n1 6\nabacba</pre><p><code>criptografie.out</code></p><pre>acb</pre><h3>Explicație</h3><p>Lungimea maximă a unei secvențe de elemente distincte este <code>3</code>. Sunt trei astfel de secvențe. Prima din punct de vedere alfabetic este <code>acb</code>.</p>",
+      "text": "criptografie.in1 1 4 abaccriptografie.out8ExplicațiePentru textul dat, variantele care ar putea fi obținute conform cerinței sunt: a, ab, b, ba, bac, a, ac, c. În total numărul de secvențe cu caractere distincte (k = 1) ce pot fi formate este 8.Exemplul 2:criptografie.in2 1 6 abacbacriptografie.outacbExplicațieLungimea maximă a unei secvențe de elemente distincte este 3. Sunt trei astfel de secvențe. Prima din punct de vedere alfabetic este acb."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Pentru textul dat, variantele care ar putea fi obținute conform cerinței sunt: a, ab, b, ba, bac, a, ac, c. În total numărul de secvențe cu caractere distincte (k = 1) ce pot fi formate este 8."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Lungimea maximă a unei secvențe de elemente distincte este 3. Sunt trei astfel de secvențe. Prima din punct de vedere alfabetic este acb."
+    }
+  ],
+  "constraints": [
+    "o secvență este formată dintr-o succesiune de litere aflate pe poziții consecutive într-un șir.",
+    "0 < n ≤ 100.000",
+    "0 < k ≤ n",
+    "Pentru teste în valoare de 67 de puncte C = 1, iar pentru 33 de puncte C = 2",
+    "Pentru teste în valoare de 17 puncte se garantează C = 1, k = 1 și n ≤ 100",
+    "Pentru teste în valoare de alte 17 puncte se garantează C = 1 și n ≤ 1000",
+    "Pentru cerința 2 se garantează că valoarea lui k este 1."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qc32c2c6bda.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "criptografie.in / criptografie.out",
+    "limită timp": "0.2 secunde",
+    "limită memorie": "20 MB / 8 MB",
+    "sursa problemei": "ONIGIM 2019 clasa a VIII-a",
+    "autor": "Alina Pintescu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.2,
+  "memoryLimitMb": 20,
+  "author": "Alina Pintescu",
+  "sourceAttribution": "ONIGIM 2019 clasa a VIII-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3033/criptografie"
+}

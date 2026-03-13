@@ -1,0 +1,78 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2514"><article id="enunt">
+			<p><strong>Durotan</strong>, căpetenia clanului <em>Frostwolf</em>, face o ultima încercare în a cuceri clanurile rivale (<em>Orcish Horde</em>). Conform ierarhiei <em>Orcish</em>, căpeteniile de clan sunt denumite <strong>warchief</strong>, în timp ce liderii triburilor sunt denumiți <strong>șamani</strong>. Triburile din care fac parte căpeteniile sunt triburi dominante, iar triburile conduse de șamani sunt triburi vasale.  <br>
+Pe planetă există <code>N</code> triburi, numerotate de la <code>1</code> la <code>N</code>. Șamanul unui trib are anumite abilități de luptă. Căpetenia unui clan este șamanul tribului său. Abilitățile de luptă cunoscute de șamani sunt numerotate de la <code>1</code> la <code>M</code>. <br>
+De-a lungul timpului între triburile aceluiași clan s-au stabilit relații de vasalitate. Dacă tribul <code>1</code> este trib dominant al tribului vasal <code>2</code>, iar tribul <code>2</code> are ca vasal tribul <code>3</code>, vom spune că tribul <code>3</code> se află în zona de influență a triburilor <code>1</code> și <code>2</code>. Triburile <code>1,2,3</code> alcătuiesc un clan.<br>
+Puterea unei căpetenii depinde de numărul triburilor ce alcătuiesc clanul, precum și de abilitățile de luptă învățate. Căpetenia unui clan are anumite abilități de luptă, dar poate să-și însușească (învețe) și <em>abilități de luptă unice</em> de la șamanii triburilor clanului aflate în zona sa de influență. Prin <em>abilități de luptă unice</em> înțelegem abilități cunoscute doar de un singur șaman din totalitatea triburilor clanului.<br>
+<strong>Exemplu</strong>: Considerăm un clan ce are <code>4</code> triburi: <code>1(3,6)</code>, <code>2(1,2,4)</code>, <code>3(3,5,6)</code>, <code>4(1,3,4)</code>. Căpetenia clanului se află la tribul <code>1</code>, el fiind considerat și șamanul tribului. Acesta are abilitățile <code>3,6</code>. Șamanul tribului <code>2</code> are abilitățile <code>1,2,4</code>, șamanul tribului <code>3</code> are abilitățile <code>3,5,6</code>, șamanul tribului <code>4</code> are abilitățile <code>1,3,4</code>. Presupunem că tribul <code>4</code> este vasal tribului <code>2</code>, iar triburile <code>2</code> și <code>3</code> sunt vasale tribului <code>1</code>. Căpetenia, la abilitățile <code>3,6</code> avute deja, poate să dobândească abilitățile unice <code>2</code>, <code>5</code> de la șamanii triburilor clanului.<br>
+<strong>Durotan</strong> invocă vechiul cod al onoarei <strong>Mak’gora</strong>, ce implică provocarea la duel a căpeteniilor de clan. Câștigă duelul dacă are un număr strict mai mare de triburi în zona sa de influență, iar la număr egal de triburi, un număr strict mai mare de abilități diferite. Triburile clanului învins se vor alătura clanului său, <strong>Durotan</strong> însușindu-și (adăugându-și) abilitățile unice ale învinsului.</p>
+
+<h1>Cerința</h1>
+
+<p>Fiind cunoscute pentru cele <code>N</code> triburi abilitățile fiecărui șaman, relațiile de vasalitate între triburi, numărul de ordine al unui trib al clanului <em>Frostwolf</em>, să se determine:<br>
+</p><ul>
+	<li>numărul total de clanuri</li>
+	<li>numărul de triburi din clanul <em>Frostwolf</em> înainte de duel</li>
+	<li>numărul maxim de triburi pe care <strong>Duroton</strong> le poate avea după invocarea codului <strong>Mak’gora</strong>.</li><br>
+</ul><p></p>
+
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>warcraft.in</code> conține pe prima linie trei numere natural <code>N M X</code> ce reprezintă <code>N</code> – numărul de triburi, <code>M</code> – numărul de abilități, <code>X</code> – numărul de ordine al unui trib ce face parte din clanul lui <strong>Durotan</strong>.<br>
+Pe următoarele <code>N</code> linii descrierea fiecărui trib: <code>x y k a1 a2 … ak</code>, unde:  tribul <code>x</code> este vasal tribului <code>y</code>. Șamanul tribului <code>x</code> are <code>k</code> abilități de luptă, <code>a1, a2,…,ak</code>, valori strict crescătoare.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>warcraft.out</code> va conține trei numere naturale <code>n1, n2, n3</code>, scrise fiecare pe câte o linie, unde: <br>
+</p><ul>
+	<li><code>n1</code> reprezintă total numărul de clanuri</li>
+	<li><code>n2</code> numărul de triburi ai clanului <em>Frostwolf</em> înainte de duel</li>
+	<li><code>n3</code> numărul maxim de triburi ai clanului <em>Frostwolf</em> după ce <strong>Durotan</strong> invocă codul <strong>Mak’gora</strong>.</li><br>
+</ul><p></p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N ≤ 1000</code></li>
+	<li><code>1 ≤ X ≤ N</code></li>
+	<li><code>1 ≤ M ≤ 500</code></li>
+	<li><code>1 ≤ k ≤ M</code></li>
+	<li>Numărul de clanuri <code>≤ 500</code></li>
+	<li>Dacă un trib nu este vasal altui trib, atunci <code>y=0</code></li>
+	<li>Durotan provoacă la duel doar căpeteniile de trib. În duel sunt folosite abilitățile cunoscute sau dobândite de căpetenie</li>
+	<li>Pentru determinarea corectă a lui <code>n1</code> se acordă <code>20%</code> din punctaj/test. Pentru determinarea corectă a lui <code>n2</code> se acordă <code>20%</code> din punctaj/test. Pentru determinarea corectă a lui <code>n3</code> se acordă <code>60%</code> din punctaj/test.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>warcraft.in</code></p>
+
+<pre>12 6 8
+4 10 5 1 2 3 4 5 
+12 6 4 1 2 5 6 
+10 0 2 5 6 
+2 4 4 2 3 4 5 
+1 12 3 1 4 5 
+11 0 5 2 3 4 5 6 
+9 5 2 2 6 
+6 0 3 2 4 5 
+7 11 6 1 2 3 4 5 6 
+8 10 1 4 
+3 2 3 2 4 5
+5 1 3 1 3 6 </pre>
+
+<p><code>warcraft.out</code></p>
+
+<pre>3
+5
+12</pre>
+
+<h3>Explicație</h3>
+
+<p>Sunt <code>12</code> triburi, <code>6</code> tipuri de abilități de luptă <code>1,2,3,4,5,6</code>. Tribul lui <strong>Durotan</strong> are indicele <code>10</code>. Tribul <code>8</code> aparține clanului lui <strong>Durotan</strong>. Tribul <code>1</code> este vasal tribului <code>12</code>. Șamanul tribului are <code>3</code> abilități: <code>1,4,5</code><br>
+Tribul <code>2</code> este vasal tribului <code>4</code>. Șamanul tribului are <code>4</code> abilități: <code>2,3,4,5</code>. Tribul <code>3</code> este vasal tribului <code>2</code>. Șamanul tribului are <code>3</code> abilități: <code>2,4,5</code>. Tribul <code>4</code> este vasal tribului <code>10</code>. Șamanul tribului are <code>5</code> abilități: <code>1,2,3,4,5</code>. Tribul <code>5</code> este vasal tribului <code>1</code>. Șamanul tribului are <code>5</code> abilități: <code>1,2,3,4,5</code>. Tribul <code>6</code> este trib dominant (nu este vasal). Șamanul tribului are <code>3</code> abilități: <code>2,4,5</code>.<br>
+s.a.m.d.<br>
+Există <code>3</code> clanuri: (<code>2,3,4,8,10</code>), (<code>1,5,6,9,12</code>),(<code>7,11</code>).<br>
+Clanul lui <strong>Durotan</strong> are <code>5</code> triburi în zona sa de influență. Abilitățile de luptă ale lui <strong>Durotan</strong>: <code>5,6</code> la care se adaugă abilitatea unică <code>1</code>. Astfel, abilitățile folosite de <strong>Durotan</strong> în primul duel vor fi: <code>1,5,6</code>. Al doilea clan are căpetenia în tribul <code>6</code> și este compus din <code>5</code> triburi. Abilitățile căpeteniei în cazul unui duel sunt: <code>2,3,4,5</code>. Al treilea clan are căpetenia în tribul <code>11</code>. Abilitățile căpeteniei în cazul unui duel sunt: <code>1,2,3,4,5,6</code>.<br>
+<strong>Durotan</strong> provoacă la duel căpetenia celui de-al treilea clan. Câștigă duelul pentru că numărul de triburi ai clanului său este mai mare. După duel, numărul de triburi ai clanului <em>Frostwolf</em> va fi <code>7</code>, iar  abilitățile după duel ale lui <strong>Durotan</strong> vor fi: <code>1,2,3,4,5,6</code>. Apoi, <strong>Durotan</strong> va provoca la duel căpetenia celui de-al doilea clan. Numărul de triburi ai clanului <em>Frostwolf</em> după duel este <code>12</code>.</p>		</article>
+		</body></html>

@@ -1,0 +1,320 @@
+{
+  "id": 4950,
+  "slug": "esentiale",
+  "name": "esentiale",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4950/esentiale",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 16,
+      "name": "Teoria Grafurilor",
+      "slug": "teoria-grafurilor",
+      "href": "/?pagina=probleme-lista&tag=16"
+    },
+    {
+      "id": 60,
+      "name": "Grafuri cu costuri",
+      "slug": "grafuri-cu-costuri",
+      "href": "/?pagina=probleme-lista&tag=60"
+    }
+  ],
+  "tags": [
+    "Algoritmul lui Kruskal"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Scrieţi un program care, cunoscând graful, rezolvă următoarele două cerinţe: <br>\n1.\tdetermină costul unui arbore parțial de cost minim al lui G;<br>\n2.\tdetermină numărul de muchii esențiale ale grafului G.</p>",
+      "text": "Scrieţi un program care, cunoscând graful, rezolvă următoarele două cerinţe: 1. determină costul unui arbore parțial de cost minim al lui G; 2. determină numărul de muchii esențiale ale grafului G."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>esentiale.in</code> conţine pe prima linie numerele naturale <code>N</code>, <code>M</code> și <code>C</code>, reprezentând numărul de noduri, numărul de muchii și numărul cerinței (<code>1</code> sau <code>2</code>). Următoarele <code>M</code> linii conțin câte trei numere: <code>x y cost</code>, cu semnificația că între nodurile <code>x</code> și <code>y</code> există o muchie având costul cost.</p>",
+      "text": "Fișierul de intrare esentiale.in conţine pe prima linie numerele naturale N, M și C, reprezentând numărul de noduri, numărul de muchii și numărul cerinței (1 sau 2). Următoarele M linii conțin câte trei numere: x y cost, cu semnificația că între nodurile x și y există o muchie având costul cost."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>esentiale.out</code> va conţine o singură linie pe care va fi scris răspunsul la cerinţa <code>C</code>.</p>",
+      "text": "Fișierul de ieșire esentiale.out va conţine o singură linie pe care va fi scris răspunsul la cerinţa C."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2 ≤ N ≤ 1000</code></li>\n\t<li><code>N ≤ M ≤ 100.000</code></li>\n\t<li><code>1 ≤ cost ≤ 10.000.000</code>,  pentru orice muchie din G</li>\n\t<li>Între oricare două noduri există cel mult o muchie.</li>\n\t<li>Pentru 34 de puncte, <code>C = 1</code></li>\n\t<li>Pentru 29 de puncte, <code>C = 2</code> și <code>M ≤ 1000</code></li>\n\t<li>Pentru 27 de puncte, <code>C = 2</code> și <code>M &gt; 1000</code></li>\n\t<li>În concurs s-au acordat 10 puncte din oficiu. Aici se acordă pentru testele din exemple</li>\n</ul>",
+      "text": "2 ≤ N ≤ 1000 N ≤ M ≤ 100.000 1 ≤ cost ≤ 10.000.000, pentru orice muchie din G Între oricare două noduri există cel mult o muchie. Pentru 34 de puncte, C = 1 Pentru 29 de puncte, C = 2 și M ≤ 1000 Pentru 27 de puncte, C = 2 și M > 1000 În concurs s-au acordat 10 puncte din oficiu. Aici se acordă pentru testele din exemple"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>esentiale.in</code></p><pre>5 7 1\n1 2 3\n3 2 4\n3 4 3\n1 3 2\n2 5 3\n5 4 1\n4 1 4</pre><p><code>esentiale.out</code></p><pre>9</pre><h3>Explicație</h3><p><code>C = 1</code> deci se rezolvă doar prima cerință. Graful G este cel din desen și unul din arborii parțiali de cost minim ai lui este format din muchiile: <code>(4, 5)</code>, <code>(1, 3)</code>, <code>(1, 2)</code>, <code>(2, 5)</code>. Costul total minim este <code>9=1+2+3+3</code>, egal cu suma costurilor muchiilor în ordinea specificată mai sus.</p><p><img alt=\"\" src=\"/resurse/16a4b0/esentiale00.jpg\"></p>",
+      "text": "esentiale.in5 7 1 1 2 3 3 2 4 3 4 3 1 3 2 2 5 3 5 4 1 4 1 4esentiale.out9ExplicațieC = 1 deci se rezolvă doar prima cerință. Graful G este cel din desen și unul din arborii parțiali de cost minim ai lui este format din muchiile: (4, 5), (1, 3), (1, 2), (2, 5). Costul total minim este 9=1+2+3+3, egal cu suma costurilor muchiilor în ordinea specificată mai sus."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>esentiale.in</code></p><pre>5 7 2\n1 2 3\n3 2 4\n3 4 3\n1 3 2\n2 5 3\n5 4 1\n4 1 4</pre><p><code>esentiale.out</code></p><pre>2</pre><h3>Explicație</h3><p><code>C = 2</code> deci avem de rezolvat cerința a doua, pentru același graf G. Există trei arbori parțiali de cost minim, formați din următoarele muchii:<br>\n<code>(4, 5), (1, 3), (1, 2), (2, 5)</code><br>\n<code>(4, 5), (1, 3), (1, 2), (3, 4)</code><br>\n<code>(4, 5), (1, 3), (3, 4), (2, 5)</code><br>\nDoar două muchii sunt în toți arborii parțiali de cost minim și anume <code>(4, 5)</code> și <code>(1, 3)</code>.</p>",
+      "text": "esentiale.in5 7 2 1 2 3 3 2 4 3 4 3 1 3 2 2 5 3 5 4 1 4 1 4esentiale.out2ExplicațieC = 2 deci avem de rezolvat cerința a doua, pentru același graf G. Există trei arbori parțiali de cost minim, formați din următoarele muchii: (4, 5), (1, 3), (1, 2), (2, 5) (4, 5), (1, 3), (1, 2), (3, 4) (4, 5), (1, 3), (3, 4), (2, 5) Doar două muchii sunt în toți arborii parțiali de cost minim și anume (4, 5) și (1, 3)."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "C = 1 deci se rezolvă doar prima cerință. Graful G este cel din desen și unul din arborii parțiali de cost minim ai lui este format din muchiile: (4, 5), (1, 3), (1, 2), (2, 5). Costul total minim este 9=1+2+3+3, egal cu suma costurilor muchiilor în ordinea specificată mai sus."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "C = 2 deci avem de rezolvat cerința a doua, pentru același graf G. Există trei arbori parțiali de cost minim, formați din următoarele muchii: (4, 5), (1, 3), (1, 2), (2, 5) (4, 5), (1, 3), (1, 2), (3, 4) (4, 5), (1, 3), (3, 4), (2, 5) Doar două muchii sunt în toți arborii parțiali de cost minim și anume (4, 5) și (1, 3)."
+    }
+  ],
+  "constraints": [
+    "2 ≤ N ≤ 1000",
+    "N ≤ M ≤ 100.000",
+    "1 ≤ cost ≤ 10.000.000, pentru orice muchie din G",
+    "Între oricare două noduri există cel mult o muchie.",
+    "Pentru 34 de puncte, C = 1",
+    "Pentru 29 de puncte, C = 2 și M ≤ 1000",
+    "Pentru 27 de puncte, C = 2 și M > 1000",
+    "În concurs s-au acordat 10 puncte din oficiu. Aici se acordă pentru testele din exemple"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q3f1e69665b.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/esentiale00.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-esentiale00-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "11",
+    "intrare/ieșire": "esentiale.in / esentiale.out",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "64 MB / 16 MB",
+    "sursa problemei": "OMI 2026, clasele 11-12",
+    "autor": "Paul Diac",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 64,
+  "author": "Paul Diac",
+  "sourceAttribution": "OMI 2026, clasele 11-12",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4950/esentiale"
+}

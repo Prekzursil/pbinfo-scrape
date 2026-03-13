@@ -1,0 +1,319 @@
+{
+  "id": 4840,
+  "slug": "allca",
+  "name": "Allca",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4840/allca",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 16,
+      "name": "Teoria Grafurilor",
+      "slug": "teoria-grafurilor",
+      "href": "/?pagina=probleme-lista&tag=16"
+    },
+    {
+      "id": 64,
+      "name": "Arbori cu rădăcină",
+      "slug": "arbori-cu-r-d-cin",
+      "href": "/?pagina=probleme-lista&tag=64"
+    }
+  ],
+  "tags": [
+    "divide et impera",
+    "Range Minimum Query",
+    "Small to large",
+    "Păduri de mulțimi disjuncte"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Se dă un arbore cu <code>N</code> noduri înrădăcinat în <code>1</code> și un șir <code>A</code> de lungime <code>M</code> , cu <code>1≤A[i]≤N</code>. Definim nivelul unui nod ca fiind distanța față de rădăcină și strămoșul unui nod <code>x</code> ca fiind oricare nod <code>y</code> de pe drumul de la <code>x</code> la rădăcină. De asemenea, <code>lca(V)</code>, unde <code>V</code> este un șir, reprezintă nodul de nivel maxim care este strămoș pentru toate nodurile din șirul <code>V</code>. Să se calculeze sumă după <code>lca(V)</code>, unde <code>V</code> este fiecare subsecvență a șirului <code>A</code>. Mai formal, să se afle:</p><p>\\[<br>\n\\sum_{st = 1}^{M} \\sum_{dr = st}^{M} \\operatorname{lca}(A[st], A[st+1], \\ldots, A[dr])<br>\n\\] </p>",
+      "text": "Se dă un arbore cu N noduri înrădăcinat în 1 și un șir A de lungime M , cu 1≤A[i]≤N. Definim nivelul unui nod ca fiind distanța față de rădăcină și strămoșul unui nod x ca fiind oricare nod y de pe drumul de la x la rădăcină. De asemenea, lca(V), unde V este un șir, reprezintă nodul de nivel maxim care este strămoș pentru toate nodurile din șirul V. Să se calculeze sumă după lca(V), unde V este fiecare subsecvență a șirului A. Mai formal, să se afle:\\[ \\sum_{st = 1}^{M} \\sum_{dr = st}^{M} \\operatorname{lca}(A[st], A[st+1], \\ldots, A[dr]) \\]"
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>allca.in</code> conține pe prima linie numărul <code>N</code> de noduri din arbore. Pe următoarele <code>N - 1</code> linii avem descrierea arborelui, câte o muchie pe fiecare linie. Pe linia <code>N + 1</code> se află <code>M</code>, iar pe linia <code>N + 2</code> șirul <code>A</code>.</p>",
+      "text": "Fișierul de intrare allca.in conține pe prima linie numărul N de noduri din arbore. Pe următoarele N - 1 linii avem descrierea arborelui, câte o muchie pe fiecare linie. Pe linia N + 1 se află M, iar pe linia N + 2 șirul A."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul <code>allca.out</code> va conține, pe prima linie, un singur număr întreg, suma căutată.</p>",
+      "text": "Fișierul allca.out va conține, pe prima linie, un singur număr întreg, suma căutată."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 200000</code></li>\n\t<li><code>1 ≤ M ≤ 400000</code></li>\n\t<li>Pentru teste în valoare de <code>10</code> de puncte,  pentru oricare <code>i&gt;1</code>, <code>A[i]</code> este strămoșul lui <code>A[i-1]</code></li>\n\t<li>Pentru alte teste în valoare de <code>20</code> de puncte, arborele este un lanț</li>\n\t<li>Pentru teste în valoare de <code>10</code> de puncte, <code>1 ≤ N, M ≤ 1000</code></li>\n\t<li>Pentru teste în valoare de <code>10</code> de puncte, <code>1000 ≤ N, M ≤ 3000</code></li>\n\t<li>Pentru teste în valoare de <code>25</code> de puncte, <code>3000 ≤ N, M ≤ 100000</code></li>\n\t<li>Pentru restul testelor se păstrează restricțiile inițiale din enunț</li>\n\t<li>În varianta publicată pe platforma <span class=\"caps\">PBI</span>nfo, față de cea utilizată în concurs, a fost adăugat <code>Testul 12</code>, în valoare de <code>1</code> punct. Această modificare are scopul de a încuraja o abordare mai eficientă a problemei și nu a afectat evaluarea soluțiilor trimise în timpul concursului.</li>\n</ul>",
+      "text": "1 ≤ N ≤ 200000 1 ≤ M ≤ 400000 Pentru teste în valoare de 10 de puncte, pentru oricare i>1, A[i] este strămoșul lui A[i-1] Pentru alte teste în valoare de 20 de puncte, arborele este un lanț Pentru teste în valoare de 10 de puncte, 1 ≤ N, M ≤ 1000 Pentru teste în valoare de 10 de puncte, 1000 ≤ N, M ≤ 3000 Pentru teste în valoare de 25 de puncte, 3000 ≤ N, M ≤ 100000 Pentru restul testelor se păstrează restricțiile inițiale din enunț În varianta publicată pe platforma PBInfo, față de cea utilizată în concurs, a fost adăugat Testul 12, în valoare de 1 punct. Această modificare are scopul de a încuraja o abordare mai eficientă a problemei și nu a afectat evaluarea soluțiilor trimise în timpul concursului."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>allca.in</code></p><pre>2\n1 2\n2\n2 1</pre><p><code>allca.out</code></p><pre>4</pre><h3>Explicație</h3><p><code>lca(2)+lca(1)+lca(2,1)=2+1+1=4</code>.</p>",
+      "text": "allca.in2 1 2 2 2 1allca.out4Explicațielca(2)+lca(1)+lca(2,1)=2+1+1=4."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>allca.in</code></p><pre>5\n1 2\n2 3\n3 4\n4 5\n8\n4 1 2 4 2 4 2 2</pre><p><code>allca.out</code></p><pre>64</pre>",
+      "text": "allca.in5 1 2 2 3 3 4 4 5 8 4 1 2 4 2 4 2 2allca.out64"
+    },
+    {
+      "title": "Exemplul 3:",
+      "html": "<p><code>allca.in</code></p><pre>3\t\n1 2\n1 3\n5\n1 3 2 2 1</pre><p><code>allca.out</code></p><pre>20</pre>",
+      "text": "allca.in3 1 2 1 3 5 1 3 2 2 1allca.out20"
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "lca(2)+lca(1)+lca(2,1)=2+1+1=4."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 200000",
+    "1 ≤ M ≤ 400000",
+    "Pentru teste în valoare de 10 de puncte, pentru oricare i>1, A[i] este strămoșul lui A[i-1]",
+    "Pentru alte teste în valoare de 20 de puncte, arborele este un lanț",
+    "Pentru teste în valoare de 10 de puncte, 1 ≤ N, M ≤ 1000",
+    "Pentru teste în valoare de 10 de puncte, 1000 ≤ N, M ≤ 3000",
+    "Pentru teste în valoare de 25 de puncte, 3000 ≤ N, M ≤ 100000",
+    "Pentru restul testelor se păstrează restricțiile inițiale din enunț",
+    "În varianta publicată pe platforma PBInfo, față de cea utilizată în concurs, a fost adăugat Testul 12, în valoare de 1 punct. Această modificare are scopul de a încuraja o abordare mai eficientă a problemei și nu a afectat evaluarea soluțiilor trimise în timpul concursului."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q859bcd7be4.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Crisan Daniela Alexandra (URA)",
+    "clasa": "11",
+    "intrare/ieșire": "allca.in / allca.out",
+    "limită timp": "1 secunde",
+    "limită memorie": "128 MB / 128 MB",
+    "sursa problemei": "RAU-Coder 2025",
+    "autor": "Șerban Carole",
+    "dificultate": "concurs"
+  },
+  "timeLimitSeconds": 1,
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "memoryLimitMb": 128,
+  "author": "Șerban Carole",
+  "sourceAttribution": "RAU-Coder 2025",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4840/allca"
+}

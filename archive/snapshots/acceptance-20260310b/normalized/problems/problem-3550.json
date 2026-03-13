@@ -1,0 +1,307 @@
+{
+  "id": 3550,
+  "slug": "liceu",
+  "name": "liceu",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3550/liceu",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 85,
+      "name": "Structuri de date liniare",
+      "slug": "structuri-de-date-liniare",
+      "href": "/?pagina=probleme-lista&tag=85"
+    },
+    {
+      "id": 87,
+      "name": "Coada",
+      "slug": "coada",
+      "href": "/?pagina=probleme-lista&tag=87"
+    }
+  ],
+  "tags": [
+    "Algoritmul lui Lee"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Fiind dat numărul <code>n</code> de linii și de coloane, coordonatele celulelor ocupate de zid și coordonatele scurtăturilor, se cere să se afișeze numărul minim de secunde în care Marciuc reușește să ajungă în clasă, trecând și pe la magazin. Dacă magazinul nu este accesibil sau daca va ajunge în clasă in mai mult de <code>T</code> secunde, atunci el nu va mai merge la magazin și se va afișa numărul minim de secunde în care acesta ajunge de la poziția lui la clasă. De asemenea, se va afișa și traseul folosit.</p>",
+      "text": "Fiind dat numărul n de linii și de coloane, coordonatele celulelor ocupate de zid și coordonatele scurtăturilor, se cere să se afișeze numărul minim de secunde în care Marciuc reușește să ajungă în clasă, trecând și pe la magazin. Dacă magazinul nu este accesibil sau daca va ajunge în clasă in mai mult de T secunde, atunci el nu va mai merge la magazin și se va afișa numărul minim de secunde în care acesta ajunge de la poziția lui la clasă. De asemenea, se va afișa și traseul folosit."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie a fișierului <code>liceu.in</code> se vor afla <code>4</code> numere naturale: <code>n</code> – numărul de linii și de coloane ale matricei, <code>z</code> – numărul de ziduri ce blochează calea băiatului, <code>s</code> – numărul de scurtături și <code>t</code> – numărul de secunde în care Marciuc poate ajunge în clasă dacă vrea să treacă și pe la magazin.</p><p>Pe următoarele <code>Z</code> linii se află câte <code>2</code> numere reprezentânt coordonatele celulelor ocupate de zid.</p><p>Pe următoarele <code>S</code> linii se află câte <code>4</code> numere naturale reprezentând coordonatele a două celule ce formează o scurtătură.</p><p>Pe ultima linie se află <code>2</code> numere ce reprezintă coordonatele magazinului.</p>",
+      "text": "Pe prima linie a fișierului liceu.in se vor afla 4 numere naturale: n – numărul de linii și de coloane ale matricei, z – numărul de ziduri ce blochează calea băiatului, s – numărul de scurtături și t – numărul de secunde în care Marciuc poate ajunge în clasă dacă vrea să treacă și pe la magazin.Pe următoarele Z linii se află câte 2 numere reprezentânt coordonatele celulelor ocupate de zid.Pe următoarele S linii se află câte 4 numere naturale reprezentând coordonatele a două celule ce formează o scurtătură.Pe ultima linie se află 2 numere ce reprezintă coordonatele magazinului."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>liceu.out</code> va conține pe prima linie numărul minim de secunde în care băiatul ajunge în clasă, iar pe următoarele linii traseul complet al băiatului, celule fiind afișate în ordinea parcurgerii.</p>",
+      "text": "Fișierul de ieșire liceu.out va conține pe prima linie numărul minim de secunde în care băiatul ajunge în clasă, iar pe următoarele linii traseul complet al băiatului, celule fiind afișate în ordinea parcurgerii."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ n ≤ 400</code></li>\n\t<li><code>5 ≤ z ≤ 100000</code></li>\n\t<li><code>0 ≤ s ≤ 15500</code></li>\n\t<li>Poziția inițială a lui Marciuc este <code>1 1</code>, iar poziția clasei este <code>n n</code></li>\n\t<li>Orice traseu de durată minimă este corect. Dacă băiatul poate merge pe la magazin, în traseu trebuie să apară obligatoriu coordonatele magazinului.</li>\n\t<li>Daca numărul minim de secunde este corect dar traseul nu este curect se acordă <strong>40%</strong> din punctaj.</li>\n\t<li>Pentru teste în valoare de <strong>20</strong> de puncte, <code>s = 0</code>.</li>\n\t<li>Pentru teste în valoare de <strong>40</strong> de puncte, <code>n ≤ 100</code>.</li>\n\t<li>Marciuc poate trece de mai multe ori prin același loc.</li>\n\t<li>O celula surtătură poate fi folosită și ca o celula libera.</li>\n\t<li>Fiecare celulă are un singur tip. Nu există scurtături spre celule blocate; celulele <code>1 1</code>, <code>n n</code> și celula pe care este situat magazinul nu sunt blocate.</li>\n\t<li>O scurtatură poate fi traversată prin ambele sensuri.</li>\n</ul>",
+      "text": "1 ≤ n ≤ 400 5 ≤ z ≤ 100000 0 ≤ s ≤ 15500 Poziția inițială a lui Marciuc este 1 1, iar poziția clasei este n n Orice traseu de durată minimă este corect. Dacă băiatul poate merge pe la magazin, în traseu trebuie să apară obligatoriu coordonatele magazinului. Daca numărul minim de secunde este corect dar traseul nu este curect se acordă 40% din punctaj. Pentru teste în valoare de 20 de puncte, s = 0. Pentru teste în valoare de 40 de puncte, n ≤ 100. Marciuc poate trece de mai multe ori prin același loc. O celula surtătură poate fi folosită și ca o celula libera. Fiecare celulă are un singur tip. Nu există scurtături spre celule blocate; celulele 1 1, n n și celula pe care este situat magazinul nu sunt blocate. O scurtatură poate fi traversată prin ambele sensuri."
+    },
+    {
+      "title": "Exemplul 1",
+      "html": "<p><code>liceu.in</code></p><pre>5 5 2 10\n1 5\n3 3\n4 5\n5 2\n2 2\n3 1 5 4\n4 3 1 2\n4 4</pre><p><code>liceu.out</code></p><pre>6\n1 1\n1 2\n4 3\n4 4\n5 4\n5 5</pre><p>Marciuc începe din celula <code>1 1</code>. De-acolo se deplasează până în celula <code>1 2</code>, de unde folosește scurtătura ca să ajungă la <code>4 3</code>. De la <code>4 3</code> se deplasează în celula <code>4 4</code>, unde este magazinul, iar de acolo se deplasează în celulele <code>5 4</code>, <code>5 5</code>, ajungând astfel în <code>clasă</code>. În total, baiatul ajunge în clasă in <code>6</code> secunde, iar <code>6&lt;=T</code>.</p>",
+      "text": "liceu.in5 5 2 10 1 5 3 3 4 5 5 2 2 2 3 1 5 4 4 3 1 2 4 4liceu.out6 1 1 1 2 4 3 4 4 5 4 5 5Marciuc începe din celula 1 1. De-acolo se deplasează până în celula 1 2, de unde folosește scurtătura ca să ajungă la 4 3. De la 4 3 se deplasează în celula 4 4, unde este magazinul, iar de acolo se deplasează în celulele 5 4, 5 5, ajungând astfel în clasă. În total, baiatul ajunge în clasă in 6 secunde, iar 6<=T."
+    },
+    {
+      "title": "Exemplul 2",
+      "html": "<p><code>liceu.in</code></p><pre>5 5 2 10\n2 1\n3 3\n4 5\n5 2\n2 2\n1 4 4 1\n2 3 3 2\n1 5</pre><p><code>liceu.out</code></p><pre>9\n1 1\n1 2\n1 3\n1 4\n2 4\n3 4\n4 4\n5 4\n5 5</pre><p>Dacă ar merge pe la magazin, Marciuc ar ajunge în clasă în <code>11</code> secunde. Dar <code>11&gt;T</code> așa că alege să meargă direct la clasa. O să parcurga urmatorul drum: <code>1 1</code>, <code>1 2</code>, <code>1 3</code>, <code>1 4</code>, <code>2 4</code>, <code>3 4</code>, <code>4 4</code>, <code>5 4</code>, <code>5 5</code>. Puteam observa ca în celula <code>1 4</code> este o scurtătura dar Marciuc a preferat sa nu mearga prin ea. O să ajunge în clasă în <code>9</code> secunde.</p>",
+      "text": "liceu.in5 5 2 10 2 1 3 3 4 5 5 2 2 2 1 4 4 1 2 3 3 2 1 5liceu.out9 1 1 1 2 1 3 1 4 2 4 3 4 4 4 5 4 5 5Dacă ar merge pe la magazin, Marciuc ar ajunge în clasă în 11 secunde. Dar 11>T așa că alege să meargă direct la clasa. O să parcurga urmatorul drum: 1 1, 1 2, 1 3, 1 4, 2 4, 3 4, 4 4, 5 4, 5 5. Puteam observa ca în celula 1 4 este o scurtătura dar Marciuc a preferat sa nu mearga prin ea. O să ajunge în clasă în 9 secunde."
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "1 ≤ n ≤ 400",
+    "5 ≤ z ≤ 100000",
+    "0 ≤ s ≤ 15500",
+    "Poziția inițială a lui Marciuc este 1 1, iar poziția clasei este n n",
+    "Orice traseu de durată minimă este corect. Dacă băiatul poate merge pe la magazin, în traseu trebuie să apară obligatoriu coordonatele magazinului.",
+    "Daca numărul minim de secunde este corect dar traseul nu este curect se acordă 40% din punctaj.",
+    "Pentru teste în valoare de 20 de puncte, s = 0.",
+    "Pentru teste în valoare de 40 de puncte, n ≤ 100.",
+    "Marciuc poate trece de mai multe ori prin același loc.",
+    "O celula surtătură poate fi folosită și ca o celula libera.",
+    "Fiecare celulă are un singur tip. Nu există scurtături spre celule blocate; celulele 1 1, n n și celula pe care este situat magazinul nu sunt blocate.",
+    "O scurtatură poate fi traversată prin ambele sensuri."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qf9d49baad1.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Ioncioaia Calin (Ioncioaia_Calin)",
+    "clasa": "10",
+    "intrare/ieșire": "liceu.in / liceu.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "-",
+    "autor": "Ciornei Stefan, Ioncioaia Calin",
+    "dificultate": "medie"
+  },
+  "timeLimitSeconds": 0.1,
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "memoryLimitMb": 64,
+  "author": "Ciornei Stefan, Ioncioaia Calin",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3550/liceu"
+}

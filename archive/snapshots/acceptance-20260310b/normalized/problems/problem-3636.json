@@ -1,0 +1,299 @@
+{
+  "id": 3636,
+  "slug": "hill-climb",
+  "name": "Hill Climb",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3636/hill-climb",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 9,
+      "name": "Parcurgerea vectorilor",
+      "slug": "parcurgerea-vectorilor",
+      "href": "/?pagina=probleme-lista&tag=9"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p><em>În acest univers virtual, până și dealurile pot fi modificate la cel mai mic ordin al combatanților ezoterici.</em> </p><p>Se da un vector <code>a</code> cu <code>n</code> numere naturale și scopul nostru este să-l transformăm într-un vector descrescător. Pentru a-l face descrescător, avem la dispoziție următoarea operatie:</p><p>La o parcurgere a șirului de la poziția <code>1</code> la poziția <code>n</code>, vom proceda în felul următor pentru fiecare poziție <code>i</code>, în ordine crescătoare: dacă <code>a[i] ≤ a[i+1]</code>, vom atribui lui <code>a[i] = a[i+1]</code>.</p><p>De exemplu, dacă avem vectorul <code>[4, 1, 5, 3, 3]</code>, începem la poziția <code>1</code>, apoi mergem la poziția <code>2</code>, valoarea lui <code>a[2]</code> devine <code>5</code>, apoi mergem la poziția <code>3</code>, apoi la poziția <code>4</code> și în cele din urmă la poziția <code>5</code>.</p><p>După modificări, vectorul va avea următoarele valori: <code>[4, 5, 5, 3, 3]</code>.</p><p>Trebuie să aflați câte parcurgeri sunt necesare pentru a transforma vectorul într-un vector descrescător.</p>",
+      "text": "În acest univers virtual, până și dealurile pot fi modificate la cel mai mic ordin al combatanților ezoterici. Se da un vector a cu n numere naturale și scopul nostru este să-l transformăm într-un vector descrescător. Pentru a-l face descrescător, avem la dispoziție următoarea operatie:La o parcurgere a șirului de la poziția 1 la poziția n, vom proceda în felul următor pentru fiecare poziție i, în ordine crescătoare: dacă a[i] ≤ a[i+1], vom atribui lui a[i] = a[i+1].De exemplu, dacă avem vectorul [4, 1, 5, 3, 3], începem la poziția 1, apoi mergem la poziția 2, valoarea lui a[2] devine 5, apoi mergem la poziția 3, apoi la poziția 4 și în cele din urmă la poziția 5.După modificări, vectorul va avea următoarele valori: [4, 5, 5, 3, 3].Trebuie să aflați câte parcurgeri sunt necesare pentru a transforma vectorul într-un vector descrescător."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fiecare test conține mai multe teste. Prima linie conține numărul de teste <code>t</code>.</p><p>Fiecare test conține pe prima linie numărul <code>n</code>, iar apoi <code>n</code> numere naturale, separate prin spații.</p>",
+      "text": "Fiecare test conține mai multe teste. Prima linie conține numărul de teste t.Fiecare test conține pe prima linie numărul n, iar apoi n numere naturale, separate prin spații."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Programul va afișa pe ecran pentru fiecare linie <code>x</code>, reprezentând numărul de parcurgeri cerut în enunț.</p>",
+      "text": "Programul va afișa pe ecran pentru fiecare linie x, reprezentând numărul de parcurgeri cerut în enunț."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ t ≤ 10</code></li>\n\t<li><code>2 ≤ n ≤ 100000</code></li>\n\t<li>cele <code>n</code> numere citite sunt cuprinse între <code>-1.000.000.000</code> și <code>1.000.000.000</code></li>\n\t<li>pentru teste valorând <code>20</code> de puncte, <code>2 ≤ n ≤ 1000</code></li>\n</ul>",
+      "text": "1 ≤ t ≤ 10 2 ≤ n ≤ 100000 cele n numere citite sunt cuprinse între -1.000.000.000 și 1.000.000.000 pentru teste valorând 20 de puncte, 2 ≤ n ≤ 1000"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><strong>Intrare</strong></p><pre>2\n5\n4 1 5 3 3\n4\n5 5 4 2</pre><p><strong>Ieșire</strong></p><pre>2\n0</pre><h3>Explicație</h3><p>Primul test necesită două parcurgeri: <code>[4, 1, 5, 3, 3]</code> -&gt; <code>[4, 5, 5, 3, 3]</code> -&gt; <code>[5, 5, 5, 3, 3]</code></p><p>Cel de-al doilea test conține un vector care este deja descrescător, așa că răspunsul este deja <code>0</code>.</p>",
+      "text": "Intrare2 5 4 1 5 3 3 4 5 5 4 2Ieșire2 0ExplicațiePrimul test necesită două parcurgeri: [4, 1, 5, 3, 3] -> [4, 5, 5, 3, 3] -> [5, 5, 5, 3, 3]Cel de-al doilea test conține un vector care este deja descrescător, așa că răspunsul este deja 0."
+    }
+  ],
+  "examples": [
+    {
+      "input": "2\n5\n4 1 5 3 3\n4\n5 5 4 2",
+      "output": "2\n0",
+      "explanation": "Primul test necesită două parcurgeri: [4, 1, 5, 3, 3] -> [4, 5, 5, 3, 3] -> [5, 5, 5, 3, 3]"
+    }
+  ],
+  "constraints": [
+    "1 ≤ t ≤ 10",
+    "2 ≤ n ≤ 100000",
+    "cele n numere citite sunt cuprinse între -1.000.000.000 și 1.000.000.000",
+    "pentru teste valorând 20 de puncte, 2 ≤ n ≤ 1000"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q0325e543ea.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Stefan Dascalescu stefdasca.ro (stefdasca)",
+    "clasa": "9",
+    "intrare/ieșire": "tastatură / ecran",
+    "limită timp": "2 secunde",
+    "limită memorie": "32 MB / 32 MB",
+    "sursa problemei": "IOIT 2020-21, Runda 1",
+    "autor": "Flaviu Crăciun",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 2,
+  "memoryLimitMb": 32,
+  "author": "Flaviu Crăciun",
+  "sourceAttribution": "IOIT 2020-21, Runda 1",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3636/hill-climb"
+}

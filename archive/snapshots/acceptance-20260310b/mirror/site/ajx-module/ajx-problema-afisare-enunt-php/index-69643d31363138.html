@@ -1,0 +1,100 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1618"><article id="enunt">
+			<p>Un indicator numeric este un dispozitiv de afişaj electronic destinat afişării unei cifre zecimale. <br>
+Acesta conține <code>7</code> segmente notate cu <code>a</code>, <code>b</code>, <code>c</code>, <code>d</code>, <code>e</code>, <code>f</code>, <code>g</code>, ca în figura de mai jos.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1200-7segmente-jpg.jpg"></p>
+
+<p>Afişarea unei cifre se face prin aprinderea unei combinații de segmente conform tabelului:</p>
+
+<table class="table table-bordered">
+		<tbody><tr>
+			<th>Cifră</th>
+			<th>0</th>
+			<th>1</th>
+			<th>2</th>
+			<th>3</th>
+			<th>4</th>
+			<th>5</th>
+			<th>6</th>
+			<th>7</th>
+			<th>8</th>
+			<th>9</th>
+		</tr>
+		<tr>
+			<td> Segmente aprinse </td>
+			<td> a,b,c,d,e,f </td>
+			<td> b,c  </td>
+			<td> a,b,d,e,g  </td>
+			<td> a,b,c,d,g </td>
+			<td> b,c,f,g </td>
+			<td> a,c,d,f,g </td>
+			<td> a,c,d,e,f,g </td>
+			<td> a,b,c </td>
+			<td> a,b,c,d,e,f,g </td>
+			<td> a,b,c,d,f,g </td>
+		</tr>
+</tbody></table>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând un număr natural <code>N</code> afișat cu ajutorul mai multor indicatoare numerice, să se scrie un program care determină:</p>
+
+<ol>
+	<li>Numărul de segmente aprinse pentru afișarea numărului <code>N</code>.</li>
+	<li>Numărul de numere distincte mai mari decât <code>N</code>,ce se pot forma prin aprinderea a cel puțin unui segment în plus, față de cele utilizate pentru afișarea numărului <code>N</code>, fără a folosi alte indicatoare numerice, și fără a stinge niciun segment dintre cele deja aprinse.</li>
+</ol>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>cifre12.in</code> conține pe prima linie numărul natural <code>V</code> a cărui valoare poate fi doar <code>1</code> sau <code>2</code>, iar pe a doua linie numărul natural <code>N</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire este <code>cifre12.out</code>.</p>
+
+<p>Dacă valoarea lui <code>V</code> este <code>1</code> atunci fişierul de ieşire va conţine pe prima linie un singur număr natural ce reprezintă numărul de segmente aprinse pentru afișarea numărului <code>N</code>.</p>
+
+<p>Dacă valoarea lui <code>V</code> este <code>2</code> atunci fişierul de ieşire va conține pe prima linie un singur număr natural reprezentând numărul de numere distincte mai mari decât <code>N</code>, ce se pot forma prin aprinderea a cel puțin unui segment în plus, față de cele utilizate pentru afișarea numărului <code>N</code>, fără a folosi alte indicatoare numerice.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>10 ≤ N ≤ 10</code><sup><code>19</code></sup></li>
+	<li>20% din teste vor avea valoarea <code>V = 1</code>, iar 80% din teste vor avea valoarea <code>V = 2</code>.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>cifre12.in</code></p>
+
+<pre>1 
+823</pre>
+
+<p><code>cifre12.out</code></p>
+
+<pre>17</pre>
+
+<h3>Explicație</h3>
+
+<p><code>V = 1</code>, deci se rezolvă <span class="caps">NUMAI</span> prima cerință. <code>N = 823</code>;</p>
+
+<p>Pentru afișarea cifrei <code>8</code> s-au aprins <code>7</code> segmente, pentru cifra <code>2</code> s-au aprins <code>5</code> segmente și pentru cifra <code>3</code> tot <code>5</code> segmente. În total s-au aprins <code>17</code> segmente.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>cifre12.in</code></p>
+
+<pre>2
+823</pre>
+
+<p><code>cifre12.out</code></p>
+
+<pre>5</pre>
+
+<h3>Explicație</h3>
+
+<p><code>V = 2</code>, deci se rezolvă <span class="caps">NUMAI</span> a doua cerință. <code>N = 823</code>;</p>
+
+<p>Din cifra <code>8</code> nu se mai pot obține alte cifre prin aprinderea de noi segmente.<br>
+Din cifra <code>2</code> se poate obține cifra <code>8</code> iar din cifra <code>3</code> se pot obține cifrele <code>8</code> și <code>9</code> prin aprinderea de noi segmente. Așadar, se pot obține <code>5</code> numere mai mari ca <code>823</code>: <code>828</code>, <code>829</code>, <code>883</code>, <code>888</code>, <code>889</code>.</p>		</article>
+		</body></html>

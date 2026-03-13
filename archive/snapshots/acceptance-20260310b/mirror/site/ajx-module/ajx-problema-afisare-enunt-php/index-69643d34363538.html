@@ -1,0 +1,72 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4658"><article id="enunt">
+			<p>Maria a primit cadou de ziua ei o cutie cu piese de puzzle, etichetate cu numere naturale. Pentru a-l rezolva trebuie să lipească între ele, în ordinea în care le extrage din cutie, cât mai multe piese, formând astfel grupuri de piese. </p>
+
+<p>Două piese de puzzle se pot lipi între ele dacă numerele de pe etichetele lor au cel puțin trei cifre comune. La operația de lipire a două piese se obține un grup de piese care va fi etichetat cu numărul obținut prin alipirea primelor patru cifre de pe prima etichetă cu ultimele patru cifre de pe cea de a doua etichetă (dacă numerele de pe etichete nu au cel puțin patru cifre se păstrează doar cele existente fără a adăuga altele). O piesă se poate lipi de o altă piesă sau de un grupul de piese anterior creat (dacă acesta există), sau poate forma singură un grup.</p>
+
+<p>De exemplu dacă pe etichete avem numerele <code>133454</code> și <code>3523143</code> atunci putem lipi cele două piese deoarece au în comun cinci cifre (o cifră <code>1</code>, două cifre <code>3</code>, o cifră <code>4</code> și o cifră <code>5</code>). În urma lipirii obținem un grup cu eticheta <code>13343143</code>.</p>
+
+<p>Pentru a rezolva jocul Maria extrage pe rând din cutie câte o piesă. Dacă aceasta se poate lipi de ultimul grup format atunci o lipește de el și actualizează eticheta grupului, altfel pune deoparte grupul respectiv și începe să formeze un nou grup pornind cu piesa extrasă.</p>
+
+<p>După ce formează grupurile Maria alege etichete de grupuri în următoarea ordine: prima dată alege eticheta cu număr maxim de cifre distincte. Dacă sunt mai multe, o alege pe cea cu valoarea cea mai mică. Dintre etichetele rămase alege următoarea etichetă după aceiași regulă. Continuă procedeul până când a ales <code>K</code> etichete.</p>
+
+<p>Cunoscând cele <code>N</code> numere naturale care se găsesc pe etichetele pieselor de joc, în ordinea în care aceste se extrag din cutie, să se determine:</p>
+
+<h1>Cerința</h1>
+
+<p>1. Numărul de grupuri pe care le obține Maria după ce rezolvă jocul de puzzle;<br>
+2. Cele <code>K</code> numere înscrise pe etichetele grupurilor alese de Maria.</p>
+
+<h1>Date de intrare</h1>
+
+<p>În fișierul de intrare <code>puzzle.in</code> se găsesc pe prima linie, separate prin câte un spațiu, <code>C</code>, <code>N</code> și <code>K</code>, unde <code>C</code> reprezintă cerința ce trebuie rezolvată, <code>N</code> numărul de piese din joc, <code>K</code> numărul de valori cerute la cerința 2. Pe linia următoare, separate prin câte un spațiu, sunt cele <code>N</code> numere înscrise pe etichetele pieselor de joc, în ordinea în care se extrag din cutie.  </p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă cerința este <code>1</code>, fişierul de ieşire <code>puzzle.out</code> va conţine pe prima linie un număr natural <code>G</code>, reprezentând numărul de grupuri obținut după finalizarea jocului.</p>
+
+<p>Dacă cerința este <code>2</code> pe prima linie a fișierului de ieșire <code>puzzle.out</code> se vor scrie, separate prin câte un spațiu, cele <code>K</code> numere înscrise pe etichetele grupurilor alese de Maria.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ C ≤ 2</code></li>
+	<li><code>1 ≤ N ≤ 100.000</code></li>
+	<li><code>1 ≤ K ≤ 10</code></li>
+	<li>Numerele de pe etichetele pieselor sunt numere naturale cu cel mult nouă cifre;</li>
+	<li>Pentru toate datele de test există soluție.</li>
+	<li>Pentru 53 de puncte, <code>C = 1</code></li>
+	<li>Pentru 7 puncte, <code>C = 2</code>, <code>K = 1</code></li>
+	<li>Pentru 13 puncte, <code>C = 2</code>, <code>K = 2</code></li>
+	<li>Pentru 27 de puncte, <code>C = 2</code>, <code>K &gt; 2</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>puzzle.in</code></p>
+
+<pre>1 6 1
+13345 23143 4343 784532 432 7826</pre>
+
+<p><code>puzzle.out</code></p>
+
+<pre>2</pre>
+
+<h3>Explicație</h3>
+
+<p>Piesa cu eticheta <code>13345</code> se poate lipi cu piesa cu eticheta <code>23143</code> obținând astfel grupul cu eticheta <code>13343143</code> la care se poate lipi piesa cu eticheta <code>4343</code> și obținem <code>13344343</code> care nu se mai poate lipi cu următoarea piesă cu eticheta <code>784532</code>, dar această piesă se va lipi cu piesa etichetată cu <code>432</code> și obținem <code>7845432</code> care în continuare se lipește cu piesa <code>7826</code> și obținem a doua etichetă a unui grup <code>78457826</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>puzzle.in</code></p>
+
+<pre>2 6 1
+13345 23143 4343 784532 432 7826</pre>
+
+<p><code>puzzle.out</code></p>
+
+<pre>78457826</pre>
+
+<h3>Explicație</h3>
+
+<p>În urma grupării pieselor obținem două grupuri etichetate cu <code>13344343</code> și respectiv <code>78457826</code>. Dintre acestea <code>78457826</code> are <code>6</code> cifre distincte, iar <code>13344343</code> are doar <code>3</code> cifre distincte. Deci valoarea căutată este <code>78457826</code>.</p>		</article>
+		</body></html>

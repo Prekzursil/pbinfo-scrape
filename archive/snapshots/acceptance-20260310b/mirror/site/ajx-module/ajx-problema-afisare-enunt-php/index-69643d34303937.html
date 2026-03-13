@@ -1,0 +1,117 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4097"><article id="enunt">
+			<p>O imprimantă circulară are litere mari ale alfabetului englezesc dispuse circular de la <code>A</code> la <code>Z</code>. Imprimanta are un indicator care inițial este plasat la litera <code>A</code>.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-circular1-jpg.jpg"></p>
+
+<p>Pentru a tipări o literă indicatorul imprimantei se mișcă la stânga sau dreapta. Mișcarea indicatorului către o literă alăturată aflată la stânga sau la dreapta literei curente se realizează într-o secundă. De exemplu: pentru a tipări șirul <code>BCY</code> mișcarea indicatorului se va face către dreapta de la <code>A</code> la <code>B</code> într-o secundă, apoi de la <code>B</code> la <code>C</code> într-o secundă, apoi către stânga de la <code>C</code> la <code>Y</code> în <code>4</code> secunde. În total pentru a tipări șirul <code>BCY</code> sunt necesare <code>6</code> secunde. Imprimanta va alege întotdeauna sensul cel mai avantajos de deplasare, astfel încât timpul de deplasare să fie minim. </p>
+
+<p>Imprimanta tipărește literele în două culori roșu sau albastru. Unele litere se tipăresc cu cerneală roșie, restul cu cerneală albastră. Pentru simplitate le vom numi litere roșii și litere albastre. </p>
+
+<h1>Cerința</h1>
+
+<p>Fiind date un șir de litere albastre nu neapărat distincte și mulțimea literelor roșii ale imprimantei, să se calculeze:</p>
+
+#* Care este timpul pentru tipărirea la imprimantă circulară a șirului de litere albastre.
+<ol>
+	<li>Să se insereze între oricare două litere albastre aflate pe poziții consecutive câte o literă roșie astfel încât să se obțină timpul minim pentru tipărire și să se afișeze: timpul minim, numărul de șiruri distincte care sunt tipărite cu timp minim, șirul minim lexicografic dintre toate șirurile ce sunt tipărite în acest timp</li>
+</ol>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>circular.in</code> conține:</p>
+
+<ul>
+	<li>pe prima linie un număr natural <code>c</code> cu valori posibile <code>1</code> sau <code>2</code> reprezentând cerința problemei</li>
+	<li>pe a doua linie un șir de litere albastre, nu neapărat distincte</li>
+	<li>pe a treia linie mulțimea literelor roșii distincte în ordine alfabetică</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>În fișierul de ieșire <code>circular.out</code> se va afișa în funcție de cerință:</p>
+
+<ul>
+	<li>Dacă <code>c=1</code>, un singur număr natural reprezentând timpul necesar pentru tipărirea la imprimantă a șirului de litere albastre.</li>
+	<li>Dacă <code>c=2</code> se vor tipări trei rezultate, fiecare pe câte o linie: timpul minim pentru tipărire conform cerinței a doua, numărul de șiruri distincte care sunt tipărite cu timp minim, modulo <code>666013</code>, șirul minim lexicografic ce obține acest timp.</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>Cele două șiruri conțin doar litere mari ale alfabetului englez</li>
+	<li>Lungimea șirului de litere albastre nu depășește <code>50.000</code> de litere</li>
+	<li>Mulțimea literelor roșii nu depășește <code>25</code> de litere, care sunt distincte și afișate în ordine alfabetică</li>
+	<li>Toate celelalte litere care nu se regăsesc în mulțimea literelor roșii, sunt albastre</li>
+	<li>Pentru obținerea punctajului la cerința a doua, pentru orice test, în fișierul de ieșire trebuie să existe exact trei linii care respectă formatul cerut.</li>
+	<li>pentru 24 de puncte <code>c = 1</code></li>
+	<li>pentru 76 de puncte <code>c = 2</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>circular.in</code></p>
+
+<pre>1
+BBTH
+AEIOU</pre>
+
+<p><code>circular.out</code></p>
+
+<pre>21</pre>
+
+<h3>Explicație</h3>
+
+<p>Timpul de tipărire al șirului <code>BBTH</code> este 21 și se obține astfel:</p>
+
+<ul>
+	<li>de la <code>A</code> la <code>B</code> = <code>1</code> secundă</li>
+	<li>de la <code>B</code> la <code>B</code> = <code>0</code> secunde</li>
+	<li>de la <code>B</code> la <code>T</code> = <code>8</code> secunde</li>
+	<li>de la <code>T</code> la <code>H</code> = <code>12</code> secunde</li>
+</ul>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>circular.in</code></p>
+
+<pre>2
+BBTH
+AEIOU</pre>
+
+<p><code>circular.out</code></p>
+
+<pre>23
+4
+BABATIH</pre>
+
+<h3>Explicație</h3>
+
+<p>Timpul minim pentru tipărirea la imprimantă este <code>23</code> și se obține pentru șirul <code>BABATIH</code> astfel:<br>
+de la <code>A</code> la <code>B</code> = <code>1</code> secundă<br>
+de la <code>B</code> la <code>A</code> = <code>1</code> secundă<br>
+de la <code>A</code> la <code>B</code> = <code>1</code> secundă<br>
+de la <code>B</code> la <code>A</code> = <code>1</code> secundă<br>
+de la <code>A</code> la <code>T</code> = <code>7</code> secunde<br>
+de la <code>T</code> la <code>I</code> = <code>11</code> secunde<br>
+de la <code>I</code> la <code>H</code> = <code>1</code> secundă<br>
+în total <code>23</code> de secunde.<br>
+Avem <code>4</code> șiruri pentru care se obține timp minim la tipărire: <code>BABATIH</code>, <code>BABATOH</code>, <code>BABUTIH</code>, <code>BABUTOH</code>. Prima soluție în ordine lexicografică este <code>BABATIH</code>.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>circular.in</code></p>
+
+<pre>2
+AMYMAMAMY
+BCDEFGHIJKLNOPQRSTUVWX</pre>
+
+<p><code>circular.out</code></p>
+
+<pre>96
+568708
+ABMNYNMBABMBABMNY</pre>
+
+<h3>Explicație</h3>
+
+<p>Timpul minim de tipărire este <code>96</code>. Avem <code>214.358.881</code> șiruri distincte, iar <code>214358881 mod 666013 = 568708</code>. Prima soluție în ordine lexicografică este <code>ABMNYNMBABMBABMNY</code>.</p>		</article>
+		</body></html>

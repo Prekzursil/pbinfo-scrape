@@ -1,0 +1,72 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4408"><article id="enunt">
+			<p>O companie aeriană are planificate <code>N</code> zboruri. Fiecare zbor are asociate câte șase numere naturale cu următoarea semnificație: primul număr  <code>A1</code> identifică aeroportul de decolare, cel de-al doilea număr  <code>A2</code>  identifică aeroportul de aterizare, următoarele patru numere naturale <code>H1</code>, <code>M1</code>, <code>H2</code> și <code>M2</code>, reprezintă în ordine ora și minutul decolării, respectiv ora și minutul aterizării. Aterizarea poate să fie în ziua curentă sau în ziua următoare. Un zbor poate să dureze maximum <code>23</code> de ore și <code>59</code> de minute. De exemplu, pentru <code>H1=10</code>, <code>M1=5</code>, <code>H2=15</code>, <code>M2=20</code> aterizarea are loc în aceeași zi cu decolarea (zborul durează <code>5</code> ore și <code>15</code> minute), iar pentru <code>H1=23</code>, <code>M1=5</code>, <code>H2=1</code>, <code>M2=15</code> aterizarea are loc în ziua următoare (zborul durează <code>2</code> ore și <code>10</code> minute). </p>
+
+<p>Un virus informatic s-a infiltrat în sistemele de calcul ale companiei și a inversat momentul de decolare cu cel de aterizare al zborurilor pe care le consideră speciale. Un zbor este considerat special de către acest virus în cazul în care codul aeroportului de decolare, <code>A1</code>, este un număr prim, iar codul aeroportului de aterizare, <code>A2</code>, se divide cu suma cifrelor lui <code>A1</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscându-se numărul de zboruri <code>N</code> și datele fiecăruia, <strong>înainte de intervenția virusului</strong>, să se determine:</p>
+
+<ul>
+	<li>Care este durata maximă a unui zbor, înainte de intervenția virusului.</li>
+	<li>Care este durata maximă a unui zbor, după intervenția virusului. Se iau în calcul atât duratele zborurilor inversate (speciale), cât și duratele zborurilor neinversate (nespeciale).</li>
+</ul>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>aeriana.in</code> conține pe prima linie valoarea <code>C</code> (numărul cerinței, poate fi <code>1</code> sau <code>2</code>), pe a doua linie valoarea <code>N</code> (numărul de zboruri). Pe fiecare dintre următoarele <code>N</code> linii sunt câte șase numere naturale <code>A1</code>, <code>A2</code>, <code>H1</code>, <code>M1</code>, <code>H2</code>, <code>M2</code>, în această ordine, despărțite prin câte un spațiu, cu semnificația din enunț.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>aeriana.out</code> va conține pe prima linie două numere naturale separate printr-un spațiu, reprezentând numărul de ore și respectiv numărul de minute ale zborului de durată maximă, în condițiile cerinței specificate.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 1000</code></li>
+	<li><code>0 ≤ H1, H2 ≤ 23</code></li>
+	<li><code>0 ≤ M1, M2 ≤ 59</code></li>
+	<li><code>0 ≤ A1, A2 ≤ 1.000.000.000</code></li>
+	<li>Un zbor va dura cel puțin un minut și cel mult 23 de ore și 59 de minute</li>
+	<li>Pentru 19 puncte, <code>C=1</code> și toate zborurile se desfășoară în aceeași zi</li>
+	<li>Pentru 17 puncte, <code>C=1</code>, <code>M1=0</code>, <code>M2=0</code> pentru toate zborurile</li>
+	<li>Pentru 17 puncte, <code>C=1</code>, fără alte precizări</li>
+	<li>Pentru 47 puncte, <code>C=2</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>aeriana.in</code></p>
+
+<pre>1
+3
+47 55 0 0 23 59
+1 437 23 43 10 34
+11 457 10 43 10 23</pre>
+
+<p><code>aeriana.out</code></p>
+
+<pre>23 59</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C=1</code>, <code>N=3</code>. Duratele acestor zboruri sunt, în ordine, <code>23</code> de ore și <code>59</code> de minute, <code>10</code> ore și <code>51</code> de minute, iar pentru ultimul zbor, <code>23</code> de ore și <code>40</code> de minute.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>aeriana.in</code></p>
+
+<pre>2
+3
+47 55 0 0 23 59
+1 437 23 43 10 34
+11 457 10 43 10 23</pre>
+
+<p><code>aeriana.out</code></p>
+
+<pre>23 40</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C=2</code>, <code>N=3</code>. Pentru primul zbor <code>A1=47</code> este număr prim, suma cifrelor sale este egală cu <code>11</code> și <code>A2=55</code> se divide cu <code>11</code>, deci primul zbor devine <code>23:59-00:00</code> și are o durata de <code>0</code> ore și <code>1</code> minut. Al doilea zbor rămâne nemodificat, deoarece <code>1</code> nu e prim. Al treilea zbor rămâne nemodificat. Chiar dacă 11 este prim, <code>457</code> nu se divide cu <code>2</code> (suma cifrelor lui <code>11</code>). Zborul de durata maximă, dupa interventia virusului, este cel de-al treilea.</p>		</article>
+		</body></html>

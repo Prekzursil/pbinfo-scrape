@@ -1,0 +1,120 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2153"><article id="enunt">
+			<p>Numim „oglinda” numărului natural nenul <code>a</code>, numărul <code>b</code>, obţinut prin modificarea fiecărei cifre din reprezentarea sa binară, de exemplu pentru <code>a=22</code><sub><code>(10)</code></sub><code>=10110</code><sub><code>(2)</code></sub> se obţine <code>01001</code><sub><code>(2)</code></sub><code>= 9</code><sub><code>(10)</code></sub><code>=b</code>. </p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscându-se numerele naturale <code>N</code>, <code>K</code> și cele <code>N</code> numere natural nenule, scrieți un program care: </p>
+
+<ol>
+	<li>Transformă în baza doi termenii şirului dat obţinându-se un nou şir format din alipirea cifrelor binare. Din acest şir se vor determina și afișa, separate prin câte un spațiu, toate reprezentările în baza <code>10</code> corespunzătoare secvenţelor alăturate de  exact <code>K</code> cifre binare, parcurse de la stânga la drepta. Dacă ultima secvenţă nu are exact <code>K</code> cifre  binare, atunci aceasta nu se va mai lua în considerare.</li>
+	<li>Să aplice <code>K</code> transformări asupra şirului iniţial, înlocuind la fiecare pas orice termen cu „oglinda” sa. Asupra termenilor care devin zero nu se vor mai efectua alte operații. După efectuarea celor <code>K</code> transformări, să se determine cea mai lungă secvență de numere care au cifra <code>1</code> pe aceeași poziție în reprezentarea lor în baza doi. Dacă sunt mai multe astfel de secvențe având lungimea maximă, se va afișa cea mai din stânga.</li>
+</ol>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>mirror.in</code> conţine pe primul rând numărul <code>C</code>, reprezentând cerința. Pe al doilea rând se află scrise numerele naturale <code>N</code> și <code>K</code>. Pe rândul al treilea sunt cele <code>N</code> numere ale șirului separate prin câte un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă <code>C=1</code>, atunci în fişierul de ieşire <code>mirror.out</code> se vor scrie separate prin câte un spațiu, toate numerele cerute în enunț.<br>
+Dacă <code>C=2</code>, atunci în fişierul de ieşire <code>mirror.out</code> se va scrie pe prima linie lungimea maximă a secvenței determinate, iar pe următoarea linie separate prin spațiu, poziția primului și ultimului termen din secvență (prima poziție este <code>1</code>).</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 100000</code></li>
+	<li><code>0 ≤ K ≤ 30</code></li>
+	<li>Elementele șirului sunt mai mici decât <code>2000000001</code>;</li>
+	<li>Pentru 30% din teste cerinţa va fi <code>C=1</code>.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>mirror.in</code></p>
+
+<pre>1 
+4 2
+7 8 2 11</pre>
+
+<p><code>mirror.out</code></p>
+
+<pre>3 3 0 1 1 1</pre>
+
+<h3>Explicație</h3>
+
+<p><code>7</code><sub><code>(10)</code></sub><code>=111</code><sub><code>(2)</code></sub>; <code>8</code><sub><code>(10)</code></sub><code>=1000</code><sub><code>(2)</code></sub>; <code>2</code><sub><code>(10)</code></sub><code>=10</code><sub@(2)@< sub="">; <code>11</code><sub><code>(10)</code></sub><code>=1011</code><sub><code>(2)</code></sub>; </sub@(2)@<></p>
+
+<p>Sirul format este: <code>1111000101011</code> și grupate câte <code>2</code> avem numerele: <code>11</code><sub><code>(2)</code></sub><code>=3</code><sub><code>(10)</code></sub>; <code>11</code><sub><code>(2)</code></sub><code>=3</code><sub><code>(10)</code></sub>; <code>00</code><sub><code>(2)</code></sub><code>=0</code><sub><code>(10)</code></sub>; <code>01</code><sub><code>(2)</code></sub><code>=1</code><sub><code>(10)</code></sub>; <code>01</code><sub><code>(2)</code></sub><code>=1</code><sub><code>(10)</code></sub>; <code>01</code><sub><code>(2)</code></sub><code>=1</code><sub><code>(10)</code></sub>; </p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>mirror.in</code></p>
+
+<pre>2 
+5 1
+37 72 101 50 116</pre>
+
+<p><code>mirror.out</code></p>
+
+<pre>3
+1 3</pre>
+
+<h3>Explicație</h3>
+
+<p>După o transformare numerele în baza 2 sunt:</p>
+
+<table>
+		<tbody><tr>
+			<td>     </td>
+			<td> <code>0</code> </td>
+			<td> <strong><code>1</code></strong> </td>
+			<td> <code>1</code> </td>
+			<td> <code>0</code> </td>
+			<td class="bg-primary"><strong><code>1</code></strong> </td>
+			<td> <code>0</code> </td>
+			<td> <code>&lt;-37</code> </td>
+		</tr>
+		<tr>
+			<td> <code>0</code> </td>
+			<td> <code>1</code> </td>
+			<td> <strong><code>1</code></strong> </td>
+			<td> <code>0</code> </td>
+			<td> <code>1</code> </td>
+			<td class="bg-primary"><strong><code>1</code></strong> </td>
+			<td> <code>1</code> </td>
+			<td> <code>&lt;-72</code> </td>
+		</tr>
+		<tr>
+			<td> <code>0</code> </td>
+			<td> <code>0</code> </td>
+			<td> <strong><code>1</code></strong> </td>
+			<td> <strong><code>1</code></strong> </td>
+			<td> <code>0</code> </td>
+			<td class="bg-primary"><strong><code>1</code></strong> </td>
+			<td> <code>0</code> </td>
+			<td> <code>&lt;-101</code></td>
+		</tr>
+		<tr>
+			<td>     </td>
+			<td> <code>0</code> </td>
+			<td> <code>0</code> </td>
+			<td> <strong><code>1</code></strong> </td>
+			<td> <code>1</code> </td>
+			<td> <code>0</code> </td>
+			<td> <code>1</code> </td>
+			<td> <code>&lt;-50</code> </td>
+		</tr>
+		<tr>
+			<td> <code>0</code> </td>
+			<td> <code>0</code> </td>
+			<td> <code>0</code> </td>
+			<td> <strong><code>1</code></strong> </td>
+			<td> <code>0</code> </td>
+			<td> <code>0</code> </td>
+			<td> <code>0</code> </td>
+			<td> <code>&lt;-116</code></td>
+		</tr>
+</tbody></table>
+
+<p>Cea mai lungă secvență este de lungime <code>3</code>, fiind formată din numerele <code>37</code>, <code>72</code>, <code>101</code> care începe pe poziția <code>1</code> și se termină pe poziția <code>3</code>. Mai există încă o astfel de secvenţa (<code>101, 50, 116</code>)  dar se alege cea mai din stânga. </p>		</article>
+		</body></html>

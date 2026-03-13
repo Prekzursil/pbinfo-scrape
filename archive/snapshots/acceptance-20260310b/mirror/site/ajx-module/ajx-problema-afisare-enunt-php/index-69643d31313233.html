@@ -1,0 +1,56 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1123"><article id="enunt">
+			<p>Se construieşte un şir de numere naturale care respectă restricţiile: </p>
+
+<ul>
+	<li>primul număr din şir este <code>9</code>;</li>
+	<li>numerele se generează în ordine strict crescătoare;</li>
+	<li>şirul conţine toate numerele formate doar cu cifrele <code>7</code>, <code>8</code> şi <code>9</code> cu proprietatea că numărul cifrelor <code>9</code> este mai mare sau egal decât numărul cifrelor <code>8</code> şi numărul cifrelor <code>8</code> este mai mare sau egal decât numărul cifrelor <code>7</code>.<br>
+Primii <code>14</code> termeni ai şirului, în ordine, sunt:  <code>9</code>, <code>89</code>, <code>98</code>, <code>99</code>, <code>789</code>, <code>798</code>, <code>879</code>, <code>897</code>, <code>899</code>, <code>978</code>, <code>987</code>, <code>989</code>, <code>998</code>, <code>999</code>.</li>
+</ul>
+
+<p>Pornind de la aceste numere, Liv a inventat un joc interactiv: <code>N</code> iepuraşi sunt aşezaţi în şir, fiecare având câte un cartonaş. Fiecare cartonaş are două feţe, o faţă albă pe care este inscripţionat un număr din acest şir şi o faţă gri, pe care este inscripţionată poziţia acelui număr în şir, poziţii numerotate în ordine, începând cu valoarea <code>1</code>.</p>
+
+<p><img align="right" alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-iepurasi-png.png"> <strong>Exemple.</strong> Cartonaşul care are pe faţa gri inscripţionat numărul <code>1</code> va avea pe faţa albă inscripţionat numărul <code>9</code>, iar cartonaşul care are pe faţa gri inscripţionat numărul <code>5</code> va avea pe faţa albă inscripţionat numărul <code>789</code>.</p>
+
+<p>Iepuraşii sunt aşezaţi într-o ordine oarecare şi ţin cartonaşele astfel încât să se vadă faţa gri. Jocul constă în a rearanja iepuraşii de la stânga la dreapta, descrescător după numerele inscripţionate pe feţele gri, având la dispoziţie doar operaţia <code>TAP</code> pe un iepuraş. Când se aplică operaţia <code>TAP</code> unui iepuraş  atunci secvenţa de iepuraşi,  începând de la cel pe care s-a făcut <code>TAP</code> şi până la sfârşitul şirului (spre dreapta), este oglindită (ca în imaginea de mai sus). După oglindire, toţi iepuraşii din acea secvenţă ţin cartonaşele astfel încât să se vadă faţa albă. Se doreşte aplicarea unui număr cât mai mic de operaţii <span class="caps">TAP</span> pentru rearanjarea iepuraşilor.</p>
+
+<h1>Cerinţe</h1>
+
+<p>Scrieţi un program care să citească numerele naturale <code>N</code> (reprezentând numărul de iepuraşi) şi <code>a</code><sub><code>1</code></sub>, <code>a</code><sub><code>2</code></sub>,…, <code>a</code><sub><code>N</code></sub>  (reprezentând, în ordine,  numerele inscripţionate pe feţele gri) și care să determine:</p>
+
+<p><strong>a)</strong> Numărul minim de operaţii <code>TAP</code> necesare rearanjării iepuraşilor;<br>
+<strong>b)</strong> Cel mai mic număr aflat pe o faţă albă care nu se vede, în cazul în care au rămas cartonaşe neîntoarse. Dacă toate cartonaşele au fost întoarse  (la toate fiind vizibilă faţa albă) se va afişa cel mai mare număr aflat pe o faţă albă a unui cartonaş.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>iepurasi.in</code> conține pe prima linie numărul natural <code>N</code> reprezentând numărul de iepuraşi. A doua linie a fişierului conţine, în ordine, cele <code>N</code> numere: <code>a</code><sub><code>1</code></sub>, <code>a</code><sub><code>2</code>a<sub><code>N</code></sub>, separate prin câte un spaţiu, reprezentând în ordine, numerele inscripţionate pe feţele gri ale cartonașelor. </sub></p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>iepurasi.out</code> va conține pe prima linie un număr reprezentând numărul minim de operaţii <code>TAP</code> necesare rearanjării iepuraşilor. A doua linie va conține un număr reprezentând cel mai mic număr aflat pe o faţă albă care nu se vede (în cazul în care au rămas cartonaşe neîntoarse), respectiv cel mai mare număr aflat pe o faţă albă a unui cartonaş, în cazul în care toate cartonaşele au fost întoarse (la toate fiind vizibilă faţa albă). </p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N ≤ 10000</code>;</li>
+	<li><code>1 ≤ a</code><sub><code>i</code></sub><code> ≤ 10000</code> (<code>1≤i≤N</code>);</li>
+	<li><code>N, a</code><sub><code>1</code></sub>, <code>a</code><sub><code>2</code></sub>, …, <code>a</code><sub><code>N</code></sub> sunt numere naturale;</li>
+	<li>pentru rezolvarea cerinţei a) se acordă 50% din punctaj, iar pentru cerinţa b) se acordă 50% din punctaj.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>iepurasi.in</code></p>
+
+<pre>5 
+14 5 8 9 10</pre>
+
+<p><code>iepurasi.out</code></p>
+
+<pre>1
+999</pre>
+
+<h1>Explicație</h1>
+
+<p>Se aplică o singură operaţie <code>TAP</code> pe iepuraşul cu numărul de ordine <code>5</code>. Cartonaşul neîntors are numărul de ordine <code>14</code> (<code>999</code>).</p>		</article>
+		</body></html>

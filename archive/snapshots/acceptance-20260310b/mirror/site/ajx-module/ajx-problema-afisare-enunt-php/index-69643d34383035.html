@@ -1,0 +1,78 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4805"><article id="enunt">
+			<h1>Cerința  </h1>
+
+<p>Te-ai decis să ieși la o plimbare cu Opelozaurul pe un traseu care conține, la fiecare kilometru, un indicator cu numerele naturale din intervalul <code>[1, N]</code>, în ordine crescătoare. Îți începi traseul în dreptul indicatorului cu numărul <code>1</code> și îl termini la indicatorul cu numărul <code>N</code>.  </p>
+
+<p>În mod normal, reușești să parcurgi orice kilometru cu mașina în <code>100</code> de secunde, dar, înainte să începi cursa, drumul a fost afectat de precipitații.  </p>
+
+<p>Prima dată a fost afectat de ninsori, fiecare ninsoare fiind descrisă printr-un triplet <code>L R k</code>, care arată că ninsoarea a afectat drumul în intervalul delimitat de indicatoarele <code>L</code> și <code>R</code>, iar acum, în acel interval, numărul de secunde necesare pentru a parcurge un kilometru crește cu <code>k</code>, indiferent de valoarea lui precedentă.  </p>
+
+<p>După ninsori, drumul este afectat de ploi, care sunt descrise și ele prin triplete <code>L R k</code> și limitează timpul în care mașina poate să parcurgă un kilometru în intervalul delimitat de indicatoarele <code>L</code> și <code>R</code> la <code>k</code> secunde.</p>
+
+<p>Se dau <code>Q</code> numere întregi <code>p</code> din intervalul <code>[1, N]</code>, iar pentru fiecare trebuie să determini numărul de secunde necesare să ajungi în dreptul panoului <code>p</code>.</p>
+
+<h1>Date de intrare  </h1>
+
+<p>Fișierul de intrare <code>corsa.in</code> conține pe prima linie un număr întreg <code>N</code> — lungimea traseului.  </p>
+
+<p>Pe a doua linie se citesc trei numere întregi, <code>s r q</code> — numărul de ninsori, numărul de ploi și numărul de întrebări.   </p>
+
+<p>Următoarele <code>S</code> linii conțin câte un triplet <code>L R k</code>, reprezentând o ninsoare.  </p>
+
+<p>Următoarele <code>R</code> linii conțin câte un triplet <code>L R k</code>, reprezentând o ploaie.  </p>
+
+<p>Ultimele <code>Q</code> linii conțin câte un număr întreg <code>p</code>, reprezentând poziția unui panou pentru care trebuie calculat timpul de parcurs.  </p>
+
+<h1>Date de ieșire  </h1>
+
+<p>Se vor afișa în fișierul <code>corsa.out</code> <code>Q</code> linii, fiecare linie conținând un număr întreg, reprezentând timpul necesar pentru a ajunge la indicatorul cu numărul <code>p</code>.  </p>
+
+<h1>Restricții și precizări </h1>
+
+<p><code>L &lt; R</code><br>
+<code>2 ≤ N ≤ 10</code><sup><code>10</code></sup><br>
+<code>0 ≤ s, r, q, k ≤ 10</code><sup><code>5</code></sup></p>
+
+<h1>Punctaj</h1>
+
+<p><b>5 puncte</b> — <code>N, s, r, q, k ≤ 500</code><br>
+<b>5 puncte</b> — Nu există ploi și <code>N ≤ 10</code><sup><code>10</code></sup><br>
+<b>10 puncte</b> — Nu există ninsori și <code>N, S, R, Q, k ≤ 10</code><sup><code>5</code></sup><br>
+<b>10 puncte</b> — Nu există ninsori și <code>N ≤ 10</code><sup><code>10</code></sup><br>
+<b>20 puncte</b> — <code>N ≤ 10</code><sup><code>6</code></sup><br>
+<b>50 puncte</b> — Fără alte restricții. </p>
+
+<h1>Exemplu  </h1>
+
+<p><code>corsa.in</code>  </p>
+
+<pre>10  
+1 2 2  
+3 6 15  
+5 8 110  
+7 10 107  
+5  
+9  </pre>
+
+<p><code>corsa.out</code>  </p>
+
+<pre>430  
+872  </pre>
+
+<h3>Explicație  </h3>
+
+<p>Inițial, fiecare segment al traseului poate fi parcurs în <code>100</code> secunde.  </p>
+
+<p>După aplicarea ninsorilor, timpul pe fiecare segment devine:  <br>
+<code>100 100 115 115 115 100 100 100 100</code>  </p>
+
+<p>După aplicarea primei ploi (<code>5 8 110</code>), timpul maxim pe segmentele afectate este limitat la:  <br>
+<code>100 100 115 115 115 110 110 100 100</code>  </p>
+
+<p>După aplicarea ultimei ploi (<code>7 10 107</code>), timpul maxim pe segmentele afectate devine:  <br>
+<code>100 100 115 115 115 110 110 107 107</code>  </p>
+
+<p>Pentru întrebarea <code>p = 5</code>, timpul necesar pentru a ajunge la panou este <code>430</code> secunde.  </p>
+
+<p>Pentru întrebarea <code>p = 9</code>, timpul necesar pentru a ajunge la panou este <code>872</code> secunde.  </p>		</article>
+		</body></html>

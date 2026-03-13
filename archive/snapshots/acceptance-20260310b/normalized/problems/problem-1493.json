@@ -1,0 +1,309 @@
+{
+  "id": 1493,
+  "slug": "masca",
+  "name": "Masca",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1493/masca",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 10,
+      "name": "Şiruri de caractere",
+      "slug": "iruri-de-caractere",
+      "href": "/?pagina=probleme-lista&tag=10"
+    },
+    {
+      "id": 84,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=84"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Considerându-se o listă de cuvinte, să se determine:</p><p>a) Numărul de cuvinte distincte.<br>\nb) Numărul de cuvinte distincte ce se potrivesc cu o mască dată, adică se pot obţine prin înlocuirea caracterelor <code>?</code> şi <code>*</code> din mască.</p>",
+      "text": "Considerându-se o listă de cuvinte, să se determine:a) Numărul de cuvinte distincte. b) Numărul de cuvinte distincte ce se potrivesc cu o mască dată, adică se pot obţine prin înlocuirea caracterelor ? şi * din mască."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>masca.in</code> conține:</p><ul>\n\t<li>Pe prima linie un număr natural <code>p</code>. Pentru toate testele de intrare, numărul <code>p</code> poate avea doar valoarea <code>1</code> sau valoarea <code>2</code>.</li>\n\t<li>Pe a doua linie o mască <code>E</code> (şir de caractere).</li>\n\t<li>Pe a treia linie numărul <code>N</code> de cuvinte.</li>\n\t<li>Pe fiecare din următoarele <code>N</code> linii câte un cuvânt <code>S</code> (şir de caractere) cu litere din alfabet.</li>\n</ul>",
+      "text": "Fișierul de intrare masca.in conține: Pe prima linie un număr natural p. Pentru toate testele de intrare, numărul p poate avea doar valoarea 1 sau valoarea 2. Pe a doua linie o mască E (şir de caractere). Pe a treia linie numărul N de cuvinte. Pe fiecare din următoarele N linii câte un cuvânt S (şir de caractere) cu litere din alfabet."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>masca.out</code> va conține:</p><ul>\n\t<li>Dacă valoarea lui <code>p</code> este <code>1</code>, se va rezolva numai punctul a) din cerinţă. În acest caz, în fişierul de ieşire se va scrie un singur număr natural <code>N1</code>, reprezentând numărul de cuvinte distincte <code>S</code> din fişierul de intrare.</li>\n\t<li>Dacă valoarea lui <code>p</code> este <code>2</code>, se va rezolva numai punctul b) din cerinţă. În acest caz, în fişierul de ieșire se va scrie un număr natural <code>N2</code>, reprezentând numărul de cuvinte distincte <code>S</code> ce se potrivesc cu masca <code>E</code>.</li>\n</ul>",
+      "text": "Fișierul de ieșire masca.out va conține: Dacă valoarea lui p este 1, se va rezolva numai punctul a) din cerinţă. În acest caz, în fişierul de ieşire se va scrie un singur număr natural N1, reprezentând numărul de cuvinte distincte S din fişierul de intrare. Dacă valoarea lui p este 2, se va rezolva numai punctul b) din cerinţă. În acest caz, în fişierul de ieșire se va scrie un număr natural N2, reprezentând numărul de cuvinte distincte S ce se potrivesc cu masca E."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li>Pentru rezolvarea corectă a primei cerinţe se acordă 20 de puncte, iar pentru cerinţa a doua se acordă 80 de puncte.</li>\n\t<li><code>1≤N≤1000</code></li>\n\t<li>Lungimea unui cuvânt oarecare <code>S</code> cât şi a expresiei mască <code>E</code> este între <code>1</code> şi <code>100</code> de caractere.</li>\n\t<li>În expresia mască <code>E</code> sunt cel mult două caractere <code>*</code>.</li>\n</ul>",
+      "text": "Pentru rezolvarea corectă a primei cerinţe se acordă 20 de puncte, iar pentru cerinţa a doua se acordă 80 de puncte. 1≤N≤1000 Lungimea unui cuvânt oarecare S cât şi a expresiei mască E este între 1 şi 100 de caractere. În expresia mască E sunt cel mult două caractere *."
+    },
+    {
+      "title": "Exemplul 1",
+      "html": "<p><code>masca.in</code></p><pre>1\na*a?b\n7\nababb\naab\naabb\naab\nabcaab\nabcaab\nababa</pre><p><code>masca.out</code></p><pre>5</pre><h3>Explicație</h3><p>Cuvintele <code>aab</code> si <code>abcaab</code> apar de cate <code>2</code> ori. <strong>Atenţie! Pentru acest test se rezolvă doar cerinţa a).</strong></p>",
+      "text": "masca.in1 a*a?b 7 ababb aab aabb aab abcaab abcaab ababamasca.out5ExplicațieCuvintele aab si abcaab apar de cate 2 ori. Atenţie! Pentru acest test se rezolvă doar cerinţa a)."
+    },
+    {
+      "title": "Exemplul 2",
+      "html": "<p><code>masca.in</code></p><pre>2\na*a?b\n7\nababb\naab\naabb\naab\nabcaab\nabcaab\nababa</pre><p><code>masca.out</code></p><pre>3</pre><h3>Explicație</h3><p>Cuvintele <code>ababb</code>, <code>aabb</code> și <code>abcaab</code> se potrivesc cu masca. Cuvântul <code>abcaab</code> apare de <code>2</code> ori. <strong>Atenţie! Pentru acest test se rezolvă doar cerinţa b).</strong></p>",
+      "text": "masca.in2 a*a?b 7 ababb aab aabb aab abcaab abcaab ababamasca.out3ExplicațieCuvintele ababb, aabb și abcaab se potrivesc cu masca. Cuvântul abcaab apare de 2 ori. Atenţie! Pentru acest test se rezolvă doar cerinţa b)."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cuvintele aab si abcaab apar de cate 2 ori. Atenţie! Pentru acest test se rezolvă doar cerinţa a)."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cuvintele ababb, aabb și abcaab se potrivesc cu masca. Cuvântul abcaab apare de 2 ori. Atenţie! Pentru acest test se rezolvă doar cerinţa b)."
+    }
+  ],
+  "constraints": [
+    "Pentru rezolvarea corectă a primei cerinţe se acordă 20 de puncte, iar pentru cerinţa a doua se acordă 80 de puncte.",
+    "1≤N≤1000",
+    "Lungimea unui cuvânt oarecare S cât şi a expresiei mască E este între 1 şi 100 de caractere.",
+    "În expresia mască E sunt cel mult două caractere *."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q81b568b5b4.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "10",
+    "intrare/ieșire": "masca.in / masca.out",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "4 MB / 2 MB",
+    "sursa problemei": "Olimpiada locală de Informatică, Prahova, 2016",
+    "autor": "Radu Visinescu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 4,
+  "author": "Radu Visinescu",
+  "sourceAttribution": "Olimpiada locală de Informatică, Prahova, 2016",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1493/masca"
+}

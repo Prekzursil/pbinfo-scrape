@@ -1,0 +1,84 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1027"><article id="enunt">
+			<p>Se consideră un șir <code>A</code> format din <code>N</code> elemente naturale nenule.  Numim secvență de lungime <code>K</code> a șirului <code>A</code> orice succesiune de elemente consecutive din șir de forma <code>A</code><sub><code>i</code></sub>, <code>A</code><sub><code>i+1</code></sub> ,…, <code>A</code><sub><code>i+K-1</code></sub>. </p>
+
+<p>O secvență o numim <em>secvență cool</em> dacă elementele care o compun sunt distincte și pot fi rearanjate astfel încât să alcătuiască o secvență continuă de numere consecutive. <br>
+De exemplu, considerând șirul <code>A=(3,1,6,8,4,5,6,7,4,3,4)</code>, atunci secvența <code>(8,4,5,6,7)</code> este o secvență cool deoarece conține elemente distincte ce pot fi rearanjate astfel încât să alcătuiască șirul de numere consecutive <code>4,5,6,7,8,</code> pe când secvențele <code>(4,3,4), (6,7,4,3)</code> nu sunt considerate secvențe cool.</p>
+
+<h1>Cerinţă</h1>
+
+<p>Fiind dat un şir de <code>N</code> numere naturale nenule se cer următoarele: <br>
+1. Pentru o valoare dată <code>K</code> să se verifice dacă secvența <code>A</code><sub><code>1</code></sub>, <code>A</code><sub><code>2</code></sub> ,…, <code>A</code><sub><code>K</code></sub> este secvență cool. Dacă secvența este cool, atunci se va afișa cea mai mare valoare ce aparține secvenței. Dacă secvența nu este cool, atunci se va afișa numărul elementelor distincte din secvența  <code>A</code><sub><code>1</code></sub>, <code>A</code><sub><code>2</code></sub> ,…, <code>A</code><sub><code>K</code></sub> , adică numărul elementelor care apar o singură dată. <br>
+2. Lungimea maximă a unei secvențe cool și numărul secvențelor cool de lungime maximă.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fişierul de intrare <code>cool.in</code> conţine pe prima linie un număr natural <code>p</code>. Pentru toate testele de intrare, numărul p poate avea doar valoarea <code>1</code> sau valoarea <code>2</code>. Pe linia a doua se găsesc, despărțite printr-un spațiu, două numere naturale <code>N K</code>. Pe următoarea linie se găsesc <code>N</code> numere întregi, separate prin câte un spațiu, ce reprezintă elementele şirului.</p>
+
+<h1>Date de ieşire</h1>
+
+<p>Dacă valoarea lui <code>p</code> este <code>1</code>, atunci se va rezolva numai punctul <code>1</code> din cerință. În acest caz, fişierul de ieşire <code>cool.out</code> va conţine pe prima linie un număr natural, număr ce reprezintă conform cerinței <code>1</code>, maximul secvenței <code>A</code><sub><code>1</code></sub>, <code>A</code><sub><code>2</code></sub> ,…, <code>A</code><sub><code>K</code></sub>, dacă secvența este secvență cool, sau numărul elementelor distincte din secvență, dacă aceasta nu este secvență cool.<br>
+Dacă valoarea lui <code>p</code> este <code>2</code>,  se va rezolva numai punctul <code>2</code> din cerință. În acest caz, fişierul de ieşire <code>cool.out</code> va avea două linii. Prima linie va conține un număr natural nenul ce reprezintă lungimea maximă a unei secvențe cool, iar următoarea linie un număr natural nenul ce reprezintă numărul de secvențe cool care au lungimea maximă. </p>
+
+<h1>Restricţii și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 5000</code></li>
+	<li><code>2 ≤ K ≤ 1000</code></li>
+	<li><code>1 ≤ A[i] ≤ 1000, 1 ≤ i ≤ N</code></li>
+	<li>Pentru <code>30%</code> dintre teste <code>N ≤ 1000</code></li>
+	<li>Pentru rezolvarea primei cerinţe se acordă <code>20%</code> din punctaj, iar pentru cerința a doua se acordă <code>80%</code> din punctaj.</li>
+</ul>
+
+<h1>Exemple</h1>
+
+<p><code>cool.in</code></p>
+
+<pre>1
+7 4
+6 4 5 7 8 3 5</pre>
+
+
+<p><code>cool.out</code></p>
+
+<pre>7</pre>
+
+<p><code>cool.in</code></p>
+
+<pre>1
+7 6
+6 4 5 7 5 4 3</pre>
+
+
+<p><code>cool.out</code></p>
+
+<pre>2</pre>
+
+<p><code>cool.in</code></p>
+
+<pre>2
+11 4
+7 4 5 6 8 4 5 7 4 3 2</pre>
+
+
+<p><code>cool.out</code></p>
+
+<pre>5 
+2</pre>
+
+<h1>Explicație</h1>
+
+<p><b>Pentru primul exemplu: (Atenție! Pentru acest test se rezolvă doar cerința 1.)</b></p>
+
+<p>Secvența <code>6 4 5 7</code> este cool. <br>
+Valoarea maximă din secvență este <code>7</code></p>
+
+<p><b>Pentru al doilea exemplu: (Atenție! Pentru acest test se rezolvă doar cerința 1.)</b></p>
+
+<p>Secvența <code>6 4 5 7 5 4</code> nu este secvență cool. Numărul valorilor distincte din secvență este <code>2</code>. Valorile distincte sunt: <code>6,7</code></p>
+
+<p><b>Pentru al treilea exemplu: (Atenție! Pentru acest test se rezolvă doar cerința 2.)</b></p>
+
+<p>Cele două secvențe cool de lungime maximă 5 sunt:<br>
+<code>7 4 5 6 8</code><br>
+<code>6 8 4 5 7</code></p>		</article>
+		</body></html>

@@ -1,0 +1,83 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4804"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>Fermierul Ion, cândva cunoscut pentru porumbul său de înaltă calitate, a intrat în faliment. Acum, el se mulțumește să crească roșii pe un câmp pătratic împărțit în <code>N × N</code> parcele. La început, câmpul era gol, dar de-a lungul timpului, Ion a efectuat mai multe plantări respectând o regulă specială, numită formula roșiilor gustoase:</p>
+
+<ul>
+	<li>se alege un număr <code>v</code>;</li>
+	<li>se alege o porțiune a câmpului definită de colțul stânga-sus (<code>a</code>, <code>b</code>) și colțul dreapta-jos (<code>c</code>, <code>d</code>. Cu alte cuvinte, pentru orice <code>1 ≤ i</code>, <code>j ≤ N</code>, porțiunea câmpului conține parcela de pe linia <code>i</code> și coloana <code>j</code> dacă <code>a ≤ i ≤ c</code> și <code>b ≤ j ≤ d</code>.</li>
+	<li>în fiecare parcelă din porțiune se plantează un număr de roșii egal cu suma modulo <code>1789</code> a numerelor mai mici decât <code>v</code> care sunt coprime cu <code>v</code>.</li>
+</ul>
+
+<p>Din cauza dificultăților financiare, fermierul trebuie să recolteze câteva roșii. Pentru a ușura procesul de recoltare, Ion va culege în întregime toate liniile de pe care culege cel puțin o roșie. El dorește să aleagă un număr maxim posibil de linii consecutive, astfel încât numărul total de roșii culese să nu depășească o anumită valoare <code>k</code>. Ajută-l să afle, pentru mai multe valori posibile ale lui <code>k</code>, de pe care linii trebuie să culeagă roșiile.</p>
+
+<h1>Date de intrare</h1>
+
+<ul>
+	<li>Fișierul de intrare <code>graunte.in</code> conține pe prima linie trei numere întregi, despărțite prin câte un spațiu: <code>N</code> (dimensiunea câmpului), <code>Q1</code>(numărul de plantări) și <code>Q2</code> (numărul de valori <code>k</code>).</li>
+	<li>Următoarele <code>Q1</code> linii conțin câte <code>5</code> valori întregi, despărțite prin câte un spațiu: <code>a b c d v</code>, reprezentând o plantare efectuată conform formulei roșiilor gustoase.</li>
+	<li>Următoarele <code>Q2</code> linii conțin câte un număr întreg k, pentru care trebuie determinată cea mai lungă secvență de linii consecutive care conține cel mult <code>k</code> roșii.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<ul>
+	<li>Se vor afișa în fișierul <code>graunte.out</code> <code>Q2</code> linii, fiecare conținând două numere <code>a b</code>, despărțite printr-un spațiu, unde <code>a</code> și <code>b</code> sunt capetele celei mai lungi secvențe de linii consecutive care conține cel mult <code>k</code> roșii.</li>
+	<li>Dacă există mai multe secvențe de lungime maximă, se va alege cea mai de sus.</li>
+	<li>Dacă nicio secvență nu îndeplinește condiția, se va afișa <code>−1 −1</code>.</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 10⁶</code></li>
+	<li><code>1 ≤ Q1 ≤ 10⁵</code></li>
+	<li><code>1 ≤ Q2 ≤ 10</code></li>
+	<li><code>1 ≤ a, b, c, d ≤ N</code>, pentru toate cele <code>Q1</code> plantări de roșii</li>
+	<li><code>0 ≤ v ≤ 10⁶</code>, pentru toate cele <code>Q1</code> plantări de roșii</li>
+	<li><code>0 ≤ k ≤ 10¹⁸</code>, pentru toate cele <code>Q2</code> valori pe care le ia <code>k</code></li>
+</ul>
+
+<p>Se garantează că numărul total de roșii de pe câmp nu va depăși <code>10¹⁸</code>.<br>
+După efectuarea mai multor plantări, numărul de roșii aflate într-o parcelă poate să atingă și să depășească <code>1789</code>.</p>
+
+<h1>Exemplu</h1>
+
+<p><code>graunte.in</code></p>
+
+<pre>2 3 4
+1 1 1 2 91
+1 2 2 2 12
+1 1 2 2 24
+216
+210
+3500
+3400</pre>
+
+<p><code>graunte.out</code></p>
+
+<pre>2 2
+-1 -1
+1 2
+1 1</pre>
+
+<h3>Explicație</h3>
+
+<p><code>N = 2</code>, deci câmpul are <code>2</code> linii și <code>2</code> coloane. Pentru prima plantare, <code>a = b = c = 1</code>, <code>d = 2</code>, <code>v = 91</code>. Suma numerelor coprime cu <code>91</code> care sunt mai mici decât <code>91</code> este <code>3276</code>. Prin urmare, în cele două parcele de pe prima linie se vor planta <code>3276 mod 1789 = 1487</code> roșii.<br>
+În timpul celei de-a doua plantări, în parcelele de pe a doua coloană se plantează <code>1 + 5 + 7 + 11 = 24</code> roșii.<br>
+În timpul celei de-a treia plantări, în toate parcelele se plantează <code>1 + 5 + 7 + 11 + 13 + 17 + 19 + 23 = 96</code> roșii. Astfel, numerele finale de roșii din fiecare parcelă vor fi cele de mai jos.</p>
+
+<table style="border: 1px solid black; border-collapse: collapse;">
+  <tbody><tr>
+    <td style="border: 1px solid black; padding: 5px;">1583</td>
+    <td style="border: 1px solid black; padding: 5px;">1607</td>
+  </tr>
+  <tr>
+    <td style="border: 1px solid black; padding: 5px;">96</td>
+    <td style="border: 1px solid black; padding: 5px;">120</td>
+  </tr>
+</tbody></table>
+
+<p>Prima valoare pe care o ia <code>k</code> este <code>216</code>. A doua linie este singura în care numărul de roșii este <code>≤ 216</code>, așadar a doua linie este singura care poate fi inclusă în secvența cerută, deci răspunsul este <code>2 2</code>.<br>
+A doua valoare pe care o ia <code>k</code> este <code>210</code>. Pe nicio linie nu avem cel mult <code>≤ 210</code> roșii, așadar nicio linie nu poate fi inclusă în secvența cerută, deci răspunsul este <code>−1 −1</code>.</p>		</article>
+		</body></html>

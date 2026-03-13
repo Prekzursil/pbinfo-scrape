@@ -1,0 +1,134 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4133"><article id="enunt">
+			<p>O companie de transport cu microbuze din județul Iași a adoptat o strategie proprie pentru rutele din județ: </p>
+
+<ul>
+	<li>niciun traseu nu poate avea mai mult de <code>165</code> kilometri</li>
+	<li>distanța între două stații consecutive este de un kilometru</li>
+	<li>un pasager poate pleca din orice stație şi poate să își cumpere bilete pentru parcurgerea a <code>1, 2, ..., 10</code> kilometri</li>
+	<li>fiecare dintre cele zece distanţe posibile au bilete cu preţuri distincte</li>
+</ul>
+
+<p>De exemplu:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-microbuz-001-jpg.jpg"></p>
+
+<p>Gigel, care călătoreşte cu microbuzul exact <code>N</code> kilometri, poate să aleagă una sau mai multe distanţe dintre cele zece stabilite și să cumpere biletele corespunzătoare. Compania impune ca un pasager să poată cumpăra maxim <code>3</code> bilete de același tip. Gigel observă că pentru aceeași sumă poate achiziționa seturi diferite de bilete <em>cu prețuri distincte</em>. Pentru exemplu de mai sus, cu <code>98</code> de lei el poate cumpăra câte un bilet cu prețurile <code>11</code>, <code>14</code>, <code>29</code>, <code>44</code> lei sau câte un bilet cu prețurile <code>45</code>, <code>53</code> lei (<code>11+14+29+44 = 45+53</code>).</p>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care să rezolve următoarele cerințe:</p>
+
+<ul>
+	<li>determină preţul minim al unui set de bilete ce poate fi achiziționat pentru parcurgerea a exact <code>N</code> kilometri;</li>
+	<li>determină distanţele alese de Gigel, astfel încât preţul total al călătoriei să fie minim;</li>
+	<li>determină două seturi distincte de bilete pentru care prețul total al biletelor este același și este cel mai mare posibil. Pentru fiecare set nu este permisă alegerea mai multor bilete cu același preț și nu există două bilete cu același preț în ambele seturi.</li>
+</ul>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>microbuz.in</code> are trei linii. Pe prima linie se află un număr natural <code>C</code> ce reprezintă cerința (<code>1</code>, <code>2</code> sau <code>3</code>). Linia  a doua conține zece valori naturale ordonate <strong>strict crescător</strong>, separate prin câte un spaţiu, reprezentând preţurile pentru parcurgerea a <code>1</code>, <code>2</code>, …, <code>10</code> kilometri. Linia a treia conţine valoarea <code>N</code> reprezentând distanţa pe care doreşte să o parcurgă Gigel.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>microbuz.out</code> are următoarea structură:</p>
+
+<ul>
+	<li>dacă <code>C = 1</code>, pe prima linie se va afișa un întreg reprezentând costul minim al călătoriei;</li>
+	<li>dacă <code>C = 2</code>, pe fiecare linie se vor afișa câte două numere întregi, separate printr-un spaţiu, reprezentând distanța parcursă şi preţul biletului corespunzător;</li>
+	<li>dacă <code>C = 3</code>, pe prima linie se va afișa prețul comun al celor două seturi de bilete, iar pe următoarele două linii câte un set de bilete dat prin numărul de km pentru biletele din set, în ordine strict crescătoare, separate prin câte un spațiu.</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>C ∈ {1, 2, 3}</code></li>
+	<li><code>1 ≤ N ≤ 165</code></li>
+	<li>cele <code>10</code> prețuri sunt numere naturale din intervalul <code>[10, 99]</code></li>
+	<li>răspunsul la cerința <code>3</code> nu depinde de valoarea lui <code>N</code></li>
+	<li>Pentru 28 de puncte, <code>C = 1</code></li>
+	<li>Pentru 38 de puncte, <code>C = 2</code></li>
+	<li>Pentru 34 de puncte, <code>C = 3</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>microbuz.in</code></p>
+
+<pre>1
+11 14 18 23 29 36 44 45 53 64
+15</pre>
+
+<p><code>microbuz.out</code></p>
+
+<pre>86</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerința este 1. Costul minim total este <code>86</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>microbuz.in</code></p>
+
+<pre>2
+11 14 18 23 29 36 44 45 53 64
+15</pre>
+
+<p><code>microbuz.out</code></p>
+
+<pre>3 18
+4 23
+8 45</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerința este 2. Biletele cumpărate și prețurile lor sunt: <br>
+<code>3</code> km parcurși, preț <code>18</code><br>
+<code>4</code> km parcurși, preț <code>23</code><br>
+<code>8</code> km parcurși, preț <code>45</code></p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>microbuz.in</code></p>
+
+<pre>2
+13 17 18 19 21 22 25 28 31 37
+39</pre>
+
+<p><code>microbuz.out</code></p>
+
+<pre>7 25
+7 25
+8 28
+8 28
+9 31</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerința este 2. Biletele cumpărate și prețurile lor sunt: <br>
+<code>7</code> km parcurși, preț <code>25</code><br>
+<code>7</code> km parcurși, preț <code>25</code><br>
+<code>8</code> km parcurși, preț <code>28</code><br>
+<code>8</code> km parcurși, preț <code>28</code><br>
+<code>9</code> km parcurși, preț <code>31</code></p>
+
+<h1>Exemplul 4:</h1>
+
+<p><code>microbuz.in</code></p>
+
+<pre>3
+11 14 18 23 29 36 44 45 53 64
+15</pre>
+
+<p><code>microbuz.out</code></p>
+
+<pre>163
+2 3 4 7 10 
+5 6 8 9</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerința este 3. Prețul maxim comun este <code>163</code>.<br>
+Setul 1: câte un bilet cu prețurile <code>14 18 23 44 64</code>.<br>
+Setul 2: câte un bilet cu prețurile <code>29 36 45 53</code>.</p>		</article>
+		</body></html>

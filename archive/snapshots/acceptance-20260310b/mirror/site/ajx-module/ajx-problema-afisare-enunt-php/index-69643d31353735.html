@@ -1,0 +1,77 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1575"><article id="enunt">
+			<p>În vederea asigurării unei transmiteri cât mai exacte a informaţiilor pe reţea, transmiterea se efectuează caracter cu caracter, fiecare caracter fiind dat prin codul său <span class="caps">ASCII</span>, adică o grupă de <code>8</code> biţi (octet).  Pentru fiecare <code>8</code> biţi transmişi se calculează un bit de paritate care are valoarea <code>0</code> (dacă codul <span class="caps">ASCII</span> al caracterului conţine un număr par de cifre binare <code>1</code>) sau <code>1</code> (în caz contrar). Deoarece în problema noastră se transmit numai caractere <span class="caps">ASCII</span> standard, cu codul <span class="caps">ASCII</span> din intervalul <code>[32,127]</code>, codul lor <span class="caps">ASCII</span> are bitul <code>7</code> (primul bit din stânga) egal cu <code>0</code>. Pe această poziţie va fi pus bitul de paritate, economisind astfel câte un bit pentru fiecare caracter transmis.<br>
+De exemplu, dacă mesajul care trebuie transmis conţine caracterele <code>Paritate</code>, succesiunea de biţi transmisă va fi:</p>
+
+<p><code>01010000 11100001 01110010 01101001 01110100 11100001 01110100 01100101</code></p>
+
+<p>În plus, pe lângă caracterele amintite, în mesaj mai poate să apară un caracterul special, caracter care indică trecerea la începutul unui nou rând. Acest caracter are codul <span class="caps">ASCII</span> 10.</p>
+
+<h1>Cerința</h1>
+
+<p>Să se scrie un program care să verifice dacă un text a fost sau nu transmis corect.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fişierul de intrare paritate.in are pe prima linie o succesiune de caractere <code>0</code> şi <code>1</code> care reprezintă mesajul transmis. Între caractere nu există spaţii. Linia se termină cu caracterul marcaj de sfârşit de linie (newline).</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fişierul de ieşire paritate.out are pe prima linie mesajul <code>DA</code> dacă textul a fost transmis corect sau <code>NU</code> în caz contrar. În cazul în care mesajul de pe prima linie este <code>DA</code> liniile următoare vor conţine textul transmis în clar. În cazul în care mesajul de pe prima linie este <code>NU</code> linia următoare va conţine numerele de ordine ale caracterelor care nu au fost transmise corect, în ordine strict crescătoare, separate prin câte un spaţiu.  </p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>Cei <code>8</code> biţi ai codului <span class="caps">ASCII</span> a unui caracter se numerotează de la <code>0</code> la <code>7</code>, de la dreapta la stânga, cel mai din stânga bit fiind bitul <code>7</code> iar cel mai din dreapta bitul <code>0</code>.</li>
+	<li>Textul transmis are cel mult <code>60.000</code> caractere.</li>
+	<li>Numărul de caractere <code>0</code> şi <code>1</code> din prima linie a fişierului de intrare este multiplu de <code>8</code>.</li>
+	<li>Codurile <span class="caps">ASCII</span> ale caracterelor din text aparţin mulţimii <code>{10, 32–127}</code>, codul <code>10</code> însemnând trecerea la începutul unui rând nou.</li>
+	<li>Nici o linie din fişierul de ieşire nu va avea mai mult de <code>255</code> caractere.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>paritate.in</code></p>
+
+<pre>0101000011100001011100100110100101110100111000010111010001100101</pre>
+
+<p><code>paritate.out</code></p>
+
+<pre>DA
+Paritate</pre>
+
+<h3>Explicație</h3>
+
+<p>Toate codurile sunt corecte.</p>
+
+<h1>Exemplu 2:</h1>
+
+<p><code>paritate.in</code></p>
+
+<pre>1101000011100001111100100110100101110100111000010111010011100101</pre>
+
+<p><code>paritate.out</code></p>
+
+<pre>NU
+0 2 7</pre>
+
+<h3>Explicatie</h3>
+
+<p>Primul caracter a fost transmis ca succesiunea de biţi <code>11010000</code> ceea ce înseamnă că fără bitul de paritate ar fi trebuit să existe un număr impar de cifre <code>1</code>, ceea ce este fals. Deci caracterul  nu a fost transmis corect. Acelaşi lucru se verifică şi pentru caracterele cu numerele de ordine <code>2</code> şi <code>7</code>.</p>
+
+<h1>Exemplu 3:</h1>
+
+<p><code>paritate.in</code></p>
+
+<pre>010000011111101001101001000010100110010100001010011010100110111101101001</pre>
+
+<p><code>paritate.out</code></p>
+
+<pre>DA
+Azi
+e
+joi</pre>
+
+<h3>Explicatie</h3>
+
+<p>Toate codurile sunt corecte. În text există două caractere cu cod <span class="caps">ASCII</span> <code>10</code>.</p>		</article>
+		</body></html>

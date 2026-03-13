@@ -1,0 +1,100 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2450"><article id="enunt">
+			<p>Ai deschis recent un restaurant cu specific japonez, iar lucrurile nu merg grozav. Uneori clienții ajung să aștepte foarte mult mâncarea comandată, iar acum crezi că ai înțeles de ce se întâmplă acest lucru.<br>
+Restaurantul nu are mese, ci un singur bar foarte lung dotat cu o bandă rulantă care transportă porțiile de mâncare de la bucătărie la client. Barul are <code>500.000.000</code> de scaune numerotate în ordine crescătoare, scaunul <code>1</code> fiind cel mai apropiat de bucătărie. Uneori clienții fac noi comenzi. O comandă făcută la secunda <code>T</code> de către clientul aflat pe scaunul cu numărul <code>P</code> va ajunge instant la bucătărie. Prepararea mâncării va dura <code>D</code> secunde, iar apoi mâncarea va fi pusă pe bandă și va dura exact <code>P</code> secunde ca aceasta să ajungă la client. În acest timp, mâncarea va trece prin fața scaunelor <code>1</code>, <code>2</code>, … <code>P - 1</code>. Dacă dintr-un anumit motiv clientul nu își ridică mâncarea de pe bandă, aceasta va continua să se deplaseze. În caz contrar, clientul în cauză se așteaptă ca mâncarea să ajungă la scaunul său la secunda <code>T + D + P</code>.<br>
+Deocamdată restaurantul servește un singur fel de mâncare: ramen. Astfel, comenzile făcute de clienți ajung să fie ușor interschimbabile, iar aceștia se arată foarte deschiși la a profita de pe urma acestui fapt.<br>
+Se cunosc următoarele:</p>
+
+<ul>
+	<li>Un client poate avea zero sau mai multe comenzi în așteptare.</li>
+	<li>Un client care are zero comenzi în așteptare este complet inactiv.</li>
+	<li>Numărul de comenzi în așteptare ale unui client care face o comandă la secunda <code>T</code> va crește cu o unitate exact la secunda <code>T</code>.</li>
+	<li>Un client care are în așteptare cel puțin o comandă va ridica de pe bandă prima porție de ramen care trece prin fața sa, indiferent dacă aceasta îi era destinată sau nu. Dacă va face acest lucru la momentul <code>T</code>, numărul său de comenzi în așteptare va scădea cu o unitate exact la momentul <code>T</code>.</li>
+</ul>
+
+<p>Spre exemplu, analizăm situația următoare cu două comenzi:<br>
+Durata de preparare a ramenului este <code>D = 2</code> secunde. Această valoare este o constantă şi se aplică identic fiecărei comenzi.<br>
+La secunda <code>T1 = 10</code>, persoana de pe scaunul cu numarul <code>P1 = 8</code> (să o numim A) comandă o porţie de ramen. La secunda <code>T1 + D = 12</code>, porţia sa este pusă pe bandă.<br>
+La secunda <code>T2 = 16</code>, persoana de pe scaunul cu numarul <code>P2 = 6</code> (să o numim B) comandă o porţie de ramen. La secunda <code>T2 + D = 18</code>, porţia sa este pusă pe bandă.<br>
+La secunda <code>18</code> porţia destinată clientului A trece prin faţa scaunului <code>6</code>, iar clientul B, fiind el însuşi în aşteptarea unei comenzi o va lua şi o va mânca. El va mânca deci la secunda <code>18</code> şi va ignora apoi propria sa comandă, care va trece pe lângă el.<br>
+La secunda <code>26</code> porţia destinată clientului B va ajunge la clientul A, iar acesta o va lua şi o va mânca. El va mânca deci la secunda <code>26</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Pentru a evalua impactul acestui obicei asupra timpilor de așteptare, ai obținut date despre toate comenzile date în ziua curentă. Îți propui să afli, pentru fiecare comandă următoarea valoare: dacă respectiva comandă este a <code>NR</code>-a făcută de clientul respectiv, care este secunda la care clientul în cauză va mânca pentru a <code>NR</code>-a oară?</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>ramen.in</code> va conține pe prima linie numărul de comenzi <code>N</code>, respectiv timpul de preparare a unei porții de ramen <code>D</code>. Următoarele <code>N</code> linii vor conține câte o pereche de numere: <code>T[i]</code>, secunda la care este făcută a <code>i</code>-a comandă, respectiv <code>P[i]</code>, numărul scaunului de la care s-a făcut a <code>i</code>-a comandă. Se garantează că timpii de comandă sunt distincți și sunt crescători în ordinea citirii lor.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>ramen.out</code> va conține <code>N</code> linii, fiecare conținând o singură valoare naturală: a <code>i</code>-a valoare va reprezenta răspunsul cerut pentru a <code>i</code>-a comandă în ordinea citirii.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 100.000</code></li>
+	<li><code>0 ≤ D, T[i] ≤ 500.000.000</code>, pentru orice <code>1 ≤ i ≤ N</code></li>
+	<li><code>1 ≤ P[i] ≤ 500.000.000</code>, pentru orice <code>1 ≤ i ≤ N</code></li>
+
+	<li>Se garantează că <code>T[i] &lt; T[i+1]</code>, pentru orice <code>1 ≤ i &lt; N</code></li>
+	<li>Pentru teste în valoare totală de <code>22</code> de puncte, se garantează în plus faţă de restricţiile generale că <code>N ≤ 2000</code> şi <code>D, T[i], P[i] ≤ 5000</code></li>
+	<li>Pentru alte teste în valoare totală de <code>25</code> de puncte, se garantează în plus faţă de restricţiile generale că <code>N ≤ 2000</code>.</li>
+	<li>În concurs s-au acordat <code>10</code> puncte din oficiu. Aici se acordă <code>10</code> puncte pentru exemplele din enunț.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>ramen.in</code></p>
+
+<pre>2 2
+10 8
+16 6</pre>
+
+<p><code>ramen.out</code></p>
+
+<pre>26
+18</pre>
+
+<h3>Explicație</h3>
+
+<p>Exemplul descris în enunț.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>ramen.in</code></p>
+
+<pre>3 2
+5 4
+6 4
+7 3</pre>
+
+<p><code>ramen.out</code></p>
+
+<pre>12
+13
+10</pre>
+
+<h3>Explicație</h3>
+
+<p>Observaţi că în acest exemplu clientul de pe scaunul cu numărul <code>4</code> face două comenzi. Răspunsul corespunzător primei comenzi este secunda în care clientul mănâncă pentru prima oară, iar răspunsul corespunzător comenzii cu numărul doi este secunda în care clientul mănâncă pentru a doua oară.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>ramen.in</code></p>
+
+<pre>3 0
+0 6
+3 3
+4 5</pre>
+
+<p><code>ramen.out</code></p>
+
+<pre>10
+3
+8</pre>
+
+<h3>Explicație</h3>
+
+<p>Observaţi că în acest exemplu clientul de pe scaunul cu numărul <code>3</code> face o comandă la secunda <code>3</code>. Exact în acelaşi moment, îi apare o porţie de ramen în faţă, iar el o consumă imediat.</p>		</article>
+		</body></html>

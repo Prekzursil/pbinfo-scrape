@@ -1,0 +1,310 @@
+{
+  "id": 3036,
+  "slug": "raganama",
+  "name": "raganama",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3036/raganama",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 91,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=91"
+    },
+    {
+      "id": 93,
+      "name": "Combinatorică",
+      "slug": "combinatoric",
+      "href": "/?pagina=probleme-lista&tag=93"
+    }
+  ],
+  "tags": [
+    "Numere mari",
+    "Combinatorica"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Fiindcă astăzi în trib s-a născut o fetiță, scrieți un program care, cunoscând numele fetelor din trib, rezolvă următoarele cerințe:<br>\n1. afișează numele pe care părinții ar trebui să i-l dea fetei pentru ca viața să-i stea sub o stea norocoasă;<br>\n2. determină câte nume frumoase, diferite de cele ale fetelor din trib, există.</p>",
+      "text": "Fiindcă astăzi în trib s-a născut o fetiță, scrieți un program care, cunoscând numele fetelor din trib, rezolvă următoarele cerințe: 1. afișează numele pe care părinții ar trebui să i-l dea fetei pentru ca viața să-i stea sub o stea norocoasă; 2. determină câte nume frumoase, diferite de cele ale fetelor din trib, există."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>raganama.in</code> conține pe prima linie un număr natural <code>C</code>, care reprezintă cerința care trebuie să fie rezolvată (<code>1</code> sau <code>2</code>). Pe următoarele linii se află numele fetelor din trib, câte un nume pe o linie, în ordine lexicografică; toate numele sunt anagrame ale aceluiași cuvânt.</p>",
+      "text": "Fișierul de intrare raganama.in conține pe prima linie un număr natural C, care reprezintă cerința care trebuie să fie rezolvată (1 sau 2). Pe următoarele linii se află numele fetelor din trib, câte un nume pe o linie, în ordine lexicografică; toate numele sunt anagrame ale aceluiași cuvânt."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>raganama.out</code> va conține o singură linie.<br>\nDacă <code>C = 1</code>, pe această linie pe care va fi scris numele pe care părinții ar trebui să i-l dea fetei.<br>\nDacă <code>C = 2</code>, pe această linie va fi scris numărul de nume frumoase, diferite de cele ale fetelor din trib.</p>",
+      "text": "Fișierul de ieșire raganama.out va conține o singură linie. Dacă C = 1, pe această linie pe care va fi scris numele pe care părinții ar trebui să i-l dea fetei. Dacă C = 2, pe această linie va fi scris numărul de nume frumoase, diferite de cele ale fetelor din trib."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li>Numele fetelor sunt formate din maximum <code>100</code> de litere mici din alfabetul englez.</li>\n\t<li>În trib există maximum <code>100.000</code> de fete.</li>\n\t<li>O anagramă a unui cuvânt este formată din aceleași litere cu cuvântul dat, eventual într-o altă ordine. De exemplu cuvântul “armata” este o anagramă a cuvântului “tamara”.</li>\n\t<li>Spunem că un cuvânt <code>a</code><sub><code>1</code></sub><code>a</code><sub><code>2</code></sub>… <code>a</code><sub><code>n</code></sub> este mai mic din punct de vedere lexicografic decât un cuvânt <code>b</code><sub><code>1</code></sub><code>b</code><sub><code>2</code></sub>… <code>b</code><sub><code>n</code></sub> dacă există <code>1 ≤ k ≤ n</code> astfel încât <code>a</code><sub><code>i</code></sub><code>=b</code><sub><code>i</code></sub>, pentru orice <code>1 ≤ i &lt; k</code> și <code>a</code><sub><code>k</code></sub><code>=b</code><sub><code>k</code></sub>.</li>\n\t<li>Se garantează că pentru datele de test există un nume ce poate fi dat fetei nou-născute.</li>\n\t<li>Pentru teste valorând <code>20</code> de puncte rezultatul la cerința <code>2</code> va avea maximum <code>18</code> cifre.</li>\n\t<li>Pentru teste valorând <code>50</code> de puncte cerința este <code>1</code>.</li>\n</ul>",
+      "text": "Numele fetelor sunt formate din maximum 100 de litere mici din alfabetul englez. În trib există maximum 100.000 de fete. O anagramă a unui cuvânt este formată din aceleași litere cu cuvântul dat, eventual într-o altă ordine. De exemplu cuvântul “armata” este o anagramă a cuvântului “tamara”. Spunem că un cuvânt a1a2… an este mai mic din punct de vedere lexicografic decât un cuvânt b1b2… bn dacă există 1 ≤ k ≤ n astfel încât ai=bi, pentru orice 1 ≤ i < k și ak=bk. Se garantează că pentru datele de test există un nume ce poate fi dat fetei nou-născute. Pentru teste valorând 20 de puncte rezultatul la cerința 2 va avea maximum 18 cifre. Pentru teste valorând 50 de puncte cerința este 1."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>raganama.in</code></p><pre>1\naacn\naanc\nacan\nacna\nanac\ncaan\ncana</pre><p><code>raganama.out</code></p><pre>anca</pre>",
+      "text": "raganama.in1 aacn aanc acan acna anac caan canaraganama.outanca"
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>raganama.in</code></p><pre>2\naacn\naanc\nacan\nacna\nanac\ncaan\ncana</pre><p><code>raganama.out</code></p><pre>5</pre><h3>Explicație</h3><p>Există în total <code>12</code> anagrame:<br>\n<code>aacn</code><br>\n<code>aanc</code><br>\n<code>acan</code><br>\n<code>acna</code><br>\n<code>anac</code><br>\n<code>anca</code><br>\n<code>caan</code><br>\n<code>cana</code><br>\n<code>cnaa</code><br>\n<code>naac</code><br>\n<code>naca</code><br>\n<code>ncaa</code></p><p>Primul nume în ordine lexicografică care nu aparține niciunei fete din trib este <code>anca</code>. Dintre cele <code>12</code> anagrame existente, <code>7</code> sunt deja numele unor fete din trib, deci mai există <code>12 - 7 = 5</code> nume frumoase.</p>",
+      "text": "raganama.in2 aacn aanc acan acna anac caan canaraganama.out5ExplicațieExistă în total 12 anagrame: aacn aanc acan acna anac anca caan cana cnaa naac naca ncaaPrimul nume în ordine lexicografică care nu aparține niciunei fete din trib este anca. Dintre cele 12 anagrame existente, 7 sunt deja numele unor fete din trib, deci mai există 12 - 7 = 5 nume frumoase."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Există în total 12 anagrame: aacn aanc acan acna anac anca caan cana cnaa naac naca ncaa"
+    }
+  ],
+  "constraints": [
+    "Numele fetelor sunt formate din maximum 100 de litere mici din alfabetul englez.",
+    "În trib există maximum 100.000 de fete.",
+    "O anagramă a unui cuvânt este formată din aceleași litere cu cuvântul dat, eventual într-o altă ordine. De exemplu cuvântul “armata” este o anagramă a cuvântului “tamara”.",
+    "Spunem că un cuvânt a1a2… an este mai mic din punct de vedere lexicografic decât un cuvânt b1b2… bn dacă există 1 ≤ k ≤ n astfel încât ai=bi, pentru orice 1 ≤ i < k și ak=bk.",
+    "Se garantează că pentru datele de test există un nume ce poate fi dat fetei nou-născute.",
+    "Pentru teste valorând 20 de puncte rezultatul la cerința 2 va avea maximum 18 cifre.",
+    "Pentru teste valorând 50 de puncte cerința este 1."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qc5f0f5bb20.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "10",
+    "intrare/ieșire": "raganama.in / raganama.out",
+    "limită timp": "0.2 secunde",
+    "limită memorie": "8 MB / 4 MB",
+    "sursa problemei": "ONIGIM 2019, baraj",
+    "autor": "Emanuela Cerchez",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.2,
+  "memoryLimitMb": 8,
+  "author": "Emanuela Cerchez",
+  "sourceAttribution": "ONIGIM 2019, baraj",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3036/raganama"
+}

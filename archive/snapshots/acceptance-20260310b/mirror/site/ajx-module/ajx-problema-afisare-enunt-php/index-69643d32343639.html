@@ -1,0 +1,77 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2469"><article id="enunt">
+			<p>Fie <code>G</code> un graf neorientat cu <code>2 * N</code> noduri și <code>3 * N - 2</code> muchii. Fiecare muchie este colorată în alb, negru sau roșu.<br>
+Se garantează următoarele:</p>
+
+<ul>
+	<li>Există <code>N-1</code> muchii albe. Capetele lor sunt noduri din mulțimea <code>1, 2, ..., N</code>. Ele formează un arbore.</li>
+	<li>Există <code>N-1</code> muchii negre. Capetele lor sunt noduri din mulțimea <code>N+1, N+2, ..., 2*N</code>. Ele formează un arbore.</li>
+	<li>Există <code>N</code> muchii roșii. Fiecare muchie are un capăt în mulțimea <code>1, 2, ..., N</code> și celălalt capăt în mulțimea <code>N+1, N+2, ..., 2*N</code>.</li>
+</ul>
+
+<p>Cele <code>2 * N</code> capete ale muchiilor roșii sunt distincte două câte două. Cu alte cuvinte, fiecare nod din graf are exact o muchie roșie incidentă.<br>
+Numim <b>ciclu hamiltonian special</b> un ciclu care:</p>
+
+<ul>
+	<li>vizitează fiecare nod al grafului exact o dată.</li>
+	<li>nu parcurge consecutiv două muchii de aceeași culoare.</li>
+	<li>începe din nodul <code>1</code>, iar prima muchie parcursă este de culoare roșie.</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Afișați un ciclu hamiltonian special al grafului <code>G</code> sau constatați că nu există niciun astfel de ciclu.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>dungeon.in</code> va conține pe prima linie un număr natural <code>T</code> reprezentând numărul de teste. Pentru fiecare test pe prima linie se află valoarea <code>N</code>. Pe următoarele <code>N-1</code> linii se găsesc perechi de valori reprezentând capetele muchiilor de culoare albă (valori de la <code>1</code> la <code>N</code>). Următoarele <code>N-1</code> linii conţin perechi de valori ce reprezintă capetele muchiilor de culoare neagră (valori de la <code>N+1</code> la <code>2*N</code>). Următoarele <code>N</code> perechi de valori reprezintă capetele muchiilor de culoare roşie.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>dungeon.out</code> va conține pentru fiecare din cele <code>T</code> teste câte o linie cu <code>2*N</code> valori reprezentând succesiunea nodurilor care formează ciclul hamiltonian special al fiecărui graf dat, respectiv valoarea <code>-1</code> dacă nu există un astfel de ciclu.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>N ≤ 50 000</code></li>
+	<li><code>T ≤ 5</code></li>
+	<li>Pentru teste in valoare de <code>20</code> puncte se garantează că <code>N ≤ 10</code></li>
+	<li>Pentru alte teste in valoare de <code>30</code> puncte se garantează că ambii arbori au forma de lanţ.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>dungeon.in</code></p>
+
+<pre>2
+4
+1 2
+1 3
+3 4
+5 6
+5 7
+5 8
+1 5
+2 6
+3 7
+4 8
+4
+1 2
+1 3
+3 4
+5 6
+6 7
+5 8
+1 7
+2 8
+3 5
+4 6</pre>
+
+<p><code>dungeon.out</code></p>
+
+<pre>-1
+1 7 6 4 3 5 8 2</pre>
+
+<h3>Explicație</h3>
+
+<p>Există două teste. În fiecare test graful are <code>2*4</code> noduri şi <code>3*4-2</code> muchii (<code>3</code> muchii de culoare albă, <code>3</code> muchii de culoare neagră, respectiv <code>4</code> muchii de culoare roşie). În primul graf nu se găseşte un ciclu hamiltonian special.</p>		</article>
+		</body></html>

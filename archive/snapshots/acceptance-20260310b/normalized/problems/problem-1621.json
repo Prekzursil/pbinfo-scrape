@@ -1,0 +1,334 @@
+{
+  "id": 1621,
+  "slug": "miting",
+  "name": "Miting",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1621/miting",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 85,
+      "name": "Structuri de date liniare",
+      "slug": "structuri-de-date-liniare",
+      "href": "/?pagina=probleme-lista&tag=85"
+    },
+    {
+      "id": 87,
+      "name": "Coada",
+      "slug": "coada",
+      "href": "/?pagina=probleme-lista&tag=87"
+    }
+  ],
+  "tags": [
+    "Algoritmul lui Lee"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Cunoscând dimensiunile cartierului <code>n</code> și <code>m</code>, cuvântul <code>cuv</code>, configurația cartierului și pozițiile inițiale ale tinerilor, se cere:</p><ol>\n\t<li>Aria minimă a unei submatrice a matricei care codifică cartierul, în care se situează toate pozițiile inițiale ale tinerilor.</li>\n\t<li>Numărul minim de unități de combustibil consumați de către toate mașinile, știind că în final toți tinerii se vor reuni într-o singură mașină.</li>\n</ol>",
+      "text": "Cunoscând dimensiunile cartierului n și m, cuvântul cuv, configurația cartierului și pozițiile inițiale ale tinerilor, se cere: Aria minimă a unei submatrice a matricei care codifică cartierul, în care se situează toate pozițiile inițiale ale tinerilor. Numărul minim de unități de combustibil consumați de către toate mașinile, știind că în final toți tinerii se vor reuni într-o singură mașină."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>miting.in</code> conține:<br>\nPe prima linie, un număr natural <code>p</code>, care poate avea doar valoarea <code>1</code> sau <code>2</code>.<br>\nPe a doua linie două numere naturale <code>n</code> și <code>m</code>, separate printr-un spațiu.<br>\nPe a treia linie, cuvântul <code>cuv</code>.<br>\nPe următoarele <code>n</code> linii, câte <code>m</code> caractere pe linie reprezentând zonele cartierului. O zonă este interzisă dacă îi corespunde caracterul <code>#</code>, este liberă dacă îi corespunde caracterul <code>_</code> (underline) și este punctul de plecare al unei mașini dacă îi corespunde una dintre literele cuvântului <code>cuv</code>.</p>",
+      "text": "Fișierul de intrare miting.in conține: Pe prima linie, un număr natural p, care poate avea doar valoarea 1 sau 2. Pe a doua linie două numere naturale n și m, separate printr-un spațiu. Pe a treia linie, cuvântul cuv. Pe următoarele n linii, câte m caractere pe linie reprezentând zonele cartierului. O zonă este interzisă dacă îi corespunde caracterul #, este liberă dacă îi corespunde caracterul _ (underline) și este punctul de plecare al unei mașini dacă îi corespunde una dintre literele cuvântului cuv."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Dacă valoarea lui <code>p</code> este <code>1</code>,  se va rezolva numai cerința 1.  <br>\nÎn acest caz, în fişierul de ieşire <code>miting.out</code> se va scrie un singur număr natural <code>A</code>, reprezentând aria minimă a unei submatrice a matricei care codifică cartierul, în care se situează toate  pozițiile inițiale ale tinerilor.</p><p>Dacă valoarea lui <code>p</code> este <code>2</code>, se va rezolva numai cerința <code>2</code>.<br>\nÎn acest caz, în fişierul de ieşire <code>miting.out</code> se va scrie un singur număr natural <code>C</code>, reprezentând numărul minim de unități de combustibil consumate de către toate mașinile până la reunirea tinerilor, deci și a literelor, într-o singură mașină. În cazul în care nu există soluție, adică nu toți tinerii se pot reuni într-o singură mașină, se va scrie <code>-1</code>.</p>",
+      "text": "Dacă valoarea lui p este 1, se va rezolva numai cerința 1. În acest caz, în fişierul de ieşire miting.out se va scrie un singur număr natural A, reprezentând aria minimă a unei submatrice a matricei care codifică cartierul, în care se situează toate pozițiile inițiale ale tinerilor.Dacă valoarea lui p este 2, se va rezolva numai cerința 2. În acest caz, în fişierul de ieşire miting.out se va scrie un singur număr natural C, reprezentând numărul minim de unități de combustibil consumate de către toate mașinile până la reunirea tinerilor, deci și a literelor, într-o singură mașină. În cazul în care nu există soluție, adică nu toți tinerii se pot reuni într-o singură mașină, se va scrie -1."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2 ≤ n, m ≤ 60</code></li>\n\t<li><code>2 ≤ k ≤ 10</code></li>\n\t<li>Fie <code>z</code> numărul zonelor interzise. Atunci <code>0 ≤ z ≤ (n * m)/3</code></li>\n\t<li>În fiecare unitate de timp, o mașină poate să rămână pe loc în așteptarea alteia sau poate să treacă într-o zonă vecină, indiferent dacă zona respectivă este sau nu ocupată de o altă mașină.</li>\n\t<li>Lungimea laturii unei zone se consideră egală cu <code>1</code>.</li>\n\t<li>Pentru rezolvarea corectă a primei cerințe se acordă <code>20</code> de puncte, iar pentru cerința a doua se acordă <code>80</code> de puncte.</li>\n\t<li>Pentru <code>30%</code> dintre testele cerinței <code>2</code> se garantează <code>k ≤ 3</code>.</li>\n</ul>",
+      "text": "2 ≤ n, m ≤ 60 2 ≤ k ≤ 10 Fie z numărul zonelor interzise. Atunci 0 ≤ z ≤ (n * m)/3 În fiecare unitate de timp, o mașină poate să rămână pe loc în așteptarea alteia sau poate să treacă într-o zonă vecină, indiferent dacă zona respectivă este sau nu ocupată de o altă mașină. Lungimea laturii unei zone se consideră egală cu 1. Pentru rezolvarea corectă a primei cerințe se acordă 20 de puncte, iar pentru cerința a doua se acordă 80 de puncte. Pentru 30% dintre testele cerinței 2 se garantează k ≤ 3."
+    },
+    {
+      "title": "Exemplul 1",
+      "html": "<p><code>miting.in</code></p><pre>1\n4 5\nJOS\n#_O_#\n_#__S\n_#J_#\n___#_</pre><p><code>miting.out</code></p><pre>9</pre><h3>Explicație</h3><p>Submatricea de arie minimă care include toate literele are colțul stînga sus la linia <code>1</code> și coloana <code>3</code> și colțul dreapta jos la linia <code>3</code> și coloana <code>5</code>. Aria   este egală cu numărul de zone acoperite: <code>3 * 3 = 9</code>.</p><p><strong>Atenție! Pentru acest test se rezolvă doar cerința 1.</strong></p>",
+      "text": "miting.in1 4 5 JOS #_O_# _#__S _#J_# ___#_miting.out9ExplicațieSubmatricea de arie minimă care include toate literele are colțul stînga sus la linia 1 și coloana 3 și colțul dreapta jos la linia 3 și coloana 5. Aria este egală cu numărul de zone acoperite: 3 * 3 = 9.Atenție! Pentru acest test se rezolvă doar cerința 1."
+    },
+    {
+      "title": "Exemplul 2",
+      "html": "<p><code>miting.in</code></p><pre>2\n5 7\nBUN\n_#_#_#_\n__N#__#\n_#__B__\nU__#_#_\n_#_#_#_</pre><p><code>miting.out</code></p><pre>6</pre><h3>Explicație</h3><p><img src=\"/resurse/9dc152/p-1200/1621-interesant-1.png\" style=\"float:right;\"> O variantă de consum minim este: <code>U</code> se deplasează cu două poziții la dreapta. Apoi <code>B</code> se deplasează cu două poziții la stânga. <code>U</code> se deplasează din nou cu o singură poziție în sus. În final, <code>N</code> coboară o poziție. </p><p>Remarcați că <code>B</code> s-a reunit cu <code>U</code>, apoi <code>BU</code> cu <code>N</code>. </p><p><strong>Atenție! Pentru acest test se rezolvă doar cerința 2.</strong></p>",
+      "text": "miting.in2 5 7 BUN _#_#_#_ __N#__# _#__B__ U__#_#_ _#_#_#_miting.out6Explicație O variantă de consum minim este: U se deplasează cu două poziții la dreapta. Apoi B se deplasează cu două poziții la stânga. U se deplasează din nou cu o singură poziție în sus. În final, N coboară o poziție. Remarcați că B s-a reunit cu U, apoi BU cu N. Atenție! Pentru acest test se rezolvă doar cerința 2."
+    },
+    {
+      "title": "Exemplul 3",
+      "html": "<p><code>miting.in</code></p><pre>2\n6 7\nROST\nO#_#_#_\n___#__#\n_#_R___\n____#__\n__#_S_#\n_#_T_#_</pre><p><code>miting.out</code></p><pre>9</pre><h3>Explicație</h3><p><img src=\"/resurse/9dc152/p-1200/1621-interesant-2.png\" style=\"float:right;\"> O variantă de consum minim este: <code>O</code> se deplasează cu o poziție în jos, apoi cu două poziții spre dreapta, coboară o poziție și în final se deplasează o poziție spre dreapta, unde se reunește cu <code>R</code>. Apoi <code>S</code> se deplasează cu o poziție la stânga. <code>T</code> urcă o poziție și se reunește cu <code>2</code>. În final, mașina în care se găsesc <code>S</code> și <code>T</code> urcă două poziții și se întâlnește cu mașina în care se găsesc <code>R</code> și <code>O</code>. În această zonă, la linia <code>3</code> și coloana <code>4</code>, toate literele se reunesc într-o singură mașină.</p><p><strong>Atenție! Pentru acest test se rezolvă doar cerința 2.</strong></p>",
+      "text": "miting.in2 6 7 ROST O#_#_#_ ___#__# _#_R___ ____#__ __#_S_# _#_T_#_miting.out9Explicație O variantă de consum minim este: O se deplasează cu o poziție în jos, apoi cu două poziții spre dreapta, coboară o poziție și în final se deplasează o poziție spre dreapta, unde se reunește cu R. Apoi S se deplasează cu o poziție la stânga. T urcă o poziție și se reunește cu 2. În final, mașina în care se găsesc S și T urcă două poziții și se întâlnește cu mașina în care se găsesc R și O. În această zonă, la linia 3 și coloana 4, toate literele se reunesc într-o singură mașină.Atenție! Pentru acest test se rezolvă doar cerința 2."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Submatricea de arie minimă care include toate literele are colțul stînga sus la linia 1 și coloana 3 și colțul dreapta jos la linia 3 și coloana 5. Aria este egală cu numărul de zone acoperite: 3 * 3 = 9."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "O variantă de consum minim este: U se deplasează cu două poziții la dreapta. Apoi B se deplasează cu două poziții la stânga. U se deplasează din nou cu o singură poziție în sus. În final, N coboară o poziție."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "O variantă de consum minim este: O se deplasează cu o poziție în jos, apoi cu două poziții spre dreapta, coboară o poziție și în final se deplasează o poziție spre dreapta, unde se reunește cu R. Apoi S se deplasează cu o poziție la stânga. T urcă o poziție și se reunește cu 2. În final, mașina în care se găsesc S și T urcă două poziții și se întâlnește cu mașina în care se găsesc R și O. În această zonă, la linia 3 și coloana 4, toate literele se reunesc într-o singură mașină."
+    }
+  ],
+  "constraints": [
+    "2 ≤ n, m ≤ 60",
+    "2 ≤ k ≤ 10",
+    "Fie z numărul zonelor interzise. Atunci 0 ≤ z ≤ (n * m)/3",
+    "În fiecare unitate de timp, o mașină poate să rămână pe loc în așteptarea alteia sau poate să treacă într-o zonă vecină, indiferent dacă zona respectivă este sau nu ocupată de o altă mașină.",
+    "Lungimea laturii unei zone se consideră egală cu 1.",
+    "Pentru rezolvarea corectă a primei cerințe se acordă 20 de puncte, iar pentru cerința a doua se acordă 80 de puncte.",
+    "Pentru 30% dintre testele cerinței 2 se garantează k ≤ 3."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q621bd6d1be.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1200/1621-interesant-1.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1200-1621-interesant-1-png.png",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1200/1621-interesant-2.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1200-1621-interesant-2-png.png",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "10",
+    "intrare/ieșire": "miting.in / miting.out",
+    "limită timp": "1 secunde",
+    "limită memorie": "16 MB / 8 MB",
+    "sursa problemei": "OJI 2016, Clasa a X-a",
+    "autor": "Constantin Galatan",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 1,
+  "memoryLimitMb": 16,
+  "author": "Constantin Galatan",
+  "sourceAttribution": "OJI 2016, Clasa a X-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1621/miting"
+}

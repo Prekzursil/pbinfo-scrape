@@ -1,0 +1,100 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4789"><article id="enunt">
+			<p>Jocul preferat al lui Aurel are o hartă împărțită în <code>N</code> sectoare, numerotate, în ordine, de la <code>1</code> la <code>N</code>. Fiecare sector <code>i</code> (<code>1 ≤ i ≤ N</code>) are asociate două numere naturale reprezentând un decor, <code>decor</code><sub><code>i</code></sub>  și un scor, <code>scor</code><sub><code>i</code></sub>. Două decoruri de același tip sunt codificate prin același număr natural.</p>
+
+<p>O secvență formată din <code>lg</code> (<code>lg ≥ 2</code>) sectoare aflate pe poziții consecutive este numită <strong>riscantă</strong> dacă cel puțin  <code>lg / 2 + 1</code> dintre sectoarele acesteia au asociat același tip de decor, unde <code>lg / 2</code> reprezintă câtul împărțirii lui <code>lg</code> la 2.</p>
+
+<p>Dacă Aurel se află pe sectorul <code>s</code> și are vizibilitatea <code>v</code> (<code>0 ≤ v ≤ s-1</code>), el va “vedea” pe hartă secvența de <code>v+1</code> sectoare consecutive, care se încheie cu <code>s</code>: <code>s-v, s-v+1, ... s</code>. </p>
+
+<p>La începutul jocului, Aurel este poziționat într-un anumit sector (sector de start) și are o anumită vizibilitate. La fiecare pas al jocului, Aurel, fiind poziționat într-un sector oarecare, efectuează una dintre acțiunile:</p>
+
+<ul>
+	<li>dacă secvența pe care o “vede” pe hartă este riscantă, Aurel scade cu 1 vizibilitatea pe care o are (astfel el speră ca secvența rezultată să nu mai fie riscantă);</li>
+	<li>dacă secvența pe care o “vede” pe hartă nu este riscantă, Aurel avansează, poziționându-se în sectorul următor, și crește cu 1 vizibilitatea (el se simte încurajat și merge mai departe).</li>
+</ul>
+
+<p>Jocul se termină când el iese de pe hartă, adică se află după sectorul cu numărul <code>N</code> (ultimul). Scorul obținut este egal cu suma scorurilor sectoarelor în care el a fost poziționat la fiecare pas pe parcursul jocului (inclusiv scorul sectorului de start).</p>
+
+<h1>Cerinț3</h1>
+
+<p>1) Determinați numărul de moduri în care Aurel poate începe jocul, astfel încât prima secvență pe care o “vede” pe hartă să NU fie riscantă. Două moduri de a începe jocul sunt considerate diferite dacă încep pe sectoare diferite sau dacă au vizibilitatea diferită.<br>
+2) Determinați scorul obținut dacă Aurel pornește din sectorul <code>1</code> cu vizibilitatea <code>0</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>joc.in</code> conține pe prima linie numărul natural <code>C</code> reprezentând cerința care trebuie să fie rezolvată. Pe a doua linie se află numărul natural <code>N</code> reprezentând numărul de sectoare. Pe a treia linie se află <code>N</code> numere naturale, reprezentând decorurile asociate sectoarelor, în ordinea numerotării acestora. Pe a patra linie se află <code>N</code> numere naturale, reprezentând scorurile asociate sectoarelor, în ordinea numerotării acestora. Numerele aflate pe aceeași linie a fișierului sunt separate prin câte un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>joc.out</code> va conține o singură linie pe care este scris numărul determinat pentru cerința <code>C</code> din fișierul de intrare.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ C ≤ 2</code></li>
+	<li>Dacă <code>C = 1</code>, atunci <code>1 ≤ N ≤ 3.000</code></li>
+	<li>Dacă <code>C = 2</code>, atunci <code>1 ≤ N ≤ 100.000</code></li>
+	<li><code>1 ≤ decor</code><sub><code>i</code></sub> <code>≤ N</code>, pentru <code>1 ≤ i ≤ N</code></li>
+	<li><code>1 ≤ scor</code><sub><code>i</code></sub> <code>≤ 1.000.000</code>, pentru <code>1 ≤ i ≤ N</code></li>
+	<li>Pentru 25 de puncte, <code>C=1</code>, <code>1 ≤ N ≤ 800</code></li>
+	<li>Pentru 21 de puncte, <code>C=1</code>, <code>800 &lt; N ≤ 3.000</code></li>
+	<li>Pentru 24 de puncte, <code>C=2</code>, <code>1 ≤ N ≤ 9.000</code></li>
+	<li>Pentru 30 de puncte, <code>C=2</code>, <code>9.000 &lt; N ≤ 100.000</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>joc.in</code></p>
+
+<pre>1
+5
+1 1 2 1 3
+2 3 1 1 5</pre>
+
+<p><code>joc.out</code></p>
+
+<pre>10</pre>
+
+<h3>Explicație</h3>
+
+<p>Se notează cu <code>st</code> sectorul de start și cu <code>v</code> vizibilitatea; există <code>10</code> moduri în care Aurel poate începe jocul astfel încât prima secvență văzută să nu fie riscantă:</p>
+
+<ul>
+	<li><code>st=1</code>, <code>v=0</code> (secvența 1)</li>
+	<li><code>st=2</code>, <code>v=0</code> (secvența 2)</li>
+	<li><code>st=3</code>, <code>v=0</code> (secvența 3)</li>
+	<li><code>st=4</code>, <code>v=0</code> (secvența 4)</li>
+	<li><code>st=5</code>, <code>v=0</code> (secvența 5)</li>
+	<li><code>st=3</code>, <code>v=1</code> (secvența 2,3)</li>
+	<li><code>st=4</code>, <code>v=1</code> (secvența 3,4)</li>
+	<li><code>st=5</code>, <code>v=1</code> (secvența 4,5)</li>
+	<li><code>st=5</code>, <code>v=2</code> (secvența 3,4,5)</li>
+	<li><code>st=5</code>, <code>v=3</code> (secvența 2,3,4,5)</li>
+</ul>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>joc.in</code></p>
+
+<pre>2
+5
+1 1 2 1 3
+2 3 1 1 5</pre>
+
+<p><code>joc.out</code></p>
+
+<pre>16</pre>
+
+<h3>Explicație</h3>
+
+<p>Aurel pornește din sectorul 1 cu vizibilitate <code>v=0</code>. Scorul total este inițial <code>scor</code><sub><code>1</code></sub> <code>= 2</code>.</p>
+
+<ul>
+	<li>El vede doar sectorul 1, iar secvența văzută nu este riscantă, deci avansează în sectorul 2 și crește <code>v</code> cu <code>1</code>. La scorul total se adună <code>scor</code><sub><code>2</code></sub> <code>= 3</code>.</li>
+	<li>Secvența văzută, formată din sectoarele 1, 2, este riscantă, deci scade <code>v</code> cu <code>1</code>. Aurel este acum în sectorul 2, cu <code>v=0</code>. La scorul total se adună <code>scor</code><sub><code>2</code></sub> <code>= 3</code>.</li>
+	<li>Secvența curentă văzută nu este riscantă, deci avansează în sectorul 3 și crește <code>v</code> cu <code>1</code>. La scorul total se adună <code>scor</code><sub><code>3</code></sub> <code>= 1</code>.</li>
+	<li>Secvența văzută 2,3 nu este riscantă, deci avansează în sectorul 4 și crește <code>v</code> cu <code>1</code>. La scorul total se adună <code>scor</code><sub><code>4</code></sub> <code>= 1</code>.</li>
+	<li>Secvența văzută, formată din sectoarele 2,3,4 este riscantă, deci scade <code>v</code> cu <code>1</code>. La scorul total se adună <code>scor</code><sub><code>4</code></sub> <code>= 1</code>.</li>
+	<li>Secvența văzută 3,4 nu este riscantă, deci avansează în  sectorul 5 și crește <code>v</code> cu <code>1</code>. La scorul total se adună <code>scor</code><sub><code>5</code></sub> <code>= 5</code>.</li>
+	<li>Secvența văzută formată din sectoarele 3,4,5 nu este riscantă, deci avansează și se poziționează după ultimul sector, terminând jocul. Scorul total obținut este <code>2 + 3 + 3 + 1 + 1 + 1 + 5 = 16</code>.</li>
+</ul>		</article>
+		</body></html>

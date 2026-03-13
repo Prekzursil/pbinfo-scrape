@@ -1,0 +1,85 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1690"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p><strong><span class="caps">XOR</span>in</strong> este nemulțumit de problemele primite în prima zi de concurs de la Olimpiada Națională de Informatică și decide astfel să se implice în comisie. În scurt timp devine specialistul comisiei în generarea de teste formate din șiruri de numere. Din când în când el trebuie să adauge sau să șteargă elemente din șir. Câteodată el decide să readauge dintre elemente șterse anterior. Fie șirul de numere <code>a=(a[1], a[2], … ,a[N])</code> și <code>N</code> numărul de elemente din șir după fiecare operație.</p>
+
+<p>Astfel el are de realizat următoarele operații pornind de la un șir vid:</p>
+
+<ul>
+	<li>Inserează la sfârșitul șirului o valoare <code>x</code>;</li>
+	<li>Șterge ultimele <code>x</code> elemente din șir;</li>
+	<li>Readaugă la sfârșitul șirului primele <code>x</code> elemente șterse. Dacă, de exemplu, în operația anterioară de ștergere a unui număr <code>y</code> de elemente, am șters elementele <code>a[N-y+1]</code>, <code>a[N-y+2]</code>,…, <code>a[N]</code>, iar acum urmează o operație de readăugare a <code>x</code> elemente, vor fi adăugate în ordine elementele <code>a[N-y+1]</code>, <code>a[N-y+2]</code>,…, <code>a[N-y+x]</code> la sfârșitul șirului.</li>
+</ul>
+
+<p>Din când în când <span class="caps">XOR</span>in își pune următoarea întrebare: de câte ori există valoarea <code>x</code> în șir?</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>undo.in</code> conține pe prima linie numărul <code>M</code> ce reprezintă numărul de operații.</p>
+
+<p>Pe următoarele <code>M</code> linii se vor afla operațiile codificate astfel:</p>
+
+<ul>
+	<li><code>1 x</code> – se inserează elementul <code>x</code> la sfârșitul șirului</li>
+	<li><code>2 y</code> – se șterg ultimele <code>y</code> elemente adăugate în șir</li>
+	<li><code>3 z</code> – se adaugă înapoi la sfârșitul șirului primele <code>z</code> elemente șterse</li>
+	<li><code>4 t</code> – se afișează numărul de elemente cu valoarea <code>t</code> din șir</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>Pe fiecare linie a fișierului <code>undo.out</code> se scriu răspunsurile la întrebările lui <strong><span class="caps">XOR</span>in</strong>, fiecare răspuns pe câte o linie.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>Toate numerele din fișierul de intrare sunt cuprinse între <code>1</code> și  <code>200000</code>;</li>
+	<li>Pentru 20% din teste se garantează  <code>M ≤ 1000</code>,  pentru alte 40% din teste, se garantează că numerele inserate vor fi distincte;</li>
+	<li>Între o operație de ștergere și una de readăugare sau între două de readăugare nu se vor afla alte operații de inserare</li>
+	<li>Numărul de elemente readăugate nu va fi mai mare decât numărul de elemente șterse la ultima operație.</li>
+	<li>Între două operații de readăugare va exista cel puțin o operație de ștergere.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>undo.in</code></p>
+
+<pre>16
+1 1
+1 2
+1 3
+1 4
+4 4
+2 2
+4 3
+3 1
+4 4
+4 3
+1 7
+1 7
+1 7
+4 7
+2 2
+4 7</pre>
+
+<p><code>undo.out</code></p>
+
+<pre>1
+0
+0
+1
+3
+1</pre>
+
+<h3>Explicație</h3>
+
+<p>Inițial șirul este vid.<br>
+După primele <code>4</code> operații de inserare șirul este <code>1, 2, 3, 4</code>.  <br>
+Operația <code>4 4</code> va afișa <code>1</code>.<br>
+Operația <code>2 2</code> va șterge ultimele două elemente șirul devenind <code>1, 2</code>.<br>
+Din cauză că elementul <code>3</code> a fost șters, a șaptea operație va afișa <code>0</code>.<br>
+Operația <code>3 1</code> va readăuga la sfârșitul șirului elementul <code>3</code>. <br>
+În urma acestei operații șirul devine <code>1, 2, 3</code>.<br>
+Operația <code>4 4</code> va afișa 0, iar operația <code>4 3</code> va afișa <code>1</code>.<br>
+ș.a.m.d.</p>		</article>
+		</body></html>

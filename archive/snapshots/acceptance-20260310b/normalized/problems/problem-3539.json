@@ -1,0 +1,291 @@
+{
+  "id": 3539,
+  "slug": "oop-numere-complexe",
+  "name": "oop_numere_complexe",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3539/oop-numere-complexe",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 164,
+      "name": "Programare orientată pe obiecte",
+      "slug": "programare-orientat-pe-obiecte",
+      "href": "/?pagina=probleme-lista&tag=164"
+    },
+    {
+      "id": 165,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=165"
+    }
+  ],
+  "tags": [
+    "POO",
+    "supraincarcare operatori"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Ai primit definiția clasei de mai jos. Implementează toate metodele clasei.</p><pre class=\"code_cpp\">class Complex\n{\n    // i - partea imaginara, r - partea reala\n    int i, r;\npublic:\n    // constructor stabileste valoare partii reale si acelei imaginare\n    Complex(int pr, int pi);\n    // constructor creeaza numarul complex nul\n    Complex();\n    // seteaza valorile partii reale si a celei imaginare\n    void set(int pr, int pi);\n    //returneaza modulul\n    double modul();\n    //returneaza partea reala\n    int real();\n    //returneaza partea imaginara\n    int imag();\n    //supraincarcare operator pentru afisarea numarului complex\n    friend ostream&amp; operator&lt;&lt;(ostream&amp;, const Complex&amp;);\n    // supraincarcare operator adunare\n    Complex operator +(Complex );\n    // supraincarcare operator scadere\n    Complex operator -(Complex );\n    // supraincarcare operator inmultire\n    Complex operator *(Complex );\n};</pre><p>Codul scris de tine va fi încărcat într-un program de forma:</p><pre class=\"code_cpp\">#include &lt;iostream&gt;\n#include &lt;cmath&gt;\nusing namespace std;\n\nclass Complex\n{\n    // i - partea imaginara, r - partea reala\n    int i, r;\npublic:\n    // constructor stabileste valoare partii reale si acelei imaginare\n    Complex(int pr, int pi);\n    // constructor creeaza numarul complex nul\n    Complex();\n    // seteaza valorile partii reale si a celei imaginare\n    void set(int pr, int pi);\n    //returneaza modulul\n    double modul();\n    //returneaza partea reala\n    int real();\n    //returneaza partea imaginara\n    int imag();\n    //supraincarcare operator pentru afisarea numarului complex\n    friend ostream&amp; operator&lt;&lt;(ostream&amp;, const Complex&amp;);\n    // supraincarcare operator adunare\n    Complex operator +(Complex );\n    // supraincarcare operator scadere\n    Complex operator -(Complex );\n    // supraincarcare operator inmultire\n    Complex operator *(Complex );\n};\n\n// codul scris de tine\n\nint main()\n{\n    Complex a, b(4,5),c;\n    int x, y;\n    cin &gt;&gt; x &gt;&gt; y;\n    a.set(x,y);\n    cout &lt;&lt; a.modul()&lt;&lt;\" \"&lt;&lt; a*b &lt;&lt; \" \" &lt;&lt; a+b &lt;&lt; \" \" &lt;&lt; a-b;\n    return 0;\n}</pre>",
+      "text": "Ai primit definiția clasei de mai jos. Implementează toate metodele clasei.class Complex { // i - partea imaginara, r - partea reala int i, r; public: // constructor stabileste valoare partii reale si acelei imaginare Complex(int pr, int pi); // constructor creeaza numarul complex nul Complex(); // seteaza valorile partii reale si a celei imaginare void set(int pr, int pi); //returneaza modulul double modul(); //returneaza partea reala int real(); //returneaza partea imaginara int imag(); //supraincarcare operator pentru afisarea numarului complex friend ostream& operator<<(ostream&, const Complex&); // supraincarcare operator adunare Complex operator +(Complex ); // supraincarcare operator scadere Complex operator -(Complex ); // supraincarcare operator inmultire Complex operator *(Complex ); };Codul scris de tine va fi încărcat într-un program de forma:#include <iostream> #include <cmath> using namespace std; class Complex { // i - partea imaginara, r - partea reala int i, r; public: // constructor stabileste valoare partii reale si acelei imaginare Complex(int pr, int pi); // constructor creeaza numarul complex nul Complex(); // seteaza valorile partii reale si a celei imaginare void set(int pr, int pi); //returneaza modulul double modul(); //returneaza partea reala int real(); //returneaza partea imaginara int imag(); //supraincarcare operator pentru afisarea numarului complex friend ostream& operator<<(ostream&, const Complex&); // supraincarcare operator adunare Complex operator +(Complex ); // supraincarcare operator scadere Complex operator -(Complex ); // supraincarcare operator inmultire Complex operator *(Complex ); }; // codul scris de tine int main() { Complex a, b(4,5),c; int x, y; cin >> x >> y; a.set(x,y); cout << a.modul()<<\" \"<< a*b << \" \" << a+b << \" \" << a-b; return 0; }"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><strong>Intrare</strong></p><pre>4 5</pre><p><strong>Ieșire</strong></p><pre>6.40312 -9+40i 8+10i 0</pre><h3>Explicație</h3><p>S-a afișat modulul numărului complex 4+5i, produsul, suma și diferența numerelor complexe 4+5i și 4+5i.</p>",
+      "text": "Intrare4 5Ieșire6.40312 -9+40i 8+10i 0ExplicațieS-a afișat modulul numărului complex 4+5i, produsul, suma și diferența numerelor complexe 4+5i și 4+5i."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><strong>Intrare</strong></p><pre>4 -5</pre><p><strong>Ieșire</strong></p><pre>6.40312 41 8 -10i</pre><h3>Explicație</h3><p>S-a afișat modulul numărului complex 4-5i, produsul, suma și diferența numerelor complexe 4-5i și 4+5i.</p>",
+      "text": "Intrare4 -5Ieșire6.40312 41 8 -10iExplicațieS-a afișat modulul numărului complex 4-5i, produsul, suma și diferența numerelor complexe 4-5i și 4+5i."
+    }
+  ],
+  "examples": [
+    {
+      "input": "4 5",
+      "output": "6.40312 -9+40i 8+10i 0",
+      "explanation": "S-a afișat modulul numărului complex 4+5i, produsul, suma și diferența numerelor complexe 4+5i și 4+5i."
+    },
+    {
+      "input": "4 -5",
+      "output": "6.40312 41 8 -10i",
+      "explanation": "S-a afișat modulul numărului complex 4-5i, produsul, suma și diferența numerelor complexe 4-5i și 4+5i."
+    }
+  ],
+  "constraints": [],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q973a0a5fa7.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Popa Daniel (popadaniel72)",
+    "clasa": "11",
+    "intrare/ieșire": "tastatură / ecran",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "-",
+    "autor": "Daniel Popa",
+    "dificultate": "medie"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "author": "Daniel Popa",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3539/oop-numere-complexe"
+}

@@ -1,0 +1,94 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2056"><article id="enunt">
+			<p>Cu toții știm că popcornul este o adevărată delicatesă culinară. În pregătirile tale pentru lotul de anul acesta (și pentru petrecerile de după), ai făcut comandă de <code>N</code> tipuri de floricele de porumb pentru microunde. Fiecare tip are asociate <code>3</code> valori:</p>
+
+<ul>
+	<li><code>A[i]</code> = Timpul (în secunde) la care orice floricică de acel tip “pocnește”;</li>
+	<li><code>B[i]</code> = Timpul (în secunde) la care orice floricică de acel tip “se arde”;</li>
+	<li><code>C[i]</code> = Cantitatea (în floricele) a respectivului tip.</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Mai ai la dispoziție <code>M</code> pungi pentru floricele de unică folosință de capacitate foarte mare (practic, infinită) și un cuptor cu microunde. Cum, bineînțeles, nimănui nu îi plac floricelele nefăcute sau cele arse, îți dorești să le partiționezi convenabil în cele <code>M</code> pungi și apoi să le introduci pe rând în cuptorul cu microunde, setându-i un timp de preparare <code>prep[i]</code> corespunzător, astfel încât după cele <code>M</code> tranșe să obții <b>cât mai multe floricele comestibile</b>.</p>
+
+<p>Formal, o floricică de tipul <code>i</code> introdusă în punga <code>j</code> , setată la timpul (în secunde) de preparare <code>prep[j]</code> este comestibilă dacă și numai dacă <code>A[i] ≤ prep[j] &lt; B[i]</code>.</p>
+
+<p>Fiind date cele <code>N</code> tipuri de floricele și numărul de pungi disponibile, trebuie să găsești o partiție convenabilă și timpii optimi de preparare pentru fiecare pungă, astfel încât la final să obții numărul maxim de floricele comestibile, pe care să îl afișezi în fișierul de ieșire. Prea ușor!</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>popcorn.in</code> conține pe prima linie numerele naturale <code>N</code> și <code>M</code> , separate printr-un spațiu, cu semnificația din enunț. Pe următoarele <code>N</code> linii se vor afla valorile <code>A[i]</code> , <code>B[i]</code> , <code>C[i]</code> corespunzătoare fiecărui tip de floricele.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul <code>popcorn.out</code> va conține un singur număr natural reprezentând numărul maxim de floricele comestibile care se poate obține.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ M ≤ N ≤ 200 000</code></li>
+	<li><code>1 ≤ A[i] &lt; B[i] ≤ 200 000</code></li>
+	<li>Numărul total de floricele nu depășește <code>10</code><sup><code>9</code></sup></li>
+	<li><b>Unele pungi pot fi goale !</b></li>
+	<li><code>X = max{N, B[1], B[2], …, B[N]}</code></li>
+	<li>Pentru 10 puncte: <code>X ≤ 550, M ≤ 100</code></li>
+	<li>Pentru alte 10 puncte: <code>X ≤ 3 000, M ≤ 50</code></li>
+	<li>Pentru alte 10 puncte: <code>M ≤ X ≤ 3 000</code></li>
+	<li>Pentru alte 10 puncte: <code>X ≤ 50 000, M = 3</code></li>
+	<li>Pentru alte 20 de puncte: <code>X ≤ 50 000, M ≤ 20</code></li>
+	<li>Pentru alte 15 puncte: <code>X ≤ 200 000, M ≤ 50</code></li>
+	<li>Pentru alte 15 puncte: <code>M ≤ X ≤ 50 000</code></li>
+	<li>Pentru restul de 10 puncte: <b>restricțiile originale</b></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>popcorn.in</code></p>
+
+<pre>5 2
+2 4 3
+1 5 6
+4 8 10
+7 8 2
+10 11 2</pre>
+
+<p><code>popcorn.out</code></p>
+
+<pre>21</pre>
+
+<h3>Explicație</h3>
+
+<p>Avem <code>5</code> tipuri de floricele și <code>2</code> pungi disponibile.</p>
+
+<p>Una din soluțiile posibile este:</p>
+
+<ul>
+	<li>Punga <code>1</code> va conține tipurile <code>1</code> și <code>2</code> și va fi preparată la timpul <code>3</code>.</li>
+	<li>Punga <code>2</code> va conține tipurile <code>3, 4, 5</code> și va fi preparată la timpul <code>7</code>.</li>
+</ul>
+
+<p>Toate tipurile de floricele vor fi preparate cu succes, în afară de tipul <code>5</code>, care vor rămâne în stadiul de boabe.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>popcorn.in</code></p>
+
+<pre>3 3
+1 2 2
+2 3 3
+1 3 5</pre>
+
+<p><code>popcorn.out</code></p>
+
+<pre>10</pre>
+
+<h3>Explicație</h3>
+
+<p>Putem alege pungile astfel:</p>
+
+<ul>
+	<li>Punga <code>1</code> va conține tipurile <code>1, 3</code> și va fi preparată la timpul <code>1</code>.</li>
+	<li>Punga <code>2</code> va conține tipul <code>2</code> și va fi preparată la timpul <code>2</code>.</li>
+	<li>Punga <code>3</code> va fi goală.</li>
+</ul>		</article>
+		</body></html>

@@ -1,0 +1,318 @@
+{
+  "id": 3682,
+  "slug": "walker",
+  "name": "Walker",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3682/walker",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 53,
+      "name": "Programare dinamică",
+      "slug": "programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=53"
+    },
+    {
+      "id": 54,
+      "name": "Probleme diverse de programare dinamică",
+      "slug": "probleme-diverse-de-programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=54"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Johnnie Walker este acum in București! Chiar dacă este târziu, el vrea totuși să facă o plimbare. Cartierul în care locuiește Johnnie poate fi reprezentat ca un graf neorientat complet cu <code>n</code> noduri, unde străzile sunt reprezentate ca muchii și intersecțiile ca noduri. </p><p>În orice moment de timp, Johnnie poate să meargă către orice intersecție adiacentă cu cea în care se afla și îi va lua exact un minut să se deplaseze. Pentru că lui Johnnie nu-i place să aștepte, el se va deplasa către o altă intersecție în fiecare minut.</p><p>Johnnie e acum curios câte drumuri există astfel încât drumul lui va dura exact <code>k</code> minute și va ajunge înapoi în intersecția de unde și-a început drumul. La început, Johnnie se află în prima intersecție(nodul <code>1</code>).</p><p>Două drumuri sunt diferite dacă există o poziție unde cele două intersecții diferă. Johnnie poate să treaca printr-o intersecție de mai multe ori pe parcursul drumului său.</p><p>Ajutați-l să afle răspunsul la întrebarea sa. Fiindcă valoarea poate fi destul de mare, el vă cere doar să afișați restul valorii la <code>666013</code>.</p>",
+      "text": "Johnnie Walker este acum in București! Chiar dacă este târziu, el vrea totuși să facă o plimbare. Cartierul în care locuiește Johnnie poate fi reprezentat ca un graf neorientat complet cu n noduri, unde străzile sunt reprezentate ca muchii și intersecțiile ca noduri. În orice moment de timp, Johnnie poate să meargă către orice intersecție adiacentă cu cea în care se afla și îi va lua exact un minut să se deplaseze. Pentru că lui Johnnie nu-i place să aștepte, el se va deplasa către o altă intersecție în fiecare minut.Johnnie e acum curios câte drumuri există astfel încât drumul lui va dura exact k minute și va ajunge înapoi în intersecția de unde și-a început drumul. La început, Johnnie se află în prima intersecție(nodul 1).Două drumuri sunt diferite dacă există o poziție unde cele două intersecții diferă. Johnnie poate să treaca printr-o intersecție de mai multe ori pe parcursul drumului său.Ajutați-l să afle răspunsul la întrebarea sa. Fiindcă valoarea poate fi destul de mare, el vă cere doar să afișați restul valorii la 666013."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Programul citește de la tastatură două numere, <code>n</code> și <code>k</code>, cu descrierea din enunț. </p>",
+      "text": "Programul citește de la tastatură două numere, n și k, cu descrierea din enunț."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Programul va afișa pe ecran răspunsul la întrebarea lui Johnnie, modulo <code>666013</code>.</p>",
+      "text": "Programul va afișa pe ecran răspunsul la întrebarea lui Johnnie, modulo 666013."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ n ≤</code> <code>10</code><sup><code>9</code></sup></li>\n\t<li><code>1 ≤ k ≤</code> <code>10</code><sup><code>18</code></sup></li>\n\t<li>Pentru teste în valoare de <code>10</code> puncte, <code>1 ≤ n ≤ 5</code> și <code>1 ≤ k ≤ 10</code>.</li>\n\t<li>Pentru alte teste în valoare de <code>20</code> de puncte, <code>1 ≤ n * k ≤ 2 000 000</code>.</li>\n\t<li>Pentru alte teste în valoare de <code>20</code> de puncte, <code>1 ≤ k ≤ 1 000 000</code>.</li>\n</ul>",
+      "text": "1 ≤ n ≤ 109 1 ≤ k ≤ 1018 Pentru teste în valoare de 10 puncte, 1 ≤ n ≤ 5 și 1 ≤ k ≤ 10. Pentru alte teste în valoare de 20 de puncte, 1 ≤ n * k ≤ 2 000 000. Pentru alte teste în valoare de 20 de puncte, 1 ≤ k ≤ 1 000 000."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><strong>Intrare</strong></p><pre>4 3</pre><p><strong>Ieșire</strong></p><pre>6</pre>",
+      "text": "Intrare4 3Ieșire6"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><strong>Intrare</strong></p><pre>5 3</pre><p><strong>Ieșire</strong></p><pre>12</pre>",
+      "text": "Intrare5 3Ieșire12"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><strong>Intrare</strong></p><pre>100 15799</pre><p><strong>Ieșire</strong></p><pre>543264</pre><h3>Explicație</h3><p>Pentru primul exemplu, cele <code>6</code> drumuri valide sunt:</p><p>\t<code>1 -&gt; 2 -&gt; 3 -&gt; 1</code></p><p>\t<code>1 -&gt; 2 -&gt; 4 -&gt; 1</code></p><p>\t<code>1 -&gt; 3 -&gt; 2 -&gt; 1</code></p><p>\t<code>1 -&gt; 3 -&gt; 4 -&gt; 1</code></p><p>\t<code>1 -&gt; 4 -&gt; 2 -&gt; 1</code></p><p>\t<code>1 -&gt; 4 -&gt; 3 -&gt; 1</code></p>",
+      "text": "Intrare100 15799Ieșire543264ExplicațiePentru primul exemplu, cele 6 drumuri valide sunt: 1 -> 2 -> 3 -> 1 1 -> 2 -> 4 -> 1 1 -> 3 -> 2 -> 1 1 -> 3 -> 4 -> 1 1 -> 4 -> 2 -> 1 1 -> 4 -> 3 -> 1"
+    }
+  ],
+  "examples": [
+    {
+      "input": "4 3",
+      "output": "6"
+    },
+    {
+      "input": "5 3",
+      "output": "12"
+    },
+    {
+      "input": "100 15799",
+      "output": "543264",
+      "explanation": "Pentru primul exemplu, cele 6 drumuri valide sunt:"
+    }
+  ],
+  "constraints": [
+    "1 ≤ n ≤ 109",
+    "1 ≤ k ≤ 1018",
+    "Pentru teste în valoare de 10 puncte, 1 ≤ n ≤ 5 și 1 ≤ k ≤ 10.",
+    "Pentru alte teste în valoare de 20 de puncte, 1 ≤ n * k ≤ 2 000 000.",
+    "Pentru alte teste în valoare de 20 de puncte, 1 ≤ k ≤ 1 000 000."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qbb16d7ee8e.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Stefan Dascalescu stefdasca.ro (stefdasca)",
+    "clasa": "11",
+    "intrare/ieșire": "tastatură / ecran",
+    "limită timp": "0.3 secunde",
+    "limită memorie": "32 MB / 32 MB",
+    "sursa problemei": "IOIT 2020-21, Runda 3",
+    "autor": "Alexandru Tifui",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.3,
+  "memoryLimitMb": 32,
+  "author": "Alexandru Tifui",
+  "sourceAttribution": "IOIT 2020-21, Runda 3",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3682/walker"
+}

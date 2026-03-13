@@ -1,0 +1,107 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4616"><article id="enunt">
+			<p>În sistemul solar Stelarion sunt <code>99</code> de planete. Planeta Hazard găzduiește campionatul de Robotron pe echipe. Jucătorii sunt înregistrați în ordinea sosirii lor, indiferent de planeta de pe care provin. Anul acesta s-au înscris în campionat <code>N</code> jucători de pe <code>M</code> planete. Jucătorul înregistrat al <code>i</code>-lea (cu <code>i</code> de la <code>1</code> la <code>N</code>) primește două numere: <code>E[i]</code> — numărul trecut pe ecuson și <code>P[i]</code> — puterea jucătorului. Numărul trecut pe ecuson este format din codul planetei jucătorului <code>CP</code> (numărul format din ultimele două cifre de pe ecuson) și codul jucătorului <code>CJ</code> (numărul format din restul cifrelor). Jucătorii care reprezintă aceeași planetă vor fi repartizați în aceeași echipă, poziția pe care o ocupă inițial în echipă fiind în ordinea înregistrării lor în concurs. În cadrul campionatului se vor disputa mai multe runde, iar la fiecare rundă va fi desemnată o echipă câștigătoare. </p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-robotron-01-jpg.jpg"></p>
+
+<p>Regulamentul de concurs:</p>
+
+<ul>
+	<li>O rundă constă în parcurgerea unui circuit format din <code>L</code> căsuțe, numerotate de la <code>1</code> la <code>L</code>, în sens orar, plasate ca în figură.</li>
+	<li>Fiecare echipă dispune de un pion care este plasat în căsuța <code>1</code> la începutul fiecărei runde; o mutare a jucătorului al <code>i</code>-lea în ordinea înregistrării constă în deplasarea pionului echipei proprii cu <code>P[i]</code> căsuțe, în sens orar.</li>
+	<li>În fiecare rundă, echipele joacă ciclic, în secvențe succesive, fiecare secvență fiind în ordinea strict crescătoare a codurilor planetelor de pe care provin. Într-o secvență joacă toate echipele, doar ultima secvență a rundei putând fi incompletă, după caz. Ordinea echipelor nu se schimbă de la o rundă la alta. Când este rândul unei echipe să joace, unul dintre membrii acesteia mută pionul echipei respective.</li>
+</ul>
+
+<ul>
+	<li>La prima rundă, în cadrul fiecărei echipe, jucătorii ocupă pozițiile inițiale, stabilite la înscriere. Pentru fiecare altă rundă care urmează, în fiecare echipă, se schimbă poziția jucătorilor, aceștia permutându-se circular. Astfel cel care a fost primul la runda anterioară devine ultimul, iar cel care fusese al doilea va fi acum pe prima poziție.</li>
+	<li>La fiecare rundă, în cadrul fiecărei echipe, jucătorii mută pionul echipei pe rând, în ordinea poziției pe care o ocupă în echipă în runda respectivă. După jucătorul care ocupă ultima poziție în echipă la runda curentă va muta jucătorul care ocupă prima poziție.</li>
+	<li>Runda se încheie când pionul uneia dintre echipe a parcurs tot circuitul, ajungând din nou la poziția <code>1</code> sau trecând peste aceasta. Această echipă este desemnată ca fiind echipa câștigătoare a rundei, iar jucătorul care aduce victoria echipei sale este cel care face ultima mutare, de tipul precizat.</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>1) Să se determine numărul <code>M</code> al echipelor participante și codul <code>H</code> al planetei gazdă Hazard, știind că numărul jucătorilor din echipa planetei gazdă este strict mai mare decât numărul jucătorilor oricărei alte echipe.</p>
+
+<p>2) Să se determine codul planetei de pe care provine echipa câștigătoare la runda <code>K</code> și codul jucătorului care aduce victoria acestei echipei la aceasta rundă.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>robotron.in</code> conține pe prima linie un număr <code>C</code>, reprezentând numărul cerinței, pe a doua linie, <code>3</code> numere naturale <code>N</code>,  <code>L</code> și <code>K</code> cu semnificația din enunț. Pe următoarele <code>N</code> linii sunt datele jucătorilor: pe a <code>i</code>-a dintre aceste linii se află câte două numere naturale <code>E[i]</code> și <code>P[i]</code>, cu semnificația din enunț. Numerele de pe aceeași linie a fișierului sunt separate prin câte un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>robotron.out</code> va conține pe prima linie, pentru <code>C=1</code>, numerele <code>M</code> și <code>H</code>, iar pentru <code>C=2</code>, codul planetei și al jucătorului precizate la cerința <code>2</code>. Numerele de pe aceeași linie a fișierului sunt despărțite printr-un spațiu.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 100.000</code></li>
+	<li><code>1 ≤ L ≤ 1.000.000.000</code></li>
+	<li><code>1 ≤ K ≤ 1.000.000.000</code></li>
+	<li><code>101 ≤ E[i] ≤ 1.000.000.000</code></li>
+	<li><code>101 ≤ P[i] ≤ 1.000.000</code></li>
+	<li><code>1 ≤ CP ≤ 99</code></li>
+	<li>Pentru 20 de puncte, <code>C = 1</code>, <code>N ≤ 1000</code></li>
+	<li>Pentru 30 de puncte, <code>C = 1</code></li>
+	<li>Pentru 10 puncte, <code>C = 2</code>, <code>N ≤ 10000</code>, <code>L ≤ 10000</code>, <code>K ≤ 1000</code></li>
+	<li>Pentru 10 puncte, <code>C = 2</code>, <code>N ≤ 10000</code>, <code>L ≤ 10000</code></li>
+	<li>Pentru 30 de puncte, <code>C = 2</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>robotron.in</code></p>
+
+<pre>1
+7 23 2
+245 5
+3103 5
+3203 2
+3303 5
+2245 6
+3003 3
+231745 1</pre>
+
+<p><code>robotron.out</code></p>
+
+<pre>2 3</pre>
+
+<h3>Explicație</h3>
+
+<p>Sunt 7 jucători și ei vor fi împărțiți în 2 echipe (<code>M = 2</code>), reprezentând planetele cu codurile <code>3</code> (jucătorii cu codurile <code>31</code>, <code>32</code>, <code>33</code>, <code>30</code>) și <code>45</code> (jucătorii cu codurile <code>2</code>, <code>22</code>, <code>2317</code>). Codul planetei gazdă Hazard este <code>H = 3</code>, echipa planetei <code>3</code> fiind cea mai numeroasă.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>robotron.in</code></p>
+
+<pre>2
+7 23 2
+2145 5
+3103 5
+3203 2
+3303 5
+2245 6
+3003 3
+2345 1</pre>
+
+<p><code>robotron.out</code></p>
+
+<pre>45 21</pre>
+
+<h3>Explicație</h3>
+
+<p>Traseul conține <code>23</code> de căsuțe, iar la prima rundă membrii echipelor au pozițiile stabilite la înscriere și vor muta în ordinea acestor poziții:</p>
+
+<p>Echipa planetei cu codul <code>3</code> are următorii jucători, cu codurile și puterile aferente: <code>31 5</code>, <code>32 2</code>, <code>33 5</code>, <code>30 3</code></p>
+
+<p>Echipa planetei cu codul <code>45</code> are următorii jucători, cu codurile și puterile aferente: <code>21 5</code>, <code>22 6</code>, <code>23 1</code>.</p>
+
+<p>La runda a 2-a pozițiile membrilor se schimbă, primii jucători din fiecare echipă trecând la coadă:</p>
+
+<p>Echipa planetei cu codul <code>3</code>: <code>32 2</code>, <code>33 5</code>, <code>30 3</code>, <code>31 5</code>.</p>
+
+<p>Echipa planetei cu codul <code>45</code>: <code>22 6</code>, <code>23 1</code>, <code>21 5</code>.</p>
+
+<p>Echipa planetei cu codul <code>45</code> termină jocul în runda a <code>2</code>-a după <code>6</code> mutări, care, pentru această echipă, vor fi efectuate în ordine de jucătorii <code>22</code>, <code>23</code>, <code>21</code>, <code>22</code>, <code>23</code> si <code>21</code>. Deci ultima mutare o va face jucătorul cu codul <code>CJ = 21</code>, care ajunge în căsuța <code>2</code>, deci trece peste căsuța <code>1</code>. Ordinea în care mută jucătorii celor două echipe în cadrul acestei runde, precum și numerele căsuțelor ocupate succesiv de cei doi pioni, sunt ilustrate în tabelul de mai jos.  </p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-robotron-02-jpg.jpg"></p>		</article>
+		</body></html>

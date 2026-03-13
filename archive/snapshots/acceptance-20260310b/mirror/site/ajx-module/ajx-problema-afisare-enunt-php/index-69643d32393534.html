@@ -1,0 +1,88 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2954"><article id="enunt">
+			<p>A și B participă la un joc cu următoarele reguli:</p>
+
+<ul>
+	<li>întotdeauna începe jucătorul A;</li>
+	<li>el primește un număr natural <code>n</code> mai mare decât <code>1</code>;</li>
+	<li>jucătorul care este la mutare poate să scadă <code>1</code> din număr, sau să îl împartă la <code>2</code> (rezultatul fiind partea întreagă a împărțirii), apoi acest număr este dat adversarului, care va proceda la fel;</li>
+	<li>jocul se va termina atunci când un jucător a ajuns la numărul <code>1</code>.</li>
+</ul>
+
+<p>Avem două tipuri de joc, în funcție de cum se termină:<br>
+1. Câștigă cel care primește de la adversar numărul <code>1</code>;<br>
+2. Pierde cel care primește de la adversar numărul <code>1</code>.</p>
+
+<p>Un meci este format din mai multe game-uri consecutive, toate fiind de același tip. Vom considera, că cei doi jucători cunosc acest principiu înainte de începerea meciului și că vor juca optim de fiecare dată. De exemplu, dacă jocul este de tipul 1 (câștigă cel care primește <code>1</code>) și game-ul începe cu valoarea <code>n = 4</code>, atunci A va câștiga, pentru că împarte la <code>2</code>, iar B indiferent că scade <code>1</code> sau împarte la <code>2</code>, îi va da lui A numărul <code>1</code>, deci A va câștiga.<br>
+Dacă jocul este de tipul 2 și game-ul începe cu valoarea <code>n = 4</code>, atunci A va pierde, pentru că indiferent că scade <code>1</code> și îi dă lui B numărul <code>3</code>, sau împarte la <code>2</code> și îi dă lui B numărul <code>2</code>, B va împărți acest număr la <code>2</code> (<code>3 / 2 = 1</code>, <code>2 / 2 = 1</code>) și îi va da lui A numărul <code>1</code>, deci A va pierde.</p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând tipul <code>T</code> al jocului, numărul <code>G</code> al game-urilor, respectiv valoarea de pornire pentru fiecare game, să se răspundă pentru fiecare caz în parte, dacă jucătorul A va câștiga (<code>1</code>) sau va pierde (<code>0</code>).</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul standard de intrare va conține pe prima linie două numere naturale <code>T</code> și <code>G</code> separate prin spațiu, reprezentând tipul tuturor jocurilor (<code>1</code> sau <code>2</code>) respectiv numărul de game-uri. Următoarele <code>G</code> linii vor conține câte un număr natural ce reprezintă câte o valoare de pornire.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul standard de ieșire va conține <code>G</code> linii, pe fiecare linie se va scrie valoarea <code>1</code> – dacă numărul este câștigător pentru jucătorul A, sau valoarea <code>0</code> – dacă numărul este pierzător pentru jucătorul A, în ordinea citirii valorilor din fișierul de intrare.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>T</code> poate fi <code>1</code> sau <code>2</code>;</li>
+	<li><code>0 &lt; G &lt; 10</code>;</li>
+	<li><code>1 &lt; valoare de pornire &lt; 2.000.000.000</code>.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>1 4
+2
+3
+4
+2019</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>0
+1
+1
+1</pre>
+
+<h3>Explicație</h3>
+
+<p>avem joc de tipul <code>T = 1</code>,<br>
+meciul este format din <code>G = 4</code> game-uri<br>
+<code>2</code> – pierzător pentru A (<code>0</code>)<br>
+<code>3</code> – câștigător pentru A (<code>1</code>)<br>
+<code>4</code> – câștigător pentru A (<code>1</code>)<br>
+<code>2019</code> – câștigător pentru A (<code>1</code>)</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>2 4
+2
+3
+4
+123456789</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>1
+1
+0
+1</pre>
+
+<h3>Explicație</h3>
+
+<p>avem joc de tip <code>T = 2</code> și <code>G = 4</code><br>
+<code>2</code> – câștigător<br>
+<code>3</code> – câștigător<br>
+<code>4</code> – pierzător<br>
+<code>123456789</code> – câștigător</p>		</article>
+		</body></html>

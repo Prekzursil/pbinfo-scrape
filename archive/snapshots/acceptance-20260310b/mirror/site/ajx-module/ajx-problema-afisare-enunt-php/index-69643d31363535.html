@@ -1,0 +1,94 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1655"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>Fiind dat un şir de numere, denumim secvenţă a acestuia o parte dintre termenii şirului luaţi de pe poziţii consecutive. Denumim platou al acestui şir o secvenţă formată din valori identice. Lungimea unui platou este egală cu numărul de elemente care îl formează.</p>
+
+<p>De exemplu, în şirul de numere <code>1 1 1 7 7 3 4 4 4 7 7</code> avem: </p>
+
+<ul>
+	<li>platourile <code>1 1 1</code> şi <code>4 4 4</code>  ambele având lungimea <code>3</code>;</li>
+	<li>platourile <code>7 7</code>  (cel care începe în poziţia a patra) şi <code>7 7</code> (cel care începe pe poziţia a zecea), ambele având lungimea <code>2</code>;</li>
+	<li>platoul <code>3</code> care are lungimea <code>1</code>.</li>
+</ul>
+
+<p>În schimb nu avem platoul <code>7 7 7 7</code> deoarece cele patru elemente egale cu <code>7</code> nu sunt pe poziţii consecutive!</p>
+
+<p>Se dă un şir de n numere. Fiecare dintre aceste numere aparţine intervalului <code>[0,1000000]</code>. Asupra acestui şir se pot efectua o singură dată următoarele două operaţiuni în această ordine: </p>
+
+<ol>
+	<li>se extrage un platou la alegere;</li>
+	<li>se inserează platoul extras la pasul anterior într-o poziţie la alegere din şirul rezultat după extragere.</li>
+</ol>
+
+<p>De exemplu, dacă avem următorul şir inițial: <code>2 2 5 0 5 8 8 8 4 9 9 9 0 0 2 2 8</code> extragem platoul <code>2 2</code> format din elementele aflate în penultima şi antepenultima poziţie şi obţinem şirul: <code>2 2 5 0 5 8 8 8 4 9 9 9 0 0 8</code></p>
+
+<p>În şirul rezultat inserăm platoul <code>2 2</code> (pe care l-am extras în pasul anterior) în poziţia a doua şi obţinem şirul: <code>2 2 2 2 5 0 5 8 8 8 4 9 9 9 0 0 8</code></p>
+
+<p>Să se scrie un program care pentru un şir dat determină:</p>
+
+<ol>
+	<li>Lungimea maximă a unui platou din şirul dat iniţial precum şi valoarea cea mai mare a elementelor care formează un platou de lungime maximă.</li>
+	<li>Lungimea maximă a unui platou care poate să apară în şir în urma efectuării celor două operaţiuni precum şi valoarea cea mai mare a elementelor care ar putea forma un astfel de platou.</li>
+</ol>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>platou.in</code> conține:</p>
+
+<ul>
+	<li>pe prima linie un număr natural <code>V</code> care poate avea valoarea <code>1</code> sau valoarea <code>2</code>;</li>
+	<li>pe a doua linie un număr natual <code>n</code>;</li>
+	<li>pe a treia linie un şir de <code>n</code> numere naturale separate prin câte un spaţiu, reprezentând elementele şirului dat. Fiecare dintre aceste numere aparţine intervalului <code>[0,1.000.000]</code>.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>platou.out</code> va conține:</p>
+
+<ul>
+	<li>dacă <code>V=1</code>, atunci pe această linie se vor scrie cele două numere care reprezintă răspunsul la prima cerinţă.</li>
+	<li>dacă <code>V=2</code>, atunci pe această linie se vor scrie cele două numere care reprezintă răspunsul la a doua cerinţă.</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 1.000.000</code></li>
+	<li>numerele aparțin intervalului <code>[0,1.000.000]</code>.</li>
+	<li>Pentru rezolvarea corectă a primei cerinţe se obţin 20 de puncte, iar pentru rezolvarea corectă a celei de a doua cerinţe se obţin 80 puncte.</li>
+</ul>
+
+<h1>Exemplu 1</h1>
+
+<p><code>platou.in</code></p>
+
+<pre>1
+16 
+2 2 5 0 5 8 8 8 4 9 9 9 0 8 2 2</pre>
+
+<p><code>platou.out</code></p>
+
+<pre>3 9</pre>
+
+<h3>Explicație</h3>
+
+<p><code>V=1</code>, deci se rezolvă <span class="caps">NUMAI</span> prima cerinţă. Lungimea maximă a unui platou din şirul dat este <code>3</code>. Sunt două astfel de platouri: <code>8 8 8</code> şi <code>9 9 9</code>. Valoarea cea mai mare din care este format unul dintre aceste platouri este <code>9</code>.</p>
+
+<h1>Exemplu 2</h1>
+
+<p><code>platou.in</code></p>
+
+<pre>2
+16 
+2 2 5 0 5 8 8 8 4 9 9 9 0 8 2 2</pre>
+
+<p><code>platou.out</code></p>
+
+<pre>4 8</pre>
+
+<h3>Explicație</h3>
+
+<p><code>V=2</code>, deci se rezolvă <span class="caps">NUMAI</span> a doua cerinţă. În urma executării celor două operațiuni pot să apară platouri de lungime maximă <code>4</code> în două moduri: <code>2 2 2 2</code> respectiv <code>8 8 8 8</code>. </p>
+
+<p>Valoarea cea mai mare din care este format unul dintre aceste platouri este <code>8</code>. </p>		</article>
+		</body></html>

@@ -1,0 +1,100 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4099"><article id="enunt">
+			<p>Anul 1905. Un stat din America de Sud și-a propus investiții majore în infrastructura feroviară. Brazilianul Badinho este managerul unei companii de transport feroviar pe o magistrală importantă. De-a lungul magistralei se află <code>N</code> stații, numerotate de la <code>1</code> la <code>N</code>. Fiecărei stații îi corespunde un număr <code>X</code><sub><code>i</code></sub> care reprezintă numărul de kilometri de la începutul magistralei până la stația <code>i</code> (<code>X</code><sub><code>1</code></sub> <code>= 0</code>). Pentru simplitate Badinho reprezintă magistrala ca o dreaptă, iar stațiile ca puncte pe dreapta respectivă, stația <code>i</code> aflându-se la coordonata <code>X</code><sub><code>i</code></sub>.</p>
+
+<p>O rută reprezintă o submulțime de cel puțin <code>2</code> stații dintre cele <code>N</code>, cu semnificația că în aceste stații se vor face opriri. Orice rută operată de Badinho are <code>2</code> stații numite capete, definite ca fiind cea mai apropiată stație, inclusă în rută, de începutul magistralei respectiv cea mai îndepărtată stație, inclusă în rută, de începutul magistralei.</p>
+
+<p>Compania lui Badinho va primi o subvenție pentru deschiderea unei noi rute, care va fi proporțională cu lungimea rutei deschise. Mai exact, Badinho va primi <code>C</code> reali (realul este monenda națională a Braziliei) pentru fiecare kilometru din noua rută. Lungimea rutei se definește ca fiind distanța dintre capete.</p>
+
+<p>Badinho poate deschide două tipuri de rute:</p>
+
+<ul>
+	<li>Regio – se fac opriri în toate stațiile dintre cele două capete</li>
+	<li>Expres – unele stații dintre cele două capete pot fi traversate fără a opri în ele</li>
+</ul>
+
+<p>Pentru a deschide o rută Badinho trebuie să construiască câte un depou în capetele rutei respective. Costul pentru a construi un depou în stația <code>i</code> este <code>D_i</code> reali.</p>
+
+<h1>Cerința</h1>
+
+<p>Știind că Badinho trebuie să cheltuiască întreaga sumă pe care ar primi-o dintr-o subvenție, să se determine:</p>
+
+<ul>
+	<li>Numărul de moduri de a deschide o rută de tip Regio, modulo <code>1.000.000.007</code></li>
+	<li>Numărul de moduri de a deschide o rută de tip Expres, modulo <code>1.000.000.007</code></li>
+</ul>
+
+<h1>Date de intrare</h1>
+
+<p>În fișierul de intrare <code>transport.in</code> se află:</p>
+
+<ul>
+	<li>Pe prima linie tipul cerinței <code>T</code>, care poate avea valoarea <code>1</code> sau <code>2</code>.</li>
+	<li>Pe a doua linie <code>N</code> și <code>C</code>, separate printr-un spațiu, reprezentând numărul de stații, respectiv suma primită per kilometru ca subvenție</li>
+	<li>Pe următoarele <code>N</code> linii, pe linia <code>i+2</code> se află câte o pereche <code>X</code><sub><code>i</code></sub> și <code>D</code><sub><code>i</code></sub>, separate printr-un spațiu, reprezentând distanța la care se află stația <code>i</code> față de începutul magistralei, respectiv costul de a construi un depou în stația <code>i</code>.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>În fișierul de ieșire <code>transport.out</code> se va afișa:</p>
+
+<ul>
+	<li>Dacă <code>T = 1</code>, numărul de moduri de a deschide o rută de tip Regio, modulo <code>1.000.000.007</code></li>
+	<li>Dacă <code>T = 2</code>, numărul de moduri de a deschide o rută de tip Expres, modulo <code>1.000.000.007</code></li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>Două rute se consideră distincte dacă diferă prin cel puțin o stație.</li>
+	<li><code>2 ≤ N ≤ 200.000, 1 ≤ C ≤ 1.000.000.000</code></li>
+	<li><code>0 ≤ X</code><sub><code>i</code></sub>, <code>D</code><sub><code>i</code></sub> <code>≤ 1.000.000.000</code> pentru orice <code>1 ≤ i ≤ N</code></li>
+	<li><code>X</code><sub><code>1</code></sub> <code>= 0</code></li>
+	<li>sirul <code>X</code> este sortat strict crescător: <code>X</code><sub><code>i</code></sub> <code>&lt; X</code><sub><code>j</code></sub> pentru orice <code>1 ≤ i &lt; j ≤ N</code></li>
+	<li>toate liniile de cale ferată ale magistralei sunt deja construite, singurele costuri pe care le va suporta Badinho sunt cele de construire a depourilor</li>
+	<li>Din cauza dimensiunilor mari, unele teste nu au fost adăugate</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>transport.in</code></p>
+
+<pre>1
+5 1
+0 2
+1 1
+3 10
+4 15
+6 4</pre>
+
+<p><code>transport.out</code></p>
+
+<pre>2</pre>
+
+<h3>Explicație</h3>
+
+<p>Rutele posibile în condițiile cerinței <code>1</code> sunt: <code>{1, 2, 3, 4, 5}</code>, <code>{2, 3, 4, 5}</code></p>
+
+<p>Ruta <code>{1, 2, 3, 4, 5}</code> conține opriri în stațiile <code>1, 2, 3, 4, 5</code>. Stațiile <code>1</code> și <code>5</code> sunt cele <code>2</code> capete. Suma primită din subvenție este: <code>1 * (6 - 0) = 6</code> reali (<code>6 - 0</code> reprezintă distanța dintre stația <code>1</code> și <code>5</code>), iar costul de construire a celor 2 depouri este: <code>2 + 4 = 6</code> reali.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>transport.in</code></p>
+
+<pre>2
+5 1
+0 2
+1 1
+3 10
+4 15
+6 4</pre>
+
+<p><code>transport.out</code></p>
+
+<pre>12</pre>
+
+<h3>Explicație</h3>
+
+<p>Rutele posibile în condițiile cerinței <code>2</code> sunt: <code>{1, 5}</code>, <code>{1, 2, 5}</code>, <code>{1, 3, 5}</code>, <code>{1, 4, 5}</code>, <code>{1, 2, 3, 5}</code>, <code>{1, 2, 4, 5}</code>, <code>{1, 3, 4, 5}</code>, <code>{1, 2, 3, 4, 5}</code>, <code>{2, 5}</code>, <code>{2, 3, 5}</code>, <code>{2, 4, 5}</code>, <code>{2, 3, 4, 5}</code>.</p>
+
+<p>Ruta <code>{1, 2, 5}</code> conține opriri în stațiile <code>1, 2, 5</code>. Stațiile <code>1</code> și <code>5</code> sunt cele <code>2</code> extreme. Suma primită din subvenție este: <code>1 * (6 - 0) = 6</code> reali, iar costul de construire a celor <code>2</code> depouri este: <code>2 + 4 = 6</code> reali.</p>		</article>
+		</body></html>

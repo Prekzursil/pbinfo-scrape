@@ -1,0 +1,51 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1087"><article id="enunt">
+			<p>Se consideră un şir de cuvinte separate două câte două printr-un spaţiu. Fiecare cuvânt este caracterizat prin numărul de ordine care reprezintă poziţia lui în şirul de cuvinte (primul cuvânt are numărul de ordine <code>1</code>). Unui cuvânt i se pot aplica în mod repetat următoarele transformări: primul caracter al cuvântului (cel mai din stânga) se şterge de acolo şi se adaugă după ultimul caracter din cuvânt. Astfel, dintr-un cuvânt <code>s</code> cu <code>k</code> caractere se pot obţine alte <code>k-1</code> cuvinte pe care le numim cuvinte obţinute din transformarea cuvântului <code>s</code>. De exemplu, dintr-un cuvânt format din <code>4</code> caractere <code>c1c2c3c4</code>, cuvintele obţinute prin transformarea lui sunt: <code>c2c3c4c1</code>, <code>c3c4c1c2</code>, <code>c4c1c2c3</code>.</p>
+
+<p>Se caută în şirul de cuvinte prima pereche de cuvinte vecine <code>(a,b)</code>, în care al doilea cuvânt din pereche <code>(cuvântul b)</code> este identic cu un cuvânt obţinut din transformarea lui <code>a</code>. Dacă există o astfel de pereche, se şterge cuvântul <code>b</code> din şir. Prin ştergerea cuvântului <code>b</code> din şir, acesta va avea mai puţin cu un cuvânt! Se repetă operaţia de căutare de mai sus până când în şirul rămas nu mai există o pereche <code>(a,b)</code> de cuvinte vecine, astfel încât <code>b</code> să fie obţinut prin transformarea lui <code>a</code>.</p>
+
+<p>Se ştie că pe parcursul modificărilor, cuvintele nu-şi schimbă numerele de ordine pe care le-au avut iniţial.</p>
+
+<h1>Cerinţă:</h1>
+
+<p>Scrieţi un program care să citească şirul de cuvinte şi să afişeze:</p>
+
+<p>a) numărul de ordine al primului cuvânt şters sau valoarea <code>0</code> în cazul în care nu se şterge niciun cuvânt<br>
+b) numerele de ordine ale cuvintelor rămase după finalizarea operaţiilor de modificare. </p>
+
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>cuvinte4.in</code> conține o singură linie pe care se află şirul de cuvinte separate două câte două printr-un spaţiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>cuvinte4.out</code> va conține:</p>
+
+<ul>
+	<li>pe prima linie numărul de ordine al primului cuvânt şters sau valoarea <code>0</code> în cazul în care nu se şterge niciun cuvânt</li>
+	<li>pe a doua linie numerele de ordine ale cuvintelor rămase în final în şirul de cuvinte, despărţite  două câte două printr-un spaţiu.</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>După ultimul cuvânt din şirul iniţial există caracterul <code>!</code></li>
+	<li>Fiecare cuvânt are maxim <code>10</code> caractere, iar în şirul iniţial nu există mai mult de <code>25</code> cuvinte.</li>
+	<li>Şirul de cuvinte iniţial este format din cel puţin un cuvânt. O pereche de cuvinte vecine <code>(a,b)</code>, din şirul de cuvinte este caracterizată prin faptul că, după cuvântul <code>a</code> se afla imediat cuvântul <code>b</code>.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>cuvinte4.in</code></p>
+
+<pre>alfa faal alfa fala lafa afal calfa calfa!</pre>
+
+<p><code>cuvinte4.out</code></p>
+
+<pre>2
+1 3 4 7 8</pre>
+
+<h1>Explicație</h1>
+
+<p>Cuvintele obţinute prin transformarea cuvântului <code>alfa</code> sunt: : <code>lfaa</code>, <code>faal</code>, <code>aalf</code>.  Prima pereche de cuvinte vecine care îndeplinesc cerinţele sunt cuvintele cu numerele de ordine <code>1</code> şi <code>2</code>. Va fi şters cuvântul cu numărul de ordine <code>2</code>. Şirul rezultat este format din următoarele <code>7</code> cuvinte: <code>alfa alfa fala lafa afal calfa calfa</code>. Prima pereche care îndeplineşte cerinţele din noul şir este perechea formată din cuvintele <code>fala</code> şi <code>lafa</code>, având numerele de ordine <code>4</code> şi <code>5</code>,  pentru că lista de cuvinte obţinute prin transformarea cuvântului <code>fala</code> sunt: <code>alaf</code>, <code>lafa</code>, <code>afal</code>. Se va şterge cuvântul cu numărul de ordine <code>5</code>. Şirul rezultat după ştergere este: <code>alfa alfa fala afal calfa calfa</code>. Prima pereche care îndeplineşte cerinţele problemei în noul şir este <code>fala</code> şi <code>afal</code>. Se şterge <code>afal</code> cu numărul de ordine <code>6</code>. Şirul rezultat după ştergere este: <code>alfa alfa fala calfa calfa</code>. În acest şir nu se mai găseşte nicio pereche care să îndeplinească cerinţele. Au rămas deci cuvintele: <code>alfa</code>, <code>alfa</code>, <code>fala</code>, <code>calfa</code>, <code>calfa</code>  care au numerele de ordine <code>1</code>, <code>3</code>, <code>4</code>, <code>7</code>, <code>8</code>.</p>		</article>
+		</body></html>

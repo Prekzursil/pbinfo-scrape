@@ -1,0 +1,146 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4807"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>Andrei este managerul unei librării care dorește să mențină o evidență exactă a prețurilor cărților din inventar. Emanuel, administratorul librăriei, implementează planuri de marketing care implică modificări repetate ale prețurilor (operații de modificare de preț), iar deciziile sale se pot schimba ulterior. Pentru a maximiza profitul obținut în funcție de cerere, în fiecare zi, Emanuel efectuează o serie de operații (modificări, anulări și refaceri), iar la sfârșitul fiecărei zile, Andrei trebuie să vadă starea finală a prețurilor din librărie.</p>
+
+<h1>Date de intrare</h1>
+
+Fișierul <code>librarie.in</code> conține:
+<ul>
+	<li>Linia <code>1</code>: Un număr natural <code>n</code>, numărul de cărți din librărie (numerotate de la 1 la <code>n</code>).</li>
+	<li>Linia <code>2</code>: <code>n</code> numere naturale, prețurile inițiale ale cărților.</li>
+	<li>Linia <code>3</code>: Un număr natural <code>Q</code>, numărul de zile.</li>
+</ul>
+
+Pentru fiecare din cele <code>Q</code> zile:
+<ul>
+	<li>O linie cu un număr natural <code>t</code>, numărul de operații din ziua respectivă.</li>
+	<li>Următoarele <code>t</code> linii, fiecare descriind o operație.</li>
+</ul>
+
+<h3>Tipuri de operații:</h3>
+
+<ul>
+	<li>Modificare preț: <code>op index1 index2 numar</code>
+	<ul>
+		<li><code>op</code> este fie <code>+</code> (adaugă <code>număr</code> la prețurile cărților de la <code>index1</code> la <code>index2</code> inclusiv), fie <code>-</code> (scade <code>număr</code> din prețurile cărților de la <code>index1</code> la <code>index2</code> inclusiv).</li>
+	</ul></li>
+	<li>Undo: <code>u</code> – anulează ultima operație de modificare neanulată (dacă există).</li>
+	<li>Redo: <code>r</code> – reface ultima operație anulată care nu a fost refăcută (dacă există).</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul <code>librarie.out</code> va conține <code>Q</code> linii. Fiecare linie va conține starea finală a prețurilor cărților la sfârșitul zilei respective, separate prin spații.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 100000</code></li>
+	<li><code>1 ≤ Q ≤ 100</code></li>
+	<li><code>0 ≤</code> prețurile inițiale <code>≤ 1000000000</code></li>
+	<li>Pentru fiecare zi, <code>1 ≤ t &lt; 100000</code></li>
+	<li><code>-10000 ≤ număr ≤ 10000</code></li>
+	<li><code>1 ≤ index1 ≤ index2 ≤ n</code></li>
+	<li>Este garantat că toate operațiile vor fi valide.</li>
+	<li>Prețurile pot deveni negative în urma operațiilor.</li>
+	<li>Starea se acumulează de la o zi la alta: ziua <code>i+1</code> începe cu prețurile rezultate la finalul zilei <code>i</code>, iar istoricul operațiilor (pentru undo/redo) se menține între zile.</li>
+	<li>În cazul în care se efectuează o nouă operație de modificare după una sau mai multe comenzi <code>u</code>, istoricul operațiilor se păstrează, permițând astfel ca operațiile anulate să poată fi refăcute ulterior prin comanda <code>r</code>.</li>
+	<li>Pentru teste în valoare de <code>16</code> puncte, numărul de operații de tipul undo/redo este 0.</li>
+	<li>Pentru alte teste în valoare de <code>15</code> puncte, <code>Q = 1</code>.</li>
+	<li>Pentru alte teste în valoare de <code>27</code> de puncte, <code>L = 1, R = N</code>, pentru fiecare operație de modificare de preț.</li>
+	<li>Pentru alte teste în valoare de <code>42</code> de puncte, nu există restricții suplimentare.</li>
+</ul>
+
+<h1>Exemplu 1:</h1>
+
+<p><code>librarie.in</code></p>
+
+<pre>5
+10 20 30 40 50
+2
+3
++ 1 3 5
+- 2 5 10
++ 4 5 2
+3
+u
+u
+u</pre>
+
+<p><code>librarie.out</code></p>
+
+<pre>15 15 25 32 42
+10 20 30 40 50</pre>
+
+<h3>Explicație</h3>
+
+<p>Ziua <code>1</code>: <br>
+Inițial: <code>[10, 20, 30, 40, 50]</code>.<br>
+</p><ul>
+	<li><code>+ 1 3 5</code>: se adaugă <code>5</code> la pozițiile <code>1-3</code>, rezultând <code>[15, 25, 35, 40, 50]</code>.</li>
+	<li><code>- 2 5 10</code>: se scade <code>10</code> din pozițiile <code>2-5</code>, rezultând <code>[15, 15, 25, 30, 40]</code>.</li>
+	<li><code>+ 4 5 2</code>: se adaugă <code>2</code> la pozițiile <code>4-5</code>, rezultând <code>[15, 15, 25, 32, 42]</code>.</li><br>
+</ul><p></p>
+
+<p>La finalul zilei <code>1</code>, se obține starea: <code>[15 15 25 32 42]</code>.</p>
+
+<p>Ziua <code>2</code>:<br>
+Inițial: <code>[15, 15, 25, 32, 42]</code><br>
+</p><ul>
+	<li><code>u</code>: anulează ultima operație (<code>+ 4 5 2</code>), rezultând <code>[15, 15, 25, 30, 40]</code>.</li>
+	<li><code>u</code>: anulează următoarea operație (care a fost <code>- 2 5 10</code>), rezultând <code>[15, 25, 35, 40, 50]</code>.</li>
+	<li><code>u</code>: anulează următoarea operație (care a fost <code>+ 1 3 5</code>), rezultând <code>[10, 20, 30, 40, 50]</code>.</li><br>
+</ul><p></p>
+
+<p>La finalul zilei <code>2</code>, se obține starea: <code>[10 20 30 40 50]</code>.</p>
+
+<h1>Exemplu 2:</h1>
+
+<p><code>librarie.in</code></p>
+
+<pre>10
+4 8 5 9 1 2 3 7 11 12
+2
+4
++ 2 5 2
+- 1 3 2
++ 1 7 3
++ 1 7 3
+5
+u
+r
++ 3 8 4
+- 4 10 1
+r</pre>
+
+<p><code>librarie.out</code></p>
+
+<pre>8 14 11 17 9 8 9 7 11 12
+8 14 15 20 12 11 12 10 10 11</pre>
+
+<h3>Explicație</h3>
+
+<p>Ziua <code>1</code>: <br>
+Inițial: <code>[4, 8, 5, 9, 1, 2, 3, 7, 11, 12]</code>.<br>
+</p><ul>
+	<li><code>+ 2 5 2</code>: se adaugă <code>2</code> la pozițiile <code>2-5</code>, rezultând <code>[4, 10, 7, 11, 3, 2, 3, 7, 11, 12]</code>.</li>
+	<li><code>- 1 3 2</code>: se scade <code>2</code> din pozițiile <code>1-3</code>, rezultând <code>[2, 8, 5, 11, 3, 2, 3, 7, 11, 12]</code>.</li>
+	<li><code>+ 1 7 3</code>: se adaugă <code>3</code> la pozițiile <code>1-7</code>, rezultând <code>[5, 11, 8, 14, 6, 5, 6, 7, 11, 12]</code>.</li>
+	<li><code>+ 1 7 3</code>: se adaugă <code>3</code> la pozițiile <code>1-7</code>, rezultând <code>[8, 14, 11, 17, 9, 8, 9, 7, 11, 12]</code>.</li><br>
+</ul><p></p>
+
+<p>La finalul zilei <code>1</code>, se obține starea: <code>[8 14 11 17 9 8 9 7 11 12]</code>.</p>
+
+<p>Ziua <code>2</code>:<br>
+Inițial: <code>[8, 14, 11, 17, 9, 8, 9, 7, 11, 12]</code><br>
+</p><ul>
+	<li><code>u</code>: anulează ultima operație (<code>+ 1 7 3</code>), rezultând <code>[5, 11, 8, 14, 6, 8, 9, 7, 11, 12]</code>.</li>
+	<li><code>r</code>: reface ultima operație anulată, revenind la <code>[8, 14, 11, 17, 9, 8, 9, 7, 11, 12]</code>.</li>
+	<li><code>+ 3 8 4</code>: se adaugă <code>4</code> la pozițiile <code>3-8</code>, rezultând <code>[8, 14, 15, 21, 13, 8, 9, 11, 11, 12]</code>.</li>
+	<li><code>- 4 10 1</code>: se scade <code>1</code> din pozițiile <code>4-10</code>, rezultând <code>[8, 14, 15, 20, 12, 8, 9, 10, 10, 11]</code>.</li>
+	<li><code>r</code>: nu există nicio operație anulată la acest moment (comanda nu are efect), deci starea rămâne <code>[8, 14, 15, 20, 12, 8, 9, 10, 10, 11]</code>.</li><br>
+</ul><p></p>
+
+<p>La finalul zilei <code>2</code>, se obține starea: <code>[8 14 15 20 12 8 9 10 10 11]</code>.</p>		</article>
+		</body></html>

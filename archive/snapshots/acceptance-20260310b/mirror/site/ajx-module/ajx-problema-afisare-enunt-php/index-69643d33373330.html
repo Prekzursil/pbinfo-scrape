@@ -1,0 +1,91 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3730"><article id="enunt">
+			<p>Fermierul Feder cultivă cartofi pe un teren dreptunghiular de lățime <code>N</code> metri și lungime <code>M</code> metri, compartimentat în <code>N * M</code> zone pătratice identice de lungime <code>1</code> metru, dispuse alăturat, câte <code>N</code> pe lățime (pe <code>N</code> linii, numerotate de la <code>1</code> la <code>N</code>) și câte <code>M</code> pe lungime (pe <code>M</code> coloane, numerotate de la <code>1</code> la <code>M</code>).<br>
+În fiecare zonă pătratică se află câte o plantă de cartofi. Parcurgând terenul de la prima linie către ultima, fiecare linie cu număr impar parcurgând-o de la coloana <code>1</code> către coloana <code>M</code>, iar fiecare linie cu număr par parcurgând-o de la coloana <code>M</code> către coloana <code>1</code>, fermierul (pasionat de matematică) a scris numerele cartofilor produși de fiecare plantă, în ordinea parcurgerii, și a constatat că a obținut șirul cifrelor unităților primilor <code>N * M</code> termeni ai șirului Fibonacci (vezi Figura 1 în care <code>N = 3</code> și <code>M = 6</code>).</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-cartofi-001-jpg.jpg"></p>
+
+<h1>Cerința</h1>
+
+<p>Scrieți un program care citește numerele <code>N</code> și <code>M</code> (cu semnificația din enunț), iar apoi determină:<br>
+1. numărul plantelor din teren care nu au produs niciun cartof;<br>
+2. numărul maxim de cartofi care pot fi produși de plantele dintr-o suprafață pătratică din terenul fermierului;<br>
+3. pentru fiecare dintre cele <code>Q</code> perechi de numere <code>(A, B)</code> citite, numărul cartofilor produși de plantele aflate în zonele pătratice situate între coloanele cu numerele <code>A</code> și <code>B</code>, inclusiv acestea.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>cartofi.in</code> conține pe prima linie un număr natural <code>C</code> reprezentând cerința din problemă care trebuie rezolvată (<code>1</code>, <code>2</code> sau <code>3</code>). A doua linie a fișierului conține cele două numere naturale <code>N</code> și <code>M</code>, separate printr-un spațiu, cu semnificația din enunț. Dacă <code>C = 3</code>, atunci fișierul va mai conține pe a treia linie numărul natural <code>Q</code>, iar pe fiecare linie dintre următoarele <code>Q</code>, câte două numere naturale separate printr-un spațiu reprezentând câte o pereche de numere <code>(A, B)</code> dintre cele <code>Q</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>cartofi.out</code> va conține:</p>
+
+<ul>
+	<li>Dacă <code>C = 1</code>, pe prima linie un număr natural reprezentând răspunsul la cerința <code>1</code>.</li>
+	<li>Dacă <code>C = 2</code>, pe prima linie un număr natural reprezentând răspunsul la cerința <code>2</code>.</li>
+	<li>Dacă <code>C = 3</code>, <code>Q</code> linii, câte o linie pentru fiecare pereche <code>(A, B)</code> dintre cele <code>Q</code>. Linia corespunzătoare fiecărei perechi <code>(A, B)</code> va conține un număr natural reprezentând numărul cartofilor produși de plantele aflate în zonele pătratice situate între coloanele cu numerele <code>A</code> și <code>B</code>, inclusiv aceste valori, reprezentând răspunsul la cerința <code>3</code>.</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N ≤ 500.000.000</code></li>
+	<li><code>3 ≤ M ≤ 1.000.000.000</code></li>
+	<li><code>N ≤ M</code></li>
+	<li><code>Q ≤ 100.000</code></li>
+	<li><code>1 ≤ A ≤ B ≤ M</code></li>
+	<li>Pentru cerința 1 se acordă 20p, iar pentru cerințele 2 și 3 se acordă câte 40p.</li>
+	<li>Șirul Fibonacci este definit astfel: <code>f(1) = 1</code>, <code>f(2) = 1</code> și <code>f(n) = f(n-1) + f(n-2)</code>, dacă <code>n ≥ 3</code>, (<code>n</code> este un număr natural nenul).</li>
+	<li>O suprafață pătratică din teren este formată din <code>K * K</code> zone pătratice alăturate dispuse câte <code>K</code> pe linie și câte <code>K</code> pe coloană, oricare ar fi <code>1 ≤ K ≤ min{N, M}</code>.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>cartofi.in</code></p>
+
+<pre>1
+3 6</pre>
+
+<p><code>cartofi.out</code></p>
+
+<pre>1</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința 1. <code>N = 3</code>, <code>M = 6</code>. Primii <code>N * M = 18</code> termeni ai șirului Fibonacci sunt: <code>1</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>5</code>, <code>8</code>, <code>13</code>, <code>21</code>, <code>34</code>, <code>55</code>, <code>89</code>, <code>144</code>, <code>233</code>, <code>377</code>, <code>610</code>, <code>987</code>, <code>1597</code>, <code>2584</code>. Astfel, numerele cartofilor produși de fiecare plantă din teren sunt cele din Figura 1. În teren există o singură plantă care nu a produs niciun cartof (cea din linia <code>3</code>, coloana <code>3</code>).</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>cartofi.in</code></p>
+
+<pre>2
+3 6</pre>
+
+<p><code>cartofi.out</code></p>
+
+<pre>42</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința 2. <code>N = 3</code>, <code>M = 6</code>. Numerele cartofilor produși de fiecare plantă din teren sunt cele din tabelul din Figura 1. Plantele aflate în suprafața pătratică galbenă din tabelul din Figura 2 au produs cel mai mare număr de cartofi.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>cartofi.in</code></p>
+
+<pre>3
+5 6
+3
+1 2
+4 6
+2 3</pre>
+
+<p><code>cartofi.out</code></p>
+
+<pre>48
+64
+43</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința 3. <code>N = 5</code>, <code>M = 6</code>, <code>Q = 3</code>. Tabelul din Figura 3 conține numerele cartofilor produși de fiecare plantă din teren sunt cele din Figura 3. Suma elementelor cuprinse între coloanele <code>(1, 2)</code>, inclusiv <code>1</code> și <code>2</code>, este <code>48</code>. Suma elementelor cuprinse între coloanele <code>(4, 6)</code>, inclusiv <code>4</code> și <code>6</code>, este <code>64</code>. Suma elementelor cuprinse între coloanele <code>(2, 3)</code>, inclusiv <code>2</code> și <code>3</code>, este <code>43</code>.</p>		</article>
+		</body></html>

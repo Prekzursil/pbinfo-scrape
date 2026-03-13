@@ -1,0 +1,311 @@
+{
+  "id": 1065,
+  "slug": "vase1",
+  "name": "Vase1",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1065/vase1",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 44,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=44"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerinţă",
+      "html": "<p>Să se scrie un program care cunoscând numărul <code>n</code> de lichide introduse în sistemul cu două vase comunicante, volumul <code>V</code><sub><code>i</code></sub> şi ramura prin care se face introducerea lichidului de culoare <code>i</code> (<code>1≤i≤n</code>), precum şi culoarea <code>x</code>, să calculeze gradaţia maximă la care se ridică lichidele în acest sistem la echilibru şi între ce gradaţii se găseşte lichidul de culoare <code>x</code>.</p>",
+      "text": "Să se scrie un program care cunoscând numărul n de lichide introduse în sistemul cu două vase comunicante, volumul Vi şi ramura prin care se face introducerea lichidului de culoare i (1≤i≤n), precum şi culoarea x, să calculeze gradaţia maximă la care se ridică lichidele în acest sistem la echilibru şi între ce gradaţii se găseşte lichidul de culoare x."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Prima linie a fişierului de intrare <code>vase1.in</code> conţine un singur număr natural nenul <code>n</code>, cu semnificaţia de mai sus. Fiecare linie, din următoarele <code>n</code>, conţine câte două valori separate printr-un spaţiu: un număr natural nenul par şi o literă mare, <code>S</code> sau <code>D</code>, reprezentând volumul introdus din lichidul de culoare <code>i</code>, respectiv ramura (<code>S</code> pentru ramura din stânga şi <code>D</code> pentru ramura din dreapta) prin care se face introducerea acestuia. Linia <code>n+2</code> a fişierului de intrare conţine un singur număr nenul <code>x</code> ce reprezintă culoarea lichidului căutat.</p>",
+      "text": "Prima linie a fişierului de intrare vase1.in conţine un singur număr natural nenul n, cu semnificaţia de mai sus. Fiecare linie, din următoarele n, conţine câte două valori separate printr-un spaţiu: un număr natural nenul par şi o literă mare, S sau D, reprezentând volumul introdus din lichidul de culoare i, respectiv ramura (S pentru ramura din stânga şi D pentru ramura din dreapta) prin care se face introducerea acestuia. Linia n+2 a fişierului de intrare conţine un singur număr nenul x ce reprezintă culoarea lichidului căutat."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fişierul de ieşire <code>vase1.out</code> va conţine pe prima linie un număr natural nenul ce reprezintă gradaţia maximă la care se ridică lichidele în sistemul de vase comunicante la echilibru. Următoarele două linii vor conţine fiecare câte două valori separate printr-un spaţiu: un număr natural şi o literă mare (<code>S</code> sau <code>D</code>), reprezentând gradaţia şi ramura între care se aşează lichidul căutat.</p>",
+      "text": "Fişierul de ieşire vase1.out va conţine pe prima linie un număr natural nenul ce reprezintă gradaţia maximă la care se ridică lichidele în sistemul de vase comunicante la echilibru. Următoarele două linii vor conţine fiecare câte două valori separate printr-un spaţiu: un număr natural şi o literă mare (S sau D), reprezentând gradaţia şi ramura între care se aşează lichidul căutat."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ x  ≤ n  ≤ 100 000</code></li>\n\t<li><code>2 ≤ V</code><sub><code>i</code></sub><code> ≤ 100 000</code> pentru <code>1 ≤ i ≤ n</code></li>\n\t<li>sistemul de vase este gradat în aceleaşi unităţi de măsură în care sunt exprimate volumele de lichid;</li>\n\t<li>dacă lichidul căutat, de culoare <code>x</code>, se aşează pe aceeaşi ramură se va afişa întâi gradaţia superioară şi apoi cea inferioară;</li>\n\t<li>dacă lichidul căutat, de culoare <code>x</code>, se aşează pe ramuri diferite se va afişa întâi gradaţia de pe ramura din stânga şi apoi cea de pe ramura din dreapta;</li>\n\t<li>dacă una dintre gradaţiile între care se situează lichidul căutat, de culoare <code>x</code>, este <code>0</code> atunci se consideră că aceasta gradaţie se găseşte pe aceeaşi ramură cu cealaltă gradaţie;</li>\n\t<li>pentru rezolvarea primei cerinţe se acordă 20% din punctaj, iar pentru a doua cerinţă 80% din punctaj.</li>\n</ul>",
+      "text": "1 ≤ x ≤ n ≤ 100 000 2 ≤ Vi ≤ 100 000 pentru 1 ≤ i ≤ n sistemul de vase este gradat în aceleaşi unităţi de măsură în care sunt exprimate volumele de lichid; dacă lichidul căutat, de culoare x, se aşează pe aceeaşi ramură se va afişa întâi gradaţia superioară şi apoi cea inferioară; dacă lichidul căutat, de culoare x, se aşează pe ramuri diferite se va afişa întâi gradaţia de pe ramura din stânga şi apoi cea de pe ramura din dreapta; dacă una dintre gradaţiile între care se situează lichidul căutat, de culoare x, este 0 atunci se consideră că aceasta gradaţie se găseşte pe aceeaşi ramură cu cealaltă gradaţie; pentru rezolvarea primei cerinţe se acordă 20% din punctaj, iar pentru a doua cerinţă 80% din punctaj."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>vase1.in</code></p><pre>3\n4 D\n4 S\n2 S\n2</pre><p><code>vase1.out</code></p><pre>5\n3 S\n1 D</pre>",
+      "text": "vase1.in3 4 D 4 S 2 S 2vase1.out5 3 S 1 D"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p>Se introduc <code>3</code> lichide în sistemul de două vase comunicante: </p><ul>\n\t<li>primul cu volumul <code>4</code>, se introduce prin dreapta şi are culoarea <code>1</code>;</li>\n\t<li>al doilea cu volumul  <code>4</code>, se introduce prin stânga şi are culoarea <code>2</code>;</li>\n\t<li>al treilea cu volumul <code>2</code>, se introduce prin stânga şi are culoarea <code>3</code>;</li>\n</ul><p>Se caută gradaţiile ce corespund lichidului de culoare <code>2</code>.</p><p>Gradaţia maximă la care ajunge nivelul lichidului este <code>5</code>.<br>\nLichidul  de culoare <code>2</code> se aşează între gradaţiile <code>3</code> pe ramura din stânga şi <code>1</code> pe ramura din dreapta.</p>",
+      "text": "Se introduc 3 lichide în sistemul de două vase comunicante: primul cu volumul 4, se introduce prin dreapta şi are culoarea 1; al doilea cu volumul 4, se introduce prin stânga şi are culoarea 2; al treilea cu volumul 2, se introduce prin stânga şi are culoarea 3; Se caută gradaţiile ce corespund lichidului de culoare 2.Gradaţia maximă la care ajunge nivelul lichidului este 5. Lichidul de culoare 2 se aşează între gradaţiile 3 pe ramura din stânga şi 1 pe ramura din dreapta."
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "1 ≤ x ≤ n ≤ 100 000",
+    "2 ≤ Vi ≤ 100 000 pentru 1 ≤ i ≤ n",
+    "sistemul de vase este gradat în aceleaşi unităţi de măsură în care sunt exprimate volumele de lichid;",
+    "dacă lichidul căutat, de culoare x, se aşează pe aceeaşi ramură se va afişa întâi gradaţia superioară şi apoi cea inferioară;",
+    "dacă lichidul căutat, de culoare x, se aşează pe ramuri diferite se va afişa întâi gradaţia de pe ramura din stânga şi apoi cea de pe ramura din dreapta;",
+    "dacă una dintre gradaţiile între care se situează lichidul căutat, de culoare x, este 0 atunci se consideră că aceasta gradaţie se găseşte pe aceeaşi ramură cu cealaltă gradaţie;",
+    "pentru rezolvarea primei cerinţe se acordă 20% din punctaj, iar pentru a doua cerinţă 80% din punctaj."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qdae1f7a3e6.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1051-1075/vase1.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1051-1075-vase1-png.png",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1051-1075/vase1-2.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1051-1075-vase1-2-png.png",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "9",
+    "intrare/ieșire": "vase1.in / vase1.out",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "4 MB / 4 MB",
+    "sursa problemei": "OJI 2011, Clasa a IX-a",
+    "autor": "Ciprian Chesca",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 4,
+  "author": "Ciprian Chesca",
+  "sourceAttribution": "OJI 2011, Clasa a IX-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1065/vase1"
+}

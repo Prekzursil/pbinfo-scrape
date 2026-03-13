@@ -1,0 +1,77 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=615"><article id="enunt">
+			<p>După ce a ajutat la conectarea oraşelor Nordemos şi Suderim, Negrimon s-a hotărât să-şi urmeze destinul şi să devină un programamon roşu. Pentru a-şi începe călătoria, este nevoit să părăsească Udobje Lurrak şi să treacă prin Sha’ar Azih, poarta magică de la ieşirea din oraşul Estumar. Această poartă se bazează pe un sistem de runix-uri aşezate în linie, numerotate de la <code>1</code> la <code>N</code>. Un <strong>runix</strong> este un pătrat pe care este înscrisă o literă mică, din mulţimea<br>
+unui alfabet restrâns, format din primele <code>L</code> litere ale alfabetului englez. Alfabetul restrâns este circular, astfel încât după ultima literă urmează prima, iar înainte de prima literă este ultima literă din alfabet. </p>
+
+<p>În starea iniţială a sistemului, primul runix este setat pe litera <code>a</code>, al doilea runix este setat pe următoarea literă din alfabetul restrâns ş.a.m.d .</p>
+
+<p>De exemplu:</p>
+
+<ul>
+	<li>pentru <code>N = 8</code> şi <code>L = 3</code>, sistemul are configuraţia iniţială: <code>abcabcab</code></li>
+	<li>pentru <code>N = 11</code> şi <code>L = 4</code>, sistemul are configuraţia iniţială: <code>abcdabcdabc</code></li>
+	<li>pentru <code>N = 14</code> şi <code>L = 7</code>, sistemul are configuraţia iniţială: <code>abcdefgabcdefg</code></li>
+</ul>
+
+<p>Când Negrimon ajunge la poartă, aceasta prinde viaţă şi se produce un şir de acţiuni de următorul tip:</p>
+
+<p>1. Runix-ul cu numărul <code>r</code> împreună cu toate runix-urile din stânga se deplasează şi se separă de cele din dreapta (dacă există), formându-se astfel două grupuri independente (iniţial toate runix-urile formează un singur grup).<br>
+2. Toate runix-urile din grupul din care face parte runix-ul cu numărul <code>r</code> execută o schimbare de pas <code>p</code>. Aceasta constă în înlocuirea literei asociate cu următoarea a <code>p</code>-a literă din alfabet (<code>p &gt; 0</code>) sau cu precedenta a <code>(-p)</code>-a literă din alfabet (<code>p &lt; 0</code>). Datorită circularităţii alfabetului, oricât de mare ar fi <code>p</code> va exista o literă care să fie la<br>
+distanţa <code>p</code> faţă de litera actuală.<br>
+3. Negrimon primeşte o întrebare de tipul: pe ce literă este setat runix-ul cu numărul <code>r</code>?</p>
+
+<p>Poarta se deschide dacă Negrimon răspunde corect la toate întrebările primite şi astfel își poate continua călătoria în Azih Lurrak.</p>
+
+<h1>Cerința</h1>
+
+<p>Ajutaţi-l pe Negrimon să deschidă poarta.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fişierului <code>gate.in</code> se află valorile <code>N L M</code>, separate prin câte un spaţiu, cu semnificația: <code>N</code> – numărul de runix-uri din sistem, <code>L</code> – numărul de litere din alfabetul restrâns, <code>M</code> – numărul de acţiuni desfăşurate. Fiecare dintre următoarele <code>M</code> linii conţine valorile <code>t</code> – tipul acţiunii, <code>r</code> – numărul runix-ului la care se face referire, <code>p</code> – schimbarea de pas a runix-ului, dacă acţiunea este una de tipul <code>2</code> (<code>t = 2</code>), toate separate prin câte un spaţiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>În fişierul <code>gate.out</code> se vor afla răspunsurile la întrebările primite, în ordinea în care sunt adresate. Fiecare răspuns ocupă o linie și este format dintr-un singur caracter ce reprezintă litera pe care este setat runix-ul cu numărul dat în întrebare.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N,M ≤ 200.000</code></li>
+	<li><code>1≤r≤N</code></li>
+	<li><code>-100000 ≤ p ≤ 100.000, p≠0</code></li>
+	<li>Pentru teste în valoare de <code>20</code> de puncte, <code>N*M ≤ 25.000.000</code></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>gate.in</code></p>
+
+<pre>8 3 8 
+1 3 
+2 4 1 
+3 8 
+1 5 
+2 2 2 
+3 1 
+2 5 -1 
+3 5 </pre>
+
+<p><code>gate.out</code></p>
+
+<pre>c 
+c 
+b</pre>
+
+<h1>Explicație</h1>
+
+<p>Starea iniţială a sistemului : <code>abcabcab</code></p>
+
+<pre>1 3    - abc abcab
+2 4 1  - abc bcabc
+3 8    - abc bcabc
+1 5    - abc bc abc
+2 2 2  - cab bc abc
+3 1    - cab bc abc
+2 5 -1 - cab ab abc
+3 5    - cab ab abc</pre>		</article>
+		</body></html>

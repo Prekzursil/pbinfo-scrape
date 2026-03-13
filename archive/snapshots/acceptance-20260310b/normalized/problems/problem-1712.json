@@ -1,0 +1,309 @@
+{
+  "id": 1712,
+  "slug": "centura",
+  "name": "Centura",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1712/centura",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 53,
+      "name": "Programare dinamică",
+      "slug": "programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=53"
+    },
+    {
+      "id": 54,
+      "name": "Probleme diverse de programare dinamică",
+      "slug": "probleme-diverse-de-programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=54"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Cunoscând <code>n</code>, <code>k</code> și distribuția autovehiculelor pe șosea, să se determine două numere naturale <code>V</code> și <code>T</code>, unde <code>V</code> reprezintă numărul de variante de dirijare a traficului astfel încât să fie respectată restricția <code>R</code>, iar <code>T</code> reprezintă numărul minim de autoturisme care trebuie să fie deviate pe drumul de centură  pentru a se respecta aceeași restricție <code>R</code>.</p>",
+      "text": "Cunoscând n, k și distribuția autovehiculelor pe șosea, să se determine două numere naturale V și T, unde V reprezintă numărul de variante de dirijare a traficului astfel încât să fie respectată restricția R, iar T reprezintă numărul minim de autoturisme care trebuie să fie deviate pe drumul de centură pentru a se respecta aceeași restricție R."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>centura.in</code> conține pe prima linie trei numere naturale nenule <code>n m k</code>. Pe următoarea linie un șir de caractere format doar din caracterele <code>A</code> și <code>C</code>. Caracterul <code>A</code> reprezintă un autoturism, iar caracterul <code>C</code> reprezintă un camion.</p>",
+      "text": "Fișierul de intrare centura.in conține pe prima linie trei numere naturale nenule n m k. Pe următoarea linie un șir de caractere format doar din caracterele A și C. Caracterul A reprezintă un autoturism, iar caracterul C reprezintă un camion."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>centura.out</code> va conține pe prima linie numerele naturale nenule <code>V</code> și <code>T</code> separate prin spațiu, cu semnificația din enunț.</p>",
+      "text": "Fișierul de ieșire centura.out va conține pe prima linie numerele naturale nenule V și T separate prin spațiu, cu semnificația din enunț."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ k &lt; n ≤ 100000</code></li>\n\t<li><code>1 &lt; m ≤ 30</code></li>\n\t<li>Atenție, dacă inițial avem un șir de forma <code>CCAAC</code> și <code>k=2</code>, atunci sunt două soluții distincte pentru mersul pe centură: <code>CCAC</code> (primul <code>A</code> merge prin oraș) și din nou <code>CCAC</code> (al doilea <code>A</code> merge prin oraș).</li>\n\t<li>Se garantează că, pentru toate datele de test, șirul inițial de autovehicule respectă restricția <code>R</code>.</li>\n</ul>",
+      "text": "1 ≤ k < n ≤ 100000 1 < m ≤ 30 Atenție, dacă inițial avem un șir de forma CCAAC și k=2, atunci sunt două soluții distincte pentru mersul pe centură: CCAC (primul A merge prin oraș) și din nou CCAC (al doilea A merge prin oraș). Se garantează că, pentru toate datele de test, șirul inițial de autovehicule respectă restricția R."
+    },
+    {
+      "title": "Exemplul 1",
+      "html": "<p><code>centura.in</code></p><pre>8 3 2\nCCAACACC</pre><p><code>centura.out</code></p><pre>3 2</pre><h3>Explicație</h3><p>Sunt posibile următoarele trei variante de separare a coloanei inițiale de autovehicule:</p><ol>\n\t<li>prin oraș: <code>A1</code>; pe centură: <code>C1C2A2C3A3C4C5</code></li>\n\t<li>prin oraș: <code>A2</code>; pe centură: <code>C1C2A1C3A3C4C5</code></li>\n\t<li>prin oraș: nici unul; pe centură:  <code>C1C2A1A2C3A3C4C5</code> (toate)</li>\n</ol><p>Este necesar ca minimum două autoturisme să fie deviate pe drumul de centură. Prin urmare: <code>V = 3</code> și <code>T = 2</code>.</p>",
+      "text": "centura.in8 3 2 CCAACACCcentura.out3 2ExplicațieSunt posibile următoarele trei variante de separare a coloanei inițiale de autovehicule: prin oraș: A1; pe centură: C1C2A2C3A3C4C5 prin oraș: A2; pe centură: C1C2A1C3A3C4C5 prin oraș: nici unul; pe centură: C1C2A1A2C3A3C4C5 (toate) Este necesar ca minimum două autoturisme să fie deviate pe drumul de centură. Prin urmare: V = 3 și T = 2."
+    },
+    {
+      "title": "Exemplul 2",
+      "html": "<p><code>centura.in</code></p><pre>7 2 2\nCCACCAC</pre><p><code>centura.out</code></p><pre>1 2</pre><h3>Explicație</h3><p>Există o singură variantă: toate autovehiculele vor fi deviate pe drumul de centură: <code>C1C2A1C3C4A2C5</code> Prin urmare: <code>V = 1</code> și <code>T = 2</code>.</p>",
+      "text": "centura.in7 2 2 CCACCACcentura.out1 2ExplicațieExistă o singură variantă: toate autovehiculele vor fi deviate pe drumul de centură: C1C2A1C3C4A2C5 Prin urmare: V = 1 și T = 2."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Sunt posibile următoarele trei variante de separare a coloanei inițiale de autovehicule:"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Există o singură variantă: toate autovehiculele vor fi deviate pe drumul de centură: C1C2A1C3C4A2C5 Prin urmare: V = 1 și T = 2."
+    }
+  ],
+  "constraints": [
+    "1 ≤ k < n ≤ 100000",
+    "1 < m ≤ 30",
+    "Atenție, dacă inițial avem un șir de forma CCAAC și k=2, atunci sunt două soluții distincte pentru mersul pe centură: CCAC (primul A merge prin oraș) și din nou CCAC (al doilea A merge prin oraș).",
+    "Se garantează că, pentru toate datele de test, șirul inițial de autovehicule respectă restricția R."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qa6e93a4a59.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "11",
+    "intrare/ieșire": "centura.in / centura.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "16 MB / 16 MB",
+    "sursa problemei": "Lot Juniori Focsani, 2016",
+    "autor": "Constantin Galatan",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 16,
+  "author": "Constantin Galatan",
+  "sourceAttribution": "Lot Juniori Focsani, 2016",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1712/centura"
+}

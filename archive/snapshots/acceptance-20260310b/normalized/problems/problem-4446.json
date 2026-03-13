@@ -1,0 +1,315 @@
+{
+  "id": 4446,
+  "slug": "magictrick",
+  "name": "magictrick",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4446/magictrick",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 45,
+      "name": "Vectori caracteristici / de frecventa",
+      "slug": "vectori-caracteristici-de-frecventa",
+      "href": "/?pagina=probleme-lista&tag=45"
+    }
+  ],
+  "tags": [
+    "Determinarea divizorilor"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Fiind date numerele scrise pe cele <code>N</code> cărți din pachet, să se determine:<br>\n1) coeficientul magic al întregului pachet de cărți;<br>\n2) coeficientul magic maxim, alegând din pachet un set de cel puțin două cărți.</p>",
+      "text": "Fiind date numerele scrise pe cele N cărți din pachet, să se determine: 1) coeficientul magic al întregului pachet de cărți; 2) coeficientul magic maxim, alegând din pachet un set de cel puțin două cărți."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>magictrick.in</code> conține pe prima linie numerele naturale <code>C</code> și <code>N</code>, unde <code>C</code> reprezintă cerința care trebuie rezolvată (<code>1</code> sau <code>2</code>), iar <code>N</code> reprezintă numărul de cărți cumpărate de Richard. Pe următoarea linie fișierul conține <code>N</code> valori, reprezentând numerele ce sunt scrise pe spatele fiecărei cărți. Numerele care se găsesc pe aceeași linie a fișierului sunt separate prin câte un spațiu.</p>",
+      "text": "Fișierul de intrare magictrick.in conține pe prima linie numerele naturale C și N, unde C reprezintă cerința care trebuie rezolvată (1 sau 2), iar N reprezintă numărul de cărți cumpărate de Richard. Pe următoarea linie fișierul conține N valori, reprezentând numerele ce sunt scrise pe spatele fiecărei cărți. Numerele care se găsesc pe aceeași linie a fișierului sunt separate prin câte un spațiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>magictrick.out</code> va conține fie doar răspunsul pentru cerința <code>1</code> (dacă <code>C=1</code>), fie doar răspunsul pentru cerința <code>2</code> (dacă <code>C=2</code>).</p>",
+      "text": "Fișierul de ieșire magictrick.out va conține fie doar răspunsul pentru cerința 1 (dacă C=1), fie doar răspunsul pentru cerința 2 (dacă C=2)."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>C ∈ {1, 2}</code></li>\n\t<li><code>2 ≤ N ≤ 100.000</code></li>\n\t<li>numerele scrise pe cele <code>N</code> cărți au valori cuprinse între <code>[1, 500.000]</code>.</li>\n\t<li>Pentru 20 de puncte, <code>C = 1</code></li>\n\t<li>Pentru 9 de puncte, <code>C = 2</code>, <code>N ≤ 1000</code>, iar fiecare număr scris pe cele <code>N</code> cărți este cuprins între <code>[1, 6]</code></li>\n\t<li>Pentru 11 de puncte, <code>C = 2</code>, <code>N ≤ 1000</code>, iar fiecare număr scris pe cele <code>N</code> cărți este cuprins între <code>[1, 1000]</code></li>\n\t<li>Pentru 13 de puncte, <code>C = 2</code>, iar numerele scrise pe cele <code>N</code> cărți sunt puteri ale aceluiași număr din intervalul <code>[2, 6]</code></li>\n\t<li>Pentru 47 de puncte, fără restricții suplimentare</li>\n</ul>",
+      "text": "C ∈ {1, 2} 2 ≤ N ≤ 100.000 numerele scrise pe cele N cărți au valori cuprinse între [1, 500.000]. Pentru 20 de puncte, C = 1 Pentru 9 de puncte, C = 2, N ≤ 1000, iar fiecare număr scris pe cele N cărți este cuprins între [1, 6] Pentru 11 de puncte, C = 2, N ≤ 1000, iar fiecare număr scris pe cele N cărți este cuprins între [1, 1000] Pentru 13 de puncte, C = 2, iar numerele scrise pe cele N cărți sunt puteri ale aceluiași număr din intervalul [2, 6] Pentru 47 de puncte, fără restricții suplimentare"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>magictrick.in</code></p><pre>1 5\n1 2 3 4 5</pre><p><code>magictrick.out</code></p><pre>15</pre><h3>Explicație</h3><p>Coeficientul magic al pachetului este: <code>(1 + 2 + 3 + 4 + 5) • cmmdc}(1, 2, 3, 4, 5) = 15 • 1 = 15</code></p>",
+      "text": "magictrick.in1 5 1 2 3 4 5magictrick.out15ExplicațieCoeficientul magic al pachetului este: (1 + 2 + 3 + 4 + 5) • cmmdc}(1, 2, 3, 4, 5) = 15 • 1 = 15"
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>magictrick.in</code></p><pre>2 5\n2 3 6 7 8</pre><p><code>magictrick.out</code></p><pre>32</pre><h3>Explicație</h3><p>Coeficientul magic maxim este: <code>cmmdc(2, 6, 8) • (2 + 6 + 8) = 2 • 16 = 32</code>.</p>",
+      "text": "magictrick.in2 5 2 3 6 7 8magictrick.out32ExplicațieCoeficientul magic maxim este: cmmdc(2, 6, 8) • (2 + 6 + 8) = 2 • 16 = 32."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Coeficientul magic al pachetului este: (1 + 2 + 3 + 4 + 5) • cmmdc}(1, 2, 3, 4, 5) = 15 • 1 = 15"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Coeficientul magic maxim este: cmmdc(2, 6, 8) • (2 + 6 + 8) = 2 • 16 = 32."
+    }
+  ],
+  "constraints": [
+    "C ∈ {1, 2}",
+    "2 ≤ N ≤ 100.000",
+    "numerele scrise pe cele N cărți au valori cuprinse între [1, 500.000].",
+    "Pentru 20 de puncte, C = 1",
+    "Pentru 9 de puncte, C = 2, N ≤ 1000, iar fiecare număr scris pe cele N cărți este cuprins între [1, 6]",
+    "Pentru 11 de puncte, C = 2, N ≤ 1000, iar fiecare număr scris pe cele N cărți este cuprins între [1, 1000]",
+    "Pentru 13 de puncte, C = 2, iar numerele scrise pe cele N cărți sunt puteri ale aceluiași număr din intervalul [2, 6]",
+    "Pentru 47 de puncte, fără restricții suplimentare"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qba2cde37a8.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "magictrick.in / magictrick.out",
+    "limită timp": "0.2 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "ONI 2023 clasa a VI-a",
+    "autor": "Mihnea-Vicențiu Bucă",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.2,
+  "memoryLimitMb": 64,
+  "author": "Mihnea-Vicențiu Bucă",
+  "sourceAttribution": "ONI 2023 clasa a VI-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4446/magictrick"
+}

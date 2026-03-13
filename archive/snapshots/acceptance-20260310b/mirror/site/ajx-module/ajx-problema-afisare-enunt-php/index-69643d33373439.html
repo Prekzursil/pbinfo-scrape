@@ -1,0 +1,105 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3749"><article id="enunt">
+			<p><strong>Valoarea unei litere</strong> este dată de numărul ei de ordine în alfabet (<code>A</code> are valoarea <code>1</code>, <code>B</code> are valoarea <code>2</code>, <code>C</code> are valoarea <code>3</code>, etc.). Un <strong>text special</strong> este format din una sau mai multe litere mari ale alfabetului englez și nu conține alte tipuri de caractere. <strong>Valoarea</strong> unui text special o definim ca fiind egală cu suma valorilor literelor care îl compun. De exemplu, textul special <code>ABAC</code> are valoarea <code>7</code> (<code>7=1+2+1+3</code>).</p>
+
+<p>Un text special poate fi transcris într-o <strong>formă restrânsă</strong> prin utilizarea perechilor de paranteze și a numerelor naturale. De exemplu, transcrierea în forma restrănsă a textului <code>ABACABACEECDCDE</code> este textul <code>(ABAC)2E2(CD)2E</code> deoarece secvența <code>ABAC</code> apare de două ori consecutiv, litera <code>E</code> are două apariții consecutive și la fel secvența de litere <code>CD</code>.</p>
+
+<p>Transcrierea în formă restrânsă a unui text special se realizează prin înlocuirea fiecărei secvențe care are apariții consecutive în text cu secvența scrisă între o pereche de paranteze rotunde urmată apoi de numărul de repetiții. De exemplu, textul special <code>ABABAB</code> se transcrie în forma restrânsă în <code>(AB)3</code>.</p>
+
+<p>Dacă, după transcriere, textul în formă restrânsă conține secvențe care au apariții consecutive în text atunci și acesta se va transcrie în formă restrânsă. De exemplu, textul special <code>ABABCABABC</code> se poate transcrie întâi în forma restrânsă în <code>(ABABC)2</code> sau în <code>(AB)2C(AB)2C</code> iar apoi în <code>((AB)2C)2</code>.</p>
+
+<p>Dacă textul special nu conține nicio secvență cu apariții consecutive în text, atunci forma restrânsă a textului este identică cu forma inițială. De exemplu, textul special <code>ABAC</code> are forma restrânsă <code>ABAC</code> care este identică cu acest text special.</p>
+
+
+<h1>Cerința</h1>
+
+<p>Scrieți un program care citește un șir de caractere <code>S</code> reprezentând forma restrânsă a unui text special, și apoi determină:</p>
+
+<ol>
+	<li>numărul literelor distincte care apar în textul special;</li>
+	<li>suma numerelor care apar în forma restrânsă a textului special;</li>
+	<li>valoarea textului special dat în forma restrânsă.</li>
+</ol>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>valoare.in</code> conține:</p>
+
+<ul>
+	<li>pe prima linie, un număr natural <code>C</code> (<code>1</code>, <code>2</code> sau <code>3</code>) reprezentând cerința care trebuie rezolvată;</li>
+	<li>pe a doua linie, șirul de caractere <code>S</code> reprezentând forma restrânsă a unui text special.</li>
+</ul>
+
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>valoare.out</code> va conține pe prima linie:</p>
+
+<ul>
+	<li>dacă <code>C = 1</code>, un număr natural reprezentând numărul literelor distincte care apar în textul special (răspunsul la cerința <code>1</code>);</li>
+	<li>dacă <code>C = 2</code>, pe prima linie, un număr natural reprezentând suma numerelor care apar în forma restrânsă a textului special (răspunsul la cerința <code>2</code>);</li>
+	<li>dacă <code>C = 3</code>, pe prima linie, un număr natural reprezentând valoarea textului special dat în forma restrânsă (răspunsul la cerința <code>3</code>).</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>Șirul de caractere <code>S</code> ce reprezintă forma restrânsă a unui text special poate avea cel mult <code>1000</code> de caractere (litere mari ale alfabetului englez, perechi de paranteze rotunde, cifre).</li>
+	<li>Numerele naturale care apar în forma restrânsă a unui text special sunt nenule și aparțin intervalului închis <code>[2, 9999]</code>.</li>
+	<li>Valoarea unui text special este un număr natural format din cel mult <code>12</code> cifre.</li>
+	<li>Pentru cerința <code>1</code> se acordă <code>10p</code>, pentru cerința <code>2</code> se acordă <code>20p</code>, iar pentru cerința <code>3</code> se acordă <code>70p</code>.</li>
+	<li>Pentru teste în valoare de <code>10p</code>, formă restrânsă a textului special este identică cu textul special și cerința este <code>3</code>.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>valoare.in</code></p>
+
+<pre>1
+(ABAC)2E2(CD)2E</pre>
+
+<p><code>valoare.out</code></p>
+
+<pre>5 </pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința <code>1</code>.</p>
+
+<p>Forma restrânsă a textului special este <code>(ABAC)2E2(CD)2E</code>. În textul special apar doar literele <code>A</code>, <code>B</code>, <code>C</code>, <code>D</code> și <code>E</code>.</p>
+
+
+<h1>Exemplul 2:</h1>
+
+<p><code>valoare.in</code></p>
+
+<pre>2
+(ABAC)2E2(CD)2E</pre>
+
+<p><code>valoare.out</code></p>
+
+<pre>6 </pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința <code>2</code>.</p>
+
+<p>Se rezolvă cerința <code>2</code>. Forma restrânsă a textului special este <code>(ABAC)2E2(CD)2E</code>. În textul special apare doar numărul <code>2</code>, de <code>3</code> ori. Astfel suma este <code>6</code> (=2+2+2).</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>valoare.in</code></p>
+
+<pre>3
+(ABAC)2E2(CD)2E</pre>
+
+<p><code>valoare.out</code></p>
+
+<pre>43 </pre>
+
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința <code>3</code>.</p>
+
+<p>Forma restrânsă <code>(ABAC)2E2(CD)2E</code> reprezintă transcrierea textului special <code>ABACABACEECDCDE</code>. În textul special apar <code>4</code> de <code>A</code>, <code>2</code> de <code>B</code>, <code>4</code> de <code>C</code>, <code>2</code> de <code>D</code> și <code>3</code> de <code>E</code>. Astfel, valoarea textului special este egală cu <code>43</code> (<code>=4*1+2*2+4*3+2*4+3*5</code>).</p>		</article>
+		</body></html>

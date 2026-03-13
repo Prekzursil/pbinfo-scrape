@@ -1,0 +1,73 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1427"><article id="enunt">
+			<p>Andrei este manager la o firmă foarte importantă, la care se lucrează în ture. Aceste ture durează un număr constant de minute (<code>10</code><sup><code>17</code></sup> minute), fiecare tură începând la minutul <code>1</code>. După o tură, Andrei, fiind foarte obosit, doarme până la începutul următoarei ture.</p>
+
+<p>El este foarte ocupat cu o mulțime de ședințe (<code>S</code> ședințe mai exact). Acestea sunt trecute în agenda lui astfel: <code>Minutul de început Durata Minutele necesare pentru pregătire</code> – în minutele de pregătire nu trebuie să îl deranjeze nimeni).</p>
+
+<p>Agenda este foarte dezordonată, iar şedinţele nu sunt notate în ordine cronologică, şi, în plus, acestea se pot suprapune. Ca un bun manager, Andrei doreşte să participe la cât mai multe şedinţe într-o tură cu condiţia să nu se desfăşoare în acelaşi timp. Deoarece nu poate renunța la nicio ședință, el va amâna pentru turele viitoare unele dintre ședințele care se suprapun, păstrând în agendă aceleași informații despre fiecare (început, durată, timp necesar pentru pregătire).</p>
+
+<h1>Cerința</h1>
+
+<p>a) Afișați numărul minim de ture în care Andrei poate participa la toate şedinţele.<br>
+b) Știind că în prima tură, Andrei poate să ajungă la toate şedinţele (nu se desfăşoară două sau mai multe şedinţe la un moment dat), determinați minutul în care se poate programa începutul pregătirii unei noi şedinţe de durată <code>D</code> şi timp de pregătire <code>P</code>, astfel încât să nu se suprapună cu o alta (dacă există mai multe soluţii se va afişa cea cu momentul de început minim).</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fişierului de intrare <code>manager.in</code> se găseşte litera <code>a</code>, însemnând că se cere rezolvare cerinţei a), sau <code>b</code>, semnificând faptul că se cere rezolvarea cerinţei b). Pe linia a doua se găseşte un număr <code>S</code> reprezentând numărul de şedinţe, iar pe următoarele <code>S</code> linii se găsesc câte trei numere <code>x y z</code> separate prin câte un spaţiu, astfel: <code>x</code> – minutul la care începe şedinţa de pe linia curentă, <code>y</code> – durata şedinţei iar <code>z</code> – timpul necesar pentru pregătirea şedinţei, în care Andrei nu trebuie să fie deranjat de nimeni. Doar pentru cerinţa b), pe<br>
+ultima linie, adică linia <code>S+3</code>, se vor afla <code>2</code> numere <code>D P</code> separate printr-un spaţiu, având semnificaţiile din enunţ.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>manager.out</code> va conține pe prima linie un singur număr reprezentând răspunsul la cerinţa a sau b dată pe prima linie în fişierul <code>manager.in</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ D P x y z ≤ 10</code><sup><code>17</code></sup></li>
+	<li><code>1 ≤ S ≤ 100.000</code></li>
+	<li><code>x-z&gt;0</code></li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>manager.in</code></p>
+
+<pre>a
+7
+5 8 1
+1 3 0
+2 4 0
+5 9 3
+2 7 0
+6 10 1
+5 1 0</pre>
+
+<p><code>manager.out</code></p>
+
+<pre>6</pre>
+
+<h3>Explicație</h3>
+
+<p>În prima tură se pot desfășura ședințele <code>2</code>, <code>7</code> sau ședințele <code>2</code>, <code>6</code>. Toate celelalte ședințe conțin minutul <code>5</code> deci vor trebui sa se desfășoare în ture separate astfel: În cea de a doua tură ședința <code>1</code>, în a treia ședința <code>3</code>, în cea de-a patra ședința <code>4</code>, într-a cincea ședința <code>5</code>, iar într-a șasea ședința <code>6</code> sau <code>7</code> în funcție de cea aleasă pentru tura <code>1</code>. În total sunt <code>6</code> ture.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>manager.in</code></p>
+
+<pre>b
+6
+5 3 2
+20 6 3
+48 10 4
+10 5 0
+30 3 1
+55 3 3
+7 1</pre>
+
+<p><code>manager.out</code></p>
+
+<pre>33</pre>
+
+<h3>Explicație</h3>
+
+<p>Pregătirea noii ședință poate începe de la minutul <code>33</code>, între ședințele <code>5</code> și <code>3</code>.</p>		</article>
+		</body></html>

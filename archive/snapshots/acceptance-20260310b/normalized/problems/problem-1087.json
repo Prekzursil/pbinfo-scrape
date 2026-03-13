@@ -1,0 +1,297 @@
+{
+  "id": 1087,
+  "slug": "cuvinte4",
+  "name": "Cuvinte4",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1087/cuvinte4",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 10,
+      "name": "Şiruri de caractere",
+      "slug": "iruri-de-caractere",
+      "href": "/?pagina=probleme-lista&tag=10"
+    },
+    {
+      "id": 84,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=84"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerinţă:",
+      "html": "<p>Scrieţi un program care să citească şirul de cuvinte şi să afişeze:</p><p>a) numărul de ordine al primului cuvânt şters sau valoarea <code>0</code> în cazul în care nu se şterge niciun cuvânt<br>\nb) numerele de ordine ale cuvintelor rămase după finalizarea operaţiilor de modificare. </p>",
+      "text": "Scrieţi un program care să citească şirul de cuvinte şi să afişeze:a) numărul de ordine al primului cuvânt şters sau valoarea 0 în cazul în care nu se şterge niciun cuvânt b) numerele de ordine ale cuvintelor rămase după finalizarea operaţiilor de modificare."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>cuvinte4.in</code> conține o singură linie pe care se află şirul de cuvinte separate două câte două printr-un spaţiu.</p>",
+      "text": "Fișierul de intrare cuvinte4.in conține o singură linie pe care se află şirul de cuvinte separate două câte două printr-un spaţiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>cuvinte4.out</code> va conține:</p><ul>\n\t<li>pe prima linie numărul de ordine al primului cuvânt şters sau valoarea <code>0</code> în cazul în care nu se şterge niciun cuvânt</li>\n\t<li>pe a doua linie numerele de ordine ale cuvintelor rămase în final în şirul de cuvinte, despărţite  două câte două printr-un spaţiu.</li>\n</ul>",
+      "text": "Fișierul de ieșire cuvinte4.out va conține: pe prima linie numărul de ordine al primului cuvânt şters sau valoarea 0 în cazul în care nu se şterge niciun cuvânt pe a doua linie numerele de ordine ale cuvintelor rămase în final în şirul de cuvinte, despărţite două câte două printr-un spaţiu."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li>După ultimul cuvânt din şirul iniţial există caracterul <code>!</code></li>\n\t<li>Fiecare cuvânt are maxim <code>10</code> caractere, iar în şirul iniţial nu există mai mult de <code>25</code> cuvinte.</li>\n\t<li>Şirul de cuvinte iniţial este format din cel puţin un cuvânt. O pereche de cuvinte vecine <code>(a,b)</code>, din şirul de cuvinte este caracterizată prin faptul că, după cuvântul <code>a</code> se afla imediat cuvântul <code>b</code>.</li>\n</ul>",
+      "text": "După ultimul cuvânt din şirul iniţial există caracterul ! Fiecare cuvânt are maxim 10 caractere, iar în şirul iniţial nu există mai mult de 25 cuvinte. Şirul de cuvinte iniţial este format din cel puţin un cuvânt. O pereche de cuvinte vecine (a,b), din şirul de cuvinte este caracterizată prin faptul că, după cuvântul a se afla imediat cuvântul b."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>cuvinte4.in</code></p><pre>alfa faal alfa fala lafa afal calfa calfa!</pre><p><code>cuvinte4.out</code></p><pre>2\n1 3 4 7 8</pre>",
+      "text": "cuvinte4.inalfa faal alfa fala lafa afal calfa calfa!cuvinte4.out2 1 3 4 7 8"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p>Cuvintele obţinute prin transformarea cuvântului <code>alfa</code> sunt: : <code>lfaa</code>, <code>faal</code>, <code>aalf</code>.  Prima pereche de cuvinte vecine care îndeplinesc cerinţele sunt cuvintele cu numerele de ordine <code>1</code> şi <code>2</code>. Va fi şters cuvântul cu numărul de ordine <code>2</code>. Şirul rezultat este format din următoarele <code>7</code> cuvinte: <code>alfa alfa fala lafa afal calfa calfa</code>. Prima pereche care îndeplineşte cerinţele din noul şir este perechea formată din cuvintele <code>fala</code> şi <code>lafa</code>, având numerele de ordine <code>4</code> şi <code>5</code>,  pentru că lista de cuvinte obţinute prin transformarea cuvântului <code>fala</code> sunt: <code>alaf</code>, <code>lafa</code>, <code>afal</code>. Se va şterge cuvântul cu numărul de ordine <code>5</code>. Şirul rezultat după ştergere este: <code>alfa alfa fala afal calfa calfa</code>. Prima pereche care îndeplineşte cerinţele problemei în noul şir este <code>fala</code> şi <code>afal</code>. Se şterge <code>afal</code> cu numărul de ordine <code>6</code>. Şirul rezultat după ştergere este: <code>alfa alfa fala calfa calfa</code>. În acest şir nu se mai găseşte nicio pereche care să îndeplinească cerinţele. Au rămas deci cuvintele: <code>alfa</code>, <code>alfa</code>, <code>fala</code>, <code>calfa</code>, <code>calfa</code>  care au numerele de ordine <code>1</code>, <code>3</code>, <code>4</code>, <code>7</code>, <code>8</code>.</p>",
+      "text": "Cuvintele obţinute prin transformarea cuvântului alfa sunt: : lfaa, faal, aalf. Prima pereche de cuvinte vecine care îndeplinesc cerinţele sunt cuvintele cu numerele de ordine 1 şi 2. Va fi şters cuvântul cu numărul de ordine 2. Şirul rezultat este format din următoarele 7 cuvinte: alfa alfa fala lafa afal calfa calfa. Prima pereche care îndeplineşte cerinţele din noul şir este perechea formată din cuvintele fala şi lafa, având numerele de ordine 4 şi 5, pentru că lista de cuvinte obţinute prin transformarea cuvântului fala sunt: alaf, lafa, afal. Se va şterge cuvântul cu numărul de ordine 5. Şirul rezultat după ştergere este: alfa alfa fala afal calfa calfa. Prima pereche care îndeplineşte cerinţele problemei în noul şir este fala şi afal. Se şterge afal cu numărul de ordine 6. Şirul rezultat după ştergere este: alfa alfa fala calfa calfa. În acest şir nu se mai găseşte nicio pereche care să îndeplinească cerinţele. Au rămas deci cuvintele: alfa, alfa, fala, calfa, calfa care au numerele de ordine 1, 3, 4, 7, 8."
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "După ultimul cuvânt din şirul iniţial există caracterul !",
+    "Fiecare cuvânt are maxim 10 caractere, iar în şirul iniţial nu există mai mult de 25 cuvinte.",
+    "Şirul de cuvinte iniţial este format din cel puţin un cuvânt. O pereche de cuvinte vecine (a,b), din şirul de cuvinte este caracterizată prin faptul că, după cuvântul a se afla imediat cuvântul b."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q4d87460769.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "10",
+    "intrare/ieșire": "cuvinte4.in / cuvinte4.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "OJI 2010, Clasa a VII-a",
+    "autor": "Roxana Timplaru",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "author": "Roxana Timplaru",
+  "sourceAttribution": "OJI 2010, Clasa a VII-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1087/cuvinte4"
+}

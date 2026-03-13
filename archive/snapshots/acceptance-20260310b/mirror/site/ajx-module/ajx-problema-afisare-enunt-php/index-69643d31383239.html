@@ -1,0 +1,62 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1829"><article id="enunt">
+			<p>Programatoarea Petra a început un curs de criptografie. Fiind un spirit creativ, Petra a creat deja o metodă elaborată de criptare a unei parole sub forma unei perechi (tabel de litere aparţinând mulţimii <code>{‘a’...’z’}</code>, dicţionar de cuvinte). Din păcate pentru Petra, metoda ei de criptare a parolei, poate fi decriptată de oricine astfel:<br>
+</p><ul>
+	<li>se iau tabelul de litere şi dicţionarul de cuvinte permise</li>
+	<li>se listează, sortează şi numără toate cuvintele care se găsesc în tabel. Un cuvânt \(c_1c_2…c_k\) care există în dicţionar există şi în tabel dacă fiecare literă \(c_i\) apare în tabel şi pentru <code>i&gt;1</code>, \(c_i\) este vecină în tabel cu litera \(c_{i-1}\).</li>
+	<li>din lista sortata de <code>T</code> perechi (\(cuvânt_i\), \(a_i\)), unde \(cuvânt_i\) este un cuvânt iar \(a_i\) este numărul de apariţii în tabel, reconstituie litera \(p_i\) a parolei astfel: \(p_i =\) <code>‘a’ + (</code> \(a_i\) <code> mod 26)</code>. Încercând să îmbunătăţească algoritmul, Petra a decis să înlocuiască unele litere din tabel cu semnul întrebării <code>'?'</code>. Un semn <code>'?'</code> poate fi înlocuit cu orice literă când se parcurge tabelul. Convinge-o pe Petra că, în ciuda îmbunătăţirii, îi poţi găsi parola pornind de la orice pereche de (dicţionar, tabel de litere) dată.</li><br>
+</ul><p></p>
+
+<h1>Cerința</h1>
+
+<p>Dat fiind un tabel de litere de dimensiuni <code>N x M</code>, şi o listă a cuvintelor din dicţionar, să se afişeze lista sortată de <code>T</code> perechi de forma <code>'ci: ai'</code> şi parola Petrei.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fişierul <code>cuvinteascunse.in</code> va conţine <code>N + C + 1</code> linii. Pe prima linie <code>N, M, C</code> – dimensiunile tabelului, şi numărul de cuvinte din dicţionar. Apoi cele <code>N</code> linii ale tabelului:</p>
+
+<p><code>t</code><sub><code>1,1</code></sub> <code>...t</code><sub><code>1,m</code></sub><br>
+<code>t</code><sub><code>2,1</code></sub> <code>...t</code><sub><code>2,m</code></sub><br>
+<code>. . .</code><br>
+<code>t</code><sub><code>n,1</code></sub> <code>...t</code><sub><code>n,m</code></sub></p>
+
+<p>urmate de cele <code>C</code> cuvinte din dicţionar, fiecare pe o linie:<br>
+<code>cuvânt</code><sub><code>1</code></sub><br>
+<code>cuvânt</code><sub><code>2</code></sub><br>
+<code>. . .</code><br>
+<code>cuvânt</code><sub><code>C</code></sub></p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fişierul <code>cuvinteascunse.out</code> va conţine pe prima linie <code>T</code>, numărul de cuvinte distincte găsite în tabel. Pe următoarele <code>T</code> linii se vor afla perechi cuvânti ai separate printr-un spaţiu. Pe ultima linie se va afla un şir de caractere reprezentand parola Petrei.</p>
+
+<h1>Restricții și precizări</h1>
+
+<p>O secvenţă de litere reprezintă un cuvânt dacă se află în dicţionarul dat ca date de intrare. Dicţionarul conţine cuvinte formate din litere aparţinând mulţimii <code>{‘a’...’z’}U{‘A’...’Z’}</code>. Literele mici şi cele mari se consideră egale. Două litere sunt vecine în tabel, dacă celulele lor au o latura sau un colţ comun. Aceeaşi litera din tabel se poate folosi de mai multe ori într-un cuvânt. Dacă acelaşi semn <code>'?'</code> este folosit de mai multe ori într-un cuvânt, trebuie să reprezinte aceeaşi literă de fiecare dată.<br>
+</p><ul>
+	<li><code>0 &lt; N &lt; 6</code></li>
+	<li><code>0 &lt; M &lt; 6</code></li>
+	<li><code>0 &lt; C &lt; 20000</code></li><br>
+</ul><p></p>
+
+<h1>Exemplu:</h1>
+
+<p><code>cuvinteascunse.in</code></p>
+
+<pre>2 2 3
+e a
+l ?
+ea
+elena
+arc</pre>
+
+<p><code>cuvinteascunse.out</code></p>
+
+<pre>2
+ea 3
+elena 1
+db</pre>
+
+<h3>Explicație</h3>
+
+<p>Am gasit cuvântul <code>“ea”</code> de <code>3</code> ori: o data pe prima linie a tabelului, o data pe diagonala principală, inlocuind <code>'?'</code> cu <code>'a'</code>, şi o data ca <code>“?a"</code> inlocuind <code>'?'</code> cu <code>'e'</code>. Am gasit cuvântul <code>“elena”</code> o data, inlocuind <code>'?'</code> cu <code>'n'</code>.</p>		</article>
+		</body></html>

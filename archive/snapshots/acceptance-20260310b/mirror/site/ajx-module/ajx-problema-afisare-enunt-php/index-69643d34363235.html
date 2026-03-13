@@ -1,0 +1,117 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4625"><article id="enunt">
+			<p><i>La mulți ani, Mugur! Să trăiești 1 000 000 de ani!</i></p>
+
+<p>Mugur a primit cadou de ziua sa de la fiul său Mugurel o <strong>stivă</strong>. După ce chefuiește cu prietenii la Căminul Cultural din Imperiul Rațelor de Cauciuc, el merge acasă entuziasmat și începe să facă operații pe ea.<br>
+Operațiile sunt de două tipuri:</p>
+
+<ul>
+	<li><strong><i>push</i></strong> <code>x</code>. Numărul <code>x</code> se adaugă în stivă (<code>x</code> devine elementul din vârful stivei).</li>
+	<li><strong><i>pop</i></strong>. Se elimină elementul din vârful stivei. Dacă stiva este goală, operația nu are niciun efect.</li>
+</ul>
+
+<p>Din păcate, stiva nu era cea mai calitativă, așa că după ce face <code>N</code> operații pe ea, aceasta dă eroarea <i>maCmAcMac</i> și nu mai poate să execute alte operații.<br>
+Fiind o rață bătrână, Mugur nu reușește să-și, amintească instant toate operațiile pe care le-a făcut, însă în fiecare zi își aduce aminte de câte o operație și a câta era aceasta în șirul inițial de operații. </p>
+
+<h1>Cerința</h1>
+
+<p>Ca să nu se plictisească, Mugur își pune zilnic câte o întrebare: având doar operațiile până în ziua curentă, dacă le execută în ordinea indicilor, care ar fi elementul de pe vârful <strong>stivei</strong>?</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>mugur.in</code> va conține pe prima linie un număr întreg <code>N</code>, reprezentând numărul de operații.</p>
+
+<p>Fiecare linie <code>i</code> din următoarele <code>N</code> linii conține câte o operație: un număr natural \({p}_{i}\) reprezentând indicele operației, un șir de caractere \({s}_{i}\) reprezentând tipul operației și un număr natural \({x}_{i}\) dacă operația este de tip <i>push</i>, reprezentând numărul care se introduce în stivă.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>mugur.out</code> va conține <code>N</code> linii, pe fiecare linie fiind un singur număr întreg: elementul de pe vârful <strong>stivei</strong> luând în considerare operațiile curente sau <code>-1</code> dacă stiva este goală.</p>
+
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>\(1 \le N \le 100000\)</li>
+	<li>\(1 \le {x}_{i} \le 10^9\)</li>
+	<li>\(s_i \in \{push, pop\}\)</li>
+	<li>\(1 \le p_i \le N\)</li>
+	<li>Toți indicii operațiilor care apar sunt distincți.</li>
+	<li>Toate numerele sunt întregi.</li>
+	<li>Mugurel își cere scuze pentru inconveniențe, data viitoare va cumpăra un cadou mai calitativ.</li>
+</ul>
+
+<h1>Punctare</h1>
+
+<ul>
+	<li>Pentru teste în valoare de <code>5</code> puncte, indicii operațiilor sunt în ordine crescătoare.</li>
+	<li>Pentru alte teste în valoare de <code>5</code> puncte, toate operațiile sunt de tip <strong><i>push</i></strong>.</li>
+	<li>Pentru alte teste în valoare de <code>8</code> puncte, \(N \le 5000\).</li>
+	<li>Pentru alte teste în valoare de <code>13</code> puncte, toate operațiile <strong><i>push</i></strong> apar înaintea operațiilor <strong><i>pop</i></strong>.</li>
+	<li>Pentru alte teste în valoare de <code>69</code> de puncte, nu există restricții suplimentare.</li>
+</ul>
+
+<h1>Exemplu 1:</h1>
+
+<p><code>mugur.in</code></p>
+
+<pre>4
+1 push 2
+4 pop
+2 push 3
+3 push 4</pre>
+
+<p><code>mugur.out</code></p>
+
+<pre>2
+-1
+2
+3</pre>
+
+<h3>Explicație</h3>
+
+<p>După prima zi, avem operațiile: <code>push 2</code> → vârful stivei este <code>2</code>. </p>
+
+<p>După a doua zi, avem operațiile: <code>push 2, pop</code> → stiva este goală.</p>
+
+<p>După a treia zi, avem operațiile: <code>push 2, push 3, pop</code> → vârful stivei este <code>2</code>.</p>
+
+<p>După a patra zi, avem operațiile: <code>push 2, push 3, push 4, pop</code>  → vârful stivei este <code>3</code>. </p>
+
+<h1>Exemplu 2:</h1>
+
+<p><code>mugur.in</code></p>
+
+<pre>7
+1 pop
+4 push 7
+2 push 9
+5 pop
+3 push 5
+6 pop
+7 pop</pre>
+
+<p><code>mugur.out</code></p>
+
+<pre>-1
+7
+7
+9
+5
+9
+-1</pre>
+
+<h3>Explicație</h3>
+
+<p>După prima zi, avem operațiile: <code>pop</code> → stiva este goală. </p>
+
+<p>După a doua zi, avem operațiile: <code>pop, push 7</code> → vârful stivei este <code>7</code>.</p>
+
+<p>După a treia zi, avem operațiile: <code>pop, push 9, push 7</code> → vârful stivei este <code>7</code>.</p>
+
+<p>După a patra zi, avem operațiile: <code>pop, push 9, push 7, pop</code> → vârful stivei este <code>9</code>. </p>
+
+<p>După a cincea zi, avem operațiile: <code>pop, push 9, push 5, push 7, pop</code> → vârful stivei este <code>5</code>. </p>
+
+<p>După a șasea zi, avem operațiile: <code>pop, push 9, push 5, push 7, pop, pop</code> → vârful stivei este <code>9</code>. </p>
+
+<p>După a șaptea zi, avem operațiile: <code>pop, push 9, push 5, push 7, pop, pop, pop</code> → stiva este goală. </p>		</article>
+		</body></html>

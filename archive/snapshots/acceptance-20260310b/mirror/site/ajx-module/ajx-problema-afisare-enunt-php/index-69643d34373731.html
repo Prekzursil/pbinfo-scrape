@@ -1,0 +1,83 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4771"><article id="enunt">
+			<p>Un institut de istorie colectează obiecte descoperite pe mai multe șantiere arheologice. Pentru fiecare descoperire de pe șantier se stabilește categoria din care face parte obiectul (de exemplu: ceramică, monedă etc.), materialul din care este confecționat și numărul de exemplare ce fac parte din aceeași categorie și au același material. Categoria și materialul unui obiect sunt reprezentate prin numere naturale nenule.<br>
+Pentru fiecare șantier se cunoaște: numărul total de valori transmise institutului, grupate în șiruri formate din <code>2</code> sau <code>3</code> numere naturale nenule ce sunt urmate de un număr negativ (ce marchează sfârșitul unui șir), fiecare asemenea șir codifică datele unei descoperiri. Primul număr dintr-un șir reprezintă categoria din care face parte obiectul descoperit, al doilea număr reprezintă materialul din care este confecționat obiectul, al treilea număr indică numărul de exemplare, descoperite la acea operație. Dacă șirul are numai <code>2</code> numere pozitive, atunci s-a descoperit un singur exemplar din acel obiect. De exemplu, șirul de numere <code>3,7,4,-2</code> va reprezenta o descoperire a <code>4</code> exemplare din categoria <code>3</code>, confecționate din materialul <code>7</code> (categoria <code>3</code> poate fi monezi, materialul <code>7</code> poate fi bronz și sunt <code>4</code> exemplare descoperite: deci s-au descoperit <code>4</code> monezi din bronz).</p>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care determină și afișează pentru datele trimise de <code>n</code> șantiere către institut:<br>
+1. Lista obiectelor în ordine crescătoare după categorie: se va afișa categoria și numărul total de exemplare descoperite pe toate șantierele la acea categorie.<br>
+2. Lista obiectelor descoperite în ordine crescătoare după categorie: pentru fiecare obiect se afișează categoria, materialul și numărul de exemplare descoperite, ce au aceste caracteristici.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>institut.in</code> conține pe prima linie două numere naturale <code>c</code> și <code>n</code>: <code>c</code> reprezintă cerința și are una din valorile <code>1</code> sau <code>2</code> și <code>n</code> reprezintă numărul de șantiere arheologice. Fiecare dintre următoarele <code>n</code> linii din fișier conține un șir de numere întregi, separate prin spațiu, ce reprezintă datele trimise de un șantier, în ordinea următoare: numărul total de valori, șiruri formate din <code>2</code> sau <code>3</code> numere naturale nenule urmate de un număr negativ, ce codifică pentru descoperirea făcută: categoria, materialul și numărul de exemplare cu aceste caracteristici pentru obiectele descoperite.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>institut.out</code> va conține :<br>
+1. Dacă c = 1, fișierul de ieșire <code>institut.out</code> va conține pe fiecare linie două numere naturale, separate printr-un spațiu, ce reprezintă categoria și numărul total de exemplare descoperite la acea categorie, pe toate șantierele, în ordinea crescătoare a categoriilor .<br>
+2. Dacă c = 2, fișierul de ieșire <code>institut.out</code> va conține pe prima linie un număr natural d ce reprezintă numărul total de descoperiri de pe toate șantierele și pe fiecare dintre următoarele d linii câte trei numere naturale, separate prin spațiu, ce reprezintă în această ordine: categoria obiectului descoperit, materialul obiectului și numărul de exemplare descoperite. Cele d linii vor fi afișate în ordinea crescătoare a categoriilor obiectelor și pentru obiecte cu aceeași categorie, în ordinea crescătoare a materialului.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>4 ≤ n ≤ 400</code></li>
+	<li>Categoria, materialul și numărul de exemplare ale unui obiect sunt numere naturale nenule cu cel mult <code>2</code> cifre</li>
+	<li>Numărul total de valori transmise de un șantier institutului este cel mult <code>600</code></li>
+	<li>Numărul de descoperiri de pe toate șantierele este cel mult <code>10000</code></li>
+	<li>Pentru datele de test, se consideră că obiectele oricăror două descoperiri diferite nu au aceeași categorie și același material</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>institut.in</code></p>
+
+<pre>1 4
+10 1 6 -5 7 2 -8 2 10 3 -4
+10 2 5 -7 2 6 2 -4 1 5 -7
+6 3 8 -6 7 5 -1
+4 2 1 5 -6</pre>
+
+<p><code>institut.out</code></p>
+
+<pre>1 2
+2 11
+3 1
+7 2</pre>
+
+<h3>Explicație</h3>
+
+<p>Sunt <code>4</code> șantiere arheologice, pentru fiecare se cunoaște numărul de valori trimise: pentru primul șantier sunt <code>10</code> valori, cu șirurile următoare ce reprezintă descoperiri efectuate :<br>
+- șirul <code>(1,6,-5)</code> reprezintă categoria <code>1</code>, materialul <code>6</code>, <code>1</code> exemplar;<br>
+- șirul <code>(7,2,-8)</code> reprezintă categoria <code>7</code>, materialul <code>2</code>, <code>1</code> exemplar;<br>
+- șirul <code>(2,10,3,-4)</code> reprezintă categoria <code>2</code>, materialul <code>10</code>, <code>3</code> exemplare etc.</p>
+
+<p>Se afișează pe categorii, obiectele descoperite de pe toate șantierele, în ordinea crescătoare a categoriilor: sunt <code>2</code> exemplare la categoria <code>1</code>, <code>11</code> exemplare la categoria <code>2</code>: <code>(2,10,3,-4)</code>, <code>(2,5,-7)</code>, <code>(2,6,2,-4)</code>, <code>(2,1,5,-6)</code>, <code>1</code> exemplar la categoria <code>3</code> și <code>2</code> exemplare la categoria <code>7</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>institut.in</code></p>
+
+<pre>2 4
+10 1 6 -5 7 2 -8 2 10 3 -4
+10 2 5 -7 2 6 2 -4 1 5 -7
+6 3 8 -6 7 5 -1
+4 2 1 7 -6</pre>
+
+<p><code>institut.out</code></p>
+
+<pre>9
+1 5 1
+1 6 1
+2 1 7
+2 5 1
+2 6 2
+2 10 3
+3 8 1
+7 2 1
+7 5 1</pre>
+
+<h3>Explicație</h3>
+
+<p>Sunt <code>9</code> descoperiri de obiecte, ce sunt afișate pe categorii în sens crescător: la aceeași categorie, se afișează după material, în sens crescator.</p>		</article>
+		</body></html>

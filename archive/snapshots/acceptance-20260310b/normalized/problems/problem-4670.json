@@ -1,0 +1,316 @@
+{
+  "id": 4670,
+  "slug": "gcd-tree",
+  "name": "gcd_tree",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4670/gcd-tree",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 65,
+      "name": "Structuri de date arborescente",
+      "slug": "structuri-de-date-arborescente",
+      "href": "/?pagina=probleme-lista&tag=65"
+    },
+    {
+      "id": 148,
+      "name": "Structuri de date",
+      "slug": "structuri-de-date",
+      "href": "/?pagina=probleme-lista&tag=148"
+    }
+  ],
+  "tags": [
+    "Arbori de intervale",
+    "Algoritmul lui Euclid",
+    "Range Minimum Query",
+    "Lowest Common Ancestor",
+    "Heavy-Light Decomposition"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p><span class=\"caps\">RAU</span>-Gigel și Vlad sunt prieteni buni și le place tot timpul să se provoace unul pe altul. De data aceasta, <span class=\"caps\">RAU</span>-Gigel a inventat o problemă interesantă de matematică. </p><p>Acesta are un arbore secret cu <code>N</code> noduri (numerotate de la <code>1</code> la <code>N</code>), în care fiecare nod are asociată o valoare (pe lângă numărul său de ordine din arbore), care este un număr natural și ii spune lui Vlad informații despre unele drumuri din acest arbore. O informație are forma <code>x, y, val</code> și reprezintă faptul că lanțul din arbore de la nodul <code>x</code> la nodul <code>y</code> are cel mai mare divizor comun al valorilor asociate nodurilor acestuia egal cu <code>val</code>, unde <code>val</code> este un număr natural nenul.</p><p>Vlad știe că <span class=\"caps\">RAU</span>-Gigel minte câteodată și s-ar putea ca unele dintre restricțiile date să fie eronate, astfel că vrea să afle întâi folosind informațiile ce le are la îndemână dacă ar putea exista un arbore care să respecte toate restricțiile date de prietenul său.</p><p>Pentru că știe ce programator iscusit ești, Vlad ți-ar fi foarte recunoscător daca l-ai putea ajuta cu această problemă prin a scrie un program care să o rezolve cât mai eficient.</p>",
+      "text": "RAU-Gigel și Vlad sunt prieteni buni și le place tot timpul să se provoace unul pe altul. De data aceasta, RAU-Gigel a inventat o problemă interesantă de matematică. Acesta are un arbore secret cu N noduri (numerotate de la 1 la N), în care fiecare nod are asociată o valoare (pe lângă numărul său de ordine din arbore), care este un număr natural și ii spune lui Vlad informații despre unele drumuri din acest arbore. O informație are forma x, y, val și reprezintă faptul că lanțul din arbore de la nodul x la nodul y are cel mai mare divizor comun al valorilor asociate nodurilor acestuia egal cu val, unde val este un număr natural nenul.Vlad știe că RAU-Gigel minte câteodată și s-ar putea ca unele dintre restricțiile date să fie eronate, astfel că vrea să afle întâi folosind informațiile ce le are la îndemână dacă ar putea exista un arbore care să respecte toate restricțiile date de prietenul său.Pentru că știe ce programator iscusit ești, Vlad ți-ar fi foarte recunoscător daca l-ai putea ajuta cu această problemă prin a scrie un program care să o rezolve cât mai eficient."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>gcd_tree.in</code> conține pe prima linie numărul <code>T</code>, care reprezintă numărul de scenarii de test care trebuie rezolvate.</p><p>Pentru fiecare test, prima linie a conține <code>2</code> numere <code>N</code> și <code>M</code>, reprezentând lungimea șirului secret și numărul de restricții pe care acesta trebuie să le respecte. </p><p>A doua linie conține <code>N – 1</code> numere naturale, al <code>i</code>-lea număr reprezentând părintele nodului <code>i + 1</code> din arbore (se consideră că arbore are nodurile indexate de la <code>1</code> și rădăcina în nodul <code>1</code>).</p><p>Fiecare dintre următoarele <code>M</code> linii din test conține câte <code>3</code> numere <code>x, y, val</code>, capetele lanțului din arbore pe care se aplică restricția, respectiv valoarea acestei restricții.</p>",
+      "text": "Fișierul de intrare gcd_tree.in conține pe prima linie numărul T, care reprezintă numărul de scenarii de test care trebuie rezolvate.Pentru fiecare test, prima linie a conține 2 numere N și M, reprezentând lungimea șirului secret și numărul de restricții pe care acesta trebuie să le respecte. A doua linie conține N – 1 numere naturale, al i-lea număr reprezentând părintele nodului i + 1 din arbore (se consideră că arbore are nodurile indexate de la 1 și rădăcina în nodul 1).Fiecare dintre următoarele M linii din test conține câte 3 numere x, y, val, capetele lanțului din arbore pe care se aplică restricția, respectiv valoarea acestei restricții."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Programul trebuie să afișeze în fișierul de ieșire <code>gcd_tree.out</code>, pe o singură linie, fără spații, un șir de lungime <code>T</code> format din valorile <code>0</code> sau <code>1</code>, unde elementul de pe poziția <code>i</code> este <code>1</code> dacă scenariul de test cu numărul <code>i</code> din input admite un arbore posibil care să satisfacă toate restricțiile sau <code>0</code> în caz contrar. </p>",
+      "text": "Programul trebuie să afișeze în fișierul de ieșire gcd_tree.out, pe o singură linie, fără spații, un șir de lungime T format din valorile 0 sau 1, unde elementul de pe poziția i este 1 dacă scenariul de test cu numărul i din input admite un arbore posibil care să satisfacă toate restricțiile sau 0 în caz contrar."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ T ≤ 10</code></li>\n\t<li><code>1 ≤ N, M ≤ 100.000</code></li>\n\t<li><code>1 ≤ x, y ≤ N</code></li>\n\t<li><code>1 ≤ val ≤ 20</code></li>\n\t<li>Se notează cu <code>SN</code> suma valorilor <code>N</code> din toate scenariile de test dintr-un fișier de intrare și cu <code>SM</code> suma valorilor <code>M</code> din toate scenariile de test dintr-un fișier de intrare.</li>\n\t<li><code>1 ≤ SN ≤ 300.000</code></li>\n\t<li><code>1 ≤ SM ≤ 300.000</code></li>\n\t<li>Pentru teste în valoare de <code>13</code> puncte, arborele este un lanț simplu de forma <code>1 – 2 – ... – N</code>; <code>1 ≤ N, M ≤ 1.000</code>; <code>1 ≤ SN, SM ≤ 3.000</code> și <code>val ∈ {2, 4, 8, 16}</code>.</li>\n\t<li>Pentru alte teste în valoare de <code>19</code> puncte, arborele este un lanț simplu de forma <code>1 – 2 – ... – N</code>; <code>1 ≤ N, M ≤ 1.000</code>; <code>1 ≤ SN, SM ≤ 3.000</code> și <code>1 ≤ val ≤ 20</code>.</li>\n\t<li>Pentru alte teste în valoare de <code>17</code> puncte, arborele este un lanț simplu de forma <code>1 – 2 – ... – N</code> și <code>val ∈ {2,4,8,16}</code>.</li>\n\t<li>Pentru alte teste în valoare de <code>24</code> puncte, arborele este un lanț simplu de forma <code>1 – 2 – ... – N</code>.</li>\n\t<li>Pentru alte teste în valoare de <code>8</code> puncte, <code>1 ≤ N, M ≤ 1.000; 1 ≤ SN, SM ≤ 3.000</code> și <code>val ∈ {2, 4, 8, 16}</code>.</li>\n\t<li>Pentru alte teste în valoare de <code>6</code> puncte, <code>1 ≤ N, M ≤ 1.000; 1 ≤ SN, SM ≤ 3.000</code> și <code>1 ≤ val ≤ 20</code>.</li>\n\t<li>Pentru alte teste în valoare de <code>9</code> puncte, <code>val ∈ {2, 4, 8, 16}</code>.</li>\n\t<li>Pentru restul testelor nu există restricții suplimentare, adică se păstrează doar condițiile inițiale.</li>\n</ul>",
+      "text": "1 ≤ T ≤ 10 1 ≤ N, M ≤ 100.000 1 ≤ x, y ≤ N 1 ≤ val ≤ 20 Se notează cu SN suma valorilor N din toate scenariile de test dintr-un fișier de intrare și cu SM suma valorilor M din toate scenariile de test dintr-un fișier de intrare. 1 ≤ SN ≤ 300.000 1 ≤ SM ≤ 300.000 Pentru teste în valoare de 13 puncte, arborele este un lanț simplu de forma 1 – 2 – ... – N; 1 ≤ N, M ≤ 1.000; 1 ≤ SN, SM ≤ 3.000 și val ∈ {2, 4, 8, 16}. Pentru alte teste în valoare de 19 puncte, arborele este un lanț simplu de forma 1 – 2 – ... – N; 1 ≤ N, M ≤ 1.000; 1 ≤ SN, SM ≤ 3.000 și 1 ≤ val ≤ 20. Pentru alte teste în valoare de 17 puncte, arborele este un lanț simplu de forma 1 – 2 – ... – N și val ∈ {2,4,8,16}. Pentru alte teste în valoare de 24 puncte, arborele este un lanț simplu de forma 1 – 2 – ... – N. Pentru alte teste în valoare de 8 puncte, 1 ≤ N, M ≤ 1.000; 1 ≤ SN, SM ≤ 3.000 și val ∈ {2, 4, 8, 16}. Pentru alte teste în valoare de 6 puncte, 1 ≤ N, M ≤ 1.000; 1 ≤ SN, SM ≤ 3.000 și 1 ≤ val ≤ 20. Pentru alte teste în valoare de 9 puncte, val ∈ {2, 4, 8, 16}. Pentru restul testelor nu există restricții suplimentare, adică se păstrează doar condițiile inițiale."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>gcd_tree.in</code></p><pre>2\n4 2 \n3 1 3\n1 4 11\n2 4 12\n3 2\n1 2\n1 3 4\n3 2 3</pre><p><code>gcd_tree.out</code></p><pre>10</pre><h3>Explicație</h3><p>Pentru primul scenariu de test din exemplu, arborele secret ar putea avea valorile <code>11, 12, 132, 132</code> asociate nodurilor sale (scrise în ordine, de la nodul cu numărul <code>1</code> la nodul cu numărul <code>4</code>). </p><p>Pentru al doilea scenariu de test se poate demonstra ușor matematic că nu există soluție.</p>",
+      "text": "gcd_tree.in2 4 2 3 1 3 1 4 11 2 4 12 3 2 1 2 1 3 4 3 2 3gcd_tree.out10ExplicațiePentru primul scenariu de test din exemplu, arborele secret ar putea avea valorile 11, 12, 132, 132 asociate nodurilor sale (scrise în ordine, de la nodul cu numărul 1 la nodul cu numărul 4). Pentru al doilea scenariu de test se poate demonstra ușor matematic că nu există soluție."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Pentru primul scenariu de test din exemplu, arborele secret ar putea avea valorile 11, 12, 132, 132 asociate nodurilor sale (scrise în ordine, de la nodul cu numărul 1 la nodul cu numărul 4)."
+    }
+  ],
+  "constraints": [
+    "1 ≤ T ≤ 10",
+    "1 ≤ N, M ≤ 100.000",
+    "1 ≤ x, y ≤ N",
+    "1 ≤ val ≤ 20",
+    "Se notează cu SN suma valorilor N din toate scenariile de test dintr-un fișier de intrare și cu SM suma valorilor M din toate scenariile de test dintr-un fișier de intrare.",
+    "1 ≤ SN ≤ 300.000",
+    "1 ≤ SM ≤ 300.000",
+    "Pentru teste în valoare de 13 puncte, arborele este un lanț simplu de forma 1 – 2 – ... – N; 1 ≤ N, M ≤ 1.000; 1 ≤ SN, SM ≤ 3.000 și val ∈ {2, 4, 8, 16}.",
+    "Pentru alte teste în valoare de 19 puncte, arborele este un lanț simplu de forma 1 – 2 – ... – N; 1 ≤ N, M ≤ 1.000; 1 ≤ SN, SM ≤ 3.000 și 1 ≤ val ≤ 20.",
+    "Pentru alte teste în valoare de 17 puncte, arborele este un lanț simplu de forma 1 – 2 – ... – N și val ∈ {2,4,8,16}.",
+    "Pentru alte teste în valoare de 24 puncte, arborele este un lanț simplu de forma 1 – 2 – ... – N.",
+    "Pentru alte teste în valoare de 8 puncte, 1 ≤ N, M ≤ 1.000; 1 ≤ SN, SM ≤ 3.000 și val ∈ {2, 4, 8, 16}.",
+    "Pentru alte teste în valoare de 6 puncte, 1 ≤ N, M ≤ 1.000; 1 ≤ SN, SM ≤ 3.000 și 1 ≤ val ≤ 20.",
+    "Pentru alte teste în valoare de 9 puncte, val ∈ {2, 4, 8, 16}.",
+    "Pentru restul testelor nu există restricții suplimentare, adică se păstrează doar condițiile inițiale."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q89fdf05585.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Lorintz Alexandru (Alex_tz307)",
+    "clasa": "11",
+    "intrare/ieșire": "gcd_tree.in / gcd_tree.out",
+    "limită timp": "2 secunde",
+    "limită memorie": "256 MB / 64 MB",
+    "sursa problemei": "RAU-Coder 2024",
+    "autor": "Alexandru Lorintz",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 2,
+  "memoryLimitMb": 256,
+  "author": "Alexandru Lorintz",
+  "sourceAttribution": "RAU-Coder 2024",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4670/gcd-tree"
+}

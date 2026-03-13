@@ -1,0 +1,298 @@
+{
+  "id": 2231,
+  "slug": "centre",
+  "name": "centre",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/2231/centre",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 53,
+      "name": "Programare dinamică",
+      "slug": "programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=53"
+    },
+    {
+      "id": 54,
+      "name": "Probleme diverse de programare dinamică",
+      "slug": "probleme-diverse-de-programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=54"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Scrieţi un program care calculează costul minim de transport săptămânal pentru livrarea comenzilor la cele <code>n</code> centre de distribuţie, cunoscând cantităţile produse de cele două fabrici, cererea fiecărui centru de distribuţie şi costurile de transport ale unei cutii cu ciocolată de la fiecare fabrică la fiecare centru.</p>",
+      "text": "Scrieţi un program care calculează costul minim de transport săptămânal pentru livrarea comenzilor la cele n centre de distribuţie, cunoscând cantităţile produse de cele două fabrici, cererea fiecărui centru de distribuţie şi costurile de transport ale unei cutii cu ciocolată de la fiecare fabrică la fiecare centru."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>centre.in</code> Fişierul de intrare centre.in conţine:</p><ul>\n\t<li>pe prima linie: <code>n</code> – numărul de centre, <code>x1</code> – numărul de cutii cu ciocolată produse de prima fabrică şi <code>x2</code> – numărul de cutii cu ciocolată produse de a doua fabrică, separate prin câte un spaţiu.</li>\n\t<li>Pe a doua linie: <code>n</code> numere naturale nenule <code>c[1] c[2] … c[n]</code> reprezentând cererile celor <code>n</code> centre de distribuţie, <code>c[i]</code> = numar de cutii de ciocolată solicitate de centrul de distribuție <code>i</code>.</li>\n\t<li>Pe a treia linie: <code>n</code> numere naturale nenule reprezentând costurile de transport ale unei cutii de la prima fabrică la fiecare dintre cele <code>n</code> centre <code>cost[1][1] cost[1][2] … cost[1][n]</code>.</li>\n\t<li>Pe a patra linie: <code>n</code> numere naturale nenule reprezentând costurile de transport ale unei cutii de la a doua fabrică la fiecare dintre cele <code>n</code> centre <code>cost[2][1] cost[2][2] … cost[2][n]</code>.</li>\n</ul>",
+      "text": "Fișierul de intrare centre.in Fişierul de intrare centre.in conţine: pe prima linie: n – numărul de centre, x1 – numărul de cutii cu ciocolată produse de prima fabrică şi x2 – numărul de cutii cu ciocolată produse de a doua fabrică, separate prin câte un spaţiu. Pe a doua linie: n numere naturale nenule c[1] c[2] … c[n] reprezentând cererile celor n centre de distribuţie, c[i] = numar de cutii de ciocolată solicitate de centrul de distribuție i. Pe a treia linie: n numere naturale nenule reprezentând costurile de transport ale unei cutii de la prima fabrică la fiecare dintre cele n centre cost[1][1] cost[1][2] … cost[1][n]. Pe a patra linie: n numere naturale nenule reprezentând costurile de transport ale unei cutii de la a doua fabrică la fiecare dintre cele n centre cost[2][1] cost[2][2] … cost[2][n]."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>centre.out</code> va conţine o singură linie pe care va fi scris un număr natural  care reprezintă costul minim  de transport săptămânal, pentru  satisfacerea tuturor cererilor celor <code>n</code> centre de distribuţie.</p>",
+      "text": "Fișierul de ieșire centre.out va conţine o singură linie pe care va fi scris un număr natural care reprezintă costul minim de transport săptămânal, pentru satisfacerea tuturor cererilor celor n centre de distribuţie."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 &lt; n ≤ 200</code>, <code>1 ≤ c[i] ≤ 20</code>, <code>1 &lt; x1, x2 &lt; 4000</code>, <code>n ≤ x1 + x2</code></li>\n\t<li><code>c[1] + c[2] + … + c[n] = x1 + x2</code></li>\n\t<li><code>0 &lt; cost[i][j] ≤ 1000</code>, <code>1 ≤ i ≤ n</code>, <code>1 ≤ j ≤ n</code></li>\n</ul>",
+      "text": "1 < n ≤ 200, 1 ≤ c[i] ≤ 20, 1 < x1, x2 < 4000, n ≤ x1 + x2 c[1] + c[2] + … + c[n] = x1 + x2 0 < cost[i][j] ≤ 1000, 1 ≤ i ≤ n, 1 ≤ j ≤ n"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>centre.in</code></p><pre>3 5 6\n3 4 4 \n5 2 3\n5 3 4 </pre><p><code>centre.out</code></p><pre>38</pre><h3>Explicație</h3><p>O posibilă soluţie ar fi<br>\n<code>cost[1][1]*0 + cost[1][2]*4 + cost[1][3]*1 + cost[2][1]*3 + cost[2][2]*0 + cost[2][3]*3</code> =  <br>\n<code>5 * 0 + 2 * 4 + 3 * 1 + 5 * 3 + 3 * 0 + 4 * 3 = 38</code>.</p>",
+      "text": "centre.in3 5 6 3 4 4 5 2 3 5 3 4 centre.out38ExplicațieO posibilă soluţie ar fi cost[1][1]*0 + cost[1][2]*4 + cost[1][3]*1 + cost[2][1]*3 + cost[2][2]*0 + cost[2][3]*3 = 5 * 0 + 2 * 4 + 3 * 1 + 5 * 3 + 3 * 0 + 4 * 3 = 38."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "O posibilă soluţie ar fi cost[1][1]*0 + cost[1][2]*4 + cost[1][3]*1 + cost[2][1]*3 + cost[2][2]*0 + cost[2][3]*3 = 5 * 0 + 2 * 4 + 3 * 1 + 5 * 3 + 3 * 0 + 4 * 3 = 38."
+    }
+  ],
+  "constraints": [
+    "1 < n ≤ 200, 1 ≤ c[i] ≤ 20, 1 < x1, x2 < 4000, n ≤ x1 + x2",
+    "c[1] + c[2] + … + c[n] = x1 + x2",
+    "0 < cost[i][j] ≤ 1000, 1 ≤ i ≤ n, 1 ≤ j ≤ n"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q49e6eb93bc.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "11",
+    "intrare/ieșire": "centre.in / centre.out",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "Olimpiada Municipala de Informatica, Iasi, 2008",
+    "autor": "Mirela Țibu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 64,
+  "author": "Mirela Țibu",
+  "sourceAttribution": "Olimpiada Municipala de Informatica, Iasi, 2008",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/2231/centre"
+}

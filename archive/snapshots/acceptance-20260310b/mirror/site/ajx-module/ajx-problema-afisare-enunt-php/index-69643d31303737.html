@@ -1,0 +1,72 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1077"><article id="enunt">
+			<p>Algorel a primit un joc care conţine <code>n</code> jetoane pe care sunt scrise litere mari ale alfabetului. Fiecare literă are asociat un cod format dintr-o singură cifră nenulă. Jetoanele se aşează în ordinea dată iniţial, iar prin citirea literelor de pe acestea, de la primul la ultimul jeton, se formează un cuvânt. Dacă se citesc numerele de pe fiecare jeton, începând de la primul la ultimul, se obţine un număr <code>k</code><sub><code>1</code></sub>. Jocul continuă la fel, dar se aşează jetoanele începând de la al doilea la ultimul, obţinându-se un nou număr <code>k</code><sub><code>2</code></sub>. Apoi, se aşează jetoanele începând de la al treilea la ultimul, obţinându-se un nou număr <code>k</code><sub><code>3</code></sub>, ş.a.m.d. până se ajunge la aşezarea doar a ultimului jeton, caz în care se obţine numărul <code>k</code><sub><code>n</code></sub>.</p>
+
+<h1>Cerinţe: </h1>
+
+<p>Scrieţi un program care citeşte numărul <code>n</code> de jetoane, cele <code>n</code> litere asociate jetoanelor, precum şi codurile asociate literelor, în ordinea apariţiei lor şi afişează:</p>
+
+<p>a) numărul de perechi de litere consecutive din cuvântul iniţial care au proprietatea că o literă este vocală şi cealaltă este consoană (ordinea lor nu contează);<br>
+b) numărul <code>k</code><sub><code>1</code></sub>, format din aşezarea iniţială a jetoanelor;<br>
+c) suma <code>k</code><sub><code>1</code></sub><code>+k</code><sub><code>2</code></sub><code>+…+k</code><sub><code>n</code></sub>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>litere.in</code> conține pe prima linie valoarea lui <code>n</code>, reprezentând numărul de jetoane, pe a doua linie un cuvânt format din n litere mari (de la <code>’A’</code> la <code>’Z’</code>); literele sunt scrise una după alta, fără să fie separate cu spaţii, astfel încât prima literă este cea aflată pe primul jeton, a doua literă pe al doilea jeton ş.a.m.d. Pe a treia linie din fişier se află un număr <code>m</code> ce reprezintă numărul de litere distincte, iar pe a patra linie <code>m</code> valori reprezentând codurile literelor distincte ce apar în cuvânt. Codurile sunt date în ordinea apariţiei literelor în cuvânt şi sunt numere naturale nenule formate dintr-o singură cifră, separate printr-un spaţiu, pentru fiecare literă codul fiind dat o singură dată, chiar dacă litera se repetă.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>litere.out</code> va conține pe prima linie numărul de perechi de litere consecutive din cuvânt care au proprietatea că o literă este vocală şi cealaltă consoană (ordinea lor nu contează), pe a doua linie numărul <code>k</code><sub><code>1</code></sub>, (format din aşezarea iniţială a jetoanelor), iar pe a treia linie suma <code>k</code><sub><code>1</code></sub><code>+k</code><sub><code>2</code></sub><code>+…+k</code><sub><code>n</code></sub>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>0 &lt; n ≤ 10000</code></li>
+	<li><code>0 &lt; m &lt; 27</code></li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>litere.in</code></p>
+
+<pre>3
+CSC
+2
+1 2</pre>
+
+<p><code>litere.out</code></p>
+
+<pre>0
+121
+143</pre>
+
+<h1>Explicație</h1>
+
+<ul>
+	<li>Nu există perechi de litere consecutive care să îndeplinească cerinţa.</li>
+	<li>Sunt <code>2</code> litere distincte <code>{’C’,’S’}</code>, <code>cod(’C’)=1</code>, <code>cod(’S’)=2</code>.<br>
+<code>k</code><sub><code>1</code></sub><code> = 121</code>‚ <code>k</code><sub><code>2</code></sub><code> = 21</code>‚ <code>k</code><sub><code>3</code></sub><code> = 1</code>‚ iar <code>k</code><sub><code>1</code></sub><code>+k</code><sub><code>2</code></sub><code>+k</code><sub><code>3</code></sub><code> = 121 + 21 + 1 = 143</code></li>
+</ul>
+
+<h1>Exemplul</h1>
+
+<p><code>litere.in</code></p>
+
+<pre>6
+CABABE
+4
+2 5 6 7</pre>
+
+<p><code>litere.out</code></p>
+
+<pre>5
+256567
+320342</pre>
+
+<h1>Explicație</h1>
+
+<ul>
+	<li>Există <code>5</code> perechi de litere consecutive care să îndeplinească cerinţa: <code>{’CA’, ’AB’, ’BA’, ’AB’, ’BE’}</code>.</li>
+	<li>Sunt <code>4</code> litere distincte <code>{’C’, ’A’, ’B’, ’E’}</code>, <code>cod(’C’)=2</code>, <code>cod(’A’)=5</code>, <code>cod(’B’)=6</code>, <code>cod(’E’)=7</code>.</li>
+	<li><code>k</code><sub><code>1</code></sub><code> = 256567</code>‚ <code>k</code><sub><code>2</code></sub><code> = 56567</code>‚ <code>k</code><sub><code>3</code></sub><code> = 6567</code>‚ <code>k</code><sub><code>4</code></sub><code> = 567</code>, <code>k</code><sub><code>5</code></sub><code> = 67</code>, <code>k</code><sub><code>6</code></sub><code> = 7</code>, iar <code>k</code><sub><code>1</code></sub><code>+k</code><sub><code>2</code></sub><code>+k</code><sub><code>3</code></sub><code>+k</code><sub><code>4</code></sub><code>+k</code><sub><code>5</code></sub><code>+k</code><sub><code>6</code></sub><code>= 256567 + 56567 + 6567 + 567 + 67 + 7 = 320342</code></li>
+</ul>		</article>
+		</body></html>

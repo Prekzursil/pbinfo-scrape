@@ -1,0 +1,90 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1064"><article id="enunt">
+			<p><img align="right" alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1051-1075-cri-png.png"> Furnicuţa şi-a construit un depozit pentru grăunţe pe o suprafaţă de teren dreptunghiulară şi l-a compartimentat în <code>N*M</code> camere identice, de formă pătratică, dispuse câte <code>M</code> pe direcţia <code>Ox</code> şi câte <code>N</code> pe direcţia <code>Oy</code>. Din fiecare cameră se poate intra în orice cameră învecinată cu ea (cameră care are un perete comun cu aceasta).</p>
+
+<p>În fiecare cameră, identificată prin coordonatele sale, ca în desenul alăturat în care <code>N=5</code> şi <code>M=4</code>, furnica a depozitat o cantitate de grăunţe. De exemplu, în camera de coordonate <code>(I,J)</code> este depozitată  cantitatea <code>C</code><sub><code>IJ</code></sub> de grăunţe.  </p>
+
+<p>Atât intrarea cât şi ieşirea din depozit se poate face doar prin cele patru camere din colţurile depozitului, adică cele de coordonate <code>(1,1)</code>, <code>(1,M)</code>, <code>(N,1)</code> şi <code>(N,M)</code> care comunică cu exteriorul. </p>
+
+<p>Pentru a asigura circulaţia aerului în depozit, furnica a montat un sistem de ventilaţie în camera de coordonate <code>(X,Y)</code>. </p>
+
+<p>Văzând ce multe grăunţe are furnica pentru iarnă, vecinul ei, leneşul greieraş Cri, s-a hotărât să fure din ele. </p>
+
+<p>Cri s-a gândit să intre în depozit prin sistemul de ventilaţie din camera de coordonate <code>(X,Y)</code> şi să iasă prin una din cele <code>4</code> camere din colţurile depozitului care comunică cu exteriorul.</p>
+
+<p>A studiat planul depozitului şi a împărţit camerele în patru zone: </p>
+
+<ul>
+	<li>prima zonă, numerotată cu <code>1</code>, conţine toate camerele de coordonate <code>(I,J)</code> cu <code>1 ≤ I ≤ X</code> şi <code>1 ≤ J ≤ Y</code>, cu ieşirea prin camera de coordonate <code>(1,1)</code></li>
+	<li>a doua zonă, numerotată cu <code>2</code>, conţine toate camerele de coordonate <code>(I,J)</code> cu <code>1 ≤ I ≤ X</code> şi <code>Y ≤ J ≤ M</code>, cu ieşirea prin camera de coordonate <code>(1,M)</code></li>
+	<li>a treia zonă, numerotată cu <code>3</code>, conţine toate camerele de coordonate <code>(I,J)</code> cu <code>X ≤ I ≤ N</code> şi <code>1 ≤ J ≤ Y</code>, cu ieşirea prin camera de coordonate <code>(N,1)</code></li>
+	<li>a patra zonă, numerotată cu <code>4</code>, conţine toate camerele de coordonate <code>(I,J)</code> cu <code>X ≤ I ≤ N</code> şi <code>Y ≤ J ≤ M</code>, cu ieşirea prin camera de coordonate <code>(N,M)</code></li>
+</ul>
+
+<p>Cri va intra doar într-una din cele patru zone şi va fura grăunţele doar din camerele conţinute de zona aleasă. Pentru a nu declanşa alarma furnicuţei, el va trebui să treacă cel mult o dată prin fiecare cameră din zonă, să fure întreaga cantitate de grăunţe din aceasta şi să iasă din depozit prin camera ce comunică cu exteriorul, corespunzătoare zonei alese.</p>
+
+<p>Cri va trebui să aleagă zona în care va intra astfel încât cantitatea totală <code>T</code> de grăunţe furate să fie maximă, iar numărul <code>K</code> de camere prin care va trece să fie minim.</p>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care să determine numerele naturale <code>Z</code>, <code>T</code> şi <code>K</code>, unde <code>Z</code> reprezintă numărul zonei pe care va trebui s-o aleagă Cri astfel încât cantitatea totală <code>T</code> de grăunţe furate să fie maximă, iar numărul <code>K</code> de camere prin va trece să fie minim.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>cri.in</code> conține:</p>
+
+<ul>
+	<li>pe prima linie cele patru numere naturale nenule <code>N M X Y</code>, separate prin câte un spaţiu, cu semnificaţia din enunţ</li>
+	<li>pe fiecare din următoarele <code>N</code> linii câte <code>M</code> numere naturale nenule, separate prin câte un spaţiu,  reprezentând cantitatea de grăunţe <code>C</code><sub><code>IJ</code></sub> depozitată în camera de coordonate <code>(I,J)</code> pentru <code>1 ≤ I ≤ N</code> şi <code>1 ≤ J ≤ M</code>.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>cri.out</code> va conține, pe o singură linie, cele trei numere naturale <code>Z</code>, <code>T</code> şi <code>K</code> determinate de program, separate prin câte un spaţiu, în această ordine.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>3 ≤ N ≤ 500</code>; <code>3 ≤ M ≤ 500</code></li>
+	<li><code>2 ≤ X &lt; N</code>; <code>2 ≤ Y &lt; M</code></li>
+	<li><code>M</code>, <code>N</code>, <code>X</code> şi <code>Y</code> sunt numere naturale</li>
+	<li><code>Z</code> aparține <code>{1,2,3,4}</code></li>
+	<li><code>1 ≤ C</code><sub><code>IJ</code></sub><code> ≤ 8000</code>  ( <code>1 ≤ I ≤ N</code>  şi <code>1 ≤ J ≤ M</code> )</li>
+	<li><code>C</code><sub><code>IJ</code></sub> sunt numere naturale ( <code>1 ≤ I ≤ N</code> şi <code>1 ≤ J ≤ M</code> )</li>
+	<li>Dacă există zone pentru care se obţine aceeaşi cantitate totală maximă <code>T</code> de grăunţe şi se trece prin acelaşi număr minim <code>K</code> de camere, se va alege zona numerotată cu numărul cel mai mic.</li>
+	<li>Se acordă:
+	<ul>
+		<li>20% din punctaj pentru determinarea corectă a numărului <code>Z</code></li>
+		<li>40% din punctaj pentru determinarea corectă a numărului <code>T</code></li>
+		<li>40% din punctaj pentru determinarea corectă a numărului <code>K</code></li>
+	</ul></li>
+	</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>cri.in</code></p>
+
+<pre>5 4 2 3
+1 2 3 33
+5 4 3 9
+2 13 4 15
+1 2 3 3
+1 5 2 6</pre>
+
+<p><code>cri.out</code></p>
+
+<pre>2 45 3</pre>
+
+<h1>Explicație</h1>
+
+<p>Camera de pornire are coordonatele <code>(2,3)</code>, iar <code>N=5</code> şi <code>M=4</code>.</p>
+
+<p>Zona <code>1</code> conţine camerele de coordonate: <code>(1,1)</code>, <code>(1,2)</code>, <code>(1,3)</code>, <code>(2,1)</code>, <code>(2,2)</code>, <code>(2,3)</code>. Cantitatea maximă de grăunţe pe care o poate fura Cri este <code>18</code> trecând prin <code>6</code> camere. </p>
+
+<p>Zona <code>2</code> conţine camerele de coordonate: <code>(1,3)</code>, <code>(1,4)</code>, <code>(2,3)</code>, <code>(2,4)</code>. Cantitatea maximă de grăunţe pe care o poate fura Cri este <code>45</code> trecând prin <code>3</code> camere.</p>
+
+<p>Zona <code>3</code> conţine camerele de coordonate: <code>(2,1)</code>, <code>(2,2)</code>, <code>(2,3)</code>, <code>(3,1)</code>, <code>(3,2)</code>, <code>(3,3)</code>, <code>(4,1)</code>, <code>(4,2)</code>, <code>(4,3)</code>, <code>(5,1)</code>, <code>(5,2)</code>, <code>(5,3)</code>. Cantitatea maximă de grăunţe pe care o poate fura Cri este <code>45</code> trecând prin <code>12</code> camere. </p>
+
+<p>Zona <code>4</code> conţine camerele de coordonate: <code>(2,3)</code>, <code>(2,4)</code>, <code>(3,3)</code>, <code>(3,4)</code>, <code>(4,3)</code>, <code>(4,4)</code>, <code>(5,3)</code>, <code>(5,4)</code>. Cantitatea maximă de grăunţe pe care o poate fura Cri este <code>43</code> trecând prin <code>7</code> camere.</p>
+
+<p>Astfel, Cri va intra în zona <code>Z=2</code>, va fura cantitatea maximă de grăunţe <code>T=45</code> trecând prin numărul <code>K=3</code> minim de camere.</p>		</article>
+		</body></html>

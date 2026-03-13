@@ -1,0 +1,65 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3261"><article id="enunt">
+			<p>Reședința Larei a fost invadată de șobolani. Putem descrie reședința Lorei ca un arbore cu <code>N</code> noduri având rădăcina în nodul <code>1</code>. Inițial niciun nod nu este infestat. Diverse evenimente se pot întâmpla pe rând, fiecare eveniment fiind de următoarele patru tipuri:</p>
+
+<ul>
+	<li><code>1 X</code> – nodul <code>X</code> devine infestat</li>
+	<li><code>2 X</code> – Lora vrea să elimine șobolanii din drumul de la nodul <code>1</code> la nodul <code>X</code> (inclusiv) folosind ultrasunete în toate nodurile simultan. Dacă se folosesc ultrasunete într-un nod infestat, șobolanii de acolo se împrăștie în toate nodurile vecine unde nu se folosesc ultrasunete, acestea devenind infestate. Nodurile unde se folosesc ultrasunete nu mai sunt infestate. După ce șobolanii au plecat, ultrasunetele se opresc, adică nodurile curățate vor putea fi infestate iar în evenimentele ulterioare.</li>
+	<li><code>3 X</code> – Lora angajează profesioniști să curețe nodul <code>X</code> și fiii săi. Ca urmare, <code>X</code> și fiii direcți nu mai sunt infestați.</li>
+	<li><code>4 X</code> – Lora ar vrea să știe numărul total de noduri infestate din subarborele cu rădăcina <code>X</code>.</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Ajutați-o pe Lora să scrie un program care prelucrează fiecare eveniment și determină răspunsurile la evenimentele de tip 4.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Prima linie conține un singur întreg <code>N</code> – numărul de noduri din arbore. A doua linie conține <code>N-1</code> numere, al <code>i</code>-lea fiind tatăl nodului <code>i+1</code>. Linia a treia conține numărul de evenimente <code>Q</code>. Următoarele <code>Q</code> linii conțin câte doi întregi reprezentând un eveniment în formatul descris anterior.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Pentru fiecare eveniment de tip <code>4</code> afișați o linie care conține un singur întreg – numărul de noduri infestate din subarbore.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N, Q ≤ 300.000</code></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>5
+1 1 3 3
+8
+1 3
+2 5
+4 1
+1 1
+2 1
+4 3
+3 1
+4 3</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>1
+2
+1</pre>
+
+<h3>Explicație</h3>
+
+<p>Evenimentele au următorul efect:</p>
+
+<ul>
+	<li><code>1 3</code> – Nodul <code>3</code> este infestat</li>
+	<li><code>2 5</code> – Lora folosește ultrasunete în nodurile din drumul de la <code>1</code> la <code>5</code>. Acesteaa sunt <code>1</code>, <code>3</code> și <code>5</code>. Nodul 3 este infestat și singurul său vecin fără ultrasunete este <code>4</code>. Astfel nodul <code>3</code> nu mai este infestat și <code>4</code> devine infestat.</li>
+	<li><code>4 1</code> – Subarborele cu rădăcina <code>1</code> conține toate nodurile. Singurul infestat este <code>4</code>.</li>
+	<li><code>1 1</code> – Nodul <code>1</code> este infestat</li>
+	<li><code>2 1</code> – Lora folosește ultrasunete în nodul <code>1</code>. Nodurile <code>2</code> și <code>3</code> devin infestate, iar nodul <code>1</code> nu mai este infestat.</li>
+	<li><code>4 3</code> – Subarborele cu rădăcina <code>3</code> conține nodurile <code>3</code>, <code>4</code> și <code>5</code>. Dintre ele <code>3</code> și <code>4</code> sunt infestate.</li>
+	<li><code>3 1</code> – Nodul <code>1</code> și fiii săi, adică nodurile <code>1</code>, <code>2</code> și <code>3</code>, nu mai sunt infestate.</li>
+	<li><code>4 3</code> – Dintre nodurile <code>3</code>, <code>4</code> și <code>5</code>, doar nodul <code>4</code> este infestat.</li>
+</ul>		</article>
+		</body></html>

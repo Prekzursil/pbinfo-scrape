@@ -1,0 +1,97 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4660"><article id="enunt">
+			<p>Se dau două șiruri, <code>A</code> și <code>B</code>, cu valori din mulțimea <code>{0, 1}</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>1. Să se afle numărul de subsecvențe distincte din <code>B</code> care sunt subșiruri în <code>A</code>.<br>
+2. Să se afle, pentru o subsecvență <code>B[p...q]</code>, numărul de subșiruri din <code>A</code> egale cu aceasta.<br>
+3. Să se afle numărul de subșiruri din <code>A</code> care sunt subsecvențe în <code>B</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului <code>seqstr.in</code> se află <code>n</code> reprezentând lungimea șirului <code>A</code>.<br>
+Pe linia a doua se află cele <code>n</code> elemente ale șirului <code>A</code> separate prin câte un spațiu.<br>
+Pe linia a treia se află numărul <code>m</code> reprezentând lungimea șirului <code>B</code>.<br>
+Pe linia a patra se află cele <code>m</code> elemente ale șirului <code>B</code> separate prin câte un spațiu.<br>
+Pe linia a cincea se află numărul <code>C</code> reprezentând cerința 1, 2 sau 3.<br>
+Dacă <code>C</code> este 2 atunci pe linia a șasea se află două numere <code>p</code> și <code>q</code> separate printr-un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>seqstr.out</code> va conține o singură linie pe care va fi scris numărul cerut, conform cerinței.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>Rezultatele cerute vor fi calculate și afișate modulo <code>1.000.000.007</code></li>
+	<li>Prin subșir <code>T</code> de lungime <code>p</code> al lui <code>A</code> se înțelege un șir <code>[A[t1], A[t2], A[t3], ..., A[tp]]</code> determinat de pozițiile <code>[1 ≤ t1 &lt; t2 &lt; t3 &lt; ... &lt; tp ≤ n]</code></li>
+	<li>Orice subsecvență a lui <code>B</code> este determinată de două poziții <code>[1 ≤ p ≤ q ≤ m]</code> și este egală cu șirul <code>[B[p], B[p+1], ..., B[q]]</code> Lungimea secvenței este egală cu <code>q - p + 1</code>.</li>
+	<li>Două subsecvențe din <code>B</code>, determinate respectiv de perechile de poziții <code>p1</code>, <code>q1</code> și <code>p2</code>, <code>q2</code> sunt <strong>distincte</strong> dacă au lungimi diferite sau dacă au lungimi egale și există <code>k</code> astfel încât <code>p1 ≤ p1 + k * q1</code> și <code>p2 ≤ p2 + k ≤ q2</code> și <code>B[p1 + k] ≠ B[p2 + k]</code>.</li>
+	<li><code>1 ≤ m ≤ n</code></li>
+	<li>Pentru 7 puncte, <code>C=1</code> și <code>n ≤ 20</code></li>
+	<li>Pentru 9 puncte, <code>C=1</code> și <code>21 ≤ n ≤ 500</code></li>
+	<li>Pentru 19 puncte, <code>C=1</code> și <code>501 ≤ n ≤ 5000</code></li>
+	<li>Pentru 3 puncte, <code>C=2</code> și <code>n ≤ 20</code></li>
+	<li>Pentru 9 puncte, <code>C=2</code> și <code>21 ≤ n ≤ 100</code></li>
+	<li>Pentru 15 puncte, <code>C=2</code> și <code>101 ≤ n ≤ 5000</code></li>
+	<li>Pentru 9 puncte, <code>C=3</code> și <code>n ≤ 20</code></li>
+	<li>Pentru 9 puncte, <code>C=3</code> și <code>21 ≤ n ≤ 100</code></li>
+	<li>Pentru 20 de puncte, <code>C=3</code> și <code>101 ≤ n ≤ 500</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>seqstr.in</code></p>
+
+<pre>5
+1 1 0 0 1
+3
+0 1 1 
+1</pre>
+
+<p><code>seqstr.out</code></p>
+
+<pre>4</pre>
+
+<h3>Explicație</h3>
+
+<p>Avem de rezolvat cerința 1. Subsecvențele distincte din șirul <code>B</code> pentru care există subșir în <code>A</code> sunt: <code>0</code>, <code>1</code>, <code>0 1</code> și <code>1 1</code>. Pentru subsecvența <code>0 1 1</code> din <code>B</code> nu există subșir în <code>A</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>seqstr.in</code></p>
+
+<pre>5
+1 1 0 0 1
+3
+0 1 1 
+2
+2 3</pre>
+
+<p><code>seqstr.out</code></p>
+
+<pre>3</pre>
+
+<h3>Explicație</h3>
+
+<p>Avem cerința 2. Subșirurile din <code>A</code> egale cu subsecvența <code>1 1</code> din <code>B</code> sunt cele determinate de subșirurile de poziții: <code>1 2</code>, <code>1 5</code> și <code>2 5</code>.</p>
+
+
+<h1>Exemplul 3:</h1>
+
+<p><code>seqstr.in</code></p>
+
+<pre>5
+1 1 0 0 1
+3
+0 1 1 
+3</pre>
+
+<p><code>seqstr.out</code></p>
+
+<pre>10</pre>
+
+<h3>Explicație</h3>
+
+<p>Avem cerința 3. Vor fi analizate numai subșirurile de lungime <code>1</code>, <code>2</code> sau <code>3</code>. Nu avem subșiruri de lungime <code>3</code> în <code>A</code> egale cu subsecvențe din <code>B</code>, iar din cele de lungime <code>1</code> sau <code>2</code> sunt numărate cele egale cu <code>0</code>, <code>1</code>, <code>0 1</code> și <code>1 1</code>.</p>		</article>
+		</body></html>

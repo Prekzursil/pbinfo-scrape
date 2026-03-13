@@ -1,0 +1,138 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3724"><article id="enunt">
+			<p>Avem la dispoziție un dreptunghi de dimensiuni <code>N x M</code>. Ne este util ca dreptunghiul nostru să se asemene cu o matrice, de aceea vom considera că are <code>N</code> linii și <code>M</code> coloane. Vom segmenta si numerota dreptunghiul nostru după un anumit cod <code>C</code>. Prin segmentare se înțelege trasarea unei linii orizontale sau verticale la o anumită poziție <code>k</code>, ce va despărți dreptunghiul nostru în alte două dreptunghiuri mai mici:</p>
+
+<ul>
+	<li>de dimensiuni <code>k x M</code> (cel de sus) și <code>(N - k) x M</code> (cel de jos) – în cazul unei linii (H)orizontale, operație codificată prin <code>H</code><sub><code>k</code></sub></li>
+	<li>de dimensiuni <code>N x k</code> (cel din stânga) și <code>N x (M - k)</code> (cel din dreapta) – în cazul unei linii <code>V</code>erticale, operație codificată prin <code>V</code><sub><code>k</code></sub></li>
+</ul>
+
+<p>Numerotarea dreptunghiului se realizează cu numerele naturale <code>1</code>, <code>2</code>, <code>3</code>, … în această ordine.<br>
+Codul <code>C</code> pentru segmentarea și numerotarea unui dreptunghi se definește recursiv. Dacă <code>C1</code> și <code>C2</code> sunt coduri de segmentare și numerotare, atunci:</p>
+
+<ul>
+	<li><code>*</code> – în fiecare căsuță a dreptunghiului se va scrie valoarea curentă a numerotării. După aceea, această valoare este incrementată pentru a fi folosită de o ulterioară operație de tipul <code>*</code>;</li>
+	<li><code>HkC1C2</code> – se trasează linia orizontală la poziția <code>k</code>, se segmentează și numerotează dreptunghiul de sus conform codului <code>C1</code>, apoi se continuă cu segmentarea și numerotarea dreptunghiului de jos conform codului <code>C2</code>;</li>
+	<li><code>VkC1C2</code> – se trasează linia verticală la poziția <code>k</code>, se segmentează și numerotează dreptunghiul din stânga conform codului <code>C1</code>, apoi se continuă cu segmentarea și numerotarea dreptunghiului din dreapta conform codului <code>C2</code>.</li>
+</ul>
+
+<p>De exemplu, dreptunghiul de dimensiuni <code>8 x 6</code> (<code>8</code> linii, <code>6</code> coloane) segmentat și numerotat conform codului <code>C = H5H3V2**V3**V5V2***</code>, va arăta ca în Figura 1.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-dreptunghi2-001-jpg.jpg"></p>
+
+<p>Un cod de segmentare și numerotare <code>C</code> este valid pentru un dreptunghi de dimensiuni <code>N x M</code> dacă și numai dacă pentru fiecare operație de tipul <code>HkC1C2</code> și de tipul <code>VkC1C2</code> din cadrul lui <code>C</code>, poziția <code>k</code> la care se trage linia orizontală, sau verticală respectiv, se află strict în interiorul dreptunghiului curent (adică pe ambele părți ale liniei trasate există cel puțin o linie si cel puțin o coloană rămase care vor fi ulterior numerotate conform definiției recursive a codului <code>C</code>).</p>
+
+<p>Un cod de segmentare și numerotare <code>C</code> valid pentru un dreptunghi de dimensiuni <code>N x M</code> generează mai multe subdiviziuni (dreptunghiuri mai mici) delimitate de liniile orizontale și verticale trasate în cadrul lui <code>C</code>. De exemplu, pentru dreptunghiul din Figura 1 codul <code>C</code> din exemplul de mai sus generează <code>7</code> subdiviziuni.</p>
+
+<p>Codul <code>C</code> nu este unic determinat. Pentru dreptunghiul segmentat și numerotat din Figura 1 există <code>4</code> coduri echivalente, pe care le scriem în ordine lexicografică în cele ce urmează:<br>
+1. <code>H3V2**H2V3**V2*V3**</code><br>
+2. <code>H3V2**H2V3**V5V2***</code><br>
+3. <code>H5H3V2**V3**V2*V3**</code><br>
+4. <code>H5H3V2**V3**V5V2***</code></p>
+
+<p>Pentru stabilirea ordinii lexicografice a două codificări, fiecare informație compactă ce face parte din secvență se va considera entitate separată: adică simbolurile <code>H</code>, <code>V</code>, <code>*</code> de tip caracter, respectiv numerele <code>k</code> de tip întreg, indiferent de numărul de cifre din care sunt formate.</p>
+
+<p>La nivel de caractere ordinea lexicografică este <code>H &lt; V &lt; *</code>. Numerele se vor compara în funcție de valoarea lor, de exemplu <code>1 &lt; 7 &lt; 12</code>. Vom considera că un caracter este mai mic lexicografic decât un număr întreg.</p>
+
+<p>De exemplu, următoarele două coduri echivalente sunt scrise în ordine lexicografică:<br>
+1. <code>V7*V6**</code><br>
+2. <code>V13V7***</code><br>
+și corespund dreptunghiului de mai jos:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-dreptunghi2-02-jpg.jpg"></p>
+
+<h1>Cerința</h1>
+
+<p>Se dă un cod de segmentare și numerotare și se cere să se afle:<br>
+1. numărul de subdiviziuni pe care acesta le generează;<br>
+2. dimensiunile unui dreptunghi de arie minimă pentru care acest cod este valid;<br>
+3. numărul de codificări distincte modulo <code>1.000.000.007</code>, echivalente cu codul citit (în acest număr va fi inclus și codul inițial);<br>
+4. primul cod în ordine lexicografică echivalent cu cel dat.</p>
+
+<h1>Date de intrare</h1>
+
+<p>De la intrarea standard se vor citi:</p>
+
+<ul>
+	<li>de pe prima linie valoarea lui <code>P</code>;</li>
+	<li>de pe linia următoare un șir de caractere reprezentând codul de segmentare și numerotare <code>C</code>.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<ul>
+	<li>Dacă valoarea citită pentru <code>P</code> este <code>1</code>, atunci la ieșirea standard se va tipări numărul de subdiviziuni pe care codul <code>C</code> le generează;</li>
+	<li>Dacă valoarea citită pentru <code>P</code> este <code>2</code>, atunci la ieșirea standard se vor tipări două numere <code>N</code> și <code>M</code> separate printr-un spațiu, dimensiunile unui dreptunghi de arie minimă pentru care codul <code>C</code> citit este valid. În caz că există mai multe, se acceptă oricare;</li>
+	<li>Dacă valoarea citită pentru <code>P</code> este <code>3</code>, atunci la ieșirea standard se va tipări numărul de codificări distincte modulo <code>1.000.000.007</code> echivalente cu codul citit (în acest număr va fi inclus și codul <code>C</code> citit).</li>
+	<li>Dacă valoarea citită pentru <code>P</code> este <code>4</code>, atunci la ieșirea standard se va tipări primul cod în ordine lexicografică echivalent cu cel dat;</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>0 &lt; lungimea codului C (număr de caractere) &lt; 350</code></li>
+	<li>Pentru teste în valoare de 14 puncte avem <code>P = 1</code>.</li>
+	<li>Pentru teste în valoare de 21 de puncte avem <code>P = 2</code>.</li>
+	<li>Pentru teste în valoare de 29 de puncte avem <code>P = 3</code>.</li>
+	<li>Pentru teste în valoare de 36 de puncte avem <code>P = 4</code>.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>1
+H3V2**H2V3**V2*V3**</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>7</pre>
+
+<h3>Explicație</h3>
+
+<p>În urma segmentării se obțin <code>7</code> dreptunghiuri.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>2
+H3V2**H2V3**V2*V3**</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>6 6</pre>
+
+<h3>Explicație</h3>
+
+<p>Cel mai mic dreptunghi pentru care codul este valid are <code>6</code> linii și <code>6</code> coloane.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>3
+H3V2**H2V3**V2*V3**</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>4</pre>
+
+<h3>Explicație</h3>
+
+<p>Numărul codurilor echivalente cu cel citit este <code>4</code> (vezi exemplul din enunț).</p>
+
+<h1>Exemplul 4:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>4
+H3V2**H2V3**V2*V3**</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>H3V2**H2V3**V2*V3**</pre>
+
+<h3>Explicație</h3>
+
+<p>Primul cod în ordine lexicografică echivalent cu cel citit este <code>H3V2**H2V3**V2*V3**</code>.</p>		</article>
+		</body></html>

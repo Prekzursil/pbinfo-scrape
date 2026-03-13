@@ -1,0 +1,61 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4662"><article id="enunt">
+			<p>Profesorul de informatică trebuie să corecteze tezele a <code>m</code> elevi. Elevii au avut de rezolvat <code>n</code> probleme în teză, numerotate de la 1 la <code>n</code>. Fiecare elev a rezolvat toate problemele, deci profesorul are de corectat în total <code>m x n</code> probleme. El observă că luând lucrările la rând și corectând toate problemele din prima lucrare, apoi toate problemele din a doua lucrare, ș.a.m.d., nu obține întotdeauna cel mai mic timp total de corectare a tezelor. Profesorul are următoarea metodă de corectură:</p>
+
+<ul>
+	<li>Toate tezele se vor corecta în <code>f</code> faze <code>(1 ≤ f ≤ n)</code>.</li>
+	<li>În fiecare fază <code>i</code> se va decide asupra unei submulțimi de probleme care nu au fost deja corectate, <code>S</code><sub><code>i</code></sub>. Aceste probleme se vor corecta în toate tezele înainte să se revină la prima teză.</li>
+	<li>Formal, alegem <code>S</code><sub><code>i</code></sub> \( \subseteq \) <code>{1,...,n}</code> astfel încât <code>S</code><sub><code>i</code></sub> <code>∩ S</code><sub><code>j</code></sub> <code>= ∅</code>, pentru orice <code>i, j ∊ {1, ..., f}</code>, <code>i ≠ j</code> și <code>S</code><sub><code>1</code></sub> <code>∪ ... ∪ S</code><sub><code>f</code></sub> <code>= {1, ..., n}</code></li>
+</ul>
+
+<p>La începerea corectării fiecărei teze, trebuie identificat numele elevului, proces care durează exact <code>p</code> secunde de fiecare dată, chiar dacă se revine la aceeași teză de mai multe ori.</p>
+
+<p>După începerea corectării unei teze, căutarea fiecărei probleme durează <code>k</code> secunde. Corectarea primei probleme din submulțimea aleasă durează <code>t[1]</code> secunde, corectarea celei de-a doua probleme durează <code>t[2]</code> secunde ș.a.m.d. Se garantează că <code>t[1] &lt; t[2] &lt; ... &lt; t[n]</code>. De fiecare dată când se revine la o anumită teză și se reîncepe corectarea ei cu o altă submulțime de probleme, corectarea primei probleme din submulțime va dura din nou <code>t[1]</code> secunde.</p>
+
+<p>Valoarea <code>t[1]</code> va fi dată în fișierul de intrare împreună cu valorile <code>d[0], ..., d[q-1]</code>, din care se vor obține celelalte valori din șirul <code>t</code> prin formula: <code>t[i] = t[i-1] + d[i % q]</code>, pentru orice <code>i ∊ {2, ..., n}</code>, unde <code>x % y</code> semnifică restul împărțirii lui <code>x</code> la <code>y</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Să se determine timpul minim în care pot fi corectate cele <code>m</code> lucrări.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului de intrare <code>teze.in</code> se află numerele <code>n</code>, <code>m</code>, <code>p</code> și <code>k</code>, despărțite prin câte un spațiu. Pe a doua linie se află două valori <code>t1</code> și <code>q</code>, despărțite printr-un spațiu. Pe următoarele <code>q</code> linii se află valorile <code>d[0], ..., d[q-1]</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>În fișierul de ieșire <code>teze.out</code> se va scrie un singur număr, reprezentând numărul de secunde în care se pot corecta tezele modulo <code>1.000.000.007</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 1.500.000.000</code>, unde <code>n</code> este numărul problemelor din teze</li>
+	<li><code>1 ≤ m, q, k ≤ 1000</code>, unde <code>m</code> este numărul elevilor, <code>q</code> este lungimea șirului <code>d</code>, iar <code>k</code> reprezintă numărul de secunde necesar căutării unei probleme</li>
+	<li><code>1 ≤ p ≤ 10</code><sup><code>10</code></sup>, unde <code>p</code> este numărul de secunde necesar identificării numelui unui elev</li>
+	<li><code>1 ≤ t[1], d[i] ≤ 10</code></li>
+	<li>Pentru 5 puncte, <code>n ≤ 25</code></li>
+	<li>Pentru 10 puncte, <code>n ≤ 50</code></li>
+	<li>Pentru 20 de puncte, <code>n ≤ 10000</code></li>
+	<li>Pentru 30 de puncte, <code>n ≤ 10.000.000</code></li>
+	<li>Pentru 7 puncte, <code>q = 1</code></li>
+	<li>Pentru 8 puncte, <code>q = 2</code></li>
+	<li>Pentru 20 de puncte, fără alte restricții suplimentare</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>teze.in</code></p>
+
+<pre>2 10 5 2
+1 1 
+2</pre>
+
+<p><code>teze.out</code></p>
+
+<pre>130</pre>
+
+<h3>Explicație</h3>
+
+<p>Avem două probleme în teză, iar <code>t[1] = 1</code>, <code>t[2] = t[1] + d[0] = 1 + 2 = 3</code>. Dacă le corectăm împreună, timpul de corectare pentru fiecare teză va fi: <code>5</code> secunde pentru găsirea numelui elevului, <code>2</code> secunde pentru găsirea primei probleme, <code>1</code> secundă pentru corectarea primei probleme, <code>2</code> secunde pentru găsirea problemei a doua și <code>3</code> secunde pentru corectarea problemei a doua, deci în total <code>5 + 2 + 1 + 2 + 3 = 13</code> secunde pentru fiecare dintre cele <code>10</code> teze, adică <code>130</code> de secunde în total.</p>
+
+<p>O altă posibilitate este să corectăm prima dată problema <code>1</code> în toate tezele, iar pe urmă să corectăm problema <code>2</code> în toate tezele. Pentru corectarea primei probleme avem: <code>5</code> secunde începerea corectării, <code>2</code> secunde găsirea problemei și <code>1</code> secundă corectarea problemei, în total <code>5 + 2 + 1 = 8</code> pentru o teză, în total <code>80</code> de secunde pentru toate tezele. Pentru corectarea problemei <code>2</code> avem exact același calcul, rezultă în total <code>160</code> de secunde, deci prima metodă a fost mai eficientă și posibilitate mai bună nu există.</p>		</article>
+		</body></html>

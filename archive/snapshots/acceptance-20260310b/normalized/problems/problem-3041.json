@@ -1,0 +1,301 @@
+{
+  "id": 3041,
+  "slug": "venus",
+  "name": "venus",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3041/venus",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 91,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=91"
+    },
+    {
+      "id": 115,
+      "name": "Diverse",
+      "slug": "diverse",
+      "href": "/?pagina=probleme-lista&tag=115"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Scrieți un program care, cunoscând informațiile referitoare la cele <code>N</code> comenzi, determină pierderea minimă, precum și o planificare optimală.</p>",
+      "text": "Scrieți un program care, cunoscând informațiile referitoare la cele N comenzi, determină pierderea minimă, precum și o planificare optimală."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>venus.in</code> conține pe prima linie numărul natural <code>N</code>, reprezentând numărul de comenzi și numărul natural <code>T</code>, reprezentând numărul de ore necesare lui Vasile pentru a executa o comandă. Pe următoarele <code>N</code> linii se află informațiile despre comenzi, câte o comandă pe o linie, sub forma:<br>\n<code>V zi luna ora</code><br>\nunde <code>V</code> este valoarea comenzii, <code>zi</code> este ziua în care trebuie predată comanda (un număr natural cuprins între <code>1</code> și numărul de zile ale lunii), <code>luna</code> este denumirea lunii, iar <code>ora</code> este un număr natural cuprins între <code>0</code> și <code>23</code>. Valorile scrise pe aceeași linie sunt separate prin câte un spațiu. Comenzile se consideră numerotate de la <code>1</code> la <code>N</code> în ordinea din fișierul de intrare.</p>",
+      "text": "Fișierul de intrare venus.in conține pe prima linie numărul natural N, reprezentând numărul de comenzi și numărul natural T, reprezentând numărul de ore necesare lui Vasile pentru a executa o comandă. Pe următoarele N linii se află informațiile despre comenzi, câte o comandă pe o linie, sub forma: V zi luna ora unde V este valoarea comenzii, zi este ziua în care trebuie predată comanda (un număr natural cuprins între 1 și numărul de zile ale lunii), luna este denumirea lunii, iar ora este un număr natural cuprins între 0 și 23. Valorile scrise pe aceeași linie sunt separate prin câte un spațiu. Comenzile se consideră numerotate de la 1 la N în ordinea din fișierul de intrare."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>venus.out</code> va conține pe prima linie numărul natural <code>pmin</code>, reprezentând pierderea minimă. Pe a doua linie vor fi scrise <code>N</code> numere naturale distincte cuprinse între <code>1</code> și <code>N</code>, separate prin câte un spațiu, reprezentând o planificare optimală.</p>",
+      "text": "Fișierul de ieșire venus.out va conține pe prima linie numărul natural pmin, reprezentând pierderea minimă. Pe a doua linie vor fi scrise N numere naturale distincte cuprinse între 1 și N, separate prin câte un spațiu, reprezentând o planificare optimală."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 1000</code></li>\n\t<li><code>1 ≤ T ≤ 500</code></li>\n\t<li><code>1 ≤ V ≤ 10.000</code></li>\n\t<li>Numele lunilor vor fi scrise cu litere mici. Anul 2020 este an bisect, adică luna februarie are <code>29</code> de zile.</li>\n\t<li>Dacă există mai multe planificări optimale, se va accepta orice soluție corectă.</li>\n\t<li>Se acordă <code>50%</code> din punctajul pentru fiecare test pentru determinarea valorii <code>pmin</code>. Punctajul integral pentru fiecare test se acordă pentru rezolvarea ambelor cerințe (<code>pmin</code> şi o planificare optimală).</li>\n</ul>",
+      "text": "1 ≤ N ≤ 1000 1 ≤ T ≤ 500 1 ≤ V ≤ 10.000 Numele lunilor vor fi scrise cu litere mici. Anul 2020 este an bisect, adică luna februarie are 29 de zile. Dacă există mai multe planificări optimale, se va accepta orice soluție corectă. Se acordă 50% din punctajul pentru fiecare test pentru determinarea valorii pmin. Punctajul integral pentru fiecare test se acordă pentru rezolvarea ambelor cerințe (pmin şi o planificare optimală)."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>venus.in</code></p><pre>4 25\n90 10 ianuarie 20\n50 2 ianuarie 8\n20 4 ianuarie 3\n70 2 ianuarie 9</pre><p><code>venus.out</code></p><pre>50\n4 1 3 2</pre><h3>Explicație</h3><p>Începând cu <code>1 ianuarie ora 0</code>, Vasile execută comanda <code>4</code> și termină pe <code>2 ianuarie la ora 1.00</code>.<br>\nExecută apoi comanda <code>1</code> pe care o termină pe <code>3 ianuarie la ora 2.00</code>.<br>\nExecută apoi comanda <code>3</code> pe care o termină pe <code>4 ianuarie la ora 3.00</code>.<br>\nExecută apoi comanda <code>2</code> pe care o termină pe <code>5 ianuarie la ora 4.00</code>, ceea ce înseamnă că a depășit termenul de predare, deci pierde valoarea ei (<code>50</code>).<br>\nExistă și alte planificări optimale posibile. De exemplu, <code>4 3 1 2</code>.</p>",
+      "text": "venus.in4 25 90 10 ianuarie 20 50 2 ianuarie 8 20 4 ianuarie 3 70 2 ianuarie 9venus.out50 4 1 3 2ExplicațieÎncepând cu 1 ianuarie ora 0, Vasile execută comanda 4 și termină pe 2 ianuarie la ora 1.00. Execută apoi comanda 1 pe care o termină pe 3 ianuarie la ora 2.00. Execută apoi comanda 3 pe care o termină pe 4 ianuarie la ora 3.00. Execută apoi comanda 2 pe care o termină pe 5 ianuarie la ora 4.00, ceea ce înseamnă că a depășit termenul de predare, deci pierde valoarea ei (50). Există și alte planificări optimale posibile. De exemplu, 4 3 1 2."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Începând cu 1 ianuarie ora 0, Vasile execută comanda 4 și termină pe 2 ianuarie la ora 1.00. Execută apoi comanda 1 pe care o termină pe 3 ianuarie la ora 2.00. Execută apoi comanda 3 pe care o termină pe 4 ianuarie la ora 3.00. Execută apoi comanda 2 pe care o termină pe 5 ianuarie la ora 4.00, ceea ce înseamnă că a depășit termenul de predare, deci pierde valoarea ei (50). Există și alte planificări optimale posibile. De exemplu, 4 3 1 2."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 1000",
+    "1 ≤ T ≤ 500",
+    "1 ≤ V ≤ 10.000",
+    "Numele lunilor vor fi scrise cu litere mici. Anul 2020 este an bisect, adică luna februarie are 29 de zile.",
+    "Dacă există mai multe planificări optimale, se va accepta orice soluție corectă.",
+    "Se acordă 50% din punctajul pentru fiecare test pentru determinarea valorii pmin. Punctajul integral pentru fiecare test se acordă pentru rezolvarea ambelor cerințe (pmin şi o planificare optimală)."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q5529bd281e.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "10",
+    "intrare/ieșire": "venus.in / venus.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "8 MB / 4 MB",
+    "sursa problemei": "ONIGIM 2019 clasa a VII-a",
+    "autor": "Emanuela Cerchez",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 8,
+  "author": "Emanuela Cerchez",
+  "sourceAttribution": "ONIGIM 2019 clasa a VII-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3041/venus"
+}

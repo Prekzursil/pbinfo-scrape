@@ -1,0 +1,127 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4134"><article id="enunt">
+			<p>Pe planeta Quadratia, locuitorii folosesc forme pătrate în tot ceea ce construiesc. Ei au trimis pe solul planetei <code>N</code> mașini speciale de apărare, numite <strong>rovere</strong>, care se deplasează pe traiectorii ce descriu pătrate. Harta  planetei poate fi privită ca un tablou bidimensional cu număr infinit de linii și coloane, numerotarea acestora începând cu <code>1</code>. Fiecare element al acestui tablou se identifică prin numărul liniei, respectiv numărul coloanei pe care se găsește. </p>
+
+<p>Fiecare rover este descris prin <code>3</code> numere naturale nenule <code>L</code>, <code>C</code> și <code>R</code>, reprezentând poziția (linia <code>L</code> și coloana <code>C</code>) elementului din colțul din stânga-sus al pătratului ce descrie traiectoria, respectiv lungimea <code>R</code> a laturii acestuia. Toate roverele pornesc inițial din elementul din colțul stânga-sus al pătratului ce descrie traiectoria, pe care o parcurg în sensul acelor de ceasornic, traversând câte un element pe secundă. Ele sunt programate să parcurgă această traiectorie fără a se opri. Este posibil ca mai multe rovere să se afle, la un moment dat, la aceeași poziție de pe hartă.</p>
+
+<p>Rectilinienii sunt singurii dușmani ai quadratienilor, ei deosebindu-se de aceștia prin folosirea consecventă a liniilor drepte în tot ceea ce construiesc. Rectilinienii au construit o armă laser de mare putere, pe care vor să o folosească la distrugerea roverelor quadratiene. Arma a fost adusă în poziția <code>(1,1)</code> de pe harta planetei, adică elementul de pe prima linie și prima coloană. </p>
+
+<p>Arma poate emite <strong>o singură</strong> rază distructivă, timp de o secundă, dezafectând în acest timp toate roverele aflate în secunda respectivă pe diagonala principală a tabloului care descrie harta planetei. Arma nu poate fi detectată în primele <code>S</code> secunde. Traiectoria roverelor poate trece prin poziția în care a fost amplasată arma, fără a o putea detecta în primele <code>S</code> secunde.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-raza1-001-jpg.jpg"></p>
+
+<p>În imagine avem două rovere, acestea fiind identificate prin tripletele de numere <code>4, 2, 6</code>, respectiv <code>6, 9, 4</code>.  Traiectoria primului rover începe din poziția <code>(4, 2)</code> și are latura <code>6</code>. Numerele de pe traiectorie reprezintă secunda la care se parcurge respectivul element al tabloului. Roverul va ajunge din nou în poziția inițială la secundele <code>21, 41, 61, ...</code> Primul rover intersectează, la prima sa trecere, diagonala principală în două puncte: <code>(4, 4)</code> la secunda <code>3</code> și <code>(7, 7)</code> la secunda <code>9</code>. Al doilea rover intersectează diagonala principală într-un singur punct, <code>(9, 9)</code> la secundele <code>10, 22, 34, ...</code></p>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care să rezolve următoarele cerințe:</p>
+
+<ul>
+	<li>Determină numărul roverelor a căror traiectorie se intersectează cu diagonala principală a tabloului ce descrie harta.</li>
+	<li>Determină numărul maxim de rovere, care pot fi distruse simultan, într-o singură secundă, înainte de trecerea celor <code>S</code> secunde, precum și secunda minimă în care se poate realiza acest lucru.</li>
+</ul>
+
+<h1>Date de intrare</h1>
+
+<p>Datele de intrare se citesc din fișierul <code>raza.in</code>, care are următoarea structură:</p>
+
+<ul>
+	<li>pe prima linie se află numărul natural <code>T ∈ {1, 2}</code>, semnificând numărul cerinței de rezolvat.</li>
+	<li>pe a doua linie se află numerele naturale nenule <code>N</code> și <code>S</code>, separate printr-un spațiu, reprezentând numărul roverelor, respectiv numărul de secunde în care arma nu este detectată.</li>
+	<li>pe următoarele <code>N</code> linii se află câte 3 numere naturale nenule, <code>L</code> <code>C</code> <code>R</code>, separate prin câte un spațiu, reprezentând coordonatele poziției inițiale, respectiv lungimea laturii traiectoriei fiecărui rover.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>Datele de ieșire se vor afișa în fișierul <code>raza.out</code>, care are următoarea structură în funcție de cerință:</p>
+
+<ul>
+	<li>dacă <code>T = 1</code>, pe prima linie se va afișa numărul roverelor a căror traiectorie se intersectează cu diagonala principală;</li>
+	<li>dacă <code>T = 2</code>, pe prima linie se vor afișa două numere naturale, separate printr-un spațiu, reprezentând numărul maxim de rovere dezactivate și secunda minimă în care se poate realiza acest lucru.</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 10.000</code></li>
+	<li><code>1 ≤ S ≤ 100.000</code></li>
+	<li><code>1 ≤ L, C ≤ 50.000</code></li>
+	<li><code>3 ≤ R ≤ 1000</code></li>
+	<li><code>1 ≤ Numărul maxim de rovere care se intersectează cu raza armei ≤ 1000</code>.</li>
+	<li>Pentru 28 de puncte, <code>T = 1</code></li>
+	<li>Pentru 72 de puncte, <code>T = 2</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>raza.in</code></p>
+
+<pre>1
+2 100
+4 2 6
+6 9 4</pre>
+
+<p><code>raza.out</code></p>
+
+<pre>2</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerința este 1. Exemplul reprezintă desenul din enunț.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>raza.in</code></p>
+
+<pre>2
+2 5
+4 2 6
+6 9 4</pre>
+
+<p><code>raza.out</code></p>
+
+<pre>1 3</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerința este 2. Este distrus doar primul rover, momentul în care se distruge acest rover este <code>3</code>.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>raza.in</code></p>
+
+<pre>1
+5 10000
+3 3 3
+4 7 4
+6 4 3
+9 2 3
+9 7 5</pre>
+
+<p><code>raza.out</code></p>
+
+<pre>4</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerința este 1. Sunt patru rovere care intersectează diagonala.</p>
+
+<h1>Exemplul 4:</h1>
+
+<p><code>raza.in</code></p>
+
+<pre>2
+5 10000
+3 3 3
+4 7 4
+6 4 3
+9 2 3
+9 7 5</pre>
+
+<p><code>raza.out</code></p>
+
+<pre>2 3</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerința este 2. Numărul maxim de rovere, care pot fi distruse este <code>2</code>. Acest lucru se poate realiza cel mai devreme la secunda <code>3</code>.</p>		</article>
+		</body></html>

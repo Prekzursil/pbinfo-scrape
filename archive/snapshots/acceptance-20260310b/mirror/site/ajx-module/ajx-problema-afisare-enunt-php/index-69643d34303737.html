@@ -1,0 +1,125 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4077"><article id="enunt">
+			<p><strong>Motivație:</strong> Având în vedere apariția limbajelor de programare moderne precum <code>Python</code> ce oferă programatorului posibilitatea de a memora și efectua operații aritmetice asupra numerelor întregi mari fără niciun efort suplimentar, necesitatea folosirii acestora în concursurile de informatică a dispărut. Totuși, multe astfel de probleme apar în continuare pe site-urile de informatică românești precum <code>pbinfo</code>, de aceea am considerat că implementarea unei astfel de structuri de date este utilă și în <code>C++</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Definiți în <code>C++</code> clasa <code>big_int</code> cu următoarea structură:</p>
+
+<pre class="code_cpp">class big_int
+{
+private:
+    int sign; // -1 daca numarul este negativ, +1 daca este pozitiv
+    string digits; // cifrele numarului, stocate in ordine inversa
+public:
+    big_int()
+    {
+        // initializare implicita cu 0
+    }
+    big_int(string s)
+    {
+        // initializare prin intermediul unui sir de caractere
+    }
+    big_int(int n)
+    {
+        // initializare prin intermediul unui numar intre -2^31 si 2^31 - 1
+    }
+    operator string() const
+    {
+        // conversie la sir de caractere
+    }
+    friend bool operator == (const big_int&amp; a, const big_int&amp; b)
+    {
+        // comparator ==
+    }
+	friend bool operator &lt; (const big_int&amp; a, const big_int&amp; b)
+    {
+        // comparator &lt;
+    }
+    big_int abs() const
+    {
+        // valoarea absoluta
+    }
+    big_int operator - () const
+    {
+        // opusul (inversul in raport cu adunarea)
+    }
+    big_int operator + (const big_int&amp; b) const
+    {
+        // suma a 2 numere
+    }
+    big_int operator - (const big_int&amp; b) const
+    {
+        // diferenta a 2 numere
+    }
+    big_int operator * (const big_int&amp; b) const
+    {
+        // produsul a 2 numere
+    }
+    big_int operator / (const big_int&amp; b) const
+    {
+        // catul impartirii a 2 numere
+    }
+    big_int operator % (const big_int&amp; b) const
+    {
+        // restul impartirii a 2 numere pozitive
+    }
+    friend istream&amp; operator &gt;&gt; (istream&amp; in, big_int&amp; n)
+    {
+        // citire prin intermediul stream-urilor
+    }
+    friend ostream&amp; operator &lt;&lt; (ostream&amp; out, const big_int&amp; n)
+    {
+        // scriere prin intermediul stream-urilor
+    }
+};</pre>
+
+<p>Această clasă va fi integrată în următorul program:</p>
+
+<pre class="code_cpp">#include &lt;bits/stdc++.h&gt;
+
+using namespace std;
+
+// codul scris de tine
+
+int main()
+{
+    big_int a = 96, b("420");
+    cin &gt;&gt; a &gt;&gt; b;
+    cout &lt;&lt; a + b &lt;&lt; "\n";
+    cout &lt;&lt; -a + b &lt;&lt; "\n";
+    cout &lt;&lt; a - b &lt;&lt; "\n";
+    cout &lt;&lt; a * b &lt;&lt; "\n";
+    cout &lt;&lt; a / b &lt;&lt; "\n";
+    cout &lt;&lt; a.abs() % b.abs() &lt;&lt; "\n";
+    if(a &lt; b)
+        cout &lt;&lt; "a &lt; b\n";
+    else if(a == b)
+        cout &lt;&lt; "a = b\n";
+    else cout &lt;&lt; "a &gt; b\n";
+
+    return 0;
+}</pre>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><strong>nu</strong> se vor face împărțiri la <code>0</code></li>
+	<li>operatorul <code>/</code> funcționează la fel ca omologul standard din <code>C++</code>, adică e.x. <code>-3 / 2 = -1</code></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>71 8</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>79
+-63
+63
+568
+8
+7
+a &gt; b</pre>		</article>
+		</body></html>

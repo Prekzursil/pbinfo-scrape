@@ -1,0 +1,70 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4941"><article id="enunt">
+			<p>Tot tărâmul numericesc a fost invitat la balul din Numeradonia. Fiecare numerian (reprezentat printr-un număr natural nenul) a venit în sala de bal și încearcă să-și găsească perechea. Regula după care un numerian <code>x</code> îl poate invita la dans pe un alt numerian <code>y</code> este în funcție de dans:<br>
+- Valsul prim: numerianul <code>x</code> îl poate invita la dans pe numerianul <code>y</code> dacă <code>x + y</code> este număr prim.<br>
+- Salsa fracțional: numerianul <code>x</code> îl poate invita la dans pe numerianul <code>y</code> dacă mulțimea cifrelor din <code>y</code> este inclusă în mulțimea cifrelor din <code>x</code>. (Fiecare cifră care apare în <code>y</code> apare și în <code>x</code>, cel puțin o dată; multiplicitatea nu contează.)<br>
+Cifrimina își dorește să știe câți parteneri de dans ar putea găsi, în funcție de cerință.</p>
+
+<h1>Cerința</h1>
+
+<p>Se citește numărul natural <code>C</code> (numărul cerinței), numărul natural <code>n</code>, valoarea <code>D</code> a Cifriminei și apoi un șir de <code>n</code> numere naturale nenule <code>a1</code>, <code>a2</code>, …, <code>an</code> (numerienii din sală).<br>
+1.	Dacă <code>C = 1</code>, determinați pe câți numerieni îi poate invita Cifrimina la valsul prim (adică numărul de valori ai pentru care <code>D + ai</code> este prim).<br>
+2.	Dacă <code>C = 2</code>, determinați pe câți numerieni îi poate invita Cifrimina la salsa fracțional (adică numărul de valori ai ale căror cifre apar toate în <code>D</code>).<br>
+Observație: fiecare numerian este considerat distinct prin poziția sa în șir (dacă aceeași valoare apare de mai multe ori, fiecare apariție contează separat).</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>dans.in</code> conține pe prima linie: <code>C</code>, <code>n</code>, <code>D</code>; pe a doua linie: <code>n</code> numere naturale nenule <code>a1</code>, <code>a2</code>, <code>a3</code>, …, <code>an</code> separate prin spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>dans.out</code> va conține:</p>
+
+<ul>
+	<li>Dacă cerința <code>C = 1</code>, atunci pe prima linie a fișierului de ieșire <code>dans.out</code> se va scrie un număr natural reprezentând numărul de numerieni din șir pe care îi poate invita Cifrimina la valsul prim, adică numărul de valori ai pentru care <code>D + ai</code> este număr prim.</li>
+	<li>Dacă cerința <code>C = 2</code>, atunci pe prima linie a fișierului de ieșire <code>dans.out</code> se va scrie un număr natural reprezentând numărul de numerieni din șir pe care îi poate invita Cifrimina la salsa fracțional, adică numărul de valori ai ale căror cifre apar toate în numărul <code>D</code> (multiplicitatea cifrelor nu contează).</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 1.000.000</code></li>
+	<li><code>1 ≤ D ≤ 1.000.000</code>,</li>
+	<li><code>0 ≤ ai ≤ 1.000.000</code></li>
+	<li>Pentru teste în valoare de 60p, <code>C = 1</code></li>
+	<li>Pentru teste în valoare de 40p, <code>C = 1</code> și <code>n ≤ 1000</code></li>
+	<li>Pentru teste în valoare de 30p, <code>C = 2</code></li>
+	<li>Se acordă 10 puncte pentru exemple</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>dans.in</code></p>
+
+<pre>1 6 10
+1 2 3 4 7 10</pre>
+
+<p><code>dans.out</code></p>
+
+<pre>3</pre>
+
+<h3>Explicație</h3>
+
+<p>Verificăm sumele cu <code>D = 10</code>: <code>10 + 1 = 11</code> (e prim), <code>10 + 2 = 12</code> (nu e prim), <code>10 + 3 = 13</code> (prim), <code>10 + 4 = 14</code> (nu e prim),<br>
+<code>10 + 7 = 17</code> (e prim), <code>10 + 10 = 20</code> (nu e prim). Răspuns: <code>3</code> parteneri.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>dans.in</code></p>
+
+<pre>2 7 120
+2001 33 5 101 12 222 900</pre>
+
+<p><code>dans.out</code></p>
+
+<pre>4</pre>
+
+<h3>Explicație</h3>
+
+<p>Cifrele lui <code>D = 120</code>: <code>{0,1,2}</code>. Acceptate: <code>2001</code> (0,1,2), <code>101</code> (0,1), <code>12</code> (1,2), <code>222</code> (2).<br>
+Respinse: <code>33</code> (3), <code>5</code> (5), <code>900</code> (9).</p>		</article>
+		</body></html>

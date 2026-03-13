@@ -1,0 +1,74 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1066"><article id="enunt">
+			<p>Institutul Naţional de Robotică Avansată realizează o serie de teste ultimei generaţii de roboţi inteligenţi proiectaţi de specialiştii acestuia. Sistemul de testare se bazează pe o reţea  de senzori formată din <code>n</code> segmente egale dispuse orizontal şi <code>n</code> segmente egale dispuse vertical. Distanţa între două segmente alăturate orizontale, respectiv verticale este de <code>1</code> metru. Fiecare segment orizontal este în contact cu fiecare segment vertical. Denumim nod un punct în care un segment orizontal şi unul vertical vin în contact. Segmentele sunt numerotate: cele orizontale de sus în jos începând de la <code>1</code> iar cele verticale de la stânga la dreapta începând de la <code>1</code>. </p>
+
+<p><img align="left" alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1051-1075-ai-png.png"> Un nod va fi identificat prin două numere: primul reprezintă numărul segmentului orizontal iar al doilea numărul segmentului vertical care vin în contact în respectivul nod. </p>
+
+<p>Într-unul dintre nodurile reţelei se află o ţintă. În alte două noduri se află câte o sursă ce emite o rază laser. O astfel de sursă emite raza într-o singură direcţie. Raza laser are o grosime neglijabilă. Cele două surse sunt astfel orientate încât raza emisă de fiecare “loveşte” ţinta. Cele două noduri în care sunt plasate sursele sunt astfel alese încât cele două raze nu se intersectează decât în nodul unde se află ţinta.</p>
+
+<p>În alte două noduri ale reţelei se află câte un robot. Fiecare robot se poate deplasa dintr-un nod în cele vecine (cele aflate sus, jos, în stânga şi în dreapta), dar fără să iasă din cadrul reţelei. Roboţii se deplasează cu <code>1</code> m/secundă.</p>
+
+<p>Se efectuează experimente în care roboţii sunt programaţi  să se deplaseze prin reţea cu scopul de a proteja ţinta faţă de cele două raze laser. Un robot poate proteja ţinta fie ocupând nodul unde se află sursa, fie ocupând un nod prin care trece raza laser în drumul de la sursă către ţintă (razele laser nu “ocolesc” roboţii). Dimensiunea roboţilor este atât de mică încât, în acest al doilea caz, ei protejează ţinta faţă de raza laser doar când nodurile unde sunt sursa, ţinta şi robotul sunt coliniare iar robotul este între sursă şi ţintă. În momentul în care un robot ajunge într-un nod unde protejează ţinta faţă de una dintre raze, el se poate opri sau poate să îşi continue deplasarea. Dacă îşi continuă deplasarea astfel încât noua poziţie ocupată de acel robot şi poziţiile ţintei şi sursei nu mai sunt coliniare, atunci acel robot nu mai protejează ţinta. Din modul în care sunt alese poziţiile nodurilor pentru ţintă şi sursele laser rezultă că nu există nicio poziţie în care un robot să protejeze simultan ţinta faţă de ambele raze. </p>
+
+<p>Fiecare robot este dotat cu o reţea neuronală şi poate învăţa din experimentele anterioare pe unde să se deplaseze. Pentru a mări capacitatea de adaptare a roboţilor, în <code>k</code> noduri ale reţelei sunt aşezate obstacole care fac ca roboţii să nu poată trece prin nodurile respective. Deoarece obstacolele folosite sunt transparente, razele laser pot trece prin acestea fără a le fi afectată intensitatea sau direcţia. Două sau mai multe obstacole dispuse pe acelaşi segment, în noduri alăturate, formează un zid. Lungimea unui zid este egală cu numărul de obstacole din care este alcătuit.</p>
+
+<h1>Cerinţă</h1>
+
+<p>1) Determinaţi lungimea maximă a unui zid.<br>
+2) Determinaţi numărul minim de secunde în care cei doi roboţi pot proteja ţinta faţă de cele două raze laser. </p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>ai.in</code> conține <br>
+</p><ul>
+	<li>pe prima linie o valoare naturală <code>n</code>, reprezentând numărul segmentelor ce compun reţeaua;</li>
+	<li>pe a doua linie cinci perechi de valori naturale separate prin câte un spaţiu <code>T1 T2 S1 S2 S3 S4 R1 R2 R3 R4</code> cu următoarea semnificaţie: <code>T1 T2</code>  reprezintă coordonatele nodului unde se află ţinta, <code>S1 S2</code> coordonatele nodului în care este amplasată prima sursă, <code>S3 S4</code> coordonatele nodului în care este amplasată a doua sursă, <code>R1 R2</code>  coordonatele poziţiei iniţiale a primului robot, respectiv  <code>R3 R4</code>  coordonatele poziţiei iniţiale a celui de-al doilea robot;</li>
+	<li>pe a treia linie o valoare naturală <code>k</code>, reprezentând numărul obstacolelor din reţea;</li>
+	<li>pe următoarele  <code>k</code> linii se găseşte câte o pereche de valori naturale separate printr-un spaţiu. Fiecare pereche reprezintă coordonatele unui nod în care este amplasat un obstacol.</li><br>
+</ul><p></p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>ai.out</code> va conține pe prima linie un număr natural ce reprezintă răspunsul la cerinţa 1) iar pe a doua linie un număr natural care reprezintă răspunsul la cerinţa 2).</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>n ≤ 1000</code></li>
+	<li><code>k ≤ 150000</code></li>
+	<li>la începutul experimentului poziţiile ţintei, surselor laser, roboţilor şi obstacolelor sunt diferite.</li>
+	<li>roboţii nu pot ocupa şi nu pot trece prin nodul în care se află ţinta,</li>
+	<li>roboţii pot ocupa un nod în acelaşi timp.</li>
+	<li>un robot nu poate proteja ţinta faţă de o rază decât atunci când este plasat exact într-un nod, nu şi atunci când se află între două noduri.</li>
+	<li>un obstacol poate să aparţină în acelaşi timp atât unui zid orizontal cât şi unui zid vertical.</li>
+	<li>dacă fişierul de ieşire conţine o singură valoare, se consideră că aceasta reprezintă răspunsul la prima cerinţă</li>
+	<li>în toate testele efectuate, există cel puţin o posibilitate ca ţinta să fie apărată de către una dintre raze de unul dintre roboţi iar faţă de cealaltă rază să fie apărată de celălalt robot.</li>
+	<li>pentru rezolvarea primei cerinţe se acordă 20% din punctaj; pentru rezolvarea celei de-a doua cerinţe se acordă 80% din punctaj.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>ai.in</code></p>
+
+<pre>6
+4 4 1 1 6 5 1 3 3 4
+8
+1 2 
+2 3 
+2 5 
+4 2 
+6 2 
+2 2 
+2 4 
+5 2</pre>
+
+<p><code>ai.out</code></p>
+
+<pre>4
+8</pre>
+
+<h1>Explicație</h1>
+
+<p>Cel mai lung zid are lungimea <code>4</code> (este cel plasat pe segmentul orizontal cu numărul <code>2</code>); obstacolele de pe segmentul vertical <code>2</code> formează două ziduri cu lungimile <code>2</code> şi <code>3</code>.</p>
+
+<p>Primul robot ajunge în <code>4</code> secunde în poziţia <code>6 5</code> protejând astfel ţinta faţă de raza emisă de sursa din poziţia <code>6 5</code> iar al doilea în <code>8</code> secunde în poziţia <code>3 3</code> protejând astfel ţinta faţă de raza emisă de sursa din poziţia <code>1 1</code>. După <code>8</code> secunde ţinta e protejată faţă de ambele raze laser.</p>		</article>
+		</body></html>

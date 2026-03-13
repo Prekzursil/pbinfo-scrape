@@ -1,0 +1,303 @@
+{
+  "id": 3826,
+  "slug": "b-arraygcd",
+  "name": "B-ArrayGCD",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3826/b-arraygcd",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 91,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=91"
+    },
+    {
+      "id": 115,
+      "name": "Diverse",
+      "slug": "diverse",
+      "href": "/?pagina=probleme-lista&tag=115"
+    }
+  ],
+  "tags": [
+    "Eratostene",
+    "Combinatorica",
+    "Exponentiere rapida"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Aveți la dispoziție toate numerele naturale de la <code>1...M</code> pentru a forma vectori de lungime <code>N</code>. De exemplu , Pentru <code>N = 3</code> și <code>M = 200</code> , un posibil vector este <code>[199 , 41 , 41]</code>. Pentru fiecare vector distinct care poate fi creat ( doi vectori <code>A</code> și <code>B</code> sunt distincți dacă există cel puțin un <code>i</code> astfel încât <code>A[i] != B[i]</code>) , se cere să determinați cel mai mare divizor comun al elementelor sale. Care este suma valorilor determinate ? </p>",
+      "text": "Aveți la dispoziție toate numerele naturale de la 1...M pentru a forma vectori de lungime N. De exemplu , Pentru N = 3 și M = 200 , un posibil vector este [199 , 41 , 41]. Pentru fiecare vector distinct care poate fi creat ( doi vectori A și B sunt distincți dacă există cel puțin un i astfel încât A[i] != B[i]) , se cere să determinați cel mai mare divizor comun al elementelor sale. Care este suma valorilor determinate ?"
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Inputul conține pe prima linie două numere naturale <code>N</code> și <code>M</code>  cu semnificația din enunț. </p>",
+      "text": "Inputul conține pe prima linie două numere naturale N și M cu semnificația din enunț."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Outputul conține răspunsul cerut modulo <code>666013</code>.</p>",
+      "text": "Outputul conține răspunsul cerut modulo 666013."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>N &lt;= 1.000.000.000 , M &lt;= 1.000.000</code>.</li>\n\t<li>Pentru teste în valoare de <code>20 puncte N &lt;= 6 si M &lt;= 8</code>.</li>\n\t<li>Pentru alte teste în valoare de <code>40 puncte , N &lt;= 100000 si M &lt;= 100</code></li>\n\t<li>Pentru restul de <code>40 puncte</code> se respectă restricțiile inițiale.</li>\n</ul>",
+      "text": "N <= 1.000.000.000 , M <= 1.000.000. Pentru teste în valoare de 20 puncte N <= 6 si M <= 8. Pentru alte teste în valoare de 40 puncte , N <= 100000 si M <= 100 Pentru restul de 40 puncte se respectă restricțiile inițiale."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><strong>Intrare</strong></p><pre>2 3</pre><p><strong>Ieșire</strong></p><pre>12</pre><p><strong>Intrare</strong></p><pre>300 100</pre><p><strong>Ieșire</strong></p><pre>44076</pre><h3>Explicație</h3><p>În primul exemplu , vectorii de lungime 2 formați cu elementele din invervalul <code>1...3</code> sunt : <code>[1 , 1] , [1 , 2] , [1 , 3] , [2 ,1] , [2 , 2] , [2 , 3] , [3 , 1] , [3 , 2] , [3 , 3]</code>. Suma care trebuie calculată este :  <code>gcd(1 , 1) + gcd(1 , 2) + gcd(1 , 3) + gcd(2 , 1) + gcd(2 , 2) + gcd(2 , 3) + gcd(3 , 1) + gcd(3 , 2) + gcd(3 , 3)</code> = <code>1+1+1+1+2+1+1+1+3 = 12</code> , unde cu <code>gcd(a , b)</code> s-a notat cel mai mare divizor comun al lui <code>a</code> și <code>b</code>.</p>",
+      "text": "Intrare2 3Ieșire12Intrare300 100Ieșire44076ExplicațieÎn primul exemplu , vectorii de lungime 2 formați cu elementele din invervalul 1...3 sunt : [1 , 1] , [1 , 2] , [1 , 3] , [2 ,1] , [2 , 2] , [2 , 3] , [3 , 1] , [3 , 2] , [3 , 3]. Suma care trebuie calculată este : gcd(1 , 1) + gcd(1 , 2) + gcd(1 , 3) + gcd(2 , 1) + gcd(2 , 2) + gcd(2 , 3) + gcd(3 , 1) + gcd(3 , 2) + gcd(3 , 3) = 1+1+1+1+2+1+1+1+3 = 12 , unde cu gcd(a , b) s-a notat cel mai mare divizor comun al lui a și b."
+    }
+  ],
+  "examples": [
+    {
+      "input": "300 100",
+      "output": "44076",
+      "explanation": "În primul exemplu , vectorii de lungime 2 formați cu elementele din invervalul 1...3 sunt : [1 , 1] , [1 , 2] , [1 , 3] , [2 ,1] , [2 , 2] , [2 , 3] , [3 , 1] , [3 , 2] , [3 , 3]. Suma care trebuie calculată este : gcd(1 , 1) + gcd(1 , 2) + gcd(1 , 3) + gcd(2 , 1) + gcd(2 , 2) + gcd(2 , 3) + gcd(3 , 1) + gcd(3 , 2) + gcd(3 , 3) = 1+1+1+1+2+1+1+1+3 = 12 , unde cu gcd(a , b) s-a notat cel mai mare divizor comun al lui a și b."
+    }
+  ],
+  "constraints": [
+    "N <= 1.000.000.000 , M <= 1.000.000.",
+    "Pentru teste în valoare de 20 puncte N <= 6 si M <= 8.",
+    "Pentru alte teste în valoare de 40 puncte , N <= 100000 si M <= 100",
+    "Pentru restul de 40 puncte se respectă restricțiile inițiale."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qa549125208.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Iacob Tudor (IacobTudor)",
+    "clasa": "10",
+    "intrare/ieșire": "tastatură / ecran",
+    "limită timp": "0.85 secunde",
+    "limită memorie": "64 MB / 32 MB",
+    "sursa problemei": "infoleague.net runda de antrenament, problema B.",
+    "autor": "Cozma Tiberiu Ștefan",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.85,
+  "memoryLimitMb": 64,
+  "author": "Cozma Tiberiu Ștefan",
+  "sourceAttribution": "infoleague.net runda de antrenament, problema B.",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3826/b-arraygcd"
+}

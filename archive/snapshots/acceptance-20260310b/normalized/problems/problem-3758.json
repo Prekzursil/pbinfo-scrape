@@ -1,0 +1,309 @@
+{
+  "id": 3758,
+  "slug": "inno",
+  "name": "inno",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3758/inno",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 21,
+      "name": "Probleme cu secvențe",
+      "slug": "probleme-cu-secven-e",
+      "href": "/?pagina=probleme-lista&tag=21"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Să se determine în câte moduri se poate elimina o secvență astfel încât elementele rămase să formeze șir <strong>inno</strong>.</p>",
+      "text": "Să se determine în câte moduri se poate elimina o secvență astfel încât elementele rămase să formeze șir inno."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>inno.in</code> conține pe prima linie numerele naturale <code>n</code> și <code>k</code>. Pe linia a doua se află <code>n</code> numere naturale reprezentând elementele șirului.</p>",
+      "text": "Fișierul de intrare inno.in conține pe prima linie numerele naturale n și k. Pe linia a doua se află n numere naturale reprezentând elementele șirului."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>inno.out</code> va conține pe prima linie un singur număr natural reprezentând numărul de moduri de a elimina o secvență astfel încât șirul rămas să fie <strong>inno</strong>.</p>",
+      "text": "Fișierul de ieșire inno.out va conține pe prima linie un singur număr natural reprezentând numărul de moduri de a elimina o secvență astfel încât șirul rămas să fie inno."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>3 ≤ n ≤ 200.000</code>;</li>\n\t<li><code>1 ≤ k ≤ 29</code>;</li>\n\t<li><code>0 ≤ a[i] ≤ 2</code><sup><code>31</code></sup> <code>- 1</code>;</li>\n\t<li><code>&amp;</code> este operatorul de conjuncție pe biți. Dacă <code>x</code> și <code>y</code> sunt valori binare, atunci expresia <code>x &amp; y</code> este egală cu <code>1</code> dacă și numai dacă <code>x = 1</code> și <code>y = 1</code>. Deci <code>1 &amp; 1 = 1</code>, <code>0 &amp; 1 = 0</code>, <code>1 &amp; 0 = 0</code>, <code>0 &amp; 0 = 0</code>. Dacă <code>a</code> și <code>b</code> sunt numere naturale, atunci expresia <code>a &amp; b</code> se efectuează la nivelul reprezentării în baza <code>2</code>. De exemplu, dacă <code>a = 12</code> și <code>b = 20</code>, atunci <code>a &amp; b = 12 &amp; 20 = 01100</code><sub><code>(2)</code></sub> <code>&amp; 10100</code><sub><code>(2)</code></sub> <code>= 00100</code><sub><code>(2)</code></sub> <code>= 4</code><sub><code>(10)</code></sub>;</li>\n</ul>",
+      "text": "3 ≤ n ≤ 200.000; 1 ≤ k ≤ 29; 0 ≤ a[i] ≤ 231 - 1; & este operatorul de conjuncție pe biți. Dacă x și y sunt valori binare, atunci expresia x & y este egală cu 1 dacă și numai dacă x = 1 și y = 1. Deci 1 & 1 = 1, 0 & 1 = 0, 1 & 0 = 0, 0 & 0 = 0. Dacă a și b sunt numere naturale, atunci expresia a & b se efectuează la nivelul reprezentării în baza 2. De exemplu, dacă a = 12 și b = 20, atunci a & b = 12 & 20 = 01100(2) & 10100(2) = 00100(2) = 4(10);"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>inno.in</code></p><pre>4 2\n10 7 5 15</pre><p><code>inno.out</code></p><pre>5</pre><h3>Explicație</h3><p>Modalitățile sunt:<br>\n- se elimină <code>10</code> și rămâne șirul <code>7 5 15</code>, iar <code>7 &amp; 5 &amp; 15 = 5</code>, care are <code>2</code> biți de <code>1</code><br>\n- se elimină <code>10 7</code> și rămâne șirul <code>5 15</code>, iar <code>5 &amp; 15 = 5</code>, care are <code>2</code> biți de <code>1</code><br>\n- se elimină <code>10 7 5</code> și rămâne șirul <code>15</code>, iar <code>15</code> are <code>4</code> biți de <code>1</code><br>\n- se elimină <code>7 5</code> și rămâne șirul <code>10 15</code>, iar <code>10 &amp; 15 = 10</code> are <code>2</code> biți de <code>1</code><br>\n- se elimină <code>7 5 15</code> și rămâne șirul <code>10</code>, iar <code>10</code> are <code>2</code> biți de <code>1</code></p>",
+      "text": "inno.in4 2 10 7 5 15inno.out5ExplicațieModalitățile sunt: - se elimină 10 și rămâne șirul 7 5 15, iar 7 & 5 & 15 = 5, care are 2 biți de 1 - se elimină 10 7 și rămâne șirul 5 15, iar 5 & 15 = 5, care are 2 biți de 1 - se elimină 10 7 5 și rămâne șirul 15, iar 15 are 4 biți de 1 - se elimină 7 5 și rămâne șirul 10 15, iar 10 & 15 = 10 are 2 biți de 1 - se elimină 7 5 15 și rămâne șirul 10, iar 10 are 2 biți de 1"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>inno.in</code></p><pre>5 4\n7 7 6 1 62</pre><p><code>inno.out</code></p><pre>1</pre><h3>Explicație</h3><p>Singura posibilitate este eliminarea secvenței <code>7 7 6 1</code>. Rămâne doar numărul <code>62</code>, care are <code>5</code> biți de <code>1</code>.</p>",
+      "text": "inno.in5 4 7 7 6 1 62inno.out1ExplicațieSingura posibilitate este eliminarea secvenței 7 7 6 1. Rămâne doar numărul 62, care are 5 biți de 1."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Modalitățile sunt: - se elimină 10 și rămâne șirul 7 5 15, iar 7 & 5 & 15 = 5, care are 2 biți de 1 - se elimină 10 7 și rămâne șirul 5 15, iar 5 & 15 = 5, care are 2 biți de 1 - se elimină 10 7 5 și rămâne șirul 15, iar 15 are 4 biți de 1 - se elimină 7 5 și rămâne șirul 10 15, iar 10 & 15 = 10 are 2 biți de 1 - se elimină 7 5 15 și rămâne șirul 10, iar 10 are 2 biți de 1"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Singura posibilitate este eliminarea secvenței 7 7 6 1. Rămâne doar numărul 62, care are 5 biți de 1."
+    }
+  ],
+  "constraints": [
+    "3 ≤ n ≤ 200.000;",
+    "1 ≤ k ≤ 29;",
+    "0 ≤ a[i] ≤ 231 - 1;",
+    "& este operatorul de conjuncție pe biți. Dacă x și y sunt valori binare, atunci expresia x & y este egală cu 1 dacă și numai dacă x = 1 și y = 1. Deci 1 & 1 = 1, 0 & 1 = 0, 1 & 0 = 0, 0 & 0 = 0. Dacă a și b sunt numere naturale, atunci expresia a & b se efectuează la nivelul reprezentării în baza 2. De exemplu, dacă a = 12 și b = 20, atunci a & b = 12 & 20 = 01100(2) & 10100(2) = 00100(2) = 4(10);"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q206df4d03d.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "inno.in / inno.out",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "ONSEPI, 2021, baraj juniori",
+    "autor": "Dan Pracsiu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 64,
+  "author": "Dan Pracsiu",
+  "sourceAttribution": "ONSEPI, 2021, baraj juniori",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3758/inno"
+}

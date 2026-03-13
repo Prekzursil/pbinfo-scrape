@@ -1,0 +1,63 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1164"><article id="enunt">
+			<p>În seara dinaintea probei de concurs, Cobby a avut un vis demn de un Oscar, cu mai multe evenimente. Se făcea că lumea era reprezentată ca o matrice pătratică de latură <code>N</code>, cu liniile și coloanele numerotate de la <code>1</code> la <code>N</code>, în care fiecare element era inițial vid. Privind în jur, a realizat că atunci când visează un element al matricei, situat la intersecția liniei <code>i</code> cu coloana <code>j</code>, interiorul acestuia se împarte în <code>N</code> linii și <code>N</code> coloane, ca o nouă matrice. Apoi, dacă visează la un element din matricea nou formată sau<br>
+din cea inițială, se întâmplă la fel.</p>
+
+<p>Pentru a nu se rătăci, eroul nopții a decis să atribuie un indice fiecărei matrice formată începând cu cea inițială căreia i-a asociat indicele <code>1</code>. Matricele care se creează primesc indici numere naturale consecutive (<code>2</code>, <code>3</code>, …), în ordinea în care se obţin. Astfel, fiecare element din visul lui Cobby este definit de 3 numere: <code>id</code> – indicele atribuit matricei din care face parte, <code>i</code> şi <code>j</code> – indicii liniei şi coloanei pe care se află elementul.</p>
+
+<p>Cobby realizează că, oricât ar încerca, nu poate visa un element decât o singură dată. Pentru a face visul şi mai interesant, el reţine pentru fiecare matrice un număr natural denumit “coeficient de importanţă”, iniţial <code>0</code> pentru fiecare matrice din vis. Din când în când, eroul nostru alege una dintre matrice şi adaugă o valoare <code>VAL</code> la coeficientul de importanță al ultimelor <code>NR</code> matrice din care s-a obținut aceasta, inclusiv ea.</p>
+
+<h1>Cerința</h1>
+
+<p>După ce au loc toate evenimentele din vis, Cobby vrea să ştie valoarea finală a coeficientului de importanţă pentru un șir de <code>K</code> matrice date prin indicii lor. Deoarece el se grăbeşte să participe la Concursul Naţional Urmaşii lui Moisil, îţi revine ţie misiunea de a găsi răspunsul pentru fiecare matrice.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fişierului <code>inception.in</code> se află valorile <code>N</code> – numărul de linii şi coloane din fiecare matrice, <code>Q</code> – numărul de evenimente care au loc în visul lui Cobby, <code>K</code> – numărul de matrice pentru care Cobby vrea să ştie coeficientul de importanţă. Următoarele <code>Q</code> linii respectă unul dintre formatele:</p>
+
+<ul>
+	<li><code>1 id i j</code> – Cobby visează elementul de pe linia <code>i</code> şi coloana <code>j</code> din matricea cu indicele <code>id</code></li>
+	<li><code>2 id NR VAL</code> – Cobby adaugă valoarea <code>VAL</code> la coeficienţii de importanţă a <code>NR</code> matrice începând cu matricea cu indicele <code>id</code>.</li>
+</ul>
+
+<p>Pe linia <code>Q+2</code> se află <code>K</code> valori <code>id1 id2 ... idK</code>, separate prin câte un spaţiu, ce reprezintă indicii matrice lor pentru care trebuie afişată valoarea finală a coeficientului de importanţă. Evenimentele se petrec în ordinea în care sunt date în fişier.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Pe prima linie a fişierului <code>inception.out</code> se află <code>K</code> valori <code>r1 r2 ... rK</code>, separate prin câte un spaţiu, unde <code>ri</code> reprezintă coeficientul final al matricei cu id-ul <code>id i</code>, <code>i</code> din <code>[1,K]</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 500000</code></li>
+	<li><code>1≤ Q ≤ 300000</code></li>
+	<li><code>1≤VAL≤1000</code></li>
+	<li><code>1 ≤ K, NR, id ≤ </code> numărul total de operații de tipul 1.</li>
+	<li>În ambele tipuri de evenimente valoare <code>id</code> corespunde unei matrice<br>
+formate anterior.</li>
+	<li>Se garantează că există cel puţin <code>NR</code> matrice care pot fi modificate pentru operaţia de tipul 2.</li>
+	<li>Pentru 20% dintre teste orice matrice va conţine cel mult un element visat.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>inception.in</code></p>
+
+<pre>3 6 3
+1 1 2 3
+1 2 3 3
+2 3 3 5
+1 1 3 1
+1 2 3 1
+2 5 2 3
+2 1 4</pre>
+
+<p><code>inception.out</code></p>
+
+<pre>8 5 0</pre>
+
+<h1>Explicație</h1>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-1164-inception-png.png"></p>
+
+<p>Matricele cu indicii <code>3</code>, <code>2</code>, <code>1</code> primesc valoarea <code>5</code> la coeficientul de importanță în evenimentul <code>3</code>, iar matricele cu indicii <code>5</code> și <code>2</code> primesc valoarea <code>3</code> la coeficientul de importanță în evenimentul <code>6</code>.</p>		</article>
+		</body></html>

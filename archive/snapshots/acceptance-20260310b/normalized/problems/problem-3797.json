@@ -1,0 +1,307 @@
+{
+  "id": 3797,
+  "slug": "paths-sums",
+  "name": "paths_sums",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3797/paths-sums",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 16,
+      "name": "Teoria Grafurilor",
+      "slug": "teoria-grafurilor",
+      "href": "/?pagina=probleme-lista&tag=16"
+    },
+    {
+      "id": 64,
+      "name": "Arbori cu rădăcină",
+      "slug": "arbori-cu-r-d-cin",
+      "href": "/?pagina=probleme-lista&tag=64"
+    }
+  ],
+  "tags": [
+    "Lowest Common Ancestor",
+    "Range Minimum Query"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Se dau un arbore cu <code>N</code> noduri și rădăcina în nodul <code>1</code> al cărui muchii au lungimi exprimate prin numere naturale nenule și <code>Q</code> query-uri de forma <code>u v</code>. Pentru fiecare query să se afle suma lungimilor tuturor drumurilor distincte de la un nod aflat în subarborele cu rădăcina în nodul <code>u</code> la un nod aflat în subarborele cu rădăcina în nodul <code>v</code> modulo <code>10</code><sup><code>9</code></sup> <code>+ 7</code>. (lungimea unui drum este egală cu suma lungimilor tuturor muchiilor ce îl alcătuiesc).</p>",
+      "text": "Se dau un arbore cu N noduri și rădăcina în nodul 1 al cărui muchii au lungimi exprimate prin numere naturale nenule și Q query-uri de forma u v. Pentru fiecare query să se afle suma lungimilor tuturor drumurilor distincte de la un nod aflat în subarborele cu rădăcina în nodul u la un nod aflat în subarborele cu rădăcina în nodul v modulo 109 + 7. (lungimea unui drum este egală cu suma lungimilor tuturor muchiilor ce îl alcătuiesc)."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie se vor citi de la tastatură numerele <code>N</code> și <code>Q</code> reprezentând numărul de noduri din arbore, respectiv numărul de query-uri.</p><p>Următoarele <code>N - 1</code> linii conțin câte <code>2</code> numere \\( {p}_{i}\\ {w}_{i} \\), \\( i = \\overline{2,N} \\), reprezentând tatăl nodului <code>i</code> în arbore, respectiv lungimea muchiei dintre \\( {p}_{i} \\) și <code>i</code>(nodul <code>1</code> este rădăcina arborelui, deci nu are tată).</p><p>Pe următoarele <code>Q</code> linii se va afla câte un query.</p>",
+      "text": "Pe prima linie se vor citi de la tastatură numerele N și Q reprezentând numărul de noduri din arbore, respectiv numărul de query-uri.Următoarele N - 1 linii conțin câte 2 numere \\( {p}_{i}\\ {w}_{i} \\), \\( i = \\overline{2,N} \\), reprezentând tatăl nodului i în arbore, respectiv lungimea muchiei dintre \\( {p}_{i} \\) și i(nodul 1 este rădăcina arborelui, deci nu are tată).Pe următoarele Q linii se va afla câte un query."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Programul va afișa pe ecran pe câte o linie rezultatele query-urilor, în ordinea în care acestea apar în input.</p>",
+      "text": "Programul va afișa pe ecran pe câte o linie rezultatele query-urilor, în ordinea în care acestea apar în input."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 200.000</code></li>\n\t<li><code>1 ≤ Q ≤ 500.000</code></li>\n\t<li><code>1 ≤ w</code><sub><code>i</code></sub> <code>≤ 1.000.000.000</code></li>\n\t<li><code>1 ≤ u, v ≤ N</code></li>\n\t<li>pentru fiecare query de tipul <code>2</code>, subarborii cu rădăcinile în nodurile <code>u</code>, respectiv <code>v</code> nu vor avea noduri comune</li>\n</ul>",
+      "text": "1 ≤ N ≤ 200.000 1 ≤ Q ≤ 500.000 1 ≤ wi ≤ 1.000.000.000 1 ≤ u, v ≤ N pentru fiecare query de tipul 2, subarborii cu rădăcinile în nodurile u, respectiv v nu vor avea noduri comune"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><strong>Intrare</strong></p><pre>14 4\n1 4\n1 3\n2 2\n2 7\n2 10\n3 12\n3 5\n4 8\n4 1\n5 3\n7 6\n7 4\n8 9\n4 8\n2 7\n9 11\n12 8</pre><p><strong>Ieșire</strong></p><pre>129\n595\n20\n55</pre><h3>Explicație</h3><p>Arborele descris în exemplu arată în felul următor:</p><p><img alt=\"\" src=\"https://www.pbinfo.ro/resurse/dcee6e/paths_sums_exemplu.png\"></p><p>Pentru primul query drumurile sunt:<br>\n</p><ul>\n\t<li>De la <code>4</code> la <code>8</code> de lungime <code>14</code></li>\n\t<li>De la <code>4</code> la <code>14</code> de lungime <code>23</code></li>\n\t<li>De la <code>9</code> la <code>8</code> de lungime <code>22</code></li>\n\t<li>De la <code>9</code> la <code>14</code> de lungime <code>31</code></li>\n\t<li>De la <code>10</code> la <code>8</code> de lungime <code>15</code></li>\n\t<li>De la <code>10</code> la <code>14</code> de lungime <code>24</code></li><br>\n</ul><p></p><p>Total: <code>14 + 23 + 22 + 31 + 15 + 24 = 129</code></p>",
+      "text": "Intrare14 4 1 4 1 3 2 2 2 7 2 10 3 12 3 5 4 8 4 1 5 3 7 6 7 4 8 9 4 8 2 7 9 11 12 8Ieșire129 595 20 55ExplicațieArborele descris în exemplu arată în felul următor:Pentru primul query drumurile sunt: De la 4 la 8 de lungime 14 De la 4 la 14 de lungime 23 De la 9 la 8 de lungime 22 De la 9 la 14 de lungime 31 De la 10 la 8 de lungime 15 De la 10 la 14 de lungime 24 Total: 14 + 23 + 22 + 31 + 15 + 24 = 129"
+    }
+  ],
+  "examples": [
+    {
+      "input": "14 4\n1 4\n1 3\n2 2\n2 7\n2 10\n3 12\n3 5\n4 8\n4 1\n5 3\n7 6\n7 4\n8 9\n4 8\n2 7\n9 11\n12 8",
+      "output": "129\n595\n20\n55",
+      "explanation": "Arborele descris în exemplu arată în felul următor:"
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 200.000",
+    "1 ≤ Q ≤ 500.000",
+    "1 ≤ wi ≤ 1.000.000.000",
+    "1 ≤ u, v ≤ N",
+    "pentru fiecare query de tipul 2, subarborii cu rădăcinile în nodurile u, respectiv v nu vor avea noduri comune"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q0f1c393fde.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/dcee6e/paths_sums_exemplu.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-dcee6e-paths-sums-exemplu-png.png",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Lorintz Alexandru (Alex_tz307)",
+    "clasa": "11",
+    "intrare/ieșire": "tastatură / ecran",
+    "limită timp": "0.6 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "-",
+    "autor": "Alexandru Lorintz",
+    "dificultate": "dificilă"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.6,
+  "memoryLimitMb": 64,
+  "author": "Alexandru Lorintz",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3797/paths-sums"
+}

@@ -1,0 +1,145 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=612"><article id="enunt">
+			<p>În premieră în acest an, pentru a putea ridica marele trofeu “Urmașul lui Moisil” vor fi necesare o serie de ștampile ce se obțin de la Primărie. </p>
+
+<p>La Primăria din Iași sunt <code>N</code> camere numerotate de la <code>1</code> la <code>N</code>. În fiecare cameră există câte o ștampilă pe care apare o literă mică a alfabetului englez <code>a-z</code>. Pot exista camere cu același caracter pe ștampilă. </p>
+
+<p>În instituţie sunt două categorii de camere, în funcţie de modul în care acordă ștampilele:</p>
+
+<ul>
+	<li><strong>camere simple</strong> – se aplică ștampila camerei imediat, fără a fi necesare ştampilele din alte camere.</li>
+	<li><strong>camere complicate</strong> – Mecanismul birocratic intră în acţiune! Funcţionarul unei astfel de camere <code>i</code> aplică ştampila pe cerere apoi solicită obţinerea în ordine a ştampilelor camerelor <code>c[i1], c[i2] ... c[iLg]</code>, toate aceste camere având numere mai mari strict decât <code>i</code>. După fiecare ștampilă obținută în camerele specificate, aplică și el, încă o dată, ştampila camerei sale. Spunem că această cameră complicată este dependentă de fiecare dintre camerele din lista asociată, care pot fi la rândul lor simple sau complicate.</li>
+</ul>
+
+<p>De exemplu, dacă <code>5</code> este o cameră complicată cu ştampila <code>z</code> și este dependentă de camera simplă <code>7</code> (cu caracterul <code>u</code>) atunci, la ieșirea din camera <code>5</code> , pe cerere va apărea secvența <code>zuz</code>. Dacă <code>1</code> este de asemenea o cameră complicată în care se ștampilează cu litera <code>t</code> și este dependentă de camera simplă <code>2</code> (cu caracterul <code>x</code>) și de camera complicată <code>5</code> atunci, la finalizarea validării cererii în camera <code>1</code>, va apărea pe cerere secvența <code>txtzuzt</code>. Obținerea ștampilelor poate implica un efort considerabil, dar respectarea acestei reguli birocratice este recompensată prin premiul care este deosebit de valoros. </p>
+
+<h1>Cerința</h1>
+
+<p>Pentru ca festivitatea de premiere să nu înceapă prea târziu , câștigătorul trofeului trebuie să raspundă repede la <code>M</code> întrebări de tipul <code>(q,k)</code>: care este litera de pe poziția <code>k</code> a șirului de ștampile obținut de la camera <code>q</code>?</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului <code>birocratie.in</code> se găsesc două numere naturale <code>N</code> și <code>M</code> cu semnificația: numărul de camere și numărul de întrebări la care trebuie răspuns.</p>
+
+<p>Pe următoarele <code>N</code> linii se găsesc descrierile camerelor, câte o linie pentru fiecare cameră, de forma: <code>si Li c[i1] c[i2] ... c[iLi]</code> unde <code>si</code> reprezintă caracterul ștampilei din camera <code>i</code>, <code>Li</code> reprezintă numărul camerelor de care depinde obţinerea acesteia iar <code>c[i1] c[i2] ... c[iLi]</code> este lista asociată camerei i şi conţine camerele, în ordine a de vizitare impusă. Pentru camere simple <code>Li</code> este <code>0</code>.</p>
+
+<p>Următoarele <code>M</code> linii conțin câte două numere <code>q</code> și <code>k</code>, separate printr-un spațiu, reprezentând întrebările: care este al <code>k</code>-lea caracter din șirul de ștampile al camerei <code>q</code>? (pozițiile se numerotează de la <code>1</code>).</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul <code>birocratie.out</code> va conţine <code>M</code> linii, pe fiecare linie <code>i</code> fiind scrisă o singură literă ce reprezintă răspunsul la întrebarea <code>i</code>, <code>i∈[1,M]</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>N≤1000, M≤1000</code></li>
+	<li><code>Li≤5000</code> pentru orice cameră</li>
+	<li><code>k≤1.000.000.000</code> și <code>1≤q≤N</code> pentru orice întrebare</li>
+	<li>Pentru orice <code>i∈[1,N] cij&gt;i</code>: camerele de care depinde camera <code>i</code> au indici cu valori mai mari<br>
+strict decât <code>i</code></li>
+	<li>Pentru orice întrebare <code>(q,k)</code>, <code>k</code> este mai mic sau egal decât lungimea șirului de ștampile al camerei <code>q</code></li>
+	<li>Pentru orice cameră, numărul maxim de ștampile necesare este <code>≤ 1.000.000.000</code></li>
+	<li>Orice succesiune de camere <code>c[1] c[2] ... c[Lg]</code> în care <code>c[i-1]</code> este dependentă de <code>c[i]</code>, <code>i∈[2,Lg]</code>, are <code>Lg≤20</code></li>
+	<li>pentru teste în valoare de <code>15</code> puncte <code>Li≤1</code> pentru orice cameră</li>
+	<li>pentru teste în valoare de <code>35</code> puncte <code>k≤1000</code> pentru orice întrebare</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>birocratie.in</code></p>
+
+<pre>2 4
+b 1 2
+a 0
+1 1
+1 2
+1 3
+2 1</pre>
+
+<p><code>birocratie.out</code></p>
+
+<pre>b
+a
+b
+a </pre>
+
+<h1>Explicație</h1>
+
+<p>Sunt <code>2</code> camere și <code>4</code> întrebări:<br>
+Camera <code>1</code> este dependentă de camera <code>2</code>. Ștampila validă este <code>bab</code>.<br>
+Camera <code>2</code> este simplă și are ștampila validă <code>a</code>.<br>
+Pozițiile în șirurile asociate sunt numerotate de la 1.<br>
+În acest exemplu se întreabă despre toate pozițiile din toate camerele, pe rând. </p>
+
+
+<p><code>birocratie.in</code></p>
+
+<pre>5 3
+e 2 3 2
+d 2 4 5
+c 0
+p 0
+q 0
+1 3
+1 4
+2 1 </pre>
+
+<p><code>birocratie.out</code></p>
+
+<pre>e
+d
+d</pre>
+
+<h1>Explicație</h1>
+
+<p>Sunt <code>5</code> camere și <code>3</code> întrebări. Camera <code>1</code> depinde de camerele <code>3</code> și <code>2</code>: <code>e(3)e(2)e</code> adică <code>ecedpdqde</code>.<br>
+Camera <code>2</code> depinde de camerele <code>4</code> și <code>5</code>: <code>d(4)d(5)d</code>, adică <code>dpdqd</code>.<br>
+Camera <code>3</code>: simplă cu ștampila <code>c</code><br>
+Camera <code>4</code>: simplă cu ștampila <code>p</code><br>
+Camera <code>5</code>: simplă cu ștampila <code>q</code><br>
+Se întreabă despre ștampilele <code>3</code> și <code>4</code> din camera <code>1</code> (<code>e</code>, respectiv <code>d</code>) și ștampila <code>1</code> din camera <code>2</code> (ștampila <code>d</code>).</p>
+
+<p><code>birocratie.in</code></p>
+
+<pre>4
+13
+x 4 3 2 3 4
+q 2 4 4
+z 0
+p 0
+1 1
+1 2
+1 3
+1 4
+1 5
+1 6
+1 7
+1 8
+1 9
+1 10
+1 11
+1 12
+1 13 </pre>
+
+<p><code>birocratie.out</code></p>
+
+<pre>x
+z
+x
+q
+p
+q
+p
+q
+x
+z
+x
+p
+x </pre>
+
+<h1>Explicație</h1>
+
+<p>Camera <code>1</code> depinde de camerele : <code>3 2 3 4</code> (pot exista repetiții) Șirul asociat este <code>x(3)x(2)x(3)x(4)x</code>, adică <code>xzxqpqpqxzxpx</code>.<br>
+Camera <code>2</code> depinde de camerele <code>4</code> și iar <code>4</code>, ştampila validă a camerei 2 fiind <code>qpqpq</code>.<br>
+Camerele <code>3</code> și <code>4</code> sunt simple, cu ştampilele <code>z</code> și respectiv <code>p</code>.<br>
+Se întreabă, pe rând, despre fiecare caracter din șirul de ștampile al camerei cu numărul <code>1</code>.</p>		</article>
+		</body></html>

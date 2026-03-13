@@ -1,0 +1,315 @@
+{
+  "id": 4404,
+  "slug": "conflicte",
+  "name": "Conflicte",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4404/conflicte",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 45,
+      "name": "Vectori caracteristici / de frecventa",
+      "slug": "vectori-caracteristici-de-frecventa",
+      "href": "/?pagina=probleme-lista&tag=45"
+    }
+  ],
+  "tags": [
+    "Vector de frecvență",
+    "măști de biți"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p><span class=\"caps\">RAU</span>-Gigel își amintește cu nostalgie de momentele sale de început într-ale programării, când mai făcea și stângăcii cum ar fi să declare un nume de tipul <code>int</code>….  așa a apărut următoarea problemă:</p><p>Să ne imaginăm harta politică a lumii viitorului, împărțită în țări ale căror nume sunt de fapt numere naturale nenule. Între ele există anumite relații: două țări sunt înfrățite dacă au în compunerea numelui lor aceleași cifre (nu contează numărul de apariții), în timp ce două țări se află în conflict dacă nu au nicio cifră comună în numele lor. </p><p>Interesat de politică, <span class=\"caps\">RAU</span>-Gigel ar vrea să afle câteva informații:</p><ul>\n\t<li>întrebare de tipul <code>1</code>: câte țări sunt izolate din punct de vedere politic, în sensul că nu sunt înfrățite cu nicio altă țară?</li>\n\t<li>întrebare de tipul <code>2</code>:  pentru fiecare țară dintr-o listă de țări preferate să se afle: cu câte țări este înfrățită și cu câte în conflict?</li>\n</ul><p>Ajutați-l pe <span class=\"caps\">RAU</span>-Gigel să afle răspunsul la cele două tipuri de întrebări ale sale !</p>",
+      "text": "RAU-Gigel își amintește cu nostalgie de momentele sale de început într-ale programării, când mai făcea și stângăcii cum ar fi să declare un nume de tipul int…. așa a apărut următoarea problemă:Să ne imaginăm harta politică a lumii viitorului, împărțită în țări ale căror nume sunt de fapt numere naturale nenule. Între ele există anumite relații: două țări sunt înfrățite dacă au în compunerea numelui lor aceleași cifre (nu contează numărul de apariții), în timp ce două țări se află în conflict dacă nu au nicio cifră comună în numele lor. Interesat de politică, RAU-Gigel ar vrea să afle câteva informații: întrebare de tipul 1: câte țări sunt izolate din punct de vedere politic, în sensul că nu sunt înfrățite cu nicio altă țară? întrebare de tipul 2: pentru fiecare țară dintr-o listă de țări preferate să se afle: cu câte țări este înfrățită și cu câte în conflict? Ajutați-l pe RAU-Gigel să afle răspunsul la cele două tipuri de întrebări ale sale !"
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>conflicte.in</code> conține pe prima linie tipul <code>T</code> al întrebării, cu valorile <code>1</code> sau <code>2</code>. </p><p>Daca <code>T = 1</code>, pe rândurile următoare sunt numele țărilor de pe hartă, adică numere naturale nenule distincte două câte două, dispuse câte unul pe rând, sau mai multe pe rând și separate prin câte un spațiu, în total <code>N</code> numere. </p><p>Daca <code>T = 2</code>, pe următorul rând se află un număr natural nenul reprezentând numărul <code>Q</code> de țări preferate, apoi, separate printr-un spațiu, țările respective. Pe rândurile următoare este lista țărilor, ca la taskul <code>1</code>. </p>",
+      "text": "Fișierul de intrare conflicte.in conține pe prima linie tipul T al întrebării, cu valorile 1 sau 2. Daca T = 1, pe rândurile următoare sunt numele țărilor de pe hartă, adică numere naturale nenule distincte două câte două, dispuse câte unul pe rând, sau mai multe pe rând și separate prin câte un spațiu, în total N numere. Daca T = 2, pe următorul rând se află un număr natural nenul reprezentând numărul Q de țări preferate, apoi, separate printr-un spațiu, țările respective. Pe rândurile următoare este lista țărilor, ca la taskul 1."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Dacă întrebarea e de tipul <code>1</code>, fișierul de ieșire <code>conflicte.out</code> va conține un sigur rând pe care se află un singur număr reprezentând răspunsul la întrebarea de tipul <code>1</code>. </p><p>Dacă întrebarea e de tipul <code>2</code>, fișierul de ieșire <code>conflicte.out</code> va conține <code>Q</code> rânduri: pe fiecare rând <code>i</code> se vor afla câte două numere separate printr-un spațiu, reprezentând numărul de țări înfrățite, respectiv în conflict cu țara a <code>i</code>-a din fișierul de intrare. </p>",
+      "text": "Dacă întrebarea e de tipul 1, fișierul de ieșire conflicte.out va conține un sigur rând pe care se află un singur număr reprezentând răspunsul la întrebarea de tipul 1. Dacă întrebarea e de tipul 2, fișierul de ieșire conflicte.out va conține Q rânduri: pe fiecare rând i se vor afla câte două numere separate printr-un spațiu, reprezentând numărul de țări înfrățite, respectiv în conflict cu țara a i-a din fișierul de intrare."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 100.000</code>, <code>1 ≤ Q ≤ 1.000</code>, <code>Q ≤ N</code></li>\n\t<li>Teste în valoare de <code>40</code> puncte conțin o întrebare de tipul <code>1</code></li>\n\t<li>Teste în valoare de <code>20</code> puncte conțin o întrebare de tipul <code>2</code> și <code>N ≤ 1.000</code>, <code>Q ≤ 10</code></li>\n\t<li>Numele țărilor sunt numere naturale nenule, au între <code>1</code> și <code>9</code> cifre (inclusiv) și nu conțin zerouri nesemnificative (la stânga)</li>\n\t<li>Țările de pe hartă sunt distincte două câte două; la întrebările de tip <code>2</code>, lista țărilor preferate ale lui <span class=\"caps\">RAU</span>-Gigel nu conține duplicate și este inclusă în lista țărilor de pe hartă</li>\n\t<li>O țară aflată în conflict cu o altă țară poate să fie izolată din punct de vedere politic, în sensul că nu are aliați</li>\n\t<li>Toate țările care au în compunerea numelui lor același set de cifre formează o alianță</li>\n</ul>",
+      "text": "1 ≤ N ≤ 100.000, 1 ≤ Q ≤ 1.000, Q ≤ N Teste în valoare de 40 puncte conțin o întrebare de tipul 1 Teste în valoare de 20 puncte conțin o întrebare de tipul 2 și N ≤ 1.000, Q ≤ 10 Numele țărilor sunt numere naturale nenule, au între 1 și 9 cifre (inclusiv) și nu conțin zerouri nesemnificative (la stânga) Țările de pe hartă sunt distincte două câte două; la întrebările de tip 2, lista țărilor preferate ale lui RAU-Gigel nu conține duplicate și este inclusă în lista țărilor de pe hartă O țară aflată în conflict cu o altă țară poate să fie izolată din punct de vedere politic, în sensul că nu are aliați Toate țările care au în compunerea numelui lor același set de cifre formează o alianță"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>conflicte.in</code></p><pre>1\n1133 1356789\n3131 13\n1331 2444 \n678 42 133</pre><p><code>conflicte.out</code></p><pre>2</pre><h3>Explicație</h3><p>Pentru întrebarea de tipul <code>1</code> avem: țările <code>1133</code>, <code>3131</code>, <code>13</code>, <code>1331</code> și <code>133</code> formează o alianță, țările <code>2444</code> și <code>42</code> formează o altă alianță, în timp ce <code>1356789</code> și <code>678</code> sunt izolate din punct de vedere politic.</p>",
+      "text": "conflicte.in1 1133 1356789 3131 13 1331 2444 678 42 133conflicte.out2ExplicațiePentru întrebarea de tipul 1 avem: țările 1133, 3131, 13, 1331 și 133 formează o alianță, țările 2444 și 42 formează o altă alianță, în timp ce 1356789 și 678 sunt izolate din punct de vedere politic."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>conflicte.in</code></p><pre>2\n2 13 1356789\n1133 1356789\n3131 13\n1331 2444 \n678 42 133</pre><p><code>conflicte.out</code></p><pre>4 3\n0 2</pre><h3>Explicație</h3><p>Pentru întrebarea de tipul <code>2</code> avem: țara <code>13</code> este înfrățită cu <code>4</code> țări: <code>1133</code>, <code>3131</code> și <code>1331</code>, <code>133</code>.<br>\nȚara <code>13</code> este în conflict cu <code>3</code> țări: <code>2444</code>, <code>678</code> și <code>42</code>.<br>\nCea de-a doua țară preferată a lui <span class=\"caps\">RAU</span>-Gigel, țara <code>1356789</code> nu este înfrățită cu nicio altă țară, dar este în conflict cu țările: <code>2444</code> și <code>42</code>. </p>",
+      "text": "conflicte.in2 2 13 1356789 1133 1356789 3131 13 1331 2444 678 42 133conflicte.out4 3 0 2ExplicațiePentru întrebarea de tipul 2 avem: țara 13 este înfrățită cu 4 țări: 1133, 3131 și 1331, 133. Țara 13 este în conflict cu 3 țări: 2444, 678 și 42. Cea de-a doua țară preferată a lui RAU-Gigel, țara 1356789 nu este înfrățită cu nicio altă țară, dar este în conflict cu țările: 2444 și 42."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Pentru întrebarea de tipul 1 avem: țările 1133, 3131, 13, 1331 și 133 formează o alianță, țările 2444 și 42 formează o altă alianță, în timp ce 1356789 și 678 sunt izolate din punct de vedere politic."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Pentru întrebarea de tipul 2 avem: țara 13 este înfrățită cu 4 țări: 1133, 3131 și 1331, 133. Țara 13 este în conflict cu 3 țări: 2444, 678 și 42. Cea de-a doua țară preferată a lui RAU-Gigel, țara 1356789 nu este înfrățită cu nicio altă țară, dar este în conflict cu țările: 2444 și 42."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 100.000, 1 ≤ Q ≤ 1.000, Q ≤ N",
+    "Teste în valoare de 40 puncte conțin o întrebare de tipul 1",
+    "Teste în valoare de 20 puncte conțin o întrebare de tipul 2 și N ≤ 1.000, Q ≤ 10",
+    "Numele țărilor sunt numere naturale nenule, au între 1 și 9 cifre (inclusiv) și nu conțin zerouri nesemnificative (la stânga)",
+    "Țările de pe hartă sunt distincte două câte două; la întrebările de tip 2, lista țărilor preferate ale lui RAU-Gigel nu conține duplicate și este inclusă în lista țărilor de pe hartă",
+    "O țară aflată în conflict cu o altă țară poate să fie izolată din punct de vedere politic, în sensul că nu are aliați",
+    "Toate țările care au în compunerea numelui lor același set de cifre formează o alianță"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q094464e242.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Crisan Daniela Alexandra (URA)",
+    "clasa": "9",
+    "intrare/ieșire": "conflicte.in / conflicte.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "RAU-Coder 2023",
+    "autor": "Daniela Alexandra Crisan",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "author": "Daniela Alexandra Crisan",
+  "sourceAttribution": "RAU-Coder 2023",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4404/conflicte"
+}

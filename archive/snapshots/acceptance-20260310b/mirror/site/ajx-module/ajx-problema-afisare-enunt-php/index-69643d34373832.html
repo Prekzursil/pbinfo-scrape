@@ -1,0 +1,66 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4782"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>În regatul „Iluminia” există un laborator care conține o rețea de <code>N</code> camere, fiecare cameră are lungimea <code>P</code> și este reprezentată de o secvență de comutatoare, fiecare comutator având starea <code>0</code> (stins) sau <code>1</code> (aprins).</p>
+
+<p>Regele dorește să construiască o cameră supremă pentru un experiment de mare anvergură. Această cameră supremă se obține prin aplicarea operației <span class="caps">XOR</span> (<code>^</code>) asupra tuturor secvențelor de comutatoare. Regele vrea ca această cameră rezultată să fie „supremă”, adică să conțină doar comutatoare în starea <code>1</code>.</p>
+
+<p>Deoarece acest lucru nu este garantat, regele are la dispoziție <code>M</code> operații de flip. Fiecare flip inversează starea anumitor comutatoare dintr-o subsecență de lungime cel mult <code>L</code> (<code>0</code> devine <code>1</code>, iar <code>1</code> devine <code>0</code>). Comutatoarele care vor fi inversate sunt la discreția regelui.</p>
+
+<p>Acest lucru înseamnă că regele are posibilitatea de a alege, dintr-o subsecență dată de comutatoare, care dintre acestea să fie inversate. El nu este obligat să inverseze toate comutatoarele din subsecența aleasă, ci poate alege doar anumite comutatoare, în funcție de cum consideră că este cel mai eficient pentru găsirea camerei supreme.</p>
+
+<p>Sarcina ta este să găsești cea mai mică valoare <code>L</code> pentru care există o succesiune de cel mult <code>M</code> flip-uri (fiecare aplicată pe o subsecență de lungime cel mult <code>L</code>) care să construiască camera supremă.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>lumina.in</code> conține pe prima linie trei numere întregi: <code>N</code> (numărul de camere), <code>P</code> (lungimea fiecărei camere) și <code>M</code> (numărul maxim de operații de flip).</p>
+
+<p>Pe următoarele <code>N</code> linii se află reprezentarea camerelor regelui.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>lumina.out</code> va conține pe prima linie un singur număr întreg, reprezentând cea mai mică valoare a lui <code>L</code> pentru care problema are soluție.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 10</code></li>
+	<li><code>1 ≤ P ≤ 100.000</code></li>
+	<li><code>1 ≤ M ≤ 100.000</code></li>
+</ul>
+
+<h1>Exemple:</h1>
+
+<p><code>lumina.in</code></p>
+
+<pre>3 5 2
+00011
+01100
+11101</pre>
+
+<p><code>lumina.out</code></p>
+
+<pre>2</pre>
+
+<h3>Explicație</h3>
+
+<p>Regele decide să aplice o operație de flip cu <code>L = 2</code> pe poziția <code>2</code> din camera <code>1</code> (schimbând atât starea comutatorului <code>2</code> cât și <code>3</code>) și pe poziția <code>5</code> din camera <code>3</code> (schimbând doar starea comutatorului <code>5</code> de la <code>1</code> la <code>0</code>).</p>
+
+<p>Calculul camerei supreme după operație: <code>01111 ˆ 01100 ˆ 11100 = 11111</code></p>
+
+<p><code>lumina.in</code></p>
+
+<pre>2 9 2
+101011000
+000001101</pre>
+
+<p><code>lumina.out</code></p>
+
+<pre>3</pre>
+
+<h3>Explicație</h3>
+
+Regele decide să aplice o operație de flip cu <code>L = 3</code> pe poziția <code>2</code> din camera <code>1</code> schimbând starea comutatoarelor <code>2</code> și <code>4</code>) și pe poziția <code>6</code> din camera <code>1</code> o operație de flip cu <code>L = 3</code> (schimbând starea comutatoarelor <code>6</code> și <code>8</code>).<p></p>
+
+<p>Calculul camerei supreme după operație: <code>111110010 ˆ 000001101 = 111111111</code>.</p>		</article>
+		</body></html>

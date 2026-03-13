@@ -1,0 +1,120 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2497"><article id="enunt">
+			<p>Gigel este curios să afle în ce zonă a țării au trăit cei mai mulți dintre strămoșii săi. El reușește să adune informații despre structura genetică a persoanelor din diferite părți ale țării și speră că, prin compararea cu propria structură genetică, să identifice o zonă pătratică în care au trăit cei mai mulți dintre strămoșii săi.</p>
+
+<p>Structura genetică a unei persoane este reprezentată sub forma unei secvențe cu cel mult 20 de caractere (litere mici ale alfabetului englez). O persoană poate fi considerată strămoș a lui Gigel dacă gradul de similaritate dintre secvența corespunzătoare persoanei respective și cea a lui Gigel este mai mare strict decât un număr <code>K</code>, cunoscut.</p>
+
+<p>Gradul de similaritate dintre două secvențe este reprezentat de numărul de caractere comune celor două secvențe. De exemplu pentru secvențele <code>abcdabd</code> și <code>acbdaad</code> gradul de similaritate este <code>6</code> (<code>2</code> caractere <code>a</code>, <code>2</code> caractere <code>d</code>, <code>1</code> caracter <code>b</code>, <code>1</code> caracter <code>c</code>).</p>
+
+<p>Gigel reprezintă harta țării sub forma unui tablou bidimensional cu <code>N</code> linii și <code>M</code> coloane în care fiecare element reprezintă structura genetică a unei persoane din zona respectivă.</p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând <code>N</code> , <code>M</code> , <code>K</code> , structura genetică pentru Gigel și reprezentarea hărții identificată de acesta, să se determine:</p>
+
+<p>1) poziția pe hartă și structura genetică pentru persoana, sau persoanele, pentru care gradul de similaritate cu structura genetică a lui Gigel este maxim;<br>
+2) o zonă pătratică, de dimensiune maximă în care toate persoanele ar putea fi strămoși ai lui Gigel.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>gene.in</code> conţine pe prima linie numărul natural <code>C</code>, care nu poate avea decât valorile 1 sau 2 și<br>
+indică numărul cerinței care va fi rezolvată. Pe a doua linie numerele naturale <code>N</code> , <code>M</code> și <code>K</code> , separate prin câte un spațiu, cu semnificația de mai sus. Pe a treia linie se află structura genetică a lui Gigel, iar pe următoarele <code>N*M</code> linii câte o secvență de maximum 20 de litere mici ale alfabetului englez, care reprezintă structurile genetice ale persoanelor din țară, în ordinea parcurgerii hărții pe linii.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieşire <code>gene.out</code> va conţine răspunsul la cerința rezolvată.</p>
+
+<p>Dacă s-a rezolvat prima cerință, fișierul de ieșire va conține, pe linii separate, datele de identificare pentru persoanele cu cel mai mare grad de similaritate, după cum urmează: câte două numere naturale, separate prin câte un spațiu, care reprezintă poziția pe hartă a unei persoane urmate de un spațiu și secvența care indică structura ei genetică.</p>
+
+<p>Dacă s-a rezolvat cerința 2, pe prima linie a fișierului de ieșire se vor scrie, separate prin câte un spațiu, trei numere naturale <code>x y lgmax</code> reprezentând poziția colțului din stânga sus, exprimată în ordine prin indicele liniei și al<br>
+coloanei, respectiv lungimea maximă a laturii pătratului identificat pe hartă.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>0 &lt; N ≤ 500, 0 &lt; M ≤ 500, 0 &lt; K ≤ 20</code></li>
+	<li>colțul din stânga sus al hărții are poziția <code>(1, 1)</code></li>
+	<li>dacă pentru cerința 1 există mai multe persoane cu grad de similaritate maxim, se vor afișa în ordine lexicografică a poziției pe hartă (în ordine crescătoare a indicelui de linie, iar în caz de egalitate pentru acesta, în ordine crescătoare a indicelui de coloană);</li>
+	<li>dacă pentru cerința 2 există mai multe zone maximale, se va afișa cea cu indicele de linie cel mai mic, iar în caz de egalitate și pentru acesta, cea cu indicele de coloană mai mic;</li>
+	<li>pentru rezolvarea corectă a primei cerinţe se acordă 30 de puncte, pentru rezolvarea corectă a celei de a doua cerințe se acordă 70 de puncte.</li>
+</ul>
+
+<h1>Exemplu 1:</h1>
+
+<p><code>gene.in</code></p>
+
+<pre>1
+3 3 3
+acgt
+aaacctg
+abrcg
+saasdfs
+ecctg
+abnctt
+agtatggt
+aaa
+ccgtabd
+bbbb</pre>
+
+
+<p><code>gene.out</code></p>
+
+<pre>1 1 aaacctg
+3 2 ccgtabd</pre>
+
+<h3>Explicație</h3>
+
+<p>Secvența corespunzătoare lui Gigel este: <code>acgt</code></p>
+
+<p>Pentru secvențele din hartă gradele de similaritate sunt:</p>
+
+<p><code>aaacctg</code> – grad <code>4</code><br>
+<code>abrcg</code> – grad <code>3</code><br>
+<code>saasdfs</code> – grad <code>1</code><br>
+<code>ecctg</code> – grad <code>3</code><br>
+<code>abnctt</code> – grad <code>3</code><br>
+<code>agtatggt</code> – grad <code>3</code><br>
+<code>aaa</code> – grad <code>1</code><br>
+<code>ccgtabd</code> – grad <code>4</code><br>
+<code>bbbb</code> – grad <code>0</code></p>
+
+<p>deci maximul este <code>4</code> și apare pentru două dintre secvențe</p>
+
+<h1>Exemplu 2:</h1>
+
+<p><code>gene.in</code></p>
+
+<pre>2
+4 4 2
+acgt
+aec
+ctg
+abvf
+acgtaaa
+bbbbttg
+saa
+acgec
+actgt
+abvf
+nctt
+cagtatggt
+acgtaaa
+bbabttg
+saatg
+sdfs
+fhgj</pre>
+
+<p><code>gene.out</code></p>
+
+<pre>2 3 2 </pre>
+
+<h3>Explicație</h3>
+
+<p>Pentru harta dată, gradele de similaritate cu secvența <code>acgt</code> sunt, în ordine: <code>2 3 1 4 2 1 3 4 1 2 4 4 3 3 0 1</code>. Deci reprezentarea hărții în formă bidimensională este:</p>
+
+<p>2 3 1 4<br>
+2 1 <b>3 4</b><br>
+1 2 <b>4 4</b><br>
+3 3 0 1</p>
+
+<p>Cea mai mare zonă pătratică, în care toate gradele sunt mai mari strict decât <code>2</code> are latura <code>2</code> și începe la linia <code>2</code>, coloana <code>3</code>.</p>		</article>
+		</body></html>

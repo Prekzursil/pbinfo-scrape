@@ -1,0 +1,102 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4464"><article id="enunt">
+			<p>Pe insula Kauai, aflată în statul Hawaii, se găsesc <code>N</code> sate așezate în linie dreaptă, numerotate în ordine crescătoare, începând de la <code>1</code>: <code>1, 2, 3, ..., N</code>. În dreptul fiecărui sat <code>i</code> (<code>1 ≤ i ≤ N</code>) se află un indicator pe care poate scrie fie <code>R</code>, cu semnificația că din satul <code>i</code> se poate ajunge în satul <code>(i + 1)</code>, fie <code>L</code>, cu semnificația că din satul <code>i</code> se poate ajunge în satul <code>(i - 1)</code>. Se știe faptul că pe indicatorul satului <code>1</code> este scris <code>R</code>, iar pe cel al satului <code>N</code> este scris <code>L</code>.</p>
+
+<p>Ajunși în Kauai pentru <code>Q</code> zile, tinerii John și Mary își propun să facă câte o excursie în fiecare zi. În cadrul fiecărei excursii, tinerii pornesc din sate diferite, urmărind să se întâlnească, eventual, într-unul dintre cele <code>N</code> sate. Fiecare excursie va fi reprezentată sub forma <code>(i, j)</code> (unde <code>1 ≤ i, j ≤ N</code> și <code>i ≠ j</code>), cu semnificația: John se află inițial în satul <code>i</code>, Mary în satul <code>j</code>, iar ei încep să se deplaseze între sate, respectând sensul de deplasare de pe indicatoarele satelor vizitate.</p>
+
+<p>Interesant este că cei doi au posibilitatea să înlocuiască oricât de multe indicatoare întâlnesc pe parcursul traseului și să urmeze astfel noul sens de deplasare; adică, pot înlocui un indicator <code>R</code> întâlnit într-unul <code>L</code> sau pot înlocui un indicator <code>L</code> întâlnit într-unul <code>R</code> și apoi să continue deplasarea între sate. Fiecare înlocuire a unui indicator poate fi efectuată dacă se achită o taxă în valoare de <code>1</code> dolar. Pe durata excursiei, din cauza căldurii, tinerii pot alege și să staționeze în satele în care se găsesc la un moment dat (inclusiv în satele din care pornesc), adică nu este nevoie ca cei doi să se deplaseze simultan între sate pe durata întregului traseu. Important este ca cei doi, într-un final, să se întâlnească într-un sat.</p>
+
+<h1>Cerința</h1>
+
+<p> Pentru fiecare dintre cele <code>Q</code> excursii, se cere să se determine <strong>costul total minim</strong>, exprimat în dolari, care va fi plătit pentru ca cei doi tineri să se poată întâlni într-unul dintre cele <code>N</code> sate, eventual după modificarea a <code>0</code> sau mai multe indicatoare din satele vizitate.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului de intrare <code>excursie.in</code> se află numărul natural nenul <code>N</code>, cu semnificația de mai sus. Pe următoarea linie se află, fără niciun spațiu între ele, <code>N</code> caractere ce pot fi fie <code>R</code>, fie <code>L</code>, al <code>i</code>-lea caracter reprezentând ce este scris inițial pe indicatorul din dreptul satului <code>i</code>. Pe cea de a treia linie se află numărul natural nenul <code>Q</code>, reprezentând numărul de excursii. Pe următoarele <code>Q</code> linii se află, separate prin câte un spațiu, câte două numere naturale <code>i</code> și <code>j</code>, descriind, în ordine, excursiile tinerilor, adică satele din care pornesc cei doi în fiecare dintre cele <code>Q</code> zile.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>excursie.out</code> va conține <code>Q</code> linii, pe cea de a <code>i</code>-a linie aflându-se <strong>costul total minim</strong> necesar efectuării excursiei din ziua <code>i</code>, pentru fiecare <code>i</code>: <code>1 ≤ i ≤ Q</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N ≤ 200.000</code> și <code>1 ≤ Q ≤ 200.000</code></li>
+	<li>Indicatoarele din satele <code>1</code> și <code>N</code> nu pot fi modificate.</li>
+	<li>Chiar dacă pentru efectuarea unei excursii dintre cele <code>Q</code> se pot modifica indicatoarele anumitor sate, în timpul nopții, înainte de începerea următoarei excursii, acestea vor reveni la starea inițială, așa cum au fost descrise în fișierul de intrare.</li>
+	<li>Dacă pentru efectuarea unei excursii nu este necesar să fie schimbat niciun indicator, atunci costul (total) aferent acesteia va fi egal cu <code>0</code> dolari. De asemenea, în cadrul unei excursii, este permis ca indicația de pe un indicator întâlnit pe parcursul traseului să fie schimbată de mai multe ori.</li>
+	<li>Este posibil ca pentru efectuarea unei excursii să existe mai multe modalități de a modifica indicatoarele astfel încât costul total să fie minim.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>excursie.in</code></p>
+
+<pre>7
+RRRLLLL
+1
+2 6</pre>
+
+<p><code>excursie.out</code></p>
+
+<pre>0</pre>
+
+<h3>Explicație</h3>
+
+<p>Pe insulă există <code>N = 7</code> sate, iar inițial, conform indicatoarelor din dreptul satelor:</p>
+
+<ul>
+	<li>din satul <code>1</code> se poate ajunge în satul <code>2</code>;</li>
+	<li>din satul <code>2</code> se poate ajunge în satul <code>3</code>;</li>
+	<li>din satul <code>3</code> se poate ajunge în satul <code>4</code>;</li>
+	<li>din satul <code>4</code> se poate ajunge în satul <code>3</code>;</li>
+	<li>din satul <code>5</code> se poate ajunge în satul <code>4</code>;</li>
+	<li>din satul <code>6</code> se poate ajunge în satul <code>5</code>;</li>
+	<li>din satul <code>7</code> se poate ajunge în satul <code>6</code>.</li>
+</ul>
+
+<p>Va fi efectuată o singură excursie (<code>Q = 1</code>): John va începe din satul <code>2</code>, iar Mary din satul <code>6</code>. Fără a schimba niciun indicator (cost total: <code>0</code> dolari), cei doi se pot întâlni, de exemplu, în satul <code>3</code>, respectând indicațiile de pe indicatoarele întâlnite. Astfel, John se va deplasa din satul <code>2</code> în satul <code>3</code>. De asemenea, Mary se va deplasa, pornind din satul <code>6</code>, în satul <code>5</code>, apoi în satul <code>4</code>, iar în cele din urmă în satul <code>3</code>, unde se va întâlni cu John.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>excursie.in</code></p>
+
+<pre>5
+RRLRL
+3
+1 3
+4 1
+2 5</pre>
+
+<p><code>excursie.out</code></p>
+
+<pre>0
+1
+1</pre>
+
+<h3>Explicație</h3>
+
+<p>Pentru cea de a doua excursie <code>(4, 1)</code>, este necesar ca cel puțin un indicator să fie schimbat, cu costul de <code>1</code> dolar. De exemplu, indicatorul din dreptul satului <code>3</code> poate fi transformat din <code>L</code> în <code>R</code>.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>excursie.in</code></p>
+
+<pre>8
+RLRRRLRL
+4
+2 4
+1 6
+2 8
+6 2</pre>
+
+<p><code>excursie.out</code></p>
+
+<pre>1
+1
+2
+1</pre>
+
+<h3>Explicație</h3>
+
+<p>Pentru cea de a treia excursie <code>(2, 8)</code>, este nevoie ca cel puțin două indicatoare să fie schimbate, cu costul total de <code>2</code> dolari. De exemplu, indicatoarele din dreptul satelor <code>2</code> și <code>6</code> pot fi transformate din <code>L</code> în <code>R</code>. John și Mary nu se pot întâlni dacă nu schimbă cel puțin două indicatoare în cadrul acestei excursii.</p>		</article>
+		</body></html>

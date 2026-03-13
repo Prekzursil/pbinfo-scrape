@@ -1,0 +1,316 @@
+{
+  "id": 2980,
+  "slug": "valutar",
+  "name": "valutar",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/2980/valutar",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 151,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=151"
+    },
+    {
+      "id": 152,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=152"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Scrieți un program care să rezolve următoarele cerințe:<br>\n1. determină numărul de jucători existenți în joc după <code>X</code> mutări;<br>\n2. determină jucătorul care a rămas în joc și care are cea mai mare sumă de Euro după <code>X</code> mutări.</p>",
+      "text": "Scrieți un program care să rezolve următoarele cerințe: 1. determină numărul de jucători existenți în joc după X mutări; 2. determină jucătorul care a rămas în joc și care are cea mai mare sumă de Euro după X mutări."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>valutar.in</code> conține pe prima linie cerința care trebuie să fie rezolvată (<code>1</code> sau <code>2</code>). Pe a doua linie se află numerele naturale <code>a</code>, <code>b</code> și <code>nr</code><sub><code>0</code></sub>, cu semnificația din enunț. Pe a treia linie se află numerele naturale <code>N M L E X</code>, reprezentând numărul de case de schimb valutar, numărul de jucători, câți lei și câți euro primește fiecare jucător la începutul jocului, respectiv numărul de mutări din joc. Pe următoarele <code>N</code> linii sunt descrise casele de schimb valutar, câte o casă pe o linie, în ordinea de la <code>1</code> la <code>N</code>, sub forma <code>Cod C V</code>, cu semnificațiile din enunț. Valorile scrise pe aceeași linie sunt separate prin câte un spațiu.</p>",
+      "text": "Fișierul de intrare valutar.in conține pe prima linie cerința care trebuie să fie rezolvată (1 sau 2). Pe a doua linie se află numerele naturale a, b și nr0, cu semnificația din enunț. Pe a treia linie se află numerele naturale N M L E X, reprezentând numărul de case de schimb valutar, numărul de jucători, câți lei și câți euro primește fiecare jucător la începutul jocului, respectiv numărul de mutări din joc. Pe următoarele N linii sunt descrise casele de schimb valutar, câte o casă pe o linie, în ordinea de la 1 la N, sub forma Cod C V, cu semnificațiile din enunț. Valorile scrise pe aceeași linie sunt separate prin câte un spațiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>valutar.out</code> va conține o singură linie. Dacă cerința este <code>1</code>, linia va conține un număr natural reprezentând numărul de jucători existenți în joc după <code>X</code> mutări. Dacă cerința este <code>2</code>, linia va conține numărul jetonului jucătorului rămas în joc și care are cea mai mare sumă de euro după <code>X</code> mutări.</p>",
+      "text": "Fișierul de ieșire valutar.out va conține o singură linie. Dacă cerința este 1, linia va conține un număr natural reprezentând numărul de jucători existenți în joc după X mutări. Dacă cerința este 2, linia va conține numărul jetonului jucătorului rămas în joc și care are cea mai mare sumă de euro după X mutări."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ M, C, V ≤ 100</code></li>\n\t<li><code>1 ≤ a, b, nr0, N, X ≤ 10.000</code></li>\n\t<li><code>1 ≤ L, E ≤ 1.000.000</code></li>\n\t<li>Toate casele de schimb valutar au suficienți lei și euro pentru efectuarea oricărei acțiuni.</li>\n\t<li>Se garantează că pentru datele de test la cerința 2 va rămâne în joc după <code>X</code> mutări un singur jucător cu suma maximă de euro.</li>\n\t<li>Pentru fiecare cerință se acordă <code>50%</code> din punctajul obținut pe teste.</li>\n</ul>",
+      "text": "1 ≤ M, C, V ≤ 100 1 ≤ a, b, nr0, N, X ≤ 10.000 1 ≤ L, E ≤ 1.000.000 Toate casele de schimb valutar au suficienți lei și euro pentru efectuarea oricărei acțiuni. Se garantează că pentru datele de test la cerința 2 va rămâne în joc după X mutări un singur jucător cu suma maximă de euro. Pentru fiecare cerință se acordă 50% din punctajul obținut pe teste."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>valutar.in</code></p><pre>1\n3 2 7\n5 3 2 3 8\nA 1 1\nG 5 4\nG 6 4\nV 6 5\nR 2 3</pre><p><code>valutar.out</code></p><pre>1</pre>",
+      "text": "valutar.in1 3 2 7 5 3 2 3 8 A 1 1 G 5 4 G 6 4 V 6 5 R 2 3valutar.out1"
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>valutar.in</code></p><pre>2\n3 2 7\n5 3 2 3 8\nA 1 1\nG 5 4\nG 6 4\nV 6 5\nR 2 3</pre><p><code>valutar.out</code></p><pre>2</pre><h3>Explicație</h3><p>Numerele care se obțin când se dă cu zarul se generează astfel: <code>nr</code><sub><code>j</code></sub> <code>= (3 * nr</code><sub><code>j-1</code></sub> <code>+ 2) % 5 + 1</code>, unde <code>nr</code><sub><code>0</code></sub> <code>= 7</code>.<br>\nExistă în joc <code>5</code> case de schimb valutar și <code>3</code> jucători. Toți jucătorii au inițial <code>2</code> lei Și <code>3</code> euro și se află la casa de schimb valutar <code>1</code> care este albă. Se efectuează <code>8</code> mutări astfel:</p><p><img alt=\"\" src=\"/resurse/16a4b0/valutar_2.jpg\"></p><p>Singurul jucător rămas în joc este <code>2</code>, deci el are și suma maximă de euro.</p>",
+      "text": "valutar.in2 3 2 7 5 3 2 3 8 A 1 1 G 5 4 G 6 4 V 6 5 R 2 3valutar.out2ExplicațieNumerele care se obțin când se dă cu zarul se generează astfel: nrj = (3 * nrj-1 + 2) % 5 + 1, unde nr0 = 7. Există în joc 5 case de schimb valutar și 3 jucători. Toți jucătorii au inițial 2 lei Și 3 euro și se află la casa de schimb valutar 1 care este albă. Se efectuează 8 mutări astfel:Singurul jucător rămas în joc este 2, deci el are și suma maximă de euro."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Numerele care se obțin când se dă cu zarul se generează astfel: nrj = (3 * nrj-1 + 2) % 5 + 1, unde nr0 = 7. Există în joc 5 case de schimb valutar și 3 jucători. Toți jucătorii au inițial 2 lei Și 3 euro și se află la casa de schimb valutar 1 care este albă. Se efectuează 8 mutări astfel:"
+    }
+  ],
+  "constraints": [
+    "1 ≤ M, C, V ≤ 100",
+    "1 ≤ a, b, nr0, N, X ≤ 10.000",
+    "1 ≤ L, E ≤ 1.000.000",
+    "Toate casele de schimb valutar au suficienți lei și euro pentru efectuarea oricărei acțiuni.",
+    "Se garantează că pentru datele de test la cerința 2 va rămâne în joc după X mutări un singur jucător cu suma maximă de euro.",
+    "Pentru fiecare cerință se acordă 50% din punctajul obținut pe teste."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q18aff23bde.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/valutar_1.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-valutar-1-jpg.jpg",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/valutar_2.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-valutar-2-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "valutar.in / valutar.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "8 MB / 4 MB",
+    "sursa problemei": "OJI 2019",
+    "autor": "Emanuela Cerchez",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 8,
+  "author": "Emanuela Cerchez",
+  "sourceAttribution": "OJI 2019",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/2980/valutar"
+}

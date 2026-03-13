@@ -1,0 +1,68 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2212"><article id="enunt">
+			<p>Să considerăm o expresie aritmetică care conţine ca operanzi numai variabile al căror nume este format dintr-o singură literă mică a alfabetului englez. Valorile iniţiale ale variabilelor ce pot interveni în expresie sunt: <code>a = 1</code>, <code>b = 2</code>, …, <code>z = 26</code>. În expresie pot fi utilizaţi doi operatori binari  (<code>+</code> şi <code>–</code>, reprezentând adunarea şi respectiv scăderea) şi doi operatori unari (<code>++</code> şi <code>--</code>, reprezentând operatorul de incrementare şi respectiv operatorul de decrementare). Operatorii unari <code>++</code> şi <code>––</code> pot fi plasaţi numai înainte sau după o variabilă. Dacă operatorul unar <code>++</code>  apare înaintea unei variabile, atunci valoarea variabilei este mărită cu <code>1</code> înainte ca valoarea variabilei să fie luată în calculul expresiei. De exemplu, valoarea expresiei <code>++c–b</code> este <code>2</code>, iar valoarea variabilei <code>c</code> după evaluarea expresiei va fi <code>4</code>. Când operatorul unar <code>++</code> apare după variabilă, valoarea variabilei este mărită cu <code>1</code> după ce valoarea acelei variabile este folosită la calculul expresiei. De exemplu, valoarea expresiei <code>c++–b</code> este <code>1</code>, iar valoarea variabilei <code>c</code> după evaluarea expresiei va fi <code>4</code>. Operatorul <code>––</code> se comportă la fel, cu observaţia că valoarea variabilei se va micşora cu <code>1</code>. Operatorii unari au prioritate mai mare decât cei binari (mai exact, se execută mai întâi incrementările/decrementările, apoi adunările şi scăderile). În cazul în care există mai multe operaţii cu aceeaşi prioritate, acestea vor fi executate în ordine, de la stânga la dreapta.</p>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care să determine valoarea unei expresii, precum şi valorile finale ale variabilelor folosite în expresie.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>eval.in</code> conţine pe prima linie expresia. Aceasta poate conţine şi spaţii.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>eval.out</code> conţine pe prima linie un număr întreg care reprezintă valoarea expresiei, iar pe următoarele linii valorile variabilelor folosite în expresie, câte o valoare pe fiecare linie, în ordinea alfabetică a variabilelor.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>Expresia va conţine cel puţin o variabilă.</li>
+	<li>Numărul de caractere din expresie este mai mic decât <code>1000</code></li>
+	<li>Expresia nu conţine nicio ambiguitate (de forma <code>a+++b</code> sau <code>a---b</code>) .</li>
+	<li>Operatorii <code>++</code> şi <code>––</code> nu vor apărea simultan înainte şi după o variabilă (de exemplu, <code>++a++</code> sau <code>++a--</code>).</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>eval.in</code></p>
+
+<pre>d -- + a – b</pre>
+
+<p><code>eval.out</code></p>
+
+<pre>3
+1
+2
+3</pre>
+
+<h3>Explicație</h3>
+
+<p>Valoarea expresiei este <code>3</code><br>
+<code>a = 1</code><br>
+<code>b = 2</code><br>
+<code>d = 3</code></p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>eval.in</code></p>
+
+<pre>q- u   -+         +a-c++ - ++ t</pre>
+
+<p><code>eval.out</code></p>
+
+<pre>-30
+2
+4
+17
+21
+21</pre>
+
+<h3>Explicație</h3>
+
+<p>Valoarea expresiei este <code>-30</code><br>
+<code>a = 2</code><br>
+<code>c = 4</code><br>
+<code>q = 17</code><br>
+<code>t = 21</code><br>
+<code>u = 21</code></p>		</article>
+		</body></html>

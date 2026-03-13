@@ -1,0 +1,299 @@
+{
+  "id": 3683,
+  "slug": "predictor-machine",
+  "name": "Predictor Machine",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3683/predictor-machine",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 65,
+      "name": "Structuri de date arborescente",
+      "slug": "structuri-de-date-arborescente",
+      "href": "/?pagina=probleme-lista&tag=65"
+    },
+    {
+      "id": 154,
+      "name": "Arbori de intervale",
+      "slug": "arbori-de-intervale",
+      "href": "/?pagina=probleme-lista&tag=154"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>După ce a văzut câti oameni au vrut să știe ce rating vor avea în viitor pe Codeforces, Ștefan s-a decis să își folosească abilitățile sale de programator pentru a găsi punctele importante din graficele ratingurilor de pe Codeforces. Pentru că nu are timp să adauge toate tehnicile sale, el se va ocupa doar de punctele de interes.</p><p>Astfel, el primește un vector de <code>n</code> numere, indexat de la <code>1</code> și o funcție continuă, astfel încât <code>v[i] = f(i)</code>, unde <code>v[i]</code> e ratingul utilizatorului dupa <code>i</code> concursuri. Pentru că funcția e continuă, pentru fiecare linie dintre cele două puncte, graficul funcției va atinge toate punctele de coordonate întregi dintre valori. </p><p>De exemplu, daca <code>f(1) = 3</code> și <code>f(2) = 9</code>, linia va atinge punctele de pe coordonatele întregi <code>3, 4, 5, 6, 7, 8</code> și <code>9</code>. </p><p>De asemenea ni se dau <code>q</code> query-uri, unde la un query vom schimba valoarea unui punct din vector și după fiecare query, va trebui să afișăm punctul de interes al vectorului, care este punctul atins de cel mai mare număr de ori de către graficul funcției. De asemenea, trebuie afișat și numărul de ori în care este atins. </p><p>Dacă avem mai multe puncte de acest fel, vom afișa punctul cu cea mai mică valoare dintre ele.</p><p>Se garantează că cele <code>n</code> valori vor fi distincte atât la început, cât și de-a lungul actualizărilor. </p>",
+      "text": "După ce a văzut câti oameni au vrut să știe ce rating vor avea în viitor pe Codeforces, Ștefan s-a decis să își folosească abilitățile sale de programator pentru a găsi punctele importante din graficele ratingurilor de pe Codeforces. Pentru că nu are timp să adauge toate tehnicile sale, el se va ocupa doar de punctele de interes.Astfel, el primește un vector de n numere, indexat de la 1 și o funcție continuă, astfel încât v[i] = f(i), unde v[i] e ratingul utilizatorului dupa i concursuri. Pentru că funcția e continuă, pentru fiecare linie dintre cele două puncte, graficul funcției va atinge toate punctele de coordonate întregi dintre valori. De exemplu, daca f(1) = 3 și f(2) = 9, linia va atinge punctele de pe coordonatele întregi 3, 4, 5, 6, 7, 8 și 9. De asemenea ni se dau q query-uri, unde la un query vom schimba valoarea unui punct din vector și după fiecare query, va trebui să afișăm punctul de interes al vectorului, care este punctul atins de cel mai mare număr de ori de către graficul funcției. De asemenea, trebuie afișat și numărul de ori în care este atins. Dacă avem mai multe puncte de acest fel, vom afișa punctul cu cea mai mică valoare dintre ele.Se garantează că cele n valori vor fi distincte atât la început, cât și de-a lungul actualizărilor."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Programul citește de la tastatură pe prima linie numărul <code>n</code>. Pe următoarea linie, programul va citi cele <code>n</code> numere naturale, reprezentând valorile inițiale ale vectorului <code>v</code>. </p><p>\tPe linia a treia, programul va citi numărul <code>q</code>, iar pe următoarele <code>q</code> linii, programul va citi câte două numere, <code>pos</code> și <code>val</code>, reprezentând poziția schimbată și valoarea nouă.</p>",
+      "text": "Programul citește de la tastatură pe prima linie numărul n. Pe următoarea linie, programul va citi cele n numere naturale, reprezentând valorile inițiale ale vectorului v. Pe linia a treia, programul va citi numărul q, iar pe următoarele q linii, programul va citi câte două numere, pos și val, reprezentând poziția schimbată și valoarea nouă."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Programul va afișa pe ecran <code>q</code> linii, pe fiecare din cele <code>q</code> linii regăsindu-se cele două valori cerute de problemă, și anume punctul cu valoare minimă care este atins de numărul maxim de ori, precum și numărul de ori în care este atins.</p>",
+      "text": "Programul va afișa pe ecran q linii, pe fiecare din cele q linii regăsindu-se cele două valori cerute de problemă, și anume punctul cu valoare minimă care este atins de numărul maxim de ori, precum și numărul de ori în care este atins."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ pos ≤ n ≤ 100 000</code></li>\n\t<li><code>1 ≤ q ≤ 200 000</code></li>\n\t<li><code>1 ≤ v[i], val ≤ 200 000</code></li>\n\t<li>Pentru teste în valoare de <code>30</code> de puncte, <code>1 ≤ n, q ≤ 1000</code></li>\n</ul>",
+      "text": "1 ≤ pos ≤ n ≤ 100 000 1 ≤ q ≤ 200 000 1 ≤ v[i], val ≤ 200 000 Pentru teste în valoare de 30 de puncte, 1 ≤ n, q ≤ 1000"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><strong>Intrare</strong></p><pre>5\n4 2 6 1 7\n5\n1 3\n4 4\n2 1\n5 2\n3 5</pre><p><strong>Ieșire</strong></p><pre>3 4\n5 3\n5 3\n2 3\n2 3</pre><h3>Explicație</h3><p>După ce s-au efectuat toate actualizăriile, vectorul va arăta astfel: <code>3 1 5 4 2</code>. </p><p>Valoarea <code>2</code> e atinsă de <code>3</code> ori, între pozițiile <code>1</code> și <code>2</code>, între pozițiile <code>2</code> și <code>3</code> precum și între pozițiile <code>4</code> și <code>5</code>. </p>",
+      "text": "Intrare5 4 2 6 1 7 5 1 3 4 4 2 1 5 2 3 5Ieșire3 4 5 3 5 3 2 3 2 3ExplicațieDupă ce s-au efectuat toate actualizăriile, vectorul va arăta astfel: 3 1 5 4 2. Valoarea 2 e atinsă de 3 ori, între pozițiile 1 și 2, între pozițiile 2 și 3 precum și între pozițiile 4 și 5."
+    }
+  ],
+  "examples": [
+    {
+      "input": "5\n4 2 6 1 7\n5\n1 3\n4 4\n2 1\n5 2\n3 5",
+      "output": "3 4\n5 3\n5 3\n2 3\n2 3",
+      "explanation": "După ce s-au efectuat toate actualizăriile, vectorul va arăta astfel: 3 1 5 4 2."
+    }
+  ],
+  "constraints": [
+    "1 ≤ pos ≤ n ≤ 100 000",
+    "1 ≤ q ≤ 200 000",
+    "1 ≤ v[i], val ≤ 200 000",
+    "Pentru teste în valoare de 30 de puncte, 1 ≤ n, q ≤ 1000"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qeb66be6535.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Stefan Dascalescu stefdasca.ro (stefdasca)",
+    "clasa": "11",
+    "intrare/ieșire": "tastatură / ecran",
+    "limită timp": "2 secunde",
+    "limită memorie": "32 MB / 32 MB",
+    "sursa problemei": "IOIT 2020-21, Runda 3",
+    "autor": "Stefan Dascalescu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 2,
+  "memoryLimitMb": 32,
+  "author": "Stefan Dascalescu",
+  "sourceAttribution": "IOIT 2020-21, Runda 3",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3683/predictor-machine"
+}

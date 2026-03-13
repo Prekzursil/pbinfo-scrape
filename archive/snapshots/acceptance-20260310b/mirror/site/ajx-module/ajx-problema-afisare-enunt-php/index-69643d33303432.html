@@ -1,0 +1,103 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3042"><article id="enunt">
+			<p>Pasionat de informatică și de puzzle-uri, Dorel a construit o matrice <code>A</code> de dimensiunea <code>N × M</code> lipind mai multe piese dreptunghiulare de diferite dimensiuni. Fiecare piesă este compusă din elemente de dimensiunea <code>1 × 1</code> și rețin o aceeași valoare (vezi exemplele). Matricea rezultată nu are spații libere, iar piesele din care este compusă nu se suprapun. Nu există două piese cu aceeași valoare.<br>
+Deși inițial părea că acest design este unul inedit, nu a durat mult până când Dorel s-a plictisit. Astfel, acum el dorește să “upgradeze” matricea construită. Dorel alege o submatrice delimitată de coordonatele <code>(x1,y1)</code> – colțul stânga-sus, <code>(x2,y2)</code> – colțul dreapta-jos (<code>1 ≤ x1 ≤ x2 ≤ N</code>, <code>1 ≤ y1 ≤ y2 ≤ M</code>), unde crește toate valorile elementelor submatricei cu valoarea <code>V</code>.<br>
+Dorel efectuează în ordine <code>Q</code> operații de upgrade, operații numerotate de la <code>1</code> la <code>Q</code>. La finalizarea celor <code>Q</code> operații de upgrade, toate elementele din matrice au valoarea mai mare sau egală cu <code>K</code>. După o operație de upgrade, structura inițială a matricei se modifică.</p>
+
+<h1>Cerința</h1>
+
+<p>Cum priceperea lui Dorel este proverbială, trebuie să îl ajutați în rezolvarea următoarelor cerințe:<br>
+1) determinarea coordonatelor piesei cu număr maxim de elemente înainte ca Dorel să efectueze operațiile de upgrade;<br>
+2) determinarea numărului minim de operații de upgrade după care toate elementele matricei au valoarea mai mare sau egală cu <code>K</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Datele de intrare se citesc din fișierul <code>amat.in</code>, care are următoarea structură:<br>
+</p><ul>
+	<li>pe prima linie se află numărul natural <code>C</code>, care poate fi egal cu <code>1</code> sau <code>2</code>, în funcție de cerința ce trebuie rezolvată;</li>
+	<li>pe linia următoare se află două numerele naturale <code>N</code> și <code>M</code> cu semnificația din enunț;</li>
+	<li>pe următoarele <code>N</code> linii se găsesc elementele matricei <code>A</code>.</li>
+	<li>dacă <code>C = 2</code> atunci fișierul de intrare mai conține: pe linia <code>N+2</code> numerele naturale <code>Q K</code> cu semnificațiile din enunț; pe următoarele <code>Q</code> linii descrierea submatricelor asupra cărora se efectuează operații de upgrade de forma: <code>x1 y1 x2 y2 V</code>.</li><br>
+</ul><p></p>
+
+<h1>Date de ieșire</h1>
+
+<p>Datele de ieșire se vor scrie în fișierul <code>amat.out</code>, astfel:<br>
+Dacă <code>C = 1</code> se vor scrie, separate prin spațiu patru numere naturale nenule <code>x1 y1 x2 y2</code> ce reprezintă coordonatele colțului stânga-sus, respectiv colțului dreapta-jos unde este plasată piesa cu număr maxim de elemente înainte de upgrade. Dacă există mai multe astfel de piese, atunci vor fi scrise coordonatele piesei pentru care coordonatele colțului stânga-sus are valoarea liniei cea mai mare, iar la linii egale, se va alege piesa cu coordonata coloanei cea mai mare.<br>
+Dacă <code>C = 2</code> se va scrie numărul natural nenul <code>NR</code> ce reprezintă numărului minim de operații de upgrade după care toate elementele matricei au valoarea mai mare sau egală cu <code>K</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N, M ≤ 1000</code>; <code>1 ≤ Q ≤ 100.000</code>; <code>1 ≤ V ≤ 1000</code></li>
+	<li><code>-1000 ≤ elementele matricei A înainte de upgrade ≤ 1000</code></li>
+	<li>Operațiile de upgrade se efectuează obligatoriu în ordinea citirii</li>
+	<li>Pentru teste în valoare de <code>30</code> de puncte, <code>C = 1</code></li>
+	<li>Pentru teste în valoare de <code>30</code> de puncte, <code>C = 2</code> şi <code>N, M, Q ≤ 250</code></li>
+	<li>Pentru teste în valoare de <code>50</code> de puncte, <code>C = 2</code> şi <code>Q ≤ 4000</code></li>
+	<li>Pentru teste în valoare de <code>70</code> de puncte, <code>C = 2</code>.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>amat.in</code></p>
+
+<pre>1
+4 6
+1 1 1 3 2 2
+1 1 1 3 2 2
+6 4 4 4 2 2
+6 4 4 4 5 7</pre>
+
+<p><code>amat.out</code></p>
+
+<pre>3 2 4 4</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința 1. Matricea inițială construită de Dorel este:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-amat-jpg.jpg"></p>
+
+<p>Există <code>3</code> piese cu număr maxim de valori egale, dar piesa care corespunde cerințelor are coordonatele: <code>3 2 4 4</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>amat.in</code></p>
+
+<pre>2
+4 6
+1 1 1 3 2 2
+1 1 1 3 2 2
+6 4 4 4 2 2
+6 4 4 4 5 7
+3 6
+1 1 3 3 5
+1 2 4 6 5
+4 1 4 3 1</pre>
+
+<p><code>amat.out</code></p>
+
+<pre>2</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința 2. Matricea inițială construită este cea prezentată mai sus.<br>
+Dorel efectuează <code>3</code> operații de upgrade.<br>
+Matricea obținută după efectuarea primului upgrade:<br>
+<code>6 6 6 3 2 2</code><br>
+<code>6 6 6 3 2 2</code><br>
+<code>11 9 9 4 2 2</code><br>
+<code>6 4 4 4 5 7</code><br>
+Matricea obținută după efectuarea celui de-al doilea upgrade:<br>
+<code>6 11 11 8 7 7</code><br>
+<code>6 11 11 8 7 7</code><br>
+<code>11 14 14 9 7 7</code><br>
+<code>6 9 9 9 10 12</code><br>
+Matricea obținută după efectuarea celui de-al treilea upgrade:<br>
+<code>6 11 11 8 7 7</code><br>
+<code>6 11 11 8 7 7</code><br>
+<code>11 14 14 9 7 7</code><br>
+<code>7 10 10 9 10 12</code><br>
+La final tuturor operațiilor de upgrade, matricea are toate valorile mai mari sau egale <code>6</code>.<br>
+Se observă că sunt suficiente primele două operații de upgrade pentru că toate elementele matricei să fie mai mari sau egale cu <code>6</code>.</p>		</article>
+		</body></html>

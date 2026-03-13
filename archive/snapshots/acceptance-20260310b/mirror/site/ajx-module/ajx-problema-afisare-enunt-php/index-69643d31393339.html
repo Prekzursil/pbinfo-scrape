@@ -1,0 +1,60 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1939"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>Pe o tablă de joc cu <code>N</code> linii și <code>M</code> coloane se află un roboțel pe poziția <code>1,1</code>. El știe să meargă doar pe conturul tablei (prima și ultima linie, respectiv prima și ultima coloană). Robotul dorește să ajungă pe poziția <code>N, M</code> dar nu este așa simplu. Pe tabla de joc se află <code>Q</code> bare de lungimi infinite. Barele sunt fixate în colțul din dreapta jos a unor căsuțe. La început, o bară se poate afla fie în poziție verticală, fie în poziție orizontală. Robotul poate schimba orientarea acestor bare din poziție verticală în poziție orizontală și invers. El nu poate trece printr-o bară. <br>
+De exemplu, dacă avem <code>N=4</code>, <code>M=4</code>, <code>Q=1</code> și bara se află la coordonatele <code>3,3</code>  în poziție verticală, robotul nu poate ajunge la căsuțele de pe coloana <code>4</code>. Dar dacă el învârte bara poate merge pe coloana <code>4</code>, apoi pentru a merge pe linia <code>4</code> poate să învârtă bara din nou.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1700-1939-bare-png.png"></p>
+
+<p>Această soluție nu este optimă deoarece robotul putea ajunge în poziția <code>4,4</code> învârtind o singură dată bara. Mai întâi se poziționează pe linia <code>4</code>, apoi învârte bara și se duce pe coloana <code>4</code>.</p>
+
+<p>Să se afle numărul minim de rotiri ale barelor pentru ca robotul să ajungă din poziția <code>1,1</code> în poziția <code>N,M</code>, mergând numai în dreapta și în jos.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>bare.in</code> conține pe prima linie trei numere <code>N</code>, <code>M</code> și <code>Q</code> reprezentând numărul de coloane și numărul de linii pe care îl are tabla de joc, respectiv numărul de bare care se află pe tablă. Pe următoarele <code>Q</code> linii se găsesc câte trei valori <code>X[i] Y[i]  K[i]</code>, unde <code>X[i] Y[i]</code> reprezintă linia și coloana căsuței în care se află bara, iar <code>K[i]</code> reprezintă orientarea barei (poate fi verticală <code>V</code> sau orizontală <code>O</code>).</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>bare.out</code> va conține pe prima linie o singură valoare ce reprezintă numărul minim de rotiri ale barelor pentru ca robotul să ajungă din poziția <code>1,1</code> în poziția <code>N,M</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>3 ≤ N,M ≤ 10000</code></li>
+	<li><code>0 ≤ Q ≤ min(N,M)</code></li>
+	<li>Oricare două bare nu vor fi fixate pe aceeași linie sau pe aceeași coloană.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>bare.in</code></p>
+
+<pre>4 4 1
+3 3 V</pre>
+
+<p><code>bare.out</code></p>
+
+<pre>1</pre>
+
+<h3>Explicație</h3>
+
+<p>Robotul pornește din <code>1, 1</code>, apoi se duce în căsuța <code>4,1</code> → învârte bara apoi se poate duce în <code>4,4</code>.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>bare.in</code></p>
+
+<pre>4 5 3
+3 4 V
+2 1 O
+1 2 V</pre>
+
+<p><code>bare.out</code></p>
+
+<pre>4</pre>
+
+<h3>Explicație</h3>
+
+<p>Robotul pornește din <code>1, 1</code> întoarce bara din căsuța <code>2,1</code> → se duce în căsuța <code>4,1</code> apoi întoarce toate cele <code>3</code> bare și se duce în căsuța <code>4,4</code>.</p>		</article>
+		</body></html>

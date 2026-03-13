@@ -1,0 +1,54 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3573"><article id="enunt">
+			<p>Pentru un concurs de design de jocuri, Gigel vrea să construiască un joc. La joc participă <code>n</code> concurenţi numerotaţi de la <code>1</code> la <code>n</code>. Fiecare concurent are la dispoziţie câte un şir de <code>m</code> încăperi, numerotate de la <code>1</code> la <code>m</code>. Scopul jocului este de a găsi o comoară ascunsă în una din aceste încăperi. Fiecare încăpere conţine un cod, număr natural, fie egal cu <code>0</code>, fie având cel puţin <code>2</code> cifre. Ultima cifră indică numărul de etape de penalizare, adică numărul de etape în care concurentul nu are voie să părăsească încăperea. Numărul obţinut prin eliminarea ultimei cifre a codului indică numărul încăperii în care se va deplasa acesta la următoarea etapă sau la expirarea penalizării.</p>
+
+<p>Există două excepţii de la regula de definire a codului: numărul <code>9999</code> codifică o încăpere conţinând o comoară, iar numărul <code>0</code> o încăpere conţinând o capcana.</p>
+
+<p>În etapa <code>1</code> fiecare jucător intră în încăperea <code>1</code> din şirul său de încăperi. În funcţie de codul găsit în încăpere sunt posibile următoarele situaţii:</p>
+
+<ul>
+	<li>codul găsit este <code>9999</code> ceea ce înseamnă că jucătorul este câştigător şi jocul se încheie la finalul acestei etape;</li>
+	<li>codul găsit este <code>0</code> ceea ce duce la eliminarea sa din joc;</li>
+	<li>pentru celelalte coduri, după efectuarea etapelor de penalizare, jucătorul efectuează o deplasare în încăperea indicată de cod. De exemplu la întâlnirea codul <code>157</code>, după efectuarea celor <code>7</code> etape de penalizare jucătorul se va deplasa în camera <code>15</code>.</li>
+</ul>
+
+<p>Trecerea de la o etapă la alta se realizează simultan pentru toţi concurenţii.</p>
+
+<h1>Cerința</h1>
+
+<p>Fiind dat numărul <code>n</code> de concurenţi, numărul <code>m</code> de încăperi alocate fiecărui concurent, şi codurile din cele <code>n×m</code> încăperi să se determine câştigătorul jocului, numărul încăperii în care a găsit comoara, numărul de etape parcurse până când câştigătorul găseşte comoara precum şi numărul de concurenţi eliminaţi din joc până la etapa respectivă (inclusiv).</p>
+
+<h1>Date de intrare</h1>
+
+<p>Prima linie a fişierului de intrare <code>joc11.in</code> conţine două numere naturale <code>n</code> şi <code>m</code>, separate printr-un spaţiu, reprezentând numărul concurenţilor, respectiv numărul încăperilor. Următoarele <code>n</code> linii conţin câte <code>m</code> numere naturale, separate prin câte un spaţiu, reprezentând codurile din fiecare încăpere.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Prima linie a fişierului de ieşire <code>joc11.out</code> va conţine patru numere naturale separate prin câte un spaţiu, reprezentând indicele câştigătorului, numărul încăperii unde a găsit comoara, numărul etapei în care a câştigat şi respectiv numărul de concurenţi eliminaţi din joc.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 400</code></li>
+	<li><code>1 ≤ m ≤ 900</code></li>
+	<li>Pentru toate testele de intrare se garantează că există exact un câştigător.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>joc11.in</code></p>
+
+<pre>4 8
+0 9999 41 50 61 70 80 30
+30 80 60 60 9999 21 40 50
+20 30 40 50 61 71 81 9999
+20 30 50 0 61 71 9999 41</pre>
+
+<p><code>joc11.out</code></p>
+
+<pre>2 5 7 1</pre>
+
+<h3>Explicație</h3>
+
+<p>Câştigă jucătorul al <code>2</code>-lea, după <code>7</code> etape, iar încăperea în care a găsit comoara este încăperea <code>5</code>. În cele <code>7</code> etape a fost eliminat un singur concurent şi anume primul concurent.<br>
+Încăperile prin care trece jucătorul câştigător până la final sunt: <code>1-&gt;3-&gt;6-&gt;2-&gt;8-&gt;5</code></p>		</article>
+		</body></html>

@@ -1,0 +1,81 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1761"><article id="enunt">
+			<p>Renumitul nostru brutar a avut azi noapte un vis tare ciudat: acesta trăia într-un univers paralel în care nu omul îl mănâncă pe blat ci blatul îl mănâncă pe om… (eh, poate nu chiar atât de paralel). Astfel, brutarul nostru a fost atacat de blatul pe care tocmai îl pregătise (pentru prăjituri, evident) și a încercat să scape. Acesta a ieșit din brutărie și a ajuns în fața unui câmp de formă dreptunghiulară, cu dimensiunile cunoscute, ce poate fi împărțit în celule elementare cu latura de o unitate (exact ca o matrice!). Acesta poate intra pe câmp prin orice celulă a primei linii și trebuie să ajungă în orice celulă a ultimei linii (blatul se va întări până va ajunge acolo). Unele celule îi sunt inaccesibile din cauza diverselor obstacole (pietre, pomi, gropi,etc.)</p>
+
+<p>Brutarul nostru se poate deplasa în <code>6</code> moduri:</p>
+
+<ul>
+	<li>Din căsuța curentă în cele adiacente ( <code>Nord</code>, <code>Vest</code>, <code>Sud</code>, <code>Est</code> )</li>
+	<li>Două mișcări speciale ce pot varia.</li>
+</ul>
+
+<p>Mutările speciale vor fi citite din fișier și o mutare se va codifica astfel: <code>xA yB</code>, unde <code>x</code> și <code>y</code> sunt numere naturale nenule iar <code>A</code> și <code>B</code> sunt două caractere ce codifică direcția (<code>A</code> poate fi <code>'N'</code> sau <code>'S'</code> de la <code>Nord</code> respectiv <code>Sud</code> iar <code>B</code> poate fi <code>‘E’</code> sau <code>‘V’</code> de la <code>Est</code> respectiv <code>Vest</code>)</p>
+
+<p>Ex. <code>5N 2V</code> codifică mutarea <code>5</code> poziții spre Nord și <code>2</code> poziții spre Vest. (din poziția <code>(x,y)</code> ajunge în poziția <code>(x-5, y-2)</code>)</p>
+
+<p>O mutare specială se poate face dacă celula destinație nu este ocupată de un obstacol și dacă nu implică ieșirea brutarului din matrice.</p>
+
+<h1>Cerința</h1>
+
+<p>Brutarul vă roagă să îi specificați un traseu cu număr minim de celule parcurse, ce pornește de pe prima linie și se termină pe ultima linie, pentru a nu fi blătuit (mâncat de blat).</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului <code>brutar.in</code> se vor afla două numere naturale separate prin spațiu: <code>N</code> și <code>M</code> reprezentând numărul de linii și numărul de coloane ale câmpului. Urmează <code>N</code> linii a câte <code>M</code> caractere <code>‘X’</code> și <code>‘O’</code> unde <code>‘X'</code> reprezintă obstacol iar <code>‘O’</code> reprezintă zonă liberă.</p>
+
+<p>Ultimele două linii reprezintă codificarea celor două mutări speciale, câte o mutare pe o linie.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul <code>brutar.out</code> va conține, pe prima linie, numărul <code>T</code> de celule al unui traseu de lungime minimă. Următoarele <code>T</code> linii vor conține descrierea traseului, câte o celulă pe o linie, prin coordonatele ei, în ordinea în care au fost parcurse.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N, M ≤ 1.000</code></li>
+	<li><code>1 ≤ x ≤ N</code></li>
+	<li><code>1 ≤ y ≤ M</code></li>
+	<li>Se garantează că mereu va există cel puțin un drum care pornește de pe prima linie și ajunge pe ultima linie a matricei.</li>
+	<li>Dacă există mai multe soluții cu număr minim de pași, se poate afișa oricare dintre acestea.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>brutar.in</code></p>
+
+<pre>14 10
+XXXXXXOXXX
+OXOOOXOOOO
+OOXXOOXOXO
+OXOOOOXXXX
+OOOOXXOXOX
+OXOXOXXOOO
+XOXOOOOXOO
+OXXXOXOOOX
+XOOXOXOXOO
+OXOXOXOXOO
+OOOOXXOOXO
+XOOOXOXOOX
+OXOOOOOOOO
+XOXXXOXXXX
+2S 1V
+2S 1E</pre>
+
+<p><code>brutar.out</code></p>
+
+<pre>9
+1 7
+3 6
+5 7
+7 6
+9 5
+10 5
+12 4
+12 3
+14 2</pre>
+
+<h3>Explicație</h3>
+
+<p>Drumul este colorat în galben:</p>
+
+<p></p>		</article>
+		</body></html>

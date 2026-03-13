@@ -1,0 +1,60 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1071"><article id="enunt">
+			<p>O invazie de <code>N</code> farfurii zburătoare (denumite uzual <span class="caps">OZN</span>) dă bătăi de cap autorităţilor. În fiecare astfel de <span class="caps">OZN</span> se află extratereştri care au ca misiune distrugerea planetei noastre. Radarul care a detectat invazia are un ecran similar cu planul <code>XOY</code>. Fiecare <span class="caps">OZN</span> este reprezentat pe ecran printr-un segment de dreaptă. </p>
+
+<p>Pentru anihilarea <span class="caps">OZN</span>-urilor, autorităţile dispun de <code>K</code> arme laser. Armele sunt poziţionate pe sol (ilustrat pe ecranul radarului prin axa <code>OX</code>). Fiecare armă emite o rază laser, ilustrată pe ecran printr-o paralelă cu axa <code>OY</code>. Dacă o rază laser intersectează segmentul de pe ecranul radarului corespunzător unui <span class="caps">OZN</span>, raza va omorî toţi extratereştrii aflaţi în <span class="caps">OZN</span>-ul respectiv. </p>
+
+<p>Din păcate, în preajmă se află doar un militar specializat în arme laser, aşa că autorităţile doresc să ştie exact ce armă trebuie să folosească acesta pentru a distruge cât mai mulţi extratereştri.  </p>
+
+<h1>Cerinţă</h1>
+
+<p>Ajutaţi autorităţile să determine numărul de extratereştri care pot fi anihilaţi cu fiecare armă din dotare.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>ozn.in</code> conține pe prima linie două numere naturale separate prin spaţiu <code>N K</code> reprezentând numărul de <span class="caps">OZN</span>-uri şi respectiv numărul de arme laser. Pe următoarele <code>N</code> linii sunt descrise cele N <span class="caps">OZN</span>-uri, câte unul pe linie. Un <span class="caps">OZN</span> este descris prin <code>5</code> numere naturale separate prin câte un spaţiu <code>x1 y1 x2 y2 nr</code>, reprezentând în ordine coordonatele capetelor segmentului corespunzător <code>(x1, y1)</code>, <code>(x2, y2)</code>, iar <code>nr</code> – numărul de extratereştri din el. Pe ultima linie se găsesc <code>K</code> numere naturale <code>a</code><sub><code>1</code></sub> <code>a</code><sub><code>2</code></sub> <code>a</code><sub><code>3</code></sub> … <code>a</code><sub><code>K</code></sub>, separate prin câte un spaţiu, reprezentând coordonatele pe axa <code>OX</code> (abscisele) unde sunt amplasate armele laser.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>ozn.out</code> va conține <code>K</code> linii. Pe linia <code>i</code> va fi scris numărul total de extratereştri care pot fi distruşi cu arma <code>i</code>, considerând armele numerotate în ordinea în care acestea apar în fişierul de intrare.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 20 000</code></li>
+	<li><code>1 ≤ K ≤ 20 000</code></li>
+	<li><code>1 ≤</code> orice coordonată din fişierul de intrare <code>≤ 2 000 000</code></li>
+	<li><code>1 ≤ nr ≤ 100</code>, pentru orice <span class="caps">OZN</span></li>
+	<li><code>x</code><sub><code>1</code></sub> <code>&lt; x</code><sub><code>2</code></sub>, pentru orice <span class="caps">OZN</span></li>
+	<li>Pe ecranul radarului segmentele ce descriu navele se pot intersecta.</li>
+	<li>Dacă raza laser trece prin unul dintre capetele unui <span class="caps">OZN</span> atunci acesta este distrus.</li>
+	<li>Pentru 50% dintre testele de intrare <code>1 ≤ N*K ≤ 10 000 000</code></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>ozn.in</code></p>
+
+<pre>5 3
+1 1 3 2 2
+2 3 4 1 3
+6 5 8 5 8
+5 1 7 1 6
+6 2 7 4 1
+3 7 5</pre>
+
+<p><code>ozn.out</code></p>
+
+<pre>5
+15
+6</pre>
+
+<h1>Explicație</h1>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1051-1075-ozn-png.png"></p>
+
+<p>Arma care emite din punctul <code>(3,0)</code> doboară farfuriile reprezentate de segmentele <code>{(1,1)(3,2)}</code> şi <code>{(2,3)(4,1)}</code> distrugând în total <code>5</code> extratereştri.</p>
+
+<p>Arma care emite din punctul <code>(7,0)</code> doboară farfuriile reprezentate de segmentele <code>{(5,1)(7,1)}, {(6,2)(7,4)}</code> şi <code>{(6,5)(8,5)}</code> distrugând în total <code>15</code> extratereştri.</p>
+
+<p>Arma care emite din punctul <code>(5,0)</code> doboară farfuria reprezentată de segmentul <code>{(5,1)(7,1)}</code> şi distruge <code>6</code> extratereştri.</p>		</article>
+		</body></html>

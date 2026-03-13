@@ -1,0 +1,55 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4584"><article id="enunt">
+			<p>La atelierul de făcut potcoave lucrează <code>N</code> muncitori, numerotaţi pentru simplitate de la <code>1</code> la <code>N</code>. Fiecare muncitor a încheiat la angajare un contract în care este specificat numărul de potcoave pe care trebuie să le producă muncitorul în fiecare zi de muncă, respectiv a câta zi muncitorul este liber. Mai exact, muncitorul <code>i</code> (<code>1 ≤ i ≤ N</code>) trebuie să producă în fiecare zi de muncă <code>p</code><sub><code>i</code></sub> potcoave, iar fiecare a <code>k</code><sub><code>i</code></sub>-a zi va fi liberă (adică muncitorul <code>i</code> va fi liber în ziua <code>k</code><sub><code>i</code></sub>, <code>2k</code><sub><code>i</code></sub>, <code>3k</code><sub><code>i</code></sub>, …). În ziua liberă el nu va veni la atelier, deci nu produce potcoave. Atelierul tocmai a primit o comandă de <code>M</code> potcoave.</p>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care să determine numărul minim de zile după care comanda poate fi integral livrată.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>potcoave.in</code> conține pe prima linie numărul natural <code>M</code> reprezentând numărul de potcoave care trebuie să fie livrate. Pe cea de a doua linie se află numărul natural <code>N</code> reprezentând numărul de muncitori. Pe următoarele <code>N</code> linii sunt scrise datele contractuale ale celor <code>N</code> muncitori. Pe a <code>i</code>-a linie dintre cele <code>N</code> se află două numere naturale separate prin spaţiu <code>p</code><sub><code>i</code></sub> <code>k</code><sub><code>i</code></sub>, cu semnificaţia din enunţ (<code>1 ≤ i ≤ N</code>). </p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>potcoave.out</code> va conține o singură linie pe care va fi scris numărul minim de zile după pot fi livrate cele <code>M</code> potcoave din comanda primită.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ M ≤ 10</code><sup><code>18</code></sup></li>
+	<li><code>1 ≤ N ≤ 10.000</code></li>
+	<li><code>1 ≤ p</code><sub><code>i</code></sub> <code>≤ 10</code><sup><code>18</code></sup> (<code>1 ≤ i ≤ N</code>)</li>
+	<li><code>2 ≤ k</code><sub><code>i</code></sub> <code>≤ 10</code><sup><code>18</code></sup> (<code>1 ≤ i ≤ N</code>)</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>potcoave.in</code></p>
+
+<pre>100
+3
+2 3
+3 4
+5 7</pre>
+
+<p><code>potcoave.out</code></p>
+
+<pre>13</pre>
+
+<h3>Explicație</h3>
+
+<p>Ziua 1: lucrează toţi cei 3 muncitori şi produc <code>2 + 3 + 5 = 10</code> potcoave.<br>
+Ziua 2: lucrează toţi cei 3 muncitori şi produc <code>2 + 3 + 5 = 10</code> potcoave.<br>
+Ziua 3: lucrează muncitorii 2 şi 3 şi produc <code>3 + 5 = 8</code> potcoave.<br>
+Ziua 4: lucrează muncitorii 1 şi 3 şi produc <code>2 + 5 = 7</code> potcoave.<br>
+Ziua 5: lucrează toţi cei 3 muncitori şi produc <code>2 + 3 + 5 = 10</code> potcoave.<br>
+Ziua 6: lucrează muncitorii 2 şi 3 şi produc <code>3 + 5 = 8</code> potcoave.<br>
+Ziua 7: lucrează muncitorii 1 şi 2 şi produc <code>2 + 3 = 5</code> potcoave.<br>
+Ziua 8: lucrează muncitorii 1 şi 3 şi produc <code>2 + 5 = 7</code> potcoave.<br>
+Ziua 9: lucrează muncitorii 2 şi 3 şi produc <code>3 + 5 = 8</code> potcoave.<br>
+Ziua 10: lucrează toţi cei 3 muncitori şi produc <code>2 + 3 + 5 = 10</code> potcoave.<br>
+Ziua 11: lucrează toţi cei 3 muncitori şi produc <code>2 + 3 + 5 = 10</code> potcoave.<br>
+Ziua 12: lucrează doar muncitorul 3 şi produce <code>5</code> potcoave.<br>
+Ziua 13: lucrează toţi cei 3 muncitori şi produc <code>2 + 3 + 5 = 10</code> potcoave.<br>
+După 13 zile numărul total de potcoave produse este <code>10 + 10 + 8 + 7 + 10 + 8 + 5 + 7 + 8 + 10 + 10 + 5 + 10 = 108</code>, suficient pentru a onora comanda. </p>		</article>
+		</body></html>

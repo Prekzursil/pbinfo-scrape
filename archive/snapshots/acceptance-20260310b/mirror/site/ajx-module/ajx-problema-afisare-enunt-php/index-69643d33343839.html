@@ -1,0 +1,60 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3489"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>Considerăm o suprață plană în formă de pătrat având latura de 100 de unități și două mulțimi: <br>
+</p><ul>
+	<li>Mulțimea \(P\) de puncte având coordonatele numere reale pozitive mai mici decat 100 (deci aparținând pătratului).</li>
+	<li>Mulțimea ordonată \(C\) de cercuri având centrul în același pătrat și cu raza variabilă (se poate întâmpla ca centrul să fie în punctul \(p(1,1)\) și cercul să aibă raza de 3, deci să aibă o porțiune înafara pătratului).</li><br>
+</ul><p></p>
+
+<p>Se dorește să se stabilească, pentru fiecare dintre cercurile din mulțimea \(C\), câte puncte din mulțimea \(P\) se află în interior (sau pe marginea acestuia).</p>
+
+<h1>Date de intrare</h1>
+
+<p>Programul citește de la tastatură numărul \(n\) de puncte, iar apoi \(n\) cupluri de numere reale, separate prin spații reprezentând coordonatele fiecărui punct. După ce a citit valorile reprezentând coordonatele punctelor, se va citi numărul \(m\) de cercuri și vor apoi cele \(m\) triplete reprezentând coordonatele centrului cercului respectiv  raza cercului.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Pentru fiecare cerc citit se va afișa pe câte o linie diferită câte puncte sunt in interiorul său sau pe frontieră.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>\(1 ≤ n ≤ 100000\)</li>
+	<li>Pentru fiecare punct \(p(x,y)\) avem \(  x\in[0,100] \) respectiv \(  y\in[0,100] \)</li>
+	<li>\(1 ≤ m ≤ 10000\)</li>
+	<li>Pentru fiecare cerc \(c(x,y,r)\) avem \(  x\in[0,100] \), \(  y\in[0,100] \) și \(  r\in[0,30] \)</li>
+</ul>
+
+
+<h1>Exemplu:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>3
+6.39 24.96
+6.23 6.17
+20.0 20.0
+3
+23.05 83 10.57
+15.00 15.00 10.0
+10.0 20.0 10</pre>
+
+
+<p><strong>Ieșire</strong></p>
+
+<pre>0
+1
+2</pre>
+
+
+<h3>Explicație</h3>
+
+<p>S-au introdus <code>3</code> puncte și <code>3</code> cercuri.<br>
+</p><ul>
+	<li>Cercul 1: \({c}_{1}(23.05, 83, 10.57)\) nu conține niciun punct deoarece coordonata sa \(y\) este prea mare, raza de <code>10.57</code> fiind insuficientă pentru a ajunge la cele trei puncte care au coordonate relativ mici (distantele de la centrul cercului la cele trei puncte sunt de <code>78.65</code>, <code>60.38</code>, <code>63.07</code>, toate valorile fiind mai mari decat raza).</li>
+	<li>Cercul 2: \({c}_{2}(15.00, 15.00, 10.0)\) contine \({p}_{3}(20,20)\). Distanța de la centru la acest punct este de <code>7.07</code>, distanță mai mică decât raza cercului (de <code>10.0</code>). Deci punctul se află în cerc. Distanțele de la centrul lui \({c}_{2}\) până la \({p}_{1}\) și \({p}_{2}\) sunt de <code>12.45</code> respectiv de <code>13.17</code>.</li>
+	<li>Cercul 3: \({c}_{3}(10.0, 20.0, 10)\) contine \({p}_{1}(6.39, 24.96)\). Distanța de la centru la acest punct este de <code>6.14</code>, distanță mai mică decât raza cercului (de <code>10.0</code>). De asemenea conține punctul \({p}_{3}(20,20)\), distanța de la acesta la centrul cercului fiind exact cât raza cercului. Distanță de la \({c}_{3}\) la \({p}_{2}\) este de <code>14.34</code> (deci mai mare decât raza lui \({c}_{3}\)).<br>
+Concluzia este că cercul 1 conține 0 puncte, al doilea cerc conține 1 punct iar cel de-al treilea cerc coține 2 puncte – de aici și rezultatul.</li><br>
+</ul><p></p>		</article>
+		</body></html>

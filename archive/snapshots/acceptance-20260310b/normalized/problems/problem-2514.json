@@ -1,0 +1,306 @@
+{
+  "id": 2514,
+  "slug": "warcraft",
+  "name": "warcraft",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/2514/warcraft",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 16,
+      "name": "Teoria Grafurilor",
+      "slug": "teoria-grafurilor",
+      "href": "/?pagina=probleme-lista&tag=16"
+    },
+    {
+      "id": 17,
+      "name": "Parcurgerea grafurilor neorientate",
+      "slug": "parcurgerea-grafurilor-neorientate",
+      "href": "/?pagina=probleme-lista&tag=17"
+    }
+  ],
+  "tags": [
+    "componente conexe",
+    "Greedy"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Fiind cunoscute pentru cele <code>N</code> triburi abilitățile fiecărui șaman, relațiile de vasalitate între triburi, numărul de ordine al unui trib al clanului <em>Frostwolf</em>, să se determine:<br>\n</p><ul>\n\t<li>numărul total de clanuri</li>\n\t<li>numărul de triburi din clanul <em>Frostwolf</em> înainte de duel</li>\n\t<li>numărul maxim de triburi pe care <strong>Duroton</strong> le poate avea după invocarea codului <strong>Mak’gora</strong>.</li><br>\n</ul><p></p>",
+      "text": "Fiind cunoscute pentru cele N triburi abilitățile fiecărui șaman, relațiile de vasalitate între triburi, numărul de ordine al unui trib al clanului Frostwolf, să se determine: numărul total de clanuri numărul de triburi din clanul Frostwolf înainte de duel numărul maxim de triburi pe care Duroton le poate avea după invocarea codului Mak’gora."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>warcraft.in</code> conține pe prima linie trei numere natural <code>N M X</code> ce reprezintă <code>N</code> – numărul de triburi, <code>M</code> – numărul de abilități, <code>X</code> – numărul de ordine al unui trib ce face parte din clanul lui <strong>Durotan</strong>.<br>\nPe următoarele <code>N</code> linii descrierea fiecărui trib: <code>x y k a1 a2 … ak</code>, unde:  tribul <code>x</code> este vasal tribului <code>y</code>. Șamanul tribului <code>x</code> are <code>k</code> abilități de luptă, <code>a1, a2,…,ak</code>, valori strict crescătoare.</p>",
+      "text": "Fișierul de intrare warcraft.in conține pe prima linie trei numere natural N M X ce reprezintă N – numărul de triburi, M – numărul de abilități, X – numărul de ordine al unui trib ce face parte din clanul lui Durotan. Pe următoarele N linii descrierea fiecărui trib: x y k a1 a2 … ak, unde: tribul x este vasal tribului y. Șamanul tribului x are k abilități de luptă, a1, a2,…,ak, valori strict crescătoare."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>warcraft.out</code> va conține trei numere naturale <code>n1, n2, n3</code>, scrise fiecare pe câte o linie, unde: <br>\n</p><ul>\n\t<li><code>n1</code> reprezintă total numărul de clanuri</li>\n\t<li><code>n2</code> numărul de triburi ai clanului <em>Frostwolf</em> înainte de duel</li>\n\t<li><code>n3</code> numărul maxim de triburi ai clanului <em>Frostwolf</em> după ce <strong>Durotan</strong> invocă codul <strong>Mak’gora</strong>.</li><br>\n</ul><p></p>",
+      "text": "Fișierul de ieșire warcraft.out va conține trei numere naturale n1, n2, n3, scrise fiecare pe câte o linie, unde: n1 reprezintă total numărul de clanuri n2 numărul de triburi ai clanului Frostwolf înainte de duel n3 numărul maxim de triburi ai clanului Frostwolf după ce Durotan invocă codul Mak’gora."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2 ≤ N ≤ 1000</code></li>\n\t<li><code>1 ≤ X ≤ N</code></li>\n\t<li><code>1 ≤ M ≤ 500</code></li>\n\t<li><code>1 ≤ k ≤ M</code></li>\n\t<li>Numărul de clanuri <code>≤ 500</code></li>\n\t<li>Dacă un trib nu este vasal altui trib, atunci <code>y=0</code></li>\n\t<li>Durotan provoacă la duel doar căpeteniile de trib. În duel sunt folosite abilitățile cunoscute sau dobândite de căpetenie</li>\n\t<li>Pentru determinarea corectă a lui <code>n1</code> se acordă <code>20%</code> din punctaj/test. Pentru determinarea corectă a lui <code>n2</code> se acordă <code>20%</code> din punctaj/test. Pentru determinarea corectă a lui <code>n3</code> se acordă <code>60%</code> din punctaj/test.</li>\n</ul>",
+      "text": "2 ≤ N ≤ 1000 1 ≤ X ≤ N 1 ≤ M ≤ 500 1 ≤ k ≤ M Numărul de clanuri ≤ 500 Dacă un trib nu este vasal altui trib, atunci y=0 Durotan provoacă la duel doar căpeteniile de trib. În duel sunt folosite abilitățile cunoscute sau dobândite de căpetenie Pentru determinarea corectă a lui n1 se acordă 20% din punctaj/test. Pentru determinarea corectă a lui n2 se acordă 20% din punctaj/test. Pentru determinarea corectă a lui n3 se acordă 60% din punctaj/test."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>warcraft.in</code></p><pre>12 6 8\n4 10 5 1 2 3 4 5 \n12 6 4 1 2 5 6 \n10 0 2 5 6 \n2 4 4 2 3 4 5 \n1 12 3 1 4 5 \n11 0 5 2 3 4 5 6 \n9 5 2 2 6 \n6 0 3 2 4 5 \n7 11 6 1 2 3 4 5 6 \n8 10 1 4 \n3 2 3 2 4 5\n5 1 3 1 3 6 </pre><p><code>warcraft.out</code></p><pre>3\n5\n12</pre><h3>Explicație</h3><p>Sunt <code>12</code> triburi, <code>6</code> tipuri de abilități de luptă <code>1,2,3,4,5,6</code>. Tribul lui <strong>Durotan</strong> are indicele <code>10</code>. Tribul <code>8</code> aparține clanului lui <strong>Durotan</strong>. Tribul <code>1</code> este vasal tribului <code>12</code>. Șamanul tribului are <code>3</code> abilități: <code>1,4,5</code><br>\nTribul <code>2</code> este vasal tribului <code>4</code>. Șamanul tribului are <code>4</code> abilități: <code>2,3,4,5</code>. Tribul <code>3</code> este vasal tribului <code>2</code>. Șamanul tribului are <code>3</code> abilități: <code>2,4,5</code>. Tribul <code>4</code> este vasal tribului <code>10</code>. Șamanul tribului are <code>5</code> abilități: <code>1,2,3,4,5</code>. Tribul <code>5</code> este vasal tribului <code>1</code>. Șamanul tribului are <code>5</code> abilități: <code>1,2,3,4,5</code>. Tribul <code>6</code> este trib dominant (nu este vasal). Șamanul tribului are <code>3</code> abilități: <code>2,4,5</code>.<br>\ns.a.m.d.<br>\nExistă <code>3</code> clanuri: (<code>2,3,4,8,10</code>), (<code>1,5,6,9,12</code>),(<code>7,11</code>).<br>\nClanul lui <strong>Durotan</strong> are <code>5</code> triburi în zona sa de influență. Abilitățile de luptă ale lui <strong>Durotan</strong>: <code>5,6</code> la care se adaugă abilitatea unică <code>1</code>. Astfel, abilitățile folosite de <strong>Durotan</strong> în primul duel vor fi: <code>1,5,6</code>. Al doilea clan are căpetenia în tribul <code>6</code> și este compus din <code>5</code> triburi. Abilitățile căpeteniei în cazul unui duel sunt: <code>2,3,4,5</code>. Al treilea clan are căpetenia în tribul <code>11</code>. Abilitățile căpeteniei în cazul unui duel sunt: <code>1,2,3,4,5,6</code>.<br>\n<strong>Durotan</strong> provoacă la duel căpetenia celui de-al treilea clan. Câștigă duelul pentru că numărul de triburi ai clanului său este mai mare. După duel, numărul de triburi ai clanului <em>Frostwolf</em> va fi <code>7</code>, iar  abilitățile după duel ale lui <strong>Durotan</strong> vor fi: <code>1,2,3,4,5,6</code>. Apoi, <strong>Durotan</strong> va provoca la duel căpetenia celui de-al doilea clan. Numărul de triburi ai clanului <em>Frostwolf</em> după duel este <code>12</code>.</p>",
+      "text": "warcraft.in12 6 8 4 10 5 1 2 3 4 5 12 6 4 1 2 5 6 10 0 2 5 6 2 4 4 2 3 4 5 1 12 3 1 4 5 11 0 5 2 3 4 5 6 9 5 2 2 6 6 0 3 2 4 5 7 11 6 1 2 3 4 5 6 8 10 1 4 3 2 3 2 4 5 5 1 3 1 3 6 warcraft.out3 5 12ExplicațieSunt 12 triburi, 6 tipuri de abilități de luptă 1,2,3,4,5,6. Tribul lui Durotan are indicele 10. Tribul 8 aparține clanului lui Durotan. Tribul 1 este vasal tribului 12. Șamanul tribului are 3 abilități: 1,4,5 Tribul 2 este vasal tribului 4. Șamanul tribului are 4 abilități: 2,3,4,5. Tribul 3 este vasal tribului 2. Șamanul tribului are 3 abilități: 2,4,5. Tribul 4 este vasal tribului 10. Șamanul tribului are 5 abilități: 1,2,3,4,5. Tribul 5 este vasal tribului 1. Șamanul tribului are 5 abilități: 1,2,3,4,5. Tribul 6 este trib dominant (nu este vasal). Șamanul tribului are 3 abilități: 2,4,5. s.a.m.d. Există 3 clanuri: (2,3,4,8,10), (1,5,6,9,12),(7,11). Clanul lui Durotan are 5 triburi în zona sa de influență. Abilitățile de luptă ale lui Durotan: 5,6 la care se adaugă abilitatea unică 1. Astfel, abilitățile folosite de Durotan în primul duel vor fi: 1,5,6. Al doilea clan are căpetenia în tribul 6 și este compus din 5 triburi. Abilitățile căpeteniei în cazul unui duel sunt: 2,3,4,5. Al treilea clan are căpetenia în tribul 11. Abilitățile căpeteniei în cazul unui duel sunt: 1,2,3,4,5,6. Durotan provoacă la duel căpetenia celui de-al treilea clan. Câștigă duelul pentru că numărul de triburi ai clanului său este mai mare. După duel, numărul de triburi ai clanului Frostwolf va fi 7, iar abilitățile după duel ale lui Durotan vor fi: 1,2,3,4,5,6. Apoi, Durotan va provoca la duel căpetenia celui de-al doilea clan. Numărul de triburi ai clanului Frostwolf după duel este 12."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Sunt 12 triburi, 6 tipuri de abilități de luptă 1,2,3,4,5,6. Tribul lui Durotan are indicele 10. Tribul 8 aparține clanului lui Durotan. Tribul 1 este vasal tribului 12. Șamanul tribului are 3 abilități: 1,4,5 Tribul 2 este vasal tribului 4. Șamanul tribului are 4 abilități: 2,3,4,5. Tribul 3 este vasal tribului 2. Șamanul tribului are 3 abilități: 2,4,5. Tribul 4 este vasal tribului 10. Șamanul tribului are 5 abilități: 1,2,3,4,5. Tribul 5 este vasal tribului 1. Șamanul tribului are 5 abilități: 1,2,3,4,5. Tribul 6 este trib dominant (nu este vasal). Șamanul tribului are 3 abilități: 2,4,5. s.a.m.d. Există 3 clanuri: (2,3,4,8,10), (1,5,6,9,12),(7,11). Clanul lui Durotan are 5 triburi în zona sa de influență. Abilitățile de luptă ale lui Durotan: 5,6 la care se adaugă abilitatea unică 1. Astfel, abilitățile folosite de Durotan în primul duel vor fi: 1,5,6. Al doilea clan are căpetenia în tribul 6 și este compus din 5 triburi. Abilitățile căpeteniei în cazul unui duel sunt: 2,3,4,5. Al treilea clan are căpetenia în tribul 11. Abilitățile căpeteniei în cazul unui duel sunt: 1,2,3,4,5,6. Durotan provoacă la duel căpetenia celui de-al treilea clan. Câștigă duelul pentru că numărul de triburi ai clanului său este mai mare. După duel, numărul de triburi ai clanului Frostwolf va fi 7, iar abilitățile după duel ale lui Durotan vor fi: 1,2,3,4,5,6. Apoi, Durotan va provoca la duel căpetenia celui de-al doilea clan. Numărul de triburi ai clanului Frostwolf după duel este 12."
+    }
+  ],
+  "constraints": [
+    "2 ≤ N ≤ 1000",
+    "1 ≤ X ≤ N",
+    "1 ≤ M ≤ 500",
+    "1 ≤ k ≤ M",
+    "Numărul de clanuri ≤ 500",
+    "Dacă un trib nu este vasal altui trib, atunci y=0",
+    "Durotan provoacă la duel doar căpeteniile de trib. În duel sunt folosite abilitățile cunoscute sau dobândite de căpetenie",
+    "Pentru determinarea corectă a lui n1 se acordă 20% din punctaj/test. Pentru determinarea corectă a lui n2 se acordă 20% din punctaj/test. Pentru determinarea corectă a lui n3 se acordă 60% din punctaj/test."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q2152d6a5f5.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Nodea Eugen (eugen_nodea)",
+    "clasa": "11",
+    "intrare/ieșire": "warcraft.in / warcraft.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 32 MB",
+    "sursa problemei": "Lot juniori Câmpulung Muscel, 2018",
+    "autor": "Eugen Nodea",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "author": "Eugen Nodea",
+  "sourceAttribution": "Lot juniori Câmpulung Muscel, 2018",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/2514/warcraft"
+}

@@ -1,0 +1,310 @@
+{
+  "id": 3757,
+  "slug": "cuvinte10",
+  "name": "Cuvinte10",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3757/cuvinte10",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 53,
+      "name": "Programare dinamică",
+      "slug": "programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=53"
+    },
+    {
+      "id": 54,
+      "name": "Probleme diverse de programare dinamică",
+      "slug": "probleme-diverse-de-programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=54"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Să se calculeze numărul de moduri de a forma <code>M</code> cuvinte care respectă proprietățile de mai sus. Două moduri se consideră diferite dacă există cel puțin o poziție <code>i</code> pentru care al <code>i</code>-lea cuvânt diferă. Deoarece acest număr poate fi foarte mare, se va afișa doar restul său la împărțirea cu <code>1.000.000.007</code>.</p>",
+      "text": "Să se calculeze numărul de moduri de a forma M cuvinte care respectă proprietățile de mai sus. Două moduri se consideră diferite dacă există cel puțin o poziție i pentru care al i-lea cuvânt diferă. Deoarece acest număr poate fi foarte mare, se va afișa doar restul său la împărțirea cu 1.000.000.007."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Prima linie conține trei numere naturale separate prin câte un spațiu <code>N</code>, <code>M</code> și <code>K</code>, având semnificația din<br>\nenunț. Pe următoarele <code>N</code> linii se află câte un șir de caractere reprezentând cuvintele inițiale. Ultimele <code>M</code> linii conțin câte un număr natural <code>x</code><sub><code>i</code></sub> reprezentând lungimile cuvintelor care trebuie construite.</p>",
+      "text": "Prima linie conține trei numere naturale separate prin câte un spațiu N, M și K, având semnificația din enunț. Pe următoarele N linii se află câte un șir de caractere reprezentând cuvintele inițiale. Ultimele M linii conțin câte un număr natural xi reprezentând lungimile cuvintelor care trebuie construite."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Se va afișa pe o singură linie numărul de moduri de a forma cele <code>M</code> cuvinte modulo <code>1.000.000.007</code>.</p>",
+      "text": "Se va afișa pe o singură linie numărul de moduri de a forma cele M cuvinte modulo 1.000.000.007."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 300.000</code></li>\n\t<li><code>1 ≤ M ≤ 300.000</code></li>\n\t<li><code>1 ≤ x</code><sub><code>i</code></sub> <code>≤ 300.000</code>, pentru orice <code>1 ≤ i ≤ M</code></li>\n\t<li><code>1 ≤ S ≤ 300.000</code>, unde <code>S</code> suma lungimilor celor <code>N</code> cuvinte inițiale</li>\n\t<li><code>1 ≤ K ≤ 26</code></li>\n\t<li>Se garantează că toate cuvintele inițiale vor fi formate doar din primele <code>K</code> litere mici ale alfabetului englez.</li>\n</ul>",
+      "text": "1 ≤ N ≤ 300.000 1 ≤ M ≤ 300.000 1 ≤ xi ≤ 300.000, pentru orice 1 ≤ i ≤ M 1 ≤ S ≤ 300.000, unde S suma lungimilor celor N cuvinte inițiale 1 ≤ K ≤ 26 Se garantează că toate cuvintele inițiale vor fi formate doar din primele K litere mici ale alfabetului englez."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><strong>Intrare</strong></p><pre>4 2 2\nab\nabaa\nbbb\nbaaa\n3\n3</pre><p><strong>Ieșire</strong></p><pre>12</pre><h3>Explicație</h3><p>Există <code>4</code> posibilități de a forma un cuvânt de lungime <code>3</code>: <code>aaa</code>, <code>aab</code>, <code>bab</code>, <code>bba</code>, și <code>12</code> posibilități de a forma două cuvinte de lungime <code>3</code>.</p>",
+      "text": "Intrare4 2 2 ab abaa bbb baaa 3 3Ieșire12ExplicațieExistă 4 posibilități de a forma un cuvânt de lungime 3: aaa, aab, bab, bba, și 12 posibilități de a forma două cuvinte de lungime 3."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><strong>Intrare</strong></p><pre>6 5 3\naab\naabcc\naabb\nbbb\nbb\naaaab\n2\n3\n6\n5\n5</pre><p><strong>Ieșire</strong></p><pre>925829353</pre>",
+      "text": "Intrare6 5 3 aab aabcc aabb bbb bb aaaab 2 3 6 5 5Ieșire925829353"
+    }
+  ],
+  "examples": [
+    {
+      "input": "4 2 2\nab\nabaa\nbbb\nbaaa\n3\n3",
+      "output": "12",
+      "explanation": "Există 4 posibilități de a forma un cuvânt de lungime 3: aaa, aab, bab, bba, și 12 posibilități de a forma două cuvinte de lungime 3."
+    },
+    {
+      "input": "6 5 3\naab\naabcc\naabb\nbbb\nbb\naaaab\n2\n3\n6\n5\n5",
+      "output": "925829353"
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 300.000",
+    "1 ≤ M ≤ 300.000",
+    "1 ≤ xi ≤ 300.000, pentru orice 1 ≤ i ≤ M",
+    "1 ≤ S ≤ 300.000, unde S suma lungimilor celor N cuvinte inițiale",
+    "1 ≤ K ≤ 26",
+    "Se garantează că toate cuvintele inițiale vor fi formate doar din primele K litere mici ale alfabetului englez."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q10aac2364e.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "11",
+    "intrare/ieșire": "tastatură / ecran",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "512 MB / 128 MB",
+    "sursa problemei": "ONSEPI, 2021, clasele XI-XII",
+    "autor": "Alexandra Udriștoiu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 512,
+  "author": "Alexandra Udriștoiu",
+  "sourceAttribution": "ONSEPI, 2021, clasele XI-XII",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3757/cuvinte10"
+}

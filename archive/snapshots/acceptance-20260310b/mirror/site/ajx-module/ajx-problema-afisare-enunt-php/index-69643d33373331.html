@@ -1,0 +1,108 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3731"><article id="enunt">
+			<h1>Enunț</h1>
+
+<p>Tommy este un motan alintat care adoră să se plimbe prin orice tunel. De aceea, stăpânii lui i-au construit o nouă jucărie, formată din <code>N</code> tuneluri interconectate (etichetate cu numerele distincte de la <code>1</code> la <code>N</code>. Toate tunelurile au aceeași lungime, sunt formate din <code>M</code> elemente unitare identice (numerotate cu numerele distincte de la <code>1</code> la <code>M</code>) și au ieșiri la ambele capete. Conectarea dintre două tuneluri alăturate se face printr-un element unitar numit pasaj. În exemplul din <code>Figura 1</code>, jucăria este formată din <code>4</code> tuneluri, fiecare tunel fiind format din <code>9</code> elemente unitare.</p>
+
+<p>Pentru a fi mai provocator, stăpânii motanului plasează în ultimul element unitar al ultimului tunel o recompensă.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-tunel2-1-jpg.jpg"></p>
+
+<p>Motan isteț, Tommy a învățat deja toate regulile jocului:</p>
+
+<ul>
+	<li>poate intra prin capătul din stânga al oricărui tunel (prin elementul unitar  <code>1</code>);</li>
+	<li>nu trece de multe ori prin același pasaj;</li>
+	<li>dacă nu se află lângă un pasaj, continuă să meargă prin tunel către dreapta;</li>
+	<li>dacă ajunge la un pasaj, atunci trece prin acesta în tunelul alăturat;</li>
+	<li>dacă ajunge în ultimul element unitar al tunelului etichetat cu <code>N</code>, atunci Tommy iese din acest tunel cu recompensă, chiar dacă ar exista un pasaj ce conectează acest ultim element la ultimul element din tunelul <code>N-1</code> (vezi <code>Figura 2.b</code>);</li>
+	<li>dacă ajunge în ultimul element unitar al tunelului etichetat cu <code>N-1</code> și există un pasaj care conectează acest element cu ultimul element unitar al tunelului etichetat cu <code>N</code>, atunci Tommy trece prin acest pasaj în ultimul element din ultimul tunel, ia recompensa și iese din tunel <code>Figura 2.a</code>). În cazul în care acest pasaj nu există, Tommy iese din tunelul <code>N-1</code> fără recompensă;</li>
+	<li>dacă ajunge în ultimul element unitar al unui tunel cu eticheta mai mică decât <code>N-1</code>, atunci Tommy iese din tunel fără recompensă. <p></p></li>
+</ul>
+
+<p>Ajutați-l pe Tommy să ajungă cât mai repede la recompensă respectând regulile jocului!</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-2600-3731-tunel2-Figura-2-png.png"></p>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care citește numerele naturale <code>N</code>, <code>M</code> și <code>X</code>, iar apoi determină:</p>
+
+
+<ol>
+	<li>eticheta tunelului prin care iese Tommy dacă intră în tunelul cu eticheta <code>X</code> respectând regulile jocului;</li>
+	<li>numărul <code>L</code> de elemente unitare (ale tunelurilor și ale pasajelor) prin care Tommy ar trebui să treacă, respectând regulile jocului, pentru a ajunge la recompensă.</li>
+</ol>
+
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul <code>tunel2.in</code> conține pe prima linie un număr natural <code>C</code> reprezentând cerința din problemă care trebuie rezolvată <code>1</code> sau <code>2</code>.</p>
+
+<p>A doua linie a fișierului conține cele trei numere naturale <code>N</code>, <code>M</code> și  <code>X</code>, separate prin câte un spațiu, cu semnificația din enunț. Următoarele <code>N-1</code> linii descriu pasajele dintre tuneluri. Prima linie dintre cele <code>N-1</code> indică pasajele dintre tunelurile etichetate cu <code>1</code> și <code>2</code>, următoarea linie indică pasajele dintre tunelurile etichetate cu <code>2</code> și <code>3</code>, …, ultima dintre cele <code>N-1</code> linii indică pasajele dintre tunelurile etichetate cu <code>N-1</code> și <code>N</code>.</p>
+
+<p>Primul număr din fiecare astfel de linie reprezintă numărul <code>P</code> de pasaje, iar următoarele <code>P</code> numere distincte, scrise în ordine crescătoare, reprezintă pozițiile elementelor unitare (dintre cele două tuneluri) conectate prin cele <code>P</code> pasaje.</p>
+
+
+<h1>Date de ieșire</h1>
+
+<ul>
+	<li>Dacă <code>C=1</code>, fișierul <code>tunel2.out</code> va conține pe prima linie un număr natural reprezentând răspunsul la cerința <code>1</code>.</li>
+	<li>Dacă <code>C=2</code>, fișierul <code>tunel2.out</code> va conține pe prima linie numărul natural <code>L</code> reprezentând răspunsul la cerința <code>2</code>.</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>3 ≤ N ≤ 1000</code></li>
+	<li><code>4 ≤ M ≤ 20000</code></li>
+	<li><code>1 ≤ P ≤ M−2</code></li>
+	<li>Pot exista cel mult  <code>150000</code> pasaje care interconectează tunelurile.</li>
+	<li>Pot exista pasaje învecinate care să conecteze elementele unitare din două tuneluri alăturate (vezi <code>Figura 1</code>) în care tunelurile <code>1</code> și <code>2</code> sunt interconectate prin pasajele învecinate dintre elementele <code>6</code>, respectiv <code>7</code>).</li>
+	<li>Primul element unitar din fiecare tunel nu este conectat la niciun pasaj.</li>
+	<li>Ultimul element unitar din tunelurile etichetate cu <code>1, 2,..., N-2</code> nu este conectat la niciun pasaj.</li>
+	<li>Oricare element unitar poate fi conectat la cel mult un pasaj.</li>
+	<li>Oricare două tuneluri etichetate cu numere consecutive sunt interconectate prin cel puțin un pasaj.</li>
+	<li>Pentru fiecare intrare într-un tunel există traseu către ieșire.</li>
+	<li>Pentru fiecare test există cel puțin o intrare într-un tunel prin care Tommy poate ajunge la ieșirea cu recompensă din tunelul <code>N</code>.</li>
+	<li>Pentru cerința <code>1</code> se acordă <code>40p</code>. iar pentru cerința <code>2</code> se acordă <code>60p</code>.</li>
+	<li>În concurs, limita de memorie a fost 32MiB.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>tunel2.in</code></p>
+
+<pre>1
+4 9 4
+3 2 4 6
+2 3 5
+3 4 6 9</pre>
+
+<p><code>tunel2.out</code></p>
+
+<pre>1</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința <code>1</code> . <code>N=4</code>, <code>M=9</code>, <code>X=4</code>. <br>
+Tommy, intra prin tunelul etichetat cu <code>X=4</code> și iese prin tunelul etichetat cu <code>1</code>  (vezi Figura <code>2.d</code>).</p>
+
+
+<h1>Exemplul 2:</h1>
+
+<p><code>tunel2.in</code></p>
+
+<pre>2
+4 9 4
+3 2 4 6
+2 3 5
+3 4 6 9</pre>
+
+<p><code>tunel2.out</code></p>
+
+<pre>17</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința <code>2</code> . <code>N=4</code>, <code>M=9</code>, <code>X=4</code>. Figurile <code>2.a, 2.b, 2.c, 2.d</code> conțin trecerea lui Tommy prin tunele pentru fiecare din cele patru intrări. Doar <code>2</code> dintre aceste treceri îl duc pe Tommy la recompensă (vezi <code>Figura 2.a</code> și <code>Figura 2.b</code>). Dacă Tommy intră prin tunelul <code>2</code> atunci el ajunge la recompensă trecând prin numărul minim <code>L=17</code> (=min(17,19)) elemente unitare. </p>		</article>
+		</body></html>

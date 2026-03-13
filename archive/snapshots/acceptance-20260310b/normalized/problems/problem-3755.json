@@ -1,0 +1,309 @@
+{
+  "id": 3755,
+  "slug": "saseg",
+  "name": "SaseG",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3755/saseg",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 25,
+      "name": "Metoda Greedy",
+      "slug": "metoda-greedy",
+      "href": "/?pagina=probleme-lista&tag=25"
+    },
+    {
+      "id": 24,
+      "name": "Probleme diverse cu metoda Greedy",
+      "slug": "probleme-diverse-cu-metoda-greedy",
+      "href": "/?pagina=probleme-lista&tag=24"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Acum William își pune următoarele întrebări:<br>\n1. Pentru fiecare om, poate acesta să fie unul dintre cei <strong>infectați</strong> inițial?<br>\n2. Pentru fiecare om, poate acesta să fie unul dintre cei <strong>neinfectați</strong> inițial?</p>",
+      "text": "Acum William își pune următoarele întrebări: 1. Pentru fiecare om, poate acesta să fie unul dintre cei infectați inițial? 2. Pentru fiecare om, poate acesta să fie unul dintre cei neinfectați inițial?"
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie se găsește un număr întreg <code>C</code>, reprezentând numărul cerinței de rezolvat. Pe cea de-a doua linie se găsesc două numere întregi <code>N</code>, <code>M</code>, reprezentând numărul de persoane, respectiv numărul de întâlniri care au loc. Pe cea de-a treia linie se găsesc <code>N</code> numere (având valori între <code>0</code> și <code>1</code>) separate prin spații, reprezentând <br>\npentru fiecare om starea sa finală (<code>0</code> – neinfectat, <code>1</code> – infectat). Următoarele <code>M</code> linii reprezintă fiecare câte o întâlnire (în ordine cronologică), având <code>2</code> numere întregi distincte (între <code>1</code> și <code>N</code>) reprezentând cele două persoane care se întâlnesc.</p>",
+      "text": "Pe prima linie se găsește un număr întreg C, reprezentând numărul cerinței de rezolvat. Pe cea de-a doua linie se găsesc două numere întregi N, M, reprezentând numărul de persoane, respectiv numărul de întâlniri care au loc. Pe cea de-a treia linie se găsesc N numere (având valori între 0 și 1) separate prin spații, reprezentând pentru fiecare om starea sa finală (0 – neinfectat, 1 – infectat). Următoarele M linii reprezintă fiecare câte o întâlnire (în ordine cronologică), având 2 numere întregi distincte (între 1 și N) reprezentând cele două persoane care se întâlnesc."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Se va afișa o singură linie conținând <code>N</code> cifre binare neseparate prin spații, reprezentând răspunsul pentru<br>\nrespectivul test. Dacă <code>C = 1</code>, se rezolvă prima cerință, iar al <code>i</code>-lea caracter va fi <code>1</code> dacă și numai dacă există un scenariu inițial în care persoana <code>i</code> este infectată care duce la scenariul final dat, altfel va fi <code>0</code>. Dacă <code>C = 2</code>, se rezolvă a doua cerință, iar al <code>i</code>-lea caracter va fi <code>1</code> dacă și numai dacă există un scenariu<br>\ninițial în care persoana <code>i</code> este neinfectată care duce la scenariul final dat, altfel va fi <code>0</code>.</p>",
+      "text": "Se va afișa o singură linie conținând N cifre binare neseparate prin spații, reprezentând răspunsul pentru respectivul test. Dacă C = 1, se rezolvă prima cerință, iar al i-lea caracter va fi 1 dacă și numai dacă există un scenariu inițial în care persoana i este infectată care duce la scenariul final dat, altfel va fi 0. Dacă C = 2, se rezolvă a doua cerință, iar al i-lea caracter va fi 1 dacă și numai dacă există un scenariu inițial în care persoana i este neinfectată care duce la scenariul final dat, altfel va fi 0."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ C ≤ 2</code></li>\n\t<li><code>1 ≤ N ≤ 100.000</code></li>\n\t<li><code>0 ≤ M ≤ 100.000</code></li>\n\t<li>Se garantează că pentru fiecare test există un scenariu posibil inițial care să ducă la scenariul final.</li>\n\t<li>Persoanele nu se pot infecta spontan. Acestea pot fi infectate la final doar dacă au fost infectate inițial sau au fost infectate de o altă persoană în urma unei întâlniri.</li>\n</ul>",
+      "text": "1 ≤ C ≤ 2 1 ≤ N ≤ 100.000 0 ≤ M ≤ 100.000 Se garantează că pentru fiecare test există un scenariu posibil inițial care să ducă la scenariul final. Persoanele nu se pot infecta spontan. Acestea pot fi infectate la final doar dacă au fost infectate inițial sau au fost infectate de o altă persoană în urma unei întâlniri."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><strong>Intrare</strong></p><pre>1\n6 5\n1 1 0 0 1 1\n4 3\n3 6\n1 2\n5 6\n3 4</pre><p><strong>Ieșire</strong></p><pre>110010</pre>",
+      "text": "Intrare1 6 5 1 1 0 0 1 1 4 3 3 6 1 2 5 6 3 4Ieșire110010"
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><strong>Intrare</strong></p><pre>2\n6 5\n1 1 0 0 1 1\n4 3\n3 6\n1 2\n5 6\n3 4</pre><p><strong>Ieșire</strong></p><pre>111101</pre><h3>Explicații</h3><p>Considerăm următoarele două scenarii inițiale: <code>010010</code>, <code>100010</code>. </p><p>Se poate observa ușor că ambele scenarii duc la starea finală <code>110011</code> în urma întâlnirilor. Pentru persoanele <code>1</code>, <code>2</code> și <code>5</code> există scenarii în care acestea sunt infectate inițial, și se poate demonstra că pentru niciuna dintre persoanele <code>3</code>, <code>4</code> și <code>6</code> nu există vreun scenariu inițial în care acestea să fie infectate.</p><p>Pentru persoanele <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code> și <code>6</code> există scenarii în care acestea sunt neinfectate inițial, și se poate demonstra că pentru persoana <code>5</code> nu există vreun scenariu inițial în care acesta să fie neinfectată.</p>",
+      "text": "Intrare2 6 5 1 1 0 0 1 1 4 3 3 6 1 2 5 6 3 4Ieșire111101ExplicațiiConsiderăm următoarele două scenarii inițiale: 010010, 100010. Se poate observa ușor că ambele scenarii duc la starea finală 110011 în urma întâlnirilor. Pentru persoanele 1, 2 și 5 există scenarii în care acestea sunt infectate inițial, și se poate demonstra că pentru niciuna dintre persoanele 3, 4 și 6 nu există vreun scenariu inițial în care acestea să fie infectate.Pentru persoanele 1, 2, 3, 4 și 6 există scenarii în care acestea sunt neinfectate inițial, și se poate demonstra că pentru persoana 5 nu există vreun scenariu inițial în care acesta să fie neinfectată."
+    }
+  ],
+  "examples": [
+    {
+      "input": "1\n6 5\n1 1 0 0 1 1\n4 3\n3 6\n1 2\n5 6\n3 4",
+      "output": "110010"
+    },
+    {
+      "input": "2\n6 5\n1 1 0 0 1 1\n4 3\n3 6\n1 2\n5 6\n3 4",
+      "output": "111101",
+      "explanation": "Considerăm următoarele două scenarii inițiale: 010010, 100010."
+    }
+  ],
+  "constraints": [
+    "1 ≤ C ≤ 2",
+    "1 ≤ N ≤ 100.000",
+    "0 ≤ M ≤ 100.000",
+    "Se garantează că pentru fiecare test există un scenariu posibil inițial care să ducă la scenariul final.",
+    "Persoanele nu se pot infecta spontan. Acestea pot fi infectate la final doar dacă au fost infectate inițial sau au fost infectate de o altă persoană în urma unei întâlniri."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q1d551f866d.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "11",
+    "intrare/ieșire": "tastatură / ecran",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "ONSEPI, 2021, clasele XI-XII",
+    "autor": "Costin Andrei Oncescu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "author": "Costin Andrei Oncescu",
+  "sourceAttribution": "ONSEPI, 2021, clasele XI-XII",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3755/saseg"
+}

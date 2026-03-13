@@ -1,0 +1,103 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4095"><article id="enunt">
+			<p>Deși nu obișnuiește să deseneze, Adrian are o pasiune inedită: îi place să schițeze pe hârtie orașe imaginare… mai exact cum ar arăta acestea văzute de sus. În acest an, de ziua lui a primit cadou un pergament! Normal că menirea acestuia va fi ca Adrian să deseneze pe el schița celui mai mare oraș pe care și l-a imaginat până acum.</p>
+
+<p><img align="right" alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-pergament-1-jpg.jpg"></p>
+
+<p>Pergamentul are lățimea unei coli de hârtie, însă lungimea sa este neașteptat de mare. De asemenea, pergamentul este împărțit în pătrate astfel încât pe lungime se află exact <code>N</code> pătrate iar pe lățime se află exact <code>K</code> pătrate. Astfel, Adrian are la dispoziție exact <code>N*K</code> pătrate pe care le poate colora.</p>
+
+<p>El decide să coloreze doar străzile orașului, deoarece nu are timp de mai mult și plănuiește să folosească două tipuri de străzi:</p>
+
+<p>1. Străzi orizontale</p>
+
+<ul>
+	<li>Vor fi desenate ca o secvență continuă de pătrate albastre.</li>
+	<li>Pe fiecare rând de la <code>1</code> la <code>N</code> se va afla exact o stradă orizontală. Deci, la final vor fi exact <code>N</code> străzi orizontale.</li>
+	<li>Fiecare stradă se desfășoară pe un singur rând.</li>
+	<li>Lungimea fiecărei străzi va fi de minim un pătrat și de maxim <code>K</code> pătrate și este egală cu numărul de pătrate ce o compun.</li>
+	<li>Strada poate începe pe oricare pătrat de pe rând și poate avea orice lungime cât timp nu depășește limitele pergamentului.</li>
+</ul>
+
+<p>2. Străzi verticale</p>
+
+<ul>
+	<li>Vor fi desenate ca o secvență continuă de pătrate roșii.</li>
+	<li>Adrian va desena exact <code>Q</code> străzi verticale, desfășurate pe una dintre coloanele de la <code>1</code> la <code>K</code>.</li>
+	<li>Pe o coloană pot exista mai multe străzi verticale cu condiția să nu se suprapună. Nu este obligatoriu să existe străzi verticale pe toate coloanele.</li>
+	<li>Lungimea fiecărei străzi va fi de minim un pătrat și de maxim <code>N</code> pătrate și este egală cu numărul de pătrate ce o compun.</li>
+	<li>Strada poate începe pe oricare pătrat de pe coloană și poate avea orice lungime cât timp nu depășește limitele pergamentului.</li>
+</ul>
+
+<p>La final, Adrian observă că anumite pătrate au devenit mov, deoarece fac parte atât dintr-o stradă verticală cât și din una orizontală, deci au fost colorate atât cu roșu cât și cu albastru. <br>
+Adrian este fascinat de apariția acestora și vrea să știe câte pătrate mov sunt în desenul său. Fiind prea obosit să le numere, vă roagă pe voi să-l ajutați.</p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscând numerele <code>N</code>, <code>K</code>, <code>Q</code>, precum și poziționarea celor <code>N</code> străzi orizontale și a celor <code>Q</code> străzi verticale, să se determine numărul de pătrate mov din pergament.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului de intrare <code>pergament.in</code> se află trei numere naturale separate prin cate un spațiu: <code>N K Q</code>, cu semnificația din enunț.</p>
+
+<p>Pe a doua linie se află patru numere naturale separate prin câte un spațiu: <code>A</code> <code>B</code> <code>C</code> <code>D</code>.</p>
+
+<p>Pe a treia linie se află două numere naturale <code>X[1]</code> <code>Y[1]</code>, unde <code>X[1]</code> reprezintă coloana pătratului de început al străzii orizontale de pe rândul <code>1</code>, iar <code>Y[1]</code> reprezintă lungimea acesteia. </p>
+
+<p>Datele următoarelor <code>N-1</code> străzi se vor calcula prin formulele de mai jos, unde <code>X[i]</code> reprezintă coloana pătratului de început al străzii orizontale de pe rândul <code>i</code> (<code>2 ≤ i ≤ N</code>), iar <code>Y[i]</code> reprezintă lungimea acesteia:</p>
+
+<ul>
+	<li><code>X[i] = 1 + (X[i - 1] * A + B) % K</code></li>
+	<li><code>Y[i] = 1 + (Y[i - 1] * C + D) % (K - X[i] + 1)</code></li>
+</ul>
+
+<p>Pe următoarele <code>Q</code> linii se află câte trei numere naturale <code>J</code> <code>R</code> <code>L</code>, unde <code>J</code> reprezintă coloana pe care se află strada verticală, <code>R</code> reprezintă rândul pe care se află pătratul de început al străzii, iar <code>L</code> reprezintă lungimea străzii.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>În fișierul de ieșire <code>pergament.out</code> se va afla un singur număr natural ce reprezintă numărul de pătrate mov din desenul lui Adrian.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 10.000.000</code></li>
+	<li><code>1 ≤ K ≤ 50</code></li>
+	<li><code>1 ≤ Q ≤ 100.000</code></li>
+	<li><code>1 ≤ A, B, C, D ≤ 10.000.000</code></li>
+	<li><code>1 ≤ X[i] ≤ K</code></li>
+	<li><code>1 ≤ Y[i] ≤ K - X + 1</code></li>
+	<li><code>1 ≤ J ≤ K</code></li>
+	<li><code>1 ≤ R ≤ N</code></li>
+	<li><code>1 ≤ L ≤ N - R + 1</code></li>
+	<li>Rândurile sunt numerotate de la <code>1</code> la <code>N</code>, iar coloanele sunt numerotate de la <code>1</code> la <code>K</code></li>
+	<li>Pentru <code>40</code> puncte <code>N ≤ 20.000</code></li>
+	<li>Pentru <code>70</code> de puncte <code>N ≤ 500.000</code></li>
+	<li>Pentru <code>100</code> de puncte nu există condiții adiționale.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>pergament.in</code></p>
+
+<pre>6 3 2
+1 1 1 1
+1 2
+2 2 4
+1 4 3</pre>
+
+<p><code>pergament.out</code></p>
+
+<pre>3</pre>
+
+<h3>Explicație</h3>
+
+<p>Imaginea reprezintă pergamentul desenat de Adrian din exemplu.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-pergament-2-jpg.jpg"></p>
+
+<p>Conform formulelor, vom avea următoarele străzi orizontale:<br>
+Linia 1: <code>X[ 1 ] = 1</code> și <code>Y[ 1 ] = 2</code><br>
+Linia 2: <code>X[ 2 ] = 3</code> și <code>Y[ 2 ] = 1</code><br>
+Linia 3: <code>X[ 3 ] = 2</code> și <code>Y[ 3 ] = 1</code><br>
+Linia 4: <code>X[ 4 ] = 1</code> și <code>Y[ 4 ] = 3</code><br>
+Linia 5: <code>X[ 5 ] = 3</code> și <code>Y[ 5 ] = 1</code><br>
+Linia 6: <code>X[ 6 ] = 2</code> și <code>Y[ 6 ] = 1</code></p>		</article>
+		</body></html>

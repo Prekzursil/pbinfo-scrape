@@ -1,0 +1,145 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4628"><article id="enunt">
+			<p>Mugurel a decis să devină în sfârșit cel mai mare antreprenor din <i>Imperiul Rațelor de Cauciuc</i>. Astfel, el și-a deschis o afacere cu fructele sale preferate: portocale și banane.</p>
+
+<p>Acesta primește planul recoltelor de fructe: timp de <code>N</code> zile, în fiecare zi Mugurel primește <code>M</code> grămezi de portocale și <code>M</code> grămezi de banane (alternativ), reprezentate prin numărul lor de kilograme.<br>
+Mugurel trebuie să împacheteze toate aceste fructe, însă producătorul său de cutii îi oferă două variante, din care poate alege doar una: fabricarea a <code>K</code> cutii pentru portocale și <code>K</code> cutii pentru banane (împachetare separată), sau fabricarea a <code>K</code> cutii mixte (împachetarea portocalelor și a bananelor împreună). Există însă niște reguli privind împachetarea:</p>
+
+<ul>
+	<li>O cutie poate conține doar grămezi de fructe consecutive (o grămadă trebuie pusă în cutie înainte ca o altă grămadă de același tip să vină).</li>
+	<li>O grămadă de fructe nu poate fi separată în mai multe grămezi.</li>
+	<li>Orice cutie deschisă trebuie închisă la finalul unei zile (pe scurt, o cutie nu poate conține fructe din zile diferite).</li>
+	<li>Cutiile mixte trebuie să conțină același număr de grămezi de portocale și banane (nu neapărat același număr de kilograme).</li>
+</ul>
+
+<p>Însă, totul are un preț. Fie \(c_{port}\), \(c_{ban}\), \(c_{mixt}\) capacitățile cutiilor de portocale, banane respectiv mixte. Atunci, Mugurel va plăti \(A \; maci \cdot c_{port} + B \; maci \cdot c_{ban}\) sau \(C \; maci \cdot c_{mixt}\), în funcție de varianta de împachetare aleasă, unde \(A\), \(B\) și \(C\) vor fi prețuri oferite de producător. Mugurel va alege metoda de împachetare astfel încât suma de bani cheltuită să fie cât mai mică.</p>
+
+<p>După ce plătește și primește cutiile, începe împachetarea. De fiecare dată când închide o cutie, o pune la finalul șirului de cutii deja închise (Mugurel se ocupă mai întâi de grămada de portocale, apoi de cea de banane). La finalul împachetării fructelor, el trebuie să împartă șirul de cutii în două șiruri consecutive, pe care le vom numi loturi.</p>
+
+<p>Loturile vor fi trimise către cele două cetăți ale Imperiului, însă Mugurel nu vrea să pornească un război între cele două cetăți, așadar vrea să le împartă cu grijă. Numim <strong>discrepanță</strong> a unui lot diferența dintre cutia cu număr maxim de kilograme și cea cu număr minim. Împărțirea trebuie făcută astfel încât suma <strong>discrepanțelor</strong> celor două loturi să fie minimă, pentru împachetare.</p>
+
+<p>Cu atâtea responsabilități pe cap, Mugurel vă roagă să-l ajutați cu afacerea.</p>
+
+<h1>Cerința</h1>
+
+<p>Determinați modalitatea de împachetare cheltuind cât mai puțini bani și împărțirea șirului de cutii în două loturi cu suma discrepanțelor minimă.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>mugurel.in</code> conține pe prima linie două numere întregi, <code>N</code> și <code>M</code>, reprezentând numărul de zile și numărul de grămezi zilnice.</p>
+
+<p>A doua linie conține numerele întregi <code>K</code>, <code>A</code>, <code>B</code>, <code>C</code>, reprezentând numărul de cutii care se fabrică de un anumit tip, precum și prețurile celor trei tipuri de cutii.</p>
+
+<p>Următoarele <code>N</code> linii conțin câte <code>M</code> numere întregi, reprezentând kilogramele grămezilor de portocale, în ordinea în care acestea vin.</p>
+
+<p>Următoarele <code>N</code> linii conțin câte <code>M</code> numere întregi, reprezentând kilogramele grămezilor de banane, în ordinea în care acestea vin.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>mugurel.out</code> va conține pe prima linie un singur număr, <code>S</code>, reprezentând suma de maci pe care Mugurel trebuie să o cheltuie pentru toate cutiile. </p>
+
+<p>A doua linie va conține un singur număr, <code>T</code>, reprezentând numărul total de cutii închise cu fructe.</p>
+
+<p>Următoarele <code>T</code> linii vor conține datele cutiilor în ordinea în care au fost închise, pe fiecare linie aflându-se câte două valori: numărul de kilograme din cutia respectivă, precum și tipul cutiei, reprezentat de un singur caracter: <strong>P</strong> pentru portocale, <strong>B</strong> pentru banane, <strong>M</strong> pentru mixt.</p>
+
+<p>Ultima linie va conține un singur număr, <code>D</code>, reprezentând suma minimă a discrepanțelor celor două loturi care se poate obține în urma unei împărțiri a șirului de cutii format din împachetarea aleasă.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N, M ≤ 1000</code></li>
+	<li><code>N ≤ K ≤ N • M</code></li>
+	<li><code>1 ≤ A, B, C ≤ 1.000.000</code></li>
+	<li>Fiecare grămadă de fructe conține cel mult <code>1.000.000</code> kilograme.</li>
+	<li>Cutiile de tipuri diferite pot avea o capacitate diferită, însă toate cutiile folosite la același tip de fructe (portocale, banane, mixte) au aceeași capacitate.</li>
+	<li>Nu este necesar ca toate cutiile să fie folosite (însă suma cheltuită rămâne aceeași), deci <code>T ≤ K</code> pentru împachetare mixtă și <code>T ≤ 2K</code> pentru împachetare separată.</li>
+	<li>Fiecare lot trebuie să conțină cel puțin o cutie, însă cutia minimă poate să coincidă cu cutia maximă. Se garantează că șirul de cutii rezultat în urma împachetării este format din cel puțin două cutii.</li>
+	<li>Dacă există mai multe soluții corecte, se poate afișa oricare dintre acestea.</li>
+	<li>Macul este moneda oficială din Imperiul Rațelor de Cauciuc.</li>
+</ul>
+
+<h1>Punctare</h1>
+
+<ul>
+	<li>Pentru teste în valoare de <code>5</code> puncte, <code>K = N</code>.</li>
+	<li>Pentru alte teste în valoare de <code>5</code> puncte, <code>K = N+1</code>.</li>
+	<li>Pentru alte teste în valoare de <code>15</code> puncte, toate grămezile au același număr de kilograme.</li>
+	<li>Pentru alte teste în valoare de <code>15</code> puncte, <code>N,M ≤ 100</code>, iar suma grămezilor din fiecare zi este <code>≤ 1000</code> kilograme.</li>
+	<li>Pentru alte teste în valoare de <code>30</code> de puncte, <code>K ≤ 1000</code>.</li>
+	<li>Pentru alte teste în valoare de <code>30</code> de puncte, nu există restricții suplimentare.</li>
+</ul>
+
+<h1>Exemplu 1</h1>
+
+<p><code>mugurel.in</code></p>
+
+<pre>2 4
+4 2 3 7
+2 9 9 1
+10 9 8 9
+2 3 5 3
+20 19 13 4</pre>
+
+<p><code>mugurel.out</code></p>
+
+<pre>98
+8
+11 P
+10 P
+13 B
+20 B
+19 P
+19 B
+17 P
+17 B
+6</pre>
+
+<h3>Explicație</h3>
+
+<p>În primul exemplu, cel mai ieftin va fi să împachetăm fructele în cutii separate. Una dintre împachetările posibile în care vom cheltui o sumă minimă de maci ar fi (cu portocaliu marcăm portocalele, iar cu galben bananele):</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-95f16d-imp1-png.png" style="width: 60%;"></p>
+
+<p>În urma acestei împachetări, obținem următorul șir de cutii:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-95f16d-discr1-png.png" style="width: 52%;"></p>
+
+<p>Astfel, capacitatea cutiilor de portocale va fi de <code>19 kg</code>, iar capacitatea celor pentru banane va fi de <code>20 kg</code>. Prețurile cutiilor sunt de <code>2 maci / kg</code> pentru portocale și <code>3 maci / kg</code> pentru banane, cheltuind astfel: <code>19 · 2 + 20 · 3 = 98 maci</code>.<br>
+Împărțirea optimă în cele două loturi este dată de linia roșie, obținând suma minimă a discrepanțelor: <code>3 + 3 = 6</code>.</p>
+
+<h1>Exemplu 2</h1>
+
+<p><code>mugurel.in</code></p>
+
+<pre>3 3
+5 14 18 7
+2 2 2
+3 3 3
+4 5 7
+1 1 4
+3 3 3
+6 1 8</pre>
+
+<p><code>mugurel.out</code></p>
+
+<pre>112
+5
+12 M
+6 M
+12 M
+16 M
+15 M
+7</pre>
+
+<h3>Explicație</h3>
+
+<p>În al doilea exemplu, pentru a cheltui cât mai puțini bani, fructele trebuie împachetate împreună. O împachetare posibilă ar fi:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-95f16d-imp2-png.png" style="width: 25%;"></p>
+
+<p>Se observă că numărul de grămezi de portocale este egal cu numărul de grămezi de banane pentru fiecare cutie. Obținem astfel următorul șir de cutii:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-95f16d-discr2-png.png" style="width: 35%;"></p>
+
+<p>Astfel, capacitatea cutiilor mixte va fi de <code>16 kg</code>. Prețul cutiei este de <code>7 maci / kg</code>, cheltuind astfel: <code>16 · 7 = 112 maci</code>.<br>
+Împărțirea optimă în cele două loturi este dată de linia roșie, obținând suma minimă a discrepanțelor: <code>6 + 1 = 7</code>.</p>		</article>
+		</body></html>

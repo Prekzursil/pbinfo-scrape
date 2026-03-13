@@ -1,0 +1,74 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3561"><article id="enunt">
+			<h1>Playfair</h1>
+
+<p>Cifrul <code>Playfair</code> este un cifru care folosește o matrice <code>5x5</code> care conţine literele alfabetului englez. Matricea are proprietatea că după coloana <code>1</code> urmează coloana <code>2</code>, după coloana <code>2</code> urmează coloana <code>3</code> … după coloana <code>5</code> urmează coloana <code>1</code> iar după linia <code>1</code> urmează linia <code>2</code>, după linia <code>2</code> urmează linia <code>3</code> … după linia <code>5</code> urmează linia <code>1</code>.<br>
+Cifrul funcţionează așa:<br>
+</p><ul>
+	<li>Se citește un mesaj și apoi grupăm literele <code>2</code> câte <code>2</code>.
+ Pentru fiecare <code>2</code> litere:</li>
+	<li>căutăm literele în matrice și le reținem linia și coloana pe care se află</li>
+	<li>dacă literele sunt identice atunci înlocuim a doua literă cu litera care lipsește din matricea <code>5x5</code></li>
+	<li>dacă prima literă se află pe linia <code>a</code> și coloana <code>b</code> iar a doua literă se află pe linia <code>c</code> și coloana <code>d</code> atunci avem următoarele cazuri:
+	<ul>
+		<li>dacă <code>a</code> este diferit de <code>c</code> și <code>b</code> este diferit de <code>d</code> atunci se înlocuiesc cu literele de pe linia <code>a</code> și coloana <code>d</code> și linia <code>c</code> și coloana <code>b</code> din matrice.</li>
+		<li>dacă <code>a</code> este egal cu <code>c</code> (literele se află pe aceeasi linie) atunci se înlocuiesc cu literele de pe coloana următoare</li>
+		<li>dacă <code>b</code> este egal cu <code>d</code> (literele se află pe aceeasi coloana) atunci se înlocuiesc cu literele de pe linia următoare</li>
+	</ul></li>
+	</ul><p></p>
+
+<h1>Cerință</h1>
+
+<p>	Dându-se un număr <code>c</code>, o matrice <code>5x5</code> și un mesaj:</p>
+
+<ul>
+	<li>pentru <code>c=1</code> atunci mesajul se va cripta;</li>
+	<li>pentru <code>c=2</code> atunci mesajul se va decripta;</li>
+</ul>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>playfair.in</code> conține pe prima linie numărul <code>c</code>, pe a doua linie o matrice <code>5x5</code> cu litere iar pe ultima linie se va citi mesajul.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>playfair.out</code> va conține mesajul criptat sau decriptat în funcție de caz.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ lungimea mesajului ≤ 10000</code></li>
+	<li>mesajul are un număr par de litere</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>playfair.in</code></p>
+
+<pre>1
+p l a y f
+i r e x m
+b c d g h
+k n o q s
+t u v w z
+hidethegoldinthetrexestump</pre>
+
+
+<p><code>playfair.out</code></p>
+
+<pre>bmodzbxdnabekudmuixmmouvif</pre>
+
+<h1>Exemplul 2:</h1>
+
+<pre>2
+p l a y f
+i r e x m
+b c d g h
+k n o q s
+t u v w z
+bmodzbxdnabekudmuixmmouvif</pre>
+
+
+<p><code>playfair.out</code></p>
+
+<pre>hidethegoldinthetrexestump</pre>		</article>
+		</body></html>

@@ -1,0 +1,321 @@
+{
+  "id": 4617,
+  "slug": "parking",
+  "name": "parking",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4617/parking",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 89,
+      "name": "Structuri de date neomogene",
+      "slug": "structuri-de-date-neomogene",
+      "href": "/?pagina=probleme-lista&tag=89"
+    },
+    {
+      "id": 90,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=90"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Scrieți un program care, cunoscând dimensiunile parcării, pozițiile întreruperilor din zid, numărul de mașini, iar pentru fiecare mașină numărul liniei și al coloanei corespunzătoare locului în care este parcată și modul de parcare a acesteia, rezolvă următoarele două cerinţe: <br>\n1) determină numărul de mașini care pot ieși din parcare fără a fi condiționate de mutarea sau de părăsirea parcării de către alte mașini (numărul de maşini care pot ieşi în prima serie);<br>\n2) determină numărul total maşini care pot ieşi din parcare, precum şi numărul de serii în care se realizează ieşirea tuturor acestor maşini.</p>",
+      "text": "Scrieți un program care, cunoscând dimensiunile parcării, pozițiile întreruperilor din zid, numărul de mașini, iar pentru fiecare mașină numărul liniei și al coloanei corespunzătoare locului în care este parcată și modul de parcare a acesteia, rezolvă următoarele două cerinţe: 1) determină numărul de mașini care pot ieși din parcare fără a fi condiționate de mutarea sau de părăsirea parcării de către alte mașini (numărul de maşini care pot ieşi în prima serie); 2) determină numărul total maşini care pot ieşi din parcare, precum şi numărul de serii în care se realizează ieşirea tuturor acestor maşini."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>parking.in</code> conține pe prima linie numerele naturale <code>c</code>, <code>n</code>, <code>m</code>, <code>k</code> și <code>q</code> reprezentând, în ordine, numărul cerinței, numărul de linii și numărul de coloane ale parcării, numărul de întreruperi ale zidului parcării, respectiv, numărul de mașini parcate. Pe următoarele <code>k</code> linii se află câte două numere naturale <code>i</code> și <code>j</code> reprezentând pozițiile (linia, respectiv coloana) întreruperilor din zidul parcării. Pe următoarele <code>q</code> linii se află câte trei numere naturale <code>x</code>, <code>y</code> și <code>p</code> reprezentând, în ordine, numărul liniei și al coloanei corespunzătoare locului în care este parcată o mașină și modul de parcare a acesteia (<code>p=0</code> pentru parcare paralelă cu marcajele orizontale, respectiv <code>p=1</code> pentru parcare paralelă cu marcajele verticale). Valorile scrise pe aceeaşi linie sunt separate prin câte un spaţiu.</p>",
+      "text": "Fișierul de intrare parking.in conține pe prima linie numerele naturale c, n, m, k și q reprezentând, în ordine, numărul cerinței, numărul de linii și numărul de coloane ale parcării, numărul de întreruperi ale zidului parcării, respectiv, numărul de mașini parcate. Pe următoarele k linii se află câte două numere naturale i și j reprezentând pozițiile (linia, respectiv coloana) întreruperilor din zidul parcării. Pe următoarele q linii se află câte trei numere naturale x, y și p reprezentând, în ordine, numărul liniei și al coloanei corespunzătoare locului în care este parcată o mașină și modul de parcare a acesteia (p=0 pentru parcare paralelă cu marcajele orizontale, respectiv p=1 pentru parcare paralelă cu marcajele verticale). Valorile scrise pe aceeaşi linie sunt separate prin câte un spaţiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>parking.out</code> va conține o singură linie ce va conține:</p><ul>\n\t<li>numărul de maşini care au ieşit din parcare în prima serie, dacă <code>c=1</code>;</li>\n\t<li>numărul total de mașini care au ieşit din parcare și numărul de serii în care s-a realizat ieşirea maşinilor, separate printr-un spaţiu, dacă <code>c=2</code>.</li>\n</ul>",
+      "text": "Fișierul de ieșire parking.out va conține o singură linie ce va conține: numărul de maşini care au ieşit din parcare în prima serie, dacă c=1; numărul total de mașini care au ieşit din parcare și numărul de serii în care s-a realizat ieşirea maşinilor, separate printr-un spaţiu, dacă c=2."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2 ≤ n, m ≤ 1000</code></li>\n\t<li><code>2 ≤ k ≤ 2 • n + 2 • m</code></li>\n\t<li><code>2 ≤ q ≤ min(n • m, 100.000)</code></li>\n\t<li><code> 1 ≤ i ≤ n</code>, pentru <code>j=0</code> sau <code>j=m+1</code> şi <code>1 ≤ j ≤ m</code>, pentru <code>i=0</code> sau <code>i=n+1</code></li>\n\t<li><code> 1 ≤ x ≤ n</code>, <code>1 ≤ y ≤ m</code>,  <code>0 ≤ p ≤ 1</code></li>\n\t<li>Se garantează  pentru datele de test că numărul de serii obținute va fi cel mult <code>10.000</code>, dacă <code>c=2</code>.</li>\n\t<li>Pe parcursul deplasării pentru a ieși din parcare mașinile vor circula astfel încât nu se vor ciocni.</li>\n\t<li>Pentru 12 puncte, <code>C=1</code>, <code>n, m, q ≤ 150</code></li>\n\t<li>Pentru 16 puncte, <code>C=1</code> și nu există restricții suplimentare.</li>\n\t<li>Pentru 12 puncte, <code>C=2</code>, <code>n, m, q ≤ 150</code></li>\n\t<li>Pentru 60 puncte, <code>C=2</code> și nu există restricții suplimentare.</li>\n</ul>",
+      "text": "2 ≤ n, m ≤ 1000 2 ≤ k ≤ 2 • n + 2 • m 2 ≤ q ≤ min(n • m, 100.000) 1 ≤ i ≤ n, pentru j=0 sau j=m+1 şi 1 ≤ j ≤ m, pentru i=0 sau i=n+1 1 ≤ x ≤ n, 1 ≤ y ≤ m, 0 ≤ p ≤ 1 Se garantează pentru datele de test că numărul de serii obținute va fi cel mult 10.000, dacă c=2. Pe parcursul deplasării pentru a ieși din parcare mașinile vor circula astfel încât nu se vor ciocni. Pentru 12 puncte, C=1, n, m, q ≤ 150 Pentru 16 puncte, C=1 și nu există restricții suplimentare. Pentru 12 puncte, C=2, n, m, q ≤ 150 Pentru 60 puncte, C=2 și nu există restricții suplimentare."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>parking.in</code></p><pre>1 6 7 11 16\n0 1\n0 4\n0 6\n7 2\n7 3\n7 5\n7 7 \n1 0\n4 0\n6 0\n2 8\n1 2 1\n1 4 0\n2 2 0\n2 4 1\n2 6 0\n3 1 1\n3 4 0\n3 6 1\n4 2 0\n4 3 1\n4 5 0\n4 7 1\n5 6 0\n6 1 0\n6 3 1\n6 6 0</pre><p><code>parking.out</code></p><pre>6</pre><h3>Explicație</h3><p>Datele corespund imaginii din enunț. Pot ieși din parcare fără a aștepta mutarea sau plecarea altor mașini cele <code>6</code> mașini aflate în locurile de parcare din pozițiile:<br>\n<code>(2,6)</code> – spre est<br>\n<code>(3,1)</code> – spre nord<br>\n<code>(4,2)</code> – spre vest<br>\n<code>(4,7)</code> – spre sud<br>\n<code>(6,1)</code> – spre vest<br>\n<code>(6,3)</code> – spre sud</p>",
+      "text": "parking.in1 6 7 11 16 0 1 0 4 0 6 7 2 7 3 7 5 7 7 1 0 4 0 6 0 2 8 1 2 1 1 4 0 2 2 0 2 4 1 2 6 0 3 1 1 3 4 0 3 6 1 4 2 0 4 3 1 4 5 0 4 7 1 5 6 0 6 1 0 6 3 1 6 6 0parking.out6ExplicațieDatele corespund imaginii din enunț. Pot ieși din parcare fără a aștepta mutarea sau plecarea altor mașini cele 6 mașini aflate în locurile de parcare din pozițiile: (2,6) – spre est (3,1) – spre nord (4,2) – spre vest (4,7) – spre sud (6,1) – spre vest (6,3) – spre sud"
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>parking.in</code></p><pre>2 6 7 11 16\n0 1\n0 4\n0 6\n7 2\n7 3\n7 5\n7 7 \n1 0\n4 0\n6 0\n2 8\n1 2 1\n1 4 0\n2 2 0\n2 4 1\n2 6 0\n3 1 1\n3 4 0\n3 6 1\n4 2 0\n4 3 1\n4 5 0\n4 7 1\n5 6 0\n6 1 0\n6 3 1\n6 6 0</pre><p><code>parking.out</code></p><pre>10 3</pre><h3>Explicație</h3><p>Seria 1: ies din parcare cele <code>6</code> mașini, specificate la exemplul precedent. <br>\nSeria 2: pot ieși din parcare cele <code>3</code> mașini aflate în locurile de parcare din pozițiile: <code>(3, 6)</code> – spre nord, <code>(4, 3)</code> – spre sud, <code>(6, 6)</code> – spre vest. Configurația apare în prima imagine de mai jos. <br>\nSeria 3: poate ieși din parcare o singură mașină aflată în locul de parcare din poziția: <code>(4,5)</code> – spre vest. Vor putea părăsi parcarea în total <code>6 + 3 + 1 = 10</code> mașini în <code>3</code> serii. Configurația apare în a doua imagine de mai jos.</p><p><img alt=\"\" src=\"/resurse/16a4b0/parking_02.jpg\"></p>",
+      "text": "parking.in2 6 7 11 16 0 1 0 4 0 6 7 2 7 3 7 5 7 7 1 0 4 0 6 0 2 8 1 2 1 1 4 0 2 2 0 2 4 1 2 6 0 3 1 1 3 4 0 3 6 1 4 2 0 4 3 1 4 5 0 4 7 1 5 6 0 6 1 0 6 3 1 6 6 0parking.out10 3ExplicațieSeria 1: ies din parcare cele 6 mașini, specificate la exemplul precedent. Seria 2: pot ieși din parcare cele 3 mașini aflate în locurile de parcare din pozițiile: (3, 6) – spre nord, (4, 3) – spre sud, (6, 6) – spre vest. Configurația apare în prima imagine de mai jos. Seria 3: poate ieși din parcare o singură mașină aflată în locul de parcare din poziția: (4,5) – spre vest. Vor putea părăsi parcarea în total 6 + 3 + 1 = 10 mașini în 3 serii. Configurația apare în a doua imagine de mai jos."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Datele corespund imaginii din enunț. Pot ieși din parcare fără a aștepta mutarea sau plecarea altor mașini cele 6 mașini aflate în locurile de parcare din pozițiile: (2,6) – spre est (3,1) – spre nord (4,2) – spre vest (4,7) – spre sud (6,1) – spre vest (6,3) – spre sud"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Seria 1: ies din parcare cele 6 mașini, specificate la exemplul precedent. Seria 2: pot ieși din parcare cele 3 mașini aflate în locurile de parcare din pozițiile: (3, 6) – spre nord, (4, 3) – spre sud, (6, 6) – spre vest. Configurația apare în prima imagine de mai jos. Seria 3: poate ieși din parcare o singură mașină aflată în locul de parcare din poziția: (4,5) – spre vest. Vor putea părăsi parcarea în total 6 + 3 + 1 = 10 mașini în 3 serii. Configurația apare în a doua imagine de mai jos."
+    }
+  ],
+  "constraints": [
+    "2 ≤ n, m ≤ 1000",
+    "2 ≤ k ≤ 2 • n + 2 • m",
+    "2 ≤ q ≤ min(n • m, 100.000)",
+    "1 ≤ i ≤ n, pentru j=0 sau j=m+1 şi 1 ≤ j ≤ m, pentru i=0 sau i=n+1",
+    "1 ≤ x ≤ n, 1 ≤ y ≤ m, 0 ≤ p ≤ 1",
+    "Se garantează pentru datele de test că numărul de serii obținute va fi cel mult 10.000, dacă c=2.",
+    "Pe parcursul deplasării pentru a ieși din parcare mașinile vor circula astfel încât nu se vor ciocni.",
+    "Pentru 12 puncte, C=1, n, m, q ≤ 150",
+    "Pentru 16 puncte, C=1 și nu există restricții suplimentare.",
+    "Pentru 12 puncte, C=2, n, m, q ≤ 150",
+    "Pentru 60 puncte, C=2 și nu există restricții suplimentare."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q85348ee06a.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/parking_02.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-parking-02-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "10",
+    "intrare/ieșire": "parking.in / parking.out",
+    "limită timp": "0.2 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "OJI 2024, clasa a 7-a",
+    "autor": "Florentina Ungureanu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.2,
+  "memoryLimitMb": 64,
+  "author": "Florentina Ungureanu",
+  "sourceAttribution": "OJI 2024, clasa a 7-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4617/parking"
+}

@@ -1,0 +1,299 @@
+{
+  "id": 4203,
+  "slug": "numberofpoints",
+  "name": "NumberOfPoints",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4203/numberofpoints",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 65,
+      "name": "Structuri de date arborescente",
+      "slug": "structuri-de-date-arborescente",
+      "href": "/?pagina=probleme-lista&tag=65"
+    },
+    {
+      "id": 148,
+      "name": "Structuri de date",
+      "slug": "structuri-de-date",
+      "href": "/?pagina=probleme-lista&tag=148"
+    }
+  ],
+  "tags": [
+    "Arbori indexați binar"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Pentru fiecare punct din plan de coordonate <code>(x, y)</code> trebuie să spuneți câte alte puncte au coordonatele <code>(p, q)</code> cu proprietatea că <code>1 ≤ p &lt; x</code> și <code>1 ≤ q ≤ y</code> (atenție, <code>p</code> este strict mai mic decât <code>x</code>, iar <code>q</code> este mai mic sau egal cu <code>y</code>).</p>",
+      "text": "Pentru fiecare punct din plan de coordonate (x, y) trebuie să spuneți câte alte puncte au coordonatele (p, q) cu proprietatea că 1 ≤ p < x și 1 ≤ q ≤ y (atenție, p este strict mai mic decât x, iar q este mai mic sau egal cu y)."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>numberofpoints.in</code> conține pe prima linie, separate prin câte un spațiu, numerele <code>n</code>, <code>A</code>, <code>B</code>, <code>C</code>, <code>D</code>, <code>x1</code>, <code>y1</code>, <code>x2</code>, <code>y2</code>, unde <code>n</code> este numărul de puncte din plan, <code>(x1, y1)</code> sunt coordonatele primului punct din plan, iar <code>(x2, y2)</code> sunt coordonatele celui de-al doilea punct. Coordonatele restului punctelor se generează după formulele: </p><ul>\n\t<li><code>x</code><sub><code>i</code></sub> <code>= (x</code><sub><code>i-2</code></sub> <code>* A + x</code><sub><code>i-1</code></sub> <code>* B + C) % D + 1</code>, pentru orice <code>i=3..n</code></li>\n\t<li><code>y</code><sub><code>i</code></sub> <code>= (y</code><sub><code>i-2</code></sub> <code>* A + y</code><sub><code>i-1</code></sub> <code>* B + C) % D + 1</code>, pentru orice <code>i=3..n</code></li>\n</ul>",
+      "text": "Fișierul de intrare numberofpoints.in conține pe prima linie, separate prin câte un spațiu, numerele n, A, B, C, D, x1, y1, x2, y2, unde n este numărul de puncte din plan, (x1, y1) sunt coordonatele primului punct din plan, iar (x2, y2) sunt coordonatele celui de-al doilea punct. Coordonatele restului punctelor se generează după formulele: xi = (xi-2 * A + xi-1 * B + C) % D + 1, pentru orice i=3..n yi = (yi-2 * A + yi-1 * B + C) % D + 1, pentru orice i=3..n"
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>numberofpoints.out</code> va conține exact <code>n</code> linii, pe linia <code>i</code> (cu <code>i = 1..n</code>) se va afla un singur număr natural reprezentând numărul de puncte care au abscisa strict mai mică decât <code>x</code><sub><code>i</code></sub> și ordonata mai mică sau egală decât <code>y</code><sub><code>i</code></sub>.</p>",
+      "text": "Fișierul de ieșire numberofpoints.out va conține exact n linii, pe linia i (cu i = 1..n) se va afla un singur număr natural reprezentând numărul de puncte care au abscisa strict mai mică decât xi și ordonata mai mică sau egală decât yi."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ n ≤ 200.000</code></li>\n\t<li><code>1 ≤ A, B, C, D, x1, y1, x2, y2 ≤ 1.000.000</code></li>\n</ul>",
+      "text": "1 ≤ n ≤ 200.000 1 ≤ A, B, C, D, x1, y1, x2, y2 ≤ 1.000.000"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>numberofpoints.in</code></p><pre>7 19 17 11 23 4 5 7 2</pre><p><code>numberofpoints.out</code></p><pre>1\n1\n2\n2\n4\n0\n5</pre><h3>Explicații</h3><p>Cele șapte puncte generate au coordonatele: <code>(4, 5)</code>, <code>(7, 2)</code>, <code>(23, 3)</code>, <code>(7, 9)</code>, <code>(16, 15)</code>, <code>(3, 1)</code> și <code>(22, 15)</code>. Primul punct, de coordonate <code>(4, 5)</code> are un singur punct care îndeplinește cerințele, anume cel de coordonate <code>(3, 1)</code>. Al cincilea punct, de coordonate <code>(16, 15)</code> are <code>4</code> puncte care îndeplinesc condițiile, anume <code>(4, 5)</code>, <code>(7, 2)</code>,  <code>(7, 9)</code> și <code>(3, 1)</code>.</p>",
+      "text": "numberofpoints.in7 19 17 11 23 4 5 7 2numberofpoints.out1 1 2 2 4 0 5ExplicațiiCele șapte puncte generate au coordonatele: (4, 5), (7, 2), (23, 3), (7, 9), (16, 15), (3, 1) și (22, 15). Primul punct, de coordonate (4, 5) are un singur punct care îndeplinește cerințele, anume cel de coordonate (3, 1). Al cincilea punct, de coordonate (16, 15) are 4 puncte care îndeplinesc condițiile, anume (4, 5), (7, 2), (7, 9) și (3, 1)."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cele șapte puncte generate au coordonatele: (4, 5), (7, 2), (23, 3), (7, 9), (16, 15), (3, 1) și (22, 15). Primul punct, de coordonate (4, 5) are un singur punct care îndeplinește cerințele, anume cel de coordonate (3, 1). Al cincilea punct, de coordonate (16, 15) are 4 puncte care îndeplinesc condițiile, anume (4, 5), (7, 2), (7, 9) și (3, 1)."
+    }
+  ],
+  "constraints": [
+    "1 ≤ n ≤ 200.000",
+    "1 ≤ A, B, C, D, x1, y1, x2, y2 ≤ 1.000.000"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qcb2a766584.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "11",
+    "intrare/ieșire": "numberofpoints.in / numberofpoints.out",
+    "limită timp": "0.3 secunde",
+    "limită memorie": "128 MB / 64 MB",
+    "sursa problemei": "Folclorul informatic",
+    "autor": "Dan Pracsiu",
+    "dificultate": "dificilă"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.3,
+  "memoryLimitMb": 128,
+  "author": "Dan Pracsiu",
+  "sourceAttribution": "Folclorul informatic",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4203/numberofpoints"
+}

@@ -1,0 +1,314 @@
+{
+  "id": 4941,
+  "slug": "dans1",
+  "name": "dans1",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4941/dans1",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 45,
+      "name": "Vectori caracteristici / de frecventa",
+      "slug": "vectori-caracteristici-de-frecventa",
+      "href": "/?pagina=probleme-lista&tag=45"
+    }
+  ],
+  "tags": [
+    "ciurul lui Eratostene"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Se citește numărul natural <code>C</code> (numărul cerinței), numărul natural <code>n</code>, valoarea <code>D</code> a Cifriminei și apoi un șir de <code>n</code> numere naturale nenule <code>a1</code>, <code>a2</code>, …, <code>an</code> (numerienii din sală).<br>\n1.\tDacă <code>C = 1</code>, determinați pe câți numerieni îi poate invita Cifrimina la valsul prim (adică numărul de valori ai pentru care <code>D + ai</code> este prim).<br>\n2.\tDacă <code>C = 2</code>, determinați pe câți numerieni îi poate invita Cifrimina la salsa fracțional (adică numărul de valori ai ale căror cifre apar toate în <code>D</code>).<br>\nObservație: fiecare numerian este considerat distinct prin poziția sa în șir (dacă aceeași valoare apare de mai multe ori, fiecare apariție contează separat).</p>",
+      "text": "Se citește numărul natural C (numărul cerinței), numărul natural n, valoarea D a Cifriminei și apoi un șir de n numere naturale nenule a1, a2, …, an (numerienii din sală). 1. Dacă C = 1, determinați pe câți numerieni îi poate invita Cifrimina la valsul prim (adică numărul de valori ai pentru care D + ai este prim). 2. Dacă C = 2, determinați pe câți numerieni îi poate invita Cifrimina la salsa fracțional (adică numărul de valori ai ale căror cifre apar toate în D). Observație: fiecare numerian este considerat distinct prin poziția sa în șir (dacă aceeași valoare apare de mai multe ori, fiecare apariție contează separat)."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>dans.in</code> conține pe prima linie: <code>C</code>, <code>n</code>, <code>D</code>; pe a doua linie: <code>n</code> numere naturale nenule <code>a1</code>, <code>a2</code>, <code>a3</code>, …, <code>an</code> separate prin spațiu.</p>",
+      "text": "Fișierul de intrare dans.in conține pe prima linie: C, n, D; pe a doua linie: n numere naturale nenule a1, a2, a3, …, an separate prin spațiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>dans.out</code> va conține:</p><ul>\n\t<li>Dacă cerința <code>C = 1</code>, atunci pe prima linie a fișierului de ieșire <code>dans.out</code> se va scrie un număr natural reprezentând numărul de numerieni din șir pe care îi poate invita Cifrimina la valsul prim, adică numărul de valori ai pentru care <code>D + ai</code> este număr prim.</li>\n\t<li>Dacă cerința <code>C = 2</code>, atunci pe prima linie a fișierului de ieșire <code>dans.out</code> se va scrie un număr natural reprezentând numărul de numerieni din șir pe care îi poate invita Cifrimina la salsa fracțional, adică numărul de valori ai ale căror cifre apar toate în numărul <code>D</code> (multiplicitatea cifrelor nu contează).</li>\n</ul>",
+      "text": "Fișierul de ieșire dans.out va conține: Dacă cerința C = 1, atunci pe prima linie a fișierului de ieșire dans.out se va scrie un număr natural reprezentând numărul de numerieni din șir pe care îi poate invita Cifrimina la valsul prim, adică numărul de valori ai pentru care D + ai este număr prim. Dacă cerința C = 2, atunci pe prima linie a fișierului de ieșire dans.out se va scrie un număr natural reprezentând numărul de numerieni din șir pe care îi poate invita Cifrimina la salsa fracțional, adică numărul de valori ai ale căror cifre apar toate în numărul D (multiplicitatea cifrelor nu contează)."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ n ≤ 1.000.000</code></li>\n\t<li><code>1 ≤ D ≤ 1.000.000</code>,</li>\n\t<li><code>0 ≤ ai ≤ 1.000.000</code></li>\n\t<li>Pentru teste în valoare de 60p, <code>C = 1</code></li>\n\t<li>Pentru teste în valoare de 40p, <code>C = 1</code> și <code>n ≤ 1000</code></li>\n\t<li>Pentru teste în valoare de 30p, <code>C = 2</code></li>\n\t<li>Se acordă 10 puncte pentru exemple</li>\n</ul>",
+      "text": "1 ≤ n ≤ 1.000.000 1 ≤ D ≤ 1.000.000, 0 ≤ ai ≤ 1.000.000 Pentru teste în valoare de 60p, C = 1 Pentru teste în valoare de 40p, C = 1 și n ≤ 1000 Pentru teste în valoare de 30p, C = 2 Se acordă 10 puncte pentru exemple"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>dans.in</code></p><pre>1 6 10\n1 2 3 4 7 10</pre><p><code>dans.out</code></p><pre>3</pre><h3>Explicație</h3><p>Verificăm sumele cu <code>D = 10</code>: <code>10 + 1 = 11</code> (e prim), <code>10 + 2 = 12</code> (nu e prim), <code>10 + 3 = 13</code> (prim), <code>10 + 4 = 14</code> (nu e prim),<br>\n<code>10 + 7 = 17</code> (e prim), <code>10 + 10 = 20</code> (nu e prim). Răspuns: <code>3</code> parteneri.</p>",
+      "text": "dans.in1 6 10 1 2 3 4 7 10dans.out3ExplicațieVerificăm sumele cu D = 10: 10 + 1 = 11 (e prim), 10 + 2 = 12 (nu e prim), 10 + 3 = 13 (prim), 10 + 4 = 14 (nu e prim), 10 + 7 = 17 (e prim), 10 + 10 = 20 (nu e prim). Răspuns: 3 parteneri."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>dans.in</code></p><pre>2 7 120\n2001 33 5 101 12 222 900</pre><p><code>dans.out</code></p><pre>4</pre><h3>Explicație</h3><p>Cifrele lui <code>D = 120</code>: <code>{0,1,2}</code>. Acceptate: <code>2001</code> (0,1,2), <code>101</code> (0,1), <code>12</code> (1,2), <code>222</code> (2).<br>\nRespinse: <code>33</code> (3), <code>5</code> (5), <code>900</code> (9).</p>",
+      "text": "dans.in2 7 120 2001 33 5 101 12 222 900dans.out4ExplicațieCifrele lui D = 120: {0,1,2}. Acceptate: 2001 (0,1,2), 101 (0,1), 12 (1,2), 222 (2). Respinse: 33 (3), 5 (5), 900 (9)."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Verificăm sumele cu D = 10: 10 + 1 = 11 (e prim), 10 + 2 = 12 (nu e prim), 10 + 3 = 13 (prim), 10 + 4 = 14 (nu e prim), 10 + 7 = 17 (e prim), 10 + 10 = 20 (nu e prim). Răspuns: 3 parteneri."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cifrele lui D = 120: {0,1,2}. Acceptate: 2001 (0,1,2), 101 (0,1), 12 (1,2), 222 (2). Respinse: 33 (3), 5 (5), 900 (9)."
+    }
+  ],
+  "constraints": [
+    "1 ≤ n ≤ 1.000.000",
+    "1 ≤ D ≤ 1.000.000,",
+    "0 ≤ ai ≤ 1.000.000",
+    "Pentru teste în valoare de 60p, C = 1",
+    "Pentru teste în valoare de 40p, C = 1 și n ≤ 1000",
+    "Pentru teste în valoare de 30p, C = 2",
+    "Se acordă 10 puncte pentru exemple"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q3add7efd6f.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "dans.in / dans.out",
+    "limită timp": "1 secunde",
+    "limită memorie": "64 MB / 2 MB",
+    "sursa problemei": "OMI Iași 2026, clasa a 9-a",
+    "autor": "Andreea Ioniță",
+    "dificultate": "ușoară"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 1,
+  "memoryLimitMb": 64,
+  "author": "Andreea Ioniță",
+  "sourceAttribution": "OMI Iași 2026, clasa a 9-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4941/dans1"
+}

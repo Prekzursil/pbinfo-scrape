@@ -1,0 +1,92 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2055"><article id="enunt">
+			<p>Pe o zonă în formă de dreptunghi cu laturile de lungimi <code>N</code> și <code>M</code> se găsesc <code>NxM</code> pătrate de latură <code>1</code>. În centrul fiecărui pătrat se găsește înfipt câte un ac de grosime neglijabilă. Fiecare ac este descris de înălțimea sa. Această zonă se poate reprezenta ca un tablou bidimensional de dimensiuni <code>N</code> și <code>M</code>, iar fiecare element din matrice reprezintă înălțimea (număr natural nenul) fiecărui ac. În centrul pătratului <code>(N,M)</code> există  o cameră de luat vederi de ultimă generație, mobilă, care se poate roti cu 360<sup>0</sup> în orice plan, situată la nivelul solului. Dimensiunile camerei sunt neglijabile.  De exemplu, dacă avem zona sub forma:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-Imagini-ace01-jpg.jpg"></p>
+
+<p>Din pătratul <code>(4,4)</code>, în direcția N (nord), camera va obține Fig. 1, iar în  direcția V (vest)  va obține Fig. 2.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-Imagini-ace02-jpg.jpg"></p>
+
+<p>Pentru direcția N, camera va vedea acul de coordonatele <code>(3,4)</code> – în totalitate, iar acul <code>(2,4)</code> se va vedea doar parțial . Acul <code>(1,4)</code> nu se vede pentru că este acoperit total de <code>(2,4)</code>. În direcția V, camera va vedea doar acul <code>(4,3)</code>, deoarece <code>(4,2)</code> și <code>(4,1)</code> sunt acoperite total de <code>(4,3)</code>. Pentru celelalte direcții se vor vedea parțial sau în totalitate acele <code>(3,3)</code>, <code>(3,2)</code>, <code>(3,1)</code>, <code>(2,3)</code>, <code>(1,3)</code>, <code>(2,2)</code>, <code>(2,1)</code>, <code>(1,2)</code>. Acul <code>(1,1)</code> nu se vede din cauza acului <code>(2,2)</code>, care îl acoperă total. Acul <code>(2,2)</code> se vede doar parțial, pentru că o parte din el este acoperit de acul <code>(3,3)</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>1. Câte ace vede camera de luat vederi dacă se poate roti în plan vertical, doar în direcțiile N și V?<br>
+2. Câte ace vede camera de luat vederi dacă se poate roti în orice plan și în orice direcții?</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>ace.in</code> conține pe prima linie numărul <code>P</code> care poate fi <code>1</code> sau <code>2</code>, pentru prima, respectiv a doua cerință. Pe a doua linie se găsesc numerele <code>N</code>, <code>M</code> reprezentând dimensiunile tabloului, apoi pe următoarele <code>N</code> linii câte <code>M</code> numere naturale, despărțite prin câte un spațiu, reprezentând înălțimile acelor.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>ace.out</code> va conține pe prima linie numărul de ace văzute pentru cerință indicată de valoarea numărului <code>P</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N ≤ 1000</code></li>
+	<li><code>2 ≤ M ≤ 1000</code></li>
+	<li>Elementele matricei sunt numere naturale nenule mai mici decât <code>1000</code>, cu excepția numărului de pe linia <code>N</code> și coloana <code>M</code> care este <code>0</code>.</li>
+	<li>Pentru rezolvarea corectă a cerinței 1 se acordă 20 puncte, pentru rezolvarea corectă a cerinței 2 se acordă  70 de puncte, iar din oficiu se acordă 10 de puncte.</li>
+	<li>Pentru cerința 2 există teste în valoare de 20 puncte cu <code>N,M ≤ 50</code>.</li>
+	<li>Pentru cerința 2 există teste în valoare de 45 puncte cu <code>N,M ≤ 100</code>.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>ace.in</code></p>
+
+<pre>1
+4 4
+8 5 4 7
+2 7 4 6
+5 5 3 2
+6 6 3 0</pre>
+
+<p><code>ace.out</code></p>
+
+<pre>3</pre>
+
+<h3>Explicație</h3>
+
+<p>Pentru cerința 1 avem direcțiile N și V: Pentru direcția N, camera va vedea acul de coordonatele <code>(3,4)</code> – în totalitate, iar acul <code>(2,4)</code> se va vedea doar parțial. Acul <code>(1,4)</code> nu se va vedea pentru că este acoperit total de <code>(2,4)</code>.  În direcția V, camera va vedea doar acul <code>(4,3)</code>, deoarece acele <code>(4,2)</code> și <code>(4,1)</code> sunt acoperite total de acul <code>(4,3)</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>ace.in</code></p>
+
+<pre>2
+4 4
+8 5 4 7
+2 7 4 6
+5 5 3 2
+6 6 3 0</pre>
+
+<p><code>ace.out</code></p>
+
+<pre>11</pre>
+
+<h3>Explicație</h3>
+
+<p>Pentru cerința 2 camera va vedea cele trei ace din direcțiile N și V (vezi mai sus) și opt pentru celelalte direcții se vor vedea parțial sau în totalitate acele <code>(3,3)</code>, <code>(3,2)</code>, <code>(3,1)</code>, <code>(2,3)</code>, <code>(1,3)</code>, <code>(2,2)</code>, <code>(2,1)</code>, <code>(1,2)</code>. Acul <code>(1,1)</code> nu se vede din cauza celui de pe <code>(2,2)</code> care îl acoperă total. Acul <code>(2,2)</code> se vede doar parțial, pentru că o parte din el este acoperit de acul <code>(3,3)</code>.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>ace.in</code></p>
+
+<pre>2
+4 3 
+5 4 7
+6 4 6
+5 3 2
+6 3 0</pre>
+
+<p><code>ace.out</code></p>
+
+<pre>8</pre>
+
+<h3>Explicație</h3>
+
+<p>Pentru cerința 2 camera  va vedea în N <code>(3,3)</code>, <code>(2,3)</code>, în V  va vedea <code>(4,2)</code>. În celelalte direcții camera  va vedea parțial sau în totalitate acele <code>(3,2)</code>, <code>(3,1)</code>, <code>(2,2)</code>, <code>(1,2)</code>, <code>(1,1)</code>.</p>		</article>
+		</body></html>

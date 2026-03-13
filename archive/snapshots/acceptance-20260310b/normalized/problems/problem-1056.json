@@ -1,0 +1,300 @@
+{
+  "id": 1056,
+  "slug": "unific",
+  "name": "Unific",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1056/unific",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 85,
+      "name": "Structuri de date liniare",
+      "slug": "structuri-de-date-liniare",
+      "href": "/?pagina=probleme-lista&tag=85"
+    },
+    {
+      "id": 86,
+      "name": "Stiva",
+      "slug": "stiva",
+      "href": "/?pagina=probleme-lista&tag=86"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerinţă",
+      "html": "<p>Cunoscându-se şirul celor <code>N</code> numere naturale, să se determine:</p><p>a) cifra care apare cel mai frecvent în scrierea tuturor celor <code>N</code> numere; dacă există mai multe cifre cu aceeaşi frecvenţă de apariţie maximă, se va reţine cea mai mică cifră.   <br>\nb) şirul obţinut prin efectuarea unui număr maxim de unificări, după regulile descrise în enunţ.</p>",
+      "text": "Cunoscându-se şirul celor N numere naturale, să se determine:a) cifra care apare cel mai frecvent în scrierea tuturor celor N numere; dacă există mai multe cifre cu aceeaşi frecvenţă de apariţie maximă, se va reţine cea mai mică cifră. b) şirul obţinut prin efectuarea unui număr maxim de unificări, după regulile descrise în enunţ."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>unific.in</code> conține pe prima linie o valoare naturală <code>N</code>, iar pe următoarele <code>N</code> linii, în ordine, cele <code>N</code> numere naturale din şirul <code>A</code>, câte un număr pe o linie.</p>",
+      "text": "Fișierul de intrare unific.in conține pe prima linie o valoare naturală N, iar pe următoarele N linii, în ordine, cele N numere naturale din şirul A, câte un număr pe o linie."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>unific.out</code> va conține pe prima linie un număr natural c reprezentând cifra care apare cel mai frecvent în scrierea celor <code>N</code> numere naturale. Pe cea de a doua linie un număr natural <code>Nr</code> reprezentând numărul de numere naturale rămase în şir după efectuarea unui număr maxim de unificări. Pe cea de a treia linie se vor scrie cele <code>Nr</code> numere naturale rămase, în ordinea din şir, separate prin câte un spaţiu.</p><p>Dacă în urma procedeului de unificare, toate numerele vor fi eliminate, fişierul de ieşire va conţine o singură linie, pe care se va scrie cifra care apare cel mai frecvent în scrierea celor <code>N</code> numere naturale.</p>",
+      "text": "Fișierul de ieșire unific.out va conține pe prima linie un număr natural c reprezentând cifra care apare cel mai frecvent în scrierea celor N numere naturale. Pe cea de a doua linie un număr natural Nr reprezentând numărul de numere naturale rămase în şir după efectuarea unui număr maxim de unificări. Pe cea de a treia linie se vor scrie cele Nr numere naturale rămase, în ordinea din şir, separate prin câte un spaţiu.Dacă în urma procedeului de unificare, toate numerele vor fi eliminate, fişierul de ieşire va conţine o singură linie, pe care se va scrie cifra care apare cel mai frecvent în scrierea celor N numere naturale."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 100 000</code></li>\n\t<li>Numerele din şirul iniţial, precum şi numerele obţinute în urma unificărilor, nu vor depăşi  <code>10</code><sup><code>18</code></sup></li>\n\t<li>Pentru datele de test şirul obţinut în urma unificărilor este nevid.</li>\n\t<li>Pentru 30% dintre teste <code>N ≤ 1000</code></li>\n\t<li>Pentru 70% dintre teste numere naturale din şir au cifrele nenule.</li>\n\t<li>Pentru determinarea corectă a primei cerinţe se acordă 10% din punctajul pe test. Punctajul integral se acordă pe ambele cerinţe rezolvate corect.</li>\n</ul>",
+      "text": "1 ≤ N ≤ 100 000 Numerele din şirul iniţial, precum şi numerele obţinute în urma unificărilor, nu vor depăşi 1018 Pentru datele de test şirul obţinut în urma unificărilor este nevid. Pentru 30% dintre teste N ≤ 1000 Pentru 70% dintre teste numere naturale din şir au cifrele nenule. Pentru determinarea corectă a primei cerinţe se acordă 10% din punctajul pe test. Punctajul integral se acordă pe ambele cerinţe rezolvate corect."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>unific.in</code></p><pre>10\n6\n47\n67\n40\n123\n231\n1238\n331\n2035\n50007</pre><p><code>unific.out</code></p><pre>3\n2\n0 837</pre>",
+      "text": "unific.in10 6 47 67 40 123 231 1238 331 2035 50007unific.out3 2 0 837"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p>Cifra care apare cel mai frecvent este <code>3</code> (de <code>6</code> ori).</p><p>Se unifică:  <code>47</code> cu <code>67  =&gt; 46</code>. Şirul rămas: <code>6 46 40 123 231 1238 331 2035 50007</code><br>\nSe unifică: <code>6</code> cu <code>46  =&gt; 4</code>.       Şirul rămas: <code>4 40 123 231 1238 331 2035 50007</code><br>\nSe unifică: <code>4</code> cu <code>40 =&gt; 0</code>.        Şirul rămas: <code>0 123 231 1238 331 2035 50007</code><br>\nSe unifică: <code>123</code> cu <code>231</code>, ambele numere rămân fără cifre, deci vor fi ambele eliminate. Şirul rămas: <code>0 1238 331 2035 50007</code><br>\nSe unifică: <code>1238</code> cu <code>331 =&gt; 28</code>.      Şirul rămas: <code>0 28 2035 50007</code><br>\nSe unifică: <code>28</code> cu <code>2035 =&gt; 835</code>.      Şirul rămas: <code>0 835 50007</code><br>\nSe unifică: <code>835</code> cu <code>50007 =&gt; 837</code>. Şirul rămas: <code>0 837</code></p>",
+      "text": "Cifra care apare cel mai frecvent este 3 (de 6 ori).Se unifică: 47 cu 67 => 46. Şirul rămas: 6 46 40 123 231 1238 331 2035 50007 Se unifică: 6 cu 46 => 4. Şirul rămas: 4 40 123 231 1238 331 2035 50007 Se unifică: 4 cu 40 => 0. Şirul rămas: 0 123 231 1238 331 2035 50007 Se unifică: 123 cu 231, ambele numere rămân fără cifre, deci vor fi ambele eliminate. Şirul rămas: 0 1238 331 2035 50007 Se unifică: 1238 cu 331 => 28. Şirul rămas: 0 28 2035 50007 Se unifică: 28 cu 2035 => 835. Şirul rămas: 0 835 50007 Se unifică: 835 cu 50007 => 837. Şirul rămas: 0 837"
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "1 ≤ N ≤ 100 000",
+    "Numerele din şirul iniţial, precum şi numerele obţinute în urma unificărilor, nu vor depăşi 1018",
+    "Pentru datele de test şirul obţinut în urma unificărilor este nevid.",
+    "Pentru 30% dintre teste N ≤ 1000",
+    "Pentru 70% dintre teste numere naturale din şir au cifrele nenule.",
+    "Pentru determinarea corectă a primei cerinţe se acordă 10% din punctajul pe test. Punctajul integral se acordă pe ambele cerinţe rezolvate corect."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q8e95863ecc.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "10",
+    "intrare/ieșire": "unific.in / unific.out",
+    "limită timp": "1 secunde",
+    "limită memorie": "2 MB / 1 MB",
+    "sursa problemei": "OJI 2013, Clasa a VII-a",
+    "autor": "Eugen Nodea",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 1,
+  "memoryLimitMb": 2,
+  "author": "Eugen Nodea",
+  "sourceAttribution": "OJI 2013, Clasa a VII-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1056/unific"
+}

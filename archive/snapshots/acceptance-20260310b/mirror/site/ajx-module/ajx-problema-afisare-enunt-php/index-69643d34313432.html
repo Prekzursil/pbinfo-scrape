@@ -1,0 +1,74 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4142"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>Prietenii lui <span class="caps">RAU</span>-Gigel vor să-i facă o surpriză de ziua lui! Pentru aceasta, ei trebuie să se întâlnească într-un singur loc pentru a se putea organiza mai eficient. </p>
+
+<p><span class="caps">RAU</span>-Gigel are <code>N</code> prieteni, etichetați în continuare cu numere de la <code>1</code> la <code>N</code>, ale căror poziții le putem reprezenta drept puncte în plan de coordonate <strong>numere naturale nenule</strong>, care sunt, pentru simplitate, tot de la <code>1</code> la <code>N</code>. Aceștia doresc să se întâlnească într-un singur punct de coordonate <strong>numere naturale nenule</strong>. În acest scop, fiecare prieten poate face câte un pas de lungime unitară (raportat la un reper cartezian în care s-ar putea reprezenta punctele) în oricare din cele <code>4</code> direcții cardinale (<code>Nord</code>, <code>Est</code>, <code>Sud</code> sau <code>Vest</code>) de oricâte ori dorește. Se consideră că distanța parcursă de un prieten până la locul de întâlnire este egală cu numărul de pași parcurși de acesta pentru a ajunge la respectiva destinație.</p>
+
+<p>În urma unei discuții aprinse s-a ajuns la un compromis care să mulțumească pe toată lumea și s-a hotărât ca prietenii personajului nostru principal să se întâlnească într-unul din punctele (nu neapărat din cele <code>N</code> date) care minimizează suma distanțelor minime de la fiecare prieten la punctul respectiv ales (prietenilor lui <span class="caps">RAU</span>-Gigel nu le place sportul, deci vor parcurge mereu drumul de lungime minimă până la punctul de întâlnire stabilit).</p>
+
+<p>Pentru că prietenii lui <span class="caps">RAU</span>-Gigel au o perioadă mai încărcată (<span class="caps">BAC</span>, admitere, …) nu își pot potrivi programul perfect pentru a se întâlni mereu cu toții, așa că organizează mai multe întâlniri la care vor participa prieteni dintr-un interval continuu de indici pe baza numerotării stabilite inițial. Pentru fiecare astfel de întâlnire se vrea să se afle (din motive pur statistice) care este suma minimă a tuturor distanțelor parcurse de către prieteni până la punctul de întâlnire, dacă acesta este ales optim.</p>
+
+<p>Această veritabilă problemă de informatică a fost prea grea pentru prietenii lui <span class="caps">RAU</span>-Gigel și pentru că nu pot apela la acesta să o rezolve (pentru a nu risca să strice surpriza), îți cer ție, știind că ești un informatician iscusit, să-i ajuți cât mai rapid (deoarece ziua de naștere se apropie), răsplătindu-te astfel dacă vei reuși cu cât mai multe puncte la concursul tău favorit de programare!</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>meeting.in</code> conține pe prima linie numărul <code>N</code>, iar pe următoarele <code>N</code> linii câte <code>2</code> numere naturale nenule \( {x}_{i}, {y}_{i} \), reprezentând coordonatele punctului aferent prietenului cu numărul <code>i</code>.  </p>
+
+<p>Pe următoarea linie se citește un număr <code>Q</code>, iar pe următoarele <code>Q</code> linii câte <code>2</code> numere naturale nenule \( {l}_{i}, {r}_{i} \), reprezentând câte un interval de prieteni care vor participa la întâlnirea cu numărul <code>i</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>meeting.out</code> va conține pe primele <code>Q</code> linii câte un număr care reprezintă suma minimă a tuturor distanțelor parcurse de către prietenii din intervalul dat până la punctul de întâlnire, dacă acesta este ales optim.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>\( 1 ≤ N, Q &lt; {2}^{17} \)</li>
+	<li>\( 1 ≤ {x}_{i}, {y}_{i} ≤ N \)</li>
+	<li>\( 1 ≤ {l}_{i} ≤ {r}_{i} ≤ N \)</li>
+	<li><strong>Atenție!</strong> Punctul în care prietenii se întâlnesc nu trebuie să fie neapărat unul dintre cele <code>N</code> puncte în care se află aceștia inițial, dar ar putea fi! De asemenea, coordonatele acestuia trebuie să fie <strong>numere naturale nenule</strong> (în mod evident, prietenii lui <span class="caps">RAU</span>-Gigel nu pot ajunge în puncte care nu au coordonate întregi, plecând din puncte de coordonate <strong>numere naturale nenule</strong> și efectuând doar pași de lungime <code>1</code>).</li>
+	<li><strong>Atenție!</strong> Dacă doi sau mai mulți prieteni parcurg la un moment dat o bucată de drum comună (execută aceeași pași din aceleași puncte), aceasta contribuie individual la traseul fiecăruia, fiind astfel adunată de mai multe ori la suma cerută, pentru că apare în mai multe trasee.</li>
+	<li>Pentru teste în valoare de <code>5</code> puncte, \( 1 ≤ N, Q &lt; {2}^{7} \)</li>
+	<li>Pentru alte teste în valoare de <code>10</code> puncte, \( 1 ≤ N, Q &lt; {2}^{9} \)</li>
+	<li>Pentru alte teste în valoare de <code>10</code> puncte, \( 1 ≤ N, Q &lt; {2}^{11} \)</li>
+	<li>Pentru alte teste în valoare de <code>15</code> puncte, \( 1 ≤ N &lt; {2}^{17} \) și \(1 ≤ Q &lt; {2}^{8} \)</li>
+	<li>Pentru alte teste în valoare de <code>15</code> puncte, \( 1 ≤ N &lt; {2}^{11} \) și \( 1 ≤ Q &lt; {2}^{17} \)</li>
+	<li>Pentru alte teste în valoare de <code>15</code> puncte, \( 1 ≤ N, Q &lt; {2}^{15} \)</li>
+	<li>Pentru alte teste în valoare de <code>15</code> puncte, \( 1 ≤ N, Q &lt; {2}^{16} \)</li>
+	<li>Pentru restul testelor nu există restricții suplimentare, adică se păstrează doar condiția \( 1 ≤ N, Q &lt; {2}^{17} \)</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>meeting.in</code></p>
+
+<pre>7
+2 3
+1 4
+5 5
+4 3
+3 6
+1 2
+7 4
+5
+1 7
+3 5
+4 7
+2 6
+2 5</pre>
+
+<p><code>meeting.out</code></p>
+
+<pre>19
+5
+12
+13
+9</pre>
+
+<h3>Explicație</h3>
+
+<p>Pentru prima interogare din exemplu se poate demonstra că punctul <code>A(3, 4)</code> este optim, acesta minimizând suma distanțelor minime de la restul punctelor la acesta. Dacă notăm cu <code>D(X, Y)</code> distanța minimă dintre punctele <code>X</code> și <code>Y</code>, atunci <code>D(P1, A) = 2</code>, <code>D(P2, A) = 2</code>, <code>D(P3, A) = 3</code>, <code>D(P4, A) = 2</code>, <code>D(P5, A) = 2</code>, <code>D(P6, A) = 4</code>, <code>D(P7, A) = 4</code>, suma fiind astfel <code>2 + 2 + 3 + 2 + 2 + 4 + 4 = 19</code>. Pentru restul interogărilor din exemplu se procedează similar.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-dcee6e-grid-meeting-png.png"></p>		</article>
+		</body></html>

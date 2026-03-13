@@ -1,0 +1,49 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2049"><article id="enunt">
+			<p>Avem o jucărie formată din <code>NxN</code> pătrate de latură <code>1</code> dispuse ca într-o matrice cu <code>N</code> linii și <code>N</code> coloane. Liniile și coloanele matricei sunt numerotate de la <code>1</code> la <code>N</code>, iar <code>N</code> este mereu impar. Pătrățelele pot fi albe și le vom codifica <code>0</code>, sau negre și le codificăm <code>1</code>. Împărțim matricea în zone concentrice astfel: zona <code>1</code> este formată din linia <code>1</code>, coloana <code>N</code>, linia <code>N</code> și coloana <code>1</code>; zona <code>2</code> este formată din linia a doua, coloana <code>N-1</code>, linia <code>N-1</code>, coloana <code>2</code> etc. Sunt <code>[N/2]</code> astfel de zone. În mijlocul matricei este, evident, un singur element, <code>N</code> fiind impar. Asupra oricărei zone putem aplica o operație de rotire, doar spre stânga. Iată în figura de mai jos efectul unei operații de rotire “de lungime” <code>3</code>, asupra unei zone.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-Imagini-cubic1-jpg.jpg"></p>
+
+<p>În figurile de mai jos culorile de fundal ale pătrățelelor au doar rolul de a pune în evidență zonele (cu gri închis este zona <code>1</code> și cu gri mai deschis zona <code>2</code>). Dorim să aplicăm asupra jucăriei un set de rotiri așa încât “să rezolvăm jucăria”. Asta înseamnă că toate pătrățelele de pe linia din mijloc și cele de pe coloana din mijloc să devină negre.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-Imagini-cubic2-jpg.jpg"></p>
+
+<p>Observăm în figura din dreapta că linia <code>3</code> și coloana <code>3</code> sunt pline de <code>1</code>. Pentru aceasta, am aplicat o rotire de lungime <code>2</code> asupra zonei <code>1</code> și o rotire de lungime <code>0</code> asupra zonei <code>2</code>. Codificăm această soluție cu <code>(2,0)</code>. Altă soluție este cea codificată prin <code>(2,2)</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Dată fiind codificarea jucăriei, precum și “lungimea” maximă permisă pentru o rotire în oricare zonă, să se determine numărul de posibilități de a aplica rotiri asupra zonelor așa încât să rezolvăm jucăria. Evident, unei zone i se poate aplica o singură rotire, de lungime cuprinsă între <code>0</code> și valoarea maximă permisă.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>cubic.in</code> conține pe prima linie două numere <code>N</code> și <code>P</code>, separate printr-un spațiu, reprezentând dimensiunea jucăriei respectiv lungimea maximă permisă pentru rotirile din oricare zonă. Pe fiecare din următoarele <code>N</code> linii se află câte <code>N</code> numere care pot fi <code>0</code> sau <code>1</code>, neseparate de spații.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>cubic.out</code> conține pe prima linie numărul de posibilități de a aplica rotiri asupra zonelor, pentru a rezolva jocul. Două posibilități se consideră distincte dacă diferă prin lungimea rotirii din cel puțin o zonă. Pentru că acest număr poate fi foarte mare, se va afișa restul împărțirii lui la <code>9901</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>3 ≤ N ≤ 999</code>, <code>N</code> este impar</li>
+	<li><code>0 ≤ P ≤ 100 000</code></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>cubic.in</code></p>
+
+<pre>5 3
+11001
+00111
+11111
+11111
+11111</pre>
+
+<p><code>cubic.out</code></p>
+
+<pre>4</pre>
+
+<h3>Explicație</h3>
+
+<p>Soluțiile sunt <code>(2,0)</code>, <code>(3,0)</code>, <code>(2,2)</code>, <code>(3,2)</code>.</p>		</article>
+		</body></html>

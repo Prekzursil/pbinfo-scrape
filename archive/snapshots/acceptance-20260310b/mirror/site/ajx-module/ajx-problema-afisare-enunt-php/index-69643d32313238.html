@@ -1,0 +1,109 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2128"><article id="enunt">
+			<p>Definim o permutare dublă de ordin <code>n</code> ca fiind un șir format din primele <code>2n</code> numere naturale nenule:
+ <code>(a[1], a[2], ... , a[n], a[n+1], a[n+2], ... , a[2n])</code>. Această permutare dublă este de trei ori în creștere, dacă sunt adevărate următoarele trei proprietăți:</p>
+
+<ol>
+	<li>secvența formată din primele <code>n</code> elemente este crescătoare: <code>a[1]&lt;a[2]&lt; ... &lt; a[n]</code></li>
+	<li>secvența formată din ultimele <code>n</code> elemente este crescătoare: <code>a[n+1]&lt;a[n+2]&lt; ... &lt; a[2n]</code></li>
+	<li>perechile ordonate formate din elementele aflate pe poziții identice ale celor două secvențe sunt de asemenea în ordine crescătoare: <code>a[1]&lt;a[n+1], a[2]&lt;a[n+2], ... , a[n]&lt;a[2n]</code>.</li>
+</ol>
+
+<p>De exemplu permutarea <code>(1,3,4,2,5,6)</code> este o permutare dublă de ordin <code>3</code>, de trei ori în creștere, pentru că secvențele <code>(1,3,4)</code> și <code>(2,5,6)</code> formează șiruri crescătoare, iar toate perechile formate din elementele de pe poziții identice: <code>(1,2)</code>, <code>(3,5)</code>, <code>(4,6)</code> formează de asemenea șiruri crescătoare.</p>
+
+<p>Următoarele permutări duble nu au proprietatea de trei ori în creștere:</p>
+
+<ul>
+	<li><code>(1,4,3,2,5,6)</code> – secvența <code>(1,4,3)</code> nu este crescătoare,</li>
+	<li><code>(1,3,4,2,6,5)</code> – secvența <code>(2,6,5)</code> nu este crescătoare,</li>
+	<li><code>(1,4,5,2,3,6)</code> – perechea <code>(4,3)</code> nu este crescătoare.</li>
+</ul>
+
+<p>Pentru simplificare în continuare permutarea dublă de trei ori în creștere se va numi permutare.</p>
+
+<p>Vom considera toate permutările de ordin <code>n</code> ordonate lexicografic, numerotate începând cu <code>1</code>. Tabelul de mai jos conține datele pentru <code>n=3</code>:</p>
+
+<table class="table">
+		<tbody><tr>
+			<td> pozitie </td>
+			<td> permutare </td>
+		</tr>
+		<tr>
+			<td> 1 </td>
+			<td> <code>1 2 3 4 5 6</code> </td>
+		</tr>
+		<tr>
+			<td> 2 </td>
+			<td> <code>1 2 4 3 5 6</code> </td>
+		</tr>
+		<tr>
+			<td> 3 </td>
+			<td> <code>1 2 5 3 4 6</code> </td>
+		</tr>
+		<tr>
+			<td> 4 </td>
+			<td> <code>1 3 4 2 5 6</code> </td>
+		</tr>
+		<tr>
+			<td> 5 </td>
+			<td> <code>1 3 5 2 4 6</code> </td>
+		</tr>
+</tbody></table>
+
+<p>Există două tipuri de întrebări:</p>
+
+<ol>
+	<li>Ce permutare se află pe o poziție dată?</li>
+	<li>Pe ce poziție se află o permutare dată?</li>
+</ol>
+
+<p>Prima întrebare este codificată astfel: <code>1 n p</code> și se compune din valorile: <code>1</code> – tipul întrebării, <code>n</code> – ordinul permutării, <code>p</code> – poziția permutării cerute.</p>
+
+<p>A doua întrebare este codificată astfel: <code>2 n a[1] a[2] ... a[2n]</code> și se compune din valorile: <code>2</code> – tipul întrebării, <code>n</code> – ordinul permutării, <code>a[1] a[2] ... a[2n]</code> – elementele permutării.</p>
+
+<p>Exemple:</p>
+
+<p>Întrebarea  <code>1 3 2</code> înseamnă: “Ce permutare de ordin <code>3</code> se află pe poziția <code>2</code> în ordine lexicografică?”  și are răspunsul: <code>1 2 4 3 5 6</code>.<br>
+Întrebarea  <code>2 3 1 3 5 2 4 6</code>  înseamnă: “Pe ce poziție se află permutarea de ordin <code>3</code>: <code>1 3 5 2 4 6</code>?” și are răspunsul: <code>5</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Să se răspundă corect la un set de întrebări.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>permutare2.in</code> conține pe fiecare linie câte o întrebare de orice tip.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>permutare2.out</code> va conține pe câte o linie câte un răspuns la fiecare întrebare din fișierul de intrare, în ordinea întrebărilor.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 &lt; n &lt; 1 000</code>;</li>
+	<li><code>0 &lt; p &lt;= 1 000 000 000</code> (în cazul întrebărilor de tip <code>1</code>);</li>
+	<li>răspunsul la întrebările de tip <code>2</code> este &lt;=  <code>1 000 000 000</code>;</li>
+	<li>fișierele de intrare vor conține cel mult <code>2000</code> de întrebări;</li>
+	<li>pentru teste în valoare de 20 de puncte numărul de întrebări va fi <code>1000</code> iar numerele de ordine ce intervin în calcule vor fi mai mici decât <code>5000</code>;</li>
+	<li>pentru teste în valoare de 30 de puncte întrebările vor fi de tipul 1;</li>
+	<li>pentru teste în valoare de 30 de puncte întrebările vor fi de tipul 2;</li>
+	<li>pentru teste în valoare de 30 de puncte întrebările vor fi mixte.</li>
+	<li>În concurs s-au acordat 10 puncte din oficiu. Pe site se acordă 10 puncte pentru exemple.</li>
+</ul>
+
+<h1>Exemplu</h1>
+
+<p><code>permutare2.in</code></p>
+
+<pre>1 3 2
+2 3 1 3 5 2 4 6
+1 4 1
+2 4 1 2 3 4 5 6 7 8</pre>
+
+<p><code>permutare2.out</code></p>
+
+<pre>1 2 4 3 5 6
+5
+1 2 3 4 5 6 7 8
+1</pre>		</article>
+		</body></html>

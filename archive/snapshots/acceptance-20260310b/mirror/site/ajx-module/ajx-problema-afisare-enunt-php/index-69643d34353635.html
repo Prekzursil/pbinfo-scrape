@@ -1,0 +1,72 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4565"><article id="enunt">
+			<p>„<em>If you think it’s simple, then you have misunderstood the problem</em>” (Bjarne Stroustrup)</p>
+
+<h1>Cerința</h1>
+
+<p>Jeffrey dorește sa își extindă magazinul său online și în România. Pentru a asigura obsesia pentru satisfacția clienților, el stabilește o strategie de livrare a comenzilor eficientă, automată, și într-un timp cât mai scurt.</p>
+
+<p>România este formată din <code>N</code> orașe conectate între ele, existând un traseu unic între oricare două orașe. Un traseu este o secvență de drumuri care conectează două orașe, astfel încât niciun drum nu se repetă. În total, există <code>N−1</code> drumuri bidirecționale care conectează orașele.</p>
+
+<p>Fiecare drum are și un cost asociat. Echipa lui Jeffrey a creat o lista de <code>M</code> perechi de orașe între care se va circula foarte des pentru livrarea coletelor. Definim costul unei perechi de orașe <code>(x, y)</code> ca fiind suma costurilor drumurilor din traseul de la orașul <code>x</code> la orașul <code>y</code>. De asemenea, definim costul total ca fiind suma tuturor costurilor celor <code>M</code> perechi de orașe date.</p>
+
+<p>Jeffrey poate să aplice următorul tip de operație: selectează un drum cu un cost strict pozitiv și îi scade costul cu <code>1</code>. Din motive de “<em>frugality</em>”, această operație poate fi aplicată de cel mult <code>K</code> ori, unde <code>K</code> este un număr natural.</p>
+
+<p>Se cere să găsiți costul total minim ce poate fi obținut, după aplicarea de cel mult <code>K</code> ori a operației menționate mai sus.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului de intrare se află un număr natural <code>N</code>, reprezentând numărul de orașe.</p>
+
+<p>Pe următoarele <code>N−1</code> linii se află câte <code>3</code> numere <code>x</code>, <code>y</code> și <code>w</code>, reprezentând faptul că există un drum bidirecțional între orașele <code>x</code> și <code>y</code>, cu costul egal cu <code>w</code>. Orașele sunt numerotate de la <code>0</code> la <code>N−1</code>.</p>
+
+<p>Pe următoarea linie se află numerele <code>M</code> și <code>K</code>, reprezentând numărul de perechi de orașe, respectiv, numărul de operații ce pot fi aplicate, urmând apoi <code>M</code> linii care conțin fiecare câte două numere <code>x</code> și <code>y</code> reprezentând cele <code>M</code> perechi de orașe.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Pe prima linie a fișierului de ieșire se va afla un singur număr, reprezentând costul total minim ce va putea fi obținut, modulo <code>666.013</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 200 000</code></li>
+	<li><code>1 ≤ K ≤ 200 000</code></li>
+	<li><code>1 ≤ M ≤ N</code></li>
+	<li><code>1 ≤ w ≤ 20</code></li>
+	<li><code>0 ≤ x, y &lt; N, x ≠ y</code></li>
+	<li>Operația de scădere a costului unui drum <b>poate fi aplicată de mai multe ori pentru același drum</b>, atât timp cât costul drumului nu devine un număr negativ.</li>
+</ul>
+
+<h1>Punctare</h1>
+
+<ul>
+	<li>Pentru teste în valoare de <code>20</code> de puncte se garantează că <code>1 ≤ N, K ≤ 1 000</code>.</li>
+	<li>Pentru alte teste în valoare de <code>30</code> de puncte se garantează că <code>K = 0</code>.</li>
+	<li>Pentru restul testelor în valoare de <code>50</code> de puncte nu sunt restricții suplimentare.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>amazon.in</code></p>
+
+<pre>5
+1 0 4
+0 2 3
+1 3 4
+1 4 4
+3 5
+2 4
+1 4
+3 4</pre>
+
+<p><code>amazon.out</code></p>
+
+<pre>10</pre>
+
+<h3>Explicații</h3>
+
+<p>Putem alege să aplicăm operația de scădere a costului drumului pe drumul de la orașul <code>1</code> la orașul <code>4</code> de <code>4</code> ori. Astfel, costul drumului va deveni <code>0</code>.</p>
+
+<p>Mai putem aplica încă o dată operația pentru drumul de la orașul <code>1</code> la <code>3</code>, micșorând costul acestuia la <code>3</code>. Costul traseului între orașele <code>2</code> si <code>4</code> va fi suma costurilor drumurilor <code>2-&gt;0</code>, <code>0-&gt;1</code> și <code>1-&gt;4</code>, adică <code>3 + 4 + 0 = 7</code>. Costul traseului între orașele <code>1</code> si <code>4</code> va fi costul drumului <code>1-&gt;4</code>, adică <code>0</code>. Costul traseului între orașele <code>3</code> si <code>4</code> va fi suma costurilor drumurilor <code>3-&gt;1</code> și <code>1-&gt;4</code>, adică <code>3 + 0 = 3</code>.</p>
+
+<p>Astfel, costul total este <code>7 + 0 + 3 = 10</code>.</p>		</article>
+		</body></html>

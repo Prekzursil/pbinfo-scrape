@@ -1,0 +1,310 @@
+{
+  "id": 1497,
+  "slug": "nunta",
+  "name": "Nunta",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1497/nunta",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 16,
+      "name": "Teoria Grafurilor",
+      "slug": "teoria-grafurilor",
+      "href": "/?pagina=probleme-lista&tag=16"
+    },
+    {
+      "id": 17,
+      "name": "Parcurgerea grafurilor neorientate",
+      "slug": "parcurgerea-grafurilor-neorientate",
+      "href": "/?pagina=probleme-lista&tag=17"
+    }
+  ],
+  "tags": [
+    "componente conexe",
+    "Two Pointers"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Fiind date <code>n</code>, numărul de persoane, <code>m</code>, numărul de perechi de invitaţi care se cunosc între ei și cele <code>m</code> perechi, să se determine numărul <code>K</code> minim de grupuri formate din cel puțin doi invitați astfel încât, în fiecare grup, fiecare persoană să aibă cel puţin un cunoscut, precum şi numărul variantelor distincte în care se poate organiza masa cu cel puţin <code>n/2+1</code> invitaţi din grupurile formate. </p>",
+      "text": "Fiind date n, numărul de persoane, m, numărul de perechi de invitaţi care se cunosc între ei și cele m perechi, să se determine numărul K minim de grupuri formate din cel puțin doi invitați astfel încât, în fiecare grup, fiecare persoană să aibă cel puţin un cunoscut, precum şi numărul variantelor distincte în care se poate organiza masa cu cel puţin n/2+1 invitaţi din grupurile formate."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>nunta.in</code> conține pe prima linie două numere naturale separate prin spațiu <code>n</code> și <code>m</code>, <code>n</code> reprezentând numărul de invitaţi, respectiv <code>m</code> numărul de perechi de invitaţi care se cunosc între ei. Pe fiecare din următoarele <code>m</code> linii se află câte două numere naturale <code>x</code> și <code>y</code>, <code>1≤x</code>, <code>y≤n</code>, separate printr-un spațiu, cu semnificația că invitaţii <code>x</code> și <code>y</code> se cunosc între ei.</p>",
+      "text": "Fișierul de intrare nunta.in conține pe prima linie două numere naturale separate prin spațiu n și m, n reprezentând numărul de invitaţi, respectiv m numărul de perechi de invitaţi care se cunosc între ei. Pe fiecare din următoarele m linii se află câte două numere naturale x și y, 1≤x, y≤n, separate printr-un spațiu, cu semnificația că invitaţii x și y se cunosc între ei."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>nunta.out</code> va conține pe prima linie un număr natural <code>g</code> reprezentând numărul minim de grupuri formate din cel puțin doi invitați astfel încât, în fiecare grup, fiecare persoană să aibă cel puţin un cunoscut. Pe cea de a doua linie va fi scris un număr natural <code>v</code> reprezentând numărul variantelor distincte în care se poate organiza masa cu cel puţin <code>n/2+1</code> invitaţi din grupurile formate.</p>",
+      "text": "Fișierul de ieșire nunta.out va conține pe prima linie un număr natural g reprezentând numărul minim de grupuri formate din cel puțin doi invitați astfel încât, în fiecare grup, fiecare persoană să aibă cel puţin un cunoscut. Pe cea de a doua linie va fi scris un număr natural v reprezentând numărul variantelor distincte în care se poate organiza masa cu cel puţin n/2+1 invitaţi din grupurile formate."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>0 &lt; n &lt;= 20000</code></li>\n\t<li><code>0 &lt; m &lt;= 100000</code></li>\n</ul>",
+      "text": "0 < n <= 20000 0 < m <= 100000"
+    },
+    {
+      "title": "Exemplul 1",
+      "html": "<p><code>nunta.in</code></p><pre>31 6\n5 7\n2 3\n10 14\n14 6\n9 15\n7 30</pre><p><code>nunta.out</code></p><pre>4\n0</pre><h3>Explicație</h3><p>Grupurile formate din cel puțin doi invitați sunt : <code>(2,3)</code>, <code>(5,7,30)</code>, <code>(6,10,14)</code>, <code>(9,15)</code>, deci <code>K=4</code>. Ele nu sunt suficiente pentru a forma o masă cu cel puţin <code>16</code> invitaţi, deci sunt <code>0</code> variante de aranjare.</p>",
+      "text": "nunta.in31 6 5 7 2 3 10 14 14 6 9 15 7 30nunta.out4 0ExplicațieGrupurile formate din cel puțin doi invitați sunt : (2,3), (5,7,30), (6,10,14), (9,15), deci K=4. Ele nu sunt suficiente pentru a forma o masă cu cel puţin 16 invitaţi, deci sunt 0 variante de aranjare."
+    },
+    {
+      "title": "Exemplul 2",
+      "html": "<p><code>nunta.in</code></p><pre>12 8\n1 2\n6 5\n3 2\n10 8\n3 4\n7 8\n1 4\n12 9</pre><p><code>nunta.out</code></p><pre>4\n3</pre><h3>Explicație</h3><p>Sunt <code>k=4</code> grupuri formate din cel puțin doi invitați. Acestea sunt: <code>G1=(1,2,3,4)</code>, <code>G2=(5,6)</code>, <code>G3=(7,8,10)</code>, <code>G4=(9,12)</code>.</p><p>Variantele distincte în care se poate organiza masa cu cel puţin <code>n/2+1</code>, adică <code>7</code> invitaţi din grupurile formate sunt: <code>G1+G2+G3</code>, <code>G1+G2+G3+G4</code> și <code>G2+G3+G4</code>. <code>G1+G3+G4</code> nu este alcătuit din grupuri numerotate cu valori consecutive.</p>",
+      "text": "nunta.in12 8 1 2 6 5 3 2 10 8 3 4 7 8 1 4 12 9nunta.out4 3ExplicațieSunt k=4 grupuri formate din cel puțin doi invitați. Acestea sunt: G1=(1,2,3,4), G2=(5,6), G3=(7,8,10), G4=(9,12).Variantele distincte în care se poate organiza masa cu cel puţin n/2+1, adică 7 invitaţi din grupurile formate sunt: G1+G2+G3, G1+G2+G3+G4 și G2+G3+G4. G1+G3+G4 nu este alcătuit din grupuri numerotate cu valori consecutive."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Grupurile formate din cel puțin doi invitați sunt : (2,3), (5,7,30), (6,10,14), (9,15), deci K=4. Ele nu sunt suficiente pentru a forma o masă cu cel puţin 16 invitaţi, deci sunt 0 variante de aranjare."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Sunt k=4 grupuri formate din cel puțin doi invitați. Acestea sunt: G1=(1,2,3,4), G2=(5,6), G3=(7,8,10), G4=(9,12)."
+    }
+  ],
+  "constraints": [
+    "0 < n <= 20000",
+    "0 < m <= 100000"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q17f37fd791.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "11",
+    "intrare/ieșire": "nunta.in / nunta.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "2 MB / 1 MB",
+    "sursa problemei": "Olimpiada locală de Informatică, Prahova, 2016",
+    "autor": "Iulia Lincan",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 2,
+  "author": "Iulia Lincan",
+  "sourceAttribution": "Olimpiada locală de Informatică, Prahova, 2016",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1497/nunta"
+}

@@ -1,0 +1,70 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4087"><article id="enunt">
+			<p>Se dă un șir de <code>n</code> cifre <code>c</code><sub><code>1</code></sub>, <code>c</code><sub><code>2</code></sub>, …, <code>c</code><sub><code>n</code></sub>, adică <code>0 ≤ c</code><sub><code>i</code></sub> <code>≤ 9</code>. Dintr-un șir de cifre se poate obține un șir de <code>1 ≤ m ≤ n</code> numere <code>a</code><sub><code>1</code></sub>, <code>a</code><sub><code>2</code></sub>, …, <code>a</code><sub><code>m</code></sub> astfel: </p>
+
+<ul>
+	<li>Inițial considerăm fiecare cifră un număr și obținem șirul de <code>n</code> numere <code>a</code><sub><code>i</code></sub> <code>= c</code><sub><code>1</code></sub></li>
+	<li>Un număr nou poate fi obținut prin lipirea unei secvențe de două sau mai multe numere vecine din șirul original. Două elemente dintr-un șir se numesc vecine dacă acestea se regăsesc în șir pe poziții alăturate.</li>
+	<li>Operația de lipire de două sau mai multe numere se poate realiza de oricâte ori atât timp cât numărul obținut este mai mic sau egal cu <code>2.000.000.000</code>, nu începe cu cifra <code>0</code> și există cel puțin două numere în șir.</li>
+	<li>De exemplu șirul <code>[3, 5, 0, 2, 7, 3]</code> poate deveni <code>[35, 0, 2, 73]</code> prin lipirea numerelor <code>3, 5 → 35</code> și <code>7, 3 → 73</code>, care ulterior poate deveni <code>[3502, 73]</code> prin lipirea numerelor <code>35, 0, 2 → 3502</code>. Dar nu putem crea șirul <code>[35, 02, 73]</code>, deoarece am avea un număr care începe cu <code>0</code>.</li>
+</ul>
+
+<p>Două numere vecine sunt consecutive dacă primul este cu <code>1</code> mai mic decât al doilea.</p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscându-se șirul de cifre inițial, să se obțină următoarele rezultate:</p>
+
+<ul>
+	<li>Presupunând că nu se face nici o lipire de cifre, fiecare cifră devenind un număr în șir, adică <code>a</code><sub><code>i</code></sub> <code>= c</code><sub><code>1</code></sub>, să se determine câte perechi de numere vecine consecutive există în șir;</li>
+	<li>Să se determine o modalitate de lipire a cifrelor astfel încât să se obțină cele mai mari două numere vecine consecutive și să se afișeze primul dintre aceste numere.</li>
+</ul>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>vecine.in</code> conține pe prima linie două numere <code>p</code> și <code>n</code>, <code>p</code> reprezentând cerința <code>1</code> sau <code>2</code>, iar pe linia următoare cele <code>n</code> cifre, despărțite prin câte un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>În fișierul de ieșire <code>vecine.out</code> se va afla un singur număr natural. Dacă <code>p = 1</code>, acesta va reprezenta răspunsul pentru cerința <code>1</code>. Dacă <code>p = 2</code>, acesta va reprezenta răspunsul pentru cerința <code>2</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>Pentru cerința <code>2</code> se garantează că numerele ce se pot obține nu vor depăși valoarea <code>2.000.000.000</code></li>
+	<li>Tot pentru cerința <code>2</code> se garantează existența a cel puțin o pereche de numere vecine consecutive</li>
+	<li>Cifra <code>0</code> poate forma singură doar numărul <code>0</code>.</li>
+	<li>Două numere vecine sunt consecutive dacă primul este cu <code>1</code> mai mic decât al doilea.</li>
+	<li>Pentru 20 de puncte <code>p = 1</code> și <code>3 ≤ n ≤ 100.000</code></li>
+	<li>Pentru 80 de puncte <code>p = 2</code> și <code>3 ≤ n ≤ 100.000</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>vecine.in</code></p>
+
+<pre>1 18
+3 2 1 2 1 0 6 3 0 5 6 3 0 6 9 2 9 3</pre>
+
+<p><code>vecine.out</code></p>
+
+<pre>2</pre>
+
+<h3>Explicație</h3>
+
+<p>Există două perechi de numere vecine consecutive formate dintr-o singură cifră: <code>1, 2</code> și <code>5, 6</code></p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>vecine.in</code></p>
+
+<pre>2 18
+3 2 1 2 1 0 6 3 0 5 6 3 0 6 9 2 9 3</pre>
+
+<p><code>vecine.out</code></p>
+
+<pre>6305</pre>
+
+<h3>Explicație</h3>
+
+<p>Perechea cu cele mai mari două numere vecine consecutive este <code>6305</code> și <code>6306</code>. Conform cerinței s-a scris în fișier doar primul număr din pereche.</p>		</article>
+		</body></html>

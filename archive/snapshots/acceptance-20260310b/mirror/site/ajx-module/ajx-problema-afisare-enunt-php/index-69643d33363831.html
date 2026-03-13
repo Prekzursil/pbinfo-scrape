@@ -1,0 +1,96 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3681"><article id="enunt">
+			<p>Se consideră un tablou bidimensional format din <code>N</code> linii și <code>N</code> coloane, care conține celule libere codificate cu valoarea <code>0</code> și celule blocate, codificate cu valoarea <code>1</code>. <code>M</code> jucători sunt poziționați în celule diferite ale matricei. Un jucător poate fi poziționat într-o celulă liberă sau într-o celulă blocată. Începând cu momentul <code>t0 = 0</code>, la fiecare moment întreg de timp <code>t</code>, fiecare jucător colorează celulele libere aflate la distanța <code>t</code> de poziția în care se află.</p>
+
+<p>Definim distanța dintre două celule <code>(i1, j1)</code> și <code>(i2, j2)</code> ca fiind egală cu <code>max(|i1 - i2|, |j1 - j2|)</code>, unde <code>i1</code> și <code>i2</code> corespund indicilor liniilor pe care se află cele două celule, iar <code>j1</code> și <code>j2</code> corespund coloanelor.</p>
+
+<h1>Cerința</h1>
+
+<p>Scrieți un program care citește un număr natural <code>N</code>, valorile matricei și pozițiile inițiale ale jucătorilor și afișează la ieșire răspunsul la <code>Q</code> întrebări de forma: “Care este primul moment de timp după care avem cel puțin <code>P</code> celule colorate în matrice?”. În cazul în care pentru o întrebare nu se vor putea colora <code>P</code> celule libere (după oricât de mult timp), se va afișa ca răspuns pentru acea întrebare valoarea <code>-1</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Prima linie conține numărul <code>N</code>, iar fiecare din următoarele <code>N</code> linii, câte <code>N</code> numere separate prin câte un spațiu, corespunzând tipului celulelor de pe linia corespunzătoare din matrice.</p>
+
+<p>Linia <code>N + 2</code> conține numărul de jucători <code>M</code>, iar fiecare din următoarele <code>M</code> linii câte două numere naturale, separate prin spațiu, reprezentând numărul liniei, respectiv, numărul coloanei în care se află fiecare din cei <code>M</code> jucători.</p>
+
+<p>Linia <code>M + N + 3</code> conține numărul natural <code>Q</code>, reprezentând numărul de întrebări, iar ultima linie conține <code>Q</code> numere naturale separate prin câte un spațiu, reprezentând valorile lui <code>P</code>, pentru fiecare dintre cele <code>Q</code> interogări.</p>
+
+<p>Întrucât volumul datelor de intrare este foarte mare, vă recomandăm, în cazul în care folosiți pentru citire biblioteca <code>iostream</code> din standardul <code>C++</code>, să adăaugați la începutul funcției main următoarele instrucțiuni:</p>
+
+<pre>std :: ios_base :: sync_with_stdio(false);
+std :: cin.tie(0);</pre>
+
+<h1>Date de ieșire</h1>
+
+<p>Ieșirea constă într-o singură linie, care va conține <code>Q</code> numere, separate prin câte un spațiu, corespunzătoare răspunsurilor la întrebările date, în ordinea în care au fost citite. </p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>3 ≤ N ≤ 1500</code></li>
+	<li>\( 1 ≤ M, Q ≤ {N}^{2} \)</li>
+	<li>\( 1 ≤ P ≤ {10}^{9} \)</li>
+	<li>liniile și coloanele sunt indexate începând cu <code>1</code>.</li>
+</ul>
+
+<h2>Subtask 1(12 puncte)</h2>
+
+<ul>
+	<li><code>3 ≤ N ≤ 20</code></li>
+</ul>
+
+<h2>Subtask 2(33 de puncte)</h2>
+
+<ul>
+	<li><code>1 ≤ M ≤ 10</code></li>
+</ul>
+
+<h2>Subtask 3(21 de puncte)</h2>
+
+<ul>
+	<li><code>3 ≤ N ≤ 600</code></li>
+</ul>
+
+<h2>Subtask 4(34 de puncte)</h2>
+
+<ul>
+	<li>fără restricții suplimentare.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>8
+0 0 0 0 0 0 0 0
+1 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 1 0 0 1 0 0 0
+0 0 0 0 0 1 0 0
+0 0 0 0 0 0 0 0
+0 0 0 1 0 0 0 1
+2
+3 3
+6 6
+3
+35 16 1000</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>2 1 -1</pre>
+
+<h3>Explicație</h3>
+
+<p>După momentul de timp <code>t = 0</code>, se va colora doar celula <code>(3, 3)</code>. (Total: <code>1</code>)</p>
+
+<p>După momentul de timp <code>t = 1</code>, se vor mai colora în plus celulele <code>(2, 2)</code>, <code>(2, 3)</code>, <code>(2, 4)</code>, <code>(3, 2)</code>, <code>(3, 4)</code>, <code>(4, 2)</code>, <code>(4, 3)</code>, <code>(4, 4)</code>, <code>(5, 6)</code>, <code>(5, 7)</code>, <code>(6, 5)</code>, <code>(6, 7)</code>, <code>(7, 5)</code>, <code>(7, 6)</code>, <code>(7, 7)</code>. (Total: <code>16</code>)</p>
+
+<p>După momentul de timp <code>t = 2</code>, vom avea în total colorate <code>40</code> de celule.</p>
+
+<p>Pentru prima interogare, primul moment de timp după care avem cel puțin <code>35</code> de celule colorate este <code>2</code>.</p>
+
+<p>Analog, pentru a doua interogare, răspunsul este <code>1</code>.</p>
+
+<p>Nu se vor putea colora niciodată <code>1000</code> de celule, răspunsul fiind <code>-1</code>.</p>		</article>
+		</body></html>

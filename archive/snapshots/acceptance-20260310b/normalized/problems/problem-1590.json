@@ -1,0 +1,306 @@
+{
+  "id": 1590,
+  "slug": "arma1",
+  "name": "Arma1",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1590/arma1",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 1,
+      "name": "Algoritmi elementari",
+      "slug": "algoritmi-elementari",
+      "href": "/?pagina=probleme-lista&tag=1"
+    },
+    {
+      "id": 18,
+      "name": "Divizibilitate",
+      "slug": "divizibilitate",
+      "href": "/?pagina=probleme-lista&tag=18"
+    }
+  ],
+  "tags": [
+    "Descompunere in factori",
+    "Algoritmul lui Euclid"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Cunoscându-se <code>n</code>, numărul atacatorilor, precum şi cele <code>n</code> distanţe până la cartierele generale ale acestora, să se scrie un program care determină:</p><ul>\n\t<li>cantitatea minimă de narun necesară pentru a distruge toate cartierele generale inamice;</li>\n\t<li>nivelurile la care trebuie programată arma, pentru a distruge fiecare cartier general inamic cu o cantitate minimă de narun.</li>\n</ul>",
+      "text": "Cunoscându-se n, numărul atacatorilor, precum şi cele n distanţe până la cartierele generale ale acestora, să se scrie un program care determină: cantitatea minimă de narun necesară pentru a distruge toate cartierele generale inamice; nivelurile la care trebuie programată arma, pentru a distruge fiecare cartier general inamic cu o cantitate minimă de narun."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>arma1.in</code> conține pe prima linie un număr natural <code>c</code> reprezentând cerinţa care trebuie să fie rezolvată (<code>1</code> sau <code>2</code>). Pe cea de a doua linie se află numărul natural <code>n</code>, reprezentând numărul atacatorilor. Pe următoarele <code>n</code> linii se află <code>n</code> numere naturale, câte un număr pe o linie; pe cea de a <code>i</code>-a linie dintre cele <code>n</code> (<code>1≤i≤n</code>) se află distanţa faţă de Pământ a cartierului general al celei de a <code>i</code>-a civilizaţii extraterestre.</p>",
+      "text": "Fișierul de intrare arma1.in conține pe prima linie un număr natural c reprezentând cerinţa care trebuie să fie rezolvată (1 sau 2). Pe cea de a doua linie se află numărul natural n, reprezentând numărul atacatorilor. Pe următoarele n linii se află n numere naturale, câte un număr pe o linie; pe cea de a i-a linie dintre cele n (1≤i≤n) se află distanţa faţă de Pământ a cartierului general al celei de a i-a civilizaţii extraterestre."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Dacă cerinţa <code>c=1</code>, atunci pe prima linie a fişierului <code>arma1.out</code> va fi scris un număr natural reprezentând cantitatea minimă de narun necesară distrugerii tuturor cartierelor generale inamice.</p><p>Dacă cerinţa este <code>c=2</code>, atunci fişierul de ieşire <code>arma1.out</code> va conţine <code>n</code> linii. Pe a <code>i</code>-a linie (<code>1≤i≤n</code>) se va scrie nivelul la care trebuie programată arma pentru a distruge cartierul general al celei de a <code>i</code>-a civilizaţii extraterestre.</p>",
+      "text": "Dacă cerinţa c=1, atunci pe prima linie a fişierului arma1.out va fi scris un număr natural reprezentând cantitatea minimă de narun necesară distrugerii tuturor cartierelor generale inamice.Dacă cerinţa este c=2, atunci fişierul de ieşire arma1.out va conţine n linii. Pe a i-a linie (1≤i≤n) se va scrie nivelul la care trebuie programată arma pentru a distruge cartierul general al celei de a i-a civilizaţii extraterestre."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ n ≤ 10 000</code></li>\n\t<li>Distanţele până la cartierele generale inamice sunt numere naturale nenule <code>≤ 2.000.000.000</code>.</li>\n\t<li>Pentru 50% dintre teste cerinţa este <code>1</code>.</li>\n</ul>",
+      "text": "1 ≤ n ≤ 10 000 Distanţele până la cartierele generale inamice sunt numere naturale nenule ≤ 2.000.000.000. Pentru 50% dintre teste cerinţa este 1."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>arma1.in</code></p><pre>1\n5\n100 \n97 \n625 \n40353607 \n81</pre><p><code>arma1.out</code></p><pre>122</pre>",
+      "text": "arma1.in1 5 100 97 625 40353607 81arma1.out122"
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>arma1.in</code></p><pre>2\n5\n100 \n97 \n625 \n40353607 \n81</pre><p><code>arma1.out</code></p><pre>2 \n1 \n4 \n9 \n4</pre><h3>Explicație</h3><p>Primul cartier general se poate distruge cu un proiectil de greutate <code>10</code>, programat la nivelul <code>2</code>, al doilea obiectiv cu un proiectil de greutate <code>97</code> programat la nivelul <code>1</code>, al treilea cu un proiectil de greutate <code>5</code> programat la nivelul <code>4</code>, al patrulea cu un proiectil de greutate <code>7</code> programat la nivelul <code>9</code>, iar ultimul cu un proiectil de greutate <code>3</code> programat la nivelul <code>4</code>.</p><p>Cantitatea minimă de narun necesară este <code>10+97+5+7+3=122</code>. </p><p>Nivelurile sunt în ordine: <code>2 1 4 9 4</code></p>",
+      "text": "arma1.in2 5 100 97 625 40353607 81arma1.out2 1 4 9 4ExplicațiePrimul cartier general se poate distruge cu un proiectil de greutate 10, programat la nivelul 2, al doilea obiectiv cu un proiectil de greutate 97 programat la nivelul 1, al treilea cu un proiectil de greutate 5 programat la nivelul 4, al patrulea cu un proiectil de greutate 7 programat la nivelul 9, iar ultimul cu un proiectil de greutate 3 programat la nivelul 4.Cantitatea minimă de narun necesară este 10+97+5+7+3=122. Nivelurile sunt în ordine: 2 1 4 9 4"
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Primul cartier general se poate distruge cu un proiectil de greutate 10, programat la nivelul 2, al doilea obiectiv cu un proiectil de greutate 97 programat la nivelul 1, al treilea cu un proiectil de greutate 5 programat la nivelul 4, al patrulea cu un proiectil de greutate 7 programat la nivelul 9, iar ultimul cu un proiectil de greutate 3 programat la nivelul 4."
+    }
+  ],
+  "constraints": [
+    "1 ≤ n ≤ 10 000",
+    "Distanţele până la cartierele generale inamice sunt numere naturale nenule ≤ 2.000.000.000.",
+    "Pentru 50% dintre teste cerinţa este 1."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q8bdcb84ef1.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "9",
+    "intrare/ieșire": "arma1.in / arma1.out",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "4 MB / 2 MB",
+    "sursa problemei": "OJI 2016, Clasa a VIII-a",
+    "autor": "Sandor Lukacs",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 4,
+  "author": "Sandor Lukacs",
+  "sourceAttribution": "OJI 2016, Clasa a VIII-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1590/arma1"
+}

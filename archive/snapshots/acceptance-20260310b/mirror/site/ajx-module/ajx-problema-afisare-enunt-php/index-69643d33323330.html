@@ -1,0 +1,71 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3230"><article id="enunt">
+			<p>Interviul de admitere la prestigioasa Universitate Cambridge constă în <code>N</code> probleme, numerotate de la <code>1</code> la <code>N</code>. Alex este în momentul acesta acolo, așteptând să susțină interviul. Takahiro Wong, care tocmai a ieșit din examen, a rezolvat toate problemele, problema <code>i</code> rezolvând-o după <code>D</code><sub><code>i</code></sub> secunde de la începerea interviului.<br>
+Cunoscând ca poate rezolva fiecare problema <code>i</code> în <code>T</code><sub><code>i</code></sub> secunde, Alex, panicat din fire, își pune <code>M</code> întrebări de forma: <code>x y</code>. Pentru fiecare întrebare, Alex vrea să afle dacă poate rezolva fiecare problemă din intervalul <code>[x;y]</code> înaintea lui Takahiro Wong (Alex poate rezolva problemele din intervalul <code>[x;y]</code> în ce ordine dorește).<br>
+De exemplu, să considerăm că Alex rezolvă problemele <code>a</code> și <code>b</code> (în această ordine). El va termina problema <code>a</code> după <code>T</code><sub><code>a</code></sub> secunde, și problema <code>b</code> după <code>T</code><sub><code>a</code></sub> + <code>T</code><sub><code>b</code></sub> secunde. Alex va rezolva ambele probleme înaintea lui Takahiro Wong dacă <code>T</code><sub><code>a</code></sub> <code>&lt; D</code><sub><code>a</code></sub> și <code>T</code><sub><code>a</code></sub> <code>+ T</code><sub><code>b</code></sub> <code>&lt; D</code><sub><code>b</code></sub>. Atât interviul lui Takahiro Wong, cât și cel al lui Alex încep de la secunda <code>0</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Ajutați-l pe Alex să răspundă corect la cele <code>M</code> întrebări pentru a nu intra panicat la interviu.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie se vor citi de la tastatura <code>N</code> și <code>M</code>, separate prin câte un spațiu. <code>N</code> – numărul de probleme, <code>M</code> – numărul de întrebări.</p>
+
+<p>Pe următoarele <code>N</code> linii se vor citi de la tastatura <code>T</code><sub><code>i</code></sub> și <code>D</code><sub><code>i</code></sub>, separate prin câte un spațiu. <code>T</code><sub><code>i</code></sub> – timpul necesar lui Alex sa rezolve problema <code>i</code>. <code>D</code><sub><code>i</code></sub> – timpul (de la începerea interviului) după care Takahiro Wong rezolv[ problema <code>i</code>.</p>
+
+<p>Pe următoarele <code>M</code> linii se vor citi de la tastatură <code>x</code> și <code>y</code>, separate prin câte un spațiu. <code>x</code> – capătul din stânga al intervalului. <code>y</code> – capătul din dreapta al intervalului.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Se vor afișa pe ecran <code>M</code> linii – răspunsurile la cele <code>M</code> întrebări. Linia cu numărul <code>i</code> va conține răspunsul pentru întrebarea cu numărul <code>i</code>: <code>1</code>, dacă Alex poate găsi o ordine în care să rezolve toate problemele din intervalul <code>[x;y]</code>, astfel încât să termine fiecare problema înaintea lui Takahiro Wong, sau <code>0</code>, altfel.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N, M ≤ 100.000</code></li>
+	<li><code>1 ≤ T</code><sub><code>i</code></sub>, <code>D</code><sub><code>i</code></sub> <code>≤ 1.000.000.000</code></li>
+	<li>Valorile <code>D</code><sub><code>i</code></sub> <strong>nu sunt</strong> distincte două câte două (o valoarea poate apărea de mai multe ori)</li>
+	<li>Alex nu poate rezolva două probleme în același timp, însă Takahiro Wong poate (valorile <code>D</code><sub><code>i</code></sub> nu sunt distincte două câte două).</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><strong>Intrare</strong></p>
+
+<pre>4 3
+1 10
+14 18
+2 7
+10 12
+3 4
+2 4
+1 3</pre>
+
+<p><strong>Ieșire</strong></p>
+
+<pre>0
+0
+1</pre>
+
+<h3>Explicație</h3>
+
+<p>Sunt <code>4</code> probleme, numerotate de la <code>1</code> la <code>4</code>:</p>
+
+<ul>
+	<li>problema numărul 1: <code>T1 = 1</code>, <code>D1 = 10</code>;</li>
+	<li>problema numărul 2: <code>T2 = 14</code>, <code>D2 = 18</code>;</li>
+	<li>problema numărul 3: <code>T3 = 2</code>, <code>D3 = 7</code>;</li>
+	<li>problema numărul 4: <code>T4 = 10</code>, <code>D4 = 12</code>;</li>
+	<li>Prima întrebare se referă la intervalul <code>[3,4]</code>:
+  – Dacă rezolvăm problemele în ordinea <code>(3,4)</code> trebuie să avem <code>T3 &lt; D3</code> și <code>T3 + T4 &lt; D4</code>. Observăm că a doua relație este falsă.
+  – Dacă rezolvăm problemele în ordinea <code>(4,3)</code> trebuie să avem <code>T4 &lt; D4</code> și <code>T4 + T3 &lt; D3</code>. Observăm, din nou, că a doua relație este falsă.
+  –  Nu există nicio altă ordine în care putem rezolva problemele, deci răspunsul este <code>0</code>.</li>
+	<li>A doua întrebare se referă la intervalul <code>[2,4]</code>:
+  – Exista șase modalități de a rezolva problemele: <code>(2, 3, 4)</code>, <code>(2, 4, 3)</code>, <code>(3, 2, 4)</code>, <code>(3, 4, 2)</code>, <code>(4, 2, 3)</code>, <code>(4, 3, 2)</code>.
+  – În niciuna din cele șase modalități nu sunt toate relațiile respectate, deci răspunsul este <code>0</code>.</li>
+	<li>A treia întrebare se referă la intervalul <code>[1,3]</code>:
+ –  Exista șase modalități de a rezolva problemele: <code>(1,2,3)</code>, <code>(1, 3, 2)</code>, <code>(2, 1, 3)</code>, <code>(2, 3, 1)</code>, <code>(3, 1, 2)</code>, <code>(3, 2, 1)</code>.
+ –  Dacă rezolvăm problemele în ordinea <code>(1,3,2)</code> trebuie să avem <code>T1 &lt; D1</code>, <code>T1 + T3 &lt; D3</code> și <code>T1 + T3 + T2 &lt; D2</code>. Observăm că toate sunt adevărate.
+  – Deoarece am găsit o ordine de a rezolva problemele, pentru care toate relațiile sunt adevărate, răspunsul este <code>1</code>.</li>
+</ul>		</article>
+		</body></html>

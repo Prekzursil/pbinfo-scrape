@@ -1,0 +1,315 @@
+{
+  "id": 4827,
+  "slug": "prime5",
+  "name": "prime5",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4827/prime5",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 45,
+      "name": "Vectori caracteristici / de frecventa",
+      "slug": "vectori-caracteristici-de-frecventa",
+      "href": "/?pagina=probleme-lista&tag=45"
+    }
+  ],
+  "tags": [
+    "ciurul lui Eratostene"
+  ],
+  "sections": [
+    {
+      "title": "Cerințe",
+      "html": "<p>1) Se dau <code>Q</code> perechi de numere naturale de forma <code>(a,b)</code>. Pentru fiecare pereche se cere să se determine numărul de numere prime care află în secvența de numere consecutive: <code>a, a+1, a+2, ..., b</code>.<br>\n2) Se dau <code>Q</code> numere naturale <code>p</code><sub><code>1</code></sub>, <code>p</code><sub><code>2</code></sub>, …, <code>p</code><sub><code>Q</code></sub>. Pentru fiecare număr <code>p</code><sub><code>i</code></sub> se cere să se determine numărul secvențelor <code>a, a+1, a+2, ..., b</code> din șirul <code>0, 1, ..., N</code> care conțin câte <code>p</code><sub><code>i</code></sub> numere prime (<code>1 ≤ i ≤ Q</code>).</p>",
+      "text": "1) Se dau Q perechi de numere naturale de forma (a,b). Pentru fiecare pereche se cere să se determine numărul de numere prime care află în secvența de numere consecutive: a, a+1, a+2, ..., b. 2) Se dau Q numere naturale p1, p2, …, pQ. Pentru fiecare număr pi se cere să se determine numărul secvențelor a, a+1, a+2, ..., b din șirul 0, 1, ..., N care conțin câte pi numere prime (1 ≤ i ≤ Q)."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>prime.in</code> conține pe prima linie trei numere naturale <code>C</code> <code>N</code> <code>Q</code>, separate prin câte un spațiu, unde <code>C</code> este cerința care trebuie rezolvată (<code>1</code> sau <code>2</code>), <code>N</code> și <code>Q</code> au semnificația de mai sus. Dacă <code>C=1</code>, atunci pe fiecare dintre următoarele <code>Q</code> linii se află câte două numere naturale <code>a</code> <code>b</code>, separate prin spațiu, reprezentând extremitățile unei secvențe de numere naturale consecutive. Dacă <code>C=2</code>, atunci pe următoarele <code>Q</code> linii se află câte un număr natural <code>p</code><sub><code>i</code></sub> (<code>1 ≤ i ≤ Q</code>), cu semnificația din enunț.</p>",
+      "text": "Fișierul de intrare prime.in conține pe prima linie trei numere naturale C N Q, separate prin câte un spațiu, unde C este cerința care trebuie rezolvată (1 sau 2), N și Q au semnificația de mai sus. Dacă C=1, atunci pe fiecare dintre următoarele Q linii se află câte două numere naturale a b, separate prin spațiu, reprezentând extremitățile unei secvențe de numere naturale consecutive. Dacă C=2, atunci pe următoarele Q linii se află câte un număr natural pi (1 ≤ i ≤ Q), cu semnificația din enunț."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>prime.out</code> conține <code>Q</code> numere, fiecare pe câte un rând, în conformitate cu cerința <code>C</code>.</p>",
+      "text": "Fișierul de ieșire prime.out conține Q numere, fiecare pe câte un rând, în conformitate cu cerința C."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>C ∈ {1, 2}</code></li>\n\t<li><code>1 ≤ N, Q ≤ 50.000</code></li>\n\t<li><code>0 ≤ a ≤ b ≤ N</code></li>\n\t<li><code>0 ≤ p</code><sub><code>i</code></sub> <code>≤ N</code>, <code>1 ≤ i ≤ Q</code></li>\n\t<li>Pentru 40 de puncte, <code>C = 1</code>, <code>1 ≤ N, Q ≤ 10.000</code></li>\n\t<li>Pentru 10 puncte, <code>C = 1</code>, <code>10.000 &lt; N, Q ≤ 50.000</code></li>\n\t<li>Pentru 30 de puncte, <code>C = 2</code>, <code>1 ≤ N, Q ≤ 10.000</code></li>\n\t<li>Pentru 20 de puncte, <code>C = 2</code>,  <code>10.000 &lt; N, Q ≤ 50.000</code></li>\n</ul>",
+      "text": "C ∈ {1, 2} 1 ≤ N, Q ≤ 50.000 0 ≤ a ≤ b ≤ N 0 ≤ pi ≤ N, 1 ≤ i ≤ Q Pentru 40 de puncte, C = 1, 1 ≤ N, Q ≤ 10.000 Pentru 10 puncte, C = 1, 10.000 < N, Q ≤ 50.000 Pentru 30 de puncte, C = 2, 1 ≤ N, Q ≤ 10.000 Pentru 20 de puncte, C = 2, 10.000 < N, Q ≤ 50.000"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>prime.in</code></p><pre>1 10 3\n0 10\n3 3\n8 10</pre><p><code>prime.out</code></p><pre>4\n1\n0</pre><h3>Explicație</h3><p><code>C=1</code>, <code>N=10</code>, <code>Q=3</code>. Se rezolvă cerința <code>1</code>. În secvența <code>0…10</code> există <code>4</code> numere prime: <code>2</code>, <code>3</code>, <code>5</code>, <code>7</code>. În secvența <code>3…3</code> există un singur număr prim, numărul <code>3</code>. În secvența <code>8…10</code> nu există numere prime. </p>",
+      "text": "prime.in1 10 3 0 10 3 3 8 10prime.out4 1 0ExplicațieC=1, N=10, Q=3. Se rezolvă cerința 1. În secvența 0…10 există 4 numere prime: 2, 3, 5, 7. În secvența 3…3 există un singur număr prim, numărul 3. În secvența 8…10 nu există numere prime."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>prime.in</code></p><pre>2 10 2\n4\n1</pre><p><code>prime.out</code></p><pre>12\n17</pre><h3>Explicație</h3><p><code>C=2</code>, <code>N=10</code>, <code>Q=2</code>. Se rezolvă cerința <code>2</code>. Există câte <code>4</code> numere prime în fiecare dintre următoarele <code>12</code> secvențe: <code>0…10</code>, <code>1…10</code>, <code>2…10</code>, <code>0…9</code>, <code>1…9</code>, <code>2…9</code>, <code>0…8</code>, <code>1…8</code>, <code>2…8</code>, <code>0…7</code>, <code>1…7</code>, <code>2…7</code>. Există câte un singur număr prim în fiecare dintre următoarele <code>17</code> secvențe: <code>0…2</code>, <code>1…2</code>, <code>2…2</code>, <code>3…3</code>, <code>3…4</code>, <code>4…5</code>, <code>5…5</code>, <code>4…6</code>, <code>5…6</code>, <code>6…7</code>, <code>6…8</code>, <code>6…9</code>, <code>6…10</code>, <code>7…7</code>, <code>7…8</code>, <code>7…9</code>, <code>7…10</code>.</p>",
+      "text": "prime.in2 10 2 4 1prime.out12 17ExplicațieC=2, N=10, Q=2. Se rezolvă cerința 2. Există câte 4 numere prime în fiecare dintre următoarele 12 secvențe: 0…10, 1…10, 2…10, 0…9, 1…9, 2…9, 0…8, 1…8, 2…8, 0…7, 1…7, 2…7. Există câte un singur număr prim în fiecare dintre următoarele 17 secvențe: 0…2, 1…2, 2…2, 3…3, 3…4, 4…5, 5…5, 4…6, 5…6, 6…7, 6…8, 6…9, 6…10, 7…7, 7…8, 7…9, 7…10."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "C=1, N=10, Q=3. Se rezolvă cerința 1. În secvența 0…10 există 4 numere prime: 2, 3, 5, 7. În secvența 3…3 există un singur număr prim, numărul 3. În secvența 8…10 nu există numere prime."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "C=2, N=10, Q=2. Se rezolvă cerința 2. Există câte 4 numere prime în fiecare dintre următoarele 12 secvențe: 0…10, 1…10, 2…10, 0…9, 1…9, 2…9, 0…8, 1…8, 2…8, 0…7, 1…7, 2…7. Există câte un singur număr prim în fiecare dintre următoarele 17 secvențe: 0…2, 1…2, 2…2, 3…3, 3…4, 4…5, 5…5, 4…6, 5…6, 6…7, 6…8, 6…9, 6…10, 7…7, 7…8, 7…9, 7…10."
+    }
+  ],
+  "constraints": [
+    "C ∈ {1, 2}",
+    "1 ≤ N, Q ≤ 50.000",
+    "0 ≤ a ≤ b ≤ N",
+    "0 ≤ pi ≤ N, 1 ≤ i ≤ Q",
+    "Pentru 40 de puncte, C = 1, 1 ≤ N, Q ≤ 10.000",
+    "Pentru 10 puncte, C = 1, 10.000 < N, Q ≤ 50.000",
+    "Pentru 30 de puncte, C = 2, 1 ≤ N, Q ≤ 10.000",
+    "Pentru 20 de puncte, C = 2, 10.000 < N, Q ≤ 50.000"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qfd753488c0.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "prime.in / prime.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "ONI 2025, clasa a 6-a",
+    "autor": "Ionel-Vasile Piț-Rada",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "author": "Ionel-Vasile Piț-Rada",
+  "sourceAttribution": "ONI 2025, clasa a 6-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4827/prime5"
+}

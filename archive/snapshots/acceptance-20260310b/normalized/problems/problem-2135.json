@@ -1,0 +1,311 @@
+{
+  "id": 2135,
+  "slug": "roua",
+  "name": "Roua",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/2135/roua",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 44,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=44"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Cunoscând <code>N</code>, numărul de ouă vopsite, și numărul natural <code>R</code>, scrieți un program care determină și afișează:</p><ol>\n\t<li>numărul de secvențe <strong>“roua”</strong> de lungime <code>R</code> existente în colorarea celor <code>N</code> ouă;</li>\n\t<li>numărul total al colorărilor <code>R</code>-frumoase pentru cele <code>N</code> ouă.</li>\n</ol>",
+      "text": "Cunoscând N, numărul de ouă vopsite, și numărul natural R, scrieți un program care determină și afișează: numărul de secvențe “roua” de lungime R existente în colorarea celor N ouă; numărul total al colorărilor R-frumoase pentru cele N ouă."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>roua.in</code> conține pe prima linie un număr natural <code>C</code> reprezentând cerința din problemă care trebuie rezolvată (<code>1</code> sau <code>2</code>). A doua linie din fișier conține numerele naturale <code>N</code> și <code>R</code>, separate prin spaţiu, reprezentând numărul de ouă și lungimea unei secvențe “roua”. Dacă <code>C=1</code>, fișierul va conţine şi o a treia linie pe care se află colorarea celor <code>N</code> ouă.</p>",
+      "text": "Fișierul de intrare roua.in conține pe prima linie un număr natural C reprezentând cerința din problemă care trebuie rezolvată (1 sau 2). A doua linie din fișier conține numerele naturale N și R, separate prin spaţiu, reprezentând numărul de ouă și lungimea unei secvențe “roua”. Dacă C=1, fișierul va conţine şi o a treia linie pe care se află colorarea celor N ouă."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>roua.out</code> va conține o singură linie pe care va fi scris un număr natural, reprezentând răspunsul la cerinţa specificată în fişierul de intrare</p>",
+      "text": "Fișierul de ieșire roua.out va conține o singură linie pe care va fi scris un număr natural, reprezentând răspunsul la cerinţa specificată în fişierul de intrare"
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>3 ≤ N ≤ 10000</code></li>\n\t<li><code>2 ≤ R &lt; N</code></li>\n\t<li>Pentru rezolvarea corectă a cerinței 1 se acordă 40 puncte, pentru rezolvarea corectă a cerinței 2 se acordă 60 de puncte.</li>\n\t<li>Pentru 60% dintre testele pentru cerința 2 , <code>3 ≤ N ≤ 70</code></li>\n\t<li>Pentru 40% dintre testele pentru cerința 2 , <code>N &gt; 70</code></li>\n\t<li>Rezultatul la cerința 2 poate avea cel mult <code>2400</code> de cifre.</li>\n</ul>",
+      "text": "3 ≤ N ≤ 10000 2 ≤ R < N Pentru rezolvarea corectă a cerinței 1 se acordă 40 puncte, pentru rezolvarea corectă a cerinței 2 se acordă 60 de puncte. Pentru 60% dintre testele pentru cerința 2 , 3 ≤ N ≤ 70 Pentru 40% dintre testele pentru cerința 2 , N > 70 Rezultatul la cerința 2 poate avea cel mult 2400 de cifre."
+    },
+    {
+      "title": "Exemplul 1",
+      "html": "<p><code>roua.in</code></p><pre>1\n7 3\nvrrrgrr</pre><p><code>roua.out</code></p><pre>4</pre><h3>Explicație</h3><p>Cerinţa este 1. Există <code>N=7</code> ouă. Secvențele <em>roua</em> de lungime <code>3</code> existente în colorare sunt <code>\"vrr\"</code>, <code>\"rrg\"</code>, <code>\"rgr\"</code>, <code>\"grr\"</code>.</p>",
+      "text": "roua.in1 7 3 vrrrgrrroua.out4ExplicațieCerinţa este 1. Există N=7 ouă. Secvențele roua de lungime 3 existente în colorare sunt \"vrr\", \"rrg\", \"rgr\", \"grr\"."
+    },
+    {
+      "title": "Exemplul 2",
+      "html": "<p><code>roua.in</code></p><pre>2\n4 3</pre><p><code>roua.out</code></p><pre>15</pre><h3>Explicație</h3><p>Cerinţa este 2. Există <code>4</code> ouă. Colorările <code>3</code>-frumoase ale celor <code>4</code> ouă sunt <code>\"grrg\"</code>, <code>\"grrv\"</code>, <code>\"grra\"</code>, <code>\"vrrg\"</code>,<br>\n<code>\"vrrv\"</code>, <code>\"vrra\"</code>, <code>\"arrg\"</code>, <code>\"arrv\"</code>, <code>\"arra\"</code>, <code>\"rgrr\"</code>, <code>\"rvrr\"</code>, <code>\"rarr\"</code>, <code>\"rrgr\"</code>, <code>\"rrvr\"</code>, <code>\"rrar\"</code>.</p>",
+      "text": "roua.in2 4 3roua.out15ExplicațieCerinţa este 2. Există 4 ouă. Colorările 3-frumoase ale celor 4 ouă sunt \"grrg\", \"grrv\", \"grra\", \"vrrg\", \"vrrv\", \"vrra\", \"arrg\", \"arrv\", \"arra\", \"rgrr\", \"rvrr\", \"rarr\", \"rrgr\", \"rrvr\", \"rrar\"."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cerinţa este 1. Există N=7 ouă. Secvențele roua de lungime 3 existente în colorare sunt \"vrr\", \"rrg\", \"rgr\", \"grr\"."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cerinţa este 2. Există 4 ouă. Colorările 3-frumoase ale celor 4 ouă sunt \"grrg\", \"grrv\", \"grra\", \"vrrg\", \"vrrv\", \"vrra\", \"arrg\", \"arrv\", \"arra\", \"rgrr\", \"rvrr\", \"rarr\", \"rrgr\", \"rrvr\", \"rrar\"."
+    }
+  ],
+  "constraints": [
+    "3 ≤ N ≤ 10000",
+    "2 ≤ R < N",
+    "Pentru rezolvarea corectă a cerinței 1 se acordă 40 puncte, pentru rezolvarea corectă a cerinței 2 se acordă 60 de puncte.",
+    "Pentru 60% dintre testele pentru cerința 2 , 3 ≤ N ≤ 70",
+    "Pentru 40% dintre testele pentru cerința 2 , N > 70",
+    "Rezultatul la cerința 2 poate avea cel mult 2400 de cifre."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qcaf5894175.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "9",
+    "intrare/ieșire": "roua.in / roua.out",
+    "limită timp": "0.2 secunde",
+    "limită memorie": "2 MB / 1 MB",
+    "sursa problemei": "ONI 2017, Clasa a V-a",
+    "autor": "Cardas Cerasela Daniela",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.2,
+  "memoryLimitMb": 2,
+  "author": "Cardas Cerasela Daniela",
+  "sourceAttribution": "ONI 2017, Clasa a V-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/2135/roua"
+}

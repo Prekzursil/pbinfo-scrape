@@ -1,0 +1,310 @@
+{
+  "id": 4467,
+  "slug": "culegeri",
+  "name": "culegeri",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4467/culegeri",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 85,
+      "name": "Structuri de date liniare",
+      "slug": "structuri-de-date-liniare",
+      "href": "/?pagina=probleme-lista&tag=85"
+    },
+    {
+      "id": 86,
+      "name": "Stiva",
+      "slug": "stiva",
+      "href": "/?pagina=probleme-lista&tag=86"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Cunoscând numărul de zile în care se desfășoară activitatea, producția zilnică inițială, respectiv lista cu cele <code>N</code> comenzi, să se rezolve următoarele cerințe:</p><ul>\n\t<li>dacă <code>T = 1</code>, atunci Gimi vrea să afle numărul maxim de culegeri pe care le poate avea în stoc la finalul ultimei zile (a <code>N</code>-a zi).</li>\n\t<li>dacă <code>T = 2</code>, atunci Gimi vrea să afle numărul maxim de culegeri pe care le poate avea în stoc la finalul celei de-a <code>i</code>-a zi, pentru fiecare <code>i</code> de la <code>1</code> la <code>N</code>.</li>\n</ul>",
+      "text": "Cunoscând numărul de zile în care se desfășoară activitatea, producția zilnică inițială, respectiv lista cu cele N comenzi, să se rezolve următoarele cerințe: dacă T = 1, atunci Gimi vrea să afle numărul maxim de culegeri pe care le poate avea în stoc la finalul ultimei zile (a N-a zi). dacă T = 2, atunci Gimi vrea să afle numărul maxim de culegeri pe care le poate avea în stoc la finalul celei de-a i-a zi, pentru fiecare i de la 1 la N."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Prima linie din fișierul de intrare <code>culegeri.in</code> conține trei numere <code>T</code>, <code>N</code> și <code>K</code>, separate prin câte un spațiu. A doua linie va conține <code>N</code> numere, unde al <code>i</code>-lea număr reprezintă <code>c[i]</code>, comanda de culegeri din a <code>i</code>-a zi.</p>",
+      "text": "Prima linie din fișierul de intrare culegeri.in conține trei numere T, N și K, separate prin câte un spațiu. A doua linie va conține N numere, unde al i-lea număr reprezintă c[i], comanda de culegeri din a i-a zi."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Dacă <code>T = 1</code>, atunci fișierul de ieșire <code>culegeri.out</code> va conține un singur număr natural, reprezentând numărul maxim posibil de culegeri rămase în stoc la finalul celei de-a <code>N</code>-a zi. Dacă <code>T = 2</code>, atunci fișierul de ieșire <code>culegeri.out</code> va conține, pe o singură linie, <code>N</code> numere naturale separate prin câte un spațiu, unde al <code>i</code>-lea număr reprezintă numărul maxim posibil de culegeri rămase în stoc la finalul celei de-a <code>i</code>-a zi.</p>",
+      "text": "Dacă T = 1, atunci fișierul de ieșire culegeri.out va conține un singur număr natural, reprezentând numărul maxim posibil de culegeri rămase în stoc la finalul celei de-a N-a zi. Dacă T = 2, atunci fișierul de ieșire culegeri.out va conține, pe o singură linie, N numere naturale separate prin câte un spațiu, unde al i-lea număr reprezintă numărul maxim posibil de culegeri rămase în stoc la finalul celei de-a i-a zi."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 500.000</code></li>\n\t<li><code>0 ≤ K ≤ N</code></li>\n\t<li><code>0 ≤ c[i] ≤ N • K</code></li>\n\t<li>Se garantează că există o modalitate prin care Gimi își va putea desfășura activitatea până în ultima zi inclusiv.</li>\n\t<li>Strategia utilizată pentru ziua <code>i</code> nu trebuie neapărat să fie continuată în ziua <code>i + 1</code>. Se poate folosi o altă strategie, diferită de cea pentru ziua precedentă.</li>\n</ul>",
+      "text": "1 ≤ N ≤ 500.000 0 ≤ K ≤ N 0 ≤ c[i] ≤ N • K Se garantează că există o modalitate prin care Gimi își va putea desfășura activitatea până în ultima zi inclusiv. Strategia utilizată pentru ziua i nu trebuie neapărat să fie continuată în ziua i + 1. Se poate folosi o altă strategie, diferită de cea pentru ziua precedentă."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>culegeri.in</code></p><pre>2 5 2\n1 1 3 1 3</pre><p><code>culegeri.out</code></p><pre>1 2 1 2 2</pre><h3>Explicație</h3><p>Pentru primul exemplu, <code>T = 2</code>, deci se va rezolva a doua cerință. Notăm cu <code>P x</code> zilele în care vom produce <code>x</code> culegeri, iar cu <code>I 1</code> zilele în care vom crește producția cu <code>1</code>. Strategiile optime, pentru fiecare zi, ar putea fi:</p><ul>\n\t<li>ziua 1: <code>P 2</code></li>\n\t<li>zilele 1-2: <code>P 2 → P 2</code></li>\n\t<li>zilele 1-3: <code>P 2 → P 2 → P 2</code></li>\n\t<li>zilele 1-4: <code>P 2 → I 1 → P 3 → P 3</code></li>\n\t<li>zilele 1-5: <code>P 2 → I 1 → P 3 → P 3 → P 3</code></li>\n</ul><p>Se observă că strategiile diferă în funcție de ziua în care se vor termina experimentele. Pentru zilele 1-4, capacitatea de producție va crește în a doua zi, dar pentru zilele 1-3, capacitatea de producție nu se va modifica. În plus, este imposibilă creșterea capacității de producție în prima zi, deoarece stocul ar fi zero, iar Gimi trebuie să livreze o culegere.</p>",
+      "text": "culegeri.in2 5 2 1 1 3 1 3culegeri.out1 2 1 2 2ExplicațiePentru primul exemplu, T = 2, deci se va rezolva a doua cerință. Notăm cu P x zilele în care vom produce x culegeri, iar cu I 1 zilele în care vom crește producția cu 1. Strategiile optime, pentru fiecare zi, ar putea fi: ziua 1: P 2 zilele 1-2: P 2 → P 2 zilele 1-3: P 2 → P 2 → P 2 zilele 1-4: P 2 → I 1 → P 3 → P 3 zilele 1-5: P 2 → I 1 → P 3 → P 3 → P 3 Se observă că strategiile diferă în funcție de ziua în care se vor termina experimentele. Pentru zilele 1-4, capacitatea de producție va crește în a doua zi, dar pentru zilele 1-3, capacitatea de producție nu se va modifica. În plus, este imposibilă creșterea capacității de producție în prima zi, deoarece stocul ar fi zero, iar Gimi trebuie să livreze o culegere."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>culegeri.in</code></p><pre>1 5 2\n1 1 3 1 3</pre><p><code>culegeri.out</code></p><pre>2</pre><h3>Explicație</h3><p>Pentru al doilea exemplu, <code>T = 1</code>, deci se va rezolva prima cerință. Se va afișa doar stocul maxim posibil la finalul ultimei zile.</p>",
+      "text": "culegeri.in1 5 2 1 1 3 1 3culegeri.out2ExplicațiePentru al doilea exemplu, T = 1, deci se va rezolva prima cerință. Se va afișa doar stocul maxim posibil la finalul ultimei zile."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Pentru primul exemplu, T = 2, deci se va rezolva a doua cerință. Notăm cu P x zilele în care vom produce x culegeri, iar cu I 1 zilele în care vom crește producția cu 1. Strategiile optime, pentru fiecare zi, ar putea fi:"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Pentru al doilea exemplu, T = 1, deci se va rezolva prima cerință. Se va afișa doar stocul maxim posibil la finalul ultimei zile."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 500.000",
+    "0 ≤ K ≤ N",
+    "0 ≤ c[i] ≤ N • K",
+    "Se garantează că există o modalitate prin care Gimi își va putea desfășura activitatea până în ultima zi inclusiv.",
+    "Strategia utilizată pentru ziua i nu trebuie neapărat să fie continuată în ziua i + 1. Se poate folosi o altă strategie, diferită de cea pentru ziua precedentă."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q6bc19e87d0.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "10",
+    "intrare/ieșire": "culegeri.in / culegeri.out",
+    "limită timp": "0.3 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "Lot informatică 2023",
+    "autor": "Pop Ioan Cristian",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.3,
+  "memoryLimitMb": 64,
+  "author": "Pop Ioan Cristian",
+  "sourceAttribution": "Lot informatică 2023",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4467/culegeri"
+}

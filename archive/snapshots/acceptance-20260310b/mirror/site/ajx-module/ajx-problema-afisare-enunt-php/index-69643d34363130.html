@@ -1,0 +1,109 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4610"><article id="enunt">
+			<p>În Tărâmul Magic al Insulelor, se desfășoară o vânătoare anuală de comori, unde echipele explorează insule fermecate, delimitate de apa ce le înconjoară. La ordinul regelui A., sunt ascunse comori pe fiecare insulă. Harta tărâmului este reprezentată sub forma unei matrice de dimensiune <code>𝑛 × 𝑚</code>, ale cărei elemente codifică zone pătratice, cu latura de 1 metru. Acestea pot fi:</p>
+
+<ul>
+	<li>zonă care conține apă, marcată cu <code>−1</code>;</li>
+	<li>zonă care conține doar pământ, marcată cu <code>0</code>; sau</li>
+	<li>zonă care conține pământ și o singură comoară, marcată cu un număr natural nenul.</li>
+</ul>
+
+<p>Două zone se consideră vecine dacă au o latură comună. Două zone aparţin aceleiaşi insule dacă ele sunt vecine sau dacă se poate ajunge de la o zonă la cealaltă pe un drum care parcurge o succesiune de zone, oricare două zone parcurse consecutiv fiind vecine. În acest an, căpitanul Poseidon dorește să facă o farsă regelui A., permutând comorile, astfel încât fiecare comoară să fie mutată într-o zona în care inițial a fost o altă comoară. Totuși, pentru a nu atrage atenția prea mult, comorile vor rămâne în cadrul insulei pe care se aflau inițial</p>
+
+<h1>Cerințe</h1>
+
+<p>Pentru început, căpitanul Poseidon își propune să rezolve următoarele cerințe:</p>
+
+<ol>
+	<li>Câte comori se găsesc pe insula pe care se află căpitanul Poseidon?</li>
+	<li>Câte soluții există pentru plasarea tuturor comorilor, astfel încât fiecare comoară să fie mutată în cadrul aceleiași insule, într-o zonă în care inițial a fost o altă comoară? Pentru că numărul de soluții poate fi foarte mare, răspunsul va fi afișat modulo <code>1 000 000 007</code>.</li>
+</ol>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>poseidon.in</code> conține pe prima linie numărul natural <code>𝑐</code>, reprezentând cerința care trebuie rezolvată (1 sau 2).</p>
+
+<p>Pe a doua linie, se află două numere naturale <code>𝑛</code> și <code>𝑚</code> reprezentând, în această ordine, numărul de linii, respectiv numărul de coloane ale hărții Tărâmului Magic al Insulelor. Pe fiecare din următoarele <code>𝑛</code> linii se află câte <code>𝑚</code> numere întregi, reprezentând codificarea zonelor matricei. Pentru cazul în care <code>𝑐 = 1</code>, pe ultima linie a fișierului se mai află două numere naturale <code>𝑥𝑃</code> și <code>𝑦𝑃</code>, reprezentând linia și coloana zonei în care se află Poseidon.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>poseidon.out</code> va conține pe prima linie un număr natural: dacă <code>𝑐 = 1</code>, numărul total de comori precizat la cerința 1, iar dacă <code>𝑐 = 2</code>, numărul de soluții de plasare precizate la cerința 2, în forma indicată.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ 𝑐 ≤ 2</code></li>
+	<li><code>1 ≤ 𝑛, 𝑚 ≤ 1000</code></li>
+	<li>Elementele matricei au valori întregi din intervalul <code>[−1, 𝑛 · 𝑚]</code>. Matricea este indexată începând cu <code>1</code>.</li>
+	<li>Oricare două zone distincte care conțin câte o comoară vor fi descrise prin numere distincte.</li>
+	<li>Insulele sunt formate din zone compacte de pământ. Se garantează că nu conțin apă în interior.</li>
+	<li><code>1 ≤ 𝑥𝑃 ≤ 𝑛</code>, <code>1 ≤ 𝑦𝑃 ≤ 𝑚</code>, zona dată de <code>𝑥𝑃</code> și <code>𝑦𝑃</code> conține pământ.</li>
+	<li>Notăm cu <code>𝑛𝑐</code> numarul maxim de comori de pe o singură insulă.</li>
+	<li>Subtaskuri:
+	<ol>
+		<li><code>𝑐 = 1</code> și există o singură insulă</li>
+		<li><code>𝑐 = 1</code> și <code>𝑛 = 1</code></li>
+		<li><code>𝑐 = 1</code>, fără alte restricții</li>
+		<li><code>𝑐 = 2</code> și <code>𝑛𝑐 ≤ 4</code></li>
+		<li><code>𝑐 = 2</code> și <code>𝑛𝑐 ≤ 8</code></li>
+		<li><code>𝑐 = 2</code>, fără alte restricții</li>
+	</ol></li>
+	<li>testele folosite pentru evaluare sunt o parte dintre testele folosite la <span class="caps">OJI</span> 2024</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>poseidon.in</code></p>
+
+<pre>1
+8 6
+-1 -1 -1 -1 -1 -1
+-1 0 0 -1 -1 -1
+-1 9 1 0 -1 -1
+-1 3 4 0 -1 -1
+-1 0 0 -1 0 -1
+-1 -1 -1 5 10 -1
+-1 -1 0 6 7 -1
+-1 -1 -1 -1 -1 -1
+2 2</pre>
+
+<p><code>poseidon.out</code></p>
+
+<pre>4</pre>
+
+<h3>Explicație</h3>
+
+<p>Există două insule, cea care conține comorile <code>1, 3, 4, 9</code> și cea care conține comorile <code>5, 6, 7, 10</code>.<br>
+Poseidon se află pe insula care conține comorile <code>1, 3, 4, 9</code>.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>poseidon.in</code></p>
+
+<pre>2
+8 6
+-1 -1 -1 -1 -1 -1
+-1 0 0 -1 -1 -1
+-1 9 1 0 -1 -1
+-1 3 4 0 -1 -1
+-1 0 0 -1 0 -1
+-1 -1 -1 5 0 -1
+-1 -1 0 6 8 -1
+-1 -1 -1 -1 -1 -1</pre>
+
+<p><code>poseidon.out</code></p>
+
+<pre>18</pre>
+
+<h3>Explicație</h3>
+
+<p>Sunt <code>18</code> moduri de a rearanja comorile. Unul dintre acestea este:</p>
+
+<pre>-1 -1 -1 -1 -1 -1
+-1 0 0 -1 -1 -1
+-1 3 9 0 -1 -1
+-1 4 1 0 -1 -1
+-1 0 0 -1 0 -1
+-1 -1 -1 6 0 -1
+-1 -1 0 8 5 -1
+-1 -1 -1 -1 -1 -1</pre>		</article>
+		</body></html>

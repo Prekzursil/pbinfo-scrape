@@ -1,0 +1,319 @@
+{
+  "id": 2559,
+  "slug": "train",
+  "name": "train",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/2559/train",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 53,
+      "name": "Programare dinamică",
+      "slug": "programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=53"
+    },
+    {
+      "id": 54,
+      "name": "Probleme diverse de programare dinamică",
+      "slug": "probleme-diverse-de-programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=54"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Determinați profitul maximal care poate fi obținut de companie având doar clienți fericiți, precum și o ordine de îmbarcare validă, care permite obținerea acestui profit.</p>",
+      "text": "Determinați profitul maximal care poate fi obținut de companie având doar clienți fericiți, precum și o ordine de îmbarcare validă, care permite obținerea acestui profit."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>train.in</code> conține pe prima linie o pereche de numere <code>N</code> și <code>M</code>. Următoarele <code>N</code> linii descriu datele de călătorie ale fiecărui pasager: câte trei numere întregi  <code>x</code>, <code>y</code> și <code>c</code>, unde <code>x</code> reprezintă stația de îmbarcare, <code>y</code> reprezintă stația de  destinație și <code>c</code> este costul tichetului.</p>",
+      "text": "Fișierul de intrare train.in conține pe prima linie o pereche de numere N și M. Următoarele N linii descriu datele de călătorie ale fiecărui pasager: câte trei numere întregi x, y și c, unde x reprezintă stația de îmbarcare, y reprezintă stația de destinație și c este costul tichetului."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>train.out</code> va avea următorul format: <br>\n1. Prima linie va conține un număr <code>P</code> reprezentând profitul maximal pe care îl poate obține compania feroviară;<br>\n2. Cea de a doua linie va conține un număr <code>Num</code> reprezentând numărul pasagerilor, care vor putea ajunge la destinația lor în condiția unei soluții optimale, adică a unui profit maximal;<br>\n3. Cea de a treia linie va conține indicii pentru fiecare pasager, care ajunge la destinația sa, în ordinea îmbarcării, în soluția optimală determinată. Indicii pasagerilor vor fi separați prin exact un spațiu.</p>",
+      "text": "Fișierul de ieșire train.out va avea următorul format: 1. Prima linie va conține un număr P reprezentând profitul maximal pe care îl poate obține compania feroviară; 2. Cea de a doua linie va conține un număr Num reprezentând numărul pasagerilor, care vor putea ajunge la destinația lor în condiția unei soluții optimale, adică a unui profit maximal; 3. Cea de a treia linie va conține indicii pentru fiecare pasager, care ajunge la destinația sa, în ordinea îmbarcării, în soluția optimală determinată. Indicii pasagerilor vor fi separați prin exact un spațiu."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 100000</code></li>\n\t<li><code>1 ≤ M ≤ 2 000 000 000</code></li>\n\t<li><code>1 ≤ x &lt; y ≤  M</code> pentru toți pasagerii</li>\n\t<li><code>1 ≤ c ≤ 10000</code></li>\n\t<li>Orice configurație a pasagerilor care produce un profit maximal al companiei este considerată corectă;</li>\n\t<li>Pentru fiecare test, veți primi <code>60%</code> punctaj/test pentru scrierea profitului maximal corect <code>P</code> sau <code>100%</code> punctaj/test pentru scrierea corectă a tuturor valorilor solicitate;</li>\n\t<li>Pentru <code>10</code> puncte, <code>N ≤ 25</code></li>\n\t<li>Pentru <code>30</code> puncte, <code>26 ≤ N ≤ 2500</code></li>\n\t<li>Pentru <code>60</code> puncte, <code>2501 ≤ N ≤ 100000</code></li>\n</ul>",
+      "text": "1 ≤ N ≤ 100000 1 ≤ M ≤ 2 000 000 000 1 ≤ x < y ≤ M pentru toți pasagerii 1 ≤ c ≤ 10000 Orice configurație a pasagerilor care produce un profit maximal al companiei este considerată corectă; Pentru fiecare test, veți primi 60% punctaj/test pentru scrierea profitului maximal corect P sau 100% punctaj/test pentru scrierea corectă a tuturor valorilor solicitate; Pentru 10 puncte, N ≤ 25 Pentru 30 puncte, 26 ≤ N ≤ 2500 Pentru 60 puncte, 2501 ≤ N ≤ 100000"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>train.in</code></p><pre>4 8\n2 6 10\n4 5 1\n3 7 10\n1 7 10</pre><p><code>train.out</code></p><pre>20 \n2\n1 3</pre><h3>Explicație</h3><p>Răspunsul corect poate fi obținut astfel: <br>\nstația <code>2</code>: pasagerul <code>1</code> urcă în tren <br>\nstația <code>3</code>: pasagerul <code>3</code> urcă în tren<br>\nstația <code>6</code>: pasagerul <code>1</code> coboară din tren<br>\nstația <code>7</code>: pasagerul <code>3</code> coboară din tren</p>",
+      "text": "train.in4 8 2 6 10 4 5 1 3 7 10 1 7 10train.out20 2 1 3ExplicațieRăspunsul corect poate fi obținut astfel: stația 2: pasagerul 1 urcă în tren stația 3: pasagerul 3 urcă în tren stația 6: pasagerul 1 coboară din tren stația 7: pasagerul 3 coboară din tren"
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>train.in</code></p><pre>4 10\n1 3 3\n1 10 2\n2 5 3\n1 2 5</pre><p><code>train.out</code></p><pre>11\n3\n4 1 3</pre><h3>Explicație</h3><p>Răspunsul corect poate fi obținut astfel: <br>\nstația <code>1</code>: pasagerul <code>4</code> și <code>1</code> urcă în tren <br>\nstația <code>2</code>: pasagerul <code>4</code> coboară din tren, pasagerul <code>3</code> urcă în tren<br>\nstația <code>3</code>: pasagerul <code>1</code> coboară din tren<br>\nstația <code>5</code>: pasagerul <code>3</code> coboară din tren</p>",
+      "text": "train.in4 10 1 3 3 1 10 2 2 5 3 1 2 5train.out11 3 4 1 3ExplicațieRăspunsul corect poate fi obținut astfel: stația 1: pasagerul 4 și 1 urcă în tren stația 2: pasagerul 4 coboară din tren, pasagerul 3 urcă în tren stația 3: pasagerul 1 coboară din tren stația 5: pasagerul 3 coboară din tren"
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Răspunsul corect poate fi obținut astfel: stația 2: pasagerul 1 urcă în tren stația 3: pasagerul 3 urcă în tren stația 6: pasagerul 1 coboară din tren stația 7: pasagerul 3 coboară din tren"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Răspunsul corect poate fi obținut astfel: stația 1: pasagerul 4 și 1 urcă în tren stația 2: pasagerul 4 coboară din tren, pasagerul 3 urcă în tren stația 3: pasagerul 1 coboară din tren stația 5: pasagerul 3 coboară din tren"
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 100000",
+    "1 ≤ M ≤ 2 000 000 000",
+    "1 ≤ x < y ≤ M pentru toți pasagerii",
+    "1 ≤ c ≤ 10000",
+    "Orice configurație a pasagerilor care produce un profit maximal al companiei este considerată corectă;",
+    "Pentru fiecare test, veți primi 60% punctaj/test pentru scrierea profitului maximal corect P sau 100% punctaj/test pentru scrierea corectă a tuturor valorilor solicitate;",
+    "Pentru 10 puncte, N ≤ 25",
+    "Pentru 30 puncte, 26 ≤ N ≤ 2500",
+    "Pentru 60 puncte, 2501 ≤ N ≤ 100000"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qcf5c1a92b8.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/train.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-train-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "11",
+    "intrare/ieșire": "train.in / train.out",
+    "limită timp": "0.4 secunde",
+    "limită memorie": "128 MB / 32 MB",
+    "sursa problemei": "Balcaniada de Informatică 2018, ziua 2",
+    "autor": "Dana Lica",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.4,
+  "memoryLimitMb": 128,
+  "author": "Dana Lica",
+  "sourceAttribution": "Balcaniada de Informatică 2018, ziua 2",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/2559/train"
+}

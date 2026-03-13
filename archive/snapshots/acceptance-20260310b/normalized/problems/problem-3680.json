@@ -1,0 +1,318 @@
+{
+  "id": 3680,
+  "slug": "numerex",
+  "name": "numereX",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3680/numerex",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 44,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=44"
+    }
+  ],
+  "tags": [
+    "Cautare binara",
+    "Sume parțiale",
+    "Divizibilitate",
+    "Numere prime",
+    "Descompunere in factori",
+    "Numararea divizorilor",
+    "ciurul lui Eratostene"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>1. Se dă un număr natural <code>N</code>. Determinați cel mai mic număr din intervalul închis <code>[1,N]</code> care are număr maxim de divizori proprii.<br>\n2. Se dau trei numere <code>N</code>, <code>M</code> și <code>T</code>. Determinați câte intervale de forma <code>[a,b]</code> au proprietatea că există exact <code>M</code> numere naturale care au <code>T</code> divizori proprii.</p>",
+      "text": "1. Se dă un număr natural N. Determinați cel mai mic număr din intervalul închis [1,N] care are număr maxim de divizori proprii. 2. Se dau trei numere N, M și T. Determinați câte intervale de forma [a,b] au proprietatea că există exact M numere naturale care au T divizori proprii."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>numere.in</code> conține pe prima linie un număr natural <code>P</code> reprezentând cerința din problemă care trebuie rezolvată.</p><p>Dacă <code>P = 1</code> atunci pe a doua linie se găsește un număr natural <code>N</code>, reprezentând extremitatea din dreapta a intervalului.</p><p>Dacă <code>P = 2</code> atunci pe a doua linie se găsesc trei numere: un număr natural <code>N</code>, un număr natural <code>M</code> și un număr natural <code>T</code> cu semnificațiile din enunț.</p>",
+      "text": "Fișierul de intrare numere.in conține pe prima linie un număr natural P reprezentând cerința din problemă care trebuie rezolvată.Dacă P = 1 atunci pe a doua linie se găsește un număr natural N, reprezentând extremitatea din dreapta a intervalului.Dacă P = 2 atunci pe a doua linie se găsesc trei numere: un număr natural N, un număr natural M și un număr natural T cu semnificațiile din enunț."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Dacă <code>P = 1</code> atunci fișierul de ieșire <code>numere.out</code> conține pe o singură linie numărul cel mai mic determinat care are număr maxim de divizori.</p><p>Dacă <code>P = 2</code> atunci fișierul de ieșire <code>numere.out</code> conține pe o singură linie numărul de intervale determinate care au proprietatea cerută.</p>",
+      "text": "Dacă P = 1 atunci fișierul de ieșire numere.out conține pe o singură linie numărul cel mai mic determinat care are număr maxim de divizori.Dacă P = 2 atunci fișierul de ieșire numere.out conține pe o singură linie numărul de intervale determinate care au proprietatea cerută."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 100000</code></li>\n\t<li><code>1 ≤ M ≤ 100000</code></li>\n\t<li><code>1 ≤ T ≤ 100000</code></li>\n\t<li><code>1 ≤ a ≤ b ≤ N</code></li>\n\t<li>Pentru rezolvarea corectă a cerinței <code>1</code> se acordă <code>40</code> de puncte, pentru rezolvarea corectă a cerinței <code>2</code> se acordă <code>60</code> de puncte.</li>\n</ul>",
+      "text": "1 ≤ N ≤ 100000 1 ≤ M ≤ 100000 1 ≤ T ≤ 100000 1 ≤ a ≤ b ≤ N Pentru rezolvarea corectă a cerinței 1 se acordă 40 de puncte, pentru rezolvarea corectă a cerinței 2 se acordă 60 de puncte."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>numere.in</code></p><pre>1\n20</pre><p><code>numere.out</code></p><pre>12</pre><h3>Explicație</h3><p><code>12</code> are <code>4</code> divizori proprii și este cel mai mic număr cu <code>4</code> divizori proprii din <code>[1,20]</code>.</p>",
+      "text": "numere.in1 20numere.out12Explicație12 are 4 divizori proprii și este cel mai mic număr cu 4 divizori proprii din [1,20]."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>numere.in</code></p><pre>2\n10 3 2</pre><p><code>numere.out</code></p><pre>6</pre><h3>Explicație</h3><p><code>[1,10]</code>, <code>[2,10]</code>, <code>[3,10]</code>, <code>[4,10]</code>, <code>[5,10]</code>, <code>[6,10]</code> sunt cele <code>6</code> intervale în care se găsesc exact <code>3</code> numere cu <code>2</code> divizori proprii(<code>6</code>, <code>8</code>, <code>10</code> sunt numerele cu <code>3</code> divizori proprii).</p>",
+      "text": "numere.in2 10 3 2numere.out6Explicație[1,10], [2,10], [3,10], [4,10], [5,10], [6,10] sunt cele 6 intervale în care se găsesc exact 3 numere cu 2 divizori proprii(6, 8, 10 sunt numerele cu 3 divizori proprii)."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "12 are 4 divizori proprii și este cel mai mic număr cu 4 divizori proprii din [1,20]."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "[1,10], [2,10], [3,10], [4,10], [5,10], [6,10] sunt cele 6 intervale în care se găsesc exact 3 numere cu 2 divizori proprii(6, 8, 10 sunt numerele cu 3 divizori proprii)."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 100000",
+    "1 ≤ M ≤ 100000",
+    "1 ≤ T ≤ 100000",
+    "1 ≤ a ≤ b ≤ N",
+    "Pentru rezolvarea corectă a cerinței 1 se acordă 40 de puncte, pentru rezolvarea corectă a cerinței 2 se acordă 60 de puncte."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q82c3b7c44a.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Lorintz Alexandru (Alex_tz307)",
+    "clasa": "9",
+    "intrare/ieșire": "numere.in / numere.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "Concursul Național Info Pro, Etapa II",
+    "autor": "Dan Octavian Dumitrașcu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "author": "Dan Octavian Dumitrașcu",
+  "sourceAttribution": "Concursul Național Info Pro, Etapa II",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3680/numerex"
+}

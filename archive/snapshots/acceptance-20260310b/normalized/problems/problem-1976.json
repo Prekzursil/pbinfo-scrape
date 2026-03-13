@@ -1,0 +1,297 @@
+{
+  "id": 1976,
+  "slug": "srh",
+  "name": "srh",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1976/srh",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 16,
+      "name": "Teoria Grafurilor",
+      "slug": "teoria-grafurilor",
+      "href": "/?pagina=probleme-lista&tag=16"
+    },
+    {
+      "id": 64,
+      "name": "Arbori cu rădăcină",
+      "slug": "arbori-cu-r-d-cin",
+      "href": "/?pagina=probleme-lista&tag=64"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Se consideră un arbore cu <code>N</code> noduri și rădăcina în nodul <code>1</code>. Nodurile sunt numerotate de la <code>1</code> la <code>N</code>. <br>\nFie <code>TX</code> = subarborele cu rădăcina în nodul <code>X</code>. Se cere să se calculeze numărul de perechi <code>(X,Y)</code> astfel încât subarborii <code>TX</code> și <code>TY</code> sunt similari și <code>X&lt;Y</code>.</p>",
+      "text": "Se consideră un arbore cu N noduri și rădăcina în nodul 1. Nodurile sunt numerotate de la 1 la N. Fie TX = subarborele cu rădăcina în nodul X. Se cere să se calculeze numărul de perechi (X,Y) astfel încât subarborii TX și TY sunt similari și X<Y."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>srh.in</code> conține pe prima linie un număr natural <code>N</code>, reprezentând numărul de noduri al arborelui. Următoarele <code>N-1</code> linii care conțin muchile arborelui: pe linia <code>i+1</code> se găsesc două numere <code>a</code><sub><code>i</code></sub> și <code>b</code><sub><code>i</code></sub>, care înseamnă că <code>a</code><sub><code>i</code></sub> este părintele lui <code>b</code><sub><code>i</code></sub>.</p>",
+      "text": "Fișierul de intrare srh.in conține pe prima linie un număr natural N, reprezentând numărul de noduri al arborelui. Următoarele N-1 linii care conțin muchile arborelui: pe linia i+1 se găsesc două numere ai și bi, care înseamnă că ai este părintele lui bi."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>srh.out</code> conține o singură linie pe care se află numărul de perechi de noduri <code>(X, Y)</code> astfel încât subarborele cu rădăcina în nodul <code>X</code> să fie similar cu subarborele cu rădăcina în nodul <code>Y</code> și <code>(X &lt; Y)</code>.</p>",
+      "text": "Fișierul de ieșire srh.out conține o singură linie pe care se află numărul de perechi de noduri (X, Y) astfel încât subarborele cu rădăcina în nodul X să fie similar cu subarborele cu rădăcina în nodul Y și (X < Y)."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 100.000</code></li>\n\t<li>Se garantează că arborele este bine format și fiecare nod are un singur părinte (în afară de rădăcina).</li>\n</ul>",
+      "text": "1 ≤ N ≤ 100.000 Se garantează că arborele este bine format și fiecare nod are un singur părinte (în afară de rădăcina)."
+    },
+    {
+      "title": "Exemple:",
+      "html": "<p><code>srh.in</code></p><pre>6\n1 5\n5 6\n6 3\n1 2\n2 4</pre><p><code>srh.out</code></p><pre>2</pre><pre>13\n1 5\n1 6\n5 7\n5 8\n6 2\n6 3\n7 4\n7 9\n4 10\n2 11\n11 13\n3 12</pre><p><code>srh.out</code></p><pre>14</pre><h3>Explicație</h3><p>Pentru ultimul exemplu, comparăm subarborii din nodul <code>5</code> și nodul <code>6</code>.<br>\nSubarborele nodului <code>5</code> conține următoarele noduri: nivel <code>0</code> – nod <code>5</code>, nivel <code>1</code> – nod <code>7</code>, nod <code>8</code>, nivel <code>2</code> – nod <code>4</code>, nod <code>9</code>, nivel <code>3</code> – nod <code>10</code>.<br>\nSubarborele nodului <code>6</code> conține următoarele noduri:nivel <code>0</code> – nod <code>6</code>, nivel <code>1</code> – nod <code>2</code>, nod <code>3</code>, nivel <code>2</code> – nod <code>11</code>, nod <code>12</code>, nivel <code>3</code> – nod <code>13</code>.<br>\nSe observă că subarborii nodului <code>5</code> și nodului <code>6</code> au același număr de noduri pe fiecare nivel și astfel sunt similari. Prin urmare prima pereche de subarbori similari este <code>(5,6)</code>. <br>\nUrmatoarele <code>13</code> perechi sunt <code>(8,9)</code>, <code>(8,10)</code>, <code>(8,12)</code>, <code>(8,13)</code>, <code>(9,10)</code>, <code>(9,12)</code>, <code>(9,13)</code>, <code>(10,12)</code>, <code>(10,13)</code>, <code>(12,13)</code>, <code>(3,4)</code>, <code>(3,11)</code>, <code>(4,11)</code>.</p>",
+      "text": "srh.in6 1 5 5 6 6 3 1 2 2 4srh.out213 1 5 1 6 5 7 5 8 6 2 6 3 7 4 7 9 4 10 2 11 11 13 3 12srh.out14ExplicațiePentru ultimul exemplu, comparăm subarborii din nodul 5 și nodul 6. Subarborele nodului 5 conține următoarele noduri: nivel 0 – nod 5, nivel 1 – nod 7, nod 8, nivel 2 – nod 4, nod 9, nivel 3 – nod 10. Subarborele nodului 6 conține următoarele noduri:nivel 0 – nod 6, nivel 1 – nod 2, nod 3, nivel 2 – nod 11, nod 12, nivel 3 – nod 13. Se observă că subarborii nodului 5 și nodului 6 au același număr de noduri pe fiecare nivel și astfel sunt similari. Prin urmare prima pereche de subarbori similari este (5,6). Urmatoarele 13 perechi sunt (8,9), (8,10), (8,12), (8,13), (9,10), (9,12), (9,13), (10,12), (10,13), (12,13), (3,4), (3,11), (4,11)."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Pentru ultimul exemplu, comparăm subarborii din nodul 5 și nodul 6. Subarborele nodului 5 conține următoarele noduri: nivel 0 – nod 5, nivel 1 – nod 7, nod 8, nivel 2 – nod 4, nod 9, nivel 3 – nod 10. Subarborele nodului 6 conține următoarele noduri:nivel 0 – nod 6, nivel 1 – nod 2, nod 3, nivel 2 – nod 11, nod 12, nivel 3 – nod 13. Se observă că subarborii nodului 5 și nodului 6 au același număr de noduri pe fiecare nivel și astfel sunt similari. Prin urmare prima pereche de subarbori similari este (5,6). Urmatoarele 13 perechi sunt (8,9), (8,10), (8,12), (8,13), (9,10), (9,12), (9,13), (10,12), (10,13), (12,13), (3,4), (3,11), (4,11)."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 100.000",
+    "Se garantează că arborele este bine format și fiecare nod are un singur părinte (în afară de rădăcina)."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q3ccc6239dd.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Nodea Eugen (eugen_nodea)",
+    "clasa": "11",
+    "intrare/ieșire": "srh.in / srh.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "16 MB / 4 MB",
+    "sursa problemei": "Info Oltenia 2017, Clase XI-XII echipaje",
+    "autor": "Mărgeloiu Andrei, University College London",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 16,
+  "author": "Mărgeloiu Andrei, University College London",
+  "sourceAttribution": "Info Oltenia 2017, Clase XI-XII echipaje",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1976/srh"
+}

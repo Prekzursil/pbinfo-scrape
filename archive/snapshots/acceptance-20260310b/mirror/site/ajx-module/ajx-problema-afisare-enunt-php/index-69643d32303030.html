@@ -1,0 +1,76 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2000"><article id="enunt">
+			<p>Corneluș a învățat să numere. El pornește întotdeauna de la <code>1</code>, numără din <code>1</code> în <code>1</code>, nu greșește niciodată numărul următor, însă ezită uneori și atunci spune numărul curent de mai multe ori. Sora lui, Corina, îl urmărește și face tot felul de calcule asupra modurilor în care numără fratele ei. Astfel, ea urmărește până la cât numără (<code>U</code>), câte numere spune în total (<code>N</code>) și, pentru a aprecia cât de ezitant este, numărul maxim de repetări (<code>R</code>) ale unei valori. De exemplu, el poate număra până la <code>8</code> astfel: <code>1 2 3 3 4 5 6 7 7 7 7 8 8</code>. În acest caz, numără până la <code>8</code> (<code>U=8</code>), spune <code>13</code> numere (<code>N=13</code>) și ezită cel mai mult la <code>7</code>, spunându‑l de <code>4</code> ori (<code>R=4</code>).</p>
+
+<h1>Cerințe</h1>
+
+<p>1) Cunoscând numărul total de numere <code>N</code> și ultimul număr spus <code>U</code>, trebuie să calculați câte șiruri diferite au exact <code>N</code> numere și se termină cu numărul <code>U</code>.<br>
+2) Cunoscând numărul total de numere <code>N</code> și numărul maxim de repetări <code>R</code> ale unei valori, trebuie să calculați câte șiruri diferite au exact <code>N</code> numere și fiecare valoare se repetă de cel mult <code>R</code> ori. <br>
+Deoarece numărul de șiruri poate fi foarte mare, calculați restul împărțirii acestui număr la <code>20173333</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Din fișierul <code>sir9.in</code> se citesc trei numere naturale, <code>P</code>, <code>N</code> și <code>X</code>, scrise în această ordine, cu câte un spațiu între ele. <code>P</code> poate avea una dintre valorile <code>1</code> sau <code>2</code>, iar <code>N</code> este numărul de numere din șir. Când <code>P</code> are valoarea <code>1</code>, numărul <code>X</code> reprezintă ultimul număr spus (<code>U</code>), iar când <code>P</code> are valoarea <code>2</code>, <code>X</code> reprezintă numărul maxim de repetări ale unei valori (<code>R</code>).</p>
+
+<h1>Date de ieșire</h1>
+
+<p>În fișierul <code>sir9.out</code> se scrie o singură valoare, astfel: </p>
+
+<ul>
+	<li>dacă <code>P</code> a avut valoarea <code>1</code>, valoarea reprezintă numărul de șiruri distincte care au exact <code>N</code> numere și se termină cu numărul <code>X</code>;</li>
+	<li>dacă <code>P</code> a avut valoarea <code>2</code>, valoarea reprezintă numărul de șiruri distincte care au exact <code>N</code> numere și fiecare număr se repetă de cel mult <code>X</code> ori.</li>
+</ul>
+
+<p><strong>În ambele cazuri</strong>, deoarece numărul rezultat poate fi foarte mare, se va scrie restul împărțirii acestui număr la <code>20173333</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 100.000</code></li>
+	<li><code>X ≤ N</code></li>
+	<li>testele cu <code>P=1</code> vor totaliza 50% din punctaj, restul de 50% din punctaj fiind pentru <code>P=2</code>;</li>
+	<li>pentru teste cumulând 50 de puncte valoarea lui <code>N</code> nu depășește <code>1000</code>;</li>
+	<li>Ultima valoare spusă poate să apară de mai multe ori.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>sir9.in</code></p>
+
+<pre>1 5 3</pre>
+
+<p><code>sir9.out</code></p>
+
+<pre>6</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința 1. Pentru <code>N=5</code>, <code>X=3</code>, sunt <code>6</code> șiruri care au exact <code>N</code> numere și se termină cu <code>3</code>: <code>1&nbsp;1&nbsp;1&nbsp;2&nbsp;3</code>, <code>1&nbsp;1&nbsp;2&nbsp;2&nbsp;3</code>, <code>1&nbsp;1&nbsp;2&nbsp;3&nbsp;3</code>, <code>1&nbsp;2&nbsp;2&nbsp;2&nbsp;3</code>, <code>1&nbsp;2&nbsp;2&nbsp;3&nbsp;3</code>, <code>1 2 3 3 3</code>.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>sir9.in</code></p>
+
+<pre>2 5 2</pre>
+
+<p><code>sir9.out</code></p>
+
+<pre>8</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința 2. Pentru <code>N=5</code>, <code>X=2</code>, sunt <code>8</code> șiruri care au exact <code>N</code> numere și fiecare număr se repetă de cel mult <code>2</code> ori: <code>1&nbsp;1&nbsp;2&nbsp;2&nbsp;3</code>, <code>1&nbsp;1&nbsp;2&nbsp;3&nbsp;3</code>, <code>1&nbsp;1&nbsp;2&nbsp;3&nbsp;4</code>, <code>1&nbsp;2&nbsp;2&nbsp;3&nbsp;3</code>, <code>1&nbsp;2&nbsp;2&nbsp;3&nbsp;4</code>, <code>1&nbsp;2&nbsp;3&nbsp;3&nbsp;4</code>, <code>1&nbsp;2&nbsp;3&nbsp;4&nbsp;4</code>, <code>1&nbsp;2&nbsp;3&nbsp;4&nbsp;5</code>.</p>
+
+<h1>Exemplul 3</h1>
+
+<p><code>sir9.in</code></p>
+
+<pre>2 10 3</pre>
+
+<p><code>sir9.out</code></p>
+
+<pre>274</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința 2. Pentru <code>N=10</code>, <code>X=3</code>, sunt <code>274</code> de șiruri care au exact <code>10</code> numere și fiecare număr se repetă de cel mult <code>3</code> ori.</p>		</article>
+		</body></html>

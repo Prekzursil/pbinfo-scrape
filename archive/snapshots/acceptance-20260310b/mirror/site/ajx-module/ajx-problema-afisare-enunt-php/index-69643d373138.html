@@ -1,0 +1,50 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=718"><article id="enunt">
+			<p>Mihai a primit de ziua sa un joc de şah special. Tabla jocului are forma pătrată, de dimensiune <code>N</code> dar unele poziţii sunt marcate ca obstacole şi ele nu pot fi ocupate cu piese. În plus, jocul său are o singură piesă, numită “nebun”. Două poziţii pe tablă sunt desemnate ca poziţie iniţială şi poziţie finală. Mihai vrea să determine o modalitate de a deplasa nebunul, cu un număr minim de mutări, astfel încât acesta să ajungă din poziţia iniţială în poziţia finală. Mihai va respecta regulile de mutare a nebunului la jocul de şah, adică din poziţia curentă nebunul se poate muta doar pe diagonală, în oricare dintre cele <code>4</code> direcţii, oricâte poziţii deodată dar fără a sări peste obstacole. În plus, Mihai are voie la o excepţie de la această regulă: îi este permis să execute cel mult două mutări după regula de avansare a calului pe tabla de şah. </p>
+
+<p><img src="/_assets/asset-https-www-pbinfo-ro-resurse-probleme-701-750-718-sah-png.png" style="float:right;"> Pentru clarificare, în figura alăturată, poziţia calului este marcată cu <code>X</code>. El va putea fi mutat în oricare dintre poziţiile marcate cu <code>Y</code>. La o mutare după regula calului, nu contează starea poziţiilor peste care se sare, ci doar ca poziţia finală să nu reprezinte un obstacol.</p>
+
+<p>Tabla de şah are liniile numerotate de sus în jos cu numere naturale cuprinse între <code>1</code> şi <code>N</code> iar coloanele de la stânga la dreapta cu numere naturale cuprinse între <code>1</code> şi <code>N</code>. O poziţie de pe tablă se identifică printr-o pereche <code>(i,j)</code> unde <code>i</code> reprezintă linia iar <code>j</code> coloana acelei poziţii.</p>
+
+<h1>Cerința</h1>
+
+<p>Dată fiind configuraţia tablei de şah precum şi poziţiile iniţială şi finală ale piesei, se cere determinarea numărului minim de mutări pentru a deplasa piesa între cele două poziţii.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>sah2.in</code> conţine pe prima linie numerele <code>N</code>, <code>i1</code>, <code>j1</code>, <code>i2</code>, <code>j2</code>, separate prin câte un spaţiu, reprezentând: <code>N</code> – dimensiunea tablei; <code>(i1,j1)</code> – poziţia iniţială a piesei; <code>(i2,j2</code>) – poziţia finală a piesei.</p>
+
+<p>Pe următoarele <code>N</code> linii se găsesc câte <code>N</code> numere din mulţimea <code>{0,1}</code>. Valoarea <code>1</code> reprezintă o poziţie marcată pe tablă ca obstacol iar valoarea <code>0</code> o poziţie liberă. Numerele de pe aceeaşi linie nu sunt separate prin spaţii.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>sah2.out</code> va conţine pe prima linie un număr natural reprezentând  numărul minim de mutări necesare.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 500</code></li>
+	<li>Piesa nu poate părăsi tabla de joc;</li>
+	<li>Se garantează că poziţia iniţială şi cea finală nu sunt marcate ca obstacole;</li>
+	<li>Se garantează existenţa a cel puţin unei posibilităţi de mutare a piesei între poziţia iniţială şi cea finală;</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>sah2.in</code></p>
+
+<pre>4 1 1 4 1
+0100
+1000
+0010
+0000</pre>
+
+<p><code>sah2.out</code></p>
+
+<pre>2</pre>
+
+<h1>Explicație</h1>
+
+<p>Nebunul pleacă din <code>(1,1)</code> foloseste săritura calului până în poziţia <code>(3,2)</code>, apoi din acea poziţie, folosind mişcarea pe diagonală sare până în poziţia finală <code>(4,1)</code>.</p>
+
+<p>O altă soluţie se poate obţine efectuând mutările : <code>(1,1)</code> → <code>(2,3)</code>, <code>(2,3)</code> → <code>(4,1)</code></p>		</article>
+		</body></html>

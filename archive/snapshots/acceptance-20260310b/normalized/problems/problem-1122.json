@@ -1,0 +1,342 @@
+{
+  "id": 1122,
+  "slug": "babilon",
+  "name": "Babilon",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1122/babilon",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 1,
+      "name": "Algoritmi elementari",
+      "slug": "algoritmi-elementari",
+      "href": "/?pagina=probleme-lista&tag=1"
+    },
+    {
+      "id": 5,
+      "name": "Cifrele unui număr",
+      "slug": "cifrele-unui-num-r",
+      "href": "/?pagina=probleme-lista&tag=5"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerință",
+      "html": "<p>Dându-se un număr natural <code>n</code> și un șir de <code>n</code> cifre din mulțimea <code>{1, 2, 3}</code>, reprezentând codificarea scrierii babiloniene a unui număr natural, să se determine: <br>\n<strong>a)</strong> numărul maxim de cifre <code>1</code> aflate pe poziții consecutive în  codificarea scrierii babiloniene date;<br>\n<strong>b)</strong> numărul natural din sistemul zecimal corespunzător scrierii babiloniene date.</p>",
+      "text": "Dându-se un număr natural n și un șir de n cifre din mulțimea {1, 2, 3}, reprezentând codificarea scrierii babiloniene a unui număr natural, să se determine: a) numărul maxim de cifre 1 aflate pe poziții consecutive în codificarea scrierii babiloniene date; b) numărul natural din sistemul zecimal corespunzător scrierii babiloniene date."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>babilon.in</code> conține:</p><ul>\n\t<li>pe prima linie un număr natural <code>p</code> ( <code>1 ≤ p ≤ 2</code> );</li>\n\t<li>pe a doua linie un număr natural <code>n</code>;</li>\n\t<li>pe a treia linie <code>n</code> cifre separate prin câte un spațiu, reprezentând codificarea scrierii babiloniene a unui număr natural.</li>\n</ul>",
+      "text": "Fișierul de intrare babilon.in conține: pe prima linie un număr natural p ( 1 ≤ p ≤ 2 ); pe a doua linie un număr natural n; pe a treia linie n cifre separate prin câte un spațiu, reprezentând codificarea scrierii babiloniene a unui număr natural."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Dacă valoarea lui <code>p</code> este <code>1</code>, atunci se va rezolva numai punctul a) din cerință. În acest caz, fişierul de ieşire <code>babilon.out</code> va conţine pe prima linie un număr natural reprezentând numărul maxim de cifre <code>1</code> aflate pe poziții consecutive în  codificarea scrierii babiloniene date.</p><p>Dacă valoarea lui <code>p</code> este <code>2</code>, atunci se va rezolva numai punctul b) din cerință. În acest caz, fişierul de ieşire <code>babilon.out</code> va conţine pe prima linie numărul natural corespunzător scrierii babiloniene date.</p>",
+      "text": "Dacă valoarea lui p este 1, atunci se va rezolva numai punctul a) din cerință. În acest caz, fişierul de ieşire babilon.out va conţine pe prima linie un număr natural reprezentând numărul maxim de cifre 1 aflate pe poziții consecutive în codificarea scrierii babiloniene date.Dacă valoarea lui p este 2, atunci se va rezolva numai punctul b) din cerință. În acest caz, fişierul de ieşire babilon.out va conţine pe prima linie numărul natural corespunzător scrierii babiloniene date."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2 ≤ n ≤ 109</code>;</li>\n\t<li>se garantează faptul că numărul de cifre al rezultatului de la punctul b) (numărul zecimal) este mai mic decât <code>20</code>;</li>\n\t<li>30% din teste vor avea pe prima linie valoarea <code>1</code>,  iar restul de 70% din teste vor avea pe prima linie valoarea <code>2</code>.</li>\n</ul>",
+      "text": "2 ≤ n ≤ 109; se garantează faptul că numărul de cifre al rezultatului de la punctul b) (numărul zecimal) este mai mic decât 20; 30% din teste vor avea pe prima linie valoarea 1, iar restul de 70% din teste vor avea pe prima linie valoarea 2."
+    },
+    {
+      "title": "Exemplul 1",
+      "html": "<p><code>babilon.in</code></p><pre>1\n8\n1 1 3 2 1 1 1 2</pre><p><code>babilon.out</code></p><pre>3</pre>",
+      "text": "babilon.in1 8 1 1 3 2 1 1 1 2babilon.out3"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p><code>1 1 3 2</code> <u><code>1 1 1</code></u><code> 2</code>. Cea mai lungă secvență de cifre <code>1</code> are lungimea <code>3</code>.</p>",
+      "text": "1 1 3 2 1 1 1 2. Cea mai lungă secvență de cifre 1 are lungimea 3."
+    },
+    {
+      "title": "Exemplul 2",
+      "html": "<p><code>babilon.in</code></p><pre>2\n7\n1 1 3 2 1 1 1</pre><p><code>babilon.out</code></p><pre>7213</pre>",
+      "text": "babilon.in2 7 1 1 3 2 1 1 1babilon.out7213"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p><img alt=\"\" src=\"/resurse/9dc152/p-1100/babilon-ex2.png\"><br>\n<code>2</code> se înmulțește de două ori cu <code>60</code> (o dată pentru că este urmat de spațiu și încă o dată pentru că precede o grupă care începe cu semnul <img alt=\"\" src=\"/resurse/9dc152/p-1100/babilon10.png\"> ), apoi se adună valoarea <code>13</code>.</p><p><code>2*60*60+10+3=7213</code></p>",
+      "text": "2 se înmulțește de două ori cu 60 (o dată pentru că este urmat de spațiu și încă o dată pentru că precede o grupă care începe cu semnul ), apoi se adună valoarea 13.2*60*60+10+3=7213"
+    },
+    {
+      "title": "Exemplul 3",
+      "html": "<p><code>babilon.in</code></p><pre>2\n9\n1 1 1 2 1 1 2 2 1</pre><p><code>babilon.out</code></p><pre>11541</pre>",
+      "text": "babilon.in2 9 1 1 1 2 1 1 2 2 1babilon.out11541"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p><img alt=\"\" src=\"/resurse/9dc152/p-1100/babilon-ex3.png\"><br>\n<code>3</code> se înmulțește cu <code>60</code> de două ori pentru că este precedat de două grupe care încep cu semnul <img alt=\"\" src=\"/resurse/9dc152/p-1100/babilon10.png\"> , apoi se adună <code>12</code> înmulţit cu <code>60</code> şi la final se adună <code>21</code>.</p><p><code>3*60*60+12*60+21=11541</code></p>",
+      "text": "3 se înmulțește cu 60 de două ori pentru că este precedat de două grupe care încep cu semnul , apoi se adună 12 înmulţit cu 60 şi la final se adună 21.3*60*60+12*60+21=11541"
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "2 ≤ n ≤ 109;",
+    "se garantează faptul că numărul de cifre al rezultatului de la punctul b) (numărul zecimal) este mai mic decât 20;",
+    "30% din teste vor avea pe prima linie valoarea 1, iar restul de 70% din teste vor avea pe prima linie valoarea 2."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q2798a41476.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1100/babilon1.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-babilon1-png.png",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1100/babilon10.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-babilon10-png.png",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1100/babilon60.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-babilon60-png.png",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1100/babilon-ex2.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-babilon-ex2-png.png",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1100/babilon-ex3.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-babilon-ex3-png.png",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "9",
+    "intrare/ieșire": "babilon.in / babilon.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "2 MB / 2 MB",
+    "sursa problemei": "ONI GIM 2014, Clasa a V-a",
+    "autor": "Florentina Ungureanu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 2,
+  "author": "Florentina Ungureanu",
+  "sourceAttribution": "ONI GIM 2014, Clasa a V-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1122/babilon"
+}

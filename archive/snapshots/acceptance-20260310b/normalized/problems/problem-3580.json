@@ -1,0 +1,298 @@
+{
+  "id": 3580,
+  "slug": "chromosome",
+  "name": "chromosome",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3580/chromosome",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 16,
+      "name": "Teoria Grafurilor",
+      "slug": "teoria-grafurilor",
+      "href": "/?pagina=probleme-lista&tag=16"
+    },
+    {
+      "id": 60,
+      "name": "Grafuri cu costuri",
+      "slug": "grafuri-cu-costuri",
+      "href": "/?pagina=probleme-lista&tag=60"
+    }
+  ],
+  "tags": [
+    "Drumuri de cost minim"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>În cadrul unui experiment de inginerie genetică, un grup de cercetători desfășoară seturi de analize ample asupra unei secțiuni a genomului uman. Scopul studiului este selectarea unor succesiuni optime de hibridizări dintre  doi cromozomi.</p><p>Genomul analizat are în componența sa <code>n</code> cromozomi interconectați prin mecanisme de crossing-over unidirecțional ce permit schimburi eficiente de gene care favorizează apariția mutațiilor și evoluția per ansamblu a genomului. Fiecare mecanism de crossing-over are un coeficient specific de transfer, <code>c</code>, care se definește prin numărul de gene pe care le poate transmite la un moment dat de la cromozomul <code>x</code> la cromozomul <code>y</code>.</p><p>Interesul cercetătorilor se concentrează asupra unei perechi speciale de cromozomi, <code>u</code> și <code>v</code>. Se definește drept succesiune validă de cromozomi o succesiune care începe cu cromozomul <code>u</code>, se termina cu cromozomul <code>v</code> și nu conține de 2 ori același cromozom. Se cere identificarea primelor <code>k</code> succesiuni valide  din punct de vedere al sumelor coeficienților de transfer. </p><p>Succes!</p>",
+      "text": "În cadrul unui experiment de inginerie genetică, un grup de cercetători desfășoară seturi de analize ample asupra unei secțiuni a genomului uman. Scopul studiului este selectarea unor succesiuni optime de hibridizări dintre doi cromozomi.Genomul analizat are în componența sa n cromozomi interconectați prin mecanisme de crossing-over unidirecțional ce permit schimburi eficiente de gene care favorizează apariția mutațiilor și evoluția per ansamblu a genomului. Fiecare mecanism de crossing-over are un coeficient specific de transfer, c, care se definește prin numărul de gene pe care le poate transmite la un moment dat de la cromozomul x la cromozomul y.Interesul cercetătorilor se concentrează asupra unei perechi speciale de cromozomi, u și v. Se definește drept succesiune validă de cromozomi o succesiune care începe cu cromozomul u, se termina cu cromozomul v și nu conține de 2 ori același cromozom. Se cere identificarea primelor k succesiuni valide din punct de vedere al sumelor coeficienților de transfer. Succes!"
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie a fișierului de intrare <code>chromosome.in</code> se află valorile: <code>n</code> – numărul de cromozomi per secțiunea de genom, <code>m</code> – numărul de mecanisme de crossing-over, <code>k</code> – numărul maxim de succesiuni de recombinări care trebuie determinate, <code>u</code> și <code>v</code> – perechea de cromozomi speciali.</p><p>Pe următoarele <code>m</code> linii se află câte o tripletă de forma <code>x</code>, <code>y</code>, <code>c</code> definită astfel: există mecanism de transfer unidirecțional de la cromozomul <code>x</code> la cromozomul <code>y</code> având coeficientul specific <code>c</code>. </p>",
+      "text": "Pe prima linie a fișierului de intrare chromosome.in se află valorile: n – numărul de cromozomi per secțiunea de genom, m – numărul de mecanisme de crossing-over, k – numărul maxim de succesiuni de recombinări care trebuie determinate, u și v – perechea de cromozomi speciali.Pe următoarele m linii se află câte o tripletă de forma x, y, c definită astfel: există mecanism de transfer unidirecțional de la cromozomul x la cromozomul y având coeficientul specific c."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Pe prima linie a fișierului de ieșire <code>chromosome.out</code> se va afișa valoarea <code>r</code> – numărul de succesiuni de combinări găsite (<code>k</code> sau mai puține), iar pe următoarele linii descrierile succesiunilor :<br>\n</p><ul>\n\t<li>pe prima linie a succesiunii <code>i</code> se vor afișa două valori: \\( c_{i}\\) – costul succesiunii <code>i</code> și \\( p_{i}\\) – numărul de cromozomi implicați în succesiunea <code>i</code>;</li>\n\t<li>pe a doua linie a setului <code>i</code> se vor afișa cei \\( p_{i}\\) cromozomi în ordinea în care aceștia apar în succesiunea <code>i</code></li><br>\n</ul><p></p>",
+      "text": "Pe prima linie a fișierului de ieșire chromosome.out se va afișa valoarea r – numărul de succesiuni de combinări găsite (k sau mai puține), iar pe următoarele linii descrierile succesiunilor : pe prima linie a succesiunii i se vor afișa două valori: \\( c_{i}\\) – costul succesiunii i și \\( p_{i}\\) – numărul de cromozomi implicați în succesiunea i; pe a doua linie a setului i se vor afișa cei \\( p_{i}\\) cromozomi în ordinea în care aceștia apar în succesiunea i"
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li>Se garantează pentru fiecare test că există cel puțin o succesiune de recombinări între cromozomii <code>u</code> și <code>v</code>;</li>\n\t<li>Succesiunile se vor afișa în ordine crescătoare a costurilor, iar la costuri egale în ordine <a href=\"https://en.m.wikipedia.org/wiki/Lexicographical_order#Colexicographic_order\">colexicografică</a> a cromozomilor implicați;</li>\n\t<li>În cazul în care nu există <code>k</code> succesiuni se vor afișa doar cele găsite;</li>\n\t<li><code>1 &lt;= n &lt;= 1000</code>;</li>\n\t<li><code>1 &lt;= m &lt;= 8000</code>;</li>\n\t<li><code>1 &lt;= c &lt;= 10000</code>;</li>\n\t<li><code>1 &lt;= k &lt;= 500</code>;</li>\n\t<li><code>1 &lt;= u, v, x, y &lt;= n</code>.</li>\n</ul>",
+      "text": "Se garantează pentru fiecare test că există cel puțin o succesiune de recombinări între cromozomii u și v; Succesiunile se vor afișa în ordine crescătoare a costurilor, iar la costuri egale în ordine colexicografică a cromozomilor implicați; În cazul în care nu există k succesiuni se vor afișa doar cele găsite; 1 <= n <= 1000; 1 <= m <= 8000; 1 <= c <= 10000; 1 <= k <= 500; 1 <= u, v, x, y <= n."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>chromosome.in</code></p><pre>6 8 4 6 4\n5 3 3\n5 1 1\n6 5 1\n2 1 4\n2 6 3\n3 4 2\n1 3 1\n6 1 2</pre><p><code>chromosome.out</code></p><pre>3\n5 5\n6 5 1 3 4 \n5 4\n6 1 3 4 \n6 4\n6 5 3 4 </pre><h3>Explicație</h3><p><img alt=\"\" src=\"https://cdn.discordapp.com/attachments/715598978783248435/730467025285283940/graph_1.png\"></p>",
+      "text": "chromosome.in6 8 4 6 4 5 3 3 5 1 1 6 5 1 2 1 4 2 6 3 3 4 2 1 3 1 6 1 2chromosome.out3 5 5 6 5 1 3 4 5 4 6 1 3 4 6 4 6 5 3 4 Explicație"
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "Se garantează pentru fiecare test că există cel puțin o succesiune de recombinări între cromozomii u și v;",
+    "Succesiunile se vor afișa în ordine crescătoare a costurilor, iar la costuri egale în ordine colexicografică a cromozomilor implicați;",
+    "În cazul în care nu există k succesiuni se vor afișa doar cele găsite;",
+    "1 <= n <= 1000;",
+    "1 <= m <= 8000;",
+    "1 <= c <= 10000;",
+    "1 <= k <= 500;",
+    "1 <= u, v, x, y <= n."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q06b52ea2dc.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Popa Sebastian (Popa_Sebastian)",
+    "clasa": "11",
+    "intrare/ieșire": "chromosome.in / chromosome.out",
+    "limită timp": "1.5 secunde",
+    "limită memorie": "32 MB / 16 MB",
+    "sursa problemei": "-",
+    "autor": "Bărbuț-Dică Sami, Popa Sebastian",
+    "dificultate": "dificilă"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 1.5,
+  "memoryLimitMb": 32,
+  "author": "Bărbuț-Dică Sami, Popa Sebastian",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3580/chromosome"
+}

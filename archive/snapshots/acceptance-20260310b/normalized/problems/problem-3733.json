@@ -1,0 +1,326 @@
+{
+  "id": 3733,
+  "slug": "cosuri",
+  "name": "Cosuri",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3733/cosuri",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 45,
+      "name": "Vectori caracteristici / de frecventa",
+      "slug": "vectori-caracteristici-de-frecventa",
+      "href": "/?pagina=probleme-lista&tag=45"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Enunț",
+      "html": "<p>Se consideră <code>N</code> coșuri numerotate cu numerele distincte de la <code>1</code> la <code>2•N</code>.<br>\nCoșul <code>1</code> conține <code>C</code><sub><code>1</code></sub> mere, coșul <code>2</code> conține <code>C</code><sub><code>2</code></sub> mere,…, coșul <code>2•N</code> conține <code>C</code><sub><code>2•N</code></sub> mere.</p><p>Cele <code>2•N</code> coșuri vor fi grupate două câte două, rezultând <code>N</code> perechi de coșuri. Fiecare coș poate face parte dintr-o singură pereche. Numărul de mere dintr-o pereche de coșuri este egal cu suma numerelor de mere din cele două coșuri. Pentru fiecare pereche, valoarea absolută a diferenței numerelor de mere din cele două coșuri ale perechii reprezintă <code>excedentul</code> perechii.</p><p>Ionuț, având o fire curioasă, vrea să afle mai multe despre aceste perechi.</p><p>Mai întâi vrea să afle numărul minim posibil, respectiv maxim posibil, de mere dintr-o pereche, indiferent de gruparea coșurilor în perechi de câte două.</p><p>Apoi, Ionuț vă întreabă dacă este posibil să grupeze cele <code>2•N</code> coșuri în perechi de câte două, astfel încât cele <code>N</code> perechi rezultate să aibă același număr de mere. Dacă este posibil, atunci Ionuț vrea să afle și care este valoarea minimă a excedentelor perechilor din noua grupare.</p><p>Voi va trebui să îl ajutați pe Ionuț să afle răspunsurile la întrebările lui.</p>",
+      "text": "Se consideră N coșuri numerotate cu numerele distincte de la 1 la 2•N. Coșul 1 conține C1 mere, coșul 2 conține C2 mere,…, coșul 2•N conține C2•N mere.Cele 2•N coșuri vor fi grupate două câte două, rezultând N perechi de coșuri. Fiecare coș poate face parte dintr-o singură pereche. Numărul de mere dintr-o pereche de coșuri este egal cu suma numerelor de mere din cele două coșuri. Pentru fiecare pereche, valoarea absolută a diferenței numerelor de mere din cele două coșuri ale perechii reprezintă excedentul perechii.Ionuț, având o fire curioasă, vrea să afle mai multe despre aceste perechi.Mai întâi vrea să afle numărul minim posibil, respectiv maxim posibil, de mere dintr-o pereche, indiferent de gruparea coșurilor în perechi de câte două.Apoi, Ionuț vă întreabă dacă este posibil să grupeze cele 2•N coșuri în perechi de câte două, astfel încât cele N perechi rezultate să aibă același număr de mere. Dacă este posibil, atunci Ionuț vrea să afle și care este valoarea minimă a excedentelor perechilor din noua grupare.Voi va trebui să îl ajutați pe Ionuț să afle răspunsurile la întrebările lui."
+    },
+    {
+      "title": "Cerința",
+      "html": "<p>Scrieți un program care să citească numărul <code>N</code> și cele <code>2•N</code> numere naturale <code>C</code><sub><code>1</code></sub>,  <code>C</code><sub><code>2</code></sub>,…, <code>C</code><sub><code>2•N</code></sub>, iar apoi să determine:</p><p><code>1.</code> Numărul minim de mere și numărul maxim de mere pe care le pot avea perechile de coșuri.</p><p><code>2.</code> Răspunsul <code>DA</code> sau <code>NU</code> la întrebarea lui Ionuț; dacă răspunsul este <code>DA</code>, se va determina și care este valoarea minimă a excedentelor perechilor din noua grupare.</p>",
+      "text": "Scrieți un program care să citească numărul N și cele 2•N numere naturale C1, C2,…, C2•N, iar apoi să determine:1. Numărul minim de mere și numărul maxim de mere pe care le pot avea perechile de coșuri.2. Răspunsul DA sau NU la întrebarea lui Ionuț; dacă răspunsul este DA, se va determina și care este valoarea minimă a excedentelor perechilor din noua grupare."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>cosuri.in</code> conține pe prima linie două numere naturale <code>T</code> și <code>N</code> separate printr-un spațiu. A doua linie a fișierului conține cele <code>2•N</code> numere naturale <code>C</code><sub><code>1</code></sub>,  <code>C</code><sub><code>2</code></sub>,…, <code>C</code><sub><code>2•N</code></sub>, separate prin câte un spațiu.</p>",
+      "text": "Fișierul de intrare cosuri.in conține pe prima linie două numere naturale T și N separate printr-un spațiu. A doua linie a fișierului conține cele 2•N numere naturale C1, C2,…, C2•N, separate prin câte un spațiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>cosuri.out</code> va conține:</p><ul>\n\t<li>Dacă <code>T=1</code>, pe prima linie, două numere naturale separate printr-un singur spațiu reprezentând numărul minim, respectiv maxim de mere pe care le pot avea perechile (răspunsul la cerinţa 1);</li>\n\t<li>Dacă <code>T=2</code>, pe prima linie, un șir de două caractere care poate fi <code>DA</code> sau <code>NU</code>, reprezentând răspunsul la întrebarea lui Ionuț; dacă răspunsul este <code>DA</code>, atunci a doua linie a fișierului va conține un număr natural reprezentând valoarea minimă a excedentelor perechilor din noua grupare (răspunsul la cerința 2).</li>\n</ul>",
+      "text": "Fișierul de ieșire cosuri.out va conține: Dacă T=1, pe prima linie, două numere naturale separate printr-un singur spațiu reprezentând numărul minim, respectiv maxim de mere pe care le pot avea perechile (răspunsul la cerinţa 1); Dacă T=2, pe prima linie, un șir de două caractere care poate fi DA sau NU, reprezentând răspunsul la întrebarea lui Ionuț; dacă răspunsul este DA, atunci a doua linie a fișierului va conține un număr natural reprezentând valoarea minimă a excedentelor perechilor din noua grupare (răspunsul la cerința 2)."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 500 000</code></li>\n\t<li><code>1 ≤ C</code><sub><code>i</code></sub><code> ≤ 1 000 000</code>, pentru oricare <code>1 ≤ i ≤ 2·N</code></li>\n\t<li>Pentru teste în valoare de 30 de puncte, <code>T = 1</code></li>\n\t<li>Pentru restul de 70 de puncte, <code>T= 2</code></li>\n\t<li>Pentru teste în valoare de 20 de puncte, <code>N ≤ 5</code></li>\n\t<li>Pentru alte teste în valoare de 40 de puncte, <code>N ≤ 70000</code></li>\n</ul>",
+      "text": "1 ≤ N ≤ 500 000 1 ≤ Ci ≤ 1 000 000, pentru oricare 1 ≤ i ≤ 2·N Pentru teste în valoare de 30 de puncte, T = 1 Pentru restul de 70 de puncte, T= 2 Pentru teste în valoare de 20 de puncte, N ≤ 5 Pentru alte teste în valoare de 40 de puncte, N ≤ 70000"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>cosuri.in</code></p><pre>1 3\n1 7 4 10 2 9</pre><p><code>cosuri.out</code></p><pre>3 19</pre><h3>Explicație</h3><p>Se rezolvă cerința 1. Perechea formată din coșurile <code>1</code> și <code>5</code> are <code>3</code> mere, iar perechea formată din coșurile <code>4</code> și <code>6</code> are <code>19</code> mere. Se observă că aceste valori sunt minimul, respectiv maximul posibil.</p>",
+      "text": "cosuri.in1 3 1 7 4 10 2 9cosuri.out3 19ExplicațieSe rezolvă cerința 1. Perechea formată din coșurile 1 și 5 are 3 mere, iar perechea formată din coșurile 4 și 6 are 19 mere. Se observă că aceste valori sunt minimul, respectiv maximul posibil."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>cosuri.in</code></p><pre>2 3\n1 7 4 10 2 9</pre><p><code>cosuri.out</code></p><pre>DA\n3</pre><h3>Explicație</h3><p>Se rezolvă cerința 2. Grupând coșurile <code>1</code> cu <code>4</code>, <code>2</code> cu <code>3</code> și <code>5</code> cu <code>6</code>, obținem <code>3</code> perechi cu câte <code>11</code> mere fiecare (<code>1 + 10</code>, <code>7 + 4</code>, <code>2 + 9</code>) și cu excedentele: <code>9</code> (<code>=|1-10|</code>), <code>3</code> (<code>=|7-4|</code>), <code>7</code> (<code>=|2-9|</code>). Valoarea minimă a excedentelor perechilor din noua grupare este <code>3</code>.</p>",
+      "text": "cosuri.in2 3 1 7 4 10 2 9cosuri.outDA 3ExplicațieSe rezolvă cerința 2. Grupând coșurile 1 cu 4, 2 cu 3 și 5 cu 6, obținem 3 perechi cu câte 11 mere fiecare (1 + 10, 7 + 4, 2 + 9) și cu excedentele: 9 (=|1-10|), 3 (=|7-4|), 7 (=|2-9|). Valoarea minimă a excedentelor perechilor din noua grupare este 3."
+    },
+    {
+      "title": "Exemplul 3:",
+      "html": "<p><code>cosuri.in</code></p><pre>2 3\n1 7 5 12 2 9</pre><p><code>cosuri.out</code></p><pre>NU</pre><h3>Explicație</h3><p>Se rezolvă cerința 2. Este imposibil să formăm perechile de coșuri, deci răspunsul este <code>NU</code>.</p>",
+      "text": "cosuri.in2 3 1 7 5 12 2 9cosuri.outNUExplicațieSe rezolvă cerința 2. Este imposibil să formăm perechile de coșuri, deci răspunsul este NU."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Se rezolvă cerința 1. Perechea formată din coșurile 1 și 5 are 3 mere, iar perechea formată din coșurile 4 și 6 are 19 mere. Se observă că aceste valori sunt minimul, respectiv maximul posibil."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Se rezolvă cerința 2. Grupând coșurile 1 cu 4, 2 cu 3 și 5 cu 6, obținem 3 perechi cu câte 11 mere fiecare (1 + 10, 7 + 4, 2 + 9) și cu excedentele: 9 (=|1-10|), 3 (=|7-4|), 7 (=|2-9|). Valoarea minimă a excedentelor perechilor din noua grupare este 3."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Se rezolvă cerința 2. Este imposibil să formăm perechile de coșuri, deci răspunsul este NU."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 500 000",
+    "1 ≤ Ci ≤ 1 000 000, pentru oricare 1 ≤ i ≤ 2·N",
+    "Pentru teste în valoare de 30 de puncte, T = 1",
+    "Pentru restul de 70 de puncte, T= 2",
+    "Pentru teste în valoare de 20 de puncte, N ≤ 5",
+    "Pentru alte teste în valoare de 40 de puncte, N ≤ 70000"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qf8e3966b32.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Minca Carmen (carmen)",
+    "clasa": "9",
+    "intrare/ieșire": "cosuri.in / cosuri.out",
+    "limită timp": "0.2 secunde",
+    "limită memorie": "64 MB / 64 MB",
+    "sursa problemei": "Sesiunea de antrenament OJI 2021",
+    "autor": "Pop Ioan Cristian",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.2,
+  "memoryLimitMb": 64,
+  "author": "Pop Ioan Cristian",
+  "sourceAttribution": "Sesiunea de antrenament OJI 2021",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3733/cosuri"
+}

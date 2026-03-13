@@ -1,0 +1,317 @@
+{
+  "id": 1068,
+  "slug": "suma5",
+  "name": "Suma5",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1068/suma5",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 53,
+      "name": "Programare dinamică",
+      "slug": "programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=53"
+    },
+    {
+      "id": 54,
+      "name": "Probleme diverse de programare dinamică",
+      "slug": "probleme-diverse-de-programare-dinamic",
+      "href": "/?pagina=probleme-lista&tag=54"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerinţă",
+      "html": "<p>Scrieţi un program care să determine numărul <code>m</code> de niveluri ale piramidei, suma minimă <code>s</code> a tuturor costurilor aferente finisării şi decorării camerelor de pe un drum ce trece prin toate nivelurile piramidei, construit în modul descris în enunţ, precum şi un astfel de drum pentru care se obţine suma minimă, putând fi ales de scrib.</p>",
+      "text": "Scrieţi un program care să determine numărul m de niveluri ale piramidei, suma minimă s a tuturor costurilor aferente finisării şi decorării camerelor de pe un drum ce trece prin toate nivelurile piramidei, construit în modul descris în enunţ, precum şi un astfel de drum pentru care se obţine suma minimă, putând fi ales de scrib."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>suma5.in</code> conține pe prima linie numărul natural nenul <code>n</code> reprezentând numărul de camere din piramidă. A doua linie conţine <code>n</code> numere naturale nenule <code>c</code><sub><code>1</code></sub>, <code>c</code><sub><code>2</code></sub>,…, <code>c</code><sub><code>n</code></sub>, separate prin câte un spaţiu, reprezentând costurile aferente finisării şi decorării camerelor, în ordinea numerotării lor.</p>",
+      "text": "Fișierul de intrare suma5.in conține pe prima linie numărul natural nenul n reprezentând numărul de camere din piramidă. A doua linie conţine n numere naturale nenule c1, c2,…, cn, separate prin câte un spaţiu, reprezentând costurile aferente finisării şi decorării camerelor, în ordinea numerotării lor."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>suma5.out</code> va conține pe prima linie două numere naturale <code>m</code> şi <code>s</code>, separate printr-un singur spaţiu, cu semnificaţia din enunţ. Cea de-a doua linie va conţine, separate prin câte un spaţiu, în ordinea parcurgerii lor, numerele camerelor de pe un drum ce trece prin toate nivelurile piramidei, drum pentru care se obţine suma minimă <code>s</code>.</p>",
+      "text": "Fișierul de ieșire suma5.out va conține pe prima linie două numere naturale m şi s, separate printr-un singur spaţiu, cu semnificaţia din enunţ. Cea de-a doua linie va conţine, separate prin câte un spaţiu, în ordinea parcurgerii lor, numerele camerelor de pe un drum ce trece prin toate nivelurile piramidei, drum pentru care se obţine suma minimă s."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ n ≤ 63365</code></li>\n\t<li>Pentru fiecare valoare <code>n</code> citită se poate construi în modul descris în enunţ o piramidă în trepte cu n camere</li>\n\t<li><code>1 ≤ c</code><sub><code>1</code></sub><code>, c</code><sub><code>2</code></sub><code>,…, c</code><sub><code>n</code></sub><code> &lt;100</code></li>\n\t<li>Dacă există mai multe drumuri ce trec prin toate nivelurile piramidei şi pentru care se obţine suma minimă <code>s</code>, atunci drumul ales va fi cel mai mic drum din punct de vedere lexicografic.</li>\n\t<li>Se acordă:\n\t<ul>\n\t\t<li>10% din punctaj pentru determinarea corectă a numărului <code>m</code> de niveluri ale piramidei</li>\n\t\t<li>30% din punctaj pentru determinarea corectă a sumei minime <code>s</code></li>\n\t\t<li>60% din punctaj pentru determinarea corectă a drumului cerut.</li>\n\t</ul></li>\n\t</ul>",
+      "text": "1 ≤ n ≤ 63365 Pentru fiecare valoare n citită se poate construi în modul descris în enunţ o piramidă în trepte cu n camere 1 ≤ c1, c2,…, cn <100 Dacă există mai multe drumuri ce trec prin toate nivelurile piramidei şi pentru care se obţine suma minimă s, atunci drumul ales va fi cel mai mic drum din punct de vedere lexicografic. Se acordă: 10% din punctaj pentru determinarea corectă a numărului m de niveluri ale piramidei 30% din punctaj pentru determinarea corectă a sumei minime s 60% din punctaj pentru determinarea corectă a drumului cerut."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>suma5.in</code></p><pre>14\n7 8 4 5 5 8 4 2 7 7 8 3 1 6</pre><p><code>suma5.out</code></p><pre>3 13\n1 3 8</pre>",
+      "text": "suma5.in14 7 8 4 5 5 8 4 2 7 7 8 3 1 6suma5.out3 13 1 3 8"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p>Piramida conţine <code>14</code> camere dispuse pe <code>m=3</code> trei niveluri. Nivelurile conţin valorile:</p><p><img alt=\"\" src=\"/resurse/9dc152/p-1051-1075/suma5-2.png\"></p><p>Suma minimă <code>s</code> a tuturor costurilor aferente finisării şi decorării camerelor de un drum ce trece prin toate cele <code>3</code> niveluri ale piramidei este <code>13</code>. Există mai multe drumuri pentru care se poate obţine suma minimă: <code>[1,3,8]</code>, <code>[1,4,13]</code>, <code>[1,5,13]</code>. Din punct de vedere lexicografic, cel mai mic drum dintre aceste drumuri este: <code>[1,3,8]</code>.</p>",
+      "text": "Piramida conţine 14 camere dispuse pe m=3 trei niveluri. Nivelurile conţin valorile:Suma minimă s a tuturor costurilor aferente finisării şi decorării camerelor de un drum ce trece prin toate cele 3 niveluri ale piramidei este 13. Există mai multe drumuri pentru care se poate obţine suma minimă: [1,3,8], [1,4,13], [1,5,13]. Din punct de vedere lexicografic, cel mai mic drum dintre aceste drumuri este: [1,3,8]."
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "1 ≤ n ≤ 63365",
+    "Pentru fiecare valoare n citită se poate construi în modul descris în enunţ o piramidă în trepte cu n camere",
+    "1 ≤ c1, c2,…, cn <100",
+    "Dacă există mai multe drumuri ce trec prin toate nivelurile piramidei şi pentru care se obţine suma minimă s, atunci drumul ales va fi cel mai mic drum din punct de vedere lexicografic.",
+    "Se acordă: 10% din punctaj pentru determinarea corectă a numărului m de niveluri ale piramidei 30% din punctaj pentru determinarea corectă a sumei minime s 60% din punctaj pentru determinarea corectă a drumului cerut.",
+    "10% din punctaj pentru determinarea corectă a numărului m de niveluri ale piramidei",
+    "30% din punctaj pentru determinarea corectă a sumei minime s",
+    "60% din punctaj pentru determinarea corectă a drumului cerut."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qefd52d4a13.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1051-1075/suma5.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1051-1075-suma5-png.png",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1051-1075/suma5-1.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1051-1075-suma5-1-png.png",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-1051-1075/suma5-2.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1051-1075-suma5-2-png.png",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "11",
+    "intrare/ieșire": "suma5.in / suma5.out",
+    "limită timp": "0.2 secunde",
+    "limită memorie": "2 MB / 2 MB",
+    "sursa problemei": "OJI 2011, Clasele XI-XII",
+    "autor": "Carmen Minca",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.2,
+  "memoryLimitMb": 2,
+  "author": "Carmen Minca",
+  "sourceAttribution": "OJI 2011, Clasele XI-XII",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1068/suma5"
+}

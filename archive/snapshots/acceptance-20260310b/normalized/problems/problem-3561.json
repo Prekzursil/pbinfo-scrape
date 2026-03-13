@@ -1,0 +1,305 @@
+{
+  "id": 3561,
+  "slug": "playfair",
+  "name": "Playfair",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3561/playfair",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 10,
+      "name": "Şiruri de caractere",
+      "slug": "iruri-de-caractere",
+      "href": "/?pagina=probleme-lista&tag=10"
+    },
+    {
+      "id": 84,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=84"
+    }
+  ],
+  "tags": [
+    "Criptografie",
+    "Tablouri bidimensionale",
+    "Siruri de caractere"
+  ],
+  "sections": [
+    {
+      "title": "Playfair",
+      "html": "<p>Cifrul <code>Playfair</code> este un cifru care folosește o matrice <code>5x5</code> care conţine literele alfabetului englez. Matricea are proprietatea că după coloana <code>1</code> urmează coloana <code>2</code>, după coloana <code>2</code> urmează coloana <code>3</code> … după coloana <code>5</code> urmează coloana <code>1</code> iar după linia <code>1</code> urmează linia <code>2</code>, după linia <code>2</code> urmează linia <code>3</code> … după linia <code>5</code> urmează linia <code>1</code>.<br>\nCifrul funcţionează așa:<br>\n</p><ul>\n\t<li>Se citește un mesaj și apoi grupăm literele <code>2</code> câte <code>2</code>.\n Pentru fiecare <code>2</code> litere:</li>\n\t<li>căutăm literele în matrice și le reținem linia și coloana pe care se află</li>\n\t<li>dacă literele sunt identice atunci înlocuim a doua literă cu litera care lipsește din matricea <code>5x5</code></li>\n\t<li>dacă prima literă se află pe linia <code>a</code> și coloana <code>b</code> iar a doua literă se află pe linia <code>c</code> și coloana <code>d</code> atunci avem următoarele cazuri:\n\t<ul>\n\t\t<li>dacă <code>a</code> este diferit de <code>c</code> și <code>b</code> este diferit de <code>d</code> atunci se înlocuiesc cu literele de pe linia <code>a</code> și coloana <code>d</code> și linia <code>c</code> și coloana <code>b</code> din matrice.</li>\n\t\t<li>dacă <code>a</code> este egal cu <code>c</code> (literele se află pe aceeasi linie) atunci se înlocuiesc cu literele de pe coloana următoare</li>\n\t\t<li>dacă <code>b</code> este egal cu <code>d</code> (literele se află pe aceeasi coloana) atunci se înlocuiesc cu literele de pe linia următoare</li>\n\t</ul></li>\n\t</ul><p></p>",
+      "text": "Cifrul Playfair este un cifru care folosește o matrice 5x5 care conţine literele alfabetului englez. Matricea are proprietatea că după coloana 1 urmează coloana 2, după coloana 2 urmează coloana 3 … după coloana 5 urmează coloana 1 iar după linia 1 urmează linia 2, după linia 2 urmează linia 3 … după linia 5 urmează linia 1. Cifrul funcţionează așa: Se citește un mesaj și apoi grupăm literele 2 câte 2. Pentru fiecare 2 litere: căutăm literele în matrice și le reținem linia și coloana pe care se află dacă literele sunt identice atunci înlocuim a doua literă cu litera care lipsește din matricea 5x5 dacă prima literă se află pe linia a și coloana b iar a doua literă se află pe linia c și coloana d atunci avem următoarele cazuri: dacă a este diferit de c și b este diferit de d atunci se înlocuiesc cu literele de pe linia a și coloana d și linia c și coloana b din matrice. dacă a este egal cu c (literele se află pe aceeasi linie) atunci se înlocuiesc cu literele de pe coloana următoare dacă b este egal cu d (literele se află pe aceeasi coloana) atunci se înlocuiesc cu literele de pe linia următoare"
+    },
+    {
+      "title": "Cerință",
+      "html": "<p>\tDându-se un număr <code>c</code>, o matrice <code>5x5</code> și un mesaj:</p><ul>\n\t<li>pentru <code>c=1</code> atunci mesajul se va cripta;</li>\n\t<li>pentru <code>c=2</code> atunci mesajul se va decripta;</li>\n</ul>",
+      "text": "Dându-se un număr c, o matrice 5x5 și un mesaj: pentru c=1 atunci mesajul se va cripta; pentru c=2 atunci mesajul se va decripta;"
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>playfair.in</code> conține pe prima linie numărul <code>c</code>, pe a doua linie o matrice <code>5x5</code> cu litere iar pe ultima linie se va citi mesajul.</p>",
+      "text": "Fișierul de intrare playfair.in conține pe prima linie numărul c, pe a doua linie o matrice 5x5 cu litere iar pe ultima linie se va citi mesajul."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>playfair.out</code> va conține mesajul criptat sau decriptat în funcție de caz.</p>",
+      "text": "Fișierul de ieșire playfair.out va conține mesajul criptat sau decriptat în funcție de caz."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ lungimea mesajului ≤ 10000</code></li>\n\t<li>mesajul are un număr par de litere</li>\n</ul>",
+      "text": "1 ≤ lungimea mesajului ≤ 10000 mesajul are un număr par de litere"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>playfair.in</code></p><pre>1\np l a y f\ni r e x m\nb c d g h\nk n o q s\nt u v w z\nhidethegoldinthetrexestump</pre><p><code>playfair.out</code></p><pre>bmodzbxdnabekudmuixmmouvif</pre>",
+      "text": "playfair.in1 p l a y f i r e x m b c d g h k n o q s t u v w z hidethegoldinthetrexestumpplayfair.outbmodzbxdnabekudmuixmmouvif"
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<pre>2\np l a y f\ni r e x m\nb c d g h\nk n o q s\nt u v w z\nbmodzbxdnabekudmuixmmouvif</pre><p><code>playfair.out</code></p><pre>hidethegoldinthetrexestump</pre>",
+      "text": "2 p l a y f i r e x m b c d g h k n o q s t u v w z bmodzbxdnabekudmuixmmouvifplayfair.outhidethegoldinthetrexestump"
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "1 ≤ lungimea mesajului ≤ 10000",
+    "mesajul are un număr par de litere"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q6349ceba0c.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "PARMI NOUS (traianflorianalin)",
+    "clasa": "10",
+    "intrare/ieșire": "playfair.in / playfair.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "cifrul Playfair",
+    "autor": "Traian Florian Alin Moldoveanu",
+    "dificultate": "dificilă"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "author": "Traian Florian Alin Moldoveanu",
+  "sourceAttribution": "cifrul Playfair",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3561/playfair"
+}

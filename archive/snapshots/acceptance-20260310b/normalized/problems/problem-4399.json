@@ -1,0 +1,315 @@
+{
+  "id": 4399,
+  "slug": "fetze",
+  "name": "Fetze",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4399/fetze",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 46,
+      "name": "Tablouri bidimensionale (matrice)",
+      "slug": "tablouri-bidimensionale-matrice",
+      "href": "/?pagina=probleme-lista&tag=46"
+    },
+    {
+      "id": 58,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=58"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p> Se dă o matrice binară de dimensiuni \\(n\\times m\\). Determinați numărul de cvadruplete \\((r_1,r_2,c_1,c_2)\\) care respectă următoarele condiții:<br>\n</p><ul>\n\t<li>\\(1\\le r_1 &lt; r_2\\le N\\) și \\(1\\le c_1 &lt; c_2\\le M\\).</li>\n\t<li>Celulele \\((r_1,c_1)\\) și \\((r_1,c_2)\\) conțin valoarea \\(1\\).</li>\n\t<li>Celulele \\((r_2,c_1)\\), \\((r_2,c_1+1)\\), …, \\((r_2,c_2)\\) conțin toate valoarea \\(1\\).</li><br>\n</ul><p></p>",
+      "text": "Se dă o matrice binară de dimensiuni \\(n\\times m\\). Determinați numărul de cvadruplete \\((r_1,r_2,c_1,c_2)\\) care respectă următoarele condiții: \\(1\\le r_1 < r_2\\le N\\) și \\(1\\le c_1 < c_2\\le M\\). Celulele \\((r_1,c_1)\\) și \\((r_1,c_2)\\) conțin valoarea \\(1\\). Celulele \\((r_2,c_1)\\), \\((r_2,c_1+1)\\), …, \\((r_2,c_2)\\) conțin toate valoarea \\(1\\)."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie se vor afla valorile \\(n\\) și \\(m\\) (dimensiunile tablei). Următoarele \\(n\\) linii  descriu matricea. Fiecare va conține \\(m\\) valori de \\(0\\) sau \\(1\\). A \\(c\\)-a valoare de pe a \\(r\\)-a dintre aceste linii reprezintă celula \\((r,c)\\).</p>",
+      "text": "Pe prima linie se vor afla valorile \\(n\\) și \\(m\\) (dimensiunile tablei). Următoarele \\(n\\) linii descriu matricea. Fiecare va conține \\(m\\) valori de \\(0\\) sau \\(1\\). A \\(c\\)-a valoare de pe a \\(r\\)-a dintre aceste linii reprezintă celula \\((r,c)\\)."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Pe prima linie se va afișa numărul de cvadruplete care respectă condițiile.</p>",
+      "text": "Pe prima linie se va afișa numărul de cvadruplete care respectă condițiile."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li>Pentru toate testele, se respectă \\(1 \\le n\\cdot m \\le 10^5\\).</li>\n\t<li>Subtask 1, <code>20p</code>: \\(n,m \\le 40\\)</li>\n\t<li>Subtask 2, <code>30p</code>: \\(n,m \\le 100\\)</li>\n\t<li>Subtask 3, <code>20p</code>: \\(n,m \\le 300\\)</li>\n\t<li>Subtask 4, <code>30p</code>: restricțiile inițiale</li>\n</ul>",
+      "text": "Pentru toate testele, se respectă \\(1 \\le n\\cdot m \\le 10^5\\). Subtask 1, 20p: \\(n,m \\le 40\\) Subtask 2, 30p: \\(n,m \\le 100\\) Subtask 3, 20p: \\(n,m \\le 300\\) Subtask 4, 30p: restricțiile inițiale"
+    },
+    {
+      "title": "Exemplu 1:",
+      "html": "<p><strong>Intrare</strong></p><pre>3 3\n1 0 1\n0 0 0\n1 1 1</pre><p><strong>Ieșire</strong></p><pre>1</pre><h3>Explicație</h3><p>Singurul cvadruplet este format din \\(r_1=1\\), \\(r_2=3\\), \\(c_1=1\\) și \\(c_2=3\\). Celulele \\((1,1)\\), \\((1,3)\\), \\((3,1)\\), \\((3,2)\\) și \\((3,3)\\) conțin toate valoarea \\(1\\), deci condiția este respectată.</p>",
+      "text": "Intrare3 3 1 0 1 0 0 0 1 1 1Ieșire1ExplicațieSingurul cvadruplet este format din \\(r_1=1\\), \\(r_2=3\\), \\(c_1=1\\) și \\(c_2=3\\). Celulele \\((1,1)\\), \\((1,3)\\), \\((3,1)\\), \\((3,2)\\) și \\((3,3)\\) conțin toate valoarea \\(1\\), deci condiția este respectată."
+    },
+    {
+      "title": "Exemplu 2:",
+      "html": "<p><strong>Intrare</strong></p><pre>3 4\n1 0 1 1\n1 1 1 0\n1 1 1 1</pre><p><strong>Ieșire</strong></p><pre>7</pre><h3>Explicație</h3><p>Celulele de valoare \\(1\\) din cele \\(7\\) cvadruplete sunt reprezentate mai jos:</p><p><img alt=\"\" src=\"/resurse/9dc152/p-2600/4399-fetze.png\" style=\"height:200px;\"></p>",
+      "text": "Intrare3 4 1 0 1 1 1 1 1 0 1 1 1 1Ieșire7ExplicațieCelulele de valoare \\(1\\) din cele \\(7\\) cvadruplete sunt reprezentate mai jos:"
+    }
+  ],
+  "examples": [
+    {
+      "input": "3 3\n1 0 1\n0 0 0\n1 1 1",
+      "output": "1",
+      "explanation": "Singurul cvadruplet este format din \\(r_1=1\\), \\(r_2=3\\), \\(c_1=1\\) și \\(c_2=3\\). Celulele \\((1,1)\\), \\((1,3)\\), \\((3,1)\\), \\((3,2)\\) și \\((3,3)\\) conțin toate valoarea \\(1\\), deci condiția este respectată."
+    },
+    {
+      "input": "3 4\n1 0 1 1\n1 1 1 0\n1 1 1 1",
+      "output": "7",
+      "explanation": "Celulele de valoare \\(1\\) din cele \\(7\\) cvadruplete sunt reprezentate mai jos:"
+    }
+  ],
+  "constraints": [
+    "Pentru toate testele, se respectă \\(1 \\le n\\cdot m \\le 10^5\\).",
+    "Subtask 1, 20p: \\(n,m \\le 40\\)",
+    "Subtask 2, 30p: \\(n,m \\le 100\\)",
+    "Subtask 3, 20p: \\(n,m \\le 300\\)",
+    "Subtask 4, 30p: restricțiile inițiale"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q11daa10b8b.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/9dc152/p-2600/4399-fetze.png",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-2600-4399-fetze-png.png",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Todoran Alexandru (alextodoran)",
+    "clasa": "9",
+    "intrare/ieșire": "tastatură / ecran",
+    "limită timp": "1 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "Concursul Județean de Informatică \"Aurel Vlaicu\" 2023, clasele 11-12",
+    "autor": "Alexandru Todoran",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 1,
+  "memoryLimitMb": 64,
+  "author": "Alexandru Todoran",
+  "sourceAttribution": "Concursul Județean de Informatică \"Aurel Vlaicu\" 2023, clasele 11-12",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4399/fetze"
+}

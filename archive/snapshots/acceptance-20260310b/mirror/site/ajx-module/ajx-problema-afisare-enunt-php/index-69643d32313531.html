@@ -1,0 +1,97 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2151"><article id="enunt">
+			<p><em>SLang</em> este o versiune a aplicației <em>Scratch</em> care pune la dispoziție șapte instrucțiuni de tip <code>I1</code>, <code>I2</code>, <code>I3</code>, <code>I4</code>, <code>I5</code>, <code>I6</code>, <code>I7</code> prezentate în imaginea de mai jos.</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1700-2151-slang-1-png.png"></p>
+
+<p>Un program corect este o succesiune de instrucţiuni care respectă următoarele reguli:</p>
+
+<p>1. Începe cu o instrucțiune de tip <code>I1</code> şi se termină cu o instrucțiune de tip <code>I7</code>.<br>
+2. Între instrucţiunea de tip <code>I1</code> şi instrucţiunea de tip <code>I7</code> vor exista una, două sau mai multe instrucţiuni de tipurile <code>I2</code>, <code>I3</code>, <code>I4</code>, <code>I5</code> sau <code>I6</code>, fără a utiliza două instrucţiuni de acelaşi tip; fiecare dintre aceste instrucţiuni poate să conţină alte instrucţiuni, conform cu regulile specificate.<br>
+3. Corpul unei instrucțiuni de tip <code>I4</code> poate conține una sau două instrucțiuni de mișcare (adică de tip <code>I2</code> sau <code>I3</code>) și nu poate conține instrucțiuni de alt tip. De exemplu:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1700-2151-slang-2-png.png"></p>
+
+<p>4. Fiecare dintre cele două ramuri ale unei instrucțiuni de tip <code>I5</code> (ramura <code>daca</code> şi ramura <code>daca nu</code>) poate conține una sau două instrucțiuni de tip <code>I2</code> sau <code>I3</code> și nu poate conține instrucțiuni de alt tip.<br>
+5. Corpul unei instrucțiuni de tip <code>I6</code> poate conține una, două sau mai multe instrucţiuni de tipurile <code>I2</code>, <code>I3</code>, <code>I4</code>, <code>I5</code> sau <code>I6</code>, fără a utiliza două instrucţiuni de acelaşi tip; similar, fiecare dintre aceste instrucţiuni poate să conţină alte instrucţiuni, conform cu regulile specificate.</p>
+
+<p><em>Nivelul de imbricare</em> al unui program corect va fi egal cu numărul de instrucţiuni de tip <code>I6</code> existente în program.</p>
+
+<table class="table">
+		<tbody><tr>
+			<td> Exemplu de program corect cu trei instrucțiuni de tip <code>I6</code> (program cu nivelul de imbricare <code>3</code>). </td>
+			<td> Exemplu de program incorect deoarece o instrucțiune de tip <code>I5</code> nu poate conține o instrucțiune de tip <code>I6</code>. </td>
+		</tr>
+		<tr>
+			<td> <img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1700-2151-slang-3-png.png"> </td>
+			<td> <img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1700-2151-slang-4-png.png"> </td>
+		</tr>
+</tbody></table>
+
+<h1>Cerința</h1>
+
+<p>Dat fiind numărul natural <code>K</code>, reprezentând nivelul de imbricare, scrieţi un program care să rezolve următoarele cerinţe:</p>
+
+<ol>
+	<li>determină numărul de programe corecte distincte cu nivelul de imbricare <code>K</code>;</li>
+	<li>determină numărul minim de instrucțiuni și respectiv numărul maxim de instrucțiuni ce pot exista într-un program corect cu nivel de imbricare <code>K</code>.</li>
+</ol>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>slang.in</code> conține pe prima linie numărul <code>c</code> reprezentând cerinţa care trebuie să fie rezolvată (1 sau 2). Pe cea de a doua linie se află numărul natural <code>K</code>, reprezentând nivelul de imbricare.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă <code>c=1</code>, atunci se va rezolva numai cerința 1, caz în care pe prima linie a fișierului <code>slang.out</code> va fi scris un număr natural reprezentând ultimele șase cifre ale numărului de programe corecte distincte care au nivelul de imbricare <code>K</code>.</p>
+
+<p>Dacă <code>c=2</code>, atunci se va rezolva numai cerința <code>2</code>. În acest caz, fișierul de ieșire <code>slang.out</code> va conține pe prima linie două numere naturale separate printr-un spațiu, reprezentând numărul minim de instrucțiuni, respectiv numărul maxim de instrucțiuni ale unui program corect cu nivel de imbricare <code>K</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>0 ≤ K ≤ 1000</code></li>
+	<li>Două programe sunt distincte dacă în succesiunile de instrucţiuni corespunzătoare există cel puţin o poziţie pe care se află instrucţiuni de tipuri diferite.</li>
+	<li>Se garantează că, pentru datele de test, prima dintre cele <code>6</code> cifre cerute, este nenulă.</li>
+	<li>Pentru rezolvarea corectă a fiecărei cerinţe se acordă 50 de puncte.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>slang.in</code></p>
+
+<pre>1
+0</pre>
+
+<p><code>slang.out</code></p>
+
+<pre>8674</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerinţa este 1.</p>
+
+<p>Există <code>8674</code> de programe corecte distincte cu nivelul de imbricare <code>0</code>.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>slang.in</code></p>
+
+<pre>2
+0</pre>
+
+<p><code>slang.out</code></p>
+
+<pre>3  12</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerinţa este 2.</p>
+
+<p>Numărul minim de instrucţiuni dintr-un program corect cu nivelul de imbricare <code>0</code> este <code>3</code>. Un exemplu de astfel de program este:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1700-2151-slang-5-png.png"></p>
+
+<p>Numărul maxim de instrucţiuni dintr-un program corect cu nivelul de imbricare <code>0</code> este <code>12</code>. Un exemplu de astfel de program este:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1700-2151-slang-6-png.png"></p>		</article>
+		</body></html>

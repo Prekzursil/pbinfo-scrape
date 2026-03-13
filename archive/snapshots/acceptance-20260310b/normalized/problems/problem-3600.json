@@ -1,0 +1,300 @@
+{
+  "id": 3600,
+  "slug": "numbers-tree",
+  "name": "numbers_tree",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3600/numbers-tree",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 65,
+      "name": "Structuri de date arborescente",
+      "slug": "structuri-de-date-arborescente",
+      "href": "/?pagina=probleme-lista&tag=65"
+    },
+    {
+      "id": 154,
+      "name": "Arbori de intervale",
+      "slug": "arbori-de-intervale",
+      "href": "/?pagina=probleme-lista&tag=154"
+    }
+  ],
+  "tags": [
+    "Arbori de intervale",
+    "ciurul lui Eratostene"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Se dă un șir <code>a</code> de <code>n</code> numere naturale nenule strict mai mari decât <code>1</code>, indexat de la <code>1</code>. Asupra acestui șir se aplică <code>3</code> tipuri de operații:<br>\n</p><ul>\n\t<li><code>1 st dr val</code> – toate valorile <code>a[i]</code> cu <code>i</code> din intervalul <code>[st, dr]</code> devin egale cu <code>val</code>;</li>\n\t<li><code>2 st dr</code> – se cere să se afle câte elemente ale șirului <code>a</code> care au indicii aflați în intervalul <code>[st, dr]</code> sunt numere compuse(un număr natural este compus dacă are cel puțin <code>3</code> divizori);</li>\n\t<li><code>3 st dr</code> – se cere să se afișeze lungimea cele mai lungi secvențe de numere prime alcătuită exclusiv din elemente ale șirului care au indicii aflați în intervalul <code>[st, dr]</code>(o secvență a unui șir este alcătuită din elemente aflate poziții consecutive).</li><br>\n</ul><p></p><p>Dându-se <code>Q</code> operații, să se raspundă în ordine la cele de tip <code>2</code> și <code>3</code>.</p>",
+      "text": "Se dă un șir a de n numere naturale nenule strict mai mari decât 1, indexat de la 1. Asupra acestui șir se aplică 3 tipuri de operații: 1 st dr val – toate valorile a[i] cu i din intervalul [st, dr] devin egale cu val; 2 st dr – se cere să se afle câte elemente ale șirului a care au indicii aflați în intervalul [st, dr] sunt numere compuse(un număr natural este compus dacă are cel puțin 3 divizori); 3 st dr – se cere să se afișeze lungimea cele mai lungi secvențe de numere prime alcătuită exclusiv din elemente ale șirului care au indicii aflați în intervalul [st, dr](o secvență a unui șir este alcătuită din elemente aflate poziții consecutive). Dându-se Q operații, să se raspundă în ordine la cele de tip 2 și 3."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>numbers_tree.in</code> conține pe prima linie numerele <code>n</code> și <code>Q</code>, reprezentând numărul de elemente ale șirului <code>a</code>, respectiv numărul de operații, pe a doua linie <code>n</code> numere naturale separate prin spații reprezentând elementele șirului inițial, iar pe următoarele <code>Q</code> linii sunt descrise operațiile.</p>",
+      "text": "Fișierul de intrare numbers_tree.in conține pe prima linie numerele n și Q, reprezentând numărul de elemente ale șirului a, respectiv numărul de operații, pe a doua linie n numere naturale separate prin spații reprezentând elementele șirului inițial, iar pe următoarele Q linii sunt descrise operațiile."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>numbers_tree.out</code> va conține pe câte o linie răspunsurile la operațiile de tip <code>2</code> și <code>3</code> în ordinea în care acestea apar în fișierul de intrare.</p>",
+      "text": "Fișierul de ieșire numbers_tree.out va conține pe câte o linie răspunsurile la operațiile de tip 2 și 3 în ordinea în care acestea apar în fișierul de intrare."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ n, Q ≤ 100.000</code></li>\n\t<li><code>2 ≤ a[i], val ≤ 1.000.000</code></li>\n\t<li><code>1 ≤ st ≤ dr ≤ n</code></li>\n</ul>",
+      "text": "1 ≤ n, Q ≤ 100.000 2 ≤ a[i], val ≤ 1.000.000 1 ≤ st ≤ dr ≤ n"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>numbers_tree.in</code></p><pre>7 7\n2 3 4 5 6 7 8\n2 1 7\n3 1 7\n1 2 5 4\n2 2 5\n3 2 5\n1 2 4 3\n3 1 6</pre><p><code>numbers_tree.out</code></p><pre>3\n2\n4\n0\n4</pre><h3>Explicație</h3><p>Pentru <code>2 1 7</code> răspunsul este <code>3</code>, deoarece în șir există la momentul respectiv <code>3</code> numere compuse: <code>4 6 8</code><br>\nPentru <code>3 1 7</code> răspunsul este <code>2</code>, deoarece la momentul respectiv cea mai lungă secvență de numere prime din șir este <code>2 3</code>.<br>\nPentru <code>2 2 5</code> răspunsul este <code>4</code>, elemenetele din acest interval(<code>4</code> numere) au fost setate anterior la <code>4</code> care este număr compus. De asemenea, de aici se vede clar că răspunsul pentru <code>3 2 5</code> este <code>0</code> deoarece în acest interval de indici nu există elemente numere prime.<br>\nPentru <code>3 1 6</code> răspunsul este <code>4</code>, secevența de lungime maximă fiind <code>2 3 3 3</code>.</p>",
+      "text": "numbers_tree.in7 7 2 3 4 5 6 7 8 2 1 7 3 1 7 1 2 5 4 2 2 5 3 2 5 1 2 4 3 3 1 6numbers_tree.out3 2 4 0 4ExplicațiePentru 2 1 7 răspunsul este 3, deoarece în șir există la momentul respectiv 3 numere compuse: 4 6 8 Pentru 3 1 7 răspunsul este 2, deoarece la momentul respectiv cea mai lungă secvență de numere prime din șir este 2 3. Pentru 2 2 5 răspunsul este 4, elemenetele din acest interval(4 numere) au fost setate anterior la 4 care este număr compus. De asemenea, de aici se vede clar că răspunsul pentru 3 2 5 este 0 deoarece în acest interval de indici nu există elemente numere prime. Pentru 3 1 6 răspunsul este 4, secevența de lungime maximă fiind 2 3 3 3."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Pentru 2 1 7 răspunsul este 3, deoarece în șir există la momentul respectiv 3 numere compuse: 4 6 8 Pentru 3 1 7 răspunsul este 2, deoarece la momentul respectiv cea mai lungă secvență de numere prime din șir este 2 3. Pentru 2 2 5 răspunsul este 4, elemenetele din acest interval(4 numere) au fost setate anterior la 4 care este număr compus. De asemenea, de aici se vede clar că răspunsul pentru 3 2 5 este 0 deoarece în acest interval de indici nu există elemente numere prime. Pentru 3 1 6 răspunsul este 4, secevența de lungime maximă fiind 2 3 3 3."
+    }
+  ],
+  "constraints": [
+    "1 ≤ n, Q ≤ 100.000",
+    "2 ≤ a[i], val ≤ 1.000.000",
+    "1 ≤ st ≤ dr ≤ n"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qbd4f156fd4.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Lorintz Alexandru (Alex_tz307)",
+    "clasa": "11",
+    "intrare/ieșire": "numbers_tree.in / numbers_tree.out",
+    "limită timp": "0.2 secunde",
+    "limită memorie": "8 MB / 4 MB",
+    "sursa problemei": "-",
+    "autor": "Alexandru Lorintz",
+    "dificultate": "dificilă"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.2,
+  "memoryLimitMb": 8,
+  "author": "Alexandru Lorintz",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3600/numbers-tree"
+}

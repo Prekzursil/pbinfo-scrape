@@ -1,0 +1,97 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1971"><article id="enunt">
+			<p>Locuitorii planetei Aritmo au hotărât ca în celebrul an 2012 să le explice pământenilor metoda <strong>plus</strong> de adunare a numerelor naturale pe planeta lor. La fel ca și planetele, înainte de adunare, numerele se aliniază astfel încât să se obțină cât mai multe cifre egale pe aceleași poziții. Cifrele egale, astfel obținute, se elimină din cele două numere. Pentru a obține rezultatul final, se adună  cele două numerele deplasate, obținute după eliminare, ca în exemplu. </p>
+
+<p><strong>Exemplu:</strong> Numerele <code>18935</code> și <code>85352</code> se aliniază ca în figura de mai jos. După eliminare se obțin numerele <code>19</code> și <code>52</code> care se adună deplasate, pentru a obține rezultatul final. Așadar <code>18935 plus 85352=242</code>.</p>
+
+<pre>18935 plus    19 +
+ 85352         52
+              ---
+              242</pre>
+
+
+<p>Dacă există mai multe posibilități de a alinia numerele astfel încât să se elimine același număr maxim de cifre, atunci numerele sunt aliniate astfel încât, după eliminare şi adunarea numerelor după metoda descrisă, să se obțină o valoare cât mai mare.</p>
+
+<p><strong>Exemplu:</strong> <code>22331 plus 3322 = 33331</code> (există două moduri în care cele două numere pot fi aliniate astfel încât să se elimine un număr maxim de cifre, valoarea maximă obținându-se atunci când se elimină cele două cifre <code>2</code>)</p>
+
+<pre>22331      221 +       22331      331+
+  3322       22      3322       33
+           ----                 -----
+           2232                 33331</pre>
+
+<p>Dacă două numere <code>a</code> și <code>b</code> sunt identice sau nu au cifre comune atunci <code>a plus b=0</code>. Dacă  se elimină toate cifrele unui număr atunci rezultatul este dat de cifrele rămase în celălalt  număr. <strong>Exemple:</strong> <code>23 plus 523=5</code>, <code>562 plus 56=2</code>.</p>
+
+<p>Adunarea mai multor numere se face de la stânga la dreapta: se adună primele două numere conform metodei descrise mai sus, apoi rezultatul se adună cu al treilea, și așa mai departe. </p>
+
+<p>Într-o expresie în care se adună mai multe numere pot să apară paranteze rotunde. În evaluarea unei asemenea expresii, numită expresie parantezată, se efectuează mai întâi adunările din paranteze conform metodei descrise mai sus, parantezele fiind apoi înlocuite cu rezultatul adunărilor din paranteze.</p>
+
+<p>Se definește adâncimea <code>A­­­­d(E)</code> corespunzătoare unei expresii parantezate <code>E</code> astfel:</p>
+
+<ul>
+	<li>dacă expresia <code>E</code> nu conține paranteze, atunci adâncimea acesteia este <code>0</code>;</li>
+	<li>dacă expresia <code>E</code> este de forma <code>(F)</code>, atunci <code>A­­­­d(E)=1+A­­­­d(F)</code>;</li>
+	<li>dacă expresia <code>E</code> este de forma <code>E1 plus E2…plus Ek</code>, atunci <code>A­­­­d(E)=max(A­­­­d(E1), A­­­­d(E2),…, A­­­­d(Ek­­­))</code>.</li>
+</ul>
+
+<h1>Cerințe</h1>
+
+<p>Pentru a-i ajuta pe pământenii care doresc să învețe acest nou mod de adunare, scrieți un program care citește o expresie parantezată  și determină:</p>
+
+<p>a) adâncimea expresiei date;<br>
+b) valoarea acestei expresii.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>plus.in</code> conține pe prima linie un număr natural <code>n</code>. Pe următoarele <code>n</code> linii se află descrierea expresiei parantezate. Pe fiecare dintre aceste linii se află un  număr natural sau una dintre valorile <code>-1</code> sau <code>-2</code>. Valoarea <code>-1</code> reprezintă o paranteză rotundă deschisă  iar  valoarea <code>-2</code> reprezintă o paranteză rotundă închisă.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>plus.out</code> va conține:</p>
+
+<p>a) pe prima linie numărul natural ce reprezintă adâncimea expresiei date;<br>
+b) pe a doua linie se va scrie numărul natural ce reprezintă rezultatul evaluării expresiei date, adunarea numerelor făcându-se conform metodei descrise.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1&lt;n≤2000</code>;</li>
+	<li>fiecare dintre celelalte numere naturale din fișier are cel mult 9 cifre;</li>
+	<li>în fiecare paranteză se află cel puțin un număr natural;</li>
+	<li>dacă într-o paranteză se află un singur număr natural, atunci valoarea expresiei este egală cu valoarea numărului din paranteză;</li>
+	<li>pentru rezolvarea corectă a cerinței a) se acordă 20% din punctaj, iar pentru rezolvarea corectă a ambelor cerinţe se acordă punctajul integral.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>plus.in</code></p>
+
+<pre>12
+-1
+1343 
+-1
+234 
+4532 
+-2
+-2
+14091
+-1
+21
+2
+-2</pre>
+
+<p><code>plus.out</code></p>
+
+<pre>2
+4639</pre>
+
+<h3>Explicație</h3>
+
+<p>Expresia parantezată care trebuie evaluată este: </p>
+
+<p><code>(1343 plus (234 plus 4532)) plus 14091 plus (21 plus 2)=</code><br>
+<code>(1343 plus 45334)plus 14091 plus (21 plus 2) =</code><br>
+<code>4543 plus 14091 plus (21 plus 2)=</code><br>
+<code>4543 plus 14091 plus 1=</code><br>
+<code>46391 plus 1=4639</code></p>
+
+<p>Valoarea expresei este <code>4639</code>. Adâncimea expresiei este <code>2</code>.</p>		</article>
+		</body></html>

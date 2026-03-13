@@ -1,0 +1,68 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4806"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>Labirintul EscapeLight este reprezentat printr-o matrice de dimensiuni <code>N</code> x <code>M</code>, unde fiecare celulă reprezintă o cameră. Fiecare cameră poate fi de unul dintre următoarele tipuri:</p>
+
+<ul>
+	<li>Tipul <code>0</code>: cameră cu bec stins</li>
+	<li>Tipul <code>1</code>: cameră cu bec aprins</li>
+	<li>Tipul <code>2</code>: cameră fără bec</li>
+	<li>Tipul <code>3</code>: cameră echipată cu un întrerupător</li>
+</ul>
+
+<p>Camerele de tip <code>3</code> sunt conectate la becuri din alte camere de tip <code>0</code> sau <code>1</code>. Când cineva intră într-o cameră cu întrerupător, poate alege să apese sau nu întrerupătorul. Apăsarea întrerupătorului inversează starea tuturor becurilor conectate (becurile aprinse se sting, iar cele stinse se aprind).</p>
+
+<p>Andrei pornește dintr-o cameră aflată la coordonatele <code>(x_start, y_start)</code> și trebuie să ajungă la o cameră situată la coordonatele <code>(x_stop, y_stop)</code> deplasându-se exclusiv prin camere luminoase (adică, camerele în care becul este aprins). Scopul este de a găsi drumul de distanță minimă, măsurat în numărul de camere parcurse, ținând cont de posibilitatea de a utiliza întrerupătoarele.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>escapelight.in</code> conține prima linie două numere <code>N</code> și <code>M</code>, numărul de linii și coloane ale labirintului.</p>
+
+<p>Următoarele <code>N</code> linii conțin câte <code>M</code> numere separate prin spațiu, reprezentând tipul fiecărei camere: <code>0</code> — cameră cu bec stins, <code>1</code> — cameră cu bec aprins, <code>2</code> — cameră fără bec, <code>3</code> — cameră cu întrerupător.</p>
+
+<p>Pe următoarea linie, patru numere întregi <code>x_start</code>, <code>y_start</code>, <code>x_stop</code> și <code>y_stop</code>, reprezentând coordonatele de start și de final.<br>
+Următoarea linie conține două numere <code>K</code> și <code>P</code>, reprezentând numărul de conexiuni și numărul de camere cu întrerupătoare.<br>
+Fiecare din următoarele <code>K</code> linii conține câte patru numere <code>x_switch</code>, <code>y_switch</code>, <code>x_light</code> și <code>y_light</code>, indicând că întrerupătorul din camera <code>(x_switch, y_switch)</code> este conectat la becul din camera <code>(x_light, y_light)</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>escapelight.out</code> va conține pe prima linie un număr — numărul minim de camere parcurse pentru a ajunge de la poziția de start la poziția de destinație.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N, M ≤ 150</code></li>
+	<li><code>0 ≤ K ≤ 100.000</code></li>
+	<li><code>0 ≤ P ≤ 10</code></li>
+	<li><code>1 ≤ x_start, x_stop ≤ N, 1 ≤ y_start, y_stop ≤ M</code></li>
+	<li>Pentru fiecare conexiune: <code>1 ≤ x_switch, x_light ≤ N</code>, <code>1 ≤ y_switch, y_light ≤ M</code></li>
+	<li>Camerele de tip <code>3</code> sunt considerate mereu luminoase.</li>
+	<li>Se garantează existența unei soluții.</li>
+	<li>Pentru <code>10</code> puncte, <code>K = 0</code>.</li>
+	<li>Pentru <code>10</code> puncte, <code>K = 1</code>.</li>
+	<li>Pentru <code>10</code> puncte, <code>P = 1, K &gt; 1</code>.</li>
+	<li>Pentru <code>15</code> puncte, <code>P = 2</code>.</li>
+	<li>Pentru restul testelor se respectă restricțiile generale.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>escapelight.in</code></p>
+
+<pre>3 3
+1 0 2
+3 1 0
+2 0 1
+1 1 3 3
+2 1
+2 1 1 2
+2 1 3 2</pre>
+
+<p><code>escapelight.out</code></p>
+
+<pre>5</pre>
+
+<h3>Explicație</h3>
+
+<p>În exemplul de mai sus, Andrei trebuie să utilizeze întrerupătorul din camera <code>(2,1)</code> pentru a aprinde becurile din camerele <code>(1,2)</code> și <code>(3,2)</code>, permițându-i să găsească un drum minim de lungime <code>5</code>.</p>		</article>
+		</body></html>

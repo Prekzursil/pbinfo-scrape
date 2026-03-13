@@ -1,0 +1,142 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4849"><article id="enunt">
+			<h1>Enunț</h1>
+
+<p>Cu ocazia intrării în sezonul 8 al competiției de robotică <span class="caps">FTC</span>, Trixie se decide să își ajute echipa și să curețe terenul pe care au loc sesiunile de antrenament ale echipei. Tema sezonului acesta implică un teren de dimensiuni nemaivăzute până acum, care poate fi reprezentat sub forma de matrice cu <code>n</code> linii și <code>m</code> coloane, matrice cu <code>n * m</code> tile-uri (bucăți de teren cu o formă asemănătoare unei piese de puzzle) pe care Trixie scrie <code>n * m</code> numere naturale notate <code>t[i][j]</code>, câte unul pentru fiecare tile. De asemenea, este important să menționăm că terenul este prevăzut cu pereți laterali pe toate cele 4 laturi, astfel încât Trixie nu poate ieși din perimetrul terenului.</p>
+
+<p>Pentru a începe curățenia, aceasta folosește o dronă de ultimă generație care plutește deasupra terenului și efectuează <code>q</code> scanări. O scanare este descrisă prin colțul stânga-sus de coordonate <code>(is, js)</code> și colțul dreapta-jos de coordonate <code>(ij, jj)</code>. Din cauza unui defect, drona adaugă <code>1</code> la fiecare element din submatricea scanată.</p>
+
+<p><strong><span class="caps">ATENȚIE</span>!</strong> Trixie poate să greșească și să aleagă colțul dreapta-jos în afara terenului. În acest caz, scanarea se aplică doar pe intersecția cu terenul:<br>
+<code>i2 = min(ij, n)</code>, <code>j2 = min(jj, m)</code>;<br>
+se adaugă <code>1</code> tuturor celulelor <code>(i, j)</code> cu <code>is ≤ i ≤ i2</code> și <code>js ≤ j ≤ j2</code>;<br>
+dacă după tăiere rezultă un dreptunghi vid (adică <code>is &gt; i2</code> sau <code>js &gt; j2</code>), scanarea nu are efect.</p>
+
+<p>După ce toate scanările au fost aplicate, Trixie parcurge terenul și, pentru fiecare pereche de linii consecutive <code>(i, i+1)</code>, cu <code>1 ≤ i ≤ n-1</code>, procedează astfel: ia tile-urile <strong>alunecoase</strong> de pe linia <code>i</code> și tile-urile <strong>super-alunecoase</strong> de pe linia <code>i+1</code>, apoi înmulțește fiecare număr de pe tile-urile <strong>alunecoase</strong> cu fiecare număr de pe tile-urile <strong>super-alunecoase</strong>. Fiecare astfel de produs se numește <strong>nivel de alunecare</strong> și corespunde unui <strong><span class="caps">OMEGA</span>-tile</strong>.</p>
+
+<p>Un tile <strong>alunecos</strong> este definit ca un tile pe care este scris un număr <strong>prim</strong>. (Numerele <code>0</code> și <code>1</code> nu sunt prime.)</p>
+
+<p>Un tile <strong>super-alunecos</strong> este definit ca un tile pe care este scris un număr <strong>aprim</strong>. Numim un număr <strong>aprim</strong> dacă acesta se poate scrie <strong>exact</strong> ca produsul a <strong>două</strong> numere prime <strong>distincte</strong>: <code>x = p * q</code>, unde <code>p</code> și <code>q</code> sunt prime și <code>p ≠ q</code>. (De exemplu <code>6=2*3</code> și <code>10=2*5</code> sunt aprime, dar <code>4=2*2</code> nu este aprim, iar <code>12=2*2*3</code> nu este aprim.)</p>
+
+<p>Pentru o pereche de linii <code>(i, i+1)</code>, notăm cu <code>P</code> mulțimea valorilor prime din linia <code>i</code> și cu <code>S</code> mulțimea valorilor aprime din linia <code>i+1</code>. Trixie formează toate <strong><span class="caps">OMEGA</span>-tile-urile</strong> posibile, alegând orice <code>p ∈ P</code> și orice <code>s ∈ S</code>. Nivelul de alunecare este <code>p * s</code>.</p>
+
+<p><strong>Important:</strong> dacă există mai multe perechi <code>(p, s)</code> care dau același produs, acel produs apare de mai multe ori (se lucrează cu un multiset de produse).</p>
+
+<p>Trixie își pune <code>n - 1</code> întrebări (o întrebare pentru fiecare pereche de linii consecutive), de tipul:<br>
+<strong>„Care este nivelul de alunecare pentru al k-lea cel mai puțin alunecos <span class="caps">OMEGA</span>-tile?”</strong><br>
+(adică al <code>k</code>-lea produs în ordine crescătoare).</p>
+
+<h1>Cerința</h1>
+
+<p>Din pricina unei actualizări neșteptate ale sistemului pe care operează Trixie, aceasta uită de <strong><span class="caps">OMEGA</span>-tile-urile</strong> căutate. Aceasta vă roagă să scrieți un algoritm care:<br>
+aplică cele <code>q</code> scanări asupra matricei;<br>
+pentru fiecare pereche de linii consecutive <code>(i, i+1)</code>, cu <code>1 ≤ i ≤ n-1</code>, afișează răspunsul la întrebarea corespunzătoare.</p>
+
+<p>Dacă pentru o pereche de linii numărul de <strong><span class="caps">OMEGA</span>-tile-uri</strong> este insuficient (adică <code>k &gt; |P| * |S|</code>), se afișează <code>„-”</code>.</p>
+
+<p><strong>Caz special:</strong> dacă <code>n = 1</code> nu există nicio pereche de linii și deci nu există întrebări; în acest caz se afișează o singură linie cu textul <code>nu exista</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>"trixie2.in"</code> va conține pe prima linie <code>n</code> și <code>m</code> cu semnificația din enunț. Pe următoarele <code>n</code> linii se află matricea de <code>n * m</code> elemente. Pe următoarea linie se află <code>q</code> cu semnificația din enunț. Pe următoarele <code>q</code> linii se află <code>is, js, ij, jj</code>, însemnând că se scanează submatricea cu colțul stânga-sus <code>(is, js)</code> și colțul dreapta-jos <code>(ij, jj)</code>. Iar pe următoarele <code>n - 1</code> linii se citește câte un <code>k</code> (în ordine, pentru perechile <code>(1,2), (2,3), ..., (n-1,n)</code>).<br>
+p. Coordonatele sunt <code>1-indexate</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>"trixie2.out"</code>:<br>
+dacă <code>n = 1</code>, conține o singură linie: <code>nu exista</code><br>
+altfel, conține <code>n - 1</code> linii; pe linia <code>i</code> se află un singur număr sau <code>„-”</code> ce reprezintă răspunsul pentru întrebarea asociată perechii de linii <code>(i, i+1)</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<p><code>1 ≤ n ≤ 1000</code><br>
+<code>1 ≤ m ≤ 1000</code><br>
+<code>0 ≤ q ≤ 200 000</code><br>
+fiecare număr din matrice este <code>0 ≤ t[i][j] &lt; 1 000 000 000</code><br>
+pentru scanări: <code>1 ≤ is ≤ n</code>, <code>1 ≤ js ≤ m</code>, <code>is ≤ ij</code>, <code>js ≤ jj</code> (dar <code>ij</code> poate depăși <code>n</code> și/sau <code>jj</code> poate depăși <code>m</code>)<br>
+pentru fiecare pereche de linii se dă un <code>k</code> cu <code>1 ≤ k ≤ m * m + 1</code>; dacă <code>k</code> depășește numărul de <strong><span class="caps">OMEGA</span>-tiles</strong> se afișează <code>„-”</code><br>
+<strong>Atenție:</strong> răspunsurile pot depăși <code>2^31 - 1</code>, folosiți tipuri pe <strong>64 de biți</strong>.</p>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>trixie2.in</code></p>
+
+<pre>3 4
+3 5 7 9
+6 10 16 18
+2 3 4 5
+1
+2 4 3 4
+5
+6</pre>
+
+<p><code>trixie2.out</code></p>
+
+<pre>50
+-</pre>
+
+<h3>Explicație</h3>
+
+<pre>Valorile terenului după scanarea efectuată de dronă:
+3 5 7 9
+6 10 16 19
+2 3 4 6
+Pentru perechea (1,2):
+Valorile ordonate scrise pe tile-urile alunecoase (prime), respectiv super-alunecoase (aprime):
+3 5 7
+6 10
+Șirul ordonat cu nivelul de alunecare de pe OMEGA-tiles:
+18 30 30 42 50 70
+Al 5-lea cel mai puțin alunecos OMEGA-tile este cel cu nivelul de alunecare 50.
+Pentru perechea (2,3):
+Prime în linia 2: 19
+Aprime în linia 3: 6
+Există doar 1 OMEGA-tile, deci nu există al 6-lea; se afișează „-”.</pre>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>trixie2.in</code></p>
+
+<pre>5 6
+0 1 4 19 19 19
+19 26 0 1 2 2
+1 5 13 29 61 61
+7 11 0 6 24 24
+4 8 11 18 30 30
+3
+1 1 7 7
+1 1 7 7
+1 1 7 7
+1
+1
+1
+1</pre>
+
+<p><code>trixie2.out</code></p>
+
+<pre>66
+-
+-
+42</pre>
+
+<h3>Explicație</h3>
+
+<pre>Valorile terenului după scanări:
+3 4 7 22 22 22
+22 29 3 4 5 5
+4 8 16 32 64 64
+10 14 3 9 27 27
+7 11 14 21 33 33
+Pentru perechea (1,2):
+Tile-uri alunecoase (prime) în linia 1: 3 7
+Tile-uri super-alunecoase (aprime) în linia 2: 22
+Produsele posibile: 66 154
+Cel mai puțin alunecos este 66.
+Pentru perechea (2,3):
+În linia 3 nu există aprime, deci nu există OMEGA-tiles -&gt; „-”.
+Pentru perechea (3,4):
+În linia 3 nu există prime, deci nu există OMEGA-tiles -&gt; „-”.
+Pentru perechea (4,5):
+Prime în linia 4: 3
+Aprime în linia 5: 14 21 33 33
+Produsele: 42 63 99 99
+Cel mai puțin alunecos este 42.</pre>		</article>
+		</body></html>

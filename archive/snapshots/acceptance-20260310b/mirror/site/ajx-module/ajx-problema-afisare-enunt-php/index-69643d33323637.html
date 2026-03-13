@@ -1,0 +1,48 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3267"><article id="enunt">
+			<p>Există <code>N</code> candidați la alegerile prezidențiale. Fiecare dintre cei <code>N</code> candidați știe exact cu cine va vota. O persoană poate vota o singură altă persoană (se poate vota și pe sine). Scopul tău este să creezi confuzie între candidați. Pentru asta, ai dreptul să le interzici la cel mult <code>K</code> dintre candidați să participe. Atunci când un candidat este eliminat, toți candidații care ar fi votat cu el votează cu persoana cu care ar fi votat candidatul eliminat (deoarece au încredere în decizia sa). Dacă cel eliminat ar fi votat cu sine sau era <span class="caps">INDECIS</span>, toți cei care ar fi votat cu el devin <span class="caps">INDECIȘI</span>. Pe scurt, dacă <code>A</code> votează cu <code>B</code> și <code>B</code> votează cu <code>C</code>, după ce îl elimini pe <code>B</code>, <code>A</code> va vota cu <code>C</code>. Dacă <code>A</code> votează cu <code>B</code> și <code>B</code> votează cu <code>B</code>, după ce îl elimini pe <code>B</code>, <code>A</code> va deveni <span class="caps">INDECIS</span>. De asemenea, dacă <code>A</code> votează cu <code>B</code> și <code>B</code> este <span class="caps">INDECIS</span>, după ce îl elimini pe <code>B</code>, <code>A</code> va deveni <span class="caps">INDECIS</span>. Un candidat este considerat “decis” dacă NU este eliminat și NU este <span class="caps">INDECIS</span>.</p>
+
+<h1>Cerința</h1>
+
+<p>Pentru fiecare <code>K</code> de la <code>1</code> la <code>N</code>, se cere numărul minim de candidați “deciși” pe care îi putem avea dacă am elimina <code>K</code> dintre candidați.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului de intrare <code>politic.in</code> se va afla numărul natural <code>N</code>, reprezentând numărul de candidați. Urmează <code>N</code> linii. Pe linia <code>i + 1</code>, se va afla un număr natural, reprezentând candidatul cu care votează candidatul cu numărul <code>i</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>politic.out</code> va conține <code>N</code> linii. Pe linia <code>i</code> se va afișa un singur număr natural, reprezentând numărul minim de candidați deciși în cazul în care eliminăm <code>i</code> candidați.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 1000</code></li>
+	<li>Pentru teste în valoare de 30 puncte, <code>N ≤ 200</code></li>
+	<li>Candidații sunt indexați de la <code>1</code>.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>politic.in</code></p>
+
+<pre>6 
+2 
+6 
+2 
+5 
+5 
+5</pre>
+
+<p><code>politic.out</code></p>
+
+<pre>3 
+2 
+0 
+0 
+0 
+0</pre>
+
+<h3>Explicație</h3>
+
+<p>Eliminând candidatul <code>5</code>, candidații <code>4</code> și <code>6</code> devin indeciși, așa ca rămân doar <code>3</code> candidați deciși (<code>1</code>, <code>2</code> și <code>3</code>). Eliminând în continuare candidatul <code>6</code>, candidatul <code>2</code> devine indecis fiindcă <code>6</code> era indecis. Astfel, doar <code>1</code> și <code>3</code> rămân deciși. Eliminând nodul <code>2</code>, nu mai rămâne niciun candidat decis.</p>		</article>
+		</body></html>

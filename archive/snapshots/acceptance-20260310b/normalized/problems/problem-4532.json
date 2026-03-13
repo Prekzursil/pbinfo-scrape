@@ -1,0 +1,310 @@
+{
+  "id": 4532,
+  "slug": "sumofall",
+  "name": "SumOfAll",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4532/sumofall",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 116,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=116"
+    },
+    {
+      "id": 150,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=150"
+    }
+  ],
+  "tags": [
+    "Sume parțiale",
+    "Structuri de date",
+    "Algoritmul lui Mo",
+    "Arbori de intervale",
+    "Formula"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Se dă un vector de <code>N</code> numere naturale. Se dau de asemenea <code>Q</code> query-uri de forma <code>l r</code>, unde se cere suma tuturor subsecvențelor de elemente consecutive. Mai formal, pentru fiecare query <code>[l, r]</code>, se cere rezultatul funcției <code>F(l, r)</code> = \\( \\sum_{i=l}^{r} \\sum_{j=i}^{r}  \\) <code>S(i, j)</code>, unde <code>S(l, r)</code> este suma tuturor elementelor din secvența <code>[l, r]</code>.</p>",
+      "text": "Se dă un vector de N numere naturale. Se dau de asemenea Q query-uri de forma l r, unde se cere suma tuturor subsecvențelor de elemente consecutive. Mai formal, pentru fiecare query [l, r], se cere rezultatul funcției F(l, r) = \\( \\sum_{i=l}^{r} \\sum_{j=i}^{r} \\) S(i, j), unde S(l, r) este suma tuturor elementelor din secvența [l, r]."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li>Se recomanda folosirea <a href=\"https://www.geeksforgeeks.org/fast-io-for-competitive-programming/\">fastio</a></li>\n\t<li><code>1 ≤ N, Q ≤ 500.000</code></li>\n\t<li><code>0 ≤ A[i] ≤ 1.000.000.000</code></li>\n\t<li><code>1 ≤ l ≤ r ≤ N</code></li>\n\t<li>Deoarece răspunsurile sunt prea mari pentru a fi reprezentate de tipurile de date implicite din limbajul C++, se vor afișa modulo \\( {2}^{32}  \\)</li>\n</ul>",
+      "text": "Se recomanda folosirea fastio 1 ≤ N, Q ≤ 500.000 0 ≤ A[i] ≤ 1.000.000.000 1 ≤ l ≤ r ≤ N Deoarece răspunsurile sunt prea mari pentru a fi reprezentate de tipurile de date implicite din limbajul C++, se vor afișa modulo \\( {2}^{32} \\)"
+    },
+    {
+      "title": "Subtask-uri",
+      "html": "<ul>\n\t<li><code>20</code> puncte: <code>1 ≤ N, Q ≤ 500</code></li>\n\t<li><code>10</code> puncte: <code>1 ≤ N, Q ≤ 2.500</code></li>\n\t<li><code>20</code> puncte: <code>1 ≤ N, Q ≤ 50.000</code></li>\n\t<li><code>50</code> puncte: <code>1 ≤ N, Q ≤ 500.000</code></li>\n</ul>",
+      "text": "20 puncte: 1 ≤ N, Q ≤ 500 10 puncte: 1 ≤ N, Q ≤ 2.500 20 puncte: 1 ≤ N, Q ≤ 50.000 50 puncte: 1 ≤ N, Q ≤ 500.000"
+    },
+    {
+      "title": "Formatul input-ului",
+      "html": "<pre>N Q\nA[1] A[2] ... A[N]\nL[1] R[1]\nL[2] R[2]\n...\nL[Q] R[Q]</pre>",
+      "text": "N Q A[1] A[2] ... A[N] L[1] R[1] L[2] R[2] ... L[Q] R[Q]"
+    },
+    {
+      "title": "Formatul output-ului",
+      "html": "<pre>S[1]\nS[2]\n...\nS[Q]</pre>",
+      "text": "S[1] S[2] ... S[Q]"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><b>Intrare</b></p><pre>5 4\n5 3 2 4 2\n3 4\n3 5\n4 5\n1 5</pre><p><b>Iesire</b></p><pre>12\n28\n12\n109</pre><h3>Explicație</h3><p>Pentru primul query (secvența <code>[3, 4]</code>), suma este <code>2</code> + <code>4</code> + <code>2 + 4</code> = <code>12</code>.</p><p>Pentru al doilea query (secvența <code>[3, 5]</code>), suma este <code>2</code> + <code>4</code> + <code>2</code> + <code>2 + 4</code> + <code>4 + 2</code> + <code>2 + 4 + 2</code> = <code>28</code>.</p><p>Pentru al treilea query (secvența <code>[4, 5]</code>), suma este <code>4</code> + <code>2</code> + <code>4 + 2</code> = <code>12</code>.</p><p>Pentru al patrulea query (secvența <code>[1, 5]</code>), suma este <code>5</code> + <code>3</code> + <code>2</code> + <code>4</code> + <code>2</code> + <code>5 + 3</code> + <code>3 + 2</code> + <code>2 + 4</code> + <code>4 + 2</code> + <code>5 + 3 + 2</code> + <code>3 + 2 + 4</code> + <code>2 + 4 + 2</code> + <code>5 + 3 + 2 + 4</code> + <code>3 + 2 + 4 + 2</code> + <code>5 + 3 + 2 + 4 + 2</code> = <code>109</code>.</p>",
+      "text": "Intrare5 4 5 3 2 4 2 3 4 3 5 4 5 1 5Iesire12 28 12 109ExplicațiePentru primul query (secvența [3, 4]), suma este 2 + 4 + 2 + 4 = 12.Pentru al doilea query (secvența [3, 5]), suma este 2 + 4 + 2 + 2 + 4 + 4 + 2 + 2 + 4 + 2 = 28.Pentru al treilea query (secvența [4, 5]), suma este 4 + 2 + 4 + 2 = 12.Pentru al patrulea query (secvența [1, 5]), suma este 5 + 3 + 2 + 4 + 2 + 5 + 3 + 3 + 2 + 2 + 4 + 4 + 2 + 5 + 3 + 2 + 3 + 2 + 4 + 2 + 4 + 2 + 5 + 3 + 2 + 4 + 3 + 2 + 4 + 2 + 5 + 3 + 2 + 4 + 2 = 109."
+    }
+  ],
+  "examples": [
+    {
+      "input": "5 4\n5 3 2 4 2\n3 4\n3 5\n4 5\n1 5",
+      "output": "12\n28\n12\n109",
+      "explanation": "Pentru primul query (secvența [3, 4]), suma este 2 + 4 + 2 + 4 = 12."
+    }
+  ],
+  "constraints": [
+    "Se recomanda folosirea fastio",
+    "1 ≤ N, Q ≤ 500.000",
+    "0 ≤ A[i] ≤ 1.000.000.000",
+    "1 ≤ l ≤ r ≤ N",
+    "Deoarece răspunsurile sunt prea mari pentru a fi reprezentate de tipurile de date implicite din limbajul C++, se vor afișa modulo \\( {2}^{32} \\)"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qbd8be40f59.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Moldovan Robert (moldovan_robert_lol)",
+    "clasa": "11",
+    "intrare/ieșire": "tastatură / ecran",
+    "limită timp": "1.5 secunde",
+    "limită memorie": "128 MB / 8 MB",
+    "sursa problemei": "-",
+    "autor": "Robert Moldovan",
+    "dificultate": "dificilă"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 1.5,
+  "memoryLimitMb": 128,
+  "author": "Robert Moldovan",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4532/sumofall"
+}

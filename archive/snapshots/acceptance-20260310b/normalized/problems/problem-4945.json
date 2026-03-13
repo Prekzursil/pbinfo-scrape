@@ -1,0 +1,351 @@
+{
+  "id": 4945,
+  "slug": "ferma2",
+  "name": "ferma2",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4945/ferma2",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 45,
+      "name": "Vectori caracteristici / de frecventa",
+      "slug": "vectori-caracteristici-de-frecventa",
+      "href": "/?pagina=probleme-lista&tag=45"
+    }
+  ],
+  "tags": [
+    "generare submultimi"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Să se realizeze o repartizare a porcilor în 3 grupuri astfel încât mijlocul de transport să poată realiza trei drumuri până la piață, iar diferența de greutate dintre cele 3 transporturi să fie minimă.</p>",
+      "text": "Să se realizeze o repartizare a porcilor în 3 grupuri astfel încât mijlocul de transport să poată realiza trei drumuri până la piață, iar diferența de greutate dintre cele 3 transporturi să fie minimă."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>ferma.in</code> conține pe prima linie trei valori <code>C N G</code>, separate prin câte un spațiu, reprezentând cerința <code>C</code> (<code>1</code>, <code>2</code> sau <code>3</code>), numărul de porci și greutatea maximă permisă în remorcă. Următoarea linie conține <code>N</code> valori naturale nenule separate prin câte un spațiu, <code>g1 g2 ... gN</code>. reprezentând greutățile celor <code>N</code> porci.</p>",
+      "text": "Fișierul de intrare ferma.in conține pe prima linie trei valori C N G, separate prin câte un spațiu, reprezentând cerința C (1, 2 sau 3), numărul de porci și greutatea maximă permisă în remorcă. Următoarea linie conține N valori naturale nenule separate prin câte un spațiu, g1 g2 ... gN. reprezentând greutățile celor N porci."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Dacă cerința este <code>C = 1</code>, fișierul de ieșire <code>ferma.out</code> va conține pe prima linie trei numere naturale separate prin câte un spațiu, reprezentând sumele greutăților din cele 3 transporturi, scrise în ordine crescătoare. Dacă cerința este <code>C = 2</code>, fișierul de ieșire va conține pe prima linie <code>N</code> valori <code>1</code>, <code>2</code>, <code>3</code> indicând transportul din care face parte fiecare porc; în cazul în care există mai multe soluții se va afișa soluția minimă din punct de vedere lexicografic. Dacă cerința este <code>C = 3</code>, fișierul de ieșire va conține pe prima linie un sigur număr natural reprezentând diferența de greutate dintre cele 3 transporturi.</p>",
+      "text": "Dacă cerința este C = 1, fișierul de ieșire ferma.out va conține pe prima linie trei numere naturale separate prin câte un spațiu, reprezentând sumele greutăților din cele 3 transporturi, scrise în ordine crescătoare. Dacă cerința este C = 2, fișierul de ieșire va conține pe prima linie N valori 1, 2, 3 indicând transportul din care face parte fiecare porc; în cazul în care există mai multe soluții se va afișa soluția minimă din punct de vedere lexicografic. Dacă cerința este C = 3, fișierul de ieșire va conține pe prima linie un sigur număr natural reprezentând diferența de greutate dintre cele 3 transporturi."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>10 ≤ N ≤ 15</code></li>\n\t<li><code>10 ≤ G ≤ 40.000</code></li>\n\t<li><code>1 ≤ gi ≤ 10.000</code>, <code>1 ≤ i ≤ N</code></li>\n\t<li>Pentru toate testele există soluție</li>\n</ul>",
+      "text": "10 ≤ N ≤ 15 10 ≤ G ≤ 40.000 1 ≤ gi ≤ 10.000, 1 ≤ i ≤ N Pentru toate testele există soluție"
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>ferma.in</code></p><pre>1 10 238 \n106 58 73 48 64 64 61 77 62 98</pre><p><code>ferma.out</code></p><pre>237 237 237</pre><h3>Explicație</h3><p>Suma greutăților este <code>237</code> în fiecare transport.</p>",
+      "text": "ferma.in1 10 238 106 58 73 48 64 64 61 77 62 98ferma.out237 237 237ExplicațieSuma greutăților este 237 în fiecare transport."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>ferma.in</code></p><pre>2 10 238 \n106 58 73 48 64 64 61 77 62 98</pre><p><code>ferma.out</code></p><pre>1 1 1 2 2 2 2 3 3 3</pre><h3>Explicație</h3><p>Primii <code>3</code> în transportul <code>1</code>, următorii <code>4</code> în transportul <code>2</code>, ultimii <code>3</code> în transportul <code>3</code>.<br>\nAlte soluții corecte:<br>\n<code>2 2 2 1 1 1 1 3 3 3</code><br>\n<code>3 3 3 1 1 1 1 2 2 2</code><br>\netc.  </p>",
+      "text": "ferma.in2 10 238 106 58 73 48 64 64 61 77 62 98ferma.out1 1 1 2 2 2 2 3 3 3ExplicațiePrimii 3 în transportul 1, următorii 4 în transportul 2, ultimii 3 în transportul 3. Alte soluții corecte: 2 2 2 1 1 1 1 3 3 3 3 3 3 1 1 1 1 2 2 2 etc."
+    },
+    {
+      "title": "Exemplul 3:",
+      "html": "<p><code>ferma.in</code></p><pre>3 10 238 \n106 58 73 48 64 64 61 77 62 98</pre><p><code>ferma.out</code></p><pre>0</pre><h3>Explicație</h3><p>Diferența este <code>0</code>.</p>",
+      "text": "ferma.in3 10 238 106 58 73 48 64 64 61 77 62 98ferma.out0ExplicațieDiferența este 0."
+    },
+    {
+      "title": "Exemplul 4:",
+      "html": "<p><code>ferma.in</code></p><pre>1 7 33\n9 1 8 2 7 3 4</pre><p><code>ferma.out</code></p><pre>11 11 12</pre><h3>Explicație</h3><p>Transportul <code>1</code> și <code>2</code> greutate <code>11</code>, transportul <code>3</code> greutate <code>12</code>.</p>",
+      "text": "ferma.in1 7 33 9 1 8 2 7 3 4ferma.out11 11 12ExplicațieTransportul 1 și 2 greutate 11, transportul 3 greutate 12."
+    },
+    {
+      "title": "Exemplul 5:",
+      "html": "<p><code>ferma.in</code></p><pre>2 7 33\n9 1 8 2 7 3 4</pre><p><code>ferma.out</code></p><pre>1 1 2 1 3 2 3</pre><h3>Explicație</h3><p>O altă soluție corectă este <code>3 3 2 3 1 2 1</code> dar nu este minimă lexicografic.</p>",
+      "text": "ferma.in2 7 33 9 1 8 2 7 3 4ferma.out1 1 2 1 3 2 3ExplicațieO altă soluție corectă este 3 3 2 3 1 2 1 dar nu este minimă lexicografic."
+    },
+    {
+      "title": "Exemplul 6:",
+      "html": "<p><code>ferma.in</code></p><pre>3 7 33\n9 1 8 2 7 3 4</pre><p><code>ferma.out</code></p><pre>1</pre><h3>Explicație</h3><p>Cea mai mare diferență între cele 3 transporturi este <code>1</code>.</p>",
+      "text": "ferma.in3 7 33 9 1 8 2 7 3 4ferma.out1ExplicațieCea mai mare diferență între cele 3 transporturi este 1."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Suma greutăților este 237 în fiecare transport."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Primii 3 în transportul 1, următorii 4 în transportul 2, ultimii 3 în transportul 3. Alte soluții corecte: 2 2 2 1 1 1 1 3 3 3 3 3 3 1 1 1 1 2 2 2 etc."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Diferența este 0."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Transportul 1 și 2 greutate 11, transportul 3 greutate 12."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "O altă soluție corectă este 3 3 2 3 1 2 1 dar nu este minimă lexicografic."
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Cea mai mare diferență între cele 3 transporturi este 1."
+    }
+  ],
+  "constraints": [
+    "10 ≤ N ≤ 15",
+    "10 ≤ G ≤ 40.000",
+    "1 ≤ gi ≤ 10.000, 1 ≤ i ≤ N",
+    "Pentru toate testele există soluție"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q5f45acc1b8.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "9",
+    "intrare/ieșire": "ferma.in / ferma.out",
+    "limită timp": "1.5 secunde",
+    "limită memorie": "16 MB / 8 MB",
+    "sursa problemei": "OMI 2026, clasa a 10-a",
+    "autor": "Marinel Șerban",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 1.5,
+  "memoryLimitMb": 16,
+  "author": "Marinel Șerban",
+  "sourceAttribution": "OMI 2026, clasa a 10-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4945/ferma2"
+}

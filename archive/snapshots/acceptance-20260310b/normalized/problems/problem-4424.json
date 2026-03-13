@@ -1,0 +1,309 @@
+{
+  "id": 4424,
+  "slug": "aranjare1",
+  "name": "aranjare1",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4424/aranjare1",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 44,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=44"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>La începutul anului școlar, un profesor de informatică a primit lista notelor celor <code>N</code> elevi din clasa a IX-a cu care va lucra în laborator. Acestea sunt numere naturale mai mari sau egale cu <code>3</code>.<br>\nPentru a învăța mai bine informatica, elevii vor fi împărțiți în grupe de studiu, astfel încât, pentru fiecare grupă, toate notele elevilor din grupă să fie divizibile cu cea mai mică notă a unui elev din acea grupă. Într-o grupă poate fi și un singur elev.</p><ul>\n\t<li>o grupă poate conține elevi cu notele <code>5, 10</code>, deoarece <code>5</code> este nota minimă din grupă, iar <code>10</code> este divizibil cu <code>5</code>;</li>\n\t<li>o grupă NU poate conține elevi cu notele <code>3, 7</code>, deoarece <code>3</code> este nota minimă din grupă, iar <code>7</code> nu este divizibil cu <code>3</code>.</li>\n</ul><p>Ajută-l pe profesor să împartă elevi în cât mai puține astfel de grupe.</p><p>Scrieți un program care citește numărul de elevi și notele acestora și determină numărul minim de grupe în care pot fi împărțiți elevii conform regulii precizate.</p>",
+      "text": "La începutul anului școlar, un profesor de informatică a primit lista notelor celor N elevi din clasa a IX-a cu care va lucra în laborator. Acestea sunt numere naturale mai mari sau egale cu 3. Pentru a învăța mai bine informatica, elevii vor fi împărțiți în grupe de studiu, astfel încât, pentru fiecare grupă, toate notele elevilor din grupă să fie divizibile cu cea mai mică notă a unui elev din acea grupă. Într-o grupă poate fi și un singur elev. o grupă poate conține elevi cu notele 5, 10, deoarece 5 este nota minimă din grupă, iar 10 este divizibil cu 5; o grupă NU poate conține elevi cu notele 3, 7, deoarece 3 este nota minimă din grupă, iar 7 nu este divizibil cu 3. Ajută-l pe profesor să împartă elevi în cât mai puține astfel de grupe.Scrieți un program care citește numărul de elevi și notele acestora și determină numărul minim de grupe în care pot fi împărțiți elevii conform regulii precizate."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>aranjare1.in</code> conține pe prima linie numărul <code>N</code> de elevi.<br>\nPe a doua linie se află două numere naturale <code>nota[1]</code> și <code>nota[2]</code>, reprezentând notele primilor doi elevi.<br>\nUrmătoarele note vor fi generate folosind formula: \\( nota[i] = (17 * nota[i – 2] + 35 * nota[i – 1])\\%666013 + 3  \\)</p>",
+      "text": "Fișierul de intrare aranjare1.in conține pe prima linie numărul N de elevi. Pe a doua linie se află două numere naturale nota[1] și nota[2], reprezentând notele primilor doi elevi. Următoarele note vor fi generate folosind formula: \\( nota[i] = (17 * nota[i – 2] + 35 * nota[i – 1])\\%666013 + 3 \\)"
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>aranjare1.out</code> va conține un număr natural, reprezentând numărul minim de grupe ce pot fi formate.</p>",
+      "text": "Fișierul de ieșire aranjare1.out va conține un număr natural, reprezentând numărul minim de grupe ce pot fi formate."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 2 000 000</code></li>\n\t<li><code>3 ≤</code> <code>nota[1]</code>, <code>nota[2]</code> <code>≤ 500 000</code></li>\n\t<li>pentru teste în valoare de 40 puncte, <code>n ≤ 1 000</code></li>\n\t<li>pentru teste în valoare de 80 puncte, <code>n ≤ 100 000</code></li>\n</ul>",
+      "text": "1 ≤ N ≤ 2 000 000 3 ≤ nota[1], nota[2] ≤ 500 000 pentru teste în valoare de 40 puncte, n ≤ 1 000 pentru teste în valoare de 80 puncte, n ≤ 100 000"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>aranjare1.in</code></p><pre>6 \n3 7</pre><p><code>aranjare1.out</code></p><pre>4</pre><h3>Explicație</h3><p>Notele elevilor sunt <code>3, 7, 299, 10587, 375631, 6807</code>.<br>\nAcestea se pot împărți în <code>4</code> grupe:<br>\n<code>[3, 10587, 6807]</code><br>\n<code>[7]</code><br>\n<code>[299]</code><br>\n<code>[375631]</code></p>",
+      "text": "aranjare1.in6 3 7aranjare1.out4ExplicațieNotele elevilor sunt 3, 7, 299, 10587, 375631, 6807. Acestea se pot împărți în 4 grupe: [3, 10587, 6807] [7] [299] [375631]"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>aranjare1.in</code></p><pre>11\n3 10</pre><p><code>aranjare1.out</code></p><pre>8</pre><h3>Explicație</h3><p>Notele elevilor sunt <code>3, 10, 404, 14313, 507826, 34883, 529768, 486530, 60102, 384388, 489044</code>.<br>\nAcestea se pot împărți în <code>8</code> grupe:<br>\n<code>[3, 14313, 60102]</code><br>\n<code>[10, 486530]</code><br>\n<code>[404]</code><br>\n<code>[34883]</code> <br>\n<code>[384388]</code><br>\n<code>[489044]</code><br>\n<code>[507826]</code><br>\n<code>[529768]</code></p>",
+      "text": "aranjare1.in11 3 10aranjare1.out8ExplicațieNotele elevilor sunt 3, 10, 404, 14313, 507826, 34883, 529768, 486530, 60102, 384388, 489044. Acestea se pot împărți în 8 grupe: [3, 14313, 60102] [10, 486530] [404] [34883] [384388] [489044] [507826] [529768]"
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Notele elevilor sunt 3, 7, 299, 10587, 375631, 6807. Acestea se pot împărți în 4 grupe: [3, 10587, 6807] [7] [299] [375631]"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Notele elevilor sunt 3, 10, 404, 14313, 507826, 34883, 529768, 486530, 60102, 384388, 489044. Acestea se pot împărți în 8 grupe: [3, 14313, 60102] [10, 486530] [404] [34883] [384388] [489044] [507826] [529768]"
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 2 000 000",
+    "3 ≤ nota[1], nota[2] ≤ 500 000",
+    "pentru teste în valoare de 40 puncte, n ≤ 1 000",
+    "pentru teste în valoare de 80 puncte, n ≤ 100 000"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qa1d73d9709.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Mircea Măierean (mirceamaierean)",
+    "clasa": "9",
+    "intrare/ieșire": "aranjare1.in / aranjare1.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "64 MB / 64 MB",
+    "sursa problemei": "Concursul Interjudeţean de Matematică şi Informatică Grigore Moisil, 2023",
+    "autor": "Rusu Raluca",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 64,
+  "author": "Rusu Raluca",
+  "sourceAttribution": "Concursul Interjudeţean de Matematică şi Informatică Grigore Moisil, 2023",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4424/aranjare1"
+}

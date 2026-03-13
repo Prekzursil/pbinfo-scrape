@@ -1,0 +1,80 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3035"><article id="enunt">
+			Privită din spațiu, harta insulei din povestea noastră are forma unui caroiaj pătratic cu L linii și L coloane. Liniile și coloanele sunt numerotate de la 1 la L. În fiecare dintre cele L*L celule se află câte un far. Inițial cel de la poziția 1,1 este aprins și toate respectă regula: orice far are farurile vecine (pe linie și coloană, deci maximum 4) în starea opusă față de starea sa. În urma unei furtuni, s-au întâmplat lucruri ciudate: fulgerele au lovit unul după altul și au afectat starea unor faruri. Sunt trei tipuri de fulgere:
+<ul>
+	<li>Fulger de tip 1. Pentru acesta se indică linia pe care lovește și el afectează starea farurilor de pe linia respectivă și de pe liniile cu număr de ordine mai mare. Mai exact, toate farurile de pe aceste linii își schimbă instantaneu starea.</li>
+	<li>Fulger de tip 2. Pentru acesta se indică un număr ce reprezintă coloana pe care lovește și el afectează starea farurilor de pe coloana respectivă și de pe coloanele cu număr de ordine mai mare. Mai exact, toate farurile de pe aceste coloane își schimbă instantaneu starea.</li>
+	<li>Fulger de tip 3. Pentru acesta se indică linia apoi coloana unui element din caroiaj. Toate farurile aflate pe aceeași paralelă cu diagonala secundară cu elementul specificat și pe paralelele cu diagonala secundară aflate sub aceasta, își schimbă starea.<br>
+Prin schimbarea stării unui far înțelegem că acesta se aprinde dacă este stins și se stinge dacă este aprins.</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Se dau date despre fulgere, în ordinea în care acestea acționează. Se cere ca la finalul furtunii să se indice care este starea anumitor faruri, aflate la coordonate precizate de pe insulă.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Prima linie a fișierului <code>lumini.in</code> conține un numărul natural L, cu semnificația de mai sus. Pe linia a doua se află un număr natural F, reprezentând numărul de fulgere. Pe următoarele F linii se află date despre câte un fulger, în ordinea în care acestea apar. Primul număr de pe fiecare linie este tipul de fulger (1 sau 2 sau 3). Dacă acest număr este 1 sau 2, se mai află pe această linie un spațiu și încă un număr. Acesta reprezintă linia pe care lovește fulgerul (dacă linia din fișier are la început 1), respectiv coloana pe care lovește fulgerul (dacă linia respectivă din fișier are la început 2). Dacă este vorba despre fulger de tip 3, pe acea linie se mai află două numere, reprezentând linia și coloana elementului de pe insulă unde lovește fulgerul, separate prin spațiu. Linia următoare conține un număr Q. Pe următoarele Q linii se află câte două numere (separate prin spațiu) reprezentând linia și coloana unui far de pe insulă pentru care se dorește aflarea stării după furtună.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>lumini.out</code> conține pe o linie, separate prin câte un spațiu, Q numere, reprezentând rezultatele interogărilor în ordinea în care acestea apar în fișierul de intrare. Dacă farul corespunzător este aprins se va scrie valoarea 1, iar dacă este stins se va scrie valoarea 0.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ L ≤ 2.000.000.000</code></li>
+	<li><code>1 ≤ F ≤ 1000</code></li>
+	<li>Se garantează că la precizarea fulgerelor linia începe cu <code>1</code>, <code>2</code> sau <code>3</code>, iar celelalte valori de pe liniile respective sunt cuprinse între <code>1</code> și <code>L</code> inclusiv.</li>
+	<li><code>1 ≤ Q ≤ 100.000</code></li>
+	<li>Se garantează că pentru fiecare far a cărei stare trebuie aflată linia și coloana sunt cuprinse între <code>1</code> și <code>L</code> inclusiv.</li>
+	<li>Pentru <code>24</code> de puncte, <code>L ≤ 100</code>, <code>F ≤ 100</code> și apar doar fulgere de tipul <code>1</code>;</li>
+	<li>Pentru alte <code>18</code> puncte, <code>L ≤ 100</code>, <code>F ≤ 100</code>;</li>
+	<li>Pentru alte <code>12</code> puncte, <code>L ≤ 10.000</code> și apar doar fulgere de tipul <code>1</code>;</li>
+	<li>Pentru alte <code>8</code> puncte, <code>L ≤ 10.000</code>;</li>
+	<li>Pentru alte <code>13</code> puncte, <code>L ≤ 1.000.000</code>;</li>
+	<li>Pentru restul de <code>25</code> de puncte nu sunt restricții suplimentare.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>lumini.in</code></p>
+
+<pre>4 
+3 
+1 2 
+3 3 1 
+2 3 
+5 
+1 1 
+2 4 
+3 2 
+4 2 
+4 4</pre>
+
+<p><code>lumini.out</code></p>
+
+<pre>1 0 0 1 0</pre>
+
+<h3>Explicație</h3>
+
+<p>Inițial starea becurilor de pe insulă poate fi reprezentată astfel: <br>
+<code>1 0 1 0</code><br>
+<code>0 1 0 1</code> <br>
+<code>1 0 1 0</code><br>
+<code>0 1 0 1</code><br>
+După aplicarea primului fulger starea becurilor devine <br>
+<code>1 0 1 0</code><br>
+<code>1 0 1 0</code><br>
+<code>0 1 0 1</code><br>
+<code>1 0 1 0</code><br>
+După aplicarea celui de-al doilea fulger starea becurilor devine <br>
+<code>1 0 0 1</code><br>
+<code>1 1 0 1</code><br>
+<code>1 0 1 0</code><br>
+<code>0 1 0 1</code><br>
+După aplicarea celui de-al treilea starea becurilor devine <br>
+<code>1 0 1 0</code><br>
+<code>1 1 1 0</code><br>
+<code>1 0 0 1</code><br>
+<code>0 1 1 0</code></p>		</article>
+		</body></html>

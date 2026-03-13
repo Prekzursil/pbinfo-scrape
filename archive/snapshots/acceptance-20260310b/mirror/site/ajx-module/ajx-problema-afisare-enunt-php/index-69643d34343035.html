@@ -1,0 +1,85 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4405"><article id="enunt">
+			<p>Prin operația de unificare a două numere naturale <code>a</code> și <code>b</code> înțelegem obținerea celui mai mare număr care se poate forma din cifrele distincte din scrierea numărului <code>a</code> și cifrele distincte din scrierea numărului <code>b</code>. De exemplu, unificând <code>a = 727952</code> cu <code>b = 92868</code> vom obține numărul <code>99876522</code>, deoarece din <code>a</code> vom utiliza cifrele <code>2</code>, <code>5</code>, <code>7</code>, <code>9</code>, iar din <code>b</code> cifrele <code>2</code>, <code>6</code>, <code>8</code>, <code>9</code>. Cel mai mare număr pe care îl putem forma cu aceste cifre este <code>99876522</code>.<br>
+Operația de unificare poate fi aplicată și pentru <code>k</code> numere, respectând aceeași regulă: pentru fiecare număr din cele <code>k</code> identificăm cifrele distincte care apar în scrierea lui, apoi determinăm cel mai mare număr care se poate forma utilizând toate aceste cifre. De exemplu, unificând numerele <code>112</code>, <code>223</code> și <code>12334</code> vom obține <code>43322211</code>.<br>
+Se dau două numere naturale, <code>n</code> și <code>k</code>, și un șir de <code>n</code> numere naturale <code>a[1]</code>, <code>a[2]</code>, …, <code>a[n]</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Determinați și afișați:<br>
+1. cel mai mare număr de exact <code>k</code> cifre din șirul dat;<br>
+2. cel mai mare număr care poate fi obținut prin unificarea a două valori aflate pe poziții alăturate în șirul dat;<br>
+3. cel mai mare număr care se poate obține prin unificarea a <code>k</code> valori aflate pe poziții consecutive în șirul dat.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>unificare.in</code> conține pe prima linie un număr natural <code>C</code>, reprezentând cerința ce trebuie rezolvată (<code>1</code>, <code>2</code> sau <code>3</code>), pe a doua linie <code>n</code> și <code>k</code>, cu semnificația din enunț, iar pe a treia linie cei <code>n</code> termeni ai șirului precizat, în ordinea<br>
+din șir. Numerele aflate pe aceeași linie a fișierului sunt separate prin câte un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>În fișierul de ieșire <code>unificare.out</code>:<br>
+• dacă <code>C = 1</code>, se va afișa pe prima linie cel mai mare număr de <code>k</code> cifre din șirul dat;<br>
+• dacă <code>C = 2</code>, se va afișa pe prima linie cel mai mare număr obținut prin unificarea a două numere alăturate în șir;<br>
+• dacă <code>C = 3</code>, se va afișa pe prima linie valoarea maximă obținută prin unificarea a <code>k</code> valori aflate pe poziții consecutive.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>C ∈ {1, 2, 3}</code>; <code>1 ≤ n ≤ 100.000</code>; <code>1 ≤ k ≤ n / 2</code></li>
+	<li><code>0 ≤ a[i] ≤ 100.000.000</code>, pentru oricare <code>1 ≤ i ≤ n</code></li>
+	<li>Pentru 20 de puncte, <code>C = 1</code> și <code>k ≤ 8</code></li>
+	<li>Pentru 5 de puncte, <code>C = 2</code> și <code>n = 2</code></li>
+	<li>Pentru 10 de puncte, <code>C = 2</code> și <code>0 ≤ a[i] ≤ 9</code>, pentru oricare <code>1 ≤ i ≤ n</code></li>
+	<li>Pentru 35 de puncte, <code>C = 2</code>, fără restricții suplimentare</li>
+	<li>Pentru 15 de puncte, <code>C = 3</code> și <code>k ≤ 8</code></li>
+	<li>Pentru 15 de puncte, <code>C = 3</code> și <code>k ≤ n / 2</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>unificare.in</code></p>
+
+<pre>1
+5 3
+112 223 12334 561 289</pre>
+
+<p><code>unificare.out</code></p>
+
+<pre>561</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C = 1</code>, <code>n = 5</code> și <code>k = 3</code>. În șir sunt <code>4</code> numere care au exact <code>3</code> cifre: <code>112</code>, <code>223</code>, <code>561</code> și <code>289</code>, cel mai mare dintre ele fiind <code>561</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>unificare.in</code></p>
+
+<pre>2
+5 3
+112 223 12334 561 289</pre>
+
+<p><code>unificare.out</code></p>
+
+<pre>6543211</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C = 2</code>, <code>n = 5</code> și <code>k = 3</code>, nu utilizăm valoarea lui <code>k</code> și unificând <code>a[3]</code> cu <code>a[4]</code> vom obține cea mai mare valoare: <code>6543211</code>.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>unificare.in</code></p>
+
+<pre>3
+5 3
+112 223 12334 561 289</pre>
+
+<p><code>unificare.out</code></p>
+
+<pre>9865432211</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C = 3</code>, <code>n = 5</code> și <code>k = 3</code>. Cea mai mare valoare care se poate obține este <code>9865432211</code> și o obținem unificând <code>a[3]</code> cu <code>a[4]</code> și cu <code>a[5]</code>.</p>		</article>
+		</body></html>

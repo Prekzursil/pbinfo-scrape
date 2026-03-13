@@ -1,0 +1,76 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1196"><article id="enunt">
+			<p>Definim o modificare procentuală de preț ca fiind o pereche <code>(c p)</code> formată dintr-un caracter din <code>{‘+‘,‘-‘}</code> și un număr natural <code>p</code>. Dacă <code>c = ‘+‘</code>  atunci are loc o scumpire iar dacă <code>c = ‘-‘</code> atunci are loc o ieftinire a unui preț, iar numărul <code>p</code> reprezintă procentul de modificare a prețului. </p>
+
+<p>Exemple de modificări procentuale de preț: <code>(+ 35)</code> – reprezintă scumpirea unui preț cu <code>35%</code>; <code>(– 50)</code> – reprezintă ieftinirea unui preț cu <code>50%</code>.</p>
+
+<p>Unui preț inițial i se poate aplica o succesiune de <code>n</code> modificări procentuale de preț obținându-se un preț final. Numim <strong>ciclu de preț de lungime <code>n</code></strong> o succesiune de <code>n</code> modificări procentuale de preț, cu proprietatea că <strong>prețul final</strong> este egal cu <strong>prețul inițial</strong>.</p>
+
+<p>Exemple de cicluri de preț :</p>
+
+<ul>
+	<li>de lungime <code>n=2</code>   <code>(- 20)(+ 25)</code></li>
+	<li>de lungime <code>n=3</code>   <code>(- 50)(+ 25)(+ 60)</code></li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>Să se scrie un program care citește un număr natural <code>n</code> și determină numărul de cicluri de preț de lungime <code>n</code> distincte ce conțin cel puțin o dată o modificare procentuală cunoscută <code>(C P)</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>procente.in</code> conține pe prima linie numărul natural <code>n</code> și pe a doua linie un caracter <code>C</code> din <code>{‘+‘,‘-‘}</code>, urmat de un număr natural <code>P</code>, despărțite printr-un spațiu, cu semnificaţia de mai sus.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>procente.out</code> va conține pe prima linie numărul căutat.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ n ≤ 80</code></li>
+	<li><code>C</code> din <code>{‘+‘,‘-‘}</code></li>
+	<li>Valoarea procentului <code>p</code> în caz de scumpire este cuprinsă între <code>0</code> și <code>100</code> inclusiv.</li>
+	<li>Valoarea procentului <code>p</code> în caz de ieftinire este cuprinsă între <code>1</code> și <code>99</code> inclusiv.</li>
+	<li>Două modificări procentuale de preț <code>(c1 p1)</code>, <code>(c2 p2)</code> sunt diferite dacă <code>c1≠c2</code> sau <code>p1≠p2</code></li>
+	<li>Două cicluri de preț de lungime <code>n</code> sunt distincte, dacă diferă prin cel puțin o modificare procentuală de preț.</li>
+	<li>Două cicluri de preț de lungime <code>n</code> ce conțin aceleași modificări procentuale, dar în altă ordine, sunt identice.</li>
+	<li>Pentru 28% din punctaj <code>n ≤ 20</code>, pentru 60% din punctaj <code>n ≤ 40</code>, pentru 100% din punctaj <code>n ≤ 80</code></li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>procente.in</code></p>
+
+<pre>2
+- 20</pre>
+
+<p><code>procente.out</code></p>
+
+<pre>1</pre>
+
+<h3>Explicație</h3>
+
+<p>Există o singură succesiune de <code>2</code> modificări procentuale de preț ce conține și o ieftinire cu <code>20%</code> care are prețul final egal cu prețul inițial. Această succesiune este: <code>(- 20)(+ 25)</code>.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>procente.in</code></p>
+
+<pre>3
++ 25</pre>
+
+<p><code>procente.out</code></p>
+
+<pre>4</pre>
+
+<h3>Explicație</h3>
+
+<p>Există patru succesiuni distincte de <code>3</code> modificări procentuale de preț ce conțin cel puțin o scumpire cu <code>25%</code> care au prețul final egal cu prețul inițial.  Aceste succesiuni sunt : </p>
+
+<ul>
+	<li><code>(- 50)(+ 25)(+ 60)</code>;</li>
+	<li><code>(- 36)(+ 25)(+ 25)</code>;</li>
+	<li><code>(- 60)(+ 25)(+ 100)</code>;</li>
+	<li><code>(- 20)(+ 25)(+ 0)</code>.</li>
+</ul>		</article>
+		</body></html>

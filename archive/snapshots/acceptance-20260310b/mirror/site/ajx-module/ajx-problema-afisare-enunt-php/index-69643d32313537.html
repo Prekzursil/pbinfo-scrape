@@ -1,0 +1,76 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2157"><article id="enunt">
+			<p>Zeno are <code>n</code> cutii cu bomboane, iar în fiecare cutie se găsește un număr natural nenul de bomboane. Zeno poate împărți bomboanele din toate cutiile colegilor în două moduri: frățește sau diferențiat. Împărțirea frățească se realizează astfel:</p>
+
+<ul>
+	<li>numărul de colegi care primesc bomboane din fiecare cutie este același (dacă din prima cutie primesc bomboane <code>k</code> colegi și din cutia <code>2</code> vor primi tot <code>k</code> colegi, și din cutia <code>3</code> tot <code>k</code> colegi etc).</li>
+	<li>bomboanele din fiecare cutie se împart în mod egal între cei <code>k</code> colegi, aceștia primind un număr nenul de bomboane;</li>
+	<li>în final în fiecare cutie trebuie să rămână un număr identic de bomboane (posibil zero) care îi revin lui Zeno. De exemplu dacă <code>n = 3</code>, iar în cutii se găsesc <code>14</code>, <code>23</code> respectiv <code>17</code> bomboane, din prima cutie oferă câte <code>4</code> bomboane pentru <code>3</code> colegi, din a doua cutie câte <code>7</code> bomboane pentru <code>3</code> colegi, iar din ultima cutie câte <code>5</code> bomboane pentru <code>3</code> colegi, iar în fiecare cutie rămân <code>2</code> bomboane.</li>
+</ul>
+
+<p>Împărțirea diferențiată se realizează în felul următor:</p>
+
+<ul>
+	<li>dintre colegii care primesc bomboane din aceeași cutie fiecare coleg primește un număr diferit de bomboane (număr nenul), neexistând doi colegi care primesc număr identic de bomboane din aceeași cutie;</li>
+	<li>din fiecare cutie Zeno oferă bomboane unui număr cât mai mare de colegi.</li>
+	<li>diferențele în modul dintre numărul de bomboane primite consecutiv de doi colegi sunt distincte două câte două. De exemplu dacă <code>n = 3</code>, iar în cutii se găsesc <code>14</code>, <code>23</code> respectiv <code>17</code> bomboane, bomboanele din prima cutie se pot împărți astfel <code>(3, 4, 6, 1)</code>, bomboanele din a doua cutie <code>(6, 2, 7, 1, 3, 4)</code>, iar bomboanele din a treia cutie se pot împărți astfel <code>(2, 1, 3, 7, 4)</code>.</li>
+</ul>
+
+<h1>Cerințe</h1>
+
+<p>Cunoscând <code>n</code> numărul de cutii și numărul de bomboane din fiecare cutie să se scrie un program care determină: </p>
+
+<p>a) Numărul maxim de colegi care pot primi bomboane, dacă Zeno alege împărțirea frățească.<br>
+b) O modalitate de împărțire a bomboanelor din fiecare cutie, dacă se face împărțirea diferențiată.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>bomboane3.in</code> conține pe prima linie două numere naturale <code>p</code> (numărul cerinței de rezolvat), și <code>n</code> (numărul de cutii), despărțite printr-un spațiu. Pe următoarea linie se găsesc <code>n</code> valori naturale, separate prin câte un spațiu, reprezentând numărul de bomboane din fiecare cutie. </p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă <code>p = 1</code> se va rezolva numai punctul a) din cerință. În acest caz fișierul de ieșire <code>bomboane3.out</code> va conține o valoare naturală reprezentând numărul maxim de colegi care pot primi bomboane, dacă Zeno alege împărțirea frățească.<br>
+Dacă <code>p = 2</code> se rezolvă numai punctul b). Fișierul de ieșire <code>bomboane3.out</code> va conține <code>n</code> linii. Pe fiecare linie <code>i</code>, prima valoare <code>nri</code> reprezintă numărul maxim de colegi care pot primi bomboane din cutia <code>i</code>, urmată de <code>nri</code> valori separate prin câte un spațiu reprezentând o modalitate de împărțire a bomboanelor din cutia <code>i</code>, dacă Zeno alege împărțirea diferențiată. </p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ p ≤ 2</code>;</li>
+	<li>Dacă <code>p = 1</code> atunci <code>1 ≤ n ≤ 10 000</code> și <code>1 ≤</code> numărul de bomboane din cutii <code>≤  10</code><sup><code>6</code></sup>.</li>
+	<li>Dacă <code>p = 2</code> atunci <code>1 ≤ n ≤ 200</code> și <code>1 ≤</code> numărul de bomboane din cutii <code>≤  100 000</code>.</li>
+	<li>Dacă există mai multe soluții se poate afișa oricare.</li>
+	<li>Pentru rezolvarea fiecărei cerințe se acordă 50% din punctaj.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>bomboane3.in</code></p>
+
+<pre>1 3
+14 23 17</pre>
+
+<p><code>bomboane3.out</code></p>
+
+<pre>3</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă numai punctul a). Numărul maxim de colegi care pot primi bomboane dacă Zeno alege împărțirea frățească e <code>3</code>.</p>
+
+
+<h1>Exemplul 2</h1>
+
+<p><code>bomboane3.in</code></p>
+
+<pre>2 3
+14 23 17</pre>
+
+<p><code>bomboane3.out</code></p>
+
+<pre>4 3 4 6 1
+6 6 2 7 1 3 4 
+5 2 1 3 7 4</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă numai punctul b). Din prima cutie pot primi bomboane maxim <code>4</code> colegi. O modalitate de împărțire astfel încât fiecare coleg să primească un număr diferit de bomboane, iar diferențele dintre bomboanele primite de doi colegi consecutivi să fie  distincte două câte două este <code>(3,4,6,1)</code>. Este corectă și soluția <code>(1, 2, 7, 4)</code>.</p>		</article>
+		</body></html>

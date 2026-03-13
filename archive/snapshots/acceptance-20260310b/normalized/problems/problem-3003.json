@@ -1,0 +1,305 @@
+{
+  "id": 3003,
+  "slug": "intersectie",
+  "name": "Intersectie",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3003/intersectie",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 2,
+      "name": "Tablouri unidimensionale (vectori)",
+      "slug": "tablouri-unidimensionale-vectori",
+      "href": "/?pagina=probleme-lista&tag=2"
+    },
+    {
+      "id": 3,
+      "name": "Sortarea vectorilor",
+      "slug": "sortarea-vectorilor",
+      "href": "/?pagina=probleme-lista&tag=3"
+    }
+  ],
+  "tags": [
+    "Sortare"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Pe un cerc sunt așezate echidistant <code>N</code> puncte, etichetate în sensul acelor de ceas cu <code>1</code>, <code>2</code>, <code>3</code>, …, <code>N</code>.<br>\nSe dau <code>M</code> intervale de forma <code>[a, b]</code> și <code>T</code> interogări de forma <code>P Q</code>.</p><p>Pentru fiecare interogare <code>[P, Q]</code> să se verifice dacă este adevărat sau fals că intersecția tuturor intervalelor care au puncte comune cu <code>[P, Q]</code> include intervalul <code>[P, Q]</code>. </p>",
+      "text": "Pe un cerc sunt așezate echidistant N puncte, etichetate în sensul acelor de ceas cu 1, 2, 3, …, N. Se dau M intervale de forma [a, b] și T interogări de forma P Q.Pentru fiecare interogare [P, Q] să se verifice dacă este adevărat sau fals că intersecția tuturor intervalelor care au puncte comune cu [P, Q] include intervalul [P, Q]."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>intersectie.in</code> conține pe primul rând numerele <code>N</code>, <code>M</code> și <code>T</code>. Pe următoarele <code>M</code> rânduri sunt scrise câte două numere naturale <code>a b</code>, separate prin spațiu, reprezentând capetele celor <code>M</code> intervale date. Pe următoarele <code>T</code> rânduri sunt scrise câte două numere naturale <code>P Q</code>, separate prin spațiu, reprezentând capetele celor <code>T</code> intervale de interogare date.</p>",
+      "text": "Fișierul de intrare intersectie.in conține pe primul rând numerele N, M și T. Pe următoarele M rânduri sunt scrise câte două numere naturale a b, separate prin spațiu, reprezentând capetele celor M intervale date. Pe următoarele T rânduri sunt scrise câte două numere naturale P Q, separate prin spațiu, reprezentând capetele celor T intervale de interogare date."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>În fișierul de ieșire <code>intersectie.out</code> pe primele <code>T</code> rânduri este scris un număr natural: <code>1</code> dacă răspunsul la interogare este adevărat, respectiv <code>0</code> dacă răspunsul este fals.</p>",
+      "text": "În fișierul de ieșire intersectie.out pe primele T rânduri este scris un număr natural: 1 dacă răspunsul la interogare este adevărat, respectiv 0 dacă răspunsul este fals."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>2 ≤ N ≤ 1.000.000.000</code></li>\n\t<li><code>1 ≤ M ≤ 100.000</code></li>\n\t<li><code>1 ≤ T ≤ 100.000</code></li>\n\t<li><code>1 ≤ P ≤ N</code>, <code>1 ≤ Q ≤ N</code>, <code>P</code> și <code>Q</code> sunt etichete date în sensul acelor de ceas</li>\n\t<li><code>1 ≤ a ≤ N</code>, <code>1 ≤ b ≤ N</code>, <code>a</code> și <code>b</code> sunt etichete date în sensul acelor de ceas</li>\n\t<li>Dacă <code>x = y</code>, atunci <code>[x, y]</code> este un interval care conține doar numărul <code>x</code></li>\n\t<li>Pentru <code>30%</code> din teste <code>1 ≤ M ≤ 1000</code> și <code>1 ≤ T ≤ 10.000</code></li>\n\t<li>Pentru <code>30%</code> din teste <code>1 ≤ N ≤ 1.000.000</code></li>\n</ul>",
+      "text": "2 ≤ N ≤ 1.000.000.000 1 ≤ M ≤ 100.000 1 ≤ T ≤ 100.000 1 ≤ P ≤ N, 1 ≤ Q ≤ N, P și Q sunt etichete date în sensul acelor de ceas 1 ≤ a ≤ N, 1 ≤ b ≤ N, a și b sunt etichete date în sensul acelor de ceas Dacă x = y, atunci [x, y] este un interval care conține doar numărul x Pentru 30% din teste 1 ≤ M ≤ 1000 și 1 ≤ T ≤ 10.000 Pentru 30% din teste 1 ≤ N ≤ 1.000.000"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>intersectie.in</code></p><pre>5 3 3\n2 3\n5 1\n5 5\n4 4\n3 5\n1 1</pre><p><code>intersectie.out</code></p><pre>0\n0\n1</pre><h3>Explicație</h3><p>Intervalul <code>[4,4]</code> din interogarea <code>1</code> nu se intersectează cu nici unul din cele trei intervale date <code>[2,3]</code>, <code>[5,1]</code>, <code>[5;5]</code>. Răspuns <code>0</code>. <br>\nIntervalul <code>[3,5]</code> din interogarea <code>2</code> se intersectează cu <code>[2,3]</code>, <code>[5,1]</code>, <code>[5,5]</code>. Intersecția acestora este vidă. Răspuns <code>0</code>.<br>\nIntervalul <code>[1,1]</code> din interogarea <code>3</code> se intersectează doar cu <code>[5,1]</code>. Intersecția intervalelor care conțin pe <code>[1,1]</code> este <code>[5,1]</code>. Răspuns <code>1</code>.</p>",
+      "text": "intersectie.in5 3 3 2 3 5 1 5 5 4 4 3 5 1 1intersectie.out0 0 1ExplicațieIntervalul [4,4] din interogarea 1 nu se intersectează cu nici unul din cele trei intervale date [2,3], [5,1], [5;5]. Răspuns 0. Intervalul [3,5] din interogarea 2 se intersectează cu [2,3], [5,1], [5,5]. Intersecția acestora este vidă. Răspuns 0. Intervalul [1,1] din interogarea 3 se intersectează doar cu [5,1]. Intersecția intervalelor care conțin pe [1,1] este [5,1]. Răspuns 1."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Intervalul [4,4] din interogarea 1 nu se intersectează cu nici unul din cele trei intervale date [2,3], [5,1], [5;5]. Răspuns 0. Intervalul [3,5] din interogarea 2 se intersectează cu [2,3], [5,1], [5,5]. Intersecția acestora este vidă. Răspuns 0. Intervalul [1,1] din interogarea 3 se intersectează doar cu [5,1]. Intersecția intervalelor care conțin pe [1,1] este [5,1]. Răspuns 1."
+    }
+  ],
+  "constraints": [
+    "2 ≤ N ≤ 1.000.000.000",
+    "1 ≤ M ≤ 100.000",
+    "1 ≤ T ≤ 100.000",
+    "1 ≤ P ≤ N, 1 ≤ Q ≤ N, P și Q sunt etichete date în sensul acelor de ceas",
+    "1 ≤ a ≤ N, 1 ≤ b ≤ N, a și b sunt etichete date în sensul acelor de ceas",
+    "Dacă x = y, atunci [x, y] este un interval care conține doar numărul x",
+    "Pentru 30% din teste 1 ≤ M ≤ 1000 și 1 ≤ T ≤ 10.000",
+    "Pentru 30% din teste 1 ≤ N ≤ 1.000.000"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qf30cc41cb7.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Andrei Visalon (Prekzursil)",
+    "clasa": "9",
+    "intrare/ieșire": "intersectie.in / intersectie.out",
+    "limită timp": "0.11 secunde",
+    "limită memorie": "64 MB / 64 MB",
+    "sursa problemei": "Info Oltenia 2019",
+    "autor": "Ionel-Vasile Piț-Rada",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.11,
+  "memoryLimitMb": 64,
+  "author": "Ionel-Vasile Piț-Rada",
+  "sourceAttribution": "Info Oltenia 2019",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3003/intersectie"
+}

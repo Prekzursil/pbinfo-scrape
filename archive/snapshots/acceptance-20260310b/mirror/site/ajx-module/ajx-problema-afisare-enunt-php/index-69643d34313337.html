@@ -1,0 +1,95 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4137"><article id="enunt">
+			<p>Ionuţ, tânăr programator, se lansează pe piaţa producătorilor de jocuri pe calculator. Jocul pe care l-a proiectat se numeşte <span class="caps">RGB</span>. În joc există <code>N</code> personaje extraterestre. Fiindcă Ionuţ nu este de acord cu teoria omuleţilor verzi, personajele lui sunt de trei culori: </p>
+
+<ul>
+	<li><code>R</code> extratereştri de culoare roşie;</li>
+	<li><code>G</code> extratereştri de culoare verde;</li>
+	<li><code>B</code> extratereştri de culoare albastră.</li>
+</ul>
+
+<p>Fiecare extraterestru are o anumită putere, exprimată printr-un număr natural impar, puterile oricăror doi extratereştri fiind diferite. Pe parcursul jocului fiecare extraterestru va lupta cu fiecare dintre ceilalţi extratereştri. Rezultatul unei lupte între doi extratereştri depinde de puterea acestora, dar şi de culoarea lor. Într-o luptă dintre doi extratereştri de aceeaşi culoare, va câştiga cel cu puterea cea mai mare. Într-o luptă între doi extratereştri de culori diferite, puterile lor se modifică după cum urmează, iar după modificare lupta o va câştiga extraterestrul cu puterea mai mare:</p>
+
+<ul>
+	<li>Puterea unui extraterestru roșu este dublată dacă adversarul este un extraterestru verde.</li>
+	<li>Puterea unui extraterestru verde este dublată dacă adversarul este un extraterestru albastru.</li>
+	<li>Puterea unui extraterestru albastru este dublată dacă adversarul este un extraterestru roșu.</li>
+</ul>
+
+<p>După fiecare luptă, puterile extratereștrilor revin la valorile inițiale, în caz că s-au modificat.</p>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care, cunoscând culorile şi puterile extratereştrilor, rezolvă următoarele două cerinţe:<br>
+1) determină puterea extraterestrului care câştigă cele mai multe lupte; dacă există mai mulţi astfel de extratereştri, se va afişa puterea minimă;<br>
+2) determină pentru fiecare extraterestru numărul de lupte câştigate de acesta.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>rgb.in</code> conține pe prima linie numerele naturale <code>C</code> <code>R</code> <code>G</code> și <code>B</code>, unde <code>C</code> este cerinţa care trebuie să fie rezolvată (1 sau 2), <code>R</code> reprezintă numărul de extratereștri roșii, <code>G</code> numărul de extratereștri verzi, iar <code>B</code> numărul de extratereștri albaştri. Pe cea de a doua linie se află <code>R</code> numere naturale impare în ordine strict crescătoare, reprezentând puterile celor R extratereștri roșii. Pe cea de a treia linie se află <code>G</code> numere naturale impare în ordine strict crescătoare, reprezentând puterile celor G extratereștri verzi. <br>
+Pe cea de a patra linie se află <code>B</code> numere naturale impare în ordine strict crescătoare, reprezentând puterile celor B extratereștri albaştri. Valorile scrise pe aceeaşi linie sunt separate prin câte un spaţiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Pentru <code>C = 1</code>, fişierul de ieşire <code>rgb.out</code> va conţine o singură linie pe care va fi scrisă puterea extraterestrului care câştigă cele mai multe lupte; dacă există mai mulţi extratereştri care câştigă un număr maxim de lupte, se va afişa puterea minimă.</p>
+
+<p>Pentru <code>C = 2</code>, fişierul de ieşire <code>rgb.out</code> va conţine trei linii. Pe prima linie se va scrie numărul de lupte câştigate de fiecare extraterestru roșu. Pe a doua linie, se va scrie numărul de lupte câştigate de fiecare extraterestru verde. Pe a treia linie, se va scrie numărul de lupte câştigate de fiecare extraterestru albastru. Pentru fiecare culoare, valorile vor fi afişate considerând ordinea extratereştrilor din fişierul de intrare. Valorile scrise pe aceeaşi linie vor fi separate prin câte un spaţiu.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>N = R + G + B</code>, <code>N ≤ 500.000</code></li>
+	<li><code>1 ≤ R, G, B ≤ N-2</code></li>
+	<li><code>1 ≤ puterea oricărui extraterestru ≤ 2 • N - 1</code></li>
+	<li>Datorită dimensiunilor mari, unele teste nu au fost adăugate</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>rgb.in</code></p>
+
+<pre>1 1 2 2
+3
+1 7
+5 9</pre>
+
+<p><code>rgb.out</code></p>
+
+<pre>7</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C = 1</code>, deci se va rezolva prima cerinţă. Există un extraterestru roşu, care are puterea <code>3</code>, doi extratereştri verzi, având puterile <code>1</code>, respectiv <code>7</code> şi doi extratereştri albaștri cu puterile <code>5</code>, respectiv <code>9</code>. Extraterestrul cu puterea <code>7</code> este singurul care va câştiga cele mai multe lupte (în cazul acesta, chiar toate):</p>
+
+<ul>
+	<li>când luptă cu extraterestrul verde cu puterea <code>1</code> câştigă, pentru că are puterea mai mare;</li>
+	<li>când luptă cu extraterestrul roşu cu puterea <code>3</code>, acesta îşi va dubla puterea (va avea puterea <code>6</code>), dar va fi insuficient pentru a câștiga lupta;</li>
+	<li>când luptă contra extraterestrului albastru cu puterea <code>9</code>, va avea puterea dublată (<code>14</code>), prin urmare va câştiga şi această luptă.</li>
+</ul>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>rgb.in</code></p>
+
+<pre>2 1 2 2
+3
+1 7
+5 9</pre>
+
+<p><code>rgb.out</code></p>
+
+<pre>1
+0 4
+2 3</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C = 2</code>, deci se va rezolva a doua cerinţă.</p>
+
+<ul>
+	<li>Extraterestrul cu puterea <code>3</code> poate câştiga doar o luptă (contra extraterestrului cu puterea <code>1</code>).</li>
+	<li>Extraterestrul cu puterea <code>1</code> nu poate câştiga nicio luptă.</li>
+	<li>Extraterestrul cu puterea <code>7</code> poate câștiga toate luptele (vezi explicaţia de la exemplul precedent).</li>
+	<li>Extraterestrul cu puterea <code>5</code> poate câştiga două lupte (contra extratereştrilor cu puterile <code>1</code> şi <code>3</code>).</li>
+	<li>Extraterestrul cu puterea <code>9</code> poate câştiga 3 lupte (contra extratereştrilor cu puterile <code>1</code>, <code>3</code> și <code>5</code>).</li>
+</ul>		</article>
+		</body></html>

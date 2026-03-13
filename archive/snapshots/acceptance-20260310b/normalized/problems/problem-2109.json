@@ -1,0 +1,297 @@
+{
+  "id": 2109,
+  "slug": "dineu",
+  "name": "Dineu",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/2109/dineu",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 16,
+      "name": "Teoria Grafurilor",
+      "slug": "teoria-grafurilor",
+      "href": "/?pagina=probleme-lista&tag=16"
+    },
+    {
+      "id": 17,
+      "name": "Parcurgerea grafurilor neorientate",
+      "slug": "parcurgerea-grafurilor-neorientate",
+      "href": "/?pagina=probleme-lista&tag=17"
+    }
+  ],
+  "tags": [
+    "Clică",
+    "Backtracking"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Cunoscând <code>N</code> – numărul de reprezentanţi, identificăm fiecare reprezentant cu un număr natural cuprins între <code>1</code> şi <code>N</code>, <code>L</code> – numărul limbilor străine care se vorbesc la dineu (acestea sunt codificate prin numerele naturale de la <code>1</code> la <code>L</code>), numărul de limbi vorbite de fiecare reprezentant şi codurile acestora să se determine numărul maxim de persoane care pot sta la o masa fără translator.</p>",
+      "text": "Cunoscând N – numărul de reprezentanţi, identificăm fiecare reprezentant cu un număr natural cuprins între 1 şi N, L – numărul limbilor străine care se vorbesc la dineu (acestea sunt codificate prin numerele naturale de la 1 la L), numărul de limbi vorbite de fiecare reprezentant şi codurile acestora să se determine numărul maxim de persoane care pot sta la o masa fără translator."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fişierul de intrare <code>dineu.in</code> conţine, pe prima linie, numerele naturale <code>N</code> şi <code>L</code>, separate printr-un spaţiu, cu semnificaţia de mai sus. Pe fiecare dintre următoarele <code>N</code> linii se află informaţii despre câte un reprezentant, în ordinea numerelor de identificare a acestora. Astfel, pe linia corespunzătoare reprezentantului <code>i (1≤i≤N)</code>, se află un număr natural <code>nri</code>- numărul limbilor străine vorbite de acesta, urmat de <code>nri</code> numere naturale distincte <code>l1 l2 ... lnri</code>, reprezentând codurile acestora. Numerele de pe aceeaşi linie sunt separate prin câte un spaţiu.</p>",
+      "text": "Fişierul de intrare dineu.in conţine, pe prima linie, numerele naturale N şi L, separate printr-un spaţiu, cu semnificaţia de mai sus. Pe fiecare dintre următoarele N linii se află informaţii despre câte un reprezentant, în ordinea numerelor de identificare a acestora. Astfel, pe linia corespunzătoare reprezentantului i (1≤i≤N), se află un număr natural nri- numărul limbilor străine vorbite de acesta, urmat de nri numere naturale distincte l1 l2 ... lnri, reprezentând codurile acestora. Numerele de pe aceeaşi linie sunt separate prin câte un spaţiu."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fişierul de ieşire <code>dineu.out</code> va conţine două linii. Pe prima linie se află numărul maxim de reprezentanţi care stau la aceeaşi masă. Pe a doua linie se află numerele de identificare ale acestora. Numerele de pe aceeaşi linie sunt separate prin câte un spaţiu.</p>",
+      "text": "Fişierul de ieşire dineu.out va conţine două linii. Pe prima linie se află numărul maxim de reprezentanţi care stau la aceeaşi masă. Pe a doua linie se află numerele de identificare ale acestora. Numerele de pe aceeaşi linie sunt separate prin câte un spaţiu."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<p>• <code>1 ≤ N ≤ 20</code><br>\n• <code>1 ≤ L ≤ 10</code><br>\n• <code>1 ≤ nri, l1, l2, ..., lnri ≤ 10</code><br>\n• Dacă există mai multe soluţii se va afişa cea mai mică din punct de vedere lexicografic</p>",
+      "text": "• 1 ≤ N ≤ 20 • 1 ≤ L ≤ 10 • 1 ≤ nri, l1, l2, ..., lnri ≤ 10 • Dacă există mai multe soluţii se va afişa cea mai mică din punct de vedere lexicografic"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>dineu.in</code></p><pre>5 5\n3 1 3 5 \n2 3 4\n3 1 2 4\n2 4 5\n2 2 3</pre><p><code>dineu.out</code></p><pre>4\n1 2 3 4</pre><h3>Explicație</h3><p><code>1</code> cu <code>2</code> vorbesc în limba <code>3</code><br>\n<code>1</code> cu <code>4</code> vorbesc în limba <code>5</code><br>\n<code>1</code> cu <code>3</code> vorbesc în limba <code>1</code><br>\n<code>2</code> cu <code>4</code> vorbesc în limba <code>4</code><br>\n<code>2</code> cu <code>3</code> vorbesc în limba <code>4</code><br>\n<code>3</code> cu <code>4</code> vorbesc în limba <code>4</code><br>\nExistă şi alte soluţii, de exemplu soluţia <code>1 2 3 5</code>, dar este mai mare din punct de vedere lexicografic.</p>",
+      "text": "dineu.in5 5 3 1 3 5 2 3 4 3 1 2 4 2 4 5 2 2 3dineu.out4 1 2 3 4Explicație1 cu 2 vorbesc în limba 3 1 cu 4 vorbesc în limba 5 1 cu 3 vorbesc în limba 1 2 cu 4 vorbesc în limba 4 2 cu 3 vorbesc în limba 4 3 cu 4 vorbesc în limba 4 Există şi alte soluţii, de exemplu soluţia 1 2 3 5, dar este mai mare din punct de vedere lexicografic."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "1 cu 2 vorbesc în limba 3 1 cu 4 vorbesc în limba 5 1 cu 3 vorbesc în limba 1 2 cu 4 vorbesc în limba 4 2 cu 3 vorbesc în limba 4 3 cu 4 vorbesc în limba 4 Există şi alte soluţii, de exemplu soluţia 1 2 3 5, dar este mai mare din punct de vedere lexicografic."
+    }
+  ],
+  "constraints": [],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qb45aeab373.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Peticaru Alexandru (AlexandruPeticaru)",
+    "clasa": "11",
+    "intrare/ieșire": "dineu.in / dineu.out",
+    "limită timp": "0.1 secunde",
+    "limită memorie": "2 MB / 1 MB",
+    "sursa problemei": "Olimpiada Municipala Informatica Iasi 2013",
+    "autor": "Lucia Miron",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.1,
+  "memoryLimitMb": 2,
+  "author": "Lucia Miron",
+  "sourceAttribution": "Olimpiada Municipala Informatica Iasi 2013",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/2109/dineu"
+}

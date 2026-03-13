@@ -1,0 +1,132 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1622"><article id="enunt">
+			<p>Arhipelagul Zopopan este format din <code>n</code> insule de formă triunghiulară numerotate de la <code>1</code> la <code>n</code>. Fiecare insulă este localizată prin coordonatele carteziene ale vârfurilor.</p>
+
+<p>Administrația dorește să cumpere elicoptere pentru a realiza transportul între insule. Un elicopter va putea să asigure o rută între două insule pe distanța minimă obținută pe orizontală sau verticală (paralel cu axele de coordonate). În plus, datorită capacității rezervorului o astfel de rută nu poate să depășească o valoare <code>k</code> – număr natural. Elicopterele parcurg rutele în ambele sensuri.<br>
+Investiția trebuie să îndeplinească următoarele condiții:</p>
+
+<ol>
+	<li>Numărul de elicoptere cumpărate să fie minim.</li>
+	<li>Numărul de perechi de insule între care se poate realiza transportul, folosind unul sau mai multe elicoptere să fie maxim.</li>
+	<li>Suma lungimii tuturor rutelor să fie minimă.</li>
+</ol>
+
+<h1>Cerința</h1>
+
+<p>Să se scrie un program care pentru <code>n</code>, <code>k</code> şi coordonatele vârfurilor insulelor cunoscute, determină:</p>
+
+<ol>
+	<li>numărul minim de elicoptere ce vor fi cumpărate de administraţie;</li>
+	<li>numărul perechilor neordonate de insule între care se poate realiza transportul prin elicoptere direct sau indirect;</li>
+	<li>suma distantelor parcurse de toate elicopterele cumpărate (distanța parcursă de un elicopter se consideră distanța dintre insulele între care acesta asigură transportul).</li>
+</ol>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>elicoptere.in</code> conține pe prima linie  o valoare <code>v</code> ce poate fi <code>1</code>, <code>2</code>, sau <code>3</code>, în funcţie de cerinţa ce va fi rezolvată, pe linia a doua numerele naturale <code>n</code> şi <code>k</code> separate printr-un spaţiu, cu semnificaţia de mai sus, iar pe următoarele <code>n</code> linii se află câte şase numere naturale <code>x1</code>, <code>y1</code>, <code>x2</code>, <code>y2</code>, <code>x3</code> și <code>y3</code> separate prin spațiu reprezentând coordonatele celor trei vârfuri ale insulelor în formatul (abscisă, ordonată).</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă valoarea lui <code>v</code> este <code>1</code> atunci fişierul de ieşire <code>elicoptere.out</code> va conţine pe prima linie numai numărul minim de elicoptere, ce vor fi cumpărate de administraţie.</p>
+
+<p>Dacă valoarea lui <code>v</code> este <code>2</code> atunci fişierul de ieşire <code>elicoptere.out</code> va conţine pe prima linie numai numărul maxim de perechi de insule între care se poate realiza transportul prin elicoptere.</p>
+
+<p>Dacă valoarea lui <code>v</code> este <code>3</code> atunci fişierul de ieşire <code>elicoptere.out</code> va conţine pe prima linie suma minimă a lungimii rutelor parcurse de elicoptere.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 100;</code></li>
+	<li><code>1 ≤ k ≤ 1000;</code></li>
+	<li>coordonatele vârfurilor insulelor sunt numere naturale <code>0 ≤ xi , yi ≤ 10</code><sup><code>6</code></sup>;</li>
+	<li>orice două insule nu au puncte comune;</li>
+	<li>la cerința 2, dacă se poate ajunge din insula A în insula B atunci evident că se poate ajunge și din B în A, deci perechea formată din A și B se numără o singură dată;</li>
+	<li>distanța dintre două insule poate fi şi număr real. La cerința 3 rezultatul se cere cu o aproximație de <code>0.001</code>, adică rezultatul notat cu <code>R</code> se consideră corect, dacă faţă de rezultatul comisiei <code>C</code> îndeplineşte condiţia <code>|R-C|&lt;0.001</code>.</li>
+	<li>pentru a calcula şi afișa un număr real <code>x</code> cu o precizie cât mai mare vă recomandăm folosirea tipului <code>double</code></li>
+	<li>pentru rezolvarea corectă a cerinței 1 se acordă 20% din punctaj;</li>
+	<li>pentru rezolvarea corectă a cerinței 2 se acordă 40% din punctaj;</li>
+	<li>pentru rezolvarea corectă a cerinței 3 se acordă 40% din punctaj.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>elicoptere.in</code></p>
+
+<pre>1
+6 11
+100 20 100 30 105 30
+20 20 30 30 20 30
+200 20 200 30 205 30
+100 40 100 50 105 40
+10 40 5 40 10 50
+10 20 5 30 10 30</pre>
+
+<p><code>elicoptere.out</code></p>
+
+<pre>3</pre>
+
+<h3>Explicație</h3>
+
+<p><code>v = 1</code>, deci se rezolvă <span class="caps">NUMAI</span> prima cerință.</p>
+
+<p>Perechile de insule cu transport direct cu elicoptere: <code>(1,4) (2,6)</code>, <code>(6,5)</code> și obținem astfel <code>3</code> elicoptere.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>elicoptere.in</code></p>
+
+<pre>2
+6 11
+100 20 100 30 105 30
+20 20 30 30 20 30
+200 20 200 30 205 30
+100 40 100 50 105 40
+10 40 5 40 10 50
+10 20 5 30 10 30</pre>
+
+<p><code>elicoptere.out</code></p>
+
+<pre>4</pre>
+
+<h3>Explicație</h3>
+
+<p><code>v = 2</code>, deci se rezolvă <span class="caps">NUMAI</span> a doua cerință.</p>
+
+<p>Perechile de insule cu transport direct cu elicoptere: <code>(1,4) (2,6)</code>, <code>(6,5)</code> și obținem astfel <code>3</code> elicoptere.</p>
+
+<p>Insula <code>3</code> rămâne izolată, astfel avem două grupuri de insule. Primul grup conţine insulele <code>1</code> şi <code>4</code>, iar al doilea insulele <code>2</code>, <code>5</code>, <code>6</code>. Din primul grup se numara perechea <code>(1,4)</code>, iar din al doilea grup se numara perechile de insule <code>(2,5)</code>, <code>(2,6)</code> si <code>(5,6)</code>. In total <code>4</code> perechi de insule intre care se poate deplasa cu elicopterul direct sau cu escala (indirect).</p>
+
+<h1>Exemplul 3</h1>
+
+<p><code>elicoptere.in</code></p>
+
+<pre>3
+6 11
+100 20 100 30 105 30
+20 20 30 30 20 30
+200 20 200 30 205 30
+100 40 100 50 105 40
+10 40 5 40 10 50
+10 20 5 30 10 30</pre>
+
+<p><code>elicoptere.out</code></p>
+
+<pre>30</pre>
+
+<h3>Explicație</h3>
+
+<p><code>v = 3</code>, deci se rezolvă <span class="caps">NUMAI</span> a treia cerință.</p>
+
+<p>Perechile de insule cu transport direct cu elicoptere: <code>(1,4) (2,6)</code>, <code>(6,5)</code> și obținem astfel <code>3</code> elicoptere.</p>
+
+<p>Insula <code>3</code> rămâne izolată, astfel avem două grupuri de insule. Primul grup conţine insulele <code>1</code> şi <code>4</code>, iar al doilea insulele <code>2</code>, <code>5</code>, <code>6</code>.</p>
+
+<p>Elicopterele asigură transportul direct între insulele:</p>
+
+<ul>
+	<li><code>1</code> şi <code>4</code> cu distanţa verticală egală cu <code>10</code>;</li>
+	<li><code>2</code> şi <code>6</code> cu distanţa orizontală egală cu <code>10</code>;</li>
+	<li><code>5</code> şi <code>6</code> cu distanţa verticală egală cu <code>10</code>;</li>
+</ul>
+
+<p>În total liniile de transport au distanţa <code>30</code>.</p>		</article>
+		</body></html>

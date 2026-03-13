@@ -1,0 +1,118 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1137"><article id="enunt">
+			<p>Gina şi Mihai joacă împreună jocul Cuart. Ei au la dispoziție un șir de <code>2*N</code> cartonașe ce conțin numere naturale. Primele <code>N</code> cartonașe, de la stânga la dreapta, sunt ale Ginei, iar următoarele <code>N</code> ale lui Mihai. Gina traversează șirul, de la stânga la dreapta și scrie pe o foaie de hârtie, pe primul rând, un șir de numere obținut din numerele de pe cartonașele sale, din care a șters toate cifrele pare. La fel procedează Mihai care scrie pe foaia sa de hârtie, pe primul rând, șirul de numere obținut din numerele de pe cartonașele sale, din care a șters toate cifrele impare. Dacă dintr-un număr s-au șters toate cifrele, sau au rămas doar cifre egale cu <code>0</code>, atunci numărul este ignorat, deci pe hârtie nu se scrie nimic.<br>
+Fiecare copil, notează pe hârtia sa, pe al doilea rând, un alt șir de numere obținut astfel: pentru fiecare număr <code>X</code> scris pe primul rând, copilul va scrie cel mai mare număr natural <code>K</code> cu proprietatea că <code>1+5+9+13+...+ K ≤ X</code>. În jocul copiilor, numărul <code>X</code> se numește cuarț dacă <code>1+5+9+13+...+K = X</code>.</p>
+
+<p style="text-align:center;"><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-cuart-png.png"></p>
+
+<p>În exemplul de mai sus, Gina nu a scris niciun număr cuarț pe primul rând, iar Mihai a scris unul singur (<code>6=1+5</code>).</p>
+
+<p>Regulile de câștig ale jocului sunt următoarele:</p>
+
+<ul>
+	<li>Câștigă acel copil care are scrise pe primul rând cele mai multe numere cuarț. În acest caz, valoarea de câștig a jocului este egală cu numărul de numere cuarț scrise de copilul câștigător.</li>
+	<li>Dacă cei doi copii au scris același număr de numere cuarț,  atunci va câștiga cel care are primul număr scris pe primul rând, mai mare decât al celuilalt. Acest prim număr scris de câștigător va reprezenta valoarea de câștig.</li>
+	<li>Dacă nici Gina și nici Mihai nu au scris niciun număr pe hârtie, se consideră egalitate și nu câștigă niciunul.</li>
+</ul>
+
+<h1>Cerinţe</h1>
+
+<p>Scrieţi un program care să citească numărul <code>N</code> reprezentând numărul de cartonașe ale unui copil şi cele <code>2*N</code> numere de pe cartonașe, în ordine de la stânga la dreapta și care să determine:</p>
+
+<p><strong>1)</strong> Cel mai mare număr de pe cele <code>2*N</code> catonașe, pentru care nu s-a scris niciun număr pe primul rând (a fost omis), nici pe hârtia Ginei, nici pe hârtia lui Mihai; dacă nu a fost omis niciun număr, se va scrie <code>0</code>;<br>
+<strong>2)</strong> Câștigătorul jocului și afișează numărul <code>1</code> dacă a câștigat Gina, <code>2</code> pentru Mihai sau <code>0</code> în caz de egalitate.<br>
+<strong>3)</strong> Valoarea de câștig a jocului, sau <code>0</code>, în caz de egalitate.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>cuart.in</code> conține pe prima linie un număr natural <code>P</code>. Pentru toate testele de intrare, numărul <code>P</code> poate avea doar valoarea <code>1</code>, valoarea <code>2</code> sau valoarea <code>3</code>. Pe a doua linie a fișierului de intrare <code>cuart.in</code> se găsește  numărul natural <code>N</code> reprezentând numărul de cartonașe ale fiecărui copil și pe a treia linie, în ordine de la stânga la dreapta, numerele de pe cele <code>2*N</code> cartonașe, separate prin câte un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p><strong>Dacă valoarea lui <code>P</code> este <code>1</code>, se va rezolva numai punctul 1) din cerințe.</strong> În acest caz, fişierul de ieşire <code>cuart.out</code> va conține pe prima linie un număr natural reprezentând răspunsul la cerinţa 1).</p>
+
+<p><strong>Dacă valoarea lui <code>P</code> este <code>2</code>, se va rezolva numai punctul 2) din cerințe.</strong> În acest caz, fişierul de ieşire <code>cuart.out</code> va conține pe prima linie un număr natural reprezentând răspunsul la cerinţa 2).</p>
+
+<p><strong>Dacă valoarea lui <code>P</code> este <code>3</code>, se va rezolva numai punctul 3) din cerințe.</strong> În acest caz, fişierul de ieşire <code>cuart.out</code> va conține pe prima linie un număr natural reprezentând răspunsul la cerinţa 3).</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 1000</code></li>
+	<li><code>1 ≤</code> numerele de pe cartonașe <code>&lt; 100.000.000</code></li>
+	<li>Pentru rezolvarea corectă a primei cerinţe se acordă 20 de puncte, pentru rezolvarea corectă a celei de a doua cerințe se acordă 30 de puncte, pentru rezolvarea corectă a celei de a treia cerințe se acordă 50 de puncte.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>cuart.in</code></p>
+
+<pre>1
+4
+1234 48 284260 75 756 1232515 153 98</pre>
+
+<p><code>cuart.out</code></p>
+
+<pre>284260</pre>
+
+<h1>Explicație</h1>
+
+<p><code>P = 1</code>, pentru acest test, se rezolvă cerința 1).</p>
+
+<p>Gina a scris pe hârtia sa, pe două rânduri numerele:</p>
+
+<pre>13 75
+ 5 21</pre>
+
+<p>Mihai a scris pe hârtie numerele:</p>
+
+<pre>6 22 8
+5 9  5</pre>
+
+<p>Cel mai mare număr omis este <code>284260</code></p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>cuart.in</code></p>
+
+<pre>2
+4
+1234 48 284260 75 756 1232515 153 98</pre>
+
+<p><code>cuart.out</code></p>
+
+<pre>2</pre>
+
+<h1>Explicație</h1>
+
+<p><code>P = 2</code>, pentru acest test, se rezolvă cerința 2).</p>
+
+<p>A câștigat Mihai deoarece are un număr cuarț, iar Gina niciunul</p>
+
+<h1>Exemplul 3</h1>
+
+<p><code>cuart.in</code></p>
+
+<pre>3
+1
+154 2181</pre>
+
+<p><code>cuart.out</code></p>
+
+<pre>28</pre>
+
+<h1>Explicație</h1>
+
+<p><code>P = 3</code>, pentru acest test, se rezolvă cerința 3).</p>
+
+<p>Gina a scris pe hârtia sa, pe două rânduri numerele:</p>
+
+<pre>15
+9</pre>
+
+<p>Mihai a scris pe hârtie numerele:</p>
+
+<pre>28
+13</pre>
+
+<p>Ambii copii au scris câte un număr cuarț, însă a câștigat Mihai care are primul număr scris pe primul rând mai mare decât al Ginei. Valoarea de câștig a jocului este <code>28</code>.</p>		</article>
+		</body></html>

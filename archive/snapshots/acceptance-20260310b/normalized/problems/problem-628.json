@@ -1,0 +1,312 @@
+{
+  "id": 628,
+  "slug": "cub1",
+  "name": "Cub1",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/628/cub1",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 85,
+      "name": "Structuri de date liniare",
+      "slug": "structuri-de-date-liniare",
+      "href": "/?pagina=probleme-lista&tag=85"
+    },
+    {
+      "id": 87,
+      "name": "Coada",
+      "slug": "coada",
+      "href": "/?pagina=probleme-lista&tag=87"
+    }
+  ],
+  "tags": [
+    "Algoritmul lui Lee"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Cunoscând <code>n</code>, dimensiunea cubului şi valorile asociate fiecărei cămăruţe, determinaţi:</p><p>a) cămăruța cu un număr maxim de cămăruțe ce pot fi accesate din ea;<br>\nb) un drum de lungime minimă de la cămăruţa <code>(1,1,1)</code> la cămăruţa <code>(n,n,n)</code>.</p>",
+      "text": "Cunoscând n, dimensiunea cubului şi valorile asociate fiecărei cămăruţe, determinaţi:a) cămăruța cu un număr maxim de cămăruțe ce pot fi accesate din ea; b) un drum de lungime minimă de la cămăruţa (1,1,1) la cămăruţa (n,n,n)."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fişierul de intrare <code>cub1.in</code> conţine pe prima linie un număr natural <code>p</code>. Pentru toate testele de intrare, numărul <code>p</code> poate avea doar valoarea <code>1</code> sau valoarea <code>2</code>.</p><p>Pe a doua linie se găseşte un număr natural <code>n</code> care reprezintă dimensiunea cubului. Următoarele linii conţin <code>n</code> matrice pătratice de dimensiune <code>n</code>, reprezentând valorile <code>x<sub>ijk</sub></code> asociate cămăruţelor, astfel: primele <code>n</code> linii reprezintă valorile <code>x<sub>1jk</sub></code> , următoarele <code>n</code> linii valorile <code>x<sub>2jk</sub></code> , ş.a.m.d.</p>",
+      "text": "Fişierul de intrare cub1.in conţine pe prima linie un număr natural p. Pentru toate testele de intrare, numărul p poate avea doar valoarea 1 sau valoarea 2.Pe a doua linie se găseşte un număr natural n care reprezintă dimensiunea cubului. Următoarele linii conţin n matrice pătratice de dimensiune n, reprezentând valorile xijk asociate cămăruţelor, astfel: primele n linii reprezintă valorile x1jk , următoarele n linii valorile x2jk , ş.a.m.d."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Dacă valoarea lui <code>p</code> este <code>1</code>, <strong>se va rezolva numai punctul a)</strong> din cerință. </p><p>În acest caz, în fişierul de ieşire <code>cub1.out</code> se vor scrie pe prima linie trei numere naturale reprezentând coordonatele cămăruței din care pot fi accesate un număr maxim de cămăruțe.</p><p>Dacă valoarea lui <code>p</code> este <code>2</code>, <strong>se va rezolva numai punctul b)</strong> din cerință. </p><p>În acest caz, în fişierul de ieşire <code>cub1.out</code> se va scrie pe prima linie un singur număr natural <code>L</code>,  reprezentând lungimea drumului de lungime minimă găsit. Dacă nu există drum, se va afişa <code>-1</code>. Următoarele <code>L</code> linii vor conţine câte <code>3</code> numere naturale reprezentând coordonatele cămăruţelor care alcătuiesc drumul găsit.</p>",
+      "text": "Dacă valoarea lui p este 1, se va rezolva numai punctul a) din cerință. În acest caz, în fişierul de ieşire cub1.out se vor scrie pe prima linie trei numere naturale reprezentând coordonatele cămăruței din care pot fi accesate un număr maxim de cămăruțe.Dacă valoarea lui p este 2, se va rezolva numai punctul b) din cerință. În acest caz, în fişierul de ieşire cub1.out se va scrie pe prima linie un singur număr natural L, reprezentând lungimea drumului de lungime minimă găsit. Dacă nu există drum, se va afişa -1. Următoarele L linii vor conţine câte 3 numere naturale reprezentând coordonatele cămăruţelor care alcătuiesc drumul găsit."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ n ≤ 100</code></li>\n\t<li><code>0 ≤ <code>x<sub>ijk</sub></code> ≤ 63</code></li>\n\t<li>Pentru rezolvarea corectă a primei cerinţe se acordă 20 de puncte, iar pentru cerința a doua se acordă 80 de puncte.</li>\n\t<li>La cerința a), dacă există mai multe cămăruțe care respectă cerința dată, se va afișa oricare dintre ele.</li>\n\t<li>La cerinţa b), dacă există mai multe drumuri de lungime minimă, se poate afişa oricare dintre ele.</li>\n\t<li>Coordonatele cămăruţelor se afişează în ordinea în care sunt parcurse de către bilă.</li>\n</ul>",
+      "text": "1 ≤ n ≤ 100 0 ≤ xijk ≤ 63 Pentru rezolvarea corectă a primei cerinţe se acordă 20 de puncte, iar pentru cerința a doua se acordă 80 de puncte. La cerința a), dacă există mai multe cămăruțe care respectă cerința dată, se va afișa oricare dintre ele. La cerinţa b), dacă există mai multe drumuri de lungime minimă, se poate afişa oricare dintre ele. Coordonatele cămăruţelor se afişează în ordinea în care sunt parcurse de către bilă."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>cub1.in</code></p><pre>1\n3\n23 6 2\n57 1 10\n12 23 12\n12 1 17\n1 48 3\n2 7 17\n8 8 4\n16 4 4\n5 8 6</pre><p><code>cub1.out</code></p><pre>1 2 1</pre>",
+      "text": "cub1.in1 3 23 6 2 57 1 10 12 23 12 12 1 17 1 48 3 2 7 17 8 8 4 16 4 4 5 8 6cub1.out1 2 1"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p><code>p = 1</code></p><p><code>x<sub><small>121</small></sub>= 57 [111001]</code><br>\nDin cămăruța <code>(1,2,1)</code> se poate ajunge în <code>(2,2,1)</code>, <code>(1,2,2)</code> și <code>(1,1,1)</code>. Valoarea 3 este numărul maxim de cămăruțe accesibile dintr-o cămăruță.</p><p><strong>Atenție! Pentru acest test se rezolvă doar cerința a).</strong></p>",
+      "text": "p = 1x121= 57 [111001] Din cămăruța (1,2,1) se poate ajunge în (2,2,1), (1,2,2) și (1,1,1). Valoarea 3 este numărul maxim de cămăruțe accesibile dintr-o cămăruță.Atenție! Pentru acest test se rezolvă doar cerința a)."
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>cub1.in</code></p><pre>2\n3\n23 6 2\n57 1 10\n12 23 12\n12 1 17\n1 48 3\n2 7 17\n8 8 4\n16 4 4\n5 8 6</pre><p><code>cub1.out</code></p><pre>7\n1 1 1\n2 1 1\n2 1 2\n3 1 2\n3 1 3\n3 2 3\n3 3 3</pre>",
+      "text": "cub1.in2 3 23 6 2 57 1 10 12 23 12 12 1 17 1 48 3 2 7 17 8 8 4 16 4 4 5 8 6cub1.out7 1 1 1 2 1 1 2 1 2 3 1 2 3 1 3 3 2 3 3 3 3"
+    },
+    {
+      "title": "Explicație",
+      "html": "<p><code>p = 2</code></p><p>Lungimea minimă a unui drum este <code>7</code>.</p><p>Iniţial bila se află în <code>(1,1,1)</code>. <code>x<sub><small>111</small></sub>= 23 [010111]</code> (bitul de pe poziția <code>0</code> este <code>1</code>) deci bila se poate deplasa în <code>(2,1,1)</code>. <code>x<sub><small>211</small></sub>= 12 [001100]</code> (bitul de pe pozitia <code>3</code> este <code>1</code>) deci bila se poate deplasa în <code>(2,1,2)</code>. <code>x<sub><small>212</small></sub>= 1 [000001]</code> (bitul de pe pozitia <code>0</code> este <code>1</code>) deci bila se poate deplasa în <code>(3,1,2)</code>, ș.a.m.d.</p><p><strong>Atenție! Pentru acest test se rezolvă doar cerința b).</strong></p>",
+      "text": "p = 2Lungimea minimă a unui drum este 7.Iniţial bila se află în (1,1,1). x111= 23 [010111] (bitul de pe poziția 0 este 1) deci bila se poate deplasa în (2,1,1). x211= 12 [001100] (bitul de pe pozitia 3 este 1) deci bila se poate deplasa în (2,1,2). x212= 1 [000001] (bitul de pe pozitia 0 este 1) deci bila se poate deplasa în (3,1,2), ș.a.m.d.Atenție! Pentru acest test se rezolvă doar cerința b)."
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "1 ≤ n ≤ 100",
+    "0 ≤ xijk ≤ 63",
+    "Pentru rezolvarea corectă a primei cerinţe se acordă 20 de puncte, iar pentru cerința a doua se acordă 80 de puncte.",
+    "La cerința a), dacă există mai multe cămăruțe care respectă cerința dată, se va afișa oricare dintre ele.",
+    "La cerinţa b), dacă există mai multe drumuri de lungime minimă, se poate afişa oricare dintre ele.",
+    "Coordonatele cămăruţelor se afişează în ordinea în care sunt parcurse de către bilă."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qd45e1141d0.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "10",
+    "intrare/ieșire": "cub1.in / cub1.out",
+    "limită timp": "2 secunde",
+    "limită memorie": "32 MB / 16 MB",
+    "sursa problemei": "Grigore Moisil, 2014",
+    "autor": "Nicolae Dragos",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 2,
+  "memoryLimitMb": 32,
+  "author": "Nicolae Dragos",
+  "sourceAttribution": "Grigore Moisil, 2014",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/628/cub1"
+}

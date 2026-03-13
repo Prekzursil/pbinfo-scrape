@@ -1,0 +1,68 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1090"><article id="enunt">
+			<p>Mariei îi plac numerele prime şi puterile numerelor prime. Pornind de la un număr prim <code>p</code>, ea construieşte noi numere, fiecare număr construit fiind un produs de forma <code>p</code><sup><code>y</code></sup> (<code>y</code> număr natural nenul) sau <code>q∙p</code><sup><code>m</code></sup>,  <code>m</code> număr natural şi <code>q</code> un număr prim, numindu-le numere <b><code>p</code>-prime</b>.  De exemplu, numerele <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code>, <code>10</code>, <code>12</code>, <code>13</code>, <code>14</code>, <code>16</code>, <code>17</code> sunt primele <code>13</code> numere <code>2</code>-prime deoarece <code>2=2</code><sup><code>1</code></sup>, <code>3=3•2</code><sup><code>0</code></sup>, <code>4=2</code><sup><code>2</code></sup>, <code>5=5•2</code><sup><code>0</code></sup>, <code>6=3•2</code><sup><code>1</code></sup>, <code>7=7•2</code><sup><code>0</code></sup>, <code>8=2</code><sup><code>3</code></sup>, <code>10=5•2</code><sup><code>1</code></sup>, <code>12=3•2</code><sup><code>2</code></sup>, <code>13=13•2</code><sup><code>0</code></sup>, <code>14=7•2</code><sup><code>1</code></sup>, <code>16=2</code><sup><code>4</code></sup>, <code>17=17•2</code><sup><code>0</code></sup>.   </p>
+
+<p>Într-o zi Maria a găsit o foaie de hârtie, pe care era scris un şir format din <code>n</code> numere naturale nenule.</p>
+
+<p>Cum pe lângă numerele <code>p</code>-prime ea este pasionată şi de secvenţe, şi-a pus următoarea întrebare: câte secvenţe sunt pe foaie cu următoarele proprietăţi:</p>
+
+<ul>
+	<li>conţin exact <code>k</code> numere <code>p</code>-prime;</li>
+	<li>încep şi se termină cu un număr <code>p</code>-prim.</li>
+</ul>
+
+<p>În plus, Maria doreşte să ştie care este poziţia de început şi cea de final, pentru fiecare secvenţă descoperită, relative la şirul scris pe foaia de hârtie.</p>
+
+<h1>Cerinţă</h1>
+
+<p>Scrieţi un program care să citească mai multe seturi de date, fiecare set fiind format din numerele <code>n</code>, <code>p</code>, <code>k</code>, cu semnificaţiile din enunţ, şi şirul cu <code>n</code> elemente  <code>a</code><sub><code>1</code></sub>, <code>a</code><sub><code>2</code></sub>, <code>a</code><sub><code>3</code></sub>, … <code>a</code><sub><code>n</code></sub>, numerele Mariei. Programul va determina pentru fiecare set de date numărul secvenţelor ce conţin exact <code>k</code> numere <code>p</code>-prime, precum şi poziţiile de început şi de final ale acestor secvenţe în şirul din set.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>secvente2.in</code> conține pe prima linie numărul <code>D</code> reprezentând numărul de seturi de date din fişier. Seturile de date sunt scrise în fişier pe linii succesive. Pentru fiecare set de date, prima linie conţine câte trei numere naturale: <code>n</code> (numărul de elemente de pe foaie), <code>p</code> şi <code>k</code> (cu semnificaţia din enunţ), separate prin câte un spaţiu, iar fiecare dintre următoarele <code>n</code> linii conţine câte un număr natural al şirului <code>a</code><sub><code>1</code></sub>, <code>a</code><sub><code>2</code></sub>, <code>a</code><sub><code>3</code></sub>, … <code>a</code><sub><code>n</code></sub>, numerele din şirul Mariei.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>secvente2.out</code> va conține <code>D</code> soluţii corespunzătoare celor <code>D</code> seturi de date. Pentru fiecare soluţie  prima linie va conţine un număr <code>x</code> reprezentând numărul de secvenţe ce îndeplinesc proprietăţile cerute, iar fiecare dintre următoarele <code>x</code> linii vor conţine câte <code>2</code> numere naturale, separate printr-un spaţiu, reprezentând poziţia de început, respectiv de final a fiecărei secvenţe, linii ordonate crescător după poziţia de început. Dacă în şir nu există o astfel de secvenţă, prima linie a setului va conţine valoarea <code>0</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ D ≤ 15</code>;</li>
+	<li><code>1 ≤ k ≤ n ≤ 15000</code>;</li>
+	<li><code>2 ≤ p ≤ 30000</code>; <code>p</code> este un număr natural prim</li>
+	<li><code>1 ≤ a</code><sub><code>1</code></sub>, <code>a</code><sub><code>2</code></sub>, <code>a</code><sub><code>3</code></sub>, … <code>a</code><sub><code>n</code></sub> <code> ≤ 30000</code>; <code>a</code><sub><code>1</code></sub>, <code>a</code><sub><code>2</code></sub>, <code>a</code><sub><code>3</code></sub>, … <code>a</code><sub><code>n</code></sub> sunt numere naturale nenule (poziţiile din şir sunt numerotate de la <code>1</code>)</li>
+	<li>numărul <code>1</code> nu este p-prim.</li>
+	<li>o secvenţă dintr-un şir este formată din elemente aflate pe poziţii consecutive în şirul dat.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>secvente2.in</code></p>
+
+<pre>2
+5 3 2
+7
+27 
+4 
+45 
+1
+3 5 7
+3
+4
+5</pre>
+
+<p><code>secvente2.out</code></p>
+
+<pre>2
+1 2
+2 4
+0</pre>
+
+<h1>Explicație</h1>
+
+<p>Cum <code>D=2</code>, fişierul de intrare conţine două seturi de date. </p>
+
+<p>Primul set de date: <code>n=5</code>, <code>p=3</code>, <code>k=2</code> şi <code>a=(7, 27, 4, 45, 1)</code>. Şirul din acest set conţine următoarele numere <code>3</code>-prime: <code>a</code><sub><code>1</code></sub><code>=7</code> (număr prim), <code>a</code><sub><code>2</code></sub><code>=27=3</code><sup><code>3</code></sup> (putere a lui <code>3</code>) şi <code>a</code><sub><code>4</code></sub><code>=45=5*3</code><sup><code>2</code></sup> (număr prim înmulţit cu o putere a lui <code>3</code>). În şir sunt două secvenţe cu câte <code>2</code> numere <code>3</code>-prime: <code>a</code><sub><code>1</code></sub>, <code>a</code><sub><code>2</code></sub> respectiv <code>a</code><sub><code>2</code></sub>, <code>a</code><sub><code>3</code></sub>, <code>a</code><sub><code>4</code></sub>. Pe prima linie a fişierului de ieşire se va scrie valoarea <code>2</code>, iar pe următoarele două linii, poziţiile de început şi de final ale celor două secvenţe determinate.   </p>
+
+<p>Şirul <code>a</code> din al doilea set de date, <code>n=3</code>, <code>p=5</code>, <code>k=7</code>, <code>a=(3,4,5)</code>, nu conţine nici o secvenţă cu proprietatea cerută. Astfel, în fişierul de ieşire, pe cea de-a patra linie, se va scrie valoarea <code>0</code>.</p>		</article>
+		</body></html>

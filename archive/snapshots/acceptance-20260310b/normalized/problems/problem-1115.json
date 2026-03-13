@@ -1,0 +1,307 @@
+{
+  "id": 1115,
+  "slug": "avarcolaci",
+  "name": "Avarcolaci",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/1115/avarcolaci",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 116,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=116"
+    },
+    {
+      "id": 150,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=150"
+    }
+  ],
+  "tags": [
+    "Element majoritar"
+  ],
+  "sections": [
+    {
+      "title": "Cerință",
+      "html": "<p>Cunoscând <code>N</code> și indicii vârcolacilor cu care se înrudesc fiecare dintre cei <code>2*N</code> săteni, să se determine vârcolacul care bântuie satul, în cazul în care acesta există. </p>",
+      "text": "Cunoscând N și indicii vârcolacilor cu care se înrudesc fiecare dintre cei 2*N săteni, să se determine vârcolacul care bântuie satul, în cazul în care acesta există."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>avarcolaci.in</code> conține pe prima linie numărul <code>T</code> de teste. Următoarele <code>2*T</code> linii conțin cele <code>T</code> teste. Prima linie dintr-un test conține numărul natural <code>N</code>, indicând faptul că avem <code>2*N</code> săteni în Bosston. Următoarea linie conține <code>2*N</code> elemente, al <code>i</code>-lea dintre aceste elemente reprezentând indicele vârcolacului cu care este rudă al <code>i</code>-lea sătean.</p>",
+      "text": "Fișierul de intrare avarcolaci.in conține pe prima linie numărul T de teste. Următoarele 2*T linii conțin cele T teste. Prima linie dintr-un test conține numărul natural N, indicând faptul că avem 2*N săteni în Bosston. Următoarea linie conține 2*N elemente, al i-lea dintre aceste elemente reprezentând indicele vârcolacului cu care este rudă al i-lea sătean."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>avarcolaci.out</code> va conține <code>T</code> linii, câte una pentru fiecare test din fișierul de intrare. Dacă vârcolacul care bântuie satul nu poate fi determinat, atunci se va afișa textul <code>Mozart</code>. Dacă vârcolacul poate fi determinat, atunci se va afișă indicele acestuia.</p>",
+      "text": "Fișierul de ieșire avarcolaci.out va conține T linii, câte una pentru fiecare test din fișierul de intrare. Dacă vârcolacul care bântuie satul nu poate fi determinat, atunci se va afișa textul Mozart. Dacă vârcolacul poate fi determinat, atunci se va afișă indicele acestuia."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ T ≤ 15</code></li>\n\t<li><code>1 ≤ N ≤ 500.000</code></li>\n\t<li>Pentru 10% din teste se garantează că <code>N = 1</code></li>\n\t<li>Pentru 20% din teste se garantează că <code>N &lt; 10</code></li>\n\t<li>Pentru 40% din teste se garantează că <code>N &lt;= 500</code></li>\n\t<li>Pentru 80% din teste se garantează că <code>N &lt;= 50.000</code></li>\n\t<li>Indicii vârcolacilor sunt numere întregi pozitive mai mici ca <code>10</code><sup><code>9</code></sup></li>\n\t<li>Pentru 50% din teste indicii vârcolacilor sunt mai mici strict ca <code>32762</code></li>\n\t<li><span class=\"caps\">ATENȚIE</span>! Satul conține <code>2*N</code> săteni!</li>\n\t<li><span class=\"caps\">ATENȚIE</span> la limita de memorie!</li>\n\t<li><span class=\"caps\">ATENȚIE</span>! În cazul în care sunt mai multe soluții pentru vârcolacul care bântuie satul, se acceptă oricare dintre ele.</li>\n</ul>",
+      "text": "1 ≤ T ≤ 15 1 ≤ N ≤ 500.000 Pentru 10% din teste se garantează că N = 1 Pentru 20% din teste se garantează că N < 10 Pentru 40% din teste se garantează că N <= 500 Pentru 80% din teste se garantează că N <= 50.000 Indicii vârcolacilor sunt numere întregi pozitive mai mici ca 109 Pentru 50% din teste indicii vârcolacilor sunt mai mici strict ca 32762 ATENȚIE! Satul conține 2*N săteni! ATENȚIE la limita de memorie! ATENȚIE! În cazul în care sunt mai multe soluții pentru vârcolacul care bântuie satul, se acceptă oricare dintre ele."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>avarcolaci.in</code></p><pre>3\n2\n1 4 3 4\n1\n1 1\n3\n4 1 4 4 4 4</pre><p><code>avarcolaci.out</code></p><pre>Mozart\n1\n4</pre>",
+      "text": "avarcolaci.in3 2 1 4 3 4 1 1 1 3 4 1 4 4 4 4avarcolaci.outMozart 1 4"
+    },
+    {
+      "title": "Explicație",
+      "html": "<ol>\n\t<li>Dacă împărțim în grupuri vârcolacii asociați celor <code>4</code> săteni obținem <code>(1, 3) (4, 4)</code> și nu avem un vârcolac atât în primul grup, cât și în al doilea.</li>\n\t<li>Vârcolacul <code>1</code> bântuie satul.</li>\n\t<li>Vârcolacul <code>4</code> bântuie satul – nu putem împărți sătenii în două grupuri astfel încât <code>4</code> să nu fie în niciunul dintre ele.</li>\n</ol>",
+      "text": "Dacă împărțim în grupuri vârcolacii asociați celor 4 săteni obținem (1, 3) (4, 4) și nu avem un vârcolac atât în primul grup, cât și în al doilea. Vârcolacul 1 bântuie satul. Vârcolacul 4 bântuie satul – nu putem împărți sătenii în două grupuri astfel încât 4 să nu fie în niciunul dintre ele."
+    }
+  ],
+  "examples": [],
+  "constraints": [
+    "1 ≤ T ≤ 15",
+    "1 ≤ N ≤ 500.000",
+    "Pentru 10% din teste se garantează că N = 1",
+    "Pentru 20% din teste se garantează că N < 10",
+    "Pentru 40% din teste se garantează că N <= 500",
+    "Pentru 80% din teste se garantează că N <= 50.000",
+    "Indicii vârcolacilor sunt numere întregi pozitive mai mici ca 109",
+    "Pentru 50% din teste indicii vârcolacilor sunt mai mici strict ca 32762",
+    "ATENȚIE! Satul conține 2*N săteni!",
+    "ATENȚIE la limita de memorie!",
+    "ATENȚIE! În cazul în care sunt mai multe soluții pentru vârcolacul care bântuie satul, se acceptă oricare dintre ele."
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q723175c76b.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Candale Silviu (silviu)",
+    "clasa": "11",
+    "intrare/ieșire": "avarcolaci.in / avarcolaci.out",
+    "limită timp": "5 secunde",
+    "limită memorie": "3 MB / 1 MB",
+    "sursa problemei": "ONI 2014, Clasele XI-XII",
+    "autor": "Andrei Parvu",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 5,
+  "memoryLimitMb": 3,
+  "author": "Andrei Parvu",
+  "sourceAttribution": "ONI 2014, Clasele XI-XII",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/1115/avarcolaci"
+}

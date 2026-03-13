@@ -1,0 +1,70 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2057"><article id="enunt">
+			<p>Să ne imaginăm faptul că la un anumit liceu există doar două clase per generație: una de Real și una de Uman. În prezent au loc înscrierile pentru clasa a IX-a. Cele două clase au fiecare câte <code>M</code> locuri disponibile, atât la Real, cât și la Uman. Dacă lista de elevi înscriși la o anumită clasă conține mai mult de <code>M</code> elevi, vor fi admiși acei <code>M</code> elevi care au notele cele mai mari. Ambele clase au deja <code>M</code> elevi înscriși, iar pentru fiecare se știe nota cu care a fost înscris la clasa respectivă. </p>
+
+<p>Mai există însă <code>N</code> elevi, singurii încă neînscriși, care sunt privilegiați în acest proces (fiindcă au terminat gimnaziul la acest liceu). Privilegiul lor constă în următorul fapt: ei se pot înscrie acum, după ce înscrierile publice au fost încheiate, și se cunosc notele de înscriere la ambele clase. Fiecare din cei <code>N</code> elevi are câte două note: nota cu care ar fi înscris la Real și nota cu care ar fi înscris la Uman (acestea pot fi diferite, deoarece examenele de admitere de la cele două clase diferă). Fiecare din cei <code>N</code> elevi va alege să se înscrie în maxim o clasă. Ei își vor coordona alegerile astfel încât să maximizeze numărul de elevi admiși. Deoarece calculele devin destul de complicate, aceștia s-ar putea folosi de ajutorul vostru. Ei doresc răspunsul la două întrebări.</p>
+
+<h1>Cerința</h1>
+
+<p>(1) Care este numărul maxim de elevi privilegiaţi care pot fi admiși dacă se pune restricția suplimentară ca toți elevii privilegiați admiși să fie admiși la aceeași clasă?<br>
+(2) Care este numărul maxim de elevi privilegiaţi care pot fi admiși dacă aceștia se pot înscrie la clase diferite?</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>admitere.in</code> conţine pe primul rând o valoare egală cu <code>1</code> sau <code>2</code>,  reprezentând cerința ce urmează a fi rezolvată. Următoarea linie conține cele două numere <code>N</code> și <code>M</code>. Pe al treilea rând se află <code>M</code> numere, separate prin câte un spațiu, reprezentând notele cu care au fost înscriși elevii care formează momentan clasa de Real. Pe al patrulea rând se află <code>M</code> numere, separate prin câte un spațiu, reprezentând notele cu care au fost înscriși elevii care formează momentan clasa de Uman. Următoarele <code>N</code> linii vor conține câte o pereche de numere <code>R[i]</code>, <code>U[i]</code>, separate prin câte un spațiu, reprezentând nota cu care al <code>i</code>-lea elev privilegiat s-ar înscrie la clasa de Real, respectiv la clasa de Uman.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>admitere.out</code> va conține pe prima linie valoarea <code>MAX</code>: numărul maxim de elevi privilegiați admiși. A doua linie va conține un șir de <code>N</code> caractere din mulțimea <code>{'R', 'U', 'X'}</code>, care va descrie scenariul optim. Dacă al <code>i</code>-lea elev va fi înscris la Real, al <code>i</code>-lea caracter va fi egal cu <code>'R'</code>. Dacă al <code>i</code>-lea elev va fi înscris la Uman, al <code>i</code>-lea caracter va fi egal cu <code>'U'</code>. Dacă acesta nu va fi înscris nicăieri, al <code>i</code>-lea caracter va fi egal cu <code>'X'</code>. Deoarece elevii nu vor să depună efort inutil, un elev privilegiat care nu va fi admis în scenariul optim nu se va înscrie la nicio clasă. Cu alte cuvinte, pentru ca scenariul descris să fie considerat corect este necesar ca exact <code>MAX</code> caractere din șir să fie diferite de <code>'X'</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N, M ≤ 2000</code></li>
+	<li>Teste în valoare totală de 25 de puncte vor solicita rezolvarea cerinței (1), iar restul de 65 de puncte vor solicita rezolvarea cerinței (2). Din oficiu sunt acordate 10 puncte.</li>
+	<li>Pentru cerința (2), teste în valoare totală de 45 de puncte vor avea <code>1 ≤ N, M ≤ 150</code></li>
+	<li>Toate cele <code>N + M</code> note pentru clasa de Real sunt distincte două câte două. Același lucru este valabil și în cazul notelor pentru clasa de Uman.</li>
+	<li>Toate notele sunt numere naturale din intervalul <code>[1, 4000]</code>.</li>
+	<li>Notele elevilor deja înscriși de la clasa de Real, respectiv Uman vor fi date în ordine crescătoare.</li>
+	<li>În cazul în care există mai multe soluții corecte, este acceptată oricare dintre acestea.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>admitere.in</code></p>
+
+<pre>1
+2 3
+2 4 6
+6 7 8
+3 5
+12 14</pre>
+
+<p><code>admitere.out</code></p>
+
+<pre>1
+XR</pre>
+
+<h3>Explicație</h3>
+
+<p>Nu este posibil ca ambii elevi să fie admiși la aceeași clasă. Există mai multe soluții în care un singur elev este admis: <code>XR</code>, <code>XU</code>, <code>RX</code>. Oricare din acestea este corectă.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>admitere.in</code></p>
+
+<pre>2
+2 3
+2 4 6
+6 7 8
+3 5
+12 14</pre>
+
+<p><code>admitere.out</code></p>
+
+<pre>2
+RU</pre>
+
+<h3>Explicație</h3>
+
+<p>Deoarece acum rezolvăm cerința (2), ne este permis să înscriem elevii la clase diferite. Există o soluție în care ambii elevi sunt admiși, iar aceasta este unică: cea în care elevul 1 este înscris la Real (el nu putea fi admis la Uman indiferent de decizia celui de-al doilea elev), iar cel de-al doilea elev este înscris la Uman.</p>		</article>
+		</body></html>

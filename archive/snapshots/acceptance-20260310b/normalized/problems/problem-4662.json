@@ -1,0 +1,306 @@
+{
+  "id": 4662,
+  "slug": "teze",
+  "name": "teze",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4662/teze",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 91,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=91"
+    },
+    {
+      "id": 115,
+      "name": "Diverse",
+      "slug": "diverse",
+      "href": "/?pagina=probleme-lista&tag=115"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Să se determine timpul minim în care pot fi corectate cele <code>m</code> lucrări.</p>",
+      "text": "Să se determine timpul minim în care pot fi corectate cele m lucrări."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie a fișierului de intrare <code>teze.in</code> se află numerele <code>n</code>, <code>m</code>, <code>p</code> și <code>k</code>, despărțite prin câte un spațiu. Pe a doua linie se află două valori <code>t1</code> și <code>q</code>, despărțite printr-un spațiu. Pe următoarele <code>q</code> linii se află valorile <code>d[0], ..., d[q-1]</code>.</p>",
+      "text": "Pe prima linie a fișierului de intrare teze.in se află numerele n, m, p și k, despărțite prin câte un spațiu. Pe a doua linie se află două valori t1 și q, despărțite printr-un spațiu. Pe următoarele q linii se află valorile d[0], ..., d[q-1]."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>În fișierul de ieșire <code>teze.out</code> se va scrie un singur număr, reprezentând numărul de secunde în care se pot corecta tezele modulo <code>1.000.000.007</code>.</p>",
+      "text": "În fișierul de ieșire teze.out se va scrie un singur număr, reprezentând numărul de secunde în care se pot corecta tezele modulo 1.000.000.007."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ n ≤ 1.500.000.000</code>, unde <code>n</code> este numărul problemelor din teze</li>\n\t<li><code>1 ≤ m, q, k ≤ 1000</code>, unde <code>m</code> este numărul elevilor, <code>q</code> este lungimea șirului <code>d</code>, iar <code>k</code> reprezintă numărul de secunde necesar căutării unei probleme</li>\n\t<li><code>1 ≤ p ≤ 10</code><sup><code>10</code></sup>, unde <code>p</code> este numărul de secunde necesar identificării numelui unui elev</li>\n\t<li><code>1 ≤ t[1], d[i] ≤ 10</code></li>\n\t<li>Pentru 5 puncte, <code>n ≤ 25</code></li>\n\t<li>Pentru 10 puncte, <code>n ≤ 50</code></li>\n\t<li>Pentru 20 de puncte, <code>n ≤ 10000</code></li>\n\t<li>Pentru 30 de puncte, <code>n ≤ 10.000.000</code></li>\n\t<li>Pentru 7 puncte, <code>q = 1</code></li>\n\t<li>Pentru 8 puncte, <code>q = 2</code></li>\n\t<li>Pentru 20 de puncte, fără alte restricții suplimentare</li>\n</ul>",
+      "text": "1 ≤ n ≤ 1.500.000.000, unde n este numărul problemelor din teze 1 ≤ m, q, k ≤ 1000, unde m este numărul elevilor, q este lungimea șirului d, iar k reprezintă numărul de secunde necesar căutării unei probleme 1 ≤ p ≤ 1010, unde p este numărul de secunde necesar identificării numelui unui elev 1 ≤ t[1], d[i] ≤ 10 Pentru 5 puncte, n ≤ 25 Pentru 10 puncte, n ≤ 50 Pentru 20 de puncte, n ≤ 10000 Pentru 30 de puncte, n ≤ 10.000.000 Pentru 7 puncte, q = 1 Pentru 8 puncte, q = 2 Pentru 20 de puncte, fără alte restricții suplimentare"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>teze.in</code></p><pre>2 10 5 2\n1 1 \n2</pre><p><code>teze.out</code></p><pre>130</pre><h3>Explicație</h3><p>Avem două probleme în teză, iar <code>t[1] = 1</code>, <code>t[2] = t[1] + d[0] = 1 + 2 = 3</code>. Dacă le corectăm împreună, timpul de corectare pentru fiecare teză va fi: <code>5</code> secunde pentru găsirea numelui elevului, <code>2</code> secunde pentru găsirea primei probleme, <code>1</code> secundă pentru corectarea primei probleme, <code>2</code> secunde pentru găsirea problemei a doua și <code>3</code> secunde pentru corectarea problemei a doua, deci în total <code>5 + 2 + 1 + 2 + 3 = 13</code> secunde pentru fiecare dintre cele <code>10</code> teze, adică <code>130</code> de secunde în total.</p><p>O altă posibilitate este să corectăm prima dată problema <code>1</code> în toate tezele, iar pe urmă să corectăm problema <code>2</code> în toate tezele. Pentru corectarea primei probleme avem: <code>5</code> secunde începerea corectării, <code>2</code> secunde găsirea problemei și <code>1</code> secundă corectarea problemei, în total <code>5 + 2 + 1 = 8</code> pentru o teză, în total <code>80</code> de secunde pentru toate tezele. Pentru corectarea problemei <code>2</code> avem exact același calcul, rezultă în total <code>160</code> de secunde, deci prima metodă a fost mai eficientă și posibilitate mai bună nu există.</p>",
+      "text": "teze.in2 10 5 2 1 1 2teze.out130ExplicațieAvem două probleme în teză, iar t[1] = 1, t[2] = t[1] + d[0] = 1 + 2 = 3. Dacă le corectăm împreună, timpul de corectare pentru fiecare teză va fi: 5 secunde pentru găsirea numelui elevului, 2 secunde pentru găsirea primei probleme, 1 secundă pentru corectarea primei probleme, 2 secunde pentru găsirea problemei a doua și 3 secunde pentru corectarea problemei a doua, deci în total 5 + 2 + 1 + 2 + 3 = 13 secunde pentru fiecare dintre cele 10 teze, adică 130 de secunde în total.O altă posibilitate este să corectăm prima dată problema 1 în toate tezele, iar pe urmă să corectăm problema 2 în toate tezele. Pentru corectarea primei probleme avem: 5 secunde începerea corectării, 2 secunde găsirea problemei și 1 secundă corectarea problemei, în total 5 + 2 + 1 = 8 pentru o teză, în total 80 de secunde pentru toate tezele. Pentru corectarea problemei 2 avem exact același calcul, rezultă în total 160 de secunde, deci prima metodă a fost mai eficientă și posibilitate mai bună nu există."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Avem două probleme în teză, iar t[1] = 1, t[2] = t[1] + d[0] = 1 + 2 = 3. Dacă le corectăm împreună, timpul de corectare pentru fiecare teză va fi: 5 secunde pentru găsirea numelui elevului, 2 secunde pentru găsirea primei probleme, 1 secundă pentru corectarea primei probleme, 2 secunde pentru găsirea problemei a doua și 3 secunde pentru corectarea problemei a doua, deci în total 5 + 2 + 1 + 2 + 3 = 13 secunde pentru fiecare dintre cele 10 teze, adică 130 de secunde în total."
+    }
+  ],
+  "constraints": [
+    "1 ≤ n ≤ 1.500.000.000, unde n este numărul problemelor din teze",
+    "1 ≤ m, q, k ≤ 1000, unde m este numărul elevilor, q este lungimea șirului d, iar k reprezintă numărul de secunde necesar căutării unei probleme",
+    "1 ≤ p ≤ 1010, unde p este numărul de secunde necesar identificării numelui unui elev",
+    "1 ≤ t[1], d[i] ≤ 10",
+    "Pentru 5 puncte, n ≤ 25",
+    "Pentru 10 puncte, n ≤ 50",
+    "Pentru 20 de puncte, n ≤ 10000",
+    "Pentru 30 de puncte, n ≤ 10.000.000",
+    "Pentru 7 puncte, q = 1",
+    "Pentru 8 puncte, q = 2",
+    "Pentru 20 de puncte, fără alte restricții suplimentare"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qe54fcfdd28.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "10",
+    "intrare/ieșire": "teze.in / teze.out",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "ONI 2024, clasa a 10-a",
+    "autor": "Csaba Pătcaș",
+    "dificultate": "concurs"
+  },
+  "timeLimitSeconds": 0.5,
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "memoryLimitMb": 64,
+  "author": "Csaba Pătcaș",
+  "sourceAttribution": "ONI 2024, clasa a 10-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4662/teze"
+}

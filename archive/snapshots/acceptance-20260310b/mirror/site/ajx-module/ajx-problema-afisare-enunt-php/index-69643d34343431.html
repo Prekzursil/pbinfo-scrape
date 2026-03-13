@@ -1,0 +1,139 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4441"><article id="enunt">
+			<p>Ranuto are un program de antrenament de-a lungul a mai multor zile, în care vrea să învețe o nouă tehnică: “11th Gate Super Convincing Chakra Dual-Core Rasengan”. Din motive obiective, vrea să știe din avans în ce ar putea consta antrenamentul lui într-o zi anume (vine Kasura să se uite la el).</p>
+
+<p>Se dă un arbore cu <code>N</code> noduri, numerotate de la <code>1</code> la <code>N</code>. Arborele este înrădăcinat în nodul <code>1</code>. Vrem să facem o parcurgere a arborelui, pornind din rădăcină.  Pentru fiecare nod, putem considera fiii acestuia în orice ordine dorim. Există două tipuri de cerințe, reprezentate printr-un număr <code>c</code>:</p>
+
+<ul>
+	<li>Pentru <code>C = 1</code>, parcurgerea va fi de tip <strong>adâncime (<span class="caps">DFS</span>) pre-ordine</strong>.</li>
+	<li>Pentru <code>C = 2</code>, parcurgerea arborelui va fi de tip <strong>lățime (<span class="caps">BFS</span>)</strong>.</li>
+</ul>
+
+<p>Pseudocodul pentru parcurgeri poate fi consultat mai jos:</p>
+
+<pre>Algoritmul 1. Parcurgere în adâncime (DFS) pre-ordine
+p ← listă vidă (va conține nodurile din parcurgere)
+procedură DFS(arbore, nod):
+    adaugă nod în spatele lui p
+    pentru fiecare fiu x al lui nod:
+        DFS(arbore, x)
+DFS(arbore, 1)</pre>
+
+<pre>Algoritmul 2. Parcurgere în lățime (BFS)
+p ← listă vidă (va conține nodurile din parcurgere)
+procedură BFS(arbore):
+    q ← coadă vidă
+    adaugă nodul 1 în spatele lui q
+    cât timp q nu este vidă:
+        f ← nodul din fața lui q
+        scoate f din fața lui q
+        adaugă f în spatele lui p
+        pentru fiecare fiu x al lui f:
+            adaugă nodul x în spatele lui q
+BFS(arbore)</pre>
+
+<h1>Cerința</h1>
+
+<p>Care noduri din arbore pot să fie pe a <code>K</code>-a poziție în vreuna dintre posibilele parcurgeri?</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului <code>keidei.in</code> se găsesc trei numere, <code>C</code>, <code>N</code> și <code>K</code>. Pe următoarele <code>N-1</code> linii se găsesc câte <code>2</code> numere, <code>A</code> și <code>B</code>, semnificând existența unei muchii în arbore între nodurile <code>A</code> și <code>B</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Afișaţi în fișierul <code>keidei.out</code> pe o linie, cu un spaţiu între ele, în ordine crescătoare, toate nodurile care pot fi pe a <code>K</code>-a poziție în vreo parcurgere de tipul stabilit de <code>C</code>. <strong>Nu trebuie afișat numărul de noduri</strong>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N ≤ 10.000</code></li>
+	<li><code>1 ≤ K ≤ N</code></li>
+	<li>Pentru 5 puncte, <code>C = 1</code>, <code>N ≤ 10</code></li>
+	<li>Pentru 5 puncte, <code>C = 2</code>, <code>N ≤ 10</code></li>
+	<li>Pentru 5 puncte, <code>C = 1</code>, arborele este binar complet, cu <code>N</code> de forma <code>2</code><sup><code>p</code></sup> <code>- 1</code>, <code>p</code> număr natural nenul.</li>
+	<li>Pentru 5 puncte, <code>C = 2</code>, arborele este binar complet, cu <code>N</code> de forma <code>2</code><sup><code>p</code></sup> <code>- 1</code>, <code>p</code> număr natural nenul.</li>
+	<li>Pentru 20 puncte, <code>C = 1</code>, <code>N ≤ 500</code></li>
+	<li>Pentru 20 puncte, <code>C = 2</code>, <code>N ≤ 500</code></li>
+	<li>Pentru 15 puncte, <code>C = 1</code>, <code>N ≤ 3.500</code></li>
+	<li>Pentru 10 puncte, <code>C = 2</code>, <code>N ≤ 5.000</code></li>
+	<li>Pentru 15 puncte, <code>C = 1</code>, <code>N ≤ 10.000</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>keidei.in</code></p>
+
+<pre>1 8 5
+1 2
+1 3
+1 4
+2 5
+2 6
+3 7
+5 8</pre>
+
+<p><code>keidei.out</code></p>
+
+<pre>2 5 6 8</pre>
+
+<h3>Explicație</h3>
+
+<p>Pentru că putem să considerăm fiii oricărui nod din arbore în ce ordine dorim, putem să presupunem că parcurgerea noastră în adâncime parcurge fiii unui nod de la stânga la dreapta după ce stabilim ordinea. </p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-keidei-01-jpg.jpg" style="width:400px;"></p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-keidei-02-jpg.jpg" style="width:400px;"></p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-keidei-03-jpg.jpg" style="width:400px;"></p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-16a4b0-keidei-04-jpg.jpg" style="width:400px;"></p>
+
+<p>Putem verifica orice alt aranjament pentru a garanta că orice alt nod în afară de <code>2, 5, 6, 8</code> nu poate fi pe a <code>5</code>-a poziție într-o parcurgere în adâncime preordine.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>keidei.in</code></p>
+
+<pre>1 17 15
+1 2
+1 3
+1 4
+2 5
+3 6
+3 7
+4 8
+5 9
+5 10
+8 11
+8 12
+8 13
+8 14
+9 15
+10 16
+10 17</pre>
+
+<p><code>keidei.out</code></p>
+
+<pre>3 10 11 12 13 14 16 17</pre>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>keidei.in</code></p>
+
+<pre>2 8 5
+1 2
+1 3
+2 4
+2 5
+2 7
+2 8
+3 6</pre>
+
+<p><code>keidei.out</code></p>
+
+<pre>4 5 7 8</pre>
+
+<h3>Explicație</h3>
+
+<p>Putem observa că oricum am aranja arborele, primele <code>3</code> noduri din parcurgere vor fi ori <code>1, 2, 3</code>, ori <code>1, 3, 2</code>. Dacă <code>2</code> este înaintea lui <code>3</code> în parcurgere, atunci <code>6</code> va fi neapărat ultimul nod din parcurgere. Dacă <code>3</code> ar fi înaintea lui <code>2</code>, atunci <code>6</code> va fi neapărat pe a patra poziție în parcurgere. Astfel, singurele noduri care pot fi pe a <code>5</code>-a poziție sunt <code>4, 5, 7, 8</code>.</p>		</article>
+		</body></html>

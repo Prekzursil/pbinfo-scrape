@@ -1,0 +1,304 @@
+{
+  "id": 2466,
+  "slug": "proiectoare",
+  "name": "proiectoare",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/2466/proiectoare",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 94,
+      "name": "Divide et Impera",
+      "slug": "divide-et-impera",
+      "href": "/?pagina=probleme-lista&tag=94"
+    },
+    {
+      "id": 95,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=95"
+    }
+  ],
+  "tags": [
+    "Stiva"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Dându-se <code>Q</code> intervale de forma <code>[X</code><sub><code>i</code></sub><code>, Y</code><sub><code>i</code></sub><code>]</code> determinați, pentru fiecare dintre acestea, câte un interval de lungime maximă iluminat de cel mult <code>K</code> proiectoare. Dacă nici un proiector nu iluminează vreo porțiune din intervalul <code>[X</code><sub><code>i</code></sub><code>, Y</code><sub><code>i</code></sub><code>]</code> se va afișa valoarea <code>0</code>.</p>",
+      "text": "Dându-se Q intervale de forma [Xi, Yi] determinați, pentru fiecare dintre acestea, câte un interval de lungime maximă iluminat de cel mult K proiectoare. Dacă nici un proiector nu iluminează vreo porțiune din intervalul [Xi, Yi] se va afișa valoarea 0."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Datele de intrare se citesc din fișierul text <code>proiectoare.in</code>, care are structura următoare:</p><ul>\n\t<li>pe prima linie se află valorile naturale <code>N</code>, <code>Q</code>, <code>K</code>, separate prin câte un spațiu, cu semnificația din enunț;</li>\n\t<li>pe următoarele <code>N</code> linii se află câte o pereche de valori naturale <code>S</code><sub><code>i</code></sub>, <code>D</code><sub><code>i</code></sub>, separate printr-un spațiu, reprezentând intervalele iluminate de fiecare proiector;</li>\n\t<li>pe următoarele <code>Q</code> linii se află câte o pereche de valori naturale <code>X</code><sub><code>i</code></sub><code>, Y</code><sub><code>i</code></sub>, separate printr-un spațiu, reprezentând intervalele pentru care se realizează verificările.</li>\n</ul>",
+      "text": "Datele de intrare se citesc din fișierul text proiectoare.in, care are structura următoare: pe prima linie se află valorile naturale N, Q, K, separate prin câte un spațiu, cu semnificația din enunț; pe următoarele N linii se află câte o pereche de valori naturale Si, Di, separate printr-un spațiu, reprezentând intervalele iluminate de fiecare proiector; pe următoarele Q linii se află câte o pereche de valori naturale Xi, Yi, separate printr-un spațiu, reprezentând intervalele pentru care se realizează verificările."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>În fișierul text <code>proiectoare.out</code> se vor scrie <code>Q</code> linii; pe linia <code>i</code> (<code>1 ≤ i ≤ Q</code>) se va scrie un număr natural reprezentând lungimea intervalului obținut ca răspuns la verificarea efectuată pentru intervalul <code>[X</code><sub><code>i</code></sub><code>, Y</code><sub><code>i</code></sub><code>]</code>.</p>",
+      "text": "În fișierul text proiectoare.out se vor scrie Q linii; pe linia i (1 ≤ i ≤ Q) se va scrie un număr natural reprezentând lungimea intervalului obținut ca răspuns la verificarea efectuată pentru intervalul [Xi, Yi]."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>0 ≤ S &lt; D ≤ 1 000 000 000</code></li>\n\t<li><code>1 ≤ K ≤ N ≤ 100 000</code></li>\n\t<li><code>1 ≤ Q ≤ 100 000</code></li>\n\t<li>Pentru teste în valoare de <code>11</code> puncte, <code>K = 1</code> și <code>n ≤ 2000</code> și <code>Q ≤ 2000</code></li>\n\t<li>Pentru teste în valoare de alte <code>38</code> puncte, <code>K = 1</code></li>\n\t<li>Pentru teste în valoare de alte <code>21</code> puncte, <code>K = 2</code></li>\n\t<li>Pentru teste în valoare de alte <code>10</code> puncte, <code>K ≤ 30</code></li>\n</ul>",
+      "text": "0 ≤ S < D ≤ 1 000 000 000 1 ≤ K ≤ N ≤ 100 000 1 ≤ Q ≤ 100 000 Pentru teste în valoare de 11 puncte, K = 1 și n ≤ 2000 și Q ≤ 2000 Pentru teste în valoare de alte 38 puncte, K = 1 Pentru teste în valoare de alte 21 puncte, K = 2 Pentru teste în valoare de alte 10 puncte, K ≤ 30"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>proiectoare.in</code></p><pre>5 5 1\n1 4\n2 3\n3 6\n4 7\n4 8\n1 10\n2 5\n3 4\n6 8\n8 9</pre><p><code>proiectoare.out</code></p><pre>4\n2\n1\n2\n0</pre><h3>Explicație</h3><p>Pentru verificarea <code>[1,10]</code> cel mai lung interval complet iluminat este <code>[4,8]</code> cu lungimea <code>4</code>.<br>\nPentru verificarea <code>[2,5]</code> cele mai lungi intervale complet iluminate sunt <code>[2,4]</code> și <code>[3,5]</code>, ambele au lungimea <code>2</code>.<br>\nPentru verificarea <code>[3,4]</code> cel mai lung interval complet iluminat este <code>[3,4]</code> cu lungimea <code>1</code>.<br>\nPentru verificarea <code>[6,8]</code> cel mai lung interval complet iluminat este <code>[6,8]</code> cu lungimea <code>2</code>.<br>\nPentru verificarea <code>[8,9]</code> se afișează valoarea <code>0</code>.</p>",
+      "text": "proiectoare.in5 5 1 1 4 2 3 3 6 4 7 4 8 1 10 2 5 3 4 6 8 8 9proiectoare.out4 2 1 2 0ExplicațiePentru verificarea [1,10] cel mai lung interval complet iluminat este [4,8] cu lungimea 4. Pentru verificarea [2,5] cele mai lungi intervale complet iluminate sunt [2,4] și [3,5], ambele au lungimea 2. Pentru verificarea [3,4] cel mai lung interval complet iluminat este [3,4] cu lungimea 1. Pentru verificarea [6,8] cel mai lung interval complet iluminat este [6,8] cu lungimea 2. Pentru verificarea [8,9] se afișează valoarea 0."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Pentru verificarea [1,10] cel mai lung interval complet iluminat este [4,8] cu lungimea 4. Pentru verificarea [2,5] cele mai lungi intervale complet iluminate sunt [2,4] și [3,5], ambele au lungimea 2. Pentru verificarea [3,4] cel mai lung interval complet iluminat este [3,4] cu lungimea 1. Pentru verificarea [6,8] cel mai lung interval complet iluminat este [6,8] cu lungimea 2. Pentru verificarea [8,9] se afișează valoarea 0."
+    }
+  ],
+  "constraints": [
+    "0 ≤ S < D ≤ 1 000 000 000",
+    "1 ≤ K ≤ N ≤ 100 000",
+    "1 ≤ Q ≤ 100 000",
+    "Pentru teste în valoare de 11 puncte, K = 1 și n ≤ 2000 și Q ≤ 2000",
+    "Pentru teste în valoare de alte 38 puncte, K = 1",
+    "Pentru teste în valoare de alte 21 puncte, K = 2",
+    "Pentru teste în valoare de alte 10 puncte, K ≤ 30"
+  ],
+  "editorialAvailability": "visible",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qc3e7083094.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "10",
+    "intrare/ieșire": "proiectoare.in / proiectoare.out",
+    "limită timp": "0.8 secunde",
+    "limită memorie": "128 MB / 32 MB",
+    "sursa problemei": "ONI 2018 clasa a X-a",
+    "autor": "Adrian Budău",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.8,
+  "memoryLimitMb": 128,
+  "author": "Adrian Budău",
+  "sourceAttribution": "ONI 2018 clasa a X-a",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/2466/proiectoare"
+}

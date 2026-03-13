@@ -1,0 +1,308 @@
+{
+  "id": 3838,
+  "slug": "d-bitwiseparadise",
+  "name": "D-BitwiseParadise",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3838/d-bitwiseparadise",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 91,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=91"
+    },
+    {
+      "id": 93,
+      "name": "Combinatorică",
+      "slug": "combinatoric",
+      "href": "/?pagina=probleme-lista&tag=93"
+    }
+  ],
+  "tags": [
+    "Programare dinamică",
+    "Combinari",
+    "Exponentiere rapida",
+    "Invers modular",
+    "Precalculare",
+    "number theory",
+    "Formula",
+    "Operații pe biți"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Se dă <code>N</code> și <code>Q</code>, apoi <code>Q</code> interogări de tipul <code>K X</code> pentru fiecare interogare să se afișeze separate prin spațiu ( ficare interogare pe un rând diferit ):</p><p>1. Câți vectori de exact <code>N</code> elemente din intervalul \\([0, {2}^{K})\\) ( mai mari sau egale cu \\(0\\) și strict mai mici ca \\({2}^{K}\\) ) există astfel încât valoarea \\(a_1\\) <code>&amp;</code> \\(a_2\\) <code>&amp; ... &amp;</code> \\(a_N\\) să fie <code>X</code>-frumoasă. Un număr este <code>X</code>-frumos dacă în reprezentare binară are exat <code>X</code> biți setați ( cu valoare <code>= 1</code> ). Cu <code>&amp;</code> am notat operația pe biți <code>AND</code>.</p><p>2. Câți vectori de exact <code>N</code> elemente din intervalul \\([0, {2}^{K})\\) ( mai mari sau egale cu \\(0\\) și strict mai mici ca \\({2}^{K}\\) ) există astfel încât valoarea \\(a_1\\) <code>|</code> \\(a_2\\) <code>| ... |</code> \\(a_N\\) să fie <code>X</code>-frumoasă. Un număr este <code>X</code>-frumos dacă în reprezentare binară are exat <code>X</code> biți setați ( cu valoare <code>= 1</code> ). Cu <code>|</code> am notat operația pe biți <code>OR</code>.</p><p>3.Câți vectori de exact <code>N</code> elemente din intervalul \\([0, {2}^{K})\\) ( mai mari sau egale cu \\(0\\) și strict mai mici ca \\({2}^{K}\\) ) există astfel încât valoarea \\(a_1\\) <code>^</code> \\(a_2\\) <code>^ ... ^</code> \\(a_N\\) să fie <code>X</code>-frumoasă. Un număr este <code>X</code>-frumos dacă în reprezentare binară are exat <code>X</code> biți setați ( cu valoare <code>= 1</code> ). Cu <code>^</code> am notat operația pe biți <code>XOR</code>.</p>",
+      "text": "Se dă N și Q, apoi Q interogări de tipul K X pentru fiecare interogare să se afișeze separate prin spațiu ( ficare interogare pe un rând diferit ):1. Câți vectori de exact N elemente din intervalul \\([0, {2}^{K})\\) ( mai mari sau egale cu \\(0\\) și strict mai mici ca \\({2}^{K}\\) ) există astfel încât valoarea \\(a_1\\) & \\(a_2\\) & ... & \\(a_N\\) să fie X-frumoasă. Un număr este X-frumos dacă în reprezentare binară are exat X biți setați ( cu valoare = 1 ). Cu & am notat operația pe biți AND.2. Câți vectori de exact N elemente din intervalul \\([0, {2}^{K})\\) ( mai mari sau egale cu \\(0\\) și strict mai mici ca \\({2}^{K}\\) ) există astfel încât valoarea \\(a_1\\) | \\(a_2\\) | ... | \\(a_N\\) să fie X-frumoasă. Un număr este X-frumos dacă în reprezentare binară are exat X biți setați ( cu valoare = 1 ). Cu | am notat operația pe biți OR.3.Câți vectori de exact N elemente din intervalul \\([0, {2}^{K})\\) ( mai mari sau egale cu \\(0\\) și strict mai mici ca \\({2}^{K}\\) ) există astfel încât valoarea \\(a_1\\) ^ \\(a_2\\) ^ ... ^ \\(a_N\\) să fie X-frumoasă. Un număr este X-frumos dacă în reprezentare binară are exat X biți setați ( cu valoare = 1 ). Cu ^ am notat operația pe biți XOR."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>bit.in</code> va conține pe prima linie <code>N</code> și <code>Q</code> iar apoi pe urmatoarele <code>Q</code> linii câte <code>2</code> numere, <code>K</code> și <code>X</code>, cu semnificația din enunț.</p>",
+      "text": "Fișierul de intrare bit.in va conține pe prima linie N și Q iar apoi pe urmatoarele Q linii câte 2 numere, K și X, cu semnificația din enunț."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>biti.out</code> va conține pe <code>Q</code> linii răspunsul întrebărilor, pe linia <code>i</code> se va afla răspunsul aferent celei de a <code>i</code>-a intergoare după ordinea citirii.</p>",
+      "text": "Fișierul de ieșire biti.out va conține pe Q linii răspunsul întrebărilor, pe linia i se va afla răspunsul aferent celei de a i-a intergoare după ordinea citirii."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 &lt;= N &lt;= 1.000.000.000</code>.</li>\n\t<li><code>1 &lt;= Q &lt;= 100.000</code>.</li>\n\t<li><code>0 &lt;= X &lt;= K &lt;= 1.000.000</code>.</li>\n\t<li>Toate rezultatele vor fi tipărite <code>modulo</code> \\({10}^{9}+7\\).</li>\n</ul>",
+      "text": "1 <= N <= 1.000.000.000. 1 <= Q <= 100.000. 0 <= X <= K <= 1.000.000. Toate rezultatele vor fi tipărite modulo \\({10}^{9}+7\\)."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>biti.in</code></p><pre>2 1\n1 1</pre><p><code>biti.out</code></p><pre>1 3 2</pre><p><code>biti.in</code></p><pre>420 1\n696 69</pre><p><code>biti.out</code></p><pre>626471342 256445754 914714458</pre><h3>Explicație</h3><p>În primul exemplu ne interesează numărul de vectori cu exact <code>2</code> elemente <code>&gt;= 0</code> și <code>&lt;= 1</code> care au <code>AND</code>-ul elementelor <code>1</code>, singurul vector este <code>[1,1]</code>. Cei trei vectori care respectă condițiile la <code>OR</code> sunt <code>[0,1], [1,0]</code> și <code>[1,1]</code>. Pentru <code>XOR</code> cei <code>2</code> vectori sunt <code>[0,1]</code> și <code>[1,0]</code>.</p>",
+      "text": "biti.in2 1 1 1biti.out1 3 2biti.in420 1 696 69biti.out626471342 256445754 914714458ExplicațieÎn primul exemplu ne interesează numărul de vectori cu exact 2 elemente >= 0 și <= 1 care au AND-ul elementelor 1, singurul vector este [1,1]. Cei trei vectori care respectă condițiile la OR sunt [0,1], [1,0] și [1,1]. Pentru XOR cei 2 vectori sunt [0,1] și [1,0]."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "În primul exemplu ne interesează numărul de vectori cu exact 2 elemente >= 0 și <= 1 care au AND-ul elementelor 1, singurul vector este [1,1]. Cei trei vectori care respectă condițiile la OR sunt [0,1], [1,0] și [1,1]. Pentru XOR cei 2 vectori sunt [0,1] și [1,0]."
+    }
+  ],
+  "constraints": [
+    "1 <= N <= 1.000.000.000.",
+    "1 <= Q <= 100.000.",
+    "0 <= X <= K <= 1.000.000.",
+    "Toate rezultatele vor fi tipărite modulo \\({10}^{9}+7\\)."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q9a81573fde.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Iacob Tudor (IacobTudor)",
+    "clasa": "10",
+    "intrare/ieșire": "biti.in / biti.out",
+    "limită timp": "0.5 secunde",
+    "limită memorie": "64 MB / 8 MB",
+    "sursa problemei": "infoleague.net runda antrenament 2, problema D.",
+    "autor": "Tudor Iacob",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.5,
+  "memoryLimitMb": 64,
+  "author": "Tudor Iacob",
+  "sourceAttribution": "infoleague.net runda antrenament 2, problema D.",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3838/d-bitwiseparadise"
+}

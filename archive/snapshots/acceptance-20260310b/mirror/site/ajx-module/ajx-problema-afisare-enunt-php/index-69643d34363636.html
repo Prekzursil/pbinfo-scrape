@@ -1,0 +1,92 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4666"><article id="enunt">
+			<p>Yamada, cel mai bun jucător al jocului Forest of Savior, se pregătește pentru a participa într-o bătălie împreună cu coechipierii săi. Pentru a câștiga această luptă, Yamada trebuie să se folosească de diverse obiecte magice pe care le-a obținut de-a lungul timpului. Obiectele cu puteri magice ale lui Yamada sunt de trei tipuri:</p>
+
+<ul>
+	<li>Cărți de vrăji. Dacă personajul are puterea <code>P</code> și citește o carte de putere magică <code>x</code>, atunci puterea personajului va deveni <code>P</code><sup><code>x</code></sup>.</li>
+	<li>Poțiuni. Dacă personajul are puterea <code>P</code> și bea o poțiune de putere magică <code>x</code>, atunci noua lui putere va fi <code>P + x</code>.</li>
+	<li>Nestemate. Dacă personajul are puterea <code>P</code> și sparge o piatră prețioasă de putere magică <code>x</code>, atunci noua putere obținută va fi <code>P • x</code>.</li>
+</ul>
+
+<p>Personajul lui are o putere inițială <code>P</code><sub><code>0</code></sub>, iar fiecare dintre aceste obiecte, după ce este folosit, îi va schimba puterea acestuia în mod ireversibil. De exemplu, dacă personajul lui Yamada începe cu puterea inițială <code>P</code><sub><code>0</code></sub> <code>= 3</code>, după folosirea unei poțiuni de putere magică <code>2</code> puterea personajului crește și devine egală cu <code>5</code>. Utilizarea ulterioară a unei cărți de vrăji de putere magică <code>3</code> îi va crește personajului puterea la <code>125</code>. Yamada își poate folosi obiectele în orice ordine, dar fiind copleșit de numărul de moduri în care își poate folosi obiectele, vă cere ajutorul vostru!</p>
+
+<h1>Cerința</h1>
+
+<p>Ajutați-l pe Yamada să determine:<br>
+1. Dintre toate obiectele avute la dispoziție, care este cea mai puternică carte de vrăji, care este cea mai puternică poțiune și care este cea mai puternică nestemată.<br>
+2. În ce ordine ar trebui să se folosească de obiectele magice astfel încât, la final, puterea personajului său să fie maximă.<br>
+3. Care este puterea maximă pe care o poate atinge personajul său. Fiindcă acest număr poate fi foarte mare, Yamada vrea doar să afle care ar fi restul împărțirii acestui număr la <code>1.000.000.007</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie din fișierul de intrare <code>apgreid.in</code> se va află valoarea <code>T</code>, care reprezintă cerința care trebuie rezolvată și poate avea una din valorile <code>1</code>, <code>2</code> sau <code>3</code>. Pe următoarea linie se află numerele naturale <code>M</code> și <code>P</code><sub><code>0</code></sub>, reprezentând, în ordine, numărul total de obiecte pe care le are Yamada, respectiv<br>
+puterea inițială a personajului său. Pe fiecare dintre următoarele <code>M</code> linii se află descrierea câte unui obiect magic. Linia <code>i</code> (<code>1 ≤ i ≤ M</code>) conține un caracter de tip literă <code>l</code><sub><code>i</code></sub>, care reprezintă tipul obiectului (<code>c</code> – carte de vrăji, <code>p</code> – poțiune și <code>n</code> – nestemată) și un număr <code>x</code><sub><code>i</code></sub>, reprezentând puterea magică în funcție de tipul obiectului. Valorile <code>l</code><sub><code>i</code></sub> și <code>x</code><sub><code>i</code></sub> sunt despărțite printr-un spațiu.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Pentru cerința <code>T = 1</code>, pe prima linie a fișierului de ieșire <code>apgreid.out</code> se vor afișa trei numere naturale reprezentând, în ordine, cea mai mare puterea magică a unei cărți de vrăji, a unei poțiuni respectiv a unei nestemate.</p>
+
+<p>Pentru cerința <code>T = 2</code>, în fișierul de ieșire se vor afișa pe <code>M</code> linii diferite perechile de caractere și numere, reprezentând tipul și puterea obiectelor în ordinea în care Yamada ar trebui să le folosească pentru a maximiza puterea personajului său. Fiecare linie va conține un caracter <code>l</code> (care va fi unul dintre <code>c</code>, <code>p</code> sau <code>n</code>) separat printr-un spațiu de un număr <code>x</code> care reprezintă puterea magică a obiectului respectiv. Dacă există mai multe moduri de a obține puterea maximă, oricare dintre ele va fi considerat corect.</p>
+
+<p>Pentru cerința <code>T = 3</code>, pe prima linie a fișierului de ieșire se va afișa un număr întreg, reprezentând restul împărțirii puterii maxime pe care o poate atinge personajul lui Yamada la <code>1.000.000.007</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ T ≤ 3</code></li>
+	<li><code>1 ≤ M ≤ 100.000</code></li>
+	<li><code>1 ≤ P</code><sub><code>0</code></sub> <code>≤ 100.000</code></li>
+	<li><code>l</code><sub><code>i</code></sub> <code>∊ {c, n, p}</code> pentru orice <code>1 ≤ i ≤ M</code> și <code>1 ≤ x</code><sub><code>i</code></sub> <code>≤ 1.000.000.000</code> pentru orice <code>1 ≤ i ≤ M</code></li>
+	<li>Dacă <code>T = 1</code>, atunci Yamada are cel puțin un obiect magic din fiecare din cele trei tipuri.</li>
+	<li>Pentru 19 puncte, <code>T = 1</code></li>
+	<li>Pentru 13 puncte, <code>T = 2</code>,  <code>1 ≤ M ≤ 1000</code></li>
+	<li>Pentru 17 puncte, <code>T = 2</code></li>
+	<li>Pentru 9 puncte, <code>T = 3</code>, <code>1 ≤ M ≤ 1000</code>, <code>1 ≤ x</code><sub><code>i</code></sub> <code>≤ 1000</code></li>
+	<li>Pentru 11 puncte, <code>T = 3</code>, <code>1 ≤ x</code><sub><code>i</code></sub> <code>≤ 1000</code></li>
+	<li>Pentru 12 puncte, <code>T = 3</code>, <code>1 ≤ M ≤ 1000</code></li>
+	<li>Pentru 19 puncte, <code>T = 3</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>apgreid.in</code></p>
+
+<pre>1
+6 3
+p 1
+n 3
+c 10
+n 2
+p 12
+p 8</pre>
+
+<p><code>apgreid.out</code></p>
+
+<pre>10 12 3</pre>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>apgreid.in</code></p>
+
+<pre>2
+2 3
+c 3
+p 2</pre>
+
+<p><code>apgreid.out</code></p>
+
+<pre>p 2
+c 3</pre>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>apgreid.in</code></p>
+
+<pre>3 
+2 3
+p 2
+c 3</pre>
+
+<p><code>apgreid.out</code></p>
+
+<pre>125</pre>		</article>
+		</body></html>

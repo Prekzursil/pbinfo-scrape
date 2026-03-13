@@ -1,0 +1,109 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1049"><article id="enunt">
+			<p><em>“Arrows”</em> este un joc care se joacă pe o tablă dreptunghiulară a cărei suprafaţă este împărţită în <code>NxM</code> celule, aranjate pe <code>N</code> linii şi <code>M</code> coloane. În fiecare celulă se află o săgeată (sus, jos, stânga sau dreapta), ca în figura de mai jos:</p>
+
+<p style="text-align:center;"><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1001-1050-arrows-png.png"></p>
+
+<p>Când este la mutare, un jucător poate alege o poziţie de start pe care plasează un jeton, apoi deplasează jetonul la celula învecinată în sensul indicat de săgeată. Deplasarea continuă până când jetonul părăseşte tabla de joc, caz în care jucătorul obţine un punctaj egal cu numărul de celule parcurse de jetonul său. </p>
+
+<p>Există însă poziţii de start denumite favorabile, pentru care jetonul nu va părăsi niciodată tabla de joc. De exemplu, toate poziţiile din figură cu fundal gri sunt favorabile. Jucătorul care alege o poziţie de start favorabilă obţine un punctaj egal cu numărul de celule distincte vizitate înmulţit cu <code>1000</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Scrieţi un program care, cunoscând configuraţia tablei de joc, rezolvă una dintre următoarele cerinţe:</p>
+
+<p>1. determină punctajul pe care îl obţine un jucător care plasează jetonul său pe o poziţie de start specificată;<br>
+2. determină numărul de celule favorabile de pe tabla de joc;<br>
+3. determină punctajul maxim pe care jucătorul îl poate obţine la o mutare, alegând convenabil poziţia de start.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>arrows.in</code> conține pe prima linie cerinţa care trebuie să fie rezolvată (<code>1</code>, <code>2</code> sau <code>3</code>). Pe a doua linie se află numerele naturale <code>N M</code>, care reprezintă numărul de linii şi respectiv de coloane de pe tabla de joc. Pe următoarele <code>N</code> linii se află câte <code>M</code> numere din mulţimea <code>{1,2,3,4}</code> reprezentând săgeţile aflate în celulele de pe tabla de joc (<code>1</code> semnificând săgeata la dreapta, <code>2</code> săgeata în sus, <code>3</code> săgeata la stânga şi <code>4</code> săgeata în jos). Pe ultima linie sunt scrise numerele naturale <code>lin col</code>, reprezentând linia şi coloana pe care se află poziţia de start specificată. Valorile scrise pe aceeaşi linie în fişierul de intrare sunt separate prin spaţii. </p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>arrows.out</code> va conţine o singură linie pe care va fi scris un număr natural reprezentând răspunsul pentru cerinţa specificată pe prima linie a fişierului de intrare. </p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ N, M ≤ 500</code></li>
+	<li>Liniile sunt numerotate de la <code>1</code> la <code>N</code>, iar coloanele de la <code>1</code> la <code>M</code>.</li>
+	<li><strong>Punctaj.</strong> Pentru teste valorând <code>20</code> de puncte cerinţa este <code>1</code>.  Pentru teste valorând <code>40</code> de puncte cerinţa este <code>2</code>. Pentru celelalte teste, valorând de asemenea <code>40</code> de puncte, cerinţa este <code>3</code>.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>arrows.in</code></p>
+
+<pre>1
+6 5
+3 1 1 4 2
+1 2 4 3 1
+4 2 1 1 4
+1 2 3 3 3
+3 1 4 4 4
+2 2 3 4 2 
+5 5</pre>
+
+<p><code>arrows.out</code></p>
+
+<pre>2000</pre>
+
+<h3>Explicație</h3>
+
+<p>Exemplul corespunde tablei de joc din figură. <br>
+Punctajele pentru fiecare poziţie sunt:</p>
+
+<pre>    1 14000 14000 14000     1 
+15000 14000 14000 14000     1 
+16000 14000 14000 14000 14000 
+15000 14000 14000 14000 14000 
+    1  4000  4000     2  2000 
+    2  4000  4000     1  2000</pre>
+
+<p>Cerinţa este <code>1</code>: punctajul care se obţine plecând din poziţia de start aflată pe linia <code>5</code> şi coloana <code>5</code> este <code>2000</code>.</p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>arrows.in</code></p>
+
+<pre>2
+6 5
+3 1 1 4 2
+1 2 4 3 1
+4 2 1 1 4
+1 2 3 3 3
+3 1 4 4 4
+2 2 3 4 2 
+5 5</pre>
+
+<p><code>arrows.out</code></p>
+
+<pre>23</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerinţa este <code>2</code>: există <code>23</code> de poziţii favorabile.</p>
+
+<h1>Exemplul 3</h1>
+
+<p><code>arrows.in</code></p>
+
+<pre>3
+6 5
+3 1 1 4 2
+1 2 4 3 1
+4 2 1 1 4
+1 2 3 3 3
+3 1 4 4 4
+2 2 3 4 2 
+5 5</pre>
+
+<p><code>arrows.out</code></p>
+
+<pre>16000</pre>
+
+<h3>Explicație</h3>
+
+<p>Cerinţa este <code>3</code>: punctajul maxim se poate obţine plasând jetonul în punctul de start de pe linia <code>3</code> şi coloana <code>1</code>.</p>		</article>
+		</body></html>

@@ -1,0 +1,60 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3536"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>Se consideră o expresie aritmetică formată din numere naturale și operatorii binari <code>+</code> (adunare), <code>-</code> (scădere), <code>*</code> (înmulțire), <code>^</code> (ridicare la putere). Să se determine forma postfixată corespunzătoare și să se calculeze valoarea expresiei.<br>
+Spunem că expresia este în formă infixată dacă fiecare operator binar este încadrat de cei doi operanzi ai săi. Aceasta este de fapt forma uzuală a expresiilor aritmetice.<br>
+Spunem că expresia este în formă postfixată dacă fiecare operator este poziționat după operanzii săi, respectând prioritatea și regula de asociere a operatorilor.<br>
+De exemplu, expresia aritmetică în formă infixată: <code>1*2+3^4</code> poate fi rescrisă în forma postfixată astfel: <br>
+<code>1*2+3^4 → (parantezare) → ((1*2)+(3^4)) → (postfixare +) → ((1*2)(3^4)+) → (postfixare * și ^) → 
+((1 2 *)(3 4 ^) +) → (eliminare paranteze) → 1 2 * 3 4 ^ +</code><br>
+Valoarea expresiei date este <code>83</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>evaluareexpresie.in</code> conține pe un singur rând un șir de caractere ce reprezintă o expresie aritmetică corect construită ce poate conține numai operatorii binari <code>+</code>, <code>-</code>, <code>*</code>, <code>^</code>, cu semnificațiile de mai sus, și operanzi constante numere naturale. </p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>evaluareexpresie.out</code> va conține pe prima linie un șir de caractere ce reprezintă forma postfixată a expresiei date, iar pe cel de-al doilea rând un număr natural ce reprezintă valoarea expresiei date. Pentru forma postfixată operanzii și operatorii vor fi separați cu câte un spațiu.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li>Lungimea expresiei din fișierul de intrare va fi de cel mult <code>50</code> de caractere</li>
+	<li>Rezultatul final precum și rezultatele intermediare se vor încadra în tipul de date <code>long long</code></li>
+	<li>Expresia este corectă și nu conține alte caractere în afară de cifre și operatorii <code>+</code>, <code>-</code>, <code>*</code>, <code>^</code></li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>evaluareexpresie.in</code></p>
+
+<pre>100-2*3^2</pre>
+
+<p><code>evaluareexpresie.out</code></p>
+
+<pre>100 2 3 2 ^ * -
+82</pre>
+
+<h3>Explicație</h3>
+
+<p><code>100-2*3^2 → (100-(2*(3^2))) → (100-(2*(3 2^))) → (100-(2(3 2^)*)) → (100(2(3 2^)*)-) → 100 2 3 2 ^ * -</code><br>
+Valoare expresiei este <code>82</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>evaluareexpresie.in</code></p>
+
+<pre>1+2+2^3^2</pre>
+
+<p><code>evaluareexpresie.out</code></p>
+
+<pre>1 2 + 2 3 ^ 2 ^ +
+67</pre>
+
+<h3>Explicație</h3>
+
+<p><code>1+2+2^3^2 → ((1+2)+((2^3)^2)) → ((1 2 +)+((2 3 ^)^2)) → ((1 2 +)+((2 3 ^) 2 ^)) → 
+((1 2 +)((2 3 ^) 2 ^) +) → 1 2 + 2 3 ^ 2 ^ +</code> <br>
+Valoare expresiei este <code>67</code>.</p>		</article>
+		</body></html>

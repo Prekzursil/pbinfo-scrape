@@ -1,0 +1,68 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3845"><article id="enunt">
+			<h1>Cerința</h1>
+
+<p>Popel, elev de liceu calificat la barajul pentru Lotul Național de Informatică, tocmai a învățat ciurul lui Eratostene, pentru aflarea numerelor prime, al cărui algoritm este descris astfel:</p>
+
+<pre class="code_c">prim[i]=1, oricare ar fi i de la 2 la N
+pentru i de la 2 la N:
+	dacă prim[i] este 1:
+		pentru j de la 2*i la N din i în i:
+			prim[j] = 0</pre>
+
+<p>Din cauza oboselii și a stresului, Popel a inițializat greșit șirul prim, punând pe unele poziții <code>0</code> în loc de <code>1</code>. După ce a executat algoritmul pe șirul prim greșit inițializat, a obținut un nou șir pe care l-a notat pe o foaie de hârtie. Mai târziu, nu își mai amintea șirul inițial prim, dar mai avea șirul final pe care l-a obținut. În plus, nu mai era sigur dacă unele valori din șirul final le-a notat corect, așa că le-a marcat cu caracterul <code>"?"</code>. Popel vă roagă să aflați un șir inițial cu proprietatea că dacă ar executa algoritmul de mai sus asupra lui, ar obține un șir care s-ar potrivi cu șirul final notat pe foaie. De asemenea, el își dorește ca șirul inițial să aibă un număr cât mai mare de cifre de <code>1</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului <code>ciurulet.in</code> se va afla numărul <code>N</code> reprezentând valoarea până la care se<br>
+execută algoritmul.<br>
+Următoarea linie conține <code>N-1</code> caractere din mulțimea <code>{0, 1, ?}</code>, fără spații între ele, reprezentând șirul notat pe foaie. Caracterul <code>?</code> indică un caracter pe care Popel nu și-l mai amintește (adică Popel nu mai știe dacă acolo era <code>0</code> sau <code>1</code>). Al <code>i</code>-lea caracter dintre acestea reprezintă valoarea lui <code>prim[i+1]</code>. Dacă aceasta este diferită de <code>?</code>, atunci Popel și-o amintește exact. Altfel, acolo ar fi putut fi orice (<code>0</code> sau <code>1</code>).</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Pe prima linie a fișierului <code>ciurulet.out</code> se va afla numărul maxim de cifre de <code>1</code> care pot apărea într-un șir<br>
+inițial din care se obține un șir final care se potrivește cu cel notat pe foaie.<br>
+Pe a doua linie se vor afișa <code>N-1</code> caractere din mulțimea <code>{0, 1}</code>, fără spații între ele, care reprezintă șirul inițial folosit.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N ≤ 1.000.000</code>.</li>
+	<li>Pentru <code>30%</code> din teste, șirul din fișierul de intrare nu conține caracterul <code>?</code>.</li>
+	<li>Pentru ca două șiruri <code>A</code> și <code>B</code> să se potrivească, trebuie ca <code>A[i]</code> și <code>B[i]</code> să fie egale, oricare ar fi <code>i</code> de la <code>2</code> la <code>N</code> cu <code>B[i]</code> diferit de <code>?</code>. Cu alte cuvinte, peste <code>0</code> se potrivește <code>0</code>, peste <code>1</code> se potrivește <code>1</code>, iar peste <code>?</code> se potrivesc atât <code>0</code>, cât și <code>1</code>.</li>
+	<li>Se garantează faptul că șirul final obținut notat pe foaie este unul valid.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>ciurulet.in</code></p>
+
+<pre>6
+10??0</pre>
+
+<p><code>ciurulet.out</code></p>
+
+<pre>4
+10111</pre>
+
+<h3>Explicație</h3>
+
+<p>Transformările prin care șirul <code>1011</code> va trece sunt: <br>
+<code>10111</code> -&gt; <code>10011</code> -&gt; <code>10010</code><br>
+Șirul <code>10010</code> se potrivește cu ce și-a notat Popel pe foaie.</p>
+
+<h1>Exemplu:</h1>
+
+<p><code>ciurulet.in</code></p>
+
+<pre>9
+??10?00?</pre>
+
+<p><code>ciurulet.out</code></p>
+
+<pre>5
+01101011</pre>
+
+<h3>Explicație</h3>
+
+<p>Aplicând algoritmul de mai sus asupra șirului <code>01101011</code> se obține în final șirul <code>01100000</code>, care se potrivește cu ce și-a notat Popel pe foaie.</p>		</article>
+		</body></html>

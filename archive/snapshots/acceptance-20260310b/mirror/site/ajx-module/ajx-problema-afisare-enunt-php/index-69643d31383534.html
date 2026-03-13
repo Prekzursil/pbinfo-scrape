@@ -1,0 +1,78 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1854"><article id="enunt">
+			<p>Un <strong>arbore binar complet</strong> este un arbore binar în care toate nivelurile, cu excepția ultimului sunt ocupate în întregime. În general, deși nu este obligatoriu, toate nodurile de pe ultimul nivel sunt grupate în partea stânga a acestuia.</p>
+
+<p>Arborele binar  de mai jos este complet:</p>
+
+<p><img alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1700-1854-arbore-complet-png.png"></p>
+
+<p>Înălțimea unui arbore binare complet este \( \left[ log_2 n \right] + 1 \), unde \(n\) este numărul de noduri.</p>
+
+<p>Pentru reprezentarea unui arbore binar complet se poate folosi un tablou unidimensional <code>A</code> cu <code>n</code> elemente, în felul următor:</p>
+
+<ul>
+	<li>rădăcinii arborelui îi corespunde elementul <code>A[1]</code>;</li>
+	<li>dacă unui nod îi corespunde elementul <code>A[k]</code>, descendentului stâng îi va corespunde elementul <code>A[2*k]</code>, iar celui drept îi va corespunde elementul <code>A[2*k+1]</code>.</li>
+</ul>
+
+<p>Observăm că pentru un nod <code>A[k]</code>, nodul părinte este <code>A[k/2]</code>, unde <code>k/2</code> este câtul împărțirii, fără zecimale.</p>
+
+<p>Într-un arbore reprezentat astfel, nodurile de pe ultimul nivel sunt grupate în stânga. Dacă nodurile nu sunt grupate în stânga, sunt necesare câteva elemente în plus în vector, iar unele dintre ele nu vor fi folosite – nu vor avea un nod corespunzător.</p>
+
+<h1>Cerința</h1>
+
+<p>Se dau <code>n</code> numere naturale, reprezentând în ordine valorile nodurilor dintr-un arbore binar complet și <code>m</code> operații de tip <code>1</code> sau <code>2</code>, aplicate unui nod <code>k</code>. </p>
+
+<p>Operația de tip <code>1</code> determină valoarea nodului părinte a lui <code>k</code>, iar operația de tip <code>2</code> determină suma valorilor fiilor nodului <code>k</code>. Dacă <code>k=1</code>  sau dacă nodul <code>k</code> nu are fii, rezultatul va fi <code>0</code>.</p>
+
+<p>Afișați pentru fiecare operație rezultatul ei.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>complet.in</code> conține pe prima linie numărul <code>n</code>, pe linia a doua <code>n</code> numere naturale, pe linia a treia <code>m</code>, iar pe următoarele <code>m</code> linii câte o pereche <code>op k</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>complet.out</code> va conține rezultatele celor <code>m</code> operații, în ordine, câte unul pe linie.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>1 ≤ n ≤ 100000</code></li>
+	<li>cele <code>n</code> numere citite vor fi mai mici decât <code>1.000.000</code></li>
+	<li><code>1 ≤ m ≤ 100000</code></li>
+	<li><code>1 ≤ op ≤ 2</code></li>
+	<li><code>1 ≤ k ≤ n</code></li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>complet.in</code></p>
+
+<pre>12
+15 5 18 35 32 23 12 43 29 25 22 13
+8
+2 9
+1 7
+2 5
+1 8
+1 1
+2 6
+1 9
+2 4 </pre>
+
+<p><code>complet.out</code></p>
+
+<pre>0
+18
+47
+35
+0
+13
+35
+72</pre>
+
+
+<h3>Explicație</h3>
+
+<p>Exemplul corespunde arborelui de mai sus.</p>		</article>
+		</body></html>

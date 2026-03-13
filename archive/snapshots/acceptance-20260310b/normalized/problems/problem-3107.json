@@ -1,0 +1,334 @@
+{
+  "id": 3107,
+  "slug": "margi",
+  "name": "margi",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3107/margi",
+  "categoryChain": [
+    {
+      "id": 10,
+      "name": "Clasa a 10-a",
+      "slug": "clasa-a-10-a",
+      "href": "/?pagina=probleme-lista&clasa=10"
+    },
+    {
+      "id": 94,
+      "name": "Divide et Impera",
+      "slug": "divide-et-impera",
+      "href": "/?pagina=probleme-lista&tag=94"
+    },
+    {
+      "id": 95,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=95"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Pentru un <code>n</code> număr natural dat și o matrice binară de dimensiunea <code>2</code><sup><code>n</code></sup>, se cere să se determine punctajul maxim obținut de cei doi jucători. Se cere și determinarea unei strategii de alegere a matricelor la fiecare pas care să ducă la obținerea punctajului maxim.</p>",
+      "text": "Pentru un n număr natural dat și o matrice binară de dimensiunea 2n, se cere să se determine punctajul maxim obținut de cei doi jucători. Se cere și determinarea unei strategii de alegere a matricelor la fiecare pas care să ducă la obținerea punctajului maxim."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Fișierul de intrare <code>margi.in</code> conține pe prima linie un număr natural <code>C</code>. Pe linia a doua se află un număr natural <code>n</code>. Pe următoarele <code>2</code><sup><code>n</code></sup> linii, elementele matricei binare.</p>",
+      "text": "Fișierul de intrare margi.in conține pe prima linie un număr natural C. Pe linia a doua se află un număr natural n. Pe următoarele 2n linii, elementele matricei binare."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Fișierul de ieșire <code>margi.out</code> conține pe prima linie suma maximă care se poate obține prin însumarea punctajelor celor doi jucători. În cazul în care <code>C = 1</code> în fișierul de ieșire va apărea doar această valoare. Dacă <code>C = 2</code> fișierul  de ieșire va conține, în continuare:<br>\nPe cea de-a doua linie se vor scrie <code>n</code> numere ce reprezintă secvența de matrici alese de jucătorul A. <br>\nPe cea de-a treia linie se vor scrie <code>n</code> numere ce reprezintă secvența de matrici alese de jucătorul <code>B</code>.<br>\nSecvențele de matrice alese de cei doi trebuie să respecte următoarele două condiții:<br>\n1) suma celor două punctaje obținute de cei doi jucători este maximă. Pot exista mai multe secvențe de matrici care au suma maximă.<br>\n2) Fie <code>A</code><sub><code>n</code></sub>, <code>A</code><sub><code>n-1</code></sub>, …, <code>A</code><sub><code>1</code></sub> secvențele de matrici  alese de <code>A</code>, respectiv <code>B</code><sub><code>n</code></sub>, <code>B</code><sub><code>n-1</code></sub>, …, <code>B</code><sub><code>1</code></sub>, secvențele de matrici  alese de <code>B</code>, la nivelele <code>n</code>, <code>n-1</code>, …, <code>2</code>, <code>1</code>. Dacă compunem șirul <code>A</code><sub><code>n</code></sub>, <code>B</code><sub><code>n</code></sub>, <code>A</code><sub><code>n-1</code></sub>, <code>B</code><sub><code>n-1</code></sub>, <code>A</code><sub><code>n-2</code></sub>, <code>B</code><sub><code>n-2</code></sub>, …, <code>A</code><sub><code>1</code></sub>, <code>B</code><sub><code>1</code></sub>, dintre toate șirurile posibile care dau suma maximă, trebuie ales cel șirul minim lexicografic.</p>",
+      "text": "Fișierul de ieșire margi.out conține pe prima linie suma maximă care se poate obține prin însumarea punctajelor celor doi jucători. În cazul în care C = 1 în fișierul de ieșire va apărea doar această valoare. Dacă C = 2 fișierul de ieșire va conține, în continuare: Pe cea de-a doua linie se vor scrie n numere ce reprezintă secvența de matrici alese de jucătorul A. Pe cea de-a treia linie se vor scrie n numere ce reprezintă secvența de matrici alese de jucătorul B. Secvențele de matrice alese de cei doi trebuie să respecte următoarele două condiții: 1) suma celor două punctaje obținute de cei doi jucători este maximă. Pot exista mai multe secvențe de matrici care au suma maximă. 2) Fie An, An-1, …, A1 secvențele de matrici alese de A, respectiv Bn, Bn-1, …, B1, secvențele de matrici alese de B, la nivelele n, n-1, …, 2, 1. Dacă compunem șirul An, Bn, An-1, Bn-1, An-2, Bn-2, …, A1, B1, dintre toate șirurile posibile care dau suma maximă, trebuie ales cel șirul minim lexicografic."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>C</code> poate fi <code>1</code> sau <code>2</code></li>\n\t<li><code>2 ≤ n ≤ 10</code></li>\n\t<li>Spunem că șirul <code>X</code> este mai mic lexicografic decât șirul <code>Y</code>, dacă există o poziție <code>i</code>, astfel încât <code>X</code><sub><code>1</code></sub><code>=Y</code><sub><code>1</code></sub>, <code>X</code><sub><code>2</code></sub><code>=Y</code><sub><code>2</code></sub>, …., <code>X</code><sub><code>i-1</code></sub><code>=Y</code><sub><code>i-1</code></sub>, iar  <code>X</code><sub><code>i</code></sub><code>&lt;Y</code><sub><code>i</code></sub></li>\n\t<li>Pentru teste în valoare de <code>30</code> de puncte avem <code>C = 1</code>.</li>\n</ul>",
+      "text": "C poate fi 1 sau 2 2 ≤ n ≤ 10 Spunem că șirul X este mai mic lexicografic decât șirul Y, dacă există o poziție i, astfel încât X1=Y1, X2=Y2, …., Xi-1=Yi-1, iar Xi<Yi Pentru teste în valoare de 30 de puncte avem C = 1."
+    },
+    {
+      "title": "Exemplul 1:",
+      "html": "<p><code>margi.in</code></p><pre>1\n2\n0000\n0100\n0000\n0000</pre><p><code>margi.out</code></p><pre>2</pre><h3>Explicație</h3><p>Suma maximă este <code>(0 + 1) + (0 + 1) = 2</code>. Dacă am fi avut <code>C = 2</code>, pe liniile <code>2</code> și <code>3</code> ar mai fi apărut:<br>\n<code>1 1</code><br>\n<code>1 4</code></p>",
+      "text": "margi.in1 2 0000 0100 0000 0000margi.out2ExplicațieSuma maximă este (0 + 1) + (0 + 1) = 2. Dacă am fi avut C = 2, pe liniile 2 și 3 ar mai fi apărut: 1 1 1 4"
+    },
+    {
+      "title": "Exemplul 2:",
+      "html": "<p><code>margi.in</code></p><pre>2\n3\n01001100\n11100011\n00101000\n11000000\n00000000\n01100100\n01000000\n11000010</pre><p><code>margi.out</code></p><pre>20\n1 1 2\n3 3 2 </pre><h3>Explicație</h3><p>Suma maximă este <code>(7 + 5) + (3 + 3) + (1 + 1) = 20</code>. Exemplul din figura de mai sus.</p>",
+      "text": "margi.in2 3 01001100 11100011 00101000 11000000 00000000 01100100 01000000 11000010margi.out20 1 1 2 3 3 2 ExplicațieSuma maximă este (7 + 5) + (3 + 3) + (1 + 1) = 20. Exemplul din figura de mai sus."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Suma maximă este (0 + 1) + (0 + 1) = 2. Dacă am fi avut C = 2, pe liniile 2 și 3 ar mai fi apărut: 1 1 1 4"
+    },
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Suma maximă este (7 + 5) + (3 + 3) + (1 + 1) = 20. Exemplul din figura de mai sus."
+    }
+  ],
+  "constraints": [
+    "C poate fi 1 sau 2",
+    "2 ≤ n ≤ 10",
+    "Spunem că șirul X este mai mic lexicografic decât șirul Y, dacă există o poziție i, astfel încât X1=Y1, X2=Y2, …., Xi-1=Yi-1, iar Xi<Yi",
+    "Pentru teste în valoare de 30 de puncte avem C = 1."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q4d3de20417.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/margi_01.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-margi-01-jpg.jpg",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/margi_02.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-margi-02-jpg.jpg",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/margi_03.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-margi-03-jpg.jpg",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/margi_04.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-margi-04-jpg.jpg",
+      "kind": "image"
+    },
+    {
+      "url": "https://www.pbinfo.ro/resurse/16a4b0/margi_05.jpg",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-resurse-16a4b0-margi-05-jpg.jpg",
+      "kind": "image"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "10",
+    "intrare/ieșire": "margi.in / margi.out",
+    "limită timp": "0.2 secunde",
+    "limită memorie": "128 MB / 8 MB",
+    "sursa problemei": "Lot Național Juniori 2019",
+    "autor": "Eugen Nodea",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 10,
+  "timeLimitSeconds": 0.2,
+  "memoryLimitMb": 128,
+  "author": "Eugen Nodea",
+  "sourceAttribution": "Lot Național Juniori 2019",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3107/margi"
+}

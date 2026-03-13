@@ -1,0 +1,150 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1134"><article id="enunt">
+			<p>O rezervație de urși panda, privită de sus, are formă dreptunghiulară și este compusă din <code>n</code> rânduri identice, iar pe fiecare rând sunt <code>m</code> țarcuri identice cu baza pătrată. Țarcurile sunt îngrădite și sunt prevăzute cu uși către toate cele <code>4</code> țarcuri vecine. Ușile sunt prevăzute cu câte un cod de acces, ca atare acestea se închid și se deschid automat. Prin acest sistem, unele ţarcuri sunt accesibile ursuleților, iar altele le sunt interzise acestora. În <code>T</code> țarcuri se găsește mâncare pentru ursuleți.</p>
+
+<p>Ursuleții din rezervație poartă câte un microcip care le deschide automat ușile țarcurilor unde pot intra și închide automat uşile țarcurilor interzise. Un țarc este accesibil ursulețului dacă ultimele <code>S</code> cifre ale reprezentărilor binare ale codului țarcului și ale codului <code>k</code> de pe microcip sunt complementare. (Exemplu: pentru <code>S=8</code>, <code>11101011</code> și <code>00010100</code> sunt complementare).</p>
+
+<p>Într-un țarc este un ursuleț căruia i s-a făcut foame. Ursulețul se deplasează doar paralel cu laturile dreptunghiului. Trecerea dintr-un țarc în altul vecin cu el se face într-o secundă.</p>
+
+<h1>Cerinţă</h1>
+
+<p>Cunoscând <code>n</code> și <code>m</code> dimensiunile rezervației, codurile de acces de la fiecare dintre cele <code>n*m</code> țarcuri, coordonatele celor <code>T</code> țarcuri cu mâncare, coordonatele țarcului <code>L</code> și <code>C</code> unde se află inițial  ursulețul, codul <code>k</code> al microcipului său și numărul <code>S</code>, determinați:</p>
+
+<p><strong>a)</strong> Numărul <code>X</code> de țarcuri care îndeplinesc proprietatea că ultimele <code>S</code> cifre din reprezentarea binară a codului lor sunt complementare cu ultimele <code>S</code> cifre din reprezentarea binară a codului <code>k</code> purtat de ursuleț, cu excepția țarcului în care se află acesta inițial. <br>
+<strong>b)</strong> Numărul minim de secunde <code>Smin</code> în care poate ajunge la un țarc cu mâncare precum și numărul de țarcuri cu mâncare <code>nt</code> la care poate ajunge în acest timp minim.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>panda.in</code> conține:</p>
+
+<ul>
+	<li>pe prima linie un număr natural <code>p</code>. Pentru toate testele de intrare, numărul <code>p</code> poate avea doar valoarea <code>1</code> sau valoarea <code>2</code>;</li>
+	<li>pe a doua  linie trei numere naturale <code>n</code>, <code>m</code> și <code>T</code> separate prin câte un spațiu, cu semnificațiile din enunț;</li>
+	<li>pe linia a treia patru numere naturale nenule <code>L</code>, <code>C</code>, <code>k</code> și <code>S</code>, separate prin câte un spațiu, cu semnificațiile din enunț;</li>
+	<li>pe următoarele <code>T</code> linii câte două numere naturale reprezentând coordonatele țarcurilor cu mâncare;</li>
+	<li>pe următoarele <code>n</code> linii câte m numere naturale, separate prin câte un spațiu, reprezentând codurile de acces la ușile din cele <code>n*m</code> țarcuri ale rezervației.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>Dacă valoarea lui <code>p</code> este <code>1</code>,  se va rezolva numai punctul a) din cerință. <br>
+În acest caz, în fişierul de ieşire <code>panda.out</code> se va scrie un singur număr natural <code>X</code>, reprezentând numărul total de țarcuri pe care le poate accesa ursulețul, cu excepția țarcului în care se află acesta inițial.</p>
+
+<p>Dacă valoarea lui <code>p</code> este <code>2</code>, se va rezolva numai punctul b) din cerință. </p>
+
+<p>În acest caz, fişierul de ieşire <code>panda.out</code> va conține  numerele naturale naturale <code>Smin</code> și <code>nt</code>, în această ordine, separate printr-un spațiu.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ n,m ≤ 500</code></li>
+	<li><code>1 ≤ S ≤ 8</code></li>
+	<li><code>1 ≤ T &lt; n*m</code></li>
+	<li><code>0 ≤ k</code>, valorile codurilor  <code>≤ 9999</code></li>
+	<li>Pentru toate testele problemei există soluție, adică ursulețul poate ajunge la cel puțin unul dintre țarcurile cu mâncare.</li>
+	<li>Mâncarea se poate găsi și în zone inaccesibile.</li>
+	<li>Pentru rezolvarea corectă a primei cerinţe se acordă 20 de puncte, iar pentru cerința a doua se acordă 80 de puncte.</li>
+	<li>Pentru 24% dintre teste, se garantează  <code>m ≤ 50</code>  și <code>n ≤  50</code>.</li>
+	<li>Pentru 20% dintre teste, se garantează  <code>S=1</code>.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>panda.in</code></p>
+
+<pre>1
+5 6 4
+3 5 1 1
+1 2 
+5 1 
+2 1
+4 3
+15 1278 3 1278 1278 1 
+16 17 18 19 254 20
+21 25 26 254 254 254
+27 28 29 3 2 254
+2 254 4 254 254 254</pre>
+
+<p><code>panda.out</code></p>
+
+<pre>19</pre>
+
+<h1>Explicație</h1>
+
+<p><code>k=1</code> și deoarece <code>s=1</code> trebuie ca doar ultima cifră binară a lui <code>k</code> să fie diferită de ultima cifră binară a codului din țarc. </p>
+
+<p><strong>Atenție! Pentru acest test se rezolvă doar cerința a).</strong></p>
+
+<h1>Exemplul 2</h1>
+
+<p><code>panda.in</code></p>
+
+<pre>2
+5 6 4
+3 5 1 1
+1 2 
+5 1 
+2 1
+4 3
+15 1278 3 1278 1278 1 
+16 17 18 19 254 20
+21 25 26 254 254 254
+27 28 29 3 2 254
+2 254 4 254 254 254</pre>
+
+<p><code>panda.out</code></p>
+
+<pre>6 1</pre>
+
+<h1>Explicație</h1>
+
+<p>Dacă notăm cu <code>1</code> țarcurile accesibile și cu <code>0</code> cele inaccesibile, obținem următoarea matrice:</p>
+
+<table>
+		<tbody><tr>
+			<td> 0 </td>
+			<td> <strong>1</strong> </td>
+			<td> 0 </td>
+			<td> 1 </td>
+			<td> 1 </td>
+			<td> 0 </td>
+		</tr>
+		<tr>
+			<td> <strong>1</strong> </td>
+			<td> 0 </td>
+			<td> 1 </td>
+			<td> 0 </td>
+			<td> 1 </td>
+			<td> 1 </td>
+		</tr>
+		<tr>
+			<td> 0 </td>
+			<td> 0 </td>
+			<td> 1 </td>
+			<td> 1 </td>
+			<td> <strong>1</strong> </td>
+			<td> 1 </td>
+		</tr>
+		<tr>
+			<td> 0 </td>
+			<td> 1 </td>
+			<td> <strong>0</strong> </td>
+			<td> 0 </td>
+			<td> 1 </td>
+			<td> 1 </td>
+		</tr>
+		<tr>
+			<td> <strong>1</strong> </td>
+			<td> 1 </td>
+			<td> 1 </td>
+			<td> 1 </td>
+			<td> 1 </td>
+			<td> 1 </td>
+		</tr>
+</tbody></table>
+
+<p>Ursulețul se află în țarcul de coordonate <code>(3,5)</code> și poate ajunge la un singur țarc cu mâncare,  după <code>6</code> secunde. Acest țarc este cel de la coordonatele  <code>(5,1)</code>; drumul parcurs este:</p>
+
+<p><code>(3,5)→(4,5) →(5,5) →(5,4) →(5,3) →(5,2) →(5,1)</code></p>
+
+<p><strong>Atenție! Pentru acest test se rezolvă doar cerința b).</strong></p>		</article>
+		</body></html>

@@ -1,0 +1,304 @@
+{
+  "id": 3903,
+  "slug": "diff2darrays",
+  "name": "Diff2dArrays",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3903/diff2darrays",
+  "categoryChain": [
+    {
+      "id": 9,
+      "name": "Clasa a 9-a",
+      "slug": "clasa-a-9-a",
+      "href": "/?pagina=probleme-lista&clasa=9"
+    },
+    {
+      "id": 46,
+      "name": "Tablouri bidimensionale (matrice)",
+      "slug": "tablouri-bidimensionale-matrice",
+      "href": "/?pagina=probleme-lista&tag=46"
+    },
+    {
+      "id": 58,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=58"
+    }
+  ],
+  "tags": [
+    "Smenul lui Mars (Difference Arrays)",
+    "Sume parțiale"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Se dă o matrice <code>A</code>, formată din <code>N</code> <strong>linii</strong> și <code>N</code> <strong>coloane</strong>. Asupra unei <strong>submatrice</strong> cu <strong>colțul din stânga-sus</strong> aflat pe linia <code>l1</code> și coloana <code>c1</code>, și <strong>colțul din dreapta-jos</strong> aflat pe linia <code>l2</code> și coloana <code>c2</code>, se poate efectua operație de <strong>mărire a elementelor cu un număr întreg</strong> <code>v</code>. Afișați matricea <code>A</code>, după efectuarea a <code>Q</code> astfel de operații.</p>",
+      "text": "Se dă o matrice A, formată din N linii și N coloane. Asupra unei submatrice cu colțul din stânga-sus aflat pe linia l1 și coloana c1, și colțul din dreapta-jos aflat pe linia l2 și coloana c2, se poate efectua operație de mărire a elementelor cu un număr întreg v. Afișați matricea A, după efectuarea a Q astfel de operații."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<ul>\n\t<li>pe prima linie se află variabila <code>N</code>, reprezentând <strong>numărul de linii și coloane</strong>.</li>\n\t<li>pe următoarele <code>N</code> linii, câte <code>N</code> <strong>numere întregi</strong>, reprezentând <strong>elementele matricii</strong>.</li>\n\t<li>pe cea de-a <code>N + 1</code> se află variabila <code>Q</code>, reprezentând <strong>numărul de operații</strong> ce trebuie efectuate.</li>\n\t<li>pe următoarele <code>Q</code> linii, <code>5</code> numere : <code>l1, c1, l2, c2, v</code>, reprezentând linia și coloana <strong>colțului din stânga-sus</strong>, respectiv linia și coloana <strong>colțului din dreapta-jos</strong> al  unei <strong>submatrici</strong>, căreia îi vor fi mărite elementele cu <strong>numărul întreg</strong> <code>v</code>.</li>\n</ul>",
+      "text": "pe prima linie se află variabila N, reprezentând numărul de linii și coloane. pe următoarele N linii, câte N numere întregi, reprezentând elementele matricii. pe cea de-a N + 1 se află variabila Q, reprezentând numărul de operații ce trebuie efectuate. pe următoarele Q linii, 5 numere : l1, c1, l2, c2, v, reprezentând linia și coloana colțului din stânga-sus, respectiv linia și coloana colțului din dreapta-jos al unei submatrici, căreia îi vor fi mărite elementele cu numărul întreg v."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Programul va afișa pe ecran matricea după aplicarea tuturor celor <code>Q</code> operații de mărire.</p>",
+      "text": "Programul va afișa pe ecran matricea după aplicarea tuturor celor Q operații de mărire."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N ≤ 500</code></li>\n\t<li><code>1 ≤ Q ≤ 200.000</code></li>\n\t<li><code>1 ≤ l1 ≤ l2 ≤ N</code></li>\n\t<li><code>1 ≤ c1 ≤ c2 ≤ N</code></li>\n\t<li><code>-1.000 ≤ v ≤ 1.000</code></li>\n\t<li>Elementele matricii <code>A</code> vor avea valori cuprinse între <code>[-10.000, 10.000]</code></li>\n</ul>",
+      "text": "1 ≤ N ≤ 500 1 ≤ Q ≤ 200.000 1 ≤ l1 ≤ l2 ≤ N 1 ≤ c1 ≤ c2 ≤ N -1.000 ≤ v ≤ 1.000 Elementele matricii A vor avea valori cuprinse între [-10.000, 10.000]"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><strong>Intrare</strong></p><pre>4\n3 6 3 3\n0 5 2 10\n-4 4 10 -1\n4 -1 8 3\n2\n1 1 4 2 10\n1 1 4 4 -5</pre><p><strong>Ieșire</strong></p><pre>8 11 -2 -2\n5 10 -3 5\n1 9 5 -6\n9 4 3 -2</pre><h3>Explicație</h3><p>În prima operație se adună valoarea <code>10</code>,  submatricii delimitată de liniile <code>1, 4</code> și coloanele <code>1, 2</code> obținând matricea:<br>\n<code>13 16 3 3</code><br>\n<code>10 15 2 10</code><br>\n<code>6  14 10 -1</code><br>\n<code>14  9 8 3</code></p><p>În cea de-a doua operație se adună valoarea <code>-5</code>, întregii matrici obținând:<br>\n<code>8 11 -2 -2</code><br>\n<code>5 10 -3 5</code><br>\n<code>1 9 5 -6</code><br>\n<code>9 4 3 -2</code></p>",
+      "text": "Intrare4 3 6 3 3 0 5 2 10 -4 4 10 -1 4 -1 8 3 2 1 1 4 2 10 1 1 4 4 -5Ieșire8 11 -2 -2 5 10 -3 5 1 9 5 -6 9 4 3 -2ExplicațieÎn prima operație se adună valoarea 10, submatricii delimitată de liniile 1, 4 și coloanele 1, 2 obținând matricea: 13 16 3 3 10 15 2 10 6 14 10 -1 14 9 8 3În cea de-a doua operație se adună valoarea -5, întregii matrici obținând: 8 11 -2 -2 5 10 -3 5 1 9 5 -6 9 4 3 -2"
+    }
+  ],
+  "examples": [
+    {
+      "input": "4\n3 6 3 3\n0 5 2 10\n-4 4 10 -1\n4 -1 8 3\n2\n1 1 4 2 10\n1 1 4 4 -5",
+      "output": "8 11 -2 -2\n5 10 -3 5\n1 9 5 -6\n9 4 3 -2",
+      "explanation": "În prima operație se adună valoarea 10, submatricii delimitată de liniile 1, 4 și coloanele 1, 2 obținând matricea: 13 16 3 3 10 15 2 10 6 14 10 -1 14 9 8 3"
+    }
+  ],
+  "constraints": [
+    "1 ≤ N ≤ 500",
+    "1 ≤ Q ≤ 200.000",
+    "1 ≤ l1 ≤ l2 ≤ N",
+    "1 ≤ c1 ≤ c2 ≤ N",
+    "-1.000 ≤ v ≤ 1.000",
+    "Elementele matricii A vor avea valori cuprinse între [-10.000, 10.000]"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-qd482221331.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Dumitrescu Ovidiu Mihail (dovidiu)",
+    "clasa": "9",
+    "intrare/ieșire": "tastatură / ecran",
+    "limită timp": "0.4 secunde",
+    "limită memorie": "4 MB / 2 MB",
+    "sursa problemei": "ad-hoc",
+    "autor": "Bucă Mihnea-Vicențiu, Ovidiu Mihail Dumitrescu",
+    "dificultate": "medie"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 9,
+  "timeLimitSeconds": 0.4,
+  "memoryLimitMb": 4,
+  "author": "Bucă Mihnea-Vicențiu, Ovidiu Mihail Dumitrescu",
+  "sourceAttribution": "ad-hoc",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3903/diff2darrays"
+}

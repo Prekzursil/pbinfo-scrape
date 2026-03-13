@@ -1,0 +1,295 @@
+{
+  "id": 3261,
+  "slug": "infestation",
+  "name": "infestation",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/3261/infestation",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 16,
+      "name": "Teoria Grafurilor",
+      "slug": "teoria-grafurilor",
+      "href": "/?pagina=probleme-lista&tag=16"
+    },
+    {
+      "id": 64,
+      "name": "Arbori cu rădăcină",
+      "slug": "arbori-cu-r-d-cin",
+      "href": "/?pagina=probleme-lista&tag=64"
+    }
+  ],
+  "tags": [],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Ajutați-o pe Lora să scrie un program care prelucrează fiecare eveniment și determină răspunsurile la evenimentele de tip 4.</p>",
+      "text": "Ajutați-o pe Lora să scrie un program care prelucrează fiecare eveniment și determină răspunsurile la evenimentele de tip 4."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Prima linie conține un singur întreg <code>N</code> – numărul de noduri din arbore. A doua linie conține <code>N-1</code> numere, al <code>i</code>-lea fiind tatăl nodului <code>i+1</code>. Linia a treia conține numărul de evenimente <code>Q</code>. Următoarele <code>Q</code> linii conțin câte doi întregi reprezentând un eveniment în formatul descris anterior.</p>",
+      "text": "Prima linie conține un singur întreg N – numărul de noduri din arbore. A doua linie conține N-1 numere, al i-lea fiind tatăl nodului i+1. Linia a treia conține numărul de evenimente Q. Următoarele Q linii conțin câte doi întregi reprezentând un eveniment în formatul descris anterior."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Pentru fiecare eveniment de tip <code>4</code> afișați o linie care conține un singur întreg – numărul de noduri infestate din subarbore.</p>",
+      "text": "Pentru fiecare eveniment de tip 4 afișați o linie care conține un singur întreg – numărul de noduri infestate din subarbore."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N, Q ≤ 300.000</code></li>\n</ul>",
+      "text": "1 ≤ N, Q ≤ 300.000"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><strong>Intrare</strong></p><pre>5\n1 1 3 3\n8\n1 3\n2 5\n4 1\n1 1\n2 1\n4 3\n3 1\n4 3</pre><p><strong>Ieșire</strong></p><pre>1\n2\n1</pre><h3>Explicație</h3><p>Evenimentele au următorul efect:</p><ul>\n\t<li><code>1 3</code> – Nodul <code>3</code> este infestat</li>\n\t<li><code>2 5</code> – Lora folosește ultrasunete în nodurile din drumul de la <code>1</code> la <code>5</code>. Acesteaa sunt <code>1</code>, <code>3</code> și <code>5</code>. Nodul 3 este infestat și singurul său vecin fără ultrasunete este <code>4</code>. Astfel nodul <code>3</code> nu mai este infestat și <code>4</code> devine infestat.</li>\n\t<li><code>4 1</code> – Subarborele cu rădăcina <code>1</code> conține toate nodurile. Singurul infestat este <code>4</code>.</li>\n\t<li><code>1 1</code> – Nodul <code>1</code> este infestat</li>\n\t<li><code>2 1</code> – Lora folosește ultrasunete în nodul <code>1</code>. Nodurile <code>2</code> și <code>3</code> devin infestate, iar nodul <code>1</code> nu mai este infestat.</li>\n\t<li><code>4 3</code> – Subarborele cu rădăcina <code>3</code> conține nodurile <code>3</code>, <code>4</code> și <code>5</code>. Dintre ele <code>3</code> și <code>4</code> sunt infestate.</li>\n\t<li><code>3 1</code> – Nodul <code>1</code> și fiii săi, adică nodurile <code>1</code>, <code>2</code> și <code>3</code>, nu mai sunt infestate.</li>\n\t<li><code>4 3</code> – Dintre nodurile <code>3</code>, <code>4</code> și <code>5</code>, doar nodul <code>4</code> este infestat.</li>\n</ul>",
+      "text": "Intrare5 1 1 3 3 8 1 3 2 5 4 1 1 1 2 1 4 3 3 1 4 3Ieșire1 2 1ExplicațieEvenimentele au următorul efect: 1 3 – Nodul 3 este infestat 2 5 – Lora folosește ultrasunete în nodurile din drumul de la 1 la 5. Acesteaa sunt 1, 3 și 5. Nodul 3 este infestat și singurul său vecin fără ultrasunete este 4. Astfel nodul 3 nu mai este infestat și 4 devine infestat. 4 1 – Subarborele cu rădăcina 1 conține toate nodurile. Singurul infestat este 4. 1 1 – Nodul 1 este infestat 2 1 – Lora folosește ultrasunete în nodul 1. Nodurile 2 și 3 devin infestate, iar nodul 1 nu mai este infestat. 4 3 – Subarborele cu rădăcina 3 conține nodurile 3, 4 și 5. Dintre ele 3 și 4 sunt infestate. 3 1 – Nodul 1 și fiii săi, adică nodurile 1, 2 și 3, nu mai sunt infestate. 4 3 – Dintre nodurile 3, 4 și 5, doar nodul 4 este infestat."
+    }
+  ],
+  "examples": [
+    {
+      "input": "5\n1 1 3 3\n8\n1 3\n2 5\n4 1\n1 1\n2 1\n4 3\n3 1\n4 3",
+      "output": "1\n2\n1",
+      "explanation": "Evenimentele au următorul efect:"
+    }
+  ],
+  "constraints": [
+    "1 ≤ N, Q ≤ 300.000"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q623ca99ada.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "11",
+    "intrare/ieșire": "tastatură / ecran",
+    "limită timp": "1 secunde",
+    "limită memorie": "128 MB / 8 MB",
+    "sursa problemei": "Turneul Internațional Shumen 2019",
+    "autor": "-",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 1,
+  "memoryLimitMb": 128,
+  "sourceAttribution": "Turneul Internațional Shumen 2019",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/3261/infestation"
+}

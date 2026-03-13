@@ -1,0 +1,85 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1201"><article id="enunt">
+			<p>Un şir format din cifre trebuie să fie tastat în una sau mai multe sesiuni. </p>
+
+<p>Există două tastaturi: tastatura <code>A</code> care conţine taste cu toate combinaţiile de exact două cifre: tasta <code>00</code>, tasta <code>01</code>, <code>02</code>, …, <code>98</code>, <code>99</code> și tastatura B care conţine taste cu toate combinaţiile de exact trei cifre: tasta <code>000</code>, tasta <code>001</code>, …, <code>998</code>, <code>999</code>. Cifrele se vor introduce în una sau mai multe sesiuni, pentru o sesiune putându-se folosi o singură tastatură. Datorită unei ordonanțe de urgență, dacă o combinație de taste a fost introdusă cu una din tastaturi în sesiunea curentă și, continuând sesiunea, această combinație poate fi introdusă din nou, este necesar să continuăm sesiunea cel puțin până când o vom introduce din nou. În cazul în care introducem până atunci și alte taste, trebuie să continuăm sesiunea până când vom introduce ultima apariție a lor.</p>
+
+<p>Astfel, dacă şirul <code>255222255</code><u><code>25</code></u><code>7</code> este început folosind tastatura <code>A</code>, se va scrie obligatoriu într‑o sesiune <code>25 52 22 25 52</code>. Suntem obligați să tastăm până la ultima apariție a tastei <code>25</code> în sesiunea curentă, și când folosim tasta <code>52</code> suntem obligați să continuăm până la ultima apariție a acesteia. <code>A</code> se observa că cifrele de pe pozițiile subliniate sunt tot <code>2</code> și <code>5</code>, însă nu formează o tastă care se poate apăsa în sesiunea curentă. Deoarece se dorește un număr cât mai mare de sesiuni, se va începe o nouă sesiune în care se va scrie doar <code>57</code>.</p>
+
+<h1>Cerința</h1>
+
+<p>Cunoscându-se numărul total de cifre și secvența de cifre ce formează şirul, să se determine o modalitate de a despărţi textul astfel încât el să poată fi scris într-un număr maxim de sesiuni.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Din fișierul <code>text1.in</code> se citesc:</p>
+
+<ul>
+	<li>de pe prima linie un număr natural <code>N</code> reprezentând numărul de cifre</li>
+	<li>de pe următoarea linie <code>N</code> cifre, scrise fără spații, reprezentând şirul de tastat</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>În fișerul <code>text1.out</code> se afișează:</p>
+
+<ul>
+	<li>pe prima linie <code>S</code>, reprezentând numărul maxim de sesiuni</li>
+	<li>pe fiecare dintre următoarele <code>S</code> linii, câte două numere <code>p</code>, <code>k</code>, scrise cu spaţiu între ele, fiecare astfel de pereche descriind, în ordinea în care apar în text, secvențele tipărite în sesiuni: <code>p[i]</code> – poziția din șirul de cifre dat unde începe sesiunea <code>i</code> și <code>k[i]</code> – tipul de tastatură folosită în sesiunea <code>i</code> (<code>2</code> pentru tastatura <code>A</code>, <code>3</code> pentru tastatura <code>B</code>)</li>
+</ul>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>3 ≤ n ≤ 1 000 000</code></li>
+	<li>cifrele din secvență sunt între <code>0</code> și <code>9</code></li>
+	<li>testele propuse asigură existența unei soluții pentru cerința dată</li>
+	<li>dacă există mai multe soluții, se va furniza oricare dintre ele.</li>
+	<li>pentru numărul corect de sesiuni, fără liniile care descriu soluția completă și corectă se acordă 50% din punctaj.</li>
+</ul>
+
+<h1>Exemplul 1</h1>
+
+<p><code>text1.in</code></p>
+
+<pre>15
+233323333333322</pre>
+
+<p><code>text1.out</code></p>
+
+<pre>5
+1 3
+4 2
+6 3
+12 2
+14 2</pre>
+
+<h3>Explicație</h3>
+
+<p>Şirul poate fi scris în maximum <code>5</code> sesiuni astfel: <code>(233) (32) (333 333) (33) (22)</code></p>
+
+<ul>
+	<li>prima sesiune, începe cu prima cifră și foloseşte tastatura <code>B</code> (cu taste de <code>3</code> cifre)</li>
+	<li>următoarea sesiune începe la cifra a <code>3</code>-a și foloseşte tastatura <code>A</code></li>
+	<li>a treia sesiune începe la cifra a <code>6</code>-a și foloseşte tastatura <code>B</code></li>
+	<li>a patra sesiune începe la cifra a <code>12</code>-a și foloseşte tastatura <code>A</code></li>
+	<li>ultima sesiune începe la cifra a <code>14</code>-a și foloseşte tastatura <code>A</code></li>
+</ul>
+
+<h1>Exemplul 2</h1>
+
+<p><code>text1.in</code></p>
+
+<pre>8
+46234623</pre>
+
+<p><code>text1.out</code></p>
+
+<pre>3
+1 3
+4 2
+6 3</pre>
+
+<h3>Explicație</h3>
+
+<p>Soluția corespunde secvenţelor <code>(462) (34) (623)</code>.</p>		</article>
+		</body></html>

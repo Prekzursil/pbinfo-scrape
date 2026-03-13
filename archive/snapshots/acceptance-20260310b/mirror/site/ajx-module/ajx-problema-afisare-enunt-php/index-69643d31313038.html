@@ -1,0 +1,90 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1108"><article id="enunt">
+			<p><img align="right" alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-traseu1-png.png"> Într-un oraș există un hotel de formă cubică, cu <code>N</code> etaje, numerotate de la <code>1</code> la <code>N</code>. Suprafața fiecărui etaj <code>K</code> (<code>1 ≤ K ≤ N</code>) este pătratică și este împărțită în <code>N x N</code> camere identice alăturate, dispuse pe <code>N</code> linii și <code>N</code> coloane, fiecare cameră având drept etichetă un triplet de numere naturale (<code>K L C</code>) (<code>K=</code>etajul, <code>L=</code>linia, <code>C=</code>coloana, <code>1 ≤ L, C ≤ N</code>), ca în imaginea alăturată. </p>
+
+<p><img align="left" alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-traseu2-png.png"> Dintre cele <code>N x N x N</code> camere ale hotelului, una este specială deoarece în ea locuiește de mult timp un șoricel. Fiind isteț, el știe eticheta camerei în care se află precum și eticheta camerei în care bucătarul hotelului depozitează alimente. </p>
+
+<p>Studiind  hotelul, șoricelul a constatat că pe fiecare etaj, din orice cameră poate intra în toate camerele care au un perete comun cu aceasta (existând un mic orificiu pentru aerisire). </p>
+
+<p><img align="left" alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-traseu3-png.png"> De asemenea, șoricelul a constatat că din fiecare cameră (situată la etajele <code>2</code>, <code>3</code>, …, sau <code>N-1</code>) poate intra în camera situată imediat deasupra ei și în camera situată imediat sub ea.</p>
+
+<p>Fiind un șoricel binecrescut, el nu intră în nicio cameră ocupată de clienți ca să nu-i deranjeze. Hotelul având mulți clienți, șoricelul trebuie să-și găsească cel mai scurt traseu de la camera lui la camera cu alimente, traseu care să treacă printr-un număr minim de camere, toate neocupate. </p>
+
+<h1>Cerinţe: </h1>
+
+<p>Se cere să se determine:<br>
+a) numărul de camere prin care trece cel mai scurt traseu al șoricelului de la camera lui la camera cu alimente (inclusiv camera lui şi camera cu alimente);<br>
+b) etichetele camerelor prin care trece traseul determinat la punctul a).</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>traseu.in</code> conține:</p>
+
+<ul>
+	<li>pe prima linie, două numere naturale <code>N</code> și <code>M</code> separate printr-un spațiu, <code>N</code> cu semnificația din enunț iar <code>M</code> reprezentând numărul de camere ocupate de clienţii hotelului;<br>
+pe a doua linie, trei numere naturale <code>K1 L1 C1</code>, separate prin câte un spațiu, reprezentând eticheta camerei în care se află șoricelul;</li>
+	<li>pe a treia linie, trei numere naturale  <code>K2 L2 C2</code>, separate prin câte un spațiu, reprezentând eticheta camerei în care sunt depozitate alimentele;</li>
+	<li>pe fiecare dintre următoarele <code>M</code> linii, câte trei numere naturale <code>X Y Z</code>, separate prin câte un spaţiu, reprezentând etichetele celor <code>M</code> camere ocupate de clienți.</li>
+</ul>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>traseu.out</code> va conține pe prima linie un număr natural <code>T</code> reprezentând numărul de camere prin care trece cel mai scurt traseu al șoricelului de la camera lui la camera cu alimente determinat la punctul a). Pe fiecare din următoarele <code>T</code> linii, se vor scrie câte trei numere naturale <code>X Y Z</code>, separate prin câte un spaţiu, reprezentând etichetele camerelor prin care trece traseul determinat la punctul a), în ordinea în care sunt parcurse camerele de către șoricel pentru a ajunge din camera lui în camera cu alimente. </p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N ≤ 100</code>; <code>1 ≤ M ≤ 5000</code>&nbsp;și <code>M &lt; N*N-2</code></li>
+	<li>Șoricelul nu intră decât în camere neocupate de clienți.</li>
+	<li>Camera șoricelului este o cameră neocupată de clienți.</li>
+	<li>Dacă există mai multe trasee ale șoricelului de la camera lui la camera de alimente care trec prin exact <code>T</code> camere, atunci traseul afișat va fi cel mai mic traseu din punct de vedere lexicografic.</li>
+	<li>Eticheta  <code>(X1 Y1 Z1)</code> se consideră strict mai mică în sens lexicografic ca eticheta <code>(X2 Y2 Z2)</code> dacă este satisfăcută doar una dintre condițiile:
+	<ol>
+		<li><code>X1&nbsp;&lt; X2</code></li>
+		<li><code>X1 = X2</code> și <code>Y1 &lt; Y2</code></li>
+		<li><code>X1 = X2</code> și <code>Y1 = Y2</code> și <code>Z1 &lt; Z2</code></li>
+	</ol></li>
+	<li>Eticheta  <code>X1 Y1 Z1</code> se consideră egală cu eticheta <code>X2 Y2 Z2</code> dacă <code>X1 = X2</code> și <code>Y1 = Y2</code> și <code>Z1 = Z2</code>. Vom scrie egalitatea lor astfel: <code>(X1 Y1 Z1) = (X2 Y2 Z2)</code>.</li>
+	<li>Traseul ce trece (în această ordine) prin camerele cu etichetele <code>(X1 Y1 Z1)</code>, <code>(X2 Y2 Z2)</code>,…, <code>(XT YT ZT)</code> este mai mic din punct de vedere lexicografic ca traseul <code>(A1 B1 C1)</code>, <code>(A2 B2 C2)</code>,…, <code>(AT BT CT)</code> dacă există un indice <code>J</code> (<code>1≤J≤T</code>) astfel încât <code>(X1 Y1 Z1) = (A1 B1 C1)</code>, <code>(X2 Y2 Z2) = (A2 B2 C2)</code>…., <code>(XJ-1 YJ-1 ZJ-1) = (AJ-1 BJ-1 CJ-1)</code> iar eticheta <code>(XJ YJ ZJ)</code> este strict mai mică ca eticheta <code>(AJ BJ CJ)</code>.</li>
+	<li>Se acordă: 40% din punctaj pentru determinarea corectă a numărului <code>T</code>&nbsp;și 100% din punctaj pentru rezolvarea corectă a ambelor cerințe.</li>
+	<li>Se garantează că există soluție pentru ambele cerințe, pentru toate datele de test.</li>
+</ul>
+
+<h1>Exemplu:</h1>
+
+<p><code>traseu.in</code></p>
+
+<pre>3 4
+1 1 1
+3 3 3
+3 3 1
+2 1 1
+3 1 1
+3 1 3</pre>
+
+<p><code>traseu.out</code></p>
+
+<pre>7
+1 1 1
+1 1 2
+1 1 3
+1 2 3
+1 3 3
+2 3 3
+3 3 3</pre>
+
+<h1>Explicație</h1>
+
+<p><img align="right" alt="" src="/_assets/asset-https-www-pbinfo-ro-resurse-9dc152-p-1100-traseu4-png.png"> Hotelul are trei etaje (<code>1</code>, <code>2</code> şi <code>3</code>). Pe fiecare etaj sunt <code>3*3</code> camere. Șoricelul se află în camera cu eticheta <code>(1 1 1)</code> iar camera cu alimente are eticheta <code>(3 3 3)</code>.</p>
+
+<p>Sunt <code>4</code> camere ocupate de clienţi. Acestea au etichetele&nbsp;: <code>3 3 1</code>, <code>2 1 1</code>, <code>3 1 1</code>, <code>3 1 3</code>.<br>
+Traseul cel mai scurt trece prin <code>T=7</code> camere. Sunt mai multe astfel de trasee. De exemplu:</p>
+
+<ol>
+	<li><code>(1 1 1, 1 1 2, 1 1 3, 1 2 3, 1 3 3, 2 3 3, 3 3 3)</code></li>
+	<li><code>(1 1 1, 1 1 2, 1 1 3, 2 1 3, 2 2 3, 3 2 3, 3 3 3)</code></li>
+	<li><code>(1 1 1, 1 2 1, 1 3 1, 1 3 2, 2 3 2, 3 2 3, 3 3 3)</code></li>
+	<li>etc.</li>
+</ol>
+
+<p>Cel mai mic astfel de traseu (în sens lexicografic) este traseul 1). </p>		</article>
+		</body></html>

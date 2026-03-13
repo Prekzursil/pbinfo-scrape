@@ -1,0 +1,109 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=2102"><article id="enunt">
+			<p>Paul dorește să învețe cum să programeze un robot. Pentru început s-a gândit să construiască un robot format dintr-un mâner, <code>10</code> butoane aranjate circular şi un ecran. Pe butoane sunt scrise, în ordine crescătoare, cifrele de la <code>0</code> la <code>9</code>, ca în figură.</p>
+
+<p style="text-align:center;"></p>
+
+<p>Un roboprogram va fi format dintr-o secvenţă de instrucţiuni. Instrucțiunile pot fi:</p>
+
+<table class="table table-bordered">
+		<tbody><tr>
+			<th>Instructiune </th>
+			<th>Semnificatie </th>
+		</tr>
+		<tr>
+			<td> <code>Dp</code> </td>
+			<td> Mânerul robotului se deplasează spre dreapta cu <code>p</code> poziţii <code>(p este o cifră)</code> </td>
+		</tr>
+		<tr>
+			<td> <code>Sp</code> </td>
+			<td> Mânerul robotului se deplasează spre stânga cu <code>p</code> poziţii <code>(p este o cifră)</code> </td>
+		</tr>
+		<tr>
+			<td> <code>A</code> </td>
+			<td> Este apăsat butonul în dreptul căruia se află mânerul robotului şi pe ecran apare cifra scrisă pe buton </td>
+		</tr>
+		<tr>
+			<td> <code>T</code> </td>
+			<td> Terminarea programului (se utilizează o singură dată la final şi este precedată de cel puţin o instrucțiune A) </td>
+		</tr>
+</tbody></table>
+
+<p>Iniţial mânerul robotului este plasat în dreptul butonului <code>0</code>, iar ecranul este gol. <br>
+De exemplu, în urma executării roboprogramului <code>D4AS1AAD6AT</code> robotul apasă butoanele pe care sunt scrise cifrele <code>4, 3, 3, 9,</code> iar pe ecran va apărea <code>4339</code>. </p>
+
+
+<h1>Cerințe</h1>
+
+<p>Să se scrie un program care rezolvă următoarele cerinţe:<br>
+</p><ol>
+	<li>citeşte un roboprogram şi determină numărul de cifre afişate pe ecran după executarea roboprogramului;</li>
+	<li>citeşte un roboprogram şi determină cifrele afişate pe ecran după executarea roboprogramului;</li>
+	<li>citeşte un număr natural <code>N</code> şi construieşte un roboprogram de lungime minimă prin executarea căruia pe ecran se va obţine numărul <code>N</code>; deoarece robotului îi place să se deplaseze în special spre dreapta, dacă există mai multe roboprograme de lungime minimă, se va afişa roboprogramul cu număr maxim de instrucţiuni <code>D</code>.</li><br>
+</ol><p></p>
+
+
+<h1>Date de intrare</h1>
+
+<p>Fişierul de intrare <code>robot3.in</code> conţine pe prima linie un număr natural <code>C</code>, reprezentând cerinţa care urmează să fie rezolvată <code>(1, 2 sau 3)</code>. Dacă <code>C=1</code> sau <code>C=2</code>, pe a doua linie a fişierului se află un roboprogram. Dacă <code>C=3</code>, pe a doua linie a fişierului de intrare se află numărul natural <code>N</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fişierul de ieşire <code>robot3.out</code> va conţine o singură linie. Dacă <code>C=1</code>, pe prima linie se va scrie un număr natural reprezentând numărul de cifre afişate pe ecran după executarea roboprogramului din fişierul de intrare. <br>
+Dacă <code>C=2</code>, pe prima linie vor fi scrise cifrele afișate pe ecran în urma executării roboprogramului din fişierul de intrare. Dacă <code>C=3</code>, pe prima linie va fi scris roboprogramul solicitat de cerinţa <code>3</code>.</p>
+
+
+<h1>Restricții și precizări</h1>
+
+<p>• <code>0 ≤ N ≤ 1000000000</code><br>
+• Lungimea roboprogramului citit din fişierul de intrare sau scris în fişierul de ieşire este <code>cel mult 1000</code> de caractere.<br>
+• Dacă mânerul este plasat în dreptul butonului <code>0</code> şi se deplasează spre dreapta, se va îndrepta către butonul <code>1</code>; dacă deplasarea este spre stânga, se va îndrepta către butonul <code>9</code>.<br>
+• Pentru rezolvarea corectă a primei cerinţe se acordă 10 puncte, pentru rezolvarea corectă a celei de a doua cerințe se acordă 30 de puncte, iar pentru rezolvarea corectă a celei de a treia cerințe se acordă 50 de puncte. 10 puncte se acordă din oficiu.</p>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>robot3.in</code></p>
+
+<pre>1
+D1AD2AS1AT</pre>
+
+<p><code>robot3.out</code></p>
+
+<pre>3</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C=1</code>, pentru acest test se rezolvă <code>cerința 1</code>.<br>
+Se afişează pe ecran <code>3 cifre (132)</code></p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>robot3.in</code></p>
+
+<pre>2
+S0AD2AS1AT</pre>
+
+<p><code>robot3.out</code></p>
+
+<pre>021</pre>
+
+<h3>Explicație</h3>
+
+<p><code>C=2</code>, pentru acest test se rezolvă <code>cerința 2</code>. <br>
+Mânerul robotului se deplasează cu <code>0</code> unități la stânga, deci rămâne în dreptul butonului <code>0</code> și apasă, apoi se deplasează <code>2</code> unități spre dreapta şi ajunge în dreptul butonului <code>2</code>, apasă, apoi se deplasează <code>1</code> unitate la stânga și ajunge în dreptul butonului <code>1</code> și apasă acest buton → <code>021</code>.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>robot3.in</code></p>
+
+<pre>3
+19332</pre>
+
+<p><code>robot3.out</code></p>
+
+<pre>D1AS2AD4AAS1AT</pre>
+
+
+<h3>Explicație</h3>
+
+<p><code>C=3</code>, pentru acest test se rezolvă <code>cerința 3</code>. Pentru a afișa cifra <code>1</code>, mânerul robotului se deplasează <code>1</code> unitate la dreapta după care apasă <code>(D1A)</code>. Pentru a afișa cifra <code>9</code>, din poziția curentă mânerul robotului se deplasează <code>2</code> unități la stânga şi apasă <code>(S2A)</code>. Pentru a afișa cifra <code>3</code>, din poziția curentă mânerul robotului se deplasează <code>4</code> unități la dreapta după care apasă <code>(D4A)</code>. Pentru a afișa a doua cifra <code>3</code>, mânerul robotului rămâne în poziția curentă și apasă butonul. Pentru a afișa cifra <code>2</code>, din poziția curentă mânerul robotului se deplasează <code>1</code> unitate la stânga după care apasă <code>(S1A)</code>. Programul se termină cu instrucțiunea <code>T → D1AS2AD4AAS1AT</code></p>		</article>
+		</body></html>

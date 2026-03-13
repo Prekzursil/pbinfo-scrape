@@ -1,0 +1,51 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3924"><article id="enunt">
+			<p>Se dă un limbaj format din <code>N</code> cuvinte și un text criptat format din <code>M</code> cuvinte. Spunem că un cuvânt se permută după un șir \({x}_{1}, {x}_{2}, …, {x}_{K} \) dacă prima literă se permută cu \({x}_{1}\), a doua cu \({x}_{2}\), …,  iar ultima cu \({x}_{K}\).<br>
+De exemplu, după șirul <code>1 5 6</code>, <strong>“abc”</strong> devine <strong>“bgi”</strong>. Permutarea se face în ordinea literelor mici din alfabetul englez. Dacă o literă ar trece de finalul alfabetului, aceasta îl reia și apoi permută și litera următoare cu <code>1</code>.<br>
+În cazul în care ultima literă trece de finalul alfabetului, atunci cuvântul devine invalid. De exemplu, <strong>“zza”</strong> permutat după șirul <code>1 2 3</code>, devine <strong>“ace”</strong>. (adunarea se face cu transport pornind de la stânga).  Dacă <strong>“zzz”</strong> s-ar permuta după șirul <code>1 2 3</code>, ar deveni invalid. Cele mai <strong>“semnificative”</strong> litere sunt de la dreapta la stânga.<br>
+Vrem să decriptăm textul, folosind mai multe variante de șiruri pe care le considerăm valabile. Cel mai bun șir de decriptare este acela pentru care numărul de cuvinte din textul criptat care se găsesc, după operație, în limbaj, este maximal. </p>
+
+<h1>Cerința</h1>
+
+<p>Să se determine șirul cel mai bun de decriptare, dintre cele date. În cazul în care există mai multe astfel de șiruri, se va afișa cel cu indicele cel mai mic. </p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie  din fișierul <code>cripto1.in</code> se află patru numere naturale <code>N, M, K, Q</code>. <br>
+Pe următoarea linie, se găsește limbajul, format din cele <code>N</code> cuvinte de lungime <code>K</code>.<br>
+Pe a treia linie se găsesc cele <code>M</code> cuvinte.<br>
+În final, se găsesc cele <code>Q</code> șiruri, de câte <code>K</code> numere fiecare pe câte o linie.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fişierul de ieşire <code>cripto1.out</code> va conţine pe prima linie, indicele celui mai bun șir, și similitudinea acestuia. </p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>N, M, Q ≤</code> \({10}^{5}\), <code>M * Q ≤</code> \({10}^{7}\).  Valorile din șiruri sunt strict mai mici decât <code>26</code>.</li>
+	<li>Pentru <code>30%</code> din tese  <code>N, M, Q ≤ 100</code>.</li>
+	<li><code>K ≤ 12</code>. Pentru alte <code>20%</code> din teste <code>K ≤ 3</code>.</li>
+</ul>
+
+
+<h1>Exemplu:</h1>
+
+<p><code>cripto1.in</code></p>
+
+<pre>6 3 4 2 
+info olte niaa este inva lcea 
+hlck njqa hlcj 
+1 2 3 5  
+1 2 3 4 </pre>
+
+<p><code>cripto1.out</code></p>
+
+<pre>2 2</pre>
+
+<h3>Explicație</h3>
+
+<p>Se permută cuvintele de pe a doua linie, după fiecare șir, din cele două.<br>
+Răspunsul este al doilea șir, <code>1 2 3 4</code>, pentru că input-ul devine <strong>info olte infn</strong>.<br>
+Astfel, 2 dintre cuvinte se găsesc în primul limbaj. <br>
+Dacă am folosi primul șir, rezultatul ar fi <code>1</code>: <strong>infp oltf info</strong>.</p>		</article>
+		</body></html>

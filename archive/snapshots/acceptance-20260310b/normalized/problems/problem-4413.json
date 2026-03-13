@@ -1,0 +1,304 @@
+{
+  "id": 4413,
+  "slug": "parcare2",
+  "name": "parcare2",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4413/parcare2",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 25,
+      "name": "Metoda Greedy",
+      "slug": "metoda-greedy",
+      "href": "/?pagina=probleme-lista&tag=25"
+    },
+    {
+      "id": 24,
+      "name": "Probleme diverse cu metoda Greedy",
+      "slug": "probleme-diverse-cu-metoda-greedy",
+      "href": "/?pagina=probleme-lista&tag=24"
+    }
+  ],
+  "tags": [
+    "set",
+    "Heapuri"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>La final, Paul este interesat de mașinile care mai sunt rămase în parcare la închiderea parcării, de aceea vă cere să afișați configurația parcării la timpul <code>T</code>.</p>",
+      "text": "La final, Paul este interesat de mașinile care mai sunt rămase în parcare la închiderea parcării, de aceea vă cere să afișați configurația parcării la timpul T."
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe prima linie a fișierului de intrare <code>parcare.in</code> se găsesc trei numere întregi <code>N, M</code> și  <code>T</code>, reprezentând numărul de locuri din parcare, numărul de mașini care vin să folosească parcarea, respectiv numărul de secunde pentru care este deschisă parcarea. Următoarele <code>M</code> linii conțin fiecare câte două numere întregi <code>s[i], p[i]</code>, reprezentând venirea unei mașini la secunda <code>s_i</code> care va pleca la secunda <code>p_i</code>. Mașinile apar în fișierul de intrare în ordine crescătoare după timpul de sosire <code>s_i</code>.</p>",
+      "text": "Pe prima linie a fișierului de intrare parcare.in se găsesc trei numere întregi N, M și T, reprezentând numărul de locuri din parcare, numărul de mașini care vin să folosească parcarea, respectiv numărul de secunde pentru care este deschisă parcarea. Următoarele M linii conțin fiecare câte două numere întregi s[i], p[i], reprezentând venirea unei mașini la secunda s_i care va pleca la secunda p_i. Mașinile apar în fișierul de intrare în ordine crescătoare după timpul de sosire s_i."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>În fișierul de ieșire <code>parcare.out</code> se vor afișa <code>M + 1</code> linii în total, primele <code>M</code> linii conținând fiecare câte un număr întreg între <code>1</code> și <code>N</code> reprezentând locul de parcare pe care îl va ocupa mașina, sau <code>-1</code> dacă nu există niciun loc de parcare disponibil.</p><p>Ultima linie va conține <code>N</code> numere întregi, reprezentând configurația parcării la închidere, unde cel de-al <code>i</code>-lea număr reprezintă <strong>timpul de sosire</strong> al mașinii de pe locul de parcare <code>i</code>, sau <code>-1</code> dacă locul de parcare <code>i</code> este gol.</p>",
+      "text": "În fișierul de ieșire parcare.out se vor afișa M + 1 linii în total, primele M linii conținând fiecare câte un număr întreg între 1 și N reprezentând locul de parcare pe care îl va ocupa mașina, sau -1 dacă nu există niciun loc de parcare disponibil.Ultima linie va conține N numere întregi, reprezentând configurația parcării la închidere, unde cel de-al i-lea număr reprezintă timpul de sosire al mașinii de pe locul de parcare i, sau -1 dacă locul de parcare i este gol."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li><code>1 ≤ N, M, T ≤ 200.000</code></li>\n\t<li><code>1 ≤ s[i] ≤ T</code></li>\n\t<li><code>1 ≤ s[i] &lt; p[i] ≤ 200.000</code></li>\n\t<li>Considerând următoarele <code>2M</code> valori: <code>s[1], s[2], ..., s[M], p[1], p[2], ..., p[M]</code>, acestea sunt distincte două câte două.</li>\n\t<li>Dacă există mai multe soluții, se poate afișa oricare dintre acestea.</li>\n\t<li>Datorită dimensiunilor mari, nu au putut fi adăugate toate testele.</li>\n</ul>",
+      "text": "1 ≤ N, M, T ≤ 200.000 1 ≤ s[i] ≤ T 1 ≤ s[i] < p[i] ≤ 200.000 Considerând următoarele 2M valori: s[1], s[2], ..., s[M], p[1], p[2], ..., p[M], acestea sunt distincte două câte două. Dacă există mai multe soluții, se poate afișa oricare dintre acestea. Datorită dimensiunilor mari, nu au putut fi adăugate toate testele."
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><code>parcare.in</code></p><pre>2 4 6\n1 3\n2 10\n4 6\n5 8</pre><p><code>parcare.out</code></p><pre>2\n1\n2\n-1\n2 -1</pre><h3>Explicație</h3><p>Prima mașină sosește în secunda <code>1</code> și este parcată pe locul <code>2</code>. A doua mașină sosește în secunda <code>2</code> și este parcată pe locul <code>1</code>. În secunda <code>3</code> se eliberează locul <code>2</code>. Cea de-a treia mașină sosește în secunda <code>4</code> și ocupă locul <code>2</code>. Mașina sosită în secunda <code>5</code> nu găsește loc liber. În secunda <code>6</code> se eliberează locul <code>2</code>. După închiderea parcării, pe locul <code>1</code> va fi parcată mașina venită în secunda <code>2</code>, locul al doilea fiind liber.</p>",
+      "text": "parcare.in2 4 6 1 3 2 10 4 6 5 8parcare.out2 1 2 -1 2 -1ExplicațiePrima mașină sosește în secunda 1 și este parcată pe locul 2. A doua mașină sosește în secunda 2 și este parcată pe locul 1. În secunda 3 se eliberează locul 2. Cea de-a treia mașină sosește în secunda 4 și ocupă locul 2. Mașina sosită în secunda 5 nu găsește loc liber. În secunda 6 se eliberează locul 2. După închiderea parcării, pe locul 1 va fi parcată mașina venită în secunda 2, locul al doilea fiind liber."
+    }
+  ],
+  "examples": [
+    {
+      "input": "",
+      "output": "",
+      "explanation": "Prima mașină sosește în secunda 1 și este parcată pe locul 2. A doua mașină sosește în secunda 2 și este parcată pe locul 1. În secunda 3 se eliberează locul 2. Cea de-a treia mașină sosește în secunda 4 și ocupă locul 2. Mașina sosită în secunda 5 nu găsește loc liber. În secunda 6 se eliberează locul 2. După închiderea parcării, pe locul 1 va fi parcată mașina venită în secunda 2, locul al doilea fiind liber."
+    }
+  ],
+  "constraints": [
+    "1 ≤ N, M, T ≤ 200.000",
+    "1 ≤ s[i] ≤ T",
+    "1 ≤ s[i] < p[i] ≤ 200.000",
+    "Considerând următoarele 2M valori: s[1], s[2], ..., s[M], p[1], p[2], ..., p[M], acestea sunt distincte două câte două.",
+    "Dacă există mai multe soluții, se poate afișa oricare dintre acestea.",
+    "Datorită dimensiunilor mari, nu au putut fi adăugate toate testele."
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q158097af02.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Pracsiu Dan (dnprx)",
+    "clasa": "11",
+    "intrare/ieșire": "parcare.in / parcare.out",
+    "limită timp": "0.25 secunde",
+    "limită memorie": "256 MB / 64 MB",
+    "sursa problemei": "OJI 2023, clasele XI-XII",
+    "autor": "Bogdan Sitaru",
+    "dificultate": "concurs"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 0.25,
+  "memoryLimitMb": 256,
+  "author": "Bogdan Sitaru",
+  "sourceAttribution": "OJI 2023, clasele XI-XII",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4413/parcare2"
+}

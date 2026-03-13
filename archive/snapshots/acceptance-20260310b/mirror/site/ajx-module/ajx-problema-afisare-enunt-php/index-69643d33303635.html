@@ -1,0 +1,100 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3065"><article id="enunt">
+			Trio este un joc ce conține <code>N</code> piese de aceeași formă, așezate una lângă alta pe o tablă de joc și numerotate de la stânga la dreapta cu valori de la <code>1</code> la <code>N</code>. Fiecare piesă are marcate pe ea trei zone, iar în fiecare dintre ele este scrisă câte o cifră. Se consideră că o piesă pe care sunt scrise în ordine, de la stânga la dreapta, cifrele <code>C1</code>, <code>C2</code> și <code>C3</code> are următoarele proprietăți:
+<ul>
+	<li>este identică cu o altă piesă, dacă această piesă conține exact aceleași cifre, în aceeași ordine cu ale ei sau în ordine inversă. Astfel, piesa <code>C1|C2|C3</code> este identică cu o altă piesă de forma <code>C1|C2|C3</code> și cu o piesă de forma <code>C3|C2|C1</code>.</li>
+	<li>este prietenă cu o altă piesă dacă aceasta conține exact aceleași cifre ca piesa dată, dar nu neapărat în aceeași ordine. Astfel, piesa <code>C1|C2|C3</code> este prietenă cu piesele: <code>C1|C2|C3</code>, <code>C1|C3|C2</code>, <code>C2|C1|C3</code>, <code>C2|C3|C1</code>, <code>C3|C1|C2</code> și <code>C3|C2|C1</code>. Se observă că două piese identice sunt și prietene!<br>
+Un grup de piese prietene este format din <span class="caps">TOATE</span> piesele prietene între ele, aflate pe tabla de joc.</li>
+</ul>
+
+<h1>Cerința</h1>
+
+<p>1) Alegeți o piesă de pe tabla de joc, astfel încât numărul <code>M</code> al pieselor identice cu ea să fie cel mai mare posibil și afișați numărul <code>M</code> determinat;<br>
+2) Afișați numărul grupurilor de piese prietene existente pe tabla de joc;<br>
+3) Afișați numărul maxim de piese dintr-o secvență ce conține piese așezate una lângă alta pe tabla de joc, pentru care prima piesă și ultima piesă din secvență sunt prietene.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Fișierul de intrare <code>trio.in</code> conține<br>
+- pe prima linie un număr natural <code>C</code> care reprezintă numărul cerinţei şi poate avea valorile <code>1</code>, <code>2</code> sau <code>3</code>.<br>
+- pe cea de-a doua linie un număr natural <code>N</code> ce reprezintă numărul pieselor de joc;<br>
+- pe următoarele <code>N</code> linii, câte trei cifre, despărțite prin câte un spațiu, ce reprezintă, în ordine, cifrele scrise pe câte o piesă de joc. Piesele sunt date în ordinea numerotării acestora pe tabla de joc.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>trio.out</code> va conține pe prima linie un singur număr natural ce reprezintă rezultatul determinat conform fiecărei cerințe.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ N ≤ 100.000</code></li>
+	<li>Există cel puțin două piese identice pe tabla de joc;</li>
+	<li>O piesă ce nu e prietenă cu nicio altă piesă de pe tabla de joc formează singură un grup;</li>
+	<li>Pentru rezolvarea cerinței 1) se acordă <code>20</code> de puncte, pentru rezolvarea cerinței 2) se acordă <code>30</code> de puncte iar pentru rezolvarea cerinței 3) se acordă <code>50</code> de puncte.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>trio.in</code></p>
+
+<pre>1
+6
+1 3 3
+4 5 9
+1 3 3
+9 5 4
+3 3 1
+9 4 5</pre>
+
+<p><code>trio.out</code></p>
+
+<pre>2</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința 1. Alegând oricare din piesele <code>1</code>, <code>3</code> sau <code>5</code> există pe tablă două piese identice cu piesa aleasă. Alegând oricare din piesele <code>2</code> sau <code>4</code> există doar o piesă ce este identică cu piesa aleasă. Dacă alegem piesa <code>6</code> nu există pe tablă piese identice cu ea.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>trio.in</code></p>
+
+<pre>2
+6
+1 3 3
+4 5 9
+0 8 0
+9 5 4
+3 3 1
+9 4 5</pre>
+
+<p><code>trio.out</code></p>
+
+<pre>3</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința 2. Piesele <code>1</code> și <code>5</code> formeză un grup de piese prietene. Piesele <code>2</code>, <code>4</code> și <code>6</code> formează alt grup. Piesa <code>3</code> formează singură un grup.<br>
+În total, pe tablă, sunt <code>3</code> grupuri de piese prietene.</p>
+
+<h1>Exemplul 3:</h1>
+
+<p><code>trio.in</code></p>
+
+<pre>3
+6
+1 3 3
+4 5 9
+0 8 0
+9 5 4
+3 3 1
+9 4 5</pre>
+
+<p><code>trio.out</code></p>
+
+<pre>5</pre>
+
+<h3>Explicație</h3>
+
+<p>Se rezolvă cerința 3. Identificăm două secvențe de lungime maximă, egală cu <code>5</code>, pentru care prima și ultima piesă sunt prietene:<br>
+<code>Piesa 1 | Piesa 2 | Piesa 3 | Piesa 4 | Piesa 5</code><br>
+<code>Piesa 2 | Piesa 3 | Piesa 4 | Piesa 5 | Piesa 6</code></p>		</article>
+		</body></html>

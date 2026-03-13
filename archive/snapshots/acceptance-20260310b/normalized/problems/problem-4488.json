@@ -1,0 +1,301 @@
+{
+  "id": 4488,
+  "slug": "stkring",
+  "name": "stkring",
+  "canonicalUrl": "https://www.pbinfo.ro/probleme/4488/stkring",
+  "categoryChain": [
+    {
+      "id": 11,
+      "name": "Clasa a 11-a",
+      "slug": "clasa-a-11-a",
+      "href": "/?pagina=probleme-lista&clasa=11"
+    },
+    {
+      "id": 116,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=116"
+    },
+    {
+      "id": 150,
+      "name": "Probleme diverse",
+      "slug": "probleme-diverse",
+      "href": "/?pagina=probleme-lista&tag=150"
+    }
+  ],
+  "tags": [
+    "Trie"
+  ],
+  "sections": [
+    {
+      "title": "Cerința",
+      "html": "<p>Jimmy se joacă cu un string <code>S</code>, inițial gol, pe care poate realiza următoarele operații:</p><ul>\n\t<li>adaugă o literă mică oarecare <code>ch</code> la sfârșitul string-ului (<code>1 ch</code>)</li>\n\t<li>elimină ultimul caracter din string (<code>2</code>)</li>\n\t<li>afișează string-ul (<code>3</code>)</li>\n</ul><p>Jimmy deține și o mulțime de string-uri <code>M</code> și se întreabă care este numărul minim necesar de operații pe string-ul <code>S</code> pentru a afișa toate string-urile din mulțimea <code>M</code>, într-o ordine oarecare?</p>",
+      "text": "Jimmy se joacă cu un string S, inițial gol, pe care poate realiza următoarele operații: adaugă o literă mică oarecare ch la sfârșitul string-ului (1 ch) elimină ultimul caracter din string (2) afișează string-ul (3) Jimmy deține și o mulțime de string-uri M și se întreabă care este numărul minim necesar de operații pe string-ul S pentru a afișa toate string-urile din mulțimea M, într-o ordine oarecare?"
+    },
+    {
+      "title": "Date de intrare",
+      "html": "<p>Pe fiecare linie se va afla câte un cuvânt din mulțimea <code>M</code>.</p>",
+      "text": "Pe fiecare linie se va afla câte un cuvânt din mulțimea M."
+    },
+    {
+      "title": "Date de ieșire",
+      "html": "<p>Programul va afișa răspunsul cerut.</p>",
+      "text": "Programul va afișa răspunsul cerut."
+    },
+    {
+      "title": "Restricții și precizări",
+      "html": "<ul>\n\t<li>Se recomandă folosirea <a href=\"https://www.geeksforgeeks.org/fast-io-for-competitive-programming/\">fastio</a></li>\n\t<li><code>1 ≤ |M| ≤ 1.000.000</code></li>\n\t<li><code>1 ≤</code> \\(\\sum_1^n   \\) <code>|M[i]| ≤ 5.000.000</code></li>\n\t<li>toate string-urile din input sunt formate doar din litere mici ale alfabetului englez</li>\n\t<li>după ultima operație de afișare, Jimmy trebuie să golească string-ul <code>S</code></li>\n</ul>",
+      "text": "Se recomandă folosirea fastio 1 ≤ |M| ≤ 1.000.000 1 ≤ \\(\\sum_1^n \\) |M[i]| ≤ 5.000.000 toate string-urile din input sunt formate doar din litere mici ale alfabetului englez după ultima operație de afișare, Jimmy trebuie să golească string-ul S"
+    },
+    {
+      "title": "Exemplu:",
+      "html": "<p><strong>Intrare</strong></p><pre>tz\nabc\nabcdef\nabcde\nabctz</pre><p><strong>Ieșire</strong></p><pre>25</pre><h3>Explicație</h3><p>O posibilă secvență de operații este următoarea:<br>\n<code>1 t -&gt; t</code><br>\n<code>1 z -&gt; tz</code><br>\n<code>3   -&gt; afisare \"tz\"</code><br>\n<code>2   -&gt; t</code><br>\n<code>2   -&gt;</code><br>\n<code>1 a -&gt; a</code><br>\n<code>1 b -&gt; ab</code><br>\n<code>1 c -&gt; abc</code><br>\n<code>3   -&gt; afisare \"abc\"</code><br>\n<code>1 d -&gt; abcd</code><br>\n<code>1 e -&gt; abcde</code><br>\n<code>3   -&gt; afisare \"abcde\"</code><br>\n<code>1 f -&gt; abcdef</code><br>\n<code>3   -&gt; afisare \"abcdef\"</code><br>\n<code>2   -&gt; abcde</code><br>\n<code>2   -&gt; abcd</code><br>\n<code>2   -&gt; abc</code><br>\n<code>1 t -&gt; abct</code><br>\n<code>1 z -&gt; abctz</code><br>\n<code>3   -&gt; afisare \"abctz\"</code><br>\n<code>2   -&gt; abct</code><br>\n<code>2   -&gt; abc</code><br>\n<code>2   -&gt; ab</code><br>\n<code>2   -&gt; a</code><br>\n<code>2   -&gt;</code></p>",
+      "text": "Intraretz abc abcdef abcde abctzIeșire25ExplicațieO posibilă secvență de operații este următoarea: 1 t -> t 1 z -> tz 3 -> afisare \"tz\" 2 -> t 2 -> 1 a -> a 1 b -> ab 1 c -> abc 3 -> afisare \"abc\" 1 d -> abcd 1 e -> abcde 3 -> afisare \"abcde\" 1 f -> abcdef 3 -> afisare \"abcdef\" 2 -> abcde 2 -> abcd 2 -> abc 1 t -> abct 1 z -> abctz 3 -> afisare \"abctz\" 2 -> abct 2 -> abc 2 -> ab 2 -> a 2 ->"
+    }
+  ],
+  "examples": [
+    {
+      "input": "tz\nabc\nabcdef\nabcde\nabctz",
+      "output": "25",
+      "explanation": "O posibilă secvență de operații este următoarea: 1 t -> t 1 z -> tz 3 -> afisare \"tz\" 2 -> t 2 -> 1 a -> a 1 b -> ab 1 c -> abc 3 -> afisare \"abc\" 1 d -> abcd 1 e -> abcde 3 -> afisare \"abcde\" 1 f -> abcdef 3 -> afisare \"abcdef\" 2 -> abcde 2 -> abcd 2 -> abc 1 t -> abct 1 z -> abctz 3 -> afisare \"abctz\" 2 -> abct 2 -> abc 2 -> ab 2 -> a 2 ->"
+    }
+  ],
+  "constraints": [
+    "Se recomandă folosirea fastio",
+    "1 ≤ |M| ≤ 1.000.000",
+    "1 ≤ \\(\\sum_1^n \\) |M[i]| ≤ 5.000.000",
+    "toate string-urile din input sunt formate doar din litere mici ale alfabetului englez",
+    "după ultima operație de afișare, Jimmy trebuie să golească string-ul S"
+  ],
+  "editorialAvailability": "hidden",
+  "editorial": {
+    "availability": "restricted",
+    "message": "N-ai voie să vezi indicațiile!",
+    "artifactPath": "raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-php-q17459ec6e6.html"
+  },
+  "officialSolutions": {},
+  "officialSourceIds": {},
+  "visibleTests": [],
+  "linkedAssets": [
+    {
+      "url": "https://www.pbinfo.ro/css-ext/extensii.php",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-ext-extensii-php.php",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/normalize.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-normalize-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/095550bafa0553565997ffa4408a955552999e2a/stil.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-095550bafa0553565997ffa4408a955552999e2a-stil-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/ui-custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-ui-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/204b3e8c1b67138a8e1fdeb5c2c663361447bad9/bootstrap-ext.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-204b3e8c1b67138a8e1fdeb5c2c663361447bad9-bootstrap-ext-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/css/tablesorter/style.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-css-tablesorter-style-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.css?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-css-q366564afee.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/elegant.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-elegant-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/theme/custom.css",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-theme-custom-css.css",
+      "mimeType": "text/css",
+      "kind": "stylesheet"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.tablesorter.js?1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-tablesorter-js-q40aaea607e.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/scripts-pbinfo.2c83477756e3db80be59cfcb875b6c3492e2f5982.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-scripts-pbinfo-2c83477756e3db80be59cfcb875b6c3492e2f5982-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/knockout.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-knockout-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jqplot/jquery.jqplot.min.js?v=1",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jqplot-jquery-jqplot-min-js-qca58385a65.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery-timepicker/jquery.timepicker.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-timepicker-jquery-timepicker-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/jquery.countdown.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-jquery-countdown-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/ads.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-ads-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/lib/codemirror.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-lib-codemirror-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/runmode.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-runmode-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/addon/runmode/colorize.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-addon-runmode-colorize-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/clike/clike.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-clike-clike-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pascal/pascal.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pascal-pascal-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/pseudocod/pseudocod.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-pseudocod-pseudocod-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/php/php.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-php-php-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/python/python.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-python-python-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/sql/sql.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-sql-sql-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/xml/xml.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-xml-xml-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/css/css.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-css-css-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/javascript/javascript.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-javascript-javascript-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/codemirror/mode/htmlmixed/htmlmixed.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-codemirror-mode-htmlmixed-htmlmixed-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/fancybox/jquery.fancybox.min.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-fancybox-jquery-fancybox-min-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    },
+    {
+      "url": "https://www.pbinfo.ro/js/pbinfo/index.5a83cfb4.js",
+      "localPath": "raw-assets/asset-https-www-pbinfo-ro-js-pbinfo-index-5a83cfb4-js.js",
+      "mimeType": "application/javascript",
+      "kind": "script"
+    }
+  ],
+  "metadata": {
+    "postată de": "Moldovan Robert (moldovan_robert_lol)",
+    "clasa": "11",
+    "intrare/ieșire": "tastatură / ecran",
+    "limită timp": "1 secunde",
+    "limită memorie": "256 MB / 8 MB",
+    "sursa problemei": "-",
+    "autor": "Robert Moldovan",
+    "dificultate": "dificilă"
+  },
+  "editorialMessage": "N-ai voie să vezi indicațiile!",
+  "grade": 11,
+  "timeLimitSeconds": 1,
+  "memoryLimitMb": 256,
+  "author": "Robert Moldovan",
+  "sourceListUrl": "https://www.pbinfo.ro/solutii/problema/4488/stkring"
+}

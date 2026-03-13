@@ -1,0 +1,71 @@
+<html><head></head><body data-archived-source="https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=4401"><article id="enunt">
+			<p>O mașină hibrid se deplasează pe o șosea rectilinie folosind, alternativ, fie motorul termic (pe benzină), fie motorul electric. Axa numerelor întregi poate fi folosită pentru a descrie coordonatele de pe șosea. Deplasarea mașinii folosind motorul electric se efectuează fără taxă, dar unele porțiuni din șosea necesită folosirea motorului termic, ceea ce impune plata anumitor taxe. Se cunoaște lista celor <code>P</code> porțiuni taxabile de șosea, numerotate de la <code>1</code> la <code>P</code>, oricare două dintre ele fiind disjuncte. Fiecare porțiune este descrisă de trei numere întregi: <code>st[i]</code>, <code>dr[i]</code> și <code>c[i]</code> (<code>1 ≤ i ≤ P</code>), cu semnificația că pe porțiunea de șosea situată între coordonatele <code>st[i]</code> și <code>dr[i]</code> (inclusiv la capetele <code>st[i]</code> și <code>dr[i]</code>) se va folosi motorul termic și se va achita taxa în valoare de <code>c[i]</code> lei. Această taxă se va plăti la fiecare traversare a porțiunii, indiferent de sensul deplasării.</p>
+
+<p>Traseul pe care mașina hibrid îl are de străbătut conține <code>N</code> borne amplasate pe șosea, numerotate de la <code>1</code> la <code>N</code>, în ordinea în care acestea trebuie vizitate. Pentru fiecare dintre cele <code>N</code> borne se cunoaște coordonata poziției sale pe șosea: <code>x[1]</code>, <code>x[2]</code>, <code>x[3]</code>, …, <code>x[N]</code>. Deplasarea între două borne consecutive de pe traseu, adică între borna <code>i</code> și borna <code>(i+1)</code> (pentru fiecare <code>i</code>: <code>1 ≤ i &lt; N</code>), se face pe drumul cel mai scurt, respectiv pe segmentul de dreaptă ce unește punctele cu coordonatele <code>x[i]</code> și <code>x[i+1]</code> de pe șosea. Mașina hibrid va începe traseul din dreptul bornei cu numărul de ordine <code>1</code>, adică de la coordonata <code>x[1]</code> de pe șosea. De asemenea, se știe că nicio bornă de pe traseu nu se află în interiorul sau la capetele porțiunilor taxabile, unde se folosește deplasarea cu motorul termic.</p>
+
+<h1>Cerința</h1>
+
+<p>Să se determine:<br>
+1. numărul de ordine al porțiunii taxabile peste care se va trece de cele mai multe ori în călătorie (folosind motorul termic). Dacă există mai multe astfel de porțiuni, se va alege cea cu indicele minim, în funcție de ordinea dată în fișierul de intrare. De asemenea, în caz că nu se va trece peste nicio porțiune taxabilă, acest număr va fi egal cu <code>−1</code>.<br>
+2. suma totală, exprimată în lei, care trebuie plătită pentru a parcurge traseul stabilit. În caz că nu se va trece peste nicio porțiune taxabilă, atunci această sumă va fi egală cu <code>0</code>.</p>
+
+<h1>Date de intrare</h1>
+
+<p>Pe prima linie a fișierului de intrare <code>hibrid.in</code> se află, separate între ele prin câte un spațiu, trei numere naturale, <code>C</code>, <code>P</code> și <code>N</code>, cu semnificațiile din enunț. <code>C</code> poate avea fie valoarea <code>1</code>, fie valoarea <code>2</code>, în funcție de cerința care trebuie rezolvată. Pe următoarele <code>P</code> linii se află, separate între ele prin câte un spațiu, câte trei numere întregi: <code>st[i]</code>, <code>dr[i]</code> și <code>c[i]</code>, cu semnificația de mai sus. Pe următoarea linie se află <code>N</code> numere întregi, separate între ele prin câte un spațiu, reprezentând, în ordine, coordonatele bornelor ce trebuie vizitate: <code>x[1]</code>, <code>x[2]</code>, <code>x[3]</code>, …, <code>x[N]</code>.</p>
+
+<h1>Date de ieșire</h1>
+
+<p>Fișierul de ieșire <code>hibrid.out</code> va conține pe prima linie, un singur număr întreg, în funcție de cerința care trebuie rezolvată. Dacă <code>C = 1</code>, atunci se va rezolva cerința <code>1</code>, altfel se va rezolva cerința <code>2</code>.</p>
+
+<h1>Restricții și precizări</h1>
+
+<ul>
+	<li><code>2 ≤ P ≤ 100.000</code> și <code>2 ≤ N ≤ 200.000</code>.</li>
+	<li><code>−300 000 ≤ st[i] &lt; dr[i] ≤ 300.000</code> și <code>1 ≤ c[i] ≤ 100.000</code>, pentru fiecare <code>i</code>: <code>1 ≤ i ≤ P</code>.</li>
+	<li><code>−1.000.000 ≤ x[i] ≤ 1.000.000</code>, pentru fiecare <code>i</code>: <code>1 ≤ i ≤ N</code>.</li>
+	<li>Întrucât au dimensiuni neglijabile, pot exista și două sau mai multe borne situate la aceeași coordonată pe șosea.</li>
+	<li>Pe durata întregului traseu, motorul termic (pe benzină) este utilizat doar pentru parcurgerea porțiunilor taxabile peste care mașina hibrid trebuie să treacă. În rest, se folosește doar motorul electric, pentru a reduce poluarea.</li>
+	<li>Datorită dimensiunilor mari ale fișierelor de test, nu s-au adăugat toate.</li>
+</ul>
+
+<h1>Exemplul 1:</h1>
+
+<p><code>hibrid.in</code></p>
+
+<pre>1 2 4
+4 8 10
+-10 -9 22
+-14 20 -14 0</pre>
+
+<p><code>hibrid.out</code></p>
+
+<pre>2</pre>
+
+<h3>Explicație</h3>
+
+<p>Există două porțiuni taxabile (<code>P = 2</code>):</p>
+
+<ul>
+	<li>porțiunea 1 cuprinde coordonatele: <code>4, 5, 6, 7, 8</code> și are taxa de <code>10</code> lei la fiecare trecere;</li>
+	<li>porțiunea 2 cuprinde coordonatele: <code>−10, −9</code> și are taxa de <code>22</code> de lei la fiecare trecere.</li>
+</ul>
+
+<p>Traseul pe care mașina hibrid îl are de parcurs este alcătuit din <code>N = 4</code> borne, situate la coordonatele: <code>−14</code> (prima bornă, din dreptul căreia se începe traseul), <code>20</code> (a doua bornă), <code>−14</code> (a treia bornă; de remarcat că este situată la aceeași coordonată ca și prima bornă!), respectiv <code>0</code> (a patra bornă). Peste prima porțiune taxabilă se va trece de două ori, iar peste cea de a doua se va trece de trei ori. Prin urmare, se va afișa <code>2</code>.</p>
+
+<h1>Exemplul 2:</h1>
+
+<p><code>hibrid.in</code></p>
+
+<pre>2 2 4
+4 8 10
+-10 -9 22
+-14 20 -14 0</pre>
+
+<p><code>hibrid.out</code></p>
+
+<pre>86</pre>
+
+<h3>Explicație</h3>
+
+<p>Conform explicației de mai sus, se va afișa <code>86</code> (<code>2</code> treceri × <code>10</code> lei/trecere + <code>3</code> treceri × <code>22</code> lei/trecere = <code>86</code> de lei, adică suma totală plătită pentru efectuarea traseului).</p>		</article>
+		</body></html>
