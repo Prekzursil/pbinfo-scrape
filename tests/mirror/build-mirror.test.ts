@@ -130,7 +130,7 @@ describe('buildMirrorArtifacts', () => {
 
     const result = await buildMirrorArtifacts(workspaceRoot);
 
-    expect(result.routesBuilt).toBe(2);
+    expect(result.routesBuilt).toBe(3);
     expect(result.outputRoot).toBe(snapshot.mirrorRoot);
     expect(JSON.parse(readFileSync(snapshot.routesManifestPath, 'utf8'))).toEqual([
       {
@@ -144,6 +144,13 @@ describe('buildMirrorArtifacts', () => {
       },
       {
         snapshotId: snapshot.snapshotId,
+        route: '/archive/coverage/',
+        template: 'coverage-index',
+        entityKey: 'archive:coverage',
+        mirrorFile: 'site/archive/coverage/index.html',
+      },
+      {
+        snapshotId: snapshot.snapshotId,
         route: '/probleme',
         sourceUrl: 'https://www.pbinfo.ro/probleme',
         sourceFile: 'page-https-www-pbinfo-ro-probleme.html',
@@ -153,6 +160,12 @@ describe('buildMirrorArtifacts', () => {
       },
     ]);
     expect(readFileSync(join(snapshot.mirrorRoot, 'index.html'), 'utf8')).toContain('PBInfo Offline Mirror');
+    expect(
+      readFileSync(
+        join(snapshot.mirrorRoot, 'site', 'archive', 'coverage', 'index.html'),
+        'utf8',
+      ),
+    ).toContain('Archive coverage');
     const mirroredProbleme = readFileSync(
       join(snapshot.mirrorRoot, 'site', 'probleme', 'index.html'),
       'utf8',
@@ -231,7 +244,7 @@ describe('buildMirrorArtifacts', () => {
 
     const result = await buildMirrorArtifacts(workspaceRoot, snapshot.snapshotId);
 
-    expect(result.routesBuilt).toBe(1);
+    expect(result.routesBuilt).toBe(2);
     expect(JSON.parse(readFileSync(snapshot.rawPagesManifestPath, 'utf8'))).toEqual({
       'https://www.pbinfo.ro/probleme/1/demo': 'page-https-www-pbinfo-ro-probleme-1-demo.html',
     });
@@ -244,5 +257,329 @@ describe('buildMirrorArtifacts', () => {
         'utf8',
       ),
     ).toContain('/_assets/asset-https-www-pbinfo-ro-static-site-css.css');
+  });
+
+  test('adds a coverage index route and injects truthful archive coverage badges into problem pages', async () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-mirror-coverage-'));
+    tempDirs.push(workspaceRoot);
+
+    mkdirSync(join(workspaceRoot, '.local'), { recursive: true });
+    writeFileSync(
+      join(workspaceRoot, '.local', 'pbinfo.local.json'),
+      JSON.stringify(
+        {
+          crawl: {
+            userHandle: 'Prekzursil',
+          },
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+
+    const config = loadLocalConfig(workspaceRoot);
+    const snapshot = prepareSnapshot(config, {
+      snapshotId: 'acceptance-20260310b',
+      scope: 'all',
+      now: new Date('2026-03-10T00:00:00.000Z'),
+    });
+    mkdirSync(snapshot.rawPagesRoot, { recursive: true });
+    mkdirSync(snapshot.rawAssetsRoot, { recursive: true });
+    mkdirSync(join(snapshot.normalizedRoot, 'pages'), { recursive: true });
+    mkdirSync(join(snapshot.normalizedRoot, 'problems'), { recursive: true });
+    mkdirSync(join(snapshot.normalizedRoot, 'evaluations'), { recursive: true });
+    mkdirSync(join(snapshot.normalizedRoot, 'rankings', 'problems'), {
+      recursive: true,
+    });
+    mkdirSync(join(snapshot.normalizedRoot, 'sources'), { recursive: true });
+    mkdirSync(join(snapshot.normalizedRoot, 'user-solutions'), { recursive: true });
+    mkdirSync(join(snapshot.normalizedRoot, 'routes'), { recursive: true });
+
+    writeFileSync(
+      join(snapshot.rawPagesRoot, 'page-problem-3716.html'),
+      '<html><head><title>Crossword</title></head><body><main><h1>Crossword</h1><p>Statement</p></main></body></html>',
+      'utf8',
+    );
+    writeFileSync(
+      join(snapshot.rawPagesRoot, 'page-profile.html'),
+      '<html><body><h1>Prekzursil</h1></body></html>',
+      'utf8',
+    );
+    writeFileSync(
+      join(snapshot.rawPagesRoot, 'page-evaluation.html'),
+      '<html><body><h1>Evaluation 63332367</h1></body></html>',
+      'utf8',
+    );
+
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'pages', 'problem-page.json'),
+      JSON.stringify({
+        snapshotId: snapshot.snapshotId,
+        url: 'https://www.pbinfo.ro/probleme/3716/crossword',
+        kind: 'public-page',
+        httpStatus: 200,
+        bodyPath: 'raw-pages/page-problem-3716.html',
+        fetchedAt: '2026-03-10T00:00:00.000Z',
+      }, null, 2),
+      'utf8',
+    );
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'pages', 'statement-page.json'),
+      JSON.stringify({
+        snapshotId: snapshot.snapshotId,
+        url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3716',
+        kind: 'problem-statement',
+        httpStatus: 200,
+        bodyPath: 'raw-pages/page-problem-3716.html',
+        fetchedAt: '2026-03-10T00:00:00.000Z',
+      }, null, 2),
+      'utf8',
+    );
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'pages', 'solution-page.json'),
+      JSON.stringify({
+        snapshotId: snapshot.snapshotId,
+        url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-solutie.php?id=3716',
+        kind: 'problem-solution',
+        httpStatus: 200,
+        bodyPath: 'raw-pages/page-problem-3716.html',
+        fetchedAt: '2026-03-10T00:00:00.000Z',
+      }, null, 2),
+      'utf8',
+    );
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'pages', 'tests-page.json'),
+      JSON.stringify({
+        snapshotId: snapshot.snapshotId,
+        url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-teste.php?id=3716',
+        kind: 'problem-tests',
+        httpStatus: 200,
+        bodyPath: 'raw-pages/page-problem-3716.html',
+        fetchedAt: '2026-03-10T00:00:00.000Z',
+      }, null, 2),
+      'utf8',
+    );
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'pages', 'profile-page.json'),
+      JSON.stringify({
+        snapshotId: snapshot.snapshotId,
+        url: 'https://www.pbinfo.ro/profil/Prekzursil',
+        kind: 'user-profile',
+        httpStatus: 200,
+        bodyPath: 'raw-pages/page-profile.html',
+        fetchedAt: '2026-03-10T00:00:00.000Z',
+      }, null, 2),
+      'utf8',
+    );
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'pages', 'evaluation-page.json'),
+      JSON.stringify({
+        snapshotId: snapshot.snapshotId,
+        url: 'https://www.pbinfo.ro/detalii-evaluare/63332367',
+        kind: 'evaluation-detail',
+        httpStatus: 200,
+        bodyPath: 'raw-pages/page-evaluation.html',
+        fetchedAt: '2026-03-10T00:00:00.000Z',
+      }, null, 2),
+      'utf8',
+    );
+
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'problems', 'problem-3716.json'),
+      JSON.stringify(
+        {
+          id: 3716,
+          slug: 'crossword',
+          name: 'Crossword',
+          canonicalUrl: 'https://www.pbinfo.ro/probleme/3716/crossword',
+          grade: 11,
+          categoryChain: [],
+          tags: ['strings'],
+          sections: [],
+          examples: [],
+          constraints: [],
+          editorialAvailability: 'visible',
+          editorial: {
+            availability: 'visible',
+            artifactPath: 'raw-pages/page-problem-3716.html',
+          },
+          officialSolutions: {
+            cpp: '// editorial snippet',
+          },
+          officialSourceIds: {},
+          visibleTests: [],
+          linkedAssets: [],
+          sourceListUrl: 'https://www.pbinfo.ro/solutii/problema/3716/crossword',
+          metadata: {},
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'evaluations', 'evaluation-63332367.json'),
+      JSON.stringify(
+        {
+          evaluationId: 63332367,
+          problemId: 3716,
+          problemSlug: 'crossword',
+          problemName: 'Crossword',
+          language: 'c',
+          user: 'Andrei Visalon (Prekzursil)',
+          score: 100,
+          verdictSummary: 'accepted',
+          sourceAvailable: false,
+          suspicionFlags: [],
+          tests: [],
+          fetchedAt: '2026-03-10T00:00:00.000Z',
+          provenance: ['https://www.pbinfo.ro/detalii-evaluare/63332367'],
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'rankings', 'best-submissions.json'),
+      JSON.stringify(
+        {
+          generatedAt: '2026-03-10T00:00:00.000Z',
+          problems: [
+            {
+              problemId: 3716,
+              bestUserOverallEvaluationId: 63332367,
+              bestUserPerLanguage: { c: 63332367 },
+              bestOfficialPerLanguage: {},
+              orderedUserEvaluationIds: [63332367],
+            },
+          ],
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'rankings', 'problems', 'problem-3716.json'),
+      JSON.stringify(
+        {
+          problemId: 3716,
+          bestUserOverallEvaluationId: 63332367,
+          bestUserPerLanguage: { c: 63332367 },
+          bestOfficialPerLanguage: {},
+          orderedUserEvaluationIds: [63332367],
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'user-solutions', 'user-prekzursil.json'),
+      JSON.stringify(
+        {
+          user: 'Prekzursil',
+          entries: [
+            {
+              user: 'Andrei Visalon (Prekzursil)',
+              problemId: 3716,
+              problemSlug: 'crossword',
+              problemName: 'Crossword',
+              evaluationId: 63332367,
+            },
+          ],
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'routes', 'route-problem.json'),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          route: '/probleme/3716/crossword',
+          sourceUrl: 'https://www.pbinfo.ro/probleme/3716/crossword',
+          sourceFile: 'page-problem-3716.html',
+          template: 'problem',
+          entityKey: 'problem:3716',
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'routes', 'route-profile.json'),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          route: '/profil/Prekzursil',
+          sourceUrl: 'https://www.pbinfo.ro/profil/Prekzursil',
+          sourceFile: 'page-profile.html',
+          template: 'user-profile',
+          entityKey: 'user:Prekzursil',
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'routes', 'route-evaluation.json'),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          route: '/detalii-evaluare/63332367',
+          sourceUrl: 'https://www.pbinfo.ro/detalii-evaluare/63332367',
+          sourceFile: 'page-evaluation.html',
+          template: 'evaluation',
+          entityKey: 'evaluation:63332367',
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+
+    const result = await buildMirrorArtifacts(workspaceRoot, snapshot.snapshotId);
+
+    expect(result.routesBuilt).toBe(4);
+    const routes = JSON.parse(readFileSync(snapshot.routesManifestPath, 'utf8')) as Array<{
+      route: string;
+      template: string;
+    }>;
+    expect(routes).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          route: '/archive/coverage/',
+          template: 'coverage-index',
+        }),
+      ]),
+    );
+
+    const coverageHtml = readFileSync(
+      join(snapshot.mirrorRoot, 'site', 'archive', 'coverage', 'index.html'),
+      'utf8',
+    );
+    expect(coverageHtml).toContain('Archive coverage');
+    expect(coverageHtml).toContain('Crossword');
+    expect(coverageHtml).toContain('Solved by archived handle');
+    expect(coverageHtml).toContain('/probleme/3716/crossword');
+
+    const problemHtml = readFileSync(
+      join(snapshot.mirrorRoot, 'site', 'probleme', '3716', 'crossword', 'index.html'),
+      'utf8',
+    );
+    expect(problemHtml).toContain('Archive coverage');
+    expect(problemHtml).toContain('Solved by archived handle');
+    expect(problemHtml).toContain('Tests fragment archived');
+    expect(problemHtml).toContain('Visible tests captured: 0');
+    expect(problemHtml).toContain('Official source not archived');
+    expect(problemHtml).toContain('User source not archived');
+    expect(problemHtml).toContain('/archive/coverage/');
   });
 });

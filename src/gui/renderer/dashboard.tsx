@@ -6,6 +6,9 @@ import type {
   GuiArchiveListing,
   GuiArchiveRecordDetail,
   GuiArchiveSummary,
+  GuiCoverageDetail,
+  GuiCoverageListing,
+  GuiCoverageSummary,
   GuiCrawlMode,
   GuiCrawlStatus,
   GuiJobCounters,
@@ -14,6 +17,10 @@ import type {
   GuiProfileRecord,
   GuiWorkspaceState,
 } from '../shared/types.js';
+import {
+  CoverageExplorerPanel,
+  type CoverageExplorerFilters,
+} from './coverage-explorer.js';
 import { DataExplorerPanel } from './data-explorer.js';
 
 type CredentialLoginInput = Parameters<DesktopBridge['loginProfile']>[0];
@@ -32,6 +39,11 @@ export interface DesktopDashboardProps {
   archiveSummary: GuiArchiveSummary | null;
   archiveListing: GuiArchiveListing | null;
   archiveRecordDetail: GuiArchiveRecordDetail | null;
+  coverageSummary: GuiCoverageSummary | null;
+  coverageListing: GuiCoverageListing | null;
+  coverageDetail: GuiCoverageDetail | null;
+  selectedCoverageProblemId: number | null;
+  coverageFilters: CoverageExplorerFilters;
   selectedArchiveDataset: GuiArchiveDataset;
   selectedArchiveRecordId: string | null;
   archiveQuery: string;
@@ -46,6 +58,8 @@ export interface DesktopDashboardProps {
   onSnapshotChange: (snapshotId: string) => void;
   onCrawlModeChange: (crawlMode: CrawlMode) => void;
   onVerbosityChange: (verbosityMode: VerbosityMode) => void;
+  onCoverageFiltersChange: (filters: CoverageExplorerFilters) => void;
+  onSelectCoverageProblem: (problemId: number) => void;
   onArchiveDatasetChange: (dataset: GuiArchiveDataset) => void;
   onArchiveQueryChange: (query: string) => void;
   onSelectArchiveRecord: (recordId: string) => void;
@@ -79,6 +93,11 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
     archiveSummary,
     archiveListing,
     archiveRecordDetail,
+    coverageSummary,
+    coverageListing,
+    coverageDetail,
+    selectedCoverageProblemId,
+    coverageFilters,
     selectedArchiveDataset,
     selectedArchiveRecordId,
     archiveQuery,
@@ -93,6 +112,8 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
     onSnapshotChange,
     onCrawlModeChange,
     onVerbosityChange,
+    onCoverageFiltersChange,
+    onSelectCoverageProblem,
     onArchiveDatasetChange,
     onArchiveQueryChange,
     onSelectArchiveRecord,
@@ -390,6 +411,20 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
               </div>
             </div>
           </section>
+
+          <CoverageExplorerPanel
+            snapshotId={selectedSnapshotId}
+            summary={coverageSummary}
+            listing={coverageListing}
+            detail={coverageDetail}
+            selectedProblemId={selectedCoverageProblemId}
+            filters={coverageFilters}
+            previewUrl={previewUrl}
+            onFiltersChange={onCoverageFiltersChange}
+            onSelectProblem={onSelectCoverageProblem}
+            onOpenPath={onOpenPath}
+            onOpenExternal={onOpenExternal}
+          />
 
           <DataExplorerPanel
             snapshotId={selectedSnapshotId}

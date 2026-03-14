@@ -30,6 +30,8 @@
     "desktop:build": "npm run desktop:assets && npm run desktop:clean && npm run desktop:renderer:build && npm run desktop:main:build",
     "desktop:start": "node scripts/run-desktop-electron.mjs dist-desktop/gui/main/index.js",
     "desktop:pack": "npm run desktop:build && electron-builder --config electron-builder.json --win portable --x64",
+    "smoke:desktop-packaged": "tsx scripts/smoke-packaged-desktop.ts",
+    "verify:canonical-snapshot": "tsx scripts/verify-canonical-snapshot.ts",
     "mirror:build": "tsx src/cli.ts build-mirror",
     "acceptance:crawl": "tsx src/cli.ts crawl all --acceptance",
     "publish:repo": "tsx src/cli.ts publish"

@@ -512,6 +512,212 @@ describe('desktop controller', () => {
     );
   });
 
+  test('exposes derived coverage explorer summaries, listings, and record details', async () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-desktop-coverage-'));
+    tempDirs.push(workspaceRoot);
+    initializeWorkspaceState(workspaceRoot, {
+      now: new Date('2026-03-10T12:00:00.000Z'),
+    });
+
+    const config = loadLocalConfig(workspaceRoot);
+    const snapshot = prepareSnapshot(config, {
+      snapshotId: 'acceptance-20260310b',
+      scope: 'all',
+      now: new Date('2026-03-10T00:00:00.000Z'),
+    });
+    mkdirSync(join(snapshot.normalizedRoot, 'problem-coverage'), { recursive: true });
+
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'problem-coverage', 'problem-3716.json'),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          problemId: 3716,
+          slug: 'crossword',
+          name: 'Crossword',
+          grade: 11,
+          canonicalUrl: 'https://www.pbinfo.ro/probleme/3716/crossword',
+          mirrorRoute: '/probleme/3716/crossword',
+          tags: ['strings'],
+          solvedByMe: true,
+          evaluationCount: 1,
+          solvedEvaluationCount: 1,
+          rankingPresent: true,
+          statementArchived: true,
+          solutionFragmentArchived: true,
+          testsFragmentArchived: true,
+          visibleTestsCapturedCount: 0,
+          officialSolutionPresent: true,
+          editorialAvailability: 'visible',
+          sourceListUrl: 'https://www.pbinfo.ro/solutii/problema/3716/crossword',
+          officialSourceArchived: false,
+          officialSourceCount: 0,
+          officialSourceIds: [],
+          userSourceArchived: false,
+          userSourceCount: 0,
+          userSourceIds: [],
+          hasAnyArchivedSource: false,
+          evaluationIds: [63332367],
+          bestUserOverallEvaluationId: 63332367,
+          notes: [
+            'Tests fragment archived, no visible test cases parsed.',
+            'Source list available upstream, no archived source code yet.',
+          ],
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'problem-coverage', 'index.json'),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          generatedAt: '2026-03-10T00:00:00.000Z',
+          totals: {
+            totalProblems: 1,
+            solvedByMeCount: 1,
+            problemsWithVisibleTestsCaptured: 0,
+            problemsWithArchivedSources: 0,
+            problemsWithOfficialSourceArchived: 0,
+            problemsWithUserSourceArchived: 0,
+            editorialVisibleCount: 1,
+            rankingPresentCount: 1,
+          },
+          records: [
+            {
+              problemId: 3716,
+              slug: 'crossword',
+              name: 'Crossword',
+              grade: 11,
+              mirrorRoute: '/probleme/3716/crossword',
+              tags: ['strings'],
+              solvedByMe: true,
+              evaluationCount: 1,
+              solvedEvaluationCount: 1,
+              rankingPresent: true,
+              statementArchived: true,
+              solutionFragmentArchived: true,
+              testsFragmentArchived: true,
+              visibleTestsCapturedCount: 0,
+              officialSolutionPresent: true,
+              editorialAvailability: 'visible',
+              sourceListUrl: 'https://www.pbinfo.ro/solutii/problema/3716/crossword',
+              officialSourceArchived: false,
+              officialSourceCount: 0,
+              officialSourceIds: [],
+              userSourceArchived: false,
+              userSourceCount: 0,
+              userSourceIds: [],
+              hasAnyArchivedSource: false,
+              evaluationIds: [63332367],
+              bestUserOverallEvaluationId: 63332367,
+              notes: [
+                'Tests fragment archived, no visible test cases parsed.',
+                'Source list available upstream, no archived source code yet.',
+              ],
+            },
+          ],
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+    mkdirSync(join(snapshot.normalizedRoot, 'rankings', 'problems'), {
+      recursive: true,
+    });
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'rankings', 'problems', 'problem-3716.json'),
+      JSON.stringify(
+        {
+          problemId: 3716,
+          bestUserOverallEvaluationId: 63332367,
+          bestUserPerLanguage: {
+            c: 63332367,
+          },
+          bestOfficialPerLanguage: {},
+          orderedUserEvaluationIds: [63332367],
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+
+    const controller = createDesktopController(workspaceRoot, {
+      runProblemCoverageWorkflow: async () => ({
+        snapshotId: snapshot.snapshotId,
+        generatedAt: '2026-03-10T00:00:00.000Z',
+        problemsCovered: 1,
+        coverageRoot: join(snapshot.normalizedRoot, 'problem-coverage'),
+        indexPath: join(snapshot.normalizedRoot, 'problem-coverage', 'index.json'),
+        totals: {
+          totalProblems: 1,
+          solvedByMeCount: 1,
+          statementArchivedCount: 1,
+          solutionFragmentArchivedCount: 1,
+          testsFragmentArchivedCount: 1,
+          problemsWithVisibleTestsCaptured: 0,
+          problemsWithArchivedSources: 0,
+          problemsWithOfficialSourceArchived: 0,
+          problemsWithUserSourceArchived: 0,
+          editorialVisibleCount: 1,
+          rankingPresentCount: 1,
+        },
+      }),
+    });
+    const summary = await controller.getCoverageSummary(snapshot.snapshotId);
+    const listing = await controller.listCoverageRecords({
+      snapshotId: snapshot.snapshotId,
+      solved: 'solved',
+      query: 'cross',
+    });
+    const detail = await controller.getCoverageRecord({
+      snapshotId: snapshot.snapshotId,
+      problemId: 3716,
+    });
+
+    expect(summary).toEqual(
+      expect.objectContaining({
+        snapshotId: 'acceptance-20260310b',
+        totalProblems: 1,
+        solvedByMeCount: 1,
+        coverageRoot: expect.stringContaining(
+          'archive\\snapshots\\acceptance-20260310b\\normalized\\problem-coverage',
+        ),
+      }),
+    );
+    expect(listing.items).toEqual([
+      expect.objectContaining({
+        problemId: 3716,
+        name: 'Crossword',
+        solvedByMe: true,
+        officialSourceArchived: false,
+        userSourceArchived: false,
+      }),
+    ]);
+    expect(detail).toEqual(
+      expect.objectContaining({
+        record: expect.objectContaining({
+          problemId: 3716,
+          solvedByMe: true,
+        }),
+        rawRecordLinks: expect.objectContaining({
+          coverageFilePath: expect.stringContaining('problem-3716.json'),
+          problemFilePath: expect.stringContaining('problem-3716.json'),
+          rankingFilePath: expect.stringContaining(
+            'rankings\\problems\\problem-3716.json',
+          ),
+          evaluationFilePaths: expect.arrayContaining([
+            expect.stringContaining('evaluation-63332367.json'),
+          ]),
+        }),
+      }),
+    );
+  });
+
   test('emits a stalled crawl warning when a chunk processes no work while pending items remain', async () => {
     const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-desktop-stalled-zero-'));
     tempDirs.push(workspaceRoot);

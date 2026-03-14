@@ -41,8 +41,9 @@ testOnWindows(
     cleanupPaths.push(tempRoot);
 
     const userDataRoot = join(tempRoot, 'user-data');
-    const workspaceRoot = join(tempRoot, 'workspace');
+    const workspaceRoot = repoRoot;
     const markerPath = join(tempRoot, 'desktop-smoke-report.json');
+    const actionsPath = join(tempRoot, 'desktop-smoke-actions.json');
     mkdirSync(userDataRoot, {
       recursive: true,
     });
@@ -51,6 +52,8 @@ testOnWindows(
       PBINFO_DESKTOP_TEST_USER_DATA_ROOT: userDataRoot,
       PBINFO_DESKTOP_TEST_MARKER_PATH: markerPath,
       PBINFO_DESKTOP_TEST_WORKSPACE_ROOT: workspaceRoot,
+      PBINFO_DESKTOP_TEST_ACTIONS_PATH: actionsPath,
+      PBINFO_DESKTOP_TEST_DRY_RUN_OPENERS: '1',
     };
     delete desktopEnv.ELECTRON_RUN_AS_NODE;
 
@@ -82,7 +85,43 @@ testOnWindows(
       expect(report.initial?.headings).toContain('Choose a workspace');
       expect(report.final?.headings).toContain('Workspace Summary');
       expect(report.final?.headings).toContain('Profile Login and Import');
+      expect(report.final?.headings).toContain('Coverage Explorer');
+      expect(report.final?.headings).toContain('Data Explorer');
       expect(report.final?.text).toContain(workspaceRoot);
+      expect(report.coverageExplorer?.summary?.totalProblems).toBeGreaterThan(0);
+      expect(report.coverageExplorer?.summary?.solvedByMeCount).toBeGreaterThanOrEqual(0);
+      expect(report.coverageExplorer?.listing?.totalCount).toBeGreaterThan(0);
+      expect(report.coverageExplorer?.detail?.problemId).toBeTruthy();
+      expect(report.dataExplorer?.snapshotId).toBe('acceptance-20260310b');
+      expect(report.dataExplorer?.datasetLabels).toEqual(
+        expect.arrayContaining([
+          'Problems',
+          'Evaluations',
+          'Rankings',
+          'Mirror Routes',
+        ]),
+      );
+      expect(report.dataExplorer?.visitedDatasets).toEqual(
+        expect.arrayContaining([
+          'Problems',
+          'Evaluations',
+          'Rankings',
+          'Mirror Routes',
+        ]),
+      );
+      expect(report.dataExplorer?.datasetListings?.problems?.totalCount).toBeGreaterThan(0);
+      expect(report.dataExplorer?.datasetListings?.problems?.detailTitle).toBeTruthy();
+      const actions = JSON.parse(readFileSync(actionsPath, 'utf8')) as DesktopSmokeAction[];
+      expect(actions).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            kind: 'openPath',
+          }),
+          expect.objectContaining({
+            kind: 'openExternal',
+          }),
+        ]),
+      );
     } finally {
       await closeDesktopProcess(desktopProcess.pid);
     }
@@ -144,4 +183,42 @@ interface DesktopSmokeReport {
     headings?: string[];
     text?: string;
   };
+  dataExplorer?: {
+    snapshotId?: string;
+    datasetLabels?: string[];
+    visitedDatasets?: string[];
+    datasetListings?: {
+      problems?: {
+        totalCount?: number;
+        detailTitle?: string | null;
+      };
+    };
+  } | null;
+  coverageExplorer?: {
+    summary?: {
+      totalProblems?: number;
+      solvedByMeCount?: number;
+      problemsWithArchivedSources?: number;
+    };
+    listing?: {
+      totalCount?: number;
+      firstProblemId?: number | null;
+      firstProblemName?: string | null;
+    };
+    detail?: {
+      problemId?: number;
+      name?: string;
+      solvedByMe?: boolean;
+      testsFragmentArchived?: boolean;
+      visibleTestsCapturedCount?: number;
+      officialSourceArchived?: boolean;
+      userSourceArchived?: boolean;
+      editorialAvailability?: string;
+    } | null;
+  } | null;
+}
+
+interface DesktopSmokeAction {
+  kind: 'openPath' | 'openExternal';
+  target: string;
 }

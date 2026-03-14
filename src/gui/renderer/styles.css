@@ -259,10 +259,31 @@ button:disabled { cursor: not-allowed; opacity: 0.58; }
 .publish-card { margin-top: 14px; }
 .bootstrap-panel { max-width: 780px; }
 .archive-location-grid,
-.data-explorer-grid {
+.data-explorer-grid,
+.coverage-content-grid,
+.coverage-summary-grid,
+.coverage-metadata-grid {
   display: grid;
   gap: 14px;
+}
+.archive-location-grid,
+.data-explorer-grid,
+.coverage-content-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.coverage-summary-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: 14px;
+}
+.coverage-metadata-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 14px 0;
+}
+.coverage-filter-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-bottom: 14px;
 }
 .archive-path {
   margin: 0;
@@ -331,6 +352,60 @@ button:disabled { cursor: not-allowed; opacity: 0.58; }
 .compact-panel-heading {
   margin-bottom: 10px;
 }
+.coverage-table-shell {
+  overflow: auto;
+}
+.coverage-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.coverage-table th,
+.coverage-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid rgba(46, 59, 76, 0.1);
+  vertical-align: top;
+}
+.coverage-table th {
+  text-align: left;
+  font-size: 0.82rem;
+  color: #6a7887;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.coverage-row-button {
+  border: none;
+  padding: 0;
+  background: transparent;
+  color: var(--pac-ink);
+  font-weight: 700;
+  cursor: pointer;
+}
+.coverage-row-active {
+  background: rgba(255, 247, 233, 0.72);
+}
+.coverage-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+.coverage-badge {
+  display: inline-flex;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(44, 116, 118, 0.1);
+  color: #1f5b5d;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+.coverage-notes {
+  margin-top: 14px;
+}
+.coverage-notes ul {
+  margin: 8px 0 0;
+  padding-left: 20px;
+  color: #59697d;
+}
 .data-json-viewer {
   margin: 14px 0 0;
   padding: 14px;
@@ -350,8 +425,12 @@ button:disabled { cursor: not-allowed; opacity: 0.58; }
   .snapshot-grid,
   .auth-grid,
   .action-grid,
+  .coverage-summary-grid,
+  .coverage-metadata-grid,
+  .coverage-filter-grid,
   .archive-location-grid,
-  .data-explorer-grid {
+  .data-explorer-grid,
+  .coverage-content-grid {
     grid-template-columns: 1fr;
   }
 }

@@ -30,6 +30,9 @@ test('renders the desktop dashboard summary and operator controls from bridge da
   expect((await screen.findAllByRole('button', { name: 'Verbose' })).length).toBeGreaterThanOrEqual(1);
   expect((await screen.findAllByRole('button', { name: 'Raw' })).length).toBeGreaterThanOrEqual(1);
   expect(await screen.findByRole('button', { name: 'Open in browser' })).toBeInTheDocument();
+  expect(await screen.findByRole('heading', { name: 'Coverage Explorer' })).toBeInTheDocument();
+  expect(await screen.findByText('Solved by me')).toBeInTheDocument();
+  expect((await screen.findAllByText(/Crossword/i)).length).toBeGreaterThanOrEqual(1);
   expect(await screen.findByRole('heading', { name: 'Data Explorer' })).toBeInTheDocument();
   expect(await screen.findByRole('button', { name: 'Open normalized archive folder' })).toBeInTheDocument();
   expect(await screen.findByRole('button', { name: 'Open mirror output folder' })).toBeInTheDocument();
@@ -65,6 +68,28 @@ test('triggers desktop actions and expands the log stream for raw verbosity', { 
     },
   });
   expect((await screen.findAllByText('/probleme/3171/problem-3171')).length).toBeGreaterThanOrEqual(1);
+  const coverageSearchInput = await screen.findByLabelText('Search problems');
+  fireEvent.change(coverageSearchInput, {
+    target: {
+      value: 'crossword',
+    },
+  });
+  expect((await screen.findAllByText(/Crossword/i)).length).toBeGreaterThanOrEqual(1);
+  const solvedSelect = await screen.findByLabelText('Solved');
+  fireEvent.change(solvedSelect, {
+    target: {
+      value: 'solved',
+    },
+  });
+  expect((await screen.findAllByText('Solved')).length).toBeGreaterThanOrEqual(1);
+  fireEvent.click(await screen.findByRole('button', { name: 'Open coverage record' }));
+  expect(harness.openPath).toHaveBeenCalledWith(
+    'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problem-coverage/problem-3716.json',
+  );
+  fireEvent.click(await screen.findByRole('button', { name: 'Open source list upstream' }));
+  expect(harness.openExternal).toHaveBeenCalledWith(
+    'https://www.pbinfo.ro/solutii/problema/3716/crossword',
+  );
   fireEvent.click(await screen.findByRole('button', { name: 'Open normalized archive folder' }));
   expect(harness.openPath).toHaveBeenCalledWith(
     'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized',
@@ -316,6 +341,100 @@ function createBridgeHarness(): {
       payload: {
         id: 3171,
         name: 'waterreserve',
+      },
+    })),
+    getCoverageSummary: vi.fn(async () => ({
+      snapshotId: 'acceptance-20260310b',
+      coverageRoot: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problem-coverage',
+      normalizedRoot: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized',
+      mirrorRoot: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/mirror',
+      mirrorServeCommand: 'npm run cli -- serve --snapshot acceptance-20260310b --port 4173',
+      mirrorUrl: 'http://127.0.0.1:4173/',
+      totalProblems: 2582,
+      solvedByMeCount: 7,
+      statementArchivedCount: 2582,
+      solutionFragmentArchivedCount: 2582,
+      testsFragmentArchivedCount: 2582,
+      problemsWithVisibleTestsCaptured: 0,
+      problemsWithArchivedSources: 0,
+      problemsWithOfficialSourceArchived: 0,
+      problemsWithUserSourceArchived: 0,
+      editorialVisibleCount: 832,
+      rankingPresentCount: 7,
+    })),
+    listCoverageRecords: vi.fn(async () => ({
+      snapshotId: 'acceptance-20260310b',
+      totalCount: 1,
+      offset: 0,
+      limit: 100,
+      items: [
+        {
+          problemId: 3716,
+          slug: 'crossword',
+          name: 'Crossword',
+          grade: 11,
+          mirrorRoute: '/probleme/3716/crossword',
+          tags: ['strings'],
+          solvedByMe: true,
+          evaluationCount: 1,
+          solvedEvaluationCount: 1,
+          rankingPresent: true,
+          testsFragmentArchived: true,
+          visibleTestsCapturedCount: 0,
+          officialSolutionPresent: true,
+          officialSourceArchived: false,
+          userSourceArchived: false,
+          editorialAvailability: 'visible' as const,
+          notes: [
+            'Tests fragment archived, no visible test cases parsed.',
+            'Source list available upstream, no archived source code yet.',
+          ],
+        },
+      ],
+    })),
+    getCoverageRecord: vi.fn(async () => ({
+      snapshotId: 'acceptance-20260310b',
+      coverageFilePath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problem-coverage/problem-3716.json',
+      record: {
+        problemId: 3716,
+        slug: 'crossword',
+        name: 'Crossword',
+        grade: 11,
+        mirrorRoute: '/probleme/3716/crossword',
+        tags: ['strings'],
+        solvedByMe: true,
+        evaluationCount: 1,
+        solvedEvaluationCount: 1,
+        rankingPresent: true,
+        testsFragmentArchived: true,
+        visibleTestsCapturedCount: 0,
+        officialSolutionPresent: true,
+        officialSourceArchived: false,
+        officialSourceCount: 0,
+        userSourceArchived: false,
+        userSourceCount: 0,
+        editorialAvailability: 'visible' as const,
+        notes: [
+          'Tests fragment archived, no visible test cases parsed.',
+          'Source list available upstream, no archived source code yet.',
+        ],
+        canonicalUrl: 'https://www.pbinfo.ro/probleme/3716/crossword',
+        sourceListUrl: 'https://www.pbinfo.ro/solutii/problema/3716/crossword',
+        statementArchived: true,
+        solutionFragmentArchived: true,
+        hasAnyArchivedSource: false,
+        evaluationIds: [63332367],
+        bestUserOverallEvaluationId: 63332367,
+      },
+      rawRecordLinks: {
+        coverageFilePath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problem-coverage/problem-3716.json',
+        problemFilePath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problems/problem-3716.json',
+        rankingFilePath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/rankings/problems/problem-3716.json',
+        evaluationFilePaths: [
+          'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/evaluations/evaluation-63332367.json',
+        ],
+        officialSourceFilePaths: [],
+        userSourceFilePaths: [],
       },
     })),
     getCrawlStatus: vi.fn(async () => ({

@@ -154,7 +154,12 @@ export interface MirrorRouteRecord {
   sourceUrl?: string;
   sourceFile?: string;
   rewrittenFile?: string;
-  template: 'problem' | 'evaluation' | 'user-profile' | 'raw-page';
+  template:
+    | 'problem'
+    | 'evaluation'
+    | 'user-profile'
+    | 'raw-page'
+    | 'coverage-index';
   entityKey: string;
 }
 
@@ -163,4 +168,57 @@ export interface RankedProblemSubmissions {
   bestUserPerLanguage: Record<string, number>;
   bestOfficialPerLanguage: Record<string, string>;
   orderedUserEvaluationIds: number[];
+}
+
+export interface ProblemCoverageRecord {
+  snapshotId: string;
+  problemId: number;
+  slug: string;
+  name: string;
+  grade?: number;
+  canonicalUrl?: string;
+  mirrorRoute: string;
+  tags: string[];
+  solvedByMe: boolean;
+  evaluationCount: number;
+  solvedEvaluationCount: number;
+  rankingPresent: boolean;
+  statementArchived: boolean;
+  solutionFragmentArchived: boolean;
+  testsFragmentArchived: boolean;
+  visibleTestsCapturedCount: number;
+  officialSolutionPresent: boolean;
+  editorialAvailability: 'visible' | 'restricted' | 'hidden' | 'unknown';
+  sourceListUrl?: string;
+  officialSourceArchived: boolean;
+  officialSourceCount: number;
+  officialSourceIds: string[];
+  userSourceArchived: boolean;
+  userSourceCount: number;
+  userSourceIds: string[];
+  hasAnyArchivedSource: boolean;
+  evaluationIds: number[];
+  bestUserOverallEvaluationId?: number;
+  notes: string[];
+}
+
+export interface ProblemCoverageTotals {
+  totalProblems: number;
+  solvedByMeCount: number;
+  statementArchivedCount: number;
+  solutionFragmentArchivedCount: number;
+  testsFragmentArchivedCount: number;
+  problemsWithVisibleTestsCaptured: number;
+  problemsWithArchivedSources: number;
+  problemsWithOfficialSourceArchived: number;
+  problemsWithUserSourceArchived: number;
+  editorialVisibleCount: number;
+  rankingPresentCount: number;
+}
+
+export interface ProblemCoverageIndex {
+  snapshotId: string;
+  generatedAt: string;
+  totals: ProblemCoverageTotals;
+  records: ProblemCoverageRecord[];
 }

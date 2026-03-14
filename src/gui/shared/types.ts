@@ -48,6 +48,23 @@ export const guiArchiveDatasetSchema = z.enum([
   'rankings',
   'mirror-routes',
 ]);
+export const guiCoverageSolvedFilterSchema = z.enum([
+  'all',
+  'solved',
+  'unsolved',
+]);
+export const guiCoveragePresenceFilterSchema = z.enum([
+  'all',
+  'yes',
+  'no',
+]);
+export const guiCoverageEditorialFilterSchema = z.enum([
+  'all',
+  'visible',
+  'restricted',
+  'hidden',
+  'unknown',
+]);
 
 export const desktopPreferencesRecordSchema = z
   .object({
@@ -190,6 +207,88 @@ export const guiArchiveRecordDetailSchema = z
   })
   .strict();
 
+export const guiCoverageRecordSchema = z
+  .object({
+    problemId: z.number().int().positive(),
+    slug: z.string().min(1),
+    name: z.string().min(1),
+    grade: z.number().int().positive().optional(),
+    mirrorRoute: z.string().min(1),
+    tags: z.array(z.string().min(1)),
+    solvedByMe: z.boolean(),
+    evaluationCount: z.number().int().nonnegative(),
+    solvedEvaluationCount: z.number().int().nonnegative(),
+    rankingPresent: z.boolean(),
+    testsFragmentArchived: z.boolean(),
+    visibleTestsCapturedCount: z.number().int().nonnegative(),
+    officialSolutionPresent: z.boolean(),
+    officialSourceArchived: z.boolean(),
+    userSourceArchived: z.boolean(),
+    editorialAvailability: z.enum(['visible', 'restricted', 'hidden', 'unknown']),
+    notes: z.array(z.string()),
+  })
+  .strict();
+
+export const guiCoverageSummarySchema = z
+  .object({
+    snapshotId: z.string().min(1),
+    coverageRoot: z.string().min(1),
+    normalizedRoot: z.string().min(1),
+    mirrorRoot: z.string().min(1),
+    mirrorServeCommand: z.string().min(1),
+    mirrorUrl: z.string().min(1),
+    totalProblems: z.number().int().nonnegative(),
+    solvedByMeCount: z.number().int().nonnegative(),
+    statementArchivedCount: z.number().int().nonnegative(),
+    solutionFragmentArchivedCount: z.number().int().nonnegative(),
+    testsFragmentArchivedCount: z.number().int().nonnegative(),
+    problemsWithVisibleTestsCaptured: z.number().int().nonnegative(),
+    problemsWithArchivedSources: z.number().int().nonnegative(),
+    problemsWithOfficialSourceArchived: z.number().int().nonnegative(),
+    problemsWithUserSourceArchived: z.number().int().nonnegative(),
+    editorialVisibleCount: z.number().int().nonnegative(),
+    rankingPresentCount: z.number().int().nonnegative(),
+  })
+  .strict();
+
+export const guiCoverageListingSchema = z
+  .object({
+    snapshotId: z.string().min(1),
+    totalCount: z.number().int().nonnegative(),
+    offset: z.number().int().nonnegative(),
+    limit: z.number().int().positive(),
+    items: z.array(guiCoverageRecordSchema),
+  })
+  .strict();
+
+export const guiCoverageDetailSchema = z
+  .object({
+    snapshotId: z.string().min(1),
+    record: guiCoverageRecordSchema.extend({
+      canonicalUrl: z.string().url().optional(),
+      sourceListUrl: z.string().url().optional(),
+      statementArchived: z.boolean(),
+      solutionFragmentArchived: z.boolean(),
+      officialSourceCount: z.number().int().nonnegative(),
+      userSourceCount: z.number().int().nonnegative(),
+      hasAnyArchivedSource: z.boolean(),
+      bestUserOverallEvaluationId: z.number().int().positive().optional(),
+      evaluationIds: z.array(z.number().int().positive()),
+    }),
+    coverageFilePath: z.string().min(1),
+    rawRecordLinks: z
+      .object({
+        coverageFilePath: z.string().min(1),
+        problemFilePath: z.string().min(1),
+        rankingFilePath: z.string().min(1).optional(),
+        evaluationFilePaths: z.array(z.string().min(1)),
+        officialSourceFilePaths: z.array(z.string().min(1)),
+        userSourceFilePaths: z.array(z.string().min(1)),
+      })
+      .strict(),
+  })
+  .strict();
+
 export const guiJobEventSchema = z
   .object({
     timestamp: z.string().datetime(),
@@ -226,6 +325,15 @@ export type GuiNotificationPreference = z.infer<
 export type GuiVerbosityMode = z.infer<typeof guiVerbosityModeSchema>;
 export type GuiCrawlMode = z.infer<typeof guiCrawlModeSchema>;
 export type GuiArchiveDataset = z.infer<typeof guiArchiveDatasetSchema>;
+export type GuiCoverageSolvedFilter = z.infer<
+  typeof guiCoverageSolvedFilterSchema
+>;
+export type GuiCoveragePresenceFilter = z.infer<
+  typeof guiCoveragePresenceFilterSchema
+>;
+export type GuiCoverageEditorialFilter = z.infer<
+  typeof guiCoverageEditorialFilterSchema
+>;
 export type DesktopPreferencesRecord = z.infer<
   typeof desktopPreferencesRecordSchema
 >;
@@ -247,5 +355,9 @@ export type GuiArchiveListing = z.infer<typeof guiArchiveListingSchema>;
 export type GuiArchiveRecordDetail = z.infer<
   typeof guiArchiveRecordDetailSchema
 >;
+export type GuiCoverageRecord = z.infer<typeof guiCoverageRecordSchema>;
+export type GuiCoverageSummary = z.infer<typeof guiCoverageSummarySchema>;
+export type GuiCoverageListing = z.infer<typeof guiCoverageListingSchema>;
+export type GuiCoverageDetail = z.infer<typeof guiCoverageDetailSchema>;
 export type GuiJobEvent = z.infer<typeof guiJobEventSchema>;
 export type GuiJobRecord = z.infer<typeof guiJobRecordSchema>;

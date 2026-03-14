@@ -3,6 +3,8 @@ import { randomUUID } from 'node:crypto';
 import {
   type GuiArchiveDetailInput,
   type GuiArchiveListInput,
+  type GuiCoverageDetailInput,
+  type GuiCoverageListInput,
   guiCrawlJobDetailSchema,
   guiJobStartInputSchema,
 } from '../shared/contracts.js';
@@ -10,6 +12,9 @@ import type {
   GuiArchiveListing,
   GuiArchiveRecordDetail,
   GuiArchiveSummary,
+  GuiCoverageDetail,
+  GuiCoverageListing,
+  GuiCoverageSummary,
   GuiCrawlMode,
   GuiCrawlStatus,
   GuiJobEvent,
@@ -22,6 +27,11 @@ import {
   listArchiveExplorerRecords,
   readArchiveExplorerRecord,
 } from './archive-data-explorer.js';
+import {
+  getCoverageExplorerSummary,
+  listCoverageExplorerRecords,
+  readCoverageExplorerRecord,
+} from './problem-coverage-explorer.js';
 import {
   appendGuiJobEvent,
   createGuiJob,
@@ -53,6 +63,7 @@ import {
 } from '../../workflows/crawl-workflow.js';
 import { runNormalizeSnapshotWorkflow } from '../../workflows/normalize-workflow.js';
 import { runRankingWorkflow } from '../../workflows/rank-workflow.js';
+import { runProblemCoverageWorkflow } from '../../workflows/problem-coverage-workflow.js';
 import { finalizeSnapshotWorkflow } from '../../workflows/snapshot-workflow.js';
 import { upsertAndActivateWorkspaceProfile } from './workspace-store.js';
 
@@ -64,6 +75,7 @@ export interface DesktopControllerDependencies {
   getCrawlStatusWorkflow: typeof getCrawlStatusWorkflow;
   runNormalizeSnapshotWorkflow: typeof runNormalizeSnapshotWorkflow;
   runRankingWorkflow: typeof runRankingWorkflow;
+  runProblemCoverageWorkflow: typeof runProblemCoverageWorkflow;
   buildMirrorArtifacts: typeof buildMirrorArtifacts;
   finalizeSnapshotWorkflow: typeof finalizeSnapshotWorkflow;
   startMirrorServer: typeof startMirrorServer;
@@ -75,6 +87,9 @@ export interface DesktopControllerDependencies {
   getArchiveExplorerSummary: typeof getArchiveExplorerSummary;
   listArchiveExplorerRecords: typeof listArchiveExplorerRecords;
   readArchiveExplorerRecord: typeof readArchiveExplorerRecord;
+  getCoverageExplorerSummary: typeof getCoverageExplorerSummary;
+  listCoverageExplorerRecords: typeof listCoverageExplorerRecords;
+  readCoverageExplorerRecord: typeof readCoverageExplorerRecord;
   loadLocalConfig: typeof loadLocalConfig;
   notificationService: NotificationService;
 }
@@ -162,6 +177,9 @@ export interface DesktopController {
   getArchiveExplorerSummary(snapshotId?: string): GuiArchiveSummary;
   listArchiveExplorerRecords(input: GuiArchiveListInput): GuiArchiveListing;
   getArchiveExplorerRecord(input: GuiArchiveDetailInput): GuiArchiveRecordDetail;
+  getCoverageSummary(snapshotId?: string): Promise<GuiCoverageSummary>;
+  listCoverageRecords(input: GuiCoverageListInput): Promise<GuiCoverageListing>;
+  getCoverageRecord(input: GuiCoverageDetailInput): Promise<GuiCoverageDetail>;
   getCrawlStatus(snapshotId?: string): GuiCrawlStatus | null;
   recoverInterruptedJobs(options?: { now?: Date }): GuiJobRecord[];
   pauseJob(jobId: string, options?: { now?: Date }): GuiJobRecord;
@@ -183,6 +201,7 @@ export function createDesktopController(
     getCrawlStatusWorkflow,
     runNormalizeSnapshotWorkflow,
     runRankingWorkflow,
+    runProblemCoverageWorkflow,
     buildMirrorArtifacts,
     finalizeSnapshotWorkflow,
     startMirrorServer,
@@ -191,11 +210,15 @@ export function createDesktopController(
     getArchiveExplorerSummary,
     listArchiveExplorerRecords,
     readArchiveExplorerRecord,
+    getCoverageExplorerSummary,
+    listCoverageExplorerRecords,
+    readCoverageExplorerRecord,
     loadLocalConfig,
     notificationService: noopNotificationService,
     ...overrides,
   };
   const runningMirrors = new Map<string, RunningMirrorServer>();
+  const coverageRefreshes = new Map<string, Promise<void>>();
 
   return {
     listJobs() {
@@ -222,6 +245,23 @@ export function createDesktopController(
 
     getArchiveExplorerRecord(input) {
       return dependencies.readArchiveExplorerRecord(workspaceRoot, input);
+    },
+
+    async getCoverageSummary(snapshotId) {
+      return readCoverageExplorerWithRebuild(() =>
+        dependencies.getCoverageExplorerSummary(workspaceRoot, {
+          snapshotId,
+        }), snapshotId);
+    },
+
+    async listCoverageRecords(input) {
+      return readCoverageExplorerWithRebuild(() =>
+        dependencies.listCoverageExplorerRecords(workspaceRoot, input), input.snapshotId);
+    },
+
+    async getCoverageRecord(input) {
+      return readCoverageExplorerWithRebuild(() =>
+        dependencies.readCoverageExplorerRecord(workspaceRoot, input), input.snapshotId);
     },
 
     getCrawlStatus(snapshotId) {
@@ -759,6 +799,46 @@ export function createDesktopController(
       message: `${label}: ${message}`,
     });
     throw error;
+  }
+
+  async function readCoverageExplorerWithRebuild<T>(
+    reader: () => T,
+    snapshotId?: string,
+  ): Promise<T> {
+    try {
+      return reader();
+    } catch (error) {
+      if (
+        error instanceof Error
+        && error.message.includes('Problem coverage has not been generated')
+      ) {
+        await ensureCoverageDataset(snapshotId);
+        return reader();
+      }
+
+      throw error;
+    }
+  }
+
+  async function ensureCoverageDataset(snapshotId?: string): Promise<void> {
+    const key = snapshotId ?? '__current__';
+    const pending = coverageRefreshes.get(key);
+    if (pending) {
+      await pending;
+      return;
+    }
+
+    const refresh = dependencies
+      .runProblemCoverageWorkflow(workspaceRoot, snapshotId)
+      .then(() => undefined);
+    coverageRefreshes.set(key, refresh);
+    try {
+      await refresh;
+    } finally {
+      if (coverageRefreshes.get(key) === refresh) {
+        coverageRefreshes.delete(key);
+      }
+    }
   }
 }
 

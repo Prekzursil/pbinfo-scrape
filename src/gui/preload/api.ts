@@ -48,6 +48,17 @@ export function buildDesktopBridge(adapter: DesktopBridgeAdapter) {
         return adapter.invoke('desktop:archive:detail', payload);
       },
     },
+    coverage: {
+      async summary(payload?: unknown) {
+        return adapter.invoke('desktop:coverage:summary', payload);
+      },
+      async list(payload: unknown) {
+        return adapter.invoke('desktop:coverage:list', payload);
+      },
+      async detail(payload: unknown) {
+        return adapter.invoke('desktop:coverage:detail', payload);
+      },
+    },
     crawl: {
       async status(payload?: unknown) {
         return adapter.invoke('desktop:crawl:status', payload);
@@ -170,6 +181,21 @@ export function createDesktopBridge(adapter: DesktopBridgeAdapter): DesktopBridg
     async getArchiveExplorerRecord(input) {
       return (await nested.archive.detail(input)) as Awaited<
         ReturnType<DesktopBridge['getArchiveExplorerRecord']>
+      >;
+    },
+    async getCoverageSummary(snapshotId) {
+      return (await nested.coverage.summary(
+        snapshotId ? { snapshotId } : {},
+      )) as Awaited<ReturnType<DesktopBridge['getCoverageSummary']>>;
+    },
+    async listCoverageRecords(input) {
+      return (await nested.coverage.list(input)) as Awaited<
+        ReturnType<DesktopBridge['listCoverageRecords']>
+      >;
+    },
+    async getCoverageRecord(input) {
+      return (await nested.coverage.detail(input)) as Awaited<
+        ReturnType<DesktopBridge['getCoverageRecord']>
       >;
     },
     async getCrawlStatus(snapshotId) {

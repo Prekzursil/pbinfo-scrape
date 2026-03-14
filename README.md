@@ -6,11 +6,14 @@ PBInfo archival operator console for the `pbinfo-scrape` package: hybrid PBInfo 
 
 This repository stays **private**. Supported reporting instructions live in [SECURITY.md](./SECURITY.md).
 
+Maintainer-facing archive ownership and release guidance lives in [MAINTAINING.md](./MAINTAINING.md).
+
 ## Quick Start
 
 ```bash
 npm install
 npm run verify
+npm run verify:canonical-snapshot
 npm run cli -- --help
 ```
 
@@ -50,7 +53,7 @@ npm run cli -- normalize snapshot --snapshot acceptance-20260310b
 npm run cli -- rank --snapshot acceptance-20260310b
 npm run cli -- build-mirror --snapshot acceptance-20260310b
 npm run cli -- snapshot finalize --snapshot acceptance-20260310b
-npm run cli -- serve --port 4173
+npm run cli -- serve --snapshot acceptance-20260310b --port 4173
 
 # Export heavy raw artifacts and publish the repo with a tagged GitHub release
 npm run cli -- publish --snapshot acceptance-20260310b --release --upload-desktop-exe
@@ -83,6 +86,9 @@ npm run desktop:start
 
 # Produce the Windows x64 portable executable
 npm run desktop:pack
+
+# Run the packaged-app smoke check against the portable executable
+npm run smoke:desktop-packaged
 ```
 
 Desktop build outputs:
@@ -91,6 +97,12 @@ Desktop build outputs:
 - `dist-desktop/gui/renderer/index.html`: built renderer shell loaded in production.
 - `release-desktop/Problem Archive Crawler 0.1.0.exe`: Windows x64 portable executable.
 
+## Canonical snapshot policy
+
+- `acceptance-20260310b` is the current **blessed tracked canonical snapshot**.
+- Local crawl changes under `archive/snapshots/acceptance-20260310b/` are treated as **generated working state** until a maintainer explicitly promotes them.
+- Do **not** silently recommit local crawl drift into the canonical snapshot. Back it up first, restore the tracked reference, and follow the promotion steps in [MAINTAINING.md](./MAINTAINING.md).
+
 ## Where is the archive locally?
 
 There are two different local views of the archive:
@@ -98,10 +110,17 @@ There are two different local views of the archive:
 - **Mirror view**: browse the captured PBInfo pages like a local website.
 - **Normalized archive**: inspect the structured JSON records that power ranking, routing, and the desktop Data Explorer.
 
-### Fastest visual entry point
+### Fastest visual entry points
 
-- Start the desktop app and use the **Mirror Preview** panel to embed the local archive viewer.
-- Use the **Data Explorer** panel to inspect the core normalized datasets:
+- Start the desktop app and use the **Coverage Explorer** panel when you want the truthful per-problem audit view:
+  - solved by your archived handle
+  - tests fragment archived
+  - visible tests captured
+  - official source archived
+  - user source archived
+  - editorial visibility
+- Use the **Mirror Preview** panel to embed the local archive viewer.
+- Use the **Data Explorer** panel when you want raw normalized datasets:
   - Problems
   - Evaluations
   - Rankings
@@ -116,6 +135,13 @@ npm run cli -- serve --snapshot acceptance-20260310b --port 4173
 Then open:
 
 - `http://127.0.0.1:4173/`
+- `http://127.0.0.1:4173/archive/coverage/`
+
+The `/archive/coverage/` route is the mirror-friendly coverage index. It links back into mirrored problem pages and uses archive-truth wording such as:
+
+- `Tests fragment archived`
+- `Visible tests captured: 0`
+- `Official source not archived`
 
 ### Structured archive on disk
 
@@ -129,6 +155,34 @@ The desktop app now exposes direct actions for:
 - **Open normalized archive folder**
 - **Open mirror output folder**
 - **Open mirror in browser**
+
+### Problem coverage records on disk
+
+The derived per-problem coverage dataset lives under:
+
+- `archive/snapshots/acceptance-20260310b/normalized/problem-coverage/`
+
+This is the fastest structured place to answer the original audit questions:
+
+- which problems are solved by your archived handle
+- which problems have archived test fragments
+- which problems have visible tests captured
+- which problems have archived official or user source code
+- which problems have editorial visibility in the canonical archive
+
+### Crawl completeness and integrity checks
+
+High-level queue/crawl truth source:
+
+```bash
+npm run cli -- crawl status --snapshot acceptance-20260310b
+```
+
+Maintainer-friendly canonical snapshot verification:
+
+```bash
+npm run verify:canonical-snapshot
+```
 
 ## Archive Layout
 
@@ -146,3 +200,4 @@ The desktop app now exposes direct actions for:
 - The mirror rewrites PBInfo page shells to local routes and local vendored assets. Analytics and ad scripts are stripped during mirror build.
 - `publish --snapshot <id> --release --upload-desktop-exe` only proceeds when the selected snapshot is canonical, drained, exported, secret-clean, and backed by the final `Problem Archive Crawler *.exe` release asset.
 - The desktop Data Explorer reads from the existing normalized archive outputs; it does not create a second archive format.
+- Use [MAINTAINING.md](./MAINTAINING.md) for the canonical snapshot ownership policy, backup expectations, promotion flow, and reproducible release sequence.

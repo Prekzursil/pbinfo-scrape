@@ -12,6 +12,8 @@ const desktopTestCdpPort = process.env.PBINFO_DESKTOP_TEST_CDP_PORT;
 const desktopSmokeMarkerPath = process.env.PBINFO_DESKTOP_TEST_MARKER_PATH;
 const desktopSmokeWorkspaceRoot = process.env.PBINFO_DESKTOP_TEST_WORKSPACE_ROOT;
 const desktopTestUserDataRoot = process.env.PBINFO_DESKTOP_TEST_USER_DATA_ROOT;
+const desktopSmokeSnapshotId =
+  process.env.PBINFO_DESKTOP_TEST_SNAPSHOT_ID ?? 'acceptance-20260310b';
 
 let mainWindow: BrowserWindow | undefined;
 
@@ -89,8 +91,10 @@ async function maybeWriteDesktopSmokeMarker(
     });
 
     const report = await window.webContents.executeJavaScript(
-      `(() => {
+      `(async () => {
         const workspaceRoot = ${JSON.stringify(desktopSmokeWorkspaceRoot ?? '')};
+        const snapshotId = ${JSON.stringify(desktopSmokeSnapshotId)};
+        const bridge = window.pbinfoDesktop;
 
         const headings = () =>
           Array.from(document.querySelectorAll('h1, h2'))
@@ -101,6 +105,11 @@ async function maybeWriteDesktopSmokeMarker(
           headings: headings(),
           text: document.body?.innerText ?? '',
         });
+
+        const pause = (timeoutMs) =>
+          new Promise((resolve) => {
+            setTimeout(resolve, timeoutMs);
+          });
 
         const waitFor = (predicate, timeoutMs = 15000) =>
           new Promise((resolve, reject) => {
@@ -121,6 +130,29 @@ async function maybeWriteDesktopSmokeMarker(
 
             tick();
           });
+
+        const readDatasetButtons = () =>
+          Array.from(document.querySelectorAll('button[role="tab"]'))
+            .map((element) => {
+              const label =
+                element.querySelector('span')?.textContent?.trim() ??
+                element.textContent?.trim();
+              return label;
+            })
+            .filter((value) => Boolean(value));
+
+        const clickDatasetButton = async (label) => {
+          const button = Array.from(document.querySelectorAll('button[role="tab"]')).find(
+            (element) => element.textContent?.includes(label),
+          );
+
+          if (!(button instanceof HTMLButtonElement)) {
+            throw new Error('Desktop smoke probe could not find dataset button: ' + label);
+          }
+
+          button.click();
+          await pause(150);
+        };
 
         const setWorkspaceAndSubmit = (value) => {
           const input = document.querySelector('input');
@@ -143,6 +175,97 @@ async function maybeWriteDesktopSmokeMarker(
           input.form.requestSubmit();
         };
 
+        const inspectDataExplorer = async () => {
+          if (!bridge) {
+            throw new Error('Desktop smoke probe could not access the pbinfoDesktop bridge.');
+          }
+
+          const summary = await bridge.getArchiveExplorerSummary(snapshotId);
+          const datasetLabels = readDatasetButtons();
+          const datasetListings = {};
+          const visitedDatasets = [];
+
+          for (const dataset of summary.datasets) {
+            visitedDatasets.push(dataset.label);
+            await clickDatasetButton(dataset.label);
+            const listing = await bridge.listArchiveExplorerRecords({
+              snapshotId,
+              dataset: dataset.dataset,
+              limit: 3,
+            });
+            const selectedRecordId = listing.items[0]?.recordId ?? null;
+            const detail = selectedRecordId
+              ? await bridge.getArchiveExplorerRecord({
+                  snapshotId,
+                  dataset: dataset.dataset,
+                  recordId: selectedRecordId,
+                })
+              : null;
+
+            datasetListings[dataset.dataset] = {
+              totalCount: listing.totalCount,
+              firstRecordId: selectedRecordId,
+              detailTitle: detail?.title ?? null,
+            };
+          }
+
+          await bridge.openPath(summary.normalizedRoot);
+          await bridge.openPath(summary.mirrorRoot);
+          await bridge.openExternal(summary.mirrorUrl);
+
+          return {
+            snapshotId,
+            datasetLabels,
+            visitedDatasets,
+            datasetListings,
+            summary,
+          };
+        };
+
+        const inspectCoverageExplorer = async () => {
+          if (!bridge) {
+            throw new Error('Desktop smoke probe could not access the pbinfoDesktop bridge.');
+          }
+
+          const summary = await bridge.getCoverageSummary(snapshotId);
+          const listing = await bridge.listCoverageRecords({
+            snapshotId,
+            limit: 5,
+          });
+          const selectedProblemId = listing.items[0]?.problemId ?? null;
+          const detail = selectedProblemId
+            ? await bridge.getCoverageRecord({
+                snapshotId,
+                problemId: selectedProblemId,
+              })
+            : null;
+
+          if (detail?.record.sourceListUrl) {
+            await bridge.openExternal(detail.record.sourceListUrl);
+          }
+
+          return {
+            summary,
+            listing: {
+              totalCount: listing.totalCount,
+              firstProblemId: selectedProblemId,
+              firstProblemName: listing.items[0]?.name ?? null,
+            },
+            detail: detail
+              ? {
+                  problemId: detail.record.problemId,
+                  name: detail.record.name,
+                  solvedByMe: detail.record.solvedByMe,
+                  testsFragmentArchived: detail.record.testsFragmentArchived,
+                  visibleTestsCapturedCount: detail.record.visibleTestsCapturedCount,
+                  officialSourceArchived: detail.record.officialSourceArchived,
+                  userSourceArchived: detail.record.userSourceArchived,
+                  editorialAvailability: detail.record.editorialAvailability,
+                }
+              : null,
+          };
+        };
+
         return waitFor(() => document.body?.innerText.includes('Choose a workspace'))
           .then(() => {
             const initial = snapshot();
@@ -151,17 +274,31 @@ async function maybeWriteDesktopSmokeMarker(
               return {
                 initial,
                 final: initial,
+                dataExplorer: null,
+                coverageExplorer: null,
               };
             }
 
             setWorkspaceAndSubmit(workspaceRoot);
 
-            return waitFor(() => document.body?.innerText.includes('Workspace Summary')).then(
-              () => ({
+            return waitFor(() => document.body?.innerText.includes('Workspace Summary'))
+              .then(() =>
+                waitFor(
+                  () =>
+                    document.body?.innerText.includes('Data Explorer') &&
+                    document.body?.innerText.includes('Coverage Explorer') &&
+                    document.body?.innerText.includes('Problems') &&
+                    document.body?.innerText.includes('Evaluations') &&
+                    document.body?.innerText.includes('Rankings') &&
+                    document.body?.innerText.includes('Mirror Routes'),
+                ),
+              )
+              .then(async () => ({
                 initial,
                 final: snapshot(),
-              }),
-            );
+                dataExplorer: await inspectDataExplorer(),
+                coverageExplorer: await inspectCoverageExplorer(),
+              }));
           })
           .catch((error) => ({
             error: error instanceof Error ? error.message : String(error),

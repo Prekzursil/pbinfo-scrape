@@ -6,6 +6,9 @@ import type {
   GuiArchiveListing,
   GuiArchiveRecordDetail,
   GuiArchiveSummary,
+  GuiCoverageDetail,
+  GuiCoverageListing,
+  GuiCoverageSummary,
   GuiCrawlMode,
   GuiCrawlStatus,
   GuiVerbosityMode,
@@ -14,6 +17,7 @@ import type {
   GuiWorkspaceState,
 } from '../shared/types.js';
 import { DesktopDashboard } from './dashboard.js';
+import type { CoverageExplorerFilters } from './coverage-explorer.js';
 
 const CRAWL_CHUNK_SIZE = 25;
 const ARCHIVE_LIST_LIMIT = 24;
@@ -37,6 +41,19 @@ export function App({ desktop }: AppProps) {
   const [crawlMode, setCrawlMode] = useState<GuiCrawlMode>('incremental');
   const [selectedArchiveDataset, setSelectedArchiveDataset] =
     useState<GuiArchiveDataset>('problems');
+  const [coverageFilters, setCoverageFilters] = useState<CoverageExplorerFilters>({
+    query: '',
+    solved: 'all',
+    testsFragmentArchived: 'all',
+    visibleTestsCaptured: 'all',
+    officialSourceArchived: 'all',
+    userSourceArchived: 'all',
+    editorialAvailability: 'all',
+  });
+  const [coverageSummary, setCoverageSummary] = useState<GuiCoverageSummary | null>(null);
+  const [coverageListing, setCoverageListing] = useState<GuiCoverageListing | null>(null);
+  const [selectedCoverageProblemId, setSelectedCoverageProblemId] = useState<number | null>(null);
+  const [coverageDetail, setCoverageDetail] = useState<GuiCoverageDetail | null>(null);
   const [archiveQuery, setArchiveQuery] = useState('');
   const [archiveSummary, setArchiveSummary] = useState<GuiArchiveSummary | null>(null);
   const [archiveListing, setArchiveListing] = useState<GuiArchiveListing | null>(null);
@@ -91,6 +108,9 @@ export function App({ desktop }: AppProps) {
         setArchiveSummary(null);
         setArchiveListing(null);
         setArchiveRecordDetail(null);
+        setCoverageSummary(null);
+        setCoverageListing(null);
+        setCoverageDetail(null);
         return;
       }
 
@@ -107,6 +127,9 @@ export function App({ desktop }: AppProps) {
         setArchiveSummary(null);
         setArchiveListing(null);
         setArchiveRecordDetail(null);
+        setCoverageSummary(null);
+        setCoverageListing(null);
+        setCoverageDetail(null);
         return;
       }
 
@@ -196,6 +219,107 @@ export function App({ desktop }: AppProps) {
       cancelled = true;
     };
   }, [bridge, selectedSnapshotId, workspaceState]);
+
+  useEffect(() => {
+    if (!bridge || !workspaceState) {
+      setCoverageSummary(null);
+      return;
+    }
+
+    let cancelled = false;
+    void (async () => {
+      try {
+        const summary = await bridge.getCoverageSummary(selectedSnapshotId);
+        if (!cancelled) {
+          setCoverageSummary(summary);
+        }
+      } catch (error) {
+        if (!cancelled) {
+          setCoverageSummary(null);
+          setErrorMessage(toMessage(error));
+        }
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [bridge, selectedSnapshotId, workspaceState]);
+
+  useEffect(() => {
+    if (!bridge || !workspaceState) {
+      setCoverageListing(null);
+      setCoverageDetail(null);
+      return;
+    }
+
+    let cancelled = false;
+    void (async () => {
+      try {
+        const listing = await bridge.listCoverageRecords({
+          snapshotId: selectedSnapshotId,
+          query: coverageFilters.query || undefined,
+          solved: coverageFilters.solved,
+          testsFragmentArchived: coverageFilters.testsFragmentArchived,
+          visibleTestsCaptured: coverageFilters.visibleTestsCaptured,
+          officialSourceArchived: coverageFilters.officialSourceArchived,
+          userSourceArchived: coverageFilters.userSourceArchived,
+          editorialAvailability: coverageFilters.editorialAvailability,
+          grade: coverageFilters.grade,
+          limit: 100,
+        });
+        if (cancelled) {
+          return;
+        }
+        setCoverageListing(listing);
+        setSelectedCoverageProblemId((current) => {
+          if (current && listing.items.some((item) => item.problemId === current)) {
+            return current;
+          }
+          return listing.items[0]?.problemId ?? null;
+        });
+      } catch (error) {
+        if (!cancelled) {
+          setCoverageListing(null);
+          setCoverageDetail(null);
+          setErrorMessage(toMessage(error));
+        }
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [bridge, coverageFilters, selectedSnapshotId, workspaceState]);
+
+  useEffect(() => {
+    if (!bridge || !workspaceState || !selectedCoverageProblemId) {
+      setCoverageDetail(null);
+      return;
+    }
+
+    let cancelled = false;
+    void (async () => {
+      try {
+        const detail = await bridge.getCoverageRecord({
+          snapshotId: selectedSnapshotId,
+          problemId: selectedCoverageProblemId,
+        });
+        if (!cancelled) {
+          setCoverageDetail(detail);
+        }
+      } catch (error) {
+        if (!cancelled) {
+          setCoverageDetail(null);
+          setErrorMessage(toMessage(error));
+        }
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [bridge, selectedCoverageProblemId, selectedSnapshotId, workspaceState]);
 
   useEffect(() => {
     if (!bridge || !workspaceState) {
@@ -391,9 +515,19 @@ export function App({ desktop }: AppProps) {
       archiveSummary={archiveSummary}
       archiveListing={archiveListing}
       archiveRecordDetail={archiveRecordDetail}
+      coverageSummary={coverageSummary}
+      coverageListing={coverageListing}
+      coverageDetail={coverageDetail}
+      selectedCoverageProblemId={selectedCoverageProblemId}
+      coverageFilters={coverageFilters}
       selectedArchiveDataset={selectedArchiveDataset}
       selectedArchiveRecordId={selectedArchiveRecordId}
       archiveQuery={archiveQuery}
+      onCoverageFiltersChange={(filters) => {
+        setCoverageFilters(filters);
+        setSelectedCoverageProblemId(null);
+      }}
+      onSelectCoverageProblem={(problemId) => setSelectedCoverageProblemId(problemId)}
       onArchiveDatasetChange={(dataset) => {
         setSelectedArchiveDataset(dataset);
         setSelectedArchiveRecordId(null);

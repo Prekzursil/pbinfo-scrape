@@ -20,6 +20,9 @@ import {
   guiArchiveDetailInputSchema,
   guiArchiveListInputSchema,
   guiArchiveSummaryInputSchema,
+  guiCoverageDetailInputSchema,
+  guiCoverageListInputSchema,
+  guiCoverageSummaryInputSchema,
   desktopBrowserImportInputSchema,
   desktopCredentialLoginInputSchema,
   desktopPreferencesUpdateSchema,
@@ -44,6 +47,9 @@ export function registerDesktopIpc(options: RegisterDesktopIpcOptions): void {
         notificationService: options.notificationService,
       })
     : undefined;
+  const desktopTestActionsPath = process.env.PBINFO_DESKTOP_TEST_ACTIONS_PATH;
+  const desktopTestDryRunOpeners =
+    process.env.PBINFO_DESKTOP_TEST_DRY_RUN_OPENERS === '1';
 
   options.ipcMain.handle('desktop:workspace:state', async () => {
     if (!workspaceRoot) {
@@ -112,6 +118,21 @@ export function registerDesktopIpc(options: RegisterDesktopIpcOptions): void {
     const parsed = guiArchiveDetailInputSchema.parse(payload);
     return controller.getArchiveExplorerRecord(parsed);
   });
+  options.ipcMain.handle('desktop:coverage:summary', async (_event, payload) => {
+    assertController(controller);
+    const parsed = guiCoverageSummaryInputSchema.parse(payload ?? {});
+    return controller.getCoverageSummary(parsed.snapshotId);
+  });
+  options.ipcMain.handle('desktop:coverage:list', async (_event, payload) => {
+    assertController(controller);
+    const parsed = guiCoverageListInputSchema.parse(payload ?? {});
+    return controller.listCoverageRecords(parsed);
+  });
+  options.ipcMain.handle('desktop:coverage:detail', async (_event, payload) => {
+    assertController(controller);
+    const parsed = guiCoverageDetailInputSchema.parse(payload);
+    return controller.getCoverageRecord(parsed);
+  });
 
   options.ipcMain.handle('desktop:auth:login', async (_event, payload) => {
     assertController(controller);
@@ -141,10 +162,24 @@ export function registerDesktopIpc(options: RegisterDesktopIpcOptions): void {
   });
   options.ipcMain.handle('desktop:external:open', async (_event, payload) => {
     const parsed = guiOpenExternalInputSchema.parse(payload);
+    recordDesktopTestAction(desktopTestActionsPath, {
+      kind: 'openExternal',
+      target: parsed.url,
+    });
+    if (desktopTestDryRunOpeners) {
+      return;
+    }
     await shell.openExternal(parsed.url);
   });
   options.ipcMain.handle('desktop:path:open', async (_event, payload) => {
     const parsed = guiOpenPathInputSchema.parse(payload);
+    recordDesktopTestAction(desktopTestActionsPath, {
+      kind: 'openPath',
+      target: parsed.path,
+    });
+    if (desktopTestDryRunOpeners) {
+      return;
+    }
     const errorMessage = await shell.openPath(parsed.path);
     if (errorMessage) {
       throw new Error(errorMessage);
@@ -227,6 +262,31 @@ export function createDesktopIpcRegistry(handlers: {
       return handlers.stopMirrorPreview(asJobId(payload));
     },
   };
+}
+
+function recordDesktopTestAction(
+  actionsPath: string | undefined,
+  action: {
+    kind: 'openPath' | 'openExternal';
+    target: string;
+  },
+): void {
+  if (!actionsPath) {
+    return;
+  }
+
+  const existing = existsSync(actionsPath)
+    ? (JSON.parse(readFileSync(actionsPath, 'utf8')) as Array<{
+        kind: 'openPath' | 'openExternal';
+        target: string;
+      }>)
+    : [];
+
+  mkdirSync(dirname(actionsPath), {
+    recursive: true,
+  });
+  existing.push(action);
+  writeFileSync(actionsPath, JSON.stringify(existing, null, 2), 'utf8');
 }
 
 function assertWorkspaceSelected(

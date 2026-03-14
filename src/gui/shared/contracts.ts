@@ -2,6 +2,9 @@ import { z } from 'zod';
 
 import {
   guiArchiveDatasetSchema,
+  guiCoverageEditorialFilterSchema,
+  guiCoveragePresenceFilterSchema,
+  guiCoverageSolvedFilterSchema,
   guiCrawlModeSchema,
   guiVerbosityModeSchema,
   guiJobKindSchema,
@@ -106,6 +109,35 @@ export const guiArchiveDetailInputSchema = z
   })
   .strict();
 
+export const guiCoverageSummaryInputSchema = z
+  .object({
+    snapshotId: z.string().min(1).optional(),
+  })
+  .strict();
+
+export const guiCoverageListInputSchema = z
+  .object({
+    snapshotId: z.string().min(1).optional(),
+    query: z.string().min(1).optional(),
+    offset: z.number().int().nonnegative().optional(),
+    limit: z.number().int().positive().max(500).optional(),
+    solved: guiCoverageSolvedFilterSchema.optional(),
+    testsFragmentArchived: guiCoveragePresenceFilterSchema.optional(),
+    visibleTestsCaptured: guiCoveragePresenceFilterSchema.optional(),
+    officialSourceArchived: guiCoveragePresenceFilterSchema.optional(),
+    userSourceArchived: guiCoveragePresenceFilterSchema.optional(),
+    editorialAvailability: guiCoverageEditorialFilterSchema.optional(),
+    grade: z.number().int().positive().optional(),
+  })
+  .strict();
+
+export const guiCoverageDetailInputSchema = z
+  .object({
+    snapshotId: z.string().min(1).optional(),
+    problemId: z.number().int().positive(),
+  })
+  .strict();
+
 export const guiOpenExternalInputSchema = z
   .object({
     url: z.string().url(),
@@ -139,6 +171,11 @@ export type GuiCrawlJobDetailInput = z.infer<typeof guiCrawlJobDetailSchema>;
 export type GuiArchiveSummaryInput = z.infer<typeof guiArchiveSummaryInputSchema>;
 export type GuiArchiveListInput = z.infer<typeof guiArchiveListInputSchema>;
 export type GuiArchiveDetailInput = z.infer<typeof guiArchiveDetailInputSchema>;
+export type GuiCoverageSummaryInput = z.infer<
+  typeof guiCoverageSummaryInputSchema
+>;
+export type GuiCoverageListInput = z.infer<typeof guiCoverageListInputSchema>;
+export type GuiCoverageDetailInput = z.infer<typeof guiCoverageDetailInputSchema>;
 export type DesktopPreferencesUpdateInput = z.infer<
   typeof desktopPreferencesUpdateSchema
 >;
