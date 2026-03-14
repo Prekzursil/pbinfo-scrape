@@ -70,6 +70,8 @@ async function main(): Promise<void> {
       );
     }
 
+    const portableSmoke = await smokePortableExecutable(portableExePath, repoRoot);
+
     console.log(
       JSON.stringify(
         {
@@ -80,6 +82,7 @@ async function main(): Promise<void> {
           actionsPath,
           report,
           actions,
+          portableSmoke,
         },
         null,
         2,
@@ -148,6 +151,48 @@ function resolvePackagedOutputs(): {
   };
 }
 
+async function smokePortableExecutable(
+  portableExePath: string,
+  repoRoot: string,
+): Promise<PortableSmokeResult> {
+  const desktopEnv: NodeJS.ProcessEnv = {
+    ...process.env,
+  };
+  delete desktopEnv.ELECTRON_RUN_AS_NODE;
+
+  const portableProcess = spawn(portableExePath, [], {
+    cwd: repoRoot,
+    env: desktopEnv,
+    stdio: ['ignore', 'pipe', 'pipe'],
+    windowsHide: true,
+  });
+
+  let stdout = '';
+  let stderr = '';
+  portableProcess.stdout?.on('data', (chunk) => {
+    stdout += chunk.toString();
+  });
+  portableProcess.stderr?.on('data', (chunk) => {
+    stderr += chunk.toString();
+  });
+
+  try {
+    const visibleWindow = await waitForPortableDesktopWindow(30_000);
+    return {
+      launcherPid: portableProcess.pid,
+      visibleWindow,
+      stdout,
+      stderr,
+    };
+  } catch (error) {
+    throw new Error(
+      `Portable desktop smoke failed for ${portableExePath}. Stdout: ${stdout || '<empty>'}. Stderr: ${stderr || '<empty>'}. ${error instanceof Error ? error.message : String(error)}`,
+    );
+  } finally {
+    closeDesktopProcess(portableProcess.pid);
+  }
+}
+
 async function waitForJsonFile<T>(path: string, timeoutMs: number): Promise<T> {
   const deadline = Date.now() + timeoutMs;
 
@@ -184,6 +229,82 @@ async function waitForDesktopSmokeReport(
   throw new Error(`Timed out waiting for completed desktop smoke report: ${path}`);
 }
 
+async function waitForPortableDesktopWindow(
+  timeoutMs: number,
+): Promise<PortableWindowSnapshot> {
+  const deadline = Date.now() + timeoutMs;
+
+  while (Date.now() < deadline) {
+    const processes = listProblemArchiveCrawlerProcesses();
+    const errorWindow = processes.find(
+      (process) =>
+        process.processName === 'Problem Archive Crawler'
+        && process.mainWindowHandle !== 0
+        && process.mainWindowTitle.trim() === 'Error',
+    );
+    if (errorWindow) {
+      throw new Error(
+        `Portable executable surfaced an error dialog instead of the app window: ${JSON.stringify(errorWindow, null, 2)}`,
+      );
+    }
+
+    const visibleAppWindow = processes.find(
+      (process) =>
+        process.processName === 'Problem Archive Crawler'
+        && process.mainWindowHandle !== 0
+        && process.mainWindowTitle.trim().length > 0,
+    );
+    if (visibleAppWindow) {
+      return visibleAppWindow;
+    }
+
+    await delay(250);
+  }
+
+  const processes = listProblemArchiveCrawlerProcesses();
+  throw new Error(
+    `Timed out waiting for the portable executable to surface a visible desktop window. Observed processes: ${JSON.stringify(processes, null, 2)}`,
+  );
+}
+
+function listProblemArchiveCrawlerProcesses(): PortableWindowSnapshot[] {
+  const result = spawnSync(
+    'powershell',
+    [
+      '-NoProfile',
+      '-Command',
+      "Get-Process | Where-Object { $_.ProcessName -like 'Problem Archive Crawler*' } | Select-Object Id,ProcessName,MainWindowTitle,MainWindowHandle,Responding,Path | ConvertTo-Json -Depth 4",
+    ],
+    {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+      windowsHide: true,
+    },
+  );
+
+  if (result.status !== 0) {
+    throw new Error(
+      `Could not inspect Problem Archive Crawler processes. Stdout: ${result.stdout || '<empty>'}. Stderr: ${result.stderr || '<empty>'}. Exit code: ${result.status ?? '<unknown>'}.`,
+    );
+  }
+
+  const output = result.stdout.trim();
+  if (!output) {
+    return [];
+  }
+
+  const parsed = JSON.parse(output) as PortableProcessSnapshotRaw | PortableProcessSnapshotRaw[];
+  const snapshots = Array.isArray(parsed) ? parsed : [parsed];
+  return snapshots.map((snapshot) => ({
+    id: snapshot.Id,
+    processName: snapshot.ProcessName,
+    mainWindowTitle: snapshot.MainWindowTitle ?? '',
+    mainWindowHandle: snapshot.MainWindowHandle ?? 0,
+    responding: snapshot.Responding,
+    path: snapshot.Path,
+  }));
+}
+
 function closeDesktopProcess(processId: number | undefined): void {
   if (!processId) {
     return;
@@ -215,6 +336,31 @@ interface DesktopSmokeReport {
 interface DesktopSmokeAction {
   kind: 'openPath' | 'openExternal';
   target: string;
+}
+
+interface PortableWindowSnapshot {
+  id: number;
+  processName: string;
+  mainWindowTitle: string;
+  mainWindowHandle: number;
+  responding: boolean;
+  path?: string;
+}
+
+interface PortableSmokeResult {
+  launcherPid: number | undefined;
+  visibleWindow: PortableWindowSnapshot;
+  stdout: string;
+  stderr: string;
+}
+
+interface PortableProcessSnapshotRaw {
+  Id: number;
+  ProcessName: string;
+  MainWindowTitle?: string;
+  MainWindowHandle?: number;
+  Responding: boolean;
+  Path?: string;
 }
 
 void main();

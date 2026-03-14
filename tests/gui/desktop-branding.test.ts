@@ -27,6 +27,7 @@ describe('desktop branding assets', () => {
     ) as {
       productName?: string;
       appId?: string;
+      asar?: boolean;
       win?: {
         icon?: string;
       };
@@ -40,6 +41,7 @@ describe('desktop branding assets', () => {
 
     expect(builder.productName).toBe('Problem Archive Crawler');
     expect(builder.appId).toBe('ro.pbinfo.problemarchivecrawler.desktop');
+    expect(builder.asar).toBe(true);
     expect(builder.win?.icon).toBe('assets/desktop/problem-archive-crawler.ico');
     expect(builder.extraResources).toEqual(
       expect.arrayContaining([
@@ -57,6 +59,10 @@ describe('desktop branding assets', () => {
       join(repoRoot, 'src', 'gui', 'renderer', 'main.tsx'),
       'utf8',
     );
+    const rendererHtml = readFileSync(
+      join(repoRoot, 'src', 'gui', 'renderer', 'index.html'),
+      'utf8',
+    );
     const styles = readFileSync(
       join(repoRoot, 'src', 'gui', 'renderer', 'styles.css'),
       'utf8',
@@ -65,6 +71,7 @@ describe('desktop branding assets', () => {
     expect(rendererEntry).toContain("@fontsource/sora");
     expect(rendererEntry).toContain("@fontsource/manrope");
     expect(rendererEntry).toContain("@fontsource/ibm-plex-mono");
+    expect(rendererHtml).toContain("<title>Problem Archive Crawler</title>");
     expect(styles).toContain('"Sora"');
     expect(styles).toContain('"Manrope"');
     expect(styles).toContain('"IBM Plex Mono"');

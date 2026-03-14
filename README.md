@@ -19,13 +19,13 @@ npm run cli -- --help
 
 ## Latest private release
 
-- Current private tag: `v0.1.1`
+- Current private tag: `v0.1.2`
 - Current packaged desktop executable after `npm run desktop:pack`:
-  - `release-desktop/Problem Archive Crawler 0.1.1.exe`
+  - `release-desktop/Problem Archive Crawler 0.1.2.exe`
 - Current unpacked smoke target after `npm run desktop:pack`:
   - `release-desktop/win-unpacked/Problem Archive Crawler.exe`
 - Release notes for the current build live in:
-  - [`docs/releases/v0.1.1.md`](./docs/releases/v0.1.1.md)
+  - [`docs/releases/v0.1.2.md`](./docs/releases/v0.1.2.md)
 
 ## Local Config
 
@@ -97,7 +97,8 @@ npm run desktop:start
 # Produce the Windows x64 portable executable
 npm run desktop:pack
 
-# Run the packaged-app smoke check against the portable executable
+# Run the packaged-app smoke checks against both the unpacked Electron app
+# and the release portable executable
 npm run smoke:desktop-packaged
 ```
 
@@ -105,7 +106,7 @@ Desktop build outputs:
 
 - `dist-desktop/gui/main/index.js`: Electron main entry used by the packaged app.
 - `dist-desktop/gui/renderer/index.html`: built renderer shell loaded in production.
-- `release-desktop/Problem Archive Crawler 0.1.1.exe`: Windows x64 portable executable for the current private release.
+- `release-desktop/Problem Archive Crawler 0.1.2.exe`: Windows x64 portable executable for the current private release.
 - `release-desktop/win-unpacked/Problem Archive Crawler.exe`: unpacked smoke-test target used by `npm run smoke:desktop-packaged`.
 
 ## Canonical snapshot policy
