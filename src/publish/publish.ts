@@ -34,6 +34,7 @@ export interface PublishWorkspaceResult {
 const DEFAULT_STAGE_ALLOWLIST = [
   '.gitignore',
   'README.md',
+  'SECURITY.md',
   'electron-builder.json',
   'package.json',
   'package-lock.json',

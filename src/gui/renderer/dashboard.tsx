@@ -2,6 +2,10 @@ import { type ReactNode, useEffect, useMemo, useState } from 'react';
 
 import type { DesktopBridge } from '../shared/bridge.js';
 import type {
+  GuiArchiveDataset,
+  GuiArchiveListing,
+  GuiArchiveRecordDetail,
+  GuiArchiveSummary,
   GuiCrawlMode,
   GuiCrawlStatus,
   GuiJobCounters,
@@ -10,6 +14,7 @@ import type {
   GuiProfileRecord,
   GuiWorkspaceState,
 } from '../shared/types.js';
+import { DataExplorerPanel } from './data-explorer.js';
 
 type CredentialLoginInput = Parameters<DesktopBridge['loginProfile']>[0];
 type BrowserImportInput = Parameters<DesktopBridge['importBrowserProfile']>[0];
@@ -24,6 +29,12 @@ export interface DesktopDashboardProps {
   selectedSnapshotId: string;
   selectedCrawlMode: CrawlMode;
   verbosityMode: VerbosityMode;
+  archiveSummary: GuiArchiveSummary | null;
+  archiveListing: GuiArchiveListing | null;
+  archiveRecordDetail: GuiArchiveRecordDetail | null;
+  selectedArchiveDataset: GuiArchiveDataset;
+  selectedArchiveRecordId: string | null;
+  archiveQuery: string;
   busyAction: string | null;
   statusMessage: string | null;
   errorMessage: string | null;
@@ -35,6 +46,9 @@ export interface DesktopDashboardProps {
   onSnapshotChange: (snapshotId: string) => void;
   onCrawlModeChange: (crawlMode: CrawlMode) => void;
   onVerbosityChange: (verbosityMode: VerbosityMode) => void;
+  onArchiveDatasetChange: (dataset: GuiArchiveDataset) => void;
+  onArchiveQueryChange: (query: string) => void;
+  onSelectArchiveRecord: (recordId: string) => void;
   onSelectWorkspace: (workspaceRoot: string) => Promise<unknown>;
   onRefresh: () => Promise<unknown>;
   onLoginProfile: (input: CredentialLoginInput) => Promise<unknown>;
@@ -49,6 +63,7 @@ export interface DesktopDashboardProps {
   ) => Promise<unknown>;
   onStartMirrorPreview: () => Promise<unknown>;
   onStopMirrorPreview: (jobId: string) => Promise<unknown>;
+  onOpenPath: (path: string) => Promise<unknown>;
   onOpenExternal: (url: string) => Promise<unknown>;
 }
 
@@ -61,6 +76,12 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
     selectedSnapshotId,
     selectedCrawlMode,
     verbosityMode,
+    archiveSummary,
+    archiveListing,
+    archiveRecordDetail,
+    selectedArchiveDataset,
+    selectedArchiveRecordId,
+    archiveQuery,
     busyAction,
     statusMessage,
     errorMessage,
@@ -72,6 +93,9 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
     onSnapshotChange,
     onCrawlModeChange,
     onVerbosityChange,
+    onArchiveDatasetChange,
+    onArchiveQueryChange,
+    onSelectArchiveRecord,
     onSelectWorkspace,
     onRefresh,
     onLoginProfile,
@@ -84,6 +108,7 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
     onRunSnapshotJob,
     onStartMirrorPreview,
     onStopMirrorPreview,
+    onOpenPath,
     onOpenExternal,
   } = props;
 
@@ -365,6 +390,26 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
               </div>
             </div>
           </section>
+
+          <DataExplorerPanel
+            snapshotId={selectedSnapshotId}
+            normalizedRoot={archiveSummary?.normalizedRoot}
+            mirrorRoot={archiveSummary?.mirrorRoot}
+            mirrorServeCommand={archiveSummary?.mirrorServeCommand}
+            mirrorUrl={archiveSummary?.mirrorUrl}
+            datasetSummaries={archiveSummary?.datasets ?? []}
+            selectedDataset={selectedArchiveDataset}
+            selectedRecordId={selectedArchiveRecordId}
+            archiveQuery={archiveQuery}
+            listing={archiveListing}
+            detail={archiveRecordDetail}
+            previewUrl={previewUrl}
+            onDatasetChange={onArchiveDatasetChange}
+            onArchiveQueryChange={onArchiveQueryChange}
+            onSelectRecord={onSelectArchiveRecord}
+            onOpenPath={onOpenPath}
+            onOpenExternal={onOpenExternal}
+          />
 
           {showAdvanced ? (
             <section className="panel advanced-panel">

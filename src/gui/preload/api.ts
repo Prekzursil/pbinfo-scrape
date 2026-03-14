@@ -37,6 +37,17 @@ export function buildDesktopBridge(adapter: DesktopBridgeAdapter) {
         return adapter.invoke('desktop:profiles:delete', { profileId });
       },
     },
+    archive: {
+      async summary(payload?: unknown) {
+        return adapter.invoke('desktop:archive:summary', payload);
+      },
+      async list(payload: unknown) {
+        return adapter.invoke('desktop:archive:list', payload);
+      },
+      async detail(payload: unknown) {
+        return adapter.invoke('desktop:archive:detail', payload);
+      },
+    },
     crawl: {
       async status(payload?: unknown) {
         return adapter.invoke('desktop:crawl:status', payload);
@@ -73,6 +84,11 @@ export function buildDesktopBridge(adapter: DesktopBridgeAdapter) {
     external: {
       async open(url: string) {
         return adapter.invoke('desktop:external:open', { url });
+      },
+    },
+    paths: {
+      async open(path: string) {
+        return adapter.invoke('desktop:path:open', { path });
       },
     },
     events: {
@@ -141,6 +157,21 @@ export function createDesktopBridge(adapter: DesktopBridgeAdapter): DesktopBridg
         ReturnType<DesktopBridge['deleteProfile']>
       >;
     },
+    async getArchiveExplorerSummary(snapshotId) {
+      return (await nested.archive.summary(
+        snapshotId ? { snapshotId } : {},
+      )) as Awaited<ReturnType<DesktopBridge['getArchiveExplorerSummary']>>;
+    },
+    async listArchiveExplorerRecords(input) {
+      return (await nested.archive.list(input)) as Awaited<
+        ReturnType<DesktopBridge['listArchiveExplorerRecords']>
+      >;
+    },
+    async getArchiveExplorerRecord(input) {
+      return (await nested.archive.detail(input)) as Awaited<
+        ReturnType<DesktopBridge['getArchiveExplorerRecord']>
+      >;
+    },
     async getCrawlStatus(snapshotId) {
       return (await nested.crawl.status(
         snapshotId ? { snapshotId } : {},
@@ -182,6 +213,9 @@ export function createDesktopBridge(adapter: DesktopBridgeAdapter): DesktopBridg
       return (await nested.mirror.stopPreview(jobId)) as Awaited<
         ReturnType<DesktopBridge['stopMirrorPreview']>
       >;
+    },
+    async openPath(path) {
+      await nested.paths.open(path);
     },
     async openExternal(url) {
       await nested.external.open(url);

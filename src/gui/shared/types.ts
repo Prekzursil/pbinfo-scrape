@@ -42,6 +42,12 @@ export const guiNotificationPreferenceSchema = z
 
 export const guiVerbosityModeSchema = z.enum(['normal', 'verbose', 'raw']);
 export const guiCrawlModeSchema = z.enum(['incremental', 'fresh']);
+export const guiArchiveDatasetSchema = z.enum([
+  'problems',
+  'evaluations',
+  'rankings',
+  'mirror-routes',
+]);
 
 export const desktopPreferencesRecordSchema = z
   .object({
@@ -127,6 +133,63 @@ export const guiCrawlStatusSchema = z
   })
   .strict();
 
+export const guiArchiveDatasetSummarySchema = z
+  .object({
+    dataset: guiArchiveDatasetSchema,
+    label: z.string().min(1),
+    count: z.number().int().nonnegative(),
+    directoryPath: z.string().min(1),
+    description: z.string().min(1),
+  })
+  .strict();
+
+export const guiArchiveSummarySchema = z
+  .object({
+    snapshotId: z.string().min(1),
+    normalizedRoot: z.string().min(1),
+    mirrorRoot: z.string().min(1),
+    mirrorServeCommand: z.string().min(1),
+    mirrorUrl: z.string().min(1),
+    datasets: z.array(guiArchiveDatasetSummarySchema),
+  })
+  .strict();
+
+export const guiArchiveRecordSummarySchema = z
+  .object({
+    dataset: guiArchiveDatasetSchema,
+    recordId: z.string().min(1),
+    title: z.string().min(1),
+    subtitle: z.string().min(1).optional(),
+    description: z.string().min(1).optional(),
+    filePath: z.string().min(1),
+    mirrorRoute: z.string().min(1).optional(),
+  })
+  .strict();
+
+export const guiArchiveListingSchema = z
+  .object({
+    snapshotId: z.string().min(1),
+    dataset: guiArchiveDatasetSchema,
+    totalCount: z.number().int().nonnegative(),
+    offset: z.number().int().nonnegative(),
+    limit: z.number().int().positive(),
+    items: z.array(guiArchiveRecordSummarySchema),
+  })
+  .strict();
+
+export const guiArchiveRecordDetailSchema = z
+  .object({
+    snapshotId: z.string().min(1),
+    dataset: guiArchiveDatasetSchema,
+    recordId: z.string().min(1),
+    title: z.string().min(1),
+    subtitle: z.string().min(1).optional(),
+    filePath: z.string().min(1),
+    mirrorRoute: z.string().min(1).optional(),
+    payload: z.unknown(),
+  })
+  .strict();
+
 export const guiJobEventSchema = z
   .object({
     timestamp: z.string().datetime(),
@@ -162,6 +225,7 @@ export type GuiNotificationPreference = z.infer<
 >;
 export type GuiVerbosityMode = z.infer<typeof guiVerbosityModeSchema>;
 export type GuiCrawlMode = z.infer<typeof guiCrawlModeSchema>;
+export type GuiArchiveDataset = z.infer<typeof guiArchiveDatasetSchema>;
 export type DesktopPreferencesRecord = z.infer<
   typeof desktopPreferencesRecordSchema
 >;
@@ -172,5 +236,16 @@ export type GuiJobStatus = z.infer<typeof guiJobStatusSchema>;
 export type GuiJobCounters = z.infer<typeof guiJobCountersSchema>;
 export type GuiCrawlFailure = z.infer<typeof guiCrawlFailureSchema>;
 export type GuiCrawlStatus = z.infer<typeof guiCrawlStatusSchema>;
+export type GuiArchiveDatasetSummary = z.infer<
+  typeof guiArchiveDatasetSummarySchema
+>;
+export type GuiArchiveSummary = z.infer<typeof guiArchiveSummarySchema>;
+export type GuiArchiveRecordSummary = z.infer<
+  typeof guiArchiveRecordSummarySchema
+>;
+export type GuiArchiveListing = z.infer<typeof guiArchiveListingSchema>;
+export type GuiArchiveRecordDetail = z.infer<
+  typeof guiArchiveRecordDetailSchema
+>;
 export type GuiJobEvent = z.infer<typeof guiJobEventSchema>;
 export type GuiJobRecord = z.infer<typeof guiJobRecordSchema>;

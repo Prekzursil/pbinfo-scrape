@@ -1,10 +1,14 @@
 import '@testing-library/jest-dom/vitest';
 
-import { fireEvent, render, screen } from '@testing-library/react';
-import { expect, test, vi } from 'vitest';
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { afterEach, expect, test, vi } from 'vitest';
 
 import { App } from '../../src/gui/renderer/app.js';
 import type { DesktopBridge } from '../../src/gui/shared/bridge.js';
+
+afterEach(() => {
+  cleanup();
+});
 
 test('renders the desktop dashboard summary and operator controls from bridge data', { timeout: 15_000 }, async () => {
   const harness = createBridgeHarness();
@@ -26,6 +30,10 @@ test('renders the desktop dashboard summary and operator controls from bridge da
   expect((await screen.findAllByRole('button', { name: 'Verbose' })).length).toBeGreaterThanOrEqual(1);
   expect((await screen.findAllByRole('button', { name: 'Raw' })).length).toBeGreaterThanOrEqual(1);
   expect(await screen.findByRole('button', { name: 'Open in browser' })).toBeInTheDocument();
+  expect(await screen.findByRole('heading', { name: 'Data Explorer' })).toBeInTheDocument();
+  expect(await screen.findByRole('button', { name: 'Open normalized archive folder' })).toBeInTheDocument();
+  expect(await screen.findByRole('button', { name: 'Open mirror output folder' })).toBeInTheDocument();
+  expect((await screen.findAllByText('#3171 waterreserve')).length).toBeGreaterThanOrEqual(1);
   expect(await screen.findByText(/publish --snapshot acceptance-20260310b/)).toBeInTheDocument();
   expect(screen.getByTitle('Mirror preview')).toBeInTheDocument();
 });
@@ -50,6 +58,17 @@ test('triggers desktop actions and expands the log stream for raw verbosity', { 
   fireEvent.click((await screen.findAllByRole('button', { name: 'Raw' }))[0]!);
   expect((await screen.findAllByText(/debug snapshot trace/i)).length).toBeGreaterThanOrEqual(1);
   expect(await screen.findByText(/"processed": 25/)).toBeInTheDocument();
+  const datasetSearchInput = (await screen.findAllByLabelText('Search current dataset'))[0]!;
+  fireEvent.change(datasetSearchInput, {
+    target: {
+      value: 'waterreserve',
+    },
+  });
+  expect((await screen.findAllByText('/probleme/3171/problem-3171')).length).toBeGreaterThanOrEqual(1);
+  fireEvent.click(await screen.findByRole('button', { name: 'Open normalized archive folder' }));
+  expect(harness.openPath).toHaveBeenCalledWith(
+    'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized',
+  );
   fireEvent.click(screen.getAllByRole('button', { name: 'Advanced Settings' })[0]!);
   expect(await screen.findByRole('heading', { name: 'Advanced Settings' })).toBeInTheDocument();
 });
@@ -57,6 +76,7 @@ test('triggers desktop actions and expands the log stream for raw verbosity', { 
 function createBridgeHarness(): {
   bridge: DesktopBridge;
   startJob: ReturnType<typeof vi.fn>;
+  openPath: ReturnType<typeof vi.fn>;
   openExternal: ReturnType<typeof vi.fn>;
 } {
   const startJob = vi.fn(async (input) => ({
@@ -65,6 +85,7 @@ function createBridgeHarness(): {
     detail: input.detail,
   }));
   const openExternal = vi.fn(async () => undefined);
+  const openPath = vi.fn(async () => undefined);
   const bridge = {
     getDesktopPreferences: vi.fn(async () => ({
       verbosityMode: 'normal' as const,
@@ -196,6 +217,106 @@ function createBridgeHarness(): {
       },
       createdAt: '2026-03-10T12:00:00.000Z',
       updatedAt: '2026-03-10T12:00:00.000Z',
+    })),
+    getArchiveExplorerSummary: vi.fn(async () => ({
+      snapshotId: 'acceptance-20260310b',
+      normalizedRoot: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized',
+      mirrorRoot: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/mirror',
+      mirrorServeCommand: 'npm run cli -- serve --snapshot acceptance-20260310b --port 4173',
+      mirrorUrl: 'http://127.0.0.1:4173/',
+      datasets: [
+        {
+          dataset: 'problems' as const,
+          label: 'Problems',
+          count: 1,
+          directoryPath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problems',
+          description: 'Structured PBInfo problem records with sections, examples, constraints, and official-source metadata.',
+        },
+        {
+          dataset: 'evaluations' as const,
+          label: 'Evaluations',
+          count: 0,
+          directoryPath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/evaluations',
+          description: 'Submission and evaluation records with score, verdict, tests, and compile logs when archived.',
+        },
+        {
+          dataset: 'rankings' as const,
+          label: 'Rankings',
+          count: 1,
+          directoryPath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/rankings',
+          description: 'Canonical best-user and best-official language rankings derived from normalized evaluation sources.',
+        },
+        {
+          dataset: 'mirror-routes' as const,
+          label: 'Mirror Routes',
+          count: 1,
+          directoryPath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/routes',
+          description: 'Route records that drive local mirror replay and link archived entities back into the offline viewer.',
+        },
+      ],
+    })),
+    listArchiveExplorerRecords: vi.fn(async (input) => {
+      switch (input.dataset) {
+        case 'problems':
+          return {
+            snapshotId: 'acceptance-20260310b',
+            dataset: 'problems' as const,
+            totalCount: 1,
+            offset: 0,
+            limit: 24,
+            items: [
+              {
+                dataset: 'problems' as const,
+                recordId: '3171',
+                title: '#3171 waterreserve',
+                subtitle: '/probleme/3171/problem-3171',
+                description: '1 ≤ n ≤ 1.000.000',
+                filePath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problems/problem-3171.json',
+                mirrorRoute: '/probleme/3171/problem-3171',
+              },
+            ],
+          };
+        case 'rankings':
+          return {
+            snapshotId: 'acceptance-20260310b',
+            dataset: 'rankings' as const,
+            totalCount: 1,
+            offset: 0,
+            limit: 24,
+            items: [
+              {
+                dataset: 'rankings' as const,
+                recordId: '3716',
+                title: 'Problem #3716',
+                subtitle: 'Best user languages: c, cpp, py3',
+                description: 'Best user overall evaluation: 63332367',
+                filePath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/rankings/best-submissions.json',
+              },
+            ],
+          };
+        default:
+          return {
+            snapshotId: 'acceptance-20260310b',
+            dataset: input.dataset,
+            totalCount: 0,
+            offset: 0,
+            limit: 24,
+            items: [],
+          };
+      }
+    }),
+    getArchiveExplorerRecord: vi.fn(async () => ({
+      snapshotId: 'acceptance-20260310b',
+      dataset: 'problems' as const,
+      recordId: '3171',
+      title: '#3171 waterreserve',
+      subtitle: '/probleme/3171/problem-3171',
+      filePath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problems/problem-3171.json',
+      mirrorRoute: '/probleme/3171/problem-3171',
+      payload: {
+        id: 3171,
+        name: 'waterreserve',
+      },
     })),
     getCrawlStatus: vi.fn(async () => ({
       snapshotId: 'acceptance-20260310b',
@@ -351,11 +472,13 @@ function createBridgeHarness(): {
       baseUrl: 'http://127.0.0.1:43111',
     })),
     stopMirrorPreview: vi.fn(async () => buildJob('mirror-serve', 'completed')),
+    openPath,
     openExternal,
   } as unknown as DesktopBridge;
 
   return {
     startJob,
+    openPath,
     openExternal,
     bridge,
   };

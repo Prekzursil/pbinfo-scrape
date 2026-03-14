@@ -382,6 +382,136 @@ describe('desktop controller', () => {
     ]);
   });
 
+  test('exposes archive explorer summaries, listings, and record details from the canonical snapshot', async () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-desktop-explorer-'));
+    tempDirs.push(workspaceRoot);
+    initializeWorkspaceState(workspaceRoot, {
+      now: new Date('2026-03-10T12:00:00.000Z'),
+    });
+
+    const config = loadLocalConfig(workspaceRoot);
+    const snapshot = prepareSnapshot(config, {
+      snapshotId: 'acceptance-20260310b',
+      scope: 'all',
+      now: new Date('2026-03-10T00:00:00.000Z'),
+    });
+    mkdirSync(join(snapshot.normalizedRoot, 'problems'), { recursive: true });
+    mkdirSync(join(snapshot.normalizedRoot, 'rankings', 'problems'), {
+      recursive: true,
+    });
+    mkdirSync(join(snapshot.normalizedRoot, 'routes'), { recursive: true });
+    mkdirSync(join(snapshot.mirrorRoot), { recursive: true });
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'problems', 'problem-3171.json'),
+      JSON.stringify(
+        {
+          id: 3171,
+          slug: 'waterreserve',
+          name: 'waterreserve',
+          canonicalUrl: 'https://www.pbinfo.ro/probleme/3171/waterreserve',
+          categoryChain: [],
+          tags: [],
+          sections: [],
+          examples: [],
+          constraints: [],
+          editorialAvailability: 'unknown',
+          officialSolutions: {},
+          visibleTests: [],
+          linkedAssets: [],
+          metadata: {},
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'rankings', 'best-submissions.json'),
+      JSON.stringify(
+        {
+          generatedAt: '2026-03-10T12:00:00.000Z',
+          problems: [
+            {
+              problemId: 3171,
+              bestUserOverallEvaluationId: 63332367,
+              bestUserPerLanguage: {
+                cpp: 63332367,
+              },
+              bestOfficialPerLanguage: {},
+              orderedUserEvaluationIds: [63332367],
+            },
+          ],
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+    writeFileSync(
+      join(snapshot.mirrorRoot, 'routes.json'),
+      JSON.stringify(
+        [
+          {
+            snapshotId: snapshot.snapshotId,
+            route: '/probleme/3171/waterreserve',
+            sourceUrl: 'https://www.pbinfo.ro/probleme/3171/waterreserve',
+            sourceFile: 'page-https-www-pbinfo-ro-probleme-3171-waterreserve.html',
+            template: 'problem',
+            entityKey: 'problem:3171',
+          },
+        ],
+        null,
+        2,
+      ),
+      'utf8',
+    );
+
+    const controller = createDesktopController(workspaceRoot);
+    const summary = controller.getArchiveExplorerSummary(snapshot.snapshotId);
+    const listing = controller.listArchiveExplorerRecords({
+      snapshotId: snapshot.snapshotId,
+      dataset: 'problems',
+      query: 'water',
+    });
+    const detail = controller.getArchiveExplorerRecord({
+      snapshotId: snapshot.snapshotId,
+      dataset: 'problems',
+      recordId: '3171',
+    });
+
+    expect(summary.normalizedRoot).toContain(
+      'archive\\snapshots\\acceptance-20260310b\\normalized',
+    );
+    expect(summary.datasets).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          dataset: 'problems',
+          count: 1,
+        }),
+        expect.objectContaining({
+          dataset: 'rankings',
+          count: 1,
+        }),
+      ]),
+    );
+    expect(listing.items).toEqual([
+      expect.objectContaining({
+        recordId: '3171',
+        title: '#3171 waterreserve',
+        mirrorRoute: '/probleme/3171/waterreserve',
+      }),
+    ]);
+    expect(detail).toEqual(
+      expect.objectContaining({
+        recordId: '3171',
+        mirrorRoute: '/probleme/3171/waterreserve',
+        payload: expect.objectContaining({
+          id: 3171,
+        }),
+      }),
+    );
+  });
+
   test('emits a stalled crawl warning when a chunk processes no work while pending items remain', async () => {
     const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-desktop-stalled-zero-'));
     tempDirs.push(workspaceRoot);

@@ -23,6 +23,7 @@ describe('publishWorkspace', () => {
     tempDirs.push(workspaceRoot);
 
     writeFileSync(join(workspaceRoot, 'README.md'), '# PBInfo\n', 'utf8');
+    writeFileSync(join(workspaceRoot, 'SECURITY.md'), '# Security\n', 'utf8');
     writeFileSync(join(workspaceRoot, 'package.json'), '{"name":"pbinfo-scrape"}\n', 'utf8');
     writeFileSync(join(workspaceRoot, 'package-lock.json'), '{}\n', 'utf8');
     writeFileSync(join(workspaceRoot, 'tsconfig.json'), '{}\n', 'utf8');
@@ -87,6 +88,7 @@ describe('publishWorkspace', () => {
         'archive',
         'scripts',
         'assets',
+        'SECURITY.md',
         'electron-builder.json',
         'tsconfig.desktop.json',
         'vite.desktop.config.ts',
@@ -106,6 +108,7 @@ describe('publishWorkspace', () => {
         '--',
         'scripts',
         'assets',
+        'SECURITY.md',
         'electron-builder.json',
         'tsconfig.desktop.json',
         'vite.desktop.config.ts',

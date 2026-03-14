@@ -1,10 +1,15 @@
 import { randomUUID } from 'node:crypto';
 
 import {
+  type GuiArchiveDetailInput,
+  type GuiArchiveListInput,
   guiCrawlJobDetailSchema,
   guiJobStartInputSchema,
 } from '../shared/contracts.js';
 import type {
+  GuiArchiveListing,
+  GuiArchiveRecordDetail,
+  GuiArchiveSummary,
   GuiCrawlMode,
   GuiCrawlStatus,
   GuiJobEvent,
@@ -12,6 +17,11 @@ import type {
   GuiProfileRecord,
   GuiWorkspaceState,
 } from '../shared/types.js';
+import {
+  getArchiveExplorerSummary,
+  listArchiveExplorerRecords,
+  readArchiveExplorerRecord,
+} from './archive-data-explorer.js';
 import {
   appendGuiJobEvent,
   createGuiJob,
@@ -62,6 +72,9 @@ export interface DesktopControllerDependencies {
     baseUrl: string;
     sessionCookiesPath: string;
   }) => PbinfoAuthClient;
+  getArchiveExplorerSummary: typeof getArchiveExplorerSummary;
+  listArchiveExplorerRecords: typeof listArchiveExplorerRecords;
+  readArchiveExplorerRecord: typeof readArchiveExplorerRecord;
   loadLocalConfig: typeof loadLocalConfig;
   notificationService: NotificationService;
 }
@@ -146,6 +159,9 @@ export interface DesktopController {
   listJobs(): GuiJobRecord[];
   getJob(jobId: string): GuiJobRecord;
   listJobEvents(jobId: string, limit?: number): GuiJobEvent[];
+  getArchiveExplorerSummary(snapshotId?: string): GuiArchiveSummary;
+  listArchiveExplorerRecords(input: GuiArchiveListInput): GuiArchiveListing;
+  getArchiveExplorerRecord(input: GuiArchiveDetailInput): GuiArchiveRecordDetail;
   getCrawlStatus(snapshotId?: string): GuiCrawlStatus | null;
   recoverInterruptedJobs(options?: { now?: Date }): GuiJobRecord[];
   pauseJob(jobId: string, options?: { now?: Date }): GuiJobRecord;
@@ -172,6 +188,9 @@ export function createDesktopController(
     startMirrorServer,
     importBrowserCookies,
     createAuthClient: (options) => new PbinfoAuthClient(options),
+    getArchiveExplorerSummary,
+    listArchiveExplorerRecords,
+    readArchiveExplorerRecord,
     loadLocalConfig,
     notificationService: noopNotificationService,
     ...overrides,
@@ -189,6 +208,20 @@ export function createDesktopController(
 
     listJobEvents(jobId, limit) {
       return readGuiJobEvents(workspaceRoot, jobId, limit);
+    },
+
+    getArchiveExplorerSummary(snapshotId) {
+      return dependencies.getArchiveExplorerSummary(workspaceRoot, {
+        snapshotId,
+      });
+    },
+
+    listArchiveExplorerRecords(input) {
+      return dependencies.listArchiveExplorerRecords(workspaceRoot, input);
+    },
+
+    getArchiveExplorerRecord(input) {
+      return dependencies.readArchiveExplorerRecord(workspaceRoot, input);
     },
 
     getCrawlStatus(snapshotId) {

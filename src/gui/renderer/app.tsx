@@ -2,6 +2,10 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import type { DesktopBridge } from '../shared/bridge.js';
 import type {
+  GuiArchiveDataset,
+  GuiArchiveListing,
+  GuiArchiveRecordDetail,
+  GuiArchiveSummary,
   GuiCrawlMode,
   GuiCrawlStatus,
   GuiVerbosityMode,
@@ -12,6 +16,7 @@ import type {
 import { DesktopDashboard } from './dashboard.js';
 
 const CRAWL_CHUNK_SIZE = 25;
+const ARCHIVE_LIST_LIMIT = 24;
 const REFRESH_INTERVAL_MS = 3_000;
 const CONTINUE_CRAWL_DELAY_MS = 750;
 
@@ -30,6 +35,14 @@ export function App({ desktop }: AppProps) {
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [selectedSnapshotId, setSelectedSnapshotId] = useState('acceptance-20260310b');
   const [crawlMode, setCrawlMode] = useState<GuiCrawlMode>('incremental');
+  const [selectedArchiveDataset, setSelectedArchiveDataset] =
+    useState<GuiArchiveDataset>('problems');
+  const [archiveQuery, setArchiveQuery] = useState('');
+  const [archiveSummary, setArchiveSummary] = useState<GuiArchiveSummary | null>(null);
+  const [archiveListing, setArchiveListing] = useState<GuiArchiveListing | null>(null);
+  const [selectedArchiveRecordId, setSelectedArchiveRecordId] = useState<string | null>(null);
+  const [archiveRecordDetail, setArchiveRecordDetail] =
+    useState<GuiArchiveRecordDetail | null>(null);
   const [verbosityMode, setVerbosityMode] = useState<GuiVerbosityMode>('normal');
   const [busyAction, setBusyAction] = useState<string | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
@@ -75,6 +88,9 @@ export function App({ desktop }: AppProps) {
         setJobs([]);
         setCrawlStatus(null);
         setJobEvents([]);
+        setArchiveSummary(null);
+        setArchiveListing(null);
+        setArchiveRecordDetail(null);
         return;
       }
 
@@ -88,6 +104,9 @@ export function App({ desktop }: AppProps) {
         setJobs([]);
         setCrawlStatus(null);
         setJobEvents([]);
+        setArchiveSummary(null);
+        setArchiveListing(null);
+        setArchiveRecordDetail(null);
         return;
       }
 
@@ -151,6 +170,108 @@ export function App({ desktop }: AppProps) {
       window.clearInterval(timer);
     };
   }, [bridge, refresh, workspaceState]);
+
+  useEffect(() => {
+    if (!bridge || !workspaceState) {
+      setArchiveSummary(null);
+      return;
+    }
+
+    let cancelled = false;
+    void (async () => {
+      try {
+        const summary = await bridge.getArchiveExplorerSummary(selectedSnapshotId);
+        if (!cancelled) {
+          setArchiveSummary(summary);
+        }
+      } catch (error) {
+        if (!cancelled) {
+          setArchiveSummary(null);
+          setErrorMessage(toMessage(error));
+        }
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [bridge, selectedSnapshotId, workspaceState]);
+
+  useEffect(() => {
+    if (!bridge || !workspaceState) {
+      setArchiveListing(null);
+      setArchiveRecordDetail(null);
+      return;
+    }
+
+    let cancelled = false;
+    void (async () => {
+      try {
+        const listing = await bridge.listArchiveExplorerRecords({
+          snapshotId: selectedSnapshotId,
+          dataset: selectedArchiveDataset,
+          query: archiveQuery || undefined,
+          limit: ARCHIVE_LIST_LIMIT,
+        });
+        if (cancelled) {
+          return;
+        }
+        setArchiveListing(listing);
+        setSelectedArchiveRecordId((current) => {
+          if (current && listing.items.some((item) => item.recordId === current)) {
+            return current;
+          }
+          return listing.items[0]?.recordId ?? null;
+        });
+      } catch (error) {
+        if (!cancelled) {
+          setArchiveListing(null);
+          setArchiveRecordDetail(null);
+          setErrorMessage(toMessage(error));
+        }
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [archiveQuery, bridge, selectedArchiveDataset, selectedSnapshotId, workspaceState]);
+
+  useEffect(() => {
+    if (!bridge || !workspaceState || !selectedArchiveRecordId) {
+      setArchiveRecordDetail(null);
+      return;
+    }
+
+    let cancelled = false;
+    void (async () => {
+      try {
+        const detail = await bridge.getArchiveExplorerRecord({
+          snapshotId: selectedSnapshotId,
+          dataset: selectedArchiveDataset,
+          recordId: selectedArchiveRecordId,
+        });
+        if (!cancelled) {
+          setArchiveRecordDetail(detail);
+        }
+      } catch (error) {
+        if (!cancelled) {
+          setArchiveRecordDetail(null);
+          setErrorMessage(toMessage(error));
+        }
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [
+    bridge,
+    selectedArchiveDataset,
+    selectedArchiveRecordId,
+    selectedSnapshotId,
+    workspaceState,
+  ]);
 
   const activeCrawlJob = useMemo(
     () =>
@@ -267,6 +388,21 @@ export function App({ desktop }: AppProps) {
       onSnapshotChange={(value) => setSelectedSnapshotId(value)}
       onCrawlModeChange={(value) => setCrawlMode(value)}
       onVerbosityChange={handleVerbosityChange}
+      archiveSummary={archiveSummary}
+      archiveListing={archiveListing}
+      archiveRecordDetail={archiveRecordDetail}
+      selectedArchiveDataset={selectedArchiveDataset}
+      selectedArchiveRecordId={selectedArchiveRecordId}
+      archiveQuery={archiveQuery}
+      onArchiveDatasetChange={(dataset) => {
+        setSelectedArchiveDataset(dataset);
+        setSelectedArchiveRecordId(null);
+      }}
+      onArchiveQueryChange={(query) => {
+        setArchiveQuery(query);
+        setSelectedArchiveRecordId(null);
+      }}
+      onSelectArchiveRecord={(recordId) => setSelectedArchiveRecordId(recordId)}
       onSelectWorkspace={(workspaceRoot) =>
         runAction(
           'select-workspace',
@@ -412,6 +548,11 @@ export function App({ desktop }: AppProps) {
       onOpenExternal={(url) =>
         runAction('open-external', async () => {
           await bridge?.openExternal(url);
+        })
+      }
+      onOpenPath={(path) =>
+        runAction('open-path', async () => {
+          await bridge?.openPath(path);
         })
       }
       publishCommand={buildPublishCommand(

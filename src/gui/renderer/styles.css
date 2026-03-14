@@ -258,6 +258,89 @@ button:disabled { cursor: not-allowed; opacity: 0.58; }
 .mirror-placeholder { min-height: 260px; align-content: center; }
 .publish-card { margin-top: 14px; }
 .bootstrap-panel { max-width: 780px; }
+.archive-location-grid,
+.data-explorer-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.archive-path {
+  margin: 0;
+}
+.dataset-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 18px 0 10px;
+}
+.dataset-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(46, 59, 76, 0.14);
+  background: rgba(248, 242, 234, 0.92);
+  color: var(--pac-ink);
+  cursor: pointer;
+}
+.dataset-chip strong {
+  font-size: 0.92rem;
+}
+.dataset-chip-active {
+  background: linear-gradient(140deg, rgba(25, 37, 51, 0.97), rgba(53, 69, 89, 0.95));
+  color: #fff8ef;
+  border-color: rgba(25, 37, 51, 0.5);
+}
+.data-explorer-summary {
+  margin-top: 0;
+}
+.data-list-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 12px;
+}
+.data-record-list {
+  display: grid;
+  gap: 10px;
+  max-height: 540px;
+  overflow: auto;
+}
+.data-record-button {
+  display: grid;
+  gap: 4px;
+  text-align: left;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(46, 59, 76, 0.1);
+  background: rgba(246, 250, 251, 0.9);
+  color: inherit;
+  cursor: pointer;
+}
+.data-record-button span,
+.data-record-button small {
+  color: #59697d;
+}
+.data-record-button-active {
+  border-color: rgba(185, 125, 48, 0.45);
+  background: rgba(255, 247, 233, 0.98);
+  box-shadow: 0 8px 22px rgba(185, 125, 48, 0.14);
+}
+.compact-panel-heading {
+  margin-bottom: 10px;
+}
+.data-json-viewer {
+  margin: 14px 0 0;
+  padding: 14px;
+  max-height: 560px;
+  overflow: auto;
+  border-radius: 18px;
+  background: rgba(25, 37, 51, 0.08);
+  font-family: "IBM Plex Mono", "Cascadia Mono", "Cascadia Code", monospace;
+  font-size: 0.82rem;
+}
 
 @media (max-width: 1180px) {
   .hero-card,
@@ -266,7 +349,9 @@ button:disabled { cursor: not-allowed; opacity: 0.58; }
   .advanced-grid,
   .snapshot-grid,
   .auth-grid,
-  .action-grid {
+  .action-grid,
+  .archive-location-grid,
+  .data-explorer-grid {
     grid-template-columns: 1fr;
   }
 }

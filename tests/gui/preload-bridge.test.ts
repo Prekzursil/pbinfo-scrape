@@ -79,6 +79,64 @@ describe('desktop preload bridge', () => {
     });
   });
 
+  test('forwards archive explorer and path-open requests over dedicated channels', async () => {
+    const invoke = vi.fn(async (channel: string, payload?: unknown) => ({
+      channel,
+      payload,
+    }));
+    const bridge = buildDesktopBridge({
+      invoke,
+      on: vi.fn(),
+      off: vi.fn(),
+    });
+
+    const summary = await bridge.archive.summary({
+      snapshotId: 'acceptance-20260310b',
+    });
+    const listing = await bridge.archive.list({
+      snapshotId: 'acceptance-20260310b',
+      dataset: 'problems',
+      query: 'waterreserve',
+    });
+    const detail = await bridge.archive.detail({
+      snapshotId: 'acceptance-20260310b',
+      dataset: 'problems',
+      recordId: '3171',
+    });
+    const openedPath = await bridge.paths.open(
+      'C:/archive/snapshots/acceptance-20260310b/normalized',
+    );
+
+    expect(summary).toEqual({
+      channel: 'desktop:archive:summary',
+      payload: {
+        snapshotId: 'acceptance-20260310b',
+      },
+    });
+    expect(listing).toEqual({
+      channel: 'desktop:archive:list',
+      payload: {
+        snapshotId: 'acceptance-20260310b',
+        dataset: 'problems',
+        query: 'waterreserve',
+      },
+    });
+    expect(detail).toEqual({
+      channel: 'desktop:archive:detail',
+      payload: {
+        snapshotId: 'acceptance-20260310b',
+        dataset: 'problems',
+        recordId: '3171',
+      },
+    });
+    expect(openedPath).toEqual({
+      channel: 'desktop:path:open',
+      payload: {
+        path: 'C:/archive/snapshots/acceptance-20260310b/normalized',
+      },
+    });
+  });
+
   test('forwards desktop preference reads and verbosity updates over dedicated channels', async () => {
     const invoke = vi.fn(async (channel: string, payload?: unknown) => ({
       channel,

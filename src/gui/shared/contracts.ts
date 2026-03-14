@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 import {
+  guiArchiveDatasetSchema,
   guiCrawlModeSchema,
   guiVerbosityModeSchema,
   guiJobKindSchema,
@@ -81,9 +82,39 @@ export const guiJobEventsInputSchema = z
   })
   .strict();
 
+export const guiArchiveSummaryInputSchema = z
+  .object({
+    snapshotId: z.string().min(1).optional(),
+  })
+  .strict();
+
+export const guiArchiveListInputSchema = z
+  .object({
+    snapshotId: z.string().min(1).optional(),
+    dataset: guiArchiveDatasetSchema,
+    query: z.string().min(1).optional(),
+    offset: z.number().int().nonnegative().optional(),
+    limit: z.number().int().positive().max(100).optional(),
+  })
+  .strict();
+
+export const guiArchiveDetailInputSchema = z
+  .object({
+    snapshotId: z.string().min(1).optional(),
+    dataset: guiArchiveDatasetSchema,
+    recordId: z.string().min(1),
+  })
+  .strict();
+
 export const guiOpenExternalInputSchema = z
   .object({
     url: z.string().url(),
+  })
+  .strict();
+
+export const guiOpenPathInputSchema = z
+  .object({
+    path: z.string().min(1),
   })
   .strict();
 
@@ -105,6 +136,9 @@ export type DesktopBrowserImportInput = z.infer<
 >;
 export type GuiJobStartInput = z.infer<typeof guiJobStartInputSchema>;
 export type GuiCrawlJobDetailInput = z.infer<typeof guiCrawlJobDetailSchema>;
+export type GuiArchiveSummaryInput = z.infer<typeof guiArchiveSummaryInputSchema>;
+export type GuiArchiveListInput = z.infer<typeof guiArchiveListInputSchema>;
+export type GuiArchiveDetailInput = z.infer<typeof guiArchiveDetailInputSchema>;
 export type DesktopPreferencesUpdateInput = z.infer<
   typeof desktopPreferencesUpdateSchema
 >;

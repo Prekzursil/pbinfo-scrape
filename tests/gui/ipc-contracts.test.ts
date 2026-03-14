@@ -1,11 +1,15 @@
 import { describe, expect, test } from 'vitest';
 
 import {
+  guiArchiveDetailInputSchema,
+  guiArchiveListInputSchema,
+  guiArchiveSummaryInputSchema,
   desktopPreferencesUpdateSchema,
   createProfileInputSchema,
   desktopBrowserImportInputSchema,
   desktopCredentialLoginInputSchema,
   guiJobStartInputSchema,
+  guiOpenPathInputSchema,
   guiWorkspaceSelectionSchema,
 } from '../../src/gui/shared/contracts.js';
 
@@ -137,5 +141,55 @@ describe('desktop ipc contracts', () => {
     });
 
     expect(badResult.success).toBe(false);
+  });
+
+  test('accepts archive explorer inputs for core datasets and rejects malformed payloads', () => {
+    expect(
+      guiArchiveSummaryInputSchema.parse({
+        snapshotId: 'acceptance-20260310b',
+      }),
+    ).toEqual({
+      snapshotId: 'acceptance-20260310b',
+    });
+
+    expect(
+      guiArchiveListInputSchema.parse({
+        snapshotId: 'acceptance-20260310b',
+        dataset: 'problems',
+        query: 'waterreserve',
+        limit: 24,
+      }),
+    ).toEqual(
+      expect.objectContaining({
+        dataset: 'problems',
+        query: 'waterreserve',
+      }),
+    );
+
+    expect(
+      guiArchiveDetailInputSchema.parse({
+        snapshotId: 'acceptance-20260310b',
+        dataset: 'mirror-routes',
+        recordId: '/probleme/3171/problem-3171',
+      }),
+    ).toEqual(
+      expect.objectContaining({
+        dataset: 'mirror-routes',
+      }),
+    );
+
+    expect(
+      guiOpenPathInputSchema.parse({
+        path: 'C:/archive/snapshots/acceptance-20260310b/normalized',
+      }),
+    ).toEqual({
+      path: 'C:/archive/snapshots/acceptance-20260310b/normalized',
+    });
+
+    expect(
+      guiArchiveListInputSchema.safeParse({
+        dataset: 'pages',
+      }).success,
+    ).toBe(false);
   });
 });

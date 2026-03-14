@@ -1,4 +1,8 @@
 import type {
+  GuiArchiveDataset,
+  GuiArchiveListing,
+  GuiArchiveRecordDetail,
+  GuiArchiveSummary,
   GuiCrawlMode,
   DesktopPreferencesRecord,
   GuiCrawlStatus,
@@ -60,6 +64,19 @@ export interface DesktopBridge {
   }) => Promise<GuiProfileRecord>;
   activateProfile: (profileId: string) => Promise<GuiWorkspaceState>;
   deleteProfile: (profileId: string) => Promise<GuiWorkspaceState>;
+  getArchiveExplorerSummary: (snapshotId?: string) => Promise<GuiArchiveSummary>;
+  listArchiveExplorerRecords: (input: {
+    snapshotId?: string;
+    dataset: GuiArchiveDataset;
+    query?: string;
+    offset?: number;
+    limit?: number;
+  }) => Promise<GuiArchiveListing>;
+  getArchiveExplorerRecord: (input: {
+    snapshotId?: string;
+    dataset: GuiArchiveDataset;
+    recordId: string;
+  }) => Promise<GuiArchiveRecordDetail>;
   getCrawlStatus: (snapshotId?: string) => Promise<GuiCrawlStatus | null>;
   listJobs: () => Promise<GuiJobRecord[]>;
   listJobEvents: (jobId: string, limit?: number) => Promise<GuiJobEvent[]>;
@@ -81,6 +98,7 @@ export interface DesktopBridge {
     baseUrl: string;
   }>;
   stopMirrorPreview: (jobId: string) => Promise<GuiJobRecord>;
+  openPath: (path: string) => Promise<void>;
   openExternal: (url: string) => Promise<void>;
 }
 

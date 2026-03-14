@@ -17,11 +17,15 @@ import {
   upsertWorkspaceProfile,
 } from './workspace-store.js';
 import {
+  guiArchiveDetailInputSchema,
+  guiArchiveListInputSchema,
+  guiArchiveSummaryInputSchema,
   desktopBrowserImportInputSchema,
   desktopCredentialLoginInputSchema,
   desktopPreferencesUpdateSchema,
   guiCrawlStatusInputSchema,
   guiJobEventsInputSchema,
+  guiOpenPathInputSchema,
   guiJobStartInputSchema,
   guiOpenExternalInputSchema,
   guiWorkspaceSelectionSchema,
@@ -91,6 +95,24 @@ export function registerDesktopIpc(options: RegisterDesktopIpcOptions): void {
     return deleteWorkspaceProfile(workspaceRoot, asProfileId(payload));
   });
 
+  options.ipcMain.handle('desktop:archive:summary', async (_event, payload) => {
+    assertController(controller);
+    const parsed = guiArchiveSummaryInputSchema.parse(payload ?? {});
+    return controller.getArchiveExplorerSummary(parsed.snapshotId);
+  });
+
+  options.ipcMain.handle('desktop:archive:list', async (_event, payload) => {
+    assertController(controller);
+    const parsed = guiArchiveListInputSchema.parse(payload);
+    return controller.listArchiveExplorerRecords(parsed);
+  });
+
+  options.ipcMain.handle('desktop:archive:detail', async (_event, payload) => {
+    assertController(controller);
+    const parsed = guiArchiveDetailInputSchema.parse(payload);
+    return controller.getArchiveExplorerRecord(parsed);
+  });
+
   options.ipcMain.handle('desktop:auth:login', async (_event, payload) => {
     assertController(controller);
     return controller.loginProfile(desktopCredentialLoginInputSchema.parse(payload));
@@ -120,6 +142,13 @@ export function registerDesktopIpc(options: RegisterDesktopIpcOptions): void {
   options.ipcMain.handle('desktop:external:open', async (_event, payload) => {
     const parsed = guiOpenExternalInputSchema.parse(payload);
     await shell.openExternal(parsed.url);
+  });
+  options.ipcMain.handle('desktop:path:open', async (_event, payload) => {
+    const parsed = guiOpenPathInputSchema.parse(payload);
+    const errorMessage = await shell.openPath(parsed.path);
+    if (errorMessage) {
+      throw new Error(errorMessage);
+    }
   });
 
   const registry = createDesktopIpcRegistry({

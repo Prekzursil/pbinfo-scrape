@@ -2,6 +2,10 @@
 
 PBInfo archival operator console for the `pbinfo-scrape` package: hybrid PBInfo archive crawling, ranking, encrypted auth-bundle workflow, localhost mirror serving, and a Windows desktop operator app.
 
+## Security
+
+This repository stays **private**. Supported reporting instructions live in [SECURITY.md](./SECURITY.md).
+
 ## Quick Start
 
 ```bash
@@ -87,6 +91,45 @@ Desktop build outputs:
 - `dist-desktop/gui/renderer/index.html`: built renderer shell loaded in production.
 - `release-desktop/Problem Archive Crawler 0.1.0.exe`: Windows x64 portable executable.
 
+## Where is the archive locally?
+
+There are two different local views of the archive:
+
+- **Mirror view**: browse the captured PBInfo pages like a local website.
+- **Normalized archive**: inspect the structured JSON records that power ranking, routing, and the desktop Data Explorer.
+
+### Fastest visual entry point
+
+- Start the desktop app and use the **Mirror Preview** panel to embed the local archive viewer.
+- Use the **Data Explorer** panel to inspect the core normalized datasets:
+  - Problems
+  - Evaluations
+  - Rankings
+  - Mirror Routes
+
+### Mirror on localhost
+
+```bash
+npm run cli -- serve --snapshot acceptance-20260310b --port 4173
+```
+
+Then open:
+
+- `http://127.0.0.1:4173/`
+
+### Structured archive on disk
+
+- Normalized records:
+  - `archive/snapshots/acceptance-20260310b/normalized/`
+- Rewritten mirror output:
+  - `archive/snapshots/acceptance-20260310b/mirror/`
+
+The desktop app now exposes direct actions for:
+
+- **Open normalized archive folder**
+- **Open mirror output folder**
+- **Open mirror in browser**
+
 ## Archive Layout
 
 - `archive/catalog.json`: current snapshot pointer plus retained snapshot/export metadata.
@@ -102,3 +145,4 @@ Desktop build outputs:
 - The crawler keeps snapshot-specific raw artifacts outside the tracked archive tree so the normalized archive can live in git while heavy raw payloads can be exported separately.
 - The mirror rewrites PBInfo page shells to local routes and local vendored assets. Analytics and ad scripts are stripped during mirror build.
 - `publish --snapshot <id> --release --upload-desktop-exe` only proceeds when the selected snapshot is canonical, drained, exported, secret-clean, and backed by the final `Problem Archive Crawler *.exe` release asset.
+- The desktop Data Explorer reads from the existing normalized archive outputs; it does not create a second archive format.
