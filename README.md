@@ -17,6 +17,16 @@ npm run verify:canonical-snapshot
 npm run cli -- --help
 ```
 
+## Latest private release
+
+- Current private tag: `v0.1.1`
+- Current packaged desktop executable after `npm run desktop:pack`:
+  - `release-desktop/Problem Archive Crawler 0.1.1.exe`
+- Current unpacked smoke target after `npm run desktop:pack`:
+  - `release-desktop/win-unpacked/Problem Archive Crawler.exe`
+- Release notes for the current build live in:
+  - [`docs/releases/v0.1.1.md`](./docs/releases/v0.1.1.md)
+
 ## Local Config
 
 Create `.local/pbinfo.local.json` for live runs. The `.local/` directory stays untracked; the repo-safe encrypted bundle flow writes to `archive/secrets/`.
@@ -95,7 +105,8 @@ Desktop build outputs:
 
 - `dist-desktop/gui/main/index.js`: Electron main entry used by the packaged app.
 - `dist-desktop/gui/renderer/index.html`: built renderer shell loaded in production.
-- `release-desktop/Problem Archive Crawler 0.1.0.exe`: Windows x64 portable executable.
+- `release-desktop/Problem Archive Crawler 0.1.1.exe`: Windows x64 portable executable for the current private release.
+- `release-desktop/win-unpacked/Problem Archive Crawler.exe`: unpacked smoke-test target used by `npm run smoke:desktop-packaged`.
 
 ## Canonical snapshot policy
 
