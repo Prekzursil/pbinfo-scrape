@@ -131,8 +131,21 @@ async function maybeWriteDesktopSmokeMarker(
             tick();
           });
 
+        const clickAppSection = async (label) => {
+          const button = Array.from(document.querySelectorAll('.view-switcher button[role="tab"]')).find(
+            (element) => element.textContent?.includes(label),
+          );
+
+          if (!(button instanceof HTMLButtonElement)) {
+            throw new Error('Desktop smoke probe could not find app section button: ' + label);
+          }
+
+          button.click();
+          await pause(150);
+        };
+
         const readDatasetButtons = () =>
-          Array.from(document.querySelectorAll('button[role="tab"]'))
+          Array.from(document.querySelectorAll('.data-panel button[role="tab"]'))
             .map((element) => {
               const label =
                 element.querySelector('span')?.textContent?.trim() ??
@@ -142,7 +155,7 @@ async function maybeWriteDesktopSmokeMarker(
             .filter((value) => Boolean(value));
 
         const clickDatasetButton = async (label) => {
-          const button = Array.from(document.querySelectorAll('button[role="tab"]')).find(
+          const button = Array.from(document.querySelectorAll('.data-panel button[role="tab"]')).find(
             (element) => element.textContent?.includes(label),
           );
 
@@ -179,6 +192,9 @@ async function maybeWriteDesktopSmokeMarker(
           if (!bridge) {
             throw new Error('Desktop smoke probe could not access the pbinfoDesktop bridge.');
           }
+
+          await clickAppSection('Data');
+          await waitFor(() => document.body?.innerText.includes('Data Explorer'));
 
           const summary = await bridge.getArchiveExplorerSummary(snapshotId);
           const datasetLabels = readDatasetButtons();
@@ -226,6 +242,9 @@ async function maybeWriteDesktopSmokeMarker(
           if (!bridge) {
             throw new Error('Desktop smoke probe could not access the pbinfoDesktop bridge.');
           }
+
+          await clickAppSection('Coverage');
+          await waitFor(() => document.body?.innerText.includes('Coverage Explorer'));
 
           const summary = await bridge.getCoverageSummary(snapshotId);
           const listing = await bridge.listCoverageRecords({
@@ -281,18 +300,7 @@ async function maybeWriteDesktopSmokeMarker(
 
             setWorkspaceAndSubmit(workspaceRoot);
 
-            return waitFor(() => document.body?.innerText.includes('Workspace Summary'))
-              .then(() =>
-                waitFor(
-                  () =>
-                    document.body?.innerText.includes('Data Explorer') &&
-                    document.body?.innerText.includes('Coverage Explorer') &&
-                    document.body?.innerText.includes('Problems') &&
-                    document.body?.innerText.includes('Evaluations') &&
-                    document.body?.innerText.includes('Rankings') &&
-                    document.body?.innerText.includes('Mirror Routes'),
-                ),
-              )
+            return waitFor(() => document.body?.innerText.includes('Archive Overview'))
               .then(async () => ({
                 initial,
                 final: snapshot(),

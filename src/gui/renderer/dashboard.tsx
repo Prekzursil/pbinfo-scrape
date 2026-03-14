@@ -27,6 +27,7 @@ type CredentialLoginInput = Parameters<DesktopBridge['loginProfile']>[0];
 type BrowserImportInput = Parameters<DesktopBridge['importBrowserProfile']>[0];
 type VerbosityMode = 'normal' | 'verbose' | 'raw';
 type CrawlMode = GuiCrawlMode;
+type DashboardView = 'overview' | 'coverage' | 'data' | 'setup';
 
 export interface DesktopDashboardProps {
   workspaceState: GuiWorkspaceState | null | undefined;
@@ -148,6 +149,8 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
     browser: 'edge',
     profileName: 'Default',
   });
+  const [activeView, setActiveView] = useState<DashboardView>('overview');
+  const [showEmbeddedPreview, setShowEmbeddedPreview] = useState(false);
 
   useEffect(() => {
     if (workspaceState?.workspaceRoot) {
@@ -172,11 +175,11 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
   }
 
   return (
-    <main className="desktop-shell">
-      <section className="hero-card">
-        <div className="hero-copy">
-          <div className="brand-lockup">
-            <div className="brand-mark" aria-hidden="true">
+    <main className="desktop-shell desktop-shell-simplified">
+      <section className="topbar-card panel">
+        <div className="topbar-brand">
+          <div className="brand-lockup brand-lockup-compact">
+            <div className="brand-mark brand-mark-compact" aria-hidden="true">
               <span className="brand-mark-frame" />
               <span className="brand-mark-sheet brand-mark-sheet-back" />
               <span className="brand-mark-sheet brand-mark-sheet-front" />
@@ -188,54 +191,66 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
               <p className="hero-subtitle">PBInfo archival operator console</p>
             </div>
           </div>
-          <p className="lede">
-            Precision capture, normalization, ranking, mirror replay, and publish-readiness
-            tracking from one focused Windows operator surface.
+          <p className="lede lede-compact">
+            A lighter control surface for continuing the crawl, checking coverage,
+            and opening the local archive.
           </p>
-          <div className="hero-pill-row">
-            <span className="hero-pill">Contest modern shell</span>
-            <span className="hero-pill">Snapshot {selectedSnapshotId}</span>
-            <span className="hero-pill">
-              {crawlStatus?.publishEligible ? 'Publish gate clear' : 'Drain in progress'}
-            </span>
-          </div>
-          <div className="hero-status-row">
-            {statusMessage ? <p className="callout callout-success">{statusMessage}</p> : null}
-            {errorMessage ? <p className="callout callout-error">{errorMessage}</p> : null}
-          </div>
         </div>
-        <aside className="hero-console">
-          <article className="console-card">
-            <span className="metric-label">Active profile</span>
-            <strong>{activeProfile?.label ?? 'No active profile'}</strong>
+        <div className="topbar-status-grid">
+          <SummaryCard label="Snapshot" value={selectedSnapshotId}>
             <p className="summary-copy">
-              {activeProfile?.userHandle ? `Handle ${activeProfile.userHandle}` : 'Import or sign in to unlock authenticated crawl surfaces.'}
+              {crawlStatus?.publishEligible ? 'Drained and publish-ready.' : 'Current archive target.'}
             </p>
-          </article>
-          <article className="console-card">
-            <span className="metric-label">Queue pulse</span>
-            <strong>{formatCounters(crawlStatus ?? activeCrawlJob?.latestCounters)}</strong>
+            {workspaceState?.workspaceRoot ? (
+              <p className="summary-copy mono">{workspaceState.workspaceRoot}</p>
+            ) : null}
+          </SummaryCard>
+          <SummaryCard label="Profile" value={activeProfile?.label ?? 'No active profile'}>
             <p className="summary-copy">
-              {crawlStatus?.publishEligible ? 'The canonical snapshot is ready for guarded publish.' : `${recentFailureCount} recent failures tracked.`}
+              {activeProfile?.userHandle ? `Handle ${activeProfile.userHandle}` : 'Use Setup to import or sign in.'}
             </p>
-          </article>
-          <article className="console-card">
-            <span className="metric-label">Live ETA</span>
-            <strong>{crawlTelemetry ? formatEta(crawlTelemetry.etaSeconds) : 'Learning…'}</strong>
+          </SummaryCard>
+          <SummaryCard
+            label="Queue"
+            value={
+              crawlStatus?.publishEligible
+                ? 'Ready'
+                : formatCounters(crawlStatus ?? activeCrawlJob?.latestCounters)
+            }
+          >
             <p className="summary-copy">
-              {crawlTelemetry
-                ? `${formatRate(crawlTelemetry.completedPerMinute)} completed/min`
-                : 'Waiting for at least two crawl chunks with counters before projecting the remaining drain.'}
+              {crawlStatus?.publishEligible
+                ? 'The canonical snapshot is ready for review.'
+                : `${recentFailureCount} recent failures tracked.`}
             </p>
-          </article>
-          <div className="hero-actions">
-            <button className="secondary-button" type="button" onClick={() => void onRefresh()} disabled={busyAction !== null}>Refresh</button>
-            <button className="secondary-button" type="button" onClick={onToggleAdvanced}>
-              {showAdvanced ? 'Hide advanced settings' : 'Advanced Settings'}
+          </SummaryCard>
+          <div className="topbar-actions">
+            <button
+              className="secondary-button"
+              type="button"
+              onClick={() => void onRefresh()}
+              disabled={busyAction !== null}
+            >
+              Refresh
             </button>
           </div>
-        </aside>
+        </div>
       </section>
+
+      <section className="view-switcher-card panel">
+        <div className="view-switcher" aria-label="App sections">
+          {renderViewButton('Overview', 'overview', activeView, setActiveView)}
+          {renderViewButton('Coverage', 'coverage', activeView, setActiveView)}
+          {renderViewButton('Data', 'data', activeView, setActiveView)}
+          {renderViewButton('Setup', 'setup', activeView, setActiveView)}
+        </div>
+        <p className="summary-copy view-switcher-copy">{describeView(activeView)}</p>
+      </section>
+
+      <div className="hero-status-row">
+        {statusMessage ? <p className="callout callout-success">{statusMessage}</p> : null}
+        {errorMessage ? <p className="callout callout-error">{errorMessage}</p> : null}
+      </div>
 
       {workspaceState === null ? (
         <section className="panel empty-state bootstrap-panel">
@@ -248,8 +263,9 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
         </section>
       ) : (
         <div className="dashboard-grid">
-          <section className="panel workspace-panel">
-            <PanelHeading kicker="Workspace and identity" title="Workspace Summary" chip={`${workspaceState.profiles.length} profiles`} />
+          {activeView === 'setup' ? (
+            <section className="panel workspace-panel">
+            <PanelHeading kicker="Workspace and identity" title="Workspace" chip={`${workspaceState.profiles.length} profiles`} />
             <div className="workspace-summary">
               <SummaryCard label="Workspace root"><p className="mono">{workspaceState.workspaceRoot}</p></SummaryCard>
               <SummaryCard label="Active profile" value={activeProfile?.label ?? 'No active profile'}>
@@ -275,10 +291,12 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
                 </article>
               ))}
             </div>
-          </section>
+            </section>
+          ) : null}
 
-          <section className="panel action-panel">
-            <PanelHeading kicker="Authentication lanes" title="Profile Login and Import" />
+          {activeView === 'setup' ? (
+            <section className="panel action-panel">
+            <PanelHeading kicker="Authentication lanes" title="Profiles & Access" />
             <div className="auth-grid">
               <form className="stack-form summary-card form-card" onSubmit={(event) => { event.preventDefault(); void onLoginProfile(loginForm); }}>
                 <strong>Credential login</strong>
@@ -306,10 +324,12 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
                 <button className="primary-button" type="submit">Import browser cookies</button>
               </form>
             </div>
-          </section>
+            </section>
+          ) : null}
 
-          <section className="panel snapshot-panel">
-            <PanelHeading kicker="Canonical snapshot" title="Snapshot Detail" chip={selectedSnapshotId} />
+          {activeView === 'overview' ? (
+            <section className="panel snapshot-panel">
+            <PanelHeading kicker="Archive health" title="Archive Overview" chip={selectedSnapshotId} />
             {crawlStatus ? (
               <div className="snapshot-grid">
                 <SummaryCard label="Queue counts" value={`${crawlStatus.pending} pending`}>
@@ -329,10 +349,12 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
               </div>
             ) : <p className="summary-copy">Crawl status will appear here after the selected snapshot exists.</p>}
             {publishCommand ? <article className="summary-card publish-card"><span className="metric-label">Ready to publish</span><p className="mono">{publishCommand}</p></article> : null}
-          </section>
+            </section>
+          ) : null}
 
-          <section className="panel jobs-panel">
-            <PanelHeading kicker="Pipeline controls" title="Crawl Control" chip={`${jobs.length} jobs`} />
+          {activeView === 'overview' ? (
+            <section className="panel jobs-panel">
+            <PanelHeading kicker="Quick actions" title="What happens next" chip={`${jobs.length} jobs`} />
             <div className="summary-card form-card">
               <Field label="Crawl mode">
                 <select
@@ -357,6 +379,10 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
               <ActionButton title="Build mirror" copy="Rebuild localhost routes and local asset rewrites." onClick={() => void onRunSnapshotJob('mirror-build')} />
               <ActionButton title="Finalize snapshot" copy="Normalize, rank, mirror, export, and prune noncanonical state." onClick={() => void onRunSnapshotJob('snapshot-finalize')} />
             </div>
+            <div className="button-row">
+              <button className="ghost-button" type="button" onClick={() => setActiveView('coverage')}>Open coverage</button>
+              <button className="ghost-button" type="button" onClick={() => setActiveView('data')}>Open raw data</button>
+            </div>
             {activeCrawlJob ? <div className="button-row"><button className="ghost-button" type="button" onClick={() => void onResumeCrawl(activeCrawlJob.jobId)}>Resume crawl</button><button className="ghost-button ghost-danger" type="button" onClick={() => void onPauseCrawl(activeCrawlJob.jobId)}>Pause after current chunk</button></div> : null}
             <div className="job-list">
               {jobs.length === 0 ? <p className="summary-copy">No desktop jobs recorded yet.</p> : jobs.map((job) => (
@@ -367,11 +393,13 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
                 </article>
               ))}
             </div>
-          </section>
+            </section>
+          ) : null}
 
-          <section className="panel logs-panel">
+          {activeView === 'overview' ? (
+            <section className="panel logs-panel">
             <div className="panel-heading">
-              <div><p className="section-kicker">Structured events</p><h2>Log Stream</h2></div>
+              <div><p className="section-kicker">Structured events</p><h2>Recent activity</h2></div>
               <div className="panel-actions">
                 <div className="segmented-control" role="group" aria-label="Verbosity">
                   {(['normal', 'verbose', 'raw'] as const).map((mode) => <button key={mode} className={`segmented-button ${verbosityMode === mode ? 'segmented-button-active' : ''}`} type="button" aria-pressed={verbosityMode === mode} onClick={() => onVerbosityChange(mode)}>{capitalize(mode)}</button>)}
@@ -393,26 +421,49 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
                 ))}
               </div>
             )}
-          </section>
+            </section>
+          ) : null}
 
-          <section className="panel mirror-panel">
-            <PanelHeading kicker="Local snapshot" title="Mirror Preview" chip={previewUrl ? 'Preview live' : undefined} />
+          {activeView === 'overview' ? (
+            <section className="panel mirror-panel">
+            <PanelHeading kicker="Local snapshot" title="Mirror access" chip={previewUrl ? 'Preview live' : undefined} />
             <div className="mirror-stage">
               <div className="mirror-toolbar">
                 <div className="button-row mirror-button-row">
                   <button className="ghost-button" type="button" onClick={() => void onStartMirrorPreview()}>Start preview</button>
                   <button className="ghost-button" type="button" disabled={!previewJobId} onClick={() => { if (previewJobId) { void onStopMirrorPreview(previewJobId); } }}>Stop preview</button>
                   <button className="ghost-button" type="button" disabled={!previewUrl} onClick={() => { if (previewUrl) { void onOpenExternal(previewUrl); } }}>Open in browser</button>
+                  <button
+                    className="ghost-button"
+                    type="button"
+                    disabled={!previewUrl}
+                    onClick={() => setShowEmbeddedPreview((current) => !current)}
+                  >
+                    {showEmbeddedPreview ? 'Hide embedded preview' : 'Show embedded preview'}
+                  </button>
                 </div>
                 <article className="summary-card mirror-meta-card"><span className="metric-label">Mirror route</span><p className="mono mirror-address">{previewUrl ?? 'Not running'}</p></article>
               </div>
-              <div className="mirror-frame-shell">
-                {previewUrl ? <iframe className="mirror-frame" src={previewUrl} title="Mirror preview" /> : <div className="mirror-placeholder"><strong>No mirror preview running</strong><p>Start the mirror preview after building the selected snapshot to embed the localhost viewer here.</p></div>}
-              </div>
+              {previewUrl && showEmbeddedPreview ? (
+                <div className="mirror-frame-shell">
+                  <iframe className="mirror-frame" src={previewUrl} title="Mirror preview" />
+                </div>
+              ) : (
+                <div className="mirror-placeholder">
+                  <strong>{previewUrl ? 'Embedded preview hidden' : 'No mirror preview running'}</strong>
+                  <p>
+                    {previewUrl
+                      ? 'Keep the shell lightweight and open the embedded preview only when you need to inspect the full mirror in-place.'
+                      : 'Start the mirror preview after building the selected snapshot to embed the localhost viewer here.'}
+                  </p>
+                </div>
+              )}
             </div>
-          </section>
+            </section>
+          ) : null}
 
-          <CoverageExplorerPanel
+          {activeView === 'coverage' ? (
+            <CoverageExplorerPanel
             snapshotId={selectedSnapshotId}
             summary={coverageSummary}
             listing={coverageListing}
@@ -424,9 +475,11 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
             onSelectProblem={onSelectCoverageProblem}
             onOpenPath={onOpenPath}
             onOpenExternal={onOpenExternal}
-          />
+            />
+          ) : null}
 
-          <DataExplorerPanel
+          {activeView === 'data' ? (
+            <DataExplorerPanel
             snapshotId={selectedSnapshotId}
             normalizedRoot={archiveSummary?.normalizedRoot}
             mirrorRoot={archiveSummary?.mirrorRoot}
@@ -444,9 +497,20 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
             onSelectRecord={onSelectArchiveRecord}
             onOpenPath={onOpenPath}
             onOpenExternal={onOpenExternal}
-          />
+            />
+          ) : null}
 
-          {showAdvanced ? (
+          {activeView === 'setup' ? (
+            <section className="panel setup-panel-toggle">
+              <div className="button-row">
+                <button className="ghost-button" type="button" onClick={onToggleAdvanced}>
+                  {showAdvanced ? 'Hide advanced settings' : 'Advanced Settings'}
+                </button>
+              </div>
+            </section>
+          ) : null}
+
+          {activeView === 'setup' && showAdvanced ? (
             <section className="panel advanced-panel">
               <PanelHeading kicker="Operator defaults" title="Advanced Settings" chip="Read-only diagnostics" />
               <div className="advanced-grid">
@@ -610,4 +674,38 @@ function formatTimestamp(timestamp: string): string {
 
 function capitalize(value: string): string {
   return value.slice(0, 1).toUpperCase() + value.slice(1);
+}
+
+function renderViewButton(
+  label: string,
+  view: DashboardView,
+  activeView: DashboardView,
+  setActiveView: (view: DashboardView) => void,
+) {
+  const active = activeView === view;
+  return (
+    <button
+      key={view}
+      className={`view-switcher-button ${active ? 'view-switcher-button-active' : ''}`}
+      type="button"
+      role="tab"
+      aria-selected={active}
+      onClick={() => setActiveView(view)}
+    >
+      {label}
+    </button>
+  );
+}
+
+function describeView(activeView: DashboardView): string {
+  switch (activeView) {
+    case 'overview':
+      return 'See the current archive target, quick actions, recent activity, and mirror access in one lightweight overview.';
+    case 'coverage':
+      return 'Audit which problems are solved, which have tests archived, and which still need source or editorial coverage.';
+    case 'data':
+      return 'Inspect the raw normalized datasets and jump directly to files or live mirror routes when needed.';
+    case 'setup':
+      return 'Keep workspace, profiles, login/import, and advanced operator defaults out of the main day-to-day surface.';
+  }
 }

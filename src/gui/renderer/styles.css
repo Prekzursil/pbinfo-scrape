@@ -33,6 +33,11 @@ input, select, textarea {
 button:disabled { cursor: not-allowed; opacity: 0.58; }
 
 .desktop-shell { min-height: 100vh; padding: 24px; display: grid; gap: 18px; }
+.desktop-shell-simplified {
+  max-width: 1520px;
+  margin: 0 auto;
+  align-content: start;
+}
 .hero-card, .panel {
   border: 1px solid rgba(25, 37, 51, 0.08);
   border-radius: 28px;
@@ -41,6 +46,85 @@ button:disabled { cursor: not-allowed; opacity: 0.58; }
   backdrop-filter: blur(18px);
 }
 .panel { padding: 22px; }
+
+.topbar-card,
+.view-switcher-card {
+  display: grid;
+  gap: 16px;
+}
+
+.topbar-card {
+  grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+  align-items: start;
+}
+
+.topbar-brand,
+.topbar-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.brand-lockup-compact {
+  gap: 14px;
+}
+
+.brand-mark-compact {
+  width: 72px;
+  height: 72px;
+  border-radius: 20px;
+}
+
+.lede-compact {
+  max-width: 52ch;
+  margin: 0;
+  font-size: 0.96rem;
+}
+
+.topbar-status-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.topbar-status-grid .summary-card {
+  min-height: 100%;
+}
+
+.topbar-actions {
+  align-content: stretch;
+}
+
+.view-switcher-card {
+  grid-template-columns: minmax(0, 1fr);
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.view-switcher {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.view-switcher-button {
+  border: 1px solid rgba(25, 37, 51, 0.12);
+  border-radius: 999px;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.74);
+  color: var(--pac-ink);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.view-switcher-button-active {
+  background: var(--pac-ink);
+  border-color: transparent;
+  color: #fff8ef;
+}
+
+.view-switcher-copy {
+  margin: 0;
+}
 
 .hero-card {
   display: grid;
@@ -175,6 +259,7 @@ button:disabled { cursor: not-allowed; opacity: 0.58; }
 .dashboard-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 18px; }
 .workspace-panel, .action-panel, .snapshot-panel, .jobs-panel, .logs-panel { grid-column: span 6; }
 .mirror-panel, .advanced-panel { grid-column: span 12; }
+.setup-panel-toggle { grid-column: span 12; }
 .panel-heading {
   display: flex;
   justify-content: space-between;
@@ -257,6 +342,14 @@ button:disabled { cursor: not-allowed; opacity: 0.58; }
 }
 .mirror-placeholder { min-height: 260px; align-content: center; }
 .publish-card { margin-top: 14px; }
+.setup-panel-toggle {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.setup-panel-toggle .button-row {
+  justify-content: flex-start;
+}
 .bootstrap-panel { max-width: 780px; }
 .archive-location-grid,
 .data-explorer-grid,
@@ -419,7 +512,9 @@ button:disabled { cursor: not-allowed; opacity: 0.58; }
 
 @media (max-width: 1180px) {
   .hero-card,
+  .topbar-card,
   .mirror-toolbar,
+  .topbar-status-grid,
   .workspace-summary,
   .advanced-grid,
   .snapshot-grid,

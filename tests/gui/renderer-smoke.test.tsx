@@ -10,64 +10,54 @@ afterEach(() => {
   cleanup();
 });
 
-test('renders the desktop dashboard summary and operator controls from bridge data', { timeout: 15_000 }, async () => {
+test('renders the simplified easy-mode overview before exposing deeper tools', { timeout: 15_000 }, async () => {
   const harness = createBridgeHarness();
   render(<App desktop={harness.bridge} />);
 
   expect(await screen.findByRole('heading', { name: 'Problem Archive Crawler' })).toBeInTheDocument();
   expect(await screen.findByText('PBInfo archival operator console')).toBeInTheDocument();
+  expect(await screen.findByRole('tab', { name: 'Overview' })).toHaveAttribute('aria-selected', 'true');
+  expect(await screen.findByRole('tab', { name: 'Coverage' })).toBeInTheDocument();
+  expect(await screen.findByRole('tab', { name: 'Data' })).toBeInTheDocument();
+  expect(await screen.findByRole('tab', { name: 'Setup' })).toBeInTheDocument();
+  expect(await screen.findByRole('heading', { name: 'Archive Overview' })).toBeInTheDocument();
   expect(await screen.findByText('C:/archive-workspace')).toBeInTheDocument();
-  expect((await screen.findAllByText('Primary account')).length).toBeGreaterThanOrEqual(2);
+  expect(await screen.findByText('Primary account')).toBeInTheDocument();
   expect(await screen.findByText('42 pending')).toBeInTheDocument();
-  expect((await screen.findAllByText(/7m remaining/i)).length).toBeGreaterThanOrEqual(1);
-  expect((await screen.findAllByText(/6.0 completed\/min/i)).length).toBeGreaterThanOrEqual(1);
-  expect(await screen.findByRole('heading', { name: 'Profile Login and Import' })).toBeInTheDocument();
-  expect(await screen.findByRole('button', { name: /Start full crawl/i })).toBeInTheDocument();
+  expect(await screen.findByText(/7m remaining/i)).toBeInTheDocument();
+  expect(await screen.findByText(/6.0 completed\/min/i)).toBeInTheDocument();
   expect(await screen.findByLabelText('Crawl mode')).toHaveValue('incremental');
-  expect(await screen.findByRole('option', { name: 'Incremental sync' })).toBeInTheDocument();
-  expect(await screen.findByRole('option', { name: 'Fresh recrawl' })).toBeInTheDocument();
-  expect((await screen.findAllByRole('button', { name: 'Normal' }))[0]).toHaveAttribute('aria-pressed', 'true');
-  expect((await screen.findAllByRole('button', { name: 'Verbose' })).length).toBeGreaterThanOrEqual(1);
-  expect((await screen.findAllByRole('button', { name: 'Raw' })).length).toBeGreaterThanOrEqual(1);
+  expect(await screen.findByRole('button', { name: /Start full crawl/i })).toBeInTheDocument();
   expect(await screen.findByRole('button', { name: 'Open in browser' })).toBeInTheDocument();
-  expect(await screen.findByRole('heading', { name: 'Coverage Explorer' })).toBeInTheDocument();
-  expect(await screen.findByText('Solved by me')).toBeInTheDocument();
-  expect((await screen.findAllByText(/Crossword/i)).length).toBeGreaterThanOrEqual(1);
-  expect(await screen.findByRole('heading', { name: 'Data Explorer' })).toBeInTheDocument();
-  expect(await screen.findByRole('button', { name: 'Open normalized archive folder' })).toBeInTheDocument();
-  expect(await screen.findByRole('button', { name: 'Open mirror output folder' })).toBeInTheDocument();
-  expect((await screen.findAllByText('#3171 waterreserve')).length).toBeGreaterThanOrEqual(1);
+  expect(await screen.findByRole('button', { name: 'Show embedded preview' })).toBeInTheDocument();
+  expect(screen.queryByTitle('Mirror preview')).not.toBeInTheDocument();
+  expect(screen.queryByRole('heading', { name: 'Coverage Explorer' })).not.toBeInTheDocument();
+  expect(screen.queryByRole('heading', { name: 'Data Explorer' })).not.toBeInTheDocument();
+  expect(screen.queryByRole('heading', { name: 'Profiles & Access' })).not.toBeInTheDocument();
   expect(await screen.findByText(/publish --snapshot acceptance-20260310b/)).toBeInTheDocument();
-  expect(screen.getByTitle('Mirror preview')).toBeInTheDocument();
 });
 
-test('triggers desktop actions and expands the log stream for raw verbosity', { timeout: 15_000 }, async () => {
+test('lets the user move through overview, coverage, data, and setup without overload', { timeout: 15_000 }, async () => {
   const harness = createBridgeHarness();
   render(<App desktop={harness.bridge} />);
 
   const crawlModeSelect = await screen.findByLabelText('Crawl mode');
-  fireEvent.click((await screen.findAllByRole('button', { name: /Start full crawl/i }))[0]!);
+  fireEvent.click(await screen.findByRole('button', { name: /Start full crawl/i }));
   expect(await screen.findByText('Started all crawl')).toBeInTheDocument();
-  expect(crawlModeSelect).toHaveValue('incremental');
   fireEvent.change(crawlModeSelect, {
     target: {
       value: 'fresh',
     },
   });
   expect(crawlModeSelect).toHaveValue('fresh');
-  fireEvent.click((await screen.findAllByRole('button', { name: /Start public crawl/i }))[0]!);
+  fireEvent.click(await screen.findByRole('button', { name: /Start public crawl/i }));
   expect(await screen.findByText('Started public crawl')).toBeInTheDocument();
-  expect(screen.queryAllByText(/debug snapshot trace/i)).toHaveLength(0);
-  fireEvent.click((await screen.findAllByRole('button', { name: 'Raw' }))[0]!);
-  expect((await screen.findAllByText(/debug snapshot trace/i)).length).toBeGreaterThanOrEqual(1);
-  expect(await screen.findByText(/"processed": 25/)).toBeInTheDocument();
-  const datasetSearchInput = (await screen.findAllByLabelText('Search current dataset'))[0]!;
-  fireEvent.change(datasetSearchInput, {
-    target: {
-      value: 'waterreserve',
-    },
-  });
-  expect((await screen.findAllByText('/probleme/3171/problem-3171')).length).toBeGreaterThanOrEqual(1);
+
+  fireEvent.click(await screen.findByRole('button', { name: 'Show embedded preview' }));
+  expect(await screen.findByTitle('Mirror preview')).toBeInTheDocument();
+
+  fireEvent.click(await screen.findByRole('tab', { name: 'Coverage' }));
+  expect(await screen.findByRole('heading', { name: 'Coverage Explorer' })).toBeInTheDocument();
   const coverageSearchInput = await screen.findByLabelText('Search problems');
   fireEvent.change(coverageSearchInput, {
     target: {
@@ -90,11 +80,25 @@ test('triggers desktop actions and expands the log stream for raw verbosity', { 
   expect(harness.openExternal).toHaveBeenCalledWith(
     'https://www.pbinfo.ro/solutii/problema/3716/crossword',
   );
+
+  fireEvent.click(await screen.findByRole('tab', { name: 'Data' }));
+  expect(await screen.findByRole('heading', { name: 'Data Explorer' })).toBeInTheDocument();
+  const datasetSearchInput = await screen.findByLabelText('Search current dataset');
+  fireEvent.change(datasetSearchInput, {
+    target: {
+      value: 'waterreserve',
+    },
+  });
+  expect((await screen.findAllByText('/probleme/3171/problem-3171')).length).toBeGreaterThanOrEqual(1);
   fireEvent.click(await screen.findByRole('button', { name: 'Open normalized archive folder' }));
   expect(harness.openPath).toHaveBeenCalledWith(
     'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized',
   );
-  fireEvent.click(screen.getAllByRole('button', { name: 'Advanced Settings' })[0]!);
+
+  fireEvent.click(await screen.findByRole('tab', { name: 'Setup' }));
+  expect(await screen.findByRole('heading', { name: 'Profiles & Access' })).toBeInTheDocument();
+  expect(await screen.findByRole('button', { name: 'Advanced Settings' })).toBeInTheDocument();
+  fireEvent.click(await screen.findByRole('button', { name: 'Advanced Settings' }));
   expect(await screen.findByRole('heading', { name: 'Advanced Settings' })).toBeInTheDocument();
 });
 

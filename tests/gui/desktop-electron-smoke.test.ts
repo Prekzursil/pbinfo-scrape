@@ -83,10 +83,10 @@ testOnWindows(
       }
       expect(report.phase).toBe('completed');
       expect(report.initial?.headings).toContain('Choose a workspace');
-      expect(report.final?.headings).toContain('Workspace Summary');
-      expect(report.final?.headings).toContain('Profile Login and Import');
-      expect(report.final?.headings).toContain('Coverage Explorer');
-      expect(report.final?.headings).toContain('Data Explorer');
+      expect(report.final?.headings).toContain('Archive Overview');
+      expect(report.final?.headings).toContain('What happens next');
+      expect(report.final?.headings).toContain('Recent activity');
+      expect(report.final?.headings).toContain('Mirror access');
       expect(report.final?.text).toContain(workspaceRoot);
       expect(report.coverageExplorer?.summary?.totalProblems).toBeGreaterThan(0);
       expect(report.coverageExplorer?.summary?.solvedByMeCount).toBeGreaterThanOrEqual(0);
