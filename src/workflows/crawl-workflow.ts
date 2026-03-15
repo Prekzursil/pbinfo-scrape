@@ -9,6 +9,11 @@ import {
   readArchiveCatalog,
 } from '../archive/storage.js';
 import { createCookieFetch } from '../auth/session-store.js';
+import {
+  matchesConfiguredHandle,
+  probePbinfoAuthStatus,
+  type PbinfoAuthStatusResult,
+} from '../auth/auth-status.js';
 import { loadLocalConfig } from '../config/local-config.js';
 import { CrawlQueue, readCrawlQueueSnapshot } from '../crawl/crawl-queue.js';
 import { ArchiveCrawler } from '../crawl/archive-crawler.js';
@@ -23,6 +28,7 @@ export interface CrawlWorkflowOptions {
   snapshotId?: string;
   checkpoint?: 'canonical' | 'checkpoint';
   mode?: CrawlMode;
+  authStatusProbe?: (config: ReturnType<typeof loadLocalConfig>) => Promise<PbinfoAuthStatusResult>;
 }
 
 export interface CrawlWorkflowResult {
@@ -56,6 +62,7 @@ export async function runCrawlWorkflow(
   options: CrawlWorkflowOptions = {},
 ): Promise<CrawlWorkflowResult> {
   const config = loadLocalConfig(workspaceRoot);
+  await enforceAuthPreflight(scope, config, options.authStatusProbe);
   const now = options.now ?? new Date();
   const catalog = readArchiveCatalog(config.paths.archiveRoot);
   const resolvedSnapshotId =
@@ -153,6 +160,45 @@ export async function runCrawlWorkflow(
     if (Number.isFinite(maxIterations)) {
       remainingBudget += 1;
     }
+  }
+}
+
+async function enforceAuthPreflight(
+  scope: 'public' | 'user' | 'all',
+  config: ReturnType<typeof loadLocalConfig>,
+  customProbe?: (config: ReturnType<typeof loadLocalConfig>) => Promise<PbinfoAuthStatusResult>,
+): Promise<void> {
+  if (scope === 'public') {
+    return;
+  }
+
+  const configuredHandle = config.crawl.userHandle?.trim();
+  if (!configuredHandle) {
+    throw new Error(
+      `Authenticated crawl scope "${scope}" requires crawl.userHandle in .local/pbinfo.local.json.`,
+    );
+  }
+
+  const authStatus = customProbe
+    ? await customProbe(config)
+    : await probePbinfoAuthStatus(config);
+
+  if (!authStatus.loggedIn || authStatus.status === 'cookie-missing' || authStatus.status === 'guest') {
+    throw new Error(
+      [
+        `Authenticated crawl preflight failed: PBInfo session is not logged in (status=${authStatus.status}).`,
+        ...authStatus.remediation,
+      ].join(' '),
+    );
+  }
+
+  if (!matchesConfiguredHandle(configuredHandle, authStatus.resolvedHandle)) {
+    throw new Error(
+      [
+        `Authenticated crawl preflight failed: configured handle "${configuredHandle}" does not match active session "${authStatus.resolvedHandle ?? 'unknown'}".`,
+        ...authStatus.remediation,
+      ].join(' '),
+    );
   }
 }
 

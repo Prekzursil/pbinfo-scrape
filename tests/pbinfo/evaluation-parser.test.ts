@@ -184,4 +184,42 @@ describe('evaluation parser', () => {
       ],
     });
   });
+
+  test('uses the summary-row Utilizator field instead of the first profile link on page', () => {
+    const pageWithDecoyProfile = `
+      <div id="detalii">
+        <a href="/profil/RandomDecoy">Random Decoy</a>
+        <table class="table">
+          <tr>
+            <th>Problema</th><td><a href="/probleme/205/shuffle">Shuffle</a></td>
+            <th>Utilizator</th><td><a href="/profil/Prekzursil">Andrei Visalon (Prekzursil)</a></td>
+          </tr>
+          <tr>
+            <th>Scor/rezultat</th><td>100 puncte</td>
+            <th>Limbaj</th><td>C++</td>
+          </tr>
+        </table>
+      </div>
+      <div id="evaluare">
+        <table class="table">
+          <tr>
+            <th>Test</th>
+            <th>Scor posibil</th>
+            <th>Scor obținut</th>
+            <th>Mesaj evaluare</th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>10</td>
+            <td>10</td>
+            <td>OK.</td>
+          </tr>
+        </table>
+      </div>
+    `;
+
+    const parsed = parseEvaluationPage(pageWithDecoyProfile, 70000001);
+    expect(parsed.user).toBe('Andrei Visalon (Prekzursil)');
+    expect(parsed.problemId).toBe(205);
+  });
 });

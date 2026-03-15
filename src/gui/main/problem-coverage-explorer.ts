@@ -2,6 +2,9 @@ import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 
 import {
+  readProblemCoverageGapReport,
+} from '../../coverage/coverage-gaps.js';
+import {
   readProblemCoverageIndex,
   readProblemCoverageRecord,
 } from '../../coverage/problem-coverage.js';
@@ -49,6 +52,21 @@ export function getCoverageExplorerSummary(
   options: ExploreCoverageOptions = {},
 ): GuiCoverageSummary {
   const context = resolveCoverageContext(workspaceRoot, options.snapshotId);
+  const gapReport = readProblemCoverageGapReport(context.layout.normalizedRoot);
+  const unsolvedProblemIds =
+    gapReport?.unsolvedProblemIds
+    ?? context.index.records.filter((record) => !record.solvedByMe).map((record) => record.problemId);
+  const missingOfficialSourceProblemIds =
+    gapReport?.missingOfficialSources.map((entry) => entry.problemId)
+    ?? context.index.records
+      .filter((record) => !record.officialSourceArchived)
+      .map((record) => record.problemId);
+  const solvedByMeMissingUserSourceProblemIds =
+    gapReport?.solvedByMeMissingUserSource.map((entry) => entry.problemId)
+    ?? context.index.records
+      .filter((record) => record.solvedByMe && !record.userSourceArchived)
+      .map((record) => record.problemId);
+
   return {
     snapshotId: context.layout.snapshotId,
     coverageRoot: context.coverageRoot,
@@ -56,6 +74,12 @@ export function getCoverageExplorerSummary(
     mirrorRoot: context.layout.mirrorRoot,
     mirrorServeCommand: `npm run cli -- serve --snapshot ${context.layout.snapshotId} --port 4173`,
     mirrorUrl: 'http://127.0.0.1:4173/',
+    unsolvedProblemCount: unsolvedProblemIds.length,
+    missingOfficialSourceCount: missingOfficialSourceProblemIds.length,
+    solvedByMeMissingUserSourceCount: solvedByMeMissingUserSourceProblemIds.length,
+    unsolvedProblemIds,
+    missingOfficialSourceProblemIds,
+    solvedByMeMissingUserSourceProblemIds,
     ...context.index.totals,
   };
 }

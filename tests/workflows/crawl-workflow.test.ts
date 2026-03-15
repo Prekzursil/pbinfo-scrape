@@ -37,6 +37,95 @@ afterEach(async () => {
 });
 
 describe('runCrawlWorkflow', () => {
+  test('fails authenticated crawl when auth preflight reports a guest session', async () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-workflow-auth-preflight-guest-'));
+    tempDirs.push(workspaceRoot);
+    mkdirSync(join(workspaceRoot, '.local'), { recursive: true });
+
+    writeFileSync(
+      join(workspaceRoot, '.local', 'pbinfo.local.json'),
+      JSON.stringify(
+        {
+          auth: {
+            strategy: 'cookie-import',
+            sessionCookiesPath: '.local/session-cookies.json',
+          },
+          crawl: {
+            userHandle: 'Prekzursil',
+            crossCheckWithBrowser: false,
+          },
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+
+    await expect(
+      runCrawlWorkflow(workspaceRoot, 'user', {
+        maxIterations: 0,
+        authStatusProbe: async () => ({
+          status: 'guest',
+          loggedIn: false,
+          configuredHandle: 'prekzursil',
+          resolvedHandle: undefined,
+          handleMatchesConfigured: false,
+          cookieFileExists: true,
+          sessionCookiesPath: join(workspaceRoot, '.local', 'session-cookies.json'),
+          probeUrl: 'https://www.pbinfo.ro/',
+          checkedAt: '2026-03-10T00:00:00.000Z',
+          remediation: ['re-login required'],
+        }),
+      }),
+    ).rejects.toThrow(/preflight failed/i);
+  });
+
+  test('starts authenticated crawl when auth preflight confirms the configured handle', async () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-workflow-auth-preflight-ok-'));
+    tempDirs.push(workspaceRoot);
+    mkdirSync(join(workspaceRoot, '.local'), { recursive: true });
+
+    writeFileSync(
+      join(workspaceRoot, '.local', 'pbinfo.local.json'),
+      JSON.stringify(
+        {
+          auth: {
+            strategy: 'cookie-import',
+            sessionCookiesPath: '.local/session-cookies.json',
+          },
+          crawl: {
+            userHandle: 'Prekzursil',
+            crossCheckWithBrowser: false,
+          },
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+
+    const result = await runCrawlWorkflow(workspaceRoot, 'user', {
+      maxIterations: 0,
+      now: new Date('2026-03-10T00:00:00.000Z'),
+      authStatusProbe: async () => ({
+        status: 'ok',
+        loggedIn: true,
+        configuredHandle: 'prekzursil',
+        resolvedHandle: 'prekzursil',
+        handleMatchesConfigured: true,
+        cookieFileExists: true,
+        sessionCookiesPath: join(workspaceRoot, '.local', 'session-cookies.json'),
+        probeUrl: 'https://www.pbinfo.ro/',
+        checkedAt: '2026-03-10T00:00:00.000Z',
+        remediation: [],
+      }),
+    });
+
+    expect(result.processed).toBe(0);
+    expect(result.snapshotId).toBe('20260310T000000Z');
+    expect(result.completed).toBe(false);
+  });
+
   test('seeds, processes, and archives a small public crawl', { timeout: 20_000 }, async () => {
     const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-workflow-'));
     tempDirs.push(workspaceRoot);

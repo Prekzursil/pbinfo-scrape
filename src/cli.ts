@@ -15,6 +15,7 @@ import {
   restoreEncryptedAuthBundle,
 } from './auth/auth-bundle.js';
 import { PbinfoAuthClient } from './auth/pbinfo-auth.js';
+import { probePbinfoAuthStatus } from './auth/auth-status.js';
 import { persistSerializedCookies } from './auth/session-store.js';
 import {
   exportRawSnapshotArtifacts,
@@ -39,6 +40,7 @@ import {
 
 export interface CliHandlers {
   authLogin: (workspaceRoot: string) => Promise<void>;
+  authStatus: (workspaceRoot: string) => Promise<void>;
   authImportCookies: (workspaceRoot: string, sourcePath: string) => Promise<void>;
   authImportBrowser: (
     workspaceRoot: string,
@@ -88,6 +90,12 @@ export function buildCli(handlers: CliHandlers = createDefaultHandlers()): Comma
     .description('Login with credentials from the local config and persist the session cookie jar')
     .action(async () => {
       await handlers.authLogin(resolveWorkspace(program));
+    });
+  auth
+    .command('status')
+    .description('Probe PBInfo auth/session state and verify the resolved handle for authenticated crawls')
+    .action(async () => {
+      await handlers.authStatus(resolveWorkspace(program));
     });
 
   auth
@@ -332,6 +340,11 @@ function createDefaultHandlers(): CliHandlers {
         username: config.auth.username,
         password: config.auth.password,
       });
+      process.stdout.write(JSON.stringify(result, null, 2) + '\n');
+    },
+    authStatus: async (workspaceRoot) => {
+      const config = loadLocalConfig(workspaceRoot);
+      const result = await probePbinfoAuthStatus(config);
       process.stdout.write(JSON.stringify(result, null, 2) + '\n');
     },
     authImportCookies: async (workspaceRoot, sourcePath) => {

@@ -21,13 +21,13 @@ export interface ParsedEvaluationPage {
 export function parseEvaluationPage(html: string, evaluationId: number): ParsedEvaluationPage {
   const $ = loadHtml(html);
   const problemLink = $('a[href^="/probleme/"]').first();
-  const userLink = $('#detalii a[href^="/profil/"], a[href^="/profil/"]').first();
   const problemMatch = problemLink.attr('href')?.match(/^\/probleme\/(\d+)\/([^/]+)$/);
   if (!problemMatch) {
     throw new Error(`Could not find problem link for evaluation ${evaluationId}.`);
   }
 
   const summaryMap = extractSummaryMap($);
+  const user = resolveSubmissionOwner($, summaryMap);
   const tests = extractTests($);
 
   const sourceCode = extractSourceCode($);
@@ -44,7 +44,7 @@ export function parseEvaluationPage(html: string, evaluationId: number): ParsedE
     problemId: Number(problemMatch[1]),
     problemSlug,
     problemName: normalizeWhitespace(problemLink.text()),
-    user: normalizeWhitespace(userLink.text()),
+    user,
     language: summaryMap.get('limbaj') ?? inferLanguageFromFilename(fileName) ?? 'unknown',
     score: parseNumber(summaryMap.get('punctaj') ?? summaryMap.get('scor/rezultat') ?? '') ?? 0,
     verdictSummary: summaryMap.get('verdict') ?? summaryMap.get('scor/rezultat') ?? '',
@@ -55,6 +55,24 @@ export function parseEvaluationPage(html: string, evaluationId: number): ParsedE
     tests,
     compileLog: compileLog || undefined,
   };
+}
+
+function resolveSubmissionOwner(
+  $: ReturnType<typeof loadHtml>,
+  summaryMap: Map<string, string>,
+): string {
+  const fromSummary = normalizeWhitespace(summaryMap.get('utilizator') ?? '');
+  if (fromSummary) {
+    return fromSummary;
+  }
+
+  const profileLink = $('#detalii a[href^="/profil/"], #rezumat a[href^="/profil/"], a[href^="/profil/"]').first();
+  const fromProfile = normalizeWhitespace(profileLink.text());
+  if (fromProfile) {
+    return fromProfile;
+  }
+
+  return 'unknown';
 }
 
 function extractSummaryMap($: ReturnType<typeof loadHtml>): Map<string, string> {

@@ -27,32 +27,9 @@ export function parseUserSolutionsListPage(
   const fullText = normalizeWhitespace($.root().text()).toLowerCase();
   const throttled = fullText.includes('resursă indisponibilă temporar')
     || fullText.includes('resursa indisponibila temporar');
-  const anchors = $('a').toArray();
-  const entries: UserSolutionListEntry[] = [];
-
-  for (let index = 0; index < anchors.length; index += 1) {
-    const profileHref = $(anchors[index]).attr('href');
-    const profileMatch = profileHref?.match(/^\/profil\/([^/]+)$/);
-    if (!profileMatch) {
-      continue;
-    }
-
-    const problemHref = $(anchors[index + 1]).attr('href');
-    const problemMatch = problemHref?.match(/^\/probleme\/(\d+)\/([^/]+)$/);
-    const evaluationHref = $(anchors[index + 2]).attr('href');
-    const evaluationMatch = evaluationHref?.match(/^\/detalii-evaluare\/(\d+)$/);
-    if (!problemMatch || !evaluationMatch) {
-      continue;
-    }
-
-    entries.push({
-      user: normalizeWhitespace(profileMatch[1] || $(anchors[index]).text()),
-      problemId: Number(problemMatch[1]),
-      problemSlug: problemMatch[2] ?? '',
-      problemName: normalizeWhitespace($(anchors[index + 1]).text()),
-      evaluationId: Number(evaluationMatch[1]),
-    });
-  }
+  const entriesFromRows = extractEntriesFromRows($);
+  const entries =
+    entriesFromRows.length > 0 ? entriesFromRows : extractEntriesFromAnchorTriplets($);
 
   const paginationMetadata = parsePaginationMetadata(html, pageUrl, totalMatches);
 
@@ -64,6 +41,94 @@ export function parseUserSolutionsListPage(
     nextPageUrls: paginationMetadata?.nextPageUrls ?? [],
     entries,
   };
+}
+
+function extractEntriesFromRows(
+  $: ReturnType<typeof loadHtml>,
+): UserSolutionListEntry[] {
+  const entries: UserSolutionListEntry[] = [];
+  const seen = new Set<number>();
+
+  $('table tr').each((_, row) => {
+    const profileAnchor = $(row).find('a[href^="/profil/"]').first();
+    const problemAnchor = $(row).find('a[href^="/probleme/"]').first();
+    const evaluationAnchor = $(row).find('a[href^="/detalii-evaluare/"]').first();
+
+    const profileHref = profileAnchor.attr('href');
+    const problemHref = problemAnchor.attr('href');
+    const evaluationHref = evaluationAnchor.attr('href');
+    const profileMatch = profileHref?.match(/^\/profil\/([^/?#]+)$/);
+    const problemMatch = problemHref?.match(/^\/probleme\/(\d+)\/([^/?#]+)$/);
+    const evaluationMatch = evaluationHref?.match(/^\/detalii-evaluare\/(\d+)$/);
+    if (!profileMatch?.[1] || !problemMatch?.[1] || !problemMatch[2] || !evaluationMatch?.[1]) {
+      return;
+    }
+
+    const evaluationId = Number(evaluationMatch[1]);
+    if (!Number.isFinite(evaluationId) || seen.has(evaluationId)) {
+      return;
+    }
+    seen.add(evaluationId);
+
+    entries.push({
+      user: normalizeUserHandle(profileMatch[1], profileAnchor.text()),
+      problemId: Number(problemMatch[1]),
+      problemSlug: problemMatch[2],
+      problemName: normalizeWhitespace(problemAnchor.text()),
+      evaluationId,
+    });
+  });
+
+  return entries;
+}
+
+function extractEntriesFromAnchorTriplets(
+  $: ReturnType<typeof loadHtml>,
+): UserSolutionListEntry[] {
+  const anchors = $('a').toArray();
+  const entries: UserSolutionListEntry[] = [];
+  const seen = new Set<number>();
+
+  for (let index = 0; index < anchors.length; index += 1) {
+    const profileHref = $(anchors[index]).attr('href');
+    const profileMatch = profileHref?.match(/^\/profil\/([^/?#]+)$/);
+    if (!profileMatch?.[1]) {
+      continue;
+    }
+
+    const problemHref = $(anchors[index + 1]).attr('href');
+    const problemMatch = problemHref?.match(/^\/probleme\/(\d+)\/([^/?#]+)$/);
+    const evaluationHref = $(anchors[index + 2]).attr('href');
+    const evaluationMatch = evaluationHref?.match(/^\/detalii-evaluare\/(\d+)$/);
+    if (!problemMatch?.[1] || !problemMatch[2] || !evaluationMatch?.[1]) {
+      continue;
+    }
+
+    const evaluationId = Number(evaluationMatch[1]);
+    if (!Number.isFinite(evaluationId) || seen.has(evaluationId)) {
+      continue;
+    }
+    seen.add(evaluationId);
+
+    entries.push({
+      user: normalizeUserHandle(profileMatch[1], $(anchors[index]).text()),
+      problemId: Number(problemMatch[1]),
+      problemSlug: problemMatch[2],
+      problemName: normalizeWhitespace($(anchors[index + 1]).text()),
+      evaluationId,
+    });
+  }
+
+  return entries;
+}
+
+function normalizeUserHandle(
+  profileHandle: string,
+  profileText: string,
+): string {
+  const normalizedText = normalizeWhitespace(profileText);
+  const textHandle = normalizedText.match(/\(([^)]+)\)\s*$/)?.[1];
+  return normalizeWhitespace(textHandle ?? profileHandle);
 }
 
 function parsePaginationMetadata(

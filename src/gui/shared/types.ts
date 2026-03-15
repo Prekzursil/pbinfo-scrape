@@ -253,6 +253,12 @@ export const guiCoverageSummarySchema = z
     problemsWithUserSourceArchived: z.number().int().nonnegative(),
     editorialVisibleCount: z.number().int().nonnegative(),
     rankingPresentCount: z.number().int().nonnegative(),
+    unsolvedProblemCount: z.number().int().nonnegative().optional(),
+    missingOfficialSourceCount: z.number().int().nonnegative().optional(),
+    solvedByMeMissingUserSourceCount: z.number().int().nonnegative().optional(),
+    unsolvedProblemIds: z.array(z.number().int().positive()).optional(),
+    missingOfficialSourceProblemIds: z.array(z.number().int().positive()).optional(),
+    solvedByMeMissingUserSourceProblemIds: z.array(z.number().int().positive()).optional(),
   })
   .strict();
 

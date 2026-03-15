@@ -139,6 +139,178 @@ describe('snapshot workflow', () => {
     expect(catalog.currentSnapshotId).toBe('canonical-snapshot');
     expect(catalog.canonicalSnapshotId).toBe('canonical-snapshot');
     expect(catalog.snapshots).toHaveLength(1);
+    expect(result.coverageGates).toEqual({
+      officialSourceGatePassed: true,
+      solvedUserSourceGatePassed: true,
+    });
+    expect(existsSync(result.coverageGapReportPath)).toBe(true);
+  });
+
+  test('fails finalization when solved-by-you problems are missing archived user sources', async () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-snapshot-coverage-gates-'));
+    tempDirs.push(workspaceRoot);
+    mkdirSync(join(workspaceRoot, '.local'), { recursive: true });
+    writeFileSync(
+      join(workspaceRoot, '.local', 'pbinfo.local.json'),
+      JSON.stringify(
+        {
+          crawl: {
+            userHandle: 'Prekzursil',
+            crossCheckWithBrowser: false,
+          },
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+
+    const config = loadLocalConfig(workspaceRoot);
+    const snapshot = prepareSnapshot(config, {
+      snapshotId: 'gate-snapshot',
+      scope: 'all',
+      now: new Date('2026-03-10T00:00:00.000Z'),
+    });
+    mkdirSync(join(snapshot.normalizedRoot, 'pages'), { recursive: true });
+
+    const problemUrl = 'https://www.pbinfo.ro/probleme/1/sum';
+    const userSolutionsUrl = 'https://www.pbinfo.ro/solutii/user/Prekzursil';
+    const evaluationUrl = 'https://www.pbinfo.ro/detalii-evaluare/70000001';
+
+    writeFileSync(
+      join(snapshot.rawPagesRoot, 'problem-1.html'),
+      `
+        <html><body>
+          <table>
+            <tr><th>Clasa</th></tr>
+            <tr><td>9</td></tr>
+          </table>
+          <h1><a href="/probleme/1/sum">Sum</a></h1>
+          <a href="/solutii/problema/1/sum">Soluții</a>
+        </body></html>
+      `,
+      'utf8',
+    );
+    writeFileSync(
+      join(snapshot.rawPagesRoot, 'user-solutions.html'),
+      `
+        <html><body>
+          <div class="bold mb-3">1 soluții respectă criteriile.</div>
+          <table>
+            <tr>
+              <td><a href="/profil/Prekzursil">Andrei Visalon (Prekzursil)</a></td>
+              <td><a href="/probleme/1/sum">sum</a></td>
+              <td><a href="/detalii-evaluare/70000001">Evaluare finalizată</a></td>
+            </tr>
+          </table>
+        </body></html>
+      `,
+      'utf8',
+    );
+    writeFileSync(
+      join(snapshot.rawPagesRoot, 'evaluation-70000001.html'),
+      `
+        <div id="detalii">
+          <table class="table">
+            <tr>
+              <th>Problema</th><td><a href="/probleme/1/sum">Sum</a></td>
+              <th>Utilizator</th><td><a href="/profil/Prekzursil">Andrei Visalon (Prekzursil)</a></td>
+            </tr>
+            <tr>
+              <th>Limbaj</th><td>C++</td>
+              <th>Scor/rezultat</th><td>100 puncte</td>
+            </tr>
+          </table>
+        </div>
+        <div id="evaluare">
+          <table class="table">
+            <tr>
+              <th>Test</th>
+              <th>Scor posibil</th>
+              <th>Scor obținut</th>
+              <th>Mesaj evaluare</th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>10</td>
+              <td>10</td>
+              <td>OK.</td>
+            </tr>
+          </table>
+        </div>
+      `,
+      'utf8',
+    );
+    writeFileSync(
+      snapshot.rawPagesManifestPath,
+      JSON.stringify(
+        {
+          [problemUrl]: 'problem-1.html',
+          [userSolutionsUrl]: 'user-solutions.html',
+          [evaluationUrl]: 'evaluation-70000001.html',
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+    writeFileSync(snapshot.rawAssetsManifestPath, JSON.stringify({}, null, 2), 'utf8');
+
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'pages', 'problem-1.json'),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          url: problemUrl,
+          kind: 'public-page',
+          httpStatus: 200,
+          contentType: 'text/html',
+          bodyPath: 'raw-pages/problem-1.html',
+          fetchedAt: '2026-03-10T00:00:00.000Z',
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'pages', 'user-solutions.json'),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          url: userSolutionsUrl,
+          kind: 'user-solutions',
+          httpStatus: 200,
+          contentType: 'text/html',
+          bodyPath: 'raw-pages/user-solutions.html',
+          fetchedAt: '2026-03-10T00:00:00.000Z',
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'pages', 'evaluation.json'),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          url: evaluationUrl,
+          kind: 'evaluation-detail',
+          httpStatus: 200,
+          contentType: 'text/html',
+          bodyPath: 'raw-pages/evaluation-70000001.html',
+          fetchedAt: '2026-03-10T00:00:00.000Z',
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+
+    await expect(finalizeSnapshotWorkflow(workspaceRoot, 'gate-snapshot')).rejects.toThrow(
+      /solved-by-you user sources missing/i,
+    );
   });
 
   test('refuses to finalize a snapshot that still has pending queue work', async () => {

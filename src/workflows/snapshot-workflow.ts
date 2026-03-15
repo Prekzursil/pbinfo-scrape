@@ -9,6 +9,8 @@ import {
   resolveReadableSnapshotLayout,
 } from '../archive/storage.js';
 import { loadLocalConfig } from '../config/local-config.js';
+import { buildProblemCoverageGapReport } from '../coverage/coverage-gaps.js';
+import { readProblemCoverageIndex } from '../coverage/problem-coverage.js';
 import { readCrawlQueueSnapshot } from '../crawl/crawl-queue.js';
 import { buildMirrorArtifacts } from '../mirror/build-mirror.js';
 import { runRankingWorkflow } from './rank-workflow.js';
@@ -37,6 +39,11 @@ export interface FinalizeSnapshotResult {
   problemsRanked: number;
   routesBuilt: number;
   artifactManifestPath: string;
+  coverageGapReportPath: string;
+  coverageGates: {
+    officialSourceGatePassed: boolean;
+    solvedUserSourceGatePassed: boolean;
+  };
 }
 
 export function getCrawlStatus(
@@ -103,7 +110,28 @@ export async function finalizeSnapshotWorkflow(
   const rankingResult = await runRankingWorkflow(workspaceRoot, snapshotId);
   const mirrorResult = await buildMirrorArtifacts(workspaceRoot, snapshotId);
   const layout = resolveReadableSnapshotLayout(config, snapshotId);
-  const artifactManifest = exportRawArtifacts(config, layout);
+  const coverageIndex = readProblemCoverageIndex(layout.normalizedRoot);
+  if (!coverageIndex) {
+    throw new Error(
+      `Coverage dataset is missing for snapshot ${snapshotId}. Run normalize/rank/build-mirror before finalizing.`,
+    );
+  }
+  const coverageGaps = buildProblemCoverageGapReport({
+    normalizedRoot: layout.normalizedRoot,
+    snapshotId,
+    coverageIndex,
+  });
+  if (!coverageGaps.gates.officialSourceGate.passed) {
+    throw new Error(
+      `Coverage hard gate failed (official sources): unresolved problems=${coverageGaps.gates.officialSourceGate.failedProblemIds.join(', ')}. See ${coverageGaps.paths.reportPath}.`,
+    );
+  }
+  if (!coverageGaps.gates.solvedUserSourceGate.passed) {
+    throw new Error(
+      `Coverage hard gate failed (solved-by-you user sources missing): problems=${coverageGaps.gates.solvedUserSourceGate.failedProblemIds.join(', ')}. See ${coverageGaps.paths.reportPath}.`,
+    );
+  }
+  exportRawArtifacts(config, layout);
   pruneToCanonicalSnapshot(config, snapshotId);
 
   return {
@@ -112,5 +140,10 @@ export async function finalizeSnapshotWorkflow(
     problemsRanked: rankingResult.problemsRanked,
     routesBuilt: mirrorResult.routesBuilt,
     artifactManifestPath: layout.artifactManifestPath,
+    coverageGapReportPath: coverageGaps.paths.reportPath,
+    coverageGates: {
+      officialSourceGatePassed: coverageGaps.gates.officialSourceGate.passed,
+      solvedUserSourceGatePassed: coverageGaps.gates.solvedUserSourceGate.passed,
+    },
   };
 }

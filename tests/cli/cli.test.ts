@@ -32,6 +32,7 @@ describe('buildCli', () => {
 
     expect(authCommand?.commands.map((command) => command.name())).toEqual([
       'login',
+      'status',
       'import-cookies',
       'import-browser',
       'bundle',

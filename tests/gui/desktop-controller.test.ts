@@ -400,6 +400,19 @@ describe('desktop controller', () => {
             'artifacts',
             'acceptance-20260310b.json',
           ),
+          coverageGapReportPath: join(
+            workspaceRoot,
+            'archive',
+            'snapshots',
+            'acceptance-20260310b',
+            'normalized',
+            'problem-coverage',
+            'gaps.json',
+          ),
+          coverageGates: {
+            officialSourceGatePassed: true,
+            solvedUserSourceGatePassed: true,
+          },
         }),
     });
     const completed = await controller.startJob({
@@ -702,6 +715,7 @@ describe('desktop controller', () => {
         problemsCovered: 1,
         coverageRoot: join(snapshot.normalizedRoot, 'problem-coverage'),
         indexPath: join(snapshot.normalizedRoot, 'problem-coverage', 'index.json'),
+        gapsPath: join(snapshot.normalizedRoot, 'problem-coverage', 'gaps.json'),
         totals: {
           totalProblems: 1,
           solvedByMeCount: 1,

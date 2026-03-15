@@ -332,4 +332,44 @@ describe('user solutions parser', () => {
       },
     ]);
   });
+
+  test('parses table rows to avoid mismatching page-level profile links with unrelated evaluations', () => {
+    const parsed = parseUserSolutionsListPage(`
+      <a href="/profil/Prekzursil">Andrei Visalon (Prekzursil)</a>
+      <table>
+        <tr>
+          <th>Utilizator</th>
+          <th>Problema</th>
+          <th>Stare</th>
+        </tr>
+        <tr>
+          <td><a href="/profil/darius_tanasoiu">Darius (darius_tanasoiu)</a></td>
+          <td><a href="/probleme/3171/waterreserve">WaterReserve</a></td>
+          <td><a href="/detalii-evaluare/63676585">Evaluare finalizată</a></td>
+        </tr>
+        <tr>
+          <td><a href="/profil/Prekzursil">Andrei Visalon (Prekzursil)</a></td>
+          <td><a href="/probleme/1/sum">sum</a></td>
+          <td><a href="/detalii-evaluare/63332367">Evaluare finalizată</a></td>
+        </tr>
+      </table>
+    `);
+
+    expect(parsed.entries).toEqual([
+      {
+        user: 'darius_tanasoiu',
+        problemId: 3171,
+        problemSlug: 'waterreserve',
+        problemName: 'WaterReserve',
+        evaluationId: 63676585,
+      },
+      {
+        user: 'Prekzursil',
+        problemId: 1,
+        problemSlug: 'sum',
+        problemName: 'sum',
+        evaluationId: 63332367,
+      },
+    ]);
+  });
 });
