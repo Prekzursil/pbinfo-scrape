@@ -66,7 +66,7 @@ export function CoverageExplorerPanel(props: CoverageExplorerPanelProps) {
   };
 
   return (
-    <section className="panel coverage-panel">
+    <section className="panel coverage-panel panel-workspace">
       <div className="panel-heading">
         <div>
           <p className="section-kicker">Problem audit</p>
@@ -75,6 +75,7 @@ export function CoverageExplorerPanel(props: CoverageExplorerPanelProps) {
         <span className="panel-chip">{snapshotId}</span>
       </div>
 
+      <div className="coverage-workspace-top">
       <div className="coverage-summary-grid">
         <MetricCard
           label="Problems"
@@ -108,7 +109,7 @@ export function CoverageExplorerPanel(props: CoverageExplorerPanelProps) {
         />
       </div>
 
-      <div className="coverage-filter-grid">
+      <div className="coverage-filter-toolbar" role="toolbar" aria-label="Coverage filters">
         <label className="field">
           <span>Search problems</span>
           <input
@@ -206,6 +207,7 @@ export function CoverageExplorerPanel(props: CoverageExplorerPanelProps) {
             }
           />
         </label>
+      </div>
       </div>
 
       <div className="coverage-content-grid">
@@ -445,13 +447,15 @@ function MetricCard({
   label,
   value,
   copy,
+  className,
 }: {
   label: string;
   value: string;
   copy?: string;
+  className?: string;
 }) {
   return (
-    <article className="summary-card">
+    <article className={`summary-card ${className ?? ''}`.trim()}>
       <span className="metric-label">{label}</span>
       <strong>{value}</strong>
       {copy ? <p className="summary-copy">{copy}</p> : null}

@@ -52,7 +52,7 @@ export function DataExplorerPanel(props: DataExplorerPanelProps) {
       : undefined;
 
   return (
-    <section className="panel data-panel">
+    <section className="panel data-panel panel-workspace">
       <div className="panel-heading">
         <div>
           <p className="section-kicker">Structured archive</p>
@@ -61,6 +61,7 @@ export function DataExplorerPanel(props: DataExplorerPanelProps) {
         <span className="panel-chip">{snapshotId}</span>
       </div>
 
+      <div className="data-workspace-top">
       <div className="archive-location-grid">
         <article className="summary-card">
           <span className="metric-label">Normalized archive</span>
@@ -117,6 +118,7 @@ export function DataExplorerPanel(props: DataExplorerPanelProps) {
         </article>
       </div>
 
+      <div className="data-browser-toolbar" role="toolbar" aria-label="Archive dataset browser">
       <div className="dataset-chip-row" role="tablist" aria-label="Archive dataset">
         {datasetSummaries.map((dataset) => (
           <button
@@ -130,13 +132,15 @@ export function DataExplorerPanel(props: DataExplorerPanelProps) {
             <span>{dataset.label}</span>
             <strong>{dataset.count}</strong>
           </button>
-        ))}
+          ))}
+      </div>
       </div>
 
       <p className="summary-copy data-explorer-summary">
         {datasetSummaries.find((dataset) => dataset.dataset === selectedDataset)?.description
           ?? 'Browse the normalized PBInfo datasets captured in the canonical snapshot.'}
       </p>
+      </div>
 
       <div className="data-explorer-grid">
         <article className="summary-card data-list-card">

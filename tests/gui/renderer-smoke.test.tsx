@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom/vitest';
 
-import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen, within } from '@testing-library/react';
 import { afterEach, expect, test, vi } from 'vitest';
 
 import { App } from '../../src/gui/renderer/app.js';
@@ -57,7 +57,12 @@ test('lets the user move through overview, coverage, data, and setup without ove
   expect(await screen.findByTitle('Mirror preview')).toBeInTheDocument();
 
   fireEvent.click(await screen.findByRole('tab', { name: 'Coverage' }));
-  expect(await screen.findByRole('heading', { name: 'Coverage Explorer' })).toBeInTheDocument();
+  const coverageHeading = await screen.findByRole('heading', { name: 'Coverage Explorer' });
+  const coverageWorkspace = coverageHeading.closest('section');
+  expect(coverageWorkspace).toHaveClass('panel-workspace');
+  expect(
+    within(coverageWorkspace as HTMLElement).getByRole('toolbar', { name: 'Coverage filters' }),
+  ).toBeInTheDocument();
   const coverageSearchInput = await screen.findByLabelText('Search problems');
   fireEvent.change(coverageSearchInput, {
     target: {
@@ -82,7 +87,14 @@ test('lets the user move through overview, coverage, data, and setup without ove
   );
 
   fireEvent.click(await screen.findByRole('tab', { name: 'Data' }));
-  expect(await screen.findByRole('heading', { name: 'Data Explorer' })).toBeInTheDocument();
+  const dataHeading = await screen.findByRole('heading', { name: 'Data Explorer' });
+  const dataWorkspace = dataHeading.closest('section');
+  expect(dataWorkspace).toHaveClass('panel-workspace');
+  expect(
+    within(dataWorkspace as HTMLElement).getByRole('toolbar', {
+      name: 'Archive dataset browser',
+    }),
+  ).toBeInTheDocument();
   const datasetSearchInput = await screen.findByLabelText('Search current dataset');
   fireEvent.change(datasetSearchInput, {
     target: {
