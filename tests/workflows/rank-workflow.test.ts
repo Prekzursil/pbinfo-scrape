@@ -109,9 +109,20 @@ describe('runRankingWorkflow', () => {
             cpp: 10,
             py: 11,
           },
+          bestTrustworthyOverallEvaluationId: 10,
+          bestTrustworthyPerLanguage: {
+            cpp: 10,
+            py: 11,
+          },
+          bestFastPerLanguage: {
+            cpp: 10,
+            py: 11,
+          },
           bestOfficialPerLanguage: {
             cpp: 'official-3253-cpp',
           },
+          suspiciousCandidateEvaluationIds: [],
+          duplicateEvaluationIds: [],
           orderedUserEvaluationIds: [10, 11],
         },
       ],

@@ -383,7 +383,7 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
               <button className="ghost-button" type="button" onClick={() => setActiveView('coverage')}>Open coverage</button>
               <button className="ghost-button" type="button" onClick={() => setActiveView('data')}>Open raw data</button>
             </div>
-            {activeCrawlJob ? <div className="button-row"><button className="ghost-button" type="button" onClick={() => void onResumeCrawl(activeCrawlJob.jobId)}>Resume crawl</button><button className="ghost-button ghost-danger" type="button" onClick={() => void onPauseCrawl(activeCrawlJob.jobId)}>Pause after current chunk</button></div> : null}
+            {activeCrawlJob ? <div className="button-row"><button className="ghost-button" type="button" onClick={() => void onResumeCrawl(activeCrawlJob.jobId)}>Resume crawl</button><button className="ghost-button ghost-danger" type="button" onClick={() => void onPauseCrawl(activeCrawlJob.jobId)}>Pause after current chunk completes</button></div> : null}
             <div className="job-list">
               {jobs.length === 0 ? <p className="summary-copy">No desktop jobs recorded yet.</p> : jobs.map((job) => (
                 <article className="job-card" key={job.jobId}>

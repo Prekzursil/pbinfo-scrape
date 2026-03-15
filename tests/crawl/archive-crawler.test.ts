@@ -181,6 +181,73 @@ describe('ArchiveCrawler', () => {
     expect(snapshot.items[0]?.visibleAt).toBe('2026-03-10T00:00:30.000Z');
   });
 
+  test('queues evaluation-detail follow-ups from user solution rows with full-name profile text', async () => {
+    const workspace = createWorkspace({
+      crawl: {
+        userHandle: 'Prekzursil',
+      },
+    });
+    const server = createServer((request, response) => {
+      if (request.url === '/solutii/user/Prekzursil') {
+        response.setHeader('Content-Type', 'text/html');
+        response.end(`
+          <a href="/profil/Prekzursil">Andrei Visalon (Prekzursil)</a>
+          <a href="/probleme/4969/cibernetica">cibernetica</a>
+          <a href="/detalii-evaluare/63688922">detalii</a>
+        `);
+        return;
+      }
+
+      response.statusCode = 404;
+      response.end('missing');
+    });
+    servers.push(server);
+
+    await new Promise<void>((resolve) => {
+      server.listen(0, '127.0.0.1', () => resolve());
+    });
+
+    const address = server.address();
+    if (!address || typeof address === 'string') {
+      throw new TypeError('server address is not available');
+    }
+
+    const url = `http://127.0.0.1:${address.port}/solutii/user/Prekzursil`;
+    const queue = new CrawlQueue(workspace.queuePath);
+    queue.enqueueMany([
+      {
+        key: `page:${url}`,
+        url,
+        kind: 'user-solutions',
+      },
+    ]);
+
+    const crawler = new ArchiveCrawler({
+      config: workspace.config,
+      snapshot: workspace.snapshot,
+      queue,
+    });
+
+    await expect(crawler.processNext(new Date('2026-03-10T00:00:00.000Z'))).resolves.toBe(true);
+
+    const snapshot = queue.getSnapshot();
+    expect(snapshot.completed).toBe(1);
+    const evaluationFollowUp = snapshot.items.find((item) => item.kind === 'evaluation-detail');
+    expect(evaluationFollowUp).toMatchObject({
+      key: 'evaluation:63688922',
+      status: 'pending',
+    });
+    expect(evaluationFollowUp?.url).toContain('/detalii-evaluare/63688922');
+
+    const userSolutionsRecord = JSON.parse(
+      readFileSync(
+        join(workspace.snapshot.normalizedRoot, 'user-solutions', 'user-prekzursil.json'),
+        'utf8',
+      ),
+    );
+    expect(userSolutionsRecord.entries[0]?.user).toBe('Prekzursil');
+  });
+
   test('recovers from a malformed raw-pages manifest while archiving a page', async () => {
     const workspace = createWorkspace();
     mkdirSync(workspace.snapshot.rawPagesRoot, { recursive: true });
@@ -496,6 +563,102 @@ describe('ArchiveCrawler', () => {
     ).toContain('WaterReserve');
   });
 
+  test('normalizes statement examples and visible tests into the unified tests dataset', async () => {
+    const workspace = createWorkspace();
+    const server = createServer((request, response) => {
+      if (request.url === '/ajx-module/ajx-problema-afisare-enunt.php?id=3171') {
+        response.setHeader('Content-Type', 'text/html');
+        response.end(`
+          <article id="enunt">
+            <h1>Cerința</h1>
+            <p>Demo.</p>
+            <h1>Exemplu</h1>
+            <p>Date de intrare</p>
+            <pre>5 7</pre>
+            <p>Date de ieșire</p>
+            <pre>12</pre>
+            <p>Explicație</p>
+            <p>Suma este 12.</p>
+          </article>
+        `);
+        return;
+      }
+
+      if (request.url === '/ajx-module/ajx-problema-afisare-teste.php?id=3171') {
+        response.setHeader('Content-Type', 'text/html');
+        response.end(`
+          <h3>Test 1</h3>
+          <p>Intrare</p>
+          <pre>10 20</pre>
+          <p>Ieșire</p>
+          <pre>30</pre>
+        `);
+        return;
+      }
+
+      response.statusCode = 404;
+      response.end('missing');
+    });
+    servers.push(server);
+
+    await new Promise<void>((resolve) => {
+      server.listen(0, '127.0.0.1', () => resolve());
+    });
+
+    const address = server.address();
+    if (!address || typeof address === 'string') {
+      throw new TypeError('server address is not available');
+    }
+
+    const statementUrl = `http://127.0.0.1:${address.port}/ajx-module/ajx-problema-afisare-enunt.php?id=3171`;
+    const testsUrl = `http://127.0.0.1:${address.port}/ajx-module/ajx-problema-afisare-teste.php?id=3171`;
+    const queue = new CrawlQueue(workspace.queuePath);
+    queue.enqueueMany([
+      {
+        key: 'problem-statement:https://www.pbinfo.ro/probleme/3171/waterreserve',
+        url: statementUrl,
+        kind: 'problem-statement',
+      },
+      {
+        key: 'problem-tests:https://www.pbinfo.ro/probleme/3171/waterreserve',
+        url: testsUrl,
+        kind: 'problem-tests',
+      },
+    ]);
+
+    const crawler = new ArchiveCrawler({
+      config: workspace.config,
+      snapshot: workspace.snapshot,
+      queue,
+    });
+
+    await crawler.processNext(new Date('2026-03-10T00:00:00.000Z'));
+    await crawler.processNext(new Date('2026-03-10T00:00:01.000Z'));
+
+    const testsRecord = JSON.parse(
+      readFileSync(
+        join(workspace.snapshot.normalizedRoot, 'tests', 'problem-3171.json'),
+        'utf8',
+      ),
+    );
+
+    expect(testsRecord.examples).toEqual([
+      expect.objectContaining({
+        kind: 'example',
+        input: '5 7',
+        output: '12',
+        explanation: 'Suma este 12.',
+      }),
+    ]);
+    expect(testsRecord.visible).toEqual([
+      expect.objectContaining({
+        kind: 'visible',
+        input: '10 20',
+        output: '30',
+      }),
+    ]);
+  });
+
   test('recovers from a corrupted raw-pages manifest while normalizing a page', async () => {
     const workspace = createWorkspace();
     const server = createServer((request, response) => {
@@ -633,6 +796,130 @@ describe('ArchiveCrawler', () => {
     expect(queueSnapshot.completed).toBe(1);
   });
 
+  test('falls back to browser-captured evaluation HTML when the HTTP surface omits source code', async () => {
+    const workspace = createWorkspace();
+    const server = createServer((request, response) => {
+      if (request.url === '/detalii-evaluare/63332367') {
+        response.setHeader('Content-Type', 'text/html');
+        response.end(`
+          <div id="detalii">
+            <table class="table">
+              <tr><th>Problema</th><td><a href="/probleme/3716/crossword">Crossword</a></td></tr>
+              <tr><th>Utilizator</th><td><a href="/profil/Prekzursil">Prekzursil</a></td></tr>
+              <tr><th>Fișier</th><td>crossword.cpp</td></tr>
+              <tr><th>Scor/rezultat</th><td>100 puncte</td></tr>
+            </table>
+          </div>
+          <div id="evaluare">
+            <table class="table table-condensed">
+              <tr>
+                <th>Test</th>
+                <th>Timp</th>
+                <th>Mesaj evaluare</th>
+                <th>Scor posibil</th>
+                <th>Scor obținut</th>
+                <th></th>
+              </tr>
+              <tr><td>1</td><td>0.001 secunde</td><td>OK.</td><td>5</td><td>5</td><td></td></tr>
+            </table>
+          </div>
+        `);
+        return;
+      }
+
+      response.statusCode = 404;
+      response.end('missing');
+    });
+    servers.push(server);
+
+    await new Promise<void>((resolve) => {
+      server.listen(0, '127.0.0.1', () => resolve());
+    });
+
+    const address = server.address();
+    if (!address || typeof address === 'string') {
+      throw new TypeError('server address is not available');
+    }
+
+    const url = `http://127.0.0.1:${address.port}/detalii-evaluare/63332367`;
+    const queue = new CrawlQueue(join(workspace.root, '.local', 'browser-fallback.sqlite'));
+    queue.enqueueMany([
+      {
+        key: 'evaluation:63332367',
+        url,
+        kind: 'evaluation-detail',
+      },
+    ]);
+
+    const crawler = new ArchiveCrawler({
+      config: workspace.config,
+      snapshot: workspace.snapshot,
+      queue,
+      browserCapture: {
+        captureHtml: async () => `
+          <div id="detalii">
+            <table class="table">
+              <tr><th>Problema</th><td><a href="/probleme/3716/crossword">Crossword</a></td></tr>
+              <tr><th>Utilizator</th><td><a href="/profil/Prekzursil">Prekzursil</a></td></tr>
+              <tr><th>Fișier</th><td>crossword.cpp</td></tr>
+              <tr><th>Scor/rezultat</th><td>100 puncte</td></tr>
+            </table>
+          </div>
+          <textarea>int main(){return 0;}</textarea>
+          <div id="evaluare">
+            <table class="table table-condensed">
+              <tr>
+                <th>Test</th>
+                <th>Timp</th>
+                <th>Mesaj evaluare</th>
+                <th>Scor posibil</th>
+                <th>Scor obținut</th>
+                <th></th>
+              </tr>
+              <tr><td>1</td><td>0.001 secunde</td><td>OK.</td><td>5</td><td>5</td><td>Exemplu</td></tr>
+            </table>
+          </div>
+        `,
+        close: async () => undefined,
+      },
+    });
+
+    await crawler.processNext(new Date('2026-03-10T00:00:00.000Z'));
+
+    const evaluation = JSON.parse(
+      readFileSync(
+        join(workspace.snapshot.normalizedRoot, 'evaluations', 'evaluation-63332367.json'),
+        'utf8',
+      ),
+    );
+    const source = JSON.parse(
+      readFileSync(
+        join(workspace.snapshot.normalizedRoot, 'sources', 'evaluation-63332367.json'),
+        'utf8',
+      ),
+    );
+    const problem = JSON.parse(
+      readFileSync(
+        join(workspace.snapshot.normalizedRoot, 'problems', 'problem-3716.json'),
+        'utf8',
+      ),
+    );
+
+    expect(evaluation.sourceAvailable).toBe(true);
+    expect(source).toEqual(
+      expect.objectContaining({
+        sourceAvailable: true,
+        sourceCode: 'int main(){return 0;}',
+        provenanceType: 'browser-fallback',
+        sourceHash: expect.stringMatching(/^sha256:/),
+        normalizedSourceHash: expect.stringMatching(/^sha256:/),
+      }),
+    );
+    expect(problem.userSourceIds).toEqual({
+      cpp: ['evaluation-63332367'],
+    });
+  });
+
   test('discovers evaluation follow-ups only from the configured user solution page', async () => {
     const workspace = createWorkspace({
       crawl: {
@@ -719,5 +1006,179 @@ describe('ArchiveCrawler', () => {
     expect(otherQueue.getSnapshot().items.map((item) => item.key)).not.toContain(
       'evaluation:70000000',
     );
+  });
+
+  test('walks user-solution pagination and avoids duplicate evaluation follow-ups across pages', async () => {
+    const workspace = createWorkspace({
+      crawl: {
+        userHandle: 'Prekzursil',
+      },
+    });
+    const server = createServer((request, response) => {
+      if (request.url === '/solutii/user/Prekzursil') {
+        response.setHeader('Content-Type', 'text/html');
+        response.end(`
+          <html>
+            <body>
+              <div class="bold mb-3">75 soluții</div>
+              <a href="/profil/Prekzursil">Prekzursil</a>
+              <a href="/probleme/3171/waterreserve">WaterReserve</a>
+              <a href="/detalii-evaluare/63332367">100 puncte</a>
+              <script>
+                $(document).ready(function(){
+                  let tmp = Paginare(75, 0, 50);
+                });
+              </script>
+            </body>
+          </html>
+        `);
+        return;
+      }
+
+      if (request.url === '/solutii/user/Prekzursil?start=50') {
+        response.setHeader('Content-Type', 'text/html');
+        response.end(`
+          <html>
+            <body>
+              <div class="bold mb-3">75 soluții</div>
+              <a href="/profil/Prekzursil">Prekzursil</a>
+              <a href="/probleme/3171/waterreserve">WaterReserve</a>
+              <a href="/detalii-evaluare/63332367">100 puncte</a>
+              <a href="/profil/Prekzursil">Prekzursil</a>
+              <a href="/probleme/1/sum">Sum</a>
+              <a href="/detalii-evaluare/70000001">100 puncte</a>
+              <script>
+                $(document).ready(function(){
+                  let tmp = Paginare(75, 50, 50);
+                });
+              </script>
+            </body>
+          </html>
+        `);
+        return;
+      }
+
+      response.statusCode = 404;
+      response.end('missing');
+    });
+    servers.push(server);
+
+    await new Promise<void>((resolve) => {
+      server.listen(0, '127.0.0.1', () => resolve());
+    });
+
+    const address = server.address();
+    if (!address || typeof address === 'string') {
+      throw new TypeError('server address is not available');
+    }
+
+    const baseUrl = `http://127.0.0.1:${address.port}`;
+    const queue = new CrawlQueue(join(workspace.root, '.local', 'user-pages-queue.sqlite'));
+    queue.enqueueMany([
+      {
+        key: `page:${baseUrl}/solutii/user/Prekzursil`,
+        url: `${baseUrl}/solutii/user/Prekzursil`,
+        kind: 'user-solutions',
+      },
+    ]);
+    const crawler = new ArchiveCrawler({
+      config: workspace.config,
+      snapshot: workspace.snapshot,
+      queue,
+    });
+
+    await crawler.processNext(new Date('2026-03-10T00:00:00.000Z'));
+    await crawler.processNext(new Date('2026-03-10T00:00:05.000Z'));
+    await crawler.processNext(new Date('2026-03-10T00:00:10.000Z'));
+    await crawler.processNext(new Date('2026-03-10T00:00:15.000Z'));
+
+    const keys = queue.getSnapshot().items.map((item) => item.key);
+    expect(keys).toContain(`page:${baseUrl}/solutii/user/Prekzursil?start=50`);
+    expect(keys.filter((key) => key === 'evaluation:63332367')).toHaveLength(1);
+    expect(keys.filter((key) => key === 'evaluation:70000001')).toHaveLength(1);
+  });
+
+  test('archives official source code from source-list surfaces', async () => {
+    const workspace = createWorkspace();
+    const server = createServer((request, response) => {
+      if (request.url === '/solutii/problema/3171/waterreserve') {
+        response.setHeader('Content-Type', 'text/html');
+        response.end(`
+          <div class="tab-content">
+            <div id="cpp"><h4>C++</h4><pre>#include <bits/stdc++.h>\nint main(){return 0;}</pre></div>
+            <div id="python"><h4>Python</h4><pre>print(0)</pre></div>
+          </div>
+        `);
+        return;
+      }
+
+      response.statusCode = 404;
+      response.end('missing');
+    });
+    servers.push(server);
+
+    await new Promise<void>((resolve) => {
+      server.listen(0, '127.0.0.1', () => resolve());
+    });
+
+    const address = server.address();
+    if (!address || typeof address === 'string') {
+      throw new TypeError('server address is not available');
+    }
+
+    const url = `http://127.0.0.1:${address.port}/solutii/problema/3171/waterreserve`;
+    const queue = new CrawlQueue(join(workspace.root, '.local', 'official-source-queue.sqlite'));
+    queue.enqueueMany([
+      {
+        key: `page:${url}`,
+        url,
+        kind: 'public-page',
+      },
+    ]);
+    const crawler = new ArchiveCrawler({
+      config: workspace.config,
+      snapshot: workspace.snapshot,
+      queue,
+    });
+
+    await crawler.processNext(new Date('2026-03-10T00:00:00.000Z'));
+
+    const cppSource = JSON.parse(
+      readFileSync(
+        join(workspace.snapshot.normalizedRoot, 'sources', 'official-3171-cpp.json'),
+        'utf8',
+      ),
+    );
+    const pySource = JSON.parse(
+      readFileSync(
+        join(workspace.snapshot.normalizedRoot, 'sources', 'official-3171-py.json'),
+        'utf8',
+      ),
+    );
+    const problemRecord = JSON.parse(
+      readFileSync(
+        join(workspace.snapshot.normalizedRoot, 'problems', 'problem-3171.json'),
+        'utf8',
+      ),
+    );
+
+    expect(cppSource).toMatchObject({
+      kind: 'official',
+      problemId: 3171,
+      language: 'cpp',
+      sourceAvailable: true,
+      sourceHash: expect.stringMatching(/^sha256:/),
+      normalizedSourceHash: expect.stringMatching(/^sha256:/),
+    });
+    expect(pySource).toMatchObject({
+      kind: 'official',
+      problemId: 3171,
+      language: 'py',
+      sourceAvailable: true,
+    });
+    expect(problemRecord.officialSourceIds).toMatchObject({
+      cpp: 'official-3171-cpp',
+      py: 'official-3171-py',
+    });
   });
 });

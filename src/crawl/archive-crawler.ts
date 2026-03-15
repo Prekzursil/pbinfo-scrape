@@ -21,13 +21,22 @@ import {
   parseProblemPage,
   parseProblemStatementFragment,
 } from '../pbinfo/parsers/problem.js';
-import { parseUserSolutionsListPage } from '../pbinfo/parsers/user-solutions.js';
+import {
+  parseUserSolutionsListPage,
+  type UserSolutionListEntry,
+} from '../pbinfo/parsers/user-solutions.js';
+import { buildSourceSignature } from '../ranking/source-normalization.js';
 import type { CrawlQueueInput } from '../types/crawl.js';
 import type {
+  EvaluationTestResult,
   EvaluationRecord,
   MirrorRouteRecord,
   PageRecord,
+  ProblemExample,
   ProblemRecord,
+  ProblemTestCaseRecord,
+  ProblemTestsRecord,
+  ProblemVisibleTest,
   SourceRecord,
 } from '../types/records.js';
 import { CrawlQueue } from './crawl-queue.js';
@@ -44,6 +53,20 @@ export interface ArchiveCrawlerOptions {
 
 const manifestCache = new Map<string, Record<string, string>>();
 const manifestWriteLocks = new Map<string, Promise<void>>();
+
+interface UserSolutionsRecord {
+  user: string;
+  sourceUrl: string;
+  pageUrls: string[];
+  httpStatus?: number;
+  contentType?: string;
+  totalMatches?: number;
+  throttled: boolean;
+  pageSize?: number;
+  currentOffset?: number;
+  nextPageUrls: string[];
+  entries: UserSolutionListEntry[];
+}
 
 export class ArchiveCrawler {
   private readonly config: LoadedLocalConfig;
@@ -83,7 +106,13 @@ export class ArchiveCrawler {
 
       const contentHash = `sha256:${createHash('sha256').update(body).digest('hex')}`;
       const fileName = await this.archiveHtmlPage(item.url, body);
-      const browserBodyPath = await this.captureBrowserHtml(item.url);
+      const browserCapture = await this.captureBrowserHtml(item.url);
+      const normalizedHtml = resolvePreferredNormalizedHtml(
+        item.kind,
+        item.url,
+        body,
+        browserCapture.html,
+      );
       this.persistPageRecord({
         snapshotId: this.snapshot.snapshotId,
         url: item.url,
@@ -92,10 +121,16 @@ export class ArchiveCrawler {
         contentType: contentType ?? undefined,
         contentHash,
         bodyPath: `raw-pages/${fileName}`,
-        browserBodyPath,
+        browserBodyPath: browserCapture.bodyPath,
         fetchedAt: now.toISOString(),
       });
-      this.persistNormalizedHtml(item, body, response.status, contentType ?? undefined);
+      this.persistNormalizedHtml(
+        item,
+        normalizedHtml.html,
+        response.status,
+        contentType ?? undefined,
+        normalizedHtml.source === 'browser',
+      );
 
       const followUps = [
         ...discoverFollowUps(this.config, item.url, body),
@@ -153,9 +188,12 @@ export class ArchiveCrawler {
     );
   }
 
-  private async captureBrowserHtml(url: string): Promise<string | undefined> {
+  private async captureBrowserHtml(url: string): Promise<{
+    bodyPath?: string;
+    html?: string;
+  }> {
     if (!this.browserCapture) {
-      return undefined;
+      return {};
     }
 
     try {
@@ -164,9 +202,12 @@ export class ArchiveCrawler {
       const root = join(this.snapshot.snapshotRoot, 'browser-pages');
       mkdirSync(root, { recursive: true });
       writeFileSync(join(root, fileName), html, 'utf8');
-      return `browser-pages/${fileName}`;
+      return {
+        bodyPath: `browser-pages/${fileName}`,
+        html,
+      };
     } catch {
-      return undefined;
+      return {};
     }
   }
 
@@ -175,6 +216,7 @@ export class ArchiveCrawler {
     html: string,
     httpStatus: number,
     contentType?: string,
+    normalizedFromBrowser = false,
   ): void {
     persistNormalizedSnapshotHtml({
       config: this.config,
@@ -184,6 +226,7 @@ export class ArchiveCrawler {
       httpStatus,
       contentType,
       fetchedAt: new Date().toISOString(),
+      normalizedFromBrowser,
     });
   }
 
@@ -246,6 +289,7 @@ export interface PersistNormalizedSnapshotHtmlOptions {
   httpStatus: number;
   contentType?: string;
   fetchedAt: string;
+  normalizedFromBrowser?: boolean;
 }
 
 export function persistNormalizedSnapshotHtml(
@@ -293,13 +337,27 @@ export function persistNormalizedSnapshotHtml(
         memoryLimitMb: current?.memoryLimitMb ?? fragment.executionHints.memoryLimitMb,
       }),
     );
+    persistProblemExamples(
+      options.snapshot,
+      problemId,
+      linkedProblem.slug,
+      linkedProblem.slug,
+      fragment.examples,
+    );
     return;
   }
 
   if (options.item.kind === 'problem-solution' && linkedProblem) {
     const problemId = linkedProblem.id;
     const solution = parseOfficialSolutionFragment(options.html);
-    const sourceIds = persistOfficialSources(options.snapshot, problemId, solution.solutions, options.item.url);
+    const sourceIds = persistOfficialSources(
+      options.snapshot,
+      problemId,
+      solution.solutions,
+      options.item.url,
+      options.fetchedAt,
+      options.normalizedFromBrowser ? 'browser-fallback' : 'official-fragment',
+    );
     mergeJsonRecord<ProblemRecord>(
       join(options.snapshot.normalizedRoot, 'problems'),
       `problem-${problemId}.json`,
@@ -338,6 +396,44 @@ export function persistNormalizedSnapshotHtml(
         visibleTests: fragment.visibleTests,
       }),
     );
+    persistProblemVisibleTests(
+      options.snapshot,
+      problemId,
+      linkedProblem.slug,
+      linkedProblem.slug,
+      fragment.visibleTests,
+    );
+    return;
+  }
+
+  const sourceListMatch = new URL(options.item.url).pathname.match(/^\/solutii\/problema\/(\d+)\/([^/?#]+)/i);
+  if (options.item.kind === 'public-page' && sourceListMatch?.[1] && sourceListMatch[2]) {
+    const problemId = Number(sourceListMatch[1]);
+    const slug = sourceListMatch[2];
+    const solution = parseOfficialSolutionFragment(options.html);
+    if (Object.keys(solution.solutions).length > 0) {
+      const sourceIds = persistOfficialSources(
+        options.snapshot,
+        problemId,
+        solution.solutions,
+        options.item.url,
+        options.fetchedAt,
+        options.normalizedFromBrowser ? 'browser-fallback' : 'official-fragment',
+      );
+      mergeJsonRecord<ProblemRecord>(
+        join(options.snapshot.normalizedRoot, 'problems'),
+        `problem-${problemId}.json`,
+        (current) => ({
+          ...(current ?? createPlaceholderProblem(problemId, slug)),
+          sourceListUrl: current?.sourceListUrl ?? options.item.url,
+          officialSolutions: mergeLanguageSolutions(current?.officialSolutions ?? {}, solution.solutions),
+          officialSourceIds: {
+            ...(current?.officialSourceIds ?? {}),
+            ...sourceIds,
+          },
+        }),
+      );
+    }
     return;
   }
 
@@ -357,7 +453,12 @@ export function persistNormalizedSnapshotHtml(
         `evaluation-${evaluation.evaluationId}.json`,
         evaluation,
       );
-      persistEvaluationSource(options.snapshot, evaluation);
+      persistEvaluationSource(
+        options.snapshot,
+        evaluation,
+        options.normalizedFromBrowser ? 'browser-fallback' : 'evaluation-detail',
+      );
+      persistEvaluationObservedTests(options.snapshot, evaluation);
     } catch (error) {
       writeJsonRecord(
         join(options.snapshot.normalizedRoot, 'evaluation-errors'),
@@ -374,17 +475,33 @@ export function persistNormalizedSnapshotHtml(
   }
 
   const solutionsMatch = options.item.url.match(/\/solutii\/user\/([^/?#]+)/);
-  if (options.item.kind === 'user-solutions' && solutionsMatch?.[1]) {
-    const record = parseUserSolutionsListPage(options.html);
-    writeJsonRecord(
+  const userHandle = solutionsMatch?.[1];
+  if (options.item.kind === 'user-solutions' && userHandle) {
+    const record = parseUserSolutionsListPage(options.html, options.item.url);
+    mergeJsonRecord<UserSolutionsRecord>(
       join(options.snapshot.normalizedRoot, 'user-solutions'),
-      `user-${sanitizeSegment(solutionsMatch[1]).toLowerCase()}.json`,
-      {
-        user: solutionsMatch[1],
-        sourceUrl: options.item.url,
-        httpStatus: options.httpStatus,
-        contentType: options.contentType,
-        ...record,
+      `user-${sanitizeSegment(userHandle).toLowerCase()}.json`,
+      (current) => {
+        const existingEntries = Array.isArray(current?.entries) ? current.entries : [];
+        const nextEntries = dedupeUserSolutionEntries([
+          ...existingEntries,
+          ...record.entries,
+        ]);
+        const existingPageUrls = Array.isArray(current?.pageUrls) ? current.pageUrls : [];
+        return {
+          ...(current ?? {}),
+          user: userHandle,
+          sourceUrl: current?.sourceUrl ?? options.item.url,
+          pageUrls: [...new Set([...existingPageUrls, options.item.url])].sort(),
+          httpStatus: options.httpStatus,
+          contentType: options.contentType,
+          totalMatches: maxDefinedNumber(current?.totalMatches, record.totalMatches),
+          throttled: Boolean(current?.throttled || record.throttled),
+          pageSize: record.pageSize ?? current?.pageSize,
+          currentOffset: record.currentOffset ?? current?.currentOffset,
+          nextPageUrls: record.nextPageUrls,
+          entries: nextEntries,
+        };
       },
     );
     return;
@@ -458,11 +575,14 @@ function persistOfficialSources(
   problemId: number,
   solutions: Record<string, string>,
   sourceUrl: string,
+  fetchedAt: string,
+  provenanceType: SourceRecord['provenanceType'],
 ): Record<string, string> {
   const sourceIds: Record<string, string> = {};
   for (const [languageLabel, sourceCode] of Object.entries(solutions)) {
     const language = normalizeSourceLanguage(languageLabel);
     const sourceId = `official-${problemId}-${sanitizeSegment(language).toLowerCase()}`;
+    const signature = buildSourceSignature(sourceCode, language);
     const sourceRecord: SourceRecord = {
       sourceId,
       kind: 'official',
@@ -470,6 +590,11 @@ function persistOfficialSources(
       language,
       sourceAvailable: Boolean(sourceCode),
       sourceCode,
+      sourceHash: signature?.sourceHash,
+      normalizedSourceHash: signature?.normalizedSourceHash,
+      sourceLength: signature?.sourceLength,
+      fetchedAt,
+      provenanceType,
       suspicionFlags: detectSuspicionFlags(sourceCode),
       provenance: [sourceUrl],
     };
@@ -487,6 +612,7 @@ function persistOfficialSources(
 function persistEvaluationSource(
   snapshot: SnapshotLayout,
   evaluation: EvaluationRecord,
+  provenanceType: SourceRecord['provenanceType'],
 ): void {
   if (!evaluation.sourceAvailable) {
     return;
@@ -494,6 +620,7 @@ function persistEvaluationSource(
 
   const language = normalizeSourceLanguage(evaluation.language);
   const sourceId = `evaluation-${evaluation.evaluationId}`;
+  const signature = buildSourceSignature(evaluation.sourceCode, language);
   const sourceRecord: SourceRecord = {
     sourceId,
     kind: 'user-evaluation',
@@ -506,6 +633,11 @@ function persistEvaluationSource(
     memoryKb: evaluation.memoryKb,
     sourceAvailable: evaluation.sourceAvailable,
     sourceCode: evaluation.sourceCode,
+    sourceHash: signature?.sourceHash,
+    normalizedSourceHash: signature?.normalizedSourceHash,
+    sourceLength: signature?.sourceLength,
+    fetchedAt: evaluation.fetchedAt,
+    provenanceType,
     suspicionFlags: evaluation.suspicionFlags,
     provenance: evaluation.provenance,
   };
@@ -514,6 +646,212 @@ function persistEvaluationSource(
     `${sourceId}.json`,
     sourceRecord,
   );
+  mergeJsonRecord<ProblemRecord>(
+    join(snapshot.normalizedRoot, 'problems'),
+    `problem-${evaluation.problemId}.json`,
+    (current) => {
+      const currentIds = current?.userSourceIds ?? {};
+      const currentLanguageIds = currentIds[language] ?? [];
+      return {
+        ...(current ?? createPlaceholderProblem(evaluation.problemId, evaluation.problemSlug)),
+        userSourceIds: {
+          ...currentIds,
+          [language]: [...new Set([...currentLanguageIds, sourceId])].sort(),
+        },
+      };
+    },
+  );
+}
+
+function persistProblemExamples(
+  snapshot: SnapshotLayout,
+  problemId: number,
+  problemSlug: string,
+  fallbackProblemName: string,
+  examples: ProblemExample[],
+): void {
+  const cases: ProblemTestCaseRecord[] = examples.map((example, index) => ({
+    testId: `example-${index + 1}`,
+    kind: 'example',
+    label: `Example ${index + 1}`,
+    input: example.input || undefined,
+    output: example.output || undefined,
+    explanation: example.explanation,
+    index: index + 1,
+  }));
+  mergeJsonRecord<ProblemTestsRecord>(
+    join(snapshot.normalizedRoot, 'tests'),
+    `problem-${problemId}.json`,
+    (current) => ({
+      ...(current ?? createEmptyProblemTestsRecord(snapshot.snapshotId, problemId, problemSlug, fallbackProblemName)),
+      examples: cases,
+      visible: current?.visible ?? [],
+      evaluationObserved: current?.evaluationObserved ?? [],
+    }),
+  );
+}
+
+function persistProblemVisibleTests(
+  snapshot: SnapshotLayout,
+  problemId: number,
+  problemSlug: string,
+  fallbackProblemName: string,
+  visibleTests: ProblemVisibleTest[],
+): void {
+  const cases: ProblemTestCaseRecord[] = visibleTests.map((test, index) => ({
+    testId: `visible-${index + 1}`,
+    kind: 'visible',
+    label: test.title || `Visible test ${index + 1}`,
+    input: test.input || undefined,
+    output: test.output || undefined,
+    index: index + 1,
+  }));
+  mergeJsonRecord<ProblemTestsRecord>(
+    join(snapshot.normalizedRoot, 'tests'),
+    `problem-${problemId}.json`,
+    (current) => ({
+      ...(current ?? createEmptyProblemTestsRecord(snapshot.snapshotId, problemId, problemSlug, fallbackProblemName)),
+      examples: current?.examples ?? [],
+      visible: cases,
+      evaluationObserved: current?.evaluationObserved ?? [],
+    }),
+  );
+}
+
+function persistEvaluationObservedTests(
+  snapshot: SnapshotLayout,
+  evaluation: EvaluationRecord,
+): void {
+  const cases: ProblemTestCaseRecord[] = evaluation.tests.map((test) =>
+    toEvaluationObservedTestCase(evaluation.evaluationId, test),
+  );
+  mergeJsonRecord<ProblemTestsRecord>(
+    join(snapshot.normalizedRoot, 'tests'),
+    `problem-${evaluation.problemId}.json`,
+    (current) => {
+      const existing = current?.evaluationObserved ?? [];
+      const byId = new Map<string, ProblemTestCaseRecord>();
+      for (const entry of [...existing, ...cases]) {
+        byId.set(entry.testId, entry);
+      }
+      return {
+        ...(current ?? createEmptyProblemTestsRecord(snapshot.snapshotId, evaluation.problemId, evaluation.problemSlug, evaluation.problemName)),
+        examples: current?.examples ?? [],
+        visible: current?.visible ?? [],
+        evaluationObserved: [...byId.values()].sort(compareProblemTestCaseRecords),
+      };
+    },
+  );
+}
+
+function toEvaluationObservedTestCase(
+  evaluationId: number,
+  test: EvaluationTestResult,
+): ProblemTestCaseRecord {
+  return {
+    testId: `evaluation-${evaluationId}-test-${test.index}`,
+    kind: 'evaluationObserved',
+    label: test.details || `Evaluation test ${test.index}`,
+    evaluationId,
+    index: test.index,
+    verdict: test.verdict,
+    score: test.score,
+    maxScore: test.maxScore,
+    details: test.details,
+  };
+}
+
+function compareProblemTestCaseRecords(
+  left: ProblemTestCaseRecord,
+  right: ProblemTestCaseRecord,
+): number {
+  const leftEvaluation = left.evaluationId ?? Number.MIN_SAFE_INTEGER;
+  const rightEvaluation = right.evaluationId ?? Number.MIN_SAFE_INTEGER;
+  if (leftEvaluation !== rightEvaluation) {
+    return rightEvaluation - leftEvaluation;
+  }
+
+  const leftIndex = left.index ?? 0;
+  const rightIndex = right.index ?? 0;
+  if (leftIndex !== rightIndex) {
+    return leftIndex - rightIndex;
+  }
+
+  return left.testId.localeCompare(right.testId);
+}
+
+function createEmptyProblemTestsRecord(
+  snapshotId: string,
+  problemId: number,
+  problemSlug: string,
+  problemName: string,
+): ProblemTestsRecord {
+  return {
+    snapshotId,
+    problemId,
+    problemSlug,
+    problemName,
+    examples: [],
+    visible: [],
+    evaluationObserved: [],
+  };
+}
+
+function resolvePreferredNormalizedHtml(
+  kind: CrawlQueueInput['kind'],
+  sourceUrl: string,
+  httpHtml: string,
+  browserHtml?: string,
+): {
+  html: string;
+  source: 'http' | 'browser';
+} {
+  if (!browserHtml) {
+    return { html: httpHtml, source: 'http' };
+  }
+
+  try {
+    if (kind === 'problem-solution') {
+      const httpSolutions = Object.keys(parseOfficialSolutionFragment(httpHtml).solutions).length;
+      const browserSolutions = Object.keys(parseOfficialSolutionFragment(browserHtml).solutions).length;
+      return browserSolutions > httpSolutions
+        ? { html: browserHtml, source: 'browser' }
+        : { html: httpHtml, source: 'http' };
+    }
+
+    if (kind === 'problem-tests') {
+      const httpTests = parseProblemEndpointFragment(httpHtml).visibleTests.length;
+      const browserTests = parseProblemEndpointFragment(browserHtml).visibleTests.length;
+      return browserTests > httpTests
+        ? { html: browserHtml, source: 'browser' }
+        : { html: httpHtml, source: 'http' };
+    }
+
+    if (kind === 'evaluation-detail') {
+      const evaluationId = Number(sourceUrl.match(/\/detalii-evaluare\/(\d+)/)?.[1]);
+      if (!Number.isFinite(evaluationId)) {
+        return { html: httpHtml, source: 'http' };
+      }
+
+      const httpParsed = parseEvaluationPage(httpHtml, evaluationId);
+      const browserParsed = parseEvaluationPage(browserHtml, evaluationId);
+      return browserParsed.sourceAvailable && !httpParsed.sourceAvailable
+        ? { html: browserHtml, source: 'browser' }
+        : { html: httpHtml, source: 'http' };
+    }
+
+    if (kind === 'public-page' && /\/solutii\/problema\/\d+\/[^/?#]+/i.test(new URL(sourceUrl).pathname)) {
+      const httpSolutions = Object.keys(parseOfficialSolutionFragment(httpHtml).solutions).length;
+      const browserSolutions = Object.keys(parseOfficialSolutionFragment(browserHtml).solutions).length;
+      return browserSolutions > httpSolutions
+        ? { html: browserHtml, source: 'browser' }
+        : { html: httpHtml, source: 'http' };
+    }
+  } catch {
+    return { html: browserHtml, source: 'browser' };
+  }
+
+  return { html: httpHtml, source: 'http' };
 }
 
 function resolveRawPageBodyPath(
@@ -613,14 +951,30 @@ function discoverNormalizedFollowUps(
     return [];
   }
 
-  const parsed = parseUserSolutionsListPage(html);
-  return parsed.entries
-    .filter((entry) => matchesConfiguredUserHandle(config, entry.user))
-    .map((entry) => ({
+  const parsed = parseUserSolutionsListPage(html, baseUrl);
+  const queued = new Map<string, CrawlQueueInput>();
+
+  for (const nextPageUrl of parsed.nextPageUrls) {
+    queued.set(`page:${nextPageUrl}`, {
+      key: `page:${nextPageUrl}`,
+      url: nextPageUrl,
+      kind: 'user-solutions',
+    });
+  }
+
+  for (const entry of parsed.entries) {
+    if (!matchesConfiguredUserHandle(config, entry.user)) {
+      continue;
+    }
+
+    queued.set(`evaluation:${entry.evaluationId}`, {
       key: `evaluation:${entry.evaluationId}`,
       url: new URL(`/detalii-evaluare/${entry.evaluationId}`, baseUrl).toString(),
       kind: 'evaluation-detail',
-    }));
+    });
+  }
+
+  return [...queued.values()];
 }
 
 function normalizeNavigableUrl(
@@ -750,7 +1104,17 @@ function matchesConfiguredUserHandle(
     return false;
   }
 
-  return configured === candidate.trim().toLowerCase();
+  const normalized = candidate.trim().toLowerCase();
+  if (configured === normalized) {
+    return true;
+  }
+
+  const handleMatch = normalized.match(/\(([^)]+)\)\s*$/);
+  if (handleMatch?.[1]) {
+    return configured === handleMatch[1].trim().toLowerCase();
+  }
+
+  return false;
 }
 
 function normalizePathname(pathname: string): string {
@@ -927,6 +1291,34 @@ function normalizeSourceLanguage(language: string): string {
   return sanitizeSegment(normalized).toLowerCase() || 'unknown';
 }
 
+function dedupeUserSolutionEntries<T extends { evaluationId?: number }>(
+  entries: T[],
+): T[] {
+  const byEvaluationId = new Map<number, T>();
+  for (const entry of entries) {
+    if (typeof entry.evaluationId !== 'number') {
+      continue;
+    }
+    if (!byEvaluationId.has(entry.evaluationId)) {
+      byEvaluationId.set(entry.evaluationId, entry);
+    }
+  }
+
+  return [...byEvaluationId.values()].sort((left, right) =>
+    (right.evaluationId ?? 0) - (left.evaluationId ?? 0),
+  );
+}
+
+function maxDefinedNumber(left: number | undefined, right: number | undefined): number | undefined {
+  if (left === undefined) {
+    return right;
+  }
+  if (right === undefined) {
+    return left;
+  }
+  return Math.max(left, right);
+}
+
 function detectSuspicionFlags(sourceCode?: string): string[] {
   if (!sourceCode) {
     return [];
@@ -934,7 +1326,7 @@ function detectSuspicionFlags(sourceCode?: string): string[] {
 
   const flags = new Set<string>();
   const normalized = sourceCode.toLowerCase();
-  if (normalized.length < 24) {
+  if (normalized.length < 40) {
     flags.add('tiny-source');
   }
 
@@ -943,6 +1335,23 @@ function detectSuspicionFlags(sourceCode?: string): string[] {
   const readsInput = /(cin\s*>>|scanf\s*\(|input\s*\(|std::getline|getline\s*\()/i.test(sourceCode);
   if (printsConstant && !readsInput) {
     flags.add('constant-output');
+  }
+
+  const exactBranching =
+    readsInput
+    && /(if\s*\([^)]*(?:==|<=|>=)\s*["'\d]|case\s+["'\d]|switch\s*\()/i.test(sourceCode);
+  if (exactBranching) {
+    flags.add('input-branching');
+  }
+
+  const literalPairs = normalized.match(/(["'][^"']+["']|\b\d{2,}\b)/g) ?? [];
+  if (readsInput && literalPairs.length >= 8) {
+    flags.add('literal-pairs');
+  }
+
+  const lookupTableLiterals = normalized.match(/\{[^{}]*(?:\d+\s*,\s*){6,}\d+[^{}]*\}/g) ?? [];
+  if (lookupTableLiterals.length > 0 && normalized.length < 400) {
+    flags.add('lookup-table');
   }
 
   return [...flags];

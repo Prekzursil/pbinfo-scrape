@@ -19,6 +19,7 @@ import { persistSerializedCookies } from './auth/session-store.js';
 import {
   exportRawSnapshotArtifacts,
   importRawSnapshotArtifacts,
+  relinkRawSnapshotArtifacts,
 } from './artifacts/raw-artifacts.js';
 import { loadLocalConfig } from './config/local-config.js';
 import { buildMirrorArtifacts } from './mirror/build-mirror.js';
@@ -60,6 +61,7 @@ export interface CliHandlers {
   rank: (workspaceRoot: string, snapshot?: string) => Promise<void>;
   artifactsExportRaw: (workspaceRoot: string, snapshot?: string, targetPath?: string) => Promise<void>;
   artifactsImportRaw: (workspaceRoot: string, snapshot?: string, sourcePath?: string) => Promise<void>;
+  artifactsRelinkRaw: (workspaceRoot: string, snapshot: string, sourcePath?: string) => Promise<void>;
   buildMirror: (workspaceRoot: string, snapshot?: string) => Promise<void>;
   serve: (workspaceRoot: string, port?: number, snapshot?: string) => Promise<void>;
   resume: (workspaceRoot: string, snapshot?: string) => Promise<void>;
@@ -225,6 +227,14 @@ export function buildCli(handlers: CliHandlers = createDefaultHandlers()): Comma
     .requiredOption('--source <path>', 'Artifact manifest path')
     .action(async (options: { snapshot?: string; source?: string }) => {
       await handlers.artifactsImportRaw(resolveWorkspace(program), options.snapshot, options.source);
+    });
+  artifacts
+    .command('relink-raw')
+    .description('Relink a snapshot to externally stored raw artifacts without copying files')
+    .requiredOption('--snapshot <snapshot>', 'Snapshot id to relink')
+    .requiredOption('--source <path>', 'Artifact manifest path')
+    .action(async (options: { snapshot: string; source: string }) => {
+      await handlers.artifactsRelinkRaw(resolveWorkspace(program), options.snapshot, options.source);
     });
 
   const secrets = program.command('secrets').description('Manage encrypted repo-safe secret bundles');
@@ -412,6 +422,14 @@ function createDefaultHandlers(): CliHandlers {
       const result = await importRawSnapshotArtifacts({
         workspaceRoot,
         snapshotId: snapshot ?? 'latest',
+        sourcePath,
+      });
+      process.stdout.write(JSON.stringify(result, null, 2) + '\n');
+    },
+    artifactsRelinkRaw: async (workspaceRoot, snapshot, sourcePath) => {
+      const result = await relinkRawSnapshotArtifacts({
+        workspaceRoot,
+        snapshotId: snapshot,
         sourcePath,
       });
       process.stdout.write(JSON.stringify(result, null, 2) + '\n');

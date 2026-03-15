@@ -78,6 +78,7 @@ export interface ProblemRecord {
   editorial?: ProblemEditorialRecord;
   officialSolutions: Record<string, string>;
   officialSourceIds?: Record<string, string>;
+  userSourceIds?: Record<string, string[]>;
   visibleTests: ProblemVisibleTest[];
   linkedAssets: ProblemAssetRecord[];
   sourceListUrl?: string;
@@ -136,6 +137,13 @@ export interface SourceRecord {
   memoryKb?: number;
   sourceAvailable: boolean;
   sourceCode?: string;
+  sourceHash?: string;
+  normalizedSourceHash?: string;
+  sourceLength?: number;
+  fetchedAt?: string;
+  provenanceType?: 'official-fragment' | 'evaluation-detail' | 'browser-fallback' | 'imported';
+  duplicateOf?: string;
+  duplicateGroupId?: string;
   suspicionFlags: string[];
   provenance: string[];
 }
@@ -144,7 +152,12 @@ export interface BestSubmissionRecord {
   problemId: number;
   bestUserOverallEvaluationId?: number;
   bestUserPerLanguage: Record<string, number>;
+  bestTrustworthyOverallEvaluationId?: number;
+  bestTrustworthyPerLanguage: Record<string, number>;
+  bestFastPerLanguage: Record<string, number>;
   bestOfficialPerLanguage: Record<string, string>;
+  suspiciousCandidateEvaluationIds: number[];
+  duplicateEvaluationIds: number[];
   orderedUserEvaluationIds: number[];
 }
 
@@ -166,8 +179,38 @@ export interface MirrorRouteRecord {
 export interface RankedProblemSubmissions {
   bestUserOverallEvaluationId?: number;
   bestUserPerLanguage: Record<string, number>;
+  bestTrustworthyOverallEvaluationId?: number;
+  bestTrustworthyPerLanguage: Record<string, number>;
+  bestFastPerLanguage: Record<string, number>;
   bestOfficialPerLanguage: Record<string, string>;
+  suspiciousCandidateEvaluationIds: number[];
+  duplicateEvaluationIds: number[];
   orderedUserEvaluationIds: number[];
+}
+
+export interface ProblemTestCaseRecord {
+  testId: string;
+  kind: 'example' | 'visible' | 'evaluationObserved';
+  label?: string;
+  input?: string;
+  output?: string;
+  explanation?: string;
+  evaluationId?: number;
+  index?: number;
+  verdict?: string;
+  score?: number;
+  maxScore?: number;
+  details?: string;
+}
+
+export interface ProblemTestsRecord {
+  snapshotId: string;
+  problemId: number;
+  problemSlug: string;
+  problemName: string;
+  examples: ProblemTestCaseRecord[];
+  visible: ProblemTestCaseRecord[];
+  evaluationObserved: ProblemTestCaseRecord[];
 }
 
 export interface ProblemCoverageRecord {
@@ -186,7 +229,9 @@ export interface ProblemCoverageRecord {
   statementArchived: boolean;
   solutionFragmentArchived: boolean;
   testsFragmentArchived: boolean;
+  exampleTestsAvailableCount: number;
   visibleTestsCapturedCount: number;
+  evaluationObservedTestsCount: number;
   officialSolutionPresent: boolean;
   editorialAvailability: 'visible' | 'restricted' | 'hidden' | 'unknown';
   sourceListUrl?: string;
@@ -208,7 +253,9 @@ export interface ProblemCoverageTotals {
   statementArchivedCount: number;
   solutionFragmentArchivedCount: number;
   testsFragmentArchivedCount: number;
+  problemsWithExamples: number;
   problemsWithVisibleTestsCaptured: number;
+  problemsWithEvaluationObservedTests: number;
   problemsWithArchivedSources: number;
   problemsWithOfficialSourceArchived: number;
   problemsWithUserSourceArchived: number;

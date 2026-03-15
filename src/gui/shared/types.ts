@@ -45,6 +45,7 @@ export const guiCrawlModeSchema = z.enum(['incremental', 'fresh']);
 export const guiArchiveDatasetSchema = z.enum([
   'problems',
   'evaluations',
+  'tests',
   'rankings',
   'mirror-routes',
 ]);
@@ -220,7 +221,9 @@ export const guiCoverageRecordSchema = z
     solvedEvaluationCount: z.number().int().nonnegative(),
     rankingPresent: z.boolean(),
     testsFragmentArchived: z.boolean(),
+    exampleTestsAvailableCount: z.number().int().nonnegative(),
     visibleTestsCapturedCount: z.number().int().nonnegative(),
+    evaluationObservedTestsCount: z.number().int().nonnegative(),
     officialSolutionPresent: z.boolean(),
     officialSourceArchived: z.boolean(),
     userSourceArchived: z.boolean(),
@@ -242,7 +245,9 @@ export const guiCoverageSummarySchema = z
     statementArchivedCount: z.number().int().nonnegative(),
     solutionFragmentArchivedCount: z.number().int().nonnegative(),
     testsFragmentArchivedCount: z.number().int().nonnegative(),
+    problemsWithExamples: z.number().int().nonnegative(),
     problemsWithVisibleTestsCaptured: z.number().int().nonnegative(),
+    problemsWithEvaluationObservedTests: z.number().int().nonnegative(),
     problemsWithArchivedSources: z.number().int().nonnegative(),
     problemsWithOfficialSourceArchived: z.number().int().nonnegative(),
     problemsWithUserSourceArchived: z.number().int().nonnegative(),

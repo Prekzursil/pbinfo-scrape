@@ -1,5 +1,5 @@
 import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
 
 import type { LoadedLocalConfig } from '../config/local-config.js';
 
@@ -57,6 +57,20 @@ export interface ArtifactManifest {
   rawAssetsManifestPath: string;
 }
 
+export interface ArtifactRelinkEntry {
+  snapshotId: string;
+  linkedAt: string;
+  manifestPath: string;
+  rawPagesPath: string;
+  rawAssetsPath: string;
+  rawPagesManifestPath: string;
+  rawAssetsManifestPath: string;
+}
+
+interface ArtifactRelinkRegistry {
+  entries: ArtifactRelinkEntry[];
+}
+
 export function buildSnapshotId(now = new Date()): string {
   return now.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}Z$/, 'Z');
 }
@@ -65,6 +79,7 @@ export function resolveSnapshotLayout(
   config: LoadedLocalConfig,
   snapshotId: string,
 ): SnapshotLayout {
+  const relinked = resolveRelinkedArtifactManifest(config, snapshotId);
   const snapshotRoot = join(config.paths.snapshotsRoot, snapshotId);
   return {
     snapshotId,
@@ -73,10 +88,14 @@ export function resolveSnapshotLayout(
     normalizedRoot: join(snapshotRoot, 'normalized'),
     mirrorRoot: join(snapshotRoot, 'mirror'),
     mirrorPagesRoot: join(snapshotRoot, 'mirror', 'pages'),
-    rawPagesRoot: join(config.paths.artifactsRoot, snapshotId, 'raw-pages'),
-    rawAssetsRoot: join(config.paths.artifactsRoot, snapshotId, 'raw-assets'),
-    rawPagesManifestPath: join(config.paths.artifactsRoot, snapshotId, 'raw-pages', 'manifest.json'),
-    rawAssetsManifestPath: join(config.paths.artifactsRoot, snapshotId, 'raw-assets', 'manifest.json'),
+    rawPagesRoot: relinked?.rawPagesPath ?? join(config.paths.artifactsRoot, snapshotId, 'raw-pages'),
+    rawAssetsRoot: relinked?.rawAssetsPath ?? join(config.paths.artifactsRoot, snapshotId, 'raw-assets'),
+    rawPagesManifestPath:
+      relinked?.rawPagesManifestPath
+      ?? join(config.paths.artifactsRoot, snapshotId, 'raw-pages', 'manifest.json'),
+    rawAssetsManifestPath:
+      relinked?.rawAssetsManifestPath
+      ?? join(config.paths.artifactsRoot, snapshotId, 'raw-assets', 'manifest.json'),
     routesManifestPath: join(snapshotRoot, 'mirror', 'routes.json'),
     artifactManifestPath: join(config.paths.archiveRoot, 'artifacts', `${snapshotId}.json`),
     metadataPath: join(snapshotRoot, 'metadata.json'),
@@ -192,6 +211,16 @@ export function assertArtifactExportRecord(
   config: LoadedLocalConfig,
   snapshotId: string,
 ): ArtifactExportRecord {
+  const relinked = resolveRelinkedArtifactManifest(config, snapshotId);
+  if (relinked) {
+    return {
+      snapshotId,
+      exportedAt: relinked.exportedAt,
+      manifestPath: relinked.manifestPath,
+      exportRoot: dirname(relinked.rawPagesPath),
+    };
+  }
+
   const catalog = readArchiveCatalog(config.paths.archiveRoot);
   const record = findArtifactExportRecord(catalog, snapshotId);
   if (!record || !existsSync(record.manifestPath)) {
@@ -330,6 +359,15 @@ export function exportRawArtifacts(
   });
   catalog.currentSnapshotId = layout.snapshotId;
   writeArchiveCatalog(config.paths.archiveRoot, catalog);
+  upsertArtifactRelinkEntry(config, {
+    snapshotId: layout.snapshotId,
+    linkedAt: manifest.exportedAt,
+    manifestPath: layout.artifactManifestPath,
+    rawPagesPath: manifest.rawPagesPath,
+    rawAssetsPath: manifest.rawAssetsPath,
+    rawPagesManifestPath: manifest.rawPagesManifestPath,
+    rawAssetsManifestPath: manifest.rawAssetsManifestPath,
+  });
   return manifest;
 }
 
@@ -337,13 +375,33 @@ export function importRawArtifacts(
   config: LoadedLocalConfig,
   manifestPath: string,
 ): ArtifactManifest {
-  const manifest = JSON.parse(readFileSync(manifestPath, 'utf8')) as ArtifactManifest;
-  const layout = resolveSnapshotLayout(config, manifest.snapshotId);
-  mkdirSync(layout.rawPagesRoot, { recursive: true });
-  mkdirSync(layout.rawAssetsRoot, { recursive: true });
-  cpSync(manifest.rawPagesPath, layout.rawPagesRoot, { recursive: true, force: true });
-  cpSync(manifest.rawAssetsPath, layout.rawAssetsRoot, { recursive: true, force: true });
-  writeFileSync(layout.artifactManifestPath, JSON.stringify(manifest, null, 2), 'utf8');
+  const resolvedManifestPath = resolveArtifactManifestPath(manifestPath);
+  const manifest = JSON.parse(readFileSync(resolvedManifestPath, 'utf8')) as ArtifactManifest;
+  const localRawPagesRoot = join(config.paths.artifactsRoot, manifest.snapshotId, 'raw-pages');
+  const localRawAssetsRoot = join(config.paths.artifactsRoot, manifest.snapshotId, 'raw-assets');
+  const localRawPagesManifestPath = join(localRawPagesRoot, 'manifest.json');
+  const localRawAssetsManifestPath = join(localRawAssetsRoot, 'manifest.json');
+  const localArtifactManifestPath = join(
+    config.paths.archiveRoot,
+    'artifacts',
+    `${manifest.snapshotId}.json`,
+  );
+  mkdirSync(localRawPagesRoot, { recursive: true });
+  mkdirSync(localRawAssetsRoot, { recursive: true });
+  if (resolve(manifest.rawPagesPath) !== resolve(localRawPagesRoot)) {
+    cpSync(manifest.rawPagesPath, localRawPagesRoot, { recursive: true, force: true });
+  }
+  if (resolve(manifest.rawAssetsPath) !== resolve(localRawAssetsRoot)) {
+    cpSync(manifest.rawAssetsPath, localRawAssetsRoot, { recursive: true, force: true });
+  }
+  const localManifest: ArtifactManifest = {
+    ...manifest,
+    rawPagesPath: localRawPagesRoot,
+    rawAssetsPath: localRawAssetsRoot,
+    rawPagesManifestPath: localRawPagesManifestPath,
+    rawAssetsManifestPath: localRawAssetsManifestPath,
+  };
+  writeFileSync(localArtifactManifestPath, JSON.stringify(localManifest, null, 2), 'utf8');
   const catalog = readArchiveCatalog(config.paths.archiveRoot);
   catalog.artifactExports = catalog.artifactExports.filter(
     (record) => record.snapshotId !== manifest.snapshotId,
@@ -351,10 +409,44 @@ export function importRawArtifacts(
   catalog.artifactExports.push({
     snapshotId: manifest.snapshotId,
     exportedAt: manifest.exportedAt,
-    manifestPath: layout.artifactManifestPath,
+    manifestPath: localArtifactManifestPath,
     exportRoot: join(config.artifacts.exportRoot, manifest.snapshotId),
   });
   writeArchiveCatalog(config.paths.archiveRoot, catalog);
+  upsertArtifactRelinkEntry(config, {
+    snapshotId: manifest.snapshotId,
+    linkedAt: new Date().toISOString(),
+    manifestPath: localArtifactManifestPath,
+    rawPagesPath: localRawPagesRoot,
+    rawAssetsPath: localRawAssetsRoot,
+    rawPagesManifestPath: localRawPagesManifestPath,
+    rawAssetsManifestPath: localRawAssetsManifestPath,
+  });
+  return localManifest;
+}
+
+export function relinkRawArtifacts(
+  config: LoadedLocalConfig,
+  snapshotId: string,
+  manifestPath: string,
+): ArtifactManifest {
+  const resolvedManifestPath = resolveArtifactManifestPath(manifestPath);
+  const manifest = JSON.parse(readFileSync(resolvedManifestPath, 'utf8')) as ArtifactManifest;
+  if (manifest.snapshotId !== snapshotId) {
+    throw new Error(
+      `Artifact manifest snapshot mismatch (expected ${snapshotId}, found ${manifest.snapshotId}).`,
+    );
+  }
+  ensureArtifactManifestPaths(manifest, snapshotId);
+  upsertArtifactRelinkEntry(config, {
+    snapshotId,
+    linkedAt: new Date().toISOString(),
+    manifestPath: resolvedManifestPath,
+    rawPagesPath: manifest.rawPagesPath,
+    rawAssetsPath: manifest.rawAssetsPath,
+    rawPagesManifestPath: manifest.rawPagesManifestPath,
+    rawAssetsManifestPath: manifest.rawAssetsManifestPath,
+  });
   return manifest;
 }
 
@@ -372,4 +464,97 @@ function upsertSnapshotRecord(
 
   catalog.snapshots.push(snapshot);
   catalog.snapshots.sort((left, right) => left.snapshotId.localeCompare(right.snapshotId));
+}
+
+function artifactRelinkRegistryPath(config: LoadedLocalConfig): string {
+  return join(config.paths.localRoot, 'artifact-relinks.json');
+}
+
+function readArtifactRelinkRegistry(
+  config: LoadedLocalConfig,
+): ArtifactRelinkRegistry {
+  const registryPath = artifactRelinkRegistryPath(config);
+  if (!existsSync(registryPath)) {
+    return { entries: [] };
+  }
+
+  try {
+    const parsed = JSON.parse(readFileSync(registryPath, 'utf8')) as ArtifactRelinkRegistry;
+    return {
+      entries: Array.isArray(parsed.entries) ? parsed.entries : [],
+    };
+  } catch {
+    return { entries: [] };
+  }
+}
+
+function writeArtifactRelinkRegistry(
+  config: LoadedLocalConfig,
+  registry: ArtifactRelinkRegistry,
+): void {
+  const registryPath = artifactRelinkRegistryPath(config);
+  mkdirSync(dirname(registryPath), { recursive: true });
+  writeFileSync(registryPath, JSON.stringify(registry, null, 2), 'utf8');
+}
+
+function upsertArtifactRelinkEntry(
+  config: LoadedLocalConfig,
+  entry: ArtifactRelinkEntry,
+): void {
+  const registry = readArtifactRelinkRegistry(config);
+  registry.entries = registry.entries.filter((candidate) => candidate.snapshotId !== entry.snapshotId);
+  registry.entries.push(entry);
+  registry.entries.sort((left, right) => left.snapshotId.localeCompare(right.snapshotId));
+  writeArtifactRelinkRegistry(config, registry);
+}
+
+function resolveRelinkedArtifactManifest(
+  config: LoadedLocalConfig,
+  snapshotId: string,
+): (ArtifactManifest & { manifestPath: string }) | undefined {
+  const registry = readArtifactRelinkRegistry(config);
+  const entry = registry.entries.find((candidate) => candidate.snapshotId === snapshotId);
+  if (!entry) {
+    return undefined;
+  }
+
+  const manifest: ArtifactManifest = {
+    snapshotId: entry.snapshotId,
+    exportedAt: entry.linkedAt,
+    rawPagesPath: entry.rawPagesPath,
+    rawAssetsPath: entry.rawAssetsPath,
+    rawPagesManifestPath: entry.rawPagesManifestPath,
+    rawAssetsManifestPath: entry.rawAssetsManifestPath,
+  };
+
+  try {
+    ensureArtifactManifestPaths(manifest, snapshotId);
+    return {
+      ...manifest,
+      manifestPath: entry.manifestPath,
+    };
+  } catch {
+    return undefined;
+  }
+}
+
+function resolveArtifactManifestPath(manifestPath: string): string {
+  return manifestPath.endsWith('.json')
+    ? manifestPath
+    : join(manifestPath, 'manifest.json');
+}
+
+function ensureArtifactManifestPaths(
+  manifest: ArtifactManifest,
+  snapshotId: string,
+): void {
+  const requiredPaths = [
+    manifest.rawPagesPath,
+    manifest.rawAssetsPath,
+  ];
+  for (const path of requiredPaths) {
+    if (!existsSync(path)) {
+      throw new Error(`Raw artifact path is missing for snapshot ${snapshotId}: ${path}`);
+    }
+  }
 }

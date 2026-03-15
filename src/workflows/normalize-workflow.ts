@@ -20,6 +20,7 @@ const REBUILT_DIRECTORIES = [
   'problems',
   'routes',
   'sources',
+  'tests',
   'user-solutions',
 ];
 

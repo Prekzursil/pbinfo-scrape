@@ -67,12 +67,14 @@ export async function buildMirrorArtifacts(
     }
 
     if (!route.sourceFile) {
-      continue;
+      throw new Error(`Mirror route ${route.route} is missing a source file.`);
     }
 
     const sourcePath = join(snapshot.rawPagesRoot, route.sourceFile);
     if (!existsSync(sourcePath)) {
-      continue;
+      throw new Error(
+        `Mirror route ${route.route} references missing raw page ${route.sourceFile}. Relink or import raw artifacts before building the mirror.`,
+      );
     }
 
     const rewritten = rewriteMirrorHtml(

@@ -1,4 +1,4 @@
-import { mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { resolveReadableSnapshotLayout } from '../archive/storage.js';
@@ -26,6 +26,7 @@ export async function runRankingWorkflow(
   const rankingsRoot = join(snapshot.normalizedRoot, 'rankings');
   const perProblemRoot = join(rankingsRoot, 'problems');
   mkdirSync(rankingsRoot, { recursive: true });
+  rmSync(perProblemRoot, { recursive: true, force: true });
   mkdirSync(perProblemRoot, { recursive: true });
   const overrides = loadRankingOverrides(config.ranking.overridesPath);
 
@@ -61,7 +62,12 @@ export async function runRankingWorkflow(
           problemId,
           bestUserOverallEvaluationId: ranked.bestUserOverallEvaluationId,
           bestUserPerLanguage: ranked.bestUserPerLanguage,
+          bestTrustworthyOverallEvaluationId: ranked.bestTrustworthyOverallEvaluationId,
+          bestTrustworthyPerLanguage: ranked.bestTrustworthyPerLanguage,
+          bestFastPerLanguage: ranked.bestFastPerLanguage,
           bestOfficialPerLanguage: ranked.bestOfficialPerLanguage,
+          suspiciousCandidateEvaluationIds: ranked.suspiciousCandidateEvaluationIds,
+          duplicateEvaluationIds: ranked.duplicateEvaluationIds,
           orderedUserEvaluationIds: ranked.orderedUserEvaluationIds,
         };
         writeFileSync(
@@ -73,7 +79,12 @@ export async function runRankingWorkflow(
           problemId,
           bestUserOverallEvaluationId: ranked.bestUserOverallEvaluationId,
           bestUserPerLanguage: ranked.bestUserPerLanguage,
+          bestTrustworthyOverallEvaluationId: ranked.bestTrustworthyOverallEvaluationId,
+          bestTrustworthyPerLanguage: ranked.bestTrustworthyPerLanguage,
+          bestFastPerLanguage: ranked.bestFastPerLanguage,
           bestOfficialPerLanguage: ranked.bestOfficialPerLanguage,
+          suspiciousCandidateEvaluationIds: ranked.suspiciousCandidateEvaluationIds,
+          duplicateEvaluationIds: ranked.duplicateEvaluationIds,
           orderedUserEvaluationIds: ranked.orderedUserEvaluationIds,
         };
       }),

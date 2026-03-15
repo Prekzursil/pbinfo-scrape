@@ -1,4 +1,5 @@
 import {
+  appendFileSync,
   existsSync,
   mkdirSync,
   readFileSync,
@@ -121,13 +122,19 @@ export function appendGuiJobEvent(
   const parsedEvent = guiJobEventSchema.parse(event);
   const current = readGuiJob(resolvedWorkspace, jobId);
   ensureFile(current.logPath, '');
-  const existingContent = readFileSync(current.logPath, 'utf8');
   const nextLine = `${JSON.stringify(parsedEvent)}\n`;
-  writeFileSync(current.logPath, `${existingContent}${nextLine}`, 'utf8');
+  appendFileSync(current.logPath, nextLine, 'utf8');
   return updateGuiJob(resolvedWorkspace, jobId, {
     latestEvent: parsedEvent,
     latestCounters: parsedEvent.counters ?? current.latestCounters,
     updatedAt: parsedEvent.timestamp,
+    detail:
+      parsedEvent.detail
+        ? {
+            ...(current.detail ?? {}),
+            ...parsedEvent.detail,
+          }
+        : current.detail,
   });
 }
 

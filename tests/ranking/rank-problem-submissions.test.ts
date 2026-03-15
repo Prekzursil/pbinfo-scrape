@@ -32,6 +32,7 @@ describe('rankProblemSubmissions', () => {
         evaluationId: 11,
         language: 'cpp',
         runtimeSeconds: 0.001,
+        sourceCode: 'int main(){int n;cin>>n;if(n==1)return 0;cout<<42;}',
         suspicionFlags: ['constant-output'],
       }),
       submission({
@@ -44,14 +45,24 @@ describe('rankProblemSubmissions', () => {
     ]);
 
     expect(ranked.bestUserOverallEvaluationId).toBe(10);
+    expect(ranked.bestTrustworthyOverallEvaluationId).toBe(10);
     expect(ranked.bestUserPerLanguage).toEqual({
       cpp: 10,
       py: 12,
     });
+    expect(ranked.bestTrustworthyPerLanguage).toEqual({
+      cpp: 10,
+      py: 12,
+    });
+    expect(ranked.bestFastPerLanguage).toEqual({
+      cpp: 11,
+      py: 12,
+    });
+    expect(ranked.suspiciousCandidateEvaluationIds).toEqual([11]);
     expect(ranked.bestOfficialPerLanguage).toEqual({});
   });
 
-  test('uses runtime, then recency, then manual overrides as tie breakers', () => {
+  test('deduplicates repeated submissions of the same source per language and still honors overrides', () => {
     const ranked = rankProblemSubmissions(
       [
         submission({
@@ -59,18 +70,21 @@ describe('rankProblemSubmissions', () => {
           language: 'cpp',
           runtimeSeconds: 0.012,
           fetchedAt: '2026-03-01T00:00:00.000Z',
+          sourceCode: 'int main(){return 0;}',
         }),
         submission({
           evaluationId: 21,
           language: 'cpp',
           runtimeSeconds: 0.012,
           fetchedAt: '2026-03-03T00:00:00.000Z',
+          sourceCode: 'int main(){return 0;}',
         }),
         submission({
           evaluationId: 22,
           language: 'cpp',
           runtimeSeconds: 0.011,
           fetchedAt: '2026-03-02T00:00:00.000Z',
+          sourceCode: 'int main(){int x=1;return x;}',
         }),
       ],
       [],
@@ -83,7 +97,8 @@ describe('rankProblemSubmissions', () => {
 
     expect(ranked.bestUserOverallEvaluationId).toBe(21);
     expect(ranked.bestUserPerLanguage.cpp).toBe(21);
-    expect(ranked.orderedUserEvaluationIds.slice(0, 3)).toEqual([21, 22, 20]);
+    expect(ranked.duplicateEvaluationIds).toEqual([20]);
+    expect(ranked.orderedUserEvaluationIds.slice(0, 2)).toEqual([21, 22]);
   });
 
   test('tracks best official source per language separately from user evaluations', () => {

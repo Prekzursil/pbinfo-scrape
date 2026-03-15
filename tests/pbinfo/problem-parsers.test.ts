@@ -79,6 +79,11 @@ const userSolutionsPage = `
 <a href="/profil/DavidIanchis">DavidIanchis</a>
 <a href="/probleme/3253/par-impar3">par_impar3</a>
 <a href="/detalii-evaluare/63534271">detalii</a>
+<script>
+  $(document).ready(function(){
+    let tmp = Paginare(13968, 0, 50);
+  });
+</script>
 `;
 
 const fullProblemPage = `
@@ -277,11 +282,21 @@ describe('category parser', () => {
 });
 
 describe('user solutions parser', () => {
-  test('captures total matches, throttling banners, and evaluation entries', () => {
-    const parsed = parseUserSolutionsListPage(userSolutionsPage);
+  test('captures total matches, throttling banners, evaluation entries, and pagination follow-ups', () => {
+    const parsed = parseUserSolutionsListPage(
+      userSolutionsPage,
+      'https://www.pbinfo.ro/solutii/user/Prekzursil',
+    );
 
     expect(parsed.totalMatches).toBe(13968);
     expect(parsed.throttled).toBe(true);
+    expect(parsed.currentOffset).toBe(0);
+    expect(parsed.pageSize).toBe(50);
+    expect(parsed.nextPageUrls.slice(0, 3)).toEqual([
+      'https://www.pbinfo.ro/solutii/user/Prekzursil?start=50',
+      'https://www.pbinfo.ro/solutii/user/Prekzursil?start=100',
+      'https://www.pbinfo.ro/solutii/user/Prekzursil?start=150',
+    ]);
     expect(parsed.entries).toEqual([
       {
         user: 'Zeli',
@@ -296,6 +311,24 @@ describe('user solutions parser', () => {
         problemSlug: 'par-impar3',
         problemName: 'par_impar3',
         evaluationId: 63534271,
+      },
+    ]);
+  });
+
+  test('normalizes user handle from profile href when link text contains full name and handle', () => {
+    const parsed = parseUserSolutionsListPage(`
+      <a href="/profil/Prekzursil">Andrei Visalon (Prekzursil)</a>
+      <a href="/probleme/4969/cibernetica">cibernetica</a>
+      <a href="/detalii-evaluare/63688922">detalii</a>
+    `);
+
+    expect(parsed.entries).toEqual([
+      {
+        user: 'Prekzursil',
+        problemId: 4969,
+        problemSlug: 'cibernetica',
+        problemName: 'cibernetica',
+        evaluationId: 63688922,
       },
     ]);
   });

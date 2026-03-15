@@ -48,6 +48,7 @@ describe('buildCli', () => {
     expect(artifactsCommand?.commands.map((command) => command.name())).toEqual([
       'export-raw',
       'import-raw',
+      'relink-raw',
     ]);
   });
 
