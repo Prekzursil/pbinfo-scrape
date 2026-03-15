@@ -457,4 +457,362 @@ describe('runProblemCoverageWorkflow', () => {
       ]),
     );
   });
+
+  test('does not mark foreign entries in a matching user feed as solved-by-me', async () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-coverage-'));
+    tempDirs.push(workspaceRoot);
+
+    mkdirSync(join(workspaceRoot, '.local'), { recursive: true });
+    writeFileSync(
+      join(workspaceRoot, '.local', 'pbinfo.local.json'),
+      JSON.stringify(
+        {
+          crawl: {
+            userHandle: 'Prekzursil',
+          },
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+
+    const config = loadLocalConfig(workspaceRoot);
+    const snapshot = prepareSnapshot(config, {
+      snapshotId: 'candidate-mixed-feed-entries',
+      scope: 'all',
+      now: new Date('2026-03-15T00:00:00.000Z'),
+    });
+
+    mkdirSync(join(snapshot.normalizedRoot, 'problems'), { recursive: true });
+    mkdirSync(join(snapshot.normalizedRoot, 'evaluations'), { recursive: true });
+    mkdirSync(join(snapshot.normalizedRoot, 'user-solutions'), { recursive: true });
+
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'problems', 'problem-1.json'),
+      JSON.stringify(
+        {
+          id: 1,
+          slug: 'sum',
+          name: 'Sum',
+          canonicalUrl: 'https://www.pbinfo.ro/probleme/1/sum',
+          grade: 5,
+          categoryChain: [],
+          tags: [],
+          sections: [],
+          examples: [],
+          constraints: [],
+          editorialAvailability: 'hidden',
+          editorial: {
+            availability: 'hidden',
+          },
+          officialSolutions: {},
+          officialSourceIds: {},
+          visibleTests: [],
+          linkedAssets: [],
+          metadata: {},
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'problems', 'problem-2.json'),
+      JSON.stringify(
+        {
+          id: 2,
+          slug: 'diff',
+          name: 'Diff',
+          canonicalUrl: 'https://www.pbinfo.ro/probleme/2/diff',
+          grade: 5,
+          categoryChain: [],
+          tags: [],
+          sections: [],
+          examples: [],
+          constraints: [],
+          editorialAvailability: 'hidden',
+          editorial: {
+            availability: 'hidden',
+          },
+          officialSolutions: {},
+          officialSourceIds: {},
+          visibleTests: [],
+          linkedAssets: [],
+          metadata: {},
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'user-solutions', 'user-prekzursil.json'),
+      JSON.stringify(
+        {
+          user: 'Prekzursil',
+          sourceUrl: 'https://www.pbinfo.ro/solutii/user/Prekzursil',
+          totalMatches: 2,
+          throttled: false,
+          entries: [
+            {
+              user: 'Andrei Visalon (Prekzursil)',
+              problemId: 1,
+              evaluationId: 1001,
+            },
+            {
+              user: 'Alt User',
+              problemId: 2,
+              evaluationId: 2002,
+            },
+          ],
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'evaluations', 'evaluation-1001.json'),
+      JSON.stringify(
+        {
+          evaluationId: 1001,
+          problemId: 1,
+          problemSlug: 'sum',
+          problemName: 'Sum',
+          language: 'cpp',
+          user: 'Andrei Visalon (Prekzursil)',
+          score: 100,
+          verdictSummary: '100 puncte',
+          sourceAvailable: false,
+          suspicionFlags: [],
+          tests: [],
+          fetchedAt: '2026-03-15T00:00:00.000Z',
+          provenance: ['https://www.pbinfo.ro/detalii-evaluare/1001'],
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'evaluations', 'evaluation-2002.json'),
+      JSON.stringify(
+        {
+          evaluationId: 2002,
+          problemId: 2,
+          problemSlug: 'diff',
+          problemName: 'Diff',
+          language: 'cpp',
+          user: 'Alt User',
+          score: 100,
+          verdictSummary: '100 puncte',
+          sourceAvailable: false,
+          suspicionFlags: [],
+          tests: [],
+          fetchedAt: '2026-03-15T00:00:00.000Z',
+          provenance: ['https://www.pbinfo.ro/detalii-evaluare/2002'],
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+
+    await runProblemCoverageWorkflow(workspaceRoot, snapshot.snapshotId);
+
+    const index = JSON.parse(
+      readFileSync(join(snapshot.normalizedRoot, 'problem-coverage', 'index.json'), 'utf8'),
+    ) as {
+      totals: {
+        solvedByMeCount: number;
+      };
+      records: Array<{
+        problemId: number;
+        solvedByMe: boolean;
+      }>;
+    };
+
+    expect(index.totals.solvedByMeCount).toBe(1);
+    expect(index.records).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          problemId: 1,
+          solvedByMe: true,
+        }),
+        expect.objectContaining({
+          problemId: 2,
+          solvedByMe: false,
+        }),
+      ]),
+    );
+  });
+
+  test('requires successful evaluations before marking solved-by-me', async () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-coverage-'));
+    tempDirs.push(workspaceRoot);
+
+    mkdirSync(join(workspaceRoot, '.local'), { recursive: true });
+    writeFileSync(
+      join(workspaceRoot, '.local', 'pbinfo.local.json'),
+      JSON.stringify(
+        {
+          crawl: {
+            userHandle: 'Prekzursil',
+          },
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+
+    const config = loadLocalConfig(workspaceRoot);
+    const snapshot = prepareSnapshot(config, {
+      snapshotId: 'candidate-solved-threshold',
+      scope: 'all',
+      now: new Date('2026-03-15T00:00:00.000Z'),
+    });
+
+    mkdirSync(join(snapshot.normalizedRoot, 'problems'), { recursive: true });
+    mkdirSync(join(snapshot.normalizedRoot, 'evaluations'), { recursive: true });
+    mkdirSync(join(snapshot.normalizedRoot, 'user-solutions'), { recursive: true });
+
+    for (const [id, slug, name] of [
+      [10, 'a', 'A'],
+      [11, 'b', 'B'],
+    ] as const) {
+      writeFileSync(
+        join(snapshot.normalizedRoot, 'problems', `problem-${id}.json`),
+        JSON.stringify(
+          {
+            id,
+            slug,
+            name,
+            canonicalUrl: `https://www.pbinfo.ro/probleme/${id}/${slug}`,
+            grade: 5,
+            categoryChain: [],
+            tags: [],
+            sections: [],
+            examples: [],
+            constraints: [],
+            editorialAvailability: 'hidden',
+            editorial: {
+              availability: 'hidden',
+            },
+            officialSolutions: {},
+            officialSourceIds: {},
+            visibleTests: [],
+            linkedAssets: [],
+            metadata: {},
+          },
+          null,
+          2,
+        ),
+        'utf8',
+      );
+    }
+
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'user-solutions', 'user-prekzursil.json'),
+      JSON.stringify(
+        {
+          user: 'Prekzursil',
+          sourceUrl: 'https://www.pbinfo.ro/solutii/user/Prekzursil',
+          totalMatches: 2,
+          throttled: false,
+          entries: [
+            {
+              user: 'Andrei Visalon (Prekzursil)',
+              problemId: 10,
+              evaluationId: 10001,
+            },
+            {
+              user: 'Andrei Visalon (Prekzursil)',
+              problemId: 11,
+              evaluationId: 10002,
+            },
+          ],
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'evaluations', 'evaluation-10001.json'),
+      JSON.stringify(
+        {
+          evaluationId: 10001,
+          problemId: 10,
+          problemSlug: 'a',
+          problemName: 'A',
+          language: 'cpp',
+          user: 'Andrei Visalon (Prekzursil)',
+          score: 40,
+          verdictSummary: '40 puncte',
+          sourceAvailable: false,
+          suspicionFlags: [],
+          tests: [],
+          fetchedAt: '2026-03-15T00:00:00.000Z',
+          provenance: ['https://www.pbinfo.ro/detalii-evaluare/10001'],
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'evaluations', 'evaluation-10002.json'),
+      JSON.stringify(
+        {
+          evaluationId: 10002,
+          problemId: 11,
+          problemSlug: 'b',
+          problemName: 'B',
+          language: 'cpp',
+          user: 'Andrei Visalon (Prekzursil)',
+          score: 100,
+          verdictSummary: '100 puncte',
+          sourceAvailable: false,
+          suspicionFlags: [],
+          tests: [],
+          fetchedAt: '2026-03-15T00:00:00.000Z',
+          provenance: ['https://www.pbinfo.ro/detalii-evaluare/10002'],
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+
+    await runProblemCoverageWorkflow(workspaceRoot, snapshot.snapshotId);
+
+    const index = JSON.parse(
+      readFileSync(join(snapshot.normalizedRoot, 'problem-coverage', 'index.json'), 'utf8'),
+    ) as {
+      totals: {
+        solvedByMeCount: number;
+      };
+      records: Array<{
+        problemId: number;
+        solvedByMe: boolean;
+      }>;
+    };
+
+    expect(index.totals.solvedByMeCount).toBe(1);
+    expect(index.records).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          problemId: 10,
+          solvedByMe: false,
+        }),
+        expect.objectContaining({
+          problemId: 11,
+          solvedByMe: true,
+        }),
+      ]),
+    );
+  });
 });

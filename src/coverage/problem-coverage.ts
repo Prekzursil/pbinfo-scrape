@@ -42,6 +42,7 @@ interface UserSolutionsRecord {
     user?: string;
     problemId?: number;
     evaluationId?: number;
+    score?: number;
   }>;
 }
 
@@ -209,7 +210,6 @@ function buildCoverageRecord(
   const evaluationObservedTestsCount = testsRecord?.evaluationObserved.length ?? 0;
   const solvedEvaluationCount = context.evaluations.filter((evaluation) =>
     context.solvedEvaluationIds.has(evaluation.evaluationId)
-      || matchesConfiguredHandle(context.configuredUserHandle, evaluation.user),
   ).length;
   const officialSolutionPresent =
     fragments.solutionFragmentArchived
@@ -322,19 +322,41 @@ function deriveSolvedProblemSets(
 } {
   const problemIds = new Set<number>();
   const evaluationIds = new Set<number>();
+  const evaluationsById = new Map<number, EvaluationRecord>();
+  for (const evaluation of evaluations) {
+    evaluationsById.set(evaluation.evaluationId, evaluation);
+  }
 
   for (const feed of feeds) {
     const feedMatchesConfiguredUser =
       !configuredUserHandle || matchesConfiguredHandle(configuredUserHandle, feed.user);
 
     for (const entry of feed.entries ?? []) {
-      if (
-        !feedMatchesConfiguredUser
-        && !matchesConfiguredHandle(configuredUserHandle, entry.user)
-      ) {
+      const entryUser = entry.user?.trim();
+      if (entryUser) {
+        if (!matchesConfiguredHandle(configuredUserHandle, entryUser)) {
+          continue;
+        }
+      } else if (!feedMatchesConfiguredUser) {
         continue;
       }
 
+      const evaluation =
+        typeof entry.evaluationId === 'number'
+          ? evaluationsById.get(entry.evaluationId)
+          : undefined;
+      if (evaluation) {
+        if (!isSolvedEvaluation(evaluation)) {
+          continue;
+        }
+        problemIds.add(evaluation.problemId);
+        evaluationIds.add(evaluation.evaluationId);
+        continue;
+      }
+
+      if ((entry.score ?? 0) < 100) {
+        continue;
+      }
       if (typeof entry.problemId === 'number') {
         problemIds.add(entry.problemId);
       }
@@ -345,7 +367,10 @@ function deriveSolvedProblemSets(
   }
 
   for (const evaluation of evaluations) {
-    if (matchesConfiguredHandle(configuredUserHandle, evaluation.user)) {
+    if (
+      matchesConfiguredHandle(configuredUserHandle, evaluation.user)
+      && isSolvedEvaluation(evaluation)
+    ) {
       problemIds.add(evaluation.problemId);
       evaluationIds.add(evaluation.evaluationId);
     }
@@ -355,6 +380,10 @@ function deriveSolvedProblemSets(
     problemIds,
     evaluationIds,
   };
+}
+
+function isSolvedEvaluation(evaluation: EvaluationRecord): boolean {
+  return typeof evaluation.score === 'number' && evaluation.score >= 100;
 }
 
 function matchesConfiguredHandle(
