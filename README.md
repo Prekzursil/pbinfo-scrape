@@ -1,6 +1,12 @@
 # Problem Archive Crawler
 
-PBInfo archival operator console for the `pbinfo-scrape` package: hybrid PBInfo archive crawling, ranking, encrypted auth-bundle workflow, localhost mirror serving, and a Windows desktop operator app.
+Problem Archive Crawler is a **private PBInfo archival operator console** for the `pbinfo-scrape` package. It is built to create and inspect a truthful PBInfo archive across:
+
+- problem statements and mirrorable PBInfo pages
+- example / visible / evaluation-observed tests
+- official source availability
+- your own best trustworthy solutions per solved language
+- a local Windows-first desktop audit workflow for continuing crawls and reviewing archive truth
 
 ## Security
 
@@ -19,13 +25,21 @@ npm run cli -- --help
 
 ## Latest private release
 
-- Current private tag: `v0.1.2`
+- Current private tag: `v0.1.3`
 - Current packaged desktop executable after `npm run desktop:pack`:
-  - `release-desktop/Problem Archive Crawler 0.1.2.exe`
+  - `release-desktop/Problem Archive Crawler 0.1.3.exe`
 - Current unpacked smoke target after `npm run desktop:pack`:
   - `release-desktop/win-unpacked/Problem Archive Crawler.exe`
 - Release notes for the current build live in:
-  - [`docs/releases/v0.1.2.md`](./docs/releases/v0.1.2.md)
+  - [`docs/releases/v0.1.3.md`](./docs/releases/v0.1.3.md)
+
+Latest finalized targeted snapshot delivery:
+
+- GitHub prerelease: `snapshot-targeted-user-20260327-0645`
+- Release asset: `targeted-user-20260327-0645.tar.zst`
+- Contents:
+  - `archive/snapshots/targeted-user-20260327-0645`
+  - `archive/artifacts/targeted-user-20260327-0645.json`
 
 ## Local Config
 
@@ -73,6 +87,34 @@ npm run cli -- publish --snapshot acceptance-20260310b --release --upload-deskto
 
 The Windows desktop app is branded as `Problem Archive Crawler`. It wraps the same archive engine with a persistent operator GUI for workspace selection, PBInfo profile login/browser import, crawl control, rankings, mirror preview, and snapshot finalization. GitHub publish intentionally stays CLI-only.
 
+### What the app is for
+
+The desktop UI is optimized for three operator questions:
+
+1. **What is solved, unsolved, complete, or still missing?**
+2. **Can I open the mirror or the detailed truth record for a problem quickly?**
+3. **Is the archive missing something because capture failed, or because PBInfo does not expose it upstream?**
+
+### Main views
+
+- **Overview**
+  - fast status board for solved / unsolved / complete / missing official source / missing your source / missing tests
+  - one-click drill-down into mirror and coverage detail
+  - quick crawl + normalize + rank + mirror + finalize actions
+- **Coverage**
+  - deeper per-problem audit view with truthful status wording
+  - tests coverage, official source status, your source status, archive completeness, editorial visibility
+- **Data**
+  - raw normalized archive datasets and record payloads
+- **Setup**
+  - workspace, PBInfo profile, cookie import/login, advanced settings
+
+### Snapshot behavior
+
+- The desktop app now defaults to the **latest available snapshot** when it has not been pinned manually.
+- The tracked canonical baseline remains `acceptance-20260310b`.
+- Noncanonical generated snapshots are local working state unless explicitly promoted or published as external release assets.
+
 ### Crawl modes
 
 - `Incremental sync` is the default in both CLI and desktop. It reuses the canonical snapshot, keeps completed URLs, reseeds the root surfaces, and only fetches newly discovered or still-pending URLs.
@@ -106,7 +148,7 @@ Desktop build outputs:
 
 - `dist-desktop/gui/main/index.js`: Electron main entry used by the packaged app.
 - `dist-desktop/gui/renderer/index.html`: built renderer shell loaded in production.
-- `release-desktop/Problem Archive Crawler 0.1.2.exe`: Windows x64 portable executable for the current private release.
+- `release-desktop/Problem Archive Crawler 0.1.3.exe`: Windows x64 portable executable for the current private release.
 - `release-desktop/win-unpacked/Problem Archive Crawler.exe`: unpacked smoke-test target used by `npm run smoke:desktop-packaged`.
 
 ## Canonical snapshot policy
@@ -124,7 +166,14 @@ There are two different local views of the archive:
 
 ### Fastest visual entry points
 
-- Start the desktop app and use the **Coverage Explorer** panel when you want the truthful per-problem audit view:
+- Start the desktop app and use the **Overview** status board when you want the fastest problem triage view:
+  - solved
+  - unsolved
+  - complete
+  - missing official source
+  - missing your source
+  - missing tests
+- Use the **Coverage Explorer** panel when you want the truthful per-problem audit view:
   - solved by your archived handle
   - tests fragment archived
   - visible tests captured
@@ -209,6 +258,7 @@ npm run verify:canonical-snapshot
 ## Notes
 
 - The crawler keeps snapshot-specific raw artifacts outside the tracked archive tree so the normalized archive can live in git while heavy raw payloads can be exported separately.
+- Noncanonical generated snapshot trees such as `candidate-*`, `targeted-user-*`, and `smoke-*` are ignored locally by default and should be shared as external artifacts or explicit releases, not silently committed into git.
 - The mirror rewrites PBInfo page shells to local routes and local vendored assets. Analytics and ad scripts are stripped during mirror build.
 - `publish --snapshot <id> --release --upload-desktop-exe` only proceeds when the selected snapshot is canonical, drained, exported, secret-clean, and backed by the final `Problem Archive Crawler *.exe` release asset.
 - The desktop Data Explorer reads from the existing normalized archive outputs; it does not create a second archive format.
