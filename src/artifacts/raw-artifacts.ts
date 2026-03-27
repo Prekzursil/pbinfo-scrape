@@ -4,6 +4,7 @@ import { loadLocalConfig } from '../config/local-config.js';
 import {
   exportRawArtifacts,
   importRawArtifacts,
+  relinkRawArtifacts,
   resolveReadableSnapshotLayout,
 } from '../archive/storage.js';
 
@@ -42,5 +43,25 @@ export async function importRawSnapshotArtifacts(options: {
   return {
     ...manifest,
     snapshotRoot: join(config.paths.artifactsRoot, manifest.snapshotId),
+  };
+}
+
+export async function relinkRawSnapshotArtifacts(options: {
+  workspaceRoot: string;
+  snapshotId: string;
+  sourcePath?: string;
+}) {
+  if (!options.sourcePath) {
+    throw new Error('Artifact relink requires a manifest path.');
+  }
+
+  const config = loadLocalConfig(options.workspaceRoot);
+  const manifestPath = options.sourcePath.endsWith('.json')
+    ? options.sourcePath
+    : join(options.sourcePath, 'manifest.json');
+  const manifest = relinkRawArtifacts(config, options.snapshotId, manifestPath);
+  return {
+    ...manifest,
+    manifestPath,
   };
 }

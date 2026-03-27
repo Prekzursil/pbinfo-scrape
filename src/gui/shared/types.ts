@@ -45,6 +45,7 @@ export const guiCrawlModeSchema = z.enum(['incremental', 'fresh']);
 export const guiArchiveDatasetSchema = z.enum([
   'problems',
   'evaluations',
+  'tests',
   'rankings',
   'mirror-routes',
 ]);
@@ -64,6 +65,21 @@ export const guiCoverageEditorialFilterSchema = z.enum([
   'restricted',
   'hidden',
   'unknown',
+]);
+export const guiCoverageTestsStatusFilterSchema = z.enum([
+  'all',
+  'captured',
+  'not-available-upstream',
+  'not-captured-yet',
+]);
+export const guiCoverageArchiveStateFilterSchema = z.enum([
+  'all',
+  'complete',
+  'unsolved',
+  'not-archived-yet',
+  'missing-official-source',
+  'missing-user-source',
+  'incomplete',
 ]);
 
 export const desktopPreferencesRecordSchema = z
@@ -220,11 +236,41 @@ export const guiCoverageRecordSchema = z
     solvedEvaluationCount: z.number().int().nonnegative(),
     rankingPresent: z.boolean(),
     testsFragmentArchived: z.boolean(),
+    exampleTestsAvailableCount: z.number().int().nonnegative(),
     visibleTestsCapturedCount: z.number().int().nonnegative(),
+    evaluationObservedTestsCount: z.number().int().nonnegative(),
+    effectiveTestsAvailableCount: z.number().int().nonnegative(),
+    testsCoverageStatus: z.enum(['captured', 'not-available-upstream', 'not-captured-yet']),
     officialSolutionPresent: z.boolean(),
     officialSourceArchived: z.boolean(),
+    officialSourceLanguages: z.array(z.string().min(1)),
+    officialSourceStatus: z.enum([
+      'archived',
+      'restricted-upstream',
+      'not-available-upstream',
+      'not-captured-yet',
+    ]),
     userSourceArchived: z.boolean(),
+    userSourceLanguages: z.array(z.string().min(1)),
+    requiredTrustworthyUserSourceLanguages: z.array(z.string().min(1)),
+    trustworthyUserSourceLanguages: z.array(z.string().min(1)),
+    bestTrustworthyUserPerLanguage: z.record(z.string(), z.number().int().positive()),
+    missingTrustworthyUserSourceLanguages: z.array(z.string().min(1)),
+    archiveCompletenessStatus: z.enum([
+      'complete',
+      'unsolved',
+      'not-archived-yet',
+      'missing-official-source',
+      'missing-user-source',
+      'incomplete',
+    ]),
     editorialAvailability: z.enum(['visible', 'restricted', 'hidden', 'unknown']),
+    testsAvailable: z.boolean(),
+    unsolvedByConfiguredHandle: z.boolean(),
+    officialSourceBlocked: z.boolean(),
+    officialSourceBlockedReason: z.string().min(1).optional(),
+    notArchivedYet: z.boolean(),
+    newSinceBaseline: z.boolean(),
     notes: z.array(z.string()),
   })
   .strict();
@@ -242,12 +288,28 @@ export const guiCoverageSummarySchema = z
     statementArchivedCount: z.number().int().nonnegative(),
     solutionFragmentArchivedCount: z.number().int().nonnegative(),
     testsFragmentArchivedCount: z.number().int().nonnegative(),
+    problemsWithExamples: z.number().int().nonnegative(),
     problemsWithVisibleTestsCaptured: z.number().int().nonnegative(),
+    problemsWithEvaluationObservedTests: z.number().int().nonnegative(),
+    problemsWithEffectiveTests: z.number().int().nonnegative(),
     problemsWithArchivedSources: z.number().int().nonnegative(),
     problemsWithOfficialSourceArchived: z.number().int().nonnegative(),
     problemsWithUserSourceArchived: z.number().int().nonnegative(),
     editorialVisibleCount: z.number().int().nonnegative(),
     rankingPresentCount: z.number().int().nonnegative(),
+    newSinceBaselineCount: z.number().int().nonnegative(),
+    completeProblemCount: z.number().int().nonnegative(),
+    incompleteSolvedProblemCount: z.number().int().nonnegative(),
+    missingOfficialSourceCaptureCount: z.number().int().nonnegative(),
+    officialSourceUnavailableUpstreamCount: z.number().int().nonnegative(),
+    missingTestsCaptureCount: z.number().int().nonnegative(),
+    testsUnavailableUpstreamCount: z.number().int().nonnegative(),
+    unsolvedProblemCount: z.number().int().nonnegative().optional(),
+    missingOfficialSourceCount: z.number().int().nonnegative().optional(),
+    solvedByMeMissingUserSourceCount: z.number().int().nonnegative().optional(),
+    unsolvedProblemIds: z.array(z.number().int().positive()).optional(),
+    missingOfficialSourceProblemIds: z.array(z.number().int().positive()).optional(),
+    solvedByMeMissingUserSourceProblemIds: z.array(z.number().int().positive()).optional(),
   })
   .strict();
 
@@ -333,6 +395,12 @@ export type GuiCoveragePresenceFilter = z.infer<
 >;
 export type GuiCoverageEditorialFilter = z.infer<
   typeof guiCoverageEditorialFilterSchema
+>;
+export type GuiCoverageTestsStatusFilter = z.infer<
+  typeof guiCoverageTestsStatusFilterSchema
+>;
+export type GuiCoverageArchiveStateFilter = z.infer<
+  typeof guiCoverageArchiveStateFilterSchema
 >;
 export type DesktopPreferencesRecord = z.infer<
   typeof desktopPreferencesRecordSchema

@@ -258,6 +258,72 @@ describe('normalizeImportedCookies', () => {
       }),
     ).rejects.toThrow(/Could not copy Chromium cookies database/i);
   });
+
+  test('reports app-bound or undecryptable Chromium cookies with actionable remediation', async () => {
+    const root = mkdtempSync(join(tmpdir(), 'pbinfo-cookie-import-'));
+    const userDataDir = join(root, 'Edge', 'User Data');
+    const networkDir = join(userDataDir, 'Default', 'Network');
+    mkdirSync(networkDir, { recursive: true });
+    writeFileSync(
+      join(userDataDir, 'Local State'),
+      JSON.stringify({
+        os_crypt: {
+          encrypted_key: Buffer.concat([Buffer.from('DPAPI'), Buffer.from('wrapped-key')]).toString(
+            'base64',
+          ),
+        },
+      }),
+      'utf8',
+    );
+
+    const cookiesDbPath = join(networkDir, 'Cookies');
+    const database = new DatabaseSync(cookiesDbPath);
+    database.exec(`
+      CREATE TABLE cookies (
+        host_key TEXT NOT NULL,
+        name TEXT NOT NULL,
+        value TEXT NOT NULL,
+        encrypted_value BLOB NOT NULL,
+        path TEXT NOT NULL,
+        expires_utc INTEGER NOT NULL,
+        is_httponly INTEGER NOT NULL,
+        is_secure INTEGER NOT NULL,
+        samesite INTEGER NOT NULL
+      )
+    `);
+    database.prepare(
+      `INSERT INTO cookies (
+        host_key,
+        name,
+        value,
+        encrypted_value,
+        path,
+        expires_utc,
+        is_httponly,
+        is_secure,
+        samesite
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    ).run(
+      '.pbinfo.ro',
+      'FCCDCF',
+      '',
+      encryptChromiumCookieValue(Buffer.alloc(32, 7), 'cmp-consent-token'),
+      '/',
+      0,
+      1,
+      1,
+      0,
+    );
+    database.close();
+
+    await expect(
+      importBrowserCookies({
+        browser: 'edge',
+        userDataDir,
+        decryptMasterKey: async () => Buffer.alloc(32, 9),
+      }),
+    ).rejects.toThrow(/app-bound encryption|auth login|plain JSON cookie export/i);
+  });
 });
 
 function encryptChromiumCookieValue(masterKey: Buffer, value: string): Buffer {

@@ -6,10 +6,12 @@ import { tmpdir } from 'node:os';
 import { afterEach, describe, expect, test } from 'vitest';
 
 import { readArchiveCatalog } from '../../src/archive/storage.js';
+import { CrawlQueue, readCrawlQueueSnapshot } from '../../src/crawl/crawl-queue.js';
 import {
   getCrawlStatusWorkflow,
   resumeCrawlWorkflow,
   runCrawlWorkflow,
+  runOfficialSourceHarvestWorkflow,
 } from '../../src/workflows/crawl-workflow.js';
 
 const tempDirs: string[] = [];
@@ -37,6 +39,105 @@ afterEach(async () => {
 });
 
 describe('runCrawlWorkflow', () => {
+  test('fails authenticated crawl when auth preflight reports a guest session', async () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-workflow-auth-preflight-guest-'));
+    tempDirs.push(workspaceRoot);
+    mkdirSync(join(workspaceRoot, '.local'), { recursive: true });
+
+    writeFileSync(
+      join(workspaceRoot, '.local', 'pbinfo.local.json'),
+      JSON.stringify(
+        {
+          auth: {
+            strategy: 'cookie-import',
+            sessionCookiesPath: '.local/session-cookies.json',
+          },
+          crawl: {
+            userHandle: 'Prekzursil',
+            crossCheckWithBrowser: false,
+          },
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+
+    await expect(
+      runCrawlWorkflow(workspaceRoot, 'user', {
+        maxIterations: 0,
+        authStatusProbe: async () => ({
+          status: 'guest',
+          loggedIn: false,
+          configuredHandle: 'prekzursil',
+          resolvedHandle: undefined,
+          handleMatchesConfigured: false,
+          cookieFileExists: true,
+          sessionCookiesPath: join(workspaceRoot, '.local', 'session-cookies.json'),
+          probeUrl: 'https://www.pbinfo.ro/',
+          checkedAt: '2026-03-10T00:00:00.000Z',
+          remediation: ['re-login required'],
+        }),
+      }),
+    ).rejects.toThrow(/preflight failed/i);
+  });
+
+  test('starts authenticated crawl when auth preflight confirms the configured handle', async () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-workflow-auth-preflight-ok-'));
+    tempDirs.push(workspaceRoot);
+    mkdirSync(join(workspaceRoot, '.local'), { recursive: true });
+
+    writeFileSync(
+      join(workspaceRoot, '.local', 'pbinfo.local.json'),
+      JSON.stringify(
+        {
+          auth: {
+            strategy: 'cookie-import',
+            sessionCookiesPath: '.local/session-cookies.json',
+          },
+          crawl: {
+            userHandle: 'Prekzursil',
+            crossCheckWithBrowser: false,
+          },
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+
+    const result = await runCrawlWorkflow(workspaceRoot, 'user', {
+      maxIterations: 0,
+      now: new Date('2026-03-10T00:00:00.000Z'),
+      authStatusProbe: async () => ({
+        status: 'ok',
+        loggedIn: true,
+        configuredHandle: 'prekzursil',
+        resolvedHandle: 'prekzursil',
+        handleMatchesConfigured: true,
+        cookieFileExists: true,
+        sessionCookiesPath: join(workspaceRoot, '.local', 'session-cookies.json'),
+        probeUrl: 'https://www.pbinfo.ro/',
+        checkedAt: '2026-03-10T00:00:00.000Z',
+        remediation: [],
+      }),
+    });
+
+    expect(result.processed).toBe(0);
+    expect(result.snapshotId).toBe('20260310T000000Z');
+    expect(result.completed).toBe(false);
+    const queueSnapshot = readCrawlQueueSnapshot(
+      join(workspaceRoot, '.local', 'crawl-queues', '20260310T000000Z.sqlite'),
+    );
+    expect(queueSnapshot.items).toEqual([
+      expect.objectContaining({
+        key: 'page:https://www.pbinfo.ro/solutii/user/Prekzursil',
+        url: 'https://www.pbinfo.ro/solutii/user/Prekzursil',
+        kind: 'user-solutions',
+      }),
+    ]);
+  });
+
   test('seeds, processes, and archives a small public crawl', { timeout: 20_000 }, async () => {
     const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-workflow-'));
     tempDirs.push(workspaceRoot);
@@ -563,6 +664,447 @@ describe('runCrawlWorkflow', () => {
         lastError: 'temporarily unavailable',
       }),
     ]);
+  });
+
+  test('seeds targeted official-source harvest from normalized problem identities via official solution fragments', async () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-workflow-official-source-'));
+    tempDirs.push(workspaceRoot);
+    mkdirSync(join(workspaceRoot, '.local'), { recursive: true });
+
+    writeFileSync(
+      join(workspaceRoot, '.local', 'pbinfo.local.json'),
+      JSON.stringify(
+        {
+          auth: {
+            strategy: 'cookie-import',
+            sessionCookiesPath: '.local/session-cookies.json',
+          },
+          crawl: {
+            publicStartUrls: [],
+            userHandle: 'Prekzursil',
+            crossCheckWithBrowser: false,
+          },
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+
+    const snapshotRoot = join(
+      workspaceRoot,
+      'archive',
+      'snapshots',
+      'candidate-20260316-1900',
+      'normalized',
+      'problems',
+    );
+    mkdirSync(snapshotRoot, { recursive: true });
+    writeFileSync(
+      join(snapshotRoot, 'problem-1.json'),
+      JSON.stringify(
+        {
+          id: 1,
+          slug: 'sum',
+          canonicalUrl: 'https://www.pbinfo.ro/probleme/1/sum',
+          sourceListUrl: 'https://www.pbinfo.ro/solutii/problema/1/sum',
+          metadata: {
+            authorHandle: 'Prekzursil',
+            'postată de': 'Silviu Candale (silviu)',
+          },
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+    writeFileSync(
+      join(snapshotRoot, 'problem-2.json'),
+      JSON.stringify({ id: 2 }, null, 2),
+      'utf8',
+    );
+    writeFileSync(
+      join(workspaceRoot, 'archive', 'catalog.json'),
+      JSON.stringify(
+        {
+          version: 1,
+          currentSnapshotId: 'candidate-20260316-1900',
+          canonicalSnapshotId: 'acceptance-20260310b',
+          snapshots: [
+            {
+              snapshotId: 'candidate-20260316-1900',
+              createdAt: '2026-03-16T19:00:00.000Z',
+              scope: 'all',
+              status: 'in_progress',
+              checkpoint: 'canonical',
+            },
+          ],
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+
+    const result = await runOfficialSourceHarvestWorkflow(workspaceRoot, {
+      maxIterations: 0,
+      snapshotId: 'candidate-20260316-1900',
+      now: new Date('2026-03-16T19:05:00.000Z'),
+      authStatusProbe: async () => ({
+        status: 'ok',
+        loggedIn: true,
+        configuredHandle: 'prekzursil',
+        resolvedHandle: 'prekzursil',
+        handleMatchesConfigured: true,
+        cookieFileExists: true,
+        sessionCookiesPath: join(workspaceRoot, '.local', 'session-cookies.json'),
+        probeUrl: 'https://www.pbinfo.ro/',
+        checkedAt: '2026-03-16T19:05:00.000Z',
+        remediation: [],
+      }),
+    });
+
+    const queueState = getCrawlStatusWorkflow(workspaceRoot, result.snapshotId);
+    const queueSnapshot = readCrawlQueueSnapshot(queueState.queuePath);
+
+    expect(result.snapshotId).toBe('candidate-20260316-1900');
+    expect(result.processed).toBe(0);
+    expect(queueState.pending).toBe(1);
+    expect(queueSnapshot.items).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          key: 'official-source-list:https://www.pbinfo.ro/solutii/user/silviu/problema/1/sum',
+          url: 'https://www.pbinfo.ro/solutii/user/silviu/problema/1/sum',
+          kind: 'official-source-list',
+        }),
+      ]),
+    );
+  });
+
+  test('falls back to the public source-list URL when no official author handle is available', async () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-workflow-official-source-public-fallback-'));
+    tempDirs.push(workspaceRoot);
+    mkdirSync(join(workspaceRoot, '.local'), { recursive: true });
+
+    writeFileSync(
+      join(workspaceRoot, '.local', 'pbinfo.local.json'),
+      JSON.stringify(
+        {
+          auth: {
+            strategy: 'cookie-import',
+            sessionCookiesPath: '.local/session-cookies.json',
+          },
+          crawl: {
+            publicStartUrls: [],
+            userHandle: 'Prekzursil',
+            crossCheckWithBrowser: false,
+          },
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+
+    const snapshotRoot = join(
+      workspaceRoot,
+      'archive',
+      'snapshots',
+      'candidate-20260316-1900',
+      'normalized',
+      'problems',
+    );
+    mkdirSync(snapshotRoot, { recursive: true });
+    writeFileSync(
+      join(snapshotRoot, 'problem-1.json'),
+      JSON.stringify(
+        {
+          id: 1,
+          slug: 'sum',
+          canonicalUrl: 'https://www.pbinfo.ro/probleme/1/sum',
+          sourceListUrl: 'https://www.pbinfo.ro/solutii/problema/1/sum',
+          metadata: {
+            'postată de': 'Silviu Candale',
+          },
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+    writeFileSync(
+      join(workspaceRoot, 'archive', 'catalog.json'),
+      JSON.stringify(
+        {
+          version: 1,
+          currentSnapshotId: 'candidate-20260316-1900',
+          canonicalSnapshotId: 'acceptance-20260310b',
+          snapshots: [
+            {
+              snapshotId: 'candidate-20260316-1900',
+              createdAt: '2026-03-16T19:00:00.000Z',
+              scope: 'all',
+              status: 'in_progress',
+              checkpoint: 'canonical',
+            },
+          ],
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+
+    const result = await runOfficialSourceHarvestWorkflow(workspaceRoot, {
+      maxIterations: 0,
+      snapshotId: 'candidate-20260316-1900',
+      now: new Date('2026-03-16T19:05:00.000Z'),
+      authStatusProbe: async () => ({
+        status: 'ok',
+        loggedIn: true,
+        configuredHandle: 'prekzursil',
+        resolvedHandle: 'prekzursil',
+        handleMatchesConfigured: true,
+        cookieFileExists: true,
+        sessionCookiesPath: join(workspaceRoot, '.local', 'session-cookies.json'),
+        probeUrl: 'https://www.pbinfo.ro/',
+        checkedAt: '2026-03-16T19:05:00.000Z',
+        remediation: [],
+      }),
+    });
+
+    const queueState = getCrawlStatusWorkflow(workspaceRoot, result.snapshotId);
+    const queueSnapshot = readCrawlQueueSnapshot(queueState.queuePath);
+
+    expect(queueState.pending).toBe(1);
+    expect(queueSnapshot.items).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          key: 'official-source-list:https://www.pbinfo.ro/solutii/problema/1/sum',
+          url: 'https://www.pbinfo.ro/solutii/problema/1/sum',
+          kind: 'official-source-list',
+        }),
+      ]),
+    );
+  });
+
+  test('fails targeted official-source harvest when auth preflight reports a guest session', async () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-workflow-official-source-auth-guest-'));
+    tempDirs.push(workspaceRoot);
+    mkdirSync(join(workspaceRoot, '.local'), { recursive: true });
+
+    writeFileSync(
+      join(workspaceRoot, '.local', 'pbinfo.local.json'),
+      JSON.stringify(
+        {
+          auth: {
+            strategy: 'cookie-import',
+            sessionCookiesPath: '.local/session-cookies.json',
+          },
+          crawl: {
+            publicStartUrls: [],
+            userHandle: 'Prekzursil',
+            crossCheckWithBrowser: false,
+          },
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+
+    const snapshotRoot = join(
+      workspaceRoot,
+      'archive',
+      'snapshots',
+      'candidate-20260316-1900',
+      'normalized',
+      'problems',
+    );
+    mkdirSync(snapshotRoot, { recursive: true });
+    writeFileSync(
+      join(snapshotRoot, 'problem-1.json'),
+      JSON.stringify(
+        {
+          id: 1,
+          slug: 'sum',
+          sourceListUrl: 'https://www.pbinfo.ro/solutii/problema/1/sum',
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+    writeFileSync(
+      join(workspaceRoot, 'archive', 'catalog.json'),
+      JSON.stringify(
+        {
+          version: 1,
+          currentSnapshotId: 'candidate-20260316-1900',
+          canonicalSnapshotId: 'acceptance-20260310b',
+          snapshots: [
+            {
+              snapshotId: 'candidate-20260316-1900',
+              createdAt: '2026-03-16T19:00:00.000Z',
+              scope: 'all',
+              status: 'in_progress',
+              checkpoint: 'canonical',
+            },
+          ],
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+
+    await expect(
+      runOfficialSourceHarvestWorkflow(workspaceRoot, {
+        maxIterations: 0,
+        snapshotId: 'candidate-20260316-1900',
+        now: new Date('2026-03-16T19:05:00.000Z'),
+        authStatusProbe: async () => ({
+          status: 'guest',
+          loggedIn: false,
+          configuredHandle: 'prekzursil',
+          resolvedHandle: undefined,
+          handleMatchesConfigured: false,
+          cookieFileExists: true,
+          sessionCookiesPath: join(workspaceRoot, '.local', 'session-cookies.json'),
+          probeUrl: 'https://www.pbinfo.ro/',
+          checkedAt: '2026-03-16T19:05:00.000Z',
+          remediation: ['re-login required'],
+        }),
+      }),
+    ).rejects.toThrow(/preflight failed/i);
+  });
+
+  test('requeues targeted official source-list harvest even if the generic public crawl already completed the same source-list page', async () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-workflow-official-source-rerun-'));
+    tempDirs.push(workspaceRoot);
+    mkdirSync(join(workspaceRoot, '.local'), { recursive: true });
+
+    writeFileSync(
+      join(workspaceRoot, '.local', 'pbinfo.local.json'),
+      JSON.stringify(
+        {
+          auth: {
+            strategy: 'cookie-import',
+            sessionCookiesPath: '.local/session-cookies.json',
+          },
+          crawl: {
+            publicStartUrls: [],
+            userHandle: 'Prekzursil',
+            crossCheckWithBrowser: false,
+          },
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+
+    const snapshotRoot = join(
+      workspaceRoot,
+      'archive',
+      'snapshots',
+      'candidate-20260316-1900',
+      'normalized',
+      'problems',
+    );
+    mkdirSync(snapshotRoot, { recursive: true });
+    writeFileSync(
+      join(snapshotRoot, 'problem-1.json'),
+      JSON.stringify(
+        {
+          id: 1,
+          slug: 'sum',
+          canonicalUrl: 'https://www.pbinfo.ro/probleme/1/sum',
+          sourceListUrl: 'https://www.pbinfo.ro/solutii/problema/1/sum',
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+    writeFileSync(
+      join(workspaceRoot, 'archive', 'catalog.json'),
+      JSON.stringify(
+        {
+          version: 1,
+          currentSnapshotId: 'candidate-20260316-1900',
+          canonicalSnapshotId: 'acceptance-20260310b',
+          snapshots: [
+            {
+              snapshotId: 'candidate-20260316-1900',
+              createdAt: '2026-03-16T19:00:00.000Z',
+              scope: 'all',
+              status: 'in_progress',
+              checkpoint: 'canonical',
+            },
+          ],
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+
+    const queuePath = join(
+      workspaceRoot,
+      '.local',
+      'crawl-queues',
+      'candidate-20260316-1900.sqlite',
+    );
+    const queue = new CrawlQueue(queuePath);
+    queue.enqueueMany([
+      {
+        key: 'page:https://www.pbinfo.ro/solutii/problema/1/sum',
+        url: 'https://www.pbinfo.ro/solutii/problema/1/sum',
+        kind: 'public-page',
+      },
+    ]);
+    const existingItem = queue.claimNext(new Date('2026-03-16T19:00:00.000Z'));
+    expect(existingItem?.key).toBe('page:https://www.pbinfo.ro/solutii/problema/1/sum');
+    if (existingItem) {
+      queue.complete(existingItem.id, {
+        httpStatus: 200,
+        contentHash: 'sha256:existing',
+      });
+    }
+    queue.close();
+
+    await runOfficialSourceHarvestWorkflow(workspaceRoot, {
+      maxIterations: 0,
+      snapshotId: 'candidate-20260316-1900',
+      now: new Date('2026-03-16T19:05:00.000Z'),
+      authStatusProbe: async () => ({
+        status: 'ok',
+        loggedIn: true,
+        configuredHandle: 'prekzursil',
+        resolvedHandle: 'prekzursil',
+        handleMatchesConfigured: true,
+        cookieFileExists: true,
+        sessionCookiesPath: join(workspaceRoot, '.local', 'session-cookies.json'),
+        probeUrl: 'https://www.pbinfo.ro/',
+        checkedAt: '2026-03-16T19:05:00.000Z',
+        remediation: [],
+      }),
+    });
+
+    const queueSnapshot = readCrawlQueueSnapshot(queuePath);
+    expect(queueSnapshot.items).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          key: 'page:https://www.pbinfo.ro/solutii/problema/1/sum',
+          status: 'completed',
+        }),
+        expect.objectContaining({
+          key: 'official-source-list:https://www.pbinfo.ro/solutii/problema/1/sum',
+          status: 'pending',
+        }),
+      ]),
+    );
   });
 
   test('uses crawl.maxConcurrency to overlap independent requests', async () => {

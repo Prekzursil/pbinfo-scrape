@@ -197,13 +197,23 @@ export async function importBrowserCookies(
         }
 
         const encryptedValue = Buffer.from(row.encrypted_value);
-        const value =
-          row.value ||
-          decryptChromiumCookieValue(
-            encryptedValue,
-            masterKey,
-            options.decryptMasterKey ?? decryptDpapiBuffer,
-          );
+        let value = row.value;
+        if (!value) {
+          try {
+            value = decryptChromiumCookieValue(
+              encryptedValue,
+              masterKey,
+              options.decryptMasterKey ?? decryptDpapiBuffer,
+            );
+          } catch (error) {
+            const message = error instanceof Error ? error.message : String(error);
+            throw new Error(
+              `Could not decrypt Chromium cookie "${row.name}" for ${row.host_key}: ${message}. ` +
+              'This usually means the browser uses app-bound encryption that cannot be exported from this profile. ' +
+              'Use `npm run cli -- auth login` (credentials strategy) or import a plain JSON cookie export instead.',
+            );
+          }
+        }
         cookies.push({
           name: row.name,
           value,
@@ -310,7 +320,7 @@ function decryptChromiumCookieValue(
   }
 
   const prefix = encryptedValue.subarray(0, 3).toString('utf8');
-  if (prefix === 'v10' || prefix === 'v11') {
+  if (prefix === 'v10' || prefix === 'v11' || prefix === 'v20') {
     const nonce = encryptedValue.subarray(3, 15);
     const tag = encryptedValue.subarray(encryptedValue.length - 16);
     const ciphertext = encryptedValue.subarray(15, encryptedValue.length - 16);
@@ -328,15 +338,13 @@ function decryptChromiumCookieValue(
 }
 
 function decryptDpapiBuffer(encryptedValue: Buffer): Buffer {
-  const script = [
-    `$bytes=[Convert]::FromBase64String('${encryptedValue.toString('base64')}')`,
-    '$plain=[System.Security.Cryptography.ProtectedData]::Unprotect(',
-    '  $bytes,$null,[System.Security.Cryptography.DataProtectionScope]::CurrentUser',
-    ')',
-    '[Console]::Out.Write([Convert]::ToBase64String($plain))',
-  ].join(';');
+  const script =
+    'Add-Type -AssemblyName System.Security;' +
+    `$bytes=[Convert]::FromBase64String('${encryptedValue.toString('base64')}');` +
+    '$plain=[System.Security.Cryptography.ProtectedData]::Unprotect($bytes,$null,[System.Security.Cryptography.DataProtectionScope]::CurrentUser);' +
+    '[Console]::Out.Write([Convert]::ToBase64String($plain))';
   const output = execFileSync(
-    'powershell',
+    'powershell.exe',
     ['-NoProfile', '-NonInteractive', '-Command', script],
     { encoding: 'utf8' },
   ).trim();

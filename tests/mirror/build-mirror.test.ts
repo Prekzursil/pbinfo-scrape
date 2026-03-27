@@ -577,9 +577,11 @@ describe('buildMirrorArtifacts', () => {
     expect(problemHtml).toContain('Archive coverage');
     expect(problemHtml).toContain('Solved by archived handle');
     expect(problemHtml).toContain('Tests fragment archived');
+    expect(problemHtml).toContain('Effective tests: 0');
     expect(problemHtml).toContain('Visible tests captured: 0');
-    expect(problemHtml).toContain('Official source not archived');
+    expect(problemHtml).toContain('Official source blocked: official-source-not-captured');
     expect(problemHtml).toContain('User source not archived');
+    expect(problemHtml).toContain('New since baseline');
     expect(problemHtml).toContain('/archive/coverage/');
   });
 });

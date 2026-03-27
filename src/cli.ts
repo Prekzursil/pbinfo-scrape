@@ -15,10 +15,12 @@ import {
   restoreEncryptedAuthBundle,
 } from './auth/auth-bundle.js';
 import { PbinfoAuthClient } from './auth/pbinfo-auth.js';
+import { probePbinfoAuthStatus } from './auth/auth-status.js';
 import { persistSerializedCookies } from './auth/session-store.js';
 import {
   exportRawSnapshotArtifacts,
   importRawSnapshotArtifacts,
+  relinkRawSnapshotArtifacts,
 } from './artifacts/raw-artifacts.js';
 import { loadLocalConfig } from './config/local-config.js';
 import { buildMirrorArtifacts } from './mirror/build-mirror.js';
@@ -27,6 +29,7 @@ import { publishWorkspace } from './publish/publish.js';
 import {
   resumeCrawlWorkflow,
   runCrawlWorkflow,
+  runOfficialSourceHarvestWorkflow,
   type CrawlMode,
 } from './workflows/crawl-workflow.js';
 import { runNormalizeSnapshotWorkflow } from './workflows/normalize-workflow.js';
@@ -38,6 +41,7 @@ import {
 
 export interface CliHandlers {
   authLogin: (workspaceRoot: string) => Promise<void>;
+  authStatus: (workspaceRoot: string) => Promise<void>;
   authImportCookies: (workspaceRoot: string, sourcePath: string) => Promise<void>;
   authImportBrowser: (
     workspaceRoot: string,
@@ -54,12 +58,17 @@ export interface CliHandlers {
     acceptance?: boolean,
     mode?: CrawlMode,
   ) => Promise<void>;
+  crawlOfficialSources: (
+    workspaceRoot: string,
+    snapshot?: string,
+  ) => Promise<void>;
   crawlStatus: (workspaceRoot: string, snapshot?: string) => Promise<void>;
   normalizeSnapshot: (workspaceRoot: string, snapshot?: string) => Promise<void>;
-  snapshotFinalize: (workspaceRoot: string, snapshot: string) => Promise<void>;
+  snapshotFinalize: (workspaceRoot: string, snapshot: string, promote?: boolean) => Promise<void>;
   rank: (workspaceRoot: string, snapshot?: string) => Promise<void>;
   artifactsExportRaw: (workspaceRoot: string, snapshot?: string, targetPath?: string) => Promise<void>;
   artifactsImportRaw: (workspaceRoot: string, snapshot?: string, sourcePath?: string) => Promise<void>;
+  artifactsRelinkRaw: (workspaceRoot: string, snapshot: string, sourcePath?: string) => Promise<void>;
   buildMirror: (workspaceRoot: string, snapshot?: string) => Promise<void>;
   serve: (workspaceRoot: string, port?: number, snapshot?: string) => Promise<void>;
   resume: (workspaceRoot: string, snapshot?: string) => Promise<void>;
@@ -86,6 +95,12 @@ export function buildCli(handlers: CliHandlers = createDefaultHandlers()): Comma
     .description('Login with credentials from the local config and persist the session cookie jar')
     .action(async () => {
       await handlers.authLogin(resolveWorkspace(program));
+    });
+  auth
+    .command('status')
+    .description('Probe PBInfo auth/session state and verify the resolved handle for authenticated crawls')
+    .action(async () => {
+      await handlers.authStatus(resolveWorkspace(program));
     });
 
   auth
@@ -176,6 +191,13 @@ export function buildCli(handlers: CliHandlers = createDefaultHandlers()): Comma
       );
     });
   crawl
+    .command('official-sources')
+    .description('Harvest official source bodies from known problem source-list URLs in an existing snapshot')
+    .requiredOption('--snapshot <snapshot>', 'Snapshot id to enrich with targeted official-source harvest')
+    .action(async (options: { snapshot: string }) => {
+      await handlers.crawlOfficialSources(resolveWorkspace(program), options.snapshot);
+    });
+  crawl
     .command('status')
     .description('Report queue counts, recent failures, and publish eligibility for a snapshot')
     .option('--snapshot <snapshot>', 'Snapshot id override')
@@ -195,10 +217,11 @@ export function buildCli(handlers: CliHandlers = createDefaultHandlers()): Comma
   const snapshot = program.command('snapshot').description('Manage snapshot lifecycle and retention');
   snapshot
     .command('finalize')
-    .description('Finalize a drained snapshot, export artifacts, and prune noncanonical snapshots')
+    .description('Finalize a drained snapshot, export artifacts, and optionally promote it to canonical')
     .requiredOption('--snapshot <snapshot>', 'Snapshot id to finalize')
-    .action(async (options: { snapshot: string }) => {
-      await handlers.snapshotFinalize(resolveWorkspace(program), options.snapshot);
+    .option('--promote', 'Promote the finalized snapshot to canonical and prune noncanonical snapshots')
+    .action(async (options: { snapshot: string; promote?: boolean }) => {
+      await handlers.snapshotFinalize(resolveWorkspace(program), options.snapshot, options.promote);
     });
 
   program
@@ -225,6 +248,14 @@ export function buildCli(handlers: CliHandlers = createDefaultHandlers()): Comma
     .requiredOption('--source <path>', 'Artifact manifest path')
     .action(async (options: { snapshot?: string; source?: string }) => {
       await handlers.artifactsImportRaw(resolveWorkspace(program), options.snapshot, options.source);
+    });
+  artifacts
+    .command('relink-raw')
+    .description('Relink a snapshot to externally stored raw artifacts without copying files')
+    .requiredOption('--snapshot <snapshot>', 'Snapshot id to relink')
+    .requiredOption('--source <path>', 'Artifact manifest path')
+    .action(async (options: { snapshot: string; source: string }) => {
+      await handlers.artifactsRelinkRaw(resolveWorkspace(program), options.snapshot, options.source);
     });
 
   const secrets = program.command('secrets').description('Manage encrypted repo-safe secret bundles');
@@ -322,6 +353,17 @@ function createDefaultHandlers(): CliHandlers {
         username: config.auth.username,
         password: config.auth.password,
       });
+      if (!result.success) {
+        throw new Error(
+          result.failureReason
+          ?? 'PBInfo credential login did not create an authenticated session.',
+        );
+      }
+      process.stdout.write(JSON.stringify(result, null, 2) + '\n');
+    },
+    authStatus: async (workspaceRoot) => {
+      const config = loadLocalConfig(workspaceRoot);
+      const result = await probePbinfoAuthStatus(config);
       process.stdout.write(JSON.stringify(result, null, 2) + '\n');
     },
     authImportCookies: async (workspaceRoot, sourcePath) => {
@@ -384,6 +426,12 @@ function createDefaultHandlers(): CliHandlers {
       });
       process.stdout.write(JSON.stringify(result, null, 2) + '\n');
     },
+    crawlOfficialSources: async (workspaceRoot, snapshot) => {
+      const result = await runOfficialSourceHarvestWorkflow(workspaceRoot, {
+        snapshotId: snapshot,
+      });
+      process.stdout.write(JSON.stringify(result, null, 2) + '\n');
+    },
     crawlStatus: async (workspaceRoot, snapshot) => {
       const result = getCrawlStatus(workspaceRoot, snapshot);
       process.stdout.write(JSON.stringify(result, null, 2) + '\n');
@@ -392,8 +440,10 @@ function createDefaultHandlers(): CliHandlers {
       const result = await runNormalizeSnapshotWorkflow(workspaceRoot, snapshot);
       process.stdout.write(JSON.stringify(result, null, 2) + '\n');
     },
-    snapshotFinalize: async (workspaceRoot, snapshot) => {
-      const result = await finalizeSnapshotWorkflow(workspaceRoot, snapshot);
+    snapshotFinalize: async (workspaceRoot, snapshot, promote) => {
+      const result = await finalizeSnapshotWorkflow(workspaceRoot, snapshot, {
+        promote,
+      });
       process.stdout.write(JSON.stringify(result, null, 2) + '\n');
     },
     rank: async (workspaceRoot, snapshot) => {
@@ -412,6 +462,14 @@ function createDefaultHandlers(): CliHandlers {
       const result = await importRawSnapshotArtifacts({
         workspaceRoot,
         snapshotId: snapshot ?? 'latest',
+        sourcePath,
+      });
+      process.stdout.write(JSON.stringify(result, null, 2) + '\n');
+    },
+    artifactsRelinkRaw: async (workspaceRoot, snapshot, sourcePath) => {
+      const result = await relinkRawSnapshotArtifacts({
+        workspaceRoot,
+        snapshotId: snapshot,
         sourcePath,
       });
       process.stdout.write(JSON.stringify(result, null, 2) + '\n');

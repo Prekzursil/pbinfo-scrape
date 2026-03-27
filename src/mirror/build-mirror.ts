@@ -67,12 +67,14 @@ export async function buildMirrorArtifacts(
     }
 
     if (!route.sourceFile) {
-      continue;
+      throw new Error(`Mirror route ${route.route} is missing a source file.`);
     }
 
     const sourcePath = join(snapshot.rawPagesRoot, route.sourceFile);
     if (!existsSync(sourcePath)) {
-      continue;
+      throw new Error(
+        `Mirror route ${route.route} references missing raw page ${route.sourceFile}. Relink or import raw artifacts before building the mirror.`,
+      );
     }
 
     const rewritten = rewriteMirrorHtml(
@@ -440,7 +442,9 @@ function renderCoverageIndex(
           <article class="summary-card"><span class="muted">Problems</span><strong>${coverageIndex?.totals.totalProblems ?? 0}</strong></article>
           <article class="summary-card"><span class="muted">Solved by archived handle</span><strong>${coverageIndex?.totals.solvedByMeCount ?? 0}</strong></article>
           <article class="summary-card"><span class="muted">Tests fragments archived</span><strong>${coverageIndex?.totals.testsFragmentArchivedCount ?? 0}</strong></article>
+          <article class="summary-card"><span class="muted">Effective tests</span><strong>${coverageIndex?.totals.problemsWithEffectiveTests ?? 0}</strong></article>
           <article class="summary-card"><span class="muted">Archived source coverage</span><strong>${coverageIndex?.totals.problemsWithArchivedSources ?? 0}</strong></article>
+          <article class="summary-card"><span class="muted">New vs baseline</span><strong>${coverageIndex?.totals.newSinceBaselineCount ?? 0}</strong></article>
         </div>
       </section>
       <section class="filter-card" aria-label="Coverage filters">
@@ -506,10 +510,10 @@ function renderCoverageIndex(
             <th>Solved</th>
             <th>Evaluations</th>
             <th>Tests fragment</th>
+            <th>Effective tests</th>
             <th>Visible tests</th>
-            <th>Official solution</th>
             <th>Official source</th>
-            <th>User source</th>
+            <th>Trustworthy user source</th>
             <th>Editorial</th>
           </tr>
         </thead>
@@ -561,10 +565,10 @@ function renderCoverageIndex(
           <td>\${record.solvedByMe ? 'Solved by archived handle' : 'Unsolved'}</td>
           <td>\${record.evaluationCount} (\${evaluationLink})</td>
           <td>\${record.testsFragmentArchived ? 'Tests fragment archived' : 'Tests fragment not archived'}</td>
+          <td>Effective tests: \${record.effectiveTestsAvailableCount}</td>
           <td>Visible tests captured: \${record.visibleTestsCapturedCount}</td>
-          <td>\${record.officialSolutionPresent ? 'Official solution present' : 'Official solution not archived'}</td>
-          <td>\${record.officialSourceArchived ? \`Official source archived: \${record.officialSourceCount}\` : 'Official source not archived'}</td>
-          <td>\${record.userSourceArchived ? \`User source archived: \${record.userSourceCount}\` : 'User source not archived'}</td>
+          <td>\${record.officialSourceArchived ? \`Official source languages: \${escapeHtml(record.officialSourceLanguages.join(', '))}\` : record.officialSourceBlockedReason ? \`Official source blocked: \${escapeHtml(record.officialSourceBlockedReason)}\` : 'Official source not archived'}</td>
+          <td>\${record.trustworthyUserSourceLanguages.length > 0 ? \`Trustworthy user languages: \${escapeHtml(record.trustworthyUserSourceLanguages.join(', '))}\` : record.userSourceArchived ? 'User sources archived, but no trustworthy 100-point language kept yet' : 'User source not archived'}</td>
           <td>\${record.editorialAvailability}</td>
         </tr>\`;
       }
@@ -611,10 +615,10 @@ function renderCoverageRow(record: ProblemCoverageRecord): string {
     <td>${record.solvedByMe ? 'Solved by archived handle' : 'Unsolved'}</td>
     <td>${record.evaluationCount} (${bestEvaluationLink})</td>
     <td>${record.testsFragmentArchived ? 'Tests fragment archived' : 'Tests fragment not archived'}</td>
+    <td>Effective tests: ${record.effectiveTestsAvailableCount}</td>
     <td>Visible tests captured: ${record.visibleTestsCapturedCount}</td>
-    <td>${record.officialSolutionPresent ? 'Official solution present' : 'Official solution not archived'}</td>
-    <td>${record.officialSourceArchived ? `Official source archived: ${record.officialSourceCount}` : 'Official source not archived'}</td>
-    <td>${record.userSourceArchived ? `User source archived: ${record.userSourceCount}` : 'User source not archived'}</td>
+    <td>${record.officialSourceArchived ? `Official source languages: ${escapeHtml(record.officialSourceLanguages.join(', '))}` : record.officialSourceBlockedReason ? `Official source blocked: ${escapeHtml(record.officialSourceBlockedReason)}` : 'Official source not archived'}</td>
+    <td>${record.trustworthyUserSourceLanguages.length > 0 ? `Trustworthy user languages: ${escapeHtml(record.trustworthyUserSourceLanguages.join(', '))}` : record.userSourceArchived ? 'User sources archived, but no trustworthy 100-point language kept yet' : 'User source not archived'}</td>
     <td>${escapeHtml(record.editorialAvailability)}</td>
   </tr>`;
 }
@@ -644,11 +648,12 @@ function injectProblemCoverageStrip(
       <a class="archive-coverage-badge" href="/archive/coverage/">Coverage index</a>
       <span class="archive-coverage-badge">${record.solvedByMe ? 'Solved by archived handle' : 'Unsolved by archived handle'}</span>
       <span class="archive-coverage-badge">${record.testsFragmentArchived ? 'Tests fragment archived' : 'Tests fragment not archived'}</span>
+      <span class="archive-coverage-badge">Effective tests: ${record.effectiveTestsAvailableCount}</span>
       <span class="archive-coverage-badge">Visible tests captured: ${record.visibleTestsCapturedCount}</span>
-      <span class="archive-coverage-badge">${record.officialSolutionPresent ? 'Official solution present' : 'Official solution not archived'}</span>
-      <span class="archive-coverage-badge">${record.officialSourceArchived ? `Official source archived: ${record.officialSourceCount}` : 'Official source not archived'}</span>
-      <span class="archive-coverage-badge">${record.userSourceArchived ? `User source archived: ${record.userSourceCount}` : 'User source not archived'}</span>
+      <span class="archive-coverage-badge">${record.officialSourceArchived ? `Official source languages: ${escapeHtml(record.officialSourceLanguages.join(', '))}` : record.officialSourceBlockedReason ? `Official source blocked: ${escapeHtml(record.officialSourceBlockedReason)}` : 'Official source not archived'}</span>
+      <span class="archive-coverage-badge">${record.trustworthyUserSourceLanguages.length > 0 ? `Trustworthy user languages: ${escapeHtml(record.trustworthyUserSourceLanguages.join(', '))}` : record.userSourceArchived ? 'User sources archived, but no trustworthy 100-point language kept yet' : 'User source not archived'}</span>
       <span class="archive-coverage-badge">Editorial: ${escapeHtml(record.editorialAvailability)}</span>
+      ${record.newSinceBaseline ? '<span class="archive-coverage-badge">New since baseline</span>' : ''}
     </div>
     ${noteText}
   </section>`;

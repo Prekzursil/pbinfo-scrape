@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 
 import type {
+  GuiCoverageArchiveStateFilter,
   GuiCoverageDetail,
   GuiCoverageEditorialFilter,
   GuiCoverageListing,
@@ -8,6 +9,7 @@ import type {
   GuiCoverageRecord,
   GuiCoverageSolvedFilter,
   GuiCoverageSummary,
+  GuiCoverageTestsStatusFilter,
 } from '../shared/types.js';
 
 export interface CoverageExplorerFilters {
@@ -15,9 +17,11 @@ export interface CoverageExplorerFilters {
   solved: GuiCoverageSolvedFilter;
   testsFragmentArchived: GuiCoveragePresenceFilter;
   visibleTestsCaptured: GuiCoveragePresenceFilter;
+  testsCoverageStatus: GuiCoverageTestsStatusFilter;
   officialSourceArchived: GuiCoveragePresenceFilter;
   userSourceArchived: GuiCoveragePresenceFilter;
   editorialAvailability: GuiCoverageEditorialFilter;
+  archiveCompletenessStatus: GuiCoverageArchiveStateFilter;
   grade?: number;
 }
 
@@ -54,6 +58,10 @@ export function CoverageExplorerPanel(props: CoverageExplorerPanelProps) {
     previewUrl && detail?.record.mirrorRoute
       ? new URL(detail.record.mirrorRoute, previewUrl).toString()
       : undefined;
+  const trustworthyLanguages = detail?.record.trustworthyUserSourceLanguages ?? [];
+  const missingTrustworthyLanguages = detail?.record.missingTrustworthyUserSourceLanguages ?? [];
+  const officialSourceLanguages = detail?.record.officialSourceLanguages ?? [];
+  const userSourceLanguages = detail?.record.userSourceLanguages ?? [];
 
   const setFilter = <K extends keyof CoverageExplorerFilters>(
     key: K,
@@ -93,19 +101,29 @@ export function CoverageExplorerPanel(props: CoverageExplorerPanelProps) {
           copy="Fragment archived is distinct from visible test cases parsed."
         />
         <MetricCard
+          label="Effective tests"
+          value={String(summary?.problemsWithEffectiveTests ?? 0)}
+          copy="Deduplicated example, visible, and evaluation-observed test coverage."
+        />
+        <MetricCard
           label="Archived sources"
           value={String(summary?.problemsWithArchivedSources ?? 0)}
           copy="Split below between official and user source archives."
         />
         <MetricCard
-          label="Editorials visible"
-          value={String(summary?.editorialVisibleCount ?? 0)}
-          copy="Current editorial visibility captured in the canonical archive."
-        />
-        <MetricCard
           label="Ranking coverage"
           value={String(summary?.rankingPresentCount ?? 0)}
           copy="Problems with best-submission ranking data available."
+        />
+        <MetricCard
+          label="New vs baseline"
+          value={String(summary?.newSinceBaselineCount ?? 0)}
+          copy="Problems whose effective test or source coverage improved beyond acceptance-20260310b."
+        />
+        <MetricCard
+          label="Editorials visible"
+          value={String(summary?.editorialVisibleCount ?? 0)}
+          copy="Current editorial visibility captured in the canonical archive."
         />
       </div>
 
@@ -154,6 +172,19 @@ export function CoverageExplorerPanel(props: CoverageExplorerPanelProps) {
           ]}
         />
         <SelectField
+          label="Tests status"
+          value={filters.testsCoverageStatus}
+          onChange={(value) =>
+            setFilter('testsCoverageStatus', value as GuiCoverageTestsStatusFilter)
+          }
+          options={[
+            ['all', 'All'],
+            ['captured', 'Captured'],
+            ['not-available-upstream', 'Not available upstream'],
+            ['not-captured-yet', 'Not captured yet'],
+          ]}
+        />
+        <SelectField
           label="Official source archived"
           value={filters.officialSourceArchived}
           onChange={(value) =>
@@ -189,6 +220,22 @@ export function CoverageExplorerPanel(props: CoverageExplorerPanelProps) {
             ['restricted', 'Restricted'],
             ['hidden', 'Hidden'],
             ['unknown', 'Unknown'],
+          ]}
+        />
+        <SelectField
+          label="Archive state"
+          value={filters.archiveCompletenessStatus}
+          onChange={(value) =>
+            setFilter('archiveCompletenessStatus', value as GuiCoverageArchiveStateFilter)
+          }
+          options={[
+            ['all', 'All'],
+            ['complete', 'Complete'],
+            ['unsolved', 'Unsolved'],
+            ['not-archived-yet', 'Not archived yet'],
+            ['missing-official-source', 'Missing official source'],
+            ['missing-user-source', 'Missing user source'],
+            ['incomplete', 'Incomplete'],
           ]}
         />
         <label className="field">
@@ -230,9 +277,10 @@ export function CoverageExplorerPanel(props: CoverageExplorerPanelProps) {
                     <th>Solved</th>
                     <th>Evals</th>
                     <th>Tests fragment</th>
+                    <th>Effective tests</th>
                     <th>Visible tests</th>
                     <th>Official source</th>
-                    <th>User source</th>
+                    <th>Trustworthy user source</th>
                     <th>Editorial</th>
                   </tr>
                 </thead>
@@ -273,12 +321,21 @@ export function CoverageExplorerPanel(props: CoverageExplorerPanelProps) {
 
               <div className="coverage-badge-row">
                 <CoverageBadge>
+                  Tests status: {humanizeTestsCoverageStatus(detail.record.testsCoverageStatus)}
+                </CoverageBadge>
+                <CoverageBadge>
                   {detail.record.testsFragmentArchived
                     ? 'Tests fragment archived'
                     : 'Tests fragment not archived'}
                 </CoverageBadge>
                 <CoverageBadge>
+                  Effective tests available: {detail.record.effectiveTestsAvailableCount}
+                </CoverageBadge>
+                <CoverageBadge>
                   Visible tests captured: {detail.record.visibleTestsCapturedCount}
+                </CoverageBadge>
+                <CoverageBadge>
+                  Example tests: {detail.record.exampleTestsAvailableCount}
                 </CoverageBadge>
                 <CoverageBadge>
                   {detail.record.officialSolutionPresent
@@ -287,15 +344,26 @@ export function CoverageExplorerPanel(props: CoverageExplorerPanelProps) {
                 </CoverageBadge>
                 <CoverageBadge>
                   {detail.record.officialSourceArchived
-                    ? `Official source archived: ${detail.record.officialSourceCount}`
-                    : 'Official source not archived'}
+                    ? `Official source languages: ${officialSourceLanguages.join(', ')}`
+                    : `Official source ${humanizeOfficialSourceStatus(detail.record.officialSourceStatus).toLowerCase()}`}
                 </CoverageBadge>
                 <CoverageBadge>
-                  {detail.record.userSourceArchived
-                    ? `User source archived: ${detail.record.userSourceCount}`
-                    : 'User source not archived'}
+                  {trustworthyLanguages.length > 0
+                    ? `Trustworthy user languages: ${trustworthyLanguages.join(', ')}`
+                    : 'No trustworthy 100-point user language archived'}
+                </CoverageBadge>
+                <CoverageBadge>
+                  Archive state: {humanizeArchiveState(detail.record.archiveCompletenessStatus)}
                 </CoverageBadge>
                 <CoverageBadge>Editorial: {detail.record.editorialAvailability}</CoverageBadge>
+                {detail.record.newSinceBaseline ? (
+                  <CoverageBadge>New since baseline</CoverageBadge>
+                ) : null}
+                {detail.record.officialSourceBlockedReason ? (
+                  <CoverageBadge>
+                    Official source blocked: {detail.record.officialSourceBlockedReason}
+                  </CoverageBadge>
+                ) : null}
               </div>
 
               <div className="coverage-metadata-grid">
@@ -314,6 +382,52 @@ export function CoverageExplorerPanel(props: CoverageExplorerPanelProps) {
                 <MetricCard
                   label="Source list"
                   value={detail.record.sourceListUrl ? 'Available upstream' : 'Not listed'}
+                />
+                <MetricCard
+                  label="Official sources"
+                  value={String(detail.record.officialSourceCount)}
+                  copy={
+                    officialSourceLanguages.length > 0
+                      ? officialSourceLanguages.join(', ')
+                      : 'No archived 100-point official sources'
+                  }
+                />
+                <MetricCard
+                  label="User sources"
+                  value={String(detail.record.userSourceCount)}
+                  copy={
+                    userSourceLanguages.length > 0
+                      ? `Archived languages: ${userSourceLanguages.join(', ')}`
+                      : 'No archived user source bodies'
+                  }
+                />
+                <MetricCard
+                  label="Missing trustworthy"
+                  value={
+                    missingTrustworthyLanguages.length > 0
+                      ? missingTrustworthyLanguages.join(', ')
+                      : 'None'
+                  }
+                />
+                <MetricCard
+                  label="Required solved languages"
+                  value={
+                    detail.record.requiredTrustworthyUserSourceLanguages.length > 0
+                      ? detail.record.requiredTrustworthyUserSourceLanguages.join(', ')
+                      : 'None'
+                  }
+                />
+                <MetricCard
+                  label="Best trustworthy per language"
+                  value={
+                    Object.keys(detail.record.bestTrustworthyUserPerLanguage).length > 0
+                      ? formatEvaluationMap(detail.record.bestTrustworthyUserPerLanguage)
+                      : 'None'
+                  }
+                />
+                <MetricCard
+                  label="Archive state"
+                  value={humanizeArchiveState(detail.record.archiveCompletenessStatus)}
                 />
               </div>
 
@@ -435,12 +549,83 @@ function CoverageRow({
       <td>{record.solvedByMe ? 'Solved' : 'Unsolved'}</td>
       <td>{record.evaluationCount}</td>
       <td>{record.testsFragmentArchived ? 'Yes' : 'No'}</td>
+      <td>{record.effectiveTestsAvailableCount}</td>
       <td>{record.visibleTestsCapturedCount}</td>
-      <td>{record.officialSourceArchived ? 'Yes' : 'No'}</td>
-      <td>{record.userSourceArchived ? 'Yes' : 'No'}</td>
+      <td>
+        {record.officialSourceArchived
+          ? (record.officialSourceLanguages ?? []).join(', ')
+          : humanizeOfficialSourceStatus(record.officialSourceStatus)}
+      </td>
+      <td>
+        {(record.trustworthyUserSourceLanguages ?? []).length > 0
+          ? (record.trustworthyUserSourceLanguages ?? []).join(', ')
+          : record.userSourceArchived
+            ? 'Archived only'
+            : 'No'}
+      </td>
       <td>{record.editorialAvailability}</td>
     </tr>
   );
+}
+
+function humanizeTestsCoverageStatus(
+  status: GuiCoverageRecord['testsCoverageStatus'],
+): string {
+  switch (status) {
+    case 'captured':
+      return 'Captured';
+    case 'not-available-upstream':
+      return 'Not available upstream';
+    case 'not-captured-yet':
+      return 'Not captured yet';
+    default:
+      return status;
+  }
+}
+
+function humanizeOfficialSourceStatus(
+  status: GuiCoverageRecord['officialSourceStatus'],
+): string {
+  switch (status) {
+    case 'archived':
+      return 'Archived';
+    case 'restricted-upstream':
+      return 'Restricted upstream';
+    case 'not-available-upstream':
+      return 'Not available upstream';
+    case 'not-captured-yet':
+      return 'Not captured yet';
+    default:
+      return status;
+  }
+}
+
+function humanizeArchiveState(
+  status: GuiCoverageRecord['archiveCompletenessStatus'],
+): string {
+  switch (status) {
+    case 'complete':
+      return 'Complete';
+    case 'unsolved':
+      return 'Unsolved';
+    case 'not-archived-yet':
+      return 'Not archived yet';
+    case 'missing-official-source':
+      return 'Missing official source';
+    case 'missing-user-source':
+      return 'Missing user source';
+    case 'incomplete':
+      return 'Incomplete';
+    default:
+      return status;
+  }
+}
+
+function formatEvaluationMap(entries: Record<string, number>): string {
+  return Object.entries(entries)
+    .sort(([left], [right]) => left.localeCompare(right))
+    .map(([language, evaluationId]) => `${language} -> ${evaluationId}`)
+    .join(', ');
 }
 
 function MetricCard({

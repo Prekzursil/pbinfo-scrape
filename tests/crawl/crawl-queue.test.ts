@@ -107,4 +107,24 @@ describe('CrawlQueue', () => {
       lastError: 'requeued after interrupted crawl',
     });
   });
+
+  test('prioritizes evaluation-detail work ahead of additional list pagination', () => {
+    const queue = createQueue();
+
+    queue.enqueueMany([
+      {
+        key: 'official-source-list:https://www.pbinfo.ro/solutii/user/silviu/problema/10/suma-cifrelor?start=50',
+        url: 'https://www.pbinfo.ro/solutii/user/silviu/problema/10/suma-cifrelor?start=50',
+        kind: 'official-source-list',
+      },
+      {
+        key: 'official-evaluation:63785797',
+        url: 'https://www.pbinfo.ro/detalii-evaluare/63785797',
+        kind: 'official-evaluation-detail',
+      },
+    ]);
+
+    const claimed = queue.claimNext(new Date('2026-03-10T00:00:00.000Z'));
+    expect(claimed?.key).toBe('official-evaluation:63785797');
+  });
 });

@@ -83,6 +83,56 @@ describe('job store', () => {
     expect(existsSync(reloaded.logPath)).toBe(true);
   });
 
+  test('merges event detail into job detail while appending later log lines', () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-gui-job-detail-'));
+    tempDirs.push(workspaceRoot);
+
+    const created = createGuiJob(workspaceRoot, {
+      jobId: 'mirror-job-1',
+      kind: 'mirror-serve',
+      snapshotId: 'acceptance-20260310b',
+      now: new Date('2026-03-10T12:00:00.000Z'),
+      detail: {
+        scope: 'all',
+      },
+    });
+
+    appendGuiJobEvent(workspaceRoot, created.jobId, {
+      timestamp: '2026-03-10T12:00:01.000Z',
+      level: 'info',
+      stage: 'mirror-preview',
+      message: 'Mirror preview ready',
+      detail: {
+        mirrorPreviewUrl: 'http://127.0.0.1:43111',
+      },
+    });
+    appendGuiJobEvent(workspaceRoot, created.jobId, {
+      timestamp: '2026-03-10T12:00:02.000Z',
+      level: 'info',
+      stage: 'mirror-preview',
+      message: 'Mirror preview heartbeat',
+    });
+
+    const reloaded = readGuiJob(workspaceRoot, created.jobId);
+    const logLines = readFileSync(reloaded.logPath, 'utf8')
+      .trim()
+      .split('\n')
+      .map((line) => JSON.parse(line) as { message: string });
+
+    expect(reloaded.detail).toEqual({
+      scope: 'all',
+      mirrorPreviewUrl: 'http://127.0.0.1:43111',
+    });
+    expect(logLines).toEqual([
+      expect.objectContaining({
+        message: 'Mirror preview ready',
+      }),
+      expect.objectContaining({
+        message: 'Mirror preview heartbeat',
+      }),
+    ]);
+  });
+
   test('reopens interrupted running crawl jobs as paused and resumable after restart', () => {
     const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-gui-job-recovery-'));
     tempDirs.push(workspaceRoot);

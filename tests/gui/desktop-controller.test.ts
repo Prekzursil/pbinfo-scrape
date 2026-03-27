@@ -330,9 +330,49 @@ describe('desktop controller', () => {
       port: 0,
     });
     const response = await fetch(`${preview.baseUrl}/`);
+    const persisted = readGuiJob(workspaceRoot, preview.job.jobId);
     await controller.stopMirrorPreview(preview.job.jobId);
 
     expect(await response.text()).toContain('Mirror Preview');
+    expect(preview.job.detail).toEqual(
+      expect.objectContaining({
+        mirrorPreviewUrl: preview.baseUrl,
+      }),
+    );
+    expect(persisted.detail).toEqual(
+      expect.objectContaining({
+        mirrorPreviewUrl: preview.baseUrl,
+      }),
+    );
+  });
+
+  test('fails mirror preview clearly when the snapshot has no built mirror yet', async () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-desktop-mirror-missing-'));
+    tempDirs.push(workspaceRoot);
+
+    const config = loadLocalConfig(workspaceRoot);
+    prepareSnapshot(config, {
+      snapshotId: 'mirror-snapshot',
+      scope: 'public',
+      now: new Date('2026-03-10T00:00:00.000Z'),
+    });
+
+    const controller = createDesktopController(workspaceRoot);
+
+    await expect(
+      controller.startMirrorPreview('mirror-snapshot', {
+        port: 0,
+      }),
+    ).rejects.toThrow('Mirror preview requires a built mirror');
+    expect(controller.listJobs()).toEqual([
+      expect.objectContaining({
+        kind: 'mirror-serve',
+        status: 'failed',
+        detail: expect.objectContaining({
+          error: expect.stringContaining('Mirror preview requires a built mirror'),
+        }),
+      }),
+    ]);
   });
 
   test('records structured terminal events and notifications for finalize jobs', async () => {
@@ -360,6 +400,20 @@ describe('desktop controller', () => {
             'artifacts',
             'acceptance-20260310b.json',
           ),
+          coverageGapReportPath: join(
+            workspaceRoot,
+            'archive',
+            'snapshots',
+            'acceptance-20260310b',
+            'normalized',
+            'problem-coverage',
+            'gaps.json',
+          ),
+          promotedToCanonical: false,
+          coverageGates: {
+            officialSourceGatePassed: true,
+            solvedUserSourceGatePassed: true,
+          },
         }),
     });
     const completed = await controller.startJob({
@@ -546,17 +600,30 @@ describe('desktop controller', () => {
           statementArchived: true,
           solutionFragmentArchived: true,
           testsFragmentArchived: true,
+          exampleTestsAvailableCount: 0,
           visibleTestsCapturedCount: 0,
+          evaluationObservedTestsCount: 1,
+          effectiveTestsAvailableCount: 0,
           officialSolutionPresent: true,
           editorialAvailability: 'visible',
           sourceListUrl: 'https://www.pbinfo.ro/solutii/problema/3716/crossword',
           officialSourceArchived: false,
           officialSourceCount: 0,
           officialSourceIds: [],
+          officialSourceLanguages: [],
           userSourceArchived: false,
           userSourceCount: 0,
           userSourceIds: [],
+          userSourceLanguages: [],
+          trustworthyUserSourceLanguages: [],
+          missingTrustworthyUserSourceLanguages: ['c'],
           hasAnyArchivedSource: false,
+          testsAvailable: true,
+          unsolvedByConfiguredHandle: false,
+          officialSourceBlocked: true,
+          officialSourceBlockedReason: 'official-source-not-captured',
+          notArchivedYet: false,
+          newSinceBaseline: false,
           evaluationIds: [63332367],
           bestUserOverallEvaluationId: 63332367,
           notes: [
@@ -578,12 +645,19 @@ describe('desktop controller', () => {
           totals: {
             totalProblems: 1,
             solvedByMeCount: 1,
+            statementArchivedCount: 1,
+            solutionFragmentArchivedCount: 1,
+            testsFragmentArchivedCount: 1,
+            problemsWithExamples: 0,
             problemsWithVisibleTestsCaptured: 0,
+            problemsWithEvaluationObservedTests: 1,
+            problemsWithEffectiveTests: 0,
             problemsWithArchivedSources: 0,
             problemsWithOfficialSourceArchived: 0,
             problemsWithUserSourceArchived: 0,
             editorialVisibleCount: 1,
             rankingPresentCount: 1,
+            newSinceBaselineCount: 0,
           },
           records: [
             {
@@ -600,17 +674,30 @@ describe('desktop controller', () => {
               statementArchived: true,
               solutionFragmentArchived: true,
               testsFragmentArchived: true,
+              exampleTestsAvailableCount: 0,
               visibleTestsCapturedCount: 0,
+              evaluationObservedTestsCount: 1,
+              effectiveTestsAvailableCount: 0,
               officialSolutionPresent: true,
               editorialAvailability: 'visible',
               sourceListUrl: 'https://www.pbinfo.ro/solutii/problema/3716/crossword',
               officialSourceArchived: false,
               officialSourceCount: 0,
               officialSourceIds: [],
+              officialSourceLanguages: [],
               userSourceArchived: false,
               userSourceCount: 0,
               userSourceIds: [],
+              userSourceLanguages: [],
+              trustworthyUserSourceLanguages: [],
+              missingTrustworthyUserSourceLanguages: ['c'],
               hasAnyArchivedSource: false,
+              testsAvailable: true,
+              unsolvedByConfiguredHandle: false,
+              officialSourceBlocked: true,
+              officialSourceBlockedReason: 'official-source-not-captured',
+              notArchivedYet: false,
+              newSinceBaseline: false,
               evaluationIds: [63332367],
               bestUserOverallEvaluationId: 63332367,
               notes: [
@@ -653,18 +740,23 @@ describe('desktop controller', () => {
         problemsCovered: 1,
         coverageRoot: join(snapshot.normalizedRoot, 'problem-coverage'),
         indexPath: join(snapshot.normalizedRoot, 'problem-coverage', 'index.json'),
+        gapsPath: join(snapshot.normalizedRoot, 'problem-coverage', 'gaps.json'),
         totals: {
           totalProblems: 1,
           solvedByMeCount: 1,
           statementArchivedCount: 1,
           solutionFragmentArchivedCount: 1,
           testsFragmentArchivedCount: 1,
+          problemsWithExamples: 0,
           problemsWithVisibleTestsCaptured: 0,
+          problemsWithEvaluationObservedTests: 1,
+          problemsWithEffectiveTests: 0,
           problemsWithArchivedSources: 0,
           problemsWithOfficialSourceArchived: 0,
           problemsWithUserSourceArchived: 0,
           editorialVisibleCount: 1,
           rankingPresentCount: 1,
+          newSinceBaselineCount: 0,
         },
       }),
     });
@@ -684,6 +776,12 @@ describe('desktop controller', () => {
         snapshotId: 'acceptance-20260310b',
         totalProblems: 1,
         solvedByMeCount: 1,
+        completeProblemCount: 0,
+        incompleteSolvedProblemCount: 1,
+        missingOfficialSourceCaptureCount: 0,
+        officialSourceUnavailableUpstreamCount: 0,
+        missingTestsCaptureCount: 0,
+        testsUnavailableUpstreamCount: 0,
         coverageRoot: expect.stringContaining(
           'archive\\snapshots\\acceptance-20260310b\\normalized\\problem-coverage',
         ),

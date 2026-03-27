@@ -281,6 +281,12 @@ export function createDesktopController(
     },
 
     pauseJob(jobId, options = {}) {
+      appendGuiJobEvent(workspaceRoot, jobId, {
+        timestamp: iso(options.now),
+        level: 'info',
+        stage: 'crawl-pause',
+        message: 'Pause requested. The crawler will stop after the current chunk completes.',
+      });
       return updateGuiJob(workspaceRoot, jobId, {
         status: 'paused',
         resumable: true,
@@ -317,7 +323,8 @@ export function createDesktopController(
         });
         if (!result.success) {
           throw new Error(
-            'PBInfo credential login did not produce a successful redirect.',
+            result.failureReason
+            ?? 'PBInfo credential login did not produce an authenticated session.',
           );
         }
 
@@ -497,30 +504,58 @@ export function createDesktopController(
         resumable: false,
       });
 
-      const running = await dependencies.startMirrorServer({
-        workspaceRoot,
-        snapshotId,
-        port: options.port ?? 0,
-      });
-      runningMirrors.set(created.jobId, running);
-      const updated = appendGuiJobEvent(workspaceRoot, created.jobId, {
-        timestamp: new Date().toISOString(),
-        level: 'info',
-        stage: 'mirror-preview',
-        message: `Mirror preview ready at ${running.baseUrl}`,
-        detail: {
+      try {
+        const running = await dependencies.startMirrorServer({
+          workspaceRoot,
+          snapshotId,
+          port: options.port ?? 0,
+        });
+        runningMirrors.set(created.jobId, running);
+        const updated = appendGuiJobEvent(workspaceRoot, created.jobId, {
+          timestamp: new Date().toISOString(),
+          level: 'info',
+          stage: 'mirror-preview',
+          message: `Mirror preview ready at ${running.baseUrl}`,
+          detail: {
+            baseUrl: running.baseUrl,
+            mirrorPreviewUrl: running.baseUrl,
+          },
+        });
+        await dependencies.notificationService.notify({
+          level: 'info',
+          title: 'Mirror preview ready',
+          message: running.baseUrl,
+        });
+        return {
+          job: updated,
           baseUrl: running.baseUrl,
-        },
-      });
-      await dependencies.notificationService.notify({
-        level: 'info',
-        title: 'Mirror preview ready',
-        message: running.baseUrl,
-      });
-      return {
-        job: updated,
-        baseUrl: running.baseUrl,
-      };
+        };
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        appendGuiJobEvent(workspaceRoot, created.jobId, {
+          timestamp: new Date().toISOString(),
+          level: 'error',
+          stage: 'mirror-preview',
+          message,
+          detail: {
+            error: message,
+          },
+        });
+        updateGuiJob(workspaceRoot, created.jobId, {
+          status: 'failed',
+          updatedAt: new Date().toISOString(),
+          detail: {
+            ...(safeReadJob(created.jobId)?.detail ?? {}),
+            error: message,
+          },
+        });
+        await dependencies.notificationService.notify({
+          level: 'error',
+          title: 'Mirror preview failed',
+          message,
+        });
+        throw error;
+      }
     },
 
     async stopMirrorPreview(jobId) {

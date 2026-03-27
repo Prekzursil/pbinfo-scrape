@@ -1,12 +1,14 @@
 export type CrawlKind =
   | 'public-page'
   | 'public-asset'
+  | 'official-source-list'
   | 'problem-statement'
   | 'problem-solution'
   | 'problem-tests'
   | 'user-solutions'
   | 'user-profile'
   | 'evaluation-detail'
+  | 'official-evaluation-detail'
   | 'mirror-route';
 
 export interface PageRecord {
@@ -50,12 +52,21 @@ export interface ProblemVisibleTest {
   title: string;
   input: string;
   output: string;
+  score?: number;
+  exampleLike?: boolean;
 }
 
 export interface ProblemEditorialRecord {
   availability: 'visible' | 'restricted' | 'hidden' | 'unknown';
   message?: string;
   artifactPath?: string;
+}
+
+export interface OfficialSourceHarvestRecord {
+  sourceListHarvested: boolean;
+  sourceListPageUrl?: string;
+  authorHandle?: string;
+  qualifyingEvaluationIds?: number[];
 }
 
 export interface ProblemRecord {
@@ -77,10 +88,12 @@ export interface ProblemRecord {
   editorialMessage?: string;
   editorial?: ProblemEditorialRecord;
   officialSolutions: Record<string, string>;
-  officialSourceIds?: Record<string, string>;
+  officialSourceIds?: Record<string, string[]>;
+  userSourceIds?: Record<string, string[]>;
   visibleTests: ProblemVisibleTest[];
   linkedAssets: ProblemAssetRecord[];
   sourceListUrl?: string;
+  officialSourceHarvest?: OfficialSourceHarvestRecord;
   metadata: Record<string, string>;
 }
 
@@ -136,6 +149,13 @@ export interface SourceRecord {
   memoryKb?: number;
   sourceAvailable: boolean;
   sourceCode?: string;
+  sourceHash?: string;
+  normalizedSourceHash?: string;
+  sourceLength?: number;
+  fetchedAt?: string;
+  provenanceType?: 'official-fragment' | 'evaluation-detail' | 'browser-fallback' | 'imported';
+  duplicateOf?: string;
+  duplicateGroupId?: string;
   suspicionFlags: string[];
   provenance: string[];
 }
@@ -144,7 +164,12 @@ export interface BestSubmissionRecord {
   problemId: number;
   bestUserOverallEvaluationId?: number;
   bestUserPerLanguage: Record<string, number>;
+  bestTrustworthyOverallEvaluationId?: number;
+  bestTrustworthyPerLanguage: Record<string, number>;
+  bestFastPerLanguage: Record<string, number>;
   bestOfficialPerLanguage: Record<string, string>;
+  suspiciousCandidateEvaluationIds: number[];
+  duplicateEvaluationIds: number[];
   orderedUserEvaluationIds: number[];
 }
 
@@ -166,9 +191,62 @@ export interface MirrorRouteRecord {
 export interface RankedProblemSubmissions {
   bestUserOverallEvaluationId?: number;
   bestUserPerLanguage: Record<string, number>;
+  bestTrustworthyOverallEvaluationId?: number;
+  bestTrustworthyPerLanguage: Record<string, number>;
+  bestFastPerLanguage: Record<string, number>;
   bestOfficialPerLanguage: Record<string, string>;
+  suspiciousCandidateEvaluationIds: number[];
+  duplicateEvaluationIds: number[];
   orderedUserEvaluationIds: number[];
 }
+
+export interface ProblemTestCaseRecord {
+  testId: string;
+  kind: 'example' | 'visible' | 'evaluationObserved';
+  label?: string;
+  input?: string;
+  output?: string;
+  explanation?: string;
+  evaluationId?: number;
+  index?: number;
+  verdict?: string;
+  score?: number;
+  maxScore?: number;
+  details?: string;
+  exampleLike?: boolean;
+  provenanceKinds?: Array<'example' | 'visible' | 'evaluationObserved'>;
+  sourceTestIds?: string[];
+}
+
+export interface ProblemTestsRecord {
+  snapshotId: string;
+  problemId: number;
+  problemSlug: string;
+  problemName: string;
+  examples: ProblemTestCaseRecord[];
+  visible: ProblemTestCaseRecord[];
+  evaluationObserved: ProblemTestCaseRecord[];
+  effective: ProblemTestCaseRecord[];
+}
+
+export type ProblemTestsCoverageStatus =
+  | 'captured'
+  | 'not-available-upstream'
+  | 'not-captured-yet';
+
+export type ProblemOfficialSourceStatus =
+  | 'archived'
+  | 'restricted-upstream'
+  | 'not-available-upstream'
+  | 'not-captured-yet';
+
+export type ProblemArchiveCompletenessStatus =
+  | 'complete'
+  | 'unsolved'
+  | 'not-archived-yet'
+  | 'missing-official-source'
+  | 'missing-user-source'
+  | 'incomplete';
 
 export interface ProblemCoverageRecord {
   snapshotId: string;
@@ -186,17 +264,35 @@ export interface ProblemCoverageRecord {
   statementArchived: boolean;
   solutionFragmentArchived: boolean;
   testsFragmentArchived: boolean;
+  exampleTestsAvailableCount: number;
   visibleTestsCapturedCount: number;
+  evaluationObservedTestsCount: number;
+  effectiveTestsAvailableCount: number;
+  testsCoverageStatus: ProblemTestsCoverageStatus;
   officialSolutionPresent: boolean;
   editorialAvailability: 'visible' | 'restricted' | 'hidden' | 'unknown';
   sourceListUrl?: string;
   officialSourceArchived: boolean;
   officialSourceCount: number;
   officialSourceIds: string[];
+  officialSourceLanguages: string[];
+  officialSourceStatus: ProblemOfficialSourceStatus;
   userSourceArchived: boolean;
   userSourceCount: number;
   userSourceIds: string[];
+  userSourceLanguages: string[];
+  requiredTrustworthyUserSourceLanguages: string[];
+  trustworthyUserSourceLanguages: string[];
+  bestTrustworthyUserPerLanguage: Record<string, number>;
+  missingTrustworthyUserSourceLanguages: string[];
+  archiveCompletenessStatus: ProblemArchiveCompletenessStatus;
   hasAnyArchivedSource: boolean;
+  testsAvailable: boolean;
+  unsolvedByConfiguredHandle: boolean;
+  officialSourceBlocked: boolean;
+  officialSourceBlockedReason?: string;
+  notArchivedYet: boolean;
+  newSinceBaseline: boolean;
   evaluationIds: number[];
   bestUserOverallEvaluationId?: number;
   notes: string[];
@@ -208,12 +304,16 @@ export interface ProblemCoverageTotals {
   statementArchivedCount: number;
   solutionFragmentArchivedCount: number;
   testsFragmentArchivedCount: number;
+  problemsWithExamples: number;
   problemsWithVisibleTestsCaptured: number;
+  problemsWithEvaluationObservedTests: number;
+  problemsWithEffectiveTests: number;
   problemsWithArchivedSources: number;
   problemsWithOfficialSourceArchived: number;
   problemsWithUserSourceArchived: number;
   editorialVisibleCount: number;
   rankingPresentCount: number;
+  newSinceBaselineCount: number;
 }
 
 export interface ProblemCoverageIndex {

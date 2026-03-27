@@ -25,6 +25,11 @@ export async function startMirrorServer(
   const snapshot = resolveReadableSnapshotLayout(config, options.snapshotId);
   const app = express();
   const routes = readRoutes(snapshot.routesManifestPath);
+  if (routes.length === 0) {
+    throw new Error(
+      `Mirror preview requires a built mirror for snapshot ${snapshot.snapshotId}. Run the mirror build workflow first.`,
+    );
+  }
 
   app.get('/_assets/:fileName', (request, response) => {
     const filePath = join(snapshot.rawAssetsRoot, request.params.fileName);
@@ -49,7 +54,15 @@ export async function startMirrorServer(
       return;
     }
 
-    response.sendFile(join(snapshot.rawPagesRoot, match.sourceFile));
+    const rawPath = join(snapshot.rawPagesRoot, match.sourceFile);
+    if (!existsSync(rawPath)) {
+      response.status(500).send(
+        `Archived source page is missing for route ${routeKey}. Rebuild the mirror after relinking raw artifacts.`,
+      );
+      return;
+    }
+
+    response.sendFile(rawPath);
   });
 
   const server = await new Promise<Server>((resolve, reject) => {

@@ -32,6 +32,7 @@ describe('buildCli', () => {
 
     expect(authCommand?.commands.map((command) => command.name())).toEqual([
       'login',
+      'status',
       'import-cookies',
       'import-browser',
       'bundle',
@@ -41,6 +42,7 @@ describe('buildCli', () => {
       'public',
       'user',
       'all',
+      'official-sources',
       'status',
     ]);
     expect(normalizeCommand?.commands.map((command) => command.name())).toEqual(['snapshot']);
@@ -48,6 +50,7 @@ describe('buildCli', () => {
     expect(artifactsCommand?.commands.map((command) => command.name())).toEqual([
       'export-raw',
       'import-raw',
+      'relink-raw',
     ]);
   });
 
@@ -61,6 +64,26 @@ describe('buildCli', () => {
     for (const command of [publicCommand, userCommand, allCommand]) {
       expect(command?.options.map((option) => option.long)).toContain('--mode');
     }
+  });
+
+  test('requires an explicit snapshot for targeted official-source harvest', () => {
+    const cli = buildCli();
+    const crawlCommand = cli.commands.find((command) => command.name() === 'crawl');
+    const officialSourcesCommand = crawlCommand?.commands.find(
+      (command) => command.name() === 'official-sources',
+    );
+
+    expect(officialSourcesCommand?.options.map((option) => option.long)).toContain('--snapshot');
+  });
+
+  test('supports optional canonical promotion during snapshot finalization', () => {
+    const cli = buildCli();
+    const snapshotCommand = cli.commands.find((command) => command.name() === 'snapshot');
+    const finalizeCommand = snapshotCommand?.commands.find((command) => command.name() === 'finalize');
+
+    expect(finalizeCommand?.options.map((option) => option.long)).toEqual(
+      expect.arrayContaining(['--snapshot', '--promote']),
+    );
   });
 
   test('exposes release-style publish options', () => {

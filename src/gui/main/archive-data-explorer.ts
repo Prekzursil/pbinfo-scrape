@@ -7,6 +7,7 @@ import type {
   EvaluationRecord,
   MirrorRouteRecord,
   ProblemRecord,
+  ProblemTestsRecord,
 } from '../../types/records.js';
 import type {
   GuiArchiveDataset,
@@ -60,6 +61,7 @@ export function getArchiveExplorerSummary(
     datasets: [
       buildDatasetSummary('problems', 'Problems', context.problemsRoot, countJsonFiles(context.problemsRoot), 'Structured PBInfo problem records with sections, examples, constraints, and official-source metadata.'),
       buildDatasetSummary('evaluations', 'Evaluations', context.evaluationsRoot, countJsonFiles(context.evaluationsRoot), 'Submission and evaluation records with score, verdict, tests, and compile logs when archived.'),
+      buildDatasetSummary('tests', 'Tests', context.testsRoot, countJsonFiles(context.testsRoot), 'Unified per-problem test dataset combining statement examples, visible tests, and evaluation-observed tests.'),
       buildDatasetSummary('rankings', 'Rankings', context.rankingsRoot, countRankingEntries(context.rankingsIndexPath), 'Canonical best-user and best-official language rankings derived from normalized evaluation sources.'),
       buildDatasetSummary('mirror-routes', 'Mirror Routes', context.routesRoot, countMirrorRouteEntries(context.routesManifestPath, context.routesRoot), 'Route records that drive local mirror replay and link archived entities back into the offline viewer.'),
     ],
@@ -97,6 +99,8 @@ export function readArchiveExplorerRecord(
       return readProblemRecordDetail(context, options.recordId);
     case 'evaluations':
       return readEvaluationRecordDetail(context, options.recordId);
+    case 'tests':
+      return readTestsRecordDetail(context, options.recordId);
     case 'rankings':
       return readRankingRecordDetail(context, options.recordId);
     case 'mirror-routes':
@@ -108,6 +112,7 @@ interface ExplorerContext {
   layout: ReturnType<typeof resolveReadableSnapshotLayout>;
   problemsRoot: string;
   evaluationsRoot: string;
+  testsRoot: string;
   rankingsRoot: string;
   rankingProblemsRoot: string;
   rankingsIndexPath: string;
@@ -125,6 +130,7 @@ function resolveExplorerContext(
     layout,
     problemsRoot: join(layout.normalizedRoot, 'problems'),
     evaluationsRoot: join(layout.normalizedRoot, 'evaluations'),
+    testsRoot: join(layout.normalizedRoot, 'tests'),
     rankingsRoot: join(layout.normalizedRoot, 'rankings'),
     rankingProblemsRoot: join(layout.normalizedRoot, 'rankings', 'problems'),
     rankingsIndexPath: join(layout.normalizedRoot, 'rankings', 'best-submissions.json'),
@@ -159,6 +165,8 @@ function buildDatasetItems(
       return listProblemItems(context, query);
     case 'evaluations':
       return listEvaluationItems(context, query);
+    case 'tests':
+      return listTestsItems(context, query);
     case 'rankings':
       return listRankingItems(context, query);
     case 'mirror-routes':
@@ -202,6 +210,24 @@ function listEvaluationItems(
     }))
     .filter((item) => matchesQuery(item, query))
     .sort((left, right) => compareNumericIds(right.recordId, left.recordId));
+}
+
+function listTestsItems(
+  context: ExplorerContext,
+  query: string | undefined,
+): GuiArchiveRecordSummary[] {
+  return readJsonDirectory<ProblemTestsRecord>(context.testsRoot)
+    .map(({ payload, filePath }) => ({
+      dataset: 'tests' as const,
+      recordId: String(payload.problemId),
+      title: `#${payload.problemId} ${payload.problemName}`,
+      subtitle: `examples: ${payload.examples.length} • visible: ${payload.visible.length} • evaluation-observed: ${payload.evaluationObserved.length}`,
+      description: payload.problemSlug,
+      filePath,
+      mirrorRoute: `/probleme/${payload.problemId}/${payload.problemSlug}`,
+    }))
+    .filter((item) => matchesQuery(item, query))
+    .sort((left, right) => compareNumericIds(left.recordId, right.recordId));
 }
 
 function listRankingItems(
@@ -298,6 +324,24 @@ function readEvaluationRecordDetail(
     subtitle: `${payload.language} • ${payload.score}p • ${payload.verdictSummary}`,
     filePath,
     mirrorRoute: `/detalii-evaluare/${payload.evaluationId}`,
+    payload,
+  };
+}
+
+function readTestsRecordDetail(
+  context: ExplorerContext,
+  recordId: string,
+): GuiArchiveRecordDetail {
+  const filePath = join(context.testsRoot, `problem-${recordId}.json`);
+  const payload = requireJsonFile<ProblemTestsRecord>(filePath);
+  return {
+    snapshotId: context.layout.snapshotId,
+    dataset: 'tests',
+    recordId,
+    title: `#${payload.problemId} ${payload.problemName}`,
+    subtitle: `examples: ${payload.examples.length} • visible: ${payload.visible.length} • evaluation-observed: ${payload.evaluationObserved.length}`,
+    filePath,
+    mirrorRoute: `/probleme/${payload.problemId}/${payload.problemSlug}`,
     payload,
   };
 }

@@ -107,6 +107,9 @@ describe('runNormalizeSnapshotWorkflow', () => {
     const source = JSON.parse(
       readFileSync(join(snapshot.normalizedRoot, 'sources', 'evaluation-63332367.json'), 'utf8'),
     );
+    const testsRecord = JSON.parse(
+      readFileSync(join(snapshot.normalizedRoot, 'tests', 'problem-3716.json'), 'utf8'),
+    );
 
     expect(result.pagesNormalized).toBe(1);
     expect(evaluation).toMatchObject({
@@ -127,6 +130,17 @@ describe('runNormalizeSnapshotWorkflow', () => {
       problemId: 3716,
       language: 'c',
       sourceAvailable: true,
+    });
+    expect(testsRecord).toMatchObject({
+      problemId: 3716,
+      evaluationObserved: [
+        expect.objectContaining({
+          kind: 'evaluationObserved',
+          evaluationId: 63332367,
+          index: 1,
+          details: 'Exemplu',
+        }),
+      ],
     });
   });
 

@@ -1,10 +1,15 @@
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
-import { exportRawArtifacts, prepareSnapshot, writeArchiveCatalog } from '../../src/archive/storage.js';
+import {
+  exportRawArtifacts,
+  prepareSnapshot,
+  relinkRawArtifacts,
+  writeArchiveCatalog,
+} from '../../src/archive/storage.js';
 import { loadLocalConfig } from '../../src/config/local-config.js';
 import { CrawlQueue } from '../../src/crawl/crawl-queue.js';
 import { publishWorkspace } from '../../src/publish/publish.js';
@@ -332,6 +337,57 @@ describe('publishWorkspace', () => {
         runCommand: vi.fn(),
       }),
     ).toThrow(/Raw artifact export/i);
+  });
+
+  test('accepts publication preflight when raw artifacts are relinked from an external manifest', () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-publish-relinked-artifacts-'));
+    tempDirs.push(workspaceRoot);
+    writeFileSync(
+      join(workspaceRoot, 'package.json'),
+      JSON.stringify({ name: 'pbinfo-scrape', version: '0.1.0' }, null, 2),
+      'utf8',
+    );
+
+    const config = loadLocalConfig(workspaceRoot);
+    const snapshot = prepareSnapshot(config, {
+      snapshotId: 'publish-relinked-snapshot',
+      scope: 'all',
+      now: new Date('2026-03-10T00:00:00.000Z'),
+    });
+
+    const exported = exportRawArtifacts(
+      config,
+      snapshot,
+      join(workspaceRoot, 'external-artifacts'),
+      new Date('2026-03-10T01:00:00.000Z'),
+    );
+
+    relinkRawArtifacts(config, snapshot.snapshotId, join(workspaceRoot, 'external-artifacts', snapshot.snapshotId, 'manifest.json'));
+
+    writeArchiveCatalog(config.paths.archiveRoot, {
+      currentSnapshotId: snapshot.snapshotId,
+      canonicalSnapshotId: snapshot.snapshotId,
+      snapshots: [
+        {
+          snapshotId: snapshot.snapshotId,
+          createdAt: '2026-03-10T00:00:00.000Z',
+          scope: 'all',
+          status: 'completed',
+          checkpoint: 'canonical',
+        },
+      ],
+      artifactExports: [],
+    });
+
+    expect(() =>
+      publishWorkspace({
+        workspaceRoot,
+        config,
+        snapshotId: snapshot.snapshotId,
+        runCommand: vi.fn(),
+      }),
+    ).not.toThrow();
+    expect(existsSync(exported.rawPagesPath)).toBe(true);
   });
 
   test('rejects publication when more than one snapshot remains', () => {

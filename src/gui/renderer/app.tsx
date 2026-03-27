@@ -37,7 +37,7 @@ export function App({ desktop }: AppProps) {
   const [crawlStatus, setCrawlStatus] = useState<GuiCrawlStatus | null>(null);
   const [jobEvents, setJobEvents] = useState<GuiJobEvent[]>([]);
   const [showAdvanced, setShowAdvanced] = useState(false);
-  const [selectedSnapshotId, setSelectedSnapshotId] = useState('acceptance-20260310b');
+  const [selectedSnapshotId, setSelectedSnapshotId] = useState('');
   const [crawlMode, setCrawlMode] = useState<GuiCrawlMode>('incremental');
   const [selectedArchiveDataset, setSelectedArchiveDataset] =
     useState<GuiArchiveDataset>('problems');
@@ -46,9 +46,11 @@ export function App({ desktop }: AppProps) {
     solved: 'all',
     testsFragmentArchived: 'all',
     visibleTestsCaptured: 'all',
+    testsCoverageStatus: 'all',
     officialSourceArchived: 'all',
     userSourceArchived: 'all',
     editorialAvailability: 'all',
+    archiveCompletenessStatus: 'all',
   });
   const [coverageSummary, setCoverageSummary] = useState<GuiCoverageSummary | null>(null);
   const [coverageListing, setCoverageListing] = useState<GuiCoverageListing | null>(null);
@@ -135,9 +137,9 @@ export function App({ desktop }: AppProps) {
 
       const nextJobs = await bridge.listJobs();
       const resolvedSnapshotId =
-        snapshotOverride ??
-        selectedSnapshotId ??
-        findLatestSnapshotId(nextJobs) ??
+        snapshotOverride ||
+        selectedSnapshotId ||
+        findLatestSnapshotId(nextJobs) ||
         'acceptance-20260310b';
       if (resolvedSnapshotId !== selectedSnapshotId) {
         setSelectedSnapshotId(resolvedSnapshotId);
@@ -262,9 +264,11 @@ export function App({ desktop }: AppProps) {
           solved: coverageFilters.solved,
           testsFragmentArchived: coverageFilters.testsFragmentArchived,
           visibleTestsCaptured: coverageFilters.visibleTestsCaptured,
+          testsCoverageStatus: coverageFilters.testsCoverageStatus,
           officialSourceArchived: coverageFilters.officialSourceArchived,
           userSourceArchived: coverageFilters.userSourceArchived,
           editorialAvailability: coverageFilters.editorialAvailability,
+          archiveCompletenessStatus: coverageFilters.archiveCompletenessStatus,
           grade: coverageFilters.grade,
           limit: 100,
         });

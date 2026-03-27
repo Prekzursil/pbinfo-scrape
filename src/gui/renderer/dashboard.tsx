@@ -8,6 +8,7 @@ import type {
   GuiArchiveSummary,
   GuiCoverageDetail,
   GuiCoverageListing,
+  GuiCoverageRecord,
   GuiCoverageSummary,
   GuiCrawlMode,
   GuiCrawlStatus,
@@ -28,6 +29,26 @@ type BrowserImportInput = Parameters<DesktopBridge['importBrowserProfile']>[0];
 type VerbosityMode = 'normal' | 'verbose' | 'raw';
 type CrawlMode = GuiCrawlMode;
 type DashboardView = 'overview' | 'coverage' | 'data' | 'setup';
+type OverviewBoardPreset =
+  | 'all'
+  | 'solved'
+  | 'unsolved'
+  | 'complete'
+  | 'missing-official-source'
+  | 'missing-user-source'
+  | 'missing-tests';
+
+const DEFAULT_COVERAGE_FILTERS: CoverageExplorerFilters = {
+  query: '',
+  solved: 'all',
+  testsFragmentArchived: 'all',
+  visibleTestsCaptured: 'all',
+  testsCoverageStatus: 'all',
+  officialSourceArchived: 'all',
+  userSourceArchived: 'all',
+  editorialAvailability: 'all',
+  archiveCompletenessStatus: 'all',
+};
 
 export interface DesktopDashboardProps {
   workspaceState: GuiWorkspaceState | null | undefined;
@@ -169,6 +190,35 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
     () => deriveCrawlTelemetry(crawlStatus ?? activeCrawlJob?.latestCounters, jobEvents),
     [activeCrawlJob?.latestCounters, crawlStatus, jobEvents],
   );
+  const overviewPreset = useMemo(
+    () => detectOverviewPreset(coverageFilters),
+    [coverageFilters],
+  );
+  const overviewRows = useMemo(
+    () => (coverageListing?.items ?? []).slice(0, 8),
+    [coverageListing],
+  );
+  const boardMirrorBaseUrl =
+    previewUrl ?? coverageSummary?.mirrorUrl ?? archiveSummary?.mirrorUrl;
+  const overviewUnavailableCount =
+    (coverageSummary?.officialSourceUnavailableUpstreamCount ?? 0)
+    + (coverageSummary?.testsUnavailableUpstreamCount ?? 0);
+
+  const applyOverviewPreset = (preset: OverviewBoardPreset) => {
+    onCoverageFiltersChange(createCoverageFiltersForPreset(preset));
+  };
+
+  const openCoverageFromOverview = (problemId: number) => {
+    onSelectCoverageProblem(problemId);
+    setActiveView('coverage');
+  };
+
+  const openMirrorFromOverview = (record: GuiCoverageRecord) => {
+    if (!boardMirrorBaseUrl) {
+      return;
+    }
+    void onOpenExternal(new URL(record.mirrorRoute, boardMirrorBaseUrl).toString());
+  };
 
   if (workspaceState === undefined) {
     return <main className="desktop-shell"><section className="panel"><p>Loading desktop state…</p></section></main>;
@@ -353,6 +403,178 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
           ) : null}
 
           {activeView === 'overview' ? (
+            <section className="panel overview-board-panel">
+            <PanelHeading
+              kicker="Fast audit"
+              title="Problem Status Board"
+              chip={overviewPreset ? formatOverviewPreset(overviewPreset) : 'Custom focus'}
+            />
+            <p className="summary-copy">
+              Start here for a quick solved-versus-unsolved picture, then drill into the
+              mirror or the full coverage explorer only when you need more detail.
+            </p>
+            <div className="overview-status-grid">
+              <StatusBoardStat
+                label="Solved"
+                value={String(coverageSummary?.solvedByMeCount ?? 0)}
+                copy="Problems solved by your archived handle."
+                tone="success"
+                active={overviewPreset === 'solved'}
+                onClick={() => applyOverviewPreset('solved')}
+              />
+              <StatusBoardStat
+                label="Unsolved"
+                value={String(coverageSummary?.unsolvedProblemCount ?? 0)}
+                copy="Problems still unsolved by the configured handle."
+                tone="neutral"
+                active={overviewPreset === 'unsolved'}
+                onClick={() => applyOverviewPreset('unsolved')}
+              />
+              <StatusBoardStat
+                label="Complete"
+                value={String(coverageSummary?.completeProblemCount ?? 0)}
+                copy="Problems that already have the archive pieces they need."
+                tone="success"
+                active={overviewPreset === 'complete'}
+                onClick={() => applyOverviewPreset('complete')}
+              />
+              <StatusBoardStat
+                label="Missing official source"
+                value={String(coverageSummary?.missingOfficialSourceCaptureCount ?? 0)}
+                copy="Actionable official-source capture gaps only."
+                tone="warning"
+                active={overviewPreset === 'missing-official-source'}
+                onClick={() => applyOverviewPreset('missing-official-source')}
+              />
+              <StatusBoardStat
+                label="Missing your source"
+                value={String(coverageSummary?.solvedByMeMissingUserSourceCount ?? 0)}
+                copy="Solved problems still missing a trustworthy best-per-language user source."
+                tone="warning"
+                active={overviewPreset === 'missing-user-source'}
+                onClick={() => applyOverviewPreset('missing-user-source')}
+              />
+              <StatusBoardStat
+                label="Missing tests"
+                value={String(coverageSummary?.missingTestsCaptureCount ?? 0)}
+                copy="Problems whose tests still need to be captured."
+                tone="warning"
+                active={overviewPreset === 'missing-tests'}
+                onClick={() => applyOverviewPreset('missing-tests')}
+              />
+            </div>
+            <div className="overview-filter-row" role="toolbar" aria-label="Problem status board filters">
+              {(
+                [
+                  ['all', 'All problems'],
+                  ['solved', 'Solved'],
+                  ['unsolved', 'Unsolved'],
+                  ['complete', 'Complete'],
+                  ['missing-official-source', 'Missing official source'],
+                  ['missing-user-source', 'Missing your source'],
+                  ['missing-tests', 'Missing tests'],
+                ] as const
+              ).map(([preset, label]) => (
+                <button
+                  key={preset}
+                  className={`dataset-chip ${overviewPreset === preset ? 'dataset-chip-active' : ''}`}
+                  type="button"
+                  onClick={() => applyOverviewPreset(preset)}
+                  aria-pressed={overviewPreset === preset}
+                >
+                  <strong>{label}</strong>
+                </button>
+              ))}
+            </div>
+            <div className="overview-meta-row">
+              <article className="summary-card overview-meta-card">
+                <span className="metric-label">Upstream unavailable</span>
+                <strong>{String(overviewUnavailableCount)}</strong>
+                <p className="summary-copy">
+                  {String(coverageSummary?.officialSourceUnavailableUpstreamCount ?? 0)} official
+                  and {String(coverageSummary?.testsUnavailableUpstreamCount ?? 0)} tests are
+                  correctly classified as unavailable upstream, not missing capture.
+                </p>
+              </article>
+              <article className="summary-card overview-meta-card">
+                <span className="metric-label">Current board focus</span>
+                <strong>{coverageListing ? `${coverageListing.totalCount} matches` : 'Loading…'}</strong>
+                <p className="summary-copy">
+                  Showing up to {overviewRows.length} quick-drill rows below. Open Coverage for the full table and deeper notes.
+                </p>
+              </article>
+            </div>
+            <div className="button-row">
+              <button className="ghost-button" type="button" onClick={() => applyOverviewPreset('all')}>
+                Reset board focus
+              </button>
+              <button className="ghost-button" type="button" onClick={() => setActiveView('coverage')}>
+                Open full coverage explorer
+              </button>
+            </div>
+            {coverageListing === null ? (
+              <p className="summary-copy">Coverage data will appear here after the selected snapshot finishes loading.</p>
+            ) : overviewRows.length === 0 ? (
+              <div className="mirror-placeholder">
+                <strong>No problems match the current board focus.</strong>
+                <p>Reset the board focus or open Coverage to adjust the deeper filters.</p>
+              </div>
+            ) : (
+              <div className="overview-problem-list">
+                {overviewRows.map((record) => (
+                  <article className="summary-card overview-problem-card" key={record.problemId}>
+                    <div className="overview-problem-head">
+                      <div>
+                        <strong>{`#${record.problemId} ${record.name}`}</strong>
+                        <p className="summary-copy">
+                          {record.slug}
+                          {typeof record.grade === 'number' ? ` • grade ${record.grade}` : ''}
+                          {record.tags.length > 0 ? ` • ${record.tags.slice(0, 3).join(', ')}` : ''}
+                        </p>
+                      </div>
+                      <span className="panel-chip">{record.mirrorRoute}</span>
+                    </div>
+                    <div className="coverage-badge-row overview-badge-row">
+                      <StatusBadge tone={record.solvedByMe ? 'success' : 'neutral'}>
+                        {record.solvedByMe ? 'Solved' : 'Unsolved'}
+                      </StatusBadge>
+                      <StatusBadge tone={toneForArchiveState(record.archiveCompletenessStatus)}>
+                        {formatArchiveCompletenessStatus(record.archiveCompletenessStatus)}
+                      </StatusBadge>
+                      <StatusBadge tone={toneForOfficialStatus(record.officialSourceStatus)}>
+                        {formatOfficialSourceStatus(record.officialSourceStatus)}
+                      </StatusBadge>
+                      <StatusBadge tone={toneForTestsStatus(record.testsCoverageStatus)}>
+                        {formatTestsCoverageStatus(record.testsCoverageStatus)}
+                      </StatusBadge>
+                      <StatusBadge tone={record.userSourceArchived ? 'success' : 'warning'}>
+                        {record.userSourceArchived ? 'Your source archived' : 'Your source missing'}
+                      </StatusBadge>
+                    </div>
+                    <p className="summary-copy overview-row-copy">
+                      {formatOverviewProblemSummary(record)}
+                    </p>
+                    <div className="button-row">
+                      <button className="ghost-button" type="button" onClick={() => openCoverageFromOverview(record.problemId)}>
+                        Open coverage detail
+                      </button>
+                      <button
+                        className="ghost-button"
+                        type="button"
+                        disabled={!boardMirrorBaseUrl}
+                        onClick={() => openMirrorFromOverview(record)}
+                      >
+                        Open mirror
+                      </button>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            )}
+            </section>
+          ) : null}
+
+          {activeView === 'overview' ? (
             <section className="panel jobs-panel">
             <PanelHeading kicker="Quick actions" title="What happens next" chip={`${jobs.length} jobs`} />
             <div className="summary-card form-card">
@@ -383,7 +605,7 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
               <button className="ghost-button" type="button" onClick={() => setActiveView('coverage')}>Open coverage</button>
               <button className="ghost-button" type="button" onClick={() => setActiveView('data')}>Open raw data</button>
             </div>
-            {activeCrawlJob ? <div className="button-row"><button className="ghost-button" type="button" onClick={() => void onResumeCrawl(activeCrawlJob.jobId)}>Resume crawl</button><button className="ghost-button ghost-danger" type="button" onClick={() => void onPauseCrawl(activeCrawlJob.jobId)}>Pause after current chunk</button></div> : null}
+            {activeCrawlJob ? <div className="button-row"><button className="ghost-button" type="button" onClick={() => void onResumeCrawl(activeCrawlJob.jobId)}>Resume crawl</button><button className="ghost-button ghost-danger" type="button" onClick={() => void onPauseCrawl(activeCrawlJob.jobId)}>Pause after current chunk completes</button></div> : null}
             <div className="job-list">
               {jobs.length === 0 ? <p className="summary-copy">No desktop jobs recorded yet.</p> : jobs.map((job) => (
                 <article className="job-card" key={job.jobId}>
@@ -536,6 +758,49 @@ function SummaryCard({ label, value, children }: { label: string; value?: string
   return <article className="summary-card"><span className="metric-label">{label}</span>{value ? <strong>{value}</strong> : null}{children}</article>;
 }
 
+function StatusBoardStat({
+  label,
+  value,
+  copy,
+  tone,
+  active,
+  onClick,
+}: {
+  label: string;
+  value: string;
+  copy: string;
+  tone: 'success' | 'warning' | 'neutral';
+  active?: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      className={`summary-card overview-stat-card overview-stat-${tone} ${active ? 'overview-stat-active' : ''}`.trim()}
+      type="button"
+      onClick={onClick}
+      aria-pressed={active}
+    >
+      <span className="metric-label">{label}</span>
+      <strong>{value}</strong>
+      <span className="summary-copy">{copy}</span>
+    </button>
+  );
+}
+
+function StatusBadge({
+  tone,
+  children,
+}: {
+  tone: 'success' | 'warning' | 'neutral';
+  children: ReactNode;
+}) {
+  return (
+    <span className={`coverage-badge overview-badge overview-badge-${tone}`}>
+      {children}
+    </span>
+  );
+}
+
 function ActionButton({ title, copy, primary, onClick }: { title: string; copy: string; primary?: boolean; onClick: () => void }) {
   return <button className={`action-card ${primary ? 'action-primary' : ''}`} type="button" onClick={onClick}><strong>{title}</strong><span>{copy}</span></button>;
 }
@@ -674,6 +939,216 @@ function formatTimestamp(timestamp: string): string {
 
 function capitalize(value: string): string {
   return value.slice(0, 1).toUpperCase() + value.slice(1);
+}
+
+function createCoverageFiltersForPreset(
+  preset: OverviewBoardPreset,
+): CoverageExplorerFilters {
+  switch (preset) {
+    case 'solved':
+      return {
+        ...DEFAULT_COVERAGE_FILTERS,
+        solved: 'solved',
+      };
+    case 'unsolved':
+      return {
+        ...DEFAULT_COVERAGE_FILTERS,
+        solved: 'unsolved',
+      };
+    case 'complete':
+      return {
+        ...DEFAULT_COVERAGE_FILTERS,
+        archiveCompletenessStatus: 'complete',
+      };
+    case 'missing-official-source':
+      return {
+        ...DEFAULT_COVERAGE_FILTERS,
+        archiveCompletenessStatus: 'missing-official-source',
+      };
+    case 'missing-user-source':
+      return {
+        ...DEFAULT_COVERAGE_FILTERS,
+        archiveCompletenessStatus: 'missing-user-source',
+      };
+    case 'missing-tests':
+      return {
+        ...DEFAULT_COVERAGE_FILTERS,
+        testsCoverageStatus: 'not-captured-yet',
+      };
+    case 'all':
+    default:
+      return {
+        ...DEFAULT_COVERAGE_FILTERS,
+      };
+  }
+}
+
+function detectOverviewPreset(
+  filters: CoverageExplorerFilters,
+): OverviewBoardPreset | null {
+  const presets: OverviewBoardPreset[] = [
+    'all',
+    'solved',
+    'unsolved',
+    'complete',
+    'missing-official-source',
+    'missing-user-source',
+    'missing-tests',
+  ];
+  return (
+    presets.find((preset) =>
+      areCoverageFiltersEqual(filters, createCoverageFiltersForPreset(preset)),
+    ) ?? null
+  );
+}
+
+function areCoverageFiltersEqual(
+  left: CoverageExplorerFilters,
+  right: CoverageExplorerFilters,
+): boolean {
+  return (
+    left.query === right.query
+    && left.solved === right.solved
+    && left.testsFragmentArchived === right.testsFragmentArchived
+    && left.visibleTestsCaptured === right.visibleTestsCaptured
+    && left.testsCoverageStatus === right.testsCoverageStatus
+    && left.officialSourceArchived === right.officialSourceArchived
+    && left.userSourceArchived === right.userSourceArchived
+    && left.editorialAvailability === right.editorialAvailability
+    && left.archiveCompletenessStatus === right.archiveCompletenessStatus
+    && left.grade === right.grade
+  );
+}
+
+function formatOverviewPreset(preset: OverviewBoardPreset): string {
+  switch (preset) {
+    case 'all':
+      return 'All problems';
+    case 'solved':
+      return 'Solved';
+    case 'unsolved':
+      return 'Unsolved';
+    case 'complete':
+      return 'Complete';
+    case 'missing-official-source':
+      return 'Missing official source';
+    case 'missing-user-source':
+      return 'Missing your source';
+    case 'missing-tests':
+      return 'Missing tests';
+  }
+}
+
+function toneForArchiveState(
+  status: GuiCoverageRecord['archiveCompletenessStatus'],
+): 'success' | 'warning' | 'neutral' {
+  switch (status) {
+    case 'complete':
+      return 'success';
+    case 'unsolved':
+      return 'neutral';
+    default:
+      return 'warning';
+  }
+}
+
+function toneForOfficialStatus(
+  status: GuiCoverageRecord['officialSourceStatus'],
+): 'success' | 'warning' | 'neutral' {
+  switch (status) {
+    case 'archived':
+      return 'success';
+    case 'restricted-upstream':
+    case 'not-available-upstream':
+      return 'neutral';
+    case 'not-captured-yet':
+    default:
+      return 'warning';
+  }
+}
+
+function toneForTestsStatus(
+  status: GuiCoverageRecord['testsCoverageStatus'],
+): 'success' | 'warning' | 'neutral' {
+  switch (status) {
+    case 'captured':
+      return 'success';
+    case 'not-available-upstream':
+      return 'neutral';
+    case 'not-captured-yet':
+    default:
+      return 'warning';
+  }
+}
+
+function formatArchiveCompletenessStatus(
+  status: GuiCoverageRecord['archiveCompletenessStatus'],
+): string {
+  switch (status) {
+    case 'complete':
+      return 'Complete';
+    case 'unsolved':
+      return 'Unsolved';
+    case 'not-archived-yet':
+      return 'Not archived yet';
+    case 'missing-official-source':
+      return 'Missing official source';
+    case 'missing-user-source':
+      return 'Missing your source';
+    case 'incomplete':
+      return 'Missing tests';
+  }
+}
+
+function formatOfficialSourceStatus(
+  status: GuiCoverageRecord['officialSourceStatus'],
+): string {
+  switch (status) {
+    case 'archived':
+      return 'Official source archived';
+    case 'restricted-upstream':
+      return 'Official source restricted';
+    case 'not-available-upstream':
+      return 'Official source unavailable upstream';
+    case 'not-captured-yet':
+      return 'Official source not captured yet';
+  }
+}
+
+function formatTestsCoverageStatus(
+  status: GuiCoverageRecord['testsCoverageStatus'],
+): string {
+  switch (status) {
+    case 'captured':
+      return 'Tests archived';
+    case 'not-available-upstream':
+      return 'Tests unavailable upstream';
+    case 'not-captured-yet':
+      return 'Tests not captured yet';
+  }
+}
+
+function formatOverviewProblemSummary(record: GuiCoverageRecord): string {
+  const segments = [
+    `${record.solvedEvaluationCount}/${record.evaluationCount} solved evaluations`,
+  ];
+  if (record.requiredTrustworthyUserSourceLanguages.length > 0) {
+    segments.push(
+      `required languages: ${record.requiredTrustworthyUserSourceLanguages.join(', ')}`,
+    );
+  }
+  if (record.officialSourceLanguages.length > 0) {
+    segments.push(`official langs: ${record.officialSourceLanguages.join(', ')}`);
+  }
+  if (record.userSourceLanguages.length > 0) {
+    segments.push(`your langs: ${record.userSourceLanguages.join(', ')}`);
+  }
+  if (record.missingTrustworthyUserSourceLanguages.length > 0) {
+    segments.push(
+      `missing trustworthy: ${record.missingTrustworthyUserSourceLanguages.join(', ')}`,
+    );
+  }
+  return segments.join(' • ');
 }
 
 function renderViewButton(

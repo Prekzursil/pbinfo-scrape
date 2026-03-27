@@ -2,9 +2,11 @@ import { z } from 'zod';
 
 import {
   guiArchiveDatasetSchema,
+  guiCoverageArchiveStateFilterSchema,
   guiCoverageEditorialFilterSchema,
   guiCoveragePresenceFilterSchema,
   guiCoverageSolvedFilterSchema,
+  guiCoverageTestsStatusFilterSchema,
   guiCrawlModeSchema,
   guiVerbosityModeSchema,
   guiJobKindSchema,
@@ -124,9 +126,11 @@ export const guiCoverageListInputSchema = z
     solved: guiCoverageSolvedFilterSchema.optional(),
     testsFragmentArchived: guiCoveragePresenceFilterSchema.optional(),
     visibleTestsCaptured: guiCoveragePresenceFilterSchema.optional(),
+    testsCoverageStatus: guiCoverageTestsStatusFilterSchema.optional(),
     officialSourceArchived: guiCoveragePresenceFilterSchema.optional(),
     userSourceArchived: guiCoveragePresenceFilterSchema.optional(),
     editorialAvailability: guiCoverageEditorialFilterSchema.optional(),
+    archiveCompletenessStatus: guiCoverageArchiveStateFilterSchema.optional(),
     grade: z.number().int().positive().optional(),
   })
   .strict();

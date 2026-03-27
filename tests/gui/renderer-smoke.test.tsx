@@ -21,6 +21,14 @@ test('renders the simplified easy-mode overview before exposing deeper tools', {
   expect(await screen.findByRole('tab', { name: 'Data' })).toBeInTheDocument();
   expect(await screen.findByRole('tab', { name: 'Setup' })).toBeInTheDocument();
   expect(await screen.findByRole('heading', { name: 'Archive Overview' })).toBeInTheDocument();
+  expect(await screen.findByRole('heading', { name: 'Problem Status Board' })).toBeInTheDocument();
+  const boardToolbar = await screen.findByRole('toolbar', {
+    name: 'Problem status board filters',
+  });
+  expect(within(boardToolbar).getByRole('button', { name: 'Missing official source' })).toBeInTheDocument();
+  expect(within(boardToolbar).getByRole('button', { name: 'Missing your source' })).toBeInTheDocument();
+  expect(await screen.findByText('Upstream unavailable')).toBeInTheDocument();
+  expect(await screen.findByText(/12 official and 8 tests/i)).toBeInTheDocument();
   expect(await screen.findByText('C:/archive-workspace')).toBeInTheDocument();
   expect(await screen.findByText('Primary account')).toBeInTheDocument();
   expect(await screen.findByText('42 pending')).toBeInTheDocument();
@@ -53,6 +61,25 @@ test('lets the user move through overview, coverage, data, and setup without ove
   fireEvent.click(await screen.findByRole('button', { name: /Start public crawl/i }));
   expect(await screen.findByText('Started public crawl')).toBeInTheDocument();
 
+  const boardToolbar = await screen.findByRole('toolbar', {
+    name: 'Problem status board filters',
+  });
+  fireEvent.click(within(boardToolbar).getByRole('button', { name: 'Missing your source' }));
+  expect(await screen.findByText('Your source missing')).toBeInTheDocument();
+  fireEvent.click(await screen.findByRole('button', { name: 'Open mirror' }));
+  expect(harness.openExternal).toHaveBeenCalledWith(
+    'http://127.0.0.1:43111/probleme/3716/crossword',
+  );
+  fireEvent.click(await screen.findByRole('button', { name: 'Open coverage detail' }));
+  expect(await screen.findByRole('heading', { name: 'Coverage Explorer' })).toBeInTheDocument();
+
+  fireEvent.click(await screen.findByRole('tab', { name: 'Overview' }));
+  const refreshedBoardToolbar = await screen.findByRole('toolbar', {
+    name: 'Problem status board filters',
+  });
+  fireEvent.click(within(refreshedBoardToolbar).getByRole('button', { name: 'Missing tests' }));
+  expect(await screen.findByText('Tests not captured yet')).toBeInTheDocument();
+
   fireEvent.click(await screen.findByRole('button', { name: 'Show embedded preview' }));
   expect(await screen.findByTitle('Mirror preview')).toBeInTheDocument();
 
@@ -63,6 +90,13 @@ test('lets the user move through overview, coverage, data, and setup without ove
   expect(
     within(coverageWorkspace as HTMLElement).getByRole('toolbar', { name: 'Coverage filters' }),
   ).toBeInTheDocument();
+  expect(within(coverageWorkspace as HTMLElement).getByLabelText('Tests status')).toBeInTheDocument();
+  expect(within(coverageWorkspace as HTMLElement).getByLabelText('Archive state')).toBeInTheDocument();
+  fireEvent.change(await screen.findByLabelText('Tests status'), {
+    target: {
+      value: 'all',
+    },
+  });
   const coverageSearchInput = await screen.findByLabelText('Search problems');
   fireEvent.change(coverageSearchInput, {
     target: {
@@ -70,6 +104,8 @@ test('lets the user move through overview, coverage, data, and setup without ove
     },
   });
   expect((await screen.findAllByText(/Crossword/i)).length).toBeGreaterThanOrEqual(1);
+  expect(await screen.findByText('Required solved languages')).toBeInTheDocument();
+  expect(await screen.findByText('Official source not captured yet')).toBeInTheDocument();
   const solvedSelect = await screen.findByLabelText('Solved');
   fireEvent.change(solvedSelect, {
     target: {
@@ -120,6 +156,156 @@ function createBridgeHarness(): {
   openPath: ReturnType<typeof vi.fn>;
   openExternal: ReturnType<typeof vi.fn>;
 } {
+  const coverageRecords = [
+    {
+      problemId: 3716,
+      slug: 'crossword',
+      name: 'Crossword',
+      grade: 11,
+      mirrorRoute: '/probleme/3716/crossword',
+      tags: ['strings'],
+      solvedByMe: true,
+      evaluationCount: 1,
+      solvedEvaluationCount: 1,
+      rankingPresent: true,
+      testsFragmentArchived: true,
+      exampleTestsAvailableCount: 0,
+      visibleTestsCapturedCount: 0,
+      evaluationObservedTestsCount: 1,
+      effectiveTestsAvailableCount: 1,
+      testsCoverageStatus: 'captured' as const,
+      officialSolutionPresent: true,
+      officialSourceArchived: false,
+      officialSourceLanguages: [],
+      officialSourceStatus: 'not-captured-yet' as const,
+      userSourceArchived: false,
+      userSourceLanguages: [],
+      requiredTrustworthyUserSourceLanguages: ['c'],
+      trustworthyUserSourceLanguages: [],
+      bestTrustworthyUserPerLanguage: {},
+      missingTrustworthyUserSourceLanguages: ['c'],
+      archiveCompletenessStatus: 'missing-user-source' as const,
+      editorialAvailability: 'visible' as const,
+      testsAvailable: true,
+      unsolvedByConfiguredHandle: false,
+      officialSourceBlocked: true,
+      officialSourceBlockedReason: 'official-source-not-captured',
+      notArchivedYet: false,
+      newSinceBaseline: false,
+      notes: [
+        'Tests fragment archived, no visible test cases parsed.',
+        'Source list available upstream, no archived source code yet.',
+      ],
+    },
+    {
+      problemId: 3171,
+      slug: 'waterreserve',
+      name: 'waterreserve',
+      grade: 9,
+      mirrorRoute: '/probleme/3171/problem-3171',
+      tags: ['graphs'],
+      solvedByMe: true,
+      evaluationCount: 2,
+      solvedEvaluationCount: 2,
+      rankingPresent: true,
+      testsFragmentArchived: true,
+      exampleTestsAvailableCount: 2,
+      visibleTestsCapturedCount: 2,
+      evaluationObservedTestsCount: 4,
+      effectiveTestsAvailableCount: 4,
+      testsCoverageStatus: 'captured' as const,
+      officialSolutionPresent: true,
+      officialSourceArchived: true,
+      officialSourceLanguages: ['cpp'],
+      officialSourceStatus: 'archived' as const,
+      userSourceArchived: true,
+      userSourceLanguages: ['c', 'cpp'],
+      requiredTrustworthyUserSourceLanguages: ['c', 'cpp'],
+      trustworthyUserSourceLanguages: ['c', 'cpp'],
+      bestTrustworthyUserPerLanguage: { c: 101, cpp: 102 },
+      missingTrustworthyUserSourceLanguages: [],
+      archiveCompletenessStatus: 'complete' as const,
+      editorialAvailability: 'visible' as const,
+      testsAvailable: true,
+      unsolvedByConfiguredHandle: false,
+      officialSourceBlocked: false,
+      notArchivedYet: false,
+      newSinceBaseline: true,
+      notes: ['Official and user sources archived.'],
+    },
+    {
+      problemId: 19,
+      slug: 'bfs',
+      name: 'bfs',
+      grade: 9,
+      mirrorRoute: '/probleme/19/bfs',
+      tags: ['graphs'],
+      solvedByMe: false,
+      evaluationCount: 0,
+      solvedEvaluationCount: 0,
+      rankingPresent: false,
+      testsFragmentArchived: true,
+      exampleTestsAvailableCount: 1,
+      visibleTestsCapturedCount: 0,
+      evaluationObservedTestsCount: 0,
+      effectiveTestsAvailableCount: 1,
+      testsCoverageStatus: 'captured' as const,
+      officialSolutionPresent: true,
+      officialSourceArchived: false,
+      officialSourceLanguages: [],
+      officialSourceStatus: 'not-available-upstream' as const,
+      userSourceArchived: false,
+      userSourceLanguages: [],
+      requiredTrustworthyUserSourceLanguages: [],
+      trustworthyUserSourceLanguages: [],
+      bestTrustworthyUserPerLanguage: {},
+      missingTrustworthyUserSourceLanguages: [],
+      archiveCompletenessStatus: 'unsolved' as const,
+      editorialAvailability: 'visible' as const,
+      testsAvailable: true,
+      unsolvedByConfiguredHandle: true,
+      officialSourceBlocked: false,
+      notArchivedYet: false,
+      newSinceBaseline: false,
+      notes: ['Official 100-point source body unavailable upstream.'],
+    },
+    {
+      problemId: 5000,
+      slug: 'edgecase',
+      name: 'Edgecase',
+      grade: 10,
+      mirrorRoute: '/probleme/5000/edgecase',
+      tags: ['math'],
+      solvedByMe: true,
+      evaluationCount: 1,
+      solvedEvaluationCount: 1,
+      rankingPresent: true,
+      testsFragmentArchived: false,
+      exampleTestsAvailableCount: 0,
+      visibleTestsCapturedCount: 0,
+      evaluationObservedTestsCount: 0,
+      effectiveTestsAvailableCount: 0,
+      testsCoverageStatus: 'not-captured-yet' as const,
+      officialSolutionPresent: false,
+      officialSourceArchived: false,
+      officialSourceLanguages: [],
+      officialSourceStatus: 'not-available-upstream' as const,
+      userSourceArchived: true,
+      userSourceLanguages: ['py'],
+      requiredTrustworthyUserSourceLanguages: ['py'],
+      trustworthyUserSourceLanguages: ['py'],
+      bestTrustworthyUserPerLanguage: { py: 501 },
+      missingTrustworthyUserSourceLanguages: [],
+      archiveCompletenessStatus: 'incomplete' as const,
+      editorialAvailability: 'hidden' as const,
+      testsAvailable: false,
+      unsolvedByConfiguredHandle: false,
+      officialSourceBlocked: false,
+      notArchivedYet: false,
+      newSinceBaseline: false,
+      notes: ['Tests still need to be captured.'],
+    },
+  ];
   const startJob = vi.fn(async (input) => ({
     ...buildJob(input.kind, 'completed'),
     snapshotId: input.snapshotId,
@@ -281,6 +467,13 @@ function createBridgeHarness(): {
           description: 'Submission and evaluation records with score, verdict, tests, and compile logs when archived.',
         },
         {
+          dataset: 'tests' as const,
+          label: 'Tests',
+          count: 1,
+          directoryPath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/tests',
+          description: 'Unified per-problem test dataset combining statement examples, visible tests, and evaluation-observed tests.',
+        },
+        {
           dataset: 'rankings' as const,
           label: 'Rankings',
           count: 1,
@@ -368,46 +561,67 @@ function createBridgeHarness(): {
       mirrorUrl: 'http://127.0.0.1:4173/',
       totalProblems: 2582,
       solvedByMeCount: 7,
+      completeProblemCount: 3,
+      incompleteSolvedProblemCount: 4,
+      missingOfficialSourceCaptureCount: 1,
+      officialSourceUnavailableUpstreamCount: 12,
+      missingTestsCaptureCount: 2,
+      testsUnavailableUpstreamCount: 8,
       statementArchivedCount: 2582,
       solutionFragmentArchivedCount: 2582,
       testsFragmentArchivedCount: 2582,
+      problemsWithExamples: 1802,
       problemsWithVisibleTestsCaptured: 0,
+      problemsWithEvaluationObservedTests: 1,
+      problemsWithEffectiveTests: 0,
       problemsWithArchivedSources: 0,
       problemsWithOfficialSourceArchived: 0,
       problemsWithUserSourceArchived: 0,
       editorialVisibleCount: 832,
       rankingPresentCount: 7,
+      newSinceBaselineCount: 0,
+      unsolvedProblemCount: 3,
+      missingOfficialSourceCount: 13,
+      solvedByMeMissingUserSourceCount: 1,
     })),
-    listCoverageRecords: vi.fn(async () => ({
-      snapshotId: 'acceptance-20260310b',
-      totalCount: 1,
-      offset: 0,
-      limit: 100,
-      items: [
-        {
-          problemId: 3716,
-          slug: 'crossword',
-          name: 'Crossword',
-          grade: 11,
-          mirrorRoute: '/probleme/3716/crossword',
-          tags: ['strings'],
-          solvedByMe: true,
-          evaluationCount: 1,
-          solvedEvaluationCount: 1,
-          rankingPresent: true,
-          testsFragmentArchived: true,
-          visibleTestsCapturedCount: 0,
-          officialSolutionPresent: true,
-          officialSourceArchived: false,
-          userSourceArchived: false,
-          editorialAvailability: 'visible' as const,
-          notes: [
-            'Tests fragment archived, no visible test cases parsed.',
-            'Source list available upstream, no archived source code yet.',
-          ],
-        },
-      ],
-    })),
+    listCoverageRecords: vi.fn(async (input) => {
+      const filtered = coverageRecords.filter((record) => {
+        if (input.solved === 'solved' && !record.solvedByMe) {
+          return false;
+        }
+        if (input.solved === 'unsolved' && record.solvedByMe) {
+          return false;
+        }
+        if (
+          input.archiveCompletenessStatus
+          && input.archiveCompletenessStatus !== 'all'
+          && record.archiveCompletenessStatus !== input.archiveCompletenessStatus
+        ) {
+          return false;
+        }
+        if (
+          input.testsCoverageStatus
+          && input.testsCoverageStatus !== 'all'
+          && record.testsCoverageStatus !== input.testsCoverageStatus
+        ) {
+          return false;
+        }
+        if (input.query) {
+          const haystack = `${record.problemId} ${record.slug} ${record.name} ${record.tags.join(' ')}`.toLowerCase();
+          if (!haystack.includes(input.query.toLowerCase())) {
+            return false;
+          }
+        }
+        return true;
+      });
+      return {
+        snapshotId: 'acceptance-20260310b',
+        totalCount: filtered.length,
+        offset: 0,
+        limit: 100,
+        items: filtered,
+      };
+    }),
     getCoverageRecord: vi.fn(async () => ({
       snapshotId: 'acceptance-20260310b',
       coverageFilePath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problem-coverage/problem-3716.json',
@@ -423,13 +637,31 @@ function createBridgeHarness(): {
         solvedEvaluationCount: 1,
         rankingPresent: true,
         testsFragmentArchived: true,
+        exampleTestsAvailableCount: 0,
         visibleTestsCapturedCount: 0,
+        evaluationObservedTestsCount: 1,
+        effectiveTestsAvailableCount: 0,
+        testsCoverageStatus: 'captured' as const,
         officialSolutionPresent: true,
         officialSourceArchived: false,
         officialSourceCount: 0,
+        officialSourceLanguages: [],
+        officialSourceStatus: 'not-captured-yet' as const,
         userSourceArchived: false,
         userSourceCount: 0,
+        userSourceLanguages: [],
+        requiredTrustworthyUserSourceLanguages: ['c'],
+        trustworthyUserSourceLanguages: [],
+        bestTrustworthyUserPerLanguage: {},
+        missingTrustworthyUserSourceLanguages: ['c'],
+        archiveCompletenessStatus: 'missing-user-source' as const,
         editorialAvailability: 'visible' as const,
+        testsAvailable: true,
+        unsolvedByConfiguredHandle: false,
+        officialSourceBlocked: true,
+        officialSourceBlockedReason: 'official-source-not-captured',
+        notArchivedYet: false,
+        newSinceBaseline: false,
         notes: [
           'Tests fragment archived, no visible test cases parsed.',
           'Source list available upstream, no archived source code yet.',

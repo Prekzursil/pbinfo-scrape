@@ -1,7 +1,7 @@
 import { loadHtml, normalizeWhitespace, parseNumber } from './shared.js';
 
-export interface UserSolutionListEntry {
-  user: string;
+export interface ProblemSourceListEntry {
+  user?: string;
   problemId: number;
   problemSlug: string;
   problemName: string;
@@ -9,32 +9,34 @@ export interface UserSolutionListEntry {
   score?: number;
 }
 
-export interface ParsedUserSolutionsListPage {
+export interface ParsedProblemSourceListPage {
+  authorHandle?: string;
   totalMatches?: number;
   throttled: boolean;
   pageSize?: number;
   currentOffset?: number;
   nextPageUrls: string[];
-  entries: UserSolutionListEntry[];
+  entries: ProblemSourceListEntry[];
 }
 
-export function parseUserSolutionsListPage(
+export function parseProblemSourceListPage(
   html: string,
   pageUrl?: string,
-): ParsedUserSolutionsListPage {
+): ParsedProblemSourceListPage {
   const $ = loadHtml(html);
   const totalMatchesText = normalizeWhitespace($('.bold.mb-3').first().text());
   const totalMatches = parseNumber(totalMatchesText);
   const fullText = normalizeWhitespace($.root().text()).toLowerCase();
+  const authorHandle = extractAuthorHandle($);
   const throttled = fullText.includes('resursă indisponibilă temporar')
     || fullText.includes('resursa indisponibila temporar');
   const entriesFromRows = extractEntriesFromRows($);
   const entries =
     entriesFromRows.length > 0 ? entriesFromRows : extractEntriesFromAnchorTriplets($);
-
   const paginationMetadata = parsePaginationMetadata($, html, pageUrl, totalMatches);
 
   return {
+    authorHandle,
     totalMatches,
     throttled,
     pageSize: paginationMetadata?.pageSize,
@@ -44,10 +46,44 @@ export function parseUserSolutionsListPage(
   };
 }
 
+function extractAuthorHandle($: ReturnType<typeof loadHtml>): string | undefined {
+  const preferredLink = $('*[title="Postată de"] a[href^="/profil/"], *[title="Postata de"] a[href^="/profil/"]').first();
+  if (preferredLink.length > 0) {
+    const handle = preferredLink.attr('href')?.match(/^\/profil\/([^/?#]+)$/)?.[1];
+    const normalized = normalizeWhitespace(handle ?? '');
+    return normalized || undefined;
+  }
+
+  let summaryHandle: string | undefined;
+  $('tr').each((_, row) => {
+    const headers = $(row).children('th');
+    const values = $(row).children('td');
+    if (headers.length === 0 || values.length === 0) {
+      return;
+    }
+
+    headers.each((index, headerCell) => {
+      const header = normalizeWhitespace($(headerCell).text()).toLowerCase();
+      if (!header.includes('postată de') && !header.includes('postata de')) {
+        return;
+      }
+
+      const valueCell = values.eq(index);
+      const handle = valueCell.find('a[href^="/profil/"]').first().attr('href')?.match(/^\/profil\/([^/?#]+)$/)?.[1];
+      if (handle) {
+        summaryHandle = handle;
+      }
+    });
+  });
+
+  const normalized = normalizeWhitespace(summaryHandle ?? '');
+  return normalized || undefined;
+}
+
 function extractEntriesFromRows(
   $: ReturnType<typeof loadHtml>,
-): UserSolutionListEntry[] {
-  const entries: UserSolutionListEntry[] = [];
+): ProblemSourceListEntry[] {
+  const entries: ProblemSourceListEntry[] = [];
   const seen = new Set<number>();
 
   $('table tr').each((_, row) => {
@@ -55,13 +91,9 @@ function extractEntriesFromRows(
     const problemAnchor = $(row).find('a[href^="/probleme/"]').first();
     const evaluationAnchor = $(row).find('a[href^="/detalii-evaluare/"]').first();
 
-    const profileHref = profileAnchor.attr('href');
-    const problemHref = problemAnchor.attr('href');
-    const evaluationHref = evaluationAnchor.attr('href');
-    const profileMatch = profileHref?.match(/^\/profil\/([^/?#]+)$/);
-    const problemMatch = problemHref?.match(/^\/probleme\/(\d+)\/([^/?#]+)$/);
-    const evaluationMatch = evaluationHref?.match(/^\/detalii-evaluare\/(\d+)$/);
-    if (!profileMatch?.[1] || !problemMatch?.[1] || !problemMatch[2] || !evaluationMatch?.[1]) {
+    const problemMatch = problemAnchor.attr('href')?.match(/^\/probleme\/(\d+)\/([^/?#]+)$/);
+    const evaluationMatch = evaluationAnchor.attr('href')?.match(/^\/detalii-evaluare\/(\d+)$/);
+    if (!problemMatch?.[1] || !problemMatch[2] || !evaluationMatch?.[1]) {
       return;
     }
 
@@ -72,7 +104,7 @@ function extractEntriesFromRows(
     seen.add(evaluationId);
 
     entries.push({
-      user: normalizeUserHandle(profileMatch[1], profileAnchor.text()),
+      user: normalizeProfileHandle(profileAnchor.attr('href'), profileAnchor.text()),
       problemId: Number(problemMatch[1]),
       problemSlug: problemMatch[2],
       problemName: normalizeWhitespace(problemAnchor.text()),
@@ -86,23 +118,26 @@ function extractEntriesFromRows(
 
 function extractEntriesFromAnchorTriplets(
   $: ReturnType<typeof loadHtml>,
-): UserSolutionListEntry[] {
+): ProblemSourceListEntry[] {
   const anchors = $('a').toArray();
-  const entries: UserSolutionListEntry[] = [];
+  const entries: ProblemSourceListEntry[] = [];
   const seen = new Set<number>();
 
   for (let index = 0; index < anchors.length; index += 1) {
-    const profileHref = $(anchors[index]).attr('href');
-    const profileMatch = profileHref?.match(/^\/profil\/([^/?#]+)$/);
-    if (!profileMatch?.[1]) {
+    const problemHref = $(anchors[index]).attr('href');
+    const problemMatch = problemHref?.match(/^\/probleme\/(\d+)\/([^/?#]+)$/);
+    if (!problemMatch?.[1] || !problemMatch[2]) {
       continue;
     }
 
-    const problemHref = $(anchors[index + 1]).attr('href');
-    const problemMatch = problemHref?.match(/^\/probleme\/(\d+)\/([^/?#]+)$/);
-    const evaluationHref = $(anchors[index + 2]).attr('href');
+    let evaluationAnchorIndex = index + 1;
+    if ($(anchors[index + 1]).attr('href')?.startsWith('/profil/')) {
+      evaluationAnchorIndex = index + 2;
+    }
+
+    const evaluationHref = $(anchors[evaluationAnchorIndex]).attr('href');
     const evaluationMatch = evaluationHref?.match(/^\/detalii-evaluare\/(\d+)$/);
-    if (!problemMatch?.[1] || !problemMatch[2] || !evaluationMatch?.[1]) {
+    if (!evaluationMatch?.[1]) {
       continue;
     }
 
@@ -112,11 +147,12 @@ function extractEntriesFromAnchorTriplets(
     }
     seen.add(evaluationId);
 
+    const maybeProfileHref = $(anchors[index + 1]).attr('href');
     entries.push({
-      user: normalizeUserHandle(profileMatch[1], $(anchors[index]).text()),
+      user: normalizeProfileHandle(maybeProfileHref, $(anchors[index + 1]).text()),
       problemId: Number(problemMatch[1]),
       problemSlug: problemMatch[2],
-      problemName: normalizeWhitespace($(anchors[index + 1]).text()),
+      problemName: normalizeWhitespace($(anchors[index]).text()),
       evaluationId,
     });
   }
@@ -124,13 +160,16 @@ function extractEntriesFromAnchorTriplets(
   return entries;
 }
 
-function normalizeUserHandle(
-  profileHandle: string,
+function normalizeProfileHandle(
+  profileHref: string | undefined,
   profileText: string,
-): string {
+): string | undefined {
+  const hrefHandle = profileHref?.match(/^\/profil\/([^/?#]+)$/)?.[1];
   const normalizedText = normalizeWhitespace(profileText);
   const textHandle = normalizedText.match(/\(([^)]+)\)\s*$/)?.[1];
-  return normalizeWhitespace(textHandle ?? profileHandle);
+  const handle = textHandle ?? hrefHandle ?? normalizedText;
+  const normalizedHandle = normalizeWhitespace(handle);
+  return normalizedHandle || undefined;
 }
 
 function extractRowScore(
@@ -142,9 +181,7 @@ function extractRowScore(
     return undefined;
   }
 
-  const scoreCell = cells.last();
-  const scoreText = normalizeWhitespace(scoreCell.text());
-  return parseNumber(scoreText) ?? undefined;
+  return parseNumber(normalizeWhitespace(cells.last().text())) ?? undefined;
 }
 
 function parsePaginationMetadata(
@@ -187,14 +224,10 @@ function parsePaginationMetadata(
   const nextPageUrls: string[] = [];
   if (pageUrl) {
     const base = new URL(pageUrl);
-    const nextBase = new URL(base.toString());
-    for (
-      let offset = currentOffset + pageSize;
-      offset < resolvedTotal;
-      offset += pageSize
-    ) {
-      nextBase.searchParams.set('start', String(offset));
-      nextPageUrls.push(nextBase.toString());
+    for (let offset = currentOffset + pageSize; offset < resolvedTotal; offset += pageSize) {
+      const nextPage = new URL(base.toString());
+      nextPage.searchParams.set('start', String(offset));
+      nextPageUrls.push(nextPage.toString());
     }
   }
 

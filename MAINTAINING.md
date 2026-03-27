@@ -8,6 +8,7 @@ This runbook defines how the canonical PBInfo archive is owned, verified, and pr
 - Files under `archive/snapshots/acceptance-20260310b/` are the git-owned reference copy.
 - Local crawl output that changes the canonical snapshot tree is **generated working state**, not implicitly approved canonical content.
 - Do **not** silently commit local crawl drift into `acceptance-20260310b`.
+- Noncanonical generated snapshots such as `candidate-*`, `targeted-user-*`, and `smoke-*` should stay local or be published as external artifacts/releases unless you are deliberately promoting them into a tracked canonical state.
 
 ## What to do when the local canonical snapshot becomes dirty
 
@@ -132,6 +133,23 @@ npm run smoke:desktop-packaged
 5. Confirm the future snapshot should replace `acceptance-20260310b` as the blessed git-owned reference.
 6. Commit the deliberate canonical promotion with updated docs if the canonical snapshot ID changes.
 
+## How to ship a finalized noncanonical snapshot
+
+Sometimes you want to preserve a finalized working snapshot without promoting it into the tracked canonical tree.
+
+Recommended flow:
+
+1. finalize the working snapshot
+2. export/package the finalized snapshot outside git history
+3. publish it as a release asset or another external downloadable artifact
+4. keep the PR/repo focused on:
+   - code
+   - tests
+   - docs
+   - release metadata
+
+This keeps git history reviewable while still giving operators a reproducible artifact they can download and inspect.
+
 ## Pruning, retention, and backups
 
 - The repository keeps a **single blessed tracked canonical snapshot**.
@@ -157,6 +175,8 @@ npm run verify:canonical-snapshot
 npm run smoke:desktop-packaged
 npm run cli -- publish --snapshot acceptance-20260310b --release --upload-desktop-exe
 ```
+
+- If the release also depends on a large finalized noncanonical snapshot, publish that snapshot as a **separate release asset** instead of committing tens of thousands of generated files to git.
 
 ## Privacy and reporting alignment
 

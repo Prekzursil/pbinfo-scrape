@@ -21,13 +21,25 @@ import {
   parseProblemPage,
   parseProblemStatementFragment,
 } from '../pbinfo/parsers/problem.js';
-import { parseUserSolutionsListPage } from '../pbinfo/parsers/user-solutions.js';
+import { parseProblemSourceListPage } from '../pbinfo/parsers/problem-source-list.js';
+import {
+  parseUserSolutionsListPage,
+  type UserSolutionListEntry,
+} from '../pbinfo/parsers/user-solutions.js';
+import { isOfficialSourceAuthorHandle } from '../pbinfo/official-source-authors.js';
+import { buildSourceSignature } from '../ranking/source-normalization.js';
+import { detectSuspicionFlags } from './source-suspicion.js';
 import type { CrawlQueueInput } from '../types/crawl.js';
 import type {
+  EvaluationTestResult,
   EvaluationRecord,
   MirrorRouteRecord,
   PageRecord,
+  ProblemExample,
   ProblemRecord,
+  ProblemTestCaseRecord,
+  ProblemTestsRecord,
+  ProblemVisibleTest,
   SourceRecord,
 } from '../types/records.js';
 import { CrawlQueue } from './crawl-queue.js';
@@ -37,7 +49,9 @@ export interface ArchiveCrawlerOptions {
   config: LoadedLocalConfig;
   snapshot: SnapshotLayout;
   queue: CrawlQueue;
+  scope?: 'public' | 'user' | 'all';
   retryDelayMs?: number;
+  requestTimeoutMs?: number;
   fetchImpl?: typeof fetch;
   browserCapture?: BrowserCapture;
 }
@@ -45,11 +59,27 @@ export interface ArchiveCrawlerOptions {
 const manifestCache = new Map<string, Record<string, string>>();
 const manifestWriteLocks = new Map<string, Promise<void>>();
 
+interface UserSolutionsRecord {
+  user: string;
+  sourceUrl: string;
+  pageUrls: string[];
+  httpStatus?: number;
+  contentType?: string;
+  totalMatches?: number;
+  throttled: boolean;
+  pageSize?: number;
+  currentOffset?: number;
+  nextPageUrls: string[];
+  entries: UserSolutionListEntry[];
+}
+
 export class ArchiveCrawler {
   private readonly config: LoadedLocalConfig;
   private readonly snapshot: SnapshotLayout;
   private readonly queue: CrawlQueue;
+  private readonly scope: 'public' | 'user' | 'all';
   private readonly retryDelayMs: number;
+  private readonly requestTimeoutMs: number;
   private readonly fetchImpl: typeof fetch;
   private readonly browserCapture?: BrowserCapture;
 
@@ -57,7 +87,9 @@ export class ArchiveCrawler {
     this.config = options.config;
     this.snapshot = options.snapshot;
     this.queue = options.queue;
+    this.scope = options.scope ?? 'all';
     this.retryDelayMs = options.retryDelayMs ?? 60_000;
+    this.requestTimeoutMs = options.requestTimeoutMs ?? 30_000;
     this.fetchImpl = options.fetchImpl ?? fetch;
     this.browserCapture = options.browserCapture;
   }
@@ -68,7 +100,21 @@ export class ArchiveCrawler {
       return false;
     }
 
-    const response = await this.fetchImpl(item.url);
+    let response: Response;
+    try {
+      response = await fetchWithTimeout(
+        this.fetchImpl,
+        item.url,
+        undefined,
+        this.requestTimeoutMs,
+      );
+    } catch (error) {
+      this.queue.fail(item.id, {
+        errorMessage: error instanceof Error ? error.message : String(error),
+        nextVisibleAt: new Date(now.getTime() + this.retryDelayMs).toISOString(),
+      });
+      return true;
+    }
     const contentType = response.headers.get('content-type');
 
     if (looksLikeHtml(contentType)) {
@@ -83,7 +129,13 @@ export class ArchiveCrawler {
 
       const contentHash = `sha256:${createHash('sha256').update(body).digest('hex')}`;
       const fileName = await this.archiveHtmlPage(item.url, body);
-      const browserBodyPath = await this.captureBrowserHtml(item.url);
+      const browserCapture = await this.captureBrowserHtml(item.url);
+      const normalizedHtml = resolvePreferredNormalizedHtml(
+        item.kind,
+        item.url,
+        body,
+        browserCapture.html,
+      );
       this.persistPageRecord({
         snapshotId: this.snapshot.snapshotId,
         url: item.url,
@@ -92,15 +144,37 @@ export class ArchiveCrawler {
         contentType: contentType ?? undefined,
         contentHash,
         bodyPath: `raw-pages/${fileName}`,
-        browserBodyPath,
+        browserBodyPath: browserCapture.bodyPath,
         fetchedAt: now.toISOString(),
       });
-      this.persistNormalizedHtml(item, body, response.status, contentType ?? undefined);
+      this.persistNormalizedHtml(
+        item,
+        normalizedHtml.html,
+        response.status,
+        contentType ?? undefined,
+        normalizedHtml.source === 'browser',
+      );
 
-      const followUps = [
-        ...discoverFollowUps(this.config, item.url, body),
-        ...discoverNormalizedFollowUps(this.config, item.url, item.kind, body),
-      ];
+      const genericFollowUps = discoverFollowUps(
+        this.config,
+        this.scope,
+        item.url,
+        item.kind,
+        body,
+      );
+      const normalizedFollowUps = discoverNormalizedFollowUps(
+        this.config,
+        this.snapshot,
+        item.url,
+        item.kind,
+        body,
+      );
+      const followUps =
+        item.kind === 'user-solutions'
+          || item.kind === 'official-source-list'
+          || (item.kind === 'public-page' && isProblemSourceListUrl(item.url))
+          ? [...normalizedFollowUps, ...genericFollowUps]
+          : [...genericFollowUps, ...normalizedFollowUps];
       this.queue.enqueueMany(followUps);
       this.queue.complete(item.id, {
         contentHash,
@@ -153,9 +227,12 @@ export class ArchiveCrawler {
     );
   }
 
-  private async captureBrowserHtml(url: string): Promise<string | undefined> {
+  private async captureBrowserHtml(url: string): Promise<{
+    bodyPath?: string;
+    html?: string;
+  }> {
     if (!this.browserCapture) {
-      return undefined;
+      return {};
     }
 
     try {
@@ -164,9 +241,12 @@ export class ArchiveCrawler {
       const root = join(this.snapshot.snapshotRoot, 'browser-pages');
       mkdirSync(root, { recursive: true });
       writeFileSync(join(root, fileName), html, 'utf8');
-      return `browser-pages/${fileName}`;
+      return {
+        bodyPath: `browser-pages/${fileName}`,
+        html,
+      };
     } catch {
-      return undefined;
+      return {};
     }
   }
 
@@ -175,6 +255,7 @@ export class ArchiveCrawler {
     html: string,
     httpStatus: number,
     contentType?: string,
+    normalizedFromBrowser = false,
   ): void {
     persistNormalizedSnapshotHtml({
       config: this.config,
@@ -184,6 +265,7 @@ export class ArchiveCrawler {
       httpStatus,
       contentType,
       fetchedAt: new Date().toISOString(),
+      normalizedFromBrowser,
     });
   }
 
@@ -246,6 +328,46 @@ export interface PersistNormalizedSnapshotHtmlOptions {
   httpStatus: number;
   contentType?: string;
   fetchedAt: string;
+  normalizedFromBrowser?: boolean;
+}
+
+async function fetchWithTimeout(
+  fetchImpl: typeof fetch,
+  input: RequestInfo | URL,
+  init: RequestInit | undefined,
+  requestTimeoutMs: number,
+): Promise<Response> {
+  const controller = new AbortController();
+  const signal = init?.signal
+    ? AbortSignal.any([init.signal, controller.signal])
+    : controller.signal;
+  const timeout = setTimeout(() => {
+    controller.abort(new Error(`request timed out after ${requestTimeoutMs}ms`));
+  }, requestTimeoutMs);
+
+  try {
+    return await Promise.race([
+      fetchImpl(input, {
+        ...init,
+        signal,
+      }),
+      new Promise<Response>((_, reject) => {
+        signal.addEventListener(
+          'abort',
+          () => {
+            reject(
+              signal.reason instanceof Error
+                ? signal.reason
+                : new Error(String(signal.reason ?? 'request aborted')),
+            );
+          },
+          { once: true },
+        );
+      }),
+    ]);
+  } finally {
+    clearTimeout(timeout);
+  }
 }
 
 export function persistNormalizedSnapshotHtml(
@@ -293,13 +415,27 @@ export function persistNormalizedSnapshotHtml(
         memoryLimitMb: current?.memoryLimitMb ?? fragment.executionHints.memoryLimitMb,
       }),
     );
+    persistProblemExamples(
+      options.snapshot,
+      problemId,
+      linkedProblem.slug,
+      linkedProblem.slug,
+      fragment.examples,
+    );
     return;
   }
 
   if (options.item.kind === 'problem-solution' && linkedProblem) {
     const problemId = linkedProblem.id;
     const solution = parseOfficialSolutionFragment(options.html);
-    const sourceIds = persistOfficialSources(options.snapshot, problemId, solution.solutions, options.item.url);
+    const sourceIds = persistOfficialSources(
+      options.snapshot,
+      problemId,
+      solution.solutions,
+      options.item.url,
+      options.fetchedAt,
+      options.normalizedFromBrowser ? 'browser-fallback' : 'official-fragment',
+    );
     mergeJsonRecord<ProblemRecord>(
       join(options.snapshot.normalizedRoot, 'problems'),
       `problem-${problemId}.json`,
@@ -313,10 +449,7 @@ export function persistNormalizedSnapshotHtml(
           artifactPath: resolveRawPageBodyPath(options.snapshot, options.item.url),
         },
         officialSolutions: mergeLanguageSolutions(current?.officialSolutions ?? {}, solution.solutions),
-        officialSourceIds: {
-          ...(current?.officialSourceIds ?? {}),
-          ...sourceIds,
-        },
+        officialSourceIds: mergeLanguageSourceIds(current?.officialSourceIds, sourceIds),
       }),
     );
     return;
@@ -338,11 +471,22 @@ export function persistNormalizedSnapshotHtml(
         visibleTests: fragment.visibleTests,
       }),
     );
+    persistProblemVisibleTests(
+      options.snapshot,
+      problemId,
+      linkedProblem.slug,
+      linkedProblem.slug,
+      fragment.visibleTests,
+    );
     return;
   }
 
   const evaluationMatch = options.item.url.match(/\/detalii-evaluare\/(\d+)/);
-  if (options.item.kind === 'evaluation-detail' && evaluationMatch?.[1]) {
+  if (
+    (options.item.kind === 'evaluation-detail'
+      || options.item.kind === 'official-evaluation-detail')
+    && evaluationMatch?.[1]
+  ) {
     try {
       const record = parseEvaluationPage(options.html, Number(evaluationMatch[1]));
       const suspicious = detectSuspicionFlags(record.sourceCode);
@@ -357,7 +501,17 @@ export function persistNormalizedSnapshotHtml(
         `evaluation-${evaluation.evaluationId}.json`,
         evaluation,
       );
-      persistEvaluationSource(options.snapshot, evaluation);
+      const sourceKind: SourceRecord['kind'] =
+        options.item.kind === 'official-evaluation-detail'
+          ? 'official'
+          : 'user-evaluation';
+      persistEvaluationSource(
+        options.snapshot,
+        evaluation,
+        sourceKind,
+        options.normalizedFromBrowser ? 'browser-fallback' : 'evaluation-detail',
+      );
+      persistEvaluationObservedTests(options.snapshot, evaluation);
     } catch (error) {
       writeJsonRecord(
         join(options.snapshot.normalizedRoot, 'evaluation-errors'),
@@ -374,17 +528,33 @@ export function persistNormalizedSnapshotHtml(
   }
 
   const solutionsMatch = options.item.url.match(/\/solutii\/user\/([^/?#]+)/);
-  if (options.item.kind === 'user-solutions' && solutionsMatch?.[1]) {
-    const record = parseUserSolutionsListPage(options.html);
-    writeJsonRecord(
+  const userHandle = solutionsMatch?.[1];
+  if (options.item.kind === 'user-solutions' && userHandle) {
+    const record = parseUserSolutionsListPage(options.html, options.item.url);
+    mergeJsonRecord<UserSolutionsRecord>(
       join(options.snapshot.normalizedRoot, 'user-solutions'),
-      `user-${sanitizeSegment(solutionsMatch[1]).toLowerCase()}.json`,
-      {
-        user: solutionsMatch[1],
-        sourceUrl: options.item.url,
-        httpStatus: options.httpStatus,
-        contentType: options.contentType,
-        ...record,
+      `user-${sanitizeSegment(userHandle).toLowerCase()}.json`,
+      (current) => {
+        const existingEntries = Array.isArray(current?.entries) ? current.entries : [];
+        const nextEntries = dedupeUserSolutionEntries([
+          ...existingEntries,
+          ...record.entries,
+        ]);
+        const existingPageUrls = Array.isArray(current?.pageUrls) ? current.pageUrls : [];
+        return {
+          ...(current ?? {}),
+          user: userHandle,
+          sourceUrl: current?.sourceUrl ?? options.item.url,
+          pageUrls: [...new Set([...existingPageUrls, options.item.url])].sort(),
+          httpStatus: options.httpStatus,
+          contentType: options.contentType,
+          totalMatches: maxDefinedNumber(current?.totalMatches, record.totalMatches),
+          throttled: Boolean(current?.throttled || record.throttled),
+          pageSize: record.pageSize ?? current?.pageSize,
+          currentOffset: record.currentOffset ?? current?.currentOffset,
+          nextPageUrls: record.nextPageUrls,
+          entries: nextEntries,
+        };
       },
     );
     return;
@@ -458,18 +628,27 @@ function persistOfficialSources(
   problemId: number,
   solutions: Record<string, string>,
   sourceUrl: string,
-): Record<string, string> {
-  const sourceIds: Record<string, string> = {};
+  fetchedAt: string,
+  provenanceType: SourceRecord['provenanceType'],
+): Record<string, string[]> {
+  const sourceIds: Record<string, string[]> = {};
   for (const [languageLabel, sourceCode] of Object.entries(solutions)) {
     const language = normalizeSourceLanguage(languageLabel);
     const sourceId = `official-${problemId}-${sanitizeSegment(language).toLowerCase()}`;
+    const signature = buildSourceSignature(sourceCode, language);
     const sourceRecord: SourceRecord = {
       sourceId,
       kind: 'official',
       problemId,
       language,
+      score: provenanceType === 'official-fragment' ? 0 : 100,
       sourceAvailable: Boolean(sourceCode),
       sourceCode,
+      sourceHash: signature?.sourceHash,
+      normalizedSourceHash: signature?.normalizedSourceHash,
+      sourceLength: signature?.sourceLength,
+      fetchedAt,
+      provenanceType,
       suspicionFlags: detectSuspicionFlags(sourceCode),
       provenance: [sourceUrl],
     };
@@ -478,7 +657,7 @@ function persistOfficialSources(
       `${sourceId}.json`,
       sourceRecord,
     );
-    sourceIds[language] = sourceId;
+    sourceIds[language] = [...new Set([...(sourceIds[language] ?? []), sourceId])].sort();
   }
 
   return sourceIds;
@@ -487,16 +666,22 @@ function persistOfficialSources(
 function persistEvaluationSource(
   snapshot: SnapshotLayout,
   evaluation: EvaluationRecord,
+  kind: SourceRecord['kind'],
+  provenanceType: SourceRecord['provenanceType'],
 ): void {
   if (!evaluation.sourceAvailable) {
     return;
   }
 
   const language = normalizeSourceLanguage(evaluation.language);
-  const sourceId = `evaluation-${evaluation.evaluationId}`;
+  const sourceId =
+    kind === 'official'
+      ? `official-${evaluation.problemId}-${sanitizeSegment(language).toLowerCase()}-${evaluation.evaluationId}`
+      : `evaluation-${evaluation.evaluationId}`;
+  const signature = buildSourceSignature(evaluation.sourceCode, language);
   const sourceRecord: SourceRecord = {
     sourceId,
-    kind: 'user-evaluation',
+    kind,
     problemId: evaluation.problemId,
     evaluationId: evaluation.evaluationId,
     userHandle: evaluation.user,
@@ -506,6 +691,11 @@ function persistEvaluationSource(
     memoryKb: evaluation.memoryKb,
     sourceAvailable: evaluation.sourceAvailable,
     sourceCode: evaluation.sourceCode,
+    sourceHash: signature?.sourceHash,
+    normalizedSourceHash: signature?.normalizedSourceHash,
+    sourceLength: signature?.sourceLength,
+    fetchedAt: evaluation.fetchedAt,
+    provenanceType,
     suspicionFlags: evaluation.suspicionFlags,
     provenance: evaluation.provenance,
   };
@@ -514,6 +704,309 @@ function persistEvaluationSource(
     `${sourceId}.json`,
     sourceRecord,
   );
+  mergeJsonRecord<ProblemRecord>(
+    join(snapshot.normalizedRoot, 'problems'),
+    `problem-${evaluation.problemId}.json`,
+    (current) => {
+      const currentIds =
+        kind === 'official'
+          ? current?.officialSourceIds ?? {}
+          : current?.userSourceIds ?? {};
+      const currentLanguageIds = currentIds[language] ?? [];
+      return {
+        ...(current ?? createPlaceholderProblem(evaluation.problemId, evaluation.problemSlug)),
+        ...(kind === 'official'
+          ? {
+              officialSourceIds: {
+                ...currentIds,
+                [language]: [...new Set([...currentLanguageIds, sourceId])].sort(),
+              },
+            }
+          : {
+              userSourceIds: {
+                ...currentIds,
+                [language]: [...new Set([...currentLanguageIds, sourceId])].sort(),
+              },
+            }),
+      };
+    },
+  );
+}
+
+function persistProblemExamples(
+  snapshot: SnapshotLayout,
+  problemId: number,
+  problemSlug: string,
+  fallbackProblemName: string,
+  examples: ProblemExample[],
+): void {
+  const cases: ProblemTestCaseRecord[] = examples.map((example, index) => ({
+    testId: `example-${index + 1}`,
+    kind: 'example',
+    label: `Example ${index + 1}`,
+    input: example.input || undefined,
+    output: example.output || undefined,
+    explanation: example.explanation,
+    index: index + 1,
+  }));
+  mergeJsonRecord<ProblemTestsRecord>(
+    join(snapshot.normalizedRoot, 'tests'),
+    `problem-${problemId}.json`,
+    (current) =>
+      withEffectiveProblemTests({
+        ...(current ?? createEmptyProblemTestsRecord(snapshot.snapshotId, problemId, problemSlug, fallbackProblemName)),
+        examples: cases,
+        visible: current?.visible ?? [],
+        evaluationObserved: current?.evaluationObserved ?? [],
+      }),
+  );
+}
+
+function persistProblemVisibleTests(
+  snapshot: SnapshotLayout,
+  problemId: number,
+  problemSlug: string,
+  fallbackProblemName: string,
+  visibleTests: ProblemVisibleTest[],
+): void {
+  const cases: ProblemTestCaseRecord[] = visibleTests.map((test, index) => ({
+    testId: `visible-${index + 1}`,
+    kind: 'visible',
+    label: test.title || `Visible test ${index + 1}`,
+    input: test.input || undefined,
+    output: test.output || undefined,
+    index: index + 1,
+    score: test.score,
+    exampleLike: test.exampleLike,
+  }));
+  mergeJsonRecord<ProblemTestsRecord>(
+    join(snapshot.normalizedRoot, 'tests'),
+    `problem-${problemId}.json`,
+    (current) =>
+      withEffectiveProblemTests({
+        ...(current ?? createEmptyProblemTestsRecord(snapshot.snapshotId, problemId, problemSlug, fallbackProblemName)),
+        examples: current?.examples ?? [],
+        visible: cases,
+        evaluationObserved: current?.evaluationObserved ?? [],
+      }),
+  );
+}
+
+function persistEvaluationObservedTests(
+  snapshot: SnapshotLayout,
+  evaluation: EvaluationRecord,
+): void {
+  const cases: ProblemTestCaseRecord[] = evaluation.tests.map((test) =>
+    toEvaluationObservedTestCase(evaluation.evaluationId, test),
+  );
+  mergeJsonRecord<ProblemTestsRecord>(
+    join(snapshot.normalizedRoot, 'tests'),
+    `problem-${evaluation.problemId}.json`,
+    (current) => {
+      const existing = current?.evaluationObserved ?? [];
+      const byId = new Map<string, ProblemTestCaseRecord>();
+      for (const entry of [...existing, ...cases]) {
+        byId.set(entry.testId, entry);
+      }
+      return withEffectiveProblemTests({
+        ...(current ?? createEmptyProblemTestsRecord(snapshot.snapshotId, evaluation.problemId, evaluation.problemSlug, evaluation.problemName)),
+        examples: current?.examples ?? [],
+        visible: current?.visible ?? [],
+        evaluationObserved: [...byId.values()].sort(compareProblemTestCaseRecords),
+      });
+    },
+  );
+}
+
+function toEvaluationObservedTestCase(
+  evaluationId: number,
+  test: EvaluationTestResult,
+): ProblemTestCaseRecord {
+  return {
+    testId: `evaluation-${evaluationId}-test-${test.index}`,
+    kind: 'evaluationObserved',
+    label: test.details || `Evaluation test ${test.index}`,
+    evaluationId,
+    index: test.index,
+    verdict: test.verdict,
+    score: test.score,
+    maxScore: test.maxScore,
+    details: test.details,
+    exampleLike: /exemplu/i.test(test.details),
+  };
+}
+
+function compareProblemTestCaseRecords(
+  left: ProblemTestCaseRecord,
+  right: ProblemTestCaseRecord,
+): number {
+  const leftEvaluation = left.evaluationId ?? Number.MIN_SAFE_INTEGER;
+  const rightEvaluation = right.evaluationId ?? Number.MIN_SAFE_INTEGER;
+  if (leftEvaluation !== rightEvaluation) {
+    return rightEvaluation - leftEvaluation;
+  }
+
+  const leftIndex = left.index ?? 0;
+  const rightIndex = right.index ?? 0;
+  if (leftIndex !== rightIndex) {
+    return leftIndex - rightIndex;
+  }
+
+  return left.testId.localeCompare(right.testId);
+}
+
+function withEffectiveProblemTests(
+  record: ProblemTestsRecord,
+): ProblemTestsRecord {
+  return {
+    ...record,
+    effective: deriveEffectiveProblemTests(record),
+  };
+}
+
+function deriveEffectiveProblemTests(
+  record: Pick<ProblemTestsRecord, 'examples' | 'visible' | 'evaluationObserved'>,
+): ProblemTestCaseRecord[] {
+  const effectiveByKey = new Map<string, ProblemTestCaseRecord>();
+
+  for (const testCase of [...record.examples, ...record.visible, ...record.evaluationObserved]) {
+    const effectiveKey = buildEffectiveProblemTestKey(testCase);
+    if (!effectiveKey) {
+      continue;
+    }
+
+    const current = effectiveByKey.get(effectiveKey);
+    const provenanceKinds = [...new Set([
+      ...(current?.provenanceKinds ?? []),
+      ...(testCase.provenanceKinds ?? [testCase.kind]),
+    ])].sort(compareProvenanceKinds);
+    const sourceTestIds = [...new Set([
+      ...(current?.sourceTestIds ?? (current ? [current.testId] : [])),
+      ...(testCase.sourceTestIds ?? [testCase.testId]),
+    ])].sort();
+
+    effectiveByKey.set(effectiveKey, {
+      ...(current ?? testCase),
+      input: normalizeTestIo(testCase.input),
+      output: normalizeTestIo(testCase.output),
+      kind: provenanceKinds.includes('example')
+        ? 'example'
+        : provenanceKinds.includes('visible')
+          ? 'visible'
+          : 'evaluationObserved',
+      exampleLike:
+        Boolean(current?.exampleLike)
+        || Boolean(testCase.exampleLike)
+        || provenanceKinds.includes('example'),
+      provenanceKinds,
+      sourceTestIds,
+    });
+  }
+
+  return [...effectiveByKey.values()].sort(compareProblemTestCaseRecords);
+}
+
+function buildEffectiveProblemTestKey(
+  testCase: ProblemTestCaseRecord,
+): string | undefined {
+  const input = normalizeTestIo(testCase.input);
+  const output = normalizeTestIo(testCase.output);
+  if (!input && !output) {
+    return undefined;
+  }
+  return `${input ?? ''}::${output ?? ''}`;
+}
+
+function normalizeTestIo(value?: string): string | undefined {
+  const trimmed = value?.trim();
+  if (!trimmed) {
+    return undefined;
+  }
+
+  return trimmed
+    .replace(/\r\n/g, '\n')
+    .replace(/[ \t]+\n/g, '\n')
+    .replace(/[ \t]+/g, ' ');
+}
+
+function compareProvenanceKinds(
+  left: ProblemTestCaseRecord['kind'],
+  right: ProblemTestCaseRecord['kind'],
+): number {
+  const order: Array<ProblemTestCaseRecord['kind']> = [
+    'example',
+    'visible',
+    'evaluationObserved',
+  ];
+  return order.indexOf(left) - order.indexOf(right);
+}
+
+function createEmptyProblemTestsRecord(
+  snapshotId: string,
+  problemId: number,
+  problemSlug: string,
+  problemName: string,
+): ProblemTestsRecord {
+  return {
+    snapshotId,
+    problemId,
+    problemSlug,
+    problemName,
+    examples: [],
+    visible: [],
+    evaluationObserved: [],
+    effective: [],
+  };
+}
+
+function resolvePreferredNormalizedHtml(
+  kind: CrawlQueueInput['kind'],
+  sourceUrl: string,
+  httpHtml: string,
+  browserHtml?: string,
+): {
+  html: string;
+  source: 'http' | 'browser';
+} {
+  if (!browserHtml) {
+    return { html: httpHtml, source: 'http' };
+  }
+
+  try {
+    if (kind === 'problem-solution') {
+      const httpSolutions = Object.keys(parseOfficialSolutionFragment(httpHtml).solutions).length;
+      const browserSolutions = Object.keys(parseOfficialSolutionFragment(browserHtml).solutions).length;
+      return browserSolutions > httpSolutions
+        ? { html: browserHtml, source: 'browser' }
+        : { html: httpHtml, source: 'http' };
+    }
+
+    if (kind === 'problem-tests') {
+      const httpTests = parseProblemEndpointFragment(httpHtml).visibleTests.length;
+      const browserTests = parseProblemEndpointFragment(browserHtml).visibleTests.length;
+      return browserTests > httpTests
+        ? { html: browserHtml, source: 'browser' }
+        : { html: httpHtml, source: 'http' };
+    }
+
+    if (kind === 'evaluation-detail' || kind === 'official-evaluation-detail') {
+      const evaluationId = Number(sourceUrl.match(/\/detalii-evaluare\/(\d+)/)?.[1]);
+      if (!Number.isFinite(evaluationId)) {
+        return { html: httpHtml, source: 'http' };
+      }
+
+      const httpParsed = parseEvaluationPage(httpHtml, evaluationId);
+      const browserParsed = parseEvaluationPage(browserHtml, evaluationId);
+      return browserParsed.sourceAvailable && !httpParsed.sourceAvailable
+        ? { html: browserHtml, source: 'browser' }
+        : { html: httpHtml, source: 'http' };
+    }
+
+  } catch {
+    return { html: browserHtml, source: 'browser' };
+  }
+
+  return { html: httpHtml, source: 'http' };
 }
 
 function resolveRawPageBodyPath(
@@ -528,42 +1021,54 @@ function resolveRawPageBodyPath(
 
 function discoverFollowUps(
   config: LoadedLocalConfig,
+  crawlScope: 'public' | 'user' | 'all',
   baseUrl: string,
+  kind: CrawlQueueInput['kind'],
   html: string,
 ): CrawlQueueInput[] {
   const document = load(html);
   const base = new URL(baseUrl);
   const queued = new Map<string, CrawlQueueInput>();
+  const suppressGenericPageNavigation = shouldSuppressGenericPageNavigation(
+    crawlScope,
+    kind,
+    baseUrl,
+  );
+  const suppressGenericAssetDiscovery = shouldSuppressGenericAssetDiscovery(kind);
 
-  document('a[href]').each((_, element) => {
-    const href = document(element).attr('href');
-    const normalized = normalizeNavigableUrl(config, base, href);
-    if (!normalized) {
-      return;
-    }
-
-    queued.set(`page:${normalized}`, {
-      key: `page:${normalized}`,
-      url: normalized,
-      kind: inferPageKind(normalized),
-    });
-  });
-
-  for (const selector of ['link[href]', 'script[src]', 'img[src]', 'source[src]']) {
-    document(selector).each((_, element) => {
-      const attribute = selector.startsWith('link') ? 'href' : 'src';
-      const rawUrl = document(element).attr(attribute);
-      const normalized = normalizeAssetUrl(config, base, rawUrl);
+  if (!suppressGenericPageNavigation) {
+    document('a[href]').each((_, element) => {
+      const href = document(element).attr('href');
+      const normalized = normalizeNavigableUrl(config, base, href);
       if (!normalized) {
         return;
       }
 
-      queued.set(`asset:${normalized}`, {
-        key: `asset:${normalized}`,
+      queued.set(`page:${normalized}`, {
+        key: `page:${normalized}`,
         url: normalized,
-        kind: 'public-asset',
+        kind: inferPageKind(normalized),
       });
     });
+  }
+
+  if (!suppressGenericAssetDiscovery) {
+    for (const selector of ['link[href]', 'script[src]', 'img[src]', 'source[src]']) {
+      document(selector).each((_, element) => {
+        const attribute = selector.startsWith('link') ? 'href' : 'src';
+        const rawUrl = document(element).attr(attribute);
+        const normalized = normalizeAssetUrl(config, base, rawUrl);
+        if (!normalized) {
+          return;
+        }
+
+        queued.set(`asset:${normalized}`, {
+          key: `asset:${normalized}`,
+          url: normalized,
+          kind: 'public-asset',
+        });
+      });
+    }
   }
 
   const problemMatch = base.pathname.match(/^\/probleme\/(\d+)\/([^/?#]+)/);
@@ -587,40 +1092,179 @@ function discoverFollowUps(
       url: `${endpointBase}/ajx-problema-afisare-teste.php?id=${problemId}`,
       kind: 'problem-tests',
     });
-    queued.set(`page:https://www.pbinfo.ro/solutii/problema/${problemId}/${slug}`, {
-      key: `page:https://www.pbinfo.ro/solutii/problema/${problemId}/${slug}`,
-      url: `https://www.pbinfo.ro/solutii/problema/${problemId}/${slug}`,
-      kind: 'public-page',
-    });
     problemUrl.hash = '';
   }
 
   return [...queued.values()];
 }
 
+function shouldSuppressGenericPageNavigation(
+  crawlScope: 'public' | 'user' | 'all',
+  kind: CrawlQueueInput['kind'],
+  baseUrl: string,
+): boolean {
+  return (
+    (crawlScope === 'user' && kind === 'public-page')
+    || (crawlScope === 'user' && kind === 'user-profile')
+    || kind === 'user-solutions'
+    || kind === 'evaluation-detail'
+    || kind === 'official-evaluation-detail'
+    || kind === 'official-source-list'
+    || (kind === 'public-page' && isProblemSourceListUrl(baseUrl))
+  );
+}
+
+function shouldSuppressGenericAssetDiscovery(kind: CrawlQueueInput['kind']): boolean {
+  return (
+    kind === 'user-solutions'
+    || kind === 'evaluation-detail'
+    || kind === 'official-evaluation-detail'
+    || kind === 'official-source-list'
+  );
+}
+
 function discoverNormalizedFollowUps(
   config: LoadedLocalConfig,
+  snapshot: SnapshotLayout,
   baseUrl: string,
   kind: CrawlQueueInput['kind'],
   html: string,
 ): CrawlQueueInput[] {
-  if (kind !== 'user-solutions') {
+  if (kind !== 'user-solutions' && kind !== 'official-source-list') {
     return [];
   }
 
-  const baseMatch = new URL(baseUrl).pathname.match(/^\/solutii\/user\/([^/?#]+)/);
-  if (!matchesConfiguredUserHandle(config, baseMatch?.[1])) {
-    return [];
+  const queued = new Map<string, CrawlQueueInput>();
+
+  if (kind === 'user-solutions') {
+    const parsed = parseUserSolutionsListPage(html, baseUrl);
+    const baseMatch = new URL(baseUrl).pathname.match(/^\/solutii\/user\/([^/?#]+)/);
+    if (!matchesConfiguredUserHandle(config, baseMatch?.[1])) {
+      return [];
+    }
+
+    for (const entry of parsed.entries) {
+      if (!matchesConfiguredUserHandle(config, entry.user)) {
+        continue;
+      }
+
+      const problemPageUrl = new URL(
+        `/probleme/${entry.problemId}/${entry.problemSlug}`,
+        baseUrl,
+      ).toString();
+      queued.set(`page:${problemPageUrl}`, {
+        key: `page:${problemPageUrl}`,
+        url: problemPageUrl,
+        kind: 'public-page',
+      });
+
+      queued.set(`evaluation:${entry.evaluationId}`, {
+        key: `evaluation:${entry.evaluationId}`,
+        url: new URL(`/detalii-evaluare/${entry.evaluationId}`, baseUrl).toString(),
+        kind: 'evaluation-detail',
+      });
+    }
+
+    for (const nextPageUrl of parsed.nextPageUrls) {
+      queued.set(`page:${nextPageUrl}`, {
+        key: `page:${nextPageUrl}`,
+        url: nextPageUrl,
+        kind: 'user-solutions',
+      });
+    }
+
+    return [...queued.values()];
   }
 
-  const parsed = parseUserSolutionsListPage(html);
-  return parsed.entries
-    .filter((entry) => matchesConfiguredUserHandle(config, entry.user))
-    .map((entry) => ({
-      key: `evaluation:${entry.evaluationId}`,
-      url: new URL(`/detalii-evaluare/${entry.evaluationId}`, baseUrl).toString(),
-      kind: 'evaluation-detail',
-    }));
+  if (kind === 'official-source-list') {
+    const parsed = parseProblemSourceListPage(html, baseUrl);
+    const communitySourceListMatch = new URL(baseUrl).pathname.match(/^\/solutii\/problema\/(\d+)\/([^/?#]+)/);
+    if (communitySourceListMatch?.[1] && communitySourceListMatch[2]) {
+      if (!parsed.authorHandle) {
+        return [];
+      }
+
+      const authorScopedUrl = new URL(
+        `/solutii/user/${parsed.authorHandle}/problema/${communitySourceListMatch[1]}/${communitySourceListMatch[2]}`,
+        baseUrl,
+      ).toString();
+      const authorScopedKind = isOfficialSourceAuthorHandle(parsed.authorHandle)
+        ? 'official-source-list'
+        : 'user-solutions';
+      const authorScopedKeyPrefix = authorScopedKind === 'official-source-list'
+        ? 'official-source-list'
+        : 'page';
+      queued.set(`${authorScopedKeyPrefix}:${authorScopedUrl}`, {
+        key: `${authorScopedKeyPrefix}:${authorScopedUrl}`,
+        url: authorScopedUrl,
+        kind: authorScopedKind,
+      });
+      return [...queued.values()];
+    }
+
+    persistOfficialSourceHarvest(
+      snapshot,
+      baseUrl,
+      parsed.authorHandle,
+      parsed.entries
+        .filter((entry) => typeof entry.score !== 'number' || entry.score >= 100)
+        .map((entry) => entry.evaluationId),
+    );
+
+    for (const entry of parsed.entries) {
+      if (typeof entry.score === 'number' && entry.score < 100) {
+        continue;
+      }
+
+      queued.set(`official-evaluation:${entry.evaluationId}`, {
+        key: `official-evaluation:${entry.evaluationId}`,
+        url: new URL(`/detalii-evaluare/${entry.evaluationId}`, baseUrl).toString(),
+        kind: 'official-evaluation-detail',
+      });
+    }
+
+    for (const nextPageUrl of parsed.nextPageUrls) {
+      queued.set(`official-source-list:${nextPageUrl}`, {
+        key: `official-source-list:${nextPageUrl}`,
+        url: nextPageUrl,
+        kind: 'official-source-list',
+      });
+    }
+
+    return [...queued.values()];
+  }
+
+  return [];
+}
+
+function persistOfficialSourceHarvest(
+  snapshot: SnapshotLayout,
+  sourceListUrl: string,
+  authorHandle: string | undefined,
+  qualifyingEvaluationIds: number[],
+): void {
+  const authorScopedMatch = new URL(sourceListUrl).pathname.match(
+    /^\/solutii\/user\/([^/?#]+)\/problema\/(\d+)\/([^/?#]+)/,
+  );
+  if (!authorScopedMatch?.[2] || !authorScopedMatch[3]) {
+    return;
+  }
+
+  const problemId = Number(authorScopedMatch[2]);
+  const slug = authorScopedMatch[3];
+  mergeJsonRecord<ProblemRecord>(
+    join(snapshot.normalizedRoot, 'problems'),
+    `problem-${problemId}.json`,
+    (current) => ({
+      ...(current ?? createPlaceholderProblem(problemId, slug)),
+      officialSourceHarvest: {
+        sourceListHarvested: true,
+        sourceListPageUrl: sourceListUrl,
+        authorHandle: authorHandle ?? authorScopedMatch[1],
+        qualifyingEvaluationIds: [...new Set(qualifyingEvaluationIds)].sort((left, right) => left - right),
+      },
+    }),
+  );
 }
 
 function normalizeNavigableUrl(
@@ -691,11 +1335,18 @@ function isMeaningfulNavigableUrl(
   url: URL,
 ): boolean {
   const pathname = normalizePathname(url.pathname);
+  if (isProblemSourceListUrl(url.toString())) {
+    return false;
+  }
   if (
     pathname.startsWith('/articole')
     || pathname.startsWith('/ajutor')
+    || pathname.startsWith('/clasa-mea')
     || pathname.startsWith('/editare-cont')
+    || pathname === '/logout.php'
     || pathname.startsWith('/resurse')
+    || pathname.startsWith('/solutii/clasa')
+    || pathname.startsWith('/teme/rezolvare')
     || pathname === '/php/gravatar.php'
   ) {
     return false;
@@ -750,7 +1401,17 @@ function matchesConfiguredUserHandle(
     return false;
   }
 
-  return configured === candidate.trim().toLowerCase();
+  const normalized = candidate.trim().toLowerCase();
+  if (configured === normalized) {
+    return true;
+  }
+
+  const handleMatch = normalized.match(/\(([^)]+)\)\s*$/);
+  if (handleMatch?.[1]) {
+    return configured === handleMatch[1].trim().toLowerCase();
+  }
+
+  return false;
 }
 
 function normalizePathname(pathname: string): string {
@@ -828,6 +1489,9 @@ function inferPageKind(url: string): CrawlQueueInput['kind'] {
   if (/^\/solutii\/user\/[^/]+/.test(parsed.pathname)) {
     return 'user-solutions';
   }
+  if (/^\/solutii\/problema\/\d+\/[^/]+/.test(parsed.pathname)) {
+    return 'official-source-list';
+  }
   if (/^\/detalii-evaluare\/\d+/.test(parsed.pathname)) {
     return 'evaluation-detail';
   }
@@ -838,7 +1502,7 @@ function inferTemplate(
   url: string,
   kind: CrawlQueueInput['kind'],
 ): MirrorRouteRecord['template'] {
-  if (kind === 'evaluation-detail') {
+  if (kind === 'evaluation-detail' || kind === 'official-evaluation-detail') {
     return 'evaluation';
   }
   if (kind === 'user-profile' || kind === 'user-solutions') {
@@ -890,6 +1554,27 @@ function createPlaceholderProblem(problemId: number, slug: string): ProblemRecor
   };
 }
 
+function mergeLanguageSourceIds(
+  current: Record<string, string[]> | undefined,
+  incoming: Record<string, string[]>,
+): Record<string, string[]> {
+  const merged: Record<string, string[]> = {};
+  for (const language of new Set([
+    ...Object.keys(current ?? {}),
+    ...Object.keys(incoming),
+  ])) {
+    merged[language] = [...new Set([
+      ...((current ?? {})[language] ?? []),
+      ...(incoming[language] ?? []),
+    ])].sort();
+  }
+  return merged;
+}
+
+function isProblemSourceListUrl(url: string): boolean {
+  return /^\/solutii\/problema\/\d+\/[^/?#]+/i.test(new URL(url).pathname);
+}
+
 function mergeLanguageSolutions(
   current: Record<string, string>,
   incoming: Record<string, string>,
@@ -927,26 +1612,35 @@ function normalizeSourceLanguage(language: string): string {
   return sanitizeSegment(normalized).toLowerCase() || 'unknown';
 }
 
-function detectSuspicionFlags(sourceCode?: string): string[] {
-  if (!sourceCode) {
-    return [];
+function dedupeUserSolutionEntries<T extends { evaluationId?: number }>(
+  entries: T[],
+): T[] {
+  const byEvaluationId = new Map<number, T>();
+  for (const entry of entries) {
+    if (typeof entry.evaluationId !== 'number') {
+      continue;
+    }
+    if (!byEvaluationId.has(entry.evaluationId)) {
+      byEvaluationId.set(entry.evaluationId, entry);
+    }
   }
 
-  const flags = new Set<string>();
-  const normalized = sourceCode.toLowerCase();
-  if (normalized.length < 24) {
-    flags.add('tiny-source');
-  }
-
-  const printsConstant =
-    /(cout\s*<<\s*["'\d]|printf\s*\(\s*["'\d]|print\s*\(\s*["'\d])/.test(normalized);
-  const readsInput = /(cin\s*>>|scanf\s*\(|input\s*\(|std::getline|getline\s*\()/i.test(sourceCode);
-  if (printsConstant && !readsInput) {
-    flags.add('constant-output');
-  }
-
-  return [...flags];
+  return [...byEvaluationId.values()].sort((left, right) =>
+    (right.evaluationId ?? 0) - (left.evaluationId ?? 0),
+  );
 }
+
+function maxDefinedNumber(left: number | undefined, right: number | undefined): number | undefined {
+  if (left === undefined) {
+    return right;
+  }
+  if (right === undefined) {
+    return left;
+  }
+  return Math.max(left, right);
+}
+
+export { detectSuspicionFlags } from './source-suspicion.js';
 
 function readManifestValue(
   manifestPath: string,
