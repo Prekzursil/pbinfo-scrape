@@ -1,12 +1,14 @@
 export type CrawlKind =
   | 'public-page'
   | 'public-asset'
+  | 'official-source-list'
   | 'problem-statement'
   | 'problem-solution'
   | 'problem-tests'
   | 'user-solutions'
   | 'user-profile'
   | 'evaluation-detail'
+  | 'official-evaluation-detail'
   | 'mirror-route';
 
 export interface PageRecord {
@@ -50,12 +52,21 @@ export interface ProblemVisibleTest {
   title: string;
   input: string;
   output: string;
+  score?: number;
+  exampleLike?: boolean;
 }
 
 export interface ProblemEditorialRecord {
   availability: 'visible' | 'restricted' | 'hidden' | 'unknown';
   message?: string;
   artifactPath?: string;
+}
+
+export interface OfficialSourceHarvestRecord {
+  sourceListHarvested: boolean;
+  sourceListPageUrl?: string;
+  authorHandle?: string;
+  qualifyingEvaluationIds?: number[];
 }
 
 export interface ProblemRecord {
@@ -77,11 +88,12 @@ export interface ProblemRecord {
   editorialMessage?: string;
   editorial?: ProblemEditorialRecord;
   officialSolutions: Record<string, string>;
-  officialSourceIds?: Record<string, string>;
+  officialSourceIds?: Record<string, string[]>;
   userSourceIds?: Record<string, string[]>;
   visibleTests: ProblemVisibleTest[];
   linkedAssets: ProblemAssetRecord[];
   sourceListUrl?: string;
+  officialSourceHarvest?: OfficialSourceHarvestRecord;
   metadata: Record<string, string>;
 }
 
@@ -201,6 +213,9 @@ export interface ProblemTestCaseRecord {
   score?: number;
   maxScore?: number;
   details?: string;
+  exampleLike?: boolean;
+  provenanceKinds?: Array<'example' | 'visible' | 'evaluationObserved'>;
+  sourceTestIds?: string[];
 }
 
 export interface ProblemTestsRecord {
@@ -211,7 +226,27 @@ export interface ProblemTestsRecord {
   examples: ProblemTestCaseRecord[];
   visible: ProblemTestCaseRecord[];
   evaluationObserved: ProblemTestCaseRecord[];
+  effective: ProblemTestCaseRecord[];
 }
+
+export type ProblemTestsCoverageStatus =
+  | 'captured'
+  | 'not-available-upstream'
+  | 'not-captured-yet';
+
+export type ProblemOfficialSourceStatus =
+  | 'archived'
+  | 'restricted-upstream'
+  | 'not-available-upstream'
+  | 'not-captured-yet';
+
+export type ProblemArchiveCompletenessStatus =
+  | 'complete'
+  | 'unsolved'
+  | 'not-archived-yet'
+  | 'missing-official-source'
+  | 'missing-user-source'
+  | 'incomplete';
 
 export interface ProblemCoverageRecord {
   snapshotId: string;
@@ -232,16 +267,32 @@ export interface ProblemCoverageRecord {
   exampleTestsAvailableCount: number;
   visibleTestsCapturedCount: number;
   evaluationObservedTestsCount: number;
+  effectiveTestsAvailableCount: number;
+  testsCoverageStatus: ProblemTestsCoverageStatus;
   officialSolutionPresent: boolean;
   editorialAvailability: 'visible' | 'restricted' | 'hidden' | 'unknown';
   sourceListUrl?: string;
   officialSourceArchived: boolean;
   officialSourceCount: number;
   officialSourceIds: string[];
+  officialSourceLanguages: string[];
+  officialSourceStatus: ProblemOfficialSourceStatus;
   userSourceArchived: boolean;
   userSourceCount: number;
   userSourceIds: string[];
+  userSourceLanguages: string[];
+  requiredTrustworthyUserSourceLanguages: string[];
+  trustworthyUserSourceLanguages: string[];
+  bestTrustworthyUserPerLanguage: Record<string, number>;
+  missingTrustworthyUserSourceLanguages: string[];
+  archiveCompletenessStatus: ProblemArchiveCompletenessStatus;
   hasAnyArchivedSource: boolean;
+  testsAvailable: boolean;
+  unsolvedByConfiguredHandle: boolean;
+  officialSourceBlocked: boolean;
+  officialSourceBlockedReason?: string;
+  notArchivedYet: boolean;
+  newSinceBaseline: boolean;
   evaluationIds: number[];
   bestUserOverallEvaluationId?: number;
   notes: string[];
@@ -256,11 +307,13 @@ export interface ProblemCoverageTotals {
   problemsWithExamples: number;
   problemsWithVisibleTestsCaptured: number;
   problemsWithEvaluationObservedTests: number;
+  problemsWithEffectiveTests: number;
   problemsWithArchivedSources: number;
   problemsWithOfficialSourceArchived: number;
   problemsWithUserSourceArchived: number;
   editorialVisibleCount: number;
   rankingPresentCount: number;
+  newSinceBaselineCount: number;
 }
 
 export interface ProblemCoverageIndex {

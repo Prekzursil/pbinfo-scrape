@@ -112,6 +112,61 @@ describe('pbinfo auth status probe', () => {
     expect(result.resolvedHandle).toBeUndefined();
   });
 
+  test('does not treat unrelated profile links on a guest page as an authenticated session', async () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-auth-status-guest-profile-link-'));
+    tempDirs.push(workspaceRoot);
+    mkdirSync(join(workspaceRoot, '.local'), { recursive: true });
+    writeFileSync(
+      join(workspaceRoot, '.local', 'session-cookies.json'),
+      JSON.stringify([{ key: 'SSID', value: 'guest', domain: '127.0.0.1', path: '/' }], null, 2),
+      'utf8',
+    );
+    writeFileSync(
+      join(workspaceRoot, '.local', 'pbinfo.local.json'),
+      JSON.stringify(
+        {
+          auth: {
+            strategy: 'cookie-import',
+            sessionCookiesPath: '.local/session-cookies.json',
+          },
+          crawl: {
+            userHandle: 'Prekzursil',
+          },
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+
+    const server = createServer((_request, response) => {
+      response.setHeader('Content-Type', 'text/html');
+      response.end(`
+        <script>user_autentificat = {"id":0};</script>
+        <nav id="bara_navigare">
+          <a href="/profil/SomeContestUser">Some Contest User</a>
+        </nav>
+      `);
+    });
+    servers.push(server);
+    await new Promise<void>((resolve) => {
+      server.listen(0, '127.0.0.1', () => resolve());
+    });
+
+    const address = server.address();
+    if (!address || typeof address === 'string') {
+      throw new TypeError('server address is not available');
+    }
+
+    const result = await probePbinfoAuthStatus(loadLocalConfig(workspaceRoot), {
+      probeUrl: `http://127.0.0.1:${address.port}/`,
+    });
+
+    expect(result.status).toBe('guest');
+    expect(result.loggedIn).toBe(false);
+    expect(result.resolvedHandle).toBeUndefined();
+  });
+
   test('returns ok for logged-in matching handle', async () => {
     const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-auth-status-ok-'));
     tempDirs.push(workspaceRoot);

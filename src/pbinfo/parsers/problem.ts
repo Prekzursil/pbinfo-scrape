@@ -47,6 +47,7 @@ export function parseProblemPage(html: string, pageUrl: string): ProblemRecord {
   const statement = parseProblemStatementFragment(html);
   const summaryMap = extractSummaryMap($);
   const linkedAssets = extractLinkedAssets($, page);
+  const authorHandle = extractAuthorHandle($, summaryMap);
   const timeLimitSeconds =
     parseSeconds(summaryMap.get('limită timp') ?? '')
     ?? parseSeconds(summaryMap.get('limita timp') ?? '');
@@ -74,7 +75,10 @@ export function parseProblemPage(html: string, pageUrl: string): ProblemRecord {
     sourceListUrl: $('a[href^="/solutii/problema/"]').first().attr('href')
       ? new URL($('a[href^="/solutii/problema/"]').first().attr('href')!, page).toString()
       : undefined,
-    metadata: Object.fromEntries(summaryMap.entries()),
+    metadata: {
+      ...Object.fromEntries(summaryMap.entries()),
+      ...(authorHandle ? { authorHandle } : {}),
+    },
   };
 }
 
@@ -251,12 +255,12 @@ function extractExamples(sectionHtml: string): ProblemExample[] {
     }
 
     if (tag === 'p' || tag === 'h3') {
-      const normalized = text.toLowerCase();
+      const normalized = normalizeCueLabel(text);
       if (normalized.includes('intrare')) {
         mode = 'input';
         continue;
       }
-      if (normalized.includes('ieșire') || normalized.includes('iesire')) {
+      if (normalized.includes('iesire')) {
         mode = 'output';
         continue;
       }
@@ -284,6 +288,66 @@ function extractExamples(sectionHtml: string): ProblemExample[] {
 
   commit();
   return examples;
+}
+
+function extractAuthorHandle(
+  $: ReturnType<typeof loadHtml>,
+  summaryMap: Map<string, string>,
+): string | undefined {
+  const preferredLink = $('*[title="Postată de"] a[href^="/profil/"], *[title="Postata de"] a[href^="/profil/"]').first();
+  if (preferredLink.length > 0) {
+    const handle = preferredLink.attr('href')?.match(/^\/profil\/([^/?#]+)$/)?.[1];
+    return normalizeOptional(handle);
+  }
+
+  const summaryTextHandle = extractHandleFromSummaryText(
+    summaryMap.get('postată de') ?? summaryMap.get('postata de'),
+  );
+  if (summaryTextHandle) {
+    return summaryTextHandle;
+  }
+
+  let summaryHandle: string | undefined;
+  $('tr').each((_, row) => {
+    const headers = $(row).children('th');
+    const values = $(row).children('td');
+    if (headers.length === 0 || values.length === 0) {
+      return;
+    }
+
+    headers.each((index, headerCell) => {
+      const header = normalizeWhitespace($(headerCell).text()).toLowerCase();
+      if (!header.includes('postată de') && !header.includes('postata de')) {
+        return;
+      }
+
+      const valueCell = values.eq(index);
+      const handle = valueCell.find('a[href^="/profil/"]').first().attr('href')?.match(/^\/profil\/([^/?#]+)$/)?.[1];
+      if (handle) {
+        summaryHandle = handle;
+      }
+    });
+  });
+  if (summaryHandle) {
+    return normalizeOptional(summaryHandle);
+  }
+
+  const handle = $('article, main, .container, body').first().find('a[href^="/profil/"]').first().attr('href')?.match(/^\/profil\/([^/?#]+)$/)?.[1];
+  return normalizeOptional(handle);
+}
+
+function extractHandleFromSummaryText(value: string | undefined): string | undefined {
+  const normalized = normalizeWhitespace(value ?? '');
+  if (!normalized) {
+    return undefined;
+  }
+
+  const parenMatch = normalized.match(/\(([^()]+)\)\s*$/);
+  if (parenMatch?.[1]) {
+    return normalizeOptional(parenMatch[1]);
+  }
+
+  return undefined;
 }
 
 function extractExecutionHints(constraints: string[]): ProblemExecutionHints {
@@ -326,8 +390,12 @@ function extractExecutionHints(constraints: string[]): ProblemExecutionHints {
 
 function extractVisibleTests(html: string): ProblemVisibleTest[] {
   const $ = loadHtml(html);
-  const tests: ProblemVisibleTest[] = [];
+  const tableTests = extractVisibleTestsFromTable($);
+  if (tableTests.length > 0) {
+    return tableTests;
+  }
 
+  const tests: ProblemVisibleTest[] = [];
   $('h3').each((_, heading) => {
     const title = normalizeWhitespace($(heading).text());
     if (!title.toLowerCase().startsWith('test')) {
@@ -343,10 +411,10 @@ function extractVisibleTests(html: string): ProblemVisibleTest[] {
       const tag = sibling.prop('tagName')?.toLowerCase();
       const text = normalizeWhitespace(sibling.text());
       if (tag === 'p') {
-        const lower = text.toLowerCase();
+        const lower = normalizeCueLabel(text);
         if (lower.includes('intrare')) {
           mode = 'input';
-        } else if (lower.includes('ieșire') || lower.includes('iesire')) {
+        } else if (lower.includes('iesire')) {
           mode = 'output';
         }
       } else if (tag === 'pre') {
@@ -367,6 +435,45 @@ function extractVisibleTests(html: string): ProblemVisibleTest[] {
   });
 
   return tests;
+}
+
+function extractVisibleTestsFromTable(
+  $: ReturnType<typeof loadHtml>,
+): ProblemVisibleTest[] {
+  const tests: ProblemVisibleTest[] = [];
+
+  $('table tbody tr').each((_, row) => {
+    const cells = $(row).find('td');
+    if (cells.length < 5) {
+      return;
+    }
+
+    const index = normalizeWhitespace($(cells[0]!).text());
+    const input = $(cells[2]!).find('textarea').first().text().trim();
+    const output = $(cells[3]!).find('textarea').first().text().trim();
+    if (!index || (!input && !output)) {
+      return;
+    }
+
+    tests.push({
+      title: `Testul ${index}`,
+      input,
+      output,
+      score: parseNumber(normalizeWhitespace($(cells[1]!).text())) ?? undefined,
+      exampleLike: normalizeCueLabel($(cells[4]!).text()).includes('da'),
+    });
+  });
+
+  return tests;
+}
+
+function normalizeCueLabel(value: string): string {
+  return value
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[șş]/g, 's')
+    .replace(/[țţ]/g, 't');
 }
 
 function extractSummaryMap($: ReturnType<typeof loadHtml>): Map<string, string> {

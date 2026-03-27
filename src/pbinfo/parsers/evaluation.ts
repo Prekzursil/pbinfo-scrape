@@ -20,13 +20,13 @@ export interface ParsedEvaluationPage {
 
 export function parseEvaluationPage(html: string, evaluationId: number): ParsedEvaluationPage {
   const $ = loadHtml(html);
-  const problemLink = $('a[href^="/probleme/"]').first();
+  const summaryMap = extractSummaryMap($);
+  const problemLink = resolveProblemLink($);
   const problemMatch = problemLink.attr('href')?.match(/^\/probleme\/(\d+)\/([^/]+)$/);
   if (!problemMatch) {
     throw new Error(`Could not find problem link for evaluation ${evaluationId}.`);
   }
 
-  const summaryMap = extractSummaryMap($);
   const user = resolveSubmissionOwner($, summaryMap);
   const tests = extractTests($);
 
@@ -43,7 +43,7 @@ export function parseEvaluationPage(html: string, evaluationId: number): ParsedE
     evaluationId,
     problemId: Number(problemMatch[1]),
     problemSlug,
-    problemName: normalizeWhitespace(problemLink.text()),
+    problemName: summaryMap.get('problema') ?? normalizeWhitespace(problemLink.text()),
     user,
     language: summaryMap.get('limbaj') ?? inferLanguageFromFilename(fileName) ?? 'unknown',
     score: parseNumber(summaryMap.get('punctaj') ?? summaryMap.get('scor/rezultat') ?? '') ?? 0,
@@ -55,6 +55,21 @@ export function parseEvaluationPage(html: string, evaluationId: number): ParsedE
     tests,
     compileLog: compileLog || undefined,
   };
+}
+
+function resolveProblemLink($: ReturnType<typeof loadHtml>) {
+  const isProblemDetailHref = (href?: string) => /^\/probleme\/(\d+)\/([^/]+)$/.test(href ?? '');
+
+  const preferredLink = $('#detalii a[href], #rezumat a[href]')
+    .filter((_, element) => isProblemDetailHref($(element).attr('href')))
+    .first();
+  if (preferredLink.length > 0) {
+    return preferredLink;
+  }
+
+  return $('a[href]')
+    .filter((_, element) => isProblemDetailHref($(element).attr('href')))
+    .first();
 }
 
 function resolveSubmissionOwner(
@@ -178,7 +193,13 @@ function extractSourceCode($: ReturnType<typeof loadHtml>): string | undefined {
     return value || undefined;
   }
 
-  const pre = $('pre[data-source], pre.source-code, pre.code-source').first();
+  const sourceSectionPre = $('#sursa pre').first();
+  if (sourceSectionPre.length > 0) {
+    const value = sourceSectionPre.text().trim();
+    return value || undefined;
+  }
+
+  const pre = $('pre[data-source], pre.source-code, pre.code-source, pre[class^="code_"], pre[class*=" code_"]').first();
   if (pre.length > 0) {
     const value = pre.text().trim();
     return value || undefined;

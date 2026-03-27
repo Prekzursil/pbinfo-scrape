@@ -222,4 +222,115 @@ describe('evaluation parser', () => {
     expect(parsed.user).toBe('Andrei Visalon (Prekzursil)');
     expect(parsed.problemId).toBe(205);
   });
+
+  test('extracts authenticated source code from the dedicated sursa section', () => {
+    const pageWithSourceSection = `
+      <div id="detalii">
+        <table class="table">
+          <tr>
+            <th>Problema</th><td><a href="/probleme/2404/test">Test</a></td>
+            <th>Utilizator</th><td><a href="/profil/Prekzursil">Andrei Visalon (Prekzursil)</a></td>
+          </tr>
+          <tr>
+            <th>Fișier</th><td>test.cpp</td>
+            <th>Scor/rezultat</th><td>5 puncte</td>
+          </tr>
+          <tr>
+            <th>Limita timp</th><td>0.04 secunde</td>
+            <th>Memorie maximă</th><td>64 KB</td>
+          </tr>
+        </table>
+      </div>
+      <div id="evaluare">
+        <h4 class="mb-3">Mesaj compilare</h4>
+        <pre>warning: unused variable</pre>
+        <table class="table table-condensed">
+          <tr>
+            <th>Test</th>
+            <th>Timp</th>
+            <th>Mesaj evaluare</th>
+            <th>Scor posibil</th>
+            <th>Scor obținut</th>
+            <th></th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>0 secunde</td>
+            <td>OK.</td>
+            <td>5</td>
+            <td>5</td>
+            <td><strong>Exemplu</strong></td>
+          </tr>
+        </table>
+      </div>
+      <div id="sursa">
+        <a href="/php/descarca-sursa.php?id=10017347">Descarcă test.cpp</a>
+        <pre class="code_cpp">#include&lt;iostream&gt;
+using namespace std;
+
+int main() {
+  cout &lt;&lt; 42;
+  return 0;
+}</pre>
+      </div>
+    `;
+
+    const parsed = parseEvaluationPage(pageWithSourceSection, 10017347);
+
+    expect(parsed.sourceAvailable).toBe(true);
+    expect(parsed.sourceCode).toContain('#include<iostream>');
+    expect(parsed.sourceCode).toContain('cout << 42;');
+    expect(parsed.compileLog).toBe('warning: unused variable');
+  });
+
+  test('ignores navbar problem links like /probleme/marcate when resolving the evaluated problem', () => {
+    const authenticatedLayoutWithNavDecoy = `
+      <nav id="bara_navigare">
+        <a href="/probleme/marcate">Problemele mele</a>
+      </nav>
+      <div id="detalii">
+        <table class="table">
+          <tr>
+            <th>Problema</th><td><a href="/probleme/2404/test">Test</a></td>
+            <th>Utilizator</th><td><a href="/profil/Prekzursil">Andrei Visalon (Prekzursil)</a></td>
+          </tr>
+          <tr>
+            <th>Fișier</th><td>test.cpp</td>
+            <th>Scor/rezultat</th><td>100 puncte</td>
+          </tr>
+        </table>
+      </div>
+      <div id="evaluare">
+        <table class="table table-condensed">
+          <tr>
+            <th>Test</th>
+            <th>Timp</th>
+            <th>Mesaj evaluare</th>
+            <th>Scor posibil</th>
+            <th>Scor obținut</th>
+            <th></th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>0 secunde</td>
+            <td>OK.</td>
+            <td>5</td>
+            <td>5</td>
+            <td></td>
+          </tr>
+        </table>
+      </div>
+      <div id="sursa">
+        <pre class="code_cpp">int main(){return 0;}</pre>
+      </div>
+    `;
+
+    const parsed = parseEvaluationPage(authenticatedLayoutWithNavDecoy, 10113533);
+
+    expect(parsed.problemId).toBe(2404);
+    expect(parsed.problemSlug).toBe('test');
+    expect(parsed.problemName).toBe('Test');
+    expect(parsed.sourceAvailable).toBe(true);
+    expect(parsed.sourceCode).toContain('int main(){return 0;}');
+  });
 });

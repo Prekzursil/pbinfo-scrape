@@ -56,6 +56,60 @@ const visibleTestsFragment = `
 </div>
 `;
 
+const legacyDiacriticsStatementFragment = `
+<article id="enunt">
+  <h1>Exemplu:</h1>
+  <p><code>Intrare</code></p>
+  <pre>2705</pre>
+  <p><code>Ieşire</code></p>
+  <pre>14</pre>
+  <h3>Explicaţie</h3>
+  <p>Suma cifrelor este 14.</p>
+</article>
+`;
+
+const legacyDiacriticsVisibleTestsFragment = `
+<h2>Teste de evaluare</h2>
+<div class="pb-tests">
+  <h3>Testul 2</h3>
+  <p><strong>Intrare</strong></p>
+  <pre>8 9</pre>
+  <p><strong>Ieşire</strong></p>
+  <pre>17</pre>
+</div>
+`;
+
+const tabularVisibleTestsFragment = `
+<h2>Teste de evaluare</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Nr. test</th>
+      <th>Scor</th>
+      <th>Intrare</th>
+      <th>Ieșire</th>
+      <th>Exemplu</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><tt>1</tt></td>
+      <td><tt>20</tt></td>
+      <td><textarea>30</textarea></td>
+      <td><textarea>2 3 5 7</textarea></td>
+      <td>da</td>
+    </tr>
+    <tr>
+      <td><tt>2</tt></td>
+      <td><tt>20</tt></td>
+      <td><textarea>100</textarea></td>
+      <td><textarea>2 3 5 7 11</textarea></td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
+`;
+
 const categoryPage = `
 <div class="category-page">
   <a href="/probleme/categorii/2/tablouri-unidimensionale-vectori">Tablouri unidimensionale, vectori</a>
@@ -196,6 +250,48 @@ describe('problem parser', () => {
     ]);
   });
 
+  test('accepts legacy Romanian diacritics when parsing examples and visible tests', () => {
+    const statement = parseProblemStatementFragment(legacyDiacriticsStatementFragment);
+    const tests = parseProblemEndpointFragment(legacyDiacriticsVisibleTestsFragment);
+
+    expect(statement.examples).toEqual([
+      {
+        input: '2705',
+        output: '14',
+        explanation: 'Suma cifrelor este 14.',
+      },
+    ]);
+    expect(tests.visibleTests).toEqual([
+      {
+        title: 'Testul 2',
+        input: '8 9',
+        output: '17',
+      },
+    ]);
+  });
+
+  test('extracts visible tests from the tabular evaluation-tests surface', () => {
+    const parsed = parseProblemEndpointFragment(tabularVisibleTestsFragment);
+
+    expect(parsed.access).toBe('visible');
+    expect(parsed.visibleTests).toEqual([
+      {
+        title: 'Testul 1',
+        input: '30',
+        output: '2 3 5 7',
+        score: 20,
+        exampleLike: true,
+      },
+      {
+        title: 'Testul 2',
+        input: '100',
+        output: '2 3 5 7 11',
+        score: 20,
+        exampleLike: false,
+      },
+    ]);
+  });
+
   test('extracts a complete public problem record from the full problem page shell', () => {
     const parsed = parseProblemPage(fullProblemPage, 'https://www.pbinfo.ro/probleme/3171/waterreserve');
 
@@ -217,6 +313,9 @@ describe('problem parser', () => {
       officialSolutions: {},
       visibleTests: [],
       editorialAvailability: 'unknown',
+      metadata: {
+        authorHandle: 'Prekzursil',
+      },
     });
     expect(parsed.sections.map((section) => section.title)).toEqual([
       'Cerința',
@@ -243,6 +342,39 @@ describe('problem parser', () => {
         mimeType: 'application/javascript',
       },
     ]);
+  });
+
+  test('prefers the summary-row author handle text over unrelated profile links in the shell', () => {
+    const html = `
+      <html>
+        <body>
+          <main>
+            <a href="/profil/Prekzursil">Andrei Visalon (Prekzursil)</a>
+            <h1><a href="/probleme/10/suma-cifrelor">Suma Cifrelor</a></h1>
+            <table>
+              <tr>
+                <th>Postată de</th>
+                <th>Autor</th>
+              </tr>
+              <tr>
+                <td>Candale Silviu (silviu)</td>
+                <td>Mirela Mlisan</td>
+              </tr>
+            </table>
+            <article>
+              <h2>Cerință</h2>
+              <p>Calculați suma cifrelor numărului dat.</p>
+            </article>
+          </main>
+        </body>
+      </html>
+    `;
+
+    const parsed = parseProblemPage(html, 'https://www.pbinfo.ro/probleme/10/suma-cifrelor');
+
+    expect(parsed.metadata).toMatchObject({
+      authorHandle: 'silviu',
+    });
   });
 });
 
@@ -304,6 +436,7 @@ describe('user solutions parser', () => {
         problemSlug: 'par-impar3',
         problemName: 'par_impar3',
         evaluationId: 63568050,
+        score: undefined,
       },
       {
         user: 'DavidIanchis',
@@ -311,6 +444,7 @@ describe('user solutions parser', () => {
         problemSlug: 'par-impar3',
         problemName: 'par_impar3',
         evaluationId: 63534271,
+        score: undefined,
       },
     ]);
   });
@@ -329,6 +463,7 @@ describe('user solutions parser', () => {
         problemSlug: 'cibernetica',
         problemName: 'cibernetica',
         evaluationId: 63688922,
+        score: undefined,
       },
     ]);
   });
@@ -362,6 +497,7 @@ describe('user solutions parser', () => {
         problemSlug: 'waterreserve',
         problemName: 'WaterReserve',
         evaluationId: 63676585,
+        score: undefined,
       },
       {
         user: 'Prekzursil',
@@ -369,6 +505,51 @@ describe('user solutions parser', () => {
         problemSlug: 'sum',
         problemName: 'sum',
         evaluationId: 63332367,
+        score: undefined,
+      },
+    ]);
+  });
+
+  test('parses score values from official/source listing rows so targeted harvest can keep 100-point submissions only', () => {
+    const parsed = parseUserSolutionsListPage(`
+      <table>
+        <tr>
+          <th>Utilizator</th>
+          <th>Problema</th>
+          <th>Stare</th>
+          <th>Punctaj</th>
+        </tr>
+        <tr>
+          <td><a href="/profil/pbinfo">pbinfo</a></td>
+          <td><a href="/probleme/3171/waterreserve">WaterReserve</a></td>
+          <td><a href="/detalii-evaluare/70000001">Evaluare finalizată</a></td>
+          <td>100</td>
+        </tr>
+        <tr>
+          <td><a href="/profil/pbinfo">pbinfo</a></td>
+          <td><a href="/probleme/3171/waterreserve">WaterReserve</a></td>
+          <td><a href="/detalii-evaluare/70000002">Evaluare finalizată</a></td>
+          <td>70 puncte</td>
+        </tr>
+      </table>
+    `);
+
+    expect(parsed.entries).toEqual([
+      {
+        user: 'pbinfo',
+        problemId: 3171,
+        problemSlug: 'waterreserve',
+        problemName: 'WaterReserve',
+        evaluationId: 70000001,
+        score: 100,
+      },
+      {
+        user: 'pbinfo',
+        problemId: 3171,
+        problemSlug: 'waterreserve',
+        problemName: 'WaterReserve',
+        evaluationId: 70000002,
+        score: 70,
       },
     ]);
   });

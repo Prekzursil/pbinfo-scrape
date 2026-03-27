@@ -1,5 +1,6 @@
 import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
+import { setTimeout as delay } from 'node:timers/promises';
 
 import { resolveReadableSnapshotLayout } from '../archive/storage.js';
 import { loadLocalConfig } from '../config/local-config.js';
@@ -32,8 +33,7 @@ export async function runNormalizeSnapshotWorkflow(
   const snapshot = resolveReadableSnapshotLayout(config, snapshotId);
 
   for (const directory of REBUILT_DIRECTORIES) {
-    rmSync(join(snapshot.normalizedRoot, directory), { recursive: true, force: true });
-    mkdirSync(join(snapshot.normalizedRoot, directory), { recursive: true });
+    await resetNormalizedDirectory(join(snapshot.normalizedRoot, directory));
   }
 
   const pageRecords = loadPageRecords(join(snapshot.normalizedRoot, 'pages'));
@@ -50,13 +50,14 @@ export async function runNormalizeSnapshotWorkflow(
     }
 
     const html = readFileSync(htmlPath, 'utf8');
+    const normalizedKind = normalizeSnapshotPageKind(pageRecord);
     persistNormalizedSnapshotHtml({
       config,
       snapshot,
       item: {
-        key: `${pageRecord.kind}:${pageRecord.url}`,
+        key: `${normalizedKind}:${pageRecord.url}`,
         url: pageRecord.url,
-        kind: pageRecord.kind as CrawlQueueInput['kind'],
+        kind: normalizedKind,
       },
       html,
       httpStatus: pageRecord.httpStatus,
@@ -73,6 +74,65 @@ export async function runNormalizeSnapshotWorkflow(
   };
 }
 
+async function resetNormalizedDirectory(directoryPath: string): Promise<void> {
+  mkdirSync(directoryPath, { recursive: true });
+  let lastError: unknown;
+
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    try {
+      await clearDirectoryContents(directoryPath);
+      return;
+    } catch (error) {
+      lastError = error;
+      if (!isRetryableDirectoryResetError(error) || attempt === 2) {
+        throw error;
+      }
+      await delay(250 * (attempt + 1));
+    }
+  }
+
+  throw lastError;
+}
+
+async function clearDirectoryContents(directoryPath: string): Promise<void> {
+  for (const entry of readdirSync(directoryPath, { withFileTypes: true })) {
+    await removePathRobustly(join(directoryPath, entry.name));
+  }
+}
+
+async function removePathRobustly(targetPath: string): Promise<void> {
+  let lastError: unknown;
+
+  for (let attempt = 0; attempt < 60; attempt += 1) {
+    try {
+      rmSync(targetPath, {
+        recursive: true,
+        force: true,
+        maxRetries: 10,
+        retryDelay: 100,
+      });
+      return;
+    } catch (error) {
+      lastError = error;
+      if (!isRetryableDirectoryResetError(error) || attempt === 59) {
+        throw error;
+      }
+
+      await delay(Math.min(1000, 50 * (attempt + 1)));
+    }
+  }
+
+  throw lastError;
+}
+
+function isRetryableDirectoryResetError(error: unknown): boolean {
+  if (!(error instanceof Error)) {
+    return false;
+  }
+
+  return ['ENOTEMPTY', 'EBUSY', 'EPERM'].includes((error as NodeJS.ErrnoException).code ?? '');
+}
+
 function loadPageRecords(root: string): PageRecord[] {
   try {
     return readdirSync(root)
@@ -81,4 +141,8 @@ function loadPageRecords(root: string): PageRecord[] {
   } catch {
     return [];
   }
+}
+
+function normalizeSnapshotPageKind(pageRecord: PageRecord): CrawlQueueInput['kind'] {
+  return pageRecord.kind as CrawlQueueInput['kind'];
 }

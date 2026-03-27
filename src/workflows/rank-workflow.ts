@@ -3,6 +3,7 @@ import { join } from 'node:path';
 
 import { resolveReadableSnapshotLayout } from '../archive/storage.js';
 import { loadLocalConfig } from '../config/local-config.js';
+import { detectSuspicionFlags } from '../crawl/archive-crawler.js';
 import { rankProblemSubmissions } from '../ranking/rank-submissions.js';
 import type {
   BestSubmissionRecord,
@@ -30,7 +31,9 @@ export async function runRankingWorkflow(
   mkdirSync(perProblemRoot, { recursive: true });
   const overrides = loadRankingOverrides(config.ranking.overridesPath);
 
-  const evaluations = loadEvaluationRecords(evaluationsRoot);
+  const evaluations = loadEvaluationRecords(evaluationsRoot).filter((evaluation) =>
+    matchesConfiguredHandle(config.crawl.userHandle, evaluation.user),
+  );
   const sources = loadSourceRecords(sourcesRoot);
   const grouped = new Map<number, SubmissionRecord[]>();
   for (const evaluation of evaluations) {
@@ -104,7 +107,9 @@ function loadEvaluationRecords(root: string): SubmissionRecord[] {
     return readdirSync(root)
       .filter((entry) => entry.endsWith('.json'))
       .map((entry) =>
-        JSON.parse(readFileSync(join(root, entry), 'utf8')) as SubmissionRecord,
+        refreshSuspicionFlags(
+          JSON.parse(readFileSync(join(root, entry), 'utf8')) as SubmissionRecord,
+        ),
       );
   } catch {
     return [];
@@ -116,11 +121,29 @@ function loadSourceRecords(root: string): SourceRecord[] {
     return readdirSync(root)
       .filter((entry) => entry.endsWith('.json'))
       .map((entry) =>
-        JSON.parse(readFileSync(join(root, entry), 'utf8')) as SourceRecord,
+        refreshSuspicionFlags(
+          JSON.parse(readFileSync(join(root, entry), 'utf8')) as SourceRecord,
+        ),
       );
   } catch {
     return [];
   }
+}
+
+function refreshSuspicionFlags<T extends { sourceCode?: string; suspicionFlags?: string[] }>(
+  record: T,
+): T {
+  if (!record.sourceCode) {
+    return {
+      ...record,
+      suspicionFlags: [...(record.suspicionFlags ?? [])],
+    };
+  }
+
+  return {
+    ...record,
+    suspicionFlags: detectSuspicionFlags(record.sourceCode),
+  };
 }
 
 function loadRankingOverrides(
@@ -134,4 +157,24 @@ function loadRankingOverrides(
   } catch {
     return {};
   }
+}
+
+function matchesConfiguredHandle(
+  configuredUserHandle: string | undefined,
+  candidate: string | undefined,
+): boolean {
+  if (!configuredUserHandle) {
+    return true;
+  }
+  if (!candidate) {
+    return false;
+  }
+
+  const normalizedConfigured = configuredUserHandle.trim().toLowerCase();
+  const normalizedCandidate = candidate.trim().toLowerCase();
+  return (
+    normalizedCandidate === normalizedConfigured
+    || normalizedCandidate.includes(`(${normalizedConfigured})`)
+    || normalizedCandidate.includes(` ${normalizedConfigured}`)
+  );
 }

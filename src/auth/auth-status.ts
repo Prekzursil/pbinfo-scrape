@@ -154,17 +154,14 @@ function extractLoggedInState(html: string): boolean {
   }
 
   const $ = loadHtml(html);
-  const navProfileLinks = $('#bara_navigare a[href^="/profil/"], nav a[href^="/profil/"]');
-  if (navProfileLinks.length > 0) {
-    return true;
-  }
-
   const logoutLinks = $('a[href*="logout"], form[action*="logout"]');
   return logoutLinks.length > 0;
 }
 
 function extractResolvedHandle(html: string): string | undefined {
   const sessionJson = extractUserSessionJson(html);
+  const sessionId = Number(sessionJson?.id ?? sessionJson?.user_id ?? 0);
+  const sessionIsAuthenticated = Number.isFinite(sessionId) && sessionId > 0;
   const sessionCandidate =
     pickSessionHandle(sessionJson?.username)
     ?? pickSessionHandle(sessionJson?.user)
@@ -172,12 +169,17 @@ function extractResolvedHandle(html: string): string | undefined {
     ?? pickSessionHandle(sessionJson?.nick)
     ?? pickSessionHandle(sessionJson?.nume_utilizator)
     ?? pickSessionHandle(sessionJson?.name);
-  if (sessionCandidate) {
+  if (sessionIsAuthenticated && sessionCandidate) {
     return sessionCandidate;
   }
 
   const $ = loadHtml(html);
-  const profileAnchors = $('#bara_navigare a[href^="/profil/"], nav a[href^="/profil/"], a[href^="/profil/"]');
+  const hasLogoutLink = $('a[href*="logout"], form[action*="logout"]').length > 0;
+  if (!sessionIsAuthenticated && !hasLogoutLink) {
+    return undefined;
+  }
+
+  const profileAnchors = $('#bara_navigare a[href^="/profil/"], nav a[href^="/profil/"]');
   for (const anchor of profileAnchors.toArray()) {
     const href = $(anchor).attr('href');
     const fromHref = href?.match(/^\/profil\/([^/?#]+)/u)?.[1];

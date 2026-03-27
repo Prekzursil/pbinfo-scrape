@@ -1,7 +1,7 @@
 import makeFetchCookie from 'fetch-cookie';
 import { CookieJar } from 'tough-cookie';
 
-import { loadHtml } from '../pbinfo/parsers/shared.js';
+import { loadHtml, normalizeWhitespace } from '../pbinfo/parsers/shared.js';
 import { persistSerializedCookies } from './session-store.js';
 
 type PersistedCookie = {
@@ -20,6 +20,13 @@ export interface LoginFormDescriptor {
   formToken: string;
 }
 
+interface AjaxLoginResponse {
+  stare?: string;
+  raspuns?: string;
+  redirect?: string;
+  url?: string;
+}
+
 export interface PbinfoAuthClientOptions {
   baseUrl: string;
   sessionCookiesPath: string;
@@ -34,6 +41,8 @@ export interface CredentialLoginInput {
 export interface CredentialLoginResult {
   success: boolean;
   redirectUrl?: string;
+  resolvedHandle?: string;
+  failureReason?: string;
   sessionCookies: PersistedCookie[];
 }
 
@@ -76,7 +85,7 @@ export class PbinfoAuthClient {
       redirect: 'follow',
     });
     const loginForm = extractLoginForm(await loginPage.text());
-    const loginUrl = new URL(loginForm.action, this.baseUrl);
+    const loginUrl = new URL('/ajx-module/php-login.php', this.baseUrl);
     const formData = new URLSearchParams({
       form_token: loginForm.formToken,
       user: input.username,
@@ -88,23 +97,46 @@ export class PbinfoAuthClient {
       method: 'POST',
       body: formData,
       headers: {
-        'content-type': 'application/x-www-form-urlencoded',
+        'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'x-requested-with': 'XMLHttpRequest',
+        origin: this.baseUrl.origin,
+        referer: this.baseUrl.toString(),
       },
-      redirect: 'manual',
+      redirect: 'follow',
     });
+    const loginPayload = parseAjaxLoginResponse(await loginResponse.text());
+    const loginAccepted = loginPayload.stare === 'success';
+    const redirectUrl = new URL(loginPayload.redirect ?? loginPayload.url ?? '/', this.baseUrl).toString();
 
+    if (!loginAccepted) {
+      return {
+        success: false,
+        redirectUrl,
+        failureReason:
+          loginPayload.raspuns
+          ?? `PBInfo credential login failed with ajax state "${loginPayload.stare ?? 'unknown'}".`,
+        sessionCookies: await this.serializeCookies(),
+      };
+    }
+
+    const verificationResponse = await this.cookieFetch(redirectUrl, {
+      redirect: 'follow',
+    });
+    const verificationHtml = await verificationResponse.text();
+    const resolvedHandle = extractResolvedHandle(verificationHtml);
+    const authenticated = extractLoggedInState(verificationHtml);
     const sessionCookies = await this.serializeCookies();
-    if (input.persistSessionCookies !== false) {
+    if (authenticated && input.persistSessionCookies !== false) {
       await this.persistCookies(sessionCookies);
     }
 
-    const redirectUrl = loginResponse.headers.get('location')
-      ? new URL(loginResponse.headers.get('location')!, this.baseUrl).toString()
-      : undefined;
-
     return {
-      success: loginResponse.status >= 300 && loginResponse.status < 400,
+      success: authenticated,
       redirectUrl,
+      resolvedHandle,
+      failureReason: authenticated
+        ? undefined
+        : 'PBInfo credential login was accepted by the ajax endpoint, but the follow-up session still resolved to guest mode.',
       sessionCookies,
     };
   }
@@ -117,4 +149,85 @@ export class PbinfoAuthClient {
   private async persistCookies(cookies: PersistedCookie[]): Promise<void> {
     persistSerializedCookies(this.sessionCookiesPath, cookies);
   }
+}
+
+function parseAjaxLoginResponse(text: string): AjaxLoginResponse {
+  try {
+    return JSON.parse(text) as AjaxLoginResponse;
+  } catch {
+    return {};
+  }
+}
+
+function extractLoggedInState(html: string): boolean {
+  const sessionJson = extractUserSessionJson(html);
+  const id = Number(sessionJson?.id ?? sessionJson?.user_id ?? 0);
+  if (Number.isFinite(id) && id > 0) {
+    return true;
+  }
+
+  const $ = loadHtml(html);
+  return $('a[href*="logout"], form[action*="logout"]').length > 0;
+}
+
+function extractResolvedHandle(html: string): string | undefined {
+  const sessionJson = extractUserSessionJson(html);
+  const sessionId = Number(sessionJson?.id ?? sessionJson?.user_id ?? 0);
+  const sessionIsAuthenticated = Number.isFinite(sessionId) && sessionId > 0;
+  for (const key of ['username', 'user', 'utilizator', 'nick', 'nume_utilizator', 'name']) {
+    const candidate = pickSessionHandle(sessionJson?.[key]);
+    if (sessionIsAuthenticated && candidate) {
+      return candidate;
+    }
+  }
+
+  const $ = loadHtml(html);
+  const hasLogoutLink = $('a[href*="logout"], form[action*="logout"]').length > 0;
+  if (!sessionIsAuthenticated && !hasLogoutLink) {
+    return undefined;
+  }
+
+  const profileAnchors = $('#bara_navigare a[href^="/profil/"], nav a[href^="/profil/"]');
+  for (const anchor of profileAnchors.toArray()) {
+    const href = $(anchor).attr('href');
+    const fromHref = href?.match(/^\/profil\/([^/?#]+)/u)?.[1];
+    if (fromHref) {
+      return fromHref;
+    }
+
+    const text = normalizeWhitespace($(anchor).text());
+    const match = text.match(/\(([^)]+)\)\s*$/u);
+    if (match?.[1]) {
+      return match[1];
+    }
+  }
+
+  return undefined;
+}
+
+function extractUserSessionJson(html: string): Record<string, unknown> | undefined {
+  const match = html.match(/user_autentificat\s*=\s*(\{[\s\S]*?\})\s*;/u);
+  if (!match?.[1]) {
+    return undefined;
+  }
+
+  try {
+    return JSON.parse(match[1]) as Record<string, unknown>;
+  } catch {
+    return undefined;
+  }
+}
+
+function pickSessionHandle(value: unknown): string | undefined {
+  if (typeof value !== 'string') {
+    return undefined;
+  }
+
+  const normalized = normalizeWhitespace(value);
+  if (!normalized) {
+    return undefined;
+  }
+
+  const trailingHandle = normalized.match(/\(([^)]+)\)\s*$/u)?.[1];
+  return trailingHandle ?? normalized;
 }

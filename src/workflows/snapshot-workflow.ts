@@ -40,10 +40,15 @@ export interface FinalizeSnapshotResult {
   routesBuilt: number;
   artifactManifestPath: string;
   coverageGapReportPath: string;
+  promotedToCanonical: boolean;
   coverageGates: {
     officialSourceGatePassed: boolean;
     solvedUserSourceGatePassed: boolean;
   };
+}
+
+export interface FinalizeSnapshotOptions {
+  promote?: boolean;
 }
 
 export function getCrawlStatus(
@@ -96,6 +101,7 @@ export function getCrawlStatus(
 export async function finalizeSnapshotWorkflow(
   workspaceRoot: string,
   snapshotId: string,
+  options: FinalizeSnapshotOptions = {},
 ): Promise<FinalizeSnapshotResult> {
   const config = loadLocalConfig(workspaceRoot);
   const status = getCrawlStatus(workspaceRoot, snapshotId);
@@ -132,7 +138,9 @@ export async function finalizeSnapshotWorkflow(
     );
   }
   exportRawArtifacts(config, layout);
-  pruneToCanonicalSnapshot(config, snapshotId);
+  if (options.promote) {
+    pruneToCanonicalSnapshot(config, snapshotId);
+  }
 
   return {
     snapshotId,
@@ -141,6 +149,7 @@ export async function finalizeSnapshotWorkflow(
     routesBuilt: mirrorResult.routesBuilt,
     artifactManifestPath: layout.artifactManifestPath,
     coverageGapReportPath: coverageGaps.paths.reportPath,
+    promotedToCanonical: options.promote ?? false,
     coverageGates: {
       officialSourceGatePassed: coverageGaps.gates.officialSourceGate.passed,
       solvedUserSourceGatePassed: coverageGaps.gates.solvedUserSourceGate.passed,

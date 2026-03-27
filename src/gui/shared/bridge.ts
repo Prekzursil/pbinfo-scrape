@@ -3,12 +3,14 @@ import type {
   GuiArchiveListing,
   GuiArchiveRecordDetail,
   GuiArchiveSummary,
+  GuiCoverageArchiveStateFilter,
   GuiCoverageDetail,
   GuiCoverageEditorialFilter,
   GuiCoverageListing,
   GuiCoveragePresenceFilter,
   GuiCoverageSolvedFilter,
   GuiCoverageSummary,
+  GuiCoverageTestsStatusFilter,
   GuiCrawlMode,
   DesktopPreferencesRecord,
   GuiCrawlStatus,
@@ -92,9 +94,11 @@ export interface DesktopBridge {
     solved?: GuiCoverageSolvedFilter;
     testsFragmentArchived?: GuiCoveragePresenceFilter;
     visibleTestsCaptured?: GuiCoveragePresenceFilter;
+    testsCoverageStatus?: GuiCoverageTestsStatusFilter;
     officialSourceArchived?: GuiCoveragePresenceFilter;
     userSourceArchived?: GuiCoveragePresenceFilter;
     editorialAvailability?: GuiCoverageEditorialFilter;
+    archiveCompletenessStatus?: GuiCoverageArchiveStateFilter;
     grade?: number;
   }) => Promise<GuiCoverageListing>;
   getCoverageRecord: (input: {

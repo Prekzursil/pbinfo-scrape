@@ -1,5 +1,5 @@
-import { mkdirSync } from 'node:fs';
-import { dirname } from 'node:path';
+import { mkdirSync, readFileSync, readdirSync } from 'node:fs';
+import { dirname, join } from 'node:path';
 
 import {
   assertSnapshotRecord,
@@ -7,6 +7,7 @@ import {
   markSnapshotCompleted,
   prepareSnapshot,
   readArchiveCatalog,
+  resolveSnapshotLayout,
 } from '../archive/storage.js';
 import { createCookieFetch } from '../auth/session-store.js';
 import {
@@ -38,6 +39,8 @@ export interface CrawlWorkflowResult {
   completed: boolean;
 }
 
+export interface OfficialSourceHarvestOptions extends CrawlWorkflowOptions {}
+
 export interface CrawlFailureSummary {
   id: number;
   url: string;
@@ -63,6 +66,43 @@ export async function runCrawlWorkflow(
 ): Promise<CrawlWorkflowResult> {
   const config = loadLocalConfig(workspaceRoot);
   await enforceAuthPreflight(scope, config, options.authStatusProbe);
+  return runSeededCrawlWorkflow(workspaceRoot, config, scope, buildSeeds(config, scope), options);
+}
+
+export async function runOfficialSourceHarvestWorkflow(
+  workspaceRoot: string,
+  options: OfficialSourceHarvestOptions = {},
+): Promise<CrawlWorkflowResult> {
+  const config = loadLocalConfig(workspaceRoot);
+  await enforceAuthPreflight('all', config, options.authStatusProbe);
+  const catalog = readArchiveCatalog(config.paths.archiveRoot);
+  const snapshotId =
+    options.snapshotId
+    ?? resolveIncrementalSnapshotId(catalog, undefined);
+  if (!snapshotId) {
+    throw new Error('No snapshot is available for targeted official-source harvest.');
+  }
+
+  const seeds = buildOfficialSourceSeeds(config, snapshotId);
+  if (seeds.length === 0) {
+    throw new Error(
+      `No problem source-list URLs were found in snapshot ${snapshotId}; targeted official-source harvest cannot start yet.`,
+    );
+  }
+  return runSeededCrawlWorkflow(workspaceRoot, config, 'all', seeds, {
+    ...options,
+    snapshotId,
+    mode: 'incremental',
+  });
+}
+
+async function runSeededCrawlWorkflow(
+  workspaceRoot: string,
+  config: ReturnType<typeof loadLocalConfig>,
+  scope: 'public' | 'user' | 'all',
+  seeds: CrawlQueueInput[],
+  options: CrawlWorkflowOptions = {},
+): Promise<CrawlWorkflowResult> {
   const now = options.now ?? new Date();
   const catalog = readArchiveCatalog(config.paths.archiveRoot);
   const resolvedSnapshotId =
@@ -79,7 +119,7 @@ export async function runCrawlWorkflow(
   mkdirSync(dirname(queuePath), { recursive: true });
   const queue = new CrawlQueue(queuePath);
   queue.requeueInProgress();
-  queue.enqueueMany(buildSeeds(config, scope));
+  queue.enqueueMany(seeds);
   const fetchImpl =
     config.auth.strategy !== 'none' || config.auth.sessionCookiesPath
       ? await createCookieFetch(config.auth.sessionCookiesPath)
@@ -101,9 +141,11 @@ export async function runCrawlWorkflow(
     config,
     snapshot,
     queue,
+    scope,
     fetchImpl: createRateLimitedFetch(fetchImpl),
     browserCapture,
     retryDelayMs: config.crawl.retryDelayMs,
+    requestTimeoutMs: config.crawl.requestTimeoutMs,
   });
 
   const maxIterations = options.maxIterations ?? Number.POSITIVE_INFINITY;
@@ -282,11 +324,15 @@ function buildSeeds(
   }
 
   if ((scope === 'user' || scope === 'all') && config.crawl.userHandle) {
-    const roots = [
-      `https://www.pbinfo.ro/profil/${config.crawl.userHandle}`,
-      `https://www.pbinfo.ro/profil/${config.crawl.userHandle}/probleme`,
-      `https://www.pbinfo.ro/solutii/user/${config.crawl.userHandle}`,
-    ];
+    const roots = scope === 'user'
+      ? [
+          `https://www.pbinfo.ro/solutii/user/${config.crawl.userHandle}`,
+        ]
+      : [
+          `https://www.pbinfo.ro/profil/${config.crawl.userHandle}`,
+          `https://www.pbinfo.ro/profil/${config.crawl.userHandle}/probleme`,
+          `https://www.pbinfo.ro/solutii/user/${config.crawl.userHandle}`,
+        ];
     for (const url of roots) {
       const key = `page:${url}`;
       queue.set(key, {
@@ -300,6 +346,75 @@ function buildSeeds(
   return [...queue.values()];
 }
 
+function buildOfficialSourceSeeds(
+  config: ReturnType<typeof loadLocalConfig>,
+  snapshotId: string,
+): CrawlQueueInput[] {
+  const snapshot = resolveSnapshotLayout(config, snapshotId);
+  const problemsRoot = `${snapshot.normalizedRoot}/problems`;
+  const problemFiles = readJsonDirectory<{
+    id?: number;
+    slug?: string;
+    sourceListUrl?: string;
+    metadata?: Record<string, unknown>;
+  }>(problemsRoot);
+  const queue = new Map<string, CrawlQueueInput>();
+  for (const problem of problemFiles) {
+    const sourceListUrl = problem.sourceListUrl?.trim();
+    if (!sourceListUrl) {
+      continue;
+    }
+    const authorHandle = extractOfficialAuthorHandle(problem.metadata);
+    const targetUrl =
+      authorHandle && Number.isFinite(problem.id) && problem.slug
+        ? buildAuthorScopedOfficialSourceUrl(sourceListUrl, authorHandle)
+        : sourceListUrl;
+    const key = `official-source-list:${targetUrl}`;
+    queue.set(key, {
+      key,
+      url: targetUrl,
+      kind: 'official-source-list',
+    });
+  }
+  return [...queue.values()];
+}
+
+function buildAuthorScopedOfficialSourceUrl(sourceListUrl: string, authorHandle: string): string {
+  const sourceList = new URL(sourceListUrl);
+  const match = sourceList.pathname.match(/^\/solutii\/problema\/(\d+)\/([^/?#]+)$/);
+  if (!match?.[1] || !match[2]) {
+    return sourceListUrl;
+  }
+
+  return new URL(
+    `/solutii/user/${authorHandle}/problema/${match[1]}/${match[2]}`,
+    sourceList,
+  ).toString();
+}
+
+function extractOfficialAuthorHandle(metadata?: Record<string, unknown>): string | undefined {
+  const summaryText = typeof metadata?.['postată de'] === 'string'
+    ? metadata['postată de']
+    : typeof metadata?.['postata de'] === 'string'
+      ? metadata['postata de']
+      : undefined;
+  const match = summaryText?.match(/\(([^()]+)\)\s*$/);
+  const summaryHandle = normalizeHandleCandidate(match?.[1]);
+  if (summaryHandle) {
+    return summaryHandle;
+  }
+
+  return normalizeHandleCandidate(metadata?.authorHandle);
+}
+
+function normalizeHandleCandidate(value: unknown): string | undefined {
+  if (typeof value !== 'string') {
+    return undefined;
+  }
+
+  const normalized = value.trim();
+  return normalized.length > 0 ? normalized : undefined;
+}
 function findLatestInProgressSnapshot(
   catalog: ReturnType<typeof readArchiveCatalog>,
 ) {
@@ -332,6 +447,18 @@ function resolveIncrementalSnapshotId(
   }
 
   return undefined;
+}
+
+function readJsonDirectory<T>(directoryPath: string): T[] {
+  try {
+    return readdirSync(directoryPath)
+      .filter((entry) => entry.endsWith('.json'))
+      .map((entry) =>
+        JSON.parse(readFileSync(join(directoryPath, entry), 'utf8')) as T,
+      );
+  } catch {
+    return [];
+  }
 }
 
 function createRateLimitedFetch(

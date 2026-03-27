@@ -21,11 +21,14 @@ import {
   parseProblemPage,
   parseProblemStatementFragment,
 } from '../pbinfo/parsers/problem.js';
+import { parseProblemSourceListPage } from '../pbinfo/parsers/problem-source-list.js';
 import {
   parseUserSolutionsListPage,
   type UserSolutionListEntry,
 } from '../pbinfo/parsers/user-solutions.js';
+import { isOfficialSourceAuthorHandle } from '../pbinfo/official-source-authors.js';
 import { buildSourceSignature } from '../ranking/source-normalization.js';
+import { detectSuspicionFlags } from './source-suspicion.js';
 import type { CrawlQueueInput } from '../types/crawl.js';
 import type {
   EvaluationTestResult,
@@ -46,7 +49,9 @@ export interface ArchiveCrawlerOptions {
   config: LoadedLocalConfig;
   snapshot: SnapshotLayout;
   queue: CrawlQueue;
+  scope?: 'public' | 'user' | 'all';
   retryDelayMs?: number;
+  requestTimeoutMs?: number;
   fetchImpl?: typeof fetch;
   browserCapture?: BrowserCapture;
 }
@@ -72,7 +77,9 @@ export class ArchiveCrawler {
   private readonly config: LoadedLocalConfig;
   private readonly snapshot: SnapshotLayout;
   private readonly queue: CrawlQueue;
+  private readonly scope: 'public' | 'user' | 'all';
   private readonly retryDelayMs: number;
+  private readonly requestTimeoutMs: number;
   private readonly fetchImpl: typeof fetch;
   private readonly browserCapture?: BrowserCapture;
 
@@ -80,7 +87,9 @@ export class ArchiveCrawler {
     this.config = options.config;
     this.snapshot = options.snapshot;
     this.queue = options.queue;
+    this.scope = options.scope ?? 'all';
     this.retryDelayMs = options.retryDelayMs ?? 60_000;
+    this.requestTimeoutMs = options.requestTimeoutMs ?? 30_000;
     this.fetchImpl = options.fetchImpl ?? fetch;
     this.browserCapture = options.browserCapture;
   }
@@ -91,7 +100,21 @@ export class ArchiveCrawler {
       return false;
     }
 
-    const response = await this.fetchImpl(item.url);
+    let response: Response;
+    try {
+      response = await fetchWithTimeout(
+        this.fetchImpl,
+        item.url,
+        undefined,
+        this.requestTimeoutMs,
+      );
+    } catch (error) {
+      this.queue.fail(item.id, {
+        errorMessage: error instanceof Error ? error.message : String(error),
+        nextVisibleAt: new Date(now.getTime() + this.retryDelayMs).toISOString(),
+      });
+      return true;
+    }
     const contentType = response.headers.get('content-type');
 
     if (looksLikeHtml(contentType)) {
@@ -132,10 +155,26 @@ export class ArchiveCrawler {
         normalizedHtml.source === 'browser',
       );
 
-      const followUps = [
-        ...discoverFollowUps(this.config, item.url, body),
-        ...discoverNormalizedFollowUps(this.config, item.url, item.kind, body),
-      ];
+      const genericFollowUps = discoverFollowUps(
+        this.config,
+        this.scope,
+        item.url,
+        item.kind,
+        body,
+      );
+      const normalizedFollowUps = discoverNormalizedFollowUps(
+        this.config,
+        this.snapshot,
+        item.url,
+        item.kind,
+        body,
+      );
+      const followUps =
+        item.kind === 'user-solutions'
+          || item.kind === 'official-source-list'
+          || (item.kind === 'public-page' && isProblemSourceListUrl(item.url))
+          ? [...normalizedFollowUps, ...genericFollowUps]
+          : [...genericFollowUps, ...normalizedFollowUps];
       this.queue.enqueueMany(followUps);
       this.queue.complete(item.id, {
         contentHash,
@@ -292,6 +331,45 @@ export interface PersistNormalizedSnapshotHtmlOptions {
   normalizedFromBrowser?: boolean;
 }
 
+async function fetchWithTimeout(
+  fetchImpl: typeof fetch,
+  input: RequestInfo | URL,
+  init: RequestInit | undefined,
+  requestTimeoutMs: number,
+): Promise<Response> {
+  const controller = new AbortController();
+  const signal = init?.signal
+    ? AbortSignal.any([init.signal, controller.signal])
+    : controller.signal;
+  const timeout = setTimeout(() => {
+    controller.abort(new Error(`request timed out after ${requestTimeoutMs}ms`));
+  }, requestTimeoutMs);
+
+  try {
+    return await Promise.race([
+      fetchImpl(input, {
+        ...init,
+        signal,
+      }),
+      new Promise<Response>((_, reject) => {
+        signal.addEventListener(
+          'abort',
+          () => {
+            reject(
+              signal.reason instanceof Error
+                ? signal.reason
+                : new Error(String(signal.reason ?? 'request aborted')),
+            );
+          },
+          { once: true },
+        );
+      }),
+    ]);
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 export function persistNormalizedSnapshotHtml(
   options: PersistNormalizedSnapshotHtmlOptions,
 ): void {
@@ -371,10 +449,7 @@ export function persistNormalizedSnapshotHtml(
           artifactPath: resolveRawPageBodyPath(options.snapshot, options.item.url),
         },
         officialSolutions: mergeLanguageSolutions(current?.officialSolutions ?? {}, solution.solutions),
-        officialSourceIds: {
-          ...(current?.officialSourceIds ?? {}),
-          ...sourceIds,
-        },
+        officialSourceIds: mergeLanguageSourceIds(current?.officialSourceIds, sourceIds),
       }),
     );
     return;
@@ -406,39 +481,12 @@ export function persistNormalizedSnapshotHtml(
     return;
   }
 
-  const sourceListMatch = new URL(options.item.url).pathname.match(/^\/solutii\/problema\/(\d+)\/([^/?#]+)/i);
-  if (options.item.kind === 'public-page' && sourceListMatch?.[1] && sourceListMatch[2]) {
-    const problemId = Number(sourceListMatch[1]);
-    const slug = sourceListMatch[2];
-    const solution = parseOfficialSolutionFragment(options.html);
-    if (Object.keys(solution.solutions).length > 0) {
-      const sourceIds = persistOfficialSources(
-        options.snapshot,
-        problemId,
-        solution.solutions,
-        options.item.url,
-        options.fetchedAt,
-        options.normalizedFromBrowser ? 'browser-fallback' : 'official-fragment',
-      );
-      mergeJsonRecord<ProblemRecord>(
-        join(options.snapshot.normalizedRoot, 'problems'),
-        `problem-${problemId}.json`,
-        (current) => ({
-          ...(current ?? createPlaceholderProblem(problemId, slug)),
-          sourceListUrl: current?.sourceListUrl ?? options.item.url,
-          officialSolutions: mergeLanguageSolutions(current?.officialSolutions ?? {}, solution.solutions),
-          officialSourceIds: {
-            ...(current?.officialSourceIds ?? {}),
-            ...sourceIds,
-          },
-        }),
-      );
-    }
-    return;
-  }
-
   const evaluationMatch = options.item.url.match(/\/detalii-evaluare\/(\d+)/);
-  if (options.item.kind === 'evaluation-detail' && evaluationMatch?.[1]) {
+  if (
+    (options.item.kind === 'evaluation-detail'
+      || options.item.kind === 'official-evaluation-detail')
+    && evaluationMatch?.[1]
+  ) {
     try {
       const record = parseEvaluationPage(options.html, Number(evaluationMatch[1]));
       const suspicious = detectSuspicionFlags(record.sourceCode);
@@ -453,9 +501,14 @@ export function persistNormalizedSnapshotHtml(
         `evaluation-${evaluation.evaluationId}.json`,
         evaluation,
       );
+      const sourceKind: SourceRecord['kind'] =
+        options.item.kind === 'official-evaluation-detail'
+          ? 'official'
+          : 'user-evaluation';
       persistEvaluationSource(
         options.snapshot,
         evaluation,
+        sourceKind,
         options.normalizedFromBrowser ? 'browser-fallback' : 'evaluation-detail',
       );
       persistEvaluationObservedTests(options.snapshot, evaluation);
@@ -577,8 +630,8 @@ function persistOfficialSources(
   sourceUrl: string,
   fetchedAt: string,
   provenanceType: SourceRecord['provenanceType'],
-): Record<string, string> {
-  const sourceIds: Record<string, string> = {};
+): Record<string, string[]> {
+  const sourceIds: Record<string, string[]> = {};
   for (const [languageLabel, sourceCode] of Object.entries(solutions)) {
     const language = normalizeSourceLanguage(languageLabel);
     const sourceId = `official-${problemId}-${sanitizeSegment(language).toLowerCase()}`;
@@ -588,6 +641,7 @@ function persistOfficialSources(
       kind: 'official',
       problemId,
       language,
+      score: provenanceType === 'official-fragment' ? 0 : 100,
       sourceAvailable: Boolean(sourceCode),
       sourceCode,
       sourceHash: signature?.sourceHash,
@@ -603,7 +657,7 @@ function persistOfficialSources(
       `${sourceId}.json`,
       sourceRecord,
     );
-    sourceIds[language] = sourceId;
+    sourceIds[language] = [...new Set([...(sourceIds[language] ?? []), sourceId])].sort();
   }
 
   return sourceIds;
@@ -612,6 +666,7 @@ function persistOfficialSources(
 function persistEvaluationSource(
   snapshot: SnapshotLayout,
   evaluation: EvaluationRecord,
+  kind: SourceRecord['kind'],
   provenanceType: SourceRecord['provenanceType'],
 ): void {
   if (!evaluation.sourceAvailable) {
@@ -619,11 +674,14 @@ function persistEvaluationSource(
   }
 
   const language = normalizeSourceLanguage(evaluation.language);
-  const sourceId = `evaluation-${evaluation.evaluationId}`;
+  const sourceId =
+    kind === 'official'
+      ? `official-${evaluation.problemId}-${sanitizeSegment(language).toLowerCase()}-${evaluation.evaluationId}`
+      : `evaluation-${evaluation.evaluationId}`;
   const signature = buildSourceSignature(evaluation.sourceCode, language);
   const sourceRecord: SourceRecord = {
     sourceId,
-    kind: 'user-evaluation',
+    kind,
     problemId: evaluation.problemId,
     evaluationId: evaluation.evaluationId,
     userHandle: evaluation.user,
@@ -650,14 +708,26 @@ function persistEvaluationSource(
     join(snapshot.normalizedRoot, 'problems'),
     `problem-${evaluation.problemId}.json`,
     (current) => {
-      const currentIds = current?.userSourceIds ?? {};
+      const currentIds =
+        kind === 'official'
+          ? current?.officialSourceIds ?? {}
+          : current?.userSourceIds ?? {};
       const currentLanguageIds = currentIds[language] ?? [];
       return {
         ...(current ?? createPlaceholderProblem(evaluation.problemId, evaluation.problemSlug)),
-        userSourceIds: {
-          ...currentIds,
-          [language]: [...new Set([...currentLanguageIds, sourceId])].sort(),
-        },
+        ...(kind === 'official'
+          ? {
+              officialSourceIds: {
+                ...currentIds,
+                [language]: [...new Set([...currentLanguageIds, sourceId])].sort(),
+              },
+            }
+          : {
+              userSourceIds: {
+                ...currentIds,
+                [language]: [...new Set([...currentLanguageIds, sourceId])].sort(),
+              },
+            }),
       };
     },
   );
@@ -682,12 +752,13 @@ function persistProblemExamples(
   mergeJsonRecord<ProblemTestsRecord>(
     join(snapshot.normalizedRoot, 'tests'),
     `problem-${problemId}.json`,
-    (current) => ({
-      ...(current ?? createEmptyProblemTestsRecord(snapshot.snapshotId, problemId, problemSlug, fallbackProblemName)),
-      examples: cases,
-      visible: current?.visible ?? [],
-      evaluationObserved: current?.evaluationObserved ?? [],
-    }),
+    (current) =>
+      withEffectiveProblemTests({
+        ...(current ?? createEmptyProblemTestsRecord(snapshot.snapshotId, problemId, problemSlug, fallbackProblemName)),
+        examples: cases,
+        visible: current?.visible ?? [],
+        evaluationObserved: current?.evaluationObserved ?? [],
+      }),
   );
 }
 
@@ -705,16 +776,19 @@ function persistProblemVisibleTests(
     input: test.input || undefined,
     output: test.output || undefined,
     index: index + 1,
+    score: test.score,
+    exampleLike: test.exampleLike,
   }));
   mergeJsonRecord<ProblemTestsRecord>(
     join(snapshot.normalizedRoot, 'tests'),
     `problem-${problemId}.json`,
-    (current) => ({
-      ...(current ?? createEmptyProblemTestsRecord(snapshot.snapshotId, problemId, problemSlug, fallbackProblemName)),
-      examples: current?.examples ?? [],
-      visible: cases,
-      evaluationObserved: current?.evaluationObserved ?? [],
-    }),
+    (current) =>
+      withEffectiveProblemTests({
+        ...(current ?? createEmptyProblemTestsRecord(snapshot.snapshotId, problemId, problemSlug, fallbackProblemName)),
+        examples: current?.examples ?? [],
+        visible: cases,
+        evaluationObserved: current?.evaluationObserved ?? [],
+      }),
   );
 }
 
@@ -734,12 +808,12 @@ function persistEvaluationObservedTests(
       for (const entry of [...existing, ...cases]) {
         byId.set(entry.testId, entry);
       }
-      return {
+      return withEffectiveProblemTests({
         ...(current ?? createEmptyProblemTestsRecord(snapshot.snapshotId, evaluation.problemId, evaluation.problemSlug, evaluation.problemName)),
         examples: current?.examples ?? [],
         visible: current?.visible ?? [],
         evaluationObserved: [...byId.values()].sort(compareProblemTestCaseRecords),
-      };
+      });
     },
   );
 }
@@ -758,6 +832,7 @@ function toEvaluationObservedTestCase(
     score: test.score,
     maxScore: test.maxScore,
     details: test.details,
+    exampleLike: /exemplu/i.test(test.details),
   };
 }
 
@@ -780,6 +855,92 @@ function compareProblemTestCaseRecords(
   return left.testId.localeCompare(right.testId);
 }
 
+function withEffectiveProblemTests(
+  record: ProblemTestsRecord,
+): ProblemTestsRecord {
+  return {
+    ...record,
+    effective: deriveEffectiveProblemTests(record),
+  };
+}
+
+function deriveEffectiveProblemTests(
+  record: Pick<ProblemTestsRecord, 'examples' | 'visible' | 'evaluationObserved'>,
+): ProblemTestCaseRecord[] {
+  const effectiveByKey = new Map<string, ProblemTestCaseRecord>();
+
+  for (const testCase of [...record.examples, ...record.visible, ...record.evaluationObserved]) {
+    const effectiveKey = buildEffectiveProblemTestKey(testCase);
+    if (!effectiveKey) {
+      continue;
+    }
+
+    const current = effectiveByKey.get(effectiveKey);
+    const provenanceKinds = [...new Set([
+      ...(current?.provenanceKinds ?? []),
+      ...(testCase.provenanceKinds ?? [testCase.kind]),
+    ])].sort(compareProvenanceKinds);
+    const sourceTestIds = [...new Set([
+      ...(current?.sourceTestIds ?? (current ? [current.testId] : [])),
+      ...(testCase.sourceTestIds ?? [testCase.testId]),
+    ])].sort();
+
+    effectiveByKey.set(effectiveKey, {
+      ...(current ?? testCase),
+      input: normalizeTestIo(testCase.input),
+      output: normalizeTestIo(testCase.output),
+      kind: provenanceKinds.includes('example')
+        ? 'example'
+        : provenanceKinds.includes('visible')
+          ? 'visible'
+          : 'evaluationObserved',
+      exampleLike:
+        Boolean(current?.exampleLike)
+        || Boolean(testCase.exampleLike)
+        || provenanceKinds.includes('example'),
+      provenanceKinds,
+      sourceTestIds,
+    });
+  }
+
+  return [...effectiveByKey.values()].sort(compareProblemTestCaseRecords);
+}
+
+function buildEffectiveProblemTestKey(
+  testCase: ProblemTestCaseRecord,
+): string | undefined {
+  const input = normalizeTestIo(testCase.input);
+  const output = normalizeTestIo(testCase.output);
+  if (!input && !output) {
+    return undefined;
+  }
+  return `${input ?? ''}::${output ?? ''}`;
+}
+
+function normalizeTestIo(value?: string): string | undefined {
+  const trimmed = value?.trim();
+  if (!trimmed) {
+    return undefined;
+  }
+
+  return trimmed
+    .replace(/\r\n/g, '\n')
+    .replace(/[ \t]+\n/g, '\n')
+    .replace(/[ \t]+/g, ' ');
+}
+
+function compareProvenanceKinds(
+  left: ProblemTestCaseRecord['kind'],
+  right: ProblemTestCaseRecord['kind'],
+): number {
+  const order: Array<ProblemTestCaseRecord['kind']> = [
+    'example',
+    'visible',
+    'evaluationObserved',
+  ];
+  return order.indexOf(left) - order.indexOf(right);
+}
+
 function createEmptyProblemTestsRecord(
   snapshotId: string,
   problemId: number,
@@ -794,6 +955,7 @@ function createEmptyProblemTestsRecord(
     examples: [],
     visible: [],
     evaluationObserved: [],
+    effective: [],
   };
 }
 
@@ -827,7 +989,7 @@ function resolvePreferredNormalizedHtml(
         : { html: httpHtml, source: 'http' };
     }
 
-    if (kind === 'evaluation-detail') {
+    if (kind === 'evaluation-detail' || kind === 'official-evaluation-detail') {
       const evaluationId = Number(sourceUrl.match(/\/detalii-evaluare\/(\d+)/)?.[1]);
       if (!Number.isFinite(evaluationId)) {
         return { html: httpHtml, source: 'http' };
@@ -840,13 +1002,6 @@ function resolvePreferredNormalizedHtml(
         : { html: httpHtml, source: 'http' };
     }
 
-    if (kind === 'public-page' && /\/solutii\/problema\/\d+\/[^/?#]+/i.test(new URL(sourceUrl).pathname)) {
-      const httpSolutions = Object.keys(parseOfficialSolutionFragment(httpHtml).solutions).length;
-      const browserSolutions = Object.keys(parseOfficialSolutionFragment(browserHtml).solutions).length;
-      return browserSolutions > httpSolutions
-        ? { html: browserHtml, source: 'browser' }
-        : { html: httpHtml, source: 'http' };
-    }
   } catch {
     return { html: browserHtml, source: 'browser' };
   }
@@ -866,42 +1021,54 @@ function resolveRawPageBodyPath(
 
 function discoverFollowUps(
   config: LoadedLocalConfig,
+  crawlScope: 'public' | 'user' | 'all',
   baseUrl: string,
+  kind: CrawlQueueInput['kind'],
   html: string,
 ): CrawlQueueInput[] {
   const document = load(html);
   const base = new URL(baseUrl);
   const queued = new Map<string, CrawlQueueInput>();
+  const suppressGenericPageNavigation = shouldSuppressGenericPageNavigation(
+    crawlScope,
+    kind,
+    baseUrl,
+  );
+  const suppressGenericAssetDiscovery = shouldSuppressGenericAssetDiscovery(kind);
 
-  document('a[href]').each((_, element) => {
-    const href = document(element).attr('href');
-    const normalized = normalizeNavigableUrl(config, base, href);
-    if (!normalized) {
-      return;
-    }
-
-    queued.set(`page:${normalized}`, {
-      key: `page:${normalized}`,
-      url: normalized,
-      kind: inferPageKind(normalized),
-    });
-  });
-
-  for (const selector of ['link[href]', 'script[src]', 'img[src]', 'source[src]']) {
-    document(selector).each((_, element) => {
-      const attribute = selector.startsWith('link') ? 'href' : 'src';
-      const rawUrl = document(element).attr(attribute);
-      const normalized = normalizeAssetUrl(config, base, rawUrl);
+  if (!suppressGenericPageNavigation) {
+    document('a[href]').each((_, element) => {
+      const href = document(element).attr('href');
+      const normalized = normalizeNavigableUrl(config, base, href);
       if (!normalized) {
         return;
       }
 
-      queued.set(`asset:${normalized}`, {
-        key: `asset:${normalized}`,
+      queued.set(`page:${normalized}`, {
+        key: `page:${normalized}`,
         url: normalized,
-        kind: 'public-asset',
+        kind: inferPageKind(normalized),
       });
     });
+  }
+
+  if (!suppressGenericAssetDiscovery) {
+    for (const selector of ['link[href]', 'script[src]', 'img[src]', 'source[src]']) {
+      document(selector).each((_, element) => {
+        const attribute = selector.startsWith('link') ? 'href' : 'src';
+        const rawUrl = document(element).attr(attribute);
+        const normalized = normalizeAssetUrl(config, base, rawUrl);
+        if (!normalized) {
+          return;
+        }
+
+        queued.set(`asset:${normalized}`, {
+          key: `asset:${normalized}`,
+          url: normalized,
+          kind: 'public-asset',
+        });
+      });
+    }
   }
 
   const problemMatch = base.pathname.match(/^\/probleme\/(\d+)\/([^/?#]+)/);
@@ -925,56 +1092,179 @@ function discoverFollowUps(
       url: `${endpointBase}/ajx-problema-afisare-teste.php?id=${problemId}`,
       kind: 'problem-tests',
     });
-    queued.set(`page:https://www.pbinfo.ro/solutii/problema/${problemId}/${slug}`, {
-      key: `page:https://www.pbinfo.ro/solutii/problema/${problemId}/${slug}`,
-      url: `https://www.pbinfo.ro/solutii/problema/${problemId}/${slug}`,
-      kind: 'public-page',
-    });
     problemUrl.hash = '';
   }
 
   return [...queued.values()];
 }
 
+function shouldSuppressGenericPageNavigation(
+  crawlScope: 'public' | 'user' | 'all',
+  kind: CrawlQueueInput['kind'],
+  baseUrl: string,
+): boolean {
+  return (
+    (crawlScope === 'user' && kind === 'public-page')
+    || (crawlScope === 'user' && kind === 'user-profile')
+    || kind === 'user-solutions'
+    || kind === 'evaluation-detail'
+    || kind === 'official-evaluation-detail'
+    || kind === 'official-source-list'
+    || (kind === 'public-page' && isProblemSourceListUrl(baseUrl))
+  );
+}
+
+function shouldSuppressGenericAssetDiscovery(kind: CrawlQueueInput['kind']): boolean {
+  return (
+    kind === 'user-solutions'
+    || kind === 'evaluation-detail'
+    || kind === 'official-evaluation-detail'
+    || kind === 'official-source-list'
+  );
+}
+
 function discoverNormalizedFollowUps(
   config: LoadedLocalConfig,
+  snapshot: SnapshotLayout,
   baseUrl: string,
   kind: CrawlQueueInput['kind'],
   html: string,
 ): CrawlQueueInput[] {
-  if (kind !== 'user-solutions') {
+  if (kind !== 'user-solutions' && kind !== 'official-source-list') {
     return [];
   }
 
-  const baseMatch = new URL(baseUrl).pathname.match(/^\/solutii\/user\/([^/?#]+)/);
-  if (!matchesConfiguredUserHandle(config, baseMatch?.[1])) {
-    return [];
-  }
-
-  const parsed = parseUserSolutionsListPage(html, baseUrl);
   const queued = new Map<string, CrawlQueueInput>();
 
-  for (const nextPageUrl of parsed.nextPageUrls) {
-    queued.set(`page:${nextPageUrl}`, {
-      key: `page:${nextPageUrl}`,
-      url: nextPageUrl,
-      kind: 'user-solutions',
-    });
-  }
-
-  for (const entry of parsed.entries) {
-    if (!matchesConfiguredUserHandle(config, entry.user)) {
-      continue;
+  if (kind === 'user-solutions') {
+    const parsed = parseUserSolutionsListPage(html, baseUrl);
+    const baseMatch = new URL(baseUrl).pathname.match(/^\/solutii\/user\/([^/?#]+)/);
+    if (!matchesConfiguredUserHandle(config, baseMatch?.[1])) {
+      return [];
     }
 
-    queued.set(`evaluation:${entry.evaluationId}`, {
-      key: `evaluation:${entry.evaluationId}`,
-      url: new URL(`/detalii-evaluare/${entry.evaluationId}`, baseUrl).toString(),
-      kind: 'evaluation-detail',
-    });
+    for (const entry of parsed.entries) {
+      if (!matchesConfiguredUserHandle(config, entry.user)) {
+        continue;
+      }
+
+      const problemPageUrl = new URL(
+        `/probleme/${entry.problemId}/${entry.problemSlug}`,
+        baseUrl,
+      ).toString();
+      queued.set(`page:${problemPageUrl}`, {
+        key: `page:${problemPageUrl}`,
+        url: problemPageUrl,
+        kind: 'public-page',
+      });
+
+      queued.set(`evaluation:${entry.evaluationId}`, {
+        key: `evaluation:${entry.evaluationId}`,
+        url: new URL(`/detalii-evaluare/${entry.evaluationId}`, baseUrl).toString(),
+        kind: 'evaluation-detail',
+      });
+    }
+
+    for (const nextPageUrl of parsed.nextPageUrls) {
+      queued.set(`page:${nextPageUrl}`, {
+        key: `page:${nextPageUrl}`,
+        url: nextPageUrl,
+        kind: 'user-solutions',
+      });
+    }
+
+    return [...queued.values()];
   }
 
-  return [...queued.values()];
+  if (kind === 'official-source-list') {
+    const parsed = parseProblemSourceListPage(html, baseUrl);
+    const communitySourceListMatch = new URL(baseUrl).pathname.match(/^\/solutii\/problema\/(\d+)\/([^/?#]+)/);
+    if (communitySourceListMatch?.[1] && communitySourceListMatch[2]) {
+      if (!parsed.authorHandle) {
+        return [];
+      }
+
+      const authorScopedUrl = new URL(
+        `/solutii/user/${parsed.authorHandle}/problema/${communitySourceListMatch[1]}/${communitySourceListMatch[2]}`,
+        baseUrl,
+      ).toString();
+      const authorScopedKind = isOfficialSourceAuthorHandle(parsed.authorHandle)
+        ? 'official-source-list'
+        : 'user-solutions';
+      const authorScopedKeyPrefix = authorScopedKind === 'official-source-list'
+        ? 'official-source-list'
+        : 'page';
+      queued.set(`${authorScopedKeyPrefix}:${authorScopedUrl}`, {
+        key: `${authorScopedKeyPrefix}:${authorScopedUrl}`,
+        url: authorScopedUrl,
+        kind: authorScopedKind,
+      });
+      return [...queued.values()];
+    }
+
+    persistOfficialSourceHarvest(
+      snapshot,
+      baseUrl,
+      parsed.authorHandle,
+      parsed.entries
+        .filter((entry) => typeof entry.score !== 'number' || entry.score >= 100)
+        .map((entry) => entry.evaluationId),
+    );
+
+    for (const entry of parsed.entries) {
+      if (typeof entry.score === 'number' && entry.score < 100) {
+        continue;
+      }
+
+      queued.set(`official-evaluation:${entry.evaluationId}`, {
+        key: `official-evaluation:${entry.evaluationId}`,
+        url: new URL(`/detalii-evaluare/${entry.evaluationId}`, baseUrl).toString(),
+        kind: 'official-evaluation-detail',
+      });
+    }
+
+    for (const nextPageUrl of parsed.nextPageUrls) {
+      queued.set(`official-source-list:${nextPageUrl}`, {
+        key: `official-source-list:${nextPageUrl}`,
+        url: nextPageUrl,
+        kind: 'official-source-list',
+      });
+    }
+
+    return [...queued.values()];
+  }
+
+  return [];
+}
+
+function persistOfficialSourceHarvest(
+  snapshot: SnapshotLayout,
+  sourceListUrl: string,
+  authorHandle: string | undefined,
+  qualifyingEvaluationIds: number[],
+): void {
+  const authorScopedMatch = new URL(sourceListUrl).pathname.match(
+    /^\/solutii\/user\/([^/?#]+)\/problema\/(\d+)\/([^/?#]+)/,
+  );
+  if (!authorScopedMatch?.[2] || !authorScopedMatch[3]) {
+    return;
+  }
+
+  const problemId = Number(authorScopedMatch[2]);
+  const slug = authorScopedMatch[3];
+  mergeJsonRecord<ProblemRecord>(
+    join(snapshot.normalizedRoot, 'problems'),
+    `problem-${problemId}.json`,
+    (current) => ({
+      ...(current ?? createPlaceholderProblem(problemId, slug)),
+      officialSourceHarvest: {
+        sourceListHarvested: true,
+        sourceListPageUrl: sourceListUrl,
+        authorHandle: authorHandle ?? authorScopedMatch[1],
+        qualifyingEvaluationIds: [...new Set(qualifyingEvaluationIds)].sort((left, right) => left - right),
+      },
+    }),
+  );
 }
 
 function normalizeNavigableUrl(
@@ -1045,11 +1335,18 @@ function isMeaningfulNavigableUrl(
   url: URL,
 ): boolean {
   const pathname = normalizePathname(url.pathname);
+  if (isProblemSourceListUrl(url.toString())) {
+    return false;
+  }
   if (
     pathname.startsWith('/articole')
     || pathname.startsWith('/ajutor')
+    || pathname.startsWith('/clasa-mea')
     || pathname.startsWith('/editare-cont')
+    || pathname === '/logout.php'
     || pathname.startsWith('/resurse')
+    || pathname.startsWith('/solutii/clasa')
+    || pathname.startsWith('/teme/rezolvare')
     || pathname === '/php/gravatar.php'
   ) {
     return false;
@@ -1192,6 +1489,9 @@ function inferPageKind(url: string): CrawlQueueInput['kind'] {
   if (/^\/solutii\/user\/[^/]+/.test(parsed.pathname)) {
     return 'user-solutions';
   }
+  if (/^\/solutii\/problema\/\d+\/[^/]+/.test(parsed.pathname)) {
+    return 'official-source-list';
+  }
   if (/^\/detalii-evaluare\/\d+/.test(parsed.pathname)) {
     return 'evaluation-detail';
   }
@@ -1202,7 +1502,7 @@ function inferTemplate(
   url: string,
   kind: CrawlQueueInput['kind'],
 ): MirrorRouteRecord['template'] {
-  if (kind === 'evaluation-detail') {
+  if (kind === 'evaluation-detail' || kind === 'official-evaluation-detail') {
     return 'evaluation';
   }
   if (kind === 'user-profile' || kind === 'user-solutions') {
@@ -1252,6 +1552,27 @@ function createPlaceholderProblem(problemId: number, slug: string): ProblemRecor
     linkedAssets: [],
     metadata: {},
   };
+}
+
+function mergeLanguageSourceIds(
+  current: Record<string, string[]> | undefined,
+  incoming: Record<string, string[]>,
+): Record<string, string[]> {
+  const merged: Record<string, string[]> = {};
+  for (const language of new Set([
+    ...Object.keys(current ?? {}),
+    ...Object.keys(incoming),
+  ])) {
+    merged[language] = [...new Set([
+      ...((current ?? {})[language] ?? []),
+      ...(incoming[language] ?? []),
+    ])].sort();
+  }
+  return merged;
+}
+
+function isProblemSourceListUrl(url: string): boolean {
+  return /^\/solutii\/problema\/\d+\/[^/?#]+/i.test(new URL(url).pathname);
 }
 
 function mergeLanguageSolutions(
@@ -1319,43 +1640,7 @@ function maxDefinedNumber(left: number | undefined, right: number | undefined): 
   return Math.max(left, right);
 }
 
-function detectSuspicionFlags(sourceCode?: string): string[] {
-  if (!sourceCode) {
-    return [];
-  }
-
-  const flags = new Set<string>();
-  const normalized = sourceCode.toLowerCase();
-  if (normalized.length < 40) {
-    flags.add('tiny-source');
-  }
-
-  const printsConstant =
-    /(cout\s*<<\s*["'\d]|printf\s*\(\s*["'\d]|print\s*\(\s*["'\d])/.test(normalized);
-  const readsInput = /(cin\s*>>|scanf\s*\(|input\s*\(|std::getline|getline\s*\()/i.test(sourceCode);
-  if (printsConstant && !readsInput) {
-    flags.add('constant-output');
-  }
-
-  const exactBranching =
-    readsInput
-    && /(if\s*\([^)]*(?:==|<=|>=)\s*["'\d]|case\s+["'\d]|switch\s*\()/i.test(sourceCode);
-  if (exactBranching) {
-    flags.add('input-branching');
-  }
-
-  const literalPairs = normalized.match(/(["'][^"']+["']|\b\d{2,}\b)/g) ?? [];
-  if (readsInput && literalPairs.length >= 8) {
-    flags.add('literal-pairs');
-  }
-
-  const lookupTableLiterals = normalized.match(/\{[^{}]*(?:\d+\s*,\s*){6,}\d+[^{}]*\}/g) ?? [];
-  if (lookupTableLiterals.length > 0 && normalized.length < 400) {
-    flags.add('lookup-table');
-  }
-
-  return [...flags];
-}
+export { detectSuspicionFlags } from './source-suspicion.js';
 
 function readManifestValue(
   manifestPath: string,

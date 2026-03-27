@@ -15,6 +15,7 @@ import type {
   ProblemCoverageRecord,
 } from '../../types/records.js';
 import type {
+  GuiCoverageArchiveStateFilter,
   GuiCoverageDetail,
   GuiCoverageEditorialFilter,
   GuiCoverageListing,
@@ -22,6 +23,7 @@ import type {
   GuiCoverageRecord,
   GuiCoverageSolvedFilter,
   GuiCoverageSummary,
+  GuiCoverageTestsStatusFilter,
 } from '../shared/types.js';
 
 const DEFAULT_LIST_LIMIT = 100;
@@ -37,9 +39,11 @@ export interface ListCoverageOptions extends ExploreCoverageOptions {
   solved?: GuiCoverageSolvedFilter;
   testsFragmentArchived?: GuiCoveragePresenceFilter;
   visibleTestsCaptured?: GuiCoveragePresenceFilter;
+  testsCoverageStatus?: GuiCoverageTestsStatusFilter;
   officialSourceArchived?: GuiCoveragePresenceFilter;
   userSourceArchived?: GuiCoveragePresenceFilter;
   editorialAvailability?: GuiCoverageEditorialFilter;
+  archiveCompletenessStatus?: GuiCoverageArchiveStateFilter;
   grade?: number;
 }
 
@@ -53,6 +57,45 @@ export function getCoverageExplorerSummary(
 ): GuiCoverageSummary {
   const context = resolveCoverageContext(workspaceRoot, options.snapshotId);
   const gapReport = readProblemCoverageGapReport(context.layout.normalizedRoot);
+  const derivedStatusCounts = context.index.records.reduce(
+    (accumulator, record) => {
+      const officialSourceStatus =
+        record.officialSourceStatus ?? deriveOfficialSourceStatus(record);
+      const testsCoverageStatus =
+        record.testsCoverageStatus ?? deriveTestsCoverageStatus(record);
+      const archiveCompletenessStatus =
+        record.archiveCompletenessStatus ?? deriveArchiveCompletenessStatus(record);
+
+      if (archiveCompletenessStatus === 'complete') {
+        accumulator.completeProblemCount += 1;
+      }
+      if (record.solvedByMe && archiveCompletenessStatus !== 'complete') {
+        accumulator.incompleteSolvedProblemCount += 1;
+      }
+      if (archiveCompletenessStatus === 'missing-official-source') {
+        accumulator.missingOfficialSourceCaptureCount += 1;
+      }
+      if (officialSourceStatus === 'not-available-upstream') {
+        accumulator.officialSourceUnavailableUpstreamCount += 1;
+      }
+      if (testsCoverageStatus === 'not-captured-yet') {
+        accumulator.missingTestsCaptureCount += 1;
+      }
+      if (testsCoverageStatus === 'not-available-upstream') {
+        accumulator.testsUnavailableUpstreamCount += 1;
+      }
+
+      return accumulator;
+    },
+    {
+      completeProblemCount: 0,
+      incompleteSolvedProblemCount: 0,
+      missingOfficialSourceCaptureCount: 0,
+      officialSourceUnavailableUpstreamCount: 0,
+      missingTestsCaptureCount: 0,
+      testsUnavailableUpstreamCount: 0,
+    },
+  );
   const unsolvedProblemIds =
     gapReport?.unsolvedProblemIds
     ?? context.index.records.filter((record) => !record.solvedByMe).map((record) => record.problemId);
@@ -64,7 +107,7 @@ export function getCoverageExplorerSummary(
   const solvedByMeMissingUserSourceProblemIds =
     gapReport?.solvedByMeMissingUserSource.map((entry) => entry.problemId)
     ?? context.index.records
-      .filter((record) => record.solvedByMe && !record.userSourceArchived)
+      .filter((record) => (record.missingTrustworthyUserSourceLanguages?.length ?? 0) > 0)
       .map((record) => record.problemId);
 
   return {
@@ -80,6 +123,7 @@ export function getCoverageExplorerSummary(
     unsolvedProblemIds,
     missingOfficialSourceProblemIds,
     solvedByMeMissingUserSourceProblemIds,
+    ...derivedStatusCounts,
     ...context.index.totals,
   };
 }
@@ -160,9 +204,9 @@ export function readCoverageExplorerRecord(
           'evaluations',
           `evaluation-${evaluationId}.json`,
         )),
-      officialSourceFilePaths: record.officialSourceIds.map((sourceId) =>
+      officialSourceFilePaths: (record.officialSourceIds ?? []).map((sourceId) =>
         join(context.layout.normalizedRoot, 'sources', `${sourceId}.json`)),
-      userSourceFilePaths: record.userSourceIds.map((sourceId) =>
+      userSourceFilePaths: (record.userSourceIds ?? []).map((sourceId) =>
         join(context.layout.normalizedRoot, 'sources', `${sourceId}.json`)),
     },
   };
@@ -210,10 +254,43 @@ function toGuiCoverageRecord(record: ProblemCoverageRecord): GuiCoverageRecord {
     exampleTestsAvailableCount: record.exampleTestsAvailableCount,
     visibleTestsCapturedCount: record.visibleTestsCapturedCount,
     evaluationObservedTestsCount: record.evaluationObservedTestsCount,
+    effectiveTestsAvailableCount:
+      record.effectiveTestsAvailableCount
+      ?? record.visibleTestsCapturedCount
+      ?? record.exampleTestsAvailableCount
+      ?? 0,
+    testsCoverageStatus: record.testsCoverageStatus ?? deriveTestsCoverageStatus(record),
     officialSolutionPresent: record.officialSolutionPresent,
     officialSourceArchived: record.officialSourceArchived,
+    officialSourceLanguages: record.officialSourceLanguages ?? [],
+    officialSourceStatus:
+      record.officialSourceStatus
+      ?? deriveOfficialSourceStatus(record),
     userSourceArchived: record.userSourceArchived,
+    userSourceLanguages: record.userSourceLanguages ?? [],
+    requiredTrustworthyUserSourceLanguages:
+      record.requiredTrustworthyUserSourceLanguages
+      ?? deriveRequiredTrustworthyLanguages(record),
+    trustworthyUserSourceLanguages: record.trustworthyUserSourceLanguages ?? [],
+    bestTrustworthyUserPerLanguage:
+      record.bestTrustworthyUserPerLanguage ?? {},
+    missingTrustworthyUserSourceLanguages:
+      record.missingTrustworthyUserSourceLanguages ?? [],
+    archiveCompletenessStatus:
+      record.archiveCompletenessStatus
+      ?? deriveArchiveCompletenessStatus(record),
     editorialAvailability: record.editorialAvailability,
+    testsAvailable:
+      record.testsAvailable
+      ?? record.testsFragmentArchived
+      ?? ((record.exampleTestsAvailableCount ?? 0) > 0),
+    unsolvedByConfiguredHandle:
+      record.unsolvedByConfiguredHandle
+      ?? !record.solvedByMe,
+    officialSourceBlocked: record.officialSourceBlocked ?? false,
+    officialSourceBlockedReason: record.officialSourceBlockedReason,
+    notArchivedYet: record.notArchivedYet ?? false,
+    newSinceBaseline: record.newSinceBaseline ?? false,
     notes: record.notes,
   };
 }
@@ -241,6 +318,13 @@ function matchesCoverageFilters(
     return false;
   }
   if (
+    options.testsCoverageStatus
+    && options.testsCoverageStatus !== 'all'
+    && (record.testsCoverageStatus ?? deriveTestsCoverageStatus(record)) !== options.testsCoverageStatus
+  ) {
+    return false;
+  }
+  if (
     !matchesPresenceFilter(
       record.officialSourceArchived,
       options.officialSourceArchived,
@@ -261,6 +345,14 @@ function matchesCoverageFilters(
   if (typeof options.grade === 'number' && record.grade !== options.grade) {
     return false;
   }
+  if (
+    options.archiveCompletenessStatus
+    && options.archiveCompletenessStatus !== 'all'
+    && (record.archiveCompletenessStatus ?? deriveArchiveCompletenessStatus(record))
+      !== options.archiveCompletenessStatus
+  ) {
+    return false;
+  }
   if (!query) {
     return true;
   }
@@ -276,6 +368,98 @@ function matchesCoverageFilters(
     .join(' ')
     .toLowerCase();
   return haystack.includes(query);
+}
+
+function deriveTestsCoverageStatus(
+  record: Pick<
+    ProblemCoverageRecord,
+    | 'testsFragmentArchived'
+    | 'exampleTestsAvailableCount'
+    | 'visibleTestsCapturedCount'
+    | 'evaluationObservedTestsCount'
+    | 'effectiveTestsAvailableCount'
+  >,
+): GuiCoverageRecord['testsCoverageStatus'] {
+  if (
+    (record.effectiveTestsAvailableCount ?? 0) > 0
+    || (record.exampleTestsAvailableCount ?? 0) > 0
+    || (record.visibleTestsCapturedCount ?? 0) > 0
+    || (record.evaluationObservedTestsCount ?? 0) > 0
+  ) {
+    return 'captured';
+  }
+  if (record.testsFragmentArchived) {
+    return 'not-available-upstream';
+  }
+  return 'not-captured-yet';
+}
+
+function deriveOfficialSourceStatus(
+  record: Pick<
+    ProblemCoverageRecord,
+    'officialSourceArchived' | 'editorialAvailability' | 'sourceListUrl'
+  >,
+): GuiCoverageRecord['officialSourceStatus'] {
+  if (record.officialSourceArchived) {
+    return 'archived';
+  }
+  if (record.editorialAvailability === 'hidden' || record.editorialAvailability === 'restricted') {
+    return 'restricted-upstream';
+  }
+  if (!record.sourceListUrl) {
+    return 'not-available-upstream';
+  }
+  return 'not-captured-yet';
+}
+
+function deriveRequiredTrustworthyLanguages(
+  record: Pick<
+    ProblemCoverageRecord,
+    'missingTrustworthyUserSourceLanguages' | 'trustworthyUserSourceLanguages'
+  >,
+): string[] {
+  return [...new Set([
+    ...(record.trustworthyUserSourceLanguages ?? []),
+    ...(record.missingTrustworthyUserSourceLanguages ?? []),
+  ])].sort();
+}
+
+function deriveArchiveCompletenessStatus(
+  record: Pick<
+    ProblemCoverageRecord,
+    | 'notArchivedYet'
+    | 'solvedByMe'
+    | 'missingTrustworthyUserSourceLanguages'
+    | 'userSourceArchived'
+    | 'testsFragmentArchived'
+    | 'exampleTestsAvailableCount'
+    | 'visibleTestsCapturedCount'
+    | 'evaluationObservedTestsCount'
+    | 'effectiveTestsAvailableCount'
+    | 'officialSourceArchived'
+    | 'editorialAvailability'
+    | 'sourceListUrl'
+  >,
+): GuiCoverageRecord['archiveCompletenessStatus'] {
+  if (record.notArchivedYet) {
+    return 'not-archived-yet';
+  }
+  if (!record.solvedByMe) {
+    return 'unsolved';
+  }
+  if (
+    (record.missingTrustworthyUserSourceLanguages?.length ?? 0) > 0
+    || !record.userSourceArchived
+  ) {
+    return 'missing-user-source';
+  }
+  if (deriveOfficialSourceStatus(record) === 'not-captured-yet') {
+    return 'missing-official-source';
+  }
+  if (deriveTestsCoverageStatus(record) === 'not-captured-yet') {
+    return 'incomplete';
+  }
+  return 'complete';
 }
 
 function matchesPresenceFilter(

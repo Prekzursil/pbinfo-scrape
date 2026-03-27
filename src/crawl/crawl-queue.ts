@@ -105,7 +105,18 @@ export class CrawlQueue {
             FROM crawl_queue
             WHERE status = 'pending'
               AND (visible_at IS NULL OR visible_at <= ?)
-            ORDER BY created_at ASC, id ASC
+            ORDER BY
+              CASE kind
+                WHEN 'evaluation-detail' THEN 0
+                WHEN 'official-evaluation-detail' THEN 0
+                WHEN 'user-solutions' THEN 1
+                WHEN 'official-source-list' THEN 1
+                WHEN 'public-page' THEN 2
+                WHEN 'public-asset' THEN 3
+                ELSE 4
+              END ASC,
+              created_at ASC,
+              id ASC
             LIMIT 1
           `)
           .get(nowIso) as QueueRow | undefined;

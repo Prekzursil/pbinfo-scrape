@@ -2,6 +2,7 @@ import {
   buildSourceSignature,
   normalizeLanguage,
 } from './source-normalization.js';
+import { detectSuspicionFlags } from '../crawl/source-suspicion.js';
 import type {
   RankedProblemSubmissions,
   SourceRecord,
@@ -16,6 +17,7 @@ interface RankedSubmissionCandidate extends SubmissionRecord {
   normalizedLanguage: string;
   dedupeKey: string;
   normalizedSourceHash?: string;
+  effectiveSuspicionFlags: string[];
 }
 
 export function rankProblemSubmissions(
@@ -34,7 +36,7 @@ export function rankProblemSubmissions(
   const { representatives, duplicateEvaluationIds } = dedupeCandidates(candidates, forcedBest);
 
   const trustworthyPerLanguage = rankPerLanguage(
-    representatives.filter((candidate) => candidate.suspicionFlags.length === 0),
+    representatives.filter(isTrustworthyCandidate),
     forcedBest,
     compareTrustworthyCandidates,
   );
@@ -51,7 +53,7 @@ export function rankProblemSubmissions(
     compareFastCandidates(left, right, forcedBest),
   )[0];
   const suspiciousCandidateEvaluationIds = representatives
-    .filter((candidate) => candidate.suspicionFlags.length > 0)
+    .filter((candidate) => candidate.effectiveSuspicionFlags.length > 0)
     .sort((left, right) => compareFastCandidates(left, right, forcedBest))
     .map((candidate) => candidate.evaluationId);
 
@@ -89,6 +91,12 @@ function toCandidate(submission: SubmissionRecord): RankedSubmissionCandidate {
     normalizedLanguage,
     normalizedSourceHash: signature?.normalizedSourceHash,
     dedupeKey,
+    effectiveSuspicionFlags: normalizeBlockingSuspicionFlags(
+      submission.sourceCode
+        ? detectSuspicionFlags(submission.sourceCode)
+        : submission.suspicionFlags,
+      submission.sourceCode,
+    ),
   };
 }
 
@@ -188,7 +196,7 @@ function compareFastCandidates(
 }
 
 function candidateScore(
-  submission: SubmissionRecord,
+  submission: SubmissionRecord | RankedSubmissionCandidate,
   forcedEvaluationId: number | undefined,
   prioritizeTrustworthiness: boolean,
 ): number[] {
@@ -197,7 +205,7 @@ function candidateScore(
     submission.evaluationId === forcedEvaluationId
       ? 1
       : 0;
-  const trustworthyBoost = submission.suspicionFlags.length === 0 ? 1 : 0;
+  const trustworthyBoost = getEffectiveSuspicionFlags(submission).length === 0 ? 1 : 0;
   const acceptedScore = submission.score >= 100 ? 1 : 0;
   const runtimeRank =
     submission.runtimeSeconds !== undefined
@@ -255,7 +263,7 @@ function rankOfficialSources(
   const bestOfficialPerLanguage: Record<string, string> = {};
   const buckets = new Map<string, SourceRecord[]>();
   for (const source of sources) {
-    if (source.kind !== 'official') {
+    if (!isCoverageSatisfyingOfficialSource(source)) {
       continue;
     }
 
@@ -290,8 +298,65 @@ function compareOfficialSources(left: SourceRecord, right: SourceRecord): number
 
 function scoreOfficialSource(source: SourceRecord): number[] {
   return [
+    source.score !== undefined && source.score >= 100 ? 1 : 0,
     source.sourceAvailable ? 1 : 0,
-    source.suspicionFlags.length === 0 ? 1 : 0,
+    getEffectiveSuspicionFlags(source).length === 0 ? 1 : 0,
     source.sourceLength ?? source.sourceCode?.length ?? 0,
   ];
+}
+
+function isTrustworthyCandidate(candidate: RankedSubmissionCandidate): boolean {
+  return candidate.effectiveSuspicionFlags.length === 0
+    && candidate.score >= 100
+    && candidate.sourceAvailable;
+}
+
+function isCoverageSatisfyingOfficialSource(source: SourceRecord): boolean {
+  return source.kind === 'official'
+    && source.sourceAvailable
+    && source.score !== undefined
+    && source.score >= 100
+    && source.provenanceType !== 'official-fragment';
+}
+
+function getEffectiveSuspicionFlags(
+  submission: Pick<SubmissionRecord, 'sourceCode' | 'suspicionFlags'> | RankedSubmissionCandidate | SourceRecord,
+): string[] {
+  if ('effectiveSuspicionFlags' in submission) {
+    return submission.effectiveSuspicionFlags;
+  }
+
+  return normalizeBlockingSuspicionFlags(
+    submission.sourceCode
+      ? detectSuspicionFlags(submission.sourceCode)
+      : submission.suspicionFlags,
+    submission.sourceCode,
+  );
+}
+
+function normalizeBlockingSuspicionFlags(
+  flags: string[] | undefined,
+  sourceCode?: string,
+): string[] {
+  const uniqueFlags = [...new Set(flags ?? [])];
+  const weakOnlyFlags = new Set(['tiny-source', 'constant-output', 'lookup-table']);
+  if (uniqueFlags.length > 0 && uniqueFlags.every((flag) => weakOnlyFlags.has(flag))) {
+    return [];
+  }
+
+  const normalizedSource = sourceCode?.toLowerCase() ?? '';
+  const compactLength = normalizedSource.replace(/\s+/g, ' ').trim().length;
+  const relaxedBranchingOnly =
+    uniqueFlags.length > 0
+    && uniqueFlags.every((flag) => flag === 'input-branching')
+    && compactLength >= 180;
+  const relaxedBranchingAndLiteralPairs =
+    uniqueFlags.length > 0
+    && uniqueFlags.every((flag) => flag === 'input-branching' || flag === 'literal-pairs')
+    && compactLength >= 180;
+  if (relaxedBranchingOnly || relaxedBranchingAndLiteralPairs) {
+    return [];
+  }
+
+  return uniqueFlags;
 }

@@ -323,7 +323,8 @@ export function createDesktopController(
         });
         if (!result.success) {
           throw new Error(
-            'PBInfo credential login did not produce a successful redirect.',
+            result.failureReason
+            ?? 'PBInfo credential login did not produce an authenticated session.',
           );
         }
 
