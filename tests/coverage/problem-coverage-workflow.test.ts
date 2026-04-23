@@ -2141,6 +2141,143 @@ describe('runProblemCoverageWorkflow', () => {
     );
   });
 
+  test('derives progressState + bestScore + evaluationTimeline + languagesTried from evaluations', async () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-coverage-progress-'));
+    tempDirs.push(workspaceRoot);
+
+    mkdirSync(join(workspaceRoot, '.local'), { recursive: true });
+    writeFileSync(
+      join(workspaceRoot, '.local', 'pbinfo.local.json'),
+      JSON.stringify({ crawl: { userHandle: 'Prekzursil' } }, null, 2),
+      'utf8',
+    );
+
+    const config = loadLocalConfig(workspaceRoot);
+    const snapshot = prepareSnapshot(config, {
+      snapshotId: 'acceptance-20260310b',
+      scope: 'all',
+      now: new Date('2026-03-10T00:00:00.000Z'),
+    });
+
+    mkdirSync(join(snapshot.normalizedRoot, 'problems'), { recursive: true });
+    mkdirSync(join(snapshot.normalizedRoot, 'pages'), { recursive: true });
+    mkdirSync(join(snapshot.normalizedRoot, 'evaluations'), { recursive: true });
+    mkdirSync(join(snapshot.normalizedRoot, 'tests'), { recursive: true });
+    mkdirSync(join(snapshot.normalizedRoot, 'rankings', 'problems'), { recursive: true });
+    mkdirSync(join(snapshot.normalizedRoot, 'sources'), { recursive: true });
+    mkdirSync(join(snapshot.normalizedRoot, 'user-solutions'), { recursive: true });
+
+    // Problem with 3 evaluations: partial 60pt cpp, partial 80pt cpp, solved 100pt py
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'problems', 'problem-42.json'),
+      JSON.stringify(
+        {
+          id: 42,
+          slug: 'maxchain',
+          name: 'MaxChain',
+          canonicalUrl: 'https://www.pbinfo.ro/probleme/42/maxchain',
+          categoryChain: [],
+          tags: [],
+          sections: [],
+          examples: [],
+          constraints: [],
+          editorialAvailability: 'unknown',
+          officialSolutions: {},
+          visibleTests: [],
+          linkedAssets: [],
+          metadata: {},
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+
+    const evaluations = [
+      { id: 500, lang: 'cpp', score: 60, fetched: '2026-03-05T10:00:00.000Z' },
+      { id: 510, lang: 'cpp', score: 80, fetched: '2026-03-07T10:00:00.000Z' },
+      { id: 520, lang: 'py', score: 100, fetched: '2026-03-09T10:00:00.000Z' },
+    ];
+    for (const e of evaluations) {
+      writeFileSync(
+        join(snapshot.normalizedRoot, 'evaluations', `evaluation-${e.id}.json`),
+        JSON.stringify(
+          {
+            evaluationId: e.id,
+            problemId: 42,
+            problemSlug: 'maxchain',
+            problemName: 'MaxChain',
+            language: e.lang,
+            user: 'Prekzursil',
+            score: e.score,
+            verdictSummary: e.score >= 100 ? 'accepted' : 'partial',
+            sourceAvailable: e.score >= 100,
+            suspicionFlags: [],
+            tests: [],
+            fetchedAt: e.fetched,
+            provenance: [`https://www.pbinfo.ro/detalii-evaluare/${e.id}`],
+          },
+          null,
+          2,
+        ),
+        'utf8',
+      );
+    }
+
+    // User-solutions feed that matches handle so solvedByMe derivation triggers
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'user-solutions', 'user-prekzursil.json'),
+      JSON.stringify(
+        {
+          user: 'Prekzursil',
+          entries: evaluations.map((e) => ({
+            user: 'Prekzursil',
+            problemId: 42,
+            evaluationId: e.id,
+            score: e.score,
+          })),
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+
+    await runProblemCoverageWorkflow(workspaceRoot, snapshot.snapshotId);
+
+    const coverage = JSON.parse(
+      readFileSync(
+        join(snapshot.normalizedRoot, 'problem-coverage', 'problem-42.json'),
+        'utf8',
+      ),
+    );
+
+    expect(coverage.progressState).toBe('solved');
+    expect(coverage.bestScore).toBe(100);
+    expect(coverage.lastAttemptAt).toBe('2026-03-09T10:00:00.000Z');
+    expect(coverage.languagesTried).toEqual(['cpp', 'py']);
+    expect(coverage.evaluationTimeline).toHaveLength(3);
+    // newest first
+    expect(coverage.evaluationTimeline[0]?.evaluationId).toBe(520);
+    expect(coverage.evaluationTimeline[0]?.sourceAvailable).toBe(true);
+    expect(coverage.evaluationTimeline[1]?.evaluationId).toBe(510);
+    // 80pt partial -> sourceAvailable gated to false even if evaluation record had it true
+    expect(coverage.evaluationTimeline[1]?.sourceAvailable).toBe(false);
+    expect(coverage.evaluationTimeline[2]?.evaluationId).toBe(500);
+
+    const index = JSON.parse(
+      readFileSync(
+        join(snapshot.normalizedRoot, 'problem-coverage', 'index.json'),
+        'utf8',
+      ),
+    );
+    expect(index.totals.progressStateCounts).toEqual({
+      solved: 1,
+      partial: 0,
+      notAttempted: 0,
+    });
+  });
+
   test('derives official harvest availability from archived official-source-list pages when problem metadata is missing', async () => {
     const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-coverage-official-harvest-derived-'));
     tempDirs.push(workspaceRoot);

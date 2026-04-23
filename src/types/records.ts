@@ -248,6 +248,21 @@ export type ProblemArchiveCompletenessStatus =
   | 'missing-user-source'
   | 'incomplete';
 
+export type ProgressState = 'solved' | 'partial' | 'not-attempted';
+
+export interface EvaluationTimelineEntry {
+  evaluationId: number;
+  language: string;
+  score: number;
+  verdictSummary: string;
+  submittedAt?: string;
+  fetchedAt?: string;
+  runtimeSeconds?: number;
+  memoryKb?: number;
+  /** True only for 100-pt evaluations per the operator 100pt-only-source rule. */
+  sourceAvailable: boolean;
+}
+
 export interface ProblemCoverageRecord {
   snapshotId: string;
   problemId: number;
@@ -296,6 +311,22 @@ export interface ProblemCoverageRecord {
   evaluationIds: number[];
   bestUserOverallEvaluationId?: number;
   notes: string[];
+  /** New in full-archive-fix: progressState is a derived, UI-friendly roll-up
+   *  of solvedByMe + evaluationCount that the Coverage Explorer filter uses
+   *  directly. */
+  progressState?: ProgressState;
+  /** Max score (0..100) across the operator's evaluations for this problem. */
+  bestScore?: number;
+  /** ISO timestamp of the operator's most recent archived evaluation. */
+  lastAttemptAt?: string;
+  /** Compact per-submission trail, newest-first, for the detail pane. Empty
+   *  for problems with no archived evaluations. */
+  evaluationTimeline?: EvaluationTimelineEntry[];
+  /** Unique languages the operator has submitted in for this problem. */
+  languagesTried?: string[];
+  /** True iff a test folder (examples or visible tests) will be emitted by
+   *  the materializer for this problem. */
+  requiredTestsCaptured?: boolean;
 }
 
 export interface ProblemCoverageTotals {
@@ -314,6 +345,11 @@ export interface ProblemCoverageTotals {
   editorialVisibleCount: number;
   rankingPresentCount: number;
   newSinceBaselineCount: number;
+  progressStateCounts?: {
+    solved: number;
+    partial: number;
+    notAttempted: number;
+  };
 }
 
 export interface ProblemCoverageIndex {

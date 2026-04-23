@@ -19,6 +19,7 @@ import { normalizeLanguage } from '../ranking/source-normalization.js';
 import type {
   BestSubmissionRecord,
   EvaluationRecord,
+  EvaluationTimelineEntry,
   OfficialSourceHarvestRecord,
   ProblemArchiveCompletenessStatus,
   PageRecord,
@@ -29,6 +30,7 @@ import type {
   ProblemRecord,
   ProblemTestsCoverageStatus,
   ProblemTestsRecord,
+  ProgressState,
   SourceRecord,
 } from '../types/records.js';
 
@@ -376,9 +378,80 @@ function buildCoverageRecord(
       .sort((left, right) => right - left),
     bestUserOverallEvaluationId: context.ranking?.bestUserOverallEvaluationId,
     notes: [],
+    progressState: deriveProgressState(solvedByMe, context.evaluations.length),
+    bestScore: deriveBestScore(context.evaluations),
+    lastAttemptAt: deriveLastAttemptAt(context.evaluations),
+    evaluationTimeline: buildEvaluationTimeline(context.evaluations),
+    languagesTried: uniqueSorted(
+      context.evaluations.map((evaluation) => normalizeCoverageLanguage(evaluation.language)),
+    ),
+    requiredTestsCaptured: exampleTestsAvailableCount + visibleTestsCapturedCount > 0,
   };
   record.notes = deriveCoverageNotes(record);
   return record;
+}
+
+function deriveProgressState(solvedByMe: boolean, evaluationCount: number): ProgressState {
+  if (solvedByMe) {
+    return 'solved';
+  }
+  if (evaluationCount > 0) {
+    return 'partial';
+  }
+  return 'not-attempted';
+}
+
+function deriveBestScore(evaluations: ReadonlyArray<EvaluationRecord>): number {
+  let best = 0;
+  for (const evaluation of evaluations) {
+    if (Number.isFinite(evaluation.score) && evaluation.score > best) {
+      best = evaluation.score;
+    }
+  }
+  return best;
+}
+
+function deriveLastAttemptAt(
+  evaluations: ReadonlyArray<EvaluationRecord>,
+): string | undefined {
+  let latest: string | undefined;
+  for (const evaluation of evaluations) {
+    const candidate = evaluation.fetchedAt;
+    if (!candidate) {
+      continue;
+    }
+    if (!latest || candidate > latest) {
+      latest = candidate;
+    }
+  }
+  return latest;
+}
+
+function buildEvaluationTimeline(
+  evaluations: ReadonlyArray<EvaluationRecord>,
+): EvaluationTimelineEntry[] {
+  return evaluations
+    .map((evaluation): EvaluationTimelineEntry => ({
+      evaluationId: evaluation.evaluationId,
+      language: evaluation.language,
+      score: evaluation.score,
+      verdictSummary: evaluation.verdictSummary,
+      fetchedAt: evaluation.fetchedAt,
+      runtimeSeconds: evaluation.runtimeSeconds,
+      memoryKb: evaluation.memoryKb,
+      // Operator rule: only 100pt sources are retained; lower scores have
+      // metadata only. This mirrors the eventual storage gate.
+      sourceAvailable:
+        evaluation.sourceAvailable === true && evaluation.score >= 100,
+    }))
+    .sort((a, b) => {
+      const ta = a.fetchedAt ?? '';
+      const tb = b.fetchedAt ?? '';
+      if (ta && tb) {
+        return tb.localeCompare(ta);
+      }
+      return b.evaluationId - a.evaluationId;
+    });
 }
 
 function deriveCoverageNotes(record: ProblemCoverageRecord): string[] {
@@ -543,6 +616,13 @@ function summarizeCoverageRecords(
     ).length,
     rankingPresentCount: records.filter((record) => record.rankingPresent).length,
     newSinceBaselineCount: records.filter((record) => record.newSinceBaseline).length,
+    progressStateCounts: {
+      solved: records.filter((record) => record.progressState === 'solved').length,
+      partial: records.filter((record) => record.progressState === 'partial').length,
+      notAttempted: records.filter(
+        (record) => record.progressState === 'not-attempted' || record.progressState === undefined,
+      ).length,
+    },
   };
 }
 
