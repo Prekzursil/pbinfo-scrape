@@ -8,7 +8,10 @@ import type {
   GuiCoverageEditorialFilter,
   GuiCoverageListing,
   GuiCoveragePresenceFilter,
+  GuiCoverageProgressFilter,
   GuiCoverageSolvedFilter,
+  GuiCoverageSortDir,
+  GuiCoverageSortKey,
   GuiCoverageSummary,
   GuiCoverageTestsStatusFilter,
   GuiCrawlMode,
@@ -100,6 +103,12 @@ export interface DesktopBridge {
     editorialAvailability?: GuiCoverageEditorialFilter;
     archiveCompletenessStatus?: GuiCoverageArchiveStateFilter;
     grade?: number;
+    progressState?: GuiCoverageProgressFilter;
+    languagesTried?: string[];
+    bestScoreMin?: number;
+    bestScoreMax?: number;
+    sortBy?: GuiCoverageSortKey;
+    sortDir?: GuiCoverageSortDir;
   }) => Promise<GuiCoverageListing>;
   getCoverageRecord: (input: {
     snapshotId?: string;

@@ -33,7 +33,7 @@ Commit column records the short-sha when step is `done`.
 | 2.4 | Phase 2 `npm run verify` green + commit | todo | — | |
 | 3.1 | Backend handler filter/sort extension | todo | — | |
 | 3.2 | IPC contract update | done | (pending) | types.ts: progressState/bestScore/lastAttemptAt/timeline/languagesTried/requiredTestsCaptured + progressStateCounts + sortKey/sortDir + progress filter enum; both typechecks clean |
-| 3.3 | Renderer UX: filters, sorts, row icons, detail pane | todo | — | |
+| 3.3 | Renderer UX: filters, sorts, row icons, detail pane | in_progress | — | contracts/bridge/app wired; Progress + Sort-by + Sort-dir chip rows live in coverage-explorer.tsx; row icon strip + timeline + per-test detail pane pending |
 | 3.4 | Renderer RTL tests | todo | — | |
 | 3.5 | Phase 3 `npm run test:desktop-electron` green + commit | todo | — | |
 | 4.1 | BrowserView manager + hardened nav | todo | — | |

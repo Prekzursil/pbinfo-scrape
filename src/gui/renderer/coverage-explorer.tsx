@@ -6,8 +6,11 @@ import type {
   GuiCoverageEditorialFilter,
   GuiCoverageListing,
   GuiCoveragePresenceFilter,
+  GuiCoverageProgressFilter,
   GuiCoverageRecord,
   GuiCoverageSolvedFilter,
+  GuiCoverageSortDir,
+  GuiCoverageSortKey,
   GuiCoverageSummary,
   GuiCoverageTestsStatusFilter,
 } from '../shared/types.js';
@@ -23,6 +26,12 @@ export interface CoverageExplorerFilters {
   editorialAvailability: GuiCoverageEditorialFilter;
   archiveCompletenessStatus: GuiCoverageArchiveStateFilter;
   grade?: number;
+  progressState?: GuiCoverageProgressFilter;
+  languagesTried?: string[];
+  bestScoreMin?: number;
+  bestScoreMax?: number;
+  sortBy?: GuiCoverageSortKey;
+  sortDir?: GuiCoverageSortDir;
 }
 
 export interface CoverageExplorerPanelProps {
@@ -145,6 +154,42 @@ export function CoverageExplorerPanel(props: CoverageExplorerPanelProps) {
             ['all', 'All problems'],
             ['solved', 'Solved by archived handle'],
             ['unsolved', 'Unsolved'],
+          ]}
+        />
+        <SelectField
+          label="Progress"
+          value={filters.progressState ?? 'all'}
+          onChange={(value) =>
+            setFilter('progressState', value as GuiCoverageProgressFilter)
+          }
+          options={[
+            ['all', 'All'],
+            ['solved', 'Solved (100pt)'],
+            ['partial', 'Partial attempt (1-99pt)'],
+            ['not-attempted', 'Not attempted'],
+          ]}
+        />
+        <SelectField
+          label="Sort by"
+          value={filters.sortBy ?? 'problem-id'}
+          onChange={(value) => setFilter('sortBy', value as GuiCoverageSortKey)}
+          options={[
+            ['problem-id', 'Problem id'],
+            ['grade', 'Grade then id'],
+            ['best-score', 'Best score'],
+            ['last-attempt', 'Last attempt'],
+            ['name', 'Name (A-Z)'],
+            ['attempts', 'Attempts count'],
+            ['completeness', 'Completeness'],
+          ]}
+        />
+        <SelectField
+          label="Sort dir"
+          value={filters.sortDir ?? 'asc'}
+          onChange={(value) => setFilter('sortDir', value as GuiCoverageSortDir)}
+          options={[
+            ['asc', 'Ascending'],
+            ['desc', 'Descending'],
           ]}
         />
         <SelectField

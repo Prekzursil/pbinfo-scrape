@@ -51,6 +51,9 @@ export function App({ desktop }: AppProps) {
     userSourceArchived: 'all',
     editorialAvailability: 'all',
     archiveCompletenessStatus: 'all',
+    progressState: 'all',
+    sortBy: 'problem-id',
+    sortDir: 'asc',
   });
   const [coverageSummary, setCoverageSummary] = useState<GuiCoverageSummary | null>(null);
   const [coverageListing, setCoverageListing] = useState<GuiCoverageListing | null>(null);
@@ -270,6 +273,12 @@ export function App({ desktop }: AppProps) {
           editorialAvailability: coverageFilters.editorialAvailability,
           archiveCompletenessStatus: coverageFilters.archiveCompletenessStatus,
           grade: coverageFilters.grade,
+          progressState: coverageFilters.progressState,
+          languagesTried: coverageFilters.languagesTried,
+          bestScoreMin: coverageFilters.bestScoreMin,
+          bestScoreMax: coverageFilters.bestScoreMax,
+          sortBy: coverageFilters.sortBy,
+          sortDir: coverageFilters.sortDir,
           limit: 100,
         });
         if (cancelled) {

@@ -5,7 +5,10 @@ import {
   guiCoverageArchiveStateFilterSchema,
   guiCoverageEditorialFilterSchema,
   guiCoveragePresenceFilterSchema,
+  guiCoverageProgressFilterSchema,
   guiCoverageSolvedFilterSchema,
+  guiCoverageSortDirSchema,
+  guiCoverageSortKeySchema,
   guiCoverageTestsStatusFilterSchema,
   guiCrawlModeSchema,
   guiVerbosityModeSchema,
@@ -132,6 +135,12 @@ export const guiCoverageListInputSchema = z
     editorialAvailability: guiCoverageEditorialFilterSchema.optional(),
     archiveCompletenessStatus: guiCoverageArchiveStateFilterSchema.optional(),
     grade: z.number().int().positive().optional(),
+    progressState: guiCoverageProgressFilterSchema.optional(),
+    languagesTried: z.array(z.string().min(1)).optional(),
+    bestScoreMin: z.number().min(0).max(100).optional(),
+    bestScoreMax: z.number().min(0).max(100).optional(),
+    sortBy: guiCoverageSortKeySchema.optional(),
+    sortDir: guiCoverageSortDirSchema.optional(),
   })
   .strict();
 
