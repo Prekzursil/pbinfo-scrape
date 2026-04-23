@@ -1,11 +1,27 @@
 import { existsSync, readFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { basename, join, resolve, sep } from 'node:path';
 import { type Server } from 'node:http';
 
 import express from 'express';
 
 import { resolveReadableSnapshotLayout } from '../archive/storage.js';
 import { loadLocalConfig } from '../config/local-config.js';
+import { registerOverlayServerRoute } from './overlay-server.js';
+
+/**
+ * Returns true when `candidate`, resolved relative to `root`, stays inside
+ * `root`. Used only as a pre-flight existence check; express's `sendFile`
+ * receives the relative path + `{ root }` option which already prevents
+ * path traversal at the framework level.
+ */
+function isWithin(root: string, candidate: string): boolean {
+  const resolvedRoot = resolve(root);
+  const resolvedCandidate = resolve(resolvedRoot, candidate);
+  return (
+    resolvedCandidate === resolvedRoot
+    || resolvedCandidate.startsWith(resolvedRoot + sep)
+  );
+}
 
 export interface StartMirrorServerOptions {
   workspaceRoot: string;
@@ -31,13 +47,28 @@ export async function startMirrorServer(
     );
   }
 
+  registerOverlayServerRoute(app, snapshot);
+
   app.get('/_assets/:fileName', (request, response) => {
-    const filePath = join(snapshot.rawAssetsRoot, request.params.fileName);
-    if (!existsSync(filePath)) {
+    // Strip any directory components from the user-supplied name before
+    // handing to express; basename cannot contain a separator.
+    const requestedName = basename(request.params.fileName);
+    if (!requestedName || requestedName === '.' || requestedName === '..') {
+      response.status(400).send('invalid asset name');
+      return;
+    }
+    if (!isWithin(snapshot.rawAssetsRoot, requestedName)) {
+      response.status(400).send('invalid asset path');
+      return;
+    }
+    if (!existsSync(join(snapshot.rawAssetsRoot, requestedName))) {
       response.status(404).send('asset not found');
       return;
     }
-    response.sendFile(filePath);
+    // Express's sendFile with { root } rejects any relative path that would
+    // escape the configured root, independently of whatever value reached
+    // the handler.
+    response.sendFile(requestedName, { root: snapshot.rawAssetsRoot });
   });
 
   app.get('*route', (request, response) => {
@@ -48,21 +79,22 @@ export async function startMirrorServer(
       return;
     }
 
-    const preferredPath = match.mirrorFile ? join(snapshot.mirrorRoot, match.mirrorFile) : undefined;
-    if (preferredPath && existsSync(preferredPath)) {
-      response.sendFile(preferredPath);
+    const mirrorBody = loadValidatedBody(snapshot.mirrorRoot, match.mirrorFile);
+    if (mirrorBody !== null) {
+      response.setHeader('Content-Type', 'text/html; charset=utf-8');
+      response.send(mirrorBody);
       return;
     }
 
-    const rawPath = join(snapshot.rawPagesRoot, match.sourceFile);
-    if (!existsSync(rawPath)) {
+    const rawBody = loadValidatedBody(snapshot.rawPagesRoot, match.sourceFile);
+    if (rawBody === null) {
       response.status(500).send(
         `Archived source page is missing for route ${routeKey}. Rebuild the mirror after relinking raw artifacts.`,
       );
       return;
     }
-
-    response.sendFile(rawPath);
+    response.setHeader('Content-Type', 'text/html; charset=utf-8');
+    response.send(rawBody);
   });
 
   const server = await new Promise<Server>((resolve, reject) => {
@@ -89,6 +121,35 @@ export async function startMirrorServer(
       });
     },
   };
+}
+
+/**
+ * Reads the referenced file into memory only when the candidate path stays
+ * inside the allowed root. Rejects any path with `..`, null bytes, or absolute
+ * segment injections. Returns the buffer on success, `null` on any failure.
+ * Using readFileSync + res.send() instead of res.sendFile() removes the
+ * CWE-73 surface area entirely — no path ever reaches the static-file
+ * pipeline.
+ */
+function loadValidatedBody(root: string, candidate: string | undefined): Buffer | null {
+  if (typeof candidate !== 'string' || candidate.length === 0) {
+    return null;
+  }
+  if (candidate.includes('..') || candidate.includes('\0')) {
+    return null;
+  }
+  if (!isWithin(root, candidate)) {
+    return null;
+  }
+  const absolute = join(root, candidate);
+  if (!existsSync(absolute)) {
+    return null;
+  }
+  try {
+    return readFileSync(absolute);
+  } catch {
+    return null;
+  }
 }
 
 function readRoutes(routesPath: string): Array<{
