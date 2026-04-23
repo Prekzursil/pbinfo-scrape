@@ -487,3 +487,35 @@ export type GuiCoverageListing = z.infer<typeof guiCoverageListingSchema>;
 export type GuiCoverageDetail = z.infer<typeof guiCoverageDetailSchema>;
 export type GuiJobEvent = z.infer<typeof guiJobEventSchema>;
 export type GuiJobRecord = z.infer<typeof guiJobRecordSchema>;
+
+// Library browser redesign (2026-04-23): archive + theme shared types.
+
+export interface GuiArchiveState {
+  readonly found: boolean;
+  readonly archiveRoot?: string;
+  readonly snapshotId?: string;
+  readonly probedPaths: readonly string[];
+  readonly catalogSnapshots?: ReadonlyArray<{
+    readonly id: string;
+    readonly status: string;
+    readonly createdAt?: string;
+    readonly label?: string;
+  }>;
+}
+
+export interface ArchiveChangedEvent {
+  readonly archiveRoot: string;
+  readonly snapshotId?: string;
+  readonly cause: 'manual-override' | 'refresh-complete' | 'snapshot-switch';
+}
+
+export interface ThemeChangedEvent {
+  readonly effective: 'light' | 'dark';
+}
+
+export type ThemePreference = 'auto' | 'light' | 'dark';
+
+export interface LibraryThemeResult {
+  readonly effective: 'light' | 'dark';
+  readonly preference: ThemePreference;
+}

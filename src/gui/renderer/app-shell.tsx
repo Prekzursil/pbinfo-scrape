@@ -649,7 +649,7 @@ function titleFor(view: AppShellView): string {
   switch (view) {
     case 'home':
       return 'Home';
-    case 'problems':
+    case 'coverage':
       return 'Problems';
     case 'browse':
       return 'Browse';
@@ -664,7 +664,7 @@ function subtitleFor(view: AppShellView): string {
   switch (view) {
     case 'home':
       return 'Archive health at a glance.';
-    case 'problems':
+    case 'coverage':
       return 'Search, filter, and audit per problem.';
     case 'browse':
       return 'Open mirrored problem pages inside the app.';

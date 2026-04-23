@@ -1,7 +1,9 @@
 import type {
+  ArchiveChangedEvent,
   GuiArchiveDataset,
   GuiArchiveListing,
   GuiArchiveRecordDetail,
+  GuiArchiveState,
   GuiArchiveSummary,
   GuiCoverageArchiveStateFilter,
   GuiCoverageDetail,
@@ -137,6 +139,13 @@ export interface DesktopBridge {
   stopMirrorPreview: (jobId: string) => Promise<GuiJobRecord>;
   openPath: (path: string) => Promise<void>;
   openExternal: (url: string) => Promise<void>;
+  archive: DesktopArchiveBridge;
+}
+
+export interface DesktopArchiveBridge {
+  getState: () => Promise<GuiArchiveState>;
+  setManualOverride: (absolutePath: string) => Promise<GuiArchiveState>;
+  onChanged: (cb: (event: ArchiveChangedEvent) => void) => () => void;
 }
 
 export interface DesktopBridgeAdapter {

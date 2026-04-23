@@ -5,6 +5,7 @@ import type {
   GuiArchiveDataset,
   GuiArchiveListing,
   GuiArchiveRecordDetail,
+  GuiArchiveState,
   GuiArchiveSummary,
   GuiCoverageDetail,
   GuiCoverageListing,
@@ -19,6 +20,7 @@ import type {
 import { DesktopDashboard } from './dashboard.js';
 import { AppShell } from './app-shell.js';
 import type { CoverageExplorerFilters } from './coverage-explorer.js';
+import { EmptyStateWelcome } from './library-shell/EmptyStateWelcome.js';
 import './dashboard.js'; // keep legacy dashboard alive in build output for smoke test fallback
 
 const USE_LEGACY_DASHBOARD = typeof process !== 'undefined' && process?.env?.PBINFO_DESKTOP_LEGACY_UI === '1';
@@ -35,6 +37,9 @@ export interface AppProps {
 
 export function App({ desktop }: AppProps) {
   const bridge = desktop ?? readWindowBridge();
+  const [archiveState, setArchiveState] = useState<GuiArchiveState | undefined>(
+    undefined,
+  );
   const [workspaceState, setWorkspaceState] = useState<GuiWorkspaceState | null | undefined>(
     undefined,
   );
@@ -83,6 +88,39 @@ export function App({ desktop }: AppProps) {
       isMountedRef.current = false;
     };
   }, []);
+
+  useEffect(() => {
+    if (!bridge?.archive) {
+      return undefined;
+    }
+    let cancelled = false;
+    void (async () => {
+      try {
+        const state = await bridge.archive.getState();
+        if (!cancelled) {
+          setArchiveState(state);
+        }
+      } catch {
+        /* ignore — legacy tests that don't mock archive fall through */
+      }
+    })();
+    const unsubscribe = bridge.archive.onChanged((event) => {
+      setArchiveState((current) =>
+        current
+          ? {
+              ...current,
+              archiveRoot: event.archiveRoot,
+              snapshotId: event.snapshotId,
+              found: true,
+            }
+          : current,
+      );
+    });
+    return () => {
+      cancelled = true;
+      unsubscribe();
+    };
+  }, [bridge]);
 
   useEffect(() => {
     if (!bridge) {
@@ -518,6 +556,24 @@ export function App({ desktop }: AppProps) {
     },
     [bridge],
   );
+
+  // Library browser redesign (2026-04-23): when the archive bridge tells us
+  // no archive root is discoverable, show the empty-state welcome instead of
+  // the legacy shell. Tests that don't mock bridge.archive leave archiveState
+  // === undefined and fall through to the legacy shell unchanged.
+  if (archiveState && !archiveState.found) {
+    return (
+      <EmptyStateWelcome
+        probedPaths={archiveState.probedPaths}
+        onRunInitialCrawl={() => {
+          /* wired in Task 8 */
+        }}
+        onBrowseForArchive={() => {
+          /* wired in Task 8 */
+        }}
+      />
+    );
+  }
 
   const Shell = USE_LEGACY_DASHBOARD ? DesktopDashboard : AppShell;
   return (

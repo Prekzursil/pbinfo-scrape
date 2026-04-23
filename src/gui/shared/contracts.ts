@@ -218,3 +218,59 @@ export type ViewerSnapshot = z.infer<typeof viewerSnapshotSchema>;
 export type DesktopPreferencesUpdateInput = z.infer<
   typeof desktopPreferencesUpdateSchema
 >;
+
+// Library browser redesign (2026-04-23) — archive + theme IPC contracts.
+
+export const archiveSetManualOverrideInputSchema = z
+  .object({
+    absolutePath: z.string().min(1).max(4096),
+  })
+  .strict();
+
+export const archiveSwitchSnapshotInputSchema = z
+  .object({
+    snapshotId: z.string().min(1).max(64),
+  })
+  .strict();
+
+export const archiveProbeResultSchema = z
+  .object({
+    found: z.boolean(),
+    archiveRoot: z.string().optional(),
+    snapshotId: z.string().optional(),
+    probedPaths: z.array(z.string()),
+    catalogSnapshots: z
+      .array(
+        z.object({
+          id: z.string(),
+          status: z.string(),
+          createdAt: z.string().optional(),
+          label: z.string().optional(),
+        }),
+      )
+      .optional(),
+  })
+  .strict();
+
+export const themePreferenceSchema = z.enum(['auto', 'light', 'dark']);
+
+export const librarySetThemeInputSchema = z
+  .object({ preference: themePreferenceSchema })
+  .strict();
+
+export const libraryGetThemeResultSchema = z
+  .object({
+    effective: z.enum(['light', 'dark']),
+    preference: themePreferenceSchema,
+  })
+  .strict();
+
+export type ArchiveSetManualOverrideInput = z.infer<
+  typeof archiveSetManualOverrideInputSchema
+>;
+export type ArchiveSwitchSnapshotInput = z.infer<
+  typeof archiveSwitchSnapshotInputSchema
+>;
+export type ArchiveProbeResultContract = z.infer<typeof archiveProbeResultSchema>;
+export type LibrarySetThemeInput = z.infer<typeof librarySetThemeInputSchema>;
+export type LibraryGetThemeResult = z.infer<typeof libraryGetThemeResultSchema>;

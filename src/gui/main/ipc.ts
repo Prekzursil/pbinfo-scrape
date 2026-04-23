@@ -1,8 +1,10 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 
-import { shell, type IpcMain } from 'electron';
+import { app, shell, type IpcMain } from 'electron';
 
+import { resolveArchiveRoot } from './archive-resolver.js';
+import { readArchiveStore, writeArchiveStore } from './archive-store.js';
 import { createDesktopController } from './desktop-controller.js';
 import {
   readDesktopPreferences,
@@ -17,6 +19,7 @@ import {
   upsertWorkspaceProfile,
 } from './workspace-store.js';
 import {
+  archiveSetManualOverrideInputSchema,
   guiArchiveDetailInputSchema,
   guiArchiveListInputSchema,
   guiArchiveSummaryInputSchema,
@@ -33,6 +36,7 @@ import {
   guiOpenExternalInputSchema,
   guiWorkspaceSelectionSchema,
 } from '../shared/contracts.js';
+import type { GuiArchiveState } from '../shared/types.js';
 
 interface RegisterDesktopIpcOptions {
   ipcMain: Pick<IpcMain, 'handle'>;
@@ -224,6 +228,64 @@ export function registerDesktopIpc(options: RegisterDesktopIpcOptions): void {
   options.ipcMain.handle('desktop:mirror:stop-preview', async (_event, payload) =>
     registry['desktop:mirror:stop-preview'](payload),
   );
+
+  // Library browser redesign (2026-04-23): archive state + manual override.
+  const resolveArchiveState = (
+    override: string | undefined,
+  ): GuiArchiveState => {
+    const probe = resolveArchiveRoot({
+      exeDir: dirname(app.getPath('exe')),
+      cwd: process.cwd(),
+      manualOverride: override,
+    });
+    return {
+      ...probe,
+      catalogSnapshots: loadCatalogSnapshots(probe.archiveRoot),
+    };
+  };
+
+  options.ipcMain.handle('archive:state', async () => {
+    const store = readArchiveStore(options.userDataRoot);
+    return resolveArchiveState(store.manualArchiveOverride);
+  });
+
+  options.ipcMain.handle(
+    'archive:set-manual-override',
+    async (_event, payload: unknown) => {
+      const { absolutePath } =
+        archiveSetManualOverrideInputSchema.parse(payload);
+      writeArchiveStore(options.userDataRoot, {
+        manualArchiveOverride: absolutePath,
+      });
+      return resolveArchiveState(absolutePath);
+    },
+  );
+}
+
+function loadCatalogSnapshots(
+  archiveRoot: string | undefined,
+): GuiArchiveState['catalogSnapshots'] {
+  if (!archiveRoot) return undefined;
+  const catalogPath = join(archiveRoot, 'catalog.json');
+  if (!existsSync(catalogPath)) return undefined;
+  try {
+    const catalog = JSON.parse(readFileSync(catalogPath, 'utf8')) as {
+      snapshots?: Array<{
+        id: string;
+        status?: string;
+        createdAt?: string;
+        label?: string;
+      }>;
+    };
+    return (catalog.snapshots ?? []).map((s) => ({
+      id: s.id,
+      status: s.status ?? 'unknown',
+      createdAt: s.createdAt,
+      label: s.label,
+    }));
+  } catch {
+    return undefined;
+  }
 }
 
 export function createDesktopIpcRegistry(handlers: {

@@ -246,5 +246,26 @@ export function createDesktopBridge(adapter: DesktopBridgeAdapter): DesktopBridg
     async openExternal(url) {
       await nested.external.open(url);
     },
+    archive: {
+      async getState() {
+        return (await adapter.invoke('archive:state')) as Awaited<
+          ReturnType<DesktopBridge['archive']['getState']>
+        >;
+      },
+      async setManualOverride(absolutePath) {
+        return (await adapter.invoke('archive:set-manual-override', {
+          absolutePath,
+        })) as Awaited<
+          ReturnType<DesktopBridge['archive']['setManualOverride']>
+        >;
+      },
+      onChanged(cb) {
+        const unsubscribe = adapter.on('archive:changed', (...args) => {
+          const payload = args[0] as Parameters<typeof cb>[0];
+          cb(payload);
+        });
+        return unsubscribe ?? (() => undefined);
+      },
+    },
   };
 }
