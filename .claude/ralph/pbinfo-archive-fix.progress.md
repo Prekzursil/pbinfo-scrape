@@ -10,8 +10,8 @@ Commit column records the short-sha when step is `done`.
 | 0.3 | Confirm `.local/pbinfo.local.json` present + gitignored | done | (seeded) | creds persisted, `.local/` in `.gitignore` |
 | 0.4 | Confirm spec committed | done | 6a68e1397 | spec + plan + ralph scaffolding |
 | 0.5 | Confirm progress ledger scaffold present | done | (seeded) | this file |
-| 1.1 | Auth bootstrap `src/auth/bootstrap.ts` + tests | done | (pending commit) | 6 tests, env-vars-first precedence, non-fatal bundle-seal failure, never-log password |
-| 1.2 | User-solutions enumerator + fixture test | todo | — | paginate `/solutii/user/<handle>?offset=N` |
+| 1.1 | Auth bootstrap `src/auth/bootstrap.ts` + tests | done | 48bbc215c | 6 tests, env-vars-first precedence, non-fatal bundle-seal failure, never-log password |
+| 1.2 | User-solutions enumerator + fixture test | done | (pending) | 10 tests: pagination walk, dedup, throttled, cursor resume, maxPages cap |
 | 1.3 | Crawler extension: eval-detail, source-list, editorial, official; circuit breaker | todo | — | 429/5xx cooldown; 302 re-auth |
 | 1.4 | Parser refinements: evaluation, problem-source-list, problem | todo | — | fixtures under `tests/fixtures/pbinfo/2026-04-23/` |
 | 1.5 | Coverage model extension: progressState, bestScore, evaluationTimeline, languagesTried | todo | — | update `ProblemCoverageRecord` |
