@@ -18,7 +18,7 @@ Commit column records the short-sha when step is `done`.
 | 1.3c | Crawler integration: visibility gating + breaker + re-auth | todo | — | extends ArchiveCrawler to queue eval-detail + source-list + editorial/official per gate |
 | 1.4 | Parser refinements: evaluation, problem-source-list, problem | in_progress | — | split into 1.4a/1.4b/1.4c below |
 | 1.4a | evaluation parser: tighten source selector + sourceHash | done | (pending) | 3 new tests; sourceCode skips compile-log textareas; stable SHA-256 hash for dedup |
-| 1.4b | problem-source-list parser: per-language + content hash | todo | — | |
+| 1.4b | official-solution-fragment parser: per-language sourceHash | done | (pending) | 2 new tests; SHA-256 per language label; stable across re-parse; empty on restricted |
 | 1.4c | problem parser: visible-tests refinement + editorial fragment | todo | — | |
 | 1.5 | Coverage model extension: progressState, bestScore, evaluationTimeline, languagesTried | todo | — | update `ProblemCoverageRecord` |
 | 1.6 | Workflow orchestration + CLI flag `--fresh-snapshot` | todo | — | register `materialize-tests` subcommand |

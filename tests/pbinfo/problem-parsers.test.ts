@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
 import {
+  parseOfficialSolutionFragment,
   parseProblemEndpointFragment,
   parseProblemPage,
   parseProblemStatementFragment,
@@ -375,6 +376,45 @@ describe('problem parser', () => {
     expect(parsed.metadata).toMatchObject({
       authorHandle: 'silviu',
     });
+  });
+});
+
+describe('official solution fragment parser', () => {
+  test('emits stable SHA-256 hashes per language label when fragment is visible', () => {
+    const visibleFragment = `
+      <ul class="nav nav-tabs">
+        <li><a href="#sol-cpp">C++</a></li>
+        <li><a href="#sol-pas">Pascal</a></li>
+      </ul>
+      <div class="tab-content">
+        <div id="sol-cpp"><pre>int main(){return 42;}</pre></div>
+        <div id="sol-pas"><pre>begin writeln(42) end.</pre></div>
+      </div>
+    `;
+
+    const parsed = parseOfficialSolutionFragment(visibleFragment);
+
+    expect(parsed.access).toBe('visible');
+    expect(Object.keys(parsed.solutions).sort()).toEqual(['C++', 'Pascal']);
+    expect(Object.keys(parsed.solutionHashes).sort()).toEqual(['C++', 'Pascal']);
+    expect(parsed.solutionHashes['C++']).toMatch(/^[0-9a-f]{64}$/);
+    expect(parsed.solutionHashes['Pascal']).toMatch(/^[0-9a-f]{64}$/);
+    expect(parsed.solutionHashes['C++']).not.toBe(parsed.solutionHashes['Pascal']);
+
+    // Stability across repeat parses.
+    const repeat = parseOfficialSolutionFragment(visibleFragment);
+    expect(repeat.solutionHashes).toEqual(parsed.solutionHashes);
+  });
+
+  test('returns empty solutions and hashes when fragment is restricted', () => {
+    const restrictedFragment = `
+      <h2>Sursa oficială</h2>
+      <div class="alert alert-danger">N-ai voie!</div>
+    `;
+    const parsed = parseOfficialSolutionFragment(restrictedFragment);
+    expect(parsed.access).toBe('restricted');
+    expect(parsed.solutions).toEqual({});
+    expect(parsed.solutionHashes).toEqual({});
   });
 });
 

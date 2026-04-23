@@ -1,3 +1,5 @@
+import { createHash } from 'node:crypto';
+
 import type {
   CategoryLink,
   ProblemAssetRecord,
@@ -31,6 +33,9 @@ export interface ParsedOfficialSolutionFragment {
   access: 'visible' | 'restricted' | 'hidden';
   message?: string;
   solutions: Record<string, string>;
+  /** SHA-256 hex per language label. Stable for dedup when the same
+   *  solution body is shown on multiple problem source-list pages. */
+  solutionHashes: Record<string, string>;
 }
 
 export function parseProblemPage(html: string, pageUrl: string): ProblemRecord {
@@ -178,6 +183,7 @@ export function parseOfficialSolutionFragment(html: string): ParsedOfficialSolut
       access: endpoint.access,
       message: endpoint.message,
       solutions: {},
+      solutionHashes: {},
     };
   }
 
@@ -224,11 +230,21 @@ export function parseOfficialSolutionFragment(html: string): ParsedOfficialSolut
     }
   }
 
+  const solutionHashes: Record<string, string> = {};
+  for (const [label, code] of Object.entries(solutions)) {
+    solutionHashes[label] = hashSource(code);
+  }
+
   return {
     access: 'visible',
     message: endpoint.message,
     solutions,
+    solutionHashes,
   };
+}
+
+function hashSource(value: string): string {
+  return createHash('sha256').update(value, 'utf8').digest('hex');
 }
 
 function extractExamples(sectionHtml: string): ProblemExample[] {
