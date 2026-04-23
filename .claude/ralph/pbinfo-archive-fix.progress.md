@@ -12,6 +12,10 @@ Commit column records the short-sha when step is `done`.
 | 0.5 | Confirm progress ledger scaffold present | done | (seeded) | this file |
 | 1.1 | Auth bootstrap `src/auth/bootstrap.ts` + tests | done | 48bbc215c | 6 tests, env-vars-first precedence, non-fatal bundle-seal failure, never-log password |
 | 1.2 | User-solutions enumerator + fixture test | done | e7ca4e41d | 10 tests: pagination walk, dedup, throttled, cursor resume, maxPages cap |
+| 1.3b | 302-to-login re-auth wrapper (auth-aware fetch) | done | 9e8af2aa5 | 6 tests; single-flight reauth; URL + body detection |
+| 1.4a | evaluation parser: tighten source selector + sourceHash | done | 2c297976f | 3 new tests |
+| 1.4b | official-solution-fragment parser: per-language sourceHash | done | c3e3d22ea | 2 new tests |
+| 1.4c | problem parser: visible-tests refinement + editorial fragment | done | 89844111b | 3 new tests |
 | 1.3 | Crawler extension: eval-detail, source-list, editorial, official; circuit breaker | in_progress | — | split into 1.3a/1.3b/1.3c below |
 | 1.3a | Rate-limit circuit breaker utility | done | ec4244f12 | 9 tests: 429/5xx rolling window, cooldown auto-close, success resets counter |
 | 1.3b | 302-to-login re-auth wrapper (auth-aware fetch) | done | (pending) | 6 tests; single-flight reauth; URL + body detection; also hardened user-subs-enumerator maxPages test |
@@ -20,7 +24,7 @@ Commit column records the short-sha when step is `done`.
 | 1.4a | evaluation parser: tighten source selector + sourceHash | done | (pending) | 3 new tests; sourceCode skips compile-log textareas; stable SHA-256 hash for dedup |
 | 1.4b | official-solution-fragment parser: per-language sourceHash | done | (pending) | 2 new tests; SHA-256 per language label; stable across re-parse; empty on restricted |
 | 1.4c | problem parser: visible-tests refinement + editorial fragment | done | (pending) | parseEditorialFragment added (restricted/hidden/visible) + contentHash; 3 new tests; visible-tests table parsing already covered by existing extractVisibleTestsFromTable |
-| 1.5 | Coverage model extension: progressState, bestScore, evaluationTimeline, languagesTried | todo | — | update `ProblemCoverageRecord` |
+| 1.5 | Coverage model extension: progressState, bestScore, evaluationTimeline, languagesTried | done | a9d9323c7 | types + producer + totals.progressStateCounts; integration test exercises partial→solved timeline; 250 tests green |
 | 1.6 | Workflow orchestration + CLI flag `--fresh-snapshot` | todo | — | register `materialize-tests` subcommand |
 | 1.7 | Phase 1 `npm run verify` green + commit | todo | — | |
 | 2.1 | Materializer `src/tests-materializer/materialize-tests.ts` + tests | todo | — | merge rule per spec §3.5 |
