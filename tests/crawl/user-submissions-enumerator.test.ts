@@ -332,14 +332,16 @@ describe('enumerateUserSubmissions', () => {
   });
 
   test('honors maxPages as a safety cap', async () => {
-    // Infinite-pagination fixture: every page claims another page exists.
+    // Synthetic listing with enough rows to produce more pages than maxPages
+    // allows, but finite enough that the parser's next-page-url expansion stays
+    // cheap (pbinfo's Paginare() generates one url per page slot).
     const fetchImpl: typeof fetch = async (input) => {
       const url = typeof input === 'string' ? input : input.toString();
       const match = url.match(/start=(\d+)/);
       const currentOffset = match ? Number(match[1]) : 0;
       return new Response(
         buildListingHtml({
-          totalMatches: 1_000_000,
+          totalMatches: 20,
           currentOffset,
           pageSize: 2,
           entries: [
