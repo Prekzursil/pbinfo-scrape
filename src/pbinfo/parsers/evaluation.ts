@@ -1,3 +1,5 @@
+import { createHash } from 'node:crypto';
+
 import type { EvaluationTestResult } from '../../types/records.js';
 import { loadHtml, normalizeWhitespace, parseNumber, parseSeconds } from './shared.js';
 
@@ -14,6 +16,10 @@ export interface ParsedEvaluationPage {
   memoryKb?: number;
   sourceAvailable: boolean;
   sourceCode?: string;
+  /** SHA-256 hex of the extracted source body (when present). Stable across
+   *  re-runs; safe to keep even after the body itself is dropped by a
+   *  downstream storage gate for non-100pt evaluations. */
+  sourceHash?: string;
   compileLog?: string;
   tests: EvaluationTestResult[];
 }
@@ -52,9 +58,14 @@ export function parseEvaluationPage(html: string, evaluationId: number): ParsedE
     memoryKb: parseFirstNumber(summaryMap.get('memorie maxima') ?? summaryMap.get('limita memorie') ?? ''),
     sourceAvailable: Boolean(sourceCode),
     sourceCode: sourceCode || undefined,
+    sourceHash: sourceCode ? hashSource(sourceCode) : undefined,
     tests,
     compileLog: compileLog || undefined,
   };
+}
+
+function hashSource(value: string): string {
+  return createHash('sha256').update(value, 'utf8').digest('hex');
 }
 
 function resolveProblemLink($: ReturnType<typeof loadHtml>) {
@@ -187,22 +198,49 @@ function extractTests($: ReturnType<typeof loadHtml>): EvaluationTestResult[] {
 }
 
 function extractSourceCode($: ReturnType<typeof loadHtml>): string | undefined {
-  const textarea = $('textarea').first();
-  if (textarea.length > 0) {
-    const value = textarea.text().trim();
-    return value || undefined;
+  // Prefer explicitly-scoped selectors so we never accidentally pick up a
+  // compile-log textarea or a neighbouring diff pane that happens to sit
+  // above the source section in DOM order.
+  const scopedTextarea = $('#sursa textarea, .sursa textarea').first();
+  if (scopedTextarea.length > 0) {
+    const value = scopedTextarea.text().trim();
+    if (value) {
+      return value;
+    }
   }
 
-  const sourceSectionPre = $('#sursa pre').first();
+  const sourceSectionPre = $('#sursa pre, .sursa pre').first();
   if (sourceSectionPre.length > 0) {
     const value = sourceSectionPre.text().trim();
-    return value || undefined;
+    if (value) {
+      return value;
+    }
   }
 
-  const pre = $('pre[data-source], pre.source-code, pre.code-source, pre[class^="code_"], pre[class*=" code_"]').first();
-  if (pre.length > 0) {
-    const value = pre.text().trim();
-    return value || undefined;
+  const classScopedPre = $(
+    'pre[data-source], pre.source-code, pre.code-source, pre[class^="code_"], pre[class*=" code_"]',
+  ).first();
+  if (classScopedPre.length > 0) {
+    const value = classScopedPre.text().trim();
+    if (value) {
+      return value;
+    }
+  }
+
+  // Last-resort fallback: a bare textarea. Skip any textareas inside the
+  // compile-log or evaluation-results regions to avoid leaking log text as
+  // source code.
+  const bareTextarea = $('textarea')
+    .filter(
+      (_, element) =>
+        $(element).closest('#compilare, #evaluare, .compile-log, .compilation-log').length === 0,
+    )
+    .first();
+  if (bareTextarea.length > 0) {
+    const value = bareTextarea.text().trim();
+    if (value) {
+      return value;
+    }
   }
 
   return undefined;

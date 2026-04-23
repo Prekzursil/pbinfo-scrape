@@ -283,6 +283,95 @@ int main() {
     expect(parsed.compileLog).toBe('warning: unused variable');
   });
 
+  test('emits stable SHA-256 sourceHash when source is extracted', () => {
+    const pageWithSource = `
+      <div id="detalii">
+        <table class="table">
+          <tr>
+            <th>Problema</th><td><a href="/probleme/2404/test">Test</a></td>
+            <th>Utilizator</th><td><a href="/profil/Prekzursil">Prekzursil</a></td>
+          </tr>
+          <tr>
+            <th>Scor/rezultat</th><td>100 puncte</td>
+          </tr>
+        </table>
+      </div>
+      <div id="evaluare">
+        <table class="table">
+          <tr><th>Test</th><th>Scor</th></tr>
+          <tr><td>1</td><td>100</td></tr>
+        </table>
+      </div>
+      <div id="sursa">
+        <pre class="code_cpp">int main(){return 0;}</pre>
+      </div>
+    `;
+
+    const first = parseEvaluationPage(pageWithSource, 1001);
+    const second = parseEvaluationPage(pageWithSource, 1001);
+
+    expect(first.sourceHash).toBeDefined();
+    expect(first.sourceHash).toHaveLength(64);
+    expect(first.sourceHash).toMatch(/^[0-9a-f]{64}$/);
+    expect(first.sourceHash).toBe(second.sourceHash);
+  });
+
+  test('does not emit sourceHash when source is absent', () => {
+    const pageWithoutSource = `
+      <div id="detalii">
+        <table class="table">
+          <tr>
+            <th>Problema</th><td><a href="/probleme/1/sum">sum</a></td>
+            <th>Utilizator</th><td><a href="/profil/Prekzursil">Prekzursil</a></td>
+          </tr>
+          <tr><th>Scor/rezultat</th><td>0</td></tr>
+        </table>
+      </div>
+      <div id="evaluare">
+        <table class="table">
+          <tr><th>Test</th><th>Scor</th></tr>
+          <tr><td>1</td><td>0</td></tr>
+        </table>
+      </div>
+    `;
+
+    const parsed = parseEvaluationPage(pageWithoutSource, 2002);
+    expect(parsed.sourceAvailable).toBe(false);
+    expect(parsed.sourceCode).toBeUndefined();
+    expect(parsed.sourceHash).toBeUndefined();
+  });
+
+  test('ignores textareas inside compile-log regions when choosing source body', () => {
+    const pageWithCompileTextarea = `
+      <div id="detalii">
+        <table class="table">
+          <tr>
+            <th>Problema</th><td><a href="/probleme/1/sum">sum</a></td>
+            <th>Utilizator</th><td><a href="/profil/Prekzursil">Prekzursil</a></td>
+          </tr>
+          <tr><th>Scor/rezultat</th><td>100</td></tr>
+        </table>
+      </div>
+      <div id="compilare">
+        <textarea>warning: unused variable 'x'</textarea>
+      </div>
+      <div id="evaluare">
+        <table class="table">
+          <tr><th>Test</th><th>Scor</th></tr>
+          <tr><td>1</td><td>100</td></tr>
+        </table>
+      </div>
+      <div id="sursa">
+        <textarea>int main(){ int x; return 0; }</textarea>
+      </div>
+    `;
+
+    const parsed = parseEvaluationPage(pageWithCompileTextarea, 3003);
+    expect(parsed.sourceAvailable).toBe(true);
+    expect(parsed.sourceCode).toBe('int main(){ int x; return 0; }');
+    expect(parsed.sourceCode).not.toContain('warning');
+  });
+
   test('ignores navbar problem links like /probleme/marcate when resolving the evaluated problem', () => {
     const authenticatedLayoutWithNavDecoy = `
       <nav id="bara_navigare">
