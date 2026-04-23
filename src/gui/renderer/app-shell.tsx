@@ -102,6 +102,7 @@ export function AppShell(props: AppShellProps) {
         onNavigate={setActiveView}
         snapshotId={props.selectedSnapshotId}
         workspaceRoot={props.workspaceState.workspaceRoot}
+        onSelectWorkspace={props.onSelectWorkspace}
       />
       <main className="pac-main">
         <TopBar
@@ -169,11 +170,13 @@ function Sidebar({
   onNavigate,
   snapshotId,
   workspaceRoot,
+  onSelectWorkspace,
 }: {
   activeView: AppShellView;
   onNavigate: (view: AppShellView) => void;
   snapshotId: string;
   workspaceRoot: string;
+  onSelectWorkspace: (workspaceRoot: string) => Promise<unknown>;
 }) {
   const items: Array<{ id: AppShellView; icon: string; label: string; hint: string }> = [
     { id: 'home', icon: '▦', label: 'Home', hint: 'Dashboard at a glance' },
@@ -212,12 +215,27 @@ function Sidebar({
           <span className="pac-sidebar-footer-label">Snapshot</span>
           <code className="pac-sidebar-footer-value">{snapshotId || '—'}</code>
         </div>
-        <div className="pac-sidebar-footer-row">
+        <div className="pac-sidebar-footer-row pac-sidebar-footer-workspace">
           <span className="pac-sidebar-footer-label">Workspace</span>
-          <code className="pac-sidebar-footer-value pac-truncate" title={workspaceRoot}>
-            {workspaceRoot}
+          <code className="pac-sidebar-footer-value pac-sidebar-footer-wrap" title={workspaceRoot}>
+            {workspaceRoot || '—'}
           </code>
         </div>
+        <button
+          type="button"
+          className="pac-btn pac-btn-block"
+          aria-label="Change workspace"
+          onClick={() => {
+            const input = typeof window !== 'undefined'
+              ? window.prompt('Switch to workspace root:', workspaceRoot ?? '')
+              : null;
+            if (input && input.trim() && input.trim() !== workspaceRoot) {
+              void onSelectWorkspace(input.trim());
+            }
+          }}
+        >
+          Change workspace…
+        </button>
       </div>
     </aside>
   );
