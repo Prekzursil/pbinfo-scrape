@@ -26,6 +26,8 @@ import { loadLocalConfig } from './config/local-config.js';
 import { buildMirrorArtifacts } from './mirror/build-mirror.js';
 import { startMirrorServer } from './mirror/server.js';
 import { publishWorkspace } from './publish/publish.js';
+import { materializeTestsForSnapshot } from './tests-materializer/materialize-tests.js';
+import { resolveReadableSnapshotLayout } from './archive/storage.js';
 import {
   resumeCrawlWorkflow,
   runCrawlWorkflow,
@@ -70,6 +72,7 @@ export interface CliHandlers {
   artifactsImportRaw: (workspaceRoot: string, snapshot?: string, sourcePath?: string) => Promise<void>;
   artifactsRelinkRaw: (workspaceRoot: string, snapshot: string, sourcePath?: string) => Promise<void>;
   buildMirror: (workspaceRoot: string, snapshot?: string) => Promise<void>;
+  materializeTests: (workspaceRoot: string, snapshot?: string) => Promise<void>;
   serve: (workspaceRoot: string, port?: number, snapshot?: string) => Promise<void>;
   resume: (workspaceRoot: string, snapshot?: string) => Promise<void>;
   publish: (
@@ -284,6 +287,16 @@ export function buildCli(handlers: CliHandlers = createDefaultHandlers()): Comma
     });
 
   program
+    .command('materialize-tests')
+    .description(
+      'Emit per-problem test-case folders (NNN.in, NNN.ok, tests.json, meta.json, README.md) into archive/snapshots/<id>/tests/',
+    )
+    .option('--snapshot <snapshot>', 'Snapshot id override')
+    .action(async (options: { snapshot?: string }) => {
+      await handlers.materializeTests(resolveWorkspace(program), options.snapshot);
+    });
+
+  program
     .command('serve')
     .description('Serve the archive via a local web server')
     .option('--port <port>', 'Port to bind to', (value) => Number(value))
@@ -476,6 +489,12 @@ function createDefaultHandlers(): CliHandlers {
     },
     buildMirror: async (workspaceRoot, snapshot) => {
       const result = await buildMirrorArtifacts(workspaceRoot, snapshot);
+      process.stdout.write(JSON.stringify(result, null, 2) + '\n');
+    },
+    materializeTests: async (workspaceRoot, snapshot) => {
+      const config = loadLocalConfig(workspaceRoot);
+      const layout = resolveReadableSnapshotLayout(config, snapshot);
+      const result = await materializeTestsForSnapshot(layout);
       process.stdout.write(JSON.stringify(result, null, 2) + '\n');
     },
     serve: async (workspaceRoot, port, snapshot) => {

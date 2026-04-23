@@ -16,10 +16,18 @@ describe('buildCli', () => {
       'artifacts',
       'secrets',
       'build-mirror',
+      'materialize-tests',
       'serve',
       'resume',
       'publish',
     ]);
+  });
+
+  test('exposes materialize-tests with a --snapshot option', () => {
+    const cli = buildCli();
+    const command = cli.commands.find((c) => c.name() === 'materialize-tests');
+    expect(command).toBeDefined();
+    expect(command?.options.map((option) => option.long)).toContain('--snapshot');
   });
 
   test('exposes auth, crawl, normalize, snapshot, and artifacts subcommands', () => {
