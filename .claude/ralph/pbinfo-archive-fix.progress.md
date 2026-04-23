@@ -39,11 +39,12 @@ Commit column records the short-sha when step is `done`.
 | 4.1 | BrowserView manager + hardened nav | done | previous commit | 10 tests; dependency-injectable; DOM-only overlay (no innerHTML); archive-truth redirect before allow-list |
 | 4.2 | Overlay server `src/mirror/overlay-server.ts` | done | previous commit | 7 tests; registered in mirror/server.ts; CWE-73 mirror hardening landed alongside |
 | 4.3 | Archive-truth stubs in mirror server | done | (pending) | unknown-route 404 renders "Not archived yet" stub inline with live-link (allowlisted to pbinfo.ro paths); 4 new tests |
-| 4.4 | Browse tab renderer | done | (pending) | BrowseViewer React component with URL bar, back/fwd/reload, host div, resize observer (JSDOM fallback), error banner; 7 RTL tests green |
+| 4.4 | Browse tab renderer | done | 03104985d | BrowseViewer React component with URL bar, back/fwd/reload, host div, resize observer (JSDOM fallback), error banner; 7 RTL tests green |
+| 4.5 | Viewer IPC schemas | done | 4e41b63b6 | zod schemas landed; ipc.ts handlers + desktop controller wiring remain for a packaged-app iteration |
 | 4.5 | Viewer IPC channels | todo | — | |
 | 4.6 | Playwright E2E `tests/e2e/browse-viewer.spec.ts` | todo | — | |
 | 4.7 | Phase 4 smoke green + commit | todo | — | |
-| 5.1 | Live fresh crawl (4–5h) | todo | — | run `crawl all --fresh-snapshot` |
+| 5.1 | Live fresh crawl | in_progress | (task b4wmlv811) | Snapshot `fresh-20260423-full`; 10,899 completed / 6,774 pending / 0 failures; 10,828+ raw HTML files on disk; 6,209+ evaluation-details captured |
 | 5.2 | Normalize → rank → materialize → mirror → finalize | todo | — | |
 | 5.3 | Numeric truth gates (≥2500 statements, ≥13000 evals, …) | todo | — | |
 | 5.4 | Spot-check 10 problems in Coverage Explorer | todo | — | |
