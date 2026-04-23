@@ -169,6 +169,29 @@ export const desktopPreferencesUpdateSchema = z
   })
   .strict();
 
+export const viewerNavigateInputSchema = z
+  .object({
+    url: z.string().url(),
+  })
+  .strict();
+
+export const viewerSetBoundsInputSchema = z
+  .object({
+    x: z.number().int().nonnegative(),
+    y: z.number().int().nonnegative(),
+    width: z.number().int().positive(),
+    height: z.number().int().positive(),
+  })
+  .strict();
+
+export const viewerSnapshotSchema = z
+  .object({
+    url: z.string(),
+    canGoBack: z.boolean(),
+    canGoForward: z.boolean(),
+  })
+  .strict();
+
 export type GuiWorkspaceSelectionInput = z.infer<
   typeof guiWorkspaceSelectionSchema
 >;
@@ -189,6 +212,9 @@ export type GuiCoverageSummaryInput = z.infer<
 >;
 export type GuiCoverageListInput = z.infer<typeof guiCoverageListInputSchema>;
 export type GuiCoverageDetailInput = z.infer<typeof guiCoverageDetailInputSchema>;
+export type ViewerNavigateInput = z.infer<typeof viewerNavigateInputSchema>;
+export type ViewerSetBoundsInput = z.infer<typeof viewerSetBoundsInputSchema>;
+export type ViewerSnapshot = z.infer<typeof viewerSnapshotSchema>;
 export type DesktopPreferencesUpdateInput = z.infer<
   typeof desktopPreferencesUpdateSchema
 >;
