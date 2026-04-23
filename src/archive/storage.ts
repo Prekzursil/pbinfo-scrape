@@ -75,6 +75,17 @@ export function buildSnapshotId(now = new Date()): string {
   return now.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}Z$/, 'Z');
 }
 
+/**
+ * Builds the human-readable fresh-archive-fix snapshot id used by the
+ * `--fresh-snapshot` CLI flag. Format: `fresh-YYYYMMDD-full`.
+ */
+export function buildFreshSnapshotId(now = new Date()): string {
+  const yyyy = now.getUTCFullYear();
+  const mm = String(now.getUTCMonth() + 1).padStart(2, '0');
+  const dd = String(now.getUTCDate()).padStart(2, '0');
+  return `fresh-${yyyy}${mm}${dd}-full`;
+}
+
 export function resolveSnapshotLayout(
   config: LoadedLocalConfig,
   snapshotId: string,

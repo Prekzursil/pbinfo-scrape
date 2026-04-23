@@ -27,7 +27,7 @@ import { buildMirrorArtifacts } from './mirror/build-mirror.js';
 import { startMirrorServer } from './mirror/server.js';
 import { publishWorkspace } from './publish/publish.js';
 import { materializeTestsForSnapshot } from './tests-materializer/materialize-tests.js';
-import { resolveReadableSnapshotLayout } from './archive/storage.js';
+import { buildFreshSnapshotId, resolveReadableSnapshotLayout } from './archive/storage.js';
 import {
   resumeCrawlWorkflow,
   runCrawlWorkflow,
@@ -184,13 +184,26 @@ export function buildCli(handlers: CliHandlers = createDefaultHandlers()): Comma
     .option('--snapshot <snapshot>', 'Snapshot id override')
     .option('--acceptance', 'Mark this crawl as an acceptance-oriented run')
     .option('--mode <mode>', 'Crawl mode: incremental or fresh', 'incremental')
-    .action(async (options: { snapshot?: string; acceptance?: boolean; mode?: CrawlMode }) => {
+    .option(
+      '--fresh-snapshot',
+      'Generate a new fresh-YYYYMMDD-full snapshot id and run in fresh mode',
+    )
+    .action(async (options: {
+      snapshot?: string;
+      acceptance?: boolean;
+      mode?: CrawlMode;
+      freshSnapshot?: boolean;
+    }) => {
+      const snapshotId = options.freshSnapshot
+        ? options.snapshot ?? buildFreshSnapshotId()
+        : options.snapshot;
+      const mode: CrawlMode = options.freshSnapshot ? 'fresh' : options.mode ?? 'incremental';
       await handlers.crawl(
         resolveWorkspace(program),
         'all',
-        options.snapshot,
+        snapshotId,
         options.acceptance,
-        options.mode,
+        mode,
       );
     });
   crawl

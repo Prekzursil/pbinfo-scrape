@@ -25,7 +25,7 @@ Commit column records the short-sha when step is `done`.
 | 1.4b | official-solution-fragment parser: per-language sourceHash | done | (pending) | 2 new tests; SHA-256 per language label; stable across re-parse; empty on restricted |
 | 1.4c | problem parser: visible-tests refinement + editorial fragment | done | (pending) | parseEditorialFragment added (restricted/hidden/visible) + contentHash; 3 new tests; visible-tests table parsing already covered by existing extractVisibleTestsFromTable |
 | 1.5 | Coverage model extension: progressState, bestScore, evaluationTimeline, languagesTried | done | a9d9323c7 | types + producer + totals.progressStateCounts; integration test exercises partial→solved timeline; 250 tests green |
-| 1.6 | Workflow orchestration + CLI flag `--fresh-snapshot` | todo | — | register `materialize-tests` subcommand |
+| 1.6 | Workflow orchestration + CLI flag `--fresh-snapshot` | in_progress | — | `buildFreshSnapshotId` helper + `crawl all --fresh-snapshot` CLI wiring landed (3 new tests). Workflow-level composition of bootstrap+enum+existing-drain still pending. |
 | 1.7 | Phase 1 `npm run verify` green + commit | todo | — | |
 | 2.1 | Materializer `src/tests-materializer/materialize-tests.ts` + tests | done | (see 2.1 commit) | 5 tests: examples-only, overlap-dedupe, empty-skip, idempotent-with-clean, file shape |
 | 2.2 | CLI `materialize-tests --snapshot <id>` | done | f89dbff49 | handler + CLI test assertion |
