@@ -300,7 +300,15 @@ async function maybeWriteDesktopSmokeMarker(
 
             setWorkspaceAndSubmit(workspaceRoot);
 
-            return waitFor(() => document.body?.innerText.includes('Archive Overview'))
+            // Accept either the redesigned shell's Home view or the legacy
+            // dashboard's "Archive Overview" heading so the smoke probe works
+            // with either UI (legacy dashboard is still reachable via
+            // PBINFO_DESKTOP_LEGACY_UI=1).
+            return waitFor(
+              () =>
+                (document.body?.innerText.includes('Archive health') ?? false)
+                || (document.body?.innerText.includes('Archive Overview') ?? false),
+            )
               .then(async () => ({
                 initial,
                 final: snapshot(),

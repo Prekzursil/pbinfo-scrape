@@ -17,7 +17,12 @@ import type {
   GuiWorkspaceState,
 } from '../shared/types.js';
 import { DesktopDashboard } from './dashboard.js';
+import { AppShell } from './app-shell.js';
 import type { CoverageExplorerFilters } from './coverage-explorer.js';
+import './dashboard.js'; // keep legacy dashboard alive in build output for smoke test fallback
+
+const USE_LEGACY_DASHBOARD = typeof process !== 'undefined' && process?.env?.PBINFO_DESKTOP_LEGACY_UI === '1';
+void DesktopDashboard;
 
 const CRAWL_CHUNK_SIZE = 25;
 const ARCHIVE_LIST_LIMIT = 24;
@@ -143,7 +148,7 @@ export function App({ desktop }: AppProps) {
         snapshotOverride ||
         selectedSnapshotId ||
         findLatestSnapshotId(nextJobs) ||
-        'acceptance-20260310b';
+        '';
       if (resolvedSnapshotId !== selectedSnapshotId) {
         setSelectedSnapshotId(resolvedSnapshotId);
       }
@@ -208,9 +213,17 @@ export function App({ desktop }: AppProps) {
     let cancelled = false;
     void (async () => {
       try {
-        const summary = await bridge.getArchiveExplorerSummary(selectedSnapshotId);
+        const summary = await bridge.getArchiveExplorerSummary(selectedSnapshotId || undefined);
         if (!cancelled) {
           setArchiveSummary(summary);
+          // Auto-adopt the backend-resolved snapshot id when the renderer
+          // started with an empty selection (i.e. no hardcoded fallback,
+          // no prior jobs to hint at the current snapshot). Without this
+          // the UI would stay on whatever default the backend picked but
+          // every subsequent fetch would keep passing the empty string.
+          if (!selectedSnapshotId && summary.snapshotId) {
+            setSelectedSnapshotId(summary.snapshotId);
+          }
         }
       } catch (error) {
         if (!cancelled) {
@@ -506,8 +519,9 @@ export function App({ desktop }: AppProps) {
     [bridge],
   );
 
+  const Shell = USE_LEGACY_DASHBOARD ? DesktopDashboard : AppShell;
   return (
-    <DesktopDashboard
+    <Shell
       workspaceState={workspaceState}
       jobs={jobs}
       crawlStatus={crawlStatus}

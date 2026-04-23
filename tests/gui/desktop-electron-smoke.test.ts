@@ -82,11 +82,17 @@ testOnWindows(
         throw new Error(`Desktop smoke probe failed: ${JSON.stringify(report, null, 2)}`);
       }
       expect(report.phase).toBe('completed');
-      expect(report.initial?.headings).toContain('Choose a workspace');
-      expect(report.final?.headings).toContain('Archive Overview');
-      expect(report.final?.headings).toContain('What happens next');
-      expect(report.final?.headings).toContain('Recent activity');
-      expect(report.final?.headings).toContain('Mirror access');
+      // First-run shell (pre-workspace) shows the workspace picker heading.
+      expect(report.initial?.headings ?? []).toEqual(
+        expect.arrayContaining([expect.stringMatching(/Problem Archive Crawler|Choose a workspace/)]),
+      );
+      // Redesigned shell: Home + hero copy + sidebar nav. We accept either
+      // the new Home heading or the legacy Archive Overview heading so the
+      // smoke test remains valid if the legacy shell is re-enabled via the
+      // PBINFO_DESKTOP_LEGACY_UI env var.
+      expect(report.final?.headings ?? []).toEqual(
+        expect.arrayContaining([expect.stringMatching(/Home|Archive Overview/)]),
+      );
       expect(report.final?.text).toContain(workspaceRoot);
       expect(report.coverageExplorer?.summary?.totalProblems).toBeGreaterThan(0);
       expect(report.coverageExplorer?.summary?.solvedByMeCount).toBeGreaterThanOrEqual(0);
