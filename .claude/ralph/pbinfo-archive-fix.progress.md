@@ -16,10 +16,10 @@ Commit column records the short-sha when step is `done`.
 | 1.3a | Rate-limit circuit breaker utility | done | ec4244f12 | 9 tests: 429/5xx rolling window, cooldown auto-close, success resets counter |
 | 1.3b | 302-to-login re-auth wrapper (auth-aware fetch) | done | (pending) | 6 tests; single-flight reauth; URL + body detection; also hardened user-subs-enumerator maxPages test |
 | 1.3c | Crawler integration: visibility gating + breaker + re-auth | todo | — | extends ArchiveCrawler to queue eval-detail + source-list + editorial/official per gate |
-| 1.4 | Parser refinements: evaluation, problem-source-list, problem | in_progress | — | split into 1.4a/1.4b/1.4c below |
+| 1.4 | Parser refinements: evaluation, problem-source-list, problem | done | (after 1.4c commit) | all three subtasks landed; see 1.4a/b/c rows |
 | 1.4a | evaluation parser: tighten source selector + sourceHash | done | (pending) | 3 new tests; sourceCode skips compile-log textareas; stable SHA-256 hash for dedup |
 | 1.4b | official-solution-fragment parser: per-language sourceHash | done | (pending) | 2 new tests; SHA-256 per language label; stable across re-parse; empty on restricted |
-| 1.4c | problem parser: visible-tests refinement + editorial fragment | todo | — | |
+| 1.4c | problem parser: visible-tests refinement + editorial fragment | done | (pending) | parseEditorialFragment added (restricted/hidden/visible) + contentHash; 3 new tests; visible-tests table parsing already covered by existing extractVisibleTestsFromTable |
 | 1.5 | Coverage model extension: progressState, bestScore, evaluationTimeline, languagesTried | todo | — | update `ProblemCoverageRecord` |
 | 1.6 | Workflow orchestration + CLI flag `--fresh-snapshot` | todo | — | register `materialize-tests` subcommand |
 | 1.7 | Phase 1 `npm run verify` green + commit | todo | — | |

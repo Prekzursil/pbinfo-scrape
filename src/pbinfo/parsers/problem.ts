@@ -38,6 +38,17 @@ export interface ParsedOfficialSolutionFragment {
   solutionHashes: Record<string, string>;
 }
 
+export interface ParsedEditorialFragment {
+  access: 'visible' | 'restricted' | 'hidden';
+  message?: string;
+  /** Editorial body HTML when access==='visible'. Trimmed. */
+  html?: string;
+  /** Plain-text extraction of the editorial body for quick search / indexing. */
+  text?: string;
+  /** SHA-256 of the raw body HTML when present. Stable for change detection. */
+  contentHash?: string;
+}
+
 export function parseProblemPage(html: string, pageUrl: string): ProblemRecord {
   const $ = loadHtml(html);
   const page = new URL(pageUrl);
@@ -245,6 +256,55 @@ export function parseOfficialSolutionFragment(html: string): ParsedOfficialSolut
 
 function hashSource(value: string): string {
   return createHash('sha256').update(value, 'utf8').digest('hex');
+}
+
+export function parseEditorialFragment(html: string): ParsedEditorialFragment {
+  const $ = loadHtml(html);
+  const alert = $('.alert.alert-danger, .alert.alert-warning').first();
+  const alertText = alert.length > 0 ? normalizeWhitespace(alert.text()) : undefined;
+
+  if (alertText) {
+    const lower = alertText.toLowerCase();
+    if (
+      lower.includes('n-ai voie')
+      || lower.includes('nu ai voie')
+      || lower.includes('trebuie sa trimi')
+      || lower.includes('trebuie să trimi')
+    ) {
+      return {
+        access: 'restricted',
+        message: alertText,
+      };
+    }
+    if (lower.includes('nu sunt vizibile') || lower.includes('nu este vizibil')) {
+      return {
+        access: 'hidden',
+        message: alertText,
+      };
+    }
+  }
+
+  const body =
+    $('#indicatii, #editorial, #continut, article').first().length > 0
+      ? $('#indicatii, #editorial, #continut, article').first()
+      : $('body, main, .container').first();
+  const bodyHtml = body.html()?.trim();
+  const bodyText = normalizeWhitespace(body.text());
+
+  if (!bodyHtml || bodyText.length === 0) {
+    return {
+      access: 'hidden',
+      message: alertText,
+    };
+  }
+
+  return {
+    access: 'visible',
+    message: alertText,
+    html: bodyHtml,
+    text: bodyText,
+    contentHash: hashSource(bodyHtml),
+  };
 }
 
 function extractExamples(sectionHtml: string): ProblemExample[] {

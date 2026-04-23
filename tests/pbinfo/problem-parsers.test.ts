@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
 import {
+  parseEditorialFragment,
   parseOfficialSolutionFragment,
   parseProblemEndpointFragment,
   parseProblemPage,
@@ -415,6 +416,46 @@ describe('official solution fragment parser', () => {
     expect(parsed.access).toBe('restricted');
     expect(parsed.solutions).toEqual({});
     expect(parsed.solutionHashes).toEqual({});
+  });
+});
+
+describe('editorial fragment parser', () => {
+  test('marks access restricted when pbinfo shows the "N-ai voie" gate', () => {
+    const restricted = `
+      <h2>Indicații de rezolvare</h2>
+      <div class="alert alert-danger">N-ai voie să vezi indicațiile!</div>
+    `;
+    const parsed = parseEditorialFragment(restricted);
+    expect(parsed.access).toBe('restricted');
+    expect(parsed.message).toContain('N-ai voie');
+    expect(parsed.html).toBeUndefined();
+    expect(parsed.contentHash).toBeUndefined();
+  });
+
+  test('extracts HTML + text + contentHash when editorial is visible', () => {
+    const visible = `
+      <article id="indicatii">
+        <h3>Idee</h3>
+        <p>Folosim suma prefixelor pentru a răspunde la interogări în O(1).</p>
+        <pre>for i := 1 to n do p[i] := p[i-1] + a[i];</pre>
+      </article>
+    `;
+    const parsed = parseEditorialFragment(visible);
+    expect(parsed.access).toBe('visible');
+    expect(parsed.html).toContain('suma prefixelor');
+    expect(parsed.text).toContain('suma prefixelor');
+    expect(parsed.contentHash).toMatch(/^[0-9a-f]{64}$/);
+  });
+
+  test('content hash is stable across identical parses', () => {
+    const visible = `
+      <article id="indicatii">
+        <p>O soluție simplă este sortarea.</p>
+      </article>
+    `;
+    const a = parseEditorialFragment(visible);
+    const b = parseEditorialFragment(visible);
+    expect(a.contentHash).toBe(b.contentHash);
   });
 });
 
