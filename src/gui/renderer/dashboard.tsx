@@ -23,12 +23,13 @@ import {
   type CoverageExplorerFilters,
 } from './coverage-explorer.js';
 import { DataExplorerPanel } from './data-explorer.js';
+import { InlineBrowseViewer } from './inline-browse-viewer.js';
 
 type CredentialLoginInput = Parameters<DesktopBridge['loginProfile']>[0];
 type BrowserImportInput = Parameters<DesktopBridge['importBrowserProfile']>[0];
 type VerbosityMode = 'normal' | 'verbose' | 'raw';
 type CrawlMode = GuiCrawlMode;
-type DashboardView = 'overview' | 'coverage' | 'data' | 'setup';
+type DashboardView = 'overview' | 'coverage' | 'browse' | 'data' | 'setup';
 type OverviewBoardPreset =
   | 'all'
   | 'solved'
@@ -291,6 +292,7 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
         <div className="view-switcher" aria-label="App sections">
           {renderViewButton('Overview', 'overview', activeView, setActiveView)}
           {renderViewButton('Coverage', 'coverage', activeView, setActiveView)}
+          {renderViewButton('Browse', 'browse', activeView, setActiveView)}
           {renderViewButton('Data', 'data', activeView, setActiveView)}
           {renderViewButton('Setup', 'setup', activeView, setActiveView)}
         </div>
@@ -697,6 +699,13 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
             onSelectProblem={onSelectCoverageProblem}
             onOpenPath={onOpenPath}
             onOpenExternal={onOpenExternal}
+            />
+          ) : null}
+
+          {activeView === 'browse' ? (
+            <InlineBrowseViewer
+              previewUrl={previewUrl}
+              onOpenExternal={onOpenExternal}
             />
           ) : null}
 
@@ -1178,6 +1187,8 @@ function describeView(activeView: DashboardView): string {
       return 'See the current archive target, quick actions, recent activity, and mirror access in one lightweight overview.';
     case 'coverage':
       return 'Audit which problems are solved, which have tests archived, and which still need source or editorial coverage.';
+    case 'browse':
+      return 'Open mirrored problem pages inside the app with local underlink resolution and archive-truth fallbacks.';
     case 'data':
       return 'Inspect the raw normalized datasets and jump directly to files or live mirror routes when needed.';
     case 'setup':
