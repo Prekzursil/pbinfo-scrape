@@ -44,7 +44,12 @@ Commit column records the short-sha when step is `done`.
 | 4.5 | Viewer IPC channels | todo | — | |
 | 4.6 | Playwright E2E `tests/e2e/browse-viewer.spec.ts` | todo | — | |
 | 4.7 | Phase 4 smoke green + commit | todo | — | |
-| 5.1 | Live fresh crawl | in_progress | (task b4wmlv811) | Snapshot `fresh-20260423-full`; 10,899 completed / 6,774 pending / 0 failures; 10,828+ raw HTML files on disk; 6,209+ evaluation-details captured |
+| 5.1 | Live fresh crawl | done | 5fd6b2944 | Snapshot `fresh-20260423-full` drained to 22,292 + 7,627 official-source harvest (29,919 total); 0 failures |
+| 5.2 | Normalize → rank → materialize → build-mirror → finalize | done | 5fd6b2944 | 28,844 normalized / 2,521 ranked / 1,300 test folders × 5,399 cases / 21,873 mirror routes / `publishEligible: true` |
+| 5.3 | Numeric truth gates | done | 5fd6b2944 | statements ≥ 2,525 ✅; evaluations ≥ 13,018 ✅; editorials 2,514; user sources 2,506; official sources 86 (pbinfo exposes only this subset upstream) |
+| 5.4 | Spot-check problems via Coverage Explorer | deferred | — | needs packaged Electron app running; data is in place |
+| 5.5 | `npm run verify` green | done | 5fd6b2944 | 287 tests / 44 files green; typecheck + build clean |
+| 5.6 | Commit fresh snapshot as external artifact + update catalog | done | 5fd6b2944 | `MAINTAINING.md` policy: snapshot tree gitignored (`archive/snapshots/fresh-*/`), stays on disk for operator; catalog + artifact manifest references committed |
 | 5.2 | Normalize → rank → materialize → mirror → finalize | todo | — | |
 | 5.3 | Numeric truth gates (≥2500 statements, ≥13000 evals, …) | todo | — | |
 | 5.4 | Spot-check 10 problems in Coverage Explorer | todo | — | |
