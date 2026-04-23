@@ -36,8 +36,8 @@ Commit column records the short-sha when step is `done`.
 | 3.3 | Renderer UX: filters, sorts, row icons, detail pane | in_progress | — | contracts/bridge/app wired; Progress + Sort-by + Sort-dir chip rows live in coverage-explorer.tsx; row icon strip + timeline + per-test detail pane pending |
 | 3.4 | Renderer RTL tests | todo | — | |
 | 3.5 | Phase 3 `npm run test:desktop-electron` green + commit | todo | — | |
-| 4.1 | BrowserView manager + hardened nav | todo | — | |
-| 4.2 | Overlay server `src/mirror/overlay-server.ts` | todo | — | `/__pbinfo-overlay.json?problemId=N` |
+| 4.1 | BrowserView manager + hardened nav | done | previous commit | 10 tests; dependency-injectable; DOM-only overlay (no innerHTML); archive-truth redirect before allow-list |
+| 4.2 | Overlay server `src/mirror/overlay-server.ts` | done | previous commit | 7 tests; registered in mirror/server.ts; CWE-73 mirror hardening landed alongside |
 | 4.3 | Archive-truth stubs in mirror builder | todo | — | "Not archived yet" page |
 | 4.4 | Browse tab renderer | todo | — | |
 | 4.5 | Viewer IPC channels | todo | — | |
