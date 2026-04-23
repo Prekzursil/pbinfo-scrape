@@ -3,6 +3,7 @@ import {
   mkdtempSync,
   readFileSync,
   rmSync,
+  writeFileSync,
 } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
@@ -54,5 +55,34 @@ describe('desktop preferences', () => {
       verbosityMode: 'raw',
     });
     expect(readFileSync(preferencesPath, 'utf8')).toContain('"verbosityMode": "raw"');
+  });
+
+  test('persists and reads back themePreference', () => {
+    const userDataRoot = mkdtempSync(
+      join(tmpdir(), 'pbinfo-theme-pref-'),
+    );
+    tempDirs.push(userDataRoot);
+
+    writeDesktopPreferences(userDataRoot, {
+      verbosityMode: 'normal',
+      themePreference: 'dark',
+    });
+
+    const preferences = readDesktopPreferences(userDataRoot);
+    expect(preferences.themePreference).toBe('dark');
+  });
+
+  test('tolerates legacy preference file that omits themePreference', () => {
+    const userDataRoot = mkdtempSync(
+      join(tmpdir(), 'pbinfo-theme-legacy-'),
+    );
+    tempDirs.push(userDataRoot);
+    const path = join(userDataRoot, 'pbinfo-desktop.json');
+    // Write a legacy file with no themePreference field
+    writeFileSync(path, JSON.stringify({ verbosityMode: 'raw' }), 'utf8');
+
+    const prefs = readDesktopPreferences(userDataRoot);
+    expect(prefs.themePreference).toBeUndefined();
+    expect(prefs.verbosityMode).toBe('raw');
   });
 });

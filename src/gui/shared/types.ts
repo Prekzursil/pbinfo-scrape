@@ -121,6 +121,7 @@ export const desktopPreferencesRecordSchema = z
   .object({
     workspaceRoot: z.string().min(1).optional(),
     verbosityMode: guiVerbosityModeSchema,
+    themePreference: z.enum(['auto', 'light', 'dark']).optional(),
   })
   .strict();
 

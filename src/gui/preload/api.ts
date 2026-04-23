@@ -267,5 +267,24 @@ export function createDesktopBridge(adapter: DesktopBridgeAdapter): DesktopBridg
         return unsubscribe ?? (() => undefined);
       },
     },
+    theme: {
+      async get() {
+        return (await adapter.invoke('library:theme:get')) as Awaited<
+          ReturnType<DesktopBridge['theme']['get']>
+        >;
+      },
+      async set(preference) {
+        return (await adapter.invoke('library:theme:set', {
+          preference,
+        })) as Awaited<ReturnType<DesktopBridge['theme']['set']>>;
+      },
+      onChanged(cb) {
+        const unsubscribe = adapter.on('theme:changed', (...args) => {
+          const payload = args[0] as Parameters<typeof cb>[0];
+          cb(payload);
+        });
+        return unsubscribe ?? (() => undefined);
+      },
+    },
   };
 }

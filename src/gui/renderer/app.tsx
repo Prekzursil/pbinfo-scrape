@@ -123,6 +123,19 @@ export function App({ desktop }: AppProps) {
   }, [bridge]);
 
   useEffect(() => {
+    if (!bridge?.theme || typeof document === 'undefined') {
+      return undefined;
+    }
+    void bridge.theme.get().then(({ effective }) => {
+      document.documentElement.dataset.theme = effective;
+    });
+    const unsubscribe = bridge.theme.onChanged(({ effective }) => {
+      document.documentElement.dataset.theme = effective;
+    });
+    return unsubscribe;
+  }, [bridge]);
+
+  useEffect(() => {
     if (!bridge) {
       return undefined;
     }

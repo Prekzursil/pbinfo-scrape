@@ -24,6 +24,9 @@ import type {
   GuiProfileRecord,
   GuiVerbosityMode,
   GuiWorkspaceState,
+  LibraryThemeResult,
+  ThemeChangedEvent,
+  ThemePreference,
 } from './types.js';
 
 export interface DesktopBridge {
@@ -140,12 +143,19 @@ export interface DesktopBridge {
   openPath: (path: string) => Promise<void>;
   openExternal: (url: string) => Promise<void>;
   archive: DesktopArchiveBridge;
+  theme: DesktopThemeBridge;
 }
 
 export interface DesktopArchiveBridge {
   getState: () => Promise<GuiArchiveState>;
   setManualOverride: (absolutePath: string) => Promise<GuiArchiveState>;
   onChanged: (cb: (event: ArchiveChangedEvent) => void) => () => void;
+}
+
+export interface DesktopThemeBridge {
+  get: () => Promise<LibraryThemeResult>;
+  set: (preference: ThemePreference) => Promise<LibraryThemeResult>;
+  onChanged: (cb: (event: ThemeChangedEvent) => void) => () => void;
 }
 
 export interface DesktopBridgeAdapter {

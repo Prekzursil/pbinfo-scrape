@@ -1,7 +1,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 
-import { app, shell, type IpcMain } from 'electron';
+import { app, BrowserWindow, nativeTheme, shell, type IpcMain } from 'electron';
 
 import { resolveArchiveRoot } from './archive-resolver.js';
 import { readArchiveStore, writeArchiveStore } from './archive-store.js';
@@ -11,6 +11,7 @@ import {
   writeDesktopPreferences,
 } from './desktop-preferences.js';
 import type { NotificationService } from './notification-service.js';
+import { createThemeBridge } from './theme-bridge.js';
 import {
   activateWorkspaceProfile,
   deleteWorkspaceProfile,
@@ -35,6 +36,8 @@ import {
   guiJobStartInputSchema,
   guiOpenExternalInputSchema,
   guiWorkspaceSelectionSchema,
+  libraryGetThemeResultSchema,
+  librarySetThemeInputSchema,
 } from '../shared/contracts.js';
 import type { GuiArchiveState } from '../shared/types.js';
 
@@ -258,6 +261,36 @@ export function registerDesktopIpc(options: RegisterDesktopIpcOptions): void {
         manualArchiveOverride: absolutePath,
       });
       return resolveArchiveState(absolutePath);
+    },
+  );
+
+  // Library browser redesign (2026-04-23): theme IPC bridge.
+  const themeBridge = createThemeBridge({
+    nativeTheme,
+    getPreference: () =>
+      readDesktopPreferences(options.userDataRoot).themePreference ?? 'auto',
+    setPreference: (preference) => {
+      const current = readDesktopPreferences(options.userDataRoot);
+      writeDesktopPreferences(options.userDataRoot, {
+        ...current,
+        themePreference: preference,
+      });
+    },
+    broadcast: ({ effective }) => {
+      for (const window of BrowserWindow.getAllWindows()) {
+        window.webContents.send('theme:changed', { effective });
+      }
+    },
+  });
+
+  options.ipcMain.handle('library:theme:get', async () =>
+    libraryGetThemeResultSchema.parse(themeBridge.getTheme()),
+  );
+  options.ipcMain.handle(
+    'library:theme:set',
+    async (_event, payload: unknown) => {
+      const input = librarySetThemeInputSchema.parse(payload);
+      return libraryGetThemeResultSchema.parse(themeBridge.setTheme(input));
     },
   );
 }

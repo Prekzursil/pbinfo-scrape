@@ -24,14 +24,18 @@ On that full success, emit the sentinel: `LIBRARY_BROWSER_REDESIGN_COMPLETE — 
 
 ## Current position
 
-- **Task:** 1 — archive-resolver + archive state IPC + empty-state shell
-- **Step:** 1.1 (write failing test for archive-resolver)
-- **Last committed:** spec + plan (`1dd8e81f3`)
+- **Task:** 3 — workspace→archive rename + retire workspace IPC channels
+- **Step:** 3.1 (write failing desktop-controller test asserting archiveRoot param)
+- **Last committed:** Task 2 (pending commit below; verify green 335/335)
 
 ## Commit log
 
-_(iteration 1 appends commits here as they land)_
+| SHA | Task | Summary |
+|---|---|---|
+| `1dd8e81f3` | plan | design spec + implementation plan |
+| `668d3381b` | Task 1 | archive-resolver + empty-state shell |
+| _pending_ | Task 2 | theme token system + nativeTheme bridge |
 
 ## Open questions / notes for user
 
-_(iteration 1 appends material questions here instead of guessing)_
+- Pre-existing bug fixed as part of Task 1: `app-shell.tsx` had two `case 'problems':` labels that didn't match the `AppShellView` union. Switched to `case 'coverage':` for type soundness. This was a pre-existing blocker on `npm run typecheck`.
