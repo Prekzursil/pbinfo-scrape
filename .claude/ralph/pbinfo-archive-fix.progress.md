@@ -39,7 +39,7 @@ Commit column records the short-sha when step is `done`.
 | 4.1 | BrowserView manager + hardened nav | done | previous commit | 10 tests; dependency-injectable; DOM-only overlay (no innerHTML); archive-truth redirect before allow-list |
 | 4.2 | Overlay server `src/mirror/overlay-server.ts` | done | previous commit | 7 tests; registered in mirror/server.ts; CWE-73 mirror hardening landed alongside |
 | 4.3 | Archive-truth stubs in mirror server | done | (pending) | unknown-route 404 renders "Not archived yet" stub inline with live-link (allowlisted to pbinfo.ro paths); 4 new tests |
-| 4.4 | Browse tab renderer | todo | — | |
+| 4.4 | Browse tab renderer | done | (pending) | BrowseViewer React component with URL bar, back/fwd/reload, host div, resize observer (JSDOM fallback), error banner; 7 RTL tests green |
 | 4.5 | Viewer IPC channels | todo | — | |
 | 4.6 | Playwright E2E `tests/e2e/browse-viewer.spec.ts` | todo | — | |
 | 4.7 | Phase 4 smoke green + commit | todo | — | |
