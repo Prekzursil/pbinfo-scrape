@@ -27,9 +27,9 @@ Commit column records the short-sha when step is `done`.
 | 1.5 | Coverage model extension: progressState, bestScore, evaluationTimeline, languagesTried | done | a9d9323c7 | types + producer + totals.progressStateCounts; integration test exercises partial→solved timeline; 250 tests green |
 | 1.6 | Workflow orchestration + CLI flag `--fresh-snapshot` | todo | — | register `materialize-tests` subcommand |
 | 1.7 | Phase 1 `npm run verify` green + commit | todo | — | |
-| 2.1 | Materializer `src/tests-materializer/materialize-tests.ts` + tests | done | (pending) | 5 tests: examples-only, overlap-dedupe, empty-skip, idempotent-with-clean, file shape |
-| 2.2 | CLI `materialize-tests --snapshot <id>` | todo | — | |
-| 2.3 | Materializer fixture cases: examples-only, examples+visible, duplicate, neither | todo | — | |
+| 2.1 | Materializer `src/tests-materializer/materialize-tests.ts` + tests | done | (see 2.1 commit) | 5 tests: examples-only, overlap-dedupe, empty-skip, idempotent-with-clean, file shape |
+| 2.2 | CLI `materialize-tests --snapshot <id>` | done | f89dbff49 | handler + CLI test assertion |
+| 2.3 | Materializer fixture cases: examples-only, examples+visible, duplicate, neither | done | (covered by 2.1 tests) | scenarios (a)/(b)/(c)/(d) all exercised in 2.1 suite |
 | 2.4 | Phase 2 `npm run verify` green + commit | todo | — | |
 | 3.1 | Backend handler filter/sort extension | todo | — | |
 | 3.2 | IPC contract update | todo | — | `GuiCoverageListingRequest` + `GuiCoverageRecord` |
