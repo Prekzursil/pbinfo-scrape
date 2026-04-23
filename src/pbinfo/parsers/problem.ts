@@ -332,11 +332,19 @@ function extractExamples(sectionHtml: string): ProblemExample[] {
 
     if (tag === 'p' || tag === 'h3') {
       const normalized = normalizeCueLabel(text);
-      if (normalized.includes('intrare')) {
+      if (
+        normalized.includes('intrare')
+        || normalized.includes('input')
+        || /\.in\b/.test(normalized)
+      ) {
         mode = 'input';
         continue;
       }
-      if (normalized.includes('iesire')) {
+      if (
+        normalized.includes('iesire')
+        || normalized.includes('output')
+        || /\.out\b/.test(normalized)
+      ) {
         mode = 'output';
         continue;
       }

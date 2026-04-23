@@ -225,6 +225,41 @@ describe('problem parser', () => {
     ]);
   });
 
+  test('extracts file-based examples (multiple Exemplul N: sections with filename I/O labels)', () => {
+    const fileBasedFragment = `
+      <article id="enunt">
+        <h1>Cerința</h1>
+        <p>Determinați numărul ...</p>
+        <h1>Exemplul 1:</h1>
+        <p><code>notwen.in</code></p>
+        <pre>1
+14</pre>
+        <p><code>notwen.out</code></p>
+        <pre>2</pre>
+        <h3>Explicație</h3>
+        <p>Vezi figura.</p>
+        <h1>Exemplul 2:</h1>
+        <p><code>notwen.in</code></p>
+        <pre>2
+14</pre>
+        <p><code>notwen.out</code></p>
+        <pre>5</pre>
+        <h1>Exemplul 3:</h1>
+        <p><code>notwen.in</code></p>
+        <pre>1
+2025</pre>
+        <p><code>notwen.out</code></p>
+        <pre>5</pre>
+      </article>
+    `;
+    const parsed = parseProblemStatementFragment(fileBasedFragment);
+    expect(parsed.examples).toEqual([
+      { input: '1\n14', output: '2', explanation: 'Vezi figura.' },
+      { input: '2\n14', output: '5' },
+      { input: '1\n2025', output: '5' },
+    ]);
+  });
+
   test('classifies restricted and hidden endpoint fragments', () => {
     expect(parseProblemEndpointFragment(restrictedSolutionFragment)).toEqual({
       access: 'restricted',
