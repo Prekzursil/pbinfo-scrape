@@ -24,6 +24,9 @@ import type {
   GuiCoverageSolvedFilter,
   GuiCoverageSummary,
   GuiCoverageTestsStatusFilter,
+  GuiCoverageProgressFilter,
+  GuiCoverageSortKey,
+  GuiCoverageSortDir,
 } from '../shared/types.js';
 
 const DEFAULT_LIST_LIMIT = 100;
@@ -45,6 +48,12 @@ export interface ListCoverageOptions extends ExploreCoverageOptions {
   editorialAvailability?: GuiCoverageEditorialFilter;
   archiveCompletenessStatus?: GuiCoverageArchiveStateFilter;
   grade?: number;
+  progressState?: GuiCoverageProgressFilter;
+  languagesTried?: string[];
+  bestScoreMin?: number;
+  bestScoreMax?: number;
+  sortBy?: GuiCoverageSortKey;
+  sortDir?: GuiCoverageSortDir;
 }
 
 export interface ReadCoverageOptions extends ExploreCoverageOptions {
@@ -136,9 +145,11 @@ export function listCoverageExplorerRecords(
   const query = normalizeQuery(options.query);
   const limit = options.limit ?? DEFAULT_LIST_LIMIT;
   const offset = options.offset ?? 0;
+  const sortBy: GuiCoverageSortKey = options.sortBy ?? 'problem-id';
+  const sortDir: GuiCoverageSortDir = options.sortDir ?? 'asc';
   const filtered = context.index.records
     .filter((record) => matchesCoverageFilters(record, options, query))
-    .sort((left, right) => left.problemId - right.problemId)
+    .sort((left, right) => compareCoverageRecords(left, right, sortBy, sortDir))
     .map(toGuiCoverageRecord);
 
   return {
@@ -292,7 +303,62 @@ function toGuiCoverageRecord(record: ProblemCoverageRecord): GuiCoverageRecord {
     notArchivedYet: record.notArchivedYet ?? false,
     newSinceBaseline: record.newSinceBaseline ?? false,
     notes: record.notes,
+    progressState: record.progressState,
+    bestScore: record.bestScore,
+    lastAttemptAt: record.lastAttemptAt,
+    evaluationTimeline: record.evaluationTimeline,
+    languagesTried: record.languagesTried,
+    requiredTestsCaptured: record.requiredTestsCaptured,
   };
+}
+
+function compareCoverageRecords(
+  left: ProblemCoverageRecord,
+  right: ProblemCoverageRecord,
+  sortBy: GuiCoverageSortKey,
+  sortDir: GuiCoverageSortDir,
+): number {
+  const direction = sortDir === 'desc' ? -1 : 1;
+  switch (sortBy) {
+    case 'problem-id':
+      return (left.problemId - right.problemId) * direction;
+    case 'grade': {
+      const gradeDiff = (left.grade ?? 0) - (right.grade ?? 0);
+      if (gradeDiff !== 0) {
+        return gradeDiff * direction;
+      }
+      return left.problemId - right.problemId;
+    }
+    case 'best-score':
+      return ((left.bestScore ?? 0) - (right.bestScore ?? 0)) * direction;
+    case 'last-attempt': {
+      const leftTs = left.lastAttemptAt ?? '';
+      const rightTs = right.lastAttemptAt ?? '';
+      return leftTs.localeCompare(rightTs) * direction;
+    }
+    case 'name':
+      return left.name.localeCompare(right.name) * direction;
+    case 'attempts':
+      return ((left.evaluationCount ?? 0) - (right.evaluationCount ?? 0)) * direction;
+    case 'completeness': {
+      const leftScore = completenessScore(left);
+      const rightScore = completenessScore(right);
+      return (leftScore - rightScore) * direction;
+    }
+    default:
+      return (left.problemId - right.problemId) * direction;
+  }
+}
+
+function completenessScore(record: ProblemCoverageRecord): number {
+  // Lower is "more complete". Count missing pillars for stable ordering.
+  let missing = 0;
+  if (!record.statementArchived) missing += 1;
+  if (record.solvedByMe && !record.userSourceArchived) missing += 1;
+  if (!record.officialSourceArchived) missing += 1;
+  if (record.testsCoverageStatus === 'not-captured-yet') missing += 1;
+  if (record.editorialAvailability === 'unknown') missing += 1;
+  return missing;
 }
 
 function matchesCoverageFilters(
