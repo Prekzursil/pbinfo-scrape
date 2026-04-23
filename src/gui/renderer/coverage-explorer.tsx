@@ -319,13 +319,13 @@ export function CoverageExplorerPanel(props: CoverageExplorerPanelProps) {
                   <tr>
                     <th>Problem</th>
                     <th>Grade</th>
-                    <th>Solved</th>
+                    <th>Progress</th>
+                    <th>Best</th>
                     <th>Evals</th>
-                    <th>Tests fragment</th>
-                    <th>Effective tests</th>
-                    <th>Visible tests</th>
-                    <th>Official source</th>
-                    <th>Trustworthy user source</th>
+                    <th>Statement</th>
+                    <th>Tests</th>
+                    <th>Official</th>
+                    <th>Mine</th>
                     <th>Editorial</th>
                   </tr>
                 </thead>
@@ -487,6 +487,40 @@ export function CoverageExplorerPanel(props: CoverageExplorerPanelProps) {
                 </div>
               ) : null}
 
+              {(detail.record.evaluationTimeline?.length ?? 0) > 0 ? (
+                <div className="coverage-eval-timeline">
+                  <h4 className="section-kicker">Evaluation timeline</h4>
+                  <ol className="coverage-eval-list">
+                    {(detail.record.evaluationTimeline ?? []).slice(0, 20).map((entry) => (
+                      <li key={entry.evaluationId} className="coverage-eval-entry">
+                        <span className="coverage-eval-score">
+                          {entry.score}
+                          {entry.score >= 100 ? ' ✓' : '/100'}
+                        </span>
+                        <span className="coverage-eval-lang mono">{entry.language}</span>
+                        <span className="coverage-eval-verdict">{entry.verdictSummary}</span>
+                        <span className="coverage-eval-time summary-copy">
+                          {entry.fetchedAt
+                            ? new Date(entry.fetchedAt).toLocaleDateString()
+                            : '—'}
+                        </span>
+                        <span className="coverage-eval-id mono">
+                          #{entry.evaluationId}
+                          {entry.sourceAvailable ? ' · src' : ''}
+                        </span>
+                      </li>
+                    ))}
+                  </ol>
+                  {(detail.record.evaluationTimeline?.length ?? 0) > 20 ? (
+                    <p className="summary-copy">
+                      Showing newest 20 of {detail.record.evaluationTimeline?.length ?? 0} archived
+                      evaluations. The rest live alongside this problem in
+                      <span className="mono"> normalized/evaluations/</span>.
+                    </p>
+                  ) : null}
+                </div>
+              ) : null}
+
               <div className="button-row">
                 <button
                   className="ghost-button"
@@ -578,6 +612,33 @@ function CoverageRow({
   active: boolean;
   onSelect: (problemId: number) => void;
 }) {
+  const progressLabel = humanizeProgressState(record);
+  const mineChip = record.userSourceArchived
+    ? '✓'
+    : (record.solvedByMe ? '✗' : '·');
+  const officialChip = record.officialSourceArchived
+    ? '✓'
+    : record.officialSourceStatus === 'restricted-upstream'
+      ? '\u{1F512}'
+      : record.officialSourceStatus === 'not-available-upstream'
+        ? '·'
+        : '✗';
+  const testsChip = record.testsCoverageStatus === 'captured'
+    ? '✓'
+    : record.testsCoverageStatus === 'not-available-upstream'
+      ? '·'
+      : '✗';
+  const statementChip = record.testsFragmentArchived || record.officialSolutionPresent
+    ? '✓'
+    : '✗';
+  const editorialChip = record.editorialAvailability === 'visible'
+    ? '✓'
+    : record.editorialAvailability === 'restricted'
+      ? '\u{1F512}'
+      : record.editorialAvailability === 'hidden'
+        ? '·'
+        : '?';
+
   return (
     <tr className={active ? 'coverage-row-active' : undefined}>
       <td>
@@ -591,26 +652,32 @@ function CoverageRow({
         <div className="summary-copy">{record.slug}</div>
       </td>
       <td>{record.grade ?? '—'}</td>
-      <td>{record.solvedByMe ? 'Solved' : 'Unsolved'}</td>
+      <td>{progressLabel}</td>
+      <td>{record.bestScore ?? (record.solvedByMe ? 100 : 0)}</td>
       <td>{record.evaluationCount}</td>
-      <td>{record.testsFragmentArchived ? 'Yes' : 'No'}</td>
-      <td>{record.effectiveTestsAvailableCount}</td>
-      <td>{record.visibleTestsCapturedCount}</td>
-      <td>
-        {record.officialSourceArchived
-          ? (record.officialSourceLanguages ?? []).join(', ')
-          : humanizeOfficialSourceStatus(record.officialSourceStatus)}
+      <td title="Statement + solution fragment archived">{statementChip}</td>
+      <td title={`Tests: ${humanizeTestsCoverageStatus(record.testsCoverageStatus)}`}>
+        {testsChip}
       </td>
-      <td>
-        {(record.trustworthyUserSourceLanguages ?? []).length > 0
-          ? (record.trustworthyUserSourceLanguages ?? []).join(', ')
-          : record.userSourceArchived
-            ? 'Archived only'
-            : 'No'}
+      <td title={`Official: ${humanizeOfficialSourceStatus(record.officialSourceStatus)}`}>
+        {officialChip}
       </td>
-      <td>{record.editorialAvailability}</td>
+      <td title={`Your 100pt source ${record.userSourceArchived ? 'archived' : 'not archived'}`}>
+        {mineChip}
+      </td>
+      <td title={`Editorial: ${record.editorialAvailability}`}>{editorialChip}</td>
     </tr>
   );
+}
+
+function humanizeProgressState(record: GuiCoverageRecord): string {
+  if (record.progressState === 'solved' || record.solvedByMe) {
+    return 'Solved';
+  }
+  if (record.progressState === 'partial' || record.evaluationCount > 0) {
+    return 'Partial';
+  }
+  return 'Not tried';
 }
 
 function humanizeTestsCoverageStatus(
