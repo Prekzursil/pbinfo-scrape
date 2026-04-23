@@ -82,6 +82,41 @@ export const guiCoverageArchiveStateFilterSchema = z.enum([
   'incomplete',
 ]);
 
+export const guiCoverageProgressFilterSchema = z.enum([
+  'all',
+  'solved',
+  'partial',
+  'not-attempted',
+]);
+
+export const guiCoverageSortKeySchema = z.enum([
+  'problem-id',
+  'grade',
+  'best-score',
+  'last-attempt',
+  'name',
+  'attempts',
+  'completeness',
+]);
+
+export const guiCoverageSortDirSchema = z.enum(['asc', 'desc']);
+
+export const guiProgressStateSchema = z.enum(['solved', 'partial', 'not-attempted']);
+
+export const guiEvaluationTimelineEntrySchema = z
+  .object({
+    evaluationId: z.number().int().positive(),
+    language: z.string().min(1),
+    score: z.number(),
+    verdictSummary: z.string(),
+    submittedAt: z.string().optional(),
+    fetchedAt: z.string().optional(),
+    runtimeSeconds: z.number().nonnegative().optional(),
+    memoryKb: z.number().nonnegative().optional(),
+    sourceAvailable: z.boolean(),
+  })
+  .strict();
+
 export const desktopPreferencesRecordSchema = z
   .object({
     workspaceRoot: z.string().min(1).optional(),
@@ -272,6 +307,12 @@ export const guiCoverageRecordSchema = z
     notArchivedYet: z.boolean(),
     newSinceBaseline: z.boolean(),
     notes: z.array(z.string()),
+    progressState: guiProgressStateSchema.optional(),
+    bestScore: z.number().nonnegative().optional(),
+    lastAttemptAt: z.string().optional(),
+    evaluationTimeline: z.array(guiEvaluationTimelineEntrySchema).optional(),
+    languagesTried: z.array(z.string().min(1)).optional(),
+    requiredTestsCaptured: z.boolean().optional(),
   })
   .strict();
 
@@ -310,6 +351,14 @@ export const guiCoverageSummarySchema = z
     unsolvedProblemIds: z.array(z.number().int().positive()).optional(),
     missingOfficialSourceProblemIds: z.array(z.number().int().positive()).optional(),
     solvedByMeMissingUserSourceProblemIds: z.array(z.number().int().positive()).optional(),
+    progressStateCounts: z
+      .object({
+        solved: z.number().int().nonnegative(),
+        partial: z.number().int().nonnegative(),
+        notAttempted: z.number().int().nonnegative(),
+      })
+      .strict()
+      .optional(),
   })
   .strict();
 
@@ -401,6 +450,15 @@ export type GuiCoverageTestsStatusFilter = z.infer<
 >;
 export type GuiCoverageArchiveStateFilter = z.infer<
   typeof guiCoverageArchiveStateFilterSchema
+>;
+export type GuiCoverageProgressFilter = z.infer<
+  typeof guiCoverageProgressFilterSchema
+>;
+export type GuiCoverageSortKey = z.infer<typeof guiCoverageSortKeySchema>;
+export type GuiCoverageSortDir = z.infer<typeof guiCoverageSortDirSchema>;
+export type GuiProgressState = z.infer<typeof guiProgressStateSchema>;
+export type GuiEvaluationTimelineEntry = z.infer<
+  typeof guiEvaluationTimelineEntrySchema
 >;
 export type DesktopPreferencesRecord = z.infer<
   typeof desktopPreferencesRecordSchema
