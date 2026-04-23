@@ -1,0 +1,22 @@
+{
+  "$comment": "Source-of-truth for coverage enforcement per CLAUDE.md. Starts permissive for pragmatism; tighten as the archive-fix phases complete and existing modules gain tests. Loop may NOT drop below these thresholds.",
+  "global": {
+    "lines": 80,
+    "branches": 75,
+    "functions": 80,
+    "statements": 80
+  },
+  "perModule": {
+    "src/auth/bootstrap.ts": { "lines": 95, "branches": 90, "functions": 95, "statements": 95 },
+    "src/crawl/user-submissions-enumerator.ts": { "lines": 95, "branches": 90, "functions": 95, "statements": 95 },
+    "src/tests-materializer/materialize-tests.ts": { "lines": 95, "branches": 90, "functions": 95, "statements": 95 },
+    "src/coverage/problem-coverage.ts": { "lines": 90, "branches": 85, "functions": 90, "statements": 90 },
+    "src/pbinfo/parsers/": { "lines": 90, "branches": 85, "functions": 90, "statements": 90 }
+  },
+  "enforcementCommand": "npx vitest run --coverage",
+  "notes": [
+    "Electron main/preload paths typically register lower — not in this list by design.",
+    "Playwright E2E specs under tests/e2e/ are excluded from vitest coverage.",
+    "HTML fixtures under tests/fixtures/ are excluded from coverage."
+  ]
+}
