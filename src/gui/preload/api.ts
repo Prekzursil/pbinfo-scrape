@@ -259,6 +259,11 @@ export function createDesktopBridge(adapter: DesktopBridgeAdapter): DesktopBridg
           ReturnType<DesktopBridge['archive']['setManualOverride']>
         >;
       },
+      async browseForRoot() {
+        return (await adapter.invoke('archive:browse-for-root')) as Awaited<
+          ReturnType<DesktopBridge['archive']['browseForRoot']>
+        >;
+      },
       onChanged(cb) {
         const unsubscribe = adapter.on('archive:changed', (...args) => {
           const payload = args[0] as Parameters<typeof cb>[0];

@@ -106,13 +106,11 @@ export function App({ desktop }: AppProps) {
           void bridge.operator.runFullRefresh({});
         }}
         onBrowseForArchive={() => {
-          // Browse-for-archive prompts a native directory picker — dialog
-          // wiring is a follow-up. For now the user must stage the archive
-          // next to the exe or set a manual override via
-          // archive:set-manual-override.
-          console.info(
-            'Browse for archive: native dialog wiring is a follow-up.',
-          );
+          void bridge.archive.browseForRoot().then((result) => {
+            if (!result.cancelled) {
+              setArchiveState(result.state);
+            }
+          });
         }}
       />
     );

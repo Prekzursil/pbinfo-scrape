@@ -264,6 +264,9 @@ export interface DesktopLibraryBridge {
 export interface DesktopArchiveBridge {
   getState: () => Promise<GuiArchiveState>;
   setManualOverride: (absolutePath: string) => Promise<GuiArchiveState>;
+  browseForRoot: () => Promise<
+    { cancelled: true } | { cancelled: false; state: GuiArchiveState }
+  >;
   onChanged: (cb: (event: ArchiveChangedEvent) => void) => () => void;
 }
 

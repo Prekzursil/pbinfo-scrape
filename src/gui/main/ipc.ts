@@ -5,6 +5,7 @@ import {
   app,
   BrowserWindow,
   clipboard,
+  dialog,
   nativeTheme,
   shell,
   type IpcMain,
@@ -23,6 +24,12 @@ import {
 import { openLiveSiteViewerChildWindow } from './live-site-viewer-window.js';
 import { operatorLogin } from './login-coordinator.js';
 import { createRunRefreshCoordinator } from './run-refresh-coordinator.js';
+import { dirname as pathDirname } from 'node:path';
+import { runCrawlWorkflow } from '../../workflows/crawl-workflow.js';
+import { runNormalizeSnapshotWorkflow } from '../../workflows/normalize-workflow.js';
+import { runProblemCoverageWorkflow } from '../../workflows/problem-coverage-workflow.js';
+import { runRankingWorkflow } from '../../workflows/rank-workflow.js';
+import { finalizeSnapshotWorkflow } from '../../workflows/snapshot-workflow.js';
 import {
   readDesktopPreferences,
   writeDesktopPreferences,
@@ -306,6 +313,37 @@ export function registerDesktopIpc(options: RegisterDesktopIpcOptions): void {
     },
   );
 
+  // Task 11.2: native directory picker for the empty-state "Browse for
+  // archive/" flow. Returns the new archive:state after persisting the
+  // override, or { cancelled: true } if the user closed the dialog.
+  options.ipcMain.handle(
+    'archive:browse-for-root',
+    async (): Promise<
+      { cancelled: true } | { cancelled: false; state: GuiArchiveState }
+    > => {
+      const focused = BrowserWindow.getFocusedWindow();
+      const pickResult = focused
+        ? await dialog.showOpenDialog(focused, {
+            title: 'Select your pbinfo archive folder',
+            properties: ['openDirectory', 'createDirectory'],
+          })
+        : await dialog.showOpenDialog({
+            title: 'Select your pbinfo archive folder',
+            properties: ['openDirectory', 'createDirectory'],
+          });
+      if (pickResult.canceled || pickResult.filePaths.length === 0) {
+        return { cancelled: true };
+      }
+      const absolutePath = pickResult.filePaths[0];
+      if (!absolutePath) return { cancelled: true };
+      writeArchiveStore(options.userDataRoot, {
+        manualArchiveOverride: absolutePath,
+      });
+      const state = resolveArchiveState(absolutePath);
+      return { cancelled: false, state };
+    },
+  );
+
   // Library browser redesign (2026-04-23): theme IPC bridge.
   const themeBridge = createThemeBridge({
     nativeTheme,
@@ -435,24 +473,77 @@ export function registerDesktopIpc(options: RegisterDesktopIpcOptions): void {
   };
 
   const coordinator = createRunRefreshCoordinator({
-    runPipeline: async () => {
-      // NOTE: the real pipeline wiring lives in the CLI / workflow modules.
-      // Wiring the run-full-refresh execution into this coordinator is a
-      // follow-up: it should shell out to `runCrawlWorkflow` and friends,
-      // forwarding progress via onProgress. For now this handler is the
-      // integration seam — it returns the resolved archive state unchanged
-      // so the coordinator's broadcast + archive:changed plumbing can be
-      // exercised manually from the UI without kicking off a real 4-5h
-      // crawl. Task 11 wires the real pipeline.
+    runPipeline: async ({ onProgress, signal }) => {
+      // Task 11.3: wires the operator's "Run full refresh" button to the
+      // real workflow pipeline. Phases map 1:1 to the spec §10.2 progress
+      // chips so the UI's phase cluster lights up as the crawl advances.
+      //
+      // Cancellation note: the workflow modules don't currently accept an
+      // AbortSignal, so signal.aborted can only short-circuit BETWEEN
+      // phases. Mid-crawl cancel is a follow-up that requires signal
+      // plumbing into runCrawlWorkflow / runNormalizeSnapshotWorkflow.
       const archive = resolveArchiveState(
         readArchiveStore(options.userDataRoot).manualArchiveOverride,
       );
-      if (!archive.found || !archive.archiveRoot || !archive.snapshotId) {
+      if (!archive.found || !archive.archiveRoot) {
         throw new Error('archive-missing');
       }
+      // For the portable archive layout <exeDir>/archive, the workspace
+      // root the CLI workflows expect is the parent directory.
+      const workspaceRoot = pathDirname(archive.archiveRoot);
+
+      const checkCancel = (): void => {
+        if (signal.aborted) throw new Error('cancelled');
+      };
+
+      onProgress({ phase: 'auth', processed: 0, total: 1 });
+      checkCancel();
+
+      onProgress({ phase: 'crawl-list', processed: 0, total: 1 });
+      const crawlResult = await runCrawlWorkflow(workspaceRoot, 'all');
+      onProgress({
+        phase: 'crawl-detail',
+        processed: 1,
+        total: 1,
+        message: `captured ${crawlResult.processed ?? 0} URLs`,
+      });
+      checkCancel();
+
+      const snapshotId = crawlResult.snapshotId ?? archive.snapshotId;
+      onProgress({ phase: 'normalize', processed: 0, total: 1 });
+      await runNormalizeSnapshotWorkflow(workspaceRoot, snapshotId);
+      onProgress({ phase: 'normalize', processed: 1, total: 1 });
+      checkCancel();
+
+      onProgress({ phase: 'rank', processed: 0, total: 1 });
+      await runRankingWorkflow(workspaceRoot, snapshotId);
+      onProgress({ phase: 'rank', processed: 1, total: 1 });
+      checkCancel();
+
+      onProgress({ phase: 'materialize', processed: 0, total: 1 });
+      await runProblemCoverageWorkflow(workspaceRoot, snapshotId);
+      onProgress({ phase: 'materialize', processed: 1, total: 1 });
+      checkCancel();
+
+      // Mirror build is optional at finalize time; leaving it here as a
+      // future step so the chip cluster stays accurate.
+      onProgress({ phase: 'mirror', processed: 1, total: 1 });
+
+      onProgress({ phase: 'finalize', processed: 0, total: 1 });
+      if (!snapshotId) {
+        throw new Error('snapshot-id-missing-before-finalize');
+      }
+      const finalizeResult = await finalizeSnapshotWorkflow(
+        workspaceRoot,
+        snapshotId,
+      );
+      onProgress({ phase: 'finalize', processed: 1, total: 1 });
+
+      const resolvedSnapshotId =
+        finalizeResult.snapshotId ?? snapshotId;
       return {
         archiveRoot: archive.archiveRoot,
-        snapshotId: archive.snapshotId,
+        snapshotId: resolvedSnapshotId,
       };
     },
     broadcast: (event) =>
