@@ -78,7 +78,8 @@ describe('desktop branding assets', () => {
       'utf8',
     );
 
-    expect(rendererEntry).toContain("@fontsource/sora");
+    // Sora was dropped in Task 11 together with the legacy hero; the library
+    // shell uses Manrope (sans) + IBM Plex Mono (mono) exclusively.
     expect(rendererEntry).toContain("@fontsource/manrope");
     expect(rendererEntry).toContain("@fontsource/ibm-plex-mono");
     expect(rendererHtml).toContain("<title>Problem Archive Crawler</title>");

@@ -47,6 +47,12 @@ export function createThemeBridge(deps: ThemeBridgeDeps): ThemeBridge {
       deps.setPreference(preference);
       applyPreferenceToNativeTheme(deps.nativeTheme, preference);
       const effective = effectiveFor(deps.nativeTheme, preference);
+      // Broadcast so every renderer window (including the one that
+      // initiated the change) gets the new effective theme. Without this,
+      // the initiating renderer has to handle the set() promise itself to
+      // update its data-theme; the broadcast path also covers any peer
+      // windows that share the same preference store.
+      deps.broadcast({ effective });
       return { effective, preference };
     },
   };

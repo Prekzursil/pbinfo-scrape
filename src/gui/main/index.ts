@@ -201,11 +201,43 @@ async function maybeWriteDesktopSmokeMarker(
 
     // Capture a screenshot of the rendered window so humans can actually see
     // what the smoke probe measured, not just the text content it scraped.
+    // The optional PBINFO_DESKTOP_TEST_CLICK_ROW env var also clicks the
+    // first rendered row before capturing so the drawer state is included.
     let screenshotPath: string | undefined;
     if (process.env.PBINFO_DESKTOP_TEST_SCREENSHOT_PATH) {
       try {
         // Give the library's async problem-list fetch time to resolve + paint.
         await new Promise((resolve) => setTimeout(resolve, 1500));
+
+        if (process.env.PBINFO_DESKTOP_TEST_CLICK_ROW === '1') {
+          await window.webContents.executeJavaScript(
+            `(() => {
+              const firstRow = document.querySelector('[data-testid^="problem-row-"]');
+              if (firstRow instanceof HTMLElement) {
+                firstRow.click();
+              }
+            })()`,
+            true,
+          );
+          await new Promise((resolve) => setTimeout(resolve, 1200));
+        }
+
+        if (process.env.PBINFO_DESKTOP_TEST_FORCE_THEME) {
+          // Call the real theme bridge so the main-process preference store
+          // flips AND the renderer subscription re-sets dataset.theme in the
+          // same tick. The effective theme persists for the screenshot because
+          // the renderer subscribes to theme:changed and mirrors the flag into
+          // document.documentElement.dataset.theme.
+          const themePref = process.env.PBINFO_DESKTOP_TEST_FORCE_THEME;
+          await window.webContents.executeJavaScript(
+            `(async () => {
+              await window.pbinfoDesktop.theme.set(${JSON.stringify(themePref)});
+            })()`,
+            true,
+          );
+          await new Promise((resolve) => setTimeout(resolve, 800));
+        }
+
         const image = await window.webContents.capturePage();
         writeFileSync(
           process.env.PBINFO_DESKTOP_TEST_SCREENSHOT_PATH,

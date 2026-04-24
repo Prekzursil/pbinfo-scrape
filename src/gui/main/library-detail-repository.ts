@@ -78,6 +78,22 @@ export interface ProblemDetailPayload {
   };
 }
 
+// Real archive layout (archive/snapshots/<id>/normalized/) confirmed against
+// fresh-20260423-full in Task 11.5:
+//
+//   problem-coverage/problem-<problemId>.json
+//   problems/problem-<problemId>.json
+//   evaluations/evaluation-<evalId>.json
+//   sources/evaluation-<evalId>.json      — user sources (JSON with sourceCode)
+//   sources/official-<problemId>-<lang>-<evalId>.json — official sources
+//
+// Tests live under archive/snapshots/<id>/tests/<problemId>-<slug>/tests.json
+// (outside normalized/).
+//
+// Some fixtures in early Task 6 tests used flat `<id>.json` filenames; the
+// loader accepts both naming conventions to avoid a flag-day change to the
+// test suite.
+
 interface CoverageFile {
   readonly problemId: number;
   readonly slug: string;
@@ -85,6 +101,7 @@ interface CoverageFile {
   readonly statementArchived?: boolean;
   readonly officialSourceArchived?: boolean;
   readonly officialSourceStatus?: string;
+  readonly officialSourceIds?: readonly string[];
   readonly officialSourceLanguages?: readonly string[];
   readonly editorialAvailability?:
     | 'visible'
@@ -93,6 +110,7 @@ interface CoverageFile {
     | 'unknown';
   readonly testsCoverageStatus?: string;
   readonly evaluationIds?: readonly number[];
+  readonly userSourceIds?: readonly string[];
   readonly userSourceArchived?: boolean;
   readonly userSourceLanguages?: readonly string[];
 }
@@ -116,7 +134,15 @@ interface EvaluationFile {
   readonly verdict?: string;
   readonly submittedAt?: string;
   readonly runtime?: number;
+  readonly runtimeSeconds?: number;
   readonly memory?: number;
+  readonly memoryKb?: number;
+}
+
+interface SourceFile {
+  readonly sourceCode?: string;
+  readonly kind?: string;
+  readonly language?: string;
 }
 
 interface TestsFile {
@@ -130,12 +156,17 @@ export async function loadProblemDetail(
 ): Promise<ProblemDetailPayload> {
   const base = join(archiveRoot, 'snapshots', snapshotId);
   const normalizedRoot = join(base, 'normalized');
-  const coveragePath = join(
-    normalizedRoot,
-    'problem-coverage',
-    `${problemId}.json`,
-  );
-  const normalizedPath = join(normalizedRoot, 'problems', `${problemId}.json`);
+
+  const coveragePath =
+    findFirstExisting(
+      join(normalizedRoot, 'problem-coverage', `problem-${problemId}.json`),
+      join(normalizedRoot, 'problem-coverage', `${problemId}.json`),
+    ) ?? join(normalizedRoot, 'problem-coverage', `problem-${problemId}.json`);
+  const normalizedPath =
+    findFirstExisting(
+      join(normalizedRoot, 'problems', `problem-${problemId}.json`),
+      join(normalizedRoot, 'problems', `${problemId}.json`),
+    ) ?? join(normalizedRoot, 'problems', `problem-${problemId}.json`);
 
   const coverage = readJson<CoverageFile>(coveragePath);
   const problemRaw = readJson<ProblemFile>(normalizedPath);
@@ -152,8 +183,25 @@ export async function loadProblemDetail(
   const evaluations: EvaluationSummary[] = [];
   const sourceBodies: Record<number, string> = {};
   const evaluationFiles: string[] = [];
+  const explicitUserSourceIds =
+    coverage.userSourceIds && coverage.userSourceIds.length > 0
+      ? new Set(
+          coverage.userSourceIds.map((id) => normalizeSourceIdToNumber(id)),
+        )
+      : undefined;
+  // Fallback rule: when coverage doesn't enumerate userSourceIds (older
+  // fixtures + tests), populate source bodies for every 100-pt evaluation,
+  // matching the operator's "only 100-pt sources are archived" rule.
+  const shouldPopulateSource = (ev: EvaluationFile): boolean =>
+    explicitUserSourceIds
+      ? explicitUserSourceIds.has(ev.evaluationId)
+      : ev.score === 100;
   for (const evalId of coverage.evaluationIds ?? []) {
-    const evalPath = join(normalizedRoot, 'evaluations', `${evalId}.json`);
+    const evalPath =
+      findFirstExisting(
+        join(normalizedRoot, 'evaluations', `evaluation-${evalId}.json`),
+        join(normalizedRoot, 'evaluations', `${evalId}.json`),
+      ) ?? join(normalizedRoot, 'evaluations', `evaluation-${evalId}.json`);
     const parsed = readJson<EvaluationFile>(evalPath);
     if (!parsed) continue;
     evaluations.push({
@@ -162,52 +210,77 @@ export async function loadProblemDetail(
       language: parsed.language,
       verdict: parsed.verdict,
       submittedAt: parsed.submittedAt,
-      runtime: parsed.runtime,
-      memory: parsed.memory,
+      runtime: parsed.runtime ?? parsed.runtimeSeconds,
+      memory: parsed.memory ?? parsed.memoryKb,
     });
     evaluationFiles.push(evalPath);
 
-    if (parsed.score === 100) {
-      const candidate = join(
-        normalizedRoot,
-        'sources',
-        'user',
-        `${parsed.evaluationId}.${parsed.language}`,
+    if (!shouldPopulateSource(parsed)) continue;
+    const userSourcePath =
+      findFirstExisting(
+        join(normalizedRoot, 'sources', `evaluation-${parsed.evaluationId}.json`),
+        join(normalizedRoot, 'sources', 'user', `${parsed.evaluationId}.${parsed.language}`),
       );
-      if (existsSync(candidate)) {
-        sourceBodies[parsed.evaluationId] = readFileSync(candidate, 'utf8');
+    if (!userSourcePath) continue;
+    if (userSourcePath.endsWith('.json')) {
+      const wrapper = readJson<SourceFile>(userSourcePath);
+      if (wrapper?.sourceCode) {
+        sourceBodies[parsed.evaluationId] = wrapper.sourceCode;
       }
+    } else {
+      sourceBodies[parsed.evaluationId] = readFileSync(userSourcePath, 'utf8');
     }
   }
 
   const officialBodies: Record<Language, { body: string; filePath: string }> =
     {};
+  const officialPrefix = `official-${coverage.problemId}-`;
+  const sourcesDir = join(normalizedRoot, 'sources');
+  if (coverage.officialSourceArchived && existsSync(sourcesDir)) {
+    const entries = readdirSync(sourcesDir);
+    for (const entry of entries) {
+      if (!entry.startsWith(officialPrefix) || !entry.endsWith('.json')) {
+        continue;
+      }
+      const wrapper = readJson<SourceFile>(join(sourcesDir, entry));
+      if (!wrapper?.sourceCode || !wrapper.language) continue;
+      if (!officialBodies[wrapper.language]) {
+        officialBodies[wrapper.language] = {
+          body: wrapper.sourceCode,
+          filePath: join(sourcesDir, entry),
+        };
+      }
+    }
+  }
+  // Legacy fixture path used by older tests: sources/official/<id>-<slug>.<lang>
   if (coverage.officialSourceArchived && coverage.officialSourceLanguages) {
     for (const lang of coverage.officialSourceLanguages) {
-      const candidate = join(
-        normalizedRoot,
-        'sources',
+      if (officialBodies[lang]) continue;
+      const legacyPath = join(
+        sourcesDir,
         'official',
         `${coverage.problemId}-${coverage.slug}.${lang}`,
       );
-      if (existsSync(candidate)) {
+      if (existsSync(legacyPath)) {
         officialBodies[lang] = {
-          body: readFileSync(candidate, 'utf8'),
-          filePath: candidate,
+          body: readFileSync(legacyPath, 'utf8'),
+          filePath: legacyPath,
         };
       }
     }
   }
 
-  const editorialAvailability =
-    coverage.editorialAvailability ?? 'unknown';
-  const editorialFilePath = join(
-    normalizedRoot,
-    'editorials',
-    `${coverage.problemId}-${coverage.slug}.html`,
+  const editorialAvailability = coverage.editorialAvailability ?? 'unknown';
+  const editorialFilePath = findFirstExisting(
+    join(normalizedRoot, 'editorials', `problem-${coverage.problemId}.html`),
+    join(normalizedRoot, 'editorials', `${coverage.problemId}-${coverage.slug}.html`),
   );
   let editorialHtmlBody: string | undefined;
-  if (editorialAvailability === 'visible' && existsSync(editorialFilePath)) {
+  if (
+    editorialAvailability === 'visible' &&
+    editorialFilePath &&
+    existsSync(editorialFilePath)
+  ) {
     editorialHtmlBody = sanitizeArchiveHtml(
       readFileSync(editorialFilePath, 'utf8'),
     );
@@ -221,15 +294,10 @@ export async function loadProblemDetail(
   const testsJsonPath = join(testsFolder, 'tests.json');
   const testsJson = readJson<TestsFile>(testsJsonPath);
 
-  const sourceDirs = [
-    join(normalizedRoot, 'sources', 'user'),
-    join(normalizedRoot, 'sources', 'official'),
-  ];
   const sourceFiles: string[] = [];
-  for (const dir of sourceDirs) {
-    if (!existsSync(dir)) continue;
-    for (const entry of readdirSync(dir)) {
-      sourceFiles.push(join(dir, entry));
+  if (existsSync(sourcesDir)) {
+    for (const entry of readdirSync(sourcesDir)) {
+      sourceFiles.push(join(sourcesDir, entry));
     }
   }
 
@@ -265,12 +333,13 @@ export async function loadProblemDetail(
     },
     officialSource: {
       availability: coverage.officialSourceStatus ?? 'unknown',
-      bodies: Object.keys(officialBodies).length > 0 ? officialBodies : undefined,
+      bodies:
+        Object.keys(officialBodies).length > 0 ? officialBodies : undefined,
     },
     editorial: {
       availability: editorialAvailability,
       htmlBody: editorialHtmlBody,
-      filePath: existsSync(editorialFilePath) ? editorialFilePath : undefined,
+      filePath: editorialFilePath,
     },
     rawPaths: {
       normalized: normalizedPath,
@@ -282,6 +351,15 @@ export async function loadProblemDetail(
   };
 }
 
+function findFirstExisting(
+  ...candidates: readonly string[]
+): string | undefined {
+  for (const candidate of candidates) {
+    if (existsSync(candidate)) return candidate;
+  }
+  return undefined;
+}
+
 function readJson<T>(path: string): T | undefined {
   if (!existsSync(path)) return undefined;
   try {
@@ -289,4 +367,11 @@ function readJson<T>(path: string): T | undefined {
   } catch {
     return undefined;
   }
+}
+
+function normalizeSourceIdToNumber(sourceId: string): number {
+  // coverage.userSourceIds entries look like 'evaluation-7268103' — strip
+  // the prefix and parse the trailing int.
+  const match = sourceId.match(/(\d+)$/u);
+  return match ? parseInt(match[1] ?? '0', 10) : 0;
 }
