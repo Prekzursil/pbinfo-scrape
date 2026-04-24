@@ -24,9 +24,21 @@ On that full success, emit the sentinel: `LIBRARY_BROWSER_REDESIGN_COMPLETE — 
 
 ## Current position
 
-- **Task:** 8 — OperatorMenu + run-refresh coordinator + ProgressPanel + SettingsModal
-- **Step:** 8.1 (write failing run-refresh-coordinator test)
-- **Last committed:** Task 7 (pending below; verify green 392/392)
+- **Task:** 9 STOP GATE — await explicit user approval before destructive cutover
+- **Last committed:** Task 8 (pending below; verify green 413/413)
+
+## Iteration 3 recap
+
+Completed: Task 8. Full operator surface now live behind the dev flag:
+
+- OperatorMenu (⚙ Settings / 🌐 Open live-site viewer / 📊 Open data explorer / 🔄 Run full refresh / Re-authenticate) with dividers grouping session / destructive / explorer actions.
+- ProgressPanel with 8-phase chip cluster + progress bar + cancel confirmation.
+- SettingsModal with theme dropdown + snapshot override + archive root readout.
+- run-refresh-coordinator (job mutex, throttled progress, archive:changed emit on completion) — NOTE: the real pipeline wiring is stubbed in ipc.ts; iteration 4 (or Task 11) will replace the stub with the actual runCrawlWorkflow invocation.
+- operator:login + operatorLogin coordinator (writes creds to <workspaceRoot>/.local/pbinfo.local.json, calls bootstrapAuth, returns success + resolvedHandle; never logs the payload on error).
+- live-site-viewer child window (sandbox:true + no-IPC preload + will-navigate origin guard).
+
+**Do NOT execute Task 9 autonomously.** The next iteration must pause and ask the user for explicit approval before deleting dashboard.tsx / app-shell.tsx / coverage-explorer.tsx / workspace-store.ts + flipping sandbox:true + injecting CSP headers.
 
 ## Iteration 1 recap
 

@@ -316,5 +316,47 @@ export function createDesktopBridge(adapter: DesktopBridgeAdapter): DesktopBridg
         })) as Awaited<ReturnType<DesktopBridge['shell']['copyToClipboard']>>;
       },
     },
+    operator: {
+      async runFullRefresh(input) {
+        return (await adapter.invoke(
+          'operator:run-full-refresh',
+          input ?? {},
+        )) as Awaited<
+          ReturnType<DesktopBridge['operator']['runFullRefresh']>
+        >;
+      },
+      async runFullRefreshCancel(input) {
+        return (await adapter.invoke(
+          'operator:run-full-refresh:cancel',
+          input,
+        )) as Awaited<
+          ReturnType<DesktopBridge['operator']['runFullRefreshCancel']>
+        >;
+      },
+      onProgress(cb) {
+        const unsubscribe = adapter.on(
+          'operator:run-full-refresh:progress',
+          (...args) => {
+            const payload = args[0] as Parameters<typeof cb>[0];
+            cb(payload);
+          },
+        );
+        return unsubscribe ?? (() => undefined);
+      },
+      async login(input) {
+        return (await adapter.invoke(
+          'operator:login',
+          input,
+        )) as Awaited<ReturnType<DesktopBridge['operator']['login']>>;
+      },
+      async openLiveSiteViewer(input) {
+        return (await adapter.invoke(
+          'operator:open-live-site-viewer',
+          input ?? {},
+        )) as Awaited<
+          ReturnType<DesktopBridge['operator']['openLiveSiteViewer']>
+        >;
+      },
+    },
   };
 }

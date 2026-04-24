@@ -1,10 +1,20 @@
+import type { ReactNode } from 'react';
+
 export interface TopBarProps {
   readonly archiveRoot: string;
   readonly snapshotId: string | undefined;
   readonly totalCount: number;
+  readonly operatorMenu?: ReactNode;
+  readonly progressChip?: ReactNode;
 }
 
-export function TopBar({ archiveRoot, snapshotId, totalCount }: TopBarProps) {
+export function TopBar({
+  archiveRoot,
+  snapshotId,
+  totalCount,
+  operatorMenu,
+  progressChip,
+}: TopBarProps) {
   return (
     <header className="library-shell__topbar" role="banner">
       <h1>Problem Archive Crawler</h1>
@@ -12,7 +22,11 @@ export function TopBar({ archiveRoot, snapshotId, totalCount }: TopBarProps) {
         <span className="library-shell__snapshot-chip" title={archiveRoot}>
           {snapshotId ?? 'no snapshot'}
         </span>
-        <span className="library-shell__count">{totalCount.toLocaleString()} problems</span>
+        <span className="library-shell__count">
+          {totalCount.toLocaleString()} problems
+        </span>
+        {progressChip}
+        {operatorMenu}
       </div>
     </header>
   );

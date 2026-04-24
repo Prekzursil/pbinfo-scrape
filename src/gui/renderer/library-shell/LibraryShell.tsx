@@ -1,9 +1,16 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import type { DesktopBridge, LibraryProblemRow } from '../../shared/bridge.js';
+import type {
+  DesktopBridge,
+  LibraryProblemRow,
+  RefreshProgressEvent,
+} from '../../shared/bridge.js';
 import { FilterSidebar } from './FilterSidebar.js';
+import { OperatorMenu } from './OperatorMenu.js';
 import { ProblemDrawer } from './ProblemDrawer.js';
 import { ProblemsTable } from './ProblemsTable.js';
+import { ProgressPanel } from './ProgressPanel.js';
+import { SettingsModal } from './SettingsModal.js';
 import { TopBar } from './TopBar.js';
 import { DEFAULT_FILTERS, useFilters } from './useFilters.js';
 
@@ -28,6 +35,11 @@ export function LibraryShell({
   const [loadError, setLoadError] = useState<string | undefined>(undefined);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const sidebarRef = useRef<HTMLElement>(null);
+  const [progressEvent, setProgressEvent] = useState<
+    RefreshProgressEvent | undefined
+  >(undefined);
+  const [activeJobId, setActiveJobId] = useState<string | undefined>(undefined);
+  const [settingsOpen, setSettingsOpen] = useState(false);
 
   const focusSearch = useCallback(() => {
     searchInputRef.current?.focus();
@@ -37,6 +49,51 @@ export function LibraryShell({
     sidebarRef.current?.focus();
   }, []);
   const clearSelection = useCallback(() => setSelectedId(undefined), []);
+
+  useEffect(() => {
+    const unsub = bridge.operator.onProgress((event) => {
+      setProgressEvent(event);
+      if (event.phase === 'finalize') {
+        setActiveJobId(undefined);
+      } else {
+        setActiveJobId(event.jobId);
+      }
+    });
+    return unsub;
+  }, [bridge]);
+
+  const handleRunFullRefresh = useCallback(async () => {
+    try {
+      const result = await bridge.operator.runFullRefresh({});
+      setActiveJobId(result.jobId);
+    } catch {
+      /* surface via progress panel finalize event */
+    }
+  }, [bridge]);
+
+  const handleCancelRefresh = useCallback(() => {
+    if (!activeJobId) return;
+    void bridge.operator.runFullRefreshCancel({ jobId: activeJobId });
+  }, [bridge, activeJobId]);
+
+  const handleReauthenticate = useCallback(() => {
+    setSettingsOpen(true);
+    // The Settings modal currently surfaces re-auth only via theme/snapshot;
+    // a dedicated credentials panel would live in Task 9+ polish. For now
+    // we open Settings as the single "operator control surface".
+  }, []);
+
+  const handleOpenLiveSiteViewer = useCallback(() => {
+    void bridge.operator.openLiveSiteViewer({});
+  }, [bridge]);
+
+  const handleOpenDataExplorer = useCallback(() => {
+    // Existing Data explorer lives in the legacy shell until Task 9 deletes
+    // it. For iteration 3 we just point users at the existing flow via a
+    // notice; Task 9 either keeps this as a "classic view" link or wires a
+    // new renderer. No-op placeholder for now.
+    console.info('Data explorer is available in the legacy shell; Task 9 deletes or rewires it.');
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -97,6 +154,41 @@ export function LibraryShell({
         archiveRoot={archiveRoot}
         snapshotId={snapshotId}
         totalCount={totalCount}
+        progressChip={
+          progressEvent && progressEvent.phase !== 'finalize' ? (
+            <span
+              className="library-shell__progress-chip"
+              title={`Phase: ${progressEvent.phase}`}
+            >
+              {progressEvent.phase}:{' '}
+              {progressEvent.total
+                ? `${progressEvent.processed}/${progressEvent.total}`
+                : progressEvent.processed}
+            </span>
+          ) : undefined
+        }
+        operatorMenu={
+          <OperatorMenu
+            bridge={bridge}
+            sessionLabel={undefined}
+            onReauthenticate={handleReauthenticate}
+            onRunFullRefresh={handleRunFullRefresh}
+            onOpenDataExplorer={handleOpenDataExplorer}
+            onOpenLiveSiteViewer={handleOpenLiveSiteViewer}
+            onOpenSettings={() => setSettingsOpen(true)}
+          />
+        }
+      />
+      {progressEvent && (
+        <ProgressPanel
+          event={progressEvent}
+          onCancel={activeJobId ? handleCancelRefresh : undefined}
+        />
+      )}
+      <SettingsModal
+        bridge={bridge}
+        open={settingsOpen}
+        onClose={() => setSettingsOpen(false)}
       />
       {loadError && (
         <div className="library-shell__error" role="alert">

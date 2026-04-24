@@ -585,10 +585,13 @@ export function App({ desktop }: AppProps) {
       <EmptyStateWelcome
         probedPaths={archiveState.probedPaths}
         onRunInitialCrawl={() => {
-          /* wired in Task 8 */
+          void bridge?.operator?.runFullRefresh({});
         }}
         onBrowseForArchive={() => {
-          /* wired in Task 8 */
+          // Browse-for-archive prompts a native directory picker via a new
+          // IPC channel. Stub for now — Task 9 adds dialog.showOpenDialog
+          // as the only dialog surface in the app.
+          console.info('Browse for archive: dialog wiring lands in Task 9.');
         }}
       />
     );

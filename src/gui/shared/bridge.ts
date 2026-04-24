@@ -146,11 +146,53 @@ export interface DesktopBridge {
   theme: DesktopThemeBridge;
   library: DesktopLibraryBridge;
   shell: DesktopShellBridge;
+  operator: DesktopOperatorBridge;
 }
 
 export interface DesktopShellBridge {
   openPath: (path: string) => Promise<string>;
   copyToClipboard: (text: string) => Promise<{ ok: boolean }>;
+}
+
+export interface RefreshProgressEvent {
+  readonly jobId: string;
+  readonly phase:
+    | 'auth'
+    | 'crawl-list'
+    | 'crawl-detail'
+    | 'normalize'
+    | 'rank'
+    | 'materialize'
+    | 'mirror'
+    | 'finalize';
+  readonly processed: number;
+  readonly total?: number;
+  readonly etaSeconds?: number;
+  readonly lastItem?: string;
+  readonly message?: string;
+}
+
+export interface OperatorLoginBridgeResult {
+  readonly success: boolean;
+  readonly resolvedHandle?: string;
+  readonly status: string;
+}
+
+export interface DesktopOperatorBridge {
+  runFullRefresh: (input?: {
+    snapshotLabel?: string;
+  }) => Promise<{ jobId: string }>;
+  runFullRefreshCancel: (input: {
+    jobId: string;
+  }) => Promise<{ cancelled: boolean }>;
+  onProgress: (cb: (event: RefreshProgressEvent) => void) => () => void;
+  login: (input: {
+    username: string;
+    password: string;
+  }) => Promise<OperatorLoginBridgeResult>;
+  openLiveSiteViewer: (input?: {
+    problemId?: string;
+  }) => Promise<{ childWindowId: number }>;
 }
 
 export interface LibraryProblemRow {

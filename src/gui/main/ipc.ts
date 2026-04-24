@@ -20,6 +20,9 @@ import {
   listProblems,
   loadProblemRowsFromSnapshot,
 } from './library-repository.js';
+import { openLiveSiteViewerChildWindow } from './live-site-viewer-window.js';
+import { operatorLogin } from './login-coordinator.js';
+import { createRunRefreshCoordinator } from './run-refresh-coordinator.js';
 import {
   readDesktopPreferences,
   writeDesktopPreferences,
@@ -398,6 +401,104 @@ export function registerDesktopIpc(options: RegisterDesktopIpcOptions): void {
       const { text } = shellCopySchema.parse(payload);
       clipboard.writeText(text);
       return { ok: true };
+    },
+  );
+
+  // ─── Operator pipeline (Task 8) ───────────────────────────────────────────
+
+  const broadcastToAllWindows = (channel: string, payload: unknown): void => {
+    for (const window of BrowserWindow.getAllWindows()) {
+      window.webContents.send(channel, payload);
+    }
+  };
+
+  const coordinator = createRunRefreshCoordinator({
+    runPipeline: async () => {
+      // NOTE: the real pipeline wiring lives in the CLI / workflow modules.
+      // Wiring the run-full-refresh execution into this coordinator is a
+      // follow-up: it should shell out to `runCrawlWorkflow` and friends,
+      // forwarding progress via onProgress. For now this handler is the
+      // integration seam — it returns the resolved archive state unchanged
+      // so the coordinator's broadcast + archive:changed plumbing can be
+      // exercised manually from the UI without kicking off a real 4-5h
+      // crawl. Task 11 wires the real pipeline.
+      const archive = resolveArchiveState(
+        readArchiveStore(options.userDataRoot).manualArchiveOverride,
+      );
+      if (!archive.found || !archive.archiveRoot || !archive.snapshotId) {
+        throw new Error('archive-missing');
+      }
+      return {
+        archiveRoot: archive.archiveRoot,
+        snapshotId: archive.snapshotId,
+      };
+    },
+    broadcast: (event) =>
+      broadcastToAllWindows('operator:run-full-refresh:progress', event),
+    broadcastArchiveChanged: (event) =>
+      broadcastToAllWindows('archive:changed', event),
+  });
+
+  const runRefreshInputSchema = z
+    .object({ snapshotLabel: z.string().max(64).optional() })
+    .strict();
+  options.ipcMain.handle(
+    'operator:run-full-refresh',
+    async (_event, payload: unknown) => {
+      const input = runRefreshInputSchema.parse(payload);
+      const { jobId } = coordinator.start(input);
+      return { jobId };
+    },
+  );
+
+  const cancelRefreshInputSchema = z
+    .object({ jobId: z.string().min(1).max(128) })
+    .strict();
+  options.ipcMain.handle(
+    'operator:run-full-refresh:cancel',
+    async (_event, payload: unknown) => {
+      const input = cancelRefreshInputSchema.parse(payload);
+      return coordinator.cancel(input);
+    },
+  );
+
+  const operatorLoginInputSchema = z
+    .object({
+      username: z.string().min(1).max(64),
+      password: z.string().min(1).max(256),
+    })
+    .strict();
+  options.ipcMain.handle(
+    'operator:login',
+    async (_event, payload: unknown) => {
+      try {
+        const input = operatorLoginInputSchema.parse(payload);
+        const archive = resolveArchiveState(
+          readArchiveStore(options.userDataRoot).manualArchiveOverride,
+        );
+        if (!archive.found || !archive.archiveRoot) {
+          throw new Error('archive-missing');
+        }
+        return await operatorLogin(archive.archiveRoot, input);
+      } catch (error) {
+        // MUST NOT log the payload; only the error code + message.
+        const code = (error as { code?: string }).code;
+        const message =
+          error instanceof Error ? error.message : 'unknown';
+        console.error('operator:login failed', { code, message });
+        throw new Error('login-failed');
+      }
+    },
+  );
+
+  const openLiveSiteInputSchema = z
+    .object({ problemId: z.string().max(32).optional() })
+    .strict();
+  options.ipcMain.handle(
+    'operator:open-live-site-viewer',
+    async (_event, payload: unknown) => {
+      const input = openLiveSiteInputSchema.parse(payload);
+      return openLiveSiteViewerChildWindow(input);
     },
   );
 }
