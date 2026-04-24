@@ -327,5 +327,13 @@ export const libraryTagsInputSchema = z
   .object({ snapshotId: z.string().optional() })
   .strict();
 
+export const libraryDetailInputSchema = z
+  .object({
+    snapshotId: z.string().optional(),
+    problemId: z.number().int().positive(),
+  })
+  .strict();
+
 export type LibraryListInput = z.infer<typeof libraryListInputSchema>;
 export type LibraryTagsInput = z.infer<typeof libraryTagsInputSchema>;
+export type LibraryDetailInput = z.infer<typeof libraryDetailInputSchema>;

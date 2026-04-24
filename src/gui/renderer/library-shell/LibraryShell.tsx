@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import type { DesktopBridge, LibraryProblemRow } from '../../shared/bridge.js';
 import { FilterSidebar } from './FilterSidebar.js';
+import { ProblemDrawer } from './ProblemDrawer.js';
 import { ProblemsTable } from './ProblemsTable.js';
 import { TopBar } from './TopBar.js';
 import { DEFAULT_FILTERS, useFilters } from './useFilters.js';
@@ -120,6 +121,12 @@ export function LibraryShell({ bridge, archiveRoot, snapshotId }: LibraryShellPr
           focusSearch={focusSearch}
           focusFilters={focusFilters}
           onEscape={clearSelection}
+        />
+        <ProblemDrawer
+          bridge={bridge}
+          snapshotId={snapshotId}
+          problemId={selectedId}
+          onClose={clearSelection}
         />
       </div>
     </div>

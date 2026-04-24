@@ -297,6 +297,12 @@ export function createDesktopBridge(adapter: DesktopBridgeAdapter): DesktopBridg
           ReturnType<DesktopBridge['library']['listTags']>
         >;
       },
+      async getDetail(input) {
+        return (await adapter.invoke(
+          'library:problems:detail',
+          input,
+        )) as Awaited<ReturnType<DesktopBridge['library']['getDetail']>>;
+      },
     },
   };
 }

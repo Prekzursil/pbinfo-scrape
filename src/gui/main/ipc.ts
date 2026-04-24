@@ -6,6 +6,7 @@ import { app, BrowserWindow, nativeTheme, shell, type IpcMain } from 'electron';
 import { resolveArchiveRoot } from './archive-resolver.js';
 import { readArchiveStore, writeArchiveStore } from './archive-store.js';
 import { createDesktopController } from './desktop-controller.js';
+import { loadProblemDetail } from './library-detail-repository.js';
 import {
   collectTags,
   listProblems,
@@ -43,6 +44,7 @@ import {
   guiWorkspaceSelectionSchema,
   libraryGetThemeResultSchema,
   librarySetThemeInputSchema,
+  libraryDetailInputSchema,
   libraryListInputSchema,
   libraryTagsInputSchema,
 } from '../shared/contracts.js';
@@ -343,6 +345,28 @@ export function registerDesktopIpc(options: RegisterDesktopIpcOptions): void {
       if (!snapshotId) return [];
       const rows = loadProblemRowsFromSnapshot(archive.archiveRoot, snapshotId);
       return collectTags(rows);
+    },
+  );
+
+  options.ipcMain.handle(
+    'library:problems:detail',
+    async (_event, payload: unknown) => {
+      const input = libraryDetailInputSchema.parse(payload);
+      const archive = resolveArchiveState(
+        readArchiveStore(options.userDataRoot).manualArchiveOverride,
+      );
+      if (!archive.found || !archive.archiveRoot) {
+        throw new Error('archive-missing');
+      }
+      const snapshotId = input.snapshotId ?? archive.snapshotId;
+      if (!snapshotId) {
+        throw new Error('snapshot-missing');
+      }
+      return loadProblemDetail(
+        archive.archiveRoot,
+        snapshotId,
+        input.problemId,
+      );
     },
   );
 }

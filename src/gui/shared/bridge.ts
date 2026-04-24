@@ -200,11 +200,17 @@ export interface LibraryListResult {
   readonly snapshotId?: string;
 }
 
+export interface LibraryDetailInput {
+  readonly snapshotId?: string;
+  readonly problemId: number;
+}
+
 export interface DesktopLibraryBridge {
   listProblems: (input: LibraryListInput) => Promise<LibraryListResult>;
   listTags: (input: {
     snapshotId?: string;
   }) => Promise<readonly string[]>;
+  getDetail: (input: LibraryDetailInput) => Promise<unknown>;
 }
 
 export interface DesktopArchiveBridge {

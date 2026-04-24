@@ -24,9 +24,9 @@ On that full success, emit the sentinel: `LIBRARY_BROWSER_REDESIGN_COMPLETE — 
 
 ## Current position
 
-- **Task:** 6 — ProblemDrawer + Statement tab + sanitizer
-- **Step:** 6.1 (install isomorphic-dompurify)
-- **Last committed:** Task 5 (pending below; verify green 367/367)
+- **Task:** 7 — remaining drawer tabs (Tests/Submissions/Official/Editorial/Raw) + Shiki
+- **Step:** 7.0 (install shiki + expose shell.openPath / shell.copyToClipboard)
+- **Last committed:** Task 6 (pending below; verify green 386/386)
 
 ## Iteration 1 recap
 
