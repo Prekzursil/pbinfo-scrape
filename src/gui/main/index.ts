@@ -122,258 +122,81 @@ async function maybeWriteDesktopSmokeMarker(
       phase: 'window-loaded',
     });
 
+    // Library-browser smoke probe (Task 11). The legacy probe used to click
+    // through sidebar tabs + coverage + data explorer; all of that was
+    // removed in Task 9. The new probe confirms: (a) the renderer loaded
+    // without uncaught errors, (b) archive:state returns, (c) either the
+    // LibraryShell or EmptyStateWelcome heading appears in the DOM.
+    const snapshotId = desktopSmokeSnapshotId;
     const report = await window.webContents.executeJavaScript(
       `(async () => {
-        const workspaceRoot = ${JSON.stringify(desktopSmokeWorkspaceRoot ?? '')};
-        const snapshotId = ${JSON.stringify(desktopSmokeSnapshotId)};
         const bridge = window.pbinfoDesktop;
-
-        const headings = () =>
-          Array.from(document.querySelectorAll('h1, h2'))
-            .map((element) => element.textContent?.trim())
-            .filter((value) => Boolean(value));
-
-        const snapshot = () => ({
-          headings: headings(),
-          text: document.body?.innerText ?? '',
-        });
-
-        const pause = (timeoutMs) =>
-          new Promise((resolve) => {
-            setTimeout(resolve, timeoutMs);
-          });
-
         const waitFor = (predicate, timeoutMs = 15000) =>
           new Promise((resolve, reject) => {
             const deadline = Date.now() + timeoutMs;
             const tick = () => {
-              if (predicate()) {
-                resolve(undefined);
-                return;
-              }
-
+              try {
+                if (predicate()) { resolve(undefined); return; }
+              } catch { /* ignore and retry */ }
               if (Date.now() > deadline) {
                 reject(new Error('Timed out waiting for desktop smoke probe condition.'));
                 return;
               }
-
               setTimeout(tick, 100);
             };
-
             tick();
           });
 
-        const clickAppSection = async (label) => {
-          const button = Array.from(document.querySelectorAll('.view-switcher button[role="tab"]')).find(
-            (element) => element.textContent?.includes(label),
+        const headings = () =>
+          Array.from(document.querySelectorAll('h1, h2'))
+            .map((el) => el.textContent?.trim())
+            .filter(Boolean);
+
+        try {
+          if (!bridge?.archive) {
+            return { error: 'bridge.archive is not exposed on window.pbinfoDesktop' };
+          }
+          const archiveState = await bridge.archive.getState();
+          await waitFor(() => headings().length > 0, 15000);
+          const finalHeadings = headings();
+          const mounted = finalHeadings.some((h) =>
+            /welcome to problem archive crawler|problem archive crawler/i.test(h),
           );
-
-          if (!(button instanceof HTMLButtonElement)) {
-            throw new Error('Desktop smoke probe could not find app section button: ' + label);
-          }
-
-          button.click();
-          await pause(150);
-        };
-
-        const readDatasetButtons = () =>
-          Array.from(document.querySelectorAll('.data-panel button[role="tab"]'))
-            .map((element) => {
-              const label =
-                element.querySelector('span')?.textContent?.trim() ??
-                element.textContent?.trim();
-              return label;
-            })
-            .filter((value) => Boolean(value));
-
-        const clickDatasetButton = async (label) => {
-          const button = Array.from(document.querySelectorAll('.data-panel button[role="tab"]')).find(
-            (element) => element.textContent?.includes(label),
-          );
-
-          if (!(button instanceof HTMLButtonElement)) {
-            throw new Error('Desktop smoke probe could not find dataset button: ' + label);
-          }
-
-          button.click();
-          await pause(150);
-        };
-
-        const setWorkspaceAndSubmit = (value) => {
-          const input = document.querySelector('input');
-          const valueSetter = Object.getOwnPropertyDescriptor(
-            HTMLInputElement.prototype,
-            'value',
-          )?.set;
-
-          if (!(input instanceof HTMLInputElement) || !(input.form instanceof HTMLFormElement)) {
-            throw new Error('Desktop smoke probe could not find the workspace bootstrap form.');
-          }
-          if (!valueSetter) {
-            throw new Error('Desktop smoke probe could not access the native input value setter.');
-          }
-
-          input.focus();
-          valueSetter.call(input, value);
-          input.dispatchEvent(new Event('input', { bubbles: true, composed: true }));
-          input.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
-          input.form.requestSubmit();
-        };
-
-        const inspectDataExplorer = async () => {
-          if (!bridge) {
-            throw new Error('Desktop smoke probe could not access the pbinfoDesktop bridge.');
-          }
-
-          await clickAppSection('Data');
-          await waitFor(() => document.body?.innerText.includes('Data Explorer'));
-
-          const summary = await bridge.getArchiveExplorerSummary(snapshotId);
-          const datasetLabels = readDatasetButtons();
-          const datasetListings = {};
-          const visitedDatasets = [];
-
-          for (const dataset of summary.datasets) {
-            visitedDatasets.push(dataset.label);
-            await clickDatasetButton(dataset.label);
-            const listing = await bridge.listArchiveExplorerRecords({
-              snapshotId,
-              dataset: dataset.dataset,
-              limit: 3,
-            });
-            const selectedRecordId = listing.items[0]?.recordId ?? null;
-            const detail = selectedRecordId
-              ? await bridge.getArchiveExplorerRecord({
-                  snapshotId,
-                  dataset: dataset.dataset,
-                  recordId: selectedRecordId,
-                })
-              : null;
-
-            datasetListings[dataset.dataset] = {
-              totalCount: listing.totalCount,
-              firstRecordId: selectedRecordId,
-              detailTitle: detail?.title ?? null,
-            };
-          }
-
-          await bridge.openPath(summary.normalizedRoot);
-          await bridge.openPath(summary.mirrorRoot);
-          await bridge.openExternal(summary.mirrorUrl);
-
           return {
-            snapshotId,
-            datasetLabels,
-            visitedDatasets,
-            datasetListings,
-            summary,
+            archiveFound: archiveState.found,
+            archiveSnapshotId: archiveState.snapshotId,
+            probedPaths: archiveState.probedPaths,
+            libraryShellMounted: Boolean(archiveState.found && mounted),
+            emptyStateMounted: Boolean(!archiveState.found && mounted),
+            finalHeadings,
+            text: document.body?.innerText?.slice(0, 2000) ?? '',
+            expectedSnapshotId: ${JSON.stringify(snapshotId)},
           };
-        };
-
-        const inspectCoverageExplorer = async () => {
-          if (!bridge) {
-            throw new Error('Desktop smoke probe could not access the pbinfoDesktop bridge.');
-          }
-
-          await clickAppSection('Coverage');
-          await waitFor(() => document.body?.innerText.includes('Coverage Explorer'));
-
-          const summary = await bridge.getCoverageSummary(snapshotId);
-          const listing = await bridge.listCoverageRecords({
-            snapshotId,
-            limit: 5,
-          });
-          const selectedProblemId = listing.items[0]?.problemId ?? null;
-          const detail = selectedProblemId
-            ? await bridge.getCoverageRecord({
-                snapshotId,
-                problemId: selectedProblemId,
-              })
-            : null;
-
-          if (detail?.record.sourceListUrl) {
-            await bridge.openExternal(detail.record.sourceListUrl);
-          }
-
+        } catch (error) {
           return {
-            summary,
-            listing: {
-              totalCount: listing.totalCount,
-              firstProblemId: selectedProblemId,
-              firstProblemName: listing.items[0]?.name ?? null,
-            },
-            detail: detail
-              ? {
-                  problemId: detail.record.problemId,
-                  name: detail.record.name,
-                  solvedByMe: detail.record.solvedByMe,
-                  testsFragmentArchived: detail.record.testsFragmentArchived,
-                  visibleTestsCapturedCount: detail.record.visibleTestsCapturedCount,
-                  officialSourceArchived: detail.record.officialSourceArchived,
-                  userSourceArchived: detail.record.userSourceArchived,
-                  editorialAvailability: detail.record.editorialAvailability,
-                }
-              : null,
-          };
-        };
-
-        return waitFor(() => document.body?.innerText.includes('Choose a workspace'))
-          .then(() => {
-            const initial = snapshot();
-
-            if (!workspaceRoot) {
-              return {
-                initial,
-                final: initial,
-                dataExplorer: null,
-                coverageExplorer: null,
-              };
-            }
-
-            setWorkspaceAndSubmit(workspaceRoot);
-
-            // Accept either the redesigned shell's Home view or the legacy
-            // dashboard's "Archive Overview" heading so the smoke probe works
-            // with either UI (legacy dashboard is still reachable via
-            // PBINFO_DESKTOP_LEGACY_UI=1).
-            return waitFor(
-              () =>
-                (document.body?.innerText.includes('Archive health') ?? false)
-                || (document.body?.innerText.includes('Archive Overview') ?? false),
-            )
-              .then(async () => ({
-                initial,
-                final: snapshot(),
-                dataExplorer: await inspectDataExplorer(),
-                coverageExplorer: await inspectCoverageExplorer(),
-              }));
-          })
-          .catch((error) => ({
             error: error instanceof Error ? error.message : String(error),
-            snapshot: snapshot(),
-          }));
+            finalHeadings: headings(),
+          };
+        }
       })()`,
       true,
     );
 
     writeDesktopSmokeMarker(
       report && typeof report === 'object' && 'error' in report
-        ? {
-            phase: 'error',
-            ...report,
-          }
-        : {
-            phase: 'completed',
-            ...report,
-          },
+        ? { phase: 'error', ...report }
+        : { phase: 'completed', ...report },
     );
+    return;
   } catch (error) {
     writeDesktopSmokeMarker({
       phase: 'error',
       error: error instanceof Error ? error.message : String(error),
     });
+    return;
   }
 }
+
 
 function writeDesktopSmokeMarker(payload: Record<string, unknown>): void {
   if (!desktopSmokeMarkerPath) {

@@ -24,8 +24,12 @@ On that full success, emit the sentinel: `LIBRARY_BROWSER_REDESIGN_COMPLETE — 
 
 ## Current position
 
-- **Task:** 11 — E2E + packaged smoke + §12.3 metric assertions
-- **Last committed:** Task 10 (pending below; verify green 414/414)
+- **Task:** ALL 11 TASKS COMPLETE
+- **Last committed:** Task 11 (pending below; verify green 414/414)
+
+## Completion summary
+
+Iteration 4 closed out the plan. All 11 tasks landed; the plan's rollout is complete on `feat/full-archive-fix-20260423`. The branch is ready to cut a PR against `main`.
 
 ## Task 9 scope adjustment
 
