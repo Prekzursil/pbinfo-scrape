@@ -24,12 +24,18 @@ On that full success, emit the sentinel: `LIBRARY_BROWSER_REDESIGN_COMPLETE — 
 
 ## Current position
 
-- **Task:** ALL 11 TASKS COMPLETE
-- **Last committed:** Task 11 (pending below; verify green 414/414)
+- **Task:** ALL 11 TASKS COMPLETE + Task 11.1 follow-up fixes landed
+- **Last committed:** `a7cdf4270` (verify green 415/415; packaged Electron smoke verifies 2,525 real problem rows render in LibraryShell)
 
 ## Completion summary
 
-Iteration 4 closed out the plan. All 11 tasks landed; the plan's rollout is complete on `feat/full-archive-fix-20260423`. The branch is ready to cut a PR against `main`.
+Iteration 4 closed out the plan. All 11 tasks landed. Iteration 5 added two real regression fixes discovered only when I finally ran the packaged Electron smoke test:
+
+1. **sandbox:true + ESM preload incompatibility in Electron 40.** My Task 9 flipped `sandbox: true` per the security hardening plan, but Electron 40 refuses to load ESM preload files under sandbox mode, which silently killed `contextBridge.exposeInMainWorld`. Reverted to `sandbox: false` with a note; the fix is to bundle the preload to CJS (rollup/esbuild) — deferred as a follow-up. `contextIsolation: true` + `nodeIntegration: false` + the CSP header still provide strong protection against the archived-HTML render surfaces.
+
+2. **archive-resolver field mismatch.** The real `archive/catalog.json` on disk uses `snapshotId` per entry; my test fixtures used `id`; the resolver crashed on `join(undefined)` when filtering real snapshots. Fixed via a shared `snapshotId()` helper that accepts either field + a regression test mirroring the real catalog shape.
+
+**End-to-end verification**: `npm run test:desktop-electron` passes. The probe confirms bridge exposure, archive auto-detect, LibraryShell mount, and `rowCount > 0` (measured 2,525).
 
 ## Task 9 scope adjustment
 
