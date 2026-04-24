@@ -107,6 +107,10 @@ testOnWindows(
         report.libraryShellMounted || report.emptyStateMounted,
       );
       expect(shellMounted).toBe(true);
+      // If the library shell mounted, we expect real rows.
+      if (report.libraryShellMounted) {
+        expect(report.rowCount ?? 0).toBeGreaterThan(0);
+      }
       // Headings should include either the welcome copy or the library-shell
       // title (both contain "problem archive crawler").
       const headings = report.finalHeadings ?? [];
@@ -177,5 +181,6 @@ interface DesktopSmokeReport {
   readonly libraryShellMounted?: boolean;
   readonly emptyStateMounted?: boolean;
   readonly finalHeadings?: readonly string[];
+  readonly rowCount?: number;
   readonly text?: string;
 }

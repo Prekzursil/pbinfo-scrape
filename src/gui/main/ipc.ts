@@ -256,8 +256,18 @@ export function registerDesktopIpc(options: RegisterDesktopIpcOptions): void {
   const resolveArchiveState = (
     override: string | undefined,
   ): GuiArchiveState => {
+    let exePath: string | undefined;
+    try {
+      exePath = app.getPath('exe');
+    } catch {
+      exePath = undefined;
+    }
+    const exeDir =
+      typeof exePath === 'string' && exePath.length > 0
+        ? dirname(exePath)
+        : process.cwd();
     const probe = resolveArchiveRoot({
-      exeDir: dirname(app.getPath('exe')),
+      exeDir,
       cwd: process.cwd(),
       manualOverride: override,
     });
@@ -268,8 +278,20 @@ export function registerDesktopIpc(options: RegisterDesktopIpcOptions): void {
   };
 
   options.ipcMain.handle('archive:state', async () => {
-    const store = readArchiveStore(options.userDataRoot);
-    return resolveArchiveState(store.manualArchiveOverride);
+    try {
+      const store = readArchiveStore(options.userDataRoot);
+      return resolveArchiveState(store.manualArchiveOverride);
+    } catch (error) {
+      // Defensive: any crash inside archive probing should surface as a
+      // not-found state with the error in probedPaths, so the renderer can
+      // show a helpful empty-state instead of hanging.
+      const message = error instanceof Error ? error.message : String(error);
+      const fallback: GuiArchiveState = {
+        found: false,
+        probedPaths: [`<archive:state crashed: ${message}>`],
+      };
+      return fallback;
+    }
   });
 
   options.ipcMain.handle(

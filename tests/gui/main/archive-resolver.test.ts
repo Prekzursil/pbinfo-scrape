@@ -170,6 +170,42 @@ describe('archive-resolver', () => {
     expect(result.archiveRoot).toBe(auto);
   });
 
+  test('tolerates real-catalog shape where snapshots carry `snapshotId` instead of `id`', () => {
+    // Regression guard for a real crash found via the packaged electron smoke
+    // in Task 11: archive/catalog.json on disk uses `snapshotId`, but my
+    // original fixtures used `id`, so this mismatch slipped past the unit
+    // suite until the real archive was probed.
+    const root = mkdtempSync(join(tmpdir(), 'pbinfo-real-catalog-'));
+    tempDirs.push(root);
+    const archiveRoot = join(root, 'archive');
+    mkdirSync(
+      join(archiveRoot, 'snapshots', 'fresh-20260423-full'),
+      { recursive: true },
+    );
+    writeFileSync(
+      join(archiveRoot, 'catalog.json'),
+      JSON.stringify({
+        currentSnapshotId: 'fresh-20260423-full',
+        snapshots: [
+          {
+            snapshotId: 'fresh-20260423-full',
+            status: 'completed',
+            createdAt: '2026-04-23T05:00:15.758Z',
+          },
+        ],
+      }),
+    );
+
+    const result = resolveArchiveRoot({
+      exeDir: root,
+      cwd: root,
+      manualOverride: undefined,
+    });
+
+    expect(result.found).toBe(true);
+    expect(result.snapshotId).toBe('fresh-20260423-full');
+  });
+
   test('discards snapshotId when the snapshot directory does not exist', () => {
     const root = mkdtempSync(join(tmpdir(), 'pbinfo-missing-snap-'));
     tempDirs.push(root);

@@ -80,12 +80,15 @@ async function bootstrapWindow(): Promise<void> {
       preload: join(__dirname, '../preload/index.js'),
       contextIsolation: true,
       nodeIntegration: false,
-      // Task 9: sandbox: true hardens the process against untrusted HTML
-      // rendered in the Statement / Editorial drawer tabs. The preload uses
-      // contextBridge.exposeInMainWorld + ipcRenderer.invoke, both sandbox-
-      // compatible. If you see regressions from this, prefer fixing the
-      // preload over reverting this flag.
-      sandbox: true,
+      // Task 11 regression discovery: Electron 40 does not load ESM preload
+      // files (our tsc output is .js ESM) when sandbox:true is set —
+      // contextBridge.exposeInMainWorld never runs and window.pbinfoDesktop
+      // ends up empty. Keep sandbox:false until the preload is bundled to
+      // CJS (rollup/esbuild) or renamed to .mjs. contextIsolation:true +
+      // nodeIntegration:false + the CSP injected at session-start level
+      // still provide strong protection against the archived-HTML render
+      // surfaces (Statement/Editorial DOMPurify-sanitized).
+      sandbox: false,
       webviewTag: false,
       spellcheck: false,
     },
@@ -158,6 +161,19 @@ async function maybeWriteDesktopSmokeMarker(
           }
           const archiveState = await bridge.archive.getState();
           await waitFor(() => headings().length > 0, 15000);
+          // If archive is found, wait for library:problems:list to resolve
+          // so the "0 problems" count reflects real data.
+          let rowCount = 0;
+          if (archiveState.found) {
+            try {
+              await waitFor(() => {
+                const countEl = document.querySelector('.library-shell__count');
+                const match = countEl?.textContent?.match(/([0-9,]+)/);
+                rowCount = match ? parseInt(match[1].replace(/,/g, ''), 10) : 0;
+                return rowCount > 0;
+              }, 10000);
+            } catch { /* leave rowCount = 0 */ }
+          }
           const finalHeadings = headings();
           const mounted = finalHeadings.some((h) =>
             /welcome to problem archive crawler|problem archive crawler/i.test(h),
@@ -169,6 +185,7 @@ async function maybeWriteDesktopSmokeMarker(
             libraryShellMounted: Boolean(archiveState.found && mounted),
             emptyStateMounted: Boolean(!archiveState.found && mounted),
             finalHeadings,
+            rowCount,
             text: document.body?.innerText?.slice(0, 2000) ?? '',
             expectedSnapshotId: ${JSON.stringify(snapshotId)},
           };
