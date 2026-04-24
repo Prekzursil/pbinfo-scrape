@@ -10,7 +10,6 @@ import '@fontsource/ibm-plex-mono/600.css';
 
 import { App } from './app.js';
 import './styles.css';
-import './app-shell.css';
 import './library-shell/theme/global.css';
 
 const root = document.getElementById('root');

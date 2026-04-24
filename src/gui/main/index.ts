@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, ipcMain, session } from 'electron';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -25,8 +25,33 @@ if (desktopTestCdpPort) {
   app.commandLine.appendSwitch('remote-debugging-port', desktopTestCdpPort);
 }
 
+const CSP_POLICY = [
+  "default-src 'self'",
+  "script-src 'self'",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data:",
+  "font-src 'self' data:",
+  "connect-src 'self' http://127.0.0.1:* ws://127.0.0.1:*",
+  "frame-src 'self' http://127.0.0.1:*",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'none'",
+].join('; ');
+
 async function bootstrap(): Promise<void> {
   await app.whenReady();
+
+  // Belt-and-braces CSP: the renderer's index.html already has a <meta http-equiv>
+  // tag; this header injection covers dev-server mode (loadURL path) where meta
+  // tags from the built HTML may not apply in time.
+  session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+    callback({
+      responseHeaders: {
+        ...details.responseHeaders,
+        'Content-Security-Policy': [CSP_POLICY],
+      },
+    });
+  });
 
   registerDesktopIpc({
     ipcMain,
@@ -55,7 +80,14 @@ async function bootstrapWindow(): Promise<void> {
       preload: join(__dirname, '../preload/index.js'),
       contextIsolation: true,
       nodeIntegration: false,
-      sandbox: false,
+      // Task 9: sandbox: true hardens the process against untrusted HTML
+      // rendered in the Statement / Editorial drawer tabs. The preload uses
+      // contextBridge.exposeInMainWorld + ipcRenderer.invoke, both sandbox-
+      // compatible. If you see regressions from this, prefer fixing the
+      // preload over reverting this flag.
+      sandbox: true,
+      webviewTag: false,
+      spellcheck: false,
     },
   });
 
