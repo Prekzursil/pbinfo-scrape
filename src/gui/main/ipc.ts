@@ -1,7 +1,15 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 
-import { app, BrowserWindow, nativeTheme, shell, type IpcMain } from 'electron';
+import {
+  app,
+  BrowserWindow,
+  clipboard,
+  nativeTheme,
+  shell,
+  type IpcMain,
+} from 'electron';
+import { z } from 'zod';
 
 import { resolveArchiveRoot } from './archive-resolver.js';
 import { readArchiveStore, writeArchiveStore } from './archive-store.js';
@@ -367,6 +375,29 @@ export function registerDesktopIpc(options: RegisterDesktopIpcOptions): void {
         snapshotId,
         input.problemId,
       );
+    },
+  );
+
+  const shellOpenPathSchema = z
+    .object({ path: z.string().min(1).max(4096) })
+    .strict();
+  options.ipcMain.handle(
+    'shell:open-path',
+    async (_event, payload: unknown) => {
+      const { path: p } = shellOpenPathSchema.parse(payload);
+      return shell.openPath(p);
+    },
+  );
+
+  const shellCopySchema = z
+    .object({ text: z.string().max(1_000_000) })
+    .strict();
+  options.ipcMain.handle(
+    'shell:copy-to-clipboard',
+    async (_event, payload: unknown) => {
+      const { text } = shellCopySchema.parse(payload);
+      clipboard.writeText(text);
+      return { ok: true };
     },
   );
 }

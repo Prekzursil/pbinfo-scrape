@@ -304,5 +304,17 @@ export function createDesktopBridge(adapter: DesktopBridgeAdapter): DesktopBridg
         )) as Awaited<ReturnType<DesktopBridge['library']['getDetail']>>;
       },
     },
+    shell: {
+      async openPath(path) {
+        return (await adapter.invoke('shell:open-path', { path })) as Awaited<
+          ReturnType<DesktopBridge['shell']['openPath']>
+        >;
+      },
+      async copyToClipboard(text) {
+        return (await adapter.invoke('shell:copy-to-clipboard', {
+          text,
+        })) as Awaited<ReturnType<DesktopBridge['shell']['copyToClipboard']>>;
+      },
+    },
   };
 }

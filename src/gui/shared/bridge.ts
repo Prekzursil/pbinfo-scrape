@@ -145,6 +145,12 @@ export interface DesktopBridge {
   archive: DesktopArchiveBridge;
   theme: DesktopThemeBridge;
   library: DesktopLibraryBridge;
+  shell: DesktopShellBridge;
+}
+
+export interface DesktopShellBridge {
+  openPath: (path: string) => Promise<string>;
+  copyToClipboard: (text: string) => Promise<{ ok: boolean }>;
 }
 
 export interface LibraryProblemRow {

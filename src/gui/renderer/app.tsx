@@ -41,6 +41,9 @@ export function App({ desktop }: AppProps) {
   const [archiveState, setArchiveState] = useState<GuiArchiveState | undefined>(
     undefined,
   );
+  const [effectiveTheme, setEffectiveTheme] = useState<'light' | 'dark'>(
+    'light',
+  );
   const [workspaceState, setWorkspaceState] = useState<GuiWorkspaceState | null | undefined>(
     undefined,
   );
@@ -129,9 +132,11 @@ export function App({ desktop }: AppProps) {
     }
     void bridge.theme.get().then(({ effective }) => {
       document.documentElement.dataset.theme = effective;
+      setEffectiveTheme(effective);
     });
     const unsubscribe = bridge.theme.onChanged(({ effective }) => {
       document.documentElement.dataset.theme = effective;
+      setEffectiveTheme(effective);
     });
     return unsubscribe;
   }, [bridge]);
@@ -601,6 +606,7 @@ export function App({ desktop }: AppProps) {
         bridge={bridge}
         archiveRoot={archiveState.archiveRoot}
         snapshotId={archiveState.snapshotId}
+        theme={effectiveTheme}
       />
     );
   }

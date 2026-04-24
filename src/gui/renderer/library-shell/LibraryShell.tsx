@@ -11,9 +11,15 @@ export interface LibraryShellProps {
   readonly bridge: DesktopBridge;
   readonly archiveRoot: string;
   readonly snapshotId?: string;
+  readonly theme?: 'light' | 'dark';
 }
 
-export function LibraryShell({ bridge, archiveRoot, snapshotId }: LibraryShellProps) {
+export function LibraryShell({
+  bridge,
+  archiveRoot,
+  snapshotId,
+  theme = 'light',
+}: LibraryShellProps) {
   const filtersHook = useFilters();
   const [rows, setRows] = useState<readonly LibraryProblemRow[]>([]);
   const [totalCount, setTotalCount] = useState(0);
@@ -127,6 +133,7 @@ export function LibraryShell({ bridge, archiveRoot, snapshotId }: LibraryShellPr
           snapshotId={snapshotId}
           problemId={selectedId}
           onClose={clearSelection}
+          theme={theme}
         />
       </div>
     </div>

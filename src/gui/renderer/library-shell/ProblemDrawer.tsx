@@ -3,7 +3,12 @@ import { X as CloseIcon } from 'lucide-react';
 
 import type { DesktopBridge } from '../../shared/bridge.js';
 import type { ProblemDetailPayload } from '../../main/library-detail-repository.js';
+import { EditorialTab } from './tabs/EditorialTab.js';
+import { OfficialSourceTab } from './tabs/OfficialSourceTab.js';
+import { RawDataTab } from './tabs/RawDataTab.js';
 import { StatementTab } from './tabs/StatementTab.js';
+import { SubmissionsTab } from './tabs/SubmissionsTab.js';
+import { TestsTab } from './tabs/TestsTab.js';
 
 export type DrawerTabId =
   | 'statement'
@@ -27,6 +32,7 @@ export interface ProblemDrawerProps {
   readonly snapshotId: string | undefined;
   readonly problemId: string | undefined;
   readonly onClose: () => void;
+  readonly theme?: 'light' | 'dark';
 }
 
 export function ProblemDrawer({
@@ -34,6 +40,7 @@ export function ProblemDrawer({
   snapshotId,
   problemId,
   onClose,
+  theme = 'light',
 }: ProblemDrawerProps) {
   const [detail, setDetail] = useState<ProblemDetailPayload | undefined>(
     undefined,
@@ -123,10 +130,26 @@ export function ProblemDrawer({
         {detail && activeTab === 'statement' && (
           <StatementTab problem={detail.problem} />
         )}
-        {detail && activeTab !== 'statement' && (
-          <p className="problem-drawer__placeholder">
-            {TABS.find((t) => t.id === activeTab)?.label} — wired in Task 7.
-          </p>
+        {detail && activeTab === 'tests' && (
+          <TestsTab bridge={bridge} tests={detail.tests} />
+        )}
+        {detail && activeTab === 'submissions' && (
+          <SubmissionsTab
+            submissions={detail.submissions}
+            theme={theme}
+          />
+        )}
+        {detail && activeTab === 'official' && (
+          <OfficialSourceTab
+            officialSource={detail.officialSource}
+            theme={theme}
+          />
+        )}
+        {detail && activeTab === 'editorial' && (
+          <EditorialTab editorial={detail.editorial} />
+        )}
+        {detail && activeTab === 'raw' && (
+          <RawDataTab bridge={bridge} rawPaths={detail.rawPaths} />
         )}
       </div>
     </aside>
