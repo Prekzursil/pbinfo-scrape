@@ -6,6 +6,8 @@ export interface EditorialTabProps {
 }
 
 const BANNERS: Record<string, string> = {
+  visible:
+    "The editorial is marked visible on pbinfo.ro, but the raw HTML page isn't present in this archive snapshot (raw pages are often omitted to keep the archive small). Run Operator → Run full refresh to re-capture it, or open the problem on pbinfo.ro directly.",
   restricted:
     'Editorial is visible to you on pbinfo.ro after your first submission — even an incorrect one.',
   hidden: 'pbinfo.ro has not published an editorial for this problem.',
@@ -24,9 +26,12 @@ export function EditorialTab({ editorial }: EditorialTabProps) {
       </section>
     );
   }
+  const bannerText =
+    BANNERS[editorial.availability] ??
+    `Editorial availability: ${editorial.availability}.`;
   return (
     <section className="editorial-tab">
-      <p className="pac-banner">{BANNERS[editorial.availability]}</p>
+      <p className="pac-banner">{bannerText}</p>
     </section>
   );
 }

@@ -115,23 +115,65 @@ interface CoverageFile {
   readonly userSourceLanguages?: readonly string[];
 }
 
+interface ProblemStatementSection {
+  readonly title?: string;
+  readonly html?: string;
+  readonly text?: string;
+}
+
 interface ProblemFile {
-  readonly problemId: number;
+  // Real archive keys: id, slug, name, sections[], constraints[], examples[]
+  // Older fixtures: problemId, statementHtml
+  readonly id?: number;
+  readonly problemId?: number;
   readonly slug: string;
   readonly name: string;
   readonly statementHtml?: string;
+  readonly sections?: readonly ProblemStatementSection[];
   readonly constraints?: readonly string[];
   readonly executionLimits?: {
     readonly timeSeconds?: number;
     readonly memoryMb?: number;
   };
+  readonly editorial?: {
+    readonly availability?: string;
+    readonly artifactPath?: string;
+  };
+}
+
+function composeStatementHtml(problem: ProblemFile): string | undefined {
+  if (typeof problem.statementHtml === 'string' && problem.statementHtml.length > 0) {
+    return problem.statementHtml;
+  }
+  if (problem.sections && problem.sections.length > 0) {
+    return problem.sections
+      .map((section) => {
+        const title = section.title ? `<h3>${escapeHtml(section.title)}</h3>` : '';
+        const body = section.html ?? (section.text ? `<p>${escapeHtml(section.text)}</p>` : '');
+        return `${title}${body}`;
+      })
+      .join('\n');
+  }
+  return undefined;
+}
+
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/gu, '&amp;')
+    .replace(/</gu, '&lt;')
+    .replace(/>/gu, '&gt;')
+    .replace(/"/gu, '&quot;')
+    .replace(/'/gu, '&#39;');
 }
 
 interface EvaluationFile {
   readonly evaluationId: number;
   readonly score: number;
   readonly language: string;
+  // Real archive stores verdictSummary (e.g., "100 puncte"); older fixtures
+  // use verdict.
   readonly verdict?: string;
+  readonly verdictSummary?: string;
   readonly submittedAt?: string;
   readonly runtime?: number;
   readonly runtimeSeconds?: number;
@@ -145,8 +187,41 @@ interface SourceFile {
   readonly language?: string;
 }
 
+// Real tests.json shape (see archive/snapshots/.../tests/<id>-<slug>/tests.json):
+// cases[].index, .provenanceKinds, .label, .input, .output. Older fixtures use
+// id, kind, inputBody, expectedBody — accept both.
+interface RawTestCase {
+  readonly id?: string;
+  readonly index?: number;
+  readonly label?: string;
+  readonly kind?: 'example' | 'visible';
+  readonly provenanceKinds?: readonly string[];
+  readonly input?: string;
+  readonly inputBody?: string;
+  readonly output?: string;
+  readonly expectedBody?: string;
+  readonly evaluationVerdicts?: Record<string, string>;
+}
+
 interface TestsFile {
-  readonly cases?: readonly TestCase[];
+  readonly cases?: readonly RawTestCase[];
+}
+
+function normalizeTestCase(raw: RawTestCase): TestCase {
+  const id =
+    raw.id ?? (typeof raw.index === 'number' ? String(raw.index) : 'case');
+  const kind: 'example' | 'visible' =
+    raw.kind ??
+    (raw.provenanceKinds?.includes('example') ? 'example' : 'visible');
+  const inputBody = raw.inputBody ?? raw.input ?? '';
+  const expectedBody = raw.expectedBody ?? raw.output ?? '';
+  return {
+    id,
+    kind,
+    inputBody,
+    expectedBody,
+    evaluationVerdicts: raw.evaluationVerdicts,
+  };
 }
 
 export async function loadProblemDetail(
@@ -176,8 +251,9 @@ export async function loadProblemDetail(
     );
   }
 
-  const statementHtml = problemRaw.statementHtml
-    ? sanitizeArchiveHtml(problemRaw.statementHtml)
+  const rawStatement = composeStatementHtml(problemRaw);
+  const statementHtml = rawStatement
+    ? sanitizeArchiveHtml(rawStatement)
     : undefined;
 
   const evaluations: EvaluationSummary[] = [];
@@ -208,7 +284,7 @@ export async function loadProblemDetail(
       evaluationId: parsed.evaluationId,
       score: parsed.score,
       language: parsed.language,
-      verdict: parsed.verdict,
+      verdict: parsed.verdict ?? parsed.verdictSummary,
       submittedAt: parsed.submittedAt,
       runtime: parsed.runtime ?? parsed.runtimeSeconds,
       memory: parsed.memory ?? parsed.memoryKb,
@@ -271,10 +347,28 @@ export async function loadProblemDetail(
   }
 
   const editorialAvailability = coverage.editorialAvailability ?? 'unknown';
-  const editorialFilePath = findFirstExisting(
-    join(normalizedRoot, 'editorials', `problem-${coverage.problemId}.html`),
-    join(normalizedRoot, 'editorials', `${coverage.problemId}-${coverage.slug}.html`),
-  );
+  // The real archive stores editorial HTML at the path in
+  // problem.editorial.artifactPath (relative to the snapshot root), e.g.,
+  // raw-pages/page-https-www-pbinfo-ro-ajx-module-ajx-problema-afisare-solutie-*.html
+  // Raw pages are frequently excluded from what lands on disk (too large),
+  // so this resolution is best-effort: if the artifact isn't present, the
+  // EditorialTab renders the spec §8.2 banner explaining it needs a refresh.
+  let editorialFilePath: string | undefined;
+  const editorialArtifactPath = problemRaw.editorial?.artifactPath;
+  if (editorialArtifactPath) {
+    const candidate = join(base, editorialArtifactPath);
+    if (existsSync(candidate)) editorialFilePath = candidate;
+  }
+  if (!editorialFilePath) {
+    editorialFilePath = findFirstExisting(
+      join(normalizedRoot, 'editorials', `problem-${coverage.problemId}.html`),
+      join(
+        normalizedRoot,
+        'editorials',
+        `${coverage.problemId}-${coverage.slug}.html`,
+      ),
+    );
+  }
   let editorialHtmlBody: string | undefined;
   if (
     editorialAvailability === 'visible' &&
@@ -301,9 +395,11 @@ export async function loadProblemDetail(
     }
   }
 
+  const resolvedProblemId = problemRaw.problemId ?? problemRaw.id ?? problemId;
+
   return {
     problem: {
-      problemId: problemRaw.problemId,
+      problemId: resolvedProblemId,
       slug: problemRaw.slug,
       name: problemRaw.name,
       statementHtml,
@@ -325,7 +421,7 @@ export async function loadProblemDetail(
     },
     tests: {
       folderPath: testsFolder,
-      cases: testsJson?.cases ?? [],
+      cases: (testsJson?.cases ?? []).map(normalizeTestCase),
     },
     submissions: {
       evaluations,

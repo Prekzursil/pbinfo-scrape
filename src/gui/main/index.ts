@@ -222,6 +222,21 @@ async function maybeWriteDesktopSmokeMarker(
           await new Promise((resolve) => setTimeout(resolve, 1200));
         }
 
+        if (process.env.PBINFO_DESKTOP_TEST_CLICK_TAB) {
+          const tabLabel = process.env.PBINFO_DESKTOP_TEST_CLICK_TAB;
+          await window.webContents.executeJavaScript(
+            `(() => {
+              const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
+              const target = tabs.find(
+                (el) => el.textContent && el.textContent.trim().toLowerCase() === ${JSON.stringify(tabLabel.toLowerCase())},
+              );
+              if (target instanceof HTMLElement) target.click();
+            })()`,
+            true,
+          );
+          await new Promise((resolve) => setTimeout(resolve, 800));
+        }
+
         if (process.env.PBINFO_DESKTOP_TEST_FORCE_THEME) {
           // Call the real theme bridge so the main-process preference store
           // flips AND the renderer subscription re-sets dataset.theme in the
