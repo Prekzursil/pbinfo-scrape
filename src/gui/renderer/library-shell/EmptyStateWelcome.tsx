@@ -1,5 +1,7 @@
 import { useCallback } from 'react';
 
+import './library-shell.css';
+
 export interface EmptyStateWelcomeProps {
   readonly probedPaths: readonly string[];
   readonly onRunInitialCrawl: () => void;

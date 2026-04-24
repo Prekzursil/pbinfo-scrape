@@ -5,6 +5,8 @@ import type {
   LibraryProblemRow,
   RefreshProgressEvent,
 } from '../../shared/bridge.js';
+
+import './library-shell.css';
 import { FilterSidebar } from './FilterSidebar.js';
 import { OperatorMenu } from './OperatorMenu.js';
 import { ProblemDrawer } from './ProblemDrawer.js';
