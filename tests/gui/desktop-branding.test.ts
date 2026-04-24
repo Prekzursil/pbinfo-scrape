@@ -63,8 +63,18 @@ describe('desktop branding assets', () => {
       join(repoRoot, 'src', 'gui', 'renderer', 'index.html'),
       'utf8',
     );
-    const styles = readFileSync(
-      join(repoRoot, 'src', 'gui', 'renderer', 'styles.css'),
+    // styles.css was retired in Task 11 together with the legacy AppShell.
+    // The library-shell now imports fonts + tokens from theme/global.css.
+    const tokens = readFileSync(
+      join(
+        repoRoot,
+        'src',
+        'gui',
+        'renderer',
+        'library-shell',
+        'theme',
+        'tokens.css',
+      ),
       'utf8',
     );
 
@@ -72,8 +82,7 @@ describe('desktop branding assets', () => {
     expect(rendererEntry).toContain("@fontsource/manrope");
     expect(rendererEntry).toContain("@fontsource/ibm-plex-mono");
     expect(rendererHtml).toContain("<title>Problem Archive Crawler</title>");
-    expect(styles).toContain('"Sora"');
-    expect(styles).toContain('"Manrope"');
-    expect(styles).toContain('"IBM Plex Mono"');
+    expect(tokens).toContain("'Manrope'");
+    expect(tokens).toContain("'IBM Plex Mono'");
   });
 });

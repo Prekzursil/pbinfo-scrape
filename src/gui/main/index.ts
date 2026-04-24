@@ -199,10 +199,31 @@ async function maybeWriteDesktopSmokeMarker(
       true,
     );
 
+    // Capture a screenshot of the rendered window so humans can actually see
+    // what the smoke probe measured, not just the text content it scraped.
+    let screenshotPath: string | undefined;
+    if (process.env.PBINFO_DESKTOP_TEST_SCREENSHOT_PATH) {
+      try {
+        // Give the library's async problem-list fetch time to resolve + paint.
+        await new Promise((resolve) => setTimeout(resolve, 1500));
+        const image = await window.webContents.capturePage();
+        writeFileSync(
+          process.env.PBINFO_DESKTOP_TEST_SCREENSHOT_PATH,
+          image.toPNG(),
+        );
+        screenshotPath = process.env.PBINFO_DESKTOP_TEST_SCREENSHOT_PATH;
+      } catch (error) {
+        console.error(
+          'Failed to capture screenshot:',
+          error instanceof Error ? error.message : String(error),
+        );
+      }
+    }
+
     writeDesktopSmokeMarker(
       report && typeof report === 'object' && 'error' in report
-        ? { phase: 'error', ...report }
-        : { phase: 'completed', ...report },
+        ? { phase: 'error', ...report, screenshotPath }
+        : { phase: 'completed', ...report, screenshotPath },
     );
     return;
   } catch (error) {

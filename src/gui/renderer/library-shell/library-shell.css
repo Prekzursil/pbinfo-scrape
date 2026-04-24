@@ -195,9 +195,20 @@
   outline-offset: 2px;
 }
 .filter-sidebar__presets {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
   gap: var(--pac-space-1);
+}
+.filter-sidebar__presets .pac-btn {
+  padding: var(--pac-space-1) var(--pac-space-3);
+  font-size: 0.75rem;
+  border: 1px solid var(--pac-border);
+  background: var(--pac-bg);
+  color: var(--pac-fg);
+}
+.filter-sidebar__presets .pac-btn:hover {
+  background: var(--pac-bg-hover);
+  border-color: var(--pac-border-strong);
 }
 .filter-sidebar__section {
   margin: 0 0 var(--pac-space-4);
@@ -219,11 +230,21 @@
 }
 .filter-sidebar__radio {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--pac-space-2);
   padding: var(--pac-space-1) 0;
   color: var(--pac-fg);
   cursor: pointer;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+.filter-sidebar__radio input[type='radio'] {
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+.filter-sidebar__radio > span {
+  flex: 1;
+  min-width: 0;
 }
 .filter-sidebar__field {
   display: flex;

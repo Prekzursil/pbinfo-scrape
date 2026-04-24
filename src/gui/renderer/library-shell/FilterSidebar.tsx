@@ -130,7 +130,7 @@ export const FilterSidebar = forwardRef<HTMLElement, FilterSidebarProps>(
                   checked={props.filters.progress === value}
                   onChange={() => props.onProgressChange(value)}
                 />
-                {radioLabel('progress', value)}
+                <span>{radioLabel('progress', value)}</span>
               </label>
             ),
           )}
@@ -155,7 +155,7 @@ export const FilterSidebar = forwardRef<HTMLElement, FilterSidebarProps>(
                 checked={props.filters.completeness === value}
                 onChange={() => props.onCompletenessChange(value)}
               />
-              {radioLabel('completeness', value)}
+              <span>{radioLabel('completeness', value)}</span>
             </label>
           ))}
         </fieldset>
