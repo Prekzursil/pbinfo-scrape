@@ -1,4 +1,7 @@
+import { Check, Circle, Lock, X } from 'lucide-react';
+
 import type { ProblemRowInput } from '../../main/library-repository.js';
+import { rowStatusFor, type PillarName } from './problem-row-status.js';
 
 export interface ProblemRowProps {
   readonly row: ProblemRowInput;
@@ -6,41 +9,28 @@ export interface ProblemRowProps {
   readonly onOpen: (id: string) => void;
 }
 
-const PILLAR_KEYS = [
+const PILLAR_KEYS: readonly PillarName[] = [
   'statement',
   'editorial',
   'officialSource',
   'mySource',
   'tests',
-] as const;
+];
 
-const PILLAR_LABELS: Record<(typeof PILLAR_KEYS)[number], string> = {
-  statement: 'Statement',
-  editorial: 'Editorial',
-  officialSource: 'Official source',
-  mySource: 'My source',
-  tests: 'Tests',
-};
-
-const PILLAR_GLYPH: Record<
-  'captured' | 'missing' | 'restricted' | 'not-applicable',
-  string
-> = {
-  captured: '✓',
-  missing: '✗',
-  restricted: '🔒',
-  'not-applicable': '·',
-};
-
-const PILLAR_VALUE_LABEL: Record<
-  'captured' | 'missing' | 'restricted' | 'not-applicable',
-  string
-> = {
-  captured: 'captured',
-  missing: 'not captured yet',
-  restricted: 'restricted upstream',
-  'not-applicable': 'not applicable',
-};
+function StatusIcon({ kind }: { kind: 'ok' | 'locked' | 'gap' | 'na' }) {
+  const size = 16;
+  const strokeWidth = 2.25;
+  switch (kind) {
+    case 'ok':
+      return <Check size={size} strokeWidth={strokeWidth} aria-hidden />;
+    case 'locked':
+      return <Lock size={size} strokeWidth={strokeWidth} aria-hidden />;
+    case 'gap':
+      return <X size={size} strokeWidth={strokeWidth} aria-hidden />;
+    case 'na':
+      return <Circle size={6} strokeWidth={0} fill="currentColor" aria-hidden />;
+  }
+}
 
 export function ProblemRow({ row, selected, onOpen }: ProblemRowProps) {
   return (
@@ -50,9 +40,15 @@ export function ProblemRow({ row, selected, onOpen }: ProblemRowProps) {
       data-testid={`problem-row-${row.id}`}
       onClick={() => onOpen(row.id)}
     >
-      <div role="cell" className="problem-row__id">{row.id}</div>
-      <div role="cell" className="problem-row__name">{row.name}</div>
-      <div role="cell" className="problem-row__grade">{row.grade ?? '—'}</div>
+      <div role="cell" className="problem-row__id">
+        {row.id}
+      </div>
+      <div role="cell" className="problem-row__name">
+        {row.name}
+      </div>
+      <div role="cell" className="problem-row__grade">
+        {row.grade ?? '—'}
+      </div>
       <div role="cell" className="problem-row__progress">
         <span className={`pac-chip pac-chip--${row.progress}`}>
           {row.progress === 'not-attempted' ? '—' : row.progress}
@@ -63,24 +59,25 @@ export function ProblemRow({ row, selected, onOpen }: ProblemRowProps) {
       </div>
       <div role="cell" className="problem-row__captured">
         {PILLAR_KEYS.map((pillar) => {
-          const value = row.pillars[pillar];
-          const label = `${PILLAR_LABELS[pillar]}: ${PILLAR_VALUE_LABEL[value]}`;
+          const status = rowStatusFor(pillar, row.pillars[pillar]);
           return (
             <span
               key={pillar}
               role="img"
-              aria-label={label}
-              title={label}
-              className={`problem-row__icon problem-row__icon--${value}`}
+              aria-label={status.ariaLabel}
+              title={status.ariaLabel}
+              className={`problem-row__icon problem-row__icon--${status.tone}`}
             >
-              {PILLAR_GLYPH[value]}
+              <StatusIcon kind={status.kind} />
             </span>
           );
         })}
       </div>
       <div role="cell" className="problem-row__tags">
         {row.tags.slice(0, 3).map((tag) => (
-          <span key={tag} className="problem-row__tag">{tag}</span>
+          <span key={tag} className="problem-row__tag">
+            {tag}
+          </span>
         ))}
       </div>
     </div>

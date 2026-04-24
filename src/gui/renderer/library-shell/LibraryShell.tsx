@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import type { DesktopBridge, LibraryProblemRow } from '../../shared/bridge.js';
 import { FilterSidebar } from './FilterSidebar.js';
@@ -19,6 +19,17 @@ export function LibraryShell({ bridge, archiveRoot, snapshotId }: LibraryShellPr
   const [selectedId, setSelectedId] = useState<string | undefined>(undefined);
   const [availableTags, setAvailableTags] = useState<readonly string[]>([]);
   const [loadError, setLoadError] = useState<string | undefined>(undefined);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const sidebarRef = useRef<HTMLElement>(null);
+
+  const focusSearch = useCallback(() => {
+    searchInputRef.current?.focus();
+    searchInputRef.current?.select?.();
+  }, []);
+  const focusFilters = useCallback(() => {
+    sidebarRef.current?.focus();
+  }, []);
+  const clearSelection = useCallback(() => setSelectedId(undefined), []);
 
   useEffect(() => {
     let cancelled = false;
@@ -87,6 +98,7 @@ export function LibraryShell({ bridge, archiveRoot, snapshotId }: LibraryShellPr
       )}
       <div className="library-shell__body">
         <FilterSidebar
+          ref={sidebarRef}
           filters={filtersHook.filters}
           availableTags={availableTags}
           onSearchChange={filtersHook.setSearch}
@@ -99,11 +111,15 @@ export function LibraryShell({ bridge, archiveRoot, snapshotId }: LibraryShellPr
           onTagsChange={filtersHook.setTags}
           onPresetClick={filtersHook.applyPreset}
           onReset={filtersHook.reset}
+          searchInputRef={searchInputRef}
         />
         <ProblemsTable
           rows={rows}
           selectedId={selectedId}
           onOpenRow={setSelectedId}
+          focusSearch={focusSearch}
+          focusFilters={focusFilters}
+          onEscape={clearSelection}
         />
       </div>
     </div>

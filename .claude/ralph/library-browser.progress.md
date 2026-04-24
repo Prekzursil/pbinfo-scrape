@@ -24,9 +24,9 @@ On that full success, emit the sentinel: `LIBRARY_BROWSER_REDESIGN_COMPLETE — 
 
 ## Current position
 
-- **Task:** 5 — virtualized table + row status icons
-- **Step:** 5.1 (install react-window + lucide-react)
-- **Last committed:** `7080da41a` (Task 4, verify green 354/354)
+- **Task:** 6 — ProblemDrawer + Statement tab + sanitizer
+- **Step:** 6.1 (install isomorphic-dompurify)
+- **Last committed:** Task 5 (pending below; verify green 367/367)
 
 ## Iteration 1 recap
 
