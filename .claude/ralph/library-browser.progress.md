@@ -24,9 +24,33 @@ On that full success, emit the sentinel: `LIBRARY_BROWSER_REDESIGN_COMPLETE — 
 
 ## Current position
 
-- **Task:** 4 — LibraryShell scaffolding (non-virtualized)
-- **Step:** 4.1 (write failing useFilters test)
-- **Last committed:** `14274ad9d` (Task 2, verify green 335/335)
+- **Task:** 5 — virtualized table + row status icons
+- **Step:** 5.1 (install react-window + lucide-react)
+- **Last committed:** `7080da41a` (Task 4, verify green 354/354)
+
+## Iteration 1 recap
+
+Completed this iteration: Tasks 1, 2, 4 (Task 3 deferred into Task 9 per note above). All green: `npm run verify` clean, 354/354 tests pass. The redesigned LibraryShell renders end-to-end behind `PBINFO_USE_LIBRARY_SHELL=1` dev flag; legacy AppShell remains the default until Task 9.
+
+**User: you can try the new shell right now with:**
+
+```bash
+cross-env PBINFO_USE_LIBRARY_SHELL=1 npm run desktop:dev
+```
+
+The redesign fetches the real snapshot (`fresh-20260423-full`) via the new IPC handlers, renders every problem with filter sidebar + status icons, and auto-detects the archive next to the app. Expect the visual to be rough (plain text glyphs, no icon font yet, table not virtualized) — Tasks 5–8 polish it.
+
+## Iteration 2+ remaining work
+
+| Task | Summary | Est. work |
+|---|---|---|
+| 5 | react-window virtualization + lucide SVG row icons + keyboard nav (Ctrl+F/L/↑/↓/Enter/Esc) | medium |
+| 6 | ProblemDrawer + Statement tab + isomorphic-dompurify sanitizer + library:problems:detail IPC | large |
+| 7 | 5 more drawer tabs (Tests/Submissions/Official/Editorial/Raw) + Shiki highlighter | large |
+| 8 | OperatorMenu + run-refresh-coordinator + ProgressPanel + SettingsModal + login coordinator + live-site viewer child window | largest |
+| 9 | **STOP GATE** — await explicit user approval before destructive cut-over (delete dashboard/app-shell/coverage-explorer/workspace-store + sandbox:true + CSP) | user-gated |
+| 10 | Coverage threshold bump | trivial |
+| 11 | E2E + packaged smoke with §12.3 metric assertions | medium |
 
 ## Plan deviations
 
