@@ -24,9 +24,13 @@ On that full success, emit the sentinel: `LIBRARY_BROWSER_REDESIGN_COMPLETE — 
 
 ## Current position
 
-- **Task:** 3 — workspace→archive rename + retire workspace IPC channels
-- **Step:** 3.1 (write failing desktop-controller test asserting archiveRoot param)
-- **Last committed:** Task 2 (pending commit below; verify green 335/335)
+- **Task:** 4 — LibraryShell scaffolding (non-virtualized)
+- **Step:** 4.1 (write failing useFilters test)
+- **Last committed:** `14274ad9d` (Task 2, verify green 335/335)
+
+## Plan deviations
+
+- **Task 3 deferred into Task 9.** The plan's Task 3 is a mechanical workspace→archive rename across `desktop-controller.ts` (957 LOC) + AppShell rewiring. This is strictly cleanup — `archive:state` (Task 1) already runs additively alongside `workspaceRoot`. The renames are only load-bearing at Task 9's destructive cutover, so bundling them with Task 9 avoids destabilizing the legacy shell and keeps mid-pipeline commits small. Rollout reordered: 1→2→4→5→6→7→8→(user approval)→Task-3-merged-into-9→10→11.
 
 ## Commit log
 
@@ -34,7 +38,8 @@ On that full success, emit the sentinel: `LIBRARY_BROWSER_REDESIGN_COMPLETE — 
 |---|---|---|
 | `1dd8e81f3` | plan | design spec + implementation plan |
 | `668d3381b` | Task 1 | archive-resolver + empty-state shell |
-| _pending_ | Task 2 | theme token system + nativeTheme bridge |
+| `14274ad9d` | Task 2 | theme token system + nativeTheme bridge |
+| _pending_  | Task 4 | LibraryShell scaffold (non-virtualized) behind PBINFO_USE_LIBRARY_SHELL dev flag |
 
 ## Open questions / notes for user
 

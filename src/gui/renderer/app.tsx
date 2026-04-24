@@ -21,6 +21,7 @@ import { DesktopDashboard } from './dashboard.js';
 import { AppShell } from './app-shell.js';
 import type { CoverageExplorerFilters } from './coverage-explorer.js';
 import { EmptyStateWelcome } from './library-shell/EmptyStateWelcome.js';
+import { LibraryShell } from './library-shell/LibraryShell.js';
 import './dashboard.js'; // keep legacy dashboard alive in build output for smoke test fallback
 
 const USE_LEGACY_DASHBOARD = typeof process !== 'undefined' && process?.env?.PBINFO_DESKTOP_LEGACY_UI === '1';
@@ -584,6 +585,22 @@ export function App({ desktop }: AppProps) {
         onBrowseForArchive={() => {
           /* wired in Task 8 */
         }}
+      />
+    );
+  }
+
+  // Dev flag lets the redesigned LibraryShell render alongside the legacy
+  // shell (Task 4). Flip on with `cross-env PBINFO_USE_LIBRARY_SHELL=1`.
+  // Task 9 deletes the legacy branch and makes this unconditional.
+  const useLibraryShell =
+    typeof import.meta !== 'undefined' &&
+    import.meta.env?.PBINFO_USE_LIBRARY_SHELL === '1';
+  if (useLibraryShell && archiveState?.found && archiveState.archiveRoot && bridge) {
+    return (
+      <LibraryShell
+        bridge={bridge}
+        archiveRoot={archiveState.archiveRoot}
+        snapshotId={archiveState.snapshotId}
       />
     );
   }

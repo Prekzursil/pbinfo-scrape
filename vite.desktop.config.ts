@@ -7,6 +7,7 @@ export default defineConfig({
   root: resolve(__dirname, 'src/gui/renderer'),
   base: './',
   plugins: [react()],
+  envPrefix: ['VITE_', 'PBINFO_'],
   build: {
     outDir: resolve(__dirname, 'dist-desktop/gui/renderer'),
     emptyOutDir: true,

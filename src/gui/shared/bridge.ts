@@ -144,6 +144,67 @@ export interface DesktopBridge {
   openExternal: (url: string) => Promise<void>;
   archive: DesktopArchiveBridge;
   theme: DesktopThemeBridge;
+  library: DesktopLibraryBridge;
+}
+
+export interface LibraryProblemRow {
+  readonly id: string;
+  readonly name: string;
+  readonly slug: string;
+  readonly grade?: number;
+  readonly tags: readonly string[];
+  readonly progress: 'solved' | 'partial' | 'not-attempted';
+  readonly bestScore: number;
+  readonly completeness:
+    | 'complete'
+    | 'incomplete-my-gap'
+    | 'incomplete-upstream'
+    | 'never-crawled';
+  readonly pillars: Readonly<{
+    readonly statement:
+      | 'captured'
+      | 'missing'
+      | 'restricted'
+      | 'not-applicable';
+    readonly editorial:
+      | 'captured'
+      | 'missing'
+      | 'restricted'
+      | 'not-applicable';
+    readonly officialSource:
+      | 'captured'
+      | 'missing'
+      | 'restricted'
+      | 'not-applicable';
+    readonly mySource:
+      | 'captured'
+      | 'missing'
+      | 'restricted'
+      | 'not-applicable';
+    readonly tests: 'captured' | 'missing' | 'restricted' | 'not-applicable';
+  }>;
+  readonly languagesTried: readonly string[];
+}
+
+export interface LibraryListInput {
+  readonly snapshotId?: string;
+  readonly filters: unknown;
+  readonly sort: { readonly key: string; readonly dir: 'asc' | 'desc' };
+  readonly limit?: number;
+  readonly offset?: number;
+}
+
+export interface LibraryListResult {
+  readonly totalCount: number;
+  readonly rows: readonly LibraryProblemRow[];
+  readonly snapshotId?: string;
+}
+
+export interface DesktopLibraryBridge {
+  listProblems: (input: LibraryListInput) => Promise<LibraryListResult>;
+  listTags: (input: {
+    snapshotId?: string;
+  }) => Promise<readonly string[]>;
 }
 
 export interface DesktopArchiveBridge {

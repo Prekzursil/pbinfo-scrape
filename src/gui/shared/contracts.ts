@@ -274,3 +274,58 @@ export type ArchiveSwitchSnapshotInput = z.infer<
 export type ArchiveProbeResultContract = z.infer<typeof archiveProbeResultSchema>;
 export type LibrarySetThemeInput = z.infer<typeof librarySetThemeInputSchema>;
 export type LibraryGetThemeResult = z.infer<typeof libraryGetThemeResultSchema>;
+
+const pillarFilterSchema = z
+  .enum(['all', 'captured', 'missing', 'restricted', 'not-applicable'])
+  .default('all');
+
+export const libraryListInputSchema = z
+  .object({
+    snapshotId: z.string().optional(),
+    filters: z
+      .object({
+        search: z.string().max(256).default(''),
+        grades: z.array(z.number().int().min(5).max(12)).default([]),
+        progress: z
+          .enum(['all', 'solved', 'partial', 'not-attempted'])
+          .default('all'),
+        completeness: z
+          .enum([
+            'all',
+            'complete',
+            'incomplete-my-gap',
+            'incomplete-upstream',
+            'never-crawled',
+          ])
+          .default('all'),
+        statement: pillarFilterSchema,
+        editorial: pillarFilterSchema,
+        officialSource: pillarFilterSchema,
+        mySource: pillarFilterSchema,
+        tests: pillarFilterSchema,
+        languagesTried: z.array(z.string().max(16)).default([]),
+        bestScoreRange: z
+          .tuple([z.number().min(0).max(100), z.number().min(0).max(100)])
+          .default([0, 100]),
+        tags: z.array(z.string().max(64)).default([]),
+      })
+      .strict(),
+    sort: z
+      .object({
+        key: z
+          .enum(['id', 'name', 'grade', 'progress', 'bestScore'])
+          .default('id'),
+        dir: z.enum(['asc', 'desc']).default('asc'),
+      })
+      .strict(),
+    limit: z.number().int().min(1).max(5000).default(2500),
+    offset: z.number().int().min(0).default(0),
+  })
+  .strict();
+
+export const libraryTagsInputSchema = z
+  .object({ snapshotId: z.string().optional() })
+  .strict();
+
+export type LibraryListInput = z.infer<typeof libraryListInputSchema>;
+export type LibraryTagsInput = z.infer<typeof libraryTagsInputSchema>;

@@ -7,6 +7,11 @@ import { resolveArchiveRoot } from './archive-resolver.js';
 import { readArchiveStore, writeArchiveStore } from './archive-store.js';
 import { createDesktopController } from './desktop-controller.js';
 import {
+  collectTags,
+  listProblems,
+  loadProblemRowsFromSnapshot,
+} from './library-repository.js';
+import {
   readDesktopPreferences,
   writeDesktopPreferences,
 } from './desktop-preferences.js';
@@ -38,6 +43,8 @@ import {
   guiWorkspaceSelectionSchema,
   libraryGetThemeResultSchema,
   librarySetThemeInputSchema,
+  libraryListInputSchema,
+  libraryTagsInputSchema,
 } from '../shared/contracts.js';
 import type { GuiArchiveState } from '../shared/types.js';
 
@@ -291,6 +298,51 @@ export function registerDesktopIpc(options: RegisterDesktopIpcOptions): void {
     async (_event, payload: unknown) => {
       const input = librarySetThemeInputSchema.parse(payload);
       return libraryGetThemeResultSchema.parse(themeBridge.setTheme(input));
+    },
+  );
+
+  options.ipcMain.handle(
+    'library:problems:list',
+    async (_event, payload: unknown) => {
+      const input = libraryListInputSchema.parse(payload);
+      const archive = resolveArchiveState(
+        readArchiveStore(options.userDataRoot).manualArchiveOverride,
+      );
+      if (!archive.found || !archive.archiveRoot) {
+        return {
+          totalCount: 0,
+          rows: [],
+          snapshotId: input.snapshotId ?? archive.snapshotId,
+        };
+      }
+      const snapshotId = input.snapshotId ?? archive.snapshotId;
+      if (!snapshotId) {
+        return { totalCount: 0, rows: [], snapshotId: undefined };
+      }
+      const rows = loadProblemRowsFromSnapshot(archive.archiveRoot, snapshotId);
+      const result = listProblems({
+        rows,
+        filters: input.filters,
+        sort: input.sort,
+        limit: input.limit,
+        offset: input.offset,
+      });
+      return { ...result, snapshotId };
+    },
+  );
+
+  options.ipcMain.handle(
+    'library:tags',
+    async (_event, payload: unknown) => {
+      const input = libraryTagsInputSchema.parse(payload);
+      const archive = resolveArchiveState(
+        readArchiveStore(options.userDataRoot).manualArchiveOverride,
+      );
+      if (!archive.found || !archive.archiveRoot) return [];
+      const snapshotId = input.snapshotId ?? archive.snapshotId;
+      if (!snapshotId) return [];
+      const rows = loadProblemRowsFromSnapshot(archive.archiveRoot, snapshotId);
+      return collectTags(rows);
     },
   );
 }

@@ -286,5 +286,17 @@ export function createDesktopBridge(adapter: DesktopBridgeAdapter): DesktopBridg
         return unsubscribe ?? (() => undefined);
       },
     },
+    library: {
+      async listProblems(input) {
+        return (await adapter.invoke('library:problems:list', input)) as Awaited<
+          ReturnType<DesktopBridge['library']['listProblems']>
+        >;
+      },
+      async listTags(input) {
+        return (await adapter.invoke('library:tags', input)) as Awaited<
+          ReturnType<DesktopBridge['library']['listTags']>
+        >;
+      },
+    },
   };
 }
