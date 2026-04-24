@@ -10,6 +10,14 @@ export default defineConfig({
   test: {
     coverage: {
       reporter: ['text', 'html'],
+      include: ['src/**/*.ts', 'src/**/*.tsx'],
+      exclude: [
+        'dist/**',
+        'dist-desktop/**',
+        'archive/**',
+        'src/**/*.d.ts',
+        'src/gui/renderer/full/**',
+      ],
     },
     projects: [
       {

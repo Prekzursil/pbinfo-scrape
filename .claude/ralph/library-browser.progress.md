@@ -24,8 +24,8 @@ On that full success, emit the sentinel: `LIBRARY_BROWSER_REDESIGN_COMPLETE — 
 
 ## Current position
 
-- **Task:** 10 — coverage threshold bump
-- **Last committed:** Task 9 (pending below; verify green 414/414)
+- **Task:** 11 — E2E + packaged smoke + §12.3 metric assertions
+- **Last committed:** Task 10 (pending below; verify green 414/414)
 
 ## Task 9 scope adjustment
 
