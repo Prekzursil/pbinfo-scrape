@@ -30,17 +30,23 @@ On that full success, emit the sentinel: `LIBRARY_BROWSER_REDESIGN_COMPLETE — 
 
 ## Iteration 1 recap
 
-Completed this iteration: Tasks 1, 2, 4 (Task 3 deferred into Task 9 per note above). All green: `npm run verify` clean, 354/354 tests pass. The redesigned LibraryShell renders end-to-end behind `PBINFO_USE_LIBRARY_SHELL=1` dev flag; legacy AppShell remains the default until Task 9.
+Completed: Tasks 1, 2, 4 (Task 3 deferred into Task 9). Verify green 354/354.
 
-**User: you can try the new shell right now with:**
+## Iteration 2 recap
+
+Completed: Tasks 5, 6, 7. Verify green 392/392 (+38 new tests: 13 row-status/virtualization/keyboard, 19 sanitizer/detail-repo/drawer, 6 TestsTab).
+
+**The reading path is now visually complete behind `PBINFO_USE_LIBRARY_SHELL=1`:**
 
 ```bash
 cross-env PBINFO_USE_LIBRARY_SHELL=1 npm run desktop:dev
 ```
 
-The redesign fetches the real snapshot (`fresh-20260423-full`) via the new IPC handlers, renders every problem with filter sidebar + status icons, and auto-detects the archive next to the app. Expect the visual to be rough (plain text glyphs, no icon font yet, table not virtualized) — Tasks 5–8 polish it.
+End-to-end: archive auto-detects → LibraryShell renders 2,500+ problems (virtualized, lucide icons for 5 pillars) → click a row → drawer opens with Statement (sanitized HTML) + Tests (copy buttons, open-folder) + My submissions (Shiki-highlighted source for 100-pt evaluations) + Official source (language switcher + Shiki) + Editorial (sanitized HTML) + Raw data (file paths with Open buttons). Keyboard: ↑/↓ to move, Enter to open, Esc to close, Ctrl+F to search, Ctrl+L to filters.
 
-## Iteration 2+ remaining work
+What's still missing: operator controls (Task 8) and the destructive cutover to retire AppShell (Task 9, user-gated).
+
+## Iteration 3+ remaining work
 
 | Task | Summary | Est. work |
 |---|---|---|
