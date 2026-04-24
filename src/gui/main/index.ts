@@ -237,6 +237,19 @@ async function maybeWriteDesktopSmokeMarker(
           await new Promise((resolve) => setTimeout(resolve, 800));
         }
 
+        if (process.env.PBINFO_DESKTOP_TEST_OPEN_OPERATOR === '1') {
+          await window.webContents.executeJavaScript(
+            `(() => {
+              const trigger = Array.from(document.querySelectorAll('button')).find(
+                (el) => el.textContent && /operator/i.test(el.textContent),
+              );
+              if (trigger instanceof HTMLElement) trigger.click();
+            })()`,
+            true,
+          );
+          await new Promise((resolve) => setTimeout(resolve, 500));
+        }
+
         if (process.env.PBINFO_DESKTOP_TEST_FORCE_THEME) {
           // Call the real theme bridge so the main-process preference store
           // flips AND the renderer subscription re-sets dataset.theme in the
