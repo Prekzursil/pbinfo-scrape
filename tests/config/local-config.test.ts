@@ -114,4 +114,37 @@ describe('loadLocalConfig', () => {
       repo: 'pbinfo-private-archive',
     });
   });
+
+  test('resolves optional cookie, recipient, and artifact export overrides relative to the workspace', () => {
+    const workspaceRoot = createWorkspace();
+    const localRoot = join(workspaceRoot, '.local');
+    mkdirSync(localRoot, { recursive: true });
+    writeFileSync(
+      join(localRoot, 'pbinfo.local.json'),
+      JSON.stringify({
+        auth: {
+          cookieSourcePath: '.local/cookies-source.json',
+          sessionCookiesPath: '.local/custom-cookies.json',
+        },
+        secrets: {
+          recipientPath: 'archive/secrets/custom-recipient.txt',
+        },
+        artifacts: {
+          exportRoot: 'output/custom-exports',
+        },
+      }),
+      'utf8',
+    );
+
+    const config = loadLocalConfig(workspaceRoot);
+
+    expect(config.auth.cookieSourcePath).toBe(join(workspaceRoot, '.local', 'cookies-source.json'));
+    expect(config.auth.sessionCookiesPath).toBe(
+      join(workspaceRoot, '.local', 'custom-cookies.json'),
+    );
+    expect(config.secrets.recipientPath).toBe(
+      join(workspaceRoot, 'archive', 'secrets', 'custom-recipient.txt'),
+    );
+    expect(config.artifacts.exportRoot).toBe(join(workspaceRoot, 'output', 'custom-exports'));
+  });
 });

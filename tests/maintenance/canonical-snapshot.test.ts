@@ -7,6 +7,7 @@ import { afterEach, describe, expect, test } from 'vitest';
 import {
   CANONICAL_SAMPLE_ROUTES,
   getCanonicalSnapshotPaths,
+  readCanonicalSnapshotIntegrity,
   readMirrorRouteIndex,
   scanCanonicalSnapshotFilesystem,
   selectCanonicalSampleRoutes,
@@ -111,5 +112,24 @@ describe('canonical snapshot helpers', () => {
         }),
       ]),
     );
+  });
+
+  test('returns an empty route index when the mirror routes file is missing', () => {
+    const root = mkdtempSync(join(tmpdir(), 'pbinfo-canonical-missing-'));
+    cleanupPaths.push(root);
+    const paths = getCanonicalSnapshotPaths(root);
+    expect(readMirrorRouteIndex(paths.mirrorRoutesPath)).toEqual([]);
+  });
+
+  test('reports filesystem and crawl integrity for an absent canonical snapshot', () => {
+    const root = mkdtempSync(join(tmpdir(), 'pbinfo-canonical-integrity-'));
+    cleanupPaths.push(root);
+
+    const integrity = readCanonicalSnapshotIntegrity(root);
+    expect(integrity.snapshotId).toBeTypeOf('string');
+    expect(CANONICAL_SAMPLE_ROUTES.length).toBeGreaterThan(0);
+    expect(integrity.filesystem.problemRecordCount).toBe(0);
+    expect(integrity.filesystem.normalizedRootExists).toBe(false);
+    expect(integrity.crawlStatus).toBeDefined();
   });
 });

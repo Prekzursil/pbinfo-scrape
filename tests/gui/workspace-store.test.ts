@@ -178,4 +178,48 @@ describe('workspace store', () => {
     expect(state.activeProfileId).toBeUndefined();
     expect(existsSync(join(workspaceRoot, '.local', 'session-cookies.json'))).toBe(false);
   });
+
+  test('reuses existing state, updates an existing profile in place, and guards missing profiles', () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-gui-store-edge-'));
+    tempDirs.push(workspaceRoot);
+
+    const first = initializeWorkspaceState(workspaceRoot, {
+      now: new Date('2026-03-10T12:00:00.000Z'),
+    });
+    // Re-initializing an already-initialized workspace returns the persisted state.
+    const second = initializeWorkspaceState(workspaceRoot, {
+      now: new Date('2026-03-10T13:00:00.000Z'),
+    });
+    expect(second.createdAt).toBe(first.createdAt);
+
+    upsertWorkspaceProfile(workspaceRoot, {
+      profileId: 'alpha',
+      label: 'Original label',
+      provenance: { type: 'login' },
+      sessionCookies: [{ key: 'PHPSESSID', value: 'v1', domain: 'www.pbinfo.ro', path: '/' }],
+      now: new Date('2026-03-10T12:01:00.000Z'),
+    });
+    const updated = upsertWorkspaceProfile(workspaceRoot, {
+      profileId: 'alpha',
+      label: 'Renamed label',
+      provenance: { type: 'login' },
+      sessionCookies: [{ key: 'PHPSESSID', value: 'v2', domain: 'www.pbinfo.ro', path: '/' }],
+      now: new Date('2026-03-10T12:05:00.000Z'),
+    });
+
+    const state = readWorkspaceState(workspaceRoot);
+    expect(state.profiles).toHaveLength(1);
+    expect(updated.label).toBe('Renamed label');
+
+    expect(() =>
+      activateWorkspaceProfile(workspaceRoot, 'missing', {
+        now: new Date('2026-03-10T12:06:00.000Z'),
+      }),
+    ).toThrow(/was not found/);
+
+    const afterMissingDelete = deleteWorkspaceProfile(workspaceRoot, 'missing', {
+      now: new Date('2026-03-10T12:07:00.000Z'),
+    });
+    expect(afterMissingDelete.profiles).toHaveLength(1);
+  });
 });

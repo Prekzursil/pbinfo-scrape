@@ -144,6 +144,52 @@ describe('runNormalizeSnapshotWorkflow', () => {
     });
   });
 
+  test('skips page records without raw bodies, missing html files, and a missing pages directory', async () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-normalize-skip-'));
+    tempDirs.push(workspaceRoot);
+
+    const config = loadLocalConfig(workspaceRoot);
+    const snapshot = prepareSnapshot(config, {
+      snapshotId: 'normalize-skip',
+      scope: 'all',
+      now: new Date('2026-03-10T00:00:00.000Z'),
+    });
+
+    // No `pages` directory yet -> loadPageRecords swallows the readdir error.
+    const emptyRun = await runNormalizeSnapshotWorkflow(workspaceRoot, 'normalize-skip');
+    expect(emptyRun.pagesNormalized).toBe(0);
+
+    mkdirSync(join(snapshot.normalizedRoot, 'pages'), { recursive: true });
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'pages', 'no-body.json'),
+      JSON.stringify({
+        snapshotId: snapshot.snapshotId,
+        url: 'https://www.pbinfo.ro/no-body',
+        kind: 'public-page',
+        httpStatus: 200,
+        contentType: 'text/html',
+        fetchedAt: '2026-03-10T00:00:00.000Z',
+      }),
+      'utf8',
+    );
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'pages', 'missing-html.json'),
+      JSON.stringify({
+        snapshotId: snapshot.snapshotId,
+        url: 'https://www.pbinfo.ro/missing',
+        kind: 'public-page',
+        httpStatus: 200,
+        contentType: 'text/html',
+        bodyPath: 'raw-pages/does-not-exist.html',
+        fetchedAt: '2026-03-10T00:00:00.000Z',
+      }),
+      'utf8',
+    );
+
+    const skippedRun = await runNormalizeSnapshotWorkflow(workspaceRoot, 'normalize-skip');
+    expect(skippedRun.pagesNormalized).toBe(0);
+  });
+
   test('records evaluation parse errors instead of crashing on access-denied evaluation pages', async () => {
     const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-normalize-error-'));
     tempDirs.push(workspaceRoot);
