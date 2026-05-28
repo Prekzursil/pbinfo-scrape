@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Canonical Strict-Zero verification flow for pbinfo-scrape.
+#
+# This repository is a Node.js / TypeScript application (CLI crawler, Express
+# mirror server, and an Electron + React desktop console). The flow below runs
+# the full whole-tree quality gate: install, lint, format check, type checks,
+# unit tests with 100% line+branch coverage, production build, complexity, and
+# duplication. It runs identically in local development, the repo `Verify`
+# workflow, and the QZP-managed "Coverage 100 Gate" lane.
+
+run_node20() {
+  local command_string="$1"
+  if command -v node >/dev/null 2>&1; then
+    local node_major
+    node_major="$(node -p 'process.versions.node.split(".")[0]')"
+    if [ "${node_major}" -ge 20 ]; then
+      bash -lc "$command_string"
+      return
+    fi
+  fi
+  npx -y -p node@20 -c "$command_string"
+}
+
+# Reproducible install from the committed lockfile.
+run_node20 "npm ci"
+
+# Static analysis: lint and formatting must both be clean across the whole tree.
+run_node20 "npm run lint"
+run_node20 "npm run format:check"
+
+# Type safety for both the library/CLI and the desktop main process.
+run_node20 "npm run typecheck"
+run_node20 "npm run typecheck:desktop"
+
+# Unit + component tests with whole-tree 100% line and branch coverage.
+# The coverage thresholds live in vitest.config.ts and fail the run on any gap.
+run_node20 "npm run test:coverage"
+
+# Production build must succeed.
+run_node20 "npm run build"
+
+# Cyclomatic complexity: every function must be <= 10. `lizard` is a Python
+# tool, installed into the quality-gate virtualenv so the check is reproducible.
+PYTHON_BIN="${PYTHON_BIN:-python3}"
+VENV_DIR="${VENV_DIR:-.venv-quality-zero}"
+if [ ! -x "$VENV_DIR/bin/python" ]; then
+  rm -rf "$VENV_DIR"
+  "$PYTHON_BIN" -m venv "$VENV_DIR"
+fi
+"$VENV_DIR/bin/python" -m pip install --quiet --upgrade pip lizard
+"$VENV_DIR/bin/python" -m lizard src -l javascript -l typescript --CCN 10 --warnings_only
+
+# Duplication: zero genuine clones across the source tree (jscpd reads .jscpd.json).
+run_node20 "npx --yes jscpd src"
