@@ -1,8 +1,9 @@
 import makeFetchCookie from 'fetch-cookie';
 import { CookieJar } from 'tough-cookie';
 
-import { loadHtml, normalizeWhitespace } from '../pbinfo/parsers/shared.js';
+import { loadHtml } from '../pbinfo/parsers/shared.js';
 import { persistSerializedCookies } from './session-store.js';
+import { extractLoggedInState, extractResolvedHandle } from './session-handle.js';
 
 type PersistedCookie = {
   key?: string;
@@ -160,75 +161,3 @@ function parseAjaxLoginResponse(text: string): AjaxLoginResponse {
   }
 }
 
-function extractLoggedInState(html: string): boolean {
-  const sessionJson = extractUserSessionJson(html);
-  const id = Number(sessionJson?.id ?? sessionJson?.user_id ?? 0);
-  if (Number.isFinite(id) && id > 0) {
-    return true;
-  }
-
-  const $ = loadHtml(html);
-  return $('a[href*="logout"], form[action*="logout"]').length > 0;
-}
-
-function extractResolvedHandle(html: string): string | undefined {
-  const sessionJson = extractUserSessionJson(html);
-  const sessionId = Number(sessionJson?.id ?? sessionJson?.user_id ?? 0);
-  const sessionIsAuthenticated = Number.isFinite(sessionId) && sessionId > 0;
-  for (const key of ['username', 'user', 'utilizator', 'nick', 'nume_utilizator', 'name']) {
-    const candidate = pickSessionHandle(sessionJson?.[key]);
-    if (sessionIsAuthenticated && candidate) {
-      return candidate;
-    }
-  }
-
-  const $ = loadHtml(html);
-  const hasLogoutLink = $('a[href*="logout"], form[action*="logout"]').length > 0;
-  if (!sessionIsAuthenticated && !hasLogoutLink) {
-    return undefined;
-  }
-
-  const profileAnchors = $('#bara_navigare a[href^="/profil/"], nav a[href^="/profil/"]');
-  for (const anchor of profileAnchors.toArray()) {
-    const href = $(anchor).attr('href');
-    const fromHref = href?.match(/^\/profil\/([^/?#]+)/u)?.[1];
-    if (fromHref) {
-      return fromHref;
-    }
-
-    const text = normalizeWhitespace($(anchor).text());
-    const match = text.match(/\(([^)]+)\)\s*$/u);
-    if (match?.[1]) {
-      return match[1];
-    }
-  }
-
-  return undefined;
-}
-
-function extractUserSessionJson(html: string): Record<string, unknown> | undefined {
-  const match = html.match(/user_autentificat\s*=\s*(\{[\s\S]*?\})\s*;/u);
-  if (!match?.[1]) {
-    return undefined;
-  }
-
-  try {
-    return JSON.parse(match[1]) as Record<string, unknown>;
-  } catch {
-    return undefined;
-  }
-}
-
-function pickSessionHandle(value: unknown): string | undefined {
-  if (typeof value !== 'string') {
-    return undefined;
-  }
-
-  const normalized = normalizeWhitespace(value);
-  if (!normalized) {
-    return undefined;
-  }
-
-  const trailingHandle = normalized.match(/\(([^)]+)\)\s*$/u)?.[1];
-  return trailingHandle ?? normalized;
-}

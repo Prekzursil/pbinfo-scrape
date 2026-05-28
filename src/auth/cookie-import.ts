@@ -152,6 +152,103 @@ export async function unwrapChromiumMasterKey(
   return Buffer.from(await decryptMasterKey(wrappedKey));
 }
 
+type MasterKeyDecryptor = (wrappedKey: Buffer) => Buffer | Promise<Buffer>;
+
+function resolveCookieValue(
+  row: BrowserCookieRow,
+  masterKey: Buffer,
+  decryptMasterKey: MasterKeyDecryptor,
+): string {
+  if (row.value) {
+    return row.value;
+  }
+
+  try {
+    return decryptChromiumCookieValue(
+      Buffer.from(row.encrypted_value),
+      masterKey,
+      decryptMasterKey,
+    );
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(
+      `Could not decrypt Chromium cookie "${row.name}" for ${row.host_key}: ${message}. ` +
+        'This usually means the browser uses app-bound encryption that cannot be exported from this profile. ' +
+        'Use `npm run cli -- auth login` (credentials strategy) or import a plain JSON cookie export instead.',
+    );
+  }
+}
+
+function toImportedCookie(
+  row: BrowserCookieRow,
+  masterKey: Buffer,
+  decryptMasterKey: MasterKeyDecryptor,
+): ImportedCookie {
+  return {
+    name: row.name,
+    value: resolveCookieValue(row, masterKey, decryptMasterKey),
+    domain: row.host_key,
+    path: row.path || '/',
+    expires: normalizeChromiumExpiry(row.expires_utc),
+    httpOnly: Boolean(Number(row.is_httponly)),
+    secure: Boolean(Number(row.is_secure)),
+    sameSite: normalizeChromiumSameSite(Number(row.samesite)),
+  };
+}
+
+function copyCookiesDatabase(
+  options: BrowserCookieImportOptions,
+  sourcePath: string,
+  destinationPath: string,
+): void {
+  try {
+    (options.copyFile ?? copyFileSync)(sourcePath, destinationPath);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(`Could not copy Chromium cookies database from ${sourcePath}: ${message}`);
+  }
+}
+
+function readChromiumCookieRows(tempCookiesPath: string): BrowserCookieRow[] {
+  const database = new DatabaseSync(tempCookiesPath, { readOnly: true, allowExtension: false });
+  try {
+    const rows = database
+      .prepare(
+        `SELECT
+          host_key,
+          name,
+          value,
+          encrypted_value,
+          path,
+          CAST(expires_utc AS TEXT) AS expires_utc,
+          is_httponly,
+          is_secure,
+          samesite
+        FROM cookies`,
+      )
+      .all() as Array<Record<string, unknown>>;
+    return rows.map(coerceBrowserCookieRow);
+  } finally {
+    database.close();
+  }
+}
+
+function selectDomainCookies(
+  rows: BrowserCookieRow[],
+  domainFilter: string,
+  masterKey: Buffer,
+  decryptMasterKey: MasterKeyDecryptor,
+): ImportedCookie[] {
+  const filter = domainFilter.toLowerCase();
+  const cookies: ImportedCookie[] = [];
+  for (const row of rows) {
+    if (row.host_key.toLowerCase().includes(filter)) {
+      cookies.push(toImportedCookie(row, masterKey, decryptMasterKey));
+    }
+  }
+  return cookies;
+}
+
 export async function importBrowserCookies(
   options: BrowserCookieImportOptions,
 ): Promise<ImportedCookie[]> {
@@ -166,82 +263,19 @@ export async function importBrowserCookies(
   const tempDir = mkdtempSync(join(tmpdir(), 'pbinfo-browser-cookies-'));
   const tempCookiesPath = join(tempDir, 'Cookies');
   try {
-    try {
-      (options.copyFile ?? copyFileSync)(resolved.cookiesDbPath, tempCookiesPath);
-    } catch (error) {
-      const message = error instanceof Error ? error.message : String(error);
-      throw new Error(
-        `Could not copy Chromium cookies database from ${resolved.cookiesDbPath}: ${message}`,
-      );
-    }
-
+    copyCookiesDatabase(options, resolved.cookiesDbPath, tempCookiesPath);
+    const decryptMasterKey = options.decryptMasterKey ?? decryptDpapiBuffer;
     const masterKey = await unwrapChromiumMasterKey(
       readFileSync(resolved.localStatePath, 'utf8'),
-      options.decryptMasterKey ?? decryptDpapiBuffer,
+      decryptMasterKey,
     );
-    const database = new DatabaseSync(tempCookiesPath, {
-      readOnly: true,
-      allowExtension: false,
-    });
-    try {
-      const rows = database
-        .prepare(
-          `SELECT
-          host_key,
-          name,
-          value,
-          encrypted_value,
-          path,
-          CAST(expires_utc AS TEXT) AS expires_utc,
-          is_httponly,
-          is_secure,
-          samesite
-        FROM cookies`,
-        )
-        .all() as Array<Record<string, unknown>>;
 
-      const domainFilter = (options.domainFilter ?? 'pbinfo.ro').toLowerCase();
-      const cookies: ImportedCookie[] = [];
-      for (const row of rows.map(coerceBrowserCookieRow)) {
-        const domain = row.host_key.toLowerCase();
-        if (!domain.includes(domainFilter)) {
-          continue;
-        }
-
-        const encryptedValue = Buffer.from(row.encrypted_value);
-        let value = row.value;
-        if (!value) {
-          try {
-            value = decryptChromiumCookieValue(
-              encryptedValue,
-              masterKey,
-              options.decryptMasterKey ?? decryptDpapiBuffer,
-            );
-          } catch (error) {
-            const message = error instanceof Error ? error.message : String(error);
-            throw new Error(
-              `Could not decrypt Chromium cookie "${row.name}" for ${row.host_key}: ${message}. ` +
-                'This usually means the browser uses app-bound encryption that cannot be exported from this profile. ' +
-                'Use `npm run cli -- auth login` (credentials strategy) or import a plain JSON cookie export instead.',
-            );
-          }
-        }
-        cookies.push({
-          name: row.name,
-          value,
-          domain: row.host_key,
-          path: row.path || '/',
-          expires: normalizeChromiumExpiry(row.expires_utc),
-          httpOnly: Boolean(Number(row.is_httponly)),
-          secure: Boolean(Number(row.is_secure)),
-          sameSite: normalizeChromiumSameSite(Number(row.samesite)),
-        });
-      }
-
-      return cookies;
-    } finally {
-      database.close();
-    }
+    return selectDomainCookies(
+      readChromiumCookieRows(tempCookiesPath),
+      options.domainFilter ?? 'pbinfo.ro',
+      masterKey,
+      decryptMasterKey,
+    );
   } finally {
     rmSync(tempDir, { recursive: true, force: true });
   }

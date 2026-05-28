@@ -15,6 +15,24 @@ type PersistedCookie = {
   sameSite?: string;
 };
 
+function serializeCookieHeader(cookie: PersistedCookie): string {
+  return [
+    `${cookie.key}=${cookie.value}`,
+    cookie.domain ? `Domain=${cookie.domain}` : '',
+    `Path=${cookie.path ?? '/'}`,
+    cookie.secure ? 'Secure' : '',
+    cookie.httpOnly ? 'HttpOnly' : '',
+  ]
+    .filter(Boolean)
+    .join('; ');
+}
+
+function cookieSetUrl(cookie: PersistedCookie): string {
+  const protocol = cookie.secure ? 'https' : 'http';
+  const cookieDomain = (cookie.domain ?? 'localhost').replace(/^\./, '');
+  return `${protocol}://${cookieDomain}${cookie.path ?? '/'}`;
+}
+
 export async function loadCookieJarFromFile(sessionCookiesPath: string): Promise<CookieJar> {
   const jar = new CookieJar(undefined, {
     allowSpecialUseDomain: true,
@@ -30,18 +48,7 @@ export async function loadCookieJarFromFile(sessionCookiesPath: string): Promise
       continue;
     }
 
-    const serialized = [
-      `${cookie.key}=${cookie.value}`,
-      cookie.domain ? `Domain=${cookie.domain}` : '',
-      `Path=${cookie.path ?? '/'}`,
-      cookie.secure ? 'Secure' : '',
-      cookie.httpOnly ? 'HttpOnly' : '',
-    ]
-      .filter(Boolean)
-      .join('; ');
-    const protocol = cookie.secure ? 'https' : 'http';
-    const cookieDomain = (cookie.domain ?? 'localhost').replace(/^\./, '');
-    await jar.setCookie(serialized, `${protocol}://${cookieDomain}${cookie.path ?? '/'}`);
+    await jar.setCookie(serializeCookieHeader(cookie), cookieSetUrl(cookie));
   }
 
   return jar;

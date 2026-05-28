@@ -1,8 +1,9 @@
 import { existsSync } from 'node:fs';
 
 import type { LoadedLocalConfig } from '../config/local-config.js';
-import { loadHtml, normalizeWhitespace } from '../pbinfo/parsers/shared.js';
+import { normalizeWhitespace } from '../pbinfo/parsers/shared.js';
 import { createCookieFetch } from './session-store.js';
+import { extractLoggedInState, extractResolvedHandle } from './session-handle.js';
 
 export type PbinfoAuthProbeStatus = 'ok' | 'guest' | 'handle-mismatch' | 'cookie-missing';
 
@@ -19,6 +20,54 @@ export interface PbinfoAuthStatusResult {
   remediation: string[];
 }
 
+interface AuthProbeContext {
+  configuredHandle?: string;
+  cookieFileExists: boolean;
+  sessionCookiesPath: string;
+  probeUrl: string;
+  checkedAt: string;
+}
+
+function buildAuthStatusResult(
+  context: AuthProbeContext,
+  fields: {
+    status: PbinfoAuthProbeStatus;
+    loggedIn: boolean;
+    resolvedHandle?: string;
+    handleMatchesConfigured: boolean;
+    remediation: string[];
+  },
+): PbinfoAuthStatusResult {
+  return {
+    status: fields.status,
+    loggedIn: fields.loggedIn,
+    configuredHandle: context.configuredHandle ?? undefined,
+    resolvedHandle: fields.resolvedHandle ?? undefined,
+    handleMatchesConfigured: fields.handleMatchesConfigured,
+    cookieFileExists: context.cookieFileExists,
+    sessionCookiesPath: context.sessionCookiesPath,
+    probeUrl: context.probeUrl,
+    checkedAt: context.checkedAt,
+    remediation: fields.remediation,
+  };
+}
+
+async function fetchAuthProbe(
+  config: LoadedLocalConfig,
+  context: AuthProbeContext,
+  fetchImpl?: typeof fetch,
+): Promise<{ loggedIn: boolean; resolvedHandle?: string }> {
+  const effectiveFetch =
+    fetchImpl ?? (await createCookieFetch(config.auth.sessionCookiesPath));
+  const response = await effectiveFetch(context.probeUrl, { redirect: 'follow' });
+  const html = await response.text();
+  const loggedIn = extractLoggedInState(html);
+  return {
+    loggedIn,
+    resolvedHandle: loggedIn ? normalizeHandle(extractResolvedHandle(html)) : undefined,
+  };
+}
+
 export async function probePbinfoAuthStatus(
   config: LoadedLocalConfig,
   options: {
@@ -28,88 +77,66 @@ export async function probePbinfoAuthStatus(
   } = {},
 ): Promise<PbinfoAuthStatusResult> {
   const configuredHandle = normalizeHandle(config.crawl.userHandle);
-  const cookieFileExists = existsSync(config.auth.sessionCookiesPath);
-  const probeUrl = options.probeUrl ?? 'https://www.pbinfo.ro/';
-  const fetchImpl = options.fetchImpl ?? (await createCookieFetch(config.auth.sessionCookiesPath));
-  const checkedAt = (options.now ?? new Date()).toISOString();
+  const context: AuthProbeContext = {
+    configuredHandle,
+    cookieFileExists: existsSync(config.auth.sessionCookiesPath),
+    sessionCookiesPath: config.auth.sessionCookiesPath,
+    probeUrl: options.probeUrl ?? 'https://www.pbinfo.ro/',
+    checkedAt: (options.now ?? new Date()).toISOString(),
+  };
 
-  if (!cookieFileExists) {
-    return {
+  if (!context.cookieFileExists) {
+    return buildAuthStatusResult(context, {
       status: 'cookie-missing',
       loggedIn: false,
-      configuredHandle: configuredHandle ?? undefined,
-      resolvedHandle: undefined,
       handleMatchesConfigured: configuredHandle === undefined,
-      cookieFileExists,
-      sessionCookiesPath: config.auth.sessionCookiesPath,
-      probeUrl,
-      checkedAt,
       remediation: [
         `Session cookie jar is missing at ${config.auth.sessionCookiesPath}.`,
         'Run `npm run cli -- auth login` or import browser cookies before crawling authenticated pages.',
       ],
-    };
+    });
   }
 
-  const response = await fetchImpl(probeUrl, {
-    redirect: 'follow',
-  });
-  const html = await response.text();
-  const loggedIn = extractLoggedInState(html);
-  const resolvedHandle = loggedIn ? normalizeHandle(extractResolvedHandle(html)) : undefined;
+  const probe = await fetchAuthProbe(config, context, options.fetchImpl);
+  const { loggedIn, resolvedHandle } = probe;
   const handleMatchesConfigured =
     configuredHandle === undefined
       ? true
       : matchesConfiguredHandle(configuredHandle, resolvedHandle);
 
   if (!loggedIn) {
-    return {
+    return buildAuthStatusResult(context, {
       status: 'guest',
       loggedIn,
-      configuredHandle: configuredHandle ?? undefined,
-      resolvedHandle: resolvedHandle ?? undefined,
+      resolvedHandle,
       handleMatchesConfigured,
-      cookieFileExists,
-      sessionCookiesPath: config.auth.sessionCookiesPath,
-      probeUrl,
-      checkedAt,
       remediation: [
         'PBInfo probe resolved to an anonymous session (guest mode).',
         'Refresh cookies with `npm run cli -- auth login` or `npm run cli -- auth import-browser --browser edge`.',
       ],
-    };
+    });
   }
 
   if (!handleMatchesConfigured) {
-    return {
+    return buildAuthStatusResult(context, {
       status: 'handle-mismatch',
       loggedIn,
-      configuredHandle: configuredHandle ?? undefined,
-      resolvedHandle: resolvedHandle ?? undefined,
+      resolvedHandle,
       handleMatchesConfigured,
-      cookieFileExists,
-      sessionCookiesPath: config.auth.sessionCookiesPath,
-      probeUrl,
-      checkedAt,
       remediation: [
         `Configured crawl handle "${configuredHandle ?? 'unknown'}" does not match authenticated session "${resolvedHandle ?? 'unknown'}".`,
         'Update `.local/pbinfo.local.json` (`crawl.userHandle`) or import the correct account cookies.',
       ],
-    };
+    });
   }
 
-  return {
+  return buildAuthStatusResult(context, {
     status: 'ok',
     loggedIn,
-    configuredHandle: configuredHandle ?? undefined,
-    resolvedHandle: resolvedHandle ?? undefined,
+    resolvedHandle,
     handleMatchesConfigured,
-    cookieFileExists,
-    sessionCookiesPath: config.auth.sessionCookiesPath,
-    probeUrl,
-    checkedAt,
     remediation: [],
-  };
+  });
 }
 
 export function matchesConfiguredHandle(
@@ -139,90 +166,6 @@ export function matchesConfiguredHandle(
   }
 
   return false;
-}
-
-function extractLoggedInState(html: string): boolean {
-  const sessionJson = extractUserSessionJson(html);
-  if (sessionJson) {
-    const id = Number(sessionJson.id ?? sessionJson.user_id ?? 0);
-    if (Number.isFinite(id) && id > 0) {
-      return true;
-    }
-  }
-
-  const $ = loadHtml(html);
-  const logoutLinks = $('a[href*="logout"], form[action*="logout"]');
-  return logoutLinks.length > 0;
-}
-
-function extractResolvedHandle(html: string): string | undefined {
-  const sessionJson = extractUserSessionJson(html);
-  const sessionId = Number(sessionJson?.id ?? sessionJson?.user_id ?? 0);
-  const sessionIsAuthenticated = Number.isFinite(sessionId) && sessionId > 0;
-  const sessionCandidate =
-    pickSessionHandle(sessionJson?.username) ??
-    pickSessionHandle(sessionJson?.user) ??
-    pickSessionHandle(sessionJson?.utilizator) ??
-    pickSessionHandle(sessionJson?.nick) ??
-    pickSessionHandle(sessionJson?.nume_utilizator) ??
-    pickSessionHandle(sessionJson?.name);
-  if (sessionIsAuthenticated && sessionCandidate) {
-    return sessionCandidate;
-  }
-
-  const $ = loadHtml(html);
-  const hasLogoutLink = $('a[href*="logout"], form[action*="logout"]').length > 0;
-  if (!sessionIsAuthenticated && !hasLogoutLink) {
-    return undefined;
-  }
-
-  const profileAnchors = $('#bara_navigare a[href^="/profil/"], nav a[href^="/profil/"]');
-  for (const anchor of profileAnchors.toArray()) {
-    const href = $(anchor).attr('href');
-    const fromHref = href?.match(/^\/profil\/([^/?#]+)/u)?.[1];
-    if (fromHref) {
-      return fromHref;
-    }
-
-    const text = normalizeWhitespace($(anchor).text());
-    const match = text.match(/\(([^)]+)\)\s*$/u);
-    if (match?.[1]) {
-      return match[1];
-    }
-  }
-
-  return undefined;
-}
-
-function extractUserSessionJson(html: string): Record<string, unknown> | undefined {
-  const match = html.match(/user_autentificat\s*=\s*(\{[\s\S]*?\})\s*;/u);
-  if (!match?.[1]) {
-    return undefined;
-  }
-
-  try {
-    return JSON.parse(match[1]) as Record<string, unknown>;
-  } catch {
-    return undefined;
-  }
-}
-
-function pickSessionHandle(value: unknown): string | undefined {
-  if (typeof value !== 'string') {
-    return undefined;
-  }
-
-  const normalized = normalizeWhitespace(value);
-  if (!normalized) {
-    return undefined;
-  }
-
-  const trailingHandle = normalized.match(/\(([^)]+)\)\s*$/u)?.[1];
-  if (trailingHandle) {
-    return trailingHandle;
-  }
-
-  return normalized;
 }
 
 function normalizeHandle(value: string | undefined): string | undefined {
