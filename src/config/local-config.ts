@@ -117,94 +117,161 @@ export interface LoadedLocalConfig {
   };
 }
 
-export function loadLocalConfig(workspaceRoot: string): LoadedLocalConfig {
-  const resolvedWorkspace = resolve(workspaceRoot);
-  const defaultLocalRoot = join(resolvedWorkspace, '.local');
-  const configPath = join(defaultLocalRoot, 'pbinfo.local.json');
-  const parsedInput = existsSync(configPath)
+type ParsedConfig = z.infer<typeof configSchema>;
+
+interface ResolvedRoots {
+  localRoot: string;
+  outputRoot: string;
+  archiveRoot: string;
+  artifactsRoot: string;
+}
+
+function loadParsedConfig(workspaceRoot: string): ParsedConfig | undefined {
+  const configPath = join(workspaceRoot, '.local', 'pbinfo.local.json');
+  return existsSync(configPath)
     ? configSchema.parse(JSON.parse(readFileSync(configPath, 'utf8')))
     : undefined;
+}
 
-  const localRoot = resolveRelativeRoot(
-    resolvedWorkspace,
-    parsedInput?.paths?.localRoot ?? '.local',
-  );
-  const outputRoot = resolveRelativeRoot(
-    resolvedWorkspace,
-    parsedInput?.paths?.outputRoot ?? 'output',
-  );
-  const archiveRoot = resolveRelativeRoot(
-    resolvedWorkspace,
-    parsedInput?.paths?.archiveRoot ?? 'archive',
-  );
-  const artifactsRoot = resolveRelativeRoot(
-    resolvedWorkspace,
-    parsedInput?.paths?.artifactsRoot ?? join('output', 'artifacts'),
-  );
+function resolveRoots(workspaceRoot: string, parsed: ParsedConfig | undefined): ResolvedRoots {
+  const paths = parsed?.paths ?? {};
+  return {
+    localRoot: resolveRelativeRoot(workspaceRoot, paths.localRoot ?? '.local'),
+    outputRoot: resolveRelativeRoot(workspaceRoot, paths.outputRoot ?? 'output'),
+    archiveRoot: resolveRelativeRoot(workspaceRoot, paths.archiveRoot ?? 'archive'),
+    artifactsRoot: resolveRelativeRoot(
+      workspaceRoot,
+      paths.artifactsRoot ?? join('output', 'artifacts'),
+    ),
+  };
+}
+
+function buildAuthConfig(
+  workspaceRoot: string,
+  parsed: ParsedConfig | undefined,
+  roots: ResolvedRoots,
+): LoadedLocalConfig['auth'] {
+  const auth = parsed?.auth ?? {};
+  return {
+    strategy: auth.strategy ?? 'none',
+    username: auth.username,
+    password: auth.password,
+    cookieSourcePath: resolveOptionalPath(workspaceRoot, auth.cookieSourcePath),
+    sessionCookiesPath: resolvePathOrDefault(
+      workspaceRoot,
+      auth.sessionCookiesPath,
+      join(roots.localRoot, 'session-cookies.json'),
+    ),
+  };
+}
+
+function buildCrawlConfig(parsed: ParsedConfig | undefined): LoadedLocalConfig['crawl'] {
+  const crawl = parsed?.crawl ?? {};
+  return {
+    maxConcurrency: crawl.maxConcurrency ?? 2,
+    retryDelayMs: crawl.retryDelayMs ?? 60_000,
+    requestTimeoutMs: crawl.requestTimeoutMs ?? 30_000,
+    crossCheckWithBrowser: crawl.crossCheckWithBrowser ?? true,
+    userHandle: crawl.userHandle,
+    publicStartUrls: crawl.publicStartUrls ?? defaultPublicStartUrls(),
+  };
+}
+
+function buildSecretsConfig(
+  workspaceRoot: string,
+  parsed: ParsedConfig | undefined,
+  roots: ResolvedRoots,
+): LoadedLocalConfig['secrets'] {
+  const secrets = parsed?.secrets ?? {};
+  return {
+    recipient: secrets.recipient,
+    identityPath: resolvePathOrDefault(
+      workspaceRoot,
+      secrets.identityPath,
+      join(roots.localRoot, 'age-identity.txt'),
+    ),
+    recipientPath: resolvePathOrDefault(
+      workspaceRoot,
+      secrets.recipientPath,
+      join(roots.archiveRoot, 'secrets', 'age-recipient.txt'),
+    ),
+    bundlePath: resolvePathOrDefault(
+      workspaceRoot,
+      secrets.bundlePath,
+      join(roots.archiveRoot, 'secrets', 'pbinfo-auth.age'),
+    ),
+  };
+}
+
+export function loadLocalConfig(workspaceRoot: string): LoadedLocalConfig {
+  const resolvedWorkspace = resolve(workspaceRoot);
+  const parsedInput = loadParsedConfig(resolvedWorkspace);
+  const roots = resolveRoots(resolvedWorkspace, parsedInput);
 
   return {
-    auth: {
-      strategy: parsedInput?.auth?.strategy ?? 'none',
-      username: parsedInput?.auth?.username,
-      password: parsedInput?.auth?.password,
-      cookieSourcePath: parsedInput?.auth?.cookieSourcePath
-        ? resolveRelativeRoot(resolvedWorkspace, parsedInput.auth.cookieSourcePath)
-        : undefined,
-      sessionCookiesPath: parsedInput?.auth?.sessionCookiesPath
-        ? resolveRelativeRoot(resolvedWorkspace, parsedInput.auth.sessionCookiesPath)
-        : join(localRoot, 'session-cookies.json'),
-    },
+    auth: buildAuthConfig(resolvedWorkspace, parsedInput, roots),
     paths: {
       workspaceRoot: resolvedWorkspace,
-      localRoot,
-      outputRoot,
-      archiveRoot,
-      snapshotsRoot: join(archiveRoot, 'snapshots'),
-      artifactsRoot,
+      localRoot: roots.localRoot,
+      outputRoot: roots.outputRoot,
+      archiveRoot: roots.archiveRoot,
+      snapshotsRoot: join(roots.archiveRoot, 'snapshots'),
+      artifactsRoot: roots.artifactsRoot,
     },
-    crawl: {
-      maxConcurrency: parsedInput?.crawl?.maxConcurrency ?? 2,
-      retryDelayMs: parsedInput?.crawl?.retryDelayMs ?? 60_000,
-      requestTimeoutMs: parsedInput?.crawl?.requestTimeoutMs ?? 30_000,
-      crossCheckWithBrowser: parsedInput?.crawl?.crossCheckWithBrowser ?? true,
-      userHandle: parsedInput?.crawl?.userHandle,
-      publicStartUrls: parsedInput?.crawl?.publicStartUrls ?? defaultPublicStartUrls(),
-    },
-    mirror: {
-      blockedAssetHosts: parsedInput?.mirror?.blockedAssetHosts ?? defaultBlockedAssetHosts(),
-      externalAssetHosts: parsedInput?.mirror?.externalAssetHosts ?? defaultExternalAssetHosts(),
-    },
-    secrets: {
-      recipient: parsedInput?.secrets?.recipient,
-      identityPath: parsedInput?.secrets?.identityPath
-        ? resolveRelativeRoot(resolvedWorkspace, parsedInput.secrets.identityPath)
-        : join(localRoot, 'age-identity.txt'),
-      recipientPath: parsedInput?.secrets?.recipientPath
-        ? resolveRelativeRoot(resolvedWorkspace, parsedInput.secrets.recipientPath)
-        : join(archiveRoot, 'secrets', 'age-recipient.txt'),
-      bundlePath: parsedInput?.secrets?.bundlePath
-        ? resolveRelativeRoot(resolvedWorkspace, parsedInput.secrets.bundlePath)
-        : join(archiveRoot, 'secrets', 'pbinfo-auth.age'),
-    },
+    crawl: buildCrawlConfig(parsedInput),
+    mirror: buildMirrorConfig(parsedInput),
+    secrets: buildSecretsConfig(resolvedWorkspace, parsedInput, roots),
     artifacts: {
-      exportRoot: parsedInput?.artifacts?.exportRoot
-        ? resolveRelativeRoot(resolvedWorkspace, parsedInput.artifacts.exportRoot)
-        : join(artifactsRoot, 'exports'),
+      exportRoot: resolvePathOrDefault(
+        resolvedWorkspace,
+        parsedInput?.artifacts?.exportRoot,
+        join(roots.artifactsRoot, 'exports'),
+      ),
     },
     ranking: {
-      overridesPath: parsedInput?.ranking?.overridesPath
-        ? resolveRelativeRoot(resolvedWorkspace, parsedInput.ranking.overridesPath)
-        : join(localRoot, 'ranking-overrides.json'),
+      overridesPath: resolvePathOrDefault(
+        resolvedWorkspace,
+        parsedInput?.ranking?.overridesPath,
+        join(roots.localRoot, 'ranking-overrides.json'),
+      ),
     },
-    publish: {
-      owner: parsedInput?.publish?.owner ?? 'Prekzursil',
-      repo: parsedInput?.publish?.repo ?? 'pbinfo-scrape',
-    },
+    publish: buildPublishConfig(parsedInput),
+  };
+}
+
+function buildMirrorConfig(parsed: ParsedConfig | undefined): LoadedLocalConfig['mirror'] {
+  const mirror = parsed?.mirror ?? {};
+  return {
+    blockedAssetHosts: mirror.blockedAssetHosts ?? defaultBlockedAssetHosts(),
+    externalAssetHosts: mirror.externalAssetHosts ?? defaultExternalAssetHosts(),
+  };
+}
+
+function buildPublishConfig(parsed: ParsedConfig | undefined): LoadedLocalConfig['publish'] {
+  const publish = parsed?.publish ?? {};
+  return {
+    owner: publish.owner ?? 'Prekzursil',
+    repo: publish.repo ?? 'pbinfo-scrape',
   };
 }
 
 function resolveRelativeRoot(workspaceRoot: string, inputPath: string): string {
   return resolve(workspaceRoot, inputPath);
+}
+
+function resolveOptionalPath(
+  workspaceRoot: string,
+  inputPath: string | undefined,
+): string | undefined {
+  return inputPath ? resolveRelativeRoot(workspaceRoot, inputPath) : undefined;
+}
+
+function resolvePathOrDefault(
+  workspaceRoot: string,
+  inputPath: string | undefined,
+  fallback: string,
+): string {
+  return inputPath ? resolveRelativeRoot(workspaceRoot, inputPath) : fallback;
 }
 
 function defaultPublicStartUrls(): string[] {

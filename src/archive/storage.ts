@@ -106,6 +106,30 @@ export function buildQueuePath(localRoot: string, snapshotId: string): string {
   return join(localRoot, 'crawl-queues', `${snapshotId}.sqlite`);
 }
 
+function ensureSnapshotDirectories(config: LoadedLocalConfig, layout: SnapshotLayout): void {
+  mkdirSync(layout.normalizedRoot, { recursive: true });
+  mkdirSync(layout.mirrorPagesRoot, { recursive: true });
+  mkdirSync(layout.rawPagesRoot, { recursive: true });
+  mkdirSync(layout.rawAssetsRoot, { recursive: true });
+  mkdirSync(join(config.paths.archiveRoot, 'artifacts'), { recursive: true });
+}
+
+function buildSnapshotRecord(
+  catalog: ArchiveCatalog,
+  snapshotId: string,
+  now: Date,
+  options: PrepareSnapshotOptions,
+): SnapshotRecord {
+  const existing = catalog.snapshots.find((record) => record.snapshotId === snapshotId);
+  return {
+    snapshotId,
+    createdAt: existing?.createdAt ?? now.toISOString(),
+    scope: existing?.scope ?? options.scope,
+    status: 'in_progress',
+    checkpoint: existing?.checkpoint ?? options.checkpoint ?? 'canonical',
+  };
+}
+
 export function prepareSnapshot(
   config: LoadedLocalConfig,
   options: PrepareSnapshotOptions,
@@ -113,21 +137,10 @@ export function prepareSnapshot(
   const now = options.now ?? new Date();
   const snapshotId = options.snapshotId ?? buildSnapshotId(now);
   const layout = resolveSnapshotLayout(config, snapshotId);
-  mkdirSync(layout.normalizedRoot, { recursive: true });
-  mkdirSync(layout.mirrorPagesRoot, { recursive: true });
-  mkdirSync(layout.rawPagesRoot, { recursive: true });
-  mkdirSync(layout.rawAssetsRoot, { recursive: true });
-  mkdirSync(join(config.paths.archiveRoot, 'artifacts'), { recursive: true });
+  ensureSnapshotDirectories(config, layout);
 
   const catalog = readArchiveCatalog(config.paths.archiveRoot);
-  const existing = catalog.snapshots.find((record) => record.snapshotId === snapshotId);
-  const snapshot: SnapshotRecord = {
-    snapshotId,
-    createdAt: existing?.createdAt ?? now.toISOString(),
-    scope: existing?.scope ?? options.scope,
-    status: 'in_progress',
-    checkpoint: existing?.checkpoint ?? options.checkpoint ?? 'canonical',
-  };
+  const snapshot = buildSnapshotRecord(catalog, snapshotId, now, options);
   upsertSnapshotRecord(catalog, snapshot);
   catalog.currentSnapshotId = snapshotId;
   if (snapshot.checkpoint === 'canonical' && !catalog.canonicalSnapshotId) {
@@ -230,6 +243,54 @@ export function assertArtifactExportRecord(
   return record;
 }
 
+function removeIfExists(path: string, removedPaths: string[], recursive = false): void {
+  if (existsSync(path)) {
+    rmSync(path, { recursive, force: true });
+    removedPaths.push(path);
+  }
+}
+
+function removeSnapshotArtifacts(
+  config: LoadedLocalConfig,
+  catalog: ArchiveCatalog,
+  snapshotId: string,
+  removedArtifactPaths: string[],
+): void {
+  const layout = resolveSnapshotLayout(config, snapshotId);
+  rmSync(layout.snapshotRoot, { recursive: true, force: true });
+  removeIfExists(join(config.paths.artifactsRoot, snapshotId), removedArtifactPaths, true);
+  removeIfExists(layout.artifactManifestPath, removedArtifactPaths);
+
+  const exportRecord = catalog.artifactExports.find(
+    (record) => record.snapshotId === snapshotId,
+  );
+  if (exportRecord?.exportRoot) {
+    removeIfExists(exportRecord.exportRoot, removedArtifactPaths, true);
+  }
+}
+
+function removeNonCanonicalQueues(
+  config: LoadedLocalConfig,
+  canonicalSnapshotId: string,
+): string[] {
+  const queueRoot = join(config.paths.localRoot, 'crawl-queues');
+  const removedQueuePaths: string[] = [];
+  if (!existsSync(queueRoot)) {
+    return removedQueuePaths;
+  }
+
+  for (const entry of readdirSync(queueRoot)) {
+    if (entry === `${canonicalSnapshotId}.sqlite`) {
+      continue;
+    }
+
+    const queuePath = join(queueRoot, entry);
+    rmSync(queuePath, { force: true });
+    removedQueuePaths.push(queuePath);
+  }
+  return removedQueuePaths;
+}
+
 export function pruneToCanonicalSnapshot(
   config: LoadedLocalConfig,
   canonicalSnapshotId: string,
@@ -248,45 +309,11 @@ export function pruneToCanonicalSnapshot(
       continue;
     }
 
-    const layout = resolveSnapshotLayout(config, snapshot.snapshotId);
-    rmSync(layout.snapshotRoot, {
-      recursive: true,
-      force: true,
-    });
-    if (existsSync(join(config.paths.artifactsRoot, snapshot.snapshotId))) {
-      rmSync(join(config.paths.artifactsRoot, snapshot.snapshotId), {
-        recursive: true,
-        force: true,
-      });
-      removedArtifactPaths.push(join(config.paths.artifactsRoot, snapshot.snapshotId));
-    }
-    if (existsSync(layout.artifactManifestPath)) {
-      rmSync(layout.artifactManifestPath, { force: true });
-      removedArtifactPaths.push(layout.artifactManifestPath);
-    }
-    const exportRecord = catalog.artifactExports.find(
-      (record) => record.snapshotId === snapshot.snapshotId,
-    );
-    if (exportRecord?.exportRoot && existsSync(exportRecord.exportRoot)) {
-      rmSync(exportRecord.exportRoot, { recursive: true, force: true });
-      removedArtifactPaths.push(exportRecord.exportRoot);
-    }
+    removeSnapshotArtifacts(config, catalog, snapshot.snapshotId, removedArtifactPaths);
     removedSnapshots.push(snapshot.snapshotId);
   }
 
-  const queueRoot = join(config.paths.localRoot, 'crawl-queues');
-  const removedQueuePaths: string[] = [];
-  if (existsSync(queueRoot)) {
-    for (const entry of readdirSync(queueRoot)) {
-      const queuePath = join(queueRoot, entry);
-      if (entry === `${canonicalSnapshotId}.sqlite`) {
-        continue;
-      }
-
-      rmSync(queuePath, { force: true });
-      removedQueuePaths.push(queuePath);
-    }
-  }
+  const removedQueuePaths = removeNonCanonicalQueues(config, canonicalSnapshotId);
 
   catalog.snapshots = catalog.snapshots.filter(
     (snapshot) => snapshot.snapshotId === canonicalSnapshotId,
