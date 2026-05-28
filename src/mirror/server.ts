@@ -48,7 +48,9 @@ export async function startMirrorServer(
       return;
     }
 
-    const preferredPath = match.mirrorFile ? join(snapshot.mirrorRoot, match.mirrorFile) : undefined;
+    const preferredPath = match.mirrorFile
+      ? join(snapshot.mirrorRoot, match.mirrorFile)
+      : undefined;
     if (preferredPath && existsSync(preferredPath)) {
       response.sendFile(preferredPath);
       return;
@@ -56,9 +58,11 @@ export async function startMirrorServer(
 
     const rawPath = join(snapshot.rawPagesRoot, match.sourceFile);
     if (!existsSync(rawPath)) {
-      response.status(500).send(
-        `Archived source page is missing for route ${routeKey}. Rebuild the mirror after relinking raw artifacts.`,
-      );
+      response
+        .status(500)
+        .send(
+          `Archived source page is missing for route ${routeKey}. Rebuild the mirror after relinking raw artifacts.`,
+        );
       return;
     }
 

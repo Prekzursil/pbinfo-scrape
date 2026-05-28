@@ -49,8 +49,8 @@ export function parseProblemPage(html: string, pageUrl: string): ProblemRecord {
   const linkedAssets = extractLinkedAssets($, page);
   const authorHandle = extractAuthorHandle($, summaryMap);
   const timeLimitSeconds =
-    parseSeconds(summaryMap.get('limită timp') ?? '')
-    ?? parseSeconds(summaryMap.get('limita timp') ?? '');
+    parseSeconds(summaryMap.get('limită timp') ?? '') ??
+    parseSeconds(summaryMap.get('limita timp') ?? '');
   const memoryLimitMb = extractMemoryLimitMb(summaryMap);
 
   return {
@@ -156,7 +156,10 @@ export function parseProblemEndpointFragment(html: string): ParsedProblemEndpoin
     };
   }
 
-  if (message?.toLowerCase().includes('n-ai voie') || message?.toLowerCase().includes('nu ai voie')) {
+  if (
+    message?.toLowerCase().includes('n-ai voie') ||
+    message?.toLowerCase().includes('nu ai voie')
+  ) {
     return {
       access: 'restricted',
       message,
@@ -186,9 +189,10 @@ export function parseOfficialSolutionFragment(html: string): ParsedOfficialSolut
   const solutions: Record<string, string> = {};
 
   $('[data-bs-target], [data-target], a[href^="#"]').each((_, element) => {
-    const target = $(element).attr('data-bs-target')
-      ?? $(element).attr('data-target')
-      ?? $(element).attr('href');
+    const target =
+      $(element).attr('data-bs-target') ??
+      $(element).attr('data-target') ??
+      $(element).attr('href');
     if (!target?.startsWith('#')) {
       return;
     }
@@ -211,9 +215,9 @@ export function parseOfficialSolutionFragment(html: string): ParsedOfficialSolut
     }
 
     const label =
-      tabLabels.get(id)
-      ?? normalizeWhitespace($(element).find('h3, h4, h5').first().text())
-      ?? 'unknown';
+      tabLabels.get(id) ??
+      normalizeWhitespace($(element).find('h3, h4, h5').first().text()) ??
+      'unknown';
     solutions[label || 'unknown'] = code;
   });
 
@@ -294,7 +298,9 @@ function extractAuthorHandle(
   $: ReturnType<typeof loadHtml>,
   summaryMap: Map<string, string>,
 ): string | undefined {
-  const preferredLink = $('*[title="Postată de"] a[href^="/profil/"], *[title="Postata de"] a[href^="/profil/"]').first();
+  const preferredLink = $(
+    '*[title="Postată de"] a[href^="/profil/"], *[title="Postata de"] a[href^="/profil/"]',
+  ).first();
   if (preferredLink.length > 0) {
     const handle = preferredLink.attr('href')?.match(/^\/profil\/([^/?#]+)$/)?.[1];
     return normalizeOptional(handle);
@@ -322,7 +328,11 @@ function extractAuthorHandle(
       }
 
       const valueCell = values.eq(index);
-      const handle = valueCell.find('a[href^="/profil/"]').first().attr('href')?.match(/^\/profil\/([^/?#]+)$/)?.[1];
+      const handle = valueCell
+        .find('a[href^="/profil/"]')
+        .first()
+        .attr('href')
+        ?.match(/^\/profil\/([^/?#]+)$/)?.[1];
       if (handle) {
         summaryHandle = handle;
       }
@@ -332,7 +342,12 @@ function extractAuthorHandle(
     return normalizeOptional(summaryHandle);
   }
 
-  const handle = $('article, main, .container, body').first().find('a[href^="/profil/"]').first().attr('href')?.match(/^\/profil\/([^/?#]+)$/)?.[1];
+  const handle = $('article, main, .container, body')
+    .first()
+    .find('a[href^="/profil/"]')
+    .first()
+    .attr('href')
+    ?.match(/^\/profil\/([^/?#]+)$/)?.[1];
   return normalizeOptional(handle);
 }
 
@@ -437,9 +452,7 @@ function extractVisibleTests(html: string): ProblemVisibleTest[] {
   return tests;
 }
 
-function extractVisibleTestsFromTable(
-  $: ReturnType<typeof loadHtml>,
-): ProblemVisibleTest[] {
+function extractVisibleTestsFromTable($: ReturnType<typeof loadHtml>): ProblemVisibleTest[] {
   const tests: ProblemVisibleTest[] = [];
 
   $('table tbody tr').each((_, row) => {
@@ -570,10 +583,7 @@ function extractTags($: ReturnType<typeof loadHtml>): string[] {
   return [...tags];
 }
 
-function extractLinkedAssets(
-  $: ReturnType<typeof loadHtml>,
-  page: URL,
-): ProblemAssetRecord[] {
+function extractLinkedAssets($: ReturnType<typeof loadHtml>, page: URL): ProblemAssetRecord[] {
   const assets = new Map<string, ProblemAssetRecord>();
   const candidates: Array<{
     selector: string;
@@ -581,8 +591,18 @@ function extractLinkedAssets(
     kind: ProblemAssetRecord['kind'];
     mimeType?: string;
   }> = [
-    { selector: 'link[rel="stylesheet"][href]', attribute: 'href', kind: 'stylesheet', mimeType: 'text/css' },
-    { selector: 'script[src]', attribute: 'src', kind: 'script', mimeType: 'application/javascript' },
+    {
+      selector: 'link[rel="stylesheet"][href]',
+      attribute: 'href',
+      kind: 'stylesheet',
+      mimeType: 'text/css',
+    },
+    {
+      selector: 'script[src]',
+      attribute: 'src',
+      kind: 'script',
+      mimeType: 'application/javascript',
+    },
     { selector: 'img[src]', attribute: 'src', kind: 'image' },
   ];
 

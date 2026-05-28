@@ -28,10 +28,13 @@ describe('runNormalizeSnapshotWorkflow retry handling', () => {
 
       return {
         ...actual,
-        rmSync(target: Parameters<typeof actual.rmSync>[0], options?: Parameters<typeof actual.rmSync>[1]) {
+        rmSync(
+          target: Parameters<typeof actual.rmSync>[0],
+          options?: Parameters<typeof actual.rmSync>[1],
+        ) {
           if (
-            !injectedFailure
-            && String(target).endsWith(`${sep}normalized${sep}problems${sep}stale.json`)
+            !injectedFailure &&
+            String(target).endsWith(`${sep}normalized${sep}problems${sep}stale.json`)
           ) {
             injectedFailure = true;
             const error = new Error('Directory not empty') as NodeJS.ErrnoException;
@@ -46,7 +49,8 @@ describe('runNormalizeSnapshotWorkflow retry handling', () => {
 
     const { prepareSnapshot } = await import('../../src/archive/storage.js');
     const { loadLocalConfig } = await import('../../src/config/local-config.js');
-    const { runNormalizeSnapshotWorkflow } = await import('../../src/workflows/normalize-workflow.js');
+    const { runNormalizeSnapshotWorkflow } =
+      await import('../../src/workflows/normalize-workflow.js');
 
     const config = loadLocalConfig(workspaceRoot);
     const snapshot = prepareSnapshot(config, {
@@ -79,7 +83,10 @@ describe('runNormalizeSnapshotWorkflow retry handling', () => {
 
       return {
         ...actual,
-        rmSync(target: Parameters<typeof actual.rmSync>[0], options?: Parameters<typeof actual.rmSync>[1]) {
+        rmSync(
+          target: Parameters<typeof actual.rmSync>[0],
+          options?: Parameters<typeof actual.rmSync>[1],
+        ) {
           if (blockedRoot !== undefined && String(target) === blockedRoot) {
             rootDeletionAttempted = true;
             const error = new Error('Permission denied') as NodeJS.ErrnoException;
@@ -89,7 +96,10 @@ describe('runNormalizeSnapshotWorkflow retry handling', () => {
 
           return actual.rmSync(target, options);
         },
-        mkdirSync(target: Parameters<typeof actual.mkdirSync>[0], options?: Parameters<typeof actual.mkdirSync>[1]) {
+        mkdirSync(
+          target: Parameters<typeof actual.mkdirSync>[0],
+          options?: Parameters<typeof actual.mkdirSync>[1],
+        ) {
           if (String(target).endsWith(`${sep}normalized${sep}evaluations`)) {
             blockedRoot = String(target);
           }
@@ -100,7 +110,8 @@ describe('runNormalizeSnapshotWorkflow retry handling', () => {
 
     const { prepareSnapshot } = await import('../../src/archive/storage.js');
     const { loadLocalConfig } = await import('../../src/config/local-config.js');
-    const { runNormalizeSnapshotWorkflow } = await import('../../src/workflows/normalize-workflow.js');
+    const { runNormalizeSnapshotWorkflow } =
+      await import('../../src/workflows/normalize-workflow.js');
 
     const config = loadLocalConfig(workspaceRoot);
     const snapshot = prepareSnapshot(config, {
@@ -147,7 +158,8 @@ describe('runNormalizeSnapshotWorkflow retry handling', () => {
 
     const { prepareSnapshot } = await import('../../src/archive/storage.js');
     const { loadLocalConfig } = await import('../../src/config/local-config.js');
-    const { runNormalizeSnapshotWorkflow } = await import('../../src/workflows/normalize-workflow.js');
+    const { runNormalizeSnapshotWorkflow } =
+      await import('../../src/workflows/normalize-workflow.js');
 
     const config = loadLocalConfig(workspaceRoot);
     const snapshot = prepareSnapshot(config, {
@@ -189,7 +201,9 @@ describe('runNormalizeSnapshotWorkflow retry handling', () => {
 
   test('preserves official-evaluation-detail page kinds during normalize rebuilds', async () => {
     const actualFs = await vi.importActual<typeof import('node:fs')>('node:fs');
-    const workspaceRoot = actualFs.mkdtempSync(join(tmpdir(), 'pbinfo-normalize-evaluation-kind-remap-'));
+    const workspaceRoot = actualFs.mkdtempSync(
+      join(tmpdir(), 'pbinfo-normalize-evaluation-kind-remap-'),
+    );
     tempDirs.push(workspaceRoot);
 
     vi.resetModules();
@@ -209,7 +223,8 @@ describe('runNormalizeSnapshotWorkflow retry handling', () => {
 
     const { prepareSnapshot } = await import('../../src/archive/storage.js');
     const { loadLocalConfig } = await import('../../src/config/local-config.js');
-    const { runNormalizeSnapshotWorkflow } = await import('../../src/workflows/normalize-workflow.js');
+    const { runNormalizeSnapshotWorkflow } =
+      await import('../../src/workflows/normalize-workflow.js');
 
     const config = loadLocalConfig(workspaceRoot);
     const snapshot = prepareSnapshot(config, {

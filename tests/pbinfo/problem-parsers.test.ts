@@ -206,10 +206,7 @@ describe('problem parser', () => {
       'Restricții și precizări',
       'Exemplu:',
     ]);
-    expect(parsed.constraints).toEqual([
-      '10 ≤ n ≤ 1.000.000.000',
-      'Timp de executare: 0.2s',
-    ]);
+    expect(parsed.constraints).toEqual(['10 ≤ n ≤ 1.000.000.000', 'Timp de executare: 0.2s']);
     expect(parsed.executionHints).toEqual({
       timeLimitSeconds: 0.2,
       memoryLimitMb: undefined,
@@ -293,7 +290,10 @@ describe('problem parser', () => {
   });
 
   test('extracts a complete public problem record from the full problem page shell', () => {
-    const parsed = parseProblemPage(fullProblemPage, 'https://www.pbinfo.ro/probleme/3171/waterreserve');
+    const parsed = parseProblemPage(
+      fullProblemPage,
+      'https://www.pbinfo.ro/probleme/3171/waterreserve',
+    );
 
     expect(parsed).toMatchObject({
       id: 3171,
@@ -306,9 +306,24 @@ describe('problem parser', () => {
       author: 'Mirela Mlisan',
       sourceAttribution: 'Admitere UNIBUC 2019',
       categoryChain: [
-        { id: 9, name: 'Clasa a 9-a', slug: 'clasa-a-9-a', href: '/?pagina=probleme-lista&clasa=9' },
-        { id: 2, name: 'Tablouri unidimensionale (vectori)', slug: 'tablouri-unidimensionale-vectori', href: '/?pagina=probleme-lista&tag=2' },
-        { id: 44, name: 'Probleme diverse', slug: 'probleme-diverse', href: '/?pagina=probleme-lista&tag=44' },
+        {
+          id: 9,
+          name: 'Clasa a 9-a',
+          slug: 'clasa-a-9-a',
+          href: '/?pagina=probleme-lista&clasa=9',
+        },
+        {
+          id: 2,
+          name: 'Tablouri unidimensionale (vectori)',
+          slug: 'tablouri-unidimensionale-vectori',
+          href: '/?pagina=probleme-lista&tag=2',
+        },
+        {
+          id: 44,
+          name: 'Probleme diverse',
+          slug: 'probleme-diverse',
+          href: '/?pagina=probleme-lista&tag=44',
+        },
       ],
       officialSolutions: {},
       visibleTests: [],
@@ -396,16 +411,14 @@ describe('category parser', () => {
             name: 'Parcurgerea vectorilor',
             slug: 'tablouri-unidimensionale-vectori-parcurgerea-vectorilor',
             href: '/probleme/categorii/9/tablouri-unidimensionale-vectori-parcurgerea-vectorilor',
-            itemListHref:
-              '/?pagina=itemi-evaluare-lista&disciplina=0&clasa=9&tag=2&subtag=9',
+            itemListHref: '/?pagina=itemi-evaluare-lista&disciplina=0&clasa=9&tag=2&subtag=9',
           },
           {
             id: 44,
             name: 'Probleme diverse',
             slug: 'tablouri-unidimensionale-vectori-probleme-diverse',
             href: '/probleme/categorii/44/tablouri-unidimensionale-vectori-probleme-diverse',
-            itemListHref:
-              '/?pagina=itemi-evaluare-lista&disciplina=0&clasa=9&tag=2&subtag=44',
+            itemListHref: '/?pagina=itemi-evaluare-lista&disciplina=0&clasa=9&tag=2&subtag=44',
           },
         ],
       },

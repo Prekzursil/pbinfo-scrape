@@ -13,10 +13,14 @@ export function detectSuspicionFlags(sourceCode?: string): string[] {
   const readsInput = detectsInputRead(sourceCode);
   const printedConstantLiterals = [
     ...normalized.matchAll(/\bcout\s*<<\s*(?:"([^"\n]{0,32})"|'([^'\n]{0,8})'|(-?\d{1,9}))/g),
-    ...normalized.matchAll(/\b(?:printf|print)\s*\(\s*(?:"([^"\n]{0,32})"|'([^'\n]{0,8})'|(-?\d{1,9}))/g),
+    ...normalized.matchAll(
+      /\b(?:printf|print)\s*\(\s*(?:"([^"\n]{0,32})"|'([^'\n]{0,8})'|(-?\d{1,9}))/g,
+    ),
   ];
   const printsSubstantiveConstant = printedConstantLiterals.some((match) =>
-    isSubstantiveOutputLiteral(match[1] ?? match[2] ?? match[3] ?? match[4] ?? match[5] ?? match[6]),
+    isSubstantiveOutputLiteral(
+      match[1] ?? match[2] ?? match[3] ?? match[4] ?? match[5] ?? match[6],
+    ),
   );
   if (printsSubstantiveConstant && !readsInput) {
     flags.add('constant-output');
@@ -26,34 +30,40 @@ export function detectSuspicionFlags(sourceCode?: string): string[] {
   const directInputComparisons = collectExactInputLiteralComparisons(normalized, inputVariables);
   const comparisonsByVariable = summarizeComparisonsByVariable(directInputComparisons);
   const switchCaseCount = countSuspiciousSwitchCases(normalized, inputVariables);
-  const hasAnyInputLiteralComparisons =
-    directInputComparisons.length > 0 || switchCaseCount > 0;
+  const hasAnyInputLiteralComparisons = directInputComparisons.length > 0 || switchCaseCount > 0;
   const hasNonTrivialInputLiteralComparisons =
     comparisonsByVariable.size > 0 || switchCaseCount > 0;
   const hasIterativeLogic = /\b(for|while|do)\b/.test(normalized);
-  const literalMappingBranches = normalized.match(
-    /\bif\s*\([^)]*(?:==|!=)\s*(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})[^)]*\)\s*(?:\{)?\s*(?:cout\s*<<\s*(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})|printf\s*\(\s*(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})|print\s*\(\s*(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})|return\s+(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9}))/g,
-  ) ?? [];
-  const literalMappingCases = normalized.match(
-    /\bcase\s+(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})\s*:\s*(?:cout\s*<<\s*(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})|printf\s*\(\s*(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})|print\s*\(\s*(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})|return\s+(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9}))/g,
-  ) ?? [];
+  const literalMappingBranches =
+    normalized.match(
+      /\bif\s*\([^)]*(?:==|!=)\s*(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})[^)]*\)\s*(?:\{)?\s*(?:cout\s*<<\s*(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})|printf\s*\(\s*(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})|print\s*\(\s*(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})|return\s+(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9}))/g,
+    ) ?? [];
+  const literalMappingCases =
+    normalized.match(
+      /\bcase\s+(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})\s*:\s*(?:cout\s*<<\s*(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})|printf\s*\(\s*(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})|print\s*\(\s*(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})|return\s+(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9}))/g,
+    ) ?? [];
   const literalMappingCount = literalMappingBranches.length + literalMappingCases.length;
   const denseLiteralComparisons =
-    [...comparisonsByVariable.values()].some((count) => count >= 4)
-    || switchCaseCount >= 4;
+    [...comparisonsByVariable.values()].some((count) => count >= 4) || switchCaseCount >= 4;
   if (
-    readsInput
-    && (
-      (literalMappingCount >= 3 && hasNonTrivialInputLiteralComparisons)
-      || (denseLiteralComparisons && compactLength < 320 && !hasIterativeLogic)
-      || (compactLength < 120 && literalMappingCount >= 1 && hasAnyInputLiteralComparisons && !hasIterativeLogic)
-      || (compactLength < 220 && literalMappingCount >= 2 && hasAnyInputLiteralComparisons)
-    )
+    readsInput &&
+    ((literalMappingCount >= 3 && hasNonTrivialInputLiteralComparisons) ||
+      (denseLiteralComparisons && compactLength < 320 && !hasIterativeLogic) ||
+      (compactLength < 120 &&
+        literalMappingCount >= 1 &&
+        hasAnyInputLiteralComparisons &&
+        !hasIterativeLogic) ||
+      (compactLength < 220 && literalMappingCount >= 2 && hasAnyInputLiteralComparisons))
   ) {
     flags.add('input-branching');
   }
 
-  if (readsInput && hasNonTrivialInputLiteralComparisons && compactLength < 400 && literalMappingCount >= 3) {
+  if (
+    readsInput &&
+    hasNonTrivialInputLiteralComparisons &&
+    compactLength < 400 &&
+    literalMappingCount >= 3
+  ) {
     flags.add('literal-pairs');
   }
 
@@ -66,8 +76,9 @@ export function detectSuspicionFlags(sourceCode?: string): string[] {
 }
 
 function detectsInputRead(sourceCode: string): boolean {
-  return /(cin\s*>>|cin\s*\.\s*get(?:line)?\s*\(|scanf\s*\(|fscanf\s*\(|fread\s*\(|fgetc\s*\(|getchar_unlocked\s*\(|getchar\s*\(|input\s*\(|sys\.stdin(?:\.buffer)?\.(?:read|readline)\s*\(|stdin\.(?:read|readline)\s*\(|std::getline|getline\s*\(|ifstream\b|fstream\b|fin\s*>>|\bin\s*>>|\bsystem\.in\b|\b[a-z_]\w*\s*>>\s*&?\s*[a-z_]\w*)/i
-    .test(sourceCode);
+  return /(cin\s*>>|cin\s*\.\s*get(?:line)?\s*\(|scanf\s*\(|fscanf\s*\(|fread\s*\(|fgetc\s*\(|getchar_unlocked\s*\(|getchar\s*\(|input\s*\(|sys\.stdin(?:\.buffer)?\.(?:read|readline)\s*\(|stdin\.(?:read|readline)\s*\(|std::getline|getline\s*\(|ifstream\b|fstream\b|fin\s*>>|\bin\s*>>|\bsystem\.in\b|\b[a-z_]\w*\s*>>\s*&?\s*[a-z_]\w*)/i.test(
+    sourceCode,
+  );
 }
 
 function collectInputVariables(sourceCode: string): Set<string> {
@@ -103,8 +114,7 @@ function collectExactInputLiteralComparisons(
   const comparisons: Array<{ variable: string; literal: string }> = [];
   const identifierFirst =
     /\b([a-z_]\w*)\b\s*(==|!=)\s*((?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9}))/g;
-  const literalFirst =
-    /((?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9}))\s*(==|!=)\s*\b([a-z_]\w*)\b/g;
+  const literalFirst = /((?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9}))\s*(==|!=)\s*\b([a-z_]\w*)\b/g;
 
   for (const match of normalizedSourceCode.matchAll(identifierFirst)) {
     const variable = match[1];
@@ -142,7 +152,7 @@ function countSuspiciousSwitchCases(
   }
 
   const switchesOnInputVariables = [...inputVariables].some((variable) =>
-    new RegExp(`\\bswitch\\s*\\(\\s*${variable}\\s*\\)`).test(normalizedSourceCode)
+    new RegExp(`\\bswitch\\s*\\(\\s*${variable}\\s*\\)`).test(normalizedSourceCode),
   );
   if (!switchesOnInputVariables) {
     return 0;

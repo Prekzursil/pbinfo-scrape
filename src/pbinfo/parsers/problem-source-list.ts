@@ -1,4 +1,4 @@
-import { loadHtml, normalizeWhitespace, parseNumber } from './shared.js';
+import { loadHtml, normalizeWhitespace, parseNumber, type HtmlNode } from './shared.js';
 
 export interface ProblemSourceListEntry {
   user?: string;
@@ -28,8 +28,9 @@ export function parseProblemSourceListPage(
   const totalMatches = parseNumber(totalMatchesText);
   const fullText = normalizeWhitespace($.root().text()).toLowerCase();
   const authorHandle = extractAuthorHandle($);
-  const throttled = fullText.includes('resursă indisponibilă temporar')
-    || fullText.includes('resursa indisponibila temporar');
+  const throttled =
+    fullText.includes('resursă indisponibilă temporar') ||
+    fullText.includes('resursa indisponibila temporar');
   const entriesFromRows = extractEntriesFromRows($);
   const entries =
     entriesFromRows.length > 0 ? entriesFromRows : extractEntriesFromAnchorTriplets($);
@@ -47,7 +48,9 @@ export function parseProblemSourceListPage(
 }
 
 function extractAuthorHandle($: ReturnType<typeof loadHtml>): string | undefined {
-  const preferredLink = $('*[title="Postată de"] a[href^="/profil/"], *[title="Postata de"] a[href^="/profil/"]').first();
+  const preferredLink = $(
+    '*[title="Postată de"] a[href^="/profil/"], *[title="Postata de"] a[href^="/profil/"]',
+  ).first();
   if (preferredLink.length > 0) {
     const handle = preferredLink.attr('href')?.match(/^\/profil\/([^/?#]+)$/)?.[1];
     const normalized = normalizeWhitespace(handle ?? '');
@@ -69,7 +72,11 @@ function extractAuthorHandle($: ReturnType<typeof loadHtml>): string | undefined
       }
 
       const valueCell = values.eq(index);
-      const handle = valueCell.find('a[href^="/profil/"]').first().attr('href')?.match(/^\/profil\/([^/?#]+)$/)?.[1];
+      const handle = valueCell
+        .find('a[href^="/profil/"]')
+        .first()
+        .attr('href')
+        ?.match(/^\/profil\/([^/?#]+)$/)?.[1];
       if (handle) {
         summaryHandle = handle;
       }
@@ -80,9 +87,7 @@ function extractAuthorHandle($: ReturnType<typeof loadHtml>): string | undefined
   return normalized || undefined;
 }
 
-function extractEntriesFromRows(
-  $: ReturnType<typeof loadHtml>,
-): ProblemSourceListEntry[] {
+function extractEntriesFromRows($: ReturnType<typeof loadHtml>): ProblemSourceListEntry[] {
   const entries: ProblemSourceListEntry[] = [];
   const seen = new Set<number>();
 
@@ -131,7 +136,11 @@ function extractEntriesFromAnchorTriplets(
     }
 
     let evaluationAnchorIndex = index + 1;
-    if ($(anchors[index + 1]).attr('href')?.startsWith('/profil/')) {
+    if (
+      $(anchors[index + 1])
+        .attr('href')
+        ?.startsWith('/profil/')
+    ) {
       evaluationAnchorIndex = index + 2;
     }
 
@@ -172,10 +181,7 @@ function normalizeProfileHandle(
   return normalizedHandle || undefined;
 }
 
-function extractRowScore(
-  $: ReturnType<typeof loadHtml>,
-  row: any,
-): number | undefined {
+function extractRowScore($: ReturnType<typeof loadHtml>, row: HtmlNode): number | undefined {
   const cells = $(row).find('td');
   if (cells.length === 0) {
     return undefined;
@@ -189,11 +195,13 @@ function parsePaginationMetadata(
   html: string,
   pageUrl: string | undefined,
   totalMatches: number | undefined,
-): {
-  pageSize: number;
-  currentOffset: number;
-  nextPageUrls: string[];
-} | undefined {
+):
+  | {
+      pageSize: number;
+      currentOffset: number;
+      nextPageUrls: string[];
+    }
+  | undefined {
   const explicitPaginationUrls = extractExplicitPaginationUrls($, pageUrl);
   if (explicitPaginationUrls.length > 0) {
     return {
@@ -212,10 +220,10 @@ function parsePaginationMetadata(
   const currentOffset = Number(paginationMatch[2]);
   const pageSize = Number(paginationMatch[3]);
   if (
-    !Number.isFinite(inferredTotal)
-    || !Number.isFinite(currentOffset)
-    || !Number.isFinite(pageSize)
-    || pageSize <= 0
+    !Number.isFinite(inferredTotal) ||
+    !Number.isFinite(currentOffset) ||
+    !Number.isFinite(pageSize) ||
+    pageSize <= 0
   ) {
     return undefined;
   }

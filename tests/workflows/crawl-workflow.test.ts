@@ -215,9 +215,9 @@ describe('runCrawlWorkflow', () => {
     expect(readFileSync(join(rawSnapshotRoot, 'page-http-127-0-0-1-root.html'), 'utf8')).toContain(
       '<a href="/probleme">Probleme</a>',
     );
-    expect(readFileSync(join(rawSnapshotRoot, 'page-http-127-0-0-1-probleme.html'), 'utf8')).toContain(
-      '<h1>Probleme</h1>',
-    );
+    expect(
+      readFileSync(join(rawSnapshotRoot, 'page-http-127-0-0-1-probleme.html'), 'utf8'),
+    ).toContain('<h1>Probleme</h1>');
     expect(
       readFileSync(
         join(
@@ -230,100 +230,102 @@ describe('runCrawlWorkflow', () => {
         ),
         'utf8',
       ),
-    ).toContain(
-      'body { color: red; }',
-    );
+    ).toContain('body { color: red; }');
   });
 
-  test('uses persisted session cookies when crawling authenticated pages', { timeout: 20_000 }, async () => {
-    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-workflow-auth-'));
-    tempDirs.push(workspaceRoot);
-    mkdirSync(join(workspaceRoot, '.local'), { recursive: true });
+  test(
+    'uses persisted session cookies when crawling authenticated pages',
+    { timeout: 20_000 },
+    async () => {
+      const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-workflow-auth-'));
+      tempDirs.push(workspaceRoot);
+      mkdirSync(join(workspaceRoot, '.local'), { recursive: true });
 
-    const server = createServer((request, response) => {
-      if (request.url === '/secure') {
-        if (!request.headers.cookie?.includes('SESSION_ID=abc123')) {
-          response.statusCode = 403;
-          response.end('forbidden');
+      const server = createServer((request, response) => {
+        if (request.url === '/secure') {
+          if (!request.headers.cookie?.includes('SESSION_ID=abc123')) {
+            response.statusCode = 403;
+            response.end('forbidden');
+            return;
+          }
+
+          response.setHeader('Content-Type', 'text/html');
+          response.end('<html><body><h1>Authenticated</h1></body></html>');
           return;
         }
 
-        response.setHeader('Content-Type', 'text/html');
-        response.end('<html><body><h1>Authenticated</h1></body></html>');
-        return;
+        response.statusCode = 404;
+        response.end('missing');
+      });
+      servers.push(server);
+
+      await new Promise<void>((resolve) => {
+        server.listen(0, '127.0.0.1', () => resolve());
+      });
+
+      const address = server.address();
+      if (!address || typeof address === 'string') {
+        throw new TypeError('server address is not available');
       }
 
-      response.statusCode = 404;
-      response.end('missing');
-    });
-    servers.push(server);
-
-    await new Promise<void>((resolve) => {
-      server.listen(0, '127.0.0.1', () => resolve());
-    });
-
-    const address = server.address();
-    if (!address || typeof address === 'string') {
-      throw new TypeError('server address is not available');
-    }
-
-    writeFileSync(
-      join(workspaceRoot, '.local', 'session-cookies.json'),
-      JSON.stringify(
-        [
-          {
-            key: 'SESSION_ID',
-            value: 'abc123',
-            domain: '127.0.0.1',
-            path: '/',
-            expires: 'Infinity',
-            httpOnly: true,
-            secure: false,
-          },
-        ],
-        null,
-        2,
-      ),
-      'utf8',
-    );
-    writeFileSync(
-      join(workspaceRoot, '.local', 'pbinfo.local.json'),
-      JSON.stringify(
-        {
-          auth: {
-            strategy: 'cookie-import',
-            sessionCookiesPath: '.local/session-cookies.json',
-          },
-          crawl: {
-            publicStartUrls: [`http://127.0.0.1:${address.port}/secure`],
-          },
-        },
-        null,
-        2,
-      ),
-      'utf8',
-    );
-
-    const result = await runCrawlWorkflow(workspaceRoot, 'public', {
-      maxIterations: 1,
-      now: new Date('2026-03-10T00:00:00.000Z'),
-    });
-
-    expect(result.processed).toBe(1);
-    expect(
-      readFileSync(
-        join(
-          workspaceRoot,
-          'output',
-          'artifacts',
-          result.snapshotId,
-          'raw-pages',
-          'page-http-127-0-0-1-secure.html',
+      writeFileSync(
+        join(workspaceRoot, '.local', 'session-cookies.json'),
+        JSON.stringify(
+          [
+            {
+              key: 'SESSION_ID',
+              value: 'abc123',
+              domain: '127.0.0.1',
+              path: '/',
+              expires: 'Infinity',
+              httpOnly: true,
+              secure: false,
+            },
+          ],
+          null,
+          2,
         ),
         'utf8',
-      ),
-    ).toContain('Authenticated');
-  });
+      );
+      writeFileSync(
+        join(workspaceRoot, '.local', 'pbinfo.local.json'),
+        JSON.stringify(
+          {
+            auth: {
+              strategy: 'cookie-import',
+              sessionCookiesPath: '.local/session-cookies.json',
+            },
+            crawl: {
+              publicStartUrls: [`http://127.0.0.1:${address.port}/secure`],
+            },
+          },
+          null,
+          2,
+        ),
+        'utf8',
+      );
+
+      const result = await runCrawlWorkflow(workspaceRoot, 'public', {
+        maxIterations: 1,
+        now: new Date('2026-03-10T00:00:00.000Z'),
+      });
+
+      expect(result.processed).toBe(1);
+      expect(
+        readFileSync(
+          join(
+            workspaceRoot,
+            'output',
+            'artifacts',
+            result.snapshotId,
+            'raw-pages',
+            'page-http-127-0-0-1-secure.html',
+          ),
+          'utf8',
+        ),
+      ).toContain('Authenticated');
+    },
+  );
 
   test('resumes the latest unfinished snapshot instead of starting a new one', async () => {
     const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-workflow-resume-'));
@@ -718,11 +720,7 @@ describe('runCrawlWorkflow', () => {
       ),
       'utf8',
     );
-    writeFileSync(
-      join(snapshotRoot, 'problem-2.json'),
-      JSON.stringify({ id: 2 }, null, 2),
-      'utf8',
-    );
+    writeFileSync(join(snapshotRoot, 'problem-2.json'), JSON.stringify({ id: 2 }, null, 2), 'utf8');
     writeFileSync(
       join(workspaceRoot, 'archive', 'catalog.json'),
       JSON.stringify(
@@ -782,7 +780,9 @@ describe('runCrawlWorkflow', () => {
   });
 
   test('falls back to the public source-list URL when no official author handle is available', async () => {
-    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-workflow-official-source-public-fallback-'));
+    const workspaceRoot = mkdtempSync(
+      join(tmpdir(), 'pbinfo-workflow-official-source-public-fallback-'),
+    );
     tempDirs.push(workspaceRoot);
     mkdirSync(join(workspaceRoot, '.local'), { recursive: true });
 
@@ -889,7 +889,9 @@ describe('runCrawlWorkflow', () => {
   });
 
   test('fails targeted official-source harvest when auth preflight reports a guest session', async () => {
-    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-workflow-official-source-auth-guest-'));
+    const workspaceRoot = mkdtempSync(
+      join(tmpdir(), 'pbinfo-workflow-official-source-auth-guest-'),
+    );
     tempDirs.push(workspaceRoot);
     mkdirSync(join(workspaceRoot, '.local'), { recursive: true });
 
@@ -1254,9 +1256,7 @@ describe('runCrawlWorkflow', () => {
         maxActiveRequests = Math.max(maxActiveRequests, activeRequests);
         setTimeout(() => {
           response.setHeader('Content-Type', 'text/html');
-          response.end(
-            `<html><body><a href="${request.url}/child">child</a></body></html>`,
-          );
+          response.end(`<html><body><a href="${request.url}/child">child</a></body></html>`);
           activeRequests -= 1;
         }, 500);
         return;

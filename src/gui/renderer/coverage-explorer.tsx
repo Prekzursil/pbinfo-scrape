@@ -84,177 +84,174 @@ export function CoverageExplorerPanel(props: CoverageExplorerPanelProps) {
       </div>
 
       <div className="coverage-workspace-top">
-      <div className="coverage-summary-grid">
-        <MetricCard
-          label="Problems"
-          value={String(summary?.totalProblems ?? listing?.totalCount ?? 0)}
-          copy="All canonical problem records in the selected snapshot."
-        />
-        <MetricCard
-          label="Solved by me"
-          value={String(summary?.solvedByMeCount ?? 0)}
-          copy="Derived only from your archived handle and evaluation history."
-        />
-        <MetricCard
-          label="Tests fragments"
-          value={String(summary?.testsFragmentArchivedCount ?? 0)}
-          copy="Fragment archived is distinct from visible test cases parsed."
-        />
-        <MetricCard
-          label="Effective tests"
-          value={String(summary?.problemsWithEffectiveTests ?? 0)}
-          copy="Deduplicated example, visible, and evaluation-observed test coverage."
-        />
-        <MetricCard
-          label="Archived sources"
-          value={String(summary?.problemsWithArchivedSources ?? 0)}
-          copy="Split below between official and user source archives."
-        />
-        <MetricCard
-          label="Ranking coverage"
-          value={String(summary?.rankingPresentCount ?? 0)}
-          copy="Problems with best-submission ranking data available."
-        />
-        <MetricCard
-          label="New vs baseline"
-          value={String(summary?.newSinceBaselineCount ?? 0)}
-          copy="Problems whose effective test or source coverage improved beyond acceptance-20260310b."
-        />
-        <MetricCard
-          label="Editorials visible"
-          value={String(summary?.editorialVisibleCount ?? 0)}
-          copy="Current editorial visibility captured in the canonical archive."
-        />
-      </div>
+        <div className="coverage-summary-grid">
+          <MetricCard
+            label="Problems"
+            value={String(summary?.totalProblems ?? listing?.totalCount ?? 0)}
+            copy="All canonical problem records in the selected snapshot."
+          />
+          <MetricCard
+            label="Solved by me"
+            value={String(summary?.solvedByMeCount ?? 0)}
+            copy="Derived only from your archived handle and evaluation history."
+          />
+          <MetricCard
+            label="Tests fragments"
+            value={String(summary?.testsFragmentArchivedCount ?? 0)}
+            copy="Fragment archived is distinct from visible test cases parsed."
+          />
+          <MetricCard
+            label="Effective tests"
+            value={String(summary?.problemsWithEffectiveTests ?? 0)}
+            copy="Deduplicated example, visible, and evaluation-observed test coverage."
+          />
+          <MetricCard
+            label="Archived sources"
+            value={String(summary?.problemsWithArchivedSources ?? 0)}
+            copy="Split below between official and user source archives."
+          />
+          <MetricCard
+            label="Ranking coverage"
+            value={String(summary?.rankingPresentCount ?? 0)}
+            copy="Problems with best-submission ranking data available."
+          />
+          <MetricCard
+            label="New vs baseline"
+            value={String(summary?.newSinceBaselineCount ?? 0)}
+            copy="Problems whose effective test or source coverage improved beyond acceptance-20260310b."
+          />
+          <MetricCard
+            label="Editorials visible"
+            value={String(summary?.editorialVisibleCount ?? 0)}
+            copy="Current editorial visibility captured in the canonical archive."
+          />
+        </div>
 
-      <div className="coverage-filter-toolbar" role="toolbar" aria-label="Coverage filters">
-        <label className="field">
-          <span>Search problems</span>
-          <input
-            aria-label="Search problems"
-            value={filters.query}
-            onChange={(event) => setFilter('query', event.target.value)}
-            placeholder="Search by id, name, slug, or tag"
+        <div className="coverage-filter-toolbar" role="toolbar" aria-label="Coverage filters">
+          <label className="field">
+            <span>Search problems</span>
+            <input
+              aria-label="Search problems"
+              value={filters.query}
+              onChange={(event) => setFilter('query', event.target.value)}
+              placeholder="Search by id, name, slug, or tag"
+            />
+          </label>
+          <SelectField
+            label="Solved"
+            value={filters.solved}
+            onChange={(value) => setFilter('solved', value as GuiCoverageSolvedFilter)}
+            options={[
+              ['all', 'All problems'],
+              ['solved', 'Solved by archived handle'],
+              ['unsolved', 'Unsolved'],
+            ]}
           />
-        </label>
-        <SelectField
-          label="Solved"
-          value={filters.solved}
-          onChange={(value) => setFilter('solved', value as GuiCoverageSolvedFilter)}
-          options={[
-            ['all', 'All problems'],
-            ['solved', 'Solved by archived handle'],
-            ['unsolved', 'Unsolved'],
-          ]}
-        />
-        <SelectField
-          label="Tests fragment archived"
-          value={filters.testsFragmentArchived}
-          onChange={(value) =>
-            setFilter('testsFragmentArchived', value as GuiCoveragePresenceFilter)
-          }
-          options={[
-            ['all', 'All'],
-            ['yes', 'Yes'],
-            ['no', 'No'],
-          ]}
-        />
-        <SelectField
-          label="Visible tests captured"
-          value={filters.visibleTestsCaptured}
-          onChange={(value) =>
-            setFilter('visibleTestsCaptured', value as GuiCoveragePresenceFilter)
-          }
-          options={[
-            ['all', 'All'],
-            ['yes', 'Yes'],
-            ['no', 'No'],
-          ]}
-        />
-        <SelectField
-          label="Tests status"
-          value={filters.testsCoverageStatus}
-          onChange={(value) =>
-            setFilter('testsCoverageStatus', value as GuiCoverageTestsStatusFilter)
-          }
-          options={[
-            ['all', 'All'],
-            ['captured', 'Captured'],
-            ['not-available-upstream', 'Not available upstream'],
-            ['not-captured-yet', 'Not captured yet'],
-          ]}
-        />
-        <SelectField
-          label="Official source archived"
-          value={filters.officialSourceArchived}
-          onChange={(value) =>
-            setFilter('officialSourceArchived', value as GuiCoveragePresenceFilter)
-          }
-          options={[
-            ['all', 'All'],
-            ['yes', 'Yes'],
-            ['no', 'No'],
-          ]}
-        />
-        <SelectField
-          label="User source archived"
-          value={filters.userSourceArchived}
-          onChange={(value) =>
-            setFilter('userSourceArchived', value as GuiCoveragePresenceFilter)
-          }
-          options={[
-            ['all', 'All'],
-            ['yes', 'Yes'],
-            ['no', 'No'],
-          ]}
-        />
-        <SelectField
-          label="Editorial"
-          value={filters.editorialAvailability}
-          onChange={(value) =>
-            setFilter('editorialAvailability', value as GuiCoverageEditorialFilter)
-          }
-          options={[
-            ['all', 'All'],
-            ['visible', 'Visible'],
-            ['restricted', 'Restricted'],
-            ['hidden', 'Hidden'],
-            ['unknown', 'Unknown'],
-          ]}
-        />
-        <SelectField
-          label="Archive state"
-          value={filters.archiveCompletenessStatus}
-          onChange={(value) =>
-            setFilter('archiveCompletenessStatus', value as GuiCoverageArchiveStateFilter)
-          }
-          options={[
-            ['all', 'All'],
-            ['complete', 'Complete'],
-            ['unsolved', 'Unsolved'],
-            ['not-archived-yet', 'Not archived yet'],
-            ['missing-official-source', 'Missing official source'],
-            ['missing-user-source', 'Missing user source'],
-            ['incomplete', 'Incomplete'],
-          ]}
-        />
-        <label className="field">
-          <span>Grade</span>
-          <input
-            aria-label="Grade filter"
-            type="number"
-            min={1}
-            value={filters.grade ?? ''}
-            placeholder="All"
-            onChange={(event) =>
-              setFilter(
-                'grade',
-                event.target.value ? Number(event.target.value) : undefined,
-              )
+          <SelectField
+            label="Tests fragment archived"
+            value={filters.testsFragmentArchived}
+            onChange={(value) =>
+              setFilter('testsFragmentArchived', value as GuiCoveragePresenceFilter)
             }
+            options={[
+              ['all', 'All'],
+              ['yes', 'Yes'],
+              ['no', 'No'],
+            ]}
           />
-        </label>
-      </div>
+          <SelectField
+            label="Visible tests captured"
+            value={filters.visibleTestsCaptured}
+            onChange={(value) =>
+              setFilter('visibleTestsCaptured', value as GuiCoveragePresenceFilter)
+            }
+            options={[
+              ['all', 'All'],
+              ['yes', 'Yes'],
+              ['no', 'No'],
+            ]}
+          />
+          <SelectField
+            label="Tests status"
+            value={filters.testsCoverageStatus}
+            onChange={(value) =>
+              setFilter('testsCoverageStatus', value as GuiCoverageTestsStatusFilter)
+            }
+            options={[
+              ['all', 'All'],
+              ['captured', 'Captured'],
+              ['not-available-upstream', 'Not available upstream'],
+              ['not-captured-yet', 'Not captured yet'],
+            ]}
+          />
+          <SelectField
+            label="Official source archived"
+            value={filters.officialSourceArchived}
+            onChange={(value) =>
+              setFilter('officialSourceArchived', value as GuiCoveragePresenceFilter)
+            }
+            options={[
+              ['all', 'All'],
+              ['yes', 'Yes'],
+              ['no', 'No'],
+            ]}
+          />
+          <SelectField
+            label="User source archived"
+            value={filters.userSourceArchived}
+            onChange={(value) =>
+              setFilter('userSourceArchived', value as GuiCoveragePresenceFilter)
+            }
+            options={[
+              ['all', 'All'],
+              ['yes', 'Yes'],
+              ['no', 'No'],
+            ]}
+          />
+          <SelectField
+            label="Editorial"
+            value={filters.editorialAvailability}
+            onChange={(value) =>
+              setFilter('editorialAvailability', value as GuiCoverageEditorialFilter)
+            }
+            options={[
+              ['all', 'All'],
+              ['visible', 'Visible'],
+              ['restricted', 'Restricted'],
+              ['hidden', 'Hidden'],
+              ['unknown', 'Unknown'],
+            ]}
+          />
+          <SelectField
+            label="Archive state"
+            value={filters.archiveCompletenessStatus}
+            onChange={(value) =>
+              setFilter('archiveCompletenessStatus', value as GuiCoverageArchiveStateFilter)
+            }
+            options={[
+              ['all', 'All'],
+              ['complete', 'Complete'],
+              ['unsolved', 'Unsolved'],
+              ['not-archived-yet', 'Not archived yet'],
+              ['missing-official-source', 'Missing official source'],
+              ['missing-user-source', 'Missing user source'],
+              ['incomplete', 'Incomplete'],
+            ]}
+          />
+          <label className="field">
+            <span>Grade</span>
+            <input
+              aria-label="Grade filter"
+              type="number"
+              min={1}
+              value={filters.grade ?? ''}
+              placeholder="All"
+              onChange={(event) =>
+                setFilter('grade', event.target.value ? Number(event.target.value) : undefined)
+              }
+            />
+          </label>
+        </div>
       </div>
 
       <div className="coverage-content-grid">
@@ -297,9 +294,7 @@ export function CoverageExplorerPanel(props: CoverageExplorerPanelProps) {
               </table>
             </div>
           ) : (
-            <p className="summary-copy">
-              No problems match the current coverage filters.
-            </p>
+            <p className="summary-copy">No problems match the current coverage filters.</p>
           )}
         </article>
 
@@ -514,8 +509,8 @@ export function CoverageExplorerPanel(props: CoverageExplorerPanelProps) {
             </>
           ) : (
             <p className="summary-copy">
-              Select a problem to inspect solved state, test fragments, source-code coverage,
-              and raw normalized record links.
+              Select a problem to inspect solved state, test fragments, source-code coverage, and
+              raw normalized record links.
             </p>
           )}
         </article>
@@ -568,9 +563,7 @@ function CoverageRow({
   );
 }
 
-function humanizeTestsCoverageStatus(
-  status: GuiCoverageRecord['testsCoverageStatus'],
-): string {
+function humanizeTestsCoverageStatus(status: GuiCoverageRecord['testsCoverageStatus']): string {
   switch (status) {
     case 'captured':
       return 'Captured';
@@ -583,9 +576,7 @@ function humanizeTestsCoverageStatus(
   }
 }
 
-function humanizeOfficialSourceStatus(
-  status: GuiCoverageRecord['officialSourceStatus'],
-): string {
+function humanizeOfficialSourceStatus(status: GuiCoverageRecord['officialSourceStatus']): string {
   switch (status) {
     case 'archived':
       return 'Archived';
@@ -600,9 +591,7 @@ function humanizeOfficialSourceStatus(
   }
 }
 
-function humanizeArchiveState(
-  status: GuiCoverageRecord['archiveCompletenessStatus'],
-): string {
+function humanizeArchiveState(status: GuiCoverageRecord['archiveCompletenessStatus']): string {
   switch (status) {
     case 'complete':
       return 'Complete';
@@ -662,11 +651,7 @@ function SelectField({
   return (
     <label className="field">
       <span>{label}</span>
-      <select
-        aria-label={label}
-        value={value}
-        onChange={(event) => onChange(event.target.value)}
-      >
+      <select aria-label={label} value={value} onChange={(event) => onChange(event.target.value)}>
         {options.map(([optionValue, optionLabel]) => (
           <option key={optionValue} value={optionValue}>
             {optionLabel}

@@ -39,7 +39,7 @@ export interface CrawlWorkflowResult {
   completed: boolean;
 }
 
-export interface OfficialSourceHarvestOptions extends CrawlWorkflowOptions {}
+export type OfficialSourceHarvestOptions = CrawlWorkflowOptions;
 
 export interface CrawlFailureSummary {
   id: number;
@@ -76,9 +76,7 @@ export async function runOfficialSourceHarvestWorkflow(
   const config = loadLocalConfig(workspaceRoot);
   await enforceAuthPreflight('all', config, options.authStatusProbe);
   const catalog = readArchiveCatalog(config.paths.archiveRoot);
-  const snapshotId =
-    options.snapshotId
-    ?? resolveIncrementalSnapshotId(catalog, undefined);
+  const snapshotId = options.snapshotId ?? resolveIncrementalSnapshotId(catalog, undefined);
   if (!snapshotId) {
     throw new Error('No snapshot is available for targeted official-source harvest.');
   }
@@ -124,14 +122,10 @@ async function runSeededCrawlWorkflow(
     config.auth.strategy !== 'none' || config.auth.sessionCookiesPath
       ? await createCookieFetch(config.auth.sessionCookiesPath)
       : fetch;
-  let browserCapture:
-    | Awaited<ReturnType<typeof createPlaywrightBrowserCapture>>
-    | undefined;
+  let browserCapture: Awaited<ReturnType<typeof createPlaywrightBrowserCapture>> | undefined;
   if (config.crawl.crossCheckWithBrowser) {
     try {
-      browserCapture = await createPlaywrightBrowserCapture(
-        config.auth.sessionCookiesPath,
-      );
+      browserCapture = await createPlaywrightBrowserCapture(config.auth.sessionCookiesPath);
     } catch {
       browserCapture = undefined;
     }
@@ -221,11 +215,13 @@ async function enforceAuthPreflight(
     );
   }
 
-  const authStatus = customProbe
-    ? await customProbe(config)
-    : await probePbinfoAuthStatus(config);
+  const authStatus = customProbe ? await customProbe(config) : await probePbinfoAuthStatus(config);
 
-  if (!authStatus.loggedIn || authStatus.status === 'cookie-missing' || authStatus.status === 'guest') {
+  if (
+    !authStatus.loggedIn ||
+    authStatus.status === 'cookie-missing' ||
+    authStatus.status === 'guest'
+  ) {
     throw new Error(
       [
         `Authenticated crawl preflight failed: PBInfo session is not logged in (status=${authStatus.status}).`,
@@ -324,15 +320,14 @@ function buildSeeds(
   }
 
   if ((scope === 'user' || scope === 'all') && config.crawl.userHandle) {
-    const roots = scope === 'user'
-      ? [
-          `https://www.pbinfo.ro/solutii/user/${config.crawl.userHandle}`,
-        ]
-      : [
-          `https://www.pbinfo.ro/profil/${config.crawl.userHandle}`,
-          `https://www.pbinfo.ro/profil/${config.crawl.userHandle}/probleme`,
-          `https://www.pbinfo.ro/solutii/user/${config.crawl.userHandle}`,
-        ];
+    const roots =
+      scope === 'user'
+        ? [`https://www.pbinfo.ro/solutii/user/${config.crawl.userHandle}`]
+        : [
+            `https://www.pbinfo.ro/profil/${config.crawl.userHandle}`,
+            `https://www.pbinfo.ro/profil/${config.crawl.userHandle}/probleme`,
+            `https://www.pbinfo.ro/solutii/user/${config.crawl.userHandle}`,
+          ];
     for (const url of roots) {
       const key = `page:${url}`;
       queue.set(key, {
@@ -393,11 +388,12 @@ function buildAuthorScopedOfficialSourceUrl(sourceListUrl: string, authorHandle:
 }
 
 function extractOfficialAuthorHandle(metadata?: Record<string, unknown>): string | undefined {
-  const summaryText = typeof metadata?.['postată de'] === 'string'
-    ? metadata['postată de']
-    : typeof metadata?.['postata de'] === 'string'
-      ? metadata['postata de']
-      : undefined;
+  const summaryText =
+    typeof metadata?.['postată de'] === 'string'
+      ? metadata['postată de']
+      : typeof metadata?.['postata de'] === 'string'
+        ? metadata['postata de']
+        : undefined;
   const match = summaryText?.match(/\(([^()]+)\)\s*$/);
   const summaryHandle = normalizeHandleCandidate(match?.[1]);
   if (summaryHandle) {
@@ -415,9 +411,7 @@ function normalizeHandleCandidate(value: unknown): string | undefined {
   const normalized = value.trim();
   return normalized.length > 0 ? normalized : undefined;
 }
-function findLatestInProgressSnapshot(
-  catalog: ReturnType<typeof readArchiveCatalog>,
-) {
+function findLatestInProgressSnapshot(catalog: ReturnType<typeof readArchiveCatalog>) {
   const current = catalog.currentSnapshotId
     ? catalog.snapshots.find((snapshot) => snapshot.snapshotId === catalog.currentSnapshotId)
     : undefined;
@@ -453,18 +447,13 @@ function readJsonDirectory<T>(directoryPath: string): T[] {
   try {
     return readdirSync(directoryPath)
       .filter((entry) => entry.endsWith('.json'))
-      .map((entry) =>
-        JSON.parse(readFileSync(join(directoryPath, entry), 'utf8')) as T,
-      );
+      .map((entry) => JSON.parse(readFileSync(join(directoryPath, entry), 'utf8')) as T);
   } catch {
     return [];
   }
 }
 
-function createRateLimitedFetch(
-  fetchImpl: typeof fetch,
-  minimumDelayMs = 250,
-): typeof fetch {
+function createRateLimitedFetch(fetchImpl: typeof fetch, minimumDelayMs = 250): typeof fetch {
   let nextAvailableAt = 0;
   let queue = Promise.resolve();
 

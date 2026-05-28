@@ -50,16 +50,11 @@ import { importBrowserCookies, type SupportedChromiumBrowser } from '../../auth/
 import { PbinfoAuthClient } from '../../auth/pbinfo-auth.js';
 import { loadLocalConfig } from '../../config/local-config.js';
 import { buildMirrorArtifacts } from '../../mirror/build-mirror.js';
-import {
-  startMirrorServer,
-  type RunningMirrorServer,
-} from '../../mirror/server.js';
+import { startMirrorServer, type RunningMirrorServer } from '../../mirror/server.js';
 import {
   getCrawlStatusWorkflow,
   resumeCrawlWorkflow,
   runCrawlWorkflow,
-  type CrawlStatusResult,
-  type CrawlWorkflowResult,
 } from '../../workflows/crawl-workflow.js';
 import { runNormalizeSnapshotWorkflow } from '../../workflows/normalize-workflow.js';
 import { runRankingWorkflow } from '../../workflows/rank-workflow.js';
@@ -80,10 +75,7 @@ export interface DesktopControllerDependencies {
   finalizeSnapshotWorkflow: typeof finalizeSnapshotWorkflow;
   startMirrorServer: typeof startMirrorServer;
   importBrowserCookies: typeof importBrowserCookies;
-  createAuthClient: (options: {
-    baseUrl: string;
-    sessionCookiesPath: string;
-  }) => PbinfoAuthClient;
+  createAuthClient: (options: { baseUrl: string; sessionCookiesPath: string }) => PbinfoAuthClient;
   getArchiveExplorerSummary: typeof getArchiveExplorerSummary;
   listArchiveExplorerRecords: typeof listArchiveExplorerRecords;
   readArchiveExplorerRecord: typeof readArchiveExplorerRecord;
@@ -187,7 +179,10 @@ export interface DesktopController {
   importBrowserProfile(input: ImportBrowserDesktopProfileInput): Promise<DesktopAuthJobResult>;
   startJob(input: StartDesktopJobInput): Promise<GuiJobRecord>;
   resumeJob(jobId: string, options?: ResumeDesktopJobOptions): Promise<GuiJobRecord>;
-  startMirrorPreview(snapshotId: string, options?: StartMirrorPreviewOptions): Promise<MirrorPreviewHandle>;
+  startMirrorPreview(
+    snapshotId: string,
+    options?: StartMirrorPreviewOptions,
+  ): Promise<MirrorPreviewHandle>;
   stopMirrorPreview(jobId: string): Promise<GuiJobRecord>;
 }
 
@@ -248,27 +243,37 @@ export function createDesktopController(
     },
 
     async getCoverageSummary(snapshotId) {
-      return readCoverageExplorerWithRebuild(() =>
-        dependencies.getCoverageExplorerSummary(workspaceRoot, {
-          snapshotId,
-        }), snapshotId);
+      return readCoverageExplorerWithRebuild(
+        () =>
+          dependencies.getCoverageExplorerSummary(workspaceRoot, {
+            snapshotId,
+          }),
+        snapshotId,
+      );
     },
 
     async listCoverageRecords(input) {
-      return readCoverageExplorerWithRebuild(() =>
-        dependencies.listCoverageExplorerRecords(workspaceRoot, input), input.snapshotId);
+      return readCoverageExplorerWithRebuild(
+        () => dependencies.listCoverageExplorerRecords(workspaceRoot, input),
+        input.snapshotId,
+      );
     },
 
     async getCoverageRecord(input) {
-      return readCoverageExplorerWithRebuild(() =>
-        dependencies.readCoverageExplorerRecord(workspaceRoot, input), input.snapshotId);
+      return readCoverageExplorerWithRebuild(
+        () => dependencies.readCoverageExplorerRecord(workspaceRoot, input),
+        input.snapshotId,
+      );
     },
 
     getCrawlStatus(snapshotId) {
       try {
         return dependencies.getCrawlStatusWorkflow(workspaceRoot, snapshotId);
       } catch (error) {
-        if (error instanceof Error && error.message.includes('was not found in archive/catalog.json')) {
+        if (
+          error instanceof Error &&
+          error.message.includes('was not found in archive/catalog.json')
+        ) {
           return null;
         }
 
@@ -323,8 +328,8 @@ export function createDesktopController(
         });
         if (!result.success) {
           throw new Error(
-            result.failureReason
-            ?? 'PBInfo credential login did not produce an authenticated session.',
+            result.failureReason ??
+              'PBInfo credential login did not produce an authenticated session.',
           );
         }
 
@@ -436,13 +441,7 @@ export function createDesktopController(
           job: completed,
         };
       } catch (error) {
-        return failAuthJob(
-          job.jobId,
-          'auth-import-browser',
-          input.label,
-          error,
-          input.now,
-        );
+        return failAuthJob(job.jobId, 'auth-import-browser', input.label, error, input.now);
       }
     },
 
@@ -621,10 +620,7 @@ export function createDesktopController(
           now: options.now,
           mode: crawlDetail.mode,
         });
-    const status = dependencies.getCrawlStatusWorkflow(
-      workspaceRoot,
-      result.snapshotId,
-    );
+    const status = dependencies.getCrawlStatusWorkflow(workspaceRoot, result.snapshotId);
     const eventTimestamp = iso(options.now);
     const currentCounters = {
       pending: status.pending,
@@ -635,8 +631,7 @@ export function createDesktopController(
       !result.completed && currentCounters.pending > 0
         ? result.processed === 0
           ? 'no-visible-work'
-          : job.latestCounters &&
-              !didCrawlCountersImprove(job.latestCounters, currentCounters)
+          : job.latestCounters && !didCrawlCountersImprove(job.latestCounters, currentCounters)
             ? 'unchanged-counters'
             : null
         : null;
@@ -696,20 +691,19 @@ export function createDesktopController(
       status: 'running',
       updatedAt: iso(now),
     });
-    const result = await dependencies.runNormalizeSnapshotWorkflow(
-      workspaceRoot,
-      snapshotId,
+    const result = await dependencies.runNormalizeSnapshotWorkflow(workspaceRoot, snapshotId);
+    return finalizeSimpleJob(
+      job.jobId,
+      'normalize',
+      {
+        pagesNormalized: result.pagesNormalized,
+        snapshotId: result.snapshotId,
+      },
+      now,
     );
-    return finalizeSimpleJob(job.jobId, 'normalize', {
-      pagesNormalized: result.pagesNormalized,
-      snapshotId: result.snapshotId,
-    }, now);
   }
 
-  async function runRankingJob(
-    snapshotId: string | undefined,
-    now?: Date,
-  ): Promise<GuiJobRecord> {
+  async function runRankingJob(snapshotId: string | undefined, now?: Date): Promise<GuiJobRecord> {
     const job = createGuiJob(workspaceRoot, {
       jobId: randomUUID(),
       kind: 'rank',
@@ -721,10 +715,15 @@ export function createDesktopController(
       updatedAt: iso(now),
     });
     const result = await dependencies.runRankingWorkflow(workspaceRoot, snapshotId);
-    return finalizeSimpleJob(job.jobId, 'rank', {
-      problemsRanked: result.problemsRanked,
-      outputPath: result.outputPath,
-    }, now);
+    return finalizeSimpleJob(
+      job.jobId,
+      'rank',
+      {
+        problemsRanked: result.problemsRanked,
+        outputPath: result.outputPath,
+      },
+      now,
+    );
   }
 
   async function runMirrorBuildJob(
@@ -742,17 +741,19 @@ export function createDesktopController(
       updatedAt: iso(now),
     });
     const result = await dependencies.buildMirrorArtifacts(workspaceRoot, snapshotId);
-    return finalizeSimpleJob(job.jobId, 'mirror-build', {
-      routesBuilt: result.routesBuilt,
-      snapshotId: result.snapshotId,
-      outputRoot: result.outputRoot,
-    }, now);
+    return finalizeSimpleJob(
+      job.jobId,
+      'mirror-build',
+      {
+        routesBuilt: result.routesBuilt,
+        snapshotId: result.snapshotId,
+        outputRoot: result.outputRoot,
+      },
+      now,
+    );
   }
 
-  async function runFinalizeJob(
-    snapshotId: string,
-    now?: Date,
-  ): Promise<GuiJobRecord> {
+  async function runFinalizeJob(snapshotId: string, now?: Date): Promise<GuiJobRecord> {
     const job = createGuiJob(workspaceRoot, {
       jobId: randomUUID(),
       kind: 'snapshot-finalize',
@@ -764,13 +765,18 @@ export function createDesktopController(
       updatedAt: iso(now),
     });
     const result = await dependencies.finalizeSnapshotWorkflow(workspaceRoot, snapshotId);
-    const completed = finalizeSimpleJob(job.jobId, 'snapshot-finalize', {
-      snapshotId: result.snapshotId,
-      pagesNormalized: result.pagesNormalized,
-      problemsRanked: result.problemsRanked,
-      routesBuilt: result.routesBuilt,
-      artifactManifestPath: result.artifactManifestPath,
-    }, now);
+    const completed = finalizeSimpleJob(
+      job.jobId,
+      'snapshot-finalize',
+      {
+        snapshotId: result.snapshotId,
+        pagesNormalized: result.pagesNormalized,
+        problemsRanked: result.problemsRanked,
+        routesBuilt: result.routesBuilt,
+        artifactManifestPath: result.artifactManifestPath,
+      },
+      now,
+    );
     await dependencies.notificationService.notify({
       level: 'info',
       title: 'Snapshot finalized',
@@ -844,8 +850,8 @@ export function createDesktopController(
       return reader();
     } catch (error) {
       if (
-        error instanceof Error
-        && error.message.includes('Problem coverage has not been generated')
+        error instanceof Error &&
+        error.message.includes('Problem coverage has not been generated')
       ) {
         await ensureCoverageDataset(snapshotId);
         return reader();
@@ -881,15 +887,15 @@ function iso(now?: Date): string {
   return (now ?? new Date()).toISOString();
 }
 
-function resolveCrawlDetail(
-  detail: Record<string, unknown> | undefined,
-): {
+function resolveCrawlDetail(detail: Record<string, unknown> | undefined): {
   scope: 'public' | 'user' | 'all';
   mode: GuiCrawlMode;
 } {
-  const parsed = guiCrawlJobDetailSchema.safeParse(detail ?? {
-    scope: 'all',
-  });
+  const parsed = guiCrawlJobDetailSchema.safeParse(
+    detail ?? {
+      scope: 'all',
+    },
+  );
   if (parsed.success) {
     return {
       scope: parsed.data.scope,
@@ -936,9 +942,7 @@ function mapImportedCookieToPersisted(cookie: {
   };
 }
 
-function normalizePersistedCookiesForProfile(
-  cookies: SerializedSessionCookie[],
-): ProfileCookie[] {
+function normalizePersistedCookiesForProfile(cookies: SerializedSessionCookie[]): ProfileCookie[] {
   return cookies
     .filter(
       (cookie): cookie is SerializedSessionCookie & { key: string; value: string } =>

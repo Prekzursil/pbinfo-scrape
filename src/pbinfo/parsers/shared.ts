@@ -1,5 +1,13 @@
 import { load } from 'cheerio';
 
+/**
+ * A single DOM node yielded by cheerio iteration helpers such as `.each`.
+ *
+ * The type is derived from the elements held by a cheerio selection so parser
+ * signatures stay precise without importing cheerio's internal node modules.
+ */
+export type HtmlNode = ReturnType<ReturnType<typeof load>>['0'];
+
 export function loadHtml(html: string) {
   return load(html);
 }

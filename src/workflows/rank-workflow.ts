@@ -5,11 +5,7 @@ import { resolveReadableSnapshotLayout } from '../archive/storage.js';
 import { loadLocalConfig } from '../config/local-config.js';
 import { detectSuspicionFlags } from '../crawl/archive-crawler.js';
 import { rankProblemSubmissions } from '../ranking/rank-submissions.js';
-import type {
-  BestSubmissionRecord,
-  SourceRecord,
-  SubmissionRecord,
-} from '../types/records.js';
+import type { BestSubmissionRecord, SourceRecord, SubmissionRecord } from '../types/records.js';
 
 export interface RankingWorkflowResult {
   problemsRanked: number;
@@ -121,9 +117,7 @@ function loadSourceRecords(root: string): SourceRecord[] {
     return readdirSync(root)
       .filter((entry) => entry.endsWith('.json'))
       .map((entry) =>
-        refreshSuspicionFlags(
-          JSON.parse(readFileSync(join(root, entry), 'utf8')) as SourceRecord,
-        ),
+        refreshSuspicionFlags(JSON.parse(readFileSync(join(root, entry), 'utf8')) as SourceRecord),
       );
   } catch {
     return [];
@@ -146,9 +140,7 @@ function refreshSuspicionFlags<T extends { sourceCode?: string; suspicionFlags?:
   };
 }
 
-function loadRankingOverrides(
-  overridesPath: string,
-): Record<string, Record<string, number>> {
+function loadRankingOverrides(overridesPath: string): Record<string, Record<string, number>> {
   try {
     return JSON.parse(readFileSync(overridesPath, 'utf8')) as Record<
       string,
@@ -173,8 +165,8 @@ function matchesConfiguredHandle(
   const normalizedConfigured = configuredUserHandle.trim().toLowerCase();
   const normalizedCandidate = candidate.trim().toLowerCase();
   return (
-    normalizedCandidate === normalizedConfigured
-    || normalizedCandidate.includes(`(${normalizedConfigured})`)
-    || normalizedCandidate.includes(` ${normalizedConfigured}`)
+    normalizedCandidate === normalizedConfigured ||
+    normalizedCandidate.includes(`(${normalizedConfigured})`) ||
+    normalizedCandidate.includes(` ${normalizedConfigured}`)
   );
 }

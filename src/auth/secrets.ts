@@ -23,7 +23,7 @@ export async function bootstrapSecretBundle(
   config: LoadedLocalConfig,
   now = new Date(),
 ): Promise<BootstrapSecretBundleResult> {
-  const { identity, recipient, createdIdentity } = await ensureIdentityMaterial(config);
+  const { recipient, createdIdentity } = await ensureIdentityMaterial(config);
   const payload: SecretBundlePayload = {
     exportedAt: now.toISOString(),
     localConfig: readJsonIfExists(config.paths.localRoot, 'pbinfo.local.json'),
@@ -50,9 +50,7 @@ export async function bootstrapSecretBundle(
   };
 }
 
-export async function decryptSecretBundle(
-  config: LoadedLocalConfig,
-): Promise<SecretBundlePayload> {
+export async function decryptSecretBundle(config: LoadedLocalConfig): Promise<SecretBundlePayload> {
   const identity = readFileSync(config.secrets.identityPath, 'utf8').trim();
   const armoredCiphertext = readFileSync(config.secrets.bundlePath, 'utf8');
   const decrypter = new Decrypter();
@@ -61,9 +59,7 @@ export async function decryptSecretBundle(
   return JSON.parse(plaintext) as SecretBundlePayload;
 }
 
-export async function restoreSecretBundle(
-  config: LoadedLocalConfig,
-): Promise<SecretBundlePayload> {
+export async function restoreSecretBundle(config: LoadedLocalConfig): Promise<SecretBundlePayload> {
   const payload = await decryptSecretBundle(config);
   mkdirSync(config.paths.localRoot, { recursive: true });
 
@@ -89,9 +85,10 @@ export async function restoreSecretBundle(
 async function ensureIdentityMaterial(
   config: LoadedLocalConfig,
 ): Promise<{ identity: string; recipient: string; createdIdentity: boolean }> {
-  let identity = config.secrets.identityPath && existsSync(config.secrets.identityPath)
-    ? readFileSync(config.secrets.identityPath, 'utf8').trim()
-    : '';
+  let identity =
+    config.secrets.identityPath && existsSync(config.secrets.identityPath)
+      ? readFileSync(config.secrets.identityPath, 'utf8').trim()
+      : '';
   let createdIdentity = false;
 
   if (!identity) {
@@ -102,8 +99,8 @@ async function ensureIdentityMaterial(
   }
 
   const recipient =
-    config.secrets.recipient
-    ?? (existsSync(config.secrets.recipientPath)
+    config.secrets.recipient ??
+    (existsSync(config.secrets.recipientPath)
       ? readFileSync(config.secrets.recipientPath, 'utf8').trim()
       : await identityToRecipient(identity));
 

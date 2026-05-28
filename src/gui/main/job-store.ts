@@ -40,10 +40,7 @@ interface TimedOptions {
   now?: Date;
 }
 
-export function createGuiJob(
-  workspaceRoot: string,
-  input: CreateGuiJobInput,
-): GuiJobRecord {
+export function createGuiJob(workspaceRoot: string, input: CreateGuiJobInput): GuiJobRecord {
   const resolvedWorkspace = resolve(workspaceRoot);
   const timestamp = iso(input.now);
   const record: GuiJobRecord = {
@@ -64,10 +61,7 @@ export function createGuiJob(
   return record;
 }
 
-export function readGuiJob(
-  workspaceRoot: string,
-  jobId: string,
-): GuiJobRecord {
+export function readGuiJob(workspaceRoot: string, jobId: string): GuiJobRecord {
   const resolvedWorkspace = resolve(workspaceRoot);
   const jobPath = getGuiJobPath(resolvedWorkspace, jobId);
   if (!existsSync(jobPath)) {
@@ -86,9 +80,7 @@ export function listGuiJobs(workspaceRoot: string): GuiJobRecord[] {
 
   return readdirSync(jobsRoot, { withFileTypes: true })
     .filter((entry) => entry.isFile() && entry.name.endsWith('.json'))
-    .map((entry) =>
-      readGuiJob(resolvedWorkspace, entry.name.replace(/\.json$/u, '')),
-    )
+    .map((entry) => readGuiJob(resolvedWorkspace, entry.name.replace(/\.json$/u, '')))
     .sort((left, right) => left.createdAt.localeCompare(right.createdAt));
 }
 
@@ -128,21 +120,16 @@ export function appendGuiJobEvent(
     latestEvent: parsedEvent,
     latestCounters: parsedEvent.counters ?? current.latestCounters,
     updatedAt: parsedEvent.timestamp,
-    detail:
-      parsedEvent.detail
-        ? {
-            ...(current.detail ?? {}),
-            ...parsedEvent.detail,
-          }
-        : current.detail,
+    detail: parsedEvent.detail
+      ? {
+          ...(current.detail ?? {}),
+          ...parsedEvent.detail,
+        }
+      : current.detail,
   });
 }
 
-export function readGuiJobEvents(
-  workspaceRoot: string,
-  jobId: string,
-  limit = 50,
-): GuiJobEvent[] {
+export function readGuiJobEvents(workspaceRoot: string, jobId: string, limit = 50): GuiJobEvent[] {
   const current = readGuiJob(workspaceRoot, jobId);
   if (!existsSync(current.logPath)) {
     return [];

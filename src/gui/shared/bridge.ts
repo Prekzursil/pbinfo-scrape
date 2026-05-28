@@ -23,9 +23,7 @@ import type {
 
 export interface DesktopBridge {
   getDesktopPreferences: () => Promise<DesktopPreferencesRecord>;
-  setVerbosityMode: (
-    verbosityMode: GuiVerbosityMode,
-  ) => Promise<DesktopPreferencesRecord>;
+  setVerbosityMode: (verbosityMode: GuiVerbosityMode) => Promise<DesktopPreferencesRecord>;
   getWorkspaceState: () => Promise<GuiWorkspaceState | null>;
   selectWorkspace: (workspaceRoot: string) => Promise<GuiWorkspaceState>;
   loginProfile: (input: {
@@ -121,7 +119,10 @@ export interface DesktopBridge {
   }) => Promise<GuiJobRecord>;
   pauseJob: (jobId: string) => Promise<GuiJobRecord>;
   resumeJob: (jobId: string, options?: { maxIterations?: number }) => Promise<GuiJobRecord>;
-  startMirrorPreview: (snapshotId: string, port?: number) => Promise<{
+  startMirrorPreview: (
+    snapshotId: string,
+    port?: number,
+  ) => Promise<{
     job: GuiJobRecord;
     baseUrl: string;
   }>;
@@ -132,9 +133,6 @@ export interface DesktopBridge {
 
 export interface DesktopBridgeAdapter {
   invoke: (channel: string, payload?: unknown) => Promise<unknown>;
-  on: (
-    channel: string,
-    listener: (...args: unknown[]) => void,
-  ) => (() => void) | void;
+  on: (channel: string, listener: (...args: unknown[]) => void) => (() => void) | void;
   off?: (channel: string) => void;
 }

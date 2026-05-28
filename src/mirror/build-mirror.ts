@@ -164,10 +164,10 @@ function rewriteMirrorHtml(
   $('script:not([src])').each((_, element) => {
     const content = $(element).html() ?? '';
     if (
-      content.includes('challenge-platform')
-      || content.includes('__CF$cv$params')
-      || content.includes('window.dataLayer')
-      || content.includes('gtag(')
+      content.includes('challenge-platform') ||
+      content.includes('__CF$cv$params') ||
+      content.includes('window.dataLayer') ||
+      content.includes('gtag(')
     ) {
       $(element).remove();
     }
@@ -196,7 +196,9 @@ function rewriteMirrorHtml(
     }
   });
 
-  $('script[src*="googletagmanager"], script[src*="ads"], ins.adsbygoogle, .adsbygoogle, iframe').remove();
+  $(
+    'script[src*="googletagmanager"], script[src*="ads"], ins.adsbygoogle, .adsbygoogle, iframe',
+  ).remove();
   $('form[action*="login"], form[action*="logout"]').removeAttr('action');
   $('body').attr('data-archived-source', sourceUrl);
   if (coverageRecord) {
@@ -262,9 +264,10 @@ function readRouteRecords(root: string): MirrorRouteRecord[] {
   }
 }
 
-function rebuildRawManifests(
-  normalizedRoot: string,
-): { pageManifest: Record<string, string>; assetManifest: Record<string, string> } {
+function rebuildRawManifests(normalizedRoot: string): {
+  pageManifest: Record<string, string>;
+  assetManifest: Record<string, string>;
+} {
   const manifests = {
     pageManifest: {} as Record<string, string>,
     assetManifest: {} as Record<string, string>,
@@ -397,12 +400,15 @@ function renderCoverageIndex(
   coverageIndex: ProblemCoverageIndex | undefined,
 ): string {
   const records = coverageIndex?.records ?? [];
-  const grades = [...new Set(records.map((record) => record.grade).filter((grade): grade is number => typeof grade === 'number'))]
-    .sort((left, right) => left - right);
+  const grades = [
+    ...new Set(
+      records
+        .map((record) => record.grade)
+        .filter((grade): grade is number => typeof grade === 'number'),
+    ),
+  ].sort((left, right) => left - right);
   const payload = JSON.stringify(records);
-  const initialRows = records
-    .map((record) => renderCoverageRow(record))
-    .join('\n');
+  const initialRows = records.map((record) => renderCoverageRow(record)).join('\n');
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -639,9 +645,10 @@ function injectProblemCoverageStrip(
       .archive-coverage-strip .archive-coverage-note{margin-top:.55rem;font-size:.9rem;color:#6f655a}
     </style>`);
   }
-  const noteText = record.notes.length > 0
-    ? `<p class="archive-coverage-note">${escapeHtml(record.notes.join(' • '))}</p>`
-    : '';
+  const noteText =
+    record.notes.length > 0
+      ? `<p class="archive-coverage-note">${escapeHtml(record.notes.join(' • '))}</p>`
+      : '';
   const strip = `<section class="archive-coverage-strip" data-problem-id="${record.problemId}">
     <h2>Archive coverage</h2>
     <div class="archive-coverage-badges">

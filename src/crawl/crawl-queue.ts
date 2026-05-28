@@ -100,7 +100,8 @@ export class CrawlQueue {
       database.exec('BEGIN IMMEDIATE');
       try {
         const row = database
-          .prepare(`
+          .prepare(
+            `
             SELECT *
             FROM crawl_queue
             WHERE status = 'pending'
@@ -118,7 +119,8 @@ export class CrawlQueue {
               created_at ASC,
               id ASC
             LIMIT 1
-          `)
+          `,
+          )
           .get(nowIso) as QueueRow | undefined;
 
         if (!row) {
@@ -127,19 +129,21 @@ export class CrawlQueue {
         }
 
         database
-          .prepare(`
+          .prepare(
+            `
             UPDATE crawl_queue
             SET status = 'in_progress',
                 attempt_count = attempt_count + 1,
                 updated_at = ?,
                 visible_at = NULL
             WHERE id = ?
-          `)
+          `,
+          )
           .run(nowIso, row.id);
 
-        const claimed = database
-          .prepare(`SELECT * FROM crawl_queue WHERE id = ?`)
-          .get(row.id) as QueueRow | undefined;
+        const claimed = database.prepare(`SELECT * FROM crawl_queue WHERE id = ?`).get(row.id) as
+          | QueueRow
+          | undefined;
 
         database.exec('COMMIT');
         return claimed ? this.mapRow(claimed) : null;
@@ -153,7 +157,8 @@ export class CrawlQueue {
   complete(id: number, payload: CompletionPayload): void {
     this.withDatabase((database) => {
       database
-        .prepare(`
+        .prepare(
+          `
           UPDATE crawl_queue
           SET status = 'completed',
               updated_at = ?,
@@ -162,27 +167,25 @@ export class CrawlQueue {
               content_hash = ?,
               http_status = ?
           WHERE id = ?
-        `)
-        .run(
-          new Date().toISOString(),
-          payload.contentHash ?? null,
-          payload.httpStatus ?? null,
-          id,
-        );
+        `,
+        )
+        .run(new Date().toISOString(), payload.contentHash ?? null, payload.httpStatus ?? null, id);
     });
   }
 
   fail(id: number, payload: FailurePayload): void {
     this.withDatabase((database) => {
       database
-        .prepare(`
+        .prepare(
+          `
           UPDATE crawl_queue
           SET status = 'pending',
               updated_at = ?,
               visible_at = ?,
               last_error = ?
           WHERE id = ?
-        `)
+        `,
+        )
         .run(new Date().toISOString(), payload.nextVisibleAt, payload.errorMessage, id);
     });
   }
@@ -191,14 +194,16 @@ export class CrawlQueue {
     return this.withDatabase((database) => {
       const now = new Date().toISOString();
       const result = database
-        .prepare(`
+        .prepare(
+          `
           UPDATE crawl_queue
           SET status = 'pending',
               updated_at = ?,
               visible_at = NULL,
               last_error = COALESCE(last_error, ?)
           WHERE status = 'in_progress'
-        `)
+        `,
+        )
         .run(now, reason);
 
       return Number(result.changes ?? 0);
@@ -283,27 +288,31 @@ export function readCrawlQueueSnapshot(databasePath: string): CrawlSnapshot {
 
 function readSnapshotFromDatabase(database: DatabaseSync): CrawlSnapshot {
   const counts = database
-    .prepare(`
+    .prepare(
+      `
       SELECT
         SUM(CASE WHEN status = 'pending' THEN 1 ELSE 0 END) AS pending,
         SUM(CASE WHEN status = 'completed' THEN 1 ELSE 0 END) AS completed,
         SUM(CASE WHEN status = 'in_progress' THEN 1 ELSE 0 END) AS in_progress
       FROM crawl_queue
-    `)
+    `,
+    )
     .get() as
-      | {
-          pending: number | null;
-          completed: number | null;
-          in_progress: number | null;
-        }
-      | undefined;
+    | {
+        pending: number | null;
+        completed: number | null;
+        in_progress: number | null;
+      }
+    | undefined;
 
   const rows = database
-    .prepare(`
+    .prepare(
+      `
       SELECT *
       FROM crawl_queue
       ORDER BY created_at ASC, id ASC
-    `)
+    `,
+    )
     .all() as QueueRow[];
 
   return {

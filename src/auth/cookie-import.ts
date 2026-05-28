@@ -1,7 +1,9 @@
 import { createDecipheriv } from 'node:crypto';
 import { copyFileSync, existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join, resolve } from 'node:path';
+import { join, win32 as winPath } from 'node:path';
+import hostPath from 'node:path';
+import type { PlatformPath } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { DatabaseSync } from 'node:sqlite';
 
@@ -68,7 +70,7 @@ export interface BrowserCookieImportOptions {
 export function normalizeImportedCookies(
   rawInput: RawCookie[] | PlaywrightStorageState,
 ): ImportedCookie[] {
-  const cookies = Array.isArray(rawInput) ? rawInput : rawInput.cookies ?? [];
+  const cookies = Array.isArray(rawInput) ? rawInput : (rawInput.cookies ?? []);
 
   return cookies.map((cookie) => ({
     name: cookie.name,
@@ -106,16 +108,24 @@ export function resolveChromiumProfile(
   env: NodeJS.ProcessEnv = process.env,
 ): ResolvedChromiumProfile {
   const profileName = options.profile ?? 'Default';
+
+  // An explicit `userDataDir` is treated as a path on the host filesystem (the
+  // process is reading and copying real files from it), so the host path module
+  // must be used to derive its child paths. When no directory is supplied the
+  // default location is derived from %LOCALAPPDATA%, which is always a Windows
+  // path regardless of the host the importer happens to run on, so win32
+  // semantics are used there to keep the separators and drive handling correct.
+  const pathModule: PlatformPath = options.userDataDir ? hostPath : winPath;
   const userDataDir = options.userDataDir
-    ? resolve(options.userDataDir)
+    ? pathModule.resolve(options.userDataDir)
     : resolveDefaultChromiumUserDataDir(options.browser, env);
 
   return {
     browser: options.browser,
     profileName,
     userDataDir,
-    localStatePath: join(userDataDir, 'Local State'),
-    cookiesDbPath: join(userDataDir, profileName, 'Network', 'Cookies'),
+    localStatePath: pathModule.join(userDataDir, 'Local State'),
+    cookiesDbPath: pathModule.join(userDataDir, profileName, 'Network', 'Cookies'),
   };
 }
 
@@ -175,7 +185,8 @@ export async function importBrowserCookies(
     });
     try {
       const rows = database
-        .prepare(`SELECT
+        .prepare(
+          `SELECT
           host_key,
           name,
           value,
@@ -185,7 +196,8 @@ export async function importBrowserCookies(
           is_httponly,
           is_secure,
           samesite
-        FROM cookies`)
+        FROM cookies`,
+        )
         .all() as Array<Record<string, unknown>>;
 
       const domainFilter = (options.domainFilter ?? 'pbinfo.ro').toLowerCase();
@@ -209,8 +221,8 @@ export async function importBrowserCookies(
             const message = error instanceof Error ? error.message : String(error);
             throw new Error(
               `Could not decrypt Chromium cookie "${row.name}" for ${row.host_key}: ${message}. ` +
-              'This usually means the browser uses app-bound encryption that cannot be exported from this profile. ' +
-              'Use `npm run cli -- auth login` (credentials strategy) or import a plain JSON cookie export instead.',
+                'This usually means the browser uses app-bound encryption that cannot be exported from this profile. ' +
+                'Use `npm run cli -- auth login` (credentials strategy) or import a plain JSON cookie export instead.',
             );
           }
         }
@@ -246,10 +258,10 @@ function resolveDefaultChromiumUserDataDir(
 
   const browserPath =
     browser === 'edge'
-      ? join(localAppData, 'Microsoft', 'Edge', 'User Data')
-      : join(localAppData, 'Google', 'Chrome', 'User Data');
+      ? winPath.join(localAppData, 'Microsoft', 'Edge', 'User Data')
+      : winPath.join(localAppData, 'Google', 'Chrome', 'User Data');
 
-  return resolve(browserPath);
+  return winPath.resolve(browserPath);
 }
 
 function normalizeChromiumExpiry(
@@ -268,34 +280,26 @@ function normalizeChromiumExpiry(
   return unixSeconds > 0 ? unixSeconds : undefined;
 }
 
+function coerceSqliteNumeric(value: unknown): number | bigint {
+  return typeof value === 'number' || typeof value === 'bigint' ? value : 0;
+}
+
+function coerceExpiresUtc(value: unknown): string | number | bigint {
+  return typeof value === 'string' ? value : coerceSqliteNumeric(value);
+}
+
 function coerceBrowserCookieRow(row: Record<string, unknown>): BrowserCookieRow {
   return {
     host_key: String(row.host_key ?? ''),
     name: String(row.name ?? ''),
     value: String(row.value ?? ''),
     encrypted_value:
-      row.encrypted_value instanceof Uint8Array
-        ? row.encrypted_value
-        : new Uint8Array(),
+      row.encrypted_value instanceof Uint8Array ? row.encrypted_value : new Uint8Array(),
     path: String(row.path ?? '/'),
-    expires_utc:
-      typeof row.expires_utc === 'string' ||
-      typeof row.expires_utc === 'number' ||
-      typeof row.expires_utc === 'bigint'
-        ? row.expires_utc
-        : 0,
-    is_httponly:
-      typeof row.is_httponly === 'number' || typeof row.is_httponly === 'bigint'
-        ? row.is_httponly
-        : 0,
-    is_secure:
-      typeof row.is_secure === 'number' || typeof row.is_secure === 'bigint'
-        ? row.is_secure
-        : 0,
-    samesite:
-      typeof row.samesite === 'number' || typeof row.samesite === 'bigint'
-        ? row.samesite
-        : 0,
+    expires_utc: coerceExpiresUtc(row.expires_utc),
+    is_httponly: coerceSqliteNumeric(row.is_httponly),
+    is_secure: coerceSqliteNumeric(row.is_secure),
+    samesite: coerceSqliteNumeric(row.samesite),
   };
 }
 

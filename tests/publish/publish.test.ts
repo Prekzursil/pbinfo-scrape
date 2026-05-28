@@ -101,7 +101,8 @@ describe('publishWorkspace', () => {
     );
     expect(
       commands.some(
-        (entry) => entry.command === 'git' && entry.args[0] === 'add' && entry.args[1] === '--intent-to-add',
+        (entry) =>
+          entry.command === 'git' && entry.args[0] === 'add' && entry.args[1] === '--intent-to-add',
       ),
     ).toBe(false);
 
@@ -184,11 +185,16 @@ describe('publishWorkspace', () => {
 
     const ghCreateIndex = commands.findIndex(
       (entry) =>
-        entry.command === 'gh'
-        && entry.args.join(' ').includes('repo create Prekzursil/pbinfo-scrape --private --description'),
+        entry.command === 'gh' &&
+        entry.args
+          .join(' ')
+          .includes('repo create Prekzursil/pbinfo-scrape --private --description'),
     );
     const gitAddOriginIndex = commands.findIndex(
-      (entry) => entry.command === 'git' && entry.args.join(' ') === 'remote add origin https://github.com/Prekzursil/pbinfo-scrape.git',
+      (entry) =>
+        entry.command === 'git' &&
+        entry.args.join(' ') ===
+          'remote add origin https://github.com/Prekzursil/pbinfo-scrape.git',
     );
 
     expect(ghCreateIndex).toBeGreaterThanOrEqual(0);
@@ -362,7 +368,11 @@ describe('publishWorkspace', () => {
       new Date('2026-03-10T01:00:00.000Z'),
     );
 
-    relinkRawArtifacts(config, snapshot.snapshotId, join(workspaceRoot, 'external-artifacts', snapshot.snapshotId, 'manifest.json'));
+    relinkRawArtifacts(
+      config,
+      snapshot.snapshotId,
+      join(workspaceRoot, 'external-artifacts', snapshot.snapshotId, 'manifest.json'),
+    );
 
     writeArchiveCatalog(config.paths.archiveRoot, {
       currentSnapshotId: snapshot.snapshotId,
@@ -454,7 +464,9 @@ describe('publishWorkspace', () => {
       now: new Date('2026-03-10T00:00:00.000Z'),
     });
     mkdirSync(join(config.paths.localRoot, 'crawl-queues'), { recursive: true });
-    const queue = new CrawlQueue(join(config.paths.localRoot, 'crawl-queues', 'publish-pending.sqlite'));
+    const queue = new CrawlQueue(
+      join(config.paths.localRoot, 'crawl-queues', 'publish-pending.sqlite'),
+    );
     queue.enqueueMany([
       {
         key: 'page:https://www.pbinfo.ro/',
@@ -583,17 +595,19 @@ describe('publishWorkspace', () => {
     expect(
       commands.some(
         (entry) =>
-          entry.command === 'gh'
-          && entry.args.join(' ').includes(
-            'repo edit Prekzursil/pbinfo-scrape --description Problem Archive Crawler - PBInfo archival operator console. --default-branch main',
-          ),
+          entry.command === 'gh' &&
+          entry.args
+            .join(' ')
+            .includes(
+              'repo edit Prekzursil/pbinfo-scrape --description Problem Archive Crawler - PBInfo archival operator console. --default-branch main',
+            ),
       ),
     ).toBe(true);
     expect(
       commands.some(
         (entry) =>
-          entry.command === 'git'
-          && entry.args.join(' ') === 'tag -a v0.1.0 -m Problem Archive Crawler 0.1.0',
+          entry.command === 'git' &&
+          entry.args.join(' ') === 'tag -a v0.1.0 -m Problem Archive Crawler 0.1.0',
       ),
     ).toBe(true);
     expect(
@@ -605,11 +619,11 @@ describe('publishWorkspace', () => {
     expect(
       commands.some(
         (entry) =>
-          entry.command === 'gh'
-          && entry.args[0] === 'release'
-          && entry.args[1] === 'create'
-          && entry.args.includes('v0.1.0')
-          && entry.args.some((value) => value.includes('Problem Archive Crawler 0.1.0.exe#')),
+          entry.command === 'gh' &&
+          entry.args[0] === 'release' &&
+          entry.args[1] === 'create' &&
+          entry.args.includes('v0.1.0') &&
+          entry.args.some((value) => value.includes('Problem Archive Crawler 0.1.0.exe#')),
       ),
     ).toBe(true);
   });

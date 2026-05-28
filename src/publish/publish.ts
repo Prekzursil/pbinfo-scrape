@@ -53,10 +53,7 @@ const SESSION_COOKIE_KEY = ['PHP', 'SESSID'].join('');
 const KNOWN_FORBIDDEN_PASSWORD = ['Pre', 'kzur', 'sil', '1234'].join('');
 const PASSWORD_ASSIGNMENT_PATTERN =
   /(?:^|[\s{,])"?(?:password|parola)"?\s*[:=]\s*"?([^\s",}\r\n]+)"?/gim;
-const SESSION_COOKIE_LITERAL_PATTERN = new RegExp(
-  `\\b${SESSION_COOKIE_KEY}=([^\\s;]+)`,
-  'i',
-);
+const SESSION_COOKIE_LITERAL_PATTERN = new RegExp(`\\b${SESSION_COOKIE_KEY}=([^\\s;]+)`, 'i');
 const SERIALIZED_SESSION_COOKIE_PATTERN = new RegExp(
   `"key"\\s*:\\s*"${SESSION_COOKIE_KEY}"[\\s\\S]{0,200}?"value"\\s*:\\s*"([^"]+)"`,
   'i',
@@ -82,9 +79,7 @@ const DEFAULT_REPO_TOPICS = [
   'typescript',
 ] as const;
 
-export function publishWorkspace(
-  options: PublishWorkspaceOptions,
-): PublishWorkspaceResult {
+export function publishWorkspace(options: PublishWorkspaceOptions): PublishWorkspaceResult {
   const runCommand = options.runCommand ?? run;
   const snapshotId = options.snapshotId;
   if (!snapshotId) {
@@ -180,7 +175,12 @@ export function publishWorkspace(
 
   runCommand(options.workspaceRoot, 'git', ['push', '-u', 'origin', 'main']);
 
-  configureRepositoryMetadata(options.workspaceRoot, repository, runCommand, packageMetadata.description);
+  configureRepositoryMetadata(
+    options.workspaceRoot,
+    repository,
+    runCommand,
+    packageMetadata.description,
+  );
 
   let releaseAssetPath: string | undefined;
   let tag: string | undefined;
@@ -215,15 +215,10 @@ export function publishWorkspace(
 }
 
 function resolveStageAllowlist(workspaceRoot: string): string[] {
-  return DEFAULT_STAGE_ALLOWLIST.filter((entry) =>
-    existsSync(join(workspaceRoot, entry)),
-  );
+  return DEFAULT_STAGE_ALLOWLIST.filter((entry) => existsSync(join(workspaceRoot, entry)));
 }
 
-function scanForPublishSecrets(
-  workspaceRoot: string,
-  stagedPaths: string[],
-): string[] {
+function scanForPublishSecrets(workspaceRoot: string, stagedPaths: string[]): string[] {
   const violations: string[] = [];
 
   for (const stagedPath of stagedPaths) {
@@ -298,14 +293,14 @@ function shouldScanStructuredSecrets(relativePath: string): boolean {
   }
 
   return (
-    relativePath === 'README.md'
-    || relativePath.endsWith('.json')
-    || relativePath.endsWith('.md')
-    || relativePath.endsWith('.yaml')
-    || relativePath.endsWith('.yml')
-    || relativePath.endsWith('.toml')
-    || relativePath.endsWith('.txt')
-    || relativePath.endsWith('.env')
+    relativePath === 'README.md' ||
+    relativePath.endsWith('.json') ||
+    relativePath.endsWith('.md') ||
+    relativePath.endsWith('.yaml') ||
+    relativePath.endsWith('.yml') ||
+    relativePath.endsWith('.toml') ||
+    relativePath.endsWith('.txt') ||
+    relativePath.endsWith('.env')
   );
 }
 
@@ -380,12 +375,14 @@ function enrichCommandError(error: unknown, command: string, args: string[]): Er
     stdout?: string | Buffer;
     stderr?: string | Buffer;
   };
-  const stdout = typeof errorWithStreams.stdout === 'string'
-    ? errorWithStreams.stdout
-    : errorWithStreams.stdout?.toString?.() ?? '';
-  const stderr = typeof errorWithStreams.stderr === 'string'
-    ? errorWithStreams.stderr
-    : errorWithStreams.stderr?.toString?.() ?? '';
+  const stdout =
+    typeof errorWithStreams.stdout === 'string'
+      ? errorWithStreams.stdout
+      : (errorWithStreams.stdout?.toString?.() ?? '');
+  const stderr =
+    typeof errorWithStreams.stderr === 'string'
+      ? errorWithStreams.stderr
+      : (errorWithStreams.stderr?.toString?.() ?? '');
   const details = [stderr.trim(), stdout.trim()].filter(Boolean).join('\n');
 
   if (!details) {
@@ -398,10 +395,7 @@ function enrichCommandError(error: unknown, command: string, args: string[]): Er
 
 function shouldRetryGitIndexLock(error: unknown): boolean {
   const message = error instanceof Error ? error.message : String(error);
-  return (
-    message.includes('.git/index.lock')
-    || message.includes('index.lock')
-  );
+  return message.includes('.git/index.lock') || message.includes('index.lock');
 }
 
 function sleepSync(milliseconds: number): void {
@@ -416,7 +410,8 @@ function readPackageMetadata(workspaceRoot: string): { version: string; descript
   };
 
   return {
-    version: typeof parsed.version === 'string' && parsed.version.length > 0 ? parsed.version : '0.0.0',
+    version:
+      typeof parsed.version === 'string' && parsed.version.length > 0 ? parsed.version : '0.0.0',
     description:
       typeof parsed.description === 'string' && parsed.description.length > 0
         ? parsed.description

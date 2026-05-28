@@ -60,8 +60,9 @@ export function App({ desktop }: AppProps) {
   const [archiveSummary, setArchiveSummary] = useState<GuiArchiveSummary | null>(null);
   const [archiveListing, setArchiveListing] = useState<GuiArchiveListing | null>(null);
   const [selectedArchiveRecordId, setSelectedArchiveRecordId] = useState<string | null>(null);
-  const [archiveRecordDetail, setArchiveRecordDetail] =
-    useState<GuiArchiveRecordDetail | null>(null);
+  const [archiveRecordDetail, setArchiveRecordDetail] = useState<GuiArchiveRecordDetail | null>(
+    null,
+  );
   const [verbosityMode, setVerbosityMode] = useState<GuiVerbosityMode>('normal');
   const [busyAction, setBusyAction] = useState<string | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
@@ -146,9 +147,7 @@ export function App({ desktop }: AppProps) {
       }
 
       const [nextCrawlStatus, nextJobEvents] = await Promise.all([
-        bridge
-          .getCrawlStatus(resolvedSnapshotId)
-          .catch(() => null as GuiCrawlStatus | null),
+        bridge.getCrawlStatus(resolvedSnapshotId).catch(() => null as GuiCrawlStatus | null),
         readPreferredJobEvents(bridge, nextJobs, verbosityMode, resolvedSnapshotId),
       ]);
 
@@ -197,13 +196,14 @@ export function App({ desktop }: AppProps) {
   }, [bridge, refresh, workspaceState]);
 
   useEffect(() => {
-    if (!bridge || !workspaceState) {
-      setArchiveSummary(null);
-      return;
-    }
-
     let cancelled = false;
     void (async () => {
+      if (!bridge || !workspaceState) {
+        if (!cancelled) {
+          setArchiveSummary(null);
+        }
+        return;
+      }
       try {
         const summary = await bridge.getArchiveExplorerSummary(selectedSnapshotId);
         if (!cancelled) {
@@ -223,13 +223,14 @@ export function App({ desktop }: AppProps) {
   }, [bridge, selectedSnapshotId, workspaceState]);
 
   useEffect(() => {
-    if (!bridge || !workspaceState) {
-      setCoverageSummary(null);
-      return;
-    }
-
     let cancelled = false;
     void (async () => {
+      if (!bridge || !workspaceState) {
+        if (!cancelled) {
+          setCoverageSummary(null);
+        }
+        return;
+      }
       try {
         const summary = await bridge.getCoverageSummary(selectedSnapshotId);
         if (!cancelled) {
@@ -249,14 +250,15 @@ export function App({ desktop }: AppProps) {
   }, [bridge, selectedSnapshotId, workspaceState]);
 
   useEffect(() => {
-    if (!bridge || !workspaceState) {
-      setCoverageListing(null);
-      setCoverageDetail(null);
-      return;
-    }
-
     let cancelled = false;
     void (async () => {
+      if (!bridge || !workspaceState) {
+        if (!cancelled) {
+          setCoverageListing(null);
+          setCoverageDetail(null);
+        }
+        return;
+      }
       try {
         const listing = await bridge.listCoverageRecords({
           snapshotId: selectedSnapshotId,
@@ -297,13 +299,14 @@ export function App({ desktop }: AppProps) {
   }, [bridge, coverageFilters, selectedSnapshotId, workspaceState]);
 
   useEffect(() => {
-    if (!bridge || !workspaceState || !selectedCoverageProblemId) {
-      setCoverageDetail(null);
-      return;
-    }
-
     let cancelled = false;
     void (async () => {
+      if (!bridge || !workspaceState || !selectedCoverageProblemId) {
+        if (!cancelled) {
+          setCoverageDetail(null);
+        }
+        return;
+      }
       try {
         const detail = await bridge.getCoverageRecord({
           snapshotId: selectedSnapshotId,
@@ -326,14 +329,15 @@ export function App({ desktop }: AppProps) {
   }, [bridge, selectedCoverageProblemId, selectedSnapshotId, workspaceState]);
 
   useEffect(() => {
-    if (!bridge || !workspaceState) {
-      setArchiveListing(null);
-      setArchiveRecordDetail(null);
-      return;
-    }
-
     let cancelled = false;
     void (async () => {
+      if (!bridge || !workspaceState) {
+        if (!cancelled) {
+          setArchiveListing(null);
+          setArchiveRecordDetail(null);
+        }
+        return;
+      }
       try {
         const listing = await bridge.listArchiveExplorerRecords({
           snapshotId: selectedSnapshotId,
@@ -366,13 +370,14 @@ export function App({ desktop }: AppProps) {
   }, [archiveQuery, bridge, selectedArchiveDataset, selectedSnapshotId, workspaceState]);
 
   useEffect(() => {
-    if (!bridge || !workspaceState || !selectedArchiveRecordId) {
-      setArchiveRecordDetail(null);
-      return;
-    }
-
     let cancelled = false;
     void (async () => {
+      if (!bridge || !workspaceState || !selectedArchiveRecordId) {
+        if (!cancelled) {
+          setArchiveRecordDetail(null);
+        }
+        return;
+      }
       try {
         const detail = await bridge.getArchiveExplorerRecord({
           snapshotId: selectedSnapshotId,
@@ -393,13 +398,7 @@ export function App({ desktop }: AppProps) {
     return () => {
       cancelled = true;
     };
-  }, [
-    bridge,
-    selectedArchiveDataset,
-    selectedArchiveRecordId,
-    selectedSnapshotId,
-    workspaceState,
-  ]);
+  }, [bridge, selectedArchiveDataset, selectedArchiveRecordId, selectedSnapshotId, workspaceState]);
 
   const activeCrawlJob = useMemo(
     () =>
@@ -418,8 +417,18 @@ export function App({ desktop }: AppProps) {
       activeCrawlJob.status === 'failed' ||
       activeCrawlJob.status === 'cancelled'
     ) {
-      setCrawlLoopJobId(null);
-      return undefined;
+      // The active crawl reached a terminal state, so the loop tracking id is
+      // cleared on a microtask rather than synchronously inside the effect body
+      // to avoid the cascading-render anti-pattern.
+      let cancelled = false;
+      queueMicrotask(() => {
+        if (!cancelled) {
+          setCrawlLoopJobId(null);
+        }
+      });
+      return () => {
+        cancelled = true;
+      };
     }
 
     if (
@@ -476,7 +485,9 @@ export function App({ desktop }: AppProps) {
     () =>
       [...jobs]
         .reverse()
-        .find((job) => job.kind === 'mirror-serve' && typeof job.detail?.mirrorPreviewUrl === 'string'),
+        .find(
+          (job) => job.kind === 'mirror-serve' && typeof job.detail?.mirrorPreviewUrl === 'string',
+        ),
     [jobs],
   );
   const previewUrl =
@@ -716,17 +727,12 @@ async function readPreferredJobEvents(
   verbosityMode: GuiVerbosityMode,
   snapshotId?: string,
 ): Promise<GuiJobEvent[]> {
-  const preferredJob = [...jobs]
-    .reverse()
-    .find(
-      (job) =>
-        job.kind === 'crawl' &&
-        (!snapshotId || job.snapshotId === snapshotId),
-    )
-    ?? [...jobs]
+  const preferredJob =
+    [...jobs]
       .reverse()
-      .find((job) => job.kind === 'crawl')
-    ?? [...jobs]
+      .find((job) => job.kind === 'crawl' && (!snapshotId || job.snapshotId === snapshotId)) ??
+    [...jobs].reverse().find((job) => job.kind === 'crawl') ??
+    [...jobs]
       .reverse()
       .find((job) => job.kind === 'snapshot-finalize' || job.kind === 'mirror-build');
   if (!preferredJob) {
@@ -744,9 +750,7 @@ async function readPreferredJobEvents(
           ? 40
           : 18;
 
-  return bridge
-    .listJobEvents(preferredJob.jobId, eventLimit)
-    .catch(() => []);
+  return bridge.listJobEvents(preferredJob.jobId, eventLimit).catch(() => []);
 }
 
 function findLatestSnapshotId(jobs: GuiJobRecord[]): string | undefined {

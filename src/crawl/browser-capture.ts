@@ -1,6 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs';
 
-import { chromium, type Browser, type BrowserContext } from 'playwright';
+import { chromium, type BrowserContext } from 'playwright';
 
 interface PersistedCookie {
   key?: string;
@@ -32,9 +32,11 @@ export async function createPlaywrightBrowserCapture(
         await page.goto(url, {
           waitUntil: 'domcontentloaded',
         });
-        await page.waitForLoadState('networkidle', {
-          timeout: 10_000,
-        }).catch(() => undefined);
+        await page
+          .waitForLoadState('networkidle', {
+            timeout: 10_000,
+          })
+          .catch(() => undefined);
         return await page.content();
       } finally {
         await page.close();
@@ -62,10 +64,7 @@ async function seedContextCookies(
       value: cookie.value!,
       domain: cookie.domain!,
       path: cookie.path ?? '/',
-      expires:
-        typeof cookie.expires === 'number'
-          ? cookie.expires
-          : undefined,
+      expires: typeof cookie.expires === 'number' ? cookie.expires : undefined,
       httpOnly: cookie.httpOnly ?? false,
       secure: cookie.secure ?? false,
       sameSite: normalizeSameSite(cookie.sameSite),

@@ -10,145 +10,172 @@ afterEach(() => {
   cleanup();
 });
 
-test('renders the simplified easy-mode overview before exposing deeper tools', { timeout: 15_000 }, async () => {
-  const harness = createBridgeHarness();
-  render(<App desktop={harness.bridge} />);
+test(
+  'renders the simplified easy-mode overview before exposing deeper tools',
+  { timeout: 15_000 },
+  async () => {
+    const harness = createBridgeHarness();
+    render(<App desktop={harness.bridge} />);
 
-  expect(await screen.findByRole('heading', { name: 'Problem Archive Crawler' })).toBeInTheDocument();
-  expect(await screen.findByText('PBInfo archival operator console')).toBeInTheDocument();
-  expect(await screen.findByRole('tab', { name: 'Overview' })).toHaveAttribute('aria-selected', 'true');
-  expect(await screen.findByRole('tab', { name: 'Coverage' })).toBeInTheDocument();
-  expect(await screen.findByRole('tab', { name: 'Data' })).toBeInTheDocument();
-  expect(await screen.findByRole('tab', { name: 'Setup' })).toBeInTheDocument();
-  expect(await screen.findByRole('heading', { name: 'Archive Overview' })).toBeInTheDocument();
-  expect(await screen.findByRole('heading', { name: 'Problem Status Board' })).toBeInTheDocument();
-  const boardToolbar = await screen.findByRole('toolbar', {
-    name: 'Problem status board filters',
-  });
-  expect(within(boardToolbar).getByRole('button', { name: 'Missing official source' })).toBeInTheDocument();
-  expect(within(boardToolbar).getByRole('button', { name: 'Missing your source' })).toBeInTheDocument();
-  expect(await screen.findByText('Upstream unavailable')).toBeInTheDocument();
-  expect(await screen.findByText(/12 official and 8 tests/i)).toBeInTheDocument();
-  expect(await screen.findByText('C:/archive-workspace')).toBeInTheDocument();
-  expect(await screen.findByText('Primary account')).toBeInTheDocument();
-  expect(await screen.findByText('42 pending')).toBeInTheDocument();
-  expect(await screen.findByText(/7m remaining/i)).toBeInTheDocument();
-  expect(await screen.findByText(/6.0 completed\/min/i)).toBeInTheDocument();
-  expect(await screen.findByLabelText('Crawl mode')).toHaveValue('incremental');
-  expect(await screen.findByRole('button', { name: /Start full crawl/i })).toBeInTheDocument();
-  expect(await screen.findByRole('button', { name: 'Open in browser' })).toBeInTheDocument();
-  expect(await screen.findByRole('button', { name: 'Show embedded preview' })).toBeInTheDocument();
-  expect(screen.queryByTitle('Mirror preview')).not.toBeInTheDocument();
-  expect(screen.queryByRole('heading', { name: 'Coverage Explorer' })).not.toBeInTheDocument();
-  expect(screen.queryByRole('heading', { name: 'Data Explorer' })).not.toBeInTheDocument();
-  expect(screen.queryByRole('heading', { name: 'Profiles & Access' })).not.toBeInTheDocument();
-  expect(await screen.findByText(/publish --snapshot acceptance-20260310b/)).toBeInTheDocument();
-});
+    expect(
+      await screen.findByRole('heading', { name: 'Problem Archive Crawler' }),
+    ).toBeInTheDocument();
+    expect(await screen.findByText('PBInfo archival operator console')).toBeInTheDocument();
+    expect(await screen.findByRole('tab', { name: 'Overview' })).toHaveAttribute(
+      'aria-selected',
+      'true',
+    );
+    expect(await screen.findByRole('tab', { name: 'Coverage' })).toBeInTheDocument();
+    expect(await screen.findByRole('tab', { name: 'Data' })).toBeInTheDocument();
+    expect(await screen.findByRole('tab', { name: 'Setup' })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: 'Archive Overview' })).toBeInTheDocument();
+    expect(
+      await screen.findByRole('heading', { name: 'Problem Status Board' }),
+    ).toBeInTheDocument();
+    const boardToolbar = await screen.findByRole('toolbar', {
+      name: 'Problem status board filters',
+    });
+    expect(
+      within(boardToolbar).getByRole('button', { name: 'Missing official source' }),
+    ).toBeInTheDocument();
+    expect(
+      within(boardToolbar).getByRole('button', { name: 'Missing your source' }),
+    ).toBeInTheDocument();
+    expect(await screen.findByText('Upstream unavailable')).toBeInTheDocument();
+    expect(await screen.findByText(/12 official and 8 tests/i)).toBeInTheDocument();
+    expect(await screen.findByText('C:/archive-workspace')).toBeInTheDocument();
+    expect(await screen.findByText('Primary account')).toBeInTheDocument();
+    expect(await screen.findByText('42 pending')).toBeInTheDocument();
+    expect(await screen.findByText(/7m remaining/i)).toBeInTheDocument();
+    expect(await screen.findByText(/6.0 completed\/min/i)).toBeInTheDocument();
+    expect(await screen.findByLabelText('Crawl mode')).toHaveValue('incremental');
+    expect(await screen.findByRole('button', { name: /Start full crawl/i })).toBeInTheDocument();
+    expect(await screen.findByRole('button', { name: 'Open in browser' })).toBeInTheDocument();
+    expect(
+      await screen.findByRole('button', { name: 'Show embedded preview' }),
+    ).toBeInTheDocument();
+    expect(screen.queryByTitle('Mirror preview')).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Coverage Explorer' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Data Explorer' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Profiles & Access' })).not.toBeInTheDocument();
+    expect(await screen.findByText(/publish --snapshot acceptance-20260310b/)).toBeInTheDocument();
+  },
+);
 
-test('lets the user move through overview, coverage, data, and setup without overload', { timeout: 15_000 }, async () => {
-  const harness = createBridgeHarness();
-  render(<App desktop={harness.bridge} />);
+test(
+  'lets the user move through overview, coverage, data, and setup without overload',
+  { timeout: 15_000 },
+  async () => {
+    const harness = createBridgeHarness();
+    render(<App desktop={harness.bridge} />);
 
-  const crawlModeSelect = await screen.findByLabelText('Crawl mode');
-  fireEvent.click(await screen.findByRole('button', { name: /Start full crawl/i }));
-  expect(await screen.findByText('Started all crawl')).toBeInTheDocument();
-  fireEvent.change(crawlModeSelect, {
-    target: {
-      value: 'fresh',
-    },
-  });
-  expect(crawlModeSelect).toHaveValue('fresh');
-  fireEvent.click(await screen.findByRole('button', { name: /Start public crawl/i }));
-  expect(await screen.findByText('Started public crawl')).toBeInTheDocument();
+    const crawlModeSelect = await screen.findByLabelText('Crawl mode');
+    fireEvent.click(await screen.findByRole('button', { name: /Start full crawl/i }));
+    expect(await screen.findByText('Started all crawl')).toBeInTheDocument();
+    fireEvent.change(crawlModeSelect, {
+      target: {
+        value: 'fresh',
+      },
+    });
+    expect(crawlModeSelect).toHaveValue('fresh');
+    fireEvent.click(await screen.findByRole('button', { name: /Start public crawl/i }));
+    expect(await screen.findByText('Started public crawl')).toBeInTheDocument();
 
-  const boardToolbar = await screen.findByRole('toolbar', {
-    name: 'Problem status board filters',
-  });
-  fireEvent.click(within(boardToolbar).getByRole('button', { name: 'Missing your source' }));
-  expect(await screen.findByText('Your source missing')).toBeInTheDocument();
-  fireEvent.click(await screen.findByRole('button', { name: 'Open mirror' }));
-  expect(harness.openExternal).toHaveBeenCalledWith(
-    'http://127.0.0.1:43111/probleme/3716/crossword',
-  );
-  fireEvent.click(await screen.findByRole('button', { name: 'Open coverage detail' }));
-  expect(await screen.findByRole('heading', { name: 'Coverage Explorer' })).toBeInTheDocument();
+    const boardToolbar = await screen.findByRole('toolbar', {
+      name: 'Problem status board filters',
+    });
+    fireEvent.click(within(boardToolbar).getByRole('button', { name: 'Missing your source' }));
+    expect(await screen.findByText('Your source missing')).toBeInTheDocument();
+    fireEvent.click(await screen.findByRole('button', { name: 'Open mirror' }));
+    expect(harness.openExternal).toHaveBeenCalledWith(
+      'http://127.0.0.1:43111/probleme/3716/crossword',
+    );
+    fireEvent.click(await screen.findByRole('button', { name: 'Open coverage detail' }));
+    expect(await screen.findByRole('heading', { name: 'Coverage Explorer' })).toBeInTheDocument();
 
-  fireEvent.click(await screen.findByRole('tab', { name: 'Overview' }));
-  const refreshedBoardToolbar = await screen.findByRole('toolbar', {
-    name: 'Problem status board filters',
-  });
-  fireEvent.click(within(refreshedBoardToolbar).getByRole('button', { name: 'Missing tests' }));
-  expect(await screen.findByText('Tests not captured yet')).toBeInTheDocument();
+    fireEvent.click(await screen.findByRole('tab', { name: 'Overview' }));
+    const refreshedBoardToolbar = await screen.findByRole('toolbar', {
+      name: 'Problem status board filters',
+    });
+    fireEvent.click(within(refreshedBoardToolbar).getByRole('button', { name: 'Missing tests' }));
+    expect(await screen.findByText('Tests not captured yet')).toBeInTheDocument();
 
-  fireEvent.click(await screen.findByRole('button', { name: 'Show embedded preview' }));
-  expect(await screen.findByTitle('Mirror preview')).toBeInTheDocument();
+    fireEvent.click(await screen.findByRole('button', { name: 'Show embedded preview' }));
+    expect(await screen.findByTitle('Mirror preview')).toBeInTheDocument();
 
-  fireEvent.click(await screen.findByRole('tab', { name: 'Coverage' }));
-  const coverageHeading = await screen.findByRole('heading', { name: 'Coverage Explorer' });
-  const coverageWorkspace = coverageHeading.closest('section');
-  expect(coverageWorkspace).toHaveClass('panel-workspace');
-  expect(
-    within(coverageWorkspace as HTMLElement).getByRole('toolbar', { name: 'Coverage filters' }),
-  ).toBeInTheDocument();
-  expect(within(coverageWorkspace as HTMLElement).getByLabelText('Tests status')).toBeInTheDocument();
-  expect(within(coverageWorkspace as HTMLElement).getByLabelText('Archive state')).toBeInTheDocument();
-  fireEvent.change(await screen.findByLabelText('Tests status'), {
-    target: {
-      value: 'all',
-    },
-  });
-  const coverageSearchInput = await screen.findByLabelText('Search problems');
-  fireEvent.change(coverageSearchInput, {
-    target: {
-      value: 'crossword',
-    },
-  });
-  expect((await screen.findAllByText(/Crossword/i)).length).toBeGreaterThanOrEqual(1);
-  expect(await screen.findByText('Required solved languages')).toBeInTheDocument();
-  expect(await screen.findByText('Official source not captured yet')).toBeInTheDocument();
-  const solvedSelect = await screen.findByLabelText('Solved');
-  fireEvent.change(solvedSelect, {
-    target: {
-      value: 'solved',
-    },
-  });
-  expect((await screen.findAllByText('Solved')).length).toBeGreaterThanOrEqual(1);
-  fireEvent.click(await screen.findByRole('button', { name: 'Open coverage record' }));
-  expect(harness.openPath).toHaveBeenCalledWith(
-    'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problem-coverage/problem-3716.json',
-  );
-  fireEvent.click(await screen.findByRole('button', { name: 'Open source list upstream' }));
-  expect(harness.openExternal).toHaveBeenCalledWith(
-    'https://www.pbinfo.ro/solutii/problema/3716/crossword',
-  );
+    fireEvent.click(await screen.findByRole('tab', { name: 'Coverage' }));
+    const coverageHeading = await screen.findByRole('heading', { name: 'Coverage Explorer' });
+    const coverageWorkspace = coverageHeading.closest('section');
+    expect(coverageWorkspace).toHaveClass('panel-workspace');
+    expect(
+      within(coverageWorkspace as HTMLElement).getByRole('toolbar', { name: 'Coverage filters' }),
+    ).toBeInTheDocument();
+    expect(
+      within(coverageWorkspace as HTMLElement).getByLabelText('Tests status'),
+    ).toBeInTheDocument();
+    expect(
+      within(coverageWorkspace as HTMLElement).getByLabelText('Archive state'),
+    ).toBeInTheDocument();
+    fireEvent.change(await screen.findByLabelText('Tests status'), {
+      target: {
+        value: 'all',
+      },
+    });
+    const coverageSearchInput = await screen.findByLabelText('Search problems');
+    fireEvent.change(coverageSearchInput, {
+      target: {
+        value: 'crossword',
+      },
+    });
+    expect((await screen.findAllByText(/Crossword/i)).length).toBeGreaterThanOrEqual(1);
+    expect(await screen.findByText('Required solved languages')).toBeInTheDocument();
+    expect(await screen.findByText('Official source not captured yet')).toBeInTheDocument();
+    const solvedSelect = await screen.findByLabelText('Solved');
+    fireEvent.change(solvedSelect, {
+      target: {
+        value: 'solved',
+      },
+    });
+    expect((await screen.findAllByText('Solved')).length).toBeGreaterThanOrEqual(1);
+    fireEvent.click(await screen.findByRole('button', { name: 'Open coverage record' }));
+    expect(harness.openPath).toHaveBeenCalledWith(
+      'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problem-coverage/problem-3716.json',
+    );
+    fireEvent.click(await screen.findByRole('button', { name: 'Open source list upstream' }));
+    expect(harness.openExternal).toHaveBeenCalledWith(
+      'https://www.pbinfo.ro/solutii/problema/3716/crossword',
+    );
 
-  fireEvent.click(await screen.findByRole('tab', { name: 'Data' }));
-  const dataHeading = await screen.findByRole('heading', { name: 'Data Explorer' });
-  const dataWorkspace = dataHeading.closest('section');
-  expect(dataWorkspace).toHaveClass('panel-workspace');
-  expect(
-    within(dataWorkspace as HTMLElement).getByRole('toolbar', {
-      name: 'Archive dataset browser',
-    }),
-  ).toBeInTheDocument();
-  const datasetSearchInput = await screen.findByLabelText('Search current dataset');
-  fireEvent.change(datasetSearchInput, {
-    target: {
-      value: 'waterreserve',
-    },
-  });
-  expect((await screen.findAllByText('/probleme/3171/problem-3171')).length).toBeGreaterThanOrEqual(1);
-  fireEvent.click(await screen.findByRole('button', { name: 'Open normalized archive folder' }));
-  expect(harness.openPath).toHaveBeenCalledWith(
-    'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized',
-  );
+    fireEvent.click(await screen.findByRole('tab', { name: 'Data' }));
+    const dataHeading = await screen.findByRole('heading', { name: 'Data Explorer' });
+    const dataWorkspace = dataHeading.closest('section');
+    expect(dataWorkspace).toHaveClass('panel-workspace');
+    expect(
+      within(dataWorkspace as HTMLElement).getByRole('toolbar', {
+        name: 'Archive dataset browser',
+      }),
+    ).toBeInTheDocument();
+    const datasetSearchInput = await screen.findByLabelText('Search current dataset');
+    fireEvent.change(datasetSearchInput, {
+      target: {
+        value: 'waterreserve',
+      },
+    });
+    expect(
+      (await screen.findAllByText('/probleme/3171/problem-3171')).length,
+    ).toBeGreaterThanOrEqual(1);
+    fireEvent.click(await screen.findByRole('button', { name: 'Open normalized archive folder' }));
+    expect(harness.openPath).toHaveBeenCalledWith(
+      'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized',
+    );
 
-  fireEvent.click(await screen.findByRole('tab', { name: 'Setup' }));
-  expect(await screen.findByRole('heading', { name: 'Profiles & Access' })).toBeInTheDocument();
-  expect(await screen.findByRole('button', { name: 'Advanced Settings' })).toBeInTheDocument();
-  fireEvent.click(await screen.findByRole('button', { name: 'Advanced Settings' }));
-  expect(await screen.findByRole('heading', { name: 'Advanced Settings' })).toBeInTheDocument();
-});
+    fireEvent.click(await screen.findByRole('tab', { name: 'Setup' }));
+    expect(await screen.findByRole('heading', { name: 'Profiles & Access' })).toBeInTheDocument();
+    expect(await screen.findByRole('button', { name: 'Advanced Settings' })).toBeInTheDocument();
+    fireEvent.click(await screen.findByRole('button', { name: 'Advanced Settings' }));
+    expect(await screen.findByRole('heading', { name: 'Advanced Settings' })).toBeInTheDocument();
+  },
+);
 
 function createBridgeHarness(): {
   bridge: DesktopBridge;
@@ -456,36 +483,46 @@ function createBridgeHarness(): {
           dataset: 'problems' as const,
           label: 'Problems',
           count: 1,
-          directoryPath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problems',
-          description: 'Structured PBInfo problem records with sections, examples, constraints, and official-source metadata.',
+          directoryPath:
+            'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problems',
+          description:
+            'Structured PBInfo problem records with sections, examples, constraints, and official-source metadata.',
         },
         {
           dataset: 'evaluations' as const,
           label: 'Evaluations',
           count: 0,
-          directoryPath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/evaluations',
-          description: 'Submission and evaluation records with score, verdict, tests, and compile logs when archived.',
+          directoryPath:
+            'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/evaluations',
+          description:
+            'Submission and evaluation records with score, verdict, tests, and compile logs when archived.',
         },
         {
           dataset: 'tests' as const,
           label: 'Tests',
           count: 1,
-          directoryPath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/tests',
-          description: 'Unified per-problem test dataset combining statement examples, visible tests, and evaluation-observed tests.',
+          directoryPath:
+            'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/tests',
+          description:
+            'Unified per-problem test dataset combining statement examples, visible tests, and evaluation-observed tests.',
         },
         {
           dataset: 'rankings' as const,
           label: 'Rankings',
           count: 1,
-          directoryPath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/rankings',
-          description: 'Canonical best-user and best-official language rankings derived from normalized evaluation sources.',
+          directoryPath:
+            'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/rankings',
+          description:
+            'Canonical best-user and best-official language rankings derived from normalized evaluation sources.',
         },
         {
           dataset: 'mirror-routes' as const,
           label: 'Mirror Routes',
           count: 1,
-          directoryPath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/routes',
-          description: 'Route records that drive local mirror replay and link archived entities back into the offline viewer.',
+          directoryPath:
+            'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/routes',
+          description:
+            'Route records that drive local mirror replay and link archived entities back into the offline viewer.',
         },
       ],
     })),
@@ -505,7 +542,8 @@ function createBridgeHarness(): {
                 title: '#3171 waterreserve',
                 subtitle: '/probleme/3171/problem-3171',
                 description: '1 ≤ n ≤ 1.000.000',
-                filePath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problems/problem-3171.json',
+                filePath:
+                  'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problems/problem-3171.json',
                 mirrorRoute: '/probleme/3171/problem-3171',
               },
             ],
@@ -524,7 +562,8 @@ function createBridgeHarness(): {
                 title: 'Problem #3716',
                 subtitle: 'Best user languages: c, cpp, py3',
                 description: 'Best user overall evaluation: 63332367',
-                filePath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/rankings/best-submissions.json',
+                filePath:
+                  'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/rankings/best-submissions.json',
               },
             ],
           };
@@ -545,7 +584,8 @@ function createBridgeHarness(): {
       recordId: '3171',
       title: '#3171 waterreserve',
       subtitle: '/probleme/3171/problem-3171',
-      filePath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problems/problem-3171.json',
+      filePath:
+        'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problems/problem-3171.json',
       mirrorRoute: '/probleme/3171/problem-3171',
       payload: {
         id: 3171,
@@ -554,7 +594,8 @@ function createBridgeHarness(): {
     })),
     getCoverageSummary: vi.fn(async () => ({
       snapshotId: 'acceptance-20260310b',
-      coverageRoot: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problem-coverage',
+      coverageRoot:
+        'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problem-coverage',
       normalizedRoot: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized',
       mirrorRoot: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/mirror',
       mirrorServeCommand: 'npm run cli -- serve --snapshot acceptance-20260310b --port 4173',
@@ -593,21 +634,22 @@ function createBridgeHarness(): {
           return false;
         }
         if (
-          input.archiveCompletenessStatus
-          && input.archiveCompletenessStatus !== 'all'
-          && record.archiveCompletenessStatus !== input.archiveCompletenessStatus
+          input.archiveCompletenessStatus &&
+          input.archiveCompletenessStatus !== 'all' &&
+          record.archiveCompletenessStatus !== input.archiveCompletenessStatus
         ) {
           return false;
         }
         if (
-          input.testsCoverageStatus
-          && input.testsCoverageStatus !== 'all'
-          && record.testsCoverageStatus !== input.testsCoverageStatus
+          input.testsCoverageStatus &&
+          input.testsCoverageStatus !== 'all' &&
+          record.testsCoverageStatus !== input.testsCoverageStatus
         ) {
           return false;
         }
         if (input.query) {
-          const haystack = `${record.problemId} ${record.slug} ${record.name} ${record.tags.join(' ')}`.toLowerCase();
+          const haystack =
+            `${record.problemId} ${record.slug} ${record.name} ${record.tags.join(' ')}`.toLowerCase();
           if (!haystack.includes(input.query.toLowerCase())) {
             return false;
           }
@@ -624,7 +666,8 @@ function createBridgeHarness(): {
     }),
     getCoverageRecord: vi.fn(async () => ({
       snapshotId: 'acceptance-20260310b',
-      coverageFilePath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problem-coverage/problem-3716.json',
+      coverageFilePath:
+        'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problem-coverage/problem-3716.json',
       record: {
         problemId: 3716,
         slug: 'crossword',
@@ -675,9 +718,12 @@ function createBridgeHarness(): {
         bestUserOverallEvaluationId: 63332367,
       },
       rawRecordLinks: {
-        coverageFilePath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problem-coverage/problem-3716.json',
-        problemFilePath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problems/problem-3716.json',
-        rankingFilePath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/rankings/problems/problem-3716.json',
+        coverageFilePath:
+          'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problem-coverage/problem-3716.json',
+        problemFilePath:
+          'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problems/problem-3716.json',
+        rankingFilePath:
+          'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/rankings/problems/problem-3716.json',
         evaluationFilePaths: [
           'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/evaluations/evaluation-63332367.json',
         ],
@@ -825,7 +871,8 @@ function createBridgeHarness(): {
                 sample: 'raw-only',
               },
             },
-          ]),
+          ],
+    ),
     startJob,
     pauseJob: vi.fn(async () => buildJob('crawl', 'paused')),
     resumeJob: vi.fn(async () => buildJob('crawl', 'paused')),

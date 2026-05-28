@@ -49,8 +49,15 @@ describe('raw artifact export/import', () => {
       snapshotId: 'snapshot-2026-03-10',
     });
 
-    expect(readFileSync(join(exported.targetRoot, 'raw-pages', 'page-https-www-pbinfo-ro-root.html'), 'utf8')).toContain('root');
-    expect(JSON.parse(readFileSync(join(exported.targetRoot, 'manifest.json'), 'utf8'))).toMatchObject({
+    expect(
+      readFileSync(
+        join(exported.targetRoot, 'raw-pages', 'page-https-www-pbinfo-ro-root.html'),
+        'utf8',
+      ),
+    ).toContain('root');
+    expect(
+      JSON.parse(readFileSync(join(exported.targetRoot, 'manifest.json'), 'utf8')),
+    ).toMatchObject({
       snapshotId: 'snapshot-2026-03-10',
     });
 
@@ -63,8 +70,15 @@ describe('raw artifact export/import', () => {
       sourcePath: exported.manifestPath,
     });
 
-    expect(imported.snapshotRoot).toBe(join(workspaceRoot, 'output', 'artifacts', 'snapshot-2026-03-10'));
-    expect(readFileSync(join(snapshot.rawAssetsRoot, 'asset-https-www-pbinfo-ro-static-site-css.css'), 'utf8')).toContain('color: red');
+    expect(imported.snapshotRoot).toBe(
+      join(workspaceRoot, 'output', 'artifacts', 'snapshot-2026-03-10'),
+    );
+    expect(
+      readFileSync(
+        join(snapshot.rawAssetsRoot, 'asset-https-www-pbinfo-ro-static-site-css.css'),
+        'utf8',
+      ),
+    ).toContain('color: red');
   });
 
   test('relinks a snapshot to external raw artifacts without copying into output/artifacts', async () => {
@@ -109,7 +123,9 @@ describe('raw artifact export/import', () => {
     });
 
     expect(relinked.snapshotId).toBe(snapshot.snapshotId);
-    expect(relinked.rawPagesPath).toContain(join('external-artifacts', snapshot.snapshotId, 'raw-pages'));
+    expect(relinked.rawPagesPath).toContain(
+      join('external-artifacts', snapshot.snapshotId, 'raw-pages'),
+    );
     expect(existsSync(join(config.paths.localRoot, 'artifact-relinks.json'))).toBe(true);
   });
 });

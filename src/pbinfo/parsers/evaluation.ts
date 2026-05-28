@@ -48,8 +48,12 @@ export function parseEvaluationPage(html: string, evaluationId: number): ParsedE
     language: summaryMap.get('limbaj') ?? inferLanguageFromFilename(fileName) ?? 'unknown',
     score: parseNumber(summaryMap.get('punctaj') ?? summaryMap.get('scor/rezultat') ?? '') ?? 0,
     verdictSummary: summaryMap.get('verdict') ?? summaryMap.get('scor/rezultat') ?? '',
-    runtimeSeconds: parseSeconds(summaryMap.get('timp maxim') ?? summaryMap.get('limita timp') ?? ''),
-    memoryKb: parseFirstNumber(summaryMap.get('memorie maxima') ?? summaryMap.get('limita memorie') ?? ''),
+    runtimeSeconds: parseSeconds(
+      summaryMap.get('timp maxim') ?? summaryMap.get('limita timp') ?? '',
+    ),
+    memoryKb: parseFirstNumber(
+      summaryMap.get('memorie maxima') ?? summaryMap.get('limita memorie') ?? '',
+    ),
     sourceAvailable: Boolean(sourceCode),
     sourceCode: sourceCode || undefined,
     tests,
@@ -81,7 +85,9 @@ function resolveSubmissionOwner(
     return fromSummary;
   }
 
-  const profileLink = $('#detalii a[href^="/profil/"], #rezumat a[href^="/profil/"], a[href^="/profil/"]').first();
+  const profileLink = $(
+    '#detalii a[href^="/profil/"], #rezumat a[href^="/profil/"], a[href^="/profil/"]',
+  ).first();
   const fromProfile = normalizeWhitespace(profileLink.text());
   if (fromProfile) {
     return fromProfile;
@@ -136,9 +142,7 @@ function extractTests($: ReturnType<typeof loadHtml>): EvaluationTestResult[] {
   }
 
   const headerCells = targetTable.find('tr').first().find('th');
-  const headers = headerCells
-    .toArray()
-    .map((cell) => normalizeLabel($(cell).text()));
+  const headers = headerCells.toArray().map((cell) => normalizeLabel($(cell).text()));
   const timeIndex = headers.findIndex((header) => header.includes('timp'));
   const verdictIndex = headers.findIndex(
     (header) => header.includes('mesaj evaluare') || header === 'verdict',
@@ -154,34 +158,35 @@ function extractTests($: ReturnType<typeof loadHtml>): EvaluationTestResult[] {
   const detailsIndex = headers.findIndex((header) => header.includes('detalii'));
 
   const tests: EvaluationTestResult[] = [];
-  targetTable.find('tr').slice(1).each((_, row) => {
-    const cells = $(row).children('td');
-    if (cells.length === 0) {
-      return;
-    }
+  targetTable
+    .find('tr')
+    .slice(1)
+    .each((_, row) => {
+      const cells = $(row).children('td');
+      if (cells.length === 0) {
+        return;
+      }
 
-    const index = parseNumber($(cells[0]).text());
-    if (index === undefined) {
-      return;
-    }
+      const index = parseNumber($(cells[0]).text());
+      if (index === undefined) {
+        return;
+      }
 
-    const resolvedDetailsIndex =
-      detailsIndex >= 0 ? detailsIndex : cells.length > 5 ? cells.length - 1 : -1;
+      const resolvedDetailsIndex =
+        detailsIndex >= 0 ? detailsIndex : cells.length > 5 ? cells.length - 1 : -1;
 
-    tests.push({
-      index,
-      runtimeSeconds:
-        timeIndex >= 0 ? parseSeconds($(cells[timeIndex]).text()) : undefined,
-      verdict:
-        verdictIndex >= 0 ? normalizeWhitespace($(cells[verdictIndex]).text()) : '',
-      score: scoreIndex >= 0 ? parseNumber($(cells[scoreIndex]).text()) ?? 0 : 0,
-      maxScore: maxScoreIndex >= 0 ? parseNumber($(cells[maxScoreIndex]).text()) ?? 0 : 0,
-      details:
-        resolvedDetailsIndex >= 0
-          ? normalizeWhitespace($(cells[resolvedDetailsIndex]).text())
-          : '',
+      tests.push({
+        index,
+        runtimeSeconds: timeIndex >= 0 ? parseSeconds($(cells[timeIndex]).text()) : undefined,
+        verdict: verdictIndex >= 0 ? normalizeWhitespace($(cells[verdictIndex]).text()) : '',
+        score: scoreIndex >= 0 ? (parseNumber($(cells[scoreIndex]).text()) ?? 0) : 0,
+        maxScore: maxScoreIndex >= 0 ? (parseNumber($(cells[maxScoreIndex]).text()) ?? 0) : 0,
+        details:
+          resolvedDetailsIndex >= 0
+            ? normalizeWhitespace($(cells[resolvedDetailsIndex]).text())
+            : '',
+      });
     });
-  });
 
   return tests;
 }
@@ -199,7 +204,9 @@ function extractSourceCode($: ReturnType<typeof loadHtml>): string | undefined {
     return value || undefined;
   }
 
-  const pre = $('pre[data-source], pre.source-code, pre.code-source, pre[class^="code_"], pre[class*=" code_"]').first();
+  const pre = $(
+    'pre[data-source], pre.source-code, pre.code-source, pre[class^="code_"], pre[class*=" code_"]',
+  ).first();
   if (pre.length > 0) {
     const value = pre.text().trim();
     return value || undefined;
@@ -209,7 +216,9 @@ function extractSourceCode($: ReturnType<typeof loadHtml>): string | undefined {
 }
 
 function extractCompileLog($: ReturnType<typeof loadHtml>): string | undefined {
-  const compileNode = $('#compilare pre, #evaluare pre, .compile-log pre, .compilation-log pre').first();
+  const compileNode = $(
+    '#compilare pre, #evaluare pre, .compile-log pre, .compilation-log pre',
+  ).first();
   if (compileNode.length === 0) {
     return undefined;
   }

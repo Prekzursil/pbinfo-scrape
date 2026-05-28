@@ -8,23 +8,25 @@ const repoRoot = resolve(__dirname, '..', '..');
 describe('desktop branding assets', () => {
   test('ships generated local logo and icon assets for the desktop app', () => {
     expect(
-      existsSync(join(repoRoot, 'src', 'gui', 'renderer', 'assets', 'problem-archive-crawler-logo.svg')),
+      existsSync(
+        join(repoRoot, 'src', 'gui', 'renderer', 'assets', 'problem-archive-crawler-logo.svg'),
+      ),
     ).toBe(true);
     expect(
-      existsSync(join(repoRoot, 'src', 'gui', 'renderer', 'assets', 'problem-archive-crawler-mark.svg')),
+      existsSync(
+        join(repoRoot, 'src', 'gui', 'renderer', 'assets', 'problem-archive-crawler-mark.svg'),
+      ),
     ).toBe(true);
-    expect(
-      existsSync(join(repoRoot, 'assets', 'desktop', 'problem-archive-crawler.ico')),
-    ).toBe(true);
+    expect(existsSync(join(repoRoot, 'assets', 'desktop', 'problem-archive-crawler.ico'))).toBe(
+      true,
+    );
     expect(
       existsSync(join(repoRoot, 'assets', 'desktop', 'problem-archive-crawler-notification.png')),
     ).toBe(true);
   });
 
   test('points packaging at the Problem Archive Crawler brand assets', () => {
-    const builder = JSON.parse(
-      readFileSync(join(repoRoot, 'electron-builder.json'), 'utf8'),
-    ) as {
+    const builder = JSON.parse(readFileSync(join(repoRoot, 'electron-builder.json'), 'utf8')) as {
       productName?: string;
       appId?: string;
       asar?: boolean;
@@ -33,9 +35,7 @@ describe('desktop branding assets', () => {
       };
       extraResources?: Array<{ from?: string }>;
     };
-    const packageJson = JSON.parse(
-      readFileSync(join(repoRoot, 'package.json'), 'utf8'),
-    ) as {
+    const packageJson = JSON.parse(readFileSync(join(repoRoot, 'package.json'), 'utf8')) as {
       scripts?: Record<string, string>;
     };
 
@@ -63,17 +63,16 @@ describe('desktop branding assets', () => {
       join(repoRoot, 'src', 'gui', 'renderer', 'index.html'),
       'utf8',
     );
-    const styles = readFileSync(
-      join(repoRoot, 'src', 'gui', 'renderer', 'styles.css'),
-      'utf8',
-    );
+    const styles = readFileSync(join(repoRoot, 'src', 'gui', 'renderer', 'styles.css'), 'utf8');
 
-    expect(rendererEntry).toContain("@fontsource/sora");
-    expect(rendererEntry).toContain("@fontsource/manrope");
-    expect(rendererEntry).toContain("@fontsource/ibm-plex-mono");
-    expect(rendererHtml).toContain("<title>Problem Archive Crawler</title>");
-    expect(styles).toContain('"Sora"');
-    expect(styles).toContain('"Manrope"');
-    expect(styles).toContain('"IBM Plex Mono"');
+    expect(rendererEntry).toContain('@fontsource/sora');
+    expect(rendererEntry).toContain('@fontsource/manrope');
+    expect(rendererEntry).toContain('@fontsource/ibm-plex-mono');
+    expect(rendererHtml).toContain('<title>Problem Archive Crawler</title>');
+    // Assert the branded fonts are referenced in font-family stacks without
+    // depending on the (formatter-controlled) quoting of the font names.
+    expect(styles).toMatch(/font-family:[^;]*\bSora\b/);
+    expect(styles).toMatch(/font-family:[^;]*\bManrope\b/);
+    expect(styles).toMatch(/font-family:[^;]*IBM Plex Mono/);
   });
 });

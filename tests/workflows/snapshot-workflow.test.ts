@@ -1,16 +1,17 @@
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
 import { afterEach, describe, expect, test } from 'vitest';
 
-import { exportRawArtifacts, prepareSnapshot, readArchiveCatalog } from '../../src/archive/storage.js';
+import {
+  exportRawArtifacts,
+  prepareSnapshot,
+  readArchiveCatalog,
+} from '../../src/archive/storage.js';
 import { loadLocalConfig } from '../../src/config/local-config.js';
 import { CrawlQueue } from '../../src/crawl/crawl-queue.js';
-import {
-  finalizeSnapshotWorkflow,
-  getCrawlStatus,
-} from '../../src/workflows/snapshot-workflow.js';
+import { finalizeSnapshotWorkflow, getCrawlStatus } from '../../src/workflows/snapshot-workflow.js';
 
 const tempDirs: string[] = [];
 
@@ -32,7 +33,9 @@ describe('snapshot workflow', () => {
       now: new Date('2026-03-10T00:00:00.000Z'),
     });
     mkdirSync(join(config.paths.localRoot, 'crawl-queues'), { recursive: true });
-    const queue = new CrawlQueue(join(config.paths.localRoot, 'crawl-queues', 'status-snapshot.sqlite'));
+    const queue = new CrawlQueue(
+      join(config.paths.localRoot, 'crawl-queues', 'status-snapshot.sqlite'),
+    );
     queue.enqueueMany([
       {
         key: 'page:https://www.pbinfo.ro/problem',
@@ -92,7 +95,12 @@ describe('snapshot workflow', () => {
       }),
       'utf8',
     );
-    exportRawArtifacts(config, stale, config.artifacts.exportRoot, new Date('2026-03-09T01:00:00.000Z'));
+    exportRawArtifacts(
+      config,
+      stale,
+      config.artifacts.exportRoot,
+      new Date('2026-03-09T01:00:00.000Z'),
+    );
     mkdirSync(join(canonical.normalizedRoot, 'pages'), { recursive: true });
     writeFileSync(
       join(canonical.normalizedRoot, 'pages', 'root.json'),
@@ -120,7 +128,11 @@ describe('snapshot workflow', () => {
       'utf8',
     );
     mkdirSync(join(config.paths.localRoot, 'crawl-queues'), { recursive: true });
-    writeFileSync(join(config.paths.localRoot, 'crawl-queues', 'stale-snapshot.sqlite'), '', 'utf8');
+    writeFileSync(
+      join(config.paths.localRoot, 'crawl-queues', 'stale-snapshot.sqlite'),
+      '',
+      'utf8',
+    );
     void stale;
 
     const result = await finalizeSnapshotWorkflow(workspaceRoot, 'canonical-snapshot');
@@ -173,7 +185,12 @@ describe('snapshot workflow', () => {
       }),
       'utf8',
     );
-    exportRawArtifacts(config, stale, config.artifacts.exportRoot, new Date('2026-03-09T01:00:00.000Z'));
+    exportRawArtifacts(
+      config,
+      stale,
+      config.artifacts.exportRoot,
+      new Date('2026-03-09T01:00:00.000Z'),
+    );
     mkdirSync(join(canonical.normalizedRoot, 'pages'), { recursive: true });
     writeFileSync(
       join(canonical.normalizedRoot, 'pages', 'root.json'),
@@ -201,7 +218,11 @@ describe('snapshot workflow', () => {
       'utf8',
     );
     mkdirSync(join(config.paths.localRoot, 'crawl-queues'), { recursive: true });
-    writeFileSync(join(config.paths.localRoot, 'crawl-queues', 'stale-snapshot.sqlite'), '', 'utf8');
+    writeFileSync(
+      join(config.paths.localRoot, 'crawl-queues', 'stale-snapshot.sqlite'),
+      '',
+      'utf8',
+    );
 
     const result = await finalizeSnapshotWorkflow(workspaceRoot, 'canonical-snapshot', {
       promote: true,
@@ -249,7 +270,8 @@ describe('snapshot workflow', () => {
     mkdirSync(join(snapshot.normalizedRoot, 'pages'), { recursive: true });
 
     const problemUrl = 'https://www.pbinfo.ro/probleme/1/sum';
-    const problemSolutionUrl = 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-solutie.php?id=1';
+    const problemSolutionUrl =
+      'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-solutie.php?id=1';
     const userSolutionsUrl = 'https://www.pbinfo.ro/solutii/user/Prekzursil';
     const evaluationUrl = 'https://www.pbinfo.ro/detalii-evaluare/70000001';
 
@@ -426,7 +448,9 @@ describe('snapshot workflow', () => {
       now: new Date('2026-03-10T00:00:00.000Z'),
     });
     mkdirSync(join(config.paths.localRoot, 'crawl-queues'), { recursive: true });
-    const queue = new CrawlQueue(join(config.paths.localRoot, 'crawl-queues', 'pending-snapshot.sqlite'));
+    const queue = new CrawlQueue(
+      join(config.paths.localRoot, 'crawl-queues', 'pending-snapshot.sqlite'),
+    );
     queue.enqueueMany([
       {
         key: 'page:https://www.pbinfo.ro/',

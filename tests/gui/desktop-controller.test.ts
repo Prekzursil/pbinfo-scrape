@@ -37,105 +37,107 @@ afterEach(async () => {
 });
 
 describe('desktop controller', () => {
-  test('runs crawl jobs in resumable chunks and persists queue counters between chunks', { timeout: 20_000 }, async () => {
-    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-desktop-crawl-'));
-    tempDirs.push(workspaceRoot);
-    initializeWorkspaceState(workspaceRoot, {
-      now: new Date('2026-03-10T12:00:00.000Z'),
-    });
-    mkdirSync(join(workspaceRoot, '.local'), { recursive: true });
+  test(
+    'runs crawl jobs in resumable chunks and persists queue counters between chunks',
+    { timeout: 20_000 },
+    async () => {
+      const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-desktop-crawl-'));
+      tempDirs.push(workspaceRoot);
+      initializeWorkspaceState(workspaceRoot, {
+        now: new Date('2026-03-10T12:00:00.000Z'),
+      });
+      mkdirSync(join(workspaceRoot, '.local'), { recursive: true });
 
-    const server = createServer((request, response) => {
-      if (request.url === '/') {
-        response.setHeader('Content-Type', 'text/html');
-        response.end('<html><body><a href="/probleme">Probleme</a></body></html>');
-        return;
+      const server = createServer((request, response) => {
+        if (request.url === '/') {
+          response.setHeader('Content-Type', 'text/html');
+          response.end('<html><body><a href="/probleme">Probleme</a></body></html>');
+          return;
+        }
+
+        if (request.url === '/probleme') {
+          response.setHeader('Content-Type', 'text/html');
+          response.end('<html><body><h1>Probleme</h1></body></html>');
+          return;
+        }
+
+        response.statusCode = 404;
+        response.end('missing');
+      });
+      servers.push(server);
+
+      await new Promise<void>((resolve) => {
+        server.listen(0, '127.0.0.1', () => resolve());
+      });
+      const address = server.address();
+      if (!address || typeof address === 'string') {
+        throw new TypeError('server address is not available');
       }
 
-      if (request.url === '/probleme') {
-        response.setHeader('Content-Type', 'text/html');
-        response.end('<html><body><h1>Probleme</h1></body></html>');
-        return;
-      }
-
-      response.statusCode = 404;
-      response.end('missing');
-    });
-    servers.push(server);
-
-    await new Promise<void>((resolve) => {
-      server.listen(0, '127.0.0.1', () => resolve());
-    });
-    const address = server.address();
-    if (!address || typeof address === 'string') {
-      throw new TypeError('server address is not available');
-    }
-
-    writeFileSync(
-      join(workspaceRoot, '.local', 'pbinfo.local.json'),
-      JSON.stringify(
-        {
-          crawl: {
-            publicStartUrls: [`http://127.0.0.1:${address.port}/`],
-            crossCheckWithBrowser: false,
+      writeFileSync(
+        join(workspaceRoot, '.local', 'pbinfo.local.json'),
+        JSON.stringify(
+          {
+            crawl: {
+              publicStartUrls: [`http://127.0.0.1:${address.port}/`],
+              crossCheckWithBrowser: false,
+            },
           },
-        },
-        null,
-        2,
-      ),
-      'utf8',
-    );
+          null,
+          2,
+        ),
+        'utf8',
+      );
 
-    const controller = createDesktopController(workspaceRoot);
-    const firstChunk = await controller.startJob({
-      kind: 'crawl',
-      snapshotId: 'desktop-snapshot',
-      profileId: 'alpha',
-      detail: {
-        scope: 'public',
-      },
-      maxIterations: 1,
-      now: new Date('2026-03-10T12:01:00.000Z'),
-    });
-    const secondChunk = await controller.resumeJob(firstChunk.jobId, {
-      maxIterations: 10,
-      now: new Date('2026-03-10T12:02:00.000Z'),
-    });
-    const persisted = readGuiJob(workspaceRoot, firstChunk.jobId);
-
-    expect(firstChunk.status).toBe('paused');
-    expect(firstChunk.resumable).toBe(true);
-    expect(firstChunk.latestCounters).toEqual({
-      pending: 1,
-      completed: 1,
-      inProgress: 0,
-    });
-    expect(secondChunk.status).toBe('completed');
-    expect(secondChunk.latestCounters).toEqual({
-      pending: 0,
-      completed: 2,
-      inProgress: 0,
-    });
-    expect(persisted.status).toBe('completed');
-    expect(readFileSync(persisted.logPath, 'utf8')).toContain(
-      'Crawl snapshot desktop-snapshot',
-    );
-    expect(controller.getCrawlStatus('desktop-snapshot')).toEqual(
-      expect.objectContaining({
+      const controller = createDesktopController(workspaceRoot);
+      const firstChunk = await controller.startJob({
+        kind: 'crawl',
         snapshotId: 'desktop-snapshot',
+        profileId: 'alpha',
+        detail: {
+          scope: 'public',
+        },
+        maxIterations: 1,
+        now: new Date('2026-03-10T12:01:00.000Z'),
+      });
+      const secondChunk = await controller.resumeJob(firstChunk.jobId, {
+        maxIterations: 10,
+        now: new Date('2026-03-10T12:02:00.000Z'),
+      });
+      const persisted = readGuiJob(workspaceRoot, firstChunk.jobId);
+
+      expect(firstChunk.status).toBe('paused');
+      expect(firstChunk.resumable).toBe(true);
+      expect(firstChunk.latestCounters).toEqual({
+        pending: 1,
+        completed: 1,
+        inProgress: 0,
+      });
+      expect(secondChunk.status).toBe('completed');
+      expect(secondChunk.latestCounters).toEqual({
         pending: 0,
         completed: 2,
-      }),
-    );
-    expect(controller.listJobEvents(firstChunk.jobId)).toEqual([
-      expect.objectContaining({
-        stage: 'crawl',
-      }),
-      expect.objectContaining({
-        stage: 'crawl',
-      }),
-    ]);
-  });
+        inProgress: 0,
+      });
+      expect(persisted.status).toBe('completed');
+      expect(readFileSync(persisted.logPath, 'utf8')).toContain('Crawl snapshot desktop-snapshot');
+      expect(controller.getCrawlStatus('desktop-snapshot')).toEqual(
+        expect.objectContaining({
+          snapshotId: 'desktop-snapshot',
+          pending: 0,
+          completed: 2,
+        }),
+      );
+      expect(controller.listJobEvents(firstChunk.jobId)).toEqual([
+        expect.objectContaining({
+          stage: 'crawl',
+        }),
+        expect.objectContaining({
+          stage: 'crawl',
+        }),
+      ]);
+    },
+  );
 
   test('resumes the crawl job for its recorded snapshot instead of the latest unfinished snapshot', async () => {
     const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-desktop-resume-specific-'));
@@ -146,12 +148,7 @@ describe('desktop controller', () => {
 
     const resumeCrawlWorkflow = vi.fn(async () => ({
       processed: 3,
-      queuePath: join(
-        workspaceRoot,
-        '.local',
-        'crawl-queues',
-        'acceptance-20260310b.sqlite',
-      ),
+      queuePath: join(workspaceRoot, '.local', 'crawl-queues', 'acceptance-20260310b.sqlite'),
       snapshotId: 'acceptance-20260310b',
       completed: false,
     }));
@@ -159,24 +156,14 @@ describe('desktop controller', () => {
     const controller = createDesktopController(workspaceRoot, {
       runCrawlWorkflow: async () => ({
         processed: 1,
-        queuePath: join(
-          workspaceRoot,
-          '.local',
-          'crawl-queues',
-          'acceptance-20260310b.sqlite',
-        ),
+        queuePath: join(workspaceRoot, '.local', 'crawl-queues', 'acceptance-20260310b.sqlite'),
         snapshotId: 'acceptance-20260310b',
         completed: false,
       }),
       resumeCrawlWorkflow,
       getCrawlStatusWorkflow: () => ({
         snapshotId: 'acceptance-20260310b',
-        queuePath: join(
-          workspaceRoot,
-          '.local',
-          'crawl-queues',
-          'acceptance-20260310b.sqlite',
-        ),
+        queuePath: join(workspaceRoot, '.local', 'crawl-queues', 'acceptance-20260310b.sqlite'),
         pending: 7,
         completed: 5,
         inProgress: 0,
@@ -218,12 +205,7 @@ describe('desktop controller', () => {
 
     const runCrawlWorkflow = vi.fn(async () => ({
       processed: 1,
-      queuePath: join(
-        workspaceRoot,
-        '.local',
-        'crawl-queues',
-        'acceptance-20260310b.sqlite',
-      ),
+      queuePath: join(workspaceRoot, '.local', 'crawl-queues', 'acceptance-20260310b.sqlite'),
       snapshotId: 'acceptance-20260310b',
       completed: false,
     }));
@@ -232,12 +214,7 @@ describe('desktop controller', () => {
       runCrawlWorkflow,
       getCrawlStatusWorkflow: () => ({
         snapshotId: 'acceptance-20260310b',
-        queuePath: join(
-          workspaceRoot,
-          '.local',
-          'crawl-queues',
-          'acceptance-20260310b.sqlite',
-        ),
+        queuePath: join(workspaceRoot, '.local', 'crawl-queues', 'acceptance-20260310b.sqlite'),
         pending: 7,
         completed: 5,
         inProgress: 0,
@@ -390,31 +367,31 @@ describe('desktop controller', () => {
         },
       },
       finalizeSnapshotWorkflow: async () => ({
-          snapshotId: 'acceptance-20260310b',
-          pagesNormalized: 12,
-          problemsRanked: 3,
-          routesBuilt: 7,
-          artifactManifestPath: join(
-            workspaceRoot,
-            'archive',
-            'artifacts',
-            'acceptance-20260310b.json',
-          ),
-          coverageGapReportPath: join(
-            workspaceRoot,
-            'archive',
-            'snapshots',
-            'acceptance-20260310b',
-            'normalized',
-            'problem-coverage',
-            'gaps.json',
-          ),
-          promotedToCanonical: false,
-          coverageGates: {
-            officialSourceGatePassed: true,
-            solvedUserSourceGatePassed: true,
-          },
-        }),
+        snapshotId: 'acceptance-20260310b',
+        pagesNormalized: 12,
+        problemsRanked: 3,
+        routesBuilt: 7,
+        artifactManifestPath: join(
+          workspaceRoot,
+          'archive',
+          'artifacts',
+          'acceptance-20260310b.json',
+        ),
+        coverageGapReportPath: join(
+          workspaceRoot,
+          'archive',
+          'snapshots',
+          'acceptance-20260310b',
+          'normalized',
+          'problem-coverage',
+          'gaps.json',
+        ),
+        promotedToCanonical: false,
+        coverageGates: {
+          officialSourceGatePassed: true,
+          solvedUserSourceGatePassed: true,
+        },
+      }),
     });
     const completed = await controller.startJob({
       kind: 'snapshot-finalize',
@@ -534,7 +511,7 @@ describe('desktop controller', () => {
     });
 
     expect(summary.normalizedRoot).toContain(
-      'archive\\snapshots\\acceptance-20260310b\\normalized',
+      join('archive', 'snapshots', 'acceptance-20260310b', 'normalized'),
     );
     expect(summary.datasets).toEqual(
       expect.arrayContaining([
@@ -783,7 +760,7 @@ describe('desktop controller', () => {
         missingTestsCaptureCount: 0,
         testsUnavailableUpstreamCount: 0,
         coverageRoot: expect.stringContaining(
-          'archive\\snapshots\\acceptance-20260310b\\normalized\\problem-coverage',
+          join('archive', 'snapshots', 'acceptance-20260310b', 'normalized', 'problem-coverage'),
         ),
       }),
     );
@@ -806,7 +783,7 @@ describe('desktop controller', () => {
           coverageFilePath: expect.stringContaining('problem-3716.json'),
           problemFilePath: expect.stringContaining('problem-3716.json'),
           rankingFilePath: expect.stringContaining(
-            'rankings\\problems\\problem-3716.json',
+            join('rankings', 'problems', 'problem-3716.json'),
           ),
           evaluationFilePaths: expect.arrayContaining([
             expect.stringContaining('evaluation-63332367.json'),
@@ -906,26 +883,15 @@ describe('desktop controller', () => {
         snapshotId: 'acceptance-20260310b',
         completed: false,
       }),
-      getCrawlStatusWorkflow: (() => {
-        let callCount = 0;
-        return () => {
-          callCount += 1;
-          return {
-            snapshotId: 'acceptance-20260310b',
-            queuePath: join(
-              workspaceRoot,
-              '.local',
-              'crawl-queues',
-              'acceptance-20260310b.sqlite',
-            ),
-            pending: 8,
-            completed: 4,
-            inProgress: 0,
-            publishEligible: false,
-            recentFailures: [],
-          };
-        };
-      })(),
+      getCrawlStatusWorkflow: () => ({
+        snapshotId: 'acceptance-20260310b',
+        queuePath: join(workspaceRoot, '.local', 'crawl-queues', 'acceptance-20260310b.sqlite'),
+        pending: 8,
+        completed: 4,
+        inProgress: 0,
+        publishEligible: false,
+        recentFailures: [],
+      }),
       notificationService: {
         notify: async (message) => {
           notifications.push(message);
@@ -1035,7 +1001,9 @@ describe('desktop controller', () => {
       type: 'login',
     });
     expect(readFileSync(config.auth.sessionCookiesPath, 'utf8')).toContain('PHPSESSID');
-    expect(readFileSync(result.job.logPath, 'utf8')).toContain('Signed in and activated profile alpha');
+    expect(readFileSync(result.job.logPath, 'utf8')).toContain(
+      'Signed in and activated profile alpha',
+    );
     expect(notifications).toEqual([
       expect.objectContaining({
         title: 'PBInfo login complete',

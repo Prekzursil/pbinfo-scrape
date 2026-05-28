@@ -49,16 +49,8 @@ export const guiArchiveDatasetSchema = z.enum([
   'rankings',
   'mirror-routes',
 ]);
-export const guiCoverageSolvedFilterSchema = z.enum([
-  'all',
-  'solved',
-  'unsolved',
-]);
-export const guiCoveragePresenceFilterSchema = z.enum([
-  'all',
-  'yes',
-  'no',
-]);
+export const guiCoverageSolvedFilterSchema = z.enum(['all', 'solved', 'unsolved']);
+export const guiCoveragePresenceFilterSchema = z.enum(['all', 'yes', 'no']);
 export const guiCoverageEditorialFilterSchema = z.enum([
   'all',
   'visible',
@@ -381,30 +373,16 @@ export const guiJobRecordSchema = z
 
 export type PersistedCookie = z.infer<typeof persistedCookieSchema>;
 export type GuiProfileProvenance = z.infer<typeof profileProvenanceSchema>;
-export type GuiNotificationPreference = z.infer<
-  typeof guiNotificationPreferenceSchema
->;
+export type GuiNotificationPreference = z.infer<typeof guiNotificationPreferenceSchema>;
 export type GuiVerbosityMode = z.infer<typeof guiVerbosityModeSchema>;
 export type GuiCrawlMode = z.infer<typeof guiCrawlModeSchema>;
 export type GuiArchiveDataset = z.infer<typeof guiArchiveDatasetSchema>;
-export type GuiCoverageSolvedFilter = z.infer<
-  typeof guiCoverageSolvedFilterSchema
->;
-export type GuiCoveragePresenceFilter = z.infer<
-  typeof guiCoveragePresenceFilterSchema
->;
-export type GuiCoverageEditorialFilter = z.infer<
-  typeof guiCoverageEditorialFilterSchema
->;
-export type GuiCoverageTestsStatusFilter = z.infer<
-  typeof guiCoverageTestsStatusFilterSchema
->;
-export type GuiCoverageArchiveStateFilter = z.infer<
-  typeof guiCoverageArchiveStateFilterSchema
->;
-export type DesktopPreferencesRecord = z.infer<
-  typeof desktopPreferencesRecordSchema
->;
+export type GuiCoverageSolvedFilter = z.infer<typeof guiCoverageSolvedFilterSchema>;
+export type GuiCoveragePresenceFilter = z.infer<typeof guiCoveragePresenceFilterSchema>;
+export type GuiCoverageEditorialFilter = z.infer<typeof guiCoverageEditorialFilterSchema>;
+export type GuiCoverageTestsStatusFilter = z.infer<typeof guiCoverageTestsStatusFilterSchema>;
+export type GuiCoverageArchiveStateFilter = z.infer<typeof guiCoverageArchiveStateFilterSchema>;
+export type DesktopPreferencesRecord = z.infer<typeof desktopPreferencesRecordSchema>;
 export type GuiProfileRecord = z.infer<typeof guiProfileRecordSchema>;
 export type GuiWorkspaceState = z.infer<typeof guiWorkspaceStateSchema>;
 export type GuiJobKind = z.infer<typeof guiJobKindSchema>;
@@ -412,17 +390,11 @@ export type GuiJobStatus = z.infer<typeof guiJobStatusSchema>;
 export type GuiJobCounters = z.infer<typeof guiJobCountersSchema>;
 export type GuiCrawlFailure = z.infer<typeof guiCrawlFailureSchema>;
 export type GuiCrawlStatus = z.infer<typeof guiCrawlStatusSchema>;
-export type GuiArchiveDatasetSummary = z.infer<
-  typeof guiArchiveDatasetSummarySchema
->;
+export type GuiArchiveDatasetSummary = z.infer<typeof guiArchiveDatasetSummarySchema>;
 export type GuiArchiveSummary = z.infer<typeof guiArchiveSummarySchema>;
-export type GuiArchiveRecordSummary = z.infer<
-  typeof guiArchiveRecordSummarySchema
->;
+export type GuiArchiveRecordSummary = z.infer<typeof guiArchiveRecordSummarySchema>;
 export type GuiArchiveListing = z.infer<typeof guiArchiveListingSchema>;
-export type GuiArchiveRecordDetail = z.infer<
-  typeof guiArchiveRecordDetailSchema
->;
+export type GuiArchiveRecordDetail = z.infer<typeof guiArchiveRecordDetailSchema>;
 export type GuiCoverageRecord = z.infer<typeof guiCoverageRecordSchema>;
 export type GuiCoverageSummary = z.infer<typeof guiCoverageSummarySchema>;
 export type GuiCoverageListing = z.infer<typeof guiCoverageListingSchema>;

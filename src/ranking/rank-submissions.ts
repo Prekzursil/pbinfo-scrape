@@ -1,13 +1,6 @@
-import {
-  buildSourceSignature,
-  normalizeLanguage,
-} from './source-normalization.js';
+import { buildSourceSignature, normalizeLanguage } from './source-normalization.js';
 import { detectSuspicionFlags } from '../crawl/source-suspicion.js';
-import type {
-  RankedProblemSubmissions,
-  SourceRecord,
-  SubmissionRecord,
-} from '../types/records.js';
+import type { RankedProblemSubmissions, SourceRecord, SubmissionRecord } from '../types/records.js';
 
 export interface RankingOptions {
   forcedBestEvaluationIds?: Record<string, number>;
@@ -25,12 +18,8 @@ export function rankProblemSubmissions(
   officialSourcesOrOptions: SourceRecord[] | RankingOptions = [],
   maybeOptions: RankingOptions = {},
 ): RankedProblemSubmissions {
-  const officialSources = Array.isArray(officialSourcesOrOptions)
-    ? officialSourcesOrOptions
-    : [];
-  const options = Array.isArray(officialSourcesOrOptions)
-    ? maybeOptions
-    : officialSourcesOrOptions;
+  const officialSources = Array.isArray(officialSourcesOrOptions) ? officialSourcesOrOptions : [];
+  const options = Array.isArray(officialSourcesOrOptions) ? maybeOptions : officialSourcesOrOptions;
   const forcedBest = options.forcedBestEvaluationIds ?? {};
   const candidates = submissions.map(toCandidate);
   const { representatives, duplicateEvaluationIds } = dedupeCandidates(candidates, forcedBest);
@@ -40,11 +29,7 @@ export function rankProblemSubmissions(
     forcedBest,
     compareTrustworthyCandidates,
   );
-  const fastPerLanguage = rankPerLanguage(
-    representatives,
-    forcedBest,
-    compareFastCandidates,
-  );
+  const fastPerLanguage = rankPerLanguage(representatives, forcedBest, compareFastCandidates);
 
   const bestTrustworthyOverall = [...Object.values(trustworthyPerLanguage.candidates)].sort(
     (left, right) => compareTrustworthyCandidates(left, right, forcedBest),
@@ -81,10 +66,9 @@ export function rankProblemSubmissions(
 function toCandidate(submission: SubmissionRecord): RankedSubmissionCandidate {
   const normalizedLanguage = normalizeLanguage(submission.language) ?? submission.language;
   const signature = buildSourceSignature(submission.sourceCode, normalizedLanguage);
-  const dedupeKey =
-    signature?.normalizedSourceHash
-      ? `${normalizedLanguage}:${signature.normalizedSourceHash}`
-      : `${normalizedLanguage}:evaluation:${submission.evaluationId}`;
+  const dedupeKey = signature?.normalizedSourceHash
+    ? `${normalizedLanguage}:${signature.normalizedSourceHash}`
+    : `${normalizedLanguage}:evaluation:${submission.evaluationId}`;
 
   return {
     ...submission,
@@ -201,20 +185,13 @@ function candidateScore(
   prioritizeTrustworthiness: boolean,
 ): number[] {
   const forcedBoost =
-    forcedEvaluationId !== undefined &&
-    submission.evaluationId === forcedEvaluationId
-      ? 1
-      : 0;
+    forcedEvaluationId !== undefined && submission.evaluationId === forcedEvaluationId ? 1 : 0;
   const trustworthyBoost = getEffectiveSuspicionFlags(submission).length === 0 ? 1 : 0;
   const acceptedScore = submission.score >= 100 ? 1 : 0;
   const runtimeRank =
-    submission.runtimeSeconds !== undefined
-      ? -submission.runtimeSeconds
-      : Number.NEGATIVE_INFINITY;
+    submission.runtimeSeconds !== undefined ? -submission.runtimeSeconds : Number.NEGATIVE_INFINITY;
   const memoryRank =
-    submission.memoryKb !== undefined
-      ? -submission.memoryKb
-      : Number.NEGATIVE_INFINITY;
+    submission.memoryKb !== undefined ? -submission.memoryKb : Number.NEGATIVE_INFINITY;
   const recencyRank = Date.parse(submission.fetchedAt) || 0;
 
   if (!prioritizeTrustworthiness) {
@@ -257,9 +234,7 @@ function compareScoreVectors(
   return rightEvaluationId - leftEvaluationId;
 }
 
-function rankOfficialSources(
-  sources: SourceRecord[],
-): Record<string, string> {
+function rankOfficialSources(sources: SourceRecord[]): Record<string, string> {
   const bestOfficialPerLanguage: Record<string, string> = {};
   const buckets = new Map<string, SourceRecord[]>();
   for (const source of sources) {
@@ -306,30 +281,35 @@ function scoreOfficialSource(source: SourceRecord): number[] {
 }
 
 function isTrustworthyCandidate(candidate: RankedSubmissionCandidate): boolean {
-  return candidate.effectiveSuspicionFlags.length === 0
-    && candidate.score >= 100
-    && candidate.sourceAvailable;
+  return (
+    candidate.effectiveSuspicionFlags.length === 0 &&
+    candidate.score >= 100 &&
+    candidate.sourceAvailable
+  );
 }
 
 function isCoverageSatisfyingOfficialSource(source: SourceRecord): boolean {
-  return source.kind === 'official'
-    && source.sourceAvailable
-    && source.score !== undefined
-    && source.score >= 100
-    && source.provenanceType !== 'official-fragment';
+  return (
+    source.kind === 'official' &&
+    source.sourceAvailable &&
+    source.score !== undefined &&
+    source.score >= 100 &&
+    source.provenanceType !== 'official-fragment'
+  );
 }
 
 function getEffectiveSuspicionFlags(
-  submission: Pick<SubmissionRecord, 'sourceCode' | 'suspicionFlags'> | RankedSubmissionCandidate | SourceRecord,
+  submission:
+    | Pick<SubmissionRecord, 'sourceCode' | 'suspicionFlags'>
+    | RankedSubmissionCandidate
+    | SourceRecord,
 ): string[] {
   if ('effectiveSuspicionFlags' in submission) {
     return submission.effectiveSuspicionFlags;
   }
 
   return normalizeBlockingSuspicionFlags(
-    submission.sourceCode
-      ? detectSuspicionFlags(submission.sourceCode)
-      : submission.suspicionFlags,
+    submission.sourceCode ? detectSuspicionFlags(submission.sourceCode) : submission.suspicionFlags,
     submission.sourceCode,
   );
 }
@@ -347,13 +327,13 @@ function normalizeBlockingSuspicionFlags(
   const normalizedSource = sourceCode?.toLowerCase() ?? '';
   const compactLength = normalizedSource.replace(/\s+/g, ' ').trim().length;
   const relaxedBranchingOnly =
-    uniqueFlags.length > 0
-    && uniqueFlags.every((flag) => flag === 'input-branching')
-    && compactLength >= 180;
+    uniqueFlags.length > 0 &&
+    uniqueFlags.every((flag) => flag === 'input-branching') &&
+    compactLength >= 180;
   const relaxedBranchingAndLiteralPairs =
-    uniqueFlags.length > 0
-    && uniqueFlags.every((flag) => flag === 'input-branching' || flag === 'literal-pairs')
-    && compactLength >= 180;
+    uniqueFlags.length > 0 &&
+    uniqueFlags.every((flag) => flag === 'input-branching' || flag === 'literal-pairs') &&
+    compactLength >= 180;
   if (relaxedBranchingOnly || relaxedBranchingAndLiteralPairs) {
     return [];
   }

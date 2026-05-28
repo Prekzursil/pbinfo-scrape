@@ -78,9 +78,7 @@ app.on('window-all-closed', () => {
   }
 });
 
-async function maybeWriteDesktopSmokeMarker(
-  window: BrowserWindow,
-): Promise<void> {
+async function maybeWriteDesktopSmokeMarker(window: BrowserWindow): Promise<void> {
   if (!desktopSmokeMarkerPath) {
     return;
   }
