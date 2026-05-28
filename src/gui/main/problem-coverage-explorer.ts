@@ -46,50 +46,82 @@ export interface ReadCoverageOptions extends ExploreCoverageOptions {
   problemId: number;
 }
 
+interface DerivedStatusCounts {
+  completeProblemCount: number;
+  incompleteSolvedProblemCount: number;
+  missingOfficialSourceCaptureCount: number;
+  officialSourceUnavailableUpstreamCount: number;
+  missingTestsCaptureCount: number;
+  testsUnavailableUpstreamCount: number;
+}
+
+const STATUS_COUNT_RULES: ReadonlyArray<{
+  key: keyof DerivedStatusCounts;
+  applies: (input: {
+    record: ProblemCoverageRecord;
+    officialSourceStatus: string;
+    testsCoverageStatus: string;
+    archiveCompletenessStatus: string;
+  }) => boolean;
+}> = [
+  { key: 'completeProblemCount', applies: (i) => i.archiveCompletenessStatus === 'complete' },
+  {
+    key: 'incompleteSolvedProblemCount',
+    applies: (i) => i.record.solvedByMe && i.archiveCompletenessStatus !== 'complete',
+  },
+  {
+    key: 'missingOfficialSourceCaptureCount',
+    applies: (i) => i.archiveCompletenessStatus === 'missing-official-source',
+  },
+  {
+    key: 'officialSourceUnavailableUpstreamCount',
+    applies: (i) => i.officialSourceStatus === 'not-available-upstream',
+  },
+  {
+    key: 'missingTestsCaptureCount',
+    applies: (i) => i.testsCoverageStatus === 'not-captured-yet',
+  },
+  {
+    key: 'testsUnavailableUpstreamCount',
+    applies: (i) => i.testsCoverageStatus === 'not-available-upstream',
+  },
+];
+
+function accumulateStatusCounts(
+  accumulator: DerivedStatusCounts,
+  record: ProblemCoverageRecord,
+): DerivedStatusCounts {
+  const input = {
+    record,
+    officialSourceStatus: record.officialSourceStatus ?? deriveOfficialSourceStatus(record),
+    testsCoverageStatus: record.testsCoverageStatus ?? deriveTestsCoverageStatus(record),
+    archiveCompletenessStatus:
+      record.archiveCompletenessStatus ?? deriveArchiveCompletenessStatus(record),
+  };
+
+  for (const rule of STATUS_COUNT_RULES) {
+    if (rule.applies(input)) {
+      accumulator[rule.key] += 1;
+    }
+  }
+
+  return accumulator;
+}
+
 export function getCoverageExplorerSummary(
   workspaceRoot: string,
   options: ExploreCoverageOptions = {},
 ): GuiCoverageSummary {
   const context = resolveCoverageContext(workspaceRoot, options.snapshotId);
   const gapReport = readProblemCoverageGapReport(context.layout.normalizedRoot);
-  const derivedStatusCounts = context.index.records.reduce(
-    (accumulator, record) => {
-      const officialSourceStatus =
-        record.officialSourceStatus ?? deriveOfficialSourceStatus(record);
-      const testsCoverageStatus = record.testsCoverageStatus ?? deriveTestsCoverageStatus(record);
-      const archiveCompletenessStatus =
-        record.archiveCompletenessStatus ?? deriveArchiveCompletenessStatus(record);
-
-      if (archiveCompletenessStatus === 'complete') {
-        accumulator.completeProblemCount += 1;
-      }
-      if (record.solvedByMe && archiveCompletenessStatus !== 'complete') {
-        accumulator.incompleteSolvedProblemCount += 1;
-      }
-      if (archiveCompletenessStatus === 'missing-official-source') {
-        accumulator.missingOfficialSourceCaptureCount += 1;
-      }
-      if (officialSourceStatus === 'not-available-upstream') {
-        accumulator.officialSourceUnavailableUpstreamCount += 1;
-      }
-      if (testsCoverageStatus === 'not-captured-yet') {
-        accumulator.missingTestsCaptureCount += 1;
-      }
-      if (testsCoverageStatus === 'not-available-upstream') {
-        accumulator.testsUnavailableUpstreamCount += 1;
-      }
-
-      return accumulator;
-    },
-    {
-      completeProblemCount: 0,
-      incompleteSolvedProblemCount: 0,
-      missingOfficialSourceCaptureCount: 0,
-      officialSourceUnavailableUpstreamCount: 0,
-      missingTestsCaptureCount: 0,
-      testsUnavailableUpstreamCount: 0,
-    },
-  );
+  const derivedStatusCounts = context.index.records.reduce(accumulateStatusCounts, {
+    completeProblemCount: 0,
+    incompleteSolvedProblemCount: 0,
+    missingOfficialSourceCaptureCount: 0,
+    officialSourceUnavailableUpstreamCount: 0,
+    missingTestsCaptureCount: 0,
+    testsUnavailableUpstreamCount: 0,
+  });
   const unsolvedProblemIds =
     gapReport?.unsolvedProblemIds ??
     context.index.records.filter((record) => !record.solvedByMe).map((record) => record.problemId);
@@ -224,6 +256,70 @@ function resolveCoverageContext(workspaceRoot: string, snapshotId?: string): Cov
   };
 }
 
+function toGuiTestsFields(
+  record: ProblemCoverageRecord,
+): Pick<
+  GuiCoverageRecord,
+  | 'testsFragmentArchived'
+  | 'exampleTestsAvailableCount'
+  | 'visibleTestsCapturedCount'
+  | 'evaluationObservedTestsCount'
+  | 'effectiveTestsAvailableCount'
+  | 'testsCoverageStatus'
+  | 'testsAvailable'
+> {
+  return {
+    testsFragmentArchived: record.testsFragmentArchived,
+    exampleTestsAvailableCount: record.exampleTestsAvailableCount,
+    visibleTestsCapturedCount: record.visibleTestsCapturedCount,
+    evaluationObservedTestsCount: record.evaluationObservedTestsCount,
+    effectiveTestsAvailableCount:
+      record.effectiveTestsAvailableCount ??
+      record.visibleTestsCapturedCount ??
+      record.exampleTestsAvailableCount ??
+      0,
+    testsCoverageStatus: record.testsCoverageStatus ?? deriveTestsCoverageStatus(record),
+    testsAvailable:
+      record.testsAvailable ??
+      record.testsFragmentArchived ??
+      (record.exampleTestsAvailableCount ?? 0) > 0,
+  };
+}
+
+function toGuiSourceFields(
+  record: ProblemCoverageRecord,
+): Pick<
+  GuiCoverageRecord,
+  | 'officialSolutionPresent'
+  | 'officialSourceArchived'
+  | 'officialSourceLanguages'
+  | 'officialSourceStatus'
+  | 'userSourceArchived'
+  | 'userSourceLanguages'
+  | 'requiredTrustworthyUserSourceLanguages'
+  | 'trustworthyUserSourceLanguages'
+  | 'bestTrustworthyUserPerLanguage'
+  | 'missingTrustworthyUserSourceLanguages'
+  | 'officialSourceBlocked'
+  | 'officialSourceBlockedReason'
+> {
+  return {
+    officialSolutionPresent: record.officialSolutionPresent,
+    officialSourceArchived: record.officialSourceArchived,
+    officialSourceLanguages: record.officialSourceLanguages ?? [],
+    officialSourceStatus: record.officialSourceStatus ?? deriveOfficialSourceStatus(record),
+    userSourceArchived: record.userSourceArchived,
+    userSourceLanguages: record.userSourceLanguages ?? [],
+    requiredTrustworthyUserSourceLanguages:
+      record.requiredTrustworthyUserSourceLanguages ?? deriveRequiredTrustworthyLanguages(record),
+    trustworthyUserSourceLanguages: record.trustworthyUserSourceLanguages ?? [],
+    bestTrustworthyUserPerLanguage: record.bestTrustworthyUserPerLanguage ?? {},
+    missingTrustworthyUserSourceLanguages: record.missingTrustworthyUserSourceLanguages ?? [],
+    officialSourceBlocked: record.officialSourceBlocked ?? false,
+    officialSourceBlockedReason: record.officialSourceBlockedReason,
+  };
+}
+
 function toGuiCoverageRecord(record: ProblemCoverageRecord): GuiCoverageRecord {
   return {
     problemId: record.problemId,
@@ -236,92 +332,63 @@ function toGuiCoverageRecord(record: ProblemCoverageRecord): GuiCoverageRecord {
     evaluationCount: record.evaluationCount,
     solvedEvaluationCount: record.solvedEvaluationCount,
     rankingPresent: record.rankingPresent,
-    testsFragmentArchived: record.testsFragmentArchived,
-    exampleTestsAvailableCount: record.exampleTestsAvailableCount,
-    visibleTestsCapturedCount: record.visibleTestsCapturedCount,
-    evaluationObservedTestsCount: record.evaluationObservedTestsCount,
-    effectiveTestsAvailableCount:
-      record.effectiveTestsAvailableCount ??
-      record.visibleTestsCapturedCount ??
-      record.exampleTestsAvailableCount ??
-      0,
-    testsCoverageStatus: record.testsCoverageStatus ?? deriveTestsCoverageStatus(record),
-    officialSolutionPresent: record.officialSolutionPresent,
-    officialSourceArchived: record.officialSourceArchived,
-    officialSourceLanguages: record.officialSourceLanguages ?? [],
-    officialSourceStatus: record.officialSourceStatus ?? deriveOfficialSourceStatus(record),
-    userSourceArchived: record.userSourceArchived,
-    userSourceLanguages: record.userSourceLanguages ?? [],
-    requiredTrustworthyUserSourceLanguages:
-      record.requiredTrustworthyUserSourceLanguages ?? deriveRequiredTrustworthyLanguages(record),
-    trustworthyUserSourceLanguages: record.trustworthyUserSourceLanguages ?? [],
-    bestTrustworthyUserPerLanguage: record.bestTrustworthyUserPerLanguage ?? {},
-    missingTrustworthyUserSourceLanguages: record.missingTrustworthyUserSourceLanguages ?? [],
+    ...toGuiTestsFields(record),
+    ...toGuiSourceFields(record),
     archiveCompletenessStatus:
       record.archiveCompletenessStatus ?? deriveArchiveCompletenessStatus(record),
     editorialAvailability: record.editorialAvailability,
-    testsAvailable:
-      record.testsAvailable ??
-      record.testsFragmentArchived ??
-      (record.exampleTestsAvailableCount ?? 0) > 0,
     unsolvedByConfiguredHandle: record.unsolvedByConfiguredHandle ?? !record.solvedByMe,
-    officialSourceBlocked: record.officialSourceBlocked ?? false,
-    officialSourceBlockedReason: record.officialSourceBlockedReason,
     notArchivedYet: record.notArchivedYet ?? false,
     newSinceBaseline: record.newSinceBaseline ?? false,
     notes: record.notes,
   };
 }
 
-function matchesCoverageFilters(
+function matchesSolvedFilter(record: ProblemCoverageRecord, options: ListCoverageOptions): boolean {
+  if (options.solved === 'solved') {
+    return record.solvedByMe;
+  }
+  if (options.solved === 'unsolved') {
+    return !record.solvedByMe;
+  }
+  return true;
+}
+
+function matchesEnumFilter<T>(
+  value: T | undefined,
+  filter: T | 'all' | undefined,
+): boolean {
+  if (!filter || filter === 'all') {
+    return true;
+  }
+  return value === filter;
+}
+
+function matchesStructuredCoverageFilters(
   record: ProblemCoverageRecord,
   options: ListCoverageOptions,
-  query: string | undefined,
 ): boolean {
-  if (options.solved === 'solved' && !record.solvedByMe) {
-    return false;
-  }
-  if (options.solved === 'unsolved' && record.solvedByMe) {
-    return false;
-  }
-  if (!matchesPresenceFilter(record.testsFragmentArchived, options.testsFragmentArchived)) {
-    return false;
-  }
-  if (!matchesPresenceFilter(record.visibleTestsCapturedCount > 0, options.visibleTestsCaptured)) {
-    return false;
-  }
-  if (
-    options.testsCoverageStatus &&
-    options.testsCoverageStatus !== 'all' &&
-    (record.testsCoverageStatus ?? deriveTestsCoverageStatus(record)) !==
-      options.testsCoverageStatus
-  ) {
-    return false;
-  }
-  if (!matchesPresenceFilter(record.officialSourceArchived, options.officialSourceArchived)) {
-    return false;
-  }
-  if (!matchesPresenceFilter(record.userSourceArchived, options.userSourceArchived)) {
-    return false;
-  }
-  if (
-    options.editorialAvailability &&
-    options.editorialAvailability !== 'all' &&
-    record.editorialAvailability !== options.editorialAvailability
-  ) {
-    return false;
-  }
-  if (typeof options.grade === 'number' && record.grade !== options.grade) {
-    return false;
-  }
-  if (
-    options.archiveCompletenessStatus &&
-    options.archiveCompletenessStatus !== 'all' &&
-    (record.archiveCompletenessStatus ?? deriveArchiveCompletenessStatus(record)) !==
-      options.archiveCompletenessStatus
-  ) {
-    return false;
-  }
+  const checks: boolean[] = [
+    matchesSolvedFilter(record, options),
+    matchesPresenceFilter(record.testsFragmentArchived, options.testsFragmentArchived),
+    matchesPresenceFilter(record.visibleTestsCapturedCount > 0, options.visibleTestsCaptured),
+    matchesEnumFilter(
+      record.testsCoverageStatus ?? deriveTestsCoverageStatus(record),
+      options.testsCoverageStatus,
+    ),
+    matchesPresenceFilter(record.officialSourceArchived, options.officialSourceArchived),
+    matchesPresenceFilter(record.userSourceArchived, options.userSourceArchived),
+    matchesEnumFilter(record.editorialAvailability, options.editorialAvailability),
+    typeof options.grade !== 'number' || record.grade === options.grade,
+    matchesEnumFilter(
+      record.archiveCompletenessStatus ?? deriveArchiveCompletenessStatus(record),
+      options.archiveCompletenessStatus,
+    ),
+  ];
+  return checks.every(Boolean);
+}
+
+function matchesCoverageQuery(record: ProblemCoverageRecord, query: string | undefined): boolean {
   if (!query) {
     return true;
   }
@@ -337,6 +404,16 @@ function matchesCoverageFilters(
     .join(' ')
     .toLowerCase();
   return haystack.includes(query);
+}
+
+function matchesCoverageFilters(
+  record: ProblemCoverageRecord,
+  options: ListCoverageOptions,
+  query: string | undefined,
+): boolean {
+  return (
+    matchesStructuredCoverageFilters(record, options) && matchesCoverageQuery(record, query)
+  );
 }
 
 function deriveTestsCoverageStatus(

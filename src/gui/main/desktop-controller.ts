@@ -627,24 +627,13 @@ export function createDesktopController(
       completed: status.completed,
       inProgress: status.inProgress,
     };
-    const stallReason =
-      !result.completed && currentCounters.pending > 0
-        ? result.processed === 0
-          ? 'no-visible-work'
-          : job.latestCounters && !didCrawlCountersImprove(job.latestCounters, currentCounters)
-            ? 'unchanged-counters'
-            : null
-        : null;
+    const stallReason = resolveCrawlStallReason(result, currentCounters, job.latestCounters);
 
     appendGuiJobEvent(workspaceRoot, job.jobId, {
       timestamp: eventTimestamp,
-      level: stallReason ? 'warn' : status.recentFailures.length > 0 ? 'warn' : 'info',
+      level: stallReason || status.recentFailures.length > 0 ? 'warn' : 'info',
       stage: stallReason ? 'crawl-stalled' : 'crawl',
-      message: stallReason
-        ? `Crawl snapshot ${result.snapshotId} stalled after chunk`
-        : result.completed
-          ? `Crawl snapshot ${result.snapshotId} completed`
-          : `Crawl snapshot ${result.snapshotId} paused after chunk`,
+      message: resolveCrawlChunkMessage(result, stallReason),
       counters: currentCounters,
       detail: {
         processed: result.processed,
@@ -907,6 +896,36 @@ function resolveCrawlDetail(detail: Record<string, unknown> | undefined): {
     scope: 'all',
     mode: 'incremental',
   };
+}
+
+type CrawlCounters = NonNullable<GuiJobRecord['latestCounters']>;
+type CrawlChunkResult = { completed: boolean; processed: number; snapshotId: string };
+
+function resolveCrawlStallReason(
+  result: CrawlChunkResult,
+  currentCounters: CrawlCounters,
+  previousCounters: CrawlCounters | undefined,
+): 'no-visible-work' | 'unchanged-counters' | null {
+  if (result.completed || currentCounters.pending === 0) {
+    return null;
+  }
+  if (result.processed === 0) {
+    return 'no-visible-work';
+  }
+  if (previousCounters && !didCrawlCountersImprove(previousCounters, currentCounters)) {
+    return 'unchanged-counters';
+  }
+  return null;
+}
+
+function resolveCrawlChunkMessage(result: CrawlChunkResult, stallReason: string | null): string {
+  if (stallReason) {
+    return `Crawl snapshot ${result.snapshotId} stalled after chunk`;
+  }
+  if (result.completed) {
+    return `Crawl snapshot ${result.snapshotId} completed`;
+  }
+  return `Crawl snapshot ${result.snapshotId} paused after chunk`;
 }
 
 function didCrawlCountersImprove(
