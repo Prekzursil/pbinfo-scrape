@@ -199,70 +199,62 @@ export function readProblemCoverageRecord(
   );
 }
 
-function buildCoverageRecord(
-  problem: ProblemRecord,
-  context: {
-    snapshotId: string;
-    fragments?: {
-      statementArchived: boolean;
-      solutionFragmentArchived: boolean;
-      testsFragmentArchived: boolean;
-    };
-    evaluations: EvaluationRecord[];
-    sources: SourceRecord[];
-    tests?: ProblemTestsRecord;
-    ranking?: BestSubmissionRecord;
-    solvedProblemIds: Set<number>;
-    solvedEvaluationIds: Set<number>;
-    configuredUserHandle?: string;
-    baseline?: ProblemCoverageRecord;
-    officialSourceHarvest?: OfficialSourceHarvestRecord;
-  },
-): ProblemCoverageRecord {
-  const fragments = context.fragments ?? {
-    statementArchived: false,
-    solutionFragmentArchived: false,
-    testsFragmentArchived: false,
+interface CoverageRecordContext {
+  snapshotId: string;
+  fragments?: {
+    statementArchived: boolean;
+    solutionFragmentArchived: boolean;
+    testsFragmentArchived: boolean;
   };
-  const officialSources = context.sources.filter(
-    (source) => source.kind === 'official',
-  );
-  const qualifyingOfficialSources = officialSources.filter(isCoverageSatisfyingOfficialSource);
+  evaluations: EvaluationRecord[];
+  sources: SourceRecord[];
+  tests?: ProblemTestsRecord;
+  ranking?: BestSubmissionRecord;
+  solvedProblemIds: Set<number>;
+  solvedEvaluationIds: Set<number>;
+  configuredUserHandle?: string;
+  baseline?: ProblemCoverageRecord;
+  officialSourceHarvest?: OfficialSourceHarvestRecord;
+}
+
+interface CoverageSourceMetrics {
+  qualifyingOfficialSources: SourceRecord[];
+  harvestedOfficialEvaluations: EvaluationRecord[];
+  userSources: SourceRecord[];
+  officialSourceIds: string[];
+  userSourceIds: string[];
+  officialSourceLanguages: string[];
+  userSourceLanguages: string[];
+  bestTrustworthyUserPerLanguage: Record<string, number>;
+  trustworthyUserSourceLanguages: string[];
+  requiredTrustworthyUserSourceLanguages: string[];
+  missingTrustworthyUserSourceLanguages: string[];
+}
+
+interface CoverageTestsMetrics {
+  exampleTestsAvailableCount: number;
+  visibleTestsCapturedCount: number;
+  evaluationObservedTestsCount: number;
+  effectiveTestsAvailableCount: number;
+}
+
+function computeSourceMetrics(
+  problem: ProblemRecord,
+  context: CoverageRecordContext,
+): CoverageSourceMetrics {
+  const qualifyingOfficialSources = context.sources
+    .filter((source) => source.kind === 'official')
+    .filter(isCoverageSatisfyingOfficialSource);
   const harvestedOfficialEvaluationIds =
     context.officialSourceHarvest?.qualifyingEvaluationIds ?? [];
   const harvestedOfficialEvaluations = context.evaluations.filter((evaluation) =>
-    harvestedOfficialEvaluationIds.includes(evaluation.evaluationId)
+    harvestedOfficialEvaluationIds.includes(evaluation.evaluationId),
   );
   const userSources = context.sources.filter(
     (source) =>
-      source.kind === 'user-evaluation'
-      && source.sourceAvailable
-      && matchesConfiguredHandle(context.configuredUserHandle, source.userHandle),
-  );
-  const testsRecord = context.tests;
-  const exampleTestsAvailableCount = testsRecord?.examples.length ?? problem.examples.length ?? 0;
-  const visibleTestsCapturedCount = testsRecord?.visible.length ?? problem.visibleTests?.length ?? 0;
-  const evaluationObservedTestsCount = testsRecord?.evaluationObserved.length ?? 0;
-  const effectiveTestsAvailableCount = testsRecord?.effective?.length
-    ?? testsRecord?.examples?.length
-    ?? 0;
-  const solvedEvaluationCount = context.evaluations.filter((evaluation) =>
-    context.solvedEvaluationIds.has(evaluation.evaluationId)
-  ).length;
-  const officialSolutionPresent =
-    fragments.solutionFragmentArchived
-    || Object.keys(problem.officialSolutions ?? {}).length > 0;
-  const officialSourceIds = qualifyingOfficialSources
-    .map((source) => source.sourceId)
-    .sort();
-  const userSourceIds = userSources
-    .map((source) => source.sourceId)
-    .sort();
-  const officialSourceLanguages = uniqueSorted(
-    qualifyingOfficialSources.map((source) => normalizeCoverageLanguage(source.language)),
-  );
-  const userSourceLanguages = uniqueSorted(
-    userSources.map((source) => normalizeCoverageLanguage(source.language)),
+      source.kind === 'user-evaluation' &&
+      source.sourceAvailable &&
+      matchesConfiguredHandle(context.configuredUserHandle, source.userHandle),
   );
   const bestTrustworthyUserPerLanguage = context.ranking?.bestTrustworthyPerLanguage ?? {};
   const trustworthyUserSourceLanguages = uniqueSorted(
@@ -270,15 +262,129 @@ function buildCoverageRecord(
   );
   const requiredTrustworthyUserSourceLanguages = uniqueSorted(
     context.evaluations
-      .filter((evaluation) =>
-        matchesConfiguredHandle(context.configuredUserHandle, evaluation.user)
-        && isSolvedEvaluation(evaluation),
+      .filter(
+        (evaluation) =>
+          matchesConfiguredHandle(context.configuredUserHandle, evaluation.user) &&
+          isSolvedEvaluation(evaluation),
       )
       .map((evaluation) => normalizeCoverageLanguage(evaluation.language)),
   );
-  const missingTrustworthyUserSourceLanguages = requiredTrustworthyUserSourceLanguages.filter(
-    (language) => !trustworthyUserSourceLanguages.includes(language),
+
+  return {
+    qualifyingOfficialSources,
+    harvestedOfficialEvaluations,
+    userSources,
+    officialSourceIds: qualifyingOfficialSources.map((source) => source.sourceId).sort(),
+    userSourceIds: userSources.map((source) => source.sourceId).sort(),
+    officialSourceLanguages: uniqueSorted(
+      qualifyingOfficialSources.map((source) => normalizeCoverageLanguage(source.language)),
+    ),
+    userSourceLanguages: uniqueSorted(
+      userSources.map((source) => normalizeCoverageLanguage(source.language)),
+    ),
+    bestTrustworthyUserPerLanguage,
+    trustworthyUserSourceLanguages,
+    requiredTrustworthyUserSourceLanguages,
+    missingTrustworthyUserSourceLanguages: requiredTrustworthyUserSourceLanguages.filter(
+      (language) => !trustworthyUserSourceLanguages.includes(language),
+    ),
+  };
+}
+
+function firstCount(...values: Array<number | undefined>): number {
+  for (const value of values) {
+    if (value !== undefined) {
+      return value;
+    }
+  }
+  return 0;
+}
+
+function computeTestsMetrics(
+  problem: ProblemRecord,
+  testsRecord: ProblemTestsRecord | undefined,
+): CoverageTestsMetrics {
+  return {
+    exampleTestsAvailableCount: firstCount(testsRecord?.examples.length, problem.examples.length),
+    visibleTestsCapturedCount: firstCount(
+      testsRecord?.visible.length,
+      problem.visibleTests?.length,
+    ),
+    evaluationObservedTestsCount: firstCount(testsRecord?.evaluationObserved.length),
+    effectiveTestsAvailableCount: firstCount(
+      testsRecord?.effective?.length,
+      testsRecord?.examples?.length,
+    ),
+  };
+}
+
+function computeNotArchivedYet(
+  fragments: {
+    statementArchived: boolean;
+    solutionFragmentArchived: boolean;
+    testsFragmentArchived: boolean;
+  },
+  officialSourceCount: number,
+  userSourceCount: number,
+  evaluationCount: number,
+): boolean {
+  return (
+    !fragments.statementArchived &&
+    !fragments.solutionFragmentArchived &&
+    !fragments.testsFragmentArchived &&
+    officialSourceCount === 0 &&
+    userSourceCount === 0 &&
+    evaluationCount === 0
   );
+}
+
+function computeOfficialSourceBlocked(
+  officialSourceCount: number,
+  blockedReason: ProblemCoverageRecord['officialSourceBlockedReason'],
+): boolean {
+  return (
+    officialSourceCount === 0 &&
+    blockedReason !== undefined &&
+    blockedReason !== 'not-available-upstream'
+  );
+}
+
+function buildCoverageRecord(
+  problem: ProblemRecord,
+  context: CoverageRecordContext,
+): ProblemCoverageRecord {
+  const fragments = context.fragments ?? {
+    statementArchived: false,
+    solutionFragmentArchived: false,
+    testsFragmentArchived: false,
+  };
+  const sourceMetrics = computeSourceMetrics(problem, context);
+  const {
+    qualifyingOfficialSources,
+    harvestedOfficialEvaluations,
+    userSources,
+    officialSourceIds,
+    userSourceIds,
+    officialSourceLanguages,
+    userSourceLanguages,
+    bestTrustworthyUserPerLanguage,
+    trustworthyUserSourceLanguages,
+    requiredTrustworthyUserSourceLanguages,
+    missingTrustworthyUserSourceLanguages,
+  } = sourceMetrics;
+  const testsMetrics = computeTestsMetrics(problem, context.tests);
+  const {
+    exampleTestsAvailableCount,
+    visibleTestsCapturedCount,
+    evaluationObservedTestsCount,
+    effectiveTestsAvailableCount,
+  } = testsMetrics;
+  const solvedEvaluationCount = context.evaluations.filter((evaluation) =>
+    context.solvedEvaluationIds.has(evaluation.evaluationId)
+  ).length;
+  const officialSolutionPresent =
+    fragments.solutionFragmentArchived
+    || Object.keys(problem.officialSolutions ?? {}).length > 0;
   const testsCoverageStatus = deriveTestsCoverageStatus({
     testsFragmentArchived: fragments.testsFragmentArchived,
     exampleTestsAvailableCount,
@@ -300,13 +406,12 @@ function buildCoverageRecord(
   );
   const solvedByMe = context.solvedProblemIds.has(problem.id);
   const testsAvailable = testsCoverageStatus === 'captured';
-  const notArchivedYet =
-    !fragments.statementArchived
-    && !fragments.solutionFragmentArchived
-    && !fragments.testsFragmentArchived
-    && qualifyingOfficialSources.length === 0
-    && userSources.length === 0
-    && context.evaluations.length === 0;
+  const notArchivedYet = computeNotArchivedYet(
+    fragments,
+    qualifyingOfficialSources.length,
+    userSources.length,
+    context.evaluations.length,
+  );
   const archiveCompletenessStatus = deriveArchiveCompletenessStatus({
     solvedByMe,
     notArchivedYet,
@@ -356,10 +461,10 @@ function buildCoverageRecord(
     hasAnyArchivedSource: qualifyingOfficialSources.length + userSources.length > 0,
     testsAvailable,
     unsolvedByConfiguredHandle: !solvedByMe,
-    officialSourceBlocked:
-      qualifyingOfficialSources.length === 0
-      && officialSourceBlockedReason !== undefined
-      && officialSourceBlockedReason !== 'not-available-upstream',
+    officialSourceBlocked: computeOfficialSourceBlocked(
+      qualifyingOfficialSources.length,
+      officialSourceBlockedReason,
+    ),
     officialSourceBlockedReason,
     notArchivedYet,
     newSinceBaseline: didCoverageImproveSinceBaseline(context.baseline, {
@@ -381,68 +486,85 @@ function buildCoverageRecord(
   return record;
 }
 
-function deriveCoverageNotes(record: ProblemCoverageRecord): string[] {
-  const notes: string[] = [];
-  if (record.solutionFragmentArchived && !record.officialSourceArchived) {
-    notes.push('Editorial/solution fragment archived, but official source code is not archived yet.');
-  }
-  if (record.sourceListUrl && !record.officialSourceArchived) {
-    notes.push('Community source list exists upstream, but it is not counted as archived official source code.');
-  }
-  if (record.testsFragmentArchived && record.visibleTestsCapturedCount === 0) {
-    notes.push('Tests fragment archived, no visible test cases parsed.');
-  }
-  if (record.testsCoverageStatus === 'not-available-upstream') {
-    notes.push(
+interface CoverageNoteRule {
+  applies: (record: ProblemCoverageRecord) => boolean;
+  note: (record: ProblemCoverageRecord) => string;
+}
+
+const COVERAGE_NOTE_RULES: readonly CoverageNoteRule[] = [
+  {
+    applies: (record) => record.solutionFragmentArchived && !record.officialSourceArchived,
+    note: () => 'Editorial/solution fragment archived, but official source code is not archived yet.',
+  },
+  {
+    applies: (record) => Boolean(record.sourceListUrl) && !record.officialSourceArchived,
+    note: () =>
+      'Community source list exists upstream, but it is not counted as archived official source code.',
+  },
+  {
+    applies: (record) => record.testsFragmentArchived && record.visibleTestsCapturedCount === 0,
+    note: () => 'Tests fragment archived, no visible test cases parsed.',
+  },
+  {
+    applies: (record) => record.testsCoverageStatus === 'not-available-upstream',
+    note: () =>
       'PBInfo does not currently expose example, visible, or evaluation-observed tests for this problem in the archive.',
-    );
-  }
-  if (record.testsCoverageStatus === 'not-captured-yet') {
-    notes.push(
+  },
+  {
+    applies: (record) => record.testsCoverageStatus === 'not-captured-yet',
+    note: () =>
       'Tests are not captured yet for this problem; re-run statement/tests/evaluation crawling if test evidence is expected.',
-    );
-  }
-  if (record.exampleTestsAvailableCount > 0) {
-    notes.push(`Example tests available: ${record.exampleTestsAvailableCount}.`);
-  }
-  if (record.effectiveTestsAvailableCount > 0) {
-    notes.push(`Effective deduplicated tests available: ${record.effectiveTestsAvailableCount}.`);
-  }
-  if (record.evaluationObservedTestsCount > 0) {
-    notes.push(`Evaluation-observed tests archived: ${record.evaluationObservedTestsCount}.`);
-  }
-  if (record.solvedByMe && record.solvedEvaluationCount === 0) {
-    notes.push('Solved by archived handle, but no normalized evaluation detail is archived yet.');
-  }
-  if (record.missingTrustworthyUserSourceLanguages.length > 0) {
-    notes.push(
+  },
+  {
+    applies: (record) => record.exampleTestsAvailableCount > 0,
+    note: (record) => `Example tests available: ${record.exampleTestsAvailableCount}.`,
+  },
+  {
+    applies: (record) => record.effectiveTestsAvailableCount > 0,
+    note: (record) =>
+      `Effective deduplicated tests available: ${record.effectiveTestsAvailableCount}.`,
+  },
+  {
+    applies: (record) => record.evaluationObservedTestsCount > 0,
+    note: (record) => `Evaluation-observed tests archived: ${record.evaluationObservedTestsCount}.`,
+  },
+  {
+    applies: (record) => record.solvedByMe && record.solvedEvaluationCount === 0,
+    note: () => 'Solved by archived handle, but no normalized evaluation detail is archived yet.',
+  },
+  {
+    applies: (record) => record.missingTrustworthyUserSourceLanguages.length > 0,
+    note: (record) =>
       `Missing trustworthy 100-point user source languages: ${record.missingTrustworthyUserSourceLanguages.join(', ')}.`,
-    );
-  }
-  if (
-    record.officialSourceStatus === 'not-available-upstream'
-    && !record.sourceListUrl
-  ) {
-    notes.push('PBInfo does not currently list an upstream official source page for this problem.');
-  }
-  if (
-    record.officialSourceStatus === 'not-available-upstream'
-    && record.sourceListUrl
-  ) {
-    notes.push('Official source harvest completed, but PBInfo does not expose a qualifying 100-point official source body for this problem.');
-  }
-  if (record.officialSourceStatus === 'restricted-upstream') {
-    notes.push('PBInfo restricts official/editorial source access for this problem upstream.');
-  }
-  if (record.requiredTrustworthyUserSourceLanguages.length > 0) {
-    notes.push(
+  },
+  {
+    applies: (record) =>
+      record.officialSourceStatus === 'not-available-upstream' && !record.sourceListUrl,
+    note: () => 'PBInfo does not currently list an upstream official source page for this problem.',
+  },
+  {
+    applies: (record) =>
+      record.officialSourceStatus === 'not-available-upstream' && Boolean(record.sourceListUrl),
+    note: () =>
+      'Official source harvest completed, but PBInfo does not expose a qualifying 100-point official source body for this problem.',
+  },
+  {
+    applies: (record) => record.officialSourceStatus === 'restricted-upstream',
+    note: () => 'PBInfo restricts official/editorial source access for this problem upstream.',
+  },
+  {
+    applies: (record) => record.requiredTrustworthyUserSourceLanguages.length > 0,
+    note: (record) =>
       `Solved 100-point languages for this handle: ${record.requiredTrustworthyUserSourceLanguages.join(', ')}.`,
-    );
-  }
-  if (record.newSinceBaseline) {
-    notes.push(`Coverage improved relative to baseline snapshot ${DEFAULT_BASELINE_SNAPSHOT_ID}.`);
-  }
-  return notes;
+  },
+  {
+    applies: (record) => record.newSinceBaseline,
+    note: () => `Coverage improved relative to baseline snapshot ${DEFAULT_BASELINE_SNAPSHOT_ID}.`,
+  },
+];
+
+function deriveCoverageNotes(record: ProblemCoverageRecord): string[] {
+  return COVERAGE_NOTE_RULES.filter((rule) => rule.applies(record)).map((rule) => rule.note(record));
 }
 
 function deriveProblemMirrorRoute(problem: ProblemRecord): string {
@@ -554,66 +676,88 @@ function deriveSolvedProblemSets(
   problemIds: Set<number>;
   evaluationIds: Set<number>;
 } {
-  const problemIds = new Set<number>();
-  const evaluationIds = new Set<number>();
+  const sets: SolvedProblemSets = { problemIds: new Set<number>(), evaluationIds: new Set<number>() };
   const evaluationsById = new Map<number, EvaluationRecord>();
   for (const evaluation of evaluations) {
     evaluationsById.set(evaluation.evaluationId, evaluation);
   }
 
   for (const feed of feeds) {
-    const feedMatchesConfiguredUser =
-      !configuredUserHandle || matchesConfiguredHandle(configuredUserHandle, feed.user);
-
-    for (const entry of feed.entries ?? []) {
-      const entryUser = entry.user?.trim();
-      if (entryUser) {
-        if (!matchesConfiguredHandle(configuredUserHandle, entryUser)) {
-          continue;
-        }
-      } else if (!feedMatchesConfiguredUser) {
-        continue;
-      }
-
-      const evaluation =
-        typeof entry.evaluationId === 'number'
-          ? evaluationsById.get(entry.evaluationId)
-          : undefined;
-      if (evaluation) {
-        if (!isSolvedEvaluation(evaluation)) {
-          continue;
-        }
-        problemIds.add(evaluation.problemId);
-        evaluationIds.add(evaluation.evaluationId);
-        continue;
-      }
-
-      if ((entry.score ?? 0) < 100) {
-        continue;
-      }
-      if (typeof entry.problemId === 'number') {
-        problemIds.add(entry.problemId);
-      }
-      if (typeof entry.evaluationId === 'number') {
-        evaluationIds.add(entry.evaluationId);
-      }
-    }
+    collectSolvedFromFeed(feed, configuredUserHandle, evaluationsById, sets);
   }
 
   for (const evaluation of evaluations) {
     if (
-      matchesConfiguredHandle(configuredUserHandle, evaluation.user)
-      && isSolvedEvaluation(evaluation)
+      matchesConfiguredHandle(configuredUserHandle, evaluation.user) &&
+      isSolvedEvaluation(evaluation)
     ) {
-      problemIds.add(evaluation.problemId);
-      evaluationIds.add(evaluation.evaluationId);
+      addSolved(sets, evaluation.problemId, evaluation.evaluationId);
     }
   }
 
-  return {
-    problemIds,
-    evaluationIds,
-  };
+  return sets;
+}
+
+interface SolvedProblemSets {
+  problemIds: Set<number>;
+  evaluationIds: Set<number>;
+}
+
+function addSolved(sets: SolvedProblemSets, problemId?: number, evaluationId?: number): void {
+  if (typeof problemId === 'number') {
+    sets.problemIds.add(problemId);
+  }
+  if (typeof evaluationId === 'number') {
+    sets.evaluationIds.add(evaluationId);
+  }
+}
+
+function entryMatchesConfiguredUser(
+  entryUser: string | undefined,
+  feedMatchesConfiguredUser: boolean,
+  configuredUserHandle: string | undefined,
+): boolean {
+  if (entryUser) {
+    return matchesConfiguredHandle(configuredUserHandle, entryUser);
+  }
+  return feedMatchesConfiguredUser;
+}
+
+function collectSolvedFromFeed(
+  feed: UserSolutionsRecord,
+  configuredUserHandle: string | undefined,
+  evaluationsById: Map<number, EvaluationRecord>,
+  sets: SolvedProblemSets,
+): void {
+  const feedMatchesConfiguredUser =
+    !configuredUserHandle || matchesConfiguredHandle(configuredUserHandle, feed.user);
+
+  for (const entry of feed.entries ?? []) {
+    if (
+      entryMatchesConfiguredUser(entry.user?.trim(), feedMatchesConfiguredUser, configuredUserHandle)
+    ) {
+      collectSolvedFromEntry(entry, evaluationsById, sets);
+    }
+  }
+}
+
+function collectSolvedFromEntry(
+  entry: NonNullable<UserSolutionsRecord['entries']>[number],
+  evaluationsById: Map<number, EvaluationRecord>,
+  sets: SolvedProblemSets,
+): void {
+  const evaluation =
+    typeof entry.evaluationId === 'number' ? evaluationsById.get(entry.evaluationId) : undefined;
+  if (evaluation) {
+    if (isSolvedEvaluation(evaluation)) {
+      addSolved(sets, evaluation.problemId, evaluation.evaluationId);
+    }
+    return;
+  }
+
+  if ((entry.score ?? 0) >= 100) {
+    addSolved(sets, entry.problemId, entry.evaluationId);
+  }
 }
 
 function isSolvedEvaluation(evaluation: EvaluationRecord): boolean {
@@ -651,6 +795,20 @@ function deriveTestsCoverageStatus(input: {
   return 'not-captured-yet';
 }
 
+function harvestIndicatesNoUpstreamSource(
+  harvestedOfficialEvaluations: EvaluationRecord[],
+  officialSourceHarvest: OfficialSourceHarvestRecord,
+): boolean {
+  const candidateEvaluationIds = officialSourceHarvest.qualifyingEvaluationIds ?? [];
+  if (candidateEvaluationIds.length === 0) {
+    return true;
+  }
+  return (
+    harvestedOfficialEvaluations.length === candidateEvaluationIds.length &&
+    harvestedOfficialEvaluations.every((evaluation) => !evaluation.sourceAvailable)
+  );
+}
+
 function deriveOfficialSourceStatus(
   problem: ProblemRecord,
   qualifyingOfficialSources: SourceRecord[],
@@ -663,17 +821,11 @@ function deriveOfficialSourceStatus(
   if (problem.editorialAvailability === 'hidden' || problem.editorialAvailability === 'restricted') {
     return 'restricted-upstream';
   }
-  if (officialSourceHarvest?.sourceListHarvested) {
-    const candidateEvaluationIds = officialSourceHarvest.qualifyingEvaluationIds ?? [];
-    if (candidateEvaluationIds.length === 0) {
-      return 'not-available-upstream';
-    }
-    if (
-      harvestedOfficialEvaluations.length === candidateEvaluationIds.length
-      && harvestedOfficialEvaluations.every((evaluation) => !evaluation.sourceAvailable)
-    ) {
-      return 'not-available-upstream';
-    }
+  if (
+    officialSourceHarvest?.sourceListHarvested &&
+    harvestIndicatesNoUpstreamSource(harvestedOfficialEvaluations, officialSourceHarvest)
+  ) {
+    return 'not-available-upstream';
   }
   if (!problem.sourceListUrl?.trim()) {
     return 'not-available-upstream';
@@ -751,29 +903,56 @@ function didCoverageImproveSinceBaseline(
   },
 ): boolean {
   if (!baseline) {
-    return current.effectiveTestsAvailableCount > 0
-      || current.visibleTestsCapturedCount > 0
-      || current.evaluationObservedTestsCount > 0
-      || current.officialSourceCount > 0
-      || current.userSourceCount > 0
-      || current.trustworthyUserSourceLanguages.length > 0
-      || current.solvedByMe;
+    return hasAnyCoverageEvidence(current);
   }
+  return coverageExceedsBaseline(baseline, current);
+}
 
-  const baselineEffectiveTests = baseline.effectiveTestsAvailableCount ?? baseline.visibleTestsCapturedCount ?? 0;
-  const baselineVisibleTests = baseline.visibleTestsCapturedCount ?? 0;
-  const baselineEvaluationObserved = baseline.evaluationObservedTestsCount ?? 0;
-  const baselineOfficialSourceCount = baseline.officialSourceCount ?? 0;
-  const baselineUserSourceCount = baseline.userSourceCount ?? 0;
-  const baselineTrustworthyLanguages = baseline.trustworthyUserSourceLanguages ?? [];
+interface CoverageBaselineComparison {
+  effectiveTestsAvailableCount: number;
+  visibleTestsCapturedCount: number;
+  evaluationObservedTestsCount: number;
+  officialSourceCount: number;
+  userSourceCount: number;
+  trustworthyUserSourceLanguages: string[];
+  solvedByMe: boolean;
+}
 
-  return current.effectiveTestsAvailableCount > baselineEffectiveTests
-    || current.visibleTestsCapturedCount > baselineVisibleTests
-    || current.evaluationObservedTestsCount > baselineEvaluationObserved
-    || current.officialSourceCount > baselineOfficialSourceCount
-    || current.userSourceCount > baselineUserSourceCount
-    || current.trustworthyUserSourceLanguages.length > baselineTrustworthyLanguages.length
-    || (current.solvedByMe && !baseline.solvedByMe);
+function hasAnyCoverageEvidence(current: CoverageBaselineComparison): boolean {
+  return (
+    current.effectiveTestsAvailableCount > 0 ||
+    current.visibleTestsCapturedCount > 0 ||
+    current.evaluationObservedTestsCount > 0 ||
+    current.officialSourceCount > 0 ||
+    current.userSourceCount > 0 ||
+    current.trustworthyUserSourceLanguages.length > 0 ||
+    current.solvedByMe
+  );
+}
+
+function coverageExceedsBaseline(
+  baseline: ProblemCoverageRecord,
+  current: CoverageBaselineComparison,
+): boolean {
+  const baselineEffectiveTests = firstCount(
+    baseline.effectiveTestsAvailableCount,
+    baseline.visibleTestsCapturedCount,
+  );
+  const comparisons: Array<[number, number]> = [
+    [current.effectiveTestsAvailableCount, baselineEffectiveTests],
+    [current.visibleTestsCapturedCount, baseline.visibleTestsCapturedCount ?? 0],
+    [current.evaluationObservedTestsCount, baseline.evaluationObservedTestsCount ?? 0],
+    [current.officialSourceCount, baseline.officialSourceCount ?? 0],
+    [current.userSourceCount, baseline.userSourceCount ?? 0],
+    [
+      current.trustworthyUserSourceLanguages.length,
+      (baseline.trustworthyUserSourceLanguages ?? []).length,
+    ],
+  ];
+  if (comparisons.some(([currentValue, baselineValue]) => currentValue > baselineValue)) {
+    return true;
+  }
+  return current.solvedByMe && !baseline.solvedByMe;
 }
 
 function normalizeCoverageLanguage(language: string | undefined): string {
