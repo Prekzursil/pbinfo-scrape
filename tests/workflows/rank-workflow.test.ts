@@ -339,6 +339,86 @@ describe('runRankingWorkflow', () => {
     });
   });
 
+  test('ranks problems that only have source records and tolerates sources without code or candidate handle', async () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-ranking-source-only-'));
+    tempDirs.push(workspaceRoot);
+    mkdirSync(join(workspaceRoot, '.local'), { recursive: true });
+    writeFileSync(
+      join(workspaceRoot, '.local', 'pbinfo.local.json'),
+      JSON.stringify({ crawl: { userHandle: 'Prekzursil' } }),
+      'utf8',
+    );
+
+    const config = loadLocalConfig(workspaceRoot);
+    const snapshot = prepareSnapshot(config, {
+      snapshotId: 'snapshot-source-only',
+      scope: 'all',
+      now: new Date('2026-03-20T00:00:00.000Z'),
+    });
+    const evaluationsRoot = join(snapshot.normalizedRoot, 'evaluations');
+    const sourcesRoot = join(snapshot.normalizedRoot, 'sources');
+    mkdirSync(evaluationsRoot, { recursive: true });
+    mkdirSync(sourcesRoot, { recursive: true });
+
+    // Evaluation without a user handle is filtered out by the configured-handle gate.
+    writeFileSync(
+      join(evaluationsRoot, 'no-user.json'),
+      JSON.stringify({
+        evaluationId: 999,
+        problemId: 70,
+        language: 'cpp',
+        score: 100,
+        suspicionFlags: [],
+        tests: [],
+        fetchedAt: '2026-03-20T00:00:00.000Z',
+        provenance: ['evaluation-detail'],
+      }),
+      'utf8',
+    );
+
+    // Official source record with no source code exercises the suspicion-flag fallback.
+    writeFileSync(
+      join(sourcesRoot, 'official-70-cpp.json'),
+      JSON.stringify({
+        sourceId: 'official-70-cpp',
+        kind: 'official',
+        problemId: 70,
+        language: 'cpp',
+        score: 100,
+        sourceAvailable: false,
+        provenanceType: 'official-evaluation',
+        provenance: ['official'],
+      }),
+      'utf8',
+    );
+
+    const result = await runRankingWorkflow(workspaceRoot);
+    const summary = JSON.parse(
+      readFileSync(join(snapshot.normalizedRoot, 'rankings', 'best-submissions.json'), 'utf8'),
+    );
+
+    expect(result.problemsRanked).toBe(1);
+    expect(summary.problems[0]).toMatchObject({
+      problemId: 70,
+      orderedUserEvaluationIds: [],
+    });
+  });
+
+  test('returns an empty ranking when the snapshot has no evaluations or sources directories', async () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-ranking-empty-'));
+    tempDirs.push(workspaceRoot);
+
+    const config = loadLocalConfig(workspaceRoot);
+    prepareSnapshot(config, {
+      snapshotId: 'snapshot-empty',
+      scope: 'all',
+      now: new Date('2026-03-20T00:00:00.000Z'),
+    });
+
+    const result = await runRankingWorkflow(workspaceRoot);
+    expect(result.problemsRanked).toBe(0);
+  });
+
   test('does not let tiny-source alone disqualify a legitimate 100-point language from trustworthy ranking', async () => {
     const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-ranking-'));
     tempDirs.push(workspaceRoot);

@@ -576,9 +576,23 @@ function persistImportedCookies(
   );
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  runCli().catch((error) => {
-    process.stderr.write(`${error instanceof Error ? error.stack : String(error)}\n`);
-    process.exitCode = 1;
-  });
+export function isCliEntrypoint(moduleUrl: string, argv = process.argv): boolean {
+  const entrypoint = argv[1];
+  if (!entrypoint) {
+    return false;
+  }
+  return moduleUrl === pathToFileURL(entrypoint).href;
 }
+
+export function reportCliError(error: unknown): void {
+  process.stderr.write(`${error instanceof Error ? error.stack : String(error)}\n`);
+  process.exitCode = 1;
+}
+
+export function runCliIfEntrypoint(moduleUrl: string, argv = process.argv): void {
+  if (isCliEntrypoint(moduleUrl, argv)) {
+    void runCli(argv).catch(reportCliError);
+  }
+}
+
+runCliIfEntrypoint(import.meta.url);

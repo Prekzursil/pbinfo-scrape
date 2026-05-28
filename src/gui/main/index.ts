@@ -79,12 +79,13 @@ app.on('window-all-closed', () => {
 });
 
 async function maybeWriteDesktopSmokeMarker(window: BrowserWindow): Promise<void> {
-  if (!desktopSmokeMarkerPath) {
+  const markerPath = desktopSmokeMarkerPath;
+  if (!markerPath) {
     return;
   }
 
   try {
-    writeDesktopSmokeMarker({
+    writeDesktopSmokeMarker(markerPath, {
       phase: 'window-loaded',
     });
 
@@ -315,6 +316,7 @@ async function maybeWriteDesktopSmokeMarker(window: BrowserWindow): Promise<void
     );
 
     writeDesktopSmokeMarker(
+      markerPath,
       report && typeof report === 'object' && 'error' in report
         ? {
             phase: 'error',
@@ -326,22 +328,18 @@ async function maybeWriteDesktopSmokeMarker(window: BrowserWindow): Promise<void
           },
     );
   } catch (error) {
-    writeDesktopSmokeMarker({
+    writeDesktopSmokeMarker(markerPath, {
       phase: 'error',
       error: error instanceof Error ? error.message : String(error),
     });
   }
 }
 
-function writeDesktopSmokeMarker(payload: Record<string, unknown>): void {
-  if (!desktopSmokeMarkerPath) {
-    return;
-  }
-
-  mkdirSync(dirname(desktopSmokeMarkerPath), {
+function writeDesktopSmokeMarker(markerPath: string, payload: Record<string, unknown>): void {
+  mkdirSync(dirname(markerPath), {
     recursive: true,
   });
-  writeFileSync(desktopSmokeMarkerPath, JSON.stringify(payload, null, 2), 'utf8');
+  writeFileSync(markerPath, JSON.stringify(payload, null, 2), 'utf8');
 }
 
 void bootstrap();

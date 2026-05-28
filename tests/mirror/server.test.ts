@@ -97,4 +97,72 @@ describe('startMirrorServer', () => {
     expect(await problemsResponse.text()).toContain('<h1>Probleme</h1>');
     expect(await assetResponse.text()).toContain('body { color: red; }');
   });
+
+  test('returns 404s for unknown assets and routes, raw fallbacks, and 500s for missing raw pages', async () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-serve-fallback-'));
+    tempDirs.push(workspaceRoot);
+
+    const config = loadLocalConfig(workspaceRoot);
+    const snapshot = prepareSnapshot(config, {
+      snapshotId: 'snapshot-fallback',
+      scope: 'public',
+      now: new Date('2026-03-10T00:00:00.000Z'),
+    });
+    mkdirSync(snapshot.rawAssetsRoot, { recursive: true });
+    mkdirSync(snapshot.rawPagesRoot, { recursive: true });
+    writeFileSync(
+      join(snapshot.rawPagesRoot, 'page-raw-fallback.html'),
+      '<html><body><h1>Raw Fallback</h1></body></html>',
+      'utf8',
+    );
+    writeFileSync(
+      snapshot.routesManifestPath,
+      JSON.stringify([
+        {
+          snapshotId: snapshot.snapshotId,
+          route: '/raw-only',
+          sourceFile: 'page-raw-fallback.html',
+          template: 'raw-page',
+          entityKey: '/raw-only',
+        },
+        {
+          snapshotId: snapshot.snapshotId,
+          route: '/missing-raw',
+          sourceFile: 'page-does-not-exist.html',
+          template: 'raw-page',
+          entityKey: '/missing-raw',
+        },
+      ]),
+      'utf8',
+    );
+
+    const server = await startMirrorServer({ workspaceRoot, port: 0 });
+    stops.push(server.close);
+
+    const missingAsset = await fetch(`${server.baseUrl}/_assets/nope.css`);
+    const missingRoute = await fetch(`${server.baseUrl}/unknown`);
+    const rawFallback = await fetch(`${server.baseUrl}/raw-only`);
+    const missingRaw = await fetch(`${server.baseUrl}/missing-raw`);
+
+    expect(missingAsset.status).toBe(404);
+    expect(missingRoute.status).toBe(404);
+    expect(await rawFallback.text()).toContain('<h1>Raw Fallback</h1>');
+    expect(missingRaw.status).toBe(500);
+  });
+
+  test('throws when no built mirror routes are available', async () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-serve-no-routes-'));
+    tempDirs.push(workspaceRoot);
+
+    const config = loadLocalConfig(workspaceRoot);
+    prepareSnapshot(config, {
+      snapshotId: 'snapshot-no-routes',
+      scope: 'public',
+      now: new Date('2026-03-10T00:00:00.000Z'),
+    });
+
+    await expect(startMirrorServer({ workspaceRoot, port: 0 })).rejects.toThrow(
+      /requires a built mirror/,
+    );
+  });
 });

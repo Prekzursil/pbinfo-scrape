@@ -81,4 +81,28 @@ describe('auth bundle', () => {
       }),
     ]);
   });
+
+  test('creates a bundle without an explicit recipient override, deriving from a new identity', async () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-auth-bundle-default-'));
+    tempDirs.push(workspaceRoot);
+
+    const created = await createEncryptedAuthBundle({ workspaceRoot });
+
+    expect(created.bundlePath).toBe(join(workspaceRoot, 'archive', 'secrets', 'pbinfo-auth.age'));
+    expect(readFileSync(created.bundlePath, 'utf8')).toContain('BEGIN AGE ENCRYPTED FILE');
+    expect(existsSync(created.identityPath)).toBe(true);
+  });
+
+  test('restore falls back to configured bundle and identity paths when overrides are omitted', async () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-auth-bundle-restore-default-'));
+    tempDirs.push(workspaceRoot);
+
+    await createEncryptedAuthBundle({ workspaceRoot });
+    const restored = await restoreEncryptedAuthBundle({
+      workspaceRoot,
+      sourcePath: '',
+    });
+
+    expect(restored.restored).toBe(true);
+  });
 });

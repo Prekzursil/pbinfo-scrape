@@ -9,6 +9,7 @@ import {
   createGuiJob,
   listGuiJobs,
   readGuiJob,
+  readGuiJobEvents,
   recoverInterruptedGuiJobs,
   updateGuiJob,
 } from '../../src/gui/main/job-store.js';
@@ -81,6 +82,27 @@ describe('job store', () => {
       }),
     ]);
     expect(existsSync(reloaded.logPath)).toBe(true);
+  });
+
+  test('reads job events through the public reader and returns empty when the log is missing', () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-gui-job-events-'));
+    tempDirs.push(workspaceRoot);
+
+    // createGuiJob with no explicit `now` exercises the default ISO timestamp branch.
+    const created = createGuiJob(workspaceRoot, { jobId: 'events-job', kind: 'crawl' });
+    appendGuiJobEvent(workspaceRoot, 'events-job', {
+      timestamp: '2026-03-10T12:00:01.000Z',
+      level: 'info',
+      stage: 'crawl',
+      message: 'chunk done',
+    });
+
+    expect(readGuiJobEvents(workspaceRoot, 'events-job')).toEqual([
+      expect.objectContaining({ message: 'chunk done' }),
+    ]);
+
+    rmSync(created.logPath, { force: true });
+    expect(readGuiJobEvents(workspaceRoot, 'events-job')).toEqual([]);
   });
 
   test('merges event detail into job detail while appending later log lines', () => {

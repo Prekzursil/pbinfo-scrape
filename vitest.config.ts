@@ -20,6 +20,7 @@ export default defineConfig({
         'src/types/**',
         'src/gui/shared/types.ts',
         'src/gui/shared/contracts.ts',
+        'src/gui/shared/bridge.ts',
         // Renderer/static assets and styling are not executable TypeScript.
         'src/gui/renderer/assets/**',
         '**/*.css',
