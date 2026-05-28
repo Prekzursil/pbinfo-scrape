@@ -101,19 +101,23 @@ export function App({ desktop }: AppProps) {
     };
   }, [bridge]);
 
+  const resetWorkspaceData = useCallback(() => {
+    setWorkspaceState(null);
+    setJobs([]);
+    setCrawlStatus(null);
+    setJobEvents([]);
+    setArchiveSummary(null);
+    setArchiveListing(null);
+    setArchiveRecordDetail(null);
+    setCoverageSummary(null);
+    setCoverageListing(null);
+    setCoverageDetail(null);
+  }, []);
+
   const refresh = useCallback(
     async (snapshotOverride?: string) => {
       if (!bridge) {
-        setWorkspaceState(null);
-        setJobs([]);
-        setCrawlStatus(null);
-        setJobEvents([]);
-        setArchiveSummary(null);
-        setArchiveListing(null);
-        setArchiveRecordDetail(null);
-        setCoverageSummary(null);
-        setCoverageListing(null);
-        setCoverageDetail(null);
+        resetWorkspaceData();
         return;
       }
 
@@ -123,16 +127,7 @@ export function App({ desktop }: AppProps) {
       }
 
       if (!nextWorkspace) {
-        setWorkspaceState(null);
-        setJobs([]);
-        setCrawlStatus(null);
-        setJobEvents([]);
-        setArchiveSummary(null);
-        setArchiveListing(null);
-        setArchiveRecordDetail(null);
-        setCoverageSummary(null);
-        setCoverageListing(null);
-        setCoverageDetail(null);
+        resetWorkspaceData();
         return;
       }
 
@@ -160,7 +155,7 @@ export function App({ desktop }: AppProps) {
       setCrawlStatus(nextCrawlStatus);
       setJobEvents(nextJobEvents);
     },
-    [bridge, selectedSnapshotId, verbosityMode],
+    [bridge, resetWorkspaceData, selectedSnapshotId, verbosityMode],
   );
 
   useEffect(() => {
@@ -195,59 +190,23 @@ export function App({ desktop }: AppProps) {
     };
   }, [bridge, refresh, workspaceState]);
 
-  useEffect(() => {
-    let cancelled = false;
-    void (async () => {
-      if (!bridge || !workspaceState) {
-        if (!cancelled) {
-          setArchiveSummary(null);
-        }
-        return;
-      }
-      try {
-        const summary = await bridge.getArchiveExplorerSummary(selectedSnapshotId);
-        if (!cancelled) {
-          setArchiveSummary(summary);
-        }
-      } catch (error) {
-        if (!cancelled) {
-          setArchiveSummary(null);
-          setErrorMessage(toMessage(error));
-        }
-      }
-    })();
+  useSnapshotSummary({
+    bridge,
+    workspaceState,
+    selectedSnapshotId,
+    fetchSummary: (target, snapshotId) => target.getArchiveExplorerSummary(snapshotId),
+    setSummary: setArchiveSummary,
+    setErrorMessage,
+  });
 
-    return () => {
-      cancelled = true;
-    };
-  }, [bridge, selectedSnapshotId, workspaceState]);
-
-  useEffect(() => {
-    let cancelled = false;
-    void (async () => {
-      if (!bridge || !workspaceState) {
-        if (!cancelled) {
-          setCoverageSummary(null);
-        }
-        return;
-      }
-      try {
-        const summary = await bridge.getCoverageSummary(selectedSnapshotId);
-        if (!cancelled) {
-          setCoverageSummary(summary);
-        }
-      } catch (error) {
-        if (!cancelled) {
-          setCoverageSummary(null);
-          setErrorMessage(toMessage(error));
-        }
-      }
-    })();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [bridge, selectedSnapshotId, workspaceState]);
+  useSnapshotSummary({
+    bridge,
+    workspaceState,
+    selectedSnapshotId,
+    fetchSummary: (target, snapshotId) => target.getCoverageSummary(snapshotId),
+    setSummary: setCoverageSummary,
+    setErrorMessage,
+  });
 
   useEffect(() => {
     let cancelled = false;
@@ -751,6 +710,44 @@ async function readPreferredJobEvents(
           : 18;
 
   return bridge.listJobEvents(preferredJob.jobId, eventLimit).catch(() => []);
+}
+
+function useSnapshotSummary<T>(params: {
+  bridge: DesktopBridge | undefined;
+  workspaceState: GuiWorkspaceState | null | undefined;
+  selectedSnapshotId: string;
+  fetchSummary: (bridge: DesktopBridge, snapshotId: string) => Promise<T>;
+  setSummary: (value: T | null) => void;
+  setErrorMessage: (message: string) => void;
+}): void {
+  const { bridge, workspaceState, selectedSnapshotId, fetchSummary, setSummary, setErrorMessage } =
+    params;
+  useEffect(() => {
+    let cancelled = false;
+    void (async () => {
+      if (!bridge || !workspaceState) {
+        if (!cancelled) {
+          setSummary(null);
+        }
+        return;
+      }
+      try {
+        const summary = await fetchSummary(bridge, selectedSnapshotId);
+        if (!cancelled) {
+          setSummary(summary);
+        }
+      } catch (error) {
+        if (!cancelled) {
+          setSummary(null);
+          setErrorMessage(toMessage(error));
+        }
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [bridge, selectedSnapshotId, workspaceState]);
 }
 
 function findLatestSnapshotId(jobs: GuiJobRecord[]): string | undefined {

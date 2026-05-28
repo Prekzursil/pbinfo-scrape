@@ -11,7 +11,7 @@ import {
   guiVerbosityModeSchema,
   guiJobKindSchema,
   persistedCookieSchema,
-  profileProvenanceSchema,
+  profileIdentityFields,
 } from './types.js';
 
 export const guiWorkspaceSelectionSchema = z
@@ -22,10 +22,7 @@ export const guiWorkspaceSelectionSchema = z
 
 export const createProfileInputSchema = z
   .object({
-    profileId: z.string().min(1),
-    label: z.string().min(1),
-    userHandle: z.string().min(1).optional(),
-    provenance: profileProvenanceSchema,
+    ...profileIdentityFields,
     sessionCookies: z.array(persistedCookieSchema),
     encryptedBundlePath: z.string().min(1).optional(),
   })

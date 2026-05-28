@@ -144,14 +144,29 @@ export function buildCli(handlers: CliHandlers = createDefaultHandlers()): Comma
     .action(async (options: { recipient?: string }) => {
       await handlers.authBundle(resolveWorkspace(program), options.recipient);
     });
-  auth
-    .command('restore-bundle')
-    .description('Restore auth/session state from an encrypted repo-stored bundle')
-    .requiredOption('--source <path>', 'Encrypted bundle path')
-    .option('--identity <path>', 'Override the configured age identity path')
-    .action(async (options: { source: string; identity?: string }) => {
-      await handlers.authRestoreBundle(resolveWorkspace(program), options.source, options.identity);
-    });
+  const registerRestoreBundleCommand = (
+    parent: Command,
+    name: string,
+    description: string,
+  ): void => {
+    parent
+      .command(name)
+      .description(description)
+      .requiredOption('--source <path>', 'Encrypted bundle path')
+      .option('--identity <path>', 'Override the configured age identity path')
+      .action(async (options: { source: string; identity?: string }) => {
+        await handlers.authRestoreBundle(
+          resolveWorkspace(program),
+          options.source,
+          options.identity,
+        );
+      });
+  };
+  registerRestoreBundleCommand(
+    auth,
+    'restore-bundle',
+    'Restore auth/session state from an encrypted repo-stored bundle',
+  );
 
   const crawl = program.command('crawl').description('Queue and process crawl work');
   const registerCrawlScope = (
@@ -281,14 +296,11 @@ export function buildCli(handlers: CliHandlers = createDefaultHandlers()): Comma
     .action(async (options: { recipient?: string }) => {
       await handlers.authBundle(resolveWorkspace(program), options.recipient);
     });
-  secrets
-    .command('restore')
-    .description('Restore local auth/session files from the encrypted bundle')
-    .requiredOption('--source <path>', 'Encrypted bundle path')
-    .option('--identity <path>', 'Override the configured age identity path')
-    .action(async (options: { source: string; identity?: string }) => {
-      await handlers.authRestoreBundle(resolveWorkspace(program), options.source, options.identity);
-    });
+  registerRestoreBundleCommand(
+    secrets,
+    'restore',
+    'Restore local auth/session files from the encrypted bundle',
+  );
 
   program
     .command('build-mirror')

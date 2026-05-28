@@ -160,17 +160,8 @@ export interface SourceRecord {
   provenance: string[];
 }
 
-export interface BestSubmissionRecord {
+export interface BestSubmissionRecord extends RankedProblemSubmissions {
   problemId: number;
-  bestUserOverallEvaluationId?: number;
-  bestUserPerLanguage: Record<string, number>;
-  bestTrustworthyOverallEvaluationId?: number;
-  bestTrustworthyPerLanguage: Record<string, number>;
-  bestFastPerLanguage: Record<string, number>;
-  bestOfficialPerLanguage: Record<string, string>;
-  suspiciousCandidateEvaluationIds: number[];
-  duplicateEvaluationIds: number[];
-  orderedUserEvaluationIds: number[];
 }
 
 export interface MirrorRouteRecord {

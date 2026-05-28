@@ -81,12 +81,16 @@ export const desktopPreferencesRecordSchema = z
   })
   .strict();
 
+export const profileIdentityFields = {
+  profileId: z.string().min(1),
+  label: z.string().min(1),
+  userHandle: z.string().min(1).optional(),
+  provenance: profileProvenanceSchema,
+} as const;
+
 export const guiProfileRecordSchema = z
   .object({
-    profileId: z.string().min(1),
-    label: z.string().min(1),
-    userHandle: z.string().min(1).optional(),
-    provenance: profileProvenanceSchema,
+    ...profileIdentityFields,
     sessionCookiesPath: z.string().min(1),
     encryptedBundlePath: z.string().min(1).optional(),
     createdAt: z.string().datetime(),
@@ -168,13 +172,17 @@ export const guiArchiveDatasetSummarySchema = z
   })
   .strict();
 
+const mirrorLocationFields = {
+  snapshotId: z.string().min(1),
+  normalizedRoot: z.string().min(1),
+  mirrorRoot: z.string().min(1),
+  mirrorServeCommand: z.string().min(1),
+  mirrorUrl: z.string().min(1),
+} as const;
+
 export const guiArchiveSummarySchema = z
   .object({
-    snapshotId: z.string().min(1),
-    normalizedRoot: z.string().min(1),
-    mirrorRoot: z.string().min(1),
-    mirrorServeCommand: z.string().min(1),
-    mirrorUrl: z.string().min(1),
+    ...mirrorLocationFields,
     datasets: z.array(guiArchiveDatasetSummarySchema),
   })
   .strict();
@@ -269,12 +277,8 @@ export const guiCoverageRecordSchema = z
 
 export const guiCoverageSummarySchema = z
   .object({
-    snapshotId: z.string().min(1),
+    ...mirrorLocationFields,
     coverageRoot: z.string().min(1),
-    normalizedRoot: z.string().min(1),
-    mirrorRoot: z.string().min(1),
-    mirrorServeCommand: z.string().min(1),
-    mirrorUrl: z.string().min(1),
     totalProblems: z.number().int().nonnegative(),
     solvedByMeCount: z.number().int().nonnegative(),
     statementArchivedCount: z.number().int().nonnegative(),
