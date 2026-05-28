@@ -20,6 +20,7 @@ import type {
   GuiJobEvent,
   GuiJobRecord,
   GuiProfileRecord,
+  GuiStartJobInput,
   GuiWorkspaceState,
 } from '../shared/types.js';
 import {
@@ -86,18 +87,9 @@ export interface DesktopControllerDependencies {
   notificationService: NotificationService;
 }
 
-export interface StartDesktopJobInput {
-  kind: 'crawl' | 'normalize' | 'rank' | 'mirror-build' | 'snapshot-finalize';
-  snapshotId?: string;
-  profileId?: string;
-  detail?: {
-    scope?: 'public' | 'user' | 'all';
-    mode?: GuiCrawlMode;
-    [key: string]: unknown;
-  };
-  maxIterations?: number;
+export type StartDesktopJobInput = GuiStartJobInput & {
   now?: Date;
-}
+};
 
 export interface ResumeDesktopJobOptions {
   maxIterations?: number;

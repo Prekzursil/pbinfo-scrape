@@ -403,6 +403,22 @@ export interface GuiCoverageQuery {
   grade?: number;
 }
 
+/**
+ * Job-start request shared by the bridge `startJob` channel and the main-process
+ * desktop controller.
+ */
+export interface GuiStartJobInput {
+  kind: 'crawl' | 'normalize' | 'rank' | 'mirror-build' | 'snapshot-finalize';
+  snapshotId?: string;
+  profileId?: string;
+  detail?: {
+    scope?: 'public' | 'user' | 'all';
+    mode?: GuiCrawlMode;
+    [key: string]: unknown;
+  };
+  maxIterations?: number;
+}
+
 export type DesktopPreferencesRecord = z.infer<typeof desktopPreferencesRecordSchema>;
 export type GuiProfileRecord = z.infer<typeof guiProfileRecordSchema>;
 export type GuiWorkspaceState = z.infer<typeof guiWorkspaceStateSchema>;

@@ -7,12 +7,12 @@ import type {
   GuiCoverageListing,
   GuiCoverageQuery,
   GuiCoverageSummary,
-  GuiCrawlMode,
   DesktopPreferencesRecord,
   GuiCrawlStatus,
   GuiJobEvent,
   GuiJobRecord,
   GuiProfileRecord,
+  GuiStartJobInput,
   GuiVerbosityMode,
   GuiWorkspaceState,
 } from './types.js';
@@ -88,17 +88,7 @@ export interface DesktopBridge {
   getCrawlStatus: (snapshotId?: string) => Promise<GuiCrawlStatus | null>;
   listJobs: () => Promise<GuiJobRecord[]>;
   listJobEvents: (jobId: string, limit?: number) => Promise<GuiJobEvent[]>;
-  startJob: (input: {
-    kind: 'crawl' | 'normalize' | 'rank' | 'mirror-build' | 'snapshot-finalize';
-    snapshotId?: string;
-    profileId?: string;
-    detail?: {
-      scope?: 'public' | 'user' | 'all';
-      mode?: GuiCrawlMode;
-      [key: string]: unknown;
-    };
-    maxIterations?: number;
-  }) => Promise<GuiJobRecord>;
+  startJob: (input: GuiStartJobInput) => Promise<GuiJobRecord>;
   pauseJob: (jobId: string) => Promise<GuiJobRecord>;
   resumeJob: (jobId: string, options?: { maxIterations?: number }) => Promise<GuiJobRecord>;
   startMirrorPreview: (
