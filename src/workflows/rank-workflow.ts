@@ -57,35 +57,13 @@ export async function runRankingWorkflow(
         const ranked = rankProblemSubmissions(submissions, officialSources, {
           forcedBestEvaluationIds: overrides[String(problemId)],
         });
-        const perProblem: BestSubmissionRecord = {
-          problemId,
-          bestUserOverallEvaluationId: ranked.bestUserOverallEvaluationId,
-          bestUserPerLanguage: ranked.bestUserPerLanguage,
-          bestTrustworthyOverallEvaluationId: ranked.bestTrustworthyOverallEvaluationId,
-          bestTrustworthyPerLanguage: ranked.bestTrustworthyPerLanguage,
-          bestFastPerLanguage: ranked.bestFastPerLanguage,
-          bestOfficialPerLanguage: ranked.bestOfficialPerLanguage,
-          suspiciousCandidateEvaluationIds: ranked.suspiciousCandidateEvaluationIds,
-          duplicateEvaluationIds: ranked.duplicateEvaluationIds,
-          orderedUserEvaluationIds: ranked.orderedUserEvaluationIds,
-        };
+        const perProblem = toBestSubmissionRecord(problemId, ranked);
         writeFileSync(
           join(perProblemRoot, `problem-${problemId}.json`),
           JSON.stringify(perProblem, null, 2),
           'utf8',
         );
-        return {
-          problemId,
-          bestUserOverallEvaluationId: ranked.bestUserOverallEvaluationId,
-          bestUserPerLanguage: ranked.bestUserPerLanguage,
-          bestTrustworthyOverallEvaluationId: ranked.bestTrustworthyOverallEvaluationId,
-          bestTrustworthyPerLanguage: ranked.bestTrustworthyPerLanguage,
-          bestFastPerLanguage: ranked.bestFastPerLanguage,
-          bestOfficialPerLanguage: ranked.bestOfficialPerLanguage,
-          suspiciousCandidateEvaluationIds: ranked.suspiciousCandidateEvaluationIds,
-          duplicateEvaluationIds: ranked.duplicateEvaluationIds,
-          orderedUserEvaluationIds: ranked.orderedUserEvaluationIds,
-        };
+        return perProblem;
       }),
   };
 
@@ -98,30 +76,42 @@ export async function runRankingWorkflow(
   };
 }
 
-function loadEvaluationRecords(root: string): SubmissionRecord[] {
+function toBestSubmissionRecord(
+  problemId: number,
+  ranked: ReturnType<typeof rankProblemSubmissions>,
+): BestSubmissionRecord {
+  return {
+    problemId,
+    bestUserOverallEvaluationId: ranked.bestUserOverallEvaluationId,
+    bestUserPerLanguage: ranked.bestUserPerLanguage,
+    bestTrustworthyOverallEvaluationId: ranked.bestTrustworthyOverallEvaluationId,
+    bestTrustworthyPerLanguage: ranked.bestTrustworthyPerLanguage,
+    bestFastPerLanguage: ranked.bestFastPerLanguage,
+    bestOfficialPerLanguage: ranked.bestOfficialPerLanguage,
+    suspiciousCandidateEvaluationIds: ranked.suspiciousCandidateEvaluationIds,
+    duplicateEvaluationIds: ranked.duplicateEvaluationIds,
+    orderedUserEvaluationIds: ranked.orderedUserEvaluationIds,
+  };
+}
+
+function loadSuspicionRefreshedRecords<T extends { sourceCode?: string; suspicionFlags?: string[] }>(
+  root: string,
+): T[] {
   try {
     return readdirSync(root)
       .filter((entry) => entry.endsWith('.json'))
-      .map((entry) =>
-        refreshSuspicionFlags(
-          JSON.parse(readFileSync(join(root, entry), 'utf8')) as SubmissionRecord,
-        ),
-      );
+      .map((entry) => refreshSuspicionFlags(JSON.parse(readFileSync(join(root, entry), 'utf8')) as T));
   } catch {
     return [];
   }
 }
 
+function loadEvaluationRecords(root: string): SubmissionRecord[] {
+  return loadSuspicionRefreshedRecords<SubmissionRecord>(root);
+}
+
 function loadSourceRecords(root: string): SourceRecord[] {
-  try {
-    return readdirSync(root)
-      .filter((entry) => entry.endsWith('.json'))
-      .map((entry) =>
-        refreshSuspicionFlags(JSON.parse(readFileSync(join(root, entry), 'utf8')) as SourceRecord),
-      );
-  } catch {
-    return [];
-  }
+  return loadSuspicionRefreshedRecords<SourceRecord>(root);
 }
 
 function refreshSuspicionFlags<T extends { sourceCode?: string; suspicionFlags?: string[] }>(

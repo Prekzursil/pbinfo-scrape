@@ -100,6 +100,67 @@ export function resolveProblemListingMatch(
   };
 }
 
+export interface ProblemListingEntryBase {
+  user: string | undefined;
+  problemId: number;
+  problemSlug: string;
+  problemName: string;
+  evaluationId: number;
+}
+
+/**
+ * Builds the common listing-entry fields from a resolved match. Both listing
+ * parsers share this shape and only differ in how the user handle is resolved.
+ */
+export function buildProblemListingEntry(
+  match: ProblemListingMatch,
+  user: string | undefined,
+  problemName: string,
+): ProblemListingEntryBase {
+  return {
+    user,
+    problemId: match.problemId,
+    problemSlug: match.problemSlug,
+    problemName: normalizeWhitespace(problemName),
+    evaluationId: match.evaluationId,
+  };
+}
+
+export interface ProblemListingRow {
+  match: ProblemListingMatch;
+  profileAnchor: ReturnType<Cheerio>;
+  problemAnchor: ReturnType<Cheerio>;
+  score?: number;
+}
+
+/**
+ * Iterates `table tr` rows, resolves the problem/evaluation triple, dedupes by
+ * evaluation id, and invokes `onRow` with the resolved match plus the profile
+ * and problem anchors. Shared by both listing parsers, which differ only in how
+ * they normalize the user handle.
+ */
+export function forEachProblemListingRow(
+  $: Cheerio,
+  onRow: (row: ProblemListingRow) => void,
+): void {
+  const seen = new Set<number>();
+  $('table tr').each((_, row) => {
+    const profileAnchor = $(row).find('a[href^="/profil/"]').first();
+    const problemAnchor = $(row).find('a[href^="/probleme/"]').first();
+    const evaluationAnchor = $(row).find('a[href^="/detalii-evaluare/"]').first();
+
+    const match = resolveProblemListingMatch(
+      problemAnchor.attr('href'),
+      evaluationAnchor.attr('href'),
+    );
+    if (!match || seen.has(match.evaluationId)) {
+      return;
+    }
+    seen.add(match.evaluationId);
+    onRow({ match, profileAnchor, problemAnchor, score: extractRowScore($, row) });
+  });
+}
+
 export function extractRowScore($: Cheerio, row: HtmlNode): number | undefined {
   const cells = $(row).find('td');
   if (cells.length === 0) {

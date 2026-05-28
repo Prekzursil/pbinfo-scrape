@@ -1,7 +1,8 @@
 import { loadHtml, normalizeWhitespace } from './shared.js';
 import {
+  buildProblemListingEntry,
   extractPostedByHandleFromRows,
-  extractRowScore,
+  forEachProblemListingRow,
   isThrottledPage,
   matchProfileHref,
   parsePaginationMetadata,
@@ -66,32 +67,13 @@ function extractAuthorHandle($: ReturnType<typeof loadHtml>): string | undefined
 
 function extractEntriesFromRows($: ReturnType<typeof loadHtml>): ProblemSourceListEntry[] {
   const entries: ProblemSourceListEntry[] = [];
-  const seen = new Set<number>();
-
-  $('table tr').each((_, row) => {
-    const profileAnchor = $(row).find('a[href^="/profil/"]').first();
-    const problemAnchor = $(row).find('a[href^="/probleme/"]').first();
-    const evaluationAnchor = $(row).find('a[href^="/detalii-evaluare/"]').first();
-
-    const match = resolveProblemListingMatch(
-      problemAnchor.attr('href'),
-      evaluationAnchor.attr('href'),
-    );
-    if (!match || seen.has(match.evaluationId)) {
-      return;
-    }
-    seen.add(match.evaluationId);
-
+  forEachProblemListingRow($, ({ match, profileAnchor, problemAnchor, score }) => {
+    const user = normalizeProfileHandle(profileAnchor.attr('href'), profileAnchor.text());
     entries.push({
-      user: normalizeProfileHandle(profileAnchor.attr('href'), profileAnchor.text()),
-      problemId: match.problemId,
-      problemSlug: match.problemSlug,
-      problemName: normalizeWhitespace(problemAnchor.text()),
-      evaluationId: match.evaluationId,
-      score: extractRowScore($, row),
+      ...buildProblemListingEntry(match, user, problemAnchor.text()),
+      score,
     });
   });
-
   return entries;
 }
 
@@ -123,16 +105,11 @@ function extractEntriesFromAnchorTriplets(
     }
     seen.add(match.evaluationId);
 
-    entries.push({
-      user: normalizeProfileHandle(
-        $(anchors[index + 1]).attr('href'),
-        $(anchors[index + 1]).text(),
-      ),
-      problemId: match.problemId,
-      problemSlug: match.problemSlug,
-      problemName: normalizeWhitespace($(anchors[index]).text()),
-      evaluationId: match.evaluationId,
-    });
+    const user = normalizeProfileHandle(
+      $(anchors[index + 1]).attr('href'),
+      $(anchors[index + 1]).text(),
+    );
+    entries.push(buildProblemListingEntry(match, user, $(anchors[index]).text()));
   }
 
   return entries;

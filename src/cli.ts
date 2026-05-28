@@ -154,51 +154,29 @@ export function buildCli(handlers: CliHandlers = createDefaultHandlers()): Comma
     });
 
   const crawl = program.command('crawl').description('Queue and process crawl work');
-  crawl
-    .command('public')
-    .description('Crawl the public PBInfo surface')
-    .option('--snapshot <snapshot>', 'Snapshot id override')
-    .option('--acceptance', 'Mark this crawl as an acceptance-oriented run')
-    .option('--mode <mode>', 'Crawl mode: incremental or fresh', 'incremental')
-    .action(async (options: { snapshot?: string; acceptance?: boolean; mode?: CrawlMode }) => {
-      await handlers.crawl(
-        resolveWorkspace(program),
-        'public',
-        options.snapshot,
-        options.acceptance,
-        options.mode,
-      );
-    });
-  crawl
-    .command('user')
-    .description('Crawl authenticated user/account pages')
-    .option('--snapshot <snapshot>', 'Snapshot id override')
-    .option('--acceptance', 'Mark this crawl as an acceptance-oriented run')
-    .option('--mode <mode>', 'Crawl mode: incremental or fresh', 'incremental')
-    .action(async (options: { snapshot?: string; acceptance?: boolean; mode?: CrawlMode }) => {
-      await handlers.crawl(
-        resolveWorkspace(program),
-        'user',
-        options.snapshot,
-        options.acceptance,
-        options.mode,
-      );
-    });
-  crawl
-    .command('all')
-    .description('Crawl both public and authenticated PBInfo surfaces')
-    .option('--snapshot <snapshot>', 'Snapshot id override')
-    .option('--acceptance', 'Mark this crawl as an acceptance-oriented run')
-    .option('--mode <mode>', 'Crawl mode: incremental or fresh', 'incremental')
-    .action(async (options: { snapshot?: string; acceptance?: boolean; mode?: CrawlMode }) => {
-      await handlers.crawl(
-        resolveWorkspace(program),
-        'all',
-        options.snapshot,
-        options.acceptance,
-        options.mode,
-      );
-    });
+  const registerCrawlScope = (
+    name: 'public' | 'user' | 'all',
+    description: string,
+  ): void => {
+    crawl
+      .command(name)
+      .description(description)
+      .option('--snapshot <snapshot>', 'Snapshot id override')
+      .option('--acceptance', 'Mark this crawl as an acceptance-oriented run')
+      .option('--mode <mode>', 'Crawl mode: incremental or fresh', 'incremental')
+      .action(async (options: { snapshot?: string; acceptance?: boolean; mode?: CrawlMode }) => {
+        await handlers.crawl(
+          resolveWorkspace(program),
+          name,
+          options.snapshot,
+          options.acceptance,
+          options.mode,
+        );
+      });
+  };
+  registerCrawlScope('public', 'Crawl the public PBInfo surface');
+  registerCrawlScope('user', 'Crawl authenticated user/account pages');
+  registerCrawlScope('all', 'Crawl both public and authenticated PBInfo surfaces');
   crawl
     .command('official-sources')
     .description(
