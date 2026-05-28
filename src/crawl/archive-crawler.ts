@@ -999,7 +999,10 @@ function deriveEffectiveProblemTests(
       continue;
     }
 
-    effectiveByKey.set(effectiveKey, mergeEffectiveProblemTest(effectiveByKey.get(effectiveKey), testCase));
+    effectiveByKey.set(
+      effectiveKey,
+      mergeEffectiveProblemTest(effectiveByKey.get(effectiveKey), testCase),
+    );
   }
 
   return [...effectiveByKey.values()].sort(compareProblemTestCaseRecords);

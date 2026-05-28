@@ -226,7 +226,9 @@ function CoverageFilterToolbar(props: {
       <SelectField
         label="Tests status"
         value={filters.testsCoverageStatus}
-        onChange={(value) => setFilter('testsCoverageStatus', value as GuiCoverageTestsStatusFilter)}
+        onChange={(value) =>
+          setFilter('testsCoverageStatus', value as GuiCoverageTestsStatusFilter)
+        }
         options={[
           ['all', 'All'],
           ['captured', 'Captured'],
@@ -237,7 +239,9 @@ function CoverageFilterToolbar(props: {
       <SelectField
         label="Official source archived"
         value={filters.officialSourceArchived}
-        onChange={(value) => setFilter('officialSourceArchived', value as GuiCoveragePresenceFilter)}
+        onChange={(value) =>
+          setFilter('officialSourceArchived', value as GuiCoveragePresenceFilter)
+        }
         options={[
           ['all', 'All'],
           ['yes', 'Yes'],
@@ -257,7 +261,9 @@ function CoverageFilterToolbar(props: {
       <SelectField
         label="Editorial"
         value={filters.editorialAvailability}
-        onChange={(value) => setFilter('editorialAvailability', value as GuiCoverageEditorialFilter)}
+        onChange={(value) =>
+          setFilter('editorialAvailability', value as GuiCoverageEditorialFilter)
+        }
         options={[
           ['all', 'All'],
           ['visible', 'Visible'],
@@ -364,7 +370,9 @@ function CoverageDetailBadges(props: { record: GuiCoverageRecord }) {
       <CoverageBadge>
         {record.testsFragmentArchived ? 'Tests fragment archived' : 'Tests fragment not archived'}
       </CoverageBadge>
-      <CoverageBadge>Effective tests available: {record.effectiveTestsAvailableCount}</CoverageBadge>
+      <CoverageBadge>
+        Effective tests available: {record.effectiveTestsAvailableCount}
+      </CoverageBadge>
       <CoverageBadge>Visible tests captured: {record.visibleTestsCapturedCount}</CoverageBadge>
       <CoverageBadge>Example tests: {record.exampleTestsAvailableCount}</CoverageBadge>
       <CoverageBadge>
@@ -407,10 +415,7 @@ function CoverageDetailMetadata(props: { record: GuiCoverageDetail['record'] }) 
     <div className="coverage-metadata-grid">
       <MetricCard label="Solved evaluations" value={String(record.solvedEvaluationCount)} />
       <MetricCard label="Archived evaluations" value={String(record.evaluationCount)} />
-      <MetricCard
-        label="Ranking coverage"
-        value={record.rankingPresent ? 'Present' : 'Missing'}
-      />
+      <MetricCard label="Ranking coverage" value={record.rankingPresent ? 'Present' : 'Missing'} />
       <MetricCard
         label="Source list"
         value={record.sourceListUrl ? 'Available upstream' : 'Not listed'}

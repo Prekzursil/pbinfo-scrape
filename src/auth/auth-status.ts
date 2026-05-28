@@ -57,8 +57,7 @@ async function fetchAuthProbe(
   context: AuthProbeContext,
   fetchImpl?: typeof fetch,
 ): Promise<{ loggedIn: boolean; resolvedHandle?: string }> {
-  const effectiveFetch =
-    fetchImpl ?? (await createCookieFetch(config.auth.sessionCookiesPath));
+  const effectiveFetch = fetchImpl ?? (await createCookieFetch(config.auth.sessionCookiesPath));
   const response = await effectiveFetch(context.probeUrl, { redirect: 'follow' });
   const html = await response.text();
   const loggedIn = extractLoggedInState(html);

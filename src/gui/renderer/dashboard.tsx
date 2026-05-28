@@ -623,77 +623,72 @@ function DashboardSetupWorkspacePanel(props: {
   } = props;
   return (
     <section className="panel workspace-panel">
-              <PanelHeading
-                kicker="Workspace and identity"
-                title="Workspace"
-                chip={`${workspaceState.profiles.length} profiles`}
-              />
-              <div className="workspace-summary">
-                <SummaryCard label="Workspace root">
-                  <p className="mono">{workspaceState.workspaceRoot}</p>
-                </SummaryCard>
-                <SummaryCard
-                  label="Active profile"
-                  value={activeProfile?.label ?? 'No active profile'}
-                >
-                  <p className="summary-copy">
-                    {activeProfile?.userHandle
-                      ? `Handle: ${activeProfile.userHandle}`
-                      : 'Create or import a PBInfo session profile to enable authenticated crawl work.'}
+      <PanelHeading
+        kicker="Workspace and identity"
+        title="Workspace"
+        chip={`${workspaceState.profiles.length} profiles`}
+      />
+      <div className="workspace-summary">
+        <SummaryCard label="Workspace root">
+          <p className="mono">{workspaceState.workspaceRoot}</p>
+        </SummaryCard>
+        <SummaryCard label="Active profile" value={activeProfile?.label ?? 'No active profile'}>
+          <p className="summary-copy">
+            {activeProfile?.userHandle
+              ? `Handle: ${activeProfile.userHandle}`
+              : 'Create or import a PBInfo session profile to enable authenticated crawl work.'}
+          </p>
+        </SummaryCard>
+        <SummaryCard label="Snapshot target">
+          <input
+            value={selectedSnapshotId}
+            onChange={(event) => onSnapshotChange(event.target.value)}
+            placeholder="acceptance-20260310b"
+          />
+          <p className="summary-copy">Canonical drain target and mirror build source.</p>
+        </SummaryCard>
+      </div>
+      <div className="profile-list">
+        {workspaceState.profiles.length === 0 ? (
+          <p className="summary-copy">No saved PBInfo profiles yet.</p>
+        ) : (
+          workspaceState.profiles.map((profile) => (
+            <article className="job-card profile-card" key={profile.profileId}>
+              <header>
+                <div>
+                  <strong>{profile.label}</strong>
+                  <p className="job-meta">
+                    {profile.profileId} • {formatProfileProvenance(profile)}
                   </p>
-                </SummaryCard>
-                <SummaryCard label="Snapshot target">
-                  <input
-                    value={selectedSnapshotId}
-                    onChange={(event) => onSnapshotChange(event.target.value)}
-                    placeholder="acceptance-20260310b"
-                  />
-                  <p className="summary-copy">Canonical drain target and mirror build source.</p>
-                </SummaryCard>
+                </div>
+                {workspaceState.activeProfileId === profile.profileId ? (
+                  <span className="status-badge status-completed">active</span>
+                ) : null}
+              </header>
+              <p className="summary-copy">
+                {profile.userHandle ? `Handle ${profile.userHandle}` : 'No user handle saved'}
+              </p>
+              <div className="button-row">
+                <button
+                  className="ghost-button"
+                  type="button"
+                  onClick={() => void onActivateProfile(profile.profileId)}
+                >
+                  Activate
+                </button>
+                <button
+                  className="ghost-button ghost-danger"
+                  type="button"
+                  onClick={() => void onDeleteProfile(profile.profileId)}
+                >
+                  Delete
+                </button>
               </div>
-              <div className="profile-list">
-                {workspaceState.profiles.length === 0 ? (
-                  <p className="summary-copy">No saved PBInfo profiles yet.</p>
-                ) : (
-                  workspaceState.profiles.map((profile) => (
-                    <article className="job-card profile-card" key={profile.profileId}>
-                      <header>
-                        <div>
-                          <strong>{profile.label}</strong>
-                          <p className="job-meta">
-                            {profile.profileId} • {formatProfileProvenance(profile)}
-                          </p>
-                        </div>
-                        {workspaceState.activeProfileId === profile.profileId ? (
-                          <span className="status-badge status-completed">active</span>
-                        ) : null}
-                      </header>
-                      <p className="summary-copy">
-                        {profile.userHandle
-                          ? `Handle ${profile.userHandle}`
-                          : 'No user handle saved'}
-                      </p>
-                      <div className="button-row">
-                        <button
-                          className="ghost-button"
-                          type="button"
-                          onClick={() => void onActivateProfile(profile.profileId)}
-                        >
-                          Activate
-                        </button>
-                        <button
-                          className="ghost-button ghost-danger"
-                          type="button"
-                          onClick={() => void onDeleteProfile(profile.profileId)}
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    </article>
-                  ))
-                )}
-              </div>
-            </section>
+            </article>
+          ))
+        )}
+      </div>
+    </section>
   );
 }
 
@@ -714,138 +709,136 @@ function DashboardSetupAuthPanel(props: {
     onImportBrowserProfile,
   } = props;
   return (
-            <section className="panel action-panel">
-              <PanelHeading kicker="Authentication lanes" title="Profiles & Access" />
-              <div className="auth-grid">
-                <form
-                  className="stack-form summary-card form-card"
-                  onSubmit={(event) => {
-                    event.preventDefault();
-                    void onLoginProfile(loginForm);
-                  }}
-                >
-                  <strong>Credential login</strong>
-                  <p className="summary-copy">
-                    Use direct account auth for a crawler-owned session.
-                  </p>
-                  <Field label="Profile id">
-                    <input
-                      value={loginForm.profileId}
-                      onChange={(event) =>
-                        setLoginForm((current) => ({ ...current, profileId: event.target.value }))
-                      }
-                    />
-                  </Field>
-                  <Field label="Label">
-                    <input
-                      value={loginForm.label}
-                      onChange={(event) =>
-                        setLoginForm((current) => ({ ...current, label: event.target.value }))
-                      }
-                    />
-                  </Field>
-                  <Field label="User handle">
-                    <input
-                      value={loginForm.userHandle ?? ''}
-                      onChange={(event) =>
-                        setLoginForm((current) => ({
-                          ...current,
-                          userHandle: event.target.value || undefined,
-                        }))
-                      }
-                    />
-                  </Field>
-                  <Field label="Username">
-                    <input
-                      value={loginForm.username}
-                      onChange={(event) =>
-                        setLoginForm((current) => ({ ...current, username: event.target.value }))
-                      }
-                    />
-                  </Field>
-                  <Field label="Password">
-                    <input
-                      type="password"
-                      value={loginForm.password}
-                      onChange={(event) =>
-                        setLoginForm((current) => ({ ...current, password: event.target.value }))
-                      }
-                    />
-                  </Field>
-                  <button className="primary-button" type="submit">
-                    Sign in
-                  </button>
-                </form>
+    <section className="panel action-panel">
+      <PanelHeading kicker="Authentication lanes" title="Profiles & Access" />
+      <div className="auth-grid">
+        <form
+          className="stack-form summary-card form-card"
+          onSubmit={(event) => {
+            event.preventDefault();
+            void onLoginProfile(loginForm);
+          }}
+        >
+          <strong>Credential login</strong>
+          <p className="summary-copy">Use direct account auth for a crawler-owned session.</p>
+          <Field label="Profile id">
+            <input
+              value={loginForm.profileId}
+              onChange={(event) =>
+                setLoginForm((current) => ({ ...current, profileId: event.target.value }))
+              }
+            />
+          </Field>
+          <Field label="Label">
+            <input
+              value={loginForm.label}
+              onChange={(event) =>
+                setLoginForm((current) => ({ ...current, label: event.target.value }))
+              }
+            />
+          </Field>
+          <Field label="User handle">
+            <input
+              value={loginForm.userHandle ?? ''}
+              onChange={(event) =>
+                setLoginForm((current) => ({
+                  ...current,
+                  userHandle: event.target.value || undefined,
+                }))
+              }
+            />
+          </Field>
+          <Field label="Username">
+            <input
+              value={loginForm.username}
+              onChange={(event) =>
+                setLoginForm((current) => ({ ...current, username: event.target.value }))
+              }
+            />
+          </Field>
+          <Field label="Password">
+            <input
+              type="password"
+              value={loginForm.password}
+              onChange={(event) =>
+                setLoginForm((current) => ({ ...current, password: event.target.value }))
+              }
+            />
+          </Field>
+          <button className="primary-button" type="submit">
+            Sign in
+          </button>
+        </form>
 
-                <form
-                  className="stack-form summary-card form-card"
-                  onSubmit={(event) => {
-                    event.preventDefault();
-                    void onImportBrowserProfile(importForm);
-                  }}
-                >
-                  <strong>Browser import</strong>
-                  <p className="summary-copy">
-                    Reuse a verified local browser session when that is the fastest path.
-                  </p>
-                  <Field label="Profile id">
-                    <input
-                      value={importForm.profileId}
-                      onChange={(event) =>
-                        setImportForm((current) => ({ ...current, profileId: event.target.value }))
-                      }
-                    />
-                  </Field>
-                  <Field label="Label">
-                    <input
-                      value={importForm.label}
-                      onChange={(event) =>
-                        setImportForm((current) => ({ ...current, label: event.target.value }))
-                      }
-                    />
-                  </Field>
-                  <Field label="Browser">
-                    <select
-                      value={importForm.browser}
-                      onChange={(event) =>
-                        setImportForm((current) => ({
-                          ...current,
-                          browser: event.target.value as BrowserImportInput['browser'],
-                        }))
-                      }
-                    >
-                      <option value="edge">Edge</option>
-                      <option value="chrome">Chrome</option>
-                    </select>
-                  </Field>
-                  <Field label="Browser profile">
-                    <input
-                      value={importForm.profileName ?? ''}
-                      onChange={(event) =>
-                        setImportForm((current) => ({
-                          ...current,
-                          profileName: event.target.value || undefined,
-                        }))
-                      }
-                    />
-                  </Field>
-                  <Field label="User handle">
-                    <input
-                      value={importForm.userHandle ?? ''}
-                      onChange={(event) =>
-                        setImportForm((current) => ({
-                          ...current,
-                          userHandle: event.target.value || undefined,
-                        }))
-                      }
-                    />
-                  </Field>
-                  <button className="primary-button" type="submit">
-                    Import browser cookies
-                  </button>
-                </form>
-              </div>
-            </section>
+        <form
+          className="stack-form summary-card form-card"
+          onSubmit={(event) => {
+            event.preventDefault();
+            void onImportBrowserProfile(importForm);
+          }}
+        >
+          <strong>Browser import</strong>
+          <p className="summary-copy">
+            Reuse a verified local browser session when that is the fastest path.
+          </p>
+          <Field label="Profile id">
+            <input
+              value={importForm.profileId}
+              onChange={(event) =>
+                setImportForm((current) => ({ ...current, profileId: event.target.value }))
+              }
+            />
+          </Field>
+          <Field label="Label">
+            <input
+              value={importForm.label}
+              onChange={(event) =>
+                setImportForm((current) => ({ ...current, label: event.target.value }))
+              }
+            />
+          </Field>
+          <Field label="Browser">
+            <select
+              value={importForm.browser}
+              onChange={(event) =>
+                setImportForm((current) => ({
+                  ...current,
+                  browser: event.target.value as BrowserImportInput['browser'],
+                }))
+              }
+            >
+              <option value="edge">Edge</option>
+              <option value="chrome">Chrome</option>
+            </select>
+          </Field>
+          <Field label="Browser profile">
+            <input
+              value={importForm.profileName ?? ''}
+              onChange={(event) =>
+                setImportForm((current) => ({
+                  ...current,
+                  profileName: event.target.value || undefined,
+                }))
+              }
+            />
+          </Field>
+          <Field label="User handle">
+            <input
+              value={importForm.userHandle ?? ''}
+              onChange={(event) =>
+                setImportForm((current) => ({
+                  ...current,
+                  userHandle: event.target.value || undefined,
+                }))
+              }
+            />
+          </Field>
+          <button className="primary-button" type="submit">
+            Import browser cookies
+          </button>
+        </form>
+      </div>
+    </section>
   );
 }
 
@@ -907,53 +900,49 @@ function DashboardOverviewSnapshotPanel(props: DashboardOverviewViewProps) {
   const { selectedSnapshotId, crawlStatus, recentFailureCount, crawlTelemetry, publishCommand } =
     props;
   return (
-            <section className="panel snapshot-panel">
-              <PanelHeading
-                kicker="Archive health"
-                title="Archive Overview"
-                chip={selectedSnapshotId}
-              />
-              {crawlStatus ? (
-                <div className="snapshot-grid">
-                  <SummaryCard label="Queue counts" value={`${crawlStatus.pending} pending`}>
-                    <p className="summary-copy">{`${crawlStatus.completed} completed • ${crawlStatus.inProgress} in progress`}</p>
-                  </SummaryCard>
-                  <SummaryCard
-                    label="Publish readiness"
-                    value={crawlStatus.publishEligible ? 'Ready' : 'Not ready'}
-                  >
-                    <p className="summary-copy">
-                      {crawlStatus.publishEligible
-                        ? 'The canonical snapshot is drained and can be published through the guarded CLI.'
-                        : `${recentFailureCount} recent failures recorded.`}
-                    </p>
-                  </SummaryCard>
-                  <SummaryCard
-                    label="Real-time ETA"
-                    value={crawlTelemetry ? formatEta(crawlTelemetry.etaSeconds) : 'Learning…'}
-                  >
-                    <p className="summary-copy">
-                      {crawlTelemetry
-                        ? `${formatRate(crawlTelemetry.completedPerMinute)} completed/min across recent crawl chunks.`
-                        : 'ETA appears after enough crawl history accumulates for a stable projection.'}
-                    </p>
-                  </SummaryCard>
-                  <SummaryCard label="Queue DB">
-                    <p className="mono">{crawlStatus.queuePath}</p>
-                  </SummaryCard>
-                </div>
-              ) : (
-                <p className="summary-copy">
-                  Crawl status will appear here after the selected snapshot exists.
-                </p>
-              )}
-              {publishCommand ? (
-                <article className="summary-card publish-card">
-                  <span className="metric-label">Ready to publish</span>
-                  <p className="mono">{publishCommand}</p>
-                </article>
-              ) : null}
-            </section>
+    <section className="panel snapshot-panel">
+      <PanelHeading kicker="Archive health" title="Archive Overview" chip={selectedSnapshotId} />
+      {crawlStatus ? (
+        <div className="snapshot-grid">
+          <SummaryCard label="Queue counts" value={`${crawlStatus.pending} pending`}>
+            <p className="summary-copy">{`${crawlStatus.completed} completed • ${crawlStatus.inProgress} in progress`}</p>
+          </SummaryCard>
+          <SummaryCard
+            label="Publish readiness"
+            value={crawlStatus.publishEligible ? 'Ready' : 'Not ready'}
+          >
+            <p className="summary-copy">
+              {crawlStatus.publishEligible
+                ? 'The canonical snapshot is drained and can be published through the guarded CLI.'
+                : `${recentFailureCount} recent failures recorded.`}
+            </p>
+          </SummaryCard>
+          <SummaryCard
+            label="Real-time ETA"
+            value={crawlTelemetry ? formatEta(crawlTelemetry.etaSeconds) : 'Learning…'}
+          >
+            <p className="summary-copy">
+              {crawlTelemetry
+                ? `${formatRate(crawlTelemetry.completedPerMinute)} completed/min across recent crawl chunks.`
+                : 'ETA appears after enough crawl history accumulates for a stable projection.'}
+            </p>
+          </SummaryCard>
+          <SummaryCard label="Queue DB">
+            <p className="mono">{crawlStatus.queuePath}</p>
+          </SummaryCard>
+        </div>
+      ) : (
+        <p className="summary-copy">
+          Crawl status will appear here after the selected snapshot exists.
+        </p>
+      )}
+      {publishCommand ? (
+        <article className="summary-card publish-card">
+          <span className="metric-label">Ready to publish</span>
+          <p className="mono">{publishCommand}</p>
+        </article>
+      ) : null}
+    </section>
   );
 }
 
@@ -1265,192 +1254,175 @@ function DashboardOverviewJobsPanel(props: DashboardOverviewViewProps) {
     onRunSnapshotJob,
   } = props;
   return (
-            <section className="panel jobs-panel">
-              <PanelHeading
-                kicker="Quick actions"
-                title="What happens next"
-                chip={`${jobs.length} jobs`}
-              />
-              <div className="summary-card form-card">
-                <Field label="Crawl mode">
-                  <select
-                    aria-label="Crawl mode"
-                    value={selectedCrawlMode}
-                    onChange={(event) => onCrawlModeChange(event.target.value as CrawlMode)}
-                  >
-                    <option value="incremental">Incremental sync</option>
-                    <option value="fresh">Fresh recrawl</option>
-                  </select>
-                </Field>
-                <p className="summary-copy">
-                  Incremental sync reuses the canonical archive and skips completed URLs. Fresh
-                  recrawl creates a new snapshot from scratch.
-                </p>
-              </div>
-              <div className="action-grid">
-                <ActionButton
-                  title="Start public crawl"
-                  copy="Seed and continue the public PBInfo queue."
-                  primary
-                  onClick={() => void onStartCrawl('public')}
-                />
-                <ActionButton
-                  title="Start user crawl"
-                  copy="Harvest authenticated profile, solution, and evaluation pages."
-                  primary
-                  onClick={() => void onStartCrawl('user')}
-                />
-                <ActionButton
-                  title="Start full crawl"
-                  copy="Drive the canonical same-host drain target."
-                  primary
-                  onClick={() => void onStartCrawl('all')}
-                />
-                <ActionButton
-                  title="Normalize snapshot"
-                  copy="Rebuild normalized records without re-fetching."
-                  onClick={() => void onRunSnapshotJob('normalize')}
-                />
-                <ActionButton
-                  title="Rank sources"
-                  copy="Refresh user and official best-per-language outputs."
-                  onClick={() => void onRunSnapshotJob('rank')}
-                />
-                <ActionButton
-                  title="Build mirror"
-                  copy="Rebuild localhost routes and local asset rewrites."
-                  onClick={() => void onRunSnapshotJob('mirror-build')}
-                />
-                <ActionButton
-                  title="Finalize snapshot"
-                  copy="Normalize, rank, mirror, export, and prune noncanonical state."
-                  onClick={() => void onRunSnapshotJob('snapshot-finalize')}
-                />
-              </div>
-              <div className="button-row">
-                <button
-                  className="ghost-button"
-                  type="button"
-                  onClick={() => setActiveView('coverage')}
-                >
-                  Open coverage
-                </button>
-                <button
-                  className="ghost-button"
-                  type="button"
-                  onClick={() => setActiveView('data')}
-                >
-                  Open raw data
-                </button>
-              </div>
-              {activeCrawlJob ? (
-                <div className="button-row">
-                  <button
-                    className="ghost-button"
-                    type="button"
-                    onClick={() => void onResumeCrawl(activeCrawlJob.jobId)}
-                  >
-                    Resume crawl
-                  </button>
-                  <button
-                    className="ghost-button ghost-danger"
-                    type="button"
-                    onClick={() => void onPauseCrawl(activeCrawlJob.jobId)}
-                  >
-                    Pause after current chunk completes
-                  </button>
+    <section className="panel jobs-panel">
+      <PanelHeading kicker="Quick actions" title="What happens next" chip={`${jobs.length} jobs`} />
+      <div className="summary-card form-card">
+        <Field label="Crawl mode">
+          <select
+            aria-label="Crawl mode"
+            value={selectedCrawlMode}
+            onChange={(event) => onCrawlModeChange(event.target.value as CrawlMode)}
+          >
+            <option value="incremental">Incremental sync</option>
+            <option value="fresh">Fresh recrawl</option>
+          </select>
+        </Field>
+        <p className="summary-copy">
+          Incremental sync reuses the canonical archive and skips completed URLs. Fresh recrawl
+          creates a new snapshot from scratch.
+        </p>
+      </div>
+      <div className="action-grid">
+        <ActionButton
+          title="Start public crawl"
+          copy="Seed and continue the public PBInfo queue."
+          primary
+          onClick={() => void onStartCrawl('public')}
+        />
+        <ActionButton
+          title="Start user crawl"
+          copy="Harvest authenticated profile, solution, and evaluation pages."
+          primary
+          onClick={() => void onStartCrawl('user')}
+        />
+        <ActionButton
+          title="Start full crawl"
+          copy="Drive the canonical same-host drain target."
+          primary
+          onClick={() => void onStartCrawl('all')}
+        />
+        <ActionButton
+          title="Normalize snapshot"
+          copy="Rebuild normalized records without re-fetching."
+          onClick={() => void onRunSnapshotJob('normalize')}
+        />
+        <ActionButton
+          title="Rank sources"
+          copy="Refresh user and official best-per-language outputs."
+          onClick={() => void onRunSnapshotJob('rank')}
+        />
+        <ActionButton
+          title="Build mirror"
+          copy="Rebuild localhost routes and local asset rewrites."
+          onClick={() => void onRunSnapshotJob('mirror-build')}
+        />
+        <ActionButton
+          title="Finalize snapshot"
+          copy="Normalize, rank, mirror, export, and prune noncanonical state."
+          onClick={() => void onRunSnapshotJob('snapshot-finalize')}
+        />
+      </div>
+      <div className="button-row">
+        <button className="ghost-button" type="button" onClick={() => setActiveView('coverage')}>
+          Open coverage
+        </button>
+        <button className="ghost-button" type="button" onClick={() => setActiveView('data')}>
+          Open raw data
+        </button>
+      </div>
+      {activeCrawlJob ? (
+        <div className="button-row">
+          <button
+            className="ghost-button"
+            type="button"
+            onClick={() => void onResumeCrawl(activeCrawlJob.jobId)}
+          >
+            Resume crawl
+          </button>
+          <button
+            className="ghost-button ghost-danger"
+            type="button"
+            onClick={() => void onPauseCrawl(activeCrawlJob.jobId)}
+          >
+            Pause after current chunk completes
+          </button>
+        </div>
+      ) : null}
+      <div className="job-list">
+        {jobs.length === 0 ? (
+          <p className="summary-copy">No desktop jobs recorded yet.</p>
+        ) : (
+          jobs.map((job) => (
+            <article className="job-card" key={job.jobId}>
+              <header>
+                <div>
+                  <strong>{job.snapshotId ?? job.kind}</strong>
+                  <p className="job-meta">{formatJobMeta(job)}</p>
                 </div>
+                <span className={`status-badge status-${job.status}`}>{job.status}</span>
+              </header>
+              <p>{formatJobSummary(job)}</p>
+              {job.latestEvent?.message ? (
+                <p className="job-event">{job.latestEvent.message}</p>
               ) : null}
-              <div className="job-list">
-                {jobs.length === 0 ? (
-                  <p className="summary-copy">No desktop jobs recorded yet.</p>
-                ) : (
-                  jobs.map((job) => (
-                    <article className="job-card" key={job.jobId}>
-                      <header>
-                        <div>
-                          <strong>{job.snapshotId ?? job.kind}</strong>
-                          <p className="job-meta">{formatJobMeta(job)}</p>
-                        </div>
-                        <span className={`status-badge status-${job.status}`}>{job.status}</span>
-                      </header>
-                      <p>{formatJobSummary(job)}</p>
-                      {job.latestEvent?.message ? (
-                        <p className="job-event">{job.latestEvent.message}</p>
-                      ) : null}
-                    </article>
-                  ))
-                )}
-              </div>
-            </section>
+            </article>
+          ))
+        )}
+      </div>
+    </section>
   );
 }
 
 function DashboardOverviewLogsPanel(props: DashboardOverviewViewProps) {
   const { verbosityMode, visibleLogEntries, onVerbosityChange } = props;
   return (
-            <section className="panel logs-panel">
-              <div className="panel-heading">
-                <div>
-                  <p className="section-kicker">Structured events</p>
-                  <h2>Recent activity</h2>
-                </div>
-                <div className="panel-actions">
-                  <div className="segmented-control" role="group" aria-label="Verbosity">
-                    {(['normal', 'verbose', 'raw'] as const).map((mode) => (
-                      <button
-                        key={mode}
-                        className={`segmented-button ${verbosityMode === mode ? 'segmented-button-active' : ''}`}
-                        type="button"
-                        aria-pressed={verbosityMode === mode}
-                        onClick={() => onVerbosityChange(mode)}
-                      >
-                        {capitalize(mode)}
-                      </button>
-                    ))}
-                  </div>
-                  <span className="panel-chip">{visibleLogEntries.length} visible</span>
-                </div>
-              </div>
-              <p className="summary-copy log-summary">
-                {verbosityMode === 'normal'
-                  ? 'Normal shows the recent operator-facing stream only.'
-                  : verbosityMode === 'verbose'
-                    ? 'Verbose expands counters and structured detail for each event.'
-                    : 'Raw exposes the unfiltered event payloads exactly as captured.'}
-              </p>
-              {visibleLogEntries.length === 0 ? (
-                <p className="summary-copy">
-                  Structured job events will appear here during long-running work.
-                </p>
-              ) : (
-                <div className="log-list">
-                  {visibleLogEntries.map((entry, index) => (
-                    <article
-                      className={`log-card log-${entry.level}`}
-                      key={`${entry.timestamp}-${index}`}
-                    >
-                      <header>
-                        <span className="log-stage">{entry.stage}</span>
-                        <time dateTime={entry.timestamp}>{formatTimestamp(entry.timestamp)}</time>
-                      </header>
-                      <p>{entry.message}</p>
-                      {verbosityMode !== 'normal' && entry.counters ? (
-                        <p className="log-counters">{formatCounters(entry.counters)}</p>
-                      ) : null}
-                      {verbosityMode === 'verbose' && entry.detail ? (
-                        <pre className="log-inline-detail">
-                          {JSON.stringify(entry.detail, null, 2)}
-                        </pre>
-                      ) : null}
-                      {verbosityMode === 'raw' ? (
-                        <pre className="log-inline-detail">{JSON.stringify(entry, null, 2)}</pre>
-                      ) : null}
-                    </article>
-                  ))}
-                </div>
-              )}
-            </section>
+    <section className="panel logs-panel">
+      <div className="panel-heading">
+        <div>
+          <p className="section-kicker">Structured events</p>
+          <h2>Recent activity</h2>
+        </div>
+        <div className="panel-actions">
+          <div className="segmented-control" role="group" aria-label="Verbosity">
+            {(['normal', 'verbose', 'raw'] as const).map((mode) => (
+              <button
+                key={mode}
+                className={`segmented-button ${verbosityMode === mode ? 'segmented-button-active' : ''}`}
+                type="button"
+                aria-pressed={verbosityMode === mode}
+                onClick={() => onVerbosityChange(mode)}
+              >
+                {capitalize(mode)}
+              </button>
+            ))}
+          </div>
+          <span className="panel-chip">{visibleLogEntries.length} visible</span>
+        </div>
+      </div>
+      <p className="summary-copy log-summary">
+        {verbosityMode === 'normal'
+          ? 'Normal shows the recent operator-facing stream only.'
+          : verbosityMode === 'verbose'
+            ? 'Verbose expands counters and structured detail for each event.'
+            : 'Raw exposes the unfiltered event payloads exactly as captured.'}
+      </p>
+      {visibleLogEntries.length === 0 ? (
+        <p className="summary-copy">
+          Structured job events will appear here during long-running work.
+        </p>
+      ) : (
+        <div className="log-list">
+          {visibleLogEntries.map((entry, index) => (
+            <article className={`log-card log-${entry.level}`} key={`${entry.timestamp}-${index}`}>
+              <header>
+                <span className="log-stage">{entry.stage}</span>
+                <time dateTime={entry.timestamp}>{formatTimestamp(entry.timestamp)}</time>
+              </header>
+              <p>{entry.message}</p>
+              {verbosityMode !== 'normal' && entry.counters ? (
+                <p className="log-counters">{formatCounters(entry.counters)}</p>
+              ) : null}
+              {verbosityMode === 'verbose' && entry.detail ? (
+                <pre className="log-inline-detail">{JSON.stringify(entry.detail, null, 2)}</pre>
+              ) : null}
+              {verbosityMode === 'raw' ? (
+                <pre className="log-inline-detail">{JSON.stringify(entry, null, 2)}</pre>
+              ) : null}
+            </article>
+          ))}
+        </div>
+      )}
+    </section>
   );
 }
 
@@ -1465,78 +1437,76 @@ function DashboardOverviewMirrorPanel(props: DashboardOverviewViewProps) {
     onOpenExternal,
   } = props;
   return (
-            <section className="panel mirror-panel">
-              <PanelHeading
-                kicker="Local snapshot"
-                title="Mirror access"
-                chip={previewUrl ? 'Preview live' : undefined}
-              />
-              <div className="mirror-stage">
-                <div className="mirror-toolbar">
-                  <div className="button-row mirror-button-row">
-                    <button
-                      className="ghost-button"
-                      type="button"
-                      onClick={() => void onStartMirrorPreview()}
-                    >
-                      Start preview
-                    </button>
-                    <button
-                      className="ghost-button"
-                      type="button"
-                      disabled={!previewJobId}
-                      onClick={() => {
-                        if (previewJobId) {
-                          void onStopMirrorPreview(previewJobId);
-                        }
-                      }}
-                    >
-                      Stop preview
-                    </button>
-                    <button
-                      className="ghost-button"
-                      type="button"
-                      disabled={!previewUrl}
-                      onClick={() => {
-                        if (previewUrl) {
-                          void onOpenExternal(previewUrl);
-                        }
-                      }}
-                    >
-                      Open in browser
-                    </button>
-                    <button
-                      className="ghost-button"
-                      type="button"
-                      disabled={!previewUrl}
-                      onClick={() => setShowEmbeddedPreview((current) => !current)}
-                    >
-                      {showEmbeddedPreview ? 'Hide embedded preview' : 'Show embedded preview'}
-                    </button>
-                  </div>
-                  <article className="summary-card mirror-meta-card">
-                    <span className="metric-label">Mirror route</span>
-                    <p className="mono mirror-address">{previewUrl ?? 'Not running'}</p>
-                  </article>
-                </div>
-                {previewUrl && showEmbeddedPreview ? (
-                  <div className="mirror-frame-shell">
-                    <iframe className="mirror-frame" src={previewUrl} title="Mirror preview" />
-                  </div>
-                ) : (
-                  <div className="mirror-placeholder">
-                    <strong>
-                      {previewUrl ? 'Embedded preview hidden' : 'No mirror preview running'}
-                    </strong>
-                    <p>
-                      {previewUrl
-                        ? 'Keep the shell lightweight and open the embedded preview only when you need to inspect the full mirror in-place.'
-                        : 'Start the mirror preview after building the selected snapshot to embed the localhost viewer here.'}
-                    </p>
-                  </div>
-                )}
-              </div>
-            </section>
+    <section className="panel mirror-panel">
+      <PanelHeading
+        kicker="Local snapshot"
+        title="Mirror access"
+        chip={previewUrl ? 'Preview live' : undefined}
+      />
+      <div className="mirror-stage">
+        <div className="mirror-toolbar">
+          <div className="button-row mirror-button-row">
+            <button
+              className="ghost-button"
+              type="button"
+              onClick={() => void onStartMirrorPreview()}
+            >
+              Start preview
+            </button>
+            <button
+              className="ghost-button"
+              type="button"
+              disabled={!previewJobId}
+              onClick={() => {
+                if (previewJobId) {
+                  void onStopMirrorPreview(previewJobId);
+                }
+              }}
+            >
+              Stop preview
+            </button>
+            <button
+              className="ghost-button"
+              type="button"
+              disabled={!previewUrl}
+              onClick={() => {
+                if (previewUrl) {
+                  void onOpenExternal(previewUrl);
+                }
+              }}
+            >
+              Open in browser
+            </button>
+            <button
+              className="ghost-button"
+              type="button"
+              disabled={!previewUrl}
+              onClick={() => setShowEmbeddedPreview((current) => !current)}
+            >
+              {showEmbeddedPreview ? 'Hide embedded preview' : 'Show embedded preview'}
+            </button>
+          </div>
+          <article className="summary-card mirror-meta-card">
+            <span className="metric-label">Mirror route</span>
+            <p className="mono mirror-address">{previewUrl ?? 'Not running'}</p>
+          </article>
+        </div>
+        {previewUrl && showEmbeddedPreview ? (
+          <div className="mirror-frame-shell">
+            <iframe className="mirror-frame" src={previewUrl} title="Mirror preview" />
+          </div>
+        ) : (
+          <div className="mirror-placeholder">
+            <strong>{previewUrl ? 'Embedded preview hidden' : 'No mirror preview running'}</strong>
+            <p>
+              {previewUrl
+                ? 'Keep the shell lightweight and open the embedded preview only when you need to inspect the full mirror in-place.'
+                : 'Start the mirror preview after building the selected snapshot to embed the localhost viewer here.'}
+            </p>
+          </div>
+        )}
+      </div>
+    </section>
   );
 }
 

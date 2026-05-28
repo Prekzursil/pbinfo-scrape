@@ -361,10 +361,7 @@ function matchesSolvedFilter(record: ProblemCoverageRecord, options: ListCoverag
   return true;
 }
 
-function matchesEnumFilter<T>(
-  value: T | undefined,
-  filter: T | 'all' | undefined,
-): boolean {
+function matchesEnumFilter<T>(value: T | undefined, filter: T | 'all' | undefined): boolean {
   if (!filter || filter === 'all') {
     return true;
   }
@@ -418,9 +415,7 @@ function matchesCoverageFilters(
   options: ListCoverageOptions,
   query: string | undefined,
 ): boolean {
-  return (
-    matchesStructuredCoverageFilters(record, options) && matchesCoverageQuery(record, query)
-  );
+  return matchesStructuredCoverageFilters(record, options) && matchesCoverageQuery(record, query);
 }
 
 function deriveTestsCoverageStatus(

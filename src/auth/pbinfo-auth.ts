@@ -171,4 +171,3 @@ function parseAjaxLoginResponse(text: string): AjaxLoginResponse {
     return {};
   }
 }
-

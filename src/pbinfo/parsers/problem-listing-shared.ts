@@ -210,11 +210,13 @@ export function extractExplicitPaginationUrls($: Cheerio, pageUrl: string | unde
   return [...urls].sort((left, right) => extractCurrentOffset(left) - extractCurrentOffset(right));
 }
 
-function parseScriptedPagination(html: string): {
-  inferredTotal: number;
-  currentOffset: number;
-  pageSize: number;
-} | undefined {
+function parseScriptedPagination(html: string):
+  | {
+      inferredTotal: number;
+      currentOffset: number;
+      pageSize: number;
+    }
+  | undefined {
   const paginationMatch = html.match(/Paginare\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/i);
   if (!paginationMatch?.[1] || !paginationMatch[2] || !paginationMatch[3]) {
     return undefined;

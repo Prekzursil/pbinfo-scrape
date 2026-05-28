@@ -201,8 +201,7 @@ function computeCandidateScoreParts(
       submission.runtimeSeconds !== undefined
         ? -submission.runtimeSeconds
         : Number.NEGATIVE_INFINITY,
-    memoryRank:
-      submission.memoryKb !== undefined ? -submission.memoryKb : Number.NEGATIVE_INFINITY,
+    memoryRank: submission.memoryKb !== undefined ? -submission.memoryKb : Number.NEGATIVE_INFINITY,
     recencyRank: Date.parse(submission.fetchedAt) || 0,
   };
 }

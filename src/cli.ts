@@ -169,10 +169,7 @@ export function buildCli(handlers: CliHandlers = createDefaultHandlers()): Comma
   );
 
   const crawl = program.command('crawl').description('Queue and process crawl work');
-  const registerCrawlScope = (
-    name: 'public' | 'user' | 'all',
-    description: string,
-  ): void => {
+  const registerCrawlScope = (name: 'public' | 'user' | 'all', description: string): void => {
     crawl
       .command(name)
       .description(description)

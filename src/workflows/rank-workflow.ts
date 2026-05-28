@@ -94,13 +94,15 @@ function toBestSubmissionRecord(
   };
 }
 
-function loadSuspicionRefreshedRecords<T extends { sourceCode?: string; suspicionFlags?: string[] }>(
-  root: string,
-): T[] {
+function loadSuspicionRefreshedRecords<
+  T extends { sourceCode?: string; suspicionFlags?: string[] },
+>(root: string): T[] {
   try {
     return readdirSync(root)
       .filter((entry) => entry.endsWith('.json'))
-      .map((entry) => refreshSuspicionFlags(JSON.parse(readFileSync(join(root, entry), 'utf8')) as T));
+      .map((entry) =>
+        refreshSuspicionFlags(JSON.parse(readFileSync(join(root, entry), 'utf8')) as T),
+      );
   } catch {
     return [];
   }

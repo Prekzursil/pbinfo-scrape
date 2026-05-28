@@ -48,7 +48,9 @@ function detectsConstantOutput(normalized: string, readsInput: boolean): boolean
     ),
   ];
   return printedConstantLiterals.some((match) =>
-    isSubstantiveOutputLiteral(match[1] ?? match[2] ?? match[3] ?? match[4] ?? match[5] ?? match[6]),
+    isSubstantiveOutputLiteral(
+      match[1] ?? match[2] ?? match[3] ?? match[4] ?? match[5] ?? match[6],
+    ),
   );
 }
 
@@ -57,7 +59,9 @@ function branchesViaNonTrivialMapping(signals: SuspicionSignals): boolean {
 }
 
 function branchesViaDenseComparisons(signals: SuspicionSignals): boolean {
-  return signals.denseLiteralComparisons && signals.compactLength < 320 && !signals.hasIterativeLogic;
+  return (
+    signals.denseLiteralComparisons && signals.compactLength < 320 && !signals.hasIterativeLogic
+  );
 }
 
 function branchesViaCompactMapping(signals: SuspicionSignals): boolean {
@@ -101,7 +105,9 @@ function detectsLiteralPairs(signals: SuspicionSignals): boolean {
 function detectsLookupTable(signals: SuspicionSignals): boolean {
   const lookupTableLiterals =
     signals.normalized.match(/\{[^{}]*(?:\d+\s*,\s*){6,}\d+[^{}]*\}/g) ?? [];
-  return lookupTableLiterals.length > 0 && signals.compactLength < 300 && !signals.hasIterativeLogic;
+  return (
+    lookupTableLiterals.length > 0 && signals.compactLength < 300 && !signals.hasIterativeLogic
+  );
 }
 
 export function detectSuspicionFlags(sourceCode?: string): string[] {

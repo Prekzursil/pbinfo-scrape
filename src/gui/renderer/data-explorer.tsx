@@ -238,7 +238,11 @@ function DataRecordDetail(props: {
         <span className="panel-chip">{detail.recordId}</span>
       </div>
       <div className="button-row">
-        <button className="ghost-button" type="button" onClick={() => void onOpenPath(detail.filePath)}>
+        <button
+          className="ghost-button"
+          type="button"
+          onClick={() => void onOpenPath(detail.filePath)}
+        >
           Open selected record file
         </button>
         <button

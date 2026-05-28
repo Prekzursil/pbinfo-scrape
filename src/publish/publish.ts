@@ -431,7 +431,10 @@ function enrichCommandError(error: unknown, command: string, args: string[]): Er
     stdout?: string | Buffer;
     stderr?: string | Buffer;
   };
-  const details = [streamToString(errorWithStreams.stderr).trim(), streamToString(errorWithStreams.stdout).trim()]
+  const details = [
+    streamToString(errorWithStreams.stderr).trim(),
+    streamToString(errorWithStreams.stdout).trim(),
+  ]
     .filter(Boolean)
     .join('\n');
 

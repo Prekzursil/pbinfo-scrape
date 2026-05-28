@@ -85,7 +85,9 @@ function extractEntriesFromAnchorTriplets(
   const seen = new Set<number>();
 
   for (let index = 0; index < anchors.length; index += 1) {
-    const problemMatch = $(anchors[index]).attr('href')?.match(/^\/probleme\/(\d+)\/([^/?#]+)$/);
+    const problemMatch = $(anchors[index])
+      .attr('href')
+      ?.match(/^\/probleme\/(\d+)\/([^/?#]+)$/);
     if (!problemMatch?.[1] || !problemMatch[2]) {
       continue;
     }

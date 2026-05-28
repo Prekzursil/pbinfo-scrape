@@ -72,7 +72,9 @@ function resolveHandleFromSession(
 function resolveHandleFromAnchors(html: string): string | undefined {
   const $ = loadHtml(html);
   for (const anchor of $(PROFILE_ANCHOR_SELECTOR).toArray()) {
-    const fromHref = $(anchor).attr('href')?.match(/^\/profil\/([^/?#]+)/u)?.[1];
+    const fromHref = $(anchor)
+      .attr('href')
+      ?.match(/^\/profil\/([^/?#]+)/u)?.[1];
     if (fromHref) {
       return fromHref;
     }
