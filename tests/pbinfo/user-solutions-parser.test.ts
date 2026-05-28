@@ -22,6 +22,11 @@ describe('parseUserSolutionsListPage', () => {
         <tr>
           <td>no anchors here</td>
         </tr>
+        <tr>
+          <td><a href="/probleme/10/suma">Suma</a></td>
+          <td><a href="/detalii-evaluare/101">vezi</a></td>
+          <td>100</td>
+        </tr>
       </table>
     `;
 

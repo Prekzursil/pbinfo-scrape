@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
 import {
+  parseOfficialSolutionFragment,
   parseProblemEndpointFragment,
   parseProblemPage,
   parseProblemStatementFragment,
@@ -232,6 +233,42 @@ describe('problem parser', () => {
       message: 'Pentru această problemă testele nu sunt vizibile!',
       visibleTests: [],
     });
+  });
+
+  test('returns empty official solutions when the fragment is not visible', () => {
+    expect(parseOfficialSolutionFragment(restrictedSolutionFragment)).toEqual({
+      access: 'restricted',
+      message: 'N-ai voie să vezi indicațiile!',
+      solutions: {},
+    });
+  });
+
+  test('maps official solution code blocks to tab labels', () => {
+    const parsed = parseOfficialSolutionFragment(`
+      <ul class="nav">
+        <li><a data-bs-target="#sol-cpp" href="#sol-cpp">C++</a></li>
+        <li><a data-bs-target="#sol-py" href="#sol-py">Python</a></li>
+      </ul>
+      <div id="sol-cpp"><pre>int main() { return 0; }</pre></div>
+      <div id="sol-py"><pre>print(0)</pre></div>
+    `);
+
+    expect(parsed.access).toBe('visible');
+    expect(parsed.solutions).toEqual({
+      'C++': 'int main() { return 0; }',
+      Python: 'print(0)',
+    });
+  });
+
+  test('falls back to a single unlabeled official solution body', () => {
+    const parsed = parseOfficialSolutionFragment(`
+      <section>
+        <pre>cout &lt;&lt; 1;</pre>
+      </section>
+    `);
+
+    expect(parsed.access).toBe('visible');
+    expect(parsed.solutions).toEqual({ unknown: 'cout << 1;' });
   });
 
   test('extracts visible tests from a test endpoint fragment', () => {

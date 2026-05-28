@@ -66,6 +66,71 @@ describe('parseProblemSourceListPage', () => {
     ]);
   });
 
+  test('resolves the author handle from a summary row when no titled link exists', () => {
+    const pageUrl = 'https://www.pbinfo.ro/solutii/problema/7/foo';
+    const parsed = parseProblemSourceListPage(
+      `
+        <table class="summary">
+          <tr>
+            <th>Postată de</th>
+            <td><a href="/profil/carol">Carol</a></td>
+          </tr>
+        </table>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td><a href="/profil/carol">carol</a></td>
+              <td><a href="/probleme/7/foo">Foo</a></td>
+              <td><a href="/detalii-evaluare/900">Evaluare</a></td>
+              <td>100</td>
+            </tr>
+          </tbody>
+        </table>
+      `,
+      pageUrl,
+    );
+
+    expect(parsed.authorHandle).toBe('carol');
+  });
+
+  test('falls back to anchor triplets when no table rows are present', () => {
+    const pageUrl = 'https://www.pbinfo.ro/solutii/problema/42/answer';
+    const parsed = parseProblemSourceListPage(
+      `
+        <div class="results">
+          <a href="/probleme/42/answer">Answer</a>
+          <a href="/profil/alice">Alice (alice)</a>
+          <a href="/detalii-evaluare/8001">Evaluare</a>
+
+          <a href="/probleme/42/answer">Answer</a>
+          <a href="/detalii-evaluare/8002">Evaluare</a>
+
+          <a href="/probleme/42/answer">Answer</a>
+          <a href="/profil/bob">Bob</a>
+          <a href="/detalii-evaluare/8001">Evaluare duplicate</a>
+        </div>
+      `,
+      pageUrl,
+    );
+
+    expect(parsed.entries).toEqual([
+      {
+        user: 'alice',
+        problemId: 42,
+        problemSlug: 'answer',
+        problemName: 'Answer',
+        evaluationId: 8001,
+      },
+      {
+        user: 'Evaluare',
+        problemId: 42,
+        problemSlug: 'answer',
+        problemName: 'Answer',
+        evaluationId: 8002,
+      },
+    ]);
+  });
+
   test('prefers explicit pagination links and deduplicates repeated evaluation ids', () => {
     const pageUrl = 'https://www.pbinfo.ro/solutii/problema/1/sum';
     const parsed = parseProblemSourceListPage(
