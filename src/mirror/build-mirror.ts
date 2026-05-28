@@ -395,6 +395,25 @@ function createCoverageIndexRoute(snapshotId: string): MirrorRouteEntry {
   };
 }
 
+function resolveCoverageIndexTotals(coverageIndex: ProblemCoverageIndex | undefined): {
+  totalProblems: number;
+  solvedByMeCount: number;
+  testsFragmentArchivedCount: number;
+  problemsWithEffectiveTests: number;
+  problemsWithArchivedSources: number;
+  newSinceBaselineCount: number;
+} {
+  const totals = coverageIndex?.totals ?? ({} as Partial<ProblemCoverageIndex['totals']>);
+  return {
+    totalProblems: totals.totalProblems ?? 0,
+    solvedByMeCount: totals.solvedByMeCount ?? 0,
+    testsFragmentArchivedCount: totals.testsFragmentArchivedCount ?? 0,
+    problemsWithEffectiveTests: totals.problemsWithEffectiveTests ?? 0,
+    problemsWithArchivedSources: totals.problemsWithArchivedSources ?? 0,
+    newSinceBaselineCount: totals.newSinceBaselineCount ?? 0,
+  };
+}
+
 function renderCoverageIndex(
   snapshotId: string,
   coverageIndex: ProblemCoverageIndex | undefined,
@@ -409,6 +428,7 @@ function renderCoverageIndex(
   ].sort((left, right) => left - right);
   const payload = JSON.stringify(records);
   const initialRows = records.map((record) => renderCoverageRow(record)).join('\n');
+  const totals = resolveCoverageIndexTotals(coverageIndex);
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -445,12 +465,12 @@ function renderCoverageIndex(
           <p>Truthful per-problem coverage for solved status, archived fragments, parsed tests, and archived source code.</p>
         </div>
         <div class="summary-grid">
-          <article class="summary-card"><span class="muted">Problems</span><strong>${coverageIndex?.totals.totalProblems ?? 0}</strong></article>
-          <article class="summary-card"><span class="muted">Solved by archived handle</span><strong>${coverageIndex?.totals.solvedByMeCount ?? 0}</strong></article>
-          <article class="summary-card"><span class="muted">Tests fragments archived</span><strong>${coverageIndex?.totals.testsFragmentArchivedCount ?? 0}</strong></article>
-          <article class="summary-card"><span class="muted">Effective tests</span><strong>${coverageIndex?.totals.problemsWithEffectiveTests ?? 0}</strong></article>
-          <article class="summary-card"><span class="muted">Archived source coverage</span><strong>${coverageIndex?.totals.problemsWithArchivedSources ?? 0}</strong></article>
-          <article class="summary-card"><span class="muted">New vs baseline</span><strong>${coverageIndex?.totals.newSinceBaselineCount ?? 0}</strong></article>
+          <article class="summary-card"><span class="muted">Problems</span><strong>${totals.totalProblems}</strong></article>
+          <article class="summary-card"><span class="muted">Solved by archived handle</span><strong>${totals.solvedByMeCount}</strong></article>
+          <article class="summary-card"><span class="muted">Tests fragments archived</span><strong>${totals.testsFragmentArchivedCount}</strong></article>
+          <article class="summary-card"><span class="muted">Effective tests</span><strong>${totals.problemsWithEffectiveTests}</strong></article>
+          <article class="summary-card"><span class="muted">Archived source coverage</span><strong>${totals.problemsWithArchivedSources}</strong></article>
+          <article class="summary-card"><span class="muted">New vs baseline</span><strong>${totals.newSinceBaselineCount}</strong></article>
         </div>
       </section>
       <section class="filter-card" aria-label="Coverage filters">
@@ -657,14 +677,34 @@ function injectProblemCoverageStrip(
       <span class="archive-coverage-badge">${record.testsFragmentArchived ? 'Tests fragment archived' : 'Tests fragment not archived'}</span>
       <span class="archive-coverage-badge">Effective tests: ${record.effectiveTestsAvailableCount}</span>
       <span class="archive-coverage-badge">Visible tests captured: ${record.visibleTestsCapturedCount}</span>
-      <span class="archive-coverage-badge">${record.officialSourceArchived ? `Official source languages: ${escapeHtml(record.officialSourceLanguages.join(', '))}` : record.officialSourceBlockedReason ? `Official source blocked: ${escapeHtml(record.officialSourceBlockedReason)}` : 'Official source not archived'}</span>
-      <span class="archive-coverage-badge">${record.trustworthyUserSourceLanguages.length > 0 ? `Trustworthy user languages: ${escapeHtml(record.trustworthyUserSourceLanguages.join(', '))}` : record.userSourceArchived ? 'User sources archived, but no trustworthy 100-point language kept yet' : 'User source not archived'}</span>
+      <span class="archive-coverage-badge">${officialSourceBadgeText(record)}</span>
+      <span class="archive-coverage-badge">${userSourceBadgeText(record)}</span>
       <span class="archive-coverage-badge">Editorial: ${escapeHtml(record.editorialAvailability)}</span>
       ${record.newSinceBaseline ? '<span class="archive-coverage-badge">New since baseline</span>' : ''}
     </div>
     ${noteText}
   </section>`;
   $('body').prepend(strip);
+}
+
+function officialSourceBadgeText(record: ProblemCoverageRecord): string {
+  if (record.officialSourceArchived) {
+    return `Official source languages: ${escapeHtml(record.officialSourceLanguages.join(', '))}`;
+  }
+  if (record.officialSourceBlockedReason) {
+    return `Official source blocked: ${escapeHtml(record.officialSourceBlockedReason)}`;
+  }
+  return 'Official source not archived';
+}
+
+function userSourceBadgeText(record: ProblemCoverageRecord): string {
+  if (record.trustworthyUserSourceLanguages.length > 0) {
+    return `Trustworthy user languages: ${escapeHtml(record.trustworthyUserSourceLanguages.join(', '))}`;
+  }
+  if (record.userSourceArchived) {
+    return 'User sources archived, but no trustworthy 100-point language kept yet';
+  }
+  return 'User source not archived';
 }
 
 function readProblemIdFromEntityKey(entityKey: string): number {

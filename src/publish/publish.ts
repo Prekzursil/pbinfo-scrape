@@ -11,6 +11,8 @@ import {
 import type { LoadedLocalConfig } from '../config/local-config.js';
 import { CrawlQueue } from '../crawl/crawl-queue.js';
 
+type RunCommand = (workspaceRoot: string, command: string, args: string[]) => string;
+
 export interface PublishWorkspaceOptions {
   workspaceRoot: string;
   config: LoadedLocalConfig;
@@ -79,13 +81,7 @@ const DEFAULT_REPO_TOPICS = [
   'typescript',
 ] as const;
 
-export function publishWorkspace(options: PublishWorkspaceOptions): PublishWorkspaceResult {
-  const runCommand = options.runCommand ?? run;
-  const snapshotId = options.snapshotId;
-  if (!snapshotId) {
-    throw new Error('publish requires --snapshot <id>.');
-  }
-
+function assertPublishPreflight(options: PublishWorkspaceOptions, snapshotId: string): void {
   const catalog = readArchiveCatalog(options.config.paths.archiveRoot);
   const snapshot = assertSnapshotRecord(catalog, snapshotId);
   if (catalog.canonicalSnapshotId !== snapshotId) {
@@ -95,17 +91,7 @@ export function publishWorkspace(options: PublishWorkspaceOptions): PublishWorks
     throw new Error('Publish requires exactly one snapshot to remain in archive/snapshots/.');
   }
 
-  const queuePath = buildQueuePath(options.config.paths.localRoot, snapshotId);
-  if (existsSync(queuePath)) {
-    const queue = new CrawlQueue(queuePath);
-    const queueState = queue.getSnapshot();
-    queue.close();
-    if (queueState.pending > 0 || queueState.inProgress > 0) {
-      throw new Error(
-        `Snapshot ${snapshotId} is not fully drained (pending=${queueState.pending}, inProgress=${queueState.inProgress}).`,
-      );
-    }
-  }
+  assertQueueDrained(options.config.paths.localRoot, snapshotId);
   if (snapshot.status !== 'completed') {
     throw new Error(`Snapshot ${snapshotId} must be completed before publish.`);
   }
@@ -114,15 +100,78 @@ export function publishWorkspace(options: PublishWorkspaceOptions): PublishWorks
   if (!existsSync(artifactExport.exportRoot)) {
     throw new Error(`Raw artifact export root is missing for snapshot ${snapshotId}.`);
   }
+}
 
-  const stagedPaths = resolveStageAllowlist(options.workspaceRoot);
-  const secretViolations = scanForPublishSecrets(options.workspaceRoot, stagedPaths);
-  if (secretViolations.length > 0) {
-    throw new Error(
-      `Publish preflight found secret-like material in tracked files: ${secretViolations.join('; ')}`,
-    );
+function assertQueueDrained(localRoot: string, snapshotId: string): void {
+  const queuePath = buildQueuePath(localRoot, snapshotId);
+  if (!existsSync(queuePath)) {
+    return;
   }
 
+  const queue = new CrawlQueue(queuePath);
+  const queueState = queue.getSnapshot();
+  queue.close();
+  if (queueState.pending > 0 || queueState.inProgress > 0) {
+    throw new Error(
+      `Snapshot ${snapshotId} is not fully drained (pending=${queueState.pending}, inProgress=${queueState.inProgress}).`,
+    );
+  }
+}
+
+function commitStagedWorkspace(
+  workspaceRoot: string,
+  commitMessage: string,
+  runCommand: RunCommand,
+): void {
+  try {
+    runCommand(workspaceRoot, 'git', ['commit', '-m', commitMessage]);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    if (!message.includes('nothing to commit')) {
+      throw error;
+    }
+  }
+}
+
+function ensureGitHubRepository(
+  workspaceRoot: string,
+  repository: string,
+  runCommand: RunCommand,
+): void {
+  try {
+    runCommand(workspaceRoot, 'gh', ['repo', 'view', repository]);
+  } catch {
+    runCommand(workspaceRoot, 'gh', [
+      'repo',
+      'create',
+      repository,
+      '--private',
+      '--description',
+      DEFAULT_REPO_DESCRIPTION,
+      '--confirm',
+    ]);
+  }
+}
+
+function ensureOriginRemote(
+  workspaceRoot: string,
+  remoteUrl: string,
+  runCommand: RunCommand,
+): void {
+  try {
+    runCommand(workspaceRoot, 'git', ['remote', 'get-url', 'origin']);
+    runCommand(workspaceRoot, 'git', ['remote', 'set-url', 'origin', remoteUrl]);
+  } catch {
+    runCommand(workspaceRoot, 'git', ['remote', 'add', 'origin', remoteUrl]);
+  }
+}
+
+function stageAndCommitWorkspace(
+  options: PublishWorkspaceOptions,
+  snapshotId: string,
+  stagedPaths: string[],
+  runCommand: RunCommand,
+): boolean {
   const initializedGit = !existsSync(join(options.workspaceRoot, '.git'));
   if (initializedGit) {
     runCommand(options.workspaceRoot, 'git', ['init']);
@@ -137,41 +186,37 @@ export function publishWorkspace(options: PublishWorkspaceOptions): PublishWorks
 
   runCommand(options.workspaceRoot, 'git', ['add', '--', ...stagedPaths]);
 
-  const packageMetadata = readPackageMetadata(options.workspaceRoot);
   const commitMessage = normalizeCommitMessage(
     options.commitMessage ?? `feat: publish ${snapshotId} PBInfo archive`,
   );
-  try {
-    runCommand(options.workspaceRoot, 'git', ['commit', '-m', commitMessage]);
-  } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-    if (!message.includes('nothing to commit')) {
-      throw error;
-    }
+  commitStagedWorkspace(options.workspaceRoot, commitMessage, runCommand);
+  return initializedGit;
+}
+
+export function publishWorkspace(options: PublishWorkspaceOptions): PublishWorkspaceResult {
+  const runCommand = options.runCommand ?? run;
+  const snapshotId = options.snapshotId;
+  if (!snapshotId) {
+    throw new Error('publish requires --snapshot <id>.');
   }
+
+  assertPublishPreflight(options, snapshotId);
+
+  const stagedPaths = resolveStageAllowlist(options.workspaceRoot);
+  const secretViolations = scanForPublishSecrets(options.workspaceRoot, stagedPaths);
+  if (secretViolations.length > 0) {
+    throw new Error(
+      `Publish preflight found secret-like material in tracked files: ${secretViolations.join('; ')}`,
+    );
+  }
+
+  const initializedGit = stageAndCommitWorkspace(options, snapshotId, stagedPaths, runCommand);
+  const packageMetadata = readPackageMetadata(options.workspaceRoot);
 
   const repository = `${options.config.publish.owner}/${options.config.publish.repo}`;
   const remoteUrl = `https://github.com/${repository}.git`;
-  try {
-    runCommand(options.workspaceRoot, 'gh', ['repo', 'view', repository]);
-  } catch {
-    runCommand(options.workspaceRoot, 'gh', [
-      'repo',
-      'create',
-      repository,
-      '--private',
-      '--description',
-      DEFAULT_REPO_DESCRIPTION,
-      '--confirm',
-    ]);
-  }
-
-  try {
-    runCommand(options.workspaceRoot, 'git', ['remote', 'get-url', 'origin']);
-    runCommand(options.workspaceRoot, 'git', ['remote', 'set-url', 'origin', remoteUrl]);
-  } catch {
-    runCommand(options.workspaceRoot, 'git', ['remote', 'add', 'origin', remoteUrl]);
-  }
+  ensureGitHubRepository(options.workspaceRoot, repository, runCommand);
+  ensureOriginRemote(options.workspaceRoot, remoteUrl, runCommand);
 
   runCommand(options.workspaceRoot, 'git', ['push', '-u', 'origin', 'main']);
 
@@ -218,49 +263,53 @@ function resolveStageAllowlist(workspaceRoot: string): string[] {
   return DEFAULT_STAGE_ALLOWLIST.filter((entry) => existsSync(join(workspaceRoot, entry)));
 }
 
-function scanForPublishSecrets(workspaceRoot: string, stagedPaths: string[]): string[] {
+function scanFileForSecrets(relativePath: string, body: string): string[] {
   const violations: string[] = [];
+  if (body.includes(KNOWN_FORBIDDEN_PASSWORD)) {
+    violations.push(`${relativePath}: plaintext credential example`);
+  }
+  if (!shouldScanStructuredSecrets(relativePath)) {
+    return violations;
+  }
 
-  for (const stagedPath of stagedPaths) {
-    const absolutePath = join(workspaceRoot, stagedPath);
-    if (!existsSync(absolutePath)) {
+  if (containsUnsafePasswordValue(body)) {
+    violations.push(`${relativePath}: plaintext password material`);
+  }
+  if (containsUnsafeSessionCookieLiteral(body)) {
+    violations.push(`${relativePath}: session cookie literal`);
+  }
+  if (containsUnsafeSerializedSessionCookie(body)) {
+    violations.push(`${relativePath}: serialized session cookie dump`);
+  }
+  return violations;
+}
+
+function scanStagedPathForSecrets(workspaceRoot: string, stagedPath: string): string[] {
+  const absolutePath = join(workspaceRoot, stagedPath);
+  if (!existsSync(absolutePath)) {
+    return [];
+  }
+
+  const violations: string[] = [];
+  for (const filePath of enumerateFiles(workspaceRoot, absolutePath)) {
+    const relativePath = relative(workspaceRoot, filePath).split(sep).join('/');
+    if (relativePath.startsWith('.local/')) {
+      violations.push(`${relativePath}: local-only material`);
       continue;
     }
 
-    for (const filePath of enumerateFiles(workspaceRoot, absolutePath)) {
-      const relativePath = relative(workspaceRoot, filePath).split(sep).join('/');
-      if (relativePath.startsWith('.local/')) {
-        violations.push(`${relativePath}: local-only material`);
-        continue;
-      }
-
-      const body = readSafeText(filePath);
-      if (body === undefined) {
-        continue;
-      }
-
-      if (body.includes(KNOWN_FORBIDDEN_PASSWORD)) {
-        violations.push(`${relativePath}: plaintext credential example`);
-      }
-
-      if (!shouldScanStructuredSecrets(relativePath)) {
-        continue;
-      }
-
-      if (containsUnsafePasswordValue(body)) {
-        violations.push(`${relativePath}: plaintext password material`);
-      }
-
-      if (containsUnsafeSessionCookieLiteral(body)) {
-        violations.push(`${relativePath}: session cookie literal`);
-      }
-
-      if (containsUnsafeSerializedSessionCookie(body)) {
-        violations.push(`${relativePath}: serialized session cookie dump`);
-      }
+    const body = readSafeText(filePath);
+    if (body !== undefined) {
+      violations.push(...scanFileForSecrets(relativePath, body));
     }
   }
+  return violations;
+}
 
+function scanForPublishSecrets(workspaceRoot: string, stagedPaths: string[]): string[] {
+  const violations = stagedPaths.flatMap((stagedPath) =>
+    scanStagedPathForSecrets(workspaceRoot, stagedPath),
+  );
   return [...new Set(violations)];
 }
 
@@ -366,6 +415,13 @@ function run(workspaceRoot: string, command: string, args: string[]): string {
   throw lastError instanceof Error ? lastError : new Error(String(lastError));
 }
 
+function streamToString(stream: string | Buffer | undefined): string {
+  if (typeof stream === 'string') {
+    return stream;
+  }
+  return stream?.toString?.() ?? '';
+}
+
 function enrichCommandError(error: unknown, command: string, args: string[]): Error {
   if (!(error instanceof Error)) {
     return new Error(`Command failed: ${command} ${args.join(' ')}`);
@@ -375,21 +431,13 @@ function enrichCommandError(error: unknown, command: string, args: string[]): Er
     stdout?: string | Buffer;
     stderr?: string | Buffer;
   };
-  const stdout =
-    typeof errorWithStreams.stdout === 'string'
-      ? errorWithStreams.stdout
-      : (errorWithStreams.stdout?.toString?.() ?? '');
-  const stderr =
-    typeof errorWithStreams.stderr === 'string'
-      ? errorWithStreams.stderr
-      : (errorWithStreams.stderr?.toString?.() ?? '');
-  const details = [stderr.trim(), stdout.trim()].filter(Boolean).join('\n');
+  const details = [streamToString(errorWithStreams.stderr).trim(), streamToString(errorWithStreams.stdout).trim()]
+    .filter(Boolean)
+    .join('\n');
 
-  if (!details) {
-    return error;
+  if (details) {
+    error.message = `${error.message}\n${details}`;
   }
-
-  error.message = `${error.message}\n${details}`;
   return error;
 }
 

@@ -94,6 +94,35 @@ export async function runOfficialSourceHarvestWorkflow(
   });
 }
 
+async function resolveCrawlFetch(
+  config: ReturnType<typeof loadLocalConfig>,
+): Promise<typeof fetch> {
+  if (config.auth.strategy !== 'none' || config.auth.sessionCookiesPath) {
+    return createCookieFetch(config.auth.sessionCookiesPath);
+  }
+  return fetch;
+}
+
+async function resolveBrowserCapture(
+  config: ReturnType<typeof loadLocalConfig>,
+): Promise<Awaited<ReturnType<typeof createPlaywrightBrowserCapture>> | undefined> {
+  if (!config.crawl.crossCheckWithBrowser) {
+    return undefined;
+  }
+  try {
+    return await createPlaywrightBrowserCapture(config.auth.sessionCookiesPath);
+  } catch {
+    return undefined;
+  }
+}
+
+function resolveConcurrency(maxConcurrency: number, maxIterations: number): number {
+  const bounded = Number.isFinite(maxIterations)
+    ? Math.min(maxConcurrency, maxIterations)
+    : maxConcurrency;
+  return Math.max(1, bounded);
+}
+
 async function runSeededCrawlWorkflow(
   workspaceRoot: string,
   config: ReturnType<typeof loadLocalConfig>,
@@ -118,18 +147,8 @@ async function runSeededCrawlWorkflow(
   const queue = new CrawlQueue(queuePath);
   queue.requeueInProgress();
   queue.enqueueMany(seeds);
-  const fetchImpl =
-    config.auth.strategy !== 'none' || config.auth.sessionCookiesPath
-      ? await createCookieFetch(config.auth.sessionCookiesPath)
-      : fetch;
-  let browserCapture: Awaited<ReturnType<typeof createPlaywrightBrowserCapture>> | undefined;
-  if (config.crawl.crossCheckWithBrowser) {
-    try {
-      browserCapture = await createPlaywrightBrowserCapture(config.auth.sessionCookiesPath);
-    } catch {
-      browserCapture = undefined;
-    }
-  }
+  const fetchImpl = await resolveCrawlFetch(config);
+  const browserCapture = await resolveBrowserCapture(config);
 
   const crawler = new ArchiveCrawler({
     config,
@@ -145,12 +164,7 @@ async function runSeededCrawlWorkflow(
   const maxIterations = options.maxIterations ?? Number.POSITIVE_INFINITY;
   let processed = 0;
   let remainingBudget = maxIterations;
-  const concurrency = Math.max(
-    1,
-    Number.isFinite(maxIterations)
-      ? Math.min(config.crawl.maxConcurrency, maxIterations)
-      : config.crawl.maxConcurrency,
-  );
+  const concurrency = resolveConcurrency(config.crawl.maxConcurrency, maxIterations);
 
   try {
     await Promise.all(
