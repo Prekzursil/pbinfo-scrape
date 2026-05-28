@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { afterEach, describe, expect, test } from 'vitest';
 
 import { buildProblemCoverageGapReport } from '../../src/coverage/coverage-gaps.js';
-import type { ProblemCoverageIndex } from '../../src/types/records.js';
+import type { ProblemCoverageIndex, ProblemCoverageRecord } from '../../src/types/records.js';
 
 const tempDirs: string[] = [];
 
@@ -14,6 +14,56 @@ afterEach(() => {
     rmSync(dir, { recursive: true, force: true });
   }
 });
+
+function makeCoverageRecord(overrides: Partial<ProblemCoverageRecord>): ProblemCoverageRecord {
+  return {
+    snapshotId: 'derive-snapshot',
+    problemId: 1,
+    slug: 'p',
+    name: 'P',
+    grade: 9,
+    canonicalUrl: 'https://www.pbinfo.ro/probleme/1/p',
+    mirrorRoute: '/probleme/1/p',
+    tags: [],
+    solvedByMe: false,
+    evaluationCount: 0,
+    solvedEvaluationCount: 0,
+    rankingPresent: false,
+    statementArchived: true,
+    solutionFragmentArchived: true,
+    testsFragmentArchived: true,
+    exampleTestsAvailableCount: 0,
+    visibleTestsCapturedCount: 0,
+    evaluationObservedTestsCount: 0,
+    effectiveTestsAvailableCount: 0,
+    testsCoverageStatus: 'not-captured-yet',
+    officialSolutionPresent: false,
+    editorialAvailability: 'unknown',
+    sourceListUrl: 'https://www.pbinfo.ro/solutii/problema/1/p',
+    officialSourceArchived: false,
+    officialSourceCount: 0,
+    officialSourceIds: [],
+    officialSourceLanguages: [],
+    officialSourceStatus: 'not-captured-yet',
+    userSourceArchived: false,
+    userSourceCount: 0,
+    userSourceIds: [],
+    userSourceLanguages: [],
+    requiredTrustworthyUserSourceLanguages: [],
+    trustworthyUserSourceLanguages: [],
+    bestTrustworthyUserPerLanguage: {},
+    missingTrustworthyUserSourceLanguages: [],
+    archiveCompletenessStatus: 'unsolved',
+    hasAnyArchivedSource: false,
+    unsolvedByConfiguredHandle: true,
+    officialSourceBlocked: true,
+    notArchivedYet: false,
+    newSinceBaseline: false,
+    evaluationIds: [],
+    notes: [],
+    ...overrides,
+  };
+}
 
 describe('problem coverage gap report', () => {
   test('derives unsolved, missing-official, and solved-user-source gaps with hard gate status', () => {
@@ -438,6 +488,75 @@ describe('problem coverage gap report', () => {
       passed: true,
       failedProblemIds: [],
       failureCount: 0,
+    });
+  });
+
+  test('derives the official-source blocked reason when the record omits a precomputed reason', () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-coverage-gaps-derive-'));
+    tempDirs.push(workspaceRoot);
+    const normalizedRoot = join(workspaceRoot, 'normalized');
+
+    const totals = {
+      totalProblems: 6,
+      solvedByMeCount: 0,
+      statementArchivedCount: 6,
+      solutionFragmentArchivedCount: 3,
+      testsFragmentArchivedCount: 0,
+      problemsWithExamples: 1,
+      problemsWithVisibleTestsCaptured: 0,
+      problemsWithEvaluationObservedTests: 0,
+      problemsWithEffectiveTests: 0,
+      problemsWithArchivedSources: 0,
+      problemsWithOfficialSourceArchived: 0,
+      problemsWithUserSourceArchived: 0,
+      editorialVisibleCount: 0,
+      rankingPresentCount: 0,
+      newSinceBaselineCount: 0,
+    };
+
+    const coverageIndex: ProblemCoverageIndex = {
+      snapshotId: 'derive-snapshot',
+      generatedAt: '2026-04-01T00:00:00.000Z',
+      totals,
+      records: [
+        // editorial hidden. testsAvailable omitted -> derived from example count.
+        makeCoverageRecord({ problemId: 10, editorialAvailability: 'hidden', exampleTestsAvailableCount: 1 }),
+        // editorial restricted.
+        makeCoverageRecord({ problemId: 11, editorialAvailability: 'restricted' }),
+        // not available upstream.
+        makeCoverageRecord({ problemId: 12, officialSourceStatus: 'not-available-upstream' }),
+        // solution fragment not archived.
+        makeCoverageRecord({ problemId: 13, solutionFragmentArchived: false }),
+        // official source not captured (fragment archived, present).
+        makeCoverageRecord({ problemId: 14, solutionFragmentArchived: true, officialSolutionPresent: true }),
+        // official source not captured (fragment archived only, no editorial block).
+        makeCoverageRecord({
+          problemId: 15,
+          editorialAvailability: 'visible',
+          officialSourceStatus: 'archived',
+          solutionFragmentArchived: true,
+          officialSolutionPresent: false,
+        }),
+      ],
+    };
+
+    const report = buildProblemCoverageGapReport({
+      normalizedRoot,
+      snapshotId: coverageIndex.snapshotId,
+      coverageIndex,
+      now: new Date('2026-04-01T01:00:00.000Z'),
+    });
+
+    const reasons = Object.fromEntries(
+      report.missingOfficialSources.map((entry) => [entry.problemId, entry.blockedReason]),
+    );
+    expect(reasons).toEqual({
+      10: 'editorial-hidden',
+      11: 'editorial-restricted',
+      12: 'not-available-upstream',
+      13: 'solution-fragment-not-archived',
+      14: 'official-source-not-captured',
+      15: 'official-source-not-captured',
     });
   });
 });

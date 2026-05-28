@@ -57,4 +57,18 @@ describe('parseCategoryPage', () => {
     const result = parseCategoryPage(html, 10);
     expect(result.categories).toEqual([]);
   });
+
+  test('skips intervening anchors without an href when locating the item list', () => {
+    const html = `
+      <a href="/probleme/categorii/50/stive">Stive</a>
+      <a>placeholder without href</a>
+      <a href="/about">unrelated</a>
+      <a href="/?pagina=itemi-evaluare-lista&tag=50">List</a>
+    `;
+
+    const result = parseCategoryPage(html, 9);
+
+    expect(result.categories).toHaveLength(1);
+    expect(result.categories[0]).toMatchObject({ id: 50, slug: 'stive' });
+  });
 });

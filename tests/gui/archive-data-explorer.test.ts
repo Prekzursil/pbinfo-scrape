@@ -118,33 +118,30 @@ function seedWorkspace(): SeededWorkspace {
     makeEvaluation({ evaluationId: 5002, user: 'altul', score: 50 }),
   );
   writeJson(join(normalizedRoot, 'tests', 'problem-101.json'), makeTests());
-  writeJson(
-    join(normalizedRoot, 'rankings', 'best-submissions.json'),
-    {
-      generatedAt: '2024-01-01T00:00:00.000Z',
-      problems: [
-        {
-          problemId: 101,
-          bestUserOverallEvaluationId: 5001,
-          bestUserPerLanguage: { cpp: 5001 },
-          bestOfficialPerLanguage: {},
-          orderedUserEvaluationIds: [5001, 5002],
-        },
-        {
-          // Missing problemId is filtered out.
-          bestUserPerLanguage: {},
-        },
-        {
-          problemId: 303,
-          bestUserPerLanguage: {},
-        },
-      ],
-    },
-  );
-  writeJson(
-    join(normalizedRoot, 'rankings', 'problems', 'problem-101.json'),
-    { problemId: 101, bestUserPerLanguage: { cpp: 5001 } },
-  );
+  writeJson(join(normalizedRoot, 'rankings', 'best-submissions.json'), {
+    generatedAt: '2024-01-01T00:00:00.000Z',
+    problems: [
+      {
+        problemId: 101,
+        bestUserOverallEvaluationId: 5001,
+        bestUserPerLanguage: { cpp: 5001 },
+        bestOfficialPerLanguage: {},
+        orderedUserEvaluationIds: [5001, 5002],
+      },
+      {
+        // Missing problemId is filtered out.
+        bestUserPerLanguage: {},
+      },
+      {
+        problemId: 303,
+        bestUserPerLanguage: {},
+      },
+    ],
+  });
+  writeJson(join(normalizedRoot, 'rankings', 'problems', 'problem-101.json'), {
+    problemId: 101,
+    bestUserPerLanguage: { cpp: 5001 },
+  });
 
   return { workspaceRoot, normalizedRoot, mirrorRoot };
 }
@@ -162,7 +159,10 @@ afterEach(() => {
 describe('getArchiveExplorerSummary', () => {
   test('summarizes all datasets using directory and manifest counts', () => {
     const { workspaceRoot, mirrorRoot } = seedWorkspace();
-    writeJson(join(mirrorRoot, 'routes.json'), [makeRoute(), makeRoute({ route: '/probleme/202/produs' })]);
+    writeJson(join(mirrorRoot, 'routes.json'), [
+      makeRoute(),
+      makeRoute({ route: '/probleme/202/produs' }),
+    ]);
 
     const summary = getArchiveExplorerSummary(workspaceRoot, { snapshotId: SNAPSHOT_ID });
 
@@ -215,7 +215,9 @@ describe('getArchiveExplorerSummary', () => {
     const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-archive-none-'));
     tempDirs.push(workspaceRoot);
 
-    expect(() => getArchiveExplorerSummary(workspaceRoot)).toThrow('No archived snapshot is available.');
+    expect(() => getArchiveExplorerSummary(workspaceRoot)).toThrow(
+      'No archived snapshot is available.',
+    );
   });
 });
 
@@ -288,7 +290,12 @@ describe('listArchiveExplorerRecords', () => {
     const { workspaceRoot, mirrorRoot } = seedWorkspace();
     writeJson(join(mirrorRoot, 'routes.json'), [
       makeRoute(),
-      makeRoute({ route: '/detalii-evaluare/5001', template: 'evaluation', sourceUrl: undefined, entityKey: 'eval:5001' }),
+      makeRoute({
+        route: '/detalii-evaluare/5001',
+        template: 'evaluation',
+        sourceUrl: undefined,
+        entityKey: 'eval:5001',
+      }),
     ]);
 
     const all = listArchiveExplorerRecords(workspaceRoot, {
