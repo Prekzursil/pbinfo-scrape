@@ -1,5 +1,11 @@
 import type { EvaluationTestResult } from '../../types/records.js';
-import { loadHtml, normalizeWhitespace, parseNumber, parseSeconds } from './shared.js';
+import {
+  loadHtml,
+  normalizeWhitespace,
+  parseNumber,
+  parseSeconds,
+  type HtmlNode,
+} from './shared.js';
 
 export interface ParsedEvaluationPage {
   evaluationId: number;
@@ -27,37 +33,51 @@ export function parseEvaluationPage(html: string, evaluationId: number): ParsedE
     throw new Error(`Could not find problem link for evaluation ${evaluationId}.`);
   }
 
-  const user = resolveSubmissionOwner($, summaryMap);
-  const tests = extractTests($);
-
-  const sourceCode = extractSourceCode($);
-  const compileLog = extractCompileLog($);
-  const fileName = summaryMap.get('fisier');
-
   const problemSlug = problemMatch[2];
   if (!problemSlug) {
     throw new Error(`Could not infer problem slug for evaluation ${evaluationId}.`);
   }
+
+  const sourceCode = extractSourceCode($);
+  const compileLog = extractCompileLog($);
 
   return {
     evaluationId,
     problemId: Number(problemMatch[1]),
     problemSlug,
     problemName: summaryMap.get('problema') ?? normalizeWhitespace(problemLink.text()),
-    user,
-    language: summaryMap.get('limbaj') ?? inferLanguageFromFilename(fileName) ?? 'unknown',
-    score: parseNumber(summaryMap.get('punctaj') ?? summaryMap.get('scor/rezultat') ?? '') ?? 0,
-    verdictSummary: summaryMap.get('verdict') ?? summaryMap.get('scor/rezultat') ?? '',
-    runtimeSeconds: parseSeconds(
-      summaryMap.get('timp maxim') ?? summaryMap.get('limita timp') ?? '',
-    ),
-    memoryKb: parseFirstNumber(
-      summaryMap.get('memorie maxima') ?? summaryMap.get('limita memorie') ?? '',
-    ),
+    user: resolveSubmissionOwner($, summaryMap),
+    tests: extractTests($),
     sourceAvailable: Boolean(sourceCode),
     sourceCode: sourceCode || undefined,
-    tests,
     compileLog: compileLog || undefined,
+    ...buildEvaluationMetrics(summaryMap),
+  };
+}
+
+type EvaluationMetrics = Pick<
+  ParsedEvaluationPage,
+  'language' | 'score' | 'verdictSummary' | 'runtimeSeconds' | 'memoryKb'
+>;
+
+function firstSummaryValue(summaryMap: Map<string, string>, keys: string[]): string {
+  for (const key of keys) {
+    const value = summaryMap.get(key);
+    if (value) {
+      return value;
+    }
+  }
+  return '';
+}
+
+function buildEvaluationMetrics(summaryMap: Map<string, string>): EvaluationMetrics {
+  return {
+    language:
+      summaryMap.get('limbaj') ?? inferLanguageFromFilename(summaryMap.get('fisier')) ?? 'unknown',
+    score: parseNumber(firstSummaryValue(summaryMap, ['punctaj', 'scor/rezultat'])) ?? 0,
+    verdictSummary: firstSummaryValue(summaryMap, ['verdict', 'scor/rezultat']),
+    runtimeSeconds: parseSeconds(firstSummaryValue(summaryMap, ['timp maxim', 'limita timp'])),
+    memoryKb: parseFirstNumber(firstSummaryValue(summaryMap, ['memorie maxima', 'limita memorie'])),
   };
 }
 
@@ -155,40 +175,77 @@ function extractTests($: ReturnType<typeof loadHtml>): EvaluationTestResult[] {
       header.includes('scor obtinut') ||
       (header === 'scor' && !headers.some((candidate) => candidate.includes('scor obtinut'))),
   );
-  const detailsIndex = headers.findIndex((header) => header.includes('detalii'));
+  const columns: TestColumnIndices = {
+    timeIndex,
+    verdictIndex,
+    maxScoreIndex,
+    scoreIndex,
+    detailsIndex: headers.findIndex((header) => header.includes('detalii')),
+  };
 
   const tests: EvaluationTestResult[] = [];
   targetTable
     .find('tr')
     .slice(1)
     .each((_, row) => {
-      const cells = $(row).children('td');
-      if (cells.length === 0) {
-        return;
+      const test = parseTestRow($, row, columns);
+      if (test) {
+        tests.push(test);
       }
-
-      const index = parseNumber($(cells[0]).text());
-      if (index === undefined) {
-        return;
-      }
-
-      const resolvedDetailsIndex =
-        detailsIndex >= 0 ? detailsIndex : cells.length > 5 ? cells.length - 1 : -1;
-
-      tests.push({
-        index,
-        runtimeSeconds: timeIndex >= 0 ? parseSeconds($(cells[timeIndex]).text()) : undefined,
-        verdict: verdictIndex >= 0 ? normalizeWhitespace($(cells[verdictIndex]).text()) : '',
-        score: scoreIndex >= 0 ? (parseNumber($(cells[scoreIndex]).text()) ?? 0) : 0,
-        maxScore: maxScoreIndex >= 0 ? (parseNumber($(cells[maxScoreIndex]).text()) ?? 0) : 0,
-        details:
-          resolvedDetailsIndex >= 0
-            ? normalizeWhitespace($(cells[resolvedDetailsIndex]).text())
-            : '',
-      });
     });
 
   return tests;
+}
+
+interface TestColumnIndices {
+  timeIndex: number;
+  verdictIndex: number;
+  maxScoreIndex: number;
+  scoreIndex: number;
+  detailsIndex: number;
+}
+
+type CheerioSelection = ReturnType<ReturnType<typeof loadHtml>>;
+
+function cellText($: ReturnType<typeof loadHtml>, cells: CheerioSelection, index: number): string {
+  return index >= 0 ? normalizeWhitespace($(cells[index]).text()) : '';
+}
+
+function cellNumber(
+  $: ReturnType<typeof loadHtml>,
+  cells: CheerioSelection,
+  index: number,
+): number {
+  return index >= 0 ? (parseNumber($(cells[index]).text()) ?? 0) : 0;
+}
+
+function parseTestRow(
+  $: ReturnType<typeof loadHtml>,
+  row: HtmlNode,
+  columns: TestColumnIndices,
+): EvaluationTestResult | undefined {
+  const cells = $(row).children('td');
+  if (cells.length === 0) {
+    return undefined;
+  }
+
+  const index = parseNumber($(cells[0]).text());
+  if (index === undefined) {
+    return undefined;
+  }
+
+  const resolvedDetailsIndex =
+    columns.detailsIndex >= 0 ? columns.detailsIndex : cells.length > 5 ? cells.length - 1 : -1;
+
+  return {
+    index,
+    runtimeSeconds:
+      columns.timeIndex >= 0 ? parseSeconds($(cells[columns.timeIndex]).text()) : undefined,
+    verdict: cellText($, cells, columns.verdictIndex),
+    score: cellNumber($, cells, columns.scoreIndex),
+    maxScore: cellNumber($, cells, columns.maxScoreIndex),
+    details: cellText($, cells, resolvedDetailsIndex),
+  };
 }
 
 function extractSourceCode($: ReturnType<typeof loadHtml>): string | undefined {
@@ -234,34 +291,26 @@ function normalizeLabel(value: string): string {
     .replace(/[\u0300-\u036f]/g, '');
 }
 
+const EXTENSION_LANGUAGE: Readonly<Record<string, string>> = {
+  cpp: 'cpp',
+  cc: 'cpp',
+  cxx: 'cpp',
+  c: 'c',
+  pas: 'pas',
+  cs: 'cs',
+  php: 'php',
+  py: 'py',
+  py3: 'py3',
+  java: 'java',
+};
+
 function inferLanguageFromFilename(fileName?: string): string | undefined {
   if (!fileName) {
     return undefined;
   }
 
-  const extension = fileName.trim().split('.').pop()?.toLowerCase();
-  switch (extension) {
-    case 'cpp':
-    case 'cc':
-    case 'cxx':
-      return 'cpp';
-    case 'c':
-      return 'c';
-    case 'pas':
-      return 'pas';
-    case 'cs':
-      return 'cs';
-    case 'php':
-      return 'php';
-    case 'py':
-      return 'py';
-    case 'py3':
-      return 'py3';
-    case 'java':
-      return 'java';
-    default:
-      return undefined;
-  }
+  const extension = fileName.trim().split('.').pop()?.toLowerCase() ?? '';
+  return EXTENSION_LANGUAGE[extension];
 }
 
 function parseFirstNumber(value: string): number | undefined {

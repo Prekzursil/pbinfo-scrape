@@ -1,5 +1,6 @@
 import { loadHtml, normalizeWhitespace } from './shared.js';
 import {
+  extractPostedByHandleFromRows,
   extractRowScore,
   isThrottledPage,
   matchProfileHref,
@@ -59,35 +60,8 @@ function extractAuthorHandle($: ReturnType<typeof loadHtml>): string | undefined
     return normalizeWhitespace(handle ?? '') || undefined;
   }
 
-  const summaryHandle = extractAuthorHandleFromSummaryRows($);
+  const summaryHandle = extractPostedByHandleFromRows($);
   return normalizeWhitespace(summaryHandle ?? '') || undefined;
-}
-
-function extractAuthorHandleFromSummaryRows($: ReturnType<typeof loadHtml>): string | undefined {
-  let summaryHandle: string | undefined;
-  $('tr').each((_, row) => {
-    const headers = $(row).children('th');
-    const values = $(row).children('td');
-    if (headers.length === 0 || values.length === 0) {
-      return;
-    }
-
-    headers.each((index, headerCell) => {
-      const header = normalizeWhitespace($(headerCell).text()).toLowerCase();
-      if (!header.includes('postată de') && !header.includes('postata de')) {
-        return;
-      }
-
-      const handle = matchProfileHref(
-        values.eq(index).find('a[href^="/profil/"]').first().attr('href'),
-      )?.[1];
-      if (handle) {
-        summaryHandle = handle;
-      }
-    });
-  });
-
-  return summaryHandle;
 }
 
 function extractEntriesFromRows($: ReturnType<typeof loadHtml>): ProblemSourceListEntry[] {

@@ -18,6 +18,38 @@ export interface PaginationMetadata {
   nextPageUrls: string[];
 }
 
+/**
+ * Scans `<tr>` rows for a "Postată de" header cell and returns the profile
+ * handle found in the adjacent value cell. Shared by the problem-source-list and
+ * problem-statement parsers, which surface the same "posted by" summary table.
+ */
+export function extractPostedByHandleFromRows($: Cheerio): string | undefined {
+  let handle: string | undefined;
+  $('tr').each((_, row) => {
+    const headers = $(row).children('th');
+    const values = $(row).children('td');
+    if (headers.length === 0 || values.length === 0) {
+      return;
+    }
+
+    headers.each((index, headerCell) => {
+      const header = normalizeWhitespace($(headerCell).text()).toLowerCase();
+      if (!header.includes('postată de') && !header.includes('postata de')) {
+        return;
+      }
+
+      const found = matchProfileHref(
+        values.eq(index).find('a[href^="/profil/"]').first().attr('href'),
+      )?.[1];
+      if (found) {
+        handle = found;
+      }
+    });
+  });
+
+  return handle;
+}
+
 export function parseTotalMatches($: Cheerio): number | undefined {
   return parseNumber(normalizeWhitespace($('.bold.mb-3').first().text()));
 }

@@ -8,6 +8,7 @@ import type {
 } from '../../types/records.js';
 import { buildRawAssetLocalPath, sanitizeSegment } from '../../archive/archive-paths.js';
 import { loadHtml, normalizeWhitespace, parseNumber, parseSeconds } from './shared.js';
+import { extractPostedByHandleFromRows } from './problem-listing-shared.js';
 
 export interface ProblemExecutionHints {
   timeLimitSeconds?: number;
@@ -33,9 +34,16 @@ export interface ParsedOfficialSolutionFragment {
   solutions: Record<string, string>;
 }
 
-export function parseProblemPage(html: string, pageUrl: string): ProblemRecord {
-  const $ = loadHtml(html);
-  const page = new URL(pageUrl);
+interface ProblemIdentity {
+  recordId: number;
+  slug: string;
+}
+
+function resolveProblemIdentity(
+  $: ReturnType<typeof loadHtml>,
+  page: URL,
+  pageUrl: string,
+): { identity: ProblemIdentity; titleLink: ReturnType<typeof $> } {
   const pathnameMatch = page.pathname.match(/^\/probleme\/(\d+)\/([^/?#]+)/);
   const titleLink = $('h1 a[href^="/probleme/"]').first();
   const recordId = Number(pathnameMatch?.[1] ?? titleLink.attr('href')?.match(/\/(\d+)\//)?.[1]);
@@ -44,19 +52,28 @@ export function parseProblemPage(html: string, pageUrl: string): ProblemRecord {
     throw new Error(`Could not infer problem identity from ${pageUrl}`);
   }
 
+  return { identity: { recordId, slug }, titleLink };
+}
+
+function resolveSourceListUrl($: ReturnType<typeof loadHtml>, page: URL): string | undefined {
+  const href = $('a[href^="/solutii/problema/"]').first().attr('href');
+  return href ? new URL(href, page).toString() : undefined;
+}
+
+export function parseProblemPage(html: string, pageUrl: string): ProblemRecord {
+  const $ = loadHtml(html);
+  const page = new URL(pageUrl);
+  const { identity, titleLink } = resolveProblemIdentity($, page, pageUrl);
+
   const statement = parseProblemStatementFragment(html);
   const summaryMap = extractSummaryMap($);
-  const linkedAssets = extractLinkedAssets($, page);
   const authorHandle = extractAuthorHandle($, summaryMap);
-  const timeLimitSeconds =
-    parseSeconds(summaryMap.get('limită timp') ?? '') ??
-    parseSeconds(summaryMap.get('limita timp') ?? '');
-  const memoryLimitMb = extractMemoryLimitMb(summaryMap);
+  const timeLimitSeconds = firstParsedSeconds(summaryMap, ['limită timp', 'limita timp']);
 
   return {
-    id: recordId,
-    slug,
-    name: normalizeWhitespace(titleLink.text()) || slug,
+    id: identity.recordId,
+    slug: identity.slug,
+    name: normalizeWhitespace(titleLink.text()) || identity.slug,
     canonicalUrl: page.toString(),
     grade: extractGrade(summaryMap, $),
     categoryChain: extractCategoryChain($),
@@ -65,21 +82,29 @@ export function parseProblemPage(html: string, pageUrl: string): ProblemRecord {
     examples: statement.examples,
     constraints: statement.constraints,
     timeLimitSeconds: timeLimitSeconds ?? statement.executionHints.timeLimitSeconds,
-    memoryLimitMb: memoryLimitMb ?? statement.executionHints.memoryLimitMb,
+    memoryLimitMb: extractMemoryLimitMb(summaryMap) ?? statement.executionHints.memoryLimitMb,
     author: normalizeOptional(summaryMap.get('autor')),
     sourceAttribution: normalizeOptional(summaryMap.get('sursa problemei')),
     editorialAvailability: 'unknown',
     officialSolutions: {},
     visibleTests: [],
-    linkedAssets,
-    sourceListUrl: $('a[href^="/solutii/problema/"]').first().attr('href')
-      ? new URL($('a[href^="/solutii/problema/"]').first().attr('href')!, page).toString()
-      : undefined,
+    linkedAssets: extractLinkedAssets($, page),
+    sourceListUrl: resolveSourceListUrl($, page),
     metadata: {
       ...Object.fromEntries(summaryMap.entries()),
       ...(authorHandle ? { authorHandle } : {}),
     },
   };
+}
+
+function firstParsedSeconds(summaryMap: Map<string, string>, keys: string[]): number | undefined {
+  for (const key of keys) {
+    const parsed = parseSeconds(summaryMap.get(key) ?? '');
+    if (parsed !== undefined) {
+      return parsed;
+    }
+  }
+  return undefined;
 }
 
 export function parseProblemStatementFragment(html: string): ParsedProblemStatement {
@@ -235,12 +260,36 @@ export function parseOfficialSolutionFragment(html: string): ParsedOfficialSolut
   };
 }
 
+type ExampleMode = 'input' | 'output' | 'explanation' | undefined;
+
+function detectExampleCueMode(text: string): ExampleMode {
+  const normalized = normalizeCueLabel(text);
+  if (normalized.includes('intrare')) {
+    return 'input';
+  }
+  if (normalized.includes('iesire')) {
+    return 'output';
+  }
+  if (normalized.includes('explica')) {
+    return 'explanation';
+  }
+  return undefined;
+}
+
+function applyPreValue(current: ProblemExample, mode: ExampleMode, value: string): void {
+  if (mode === 'input') {
+    current.input = value;
+  } else if (mode === 'output') {
+    current.output = value;
+  }
+}
+
 function extractExamples(sectionHtml: string): ProblemExample[] {
   const $ = loadHtml(`<div>${sectionHtml}</div>`);
   const nodes = $('div').first().contents().toArray();
   const examples: ProblemExample[] = [];
   let current: ProblemExample = { input: '', output: '' };
-  let mode: 'input' | 'output' | 'explanation' | undefined;
+  let mode: ExampleMode;
 
   const commit = () => {
     if (current.input || current.output || current.explanation) {
@@ -259,28 +308,15 @@ function extractExamples(sectionHtml: string): ProblemExample[] {
     }
 
     if (tag === 'p' || tag === 'h3') {
-      const normalized = normalizeCueLabel(text);
-      if (normalized.includes('intrare')) {
-        mode = 'input';
-        continue;
-      }
-      if (normalized.includes('iesire')) {
-        mode = 'output';
-        continue;
-      }
-      if (normalized.includes('explica')) {
-        mode = 'explanation';
+      const cueMode = detectExampleCueMode(text);
+      if (cueMode) {
+        mode = cueMode;
         continue;
       }
     }
 
     if (tag === 'pre') {
-      const value = node.text().trim();
-      if (mode === 'input') {
-        current.input = value;
-      } else if (mode === 'output') {
-        current.output = value;
-      }
+      applyPreValue(current, mode, node.text().trim());
       continue;
     }
 
@@ -313,31 +349,7 @@ function extractAuthorHandle(
     return summaryTextHandle;
   }
 
-  let summaryHandle: string | undefined;
-  $('tr').each((_, row) => {
-    const headers = $(row).children('th');
-    const values = $(row).children('td');
-    if (headers.length === 0 || values.length === 0) {
-      return;
-    }
-
-    headers.each((index, headerCell) => {
-      const header = normalizeWhitespace($(headerCell).text()).toLowerCase();
-      if (!header.includes('postată de') && !header.includes('postata de')) {
-        return;
-      }
-
-      const valueCell = values.eq(index);
-      const handle = valueCell
-        .find('a[href^="/profil/"]')
-        .first()
-        .attr('href')
-        ?.match(/^\/profil\/([^/?#]+)$/)?.[1];
-      if (handle) {
-        summaryHandle = handle;
-      }
-    });
-  });
+  const summaryHandle = extractPostedByHandleFromRows($);
   if (summaryHandle) {
     return normalizeOptional(summaryHandle);
   }
@@ -365,41 +377,51 @@ function extractHandleFromSummaryText(value: string | undefined): string | undef
   return undefined;
 }
 
-function extractExecutionHints(constraints: string[]): ProblemExecutionHints {
-  const hints: ProblemExecutionHints = {};
-
-  for (const constraint of constraints) {
-    const lower = constraint.toLowerCase();
-    const numericMatch = constraint.match(/(\d+(?:[.,]\d+)?)/);
-    if (!numericMatch) {
-      continue;
-    }
-
-    const numericToken = numericMatch[1];
-    if (!numericToken) {
-      continue;
-    }
-
-    const numericValue = Number(numericToken.replace(',', '.'));
-    if (!Number.isFinite(numericValue)) {
-      continue;
-    }
-
-    if (lower.includes('timp') || lower.includes('secunde') || lower.includes('executare')) {
-      hints.timeLimitSeconds = hints.timeLimitSeconds ?? numericValue;
-    }
-
-    if (lower.includes('memorie') || lower.includes('memory')) {
-      if (lower.includes('kb')) {
-        hints.memoryLimitMb = hints.memoryLimitMb ?? numericValue / 1024;
-      } else if (lower.includes('gb')) {
-        hints.memoryLimitMb = hints.memoryLimitMb ?? numericValue * 1024;
-      } else {
-        hints.memoryLimitMb = hints.memoryLimitMb ?? numericValue;
-      }
-    }
+function parseConstraintNumericValue(constraint: string): number | undefined {
+  const numericToken = constraint.match(/(\d+(?:[.,]\d+)?)/)?.[1];
+  if (!numericToken) {
+    return undefined;
   }
 
+  const numericValue = Number(numericToken.replace(',', '.'));
+  return Number.isFinite(numericValue) ? numericValue : undefined;
+}
+
+function isTimeConstraint(lower: string): boolean {
+  return lower.includes('timp') || lower.includes('secunde') || lower.includes('executare');
+}
+
+function memoryValueMb(lower: string, numericValue: number): number {
+  if (lower.includes('kb')) {
+    return numericValue / 1024;
+  }
+  if (lower.includes('gb')) {
+    return numericValue * 1024;
+  }
+  return numericValue;
+}
+
+function applyConstraintHint(hints: ProblemExecutionHints, constraint: string): void {
+  const numericValue = parseConstraintNumericValue(constraint);
+  if (numericValue === undefined) {
+    return;
+  }
+
+  const lower = constraint.toLowerCase();
+  if (isTimeConstraint(lower)) {
+    hints.timeLimitSeconds = hints.timeLimitSeconds ?? numericValue;
+  }
+
+  if (lower.includes('memorie') || lower.includes('memory')) {
+    hints.memoryLimitMb = hints.memoryLimitMb ?? memoryValueMb(lower, numericValue);
+  }
+}
+
+function extractExecutionHints(constraints: string[]): ProblemExecutionHints {
+  const hints: ProblemExecutionHints = {};
+  for (const constraint of constraints) {
+    applyConstraintHint(hints, constraint);
+  }
   return hints;
 }
 
@@ -417,39 +439,43 @@ function extractVisibleTests(html: string): ProblemVisibleTest[] {
       return;
     }
 
-    let input = '';
-    let output = '';
-    let mode: 'input' | 'output' | undefined;
-    let sibling = $(heading).next();
-
-    while (sibling.length > 0 && sibling.prop('tagName')?.toLowerCase() !== 'h3') {
-      const tag = sibling.prop('tagName')?.toLowerCase();
-      const text = normalizeWhitespace(sibling.text());
-      if (tag === 'p') {
-        const lower = normalizeCueLabel(text);
-        if (lower.includes('intrare')) {
-          mode = 'input';
-        } else if (lower.includes('iesire')) {
-          mode = 'output';
-        }
-      } else if (tag === 'pre') {
-        if (mode === 'input') {
-          input = sibling.text().trim();
-        } else if (mode === 'output') {
-          output = sibling.text().trim();
-        }
-      }
-      sibling = sibling.next();
-    }
-
-    tests.push({
-      title,
-      input,
-      output,
-    });
+    const { input, output } = collectHeadingTestBody($, $(heading));
+    tests.push({ title, input, output });
   });
 
   return tests;
+}
+
+function cueModeFromParagraph(text: string): 'input' | 'output' | undefined {
+  const lower = normalizeCueLabel(normalizeWhitespace(text));
+  if (lower.includes('intrare')) {
+    return 'input';
+  }
+  if (lower.includes('iesire')) {
+    return 'output';
+  }
+  return undefined;
+}
+
+function collectHeadingTestBody(
+  $: ReturnType<typeof loadHtml>,
+  heading: ReturnType<ReturnType<typeof loadHtml>>,
+): { input: string; output: string } {
+  const body = { input: '', output: '' };
+  let mode: 'input' | 'output' | undefined;
+  let sibling = heading.next();
+
+  while (sibling.length > 0 && sibling.prop('tagName')?.toLowerCase() !== 'h3') {
+    const tag = sibling.prop('tagName')?.toLowerCase();
+    if (tag === 'p') {
+      mode = cueModeFromParagraph(sibling.text()) ?? mode;
+    } else if (tag === 'pre' && mode) {
+      body[mode] = sibling.text().trim();
+    }
+    sibling = sibling.next();
+  }
+
+  return body;
 }
 
 function extractVisibleTestsFromTable($: ReturnType<typeof loadHtml>): ProblemVisibleTest[] {
