@@ -55,6 +55,7 @@ function makeCoverageRecord(overrides: Partial<ProblemCoverageRecord>): ProblemC
     missingTrustworthyUserSourceLanguages: [],
     archiveCompletenessStatus: 'unsolved',
     hasAnyArchivedSource: false,
+    testsAvailable: true,
     unsolvedByConfiguredHandle: true,
     officialSourceBlocked: true,
     notArchivedYet: false,
@@ -519,8 +520,12 @@ describe('problem coverage gap report', () => {
       generatedAt: '2026-04-01T00:00:00.000Z',
       totals,
       records: [
-        // editorial hidden. testsAvailable omitted -> derived from example count.
-        makeCoverageRecord({ problemId: 10, editorialAvailability: 'hidden', exampleTestsAvailableCount: 1 }),
+        // editorial hidden.
+        makeCoverageRecord({
+          problemId: 10,
+          editorialAvailability: 'hidden',
+          exampleTestsAvailableCount: 1,
+        }),
         // editorial restricted.
         makeCoverageRecord({ problemId: 11, editorialAvailability: 'restricted' }),
         // not available upstream.

@@ -232,12 +232,12 @@ describe('listArchiveExplorerRecords', () => {
 
     expect(listing.totalCount).toBe(2);
     expect(listing.items.map((item) => item.recordId)).toEqual(['101', '202']);
-    expect(listing.items[0].subtitle).toBe('/probleme/101/suma');
-    expect(listing.items[0].description).toBe('1 <= n <= 100 • 0 <= a <= 1000');
+    expect(listing.items[0]!.subtitle).toBe('/probleme/101/suma');
+    expect(listing.items[0]!.description).toBe('1 <= n <= 100 • 0 <= a <= 1000');
     // Problem 202 has no canonicalUrl, so route is derived from id/slug.
-    expect(listing.items[1].mirrorRoute).toBe('/probleme/202/produs');
-    expect(listing.items[1].subtitle).toBeUndefined();
-    expect(listing.items[1].description).toBeUndefined();
+    expect(listing.items[1]!.mirrorRoute).toBe('/probleme/202/produs');
+    expect(listing.items[1]!.subtitle).toBeUndefined();
+    expect(listing.items[1]!.description).toBeUndefined();
   });
 
   test('lists evaluations sorted descending', () => {
@@ -249,7 +249,7 @@ describe('listArchiveExplorerRecords', () => {
     });
 
     expect(listing.items.map((item) => item.recordId)).toEqual(['5002', '5001']);
-    expect(listing.items[1].mirrorRoute).toBe('/detalii-evaluare/5001');
+    expect(listing.items[1]!.mirrorRoute).toBe('/detalii-evaluare/5001');
   });
 
   test('lists tests records', () => {
@@ -261,8 +261,8 @@ describe('listArchiveExplorerRecords', () => {
     });
 
     expect(listing.items).toHaveLength(1);
-    expect(listing.items[0].mirrorRoute).toBe('/probleme/101/suma');
-    expect(listing.items[0].subtitle).toContain('examples: 0');
+    expect(listing.items[0]!.mirrorRoute).toBe('/probleme/101/suma');
+    expect(listing.items[0]!.subtitle).toContain('examples: 0');
   });
 
   test('lists rankings with problem names and language winners', () => {
@@ -274,12 +274,12 @@ describe('listArchiveExplorerRecords', () => {
     });
 
     expect(listing.items.map((item) => item.recordId)).toEqual(['101', '303']);
-    const first = listing.items[0];
+    const first = listing.items[0]!;
     expect(first.title).toBe('#101 Suma a doua numere');
     expect(first.subtitle).toContain('Best user languages: cpp');
     expect(first.description).toContain('5001');
     // Problem 303 has no problem record and no winners/overall best.
-    const second = listing.items[1];
+    const second = listing.items[1]!;
     expect(second.title).toBe('Problem #303');
     expect(second.subtitle).toBe('No language winners recorded');
     expect(second.description).toBe('No overall best user evaluation recorded');
@@ -306,7 +306,7 @@ describe('listArchiveExplorerRecords', () => {
       '/detalii-evaluare/5001',
       '/probleme/101/suma',
     ]);
-    expect(all.items[0].description).toBe('eval:5001');
+    expect(all.items[0]!.description).toBe('eval:5001');
 
     const filtered = listArchiveExplorerRecords(workspaceRoot, {
       snapshotId: SNAPSHOT_ID,
@@ -314,7 +314,7 @@ describe('listArchiveExplorerRecords', () => {
       query: 'detalii',
     });
     expect(filtered.items).toHaveLength(1);
-    expect(filtered.items[0].recordId).toBe('/detalii-evaluare/5001');
+    expect(filtered.items[0]!.recordId).toBe('/detalii-evaluare/5001');
   });
 
   test('falls back to the route directory when the manifest is empty', () => {
@@ -328,7 +328,7 @@ describe('listArchiveExplorerRecords', () => {
     });
 
     expect(listing.items).toHaveLength(1);
-    expect(listing.items[0].recordId).toBe('/from-dir');
+    expect(listing.items[0]!.recordId).toBe('/from-dir');
   });
 
   test('applies query, offset, and limit', () => {
