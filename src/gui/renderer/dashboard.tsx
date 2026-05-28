@@ -100,6 +100,43 @@ export interface DesktopDashboardProps {
   onOpenExternal: (url: string) => Promise<unknown>;
 }
 
+function countRecentFailures(crawlStatus: GuiCrawlStatus | null): number {
+  return crawlStatus?.recentFailures.length ?? 0;
+}
+
+function shouldSyncWorkspaceDraft(
+  workspaceState: GuiWorkspaceState | null | undefined,
+  syncedWorkspaceRoot: string | undefined,
+): boolean {
+  const root = workspaceState?.workspaceRoot;
+  return Boolean(root) && root !== syncedWorkspaceRoot;
+}
+
+function DashboardHeroStatusRow(props: { statusMessage?: string; errorMessage?: string }) {
+  return (
+    <div className="hero-status-row">
+      {props.statusMessage ? (
+        <p className="callout callout-success">{props.statusMessage}</p>
+      ) : null}
+      {props.errorMessage ? <p className="callout callout-error">{props.errorMessage}</p> : null}
+    </div>
+  );
+}
+
+function resolveBoardMirrorBaseUrl(
+  previewUrl: string | undefined,
+  coverageSummary: GuiCoverageSummary | null,
+  archiveSummary: GuiArchiveSummary | null,
+): string | undefined {
+  return previewUrl ?? coverageSummary?.mirrorUrl ?? archiveSummary?.mirrorUrl;
+}
+
+function resolveOverviewUnavailableCount(coverageSummary: GuiCoverageSummary | null): number {
+  const official = coverageSummary?.officialSourceUnavailableUpstreamCount ?? 0;
+  const tests = coverageSummary?.testsUnavailableUpstreamCount ?? 0;
+  return official + tests;
+}
+
 export function DesktopDashboard(props: DesktopDashboardProps) {
   const {
     workspaceState,
@@ -175,9 +212,9 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
   // root by adjusting state during render (the React-recommended alternative to
   // resetting state from an effect). The draft only follows the canonical root
   // when the root actually changes, so user edits between updates are kept.
-  if (workspaceState?.workspaceRoot && workspaceState.workspaceRoot !== syncedWorkspaceRoot) {
-    setSyncedWorkspaceRoot(workspaceState.workspaceRoot);
-    setWorkspaceDraft(workspaceState.workspaceRoot);
+  if (shouldSyncWorkspaceDraft(workspaceState, syncedWorkspaceRoot)) {
+    setSyncedWorkspaceRoot(workspaceState!.workspaceRoot);
+    setWorkspaceDraft(workspaceState!.workspaceRoot);
   }
 
   const activeProfile = useMemo(() => getActiveProfile(workspaceState), [workspaceState]);
@@ -189,17 +226,15 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
     () => filterLogEntries(jobEvents.length > 0 ? jobEvents : buildLogEntries(jobs), verbosityMode),
     [jobEvents, jobs, verbosityMode],
   );
-  const recentFailureCount = crawlStatus?.recentFailures.length ?? 0;
+  const recentFailureCount = countRecentFailures(crawlStatus);
   const crawlTelemetry = useMemo(
     () => deriveCrawlTelemetry(crawlStatus ?? activeCrawlJob?.latestCounters, jobEvents),
     [activeCrawlJob?.latestCounters, crawlStatus, jobEvents],
   );
   const overviewPreset = useMemo(() => detectOverviewPreset(coverageFilters), [coverageFilters]);
   const overviewRows = useMemo(() => (coverageListing?.items ?? []).slice(0, 8), [coverageListing]);
-  const boardMirrorBaseUrl = previewUrl ?? coverageSummary?.mirrorUrl ?? archiveSummary?.mirrorUrl;
-  const overviewUnavailableCount =
-    (coverageSummary?.officialSourceUnavailableUpstreamCount ?? 0) +
-    (coverageSummary?.testsUnavailableUpstreamCount ?? 0);
+  const boardMirrorBaseUrl = resolveBoardMirrorBaseUrl(previewUrl, coverageSummary, archiveSummary);
+  const overviewUnavailableCount = resolveOverviewUnavailableCount(coverageSummary);
 
   const applyOverviewPreset = (preset: OverviewBoardPreset) => {
     onCoverageFiltersChange(createCoverageFiltersForPreset(preset));
@@ -249,49 +284,16 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
             local archive.
           </p>
         </div>
-        <div className="topbar-status-grid">
-          <SummaryCard label="Snapshot" value={selectedSnapshotId}>
-            <p className="summary-copy">
-              {crawlStatus?.publishEligible
-                ? 'Drained and publish-ready.'
-                : 'Current archive target.'}
-            </p>
-            {workspaceState?.workspaceRoot ? (
-              <p className="summary-copy mono">{workspaceState.workspaceRoot}</p>
-            ) : null}
-          </SummaryCard>
-          <SummaryCard label="Profile" value={activeProfile?.label ?? 'No active profile'}>
-            <p className="summary-copy">
-              {activeProfile?.userHandle
-                ? `Handle ${activeProfile.userHandle}`
-                : 'Use Setup to import or sign in.'}
-            </p>
-          </SummaryCard>
-          <SummaryCard
-            label="Queue"
-            value={
-              crawlStatus?.publishEligible
-                ? 'Ready'
-                : formatCounters(crawlStatus ?? activeCrawlJob?.latestCounters)
-            }
-          >
-            <p className="summary-copy">
-              {crawlStatus?.publishEligible
-                ? 'The canonical snapshot is ready for review.'
-                : `${recentFailureCount} recent failures tracked.`}
-            </p>
-          </SummaryCard>
-          <div className="topbar-actions">
-            <button
-              className="secondary-button"
-              type="button"
-              onClick={() => void onRefresh()}
-              disabled={busyAction !== null}
-            >
-              Refresh
-            </button>
-          </div>
-        </div>
+        <DashboardTopbarStatus
+          selectedSnapshotId={selectedSnapshotId}
+          crawlStatus={crawlStatus}
+          workspaceRoot={workspaceState?.workspaceRoot}
+          activeProfile={activeProfile}
+          activeCrawlJob={activeCrawlJob}
+          recentFailureCount={recentFailureCount}
+          busyAction={busyAction}
+          onRefresh={onRefresh}
+        />
       </section>
 
       <section className="view-switcher-card panel">
@@ -304,46 +306,320 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
         <p className="summary-copy view-switcher-copy">{describeView(activeView)}</p>
       </section>
 
-      <div className="hero-status-row">
-        {statusMessage ? <p className="callout callout-success">{statusMessage}</p> : null}
-        {errorMessage ? <p className="callout callout-error">{errorMessage}</p> : null}
-      </div>
+      <DashboardHeroStatusRow statusMessage={statusMessage} errorMessage={errorMessage} />
 
       {workspaceState === null ? (
-        <section className="panel empty-state bootstrap-panel">
-          <div className="panel-heading">
-            <div>
-              <p className="section-kicker">Workspace bootstrap</p>
-              <h2>Choose a workspace</h2>
-            </div>
-          </div>
-          <p className="summary-copy">
-            Keep queues, logs, profiles, and snapshots in a portable workspace folder.
-          </p>
-          <form
-            className="stack-form"
-            onSubmit={(event) => {
-              event.preventDefault();
-              void onSelectWorkspace(workspaceDraft);
-            }}
-          >
-            <label className="field">
-              <span>Workspace path</span>
-              <input
-                value={workspaceDraft}
-                onChange={(event) => setWorkspaceDraft(event.target.value)}
-                placeholder="C:/pbinfo-workspace"
-              />
-            </label>
-            <button className="primary-button" type="submit" disabled={!workspaceDraft}>
-              Select workspace
-            </button>
-          </form>
-        </section>
+        <DashboardWorkspaceBootstrap
+          workspaceDraft={workspaceDraft}
+          setWorkspaceDraft={setWorkspaceDraft}
+          onSelectWorkspace={onSelectWorkspace}
+        />
       ) : (
         <div className="dashboard-grid">
-          {activeView === 'setup' ? (
-            <section className="panel workspace-panel">
+          <DashboardSetupView
+            active={activeView === 'setup'}
+            workspaceState={workspaceState}
+            activeProfile={activeProfile}
+            selectedSnapshotId={selectedSnapshotId}
+            showAdvanced={showAdvanced}
+            recentFailureCount={recentFailureCount}
+            crawlStatus={crawlStatus}
+            loginForm={loginForm}
+            importForm={importForm}
+            setLoginForm={setLoginForm}
+            setImportForm={setImportForm}
+            onSnapshotChange={onSnapshotChange}
+            onLoginProfile={onLoginProfile}
+            onImportBrowserProfile={onImportBrowserProfile}
+            onActivateProfile={onActivateProfile}
+            onDeleteProfile={onDeleteProfile}
+            onToggleAdvanced={onToggleAdvanced}
+          />
+          <DashboardOverviewView
+            active={activeView === 'overview'}
+            selectedSnapshotId={selectedSnapshotId}
+            crawlStatus={crawlStatus}
+            recentFailureCount={recentFailureCount}
+            crawlTelemetry={crawlTelemetry}
+            publishCommand={publishCommand}
+            coverageSummary={coverageSummary}
+            coverageListing={coverageListing}
+            overviewPreset={overviewPreset}
+            overviewRows={overviewRows}
+            overviewUnavailableCount={overviewUnavailableCount}
+            boardMirrorBaseUrl={boardMirrorBaseUrl}
+            jobs={jobs}
+            activeCrawlJob={activeCrawlJob}
+            selectedCrawlMode={selectedCrawlMode}
+            verbosityMode={verbosityMode}
+            visibleLogEntries={visibleLogEntries}
+            previewUrl={previewUrl}
+            previewJobId={previewJobId}
+            showEmbeddedPreview={showEmbeddedPreview}
+            setShowEmbeddedPreview={setShowEmbeddedPreview}
+            setActiveView={setActiveView}
+            applyOverviewPreset={applyOverviewPreset}
+            openCoverageFromOverview={openCoverageFromOverview}
+            openMirrorFromOverview={openMirrorFromOverview}
+            onCrawlModeChange={onCrawlModeChange}
+            onVerbosityChange={onVerbosityChange}
+            onStartCrawl={onStartCrawl}
+            onPauseCrawl={onPauseCrawl}
+            onResumeCrawl={onResumeCrawl}
+            onRunSnapshotJob={onRunSnapshotJob}
+            onStartMirrorPreview={onStartMirrorPreview}
+            onStopMirrorPreview={onStopMirrorPreview}
+            onOpenExternal={onOpenExternal}
+          />
+          <DashboardCoverageView
+            active={activeView === 'coverage'}
+            selectedSnapshotId={selectedSnapshotId}
+            coverageSummary={coverageSummary}
+            coverageListing={coverageListing}
+            coverageDetail={coverageDetail}
+            selectedCoverageProblemId={selectedCoverageProblemId}
+            coverageFilters={coverageFilters}
+            previewUrl={previewUrl}
+            onCoverageFiltersChange={onCoverageFiltersChange}
+            onSelectCoverageProblem={onSelectCoverageProblem}
+            onOpenPath={onOpenPath}
+            onOpenExternal={onOpenExternal}
+          />
+          <DashboardDataView
+            active={activeView === 'data'}
+            selectedSnapshotId={selectedSnapshotId}
+            archiveSummary={archiveSummary}
+            selectedArchiveDataset={selectedArchiveDataset}
+            selectedArchiveRecordId={selectedArchiveRecordId}
+            archiveQuery={archiveQuery}
+            archiveListing={archiveListing}
+            archiveRecordDetail={archiveRecordDetail}
+            previewUrl={previewUrl}
+            onArchiveDatasetChange={onArchiveDatasetChange}
+            onArchiveQueryChange={onArchiveQueryChange}
+            onSelectArchiveRecord={onSelectArchiveRecord}
+            onOpenPath={onOpenPath}
+            onOpenExternal={onOpenExternal}
+          />
+        </div>
+      )}
+    </main>
+  );
+}
+
+function DashboardWorkspaceBootstrap(props: {
+  workspaceDraft: string;
+  setWorkspaceDraft: Dispatch<SetStateAction<string>>;
+  onSelectWorkspace: (workspaceRoot: string) => Promise<unknown>;
+}) {
+  const { workspaceDraft, setWorkspaceDraft, onSelectWorkspace } = props;
+  return (
+    <section className="panel empty-state bootstrap-panel">
+      <div className="panel-heading">
+        <div>
+          <p className="section-kicker">Workspace bootstrap</p>
+          <h2>Choose a workspace</h2>
+        </div>
+      </div>
+      <p className="summary-copy">
+        Keep queues, logs, profiles, and snapshots in a portable workspace folder.
+      </p>
+      <form
+        className="stack-form"
+        onSubmit={(event) => {
+          event.preventDefault();
+          void onSelectWorkspace(workspaceDraft);
+        }}
+      >
+        <label className="field">
+          <span>Workspace path</span>
+          <input
+            value={workspaceDraft}
+            onChange={(event) => setWorkspaceDraft(event.target.value)}
+            placeholder="C:/pbinfo-workspace"
+          />
+        </label>
+        <button className="primary-button" type="submit" disabled={!workspaceDraft}>
+          Select workspace
+        </button>
+      </form>
+    </section>
+  );
+}
+
+function DashboardCoverageView(props: {
+  active: boolean;
+  selectedSnapshotId: string;
+  coverageSummary: GuiCoverageSummary | null;
+  coverageListing: GuiCoverageListing | null;
+  coverageDetail: GuiCoverageDetail | null;
+  selectedCoverageProblemId: number | null;
+  coverageFilters: CoverageExplorerFilters;
+  previewUrl?: string;
+  onCoverageFiltersChange: (next: CoverageExplorerFilters) => void;
+  onSelectCoverageProblem: (problemId: number) => void;
+  onOpenPath: (path: string) => Promise<unknown>;
+  onOpenExternal: (url: string) => Promise<unknown>;
+}) {
+  if (!props.active) {
+    return null;
+  }
+  return (
+    <CoverageExplorerPanel
+      snapshotId={props.selectedSnapshotId}
+      summary={props.coverageSummary}
+      listing={props.coverageListing}
+      detail={props.coverageDetail}
+      selectedProblemId={props.selectedCoverageProblemId}
+      filters={props.coverageFilters}
+      previewUrl={props.previewUrl}
+      onFiltersChange={props.onCoverageFiltersChange}
+      onSelectProblem={props.onSelectCoverageProblem}
+      onOpenPath={props.onOpenPath}
+      onOpenExternal={props.onOpenExternal}
+    />
+  );
+}
+
+function DashboardDataView(props: {
+  active: boolean;
+  selectedSnapshotId: string;
+  archiveSummary: GuiArchiveSummary | null;
+  selectedArchiveDataset: GuiArchiveDataset;
+  selectedArchiveRecordId: string | null;
+  archiveQuery: string;
+  archiveListing: GuiArchiveListing | null;
+  archiveRecordDetail: GuiArchiveRecordDetail | null;
+  previewUrl?: string;
+  onArchiveDatasetChange: (dataset: GuiArchiveDataset) => void;
+  onArchiveQueryChange: (query: string) => void;
+  onSelectArchiveRecord: (recordId: string) => void;
+  onOpenPath: (path: string) => Promise<unknown>;
+  onOpenExternal: (url: string) => Promise<unknown>;
+}) {
+  if (!props.active) {
+    return null;
+  }
+  const { archiveSummary } = props;
+  return (
+    <DataExplorerPanel
+      snapshotId={props.selectedSnapshotId}
+      normalizedRoot={archiveSummary?.normalizedRoot}
+      mirrorRoot={archiveSummary?.mirrorRoot}
+      mirrorServeCommand={archiveSummary?.mirrorServeCommand}
+      mirrorUrl={archiveSummary?.mirrorUrl}
+      datasetSummaries={archiveSummary?.datasets ?? []}
+      selectedDataset={props.selectedArchiveDataset}
+      selectedRecordId={props.selectedArchiveRecordId}
+      archiveQuery={props.archiveQuery}
+      listing={props.archiveListing}
+      detail={props.archiveRecordDetail}
+      previewUrl={props.previewUrl}
+      onDatasetChange={props.onArchiveDatasetChange}
+      onArchiveQueryChange={props.onArchiveQueryChange}
+      onSelectRecord={props.onSelectArchiveRecord}
+      onOpenPath={props.onOpenPath}
+      onOpenExternal={props.onOpenExternal}
+    />
+  );
+}
+
+interface DashboardSetupViewProps {
+  active: boolean;
+  workspaceState: GuiWorkspaceState;
+  activeProfile: GuiProfileRecord | undefined;
+  selectedSnapshotId: string;
+  showAdvanced: boolean;
+  recentFailureCount: number;
+  crawlStatus: GuiCrawlStatus | null;
+  loginForm: CredentialLoginInput;
+  importForm: BrowserImportInput;
+  setLoginForm: Dispatch<SetStateAction<CredentialLoginInput>>;
+  setImportForm: Dispatch<SetStateAction<BrowserImportInput>>;
+  onSnapshotChange: (snapshotId: string) => void;
+  onLoginProfile: (input: CredentialLoginInput) => Promise<unknown>;
+  onImportBrowserProfile: (input: BrowserImportInput) => Promise<unknown>;
+  onActivateProfile: (profileId: string) => Promise<unknown>;
+  onDeleteProfile: (profileId: string) => Promise<unknown>;
+  onToggleAdvanced: () => void;
+}
+
+function DashboardSetupView(props: DashboardSetupViewProps) {
+  if (!props.active) {
+    return null;
+  }
+  const {
+    workspaceState,
+    activeProfile,
+    selectedSnapshotId,
+    showAdvanced,
+    recentFailureCount,
+    crawlStatus,
+    loginForm,
+    importForm,
+    setLoginForm,
+    setImportForm,
+    onSnapshotChange,
+    onLoginProfile,
+    onImportBrowserProfile,
+    onActivateProfile,
+    onDeleteProfile,
+    onToggleAdvanced,
+  } = props;
+  return (
+    <>
+      <DashboardSetupWorkspacePanel
+        workspaceState={workspaceState}
+        activeProfile={activeProfile}
+        selectedSnapshotId={selectedSnapshotId}
+        onSnapshotChange={onSnapshotChange}
+        onActivateProfile={onActivateProfile}
+        onDeleteProfile={onDeleteProfile}
+      />
+      <DashboardSetupAuthPanel
+        loginForm={loginForm}
+        importForm={importForm}
+        setLoginForm={setLoginForm}
+        setImportForm={setImportForm}
+        onLoginProfile={onLoginProfile}
+        onImportBrowserProfile={onImportBrowserProfile}
+      />
+      <section className="panel setup-panel-toggle">
+        <div className="button-row">
+          <button className="ghost-button" type="button" onClick={onToggleAdvanced}>
+            {showAdvanced ? 'Hide advanced settings' : 'Advanced Settings'}
+          </button>
+        </div>
+      </section>
+      {showAdvanced ? (
+        <DashboardSetupAdvancedPanel
+          workspaceState={workspaceState}
+          recentFailureCount={recentFailureCount}
+          crawlStatus={crawlStatus}
+        />
+      ) : null}
+    </>
+  );
+}
+
+function DashboardSetupWorkspacePanel(props: {
+  workspaceState: GuiWorkspaceState;
+  activeProfile: GuiProfileRecord | undefined;
+  selectedSnapshotId: string;
+  onSnapshotChange: (snapshotId: string) => void;
+  onActivateProfile: (profileId: string) => Promise<unknown>;
+  onDeleteProfile: (profileId: string) => Promise<unknown>;
+}) {
+  const {
+    workspaceState,
+    activeProfile,
+    selectedSnapshotId,
+    onSnapshotChange,
+    onActivateProfile,
+    onDeleteProfile,
+  } = props;
+  return (
+    <section className="panel workspace-panel">
               <PanelHeading
                 kicker="Workspace and identity"
                 title="Workspace"
@@ -415,9 +691,26 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
                 )}
               </div>
             </section>
-          ) : null}
+  );
+}
 
-          {activeView === 'setup' ? (
+function DashboardSetupAuthPanel(props: {
+  loginForm: CredentialLoginInput;
+  importForm: BrowserImportInput;
+  setLoginForm: Dispatch<SetStateAction<CredentialLoginInput>>;
+  setImportForm: Dispatch<SetStateAction<BrowserImportInput>>;
+  onLoginProfile: (input: CredentialLoginInput) => Promise<unknown>;
+  onImportBrowserProfile: (input: BrowserImportInput) => Promise<unknown>;
+}) {
+  const {
+    loginForm,
+    importForm,
+    setLoginForm,
+    setImportForm,
+    onLoginProfile,
+    onImportBrowserProfile,
+  } = props;
+  return (
             <section className="panel action-panel">
               <PanelHeading kicker="Authentication lanes" title="Profiles & Access" />
               <div className="auth-grid">
@@ -550,9 +843,65 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
                 </form>
               </div>
             </section>
-          ) : null}
+  );
+}
 
-          {activeView === 'overview' ? (
+interface DashboardOverviewViewProps {
+  active: boolean;
+  selectedSnapshotId: string;
+  crawlStatus: GuiCrawlStatus | null;
+  recentFailureCount: number;
+  crawlTelemetry: { completedPerMinute: number; etaSeconds: number } | null;
+  publishCommand?: string;
+  coverageSummary: GuiCoverageSummary | null;
+  coverageListing: GuiCoverageListing | null;
+  overviewPreset: OverviewBoardPreset | null;
+  overviewRows: GuiCoverageRecord[];
+  overviewUnavailableCount: number;
+  boardMirrorBaseUrl?: string;
+  jobs: GuiJobRecord[];
+  activeCrawlJob: GuiJobRecord | undefined;
+  selectedCrawlMode: CrawlMode;
+  verbosityMode: LogVerbosity;
+  visibleLogEntries: GuiJobEvent[];
+  previewUrl?: string;
+  previewJobId?: string;
+  showEmbeddedPreview: boolean;
+  setShowEmbeddedPreview: Dispatch<SetStateAction<boolean>>;
+  setActiveView: Dispatch<SetStateAction<DashboardView>>;
+  applyOverviewPreset: (preset: OverviewBoardPreset) => void;
+  openCoverageFromOverview: (problemId: number) => void;
+  openMirrorFromOverview: (record: GuiCoverageRecord) => void;
+  onCrawlModeChange: (mode: CrawlMode) => void;
+  onVerbosityChange: (mode: LogVerbosity) => void;
+  onStartCrawl: (scope: 'public' | 'user' | 'all') => Promise<unknown>;
+  onPauseCrawl: (jobId: string) => Promise<unknown>;
+  onResumeCrawl: (jobId: string) => Promise<unknown>;
+  onRunSnapshotJob: (job: SnapshotJobKind) => Promise<unknown>;
+  onStartMirrorPreview: () => Promise<unknown>;
+  onStopMirrorPreview: (jobId: string) => Promise<unknown>;
+  onOpenExternal: (url: string) => Promise<unknown>;
+}
+
+function DashboardOverviewView(props: DashboardOverviewViewProps) {
+  if (!props.active) {
+    return null;
+  }
+  return (
+    <>
+      <DashboardOverviewSnapshotPanel {...props} />
+      <DashboardOverviewBoardPanel {...props} />
+      <DashboardOverviewJobsPanel {...props} />
+      <DashboardOverviewLogsPanel {...props} />
+      <DashboardOverviewMirrorPanel {...props} />
+    </>
+  );
+}
+
+function DashboardOverviewSnapshotPanel(props: DashboardOverviewViewProps) {
+  const { selectedSnapshotId, crawlStatus, recentFailureCount, crawlTelemetry, publishCommand } =
+    props;
+  return (
             <section className="panel snapshot-panel">
               <PanelHeading
                 kicker="Archive health"
@@ -600,206 +949,317 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
                 </article>
               ) : null}
             </section>
-          ) : null}
+  );
+}
 
-          {activeView === 'overview' ? (
-            <section className="panel overview-board-panel">
-              <PanelHeading
-                kicker="Fast audit"
-                title="Problem Status Board"
-                chip={overviewPreset ? formatOverviewPreset(overviewPreset) : 'Custom focus'}
-              />
-              <p className="summary-copy">
-                Start here for a quick solved-versus-unsolved picture, then drill into the mirror or
-                the full coverage explorer only when you need more detail.
-              </p>
-              <div className="overview-status-grid">
-                <StatusBoardStat
-                  label="Solved"
-                  value={String(coverageSummary?.solvedByMeCount ?? 0)}
-                  copy="Problems solved by your archived handle."
-                  tone="success"
-                  active={overviewPreset === 'solved'}
-                  onClick={() => applyOverviewPreset('solved')}
-                />
-                <StatusBoardStat
-                  label="Unsolved"
-                  value={String(coverageSummary?.unsolvedProblemCount ?? 0)}
-                  copy="Problems still unsolved by the configured handle."
-                  tone="neutral"
-                  active={overviewPreset === 'unsolved'}
-                  onClick={() => applyOverviewPreset('unsolved')}
-                />
-                <StatusBoardStat
-                  label="Complete"
-                  value={String(coverageSummary?.completeProblemCount ?? 0)}
-                  copy="Problems that already have the archive pieces they need."
-                  tone="success"
-                  active={overviewPreset === 'complete'}
-                  onClick={() => applyOverviewPreset('complete')}
-                />
-                <StatusBoardStat
-                  label="Missing official source"
-                  value={String(coverageSummary?.missingOfficialSourceCaptureCount ?? 0)}
-                  copy="Actionable official-source capture gaps only."
-                  tone="warning"
-                  active={overviewPreset === 'missing-official-source'}
-                  onClick={() => applyOverviewPreset('missing-official-source')}
-                />
-                <StatusBoardStat
-                  label="Missing your source"
-                  value={String(coverageSummary?.solvedByMeMissingUserSourceCount ?? 0)}
-                  copy="Solved problems still missing a trustworthy best-per-language user source."
-                  tone="warning"
-                  active={overviewPreset === 'missing-user-source'}
-                  onClick={() => applyOverviewPreset('missing-user-source')}
-                />
-                <StatusBoardStat
-                  label="Missing tests"
-                  value={String(coverageSummary?.missingTestsCaptureCount ?? 0)}
-                  copy="Problems whose tests still need to be captured."
-                  tone="warning"
-                  active={overviewPreset === 'missing-tests'}
-                  onClick={() => applyOverviewPreset('missing-tests')}
-                />
-              </div>
-              <div
-                className="overview-filter-row"
-                role="toolbar"
-                aria-label="Problem status board filters"
-              >
-                {(
-                  [
-                    ['all', 'All problems'],
-                    ['solved', 'Solved'],
-                    ['unsolved', 'Unsolved'],
-                    ['complete', 'Complete'],
-                    ['missing-official-source', 'Missing official source'],
-                    ['missing-user-source', 'Missing your source'],
-                    ['missing-tests', 'Missing tests'],
-                  ] as const
-                ).map(([preset, label]) => (
-                  <button
-                    key={preset}
-                    className={`dataset-chip ${overviewPreset === preset ? 'dataset-chip-active' : ''}`}
-                    type="button"
-                    onClick={() => applyOverviewPreset(preset)}
-                    aria-pressed={overviewPreset === preset}
-                  >
-                    <strong>{label}</strong>
-                  </button>
-                ))}
-              </div>
-              <div className="overview-meta-row">
-                <article className="summary-card overview-meta-card">
-                  <span className="metric-label">Upstream unavailable</span>
-                  <strong>{String(overviewUnavailableCount)}</strong>
-                  <p className="summary-copy">
-                    {String(coverageSummary?.officialSourceUnavailableUpstreamCount ?? 0)} official
-                    and {String(coverageSummary?.testsUnavailableUpstreamCount ?? 0)} tests are
-                    correctly classified as unavailable upstream, not missing capture.
-                  </p>
-                </article>
-                <article className="summary-card overview-meta-card">
-                  <span className="metric-label">Current board focus</span>
-                  <strong>
-                    {coverageListing ? `${coverageListing.totalCount} matches` : 'Loading…'}
-                  </strong>
-                  <p className="summary-copy">
-                    Showing up to {overviewRows.length} quick-drill rows below. Open Coverage for
-                    the full table and deeper notes.
-                  </p>
-                </article>
-              </div>
-              <div className="button-row">
-                <button
-                  className="ghost-button"
-                  type="button"
-                  onClick={() => applyOverviewPreset('all')}
-                >
-                  Reset board focus
-                </button>
-                <button
-                  className="ghost-button"
-                  type="button"
-                  onClick={() => setActiveView('coverage')}
-                >
-                  Open full coverage explorer
-                </button>
-              </div>
-              {coverageListing === null ? (
-                <p className="summary-copy">
-                  Coverage data will appear here after the selected snapshot finishes loading.
-                </p>
-              ) : overviewRows.length === 0 ? (
-                <div className="mirror-placeholder">
-                  <strong>No problems match the current board focus.</strong>
-                  <p>Reset the board focus or open Coverage to adjust the deeper filters.</p>
-                </div>
-              ) : (
-                <div className="overview-problem-list">
-                  {overviewRows.map((record) => (
-                    <article className="summary-card overview-problem-card" key={record.problemId}>
-                      <div className="overview-problem-head">
-                        <div>
-                          <strong>{`#${record.problemId} ${record.name}`}</strong>
-                          <p className="summary-copy">
-                            {record.slug}
-                            {typeof record.grade === 'number' ? ` • grade ${record.grade}` : ''}
-                            {record.tags.length > 0
-                              ? ` • ${record.tags.slice(0, 3).join(', ')}`
-                              : ''}
-                          </p>
-                        </div>
-                        <span className="panel-chip">{record.mirrorRoute}</span>
-                      </div>
-                      <div className="coverage-badge-row overview-badge-row">
-                        <StatusBadge tone={record.solvedByMe ? 'success' : 'neutral'}>
-                          {record.solvedByMe ? 'Solved' : 'Unsolved'}
-                        </StatusBadge>
-                        <StatusBadge tone={toneForArchiveState(record.archiveCompletenessStatus)}>
-                          {formatArchiveCompletenessStatus(record.archiveCompletenessStatus)}
-                        </StatusBadge>
-                        <StatusBadge tone={toneForOfficialStatus(record.officialSourceStatus)}>
-                          {formatOfficialSourceStatus(record.officialSourceStatus)}
-                        </StatusBadge>
-                        <StatusBadge tone={toneForTestsStatus(record.testsCoverageStatus)}>
-                          {formatTestsCoverageStatus(record.testsCoverageStatus)}
-                        </StatusBadge>
-                        <StatusBadge tone={record.userSourceArchived ? 'success' : 'warning'}>
-                          {record.userSourceArchived
-                            ? 'Your source archived'
-                            : 'Your source missing'}
-                        </StatusBadge>
-                      </div>
-                      <p className="summary-copy overview-row-copy">
-                        {formatOverviewProblemSummary(record)}
-                      </p>
-                      <div className="button-row">
-                        <button
-                          className="ghost-button"
-                          type="button"
-                          onClick={() => openCoverageFromOverview(record.problemId)}
-                        >
-                          Open coverage detail
-                        </button>
-                        <button
-                          className="ghost-button"
-                          type="button"
-                          disabled={!boardMirrorBaseUrl}
-                          onClick={() => openMirrorFromOverview(record)}
-                        >
-                          Open mirror
-                        </button>
-                      </div>
-                    </article>
-                  ))}
-                </div>
-              )}
-            </section>
-          ) : null}
+function DashboardOverviewBoardPanel(props: DashboardOverviewViewProps) {
+  const {
+    coverageSummary,
+    coverageListing,
+    overviewPreset,
+    overviewRows,
+    overviewUnavailableCount,
+    boardMirrorBaseUrl,
+    setActiveView,
+    applyOverviewPreset,
+    openCoverageFromOverview,
+    openMirrorFromOverview,
+  } = props;
+  return (
+    <section className="panel overview-board-panel">
+      <PanelHeading
+        kicker="Fast audit"
+        title="Problem Status Board"
+        chip={overviewPreset ? formatOverviewPreset(overviewPreset) : 'Custom focus'}
+      />
+      <p className="summary-copy">
+        Start here for a quick solved-versus-unsolved picture, then drill into the mirror or the
+        full coverage explorer only when you need more detail.
+      </p>
+      <OverviewStatusGrid
+        coverageSummary={coverageSummary}
+        overviewPreset={overviewPreset}
+        applyOverviewPreset={applyOverviewPreset}
+      />
+      <OverviewPresetFilterRow
+        overviewPreset={overviewPreset}
+        applyOverviewPreset={applyOverviewPreset}
+      />
+      <OverviewMetaRow
+        coverageSummary={coverageSummary}
+        coverageListing={coverageListing}
+        overviewUnavailableCount={overviewUnavailableCount}
+        overviewRowCount={overviewRows.length}
+      />
+      <div className="button-row">
+        <button className="ghost-button" type="button" onClick={() => applyOverviewPreset('all')}>
+          Reset board focus
+        </button>
+        <button className="ghost-button" type="button" onClick={() => setActiveView('coverage')}>
+          Open full coverage explorer
+        </button>
+      </div>
+      <OverviewProblemList
+        coverageListing={coverageListing}
+        overviewRows={overviewRows}
+        boardMirrorBaseUrl={boardMirrorBaseUrl}
+        openCoverageFromOverview={openCoverageFromOverview}
+        openMirrorFromOverview={openMirrorFromOverview}
+      />
+    </section>
+  );
+}
 
-          {activeView === 'overview' ? (
+const OVERVIEW_STATUS_STATS: ReadonlyArray<{
+  label: string;
+  copy: string;
+  tone: 'success' | 'neutral' | 'warning';
+  preset: OverviewBoardPreset;
+  summaryKey: keyof GuiCoverageSummary;
+}> = [
+  {
+    label: 'Solved',
+    copy: 'Problems solved by your archived handle.',
+    tone: 'success',
+    preset: 'solved',
+    summaryKey: 'solvedByMeCount',
+  },
+  {
+    label: 'Unsolved',
+    copy: 'Problems still unsolved by the configured handle.',
+    tone: 'neutral',
+    preset: 'unsolved',
+    summaryKey: 'unsolvedProblemCount',
+  },
+  {
+    label: 'Complete',
+    copy: 'Problems that already have the archive pieces they need.',
+    tone: 'success',
+    preset: 'complete',
+    summaryKey: 'completeProblemCount',
+  },
+  {
+    label: 'Missing official source',
+    copy: 'Actionable official-source capture gaps only.',
+    tone: 'warning',
+    preset: 'missing-official-source',
+    summaryKey: 'missingOfficialSourceCaptureCount',
+  },
+  {
+    label: 'Missing your source',
+    copy: 'Solved problems still missing a trustworthy best-per-language user source.',
+    tone: 'warning',
+    preset: 'missing-user-source',
+    summaryKey: 'solvedByMeMissingUserSourceCount',
+  },
+  {
+    label: 'Missing tests',
+    copy: 'Problems whose tests still need to be captured.',
+    tone: 'warning',
+    preset: 'missing-tests',
+    summaryKey: 'missingTestsCaptureCount',
+  },
+];
+
+function OverviewStatusGrid(props: {
+  coverageSummary: GuiCoverageSummary | null;
+  overviewPreset: OverviewBoardPreset | null;
+  applyOverviewPreset: (preset: OverviewBoardPreset) => void;
+}) {
+  const { coverageSummary, overviewPreset, applyOverviewPreset } = props;
+  return (
+    <div className="overview-status-grid">
+      {OVERVIEW_STATUS_STATS.map((stat) => (
+        <StatusBoardStat
+          key={stat.preset}
+          label={stat.label}
+          value={String(coverageSummary?.[stat.summaryKey] ?? 0)}
+          copy={stat.copy}
+          tone={stat.tone}
+          active={overviewPreset === stat.preset}
+          onClick={() => applyOverviewPreset(stat.preset)}
+        />
+      ))}
+    </div>
+  );
+}
+
+const OVERVIEW_PRESET_FILTERS: ReadonlyArray<[OverviewBoardPreset, string]> = [
+  ['all', 'All problems'],
+  ['solved', 'Solved'],
+  ['unsolved', 'Unsolved'],
+  ['complete', 'Complete'],
+  ['missing-official-source', 'Missing official source'],
+  ['missing-user-source', 'Missing your source'],
+  ['missing-tests', 'Missing tests'],
+];
+
+function OverviewPresetFilterRow(props: {
+  overviewPreset: OverviewBoardPreset | null;
+  applyOverviewPreset: (preset: OverviewBoardPreset) => void;
+}) {
+  const { overviewPreset, applyOverviewPreset } = props;
+  return (
+    <div className="overview-filter-row" role="toolbar" aria-label="Problem status board filters">
+      {OVERVIEW_PRESET_FILTERS.map(([preset, label]) => (
+        <button
+          key={preset}
+          className={`dataset-chip ${overviewPreset === preset ? 'dataset-chip-active' : ''}`}
+          type="button"
+          onClick={() => applyOverviewPreset(preset)}
+          aria-pressed={overviewPreset === preset}
+        >
+          <strong>{label}</strong>
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function OverviewMetaRow(props: {
+  coverageSummary: GuiCoverageSummary | null;
+  coverageListing: GuiCoverageListing | null;
+  overviewUnavailableCount: number;
+  overviewRowCount: number;
+}) {
+  const { coverageSummary, coverageListing, overviewUnavailableCount, overviewRowCount } = props;
+  const officialUnavailable = coverageSummary?.officialSourceUnavailableUpstreamCount ?? 0;
+  const testsUnavailable = coverageSummary?.testsUnavailableUpstreamCount ?? 0;
+  const focusLabel = coverageListing ? `${coverageListing.totalCount} matches` : 'Loading…';
+  return (
+    <div className="overview-meta-row">
+      <article className="summary-card overview-meta-card">
+        <span className="metric-label">Upstream unavailable</span>
+        <strong>{String(overviewUnavailableCount)}</strong>
+        <p className="summary-copy">
+          {String(officialUnavailable)} official and {String(testsUnavailable)} tests are correctly
+          classified as unavailable upstream, not missing capture.
+        </p>
+      </article>
+      <article className="summary-card overview-meta-card">
+        <span className="metric-label">Current board focus</span>
+        <strong>{focusLabel}</strong>
+        <p className="summary-copy">
+          Showing up to {overviewRowCount} quick-drill rows below. Open Coverage for the full table
+          and deeper notes.
+        </p>
+      </article>
+    </div>
+  );
+}
+
+function OverviewProblemList(props: {
+  coverageListing: GuiCoverageListing | null;
+  overviewRows: GuiCoverageRecord[];
+  boardMirrorBaseUrl?: string;
+  openCoverageFromOverview: (problemId: number) => void;
+  openMirrorFromOverview: (record: GuiCoverageRecord) => void;
+}) {
+  const { coverageListing, overviewRows } = props;
+  if (coverageListing === null) {
+    return (
+      <p className="summary-copy">
+        Coverage data will appear here after the selected snapshot finishes loading.
+      </p>
+    );
+  }
+  if (overviewRows.length === 0) {
+    return (
+      <div className="mirror-placeholder">
+        <strong>No problems match the current board focus.</strong>
+        <p>Reset the board focus or open Coverage to adjust the deeper filters.</p>
+      </div>
+    );
+  }
+  return (
+    <div className="overview-problem-list">
+      {overviewRows.map((record) => (
+        <OverviewProblemCard
+          key={record.problemId}
+          record={record}
+          boardMirrorBaseUrl={props.boardMirrorBaseUrl}
+          openCoverageFromOverview={props.openCoverageFromOverview}
+          openMirrorFromOverview={props.openMirrorFromOverview}
+        />
+      ))}
+    </div>
+  );
+}
+
+function overviewProblemSubtitle(record: GuiCoverageRecord): string {
+  const gradePart = typeof record.grade === 'number' ? ` • grade ${record.grade}` : '';
+  const tagsPart = record.tags.length > 0 ? ` • ${record.tags.slice(0, 3).join(', ')}` : '';
+  return `${record.slug}${gradePart}${tagsPart}`;
+}
+
+function OverviewProblemCard(props: {
+  record: GuiCoverageRecord;
+  boardMirrorBaseUrl?: string;
+  openCoverageFromOverview: (problemId: number) => void;
+  openMirrorFromOverview: (record: GuiCoverageRecord) => void;
+}) {
+  const { record, boardMirrorBaseUrl, openCoverageFromOverview, openMirrorFromOverview } = props;
+  return (
+    <article className="summary-card overview-problem-card">
+      <div className="overview-problem-head">
+        <div>
+          <strong>{`#${record.problemId} ${record.name}`}</strong>
+          <p className="summary-copy">{overviewProblemSubtitle(record)}</p>
+        </div>
+        <span className="panel-chip">{record.mirrorRoute}</span>
+      </div>
+      <div className="coverage-badge-row overview-badge-row">
+        <StatusBadge tone={record.solvedByMe ? 'success' : 'neutral'}>
+          {record.solvedByMe ? 'Solved' : 'Unsolved'}
+        </StatusBadge>
+        <StatusBadge tone={toneForArchiveState(record.archiveCompletenessStatus)}>
+          {formatArchiveCompletenessStatus(record.archiveCompletenessStatus)}
+        </StatusBadge>
+        <StatusBadge tone={toneForOfficialStatus(record.officialSourceStatus)}>
+          {formatOfficialSourceStatus(record.officialSourceStatus)}
+        </StatusBadge>
+        <StatusBadge tone={toneForTestsStatus(record.testsCoverageStatus)}>
+          {formatTestsCoverageStatus(record.testsCoverageStatus)}
+        </StatusBadge>
+        <StatusBadge tone={record.userSourceArchived ? 'success' : 'warning'}>
+          {record.userSourceArchived ? 'Your source archived' : 'Your source missing'}
+        </StatusBadge>
+      </div>
+      <p className="summary-copy overview-row-copy">{formatOverviewProblemSummary(record)}</p>
+      <div className="button-row">
+        <button
+          className="ghost-button"
+          type="button"
+          onClick={() => openCoverageFromOverview(record.problemId)}
+        >
+          Open coverage detail
+        </button>
+        <button
+          className="ghost-button"
+          type="button"
+          disabled={!boardMirrorBaseUrl}
+          onClick={() => openMirrorFromOverview(record)}
+        >
+          Open mirror
+        </button>
+      </div>
+    </article>
+  );
+}
+
+function DashboardOverviewJobsPanel(props: DashboardOverviewViewProps) {
+  const {
+    jobs,
+    activeCrawlJob,
+    selectedCrawlMode,
+    setActiveView,
+    onCrawlModeChange,
+    onStartCrawl,
+    onPauseCrawl,
+    onResumeCrawl,
+    onRunSnapshotJob,
+  } = props;
+  return (
             <section className="panel jobs-panel">
               <PanelHeading
                 kicker="Quick actions"
@@ -918,9 +1378,12 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
                 )}
               </div>
             </section>
-          ) : null}
+  );
+}
 
-          {activeView === 'overview' ? (
+function DashboardOverviewLogsPanel(props: DashboardOverviewViewProps) {
+  const { verbosityMode, visibleLogEntries, onVerbosityChange } = props;
+  return (
             <section className="panel logs-panel">
               <div className="panel-heading">
                 <div>
@@ -983,9 +1446,20 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
                 </div>
               )}
             </section>
-          ) : null}
+  );
+}
 
-          {activeView === 'overview' ? (
+function DashboardOverviewMirrorPanel(props: DashboardOverviewViewProps) {
+  const {
+    previewUrl,
+    previewJobId,
+    showEmbeddedPreview,
+    setShowEmbeddedPreview,
+    onStartMirrorPreview,
+    onStopMirrorPreview,
+    onOpenExternal,
+  } = props;
+  return (
             <section className="panel mirror-panel">
               <PanelHeading
                 kicker="Local snapshot"
@@ -1058,83 +1532,140 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
                 )}
               </div>
             </section>
-          ) : null}
+  );
+}
 
-          {activeView === 'coverage' ? (
-            <CoverageExplorerPanel
-              snapshotId={selectedSnapshotId}
-              summary={coverageSummary}
-              listing={coverageListing}
-              detail={coverageDetail}
-              selectedProblemId={selectedCoverageProblemId}
-              filters={coverageFilters}
-              previewUrl={previewUrl}
-              onFiltersChange={onCoverageFiltersChange}
-              onSelectProblem={onSelectCoverageProblem}
-              onOpenPath={onOpenPath}
-              onOpenExternal={onOpenExternal}
-            />
-          ) : null}
+function DashboardSetupAdvancedPanel(props: {
+  workspaceState: GuiWorkspaceState;
+  recentFailureCount: number;
+  crawlStatus: GuiCrawlStatus | null;
+}) {
+  const { workspaceState, recentFailureCount, crawlStatus } = props;
+  return (
+    <section className="panel advanced-panel">
+      <PanelHeading
+        kicker="Operator defaults"
+        title="Advanced Settings"
+        chip="Read-only diagnostics"
+      />
+      <div className="advanced-grid">
+        <SummaryCard
+          label="Desktop banners"
+          value={workspaceState.notifications.desktopBanners ? 'Enabled' : 'Disabled'}
+        />
+        <SummaryCard
+          label="Windows toast"
+          value={workspaceState.notifications.windowsToast ? 'Enabled' : 'Disabled'}
+        />
+        <SummaryCard label="Recent failures" value={String(recentFailureCount)}>
+          <p className="summary-copy">
+            {crawlStatus?.recentFailures[0]?.lastError ?? 'No recent crawl failures.'}
+          </p>
+        </SummaryCard>
+      </div>
+    </section>
+  );
+}
 
-          {activeView === 'data' ? (
-            <DataExplorerPanel
-              snapshotId={selectedSnapshotId}
-              normalizedRoot={archiveSummary?.normalizedRoot}
-              mirrorRoot={archiveSummary?.mirrorRoot}
-              mirrorServeCommand={archiveSummary?.mirrorServeCommand}
-              mirrorUrl={archiveSummary?.mirrorUrl}
-              datasetSummaries={archiveSummary?.datasets ?? []}
-              selectedDataset={selectedArchiveDataset}
-              selectedRecordId={selectedArchiveRecordId}
-              archiveQuery={archiveQuery}
-              listing={archiveListing}
-              detail={archiveRecordDetail}
-              previewUrl={previewUrl}
-              onDatasetChange={onArchiveDatasetChange}
-              onArchiveQueryChange={onArchiveQueryChange}
-              onSelectRecord={onSelectArchiveRecord}
-              onOpenPath={onOpenPath}
-              onOpenExternal={onOpenExternal}
-            />
-          ) : null}
+function resolveTopbarStatusCopy(input: {
+  crawlStatus: GuiCrawlStatus | null;
+  activeCrawlJob: GuiJobRecord | undefined;
+  activeProfile: GuiProfileRecord | undefined;
+  recentFailureCount: number;
+}): {
+  snapshotCopy: string;
+  profileValue: string;
+  profileCopy: string;
+  queueValue: string;
+  queueCopy: string;
+} {
+  const { crawlStatus, activeCrawlJob, activeProfile, recentFailureCount } = input;
+  const publishEligible = Boolean(crawlStatus?.publishEligible);
+  const queue = resolveTopbarQueueCopy(
+    publishEligible,
+    crawlStatus,
+    activeCrawlJob,
+    recentFailureCount,
+  );
+  return {
+    snapshotCopy: publishEligible ? 'Drained and publish-ready.' : 'Current archive target.',
+    profileValue: activeProfile?.label ?? 'No active profile',
+    profileCopy: resolveTopbarProfileCopy(activeProfile),
+    queueValue: queue.value,
+    queueCopy: queue.copy,
+  };
+}
 
-          {activeView === 'setup' ? (
-            <section className="panel setup-panel-toggle">
-              <div className="button-row">
-                <button className="ghost-button" type="button" onClick={onToggleAdvanced}>
-                  {showAdvanced ? 'Hide advanced settings' : 'Advanced Settings'}
-                </button>
-              </div>
-            </section>
-          ) : null}
+function resolveTopbarProfileCopy(activeProfile: GuiProfileRecord | undefined): string {
+  return activeProfile?.userHandle
+    ? `Handle ${activeProfile.userHandle}`
+    : 'Use Setup to import or sign in.';
+}
 
-          {activeView === 'setup' && showAdvanced ? (
-            <section className="panel advanced-panel">
-              <PanelHeading
-                kicker="Operator defaults"
-                title="Advanced Settings"
-                chip="Read-only diagnostics"
-              />
-              <div className="advanced-grid">
-                <SummaryCard
-                  label="Desktop banners"
-                  value={workspaceState.notifications.desktopBanners ? 'Enabled' : 'Disabled'}
-                />
-                <SummaryCard
-                  label="Windows toast"
-                  value={workspaceState.notifications.windowsToast ? 'Enabled' : 'Disabled'}
-                />
-                <SummaryCard label="Recent failures" value={String(recentFailureCount)}>
-                  <p className="summary-copy">
-                    {crawlStatus?.recentFailures[0]?.lastError ?? 'No recent crawl failures.'}
-                  </p>
-                </SummaryCard>
-              </div>
-            </section>
-          ) : null}
-        </div>
-      )}
-    </main>
+function resolveTopbarQueueCopy(
+  publishEligible: boolean,
+  crawlStatus: GuiCrawlStatus | null,
+  activeCrawlJob: GuiJobRecord | undefined,
+  recentFailureCount: number,
+): { value: string; copy: string } {
+  if (publishEligible) {
+    return { value: 'Ready', copy: 'The canonical snapshot is ready for review.' };
+  }
+  return {
+    value: formatCounters(crawlStatus ?? activeCrawlJob?.latestCounters),
+    copy: `${recentFailureCount} recent failures tracked.`,
+  };
+}
+
+function DashboardTopbarStatus(props: {
+  selectedSnapshotId: string;
+  crawlStatus: GuiCrawlStatus | null;
+  workspaceRoot?: string;
+  activeProfile: GuiProfileRecord | undefined;
+  activeCrawlJob: GuiJobRecord | undefined;
+  recentFailureCount: number;
+  busyAction: string | null;
+  onRefresh: () => Promise<unknown>;
+}) {
+  const {
+    selectedSnapshotId,
+    crawlStatus,
+    workspaceRoot,
+    activeProfile,
+    activeCrawlJob,
+    recentFailureCount,
+    busyAction,
+    onRefresh,
+  } = props;
+  const status = resolveTopbarStatusCopy({
+    crawlStatus,
+    activeCrawlJob,
+    activeProfile,
+    recentFailureCount,
+  });
+  return (
+    <div className="topbar-status-grid">
+      <SummaryCard label="Snapshot" value={selectedSnapshotId}>
+        <p className="summary-copy">{status.snapshotCopy}</p>
+        {workspaceRoot ? <p className="summary-copy mono">{workspaceRoot}</p> : null}
+      </SummaryCard>
+      <SummaryCard label="Profile" value={status.profileValue}>
+        <p className="summary-copy">{status.profileCopy}</p>
+      </SummaryCard>
+      <SummaryCard label="Queue" value={status.queueValue}>
+        <p className="summary-copy">{status.queueCopy}</p>
+      </SummaryCard>
+      <div className="topbar-actions">
+        <button
+          className="secondary-button"
+          type="button"
+          onClick={() => void onRefresh()}
+          disabled={busyAction !== null}
+        >
+          Refresh
+        </button>
+      </div>
+    </div>
   );
 }
 
