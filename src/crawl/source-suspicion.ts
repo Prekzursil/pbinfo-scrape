@@ -1,74 +1,130 @@
-export function detectSuspicionFlags(sourceCode?: string): string[] {
-  if (!sourceCode) {
-    return [];
-  }
+interface SuspicionSignals {
+  normalized: string;
+  compactLength: number;
+  readsInput: boolean;
+  hasAnyInputLiteralComparisons: boolean;
+  hasNonTrivialInputLiteralComparisons: boolean;
+  hasIterativeLogic: boolean;
+  literalMappingCount: number;
+  denseLiteralComparisons: boolean;
+}
 
-  const flags = new Set<string>();
+const LITERAL_MAPPING_BRANCH_PATTERN =
+  /\bif\s*\([^)]*(?:==|!=)\s*(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})[^)]*\)\s*(?:\{)?\s*(?:cout\s*<<\s*(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})|printf\s*\(\s*(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})|print\s*\(\s*(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})|return\s+(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9}))/g;
+const LITERAL_MAPPING_CASE_PATTERN =
+  /\bcase\s+(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})\s*:\s*(?:cout\s*<<\s*(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})|printf\s*\(\s*(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})|print\s*\(\s*(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})|return\s+(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9}))/g;
+
+function computeSuspicionSignals(sourceCode: string): SuspicionSignals {
   const normalized = sourceCode.toLowerCase();
-  const compactLength = normalized.replace(/\s+/g, ' ').trim().length;
-  if (normalized.length < 40) {
-    flags.add('tiny-source');
-  }
+  const inputVariables = collectInputVariables(sourceCode);
+  const directInputComparisons = collectExactInputLiteralComparisons(normalized, inputVariables);
+  const comparisonsByVariable = summarizeComparisonsByVariable(directInputComparisons);
+  const switchCaseCount = countSuspiciousSwitchCases(normalized, inputVariables);
+  const literalMappingCount =
+    (normalized.match(LITERAL_MAPPING_BRANCH_PATTERN) ?? []).length +
+    (normalized.match(LITERAL_MAPPING_CASE_PATTERN) ?? []).length;
 
-  const readsInput = detectsInputRead(sourceCode);
+  return {
+    normalized,
+    compactLength: normalized.replace(/\s+/g, ' ').trim().length,
+    readsInput: detectsInputRead(sourceCode),
+    hasAnyInputLiteralComparisons: directInputComparisons.length > 0 || switchCaseCount > 0,
+    hasNonTrivialInputLiteralComparisons: comparisonsByVariable.size > 0 || switchCaseCount > 0,
+    hasIterativeLogic: /\b(for|while|do)\b/.test(normalized),
+    literalMappingCount,
+    denseLiteralComparisons:
+      [...comparisonsByVariable.values()].some((count) => count >= 4) || switchCaseCount >= 4,
+  };
+}
+
+function detectsConstantOutput(normalized: string, readsInput: boolean): boolean {
+  if (readsInput) {
+    return false;
+  }
   const printedConstantLiterals = [
     ...normalized.matchAll(/\bcout\s*<<\s*(?:"([^"\n]{0,32})"|'([^'\n]{0,8})'|(-?\d{1,9}))/g),
     ...normalized.matchAll(
       /\b(?:printf|print)\s*\(\s*(?:"([^"\n]{0,32})"|'([^'\n]{0,8})'|(-?\d{1,9}))/g,
     ),
   ];
-  const printsSubstantiveConstant = printedConstantLiterals.some((match) =>
-    isSubstantiveOutputLiteral(
-      match[1] ?? match[2] ?? match[3] ?? match[4] ?? match[5] ?? match[6],
-    ),
+  return printedConstantLiterals.some((match) =>
+    isSubstantiveOutputLiteral(match[1] ?? match[2] ?? match[3] ?? match[4] ?? match[5] ?? match[6]),
   );
-  if (printsSubstantiveConstant && !readsInput) {
+}
+
+function branchesViaNonTrivialMapping(signals: SuspicionSignals): boolean {
+  return signals.literalMappingCount >= 3 && signals.hasNonTrivialInputLiteralComparisons;
+}
+
+function branchesViaDenseComparisons(signals: SuspicionSignals): boolean {
+  return signals.denseLiteralComparisons && signals.compactLength < 320 && !signals.hasIterativeLogic;
+}
+
+function branchesViaCompactMapping(signals: SuspicionSignals): boolean {
+  return (
+    signals.compactLength < 120 &&
+    signals.literalMappingCount >= 1 &&
+    signals.hasAnyInputLiteralComparisons &&
+    !signals.hasIterativeLogic
+  );
+}
+
+function branchesViaMediumMapping(signals: SuspicionSignals): boolean {
+  return (
+    signals.compactLength < 220 &&
+    signals.literalMappingCount >= 2 &&
+    signals.hasAnyInputLiteralComparisons
+  );
+}
+
+function detectsInputBranching(signals: SuspicionSignals): boolean {
+  if (!signals.readsInput) {
+    return false;
+  }
+  return [
+    branchesViaNonTrivialMapping,
+    branchesViaDenseComparisons,
+    branchesViaCompactMapping,
+    branchesViaMediumMapping,
+  ].some((predicate) => predicate(signals));
+}
+
+function detectsLiteralPairs(signals: SuspicionSignals): boolean {
+  return (
+    signals.readsInput &&
+    signals.hasNonTrivialInputLiteralComparisons &&
+    signals.compactLength < 400 &&
+    signals.literalMappingCount >= 3
+  );
+}
+
+function detectsLookupTable(signals: SuspicionSignals): boolean {
+  const lookupTableLiterals =
+    signals.normalized.match(/\{[^{}]*(?:\d+\s*,\s*){6,}\d+[^{}]*\}/g) ?? [];
+  return lookupTableLiterals.length > 0 && signals.compactLength < 300 && !signals.hasIterativeLogic;
+}
+
+export function detectSuspicionFlags(sourceCode?: string): string[] {
+  if (!sourceCode) {
+    return [];
+  }
+
+  const flags = new Set<string>();
+  const signals = computeSuspicionSignals(sourceCode);
+
+  if (signals.normalized.length < 40) {
+    flags.add('tiny-source');
+  }
+  if (detectsConstantOutput(signals.normalized, signals.readsInput)) {
     flags.add('constant-output');
   }
-
-  const inputVariables = collectInputVariables(sourceCode);
-  const directInputComparisons = collectExactInputLiteralComparisons(normalized, inputVariables);
-  const comparisonsByVariable = summarizeComparisonsByVariable(directInputComparisons);
-  const switchCaseCount = countSuspiciousSwitchCases(normalized, inputVariables);
-  const hasAnyInputLiteralComparisons = directInputComparisons.length > 0 || switchCaseCount > 0;
-  const hasNonTrivialInputLiteralComparisons =
-    comparisonsByVariable.size > 0 || switchCaseCount > 0;
-  const hasIterativeLogic = /\b(for|while|do)\b/.test(normalized);
-  const literalMappingBranches =
-    normalized.match(
-      /\bif\s*\([^)]*(?:==|!=)\s*(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})[^)]*\)\s*(?:\{)?\s*(?:cout\s*<<\s*(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})|printf\s*\(\s*(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})|print\s*\(\s*(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})|return\s+(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9}))/g,
-    ) ?? [];
-  const literalMappingCases =
-    normalized.match(
-      /\bcase\s+(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})\s*:\s*(?:cout\s*<<\s*(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})|printf\s*\(\s*(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})|print\s*\(\s*(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9})|return\s+(?:"[^"\n]{0,32}"|'[^'\n]{0,4}'|-?\d{1,9}))/g,
-    ) ?? [];
-  const literalMappingCount = literalMappingBranches.length + literalMappingCases.length;
-  const denseLiteralComparisons =
-    [...comparisonsByVariable.values()].some((count) => count >= 4) || switchCaseCount >= 4;
-  if (
-    readsInput &&
-    ((literalMappingCount >= 3 && hasNonTrivialInputLiteralComparisons) ||
-      (denseLiteralComparisons && compactLength < 320 && !hasIterativeLogic) ||
-      (compactLength < 120 &&
-        literalMappingCount >= 1 &&
-        hasAnyInputLiteralComparisons &&
-        !hasIterativeLogic) ||
-      (compactLength < 220 && literalMappingCount >= 2 && hasAnyInputLiteralComparisons))
-  ) {
+  if (detectsInputBranching(signals)) {
     flags.add('input-branching');
   }
-
-  if (
-    readsInput &&
-    hasNonTrivialInputLiteralComparisons &&
-    compactLength < 400 &&
-    literalMappingCount >= 3
-  ) {
+  if (detectsLiteralPairs(signals)) {
     flags.add('literal-pairs');
   }
-
-  const lookupTableLiterals = normalized.match(/\{[^{}]*(?:\d+\s*,\s*){6,}\d+[^{}]*\}/g) ?? [];
-  if (lookupTableLiterals.length > 0 && compactLength < 300 && !hasIterativeLogic) {
+  if (detectsLookupTable(signals)) {
     flags.add('lookup-table');
   }
 

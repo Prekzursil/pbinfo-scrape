@@ -179,20 +179,41 @@ function compareFastCandidates(
   return compareScoreVectors(leftScore, rightScore, left.evaluationId, right.evaluationId);
 }
 
+interface CandidateScoreParts {
+  forcedBoost: number;
+  trustworthyBoost: number;
+  acceptedScore: number;
+  runtimeRank: number;
+  memoryRank: number;
+  recencyRank: number;
+}
+
+function computeCandidateScoreParts(
+  submission: SubmissionRecord | RankedSubmissionCandidate,
+  forcedEvaluationId: number | undefined,
+): CandidateScoreParts {
+  return {
+    forcedBoost:
+      forcedEvaluationId !== undefined && submission.evaluationId === forcedEvaluationId ? 1 : 0,
+    trustworthyBoost: getEffectiveSuspicionFlags(submission).length === 0 ? 1 : 0,
+    acceptedScore: submission.score >= 100 ? 1 : 0,
+    runtimeRank:
+      submission.runtimeSeconds !== undefined
+        ? -submission.runtimeSeconds
+        : Number.NEGATIVE_INFINITY,
+    memoryRank:
+      submission.memoryKb !== undefined ? -submission.memoryKb : Number.NEGATIVE_INFINITY,
+    recencyRank: Date.parse(submission.fetchedAt) || 0,
+  };
+}
+
 function candidateScore(
   submission: SubmissionRecord | RankedSubmissionCandidate,
   forcedEvaluationId: number | undefined,
   prioritizeTrustworthiness: boolean,
 ): number[] {
-  const forcedBoost =
-    forcedEvaluationId !== undefined && submission.evaluationId === forcedEvaluationId ? 1 : 0;
-  const trustworthyBoost = getEffectiveSuspicionFlags(submission).length === 0 ? 1 : 0;
-  const acceptedScore = submission.score >= 100 ? 1 : 0;
-  const runtimeRank =
-    submission.runtimeSeconds !== undefined ? -submission.runtimeSeconds : Number.NEGATIVE_INFINITY;
-  const memoryRank =
-    submission.memoryKb !== undefined ? -submission.memoryKb : Number.NEGATIVE_INFINITY;
-  const recencyRank = Date.parse(submission.fetchedAt) || 0;
+  const { forcedBoost, trustworthyBoost, acceptedScore, runtimeRank, memoryRank, recencyRank } =
+    computeCandidateScoreParts(submission, forcedEvaluationId);
 
   if (!prioritizeTrustworthiness) {
     return [
@@ -314,27 +335,34 @@ function getEffectiveSuspicionFlags(
   );
 }
 
+const WEAK_ONLY_SUSPICION_FLAGS = new Set(['tiny-source', 'constant-output', 'lookup-table']);
+const RELAXED_BRANCHING_FLAG_SETS: readonly ReadonlySet<string>[] = [
+  new Set(['input-branching']),
+  new Set(['input-branching', 'literal-pairs']),
+];
+
+function allFlagsWithin(flags: string[], allowed: ReadonlySet<string>): boolean {
+  return flags.length > 0 && flags.every((flag) => allowed.has(flag));
+}
+
+function isRelaxableSubstantialSource(flags: string[], sourceCode?: string): boolean {
+  const compactLength = (sourceCode?.toLowerCase() ?? '').replace(/\s+/g, ' ').trim().length;
+  if (compactLength < 180) {
+    return false;
+  }
+  return RELAXED_BRANCHING_FLAG_SETS.some((allowed) => allFlagsWithin(flags, allowed));
+}
+
 function normalizeBlockingSuspicionFlags(
   flags: string[] | undefined,
   sourceCode?: string,
 ): string[] {
   const uniqueFlags = [...new Set(flags ?? [])];
-  const weakOnlyFlags = new Set(['tiny-source', 'constant-output', 'lookup-table']);
-  if (uniqueFlags.length > 0 && uniqueFlags.every((flag) => weakOnlyFlags.has(flag))) {
+  if (allFlagsWithin(uniqueFlags, WEAK_ONLY_SUSPICION_FLAGS)) {
     return [];
   }
 
-  const normalizedSource = sourceCode?.toLowerCase() ?? '';
-  const compactLength = normalizedSource.replace(/\s+/g, ' ').trim().length;
-  const relaxedBranchingOnly =
-    uniqueFlags.length > 0 &&
-    uniqueFlags.every((flag) => flag === 'input-branching') &&
-    compactLength >= 180;
-  const relaxedBranchingAndLiteralPairs =
-    uniqueFlags.length > 0 &&
-    uniqueFlags.every((flag) => flag === 'input-branching' || flag === 'literal-pairs') &&
-    compactLength >= 180;
-  if (relaxedBranchingOnly || relaxedBranchingAndLiteralPairs) {
+  if (isRelaxableSubstantialSource(uniqueFlags, sourceCode)) {
     return [];
   }
 

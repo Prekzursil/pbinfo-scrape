@@ -54,26 +54,34 @@ export function normalizeSourceCode(
   return normalized || undefined;
 }
 
+interface LanguageAlias {
+  readonly canonical: string;
+  readonly substrings?: readonly string[];
+  readonly exact?: readonly string[];
+}
+
+const LANGUAGE_ALIASES: readonly LanguageAlias[] = [
+  { canonical: 'cpp', substrings: ['c++'], exact: ['cpp'] },
+  { canonical: 'py', substrings: ['python'], exact: ['py', 'py3'] },
+  { canonical: 'csharp', substrings: ['c#', 'csharp'] },
+  { canonical: 'pas', substrings: ['pascal'], exact: ['pas'] },
+];
+
+function matchesAlias(value: string, alias: LanguageAlias): boolean {
+  if (alias.exact?.includes(value)) {
+    return true;
+  }
+  return Boolean(alias.substrings?.some((needle) => value.includes(needle)));
+}
+
 export function normalizeLanguage(language?: string): string | undefined {
   const normalized = language?.trim().toLowerCase();
   if (!normalized) {
     return undefined;
   }
 
-  if (normalized.includes('c++') || normalized === 'cpp') {
-    return 'cpp';
-  }
-  if (normalized.includes('python') || normalized === 'py' || normalized === 'py3') {
-    return 'py';
-  }
-  if (normalized.includes('c#') || normalized.includes('csharp')) {
-    return 'csharp';
-  }
-  if (normalized.includes('pascal') || normalized === 'pas') {
-    return 'pas';
-  }
-
-  return normalized;
+  const match = LANGUAGE_ALIASES.find((alias) => matchesAlias(normalized, alias));
+  return match ? match.canonical : normalized;
 }
 
 function sha256(value: string): string {
