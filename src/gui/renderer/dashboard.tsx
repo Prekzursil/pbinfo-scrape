@@ -1,4 +1,4 @@
-import { type ReactNode, useMemo, useState } from 'react';
+import { type Dispatch, type ReactNode, type SetStateAction, useMemo, useState } from 'react';
 
 import type { DesktopBridge } from '../shared/bridge.js';
 import type {
@@ -112,7 +112,10 @@ function shouldSyncWorkspaceDraft(
   return Boolean(root) && root !== syncedWorkspaceRoot;
 }
 
-function DashboardHeroStatusRow(props: { statusMessage?: string; errorMessage?: string }) {
+function DashboardHeroStatusRow(props: {
+  statusMessage?: string | null;
+  errorMessage?: string | null;
+}) {
   return (
     <div className="hero-status-row">
       {props.statusMessage ? (
@@ -852,7 +855,7 @@ interface DashboardOverviewViewProps {
   crawlStatus: GuiCrawlStatus | null;
   recentFailureCount: number;
   crawlTelemetry: { completedPerMinute: number; etaSeconds: number } | null;
-  publishCommand?: string;
+  publishCommand: string | null;
   coverageSummary: GuiCoverageSummary | null;
   coverageListing: GuiCoverageListing | null;
   overviewPreset: OverviewBoardPreset | null;
@@ -862,7 +865,7 @@ interface DashboardOverviewViewProps {
   jobs: GuiJobRecord[];
   activeCrawlJob: GuiJobRecord | undefined;
   selectedCrawlMode: CrawlMode;
-  verbosityMode: LogVerbosity;
+  verbosityMode: VerbosityMode;
   visibleLogEntries: GuiJobEvent[];
   previewUrl?: string;
   previewJobId?: string;
@@ -873,11 +876,13 @@ interface DashboardOverviewViewProps {
   openCoverageFromOverview: (problemId: number) => void;
   openMirrorFromOverview: (record: GuiCoverageRecord) => void;
   onCrawlModeChange: (mode: CrawlMode) => void;
-  onVerbosityChange: (mode: LogVerbosity) => void;
+  onVerbosityChange: (mode: VerbosityMode) => void;
   onStartCrawl: (scope: 'public' | 'user' | 'all') => Promise<unknown>;
   onPauseCrawl: (jobId: string) => Promise<unknown>;
   onResumeCrawl: (jobId: string) => Promise<unknown>;
-  onRunSnapshotJob: (job: SnapshotJobKind) => Promise<unknown>;
+  onRunSnapshotJob: (
+    kind: 'normalize' | 'rank' | 'mirror-build' | 'snapshot-finalize',
+  ) => Promise<unknown>;
   onStartMirrorPreview: () => Promise<unknown>;
   onStopMirrorPreview: (jobId: string) => Promise<unknown>;
   onOpenExternal: (url: string) => Promise<unknown>;

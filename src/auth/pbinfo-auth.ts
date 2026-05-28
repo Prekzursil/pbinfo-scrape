@@ -104,28 +104,32 @@ export class PbinfoAuthClient {
       redirect: 'follow',
     });
     const loginPayload = parseAjaxLoginResponse(await loginResponse.text());
-    const loginAccepted = loginPayload.stare === 'success';
-    const redirectUrl = new URL(
-      loginPayload.redirect ?? loginPayload.url ?? '/',
-      this.baseUrl,
-    ).toString();
+    const redirectUrl = this.resolveLoginRedirect(loginPayload);
 
-    if (!loginAccepted) {
+    if (loginPayload.stare !== 'success') {
       return {
         success: false,
         redirectUrl,
-        failureReason:
-          loginPayload.raspuns ??
-          `PBInfo credential login failed with ajax state "${loginPayload.stare ?? 'unknown'}".`,
+        failureReason: describeLoginFailure(loginPayload),
         sessionCookies: await this.serializeCookies(),
       };
     }
 
+    return this.verifyLogin(redirectUrl, input);
+  }
+
+  private resolveLoginRedirect(loginPayload: AjaxLoginResponse): string {
+    return new URL(loginPayload.redirect ?? loginPayload.url ?? '/', this.baseUrl).toString();
+  }
+
+  private async verifyLogin(
+    redirectUrl: string,
+    input: CredentialLoginInput,
+  ): Promise<CredentialLoginResult> {
     const verificationResponse = await this.cookieFetch(redirectUrl, {
       redirect: 'follow',
     });
     const verificationHtml = await verificationResponse.text();
-    const resolvedHandle = extractResolvedHandle(verificationHtml);
     const authenticated = extractLoggedInState(verificationHtml);
     const sessionCookies = await this.serializeCookies();
     if (authenticated && input.persistSessionCookies !== false) {
@@ -135,7 +139,7 @@ export class PbinfoAuthClient {
     return {
       success: authenticated,
       redirectUrl,
-      resolvedHandle,
+      resolvedHandle: extractResolvedHandle(verificationHtml),
       failureReason: authenticated
         ? undefined
         : 'PBInfo credential login was accepted by the ajax endpoint, but the follow-up session still resolved to guest mode.',
@@ -151,6 +155,13 @@ export class PbinfoAuthClient {
   private async persistCookies(cookies: PersistedCookie[]): Promise<void> {
     persistSerializedCookies(this.sessionCookiesPath, cookies);
   }
+}
+
+function describeLoginFailure(loginPayload: AjaxLoginResponse): string {
+  return (
+    loginPayload.raspuns ??
+    `PBInfo credential login failed with ajax state "${loginPayload.stare ?? 'unknown'}".`
+  );
 }
 
 function parseAjaxLoginResponse(text: string): AjaxLoginResponse {

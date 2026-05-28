@@ -10,6 +10,50 @@ afterEach(() => {
   cleanup();
 });
 
+type CoverageFilterInput = Parameters<DesktopBridge['listCoverageRecords']>[0];
+
+interface CoverageFilterableRecord {
+  problemId: number;
+  slug: string;
+  name: string;
+  tags: string[];
+  solvedByMe: boolean;
+  archiveCompletenessStatus: string;
+  testsCoverageStatus: string;
+}
+
+function matchesEnum<T>(value: T, filter: T | 'all' | undefined): boolean {
+  return !filter || filter === 'all' || (value as unknown) === filter;
+}
+
+function coverageRecordMatchesQuery(record: CoverageFilterableRecord, query?: string): boolean {
+  if (!query) {
+    return true;
+  }
+  const haystack =
+    `${record.problemId} ${record.slug} ${record.name} ${record.tags.join(' ')}`.toLowerCase();
+  return haystack.includes(query.toLowerCase());
+}
+
+function coverageRecordMatchesInput(
+  record: CoverageFilterableRecord,
+  input: CoverageFilterInput,
+): boolean {
+  if (input.solved === 'solved' && !record.solvedByMe) {
+    return false;
+  }
+  if (input.solved === 'unsolved' && record.solvedByMe) {
+    return false;
+  }
+  if (!matchesEnum(record.archiveCompletenessStatus, input.archiveCompletenessStatus)) {
+    return false;
+  }
+  if (!matchesEnum(record.testsCoverageStatus, input.testsCoverageStatus)) {
+    return false;
+  }
+  return coverageRecordMatchesQuery(record, input.query);
+}
+
 test(
   'renders the simplified easy-mode overview before exposing deeper tools',
   { timeout: 15_000 },
@@ -626,36 +670,9 @@ function createBridgeHarness(): {
       solvedByMeMissingUserSourceCount: 1,
     })),
     listCoverageRecords: vi.fn(async (input) => {
-      const filtered = coverageRecords.filter((record) => {
-        if (input.solved === 'solved' && !record.solvedByMe) {
-          return false;
-        }
-        if (input.solved === 'unsolved' && record.solvedByMe) {
-          return false;
-        }
-        if (
-          input.archiveCompletenessStatus &&
-          input.archiveCompletenessStatus !== 'all' &&
-          record.archiveCompletenessStatus !== input.archiveCompletenessStatus
-        ) {
-          return false;
-        }
-        if (
-          input.testsCoverageStatus &&
-          input.testsCoverageStatus !== 'all' &&
-          record.testsCoverageStatus !== input.testsCoverageStatus
-        ) {
-          return false;
-        }
-        if (input.query) {
-          const haystack =
-            `${record.problemId} ${record.slug} ${record.name} ${record.tags.join(' ')}`.toLowerCase();
-          if (!haystack.includes(input.query.toLowerCase())) {
-            return false;
-          }
-        }
-        return true;
-      });
+      const filtered = coverageRecords.filter((record) =>
+        coverageRecordMatchesInput(record, input),
+      );
       return {
         snapshotId: 'acceptance-20260310b',
         totalCount: filtered.length,

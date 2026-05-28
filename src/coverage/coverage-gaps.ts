@@ -88,6 +88,47 @@ export interface ProblemCoverageGapReport {
   newSinceBaselineProblemIds: number[];
 }
 
+function isSolvedByMeMissingUserSource(record: ProblemCoverageRecord): boolean {
+  if (!record.solvedByMe) {
+    return false;
+  }
+  const missingLanguages = (record.missingTrustworthyUserSourceLanguages?.length ?? 0) > 0;
+  const unknownUserSource =
+    !record.userSourceArchived && !('missingTrustworthyUserSourceLanguages' in record);
+  return missingLanguages || unknownUserSource;
+}
+
+function hasGapTestsAvailable(record: ProblemCoverageRecord): boolean {
+  return record.testsAvailable ?? hasAnyGapTestCount(record);
+}
+
+function hasAnyGapTestCount(record: ProblemCoverageRecord): boolean {
+  return (
+    record.effectiveTestsAvailableCount > 0 ||
+    record.exampleTestsAvailableCount > 0 ||
+    record.visibleTestsCapturedCount > 0 ||
+    record.evaluationObservedTestsCount > 0
+  );
+}
+
+function isExampleOnly(record: ProblemCoverageRecord): boolean {
+  return (
+    record.exampleTestsAvailableCount > 0 &&
+    record.visibleTestsCapturedCount === 0 &&
+    record.evaluationObservedTestsCount === 0
+  );
+}
+
+const OFFICIAL_SOURCE_GATE_FAILURE_REASONS = new Set<string>([
+  'unknown',
+  'official-source-not-captured',
+  'solution-fragment-not-archived',
+]);
+
+function isOfficialSourceGateFailure(entry: ProblemCoverageGapEntry): boolean {
+  return !entry.blockedReason || OFFICIAL_SOURCE_GATE_FAILURE_REASONS.has(entry.blockedReason);
+}
+
 export function buildProblemCoverageGapReport(options: {
   normalizedRoot: string;
   snapshotId: string;
@@ -115,38 +156,14 @@ export function buildProblemCoverageGapReport(options: {
     )
     .sort((left, right) => left.problemId - right.problemId);
   const solvedByMeMissingUserSource = records
-    .filter(
-      (record) =>
-        record.solvedByMe
-        && (
-          (record.missingTrustworthyUserSourceLanguages?.length ?? 0) > 0
-          || (!record.userSourceArchived
-            && !('missingTrustworthyUserSourceLanguages' in record))
-        ),
-    )
+    .filter(isSolvedByMeMissingUserSource)
     .map((record) => toGapEntry(record))
     .sort((left, right) => left.problemId - right.problemId);
   const noTestsProblemIds = records
-    .filter(
-      (record) =>
-        !(
-          record.testsAvailable
-          ?? (
-            record.effectiveTestsAvailableCount > 0
-            || record.exampleTestsAvailableCount > 0
-            || record.visibleTestsCapturedCount > 0
-            || record.evaluationObservedTestsCount > 0
-          )
-        ),
-    )
+    .filter((record) => !hasGapTestsAvailable(record))
     .map((record) => record.problemId);
   const exampleOnlyProblemIds = records
-    .filter(
-      (record) =>
-        record.exampleTestsAvailableCount > 0
-        && record.visibleTestsCapturedCount === 0
-        && record.evaluationObservedTestsCount === 0,
-    )
+    .filter(isExampleOnly)
     .map((record) => record.problemId);
   const visibleTestsPresentProblemIds = records
     .filter((record) => record.visibleTestsCapturedCount > 0)
@@ -156,13 +173,7 @@ export function buildProblemCoverageGapReport(options: {
     .map((record) => record.problemId);
 
   const officialSourceGateFailures = missingOfficialSources
-    .filter(
-      (entry) =>
-        !entry.blockedReason
-        || entry.blockedReason === 'unknown'
-        || entry.blockedReason === 'official-source-not-captured'
-        || entry.blockedReason === 'solution-fragment-not-archived',
-    )
+    .filter(isOfficialSourceGateFailure)
     .map((entry) => entry.problemId);
   const solvedUserSourceFailures = solvedByMeMissingUserSource.map(
     (entry) => entry.problemId,
@@ -343,25 +354,37 @@ function toGapEntry(
     userSourceArchived: record.userSourceArchived,
     missingTrustworthyUserSourceLanguages: record.missingTrustworthyUserSourceLanguages,
     blockedReason,
-    evidence: {
-      sourceListUrl: record.sourceListUrl,
-      editorialAvailability: record.editorialAvailability,
-      statementArchived: record.statementArchived,
-      solutionFragmentArchived: record.solutionFragmentArchived,
-      testsFragmentArchived: record.testsFragmentArchived,
-      officialSolutionPresent: record.officialSolutionPresent,
-      effectiveTestsAvailableCount: record.effectiveTestsAvailableCount,
-      testsCoverageStatus: record.testsCoverageStatus ?? 'not-captured-yet',
-      officialSourceStatus: record.officialSourceStatus ?? 'not-captured-yet',
-      officialSourceLanguages: record.officialSourceLanguages ?? [],
-      userSourceLanguages: record.userSourceLanguages ?? [],
-      requiredTrustworthyUserSourceLanguages:
-        record.requiredTrustworthyUserSourceLanguages ?? [],
-      trustworthyUserSourceLanguages: record.trustworthyUserSourceLanguages ?? [],
-      bestTrustworthyUserPerLanguage: record.bestTrustworthyUserPerLanguage ?? {},
-      archiveCompletenessStatus: record.archiveCompletenessStatus ?? 'incomplete',
-      notes: record.notes,
-    },
+    evidence: buildGapEvidence(record),
+  };
+}
+
+function orElse<T>(value: T | undefined, fallback: T): T {
+  return value ?? fallback;
+}
+
+function buildGapEvidence(
+  record: ProblemCoverageRecord,
+): ProblemCoverageGapEntry['evidence'] {
+  return {
+    sourceListUrl: record.sourceListUrl,
+    editorialAvailability: record.editorialAvailability,
+    statementArchived: record.statementArchived,
+    solutionFragmentArchived: record.solutionFragmentArchived,
+    testsFragmentArchived: record.testsFragmentArchived,
+    officialSolutionPresent: record.officialSolutionPresent,
+    effectiveTestsAvailableCount: record.effectiveTestsAvailableCount,
+    testsCoverageStatus: orElse(record.testsCoverageStatus, 'not-captured-yet'),
+    officialSourceStatus: orElse(record.officialSourceStatus, 'not-captured-yet'),
+    officialSourceLanguages: orElse(record.officialSourceLanguages, []),
+    userSourceLanguages: orElse(record.userSourceLanguages, []),
+    requiredTrustworthyUserSourceLanguages: orElse(
+      record.requiredTrustworthyUserSourceLanguages,
+      [],
+    ),
+    trustworthyUserSourceLanguages: orElse(record.trustworthyUserSourceLanguages, []),
+    bestTrustworthyUserPerLanguage: orElse(record.bestTrustworthyUserPerLanguage, {}),
+    archiveCompletenessStatus: orElse(record.archiveCompletenessStatus, 'incomplete'),
+    notes: record.notes,
   };
 }
 

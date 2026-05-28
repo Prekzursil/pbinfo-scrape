@@ -905,19 +905,29 @@ function compareProblemTestCaseRecords(
   left: ProblemTestCaseRecord,
   right: ProblemTestCaseRecord,
 ): number {
-  const leftEvaluation = left.evaluationId ?? Number.MIN_SAFE_INTEGER;
-  const rightEvaluation = right.evaluationId ?? Number.MIN_SAFE_INTEGER;
-  if (leftEvaluation !== rightEvaluation) {
-    return rightEvaluation - leftEvaluation;
+  const evaluationDelta = compareNullableNumbers(
+    right.evaluationId,
+    left.evaluationId,
+    Number.MIN_SAFE_INTEGER,
+  );
+  if (evaluationDelta !== 0) {
+    return evaluationDelta;
   }
 
-  const leftIndex = left.index ?? 0;
-  const rightIndex = right.index ?? 0;
-  if (leftIndex !== rightIndex) {
-    return leftIndex - rightIndex;
+  const indexDelta = compareNullableNumbers(left.index, right.index, 0);
+  if (indexDelta !== 0) {
+    return indexDelta;
   }
 
   return left.testId.localeCompare(right.testId);
+}
+
+function compareNullableNumbers(
+  first: number | undefined,
+  second: number | undefined,
+  fallback: number,
+): number {
+  return (first ?? fallback) - (second ?? fallback);
 }
 
 function withEffectiveProblemTests(record: ProblemTestsRecord): ProblemTestsRecord {

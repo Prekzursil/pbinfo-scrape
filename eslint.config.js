@@ -32,6 +32,11 @@ export default tseslint.config(
         ...globals.node,
       },
     },
+    rules: {
+      // Every function across the tree must stay at or below cyclomatic
+      // complexity 10. This mirrors the lizard gate in scripts/verify.
+      complexity: ['error', 10],
+    },
   },
   {
     // Browser/renderer code runs in the Electron renderer (DOM) context.

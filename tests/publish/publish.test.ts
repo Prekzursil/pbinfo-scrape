@@ -16,6 +16,27 @@ import { publishWorkspace } from '../../src/publish/publish.js';
 
 const tempDirs: string[] = [];
 
+const MISSING_RESOURCE_PROBES: ReadonlyArray<{
+  command: string;
+  prefix: readonly string[];
+  error: string;
+}> = [
+  { command: 'gh', prefix: ['repo', 'view'], error: 'repo missing' },
+  { command: 'git', prefix: ['remote', 'get-url'], error: 'no origin' },
+  { command: 'git', prefix: ['rev-parse', '--verify'], error: 'missing tag' },
+  { command: 'gh', prefix: ['release', 'view'], error: 'missing release' },
+];
+
+function throwForMissingResourceProbe(command: string, args: string[]): void {
+  for (const probe of MISSING_RESOURCE_PROBES) {
+    const matches =
+      command === probe.command && probe.prefix.every((value, index) => args[index] === value);
+    if (matches) {
+      throw new Error(probe.error);
+    }
+  }
+}
+
 afterEach(() => {
   for (const dir of tempDirs.splice(0)) {
     rmSync(dir, { recursive: true, force: true });
@@ -573,18 +594,7 @@ describe('publishWorkspace', () => {
       runCommand: (cwd, command, args) => {
         expect(cwd).toBe(workspaceRoot);
         commands.push({ command, args });
-        if (command === 'gh' && args[0] === 'repo' && args[1] === 'view') {
-          throw new Error('repo missing');
-        }
-        if (command === 'git' && args[0] === 'remote' && args[1] === 'get-url') {
-          throw new Error('no origin');
-        }
-        if (command === 'git' && args[0] === 'rev-parse' && args[1] === '--verify') {
-          throw new Error('missing tag');
-        }
-        if (command === 'gh' && args[0] === 'release' && args[1] === 'view') {
-          throw new Error('missing release');
-        }
+        throwForMissingResourceProbe(command, args);
         return '';
       },
     });

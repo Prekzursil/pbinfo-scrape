@@ -106,14 +106,17 @@ const SUMMARY_METRIC_KEYS = [
   'editorialVisibleCount',
 ] as const;
 
+type SummaryMetricKey = (typeof SUMMARY_METRIC_KEYS)[number];
+type SummaryMetricValues = Record<SummaryMetricKey | 'totalProblems', string>;
+
 function resolveSummaryMetricValues(
   summary: GuiCoverageSummary | null,
   listing: GuiCoverageListing | null,
-): Record<string, string> {
+): SummaryMetricValues {
   const s = summary ?? ({} as Partial<GuiCoverageSummary>);
-  const values: Record<string, string> = {
+  const values = {
     totalProblems: String(s.totalProblems ?? listing?.totalCount ?? 0),
-  };
+  } as SummaryMetricValues;
   for (const key of SUMMARY_METRIC_KEYS) {
     values[key] = String(s[key] ?? 0);
   }
@@ -395,7 +398,7 @@ function joinOrFallback(values: string[], fallback: string): string {
   return values.length > 0 ? values.join(', ') : fallback;
 }
 
-function CoverageDetailMetadata(props: { record: GuiCoverageRecord }) {
+function CoverageDetailMetadata(props: { record: GuiCoverageDetail['record'] }) {
   const { record } = props;
   const officialSourceLanguages = record.officialSourceLanguages ?? [];
   const userSourceLanguages = record.userSourceLanguages ?? [];

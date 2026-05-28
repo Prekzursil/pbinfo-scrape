@@ -575,6 +575,9 @@ function deriveProblemMirrorRoute(problem: ProblemRecord): string {
   return `/probleme/${problem.id}/${problem.slug}`;
 }
 
+const OFFICIAL_SOURCE_LIST_URL_PATTERN =
+  /^https:\/\/www\.pbinfo\.ro\/solutii\/user\/([^/?#]+)\/problema\/(\d+)\/([^/?#]+)/;
+
 function buildOfficialSourceHarvestByProblemId(
   snapshot: SnapshotLayout,
   pageRecords: PageRecord[],
@@ -585,7 +588,7 @@ function buildOfficialSourceHarvestByProblemId(
       continue;
     }
 
-    const match = page.url.match(/^https:\/\/www\.pbinfo\.ro\/solutii\/user\/([^/?#]+)\/problema\/(\d+)\/([^/?#]+)/);
+    const match = page.url.match(OFFICIAL_SOURCE_LIST_URL_PATTERN);
     if (!match?.[2]) {
       continue;
     }

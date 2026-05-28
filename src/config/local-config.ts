@@ -135,14 +135,13 @@ function loadParsedConfig(workspaceRoot: string): ParsedConfig | undefined {
 
 function resolveRoots(workspaceRoot: string, parsed: ParsedConfig | undefined): ResolvedRoots {
   const paths = parsed?.paths ?? {};
+  const resolve = (value: string | undefined, fallback: string): string =>
+    resolveRelativeRoot(workspaceRoot, value ?? fallback);
   return {
-    localRoot: resolveRelativeRoot(workspaceRoot, paths.localRoot ?? '.local'),
-    outputRoot: resolveRelativeRoot(workspaceRoot, paths.outputRoot ?? 'output'),
-    archiveRoot: resolveRelativeRoot(workspaceRoot, paths.archiveRoot ?? 'archive'),
-    artifactsRoot: resolveRelativeRoot(
-      workspaceRoot,
-      paths.artifactsRoot ?? join('output', 'artifacts'),
-    ),
+    localRoot: resolve(paths.localRoot, '.local'),
+    outputRoot: resolve(paths.outputRoot, 'output'),
+    archiveRoot: resolve(paths.archiveRoot, 'archive'),
+    artifactsRoot: resolve(paths.artifactsRoot, join('output', 'artifacts')),
   };
 }
 
@@ -165,15 +164,19 @@ function buildAuthConfig(
   };
 }
 
+function withDefault<T>(value: T | undefined, fallback: T): T {
+  return value ?? fallback;
+}
+
 function buildCrawlConfig(parsed: ParsedConfig | undefined): LoadedLocalConfig['crawl'] {
   const crawl = parsed?.crawl ?? {};
   return {
-    maxConcurrency: crawl.maxConcurrency ?? 2,
-    retryDelayMs: crawl.retryDelayMs ?? 60_000,
-    requestTimeoutMs: crawl.requestTimeoutMs ?? 30_000,
-    crossCheckWithBrowser: crawl.crossCheckWithBrowser ?? true,
+    maxConcurrency: withDefault(crawl.maxConcurrency, 2),
+    retryDelayMs: withDefault(crawl.retryDelayMs, 60_000),
+    requestTimeoutMs: withDefault(crawl.requestTimeoutMs, 30_000),
+    crossCheckWithBrowser: withDefault(crawl.crossCheckWithBrowser, true),
     userHandle: crawl.userHandle,
-    publicStartUrls: crawl.publicStartUrls ?? defaultPublicStartUrls(),
+    publicStartUrls: withDefault(crawl.publicStartUrls, defaultPublicStartUrls()),
   };
 }
 

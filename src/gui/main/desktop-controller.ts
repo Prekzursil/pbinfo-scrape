@@ -608,18 +608,22 @@ export function createDesktopController(
     });
 
     const crawlDetail = resolveCrawlDetail(options.detail);
-    const result = options.resume
-      ? await dependencies.resumeCrawlWorkflow(workspaceRoot, {
+    const runOrResumeCrawl = () => {
+      if (options.resume) {
+        return dependencies.resumeCrawlWorkflow(workspaceRoot, {
           maxIterations: options.maxIterations,
           now: options.now,
           snapshotId: job.snapshotId,
-        })
-      : await dependencies.runCrawlWorkflow(workspaceRoot, crawlDetail.scope, {
-          snapshotId: options.requestedSnapshotId,
-          maxIterations: options.maxIterations,
-          now: options.now,
-          mode: crawlDetail.mode,
         });
+      }
+      return dependencies.runCrawlWorkflow(workspaceRoot, crawlDetail.scope, {
+        snapshotId: options.requestedSnapshotId,
+        maxIterations: options.maxIterations,
+        now: options.now,
+        mode: crawlDetail.mode,
+      });
+    };
+    const result = await runOrResumeCrawl();
     const status = dependencies.getCrawlStatusWorkflow(workspaceRoot, result.snapshotId);
     const eventTimestamp = iso(options.now);
     const currentCounters = {

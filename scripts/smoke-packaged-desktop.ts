@@ -46,25 +46,7 @@ async function main(): Promise<void> {
   try {
     const report = await waitForDesktopSmokeReport(markerPath, 60_000);
     const actions = await waitForJsonFile<DesktopSmokeAction[]>(actionsPath, 10_000);
-
-    if (report.phase !== 'completed') {
-      throw new Error(`Packaged desktop smoke probe failed: ${JSON.stringify(report, null, 2)}`);
-    }
-
-    const datasetLabels = report.dataExplorer?.datasetLabels ?? [];
-    const expectedDatasets = ['Problems', 'Evaluations', 'Rankings', 'Mirror Routes'];
-    for (const label of expectedDatasets) {
-      if (!datasetLabels.includes(label)) {
-        throw new Error(`Packaged desktop smoke probe did not expose dataset chip "${label}".`);
-      }
-    }
-
-    const actionKinds = actions.map((action) => action.kind);
-    if (!actionKinds.includes('openPath') || !actionKinds.includes('openExternal')) {
-      throw new Error(
-        `Packaged desktop smoke probe did not resolve archive open actions. Actions: ${JSON.stringify(actions, null, 2)}`,
-      );
-    }
+    assertSmokeReport(report, actions);
 
     const portableSmoke = await smokePortableExecutable(portableExePath, repoRoot);
 
@@ -98,6 +80,27 @@ async function main(): Promise<void> {
     } catch {
       // The packaged app can keep user-data files open briefly after taskkill.
     }
+  }
+}
+
+function assertSmokeReport(report: DesktopSmokeReport, actions: DesktopSmokeAction[]): void {
+  if (report.phase !== 'completed') {
+    throw new Error(`Packaged desktop smoke probe failed: ${JSON.stringify(report, null, 2)}`);
+  }
+
+  const datasetLabels = report.dataExplorer?.datasetLabels ?? [];
+  const expectedDatasets = ['Problems', 'Evaluations', 'Rankings', 'Mirror Routes'];
+  for (const label of expectedDatasets) {
+    if (!datasetLabels.includes(label)) {
+      throw new Error(`Packaged desktop smoke probe did not expose dataset chip "${label}".`);
+    }
+  }
+
+  const actionKinds = actions.map((action) => action.kind);
+  if (!actionKinds.includes('openPath') || !actionKinds.includes('openExternal')) {
+    throw new Error(
+      `Packaged desktop smoke probe did not resolve archive open actions. Actions: ${JSON.stringify(actions, null, 2)}`,
+    );
   }
 }
 

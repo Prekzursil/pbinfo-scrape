@@ -273,17 +273,33 @@ function toGuiTestsFields(
     exampleTestsAvailableCount: record.exampleTestsAvailableCount,
     visibleTestsCapturedCount: record.visibleTestsCapturedCount,
     evaluationObservedTestsCount: record.evaluationObservedTestsCount,
-    effectiveTestsAvailableCount:
-      record.effectiveTestsAvailableCount ??
-      record.visibleTestsCapturedCount ??
-      record.exampleTestsAvailableCount ??
-      0,
-    testsCoverageStatus: record.testsCoverageStatus ?? deriveTestsCoverageStatus(record),
-    testsAvailable:
-      record.testsAvailable ??
-      record.testsFragmentArchived ??
-      (record.exampleTestsAvailableCount ?? 0) > 0,
+    effectiveTestsAvailableCount: resolveEffectiveTestsCount(record),
+    testsCoverageStatus: withFallback(record.testsCoverageStatus, () =>
+      deriveTestsCoverageStatus(record),
+    ),
+    testsAvailable: resolveTestsAvailable(record),
   };
+}
+
+function withFallback<T>(value: T | undefined, fallback: () => T): T {
+  return value ?? fallback();
+}
+
+function resolveEffectiveTestsCount(record: ProblemCoverageRecord): number {
+  return (
+    record.effectiveTestsAvailableCount ??
+    record.visibleTestsCapturedCount ??
+    record.exampleTestsAvailableCount ??
+    0
+  );
+}
+
+function resolveTestsAvailable(record: ProblemCoverageRecord): boolean {
+  return (
+    record.testsAvailable ??
+    record.testsFragmentArchived ??
+    (record.exampleTestsAvailableCount ?? 0) > 0
+  );
 }
 
 function toGuiSourceFields(
@@ -306,16 +322,23 @@ function toGuiSourceFields(
   return {
     officialSolutionPresent: record.officialSolutionPresent,
     officialSourceArchived: record.officialSourceArchived,
-    officialSourceLanguages: record.officialSourceLanguages ?? [],
-    officialSourceStatus: record.officialSourceStatus ?? deriveOfficialSourceStatus(record),
+    officialSourceLanguages: withFallback(record.officialSourceLanguages, () => []),
+    officialSourceStatus: withFallback(record.officialSourceStatus, () =>
+      deriveOfficialSourceStatus(record),
+    ),
     userSourceArchived: record.userSourceArchived,
-    userSourceLanguages: record.userSourceLanguages ?? [],
-    requiredTrustworthyUserSourceLanguages:
-      record.requiredTrustworthyUserSourceLanguages ?? deriveRequiredTrustworthyLanguages(record),
-    trustworthyUserSourceLanguages: record.trustworthyUserSourceLanguages ?? [],
-    bestTrustworthyUserPerLanguage: record.bestTrustworthyUserPerLanguage ?? {},
-    missingTrustworthyUserSourceLanguages: record.missingTrustworthyUserSourceLanguages ?? [],
-    officialSourceBlocked: record.officialSourceBlocked ?? false,
+    userSourceLanguages: withFallback(record.userSourceLanguages, () => []),
+    requiredTrustworthyUserSourceLanguages: withFallback(
+      record.requiredTrustworthyUserSourceLanguages,
+      () => deriveRequiredTrustworthyLanguages(record),
+    ),
+    trustworthyUserSourceLanguages: withFallback(record.trustworthyUserSourceLanguages, () => []),
+    bestTrustworthyUserPerLanguage: withFallback(record.bestTrustworthyUserPerLanguage, () => ({})),
+    missingTrustworthyUserSourceLanguages: withFallback(
+      record.missingTrustworthyUserSourceLanguages,
+      () => [],
+    ),
+    officialSourceBlocked: withFallback(record.officialSourceBlocked, () => false),
     officialSourceBlockedReason: record.officialSourceBlockedReason,
   };
 }
@@ -426,18 +449,31 @@ function deriveTestsCoverageStatus(
     | 'effectiveTestsAvailableCount'
   >,
 ): GuiCoverageRecord['testsCoverageStatus'] {
-  if (
-    (record.effectiveTestsAvailableCount ?? 0) > 0 ||
-    (record.exampleTestsAvailableCount ?? 0) > 0 ||
-    (record.visibleTestsCapturedCount ?? 0) > 0 ||
-    (record.evaluationObservedTestsCount ?? 0) > 0
-  ) {
+  if (hasAnyCapturedTests(record)) {
     return 'captured';
   }
   if (record.testsFragmentArchived) {
     return 'not-available-upstream';
   }
   return 'not-captured-yet';
+}
+
+function hasAnyCapturedTests(
+  record: Pick<
+    ProblemCoverageRecord,
+    | 'exampleTestsAvailableCount'
+    | 'visibleTestsCapturedCount'
+    | 'evaluationObservedTestsCount'
+    | 'effectiveTestsAvailableCount'
+  >,
+): boolean {
+  const counts = [
+    record.effectiveTestsAvailableCount,
+    record.exampleTestsAvailableCount,
+    record.visibleTestsCapturedCount,
+    record.evaluationObservedTestsCount,
+  ];
+  return counts.some((count) => (count ?? 0) > 0);
 }
 
 function deriveOfficialSourceStatus(

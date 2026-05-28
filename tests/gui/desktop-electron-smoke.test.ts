@@ -78,45 +78,54 @@ testOnWindows(
         stderr,
         exitCode: desktopProcess.exitCode,
       }));
-      if (report.error) {
-        throw new Error(`Desktop smoke probe failed: ${JSON.stringify(report, null, 2)}`);
-      }
-      expect(report.phase).toBe('completed');
-      expect(report.initial?.headings).toContain('Choose a workspace');
-      expect(report.final?.headings).toContain('Archive Overview');
-      expect(report.final?.headings).toContain('What happens next');
-      expect(report.final?.headings).toContain('Recent activity');
-      expect(report.final?.headings).toContain('Mirror access');
-      expect(report.final?.text).toContain(workspaceRoot);
-      expect(report.coverageExplorer?.summary?.totalProblems).toBeGreaterThan(0);
-      expect(report.coverageExplorer?.summary?.solvedByMeCount).toBeGreaterThanOrEqual(0);
-      expect(report.coverageExplorer?.listing?.totalCount).toBeGreaterThan(0);
-      expect(report.coverageExplorer?.detail?.problemId).toBeTruthy();
-      expect(report.dataExplorer?.snapshotId).toBe('acceptance-20260310b');
-      expect(report.dataExplorer?.datasetLabels).toEqual(
-        expect.arrayContaining(['Problems', 'Evaluations', 'Rankings', 'Mirror Routes']),
-      );
-      expect(report.dataExplorer?.visitedDatasets).toEqual(
-        expect.arrayContaining(['Problems', 'Evaluations', 'Rankings', 'Mirror Routes']),
-      );
-      expect(report.dataExplorer?.datasetListings?.problems?.totalCount).toBeGreaterThan(0);
-      expect(report.dataExplorer?.datasetListings?.problems?.detailTitle).toBeTruthy();
-      const actions = JSON.parse(readFileSync(actionsPath, 'utf8')) as DesktopSmokeAction[];
-      expect(actions).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            kind: 'openPath',
-          }),
-          expect.objectContaining({
-            kind: 'openExternal',
-          }),
-        ]),
-      );
+      assertDesktopSmokeReport(report, workspaceRoot);
+      assertDesktopSmokeActions(actionsPath);
     } finally {
       await closeDesktopProcess(desktopProcess.pid);
     }
   },
 );
+
+function assertDesktopSmokeReport(report: DesktopSmokeReport, workspaceRoot: string): void {
+  if (report.error) {
+    throw new Error(`Desktop smoke probe failed: ${JSON.stringify(report, null, 2)}`);
+  }
+  expect(report.phase).toBe('completed');
+  expect(report.initial?.headings).toContain('Choose a workspace');
+  expect(report.final?.headings).toContain('Archive Overview');
+  expect(report.final?.headings).toContain('What happens next');
+  expect(report.final?.headings).toContain('Recent activity');
+  expect(report.final?.headings).toContain('Mirror access');
+  expect(report.final?.text).toContain(workspaceRoot);
+  assertCoverageExplorerReport(report);
+  assertDataExplorerReport(report);
+}
+
+function assertCoverageExplorerReport(report: DesktopSmokeReport): void {
+  expect(report.coverageExplorer?.summary?.totalProblems).toBeGreaterThan(0);
+  expect(report.coverageExplorer?.summary?.solvedByMeCount).toBeGreaterThanOrEqual(0);
+  expect(report.coverageExplorer?.listing?.totalCount).toBeGreaterThan(0);
+  expect(report.coverageExplorer?.detail?.problemId).toBeTruthy();
+}
+
+function assertDataExplorerReport(report: DesktopSmokeReport): void {
+  const expectedDatasets = ['Problems', 'Evaluations', 'Rankings', 'Mirror Routes'];
+  expect(report.dataExplorer?.snapshotId).toBe('acceptance-20260310b');
+  expect(report.dataExplorer?.datasetLabels).toEqual(expect.arrayContaining(expectedDatasets));
+  expect(report.dataExplorer?.visitedDatasets).toEqual(expect.arrayContaining(expectedDatasets));
+  expect(report.dataExplorer?.datasetListings?.problems?.totalCount).toBeGreaterThan(0);
+  expect(report.dataExplorer?.datasetListings?.problems?.detailTitle).toBeTruthy();
+}
+
+function assertDesktopSmokeActions(actionsPath: string): void {
+  const actions = JSON.parse(readFileSync(actionsPath, 'utf8')) as DesktopSmokeAction[];
+  expect(actions).toEqual(
+    expect.arrayContaining([
+      expect.objectContaining({ kind: 'openPath' }),
+      expect.objectContaining({ kind: 'openExternal' }),
+    ]),
+  );
+}
 
 async function waitForDesktopSmokeReport(
   path: string,
