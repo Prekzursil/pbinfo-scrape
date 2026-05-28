@@ -112,14 +112,31 @@ export function upsertAndActivateWorkspaceProfile(
   };
 }
 
+interface ResolvedWorkspaceProfile {
+  resolvedWorkspace: string;
+  state: GuiWorkspaceState;
+  profile: GuiWorkspaceState['profiles'][number] | undefined;
+}
+
+function resolveWorkspaceProfile(
+  workspaceRoot: string,
+  profileId: string,
+): ResolvedWorkspaceProfile {
+  const resolvedWorkspace = resolve(workspaceRoot);
+  const state = readWorkspaceState(resolvedWorkspace);
+  return {
+    resolvedWorkspace,
+    state,
+    profile: state.profiles.find((entry) => entry.profileId === profileId),
+  };
+}
+
 export function activateWorkspaceProfile(
   workspaceRoot: string,
   profileId: string,
   options: TimedOptions = {},
 ): GuiWorkspaceState {
-  const resolvedWorkspace = resolve(workspaceRoot);
-  const state = readWorkspaceState(resolvedWorkspace);
-  const profile = state.profiles.find((entry) => entry.profileId === profileId);
+  const { resolvedWorkspace, state, profile } = resolveWorkspaceProfile(workspaceRoot, profileId);
   if (!profile) {
     throw new Error(`Workspace profile "${profileId}" was not found.`);
   }
@@ -161,9 +178,7 @@ export function deleteWorkspaceProfile(
   profileId: string,
   options: TimedOptions = {},
 ): GuiWorkspaceState {
-  const resolvedWorkspace = resolve(workspaceRoot);
-  const state = readWorkspaceState(resolvedWorkspace);
-  const profile = state.profiles.find((entry) => entry.profileId === profileId);
+  const { resolvedWorkspace, state, profile } = resolveWorkspaceProfile(workspaceRoot, profileId);
   if (!profile) {
     return state;
   }

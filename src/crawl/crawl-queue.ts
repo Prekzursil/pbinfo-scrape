@@ -217,20 +217,7 @@ export class CrawlQueue {
   }
 
   private mapRow(row: QueueRow): CrawlQueueItem {
-    return {
-      id: row.id,
-      key: row.key,
-      url: row.url,
-      kind: row.kind as CrawlQueueItem['kind'],
-      status: row.status,
-      attemptCount: row.attempt_count,
-      createdAt: row.created_at,
-      updatedAt: row.updated_at,
-      visibleAt: row.visible_at ?? undefined,
-      lastError: row.last_error ?? undefined,
-      contentHash: row.content_hash ?? undefined,
-      httpStatus: row.http_status ?? undefined,
-    };
+    return mapRow(row);
   }
 
   private withDatabase<T>(operation: (database: DatabaseSync) => T): T {

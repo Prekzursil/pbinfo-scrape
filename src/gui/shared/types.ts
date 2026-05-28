@@ -382,6 +382,27 @@ export type GuiCoveragePresenceFilter = z.infer<typeof guiCoveragePresenceFilter
 export type GuiCoverageEditorialFilter = z.infer<typeof guiCoverageEditorialFilterSchema>;
 export type GuiCoverageTestsStatusFilter = z.infer<typeof guiCoverageTestsStatusFilterSchema>;
 export type GuiCoverageArchiveStateFilter = z.infer<typeof guiCoverageArchiveStateFilterSchema>;
+
+/**
+ * Filter/pagination inputs shared by the coverage listing bridge channel and
+ * the main-process coverage explorer query layer.
+ */
+export interface GuiCoverageQuery {
+  snapshotId?: string;
+  query?: string;
+  offset?: number;
+  limit?: number;
+  solved?: GuiCoverageSolvedFilter;
+  testsFragmentArchived?: GuiCoveragePresenceFilter;
+  visibleTestsCaptured?: GuiCoveragePresenceFilter;
+  testsCoverageStatus?: GuiCoverageTestsStatusFilter;
+  officialSourceArchived?: GuiCoveragePresenceFilter;
+  userSourceArchived?: GuiCoveragePresenceFilter;
+  editorialAvailability?: GuiCoverageEditorialFilter;
+  archiveCompletenessStatus?: GuiCoverageArchiveStateFilter;
+  grade?: number;
+}
+
 export type DesktopPreferencesRecord = z.infer<typeof desktopPreferencesRecordSchema>;
 export type GuiProfileRecord = z.infer<typeof guiProfileRecordSchema>;
 export type GuiWorkspaceState = z.infer<typeof guiWorkspaceStateSchema>;

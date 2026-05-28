@@ -10,15 +10,12 @@ import { resolveReadableSnapshotLayout } from '../../archive/storage.js';
 import { loadLocalConfig } from '../../config/local-config.js';
 import type { ProblemCoverageIndex, ProblemCoverageRecord } from '../../types/records.js';
 import type {
-  GuiCoverageArchiveStateFilter,
   GuiCoverageDetail,
-  GuiCoverageEditorialFilter,
   GuiCoverageListing,
   GuiCoveragePresenceFilter,
+  GuiCoverageQuery,
   GuiCoverageRecord,
-  GuiCoverageSolvedFilter,
   GuiCoverageSummary,
-  GuiCoverageTestsStatusFilter,
 } from '../shared/types.js';
 
 const DEFAULT_LIST_LIMIT = 100;
@@ -27,20 +24,7 @@ export interface ExploreCoverageOptions {
   snapshotId?: string;
 }
 
-export interface ListCoverageOptions extends ExploreCoverageOptions {
-  query?: string;
-  offset?: number;
-  limit?: number;
-  solved?: GuiCoverageSolvedFilter;
-  testsFragmentArchived?: GuiCoveragePresenceFilter;
-  visibleTestsCaptured?: GuiCoveragePresenceFilter;
-  testsCoverageStatus?: GuiCoverageTestsStatusFilter;
-  officialSourceArchived?: GuiCoveragePresenceFilter;
-  userSourceArchived?: GuiCoveragePresenceFilter;
-  editorialAvailability?: GuiCoverageEditorialFilter;
-  archiveCompletenessStatus?: GuiCoverageArchiveStateFilter;
-  grade?: number;
-}
+export type ListCoverageOptions = GuiCoverageQuery;
 
 export interface ReadCoverageOptions extends ExploreCoverageOptions {
   problemId: number;
