@@ -1292,6 +1292,29 @@ function formatCounters(
   return `${numberFormat.format(counters.pending)} pending, ${numberFormat.format(counters.completed)} completed, ${numberFormat.format(counters.inProgress)} in progress`;
 }
 
+function collectCrawlTelemetryEvents(jobEvents: GuiJobEvent[]): GuiJobEvent[] {
+  return [...jobEvents]
+    .filter(
+      (event) => (event.stage === 'crawl' || event.stage === 'crawl-stalled') && event.counters,
+    )
+    .sort((left, right) => left.timestamp.localeCompare(right.timestamp));
+}
+
+function resolveTelemetryRate(latest: GuiJobEvent, baseline: GuiJobEvent): number | null {
+  if (!latest.counters || !baseline.counters) {
+    return null;
+  }
+  const elapsedSeconds =
+    (new Date(latest.timestamp).getTime() - new Date(baseline.timestamp).getTime()) / 1_000;
+  const completedDelta = latest.counters.completed - baseline.counters.completed;
+  if (elapsedSeconds <= 0 || completedDelta <= 0) {
+    return null;
+  }
+
+  const completedPerMinute = completedDelta / (elapsedSeconds / 60);
+  return Number.isFinite(completedPerMinute) && completedPerMinute > 0 ? completedPerMinute : null;
+}
+
 function deriveCrawlTelemetry(
   counters:
     | GuiJobCounters
@@ -1304,18 +1327,10 @@ function deriveCrawlTelemetry(
     return null;
   }
 
-  const relevantEvents = [...jobEvents]
-    .filter(
-      (event) => (event.stage === 'crawl' || event.stage === 'crawl-stalled') && event.counters,
-    )
-    .sort((left, right) => left.timestamp.localeCompare(right.timestamp));
-  if (relevantEvents.length < 2) {
-    return null;
-  }
-
+  const relevantEvents = collectCrawlTelemetryEvents(jobEvents);
   const latest = relevantEvents.at(-1);
   const latestCounters = latest?.counters;
-  if (!latest || !latestCounters) {
+  if (relevantEvents.length < 2 || !latest || !latestCounters) {
     return null;
   }
 
@@ -1325,19 +1340,12 @@ function deriveCrawlTelemetry(
       (event) =>
         event !== latest && event.counters && event.counters.completed < latestCounters.completed,
     );
-  if (!baseline?.counters) {
+  if (!baseline) {
     return null;
   }
 
-  const elapsedSeconds =
-    (new Date(latest.timestamp).getTime() - new Date(baseline.timestamp).getTime()) / 1_000;
-  const completedDelta = latestCounters.completed - baseline.counters.completed;
-  if (elapsedSeconds <= 0 || completedDelta <= 0) {
-    return null;
-  }
-
-  const completedPerMinute = completedDelta / (elapsedSeconds / 60);
-  if (!Number.isFinite(completedPerMinute) || completedPerMinute <= 0) {
+  const completedPerMinute = resolveTelemetryRate(latest, baseline);
+  if (completedPerMinute === null) {
     return null;
   }
 
