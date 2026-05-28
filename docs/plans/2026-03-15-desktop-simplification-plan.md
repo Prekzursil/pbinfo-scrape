@@ -13,11 +13,13 @@
 ### Task 1: Lock the new UX in renderer tests
 
 **Files:**
+
 - Modify: `tests/gui/renderer-smoke.test.tsx`
 - Test: `tests/gui/renderer-smoke.test.tsx`
 
 **Step 1: Write failing expectations for the simplified shell**
 Add checks for:
+
 - Overview / Coverage / Data / Setup tab buttons
 - default Overview heading
 - Profiles & access moved behind Setup
@@ -34,11 +36,13 @@ Note which old headings are still present (for example Profile Login and Import 
 ### Task 2: Implement the simplified dashboard shell
 
 **Files:**
+
 - Modify: `src/gui/renderer/dashboard.tsx`
 - Modify: `src/gui/renderer/styles.css`
 
 **Step 1: Add local tab state in the dashboard shell**
 Create a small internal view model for:
+
 - `overview`
 - `coverage`
 - `data`
@@ -46,6 +50,7 @@ Create a small internal view model for:
 
 **Step 2: Replace the oversized hero with a compact status header**
 Show only:
+
 - product name
 - snapshot id
 - active profile
@@ -54,6 +59,7 @@ Show only:
 
 **Step 3: Build the Overview tab**
 Include only:
+
 - snapshot health cards
 - quick actions
 - mirror access
@@ -62,6 +68,7 @@ Include only:
 
 **Step 4: Move setup-heavy panels into Setup**
 Group together:
+
 - workspace summary
 - profile list
 - login/import forms
@@ -76,6 +83,7 @@ Simplify spacing, reduce decorative density, and make the default screen feel fl
 ### Task 3: Align desktop smoke expectations with the new shell
 
 **Files:**
+
 - Modify: `src/gui/main/index.ts`
 - Modify: `tests/gui/desktop-electron-smoke.test.ts`
 
@@ -88,6 +96,7 @@ Do not remove workspace / coverage / data validation; make the probe interact wi
 ### Task 4: Verify, then refine if needed
 
 **Files:**
+
 - No new files unless needed for small helpers
 
 **Step 1: Run targeted tests**
@@ -96,6 +105,7 @@ Expected: PASS
 
 **Step 2: Run the full required verification**
 Run:
+
 - `npm run verify`
 - `npm run test:desktop-electron`
 
@@ -106,6 +116,7 @@ Run: `npm run smoke:desktop-packaged`
 Expected: PASS
 
 **Step 4: Commit**
+
 ```bash
 git add docs/plans/2026-03-15-desktop-simplification-design.md docs/plans/2026-03-15-desktop-simplification-plan.md src/gui/renderer/dashboard.tsx src/gui/renderer/styles.css src/gui/main/index.ts tests/gui/renderer-smoke.test.tsx tests/gui/desktop-electron-smoke.test.ts
 git commit -m "feat: simplify desktop dashboard shell"
