@@ -143,6 +143,10 @@ describe('registerDesktopIpc', () => {
     await expect(ipc.invoke('desktop:jobs:list')).resolves.toEqual([]);
     await expect(ipc.invoke('desktop:crawl:status', {})).rejects.toBeInstanceOf(Error);
 
+    // A schema-valid job-start payload reaches the controller registry wrapper.
+    await expect(
+      ipc.invoke('desktop:jobs:start', { kind: 'rank', snapshotId: 'unknown-snap' }),
+    ).resolves.toMatchObject({ kind: 'rank' });
     await expect(ipc.invoke('desktop:jobs:start', { kind: 'publish' })).rejects.toThrow();
     await expect(ipc.invoke('desktop:jobs:pause', { jobId: 'missing' })).rejects.toThrow();
     await expect(ipc.invoke('desktop:jobs:resume', { jobId: 'missing' })).rejects.toThrow();
@@ -151,6 +155,11 @@ describe('registerDesktopIpc', () => {
     await expect(ipc.invoke('desktop:jobs:events', { jobId: 'missing' })).rejects.toBeInstanceOf(
       Error,
     );
+
+    // Missing identifiers are rejected before reaching the controller.
+    await expect(ipc.invoke('desktop:profiles:activate', {})).rejects.toThrow(/profileId/i);
+    await expect(ipc.invoke('desktop:jobs:pause', {})).rejects.toThrow(/jobId/i);
+    await expect(ipc.invoke('desktop:mirror:start-preview', {})).rejects.toThrow(/snapshotId/i);
   });
 
   test('opens external urls and filesystem paths via electron shell', async () => {

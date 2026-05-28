@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 
 import { afterEach, describe, expect, test } from 'vitest';
 
-import { CrawlQueue } from '../../src/crawl/crawl-queue.js';
+import { CrawlQueue, readCrawlQueueSnapshot } from '../../src/crawl/crawl-queue.js';
 
 const tempDirs: string[] = [];
 
@@ -126,5 +126,39 @@ describe('CrawlQueue', () => {
 
     const claimed = queue.claimNext(new Date('2026-03-10T00:00:00.000Z'));
     expect(claimed?.key).toBe('official-evaluation:63785797');
+  });
+
+  test('reads an empty snapshot from a database path that does not exist', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'pbinfo-queue-missing-'));
+    tempDirs.push(dir);
+    expect(readCrawlQueueSnapshot(join(dir, 'absent.sqlite'))).toEqual({
+      pending: 0,
+      completed: 0,
+      inProgress: 0,
+      items: [],
+    });
+  });
+
+  test('rolls back the enqueue transaction and rethrows when an insert fails', () => {
+    const queue = createQueue();
+
+    expect(() =>
+      queue.enqueueMany([
+        {
+          key: 'valid',
+          url: 'https://www.pbinfo.ro/valid',
+          kind: 'public-page',
+        },
+        // A null URL violates the NOT NULL column binding and aborts the batch.
+        {
+          key: 'invalid',
+          url: undefined as unknown as string,
+          kind: 'public-page',
+        },
+      ]),
+    ).toThrow();
+
+    // The rollback means neither item was persisted.
+    expect(queue.getSnapshot().pending).toBe(0);
   });
 });

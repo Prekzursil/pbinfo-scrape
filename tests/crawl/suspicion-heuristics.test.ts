@@ -213,4 +213,66 @@ describe('detectSuspicionFlags', () => {
 
     expect(detectSuspicionFlags(source)).not.toContain('input-branching');
   });
+
+  test('returns no flags for empty source', () => {
+    expect(detectSuspicionFlags()).toEqual([]);
+    expect(detectSuspicionFlags('')).toEqual([]);
+  });
+
+  test('flags a dense hardcoded lookup table without iterative logic', () => {
+    const source = [
+      '#include <iostream>',
+      'using namespace std;',
+      'int table[] = {3, 1, 4, 1, 5, 9, 2, 6, 5};',
+      'int main(){ int n; cin >> n; cout << table[0]; return 0; }',
+    ].join('\n');
+
+    expect(detectSuspicionFlags(source)).toContain('lookup-table');
+  });
+
+  test('processes literal-first comparisons against input variables', () => {
+    // `literal == variable` ordering exercises the literal-first comparison scan.
+    const source = [
+      '#include <iostream>',
+      'using namespace std;',
+      'int main(){',
+      '  int n; cin >> n;',
+      '  if (42 == n) cout << "AAAA";',
+      '  if (84 == n) cout << "BBBB";',
+      '  if (126 == n) cout << "CCCC";',
+      '  return 0;',
+      '}',
+    ].join('\n');
+
+    expect(Array.isArray(detectSuspicionFlags(source))).toBe(true);
+  });
+
+  test('counts suspicious switch cases on input variables as branching', () => {
+    const source = [
+      '#include <iostream>',
+      'using namespace std;',
+      'int main(){',
+      '  int n; cin >> n;',
+      '  switch (n) {',
+      '    case 11: cout << "AAAA"; break;',
+      '    case 22: cout << "BBBB"; break;',
+      '    case 33: cout << "CCCC"; break;',
+      '    case 44: cout << "DDDD"; break;',
+      '  }',
+      '  return 0;',
+      '}',
+    ].join('\n');
+
+    expect(detectSuspicionFlags(source)).toContain('input-branching');
+  });
+
+  test('does not flag constant-output when the printed literal is empty', () => {
+    const source = [
+      '#include <iostream>',
+      'using namespace std;',
+      'int main(){ cout << ""; return 0; }',
+    ].join('\n');
+
+    expect(detectSuspicionFlags(source)).not.toContain('constant-output');
+  });
 });

@@ -128,4 +128,47 @@ describe('raw artifact export/import', () => {
     );
     expect(existsSync(join(config.paths.localRoot, 'artifact-relinks.json'))).toBe(true);
   });
+
+  test('exports the latest readable snapshot and resolves directory-style manifest paths', async () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-artifacts-latest-'));
+    tempDirs.push(workspaceRoot);
+
+    const config = loadLocalConfig(workspaceRoot);
+    const snapshot = prepareSnapshot(config, {
+      snapshotId: 'snapshot-latest',
+      scope: 'public',
+      now: new Date('2026-03-12T00:00:00.000Z'),
+    });
+    mkdirSync(snapshot.rawPagesRoot, { recursive: true });
+    mkdirSync(snapshot.rawAssetsRoot, { recursive: true });
+    writeFileSync(join(snapshot.rawPagesRoot, 'page.html'), '<html>ok</html>', 'utf8');
+
+    const exported = await exportRawSnapshotArtifacts({
+      workspaceRoot,
+      snapshotId: 'latest',
+    });
+    expect(exported.snapshotId).toBe('snapshot-latest');
+
+    rmSync(snapshot.rawPagesRoot, { recursive: true, force: true });
+
+    // Passing the artifact directory (not the manifest.json) resolves manifest.json inside it.
+    const imported = await importRawSnapshotArtifacts({
+      workspaceRoot,
+      snapshotId: 'snapshot-latest',
+      sourcePath: exported.targetRoot,
+    });
+    expect(imported.snapshotId).toBe('snapshot-latest');
+  });
+
+  test('throws when import or relink are missing a source path', async () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-artifacts-nosrc-'));
+    tempDirs.push(workspaceRoot);
+
+    await expect(importRawSnapshotArtifacts({ workspaceRoot, snapshotId: 'x' })).rejects.toThrow(
+      /requires a manifest path/,
+    );
+    await expect(relinkRawSnapshotArtifacts({ workspaceRoot, snapshotId: 'x' })).rejects.toThrow(
+      /requires a manifest path/,
+    );
+  });
 });
