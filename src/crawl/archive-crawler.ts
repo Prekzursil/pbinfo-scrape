@@ -29,7 +29,7 @@ import {
 import { isOfficialSourceAuthorHandle } from '../pbinfo/official-source-authors.js';
 import { buildSourceSignature } from '../ranking/source-normalization.js';
 import { detectSuspicionFlags } from './source-suspicion.js';
-import type { CrawlQueueInput } from '../types/crawl.js';
+import type { CrawlQueueInput, CrawlQueueItem } from '../types/crawl.js';
 import type {
   EvaluationTestResult,
   EvaluationRecord,
@@ -113,69 +113,7 @@ export class ArchiveCrawler {
     const contentType = response.headers.get('content-type');
 
     if (looksLikeHtml(contentType)) {
-      const body = await response.text();
-      if (isTemporaryUnavailable(body)) {
-        this.queue.fail(item.id, {
-          errorMessage: 'temporarily unavailable',
-          nextVisibleAt: new Date(now.getTime() + this.retryDelayMs).toISOString(),
-        });
-        return true;
-      }
-
-      const contentHash = `sha256:${createHash('sha256').update(body).digest('hex')}`;
-      const fileName = await this.archiveHtmlPage(item.url, body);
-      const browserCapture = await this.captureBrowserHtml(item.url);
-      const normalizedHtml = resolvePreferredNormalizedHtml(
-        item.kind,
-        item.url,
-        body,
-        browserCapture.html,
-      );
-      this.persistPageRecord({
-        snapshotId: this.snapshot.snapshotId,
-        url: item.url,
-        kind: item.kind,
-        httpStatus: response.status,
-        contentType: contentType ?? undefined,
-        contentHash,
-        bodyPath: `raw-pages/${fileName}`,
-        browserBodyPath: browserCapture.bodyPath,
-        fetchedAt: now.toISOString(),
-      });
-      this.persistNormalizedHtml(
-        item,
-        normalizedHtml.html,
-        response.status,
-        contentType ?? undefined,
-        normalizedHtml.source === 'browser',
-      );
-
-      const genericFollowUps = discoverFollowUps(
-        this.config,
-        this.scope,
-        item.url,
-        item.kind,
-        body,
-      );
-      const normalizedFollowUps = discoverNormalizedFollowUps(
-        this.config,
-        this.snapshot,
-        item.url,
-        item.kind,
-        body,
-      );
-      const followUps =
-        item.kind === 'user-solutions' ||
-        item.kind === 'official-source-list' ||
-        (item.kind === 'public-page' && isProblemSourceListUrl(item.url))
-          ? [...normalizedFollowUps, ...genericFollowUps]
-          : [...genericFollowUps, ...normalizedFollowUps];
-      this.queue.enqueueMany(followUps);
-      this.queue.complete(item.id, {
-        contentHash,
-        httpStatus: response.status,
-      });
-      return true;
+      return this.handleHtmlResponse(item, response, contentType, now);
     }
 
     const bytes = Buffer.from(await response.arrayBuffer());
@@ -195,6 +133,72 @@ export class ArchiveCrawler {
       contentHash,
       httpStatus: response.status,
     });
+    return true;
+  }
+
+  private resolveFollowUps(item: CrawlQueueItem, body: string): CrawlQueueInput[] {
+    const genericFollowUps = discoverFollowUps(this.config, this.scope, item.url, item.kind, body);
+    const normalizedFollowUps = discoverNormalizedFollowUps(
+      this.config,
+      this.snapshot,
+      item.url,
+      item.kind,
+      body,
+    );
+    const normalizedFirst =
+      item.kind === 'user-solutions' ||
+      item.kind === 'official-source-list' ||
+      (item.kind === 'public-page' && isProblemSourceListUrl(item.url));
+    return normalizedFirst
+      ? [...normalizedFollowUps, ...genericFollowUps]
+      : [...genericFollowUps, ...normalizedFollowUps];
+  }
+
+  private async handleHtmlResponse(
+    item: CrawlQueueItem,
+    response: Response,
+    contentType: string | null,
+    now: Date,
+  ): Promise<boolean> {
+    const body = await response.text();
+    if (isTemporaryUnavailable(body)) {
+      this.queue.fail(item.id, {
+        errorMessage: 'temporarily unavailable',
+        nextVisibleAt: new Date(now.getTime() + this.retryDelayMs).toISOString(),
+      });
+      return true;
+    }
+
+    const contentHash = `sha256:${createHash('sha256').update(body).digest('hex')}`;
+    const fileName = await this.archiveHtmlPage(item.url, body);
+    const browserCapture = await this.captureBrowserHtml(item.url);
+    const normalizedHtml = resolvePreferredNormalizedHtml(
+      item.kind,
+      item.url,
+      body,
+      browserCapture.html,
+    );
+    this.persistPageRecord({
+      snapshotId: this.snapshot.snapshotId,
+      url: item.url,
+      kind: item.kind,
+      httpStatus: response.status,
+      contentType: contentType ?? undefined,
+      contentHash,
+      bodyPath: `raw-pages/${fileName}`,
+      browserBodyPath: browserCapture.bodyPath,
+      fetchedAt: now.toISOString(),
+    });
+    this.persistNormalizedHtml(
+      item,
+      normalizedHtml.html,
+      response.status,
+      contentType ?? undefined,
+      normalizedHtml.source === 'browser',
+    );
+
+    this.queue.enqueueMany(this.resolveFollowUps(item, body));
+    this.queue.complete(item.id, { contentHash, httpStatus: response.status });
     return true;
   }
 
@@ -365,6 +369,203 @@ async function fetchWithTimeout(
   }
 }
 
+function mergeProblemPageRecord(
+  current: ProblemRecord | undefined,
+  record: ProblemRecord,
+): ProblemRecord {
+  const previous = current ?? ({} as Partial<ProblemRecord>);
+  return {
+    ...current,
+    ...record,
+    editorial: previous.editorial ?? record.editorial,
+    officialSolutions: previous.officialSolutions ?? {},
+    officialSourceIds: previous.officialSourceIds ?? {},
+    visibleTests: previous.visibleTests ?? [],
+    editorialAvailability: previous.editorialAvailability ?? record.editorialAvailability,
+  };
+}
+
+function persistProblemPageRecord(options: PersistNormalizedSnapshotHtmlOptions): void {
+  const record = parseProblemPage(options.html, options.item.url);
+  mergeJsonRecord<ProblemRecord>(
+    join(options.snapshot.normalizedRoot, 'problems'),
+    `problem-${record.id}.json`,
+    (current) => mergeProblemPageRecord(current, record),
+  );
+}
+
+function persistProblemStatementRecord(
+  options: PersistNormalizedSnapshotHtmlOptions,
+  linkedProblem: { id: number; slug: string },
+): void {
+  const problemId = linkedProblem.id;
+  const fragment = parseProblemStatementFragment(options.html);
+  mergeJsonRecord<ProblemRecord>(
+    join(options.snapshot.normalizedRoot, 'problems'),
+    `problem-${problemId}.json`,
+    (current) => ({
+      ...(current ?? createPlaceholderProblem(problemId, linkedProblem.slug)),
+      sections: fragment.sections,
+      examples: fragment.examples,
+      constraints: fragment.constraints,
+      timeLimitSeconds: current?.timeLimitSeconds ?? fragment.executionHints.timeLimitSeconds,
+      memoryLimitMb: current?.memoryLimitMb ?? fragment.executionHints.memoryLimitMb,
+    }),
+  );
+  persistProblemExamples(
+    options.snapshot,
+    problemId,
+    linkedProblem.slug,
+    linkedProblem.slug,
+    fragment.examples,
+  );
+}
+
+function persistProblemSolutionRecord(
+  options: PersistNormalizedSnapshotHtmlOptions,
+  linkedProblem: { id: number; slug: string },
+): void {
+  const problemId = linkedProblem.id;
+  const solution = parseOfficialSolutionFragment(options.html);
+  const sourceIds = persistOfficialSources(
+    options.snapshot,
+    problemId,
+    solution.solutions,
+    options.item.url,
+    options.fetchedAt,
+    options.normalizedFromBrowser ? 'browser-fallback' : 'official-fragment',
+  );
+  mergeJsonRecord<ProblemRecord>(
+    join(options.snapshot.normalizedRoot, 'problems'),
+    `problem-${problemId}.json`,
+    (current) => ({
+      ...(current ?? createPlaceholderProblem(problemId, linkedProblem.slug)),
+      editorialAvailability: solution.access,
+      editorialMessage: solution.message,
+      editorial: {
+        availability: solution.access,
+        message: solution.message,
+        artifactPath: resolveRawPageBodyPath(options.snapshot, options.item.url),
+      },
+      officialSolutions: mergeLanguageSolutions(
+        current?.officialSolutions ?? {},
+        solution.solutions,
+      ),
+      officialSourceIds: mergeLanguageSourceIds(current?.officialSourceIds, sourceIds),
+    }),
+  );
+}
+
+function persistProblemTestsRecordFragment(
+  options: PersistNormalizedSnapshotHtmlOptions,
+  linkedProblem: { id: number; slug: string },
+): void {
+  const problemId = linkedProblem.id;
+  const fragment = parseProblemEndpointFragment(options.html);
+  mergeJsonRecord<ProblemRecord>(
+    join(options.snapshot.normalizedRoot, 'problems'),
+    `problem-${problemId}.json`,
+    (current) => ({
+      ...(current ?? createPlaceholderProblem(problemId, linkedProblem.slug)),
+      editorialAvailability:
+        current?.editorialAvailability === 'visible'
+          ? current.editorialAvailability
+          : fragment.access,
+      editorialMessage: current?.editorialMessage ?? fragment.message,
+      visibleTests: fragment.visibleTests,
+    }),
+  );
+  persistProblemVisibleTests(
+    options.snapshot,
+    problemId,
+    linkedProblem.slug,
+    linkedProblem.slug,
+    fragment.visibleTests,
+  );
+}
+
+function persistEvaluationDetailRecord(
+  options: PersistNormalizedSnapshotHtmlOptions,
+  evaluationId: number,
+): void {
+  try {
+    const record = parseEvaluationPage(options.html, evaluationId);
+    const evaluation: EvaluationRecord = {
+      ...record,
+      fetchedAt: options.fetchedAt,
+      provenance: [options.item.url],
+      suspicionFlags: detectSuspicionFlags(record.sourceCode),
+    };
+    writeJsonRecord(
+      join(options.snapshot.normalizedRoot, 'evaluations'),
+      `evaluation-${evaluation.evaluationId}.json`,
+      evaluation,
+    );
+    const sourceKind: SourceRecord['kind'] =
+      options.item.kind === 'official-evaluation-detail' ? 'official' : 'user-evaluation';
+    persistEvaluationSource(
+      options.snapshot,
+      evaluation,
+      sourceKind,
+      options.normalizedFromBrowser ? 'browser-fallback' : 'evaluation-detail',
+    );
+    persistEvaluationObservedTests(options.snapshot, evaluation);
+  } catch (error) {
+    writeJsonRecord(
+      join(options.snapshot.normalizedRoot, 'evaluation-errors'),
+      `evaluation-${evaluationId}.json`,
+      {
+        evaluationId,
+        sourceUrl: options.item.url,
+        fetchedAt: options.fetchedAt,
+        error: error instanceof Error ? error.message : String(error),
+      },
+    );
+  }
+}
+
+function mergeUserSolutionsRecord(
+  current: UserSolutionsRecord | undefined,
+  record: ReturnType<typeof parseUserSolutionsListPage>,
+  options: PersistNormalizedSnapshotHtmlOptions,
+  userHandle: string,
+): UserSolutionsRecord {
+  const previous = current ?? ({} as Partial<UserSolutionsRecord>);
+  const existingEntries = Array.isArray(previous.entries) ? previous.entries : [];
+  const nextEntries = dedupeUserSolutionEntries([...existingEntries, ...record.entries]);
+  const existingPageUrls = Array.isArray(previous.pageUrls) ? previous.pageUrls : [];
+  return {
+    ...previous,
+    user: userHandle,
+    sourceUrl: previous.sourceUrl ?? options.item.url,
+    pageUrls: [...new Set([...existingPageUrls, options.item.url])].sort(),
+    httpStatus: options.httpStatus,
+    contentType: options.contentType,
+    totalMatches: maxDefinedNumber(previous.totalMatches, record.totalMatches),
+    throttled: Boolean(previous.throttled || record.throttled),
+    pageSize: record.pageSize ?? previous.pageSize,
+    currentOffset: record.currentOffset ?? previous.currentOffset,
+    nextPageUrls: record.nextPageUrls,
+    entries: nextEntries,
+  };
+}
+
+function persistUserSolutionsRecord(
+  options: PersistNormalizedSnapshotHtmlOptions,
+  userHandle: string,
+): void {
+  const record = parseUserSolutionsListPage(options.html, options.item.url);
+  mergeJsonRecord<UserSolutionsRecord>(
+    join(options.snapshot.normalizedRoot, 'user-solutions'),
+    `user-${sanitizeSegment(userHandle).toLowerCase()}.json`,
+    (current) => mergeUserSolutionsRecord(current, record, options, userHandle),
+  );
+}
+
+function isEvaluationDetailKind(kind: CrawlQueueInput['kind']): boolean {
+  return kind === 'evaluation-detail' || kind === 'official-evaluation-detail';
+}
+
 export function persistNormalizedSnapshotHtml(options: PersistNormalizedSnapshotHtmlOptions): void {
   persistMirrorRouteRecord(
     options.snapshot,
@@ -374,180 +575,10 @@ export function persistNormalizedSnapshotHtml(options: PersistNormalizedSnapshot
   );
 
   const linkedProblem = resolveLinkedProblem(options.item);
-  const problemMatch = options.item.url.match(/\/probleme\/(\d+)\/([^/?#]+)/);
-  if (options.item.kind === 'public-page' && problemMatch?.[1]) {
-    const record = parseProblemPage(options.html, options.item.url);
-    mergeJsonRecord<ProblemRecord>(
-      join(options.snapshot.normalizedRoot, 'problems'),
-      `problem-${record.id}.json`,
-      (current) => ({
-        ...current,
-        ...record,
-        editorial: current?.editorial ?? record.editorial,
-        officialSolutions: current?.officialSolutions ?? {},
-        officialSourceIds: current?.officialSourceIds ?? {},
-        visibleTests: current?.visibleTests ?? [],
-        editorialAvailability: current?.editorialAvailability ?? record.editorialAvailability,
-      }),
-    );
+  if (persistLinkedProblemRecord(options, linkedProblem)) {
     return;
   }
-
-  if (options.item.kind === 'problem-statement' && linkedProblem) {
-    const problemId = linkedProblem.id;
-    const fragment = parseProblemStatementFragment(options.html);
-    mergeJsonRecord<ProblemRecord>(
-      join(options.snapshot.normalizedRoot, 'problems'),
-      `problem-${problemId}.json`,
-      (current) => ({
-        ...(current ?? createPlaceholderProblem(problemId, linkedProblem.slug)),
-        sections: fragment.sections,
-        examples: fragment.examples,
-        constraints: fragment.constraints,
-        timeLimitSeconds: current?.timeLimitSeconds ?? fragment.executionHints.timeLimitSeconds,
-        memoryLimitMb: current?.memoryLimitMb ?? fragment.executionHints.memoryLimitMb,
-      }),
-    );
-    persistProblemExamples(
-      options.snapshot,
-      problemId,
-      linkedProblem.slug,
-      linkedProblem.slug,
-      fragment.examples,
-    );
-    return;
-  }
-
-  if (options.item.kind === 'problem-solution' && linkedProblem) {
-    const problemId = linkedProblem.id;
-    const solution = parseOfficialSolutionFragment(options.html);
-    const sourceIds = persistOfficialSources(
-      options.snapshot,
-      problemId,
-      solution.solutions,
-      options.item.url,
-      options.fetchedAt,
-      options.normalizedFromBrowser ? 'browser-fallback' : 'official-fragment',
-    );
-    mergeJsonRecord<ProblemRecord>(
-      join(options.snapshot.normalizedRoot, 'problems'),
-      `problem-${problemId}.json`,
-      (current) => ({
-        ...(current ?? createPlaceholderProblem(problemId, linkedProblem.slug)),
-        editorialAvailability: solution.access,
-        editorialMessage: solution.message,
-        editorial: {
-          availability: solution.access,
-          message: solution.message,
-          artifactPath: resolveRawPageBodyPath(options.snapshot, options.item.url),
-        },
-        officialSolutions: mergeLanguageSolutions(
-          current?.officialSolutions ?? {},
-          solution.solutions,
-        ),
-        officialSourceIds: mergeLanguageSourceIds(current?.officialSourceIds, sourceIds),
-      }),
-    );
-    return;
-  }
-
-  if (options.item.kind === 'problem-tests' && linkedProblem) {
-    const problemId = linkedProblem.id;
-    const fragment = parseProblemEndpointFragment(options.html);
-    mergeJsonRecord<ProblemRecord>(
-      join(options.snapshot.normalizedRoot, 'problems'),
-      `problem-${problemId}.json`,
-      (current) => ({
-        ...(current ?? createPlaceholderProblem(problemId, linkedProblem.slug)),
-        editorialAvailability:
-          current?.editorialAvailability === 'visible'
-            ? current.editorialAvailability
-            : fragment.access,
-        editorialMessage: current?.editorialMessage ?? fragment.message,
-        visibleTests: fragment.visibleTests,
-      }),
-    );
-    persistProblemVisibleTests(
-      options.snapshot,
-      problemId,
-      linkedProblem.slug,
-      linkedProblem.slug,
-      fragment.visibleTests,
-    );
-    return;
-  }
-
-  const evaluationMatch = options.item.url.match(/\/detalii-evaluare\/(\d+)/);
-  if (
-    (options.item.kind === 'evaluation-detail' ||
-      options.item.kind === 'official-evaluation-detail') &&
-    evaluationMatch?.[1]
-  ) {
-    try {
-      const record = parseEvaluationPage(options.html, Number(evaluationMatch[1]));
-      const suspicious = detectSuspicionFlags(record.sourceCode);
-      const evaluation: EvaluationRecord = {
-        ...record,
-        fetchedAt: options.fetchedAt,
-        provenance: [options.item.url],
-        suspicionFlags: suspicious,
-      };
-      writeJsonRecord(
-        join(options.snapshot.normalizedRoot, 'evaluations'),
-        `evaluation-${evaluation.evaluationId}.json`,
-        evaluation,
-      );
-      const sourceKind: SourceRecord['kind'] =
-        options.item.kind === 'official-evaluation-detail' ? 'official' : 'user-evaluation';
-      persistEvaluationSource(
-        options.snapshot,
-        evaluation,
-        sourceKind,
-        options.normalizedFromBrowser ? 'browser-fallback' : 'evaluation-detail',
-      );
-      persistEvaluationObservedTests(options.snapshot, evaluation);
-    } catch (error) {
-      writeJsonRecord(
-        join(options.snapshot.normalizedRoot, 'evaluation-errors'),
-        `evaluation-${evaluationMatch[1]}.json`,
-        {
-          evaluationId: Number(evaluationMatch[1]),
-          sourceUrl: options.item.url,
-          fetchedAt: options.fetchedAt,
-          error: error instanceof Error ? error.message : String(error),
-        },
-      );
-    }
-    return;
-  }
-
-  const solutionsMatch = options.item.url.match(/\/solutii\/user\/([^/?#]+)/);
-  const userHandle = solutionsMatch?.[1];
-  if (options.item.kind === 'user-solutions' && userHandle) {
-    const record = parseUserSolutionsListPage(options.html, options.item.url);
-    mergeJsonRecord<UserSolutionsRecord>(
-      join(options.snapshot.normalizedRoot, 'user-solutions'),
-      `user-${sanitizeSegment(userHandle).toLowerCase()}.json`,
-      (current) => {
-        const existingEntries = Array.isArray(current?.entries) ? current.entries : [];
-        const nextEntries = dedupeUserSolutionEntries([...existingEntries, ...record.entries]);
-        const existingPageUrls = Array.isArray(current?.pageUrls) ? current.pageUrls : [];
-        return {
-          ...(current ?? {}),
-          user: userHandle,
-          sourceUrl: current?.sourceUrl ?? options.item.url,
-          pageUrls: [...new Set([...existingPageUrls, options.item.url])].sort(),
-          httpStatus: options.httpStatus,
-          contentType: options.contentType,
-          totalMatches: maxDefinedNumber(current?.totalMatches, record.totalMatches),
-          throttled: Boolean(current?.throttled || record.throttled),
-          pageSize: record.pageSize ?? current?.pageSize,
-          currentOffset: record.currentOffset ?? current?.currentOffset,
-          nextPageUrls: record.nextPageUrls,
-          entries: nextEntries,
-        };
-      },
-    );
+  if (persistNonProblemRecord(options)) {
     return;
   }
 
@@ -560,6 +591,47 @@ export function persistNormalizedSnapshotHtml(options: PersistNormalizedSnapshot
       record,
     );
   }
+}
+
+function persistLinkedProblemRecord(
+  options: PersistNormalizedSnapshotHtmlOptions,
+  linkedProblem: { id: number; slug: string } | undefined,
+): boolean {
+  const { kind, url } = options.item;
+  if (kind === 'public-page' && /\/probleme\/(\d+)\/([^/?#]+)/.test(url)) {
+    persistProblemPageRecord(options);
+    return true;
+  }
+  if (!linkedProblem) {
+    return false;
+  }
+  const handlers: Partial<Record<CrawlQueueInput['kind'], () => void>> = {
+    'problem-statement': () => persistProblemStatementRecord(options, linkedProblem),
+    'problem-solution': () => persistProblemSolutionRecord(options, linkedProblem),
+    'problem-tests': () => persistProblemTestsRecordFragment(options, linkedProblem),
+  };
+  const handler = handlers[kind];
+  if (handler) {
+    handler();
+    return true;
+  }
+  return false;
+}
+
+function persistNonProblemRecord(options: PersistNormalizedSnapshotHtmlOptions): boolean {
+  const { kind, url } = options.item;
+  const evaluationMatch = url.match(/\/detalii-evaluare\/(\d+)/);
+  if (isEvaluationDetailKind(kind) && evaluationMatch?.[1]) {
+    persistEvaluationDetailRecord(options, Number(evaluationMatch[1]));
+    return true;
+  }
+
+  const userHandle = url.match(/\/solutii\/user\/([^/?#]+)/)?.[1];
+  if (kind === 'user-solutions' && userHandle) {
+    persistUserSolutionsRecord(options, userHandle);
+    return true;
+  }
+  return false;
 }
 
 function resolveLinkedProblem(item: CrawlQueueInput): { id: number; slug: string } | undefined {
@@ -855,6 +927,57 @@ function withEffectiveProblemTests(record: ProblemTestsRecord): ProblemTestsReco
   };
 }
 
+function resolveEffectiveKind(
+  provenanceKinds: ProblemTestCaseRecord['kind'][],
+): ProblemTestCaseRecord['kind'] {
+  if (provenanceKinds.includes('example')) {
+    return 'example';
+  }
+  if (provenanceKinds.includes('visible')) {
+    return 'visible';
+  }
+  return 'evaluationObserved';
+}
+
+function mergeProvenanceKinds(
+  current: ProblemTestCaseRecord | undefined,
+  testCase: ProblemTestCaseRecord,
+): ProblemTestCaseRecord['kind'][] {
+  const currentKinds = current?.provenanceKinds ?? [];
+  const testCaseKinds = testCase.provenanceKinds ?? [testCase.kind];
+  return [...new Set([...currentKinds, ...testCaseKinds])].sort(compareProvenanceKinds);
+}
+
+function mergeSourceTestIds(
+  current: ProblemTestCaseRecord | undefined,
+  testCase: ProblemTestCaseRecord,
+): string[] {
+  const currentIds = current?.sourceTestIds ?? (current ? [current.testId] : []);
+  const testCaseIds = testCase.sourceTestIds ?? [testCase.testId];
+  return [...new Set([...currentIds, ...testCaseIds])].sort();
+}
+
+function mergeEffectiveProblemTest(
+  current: ProblemTestCaseRecord | undefined,
+  testCase: ProblemTestCaseRecord,
+): ProblemTestCaseRecord {
+  const provenanceKinds = mergeProvenanceKinds(current, testCase);
+  const sourceTestIds = mergeSourceTestIds(current, testCase);
+
+  return {
+    ...(current ?? testCase),
+    input: normalizeTestIo(testCase.input),
+    output: normalizeTestIo(testCase.output),
+    kind: resolveEffectiveKind(provenanceKinds),
+    exampleLike:
+      Boolean(current?.exampleLike) ||
+      Boolean(testCase.exampleLike) ||
+      provenanceKinds.includes('example'),
+    provenanceKinds,
+    sourceTestIds,
+  };
+}
+
 function deriveEffectiveProblemTests(
   record: Pick<ProblemTestsRecord, 'examples' | 'visible' | 'evaluationObserved'>,
 ): ProblemTestCaseRecord[] {
@@ -866,36 +989,7 @@ function deriveEffectiveProblemTests(
       continue;
     }
 
-    const current = effectiveByKey.get(effectiveKey);
-    const provenanceKinds = [
-      ...new Set([
-        ...(current?.provenanceKinds ?? []),
-        ...(testCase.provenanceKinds ?? [testCase.kind]),
-      ]),
-    ].sort(compareProvenanceKinds);
-    const sourceTestIds = [
-      ...new Set([
-        ...(current?.sourceTestIds ?? (current ? [current.testId] : [])),
-        ...(testCase.sourceTestIds ?? [testCase.testId]),
-      ]),
-    ].sort();
-
-    effectiveByKey.set(effectiveKey, {
-      ...(current ?? testCase),
-      input: normalizeTestIo(testCase.input),
-      output: normalizeTestIo(testCase.output),
-      kind: provenanceKinds.includes('example')
-        ? 'example'
-        : provenanceKinds.includes('visible')
-          ? 'visible'
-          : 'evaluationObserved',
-      exampleLike:
-        Boolean(current?.exampleLike) ||
-        Boolean(testCase.exampleLike) ||
-        provenanceKinds.includes('example'),
-      provenanceKinds,
-      sourceTestIds,
-    });
+    effectiveByKey.set(effectiveKey, mergeEffectiveProblemTest(effectiveByKey.get(effectiveKey), testCase));
   }
 
   return [...effectiveByKey.values()].sort(compareProblemTestCaseRecords);
@@ -948,15 +1042,43 @@ function createEmptyProblemTestsRecord(
   };
 }
 
+type PreferredNormalizedHtml = { html: string; source: 'http' | 'browser' };
+
+function preferBrowser(
+  httpHtml: string,
+  browserHtml: string,
+  browserIsRicher: boolean,
+): PreferredNormalizedHtml {
+  return browserIsRicher
+    ? { html: browserHtml, source: 'browser' }
+    : { html: httpHtml, source: 'http' };
+}
+
+function preferEvaluationHtml(
+  sourceUrl: string,
+  httpHtml: string,
+  browserHtml: string,
+): PreferredNormalizedHtml {
+  const evaluationId = Number(sourceUrl.match(/\/detalii-evaluare\/(\d+)/)?.[1]);
+  if (!Number.isFinite(evaluationId)) {
+    return { html: httpHtml, source: 'http' };
+  }
+
+  const httpParsed = parseEvaluationPage(httpHtml, evaluationId);
+  const browserParsed = parseEvaluationPage(browserHtml, evaluationId);
+  return preferBrowser(
+    httpHtml,
+    browserHtml,
+    browserParsed.sourceAvailable && !httpParsed.sourceAvailable,
+  );
+}
+
 function resolvePreferredNormalizedHtml(
   kind: CrawlQueueInput['kind'],
   sourceUrl: string,
   httpHtml: string,
   browserHtml?: string,
-): {
-  html: string;
-  source: 'http' | 'browser';
-} {
+): PreferredNormalizedHtml {
   if (!browserHtml) {
     return { html: httpHtml, source: 'http' };
   }
@@ -967,30 +1089,17 @@ function resolvePreferredNormalizedHtml(
       const browserSolutions = Object.keys(
         parseOfficialSolutionFragment(browserHtml).solutions,
       ).length;
-      return browserSolutions > httpSolutions
-        ? { html: browserHtml, source: 'browser' }
-        : { html: httpHtml, source: 'http' };
+      return preferBrowser(httpHtml, browserHtml, browserSolutions > httpSolutions);
     }
 
     if (kind === 'problem-tests') {
       const httpTests = parseProblemEndpointFragment(httpHtml).visibleTests.length;
       const browserTests = parseProblemEndpointFragment(browserHtml).visibleTests.length;
-      return browserTests > httpTests
-        ? { html: browserHtml, source: 'browser' }
-        : { html: httpHtml, source: 'http' };
+      return preferBrowser(httpHtml, browserHtml, browserTests > httpTests);
     }
 
     if (kind === 'evaluation-detail' || kind === 'official-evaluation-detail') {
-      const evaluationId = Number(sourceUrl.match(/\/detalii-evaluare\/(\d+)/)?.[1]);
-      if (!Number.isFinite(evaluationId)) {
-        return { html: httpHtml, source: 'http' };
-      }
-
-      const httpParsed = parseEvaluationPage(httpHtml, evaluationId);
-      const browserParsed = parseEvaluationPage(browserHtml, evaluationId);
-      return browserParsed.sourceAvailable && !httpParsed.sourceAvailable
-        ? { html: browserHtml, source: 'browser' }
-        : { html: httpHtml, source: 'http' };
+      return preferEvaluationHtml(sourceUrl, httpHtml, browserHtml);
     }
   } catch {
     return { html: browserHtml, source: 'browser' };
@@ -1107,6 +1216,120 @@ function shouldSuppressGenericAssetDiscovery(kind: CrawlQueueInput['kind']): boo
   );
 }
 
+function discoverUserSolutionsFollowUps(
+  config: LoadedLocalConfig,
+  baseUrl: string,
+  html: string,
+): CrawlQueueInput[] {
+  const parsed = parseUserSolutionsListPage(html, baseUrl);
+  const baseMatch = new URL(baseUrl).pathname.match(/^\/solutii\/user\/([^/?#]+)/);
+  if (!matchesConfiguredUserHandle(config, baseMatch?.[1])) {
+    return [];
+  }
+
+  const queued = new Map<string, CrawlQueueInput>();
+  for (const entry of parsed.entries) {
+    if (!matchesConfiguredUserHandle(config, entry.user)) {
+      continue;
+    }
+
+    const problemPageUrl = new URL(
+      `/probleme/${entry.problemId}/${entry.problemSlug}`,
+      baseUrl,
+    ).toString();
+    queued.set(`page:${problemPageUrl}`, {
+      key: `page:${problemPageUrl}`,
+      url: problemPageUrl,
+      kind: 'public-page',
+    });
+    queued.set(`evaluation:${entry.evaluationId}`, {
+      key: `evaluation:${entry.evaluationId}`,
+      url: new URL(`/detalii-evaluare/${entry.evaluationId}`, baseUrl).toString(),
+      kind: 'evaluation-detail',
+    });
+  }
+
+  for (const nextPageUrl of parsed.nextPageUrls) {
+    queued.set(`page:${nextPageUrl}`, {
+      key: `page:${nextPageUrl}`,
+      url: nextPageUrl,
+      kind: 'user-solutions',
+    });
+  }
+
+  return [...queued.values()];
+}
+
+function buildAuthorScopedFollowUp(
+  parsedAuthorHandle: string,
+  communitySourceListMatch: RegExpMatchArray,
+  baseUrl: string,
+): CrawlQueueInput {
+  const authorScopedUrl = new URL(
+    `/solutii/user/${parsedAuthorHandle}/problema/${communitySourceListMatch[1]}/${communitySourceListMatch[2]}`,
+    baseUrl,
+  ).toString();
+  const authorScopedKind = isOfficialSourceAuthorHandle(parsedAuthorHandle)
+    ? 'official-source-list'
+    : 'user-solutions';
+  const authorScopedKeyPrefix =
+    authorScopedKind === 'official-source-list' ? 'official-source-list' : 'page';
+  return {
+    key: `${authorScopedKeyPrefix}:${authorScopedUrl}`,
+    url: authorScopedUrl,
+    kind: authorScopedKind,
+  };
+}
+
+function discoverOfficialSourceListFollowUps(
+  snapshot: SnapshotLayout,
+  baseUrl: string,
+  html: string,
+): CrawlQueueInput[] {
+  const parsed = parseProblemSourceListPage(html, baseUrl);
+  const communitySourceListMatch = new URL(baseUrl).pathname.match(
+    /^\/solutii\/problema\/(\d+)\/([^/?#]+)/,
+  );
+  if (communitySourceListMatch?.[1] && communitySourceListMatch[2]) {
+    if (!parsed.authorHandle) {
+      return [];
+    }
+    return [buildAuthorScopedFollowUp(parsed.authorHandle, communitySourceListMatch, baseUrl)];
+  }
+
+  persistOfficialSourceHarvest(
+    snapshot,
+    baseUrl,
+    parsed.authorHandle,
+    parsed.entries
+      .filter((entry) => typeof entry.score !== 'number' || entry.score >= 100)
+      .map((entry) => entry.evaluationId),
+  );
+
+  const queued = new Map<string, CrawlQueueInput>();
+  for (const entry of parsed.entries) {
+    if (typeof entry.score === 'number' && entry.score < 100) {
+      continue;
+    }
+
+    queued.set(`official-evaluation:${entry.evaluationId}`, {
+      key: `official-evaluation:${entry.evaluationId}`,
+      url: new URL(`/detalii-evaluare/${entry.evaluationId}`, baseUrl).toString(),
+      kind: 'official-evaluation-detail',
+    });
+  }
+
+  for (const nextPageUrl of parsed.nextPageUrls) {
+    queued.set(`official-source-list:${nextPageUrl}`, {
+      key: `official-source-list:${nextPageUrl}`,
+      url: nextPageUrl,
+      kind: 'official-source-list',
+    });
+  }
+
+  return [...queued.values()];
+}
+
 function discoverNormalizedFollowUps(
   config: LoadedLocalConfig,
   snapshot: SnapshotLayout,
@@ -1114,111 +1337,12 @@ function discoverNormalizedFollowUps(
   kind: CrawlQueueInput['kind'],
   html: string,
 ): CrawlQueueInput[] {
-  if (kind !== 'user-solutions' && kind !== 'official-source-list') {
-    return [];
-  }
-
-  const queued = new Map<string, CrawlQueueInput>();
-
   if (kind === 'user-solutions') {
-    const parsed = parseUserSolutionsListPage(html, baseUrl);
-    const baseMatch = new URL(baseUrl).pathname.match(/^\/solutii\/user\/([^/?#]+)/);
-    if (!matchesConfiguredUserHandle(config, baseMatch?.[1])) {
-      return [];
-    }
-
-    for (const entry of parsed.entries) {
-      if (!matchesConfiguredUserHandle(config, entry.user)) {
-        continue;
-      }
-
-      const problemPageUrl = new URL(
-        `/probleme/${entry.problemId}/${entry.problemSlug}`,
-        baseUrl,
-      ).toString();
-      queued.set(`page:${problemPageUrl}`, {
-        key: `page:${problemPageUrl}`,
-        url: problemPageUrl,
-        kind: 'public-page',
-      });
-
-      queued.set(`evaluation:${entry.evaluationId}`, {
-        key: `evaluation:${entry.evaluationId}`,
-        url: new URL(`/detalii-evaluare/${entry.evaluationId}`, baseUrl).toString(),
-        kind: 'evaluation-detail',
-      });
-    }
-
-    for (const nextPageUrl of parsed.nextPageUrls) {
-      queued.set(`page:${nextPageUrl}`, {
-        key: `page:${nextPageUrl}`,
-        url: nextPageUrl,
-        kind: 'user-solutions',
-      });
-    }
-
-    return [...queued.values()];
+    return discoverUserSolutionsFollowUps(config, baseUrl, html);
   }
-
   if (kind === 'official-source-list') {
-    const parsed = parseProblemSourceListPage(html, baseUrl);
-    const communitySourceListMatch = new URL(baseUrl).pathname.match(
-      /^\/solutii\/problema\/(\d+)\/([^/?#]+)/,
-    );
-    if (communitySourceListMatch?.[1] && communitySourceListMatch[2]) {
-      if (!parsed.authorHandle) {
-        return [];
-      }
-
-      const authorScopedUrl = new URL(
-        `/solutii/user/${parsed.authorHandle}/problema/${communitySourceListMatch[1]}/${communitySourceListMatch[2]}`,
-        baseUrl,
-      ).toString();
-      const authorScopedKind = isOfficialSourceAuthorHandle(parsed.authorHandle)
-        ? 'official-source-list'
-        : 'user-solutions';
-      const authorScopedKeyPrefix =
-        authorScopedKind === 'official-source-list' ? 'official-source-list' : 'page';
-      queued.set(`${authorScopedKeyPrefix}:${authorScopedUrl}`, {
-        key: `${authorScopedKeyPrefix}:${authorScopedUrl}`,
-        url: authorScopedUrl,
-        kind: authorScopedKind,
-      });
-      return [...queued.values()];
-    }
-
-    persistOfficialSourceHarvest(
-      snapshot,
-      baseUrl,
-      parsed.authorHandle,
-      parsed.entries
-        .filter((entry) => typeof entry.score !== 'number' || entry.score >= 100)
-        .map((entry) => entry.evaluationId),
-    );
-
-    for (const entry of parsed.entries) {
-      if (typeof entry.score === 'number' && entry.score < 100) {
-        continue;
-      }
-
-      queued.set(`official-evaluation:${entry.evaluationId}`, {
-        key: `official-evaluation:${entry.evaluationId}`,
-        url: new URL(`/detalii-evaluare/${entry.evaluationId}`, baseUrl).toString(),
-        kind: 'official-evaluation-detail',
-      });
-    }
-
-    for (const nextPageUrl of parsed.nextPageUrls) {
-      queued.set(`official-source-list:${nextPageUrl}`, {
-        key: `official-source-list:${nextPageUrl}`,
-        url: nextPageUrl,
-        kind: 'official-source-list',
-      });
-    }
-
-    return [...queued.values()];
+    return discoverOfficialSourceListFollowUps(snapshot, baseUrl, html);
   }
-
   return [];
 }
 
@@ -1319,43 +1443,39 @@ function canonicalizeQueryParameters(url: URL): void {
   }
 }
 
-function isMeaningfulNavigableUrl(config: LoadedLocalConfig, url: URL): boolean {
-  const pathname = normalizePathname(url.pathname);
-  if (isProblemSourceListUrl(url.toString())) {
-    return false;
-  }
-  if (
-    pathname.startsWith('/articole') ||
-    pathname.startsWith('/ajutor') ||
-    pathname.startsWith('/clasa-mea') ||
-    pathname.startsWith('/editare-cont') ||
-    pathname === '/logout.php' ||
-    pathname.startsWith('/resurse') ||
-    pathname.startsWith('/solutii/clasa') ||
-    pathname.startsWith('/teme/rezolvare') ||
-    pathname === '/php/gravatar.php'
-  ) {
-    return false;
-  }
+const BLOCKED_NAVIGABLE_PREFIXES = [
+  '/articole',
+  '/ajutor',
+  '/clasa-mea',
+  '/editare-cont',
+  '/resurse',
+  '/solutii/clasa',
+  '/teme/rezolvare',
+] as const;
+const BLOCKED_NAVIGABLE_PATHS = new Set(['/logout.php', '/php/gravatar.php']);
 
+function isBlockedNavigablePathname(pathname: string): boolean {
+  if (BLOCKED_NAVIGABLE_PATHS.has(pathname)) {
+    return true;
+  }
   if (/^\/detalii-evaluare\/\d+$/.test(pathname)) {
+    return true;
+  }
+  return BLOCKED_NAVIGABLE_PREFIXES.some((prefix) => pathname.startsWith(prefix));
+}
+
+function isNavigableProfilePath(config: LoadedLocalConfig, pathname: string): boolean | undefined {
+  const profileMatch = pathname.match(/^\/profil\/([^/]+)(?:\/([^/]+))?$/);
+  if (!profileMatch?.[1]) {
+    return undefined;
+  }
+  if (!matchesConfiguredUserHandle(config, profileMatch[1])) {
     return false;
   }
+  return !profileMatch[2] || profileMatch[2] === 'probleme' || profileMatch[2] === 'jurnal';
+}
 
-  const profileMatch = pathname.match(/^\/profil\/([^/]+)(?:\/([^/]+))?$/);
-  if (profileMatch?.[1]) {
-    if (!matchesConfiguredUserHandle(config, profileMatch[1])) {
-      return false;
-    }
-
-    return !profileMatch[2] || profileMatch[2] === 'probleme' || profileMatch[2] === 'jurnal';
-  }
-
-  const solutionsMatch = pathname.match(/^\/solutii\/user\/([^/]+)$/);
-  if (solutionsMatch?.[1]) {
-    return matchesConfiguredUserHandle(config, solutionsMatch[1]);
-  }
-
+function isNavigableQuery(url: URL): boolean {
   const pagina = url.searchParams.get('pagina')?.toLowerCase();
   if (url.searchParams.size > 0 && !pagina) {
     return false;
@@ -1368,14 +1488,28 @@ function isMeaningfulNavigableUrl(config: LoadedLocalConfig, url: URL): boolean 
   }
   if (pagina === 'probleme-lista') {
     const allowedParams = new Set(['pagina', 'clasa', 'tag']);
-    for (const key of url.searchParams.keys()) {
-      if (!allowedParams.has(key.toLowerCase())) {
-        return false;
-      }
-    }
+    return [...url.searchParams.keys()].every((key) => allowedParams.has(key.toLowerCase()));
+  }
+  return true;
+}
+
+function isMeaningfulNavigableUrl(config: LoadedLocalConfig, url: URL): boolean {
+  const pathname = normalizePathname(url.pathname);
+  if (isProblemSourceListUrl(url.toString()) || isBlockedNavigablePathname(pathname)) {
+    return false;
   }
 
-  return true;
+  const profileResult = isNavigableProfilePath(config, pathname);
+  if (profileResult !== undefined) {
+    return profileResult;
+  }
+
+  const solutionsMatch = pathname.match(/^\/solutii\/user\/([^/]+)$/);
+  if (solutionsMatch?.[1]) {
+    return matchesConfiguredUserHandle(config, solutionsMatch[1]);
+  }
+
+  return isNavigableQuery(url);
 }
 
 function matchesConfiguredUserHandle(config: LoadedLocalConfig, candidate?: string): boolean {
@@ -1559,28 +1693,37 @@ function mergeLanguageSolutions(
   };
 }
 
+interface SourceLanguageRule {
+  canonical: string;
+  substrings?: readonly string[];
+  exact?: readonly string[];
+}
+
+const SOURCE_LANGUAGE_RULES: readonly SourceLanguageRule[] = [
+  { canonical: 'cpp', substrings: ['c++'], exact: ['cpp'] },
+  { canonical: 'c', exact: ['c'] },
+  { canonical: 'py', substrings: ['python'], exact: ['py'] },
+  { canonical: 'pas', substrings: ['pascal'], exact: ['pas'] },
+  { canonical: 'java', substrings: ['java'] },
+  { canonical: 'csharp', substrings: ['c#', 'csharp'] },
+];
+
+function matchesSourceLanguageRule(value: string, rule: SourceLanguageRule): boolean {
+  if (rule.exact?.includes(value)) {
+    return true;
+  }
+  return Boolean(rule.substrings?.some((needle) => value.includes(needle)));
+}
+
 function normalizeSourceLanguage(language: string): string {
   const normalized = language.trim().toLowerCase();
   if (!normalized || normalized === 'unknown') {
     return 'unknown';
   }
-  if (normalized.includes('c++') || normalized === 'cpp') {
-    return 'cpp';
-  }
-  if (normalized === 'c') {
-    return 'c';
-  }
-  if (normalized.includes('python') || normalized === 'py') {
-    return 'py';
-  }
-  if (normalized.includes('pascal') || normalized === 'pas') {
-    return 'pas';
-  }
-  if (normalized.includes('java')) {
-    return 'java';
-  }
-  if (normalized.includes('c#') || normalized.includes('csharp')) {
-    return 'csharp';
+
+  const match = SOURCE_LANGUAGE_RULES.find((rule) => matchesSourceLanguageRule(normalized, rule));
+  if (match) {
+    return match.canonical;
   }
 
   return sanitizeSegment(normalized).toLowerCase() || 'unknown';
