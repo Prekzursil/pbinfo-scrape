@@ -133,6 +133,69 @@ describe('desktop controller - simple job kinds', () => {
   });
 });
 
+describe('desktop controller - mirror preview failure branches', () => {
+  test('startMirrorPreview captures non-Error throws with String fallback', async () => {
+    const workspaceRoot = createWorkspaceRoot();
+    const notifications: DesktopNotification[] = [];
+    const controller = createDesktopController(workspaceRoot, {
+      startMirrorServer: async () => {
+        // eslint-disable-next-line @typescript-eslint/only-throw-error -- branch coverage
+        throw 'mirror-string-fail';
+      },
+      notificationService: {
+        notify: async (message) => {
+          notifications.push(message);
+        },
+      },
+    });
+    await expect(controller.startMirrorPreview('snap-x', { port: 0 })).rejects.toBe(
+      'mirror-string-fail',
+    );
+    expect(notifications).toEqual([
+      expect.objectContaining({
+        level: 'error',
+        title: 'Mirror preview failed',
+      }),
+    ]);
+  });
+});
+
+describe('desktop controller - resolveCrawlDetail fallbacks', () => {
+  test('startJob without detail falls back to scope=all', async () => {
+    const workspaceRoot = createWorkspaceRoot();
+    const runCrawlWorkflow = vi.fn(async () => ({
+      processed: 0,
+      queuePath: join(workspaceRoot, '.local', 'q.sqlite'),
+      snapshotId: 'snap-fallback',
+      completed: true,
+    }));
+    const controller = createDesktopController(workspaceRoot, {
+      runCrawlWorkflow,
+      getCrawlStatusWorkflow: () => ({
+        snapshotId: 'snap-fallback',
+        queuePath: join(workspaceRoot, '.local', 'q.sqlite'),
+        pending: 0,
+        completed: 0,
+        inProgress: 0,
+        publishEligible: true,
+        recentFailures: [],
+      }),
+    });
+    await controller.startJob({
+      kind: 'crawl',
+      snapshotId: 'snap-fallback',
+      now: new Date('2026-03-10T12:01:00.000Z'),
+    });
+    expect(runCrawlWorkflow).toHaveBeenCalledWith(
+      workspaceRoot,
+      'all',
+      expect.objectContaining({
+        snapshotId: 'snap-fallback',
+      }),
+    );
+  });
+});
+
 describe('desktop controller - resume guard rails', () => {
   test('resumeJob refuses non-crawl jobs', async () => {
     const workspaceRoot = createWorkspaceRoot();
@@ -151,6 +214,91 @@ describe('desktop controller - resume guard rails', () => {
 });
 
 describe('desktop controller - auth failure paths', () => {
+  test('loginProfile uses generic error when auth result omits failureReason', async () => {
+    const workspaceRoot = createWorkspaceRoot();
+    const notifications: DesktopNotification[] = [];
+    const controller = createDesktopController(workspaceRoot, {
+      createAuthClient: () =>
+        ({
+          loginWithCredentials: async () => ({
+            success: false,
+          }),
+        }) as never,
+      notificationService: {
+        notify: async (message) => {
+          notifications.push(message);
+        },
+      },
+    });
+
+    await expect(
+      controller.loginProfile({
+        profileId: 'alpha',
+        label: 'Primary',
+        username: 'a',
+        password: 'b',
+      }),
+    ).rejects.toThrow(/PBInfo credential login did not produce an authenticated session/);
+  });
+
+  test('loginProfile failAuthJob branch records non-Error throwables as String message', async () => {
+    const workspaceRoot = createWorkspaceRoot();
+    const notifications: DesktopNotification[] = [];
+    const controller = createDesktopController(workspaceRoot, {
+      createAuthClient: () =>
+        ({
+          loginWithCredentials: async () => {
+            // eslint-disable-next-line @typescript-eslint/only-throw-error -- intentionally throw a non-Error for branch coverage
+            throw 'string-error';
+          },
+        }) as never,
+      notificationService: {
+        notify: async (message) => {
+          notifications.push(message);
+        },
+      },
+    });
+
+    await expect(
+      controller.loginProfile({
+        profileId: 'alpha',
+        label: 'Primary',
+        username: 'a',
+        password: 'b',
+      }),
+    ).rejects.toBe('string-error');
+    expect(notifications).toEqual([
+      expect.objectContaining({
+        title: 'PBInfo login failed',
+        message: expect.stringContaining('string-error'),
+      }),
+    ]);
+  });
+
+  test('importBrowserProfile uses Default when profileName omitted', async () => {
+    const workspaceRoot = createWorkspaceRoot();
+    const controller = createDesktopController(workspaceRoot, {
+      importBrowserCookies: async () => [
+        {
+          name: 'PHPSESSID',
+          value: 'browser-cookie',
+          domain: 'www.pbinfo.ro',
+          path: '/',
+          secure: true,
+          httpOnly: true,
+          sameSite: 'lax',
+        },
+      ],
+    });
+    const result = await controller.importBrowserProfile({
+      profileId: 'edge2',
+      label: 'Edge',
+      browser: 'edge',
+      // profileName omitted on purpose
+    });
+    expect(result.job.status).toBe('completed');
+  });
+
   test('loginProfile fails the job and notifies when auth returns failure', async () => {
     const workspaceRoot = createWorkspaceRoot();
     const notifications: DesktopNotification[] = [];
@@ -313,6 +461,35 @@ describe('desktop controller - coverage rebuild path', () => {
       },
     });
     await expect(controller.getCoverageSummary('snap')).rejects.toThrow(/unrelated read error/);
+  });
+
+  test('getCoverageSummary rebuild uses __current__ key when snapshotId is omitted', async () => {
+    const workspaceRoot = createWorkspaceRoot();
+    let attempts = 0;
+    const runProblemCoverageWorkflow = vi.fn(async () => undefined as never);
+    const controller = createDesktopController(workspaceRoot, {
+      getCoverageExplorerSummary: () => {
+        attempts += 1;
+        if (attempts === 1) {
+          throw new Error('Problem coverage has not been generated yet.');
+        }
+        return {
+          snapshotId: '__current__',
+          generatedAt: '2026-03-10T12:00:00.000Z',
+          totals: {
+            problems: 0,
+            covered: 0,
+            partial: 0,
+            uncovered: 0,
+          },
+          datasets: [],
+        } as never;
+      },
+      runProblemCoverageWorkflow,
+    });
+
+    await controller.getCoverageSummary(undefined);
+    expect(runProblemCoverageWorkflow).toHaveBeenCalledWith(workspaceRoot, undefined);
   });
 
   test('listCoverageRecords concurrently triggers only one rebuild', async () => {
