@@ -254,13 +254,24 @@ function makeBridge(options: HarnessOptions = {}): DesktopBridge {
       return {
         snapshotId: 'snap-1',
         coverageFilePath: 'C:/ws/cov/p-100.json',
-        record: { ...coverageRecord, officialSourceCount: 0, userSourceCount: 0,
-          canonicalUrl: 'https://pbinfo.ro/p/100', sourceListUrl: 'https://pbinfo.ro/s/100',
-          statementArchived: true, solutionFragmentArchived: true,
-          hasAnyArchivedSource: false, evaluationIds: [] },
-        rawRecordLinks: { coverageFilePath: 'C:/ws/cov/p.json',
-          problemFilePath: 'C:/ws/p.json', evaluationFilePaths: [],
-          officialSourceFilePaths: [], userSourceFilePaths: [] },
+        record: {
+          ...coverageRecord,
+          officialSourceCount: 0,
+          userSourceCount: 0,
+          canonicalUrl: 'https://pbinfo.ro/p/100',
+          sourceListUrl: 'https://pbinfo.ro/s/100',
+          statementArchived: true,
+          solutionFragmentArchived: true,
+          hasAnyArchivedSource: false,
+          evaluationIds: [],
+        },
+        rawRecordLinks: {
+          coverageFilePath: 'C:/ws/cov/p.json',
+          problemFilePath: 'C:/ws/p.json',
+          evaluationFilePaths: [],
+          officialSourceFilePaths: [],
+          userSourceFilePaths: [],
+        },
       };
     }),
     getCrawlStatus: vi.fn(async () => ({
@@ -378,42 +389,34 @@ describe('App effects and error handling', () => {
     await waitFor(() => expect(bridge.selectWorkspace).toHaveBeenCalledWith('C:/ws'));
   });
 
-  test(
-    'pausing a crawl propagates pauseJob errors',
-    { timeout: 15_000 },
-    async () => {
-      const pausedJob = {
-        jobId: 'crawl-p',
-        kind: 'crawl' as const,
-        status: 'paused' as const,
-        snapshotId: 'snap-1',
-        logPath: '.local/x.jsonl',
-        resumable: true,
-        createdAt: '2026-03-10T00:00:00.000Z',
-        updatedAt: '2026-03-10T00:01:00.000Z',
-      } as GuiJobRecord;
-      const bridge = makeBridge({ jobs: [pausedJob], pauseJobThrows: true });
-      render(<App desktop={bridge} />);
-      const pauseButton = await screen.findByRole('button', {
-        name: /Pause after current chunk completes/i,
-      });
-      fireEvent.click(pauseButton);
-      expect(await screen.findByText(/pauseJob boom/)).toBeInTheDocument();
-    },
-  );
+  test('pausing a crawl propagates pauseJob errors', { timeout: 15_000 }, async () => {
+    const pausedJob = {
+      jobId: 'crawl-p',
+      kind: 'crawl' as const,
+      status: 'paused' as const,
+      snapshotId: 'snap-1',
+      logPath: '.local/x.jsonl',
+      resumable: true,
+      createdAt: '2026-03-10T00:00:00.000Z',
+      updatedAt: '2026-03-10T00:01:00.000Z',
+    } as GuiJobRecord;
+    const bridge = makeBridge({ jobs: [pausedJob], pauseJobThrows: true });
+    render(<App desktop={bridge} />);
+    const pauseButton = await screen.findByRole('button', {
+      name: /Pause after current chunk completes/i,
+    });
+    fireEvent.click(pauseButton);
+    expect(await screen.findByText(/pauseJob boom/)).toBeInTheDocument();
+  });
 
-  test(
-    'toMessage handles non-Error rejections by stringifying',
-    { timeout: 15_000 },
-    async () => {
-      const bridge = makeBridge();
-      (bridge.getDesktopPreferences as ReturnType<typeof vi.fn>).mockImplementation(async () => {
-        throw 'string-error-value';
-      });
-      render(<App desktop={bridge} />);
-      expect(await screen.findByText(/string-error-value/)).toBeInTheDocument();
-    },
-  );
+  test('toMessage handles non-Error rejections by stringifying', { timeout: 15_000 }, async () => {
+    const bridge = makeBridge();
+    (bridge.getDesktopPreferences as ReturnType<typeof vi.fn>).mockImplementation(async () => {
+      throw 'string-error-value';
+    });
+    render(<App desktop={bridge} />);
+    expect(await screen.findByText(/string-error-value/)).toBeInTheDocument();
+  });
 
   test(
     'renders without a bridge - shows bootstrap and avoids crash',

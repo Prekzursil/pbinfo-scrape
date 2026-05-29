@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
@@ -20,13 +20,20 @@ afterEach(() => {
   }
 });
 
-function setupBasicWorkspace(prefix: string, snapshotId: string, opts: {
-  catalogOverrides?: Partial<{ canonicalSnapshotId: string; status: 'completed' | 'pending' }>;
-  withArtifactExport?: boolean;
-  artifactRootMissing?: boolean;
-  packageJson?: Record<string, unknown>;
-  readmeBody?: string;
-} = {}) {
+function setupBasicWorkspace(
+  prefix: string,
+  snapshotId: string,
+  opts: {
+    catalogOverrides?: Partial<{
+      canonicalSnapshotId: string;
+      status: 'in_progress' | 'completed';
+    }>;
+    withArtifactExport?: boolean;
+    artifactRootMissing?: boolean;
+    packageJson?: Record<string, unknown>;
+    readmeBody?: string;
+  } = {},
+) {
   const workspaceRoot = mkdtempSync(join(tmpdir(), prefix));
   tempDirs.push(workspaceRoot);
 
@@ -109,7 +116,7 @@ describe('publishWorkspace argument validation', () => {
     const { workspaceRoot, config, snapshot } = setupBasicWorkspace(
       'pbinfo-publish-notcomplete-',
       'pending-snap',
-      { catalogOverrides: { status: 'pending' } },
+      { catalogOverrides: { status: 'in_progress' } },
     );
     expect(() =>
       publishWorkspace({
@@ -257,8 +264,7 @@ describe('publishWorkspace commit and remote behavior', () => {
     });
     expect(
       calls.some(
-        (call) =>
-          call.command === 'gh' && call.args[0] === 'release' && call.args[1] === 'upload',
+        (call) => call.command === 'gh' && call.args[0] === 'release' && call.args[1] === 'upload',
       ),
     ).toBe(true);
   });
@@ -291,11 +297,7 @@ describe('publishWorkspace commit and remote behavior', () => {
       'no-branded-snap',
     );
     mkdirSync(join(workspaceRoot, 'release-desktop'), { recursive: true });
-    writeFileSync(
-      join(workspaceRoot, 'release-desktop', 'unrelated.zip'),
-      'binary',
-      'utf8',
-    );
+    writeFileSync(join(workspaceRoot, 'release-desktop', 'unrelated.zip'), 'binary', 'utf8');
     expect(() =>
       publishWorkspace({
         workspaceRoot,
@@ -381,19 +383,14 @@ describe('publishWorkspace commit message preservation', () => {
       workspaceRoot,
       config,
       snapshotId: snapshot.snapshotId,
-      commitMessage:
-        'feat: keep my trailer\n\nCo-authored-by: Codex <noreply@openai.com>',
+      commitMessage: 'feat: keep my trailer\n\nCo-authored-by: Codex <noreply@openai.com>',
       runCommand: (_cwd, command, args) => {
         calls.push({ command, args });
         return '';
       },
     });
-    const commit = calls.find(
-      (call) => call.command === 'git' && call.args[0] === 'commit',
-    );
+    const commit = calls.find((call) => call.command === 'git' && call.args[0] === 'commit');
     expect(commit?.args.join(' ')).toMatch(/keep my trailer/);
-    expect(
-      commit?.args.filter((arg) => arg.includes('Co-authored-by: Codex')).length,
-    ).toBe(1);
+    expect(commit?.args.filter((arg) => arg.includes('Co-authored-by: Codex')).length).toBe(1);
   });
 });

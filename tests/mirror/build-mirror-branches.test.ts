@@ -63,11 +63,7 @@ describe('buildMirrorArtifacts edge branches', () => {
       '<html><body><img src="https://www.pbinfo.ro/static/photo.png" /></body></html>',
       'utf8',
     );
-    writeFileSync(
-      join(snapshot.rawAssetsRoot, 'asset-photo.png'),
-      'png',
-      'utf8',
-    );
+    writeFileSync(join(snapshot.rawAssetsRoot, 'asset-photo.png'), 'png', 'utf8');
     const pagesDir = join(snapshot.normalizedRoot, 'pages');
     mkdirSync(pagesDir, { recursive: true });
     // Two records: one references raw-pages (page) and one raw-assets (asset).
@@ -100,10 +96,9 @@ describe('buildMirrorArtifacts edge branches', () => {
       string
     >;
     expect(pageManifest['https://www.pbinfo.ro/page']).toBe('page.html');
-    const assetManifest = JSON.parse(readFileSync(snapshot.rawAssetsManifestPath, 'utf8')) as Record<
-      string,
-      string
-    >;
+    const assetManifest = JSON.parse(
+      readFileSync(snapshot.rawAssetsManifestPath, 'utf8'),
+    ) as Record<string, string>;
     expect(assetManifest['https://www.pbinfo.ro/static/photo.png']).toBe('asset-photo.png');
   });
 
@@ -128,21 +123,9 @@ describe('buildMirrorArtifacts edge branches', () => {
       </body></html>`,
       'utf8',
     );
-    writeFileSync(
-      join(snapshot.rawAssetsRoot, 'site-css.css'),
-      'body{}',
-      'utf8',
-    );
-    writeFileSync(
-      join(snapshot.rawAssetsRoot, 'site-js.js'),
-      'console.log()',
-      'utf8',
-    );
-    writeFileSync(
-      join(snapshot.rawAssetsRoot, 'photo.png'),
-      'png',
-      'utf8',
-    );
+    writeFileSync(join(snapshot.rawAssetsRoot, 'site-css.css'), 'body{}', 'utf8');
+    writeFileSync(join(snapshot.rawAssetsRoot, 'site-js.js'), 'console.log()', 'utf8');
+    writeFileSync(join(snapshot.rawAssetsRoot, 'photo.png'), 'png', 'utf8');
     writeFileSync(
       snapshot.rawPagesManifestPath,
       JSON.stringify({ 'https://www.pbinfo.ro/page': 'page.html' }),
@@ -173,11 +156,7 @@ describe('buildMirrorArtifacts edge branches', () => {
 
   test('renders the coverage index HTML even when no coverage records exist', async () => {
     const { workspaceRoot, snapshot } = bootstrapMirrorWorkspace('pbinfo-mirror-empty-cov-');
-    writeFileSync(
-      join(snapshot.rawPagesRoot, 'page.html'),
-      '<html><body></body></html>',
-      'utf8',
-    );
+    writeFileSync(join(snapshot.rawPagesRoot, 'page.html'), '<html><body></body></html>', 'utf8');
     writeFileSync(
       snapshot.rawPagesManifestPath,
       JSON.stringify({ 'https://www.pbinfo.ro/': 'page.html' }),

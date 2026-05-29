@@ -19,9 +19,10 @@ describe('extractUserSessionJson', () => {
   });
 
   test('parses a well-formed embedded user_autentificat record', () => {
-    expect(
-      extractUserSessionJson('user_autentificat = {"id":7,"username":"alice"};'),
-    ).toEqual({ id: 7, username: 'alice' });
+    expect(extractUserSessionJson('user_autentificat = {"id":7,"username":"alice"};')).toEqual({
+      id: 7,
+      username: 'alice',
+    });
   });
 });
 
@@ -59,9 +60,7 @@ describe('extractLoggedInState', () => {
 
 describe('extractResolvedHandle', () => {
   test('resolves a handle directly from the session blob', () => {
-    expect(
-      extractResolvedHandle('user_autentificat = {"id":7,"username":"alice"};'),
-    ).toBe('alice');
+    expect(extractResolvedHandle('user_autentificat = {"id":7,"username":"alice"};')).toBe('alice');
   });
 
   test('returns undefined when the page is guest-mode without any logout signal', () => {

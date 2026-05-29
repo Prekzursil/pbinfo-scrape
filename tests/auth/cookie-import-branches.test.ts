@@ -53,9 +53,9 @@ describe('normalizeImportedCookies sameSite branches', () => {
 describe('unwrapChromiumMasterKey branches', () => {
   test('throws when os_crypt.encrypted_key is missing', async () => {
     const localState = JSON.stringify({ os_crypt: {} });
-    await expect(
-      unwrapChromiumMasterKey(localState, async () => Buffer.alloc(32)),
-    ).rejects.toThrow(/os_crypt\.encrypted_key/);
+    await expect(unwrapChromiumMasterKey(localState, async () => Buffer.alloc(32))).rejects.toThrow(
+      /os_crypt\.encrypted_key/,
+    );
   });
 
   test('uses the encrypted key as-is when it has no DPAPI prefix', async () => {
@@ -70,9 +70,7 @@ describe('unwrapChromiumMasterKey branches', () => {
 
 describe('resolveChromiumProfile branches', () => {
   test('throws when LOCALAPPDATA is missing and no userDataDir is given', () => {
-    expect(() =>
-      resolveChromiumProfile({ browser: 'chrome' }, {}),
-    ).toThrow(/LOCALAPPDATA/);
+    expect(() => resolveChromiumProfile({ browser: 'chrome' }, {})).toThrow(/LOCALAPPDATA/);
   });
 
   test('uses an explicit userDataDir when supplied', () => {
@@ -116,7 +114,9 @@ describe('importBrowserCookies sad paths', () => {
     const userDataDir = mkdtempSync(join(tmpdir(), 'pbinfo-cookies-plaintext-'));
     writeFileSync(
       join(userDataDir, 'Local State'),
-      JSON.stringify({ os_crypt: { encrypted_key: Buffer.from('DPAPIkeyMaterial').toString('base64') } }),
+      JSON.stringify({
+        os_crypt: { encrypted_key: Buffer.from('DPAPIkeyMaterial').toString('base64') },
+      }),
       'utf8',
     );
     const profileDir = join(userDataDir, 'Default', 'Network');
@@ -137,9 +137,7 @@ describe('importBrowserCookies sad paths', () => {
         samesite INTEGER
       )`,
     );
-    db.prepare(
-      'INSERT INTO cookies VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
-    ).run(
+    db.prepare('INSERT INTO cookies VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)').run(
       '.pbinfo.ro',
       'PHPSESSID',
       'plain-value',
