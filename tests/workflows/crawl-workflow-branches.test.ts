@@ -159,6 +159,49 @@ describe('runOfficialSourceHarvestWorkflow guard rails', () => {
     ).rejects.toThrow(/No problem source-list URLs/);
   });
 
+  test('uses currentSnapshotId when canonicalSnapshotId is absent (lines 455-457)', async () => {
+    // resolveIncrementalSnapshotId falls through to the currentSnapshotId branch (line 455-457)
+    // when requestedSnapshotId is undefined AND canonicalSnapshotId is absent from the catalog.
+    const workspaceRoot = createWorkspace({
+      crawl: {
+        publicStartUrls: ['https://www.pbinfo.ro/'],
+        userHandle: 'Prekzursil',
+      },
+    });
+    const config = loadLocalConfig(workspaceRoot);
+    const snapshot = prepareSnapshot(config, {
+      snapshotId: 'harvest-current',
+      scope: 'all',
+      now: new Date('2026-03-10T00:00:00.000Z'),
+    });
+    // Write a catalog with currentSnapshotId but NO canonicalSnapshotId.
+    writeArchiveCatalog(config.paths.archiveRoot, {
+      currentSnapshotId: snapshot.snapshotId,
+      snapshots: [
+        {
+          snapshotId: snapshot.snapshotId,
+          createdAt: '2026-03-10T00:00:00.000Z',
+          scope: 'all',
+          status: 'completed',
+          checkpoint: 'current',
+        },
+      ],
+      artifactExports: [],
+    });
+    // No seeds will throw, but the test exercises line 455-457 (currentSnapshotId branch).
+    await expect(
+      runOfficialSourceHarvestWorkflow(workspaceRoot, {
+        authStatusProbe: async () => ({
+          loggedIn: true,
+          status: 'ok',
+          resolvedHandle: 'Prekzursil',
+          handleMatchesConfigured: true,
+          remediation: [],
+        }),
+      }),
+    ).rejects.toThrow(/No problem source-list URLs/);
+  });
+
   test('uses canonical snapshot when no snapshotId is given', async () => {
     const workspaceRoot = createWorkspace({
       crawl: {

@@ -316,6 +316,21 @@ describe('App snapshot job actions', () => {
   });
 });
 
+describe('App import browser profile action (lines 538-546 of app.tsx)', () => {
+  test('submitting the browser import form triggers bridge.importBrowserProfile', async () => {
+    const bridge = makeBridge();
+    render(<App desktop={bridge} />);
+
+    fireEvent.click(await screen.findByRole('tab', { name: 'Setup' }));
+
+    // Submit the "Browser import" form to trigger onImportBrowserProfile
+    const importButton = await screen.findByRole('button', { name: /Import browser cookies/i });
+    fireEvent.click(importButton);
+
+    await waitFor(() => expect(bridge.importBrowserProfile).toHaveBeenCalled());
+  });
+});
+
 describe('App profile management actions', () => {
   test('Activate profile button triggers bridge.activateProfile', async () => {
     const bridge = makeBridge();
