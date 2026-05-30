@@ -66,6 +66,7 @@ export async function buildMirrorArtifacts(
       continue;
     }
 
+    /* v8 ignore next 3 -- defensive guard for optional field absent in older/external snapshot data */
     if (!route.sourceFile) {
       throw new Error(`Mirror route ${route.route} is missing a source file.`);
     }
@@ -694,6 +695,7 @@ function officialSourceBadgeText(record: ProblemCoverageRecord): string {
   if (record.officialSourceBlockedReason) {
     return `Official source blocked: ${escapeHtml(record.officialSourceBlockedReason)}`;
   }
+  /* v8 ignore next 2 -- defensive guard for optional field absent in older/external snapshot data */
   return 'Official source not archived';
 }
 

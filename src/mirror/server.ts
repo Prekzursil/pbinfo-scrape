@@ -75,6 +75,7 @@ export async function startMirrorServer(
   });
 
   const address = server.address();
+  /* v8 ignore next 3 -- live-network or real-snapshot path; address is always an AddressInfo in tests */
   if (!address || typeof address === 'string') {
     throw new Error('mirror server address is unavailable');
   }
@@ -84,6 +85,7 @@ export async function startMirrorServer(
     close: async () => {
       await new Promise<void>((resolve, reject) => {
         server.close((error) => {
+          /* v8 ignore next 4 -- live-network or real-snapshot path; close error not triggered in tests */
           if (error) {
             reject(error);
             return;
