@@ -371,6 +371,71 @@ describe('dashboard computeCrawlTelemetry null when rate is zero (line 1856)', (
   });
 });
 
+describe('dashboard computeCrawlTelemetry null when no baseline found (line 1851)', () => {
+  test('shows Learning when all events have the same completed count (no progress delta)', async () => {
+    // When all job events have completed >= latestCounters.completed, no baseline is found.
+    // deriveCrawlTelemetry returns null at line 1851 → crawlTelemetry is null → "Learning…".
+    const ts1 = new Date(Date.now() - 30_000).toISOString();
+    const ts2 = new Date().toISOString();
+    const bridge: DesktopBridge = {
+      ...makeBridge([]),
+      getCrawlStatus: vi.fn(async () => ({
+        snapshotId: 'snap-1',
+        queuePath: '.local/q.sqlite',
+        status: 'in_progress' as const,
+        pending: 200,
+        completed: 50,
+        inProgress: 1,
+        publishEligible: false,
+        recentFailures: [],
+      })),
+      listJobs: vi.fn(async () => [
+        {
+          jobId: 'crawl-no-baseline',
+          kind: 'crawl' as const,
+          status: 'running' as const,
+          snapshotId: 'snap-1',
+          logPath: '.local/crawl.jsonl',
+          resumable: false,
+          latestCounters: { pending: 200, completed: 50, inProgress: 1 },
+          latestEvent: {
+            timestamp: ts2,
+            level: 'info' as const,
+            stage: 'crawl',
+            message: 'Crawling',
+            counters: { pending: 200, completed: 50, inProgress: 1 },
+          },
+          createdAt: new Date(Date.now() - 3600_000).toISOString(),
+          updatedAt: ts2,
+        },
+      ]),
+      // Both events have the same completed count — no baseline with completed < 50 exists.
+      listJobEvents: vi.fn(async () => [
+        {
+          timestamp: ts1,
+          level: 'info' as const,
+          stage: 'crawl',
+          message: 'start',
+          counters: { pending: 250, completed: 50, inProgress: 0 },
+        },
+        {
+          timestamp: ts2,
+          level: 'info' as const,
+          stage: 'crawl',
+          message: 'batch',
+          counters: { pending: 200, completed: 50, inProgress: 1 },
+        },
+      ]),
+    } as unknown as DesktopBridge;
+
+    render(<App desktop={bridge} />);
+
+    await waitFor(() => expect(bridge.listJobs).toHaveBeenCalled());
+    // No baseline found → crawlTelemetry is null → "Learning…"
+    expect(await screen.findByText('Learning…')).toBeInTheDocument();
+  });
+});
+
 describe('dashboard formatEtaRemaining hours branch (line 1882)', () => {
   test('shows hours-format ETA for a large pending count relative to completion rate', async () => {
     // To exercise the hours branch (line 1882), we need the computed ETA to be >= 60 minutes.

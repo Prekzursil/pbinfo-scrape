@@ -131,6 +131,18 @@ describe('parseProblemSourceListPage', () => {
     ]);
   });
 
+  test('returns undefined authorHandle when titled profile anchor has an unrecognised href (line 61)', () => {
+    // When the href under *[title="Postată de"] matches a[href^="/profil/"] but the regex
+    // PROFILE_HREF_PATTERN fails (e.g. href is "/profil/" with no handle), matchProfileHref
+    // returns null and normalizeWhitespace('') || undefined evaluates to undefined (line 61).
+    const pageUrl = 'https://www.pbinfo.ro/solutii/problema/55/test';
+    const parsed = parseProblemSourceListPage(
+      `<span title="Postată de"><a href="/profil/">no handle</a></span>`,
+      pageUrl,
+    );
+    expect(parsed.authorHandle).toBeUndefined();
+  });
+
   test('prefers explicit pagination links and deduplicates repeated evaluation ids', () => {
     const pageUrl = 'https://www.pbinfo.ro/solutii/problema/1/sum';
     const parsed = parseProblemSourceListPage(

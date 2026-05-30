@@ -18,6 +18,17 @@ describe('source normalization', () => {
     expect(signature?.sourceLength).toBeGreaterThan(0);
   });
 
+  test('buildSourceSignature sets normalizedSourceHash to undefined when normalized result is empty', () => {
+    // normalizeSourceCode returns undefined when source normalizes to empty (e.g., only comments).
+    // This exercises lines 21-23 of source-normalization.ts where normalized is falsy.
+    const signature = buildSourceSignature('# only a comment\n', 'python');
+    expect(signature).toBeDefined();
+    expect(signature?.normalizedSourceHash).toBeUndefined();
+    expect(signature?.normalizedSourceLength).toBeUndefined();
+    expect(signature?.sourceHash).toMatch(/^sha256:/);
+    expect(signature?.sourceLength).toBeGreaterThan(0);
+  });
+
   test('normalizeSourceCode strips comments per language and returns undefined for empty input', () => {
     expect(normalizeSourceCode(undefined)).toBeUndefined();
     expect(normalizeSourceCode('# only a comment\n', 'python')).toBeUndefined();

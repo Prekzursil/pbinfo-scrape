@@ -224,6 +224,18 @@ describe('parseProblemPage further category and asset branches', () => {
     expect(result.linkedAssets).toEqual([]);
   });
 
+  test('extracts author handle from title="Postată de" profile anchor (lines 341-343 of problem.ts)', () => {
+    // Reaches the preferredLink branch in extractAuthorHandle (line 341-343)
+    const html = `
+      <html><body>
+        <h1><a href="/probleme/99/preferred">Preferred</a></h1>
+        <span title="Postată de"><a href="/profil/titlehandle">Title Handle</a></span>
+      </body></html>
+    `;
+    const result = parseProblemPage(html, 'https://www.pbinfo.ro/probleme/99/preferred');
+    expect(result.metadata.authorHandle).toBe('titlehandle');
+  });
+
   test('handles posted-by handle via summary text paren fallback', () => {
     const html = `
       <html><body>
