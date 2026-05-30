@@ -177,6 +177,34 @@ describe('parseProblemEndpointFragment visible-test branches', () => {
   });
 });
 
+describe('parseProblemEndpointFragment cueModeFromParagraph undefined branch', () => {
+  test('ignores a paragraph that contains neither intrare nor iesire cue text', () => {
+    // cueModeFromParagraph returns undefined when text lacks both keywords (line 457-458)
+    // mode stays undefined so no pre block is recorded
+    const html = `
+      <html><body>
+        <h3>Testul 1</h3>
+        <p>Nota</p>
+        <pre>3 4</pre>
+        <p>Intrare</p>
+        <pre>1 2</pre>
+        <p>Iesire</p>
+        <pre>3</pre>
+      </body></html>
+    `;
+    const parsed = parseProblemEndpointFragment(html);
+    if (parsed.access === 'visible') {
+      // The first <pre> is skipped because the cue paragraph returned undefined.
+      // Only the second <pre> (after "Intrare") should be captured.
+      expect(parsed.visibleTests).toEqual([
+        expect.objectContaining({ input: '1 2', output: '3' }),
+      ]);
+    } else {
+      expect.fail('expected visible access');
+    }
+  });
+});
+
 describe('parseProblemPage further category and asset branches', () => {
   test('skips anchors with empty href when collecting categories or assets', () => {
     const html = `

@@ -259,6 +259,50 @@ describe('App snapshot job actions', () => {
     expect(await screen.findByRole('button', { name: /Stop preview/i })).toBeInTheDocument();
   });
 
+  test('clicking Stop preview triggers bridge.stopMirrorPreview (lines 646-654 of app.tsx)', async () => {
+    // To enable the Stop preview button, the bridge must return a mirror-serve job with
+    // detail.mirrorPreviewUrl set so that previewJob is non-null.
+    const mirrorServeJob: GuiJobRecord = {
+      jobId: 'preview-job-99',
+      kind: 'mirror-serve' as const,
+      status: 'running' as const,
+      snapshotId: 'snap-1',
+      logPath: '.local/mirror.jsonl',
+      resumable: false,
+      detail: { mirrorPreviewUrl: 'http://127.0.0.1:4173/' },
+      createdAt: '2026-03-10T00:00:00.000Z',
+      updatedAt: '2026-03-10T00:01:00.000Z',
+    };
+
+    const bridge: DesktopBridge = {
+      ...makeBridge(),
+      listJobs: vi.fn(async () => [mirrorServeJob]),
+      stopMirrorPreview: vi.fn(async () => ({
+        jobId: 'preview-job-99',
+        kind: 'mirror-serve' as const,
+        status: 'completed' as const,
+        snapshotId: 'snap-1',
+        logPath: '.local/mirror.jsonl',
+        resumable: false,
+        createdAt: '2026-03-10T00:00:00.000Z',
+        updatedAt: '2026-03-10T00:02:00.000Z',
+      })),
+    } as unknown as DesktopBridge;
+
+    render(<App desktop={bridge} />);
+
+    // Wait for bridge.listJobs to be called and the previewJobId to be set
+    await waitFor(() => expect(bridge.listJobs).toHaveBeenCalled());
+
+    const stopButton = await screen.findByRole('button', { name: /Stop preview/i });
+    expect(stopButton).not.toBeDisabled();
+    fireEvent.click(stopButton);
+
+    await waitFor(() =>
+      expect(bridge.stopMirrorPreview).toHaveBeenCalledWith('preview-job-99'),
+    );
+  });
+
   test('Refresh button triggers refresh which calls getWorkspaceState again', async () => {
     const bridge = makeBridge();
     render(<App desktop={bridge} />);

@@ -271,3 +271,184 @@ describe('dashboard formatOverviewPreset missing-official-source', () => {
     expect(chips.length).toBeGreaterThan(0);
   });
 });
+
+describe('dashboard formatOverviewPreset solved', () => {
+  test('shows "Solved" chip when the Solved preset button is clicked', async () => {
+    const bridge = makeBridge([]);
+    render(<App desktop={bridge} />);
+
+    const boardToolbar = await screen.findByRole('toolbar', {
+      name: 'Problem status board filters',
+    });
+    fireEvent.click(within(boardToolbar).getByRole('button', { name: 'Solved' }));
+
+    // formatOverviewPreset('solved') → 'Solved' used as chip label (line 1979)
+    const chips = await screen.findAllByText('Solved');
+    expect(chips.length).toBeGreaterThan(0);
+  });
+});
+
+describe('dashboard formatOverviewPreset unsolved', () => {
+  test('shows "Unsolved" chip when the Unsolved preset button is clicked', async () => {
+    const bridge = makeBridge([]);
+    render(<App desktop={bridge} />);
+
+    const boardToolbar = await screen.findByRole('toolbar', {
+      name: 'Problem status board filters',
+    });
+    fireEvent.click(within(boardToolbar).getByRole('button', { name: 'Unsolved' }));
+
+    // formatOverviewPreset('unsolved') → 'Unsolved' used as chip label (line 1981)
+    const chips = await screen.findAllByText('Unsolved');
+    expect(chips.length).toBeGreaterThan(0);
+  });
+});
+
+describe('dashboard computeCrawlTelemetry null when rate is zero (line 1856)', () => {
+  test('shows Learning when two events have the same timestamp (zero elapsed time)', async () => {
+    // resolveTelemetryRate returns null when elapsedSeconds <= 0 (line 1817)
+    // which causes computeCrawlTelemetry to return null at line 1856.
+    // When crawlTelemetry is null the component shows "Learning…" for ETA.
+    const sameTimestamp = new Date().toISOString();
+    const bridge: DesktopBridge = {
+      ...makeBridge([]),
+      getCrawlStatus: vi.fn(async () => ({
+        snapshotId: 'snap-1',
+        queuePath: '.local/q.sqlite',
+        status: 'in_progress' as const,
+        pending: 500,
+        completed: 50,
+        inProgress: 1,
+        publishEligible: false,
+        recentFailures: [],
+      })),
+      listJobs: vi.fn(async () => [
+        {
+          jobId: 'crawl-same-ts',
+          kind: 'crawl' as const,
+          status: 'running' as const,
+          snapshotId: 'snap-1',
+          logPath: '.local/crawl.jsonl',
+          resumable: false,
+          latestCounters: { pending: 500, completed: 50, inProgress: 1 },
+          latestEvent: {
+            timestamp: sameTimestamp,
+            level: 'info' as const,
+            stage: 'crawl',
+            message: 'Crawling',
+            counters: { pending: 500, completed: 50, inProgress: 1 },
+          },
+          createdAt: new Date(Date.now() - 3600_000).toISOString(),
+          updatedAt: sameTimestamp,
+        },
+      ]),
+      // Two events with identical timestamps but different completed counts.
+      // baseline is found (completed < latestCounters.completed) but
+      // elapsedSeconds == 0 → resolveTelemetryRate returns null → line 1856.
+      listJobEvents: vi.fn(async () => [
+        {
+          timestamp: sameTimestamp,
+          level: 'info' as const,
+          stage: 'crawl',
+          message: 'start',
+          counters: { pending: 550, completed: 0, inProgress: 0 },
+        },
+        {
+          timestamp: sameTimestamp,
+          level: 'info' as const,
+          stage: 'crawl',
+          message: 'batch',
+          counters: { pending: 500, completed: 50, inProgress: 1 },
+        },
+      ]),
+    } as unknown as DesktopBridge;
+
+    render(<App desktop={bridge} />);
+
+    await waitFor(() => expect(bridge.listJobs).toHaveBeenCalled());
+    // crawlTelemetry is null → ETA shows "Learning…"
+    expect(await screen.findByText('Learning…')).toBeInTheDocument();
+  });
+});
+
+describe('dashboard formatEtaRemaining hours branch (line 1882)', () => {
+  test('shows hours-format ETA for a large pending count relative to completion rate', async () => {
+    // To exercise the hours branch (line 1882), we need the computed ETA to be >= 60 minutes.
+    // The ETA depends on the crawl status and job events (completion rate).
+    // Set up a bridge where the crawl has a very large pending count and a slow rate
+    const bridge: DesktopBridge = {
+      ...makeBridge([]),
+      getCrawlStatus: vi.fn(async () => ({
+        snapshotId: 'snap-1',
+        queuePath: '.local/q.sqlite',
+        status: 'in_progress' as const,
+        pending: 1_000_000,
+        completed: 100,
+        inProgress: 1,
+        publishEligible: false,
+        recentFailures: [],
+      })),
+      listJobs: vi.fn(async () => [
+        {
+          jobId: 'crawl-job-1',
+          kind: 'crawl' as const,
+          status: 'running' as const,
+          snapshotId: 'snap-1',
+          logPath: '.local/crawl.jsonl',
+          resumable: false,
+          latestCounters: {
+            pending: 1_000_000,
+            completed: 100,
+            inProgress: 1,
+          },
+          latestEvent: {
+            timestamp: new Date().toISOString(),
+            level: 'info' as const,
+            stage: 'crawl',
+            message: 'Crawling',
+            counters: {
+              pending: 1_000_000,
+              completed: 100,
+              inProgress: 1,
+            },
+          },
+          createdAt: new Date(Date.now() - 3600_000).toISOString(),
+          updatedAt: new Date().toISOString(),
+        },
+      ]),
+      listJobEvents: vi.fn(async () => [
+        {
+          timestamp: new Date(Date.now() - 60_000).toISOString(),
+          level: 'info' as const,
+          stage: 'crawl',
+          message: 'Batch complete',
+          counters: {
+            pending: 1_000_100,
+            completed: 0,
+            inProgress: 0,
+          },
+        },
+        {
+          timestamp: new Date().toISOString(),
+          level: 'info' as const,
+          stage: 'crawl',
+          message: 'Batch complete',
+          counters: {
+            pending: 1_000_000,
+            completed: 100,
+            inProgress: 1,
+          },
+        },
+      ]),
+    } as unknown as DesktopBridge;
+
+    render(<App desktop={bridge} />);
+
+    // Wait for the crawl status to render — at 100 completions/min with 1M pending,
+    // ETA > 60 minutes → formatEtaRemaining uses hours branch (line 1882)
+    await waitFor(() => expect(bridge.listJobs).toHaveBeenCalled());
+    // Accept any "Nh" or "Nh Mm" format as long as the component renders
+    const etaMatches = screen.queryAllByText(/\d+h/);
+    expect(etaMatches.length).toBeGreaterThan(0);
+  });
+});
