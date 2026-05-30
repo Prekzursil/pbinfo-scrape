@@ -107,3 +107,68 @@ describe('DataRecordDetail with mirrorRoute (lines 241, 253-256, 265)', () => {
     );
   });
 });
+
+describe('DataExplorerPanel mirror folder/browser buttons and null mirrorRoute branch', () => {
+  test('clicking "Open mirror output folder" calls onOpenPath with mirrorRoot (lines 93-96)', async () => {
+    const onOpenPath = vi.fn(async () => undefined);
+    render(
+      <DataExplorerPanel
+        {...baseProps}
+        mirrorRoot="C:/ws/mirror"
+        onOpenPath={onOpenPath}
+        onOpenExternal={vi.fn()}
+      />,
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: 'Open mirror output folder' }));
+    await vi.waitFor(() =>
+      expect(onOpenPath).toHaveBeenCalledWith('C:/ws/mirror'),
+    );
+  });
+
+  test('clicking "Open mirror in browser" calls onOpenExternal with mirrorUrl (lines 105-108)', async () => {
+    const onOpenExternal = vi.fn(async () => undefined);
+    render(
+      <DataExplorerPanel
+        {...baseProps}
+        mirrorUrl="http://127.0.0.1:4174/"
+        onOpenPath={vi.fn()}
+        onOpenExternal={onOpenExternal}
+      />,
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: 'Open mirror in browser' }));
+    await vi.waitFor(() =>
+      expect(onOpenExternal).toHaveBeenCalledWith('http://127.0.0.1:4174/'),
+    );
+  });
+
+  test('detail with no mirrorRoute renders null branch (line 265)', () => {
+    // When detail.mirrorRoute is undefined, the {detail.mirrorRoute ? ... : null} branch
+    // evaluates to null (line 265) and no mirror route text is rendered.
+    const detailNoRoute: GuiArchiveRecordDetail = {
+      snapshotId: 'test-snap',
+      dataset: 'problems',
+      recordId: 'problem-99',
+      title: 'Problem 99',
+      subtitle: 'No route',
+      filePath: 'C:/ws/normalized/problems/problem-99.json',
+      mirrorRoute: undefined,
+      payload: { id: 99 },
+    };
+
+    render(
+      <DataExplorerPanel
+        {...baseProps}
+        detail={detailNoRoute}
+        onOpenPath={vi.fn()}
+        onOpenExternal={vi.fn()}
+      />,
+    );
+
+    // No mirror route text should be present (null branch)
+    expect(screen.queryByText(/Mirror route:/)).not.toBeInTheDocument();
+    // But the file path should still be present
+    expect(screen.getByText('C:/ws/normalized/problems/problem-99.json')).toBeInTheDocument();
+  });
+});
