@@ -304,6 +304,53 @@ describe('dashboard formatOverviewPreset unsolved', () => {
   });
 });
 
+describe('dashboard deriveCrawlTelemetry null with fewer than 2 events (line 1841)', () => {
+  test('shows Learning when only one job event is available', async () => {
+    // deriveCrawlTelemetry returns null at line 1840-1841 when relevantEvents.length < 2.
+    const bridge: DesktopBridge = {
+      ...makeBridge([]),
+      getCrawlStatus: vi.fn(async () => ({
+        snapshotId: 'snap-1',
+        queuePath: '.local/q.sqlite',
+        status: 'in_progress' as const,
+        pending: 300,
+        completed: 10,
+        inProgress: 1,
+        publishEligible: false,
+        recentFailures: [],
+      })),
+      listJobs: vi.fn(async () => [
+        {
+          jobId: 'crawl-single-event',
+          kind: 'crawl' as const,
+          status: 'running' as const,
+          snapshotId: 'snap-1',
+          logPath: '.local/crawl.jsonl',
+          resumable: false,
+          latestCounters: { pending: 300, completed: 10, inProgress: 1 },
+          createdAt: new Date(Date.now() - 3600_000).toISOString(),
+          updatedAt: new Date().toISOString(),
+        },
+      ]),
+      // Only one event — less than 2, so deriveCrawlTelemetry returns null at line 1840-1841.
+      listJobEvents: vi.fn(async () => [
+        {
+          timestamp: new Date().toISOString(),
+          level: 'info' as const,
+          stage: 'crawl',
+          message: 'start',
+          counters: { pending: 300, completed: 10, inProgress: 1 },
+        },
+      ]),
+    } as unknown as DesktopBridge;
+
+    render(<App desktop={bridge} />);
+
+    await waitFor(() => expect(bridge.listJobs).toHaveBeenCalled());
+    expect(await screen.findByText('Learning…')).toBeInTheDocument();
+  });
+});
+
 describe('dashboard computeCrawlTelemetry null when rate is zero (line 1856)', () => {
   test('shows Learning when two events have the same timestamp (zero elapsed time)', async () => {
     // resolveTelemetryRate returns null when elapsedSeconds <= 0 (line 1817)

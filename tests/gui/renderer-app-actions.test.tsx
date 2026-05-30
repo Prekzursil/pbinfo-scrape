@@ -337,6 +337,31 @@ describe('App profile management actions', () => {
   });
 });
 
+describe('App pause crawl action (lines 598-599 of app.tsx)', () => {
+  test('clicking "Pause after current chunk" triggers bridge.pauseJob with the active crawl jobId', async () => {
+    const bridge = makeBridge();
+    // Provide a running crawl job so the Pause button renders
+    (bridge.listJobs as ReturnType<typeof vi.fn>).mockResolvedValue([
+      {
+        jobId: 'running-crawl',
+        kind: 'crawl',
+        status: 'running',
+        snapshotId: 'snap-1',
+        logPath: '.local/x.jsonl',
+        resumable: false,
+        createdAt: '2026-03-10T00:00:00.000Z',
+        updatedAt: '2026-03-10T00:01:00.000Z',
+      },
+    ]);
+    render(<App desktop={bridge} />);
+    const pauseButton = await screen.findByRole('button', { name: /Pause/i });
+    fireEvent.click(pauseButton);
+    await waitFor(() =>
+      expect(bridge.pauseJob).toHaveBeenCalledWith('running-crawl'),
+    );
+  });
+});
+
 describe('App resume crawl action', () => {
   test('Resume crawl button triggers bridge.resumeJob with the active crawl jobId', async () => {
     const bridge = makeBridge();
