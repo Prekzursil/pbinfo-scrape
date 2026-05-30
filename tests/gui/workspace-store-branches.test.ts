@@ -22,10 +22,11 @@ afterEach(() => {
 describe('omitUserHandle with no crawl config (lines 278-280 of workspace-store.ts)', () => {
   test('deleteWorkspaceProfile handles absent crawl config without throwing', () => {
     // When localConfig.crawl is undefined, omitUserHandle's `if (!value)` guard fires (lines 278-280).
+    // activateWorkspaceProfile always writes a crawl key, so we strip it back out manually
+    // to simulate the guard condition.
     const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-ws-no-crawl-'));
     tempDirs.push(workspaceRoot);
     mkdirSync(join(workspaceRoot, '.local'), { recursive: true });
-    // No "crawl" key in local config — localConfig.crawl will be undefined.
     writeFileSync(
       join(workspaceRoot, '.local', 'pbinfo.local.json'),
       JSON.stringify({}, null, 2),
@@ -44,7 +45,14 @@ describe('omitUserHandle with no crawl config (lines 278-280 of workspace-store.
     activateWorkspaceProfile(workspaceRoot, 'no-crawl-profile', {
       now: new Date('2026-03-10T12:02:00.000Z'),
     });
-    // Deleting the active profile with no crawl config exercises the omitUserHandle null guard.
+
+    // After activate, crawl key exists; strip it so omitUserHandle receives undefined (lines 278-280).
+    const configPath = join(workspaceRoot, '.local', 'pbinfo.local.json');
+    const raw = JSON.parse(readFileSync(configPath, 'utf8')) as Record<string, unknown>;
+    delete raw['crawl'];
+    writeFileSync(configPath, JSON.stringify(raw, null, 2), 'utf8');
+
+    // Deleting the active profile now triggers omitUserHandle(undefined, 'SomeUser').
     const state = deleteWorkspaceProfile(workspaceRoot, 'no-crawl-profile', {
       now: new Date('2026-03-10T12:03:00.000Z'),
     });
