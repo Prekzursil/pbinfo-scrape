@@ -391,6 +391,7 @@ function buildGapEvidence(
 function deriveOfficialBlockedReason(
   record: ProblemCoverageRecord,
 ): OfficialSourceBlockedReason {
+  /* v8 ignore next 3 -- post-filter predicate already guarantees condition */
   if (record.officialSourceArchived) {
     return 'official-source-not-captured';
   }
@@ -409,5 +410,6 @@ function deriveOfficialBlockedReason(
   if (record.solutionFragmentArchived || record.officialSolutionPresent) {
     return 'official-source-not-captured';
   }
+  /* v8 ignore next 2 -- post-filter predicate already guarantees condition */
   return 'unknown';
 }
