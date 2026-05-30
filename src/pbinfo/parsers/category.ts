@@ -28,6 +28,7 @@ export function parseCategoryPage(html: string, grade: number): ParsedCategoryPa
 
     const id = Number(match[1]);
     const slug = match[2];
+    /* v8 ignore next 3 -- regex capture group always present when regex matches */
     if (!slug) {
       continue;
     }
@@ -80,6 +81,7 @@ function findNextItemListHref(
 ): string | undefined {
   for (let index = startIndex + 1; index < anchors.length; index += 1) {
     const anchor = anchors[index];
+    /* v8 ignore next 3 -- TS forces T|undefined on array index; anchor always defined within bounds */
     if (!anchor) {
       continue;
     }

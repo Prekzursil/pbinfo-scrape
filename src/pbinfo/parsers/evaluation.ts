@@ -34,6 +34,7 @@ export function parseEvaluationPage(html: string, evaluationId: number): ParsedE
   }
 
   const problemSlug = problemMatch[2];
+  /* v8 ignore next 3 -- regex capture group always present when regex matches */
   if (!problemSlug) {
     throw new Error(`Could not infer problem slug for evaluation ${evaluationId}.`);
   }

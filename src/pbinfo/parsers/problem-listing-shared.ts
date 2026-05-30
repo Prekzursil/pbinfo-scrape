@@ -190,6 +190,7 @@ export function extractExplicitPaginationUrls($: Cheerio, pageUrl: string | unde
 
   $('.pagination a[href], a[href*="start="]').each((_, link) => {
     const href = $(link).attr('href');
+    /* v8 ignore next 3 -- regex capture group always present when selector matches; href always defined */
     if (!href) {
       return;
     }

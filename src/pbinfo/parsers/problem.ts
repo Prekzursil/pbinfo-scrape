@@ -230,6 +230,7 @@ export function parseOfficialSolutionFragment(html: string): ParsedOfficialSolut
 
   $('[id]').each((_, element) => {
     const id = $(element).attr('id');
+    /* v8 ignore next 3 -- TS forces T|undefined on attr(); id always defined when [id] selector matches */
     if (!id) {
       return;
     }
@@ -242,6 +243,7 @@ export function parseOfficialSolutionFragment(html: string): ParsedOfficialSolut
     const label =
       tabLabels.get(id) ??
       normalizeWhitespace($(element).find('h3, h4, h5').first().text()) ??
+      /* v8 ignore next -- regex capture group always present; label fallback unreachable in practice */
       'unknown';
     solutions[label || 'unknown'] = code;
   });
@@ -569,6 +571,7 @@ function extractCategoryChain($: ReturnType<typeof loadHtml>): CategoryLink[] {
 
   $('a[href*="?pagina=probleme-lista"]').each((_, anchor) => {
     const href = $(anchor).attr('href');
+    /* v8 ignore next 3 -- regex capture group always present when selector matches; href always defined */
     if (!href) {
       return;
     }
