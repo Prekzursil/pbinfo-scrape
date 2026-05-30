@@ -19,6 +19,7 @@ export default tseslint.config(
       '**/*.html',
       '**/*.svg',
       '.stylelintrc.cjs',
+      '.venv-quality-zero/**',
     ],
   },
   js.configs.recommended,

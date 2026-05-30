@@ -5,7 +5,7 @@
  *
  * These paths are reached via vi.doMock to control coverage data returned.
  */
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
@@ -19,13 +19,6 @@ afterEach(async () => {
     rmSync(dir, { recursive: true, force: true });
   }
 });
-
-function setupMinimalWorkspace(prefix: string, snapshotId: string) {
-  const actualFs = require('node:fs');
-  const workspaceRoot = actualFs.mkdtempSync(join(tmpdir(), prefix));
-  tempDirs.push(workspaceRoot);
-  return workspaceRoot;
-}
 
 describe('finalizeSnapshotWorkflow coverage-index-missing gate (lines 118-121)', () => {
   test('throws when readProblemCoverageIndex returns undefined after full pipeline', async () => {
@@ -48,7 +41,7 @@ describe('finalizeSnapshotWorkflow coverage-index-missing gate (lines 118-121)',
     );
     tempDirs.push(workspaceRoot);
 
-    const { prepareSnapshot, markSnapshotCompleted } = await import(
+    const { prepareSnapshot } = await import(
       '../../src/archive/storage.js'
     );
     const { loadLocalConfig } = await import('../../src/config/local-config.js');

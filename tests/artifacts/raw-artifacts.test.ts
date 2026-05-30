@@ -174,7 +174,7 @@ describe('raw artifact export/import', () => {
     mkdirSync(snapshot.rawAssetsRoot, { recursive: true });
     writeFileSync(join(snapshot.rawPagesRoot, 'page.html'), '<html>ok</html>', 'utf8');
 
-    const exported = await exportRawSnapshotArtifacts({
+    await exportRawSnapshotArtifacts({
       workspaceRoot,
       snapshotId: snapshot.snapshotId,
     });

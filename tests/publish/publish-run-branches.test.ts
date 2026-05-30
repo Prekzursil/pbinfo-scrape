@@ -24,7 +24,6 @@ import { publishWorkspace } from '../../src/publish/publish.js';
 
 // Control variables shared between the mock factory and test bodies.
 // We use module-level state because vi.mock factories are hoisted.
-let execFileSyncMock: ReturnType<typeof vi.fn>;
 let execFileSyncCallCount = 0;
 let execFileSyncImpl: ((...args: unknown[]) => string) | null = null;
 

@@ -1,6 +1,7 @@
 import { mkdtempSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
+import { DatabaseSync } from 'node:sqlite';
 
 import { afterEach, describe, expect, test } from 'vitest';
 
@@ -198,8 +199,7 @@ describe('CrawlQueue', () => {
     // an error.  The trigger fires inside claimNext's BEGIN IMMEDIATE transaction after the
     // SELECT succeeds but before the COMMIT, exercising the catch(ROLLBACK) path at lines
     // 151-153 of crawl-queue.ts.
-    const { DatabaseSync } = require('node:sqlite');
-    const [dbDir] = tempDirs.slice(-1);
+    const dbDir = tempDirs.at(-1)!;
     const rawDb = new DatabaseSync(join(dbDir, 'queue.sqlite'));
     rawDb.exec(
       "CREATE TRIGGER block_claim_update BEFORE UPDATE ON crawl_queue BEGIN SELECT RAISE(ABORT, 'simulated index lock'); END;",
