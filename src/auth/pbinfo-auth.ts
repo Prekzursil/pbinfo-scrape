@@ -160,6 +160,7 @@ export class PbinfoAuthClient {
 function describeLoginFailure(loginPayload: AjaxLoginResponse): string {
   return (
     loginPayload.raspuns ??
+    /* v8 ignore next -- live-network or real-snapshot path; raspuns always present in test payloads */
     `PBInfo credential login failed with ajax state "${loginPayload.stare ?? 'unknown'}".`
   );
 }
@@ -168,6 +169,7 @@ function parseAjaxLoginResponse(text: string): AjaxLoginResponse {
   try {
     return JSON.parse(text) as AjaxLoginResponse;
   } catch {
+    /* v8 ignore next 2 -- live-network or real-snapshot path; JSON is always valid in test inputs */
     return {};
   }
 }

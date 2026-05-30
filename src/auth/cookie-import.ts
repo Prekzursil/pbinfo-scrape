@@ -375,6 +375,7 @@ function decryptChromiumCookieValue(
   return legacyValue.toString('utf8');
 }
 
+/* v8 ignore start -- Windows-only DPAPI, not reachable on Linux CI */
 function decryptDpapiBuffer(encryptedValue: Buffer): Buffer {
   const script =
     'Add-Type -AssemblyName System.Security;' +
@@ -388,3 +389,4 @@ function decryptDpapiBuffer(encryptedValue: Buffer): Buffer {
   ).trim();
   return Buffer.from(output, 'base64');
 }
+/* v8 ignore stop */
