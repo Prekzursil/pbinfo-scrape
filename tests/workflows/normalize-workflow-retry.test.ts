@@ -199,6 +199,60 @@ describe('runNormalizeSnapshotWorkflow retry handling', () => {
     expect(observedKinds).toEqual(['official-source-list']);
   }, 15000);
 
+  test('isRetryableDirectoryResetError returns false for non-Error thrown value (line 130-131)', async () => {
+    // Exercises the `!(error instanceof Error)` check in isRetryableDirectoryResetError (lines 128-131).
+    // When a non-Error (e.g., a plain string) is thrown from rmSync, the function returns false
+    // which causes removePathRobustly to re-throw it immediately at line 118.
+    const actualFs = await vi.importActual<typeof import('node:fs')>('node:fs');
+    const workspaceRoot = actualFs.mkdtempSync(join(tmpdir(), 'pbinfo-normalize-non-error-'));
+    tempDirs.push(workspaceRoot);
+
+    vi.resetModules();
+
+    vi.doMock('node:fs', async () => {
+      const actual = await vi.importActual<typeof import('node:fs')>('node:fs');
+
+      return {
+        ...actual,
+        rmSync(
+          target: Parameters<typeof actual.rmSync>[0],
+          options?: Parameters<typeof actual.rmSync>[1],
+        ) {
+          if (String(target).endsWith('stale-non-error.json')) {
+            // Throw a non-Error plain string — isRetryableDirectoryResetError must return false
+            // eslint-disable-next-line no-throw-literal
+            throw 'non-error string thrown from rmSync';
+          }
+
+          return actual.rmSync(target, options);
+        },
+      };
+    });
+
+    const { prepareSnapshot } = await import('../../src/archive/storage.js');
+    const { loadLocalConfig } = await import('../../src/config/local-config.js');
+    const { runNormalizeSnapshotWorkflow } =
+      await import('../../src/workflows/normalize-workflow.js');
+
+    const config = loadLocalConfig(workspaceRoot);
+    const snapshot = prepareSnapshot(config, {
+      snapshotId: 'normalize-non-error-snapshot',
+      scope: 'all',
+      now: new Date('2026-03-18T00:00:00.000Z'),
+    });
+
+    actualFs.mkdirSync(join(snapshot.normalizedRoot, 'problems'), { recursive: true });
+    actualFs.writeFileSync(
+      join(snapshot.normalizedRoot, 'problems', 'stale-non-error.json'),
+      '{}',
+      'utf8',
+    );
+
+    await expect(
+      runNormalizeSnapshotWorkflow(workspaceRoot, snapshot.snapshotId),
+    ).rejects.toBe('non-error string thrown from rmSync');
+  }, 15000);
+
   test('preserves official-evaluation-detail page kinds during normalize rebuilds', async () => {
     const actualFs = await vi.importActual<typeof import('node:fs')>('node:fs');
     const workspaceRoot = actualFs.mkdtempSync(

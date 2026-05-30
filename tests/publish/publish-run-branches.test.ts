@@ -293,4 +293,29 @@ describe('publishWorkspace run() function branches (execFileSync mocked at modul
     ).toThrow(/Command failed/);
   });
 
+  test('enrichCommandError appends string stdout content to error message (streamToString string branch)', () => {
+    // Exercises streamToString string branch (line 420-421): when stdout/stderr are already strings
+    // (execFileSync with encoding:'utf8' can produce string streams on the error object)
+    execFileSyncImpl = () => {
+      const errorWithStrings = Object.assign(new Error('Command failed with strings'), {
+        stderr: 'string stderr output',
+        stdout: 'string stdout output',
+      });
+      throw errorWithStrings;
+    };
+
+    const { workspaceRoot, config, snapshot } = setupWorkspace(
+      'pbinfo-pub-strstdout-',
+      'str-stdout-snap',
+    );
+
+    expect(() =>
+      publishWorkspace({
+        workspaceRoot,
+        config,
+        snapshotId: snapshot.snapshotId,
+      }),
+    ).toThrow(/string stderr output/);
+  });
+
 });

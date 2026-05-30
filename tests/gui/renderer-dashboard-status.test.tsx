@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom/vitest';
 
-import { cleanup, render, screen, waitFor } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
 import { App } from '../../src/gui/renderer/app.js';
@@ -225,5 +225,49 @@ describe('dashboard formatTestsCoverageStatus not-available-upstream', () => {
 
     await waitFor(() => expect(bridge.listCoverageRecords).toHaveBeenCalled());
     expect(await screen.findByText('Tests unavailable upstream')).toBeInTheDocument();
+  });
+});
+
+describe('dashboard formatArchiveCompletenessStatus not-archived-yet', () => {
+  test('renders "Not archived yet" badge when archiveCompletenessStatus is not-archived-yet', async () => {
+    const record = baseCoverageRecord({ archiveCompletenessStatus: 'not-archived-yet' });
+    const bridge = makeBridge([record]);
+    render(<App desktop={bridge} />);
+
+    await waitFor(() => expect(bridge.listCoverageRecords).toHaveBeenCalled());
+    const badges = await screen.findAllByText('Not archived yet');
+    expect(badges.length).toBeGreaterThan(0);
+  });
+});
+
+describe('dashboard formatOverviewPreset complete', () => {
+  test('shows "Complete" chip when the complete preset button is clicked', async () => {
+    const bridge = makeBridge([]);
+    render(<App desktop={bridge} />);
+
+    const boardToolbar = await screen.findByRole('toolbar', {
+      name: 'Problem status board filters',
+    });
+    fireEvent.click(within(boardToolbar).getByRole('button', { name: 'Complete' }));
+
+    // formatOverviewPreset('complete') → 'Complete' used as chip label (line 1983)
+    const chips = await screen.findAllByText('Complete');
+    expect(chips.length).toBeGreaterThan(0);
+  });
+});
+
+describe('dashboard formatOverviewPreset missing-official-source', () => {
+  test('shows "Missing official source" chip when the missing-official-source preset button is clicked', async () => {
+    const bridge = makeBridge([]);
+    render(<App desktop={bridge} />);
+
+    const boardToolbar = await screen.findByRole('toolbar', {
+      name: 'Problem status board filters',
+    });
+    fireEvent.click(within(boardToolbar).getByRole('button', { name: 'Missing official source' }));
+
+    // formatOverviewPreset('missing-official-source') → 'Missing official source' used as chip label (line 1985)
+    const chips = await screen.findAllByText('Missing official source');
+    expect(chips.length).toBeGreaterThan(0);
   });
 });
