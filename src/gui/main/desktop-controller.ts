@@ -461,6 +461,7 @@ export function createDesktopController(
             throw new Error('snapshot-finalize jobs require a snapshotId.');
           }
           return runFinalizeJob(parsed.snapshotId, now);
+        /* v8 ignore next 3 -- TS exhaustiveness guard */
         default:
           throw new Error(`Unsupported desktop job kind: ${parsed.kind satisfies never}`);
       }

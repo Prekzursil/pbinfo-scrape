@@ -673,6 +673,7 @@ export function App({ desktop }: AppProps) {
 }
 
 function readWindowBridge(): DesktopBridge | undefined {
+  /* v8 ignore next 3 -- SSR guard, jsdom always defines window */
   if (typeof window === 'undefined') {
     return undefined;
   }

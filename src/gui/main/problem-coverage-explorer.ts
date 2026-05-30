@@ -344,6 +344,7 @@ function toGuiCoverageRecord(record: ProblemCoverageRecord): GuiCoverageRecord {
     archiveCompletenessStatus:
       record.archiveCompletenessStatus ?? deriveArchiveCompletenessStatus(record),
     editorialAvailability: record.editorialAvailability,
+    /* v8 ignore next 3 -- TS forces T|undefined; optional fields absent in older snapshot data */
     unsolvedByConfiguredHandle: record.unsolvedByConfiguredHandle ?? !record.solvedByMe,
     notArchivedYet: record.notArchivedYet ?? false,
     newSinceBaseline: record.newSinceBaseline ?? false,
@@ -510,6 +511,7 @@ function deriveArchiveCompletenessStatus(
   if (!record.solvedByMe) {
     return 'unsolved';
   }
+  /* v8 ignore next -- TS forces T|undefined; optional fields absent in older snapshot data */
   if (
     (record.missingTrustworthyUserSourceLanguages?.length ?? 0) > 0 ||
     !record.userSourceArchived
