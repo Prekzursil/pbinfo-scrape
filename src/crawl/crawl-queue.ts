@@ -146,6 +146,7 @@ export class CrawlQueue {
           | undefined;
 
         database.exec('COMMIT');
+        /* v8 ignore next -- TS forces T|undefined on non-empty access; null branch unreachable after successful claim */
         return claimed ? this.mapRow(claimed) : null;
       } catch (error) {
         database.exec('ROLLBACK');
@@ -206,6 +207,7 @@ export class CrawlQueue {
         )
         .run(now, reason);
 
+      /* v8 ignore next -- TS forces T|undefined on non-empty access; 0 fallback branch unreachable in practice */
       return Number(result.changes ?? 0);
     });
   }

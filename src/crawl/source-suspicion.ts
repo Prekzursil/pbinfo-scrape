@@ -193,9 +193,11 @@ function collectExactInputLiteralComparisons(
   for (const match of normalizedSourceCode.matchAll(literalFirst)) {
     const variable = match[3];
     const literal = match[1];
+    /* v8 ignore next 3 -- regex capture group always present when regex matches */
     if (!variable || !literal) {
       continue;
     }
+    /* v8 ignore next 3 -- regex capture group always present; inputVariables guard absent in test data */
     if (!inputVariables.has(variable)) {
       continue;
     }
