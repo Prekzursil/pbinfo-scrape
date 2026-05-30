@@ -104,6 +104,7 @@ function dedupeCandidates(
     const representative = [...bucket].sort((left, right) =>
       compareTrustworthyCandidates(left, right, forcedBest),
     )[0];
+    /* v8 ignore next 3 -- TS forces T|undefined on non-empty array access; representative always present after sort */
     if (!representative) {
       continue;
     }
@@ -146,6 +147,7 @@ function rankPerLanguage(
   const candidates: Record<string, RankedSubmissionCandidate> = {};
   for (const [language, bucket] of buckets) {
     const best = [...bucket].sort((left, right) => comparer(left, right, forcedBest))[0];
+    /* v8 ignore next 3 -- TS forces T|undefined on non-empty array access; best always present after sort */
     if (!best) {
       continue;
     }
