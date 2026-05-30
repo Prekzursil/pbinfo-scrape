@@ -490,3 +490,217 @@ describe('readArchiveExplorerRecord', () => {
     ).toThrow('is missing or unreadable');
   });
 });
+
+describe('archive-data-explorer edge branches', () => {
+  test('compareNumericIds falls back to localeCompare for non-numeric route IDs', () => {
+    // Mirror route IDs are strings like "/probleme/101/suma" — not numeric.
+    // listMirrorRouteItems sorts via recordId.localeCompare, but listProblemItems etc.
+    // use compareNumericIds.  Inject two problems whose IDs are non-numeric strings
+    // by using slug-style recordIds so the localeCompare branch (line 519) is hit.
+    //
+    // The easiest path: write two ranking entries with non-numeric problemIds (we
+    // can't really do that, since problemId is typed as number). Instead, seed two
+    // tests records whose problemId stringified produces non-numeric values by
+    // giving them IDs that aren't finite numbers — we can abuse the ProblemRecord
+    // path by providing a problem with id=0 (falsy).
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-archive-nonnum-'));
+    tempDirs.push(workspaceRoot);
+    const snapshotRoot = join(workspaceRoot, 'archive', 'snapshots', SNAPSHOT_ID);
+    const normalizedRoot = join(snapshotRoot, 'normalized');
+
+    // Write a ranking index with a non-numeric problemId to exercise compareNumericIds
+    // via the ranking sort path.  Filter type-guard requires typeof === 'number', so
+    // give it entries with proper number IDs but ones whose string form isn't finite
+    // when parsed — that's not possible with real ints. Instead write TWO problems
+    // both with numeric IDs but the RANKING sort uses compareNumericIds on their
+    // string recordIds: still numeric. So use mirror route sort, which uses
+    // localeCompare directly.
+    //
+    // For compareNumericIds non-numeric branch we use listProblemItems with a problem
+    // that has id=0 (Number("0") is finite so still numeric) — that won't work.
+    // The real way: write problem files with non-numeric filenames whose payload.id
+    // won't be a number. Actually the simplest: pass NaN-producing IDs.
+    // problem.id = undefined → String(undefined) = "undefined" → Number("undefined") = NaN.
+    writeJson(
+      join(normalizedRoot, 'problems', 'problem-a.json'),
+      { id: undefined, name: 'Alpha', canonicalUrl: undefined, slug: 'alpha', constraints: [], tags: [], sections: [], examples: [], categoryChain: [], editorialAvailability: 'unknown', officialSolutions: {}, visibleTests: [], linkedAssets: [], metadata: {} },
+    );
+    writeJson(
+      join(normalizedRoot, 'problems', 'problem-b.json'),
+      { id: undefined, name: 'Beta', canonicalUrl: undefined, slug: 'beta', constraints: [], tags: [], sections: [], examples: [], categoryChain: [], editorialAvailability: 'unknown', officialSolutions: {}, visibleTests: [], linkedAssets: [], metadata: {} },
+    );
+
+    const listing = listArchiveExplorerRecords(workspaceRoot, {
+      snapshotId: SNAPSHOT_ID,
+      dataset: 'problems',
+    });
+    // Both items have recordId "undefined" (NaN path → localeCompare), just verify they render.
+    expect(listing.totalCount).toBe(2);
+  });
+
+  test('deriveProblemRoute returns undefined when problem has no canonicalUrl and no id', () => {
+    // Exercises lines 529-530: problem.id is falsy → return undefined
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-archive-noid-'));
+    tempDirs.push(workspaceRoot);
+    const snapshotRoot = join(workspaceRoot, 'archive', 'snapshots', SNAPSHOT_ID);
+    const normalizedRoot = join(snapshotRoot, 'normalized');
+
+    // Problem with no id and no canonicalUrl → deriveProblemRoute returns undefined
+    writeJson(join(normalizedRoot, 'problems', 'problem-999.json'), {
+      id: 0,
+      name: 'Zero Id Problem',
+      canonicalUrl: undefined,
+      slug: 'zero-id',
+      constraints: [],
+      tags: [],
+      sections: [],
+      examples: [],
+      categoryChain: [],
+      editorialAvailability: 'unknown',
+      officialSolutions: {},
+      visibleTests: [],
+      linkedAssets: [],
+      metadata: {},
+    });
+
+    const listing = listArchiveExplorerRecords(workspaceRoot, {
+      snapshotId: SNAPSHOT_ID,
+      dataset: 'problems',
+    });
+    // Problem id=0 is falsy → mirrorRoute is undefined
+    expect(listing.items[0]!.mirrorRoute).toBeUndefined();
+  });
+
+  test('extractPathname returns undefined for an invalid URL', () => {
+    // Exercises lines 536-537: new URL(url) throws → catch returns undefined
+    // A problem with a malformed canonicalUrl triggers extractPathname's catch block.
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-archive-badurl-'));
+    tempDirs.push(workspaceRoot);
+    const snapshotRoot = join(workspaceRoot, 'archive', 'snapshots', SNAPSHOT_ID);
+    const normalizedRoot = join(snapshotRoot, 'normalized');
+
+    writeJson(join(normalizedRoot, 'problems', 'problem-1.json'), {
+      id: 1,
+      name: 'Bad URL Problem',
+      canonicalUrl: 'http://[invalid-url',
+      slug: 'bad-url',
+      constraints: [],
+      tags: [],
+      sections: [],
+      examples: [],
+      categoryChain: [],
+      editorialAvailability: 'unknown',
+      officialSolutions: {},
+      visibleTests: [],
+      linkedAssets: [],
+      metadata: {},
+    });
+
+    const listing = listArchiveExplorerRecords(workspaceRoot, {
+      snapshotId: SNAPSHOT_ID,
+      dataset: 'problems',
+    });
+    // subtitle uses extractPathname(canonicalUrl) → URL parse throws → undefined
+    expect(listing.items[0]!.subtitle).toBeUndefined();
+  });
+
+  test('readArchiveExplorerRecord for problem with no canonicalUrl yields undefined subtitle', () => {
+    // Exercises line 334: payload.canonicalUrl falsy → subtitle is undefined in readProblemRecordDetail
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-archive-nocanon-'));
+    tempDirs.push(workspaceRoot);
+    const snapshotRoot = join(workspaceRoot, 'archive', 'snapshots', SNAPSHOT_ID);
+    const normalizedRoot = join(snapshotRoot, 'normalized');
+
+    writeJson(join(normalizedRoot, 'problems', 'problem-55.json'), {
+      id: 55,
+      name: 'No Canonical',
+      canonicalUrl: undefined,
+      slug: 'no-canonical',
+      constraints: [],
+      tags: [],
+      sections: [],
+      examples: [],
+      categoryChain: [],
+      editorialAvailability: 'unknown',
+      officialSolutions: {},
+      visibleTests: [],
+      linkedAssets: [],
+      metadata: {},
+    });
+
+    const detail = readArchiveExplorerRecord(workspaceRoot, {
+      snapshotId: SNAPSHOT_ID,
+      dataset: 'problems',
+      recordId: '55',
+    });
+    expect(detail.subtitle).toBeUndefined();
+  });
+
+  test('countRankingEntries returns 0 when ranking index has no problems field', () => {
+    // Exercises line 442: readRankingIndex(...).problems?.length ?? 0 → undefined ?? 0
+    // And line 380: index.problems ?? [] → [] when problems is missing
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-archive-noproblems-'));
+    tempDirs.push(workspaceRoot);
+    const snapshotRoot = join(workspaceRoot, 'archive', 'snapshots', SNAPSHOT_ID);
+    const normalizedRoot = join(snapshotRoot, 'normalized');
+
+    // Write ranking index without a "problems" field
+    writeJson(join(normalizedRoot, 'rankings', 'best-submissions.json'), {
+      generatedAt: '2026-01-01T00:00:00.000Z',
+    });
+
+    const summary = getArchiveExplorerSummary(workspaceRoot, { snapshotId: SNAPSHOT_ID });
+    const rankingsSummary = summary.datasets.find((d) => d.dataset === 'rankings');
+    // problems?.length ?? 0 → 0 because problems is undefined
+    expect(rankingsSummary?.count).toBe(0);
+
+    // Also test listArchiveExplorerRecords when problems is missing → empty list
+    const listing = listArchiveExplorerRecords(workspaceRoot, {
+      snapshotId: SNAPSHOT_ID,
+      dataset: 'rankings',
+    });
+    expect(listing.totalCount).toBe(0);
+  });
+
+  test('listRankingItems uses empty object when bestUserPerLanguage is missing', () => {
+    // Exercises line 274: entry.bestUserPerLanguage ?? {} when field is absent
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-archive-nolang-'));
+    tempDirs.push(workspaceRoot);
+    const snapshotRoot = join(workspaceRoot, 'archive', 'snapshots', SNAPSHOT_ID);
+    const normalizedRoot = join(snapshotRoot, 'normalized');
+
+    writeJson(join(normalizedRoot, 'rankings', 'best-submissions.json'), {
+      generatedAt: '2026-01-01T00:00:00.000Z',
+      problems: [
+        { problemId: 77 }, // no bestUserPerLanguage field at all
+      ],
+    });
+
+    const listing = listArchiveExplorerRecords(workspaceRoot, {
+      snapshotId: SNAPSHOT_ID,
+      dataset: 'rankings',
+    });
+    expect(listing.items[0]!.subtitle).toBe('No language winners recorded');
+  });
+
+  test('readRankingRecordDetail when index has no problems field throws not-found', () => {
+    // Exercises line 380: index.problems ?? [] → [] → indexEntry is undefined → throws
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-archive-ranknoitems-'));
+    tempDirs.push(workspaceRoot);
+    const snapshotRoot = join(workspaceRoot, 'archive', 'snapshots', SNAPSHOT_ID);
+    const normalizedRoot = join(snapshotRoot, 'normalized');
+
+    writeJson(join(normalizedRoot, 'rankings', 'best-submissions.json'), {
+      generatedAt: '2026-01-01T00:00:00.000Z',
+      // no "problems" key
+    });
+
+    expect(() =>
+      readArchiveExplorerRecord(workspaceRoot, {
+        snapshotId: SNAPSHOT_ID,
+        dataset: 'rankings',
+        recordId: '42',
+      }),
+    ).toThrow('Ranking record "42" was not found.');
+  });
+});
