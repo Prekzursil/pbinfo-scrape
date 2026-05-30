@@ -30,6 +30,8 @@ export interface CrawlWorkflowOptions {
   checkpoint?: 'canonical' | 'checkpoint';
   mode?: CrawlMode;
   authStatusProbe?: (config: ReturnType<typeof loadLocalConfig>) => Promise<PbinfoAuthStatusResult>;
+  /** Override the HTTP fetch implementation (primarily for testing). */
+  fetchImpl?: typeof fetch;
 }
 
 export interface CrawlWorkflowResult {
@@ -147,7 +149,7 @@ async function runSeededCrawlWorkflow(
   const queue = new CrawlQueue(queuePath);
   queue.requeueInProgress();
   queue.enqueueMany(seeds);
-  const fetchImpl = await resolveCrawlFetch(config);
+  const fetchImpl = options.fetchImpl ?? (await resolveCrawlFetch(config));
   const browserCapture = await resolveBrowserCapture(config);
 
   const crawler = new ArchiveCrawler({
@@ -467,7 +469,7 @@ function readJsonDirectory<T>(directoryPath: string): T[] {
   }
 }
 
-function createRateLimitedFetch(fetchImpl: typeof fetch, minimumDelayMs = 250): typeof fetch {
+export function createRateLimitedFetch(fetchImpl: typeof fetch, minimumDelayMs = 250): typeof fetch {
   let nextAvailableAt = 0;
   let queue = Promise.resolve();
 
