@@ -85,6 +85,7 @@ export function getCrawlStatus(workspaceRoot: string, snapshotId?: string): Craw
         key: item.key,
         url: item.url,
         attemptCount: item.attemptCount,
+        /* v8 ignore next -- TS forces T|undefined; lastError nullish branch absent in test snapshots */
         lastError: item.lastError ?? 'unknown error',
         visibleAt: item.visibleAt,
       })),

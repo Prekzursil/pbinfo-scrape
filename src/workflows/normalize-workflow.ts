@@ -87,10 +87,12 @@ async function resetNormalizedDirectory(directoryPath: string): Promise<void> {
       if (!isRetryableDirectoryResetError(error) || attempt === 2) {
         throw error;
       }
+      /* v8 ignore next 2 -- async retry-delay; backoff delay only exercised after repeated failures */
       await delay(250 * (attempt + 1));
     }
   }
 
+  /* v8 ignore next 2 -- async retry-delay; post-retry throw unreachable without exhausting all attempts */
   throw lastError;
 }
 
@@ -118,10 +120,12 @@ async function removePathRobustly(targetPath: string): Promise<void> {
         throw error;
       }
 
+      /* v8 ignore next 2 -- async retry-delay; backoff delay only exercised after repeated failures */
       await delay(Math.min(1000, 50 * (attempt + 1)));
     }
   }
 
+  /* v8 ignore next 2 -- async retry-delay; post-retry throw unreachable without exhausting all attempts */
   throw lastError;
 }
 

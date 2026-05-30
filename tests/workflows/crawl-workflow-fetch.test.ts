@@ -1,8 +1,11 @@
-import { describe, expect, test, vi } from 'vitest';
+import { afterEach, describe, expect, test, vi } from 'vitest';
 
 import { createRateLimitedFetch } from '../../src/workflows/crawl-workflow.js';
 
 describe('createRateLimitedFetch / resolveFetchUrl branches', () => {
+  afterEach(() => {
+    vi.useRealTimers();
+  });
   test('passes through a non-pbinfo URL instance without rate-limiting delay', async () => {
     const inner = vi.fn(async () => new Response('ok', { status: 200 }));
     const rateFetch = createRateLimitedFetch(inner as unknown as typeof fetch, 0);
@@ -54,5 +57,27 @@ describe('createRateLimitedFetch / resolveFetchUrl branches', () => {
     await rateFetch(weirdInput);
 
     expect(inner).toHaveBeenCalledWith(weirdInput, undefined);
+  });
+
+  test('applies setTimeout delay when waitFor > 0 (rate-limit backpressure)', async () => {
+    vi.useFakeTimers();
+
+    const inner = vi.fn(async () => new Response('ok', { status: 200 }));
+    // Use a 100 ms minimum delay so the second request sees waitFor > 0
+    const rateFetch = createRateLimitedFetch(inner as unknown as typeof fetch, 100);
+
+    const pbUrl = new URL('https://www.pbinfo.ro/page');
+
+    // First request – no delay needed (nextAvailableAt starts at 0)
+    const first = rateFetch(pbUrl);
+    await vi.runAllTimersAsync();
+    await first;
+
+    // Second request – nextAvailableAt is now ~100 ms in the future, so waitFor > 0
+    const second = rateFetch(pbUrl);
+    await vi.runAllTimersAsync();
+    await second;
+
+    expect(inner).toHaveBeenCalledTimes(2);
   });
 });
