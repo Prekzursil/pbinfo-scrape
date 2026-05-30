@@ -54,6 +54,12 @@ describe('problem-listing-shared helpers', () => {
     });
   });
 
+  test('resolveProblemListingMatch returns undefined when evaluation id is non-finite (lines 92-93)', () => {
+    // A digit string too large for a JS Number converts to Infinity, failing the isFinite guard.
+    const hugeEvalHref = `/detalii-evaluare/${'9'.repeat(400)}`;
+    expect(resolveProblemListingMatch('/probleme/1/sum', hugeEvalHref)).toBeUndefined();
+  });
+
   test('parseTotalMatches reads the bold summary count', () => {
     const $ = loadHtml('<div class="bold mb-3">42 soluții</div>');
     expect(parseTotalMatches($)).toBe(42);

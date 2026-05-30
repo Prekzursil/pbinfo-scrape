@@ -119,6 +119,36 @@ describe('storage helper branches', () => {
     expect(existsSync(join(queueRoot, 'canonical-snap.sqlite'))).toBe(true);
   });
 
+  test('pruneToCanonicalSnapshot returns empty paths when crawl-queues directory is absent (lines 279-280)', () => {
+    // removeNonCanonicalQueues returns early when the crawl-queues dir does not exist.
+    // This exercises lines 279-280 in storage.ts.
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-storage-no-queues-'));
+    tempDirs.push(workspaceRoot);
+    const config = loadLocalConfig(workspaceRoot);
+    const snap = prepareSnapshot(config, {
+      snapshotId: 'only-snap',
+      scope: 'all',
+      now: new Date('2026-03-10T00:00:00.000Z'),
+    });
+    writeArchiveCatalog(config.paths.archiveRoot, {
+      currentSnapshotId: snap.snapshotId,
+      canonicalSnapshotId: snap.snapshotId,
+      snapshots: [
+        {
+          snapshotId: snap.snapshotId,
+          createdAt: '2026-03-10T00:00:00.000Z',
+          scope: 'all',
+          status: 'completed',
+          checkpoint: 'canonical',
+        },
+      ],
+      artifactExports: [],
+    });
+    // Do NOT create the crawl-queues directory — the early-return branch fires.
+    const result = pruneToCanonicalSnapshot(config, snap.snapshotId);
+    expect(result.removedQueuePaths).toEqual([]);
+  });
+
   test('relinkRawArtifacts rejects a manifest with mismatched snapshot id', () => {
     const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-storage-relink-mismatch-'));
     tempDirs.push(workspaceRoot);

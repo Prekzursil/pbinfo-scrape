@@ -160,6 +160,38 @@ describe('raw artifact export/import', () => {
     expect(imported.snapshotId).toBe('snapshot-latest');
   });
 
+  test('relinkRawSnapshotArtifacts resolves directory-style sourcePath (line 61 of raw-artifacts.ts)', async () => {
+    // When sourcePath does NOT end in ".json", the else branch (line 61) appends "manifest.json".
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-artifacts-relink-dir-'));
+    tempDirs.push(workspaceRoot);
+    const config = loadLocalConfig(workspaceRoot);
+    const snapshot = prepareSnapshot(config, {
+      snapshotId: 'relink-dir-snap',
+      scope: 'public',
+      now: new Date('2026-03-10T00:00:00.000Z'),
+    });
+    mkdirSync(snapshot.rawPagesRoot, { recursive: true });
+    mkdirSync(snapshot.rawAssetsRoot, { recursive: true });
+    writeFileSync(join(snapshot.rawPagesRoot, 'page.html'), '<html>ok</html>', 'utf8');
+
+    const exported = await exportRawSnapshotArtifacts({
+      workspaceRoot,
+      snapshotId: snapshot.snapshotId,
+    });
+
+    rmSync(snapshot.rawPagesRoot, { recursive: true, force: true });
+
+    // Pass the export root directory (not the manifest.json file) — exercises line 61.
+    const relinked = await relinkRawSnapshotArtifacts({
+      workspaceRoot,
+      snapshotId: snapshot.snapshotId,
+      sourcePath: join(config.artifacts.exportRoot, snapshot.snapshotId),
+    });
+
+    expect(relinked.snapshotId).toBe(snapshot.snapshotId);
+    expect(relinked.manifestPath).toMatch(/manifest\.json$/);
+  });
+
   test('throws when import or relink are missing a source path', async () => {
     const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-artifacts-nosrc-'));
     tempDirs.push(workspaceRoot);
