@@ -331,6 +331,21 @@ describe('App import browser profile action (lines 538-546 of app.tsx)', () => {
   });
 });
 
+describe('App login profile action (lines 527-535 of app.tsx)', () => {
+  test('submitting the credential login form triggers bridge.loginProfile', async () => {
+    const bridge = makeBridge();
+    render(<App desktop={bridge} />);
+
+    fireEvent.click(await screen.findByRole('tab', { name: 'Setup' }));
+
+    // Submit the "Credential login" form to trigger onLoginProfile
+    const signInButton = await screen.findByRole('button', { name: /Sign in/i });
+    fireEvent.click(signInButton);
+
+    await waitFor(() => expect(bridge.loginProfile).toHaveBeenCalled());
+  });
+});
+
 describe('App profile management actions', () => {
   test('Activate profile button triggers bridge.activateProfile', async () => {
     const bridge = makeBridge();
