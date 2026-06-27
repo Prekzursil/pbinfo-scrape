@@ -239,7 +239,15 @@ function rewritePageUrl(
 }
 
 function safeResolve(base: URL, candidate?: string): URL | undefined {
-  if (!candidate || candidate.startsWith('javascript:') || candidate.startsWith('#')) {
+  // Case-insensitive scheme test so `JavaScript:` cannot bypass the filter
+  // (CodeQL js/incomplete-url-scheme-check).
+  const loweredCandidate = candidate?.trim().toLowerCase();
+  if (
+    !candidate
+    || !loweredCandidate
+    || loweredCandidate.startsWith('javascript:')
+    || loweredCandidate.startsWith('#')
+  ) {
     return undefined;
   }
 

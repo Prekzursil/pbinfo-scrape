@@ -1,0 +1,20 @@
+name: pbinfo-scrape CodeQL config
+
+# CodeQL scans the project's own JS/TS source only.
+#
+# paths-ignore rationale:
+#   - archive/  : committed website *snapshots* — verbatim third-party HTML/JS
+#                 scraped from pbinfo.ro and stored as the archival product of
+#                 this crawler. It is not project source; scanning it produced
+#                 thousands of alerts against external page markup (automatic
+#                 semicolon insertion, missing var declarations, DOM XSS in the
+#                 mirrored site, etc.) that this repo neither authors nor ships.
+#   - tests/    : test fixtures intentionally build sample HTML and set throwaway
+#                 cookies; those are non-production test scaffolding, not shipped
+#                 code, so security queries against them are noise.
+paths-ignore:
+  - archive
+  - tests
+
+queries:
+  - uses: security-and-quality

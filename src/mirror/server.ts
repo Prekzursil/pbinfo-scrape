@@ -3,6 +3,7 @@ import { basename, join } from 'node:path';
 import { type Server } from 'node:http';
 
 import express from 'express';
+import { rateLimit } from 'express-rate-limit';
 
 import { resolveReadableSnapshotLayout } from '../archive/storage.js';
 import { loadLocalConfig } from '../config/local-config.js';
@@ -24,6 +25,18 @@ export async function startMirrorServer(
   const config = loadLocalConfig(options.workspaceRoot);
   const snapshot = resolveReadableSnapshotLayout(config, options.snapshotId);
   const app = express();
+  // Bound per-client request rate even though the server only binds to loopback,
+  // so the disk-backed file routes below can't be hammered (CodeQL
+  // js/missing-rate-limiting). The window is generous for an interactive
+  // single-user preview.
+  app.use(
+    rateLimit({
+      windowMs: 60_000,
+      limit: 2_000,
+      standardHeaders: true,
+      legacyHeaders: false,
+    }),
+  );
   const routes = readRoutes(snapshot.routesManifestPath);
   if (routes.length === 0) {
     throw new Error(

@@ -338,8 +338,9 @@ async function fetchWithTimeout(
   requestTimeoutMs: number,
 ): Promise<Response> {
   const controller = new AbortController();
-  const signal = init?.signal
-    ? AbortSignal.any([init.signal, controller.signal])
+  const providedSignal = init?.signal;
+  const signal = providedSignal
+    ? AbortSignal.any([providedSignal, controller.signal])
     : controller.signal;
   const timeout = setTimeout(() => {
     controller.abort(new Error(`request timed out after ${requestTimeoutMs}ms`));
@@ -1271,13 +1272,17 @@ function normalizeNavigableUrl(
   base: URL,
   candidate?: string,
 ): string | null {
+  // Lower-case the scheme test so mixed-case schemes (e.g. `JavaScript:`) cannot
+  // bypass the filter (CodeQL js/incomplete-url-scheme-check).
+  const loweredCandidate = candidate?.trim().toLowerCase();
   if (
     !candidate
-    || candidate.startsWith('#')
-    || candidate.startsWith('javascript:')
-    || candidate.startsWith('mailto:')
-    || candidate.startsWith('tel:')
-    || candidate.startsWith('data:')
+    || !loweredCandidate
+    || loweredCandidate.startsWith('#')
+    || loweredCandidate.startsWith('javascript:')
+    || loweredCandidate.startsWith('mailto:')
+    || loweredCandidate.startsWith('tel:')
+    || loweredCandidate.startsWith('data:')
   ) {
     return null;
   }
@@ -1427,7 +1432,15 @@ function normalizeAssetUrl(
   base: URL,
   candidate?: string,
 ): string | null {
-  if (!candidate || candidate.startsWith('data:') || candidate.startsWith('javascript:')) {
+  // Case-insensitive scheme test: mixed-case schemes must not bypass the filter
+  // (CodeQL js/incomplete-url-scheme-check).
+  const loweredCandidate = candidate?.trim().toLowerCase();
+  if (
+    !candidate
+    || !loweredCandidate
+    || loweredCandidate.startsWith('data:')
+    || loweredCandidate.startsWith('javascript:')
+  ) {
     return null;
   }
 
