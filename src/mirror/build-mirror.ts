@@ -246,6 +246,8 @@ function safeResolve(base: URL, candidate?: string): URL | undefined {
     !candidate
     || !loweredCandidate
     || loweredCandidate.startsWith('javascript:')
+    || loweredCandidate.startsWith('vbscript:')
+    || loweredCandidate.startsWith('data:')
     || loweredCandidate.startsWith('#')
   ) {
     return undefined;
