@@ -1280,6 +1280,7 @@ function normalizeNavigableUrl(
     || !loweredCandidate
     || loweredCandidate.startsWith('#')
     || loweredCandidate.startsWith('javascript:')
+    || loweredCandidate.startsWith('vbscript:')
     || loweredCandidate.startsWith('mailto:')
     || loweredCandidate.startsWith('tel:')
     || loweredCandidate.startsWith('data:')
@@ -1440,6 +1441,7 @@ function normalizeAssetUrl(
     || !loweredCandidate
     || loweredCandidate.startsWith('data:')
     || loweredCandidate.startsWith('javascript:')
+    || loweredCandidate.startsWith('vbscript:')
   ) {
     return null;
   }
