@@ -131,7 +131,7 @@ export function appendGuiJobEvent(
     detail:
       parsedEvent.detail
         ? {
-            ...(current.detail ?? {}),
+            ...current.detail,
             ...parsedEvent.detail,
           }
         : current.detail,

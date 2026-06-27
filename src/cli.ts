@@ -1,6 +1,4 @@
-import { readFileSync, writeFileSync } from 'node:fs';
-import { dirname } from 'node:path';
-import { mkdirSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 
 import { Command } from 'commander';

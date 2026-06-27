@@ -58,8 +58,6 @@ import {
   getCrawlStatusWorkflow,
   resumeCrawlWorkflow,
   runCrawlWorkflow,
-  type CrawlStatusResult,
-  type CrawlWorkflowResult,
 } from '../../workflows/crawl-workflow.js';
 import { runNormalizeSnapshotWorkflow } from '../../workflows/normalize-workflow.js';
 import { runRankingWorkflow } from '../../workflows/rank-workflow.js';
@@ -545,7 +543,7 @@ export function createDesktopController(
           status: 'failed',
           updatedAt: new Date().toISOString(),
           detail: {
-            ...(safeReadJob(created.jobId)?.detail ?? {}),
+            ...safeReadJob(created.jobId)?.detail,
             error: message,
           },
         });
@@ -674,7 +672,7 @@ export function createDesktopController(
       latestCounters: currentCounters,
       updatedAt: eventTimestamp,
       detail: {
-        ...(job.detail ?? {}),
+        ...job.detail,
         scope: crawlDetail.scope,
         mode: crawlDetail.mode,
         snapshotId: result.snapshotId,

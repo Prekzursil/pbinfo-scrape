@@ -1,6 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs';
 
-import { chromium, type Browser, type BrowserContext } from 'playwright';
+import { chromium, type BrowserContext } from 'playwright';
 
 interface PersistedCookie {
   key?: string;

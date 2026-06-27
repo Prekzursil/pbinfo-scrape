@@ -324,7 +324,7 @@ function decryptChromiumCookieValue(
     const nonce = encryptedValue.subarray(3, 15);
     const tag = encryptedValue.subarray(encryptedValue.length - 16);
     const ciphertext = encryptedValue.subarray(15, encryptedValue.length - 16);
-    const decipher = createDecipheriv('aes-256-gcm', masterKey, nonce);
+    const decipher = createDecipheriv('aes-256-gcm', masterKey, nonce, { authTagLength: 16 });
     decipher.setAuthTag(tag);
     return Buffer.concat([decipher.update(ciphertext), decipher.final()]).toString('utf8');
   }

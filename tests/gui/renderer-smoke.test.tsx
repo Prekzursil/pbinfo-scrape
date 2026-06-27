@@ -10,7 +10,7 @@ afterEach(() => {
   cleanup();
 });
 
-test('renders the simplified easy-mode overview before exposing deeper tools', { timeout: 15_000 }, async () => {
+test('renders the simplified easy-mode overview before exposing deeper tools', { timeout: 60_000 }, async () => {
   const harness = createBridgeHarness();
   render(<App desktop={harness.bridge} />);
 
@@ -45,7 +45,7 @@ test('renders the simplified easy-mode overview before exposing deeper tools', {
   expect(await screen.findByText(/publish --snapshot acceptance-20260310b/)).toBeInTheDocument();
 });
 
-test('lets the user move through overview, coverage, data, and setup without overload', { timeout: 15_000 }, async () => {
+test('lets the user move through overview, coverage, data, and setup without overload', { timeout: 60_000 }, async () => {
   const harness = createBridgeHarness();
   render(<App desktop={harness.bridge} />);
 

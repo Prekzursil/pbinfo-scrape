@@ -542,7 +542,7 @@ export function persistNormalizedSnapshotHtml(
         ]);
         const existingPageUrls = Array.isArray(current?.pageUrls) ? current.pageUrls : [];
         return {
-          ...(current ?? {}),
+          ...current,
           user: userHandle,
           sourceUrl: current?.sourceUrl ?? options.item.url,
           pageUrls: [...new Set([...existingPageUrls, options.item.url])].sort(),
@@ -1074,7 +1074,6 @@ function discoverFollowUps(
   const problemMatch = base.pathname.match(/^\/probleme\/(\d+)\/([^/?#]+)/);
   if (problemMatch?.[1] && problemMatch[2]) {
     const problemId = Number(problemMatch[1]);
-    const slug = problemMatch[2];
     const endpointBase = 'https://www.pbinfo.ro/ajx-module';
     const problemUrl = new URL(base.toString());
     queued.set(`problem-statement:${base.toString()}`, {
@@ -1298,6 +1297,7 @@ function normalizeNavigableUrl(
 }
 
 function stripTrackingQueryParameters(url: URL): void {
+  // oxlint-disable-next-line unicorn/no-useless-spread -- snapshot keys before delete() mutates the live URLSearchParams iterator below
   for (const key of [...url.searchParams.keys()]) {
     const normalizedKey = key.toLowerCase();
     if (
