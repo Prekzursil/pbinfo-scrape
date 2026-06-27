@@ -36,7 +36,9 @@ jobs:
   # Gate 3 (part 1): tests + build.
   test:
     name: Tests & Build
-    runs-on: ubuntu-latest
+    # Windows-targeted desktop app: the suite asserts Windows path semantics and
+    # Chromium-on-Windows cookie-profile resolution, so the tests run on Windows.
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -45,7 +47,7 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Unit & integration tests
-        run: xvfb-run -a npm test
+        run: npm test
       - name: Build
         run: npm run build
 
@@ -56,7 +58,7 @@ jobs:
   # suite reaches 100%, remove `continue-on-error` so coverage becomes blocking.
   coverage:
     name: Coverage (target 100%)
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     continue-on-error: true
     steps:
       - uses: actions/checkout@v4
@@ -66,7 +68,7 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Coverage (100% line + branch enforced)
-        run: xvfb-run -a npm run test:coverage
+        run: npm run test:coverage
 
   # Gate 4: SAST (Semgrep CE / Opengrep rulesets).
   sast:
