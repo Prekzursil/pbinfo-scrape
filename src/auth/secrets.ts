@@ -23,7 +23,7 @@ export async function bootstrapSecretBundle(
   config: LoadedLocalConfig,
   now = new Date(),
 ): Promise<BootstrapSecretBundleResult> {
-  const { identity, recipient, createdIdentity } = await ensureIdentityMaterial(config);
+  const { recipient, createdIdentity } = await ensureIdentityMaterial(config);
   const payload: SecretBundlePayload = {
     exportedAt: now.toISOString(),
     localConfig: readJsonIfExists(config.paths.localRoot, 'pbinfo.local.json'),

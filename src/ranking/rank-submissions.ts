@@ -46,7 +46,7 @@ export function rankProblemSubmissions(
     compareFastCandidates,
   );
 
-  const bestTrustworthyOverall = [...Object.values(trustworthyPerLanguage.candidates)].sort(
+  const bestTrustworthyOverall = Object.values(trustworthyPerLanguage.candidates).sort(
     (left, right) => compareTrustworthyCandidates(left, right, forcedBest),
   )[0];
   const bestFastOverall = [...representatives].sort((left, right) =>
