@@ -28,6 +28,9 @@ export function parseCategoryPage(html: string, grade: number): ParsedCategoryPa
 
     const id = Number(match[1]);
     const slug = match[2];
+    /* v8 ignore next 2 -- type-only guard: the regex group `([^/?#]+)` requires
+       at least one character, so a matched `slug` is never empty at runtime;
+       the guard exists to satisfy noUncheckedIndexedAccess. */
     if (!slug) {
       continue;
     }
@@ -80,6 +83,9 @@ function findNextItemListHref(
 ): string | undefined {
   for (let index = startIndex + 1; index < anchors.length; index += 1) {
     const anchor = anchors[index];
+    /* v8 ignore next 2 -- type-only guard: `anchors` comes from cheerio's
+       toArray() whose elements are always defined; the guard exists to satisfy
+       noUncheckedIndexedAccess. */
     if (!anchor) {
       continue;
     }

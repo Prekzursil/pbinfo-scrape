@@ -114,4 +114,47 @@ describe('loadLocalConfig', () => {
       repo: 'pbinfo-private-archive',
     });
   });
+
+  test('resolves every optional custom path override relative to the workspace', () => {
+    const workspaceRoot = createWorkspace();
+    const localRoot = join(workspaceRoot, '.local');
+    const configPath = join(localRoot, 'pbinfo.local.json');
+    mkdirSync(localRoot, { recursive: true });
+
+    writeFileSync(
+      configPath,
+      JSON.stringify(
+        {
+          auth: {
+            cookieSourcePath: 'imported/cookies.json',
+            sessionCookiesPath: 'state/session.json',
+          },
+          paths: {
+            localRoot: 'custom-local',
+            archiveRoot: 'custom-archive',
+            artifactsRoot: 'custom-artifacts',
+          },
+          secrets: {
+            recipientPath: 'secrets/recipient.txt',
+          },
+          artifacts: {
+            exportRoot: 'exports/custom',
+          },
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+
+    const config = loadLocalConfig(workspaceRoot);
+
+    expect(config.auth.cookieSourcePath).toBe(join(workspaceRoot, 'imported', 'cookies.json'));
+    expect(config.auth.sessionCookiesPath).toBe(join(workspaceRoot, 'state', 'session.json'));
+    expect(config.paths.localRoot).toBe(join(workspaceRoot, 'custom-local'));
+    expect(config.paths.archiveRoot).toBe(join(workspaceRoot, 'custom-archive'));
+    expect(config.paths.artifactsRoot).toBe(join(workspaceRoot, 'custom-artifacts'));
+    expect(config.secrets.recipientPath).toBe(join(workspaceRoot, 'secrets', 'recipient.txt'));
+    expect(config.artifacts.exportRoot).toBe(join(workspaceRoot, 'exports', 'custom'));
+  });
 });

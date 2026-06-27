@@ -35,6 +35,9 @@ export function parseEvaluationPage(html: string, evaluationId: number): ParsedE
   const fileName = summaryMap.get('fisier');
 
   const problemSlug = problemMatch[2];
+  /* v8 ignore next 3 -- type-only guard: the matched group `([^/]+)` requires at
+     least one character, so `problemSlug` is never empty when `problemMatch`
+     exists; the guard exists to satisfy noUncheckedIndexedAccess. */
   if (!problemSlug) {
     throw new Error(`Could not infer problem slug for evaluation ${evaluationId}.`);
   }

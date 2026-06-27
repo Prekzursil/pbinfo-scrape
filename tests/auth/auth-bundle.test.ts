@@ -76,4 +76,15 @@ describe('auth bundle', () => {
       }),
     ]);
   });
+
+  test('bootstraps a bundle without an explicit recipient by generating identity material', async () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-auth-bundle-norecipient-'));
+    tempDirs.push(workspaceRoot);
+
+    const created = await createEncryptedAuthBundle({ workspaceRoot });
+
+    expect(created.createdIdentity).toBe(true);
+    expect(existsSync(created.identityPath)).toBe(true);
+    expect(readFileSync(created.bundlePath, 'utf8')).toContain('BEGIN AGE ENCRYPTED FILE');
+  });
 });

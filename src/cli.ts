@@ -523,9 +523,13 @@ function persistImportedCookies(
   );
 }
 
+/* v8 ignore start -- entrypoint guard: this block only runs when cli.ts is the
+   process main module (direct `node cli.js` / `tsx cli.ts`), which never happens
+   under the test runner where the module is imported. runCli itself is covered. */
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   runCli().catch((error) => {
     process.stderr.write(`${error instanceof Error ? error.stack : String(error)}\n`);
     process.exitCode = 1;
   });
 }
+/* v8 ignore stop */
