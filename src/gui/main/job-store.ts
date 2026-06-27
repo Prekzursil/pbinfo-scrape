@@ -197,8 +197,14 @@ function getGuiJobLogPath(workspaceRoot: string, jobId: string): string {
 
 function ensureFile(filePath: string, contents: string): void {
   mkdirSync(dirname(filePath), { recursive: true });
-  if (!existsSync(filePath)) {
-    writeFileSync(filePath, contents, 'utf8');
+  // Atomic create-if-absent (`wx`) instead of exists-then-write removes the
+  // TOCTOU window CodeQL flags as js/file-system-race.
+  try {
+    writeFileSync(filePath, contents, { encoding: 'utf8', flag: 'wx' });
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== 'EEXIST') {
+      throw error;
+    }
   }
 }
 

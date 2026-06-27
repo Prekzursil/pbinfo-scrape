@@ -149,11 +149,20 @@ export function markSnapshotCompleted(
   }
   writeArchiveCatalog(config.paths.archiveRoot, catalog);
   const layout = resolveSnapshotLayout(config, snapshotId);
-  if (existsSync(layout.metadataPath)) {
-    const metadata = JSON.parse(readFileSync(layout.metadataPath, 'utf8')) as SnapshotRecord;
-    metadata.status = 'completed';
-    writeFileSync(layout.metadataPath, JSON.stringify(metadata, null, 2), 'utf8');
+  // Read directly and tolerate a missing file instead of an exists-then-read
+  // guard, removing the TOCTOU window CodeQL flags as js/file-system-race.
+  let metadataRaw: string;
+  try {
+    metadataRaw = readFileSync(layout.metadataPath, 'utf8');
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
+      return;
+    }
+    throw error;
   }
+  const metadata = JSON.parse(metadataRaw) as SnapshotRecord;
+  metadata.status = 'completed';
+  writeFileSync(layout.metadataPath, JSON.stringify(metadata, null, 2), 'utf8');
 }
 
 export function resolveReadableSnapshotLayout(

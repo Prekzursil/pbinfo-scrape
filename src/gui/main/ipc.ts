@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
 
 import { shell, type IpcMain } from 'electron';
@@ -275,12 +275,22 @@ function recordDesktopTestAction(
     return;
   }
 
-  const existing = existsSync(actionsPath)
-    ? (JSON.parse(readFileSync(actionsPath, 'utf8')) as Array<{
-        kind: 'openPath' | 'openExternal';
-        target: string;
-      }>)
-    : [];
+  // Read directly and tolerate a missing file instead of an exists-then-read
+  // guard, removing the TOCTOU window CodeQL flags as js/file-system-race.
+  let existing: Array<{
+    kind: 'openPath' | 'openExternal';
+    target: string;
+  }> = [];
+  try {
+    existing = JSON.parse(readFileSync(actionsPath, 'utf8')) as Array<{
+      kind: 'openPath' | 'openExternal';
+      target: string;
+    }>;
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== 'ENOENT') {
+      throw error;
+    }
+  }
 
   mkdirSync(dirname(actionsPath), {
     recursive: true,
