@@ -1,0 +1,105 @@
+name: Quality Gate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Gate 1 + Gate 2: lint / format / sec-lint (oxlint) and types (tsc).
+  lint-and-types:
+    name: Lint & Types
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - name: Lint (oxlint)
+        run: npm run lint
+      - name: Typecheck (cli/library)
+        run: npm run typecheck
+      - name: Typecheck (desktop)
+        run: npm run typecheck:desktop
+
+  # Gate 3 (part 1): tests + build.
+  test:
+    name: Tests & Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - name: Unit & integration tests
+        run: xvfb-run -a npm test
+      - name: Build
+        run: npm run build
+
+  # Gate 3 (part 2): STRICT 100% line + branch coverage (lean strict-zero target).
+  # NOTE (transitional): coverage is being driven from its current ~81% baseline
+  # up to the enforced 100% threshold declared in vitest.config.ts. Until that
+  # work lands this job reports the real number without blocking merges; once the
+  # suite reaches 100%, remove `continue-on-error` so coverage becomes blocking.
+  coverage:
+    name: Coverage (target 100%)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - name: Coverage (100% line + branch enforced)
+        run: xvfb-run -a npm run test:coverage
+
+  # Gate 4: SAST (Semgrep CE / Opengrep rulesets).
+  sast:
+    name: SAST (Semgrep CE)
+    runs-on: ubuntu-latest
+    container:
+      image: semgrep/semgrep
+    steps:
+      - uses: actions/checkout@v4
+      - name: Semgrep scan
+        run: semgrep scan --config p/typescript --config p/javascript --config p/secrets --error --metrics off src
+
+  # Gate 5: secrets scanning (gitleaks).
+  secrets:
+    name: Secrets (gitleaks)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2.3.9
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # Gate 6: dependency vulnerability scanning (osv-scanner).
+  deps:
+    name: Dependencies (osv-scanner)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: google/osv-scanner-action/osv-scanner-action@v2.3.8
+        with:
+          scan-args: |-
+            --lockfile=package-lock.json
