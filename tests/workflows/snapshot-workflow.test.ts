@@ -415,6 +415,87 @@ describe('snapshot workflow', () => {
     );
   });
 
+  test('throws when no snapshot id is supplied and no current snapshot exists', () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-snapshot-none-'));
+    tempDirs.push(workspaceRoot);
+    expect(() => getCrawlStatus(workspaceRoot)).toThrow(/No archived snapshot/);
+  });
+
+  test('defaults status to in_progress when the snapshot is absent from the catalog', () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-snapshot-unknown-'));
+    tempDirs.push(workspaceRoot);
+    const config = loadLocalConfig(workspaceRoot);
+    prepareSnapshot(config, {
+      snapshotId: 'present-snapshot',
+      scope: 'all',
+      now: new Date('2026-03-10T00:00:00.000Z'),
+    });
+
+    const status = getCrawlStatus(workspaceRoot, 'ghost-snapshot');
+
+    expect(status.status).toBe('in_progress');
+    expect(status.publishEligible).toBe(false);
+  });
+
+  test('fails finalization when a solved problem is missing its official source capture', async () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-snapshot-official-gate-'));
+    tempDirs.push(workspaceRoot);
+    mkdirSync(join(workspaceRoot, '.local'), { recursive: true });
+    writeFileSync(
+      join(workspaceRoot, '.local', 'pbinfo.local.json'),
+      JSON.stringify({ crawl: { userHandle: 'Prekzursil', crossCheckWithBrowser: false } }, null, 2),
+      'utf8',
+    );
+
+    const config = loadLocalConfig(workspaceRoot);
+    const snapshot = prepareSnapshot(config, {
+      snapshotId: 'official-gate-snapshot',
+      scope: 'all',
+      now: new Date('2026-03-10T00:00:00.000Z'),
+    });
+    mkdirSync(join(snapshot.normalizedRoot, 'pages'), { recursive: true });
+
+    const problemUrl = 'https://www.pbinfo.ro/probleme/1/sum';
+    writeFileSync(
+      join(snapshot.rawPagesRoot, 'problem-1.html'),
+      `
+        <html><body>
+          <table><tr><th>Clasa</th></tr><tr><td>9</td></tr></table>
+          <h1><a href="/probleme/1/sum">Sum</a></h1>
+          <a href="/solutii/problema/1/sum">Soluții oficiale</a>
+        </body></html>
+      `,
+      'utf8',
+    );
+    writeFileSync(
+      snapshot.rawPagesManifestPath,
+      JSON.stringify({ [problemUrl]: 'problem-1.html' }, null, 2),
+      'utf8',
+    );
+    writeFileSync(snapshot.rawAssetsManifestPath, JSON.stringify({}, null, 2), 'utf8');
+    writeFileSync(
+      join(snapshot.normalizedRoot, 'pages', 'problem-1.json'),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          url: problemUrl,
+          kind: 'public-page',
+          httpStatus: 200,
+          contentType: 'text/html',
+          bodyPath: 'raw-pages/problem-1.html',
+          fetchedAt: '2026-03-10T00:00:00.000Z',
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+
+    await expect(finalizeSnapshotWorkflow(workspaceRoot, 'official-gate-snapshot')).rejects.toThrow(
+      /official sources/i,
+    );
+  });
+
   test('refuses to finalize a snapshot that still has pending queue work', async () => {
     const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-snapshot-pending-'));
     tempDirs.push(workspaceRoot);

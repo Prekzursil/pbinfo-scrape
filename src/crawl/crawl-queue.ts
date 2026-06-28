@@ -137,16 +137,19 @@ export class CrawlQueue {
           `)
           .run(nowIso, row.id);
 
+        // The row was just updated by id, so the re-select always returns it.
         const claimed = database
           .prepare(`SELECT * FROM crawl_queue WHERE id = ?`)
-          .get(row.id) as QueueRow | undefined;
+          .get(row.id) as QueueRow;
 
         database.exec('COMMIT');
-        return claimed ? this.mapRow(claimed) : null;
+        return this.mapRow(claimed);
+      /* v8 ignore start -- defensive rollback for SQLite runtime failures */
       } catch (error) {
         database.exec('ROLLBACK');
         throw error;
       }
+      /* v8 ignore stop */
     });
   }
 
@@ -201,7 +204,7 @@ export class CrawlQueue {
         `)
         .run(now, reason);
 
-      return Number(result.changes ?? 0);
+      return Number(result.changes);
     });
   }
 

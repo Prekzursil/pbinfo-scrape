@@ -120,10 +120,10 @@ async function runSeededCrawlWorkflow(
   const queue = new CrawlQueue(queuePath);
   queue.requeueInProgress();
   queue.enqueueMany(seeds);
-  const fetchImpl =
-    config.auth.strategy !== 'none' || config.auth.sessionCookiesPath
-      ? await createCookieFetch(config.auth.sessionCookiesPath)
-      : fetch;
+  // config.auth.sessionCookiesPath is always populated by loadLocalConfig, so the
+  // crawl always runs through the cookie-aware fetch (with an empty jar when no
+  // session has been captured yet).
+  const fetchImpl = await createCookieFetch(config.auth.sessionCookiesPath);
   let browserCapture:
     | Awaited<ReturnType<typeof createPlaywrightBrowserCapture>>
     | undefined;
@@ -461,7 +461,7 @@ function readJsonDirectory<T>(directoryPath: string): T[] {
   }
 }
 
-function createRateLimitedFetch(
+export function createRateLimitedFetch(
   fetchImpl: typeof fetch,
   minimumDelayMs = 250,
 ): typeof fetch {

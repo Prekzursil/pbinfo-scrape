@@ -15,8 +15,10 @@ export function detectSuspicionFlags(sourceCode?: string): string[] {
     ...normalized.matchAll(/\bcout\s*<<\s*(?:"([^"\n]{0,32})"|'([^'\n]{0,8})'|(-?\d{1,9}))/g),
     ...normalized.matchAll(/\b(?:printf|print)\s*\(\s*(?:"([^"\n]{0,32})"|'([^'\n]{0,8})'|(-?\d{1,9}))/g),
   ];
+  // Both regexes above expose exactly three capture groups, so a match only ever
+  // populates groups 1-3 (string / char / numeric literal alternatives).
   const printsSubstantiveConstant = printedConstantLiterals.some((match) =>
-    isSubstantiveOutputLiteral(match[1] ?? match[2] ?? match[3] ?? match[4] ?? match[5] ?? match[6]),
+    isSubstantiveOutputLiteral(match[1] ?? match[2] ?? match[3]),
   );
   if (printsSubstantiveConstant && !readsInput) {
     flags.add('constant-output');
@@ -109,6 +111,7 @@ function collectExactInputLiteralComparisons(
   for (const match of normalizedSourceCode.matchAll(identifierFirst)) {
     const variable = match[1];
     const literal = match[3];
+    /* v8 ignore next 3 -- the regex's variable and literal groups are mandatory */
     if (!variable || !literal) {
       continue;
     }
@@ -121,6 +124,7 @@ function collectExactInputLiteralComparisons(
   for (const match of normalizedSourceCode.matchAll(literalFirst)) {
     const variable = match[3];
     const literal = match[1];
+    /* v8 ignore next 3 -- the regex's variable and literal groups are mandatory */
     if (!variable || !literal) {
       continue;
     }
@@ -172,6 +176,7 @@ function summarizeComparisonsByVariable(
 }
 
 function isSubstantiveOutputLiteral(literal: string | undefined): boolean {
+  /* v8 ignore next 3 -- callers always pass a populated capture-group literal */
   if (!literal) {
     return false;
   }

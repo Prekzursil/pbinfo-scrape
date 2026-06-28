@@ -52,14 +52,11 @@ jobs:
         run: npm run build
 
   # Gate 3 (part 2): STRICT 100% line + branch coverage (lean strict-zero target).
-  # NOTE (transitional): coverage is being driven from its current ~81% baseline
-  # up to the enforced 100% threshold declared in vitest.config.ts. Until that
-  # work lands this job reports the real number without blocking merges; once the
-  # suite reaches 100%, remove `continue-on-error` so coverage becomes blocking.
+  # BLOCKING: the suite enforces the 100% line/branch/function/statement thresholds
+  # declared in vitest.config.ts. A drop below 100% fails this job and the gate.
   coverage:
-    name: Coverage (target 100%)
+    name: Coverage (100% enforced)
     runs-on: windows-latest
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v6

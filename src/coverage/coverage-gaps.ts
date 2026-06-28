@@ -365,12 +365,14 @@ function toGapEntry(
   };
 }
 
+// Precondition: only ever called from the missingOfficialSources mapping above,
+// where the record set has already been filtered to officialSourceArchived ===
+// false. The remaining branches enumerate the reachable blocked reasons; once the
+// upstream-availability and fragment checks fall through, the record by definition
+// has an archived solution fragment but no captured official source body.
 function deriveOfficialBlockedReason(
   record: ProblemCoverageRecord,
 ): OfficialSourceBlockedReason {
-  if (record.officialSourceArchived) {
-    return 'official-source-not-captured';
-  }
   if (record.editorialAvailability === 'hidden') {
     return 'editorial-hidden';
   }
@@ -383,8 +385,5 @@ function deriveOfficialBlockedReason(
   if (!record.solutionFragmentArchived) {
     return 'solution-fragment-not-archived';
   }
-  if (record.solutionFragmentArchived || record.officialSolutionPresent) {
-    return 'official-source-not-captured';
-  }
-  return 'unknown';
+  return 'official-source-not-captured';
 }

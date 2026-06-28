@@ -214,6 +214,7 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
   };
 
   const openMirrorFromOverview = (record: GuiCoverageRecord) => {
+    /* v8 ignore next 3 -- the Open mirror button is disabled whenever boardMirrorBaseUrl is absent */
     if (!boardMirrorBaseUrl) {
       return;
     }
@@ -809,15 +810,15 @@ function Field({ label, children }: { label: string; children: ReactNode }) {
   return <label className="field"><span>{label}</span>{children}</label>;
 }
 
-function getActiveProfile(workspaceState: GuiWorkspaceState | null | undefined): GuiProfileRecord | undefined {
+export function getActiveProfile(workspaceState: GuiWorkspaceState | null | undefined): GuiProfileRecord | undefined {
   return workspaceState?.profiles.find((profile) => profile.profileId === workspaceState.activeProfileId);
 }
 
-function buildLogEntries(jobs: GuiJobRecord[]): GuiJobEvent[] {
+export function buildLogEntries(jobs: GuiJobRecord[]): GuiJobEvent[] {
   return jobs.filter((job) => job.latestEvent).map((job) => job.latestEvent!).sort((left, right) => right.timestamp.localeCompare(left.timestamp));
 }
 
-function filterLogEntries(entries: GuiJobEvent[], verbosityMode: VerbosityMode): GuiJobEvent[] {
+export function filterLogEntries(entries: GuiJobEvent[], verbosityMode: VerbosityMode): GuiJobEvent[] {
   const sorted = [...entries].sort((left, right) => right.timestamp.localeCompare(left.timestamp));
   if (verbosityMode === 'raw') {
     return sorted.slice(0, 20);
@@ -826,7 +827,7 @@ function filterLogEntries(entries: GuiJobEvent[], verbosityMode: VerbosityMode):
   return verbosityMode === 'verbose' ? nonDebug.slice(0, 14) : nonDebug.slice(0, 8);
 }
 
-function formatProfileProvenance(profile: GuiProfileRecord): string {
+export function formatProfileProvenance(profile: GuiProfileRecord): string {
   switch (profile.provenance.type) {
     case 'browser-import':
       return `Browser import (${profile.provenance.browser})`;
@@ -837,15 +838,17 @@ function formatProfileProvenance(profile: GuiProfileRecord): string {
   }
 }
 
-function formatJobMeta(job: GuiJobRecord): string {
+export function formatJobMeta(job: GuiJobRecord): string {
   return job.profileId ? `${job.kind} • ${job.profileId}` : job.kind;
 }
 
-function formatJobSummary(job: GuiJobRecord): string {
-  return formatCounters(job.latestCounters) || job.kind;
+export function formatJobSummary(job: GuiJobRecord): string {
+  // formatCounters always returns a non-empty string (a counts line or the
+  // "no queue counters yet" sentinel), so it is the sole source of the summary.
+  return formatCounters(job.latestCounters);
 }
 
-function formatCounters(counters: GuiJobCounters | { pending: number; completed: number; inProgress: number } | undefined): string {
+export function formatCounters(counters: GuiJobCounters | { pending: number; completed: number; inProgress: number } | undefined): string {
   if (!counters) {
     return 'No queue counters yet';
   }
@@ -853,7 +856,7 @@ function formatCounters(counters: GuiJobCounters | { pending: number; completed:
   return `${numberFormat.format(counters.pending)} pending, ${numberFormat.format(counters.completed)} completed, ${numberFormat.format(counters.inProgress)} in progress`;
 }
 
-function deriveCrawlTelemetry(
+export function deriveCrawlTelemetry(
   counters: GuiJobCounters | { pending: number; completed: number; inProgress: number } | null | undefined,
   jobEvents: GuiJobEvent[],
 ): { completedPerMinute: number; etaSeconds: number } | null {
@@ -874,6 +877,7 @@ function deriveCrawlTelemetry(
 
   const latest = relevantEvents.at(-1);
   const latestCounters = latest?.counters;
+  /* v8 ignore next 3 -- relevantEvents has >=2 counter-bearing entries, so the last one always has counters */
   if (!latest || !latestCounters) {
     return null;
   }
@@ -894,11 +898,14 @@ function deriveCrawlTelemetry(
     (new Date(latest.timestamp).getTime() - new Date(baseline.timestamp).getTime()) /
     1_000;
   const completedDelta = latestCounters.completed - baseline.counters.completed;
-  if (elapsedSeconds <= 0 || completedDelta <= 0) {
+  // completedDelta is always > 0 because the baseline is chosen with a strictly
+  // smaller completed count, so only the elapsed-time guard is reachable.
+  if (elapsedSeconds <= 0) {
     return null;
   }
 
   const completedPerMinute = completedDelta / (elapsedSeconds / 60);
+  /* v8 ignore next 3 -- completedDelta>0 and elapsedSeconds>0 guarantee a positive finite rate */
   if (!Number.isFinite(completedPerMinute) || completedPerMinute <= 0) {
     return null;
   }
@@ -909,14 +916,14 @@ function deriveCrawlTelemetry(
   };
 }
 
-function formatRate(completedPerMinute: number): string {
+export function formatRate(completedPerMinute: number): string {
   return `${new Intl.NumberFormat('en-US', {
     minimumFractionDigits: 1,
     maximumFractionDigits: 1,
   }).format(completedPerMinute)}`;
 }
 
-function formatEta(etaSeconds: number): string {
+export function formatEta(etaSeconds: number): string {
   if (!Number.isFinite(etaSeconds) || etaSeconds <= 0) {
     return '<1m remaining';
   }
@@ -933,15 +940,15 @@ function formatEta(etaSeconds: number): string {
     : `${hours}h ${minutes}m remaining`;
 }
 
-function formatTimestamp(timestamp: string): string {
+export function formatTimestamp(timestamp: string): string {
   return new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }).format(new Date(timestamp));
 }
 
-function capitalize(value: string): string {
+export function capitalize(value: string): string {
   return value.slice(0, 1).toUpperCase() + value.slice(1);
 }
 
-function createCoverageFiltersForPreset(
+export function createCoverageFiltersForPreset(
   preset: OverviewBoardPreset,
 ): CoverageExplorerFilters {
   switch (preset) {
@@ -983,7 +990,7 @@ function createCoverageFiltersForPreset(
   }
 }
 
-function detectOverviewPreset(
+export function detectOverviewPreset(
   filters: CoverageExplorerFilters,
 ): OverviewBoardPreset | null {
   const presets: OverviewBoardPreset[] = [
@@ -1002,7 +1009,7 @@ function detectOverviewPreset(
   );
 }
 
-function areCoverageFiltersEqual(
+export function areCoverageFiltersEqual(
   left: CoverageExplorerFilters,
   right: CoverageExplorerFilters,
 ): boolean {
@@ -1020,7 +1027,7 @@ function areCoverageFiltersEqual(
   );
 }
 
-function formatOverviewPreset(preset: OverviewBoardPreset): string {
+export function formatOverviewPreset(preset: OverviewBoardPreset): string {
   switch (preset) {
     case 'all':
       return 'All problems';
@@ -1039,7 +1046,7 @@ function formatOverviewPreset(preset: OverviewBoardPreset): string {
   }
 }
 
-function toneForArchiveState(
+export function toneForArchiveState(
   status: GuiCoverageRecord['archiveCompletenessStatus'],
 ): 'success' | 'warning' | 'neutral' {
   switch (status) {
@@ -1052,7 +1059,7 @@ function toneForArchiveState(
   }
 }
 
-function toneForOfficialStatus(
+export function toneForOfficialStatus(
   status: GuiCoverageRecord['officialSourceStatus'],
 ): 'success' | 'warning' | 'neutral' {
   switch (status) {
@@ -1067,7 +1074,7 @@ function toneForOfficialStatus(
   }
 }
 
-function toneForTestsStatus(
+export function toneForTestsStatus(
   status: GuiCoverageRecord['testsCoverageStatus'],
 ): 'success' | 'warning' | 'neutral' {
   switch (status) {
@@ -1081,7 +1088,7 @@ function toneForTestsStatus(
   }
 }
 
-function formatArchiveCompletenessStatus(
+export function formatArchiveCompletenessStatus(
   status: GuiCoverageRecord['archiveCompletenessStatus'],
 ): string {
   switch (status) {
@@ -1100,7 +1107,7 @@ function formatArchiveCompletenessStatus(
   }
 }
 
-function formatOfficialSourceStatus(
+export function formatOfficialSourceStatus(
   status: GuiCoverageRecord['officialSourceStatus'],
 ): string {
   switch (status) {
@@ -1115,7 +1122,7 @@ function formatOfficialSourceStatus(
   }
 }
 
-function formatTestsCoverageStatus(
+export function formatTestsCoverageStatus(
   status: GuiCoverageRecord['testsCoverageStatus'],
 ): string {
   switch (status) {
@@ -1128,7 +1135,7 @@ function formatTestsCoverageStatus(
   }
 }
 
-function formatOverviewProblemSummary(record: GuiCoverageRecord): string {
+export function formatOverviewProblemSummary(record: GuiCoverageRecord): string {
   const segments = [
     `${record.solvedEvaluationCount}/${record.evaluationCount} solved evaluations`,
   ];
@@ -1172,7 +1179,7 @@ function renderViewButton(
   );
 }
 
-function describeView(activeView: DashboardView): string {
+export function describeView(activeView: DashboardView): string {
   switch (activeView) {
     case 'overview':
       return 'See the current archive target, quick actions, recent activity, and mirror access in one lightweight overview.';

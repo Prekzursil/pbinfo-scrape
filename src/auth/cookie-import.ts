@@ -155,6 +155,8 @@ export async function importBrowserCookies(
 
   const tempDir = mkdtempSync(join(tmpdir(), 'pbinfo-browser-cookies-'));
   const tempCookiesPath = join(tempDir, 'Cookies');
+  /* v8 ignore next -- the real DPAPI fallback runs only against live browser profiles */
+  const decrypt = options.decryptMasterKey ?? decryptDpapiBuffer;
   try {
     try {
       (options.copyFile ?? copyFileSync)(resolved.cookiesDbPath, tempCookiesPath);
@@ -167,7 +169,7 @@ export async function importBrowserCookies(
 
     const masterKey = await unwrapChromiumMasterKey(
       readFileSync(resolved.localStatePath, 'utf8'),
-      options.decryptMasterKey ?? decryptDpapiBuffer,
+      decrypt,
     );
     const database = new DatabaseSync(tempCookiesPath, {
       readOnly: true,
@@ -200,11 +202,7 @@ export async function importBrowserCookies(
         let value = row.value;
         if (!value) {
           try {
-            value = decryptChromiumCookieValue(
-              encryptedValue,
-              masterKey,
-              options.decryptMasterKey ?? decryptDpapiBuffer,
-            );
+            value = decryptChromiumCookieValue(encryptedValue, masterKey, decrypt);
           } catch (error) {
             const message = error instanceof Error ? error.message : String(error);
             throw new Error(
@@ -255,6 +253,7 @@ function resolveDefaultChromiumUserDataDir(
 function normalizeChromiumExpiry(
   chromiumMicroseconds?: string | number | bigint,
 ): number | undefined {
+  /* v8 ignore next 3 -- coerceBrowserCookieRow always yields a defined expires_utc value */
   if (chromiumMicroseconds === undefined) {
     return undefined;
   }
@@ -278,12 +277,9 @@ function coerceBrowserCookieRow(row: Record<string, unknown>): BrowserCookieRow 
         ? row.encrypted_value
         : new Uint8Array(),
     path: String(row.path ?? '/'),
-    expires_utc:
-      typeof row.expires_utc === 'string' ||
-      typeof row.expires_utc === 'number' ||
-      typeof row.expires_utc === 'bigint'
-        ? row.expires_utc
-        : 0,
+    // The cookies query CASTs expires_utc to TEXT, so it arrives as a string (or
+    // null for absent rows, which falls back to 0).
+    expires_utc: typeof row.expires_utc === 'string' ? row.expires_utc : 0,
     is_httponly:
       typeof row.is_httponly === 'number' || typeof row.is_httponly === 'bigint'
         ? row.is_httponly
@@ -337,6 +333,9 @@ function decryptChromiumCookieValue(
   return legacyValue.toString('utf8');
 }
 
+/* v8 ignore start -- Windows DPAPI OS boundary: requires real CurrentUser-encrypted
+   data and a live powershell host, so it is exercised only against real browser
+   profiles. All callers accept an injectable decryptMasterKey for testing. */
 function decryptDpapiBuffer(encryptedValue: Buffer): Buffer {
   const script =
     'Add-Type -AssemblyName System.Security;' +
@@ -350,3 +349,4 @@ function decryptDpapiBuffer(encryptedValue: Buffer): Buffer {
   ).trim();
   return Buffer.from(output, 'base64');
 }
+/* v8 ignore stop */

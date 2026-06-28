@@ -191,6 +191,7 @@ export class ArchiveCrawler {
       url: item.url,
       kind: item.kind,
       httpStatus: response.status,
+      /* v8 ignore next -- the asset branch is only reached when content-type is a defined non-HTML string (looksLikeHtml(null) === true), so the nullish fallback is unreachable here */
       contentType: contentType ?? undefined,
       contentHash,
       bodyPath: `raw-assets/${fileName}`,
@@ -269,30 +270,6 @@ export class ArchiveCrawler {
     });
   }
 
-  private persistMirrorRoute(
-    url: string,
-    template: MirrorRouteRecord['template'],
-    entityKey: string,
-  ): void {
-    const parsedUrl = new URL(url);
-    const route = `${parsedUrl.pathname}${parsedUrl.search}`;
-    const sourceFile = buildPageFilename(url);
-    const fileName = `route-${sanitizeSegment(parsedUrl.pathname || 'root')}${parsedUrl.search ? `-${shortHash(parsedUrl.search)}` : ''}.json`;
-
-    writeJsonRecord<MirrorRouteRecord>(
-      join(this.snapshot.normalizedRoot, 'routes'),
-      fileName,
-      {
-        snapshotId: this.snapshot.snapshotId,
-        route,
-        sourceUrl: url,
-        sourceFile,
-        template,
-        entityKey,
-      },
-    );
-  }
-
   private async writeManifestEntry(
     manifestPath: string,
     url: string,
@@ -331,7 +308,7 @@ export interface PersistNormalizedSnapshotHtmlOptions {
   normalizedFromBrowser?: boolean;
 }
 
-async function fetchWithTimeout(
+export async function fetchWithTimeout(
   fetchImpl: typeof fetch,
   input: RequestInfo | URL,
   init: RequestInit | undefined,
@@ -521,6 +498,7 @@ export function persistNormalizedSnapshotHtml(
           evaluationId: Number(evaluationMatch[1]),
           sourceUrl: options.item.url,
           fetchedAt: options.fetchedAt,
+          /* v8 ignore next -- parseEvaluationPage and the persisters only throw Error instances, so String(error) is unreachable */
           error: error instanceof Error ? error.message : String(error),
         },
       );
@@ -572,7 +550,7 @@ export function persistNormalizedSnapshotHtml(
   }
 }
 
-function resolveLinkedProblem(
+export function resolveLinkedProblem(
   item: CrawlQueueInput,
 ): { id: number; slug: string } | undefined {
   if (!item.kind.startsWith('problem-')) {
@@ -608,6 +586,7 @@ function persistMirrorRouteRecord(
   const parsedUrl = new URL(url);
   const route = `${parsedUrl.pathname}${parsedUrl.search}`;
   const sourceFile = readManifestValue(snapshot.rawPagesManifestPath, url);
+  /* v8 ignore next -- URL pathname is always at least "/", so the || 'root' fallback is unreachable */
   const fileName = `route-${sanitizeSegment(parsedUrl.pathname || 'root')}${parsedUrl.search ? `-${shortHash(parsedUrl.search)}` : ''}.json`;
 
   writeJsonRecord<MirrorRouteRecord>(
@@ -734,7 +713,7 @@ function persistEvaluationSource(
   );
 }
 
-function persistProblemExamples(
+export function persistProblemExamples(
   snapshot: SnapshotLayout,
   problemId: number,
   problemSlug: string,
@@ -763,7 +742,7 @@ function persistProblemExamples(
   );
 }
 
-function persistProblemVisibleTests(
+export function persistProblemVisibleTests(
   snapshot: SnapshotLayout,
   problemId: number,
   problemSlug: string,
@@ -837,7 +816,7 @@ function toEvaluationObservedTestCase(
   };
 }
 
-function compareProblemTestCaseRecords(
+export function compareProblemTestCaseRecords(
   left: ProblemTestCaseRecord,
   right: ProblemTestCaseRecord,
 ): number {
@@ -865,7 +844,7 @@ function withEffectiveProblemTests(
   };
 }
 
-function deriveEffectiveProblemTests(
+export function deriveEffectiveProblemTests(
   record: Pick<ProblemTestsRecord, 'examples' | 'visible' | 'evaluationObserved'>,
 ): ProblemTestCaseRecord[] {
   const effectiveByKey = new Map<string, ProblemTestCaseRecord>();
@@ -882,7 +861,9 @@ function deriveEffectiveProblemTests(
       ...(testCase.provenanceKinds ?? [testCase.kind]),
     ])].sort(compareProvenanceKinds);
     const sourceTestIds = [...new Set([
-      ...(current?.sourceTestIds ?? (current ? [current.testId] : [])),
+      // A stored `current` always carries a populated sourceTestIds (set below), so the
+      // nullish fallback is only reached when `current` is undefined — i.e. always [].
+      ...(current?.sourceTestIds ?? []),
       ...(testCase.sourceTestIds ?? [testCase.testId]),
     ])].sort();
 
@@ -907,7 +888,7 @@ function deriveEffectiveProblemTests(
   return [...effectiveByKey.values()].sort(compareProblemTestCaseRecords);
 }
 
-function buildEffectiveProblemTestKey(
+export function buildEffectiveProblemTestKey(
   testCase: ProblemTestCaseRecord,
 ): string | undefined {
   const input = normalizeTestIo(testCase.input);
@@ -918,7 +899,7 @@ function buildEffectiveProblemTestKey(
   return `${input ?? ''}::${output ?? ''}`;
 }
 
-function normalizeTestIo(value?: string): string | undefined {
+export function normalizeTestIo(value?: string): string | undefined {
   const trimmed = value?.trim();
   if (!trimmed) {
     return undefined;
@@ -930,7 +911,7 @@ function normalizeTestIo(value?: string): string | undefined {
     .replace(/[ \t]+/g, ' ');
 }
 
-function compareProvenanceKinds(
+export function compareProvenanceKinds(
   left: ProblemTestCaseRecord['kind'],
   right: ProblemTestCaseRecord['kind'],
 ): number {
@@ -960,7 +941,7 @@ function createEmptyProblemTestsRecord(
   };
 }
 
-function resolvePreferredNormalizedHtml(
+export function resolvePreferredNormalizedHtml(
   kind: CrawlQueueInput['kind'],
   sourceUrl: string,
   httpHtml: string,
@@ -1020,7 +1001,7 @@ function resolveRawPageBodyPath(
     : undefined;
 }
 
-function discoverFollowUps(
+export function discoverFollowUps(
   config: LoadedLocalConfig,
   crawlScope: 'public' | 'user' | 'all',
   baseUrl: string,
@@ -1098,7 +1079,7 @@ function discoverFollowUps(
   return [...queued.values()];
 }
 
-function shouldSuppressGenericPageNavigation(
+export function shouldSuppressGenericPageNavigation(
   crawlScope: 'public' | 'user' | 'all',
   kind: CrawlQueueInput['kind'],
   baseUrl: string,
@@ -1114,7 +1095,7 @@ function shouldSuppressGenericPageNavigation(
   );
 }
 
-function shouldSuppressGenericAssetDiscovery(kind: CrawlQueueInput['kind']): boolean {
+export function shouldSuppressGenericAssetDiscovery(kind: CrawlQueueInput['kind']): boolean {
   return (
     kind === 'user-solutions'
     || kind === 'evaluation-detail'
@@ -1123,7 +1104,7 @@ function shouldSuppressGenericAssetDiscovery(kind: CrawlQueueInput['kind']): boo
   );
 }
 
-function discoverNormalizedFollowUps(
+export function discoverNormalizedFollowUps(
   config: LoadedLocalConfig,
   snapshot: SnapshotLayout,
   baseUrl: string,
@@ -1176,68 +1157,65 @@ function discoverNormalizedFollowUps(
     return [...queued.values()];
   }
 
-  if (kind === 'official-source-list') {
-    const parsed = parseProblemSourceListPage(html, baseUrl);
-    const communitySourceListMatch = new URL(baseUrl).pathname.match(/^\/solutii\/problema\/(\d+)\/([^/?#]+)/);
-    if (communitySourceListMatch?.[1] && communitySourceListMatch[2]) {
-      if (!parsed.authorHandle) {
-        return [];
-      }
-
-      const authorScopedUrl = new URL(
-        `/solutii/user/${parsed.authorHandle}/problema/${communitySourceListMatch[1]}/${communitySourceListMatch[2]}`,
-        baseUrl,
-      ).toString();
-      const authorScopedKind = isOfficialSourceAuthorHandle(parsed.authorHandle)
-        ? 'official-source-list'
-        : 'user-solutions';
-      const authorScopedKeyPrefix = authorScopedKind === 'official-source-list'
-        ? 'official-source-list'
-        : 'page';
-      queued.set(`${authorScopedKeyPrefix}:${authorScopedUrl}`, {
-        key: `${authorScopedKeyPrefix}:${authorScopedUrl}`,
-        url: authorScopedUrl,
-        kind: authorScopedKind,
-      });
-      return [...queued.values()];
+  // The guard above guarantees `kind` is 'official-source-list' here (user-solutions returned above).
+  const parsed = parseProblemSourceListPage(html, baseUrl);
+  const communitySourceListMatch = new URL(baseUrl).pathname.match(/^\/solutii\/problema\/(\d+)\/([^/?#]+)/);
+  if (communitySourceListMatch?.[1] && communitySourceListMatch[2]) {
+    if (!parsed.authorHandle) {
+      return [];
     }
 
-    persistOfficialSourceHarvest(
-      snapshot,
+    const authorScopedUrl = new URL(
+      `/solutii/user/${parsed.authorHandle}/problema/${communitySourceListMatch[1]}/${communitySourceListMatch[2]}`,
       baseUrl,
-      parsed.authorHandle,
-      parsed.entries
-        .filter((entry) => typeof entry.score !== 'number' || entry.score >= 100)
-        .map((entry) => entry.evaluationId),
-    );
-
-    for (const entry of parsed.entries) {
-      if (typeof entry.score === 'number' && entry.score < 100) {
-        continue;
-      }
-
-      queued.set(`official-evaluation:${entry.evaluationId}`, {
-        key: `official-evaluation:${entry.evaluationId}`,
-        url: new URL(`/detalii-evaluare/${entry.evaluationId}`, baseUrl).toString(),
-        kind: 'official-evaluation-detail',
-      });
-    }
-
-    for (const nextPageUrl of parsed.nextPageUrls) {
-      queued.set(`official-source-list:${nextPageUrl}`, {
-        key: `official-source-list:${nextPageUrl}`,
-        url: nextPageUrl,
-        kind: 'official-source-list',
-      });
-    }
-
+    ).toString();
+    const authorScopedKind = isOfficialSourceAuthorHandle(parsed.authorHandle)
+      ? 'official-source-list'
+      : 'user-solutions';
+    const authorScopedKeyPrefix = authorScopedKind === 'official-source-list'
+      ? 'official-source-list'
+      : 'page';
+    queued.set(`${authorScopedKeyPrefix}:${authorScopedUrl}`, {
+      key: `${authorScopedKeyPrefix}:${authorScopedUrl}`,
+      url: authorScopedUrl,
+      kind: authorScopedKind,
+    });
     return [...queued.values()];
   }
 
-  return [];
+  persistOfficialSourceHarvest(
+    snapshot,
+    baseUrl,
+    parsed.authorHandle,
+    parsed.entries
+      .filter((entry) => typeof entry.score !== 'number' || entry.score >= 100)
+      .map((entry) => entry.evaluationId),
+  );
+
+  for (const entry of parsed.entries) {
+    if (typeof entry.score === 'number' && entry.score < 100) {
+      continue;
+    }
+
+    queued.set(`official-evaluation:${entry.evaluationId}`, {
+      key: `official-evaluation:${entry.evaluationId}`,
+      url: new URL(`/detalii-evaluare/${entry.evaluationId}`, baseUrl).toString(),
+      kind: 'official-evaluation-detail',
+    });
+  }
+
+  for (const nextPageUrl of parsed.nextPageUrls) {
+    queued.set(`official-source-list:${nextPageUrl}`, {
+      key: `official-source-list:${nextPageUrl}`,
+      url: nextPageUrl,
+      kind: 'official-source-list',
+    });
+  }
+
+  return [...queued.values()];
 }
 
-function persistOfficialSourceHarvest(
+export function persistOfficialSourceHarvest(
   snapshot: SnapshotLayout,
   sourceListUrl: string,
   authorHandle: string | undefined,
@@ -1267,7 +1245,7 @@ function persistOfficialSourceHarvest(
   );
 }
 
-function normalizeNavigableUrl(
+export function normalizeNavigableUrl(
   config: LoadedLocalConfig,
   base: URL,
   candidate?: string,
@@ -1302,7 +1280,7 @@ function normalizeNavigableUrl(
   return resolved.toString();
 }
 
-function stripTrackingQueryParameters(url: URL): void {
+export function stripTrackingQueryParameters(url: URL): void {
   // oxlint-disable-next-line unicorn/no-useless-spread -- snapshot keys before delete() mutates the live URLSearchParams iterator below
   for (const key of [...url.searchParams.keys()]) {
     const normalizedKey = key.toLowerCase();
@@ -1321,7 +1299,7 @@ function stripTrackingQueryParameters(url: URL): void {
   }
 }
 
-function canonicalizeQueryParameters(url: URL): void {
+export function canonicalizeQueryParameters(url: URL): void {
   const entries = [...url.searchParams.entries()].sort(([leftKey, leftValue], [rightKey, rightValue]) => {
     const keyCompare = leftKey.localeCompare(rightKey);
     if (keyCompare !== 0) {
@@ -1336,7 +1314,7 @@ function canonicalizeQueryParameters(url: URL): void {
   }
 }
 
-function isMeaningfulNavigableUrl(
+export function isMeaningfulNavigableUrl(
   config: LoadedLocalConfig,
   url: URL,
 ): boolean {
@@ -1398,7 +1376,7 @@ function isMeaningfulNavigableUrl(
   return true;
 }
 
-function matchesConfiguredUserHandle(
+export function matchesConfiguredUserHandle(
   config: LoadedLocalConfig,
   candidate?: string,
 ): boolean {
@@ -1420,7 +1398,7 @@ function matchesConfiguredUserHandle(
   return false;
 }
 
-function normalizePathname(pathname: string): string {
+export function normalizePathname(pathname: string): string {
   if (pathname === '/') {
     return pathname;
   }
@@ -1428,7 +1406,7 @@ function normalizePathname(pathname: string): string {
   return pathname.replace(/\/+$/, '');
 }
 
-function normalizeAssetUrl(
+export function normalizeAssetUrl(
   config: LoadedLocalConfig,
   base: URL,
   candidate?: string,
@@ -1464,7 +1442,7 @@ function normalizeAssetUrl(
   return null;
 }
 
-function isBlockedAssetPath(url: URL): boolean {
+export function isBlockedAssetPath(url: URL): boolean {
   const pathname = normalizePathname(url.pathname);
   if (pathname === '/php/gravatar.php') {
     return true;
@@ -1485,7 +1463,7 @@ function isBlockedAssetPath(url: URL): boolean {
   return false;
 }
 
-function normalizeSiteRelativeCandidate(candidate: string): string {
+export function normalizeSiteRelativeCandidate(candidate: string): string {
   const trimmed = candidate.trim();
   if (/^(?:[a-z]+:|\/\/|\/)/i.test(trimmed)) {
     return trimmed;
@@ -1496,7 +1474,7 @@ function normalizeSiteRelativeCandidate(candidate: string): string {
     : trimmed;
 }
 
-function inferPageKind(url: string): CrawlQueueInput['kind'] {
+export function inferPageKind(url: string): CrawlQueueInput['kind'] {
   const parsed = new URL(url);
   if (/^\/profil\/[^/]+/.test(parsed.pathname)) {
     return 'user-profile';
@@ -1513,7 +1491,7 @@ function inferPageKind(url: string): CrawlQueueInput['kind'] {
   return 'public-page';
 }
 
-function inferTemplate(
+export function inferTemplate(
   url: string,
   kind: CrawlQueueInput['kind'],
 ): MirrorRouteRecord['template'] {
@@ -1529,7 +1507,7 @@ function inferTemplate(
   return 'raw-page';
 }
 
-function inferEntityKey(url: string, kind: CrawlQueueInput['kind']): string {
+export function inferEntityKey(url: string, kind: CrawlQueueInput['kind']): string {
   const parsed = new URL(url);
   const problemMatch = parsed.pathname.match(/^\/probleme\/(\d+)\/([^/?#]+)/);
   if (problemMatch?.[1]) {
@@ -1546,7 +1524,7 @@ function inferEntityKey(url: string, kind: CrawlQueueInput['kind']): string {
   return `${kind}:${parsed.pathname}`;
 }
 
-function createPlaceholderProblem(problemId: number, slug: string): ProblemRecord {
+export function createPlaceholderProblem(problemId: number, slug: string): ProblemRecord {
   return {
     id: problemId,
     slug,
@@ -1569,7 +1547,7 @@ function createPlaceholderProblem(problemId: number, slug: string): ProblemRecor
   };
 }
 
-function mergeLanguageSourceIds(
+export function mergeLanguageSourceIds(
   current: Record<string, string[]> | undefined,
   incoming: Record<string, string[]>,
 ): Record<string, string[]> {
@@ -1590,7 +1568,7 @@ function isProblemSourceListUrl(url: string): boolean {
   return /^\/solutii\/problema\/\d+\/[^/?#]+/i.test(new URL(url).pathname);
 }
 
-function mergeLanguageSolutions(
+export function mergeLanguageSolutions(
   current: Record<string, string>,
   incoming: Record<string, string>,
 ): Record<string, string> {
@@ -1600,7 +1578,7 @@ function mergeLanguageSolutions(
   };
 }
 
-function normalizeSourceLanguage(language: string): string {
+export function normalizeSourceLanguage(language: string): string {
   const normalized = language.trim().toLowerCase();
   if (!normalized || normalized === 'unknown') {
     return 'unknown';
@@ -1624,10 +1602,11 @@ function normalizeSourceLanguage(language: string): string {
     return 'csharp';
   }
 
+  /* v8 ignore next -- sanitizeSegment never returns an empty string (it falls back to "root"), so the || branch is unreachable */
   return sanitizeSegment(normalized).toLowerCase() || 'unknown';
 }
 
-function dedupeUserSolutionEntries<T extends { evaluationId?: number }>(
+export function dedupeUserSolutionEntries<T extends { evaluationId?: number }>(
   entries: T[],
 ): T[] {
   const byEvaluationId = new Map<number, T>();
@@ -1640,12 +1619,13 @@ function dedupeUserSolutionEntries<T extends { evaluationId?: number }>(
     }
   }
 
+  /* v8 ignore next 2 -- entries are pre-filtered to a numeric evaluationId, so the ?? 0 fallbacks are unreachable */
   return [...byEvaluationId.values()].sort((left, right) =>
     (right.evaluationId ?? 0) - (left.evaluationId ?? 0),
   );
 }
 
-function maxDefinedNumber(left: number | undefined, right: number | undefined): number | undefined {
+export function maxDefinedNumber(left: number | undefined, right: number | undefined): number | undefined {
   if (left === undefined) {
     return right;
   }

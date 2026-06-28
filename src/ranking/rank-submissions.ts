@@ -120,6 +120,7 @@ function dedupeCandidates(
     const representative = [...bucket].sort((left, right) =>
       compareTrustworthyCandidates(left, right, forcedBest),
     )[0];
+    /* v8 ignore next 3 -- each bucket holds at least one candidate, so [0] is always defined */
     if (!representative) {
       continue;
     }
@@ -162,6 +163,7 @@ function rankPerLanguage(
   const candidates: Record<string, RankedSubmissionCandidate> = {};
   for (const [language, bucket] of buckets) {
     const best = [...bucket].sort((left, right) => comparer(left, right, forcedBest))[0];
+    /* v8 ignore next 3 -- each bucket holds at least one candidate, so [0] is always defined */
     if (!best) {
       continue;
     }
@@ -298,7 +300,9 @@ function compareOfficialSources(left: SourceRecord, right: SourceRecord): number
 
 function scoreOfficialSource(source: SourceRecord): number[] {
   return [
+    /* v8 ignore next -- rankOfficialSources only scores sources already filtered to score >= 100 */
     source.score !== undefined && source.score >= 100 ? 1 : 0,
+    /* v8 ignore next -- rankOfficialSources only scores sources already filtered to sourceAvailable */
     source.sourceAvailable ? 1 : 0,
     getEffectiveSuspicionFlags(source).length === 0 ? 1 : 0,
     source.sourceLength ?? source.sourceCode?.length ?? 0,
@@ -336,7 +340,7 @@ function getEffectiveSuspicionFlags(
 
 function normalizeBlockingSuspicionFlags(
   flags: string[] | undefined,
-  sourceCode?: string,
+  sourceCode: string | undefined,
 ): string[] {
   const uniqueFlags = [...new Set(flags ?? [])];
   const weakOnlyFlags = new Set(['tiny-source', 'constant-output', 'lookup-table']);

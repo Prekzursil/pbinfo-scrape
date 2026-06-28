@@ -35,12 +35,14 @@ export function parseEvaluationPage(html: string, evaluationId: number): ParsedE
   const fileName = summaryMap.get('fisier');
 
   const problemSlug = problemMatch[2];
-  /* v8 ignore next 3 -- type-only guard: the matched group `([^/]+)` requires at
-     least one character, so `problemSlug` is never empty when `problemMatch`
-     exists; the guard exists to satisfy noUncheckedIndexedAccess. */
+  // Type-only guard: the matched group `([^/]+)` requires at least one
+  // character, so `problemSlug` is never empty when `problemMatch` exists; the
+  // guard exists to satisfy noUncheckedIndexedAccess.
+  /* v8 ignore start */
   if (!problemSlug) {
     throw new Error(`Could not infer problem slug for evaluation ${evaluationId}.`);
   }
+  /* v8 ignore stop */
 
   return {
     evaluationId,
@@ -61,6 +63,7 @@ export function parseEvaluationPage(html: string, evaluationId: number): ParsedE
 }
 
 function resolveProblemLink($: ReturnType<typeof loadHtml>) {
+  /* v8 ignore next -- href is always defined: only ever called with attr('href') from an a[href] match */
   const isProblemDetailHref = (href?: string) => /^\/probleme\/(\d+)\/([^/]+)$/.test(href ?? '');
 
   const preferredLink = $('#detalii a[href], #rezumat a[href]')

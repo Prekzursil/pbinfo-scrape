@@ -202,13 +202,15 @@ function ensureFile(filePath: string, contents: string): void {
   try {
     writeFileSync(filePath, contents, { encoding: 'utf8', flag: 'wx' });
   } catch (error) {
-    /* v8 ignore next 2 -- defensive rethrow: a non-EEXIST failure from this
-       atomic create-if-absent write cannot be triggered deterministically
-       across platforms (pre-existing files and directories both surface as
-       EEXIST), so only the swallow path is exercisable. */
+    // Defensive rethrow: a non-EEXIST failure from this atomic create-if-absent
+    // write cannot be triggered deterministically across platforms (pre-existing
+    // files and directories both surface as EEXIST), so only the swallow path is
+    // exercisable.
+    /* v8 ignore start */
     if ((error as NodeJS.ErrnoException).code !== 'EEXIST') {
       throw error;
     }
+    /* v8 ignore stop */
   }
 }
 

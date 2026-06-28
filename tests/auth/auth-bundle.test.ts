@@ -87,4 +87,25 @@ describe('auth bundle', () => {
     expect(existsSync(created.identityPath)).toBe(true);
     expect(readFileSync(created.bundlePath, 'utf8')).toContain('BEGIN AGE ENCRYPTED FILE');
   });
+
+  test('restores from the configured default paths when no overrides are supplied', async () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-auth-bundle-default-'));
+    tempDirs.push(workspaceRoot);
+
+    const localRoot = join(workspaceRoot, '.local');
+    mkdirSync(localRoot, { recursive: true });
+    writeFileSync(
+      join(localRoot, 'pbinfo.local.json'),
+      JSON.stringify({ auth: { strategy: 'credentials', username: 'Prekzursil' } }, null, 2),
+      'utf8',
+    );
+
+    await createEncryptedAuthBundle({ workspaceRoot });
+    rmSync(join(localRoot, 'pbinfo.local.json'));
+
+    const restored = await restoreEncryptedAuthBundle({ workspaceRoot, sourcePath: '' });
+
+    expect(restored.restored).toBe(true);
+    expect(existsSync(join(localRoot, 'pbinfo.local.json'))).toBe(true);
+  });
 });

@@ -252,6 +252,7 @@ function extractExplicitPaginationUrls(
 
   $('.pagination a[href], a[href*="start="]').each((_, link) => {
     const href = $(link).attr('href');
+    /* v8 ignore next 3 -- the a[href]/a[href*=...] selectors guarantee attr('href') is present */
     if (!href) {
       return;
     }
@@ -273,6 +274,7 @@ function extractExplicitPaginationUrls(
 }
 
 function extractCurrentOffset(pageUrl: string | undefined): number {
+  /* v8 ignore next 3 -- only ever called with a defined pageUrl (callers guard first) */
   if (!pageUrl) {
     return 0;
   }

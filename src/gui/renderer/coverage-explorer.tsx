@@ -557,15 +557,21 @@ function CoverageRow({
           : humanizeOfficialSourceStatus(record.officialSourceStatus)}
       </td>
       <td>
-        {(record.trustworthyUserSourceLanguages ?? []).length > 0
-          ? (record.trustworthyUserSourceLanguages ?? []).join(', ')
-          : record.userSourceArchived
-            ? 'Archived only'
-            : 'No'}
+        {renderTrustworthyUserSource(
+          record.trustworthyUserSourceLanguages ?? [],
+          record.userSourceArchived,
+        )}
       </td>
       <td>{record.editorialAvailability}</td>
     </tr>
   );
+}
+
+function renderTrustworthyUserSource(languages: string[], userSourceArchived: boolean): string {
+  if (languages.length > 0) {
+    return languages.join(', ');
+  }
+  return userSourceArchived ? 'Archived only' : 'No';
 }
 
 function humanizeTestsCoverageStatus(

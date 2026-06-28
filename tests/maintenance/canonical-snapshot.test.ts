@@ -7,6 +7,7 @@ import { afterEach, describe, expect, test } from 'vitest';
 import {
   CANONICAL_SAMPLE_ROUTES,
   getCanonicalSnapshotPaths,
+  readCanonicalSnapshotIntegrity,
   readMirrorRouteIndex,
   scanCanonicalSnapshotFilesystem,
   selectCanonicalSampleRoutes,
@@ -57,6 +58,8 @@ describe('canonical snapshot helpers', () => {
     });
 
     writeFileSync(join(paths.problemsRoot, 'problem-1.json'), '{}', 'utf8');
+    writeFileSync(join(paths.problemsRoot, 'not-a-problem.json'), '{}', 'utf8');
+    mkdirSync(join(paths.problemsRoot, 'problem-99.json'), { recursive: true });
     writeFileSync(
       join(paths.mirrorRoot, 'site', 'probleme', '3171', 'waterreserve', 'index.html'),
       '<html>problem</html>',
@@ -111,5 +114,27 @@ describe('canonical snapshot helpers', () => {
         }),
       ]),
     );
+  });
+
+  test('readMirrorRouteIndex returns an empty list when the routes file is absent', () => {
+    expect(readMirrorRouteIndex(join(tmpdir(), 'pbinfo-missing-routes-xyz.json'))).toEqual([]);
+  });
+
+  test('scanCanonicalSnapshotFilesystem reports zeroes for an empty workspace', () => {
+    const root = mkdtempSync(join(tmpdir(), 'pbinfo-canonical-empty-'));
+    cleanupPaths.push(root);
+    const summary = scanCanonicalSnapshotFilesystem(getCanonicalSnapshotPaths(root));
+    expect(summary.problemsRootExists).toBe(false);
+    expect(summary.problemRecordCount).toBe(0);
+  });
+
+  test('readCanonicalSnapshotIntegrity aggregates crawl status and filesystem summary', () => {
+    const root = mkdtempSync(join(tmpdir(), 'pbinfo-canonical-integrity-'));
+    cleanupPaths.push(root);
+    const integrity = readCanonicalSnapshotIntegrity(root);
+    expect(integrity.snapshotId).toBe('acceptance-20260310b');
+    expect(integrity.paths.workspaceRoot.replace(/\\/g, '/')).toContain(root.replace(/\\/g, '/'));
+    expect(integrity.filesystem.problemRecordCount).toBe(0);
+    expect(integrity.crawlStatus).toBeDefined();
   });
 });

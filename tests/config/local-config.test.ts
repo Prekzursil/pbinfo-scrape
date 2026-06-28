@@ -140,6 +140,10 @@ describe('loadLocalConfig', () => {
           artifacts: {
             exportRoot: 'exports/custom',
           },
+          mirror: {
+            blockedAssetHosts: ['ads.example.com'],
+            externalAssetHosts: ['cdn.example.com'],
+          },
         },
         null,
         2,
@@ -149,6 +153,8 @@ describe('loadLocalConfig', () => {
 
     const config = loadLocalConfig(workspaceRoot);
 
+    expect(config.mirror.blockedAssetHosts).toEqual(['ads.example.com']);
+    expect(config.mirror.externalAssetHosts).toEqual(['cdn.example.com']);
     expect(config.auth.cookieSourcePath).toBe(join(workspaceRoot, 'imported', 'cookies.json'));
     expect(config.auth.sessionCookiesPath).toBe(join(workspaceRoot, 'state', 'session.json'));
     expect(config.paths.localRoot).toBe(join(workspaceRoot, 'custom-local'));

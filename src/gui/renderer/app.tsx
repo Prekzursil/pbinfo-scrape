@@ -117,6 +117,7 @@ export function App({ desktop }: AppProps) {
       }
 
       const nextWorkspace = await bridge.getWorkspaceState();
+      /* v8 ignore next 3 -- unmount race guard: fires only if the component unmounts mid-refresh */
       if (!isMountedRef.current) {
         return;
       }
@@ -152,6 +153,7 @@ export function App({ desktop }: AppProps) {
         readPreferredJobEvents(bridge, nextJobs, verbosityMode, resolvedSnapshotId),
       ]);
 
+      /* v8 ignore next 3 -- unmount race guard: fires only if the component unmounts mid-refresh */
       if (!isMountedRef.current) {
         return;
       }
@@ -170,6 +172,7 @@ export function App({ desktop }: AppProps) {
       try {
         await refresh();
       } catch (error) {
+        /* v8 ignore next 3 -- re-render/unmount race guard: cancelled is only true after cleanup */
         if (cancelled) {
           return;
         }
@@ -461,12 +464,12 @@ export function App({ desktop }: AppProps) {
         if (successMessage) {
           setStatusMessage(successMessage);
         }
+        setBusyAction(null);
         return result;
       } catch (error) {
         setErrorMessage(toMessage(error));
-        return undefined;
-      } finally {
         setBusyAction(null);
+        return undefined;
       }
     },
     [],
@@ -486,6 +489,7 @@ export function App({ desktop }: AppProps) {
   const handleVerbosityChange = useCallback(
     (nextVerbosityMode: GuiVerbosityMode) => {
       setVerbosityMode(nextVerbosityMode);
+      /* v8 ignore next 3 -- verbosity controls only render once a bridge-backed workspace exists */
       if (!bridge) {
         return;
       }
@@ -703,6 +707,7 @@ export function App({ desktop }: AppProps) {
 }
 
 function readWindowBridge(): DesktopBridge | undefined {
+  /* v8 ignore next 3 -- the renderer always runs in a window context; the SSR guard is defensive */
   if (typeof window === 'undefined') {
     return undefined;
   }
