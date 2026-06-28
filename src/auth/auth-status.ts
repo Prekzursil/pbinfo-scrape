@@ -84,10 +84,12 @@ export async function probePbinfoAuthStatus(
   }
 
   if (!handleMatchesConfigured) {
+    // A handle mismatch only occurs when a handle is configured, so configuredHandle
+    // is always defined in this branch.
     return {
       status: 'handle-mismatch',
       loggedIn,
-      configuredHandle: configuredHandle ?? undefined,
+      configuredHandle,
       resolvedHandle: resolvedHandle ?? undefined,
       handleMatchesConfigured,
       cookieFileExists,
@@ -95,7 +97,7 @@ export async function probePbinfoAuthStatus(
       probeUrl,
       checkedAt,
       remediation: [
-        `Configured crawl handle "${configuredHandle ?? 'unknown'}" does not match authenticated session "${resolvedHandle ?? 'unknown'}".`,
+        `Configured crawl handle "${configuredHandle}" does not match authenticated session "${resolvedHandle ?? 'unknown'}".`,
         'Update `.local/pbinfo.local.json` (`crawl.userHandle`) or import the correct account cookies.',
       ],
     };
@@ -175,6 +177,7 @@ function extractResolvedHandle(html: string): string | undefined {
 
   const $ = loadHtml(html);
   const hasLogoutLink = $('a[href*="logout"], form[action*="logout"]').length > 0;
+  /* v8 ignore next 3 -- only invoked when already logged in, so one of these is always true */
   if (!sessionIsAuthenticated && !hasLogoutLink) {
     return undefined;
   }

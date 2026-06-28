@@ -76,4 +76,60 @@ describe('evaluation parser edge cases', () => {
     );
     expect(parsed.language).toBe('unknown');
   });
+
+  test('coerces unparsable per-test score and max-score cells to zero', () => {
+    const extra = `
+      <div id="detalii">
+        <table class="table table-bordered">
+          <tr><th>Test</th><th>Scor obtinut</th><th>Scor posibil</th></tr>
+          <tr><td>1</td><td>n/a</td><td>n/a</td></tr>
+        </table>
+      </div>`;
+    const parsed = parseEvaluationPage(buildEval('<tr><th>Punctaj</th><td>5</td></tr>', extra), 8);
+    expect(parsed.tests[0]?.score).toBe(0);
+    expect(parsed.tests[0]?.maxScore).toBe(0);
+  });
+
+  test('defaults per-test score and max-score to zero when those columns are absent', () => {
+    const extra = `
+      <div id="detalii">
+        <table class="table table-bordered">
+          <tr><th>Test</th></tr>
+          <tr><td>1</td></tr>
+        </table>
+      </div>`;
+    const parsed = parseEvaluationPage(buildEval('<tr><th>Punctaj</th><td>5</td></tr>', extra), 9);
+    expect(parsed.tests[0]?.score).toBe(0);
+    expect(parsed.tests[0]?.maxScore).toBe(0);
+  });
+
+  test('treats a blank textarea as no source code', () => {
+    const parsed = parseEvaluationPage(buildEval('<tr><th>Punctaj</th><td>5</td></tr>', '<textarea>   </textarea>'), 10);
+    expect(parsed.sourceAvailable).toBe(false);
+    expect(parsed.sourceCode).toBeUndefined();
+  });
+
+  test('treats a blank #sursa pre block as no source code', () => {
+    const parsed = parseEvaluationPage(
+      buildEval('<tr><th>Punctaj</th><td>5</td></tr>', '<div id="sursa"><pre>   </pre></div>'),
+      11,
+    );
+    expect(parsed.sourceCode).toBeUndefined();
+  });
+
+  test('treats a blank code_* pre block as no source code', () => {
+    const parsed = parseEvaluationPage(
+      buildEval('<tr><th>Punctaj</th><td>5</td></tr>', '<pre class="code_cpp">   </pre>'),
+      12,
+    );
+    expect(parsed.sourceCode).toBeUndefined();
+  });
+
+  test('treats a blank compilation log as no compile log', () => {
+    const parsed = parseEvaluationPage(
+      buildEval('<tr><th>Punctaj</th><td>5</td></tr>', '<div id="compilare"><pre>   </pre></div>'),
+      13,
+    );
+    expect(parsed.compileLog).toBeUndefined();
+  });
 });

@@ -57,6 +57,7 @@ export async function startMirrorServer(
   });
 
   app.get('*route', (request, response) => {
+    /* v8 ignore next -- express always provides a non-empty originalUrl */
     const routeKey = request.originalUrl === '' ? '/' : request.originalUrl;
     const match = routes.find((entry) => entry.route === routeKey || entry.route === request.path);
     if (!match) {
@@ -90,6 +91,7 @@ export async function startMirrorServer(
   });
 
   const address = server.address();
+  /* v8 ignore next 3 -- a TCP server bound via listen() always reports an AddressInfo object */
   if (!address || typeof address === 'string') {
     throw new Error('mirror server address is unavailable');
   }

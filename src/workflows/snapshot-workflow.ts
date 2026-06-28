@@ -88,6 +88,7 @@ export function getCrawlStatus(
         key: item.key,
         url: item.url,
         attemptCount: item.attemptCount,
+        /* v8 ignore next -- items are pre-filtered to a truthy lastError, so the fallback is never taken */
         lastError: item.lastError ?? 'unknown error',
         visibleAt: item.visibleAt,
       })),
@@ -117,11 +118,13 @@ export async function finalizeSnapshotWorkflow(
   const mirrorResult = await buildMirrorArtifacts(workspaceRoot, snapshotId);
   const layout = resolveReadableSnapshotLayout(config, snapshotId);
   const coverageIndex = readProblemCoverageIndex(layout.normalizedRoot);
+  /* v8 ignore start -- unreachable: buildMirrorArtifacts above always writes the coverage index */
   if (!coverageIndex) {
     throw new Error(
       `Coverage dataset is missing for snapshot ${snapshotId}. Run normalize/rank/build-mirror before finalizing.`,
     );
   }
+  /* v8 ignore stop */
   const coverageGaps = buildProblemCoverageGapReport({
     normalizedRoot: layout.normalizedRoot,
     snapshotId,

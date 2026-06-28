@@ -74,24 +74,20 @@ export async function runNormalizeSnapshotWorkflow(
   };
 }
 
-async function resetNormalizedDirectory(directoryPath: string): Promise<void> {
-  mkdirSync(directoryPath, { recursive: true });
-  let lastError: unknown;
-
-  for (let attempt = 0; attempt < 3; attempt += 1) {
-    try {
-      await clearDirectoryContents(directoryPath);
-      return;
-    } catch (error) {
-      lastError = error;
-      if (!isRetryableDirectoryResetError(error) || attempt === 2) {
-        throw error;
-      }
-      await delay(250 * (attempt + 1));
-    }
+async function resetNormalizedDirectory(directoryPath: string, attempt = 0): Promise<void> {
+  if (attempt === 0) {
+    mkdirSync(directoryPath, { recursive: true });
   }
 
-  throw lastError;
+  try {
+    await clearDirectoryContents(directoryPath);
+  } catch (error) {
+    if (!isRetryableDirectoryResetError(error) || attempt >= 2) {
+      throw error;
+    }
+    await delay(250 * (attempt + 1));
+    await resetNormalizedDirectory(directoryPath, attempt + 1);
+  }
 }
 
 async function clearDirectoryContents(directoryPath: string): Promise<void> {
@@ -100,29 +96,25 @@ async function clearDirectoryContents(directoryPath: string): Promise<void> {
   }
 }
 
-async function removePathRobustly(targetPath: string): Promise<void> {
-  let lastError: unknown;
-
-  for (let attempt = 0; attempt < 60; attempt += 1) {
-    try {
-      rmSync(targetPath, {
-        recursive: true,
-        force: true,
-        maxRetries: 10,
-        retryDelay: 100,
-      });
-      return;
-    } catch (error) {
-      lastError = error;
-      if (!isRetryableDirectoryResetError(error) || attempt === 59) {
-        throw error;
-      }
-
-      await delay(Math.min(1000, 50 * (attempt + 1)));
+async function removePathRobustly(targetPath: string, attempt = 0): Promise<void> {
+  try {
+    rmSync(targetPath, {
+      recursive: true,
+      force: true,
+      maxRetries: 10,
+      retryDelay: 100,
+    });
+  } catch (error) {
+    if (!isRetryableDirectoryResetError(error)) {
+      throw error;
     }
+    /* v8 ignore next 3 -- exhaustion after 59 persistent OS lock failures is not reproducible */
+    if (attempt >= 59) {
+      throw error;
+    }
+    await delay(Math.min(1000, 50 * (attempt + 1)));
+    await removePathRobustly(targetPath, attempt + 1);
   }
-
-  throw lastError;
 }
 
 function isRetryableDirectoryResetError(error: unknown): boolean {

@@ -220,7 +220,7 @@ function resolveStageAllowlist(workspaceRoot: string): string[] {
   );
 }
 
-function scanForPublishSecrets(
+export function scanForPublishSecrets(
   workspaceRoot: string,
   stagedPaths: string[],
 ): string[] {
@@ -343,35 +343,35 @@ function readSafeText(filePath: string): string | undefined {
   }
 }
 
-function run(workspaceRoot: string, command: string, args: string[]): string {
-  const isGitAdd = command === 'git' && args[0] === 'add';
+export function run(workspaceRoot: string, command: string, args: string[]): string {
   const maxAttempts = command === 'git' ? 6 : 1;
   let attempt = 0;
-  let lastError: unknown;
+  let lastError: Error = new Error(`Command failed: ${command} ${args.join(' ')}`);
 
   while (attempt < maxAttempts) {
+    attempt += 1;
     try {
       return execFileSync(command, args, {
         cwd: workspaceRoot,
         encoding: 'utf8',
         maxBuffer: 256 * 1024 * 1024,
-        stdio: isGitAdd ? ['ignore', 'ignore', 'pipe'] : ['ignore', 'ignore', 'pipe'],
+        stdio: ['ignore', 'ignore', 'pipe'],
       });
     } catch (error) {
       lastError = enrichCommandError(error, command, args);
-      attempt += 1;
-      if (attempt >= maxAttempts || !shouldRetryGitIndexLock(lastError)) {
+      if (!shouldRetryGitIndexLock(lastError)) {
         throw lastError;
       }
-
-      sleepSync(500 * attempt);
+      if (attempt < maxAttempts) {
+        sleepSync(500 * attempt);
+      }
     }
   }
 
-  throw lastError instanceof Error ? lastError : new Error(String(lastError));
+  throw lastError;
 }
 
-function enrichCommandError(error: unknown, command: string, args: string[]): Error {
+export function enrichCommandError(error: unknown, command: string, args: string[]): Error {
   if (!(error instanceof Error)) {
     return new Error(`Command failed: ${command} ${args.join(' ')}`);
   }
@@ -396,7 +396,7 @@ function enrichCommandError(error: unknown, command: string, args: string[]): Er
   return error;
 }
 
-function shouldRetryGitIndexLock(error: unknown): boolean {
+export function shouldRetryGitIndexLock(error: unknown): boolean {
   const message = error instanceof Error ? error.message : String(error);
   return (
     message.includes('.git/index.lock')
@@ -404,7 +404,7 @@ function shouldRetryGitIndexLock(error: unknown): boolean {
   );
 }
 
-function sleepSync(milliseconds: number): void {
+export function sleepSync(milliseconds: number): void {
   Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, milliseconds);
 }
 
@@ -517,7 +517,7 @@ function createOrUpdateRelease(
   }
 }
 
-function resolveDesktopReleaseAsset(workspaceRoot: string): string {
+export function resolveDesktopReleaseAsset(workspaceRoot: string): string {
   const releaseRoot = join(workspaceRoot, 'release-desktop');
   if (!existsSync(releaseRoot)) {
     throw new Error('release-desktop is missing; run npm run desktop:pack before publish.');
@@ -547,16 +547,18 @@ function resolveDesktopReleaseAsset(workspaceRoot: string): string {
     return rightStat - leftStat;
   });
   const latestBrandedExecutable = brandedExecutables[0];
+  /* v8 ignore start -- unreachable: brandedExecutables is non-empty (checked above), so [0] is always defined */
   if (!latestBrandedExecutable) {
     throw new Error(
       'No final branded desktop executable was found in release-desktop. Expected Problem Archive Crawler *.exe.',
     );
   }
+  /* v8 ignore stop */
 
   return join(releaseRoot, latestBrandedExecutable);
 }
 
-function normalizeCommitMessage(message: string): string {
+export function normalizeCommitMessage(message: string): string {
   const trailer = 'Co-authored-by: Codex <noreply@openai.com>';
   if (message.includes(trailer)) {
     return message;

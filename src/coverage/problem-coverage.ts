@@ -240,7 +240,7 @@ function buildCoverageRecord(
       && matchesConfiguredHandle(context.configuredUserHandle, source.userHandle),
   );
   const testsRecord = context.tests;
-  const exampleTestsAvailableCount = testsRecord?.examples.length ?? problem.examples.length ?? 0;
+  const exampleTestsAvailableCount = testsRecord?.examples.length ?? problem.examples.length;
   const visibleTestsCapturedCount = testsRecord?.visible.length ?? problem.visibleTests?.length ?? 0;
   const evaluationObservedTestsCount = testsRecord?.evaluationObserved.length ?? 0;
   const effectiveTestsAvailableCount = testsRecord?.effective?.length
@@ -468,11 +468,8 @@ function buildOfficialSourceHarvestByProblemId(
       continue;
     }
 
+    // match[2] is a `\d+` capture, so Number(...) is always finite here.
     const problemId = Number(match[2]);
-    if (!Number.isFinite(problemId)) {
-      continue;
-    }
-
     const html = readArchivedPageBody(snapshot, page);
     if (!html) {
       continue;

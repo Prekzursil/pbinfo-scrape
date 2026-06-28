@@ -51,6 +51,10 @@ describe('buildAssetFilename', () => {
     expect(buildAssetFilename('https://www.pbinfo.ro/blob')).toMatch(/\.bin$/);
   });
 
+  test('falls back to bin when the explicit extension has no alphanumeric characters', () => {
+    expect(buildAssetFilename('https://www.pbinfo.ro/file.+++')).toMatch(/\.bin$/);
+  });
+
   test('buildRawAssetLocalPath nests the asset under raw-assets', () => {
     expect(buildRawAssetLocalPath('https://www.pbinfo.ro/static/app.css')).toBe(
       'raw-assets/asset-https-www-pbinfo-ro-static-app-css.css',

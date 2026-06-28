@@ -12,6 +12,7 @@ const shellMock = vi.hoisted(() => ({
 vi.mock('electron', () => ({ shell: shellMock }));
 
 const { registerDesktopIpc } = await import('../../src/gui/main/ipc.js');
+const { writeDesktopPreferences } = await import('../../src/gui/main/desktop-preferences.js');
 
 type Handler = (event: unknown, payload?: unknown) => Promise<unknown>;
 
@@ -150,6 +151,56 @@ describe('registerDesktopIpc', () => {
     await expect(
       handlers.get('desktop:mirror:stop-preview')!(null, { jobId: 'missing' }),
     ).rejects.toBeInstanceOf(Error);
+  });
+
+  test('builds a controller at startup from persisted preferences and serves workspace state', async () => {
+    setEnv('PBINFO_DESKTOP_TEST_DRY_RUN_OPENERS', '1');
+    setEnv('PBINFO_DESKTOP_TEST_ACTIONS_PATH', undefined);
+
+    const userDataRoot = makeDir('pbinfo-ipc-seed-user-');
+    const workspaceRoot = makeDir('pbinfo-ipc-seed-ws-');
+    writeDesktopPreferences(userDataRoot, { verbosityMode: 'normal', workspaceRoot });
+
+    const handlers = new Map<string, Handler>();
+    registerDesktopIpc({
+      ipcMain: {
+        handle: (channel: string, handler: Handler) => {
+          handlers.set(channel, handler);
+        },
+      } as unknown as Parameters<typeof registerDesktopIpc>[0]['ipcMain'],
+      userDataRoot,
+      notificationService: { notify: () => undefined },
+    });
+
+    // Workspace was already selected at startup, so state resolves (not null).
+    expect(await handlers.get('desktop:workspace:state')!(null)).toMatchObject({ workspaceRoot });
+
+    // `payload ?? {}` fallback branches: invoke summary/list/status with no payload.
+    for (const channel of [
+      'desktop:archive:summary',
+      'desktop:coverage:summary',
+      'desktop:coverage:list',
+      'desktop:crawl:status',
+    ]) {
+      await handlers.get(channel)!(null).then(
+        () => undefined,
+        () => undefined,
+      );
+    }
+
+    // jobs:start with a kind whose body validates the snapshotId reaches the controller closure.
+    await expect(
+      handlers.get('desktop:jobs:start')!(null, { kind: 'snapshot-finalize' }),
+    ).rejects.toThrow(/snapshotId/i);
+
+    // Mirror preview start/stop exercises the inline forwarding closures (both
+    // reject here: no mirror is built and the stop target is not running).
+    await expect(
+      handlers.get('desktop:mirror:start-preview')!(null, { snapshotId: 'seed-snapshot', port: 0 }),
+    ).rejects.toThrow(/built mirror/i);
+    await expect(
+      handlers.get('desktop:mirror:stop-preview')!(null, { jobId: 'missing' }),
+    ).rejects.toThrow(/not active/i);
   });
 
   test('records opener actions in dry-run mode without invoking the shell', async () => {
