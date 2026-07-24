@@ -41,6 +41,7 @@ export function SettingsModal({ bridge, open, onClose }: SettingsModalProps) {
   if (!open) return null;
 
   const snapshots = archiveState?.catalogSnapshots ?? [];
+  const resolvedActive = activeSnapshot ?? archiveState?.snapshotId ?? '';
 
   return (
     <div
@@ -81,14 +82,13 @@ export function SettingsModal({ bridge, open, onClose }: SettingsModalProps) {
         <label className="settings-modal__field">
           <span>Snapshot override</span>
           <select
-            value={activeSnapshot ?? ''}
+            value={resolvedActive}
             onChange={(event) => {
               const next = event.target.value;
               setActiveSnapshot(next);
-              // A persistent snapshot switch would require a new IPC channel
-              // (`archive:switch-snapshot`) that's scoped to Task 9+. For
-              // iteration 3 the selection is session-local and informs the
-              // next LibraryShell fetch via archiveState prop on rerender.
+              // Session-local selection for now. A persistent archive:switch-
+              // snapshot IPC + archive:changed broadcast is a follow-up that
+              // would feed back into LibraryShell's fetch loop automatically.
             }}
             disabled={snapshots.length === 0}
           >

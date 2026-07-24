@@ -250,6 +250,39 @@ async function maybeWriteDesktopSmokeMarker(
           await new Promise((resolve) => setTimeout(resolve, 500));
         }
 
+        if (process.env.PBINFO_DESKTOP_TEST_OPEN_SETTINGS === '1') {
+          await window.webContents.executeJavaScript(
+            `(async () => {
+              const trigger = Array.from(document.querySelectorAll('button')).find(
+                (el) => el.textContent && /operator/i.test(el.textContent),
+              );
+              if (trigger instanceof HTMLElement) trigger.click();
+              await new Promise((r) => setTimeout(r, 300));
+              const settingsItem = Array.from(document.querySelectorAll('[role="menuitem"]')).find(
+                (el) => el.textContent && /settings/i.test(el.textContent),
+              );
+              if (settingsItem instanceof HTMLElement) settingsItem.click();
+            })()`,
+            true,
+          );
+          await new Promise((resolve) => setTimeout(resolve, 700));
+        }
+
+        if (process.env.PBINFO_DESKTOP_TEST_CLICK_PRESET) {
+          const presetLabel = process.env.PBINFO_DESKTOP_TEST_CLICK_PRESET;
+          await window.webContents.executeJavaScript(
+            `(() => {
+              const buttons = Array.from(document.querySelectorAll('.filter-sidebar__presets button'));
+              const target = buttons.find(
+                (el) => el.textContent && el.textContent.trim() === ${JSON.stringify(presetLabel)},
+              );
+              if (target instanceof HTMLElement) target.click();
+            })()`,
+            true,
+          );
+          await new Promise((resolve) => setTimeout(resolve, 800));
+        }
+
         if (process.env.PBINFO_DESKTOP_TEST_FORCE_THEME) {
           // Call the real theme bridge so the main-process preference store
           // flips AND the renderer subscription re-sets dataset.theme in the
