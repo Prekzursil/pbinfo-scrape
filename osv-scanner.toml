@@ -1,0 +1,44 @@
+# osv-scanner configuration.
+#
+# SCOPE: osv-scanner loads this file only for lockfiles in this same directory
+# (here: package-lock.json). It suppresses exactly ONE advisory ID and nothing
+# else - there is no package-wide, ecosystem-wide or dependency-group
+# suppression, and the blocking `Dependencies (osv-scanner)` gate in
+# .github/workflows/quality.yml stays fully in force for every other finding.
+#
+# SCHEMA: inside [[IgnoredVulns]] only `id`, `ignoreUntil` and `reason` are valid
+# keys. osv-scanner rejects the ENTIRE file on any unknown key and then silently
+# falls back to an empty config (internal/config/manager.go, tryLoadConfig ->
+# "unknown keys in config file"), so further context lives in comments like these
+# rather than in extra keys.
+#
+# WHY THIS ENTRY EXISTS, in full:
+#   * The advisory is brace-expansion DoS (unbounded expansion length -> OOM
+#     crash), CVSS 7.5 High. Two lockfile entries match: 1.1.16 and 2.1.2.
+#   * DEV SCOPE ONLY. osv-scanner itself flags both copies `(dev)`. They are
+#     transitive devDependencies of the build/test toolchain - electron-builder
+#     (via @electron/asar, @electron/universal), jest (via test-exclude),
+#     dir-compare and filelist - pinned there by minimatch 3.1.5 / 5.1.9 / 9.0.9.
+#     Nothing on the shipped runtime path resolves these versions.
+#   * NO FIX EXISTS for the versions we resolve. The advisory carries a single
+#     range, introduced: 0 -> fixed: 5.0.8, with no 1.x or 2.x backport, and
+#     1.1.16 / 2.1.2 are already the newest releases on the maintenance-v1 and
+#     maintenance-v2 dist-tags.
+#   * FORCING 5.0.8 BREAKS THE BUILD. It is a breaking major: v5's CommonJS build
+#     exports a named object ({ expand, EXPANSION_MAX, EXPANSION_MAX_LENGTH })
+#     instead of a callable default, so every minimatch < 10 consumer dies with
+#     "TypeError: (0 , brace_expansion_1.default) is not a function" and the
+#     100%-enforced Coverage gate goes red. That override was tried and reverted.
+#   * Suppressing this one unfixable dev-only DoS is what lets the rest of the fix
+#     land, including the CVSS 9.2 Critical tar advisory GHSA-23hp-3jrh-7fpw and
+#     the sole runtime advisory, body-parser GHSA-v422-hmwv-36x6. Leaving the gate
+#     red would have kept those unfixed on main - a strictly worse outcome.
+#
+# RE-CHECK ON EXPIRY: has minimatch/glob moved off brace-expansion < 5 (minimatch
+# >= 10 already depends on ^5.0.5), or has a 1.x/2.x backport shipped? If either
+# is true, DELETE this entry rather than extending the date.
+
+[[IgnoredVulns]]
+id = "GHSA-mh99-v99m-4gvg"
+ignoreUntil = 2026-10-23
+reason = "brace-expansion DoS (OOM), dev-dependency scope only, and unfixable at the versions we resolve: the advisory has a single range introduced:0 -> fixed:5.0.8 with no 1.x/2.x backport (1.1.16 and 2.1.2 are already the newest maintenance-v1/v2 releases), and forcing 5.0.8 is a breaking major whose CJS build exports a named object instead of a callable default, so minimatch <10 consumers fail with \"TypeError: (0 , brace_expansion_1.default) is not a function\" and the Coverage gate goes red. Time-boxed to 2026-10-23; re-check: has minimatch/glob moved off brace-expansion <5, or has a 1.x/2.x backport shipped? See the comments in osv-scanner.toml for the full rationale."
