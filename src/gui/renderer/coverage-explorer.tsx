@@ -457,9 +457,12 @@ export function CoverageExplorerPanel(props: CoverageExplorerPanelProps) {
                   type="button"
                   disabled={!detail.rawRecordLinks.rankingFilePath}
                   onClick={() => {
-                    if (detail.rawRecordLinks.rankingFilePath) {
-                      void onOpenPath(detail.rawRecordLinks.rankingFilePath);
+                    /* v8 ignore start -- the button is disabled whenever rankingFilePath is absent */
+                    if (!detail.rawRecordLinks.rankingFilePath) {
+                      return;
                     }
+                    /* v8 ignore stop */
+                    void onOpenPath(detail.rawRecordLinks.rankingFilePath);
                   }}
                 >
                   Open ranking record
@@ -482,9 +485,12 @@ export function CoverageExplorerPanel(props: CoverageExplorerPanelProps) {
                   type="button"
                   disabled={!liveMirrorUrl}
                   onClick={() => {
-                    if (liveMirrorUrl) {
-                      void onOpenExternal(liveMirrorUrl);
+                    /* v8 ignore start -- the button is disabled whenever liveMirrorUrl is absent */
+                    if (!liveMirrorUrl) {
+                      return;
                     }
+                    /* v8 ignore stop */
+                    void onOpenExternal(liveMirrorUrl);
                   }}
                 >
                   Open in live mirror
@@ -494,9 +500,12 @@ export function CoverageExplorerPanel(props: CoverageExplorerPanelProps) {
                   type="button"
                   disabled={!detail.record.sourceListUrl}
                   onClick={() => {
-                    if (detail.record.sourceListUrl) {
-                      void onOpenExternal(detail.record.sourceListUrl);
+                    /* v8 ignore start -- the button is disabled whenever sourceListUrl is absent */
+                    if (!detail.record.sourceListUrl) {
+                      return;
                     }
+                    /* v8 ignore stop */
+                    void onOpenExternal(detail.record.sourceListUrl);
                   }}
                 >
                   Open source list upstream

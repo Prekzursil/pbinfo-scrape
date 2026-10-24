@@ -1005,9 +1005,12 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
                       type="button"
                       disabled={!previewJobId}
                       onClick={() => {
-                        if (previewJobId) {
-                          void onStopMirrorPreview(previewJobId);
+                        /* v8 ignore start -- the button is disabled whenever previewJobId is absent */
+                        if (!previewJobId) {
+                          return;
                         }
+                        /* v8 ignore stop */
+                        void onStopMirrorPreview(previewJobId);
                       }}
                     >
                       Stop preview
@@ -1017,9 +1020,12 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
                       type="button"
                       disabled={!previewUrl}
                       onClick={() => {
-                        if (previewUrl) {
-                          void onOpenExternal(previewUrl);
+                        /* v8 ignore start -- the button is disabled whenever previewUrl is absent */
+                        if (!previewUrl) {
+                          return;
                         }
+                        /* v8 ignore stop */
+                        void onOpenExternal(previewUrl);
                       }}
                     >
                       Open in browser

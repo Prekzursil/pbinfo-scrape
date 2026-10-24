@@ -72,9 +72,12 @@ export function DataExplorerPanel(props: DataExplorerPanelProps) {
                 type="button"
                 disabled={!normalizedRoot}
                 onClick={() => {
-                  if (normalizedRoot) {
-                    void onOpenPath(normalizedRoot);
+                  /* v8 ignore start -- the button is disabled whenever normalizedRoot is absent */
+                  if (!normalizedRoot) {
+                    return;
                   }
+                  /* v8 ignore stop */
+                  void onOpenPath(normalizedRoot);
                 }}
               >
                 Open normalized archive folder
@@ -90,9 +93,12 @@ export function DataExplorerPanel(props: DataExplorerPanelProps) {
                 type="button"
                 disabled={!mirrorRoot}
                 onClick={() => {
-                  if (mirrorRoot) {
-                    void onOpenPath(mirrorRoot);
+                  /* v8 ignore start -- the button is disabled whenever mirrorRoot is absent */
+                  if (!mirrorRoot) {
+                    return;
                   }
+                  /* v8 ignore stop */
+                  void onOpenPath(mirrorRoot);
                 }}
               >
                 Open mirror output folder
@@ -102,9 +108,12 @@ export function DataExplorerPanel(props: DataExplorerPanelProps) {
                 type="button"
                 disabled={!mirrorUrl}
                 onClick={() => {
-                  if (mirrorUrl) {
-                    void onOpenExternal(mirrorUrl);
+                  /* v8 ignore start -- the button is disabled whenever mirrorUrl is absent */
+                  if (!mirrorUrl) {
+                    return;
                   }
+                  /* v8 ignore stop */
+                  void onOpenExternal(mirrorUrl);
                 }}
               >
                 Open mirror in browser
@@ -204,9 +213,12 @@ export function DataExplorerPanel(props: DataExplorerPanelProps) {
                   type="button"
                   disabled={!liveMirrorRecordUrl}
                   onClick={() => {
-                    if (liveMirrorRecordUrl) {
-                      void onOpenExternal(liveMirrorRecordUrl);
+                    /* v8 ignore start -- the button is disabled whenever liveMirrorRecordUrl is absent */
+                    if (!liveMirrorRecordUrl) {
+                      return;
                     }
+                    /* v8 ignore stop */
+                    void onOpenExternal(liveMirrorRecordUrl);
                   }}
                 >
                   Open record route in live mirror
