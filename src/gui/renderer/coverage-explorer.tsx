@@ -473,9 +473,12 @@ export function CoverageExplorerPanel(props: CoverageExplorerPanelProps) {
                   disabled={!detail.rawRecordLinks.evaluationFilePaths[0]}
                   onClick={() => {
                     const evaluationFilePath = detail.rawRecordLinks.evaluationFilePaths[0];
-                    if (evaluationFilePath) {
-                      void onOpenPath(evaluationFilePath);
+                    /* v8 ignore start -- the button is disabled whenever evaluationFilePaths[0] is absent */
+                    if (!evaluationFilePath) {
+                      return;
                     }
+                    /* v8 ignore stop */
+                    void onOpenPath(evaluationFilePath);
                   }}
                 >
                   Open first evaluation record

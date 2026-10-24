@@ -549,3 +549,31 @@ describe('snapshot workflow', () => {
     );
   });
 });
+
+describe('snapshot status with several failures', () => {
+  test('lists recent failures newest first', () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-snapshot-status-many-'));
+    tempDirs.push(workspaceRoot);
+    const config = loadLocalConfig(workspaceRoot);
+    prepareSnapshot(config, {
+      snapshotId: 'status-many',
+      scope: 'all',
+      now: new Date('2026-03-10T00:00:00.000Z'),
+    });
+    mkdirSync(join(config.paths.localRoot, 'crawl-queues'), { recursive: true });
+    const queue = new CrawlQueue(
+      join(config.paths.localRoot, 'crawl-queues', 'status-many.sqlite'),
+    );
+    queue.enqueueMany([
+      { key: 'page:a', url: 'https://www.pbinfo.ro/a', kind: 'public-page' },
+      { key: 'page:b', url: 'https://www.pbinfo.ro/b', kind: 'public-page' },
+    ]);
+    const first = queue.claimNext(new Date('2026-03-10T00:01:00.000Z'));
+    queue.fail(first!.id, { errorMessage: 'first', nextVisibleAt: '2026-03-10T00:06:00.000Z' });
+    const second = queue.claimNext(new Date('2026-03-10T00:02:00.000Z'));
+    queue.fail(second!.id, { errorMessage: 'second', nextVisibleAt: '2026-03-10T00:07:00.000Z' });
+
+    const status = getCrawlStatus(workspaceRoot, 'status-many');
+    expect(status.recentFailures).toHaveLength(2);
+  });
+});

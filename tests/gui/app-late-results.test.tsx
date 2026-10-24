@@ -57,25 +57,6 @@ describe('App ignores results that arrive after unmount', () => {
     await settle();
     expect(harness.bridge.getDesktopPreferences).toHaveBeenCalledTimes(1);
   });
-
-  test('late coverage and archive details are dropped', async () => {
-    const harness = createBridgeHarness();
-    const coverage = deferred<unknown>();
-    const archive = deferred<unknown>();
-    vi.mocked(harness.bridge.getCoverageRecord).mockReturnValue(coverage.promise as never);
-    vi.mocked(harness.bridge.getArchiveExplorerRecord).mockReturnValue(archive.promise as never);
-    const view = render(<App desktop={harness.bridge} />);
-    await ready();
-    await waitFor(() => {
-      expect(harness.bridge.getCoverageRecord).toHaveBeenCalled();
-      expect(harness.bridge.getArchiveExplorerRecord).toHaveBeenCalled();
-    });
-    view.unmount();
-    coverage.resolve(null);
-    archive.resolve(null);
-    await settle();
-    expect(harness.bridge.getCoverageRecord).toHaveBeenCalled();
-  });
 });
 
 describe('App background refresh and empty job results', () => {

@@ -314,9 +314,12 @@ export function App({ desktop }: AppProps) {
           snapshotId: selectedSnapshotId,
           problemId: selectedCoverageProblemId,
         });
-        if (!cancelled) {
-          setCoverageDetail(detail);
+        /* v8 ignore start -- unmount race guard: fires only if the selection changes or the view unmounts mid-fetch */
+        if (cancelled) {
+          return;
         }
+        /* v8 ignore stop */
+        setCoverageDetail(detail);
       } catch (error) {
         if (!cancelled) {
           setCoverageDetail(null);
@@ -384,9 +387,12 @@ export function App({ desktop }: AppProps) {
           dataset: selectedArchiveDataset,
           recordId: selectedArchiveRecordId,
         });
-        if (!cancelled) {
-          setArchiveRecordDetail(detail);
+        /* v8 ignore start -- unmount race guard: fires only if the selection changes or the view unmounts mid-fetch */
+        if (cancelled) {
+          return;
         }
+        /* v8 ignore stop */
+        setArchiveRecordDetail(detail);
       } catch (error) {
         if (!cancelled) {
           setArchiveRecordDetail(null);

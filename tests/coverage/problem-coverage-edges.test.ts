@@ -504,4 +504,42 @@ describe('problem-coverage workflow edge branches', () => {
     expect(record?.userSourceArchived).toBe(true);
     expect(record?.solvedByMe).toBe(true);
   });
+
+  test('a ranking entry without a problem id is ignored', async () => {
+    const workspace = tempWorkspace();
+    const snapshotId = 'SNAP2';
+    writeConfig(workspace);
+    writeCatalog(workspace, snapshotId);
+    const norm = normalizedRoot(workspace, snapshotId);
+
+    writeJson(join(norm, 'problems', 'problem-1.json'), problem({ id: 1 }));
+    writeJson(
+      join(norm, 'sources', 'user-1.json'),
+      source({
+        sourceId: 'user-1',
+        problemId: 1,
+        kind: 'user-evaluation',
+        score: 100,
+        userHandle: 'whoever',
+      }),
+    );
+    writeJson(
+      join(norm, 'evaluations', 'evaluation-1.json'),
+      evaluation({
+        evaluationId: 1,
+        problemId: 1,
+        user: 'whoever',
+      }),
+    );
+    // A ranking entry without a problem id cannot be attached to any problem.
+    writeJson(join(norm, 'rankings', 'best-submissions.json'), {
+      problems: [{ orderedUserEvaluationIds: [] }],
+    });
+
+    const result = await buildProblemCoverageDataset(workspace, snapshotId);
+    expect(result.problemsCovered).toBe(1);
+    const record = readProblemCoverageRecord(norm, 1);
+    expect(record?.userSourceArchived).toBe(true);
+    expect(record?.solvedByMe).toBe(true);
+  });
 });

@@ -410,3 +410,25 @@ describe('publish helpers', () => {
     expect(normalizeCommitMessage(once)).toBe(once);
   });
 });
+
+describe('publishWorkspace with an existing repository', () => {
+  test('reuses an existing .git directory instead of initializing one', () => {
+    const { workspaceRoot, config, snapshotId } = buildPublishable();
+    mkdirSync(join(workspaceRoot, '.git'), { recursive: true });
+    const result = publishWorkspace({
+      workspaceRoot,
+      config,
+      snapshotId,
+      runCommand: fakeRun([
+        {
+          when: (c, a) => c === 'git' && a[0] === 'commit',
+          error: new Error('nothing to commit, working tree clean'),
+        },
+        { when: (c, a) => c === 'gh' && a[0] === 'repo' && a[1] === 'view' },
+        { when: (c, a) => c === 'git' && a[0] === 'remote' && a[1] === 'get-url' },
+      ]),
+    });
+    expect(result.initializedGit).toBe(false);
+    expect(result.snapshotId).toBe(snapshotId);
+  });
+});
