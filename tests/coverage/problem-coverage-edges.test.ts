@@ -333,6 +333,8 @@ describe('problem-coverage workflow edge branches', () => {
         { problemId: 7, score: 50 },
         { evaluationId: undefined, problemId: 8, score: 100 },
         { user: 'mallory', problemId: 9, score: 100 },
+        // A solved entry that names neither a problem nor an evaluation adds nothing.
+        { score: 100 },
       ],
     });
     writeJson(join(norm, 'user-solutions', 'feed-bob.json'), {
@@ -541,5 +543,26 @@ describe('problem-coverage workflow edge branches', () => {
     const record = readProblemCoverageRecord(norm, 1);
     expect(record?.userSourceArchived).toBe(true);
     expect(record?.solvedByMe).toBe(true);
+  });
+});
+
+describe('official-source status for a partially harvested source list', () => {
+  test('stays not-captured-yet while qualifying evaluations are still unharvested', async () => {
+    const workspace = tempWorkspace();
+    const snapshotId = 'SNAP-HARVEST';
+    writeConfig(workspace);
+    writeCatalog(workspace, snapshotId);
+    const norm = normalizedRoot(workspace, snapshotId);
+    writeJson(
+      join(norm, 'problems', 'problem-1.json'),
+      problem({
+        id: 1,
+        sourceListUrl: 'https://www.pbinfo.ro/solutii/problema/1/slug-1',
+        officialSourceHarvest: { sourceListHarvested: true, qualifyingEvaluationIds: [424242] },
+      }),
+    );
+
+    await buildProblemCoverageDataset(workspace, snapshotId);
+    expect(readProblemCoverageRecord(norm, 1)?.officialSourceStatus).toBe('not-captured-yet');
   });
 });
