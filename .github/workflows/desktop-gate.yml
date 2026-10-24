@@ -1,23 +1,42 @@
-name: Quality Gate
+name: Desktop Gate
+
+# The checks the QZP lean gate (quality.yml -> `quality / quality`) does not
+# run for this repository. They moved here, unchanged, from the in-repo
+# `Quality Gate` this repository used before the lean-gate caller:
+#   - the desktop typecheck (tsconfig.desktop.json) next to the repo's own
+#     oxlint run and CLI typecheck;
+#   - the Windows test suite and CLI build (the app is Windows-targeted: the
+#     suite asserts Windows path semantics), and the 100% coverage run on
+#     Windows; the lean gate measures coverage on Linux;
+#   - Semgrep registry rulesets (p/typescript, p/javascript, p/secrets) over
+#     src/; the lean gate's opengrep runs .quality/opengrep;
+#   - gitleaks over the full history; the lean gate scans a depth-1 checkout.
+# Dependencies are not re-checked here: the lean gate's osv-scanner (gate 6)
+# replaced the old osv-scanner job.
+#
+# `desktop-gate` is the fail-closed aggregate of the jobs above.
 
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
+  merge_group:
+    types: [checks_requested]
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: quality-${{ github.ref }}
-  cancel-in-progress: true
+  # never `quality-...`: the lean-gate caller owns that group, and sharing it
+  # would let one workflow cancel the other on the same pull request
+  group: desktop-gate-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  # Gate 1 + Gate 2: lint / format / sec-lint (oxlint) and types (tsc).
   lint-and-types:
-    name: Lint & Types
+    name: Desktop lint & types (oxlint, tsc CLI + desktop)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -33,9 +52,8 @@ jobs:
       - name: Typecheck (desktop)
         run: npm run typecheck:desktop
 
-  # Gate 3 (part 1): tests + build.
   test:
-    name: Tests & Build
+    name: Windows tests & build
     # Windows-targeted desktop app: the suite asserts Windows path semantics and
     # Chromium-on-Windows cookie-profile resolution, so the tests run on Windows.
     runs-on: windows-latest
@@ -51,11 +69,8 @@ jobs:
       - name: Build
         run: npm run build
 
-  # Gate 3 (part 2): STRICT 100% line + branch coverage (lean strict-zero target).
-  # BLOCKING: the suite enforces the 100% line/branch/function/statement thresholds
-  # declared in vitest.config.ts. A drop below 100% fails this job and the gate.
   coverage:
-    name: Coverage (100% enforced)
+    name: Windows coverage (100% enforced)
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v7
@@ -67,9 +82,8 @@ jobs:
       - name: Coverage (100% line + branch enforced)
         run: npm run test:coverage
 
-  # Gate 4: SAST (Semgrep CE / Opengrep rulesets).
   sast:
-    name: SAST (Semgrep CE)
+    name: SAST (Semgrep registry rules)
     runs-on: ubuntu-latest
     container:
       image: semgrep/semgrep
@@ -78,9 +92,8 @@ jobs:
       - name: Semgrep scan
         run: semgrep scan --config p/typescript --config p/javascript --config p/secrets --error --metrics off src
 
-  # Gate 5: secrets scanning (gitleaks).
   secrets:
-    name: Secrets (gitleaks)
+    name: Secrets (gitleaks, full history)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -90,15 +103,24 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  # Gate 6: dependency vulnerability scanning (osv-scanner).
-  deps:
-    name: Dependencies (osv-scanner)
+  desktop-gate:
+    name: desktop-gate
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
+    needs: [lint-and-types, test, coverage, sast, secrets]
+    # Fail closed: run even when a needed job failed or was skipped, and pass
+    # only when every one of them succeeded.
+    if: always()
+    timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v7
-      - uses: google/osv-scanner-action/osv-scanner-action@9a498708959aeaef5ef730655706c5a1df1edbc2 # v2.3.8
-        with:
-          scan-args: |-
-            --lockfile=package-lock.json
+      - name: All desktop gates passed
+        env:
+          RESULTS: ${{ join(needs.*.result, ' ') }}
+        run: |
+          echo "needs results: $RESULTS"
+          for r in $RESULTS; do
+            if [ "$r" != "success" ]; then
+              echo "::error title=desktop-gate::a desktop gate job did not succeed (results: $RESULTS)"
+              exit 1
+            fi
+          done
+          echo "Desktop gate green - oxlint + CLI/desktop typecheck, Windows tests + build, Windows 100% coverage, Semgrep registry rules, full-history gitleaks."
