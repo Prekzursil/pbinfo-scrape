@@ -509,7 +509,7 @@ describe('desktop controller', () => {
     });
 
     expect(summary.normalizedRoot).toContain(
-      'archive\\snapshots\\acceptance-20260310b\\normalized',
+      join('archive', 'snapshots', 'acceptance-20260310b', 'normalized'),
     );
     expect(summary.datasets).toEqual(
       expect.arrayContaining([
@@ -758,7 +758,7 @@ describe('desktop controller', () => {
         missingTestsCaptureCount: 0,
         testsUnavailableUpstreamCount: 0,
         coverageRoot: expect.stringContaining(
-          'archive\\snapshots\\acceptance-20260310b\\normalized\\problem-coverage',
+          join('archive', 'snapshots', 'acceptance-20260310b', 'normalized', 'problem-coverage'),
         ),
       }),
     );
@@ -780,7 +780,9 @@ describe('desktop controller', () => {
         rawRecordLinks: expect.objectContaining({
           coverageFilePath: expect.stringContaining('problem-3716.json'),
           problemFilePath: expect.stringContaining('problem-3716.json'),
-          rankingFilePath: expect.stringContaining('rankings\\problems\\problem-3716.json'),
+          rankingFilePath: expect.stringContaining(
+            join('rankings', 'problems', 'problem-3716.json'),
+          ),
           evaluationFilePaths: expect.arrayContaining([
             expect.stringContaining('evaluation-63332367.json'),
           ]),

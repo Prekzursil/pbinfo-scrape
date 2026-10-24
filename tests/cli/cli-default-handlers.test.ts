@@ -28,7 +28,11 @@ vi.mock('../../src/auth/auth-bundle.js', () => ({
   restoreEncryptedAuthBundle: vi.fn(async () => ({ restored: true })),
 }));
 vi.mock('../../src/auth/pbinfo-auth.js', () => ({
-  PbinfoAuthClient: vi.fn(() => ({ loginWithCredentials: authMock.loginWithCredentials })),
+  // `new PbinfoAuthClient(...)` in src/cli.ts: Vitest 4 mocks keep the
+  // implementation's construct semantics, and an arrow function is not constructible.
+  PbinfoAuthClient: vi.fn(function () {
+    return { loginWithCredentials: authMock.loginWithCredentials };
+  }),
 }));
 vi.mock('../../src/auth/auth-status.js', () => ({
   probePbinfoAuthStatus: vi.fn(async () => ({ authenticated: true })),
