@@ -119,10 +119,11 @@ function collectExactInputLiteralComparisons(
   for (const match of normalizedSourceCode.matchAll(identifierFirst)) {
     const variable = match[1];
     const literal = match[3];
-    /* v8 ignore next 3 -- the regex's variable and literal groups are mandatory */
+    /* v8 ignore start -- the regex's variable and literal groups are mandatory */
     if (!variable || !literal) {
       continue;
     }
+    /* v8 ignore stop */
     if (!inputVariables.has(variable)) {
       continue;
     }
@@ -132,10 +133,11 @@ function collectExactInputLiteralComparisons(
   for (const match of normalizedSourceCode.matchAll(literalFirst)) {
     const variable = match[3];
     const literal = match[1];
-    /* v8 ignore next 3 -- the regex's variable and literal groups are mandatory */
+    /* v8 ignore start -- the regex's variable and literal groups are mandatory */
     if (!variable || !literal) {
       continue;
     }
+    /* v8 ignore stop */
     if (!inputVariables.has(variable)) {
       continue;
     }
@@ -184,10 +186,11 @@ function summarizeComparisonsByVariable(
 }
 
 function isSubstantiveOutputLiteral(literal: string | undefined): boolean {
-  /* v8 ignore next 3 -- callers always pass a populated capture-group literal */
+  /* v8 ignore start -- callers always pass a populated capture-group literal */
   if (!literal) {
     return false;
   }
+  /* v8 ignore stop */
 
   const normalizedLiteral = literal
     .replace(/\\[nrt0]/g, '')

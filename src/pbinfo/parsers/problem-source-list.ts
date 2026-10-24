@@ -260,10 +260,11 @@ function extractExplicitPaginationUrls(
 
   $('.pagination a[href], a[href*="start="]').each((_, link) => {
     const href = $(link).attr('href');
-    /* v8 ignore next 3 -- the a[href]/a[href*=...] selectors guarantee attr('href') is present */
+    /* v8 ignore start -- the a[href]/a[href*=...] selectors guarantee attr('href') is present */
     if (!href) {
       return;
     }
+    /* v8 ignore stop */
 
     const resolved = new URL(href, base);
     if (resolved.origin !== base.origin || resolved.pathname !== base.pathname) {
@@ -282,10 +283,11 @@ function extractExplicitPaginationUrls(
 }
 
 function extractCurrentOffset(pageUrl: string | undefined): number {
-  /* v8 ignore next 3 -- only ever called with a defined pageUrl (callers guard first) */
+  /* v8 ignore start -- only ever called with a defined pageUrl (callers guard first) */
   if (!pageUrl) {
     return 0;
   }
+  /* v8 ignore stop */
 
   const value = Number(new URL(pageUrl).searchParams.get('start') ?? '0');
   return Number.isFinite(value) && value >= 0 ? value : 0;

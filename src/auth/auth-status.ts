@@ -174,10 +174,11 @@ function extractResolvedHandle(html: string): string | undefined {
 
   const $ = loadHtml(html);
   const hasLogoutLink = $('a[href*="logout"], form[action*="logout"]').length > 0;
-  /* v8 ignore next 3 -- only invoked when already logged in, so one of these is always true */
+  /* v8 ignore start -- only invoked when already logged in, so one of these is always true */
   if (!sessionIsAuthenticated && !hasLogoutLink) {
     return undefined;
   }
+  /* v8 ignore stop */
 
   const profileAnchors = $('#bara_navigare a[href^="/profil/"], nav a[href^="/profil/"]');
   for (const anchor of profileAnchors.toArray()) {

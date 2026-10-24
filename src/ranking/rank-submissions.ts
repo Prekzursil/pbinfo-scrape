@@ -104,10 +104,11 @@ function dedupeCandidates(
     const representative = [...bucket].sort((left, right) =>
       compareTrustworthyCandidates(left, right, forcedBest),
     )[0];
-    /* v8 ignore next 3 -- each bucket holds at least one candidate, so [0] is always defined */
+    /* v8 ignore start -- each bucket holds at least one candidate, so [0] is always defined */
     if (!representative) {
       continue;
     }
+    /* v8 ignore stop */
 
     representatives.push(representative);
     for (const candidate of bucket) {
@@ -147,10 +148,11 @@ function rankPerLanguage(
   const candidates: Record<string, RankedSubmissionCandidate> = {};
   for (const [language, bucket] of buckets) {
     const best = [...bucket].sort((left, right) => comparer(left, right, forcedBest))[0];
-    /* v8 ignore next 3 -- each bucket holds at least one candidate, so [0] is always defined */
+    /* v8 ignore start -- each bucket holds at least one candidate, so [0] is always defined */
     if (!best) {
       continue;
     }
+    /* v8 ignore stop */
     ids[language] = best.evaluationId;
     candidates[language] = best;
   }
@@ -275,10 +277,12 @@ function compareOfficialSources(left: SourceRecord, right: SourceRecord): number
 
 function scoreOfficialSource(source: SourceRecord): number[] {
   return [
-    /* v8 ignore next -- rankOfficialSources only scores sources already filtered to score >= 100 */
+    /* v8 ignore start -- rankOfficialSources only scores sources already filtered to score >= 100 */
     source.score !== undefined && source.score >= 100 ? 1 : 0,
-    /* v8 ignore next -- rankOfficialSources only scores sources already filtered to sourceAvailable */
+    /* v8 ignore stop */
+    /* v8 ignore start -- rankOfficialSources only scores sources already filtered to sourceAvailable */
     source.sourceAvailable ? 1 : 0,
+    /* v8 ignore stop */
     getEffectiveSuspicionFlags(source).length === 0 ? 1 : 0,
     source.sourceLength ?? source.sourceCode?.length ?? 0,
   ];

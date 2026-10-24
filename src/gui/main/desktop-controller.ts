@@ -469,9 +469,10 @@ export function createDesktopController(
             throw new Error('snapshot-finalize jobs require a snapshotId.');
           }
           return runFinalizeJob(parsed.snapshotId, now);
-        /* v8 ignore next 2 -- unreachable: guiJobStartInputSchema restricts kind to the handled cases */
+        /* v8 ignore start -- unreachable: guiJobStartInputSchema restricts kind to the handled cases */
         default:
           throw new Error(`Unsupported desktop job kind: ${parsed.kind satisfies never}`);
+        /* v8 ignore stop */
       }
     },
 

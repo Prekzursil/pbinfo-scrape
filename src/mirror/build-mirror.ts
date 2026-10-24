@@ -36,8 +36,9 @@ export async function buildMirrorArtifacts(
   await buildProblemCoverageDataset(workspaceRoot, snapshot.snapshotId);
   const coverageIndex = readProblemCoverageIndex(snapshot.normalizedRoot);
   const coverageByProblemId = new Map<number, ProblemCoverageRecord>(
-    /* v8 ignore next -- buildProblemCoverageDataset always writes an index above */
+    /* v8 ignore start -- buildProblemCoverageDataset always writes an index above */
     (coverageIndex?.records ?? []).map((record) => [record.problemId, record]),
+    /* v8 ignore stop */
   );
 
   const rebuiltManifests = rebuildRawManifests(snapshot.normalizedRoot);
@@ -67,10 +68,11 @@ export async function buildMirrorArtifacts(
       continue;
     }
 
-    /* v8 ignore next 3 -- buildRoutes guarantees a sourceFile for every non-coverage route */
+    /* v8 ignore start -- buildRoutes guarantees a sourceFile for every non-coverage route */
     if (!route.sourceFile) {
       throw new Error(`Mirror route ${route.route} is missing a source file.`);
     }
+    /* v8 ignore stop */
 
     const sourcePath = join(snapshot.rawPagesRoot, route.sourceFile);
     if (!existsSync(sourcePath)) {
@@ -166,8 +168,9 @@ export function rewriteMirrorHtml(
   });
 
   $('script:not([src])').each((_, element) => {
-    /* v8 ignore next -- cheerio .html() on an existing element returns a string */
+    /* v8 ignore start -- cheerio .html() on an existing element returns a string */
     const content = $(element).html() ?? '';
+    /* v8 ignore stop */
     if (
       content.includes('challenge-platform') ||
       content.includes('__CF$cv$params') ||
@@ -336,8 +339,9 @@ export function routeToMirrorFile(route: string): string {
   }
 
   const [pathname, search] = route.split('?');
-  /* v8 ignore next -- split('?') always yields a defined first segment */
+  /* v8 ignore start -- split('?') always yields a defined first segment */
   const segments = (pathname ?? '/')
+    /* v8 ignore stop */
     .split('/')
     .filter(Boolean)
     .map((segment) => segment.replace(/[^a-zA-Z0-9_-]/g, '-'));
@@ -376,8 +380,9 @@ export function inferEntityKey(url: string): string {
     return `user:${userMatch[1]}`;
   }
 
-  /* v8 ignore next -- a parsed URL always exposes a non-empty pathname */
+  /* v8 ignore start -- a parsed URL always exposes a non-empty pathname */
   return parsed.pathname || '/';
+  /* v8 ignore stop */
 }
 
 function renderMirrorIndex(routes: MirrorRouteEntry[]): string {

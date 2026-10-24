@@ -81,6 +81,14 @@ jobs:
       - run: npm ci
       - name: Coverage (100% line + branch enforced)
         run: npm run test:coverage
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: coverage-report-windows
+          path: coverage/
+          retention-days: 7
+          if-no-files-found: warn
 
   sast:
     name: SAST (Semgrep registry rules)

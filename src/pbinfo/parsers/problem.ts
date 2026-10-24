@@ -205,10 +205,11 @@ export function parseOfficialSolutionFragment(html: string): ParsedOfficialSolut
 
   $('[id]').each((_, element) => {
     const id = $(element).attr('id');
-    /* v8 ignore next 3 -- the [id] selector guarantees attr('id') is present */
+    /* v8 ignore start -- the [id] selector guarantees attr('id') is present */
     if (!id) {
       return;
     }
+    /* v8 ignore stop */
 
     const code = $(element).find('pre, textarea').first().text().trim();
     if (!code) {
@@ -375,10 +376,11 @@ function extractExecutionHints(constraints: string[]): ProblemExecutionHints {
     }
 
     const numericToken = numericMatch[1];
-    /* v8 ignore next 3 -- the regex capture group is always a non-empty digit string */
+    /* v8 ignore start -- the regex capture group is always a non-empty digit string */
     if (!numericToken) {
       continue;
     }
+    /* v8 ignore stop */
 
     // numericToken is a digit string, so Number(...) is always finite here.
     const numericValue = Number(numericToken.replace(',', '.'));
@@ -520,8 +522,9 @@ function extractMemoryLimitMb(summaryMap: Map<string, string>): number | undefin
   }
 
   const firstSegment = rawValue.split('/')[0];
-  /* v8 ignore next -- split('/') always yields at least one element */
+  /* v8 ignore start -- split('/') always yields at least one element */
   return parseNumber((firstSegment ?? rawValue).trim());
+  /* v8 ignore stop */
 }
 
 function extractGrade(
@@ -542,10 +545,11 @@ function extractCategoryChain($: ReturnType<typeof loadHtml>): CategoryLink[] {
 
   $('a[href*="?pagina=probleme-lista"]').each((_, anchor) => {
     const href = $(anchor).attr('href');
-    /* v8 ignore next 3 -- the [href*=...] selector guarantees attr('href') is present */
+    /* v8 ignore start -- the [href*=...] selector guarantees attr('href') is present */
     if (!href) {
       return;
     }
+    /* v8 ignore stop */
 
     const resolved = new URL(href, 'https://www.pbinfo.ro');
     const name = normalizeWhitespace($(anchor).text());
@@ -609,10 +613,11 @@ function extractLinkedAssets($: ReturnType<typeof loadHtml>, page: URL): Problem
   for (const candidate of candidates) {
     $(candidate.selector).each((_, element) => {
       const rawUrl = $(element).attr(candidate.attribute);
-      /* v8 ignore next 3 -- the [src]/[href] selectors guarantee the attribute is present */
+      /* v8 ignore start -- the [src]/[href] selectors guarantee the attribute is present */
       if (!rawUrl) {
         return;
       }
+      /* v8 ignore stop */
 
       const normalized = new URL(rawUrl, page);
       if (normalized.origin !== page.origin) {

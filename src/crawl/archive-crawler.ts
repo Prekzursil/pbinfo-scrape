@@ -186,8 +186,9 @@ export class ArchiveCrawler {
       url: item.url,
       kind: item.kind,
       httpStatus: response.status,
-      /* v8 ignore next -- the asset branch is only reached when content-type is a defined non-HTML string (looksLikeHtml(null) === true), so the nullish fallback is unreachable here */
+      /* v8 ignore start -- the asset branch is only reached when content-type is a defined non-HTML string (looksLikeHtml(null) === true), so the nullish fallback is unreachable here */
       contentType: contentType ?? undefined,
+      /* v8 ignore stop */
       contentHash,
       bodyPath: `raw-assets/${fileName}`,
       fetchedAt: now.toISOString(),
@@ -496,8 +497,9 @@ export function persistNormalizedSnapshotHtml(options: PersistNormalizedSnapshot
           evaluationId: Number(evaluationMatch[1]),
           sourceUrl: options.item.url,
           fetchedAt: options.fetchedAt,
-          /* v8 ignore next -- parseEvaluationPage and the persisters only throw Error instances, so String(error) is unreachable */
+          /* v8 ignore start -- parseEvaluationPage and the persisters only throw Error instances, so String(error) is unreachable */
           error: error instanceof Error ? error.message : String(error),
+          /* v8 ignore stop */
         },
       );
     }
@@ -581,8 +583,9 @@ function persistMirrorRouteRecord(
   const parsedUrl = new URL(url);
   const route = `${parsedUrl.pathname}${parsedUrl.search}`;
   const sourceFile = readManifestValue(snapshot.rawPagesManifestPath, url);
-  /* v8 ignore next -- URL pathname is always at least "/", so the || 'root' fallback is unreachable */
+  /* v8 ignore start -- URL pathname is always at least "/", so the || 'root' fallback is unreachable */
   const fileName = `route-${sanitizeSegment(parsedUrl.pathname || 'root')}${parsedUrl.search ? `-${shortHash(parsedUrl.search)}` : ''}.json`;
+  /* v8 ignore stop */
 
   writeJsonRecord<MirrorRouteRecord>(join(snapshot.normalizedRoot, 'routes'), fileName, {
     snapshotId: snapshot.snapshotId,
@@ -1589,8 +1592,9 @@ export function normalizeSourceLanguage(language: string): string {
     return 'csharp';
   }
 
-  /* v8 ignore next -- sanitizeSegment never returns an empty string (it falls back to "root"), so the || branch is unreachable */
+  /* v8 ignore start -- sanitizeSegment never returns an empty string (it falls back to "root"), so the || branch is unreachable */
   return sanitizeSegment(normalized).toLowerCase() || 'unknown';
+  /* v8 ignore stop */
 }
 
 export function dedupeUserSolutionEntries<T extends { evaluationId?: number }>(entries: T[]): T[] {
@@ -1604,9 +1608,10 @@ export function dedupeUserSolutionEntries<T extends { evaluationId?: number }>(e
     }
   }
 
-  /* v8 ignore next 2 -- entries are pre-filtered to a numeric evaluationId, so the ?? 0 fallbacks are unreachable */
+  /* v8 ignore start -- entries are pre-filtered to a numeric evaluationId, so the ?? 0 fallbacks are unreachable */
   return [...byEvaluationId.values()].sort(
     (left, right) => (right.evaluationId ?? 0) - (left.evaluationId ?? 0),
+    /* v8 ignore stop */
   );
 }
 

@@ -67,8 +67,9 @@ export function parseEvaluationPage(html: string, evaluationId: number): ParsedE
 }
 
 function resolveProblemLink($: ReturnType<typeof loadHtml>) {
-  /* v8 ignore next -- href is always defined: only ever called with attr('href') from an a[href] match */
+  /* v8 ignore start -- href is always defined: only ever called with attr('href') from an a[href] match */
   const isProblemDetailHref = (href?: string) => /^\/probleme\/(\d+)\/([^/]+)$/.test(href ?? '');
+  /* v8 ignore stop */
 
   const preferredLink = $('#detalii a[href], #rezumat a[href]')
     .filter((_, element) => isProblemDetailHref($(element).attr('href')))

@@ -207,10 +207,11 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
   };
 
   const openMirrorFromOverview = (record: GuiCoverageRecord) => {
-    /* v8 ignore next 3 -- the Open mirror button is disabled whenever boardMirrorBaseUrl is absent */
+    /* v8 ignore start -- the Open mirror button is disabled whenever boardMirrorBaseUrl is absent */
     if (!boardMirrorBaseUrl) {
       return;
     }
+    /* v8 ignore stop */
     void onOpenExternal(new URL(record.mirrorRoute, boardMirrorBaseUrl).toString());
   };
 
@@ -1317,10 +1318,11 @@ export function deriveCrawlTelemetry(
 
   const latest = relevantEvents.at(-1);
   const latestCounters = latest?.counters;
-  /* v8 ignore next 3 -- relevantEvents has >=2 counter-bearing entries, so the last one always has counters */
+  /* v8 ignore start -- relevantEvents has >=2 counter-bearing entries, so the last one always has counters */
   if (!latest || !latestCounters) {
     return null;
   }
+  /* v8 ignore stop */
 
   const baseline = [...relevantEvents]
     .reverse()
@@ -1342,10 +1344,11 @@ export function deriveCrawlTelemetry(
   }
 
   const completedPerMinute = completedDelta / (elapsedSeconds / 60);
-  /* v8 ignore next 3 -- completedDelta>0 and elapsedSeconds>0 guarantee a positive finite rate */
+  /* v8 ignore start -- completedDelta>0 and elapsedSeconds>0 guarantee a positive finite rate */
   if (!Number.isFinite(completedPerMinute) || completedPerMinute <= 0) {
     return null;
   }
+  /* v8 ignore stop */
 
   return {
     completedPerMinute,

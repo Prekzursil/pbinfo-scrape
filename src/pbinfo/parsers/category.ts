@@ -42,8 +42,9 @@ export function parseCategoryPage(html: string, grade: number): ParsedCategoryPa
       continue;
     }
 
-    /* v8 ignore next -- findNextItemListHref only returns '/?pagina=...' hrefs, which always contain '?' */
+    /* v8 ignore start -- findNextItemListHref only returns '/?pagina=...' hrefs, which always contain '?' */
     const params = new URLSearchParams(itemListHref.split('?')[1] ?? '');
+    /* v8 ignore stop */
     const subtag = params.get('subtag');
     if (subtag === String(id)) {
       if (!currentCategory) {

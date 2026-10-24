@@ -160,8 +160,9 @@ export async function importBrowserCookies(
 
   const tempDir = mkdtempSync(join(tmpdir(), 'pbinfo-browser-cookies-'));
   const tempCookiesPath = join(tempDir, 'Cookies');
-  /* v8 ignore next -- the real DPAPI fallback runs only against live browser profiles */
+  /* v8 ignore start -- the real DPAPI fallback runs only against live browser profiles */
   const decrypt = options.decryptMasterKey ?? decryptDpapiBuffer;
+  /* v8 ignore stop */
   try {
     try {
       (options.copyFile ?? copyFileSync)(resolved.cookiesDbPath, tempCookiesPath);
@@ -258,10 +259,11 @@ function resolveDefaultChromiumUserDataDir(
 function normalizeChromiumExpiry(
   chromiumMicroseconds?: string | number | bigint,
 ): number | undefined {
-  /* v8 ignore next 3 -- coerceBrowserCookieRow always yields a defined expires_utc value */
+  /* v8 ignore start -- coerceBrowserCookieRow always yields a defined expires_utc value */
   if (chromiumMicroseconds === undefined) {
     return undefined;
   }
+  /* v8 ignore stop */
 
   const chromiumValue = BigInt(chromiumMicroseconds);
   if (chromiumValue <= 0n) {

@@ -35,7 +35,9 @@ export default defineConfig({
         'src/types/**',
         '**/*.d.ts',
       ],
-      reporter: ['text', 'text-summary', 'html', 'json-summary'],
+      // json: per-statement/branch/function detail (coverage-final.json) for the
+      // uploaded report; json-summary feeds the lean gate's number check.
+      reporter: ['text', 'text-summary', 'html', 'json', 'json-summary'],
       // Lean strict-zero target: 100% line + branch coverage.
       thresholds: {
         lines: 100,

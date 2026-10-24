@@ -118,10 +118,11 @@ export function App({ desktop }: AppProps) {
       }
 
       const nextWorkspace = await bridge.getWorkspaceState();
-      /* v8 ignore next 3 -- unmount race guard: fires only if the component unmounts mid-refresh */
+      /* v8 ignore start -- unmount race guard: fires only if the component unmounts mid-refresh */
       if (!isMountedRef.current) {
         return;
       }
+      /* v8 ignore stop */
 
       if (!nextWorkspace) {
         setWorkspaceState(null);
@@ -152,10 +153,11 @@ export function App({ desktop }: AppProps) {
         readPreferredJobEvents(bridge, nextJobs, verbosityMode, resolvedSnapshotId),
       ]);
 
-      /* v8 ignore next 3 -- unmount race guard: fires only if the component unmounts mid-refresh */
+      /* v8 ignore start -- unmount race guard: fires only if the component unmounts mid-refresh */
       if (!isMountedRef.current) {
         return;
       }
+      /* v8 ignore stop */
 
       setWorkspaceState(nextWorkspace);
       setJobs(nextJobs);
@@ -171,10 +173,11 @@ export function App({ desktop }: AppProps) {
       try {
         await refresh();
       } catch (error) {
-        /* v8 ignore next 3 -- re-render/unmount race guard: cancelled is only true after cleanup */
+        /* v8 ignore start -- re-render/unmount race guard: cancelled is only true after cleanup */
         if (cancelled) {
           return;
         }
+        /* v8 ignore stop */
         setErrorMessage(toMessage(error));
       }
     })();
@@ -484,10 +487,11 @@ export function App({ desktop }: AppProps) {
   const handleVerbosityChange = useCallback(
     (nextVerbosityMode: GuiVerbosityMode) => {
       setVerbosityMode(nextVerbosityMode);
-      /* v8 ignore next 3 -- verbosity controls only render once a bridge-backed workspace exists */
+      /* v8 ignore start -- verbosity controls only render once a bridge-backed workspace exists */
       if (!bridge) {
         return;
       }
+      /* v8 ignore stop */
 
       void bridge.setVerbosityMode(nextVerbosityMode).catch((error) => {
         setErrorMessage(toMessage(error));
@@ -702,10 +706,11 @@ export function App({ desktop }: AppProps) {
 }
 
 function readWindowBridge(): DesktopBridge | undefined {
-  /* v8 ignore next 3 -- the renderer always runs in a window context; the SSR guard is defensive */
+  /* v8 ignore start -- the renderer always runs in a window context; the SSR guard is defensive */
   if (typeof window === 'undefined') {
     return undefined;
   }
+  /* v8 ignore stop */
 
   return (window as Window & { pbinfoDesktop?: DesktopBridge }).pbinfoDesktop;
 }
