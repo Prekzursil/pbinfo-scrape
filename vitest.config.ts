@@ -4,16 +4,26 @@ const includeDesktopElectronSmoke = process.env.PBINFO_INCLUDE_ELECTRON_SMOKE ==
 
 export default defineConfig({
   test: {
-    environment: 'node',
-    include: ['tests/**/*.test.ts', 'tests/**/*.test.tsx'],
     exclude: includeDesktopElectronSmoke
       ? configDefaults.exclude
       : [...configDefaults.exclude, 'tests/gui/desktop-electron-smoke.test.ts'],
-    environmentMatchGlobs: [['tests/**/*.test.tsx', 'jsdom']],
     testTimeout: 60_000,
+    // Vitest 4 removed `environmentMatchGlobs`; projects are its replacement.
+    // Both inherit the root options above (`extends: true`).
+    projects: [
+      {
+        extends: true,
+        test: { name: 'node', environment: 'node', include: ['tests/**/*.test.ts'] },
+      },
+      {
+        extends: true,
+        test: { name: 'jsdom', environment: 'jsdom', include: ['tests/**/*.test.tsx'] },
+      },
+    ],
     coverage: {
       provider: 'v8',
-      all: true,
+      // Vitest 4 reports every file matching `include`, loaded or not (the
+      // removed `all: true` is now the behaviour whenever `include` is set).
       include: ['src/**/*.ts', 'src/**/*.tsx'],
       exclude: [
         // Process entry points: wire-up only, exercised by the desktop-electron

@@ -1,7 +1,7 @@
 import { createDecipheriv } from 'node:crypto';
 import { copyFileSync, existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join, resolve } from 'node:path';
+import { join, resolve, win32 } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { DatabaseSync } from 'node:sqlite';
 
@@ -106,16 +106,21 @@ export function resolveChromiumProfile(
   env: NodeJS.ProcessEnv = process.env,
 ): ResolvedChromiumProfile {
   const profileName = options.profile ?? 'Default';
+  // A caller-supplied directory is a path on this machine. The default one is
+  // derived from LOCALAPPDATA, which is a Windows path by definition (Chromium
+  // cookie import is Windows-only: the cookie key is DPAPI-protected), so it is
+  // built with Windows path semantics on every host. On Windows the two agree.
+  const paths = options.userDataDir ? { join, resolve } : win32;
   const userDataDir = options.userDataDir
-    ? resolve(options.userDataDir)
+    ? paths.resolve(options.userDataDir)
     : resolveDefaultChromiumUserDataDir(options.browser, env);
 
   return {
     browser: options.browser,
     profileName,
     userDataDir,
-    localStatePath: join(userDataDir, 'Local State'),
-    cookiesDbPath: join(userDataDir, profileName, 'Network', 'Cookies'),
+    localStatePath: paths.join(userDataDir, 'Local State'),
+    cookiesDbPath: paths.join(userDataDir, profileName, 'Network', 'Cookies'),
   };
 }
 
@@ -244,10 +249,10 @@ function resolveDefaultChromiumUserDataDir(
 
   const browserPath =
     browser === 'edge'
-      ? join(localAppData, 'Microsoft', 'Edge', 'User Data')
-      : join(localAppData, 'Google', 'Chrome', 'User Data');
+      ? win32.join(localAppData, 'Microsoft', 'Edge', 'User Data')
+      : win32.join(localAppData, 'Google', 'Chrome', 'User Data');
 
-  return resolve(browserPath);
+  return win32.resolve(browserPath);
 }
 
 function normalizeChromiumExpiry(
