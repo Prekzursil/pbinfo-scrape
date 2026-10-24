@@ -216,7 +216,17 @@ async function enforceAuthPreflight(
   }
 
   const authStatus = customProbe ? await customProbe(config) : await probePbinfoAuthStatus(config);
+  assertAuthenticatedSession(authStatus, configuredHandle);
+}
 
+// Synchronous on purpose: these checks follow the probe's `await`, and V8 block
+// counts derived across an await continuation came out negative under Vitest 4's
+// coverage remapping (CI run 40143497432), flipping a covered branch to uncovered.
+// In a plain function the counts are exact.
+function assertAuthenticatedSession(
+  authStatus: PbinfoAuthStatusResult,
+  configuredHandle: string,
+): void {
   if (
     !authStatus.loggedIn ||
     authStatus.status === 'cookie-missing' ||
