@@ -126,3 +126,15 @@ describe('loginWithCredentials helper branches', () => {
     expect(result.resolvedHandle).toBeUndefined();
   });
 });
+
+describe('loginWithCredentials profile anchor fall-through', () => {
+  test('skips a profile anchor with neither a handle segment nor a parenthetical name', async () => {
+    const result = await login({
+      ajaxBody: JSON.stringify({ stare: 'success' }),
+      verifyHtml:
+        '<a href="/logout">Logout</a><nav><a href="/profil/">Profil</a><a href="/profil/erin">erin</a></nav>',
+    });
+    expect(result.success).toBe(true);
+    expect(result.resolvedHandle).toBe('erin');
+  });
+});

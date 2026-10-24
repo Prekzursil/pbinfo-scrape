@@ -474,3 +474,21 @@ describe('archive-data-explorer record detail', () => {
     expect(detail.subtitle).toContain('Best user overall evaluation: 7');
   });
 });
+
+describe('archive explorer test listings', () => {
+  test('lists several problems in numeric order', () => {
+    const { root, snapshotId } = buildFullWorkspace();
+    writeJson(join(normalizedRoot(root, snapshotId), 'tests', 'problem-2.json'), {
+      snapshotId,
+      problemId: 2,
+      problemSlug: 'beta',
+      problemName: 'Beta',
+      examples: [],
+      visible: [],
+      evaluationObserved: [],
+      effective: [],
+    });
+    const listing = listArchiveExplorerRecords(root, { dataset: 'tests' });
+    expect(listing.items.map((item) => item.recordId)).toEqual(['1', '2']);
+  });
+});

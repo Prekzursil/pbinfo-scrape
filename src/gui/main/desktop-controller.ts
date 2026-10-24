@@ -878,9 +878,9 @@ export function createDesktopController(
     try {
       await refresh;
     } finally {
-      if (coverageRefreshes.get(key) === refresh) {
-        coverageRefreshes.delete(key);
-      }
+      // Only this function writes the entry, and only when none is pending, so
+      // until this refresh settles the entry for `key` is this refresh.
+      coverageRefreshes.delete(key);
     }
   }
 }

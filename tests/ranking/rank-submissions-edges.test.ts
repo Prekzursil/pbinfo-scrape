@@ -148,3 +148,38 @@ describe('rankProblemSubmissions edges', () => {
     expect(result.bestTrustworthyOverallEvaluationId).toBe(7);
   });
 });
+
+describe('rankProblemSubmissions with several candidates per ordering', () => {
+  test('orders trustworthy candidates across languages', () => {
+    const result = rankProblemSubmissions([
+      sub({ evaluationId: 1, language: 'cpp' }),
+      sub({ evaluationId: 2, language: 'pascal' }),
+    ]);
+    expect(Object.keys(result.bestTrustworthyPerLanguage)).toHaveLength(2);
+    expect([1, 2]).toContain(result.bestTrustworthyOverallEvaluationId);
+  });
+
+  test('lists every suspicious candidate', () => {
+    const result = rankProblemSubmissions([
+      sub({ evaluationId: 3, suspicionFlags: ['input-branching'] }),
+      sub({ evaluationId: 4, suspicionFlags: ['input-branching'] }),
+    ]);
+    expect([...result.suspiciousCandidateEvaluationIds].sort()).toEqual([3, 4]);
+  });
+
+  test('reports duplicate sources in ascending evaluation order', () => {
+    const sourceCode = [
+      '#include <iostream>',
+      'int main() { int a, b; std::cin >> a >> b; std::cout << a + b; }',
+    ].join('\n');
+    const result = rankProblemSubmissions([
+      sub({ evaluationId: 30, sourceCode }),
+      sub({ evaluationId: 10, sourceCode }),
+      sub({ evaluationId: 20, sourceCode }),
+    ]);
+    expect(result.duplicateEvaluationIds).toHaveLength(2);
+    expect(result.duplicateEvaluationIds).toEqual(
+      [...result.duplicateEvaluationIds].sort((left, right) => left - right),
+    );
+  });
+});

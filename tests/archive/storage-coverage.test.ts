@@ -272,3 +272,36 @@ describe('storage pruning', () => {
     expect(existsSync(join(config.paths.archiveRoot, 'snapshots', 'KEEP'))).toBe(true);
   });
 });
+
+describe('storage prune and import when there is nothing to move', () => {
+  test('prunes a snapshot that never had artifacts, an export or a crawl queue', () => {
+    const root = workspace();
+    const config = loadLocalConfig(root);
+    prepareSnapshot(config, { snapshotId: 'KEEP2', scope: 'all', now: new Date() });
+    const bare = prepareSnapshot(config, { snapshotId: 'BARE', scope: 'all', now: new Date() });
+    rmSync(join(config.paths.artifactsRoot, 'BARE'), { recursive: true, force: true });
+    rmSync(bare.artifactManifestPath, { force: true });
+    rmSync(join(config.paths.localRoot, 'crawl-queues'), { recursive: true, force: true });
+
+    const result = pruneToCanonicalSnapshot(config, 'KEEP2');
+    expect(result.removedSnapshots).toEqual(['BARE']);
+    expect(result.removedArtifactPaths).toEqual([]);
+    expect(result.removedQueuePaths).toEqual([]);
+  });
+
+  test('importing the already-local manifest copies nothing again', () => {
+    const root = workspace();
+    const config = loadLocalConfig(root);
+    const layout = prepareSnapshot(config, { snapshotId: 'A6', scope: 'all', now: new Date() });
+    seedRawArtifacts(layout);
+    exportRawArtifacts(config, layout);
+    const first = importRawArtifacts(config, join(config.artifacts.exportRoot, 'A6'));
+
+    const second = importRawArtifacts(
+      config,
+      join(config.paths.archiveRoot, 'artifacts', 'A6.json'),
+    );
+    expect(second.rawPagesPath).toBe(first.rawPagesPath);
+    expect(second.rawAssetsPath).toBe(first.rawAssetsPath);
+  });
+});

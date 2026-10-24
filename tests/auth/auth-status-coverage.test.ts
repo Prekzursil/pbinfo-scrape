@@ -172,3 +172,13 @@ describe('matchesConfiguredHandle', () => {
     expect(matchesConfiguredHandle('alice', 'bob')).toBe(false);
   });
 });
+
+describe('probePbinfoAuthStatus profile anchor fall-through', () => {
+  test('skips a profile anchor with neither a handle segment nor a parenthetical name', async () => {
+    const config = makeConfig({ cookieExists: true });
+    const html =
+      '<html><a href="/logout">Logout</a><nav><a href="/profil/">Profil</a><a href="/profil/erin">erin</a></nav></html>';
+    const result = await probePbinfoAuthStatus(config, { fetchImpl: fetchReturning(html) });
+    expect(result.resolvedHandle).toBe('erin');
+  });
+});

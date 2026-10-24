@@ -118,3 +118,20 @@ describe('secret bundle bootstrap', () => {
     expect(existsSync(config.auth.sessionCookiesPath)).toBe(false);
   });
 });
+
+describe('secret bundle restore without a local config', () => {
+  test('restores the session cookies and leaves the local config alone', async () => {
+    const root = mkdtempSync(join(tmpdir(), 'pbinfo-secrets-'));
+    tempDirs.push(root);
+    const config = makeConfig(root);
+    const cookies = [{ name: 'SESSION_ID', value: 'abc' }];
+    writeFileSync(config.auth.sessionCookiesPath, JSON.stringify(cookies), 'utf8');
+    await bootstrapSecretBundle(config);
+
+    rmSync(config.auth.sessionCookiesPath);
+    const restored = await restoreSecretBundle(config);
+    expect(restored.localConfig).toBeUndefined();
+    expect(existsSync(join(config.paths.localRoot, 'pbinfo.local.json'))).toBe(false);
+    expect(JSON.parse(readFileSync(config.auth.sessionCookiesPath, 'utf8'))).toEqual(cookies);
+  });
+});

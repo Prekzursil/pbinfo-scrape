@@ -254,9 +254,12 @@ function rankOfficialSources(sources: SourceRecord[]): Record<string, string> {
 
   for (const [language, bucket] of buckets) {
     const best = [...bucket].sort(compareOfficialSources)[0];
-    if (best) {
-      bestOfficialPerLanguage[language] = best.sourceId;
+    /* v8 ignore start -- each bucket holds at least one source, so [0] is always defined */
+    if (!best) {
+      continue;
     }
+    /* v8 ignore stop */
+    bestOfficialPerLanguage[language] = best.sourceId;
   }
 
   return bestOfficialPerLanguage;
