@@ -321,10 +321,13 @@ export function App({ desktop }: AppProps) {
         /* v8 ignore stop */
         setCoverageDetail(detail);
       } catch (error) {
-        if (!cancelled) {
-          setCoverageDetail(null);
-          setErrorMessage(toMessage(error));
+        /* v8 ignore start -- unmount race guard: fires only if the selection changes or the view unmounts mid-fetch */
+        if (cancelled) {
+          return;
         }
+        /* v8 ignore stop */
+        setCoverageDetail(null);
+        setErrorMessage(toMessage(error));
       }
     })();
 
@@ -394,10 +397,13 @@ export function App({ desktop }: AppProps) {
         /* v8 ignore stop */
         setArchiveRecordDetail(detail);
       } catch (error) {
-        if (!cancelled) {
-          setArchiveRecordDetail(null);
-          setErrorMessage(toMessage(error));
+        /* v8 ignore start -- unmount race guard: fires only if the selection changes or the view unmounts mid-fetch */
+        if (cancelled) {
+          return;
         }
+        /* v8 ignore stop */
+        setArchiveRecordDetail(null);
+        setErrorMessage(toMessage(error));
       }
     })();
 
