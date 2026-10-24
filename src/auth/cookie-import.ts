@@ -68,7 +68,7 @@ export interface BrowserCookieImportOptions {
 export function normalizeImportedCookies(
   rawInput: RawCookie[] | PlaywrightStorageState,
 ): ImportedCookie[] {
-  const cookies = Array.isArray(rawInput) ? rawInput : rawInput.cookies ?? [];
+  const cookies = Array.isArray(rawInput) ? rawInput : (rawInput.cookies ?? []);
 
   return cookies.map((cookie) => ({
     name: cookie.name,
@@ -212,8 +212,8 @@ export async function importBrowserCookies(
             const message = error instanceof Error ? error.message : String(error);
             throw new Error(
               `Could not decrypt Chromium cookie "${row.name}" for ${row.host_key}: ${message}. ` +
-              'This usually means the browser uses app-bound encryption that cannot be exported from this profile. ' +
-              'Use `npm run cli -- auth login` (credentials strategy) or import a plain JSON cookie export instead.',
+                'This usually means the browser uses app-bound encryption that cannot be exported from this profile. ' +
+                'Use `npm run cli -- auth login` (credentials strategy) or import a plain JSON cookie export instead.',
             );
           }
         }
@@ -278,9 +278,7 @@ function coerceBrowserCookieRow(row: Record<string, unknown>): BrowserCookieRow 
     name: String(row.name ?? ''),
     value: String(row.value ?? ''),
     encrypted_value:
-      row.encrypted_value instanceof Uint8Array
-        ? row.encrypted_value
-        : new Uint8Array(),
+      row.encrypted_value instanceof Uint8Array ? row.encrypted_value : new Uint8Array(),
     path: String(row.path ?? '/'),
     // The cookies query CASTs expires_utc to TEXT, so it arrives as a string (or
     // null for absent rows, which falls back to 0).
@@ -290,13 +288,9 @@ function coerceBrowserCookieRow(row: Record<string, unknown>): BrowserCookieRow 
         ? row.is_httponly
         : 0,
     is_secure:
-      typeof row.is_secure === 'number' || typeof row.is_secure === 'bigint'
-        ? row.is_secure
-        : 0,
+      typeof row.is_secure === 'number' || typeof row.is_secure === 'bigint' ? row.is_secure : 0,
     samesite:
-      typeof row.samesite === 'number' || typeof row.samesite === 'bigint'
-        ? row.samesite
-        : 0,
+      typeof row.samesite === 'number' || typeof row.samesite === 'bigint' ? row.samesite : 0,
   };
 }
 

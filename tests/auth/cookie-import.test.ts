@@ -159,8 +159,9 @@ describe('normalizeImportedCookies', () => {
         samesite INTEGER NOT NULL
       )
     `);
-    database.prepare(
-      `INSERT INTO cookies (
+    database
+      .prepare(
+        `INSERT INTO cookies (
         host_key,
         name,
         value,
@@ -171,19 +172,21 @@ describe('normalizeImportedCookies', () => {
         is_secure,
         samesite
       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-    ).run(
-      '.pbinfo.ro',
-      'PHPSESSID',
-      '',
-      encryptChromiumCookieValue(masterKey, 'secret-session'),
-      '/',
-      toChromiumEpochSeconds(1_893_456_000),
-      1,
-      1,
-      0,
-    );
-    database.prepare(
-      `INSERT INTO cookies (
+      )
+      .run(
+        '.pbinfo.ro',
+        'PHPSESSID',
+        '',
+        encryptChromiumCookieValue(masterKey, 'secret-session'),
+        '/',
+        toChromiumEpochSeconds(1_893_456_000),
+        1,
+        1,
+        0,
+      );
+    database
+      .prepare(
+        `INSERT INTO cookies (
         host_key,
         name,
         value,
@@ -194,17 +197,18 @@ describe('normalizeImportedCookies', () => {
         is_secure,
         samesite
       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-    ).run(
-      '.example.com',
-      'OTHER',
-      '',
-      encryptChromiumCookieValue(masterKey, 'ignore-me'),
-      '/',
-      0,
-      0,
-      0,
-      0,
-    );
+      )
+      .run(
+        '.example.com',
+        'OTHER',
+        '',
+        encryptChromiumCookieValue(masterKey, 'ignore-me'),
+        '/',
+        0,
+        0,
+        0,
+        0,
+      );
     database.close();
 
     const cookies = await importBrowserCookies({
@@ -291,8 +295,9 @@ describe('normalizeImportedCookies', () => {
         samesite INTEGER NOT NULL
       )
     `);
-    database.prepare(
-      `INSERT INTO cookies (
+    database
+      .prepare(
+        `INSERT INTO cookies (
         host_key,
         name,
         value,
@@ -303,17 +308,18 @@ describe('normalizeImportedCookies', () => {
         is_secure,
         samesite
       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-    ).run(
-      '.pbinfo.ro',
-      'FCCDCF',
-      '',
-      encryptChromiumCookieValue(Buffer.alloc(32, 7), 'cmp-consent-token'),
-      '/',
-      0,
-      1,
-      1,
-      0,
-    );
+      )
+      .run(
+        '.pbinfo.ro',
+        'FCCDCF',
+        '',
+        encryptChromiumCookieValue(Buffer.alloc(32, 7), 'cmp-consent-token'),
+        '/',
+        0,
+        1,
+        1,
+        0,
+      );
     database.close();
 
     await expect(

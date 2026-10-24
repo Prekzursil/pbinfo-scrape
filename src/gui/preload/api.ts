@@ -144,9 +144,7 @@ export function createDesktopBridge(adapter: DesktopBridgeAdapter): DesktopBridg
       })) as Awaited<ReturnType<DesktopBridge['selectWorkspace']>>;
     },
     async loginProfile(input) {
-      return (await nested.auth.login(input)) as Awaited<
-        ReturnType<DesktopBridge['loginProfile']>
-      >;
+      return (await nested.auth.login(input)) as Awaited<ReturnType<DesktopBridge['loginProfile']>>;
     },
     async importBrowserProfile(input) {
       return (await nested.auth.importBrowser(input)) as Awaited<
@@ -169,9 +167,9 @@ export function createDesktopBridge(adapter: DesktopBridgeAdapter): DesktopBridg
       >;
     },
     async getArchiveExplorerSummary(snapshotId) {
-      return (await nested.archive.summary(
-        snapshotId ? { snapshotId } : {},
-      )) as Awaited<ReturnType<DesktopBridge['getArchiveExplorerSummary']>>;
+      return (await nested.archive.summary(snapshotId ? { snapshotId } : {})) as Awaited<
+        ReturnType<DesktopBridge['getArchiveExplorerSummary']>
+      >;
     },
     async listArchiveExplorerRecords(input) {
       return (await nested.archive.list(input)) as Awaited<
@@ -184,9 +182,9 @@ export function createDesktopBridge(adapter: DesktopBridgeAdapter): DesktopBridg
       >;
     },
     async getCoverageSummary(snapshotId) {
-      return (await nested.coverage.summary(
-        snapshotId ? { snapshotId } : {},
-      )) as Awaited<ReturnType<DesktopBridge['getCoverageSummary']>>;
+      return (await nested.coverage.summary(snapshotId ? { snapshotId } : {})) as Awaited<
+        ReturnType<DesktopBridge['getCoverageSummary']>
+      >;
     },
     async listCoverageRecords(input) {
       return (await nested.coverage.list(input)) as Awaited<
@@ -199,14 +197,12 @@ export function createDesktopBridge(adapter: DesktopBridgeAdapter): DesktopBridg
       >;
     },
     async getCrawlStatus(snapshotId) {
-      return (await nested.crawl.status(
-        snapshotId ? { snapshotId } : {},
-      )) as Awaited<ReturnType<DesktopBridge['getCrawlStatus']>>;
+      return (await nested.crawl.status(snapshotId ? { snapshotId } : {})) as Awaited<
+        ReturnType<DesktopBridge['getCrawlStatus']>
+      >;
     },
     async listJobs() {
-      return (await nested.jobs.list()) as Awaited<
-        ReturnType<DesktopBridge['listJobs']>
-      >;
+      return (await nested.jobs.list()) as Awaited<ReturnType<DesktopBridge['listJobs']>>;
     },
     async listJobEvents(jobId, limit) {
       return (await nested.jobs.events({
@@ -215,14 +211,10 @@ export function createDesktopBridge(adapter: DesktopBridgeAdapter): DesktopBridg
       })) as Awaited<ReturnType<DesktopBridge['listJobEvents']>>;
     },
     async startJob(input) {
-      return (await nested.jobs.start(input)) as Awaited<
-        ReturnType<DesktopBridge['startJob']>
-      >;
+      return (await nested.jobs.start(input)) as Awaited<ReturnType<DesktopBridge['startJob']>>;
     },
     async pauseJob(jobId) {
-      return (await nested.jobs.pause(jobId)) as Awaited<
-        ReturnType<DesktopBridge['pauseJob']>
-      >;
+      return (await nested.jobs.pause(jobId)) as Awaited<ReturnType<DesktopBridge['pauseJob']>>;
     },
     async resumeJob(jobId, options) {
       return (await nested.jobs.resume(jobId, options)) as Awaited<

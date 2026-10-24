@@ -80,7 +80,8 @@ describe('probePbinfoAuthStatus statuses', () => {
 
   test('resolves the handle from a profile link when logged in via a logout link', async () => {
     const config = makeConfig({ cookieExists: true });
-    const html = '<html><a href="/logout">Logout</a><nav><a href="/profil/charlie">profile</a></nav></html>';
+    const html =
+      '<html><a href="/logout">Logout</a><nav><a href="/profil/charlie">profile</a></nav></html>';
     const result = await probePbinfoAuthStatus(config, { fetchImpl: fetchReturning(html) });
     expect(result.status).toBe('ok');
     expect(result.resolvedHandle).toBe('charlie');
@@ -88,7 +89,8 @@ describe('probePbinfoAuthStatus statuses', () => {
 
   test('resolves the handle from profile anchor text when the href has no segment', async () => {
     const config = makeConfig({ cookieExists: true });
-    const html = '<html><a href="/logout">Logout</a><nav><a href="/profil/">Name (dave)</a></nav></html>';
+    const html =
+      '<html><a href="/logout">Logout</a><nav><a href="/profil/">Name (dave)</a></nav></html>';
     const result = await probePbinfoAuthStatus(config, { fetchImpl: fetchReturning(html) });
     expect(result.resolvedHandle).toBe('dave');
   });
@@ -108,7 +110,8 @@ describe('probePbinfoAuthStatus statuses', () => {
     });
     expect(malformed.status).toBe('guest');
 
-    const nonString = '<script>user_autentificat = {"id":3,"username":3,"user":"   ","name":"Eve"};</script>';
+    const nonString =
+      '<script>user_autentificat = {"id":3,"username":3,"user":"   ","name":"Eve"};</script>';
     const result = await probePbinfoAuthStatus(config, { fetchImpl: fetchReturning(nonString) });
     expect(result.resolvedHandle).toBe('eve');
   });
@@ -140,7 +143,9 @@ describe('probePbinfoAuthStatus statuses', () => {
   test('resolves authentication from the user_id field', async () => {
     const config = makeConfig({ handle: 'frank', cookieExists: true });
     const result = await probePbinfoAuthStatus(config, {
-      fetchImpl: fetchReturning('<script>user_autentificat = {"user_id":4,"username":"frank"};</script>'),
+      fetchImpl: fetchReturning(
+        '<script>user_autentificat = {"user_id":4,"username":"frank"};</script>',
+      ),
     });
     expect(result.status).toBe('ok');
   });
@@ -148,7 +153,9 @@ describe('probePbinfoAuthStatus statuses', () => {
   test('treats a whitespace-only configured handle as unconfigured', async () => {
     const config = makeConfig({ handle: '   ', cookieExists: true });
     const result = await probePbinfoAuthStatus(config, {
-      fetchImpl: fetchReturning('<script>user_autentificat = {"id":1,"username":"Someone"};</script>'),
+      fetchImpl: fetchReturning(
+        '<script>user_autentificat = {"id":1,"username":"Someone"};</script>',
+      ),
     });
     expect(result.status).toBe('ok');
   });

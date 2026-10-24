@@ -15,9 +15,7 @@ type PersistedCookie = {
   sameSite?: string;
 };
 
-export async function loadCookieJarFromFile(
-  sessionCookiesPath: string,
-): Promise<CookieJar> {
+export async function loadCookieJarFromFile(sessionCookiesPath: string): Promise<CookieJar> {
   const jar = new CookieJar(undefined, {
     allowSpecialUseDomain: true,
     rejectPublicSuffixes: false,
@@ -26,9 +24,7 @@ export async function loadCookieJarFromFile(
     return jar;
   }
 
-  const cookies = JSON.parse(
-    readFileSync(sessionCookiesPath, 'utf8'),
-  ) as PersistedCookie[];
+  const cookies = JSON.parse(readFileSync(sessionCookiesPath, 'utf8')) as PersistedCookie[];
   for (const cookie of cookies) {
     if (!cookie.key || cookie.value === undefined) {
       continue;
@@ -45,18 +41,13 @@ export async function loadCookieJarFromFile(
       .join('; ');
     const protocol = cookie.secure ? 'https' : 'http';
     const cookieDomain = (cookie.domain ?? 'localhost').replace(/^\./, '');
-    await jar.setCookie(
-      serialized,
-      `${protocol}://${cookieDomain}${cookie.path ?? '/'}`,
-    );
+    await jar.setCookie(serialized, `${protocol}://${cookieDomain}${cookie.path ?? '/'}`);
   }
 
   return jar;
 }
 
-export async function createCookieFetch(
-  sessionCookiesPath: string,
-): Promise<typeof fetch> {
+export async function createCookieFetch(sessionCookiesPath: string): Promise<typeof fetch> {
   const jar = await loadCookieJarFromFile(sessionCookiesPath);
   return makeFetchCookie(fetch, jar);
 }

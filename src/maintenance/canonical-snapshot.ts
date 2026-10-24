@@ -53,12 +53,7 @@ export function getCanonicalSnapshotPaths(
   snapshotId = CANONICAL_SNAPSHOT_ID,
 ): CanonicalSnapshotPaths {
   const resolvedWorkspaceRoot = resolve(workspaceRoot);
-  const snapshotRoot = join(
-    resolvedWorkspaceRoot,
-    'archive',
-    'snapshots',
-    snapshotId,
-  );
+  const snapshotRoot = join(resolvedWorkspaceRoot, 'archive', 'snapshots', snapshotId);
   const normalizedRoot = join(snapshotRoot, 'normalized');
   const problemsRoot = join(normalizedRoot, 'problems');
   const mirrorRoot = join(snapshotRoot, 'mirror');
@@ -123,9 +118,7 @@ export function scanCanonicalSnapshotFilesystem(
   const problemRecordCount = problemsRootExists
     ? readdirSync(paths.problemsRoot, {
         withFileTypes: true,
-      }).filter(
-        (entry) => entry.isFile() && /^problem-\d+\.json$/i.test(entry.name),
-      ).length
+      }).filter((entry) => entry.isFile() && /^problem-\d+\.json$/i.test(entry.name)).length
     : 0;
 
   const mirrorRoutes = readMirrorRouteIndex(paths.mirrorRoutesPath);

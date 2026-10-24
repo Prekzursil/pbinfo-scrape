@@ -59,7 +59,7 @@ describe('runRankingWorkflow', () => {
         suspicionFlags: [],
         tests: [],
         fetchedAt: '2026-03-10T00:00:00.000Z',
-        provenance: ['user-solutions']
+        provenance: ['user-solutions'],
       }),
       'utf8',
     );
@@ -82,7 +82,7 @@ describe('runRankingWorkflow', () => {
         suspicionFlags: [],
         tests: [],
         fetchedAt: '2026-03-10T00:00:00.000Z',
-        provenance: ['user-solutions']
+        provenance: ['user-solutions'],
       }),
       'utf8',
     );

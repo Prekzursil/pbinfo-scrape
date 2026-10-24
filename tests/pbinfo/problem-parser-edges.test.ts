@@ -127,7 +127,9 @@ describe('parseProblemStatementFragment execution hints', () => {
   }
 
   test('keeps the first time limit and ignores constraints without numbers', () => {
-    expect(hints(['Timp de executare: 2 secunde', 'Timp: 3 secunde', 'fara numar']).timeLimitSeconds).toBe(2);
+    expect(
+      hints(['Timp de executare: 2 secunde', 'Timp: 3 secunde', 'fara numar']).timeLimitSeconds,
+    ).toBe(2);
   });
 
   test('converts KB memory limits and keeps the first value', () => {

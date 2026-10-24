@@ -128,17 +128,17 @@ describe('registerDesktopIpc', () => {
 
     // Auth handlers reject invalid payloads at the schema boundary.
     await expect(handlers.get('desktop:auth:login')!(null, {})).rejects.toBeInstanceOf(Error);
-    await expect(
-      handlers.get('desktop:auth:import-browser')!(null, {}),
-    ).rejects.toBeInstanceOf(Error);
+    await expect(handlers.get('desktop:auth:import-browser')!(null, {})).rejects.toBeInstanceOf(
+      Error,
+    );
 
     // Controller-backed jobs list (now present) returns an array.
     expect(await handlers.get('desktop:jobs:list')!(null)).toEqual([]);
 
     // Job + mirror forwarding handlers.
-    await expect(handlers.get('desktop:jobs:start')!(null, { kind: 'nope' })).rejects.toBeInstanceOf(
-      Error,
-    );
+    await expect(
+      handlers.get('desktop:jobs:start')!(null, { kind: 'nope' }),
+    ).rejects.toBeInstanceOf(Error);
     await expect(
       handlers.get('desktop:jobs:pause')!(null, { jobId: 'missing' }),
     ).rejects.toBeInstanceOf(Error);

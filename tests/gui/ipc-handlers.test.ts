@@ -82,9 +82,9 @@ describe('desktop IPC registry', () => {
     await registry['desktop:mirror:stop-preview']({ jobId: 'job-9' });
     expect(stopMirrorPreview).toHaveBeenCalledWith('job-9');
 
-    await expect(
-      registry['desktop:mirror:start-preview']({ port: 1 }),
-    ).rejects.toThrow('snapshotId is required.');
+    await expect(registry['desktop:mirror:start-preview']({ port: 1 })).rejects.toThrow(
+      'snapshotId is required.',
+    );
   });
 
   test('rejects pause and stop requests that omit the job id', async () => {

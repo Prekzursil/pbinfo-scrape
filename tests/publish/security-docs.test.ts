@@ -16,11 +16,7 @@ describe('security and archive visibility docs', () => {
 
     expect(body).toContain('Where is the archive locally?');
     expect(body).toContain('serve --snapshot acceptance-20260310b --port 4173');
-    expect(body).toContain(
-      'archive/snapshots/acceptance-20260310b/normalized/',
-    );
-    expect(body).toContain(
-      'archive/snapshots/acceptance-20260310b/mirror/',
-    );
+    expect(body).toContain('archive/snapshots/acceptance-20260310b/normalized/');
+    expect(body).toContain('archive/snapshots/acceptance-20260310b/mirror/');
   });
 });

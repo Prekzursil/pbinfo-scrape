@@ -1,10 +1,4 @@
-import {
-  mkdirSync,
-  mkdtempSync,
-  readFileSync,
-  rmSync,
-  writeFileSync,
-} from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
@@ -49,8 +43,12 @@ const cookie = {
 describe('workspace store edge cases', () => {
   test('initialize returns the existing state and read falls back to initialize', () => {
     const workspaceRoot = makeWorkspace('pbinfo-ws-init-');
-    const first = initializeWorkspaceState(workspaceRoot, { now: new Date('2026-03-10T00:00:00.000Z') });
-    const second = initializeWorkspaceState(workspaceRoot, { now: new Date('2026-03-11T00:00:00.000Z') });
+    const first = initializeWorkspaceState(workspaceRoot, {
+      now: new Date('2026-03-10T00:00:00.000Z'),
+    });
+    const second = initializeWorkspaceState(workspaceRoot, {
+      now: new Date('2026-03-11T00:00:00.000Z'),
+    });
     expect(second.createdAt).toBe(first.createdAt);
 
     const fresh = makeWorkspace('pbinfo-ws-read-');
@@ -99,7 +97,9 @@ describe('workspace store edge cases', () => {
       sessionCookies: [cookie],
       now: new Date('2026-03-10T00:00:00.000Z'),
     });
-    activateWorkspaceProfile(workspaceRoot, 'nohandle', { now: new Date('2026-03-10T01:00:00.000Z') });
+    activateWorkspaceProfile(workspaceRoot, 'nohandle', {
+      now: new Date('2026-03-10T01:00:00.000Z'),
+    });
     const config = JSON.parse(
       readFileSync(join(workspaceRoot, '.local', 'pbinfo.local.json'), 'utf8'),
     ) as { crawl: { publicStartUrls: string[]; userHandle?: string } };
@@ -120,7 +120,9 @@ describe('workspace store edge cases', () => {
       });
     }
     activateWorkspaceProfile(workspaceRoot, 'alpha', { now: new Date('2026-03-10T01:00:00.000Z') });
-    const state = deleteWorkspaceProfile(workspaceRoot, 'beta', { now: new Date('2026-03-10T02:00:00.000Z') });
+    const state = deleteWorkspaceProfile(workspaceRoot, 'beta', {
+      now: new Date('2026-03-10T02:00:00.000Z'),
+    });
     expect(state.activeProfileId).toBe('alpha');
     expect(state.profiles.map((profile) => profile.profileId)).toEqual(['alpha']);
   });
@@ -162,7 +164,9 @@ describe('workspace store edge cases', () => {
     writeFileSync(statePath, JSON.stringify(state), 'utf8');
     writeLocalConfig(workspaceRoot, { auth: { strategy: 'cookie-import' } });
 
-    const next = deleteWorkspaceProfile(workspaceRoot, 'alpha', { now: new Date('2026-03-10T02:00:00.000Z') });
+    const next = deleteWorkspaceProfile(workspaceRoot, 'alpha', {
+      now: new Date('2026-03-10T02:00:00.000Z'),
+    });
     expect(next.activeProfileId).toBeUndefined();
     expect(next.profiles).toEqual([]);
   });

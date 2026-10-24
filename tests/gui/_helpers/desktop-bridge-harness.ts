@@ -308,36 +308,46 @@ export function createBridgeHarness(): {
           dataset: 'problems' as const,
           label: 'Problems',
           count: 1,
-          directoryPath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problems',
-          description: 'Structured PBInfo problem records with sections, examples, constraints, and official-source metadata.',
+          directoryPath:
+            'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problems',
+          description:
+            'Structured PBInfo problem records with sections, examples, constraints, and official-source metadata.',
         },
         {
           dataset: 'evaluations' as const,
           label: 'Evaluations',
           count: 0,
-          directoryPath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/evaluations',
-          description: 'Submission and evaluation records with score, verdict, tests, and compile logs when archived.',
+          directoryPath:
+            'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/evaluations',
+          description:
+            'Submission and evaluation records with score, verdict, tests, and compile logs when archived.',
         },
         {
           dataset: 'tests' as const,
           label: 'Tests',
           count: 1,
-          directoryPath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/tests',
-          description: 'Unified per-problem test dataset combining statement examples, visible tests, and evaluation-observed tests.',
+          directoryPath:
+            'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/tests',
+          description:
+            'Unified per-problem test dataset combining statement examples, visible tests, and evaluation-observed tests.',
         },
         {
           dataset: 'rankings' as const,
           label: 'Rankings',
           count: 1,
-          directoryPath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/rankings',
-          description: 'Canonical best-user and best-official language rankings derived from normalized evaluation sources.',
+          directoryPath:
+            'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/rankings',
+          description:
+            'Canonical best-user and best-official language rankings derived from normalized evaluation sources.',
         },
         {
           dataset: 'mirror-routes' as const,
           label: 'Mirror Routes',
           count: 1,
-          directoryPath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/routes',
-          description: 'Route records that drive local mirror replay and link archived entities back into the offline viewer.',
+          directoryPath:
+            'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/routes',
+          description:
+            'Route records that drive local mirror replay and link archived entities back into the offline viewer.',
         },
       ],
     })),
@@ -357,7 +367,8 @@ export function createBridgeHarness(): {
                 title: '#3171 waterreserve',
                 subtitle: '/probleme/3171/problem-3171',
                 description: '1 ≤ n ≤ 1.000.000',
-                filePath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problems/problem-3171.json',
+                filePath:
+                  'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problems/problem-3171.json',
                 mirrorRoute: '/probleme/3171/problem-3171',
               },
             ],
@@ -376,7 +387,8 @@ export function createBridgeHarness(): {
                 title: 'Problem #3716',
                 subtitle: 'Best user languages: c, cpp, py3',
                 description: 'Best user overall evaluation: 63332367',
-                filePath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/rankings/best-submissions.json',
+                filePath:
+                  'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/rankings/best-submissions.json',
               },
             ],
           };
@@ -397,7 +409,8 @@ export function createBridgeHarness(): {
       recordId: '3171',
       title: '#3171 waterreserve',
       subtitle: '/probleme/3171/problem-3171',
-      filePath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problems/problem-3171.json',
+      filePath:
+        'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problems/problem-3171.json',
       mirrorRoute: '/probleme/3171/problem-3171',
       payload: {
         id: 3171,
@@ -406,7 +419,8 @@ export function createBridgeHarness(): {
     })),
     getCoverageSummary: vi.fn(async () => ({
       snapshotId: 'acceptance-20260310b',
-      coverageRoot: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problem-coverage',
+      coverageRoot:
+        'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problem-coverage',
       normalizedRoot: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized',
       mirrorRoot: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/mirror',
       mirrorServeCommand: 'npm run cli -- serve --snapshot acceptance-20260310b --port 4173',
@@ -445,21 +459,22 @@ export function createBridgeHarness(): {
           return false;
         }
         if (
-          input.archiveCompletenessStatus
-          && input.archiveCompletenessStatus !== 'all'
-          && record.archiveCompletenessStatus !== input.archiveCompletenessStatus
+          input.archiveCompletenessStatus &&
+          input.archiveCompletenessStatus !== 'all' &&
+          record.archiveCompletenessStatus !== input.archiveCompletenessStatus
         ) {
           return false;
         }
         if (
-          input.testsCoverageStatus
-          && input.testsCoverageStatus !== 'all'
-          && record.testsCoverageStatus !== input.testsCoverageStatus
+          input.testsCoverageStatus &&
+          input.testsCoverageStatus !== 'all' &&
+          record.testsCoverageStatus !== input.testsCoverageStatus
         ) {
           return false;
         }
         if (input.query) {
-          const haystack = `${record.problemId} ${record.slug} ${record.name} ${record.tags.join(' ')}`.toLowerCase();
+          const haystack =
+            `${record.problemId} ${record.slug} ${record.name} ${record.tags.join(' ')}`.toLowerCase();
           if (!haystack.includes(input.query.toLowerCase())) {
             return false;
           }
@@ -476,7 +491,8 @@ export function createBridgeHarness(): {
     }),
     getCoverageRecord: vi.fn(async () => ({
       snapshotId: 'acceptance-20260310b',
-      coverageFilePath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problem-coverage/problem-3716.json',
+      coverageFilePath:
+        'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problem-coverage/problem-3716.json',
       record: {
         problemId: 3716,
         slug: 'crossword',
@@ -527,9 +543,12 @@ export function createBridgeHarness(): {
         bestUserOverallEvaluationId: 63332367,
       },
       rawRecordLinks: {
-        coverageFilePath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problem-coverage/problem-3716.json',
-        problemFilePath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problems/problem-3716.json',
-        rankingFilePath: 'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/rankings/problems/problem-3716.json',
+        coverageFilePath:
+          'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problem-coverage/problem-3716.json',
+        problemFilePath:
+          'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/problems/problem-3716.json',
+        rankingFilePath:
+          'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/rankings/problems/problem-3716.json',
         evaluationFilePaths: [
           'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized/evaluations/evaluation-63332367.json',
         ],
@@ -677,7 +696,8 @@ export function createBridgeHarness(): {
                 sample: 'raw-only',
               },
             },
-          ]),
+          ],
+    ),
     startJob,
     pauseJob: vi.fn(async () => buildJob('crawl', 'paused')),
     resumeJob: vi.fn(async () => buildJob('crawl', 'paused')),
@@ -726,4 +746,3 @@ function buildJob(
     updatedAt: '2026-03-10T12:05:00.000Z',
   } as const;
 }
-

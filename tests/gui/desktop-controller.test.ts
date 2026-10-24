@@ -37,7 +37,9 @@ afterEach(async () => {
 });
 
 describe('desktop controller', () => {
-  test('runs crawl jobs in resumable chunks and persists queue counters between chunks', { timeout: 20_000 }, async () => {
+  test('runs crawl jobs in resumable chunks and persists queue counters between chunks', {
+    timeout: 20_000,
+  }, async () => {
     const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-desktop-crawl-'));
     tempDirs.push(workspaceRoot);
     initializeWorkspaceState(workspaceRoot, {
@@ -117,9 +119,7 @@ describe('desktop controller', () => {
       inProgress: 0,
     });
     expect(persisted.status).toBe('completed');
-    expect(readFileSync(persisted.logPath, 'utf8')).toContain(
-      'Crawl snapshot desktop-snapshot',
-    );
+    expect(readFileSync(persisted.logPath, 'utf8')).toContain('Crawl snapshot desktop-snapshot');
     expect(controller.getCrawlStatus('desktop-snapshot')).toEqual(
       expect.objectContaining({
         snapshotId: 'desktop-snapshot',
@@ -146,12 +146,7 @@ describe('desktop controller', () => {
 
     const resumeCrawlWorkflow = vi.fn(async () => ({
       processed: 3,
-      queuePath: join(
-        workspaceRoot,
-        '.local',
-        'crawl-queues',
-        'acceptance-20260310b.sqlite',
-      ),
+      queuePath: join(workspaceRoot, '.local', 'crawl-queues', 'acceptance-20260310b.sqlite'),
       snapshotId: 'acceptance-20260310b',
       completed: false,
     }));
@@ -159,24 +154,14 @@ describe('desktop controller', () => {
     const controller = createDesktopController(workspaceRoot, {
       runCrawlWorkflow: async () => ({
         processed: 1,
-        queuePath: join(
-          workspaceRoot,
-          '.local',
-          'crawl-queues',
-          'acceptance-20260310b.sqlite',
-        ),
+        queuePath: join(workspaceRoot, '.local', 'crawl-queues', 'acceptance-20260310b.sqlite'),
         snapshotId: 'acceptance-20260310b',
         completed: false,
       }),
       resumeCrawlWorkflow,
       getCrawlStatusWorkflow: () => ({
         snapshotId: 'acceptance-20260310b',
-        queuePath: join(
-          workspaceRoot,
-          '.local',
-          'crawl-queues',
-          'acceptance-20260310b.sqlite',
-        ),
+        queuePath: join(workspaceRoot, '.local', 'crawl-queues', 'acceptance-20260310b.sqlite'),
         pending: 7,
         completed: 5,
         inProgress: 0,
@@ -218,12 +203,7 @@ describe('desktop controller', () => {
 
     const runCrawlWorkflow = vi.fn(async () => ({
       processed: 1,
-      queuePath: join(
-        workspaceRoot,
-        '.local',
-        'crawl-queues',
-        'acceptance-20260310b.sqlite',
-      ),
+      queuePath: join(workspaceRoot, '.local', 'crawl-queues', 'acceptance-20260310b.sqlite'),
       snapshotId: 'acceptance-20260310b',
       completed: false,
     }));
@@ -232,12 +212,7 @@ describe('desktop controller', () => {
       runCrawlWorkflow,
       getCrawlStatusWorkflow: () => ({
         snapshotId: 'acceptance-20260310b',
-        queuePath: join(
-          workspaceRoot,
-          '.local',
-          'crawl-queues',
-          'acceptance-20260310b.sqlite',
-        ),
+        queuePath: join(workspaceRoot, '.local', 'crawl-queues', 'acceptance-20260310b.sqlite'),
         pending: 7,
         completed: 5,
         inProgress: 0,
@@ -390,31 +365,31 @@ describe('desktop controller', () => {
         },
       },
       finalizeSnapshotWorkflow: async () => ({
-          snapshotId: 'acceptance-20260310b',
-          pagesNormalized: 12,
-          problemsRanked: 3,
-          routesBuilt: 7,
-          artifactManifestPath: join(
-            workspaceRoot,
-            'archive',
-            'artifacts',
-            'acceptance-20260310b.json',
-          ),
-          coverageGapReportPath: join(
-            workspaceRoot,
-            'archive',
-            'snapshots',
-            'acceptance-20260310b',
-            'normalized',
-            'problem-coverage',
-            'gaps.json',
-          ),
-          promotedToCanonical: false,
-          coverageGates: {
-            officialSourceGatePassed: true,
-            solvedUserSourceGatePassed: true,
-          },
-        }),
+        snapshotId: 'acceptance-20260310b',
+        pagesNormalized: 12,
+        problemsRanked: 3,
+        routesBuilt: 7,
+        artifactManifestPath: join(
+          workspaceRoot,
+          'archive',
+          'artifacts',
+          'acceptance-20260310b.json',
+        ),
+        coverageGapReportPath: join(
+          workspaceRoot,
+          'archive',
+          'snapshots',
+          'acceptance-20260310b',
+          'normalized',
+          'problem-coverage',
+          'gaps.json',
+        ),
+        promotedToCanonical: false,
+        coverageGates: {
+          officialSourceGatePassed: true,
+          solvedUserSourceGatePassed: true,
+        },
+      }),
     });
     const completed = await controller.startJob({
       kind: 'snapshot-finalize',
@@ -805,9 +780,7 @@ describe('desktop controller', () => {
         rawRecordLinks: expect.objectContaining({
           coverageFilePath: expect.stringContaining('problem-3716.json'),
           problemFilePath: expect.stringContaining('problem-3716.json'),
-          rankingFilePath: expect.stringContaining(
-            'rankings\\problems\\problem-3716.json',
-          ),
+          rankingFilePath: expect.stringContaining('rankings\\problems\\problem-3716.json'),
           evaluationFilePaths: expect.arrayContaining([
             expect.stringContaining('evaluation-63332367.json'),
           ]),
@@ -912,12 +885,7 @@ describe('desktop controller', () => {
           callCount += 1;
           return {
             snapshotId: 'acceptance-20260310b',
-            queuePath: join(
-              workspaceRoot,
-              '.local',
-              'crawl-queues',
-              'acceptance-20260310b.sqlite',
-            ),
+            queuePath: join(workspaceRoot, '.local', 'crawl-queues', 'acceptance-20260310b.sqlite'),
             pending: 8,
             completed: 4,
             inProgress: 0,
@@ -1035,7 +1003,9 @@ describe('desktop controller', () => {
       type: 'login',
     });
     expect(readFileSync(config.auth.sessionCookiesPath, 'utf8')).toContain('PHPSESSID');
-    expect(readFileSync(result.job.logPath, 'utf8')).toContain('Signed in and activated profile alpha');
+    expect(readFileSync(result.job.logPath, 'utf8')).toContain(
+      'Signed in and activated profile alpha',
+    );
     expect(notifications).toEqual([
       expect.objectContaining({
         title: 'PBInfo login complete',

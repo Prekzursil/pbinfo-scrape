@@ -51,10 +51,7 @@ export interface FinalizeSnapshotOptions {
   promote?: boolean;
 }
 
-export function getCrawlStatus(
-  workspaceRoot: string,
-  snapshotId?: string,
-): CrawlStatusResult {
+export function getCrawlStatus(workspaceRoot: string, snapshotId?: string): CrawlStatusResult {
   const config = loadLocalConfig(workspaceRoot);
   const catalog = readArchiveCatalog(config.paths.archiveRoot);
   const resolvedSnapshotId = snapshotId ?? catalog.currentSnapshotId;

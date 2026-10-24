@@ -34,13 +34,11 @@ afterEach(async () => {
   }
 });
 
-function createWorkspace(
-  overrides?: {
-    crawl?: {
-      userHandle?: string;
-    };
-  },
-) {
+function createWorkspace(overrides?: {
+  crawl?: {
+    userHandle?: string;
+  };
+}) {
   const root = mkdtempSync(join(tmpdir(), 'pbinfo-crawl-'));
   mkdirSync(join(root, '.local'), { recursive: true });
   if (overrides) {
@@ -228,7 +226,10 @@ describe('ArchiveCrawler', () => {
     expect(snapshot.pending).toBe(3);
     expect(
       readFileSync(
-        join(workspace.snapshot.rawPagesRoot, 'page-https-www-pbinfo-ro-probleme-3171-waterreserve.html'),
+        join(
+          workspace.snapshot.rawPagesRoot,
+          'page-https-www-pbinfo-ro-probleme-3171-waterreserve.html',
+        ),
         'utf8',
       ),
     ).toContain('Recovered');
@@ -404,11 +405,12 @@ describe('ArchiveCrawler', () => {
 
     await expect(crawler.processNext(new Date('2026-03-10T00:00:00.000Z'))).resolves.toBe(true);
 
-    const pending = queue.getSnapshot().items
-      .filter(
+    const pending = queue
+      .getSnapshot()
+      .items.filter(
         (item) =>
-          item.status === 'pending'
-          && (item.kind === 'evaluation-detail' || item.kind === 'user-solutions'),
+          item.status === 'pending' &&
+          (item.kind === 'evaluation-detail' || item.kind === 'user-solutions'),
       )
       .sort((left, right) => left.id - right.id);
 
@@ -428,7 +430,9 @@ describe('ArchiveCrawler', () => {
     const server = createServer((request, response) => {
       if (request.url === '/probleme/3171/waterreserve') {
         response.setHeader('Content-Type', 'text/html');
-        response.end('<html><body><h1><span>#3171</span> <a href="/probleme/3171/waterreserve">WaterReserve</a></h1></body></html>');
+        response.end(
+          '<html><body><h1><span>#3171</span> <a href="/probleme/3171/waterreserve">WaterReserve</a></h1></body></html>',
+        );
         return;
       }
 
@@ -464,7 +468,9 @@ describe('ArchiveCrawler', () => {
 
     await expect(crawler.processNext(new Date('2026-03-10T00:00:00.000Z'))).resolves.toBe(true);
 
-    const manifest = JSON.parse(readFileSync(workspace.snapshot.rawPagesManifestPath, 'utf8')) as Record<string, string>;
+    const manifest = JSON.parse(
+      readFileSync(workspace.snapshot.rawPagesManifestPath, 'utf8'),
+    ) as Record<string, string>;
     expect(manifest[url]).toMatch(/page-http-127-0-0-1-probleme-3171-waterreserve\.html$/);
   });
 
@@ -622,21 +628,19 @@ describe('ArchiveCrawler', () => {
       `page:${baseUrl}/solutii/clasa/3751/11a-cnmb/problema/3171/waterreserve`,
     );
     expect(queuedKeys).not.toContain(`page:${baseUrl}/clasa-mea/107/postari`);
-    expect(queuedKeys).not.toContain(
-      `page:${baseUrl}/teme/rezolvare/103528/divide-et-impera`,
-    );
+    expect(queuedKeys).not.toContain(`page:${baseUrl}/teme/rezolvare/103528/divide-et-impera`);
     expect(queuedKeys).not.toContain(`page:${baseUrl}/editare-cont`);
     expect(queuedKeys).not.toContain(`page:${baseUrl}/logout.php`);
-    expect(queuedKeys).not.toContain(`page:${baseUrl}/probleme/3171/resurse/9dc152/p-1100/cub2.png`);
+    expect(queuedKeys).not.toContain(
+      `page:${baseUrl}/probleme/3171/resurse/9dc152/p-1100/cub2.png`,
+    );
     expect(queuedKeys).not.toContain(`page:${baseUrl}/resurse/9dc152/examene/2026/model.pdf`);
     expect(queuedKeys).not.toContain(`asset:${baseUrl}/resurse/9dc152/articole/cpp/quicksort.png`);
     expect(queuedKeys).not.toContain(`asset:${baseUrl}/resurse/ajutor/help.png`);
     expect(queuedKeys).toContain(`asset:${baseUrl}/resurse/probleme/851-900/depou.png`);
     expect(queuedKeys).not.toContain(`asset:${baseUrl}/php/gravatar.php?gsize=190&hash=abc`);
     expect(
-      queuedKeys.filter(
-        (key) => key === `page:${baseUrl}/?clasa=9&pagina=probleme-lista&tag=2`,
-      ),
+      queuedKeys.filter((key) => key === `page:${baseUrl}/?clasa=9&pagina=probleme-lista&tag=2`),
     ).toHaveLength(1);
   });
 
@@ -728,7 +732,11 @@ describe('ArchiveCrawler', () => {
     );
     const pageRecord = JSON.parse(
       readFileSync(
-        join(workspace.snapshot.normalizedRoot, 'pages', 'page-http-127-0-0-1-probleme-3171-waterreserve.json'),
+        join(
+          workspace.snapshot.normalizedRoot,
+          'pages',
+          'page-http-127-0-0-1-probleme-3171-waterreserve.json',
+        ),
         'utf8',
       ),
     );
@@ -820,10 +828,7 @@ describe('ArchiveCrawler', () => {
     await crawler.processNext(new Date('2026-03-10T00:00:01.000Z'));
 
     const testsRecord = JSON.parse(
-      readFileSync(
-        join(workspace.snapshot.normalizedRoot, 'tests', 'problem-3171.json'),
-        'utf8',
-      ),
+      readFileSync(join(workspace.snapshot.normalizedRoot, 'tests', 'problem-3171.json'), 'utf8'),
     );
 
     expect(testsRecord.examples).toEqual([
@@ -891,9 +896,7 @@ describe('ArchiveCrawler', () => {
       queue,
     });
 
-    await expect(
-      crawler.processNext(new Date('2026-03-10T00:00:00.000Z')),
-    ).resolves.toBe(true);
+    await expect(crawler.processNext(new Date('2026-03-10T00:00:00.000Z'))).resolves.toBe(true);
 
     const pageRecord = JSON.parse(
       readFileSync(
@@ -957,17 +960,11 @@ describe('ArchiveCrawler', () => {
       queue,
     });
 
-    await expect(
-      crawler.processNext(new Date('2026-03-10T00:00:00.000Z')),
-    ).resolves.toBe(true);
+    await expect(crawler.processNext(new Date('2026-03-10T00:00:00.000Z'))).resolves.toBe(true);
 
     const failureRecord = JSON.parse(
       readFileSync(
-        join(
-          workspace.snapshot.normalizedRoot,
-          'evaluation-errors',
-          'evaluation-63571984.json',
-        ),
+        join(workspace.snapshot.normalizedRoot, 'evaluation-errors', 'evaluation-63571984.json'),
         'utf8',
       ),
     );
@@ -1473,7 +1470,9 @@ describe('ArchiveCrawler', () => {
 
     const baseUrl = `http://127.0.0.1:${address.port}`;
     const url = `${baseUrl}/solutii/user/pbinfo/problema/3171/waterreserve`;
-    const queue = new CrawlQueue(join(workspace.root, '.local', 'official-author-followups.sqlite'));
+    const queue = new CrawlQueue(
+      join(workspace.root, '.local', 'official-author-followups.sqlite'),
+    );
     queue.enqueueMany([
       {
         key: `official-source-list:${url}`,
@@ -1581,8 +1580,8 @@ describe('ArchiveCrawler', () => {
     expect(
       pending.find(
         (item) =>
-          item.key
-          === `official-source-list:${baseUrl}/solutii/user/Prekzursil/problema/2855/subseqsum-hard`,
+          item.key ===
+          `official-source-list:${baseUrl}/solutii/user/Prekzursil/problema/2855/subseqsum-hard`,
       ),
     ).toBeUndefined();
     expect(pending.find((item) => item.key === 'official-evaluation:63436915')).toBeUndefined();
@@ -1626,7 +1625,9 @@ describe('ArchiveCrawler', () => {
 
     const baseUrl = `http://127.0.0.1:${address.port}`;
     const url = `${baseUrl}/detalii-evaluare/70000001`;
-    const queue = new CrawlQueue(join(workspace.root, '.local', 'official-evaluation-followups.sqlite'));
+    const queue = new CrawlQueue(
+      join(workspace.root, '.local', 'official-evaluation-followups.sqlite'),
+    );
     queue.enqueueMany([
       {
         key: 'official-evaluation:70000001',

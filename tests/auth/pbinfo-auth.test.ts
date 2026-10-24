@@ -88,10 +88,12 @@ describe('pbinfo auth', () => {
           expect(body).toContain('form_token=token-123');
           response.setHeader('Content-Type', 'application/json');
           response.setHeader('Set-Cookie', 'SESSION_ID=abc123; Path=/; HttpOnly');
-          response.end(JSON.stringify({
-            stare: 'success',
-            raspuns: 'Autentificare cu success!',
-          }));
+          response.end(
+            JSON.stringify({
+              stare: 'success',
+              raspuns: 'Autentificare cu success!',
+            }),
+          );
         });
         return;
       }
@@ -154,10 +156,12 @@ describe('pbinfo auth', () => {
       if (request.method === 'POST' && request.url === '/ajx-module/php-login.php') {
         response.setHeader('Content-Type', 'application/json');
         response.setHeader('Set-Cookie', 'SESSION_ID=guest-cookie; Path=/; HttpOnly');
-        response.end(JSON.stringify({
-          stare: 'success',
-          raspuns: 'Autentificare cu success!',
-        }));
+        response.end(
+          JSON.stringify({
+            stare: 'success',
+            raspuns: 'Autentificare cu success!',
+          }),
+        );
         return;
       }
 
@@ -237,10 +241,12 @@ describe('pbinfo auth', () => {
         loginCompleted = true;
         response.setHeader('Content-Type', 'application/json');
         response.setHeader('Set-Cookie', 'SESSION_ID=guest-cookie; Path=/; HttpOnly');
-        response.end(JSON.stringify({
-          stare: 'success',
-          raspuns: 'Autentificare cu success!',
-        }));
+        response.end(
+          JSON.stringify({
+            stare: 'success',
+            raspuns: 'Autentificare cu success!',
+          }),
+        );
         return;
       }
 
@@ -295,11 +301,13 @@ describe('pbinfo auth', () => {
 
       if (request.method === 'POST' && request.url === '/ajx-module/php-login.php') {
         response.setHeader('Content-Type', 'application/json');
-        response.end(JSON.stringify({
-          stare: 'danger',
-          raspuns: 'Utilizator sau parola este greșită.',
-          form_token: 'token-new',
-        }));
+        response.end(
+          JSON.stringify({
+            stare: 'danger',
+            raspuns: 'Utilizator sau parola este greșită.',
+            form_token: 'token-new',
+          }),
+        );
         return;
       }
 

@@ -36,16 +36,10 @@ async function main() {
   const logoSvg = buildLogoSvg();
 
   write(join(rendererAssetsRoot, 'problem-archive-crawler-mark.svg'), markSvg);
-  write(
-    join(rendererAssetsRoot, 'problem-archive-crawler-mark-mono.svg'),
-    monoMarkSvg,
-  );
+  write(join(rendererAssetsRoot, 'problem-archive-crawler-mark-mono.svg'), monoMarkSvg);
   write(join(rendererAssetsRoot, 'problem-archive-crawler-logo.svg'), logoSvg);
 
-  const basePng = await sharp(Buffer.from(markSvg))
-    .resize(1024, 1024)
-    .png()
-    .toBuffer();
+  const basePng = await sharp(Buffer.from(markSvg)).resize(1024, 1024).png().toBuffer();
   await writeBuffer(
     join(desktopAssetsRoot, 'problem-archive-crawler-mark-512.png'),
     await sharp(basePng).resize(512, 512).png().toBuffer(),
@@ -67,10 +61,7 @@ async function main() {
     await sharp(basePng).resize(32, 32).png().toBuffer(),
     await sharp(basePng).resize(16, 16).png().toBuffer(),
   ]);
-  await writeBuffer(
-    join(desktopAssetsRoot, 'problem-archive-crawler.ico'),
-    icoBuffer,
-  );
+  await writeBuffer(join(desktopAssetsRoot, 'problem-archive-crawler.ico'), icoBuffer);
 }
 
 function buildMarkSvg() {
@@ -128,7 +119,10 @@ function buildLogoSvg() {
   <g transform="translate(36 30) scale(0.35)">
     ${buildMarkSvg()
       .replace('<?xml version="1.0" encoding="UTF-8"?>', '')
-      .replace('<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">', '')
+      .replace(
+        '<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">',
+        '',
+      )
       .replace('</svg>', '')}
   </g>
   <text x="430" y="148" fill="${palette.bronze}" font-size="34" font-family="Manrope, Segoe UI, sans-serif" letter-spacing="6">PBINFO ARCHIVAL OPERATOR CONSOLE</text>
