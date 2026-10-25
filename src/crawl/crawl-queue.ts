@@ -12,6 +12,7 @@ interface CompletionPayload {
 interface FailurePayload {
   errorMessage: string;
   nextVisibleAt: string;
+  maxAttempts?: number;
 }
 
 type QueueRow = {
@@ -19,7 +20,7 @@ type QueueRow = {
   key: string;
   url: string;
   kind: string;
-  status: 'pending' | 'in_progress' | 'completed';
+  status: 'pending' | 'in_progress' | 'completed' | 'failed';
   attempt_count: number;
   created_at: string;
   updated_at: string;
@@ -177,6 +178,29 @@ export class CrawlQueue {
 
   fail(id: number, payload: FailurePayload): void {
     this.withDatabase((database) => {
+      const nowIso = new Date().toISOString();
+      // Attempt exhaustion: park the item in the terminal 'failed' status so a
+      // permanently broken URL cannot retry forever and block the snapshot from
+      // draining. Failed items keep last_error for crawl status reporting.
+      if (payload.maxAttempts !== undefined) {
+        const row = database
+          .prepare(`SELECT attempt_count FROM crawl_queue WHERE id = ?`)
+          .get(id) as { attempt_count: number } | undefined;
+        if (row && row.attempt_count >= payload.maxAttempts) {
+          database
+            .prepare(`
+              UPDATE crawl_queue
+              SET status = 'failed',
+                  updated_at = ?,
+                  visible_at = NULL,
+                  last_error = ?
+              WHERE id = ?
+            `)
+            .run(nowIso, payload.errorMessage, id);
+          return;
+        }
+      }
+
       database
         .prepare(`
           UPDATE crawl_queue
@@ -186,7 +210,7 @@ export class CrawlQueue {
               last_error = ?
           WHERE id = ?
         `)
-        .run(new Date().toISOString(), payload.nextVisibleAt, payload.errorMessage, id);
+        .run(nowIso, payload.nextVisibleAt, payload.errorMessage, id);
     });
   }
 
@@ -271,6 +295,7 @@ export function readCrawlQueueSnapshot(databasePath: string): CrawlSnapshot {
       pending: 0,
       completed: 0,
       inProgress: 0,
+      failed: 0,
       items: [],
     };
   }
@@ -290,16 +315,18 @@ function readSnapshotFromDatabase(database: DatabaseSync): CrawlSnapshot {
       SELECT
         SUM(CASE WHEN status = 'pending' THEN 1 ELSE 0 END) AS pending,
         SUM(CASE WHEN status = 'completed' THEN 1 ELSE 0 END) AS completed,
-        SUM(CASE WHEN status = 'in_progress' THEN 1 ELSE 0 END) AS in_progress
+        SUM(CASE WHEN status = 'in_progress' THEN 1 ELSE 0 END) AS in_progress,
+        SUM(CASE WHEN status = 'failed' THEN 1 ELSE 0 END) AS failed
       FROM crawl_queue
     `)
     .get() as
-      | {
-          pending: number | null;
-          completed: number | null;
-          in_progress: number | null;
-        }
-      | undefined;
+    | {
+        pending: number | null;
+        completed: number | null;
+        in_progress: number | null;
+        failed: number | null;
+      }
+    | undefined;
 
   const rows = database
     .prepare(`
@@ -313,6 +340,7 @@ function readSnapshotFromDatabase(database: DatabaseSync): CrawlSnapshot {
     pending: counts?.pending ?? 0,
     completed: counts?.completed ?? 0,
     inProgress: counts?.in_progress ?? 0,
+    failed: counts?.failed ?? 0,
     items: rows.map(mapRow),
   };
 }

@@ -59,6 +59,7 @@ describe('CrawlQueue edges', () => {
       pending: 0,
       completed: 0,
       inProgress: 0,
+      failed: 0,
       items: [],
     });
   });
