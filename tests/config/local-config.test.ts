@@ -40,6 +40,7 @@ describe('loadLocalConfig', () => {
       owner: 'Prekzursil',
       repo: 'pbinfo-scrape',
     });
+    expect(config.crawl.maxAttempts).toBe(5);
     expect(config.crawl.publicStartUrls).toEqual([
       'https://www.pbinfo.ro/',
       'https://www.pbinfo.ro/probleme',
@@ -73,6 +74,7 @@ describe('loadLocalConfig', () => {
           },
           crawl: {
             maxConcurrency: 2,
+            maxAttempts: 9,
             userHandle: 'Prekzursil',
           },
           ranking: {
@@ -99,6 +101,7 @@ describe('loadLocalConfig', () => {
     expect(config.paths.archiveRoot).toBe(join(workspaceRoot, 'archive'));
     expect(config.paths.snapshotsRoot).toBe(join(workspaceRoot, 'archive', 'snapshots'));
     expect(config.crawl.maxConcurrency).toBe(2);
+    expect(config.crawl.maxAttempts).toBe(9);
     expect(config.crawl.userHandle).toBe('Prekzursil');
     expect(config.ranking.overridesPath).toBe(
       join(workspaceRoot, '.local', 'ranking-overrides.json'),
