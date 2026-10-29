@@ -23,6 +23,7 @@ export interface CrawlStatusResult {
   pending: number;
   completed: number;
   inProgress: number;
+  failed: number;
   recentFailures: Array<{
     key: string;
     url: string;
@@ -67,6 +68,7 @@ export function getCrawlStatus(workspaceRoot: string, snapshotId?: string): Craw
         pending: 0,
         completed: 0,
         inProgress: 0,
+        failed: 0,
         items: [],
       };
 
@@ -77,6 +79,7 @@ export function getCrawlStatus(workspaceRoot: string, snapshotId?: string): Craw
     pending: queueSnapshot.pending,
     completed: queueSnapshot.completed,
     inProgress: queueSnapshot.inProgress,
+    failed: queueSnapshot.failed,
     recentFailures: queueSnapshot.items
       .filter((item) => item.lastError)
       .sort((left, right) => right.updatedAt.localeCompare(left.updatedAt))

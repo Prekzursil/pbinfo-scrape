@@ -8,7 +8,7 @@ export interface CrawlQueueInput {
 
 export interface CrawlQueueItem extends CrawlQueueInput {
   id: number;
-  status: 'pending' | 'in_progress' | 'completed';
+  status: 'pending' | 'in_progress' | 'completed' | 'failed';
   attemptCount: number;
   createdAt: string;
   updatedAt: string;
@@ -22,5 +22,6 @@ export interface CrawlSnapshot {
   pending: number;
   completed: number;
   inProgress: number;
+  failed: number;
   items: CrawlQueueItem[];
 }

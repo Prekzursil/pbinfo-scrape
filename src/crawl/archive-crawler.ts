@@ -52,6 +52,7 @@ export interface ArchiveCrawlerOptions {
   scope?: 'public' | 'user' | 'all';
   retryDelayMs?: number;
   requestTimeoutMs?: number;
+  maxAttempts?: number;
   fetchImpl?: typeof fetch;
   browserCapture?: BrowserCapture;
 }
@@ -80,6 +81,7 @@ export class ArchiveCrawler {
   private readonly scope: 'public' | 'user' | 'all';
   private readonly retryDelayMs: number;
   private readonly requestTimeoutMs: number;
+  private readonly maxAttempts?: number;
   private readonly fetchImpl: typeof fetch;
   private readonly browserCapture?: BrowserCapture;
 
@@ -90,6 +92,7 @@ export class ArchiveCrawler {
     this.scope = options.scope ?? 'all';
     this.retryDelayMs = options.retryDelayMs ?? 60_000;
     this.requestTimeoutMs = options.requestTimeoutMs ?? 30_000;
+    this.maxAttempts = options.maxAttempts;
     this.fetchImpl = options.fetchImpl ?? fetch;
     this.browserCapture = options.browserCapture;
   }
@@ -104,21 +107,28 @@ export class ArchiveCrawler {
     try {
       response = await fetchWithTimeout(this.fetchImpl, item.url, undefined, this.requestTimeoutMs);
     } catch (error) {
-      this.queue.fail(item.id, {
-        errorMessage: error instanceof Error ? error.message : String(error),
-        nextVisibleAt: new Date(now.getTime() + this.retryDelayMs).toISOString(),
-      });
+      this.failWithBackoff(
+        item.id,
+        error instanceof Error ? error.message : String(error),
+        now,
+      );
       return true;
     }
     const contentType = response.headers.get('content-type');
 
+    // Transient server-side conditions (rate limiting / server errors) must be
+    // retried with backoff instead of archived: completing on them would
+    // silently replace the real page with an error page. Client-side 4xx
+    // responses (e.g. 404 dead links) stay archived as truthful dead ends.
+    if (isRetryableHttpStatus(response.status)) {
+      this.failWithBackoff(item.id, `http ${response.status}`, now);
+      return true;
+    }
+
     if (looksLikeHtml(contentType)) {
       const body = await response.text();
       if (isTemporaryUnavailable(body)) {
-        this.queue.fail(item.id, {
-          errorMessage: 'temporarily unavailable',
-          nextVisibleAt: new Date(now.getTime() + this.retryDelayMs).toISOString(),
-        });
+        this.failWithBackoff(item.id, 'temporarily unavailable', now);
         return true;
       }
 
@@ -198,6 +208,14 @@ export class ArchiveCrawler {
       httpStatus: response.status,
     });
     return true;
+  }
+
+  private failWithBackoff(id: number, errorMessage: string, now: Date): void {
+    this.queue.fail(id, {
+      errorMessage,
+      nextVisibleAt: new Date(now.getTime() + this.retryDelayMs).toISOString(),
+      maxAttempts: this.maxAttempts,
+    });
   }
 
   private async archiveHtmlPage(url: string, body: string): Promise<string> {
@@ -1669,6 +1687,10 @@ function shortHash(input: string): string {
 
 function looksLikeHtml(contentType: string | null): boolean {
   return contentType?.toLowerCase().includes('html') ?? true;
+}
+
+export function isRetryableHttpStatus(status: number): boolean {
+  return status === 429 || status >= 500;
 }
 
 function isTemporaryUnavailable(body: string): boolean {

@@ -153,6 +153,7 @@ export const guiCrawlStatusSchema = z
     pending: z.number().int().nonnegative(),
     completed: z.number().int().nonnegative(),
     inProgress: z.number().int().nonnegative(),
+    failed: z.number().int().nonnegative().optional(),
     publishEligible: z.boolean(),
     recentFailures: z.array(guiCrawlFailureSchema),
   })

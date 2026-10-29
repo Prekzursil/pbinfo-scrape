@@ -306,6 +306,7 @@ describe('dashboard interactions', () => {
       pending: 5,
       completed: 1,
       inProgress: 0,
+      failed: 3,
       publishEligible: false,
       recentFailures: [{ key: 'k', url: 'https://x/', attemptCount: 2, lastError: 'boom' }],
     });
@@ -373,6 +374,7 @@ describe('dashboard interactions', () => {
     expect(await screen.findByText('Not ready')).toBeInTheDocument();
     expect(await screen.findByText(/ETA appears after enough crawl history/)).toBeInTheDocument();
     expect(await screen.findByText('#77 No Grades')).toBeInTheDocument();
+    expect(await screen.findByText(/3 failed/)).toBeInTheDocument();
 
     // Custom focus: a non-preset coverage filter makes the overview chip read "Custom focus".
     fireEvent.click(await screen.findByRole('tab', { name: 'Coverage' }));
