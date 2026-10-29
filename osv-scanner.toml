@@ -1,117 +1,13 @@
-# osv-scanner configuration.
+# osv-scanner configuration for the lean gate's dependency gate (gate 6).
+# Seeded by quality-zero-platform's fleet baseline (docs/FLEET-BASELINE.md).
 #
-# SCOPE: osv-scanner loads this file only for lockfiles in this same directory
-# (here: package-lock.json). It suppresses exactly the advisory IDs listed below
-# and nothing else - there is no package-wide, ecosystem-wide or
-# dependency-group suppression, and the blocking `Dependencies (osv-scanner)`
-# gate in .github/workflows/quality.yml stays fully in force for every other
-# finding. Every runtime advisory currently published is fixed in
-# package-lock.json at the versions we resolve (undici 7.30.1, zod 4.6.7,
-# qs 6.16.1, body-parser 2.4.0, ip-address 10.7.5, proxy-addr 2.0.8).
+# Zero tolerance: a known advisory of ANY severity fails the gate. Fix it by
+# upgrading the dependency (Dependabot groups the security updates into one
+# pull request per ecosystem). An ignore is only for an advisory that provably
+# cannot affect this repository, and it must carry a written reason and an
+# expiry date so it is reviewed again:
 #
-# SCHEMA: inside [[IgnoredVulns]] only `id`, `ignoreUntil` and `reason` are valid
-# keys. osv-scanner rejects the ENTIRE file on any unknown key and then silently
-# falls back to an empty config (internal/config/manager.go, tryLoadConfig ->
-# "unknown keys in config file"), so further context lives in comments like these
-# rather than in extra keys.
-#
-# 2026-10-25 sweep: `npm update` plus the undici override bump to 7.30.1 cleared
-# every in-range advisory (~40 findings incl. the former brace-expansion ignore
-# GHSA-mh99-v99m-4gvg, whose 1.1.21 / 2.1.7 / 5.0.12 copies we now resolve, so
-# that entry was DELETED). What remains below are dev-toolchain advisories whose
-# only fix is a breaking major upgrade of the pinned desktop/test stack, taken
-# deliberately rather than smuggled into an unrelated PR.
-
-# ELECTRON (dev): pinned to the 40.x line (electron-builder + Windows portable
-# packaging + the desktop smoke suites are validated against this line; 40.10.6
-# is the newest 40.x release and already resolved in the lockfile). Every
-# remaining electron advisory is fixed only in 41.10.x/42.11.x, which are
-# breaking Chromium/Electron majors. Dev scope only: electron is a devDependency
-# used for local packaging; nothing on the shipped npm runtime path resolves it.
-# RE-CHECK ON EXPIRY: schedule the deliberate electron 41/42 major bump (re-run
-# `npm run desktop:build`, `test:desktop-electron`, `desktop:pack`,
-# `smoke:desktop-packaged`) and then DELETE these entries.
-[[IgnoredVulns]]
-id = "GHSA-2p8c-gr87-2676"
-ignoreUntil = 2027-01-25
-reason = "electron dev-dependency only; fix requires the breaking 41/42 major of the pinned 40.x desktop packaging line. Deliberate major bump tracked separately; see osv-scanner.toml comments."
-[[IgnoredVulns]]
-id = "GHSA-3qxv-5xgr-q7w9"
-ignoreUntil = 2027-01-25
-reason = "electron dev-dependency only; fix requires the breaking 41/42 major of the pinned 40.x desktop packaging line. Deliberate major bump tracked separately; see osv-scanner.toml comments."
-[[IgnoredVulns]]
-id = "GHSA-98mx-cjp9-gchm"
-ignoreUntil = 2027-01-25
-reason = "electron dev-dependency only; fix requires the breaking 41/42 major of the pinned 40.x desktop packaging line. Deliberate major bump tracked separately; see osv-scanner.toml comments."
-[[IgnoredVulns]]
-id = "GHSA-997q-gvvc-jwmx"
-ignoreUntil = 2027-01-25
-reason = "electron dev-dependency only; fix requires the breaking 41/42 major of the pinned 40.x desktop packaging line. Deliberate major bump tracked separately; see osv-scanner.toml comments."
-[[IgnoredVulns]]
-id = "GHSA-9f4c-93c8-jc8g"
-ignoreUntil = 2027-01-25
-reason = "electron dev-dependency only; fix requires the breaking 41/42 major of the pinned 40.x desktop packaging line. Deliberate major bump tracked separately; see osv-scanner.toml comments."
-[[IgnoredVulns]]
-id = "GHSA-9qh4-3jw8-366w"
-ignoreUntil = 2027-01-25
-reason = "electron dev-dependency only; fix requires the breaking 41/42 major of the pinned 40.x desktop packaging line. Deliberate major bump tracked separately; see osv-scanner.toml comments."
-[[IgnoredVulns]]
-id = "GHSA-gr2m-v5gq-v685"
-ignoreUntil = 2027-01-25
-reason = "electron dev-dependency only; fix requires the breaking 41/42 major of the pinned 40.x desktop packaging line. Deliberate major bump tracked separately; see osv-scanner.toml comments."
-[[IgnoredVulns]]
-id = "GHSA-hq2x-r82h-9wj4"
-ignoreUntil = 2027-01-25
-reason = "electron dev-dependency only; fix requires the breaking 41/42 major of the pinned 40.x desktop packaging line. Deliberate major bump tracked separately; see osv-scanner.toml comments."
-[[IgnoredVulns]]
-id = "GHSA-j8rh-479h-cp32"
-ignoreUntil = 2027-01-25
-reason = "electron dev-dependency only; fix requires the breaking 41/42 major of the pinned 40.x desktop packaging line. Deliberate major bump tracked separately; see osv-scanner.toml comments."
-[[IgnoredVulns]]
-id = "GHSA-j84w-jfhq-vhvj"
-ignoreUntil = 2027-01-25
-reason = "electron dev-dependency only; fix requires the breaking 41/42 major of the pinned 40.x desktop packaging line. Deliberate major bump tracked separately; see osv-scanner.toml comments."
-[[IgnoredVulns]]
-id = "GHSA-jr5w-w6x2-84p9"
-ignoreUntil = 2027-01-25
-reason = "electron dev-dependency only; fix requires the breaking 41/42 major of the pinned 40.x desktop packaging line. Deliberate major bump tracked separately; see osv-scanner.toml comments."
-[[IgnoredVulns]]
-id = "GHSA-vv43-5jgx-7qv8"
-ignoreUntil = 2027-01-25
-reason = "electron dev-dependency only; fix requires the breaking 41/42 major of the pinned 40.x desktop packaging line. Deliberate major bump tracked separately; see osv-scanner.toml comments."
-[[IgnoredVulns]]
-id = "GHSA-fw47-9c62-h3vw"
-ignoreUntil = 2027-01-25
-reason = "electron dev-dependency only; fix requires the breaking 41/42 major of the pinned 40.x desktop packaging line. Deliberate major bump tracked separately; see osv-scanner.toml comments."
-[[IgnoredVulns]]
-id = "GHSA-x562-297c-g43g"
-ignoreUntil = 2027-01-25
-reason = "electron dev-dependency only; fix requires the breaking 41/42 major of the pinned 40.x desktop packaging line. Deliberate major bump tracked separately; see osv-scanner.toml comments."
-[[IgnoredVulns]]
-id = "GHSA-h3v5-h239-pg29"
-ignoreUntil = 2027-01-25
-reason = "electron dev-dependency only; fix requires the breaking 41/42 major of the pinned 40.x desktop packaging line. Deliberate major bump tracked separately; see osv-scanner.toml comments."
-
-# VITEST 3.2.x + TINYPOOL 1.x (dev): the vitest fix versions are 4.1.x, a
-# breaking major for the test harness (config/coverage-provider surface; this
-# repo's 100%-enforced coverage gate is validated on vitest 3). tinypool 1.1.1
-# is vitest 3's worker pool; its fixes live only in 2.x, delivered by the same
-# vitest 4 upgrade. Test-tooling scope only, never shipped.
-# RE-CHECK ON EXPIRY: land the vitest 4 + @vitest/coverage-v8 4 migration
-# (re-run the full coverage gate), then DELETE these entries.
-[[IgnoredVulns]]
-id = "GHSA-82fw-gwwq-j7x9"
-ignoreUntil = 2027-01-25
-reason = "vitest/@vitest/mocker dev-dependency only; fix requires the breaking vitest 4 major of the pinned 3.2.x test stack that the 100% coverage gate is validated on. Migration tracked separately; see osv-scanner.toml comments."
-[[IgnoredVulns]]
-id = "GHSA-qxg6-89mg-rqv8"
-ignoreUntil = 2027-01-25
-reason = "vitest/@vitest/mocker dev-dependency only; fix requires the breaking vitest 4 major of the pinned 3.2.x test stack that the 100% coverage gate is validated on. Migration tracked separately; see osv-scanner.toml comments."
-[[IgnoredVulns]]
-id = "GHSA-5gmw-xhrv-c9v3"
-ignoreUntil = 2027-01-25
-reason = "tinypool 1.1.1 is vitest 3's worker pool (dev scope only); its fixes ship only in tinypool 2.x, delivered by the vitest 4 migration. Tracked separately; see osv-scanner.toml comments."
-[[IgnoredVulns]]
-id = "GHSA-85c8-ppgw-ccpr"
-ignoreUntil = 2027-01-25
-reason = "tinypool 1.1.1 is vitest 3's worker pool (dev scope only); its fixes ship only in tinypool 2.x, delivered by the vitest 4 migration. Tracked separately; see osv-scanner.toml comments."
+# [[IgnoredVulns]]
+# id = "GHSA-xxxx-xxxx-xxxx"
+# ignoreUntil = 2027-01-31
+# reason = "Why this advisory cannot affect this repository, with evidence."

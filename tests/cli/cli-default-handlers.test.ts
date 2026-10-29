@@ -12,7 +12,15 @@ vi.mock('../../src/config/local-config.js', () => ({
 vi.mock('../../src/auth/cookie-import.js', () => ({
   importBrowserCookies: vi.fn(async () => []),
   normalizeImportedCookies: vi.fn(() => [
-    { name: 'k', value: 'v', domain: 'd', path: '/', httpOnly: false, secure: true, sameSite: 'Lax' },
+    {
+      name: 'k',
+      value: 'v',
+      domain: 'd',
+      path: '/',
+      httpOnly: false,
+      secure: true,
+      sameSite: 'Lax',
+    },
   ]),
 }));
 vi.mock('../../src/auth/auth-bundle.js', () => ({
@@ -20,7 +28,11 @@ vi.mock('../../src/auth/auth-bundle.js', () => ({
   restoreEncryptedAuthBundle: vi.fn(async () => ({ restored: true })),
 }));
 vi.mock('../../src/auth/pbinfo-auth.js', () => ({
-  PbinfoAuthClient: vi.fn(() => ({ loginWithCredentials: authMock.loginWithCredentials })),
+  // `new PbinfoAuthClient(...)` in src/cli.ts: Vitest 4 mocks keep the
+  // implementation's construct semantics, and an arrow function is not constructible.
+  PbinfoAuthClient: vi.fn(function () {
+    return { loginWithCredentials: authMock.loginWithCredentials };
+  }),
 }));
 vi.mock('../../src/auth/auth-status.js', () => ({
   probePbinfoAuthStatus: vi.fn(async () => ({ authenticated: true })),
@@ -106,7 +118,9 @@ describe('default CLI handlers', () => {
   });
 
   test('authLogin throws when the config is not credential-based', async () => {
-    vi.mocked(loadLocalConfig).mockReturnValue({ auth: { strategy: 'none', sessionCookiesPath: 'x' } } as never);
+    vi.mocked(loadLocalConfig).mockReturnValue({
+      auth: { strategy: 'none', sessionCookiesPath: 'x' },
+    } as never);
     await expect(run(['auth', 'login'])).rejects.toThrow(/Credential login requires/);
   });
 
@@ -114,7 +128,10 @@ describe('default CLI handlers', () => {
     authMock.loginWithCredentials.mockResolvedValue({ success: false });
     await expect(run(['auth', 'login'])).rejects.toThrow(/did not create an authenticated session/);
 
-    authMock.loginWithCredentials.mockResolvedValue({ success: false, failureReason: 'bad password' });
+    authMock.loginWithCredentials.mockResolvedValue({
+      success: false,
+      failureReason: 'bad password',
+    });
     await expect(run(['auth', 'login'])).rejects.toThrow('bad password');
   });
 
@@ -188,13 +205,19 @@ describe('default CLI handlers', () => {
   test('build-mirror, serve, resume, and publish handlers run', async () => {
     await run(['build-mirror']);
     await run(['serve', '--port', '5050']);
-    expect(startMirrorServer).toHaveBeenLastCalledWith(
-      expect.objectContaining({ port: 5050 }),
-    );
+    expect(startMirrorServer).toHaveBeenLastCalledWith(expect.objectContaining({ port: 5050 }));
     await run(['serve']);
     expect(startMirrorServer).toHaveBeenLastCalledWith(expect.objectContaining({ port: 4173 }));
     await run(['resume']);
-    await run(['publish', '--snapshot', 's', '--release', '--tag', 'v1.0.0', '--upload-desktop-exe']);
+    await run([
+      'publish',
+      '--snapshot',
+      's',
+      '--release',
+      '--tag',
+      'v1.0.0',
+      '--upload-desktop-exe',
+    ]);
     expect(stdoutSpy).toHaveBeenCalled();
   });
 

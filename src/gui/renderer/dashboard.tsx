@@ -18,10 +18,7 @@ import type {
   GuiProfileRecord,
   GuiWorkspaceState,
 } from '../shared/types.js';
-import {
-  CoverageExplorerPanel,
-  type CoverageExplorerFilters,
-} from './coverage-explorer.js';
+import { CoverageExplorerPanel, type CoverageExplorerFilters } from './coverage-explorer.js';
 import { DataExplorerPanel } from './data-explorer.js';
 
 type CredentialLoginInput = Parameters<DesktopBridge['loginProfile']>[0];
@@ -180,7 +177,10 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
   }, [workspaceState?.workspaceRoot]);
 
   const activeProfile = useMemo(() => getActiveProfile(workspaceState), [workspaceState]);
-  const activeCrawlJob = useMemo(() => [...jobs].reverse().find((job) => job.kind === 'crawl'), [jobs]);
+  const activeCrawlJob = useMemo(
+    () => [...jobs].reverse().find((job) => job.kind === 'crawl'),
+    [jobs],
+  );
   const visibleLogEntries = useMemo(
     () => filterLogEntries(jobEvents.length > 0 ? jobEvents : buildLogEntries(jobs), verbosityMode),
     [jobEvents, jobs, verbosityMode],
@@ -190,19 +190,12 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
     () => deriveCrawlTelemetry(crawlStatus ?? activeCrawlJob?.latestCounters, jobEvents),
     [activeCrawlJob?.latestCounters, crawlStatus, jobEvents],
   );
-  const overviewPreset = useMemo(
-    () => detectOverviewPreset(coverageFilters),
-    [coverageFilters],
-  );
-  const overviewRows = useMemo(
-    () => (coverageListing?.items ?? []).slice(0, 8),
-    [coverageListing],
-  );
-  const boardMirrorBaseUrl =
-    previewUrl ?? coverageSummary?.mirrorUrl ?? archiveSummary?.mirrorUrl;
+  const overviewPreset = useMemo(() => detectOverviewPreset(coverageFilters), [coverageFilters]);
+  const overviewRows = useMemo(() => (coverageListing?.items ?? []).slice(0, 8), [coverageListing]);
+  const boardMirrorBaseUrl = previewUrl ?? coverageSummary?.mirrorUrl ?? archiveSummary?.mirrorUrl;
   const overviewUnavailableCount =
-    (coverageSummary?.officialSourceUnavailableUpstreamCount ?? 0)
-    + (coverageSummary?.testsUnavailableUpstreamCount ?? 0);
+    (coverageSummary?.officialSourceUnavailableUpstreamCount ?? 0) +
+    (coverageSummary?.testsUnavailableUpstreamCount ?? 0);
 
   const applyOverviewPreset = (preset: OverviewBoardPreset) => {
     onCoverageFiltersChange(createCoverageFiltersForPreset(preset));
@@ -214,15 +207,22 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
   };
 
   const openMirrorFromOverview = (record: GuiCoverageRecord) => {
-    /* v8 ignore next 3 -- the Open mirror button is disabled whenever boardMirrorBaseUrl is absent */
+    /* v8 ignore start -- the Open mirror button is disabled whenever boardMirrorBaseUrl is absent */
     if (!boardMirrorBaseUrl) {
       return;
     }
+    /* v8 ignore stop */
     void onOpenExternal(new URL(record.mirrorRoute, boardMirrorBaseUrl).toString());
   };
 
   if (workspaceState === undefined) {
-    return <main className="desktop-shell"><section className="panel"><p>Loading desktop state…</p></section></main>;
+    return (
+      <main className="desktop-shell">
+        <section className="panel">
+          <p>Loading desktop state…</p>
+        </section>
+      </main>
+    );
   }
 
   return (
@@ -243,14 +243,16 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
             </div>
           </div>
           <p className="lede lede-compact">
-            A lighter control surface for continuing the crawl, checking coverage,
-            and opening the local archive.
+            A lighter control surface for continuing the crawl, checking coverage, and opening the
+            local archive.
           </p>
         </div>
         <div className="topbar-status-grid">
           <SummaryCard label="Snapshot" value={selectedSnapshotId}>
             <p className="summary-copy">
-              {crawlStatus?.publishEligible ? 'Drained and publish-ready.' : 'Current archive target.'}
+              {crawlStatus?.publishEligible
+                ? 'Drained and publish-ready.'
+                : 'Current archive target.'}
             </p>
             {workspaceState?.workspaceRoot ? (
               <p className="summary-copy mono">{workspaceState.workspaceRoot}</p>
@@ -258,7 +260,9 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
           </SummaryCard>
           <SummaryCard label="Profile" value={activeProfile?.label ?? 'No active profile'}>
             <p className="summary-copy">
-              {activeProfile?.userHandle ? `Handle ${activeProfile.userHandle}` : 'Use Setup to import or sign in.'}
+              {activeProfile?.userHandle
+                ? `Handle ${activeProfile.userHandle}`
+                : 'Use Setup to import or sign in.'}
             </p>
           </SummaryCard>
           <SummaryCard
@@ -305,421 +309,796 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
 
       {workspaceState === null ? (
         <section className="panel empty-state bootstrap-panel">
-          <div className="panel-heading"><div><p className="section-kicker">Workspace bootstrap</p><h2>Choose a workspace</h2></div></div>
-          <p className="summary-copy">Keep queues, logs, profiles, and snapshots in a portable workspace folder.</p>
-          <form className="stack-form" onSubmit={(event) => { event.preventDefault(); void onSelectWorkspace(workspaceDraft); }}>
-            <label className="field"><span>Workspace path</span><input value={workspaceDraft} onChange={(event) => setWorkspaceDraft(event.target.value)} placeholder="C:/pbinfo-workspace" /></label>
-            <button className="primary-button" type="submit" disabled={!workspaceDraft}>Select workspace</button>
+          <div className="panel-heading">
+            <div>
+              <p className="section-kicker">Workspace bootstrap</p>
+              <h2>Choose a workspace</h2>
+            </div>
+          </div>
+          <p className="summary-copy">
+            Keep queues, logs, profiles, and snapshots in a portable workspace folder.
+          </p>
+          <form
+            className="stack-form"
+            onSubmit={(event) => {
+              event.preventDefault();
+              void onSelectWorkspace(workspaceDraft);
+            }}
+          >
+            <label className="field">
+              <span>Workspace path</span>
+              <input
+                value={workspaceDraft}
+                onChange={(event) => setWorkspaceDraft(event.target.value)}
+                placeholder="C:/pbinfo-workspace"
+              />
+            </label>
+            <button className="primary-button" type="submit" disabled={!workspaceDraft}>
+              Select workspace
+            </button>
           </form>
         </section>
       ) : (
         <div className="dashboard-grid">
           {activeView === 'setup' ? (
             <section className="panel workspace-panel">
-            <PanelHeading kicker="Workspace and identity" title="Workspace" chip={`${workspaceState.profiles.length} profiles`} />
-            <div className="workspace-summary">
-              <SummaryCard label="Workspace root"><p className="mono">{workspaceState.workspaceRoot}</p></SummaryCard>
-              <SummaryCard label="Active profile" value={activeProfile?.label ?? 'No active profile'}>
-                <p className="summary-copy">{activeProfile?.userHandle ? `Handle: ${activeProfile.userHandle}` : 'Create or import a PBInfo session profile to enable authenticated crawl work.'}</p>
-              </SummaryCard>
-              <SummaryCard label="Snapshot target">
-                <input value={selectedSnapshotId} onChange={(event) => onSnapshotChange(event.target.value)} placeholder="acceptance-20260310b" />
-                <p className="summary-copy">Canonical drain target and mirror build source.</p>
-              </SummaryCard>
-            </div>
-            <div className="profile-list">
-              {workspaceState.profiles.length === 0 ? <p className="summary-copy">No saved PBInfo profiles yet.</p> : workspaceState.profiles.map((profile) => (
-                <article className="job-card profile-card" key={profile.profileId}>
-                  <header>
-                    <div><strong>{profile.label}</strong><p className="job-meta">{profile.profileId} • {formatProfileProvenance(profile)}</p></div>
-                    {workspaceState.activeProfileId === profile.profileId ? <span className="status-badge status-completed">active</span> : null}
-                  </header>
-                  <p className="summary-copy">{profile.userHandle ? `Handle ${profile.userHandle}` : 'No user handle saved'}</p>
-                  <div className="button-row">
-                    <button className="ghost-button" type="button" onClick={() => void onActivateProfile(profile.profileId)}>Activate</button>
-                    <button className="ghost-button ghost-danger" type="button" onClick={() => void onDeleteProfile(profile.profileId)}>Delete</button>
-                  </div>
-                </article>
-              ))}
-            </div>
+              <PanelHeading
+                kicker="Workspace and identity"
+                title="Workspace"
+                chip={`${workspaceState.profiles.length} profiles`}
+              />
+              <div className="workspace-summary">
+                <SummaryCard label="Workspace root">
+                  <p className="mono">{workspaceState.workspaceRoot}</p>
+                </SummaryCard>
+                <SummaryCard
+                  label="Active profile"
+                  value={activeProfile?.label ?? 'No active profile'}
+                >
+                  <p className="summary-copy">
+                    {activeProfile?.userHandle
+                      ? `Handle: ${activeProfile.userHandle}`
+                      : 'Create or import a PBInfo session profile to enable authenticated crawl work.'}
+                  </p>
+                </SummaryCard>
+                <SummaryCard label="Snapshot target">
+                  <input
+                    value={selectedSnapshotId}
+                    onChange={(event) => onSnapshotChange(event.target.value)}
+                    placeholder="acceptance-20260310b"
+                  />
+                  <p className="summary-copy">Canonical drain target and mirror build source.</p>
+                </SummaryCard>
+              </div>
+              <div className="profile-list">
+                {workspaceState.profiles.length === 0 ? (
+                  <p className="summary-copy">No saved PBInfo profiles yet.</p>
+                ) : (
+                  workspaceState.profiles.map((profile) => (
+                    <article className="job-card profile-card" key={profile.profileId}>
+                      <header>
+                        <div>
+                          <strong>{profile.label}</strong>
+                          <p className="job-meta">
+                            {profile.profileId} • {formatProfileProvenance(profile)}
+                          </p>
+                        </div>
+                        {workspaceState.activeProfileId === profile.profileId ? (
+                          <span className="status-badge status-completed">active</span>
+                        ) : null}
+                      </header>
+                      <p className="summary-copy">
+                        {profile.userHandle
+                          ? `Handle ${profile.userHandle}`
+                          : 'No user handle saved'}
+                      </p>
+                      <div className="button-row">
+                        <button
+                          className="ghost-button"
+                          type="button"
+                          onClick={() => void onActivateProfile(profile.profileId)}
+                        >
+                          Activate
+                        </button>
+                        <button
+                          className="ghost-button ghost-danger"
+                          type="button"
+                          onClick={() => void onDeleteProfile(profile.profileId)}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </article>
+                  ))
+                )}
+              </div>
             </section>
           ) : null}
 
           {activeView === 'setup' ? (
             <section className="panel action-panel">
-            <PanelHeading kicker="Authentication lanes" title="Profiles & Access" />
-            <div className="auth-grid">
-              <form className="stack-form summary-card form-card" onSubmit={(event) => { event.preventDefault(); void onLoginProfile(loginForm); }}>
-                <strong>Credential login</strong>
-                <p className="summary-copy">Use direct account auth for a crawler-owned session.</p>
-                <Field label="Profile id"><input value={loginForm.profileId} onChange={(event) => setLoginForm((current) => ({ ...current, profileId: event.target.value }))} /></Field>
-                <Field label="Label"><input value={loginForm.label} onChange={(event) => setLoginForm((current) => ({ ...current, label: event.target.value }))} /></Field>
-                <Field label="User handle"><input value={loginForm.userHandle ?? ''} onChange={(event) => setLoginForm((current) => ({ ...current, userHandle: event.target.value || undefined }))} /></Field>
-                <Field label="Username"><input value={loginForm.username} onChange={(event) => setLoginForm((current) => ({ ...current, username: event.target.value }))} /></Field>
-                <Field label="Password"><input type="password" value={loginForm.password} onChange={(event) => setLoginForm((current) => ({ ...current, password: event.target.value }))} /></Field>
-                <button className="primary-button" type="submit">Sign in</button>
-              </form>
+              <PanelHeading kicker="Authentication lanes" title="Profiles & Access" />
+              <div className="auth-grid">
+                <form
+                  className="stack-form summary-card form-card"
+                  onSubmit={(event) => {
+                    event.preventDefault();
+                    void onLoginProfile(loginForm);
+                  }}
+                >
+                  <strong>Credential login</strong>
+                  <p className="summary-copy">
+                    Use direct account auth for a crawler-owned session.
+                  </p>
+                  <Field label="Profile id">
+                    <input
+                      value={loginForm.profileId}
+                      onChange={(event) =>
+                        setLoginForm((current) => ({ ...current, profileId: event.target.value }))
+                      }
+                    />
+                  </Field>
+                  <Field label="Label">
+                    <input
+                      value={loginForm.label}
+                      onChange={(event) =>
+                        setLoginForm((current) => ({ ...current, label: event.target.value }))
+                      }
+                    />
+                  </Field>
+                  <Field label="User handle">
+                    <input
+                      value={loginForm.userHandle ?? ''}
+                      onChange={(event) =>
+                        setLoginForm((current) => ({
+                          ...current,
+                          userHandle: event.target.value || undefined,
+                        }))
+                      }
+                    />
+                  </Field>
+                  <Field label="Username">
+                    <input
+                      value={loginForm.username}
+                      onChange={(event) =>
+                        setLoginForm((current) => ({ ...current, username: event.target.value }))
+                      }
+                    />
+                  </Field>
+                  <Field label="Password">
+                    <input
+                      type="password"
+                      value={loginForm.password}
+                      onChange={(event) =>
+                        setLoginForm((current) => ({ ...current, password: event.target.value }))
+                      }
+                    />
+                  </Field>
+                  <button className="primary-button" type="submit">
+                    Sign in
+                  </button>
+                </form>
 
-              <form className="stack-form summary-card form-card" onSubmit={(event) => { event.preventDefault(); void onImportBrowserProfile(importForm); }}>
-                <strong>Browser import</strong>
-                <p className="summary-copy">Reuse a verified local browser session when that is the fastest path.</p>
-                <Field label="Profile id"><input value={importForm.profileId} onChange={(event) => setImportForm((current) => ({ ...current, profileId: event.target.value }))} /></Field>
-                <Field label="Label"><input value={importForm.label} onChange={(event) => setImportForm((current) => ({ ...current, label: event.target.value }))} /></Field>
-                <Field label="Browser">
-                  <select value={importForm.browser} onChange={(event) => setImportForm((current) => ({ ...current, browser: event.target.value as BrowserImportInput['browser'] }))}>
-                    <option value="edge">Edge</option><option value="chrome">Chrome</option>
-                  </select>
-                </Field>
-                <Field label="Browser profile"><input value={importForm.profileName ?? ''} onChange={(event) => setImportForm((current) => ({ ...current, profileName: event.target.value || undefined }))} /></Field>
-                <Field label="User handle"><input value={importForm.userHandle ?? ''} onChange={(event) => setImportForm((current) => ({ ...current, userHandle: event.target.value || undefined }))} /></Field>
-                <button className="primary-button" type="submit">Import browser cookies</button>
-              </form>
-            </div>
+                <form
+                  className="stack-form summary-card form-card"
+                  onSubmit={(event) => {
+                    event.preventDefault();
+                    void onImportBrowserProfile(importForm);
+                  }}
+                >
+                  <strong>Browser import</strong>
+                  <p className="summary-copy">
+                    Reuse a verified local browser session when that is the fastest path.
+                  </p>
+                  <Field label="Profile id">
+                    <input
+                      value={importForm.profileId}
+                      onChange={(event) =>
+                        setImportForm((current) => ({ ...current, profileId: event.target.value }))
+                      }
+                    />
+                  </Field>
+                  <Field label="Label">
+                    <input
+                      value={importForm.label}
+                      onChange={(event) =>
+                        setImportForm((current) => ({ ...current, label: event.target.value }))
+                      }
+                    />
+                  </Field>
+                  <Field label="Browser">
+                    <select
+                      value={importForm.browser}
+                      onChange={(event) =>
+                        setImportForm((current) => ({
+                          ...current,
+                          browser: event.target.value as BrowserImportInput['browser'],
+                        }))
+                      }
+                    >
+                      <option value="edge">Edge</option>
+                      <option value="chrome">Chrome</option>
+                    </select>
+                  </Field>
+                  <Field label="Browser profile">
+                    <input
+                      value={importForm.profileName ?? ''}
+                      onChange={(event) =>
+                        setImportForm((current) => ({
+                          ...current,
+                          profileName: event.target.value || undefined,
+                        }))
+                      }
+                    />
+                  </Field>
+                  <Field label="User handle">
+                    <input
+                      value={importForm.userHandle ?? ''}
+                      onChange={(event) =>
+                        setImportForm((current) => ({
+                          ...current,
+                          userHandle: event.target.value || undefined,
+                        }))
+                      }
+                    />
+                  </Field>
+                  <button className="primary-button" type="submit">
+                    Import browser cookies
+                  </button>
+                </form>
+              </div>
             </section>
           ) : null}
 
           {activeView === 'overview' ? (
             <section className="panel snapshot-panel">
-            <PanelHeading kicker="Archive health" title="Archive Overview" chip={selectedSnapshotId} />
-            {crawlStatus ? (
-              <div className="snapshot-grid">
-                <SummaryCard label="Queue counts" value={`${crawlStatus.pending} pending`}>
-                  <p className="summary-copy">{`${crawlStatus.completed} completed • ${crawlStatus.inProgress} in progress${crawlStatus.failed ? ` • ${crawlStatus.failed} failed` : ''}`}</p>
-                </SummaryCard>
-                <SummaryCard label="Publish readiness" value={crawlStatus.publishEligible ? 'Ready' : 'Not ready'}>
-                  <p className="summary-copy">{crawlStatus.publishEligible ? 'The canonical snapshot is drained and can be published through the guarded CLI.' : `${recentFailureCount} recent failures recorded.`}</p>
-                </SummaryCard>
-                <SummaryCard label="Real-time ETA" value={crawlTelemetry ? formatEta(crawlTelemetry.etaSeconds) : 'Learning…'}>
-                  <p className="summary-copy">
-                    {crawlTelemetry
-                      ? `${formatRate(crawlTelemetry.completedPerMinute)} completed/min across recent crawl chunks.`
-                      : 'ETA appears after enough crawl history accumulates for a stable projection.'}
-                  </p>
-                </SummaryCard>
-                <SummaryCard label="Queue DB"><p className="mono">{crawlStatus.queuePath}</p></SummaryCard>
-              </div>
-            ) : <p className="summary-copy">Crawl status will appear here after the selected snapshot exists.</p>}
-            {publishCommand ? <article className="summary-card publish-card"><span className="metric-label">Ready to publish</span><p className="mono">{publishCommand}</p></article> : null}
+              <PanelHeading
+                kicker="Archive health"
+                title="Archive Overview"
+                chip={selectedSnapshotId}
+              />
+              {crawlStatus ? (
+                <div className="snapshot-grid">
+                  <SummaryCard label="Queue counts" value={`${crawlStatus.pending} pending`}>
+                    <p className="summary-copy">{`${crawlStatus.completed} completed • ${crawlStatus.inProgress} in progress${crawlStatus.failed ? ` • ${crawlStatus.failed} failed` : ''}`}</p>
+                  </SummaryCard>
+                  <SummaryCard
+                    label="Publish readiness"
+                    value={crawlStatus.publishEligible ? 'Ready' : 'Not ready'}
+                  >
+                    <p className="summary-copy">
+                      {crawlStatus.publishEligible
+                        ? 'The canonical snapshot is drained and can be published through the guarded CLI.'
+                        : `${recentFailureCount} recent failures recorded.`}
+                    </p>
+                  </SummaryCard>
+                  <SummaryCard
+                    label="Real-time ETA"
+                    value={crawlTelemetry ? formatEta(crawlTelemetry.etaSeconds) : 'Learning…'}
+                  >
+                    <p className="summary-copy">
+                      {crawlTelemetry
+                        ? `${formatRate(crawlTelemetry.completedPerMinute)} completed/min across recent crawl chunks.`
+                        : 'ETA appears after enough crawl history accumulates for a stable projection.'}
+                    </p>
+                  </SummaryCard>
+                  <SummaryCard label="Queue DB">
+                    <p className="mono">{crawlStatus.queuePath}</p>
+                  </SummaryCard>
+                </div>
+              ) : (
+                <p className="summary-copy">
+                  Crawl status will appear here after the selected snapshot exists.
+                </p>
+              )}
+              {publishCommand ? (
+                <article className="summary-card publish-card">
+                  <span className="metric-label">Ready to publish</span>
+                  <p className="mono">{publishCommand}</p>
+                </article>
+              ) : null}
             </section>
           ) : null}
 
           {activeView === 'overview' ? (
             <section className="panel overview-board-panel">
-            <PanelHeading
-              kicker="Fast audit"
-              title="Problem Status Board"
-              chip={overviewPreset ? formatOverviewPreset(overviewPreset) : 'Custom focus'}
-            />
-            <p className="summary-copy">
-              Start here for a quick solved-versus-unsolved picture, then drill into the
-              mirror or the full coverage explorer only when you need more detail.
-            </p>
-            <div className="overview-status-grid">
-              <StatusBoardStat
-                label="Solved"
-                value={String(coverageSummary?.solvedByMeCount ?? 0)}
-                copy="Problems solved by your archived handle."
-                tone="success"
-                active={overviewPreset === 'solved'}
-                onClick={() => applyOverviewPreset('solved')}
+              <PanelHeading
+                kicker="Fast audit"
+                title="Problem Status Board"
+                chip={overviewPreset ? formatOverviewPreset(overviewPreset) : 'Custom focus'}
               />
-              <StatusBoardStat
-                label="Unsolved"
-                value={String(coverageSummary?.unsolvedProblemCount ?? 0)}
-                copy="Problems still unsolved by the configured handle."
-                tone="neutral"
-                active={overviewPreset === 'unsolved'}
-                onClick={() => applyOverviewPreset('unsolved')}
-              />
-              <StatusBoardStat
-                label="Complete"
-                value={String(coverageSummary?.completeProblemCount ?? 0)}
-                copy="Problems that already have the archive pieces they need."
-                tone="success"
-                active={overviewPreset === 'complete'}
-                onClick={() => applyOverviewPreset('complete')}
-              />
-              <StatusBoardStat
-                label="Missing official source"
-                value={String(coverageSummary?.missingOfficialSourceCaptureCount ?? 0)}
-                copy="Actionable official-source capture gaps only."
-                tone="warning"
-                active={overviewPreset === 'missing-official-source'}
-                onClick={() => applyOverviewPreset('missing-official-source')}
-              />
-              <StatusBoardStat
-                label="Missing your source"
-                value={String(coverageSummary?.solvedByMeMissingUserSourceCount ?? 0)}
-                copy="Solved problems still missing a trustworthy best-per-language user source."
-                tone="warning"
-                active={overviewPreset === 'missing-user-source'}
-                onClick={() => applyOverviewPreset('missing-user-source')}
-              />
-              <StatusBoardStat
-                label="Missing tests"
-                value={String(coverageSummary?.missingTestsCaptureCount ?? 0)}
-                copy="Problems whose tests still need to be captured."
-                tone="warning"
-                active={overviewPreset === 'missing-tests'}
-                onClick={() => applyOverviewPreset('missing-tests')}
-              />
-            </div>
-            <div className="overview-filter-row" role="toolbar" aria-label="Problem status board filters">
-              {(
-                [
-                  ['all', 'All problems'],
-                  ['solved', 'Solved'],
-                  ['unsolved', 'Unsolved'],
-                  ['complete', 'Complete'],
-                  ['missing-official-source', 'Missing official source'],
-                  ['missing-user-source', 'Missing your source'],
-                  ['missing-tests', 'Missing tests'],
-                ] as const
-              ).map(([preset, label]) => (
-                <button
-                  key={preset}
-                  className={`dataset-chip ${overviewPreset === preset ? 'dataset-chip-active' : ''}`}
-                  type="button"
-                  onClick={() => applyOverviewPreset(preset)}
-                  aria-pressed={overviewPreset === preset}
-                >
-                  <strong>{label}</strong>
-                </button>
-              ))}
-            </div>
-            <div className="overview-meta-row">
-              <article className="summary-card overview-meta-card">
-                <span className="metric-label">Upstream unavailable</span>
-                <strong>{String(overviewUnavailableCount)}</strong>
-                <p className="summary-copy">
-                  {String(coverageSummary?.officialSourceUnavailableUpstreamCount ?? 0)} official
-                  and {String(coverageSummary?.testsUnavailableUpstreamCount ?? 0)} tests are
-                  correctly classified as unavailable upstream, not missing capture.
-                </p>
-              </article>
-              <article className="summary-card overview-meta-card">
-                <span className="metric-label">Current board focus</span>
-                <strong>{coverageListing ? `${coverageListing.totalCount} matches` : 'Loading…'}</strong>
-                <p className="summary-copy">
-                  Showing up to {overviewRows.length} quick-drill rows below. Open Coverage for the full table and deeper notes.
-                </p>
-              </article>
-            </div>
-            <div className="button-row">
-              <button className="ghost-button" type="button" onClick={() => applyOverviewPreset('all')}>
-                Reset board focus
-              </button>
-              <button className="ghost-button" type="button" onClick={() => setActiveView('coverage')}>
-                Open full coverage explorer
-              </button>
-            </div>
-            {coverageListing === null ? (
-              <p className="summary-copy">Coverage data will appear here after the selected snapshot finishes loading.</p>
-            ) : overviewRows.length === 0 ? (
-              <div className="mirror-placeholder">
-                <strong>No problems match the current board focus.</strong>
-                <p>Reset the board focus or open Coverage to adjust the deeper filters.</p>
+              <p className="summary-copy">
+                Start here for a quick solved-versus-unsolved picture, then drill into the mirror or
+                the full coverage explorer only when you need more detail.
+              </p>
+              <div className="overview-status-grid">
+                <StatusBoardStat
+                  label="Solved"
+                  value={String(coverageSummary?.solvedByMeCount ?? 0)}
+                  copy="Problems solved by your archived handle."
+                  tone="success"
+                  active={overviewPreset === 'solved'}
+                  onClick={() => applyOverviewPreset('solved')}
+                />
+                <StatusBoardStat
+                  label="Unsolved"
+                  value={String(coverageSummary?.unsolvedProblemCount ?? 0)}
+                  copy="Problems still unsolved by the configured handle."
+                  tone="neutral"
+                  active={overviewPreset === 'unsolved'}
+                  onClick={() => applyOverviewPreset('unsolved')}
+                />
+                <StatusBoardStat
+                  label="Complete"
+                  value={String(coverageSummary?.completeProblemCount ?? 0)}
+                  copy="Problems that already have the archive pieces they need."
+                  tone="success"
+                  active={overviewPreset === 'complete'}
+                  onClick={() => applyOverviewPreset('complete')}
+                />
+                <StatusBoardStat
+                  label="Missing official source"
+                  value={String(coverageSummary?.missingOfficialSourceCaptureCount ?? 0)}
+                  copy="Actionable official-source capture gaps only."
+                  tone="warning"
+                  active={overviewPreset === 'missing-official-source'}
+                  onClick={() => applyOverviewPreset('missing-official-source')}
+                />
+                <StatusBoardStat
+                  label="Missing your source"
+                  value={String(coverageSummary?.solvedByMeMissingUserSourceCount ?? 0)}
+                  copy="Solved problems still missing a trustworthy best-per-language user source."
+                  tone="warning"
+                  active={overviewPreset === 'missing-user-source'}
+                  onClick={() => applyOverviewPreset('missing-user-source')}
+                />
+                <StatusBoardStat
+                  label="Missing tests"
+                  value={String(coverageSummary?.missingTestsCaptureCount ?? 0)}
+                  copy="Problems whose tests still need to be captured."
+                  tone="warning"
+                  active={overviewPreset === 'missing-tests'}
+                  onClick={() => applyOverviewPreset('missing-tests')}
+                />
               </div>
-            ) : (
-              <div className="overview-problem-list">
-                {overviewRows.map((record) => (
-                  <article className="summary-card overview-problem-card" key={record.problemId}>
-                    <div className="overview-problem-head">
-                      <div>
-                        <strong>{`#${record.problemId} ${record.name}`}</strong>
-                        <p className="summary-copy">
-                          {record.slug}
-                          {typeof record.grade === 'number' ? ` • grade ${record.grade}` : ''}
-                          {record.tags.length > 0 ? ` • ${record.tags.slice(0, 3).join(', ')}` : ''}
-                        </p>
-                      </div>
-                      <span className="panel-chip">{record.mirrorRoute}</span>
-                    </div>
-                    <div className="coverage-badge-row overview-badge-row">
-                      <StatusBadge tone={record.solvedByMe ? 'success' : 'neutral'}>
-                        {record.solvedByMe ? 'Solved' : 'Unsolved'}
-                      </StatusBadge>
-                      <StatusBadge tone={toneForArchiveState(record.archiveCompletenessStatus)}>
-                        {formatArchiveCompletenessStatus(record.archiveCompletenessStatus)}
-                      </StatusBadge>
-                      <StatusBadge tone={toneForOfficialStatus(record.officialSourceStatus)}>
-                        {formatOfficialSourceStatus(record.officialSourceStatus)}
-                      </StatusBadge>
-                      <StatusBadge tone={toneForTestsStatus(record.testsCoverageStatus)}>
-                        {formatTestsCoverageStatus(record.testsCoverageStatus)}
-                      </StatusBadge>
-                      <StatusBadge tone={record.userSourceArchived ? 'success' : 'warning'}>
-                        {record.userSourceArchived ? 'Your source archived' : 'Your source missing'}
-                      </StatusBadge>
-                    </div>
-                    <p className="summary-copy overview-row-copy">
-                      {formatOverviewProblemSummary(record)}
-                    </p>
-                    <div className="button-row">
-                      <button className="ghost-button" type="button" onClick={() => openCoverageFromOverview(record.problemId)}>
-                        Open coverage detail
-                      </button>
-                      <button
-                        className="ghost-button"
-                        type="button"
-                        disabled={!boardMirrorBaseUrl}
-                        onClick={() => openMirrorFromOverview(record)}
-                      >
-                        Open mirror
-                      </button>
-                    </div>
-                  </article>
+              <div
+                className="overview-filter-row"
+                role="toolbar"
+                aria-label="Problem status board filters"
+              >
+                {(
+                  [
+                    ['all', 'All problems'],
+                    ['solved', 'Solved'],
+                    ['unsolved', 'Unsolved'],
+                    ['complete', 'Complete'],
+                    ['missing-official-source', 'Missing official source'],
+                    ['missing-user-source', 'Missing your source'],
+                    ['missing-tests', 'Missing tests'],
+                  ] as const
+                ).map(([preset, label]) => (
+                  <button
+                    key={preset}
+                    className={`dataset-chip ${overviewPreset === preset ? 'dataset-chip-active' : ''}`}
+                    type="button"
+                    onClick={() => applyOverviewPreset(preset)}
+                    aria-pressed={overviewPreset === preset}
+                  >
+                    <strong>{label}</strong>
+                  </button>
                 ))}
               </div>
-            )}
+              <div className="overview-meta-row">
+                <article className="summary-card overview-meta-card">
+                  <span className="metric-label">Upstream unavailable</span>
+                  <strong>{String(overviewUnavailableCount)}</strong>
+                  <p className="summary-copy">
+                    {String(coverageSummary?.officialSourceUnavailableUpstreamCount ?? 0)} official
+                    and {String(coverageSummary?.testsUnavailableUpstreamCount ?? 0)} tests are
+                    correctly classified as unavailable upstream, not missing capture.
+                  </p>
+                </article>
+                <article className="summary-card overview-meta-card">
+                  <span className="metric-label">Current board focus</span>
+                  <strong>
+                    {coverageListing ? `${coverageListing.totalCount} matches` : 'Loading…'}
+                  </strong>
+                  <p className="summary-copy">
+                    Showing up to {overviewRows.length} quick-drill rows below. Open Coverage for
+                    the full table and deeper notes.
+                  </p>
+                </article>
+              </div>
+              <div className="button-row">
+                <button
+                  className="ghost-button"
+                  type="button"
+                  onClick={() => applyOverviewPreset('all')}
+                >
+                  Reset board focus
+                </button>
+                <button
+                  className="ghost-button"
+                  type="button"
+                  onClick={() => setActiveView('coverage')}
+                >
+                  Open full coverage explorer
+                </button>
+              </div>
+              {coverageListing === null ? (
+                <p className="summary-copy">
+                  Coverage data will appear here after the selected snapshot finishes loading.
+                </p>
+              ) : overviewRows.length === 0 ? (
+                <div className="mirror-placeholder">
+                  <strong>No problems match the current board focus.</strong>
+                  <p>Reset the board focus or open Coverage to adjust the deeper filters.</p>
+                </div>
+              ) : (
+                <div className="overview-problem-list">
+                  {overviewRows.map((record) => (
+                    <article className="summary-card overview-problem-card" key={record.problemId}>
+                      <div className="overview-problem-head">
+                        <div>
+                          <strong>{`#${record.problemId} ${record.name}`}</strong>
+                          <p className="summary-copy">
+                            {record.slug}
+                            {typeof record.grade === 'number' ? ` • grade ${record.grade}` : ''}
+                            {record.tags.length > 0
+                              ? ` • ${record.tags.slice(0, 3).join(', ')}`
+                              : ''}
+                          </p>
+                        </div>
+                        <span className="panel-chip">{record.mirrorRoute}</span>
+                      </div>
+                      <div className="coverage-badge-row overview-badge-row">
+                        <StatusBadge tone={record.solvedByMe ? 'success' : 'neutral'}>
+                          {record.solvedByMe ? 'Solved' : 'Unsolved'}
+                        </StatusBadge>
+                        <StatusBadge tone={toneForArchiveState(record.archiveCompletenessStatus)}>
+                          {formatArchiveCompletenessStatus(record.archiveCompletenessStatus)}
+                        </StatusBadge>
+                        <StatusBadge tone={toneForOfficialStatus(record.officialSourceStatus)}>
+                          {formatOfficialSourceStatus(record.officialSourceStatus)}
+                        </StatusBadge>
+                        <StatusBadge tone={toneForTestsStatus(record.testsCoverageStatus)}>
+                          {formatTestsCoverageStatus(record.testsCoverageStatus)}
+                        </StatusBadge>
+                        <StatusBadge tone={record.userSourceArchived ? 'success' : 'warning'}>
+                          {record.userSourceArchived
+                            ? 'Your source archived'
+                            : 'Your source missing'}
+                        </StatusBadge>
+                      </div>
+                      <p className="summary-copy overview-row-copy">
+                        {formatOverviewProblemSummary(record)}
+                      </p>
+                      <div className="button-row">
+                        <button
+                          className="ghost-button"
+                          type="button"
+                          onClick={() => openCoverageFromOverview(record.problemId)}
+                        >
+                          Open coverage detail
+                        </button>
+                        <button
+                          className="ghost-button"
+                          type="button"
+                          disabled={!boardMirrorBaseUrl}
+                          onClick={() => openMirrorFromOverview(record)}
+                        >
+                          Open mirror
+                        </button>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              )}
             </section>
           ) : null}
 
           {activeView === 'overview' ? (
             <section className="panel jobs-panel">
-            <PanelHeading kicker="Quick actions" title="What happens next" chip={`${jobs.length} jobs`} />
-            <div className="summary-card form-card">
-              <Field label="Crawl mode">
-                <select
-                  aria-label="Crawl mode"
-                  value={selectedCrawlMode}
-                  onChange={(event) => onCrawlModeChange(event.target.value as CrawlMode)}
+              <PanelHeading
+                kicker="Quick actions"
+                title="What happens next"
+                chip={`${jobs.length} jobs`}
+              />
+              <div className="summary-card form-card">
+                <Field label="Crawl mode">
+                  <select
+                    aria-label="Crawl mode"
+                    value={selectedCrawlMode}
+                    onChange={(event) => onCrawlModeChange(event.target.value as CrawlMode)}
+                  >
+                    <option value="incremental">Incremental sync</option>
+                    <option value="fresh">Fresh recrawl</option>
+                  </select>
+                </Field>
+                <p className="summary-copy">
+                  Incremental sync reuses the canonical archive and skips completed URLs. Fresh
+                  recrawl creates a new snapshot from scratch.
+                </p>
+              </div>
+              <div className="action-grid">
+                <ActionButton
+                  title="Start public crawl"
+                  copy="Seed and continue the public PBInfo queue."
+                  primary
+                  onClick={() => void onStartCrawl('public')}
+                />
+                <ActionButton
+                  title="Start user crawl"
+                  copy="Harvest authenticated profile, solution, and evaluation pages."
+                  primary
+                  onClick={() => void onStartCrawl('user')}
+                />
+                <ActionButton
+                  title="Start full crawl"
+                  copy="Drive the canonical same-host drain target."
+                  primary
+                  onClick={() => void onStartCrawl('all')}
+                />
+                <ActionButton
+                  title="Normalize snapshot"
+                  copy="Rebuild normalized records without re-fetching."
+                  onClick={() => void onRunSnapshotJob('normalize')}
+                />
+                <ActionButton
+                  title="Rank sources"
+                  copy="Refresh user and official best-per-language outputs."
+                  onClick={() => void onRunSnapshotJob('rank')}
+                />
+                <ActionButton
+                  title="Build mirror"
+                  copy="Rebuild localhost routes and local asset rewrites."
+                  onClick={() => void onRunSnapshotJob('mirror-build')}
+                />
+                <ActionButton
+                  title="Finalize snapshot"
+                  copy="Normalize, rank, mirror, export, and prune noncanonical state."
+                  onClick={() => void onRunSnapshotJob('snapshot-finalize')}
+                />
+              </div>
+              <div className="button-row">
+                <button
+                  className="ghost-button"
+                  type="button"
+                  onClick={() => setActiveView('coverage')}
                 >
-                  <option value="incremental">Incremental sync</option>
-                  <option value="fresh">Fresh recrawl</option>
-                </select>
-              </Field>
-              <p className="summary-copy">
-                Incremental sync reuses the canonical archive and skips completed URLs. Fresh recrawl creates a new snapshot from scratch.
-              </p>
-            </div>
-            <div className="action-grid">
-              <ActionButton title="Start public crawl" copy="Seed and continue the public PBInfo queue." primary onClick={() => void onStartCrawl('public')} />
-              <ActionButton title="Start user crawl" copy="Harvest authenticated profile, solution, and evaluation pages." primary onClick={() => void onStartCrawl('user')} />
-              <ActionButton title="Start full crawl" copy="Drive the canonical same-host drain target." primary onClick={() => void onStartCrawl('all')} />
-              <ActionButton title="Normalize snapshot" copy="Rebuild normalized records without re-fetching." onClick={() => void onRunSnapshotJob('normalize')} />
-              <ActionButton title="Rank sources" copy="Refresh user and official best-per-language outputs." onClick={() => void onRunSnapshotJob('rank')} />
-              <ActionButton title="Build mirror" copy="Rebuild localhost routes and local asset rewrites." onClick={() => void onRunSnapshotJob('mirror-build')} />
-              <ActionButton title="Finalize snapshot" copy="Normalize, rank, mirror, export, and prune noncanonical state." onClick={() => void onRunSnapshotJob('snapshot-finalize')} />
-            </div>
-            <div className="button-row">
-              <button className="ghost-button" type="button" onClick={() => setActiveView('coverage')}>Open coverage</button>
-              <button className="ghost-button" type="button" onClick={() => setActiveView('data')}>Open raw data</button>
-            </div>
-            {activeCrawlJob ? <div className="button-row"><button className="ghost-button" type="button" onClick={() => void onResumeCrawl(activeCrawlJob.jobId)}>Resume crawl</button><button className="ghost-button ghost-danger" type="button" onClick={() => void onPauseCrawl(activeCrawlJob.jobId)}>Pause after current chunk completes</button></div> : null}
-            <div className="job-list">
-              {jobs.length === 0 ? <p className="summary-copy">No desktop jobs recorded yet.</p> : jobs.map((job) => (
-                <article className="job-card" key={job.jobId}>
-                  <header><div><strong>{job.snapshotId ?? job.kind}</strong><p className="job-meta">{formatJobMeta(job)}</p></div><span className={`status-badge status-${job.status}`}>{job.status}</span></header>
-                  <p>{formatJobSummary(job)}</p>
-                  {job.latestEvent?.message ? <p className="job-event">{job.latestEvent.message}</p> : null}
-                </article>
-              ))}
-            </div>
+                  Open coverage
+                </button>
+                <button
+                  className="ghost-button"
+                  type="button"
+                  onClick={() => setActiveView('data')}
+                >
+                  Open raw data
+                </button>
+              </div>
+              {activeCrawlJob ? (
+                <div className="button-row">
+                  <button
+                    className="ghost-button"
+                    type="button"
+                    onClick={() => void onResumeCrawl(activeCrawlJob.jobId)}
+                  >
+                    Resume crawl
+                  </button>
+                  <button
+                    className="ghost-button ghost-danger"
+                    type="button"
+                    onClick={() => void onPauseCrawl(activeCrawlJob.jobId)}
+                  >
+                    Pause after current chunk completes
+                  </button>
+                </div>
+              ) : null}
+              <div className="job-list">
+                {jobs.length === 0 ? (
+                  <p className="summary-copy">No desktop jobs recorded yet.</p>
+                ) : (
+                  jobs.map((job) => (
+                    <article className="job-card" key={job.jobId}>
+                      <header>
+                        <div>
+                          <strong>{job.snapshotId ?? job.kind}</strong>
+                          <p className="job-meta">{formatJobMeta(job)}</p>
+                        </div>
+                        <span className={`status-badge status-${job.status}`}>{job.status}</span>
+                      </header>
+                      <p>{formatJobSummary(job)}</p>
+                      {job.latestEvent?.message ? (
+                        <p className="job-event">{job.latestEvent.message}</p>
+                      ) : null}
+                    </article>
+                  ))
+                )}
+              </div>
             </section>
           ) : null}
 
           {activeView === 'overview' ? (
             <section className="panel logs-panel">
-            <div className="panel-heading">
-              <div><p className="section-kicker">Structured events</p><h2>Recent activity</h2></div>
-              <div className="panel-actions">
-                <div className="segmented-control" role="group" aria-label="Verbosity">
-                  {(['normal', 'verbose', 'raw'] as const).map((mode) => <button key={mode} className={`segmented-button ${verbosityMode === mode ? 'segmented-button-active' : ''}`} type="button" aria-pressed={verbosityMode === mode} onClick={() => onVerbosityChange(mode)}>{capitalize(mode)}</button>)}
+              <div className="panel-heading">
+                <div>
+                  <p className="section-kicker">Structured events</p>
+                  <h2>Recent activity</h2>
                 </div>
-                <span className="panel-chip">{visibleLogEntries.length} visible</span>
+                <div className="panel-actions">
+                  <div className="segmented-control" role="group" aria-label="Verbosity">
+                    {(['normal', 'verbose', 'raw'] as const).map((mode) => (
+                      <button
+                        key={mode}
+                        className={`segmented-button ${verbosityMode === mode ? 'segmented-button-active' : ''}`}
+                        type="button"
+                        aria-pressed={verbosityMode === mode}
+                        onClick={() => onVerbosityChange(mode)}
+                      >
+                        {capitalize(mode)}
+                      </button>
+                    ))}
+                  </div>
+                  <span className="panel-chip">{visibleLogEntries.length} visible</span>
+                </div>
               </div>
-            </div>
-            <p className="summary-copy log-summary">{verbosityMode === 'normal' ? 'Normal shows the recent operator-facing stream only.' : verbosityMode === 'verbose' ? 'Verbose expands counters and structured detail for each event.' : 'Raw exposes the unfiltered event payloads exactly as captured.'}</p>
-            {visibleLogEntries.length === 0 ? <p className="summary-copy">Structured job events will appear here during long-running work.</p> : (
-              <div className="log-list">
-                {visibleLogEntries.map((entry, index) => (
-                  <article className={`log-card log-${entry.level}`} key={`${entry.timestamp}-${index}`}>
-                    <header><span className="log-stage">{entry.stage}</span><time dateTime={entry.timestamp}>{formatTimestamp(entry.timestamp)}</time></header>
-                    <p>{entry.message}</p>
-                    {verbosityMode !== 'normal' && entry.counters ? <p className="log-counters">{formatCounters(entry.counters)}</p> : null}
-                    {verbosityMode === 'verbose' && entry.detail ? <pre className="log-inline-detail">{JSON.stringify(entry.detail, null, 2)}</pre> : null}
-                    {verbosityMode === 'raw' ? <pre className="log-inline-detail">{JSON.stringify(entry, null, 2)}</pre> : null}
-                  </article>
-                ))}
-              </div>
-            )}
+              <p className="summary-copy log-summary">
+                {verbosityMode === 'normal'
+                  ? 'Normal shows the recent operator-facing stream only.'
+                  : verbosityMode === 'verbose'
+                    ? 'Verbose expands counters and structured detail for each event.'
+                    : 'Raw exposes the unfiltered event payloads exactly as captured.'}
+              </p>
+              {visibleLogEntries.length === 0 ? (
+                <p className="summary-copy">
+                  Structured job events will appear here during long-running work.
+                </p>
+              ) : (
+                <div className="log-list">
+                  {visibleLogEntries.map((entry, index) => (
+                    <article
+                      className={`log-card log-${entry.level}`}
+                      key={`${entry.timestamp}-${index}`}
+                    >
+                      <header>
+                        <span className="log-stage">{entry.stage}</span>
+                        <time dateTime={entry.timestamp}>{formatTimestamp(entry.timestamp)}</time>
+                      </header>
+                      <p>{entry.message}</p>
+                      {verbosityMode !== 'normal' && entry.counters ? (
+                        <p className="log-counters">{formatCounters(entry.counters)}</p>
+                      ) : null}
+                      {verbosityMode === 'verbose' && entry.detail ? (
+                        <pre className="log-inline-detail">
+                          {JSON.stringify(entry.detail, null, 2)}
+                        </pre>
+                      ) : null}
+                      {verbosityMode === 'raw' ? (
+                        <pre className="log-inline-detail">{JSON.stringify(entry, null, 2)}</pre>
+                      ) : null}
+                    </article>
+                  ))}
+                </div>
+              )}
             </section>
           ) : null}
 
           {activeView === 'overview' ? (
             <section className="panel mirror-panel">
-            <PanelHeading kicker="Local snapshot" title="Mirror access" chip={previewUrl ? 'Preview live' : undefined} />
-            <div className="mirror-stage">
-              <div className="mirror-toolbar">
-                <div className="button-row mirror-button-row">
-                  <button className="ghost-button" type="button" onClick={() => void onStartMirrorPreview()}>Start preview</button>
-                  <button className="ghost-button" type="button" disabled={!previewJobId} onClick={() => { if (previewJobId) { void onStopMirrorPreview(previewJobId); } }}>Stop preview</button>
-                  <button className="ghost-button" type="button" disabled={!previewUrl} onClick={() => { if (previewUrl) { void onOpenExternal(previewUrl); } }}>Open in browser</button>
-                  <button
-                    className="ghost-button"
-                    type="button"
-                    disabled={!previewUrl}
-                    onClick={() => setShowEmbeddedPreview((current) => !current)}
-                  >
-                    {showEmbeddedPreview ? 'Hide embedded preview' : 'Show embedded preview'}
-                  </button>
+              <PanelHeading
+                kicker="Local snapshot"
+                title="Mirror access"
+                chip={previewUrl ? 'Preview live' : undefined}
+              />
+              <div className="mirror-stage">
+                <div className="mirror-toolbar">
+                  <div className="button-row mirror-button-row">
+                    <button
+                      className="ghost-button"
+                      type="button"
+                      onClick={() => void onStartMirrorPreview()}
+                    >
+                      Start preview
+                    </button>
+                    <button
+                      className="ghost-button"
+                      type="button"
+                      disabled={!previewJobId}
+                      onClick={() => {
+                        /* v8 ignore start -- the button is disabled whenever previewJobId is absent */
+                        if (!previewJobId) {
+                          return;
+                        }
+                        /* v8 ignore stop */
+                        void onStopMirrorPreview(previewJobId);
+                      }}
+                    >
+                      Stop preview
+                    </button>
+                    <button
+                      className="ghost-button"
+                      type="button"
+                      disabled={!previewUrl}
+                      onClick={() => {
+                        /* v8 ignore start -- the button is disabled whenever previewUrl is absent */
+                        if (!previewUrl) {
+                          return;
+                        }
+                        /* v8 ignore stop */
+                        void onOpenExternal(previewUrl);
+                      }}
+                    >
+                      Open in browser
+                    </button>
+                    <button
+                      className="ghost-button"
+                      type="button"
+                      disabled={!previewUrl}
+                      onClick={() => setShowEmbeddedPreview((current) => !current)}
+                    >
+                      {showEmbeddedPreview ? 'Hide embedded preview' : 'Show embedded preview'}
+                    </button>
+                  </div>
+                  <article className="summary-card mirror-meta-card">
+                    <span className="metric-label">Mirror route</span>
+                    <p className="mono mirror-address">{previewUrl ?? 'Not running'}</p>
+                  </article>
                 </div>
-                <article className="summary-card mirror-meta-card"><span className="metric-label">Mirror route</span><p className="mono mirror-address">{previewUrl ?? 'Not running'}</p></article>
+                {previewUrl && showEmbeddedPreview ? (
+                  <div className="mirror-frame-shell">
+                    <iframe className="mirror-frame" src={previewUrl} title="Mirror preview" />
+                  </div>
+                ) : (
+                  <div className="mirror-placeholder">
+                    <strong>
+                      {previewUrl ? 'Embedded preview hidden' : 'No mirror preview running'}
+                    </strong>
+                    <p>
+                      {previewUrl
+                        ? 'Keep the shell lightweight and open the embedded preview only when you need to inspect the full mirror in-place.'
+                        : 'Start the mirror preview after building the selected snapshot to embed the localhost viewer here.'}
+                    </p>
+                  </div>
+                )}
               </div>
-              {previewUrl && showEmbeddedPreview ? (
-                <div className="mirror-frame-shell">
-                  <iframe className="mirror-frame" src={previewUrl} title="Mirror preview" />
-                </div>
-              ) : (
-                <div className="mirror-placeholder">
-                  <strong>{previewUrl ? 'Embedded preview hidden' : 'No mirror preview running'}</strong>
-                  <p>
-                    {previewUrl
-                      ? 'Keep the shell lightweight and open the embedded preview only when you need to inspect the full mirror in-place.'
-                      : 'Start the mirror preview after building the selected snapshot to embed the localhost viewer here.'}
-                  </p>
-                </div>
-              )}
-            </div>
             </section>
           ) : null}
 
           {activeView === 'coverage' ? (
             <CoverageExplorerPanel
-            snapshotId={selectedSnapshotId}
-            summary={coverageSummary}
-            listing={coverageListing}
-            detail={coverageDetail}
-            selectedProblemId={selectedCoverageProblemId}
-            filters={coverageFilters}
-            previewUrl={previewUrl}
-            onFiltersChange={onCoverageFiltersChange}
-            onSelectProblem={onSelectCoverageProblem}
-            onOpenPath={onOpenPath}
-            onOpenExternal={onOpenExternal}
+              snapshotId={selectedSnapshotId}
+              summary={coverageSummary}
+              listing={coverageListing}
+              detail={coverageDetail}
+              selectedProblemId={selectedCoverageProblemId}
+              filters={coverageFilters}
+              previewUrl={previewUrl}
+              onFiltersChange={onCoverageFiltersChange}
+              onSelectProblem={onSelectCoverageProblem}
+              onOpenPath={onOpenPath}
+              onOpenExternal={onOpenExternal}
             />
           ) : null}
 
           {activeView === 'data' ? (
             <DataExplorerPanel
-            snapshotId={selectedSnapshotId}
-            normalizedRoot={archiveSummary?.normalizedRoot}
-            mirrorRoot={archiveSummary?.mirrorRoot}
-            mirrorServeCommand={archiveSummary?.mirrorServeCommand}
-            mirrorUrl={archiveSummary?.mirrorUrl}
-            datasetSummaries={archiveSummary?.datasets ?? []}
-            selectedDataset={selectedArchiveDataset}
-            selectedRecordId={selectedArchiveRecordId}
-            archiveQuery={archiveQuery}
-            listing={archiveListing}
-            detail={archiveRecordDetail}
-            previewUrl={previewUrl}
-            onDatasetChange={onArchiveDatasetChange}
-            onArchiveQueryChange={onArchiveQueryChange}
-            onSelectRecord={onSelectArchiveRecord}
-            onOpenPath={onOpenPath}
-            onOpenExternal={onOpenExternal}
+              snapshotId={selectedSnapshotId}
+              normalizedRoot={archiveSummary?.normalizedRoot}
+              mirrorRoot={archiveSummary?.mirrorRoot}
+              mirrorServeCommand={archiveSummary?.mirrorServeCommand}
+              mirrorUrl={archiveSummary?.mirrorUrl}
+              datasetSummaries={archiveSummary?.datasets ?? []}
+              selectedDataset={selectedArchiveDataset}
+              selectedRecordId={selectedArchiveRecordId}
+              archiveQuery={archiveQuery}
+              listing={archiveListing}
+              detail={archiveRecordDetail}
+              previewUrl={previewUrl}
+              onDatasetChange={onArchiveDatasetChange}
+              onArchiveQueryChange={onArchiveQueryChange}
+              onSelectRecord={onSelectArchiveRecord}
+              onOpenPath={onOpenPath}
+              onOpenExternal={onOpenExternal}
             />
           ) : null}
 
@@ -735,12 +1114,24 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
 
           {activeView === 'setup' && showAdvanced ? (
             <section className="panel advanced-panel">
-              <PanelHeading kicker="Operator defaults" title="Advanced Settings" chip="Read-only diagnostics" />
+              <PanelHeading
+                kicker="Operator defaults"
+                title="Advanced Settings"
+                chip="Read-only diagnostics"
+              />
               <div className="advanced-grid">
-                <SummaryCard label="Desktop banners" value={workspaceState.notifications.desktopBanners ? 'Enabled' : 'Disabled'} />
-                <SummaryCard label="Windows toast" value={workspaceState.notifications.windowsToast ? 'Enabled' : 'Disabled'} />
+                <SummaryCard
+                  label="Desktop banners"
+                  value={workspaceState.notifications.desktopBanners ? 'Enabled' : 'Disabled'}
+                />
+                <SummaryCard
+                  label="Windows toast"
+                  value={workspaceState.notifications.windowsToast ? 'Enabled' : 'Disabled'}
+                />
                 <SummaryCard label="Recent failures" value={String(recentFailureCount)}>
-                  <p className="summary-copy">{crawlStatus?.recentFailures[0]?.lastError ?? 'No recent crawl failures.'}</p>
+                  <p className="summary-copy">
+                    {crawlStatus?.recentFailures[0]?.lastError ?? 'No recent crawl failures.'}
+                  </p>
                 </SummaryCard>
               </div>
             </section>
@@ -752,11 +1143,33 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
 }
 
 function PanelHeading({ kicker, title, chip }: { kicker: string; title: string; chip?: string }) {
-  return <div className="panel-heading"><div><p className="section-kicker">{kicker}</p><h2>{title}</h2></div>{chip ? <span className="panel-chip">{chip}</span> : null}</div>;
+  return (
+    <div className="panel-heading">
+      <div>
+        <p className="section-kicker">{kicker}</p>
+        <h2>{title}</h2>
+      </div>
+      {chip ? <span className="panel-chip">{chip}</span> : null}
+    </div>
+  );
 }
 
-function SummaryCard({ label, value, children }: { label: string; value?: string; children?: ReactNode }) {
-  return <article className="summary-card"><span className="metric-label">{label}</span>{value ? <strong>{value}</strong> : null}{children}</article>;
+function SummaryCard({
+  label,
+  value,
+  children,
+}: {
+  label: string;
+  value?: string;
+  children?: ReactNode;
+}) {
+  return (
+    <article className="summary-card">
+      <span className="metric-label">{label}</span>
+      {value ? <strong>{value}</strong> : null}
+      {children}
+    </article>
+  );
 }
 
 function StatusBoardStat({
@@ -795,30 +1208,60 @@ function StatusBadge({
   tone: 'success' | 'warning' | 'neutral';
   children: ReactNode;
 }) {
+  return <span className={`coverage-badge overview-badge overview-badge-${tone}`}>{children}</span>;
+}
+
+function ActionButton({
+  title,
+  copy,
+  primary,
+  onClick,
+}: {
+  title: string;
+  copy: string;
+  primary?: boolean;
+  onClick: () => void;
+}) {
   return (
-    <span className={`coverage-badge overview-badge overview-badge-${tone}`}>
-      {children}
-    </span>
+    <button
+      className={`action-card ${primary ? 'action-primary' : ''}`}
+      type="button"
+      onClick={onClick}
+    >
+      <strong>{title}</strong>
+      <span>{copy}</span>
+    </button>
   );
 }
 
-function ActionButton({ title, copy, primary, onClick }: { title: string; copy: string; primary?: boolean; onClick: () => void }) {
-  return <button className={`action-card ${primary ? 'action-primary' : ''}`} type="button" onClick={onClick}><strong>{title}</strong><span>{copy}</span></button>;
-}
-
 function Field({ label, children }: { label: string; children: ReactNode }) {
-  return <label className="field"><span>{label}</span>{children}</label>;
+  return (
+    <label className="field">
+      <span>{label}</span>
+      {children}
+    </label>
+  );
 }
 
-export function getActiveProfile(workspaceState: GuiWorkspaceState | null | undefined): GuiProfileRecord | undefined {
-  return workspaceState?.profiles.find((profile) => profile.profileId === workspaceState.activeProfileId);
+export function getActiveProfile(
+  workspaceState: GuiWorkspaceState | null | undefined,
+): GuiProfileRecord | undefined {
+  return workspaceState?.profiles.find(
+    (profile) => profile.profileId === workspaceState.activeProfileId,
+  );
 }
 
 export function buildLogEntries(jobs: GuiJobRecord[]): GuiJobEvent[] {
-  return jobs.filter((job) => job.latestEvent).map((job) => job.latestEvent!).sort((left, right) => right.timestamp.localeCompare(left.timestamp));
+  return jobs
+    .filter((job) => job.latestEvent)
+    .map((job) => job.latestEvent!)
+    .sort((left, right) => right.timestamp.localeCompare(left.timestamp));
 }
 
-export function filterLogEntries(entries: GuiJobEvent[], verbosityMode: VerbosityMode): GuiJobEvent[] {
+export function filterLogEntries(
+  entries: GuiJobEvent[],
+  verbosityMode: VerbosityMode,
+): GuiJobEvent[] {
   const sorted = [...entries].sort((left, right) => right.timestamp.localeCompare(left.timestamp));
   if (verbosityMode === 'raw') {
     return sorted.slice(0, 20);
@@ -848,7 +1291,9 @@ export function formatJobSummary(job: GuiJobRecord): string {
   return formatCounters(job.latestCounters);
 }
 
-export function formatCounters(counters: GuiJobCounters | { pending: number; completed: number; inProgress: number } | undefined): string {
+export function formatCounters(
+  counters: GuiJobCounters | { pending: number; completed: number; inProgress: number } | undefined,
+): string {
   if (!counters) {
     return 'No queue counters yet';
   }
@@ -857,7 +1302,11 @@ export function formatCounters(counters: GuiJobCounters | { pending: number; com
 }
 
 export function deriveCrawlTelemetry(
-  counters: GuiJobCounters | { pending: number; completed: number; inProgress: number } | null | undefined,
+  counters:
+    | GuiJobCounters
+    | { pending: number; completed: number; inProgress: number }
+    | null
+    | undefined,
   jobEvents: GuiJobEvent[],
 ): { completedPerMinute: number; etaSeconds: number } | null {
   if (!counters || counters.pending <= 0) {
@@ -866,9 +1315,7 @@ export function deriveCrawlTelemetry(
 
   const relevantEvents = [...jobEvents]
     .filter(
-      (event) =>
-        (event.stage === 'crawl' || event.stage === 'crawl-stalled') &&
-        event.counters,
+      (event) => (event.stage === 'crawl' || event.stage === 'crawl-stalled') && event.counters,
     )
     .sort((left, right) => left.timestamp.localeCompare(right.timestamp));
   if (relevantEvents.length < 2) {
@@ -877,26 +1324,24 @@ export function deriveCrawlTelemetry(
 
   const latest = relevantEvents.at(-1);
   const latestCounters = latest?.counters;
-  /* v8 ignore next 3 -- relevantEvents has >=2 counter-bearing entries, so the last one always has counters */
+  /* v8 ignore start -- relevantEvents has >=2 counter-bearing entries, so the last one always has counters */
   if (!latest || !latestCounters) {
     return null;
   }
+  /* v8 ignore stop */
 
   const baseline = [...relevantEvents]
     .reverse()
     .find(
       (event) =>
-        event !== latest &&
-        event.counters &&
-        event.counters.completed < latestCounters.completed,
+        event !== latest && event.counters && event.counters.completed < latestCounters.completed,
     );
   if (!baseline?.counters) {
     return null;
   }
 
   const elapsedSeconds =
-    (new Date(latest.timestamp).getTime() - new Date(baseline.timestamp).getTime()) /
-    1_000;
+    (new Date(latest.timestamp).getTime() - new Date(baseline.timestamp).getTime()) / 1_000;
   const completedDelta = latestCounters.completed - baseline.counters.completed;
   // completedDelta is always > 0 because the baseline is chosen with a strictly
   // smaller completed count, so only the elapsed-time guard is reachable.
@@ -905,10 +1350,11 @@ export function deriveCrawlTelemetry(
   }
 
   const completedPerMinute = completedDelta / (elapsedSeconds / 60);
-  /* v8 ignore next 3 -- completedDelta>0 and elapsedSeconds>0 guarantee a positive finite rate */
+  /* v8 ignore start -- completedDelta>0 and elapsedSeconds>0 guarantee a positive finite rate */
   if (!Number.isFinite(completedPerMinute) || completedPerMinute <= 0) {
     return null;
   }
+  /* v8 ignore stop */
 
   return {
     completedPerMinute,
@@ -935,13 +1381,16 @@ export function formatEta(etaSeconds: number): string {
 
   const hours = Math.floor(roundedMinutes / 60);
   const minutes = roundedMinutes % 60;
-  return minutes === 0
-    ? `${hours}h remaining`
-    : `${hours}h ${minutes}m remaining`;
+  return minutes === 0 ? `${hours}h remaining` : `${hours}h ${minutes}m remaining`;
 }
 
 export function formatTimestamp(timestamp: string): string {
-  return new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }).format(new Date(timestamp));
+  return new Intl.DateTimeFormat('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    hour: '2-digit',
+    minute: '2-digit',
+  }).format(new Date(timestamp));
 }
 
 export function capitalize(value: string): string {
@@ -990,9 +1439,7 @@ export function createCoverageFiltersForPreset(
   }
 }
 
-export function detectOverviewPreset(
-  filters: CoverageExplorerFilters,
-): OverviewBoardPreset | null {
+export function detectOverviewPreset(filters: CoverageExplorerFilters): OverviewBoardPreset | null {
   const presets: OverviewBoardPreset[] = [
     'all',
     'solved',
@@ -1014,16 +1461,16 @@ export function areCoverageFiltersEqual(
   right: CoverageExplorerFilters,
 ): boolean {
   return (
-    left.query === right.query
-    && left.solved === right.solved
-    && left.testsFragmentArchived === right.testsFragmentArchived
-    && left.visibleTestsCaptured === right.visibleTestsCaptured
-    && left.testsCoverageStatus === right.testsCoverageStatus
-    && left.officialSourceArchived === right.officialSourceArchived
-    && left.userSourceArchived === right.userSourceArchived
-    && left.editorialAvailability === right.editorialAvailability
-    && left.archiveCompletenessStatus === right.archiveCompletenessStatus
-    && left.grade === right.grade
+    left.query === right.query &&
+    left.solved === right.solved &&
+    left.testsFragmentArchived === right.testsFragmentArchived &&
+    left.visibleTestsCaptured === right.visibleTestsCaptured &&
+    left.testsCoverageStatus === right.testsCoverageStatus &&
+    left.officialSourceArchived === right.officialSourceArchived &&
+    left.userSourceArchived === right.userSourceArchived &&
+    left.editorialAvailability === right.editorialAvailability &&
+    left.archiveCompletenessStatus === right.archiveCompletenessStatus &&
+    left.grade === right.grade
   );
 }
 
@@ -1136,9 +1583,7 @@ export function formatTestsCoverageStatus(
 }
 
 export function formatOverviewProblemSummary(record: GuiCoverageRecord): string {
-  const segments = [
-    `${record.solvedEvaluationCount}/${record.evaluationCount} solved evaluations`,
-  ];
+  const segments = [`${record.solvedEvaluationCount}/${record.evaluationCount} solved evaluations`];
   if (record.requiredTrustworthyUserSourceLanguages.length > 0) {
     segments.push(
       `required languages: ${record.requiredTrustworthyUserSourceLanguages.join(', ')}`,

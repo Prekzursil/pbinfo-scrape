@@ -108,10 +108,11 @@ async function removePathRobustly(targetPath: string, attempt = 0): Promise<void
     if (!isRetryableDirectoryResetError(error)) {
       throw error;
     }
-    /* v8 ignore next 3 -- exhaustion after 59 persistent OS lock failures is not reproducible */
+    /* v8 ignore start -- exhaustion after 59 persistent OS lock failures is not reproducible */
     if (attempt >= 59) {
       throw error;
     }
+    /* v8 ignore stop */
     await delay(Math.min(1000, 50 * (attempt + 1)));
     await removePathRobustly(targetPath, attempt + 1);
   }

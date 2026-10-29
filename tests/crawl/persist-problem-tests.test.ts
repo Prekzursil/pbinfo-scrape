@@ -6,7 +6,10 @@ import { afterEach, beforeEach, describe, expect, test } from 'vitest';
 
 import { prepareSnapshot, type SnapshotLayout } from '../../src/archive/storage.js';
 import { loadLocalConfig } from '../../src/config/local-config.js';
-import { persistProblemExamples, persistProblemVisibleTests } from '../../src/crawl/archive-crawler.js';
+import {
+  persistProblemExamples,
+  persistProblemVisibleTests,
+} from '../../src/crawl/archive-crawler.js';
 import type { ProblemTestsRecord } from '../../src/types/records.js';
 
 const tempDirs: string[] = [];
@@ -16,7 +19,11 @@ beforeEach(() => {
   const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-persist-tests-'));
   tempDirs.push(workspaceRoot);
   const config = loadLocalConfig(workspaceRoot);
-  snapshot = prepareSnapshot(config, { scope: 'all', snapshotId: 'persist', now: new Date('2026-03-10T00:00:00.000Z') });
+  snapshot = prepareSnapshot(config, {
+    scope: 'all',
+    snapshotId: 'persist',
+    now: new Date('2026-03-10T00:00:00.000Z'),
+  });
 });
 
 afterEach(() => {

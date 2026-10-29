@@ -4,10 +4,7 @@ import { dirname } from 'node:path';
 import { shell, type IpcMain } from 'electron';
 
 import { createDesktopController } from './desktop-controller.js';
-import {
-  readDesktopPreferences,
-  writeDesktopPreferences,
-} from './desktop-preferences.js';
+import { readDesktopPreferences, writeDesktopPreferences } from './desktop-preferences.js';
 import type { NotificationService } from './notification-service.js';
 import {
   activateWorkspaceProfile,
@@ -48,8 +45,7 @@ export function registerDesktopIpc(options: RegisterDesktopIpcOptions): void {
       })
     : undefined;
   const desktopTestActionsPath = process.env.PBINFO_DESKTOP_TEST_ACTIONS_PATH;
-  const desktopTestDryRunOpeners =
-    process.env.PBINFO_DESKTOP_TEST_DRY_RUN_OPENERS === '1';
+  const desktopTestDryRunOpeners = process.env.PBINFO_DESKTOP_TEST_DRY_RUN_OPENERS === '1';
 
   options.ipcMain.handle('desktop:workspace:state', async () => {
     if (!workspaceRoot) {

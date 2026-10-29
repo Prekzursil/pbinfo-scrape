@@ -42,10 +42,10 @@ describe('dashboard interactions', () => {
         expect.arrayContaining(['normalize', 'rank', 'mirror-build', 'snapshot-finalize']),
       );
     });
-    expect((harness.bridge.resumeJob as ReturnType<typeof vi.fn>)).toHaveBeenCalled();
-    expect((harness.bridge.pauseJob as ReturnType<typeof vi.fn>)).toHaveBeenCalled();
-    expect((harness.bridge.startMirrorPreview as ReturnType<typeof vi.fn>)).toHaveBeenCalled();
-    expect((harness.bridge.stopMirrorPreview as ReturnType<typeof vi.fn>)).toHaveBeenCalled();
+    expect(harness.bridge.resumeJob as ReturnType<typeof vi.fn>).toHaveBeenCalled();
+    expect(harness.bridge.pauseJob as ReturnType<typeof vi.fn>).toHaveBeenCalled();
+    expect(harness.bridge.startMirrorPreview as ReturnType<typeof vi.fn>).toHaveBeenCalled();
+    expect(harness.bridge.stopMirrorPreview as ReturnType<typeof vi.fn>).toHaveBeenCalled();
 
     // Setup tab: snapshot edit, profile activate/delete, login + import forms.
     fireEvent.click(await screen.findByRole('tab', { name: 'Setup' }));
@@ -73,10 +73,14 @@ describe('dashboard interactions', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Import browser cookies' }));
 
     await waitFor(() => {
-      expect((harness.bridge.activateProfile as ReturnType<typeof vi.fn>)).toHaveBeenCalledWith('alpha');
-      expect((harness.bridge.deleteProfile as ReturnType<typeof vi.fn>)).toHaveBeenCalledWith('alpha');
-      expect((harness.bridge.loginProfile as ReturnType<typeof vi.fn>)).toHaveBeenCalled();
-      expect((harness.bridge.importBrowserProfile as ReturnType<typeof vi.fn>)).toHaveBeenCalled();
+      expect(harness.bridge.activateProfile as ReturnType<typeof vi.fn>).toHaveBeenCalledWith(
+        'alpha',
+      );
+      expect(harness.bridge.deleteProfile as ReturnType<typeof vi.fn>).toHaveBeenCalledWith(
+        'alpha',
+      );
+      expect(harness.bridge.loginProfile as ReturnType<typeof vi.fn>).toHaveBeenCalled();
+      expect(harness.bridge.importBrowserProfile as ReturnType<typeof vi.fn>).toHaveBeenCalled();
     });
 
     // Data tab: dataset switch, record selection, and folder/mirror openers.
@@ -85,13 +89,19 @@ describe('dashboard interactions', () => {
     fireEvent.click(await screen.findByRole('button', { name: 'Open mirror in browser' }));
     fireEvent.click((await screen.findAllByRole('listitem'))[0]!);
     fireEvent.click(await screen.findByRole('button', { name: 'Open selected record file' }));
-    fireEvent.click(await screen.findByRole('button', { name: 'Open record route in live mirror' }));
+    fireEvent.click(
+      await screen.findByRole('button', { name: 'Open record route in live mirror' }),
+    );
     fireEvent.click(await screen.findByRole('tab', { name: /Rankings/ }));
     await waitFor(() => {
-      expect((harness.bridge.listArchiveExplorerRecords as ReturnType<typeof vi.fn>).mock.calls.some(
-        (call) => call[0].dataset === 'rankings',
-      )).toBe(true);
-      expect((harness.bridge.getArchiveExplorerRecord as ReturnType<typeof vi.fn>)).toHaveBeenCalled();
+      expect(
+        (harness.bridge.listArchiveExplorerRecords as ReturnType<typeof vi.fn>).mock.calls.some(
+          (call) => call[0].dataset === 'rankings',
+        ),
+      ).toBe(true);
+      expect(
+        harness.bridge.getArchiveExplorerRecord as ReturnType<typeof vi.fn>,
+      ).toHaveBeenCalled();
     });
   });
 
@@ -188,10 +198,10 @@ describe('dashboard interactions', () => {
     }
 
     await waitFor(() => {
-      expect((harness.bridge.openPath as ReturnType<typeof vi.fn>)).toHaveBeenCalledWith(
+      expect(harness.bridge.openPath as ReturnType<typeof vi.fn>).toHaveBeenCalledWith(
         'C:/ws/rankings/problems/problem-3716.json',
       );
-      expect((harness.bridge.openExternal as ReturnType<typeof vi.fn>)).toHaveBeenCalled();
+      expect(harness.bridge.openExternal as ReturnType<typeof vi.fn>).toHaveBeenCalled();
     });
     expect((await screen.findAllByText(/cpp -> 102/)).length).toBeGreaterThanOrEqual(1);
   });
@@ -225,7 +235,9 @@ describe('dashboard interactions', () => {
     fireEvent.click((await screen.findAllByRole('button', { name: 'Open coverage detail' }))[0]!);
 
     await waitFor(() => {
-      expect((harness.bridge.setVerbosityMode as ReturnType<typeof vi.fn>)).toHaveBeenCalledWith('raw');
+      expect(harness.bridge.setVerbosityMode as ReturnType<typeof vi.fn>).toHaveBeenCalledWith(
+        'raw',
+      );
     });
   });
 
@@ -262,7 +274,9 @@ describe('dashboard interactions', () => {
       },
     ]);
     (harness.bridge.getCrawlStatus as ReturnType<typeof vi.fn>).mockRejectedValue(new Error('x'));
-    (harness.bridge.getCoverageSummary as ReturnType<typeof vi.fn>).mockRejectedValue(new Error('x'));
+    (harness.bridge.getCoverageSummary as ReturnType<typeof vi.fn>).mockRejectedValue(
+      new Error('x'),
+    );
     (harness.bridge.listCoverageRecords as ReturnType<typeof vi.fn>).mockResolvedValue({
       snapshotId: 's',
       totalCount: 0,
@@ -274,7 +288,9 @@ describe('dashboard interactions', () => {
     render(<App desktop={harness.bridge} />);
     await ready();
     expect(await screen.findByText(/Crawl status will appear here/)).toBeInTheDocument();
-    expect(await screen.findByText(/No problems match the current board focus/)).toBeInTheDocument();
+    expect(
+      await screen.findByText(/No problems match the current board focus/),
+    ).toBeInTheDocument();
 
     fireEvent.click(await screen.findByRole('tab', { name: 'Setup' }));
     expect((await screen.findAllByText('No active profile')).length).toBeGreaterThanOrEqual(1);
@@ -296,7 +312,9 @@ describe('dashboard interactions', () => {
     });
     (harness.bridge.listJobEvents as ReturnType<typeof vi.fn>).mockResolvedValue([]);
     (harness.bridge.listJobs as ReturnType<typeof vi.fn>).mockResolvedValue([]);
-    (harness.bridge.getArchiveExplorerSummary as ReturnType<typeof vi.fn>).mockRejectedValue(new Error('x'));
+    (harness.bridge.getArchiveExplorerSummary as ReturnType<typeof vi.fn>).mockRejectedValue(
+      new Error('x'),
+    );
     (harness.bridge.getWorkspaceState as ReturnType<typeof vi.fn>).mockResolvedValue({
       version: 1,
       workspaceRoot: 'C:/ws',
@@ -377,7 +395,9 @@ describe('dashboard interactions', () => {
 
   test('renders without a bridge when window has no desktop API', async () => {
     render(<App />);
-    expect(await screen.findByRole('heading', { name: 'Problem Archive Crawler' })).toBeInTheDocument();
+    expect(
+      await screen.findByRole('heading', { name: 'Problem Archive Crawler' }),
+    ).toBeInTheDocument();
     expect(await screen.findByRole('heading', { name: 'Choose a workspace' })).toBeInTheDocument();
   });
 
@@ -392,7 +412,7 @@ describe('dashboard interactions', () => {
     fireEvent.click(await screen.findByRole('button', { name: 'Select workspace' }));
 
     await waitFor(() => {
-      expect((harness.bridge.selectWorkspace as ReturnType<typeof vi.fn>)).toHaveBeenCalledWith(
+      expect(harness.bridge.selectWorkspace as ReturnType<typeof vi.fn>).toHaveBeenCalledWith(
         'C:/new-workspace',
       );
     });
@@ -434,7 +454,7 @@ describe('dashboard interactions', () => {
     fireEvent.click(await screen.findByRole('button', { name: /Start full crawl/i }));
     await waitFor(
       () => {
-        expect((harness.bridge.resumeJob as ReturnType<typeof vi.fn>)).toHaveBeenCalledWith(
+        expect(harness.bridge.resumeJob as ReturnType<typeof vi.fn>).toHaveBeenCalledWith(
           'crawl-loop',
           expect.objectContaining({ maxIterations: 25 }),
         );

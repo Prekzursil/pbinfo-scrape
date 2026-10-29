@@ -57,15 +57,18 @@ export async function startMirrorServer(
   });
 
   app.get('*route', (request, response) => {
-    /* v8 ignore next -- express always provides a non-empty originalUrl */
+    /* v8 ignore start -- express always provides a non-empty originalUrl */
     const routeKey = request.originalUrl === '' ? '/' : request.originalUrl;
+    /* v8 ignore stop */
     const match = routes.find((entry) => entry.route === routeKey || entry.route === request.path);
     if (!match) {
       response.status(404).send('route not found');
       return;
     }
 
-    const preferredPath = match.mirrorFile ? join(snapshot.mirrorRoot, match.mirrorFile) : undefined;
+    const preferredPath = match.mirrorFile
+      ? join(snapshot.mirrorRoot, match.mirrorFile)
+      : undefined;
     if (preferredPath && existsSync(preferredPath)) {
       response.sendFile(preferredPath);
       return;
@@ -76,9 +79,12 @@ export async function startMirrorServer(
       // Reflect only the trusted manifest route (match.route), never the raw
       // user-supplied URL, and force text/plain so the response can't be
       // interpreted as HTML (avoids reflected XSS).
-      response.status(500).type('text/plain').send(
-        `Archived source page is missing for route ${match.route}. Rebuild the mirror after relinking raw artifacts.`,
-      );
+      response
+        .status(500)
+        .type('text/plain')
+        .send(
+          `Archived source page is missing for route ${match.route}. Rebuild the mirror after relinking raw artifacts.`,
+        );
       return;
     }
 
@@ -91,10 +97,11 @@ export async function startMirrorServer(
   });
 
   const address = server.address();
-  /* v8 ignore next 3 -- a TCP server bound via listen() always reports an AddressInfo object */
+  /* v8 ignore start -- a TCP server bound via listen() always reports an AddressInfo object */
   if (!address || typeof address === 'string') {
     throw new Error('mirror server address is unavailable');
   }
+  /* v8 ignore stop */
 
   return {
     baseUrl: `http://127.0.0.1:${address.port}`,

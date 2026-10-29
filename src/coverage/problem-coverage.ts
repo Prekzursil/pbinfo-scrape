@@ -1,17 +1,8 @@
-import {
-  existsSync,
-  mkdirSync,
-  readdirSync,
-  readFileSync,
-  rmSync,
-} from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { writeJsonRecord } from '../archive/json-store.js';
-import {
-  resolveReadableSnapshotLayout,
-  type SnapshotLayout,
-} from '../archive/storage.js';
+import { resolveReadableSnapshotLayout, type SnapshotLayout } from '../archive/storage.js';
 import { loadLocalConfig } from '../config/local-config.js';
 import { parseProblemSourceListPage } from '../pbinfo/parsers/problem-source-list.js';
 import { buildProblemCoverageGapReport } from './coverage-gaps.js';
@@ -87,15 +78,11 @@ export async function buildProblemCoverageDatasetForSnapshot(
   const problemRecords = readJsonDirectory<ProblemRecord>(
     join(snapshot.normalizedRoot, 'problems'),
   );
-  const pageRecords = readJsonDirectory<PageRecord>(
-    join(snapshot.normalizedRoot, 'pages'),
-  );
+  const pageRecords = readJsonDirectory<PageRecord>(join(snapshot.normalizedRoot, 'pages'));
   const evaluationRecords = readJsonDirectory<EvaluationRecord>(
     join(snapshot.normalizedRoot, 'evaluations'),
   );
-  const sourceRecords = readJsonDirectory<SourceRecord>(
-    join(snapshot.normalizedRoot, 'sources'),
-  );
+  const sourceRecords = readJsonDirectory<SourceRecord>(join(snapshot.normalizedRoot, 'sources'));
   const testsRecords = readJsonDirectory<ProblemTestsRecord>(
     join(snapshot.normalizedRoot, 'tests'),
   );
@@ -144,18 +131,13 @@ export async function buildProblemCoverageDatasetForSnapshot(
         configuredUserHandle: options.configuredUserHandle,
         baseline: baselineCoverageByProblemId.get(problem.id),
         officialSourceHarvest:
-          problem.officialSourceHarvest
-          ?? officialSourceHarvestByProblemId.get(problem.id),
+          problem.officialSourceHarvest ?? officialSourceHarvestByProblemId.get(problem.id),
       }),
     )
     .sort((left, right) => left.problemId - right.problemId);
 
   for (const record of records) {
-    writeJsonRecord(
-      coverageRoot,
-      `problem-${record.problemId}.json`,
-      record,
-    );
+    writeJsonRecord(coverageRoot, `problem-${record.problemId}.json`, record);
   }
 
   const totals = summarizeCoverageRecords(records);
@@ -184,9 +166,7 @@ export async function buildProblemCoverageDatasetForSnapshot(
   };
 }
 
-export function readProblemCoverageIndex(
-  normalizedRoot: string,
-): ProblemCoverageIndex | undefined {
+export function readProblemCoverageIndex(normalizedRoot: string): ProblemCoverageIndex | undefined {
   return readJsonFile<ProblemCoverageIndex>(join(normalizedRoot, 'problem-coverage', 'index.json'));
 }
 
@@ -224,40 +204,33 @@ function buildCoverageRecord(
     solutionFragmentArchived: false,
     testsFragmentArchived: false,
   };
-  const officialSources = context.sources.filter(
-    (source) => source.kind === 'official',
-  );
+  const officialSources = context.sources.filter((source) => source.kind === 'official');
   const qualifyingOfficialSources = officialSources.filter(isCoverageSatisfyingOfficialSource);
   const harvestedOfficialEvaluationIds =
     context.officialSourceHarvest?.qualifyingEvaluationIds ?? [];
   const harvestedOfficialEvaluations = context.evaluations.filter((evaluation) =>
-    harvestedOfficialEvaluationIds.includes(evaluation.evaluationId)
+    harvestedOfficialEvaluationIds.includes(evaluation.evaluationId),
   );
   const userSources = context.sources.filter(
     (source) =>
-      source.kind === 'user-evaluation'
-      && source.sourceAvailable
-      && matchesConfiguredHandle(context.configuredUserHandle, source.userHandle),
+      source.kind === 'user-evaluation' &&
+      source.sourceAvailable &&
+      matchesConfiguredHandle(context.configuredUserHandle, source.userHandle),
   );
   const testsRecord = context.tests;
   const exampleTestsAvailableCount = testsRecord?.examples.length ?? problem.examples.length;
-  const visibleTestsCapturedCount = testsRecord?.visible.length ?? problem.visibleTests?.length ?? 0;
+  const visibleTestsCapturedCount =
+    testsRecord?.visible.length ?? problem.visibleTests?.length ?? 0;
   const evaluationObservedTestsCount = testsRecord?.evaluationObserved.length ?? 0;
-  const effectiveTestsAvailableCount = testsRecord?.effective?.length
-    ?? testsRecord?.examples?.length
-    ?? 0;
+  const effectiveTestsAvailableCount =
+    testsRecord?.effective?.length ?? testsRecord?.examples?.length ?? 0;
   const solvedEvaluationCount = context.evaluations.filter((evaluation) =>
-    context.solvedEvaluationIds.has(evaluation.evaluationId)
+    context.solvedEvaluationIds.has(evaluation.evaluationId),
   ).length;
   const officialSolutionPresent =
-    fragments.solutionFragmentArchived
-    || Object.keys(problem.officialSolutions ?? {}).length > 0;
-  const officialSourceIds = qualifyingOfficialSources
-    .map((source) => source.sourceId)
-    .sort();
-  const userSourceIds = userSources
-    .map((source) => source.sourceId)
-    .sort();
+    fragments.solutionFragmentArchived || Object.keys(problem.officialSolutions ?? {}).length > 0;
+  const officialSourceIds = qualifyingOfficialSources.map((source) => source.sourceId).sort();
+  const userSourceIds = userSources.map((source) => source.sourceId).sort();
   const officialSourceLanguages = uniqueSorted(
     qualifyingOfficialSources.map((source) => normalizeCoverageLanguage(source.language)),
   );
@@ -270,9 +243,10 @@ function buildCoverageRecord(
   );
   const requiredTrustworthyUserSourceLanguages = uniqueSorted(
     context.evaluations
-      .filter((evaluation) =>
-        matchesConfiguredHandle(context.configuredUserHandle, evaluation.user)
-        && isSolvedEvaluation(evaluation),
+      .filter(
+        (evaluation) =>
+          matchesConfiguredHandle(context.configuredUserHandle, evaluation.user) &&
+          isSolvedEvaluation(evaluation),
       )
       .map((evaluation) => normalizeCoverageLanguage(evaluation.language)),
   );
@@ -301,12 +275,12 @@ function buildCoverageRecord(
   const solvedByMe = context.solvedProblemIds.has(problem.id);
   const testsAvailable = testsCoverageStatus === 'captured';
   const notArchivedYet =
-    !fragments.statementArchived
-    && !fragments.solutionFragmentArchived
-    && !fragments.testsFragmentArchived
-    && qualifyingOfficialSources.length === 0
-    && userSources.length === 0
-    && context.evaluations.length === 0;
+    !fragments.statementArchived &&
+    !fragments.solutionFragmentArchived &&
+    !fragments.testsFragmentArchived &&
+    qualifyingOfficialSources.length === 0 &&
+    userSources.length === 0 &&
+    context.evaluations.length === 0;
   const archiveCompletenessStatus = deriveArchiveCompletenessStatus({
     solvedByMe,
     notArchivedYet,
@@ -357,9 +331,9 @@ function buildCoverageRecord(
     testsAvailable,
     unsolvedByConfiguredHandle: !solvedByMe,
     officialSourceBlocked:
-      qualifyingOfficialSources.length === 0
-      && officialSourceBlockedReason !== undefined
-      && officialSourceBlockedReason !== 'not-available-upstream',
+      qualifyingOfficialSources.length === 0 &&
+      officialSourceBlockedReason !== undefined &&
+      officialSourceBlockedReason !== 'not-available-upstream',
     officialSourceBlockedReason,
     notArchivedYet,
     newSinceBaseline: didCoverageImproveSinceBaseline(context.baseline, {
@@ -384,10 +358,14 @@ function buildCoverageRecord(
 function deriveCoverageNotes(record: ProblemCoverageRecord): string[] {
   const notes: string[] = [];
   if (record.solutionFragmentArchived && !record.officialSourceArchived) {
-    notes.push('Editorial/solution fragment archived, but official source code is not archived yet.');
+    notes.push(
+      'Editorial/solution fragment archived, but official source code is not archived yet.',
+    );
   }
   if (record.sourceListUrl && !record.officialSourceArchived) {
-    notes.push('Community source list exists upstream, but it is not counted as archived official source code.');
+    notes.push(
+      'Community source list exists upstream, but it is not counted as archived official source code.',
+    );
   }
   if (record.testsFragmentArchived && record.visibleTestsCapturedCount === 0) {
     notes.push('Tests fragment archived, no visible test cases parsed.');
@@ -419,17 +397,13 @@ function deriveCoverageNotes(record: ProblemCoverageRecord): string[] {
       `Missing trustworthy 100-point user source languages: ${record.missingTrustworthyUserSourceLanguages.join(', ')}.`,
     );
   }
-  if (
-    record.officialSourceStatus === 'not-available-upstream'
-    && !record.sourceListUrl
-  ) {
+  if (record.officialSourceStatus === 'not-available-upstream' && !record.sourceListUrl) {
     notes.push('PBInfo does not currently list an upstream official source page for this problem.');
   }
-  if (
-    record.officialSourceStatus === 'not-available-upstream'
-    && record.sourceListUrl
-  ) {
-    notes.push('Official source harvest completed, but PBInfo does not expose a qualifying 100-point official source body for this problem.');
+  if (record.officialSourceStatus === 'not-available-upstream' && record.sourceListUrl) {
+    notes.push(
+      'Official source harvest completed, but PBInfo does not expose a qualifying 100-point official source body for this problem.',
+    );
   }
   if (record.officialSourceStatus === 'restricted-upstream') {
     notes.push('PBInfo restricts official/editorial source access for this problem upstream.');
@@ -463,7 +437,9 @@ function buildOfficialSourceHarvestByProblemId(
       continue;
     }
 
-    const match = page.url.match(/^https:\/\/www\.pbinfo\.ro\/solutii\/user\/([^/?#]+)\/problema\/(\d+)\/([^/?#]+)/);
+    const match = page.url.match(
+      /^https:\/\/www\.pbinfo\.ro\/solutii\/user\/([^/?#]+)\/problema\/(\d+)\/([^/?#]+)/,
+    );
     if (!match?.[2]) {
       continue;
     }
@@ -489,10 +465,7 @@ function buildOfficialSourceHarvestByProblemId(
   return byProblemId;
 }
 
-function readArchivedPageBody(
-  snapshot: SnapshotLayout,
-  page: PageRecord,
-): string | undefined {
+function readArchivedPageBody(snapshot: SnapshotLayout, page: PageRecord): string | undefined {
   const candidate = page.browserBodyPath ?? page.bodyPath;
   if (!candidate) {
     return undefined;
@@ -511,14 +484,13 @@ function readArchivedPageBody(
   }
 }
 
-function summarizeCoverageRecords(
-  records: ProblemCoverageRecord[],
-): ProblemCoverageTotals {
+function summarizeCoverageRecords(records: ProblemCoverageRecord[]): ProblemCoverageTotals {
   return {
     totalProblems: records.length,
     solvedByMeCount: records.filter((record) => record.solvedByMe).length,
     statementArchivedCount: records.filter((record) => record.statementArchived).length,
-    solutionFragmentArchivedCount: records.filter((record) => record.solutionFragmentArchived).length,
+    solutionFragmentArchivedCount: records.filter((record) => record.solutionFragmentArchived)
+      .length,
     testsFragmentArchivedCount: records.filter((record) => record.testsFragmentArchived).length,
     problemsWithExamples: records.filter((record) => record.exampleTestsAvailableCount > 0).length,
     problemsWithVisibleTestsCaptured: records.filter(
@@ -527,17 +499,14 @@ function summarizeCoverageRecords(
     problemsWithEvaluationObservedTests: records.filter(
       (record) => record.evaluationObservedTestsCount > 0,
     ).length,
-    problemsWithEffectiveTests: records.filter(
-      (record) => record.effectiveTestsAvailableCount > 0,
-    ).length,
+    problemsWithEffectiveTests: records.filter((record) => record.effectiveTestsAvailableCount > 0)
+      .length,
     problemsWithArchivedSources: records.filter((record) => record.hasAnyArchivedSource).length,
-    problemsWithOfficialSourceArchived: records.filter(
-      (record) => record.officialSourceArchived,
-    ).length,
+    problemsWithOfficialSourceArchived: records.filter((record) => record.officialSourceArchived)
+      .length,
     problemsWithUserSourceArchived: records.filter((record) => record.userSourceArchived).length,
-    editorialVisibleCount: records.filter(
-      (record) => record.editorialAvailability === 'visible',
-    ).length,
+    editorialVisibleCount: records.filter((record) => record.editorialAvailability === 'visible')
+      .length,
     rankingPresentCount: records.filter((record) => record.rankingPresent).length,
     newSinceBaselineCount: records.filter((record) => record.newSinceBaseline).length,
   };
@@ -599,8 +568,8 @@ function deriveSolvedProblemSets(
 
   for (const evaluation of evaluations) {
     if (
-      matchesConfiguredHandle(configuredUserHandle, evaluation.user)
-      && isSolvedEvaluation(evaluation)
+      matchesConfiguredHandle(configuredUserHandle, evaluation.user) &&
+      isSolvedEvaluation(evaluation)
     ) {
       problemIds.add(evaluation.problemId);
       evaluationIds.add(evaluation.evaluationId);
@@ -618,11 +587,13 @@ function isSolvedEvaluation(evaluation: EvaluationRecord): boolean {
 }
 
 function isCoverageSatisfyingOfficialSource(source: SourceRecord): boolean {
-  return source.kind === 'official'
-    && source.sourceAvailable
-    && typeof source.score === 'number'
-    && source.score >= 100
-    && source.provenanceType !== 'official-fragment';
+  return (
+    source.kind === 'official' &&
+    source.sourceAvailable &&
+    typeof source.score === 'number' &&
+    source.score >= 100 &&
+    source.provenanceType !== 'official-fragment'
+  );
 }
 
 function deriveTestsCoverageStatus(input: {
@@ -633,10 +604,10 @@ function deriveTestsCoverageStatus(input: {
   effectiveTestsAvailableCount: number;
 }): ProblemTestsCoverageStatus {
   if (
-    input.effectiveTestsAvailableCount > 0
-    || input.exampleTestsAvailableCount > 0
-    || input.visibleTestsCapturedCount > 0
-    || input.evaluationObservedTestsCount > 0
+    input.effectiveTestsAvailableCount > 0 ||
+    input.exampleTestsAvailableCount > 0 ||
+    input.visibleTestsCapturedCount > 0 ||
+    input.evaluationObservedTestsCount > 0
   ) {
     return 'captured';
   }
@@ -657,7 +628,10 @@ function deriveOfficialSourceStatus(
   if (qualifyingOfficialSources.length > 0) {
     return 'archived';
   }
-  if (problem.editorialAvailability === 'hidden' || problem.editorialAvailability === 'restricted') {
+  if (
+    problem.editorialAvailability === 'hidden' ||
+    problem.editorialAvailability === 'restricted'
+  ) {
     return 'restricted-upstream';
   }
   if (officialSourceHarvest?.sourceListHarvested) {
@@ -666,8 +640,8 @@ function deriveOfficialSourceStatus(
       return 'not-available-upstream';
     }
     if (
-      harvestedOfficialEvaluations.length === candidateEvaluationIds.length
-      && harvestedOfficialEvaluations.every((evaluation) => !evaluation.sourceAvailable)
+      harvestedOfficialEvaluations.length === candidateEvaluationIds.length &&
+      harvestedOfficialEvaluations.every((evaluation) => !evaluation.sourceAvailable)
     ) {
       return 'not-available-upstream';
     }
@@ -720,10 +694,7 @@ function deriveArchiveCompletenessStatus(input: {
   if (!input.solvedByMe) {
     return 'unsolved';
   }
-  if (
-    input.missingTrustworthyUserSourceLanguages.length > 0
-    || !input.userSourceArchived
-  ) {
+  if (input.missingTrustworthyUserSourceLanguages.length > 0 || !input.userSourceArchived) {
     return 'missing-user-source';
   }
   if (input.officialSourceStatus === 'not-captured-yet') {
@@ -748,29 +719,34 @@ function didCoverageImproveSinceBaseline(
   },
 ): boolean {
   if (!baseline) {
-    return current.effectiveTestsAvailableCount > 0
-      || current.visibleTestsCapturedCount > 0
-      || current.evaluationObservedTestsCount > 0
-      || current.officialSourceCount > 0
-      || current.userSourceCount > 0
-      || current.trustworthyUserSourceLanguages.length > 0
-      || current.solvedByMe;
+    return (
+      current.effectiveTestsAvailableCount > 0 ||
+      current.visibleTestsCapturedCount > 0 ||
+      current.evaluationObservedTestsCount > 0 ||
+      current.officialSourceCount > 0 ||
+      current.userSourceCount > 0 ||
+      current.trustworthyUserSourceLanguages.length > 0 ||
+      current.solvedByMe
+    );
   }
 
-  const baselineEffectiveTests = baseline.effectiveTestsAvailableCount ?? baseline.visibleTestsCapturedCount ?? 0;
+  const baselineEffectiveTests =
+    baseline.effectiveTestsAvailableCount ?? baseline.visibleTestsCapturedCount ?? 0;
   const baselineVisibleTests = baseline.visibleTestsCapturedCount ?? 0;
   const baselineEvaluationObserved = baseline.evaluationObservedTestsCount ?? 0;
   const baselineOfficialSourceCount = baseline.officialSourceCount ?? 0;
   const baselineUserSourceCount = baseline.userSourceCount ?? 0;
   const baselineTrustworthyLanguages = baseline.trustworthyUserSourceLanguages ?? [];
 
-  return current.effectiveTestsAvailableCount > baselineEffectiveTests
-    || current.visibleTestsCapturedCount > baselineVisibleTests
-    || current.evaluationObservedTestsCount > baselineEvaluationObserved
-    || current.officialSourceCount > baselineOfficialSourceCount
-    || current.userSourceCount > baselineUserSourceCount
-    || current.trustworthyUserSourceLanguages.length > baselineTrustworthyLanguages.length
-    || (current.solvedByMe && !baseline.solvedByMe);
+  return (
+    current.effectiveTestsAvailableCount > baselineEffectiveTests ||
+    current.visibleTestsCapturedCount > baselineVisibleTests ||
+    current.evaluationObservedTestsCount > baselineEvaluationObserved ||
+    current.officialSourceCount > baselineOfficialSourceCount ||
+    current.userSourceCount > baselineUserSourceCount ||
+    current.trustworthyUserSourceLanguages.length > baselineTrustworthyLanguages.length ||
+    (current.solvedByMe && !baseline.solvedByMe)
+  );
 }
 
 function normalizeCoverageLanguage(language: string | undefined): string {
@@ -778,8 +754,9 @@ function normalizeCoverageLanguage(language: string | undefined): string {
 }
 
 function uniqueSorted(values: Array<string | undefined>): string[] {
-  return [...new Set(values.filter((value): value is string => Boolean(value && value.trim())))]
-    .sort((left, right) => left.localeCompare(right));
+  return [
+    ...new Set(values.filter((value): value is string => Boolean(value && value.trim()))),
+  ].sort((left, right) => left.localeCompare(right));
 }
 
 function matchesConfiguredHandle(
@@ -796,15 +773,18 @@ function matchesConfiguredHandle(
   const normalizedConfigured = configuredUserHandle.trim().toLowerCase();
   const normalizedCandidate = candidate.trim().toLowerCase();
   return (
-    normalizedCandidate === normalizedConfigured
-    || normalizedCandidate.includes(`(${normalizedConfigured})`)
-    || normalizedCandidate.includes(` ${normalizedConfigured}`)
+    normalizedCandidate === normalizedConfigured ||
+    normalizedCandidate.includes(`(${normalizedConfigured})`) ||
+    normalizedCandidate.includes(` ${normalizedConfigured}`)
   );
 }
 
 function buildProblemFragmentPresence(
   pages: PageRecord[],
-): Map<number, { statementArchived: boolean; solutionFragmentArchived: boolean; testsFragmentArchived: boolean }> {
+): Map<
+  number,
+  { statementArchived: boolean; solutionFragmentArchived: boolean; testsFragmentArchived: boolean }
+> {
   const byProblemId = new Map<
     number,
     {
@@ -842,9 +822,9 @@ function buildProblemFragmentPresence(
 function extractProblemIdFromPage(page: PageRecord): number | undefined {
   const url = new URL(page.url);
   if (
-    page.kind === 'problem-statement'
-    || page.kind === 'problem-solution'
-    || page.kind === 'problem-tests'
+    page.kind === 'problem-statement' ||
+    page.kind === 'problem-solution' ||
+    page.kind === 'problem-tests'
   ) {
     const id = url.searchParams.get('id');
     return id ? Number(id) : undefined;

@@ -104,7 +104,10 @@ describe('evaluation parser edge cases', () => {
   });
 
   test('treats a blank textarea as no source code', () => {
-    const parsed = parseEvaluationPage(buildEval('<tr><th>Punctaj</th><td>5</td></tr>', '<textarea>   </textarea>'), 10);
+    const parsed = parseEvaluationPage(
+      buildEval('<tr><th>Punctaj</th><td>5</td></tr>', '<textarea>   </textarea>'),
+      10,
+    );
     expect(parsed.sourceAvailable).toBe(false);
     expect(parsed.sourceCode).toBeUndefined();
   });

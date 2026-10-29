@@ -36,8 +36,9 @@ export async function buildMirrorArtifacts(
   await buildProblemCoverageDataset(workspaceRoot, snapshot.snapshotId);
   const coverageIndex = readProblemCoverageIndex(snapshot.normalizedRoot);
   const coverageByProblemId = new Map<number, ProblemCoverageRecord>(
-    /* v8 ignore next -- buildProblemCoverageDataset always writes an index above */
+    /* v8 ignore start -- buildProblemCoverageDataset always writes an index above */
     (coverageIndex?.records ?? []).map((record) => [record.problemId, record]),
+    /* v8 ignore stop */
   );
 
   const rebuiltManifests = rebuildRawManifests(snapshot.normalizedRoot);
@@ -67,10 +68,11 @@ export async function buildMirrorArtifacts(
       continue;
     }
 
-    /* v8 ignore next 3 -- buildRoutes guarantees a sourceFile for every non-coverage route */
+    /* v8 ignore start -- buildRoutes guarantees a sourceFile for every non-coverage route */
     if (!route.sourceFile) {
       throw new Error(`Mirror route ${route.route} is missing a source file.`);
     }
+    /* v8 ignore stop */
 
     const sourcePath = join(snapshot.rawPagesRoot, route.sourceFile);
     if (!existsSync(sourcePath)) {
@@ -166,13 +168,14 @@ export function rewriteMirrorHtml(
   });
 
   $('script:not([src])').each((_, element) => {
-    /* v8 ignore next -- cheerio .html() on an existing element returns a string */
+    /* v8 ignore start -- cheerio .html() on an existing element returns a string */
     const content = $(element).html() ?? '';
+    /* v8 ignore stop */
     if (
-      content.includes('challenge-platform')
-      || content.includes('__CF$cv$params')
-      || content.includes('window.dataLayer')
-      || content.includes('gtag(')
+      content.includes('challenge-platform') ||
+      content.includes('__CF$cv$params') ||
+      content.includes('window.dataLayer') ||
+      content.includes('gtag(')
     ) {
       $(element).remove();
     }
@@ -201,7 +204,9 @@ export function rewriteMirrorHtml(
     }
   });
 
-  $('script[src*="googletagmanager"], script[src*="ads"], ins.adsbygoogle, .adsbygoogle, iframe').remove();
+  $(
+    'script[src*="googletagmanager"], script[src*="ads"], ins.adsbygoogle, .adsbygoogle, iframe',
+  ).remove();
   $('form[action*="login"], form[action*="logout"]').removeAttr('action');
   $('body').attr('data-archived-source', sourceUrl);
   if (coverageRecord) {
@@ -248,12 +253,12 @@ export function safeResolve(base: URL, candidate?: string): URL | undefined {
   // (CodeQL js/incomplete-url-scheme-check).
   const loweredCandidate = candidate?.trim().toLowerCase();
   if (
-    !candidate
-    || !loweredCandidate
-    || loweredCandidate.startsWith('javascript:')
-    || loweredCandidate.startsWith('vbscript:')
-    || loweredCandidate.startsWith('data:')
-    || loweredCandidate.startsWith('#')
+    !candidate ||
+    !loweredCandidate ||
+    loweredCandidate.startsWith('javascript:') ||
+    loweredCandidate.startsWith('vbscript:') ||
+    loweredCandidate.startsWith('data:') ||
+    loweredCandidate.startsWith('#')
   ) {
     return undefined;
   }
@@ -277,9 +282,10 @@ export function readRouteRecords(root: string): MirrorRouteRecord[] {
   }
 }
 
-export function rebuildRawManifests(
-  normalizedRoot: string,
-): { pageManifest: Record<string, string>; assetManifest: Record<string, string> } {
+export function rebuildRawManifests(normalizedRoot: string): {
+  pageManifest: Record<string, string>;
+  assetManifest: Record<string, string>;
+} {
   const manifests = {
     pageManifest: {} as Record<string, string>,
     assetManifest: {} as Record<string, string>,
@@ -312,7 +318,10 @@ export function rebuildRawManifests(
   return manifests;
 }
 
-export function findSourceUrl(manifest: Record<string, string>, sourceFile: string): string | undefined {
+export function findSourceUrl(
+  manifest: Record<string, string>,
+  sourceFile: string,
+): string | undefined {
   return Object.entries(manifest).find(([, fileName]) => fileName === sourceFile)?.[0];
 }
 
@@ -330,8 +339,9 @@ export function routeToMirrorFile(route: string): string {
   }
 
   const [pathname, search] = route.split('?');
-  /* v8 ignore next -- split('?') always yields a defined first segment */
+  /* v8 ignore start -- split('?') always yields a defined first segment */
   const segments = (pathname ?? '/')
+    /* v8 ignore stop */
     .split('/')
     .filter(Boolean)
     .map((segment) => segment.replace(/[^a-zA-Z0-9_-]/g, '-'));
@@ -370,8 +380,9 @@ export function inferEntityKey(url: string): string {
     return `user:${userMatch[1]}`;
   }
 
-  /* v8 ignore next -- a parsed URL always exposes a non-empty pathname */
+  /* v8 ignore start -- a parsed URL always exposes a non-empty pathname */
   return parsed.pathname || '/';
+  /* v8 ignore stop */
 }
 
 function renderMirrorIndex(routes: MirrorRouteEntry[]): string {
@@ -414,12 +425,15 @@ export function renderCoverageIndex(
   coverageIndex: ProblemCoverageIndex | undefined,
 ): string {
   const records = coverageIndex?.records ?? [];
-  const grades = [...new Set(records.map((record) => record.grade).filter((grade): grade is number => typeof grade === 'number'))]
-    .sort((left, right) => left - right);
+  const grades = [
+    ...new Set(
+      records
+        .map((record) => record.grade)
+        .filter((grade): grade is number => typeof grade === 'number'),
+    ),
+  ].sort((left, right) => left - right);
   const payload = JSON.stringify(records);
-  const initialRows = records
-    .map((record) => renderCoverageRow(record))
-    .join('\n');
+  const initialRows = records.map((record) => renderCoverageRow(record)).join('\n');
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -656,9 +670,10 @@ function injectProblemCoverageStrip(
       .archive-coverage-strip .archive-coverage-note{margin-top:.55rem;font-size:.9rem;color:#6f655a}
     </style>`);
   }
-  const noteText = record.notes.length > 0
-    ? `<p class="archive-coverage-note">${escapeHtml(record.notes.join(' • '))}</p>`
-    : '';
+  const noteText =
+    record.notes.length > 0
+      ? `<p class="archive-coverage-note">${escapeHtml(record.notes.join(' • '))}</p>`
+      : '';
   const strip = `<section class="archive-coverage-strip" data-problem-id="${record.problemId}">
     <h2>Archive coverage</h2>
     <div class="archive-coverage-badges">

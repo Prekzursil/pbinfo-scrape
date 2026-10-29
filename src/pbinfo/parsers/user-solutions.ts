@@ -26,8 +26,9 @@ export function parseUserSolutionsListPage(
   const totalMatchesText = normalizeWhitespace($('.bold.mb-3').first().text());
   const totalMatches = parseNumber(totalMatchesText);
   const fullText = normalizeWhitespace($.root().text()).toLowerCase();
-  const throttled = fullText.includes('resursă indisponibilă temporar')
-    || fullText.includes('resursa indisponibila temporar');
+  const throttled =
+    fullText.includes('resursă indisponibilă temporar') ||
+    fullText.includes('resursa indisponibila temporar');
   const entriesFromRows = extractEntriesFromRows($);
   const entries =
     entriesFromRows.length > 0 ? entriesFromRows : extractEntriesFromAnchorTriplets($);
@@ -44,9 +45,7 @@ export function parseUserSolutionsListPage(
   };
 }
 
-function extractEntriesFromRows(
-  $: ReturnType<typeof loadHtml>,
-): UserSolutionListEntry[] {
+function extractEntriesFromRows($: ReturnType<typeof loadHtml>): UserSolutionListEntry[] {
   const entries: UserSolutionListEntry[] = [];
   const seen = new Set<number>();
 
@@ -84,9 +83,7 @@ function extractEntriesFromRows(
   return entries;
 }
 
-function extractEntriesFromAnchorTriplets(
-  $: ReturnType<typeof loadHtml>,
-): UserSolutionListEntry[] {
+function extractEntriesFromAnchorTriplets($: ReturnType<typeof loadHtml>): UserSolutionListEntry[] {
   const anchors = $('a').toArray();
   const entries: UserSolutionListEntry[] = [];
   const seen = new Set<number>();
@@ -124,19 +121,13 @@ function extractEntriesFromAnchorTriplets(
   return entries;
 }
 
-function normalizeUserHandle(
-  profileHandle: string,
-  profileText: string,
-): string {
+function normalizeUserHandle(profileHandle: string, profileText: string): string {
   const normalizedText = normalizeWhitespace(profileText);
   const textHandle = normalizedText.match(/\(([^)]+)\)\s*$/)?.[1];
   return normalizeWhitespace(textHandle ?? profileHandle);
 }
 
-function extractRowScore(
-  $: ReturnType<typeof loadHtml>,
-  row: any,
-): number | undefined {
+function extractRowScore($: ReturnType<typeof loadHtml>, row: any): number | undefined {
   const cells = $(row).find('td');
   if (cells.length === 0) {
     return undefined;
@@ -152,11 +143,13 @@ function parsePaginationMetadata(
   html: string,
   pageUrl: string | undefined,
   totalMatches: number | undefined,
-): {
-  pageSize: number;
-  currentOffset: number;
-  nextPageUrls: string[];
-} | undefined {
+):
+  | {
+      pageSize: number;
+      currentOffset: number;
+      nextPageUrls: string[];
+    }
+  | undefined {
   const explicitPaginationUrls = extractExplicitPaginationUrls($, pageUrl);
   if (explicitPaginationUrls.length > 0) {
     return {
@@ -175,10 +168,10 @@ function parsePaginationMetadata(
   const currentOffset = Number(paginationMatch[2]);
   const pageSize = Number(paginationMatch[3]);
   if (
-    !Number.isFinite(inferredTotal)
-    || !Number.isFinite(currentOffset)
-    || !Number.isFinite(pageSize)
-    || pageSize <= 0
+    !Number.isFinite(inferredTotal) ||
+    !Number.isFinite(currentOffset) ||
+    !Number.isFinite(pageSize) ||
+    pageSize <= 0
   ) {
     return undefined;
   }
@@ -188,11 +181,7 @@ function parsePaginationMetadata(
   if (pageUrl) {
     const base = new URL(pageUrl);
     const nextBase = new URL(base.toString());
-    for (
-      let offset = currentOffset + pageSize;
-      offset < resolvedTotal;
-      offset += pageSize
-    ) {
+    for (let offset = currentOffset + pageSize; offset < resolvedTotal; offset += pageSize) {
       nextBase.searchParams.set('start', String(offset));
       nextPageUrls.push(nextBase.toString());
     }
@@ -219,10 +208,11 @@ function extractExplicitPaginationUrls(
 
   $('.pagination a[href], a[href*="start="]').each((_, link) => {
     const href = $(link).attr('href');
-    /* v8 ignore next 3 -- the a[href]/a[href*=...] selectors guarantee attr('href') is present */
+    /* v8 ignore start -- the a[href]/a[href*=...] selectors guarantee attr('href') is present */
     if (!href) {
       return;
     }
+    /* v8 ignore stop */
 
     const resolved = new URL(href, base);
     if (resolved.origin !== base.origin || resolved.pathname !== base.pathname) {
@@ -241,10 +231,11 @@ function extractExplicitPaginationUrls(
 }
 
 function extractCurrentOffset(pageUrl: string | undefined): number {
-  /* v8 ignore next 3 -- only ever called with a defined pageUrl (callers guard first) */
+  /* v8 ignore start -- only ever called with a defined pageUrl (callers guard first) */
   if (!pageUrl) {
     return 0;
   }
+  /* v8 ignore stop */
 
   const value = Number(new URL(pageUrl).searchParams.get('start') ?? '0');
   return Number.isFinite(value) && value >= 0 ? value : 0;

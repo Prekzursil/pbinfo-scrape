@@ -183,13 +183,14 @@ describe('crawl retry hardening', () => {
 
   test('crawl status surfaces the failed counter and failed items as recent failures', () => {
     const workspace = createWorkspace();
-    const queuePath = buildQueuePath(
-      join(workspace.root, '.local'),
-      workspace.snapshot.snapshotId,
-    );
+    const queuePath = buildQueuePath(join(workspace.root, '.local'), workspace.snapshot.snapshotId);
     const queue = new CrawlQueue(queuePath);
     queue.enqueueMany([
-      { key: 'page:https://www.pbinfo.ro/probleme', url: 'https://www.pbinfo.ro/probleme', kind: 'public-page' },
+      {
+        key: 'page:https://www.pbinfo.ro/probleme',
+        url: 'https://www.pbinfo.ro/probleme',
+        kind: 'public-page',
+      },
     ]);
 
     const claimed = queue.claimNext(new Date('2026-03-10T00:00:00.000Z'));

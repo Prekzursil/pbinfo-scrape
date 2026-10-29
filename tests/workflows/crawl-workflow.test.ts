@@ -215,9 +215,9 @@ describe('runCrawlWorkflow', () => {
     expect(readFileSync(join(rawSnapshotRoot, 'page-http-127-0-0-1-root.html'), 'utf8')).toContain(
       '<a href="/probleme">Probleme</a>',
     );
-    expect(readFileSync(join(rawSnapshotRoot, 'page-http-127-0-0-1-probleme.html'), 'utf8')).toContain(
-      '<h1>Probleme</h1>',
-    );
+    expect(
+      readFileSync(join(rawSnapshotRoot, 'page-http-127-0-0-1-probleme.html'), 'utf8'),
+    ).toContain('<h1>Probleme</h1>');
     expect(
       readFileSync(
         join(
@@ -230,12 +230,12 @@ describe('runCrawlWorkflow', () => {
         ),
         'utf8',
       ),
-    ).toContain(
-      'body { color: red; }',
-    );
+    ).toContain('body { color: red; }');
   });
 
-  test('uses persisted session cookies when crawling authenticated pages', { timeout: 20_000 }, async () => {
+  test('uses persisted session cookies when crawling authenticated pages', {
+    timeout: 20_000,
+  }, async () => {
     const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-workflow-auth-'));
     tempDirs.push(workspaceRoot);
     mkdirSync(join(workspaceRoot, '.local'), { recursive: true });
@@ -718,11 +718,7 @@ describe('runCrawlWorkflow', () => {
       ),
       'utf8',
     );
-    writeFileSync(
-      join(snapshotRoot, 'problem-2.json'),
-      JSON.stringify({ id: 2 }, null, 2),
-      'utf8',
-    );
+    writeFileSync(join(snapshotRoot, 'problem-2.json'), JSON.stringify({ id: 2 }, null, 2), 'utf8');
     writeFileSync(
       join(workspaceRoot, 'archive', 'catalog.json'),
       JSON.stringify(
@@ -782,7 +778,9 @@ describe('runCrawlWorkflow', () => {
   });
 
   test('falls back to the public source-list URL when no official author handle is available', async () => {
-    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-workflow-official-source-public-fallback-'));
+    const workspaceRoot = mkdtempSync(
+      join(tmpdir(), 'pbinfo-workflow-official-source-public-fallback-'),
+    );
     tempDirs.push(workspaceRoot);
     mkdirSync(join(workspaceRoot, '.local'), { recursive: true });
 
@@ -889,7 +887,9 @@ describe('runCrawlWorkflow', () => {
   });
 
   test('fails targeted official-source harvest when auth preflight reports a guest session', async () => {
-    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-workflow-official-source-auth-guest-'));
+    const workspaceRoot = mkdtempSync(
+      join(tmpdir(), 'pbinfo-workflow-official-source-auth-guest-'),
+    );
     tempDirs.push(workspaceRoot);
     mkdirSync(join(workspaceRoot, '.local'), { recursive: true });
 
@@ -1254,9 +1254,7 @@ describe('runCrawlWorkflow', () => {
         maxActiveRequests = Math.max(maxActiveRequests, activeRequests);
         setTimeout(() => {
           response.setHeader('Content-Type', 'text/html');
-          response.end(
-            `<html><body><a href="${request.url}/child">child</a></body></html>`,
-          );
+          response.end(`<html><body><a href="${request.url}/child">child</a></body></html>`);
           activeRequests -= 1;
         }, 500);
         return;

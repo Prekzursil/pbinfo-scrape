@@ -15,8 +15,12 @@ const ready = () => screen.findByRole('heading', { name: 'Problem Archive Crawle
 describe('App edge and error paths', () => {
   test('surfaces detail-fetch failures from coverage and archive records', async () => {
     const harness = createBridgeHarness();
-    (harness.bridge.getCoverageRecord as ReturnType<typeof vi.fn>).mockRejectedValue(new Error('coverage detail failed'));
-    (harness.bridge.getArchiveExplorerRecord as ReturnType<typeof vi.fn>).mockRejectedValue(new Error('archive detail failed'));
+    (harness.bridge.getCoverageRecord as ReturnType<typeof vi.fn>).mockRejectedValue(
+      new Error('coverage detail failed'),
+    );
+    (harness.bridge.getArchiveExplorerRecord as ReturnType<typeof vi.fn>).mockRejectedValue(
+      new Error('archive detail failed'),
+    );
     render(<App desktop={harness.bridge} />);
     await ready();
     expect((await screen.findAllByText(/detail failed/)).length).toBeGreaterThanOrEqual(1);
@@ -24,7 +28,9 @@ describe('App edge and error paths', () => {
 
   test('surfaces a refresh failure when the job list cannot be read', async () => {
     const harness = createBridgeHarness();
-    (harness.bridge.listJobs as ReturnType<typeof vi.fn>).mockRejectedValue(new Error('jobs unavailable'));
+    (harness.bridge.listJobs as ReturnType<typeof vi.fn>).mockRejectedValue(
+      new Error('jobs unavailable'),
+    );
     render(<App desktop={harness.bridge} />);
     // The refresh effect throws before workspace state is set, so the shell stays on the loading view.
     expect(await screen.findByText(/Loading desktop state/)).toBeInTheDocument();
@@ -41,7 +47,9 @@ describe('App edge and error paths', () => {
 
   test('reports a verbosity persistence failure', async () => {
     const harness = createBridgeHarness();
-    (harness.bridge.setVerbosityMode as ReturnType<typeof vi.fn>).mockRejectedValue(new Error('verbosity save failed'));
+    (harness.bridge.setVerbosityMode as ReturnType<typeof vi.fn>).mockRejectedValue(
+      new Error('verbosity save failed'),
+    );
     render(<App desktop={harness.bridge} />);
     await ready();
     fireEvent.click(await screen.findByRole('button', { name: 'Verbose' }));
@@ -66,8 +74,8 @@ describe('App edge and error paths', () => {
     fireEvent.click(await screen.findByRole('button', { name: /Start full crawl/i }));
     fireEvent.click(await screen.findByRole('button', { name: /Resume crawl/ }));
     await waitFor(() => {
-      expect((harness.bridge.resumeJob as ReturnType<typeof vi.fn>)).toHaveBeenCalled();
-      expect((harness.startJob as ReturnType<typeof vi.fn>)).toHaveBeenCalled();
+      expect(harness.bridge.resumeJob as ReturnType<typeof vi.fn>).toHaveBeenCalled();
+      expect(harness.startJob as ReturnType<typeof vi.fn>).toHaveBeenCalled();
     });
   });
 
@@ -132,7 +140,7 @@ describe('App edge and error paths', () => {
     await ready();
     fireEvent.click(await screen.findByRole('button', { name: /Start full crawl/i }));
     await waitFor(() => {
-      expect((harness.startJob as ReturnType<typeof vi.fn>)).toHaveBeenCalled();
+      expect(harness.startJob as ReturnType<typeof vi.fn>).toHaveBeenCalled();
     });
   });
 
@@ -154,7 +162,7 @@ describe('App edge and error paths', () => {
     await ready();
     fireEvent.click(await screen.findByRole('button', { name: /Start full crawl/i }));
     await waitFor(() => {
-      expect((harness.startJob as ReturnType<typeof vi.fn>)).toHaveBeenCalled();
+      expect(harness.startJob as ReturnType<typeof vi.fn>).toHaveBeenCalled();
     });
   });
 
@@ -181,7 +189,7 @@ describe('App edge and error paths', () => {
     fireEvent.click(await screen.findByRole('button', { name: /Start full crawl/i }));
     await waitFor(
       () => {
-        expect((harness.bridge.resumeJob as ReturnType<typeof vi.fn>)).toHaveBeenCalled();
+        expect(harness.bridge.resumeJob as ReturnType<typeof vi.fn>).toHaveBeenCalled();
       },
       { timeout: 4000 },
     );
@@ -226,7 +234,9 @@ describe('App edge and error paths', () => {
     };
     (harness.startJob as ReturnType<typeof vi.fn>).mockResolvedValue(pausedJob);
     (harness.bridge.listJobs as ReturnType<typeof vi.fn>).mockResolvedValue([pausedJob]);
-    (harness.bridge.resumeJob as ReturnType<typeof vi.fn>).mockRejectedValue(new Error('loop resume failed'));
+    (harness.bridge.resumeJob as ReturnType<typeof vi.fn>).mockRejectedValue(
+      new Error('loop resume failed'),
+    );
     render(<App desktop={harness.bridge} />);
     await ready();
     fireEvent.click(await screen.findByRole('button', { name: /Start full crawl/i }));

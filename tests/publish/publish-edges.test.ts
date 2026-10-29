@@ -4,7 +4,11 @@ import { tmpdir } from 'node:os';
 
 import { afterEach, describe, expect, test } from 'vitest';
 
-import { exportRawArtifacts, prepareSnapshot, writeArchiveCatalog } from '../../src/archive/storage.js';
+import {
+  exportRawArtifacts,
+  prepareSnapshot,
+  writeArchiveCatalog,
+} from '../../src/archive/storage.js';
 import { loadLocalConfig, type LoadedLocalConfig } from '../../src/config/local-config.js';
 import { CrawlQueue } from '../../src/crawl/crawl-queue.js';
 import {
@@ -27,11 +31,21 @@ afterEach(() => {
 });
 
 const ALLOWLIST_FILES = [
-  '.gitignore', 'README.md', 'SECURITY.md', 'electron-builder.json', 'package.json',
-  'package-lock.json', 'tsconfig.json', 'tsconfig.desktop.json', 'vite.desktop.config.ts', 'vitest.config.ts',
+  '.gitignore',
+  'README.md',
+  'SECURITY.md',
+  'electron-builder.json',
+  'package.json',
+  'package-lock.json',
+  'tsconfig.json',
+  'tsconfig.desktop.json',
+  'vite.desktop.config.ts',
+  'vitest.config.ts',
 ];
 
-function buildPublishable(options: { snapshotId?: string; status?: 'completed' | 'in_progress'; snapshots?: number } = {}): {
+function buildPublishable(
+  options: { snapshotId?: string; status?: 'completed' | 'in_progress'; snapshots?: number } = {},
+): {
   workspaceRoot: string;
   config: LoadedLocalConfig;
   snapshotId: string;
@@ -39,7 +53,11 @@ function buildPublishable(options: { snapshotId?: string; status?: 'completed' |
   const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-publish-edges-'));
   tempDirs.push(workspaceRoot);
   for (const file of ALLOWLIST_FILES) {
-    writeFileSync(join(workspaceRoot, file), file.endsWith('.json') ? '{"version":"1.2.3","description":"d"}' : 'clean', 'utf8');
+    writeFileSync(
+      join(workspaceRoot, file),
+      file.endsWith('.json') ? '{"version":"1.2.3","description":"d"}' : 'clean',
+      'utf8',
+    );
   }
   for (const dir of ['assets', 'scripts', 'src', 'tests']) {
     mkdirSync(join(workspaceRoot, dir), { recursive: true });
@@ -47,7 +65,11 @@ function buildPublishable(options: { snapshotId?: string; status?: 'completed' |
   }
   const config = loadLocalConfig(workspaceRoot);
   const snapshotId = options.snapshotId ?? 'PUB';
-  const snapshot = prepareSnapshot(config, { snapshotId, scope: 'all', now: new Date('2026-01-01T00:00:00Z') });
+  const snapshot = prepareSnapshot(config, {
+    snapshotId,
+    scope: 'all',
+    now: new Date('2026-01-01T00:00:00Z'),
+  });
   exportRawArtifacts(config, snapshot);
   const snapshots = Array.from({ length: options.snapshots ?? 1 }, (_, i) => ({
     snapshotId: i === 0 ? snapshotId : `extra-${i}`,
@@ -91,7 +113,9 @@ describe('publishWorkspace preflight failures', () => {
 
   test('rejects an unknown snapshot id', () => {
     const { workspaceRoot, config } = buildPublishable();
-    expect(() => publishWorkspace({ workspaceRoot, config, snapshotId: 'other', runCommand: fakeRun() })).toThrow();
+    expect(() =>
+      publishWorkspace({ workspaceRoot, config, snapshotId: 'other', runCommand: fakeRun() }),
+    ).toThrow();
   });
 
   test('rejects a present-but-non-canonical snapshot', () => {
@@ -100,41 +124,61 @@ describe('publishWorkspace preflight failures', () => {
       currentSnapshotId: snapshotId,
       canonicalSnapshotId: 'different-canonical',
       snapshots: [
-        { snapshotId, createdAt: '2026-01-01T00:00:00Z', scope: 'all', status: 'completed', checkpoint: 'canonical' },
+        {
+          snapshotId,
+          createdAt: '2026-01-01T00:00:00Z',
+          scope: 'all',
+          status: 'completed',
+          checkpoint: 'canonical',
+        },
       ],
       artifactExports: [],
     });
-    expect(() => publishWorkspace({ workspaceRoot, config, snapshotId, runCommand: fakeRun() })).toThrow(/not the canonical/);
+    expect(() =>
+      publishWorkspace({ workspaceRoot, config, snapshotId, runCommand: fakeRun() }),
+    ).toThrow(/not the canonical/);
   });
 
   test('rejects a missing raw artifact export root', () => {
     const { workspaceRoot, config, snapshotId } = buildPublishable();
     rmSync(join(config.artifacts.exportRoot, snapshotId), { recursive: true, force: true });
-    expect(() => publishWorkspace({ workspaceRoot, config, snapshotId, runCommand: fakeRun() })).toThrow(/export root is missing/);
+    expect(() =>
+      publishWorkspace({ workspaceRoot, config, snapshotId, runCommand: fakeRun() }),
+    ).toThrow(/export root is missing/);
   });
 
   test('rejects when more than one snapshot remains', () => {
     const { workspaceRoot, config, snapshotId } = buildPublishable({ snapshots: 2 });
-    expect(() => publishWorkspace({ workspaceRoot, config, snapshotId, runCommand: fakeRun() })).toThrow(/exactly one snapshot/);
+    expect(() =>
+      publishWorkspace({ workspaceRoot, config, snapshotId, runCommand: fakeRun() }),
+    ).toThrow(/exactly one snapshot/);
   });
 
   test('rejects an undrained queue', () => {
     const { workspaceRoot, config, snapshotId } = buildPublishable();
-    const queue = new CrawlQueue(join(config.paths.localRoot, 'crawl-queues', `${snapshotId}.sqlite`));
+    const queue = new CrawlQueue(
+      join(config.paths.localRoot, 'crawl-queues', `${snapshotId}.sqlite`),
+    );
     queue.enqueueMany([{ key: 'k', url: 'https://x/', kind: 'public-page' }]);
     queue.close();
-    expect(() => publishWorkspace({ workspaceRoot, config, snapshotId, runCommand: fakeRun() })).toThrow(/not fully drained/);
+    expect(() =>
+      publishWorkspace({ workspaceRoot, config, snapshotId, runCommand: fakeRun() }),
+    ).toThrow(/not fully drained/);
   });
 
   test('rejects an incomplete snapshot', () => {
     const { workspaceRoot, config, snapshotId } = buildPublishable({ status: 'in_progress' });
-    expect(() => publishWorkspace({ workspaceRoot, config, snapshotId, runCommand: fakeRun() })).toThrow(/must be completed/);
+    expect(() =>
+      publishWorkspace({ workspaceRoot, config, snapshotId, runCommand: fakeRun() }),
+    ).toThrow(/must be completed/);
   });
 
   test('rejects when secret-like material is staged', () => {
     const { workspaceRoot, config, snapshotId } = buildPublishable();
     writeFileSync(join(workspaceRoot, 'README.md'), 'password: hunter2supersecret', 'utf8');
-    expect(() => publishWorkspace({ workspaceRoot, config, snapshotId, runCommand: fakeRun() })).toThrow(/secret-like/);
+    expect(() =>
+      publishWorkspace({ workspaceRoot, config, snapshotId, runCommand: fakeRun() }),
+    ).toThrow(/secret-like/);
   });
 });
 
@@ -146,7 +190,10 @@ describe('publishWorkspace command flow', () => {
       config,
       snapshotId,
       runCommand: fakeRun([
-        { when: (c, a) => c === 'git' && a[0] === 'commit', error: new Error('nothing to commit, working tree clean') },
+        {
+          when: (c, a) => c === 'git' && a[0] === 'commit',
+          error: new Error('nothing to commit, working tree clean'),
+        },
         { when: (c, a) => c === 'gh' && a[0] === 'repo' && a[1] === 'view' },
         { when: (c, a) => c === 'git' && a[0] === 'remote' && a[1] === 'get-url' },
       ]),
@@ -157,7 +204,9 @@ describe('publishWorkspace command flow', () => {
 
   test('proceeds past a drained queue and tolerates a non-Error empty-commit signal', () => {
     const { workspaceRoot, config, snapshotId } = buildPublishable();
-    const queue = new CrawlQueue(join(config.paths.localRoot, 'crawl-queues', `${snapshotId}.sqlite`));
+    const queue = new CrawlQueue(
+      join(config.paths.localRoot, 'crawl-queues', `${snapshotId}.sqlite`),
+    );
     queue.close();
     const result = publishWorkspace({
       workspaceRoot,
@@ -195,7 +244,9 @@ describe('publishWorkspace command flow', () => {
         workspaceRoot,
         config,
         snapshotId,
-        runCommand: fakeRun([{ when: (c, a) => c === 'git' && a[0] === 'commit', error: new Error('merge conflict') }]),
+        runCommand: fakeRun([
+          { when: (c, a) => c === 'git' && a[0] === 'commit', error: new Error('merge conflict') },
+        ]),
       }),
     ).toThrow(/merge conflict/);
   });
@@ -206,8 +257,16 @@ describe('publishWorkspace command flow', () => {
     mkdirSync(releaseRoot, { recursive: true });
     writeFileSync(join(releaseRoot, 'Problem Archive Crawler 1.0.0.exe'), 'a', 'utf8');
     writeFileSync(join(releaseRoot, 'Problem Archive Crawler 1.2.3.exe'), 'b', 'utf8');
-    utimesSync(join(releaseRoot, 'Problem Archive Crawler 1.0.0.exe'), new Date(1000), new Date(1000));
-    utimesSync(join(releaseRoot, 'Problem Archive Crawler 1.2.3.exe'), new Date(2000), new Date(2000));
+    utimesSync(
+      join(releaseRoot, 'Problem Archive Crawler 1.0.0.exe'),
+      new Date(1000),
+      new Date(1000),
+    );
+    utimesSync(
+      join(releaseRoot, 'Problem Archive Crawler 1.2.3.exe'),
+      new Date(2000),
+      new Date(2000),
+    );
 
     const result = publishWorkspace({
       workspaceRoot,
@@ -230,10 +289,20 @@ describe('publishWorkspace command flow', () => {
       release: true,
       tag: 'v9.9.9',
       runCommand: fakeRun([
-        { when: (c, a) => c === 'gh' && a[0] === 'repo' && a[1] === 'view', error: new Error('not found') },
-        { when: (c, a) => c === 'git' && a[0] === 'remote' && a[1] === 'add' === false && a[1] === 'get-url', error: new Error('no remote') },
+        {
+          when: (c, a) => c === 'gh' && a[0] === 'repo' && a[1] === 'view',
+          error: new Error('not found'),
+        },
+        {
+          when: (c, a) =>
+            c === 'git' && a[0] === 'remote' && (a[1] === 'add') === false && a[1] === 'get-url',
+          error: new Error('no remote'),
+        },
         { when: (c, a) => c === 'git' && a[0] === 'rev-parse', error: new Error('no tag') },
-        { when: (c, a) => c === 'gh' && a[0] === 'release' && a[1] === 'view', error: new Error('no release') },
+        {
+          when: (c, a) => c === 'gh' && a[0] === 'release' && a[1] === 'view',
+          error: new Error('no release'),
+        },
       ]),
     });
     expect(result.tag).toBe('v9.9.9');
@@ -279,7 +348,9 @@ describe('publish helpers', () => {
   }, 30000);
 
   test('enrichCommandError formats non-Error values and appends stream output', () => {
-    expect(enrichCommandError('boom', 'git', ['status']).message).toContain('Command failed: git status');
+    expect(enrichCommandError('boom', 'git', ['status']).message).toContain(
+      'Command failed: git status',
+    );
     const stringStreams = Object.assign(new Error('base'), { stdout: 'outstr', stderr: 'errstr' });
     expect(enrichCommandError(stringStreams, 'git', []).message).toContain('errstr');
     const bufferStdout = Object.assign(new Error('base2'), { stdout: Buffer.from('bufout') });
@@ -324,7 +395,11 @@ describe('publish helpers', () => {
     const root = mkdtempSync(join(tmpdir(), 'pbinfo-scan2-'));
     tempDirs.push(root);
     mkdirSync(join(root, '.local', 'nested'), { recursive: true });
-    writeFileSync(join(root, 'creds.txt'), `leaked=${['Pre', 'kzur', 'sil', '1234'].join('')}`, 'utf8');
+    writeFileSync(
+      join(root, 'creds.txt'),
+      `leaked=${['Pre', 'kzur', 'sil', '1234'].join('')}`,
+      'utf8',
+    );
     const violations = scanForPublishSecrets(root, ['creds.txt', '.local']);
     expect(violations.some((v) => v.includes('plaintext credential example'))).toBe(true);
   });
@@ -333,5 +408,27 @@ describe('publish helpers', () => {
     const once = normalizeCommitMessage('feat: x');
     expect(once).toContain('Co-authored-by');
     expect(normalizeCommitMessage(once)).toBe(once);
+  });
+});
+
+describe('publishWorkspace with an existing repository', () => {
+  test('reuses an existing .git directory instead of initializing one', () => {
+    const { workspaceRoot, config, snapshotId } = buildPublishable();
+    mkdirSync(join(workspaceRoot, '.git'), { recursive: true });
+    const result = publishWorkspace({
+      workspaceRoot,
+      config,
+      snapshotId,
+      runCommand: fakeRun([
+        {
+          when: (c, a) => c === 'git' && a[0] === 'commit',
+          error: new Error('nothing to commit, working tree clean'),
+        },
+        { when: (c, a) => c === 'gh' && a[0] === 'repo' && a[1] === 'view' },
+        { when: (c, a) => c === 'git' && a[0] === 'remote' && a[1] === 'get-url' },
+      ]),
+    });
+    expect(result.initializedGit).toBe(false);
+    expect(result.snapshotId).toBe(snapshotId);
   });
 });

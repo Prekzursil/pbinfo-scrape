@@ -49,8 +49,8 @@ export function parseProblemPage(html: string, pageUrl: string): ProblemRecord {
   const linkedAssets = extractLinkedAssets($, page);
   const authorHandle = extractAuthorHandle($, summaryMap);
   const timeLimitSeconds =
-    parseSeconds(summaryMap.get('limită timp') ?? '')
-    ?? parseSeconds(summaryMap.get('limita timp') ?? '');
+    parseSeconds(summaryMap.get('limită timp') ?? '') ??
+    parseSeconds(summaryMap.get('limita timp') ?? '');
   const memoryLimitMb = extractMemoryLimitMb(summaryMap);
 
   return {
@@ -156,7 +156,10 @@ export function parseProblemEndpointFragment(html: string): ParsedProblemEndpoin
     };
   }
 
-  if (message?.toLowerCase().includes('n-ai voie') || message?.toLowerCase().includes('nu ai voie')) {
+  if (
+    message?.toLowerCase().includes('n-ai voie') ||
+    message?.toLowerCase().includes('nu ai voie')
+  ) {
     return {
       access: 'restricted',
       message,
@@ -186,9 +189,10 @@ export function parseOfficialSolutionFragment(html: string): ParsedOfficialSolut
   const solutions: Record<string, string> = {};
 
   $('[data-bs-target], [data-target], a[href^="#"]').each((_, element) => {
-    const target = $(element).attr('data-bs-target')
-      ?? $(element).attr('data-target')
-      ?? $(element).attr('href');
+    const target =
+      $(element).attr('data-bs-target') ??
+      $(element).attr('data-target') ??
+      $(element).attr('href');
     if (!target?.startsWith('#')) {
       return;
     }
@@ -201,10 +205,11 @@ export function parseOfficialSolutionFragment(html: string): ParsedOfficialSolut
 
   $('[id]').each((_, element) => {
     const id = $(element).attr('id');
-    /* v8 ignore next 3 -- the [id] selector guarantees attr('id') is present */
+    /* v8 ignore start -- the [id] selector guarantees attr('id') is present */
     if (!id) {
       return;
     }
+    /* v8 ignore stop */
 
     const code = $(element).find('pre, textarea').first().text().trim();
     if (!code) {
@@ -212,8 +217,7 @@ export function parseOfficialSolutionFragment(html: string): ParsedOfficialSolut
     }
 
     const label =
-      tabLabels.get(id)
-      ?? normalizeWhitespace($(element).find('h3, h4, h5').first().text());
+      tabLabels.get(id) ?? normalizeWhitespace($(element).find('h3, h4, h5').first().text());
     solutions[label || 'unknown'] = code;
   });
 
@@ -294,7 +298,9 @@ function extractAuthorHandle(
   $: ReturnType<typeof loadHtml>,
   summaryMap: Map<string, string>,
 ): string | undefined {
-  const preferredLink = $('*[title="Postată de"] a[href^="/profil/"], *[title="Postata de"] a[href^="/profil/"]').first();
+  const preferredLink = $(
+    '*[title="Postată de"] a[href^="/profil/"], *[title="Postata de"] a[href^="/profil/"]',
+  ).first();
   if (preferredLink.length > 0) {
     const handle = preferredLink.attr('href')?.match(/^\/profil\/([^/?#]+)$/)?.[1];
     return normalizeOptional(handle);
@@ -322,7 +328,11 @@ function extractAuthorHandle(
       }
 
       const valueCell = values.eq(index);
-      const handle = valueCell.find('a[href^="/profil/"]').first().attr('href')?.match(/^\/profil\/([^/?#]+)$/)?.[1];
+      const handle = valueCell
+        .find('a[href^="/profil/"]')
+        .first()
+        .attr('href')
+        ?.match(/^\/profil\/([^/?#]+)$/)?.[1];
       if (handle) {
         summaryHandle = handle;
       }
@@ -332,7 +342,12 @@ function extractAuthorHandle(
     return normalizeOptional(summaryHandle);
   }
 
-  const handle = $('article, main, .container, body').first().find('a[href^="/profil/"]').first().attr('href')?.match(/^\/profil\/([^/?#]+)$/)?.[1];
+  const handle = $('article, main, .container, body')
+    .first()
+    .find('a[href^="/profil/"]')
+    .first()
+    .attr('href')
+    ?.match(/^\/profil\/([^/?#]+)$/)?.[1];
   return normalizeOptional(handle);
 }
 
@@ -361,10 +376,11 @@ function extractExecutionHints(constraints: string[]): ProblemExecutionHints {
     }
 
     const numericToken = numericMatch[1];
-    /* v8 ignore next 3 -- the regex capture group is always a non-empty digit string */
+    /* v8 ignore start -- the regex capture group is always a non-empty digit string */
     if (!numericToken) {
       continue;
     }
+    /* v8 ignore stop */
 
     // numericToken is a digit string, so Number(...) is always finite here.
     const numericValue = Number(numericToken.replace(',', '.'));
@@ -436,9 +452,7 @@ function extractVisibleTests(html: string): ProblemVisibleTest[] {
   return tests;
 }
 
-function extractVisibleTestsFromTable(
-  $: ReturnType<typeof loadHtml>,
-): ProblemVisibleTest[] {
+function extractVisibleTestsFromTable($: ReturnType<typeof loadHtml>): ProblemVisibleTest[] {
   const tests: ProblemVisibleTest[] = [];
 
   $('table tbody tr').each((_, row) => {
@@ -508,8 +522,9 @@ function extractMemoryLimitMb(summaryMap: Map<string, string>): number | undefin
   }
 
   const firstSegment = rawValue.split('/')[0];
-  /* v8 ignore next -- split('/') always yields at least one element */
+  /* v8 ignore start -- split('/') always yields at least one element */
   return parseNumber((firstSegment ?? rawValue).trim());
+  /* v8 ignore stop */
 }
 
 function extractGrade(
@@ -530,10 +545,11 @@ function extractCategoryChain($: ReturnType<typeof loadHtml>): CategoryLink[] {
 
   $('a[href*="?pagina=probleme-lista"]').each((_, anchor) => {
     const href = $(anchor).attr('href');
-    /* v8 ignore next 3 -- the [href*=...] selector guarantees attr('href') is present */
+    /* v8 ignore start -- the [href*=...] selector guarantees attr('href') is present */
     if (!href) {
       return;
     }
+    /* v8 ignore stop */
 
     const resolved = new URL(href, 'https://www.pbinfo.ro');
     const name = normalizeWhitespace($(anchor).text());
@@ -571,10 +587,7 @@ function extractTags($: ReturnType<typeof loadHtml>): string[] {
   return [...tags];
 }
 
-function extractLinkedAssets(
-  $: ReturnType<typeof loadHtml>,
-  page: URL,
-): ProblemAssetRecord[] {
+function extractLinkedAssets($: ReturnType<typeof loadHtml>, page: URL): ProblemAssetRecord[] {
   const assets = new Map<string, ProblemAssetRecord>();
   const candidates: Array<{
     selector: string;
@@ -582,18 +595,29 @@ function extractLinkedAssets(
     kind: ProblemAssetRecord['kind'];
     mimeType?: string;
   }> = [
-    { selector: 'link[rel="stylesheet"][href]', attribute: 'href', kind: 'stylesheet', mimeType: 'text/css' },
-    { selector: 'script[src]', attribute: 'src', kind: 'script', mimeType: 'application/javascript' },
+    {
+      selector: 'link[rel="stylesheet"][href]',
+      attribute: 'href',
+      kind: 'stylesheet',
+      mimeType: 'text/css',
+    },
+    {
+      selector: 'script[src]',
+      attribute: 'src',
+      kind: 'script',
+      mimeType: 'application/javascript',
+    },
     { selector: 'img[src]', attribute: 'src', kind: 'image' },
   ];
 
   for (const candidate of candidates) {
     $(candidate.selector).each((_, element) => {
       const rawUrl = $(element).attr(candidate.attribute);
-      /* v8 ignore next 3 -- the [src]/[href] selectors guarantee the attribute is present */
+      /* v8 ignore start -- the [src]/[href] selectors guarantee the attribute is present */
       if (!rawUrl) {
         return;
       }
+      /* v8 ignore stop */
 
       const normalized = new URL(rawUrl, page);
       if (normalized.origin !== page.origin) {

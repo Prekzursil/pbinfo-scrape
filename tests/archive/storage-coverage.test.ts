@@ -46,7 +46,11 @@ describe('storage snapshot lifecycle', () => {
   test('marks a snapshot completed and canonical', () => {
     const root = workspace();
     const config = loadLocalConfig(root);
-    const layout = prepareSnapshot(config, { snapshotId: 'S1', scope: 'all', now: new Date('2026-01-01T00:00:00Z') });
+    const layout = prepareSnapshot(config, {
+      snapshotId: 'S1',
+      scope: 'all',
+      now: new Date('2026-01-01T00:00:00Z'),
+    });
 
     markSnapshotCompleted(config, 'S1');
     const metadata = JSON.parse(readFileSync(layout.metadataPath, 'utf8')) as { status: string };
@@ -99,7 +103,12 @@ describe('storage raw-artifact export, import, relink', () => {
     const layout = prepareSnapshot(config, { snapshotId: 'A1', scope: 'all', now: new Date() });
     seedRawArtifacts(layout);
 
-    const manifest = exportRawArtifacts(config, layout, undefined, new Date('2026-01-02T00:00:00Z'));
+    const manifest = exportRawArtifacts(
+      config,
+      layout,
+      undefined,
+      new Date('2026-01-02T00:00:00Z'),
+    );
     expect(manifest.snapshotId).toBe('A1');
 
     const record = assertArtifactExportRecord(config, 'A1');
@@ -121,7 +130,9 @@ describe('storage raw-artifact export, import, relink', () => {
     const layout = prepareSnapshot(config, { snapshotId: 'A2', scope: 'all', now: new Date() });
     seedRawArtifacts(layout);
     const manifest = exportRawArtifacts(config, layout);
-    expect(() => relinkRawArtifacts(config, 'OTHER', manifest.rawPagesManifestPath)).toThrow(/mismatch/);
+    expect(() => relinkRawArtifacts(config, 'OTHER', manifest.rawPagesManifestPath)).toThrow(
+      /mismatch/,
+    );
   });
 
   test('relinkRawArtifacts throws when raw artifact paths are missing', () => {
@@ -233,10 +244,18 @@ describe('storage pruning', () => {
   test('prunes non-canonical snapshots, queues, and artifacts', () => {
     const root = workspace();
     const config = loadLocalConfig(root);
-    const keep = prepareSnapshot(config, { snapshotId: 'KEEP', scope: 'all', now: new Date('2026-01-01T00:00:00Z') });
+    const keep = prepareSnapshot(config, {
+      snapshotId: 'KEEP',
+      scope: 'all',
+      now: new Date('2026-01-01T00:00:00Z'),
+    });
     seedRawArtifacts(keep);
     exportRawArtifacts(config, keep);
-    const drop = prepareSnapshot(config, { snapshotId: 'DROP', scope: 'all', now: new Date('2026-01-02T00:00:00Z') });
+    const drop = prepareSnapshot(config, {
+      snapshotId: 'DROP',
+      scope: 'all',
+      now: new Date('2026-01-02T00:00:00Z'),
+    });
     seedRawArtifacts(drop);
     exportRawArtifacts(config, drop);
 
@@ -251,5 +270,38 @@ describe('storage pruning', () => {
     expect(result.removedArtifactPaths.length).toBeGreaterThan(0);
     expect(existsSync(join(config.paths.archiveRoot, 'snapshots', 'DROP'))).toBe(false);
     expect(existsSync(join(config.paths.archiveRoot, 'snapshots', 'KEEP'))).toBe(true);
+  });
+});
+
+describe('storage prune and import when there is nothing to move', () => {
+  test('prunes a snapshot that never had artifacts, an export or a crawl queue', () => {
+    const root = workspace();
+    const config = loadLocalConfig(root);
+    prepareSnapshot(config, { snapshotId: 'KEEP2', scope: 'all', now: new Date() });
+    const bare = prepareSnapshot(config, { snapshotId: 'BARE', scope: 'all', now: new Date() });
+    rmSync(join(config.paths.artifactsRoot, 'BARE'), { recursive: true, force: true });
+    rmSync(bare.artifactManifestPath, { force: true });
+    rmSync(join(config.paths.localRoot, 'crawl-queues'), { recursive: true, force: true });
+
+    const result = pruneToCanonicalSnapshot(config, 'KEEP2');
+    expect(result.removedSnapshots).toEqual(['BARE']);
+    expect(result.removedArtifactPaths).toEqual([]);
+    expect(result.removedQueuePaths).toEqual([]);
+  });
+
+  test('importing the already-local manifest copies nothing again', () => {
+    const root = workspace();
+    const config = loadLocalConfig(root);
+    const layout = prepareSnapshot(config, { snapshotId: 'A6', scope: 'all', now: new Date() });
+    seedRawArtifacts(layout);
+    exportRawArtifacts(config, layout);
+    const first = importRawArtifacts(config, join(config.artifacts.exportRoot, 'A6'));
+
+    const second = importRawArtifacts(
+      config,
+      join(config.paths.archiveRoot, 'artifacts', 'A6.json'),
+    );
+    expect(second.rawPagesPath).toBe(first.rawPagesPath);
+    expect(second.rawAssetsPath).toBe(first.rawAssetsPath);
   });
 });

@@ -105,18 +105,9 @@ export class ArchiveCrawler {
 
     let response: Response;
     try {
-      response = await fetchWithTimeout(
-        this.fetchImpl,
-        item.url,
-        undefined,
-        this.requestTimeoutMs,
-      );
+      response = await fetchWithTimeout(this.fetchImpl, item.url, undefined, this.requestTimeoutMs);
     } catch (error) {
-      this.failWithBackoff(
-        item.id,
-        error instanceof Error ? error.message : String(error),
-        now,
-      );
+      this.failWithBackoff(item.id, error instanceof Error ? error.message : String(error), now);
       return true;
     }
     const contentType = response.headers.get('content-type');
@@ -180,9 +171,9 @@ export class ArchiveCrawler {
         body,
       );
       const followUps =
-        item.kind === 'user-solutions'
-          || item.kind === 'official-source-list'
-          || (item.kind === 'public-page' && isProblemSourceListUrl(item.url))
+        item.kind === 'user-solutions' ||
+        item.kind === 'official-source-list' ||
+        (item.kind === 'public-page' && isProblemSourceListUrl(item.url))
           ? [...normalizedFollowUps, ...genericFollowUps]
           : [...genericFollowUps, ...normalizedFollowUps];
       this.queue.enqueueMany(followUps);
@@ -201,8 +192,9 @@ export class ArchiveCrawler {
       url: item.url,
       kind: item.kind,
       httpStatus: response.status,
-      /* v8 ignore next -- the asset branch is only reached when content-type is a defined non-HTML string (looksLikeHtml(null) === true), so the nullish fallback is unreachable here */
+      /* v8 ignore start -- the asset branch is only reached when content-type is a defined non-HTML string (looksLikeHtml(null) === true), so the nullish fallback is unreachable here */
       contentType: contentType ?? undefined,
+      /* v8 ignore stop */
       contentHash,
       bodyPath: `raw-assets/${fileName}`,
       fetchedAt: now.toISOString(),
@@ -230,7 +222,11 @@ export class ArchiveCrawler {
     return fileName;
   }
 
-  private async archiveAsset(url: string, bytes: Buffer, contentType: string | null): Promise<string> {
+  private async archiveAsset(
+    url: string,
+    bytes: Buffer,
+    contentType: string | null,
+  ): Promise<string> {
     const fileName = buildAssetFilename(url, contentType);
     mkdirSync(this.snapshot.rawAssetsRoot, { recursive: true });
     writeFileSync(join(this.snapshot.rawAssetsRoot, fileName), bytes);
@@ -366,9 +362,7 @@ export async function fetchWithTimeout(
   }
 }
 
-export function persistNormalizedSnapshotHtml(
-  options: PersistNormalizedSnapshotHtmlOptions,
-): void {
+export function persistNormalizedSnapshotHtml(options: PersistNormalizedSnapshotHtmlOptions): void {
   persistMirrorRouteRecord(
     options.snapshot,
     options.item.url,
@@ -444,7 +438,10 @@ export function persistNormalizedSnapshotHtml(
           message: solution.message,
           artifactPath: resolveRawPageBodyPath(options.snapshot, options.item.url),
         },
-        officialSolutions: mergeLanguageSolutions(current?.officialSolutions ?? {}, solution.solutions),
+        officialSolutions: mergeLanguageSolutions(
+          current?.officialSolutions ?? {},
+          solution.solutions,
+        ),
         officialSourceIds: mergeLanguageSourceIds(current?.officialSourceIds, sourceIds),
       }),
     );
@@ -479,9 +476,9 @@ export function persistNormalizedSnapshotHtml(
 
   const evaluationMatch = options.item.url.match(/\/detalii-evaluare\/(\d+)/);
   if (
-    (options.item.kind === 'evaluation-detail'
-      || options.item.kind === 'official-evaluation-detail')
-    && evaluationMatch?.[1]
+    (options.item.kind === 'evaluation-detail' ||
+      options.item.kind === 'official-evaluation-detail') &&
+    evaluationMatch?.[1]
   ) {
     try {
       const record = parseEvaluationPage(options.html, Number(evaluationMatch[1]));
@@ -498,9 +495,7 @@ export function persistNormalizedSnapshotHtml(
         evaluation,
       );
       const sourceKind: SourceRecord['kind'] =
-        options.item.kind === 'official-evaluation-detail'
-          ? 'official'
-          : 'user-evaluation';
+        options.item.kind === 'official-evaluation-detail' ? 'official' : 'user-evaluation';
       persistEvaluationSource(
         options.snapshot,
         evaluation,
@@ -516,8 +511,9 @@ export function persistNormalizedSnapshotHtml(
           evaluationId: Number(evaluationMatch[1]),
           sourceUrl: options.item.url,
           fetchedAt: options.fetchedAt,
-          /* v8 ignore next -- parseEvaluationPage and the persisters only throw Error instances, so String(error) is unreachable */
+          /* v8 ignore start -- parseEvaluationPage and the persisters only throw Error instances, so String(error) is unreachable */
           error: error instanceof Error ? error.message : String(error),
+          /* v8 ignore stop */
         },
       );
     }
@@ -533,10 +529,7 @@ export function persistNormalizedSnapshotHtml(
       `user-${sanitizeSegment(userHandle).toLowerCase()}.json`,
       (current) => {
         const existingEntries = Array.isArray(current?.entries) ? current.entries : [];
-        const nextEntries = dedupeUserSolutionEntries([
-          ...existingEntries,
-          ...record.entries,
-        ]);
+        const nextEntries = dedupeUserSolutionEntries([...existingEntries, ...record.entries]);
         const existingPageUrls = Array.isArray(current?.pageUrls) ? current.pageUrls : [];
         return {
           ...current,
@@ -604,21 +597,18 @@ function persistMirrorRouteRecord(
   const parsedUrl = new URL(url);
   const route = `${parsedUrl.pathname}${parsedUrl.search}`;
   const sourceFile = readManifestValue(snapshot.rawPagesManifestPath, url);
-  /* v8 ignore next -- URL pathname is always at least "/", so the || 'root' fallback is unreachable */
+  /* v8 ignore start -- URL pathname is always at least "/", so the || 'root' fallback is unreachable */
   const fileName = `route-${sanitizeSegment(parsedUrl.pathname || 'root')}${parsedUrl.search ? `-${shortHash(parsedUrl.search)}` : ''}.json`;
+  /* v8 ignore stop */
 
-  writeJsonRecord<MirrorRouteRecord>(
-    join(snapshot.normalizedRoot, 'routes'),
-    fileName,
-    {
-      snapshotId: snapshot.snapshotId,
-      route,
-      sourceUrl: url,
-      sourceFile,
-      template,
-      entityKey,
-    },
-  );
+  writeJsonRecord<MirrorRouteRecord>(join(snapshot.normalizedRoot, 'routes'), fileName, {
+    snapshotId: snapshot.snapshotId,
+    route,
+    sourceUrl: url,
+    sourceFile,
+    template,
+    entityKey,
+  });
 }
 
 function persistOfficialSources(
@@ -650,11 +640,7 @@ function persistOfficialSources(
       suspicionFlags: detectSuspicionFlags(sourceCode),
       provenance: [sourceUrl],
     };
-    writeJsonRecord(
-      join(snapshot.normalizedRoot, 'sources'),
-      `${sourceId}.json`,
-      sourceRecord,
-    );
+    writeJsonRecord(join(snapshot.normalizedRoot, 'sources'), `${sourceId}.json`, sourceRecord);
     sourceIds[language] = [...new Set([...(sourceIds[language] ?? []), sourceId])].sort();
   }
 
@@ -697,19 +683,13 @@ function persistEvaluationSource(
     suspicionFlags: evaluation.suspicionFlags,
     provenance: evaluation.provenance,
   };
-  writeJsonRecord(
-    join(snapshot.normalizedRoot, 'sources'),
-    `${sourceId}.json`,
-    sourceRecord,
-  );
+  writeJsonRecord(join(snapshot.normalizedRoot, 'sources'), `${sourceId}.json`, sourceRecord);
   mergeJsonRecord<ProblemRecord>(
     join(snapshot.normalizedRoot, 'problems'),
     `problem-${evaluation.problemId}.json`,
     (current) => {
       const currentIds =
-        kind === 'official'
-          ? current?.officialSourceIds ?? {}
-          : current?.userSourceIds ?? {};
+        kind === 'official' ? (current?.officialSourceIds ?? {}) : (current?.userSourceIds ?? {});
       const currentLanguageIds = currentIds[language] ?? [];
       return {
         ...(current ?? createPlaceholderProblem(evaluation.problemId, evaluation.problemSlug)),
@@ -752,7 +732,13 @@ export function persistProblemExamples(
     `problem-${problemId}.json`,
     (current) =>
       withEffectiveProblemTests({
-        ...(current ?? createEmptyProblemTestsRecord(snapshot.snapshotId, problemId, problemSlug, fallbackProblemName)),
+        ...(current ??
+          createEmptyProblemTestsRecord(
+            snapshot.snapshotId,
+            problemId,
+            problemSlug,
+            fallbackProblemName,
+          )),
         examples: cases,
         visible: current?.visible ?? [],
         evaluationObserved: current?.evaluationObserved ?? [],
@@ -782,7 +768,13 @@ export function persistProblemVisibleTests(
     `problem-${problemId}.json`,
     (current) =>
       withEffectiveProblemTests({
-        ...(current ?? createEmptyProblemTestsRecord(snapshot.snapshotId, problemId, problemSlug, fallbackProblemName)),
+        ...(current ??
+          createEmptyProblemTestsRecord(
+            snapshot.snapshotId,
+            problemId,
+            problemSlug,
+            fallbackProblemName,
+          )),
         examples: current?.examples ?? [],
         visible: cases,
         evaluationObserved: current?.evaluationObserved ?? [],
@@ -807,7 +799,13 @@ function persistEvaluationObservedTests(
         byId.set(entry.testId, entry);
       }
       return withEffectiveProblemTests({
-        ...(current ?? createEmptyProblemTestsRecord(snapshot.snapshotId, evaluation.problemId, evaluation.problemSlug, evaluation.problemName)),
+        ...(current ??
+          createEmptyProblemTestsRecord(
+            snapshot.snapshotId,
+            evaluation.problemId,
+            evaluation.problemSlug,
+            evaluation.problemName,
+          )),
         examples: current?.examples ?? [],
         visible: current?.visible ?? [],
         evaluationObserved: [...byId.values()].sort(compareProblemTestCaseRecords),
@@ -853,9 +851,7 @@ export function compareProblemTestCaseRecords(
   return left.testId.localeCompare(right.testId);
 }
 
-function withEffectiveProblemTests(
-  record: ProblemTestsRecord,
-): ProblemTestsRecord {
+function withEffectiveProblemTests(record: ProblemTestsRecord): ProblemTestsRecord {
   return {
     ...record,
     effective: deriveEffectiveProblemTests(record),
@@ -874,16 +870,20 @@ export function deriveEffectiveProblemTests(
     }
 
     const current = effectiveByKey.get(effectiveKey);
-    const provenanceKinds = [...new Set([
-      ...(current?.provenanceKinds ?? []),
-      ...(testCase.provenanceKinds ?? [testCase.kind]),
-    ])].sort(compareProvenanceKinds);
-    const sourceTestIds = [...new Set([
-      // A stored `current` always carries a populated sourceTestIds (set below), so the
-      // nullish fallback is only reached when `current` is undefined — i.e. always [].
-      ...(current?.sourceTestIds ?? []),
-      ...(testCase.sourceTestIds ?? [testCase.testId]),
-    ])].sort();
+    const provenanceKinds = [
+      ...new Set([
+        ...(current?.provenanceKinds ?? []),
+        ...(testCase.provenanceKinds ?? [testCase.kind]),
+      ]),
+    ].sort(compareProvenanceKinds);
+    const sourceTestIds = [
+      ...new Set([
+        // A stored `current` always carries a populated sourceTestIds (set below), so the
+        // nullish fallback is only reached when `current` is undefined — i.e. always [].
+        ...(current?.sourceTestIds ?? []),
+        ...(testCase.sourceTestIds ?? [testCase.testId]),
+      ]),
+    ].sort();
 
     effectiveByKey.set(effectiveKey, {
       ...(current ?? testCase),
@@ -895,9 +895,9 @@ export function deriveEffectiveProblemTests(
           ? 'visible'
           : 'evaluationObserved',
       exampleLike:
-        Boolean(current?.exampleLike)
-        || Boolean(testCase.exampleLike)
-        || provenanceKinds.includes('example'),
+        Boolean(current?.exampleLike) ||
+        Boolean(testCase.exampleLike) ||
+        provenanceKinds.includes('example'),
       provenanceKinds,
       sourceTestIds,
     });
@@ -906,9 +906,7 @@ export function deriveEffectiveProblemTests(
   return [...effectiveByKey.values()].sort(compareProblemTestCaseRecords);
 }
 
-export function buildEffectiveProblemTestKey(
-  testCase: ProblemTestCaseRecord,
-): string | undefined {
+export function buildEffectiveProblemTestKey(testCase: ProblemTestCaseRecord): string | undefined {
   const input = normalizeTestIo(testCase.input);
   const output = normalizeTestIo(testCase.output);
   if (!input && !output) {
@@ -933,11 +931,7 @@ export function compareProvenanceKinds(
   left: ProblemTestCaseRecord['kind'],
   right: ProblemTestCaseRecord['kind'],
 ): number {
-  const order: Array<ProblemTestCaseRecord['kind']> = [
-    'example',
-    'visible',
-    'evaluationObserved',
-  ];
+  const order: Array<ProblemTestCaseRecord['kind']> = ['example', 'visible', 'evaluationObserved'];
   return order.indexOf(left) - order.indexOf(right);
 }
 
@@ -975,7 +969,9 @@ export function resolvePreferredNormalizedHtml(
   try {
     if (kind === 'problem-solution') {
       const httpSolutions = Object.keys(parseOfficialSolutionFragment(httpHtml).solutions).length;
-      const browserSolutions = Object.keys(parseOfficialSolutionFragment(browserHtml).solutions).length;
+      const browserSolutions = Object.keys(
+        parseOfficialSolutionFragment(browserHtml).solutions,
+      ).length;
       return browserSolutions > httpSolutions
         ? { html: browserHtml, source: 'browser' }
         : { html: httpHtml, source: 'http' };
@@ -1001,7 +997,6 @@ export function resolvePreferredNormalizedHtml(
         ? { html: browserHtml, source: 'browser' }
         : { html: httpHtml, source: 'http' };
     }
-
   } catch {
     return { html: browserHtml, source: 'browser' };
   }
@@ -1009,14 +1004,9 @@ export function resolvePreferredNormalizedHtml(
   return { html: httpHtml, source: 'http' };
 }
 
-function resolveRawPageBodyPath(
-  snapshot: SnapshotLayout,
-  url: string,
-): string | undefined {
+function resolveRawPageBodyPath(snapshot: SnapshotLayout, url: string): string | undefined {
   const fileName = buildPageFilename(url);
-  return existsSync(join(snapshot.rawPagesRoot, fileName))
-    ? `raw-pages/${fileName}`
-    : undefined;
+  return existsSync(join(snapshot.rawPagesRoot, fileName)) ? `raw-pages/${fileName}` : undefined;
 }
 
 export function discoverFollowUps(
@@ -1103,22 +1093,22 @@ export function shouldSuppressGenericPageNavigation(
   baseUrl: string,
 ): boolean {
   return (
-    (crawlScope === 'user' && kind === 'public-page')
-    || (crawlScope === 'user' && kind === 'user-profile')
-    || kind === 'user-solutions'
-    || kind === 'evaluation-detail'
-    || kind === 'official-evaluation-detail'
-    || kind === 'official-source-list'
-    || (kind === 'public-page' && isProblemSourceListUrl(baseUrl))
+    (crawlScope === 'user' && kind === 'public-page') ||
+    (crawlScope === 'user' && kind === 'user-profile') ||
+    kind === 'user-solutions' ||
+    kind === 'evaluation-detail' ||
+    kind === 'official-evaluation-detail' ||
+    kind === 'official-source-list' ||
+    (kind === 'public-page' && isProblemSourceListUrl(baseUrl))
   );
 }
 
 export function shouldSuppressGenericAssetDiscovery(kind: CrawlQueueInput['kind']): boolean {
   return (
-    kind === 'user-solutions'
-    || kind === 'evaluation-detail'
-    || kind === 'official-evaluation-detail'
-    || kind === 'official-source-list'
+    kind === 'user-solutions' ||
+    kind === 'evaluation-detail' ||
+    kind === 'official-evaluation-detail' ||
+    kind === 'official-source-list'
   );
 }
 
@@ -1177,7 +1167,9 @@ export function discoverNormalizedFollowUps(
 
   // The guard above guarantees `kind` is 'official-source-list' here (user-solutions returned above).
   const parsed = parseProblemSourceListPage(html, baseUrl);
-  const communitySourceListMatch = new URL(baseUrl).pathname.match(/^\/solutii\/problema\/(\d+)\/([^/?#]+)/);
+  const communitySourceListMatch = new URL(baseUrl).pathname.match(
+    /^\/solutii\/problema\/(\d+)\/([^/?#]+)/,
+  );
   if (communitySourceListMatch?.[1] && communitySourceListMatch[2]) {
     if (!parsed.authorHandle) {
       return [];
@@ -1190,9 +1182,8 @@ export function discoverNormalizedFollowUps(
     const authorScopedKind = isOfficialSourceAuthorHandle(parsed.authorHandle)
       ? 'official-source-list'
       : 'user-solutions';
-    const authorScopedKeyPrefix = authorScopedKind === 'official-source-list'
-      ? 'official-source-list'
-      : 'page';
+    const authorScopedKeyPrefix =
+      authorScopedKind === 'official-source-list' ? 'official-source-list' : 'page';
     queued.set(`${authorScopedKeyPrefix}:${authorScopedUrl}`, {
       key: `${authorScopedKeyPrefix}:${authorScopedUrl}`,
       url: authorScopedUrl,
@@ -1257,7 +1248,9 @@ export function persistOfficialSourceHarvest(
         sourceListHarvested: true,
         sourceListPageUrl: sourceListUrl,
         authorHandle: authorHandle ?? authorScopedMatch[1],
-        qualifyingEvaluationIds: [...new Set(qualifyingEvaluationIds)].sort((left, right) => left - right),
+        qualifyingEvaluationIds: [...new Set(qualifyingEvaluationIds)].sort(
+          (left, right) => left - right,
+        ),
       },
     }),
   );
@@ -1272,14 +1265,14 @@ export function normalizeNavigableUrl(
   // bypass the filter (CodeQL js/incomplete-url-scheme-check).
   const loweredCandidate = candidate?.trim().toLowerCase();
   if (
-    !candidate
-    || !loweredCandidate
-    || loweredCandidate.startsWith('#')
-    || loweredCandidate.startsWith('javascript:')
-    || loweredCandidate.startsWith('vbscript:')
-    || loweredCandidate.startsWith('mailto:')
-    || loweredCandidate.startsWith('tel:')
-    || loweredCandidate.startsWith('data:')
+    !candidate ||
+    !loweredCandidate ||
+    loweredCandidate.startsWith('#') ||
+    loweredCandidate.startsWith('javascript:') ||
+    loweredCandidate.startsWith('vbscript:') ||
+    loweredCandidate.startsWith('mailto:') ||
+    loweredCandidate.startsWith('tel:') ||
+    loweredCandidate.startsWith('data:')
   ) {
     return null;
   }
@@ -1303,14 +1296,14 @@ export function stripTrackingQueryParameters(url: URL): void {
   for (const key of [...url.searchParams.keys()]) {
     const normalizedKey = key.toLowerCase();
     if (
-      normalizedKey.startsWith('utm_')
-      || normalizedKey === 'fbclid'
-      || normalizedKey === 'gclid'
-      || normalizedKey === 'yclid'
-      || normalizedKey === 'mc_cid'
-      || normalizedKey === 'mc_eid'
-      || normalizedKey === 'ref'
-      || normalizedKey === 'source'
+      normalizedKey.startsWith('utm_') ||
+      normalizedKey === 'fbclid' ||
+      normalizedKey === 'gclid' ||
+      normalizedKey === 'yclid' ||
+      normalizedKey === 'mc_cid' ||
+      normalizedKey === 'mc_eid' ||
+      normalizedKey === 'ref' ||
+      normalizedKey === 'source'
     ) {
       url.searchParams.delete(key);
     }
@@ -1318,13 +1311,15 @@ export function stripTrackingQueryParameters(url: URL): void {
 }
 
 export function canonicalizeQueryParameters(url: URL): void {
-  const entries = [...url.searchParams.entries()].sort(([leftKey, leftValue], [rightKey, rightValue]) => {
-    const keyCompare = leftKey.localeCompare(rightKey);
-    if (keyCompare !== 0) {
-      return keyCompare;
-    }
-    return leftValue.localeCompare(rightValue);
-  });
+  const entries = [...url.searchParams.entries()].sort(
+    ([leftKey, leftValue], [rightKey, rightValue]) => {
+      const keyCompare = leftKey.localeCompare(rightKey);
+      if (keyCompare !== 0) {
+        return keyCompare;
+      }
+      return leftValue.localeCompare(rightValue);
+    },
+  );
 
   url.search = '';
   for (const [key, value] of entries) {
@@ -1332,24 +1327,21 @@ export function canonicalizeQueryParameters(url: URL): void {
   }
 }
 
-export function isMeaningfulNavigableUrl(
-  config: LoadedLocalConfig,
-  url: URL,
-): boolean {
+export function isMeaningfulNavigableUrl(config: LoadedLocalConfig, url: URL): boolean {
   const pathname = normalizePathname(url.pathname);
   if (isProblemSourceListUrl(url.toString())) {
     return false;
   }
   if (
-    pathname.startsWith('/articole')
-    || pathname.startsWith('/ajutor')
-    || pathname.startsWith('/clasa-mea')
-    || pathname.startsWith('/editare-cont')
-    || pathname === '/logout.php'
-    || pathname.startsWith('/resurse')
-    || pathname.startsWith('/solutii/clasa')
-    || pathname.startsWith('/teme/rezolvare')
-    || pathname === '/php/gravatar.php'
+    pathname.startsWith('/articole') ||
+    pathname.startsWith('/ajutor') ||
+    pathname.startsWith('/clasa-mea') ||
+    pathname.startsWith('/editare-cont') ||
+    pathname === '/logout.php' ||
+    pathname.startsWith('/resurse') ||
+    pathname.startsWith('/solutii/clasa') ||
+    pathname.startsWith('/teme/rezolvare') ||
+    pathname === '/php/gravatar.php'
   ) {
     return false;
   }
@@ -1433,11 +1425,11 @@ export function normalizeAssetUrl(
   // (CodeQL js/incomplete-url-scheme-check).
   const loweredCandidate = candidate?.trim().toLowerCase();
   if (
-    !candidate
-    || !loweredCandidate
-    || loweredCandidate.startsWith('data:')
-    || loweredCandidate.startsWith('javascript:')
-    || loweredCandidate.startsWith('vbscript:')
+    !candidate ||
+    !loweredCandidate ||
+    loweredCandidate.startsWith('data:') ||
+    loweredCandidate.startsWith('javascript:') ||
+    loweredCandidate.startsWith('vbscript:')
   ) {
     return null;
   }
@@ -1487,9 +1479,7 @@ export function normalizeSiteRelativeCandidate(candidate: string): string {
     return trimmed;
   }
 
-  return /^(?:resurse|img|php|descarca-fisier\.php)/i.test(trimmed)
-    ? `/${trimmed}`
-    : trimmed;
+  return /^(?:resurse|img|php|descarca-fisier\.php)/i.test(trimmed) ? `/${trimmed}` : trimmed;
 }
 
 export function inferPageKind(url: string): CrawlQueueInput['kind'] {
@@ -1570,14 +1560,10 @@ export function mergeLanguageSourceIds(
   incoming: Record<string, string[]>,
 ): Record<string, string[]> {
   const merged: Record<string, string[]> = {};
-  for (const language of new Set([
-    ...Object.keys(current ?? {}),
-    ...Object.keys(incoming),
-  ])) {
-    merged[language] = [...new Set([
-      ...((current ?? {})[language] ?? []),
-      ...(incoming[language] ?? []),
-    ])].sort();
+  for (const language of new Set([...Object.keys(current ?? {}), ...Object.keys(incoming)])) {
+    merged[language] = [
+      ...new Set([...((current ?? {})[language] ?? []), ...(incoming[language] ?? [])]),
+    ].sort();
   }
   return merged;
 }
@@ -1620,13 +1606,12 @@ export function normalizeSourceLanguage(language: string): string {
     return 'csharp';
   }
 
-  /* v8 ignore next -- sanitizeSegment never returns an empty string (it falls back to "root"), so the || branch is unreachable */
+  /* v8 ignore start -- sanitizeSegment never returns an empty string (it falls back to "root"), so the || branch is unreachable */
   return sanitizeSegment(normalized).toLowerCase() || 'unknown';
+  /* v8 ignore stop */
 }
 
-export function dedupeUserSolutionEntries<T extends { evaluationId?: number }>(
-  entries: T[],
-): T[] {
+export function dedupeUserSolutionEntries<T extends { evaluationId?: number }>(entries: T[]): T[] {
   const byEvaluationId = new Map<number, T>();
   for (const entry of entries) {
     if (typeof entry.evaluationId !== 'number') {
@@ -1637,13 +1622,17 @@ export function dedupeUserSolutionEntries<T extends { evaluationId?: number }>(
     }
   }
 
-  /* v8 ignore next 2 -- entries are pre-filtered to a numeric evaluationId, so the ?? 0 fallbacks are unreachable */
-  return [...byEvaluationId.values()].sort((left, right) =>
-    (right.evaluationId ?? 0) - (left.evaluationId ?? 0),
+  /* v8 ignore start -- entries are pre-filtered to a numeric evaluationId, so the ?? 0 fallbacks are unreachable */
+  return [...byEvaluationId.values()].sort(
+    (left, right) => (right.evaluationId ?? 0) - (left.evaluationId ?? 0),
+    /* v8 ignore stop */
   );
 }
 
-export function maxDefinedNumber(left: number | undefined, right: number | undefined): number | undefined {
+export function maxDefinedNumber(
+  left: number | undefined,
+  right: number | undefined,
+): number | undefined {
   if (left === undefined) {
     return right;
   }
@@ -1655,10 +1644,7 @@ export function maxDefinedNumber(left: number | undefined, right: number | undef
 
 export { detectSuspicionFlags } from './source-suspicion.js';
 
-function readManifestValue(
-  manifestPath: string,
-  url: string,
-): string | undefined {
+function readManifestValue(manifestPath: string, url: string): string | undefined {
   return loadManifest(manifestPath)[url];
 }
 
@@ -1704,8 +1690,7 @@ export function isRetryableHttpStatus(status: number): boolean {
 }
 
 function isTemporaryUnavailable(body: string): boolean {
-  return /resurs[ăa]\s+indisponibil[ăa]\s+temporar/i.test(body)
-    || /temporar\s+indisponibil/i.test(body);
+  return (
+    /resurs[ăa]\s+indisponibil[ăa]\s+temporar/i.test(body) || /temporar\s+indisponibil/i.test(body)
+  );
 }
-
-

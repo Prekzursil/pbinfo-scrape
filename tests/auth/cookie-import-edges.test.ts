@@ -43,7 +43,10 @@ interface CookieRow {
   samesite?: unknown;
 }
 
-function buildProfile(rows: CookieRow[], options: { nullable?: boolean; writeDb?: boolean; localState?: string } = {}): string {
+function buildProfile(
+  rows: CookieRow[],
+  options: { nullable?: boolean; writeDb?: boolean; localState?: string } = {},
+): string {
   const root = mkdtempSync(join(tmpdir(), 'pbinfo-cookie-edges-'));
   tempDirs.push(root);
   const userDataDir = join(root, 'Edge', 'User Data');
@@ -52,7 +55,11 @@ function buildProfile(rows: CookieRow[], options: { nullable?: boolean; writeDb?
   writeFileSync(
     join(userDataDir, 'Local State'),
     options.localState ??
-      JSON.stringify({ os_crypt: { encrypted_key: Buffer.concat([Buffer.from('DPAPI'), WRAPPED]).toString('base64') } }),
+      JSON.stringify({
+        os_crypt: {
+          encrypted_key: Buffer.concat([Buffer.from('DPAPI'), WRAPPED]).toString('base64'),
+        },
+      }),
     'utf8',
   );
   if (options.writeDb !== false) {
@@ -65,7 +72,7 @@ function buildProfile(rows: CookieRow[], options: { nullable?: boolean; writeDb?
       'INSERT INTO cookies (host_key, name, value, encrypted_value, path, expires_utc, is_httponly, is_secure, samesite) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
     );
     const pick = <T>(row: CookieRow, key: keyof CookieRow, fallback: T): T =>
-      (key in row ? (row[key] as T) : fallback);
+      key in row ? (row[key] as T) : fallback;
     for (const row of rows) {
       stmt.run(
         pick(row, 'host_key', '.pbinfo.ro') as string,
@@ -84,7 +91,8 @@ function buildProfile(rows: CookieRow[], options: { nullable?: boolean; writeDb?
   return userDataDir;
 }
 
-const syncDecrypt = (buf: Buffer): Buffer => (buf.equals(WRAPPED) ? MASTER_KEY : Buffer.from('legacy-plain'));
+const syncDecrypt = (buf: Buffer): Buffer =>
+  buf.equals(WRAPPED) ? MASTER_KEY : Buffer.from('legacy-plain');
 
 describe('cookie-import normalization edges', () => {
   test('normalizes the none same-site value and drops non-positive expiries', () => {
@@ -104,7 +112,9 @@ describe('cookie-import normalization edges', () => {
 
 describe('unwrapChromiumMasterKey edges', () => {
   test('throws when the encrypted key is absent', async () => {
-    await expect(unwrapChromiumMasterKey(JSON.stringify({ os_crypt: {} }))).rejects.toThrow(/encrypted_key/);
+    await expect(unwrapChromiumMasterKey(JSON.stringify({ os_crypt: {} }))).rejects.toThrow(
+      /encrypted_key/,
+    );
   });
 
   test('passes the key through unchanged when no DPAPI prefix is present', async () => {
@@ -118,22 +128,24 @@ describe('unwrapChromiumMasterKey edges', () => {
 
 describe('resolveChromiumProfile / importBrowserCookies guards', () => {
   test('throws when LOCALAPPDATA is unset', () => {
-    expect(() => resolveChromiumProfile({ browser: 'edge' }, {} as NodeJS.ProcessEnv)).toThrow(/LOCALAPPDATA/);
+    expect(() => resolveChromiumProfile({ browser: 'edge' }, {} as NodeJS.ProcessEnv)).toThrow(
+      /LOCALAPPDATA/,
+    );
   });
 
   test('throws when the Local State file is missing', async () => {
     const userDataDir = buildProfile([], { writeDb: true });
     rmSync(join(userDataDir, 'Local State'));
-    await expect(importBrowserCookies({ browser: 'edge', userDataDir, decryptMasterKey: syncDecrypt })).rejects.toThrow(
-      /Local State file was not found/,
-    );
+    await expect(
+      importBrowserCookies({ browser: 'edge', userDataDir, decryptMasterKey: syncDecrypt }),
+    ).rejects.toThrow(/Local State file was not found/);
   });
 
   test('throws when the cookies database is missing', async () => {
     const userDataDir = buildProfile([], { writeDb: false });
-    await expect(importBrowserCookies({ browser: 'edge', userDataDir, decryptMasterKey: syncDecrypt })).rejects.toThrow(
-      /cookies database was not found/,
-    );
+    await expect(
+      importBrowserCookies({ browser: 'edge', userDataDir, decryptMasterKey: syncDecrypt }),
+    ).rejects.toThrow(/cookies database was not found/);
   });
 
   test('stringifies a non-Error copy failure', async () => {
@@ -154,13 +166,22 @@ describe('resolveChromiumProfile / importBrowserCookies guards', () => {
 describe('importBrowserCookies decryption variants', () => {
   test('decrypts v11, v20, legacy and empty values and honors same-site and expiry', async () => {
     const userDataDir = buildProfile([
-      { name: 'v11c', encrypted_value: encrypt('v11-value', 'v11'), samesite: 2, expires_utc: (1_893_456_000 + 11_644_473_600) * 1_000_000 },
+      {
+        name: 'v11c',
+        encrypted_value: encrypt('v11-value', 'v11'),
+        samesite: 2,
+        expires_utc: (1_893_456_000 + 11_644_473_600) * 1_000_000,
+      },
       { name: 'v20c', encrypted_value: encrypt('v20-value', 'v20'), is_httponly: 1, is_secure: 1 },
       { name: 'legacyc', encrypted_value: Buffer.concat([Buffer.from('leg'), randomBytes(8)]) },
       { name: 'emptyc', encrypted_value: new Uint8Array(), expires_utc: 0, path: '' },
       { name: 'tinyexp', encrypted_value: encrypt('t', 'v10'), expires_utc: 1_000_000 },
     ]);
-    const cookies = await importBrowserCookies({ browser: 'edge', userDataDir, decryptMasterKey: syncDecrypt });
+    const cookies = await importBrowserCookies({
+      browser: 'edge',
+      userDataDir,
+      decryptMasterKey: syncDecrypt,
+    });
     const byName = Object.fromEntries(cookies.map((c) => [c.name, c]));
     expect(byName.v11c?.value).toBe('v11-value');
     expect(byName.v11c?.sameSite).toBe('strict');
@@ -232,7 +253,11 @@ describe('importBrowserCookies decryption variants', () => {
       ],
       { nullable: true },
     );
-    const cookies = await importBrowserCookies({ browser: 'edge', userDataDir, decryptMasterKey: syncDecrypt });
+    const cookies = await importBrowserCookies({
+      browser: 'edge',
+      userDataDir,
+      decryptMasterKey: syncDecrypt,
+    });
     expect(cookies[0]).toMatchObject({
       name: 'plain',
       value: 'present',

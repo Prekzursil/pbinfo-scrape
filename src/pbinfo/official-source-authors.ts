@@ -1,6 +1,4 @@
-const OFFICIAL_SOURCE_AUTHOR_HANDLES = new Set([
-  'pbinfo',
-]);
+const OFFICIAL_SOURCE_AUTHOR_HANDLES = new Set(['pbinfo']);
 
 export function isOfficialSourceAuthorHandle(handle: string | undefined): boolean {
   if (!handle) {

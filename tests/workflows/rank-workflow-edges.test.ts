@@ -107,3 +107,40 @@ describe('runRankingWorkflow edge cases', () => {
     expect(result.problemsRanked).toBe(1);
   });
 });
+
+describe('runRankingWorkflow with several problems', () => {
+  test('ranks every problem in id order', async () => {
+    const workspaceRoot = makeWorkspace();
+    const config = loadLocalConfig(workspaceRoot);
+    const snapshot = prepareSnapshot(config, {
+      snapshotId: 'edge-multi',
+      scope: 'all',
+      now: new Date('2026-03-10T00:00:00.000Z'),
+    });
+    const sourcesRoot = join(snapshot.normalizedRoot, 'sources');
+    mkdirSync(sourcesRoot, { recursive: true });
+    for (const problemId of [7002, 7001]) {
+      writeFileSync(
+        join(sourcesRoot, `official-${problemId}.json`),
+        JSON.stringify({
+          sourceId: `official-${problemId}`,
+          kind: 'official',
+          problemId,
+          language: 'cpp',
+          score: 100,
+          sourceAvailable: false,
+          provenanceType: 'official-evaluation',
+          provenance: ['official'],
+        }),
+        'utf8',
+      );
+    }
+
+    const result = await runRankingWorkflow(workspaceRoot);
+    expect(result.problemsRanked).toBe(2);
+    const summary = JSON.parse(
+      readFileSync(join(snapshot.normalizedRoot, 'rankings', 'best-submissions.json'), 'utf8'),
+    ) as { problems: Array<{ problemId: number }> };
+    expect(summary.problems.map((entry) => entry.problemId)).toEqual([7001, 7002]);
+  });
+});

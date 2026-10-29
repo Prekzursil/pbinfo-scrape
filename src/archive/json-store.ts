@@ -1,11 +1,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-export function writeJsonRecord<T>(
-  root: string,
-  fileName: string,
-  payload: T,
-): string {
+export function writeJsonRecord<T>(root: string, fileName: string, payload: T): string {
   mkdirSync(root, { recursive: true });
   const path = join(root, fileName);
   writeJsonAtomic(path, payload);

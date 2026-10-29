@@ -171,14 +171,11 @@ export function loadLocalConfig(workspaceRoot: string): LoadedLocalConfig {
       maxAttempts: parsedInput?.crawl?.maxAttempts ?? 5,
       crossCheckWithBrowser: parsedInput?.crawl?.crossCheckWithBrowser ?? true,
       userHandle: parsedInput?.crawl?.userHandle,
-      publicStartUrls:
-        parsedInput?.crawl?.publicStartUrls ?? defaultPublicStartUrls(),
+      publicStartUrls: parsedInput?.crawl?.publicStartUrls ?? defaultPublicStartUrls(),
     },
     mirror: {
-      blockedAssetHosts:
-        parsedInput?.mirror?.blockedAssetHosts ?? defaultBlockedAssetHosts(),
-      externalAssetHosts:
-        parsedInput?.mirror?.externalAssetHosts ?? defaultExternalAssetHosts(),
+      blockedAssetHosts: parsedInput?.mirror?.blockedAssetHosts ?? defaultBlockedAssetHosts(),
+      externalAssetHosts: parsedInput?.mirror?.externalAssetHosts ?? defaultExternalAssetHosts(),
     },
     secrets: {
       recipient: parsedInput?.secrets?.recipient,
@@ -224,12 +221,7 @@ function defaultPublicStartUrls(): string[] {
 }
 
 function defaultExternalAssetHosts(): string[] {
-  return [
-    'ajax.googleapis.com',
-    'cdn.jsdelivr.net',
-    'cdnjs.cloudflare.com',
-    'use.fontawesome.com',
-  ];
+  return ['ajax.googleapis.com', 'cdn.jsdelivr.net', 'cdnjs.cloudflare.com', 'use.fontawesome.com'];
 }
 
 function defaultBlockedAssetHosts(): string[] {

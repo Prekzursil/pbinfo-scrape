@@ -1,0 +1,18 @@
+# gitleaks configuration: the pinned default ruleset plus one reviewed
+# allowlist entry. Read by the QZP lean gate (gate 5, depth-1 checkout) and by
+# the full-history scan in .github/workflows/desktop-gate.yml.
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Reviewed false positives"
+# Google reCAPTCHA *site* keys are public by design: every page that shows the
+# widget publishes its key in `data-sitekey`; only the separate secret key is
+# sensitive. The pbinfo.ro pages scraped into archive/ carry pbinfo's own site
+# key (generic-api-key at
+# archive/snapshots/acceptance-20260310b/mirror/site/contact/index.html:348,
+# inside <div class="g-recaptcha">). The pattern is the exact widget
+# attribute with the 40-character site-key shape, so any other credential
+# still fails the scan.
+regexTarget = "match"
+regexes = ['''data-sitekey="6L[0-9A-Za-z_-]{38}"''']

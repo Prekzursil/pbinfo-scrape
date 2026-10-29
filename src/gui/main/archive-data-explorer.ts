@@ -59,11 +59,41 @@ export function getArchiveExplorerSummary(
     mirrorServeCommand: `npm run cli -- serve --snapshot ${context.layout.snapshotId} --port 4173`,
     mirrorUrl: 'http://127.0.0.1:4173/',
     datasets: [
-      buildDatasetSummary('problems', 'Problems', context.problemsRoot, countJsonFiles(context.problemsRoot), 'Structured PBInfo problem records with sections, examples, constraints, and official-source metadata.'),
-      buildDatasetSummary('evaluations', 'Evaluations', context.evaluationsRoot, countJsonFiles(context.evaluationsRoot), 'Submission and evaluation records with score, verdict, tests, and compile logs when archived.'),
-      buildDatasetSummary('tests', 'Tests', context.testsRoot, countJsonFiles(context.testsRoot), 'Unified per-problem test dataset combining statement examples, visible tests, and evaluation-observed tests.'),
-      buildDatasetSummary('rankings', 'Rankings', context.rankingsRoot, countRankingEntries(context.rankingsIndexPath), 'Canonical best-user and best-official language rankings derived from normalized evaluation sources.'),
-      buildDatasetSummary('mirror-routes', 'Mirror Routes', context.routesRoot, countMirrorRouteEntries(context.routesManifestPath, context.routesRoot), 'Route records that drive local mirror replay and link archived entities back into the offline viewer.'),
+      buildDatasetSummary(
+        'problems',
+        'Problems',
+        context.problemsRoot,
+        countJsonFiles(context.problemsRoot),
+        'Structured PBInfo problem records with sections, examples, constraints, and official-source metadata.',
+      ),
+      buildDatasetSummary(
+        'evaluations',
+        'Evaluations',
+        context.evaluationsRoot,
+        countJsonFiles(context.evaluationsRoot),
+        'Submission and evaluation records with score, verdict, tests, and compile logs when archived.',
+      ),
+      buildDatasetSummary(
+        'tests',
+        'Tests',
+        context.testsRoot,
+        countJsonFiles(context.testsRoot),
+        'Unified per-problem test dataset combining statement examples, visible tests, and evaluation-observed tests.',
+      ),
+      buildDatasetSummary(
+        'rankings',
+        'Rankings',
+        context.rankingsRoot,
+        countRankingEntries(context.rankingsIndexPath),
+        'Canonical best-user and best-official language rankings derived from normalized evaluation sources.',
+      ),
+      buildDatasetSummary(
+        'mirror-routes',
+        'Mirror Routes',
+        context.routesRoot,
+        countMirrorRouteEntries(context.routesManifestPath, context.routesRoot),
+        'Route records that drive local mirror replay and link archived entities back into the offline viewer.',
+      ),
     ],
   };
 }
@@ -120,10 +150,7 @@ interface ExplorerContext {
   routesManifestPath: string;
 }
 
-function resolveExplorerContext(
-  workspaceRoot: string,
-  snapshotId?: string,
-): ExplorerContext {
+function resolveExplorerContext(workspaceRoot: string, snapshotId?: string): ExplorerContext {
   const config = loadLocalConfig(workspaceRoot);
   const layout = resolveReadableSnapshotLayout(config, snapshotId);
   return {
@@ -184,9 +211,8 @@ function listProblemItems(
       recordId: String(payload.id),
       title: `#${payload.id} ${payload.name}`,
       subtitle: payload.canonicalUrl ? extractPathname(payload.canonicalUrl) : undefined,
-      description: payload.constraints.length > 0
-        ? payload.constraints.slice(0, 2).join(' • ')
-        : undefined,
+      description:
+        payload.constraints.length > 0 ? payload.constraints.slice(0, 2).join(' • ') : undefined,
       filePath,
       mirrorRoute: deriveProblemRoute(payload),
     }))
@@ -236,12 +262,12 @@ function listRankingItems(
 ): GuiArchiveRecordSummary[] {
   const rankingIndex = readRankingIndex(context.rankingsIndexPath);
   return (rankingIndex.problems ?? [])
-    .filter((entry): entry is NonNullable<typeof rankingIndex.problems>[number] & { problemId: number } => typeof entry.problemId === 'number')
+    .filter(
+      (entry): entry is NonNullable<typeof rankingIndex.problems>[number] & { problemId: number } =>
+        typeof entry.problemId === 'number',
+    )
     .map((entry) => {
-      const rankingPath = join(
-        context.rankingProblemsRoot,
-        `problem-${entry.problemId}.json`,
-      );
+      const rankingPath = join(context.rankingProblemsRoot, `problem-${entry.problemId}.json`);
       const problemRecord = readJsonFile<ProblemRecord>(
         join(context.problemsRoot, `problem-${entry.problemId}.json`),
       );
@@ -252,9 +278,10 @@ function listRankingItems(
         title: problemRecord
           ? `#${entry.problemId} ${problemRecord.name}`
           : `Problem #${entry.problemId}`,
-        subtitle: languages.length > 0
-          ? `Best user languages: ${languages.join(', ')}`
-          : 'No language winners recorded',
+        subtitle:
+          languages.length > 0
+            ? `Best user languages: ${languages.join(', ')}`
+            : 'No language winners recorded',
         description: entry.bestUserOverallEvaluationId
           ? `Best user overall evaluation: ${entry.bestUserOverallEvaluationId}`
           : 'No overall best user evaluation recorded',
@@ -271,12 +298,13 @@ function listMirrorRouteItems(
   query: string | undefined,
 ): GuiArchiveRecordSummary[] {
   const manifestRoutes = readJsonFile<MirrorRouteRecord[]>(context.routesManifestPath);
-  const records = manifestRoutes && manifestRoutes.length > 0
-    ? manifestRoutes.map((payload) => ({
-        payload,
-        filePath: context.routesManifestPath,
-      }))
-    : readJsonDirectory<MirrorRouteRecord>(context.routesRoot);
+  const records =
+    manifestRoutes && manifestRoutes.length > 0
+      ? manifestRoutes.map((payload) => ({
+          payload,
+          filePath: context.routesManifestPath,
+        }))
+      : readJsonDirectory<MirrorRouteRecord>(context.routesRoot);
 
   return records
     .map(({ payload, filePath }) => ({
@@ -328,10 +356,7 @@ function readEvaluationRecordDetail(
   };
 }
 
-function readTestsRecordDetail(
-  context: ExplorerContext,
-  recordId: string,
-): GuiArchiveRecordDetail {
+function readTestsRecordDetail(context: ExplorerContext, recordId: string): GuiArchiveRecordDetail {
   const filePath = join(context.testsRoot, `problem-${recordId}.json`);
   const payload = requireJsonFile<ProblemTestsRecord>(filePath);
   return {
@@ -352,16 +377,12 @@ function readRankingRecordDetail(
 ): GuiArchiveRecordDetail {
   const rankingPath = join(context.rankingProblemsRoot, `problem-${recordId}.json`);
   const index = readRankingIndex(context.rankingsIndexPath);
-  const indexEntry = (index.problems ?? []).find(
-    (entry) => String(entry.problemId) === recordId,
-  );
+  const indexEntry = (index.problems ?? []).find((entry) => String(entry.problemId) === recordId);
   if (!indexEntry) {
     throw new Error(`Ranking record "${recordId}" was not found.`);
   }
 
-  const payload =
-    readJsonFile<Record<string, unknown>>(rankingPath)
-    ?? indexEntry;
+  const payload = readJsonFile<Record<string, unknown>>(rankingPath) ?? indexEntry;
   const problemRecord = readJsonFile<ProblemRecord>(
     join(context.problemsRoot, `problem-${recordId}.json`),
   );
@@ -370,9 +391,7 @@ function readRankingRecordDetail(
     snapshotId: context.layout.snapshotId,
     dataset: 'rankings',
     recordId,
-    title: problemRecord
-      ? `#${recordId} ${problemRecord.name}`
-      : `Problem #${recordId}`,
+    title: problemRecord ? `#${recordId} ${problemRecord.name}` : `Problem #${recordId}`,
     subtitle: indexEntry.bestUserOverallEvaluationId
       ? `Best user overall evaluation: ${indexEntry.bestUserOverallEvaluationId}`
       : 'No overall best user evaluation recorded',
@@ -389,8 +408,8 @@ function readMirrorRouteRecordDetail(
   const manifestRoutes = readJsonFile<MirrorRouteRecord[]>(context.routesManifestPath);
   const manifestMatch = manifestRoutes?.find((route) => route.route === recordId);
   const payload =
-    manifestMatch
-    ?? readJsonDirectory<MirrorRouteRecord>(context.routesRoot).find(
+    manifestMatch ??
+    readJsonDirectory<MirrorRouteRecord>(context.routesRoot).find(
       (record) => record.payload.route === recordId,
     )?.payload;
   if (!payload) {
@@ -403,7 +422,9 @@ function readMirrorRouteRecordDetail(
     recordId,
     title: payload.route,
     subtitle: payload.template,
-    filePath: manifestMatch ? context.routesManifestPath : join(context.routesRoot, `route-${sanitizeRouteRecordId(recordId)}.json`),
+    filePath: manifestMatch
+      ? context.routesManifestPath
+      : join(context.routesRoot, `route-${sanitizeRouteRecordId(recordId)}.json`),
     mirrorRoute: payload.route,
     payload,
   };
@@ -431,9 +452,11 @@ function countMirrorRouteEntries(manifestPath: string, fallbackRoot: string): nu
 }
 
 function readRankingIndex(path: string): RankingIndexFile {
-  return readJsonFile<RankingIndexFile>(path) ?? {
-    problems: [],
-  };
+  return (
+    readJsonFile<RankingIndexFile>(path) ?? {
+      problems: [],
+    }
+  );
 }
 
 function readJsonDirectory<T>(root: string): Array<{ payload: T; filePath: string }> {
@@ -475,21 +498,12 @@ function normalizeQuery(query: string | undefined): string | undefined {
   return trimmed ? trimmed : undefined;
 }
 
-function matchesQuery(
-  item: GuiArchiveRecordSummary,
-  query: string | undefined,
-): boolean {
+function matchesQuery(item: GuiArchiveRecordSummary, query: string | undefined): boolean {
   if (!query) {
     return true;
   }
 
-  const haystacks = [
-    item.recordId,
-    item.title,
-    item.subtitle,
-    item.description,
-    item.mirrorRoute,
-  ]
+  const haystacks = [item.recordId, item.title, item.subtitle, item.description, item.mirrorRoute]
     .filter((value): value is string => typeof value === 'string' && value.length > 0)
     .map((value) => value.toLowerCase());
   return haystacks.some((value) => value.includes(query));

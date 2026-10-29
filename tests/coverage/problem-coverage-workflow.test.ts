@@ -120,74 +120,98 @@ describe('runProblemCoverageWorkflow', () => {
 
     writeFileSync(
       join(snapshot.normalizedRoot, 'pages', 'statement-1.json'),
-      JSON.stringify({
-        snapshotId: snapshot.snapshotId,
-        url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1',
-        kind: 'problem-statement',
-        httpStatus: 200,
-        bodyPath: 'raw-pages/page-problem-1-statement.html',
-        fetchedAt: '2026-03-10T00:00:00.000Z',
-      }, null, 2),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=1',
+          kind: 'problem-statement',
+          httpStatus: 200,
+          bodyPath: 'raw-pages/page-problem-1-statement.html',
+          fetchedAt: '2026-03-10T00:00:00.000Z',
+        },
+        null,
+        2,
+      ),
       'utf8',
     );
     writeFileSync(
       join(snapshot.normalizedRoot, 'pages', 'solution-1.json'),
-      JSON.stringify({
-        snapshotId: snapshot.snapshotId,
-        url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-solutie.php?id=1',
-        kind: 'problem-solution',
-        httpStatus: 200,
-        bodyPath: 'raw-pages/page-problem-1-solution.html',
-        fetchedAt: '2026-03-10T00:00:00.000Z',
-      }, null, 2),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-solutie.php?id=1',
+          kind: 'problem-solution',
+          httpStatus: 200,
+          bodyPath: 'raw-pages/page-problem-1-solution.html',
+          fetchedAt: '2026-03-10T00:00:00.000Z',
+        },
+        null,
+        2,
+      ),
       'utf8',
     );
     writeFileSync(
       join(snapshot.normalizedRoot, 'pages', 'tests-1.json'),
-      JSON.stringify({
-        snapshotId: snapshot.snapshotId,
-        url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-teste.php?id=1',
-        kind: 'problem-tests',
-        httpStatus: 200,
-        bodyPath: 'raw-pages/page-problem-1-tests.html',
-        fetchedAt: '2026-03-10T00:00:00.000Z',
-      }, null, 2),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-teste.php?id=1',
+          kind: 'problem-tests',
+          httpStatus: 200,
+          bodyPath: 'raw-pages/page-problem-1-tests.html',
+          fetchedAt: '2026-03-10T00:00:00.000Z',
+        },
+        null,
+        2,
+      ),
       'utf8',
     );
     writeFileSync(
       join(snapshot.normalizedRoot, 'pages', 'statement-3716.json'),
-      JSON.stringify({
-        snapshotId: snapshot.snapshotId,
-        url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3716',
-        kind: 'problem-statement',
-        httpStatus: 200,
-        bodyPath: 'raw-pages/page-problem-3716-statement.html',
-        fetchedAt: '2026-03-10T00:00:00.000Z',
-      }, null, 2),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3716',
+          kind: 'problem-statement',
+          httpStatus: 200,
+          bodyPath: 'raw-pages/page-problem-3716-statement.html',
+          fetchedAt: '2026-03-10T00:00:00.000Z',
+        },
+        null,
+        2,
+      ),
       'utf8',
     );
     writeFileSync(
       join(snapshot.normalizedRoot, 'pages', 'solution-3716.json'),
-      JSON.stringify({
-        snapshotId: snapshot.snapshotId,
-        url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-solutie.php?id=3716',
-        kind: 'problem-solution',
-        httpStatus: 200,
-        bodyPath: 'raw-pages/page-problem-3716-solution.html',
-        fetchedAt: '2026-03-10T00:00:00.000Z',
-      }, null, 2),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-solutie.php?id=3716',
+          kind: 'problem-solution',
+          httpStatus: 200,
+          bodyPath: 'raw-pages/page-problem-3716-solution.html',
+          fetchedAt: '2026-03-10T00:00:00.000Z',
+        },
+        null,
+        2,
+      ),
       'utf8',
     );
     writeFileSync(
       join(snapshot.normalizedRoot, 'pages', 'tests-3716.json'),
-      JSON.stringify({
-        snapshotId: snapshot.snapshotId,
-        url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-teste.php?id=3716',
-        kind: 'problem-tests',
-        httpStatus: 200,
-        bodyPath: 'raw-pages/page-problem-3716-tests.html',
-        fetchedAt: '2026-03-10T00:00:00.000Z',
-      }, null, 2),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-teste.php?id=3716',
+          kind: 'problem-tests',
+          httpStatus: 200,
+          bodyPath: 'raw-pages/page-problem-3716-tests.html',
+          fetchedAt: '2026-03-10T00:00:00.000Z',
+        },
+        null,
+        2,
+      ),
       'utf8',
     );
 
@@ -372,16 +396,10 @@ describe('runProblemCoverageWorkflow', () => {
     );
 
     const unsolved = JSON.parse(
-      readFileSync(
-        join(snapshot.normalizedRoot, 'problem-coverage', 'problem-1.json'),
-        'utf8',
-      ),
+      readFileSync(join(snapshot.normalizedRoot, 'problem-coverage', 'problem-1.json'), 'utf8'),
     ) as Record<string, unknown>;
     const solved = JSON.parse(
-      readFileSync(
-        join(snapshot.normalizedRoot, 'problem-coverage', 'problem-3716.json'),
-        'utf8',
-      ),
+      readFileSync(join(snapshot.normalizedRoot, 'problem-coverage', 'problem-3716.json'), 'utf8'),
     ) as Record<string, unknown>;
 
     expect(unsolved).toEqual(
@@ -1085,10 +1103,7 @@ describe('runProblemCoverageWorkflow', () => {
     expect(result.problemsCovered).toBe(1);
 
     const record = JSON.parse(
-      readFileSync(
-        join(snapshot.normalizedRoot, 'problem-coverage', 'problem-1.json'),
-        'utf8',
-      ),
+      readFileSync(join(snapshot.normalizedRoot, 'problem-coverage', 'problem-1.json'), 'utf8'),
     ) as Record<string, unknown>;
 
     expect(record).toEqual(
@@ -1274,10 +1289,7 @@ describe('runProblemCoverageWorkflow', () => {
     await runProblemCoverageWorkflow(workspaceRoot, snapshot.snapshotId);
 
     const record = JSON.parse(
-      readFileSync(
-        join(snapshot.normalizedRoot, 'problem-coverage', 'problem-49.json'),
-        'utf8',
-      ),
+      readFileSync(join(snapshot.normalizedRoot, 'problem-coverage', 'problem-49.json'), 'utf8'),
     ) as Record<string, unknown>;
 
     expect(record).toEqual(
@@ -1505,10 +1517,7 @@ describe('runProblemCoverageWorkflow', () => {
     await runProblemCoverageWorkflow(workspaceRoot, snapshot.snapshotId);
 
     const record = JSON.parse(
-      readFileSync(
-        join(snapshot.normalizedRoot, 'problem-coverage', 'problem-284.json'),
-        'utf8',
-      ),
+      readFileSync(join(snapshot.normalizedRoot, 'problem-coverage', 'problem-284.json'), 'utf8'),
     ) as Record<string, unknown>;
 
     expect(record).toEqual(
@@ -1747,10 +1756,7 @@ describe('runProblemCoverageWorkflow', () => {
     await runProblemCoverageWorkflow(workspaceRoot, snapshot.snapshotId);
 
     const record = JSON.parse(
-      readFileSync(
-        join(snapshot.normalizedRoot, 'problem-coverage', 'problem-285.json'),
-        'utf8',
-      ),
+      readFileSync(join(snapshot.normalizedRoot, 'problem-coverage', 'problem-285.json'), 'utf8'),
     ) as Record<string, unknown>;
 
     expect(record).toEqual(
@@ -1830,14 +1836,18 @@ describe('runProblemCoverageWorkflow', () => {
 
     writeFileSync(
       join(snapshot.normalizedRoot, 'pages', 'tests-512.json'),
-      JSON.stringify({
-        snapshotId: snapshot.snapshotId,
-        url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-teste.php?id=512',
-        kind: 'problem-tests',
-        httpStatus: 200,
-        bodyPath: 'raw-pages/page-problem-512-tests.html',
-        fetchedAt: '2026-03-18T00:00:00.000Z',
-      }, null, 2),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-teste.php?id=512',
+          kind: 'problem-tests',
+          httpStatus: 200,
+          bodyPath: 'raw-pages/page-problem-512-tests.html',
+          fetchedAt: '2026-03-18T00:00:00.000Z',
+        },
+        null,
+        2,
+      ),
       'utf8',
     );
 
@@ -1863,10 +1873,7 @@ describe('runProblemCoverageWorkflow', () => {
     await runProblemCoverageWorkflow(workspaceRoot, snapshot.snapshotId);
 
     const record = JSON.parse(
-      readFileSync(
-        join(snapshot.normalizedRoot, 'problem-coverage', 'problem-512.json'),
-        'utf8',
-      ),
+      readFileSync(join(snapshot.normalizedRoot, 'problem-coverage', 'problem-512.json'), 'utf8'),
     ) as Record<string, unknown>;
 
     expect(record).toEqual(
@@ -1888,7 +1895,9 @@ describe('runProblemCoverageWorkflow', () => {
   });
 
   test('marks official sources as not available upstream when harvested official evaluations expose no source body', async () => {
-    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-coverage-official-harvested-no-source-'));
+    const workspaceRoot = mkdtempSync(
+      join(tmpdir(), 'pbinfo-coverage-official-harvested-no-source-'),
+    );
     tempDirs.push(workspaceRoot);
 
     mkdirSync(join(workspaceRoot, '.local'), { recursive: true });
@@ -1965,38 +1974,50 @@ describe('runProblemCoverageWorkflow', () => {
 
     writeFileSync(
       join(snapshot.normalizedRoot, 'pages', 'statement-19.json'),
-      JSON.stringify({
-        snapshotId: snapshot.snapshotId,
-        url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=19',
-        kind: 'problem-statement',
-        httpStatus: 200,
-        bodyPath: 'raw-pages/page-problem-19-statement.html',
-        fetchedAt: '2026-03-18T00:00:00.000Z',
-      }, null, 2),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=19',
+          kind: 'problem-statement',
+          httpStatus: 200,
+          bodyPath: 'raw-pages/page-problem-19-statement.html',
+          fetchedAt: '2026-03-18T00:00:00.000Z',
+        },
+        null,
+        2,
+      ),
       'utf8',
     );
     writeFileSync(
       join(snapshot.normalizedRoot, 'pages', 'solution-19.json'),
-      JSON.stringify({
-        snapshotId: snapshot.snapshotId,
-        url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-solutie.php?id=19',
-        kind: 'problem-solution',
-        httpStatus: 200,
-        bodyPath: 'raw-pages/page-problem-19-solution.html',
-        fetchedAt: '2026-03-18T00:00:00.000Z',
-      }, null, 2),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-solutie.php?id=19',
+          kind: 'problem-solution',
+          httpStatus: 200,
+          bodyPath: 'raw-pages/page-problem-19-solution.html',
+          fetchedAt: '2026-03-18T00:00:00.000Z',
+        },
+        null,
+        2,
+      ),
       'utf8',
     );
     writeFileSync(
       join(snapshot.normalizedRoot, 'pages', 'tests-19.json'),
-      JSON.stringify({
-        snapshotId: snapshot.snapshotId,
-        url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-teste.php?id=19',
-        kind: 'problem-tests',
-        httpStatus: 200,
-        bodyPath: 'raw-pages/page-problem-19-tests.html',
-        fetchedAt: '2026-03-18T00:00:00.000Z',
-      }, null, 2),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-teste.php?id=19',
+          kind: 'problem-tests',
+          httpStatus: 200,
+          bodyPath: 'raw-pages/page-problem-19-tests.html',
+          fetchedAt: '2026-03-18T00:00:00.000Z',
+        },
+        null,
+        2,
+      ),
       'utf8',
     );
 
@@ -2125,10 +2146,7 @@ describe('runProblemCoverageWorkflow', () => {
     await runProblemCoverageWorkflow(workspaceRoot, snapshot.snapshotId);
 
     const record = JSON.parse(
-      readFileSync(
-        join(snapshot.normalizedRoot, 'problem-coverage', 'problem-19.json'),
-        'utf8',
-      ),
+      readFileSync(join(snapshot.normalizedRoot, 'problem-coverage', 'problem-19.json'), 'utf8'),
     ) as Record<string, unknown>;
 
     expect(record).toEqual(
@@ -2213,7 +2231,10 @@ describe('runProblemCoverageWorkflow', () => {
     );
 
     writeFileSync(
-      join(snapshot.rawPagesRoot, 'page-https-www-pbinfo-ro-solutii-user-Vasilut-problema-19-bfs.html'),
+      join(
+        snapshot.rawPagesRoot,
+        'page-https-www-pbinfo-ro-solutii-user-Vasilut-problema-19-bfs.html',
+      ),
       `
         <table class="table">
           <tbody>
@@ -2231,39 +2252,51 @@ describe('runProblemCoverageWorkflow', () => {
 
     writeFileSync(
       join(snapshot.normalizedRoot, 'pages', 'official-source-list-19.json'),
-      JSON.stringify({
-        snapshotId: snapshot.snapshotId,
-        url: 'https://www.pbinfo.ro/solutii/user/Vasilut/problema/19/bfs',
-        kind: 'official-source-list',
-        httpStatus: 200,
-        bodyPath: 'page-https-www-pbinfo-ro-solutii-user-Vasilut-problema-19-bfs.html',
-        fetchedAt: '2026-03-18T00:00:00.000Z',
-      }, null, 2),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          url: 'https://www.pbinfo.ro/solutii/user/Vasilut/problema/19/bfs',
+          kind: 'official-source-list',
+          httpStatus: 200,
+          bodyPath: 'page-https-www-pbinfo-ro-solutii-user-Vasilut-problema-19-bfs.html',
+          fetchedAt: '2026-03-18T00:00:00.000Z',
+        },
+        null,
+        2,
+      ),
       'utf8',
     );
 
     writeFileSync(
       join(snapshot.normalizedRoot, 'pages', 'statement-19.json'),
-      JSON.stringify({
-        snapshotId: snapshot.snapshotId,
-        url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=19',
-        kind: 'problem-statement',
-        httpStatus: 200,
-        bodyPath: 'raw-pages/page-problem-19-statement.html',
-        fetchedAt: '2026-03-18T00:00:00.000Z',
-      }, null, 2),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=19',
+          kind: 'problem-statement',
+          httpStatus: 200,
+          bodyPath: 'raw-pages/page-problem-19-statement.html',
+          fetchedAt: '2026-03-18T00:00:00.000Z',
+        },
+        null,
+        2,
+      ),
       'utf8',
     );
     writeFileSync(
       join(snapshot.normalizedRoot, 'pages', 'solution-19.json'),
-      JSON.stringify({
-        snapshotId: snapshot.snapshotId,
-        url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-solutie.php?id=19',
-        kind: 'problem-solution',
-        httpStatus: 200,
-        bodyPath: 'raw-pages/page-problem-19-solution.html',
-        fetchedAt: '2026-03-18T00:00:00.000Z',
-      }, null, 2),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-solutie.php?id=19',
+          kind: 'problem-solution',
+          httpStatus: 200,
+          bodyPath: 'raw-pages/page-problem-19-solution.html',
+          fetchedAt: '2026-03-18T00:00:00.000Z',
+        },
+        null,
+        2,
+      ),
       'utf8',
     );
 
@@ -2389,10 +2422,7 @@ describe('runProblemCoverageWorkflow', () => {
     await runProblemCoverageWorkflow(workspaceRoot, snapshot.snapshotId);
 
     const record = JSON.parse(
-      readFileSync(
-        join(snapshot.normalizedRoot, 'problem-coverage', 'problem-19.json'),
-        'utf8',
-      ),
+      readFileSync(join(snapshot.normalizedRoot, 'problem-coverage', 'problem-19.json'), 'utf8'),
     ) as Record<string, unknown>;
 
     expect(record).toEqual(

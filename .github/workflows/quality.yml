@@ -1,104 +1,30 @@
-name: Quality Gate
+# QZP lean gate — zero tolerance (any finding of any severity fails).
+# Thin caller of quality-zero-platform's reusable workflow, pinned to an exact
+# commit. Gate changes happen in quality-zero-platform, never here; this repo
+# adopts them by bumping the pin below. See CONTRIBUTING.md.
+name: quality
 
 on:
   push:
-    branches: [main]
+    branches: ["main"]
   pull_request:
-    branches: [main]
-  workflow_dispatch:
+    branches: ["main"]
+  # a merge queue's synthetic commit must report the required check too
+  merge_group:
+    types: [checks_requested]
 
 permissions:
   contents: read
 
 concurrency:
-  group: quality-${{ github.ref }}
-  cancel-in-progress: true
+  # a pull request's runs share one group, so a newer push cancels the superseded
+  # run; every other event (a push, a merge-queue commit) gets a group of its own
+  # commit, so no commit's run is ever replaced while it waits or left untested
+  group: quality-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  # Gate 1 + Gate 2: lint / format / sec-lint (oxlint) and types (tsc).
-  lint-and-types:
-    name: Lint & Types
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
-        with:
-          node-version: '24'
-          cache: npm
-      - run: npm ci
-      - name: Lint (oxlint)
-        run: npm run lint
-      - name: Typecheck (cli/library)
-        run: npm run typecheck
-      - name: Typecheck (desktop)
-        run: npm run typecheck:desktop
-
-  # Gate 3 (part 1): tests + build.
-  test:
-    name: Tests & Build
-    # Windows-targeted desktop app: the suite asserts Windows path semantics and
-    # Chromium-on-Windows cookie-profile resolution, so the tests run on Windows.
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
-        with:
-          node-version: '24'
-          cache: npm
-      - run: npm ci
-      - name: Unit & integration tests
-        run: npm test
-      - name: Build
-        run: npm run build
-
-  # Gate 3 (part 2): STRICT 100% line + branch coverage (lean strict-zero target).
-  # BLOCKING: the suite enforces the 100% line/branch/function/statement thresholds
-  # declared in vitest.config.ts. A drop below 100% fails this job and the gate.
-  coverage:
-    name: Coverage (100% enforced)
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
-        with:
-          node-version: '24'
-          cache: npm
-      - run: npm ci
-      - name: Coverage (100% line + branch enforced)
-        run: npm run test:coverage
-
-  # Gate 4: SAST (Semgrep CE / Opengrep rulesets).
-  sast:
-    name: SAST (Semgrep CE)
-    runs-on: ubuntu-latest
-    container:
-      image: semgrep/semgrep
-    steps:
-      - uses: actions/checkout@v7
-      - name: Semgrep scan
-        run: semgrep scan --config p/typescript --config p/javascript --config p/secrets --error --metrics off src
-
-  # Gate 5: secrets scanning (gitleaks).
-  secrets:
-    name: Secrets (gitleaks)
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
-      - uses: gitleaks/gitleaks-action@e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e # v3.0.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  # Gate 6: dependency vulnerability scanning (osv-scanner).
-  deps:
-    name: Dependencies (osv-scanner)
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    steps:
-      - uses: actions/checkout@v7
-      - uses: google/osv-scanner-action/osv-scanner-action@9a498708959aeaef5ef730655706c5a1df1edbc2 # v2.3.8
-        with:
-          scan-args: |-
-            --lockfile=package-lock.json
+  quality:
+    uses: Prekzursil/quality-zero-platform/.github/workflows/reusable-quality.yml@f84b146aca9432cd852092251d31fec3ab3169d7
+    with:
+      deps-severity-floor: any

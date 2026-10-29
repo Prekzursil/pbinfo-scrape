@@ -60,8 +60,9 @@ export function App({ desktop }: AppProps) {
   const [archiveSummary, setArchiveSummary] = useState<GuiArchiveSummary | null>(null);
   const [archiveListing, setArchiveListing] = useState<GuiArchiveListing | null>(null);
   const [selectedArchiveRecordId, setSelectedArchiveRecordId] = useState<string | null>(null);
-  const [archiveRecordDetail, setArchiveRecordDetail] =
-    useState<GuiArchiveRecordDetail | null>(null);
+  const [archiveRecordDetail, setArchiveRecordDetail] = useState<GuiArchiveRecordDetail | null>(
+    null,
+  );
   const [verbosityMode, setVerbosityMode] = useState<GuiVerbosityMode>('normal');
   const [busyAction, setBusyAction] = useState<string | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
@@ -117,10 +118,11 @@ export function App({ desktop }: AppProps) {
       }
 
       const nextWorkspace = await bridge.getWorkspaceState();
-      /* v8 ignore next 3 -- unmount race guard: fires only if the component unmounts mid-refresh */
+      /* v8 ignore start -- unmount race guard: fires only if the component unmounts mid-refresh */
       if (!isMountedRef.current) {
         return;
       }
+      /* v8 ignore stop */
 
       if (!nextWorkspace) {
         setWorkspaceState(null);
@@ -147,16 +149,15 @@ export function App({ desktop }: AppProps) {
       }
 
       const [nextCrawlStatus, nextJobEvents] = await Promise.all([
-        bridge
-          .getCrawlStatus(resolvedSnapshotId)
-          .catch(() => null as GuiCrawlStatus | null),
+        bridge.getCrawlStatus(resolvedSnapshotId).catch(() => null as GuiCrawlStatus | null),
         readPreferredJobEvents(bridge, nextJobs, verbosityMode, resolvedSnapshotId),
       ]);
 
-      /* v8 ignore next 3 -- unmount race guard: fires only if the component unmounts mid-refresh */
+      /* v8 ignore start -- unmount race guard: fires only if the component unmounts mid-refresh */
       if (!isMountedRef.current) {
         return;
       }
+      /* v8 ignore stop */
 
       setWorkspaceState(nextWorkspace);
       setJobs(nextJobs);
@@ -172,10 +173,11 @@ export function App({ desktop }: AppProps) {
       try {
         await refresh();
       } catch (error) {
-        /* v8 ignore next 3 -- re-render/unmount race guard: cancelled is only true after cleanup */
+        /* v8 ignore start -- re-render/unmount race guard: cancelled is only true after cleanup */
         if (cancelled) {
           return;
         }
+        /* v8 ignore stop */
         setErrorMessage(toMessage(error));
       }
     })();
@@ -312,14 +314,20 @@ export function App({ desktop }: AppProps) {
           snapshotId: selectedSnapshotId,
           problemId: selectedCoverageProblemId,
         });
-        if (!cancelled) {
-          setCoverageDetail(detail);
+        /* v8 ignore start -- unmount race guard: fires only if the selection changes or the view unmounts mid-fetch */
+        if (cancelled) {
+          return;
         }
+        /* v8 ignore stop */
+        setCoverageDetail(detail);
       } catch (error) {
-        if (!cancelled) {
-          setCoverageDetail(null);
-          setErrorMessage(toMessage(error));
+        /* v8 ignore start -- unmount race guard: fires only if the selection changes or the view unmounts mid-fetch */
+        if (cancelled) {
+          return;
         }
+        /* v8 ignore stop */
+        setCoverageDetail(null);
+        setErrorMessage(toMessage(error));
       }
     })();
 
@@ -382,27 +390,27 @@ export function App({ desktop }: AppProps) {
           dataset: selectedArchiveDataset,
           recordId: selectedArchiveRecordId,
         });
-        if (!cancelled) {
-          setArchiveRecordDetail(detail);
+        /* v8 ignore start -- unmount race guard: fires only if the selection changes or the view unmounts mid-fetch */
+        if (cancelled) {
+          return;
         }
+        /* v8 ignore stop */
+        setArchiveRecordDetail(detail);
       } catch (error) {
-        if (!cancelled) {
-          setArchiveRecordDetail(null);
-          setErrorMessage(toMessage(error));
+        /* v8 ignore start -- unmount race guard: fires only if the selection changes or the view unmounts mid-fetch */
+        if (cancelled) {
+          return;
         }
+        /* v8 ignore stop */
+        setArchiveRecordDetail(null);
+        setErrorMessage(toMessage(error));
       }
     })();
 
     return () => {
       cancelled = true;
     };
-  }, [
-    bridge,
-    selectedArchiveDataset,
-    selectedArchiveRecordId,
-    selectedSnapshotId,
-    workspaceState,
-  ]);
+  }, [bridge, selectedArchiveDataset, selectedArchiveRecordId, selectedSnapshotId, workspaceState]);
 
   const activeCrawlJob = useMemo(
     () =>
@@ -479,7 +487,9 @@ export function App({ desktop }: AppProps) {
     () =>
       [...jobs]
         .reverse()
-        .find((job) => job.kind === 'mirror-serve' && typeof job.detail?.mirrorPreviewUrl === 'string'),
+        .find(
+          (job) => job.kind === 'mirror-serve' && typeof job.detail?.mirrorPreviewUrl === 'string',
+        ),
     [jobs],
   );
   const previewUrl =
@@ -489,10 +499,11 @@ export function App({ desktop }: AppProps) {
   const handleVerbosityChange = useCallback(
     (nextVerbosityMode: GuiVerbosityMode) => {
       setVerbosityMode(nextVerbosityMode);
-      /* v8 ignore next 3 -- verbosity controls only render once a bridge-backed workspace exists */
+      /* v8 ignore start -- verbosity controls only render once a bridge-backed workspace exists */
       if (!bridge) {
         return;
       }
+      /* v8 ignore stop */
 
       void bridge.setVerbosityMode(nextVerbosityMode).catch((error) => {
         setErrorMessage(toMessage(error));
@@ -707,10 +718,11 @@ export function App({ desktop }: AppProps) {
 }
 
 function readWindowBridge(): DesktopBridge | undefined {
-  /* v8 ignore next 3 -- the renderer always runs in a window context; the SSR guard is defensive */
+  /* v8 ignore start -- the renderer always runs in a window context; the SSR guard is defensive */
   if (typeof window === 'undefined') {
     return undefined;
   }
+  /* v8 ignore stop */
 
   return (window as Window & { pbinfoDesktop?: DesktopBridge }).pbinfoDesktop;
 }
@@ -721,17 +733,12 @@ async function readPreferredJobEvents(
   verbosityMode: GuiVerbosityMode,
   snapshotId?: string,
 ): Promise<GuiJobEvent[]> {
-  const preferredJob = [...jobs]
-    .reverse()
-    .find(
-      (job) =>
-        job.kind === 'crawl' &&
-        (!snapshotId || job.snapshotId === snapshotId),
-    )
-    ?? [...jobs]
+  const preferredJob =
+    [...jobs]
       .reverse()
-      .find((job) => job.kind === 'crawl')
-    ?? [...jobs]
+      .find((job) => job.kind === 'crawl' && (!snapshotId || job.snapshotId === snapshotId)) ??
+    [...jobs].reverse().find((job) => job.kind === 'crawl') ??
+    [...jobs]
       .reverse()
       .find((job) => job.kind === 'snapshot-finalize' || job.kind === 'mirror-build');
   if (!preferredJob) {
@@ -749,9 +756,7 @@ async function readPreferredJobEvents(
           ? 40
           : 18;
 
-  return bridge
-    .listJobEvents(preferredJob.jobId, eventLimit)
-    .catch(() => []);
+  return bridge.listJobEvents(preferredJob.jobId, eventLimit).catch(() => []);
 }
 
 function findLatestSnapshotId(jobs: GuiJobRecord[]): string | undefined {

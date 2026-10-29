@@ -88,15 +88,24 @@ describe('parseProblemSourceListPage pagination', () => {
   });
 
   test('derives pagination from a Paginare() call and skips invalid sizes/totals', () => {
-    const ok = parseProblemSourceListPage('<div>Paginare(50, 0, 20)</div>', 'https://www.pbinfo.ro/solutii');
+    const ok = parseProblemSourceListPage(
+      '<div>Paginare(50, 0, 20)</div>',
+      'https://www.pbinfo.ro/solutii',
+    );
     expect(ok.nextPageUrls).toEqual([
       'https://www.pbinfo.ro/solutii?start=20',
       'https://www.pbinfo.ro/solutii?start=40',
     ]);
     expect(parseProblemSourceListPage('<div>Paginare(10, 0, 0)</div>').pageSize).toBeUndefined();
-    expect(parseProblemSourceListPage(`<div>Paginare(${HUGE}, 0, 10)</div>`).pageSize).toBeUndefined();
-    expect(parseProblemSourceListPage(`<div>Paginare(10, ${HUGE}, 10)</div>`).pageSize).toBeUndefined();
-    expect(parseProblemSourceListPage(`<div>Paginare(10, 0, ${HUGE})</div>`).pageSize).toBeUndefined();
+    expect(
+      parseProblemSourceListPage(`<div>Paginare(${HUGE}, 0, 10)</div>`).pageSize,
+    ).toBeUndefined();
+    expect(
+      parseProblemSourceListPage(`<div>Paginare(10, ${HUGE}, 10)</div>`).pageSize,
+    ).toBeUndefined();
+    expect(
+      parseProblemSourceListPage(`<div>Paginare(10, 0, ${HUGE})</div>`).pageSize,
+    ).toBeUndefined();
   });
 
   test('treats a negative start offset as zero', () => {

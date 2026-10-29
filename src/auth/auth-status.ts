@@ -30,8 +30,7 @@ export async function probePbinfoAuthStatus(
   const configuredHandle = normalizeHandle(config.crawl.userHandle);
   const cookieFileExists = existsSync(config.auth.sessionCookiesPath);
   const probeUrl = options.probeUrl ?? 'https://www.pbinfo.ro/';
-  const fetchImpl = options.fetchImpl
-    ?? await createCookieFetch(config.auth.sessionCookiesPath);
+  const fetchImpl = options.fetchImpl ?? (await createCookieFetch(config.auth.sessionCookiesPath));
   const checkedAt = (options.now ?? new Date()).toISOString();
 
   if (!cookieFileExists) {
@@ -57,9 +56,7 @@ export async function probePbinfoAuthStatus(
   });
   const html = await response.text();
   const loggedIn = extractLoggedInState(html);
-  const resolvedHandle = loggedIn
-    ? normalizeHandle(extractResolvedHandle(html))
-    : undefined;
+  const resolvedHandle = loggedIn ? normalizeHandle(extractResolvedHandle(html)) : undefined;
   const handleMatchesConfigured =
     configuredHandle === undefined
       ? true
@@ -165,22 +162,23 @@ function extractResolvedHandle(html: string): string | undefined {
   const sessionId = Number(sessionJson?.id ?? sessionJson?.user_id ?? 0);
   const sessionIsAuthenticated = Number.isFinite(sessionId) && sessionId > 0;
   const sessionCandidate =
-    pickSessionHandle(sessionJson?.username)
-    ?? pickSessionHandle(sessionJson?.user)
-    ?? pickSessionHandle(sessionJson?.utilizator)
-    ?? pickSessionHandle(sessionJson?.nick)
-    ?? pickSessionHandle(sessionJson?.nume_utilizator)
-    ?? pickSessionHandle(sessionJson?.name);
+    pickSessionHandle(sessionJson?.username) ??
+    pickSessionHandle(sessionJson?.user) ??
+    pickSessionHandle(sessionJson?.utilizator) ??
+    pickSessionHandle(sessionJson?.nick) ??
+    pickSessionHandle(sessionJson?.nume_utilizator) ??
+    pickSessionHandle(sessionJson?.name);
   if (sessionIsAuthenticated && sessionCandidate) {
     return sessionCandidate;
   }
 
   const $ = loadHtml(html);
   const hasLogoutLink = $('a[href*="logout"], form[action*="logout"]').length > 0;
-  /* v8 ignore next 3 -- only invoked when already logged in, so one of these is always true */
+  /* v8 ignore start -- only invoked when already logged in, so one of these is always true */
   if (!sessionIsAuthenticated && !hasLogoutLink) {
     return undefined;
   }
+  /* v8 ignore stop */
 
   const profileAnchors = $('#bara_navigare a[href^="/profil/"], nav a[href^="/profil/"]');
   for (const anchor of profileAnchors.toArray()) {

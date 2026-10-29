@@ -5,7 +5,10 @@ import { tmpdir } from 'node:os';
 import * as age from 'age-encryption';
 import { afterEach, describe, expect, test } from 'vitest';
 
-import { createEncryptedAuthBundle, restoreEncryptedAuthBundle } from '../../src/auth/auth-bundle.js';
+import {
+  createEncryptedAuthBundle,
+  restoreEncryptedAuthBundle,
+} from '../../src/auth/auth-bundle.js';
 
 const tempDirs: string[] = [];
 
@@ -39,7 +42,11 @@ describe('auth bundle', () => {
     );
     writeFileSync(
       join(localRoot, 'session-cookies.json'),
-      JSON.stringify([{ key: 'SESSION_ID', value: 'abc123', domain: 'www.pbinfo.ro', path: '/' }], null, 2),
+      JSON.stringify(
+        [{ key: 'SESSION_ID', value: 'abc123', domain: 'www.pbinfo.ro', path: '/' }],
+        null,
+        2,
+      ),
       'utf8',
     );
 
@@ -53,9 +60,7 @@ describe('auth bundle', () => {
       recipient,
     });
 
-    expect(created.bundlePath).toBe(
-      join(workspaceRoot, 'archive', 'secrets', 'pbinfo-auth.age'),
-    );
+    expect(created.bundlePath).toBe(join(workspaceRoot, 'archive', 'secrets', 'pbinfo-auth.age'));
     expect(readFileSync(created.bundlePath, 'utf8')).toContain('BEGIN AGE ENCRYPTED FILE');
 
     rmSync(join(localRoot, 'pbinfo.local.json'));

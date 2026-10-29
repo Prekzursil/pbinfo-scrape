@@ -52,10 +52,7 @@ export interface FinalizeSnapshotOptions {
   promote?: boolean;
 }
 
-export function getCrawlStatus(
-  workspaceRoot: string,
-  snapshotId?: string,
-): CrawlStatusResult {
+export function getCrawlStatus(workspaceRoot: string, snapshotId?: string): CrawlStatusResult {
   const config = loadLocalConfig(workspaceRoot);
   const catalog = readArchiveCatalog(config.paths.archiveRoot);
   const resolvedSnapshotId = snapshotId ?? catalog.currentSnapshotId;
@@ -91,8 +88,9 @@ export function getCrawlStatus(
         key: item.key,
         url: item.url,
         attemptCount: item.attemptCount,
-        /* v8 ignore next -- items are pre-filtered to a truthy lastError, so the fallback is never taken */
+        /* v8 ignore start -- items are pre-filtered to a truthy lastError, so the fallback is never taken */
         lastError: item.lastError ?? 'unknown error',
+        /* v8 ignore stop */
         visibleAt: item.visibleAt,
       })),
     publishEligible:

@@ -42,13 +42,22 @@ describe('rankProblemSubmissions edges', () => {
   });
 
   test('keeps an unrecognized language label as-is', () => {
-    const result = rankProblemSubmissions([sub({ evaluationId: 5, language: 'klingon', sourceCode: 'x' })]);
+    const result = rankProblemSubmissions([
+      sub({ evaluationId: 5, language: 'klingon', sourceCode: 'x' }),
+    ]);
     expect(result.bestUserPerLanguage.klingon).toBe(5);
   });
 
   test('handles missing runtime/memory, invalid timestamps, and unavailable sources', () => {
     const result = rankProblemSubmissions([
-      sub({ evaluationId: 1, runtimeSeconds: undefined, memoryKb: undefined, fetchedAt: 'not-a-date', sourceAvailable: false, score: 50 }),
+      sub({
+        evaluationId: 1,
+        runtimeSeconds: undefined,
+        memoryKb: undefined,
+        fetchedAt: 'not-a-date',
+        sourceAvailable: false,
+        score: 50,
+      }),
       sub({ evaluationId: 2, runtimeSeconds: 1, memoryKb: 100, score: 100 }),
     ]);
     expect(result.bestUserOverallEvaluationId).toBe(2);
@@ -95,9 +104,10 @@ describe('rankProblemSubmissions edges', () => {
   });
 
   test('keeps an empty language label for submissions and official sources', () => {
-    const result = rankProblemSubmissions([sub({ evaluationId: 3, language: '' })], [
-      source({ sourceId: 'off-empty', language: '' }),
-    ]);
+    const result = rankProblemSubmissions(
+      [sub({ evaluationId: 3, language: '' })],
+      [source({ sourceId: 'off-empty', language: '' })],
+    );
     expect(result.bestUserPerLanguage['']).toBe(3);
     expect(result.bestOfficialPerLanguage['']).toBe('off-empty');
   });
@@ -108,8 +118,16 @@ describe('rankProblemSubmissions edges', () => {
       source({ sourceId: 'off-a', sourceLength: 10 }),
       source({ sourceId: 'off-code', sourceCode: 'code', sourceLength: undefined }),
       source({ sourceId: 'off-none', sourceLength: undefined }),
-      source({ sourceId: 'off-flagged', sourceCode: 'int main(){int n;cin>>n;if(n==11)cout<<1;if(n==22)cout<<2;if(n==33)cout<<3;}', sourceLength: undefined }),
-      source({ sourceId: 'off-noflags', sourceLength: 1, suspicionFlags: undefined as unknown as string[] }),
+      source({
+        sourceId: 'off-flagged',
+        sourceCode: 'int main(){int n;cin>>n;if(n==11)cout<<1;if(n==22)cout<<2;if(n==33)cout<<3;}',
+        sourceLength: undefined,
+      }),
+      source({
+        sourceId: 'off-noflags',
+        sourceLength: 1,
+        suspicionFlags: undefined as unknown as string[],
+      }),
     ];
     const result = rankProblemSubmissions([], sources);
     // off-a and off-z tie on score vector; localeCompare picks off-a.
@@ -128,5 +146,40 @@ describe('rankProblemSubmissions edges', () => {
     const result = rankProblemSubmissions([sub({ evaluationId: 7, sourceCode: code })]);
     // Relaxed flags mean the candidate is still trustworthy and ranked.
     expect(result.bestTrustworthyOverallEvaluationId).toBe(7);
+  });
+});
+
+describe('rankProblemSubmissions with several candidates per ordering', () => {
+  test('orders trustworthy candidates across languages', () => {
+    const result = rankProblemSubmissions([
+      sub({ evaluationId: 1, language: 'cpp' }),
+      sub({ evaluationId: 2, language: 'pascal' }),
+    ]);
+    expect(Object.keys(result.bestTrustworthyPerLanguage)).toHaveLength(2);
+    expect([1, 2]).toContain(result.bestTrustworthyOverallEvaluationId);
+  });
+
+  test('lists every suspicious candidate', () => {
+    const result = rankProblemSubmissions([
+      sub({ evaluationId: 3, suspicionFlags: ['input-branching'] }),
+      sub({ evaluationId: 4, suspicionFlags: ['input-branching'] }),
+    ]);
+    expect([...result.suspiciousCandidateEvaluationIds].sort()).toEqual([3, 4]);
+  });
+
+  test('reports duplicate sources in ascending evaluation order', () => {
+    const sourceCode = [
+      '#include <iostream>',
+      'int main() { int a, b; std::cin >> a >> b; std::cout << a + b; }',
+    ].join('\n');
+    const result = rankProblemSubmissions([
+      sub({ evaluationId: 30, sourceCode }),
+      sub({ evaluationId: 10, sourceCode }),
+      sub({ evaluationId: 20, sourceCode }),
+    ]);
+    expect(result.duplicateEvaluationIds).toHaveLength(2);
+    expect(result.duplicateEvaluationIds).toEqual(
+      [...result.duplicateEvaluationIds].sort((left, right) => left - right),
+    );
   });
 });

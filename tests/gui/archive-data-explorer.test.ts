@@ -373,19 +373,25 @@ describe('archive-data-explorer record detail', () => {
     writeCatalog(root, snapshotId);
     const norm = normalizedRoot(root, snapshotId);
     // id 0 (falsy) and no canonical url -> derived route is undefined.
-    writeJson(join(norm, 'problems', 'problem-0.json'), problemRecord({
-      id: 0,
-      slug: 'zero',
-      name: 'Zero',
-      canonicalUrl: undefined,
-    }));
+    writeJson(
+      join(norm, 'problems', 'problem-0.json'),
+      problemRecord({
+        id: 0,
+        slug: 'zero',
+        name: 'Zero',
+        canonicalUrl: undefined,
+      }),
+    );
     // invalid canonical url -> extractPathname swallows the error.
-    writeJson(join(norm, 'problems', 'problem-3.json'), problemRecord({
-      id: 3,
-      slug: 'three',
-      name: 'Three',
-      canonicalUrl: '://not-a-valid-url',
-    }));
+    writeJson(
+      join(norm, 'problems', 'problem-3.json'),
+      problemRecord({
+        id: 3,
+        slug: 'three',
+        name: 'Three',
+        canonicalUrl: '://not-a-valid-url',
+      }),
+    );
     // ranking entry without bestUserPerLanguage and without a problem record.
     writeJson(join(norm, 'rankings', 'best-submissions.json'), {
       problems: [{ problemId: 8 }],
@@ -397,7 +403,11 @@ describe('archive-data-explorer record detail', () => {
     const three = problems.items.find((i) => i.recordId === '3');
     expect(three?.subtitle).toBeUndefined();
 
-    const zeroDetail = readArchiveExplorerRecord(root, { dataset: 'problems', recordId: '0', snapshotId });
+    const zeroDetail = readArchiveExplorerRecord(root, {
+      dataset: 'problems',
+      recordId: '0',
+      snapshotId,
+    });
     expect(zeroDetail.subtitle).toBeUndefined();
 
     // tests directory does not exist -> empty listing via readJsonDirectory guard.
@@ -445,12 +455,15 @@ describe('archive-data-explorer record detail', () => {
     writeJson(join(norm, 'rankings', 'best-submissions.json'), {
       problems: [{ problemId: 5, bestUserOverallEvaluationId: 7, bestUserPerLanguage: {} }],
     });
-    writeJson(join(norm, 'problems', 'problem-5.json'), problemRecord({
-      id: 5,
-      slug: 'gamma',
-      name: 'Gamma',
-      canonicalUrl: undefined,
-    }));
+    writeJson(
+      join(norm, 'problems', 'problem-5.json'),
+      problemRecord({
+        id: 5,
+        slug: 'gamma',
+        name: 'Gamma',
+        canonicalUrl: undefined,
+      }),
+    );
 
     const detail = readArchiveExplorerRecord(root, {
       dataset: 'rankings',
@@ -459,5 +472,23 @@ describe('archive-data-explorer record detail', () => {
     });
     expect(detail.mirrorRoute).toBe('/probleme/5/gamma');
     expect(detail.subtitle).toContain('Best user overall evaluation: 7');
+  });
+});
+
+describe('archive explorer test listings', () => {
+  test('lists several problems in numeric order', () => {
+    const { root, snapshotId } = buildFullWorkspace();
+    writeJson(join(normalizedRoot(root, snapshotId), 'tests', 'problem-2.json'), {
+      snapshotId,
+      problemId: 2,
+      problemSlug: 'beta',
+      problemName: 'Beta',
+      examples: [],
+      visible: [],
+      evaluationObserved: [],
+      effective: [],
+    });
+    const listing = listArchiveExplorerRecords(root, { dataset: 'tests' });
+    expect(listing.items.map((item) => item.recordId)).toEqual(['1', '2']);
   });
 });
