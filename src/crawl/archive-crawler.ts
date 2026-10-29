@@ -107,11 +107,7 @@ export class ArchiveCrawler {
     try {
       response = await fetchWithTimeout(this.fetchImpl, item.url, undefined, this.requestTimeoutMs);
     } catch (error) {
-      this.failWithBackoff(
-        item.id,
-        error instanceof Error ? error.message : String(error),
-        now,
-      );
+      this.failWithBackoff(item.id, error instanceof Error ? error.message : String(error), now);
       return true;
     }
     const contentType = response.headers.get('content-type');
