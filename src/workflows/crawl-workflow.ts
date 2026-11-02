@@ -55,6 +55,7 @@ export interface CrawlStatusResult {
   pending: number;
   completed: number;
   inProgress: number;
+  failed: number;
   publishEligible: boolean;
   recentFailures: CrawlFailureSummary[];
 }
@@ -146,6 +147,7 @@ async function runSeededCrawlWorkflow(
     browserCapture,
     retryDelayMs: config.crawl.retryDelayMs,
     requestTimeoutMs: config.crawl.requestTimeoutMs,
+    maxAttempts: config.crawl.maxAttempts,
   });
 
   const maxIterations = options.maxIterations ?? Number.POSITIVE_INFINITY;
@@ -298,6 +300,7 @@ export function getCrawlStatusWorkflow(
     pending: queueState.pending,
     completed: queueState.completed,
     inProgress: queueState.inProgress,
+    failed: queueState.failed,
     publishEligible:
       queueState.pending === 0 &&
       queueState.inProgress === 0 &&

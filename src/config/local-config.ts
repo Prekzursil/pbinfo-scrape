@@ -28,6 +28,7 @@ const configSchema = z.object({
       maxConcurrency: z.number().int().positive().optional(),
       retryDelayMs: z.number().int().positive().optional(),
       requestTimeoutMs: z.number().int().positive().optional(),
+      maxAttempts: z.number().int().positive().optional(),
       crossCheckWithBrowser: z.boolean().optional(),
       userHandle: z.string().min(1).optional(),
       publicStartUrls: z.array(z.string().url()).optional(),
@@ -91,6 +92,7 @@ export interface LoadedLocalConfig {
     maxConcurrency: number;
     retryDelayMs: number;
     requestTimeoutMs: number;
+    maxAttempts: number;
     crossCheckWithBrowser: boolean;
     userHandle?: string;
     publicStartUrls: string[];
@@ -166,6 +168,7 @@ export function loadLocalConfig(workspaceRoot: string): LoadedLocalConfig {
       maxConcurrency: parsedInput?.crawl?.maxConcurrency ?? 2,
       retryDelayMs: parsedInput?.crawl?.retryDelayMs ?? 60_000,
       requestTimeoutMs: parsedInput?.crawl?.requestTimeoutMs ?? 30_000,
+      maxAttempts: parsedInput?.crawl?.maxAttempts ?? 5,
       crossCheckWithBrowser: parsedInput?.crawl?.crossCheckWithBrowser ?? true,
       userHandle: parsedInput?.crawl?.userHandle,
       publicStartUrls:

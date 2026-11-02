@@ -384,7 +384,7 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
             {crawlStatus ? (
               <div className="snapshot-grid">
                 <SummaryCard label="Queue counts" value={`${crawlStatus.pending} pending`}>
-                  <p className="summary-copy">{`${crawlStatus.completed} completed • ${crawlStatus.inProgress} in progress`}</p>
+                  <p className="summary-copy">{`${crawlStatus.completed} completed • ${crawlStatus.inProgress} in progress${crawlStatus.failed ? ` • ${crawlStatus.failed} failed` : ''}`}</p>
                 </SummaryCard>
                 <SummaryCard label="Publish readiness" value={crawlStatus.publishEligible ? 'Ready' : 'Not ready'}>
                   <p className="summary-copy">{crawlStatus.publishEligible ? 'The canonical snapshot is drained and can be published through the guarded CLI.' : `${recentFailureCount} recent failures recorded.`}</p>

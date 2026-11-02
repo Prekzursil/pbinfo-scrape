@@ -59,6 +59,16 @@ Create `.local/pbinfo.local.json` for live runs. The `.local/` directory stays u
 }
 ```
 
+Crawl resilience defaults (override in `.local/pbinfo.local.json` under `crawl`):
+
+- `retryDelayMs` (default `60000`): backoff before a failed URL becomes visible again.
+- `requestTimeoutMs` (default `30000`): per-request timeout.
+- `maxAttempts` (default `5`): after this many attempts a URL is parked in the terminal
+  `failed` queue status (still reported by `crawl status` under `failed`/`recentFailures`)
+  instead of retrying forever and blocking snapshot drain.
+- HTTP `429` and `5xx` responses are retried with backoff rather than archived;
+  client errors such as `404` are archived truthfully as dead ends.
+
 ## CLI Flow
 
 ```bash
