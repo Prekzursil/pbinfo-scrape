@@ -48,18 +48,14 @@ async function main(): Promise<void> {
     const actions = await waitForJsonFile<DesktopSmokeAction[]>(actionsPath, 10_000);
 
     if (report.phase !== 'completed') {
-      throw new Error(
-        `Packaged desktop smoke probe failed: ${JSON.stringify(report, null, 2)}`,
-      );
+      throw new Error(`Packaged desktop smoke probe failed: ${JSON.stringify(report, null, 2)}`);
     }
 
     const datasetLabels = report.dataExplorer?.datasetLabels ?? [];
     const expectedDatasets = ['Problems', 'Evaluations', 'Rankings', 'Mirror Routes'];
     for (const label of expectedDatasets) {
       if (!datasetLabels.includes(label)) {
-        throw new Error(
-          `Packaged desktop smoke probe did not expose dataset chip "${label}".`,
-        );
+        throw new Error(`Packaged desktop smoke probe did not expose dataset chip "${label}".`);
       }
     }
 
@@ -113,11 +109,11 @@ function resolvePackagedOutputs(): {
     throw new Error(`release-desktop does not exist: ${releaseRoot}`);
   }
 
-  const exeNames = readdirSync(releaseRoot).filter(
-    (name) => /^Problem Archive Crawler .*\.exe$/i.test(name),
+  const exeNames = readdirSync(releaseRoot).filter((name) =>
+    /^Problem Archive Crawler .*\.exe$/i.test(name),
   );
-  const legacyExeNames = readdirSync(releaseRoot).filter(
-    (name) => /^PBInfo Archive Desktop .*\.exe$/i.test(name),
+  const legacyExeNames = readdirSync(releaseRoot).filter((name) =>
+    /^PBInfo Archive Desktop .*\.exe$/i.test(name),
   );
 
   if (legacyExeNames.length > 0) {
@@ -133,11 +129,7 @@ function resolvePackagedOutputs(): {
   }
 
   const portableExePath = join(releaseRoot, exeNames[0]!);
-  const smokeTargetExePath = join(
-    releaseRoot,
-    'win-unpacked',
-    'Problem Archive Crawler.exe',
-  );
+  const smokeTargetExePath = join(releaseRoot, 'win-unpacked', 'Problem Archive Crawler.exe');
 
   if (!existsSync(smokeTargetExePath)) {
     throw new Error(
@@ -229,18 +221,16 @@ async function waitForDesktopSmokeReport(
   throw new Error(`Timed out waiting for completed desktop smoke report: ${path}`);
 }
 
-async function waitForPortableDesktopWindow(
-  timeoutMs: number,
-): Promise<PortableWindowSnapshot> {
+async function waitForPortableDesktopWindow(timeoutMs: number): Promise<PortableWindowSnapshot> {
   const deadline = Date.now() + timeoutMs;
 
   while (Date.now() < deadline) {
     const processes = listProblemArchiveCrawlerProcesses();
     const errorWindow = processes.find(
       (process) =>
-        process.processName === 'Problem Archive Crawler'
-        && process.mainWindowHandle !== 0
-        && process.mainWindowTitle.trim() === 'Error',
+        process.processName === 'Problem Archive Crawler' &&
+        process.mainWindowHandle !== 0 &&
+        process.mainWindowTitle.trim() === 'Error',
     );
     if (errorWindow) {
       throw new Error(
@@ -250,9 +240,9 @@ async function waitForPortableDesktopWindow(
 
     const visibleAppWindow = processes.find(
       (process) =>
-        process.processName === 'Problem Archive Crawler'
-        && process.mainWindowHandle !== 0
-        && process.mainWindowTitle.trim().length > 0,
+        process.processName === 'Problem Archive Crawler' &&
+        process.mainWindowHandle !== 0 &&
+        process.mainWindowTitle.trim().length > 0,
     );
     if (visibleAppWindow) {
       return visibleAppWindow;

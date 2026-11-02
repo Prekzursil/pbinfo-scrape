@@ -167,18 +167,13 @@ describe('desktop preload bridge', () => {
 
   test('subscribes and unsubscribes to structured desktop events without exposing ipcRenderer', () => {
     const handlers = new Map<string, Set<(payload: unknown) => void>>();
-    const on = vi.fn(
-      (
-        channel: string,
-        listener: (event: unknown, payload: unknown) => void,
-      ) => {
-        const wrapped = (payload: unknown) => listener({}, payload);
-        const current = handlers.get(channel) ?? new Set();
-        current.add(wrapped);
-        handlers.set(channel, current);
-        return () => current.delete(wrapped);
-      },
-    );
+    const on = vi.fn((channel: string, listener: (event: unknown, payload: unknown) => void) => {
+      const wrapped = (payload: unknown) => listener({}, payload);
+      const current = handlers.get(channel) ?? new Set();
+      current.add(wrapped);
+      handlers.set(channel, current);
+      return () => current.delete(wrapped);
+    });
     const off = vi.fn();
     const bridge = buildDesktopBridge({
       invoke: vi.fn(),

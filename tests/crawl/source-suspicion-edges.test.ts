@@ -33,7 +33,9 @@ describe('detectSuspicionFlags edge heuristics', () => {
   });
 
   test('flags constant output that never reads input', () => {
-    expect(detectSuspicionFlags('int main(){cout<<"the answer is 42";}')).toContain('constant-output');
+    expect(detectSuspicionFlags('int main(){cout<<"the answer is 42";}')).toContain(
+      'constant-output',
+    );
   });
 
   test('ignores literal-first comparisons against non-input variables and trivial sentinels', () => {

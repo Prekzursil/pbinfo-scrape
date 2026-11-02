@@ -38,7 +38,13 @@ function setupWorkspace(
     currentSnapshotId: snapshotId,
     canonicalSnapshotId: snapshotId,
     snapshots: [
-      { snapshotId, createdAt: '2026-01-01T00:00:00.000Z', scope: 'all', status: 'completed', checkpoint: 'canonical' },
+      {
+        snapshotId,
+        createdAt: '2026-01-01T00:00:00.000Z',
+        scope: 'all',
+        status: 'completed',
+        checkpoint: 'canonical',
+      },
     ],
     artifactExports: [],
   });
@@ -209,21 +215,18 @@ function buildRichIndex(): ProblemCoverageIndex {
       rankingPresent: true,
     }),
     // effective + visible counts absent -> falls through to example count.
-    sparse(
-      makeCoverageRecord({ problemId: 18, exampleTestsAvailableCount: 3 }),
-      [...DERIVED_FIELDS, 'visibleTestsCapturedCount'],
-    ),
+    sparse(makeCoverageRecord({ problemId: 18, exampleTestsAvailableCount: 3 }), [
+      ...DERIVED_FIELDS,
+      'visibleTestsCapturedCount',
+    ]),
     // all test counts and testsFragmentArchived absent -> zero / example>0 fallbacks.
-    sparse(
-      makeCoverageRecord({ problemId: 19 }),
-      [
-        ...DERIVED_FIELDS,
-        'visibleTestsCapturedCount',
-        'exampleTestsAvailableCount',
-        'evaluationObservedTestsCount',
-        'testsFragmentArchived',
-      ],
-    ),
+    sparse(makeCoverageRecord({ problemId: 19 }), [
+      ...DERIVED_FIELDS,
+      'visibleTestsCapturedCount',
+      'exampleTestsAvailableCount',
+      'evaluationObservedTestsCount',
+      'testsFragmentArchived',
+    ]),
     // missing trustworthy languages present but archive status derived -> short-circuit.
     sparse(
       makeCoverageRecord({
@@ -265,7 +268,13 @@ describe('problem-coverage-explorer summary', () => {
     writeJson(join(workspace, 'archive', 'catalog.json'), {
       currentSnapshotId: 'SNAP1',
       snapshots: [
-        { snapshotId: 'SNAP1', createdAt: '2026-01-01T00:00:00.000Z', scope: 'all', status: 'completed', checkpoint: 'canonical' },
+        {
+          snapshotId: 'SNAP1',
+          createdAt: '2026-01-01T00:00:00.000Z',
+          scope: 'all',
+          status: 'completed',
+          checkpoint: 'canonical',
+        },
       ],
       artifactExports: [],
     });
@@ -277,8 +286,12 @@ describe('problem-coverage-explorer listing', () => {
   test('applies the full filter matrix and pagination', () => {
     const { workspace } = setupWorkspace(buildRichIndex());
 
-    expect(listCoverageExplorerRecords(workspace, { solved: 'solved' }).totalCount).toBeGreaterThan(0);
-    expect(listCoverageExplorerRecords(workspace, { solved: 'unsolved' }).totalCount).toBeGreaterThan(0);
+    expect(listCoverageExplorerRecords(workspace, { solved: 'solved' }).totalCount).toBeGreaterThan(
+      0,
+    );
+    expect(
+      listCoverageExplorerRecords(workspace, { solved: 'unsolved' }).totalCount,
+    ).toBeGreaterThan(0);
     listCoverageExplorerRecords(workspace, { testsFragmentArchived: 'yes' });
     listCoverageExplorerRecords(workspace, { testsFragmentArchived: 'no' });
     listCoverageExplorerRecords(workspace, { visibleTestsCaptured: 'yes' });
@@ -344,6 +357,8 @@ describe('problem-coverage-explorer detail', () => {
 
   test('throws when the record is missing', () => {
     const { workspace } = setupWorkspace(buildRichIndex());
-    expect(() => readCoverageExplorerRecord(workspace, { problemId: 9999 })).toThrow(/was not found/);
+    expect(() => readCoverageExplorerRecord(workspace, { problemId: 9999 })).toThrow(
+      /was not found/,
+    );
   });
 });

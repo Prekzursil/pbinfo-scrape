@@ -64,7 +64,10 @@ describe('createDesktopBridge flat surface', () => {
       channel: 'desktop:jobs:resume',
       payload: { jobId: 'job', maxIterations: 3 },
     });
-    expect(adapter.calls).toContainEqual({ channel: 'desktop:jobs:resume', payload: { jobId: 'job' } });
+    expect(adapter.calls).toContainEqual({
+      channel: 'desktop:jobs:resume',
+      payload: { jobId: 'job' },
+    });
   });
 
   test('event subscriptions tolerate adapters without an unsubscribe function or off handler', () => {

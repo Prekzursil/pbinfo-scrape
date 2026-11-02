@@ -6,7 +6,10 @@ import { afterEach, beforeEach, describe, expect, test } from 'vitest';
 
 import { prepareSnapshot, type SnapshotLayout } from '../../src/archive/storage.js';
 import { loadLocalConfig, type LoadedLocalConfig } from '../../src/config/local-config.js';
-import { discoverNormalizedFollowUps, persistOfficialSourceHarvest } from '../../src/crawl/archive-crawler.js';
+import {
+  discoverNormalizedFollowUps,
+  persistOfficialSourceHarvest,
+} from '../../src/crawl/archive-crawler.js';
 
 const tempDirs: string[] = [];
 let config: LoadedLocalConfig;
@@ -17,7 +20,11 @@ beforeEach(() => {
   tempDirs.push(workspaceRoot);
   config = loadLocalConfig(workspaceRoot);
   config = { ...config, crawl: { ...config.crawl, userHandle: 'Prekzursil' } };
-  snapshot = prepareSnapshot(config, { scope: 'all', snapshotId: 'discover', now: new Date('2026-03-10T00:00:00.000Z') });
+  snapshot = prepareSnapshot(config, {
+    scope: 'all',
+    snapshotId: 'discover',
+    now: new Date('2026-03-10T00:00:00.000Z'),
+  });
 });
 
 afterEach(() => {
@@ -51,37 +58,75 @@ const userSolutions = `
 
 describe('discoverNormalizedFollowUps', () => {
   test('returns nothing for unrelated kinds', () => {
-    expect(discoverNormalizedFollowUps(config, snapshot, 'https://www.pbinfo.ro/probleme', 'public-page', '<div></div>')).toEqual([]);
+    expect(
+      discoverNormalizedFollowUps(
+        config,
+        snapshot,
+        'https://www.pbinfo.ro/probleme',
+        'public-page',
+        '<div></div>',
+      ),
+    ).toEqual([]);
   });
 
   test('skips user-solutions whose base handle does not match', () => {
     expect(
-      discoverNormalizedFollowUps(config, snapshot, 'https://www.pbinfo.ro/solutii/user/Other', 'user-solutions', userSolutions),
+      discoverNormalizedFollowUps(
+        config,
+        snapshot,
+        'https://www.pbinfo.ro/solutii/user/Other',
+        'user-solutions',
+        userSolutions,
+      ),
     ).toEqual([]);
   });
 
   test('queues problem and evaluation follow-ups for matching user-solution entries', () => {
-    const items = discoverNormalizedFollowUps(config, snapshot, 'https://www.pbinfo.ro/solutii/user/Prekzursil', 'user-solutions', userSolutions);
+    const items = discoverNormalizedFollowUps(
+      config,
+      snapshot,
+      'https://www.pbinfo.ro/solutii/user/Prekzursil',
+      'user-solutions',
+      userSolutions,
+    );
     expect(kinds(items)).toContain('public-page');
     expect(kinds(items)).toContain('evaluation-detail');
     expect(kinds(items)).toContain('user-solutions');
   });
 
   test('redirects a community source list to the official author-scoped page', () => {
-    const items = discoverNormalizedFollowUps(config, snapshot, 'https://www.pbinfo.ro/solutii/problema/3171/waterreserve', 'official-source-list', sourceList('pbinfo'));
+    const items = discoverNormalizedFollowUps(
+      config,
+      snapshot,
+      'https://www.pbinfo.ro/solutii/problema/3171/waterreserve',
+      'official-source-list',
+      sourceList('pbinfo'),
+    );
     expect(items).toHaveLength(1);
     expect(items[0]?.kind).toBe('official-source-list');
     expect(items[0]?.url).toContain('/solutii/user/pbinfo/problema/3171/waterreserve');
   });
 
   test('redirects a community source list with a non-official author to user-solutions', () => {
-    const items = discoverNormalizedFollowUps(config, snapshot, 'https://www.pbinfo.ro/solutii/problema/3171/waterreserve', 'official-source-list', sourceList('randomuser'));
+    const items = discoverNormalizedFollowUps(
+      config,
+      snapshot,
+      'https://www.pbinfo.ro/solutii/problema/3171/waterreserve',
+      'official-source-list',
+      sourceList('randomuser'),
+    );
     expect(items[0]?.kind).toBe('user-solutions');
   });
 
   test('returns nothing for a community source list without an author', () => {
     expect(
-      discoverNormalizedFollowUps(config, snapshot, 'https://www.pbinfo.ro/solutii/problema/3171/waterreserve', 'official-source-list', sourceList(null)),
+      discoverNormalizedFollowUps(
+        config,
+        snapshot,
+        'https://www.pbinfo.ro/solutii/problema/3171/waterreserve',
+        'official-source-list',
+        sourceList(null),
+      ),
     ).toEqual([]);
   });
 
@@ -100,7 +145,12 @@ describe('discoverNormalizedFollowUps', () => {
 
   test('persistOfficialSourceHarvest ignores non-author-scoped source list urls', () => {
     expect(() =>
-      persistOfficialSourceHarvest(snapshot, 'https://www.pbinfo.ro/solutii/problema/1/x', undefined, []),
+      persistOfficialSourceHarvest(
+        snapshot,
+        'https://www.pbinfo.ro/solutii/problema/1/x',
+        undefined,
+        [],
+      ),
     ).not.toThrow();
   });
 });

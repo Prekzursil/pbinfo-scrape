@@ -28,9 +28,15 @@ describe('ArchiveCrawler browser capture failures', () => {
       scope: 'all',
       now: new Date('2026-03-10T00:00:00.000Z'),
     });
-    const queue = new CrawlQueue(join(config.paths.localRoot, 'crawl-queues', 'browser-fail.sqlite'));
+    const queue = new CrawlQueue(
+      join(config.paths.localRoot, 'crawl-queues', 'browser-fail.sqlite'),
+    );
     queue.enqueueMany([
-      { key: 'page:https://www.pbinfo.ro/probleme', url: 'https://www.pbinfo.ro/probleme', kind: 'public-page' },
+      {
+        key: 'page:https://www.pbinfo.ro/probleme',
+        url: 'https://www.pbinfo.ro/probleme',
+        kind: 'public-page',
+      },
     ]);
 
     const browserCapture: BrowserCapture = {
@@ -53,9 +59,9 @@ describe('ArchiveCrawler browser capture failures', () => {
     await crawler.processNext(new Date('2026-03-10T00:00:00.000Z'));
     queue.close();
 
-    expect(
-      existsSync(join(snapshot.rawPagesRoot, 'page-https-www-pbinfo-ro-probleme.html')),
-    ).toBe(true);
+    expect(existsSync(join(snapshot.rawPagesRoot, 'page-https-www-pbinfo-ro-probleme.html'))).toBe(
+      true,
+    );
   });
 
   test('returns false when the queue has no claimable item', async () => {
@@ -67,7 +73,9 @@ describe('ArchiveCrawler browser capture failures', () => {
       scope: 'all',
       now: new Date('2026-03-10T00:00:00.000Z'),
     });
-    const queue = new CrawlQueue(join(config.paths.localRoot, 'crawl-queues', 'empty-queue.sqlite'));
+    const queue = new CrawlQueue(
+      join(config.paths.localRoot, 'crawl-queues', 'empty-queue.sqlite'),
+    );
 
     const crawler = new ArchiveCrawler({
       config,
@@ -91,9 +99,15 @@ describe('ArchiveCrawler browser capture failures', () => {
       scope: 'all',
       now: new Date('2026-03-10T00:00:00.000Z'),
     });
-    const queue = new CrawlQueue(join(config.paths.localRoot, 'crawl-queues', 'fetch-reject.sqlite'));
+    const queue = new CrawlQueue(
+      join(config.paths.localRoot, 'crawl-queues', 'fetch-reject.sqlite'),
+    );
     queue.enqueueMany([
-      { key: 'page:https://www.pbinfo.ro/probleme', url: 'https://www.pbinfo.ro/probleme', kind: 'public-page' },
+      {
+        key: 'page:https://www.pbinfo.ro/probleme',
+        url: 'https://www.pbinfo.ro/probleme',
+        kind: 'public-page',
+      },
     ]);
 
     const crawler = new ArchiveCrawler({
@@ -121,9 +135,15 @@ describe('ArchiveCrawler browser capture failures', () => {
       scope: 'all',
       now: new Date('2026-03-10T00:00:00.000Z'),
     });
-    const queue = new CrawlQueue(join(config.paths.localRoot, 'crawl-queues', 'asset-notype.sqlite'));
+    const queue = new CrawlQueue(
+      join(config.paths.localRoot, 'crawl-queues', 'asset-notype.sqlite'),
+    );
     queue.enqueueMany([
-      { key: 'asset:https://www.pbinfo.ro/static/logo.bin', url: 'https://www.pbinfo.ro/static/logo.bin', kind: 'public-asset' },
+      {
+        key: 'asset:https://www.pbinfo.ro/static/logo.bin',
+        url: 'https://www.pbinfo.ro/static/logo.bin',
+        kind: 'public-asset',
+      },
     ]);
 
     const crawler = new ArchiveCrawler({

@@ -3,7 +3,10 @@ import '@testing-library/jest-dom/vitest';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
-import { CoverageExplorerPanel, type CoverageExplorerFilters } from '../../src/gui/renderer/coverage-explorer.js';
+import {
+  CoverageExplorerPanel,
+  type CoverageExplorerFilters,
+} from '../../src/gui/renderer/coverage-explorer.js';
 import { DataExplorerPanel } from '../../src/gui/renderer/data-explorer.js';
 import type {
   GuiArchiveListing,
@@ -135,14 +138,40 @@ describe('CoverageExplorerPanel direct render', () => {
 
   test('renders coverage rows for every official-source and trustworthy variant', () => {
     const items: GuiCoverageRecord[] = [
-      { ...baseRecord, problemId: 1, officialSourceArchived: true, officialSourceLanguages: ['cpp'] },
+      {
+        ...baseRecord,
+        problemId: 1,
+        officialSourceArchived: true,
+        officialSourceLanguages: ['cpp'],
+      },
       { ...baseRecord, problemId: 2, trustworthyUserSourceLanguages: ['cpp'] },
       { ...baseRecord, problemId: 3, userSourceArchived: true },
-      { ...baseRecord, problemId: 4, officialSourceStatus: 'restricted-upstream' as GuiCoverageRecord['officialSourceStatus'] },
-      { ...baseRecord, problemId: 5, officialSourceStatus: 'not-available-upstream' as GuiCoverageRecord['officialSourceStatus'] },
-      { ...baseRecord, problemId: 6, officialSourceArchived: true, officialSourceLanguages: undefined } as unknown as GuiCoverageRecord,
-      { ...baseRecord, problemId: 7, trustworthyUserSourceLanguages: undefined } as unknown as GuiCoverageRecord,
-      { ...baseRecord, problemId: 8, officialSourceStatus: 'archived' as GuiCoverageRecord['officialSourceStatus'] },
+      {
+        ...baseRecord,
+        problemId: 4,
+        officialSourceStatus: 'restricted-upstream' as GuiCoverageRecord['officialSourceStatus'],
+      },
+      {
+        ...baseRecord,
+        problemId: 5,
+        officialSourceStatus: 'not-available-upstream' as GuiCoverageRecord['officialSourceStatus'],
+      },
+      {
+        ...baseRecord,
+        problemId: 6,
+        officialSourceArchived: true,
+        officialSourceLanguages: undefined,
+      } as unknown as GuiCoverageRecord,
+      {
+        ...baseRecord,
+        problemId: 7,
+        trustworthyUserSourceLanguages: undefined,
+      } as unknown as GuiCoverageRecord,
+      {
+        ...baseRecord,
+        problemId: 8,
+        officialSourceStatus: 'archived' as GuiCoverageRecord['officialSourceStatus'],
+      },
     ];
     render(
       <CoverageExplorerPanel

@@ -2,10 +2,7 @@ import { existsSync, mkdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { writeJsonRecord } from '../archive/json-store.js';
-import type {
-  ProblemCoverageIndex,
-  ProblemCoverageRecord,
-} from '../types/records.js';
+import type { ProblemCoverageIndex, ProblemCoverageRecord } from '../types/records.js';
 
 export type OfficialSourceBlockedReason =
   | 'editorial-hidden'
@@ -97,8 +94,8 @@ export function buildProblemCoverageGapReport(options: {
   const coverageRoot = join(options.normalizedRoot, 'problem-coverage');
   mkdirSync(coverageRoot, { recursive: true });
 
-  const records = [...options.coverageIndex.records].sort((left, right) =>
-    left.problemId - right.problemId,
+  const records = [...options.coverageIndex.records].sort(
+    (left, right) => left.problemId - right.problemId,
   );
   const unsolvedProblemIds = records
     .filter((record) => !record.solvedByMe)
@@ -109,20 +106,17 @@ export function buildProblemCoverageGapReport(options: {
     .map((record) =>
       toGapEntry(
         record,
-        (record.officialSourceBlockedReason as OfficialSourceBlockedReason | undefined)
-          ?? deriveOfficialBlockedReason(record),
-      )
+        (record.officialSourceBlockedReason as OfficialSourceBlockedReason | undefined) ??
+          deriveOfficialBlockedReason(record),
+      ),
     )
     .sort((left, right) => left.problemId - right.problemId);
   const solvedByMeMissingUserSource = records
     .filter(
       (record) =>
-        record.solvedByMe
-        && (
-          (record.missingTrustworthyUserSourceLanguages?.length ?? 0) > 0
-          || (!record.userSourceArchived
-            && !('missingTrustworthyUserSourceLanguages' in record))
-        ),
+        record.solvedByMe &&
+        ((record.missingTrustworthyUserSourceLanguages?.length ?? 0) > 0 ||
+          (!record.userSourceArchived && !('missingTrustworthyUserSourceLanguages' in record))),
     )
     .map((record) => toGapEntry(record))
     .sort((left, right) => left.problemId - right.problemId);
@@ -130,22 +124,20 @@ export function buildProblemCoverageGapReport(options: {
     .filter(
       (record) =>
         !(
-          record.testsAvailable
-          ?? (
-            record.effectiveTestsAvailableCount > 0
-            || record.exampleTestsAvailableCount > 0
-            || record.visibleTestsCapturedCount > 0
-            || record.evaluationObservedTestsCount > 0
-          )
+          record.testsAvailable ??
+          (record.effectiveTestsAvailableCount > 0 ||
+            record.exampleTestsAvailableCount > 0 ||
+            record.visibleTestsCapturedCount > 0 ||
+            record.evaluationObservedTestsCount > 0)
         ),
     )
     .map((record) => record.problemId);
   const exampleOnlyProblemIds = records
     .filter(
       (record) =>
-        record.exampleTestsAvailableCount > 0
-        && record.visibleTestsCapturedCount === 0
-        && record.evaluationObservedTestsCount === 0,
+        record.exampleTestsAvailableCount > 0 &&
+        record.visibleTestsCapturedCount === 0 &&
+        record.evaluationObservedTestsCount === 0,
     )
     .map((record) => record.problemId);
   const visibleTestsPresentProblemIds = records
@@ -158,15 +150,13 @@ export function buildProblemCoverageGapReport(options: {
   const officialSourceGateFailures = missingOfficialSources
     .filter(
       (entry) =>
-        !entry.blockedReason
-        || entry.blockedReason === 'unknown'
-        || entry.blockedReason === 'official-source-not-captured'
-        || entry.blockedReason === 'solution-fragment-not-archived',
+        !entry.blockedReason ||
+        entry.blockedReason === 'unknown' ||
+        entry.blockedReason === 'official-source-not-captured' ||
+        entry.blockedReason === 'solution-fragment-not-archived',
     )
     .map((entry) => entry.problemId);
-  const solvedUserSourceFailures = solvedByMeMissingUserSource.map(
-    (entry) => entry.problemId,
-  );
+  const solvedUserSourceFailures = solvedByMeMissingUserSource.map((entry) => entry.problemId);
 
   const reportPath = writeJsonRecord(coverageRoot, 'gaps.json', {
     snapshotId: options.snapshotId,
@@ -175,10 +165,7 @@ export function buildProblemCoverageGapReport(options: {
       reportPath: join(coverageRoot, 'gaps.json'),
       unsolvedPath: join(coverageRoot, 'unsolved-problems.json'),
       missingOfficialPath: join(coverageRoot, 'missing-official-sources.json'),
-      missingSolvedUserSourcePath: join(
-        coverageRoot,
-        'missing-user-sources-solved.json',
-      ),
+      missingSolvedUserSourcePath: join(coverageRoot, 'missing-user-sources-solved.json'),
       noTestsPath: join(coverageRoot, 'no-tests-problems.json'),
       exampleOnlyPath: join(coverageRoot, 'example-only-problems.json'),
       visibleTestsPath: join(coverageRoot, 'visible-tests-problems.json'),
@@ -216,24 +203,16 @@ export function buildProblemCoverageGapReport(options: {
     newSinceBaselineProblemIds,
   } satisfies ProblemCoverageGapReport);
 
-  const unsolvedPath = writeJsonRecord(
-    coverageRoot,
-    'unsolved-problems.json',
-    {
-      snapshotId: options.snapshotId,
-      generatedAt: (options.now ?? new Date()).toISOString(),
-      problemIds: unsolvedProblemIds,
-    },
-  );
-  const missingOfficialPath = writeJsonRecord(
-    coverageRoot,
-    'missing-official-sources.json',
-    {
-      snapshotId: options.snapshotId,
-      generatedAt: (options.now ?? new Date()).toISOString(),
-      records: missingOfficialSources,
-    },
-  );
+  const unsolvedPath = writeJsonRecord(coverageRoot, 'unsolved-problems.json', {
+    snapshotId: options.snapshotId,
+    generatedAt: (options.now ?? new Date()).toISOString(),
+    problemIds: unsolvedProblemIds,
+  });
+  const missingOfficialPath = writeJsonRecord(coverageRoot, 'missing-official-sources.json', {
+    snapshotId: options.snapshotId,
+    generatedAt: (options.now ?? new Date()).toISOString(),
+    records: missingOfficialSources,
+  });
   const missingSolvedUserSourcePath = writeJsonRecord(
     coverageRoot,
     'missing-user-sources-solved.json',
@@ -258,15 +237,11 @@ export function buildProblemCoverageGapReport(options: {
     generatedAt: (options.now ?? new Date()).toISOString(),
     problemIds: visibleTestsPresentProblemIds,
   });
-  const newSinceBaselinePath = writeJsonRecord(
-    coverageRoot,
-    'new-since-baseline-problems.json',
-    {
-      snapshotId: options.snapshotId,
-      generatedAt: (options.now ?? new Date()).toISOString(),
-      problemIds: newSinceBaselineProblemIds,
-    },
-  );
+  const newSinceBaselinePath = writeJsonRecord(coverageRoot, 'new-since-baseline-problems.json', {
+    snapshotId: options.snapshotId,
+    generatedAt: (options.now ?? new Date()).toISOString(),
+    problemIds: newSinceBaselineProblemIds,
+  });
 
   return {
     snapshotId: options.snapshotId,
@@ -355,8 +330,7 @@ function toGapEntry(
       officialSourceStatus: record.officialSourceStatus ?? 'not-captured-yet',
       officialSourceLanguages: record.officialSourceLanguages ?? [],
       userSourceLanguages: record.userSourceLanguages ?? [],
-      requiredTrustworthyUserSourceLanguages:
-        record.requiredTrustworthyUserSourceLanguages ?? [],
+      requiredTrustworthyUserSourceLanguages: record.requiredTrustworthyUserSourceLanguages ?? [],
       trustworthyUserSourceLanguages: record.trustworthyUserSourceLanguages ?? [],
       bestTrustworthyUserPerLanguage: record.bestTrustworthyUserPerLanguage ?? {},
       archiveCompletenessStatus: record.archiveCompletenessStatus ?? 'incomplete',
@@ -370,9 +344,7 @@ function toGapEntry(
 // false. The remaining branches enumerate the reachable blocked reasons; once the
 // upstream-availability and fragment checks fall through, the record by definition
 // has an archived solution fragment but no captured official source body.
-function deriveOfficialBlockedReason(
-  record: ProblemCoverageRecord,
-): OfficialSourceBlockedReason {
+function deriveOfficialBlockedReason(record: ProblemCoverageRecord): OfficialSourceBlockedReason {
   if (record.editorialAvailability === 'hidden') {
     return 'editorial-hidden';
   }

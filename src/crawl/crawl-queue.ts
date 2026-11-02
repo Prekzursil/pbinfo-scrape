@@ -145,7 +145,7 @@ export class CrawlQueue {
 
         database.exec('COMMIT');
         return this.mapRow(claimed);
-      /* v8 ignore start -- defensive rollback for SQLite runtime failures */
+        /* v8 ignore start -- defensive rollback for SQLite runtime failures */
       } catch (error) {
         database.exec('ROLLBACK');
         throw error;
@@ -167,12 +167,7 @@ export class CrawlQueue {
               http_status = ?
           WHERE id = ?
         `)
-        .run(
-          new Date().toISOString(),
-          payload.contentHash ?? null,
-          payload.httpStatus ?? null,
-          id,
-        );
+        .run(new Date().toISOString(), payload.contentHash ?? null, payload.httpStatus ?? null, id);
     });
   }
 
