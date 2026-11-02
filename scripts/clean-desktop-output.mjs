@@ -14,8 +14,8 @@ if (existsSync(releaseDesktopRoot)) {
     withFileTypes: true,
   })) {
     if (
-      entry.isFile()
-      && (entry.name.endsWith('.nsis.7z') || entry.name.toLowerCase().endsWith('.exe'))
+      entry.isFile() &&
+      (entry.name.endsWith('.nsis.7z') || entry.name.toLowerCase().endsWith('.exe'))
     ) {
       rmSync(join(releaseDesktopRoot, entry.name), {
         force: true,

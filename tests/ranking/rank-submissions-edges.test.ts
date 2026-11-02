@@ -42,13 +42,22 @@ describe('rankProblemSubmissions edges', () => {
   });
 
   test('keeps an unrecognized language label as-is', () => {
-    const result = rankProblemSubmissions([sub({ evaluationId: 5, language: 'klingon', sourceCode: 'x' })]);
+    const result = rankProblemSubmissions([
+      sub({ evaluationId: 5, language: 'klingon', sourceCode: 'x' }),
+    ]);
     expect(result.bestUserPerLanguage.klingon).toBe(5);
   });
 
   test('handles missing runtime/memory, invalid timestamps, and unavailable sources', () => {
     const result = rankProblemSubmissions([
-      sub({ evaluationId: 1, runtimeSeconds: undefined, memoryKb: undefined, fetchedAt: 'not-a-date', sourceAvailable: false, score: 50 }),
+      sub({
+        evaluationId: 1,
+        runtimeSeconds: undefined,
+        memoryKb: undefined,
+        fetchedAt: 'not-a-date',
+        sourceAvailable: false,
+        score: 50,
+      }),
       sub({ evaluationId: 2, runtimeSeconds: 1, memoryKb: 100, score: 100 }),
     ]);
     expect(result.bestUserOverallEvaluationId).toBe(2);
@@ -95,9 +104,10 @@ describe('rankProblemSubmissions edges', () => {
   });
 
   test('keeps an empty language label for submissions and official sources', () => {
-    const result = rankProblemSubmissions([sub({ evaluationId: 3, language: '' })], [
-      source({ sourceId: 'off-empty', language: '' }),
-    ]);
+    const result = rankProblemSubmissions(
+      [sub({ evaluationId: 3, language: '' })],
+      [source({ sourceId: 'off-empty', language: '' })],
+    );
     expect(result.bestUserPerLanguage['']).toBe(3);
     expect(result.bestOfficialPerLanguage['']).toBe('off-empty');
   });
@@ -108,8 +118,16 @@ describe('rankProblemSubmissions edges', () => {
       source({ sourceId: 'off-a', sourceLength: 10 }),
       source({ sourceId: 'off-code', sourceCode: 'code', sourceLength: undefined }),
       source({ sourceId: 'off-none', sourceLength: undefined }),
-      source({ sourceId: 'off-flagged', sourceCode: 'int main(){int n;cin>>n;if(n==11)cout<<1;if(n==22)cout<<2;if(n==33)cout<<3;}', sourceLength: undefined }),
-      source({ sourceId: 'off-noflags', sourceLength: 1, suspicionFlags: undefined as unknown as string[] }),
+      source({
+        sourceId: 'off-flagged',
+        sourceCode: 'int main(){int n;cin>>n;if(n==11)cout<<1;if(n==22)cout<<2;if(n==33)cout<<3;}',
+        sourceLength: undefined,
+      }),
+      source({
+        sourceId: 'off-noflags',
+        sourceLength: 1,
+        suspicionFlags: undefined as unknown as string[],
+      }),
     ];
     const result = rankProblemSubmissions([], sources);
     // off-a and off-z tie on score vector; localeCompare picks off-a.

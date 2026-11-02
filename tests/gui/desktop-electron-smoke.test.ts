@@ -94,20 +94,10 @@ testOnWindows(
       expect(report.coverageExplorer?.detail?.problemId).toBeTruthy();
       expect(report.dataExplorer?.snapshotId).toBe('acceptance-20260310b');
       expect(report.dataExplorer?.datasetLabels).toEqual(
-        expect.arrayContaining([
-          'Problems',
-          'Evaluations',
-          'Rankings',
-          'Mirror Routes',
-        ]),
+        expect.arrayContaining(['Problems', 'Evaluations', 'Rankings', 'Mirror Routes']),
       );
       expect(report.dataExplorer?.visitedDatasets).toEqual(
-        expect.arrayContaining([
-          'Problems',
-          'Evaluations',
-          'Rankings',
-          'Mirror Routes',
-        ]),
+        expect.arrayContaining(['Problems', 'Evaluations', 'Rankings', 'Mirror Routes']),
       );
       expect(report.dataExplorer?.datasetListings?.problems?.totalCount).toBeGreaterThan(0);
       expect(report.dataExplorer?.datasetListings?.problems?.detailTitle).toBeTruthy();
@@ -144,8 +134,7 @@ async function waitForDesktopSmokeReport(
       if (report.phase === 'completed' || report.phase === 'error') {
         return report;
       }
-    } catch {
-    }
+    } catch {}
 
     await delay(250);
   }

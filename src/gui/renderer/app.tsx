@@ -60,8 +60,9 @@ export function App({ desktop }: AppProps) {
   const [archiveSummary, setArchiveSummary] = useState<GuiArchiveSummary | null>(null);
   const [archiveListing, setArchiveListing] = useState<GuiArchiveListing | null>(null);
   const [selectedArchiveRecordId, setSelectedArchiveRecordId] = useState<string | null>(null);
-  const [archiveRecordDetail, setArchiveRecordDetail] =
-    useState<GuiArchiveRecordDetail | null>(null);
+  const [archiveRecordDetail, setArchiveRecordDetail] = useState<GuiArchiveRecordDetail | null>(
+    null,
+  );
   const [verbosityMode, setVerbosityMode] = useState<GuiVerbosityMode>('normal');
   const [busyAction, setBusyAction] = useState<string | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
@@ -147,9 +148,7 @@ export function App({ desktop }: AppProps) {
       }
 
       const [nextCrawlStatus, nextJobEvents] = await Promise.all([
-        bridge
-          .getCrawlStatus(resolvedSnapshotId)
-          .catch(() => null as GuiCrawlStatus | null),
+        bridge.getCrawlStatus(resolvedSnapshotId).catch(() => null as GuiCrawlStatus | null),
         readPreferredJobEvents(bridge, nextJobs, verbosityMode, resolvedSnapshotId),
       ]);
 
@@ -396,13 +395,7 @@ export function App({ desktop }: AppProps) {
     return () => {
       cancelled = true;
     };
-  }, [
-    bridge,
-    selectedArchiveDataset,
-    selectedArchiveRecordId,
-    selectedSnapshotId,
-    workspaceState,
-  ]);
+  }, [bridge, selectedArchiveDataset, selectedArchiveRecordId, selectedSnapshotId, workspaceState]);
 
   const activeCrawlJob = useMemo(
     () =>
@@ -479,7 +472,9 @@ export function App({ desktop }: AppProps) {
     () =>
       [...jobs]
         .reverse()
-        .find((job) => job.kind === 'mirror-serve' && typeof job.detail?.mirrorPreviewUrl === 'string'),
+        .find(
+          (job) => job.kind === 'mirror-serve' && typeof job.detail?.mirrorPreviewUrl === 'string',
+        ),
     [jobs],
   );
   const previewUrl =
@@ -721,17 +716,12 @@ async function readPreferredJobEvents(
   verbosityMode: GuiVerbosityMode,
   snapshotId?: string,
 ): Promise<GuiJobEvent[]> {
-  const preferredJob = [...jobs]
-    .reverse()
-    .find(
-      (job) =>
-        job.kind === 'crawl' &&
-        (!snapshotId || job.snapshotId === snapshotId),
-    )
-    ?? [...jobs]
+  const preferredJob =
+    [...jobs]
       .reverse()
-      .find((job) => job.kind === 'crawl')
-    ?? [...jobs]
+      .find((job) => job.kind === 'crawl' && (!snapshotId || job.snapshotId === snapshotId)) ??
+    [...jobs].reverse().find((job) => job.kind === 'crawl') ??
+    [...jobs]
       .reverse()
       .find((job) => job.kind === 'snapshot-finalize' || job.kind === 'mirror-build');
   if (!preferredJob) {
@@ -749,9 +739,7 @@ async function readPreferredJobEvents(
           ? 40
           : 18;
 
-  return bridge
-    .listJobEvents(preferredJob.jobId, eventLimit)
-    .catch(() => []);
+  return bridge.listJobEvents(preferredJob.jobId, eventLimit).catch(() => []);
 }
 
 function findLatestSnapshotId(jobs: GuiJobRecord[]): string | undefined {

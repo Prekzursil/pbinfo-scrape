@@ -75,29 +75,41 @@ describe('buildMirrorArtifacts', () => {
     mkdirSync(pagesRoot, { recursive: true });
     writeFileSync(
       join(pagesRoot, 'page-root.json'),
-      JSON.stringify({
-        snapshotId: snapshot.snapshotId,
-        url: 'https://www.pbinfo.ro/',
-        bodyPath: 'raw-pages/page-https-www-pbinfo-ro-root.html',
-      }, null, 2),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          url: 'https://www.pbinfo.ro/',
+          bodyPath: 'raw-pages/page-https-www-pbinfo-ro-root.html',
+        },
+        null,
+        2,
+      ),
       'utf8',
     );
     writeFileSync(
       join(pagesRoot, 'page-probleme.json'),
-      JSON.stringify({
-        snapshotId: snapshot.snapshotId,
-        url: 'https://www.pbinfo.ro/probleme',
-        bodyPath: 'raw-pages/page-https-www-pbinfo-ro-probleme.html',
-      }, null, 2),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          url: 'https://www.pbinfo.ro/probleme',
+          bodyPath: 'raw-pages/page-https-www-pbinfo-ro-probleme.html',
+        },
+        null,
+        2,
+      ),
       'utf8',
     );
     writeFileSync(
       join(pagesRoot, 'asset-site-css.json'),
-      JSON.stringify({
-        snapshotId: snapshot.snapshotId,
-        url: 'https://www.pbinfo.ro/static/site.css',
-        bodyPath: 'raw-assets/asset-https-www-pbinfo-ro-static-site-css.css',
-      }, null, 2),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          url: 'https://www.pbinfo.ro/static/site.css',
+          bodyPath: 'raw-assets/asset-https-www-pbinfo-ro-static-site-css.css',
+        },
+        null,
+        2,
+      ),
       'utf8',
     );
 
@@ -105,26 +117,34 @@ describe('buildMirrorArtifacts', () => {
     mkdirSync(routesRoot, { recursive: true });
     writeFileSync(
       join(routesRoot, 'route-root.json'),
-      JSON.stringify({
-        snapshotId: snapshot.snapshotId,
-        route: '/',
-        sourceUrl: 'https://www.pbinfo.ro/',
-        sourceFile: 'page-https-www-pbinfo-ro-root.html',
-        template: 'raw-page',
-        entityKey: '/',
-      }, null, 2),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          route: '/',
+          sourceUrl: 'https://www.pbinfo.ro/',
+          sourceFile: 'page-https-www-pbinfo-ro-root.html',
+          template: 'raw-page',
+          entityKey: '/',
+        },
+        null,
+        2,
+      ),
       'utf8',
     );
     writeFileSync(
       join(routesRoot, 'route-probleme.json'),
-      JSON.stringify({
-        snapshotId: snapshot.snapshotId,
-        route: '/probleme',
-        sourceUrl: 'https://www.pbinfo.ro/probleme',
-        sourceFile: 'page-https-www-pbinfo-ro-probleme.html',
-        template: 'raw-page',
-        entityKey: '/probleme',
-      }, null, 2),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          route: '/probleme',
+          sourceUrl: 'https://www.pbinfo.ro/probleme',
+          sourceFile: 'page-https-www-pbinfo-ro-probleme.html',
+          template: 'raw-page',
+          entityKey: '/probleme',
+        },
+        null,
+        2,
+      ),
       'utf8',
     );
 
@@ -159,12 +179,11 @@ describe('buildMirrorArtifacts', () => {
         mirrorFile: 'site/probleme/index.html',
       },
     ]);
-    expect(readFileSync(join(snapshot.mirrorRoot, 'index.html'), 'utf8')).toContain('PBInfo Offline Mirror');
+    expect(readFileSync(join(snapshot.mirrorRoot, 'index.html'), 'utf8')).toContain(
+      'PBInfo Offline Mirror',
+    );
     expect(
-      readFileSync(
-        join(snapshot.mirrorRoot, 'site', 'archive', 'coverage', 'index.html'),
-        'utf8',
-      ),
+      readFileSync(join(snapshot.mirrorRoot, 'site', 'archive', 'coverage', 'index.html'), 'utf8'),
     ).toContain('Archive coverage');
     const mirroredProbleme = readFileSync(
       join(snapshot.mirrorRoot, 'site', 'probleme', 'index.html'),
@@ -175,12 +194,9 @@ describe('buildMirrorArtifacts', () => {
     expect(mirroredProbleme).not.toContain('use.fontawesome.com');
     expect(mirroredProbleme).not.toContain('challenge-platform');
     expect(mirroredProbleme).not.toContain('gtag(');
-    expect(
-      readFileSync(
-        join(snapshot.mirrorRoot, 'site', 'root', 'index.html'),
-        'utf8',
-      ),
-    ).toContain('href="/probleme"');
+    expect(readFileSync(join(snapshot.mirrorRoot, 'site', 'root', 'index.html'), 'utf8')).toContain(
+      'href="/probleme"',
+    );
   });
 
   test('rebuilds raw manifests from normalized page records when manifests are missing or corrupt', async () => {
@@ -213,32 +229,44 @@ describe('buildMirrorArtifacts', () => {
 
     writeFileSync(
       join(snapshot.normalizedRoot, 'pages', 'page-demo.json'),
-      JSON.stringify({
-        snapshotId: snapshot.snapshotId,
-        url: 'https://www.pbinfo.ro/probleme/1/demo',
-        bodyPath: 'raw-pages/page-https-www-pbinfo-ro-probleme-1-demo.html',
-      }, null, 2),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          url: 'https://www.pbinfo.ro/probleme/1/demo',
+          bodyPath: 'raw-pages/page-https-www-pbinfo-ro-probleme-1-demo.html',
+        },
+        null,
+        2,
+      ),
       'utf8',
     );
     writeFileSync(
       join(snapshot.normalizedRoot, 'pages', 'asset-demo.json'),
-      JSON.stringify({
-        snapshotId: snapshot.snapshotId,
-        url: 'https://www.pbinfo.ro/static/site.css',
-        bodyPath: 'raw-assets/asset-https-www-pbinfo-ro-static-site-css.css',
-      }, null, 2),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          url: 'https://www.pbinfo.ro/static/site.css',
+          bodyPath: 'raw-assets/asset-https-www-pbinfo-ro-static-site-css.css',
+        },
+        null,
+        2,
+      ),
       'utf8',
     );
     writeFileSync(
       join(snapshot.normalizedRoot, 'routes', 'route-demo.json'),
-      JSON.stringify({
-        snapshotId: snapshot.snapshotId,
-        route: '/probleme/1/demo',
-        sourceUrl: 'https://www.pbinfo.ro/probleme/1/demo',
-        sourceFile: 'page-https-www-pbinfo-ro-probleme-1-demo.html',
-        template: 'problem',
-        entityKey: 'problem:1',
-      }, null, 2),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          route: '/probleme/1/demo',
+          sourceUrl: 'https://www.pbinfo.ro/probleme/1/demo',
+          sourceFile: 'page-https-www-pbinfo-ro-probleme-1-demo.html',
+          template: 'problem',
+          entityKey: 'problem:1',
+        },
+        null,
+        2,
+      ),
       'utf8',
     );
 
@@ -314,74 +342,98 @@ describe('buildMirrorArtifacts', () => {
 
     writeFileSync(
       join(snapshot.normalizedRoot, 'pages', 'problem-page.json'),
-      JSON.stringify({
-        snapshotId: snapshot.snapshotId,
-        url: 'https://www.pbinfo.ro/probleme/3716/crossword',
-        kind: 'public-page',
-        httpStatus: 200,
-        bodyPath: 'raw-pages/page-problem-3716.html',
-        fetchedAt: '2026-03-10T00:00:00.000Z',
-      }, null, 2),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          url: 'https://www.pbinfo.ro/probleme/3716/crossword',
+          kind: 'public-page',
+          httpStatus: 200,
+          bodyPath: 'raw-pages/page-problem-3716.html',
+          fetchedAt: '2026-03-10T00:00:00.000Z',
+        },
+        null,
+        2,
+      ),
       'utf8',
     );
     writeFileSync(
       join(snapshot.normalizedRoot, 'pages', 'statement-page.json'),
-      JSON.stringify({
-        snapshotId: snapshot.snapshotId,
-        url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3716',
-        kind: 'problem-statement',
-        httpStatus: 200,
-        bodyPath: 'raw-pages/page-problem-3716.html',
-        fetchedAt: '2026-03-10T00:00:00.000Z',
-      }, null, 2),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-enunt.php?id=3716',
+          kind: 'problem-statement',
+          httpStatus: 200,
+          bodyPath: 'raw-pages/page-problem-3716.html',
+          fetchedAt: '2026-03-10T00:00:00.000Z',
+        },
+        null,
+        2,
+      ),
       'utf8',
     );
     writeFileSync(
       join(snapshot.normalizedRoot, 'pages', 'solution-page.json'),
-      JSON.stringify({
-        snapshotId: snapshot.snapshotId,
-        url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-solutie.php?id=3716',
-        kind: 'problem-solution',
-        httpStatus: 200,
-        bodyPath: 'raw-pages/page-problem-3716.html',
-        fetchedAt: '2026-03-10T00:00:00.000Z',
-      }, null, 2),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-solutie.php?id=3716',
+          kind: 'problem-solution',
+          httpStatus: 200,
+          bodyPath: 'raw-pages/page-problem-3716.html',
+          fetchedAt: '2026-03-10T00:00:00.000Z',
+        },
+        null,
+        2,
+      ),
       'utf8',
     );
     writeFileSync(
       join(snapshot.normalizedRoot, 'pages', 'tests-page.json'),
-      JSON.stringify({
-        snapshotId: snapshot.snapshotId,
-        url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-teste.php?id=3716',
-        kind: 'problem-tests',
-        httpStatus: 200,
-        bodyPath: 'raw-pages/page-problem-3716.html',
-        fetchedAt: '2026-03-10T00:00:00.000Z',
-      }, null, 2),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          url: 'https://www.pbinfo.ro/ajx-module/ajx-problema-afisare-teste.php?id=3716',
+          kind: 'problem-tests',
+          httpStatus: 200,
+          bodyPath: 'raw-pages/page-problem-3716.html',
+          fetchedAt: '2026-03-10T00:00:00.000Z',
+        },
+        null,
+        2,
+      ),
       'utf8',
     );
     writeFileSync(
       join(snapshot.normalizedRoot, 'pages', 'profile-page.json'),
-      JSON.stringify({
-        snapshotId: snapshot.snapshotId,
-        url: 'https://www.pbinfo.ro/profil/Prekzursil',
-        kind: 'user-profile',
-        httpStatus: 200,
-        bodyPath: 'raw-pages/page-profile.html',
-        fetchedAt: '2026-03-10T00:00:00.000Z',
-      }, null, 2),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          url: 'https://www.pbinfo.ro/profil/Prekzursil',
+          kind: 'user-profile',
+          httpStatus: 200,
+          bodyPath: 'raw-pages/page-profile.html',
+          fetchedAt: '2026-03-10T00:00:00.000Z',
+        },
+        null,
+        2,
+      ),
       'utf8',
     );
     writeFileSync(
       join(snapshot.normalizedRoot, 'pages', 'evaluation-page.json'),
-      JSON.stringify({
-        snapshotId: snapshot.snapshotId,
-        url: 'https://www.pbinfo.ro/detalii-evaluare/63332367',
-        kind: 'evaluation-detail',
-        httpStatus: 200,
-        bodyPath: 'raw-pages/page-evaluation.html',
-        fetchedAt: '2026-03-10T00:00:00.000Z',
-      }, null, 2),
+      JSON.stringify(
+        {
+          snapshotId: snapshot.snapshotId,
+          url: 'https://www.pbinfo.ro/detalii-evaluare/63332367',
+          kind: 'evaluation-detail',
+          httpStatus: 200,
+          bodyPath: 'raw-pages/page-evaluation.html',
+          fetchedAt: '2026-03-10T00:00:00.000Z',
+        },
+        null,
+        2,
+      ),
       'utf8',
     );
 

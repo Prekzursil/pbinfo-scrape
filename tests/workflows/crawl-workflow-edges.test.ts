@@ -13,7 +13,9 @@ vi.mock('../../src/crawl/browser-capture.js', () => ({
   createPlaywrightBrowserCapture: browserMock.createPlaywrightBrowserCapture,
 }));
 
-const { buildQueuePath, markSnapshotCompleted, prepareSnapshot } = await import('../../src/archive/storage.js');
+const { buildQueuePath, markSnapshotCompleted, prepareSnapshot } = await import(
+  '../../src/archive/storage.js'
+);
 const { loadLocalConfig } = await import('../../src/config/local-config.js');
 const { CrawlQueue } = await import('../../src/crawl/crawl-queue.js');
 const {
@@ -36,7 +38,9 @@ beforeEach(() => {
 });
 
 afterEach(async () => {
-  await Promise.all(servers.splice(0).map((s) => new Promise<void>((resolve) => s.close(() => resolve()))));
+  await Promise.all(
+    servers.splice(0).map((s) => new Promise<void>((resolve) => s.close(() => resolve()))),
+  );
   for (const dir of tempDirs.splice(0)) {
     rmSync(dir, { recursive: true, force: true });
   }
@@ -85,9 +89,9 @@ describe('createRateLimitedFetch', () => {
 describe('enforceAuthPreflight', () => {
   test('throws when an authenticated scope has no configured handle', async () => {
     const root = workspace({ crawl: { crossCheckWithBrowser: false } });
-    await expect(runCrawlWorkflow(root, 'user', { maxIterations: 0, authStatusProbe: okProbe })).rejects.toThrow(
-      /requires crawl.userHandle/,
-    );
+    await expect(
+      runCrawlWorkflow(root, 'user', { maxIterations: 0, authStatusProbe: okProbe }),
+    ).rejects.toThrow(/requires crawl.userHandle/);
   });
 
   test('throws when the resolved handle does not match', async () => {
@@ -114,7 +118,10 @@ describe('enforceAuthPreflight', () => {
 describe('runCrawlWorkflow seeds', () => {
   test('seeds an authenticated user crawl and completes when budget is zero', async () => {
     const root = workspace({ crawl: { userHandle: 'alice', crossCheckWithBrowser: false } });
-    const result = await runCrawlWorkflow(root, 'user', { maxIterations: 0, authStatusProbe: okProbe });
+    const result = await runCrawlWorkflow(root, 'user', {
+      maxIterations: 0,
+      authStatusProbe: okProbe,
+    });
     expect(result.processed).toBe(0);
     expect(result.completed).toBe(false);
   });
@@ -128,7 +135,10 @@ describe('runCrawlWorkflow seeds', () => {
 
   test('closes a successfully launched browser capture', async () => {
     const close = vi.fn(async () => undefined);
-    browserMock.createPlaywrightBrowserCapture.mockResolvedValueOnce({ captureHtml: async () => '', close });
+    browserMock.createPlaywrightBrowserCapture.mockResolvedValueOnce({
+      captureHtml: async () => '',
+      close,
+    });
     const root = workspace({ crawl: { crossCheckWithBrowser: true } });
     await runCrawlWorkflow(root, 'public', { maxIterations: 0 });
     expect(close).toHaveBeenCalledOnce();
@@ -138,15 +148,20 @@ describe('runCrawlWorkflow seeds', () => {
 describe('runOfficialSourceHarvestWorkflow', () => {
   test('throws when no snapshot is available', async () => {
     const root = workspace({ crawl: { userHandle: 'alice', crossCheckWithBrowser: false } });
-    await expect(runOfficialSourceHarvestWorkflow(root, { authStatusProbe: okProbe })).rejects.toThrow(
-      /No snapshot is available/,
-    );
+    await expect(
+      runOfficialSourceHarvestWorkflow(root, { authStatusProbe: okProbe }),
+    ).rejects.toThrow(/No snapshot is available/);
   });
 
   test('throws when the snapshot has no source-list urls', async () => {
     const root = workspace({ crawl: { userHandle: 'alice', crossCheckWithBrowser: false } });
     const config = loadLocalConfig(root);
-    prepareSnapshot(config, { snapshotId: 'SNAP', scope: 'all', checkpoint: 'canonical', now: new Date() });
+    prepareSnapshot(config, {
+      snapshotId: 'SNAP',
+      scope: 'all',
+      checkpoint: 'canonical',
+      now: new Date(),
+    });
     await expect(
       runOfficialSourceHarvestWorkflow(root, { authStatusProbe: okProbe }),
     ).rejects.toThrow(/No problem source-list URLs/);
@@ -155,17 +170,32 @@ describe('runOfficialSourceHarvestWorkflow', () => {
   test('builds author-scoped seeds from problem metadata', async () => {
     const root = workspace({ crawl: { userHandle: 'alice', crossCheckWithBrowser: false } });
     const config = loadLocalConfig(root);
-    const snapshot = prepareSnapshot(config, { snapshotId: 'SNAP', scope: 'all', checkpoint: 'canonical', now: new Date() });
+    const snapshot = prepareSnapshot(config, {
+      snapshotId: 'SNAP',
+      scope: 'all',
+      checkpoint: 'canonical',
+      now: new Date(),
+    });
     const problemsRoot = join(snapshot.normalizedRoot, 'problems');
     mkdirSync(problemsRoot, { recursive: true });
     writeFileSync(
       join(problemsRoot, 'p1.json'),
-      JSON.stringify({ id: 1, slug: 'sum', sourceListUrl: 'https://www.pbinfo.ro/solutii/problema/1/sum', metadata: { 'postată de': 'Teacher (teach)' } }),
+      JSON.stringify({
+        id: 1,
+        slug: 'sum',
+        sourceListUrl: 'https://www.pbinfo.ro/solutii/problema/1/sum',
+        metadata: { 'postată de': 'Teacher (teach)' },
+      }),
       'utf8',
     );
     writeFileSync(
       join(problemsRoot, 'p2.json'),
-      JSON.stringify({ id: 2, slug: 'diff', sourceListUrl: 'https://www.pbinfo.ro/solutii/problema/2/diff', metadata: { authorHandle: 'admin' } }),
+      JSON.stringify({
+        id: 2,
+        slug: 'diff',
+        sourceListUrl: 'https://www.pbinfo.ro/solutii/problema/2/diff',
+        metadata: { authorHandle: 'admin' },
+      }),
       'utf8',
     );
     writeFileSync(
@@ -176,48 +206,83 @@ describe('runOfficialSourceHarvestWorkflow', () => {
     writeFileSync(join(problemsRoot, 'p4.json'), JSON.stringify({ id: 4, slug: 'x' }), 'utf8');
     writeFileSync(
       join(problemsRoot, 'p5.json'),
-      JSON.stringify({ id: 5, slug: 'm', sourceListUrl: 'https://www.pbinfo.ro/solutii/problema/5/m', metadata: { 'postata de': 'Plain (plain)' } }),
+      JSON.stringify({
+        id: 5,
+        slug: 'm',
+        sourceListUrl: 'https://www.pbinfo.ro/solutii/problema/5/m',
+        metadata: { 'postata de': 'Plain (plain)' },
+      }),
       'utf8',
     );
     writeFileSync(
       join(problemsRoot, 'p6.json'),
-      JSON.stringify({ id: 6, slug: 'w', sourceListUrl: 'https://www.pbinfo.ro/solutii/problema/6/w', metadata: { authorHandle: '   ' } }),
+      JSON.stringify({
+        id: 6,
+        slug: 'w',
+        sourceListUrl: 'https://www.pbinfo.ro/solutii/problema/6/w',
+        metadata: { authorHandle: '   ' },
+      }),
       'utf8',
     );
     writeFileSync(
       join(problemsRoot, 'p7.json'),
-      JSON.stringify({ id: 7, slug: 'q', sourceListUrl: 'https://www.pbinfo.ro/weird-path', metadata: { authorHandle: 'someone' } }),
+      JSON.stringify({
+        id: 7,
+        slug: 'q',
+        sourceListUrl: 'https://www.pbinfo.ro/weird-path',
+        metadata: { authorHandle: 'someone' },
+      }),
       'utf8',
     );
 
-    const result = await runOfficialSourceHarvestWorkflow(root, { maxIterations: 0, authStatusProbe: okProbe });
+    const result = await runOfficialSourceHarvestWorkflow(root, {
+      maxIterations: 0,
+      authStatusProbe: okProbe,
+    });
     expect(result.snapshotId).toBe('SNAP');
   });
 
   test('resolves the current snapshot when no canonical snapshot exists', async () => {
     const root = workspace({ crawl: { userHandle: 'alice', crossCheckWithBrowser: false } });
     const config = loadLocalConfig(root);
-    const snapshot = prepareSnapshot(config, { snapshotId: 'CHK', scope: 'all', checkpoint: 'checkpoint', now: new Date() });
+    const snapshot = prepareSnapshot(config, {
+      snapshotId: 'CHK',
+      scope: 'all',
+      checkpoint: 'checkpoint',
+      now: new Date(),
+    });
     const problemsRoot = join(snapshot.normalizedRoot, 'problems');
     mkdirSync(problemsRoot, { recursive: true });
     writeFileSync(
       join(problemsRoot, 'p1.json'),
-      JSON.stringify({ id: 1, slug: 'sum', sourceListUrl: 'https://www.pbinfo.ro/solutii/problema/1/sum' }),
+      JSON.stringify({
+        id: 1,
+        slug: 'sum',
+        sourceListUrl: 'https://www.pbinfo.ro/solutii/problema/1/sum',
+      }),
       'utf8',
     );
-    const result = await runOfficialSourceHarvestWorkflow(root, { maxIterations: 0, authStatusProbe: okProbe });
+    const result = await runOfficialSourceHarvestWorkflow(root, {
+      maxIterations: 0,
+      authStatusProbe: okProbe,
+    });
     expect(result.snapshotId).toBe('CHK');
   });
 
   test('seeds an authenticated all-scope crawl', async () => {
     const root = workspace({ crawl: { userHandle: 'alice', crossCheckWithBrowser: false } });
-    const result = await runCrawlWorkflow(root, 'all', { maxIterations: 0, authStatusProbe: okProbe });
+    const result = await runCrawlWorkflow(root, 'all', {
+      maxIterations: 0,
+      authStatusProbe: okProbe,
+    });
     expect(result.completed).toBe(false);
   });
 
   test('uses the real auth probe when none is injected', async () => {
     const root = workspace({ crawl: { userHandle: 'alice', crossCheckWithBrowser: false } });
-    await expect(runCrawlWorkflow(root, 'user', { maxIterations: 0 })).rejects.toThrow(/preflight failed/);
+    await expect(runCrawlWorkflow(root, 'user', { maxIterations: 0 })).rejects.toThrow(
+      /preflight failed/,
+    );
   });
 });
 

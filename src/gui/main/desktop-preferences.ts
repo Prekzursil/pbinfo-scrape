@@ -1,14 +1,9 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 
-import {
-  type DesktopPreferencesRecord,
-  desktopPreferencesRecordSchema,
-} from '../shared/types.js';
+import { type DesktopPreferencesRecord, desktopPreferencesRecordSchema } from '../shared/types.js';
 
-export function readDesktopPreferences(
-  userDataRoot: string,
-): DesktopPreferencesRecord {
+export function readDesktopPreferences(userDataRoot: string): DesktopPreferencesRecord {
   const path = getDesktopPreferencesPath(userDataRoot);
   if (!existsSync(path)) {
     return {
@@ -16,9 +11,7 @@ export function readDesktopPreferences(
     };
   }
 
-  return desktopPreferencesRecordSchema.parse(
-    JSON.parse(readFileSync(path, 'utf8')),
-  );
+  return desktopPreferencesRecordSchema.parse(JSON.parse(readFileSync(path, 'utf8')));
 }
 
 export function writeDesktopPreferences(

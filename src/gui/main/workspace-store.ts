@@ -1,10 +1,4 @@
-import {
-  existsSync,
-  mkdirSync,
-  readFileSync,
-  rmSync,
-  writeFileSync,
-} from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
 
 import { createProfileInputSchema } from '../shared/contracts.js';
@@ -18,8 +12,7 @@ interface TimedOptions {
   now?: Date;
 }
 
-interface UpsertWorkspaceProfileInput
-  extends ReturnType<typeof createProfileInputSchema.parse> {
+interface UpsertWorkspaceProfileInput extends ReturnType<typeof createProfileInputSchema.parse> {
   now?: Date;
 }
 
@@ -61,9 +54,7 @@ export function readWorkspaceState(workspaceRoot: string): GuiWorkspaceState {
     return initializeWorkspaceState(resolvedWorkspace);
   }
 
-  return guiWorkspaceStateSchema.parse(
-    JSON.parse(readFileSync(statePath, 'utf8')),
-  );
+  return guiWorkspaceStateSchema.parse(JSON.parse(readFileSync(statePath, 'utf8')));
 }
 
 export function upsertWorkspaceProfile(
@@ -74,9 +65,7 @@ export function upsertWorkspaceProfile(
   const { now, ...profileInput } = input;
   const parsed = createProfileInputSchema.parse(profileInput);
   const state = readWorkspaceState(resolvedWorkspace);
-  const existing = state.profiles.find(
-    (profile) => profile.profileId === parsed.profileId,
-  );
+  const existing = state.profiles.find((profile) => profile.profileId === parsed.profileId);
   const timestamp = iso(now);
   const cookiesPath = getProfileCookiesPath(resolvedWorkspace, parsed.profileId);
   mkdirSync(dirname(cookiesPath), { recursive: true });
@@ -94,9 +83,7 @@ export function upsertWorkspaceProfile(
   };
 
   const profiles = existing
-    ? state.profiles.map((profile) =>
-        profile.profileId === record.profileId ? record : profile,
-      )
+    ? state.profiles.map((profile) => (profile.profileId === record.profileId ? record : profile))
     : [...state.profiles, record];
   const nextState: GuiWorkspaceState = {
     ...state,
@@ -213,10 +200,7 @@ export function deleteWorkspaceProfile(
   return nextState;
 }
 
-function writeWorkspaceState(
-  workspaceRoot: string,
-  state: GuiWorkspaceState,
-): void {
+function writeWorkspaceState(workspaceRoot: string, state: GuiWorkspaceState): void {
   const statePath = getWorkspaceStatePath(workspaceRoot);
   mkdirSync(dirname(statePath), { recursive: true });
   writeFileSync(statePath, JSON.stringify(state, null, 2), 'utf8');
@@ -231,17 +215,10 @@ function readRawLocalConfig(workspaceRoot: string): WorkspaceLocalConfigShape {
   return JSON.parse(readFileSync(configPath, 'utf8')) as WorkspaceLocalConfigShape;
 }
 
-function writeRawLocalConfig(
-  workspaceRoot: string,
-  config: WorkspaceLocalConfigShape,
-): void {
+function writeRawLocalConfig(workspaceRoot: string, config: WorkspaceLocalConfigShape): void {
   const configPath = getRawLocalConfigPath(workspaceRoot);
   mkdirSync(dirname(configPath), { recursive: true });
-  writeFileSync(
-    configPath,
-    JSON.stringify(stripUndefined(config), null, 2),
-    'utf8',
-  );
+  writeFileSync(configPath, JSON.stringify(stripUndefined(config), null, 2), 'utf8');
 }
 
 function getWorkspaceStatePath(workspaceRoot: string): string {
@@ -276,9 +253,7 @@ function omitKeys(
     return {};
   }
 
-  return Object.fromEntries(
-    Object.entries(value).filter(([key]) => !keys.includes(key)),
-  );
+  return Object.fromEntries(Object.entries(value).filter(([key]) => !keys.includes(key)));
 }
 
 function omitUserHandle(

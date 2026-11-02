@@ -38,23 +38,39 @@ describe('runNormalizeSnapshotWorkflow edges', () => {
     fs.mkdirSync(join(snapshot.normalizedRoot, 'pages'), { recursive: true });
     fs.writeFileSync(
       join(snapshot.normalizedRoot, 'pages', 'a.json'),
-      JSON.stringify({ url: 'https://x/1', kind: 'public-page', httpStatus: 200, fetchedAt: 't', bodyPath: 'elsewhere/a.html' }),
+      JSON.stringify({
+        url: 'https://x/1',
+        kind: 'public-page',
+        httpStatus: 200,
+        fetchedAt: 't',
+        bodyPath: 'elsewhere/a.html',
+      }),
       'utf8',
     );
     fs.writeFileSync(
       join(snapshot.normalizedRoot, 'pages', 'b.json'),
-      JSON.stringify({ url: 'https://x/2', kind: 'public-page', httpStatus: 200, fetchedAt: 't', bodyPath: 'raw-pages/missing.html' }),
+      JSON.stringify({
+        url: 'https://x/2',
+        kind: 'public-page',
+        httpStatus: 200,
+        fetchedAt: 't',
+        bodyPath: 'raw-pages/missing.html',
+      }),
       'utf8',
     );
 
-    const { runNormalizeSnapshotWorkflow } = await import('../../src/workflows/normalize-workflow.js');
+    const { runNormalizeSnapshotWorkflow } = await import(
+      '../../src/workflows/normalize-workflow.js'
+    );
     const result = await runNormalizeSnapshotWorkflow(workspaceRoot, snapshot.snapshotId);
     expect(result.pagesNormalized).toBe(0);
   });
 
   test('returns empty page records when the pages directory is missing', async () => {
     const { workspaceRoot, snapshot } = await makeWorkspace('normalize-no-pages');
-    const { runNormalizeSnapshotWorkflow } = await import('../../src/workflows/normalize-workflow.js');
+    const { runNormalizeSnapshotWorkflow } = await import(
+      '../../src/workflows/normalize-workflow.js'
+    );
     const result = await runNormalizeSnapshotWorkflow(workspaceRoot, snapshot.snapshotId);
     expect(result.pagesNormalized).toBe(0);
   });
@@ -69,7 +85,10 @@ describe('runNormalizeSnapshotWorkflow edges', () => {
       const actual = await vi.importActual<typeof import('node:fs')>('node:fs');
       return {
         ...actual,
-        rmSync(target: Parameters<typeof actual.rmSync>[0], options?: Parameters<typeof actual.rmSync>[1]) {
+        rmSync(
+          target: Parameters<typeof actual.rmSync>[0],
+          options?: Parameters<typeof actual.rmSync>[1],
+        ) {
           if (String(target).endsWith(`${sep}problems${sep}stale.json`)) {
             throw 'not-an-error-instance';
           }
@@ -80,9 +99,15 @@ describe('runNormalizeSnapshotWorkflow edges', () => {
 
     const { prepareSnapshot } = await import('../../src/archive/storage.js');
     const { loadLocalConfig } = await import('../../src/config/local-config.js');
-    const { runNormalizeSnapshotWorkflow } = await import('../../src/workflows/normalize-workflow.js');
+    const { runNormalizeSnapshotWorkflow } = await import(
+      '../../src/workflows/normalize-workflow.js'
+    );
     const config = loadLocalConfig(workspaceRoot);
-    const snapshot = prepareSnapshot(config, { snapshotId: 'normalize-nonerror', scope: 'all', now: new Date() });
+    const snapshot = prepareSnapshot(config, {
+      snapshotId: 'normalize-nonerror',
+      scope: 'all',
+      now: new Date(),
+    });
     actualFs.mkdirSync(join(snapshot.normalizedRoot, 'problems'), { recursive: true });
     actualFs.writeFileSync(join(snapshot.normalizedRoot, 'problems', 'stale.json'), '{}', 'utf8');
 
@@ -101,7 +126,10 @@ describe('runNormalizeSnapshotWorkflow edges', () => {
       const actual = await vi.importActual<typeof import('node:fs')>('node:fs');
       return {
         ...actual,
-        rmSync(target: Parameters<typeof actual.rmSync>[0], options?: Parameters<typeof actual.rmSync>[1]) {
+        rmSync(
+          target: Parameters<typeof actual.rmSync>[0],
+          options?: Parameters<typeof actual.rmSync>[1],
+        ) {
           if (String(target).endsWith(`${sep}problems${sep}stale.json`)) {
             throw new Error('plain error without code');
           }
@@ -112,9 +140,15 @@ describe('runNormalizeSnapshotWorkflow edges', () => {
 
     const { prepareSnapshot } = await import('../../src/archive/storage.js');
     const { loadLocalConfig } = await import('../../src/config/local-config.js');
-    const { runNormalizeSnapshotWorkflow } = await import('../../src/workflows/normalize-workflow.js');
+    const { runNormalizeSnapshotWorkflow } = await import(
+      '../../src/workflows/normalize-workflow.js'
+    );
     const config = loadLocalConfig(workspaceRoot);
-    const snapshot = prepareSnapshot(config, { snapshotId: 'normalize-nocode', scope: 'all', now: new Date() });
+    const snapshot = prepareSnapshot(config, {
+      snapshotId: 'normalize-nocode',
+      scope: 'all',
+      now: new Date(),
+    });
     actualFs.mkdirSync(join(snapshot.normalizedRoot, 'problems'), { recursive: true });
     actualFs.writeFileSync(join(snapshot.normalizedRoot, 'problems', 'stale.json'), '{}', 'utf8');
 
@@ -133,7 +167,10 @@ describe('runNormalizeSnapshotWorkflow edges', () => {
       const actual = await vi.importActual<typeof import('node:fs')>('node:fs');
       return {
         ...actual,
-        readdirSync(target: Parameters<typeof actual.readdirSync>[0], options?: Parameters<typeof actual.readdirSync>[1]) {
+        readdirSync(
+          target: Parameters<typeof actual.readdirSync>[0],
+          options?: Parameters<typeof actual.readdirSync>[1],
+        ) {
           if (String(target).endsWith(`${sep}normalized${sep}problems`)) {
             const error = new Error('busy') as NodeJS.ErrnoException;
             error.code = 'EBUSY';
@@ -146,12 +183,20 @@ describe('runNormalizeSnapshotWorkflow edges', () => {
 
     const { prepareSnapshot } = await import('../../src/archive/storage.js');
     const { loadLocalConfig } = await import('../../src/config/local-config.js');
-    const { runNormalizeSnapshotWorkflow } = await import('../../src/workflows/normalize-workflow.js');
+    const { runNormalizeSnapshotWorkflow } = await import(
+      '../../src/workflows/normalize-workflow.js'
+    );
     const config = loadLocalConfig(workspaceRoot);
-    const snapshot = prepareSnapshot(config, { snapshotId: 'normalize-exhaust', scope: 'all', now: new Date() });
+    const snapshot = prepareSnapshot(config, {
+      snapshotId: 'normalize-exhaust',
+      scope: 'all',
+      now: new Date(),
+    });
     actualFs.mkdirSync(join(snapshot.normalizedRoot, 'pages'), { recursive: true });
 
-    await expect(runNormalizeSnapshotWorkflow(workspaceRoot, snapshot.snapshotId)).rejects.toThrow('busy');
+    await expect(runNormalizeSnapshotWorkflow(workspaceRoot, snapshot.snapshotId)).rejects.toThrow(
+      'busy',
+    );
   }, 15000);
 
   test('retries a retryable directory listing failure during reset', async () => {
@@ -165,7 +210,10 @@ describe('runNormalizeSnapshotWorkflow edges', () => {
       const actual = await vi.importActual<typeof import('node:fs')>('node:fs');
       return {
         ...actual,
-        readdirSync(target: Parameters<typeof actual.readdirSync>[0], options?: Parameters<typeof actual.readdirSync>[1]) {
+        readdirSync(
+          target: Parameters<typeof actual.readdirSync>[0],
+          options?: Parameters<typeof actual.readdirSync>[1],
+        ) {
           if (!injected && String(target).endsWith(`${sep}normalized${sep}problems`)) {
             injected = true;
             const error = new Error('busy') as NodeJS.ErrnoException;
@@ -179,9 +227,15 @@ describe('runNormalizeSnapshotWorkflow edges', () => {
 
     const { prepareSnapshot } = await import('../../src/archive/storage.js');
     const { loadLocalConfig } = await import('../../src/config/local-config.js');
-    const { runNormalizeSnapshotWorkflow } = await import('../../src/workflows/normalize-workflow.js');
+    const { runNormalizeSnapshotWorkflow } = await import(
+      '../../src/workflows/normalize-workflow.js'
+    );
     const config = loadLocalConfig(workspaceRoot);
-    const snapshot = prepareSnapshot(config, { snapshotId: 'normalize-readdir', scope: 'all', now: new Date() });
+    const snapshot = prepareSnapshot(config, {
+      snapshotId: 'normalize-readdir',
+      scope: 'all',
+      now: new Date(),
+    });
     actualFs.mkdirSync(join(snapshot.normalizedRoot, 'pages'), { recursive: true });
 
     const result = await runNormalizeSnapshotWorkflow(workspaceRoot, snapshot.snapshotId);

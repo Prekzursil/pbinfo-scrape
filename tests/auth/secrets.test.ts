@@ -20,7 +20,10 @@ afterEach(() => {
   }
 });
 
-function makeConfig(root: string, overrides: Partial<LoadedLocalConfig['secrets']> = {}): LoadedLocalConfig {
+function makeConfig(
+  root: string,
+  overrides: Partial<LoadedLocalConfig['secrets']> = {},
+): LoadedLocalConfig {
   const localRoot = join(root, '.local');
   mkdirSync(localRoot, { recursive: true });
   return {
@@ -64,8 +67,16 @@ describe('secret bundle bootstrap', () => {
     mkdirSync(join(root, 'secrets'), { recursive: true });
     writeFileSync(config.secrets.identityPath, `${identity}\n`, 'utf8');
     writeFileSync(config.secrets.recipientPath, `${recipient}\n`, 'utf8');
-    writeFileSync(join(config.paths.localRoot, 'pbinfo.local.json'), JSON.stringify({ a: 1 }), 'utf8');
-    writeFileSync(config.auth.sessionCookiesPath, JSON.stringify([{ key: 'k', value: 'v' }]), 'utf8');
+    writeFileSync(
+      join(config.paths.localRoot, 'pbinfo.local.json'),
+      JSON.stringify({ a: 1 }),
+      'utf8',
+    );
+    writeFileSync(
+      config.auth.sessionCookiesPath,
+      JSON.stringify([{ key: 'k', value: 'v' }]),
+      'utf8',
+    );
 
     const result = await bootstrapSecretBundle(config);
     expect(result.createdIdentity).toBe(false);
@@ -93,7 +104,11 @@ describe('secret bundle bootstrap', () => {
     const root = mkdtempSync(join(tmpdir(), 'pbinfo-secrets-'));
     tempDirs.push(root);
     const config = makeConfig(root);
-    writeFileSync(join(config.paths.localRoot, 'pbinfo.local.json'), JSON.stringify({ keep: true }), 'utf8');
+    writeFileSync(
+      join(config.paths.localRoot, 'pbinfo.local.json'),
+      JSON.stringify({ keep: true }),
+      'utf8',
+    );
     await bootstrapSecretBundle(config);
 
     rmSync(join(config.paths.localRoot, 'pbinfo.local.json'));

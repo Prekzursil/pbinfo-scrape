@@ -1,4 +1,12 @@
-import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import {
+  cpSync,
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  readdirSync,
+  rmSync,
+  writeFileSync,
+} from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 
 import type { LoadedLocalConfig } from '../config/local-config.js';
@@ -72,7 +80,10 @@ interface ArtifactRelinkRegistry {
 }
 
 export function buildSnapshotId(now = new Date()): string {
-  return now.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}Z$/, 'Z');
+  return now
+    .toISOString()
+    .replace(/[-:]/g, '')
+    .replace(/\.\d{3}Z$/, 'Z');
 }
 
 export function resolveSnapshotLayout(
@@ -88,14 +99,16 @@ export function resolveSnapshotLayout(
     normalizedRoot: join(snapshotRoot, 'normalized'),
     mirrorRoot: join(snapshotRoot, 'mirror'),
     mirrorPagesRoot: join(snapshotRoot, 'mirror', 'pages'),
-    rawPagesRoot: relinked?.rawPagesPath ?? join(config.paths.artifactsRoot, snapshotId, 'raw-pages'),
-    rawAssetsRoot: relinked?.rawAssetsPath ?? join(config.paths.artifactsRoot, snapshotId, 'raw-assets'),
+    rawPagesRoot:
+      relinked?.rawPagesPath ?? join(config.paths.artifactsRoot, snapshotId, 'raw-pages'),
+    rawAssetsRoot:
+      relinked?.rawAssetsPath ?? join(config.paths.artifactsRoot, snapshotId, 'raw-assets'),
     rawPagesManifestPath:
-      relinked?.rawPagesManifestPath
-      ?? join(config.paths.artifactsRoot, snapshotId, 'raw-pages', 'manifest.json'),
+      relinked?.rawPagesManifestPath ??
+      join(config.paths.artifactsRoot, snapshotId, 'raw-pages', 'manifest.json'),
     rawAssetsManifestPath:
-      relinked?.rawAssetsManifestPath
-      ?? join(config.paths.artifactsRoot, snapshotId, 'raw-assets', 'manifest.json'),
+      relinked?.rawAssetsManifestPath ??
+      join(config.paths.artifactsRoot, snapshotId, 'raw-assets', 'manifest.json'),
     routesManifestPath: join(snapshotRoot, 'mirror', 'routes.json'),
     artifactManifestPath: join(config.paths.archiveRoot, 'artifacts', `${snapshotId}.json`),
     metadataPath: join(snapshotRoot, 'metadata.json'),
@@ -138,10 +151,7 @@ export function prepareSnapshot(
   return layout;
 }
 
-export function markSnapshotCompleted(
-  config: LoadedLocalConfig,
-  snapshotId: string,
-): void {
+export function markSnapshotCompleted(config: LoadedLocalConfig, snapshotId: string): void {
   const catalog = readArchiveCatalog(config.paths.archiveRoot);
   const existing = catalog.snapshots.find((record) => record.snapshotId === snapshotId);
   if (existing) {
@@ -185,10 +195,7 @@ export function findSnapshotRecord(
   return catalog.snapshots.find((record) => record.snapshotId === snapshotId);
 }
 
-export function assertSnapshotRecord(
-  catalog: ArchiveCatalog,
-  snapshotId: string,
-): SnapshotRecord {
+export function assertSnapshotRecord(catalog: ArchiveCatalog, snapshotId: string): SnapshotRecord {
   const snapshot = findSnapshotRecord(catalog, snapshotId);
   if (!snapshot) {
     throw new Error(`Snapshot ${snapshotId} was not found in archive/catalog.json`);
@@ -326,10 +333,7 @@ export function readArchiveCatalog(archiveRoot: string): ArchiveCatalog {
   return JSON.parse(readFileSync(catalogPath, 'utf8')) as ArchiveCatalog;
 }
 
-export function writeArchiveCatalog(
-  archiveRoot: string,
-  catalog: ArchiveCatalog,
-): void {
+export function writeArchiveCatalog(archiveRoot: string, catalog: ArchiveCatalog): void {
   mkdirSync(archiveRoot, { recursive: true });
   writeFileSync(join(archiveRoot, 'catalog.json'), JSON.stringify(catalog, null, 2), 'utf8');
 }
@@ -459,13 +463,8 @@ export function relinkRawArtifacts(
   return manifest;
 }
 
-function upsertSnapshotRecord(
-  catalog: ArchiveCatalog,
-  snapshot: SnapshotRecord,
-): void {
-  const index = catalog.snapshots.findIndex(
-    (record) => record.snapshotId === snapshot.snapshotId,
-  );
+function upsertSnapshotRecord(catalog: ArchiveCatalog, snapshot: SnapshotRecord): void {
+  const index = catalog.snapshots.findIndex((record) => record.snapshotId === snapshot.snapshotId);
   if (index >= 0) {
     catalog.snapshots[index] = snapshot;
     return;
@@ -479,9 +478,7 @@ function artifactRelinkRegistryPath(config: LoadedLocalConfig): string {
   return join(config.paths.localRoot, 'artifact-relinks.json');
 }
 
-function readArtifactRelinkRegistry(
-  config: LoadedLocalConfig,
-): ArtifactRelinkRegistry {
+function readArtifactRelinkRegistry(config: LoadedLocalConfig): ArtifactRelinkRegistry {
   const registryPath = artifactRelinkRegistryPath(config);
   if (!existsSync(registryPath)) {
     return { entries: [] };
@@ -506,12 +503,11 @@ function writeArtifactRelinkRegistry(
   writeFileSync(registryPath, JSON.stringify(registry, null, 2), 'utf8');
 }
 
-function upsertArtifactRelinkEntry(
-  config: LoadedLocalConfig,
-  entry: ArtifactRelinkEntry,
-): void {
+function upsertArtifactRelinkEntry(config: LoadedLocalConfig, entry: ArtifactRelinkEntry): void {
   const registry = readArtifactRelinkRegistry(config);
-  registry.entries = registry.entries.filter((candidate) => candidate.snapshotId !== entry.snapshotId);
+  registry.entries = registry.entries.filter(
+    (candidate) => candidate.snapshotId !== entry.snapshotId,
+  );
   registry.entries.push(entry);
   registry.entries.sort((left, right) => left.snapshotId.localeCompare(right.snapshotId));
   writeArtifactRelinkRegistry(config, registry);
@@ -548,19 +544,11 @@ function resolveRelinkedArtifactManifest(
 }
 
 function resolveArtifactManifestPath(manifestPath: string): string {
-  return manifestPath.endsWith('.json')
-    ? manifestPath
-    : join(manifestPath, 'manifest.json');
+  return manifestPath.endsWith('.json') ? manifestPath : join(manifestPath, 'manifest.json');
 }
 
-function ensureArtifactManifestPaths(
-  manifest: ArtifactManifest,
-  snapshotId: string,
-): void {
-  const requiredPaths = [
-    manifest.rawPagesPath,
-    manifest.rawAssetsPath,
-  ];
+function ensureArtifactManifestPaths(manifest: ArtifactManifest, snapshotId: string): void {
+  const requiredPaths = [manifest.rawPagesPath, manifest.rawAssetsPath];
   for (const path of requiredPaths) {
     if (!existsSync(path)) {
       throw new Error(`Raw artifact path is missing for snapshot ${snapshotId}: ${path}`);

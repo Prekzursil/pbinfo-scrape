@@ -10,13 +10,20 @@ afterEach(() => {
   cleanup();
 });
 
-test('renders the simplified easy-mode overview before exposing deeper tools', { timeout: 60_000 }, async () => {
+test('renders the simplified easy-mode overview before exposing deeper tools', {
+  timeout: 60_000,
+}, async () => {
   const harness = createBridgeHarness();
   render(<App desktop={harness.bridge} />);
 
-  expect(await screen.findByRole('heading', { name: 'Problem Archive Crawler' })).toBeInTheDocument();
+  expect(
+    await screen.findByRole('heading', { name: 'Problem Archive Crawler' }),
+  ).toBeInTheDocument();
   expect(await screen.findByText('PBInfo archival operator console')).toBeInTheDocument();
-  expect(await screen.findByRole('tab', { name: 'Overview' })).toHaveAttribute('aria-selected', 'true');
+  expect(await screen.findByRole('tab', { name: 'Overview' })).toHaveAttribute(
+    'aria-selected',
+    'true',
+  );
   expect(await screen.findByRole('tab', { name: 'Coverage' })).toBeInTheDocument();
   expect(await screen.findByRole('tab', { name: 'Data' })).toBeInTheDocument();
   expect(await screen.findByRole('tab', { name: 'Setup' })).toBeInTheDocument();
@@ -25,8 +32,12 @@ test('renders the simplified easy-mode overview before exposing deeper tools', {
   const boardToolbar = await screen.findByRole('toolbar', {
     name: 'Problem status board filters',
   });
-  expect(within(boardToolbar).getByRole('button', { name: 'Missing official source' })).toBeInTheDocument();
-  expect(within(boardToolbar).getByRole('button', { name: 'Missing your source' })).toBeInTheDocument();
+  expect(
+    within(boardToolbar).getByRole('button', { name: 'Missing official source' }),
+  ).toBeInTheDocument();
+  expect(
+    within(boardToolbar).getByRole('button', { name: 'Missing your source' }),
+  ).toBeInTheDocument();
   expect(await screen.findByText('Upstream unavailable')).toBeInTheDocument();
   expect(await screen.findByText(/12 official and 8 tests/i)).toBeInTheDocument();
   expect(await screen.findByText('C:/archive-workspace')).toBeInTheDocument();
@@ -45,7 +56,9 @@ test('renders the simplified easy-mode overview before exposing deeper tools', {
   expect(await screen.findByText(/publish --snapshot acceptance-20260310b/)).toBeInTheDocument();
 });
 
-test('lets the user move through overview, coverage, data, and setup without overload', { timeout: 60_000 }, async () => {
+test('lets the user move through overview, coverage, data, and setup without overload', {
+  timeout: 60_000,
+}, async () => {
   const harness = createBridgeHarness();
   render(<App desktop={harness.bridge} />);
 
@@ -90,8 +103,12 @@ test('lets the user move through overview, coverage, data, and setup without ove
   expect(
     within(coverageWorkspace as HTMLElement).getByRole('toolbar', { name: 'Coverage filters' }),
   ).toBeInTheDocument();
-  expect(within(coverageWorkspace as HTMLElement).getByLabelText('Tests status')).toBeInTheDocument();
-  expect(within(coverageWorkspace as HTMLElement).getByLabelText('Archive state')).toBeInTheDocument();
+  expect(
+    within(coverageWorkspace as HTMLElement).getByLabelText('Tests status'),
+  ).toBeInTheDocument();
+  expect(
+    within(coverageWorkspace as HTMLElement).getByLabelText('Archive state'),
+  ).toBeInTheDocument();
   fireEvent.change(await screen.findByLabelText('Tests status'), {
     target: {
       value: 'all',
@@ -137,7 +154,9 @@ test('lets the user move through overview, coverage, data, and setup without ove
       value: 'waterreserve',
     },
   });
-  expect((await screen.findAllByText('/probleme/3171/problem-3171')).length).toBeGreaterThanOrEqual(1);
+  expect((await screen.findAllByText('/probleme/3171/problem-3171')).length).toBeGreaterThanOrEqual(
+    1,
+  );
   fireEvent.click(await screen.findByRole('button', { name: 'Open normalized archive folder' }));
   expect(harness.openPath).toHaveBeenCalledWith(
     'C:/archive-workspace/archive/snapshots/acceptance-20260310b/normalized',
@@ -149,4 +168,3 @@ test('lets the user move through overview, coverage, data, and setup without ove
   fireEvent.click(await screen.findByRole('button', { name: 'Advanced Settings' }));
   expect(await screen.findByRole('heading', { name: 'Advanced Settings' })).toBeInTheDocument();
 });
-

@@ -62,9 +62,6 @@ function buildQuerySuffix(url: URL): string {
     return '';
   }
 
-  const hash = createHash('sha1')
-    .update(`${url.pathname}${url.search}`)
-    .digest('hex')
-    .slice(0, 10);
+  const hash = createHash('sha1').update(`${url.pathname}${url.search}`).digest('hex').slice(0, 10);
   return `-q${hash}`;
 }
