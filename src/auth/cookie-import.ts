@@ -1,7 +1,7 @@
 import { createDecipheriv } from 'node:crypto';
 import { copyFileSync, existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join, resolve } from 'node:path';
+import { join, resolve, win32 } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { DatabaseSync } from 'node:sqlite';
 
@@ -114,8 +114,8 @@ export function resolveChromiumProfile(
     browser: options.browser,
     profileName,
     userDataDir,
-    localStatePath: join(userDataDir, 'Local State'),
-    cookiesDbPath: join(userDataDir, profileName, 'Network', 'Cookies'),
+    localStatePath: win32.join(userDataDir, 'Local State'),
+    cookiesDbPath: win32.join(userDataDir, profileName, 'Network', 'Cookies'),
   };
 }
 
@@ -244,10 +244,12 @@ function resolveDefaultChromiumUserDataDir(
 
   const browserPath =
     browser === 'edge'
-      ? join(localAppData, 'Microsoft', 'Edge', 'User Data')
-      : join(localAppData, 'Google', 'Chrome', 'User Data');
+      ? win32.join(localAppData, 'Microsoft', 'Edge', 'User Data')
+      : win32.join(localAppData, 'Google', 'Chrome', 'User Data');
 
-  return resolve(browserPath);
+  // Windows-domain path: resolve with win32 semantics so the default profile
+  // paths are identical regardless of the host running the suite.
+  return win32.resolve(browserPath);
 }
 
 function normalizeChromiumExpiry(
