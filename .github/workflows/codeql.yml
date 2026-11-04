@@ -31,6 +31,9 @@ jobs:
         with:
           language: ${{ matrix.language }}
           config-file: ./.github/codeql/codeql-config.yml
+          # Fleet CODEQL DECISION: both suites inline — strictly subsumes the
+          # default suite and the extended suite.
+          queries: security-extended,security-and-quality
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v4
         with:
