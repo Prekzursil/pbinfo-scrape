@@ -1,3 +1,4 @@
+// @vitest-environment jsdom
 import '@testing-library/jest-dom/vitest';
 
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
@@ -10,6 +11,19 @@ afterEach(() => {
   cleanup();
 });
 
+test('reads the desktop bridge from window when no desktop prop is provided', async () => {
+  const harness = createBridgeHarness();
+  const w = window as Window & { pbinfoDesktop?: unknown };
+  w.pbinfoDesktop = harness.bridge;
+  try {
+    render(<App />);
+    await ready();
+    expect(await screen.findByRole('heading', { name: 'Problem Archive Crawler' })).toBeInTheDocument();
+  } finally {
+    delete w.pbinfoDesktop;
+  }
+});
+
 const ready = () => screen.findByRole('heading', { name: 'Problem Archive Crawler' });
 
 describe('App edge and error paths', () => {
@@ -19,7 +33,12 @@ describe('App edge and error paths', () => {
     (harness.bridge.getArchiveExplorerRecord as ReturnType<typeof vi.fn>).mockRejectedValue(new Error('archive detail failed'));
     render(<App desktop={harness.bridge} />);
     await ready();
-    expect((await screen.findAllByText(/detail failed/)).length).toBeGreaterThanOrEqual(1);
+    // waitFor-family queries default to a 1000ms budget; this render chain
+    // measures ~1.1s under coverage instrumentation and can exceed it under
+    // full-suite parallel load, so give the assertion an explicit margin.
+    expect(
+      (await screen.findAllByText(/detail failed/, {}, { timeout: 30_000 })).length,
+    ).toBeGreaterThanOrEqual(1);
   });
 
   test('surfaces a refresh failure when the job list cannot be read', async () => {

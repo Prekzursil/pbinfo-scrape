@@ -20,7 +20,11 @@ vi.mock('../../src/auth/auth-bundle.js', () => ({
   restoreEncryptedAuthBundle: vi.fn(async () => ({ restored: true })),
 }));
 vi.mock('../../src/auth/pbinfo-auth.js', () => ({
-  PbinfoAuthClient: vi.fn(() => ({ loginWithCredentials: authMock.loginWithCredentials })),
+  // vitest 4: mock implementations used as constructors must be constructible
+  // (regular functions), not arrow functions.
+  PbinfoAuthClient: vi.fn(function () {
+    return { loginWithCredentials: authMock.loginWithCredentials };
+  }),
 }));
 vi.mock('../../src/auth/auth-status.js', () => ({
   probePbinfoAuthStatus: vi.fn(async () => ({ authenticated: true })),

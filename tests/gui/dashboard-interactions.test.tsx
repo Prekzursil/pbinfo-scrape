@@ -1,3 +1,4 @@
+// @vitest-environment jsdom
 import '@testing-library/jest-dom/vitest';
 
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
@@ -16,7 +17,9 @@ async function ready(): Promise<void> {
 }
 
 describe('dashboard interactions', () => {
-  test('drives every operator action through the dashboard', async () => {
+  // vitest 4: this end-to-end dashboard drive measures close to the 60s
+  // default under coverage instrumentation; give it explicit headroom.
+  test('drives every operator action through the dashboard', { timeout: 120_000 }, async () => {
     const harness = createBridgeHarness();
     render(<App desktop={harness.bridge} />);
     await ready();
