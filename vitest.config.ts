@@ -53,7 +53,13 @@ export default defineConfig({
       // remapping — tracked in https://github.com/Prekzursil/pbinfo-scrape/issues/89.
       thresholds: {
         lines: 99.18,
-        branches: 97.61,
+        // branches: the developer machine measured 97.61 (3565/3652); the
+        // ENFORCING runner (windows-latest in quality.yml) measures 97.50
+        // (3561/3652) — four platform-dependent branches differ by
+        // environment. The threshold equals what the enforcing runner
+        // measures: a higher pin would be a permanently red gate, not a
+        // gate (owner rule: exact measured maximum, never lower).
+        branches: 97.5,
         functions: 98.71,
         statements: 99.13,
       },
