@@ -73,3 +73,17 @@ describe('detectSuspicionFlags edge heuristics', () => {
     expect(detectSuspicionFlags()).toEqual([]);
   });
 });
+
+test('literal comparisons on non-input variables do not raise literal-pairs', () => {
+  const code = [
+    'int main(){',
+    "  char name[4];",
+    "  name[0]='a';",
+    "  name[1]='b';",
+    "  name[2]='c';",
+    "  if(name[0]=='a'&&name[1]=='b'&&name[2]=='c'){return 0;}",
+    '}',
+  ].join(' ');
+  const flags = detectSuspicionFlags(code);
+  expect(flags).not.toContain('literal-pairs');
+});

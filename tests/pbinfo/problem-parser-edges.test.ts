@@ -8,6 +8,19 @@ import {
 } from '../../src/pbinfo/parsers/problem.js';
 
 describe('parseProblemPage edge branches', () => {
+  test('falls back to <article> statement with no time limits and no solutions link', () => {
+    const html = `<html><body>
+      <h1><a href="/probleme/77/zzz">Zzz</a></h1>
+      <article><h2>Restricții</h2><p>Nu există.</p></article>
+    </body></html>`;
+    const record = parseProblemPage(html, 'https://www.pbinfo.ro/probleme/77/zzz');
+    expect(record.id).toBe(77);
+    expect(record.slug).toBe('zzz');
+    expect(record.sourceListUrl).toBeUndefined();
+    expect(record.timeLimitSeconds ?? undefined).toBeUndefined();
+    expect(Array.isArray(record.sections)).toBe(true);
+  });
+
   test('throws when problem identity cannot be inferred', () => {
     expect(() => parseProblemPage('<html><body></body></html>', 'https://www.pbinfo.ro/x')).toThrow(
       /Could not infer problem identity/,
