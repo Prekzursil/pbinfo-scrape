@@ -39,11 +39,22 @@ describe('snapshot workflow', () => {
         url: 'https://www.pbinfo.ro/problem',
         kind: 'public-page',
       },
+      {
+        key: 'page:https://www.pbinfo.ro/second',
+        url: 'https://www.pbinfo.ro/second',
+        kind: 'public-page',
+      },
     ]);
     const claimed = queue.claimNext(new Date('2026-03-10T00:01:00.000Z'));
     expect(claimed).toBeTruthy();
     queue.fail(claimed!.id, {
       errorMessage: 'temporarily unavailable',
+      nextVisibleAt: '2026-03-10T00:06:00.000Z',
+    });
+    const secondClaim = queue.claimNext(new Date('2026-03-10T00:01:00.000Z'));
+    expect(secondClaim).toBeTruthy();
+    queue.fail(secondClaim!.id, {
+      errorMessage: 'also unavailable',
       nextVisibleAt: '2026-03-10T00:06:00.000Z',
     });
     void snapshot;
@@ -52,17 +63,24 @@ describe('snapshot workflow', () => {
 
     expect(status).toMatchObject({
       snapshotId: 'status-snapshot',
-      pending: 1,
+      pending: 2,
       completed: 0,
       inProgress: 0,
       publishEligible: false,
     });
-    expect(status.recentFailures).toEqual([
-      expect.objectContaining({
-        key: 'page:https://www.pbinfo.ro/problem',
-        lastError: 'temporarily unavailable',
-      }),
-    ]);
+    expect(status.recentFailures).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          key: 'page:https://www.pbinfo.ro/problem',
+          lastError: 'temporarily unavailable',
+        }),
+        expect.objectContaining({
+          key: 'page:https://www.pbinfo.ro/second',
+          lastError: 'also unavailable',
+        }),
+      ]),
+    );
+    expect(status.recentFailures).toHaveLength(2);
   });
 
   test('finalizes a drained snapshot without promoting canonical state by default', async () => {

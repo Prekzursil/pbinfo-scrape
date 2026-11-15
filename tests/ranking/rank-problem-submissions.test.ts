@@ -204,6 +204,40 @@ describe('rankProblemSubmissions', () => {
     expect(ranked.orderedUserEvaluationIds.slice(0, 2)).toEqual([21, 22]);
   });
 
+  test('sorts multi-language trustworthy candidates and multiple duplicate ids', () => {
+    const ranked = rankProblemSubmissions(
+      [
+        // Two trustworthy candidates in different languages force the overall
+        // trustworthy ordering comparator to actually compare them.
+        submission({ evaluationId: 31, language: 'cpp', runtimeSeconds: 0.05 }),
+        submission({ evaluationId: 32, language: 'c', runtimeSeconds: 0.02 }),
+        // Two suspicious candidates exercise the suspicious-list ordering.
+        submission({
+          evaluationId: 50,
+          runtimeSeconds: 0.02,
+          sourceCode: 'int main(){int n;cin>>n;if(n==1)return 0;cout<<42;}',
+          suspicionFlags: ['constant-output'],
+        }),
+        submission({
+          evaluationId: 51,
+          runtimeSeconds: 0.03,
+          sourceCode: 'int main(){int n;cin>>n;if(n==1)return 0;cout<<43;}',
+          suspicionFlags: ['constant-output'],
+        }),
+        // Two pairs of duplicated evaluations exercise the duplicate-id sort.
+        submission({ evaluationId: 40, runtimeSeconds: 0.5 }),
+        submission({ evaluationId: 40, runtimeSeconds: 0.5 }),
+        submission({ evaluationId: 33, runtimeSeconds: 0.5 }),
+        submission({ evaluationId: 33, runtimeSeconds: 0.5 }),
+      ],
+      [],
+    );
+
+    expect(ranked.bestTrustworthyPerLanguage).toEqual({ cpp: 31, c: 32 });
+    // Every superseded occurrence is listed, ordered by evaluation id.
+    expect(ranked.duplicateEvaluationIds).toEqual([33, 33, 40, 40]);
+  });
+
   test('tracks best official source per language separately from user evaluations', () => {
     const officialSources: SourceRecord[] = [
       {

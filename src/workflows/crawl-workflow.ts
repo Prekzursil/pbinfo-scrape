@@ -24,6 +24,9 @@ import type { CrawlQueueInput } from '../types/crawl.js';
 
 export type CrawlMode = 'incremental' | 'fresh';
 
+/** Auth-probe statuses that fail an authenticated crawl preflight outright. */
+const SESSION_BLOCKING_AUTH_STATUSES = ['cookie-missing', 'guest'];
+
 export interface CrawlWorkflowOptions {
   maxIterations?: number;
   now?: Date;
@@ -250,7 +253,9 @@ async function enforceAuthPreflight(
     ? await customProbe(config)
     : await probePbinfoAuthStatus(config);
 
-  if (!authStatus.loggedIn || authStatus.status === 'cookie-missing' || authStatus.status === 'guest') {
+  const blockedBySessionStatus = !authStatus.loggedIn
+    || SESSION_BLOCKING_AUTH_STATUSES.includes(authStatus.status);
+  if (blockedBySessionStatus) {
     throw new Error(
       [
         `Authenticated crawl preflight failed: PBInfo session is not logged in (status=${authStatus.status}).`,

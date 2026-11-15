@@ -148,6 +148,49 @@ describe('runRankingWorkflow', () => {
     });
   });
 
+  test('sorts the summary problem ids numerically across problems', async () => {
+    const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-ranking-sort-'));
+    tempDirs.push(workspaceRoot);
+
+    const config = loadLocalConfig(workspaceRoot);
+    const snapshot = prepareSnapshot(config, {
+      snapshotId: 'snapshot-rank-sort',
+      scope: 'all',
+      now: new Date('2026-03-10T00:00:00.000Z'),
+    });
+    const evaluationsRoot = join(snapshot.normalizedRoot, 'evaluations');
+    mkdirSync(evaluationsRoot, { recursive: true });
+
+    const evaluation = (evaluationId: number, problemId: number) => ({
+      evaluationId,
+      problemId,
+      problemName: `p${problemId}`,
+      problemSlug: `p${problemId}`,
+      language: 'cpp',
+      user: 'Prekzursil',
+      score: 100,
+      verdictSummary: 'OK.',
+      runtimeSeconds: 0.01,
+      memoryKb: 256,
+      sourceAvailable: true,
+      sourceCode: 'int main(){int n;std::cin>>n;std::cout<<n;}',
+      suspicionFlags: [],
+      tests: [],
+      fetchedAt: '2026-03-10T00:00:00.000Z',
+      provenance: ['user-solutions'],
+    });
+    // Written larger-id-first so the summary sort visibly reorders them.
+    writeFileSync(join(evaluationsRoot, '2000-50.json'), JSON.stringify(evaluation(50, 2000)), 'utf8');
+    writeFileSync(join(evaluationsRoot, '1000-51.json'), JSON.stringify(evaluation(51, 1000)), 'utf8');
+
+    const result = await runRankingWorkflow(workspaceRoot);
+    expect(result.problemsRanked).toBe(2);
+    const summary = JSON.parse(
+      readFileSync(join(snapshot.normalizedRoot, 'rankings', 'best-submissions.json'), 'utf8'),
+    ) as { problems: Array<{ problemId: number }> };
+    expect(summary.problems.map((entry) => entry.problemId)).toEqual([1000, 2000]);
+  });
+
   test('recomputes suspicion flags from source code so stale archived flags do not poison trustworthy ranking', async () => {
     const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-ranking-'));
     tempDirs.push(workspaceRoot);

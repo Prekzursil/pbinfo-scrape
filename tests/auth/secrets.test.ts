@@ -102,4 +102,17 @@ describe('secret bundle bootstrap', () => {
     expect(existsSync(join(config.paths.localRoot, 'pbinfo.local.json'))).toBe(true);
     expect(existsSync(config.auth.sessionCookiesPath)).toBe(false);
   });
+
+  test('restore leaves no local config file behind when the bundle omits it', async () => {
+    const root = mkdtempSync(join(tmpdir(), 'pbinfo-secrets-'));
+    tempDirs.push(root);
+    const config = makeConfig(root);
+    // Bootstrap without pbinfo.local.json present: the bundle embeds no
+    // localConfig, so restore must not write one either.
+    await bootstrapSecretBundle(config);
+
+    const restored = await restoreSecretBundle(config);
+    expect(restored.localConfig).toBeUndefined();
+    expect(existsSync(join(config.paths.localRoot, 'pbinfo.local.json'))).toBe(false);
+  });
 });

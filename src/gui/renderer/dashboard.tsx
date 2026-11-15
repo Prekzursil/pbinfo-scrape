@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect, useMemo, useState } from 'react';
+import { type ReactNode, useMemo, useState } from 'react';
 
 import type { DesktopBridge } from '../shared/bridge.js';
 import type {
@@ -156,6 +156,17 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
   } = props;
 
   const [workspaceDraft, setWorkspaceDraft] = useState(workspaceState?.workspaceRoot ?? '');
+  // Keep the draft input in sync with the active workspace root. Adjusted
+  // during render (the React-documented pattern for "reset state when a prop
+  // changed") instead of a synchronous setState inside an effect.
+  const workspaceRoot = workspaceState?.workspaceRoot;
+  const [prevWorkspaceRoot, setPrevWorkspaceRoot] = useState(workspaceRoot);
+  if (workspaceRoot !== prevWorkspaceRoot) {
+    setPrevWorkspaceRoot(workspaceRoot);
+    if (workspaceRoot) {
+      setWorkspaceDraft(workspaceRoot);
+    }
+  }
   const [loginForm, setLoginForm] = useState<CredentialLoginInput>({
     profileId: 'primary-login',
     label: 'Primary account',
@@ -172,12 +183,6 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
   });
   const [activeView, setActiveView] = useState<DashboardView>('overview');
   const [showEmbeddedPreview, setShowEmbeddedPreview] = useState(false);
-
-  useEffect(() => {
-    if (workspaceState?.workspaceRoot) {
-      setWorkspaceDraft(workspaceState.workspaceRoot);
-    }
-  }, [workspaceState?.workspaceRoot]);
 
   const activeProfile = useMemo(() => getActiveProfile(workspaceState), [workspaceState]);
   const activeCrawlJob = useMemo(() => [...jobs].reverse().find((job) => job.kind === 'crawl'), [jobs]);
@@ -654,8 +659,8 @@ export function DesktopDashboard(props: DesktopDashboardProps) {
               <div className="mirror-toolbar">
                 <div className="button-row mirror-button-row">
                   <button className="ghost-button" type="button" onClick={() => void onStartMirrorPreview()}>Start preview</button>
-                  <button className="ghost-button" type="button" disabled={!previewJobId} onClick={() => { if (previewJobId) { void onStopMirrorPreview(previewJobId); } }}>Stop preview</button>
-                  <button className="ghost-button" type="button" disabled={!previewUrl} onClick={() => { if (previewUrl) { void onOpenExternal(previewUrl); } }}>Open in browser</button>
+                  <button className="ghost-button" type="button" disabled={!previewJobId} onClick={previewJobId ? () => void onStopMirrorPreview(previewJobId) : undefined}>Stop preview</button>
+                  <button className="ghost-button" type="button" disabled={!previewUrl} onClick={previewUrl ? () => void onOpenExternal(previewUrl) : undefined}>Open in browser</button>
                   <button
                     className="ghost-button"
                     type="button"

@@ -122,4 +122,14 @@ describe('loginWithCredentials helper branches', () => {
     expect(result.success).toBe(true);
     expect(result.resolvedHandle).toBeUndefined();
   });
+
+  test('skips a profile anchor whose text carries no parenthetical handle', async () => {
+    const result = await login({
+      ajaxBody: JSON.stringify({ stare: 'success' }),
+      verifyHtml:
+        '<script>user_autentificat = {"id":8};</script><nav><a href="/profil/">Plain Display Name</a></nav>',
+    });
+    expect(result.success).toBe(true);
+    expect(result.resolvedHandle).toBeUndefined();
+  });
 });

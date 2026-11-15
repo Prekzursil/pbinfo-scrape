@@ -13,7 +13,7 @@ vi.mock('../../src/crawl/browser-capture.js', () => ({
   createPlaywrightBrowserCapture: browserMock.createPlaywrightBrowserCapture,
 }));
 
-const { buildQueuePath, markSnapshotCompleted, prepareSnapshot } = await import('../../src/archive/storage.js');
+const { buildQueuePath, markSnapshotCompleted, prepareSnapshot, readArchiveCatalog, writeArchiveCatalog } = await import('../../src/archive/storage.js');
 const { loadLocalConfig } = await import('../../src/config/local-config.js');
 const { CrawlQueue } = await import('../../src/crawl/crawl-queue.js');
 const {
@@ -252,6 +252,59 @@ describe('resumeCrawlWorkflow & status', () => {
     const status = getCrawlStatusWorkflow(root, 'STAT');
     expect(status.recentFailures[0]?.lastError).toBe('boom');
     expect(status.publishEligible).toBe(false);
+  });
+
+  test('orders multiple recent failures by their most recent update', () => {
+    const root = workspace({ crawl: { crossCheckWithBrowser: false } });
+    const config = loadLocalConfig(root);
+    prepareSnapshot(config, { snapshotId: 'STAT2', scope: 'public', now: new Date() });
+    const queue = new CrawlQueue(buildQueuePath(config.paths.localRoot, 'STAT2'));
+    queue.enqueueMany([
+      { key: 'a', url: 'https://x/a', kind: 'public-page' },
+      { key: 'b', url: 'https://x/b', kind: 'public-page' },
+    ]);
+    const first = queue.claimNext(new Date('2026-01-01T00:00:00Z'));
+    queue.fail(first!.id, { errorMessage: 'first failure', nextVisibleAt: '2026-01-02T00:00:00Z' });
+    const second = queue.claimNext(new Date('2026-01-01T00:00:00Z'));
+    queue.fail(second!.id, { errorMessage: 'second failure', nextVisibleAt: '2026-01-02T00:00:00Z' });
+
+    const status = getCrawlStatusWorkflow(root, 'STAT2');
+    const errors = status.recentFailures.map((failure) => failure.lastError);
+    expect(errors).toContain('first failure');
+    expect(errors).toContain('second failure');
+  });
+
+  test('resumes the newest in-progress snapshot when no current snapshot is pinned', async () => {
+    const server = createServer((_request, response) => {
+      response.setHeader('Content-Type', 'text/html');
+      response.end('<html><body>no links here</body></html>');
+    });
+    servers.push(server);
+    await new Promise<void>((resolve) => server.listen(0, '127.0.0.1', () => resolve()));
+    const address = server.address();
+    if (!address || typeof address === 'string') {
+      throw new TypeError('no address');
+    }
+    const root = workspace({
+      crawl: {
+        crossCheckWithBrowser: false,
+        publicStartUrls: [`http://127.0.0.1:${address.port}/`],
+      },
+    });
+    const config = loadLocalConfig(root);
+    prepareSnapshot(config, { snapshotId: 'OLDER', scope: 'public', now: new Date('2026-03-09T00:00:00.000Z') });
+    prepareSnapshot(config, { snapshotId: 'NEWER', scope: 'public', now: new Date('2026-03-10T00:00:00.000Z') });
+    // Unpin the current snapshot so the latest-in-progress search (and its
+    // createdAt ordering) decides which snapshot resumes.
+    const catalog = readArchiveCatalog(config.paths.archiveRoot);
+    delete catalog.currentSnapshotId;
+    writeArchiveCatalog(config.paths.archiveRoot, catalog);
+
+    const resumed = await resumeCrawlWorkflow(root, {
+      maxIterations: 2,
+      now: new Date('2026-03-10T01:00:00.000Z'),
+    });
+    expect(resumed.snapshotId).toBe('NEWER');
   });
 
   test('runs an unbounded crawl against a trivial local page', async () => {

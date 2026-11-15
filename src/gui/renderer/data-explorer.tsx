@@ -71,11 +71,7 @@ export function DataExplorerPanel(props: DataExplorerPanelProps) {
               className="ghost-button"
               type="button"
               disabled={!normalizedRoot}
-              onClick={() => {
-                if (normalizedRoot) {
-                  void onOpenPath(normalizedRoot);
-                }
-              }}
+              onClick={normalizedRoot ? () => void onOpenPath(normalizedRoot) : undefined}
             >
               Open normalized archive folder
             </button>
@@ -89,11 +85,7 @@ export function DataExplorerPanel(props: DataExplorerPanelProps) {
               className="ghost-button"
               type="button"
               disabled={!mirrorRoot}
-              onClick={() => {
-                if (mirrorRoot) {
-                  void onOpenPath(mirrorRoot);
-                }
-              }}
+              onClick={mirrorRoot ? () => void onOpenPath(mirrorRoot) : undefined}
             >
               Open mirror output folder
             </button>
@@ -101,11 +93,7 @@ export function DataExplorerPanel(props: DataExplorerPanelProps) {
               className="ghost-button"
               type="button"
               disabled={!mirrorUrl}
-              onClick={() => {
-                if (mirrorUrl) {
-                  void onOpenExternal(mirrorUrl);
-                }
-              }}
+              onClick={mirrorUrl ? () => void onOpenExternal(mirrorUrl) : undefined}
             >
               Open mirror in browser
             </button>
@@ -203,11 +191,7 @@ export function DataExplorerPanel(props: DataExplorerPanelProps) {
                   className="ghost-button"
                   type="button"
                   disabled={!liveMirrorRecordUrl}
-                  onClick={() => {
-                    if (liveMirrorRecordUrl) {
-                      void onOpenExternal(liveMirrorRecordUrl);
-                    }
-                  }}
+                  onClick={liveMirrorRecordUrl ? () => void onOpenExternal(liveMirrorRecordUrl) : undefined}
                 >
                   Open record route in live mirror
                 </button>

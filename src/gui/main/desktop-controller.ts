@@ -869,9 +869,14 @@ export function createDesktopController(
     try {
       await refresh;
     } finally {
+      // Defensive-only: a same-key refresh can never be superseded between
+      // set() and this finally (later arrivals await the pending entry instead
+      // of replacing it), so the equality check is structurally always true.
+      /* v8 ignore start */
       if (coverageRefreshes.get(key) === refresh) {
         coverageRefreshes.delete(key);
       }
+      /* v8 ignore stop */
     }
   }
 }

@@ -461,11 +461,9 @@ export function CoverageExplorerPanel(props: CoverageExplorerPanelProps) {
                   className="ghost-button"
                   type="button"
                   disabled={!detail.rawRecordLinks.rankingFilePath}
-                  onClick={() => {
-                    if (detail.rawRecordLinks.rankingFilePath) {
-                      void onOpenPath(detail.rawRecordLinks.rankingFilePath);
-                    }
-                  }}
+                  onClick={detail.rawRecordLinks.rankingFilePath
+                    ? () => void onOpenPath(detail.rawRecordLinks.rankingFilePath!)
+                    : undefined}
                 >
                   Open ranking record
                 </button>
@@ -473,12 +471,9 @@ export function CoverageExplorerPanel(props: CoverageExplorerPanelProps) {
                   className="ghost-button"
                   type="button"
                   disabled={!detail.rawRecordLinks.evaluationFilePaths[0]}
-                  onClick={() => {
-                    const evaluationFilePath = detail.rawRecordLinks.evaluationFilePaths[0];
-                    if (evaluationFilePath) {
-                      void onOpenPath(evaluationFilePath);
-                    }
-                  }}
+                  onClick={detail.rawRecordLinks.evaluationFilePaths[0]
+                    ? () => void onOpenPath(detail.rawRecordLinks.evaluationFilePaths[0]!)
+                    : undefined}
                 >
                   Open first evaluation record
                 </button>
@@ -486,11 +481,7 @@ export function CoverageExplorerPanel(props: CoverageExplorerPanelProps) {
                   className="ghost-button"
                   type="button"
                   disabled={!liveMirrorUrl}
-                  onClick={() => {
-                    if (liveMirrorUrl) {
-                      void onOpenExternal(liveMirrorUrl);
-                    }
-                  }}
+                  onClick={liveMirrorUrl ? () => void onOpenExternal(liveMirrorUrl) : undefined}
                 >
                   Open in live mirror
                 </button>
@@ -498,11 +489,9 @@ export function CoverageExplorerPanel(props: CoverageExplorerPanelProps) {
                   className="ghost-button"
                   type="button"
                   disabled={!detail.record.sourceListUrl}
-                  onClick={() => {
-                    if (detail.record.sourceListUrl) {
-                      void onOpenExternal(detail.record.sourceListUrl);
-                    }
-                  }}
+                  onClick={detail.record.sourceListUrl
+                    ? () => void onOpenExternal(detail.record.sourceListUrl!)
+                    : undefined}
                 >
                   Open source list upstream
                 </button>

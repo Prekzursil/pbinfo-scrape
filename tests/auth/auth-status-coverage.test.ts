@@ -101,6 +101,14 @@ describe('probePbinfoAuthStatus statuses', () => {
     expect(result.resolvedHandle).toBeUndefined();
   });
 
+  test('skips a profile anchor whose text has no parenthetical handle suffix', async () => {
+    const config = makeConfig({ cookieExists: true });
+    const html = '<html><a href="/logout">Logout</a><nav><a href="/profil/">Plain Display Name</a></nav></html>';
+    const result = await probePbinfoAuthStatus(config, { fetchImpl: fetchReturning(html) });
+    expect(result.status).toBe('ok');
+    expect(result.resolvedHandle).toBeUndefined();
+  });
+
   test('ignores malformed session json and non-string handle fields', async () => {
     const config = makeConfig({ cookieExists: true });
     const malformed = await probePbinfoAuthStatus(config, {

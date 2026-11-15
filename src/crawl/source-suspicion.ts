@@ -84,10 +84,15 @@ function collectInputVariables(sourceCode: string): Set<string> {
 
   for (const pattern of patterns) {
     for (const match of normalized.matchAll(pattern)) {
+      // Type-only guard: every pattern's capture group requires at least one
+      // character, so a matched group is always defined and non-empty; the
+      // guard exists to satisfy noUncheckedIndexedAccess.
+      /* v8 ignore start */
       const variable = match[1]?.trim();
       if (variable) {
         inputVariables.add(variable);
       }
+      /* v8 ignore stop */
     }
   }
 

@@ -109,6 +109,8 @@ describe('build-mirror manifest readers', () => {
     writeFileSync(join(pagesRoot, 'b.json'), JSON.stringify({ url: 'https://x/b.css', bodyPath: 'raw-assets/b.css' }), 'utf8');
     writeFileSync(join(pagesRoot, 'c.json'), JSON.stringify({ url: 'https://x/c' }), 'utf8');
     writeFileSync(join(pagesRoot, 'd.json'), JSON.stringify({ bodyPath: 'raw-pages/d.html' }), 'utf8');
+    // Neither a raw-pages nor a raw-assets body: classified into no manifest.
+    writeFileSync(join(pagesRoot, 'e.json'), JSON.stringify({ url: 'https://x/e', bodyPath: 'attachments/e.zip' }), 'utf8');
 
     const manifests = rebuildRawManifests(root);
     expect(manifests.pageManifest).toEqual({ 'https://x/a': 'a.html' });
@@ -180,6 +182,21 @@ describe('rewriteMirrorHtml', () => {
     expect(out.match(/archive-coverage-strip/g)).toHaveLength(1);
   });
 
+  test('keeps same-origin unlisted assets and skips re-appending the strip style', () => {
+    const html = `<html><head>
+      <style data-archive-coverage-style>.archive-coverage-strip{}</style>
+      <link rel="stylesheet" href="https://www.pbinfo.ro/unlisted.css">
+    </head><body></body></html>`;
+    const record = makeCoverageRecord({ problemId: 9 });
+    const out = rewriteMirrorHtml(html, 'https://www.pbinfo.ro/p', {}, {}, record);
+    // The same-origin stylesheet is not in the asset manifest but shares the
+    // page origin, so it survives instead of being stripped.
+    expect(out).toContain('https://www.pbinfo.ro/unlisted.css');
+    // The strip style tag was already present, so exactly one remains.
+    expect(out.match(/data-archive-coverage-style/g)).toHaveLength(1);
+    expect(out).toContain('archive-coverage-strip');
+  });
+
   test('injects a strip for a blocked official source with archived user sources', () => {
     const record = makeCoverageRecord({
       problemId: 2,
@@ -248,6 +265,10 @@ describe('renderCoverageIndex', () => {
         delete (record as { notes?: string[] }).notes;
         return record;
       })(),
+      // Two further distinct grades (added after grade 9 above) exercise the
+      // numeric ordering of the grade filter list.
+      makeCoverageRecord({ problemId: 4, name: 'Delta', grade: 11 }),
+      makeCoverageRecord({ problemId: 5, name: 'Epsilon', grade: 10 }),
     ]);
     const html = renderCoverageIndex('SNAP', index);
     expect(html).toContain('#1 Alpha');
@@ -256,6 +277,15 @@ describe('renderCoverageIndex', () => {
     expect(html).toContain('Official source not archived');
     expect(html).toContain('best eval');
     expect(html).toContain('<option value="9">9</option>');
+    expect(html).toContain('<option value="10">10</option>');
+    expect(html).toContain('<option value="11">11</option>');
+    // Grade options render in ascending numeric order.
+    const nine = html.indexOf('<option value="9"');
+    const ten = html.indexOf('<option value="10"');
+    const eleven = html.indexOf('<option value="11"');
+    expect(nine).toBeGreaterThan(-1);
+    expect(ten).toBeGreaterThan(nine);
+    expect(eleven).toBeGreaterThan(ten);
   });
 });
 

@@ -199,9 +199,22 @@ export function App({ desktop }: AppProps) {
     };
   }, [bridge, refresh, workspaceState]);
 
+  // Summary/listing/detail state is gated at render (the `effective*` values
+  // passed to Dashboard) instead of synchronous setState resets inside the
+  // effects below: deriving "no workspace => no data" during render is the
+  // React-recommended shape and keeps the effects external-system-only.
+  const workspaceReady = Boolean(bridge && workspaceState);
+  const effectiveArchiveSummary = workspaceReady ? archiveSummary : null;
+  const effectiveCoverageSummary = workspaceReady ? coverageSummary : null;
+  const effectiveCoverageListing = workspaceReady ? coverageListing : null;
+  const effectiveArchiveListing = workspaceReady ? archiveListing : null;
+  const effectiveCoverageDetail =
+    workspaceReady && selectedCoverageProblemId !== null ? coverageDetail : null;
+  const effectiveArchiveRecordDetail =
+    workspaceReady && selectedArchiveRecordId !== null ? archiveRecordDetail : null;
+
   useEffect(() => {
     if (!bridge || !workspaceState) {
-      setArchiveSummary(null);
       return;
     }
 
@@ -227,7 +240,6 @@ export function App({ desktop }: AppProps) {
 
   useEffect(() => {
     if (!bridge || !workspaceState) {
-      setCoverageSummary(null);
       return;
     }
 
@@ -253,8 +265,6 @@ export function App({ desktop }: AppProps) {
 
   useEffect(() => {
     if (!bridge || !workspaceState) {
-      setCoverageListing(null);
-      setCoverageDetail(null);
       return;
     }
 
@@ -301,7 +311,6 @@ export function App({ desktop }: AppProps) {
 
   useEffect(() => {
     if (!bridge || !workspaceState || !selectedCoverageProblemId) {
-      setCoverageDetail(null);
       return;
     }
 
@@ -330,8 +339,6 @@ export function App({ desktop }: AppProps) {
 
   useEffect(() => {
     if (!bridge || !workspaceState) {
-      setArchiveListing(null);
-      setArchiveRecordDetail(null);
       return;
     }
 
@@ -370,7 +377,6 @@ export function App({ desktop }: AppProps) {
 
   useEffect(() => {
     if (!bridge || !workspaceState || !selectedArchiveRecordId) {
-      setArchiveRecordDetail(null);
       return;
     }
 
@@ -411,17 +417,23 @@ export function App({ desktop }: AppProps) {
     [crawlLoopJobId, jobs],
   );
 
-  useEffect(() => {
-    if (!bridge || !crawlLoopJobId || !activeCrawlJob) {
-      return undefined;
-    }
-
-    if (
-      activeCrawlJob.status === 'completed' ||
-      activeCrawlJob.status === 'failed' ||
-      activeCrawlJob.status === 'cancelled'
-    ) {
+  // Clear the crawl-loop pin once the pinned job settles — adjusted during
+  // render (the React-documented pattern for "reset state when something
+  // changed") instead of a synchronous setState inside the effect below.
+  const crawlLoopJobSettled =
+    activeCrawlJob?.status === 'completed' ||
+    activeCrawlJob?.status === 'failed' ||
+    activeCrawlJob?.status === 'cancelled';
+  const [prevCrawlLoopJobSettled, setPrevCrawlLoopJobSettled] = useState(false);
+  if (crawlLoopJobSettled !== prevCrawlLoopJobSettled) {
+    setPrevCrawlLoopJobSettled(crawlLoopJobSettled);
+    if (crawlLoopJobSettled && crawlLoopJobId) {
       setCrawlLoopJobId(null);
+    }
+  }
+
+  useEffect(() => {
+    if (!bridge || !crawlLoopJobId || !activeCrawlJob || crawlLoopJobSettled) {
       return undefined;
     }
 
@@ -453,7 +465,7 @@ export function App({ desktop }: AppProps) {
     return () => {
       window.clearTimeout(timer);
     };
-  }, [activeCrawlJob, bridge, crawlLoopJobId, refresh, selectedSnapshotId]);
+  }, [activeCrawlJob, bridge, crawlLoopJobId, crawlLoopJobSettled, refresh, selectedSnapshotId]);
 
   const runAction = useCallback(
     async <T,>(label: string, action: () => Promise<T>, successMessage?: string) => {
@@ -520,12 +532,12 @@ export function App({ desktop }: AppProps) {
       onSnapshotChange={(value) => setSelectedSnapshotId(value)}
       onCrawlModeChange={(value) => setCrawlMode(value)}
       onVerbosityChange={handleVerbosityChange}
-      archiveSummary={archiveSummary}
-      archiveListing={archiveListing}
-      archiveRecordDetail={archiveRecordDetail}
-      coverageSummary={coverageSummary}
-      coverageListing={coverageListing}
-      coverageDetail={coverageDetail}
+      archiveSummary={effectiveArchiveSummary}
+      archiveListing={effectiveArchiveListing}
+      archiveRecordDetail={effectiveArchiveRecordDetail}
+      coverageSummary={effectiveCoverageSummary}
+      coverageListing={effectiveCoverageListing}
+      coverageDetail={effectiveCoverageDetail}
       selectedCoverageProblemId={selectedCoverageProblemId}
       coverageFilters={coverageFilters}
       selectedArchiveDataset={selectedArchiveDataset}

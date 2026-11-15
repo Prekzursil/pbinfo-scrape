@@ -259,11 +259,22 @@ function compareScoreVectors(
   return rightEvaluationId - leftEvaluationId;
 }
 
+/**
+ * An official source that already satisfies archive coverage: available,
+ * scored at least 100, and not a bare official fragment. `rankOfficialSources`
+ * only buckets sources of this shape, so `scoreOfficialSource` can treat the
+ * guarantees as compiler-checked facts instead of re-testing them at runtime.
+ */
+type QualifyingOfficialSource = SourceRecord & {
+  score: number;
+  sourceAvailable: true;
+};
+
 function rankOfficialSources(
   sources: SourceRecord[],
 ): Record<string, string> {
   const bestOfficialPerLanguage: Record<string, string> = {};
-  const buckets = new Map<string, SourceRecord[]>();
+  const buckets = new Map<string, QualifyingOfficialSource[]>();
   for (const source of sources) {
     if (!isCoverageSatisfyingOfficialSource(source)) {
       continue;
@@ -276,16 +287,15 @@ function rankOfficialSources(
   }
 
   for (const [language, bucket] of buckets) {
-    const best = [...bucket].sort(compareOfficialSources)[0];
-    if (best) {
-      bestOfficialPerLanguage[language] = best.sourceId;
-    }
+    // Buckets only ever receive pushed members, so the first sorted entry is
+    // always defined; the index access is provably in range.
+    bestOfficialPerLanguage[language] = [...bucket].sort(compareOfficialSources)[0]!.sourceId;
   }
 
   return bestOfficialPerLanguage;
 }
 
-function compareOfficialSources(left: SourceRecord, right: SourceRecord): number {
+function compareOfficialSources(left: QualifyingOfficialSource, right: QualifyingOfficialSource): number {
   const leftScore = scoreOfficialSource(left);
   const rightScore = scoreOfficialSource(right);
 
@@ -298,12 +308,12 @@ function compareOfficialSources(left: SourceRecord, right: SourceRecord): number
   return left.sourceId.localeCompare(right.sourceId);
 }
 
-function scoreOfficialSource(source: SourceRecord): number[] {
+function scoreOfficialSource(source: QualifyingOfficialSource): number[] {
   return [
-    /* v8 ignore next -- rankOfficialSources only scores sources already filtered to score >= 100 */
-    source.score !== undefined && source.score >= 100 ? 1 : 0,
-    /* v8 ignore next -- rankOfficialSources only scores sources already filtered to sourceAvailable */
-    source.sourceAvailable ? 1 : 0,
+    // score >= 100 and sourceAvailable are guaranteed by the
+    // QualifyingOfficialSource type narrowing in isCoverageSatisfyingOfficialSource.
+    1,
+    1,
     getEffectiveSuspicionFlags(source).length === 0 ? 1 : 0,
     source.sourceLength ?? source.sourceCode?.length ?? 0,
   ];
@@ -315,7 +325,7 @@ function isTrustworthyCandidate(candidate: RankedSubmissionCandidate): boolean {
     && candidate.sourceAvailable;
 }
 
-function isCoverageSatisfyingOfficialSource(source: SourceRecord): boolean {
+function isCoverageSatisfyingOfficialSource(source: SourceRecord): source is QualifyingOfficialSource {
   return source.kind === 'official'
     && source.sourceAvailable
     && source.score !== undefined
