@@ -29,6 +29,10 @@ import {
 import { isOfficialSourceAuthorHandle } from '../pbinfo/official-source-authors.js';
 import { buildSourceSignature } from '../ranking/source-normalization.js';
 import { detectSuspicionFlags } from './source-suspicion.js';
+import {
+  isCookieShellHtml,
+  recordIdSweepCaptureStatus,
+} from './problem-id-sweep.js';
 import type { CrawlQueueInput } from '../types/crawl.js';
 import type {
   EvaluationTestResult,
@@ -379,6 +383,15 @@ export function persistNormalizedSnapshotHtml(
   const linkedProblem = resolveLinkedProblem(options.item);
   const problemMatch = options.item.url.match(/\/probleme\/(\d+)\/([^/?#]+)/);
   if (options.item.kind === 'public-page' && problemMatch?.[1]) {
+    const problemId = Number(problemMatch[1]);
+    if (isCookieShellHtml(options.html)) {
+      // The anonymous HTTP client received a login/JS-challenge shell instead
+      // of problem content. Archiving it as a problem record would fabricate
+      // an empty problem; classify it and keep the existing record intact.
+      recordIdSweepCaptureStatus(options.snapshot, problemId, 'cookie-shell');
+      return;
+    }
+
     const record = parseProblemPage(options.html, options.item.url);
     mergeJsonRecord<ProblemRecord>(
       join(options.snapshot.normalizedRoot, 'problems'),
@@ -393,11 +406,19 @@ export function persistNormalizedSnapshotHtml(
         editorialAvailability: current?.editorialAvailability ?? record.editorialAvailability,
       }),
     );
+    recordIdSweepCaptureStatus(options.snapshot, record.id, 'content');
     return;
   }
 
   if (options.item.kind === 'problem-statement' && linkedProblem) {
     const problemId = linkedProblem.id;
+    if (isCookieShellHtml(options.html)) {
+      // A challenge shell carries no statement; merging it would blank the
+      // sections of an existing record. (Sweep classification is driven by
+      // the canonical page capture, not by endpoint fragments.)
+      return;
+    }
+
     const fragment = parseProblemStatementFragment(options.html);
     mergeJsonRecord<ProblemRecord>(
       join(options.snapshot.normalizedRoot, 'problems'),
@@ -423,6 +444,12 @@ export function persistNormalizedSnapshotHtml(
 
   if (options.item.kind === 'problem-solution' && linkedProblem) {
     const problemId = linkedProblem.id;
+    if (isCookieShellHtml(options.html)) {
+      // Without a session the solution endpoint serves the challenge shell;
+      // parsing it would misreport the editorial as "visible" with no body.
+      return;
+    }
+
     const solution = parseOfficialSolutionFragment(options.html);
     const sourceIds = persistOfficialSources(
       options.snapshot,
@@ -453,6 +480,12 @@ export function persistNormalizedSnapshotHtml(
 
   if (options.item.kind === 'problem-tests' && linkedProblem) {
     const problemId = linkedProblem.id;
+    if (isCookieShellHtml(options.html)) {
+      // A challenge shell carries no visible tests; skip the merge so the
+      // fragment cannot blank existing test data.
+      return;
+    }
+
     const fragment = parseProblemEndpointFragment(options.html);
     mergeJsonRecord<ProblemRecord>(
       join(options.snapshot.normalizedRoot, 'problems'),
@@ -1069,6 +1102,24 @@ export function discoverFollowUps(
         });
       });
     }
+
+    // Attachment downloads (`descarca-fisier.php?id=...`) are linked from
+    // anchors, not from link/script/img tags, and the meaningful-navigable
+    // filter drops them because of their query string. Harvest them as
+    // public assets so problem attachments are archived with the page.
+    document('a[href]').each((_, element) => {
+      const href = document(element).attr('href');
+      const normalized = normalizeAttachmentUrl(base, href);
+      if (!normalized) {
+        return;
+      }
+
+      queued.set(`asset:${normalized}`, {
+        key: `asset:${normalized}`,
+        url: normalized,
+        kind: 'public-asset',
+      });
+    });
   }
 
   const problemMatch = base.pathname.match(/^\/probleme\/(\d+)\/([^/?#]+)/);
@@ -1458,6 +1509,44 @@ export function normalizeAssetUrl(
   }
 
   return null;
+}
+
+/**
+ * Attachment download links (`/descarca-fisier.php?id=...`) are archived as
+ * public assets. Unlike navigable pages, the identifying query string is
+ * preserved: the download URL without it would be meaningless. Bare
+ * `descarca-fisier.php?id=...` hrefs are treated as site-root relative
+ * (via normalizeSiteRelativeCandidate), matching how pbinfo links them.
+ */
+export function normalizeAttachmentUrl(
+  base: URL,
+  candidate?: string,
+): string | null {
+  const loweredCandidate = candidate?.trim().toLowerCase();
+  if (
+    !candidate
+    || !loweredCandidate
+    || loweredCandidate.startsWith('#')
+    || loweredCandidate.startsWith('javascript:')
+    || loweredCandidate.startsWith('vbscript:')
+    || loweredCandidate.startsWith('mailto:')
+    || loweredCandidate.startsWith('tel:')
+    || loweredCandidate.startsWith('data:')
+  ) {
+    return null;
+  }
+
+  const resolved = new URL(normalizeSiteRelativeCandidate(candidate), base);
+  if (resolved.origin !== base.origin) {
+    return null;
+  }
+
+  if (!/^\/descarca-fisier\.php$/i.test(normalizePathname(resolved.pathname))) {
+    return null;
+  }
+
+  resolved.hash = '';
+  return resolved.toString();
 }
 
 export function isBlockedAssetPath(url: URL): boolean {

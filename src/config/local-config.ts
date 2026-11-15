@@ -32,6 +32,14 @@ const configSchema = z.object({
       crossCheckWithBrowser: z.boolean().optional(),
       userHandle: z.string().min(1).optional(),
       publicStartUrls: z.array(z.string().url()).optional(),
+      idSweep: z
+        .object({
+          minId: z.number().int().positive().optional(),
+          maxId: z.number().int().positive().optional(),
+          deadStreakThreshold: z.number().int().min(2).optional(),
+        })
+        .partial()
+        .optional(),
     })
     .partial()
     .optional(),
@@ -96,6 +104,11 @@ export interface LoadedLocalConfig {
     crossCheckWithBrowser: boolean;
     userHandle?: string;
     publicStartUrls: string[];
+    idSweep: {
+      minId: number;
+      maxId?: number;
+      deadStreakThreshold: number;
+    };
   };
   mirror: {
     blockedAssetHosts: string[];
@@ -152,9 +165,12 @@ export function loadLocalConfig(workspaceRoot: string): LoadedLocalConfig {
       cookieSourcePath: parsedInput?.auth?.cookieSourcePath
         ? resolveRelativeRoot(resolvedWorkspace, parsedInput.auth.cookieSourcePath)
         : undefined,
-      sessionCookiesPath: parsedInput?.auth?.sessionCookiesPath
-        ? resolveRelativeRoot(resolvedWorkspace, parsedInput.auth.sessionCookiesPath)
-        : join(localRoot, 'session-cookies.json'),
+      // Pre-authenticated session jar location: config value wins, then the
+      // PBINFO_SESSION_COOKIES_PATH environment variable (handy for CI or
+      // archival runs where .local/pbinfo.local.json is not written), then
+      // the local-root default. The jar holds live session cookies — never
+      // log or commit its contents.
+      sessionCookiesPath: resolveSessionCookiesPath(resolvedWorkspace, localRoot, parsedInput?.auth?.sessionCookiesPath),
     },
     paths: {
       workspaceRoot: resolvedWorkspace,
@@ -173,6 +189,11 @@ export function loadLocalConfig(workspaceRoot: string): LoadedLocalConfig {
       userHandle: parsedInput?.crawl?.userHandle,
       publicStartUrls:
         parsedInput?.crawl?.publicStartUrls ?? defaultPublicStartUrls(),
+      idSweep: {
+        minId: parsedInput?.crawl?.idSweep?.minId ?? 1,
+        maxId: parsedInput?.crawl?.idSweep?.maxId,
+        deadStreakThreshold: parsedInput?.crawl?.idSweep?.deadStreakThreshold ?? 8,
+      },
     },
     mirror: {
       blockedAssetHosts:
@@ -211,6 +232,23 @@ export function loadLocalConfig(workspaceRoot: string): LoadedLocalConfig {
 
 function resolveRelativeRoot(workspaceRoot: string, inputPath: string): string {
   return resolve(workspaceRoot, inputPath);
+}
+
+function resolveSessionCookiesPath(
+  workspaceRoot: string,
+  localRoot: string,
+  configuredPath: string | undefined,
+): string {
+  if (configuredPath) {
+    return resolveRelativeRoot(workspaceRoot, configuredPath);
+  }
+
+  const envPath = process.env.PBINFO_SESSION_COOKIES_PATH?.trim();
+  if (envPath) {
+    return resolveRelativeRoot(workspaceRoot, envPath);
+  }
+
+  return join(localRoot, 'session-cookies.json');
 }
 
 function defaultPublicStartUrls(): string[] {

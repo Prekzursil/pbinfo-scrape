@@ -322,3 +322,49 @@ export interface ProblemCoverageIndex {
   totals: ProblemCoverageTotals;
   records: ProblemCoverageRecord[];
 }
+
+/**
+ * Classification of one problem ID probed by the full-ID sweep
+ * (`crawl sweep`).
+ *
+ * - `live`: the ID redirects to a canonical problem page and that page's
+ *   content (statement and/or detail tabs) was archived.
+ * - `dead`: the bare `/probleme/{id}` URL never redirects to a canonical
+ *   problem — no live problem exists at that ID.
+ * - `cookie-shell`: the problem is live (the probe redirected), but the
+ *   captured page body is a login/JS-challenge shell, so gated content is
+ *   only capturable with a pre-authenticated session.
+ */
+export type ProblemIdSweepClassification = 'live' | 'dead' | 'cookie-shell';
+
+export interface ProblemIdSweepRecord {
+  snapshotId: string;
+  problemId: number;
+  classification: ProblemIdSweepClassification;
+  probe: 'live' | 'dead';
+  probeHttpStatus: number;
+  slug?: string;
+  canonicalUrl?: string;
+  captureQueued: boolean;
+  captureStatus?: 'content' | 'cookie-shell';
+  probedAt: string;
+}
+
+export interface ProblemIdSweepTotals {
+  probed: number;
+  liveCount: number;
+  deadCount: number;
+  cookieShellCount: number;
+  minId: number;
+  maxId: number;
+}
+
+export interface ProblemIdSweepIndex {
+  snapshotId: string;
+  generatedAt: string;
+  ceiling: number;
+  totals: ProblemIdSweepTotals;
+  liveIds: number[];
+  deadIds: number[];
+  cookieShellIds: number[];
+}

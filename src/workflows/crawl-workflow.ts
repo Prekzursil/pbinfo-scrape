@@ -8,6 +8,7 @@ import {
   prepareSnapshot,
   readArchiveCatalog,
   resolveSnapshotLayout,
+  type SnapshotLayout,
 } from '../archive/storage.js';
 import { createCookieFetch } from '../auth/session-store.js';
 import {
@@ -30,6 +31,25 @@ export interface CrawlWorkflowOptions {
   checkpoint?: 'canonical' | 'checkpoint';
   mode?: CrawlMode;
   authStatusProbe?: (config: ReturnType<typeof loadLocalConfig>) => Promise<PbinfoAuthStatusResult>;
+  /**
+   * Injectable fetch for tests: replaces the cookie-aware fetch the crawl
+   * loop would otherwise build from the session jar. Tests use it to serve
+   * fully offline fixture responses.
+   */
+  fetchImpl?: typeof fetch;
+  /**
+   * Hook executed after the durable queue is opened and the static seeds are
+   * enqueued, right before the crawl loop starts. Used by the full-ID sweep
+   * workflow to probe problem IDs and enqueue the live canonical pages into
+   * the same queue the loop then drains.
+   */
+  prepareSeeds?: (context: SeededCrawlContext) => Promise<void>;
+}
+
+export interface SeededCrawlContext {
+  queue: CrawlQueue;
+  snapshot: SnapshotLayout;
+  config: ReturnType<typeof loadLocalConfig>;
 }
 
 export interface CrawlWorkflowResult {
@@ -97,7 +117,7 @@ export async function runOfficialSourceHarvestWorkflow(
   });
 }
 
-async function runSeededCrawlWorkflow(
+export async function runSeededCrawlWorkflow(
   workspaceRoot: string,
   config: ReturnType<typeof loadLocalConfig>,
   scope: 'public' | 'user' | 'all',
@@ -121,10 +141,13 @@ async function runSeededCrawlWorkflow(
   const queue = new CrawlQueue(queuePath);
   queue.requeueInProgress();
   queue.enqueueMany(seeds);
+  if (options.prepareSeeds) {
+    await options.prepareSeeds({ queue, snapshot, config });
+  }
   // config.auth.sessionCookiesPath is always populated by loadLocalConfig, so the
   // crawl always runs through the cookie-aware fetch (with an empty jar when no
-  // session has been captured yet).
-  const fetchImpl = await createCookieFetch(config.auth.sessionCookiesPath);
+  // session has been captured yet) — unless a test injected its own fetch.
+  const fetchImpl = options.fetchImpl ?? (await createCookieFetch(config.auth.sessionCookiesPath));
   let browserCapture:
     | Awaited<ReturnType<typeof createPlaywrightBrowserCapture>>
     | undefined;
