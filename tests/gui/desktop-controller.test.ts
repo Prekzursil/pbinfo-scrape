@@ -782,7 +782,9 @@ describe('desktop controller', () => {
         rawRecordLinks: expect.objectContaining({
           coverageFilePath: expect.stringContaining('problem-3716.json'),
           problemFilePath: expect.stringContaining('problem-3716.json'),
-          rankingFilePath: expect.stringContaining('rankings\\problems\\problem-3716.json'),
+          rankingFilePath: expect.stringContaining(
+            join('rankings', 'problems', 'problem-3716.json'),
+          ),
           evaluationFilePaths: expect.arrayContaining([
             expect.stringContaining('evaluation-63332367.json'),
           ]),
