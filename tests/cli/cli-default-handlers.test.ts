@@ -51,6 +51,9 @@ vi.mock('../../src/workflows/crawl-workflow.js', () => ({
   resumeCrawlWorkflow: vi.fn(async () => ({ resumed: true })),
   runOfficialSourceHarvestWorkflow: vi.fn(async () => ({ harvested: 1 })),
 }));
+vi.mock('../../src/workflows/id-sweep-workflow.js', () => ({
+  runProblemIdSweepWorkflow: vi.fn(async () => ({ swept: 1 })),
+}));
 vi.mock('../../src/workflows/normalize-workflow.js', () => ({
   runNormalizeSnapshotWorkflow: vi.fn(async () => ({ normalized: 1 })),
 }));
@@ -166,6 +169,26 @@ describe('default CLI handlers', () => {
     await run(['crawl', 'official-sources', '--snapshot', 's']);
     await run(['crawl', 'status']);
     expect(stdoutSpy).toHaveBeenCalled();
+  });
+
+  test('crawl sweep handler forwards id range, snapshot, checkpoint, and mode', async () => {
+    const { runProblemIdSweepWorkflow } = await import('../../src/workflows/id-sweep-workflow.js');
+    await run(['crawl', 'sweep', '--min-id', '2', '--max-id', '9']);
+    expect(runProblemIdSweepWorkflow).toHaveBeenLastCalledWith(process.cwd(), {
+      minId: 2,
+      maxId: 9,
+      snapshotId: undefined,
+      checkpoint: 'canonical',
+      mode: 'incremental',
+    });
+    await run(['crawl', 'sweep', '--snapshot', 's', '--acceptance', '--mode', 'fresh']);
+    expect(runProblemIdSweepWorkflow).toHaveBeenLastCalledWith(process.cwd(), {
+      minId: undefined,
+      maxId: undefined,
+      snapshotId: 's',
+      checkpoint: 'checkpoint',
+      mode: 'fresh',
+    });
   });
 
   test('normalize, snapshot finalize, and rank handlers run', async () => {

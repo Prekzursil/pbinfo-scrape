@@ -43,6 +43,7 @@ describe('buildCli', () => {
       'user',
       'all',
       'official-sources',
+      'sweep',
       'status',
     ]);
     expect(normalizeCommand?.commands.map((command) => command.name())).toEqual(['snapshot']);

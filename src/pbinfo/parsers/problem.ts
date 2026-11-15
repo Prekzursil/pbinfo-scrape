@@ -7,7 +7,7 @@ import type {
   ProblemVisibleTest,
 } from '../../types/records.js';
 import { buildRawAssetLocalPath, sanitizeSegment } from '../../archive/archive-paths.js';
-import { loadHtml, normalizeWhitespace, parseNumber, parseSeconds } from './shared.js';
+import { loadHtml, normalizeAttachmentHref, normalizeWhitespace, parseNumber, parseSeconds } from './shared.js';
 
 export interface ProblemExecutionHints {
   timeLimitSeconds?: number;
@@ -608,6 +608,23 @@ function extractLinkedAssets(
       });
     });
   }
+
+  // Attachment downloads are anchor links, not resource tags: a bare
+  // `descarca-fisier.php?id=...` href is site-root relative on pbinfo. The
+  // [href*=...] selector guarantees attr('href') is present.
+  $('a[href*="descarca-fisier.php"]').each((_, element) => {
+    const rawUrl = $(element).attr('href')!;
+    const normalized = new URL(normalizeAttachmentHref(rawUrl), page);
+    if (normalized.origin !== page.origin) {
+      return;
+    }
+
+    assets.set(normalized.toString(), {
+      url: normalized.toString(),
+      localPath: buildRawAssetLocalPath(normalized.toString()),
+      kind: 'other',
+    });
+  });
 
   return [...assets.values()];
 }

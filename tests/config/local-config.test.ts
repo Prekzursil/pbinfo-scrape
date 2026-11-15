@@ -167,3 +167,104 @@ describe('loadLocalConfig', () => {
     expect(config.artifacts.exportRoot).toBe(join(workspaceRoot, 'exports', 'custom'));
   });
 });
+
+describe('loadLocalConfig id sweep settings', () => {
+  test('defaults the id sweep range and dead-streak threshold', () => {
+    const config = loadLocalConfig(createWorkspace());
+    expect(config.crawl.idSweep).toEqual({
+      minId: 1,
+      maxId: undefined,
+      deadStreakThreshold: 8,
+    });
+  });
+
+  test('reads id sweep overrides from the local config file', () => {
+    const workspaceRoot = createWorkspace();
+    const localRoot = join(workspaceRoot, '.local');
+    mkdirSync(localRoot, { recursive: true });
+    writeFileSync(
+      join(localRoot, 'pbinfo.local.json'),
+      JSON.stringify({
+        crawl: {
+          idSweep: { minId: 10, maxId: 5000, deadStreakThreshold: 4 },
+        },
+      }),
+      'utf8',
+    );
+
+    const config = loadLocalConfig(workspaceRoot);
+    expect(config.crawl.idSweep).toEqual({
+      minId: 10,
+      maxId: 5000,
+      deadStreakThreshold: 4,
+    });
+  });
+});
+
+describe('loadLocalConfig session cookie path env override', () => {
+  const ENV_KEY = 'PBINFO_SESSION_COOKIES_PATH';
+
+  function withEnv(value: string | undefined, run: () => void): void {
+    const prior = process.env[ENV_KEY];
+    if (value === undefined) {
+      delete process.env[ENV_KEY];
+    } else {
+      process.env[ENV_KEY] = value;
+    }
+    try {
+      run();
+    } finally {
+      if (prior === undefined) {
+        delete process.env[ENV_KEY];
+      } else {
+        process.env[ENV_KEY] = prior;
+      }
+    }
+  }
+
+  test('falls back to PBINFO_SESSION_COOKIES_PATH when the config is silent', () => {
+    const workspaceRoot = createWorkspace();
+    withEnv('env-cookies/session.json', () => {
+      const config = loadLocalConfig(workspaceRoot);
+      expect(config.auth.sessionCookiesPath).toBe(
+        join(workspaceRoot, 'env-cookies', 'session.json'),
+      );
+    });
+  });
+
+  test('the config file wins over the environment variable', () => {
+    const workspaceRoot = createWorkspace();
+    const localRoot = join(workspaceRoot, '.local');
+    mkdirSync(localRoot, { recursive: true });
+    writeFileSync(
+      join(localRoot, 'pbinfo.local.json'),
+      JSON.stringify({ auth: { sessionCookiesPath: 'config-session.json' } }),
+      'utf8',
+    );
+
+    withEnv('env-cookies/session.json', () => {
+      const config = loadLocalConfig(workspaceRoot);
+      expect(config.auth.sessionCookiesPath).toBe(join(workspaceRoot, 'config-session.json'));
+    });
+  });
+
+  test('uses the local-root default when neither config nor env provide a path', () => {
+    const workspaceRoot = createWorkspace();
+    withEnv(undefined, () => {
+      const config = loadLocalConfig(workspaceRoot);
+      expect(config.auth.sessionCookiesPath).toBe(
+        join(workspaceRoot, '.local', 'session-cookies.json'),
+      );
+    });
+  });
+
+  test('treats a whitespace-only env value as absent', () => {
+    const workspaceRoot = createWorkspace();
+    withEnv('   ', () => {
+      const config = loadLocalConfig(workspaceRoot);
+      expect(config.auth.sessionCookiesPath).toBe(
+        join(workspaceRoot, '.local', 'session-cookies.json'),
+      );
+    });
+  });
+});

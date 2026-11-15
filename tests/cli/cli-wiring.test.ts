@@ -12,6 +12,7 @@ function makeHandlers() {
     authRestoreBundle: vi.fn(async () => undefined),
     crawl: vi.fn(async () => undefined),
     crawlOfficialSources: vi.fn(async () => undefined),
+    crawlSweep: vi.fn(async () => undefined),
     crawlStatus: vi.fn(async () => undefined),
     normalizeSnapshot: vi.fn(async () => undefined),
     snapshotFinalize: vi.fn(async () => undefined),
@@ -68,6 +69,12 @@ describe('buildCli action wiring', () => {
 
     await run(h, [...WS, 'crawl', 'official-sources', '--snapshot', 's2']);
     expect(h.crawlOfficialSources).toHaveBeenCalledWith('/ws', 's2');
+
+    await run(h, [...WS, 'crawl', 'sweep', '--min-id', '10', '--max-id', '20', '--snapshot', 's2b', '--acceptance', '--mode', 'fresh']);
+    expect(h.crawlSweep).toHaveBeenCalledWith('/ws', 10, 20, 's2b', true, 'fresh');
+
+    await run(h, [...WS, 'crawl', 'sweep']);
+    expect(h.crawlSweep).toHaveBeenLastCalledWith('/ws', undefined, undefined, undefined, undefined, 'incremental');
 
     await run(h, [...WS, 'crawl', 'status']);
     expect(h.crawlStatus).toHaveBeenCalledWith('/ws', undefined);

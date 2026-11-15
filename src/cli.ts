@@ -30,6 +30,7 @@ import {
   runOfficialSourceHarvestWorkflow,
   type CrawlMode,
 } from './workflows/crawl-workflow.js';
+import { runProblemIdSweepWorkflow } from './workflows/id-sweep-workflow.js';
 import { runNormalizeSnapshotWorkflow } from './workflows/normalize-workflow.js';
 import { runRankingWorkflow } from './workflows/rank-workflow.js';
 import {
@@ -59,6 +60,14 @@ export interface CliHandlers {
   crawlOfficialSources: (
     workspaceRoot: string,
     snapshot?: string,
+  ) => Promise<void>;
+  crawlSweep: (
+    workspaceRoot: string,
+    minId: number | undefined,
+    maxId: number | undefined,
+    snapshot?: string,
+    acceptance?: boolean,
+    mode?: CrawlMode,
   ) => Promise<void>;
   crawlStatus: (workspaceRoot: string, snapshot?: string) => Promise<void>;
   normalizeSnapshot: (workspaceRoot: string, snapshot?: string) => Promise<void>;
@@ -194,6 +203,33 @@ export function buildCli(handlers: CliHandlers = createDefaultHandlers()): Comma
     .requiredOption('--snapshot <snapshot>', 'Snapshot id to enrich with targeted official-source harvest')
     .action(async (options: { snapshot: string }) => {
       await handlers.crawlOfficialSources(resolveWorkspace(program), options.snapshot);
+    });
+  crawl
+    .command('sweep')
+    .description(
+      'Enumerate problema pages by ID up to an auto-detected ceiling, classify each ID as live/dead/cookie-shell, '
+        + 'and capture every live problem regardless of category (hidden or miscategorized problems included)',
+    )
+    .option('--min-id <minId>', 'First problem ID to probe', (value) => Number(value))
+    .option('--max-id <maxId>', 'Explicit ceiling override; the ceiling is auto-detected when omitted', (value) => Number(value))
+    .option('--snapshot <snapshot>', 'Snapshot id override')
+    .option('--acceptance', 'Mark this crawl as an acceptance-oriented run')
+    .option('--mode <mode>', 'Crawl mode: incremental or fresh', 'incremental')
+    .action(async (options: {
+      minId?: number;
+      maxId?: number;
+      snapshot?: string;
+      acceptance?: boolean;
+      mode?: CrawlMode;
+    }) => {
+      await handlers.crawlSweep(
+        resolveWorkspace(program),
+        options.minId,
+        options.maxId,
+        options.snapshot,
+        options.acceptance,
+        options.mode,
+      );
     });
   crawl
     .command('status')
@@ -427,6 +463,16 @@ function createDefaultHandlers(): CliHandlers {
     crawlOfficialSources: async (workspaceRoot, snapshot) => {
       const result = await runOfficialSourceHarvestWorkflow(workspaceRoot, {
         snapshotId: snapshot,
+      });
+      process.stdout.write(JSON.stringify(result, null, 2) + '\n');
+    },
+    crawlSweep: async (workspaceRoot, minId, maxId, snapshot, acceptance, mode = 'incremental') => {
+      const result = await runProblemIdSweepWorkflow(workspaceRoot, {
+        minId,
+        maxId,
+        snapshotId: snapshot,
+        checkpoint: acceptance ? 'checkpoint' : 'canonical',
+        mode,
       });
       process.stdout.write(JSON.stringify(result, null, 2) + '\n');
     },

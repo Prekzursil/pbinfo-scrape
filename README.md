@@ -69,6 +69,89 @@ Crawl resilience defaults (override in `.local/pbinfo.local.json` under `crawl`)
 - HTTP `429` and `5xx` responses are retried with backoff rather than archived;
   client errors such as `404` are archived truthfully as dead ends.
 
+## Problem discovery: category crawl vs full-ID sweep
+
+The default crawl (`crawl public|user|all`) is **link/category driven**: it walks
+the category pages (`/probleme-categorii/…`) and archives every problem linked
+from a reached page. That means a problem which is hidden from the category
+listings — or filed under a category the crawl never reached — can be missed.
+
+`crawl sweep` closes that gap by enumerating **problem pages by ID** instead of
+by link:
+
+```bash
+# Auto-detect the highest live problem ID, then probe every ID from 1 to it
+npm run cli -- crawl sweep
+
+# Or bound the run explicitly (also skips ceiling detection)
+npm run cli -- crawl sweep --min-id 100 --max-id 5000
+```
+
+How it works:
+
+- pbinfo canonicalizes `https://www.pbinfo.ro/probleme/{id}` server-side: a
+  **live** ID answers `301 -> /probleme/{id}/{slug}` (the redirect is issued
+  before the site's JS challenge, so this works anonymously); a **dead** ID
+  falls through to the generic shell page.
+- The ceiling is auto-detected by exponential probing plus a binary search
+  (stop after `crawl.idSweep.deadStreakThreshold` consecutive dead IDs,
+  default 8). Rare deletions above the dead streak are possible — pass
+  `--max-id` to override the detected ceiling.
+- Every ID is classified as one of:
+  - `live` — the ID redirects to a canonical problem and its page content was archived;
+  - `dead` — no live problem exists at that ID;
+  - `cookie-shell` — the problem is live, but the captured page body is a
+    login/JS-challenge shell, so gated content needs the pre-authenticated
+    session (see below).
+- Every **live** problem is captured regardless of category — including the
+  full detail-tab pipeline (statement, `Indicații de rezolvare` / official
+  source, visible tests) plus attachment downloads (`descarca-fisier.php?id=…`
+  links are archived as public assets and recorded in
+  `linkedAssets`).
+- Sweep results are persisted per snapshot under
+  `archive/snapshots/{snapshot}/normalized/id-sweep/`:
+  - `id-{n}.json` — per-ID probe/classification record (incremental reruns
+    skip already-probed IDs);
+  - `index.json` — totals plus `liveIds` / `deadIds` / `cookieShellIds`.
+- Gatekeeping stays truthful: a challenge shell is never archived as an empty
+  problem, and a gated editorial is recorded as `restricted`/`hidden` — never
+  as a visible-but-empty one.
+
+## Authenticated capture and gated tabs (2FA accounts)
+
+Detail-tab capture of gated content (editorial/`Indicații de rezolvare`,
+official sources, some visible tests) only works with a **pre-authenticated
+session**. The account behind this archive uses 2FA, so there are **no
+password-login flows** for sweep/gated capture — import a session exported
+from a browser where you are already logged in:
+
+```bash
+# Option A: export cookies from a logged-in browser profile and import the file
+#   (any cookie-export extension JSON or a Playwright storageState file works)
+npm run cli -- auth import-cookies --source path/to/pbinfo-cookies.json
+
+# Option B: read the pbinfo.ro cookies straight from a local Edge/Chrome profile
+npm run cli -- auth import-browser --browser edge --profile Default
+
+# Then verify the session is live before an authenticated crawl
+npm run cli -- auth status
+```
+
+The session jar location is `auth.sessionCookiesPath` in
+`.local/pbinfo.local.json`; the `PBINFO_SESSION_COOKIES_PATH` environment
+variable overrides the default when the config is silent (config wins over
+env). Relative paths resolve against the workspace root.
+
+Security rules for the session jar:
+
+- it contains **live session cookies** — never log its contents, never commit
+  it, never paste cookie values into issues or PRs;
+- `.local/` stays untracked; use `npm run cli -- secrets bootstrap` for the
+  repo-safe encrypted bundle flow;
+- anonymous sweeps still classify `live`/`dead` correctly (the redirect probe
+  is public), but gated tabs will be recorded as `cookie-shell` /
+  `restricted` until a session is imported.
+
 ## CLI Flow
 
 ```bash
@@ -82,6 +165,8 @@ npm run cli -- secrets bootstrap
 
 # Crawl, normalize, rank, build the mirror, and finalize the canonical snapshot
 npm run cli -- crawl all --acceptance --mode incremental
+# Optional: full-ID sweep to capture problems the category crawl cannot reach
+npm run cli -- crawl sweep --mode incremental
 npm run cli -- crawl status --snapshot acceptance-20260310b
 npm run cli -- normalize snapshot --snapshot acceptance-20260310b
 npm run cli -- rank --snapshot acceptance-20260310b
