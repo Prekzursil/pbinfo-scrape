@@ -7,10 +7,7 @@ import {
 
 function main() {
   const workspaceRoot = cwd();
-  const integrity = readCanonicalSnapshotIntegrity(
-    workspaceRoot,
-    CANONICAL_SNAPSHOT_ID,
-  );
+  const integrity = readCanonicalSnapshotIntegrity(workspaceRoot, CANONICAL_SNAPSHOT_ID);
   const failures: string[] = [];
 
   if (integrity.crawlStatus.status !== 'completed') {
@@ -24,9 +21,7 @@ function main() {
     );
   }
   if (!integrity.crawlStatus.publishEligible) {
-    failures.push(
-      `Canonical snapshot ${integrity.snapshotId} is not publish-eligible.`,
-    );
+    failures.push(`Canonical snapshot ${integrity.snapshotId} is not publish-eligible.`);
   }
   if (!integrity.filesystem.normalizedRootExists) {
     failures.push(`Missing normalized archive root: ${integrity.paths.normalizedRoot}`);
@@ -50,9 +45,7 @@ function main() {
       continue;
     }
     if (!route.exists) {
-      failures.push(
-        `Mirror file is missing for ${route.route}: ${route.mirrorFile}`,
-      );
+      failures.push(`Mirror file is missing for ${route.route}: ${route.mirrorFile}`);
     }
   }
 

@@ -59,7 +59,7 @@ describe('runRankingWorkflow', () => {
         suspicionFlags: [],
         tests: [],
         fetchedAt: '2026-03-10T00:00:00.000Z',
-        provenance: ['user-solutions']
+        provenance: ['user-solutions'],
       }),
       'utf8',
     );
@@ -82,7 +82,7 @@ describe('runRankingWorkflow', () => {
         suspicionFlags: [],
         tests: [],
         fetchedAt: '2026-03-10T00:00:00.000Z',
-        provenance: ['user-solutions']
+        provenance: ['user-solutions'],
       }),
       'utf8',
     );
@@ -180,8 +180,16 @@ describe('runRankingWorkflow', () => {
       provenance: ['user-solutions'],
     });
     // Written larger-id-first so the summary sort visibly reorders them.
-    writeFileSync(join(evaluationsRoot, '2000-50.json'), JSON.stringify(evaluation(50, 2000)), 'utf8');
-    writeFileSync(join(evaluationsRoot, '1000-51.json'), JSON.stringify(evaluation(51, 1000)), 'utf8');
+    writeFileSync(
+      join(evaluationsRoot, '2000-50.json'),
+      JSON.stringify(evaluation(50, 2000)),
+      'utf8',
+    );
+    writeFileSync(
+      join(evaluationsRoot, '1000-51.json'),
+      JSON.stringify(evaluation(51, 1000)),
+      'utf8',
+    );
 
     const result = await runRankingWorkflow(workspaceRoot);
     expect(result.problemsRanked).toBe(2);

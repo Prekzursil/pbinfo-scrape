@@ -34,16 +34,28 @@ const url = (path: string) => new URL(path, base);
 
 describe('archive-crawler navigable URL helpers', () => {
   test('normalizeNavigableUrl rejects unsafe schemes, fragments, and cross-origin links', () => {
-    for (const candidate of ['#a', 'javascript:x', 'vbscript:x', 'mailto:a@b', 'tel:1', 'data:x', undefined]) {
+    for (const candidate of [
+      '#a',
+      'javascript:x',
+      'vbscript:x',
+      'mailto:a@b',
+      'tel:1',
+      'data:x',
+      undefined,
+    ]) {
       expect(normalizeNavigableUrl(config, base, candidate)).toBeNull();
     }
     expect(normalizeNavigableUrl(config, base, 'https://other.example.com/x')).toBeNull();
     expect(normalizeNavigableUrl(config, base, '/articole/x')).toBeNull();
-    expect(normalizeNavigableUrl(config, base, '/probleme?utm_source=z')).toBe('https://www.pbinfo.ro/probleme');
+    expect(normalizeNavigableUrl(config, base, '/probleme?utm_source=z')).toBe(
+      'https://www.pbinfo.ro/probleme',
+    );
   });
 
   test('stripTrackingQueryParameters and canonicalizeQueryParameters', () => {
-    const tracking = url('/x?utm_source=a&fbclid=b&gclid=c&yclid=d&mc_cid=e&mc_eid=f&ref=g&source=h&keep=1');
+    const tracking = url(
+      '/x?utm_source=a&fbclid=b&gclid=c&yclid=d&mc_cid=e&mc_eid=f&ref=g&source=h&keep=1',
+    );
     stripTrackingQueryParameters(tracking);
     expect(tracking.searchParams.get('keep')).toBe('1');
     expect(tracking.searchParams.has('utm_source')).toBe(false);
@@ -54,7 +66,17 @@ describe('archive-crawler navigable URL helpers', () => {
 
   test('isMeaningfulNavigableUrl handles section, evaluation, profile, solution, and pagination rules', () => {
     expect(isMeaningfulNavigableUrl(config, url('/solutii/problema/1/sum'))).toBe(false);
-    for (const path of ['/articole', '/ajutor', '/clasa-mea', '/editare-cont', '/logout.php', '/resurse', '/solutii/clasa/9', '/teme/rezolvare/1', '/php/gravatar.php']) {
+    for (const path of [
+      '/articole',
+      '/ajutor',
+      '/clasa-mea',
+      '/editare-cont',
+      '/logout.php',
+      '/resurse',
+      '/solutii/clasa/9',
+      '/teme/rezolvare/1',
+      '/php/gravatar.php',
+    ]) {
       expect(isMeaningfulNavigableUrl(config, url(path))).toBe(false);
     }
     expect(isMeaningfulNavigableUrl(config, url('/detalii-evaluare/123'))).toBe(false);
@@ -94,8 +116,12 @@ describe('archive-crawler asset URL helpers', () => {
     }
     expect(normalizeAssetUrl(config, base, 'https://blocked.example.com/a.css')).toBeNull();
     expect(normalizeAssetUrl(config, base, '/php/gravatar.php')).toBeNull();
-    expect(normalizeAssetUrl(config, base, '/static/app.css')).toBe('https://www.pbinfo.ro/static/app.css');
-    expect(normalizeAssetUrl(config, base, 'https://cdn.example.com/a.css')).toBe('https://cdn.example.com/a.css');
+    expect(normalizeAssetUrl(config, base, '/static/app.css')).toBe(
+      'https://www.pbinfo.ro/static/app.css',
+    );
+    expect(normalizeAssetUrl(config, base, 'https://cdn.example.com/a.css')).toBe(
+      'https://cdn.example.com/a.css',
+    );
     expect(normalizeAssetUrl(config, base, 'https://random.example.com/a.css')).toBeNull();
   });
 
@@ -121,26 +147,40 @@ describe('archive-crawler classification helpers', () => {
   test('inferPageKind', () => {
     expect(inferPageKind('https://www.pbinfo.ro/profil/Bob')).toBe('user-profile');
     expect(inferPageKind('https://www.pbinfo.ro/solutii/user/Bob')).toBe('user-solutions');
-    expect(inferPageKind('https://www.pbinfo.ro/solutii/problema/1/sum')).toBe('official-source-list');
+    expect(inferPageKind('https://www.pbinfo.ro/solutii/problema/1/sum')).toBe(
+      'official-source-list',
+    );
     expect(inferPageKind('https://www.pbinfo.ro/detalii-evaluare/5')).toBe('evaluation-detail');
     expect(inferPageKind('https://www.pbinfo.ro/probleme')).toBe('public-page');
   });
 
   test('inferTemplate', () => {
-    expect(inferTemplate('https://www.pbinfo.ro/detalii-evaluare/5', 'evaluation-detail')).toBe('evaluation');
-    expect(inferTemplate('https://www.pbinfo.ro/x', 'official-evaluation-detail')).toBe('evaluation');
+    expect(inferTemplate('https://www.pbinfo.ro/detalii-evaluare/5', 'evaluation-detail')).toBe(
+      'evaluation',
+    );
+    expect(inferTemplate('https://www.pbinfo.ro/x', 'official-evaluation-detail')).toBe(
+      'evaluation',
+    );
     expect(inferTemplate('https://www.pbinfo.ro/profil/Bob', 'user-profile')).toBe('user-profile');
-    expect(inferTemplate('https://www.pbinfo.ro/solutii/user/Bob', 'user-solutions')).toBe('user-profile');
+    expect(inferTemplate('https://www.pbinfo.ro/solutii/user/Bob', 'user-solutions')).toBe(
+      'user-profile',
+    );
     expect(inferTemplate('https://www.pbinfo.ro/probleme/1/sum', 'public-page')).toBe('problem');
     expect(inferTemplate('https://www.pbinfo.ro/random', 'public-page')).toBe('raw-page');
   });
 
   test('inferEntityKey', () => {
     expect(inferEntityKey('https://www.pbinfo.ro/probleme/1/sum', 'public-page')).toBe('problem:1');
-    expect(inferEntityKey('https://www.pbinfo.ro/detalii-evaluare/5', 'evaluation-detail')).toBe('evaluation:5');
+    expect(inferEntityKey('https://www.pbinfo.ro/detalii-evaluare/5', 'evaluation-detail')).toBe(
+      'evaluation:5',
+    );
     expect(inferEntityKey('https://www.pbinfo.ro/profil/Bob', 'user-profile')).toBe('user:Bob');
-    expect(inferEntityKey('https://www.pbinfo.ro/solutii/user/Bob', 'user-solutions')).toBe('user:Bob');
-    expect(inferEntityKey('https://www.pbinfo.ro/random', 'public-page')).toBe('public-page:/random');
+    expect(inferEntityKey('https://www.pbinfo.ro/solutii/user/Bob', 'user-solutions')).toBe(
+      'user:Bob',
+    );
+    expect(inferEntityKey('https://www.pbinfo.ro/random', 'public-page')).toBe(
+      'public-page:/random',
+    );
   });
 
   test('createPlaceholderProblem', () => {
@@ -165,8 +205,15 @@ describe('archive-crawler test-case helpers', () => {
   });
 
   test('buildEffectiveProblemTestKey keys by normalized io', () => {
-    expect(buildEffectiveProblemTestKey({ input: undefined, output: undefined } as ProblemTestCaseRecord)).toBeUndefined();
-    expect(buildEffectiveProblemTestKey({ input: 'a', output: 'b' } as ProblemTestCaseRecord)).toBe('a::b');
+    expect(
+      buildEffectiveProblemTestKey({
+        input: undefined,
+        output: undefined,
+      } as ProblemTestCaseRecord),
+    ).toBeUndefined();
+    expect(buildEffectiveProblemTestKey({ input: 'a', output: 'b' } as ProblemTestCaseRecord)).toBe(
+      'a::b',
+    );
     expect(buildEffectiveProblemTestKey({ input: 'a' } as ProblemTestCaseRecord)).toBe('a::');
   });
 });

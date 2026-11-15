@@ -18,9 +18,10 @@ describe('App unmount-race guards', () => {
     const harness = createBridgeHarness();
     let resolvePreferences!: (value: unknown) => void;
     (harness.bridge.getDesktopPreferences as ReturnType<typeof vi.fn>).mockImplementation(
-      () => new Promise((resolve) => {
-        resolvePreferences = resolve;
-      }),
+      () =>
+        new Promise((resolve) => {
+          resolvePreferences = resolve;
+        }),
     );
     const view = render(<App desktop={harness.bridge} />);
     view.unmount();
@@ -34,9 +35,10 @@ describe('App unmount-race guards', () => {
     const harness = createBridgeHarness();
     let rejectPreferences!: (reason: unknown) => void;
     (harness.bridge.getDesktopPreferences as ReturnType<typeof vi.fn>).mockImplementation(
-      () => new Promise((_resolve, reject) => {
-        rejectPreferences = reject;
-      }),
+      () =>
+        new Promise((_resolve, reject) => {
+          rejectPreferences = reject;
+        }),
     );
     const view = render(<App desktop={harness.bridge} />);
     view.unmount();
@@ -50,14 +52,16 @@ describe('App unmount-race guards', () => {
     const harness = createBridgeHarness();
     const rejectors: Array<(reason: unknown) => void> = [];
     (harness.bridge.getCoverageRecord as ReturnType<typeof vi.fn>).mockImplementation(
-      () => new Promise((_resolve, reject) => {
-        rejectors.push(reject);
-      }),
+      () =>
+        new Promise((_resolve, reject) => {
+          rejectors.push(reject);
+        }),
     );
     (harness.bridge.getArchiveExplorerRecord as ReturnType<typeof vi.fn>).mockImplementation(
-      () => new Promise((_resolve, reject) => {
-        rejectors.push(reject);
-      }),
+      () =>
+        new Promise((_resolve, reject) => {
+          rejectors.push(reject);
+        }),
     );
     const view = render(<App desktop={harness.bridge} />);
     await ready();
@@ -85,9 +89,10 @@ describe('App unmount-race guards', () => {
       'listArchiveExplorerRecords',
     ] as const) {
       (harness.bridge[method] as ReturnType<typeof vi.fn>).mockImplementation(
-        () => new Promise((_resolve, reject) => {
-          rejectors.push(reject);
-        }),
+        () =>
+          new Promise((_resolve, reject) => {
+            rejectors.push(reject);
+          }),
       );
     }
     const view = render(<App desktop={harness.bridge} />);
@@ -195,9 +200,12 @@ describe('App action and event fallbacks', () => {
       const harness = createBridgeHarness();
       render(<App desktop={harness.bridge} />);
       await vi.waitFor(() => {
-        expect(screen.getByRole('heading', { name: 'Problem Archive Crawler' })).toBeInTheDocument();
+        expect(
+          screen.getByRole('heading', { name: 'Problem Archive Crawler' }),
+        ).toBeInTheDocument();
       });
-      const callsAfterMount = (harness.bridge.getWorkspaceState as ReturnType<typeof vi.fn>).mock.calls.length;
+      const callsAfterMount = (harness.bridge.getWorkspaceState as ReturnType<typeof vi.fn>).mock
+        .calls.length;
       await vi.advanceTimersByTimeAsync(60_000);
       expect(
         (harness.bridge.getWorkspaceState as ReturnType<typeof vi.fn>).mock.calls.length,

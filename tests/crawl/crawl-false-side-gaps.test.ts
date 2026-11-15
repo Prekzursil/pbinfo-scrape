@@ -15,9 +15,9 @@ const servers: Server[] = [];
 
 afterEach(async () => {
   await Promise.all(
-    servers.splice(0).map(
-      (server) => new Promise<void>((resolve) => server.close(() => resolve())),
-    ),
+    servers
+      .splice(0)
+      .map((server) => new Promise<void>((resolve) => server.close(() => resolve()))),
   );
   for (const dir of tempDirs.splice(0)) {
     rmSync(dir, { recursive: true, force: true });
@@ -109,7 +109,9 @@ describe('official source-list harvest ordering', () => {
       throw new TypeError('server address is not available');
     }
     const url = `http://127.0.0.1:${address.port}/solutii/user/pbinfo/problema/3171/waterreserve`;
-    const queue = new CrawlQueue(join(workspace.config.paths.localRoot, 'crawl-queues', 'harvest-order.sqlite'));
+    const queue = new CrawlQueue(
+      join(workspace.config.paths.localRoot, 'crawl-queues', 'harvest-order.sqlite'),
+    );
     queue.enqueueMany([{ key: `official-source-list:${url}`, url, kind: 'official-source-list' }]);
 
     const crawler = new ArchiveCrawler({
@@ -120,7 +122,10 @@ describe('official source-list harvest ordering', () => {
     await expect(crawler.processNext(new Date('2026-03-10T00:00:00.000Z'))).resolves.toBe(true);
 
     const merged = JSON.parse(
-      readFileSync(join(workspace.snapshot.normalizedRoot, 'problems', 'problem-3171.json'), 'utf8'),
+      readFileSync(
+        join(workspace.snapshot.normalizedRoot, 'problems', 'problem-3171.json'),
+        'utf8',
+      ),
     ) as { officialSourceHarvest?: { qualifyingEvaluationIds?: number[] } };
     expect(merged.officialSourceHarvest?.qualifyingEvaluationIds).toEqual([70000005, 70000009]);
   });

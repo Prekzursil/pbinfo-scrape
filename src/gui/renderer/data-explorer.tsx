@@ -62,72 +62,72 @@ export function DataExplorerPanel(props: DataExplorerPanelProps) {
       </div>
 
       <div className="data-workspace-top">
-      <div className="archive-location-grid">
-        <article className="summary-card">
-          <span className="metric-label">Normalized archive</span>
-          <p className="mono archive-path">{normalizedRoot ?? 'Not available'}</p>
-          <div className="button-row">
-            <button
-              className="ghost-button"
-              type="button"
-              disabled={!normalizedRoot}
-              onClick={normalizedRoot ? () => void onOpenPath(normalizedRoot) : undefined}
-            >
-              Open normalized archive folder
-            </button>
-          </div>
-        </article>
-        <article className="summary-card">
-          <span className="metric-label">Mirror output</span>
-          <p className="mono archive-path">{mirrorRoot ?? 'Not available'}</p>
-          <div className="button-row">
-            <button
-              className="ghost-button"
-              type="button"
-              disabled={!mirrorRoot}
-              onClick={mirrorRoot ? () => void onOpenPath(mirrorRoot) : undefined}
-            >
-              Open mirror output folder
-            </button>
-            <button
-              className="ghost-button"
-              type="button"
-              disabled={!mirrorUrl}
-              onClick={mirrorUrl ? () => void onOpenExternal(mirrorUrl) : undefined}
-            >
-              Open mirror in browser
-            </button>
-          </div>
-          <p className="summary-copy">
-            {mirrorServeCommand
-              ? `Serve locally with: ${mirrorServeCommand}`
-              : 'Serve the selected snapshot locally to browse it like a website.'}
-          </p>
-        </article>
-      </div>
+        <div className="archive-location-grid">
+          <article className="summary-card">
+            <span className="metric-label">Normalized archive</span>
+            <p className="mono archive-path">{normalizedRoot ?? 'Not available'}</p>
+            <div className="button-row">
+              <button
+                className="ghost-button"
+                type="button"
+                disabled={!normalizedRoot}
+                onClick={normalizedRoot ? () => void onOpenPath(normalizedRoot) : undefined}
+              >
+                Open normalized archive folder
+              </button>
+            </div>
+          </article>
+          <article className="summary-card">
+            <span className="metric-label">Mirror output</span>
+            <p className="mono archive-path">{mirrorRoot ?? 'Not available'}</p>
+            <div className="button-row">
+              <button
+                className="ghost-button"
+                type="button"
+                disabled={!mirrorRoot}
+                onClick={mirrorRoot ? () => void onOpenPath(mirrorRoot) : undefined}
+              >
+                Open mirror output folder
+              </button>
+              <button
+                className="ghost-button"
+                type="button"
+                disabled={!mirrorUrl}
+                onClick={mirrorUrl ? () => void onOpenExternal(mirrorUrl) : undefined}
+              >
+                Open mirror in browser
+              </button>
+            </div>
+            <p className="summary-copy">
+              {mirrorServeCommand
+                ? `Serve locally with: ${mirrorServeCommand}`
+                : 'Serve the selected snapshot locally to browse it like a website.'}
+            </p>
+          </article>
+        </div>
 
-      <div className="data-browser-toolbar" role="toolbar" aria-label="Archive dataset browser">
-      <div className="dataset-chip-row" role="tablist" aria-label="Archive dataset">
-        {datasetSummaries.map((dataset) => (
-          <button
-            key={dataset.dataset}
-            className={`dataset-chip ${selectedDataset === dataset.dataset ? 'dataset-chip-active' : ''}`}
-            type="button"
-            role="tab"
-            aria-selected={selectedDataset === dataset.dataset}
-            onClick={() => onDatasetChange(dataset.dataset)}
-          >
-            <span>{dataset.label}</span>
-            <strong>{dataset.count}</strong>
-          </button>
-          ))}
-      </div>
-      </div>
+        <div className="data-browser-toolbar" role="toolbar" aria-label="Archive dataset browser">
+          <div className="dataset-chip-row" role="tablist" aria-label="Archive dataset">
+            {datasetSummaries.map((dataset) => (
+              <button
+                key={dataset.dataset}
+                className={`dataset-chip ${selectedDataset === dataset.dataset ? 'dataset-chip-active' : ''}`}
+                type="button"
+                role="tab"
+                aria-selected={selectedDataset === dataset.dataset}
+                onClick={() => onDatasetChange(dataset.dataset)}
+              >
+                <span>{dataset.label}</span>
+                <strong>{dataset.count}</strong>
+              </button>
+            ))}
+          </div>
+        </div>
 
-      <p className="summary-copy data-explorer-summary">
-        {datasetSummaries.find((dataset) => dataset.dataset === selectedDataset)?.description
-          ?? 'Browse the normalized PBInfo datasets captured in the canonical snapshot.'}
-      </p>
+        <p className="summary-copy data-explorer-summary">
+          {datasetSummaries.find((dataset) => dataset.dataset === selectedDataset)?.description ??
+            'Browse the normalized PBInfo datasets captured in the canonical snapshot.'}
+        </p>
       </div>
 
       <div className="data-explorer-grid">
@@ -191,15 +191,21 @@ export function DataExplorerPanel(props: DataExplorerPanelProps) {
                   className="ghost-button"
                   type="button"
                   disabled={!liveMirrorRecordUrl}
-                  onClick={liveMirrorRecordUrl ? () => void onOpenExternal(liveMirrorRecordUrl) : undefined}
+                  onClick={
+                    liveMirrorRecordUrl ? () => void onOpenExternal(liveMirrorRecordUrl) : undefined
+                  }
                 >
                   Open record route in live mirror
                 </button>
               </div>
               {detail.mirrorRoute ? (
-                <p className="summary-copy">Mirror route: <span className="mono">{detail.mirrorRoute}</span></p>
+                <p className="summary-copy">
+                  Mirror route: <span className="mono">{detail.mirrorRoute}</span>
+                </p>
               ) : null}
-              <p className="summary-copy">Source file: <span className="mono">{detail.filePath}</span></p>
+              <p className="summary-copy">
+                Source file: <span className="mono">{detail.filePath}</span>
+              </p>
               <pre className="data-json-viewer">{JSON.stringify(detail.payload, null, 2)}</pre>
             </>
           ) : (

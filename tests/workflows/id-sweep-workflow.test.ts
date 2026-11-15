@@ -40,7 +40,8 @@ function html(body: string, status = 200): Response {
  */
 function createSweepFetch(options: SweepFetchOptions): typeof fetch {
   return (async (input: RequestInfo | URL) => {
-    const url = typeof input === 'string' ? input : input instanceof URL ? input.toString() : input.url;
+    const url =
+      typeof input === 'string' ? input : input instanceof URL ? input.toString() : input.url;
 
     const noSlug = url.match(/^https:\/\/www\.pbinfo\.ro\/probleme\/(\d+)$/);
     if (noSlug) {
@@ -86,9 +87,7 @@ function createSweepFetch(options: SweepFetchOptions): typeof fetch {
           `<div><a href="#cpp">C++</a><div id="cpp"><pre>int main(){return 0;}</pre></div></div>`,
         );
       }
-      return html(
-        `<h3>Test 1</h3><p>Intrare</p><pre>10</pre><p>Ieșire</p><pre>20</pre>`,
-      );
+      return html(`<h3>Test 1</h3><p>Intrare</p><pre>10</pre><p>Ieșire</p><pre>20</pre>`);
     }
 
     return new Response('not found', {
@@ -120,15 +119,12 @@ function createWorkspace(): string {
   return root;
 }
 
-function readSnapshotJson(snapshotId: string, workspaceRoot: string, ...segments: string[]): unknown {
-  const path = join(
-    workspaceRoot,
-    'archive',
-    'snapshots',
-    snapshotId,
-    'normalized',
-    ...segments,
-  );
+function readSnapshotJson(
+  snapshotId: string,
+  workspaceRoot: string,
+  ...segments: string[]
+): unknown {
+  const path = join(workspaceRoot, 'archive', 'snapshots', snapshotId, 'normalized', ...segments);
   return JSON.parse(readFileSync(path, 'utf8'));
 }
 
@@ -152,7 +148,9 @@ describe('runProblemIdSweepWorkflow', () => {
 
     const snapshotId = result.snapshotId;
     for (const id of [1, 2]) {
-      expect(readSnapshotJson(snapshotId, workspaceRoot, 'id-sweep', `id-${id}.json`)).toMatchObject({
+      expect(
+        readSnapshotJson(snapshotId, workspaceRoot, 'id-sweep', `id-${id}.json`),
+      ).toMatchObject({
         problemId: id,
         classification: 'live',
         captureStatus: 'content',
@@ -160,7 +158,9 @@ describe('runProblemIdSweepWorkflow', () => {
       });
     }
     for (const id of [3, 4]) {
-      expect(readSnapshotJson(snapshotId, workspaceRoot, 'id-sweep', `id-${id}.json`)).toMatchObject({
+      expect(
+        readSnapshotJson(snapshotId, workspaceRoot, 'id-sweep', `id-${id}.json`),
+      ).toMatchObject({
         problemId: id,
         classification: 'dead',
         probe: 'dead',
@@ -189,7 +189,17 @@ describe('runProblemIdSweepWorkflow', () => {
     expect(Object.keys(problem.officialSolutions)).toContain('C++');
     expect(problem.visibleTests.length).toBeGreaterThan(0);
     expect(
-      existsSync(join(workspaceRoot, 'archive', 'snapshots', snapshotId, 'normalized', 'tests', 'problem-1.json')),
+      existsSync(
+        join(
+          workspaceRoot,
+          'archive',
+          'snapshots',
+          snapshotId,
+          'normalized',
+          'tests',
+          'problem-1.json',
+        ),
+      ),
     ).toBe(true);
   });
 
@@ -243,7 +253,15 @@ describe('runProblemIdSweepWorkflow', () => {
     });
     expect(
       existsSync(
-        join(workspaceRoot, 'archive', 'snapshots', result.snapshotId, 'normalized', 'problems', 'problem-3.json'),
+        join(
+          workspaceRoot,
+          'archive',
+          'snapshots',
+          result.snapshotId,
+          'normalized',
+          'problems',
+          'problem-3.json',
+        ),
       ),
     ).toBe(false);
   });

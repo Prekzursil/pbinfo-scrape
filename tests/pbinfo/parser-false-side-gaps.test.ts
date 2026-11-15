@@ -142,8 +142,6 @@ describe('parseProblemEndpointFragment visible-test cue false sides', () => {
       </div>
     `;
     const parsed = parseProblemEndpointFragment(fragment);
-    expect(parsed.visibleTests).toEqual([
-      { title: 'Testul 1', input: '', output: '' },
-    ]);
+    expect(parsed.visibleTests).toEqual([{ title: 'Testul 1', input: '', output: '' }]);
   });
 });

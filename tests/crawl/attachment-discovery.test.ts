@@ -5,10 +5,7 @@ import { tmpdir } from 'node:os';
 import { afterEach, describe, expect, test } from 'vitest';
 
 import { loadLocalConfig } from '../../src/config/local-config.js';
-import {
-  discoverFollowUps,
-  normalizeAttachmentUrl,
-} from '../../src/crawl/archive-crawler.js';
+import { discoverFollowUps, normalizeAttachmentUrl } from '../../src/crawl/archive-crawler.js';
 import { parseProblemPage } from '../../src/pbinfo/parsers/problem.js';
 import { normalizeAttachmentHref } from '../../src/pbinfo/parsers/shared.js';
 
@@ -42,7 +39,9 @@ describe('normalizeAttachmentUrl', () => {
 
   test('rejects non-attachment paths, cross-origin links, and unsafe schemes', () => {
     expect(normalizeAttachmentUrl(base, '/some-page.php?id=1')).toBeNull();
-    expect(normalizeAttachmentUrl(base, 'https://evil.example/descarca-fisier.php?id=1')).toBeNull();
+    expect(
+      normalizeAttachmentUrl(base, 'https://evil.example/descarca-fisier.php?id=1'),
+    ).toBeNull();
     expect(normalizeAttachmentUrl(base, 'javascript:alert(1)')).toBeNull();
     expect(normalizeAttachmentUrl(base, 'vbscript:x')).toBeNull();
     expect(normalizeAttachmentUrl(base, 'mailto:a@b.c')).toBeNull();
@@ -77,7 +76,9 @@ describe('normalizeAttachmentHref', () => {
 
   test('roots bare attachment hrefs and leaves other bare hrefs alone', () => {
     expect(normalizeAttachmentHref('descarca-fisier.php?id=1')).toBe('/descarca-fisier.php?id=1');
-    expect(normalizeAttachmentHref('  descarca-fisier.php?id=1  ')).toBe('/descarca-fisier.php?id=1');
+    expect(normalizeAttachmentHref('  descarca-fisier.php?id=1  ')).toBe(
+      '/descarca-fisier.php?id=1',
+    );
     expect(normalizeAttachmentHref('altceva.php?id=1')).toBe('altceva.php?id=1');
   });
 });
@@ -85,14 +86,20 @@ describe('normalizeAttachmentHref', () => {
 describe('discoverFollowUps attachment harvest', () => {
   test('queues descarca-fisier anchors as public assets without queueing them as pages', () => {
     const config = makeConfig();
-    const followUps = discoverFollowUps(config, 'all', PROBLEM_PAGE_URL, 'public-page', `
+    const followUps = discoverFollowUps(
+      config,
+      'all',
+      PROBLEM_PAGE_URL,
+      'public-page',
+      `
       <html><body>
         <h1><a href="/probleme/4242/perle">Perle</a></h1>
         <a href="/descarca-fisier.php?id=42">atasament.pdf</a>
         <a href="descarca-fisier.php?id=43">alt-atribut.zip</a>
         <a href="/probleme/100/nrapprime">altă problemă</a>
       </body></html>
-    `);
+    `,
+    );
 
     const urls = followUps.map((item) => item.url);
     expect(urls).toContain('https://www.pbinfo.ro/descarca-fisier.php?id=42');
@@ -105,7 +112,9 @@ describe('discoverFollowUps attachment harvest', () => {
 
     // The query-carrying download URLs must not be queued as navigable pages.
     const pageItems = followUps.filter((item) => item.kind === 'public-page');
-    expect(pageItems.map((item) => item.url)).not.toContain('https://www.pbinfo.ro/descarca-fisier.php?id=42');
+    expect(pageItems.map((item) => item.url)).not.toContain(
+      'https://www.pbinfo.ro/descarca-fisier.php?id=42',
+    );
   });
 
   test('does not harvest attachments for kinds with suppressed asset discovery', () => {

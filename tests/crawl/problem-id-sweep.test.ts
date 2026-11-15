@@ -101,9 +101,13 @@ describe('parseProblemIdProbeResponse', () => {
 
 describe('isCookieShellHtml', () => {
   test('detects the Verificare challenge shell by title, marker div, and endpoint', () => {
-    expect(isCookieShellHtml('<html><head><title>Verificare - pbinfo.ro</title></head></html>')).toBe(true);
+    expect(
+      isCookieShellHtml('<html><head><title>Verificare - pbinfo.ro</title></head></html>'),
+    ).toBe(true);
     expect(isCookieShellHtml('<body><div id="verificare">Verificare.</div></body>')).toBe(true);
-    expect(isCookieShellHtml('<script>$.ajax({url: "/ajx-module/js-challenge.php"})</script>')).toBe(true);
+    expect(
+      isCookieShellHtml('<script>$.ajax({url: "/ajx-module/js-challenge.php"})</script>'),
+    ).toBe(true);
   });
 
   test('does not flag real problem content', () => {
@@ -179,7 +183,12 @@ describe('detectProblemIdCeiling', () => {
 describe('id-sweep records', () => {
   test('persists probe records and reads them back', () => {
     const snapshot = createSnapshot();
-    const live = recordIdSweepProbe(snapshot, LIVE_PROBE(4242, 'perle'), '2026-03-10T00:00:00.000Z', true);
+    const live = recordIdSweepProbe(
+      snapshot,
+      LIVE_PROBE(4242, 'perle'),
+      '2026-03-10T00:00:00.000Z',
+      true,
+    );
     expect(live).toMatchObject({
       problemId: 4242,
       classification: 'live',
@@ -196,8 +205,14 @@ describe('id-sweep records', () => {
     );
     expect(dead.classification).toBe('dead');
 
-    expect(readIdSweepRecord(snapshot, 4242)).toMatchObject({ problemId: 4242, classification: 'live' });
-    expect(readIdSweepRecord(snapshot, 4243)).toMatchObject({ problemId: 4243, classification: 'dead' });
+    expect(readIdSweepRecord(snapshot, 4242)).toMatchObject({
+      problemId: 4242,
+      classification: 'live',
+    });
+    expect(readIdSweepRecord(snapshot, 4243)).toMatchObject({
+      problemId: 4243,
+      classification: 'dead',
+    });
     expect(readIdSweepRecord(snapshot, 9999)).toBeUndefined();
   });
 

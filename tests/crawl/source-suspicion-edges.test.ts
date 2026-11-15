@@ -33,7 +33,9 @@ describe('detectSuspicionFlags edge heuristics', () => {
   });
 
   test('flags constant output that never reads input', () => {
-    expect(detectSuspicionFlags('int main(){cout<<"the answer is 42";}')).toContain('constant-output');
+    expect(detectSuspicionFlags('int main(){cout<<"the answer is 42";}')).toContain(
+      'constant-output',
+    );
   });
 
   test('ignores literal-first comparisons against non-input variables and trivial sentinels', () => {
@@ -77,7 +79,7 @@ describe('detectSuspicionFlags edge heuristics', () => {
 test('literal comparisons on non-input variables do not raise literal-pairs', () => {
   const code = [
     'int main(){',
-    "  char name[4];",
+    '  char name[4];',
     "  name[0]='a';",
     "  name[1]='b';",
     "  name[2]='c';",

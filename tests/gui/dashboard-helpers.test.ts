@@ -67,21 +67,33 @@ describe('dashboard helpers', () => {
 
   test('overview preset and status formatters cover every case', () => {
     for (const preset of [
-      'all', 'solved', 'unsolved', 'complete',
-      'missing-official-source', 'missing-user-source', 'missing-tests',
+      'all',
+      'solved',
+      'unsolved',
+      'complete',
+      'missing-official-source',
+      'missing-user-source',
+      'missing-tests',
     ] as const) {
       expect(formatOverviewPreset(preset)).toMatch(/\w/);
       expect(createCoverageFiltersForPreset(preset)).toBeTruthy();
     }
     for (const status of [
-      'complete', 'unsolved', 'not-archived-yet',
-      'missing-official-source', 'missing-user-source', 'incomplete',
+      'complete',
+      'unsolved',
+      'not-archived-yet',
+      'missing-official-source',
+      'missing-user-source',
+      'incomplete',
     ] as const) {
       expect(formatArchiveCompletenessStatus(status)).toMatch(/\w/);
       expect(toneForArchiveState(status)).toMatch(/success|warning|neutral/);
     }
     for (const status of [
-      'archived', 'restricted-upstream', 'not-available-upstream', 'not-captured-yet',
+      'archived',
+      'restricted-upstream',
+      'not-available-upstream',
+      'not-captured-yet',
     ] as const) {
       expect(formatOfficialSourceStatus(status)).toMatch(/\w/);
       expect(toneForOfficialStatus(status)).toMatch(/success|warning|neutral/);
@@ -103,7 +115,12 @@ describe('dashboard helpers', () => {
     expect(formatJobMeta({ kind: 'crawl', profileId: 'p1' } as GuiJobRecord)).toContain('p1');
     expect(formatJobMeta({ kind: 'crawl' } as GuiJobRecord)).toBe('crawl');
     expect(formatJobSummary({ kind: 'rank' } as GuiJobRecord)).toMatch(/No queue counters/);
-    expect(formatJobSummary({ kind: 'crawl', latestCounters: { pending: 1, completed: 2, inProgress: 0 } } as GuiJobRecord)).toContain('pending');
+    expect(
+      formatJobSummary({
+        kind: 'crawl',
+        latestCounters: { pending: 1, completed: 2, inProgress: 0 },
+      } as GuiJobRecord),
+    ).toContain('pending');
     expect(formatCounters(undefined)).toMatch(/No queue counters/);
     expect(formatCounters({ pending: 1, completed: 2, inProgress: 3 })).toContain('completed');
   });

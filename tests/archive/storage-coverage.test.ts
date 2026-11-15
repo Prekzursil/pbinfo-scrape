@@ -46,7 +46,11 @@ describe('storage snapshot lifecycle', () => {
   test('marks a snapshot completed and canonical', () => {
     const root = workspace();
     const config = loadLocalConfig(root);
-    const layout = prepareSnapshot(config, { snapshotId: 'S1', scope: 'all', now: new Date('2026-01-01T00:00:00Z') });
+    const layout = prepareSnapshot(config, {
+      snapshotId: 'S1',
+      scope: 'all',
+      now: new Date('2026-01-01T00:00:00Z'),
+    });
 
     markSnapshotCompleted(config, 'S1');
     const metadata = JSON.parse(readFileSync(layout.metadataPath, 'utf8')) as { status: string };
@@ -99,7 +103,12 @@ describe('storage raw-artifact export, import, relink', () => {
     const layout = prepareSnapshot(config, { snapshotId: 'A1', scope: 'all', now: new Date() });
     seedRawArtifacts(layout);
 
-    const manifest = exportRawArtifacts(config, layout, undefined, new Date('2026-01-02T00:00:00Z'));
+    const manifest = exportRawArtifacts(
+      config,
+      layout,
+      undefined,
+      new Date('2026-01-02T00:00:00Z'),
+    );
     expect(manifest.snapshotId).toBe('A1');
 
     const record = assertArtifactExportRecord(config, 'A1');
@@ -121,7 +130,9 @@ describe('storage raw-artifact export, import, relink', () => {
     const layout = prepareSnapshot(config, { snapshotId: 'A2', scope: 'all', now: new Date() });
     seedRawArtifacts(layout);
     const manifest = exportRawArtifacts(config, layout);
-    expect(() => relinkRawArtifacts(config, 'OTHER', manifest.rawPagesManifestPath)).toThrow(/mismatch/);
+    expect(() => relinkRawArtifacts(config, 'OTHER', manifest.rawPagesManifestPath)).toThrow(
+      /mismatch/,
+    );
   });
 
   test('relinkRawArtifacts throws when raw artifact paths are missing', () => {
@@ -233,10 +244,18 @@ describe('storage pruning', () => {
   test('prunes non-canonical snapshots, queues, and artifacts', () => {
     const root = workspace();
     const config = loadLocalConfig(root);
-    const keep = prepareSnapshot(config, { snapshotId: 'KEEP', scope: 'all', now: new Date('2026-01-01T00:00:00Z') });
+    const keep = prepareSnapshot(config, {
+      snapshotId: 'KEEP',
+      scope: 'all',
+      now: new Date('2026-01-01T00:00:00Z'),
+    });
     seedRawArtifacts(keep);
     exportRawArtifacts(config, keep);
-    const drop = prepareSnapshot(config, { snapshotId: 'DROP', scope: 'all', now: new Date('2026-01-02T00:00:00Z') });
+    const drop = prepareSnapshot(config, {
+      snapshotId: 'DROP',
+      scope: 'all',
+      now: new Date('2026-01-02T00:00:00Z'),
+    });
     seedRawArtifacts(drop);
     exportRawArtifacts(config, drop);
 

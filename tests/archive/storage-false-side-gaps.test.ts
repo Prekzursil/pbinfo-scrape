@@ -30,8 +30,16 @@ describe('pruneToCanonicalSnapshot sparse-workspace false sides', () => {
   test('prunes a bare snapshot with no artifacts, exports, or queue root', () => {
     const root = workspace();
     const config = loadLocalConfig(root);
-    prepareSnapshot(config, { snapshotId: 'KEEP', scope: 'all', now: new Date('2026-01-01T00:00:00Z') });
-    prepareSnapshot(config, { snapshotId: 'DROP', scope: 'all', now: new Date('2026-01-02T00:00:00Z') });
+    prepareSnapshot(config, {
+      snapshotId: 'KEEP',
+      scope: 'all',
+      now: new Date('2026-01-01T00:00:00Z'),
+    });
+    prepareSnapshot(config, {
+      snapshotId: 'DROP',
+      scope: 'all',
+      now: new Date('2026-01-02T00:00:00Z'),
+    });
     // prepareSnapshot creates the per-snapshot artifacts directory; drop it so
     // pruning sees a snapshot with neither artifacts dir, nor exported manifest.
     rmSync(join(config.paths.artifactsRoot, 'DROP'), { recursive: true, force: true });
