@@ -170,7 +170,11 @@ export function loadLocalConfig(workspaceRoot: string): LoadedLocalConfig {
       // archival runs where .local/pbinfo.local.json is not written), then
       // the local-root default. The jar holds live session cookies — never
       // log or commit its contents.
-      sessionCookiesPath: resolveSessionCookiesPath(resolvedWorkspace, localRoot, parsedInput?.auth?.sessionCookiesPath),
+      sessionCookiesPath: resolveSessionCookiesPath(
+        resolvedWorkspace,
+        localRoot,
+        parsedInput?.auth?.sessionCookiesPath,
+      ),
     },
     paths: {
       workspaceRoot: resolvedWorkspace,
@@ -187,8 +191,7 @@ export function loadLocalConfig(workspaceRoot: string): LoadedLocalConfig {
       maxAttempts: parsedInput?.crawl?.maxAttempts ?? 5,
       crossCheckWithBrowser: parsedInput?.crawl?.crossCheckWithBrowser ?? true,
       userHandle: parsedInput?.crawl?.userHandle,
-      publicStartUrls:
-        parsedInput?.crawl?.publicStartUrls ?? defaultPublicStartUrls(),
+      publicStartUrls: parsedInput?.crawl?.publicStartUrls ?? defaultPublicStartUrls(),
       idSweep: {
         minId: parsedInput?.crawl?.idSweep?.minId ?? 1,
         maxId: parsedInput?.crawl?.idSweep?.maxId,
@@ -196,10 +199,8 @@ export function loadLocalConfig(workspaceRoot: string): LoadedLocalConfig {
       },
     },
     mirror: {
-      blockedAssetHosts:
-        parsedInput?.mirror?.blockedAssetHosts ?? defaultBlockedAssetHosts(),
-      externalAssetHosts:
-        parsedInput?.mirror?.externalAssetHosts ?? defaultExternalAssetHosts(),
+      blockedAssetHosts: parsedInput?.mirror?.blockedAssetHosts ?? defaultBlockedAssetHosts(),
+      externalAssetHosts: parsedInput?.mirror?.externalAssetHosts ?? defaultExternalAssetHosts(),
     },
     secrets: {
       recipient: parsedInput?.secrets?.recipient,
@@ -262,12 +263,7 @@ function defaultPublicStartUrls(): string[] {
 }
 
 function defaultExternalAssetHosts(): string[] {
-  return [
-    'ajax.googleapis.com',
-    'cdn.jsdelivr.net',
-    'cdnjs.cloudflare.com',
-    'use.fontawesome.com',
-  ];
+  return ['ajax.googleapis.com', 'cdn.jsdelivr.net', 'cdnjs.cloudflare.com', 'use.fontawesome.com'];
 }
 
 function defaultBlockedAssetHosts(): string[] {

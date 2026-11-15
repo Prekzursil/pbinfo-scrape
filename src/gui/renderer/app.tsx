@@ -60,8 +60,9 @@ export function App({ desktop }: AppProps) {
   const [archiveSummary, setArchiveSummary] = useState<GuiArchiveSummary | null>(null);
   const [archiveListing, setArchiveListing] = useState<GuiArchiveListing | null>(null);
   const [selectedArchiveRecordId, setSelectedArchiveRecordId] = useState<string | null>(null);
-  const [archiveRecordDetail, setArchiveRecordDetail] =
-    useState<GuiArchiveRecordDetail | null>(null);
+  const [archiveRecordDetail, setArchiveRecordDetail] = useState<GuiArchiveRecordDetail | null>(
+    null,
+  );
   const [verbosityMode, setVerbosityMode] = useState<GuiVerbosityMode>('normal');
   const [busyAction, setBusyAction] = useState<string | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
@@ -147,9 +148,7 @@ export function App({ desktop }: AppProps) {
       }
 
       const [nextCrawlStatus, nextJobEvents] = await Promise.all([
-        bridge
-          .getCrawlStatus(resolvedSnapshotId)
-          .catch(() => null as GuiCrawlStatus | null),
+        bridge.getCrawlStatus(resolvedSnapshotId).catch(() => null as GuiCrawlStatus | null),
         readPreferredJobEvents(bridge, nextJobs, verbosityMode, resolvedSnapshotId),
       ]);
 
@@ -199,9 +198,22 @@ export function App({ desktop }: AppProps) {
     };
   }, [bridge, refresh, workspaceState]);
 
+  // Summary/listing/detail state is gated at render (the `effective*` values
+  // passed to Dashboard) instead of synchronous setState resets inside the
+  // effects below: deriving "no workspace => no data" during render is the
+  // React-recommended shape and keeps the effects external-system-only.
+  const workspaceReady = Boolean(bridge && workspaceState);
+  const effectiveArchiveSummary = workspaceReady ? archiveSummary : null;
+  const effectiveCoverageSummary = workspaceReady ? coverageSummary : null;
+  const effectiveCoverageListing = workspaceReady ? coverageListing : null;
+  const effectiveArchiveListing = workspaceReady ? archiveListing : null;
+  const effectiveCoverageDetail =
+    workspaceReady && selectedCoverageProblemId !== null ? coverageDetail : null;
+  const effectiveArchiveRecordDetail =
+    workspaceReady && selectedArchiveRecordId !== null ? archiveRecordDetail : null;
+
   useEffect(() => {
     if (!bridge || !workspaceState) {
-      setArchiveSummary(null);
       return;
     }
 
@@ -227,7 +239,6 @@ export function App({ desktop }: AppProps) {
 
   useEffect(() => {
     if (!bridge || !workspaceState) {
-      setCoverageSummary(null);
       return;
     }
 
@@ -253,8 +264,6 @@ export function App({ desktop }: AppProps) {
 
   useEffect(() => {
     if (!bridge || !workspaceState) {
-      setCoverageListing(null);
-      setCoverageDetail(null);
       return;
     }
 
@@ -301,7 +310,6 @@ export function App({ desktop }: AppProps) {
 
   useEffect(() => {
     if (!bridge || !workspaceState || !selectedCoverageProblemId) {
-      setCoverageDetail(null);
       return;
     }
 
@@ -330,8 +338,6 @@ export function App({ desktop }: AppProps) {
 
   useEffect(() => {
     if (!bridge || !workspaceState) {
-      setArchiveListing(null);
-      setArchiveRecordDetail(null);
       return;
     }
 
@@ -370,7 +376,6 @@ export function App({ desktop }: AppProps) {
 
   useEffect(() => {
     if (!bridge || !workspaceState || !selectedArchiveRecordId) {
-      setArchiveRecordDetail(null);
       return;
     }
 
@@ -396,13 +401,7 @@ export function App({ desktop }: AppProps) {
     return () => {
       cancelled = true;
     };
-  }, [
-    bridge,
-    selectedArchiveDataset,
-    selectedArchiveRecordId,
-    selectedSnapshotId,
-    workspaceState,
-  ]);
+  }, [bridge, selectedArchiveDataset, selectedArchiveRecordId, selectedSnapshotId, workspaceState]);
 
   const activeCrawlJob = useMemo(
     () =>
@@ -411,17 +410,23 @@ export function App({ desktop }: AppProps) {
     [crawlLoopJobId, jobs],
   );
 
-  useEffect(() => {
-    if (!bridge || !crawlLoopJobId || !activeCrawlJob) {
-      return undefined;
-    }
-
-    if (
-      activeCrawlJob.status === 'completed' ||
-      activeCrawlJob.status === 'failed' ||
-      activeCrawlJob.status === 'cancelled'
-    ) {
+  // Clear the crawl-loop pin once the pinned job settles — adjusted during
+  // render (the React-documented pattern for "reset state when something
+  // changed") instead of a synchronous setState inside the effect below.
+  const crawlLoopJobSettled =
+    activeCrawlJob?.status === 'completed' ||
+    activeCrawlJob?.status === 'failed' ||
+    activeCrawlJob?.status === 'cancelled';
+  const [prevCrawlLoopJobSettled, setPrevCrawlLoopJobSettled] = useState(false);
+  if (crawlLoopJobSettled !== prevCrawlLoopJobSettled) {
+    setPrevCrawlLoopJobSettled(crawlLoopJobSettled);
+    if (crawlLoopJobSettled && crawlLoopJobId) {
       setCrawlLoopJobId(null);
+    }
+  }
+
+  useEffect(() => {
+    if (!bridge || !crawlLoopJobId || !activeCrawlJob || crawlLoopJobSettled) {
       return undefined;
     }
 
@@ -453,7 +458,7 @@ export function App({ desktop }: AppProps) {
     return () => {
       window.clearTimeout(timer);
     };
-  }, [activeCrawlJob, bridge, crawlLoopJobId, refresh, selectedSnapshotId]);
+  }, [activeCrawlJob, bridge, crawlLoopJobId, crawlLoopJobSettled, refresh, selectedSnapshotId]);
 
   const runAction = useCallback(
     async <T,>(label: string, action: () => Promise<T>, successMessage?: string) => {
@@ -479,7 +484,9 @@ export function App({ desktop }: AppProps) {
     () =>
       [...jobs]
         .reverse()
-        .find((job) => job.kind === 'mirror-serve' && typeof job.detail?.mirrorPreviewUrl === 'string'),
+        .find(
+          (job) => job.kind === 'mirror-serve' && typeof job.detail?.mirrorPreviewUrl === 'string',
+        ),
     [jobs],
   );
   const previewUrl =
@@ -520,12 +527,12 @@ export function App({ desktop }: AppProps) {
       onSnapshotChange={(value) => setSelectedSnapshotId(value)}
       onCrawlModeChange={(value) => setCrawlMode(value)}
       onVerbosityChange={handleVerbosityChange}
-      archiveSummary={archiveSummary}
-      archiveListing={archiveListing}
-      archiveRecordDetail={archiveRecordDetail}
-      coverageSummary={coverageSummary}
-      coverageListing={coverageListing}
-      coverageDetail={coverageDetail}
+      archiveSummary={effectiveArchiveSummary}
+      archiveListing={effectiveArchiveListing}
+      archiveRecordDetail={effectiveArchiveRecordDetail}
+      coverageSummary={effectiveCoverageSummary}
+      coverageListing={effectiveCoverageListing}
+      coverageDetail={effectiveCoverageDetail}
       selectedCoverageProblemId={selectedCoverageProblemId}
       coverageFilters={coverageFilters}
       selectedArchiveDataset={selectedArchiveDataset}
@@ -721,17 +728,12 @@ async function readPreferredJobEvents(
   verbosityMode: GuiVerbosityMode,
   snapshotId?: string,
 ): Promise<GuiJobEvent[]> {
-  const preferredJob = [...jobs]
-    .reverse()
-    .find(
-      (job) =>
-        job.kind === 'crawl' &&
-        (!snapshotId || job.snapshotId === snapshotId),
-    )
-    ?? [...jobs]
+  const preferredJob =
+    [...jobs]
       .reverse()
-      .find((job) => job.kind === 'crawl')
-    ?? [...jobs]
+      .find((job) => job.kind === 'crawl' && (!snapshotId || job.snapshotId === snapshotId)) ??
+    [...jobs].reverse().find((job) => job.kind === 'crawl') ??
+    [...jobs]
       .reverse()
       .find((job) => job.kind === 'snapshot-finalize' || job.kind === 'mirror-build');
   if (!preferredJob) {
@@ -749,9 +751,7 @@ async function readPreferredJobEvents(
           ? 40
           : 18;
 
-  return bridge
-    .listJobEvents(preferredJob.jobId, eventLimit)
-    .catch(() => []);
+  return bridge.listJobEvents(preferredJob.jobId, eventLimit).catch(() => []);
 }
 
 function findLatestSnapshotId(jobs: GuiJobRecord[]): string | undefined {

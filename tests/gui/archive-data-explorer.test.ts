@@ -126,13 +126,23 @@ function buildFullWorkspace(): { root: string; snapshotId: string } {
     provenance: [],
   });
 
-  // Tests.
+  // Tests (a second record so the numeric ordering of the tests listing runs).
   writeJson(join(norm, 'tests', 'problem-1.json'), {
     snapshotId,
     problemId: 1,
     problemSlug: 'alpha',
     problemName: 'Alpha',
     examples: [{ testId: 'e1', kind: 'example' }],
+    visible: [],
+    evaluationObserved: [],
+    effective: [],
+  });
+  writeJson(join(norm, 'tests', 'problem-2.json'), {
+    snapshotId,
+    problemId: 2,
+    problemSlug: 'beta',
+    problemName: 'Beta',
+    examples: [],
     visible: [],
     evaluationObserved: [],
     effective: [],
@@ -188,7 +198,7 @@ describe('archive-data-explorer summary', () => {
     // listings skip the unparseable one (3 readable records).
     expect(byDataset.problems).toBe(4);
     expect(byDataset.evaluations).toBe(2);
-    expect(byDataset.tests).toBe(1);
+    expect(byDataset.tests).toBe(2);
     expect(byDataset.rankings).toBe(3);
     expect(byDataset['mirror-routes']).toBe(2);
     expect(summary.mirrorServeCommand).toContain('SNAP1');
@@ -301,12 +311,17 @@ describe('archive-data-explorer listings', () => {
     writeCatalog(root, snapshotId);
     const norm = normalizedRoot(root, snapshotId);
     writeJson(join(norm, 'rankings', 'best-submissions.json'), {
-      problems: [{ problemId: 9, bestUserPerLanguage: {} }],
+      problems: [
+        { problemId: 9, bestUserPerLanguage: {} },
+        { problemId: 4, bestUserPerLanguage: {} },
+      ],
     });
 
     const rankings = listArchiveExplorerRecords(root, { dataset: 'rankings', snapshotId });
-    expect(rankings.items[0]?.title).toBe('Problem #9');
+    expect(rankings.items[0]?.title).toBe('Problem #4');
     expect(rankings.items[0]?.mirrorRoute).toBeUndefined();
+    // Multiple ranking entries come back numerically ordered by problem id.
+    expect(rankings.items.map((item) => item.recordId)).toEqual(['4', '9']);
   });
 });
 
@@ -373,19 +388,25 @@ describe('archive-data-explorer record detail', () => {
     writeCatalog(root, snapshotId);
     const norm = normalizedRoot(root, snapshotId);
     // id 0 (falsy) and no canonical url -> derived route is undefined.
-    writeJson(join(norm, 'problems', 'problem-0.json'), problemRecord({
-      id: 0,
-      slug: 'zero',
-      name: 'Zero',
-      canonicalUrl: undefined,
-    }));
+    writeJson(
+      join(norm, 'problems', 'problem-0.json'),
+      problemRecord({
+        id: 0,
+        slug: 'zero',
+        name: 'Zero',
+        canonicalUrl: undefined,
+      }),
+    );
     // invalid canonical url -> extractPathname swallows the error.
-    writeJson(join(norm, 'problems', 'problem-3.json'), problemRecord({
-      id: 3,
-      slug: 'three',
-      name: 'Three',
-      canonicalUrl: '://not-a-valid-url',
-    }));
+    writeJson(
+      join(norm, 'problems', 'problem-3.json'),
+      problemRecord({
+        id: 3,
+        slug: 'three',
+        name: 'Three',
+        canonicalUrl: '://not-a-valid-url',
+      }),
+    );
     // ranking entry without bestUserPerLanguage and without a problem record.
     writeJson(join(norm, 'rankings', 'best-submissions.json'), {
       problems: [{ problemId: 8 }],
@@ -397,7 +418,11 @@ describe('archive-data-explorer record detail', () => {
     const three = problems.items.find((i) => i.recordId === '3');
     expect(three?.subtitle).toBeUndefined();
 
-    const zeroDetail = readArchiveExplorerRecord(root, { dataset: 'problems', recordId: '0', snapshotId });
+    const zeroDetail = readArchiveExplorerRecord(root, {
+      dataset: 'problems',
+      recordId: '0',
+      snapshotId,
+    });
     expect(zeroDetail.subtitle).toBeUndefined();
 
     // tests directory does not exist -> empty listing via readJsonDirectory guard.
@@ -445,12 +470,15 @@ describe('archive-data-explorer record detail', () => {
     writeJson(join(norm, 'rankings', 'best-submissions.json'), {
       problems: [{ problemId: 5, bestUserOverallEvaluationId: 7, bestUserPerLanguage: {} }],
     });
-    writeJson(join(norm, 'problems', 'problem-5.json'), problemRecord({
-      id: 5,
-      slug: 'gamma',
-      name: 'Gamma',
-      canonicalUrl: undefined,
-    }));
+    writeJson(
+      join(norm, 'problems', 'problem-5.json'),
+      problemRecord({
+        id: 5,
+        slug: 'gamma',
+        name: 'Gamma',
+        canonicalUrl: undefined,
+      }),
+    );
 
     const detail = readArchiveExplorerRecord(root, {
       dataset: 'rankings',

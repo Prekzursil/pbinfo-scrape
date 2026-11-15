@@ -80,7 +80,9 @@ describe('buildCli', () => {
   test('supports optional canonical promotion during snapshot finalization', () => {
     const cli = buildCli();
     const snapshotCommand = cli.commands.find((command) => command.name() === 'snapshot');
-    const finalizeCommand = snapshotCommand?.commands.find((command) => command.name() === 'finalize');
+    const finalizeCommand = snapshotCommand?.commands.find(
+      (command) => command.name() === 'finalize',
+    );
 
     expect(finalizeCommand?.options.map((option) => option.long)).toEqual(
       expect.arrayContaining(['--snapshot', '--promote']),
@@ -92,12 +94,7 @@ describe('buildCli', () => {
     const publishCommand = cli.commands.find((command) => command.name() === 'publish');
 
     expect(publishCommand?.options.map((option) => option.long)).toEqual(
-      expect.arrayContaining([
-        '--snapshot',
-        '--release',
-        '--tag',
-        '--upload-desktop-exe',
-      ]),
+      expect.arrayContaining(['--snapshot', '--release', '--tag', '--upload-desktop-exe']),
     );
   });
 });

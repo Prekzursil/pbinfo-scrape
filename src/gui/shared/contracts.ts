@@ -56,11 +56,7 @@ export const desktopBrowserImportInputSchema = z
 
 export const guiJobStartInputSchema = z
   .object({
-    kind: guiJobKindSchema.exclude([
-      'auth-login',
-      'auth-import-browser',
-      'mirror-serve',
-    ]),
+    kind: guiJobKindSchema.exclude(['auth-login', 'auth-import-browser', 'mirror-serve']),
     snapshotId: z.string().min(1).optional(),
     profileId: z.string().min(1).optional(),
     detail: z.record(z.string(), z.unknown()).optional(),
@@ -160,26 +156,16 @@ export const desktopPreferencesUpdateSchema = z
   })
   .strict();
 
-export type GuiWorkspaceSelectionInput = z.infer<
-  typeof guiWorkspaceSelectionSchema
->;
+export type GuiWorkspaceSelectionInput = z.infer<typeof guiWorkspaceSelectionSchema>;
 export type CreateProfileInput = z.infer<typeof createProfileInputSchema>;
-export type DesktopCredentialLoginInput = z.infer<
-  typeof desktopCredentialLoginInputSchema
->;
-export type DesktopBrowserImportInput = z.infer<
-  typeof desktopBrowserImportInputSchema
->;
+export type DesktopCredentialLoginInput = z.infer<typeof desktopCredentialLoginInputSchema>;
+export type DesktopBrowserImportInput = z.infer<typeof desktopBrowserImportInputSchema>;
 export type GuiJobStartInput = z.infer<typeof guiJobStartInputSchema>;
 export type GuiCrawlJobDetailInput = z.infer<typeof guiCrawlJobDetailSchema>;
 export type GuiArchiveSummaryInput = z.infer<typeof guiArchiveSummaryInputSchema>;
 export type GuiArchiveListInput = z.infer<typeof guiArchiveListInputSchema>;
 export type GuiArchiveDetailInput = z.infer<typeof guiArchiveDetailInputSchema>;
-export type GuiCoverageSummaryInput = z.infer<
-  typeof guiCoverageSummaryInputSchema
->;
+export type GuiCoverageSummaryInput = z.infer<typeof guiCoverageSummaryInputSchema>;
 export type GuiCoverageListInput = z.infer<typeof guiCoverageListInputSchema>;
 export type GuiCoverageDetailInput = z.infer<typeof guiCoverageDetailInputSchema>;
-export type DesktopPreferencesUpdateInput = z.infer<
-  typeof desktopPreferencesUpdateSchema
->;
+export type DesktopPreferencesUpdateInput = z.infer<typeof desktopPreferencesUpdateSchema>;

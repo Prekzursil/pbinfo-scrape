@@ -56,7 +56,11 @@ export function parseProblemIdProbeResponse(
   const canonicalMatch = resolvedLocation?.match(
     /^https:\/\/www\.pbinfo\.ro\/probleme\/(\d+)\/([^/?#]+)/,
   );
-  if (REDIRECT_STATUSES.has(httpStatus) && canonicalMatch?.[1] === String(problemId) && canonicalMatch[2]) {
+  if (
+    REDIRECT_STATUSES.has(httpStatus) &&
+    canonicalMatch?.[1] === String(problemId) &&
+    canonicalMatch[2]
+  ) {
     const slug = canonicalMatch[2];
     return {
       problemId,
@@ -84,9 +88,9 @@ export function parseProblemIdProbeResponse(
  */
 export function isCookieShellHtml(html: string): boolean {
   return (
-    /<title>\s*verificare[^<]*<\/title>/i.test(html)
-    || /id="verificare"/i.test(html)
-    || /\/ajx-module\/js-challenge\.php/i.test(html)
+    /<title>\s*verificare[^<]*<\/title>/i.test(html) ||
+    /id="verificare"/i.test(html) ||
+    /\/ajx-module\/js-challenge\.php/i.test(html)
   );
 }
 
@@ -235,8 +239,12 @@ export function buildIdSweepIndex(
   generatedAt: string,
 ): ProblemIdSweepIndex {
   const sorted = [...records].sort((left, right) => left.problemId - right.problemId);
-  const liveIds = sorted.filter((record) => record.classification === 'live').map((r) => r.problemId);
-  const deadIds = sorted.filter((record) => record.classification === 'dead').map((r) => r.problemId);
+  const liveIds = sorted
+    .filter((record) => record.classification === 'live')
+    .map((r) => r.problemId);
+  const deadIds = sorted
+    .filter((record) => record.classification === 'dead')
+    .map((r) => r.problemId);
   const cookieShellIds = sorted
     .filter((record) => record.classification === 'cookie-shell')
     .map((r) => r.problemId);

@@ -36,7 +36,9 @@ beforeEach(() => {
 
 describe('notification service', () => {
   test('noop service returns undefined', () => {
-    expect(noopNotificationService.notify({ level: 'info', title: 't', message: 'm' })).toBeUndefined();
+    expect(
+      noopNotificationService.notify({ level: 'info', title: 't', message: 'm' }),
+    ).toBeUndefined();
   });
 
   test('does nothing when notifications are unsupported', () => {

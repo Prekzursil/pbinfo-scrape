@@ -30,38 +30,22 @@ export default defineConfig({
       ],
       reporter: ['text', 'text-summary', 'html', 'json-summary'],
       // ─────────────────────────────────────────────────────────────────────
-      // INTERIM MEASURED-MAXIMUM THRESHOLDS — NOT the 100/100/100/100 target.
+      // STRICT 100% GATES — restored 2026-11-15.
       //
-      // The lean strict-zero target is 100% line + branch. It is currently
-      // unattainable because the vitest >= 4.1.11 security upgrade (required
-      // to clear Dependabot advisories GHSA for vitest/@vitest/mocker/tinypool;
-      // see PR "fix(deps): vitest 3 -> 4.1.12") switched coverage remapping to
-      // ast-v8-to-istanbun, which emits branch entries at NON-EXECUTABLE
-      // positions: TS interface members (src/archive/storage.ts:21-31), import
-      // bindings (src/auth/secrets.ts:2, src/cli.ts:1-15), regex-continuation
-      // and blank/L0 positions (src/mirror/build-mirror.ts:0,
-      // src/publish/publish.ts:57). ~55-60 such artifact entries cannot be
-      // covered by any runtime test; the repo's `/* v8 ignore next */`
-      // convention is NOT honored at those positions (verified empirically on
-      // src/pbinfo/parsers/category.ts); the istanbul provider is worse (117
-      // entries); vitest 4.1.12 exposes no remap toggle; vitest 5.x breaks 34
-      // tests. Real tests were added for every genuinely coverable gap first
-      // (window-bridge fallback, article-statement fallback, non-input
-      // literal comparisons), and these thresholds pin the EXACT measured
-      // maximum after those tests landed (owner decision 2026-11-04; not
-      // rounded down). Restore 100/100/100/100 the moment vitest ships fixed
-      // remapping — tracked in https://github.com/Prekzursil/pbinfo-scrape/issues/89.
+      // The interim measured-maximum pins (99.18/97.5/98.71/99.13, owner
+      // decision 2026-11-04, tracked in issue #89) existed because vitest
+      // 4.1.11+'s ast-v8-to-istanbul remapper emitted branch entries at
+      // non-executable positions. The vitest 5.1.0 upgrade (dev-dependency
+      // wave that also cleared the vitest/tinypool/@vitest/mocker Dependabot
+      // advisories) fixed the phantom-branch emission; tests were written for
+      // every remaining real gap, and one negative-counter artifact (a
+      // short-circuit || chain in assertAuthenticatedCrawlPreflight) was
+      // removed by restating the check with an includes() set membership.
       thresholds: {
-        lines: 99.18,
-        // branches: the developer machine measured 97.61 (3565/3652); the
-        // ENFORCING runner (windows-latest in quality.yml) measures 97.50
-        // (3561/3652) — four platform-dependent branches differ by
-        // environment. The threshold equals what the enforcing runner
-        // measures: a higher pin would be a permanently red gate, not a
-        // gate (owner rule: exact measured maximum, never lower).
-        branches: 97.5,
-        functions: 98.71,
-        statements: 99.13,
+        lines: 100,
+        branches: 100,
+        functions: 100,
+        statements: 100,
       },
     },
   },

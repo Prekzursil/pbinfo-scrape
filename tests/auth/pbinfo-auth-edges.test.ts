@@ -12,9 +12,9 @@ const servers: Server[] = [];
 
 afterEach(async () => {
   await Promise.all(
-    servers.splice(0).map(
-      (server) => new Promise<void>((resolve) => server.close(() => resolve())),
-    ),
+    servers
+      .splice(0)
+      .map((server) => new Promise<void>((resolve) => server.close(() => resolve()))),
   );
   for (const dir of tempDirs.splice(0)) {
     rmSync(dir, { recursive: true, force: true });
@@ -68,7 +68,9 @@ describe('extractLoginForm', () => {
   });
 
   test('throws when required fields are missing', () => {
-    expect(() => extractLoginForm('<form id="form-login"></form>')).toThrow(/missing required fields/);
+    expect(() => extractLoginForm('<form id="form-login"></form>')).toThrow(
+      /missing required fields/,
+    );
   });
 });
 
@@ -82,7 +84,8 @@ describe('loginWithCredentials helper branches', () => {
   test('resolves the handle from a profile link when session json lacks a username', async () => {
     const result = await login({
       ajaxBody: JSON.stringify({ stare: 'success' }),
-      verifyHtml: '<script>user_autentificat = {"id":5};</script><nav><a href="/profil/heralt">x</a></nav>',
+      verifyHtml:
+        '<script>user_autentificat = {"id":5};</script><nav><a href="/profil/heralt">x</a></nav>',
     });
     expect(result.success).toBe(true);
     expect(result.resolvedHandle).toBe('heralt');
@@ -118,6 +121,16 @@ describe('loginWithCredentials helper branches', () => {
     const result = await login({
       ajaxBody: JSON.stringify({ stare: 'success' }),
       verifyHtml: '<script>user_autentificat = {bad};</script><a href="/logout">Logout</a>',
+    });
+    expect(result.success).toBe(true);
+    expect(result.resolvedHandle).toBeUndefined();
+  });
+
+  test('skips a profile anchor whose text carries no parenthetical handle', async () => {
+    const result = await login({
+      ajaxBody: JSON.stringify({ stare: 'success' }),
+      verifyHtml:
+        '<script>user_autentificat = {"id":8};</script><nav><a href="/profil/">Plain Display Name</a></nav>',
     });
     expect(result.success).toBe(true);
     expect(result.resolvedHandle).toBeUndefined();

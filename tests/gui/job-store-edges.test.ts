@@ -4,11 +4,7 @@ import { tmpdir } from 'node:os';
 
 import { afterEach, describe, expect, test } from 'vitest';
 
-import {
-  createGuiJob,
-  listGuiJobs,
-  readGuiJobEvents,
-} from '../../src/gui/main/job-store.js';
+import { createGuiJob, listGuiJobs, readGuiJobEvents } from '../../src/gui/main/job-store.js';
 
 const tempDirs: string[] = [];
 

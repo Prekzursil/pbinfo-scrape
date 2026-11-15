@@ -411,4 +411,57 @@ describe('problem-coverage workflow edge branches', () => {
     expect(record?.userSourceArchived).toBe(true);
     expect(record?.solvedByMe).toBe(true);
   });
+
+  test('tolerates non-numeric ids and a harvest with available evaluations', async () => {
+    const workspace = tempWorkspace();
+    const snapshotId = 'SNAP3';
+    writeConfig(workspace, 'alice');
+    writeCatalog(workspace, snapshotId);
+    const norm = normalizedRoot(workspace, snapshotId);
+
+    // Problem with a harvested official-source list whose candidate evaluation
+    // IS available: the every(!sourceAvailable) clause stays false, so the
+    // status resolves through the source-list fallback to not-captured-yet.
+    writeJson(join(norm, 'problems', 'problem-21.json'), problem({
+      id: 21,
+      sourceListUrl: 'https://www.pbinfo.ro/solutii/problema/21/slug-21',
+      officialSourceHarvest: { sourceListHarvested: true, qualifyingEvaluationIds: [2101] },
+    }));
+    writeJson(join(norm, 'evaluations', 'evaluation-2101.json'), evaluation({
+      evaluationId: 2101,
+      problemId: 21,
+      sourceAvailable: true,
+    }));
+
+    // Ranking entry with a non-numeric problemId is skipped by the id map;
+    // the feed entry whose evaluation is unarchived and whose problemId is a
+    // string is skipped by the solved-set loop as well.
+    writeJson(join(norm, 'rankings', 'best-submissions.json'), {
+      problems: [
+        {
+          problemId: 'not-a-number',
+          bestUserOverallEvaluationId: 2101,
+          bestUserPerLanguage: { cpp: 2101 },
+          bestTrustworthyPerLanguage: {},
+          bestFastPerLanguage: {},
+          bestOfficialPerLanguage: {},
+          suspiciousCandidateEvaluationIds: [],
+          duplicateEvaluationIds: [],
+          orderedUserEvaluationIds: [2101],
+        },
+      ],
+    });
+    writeJson(join(norm, 'user-solutions', 'feed-alice.json'), {
+      user: 'alice',
+      entries: [{ user: 'alice', evaluationId: 3111, problemId: 'oops', score: 100 }],
+    });
+
+    const result = await buildProblemCoverageDataset(workspace, snapshotId);
+    expect(result.problemsCovered).toBe(1);
+    const record = readProblemCoverageRecord(norm, 21);
+    expect(record?.officialSourceStatus).toBe('not-captured-yet');
+    // The archived evaluation-2101 (alice, accepted) still marks the problem
+    // solved even though the malformed feed/ranking entries were skipped.
+    expect(record?.solvedByMe).toBe(true);
+  });
 });

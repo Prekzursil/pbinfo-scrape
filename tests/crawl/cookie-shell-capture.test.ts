@@ -78,7 +78,10 @@ function seedSweepRecord(): void {
 describe('persistNormalizedSnapshotHtml cookie-shell guard', () => {
   test('does not archive a challenge shell as a problem page', () => {
     seedSweepRecord();
-    persist({ key: `page:${CANONICAL_URL}`, url: CANONICAL_URL, kind: 'public-page' }, CHALLENGE_SHELL);
+    persist(
+      { key: `page:${CANONICAL_URL}`, url: CANONICAL_URL, kind: 'public-page' },
+      CHALLENGE_SHELL,
+    );
 
     expect(existsSync(join(snapshot.normalizedRoot, 'problems', 'problem-4242.json'))).toBe(false);
     expect(readIdSweepRecord(snapshot, 4242)).toMatchObject({
@@ -153,7 +156,10 @@ describe('persistNormalizedSnapshotHtml cookie-shell guard', () => {
   test('capture guards are inert for problems outside a sweep run', () => {
     // No id-sweep record seeded: the shell guard must still skip parsing
     // (no fabricated problem record) without creating sweep state.
-    persist({ key: `page:${CANONICAL_URL}`, url: CANONICAL_URL, kind: 'public-page' }, CHALLENGE_SHELL);
+    persist(
+      { key: `page:${CANONICAL_URL}`, url: CANONICAL_URL, kind: 'public-page' },
+      CHALLENGE_SHELL,
+    );
 
     expect(existsSync(join(snapshot.normalizedRoot, 'problems', 'problem-4242.json'))).toBe(false);
     expect(readIdSweepRecord(snapshot, 4242)).toBeUndefined();

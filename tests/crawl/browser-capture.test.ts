@@ -67,7 +67,16 @@ describe('createPlaywrightBrowserCapture', () => {
 
   test('seeds cookies from a session file across same-site and expiry variants', async () => {
     const path = cookieFile([
-      { key: 'a', value: '1', domain: 'x.com', expires: 123, sameSite: 'strict', httpOnly: true, secure: true, path: '/p' },
+      {
+        key: 'a',
+        value: '1',
+        domain: 'x.com',
+        expires: 123,
+        sameSite: 'strict',
+        httpOnly: true,
+        secure: true,
+        path: '/p',
+      },
       { key: 'b', value: '2', domain: '.y.com', expires: 'never', sameSite: 'none' },
       { key: 'c', value: '3', domain: 'z.com', sameSite: 'lax' },
       { key: 'd', value: '4', domain: 'w.com' },
@@ -77,7 +86,11 @@ describe('createPlaywrightBrowserCapture', () => {
     ]);
     await createPlaywrightBrowserCapture(path);
     expect(mocks.addCookies).toHaveBeenCalledTimes(1);
-    const seeded = (mocks.addCookies.mock.calls[0] as unknown[] | undefined)?.[0] as Array<{ name: string; sameSite: string; expires?: number }>;
+    const seeded = (mocks.addCookies.mock.calls[0] as unknown[] | undefined)?.[0] as Array<{
+      name: string;
+      sameSite: string;
+      expires?: number;
+    }>;
     expect(seeded.map((c) => c.name)).toEqual(['a', 'b', 'c', 'd']);
     expect(seeded[0]?.sameSite).toBe('Strict');
     expect(seeded[1]?.sameSite).toBe('None');

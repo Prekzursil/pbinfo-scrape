@@ -21,11 +21,20 @@ import {
 } from '../../src/mirror/build-mirror.js';
 import { makeCoverageIndex, makeCoverageRecord } from '../_fixtures/coverage.js';
 
-function setupSnapshot(): { workspaceRoot: string; rawPagesRoot: string; pagesRoot: string; routesRoot: string } {
+function setupSnapshot(): {
+  workspaceRoot: string;
+  rawPagesRoot: string;
+  pagesRoot: string;
+  routesRoot: string;
+} {
   const workspaceRoot = mkdtempSync(join(tmpdir(), 'pbinfo-build-mirror-'));
   tempDirs.push(workspaceRoot);
   const config = loadLocalConfig(workspaceRoot);
-  const snapshot = prepareSnapshot(config, { snapshotId: 'SNAP', scope: 'public', now: new Date() });
+  const snapshot = prepareSnapshot(config, {
+    snapshotId: 'SNAP',
+    scope: 'public',
+    now: new Date(),
+  });
   const pagesRoot = join(snapshot.normalizedRoot, 'pages');
   const routesRoot = join(snapshot.normalizedRoot, 'routes');
   mkdirSync(pagesRoot, { recursive: true });
@@ -105,10 +114,28 @@ describe('build-mirror manifest readers', () => {
     tempDirs.push(root);
     const pagesRoot = join(root, 'pages');
     mkdirSync(pagesRoot, { recursive: true });
-    writeFileSync(join(pagesRoot, 'a.json'), JSON.stringify({ url: 'https://x/a', bodyPath: 'raw-pages/a.html' }), 'utf8');
-    writeFileSync(join(pagesRoot, 'b.json'), JSON.stringify({ url: 'https://x/b.css', bodyPath: 'raw-assets/b.css' }), 'utf8');
+    writeFileSync(
+      join(pagesRoot, 'a.json'),
+      JSON.stringify({ url: 'https://x/a', bodyPath: 'raw-pages/a.html' }),
+      'utf8',
+    );
+    writeFileSync(
+      join(pagesRoot, 'b.json'),
+      JSON.stringify({ url: 'https://x/b.css', bodyPath: 'raw-assets/b.css' }),
+      'utf8',
+    );
     writeFileSync(join(pagesRoot, 'c.json'), JSON.stringify({ url: 'https://x/c' }), 'utf8');
-    writeFileSync(join(pagesRoot, 'd.json'), JSON.stringify({ bodyPath: 'raw-pages/d.html' }), 'utf8');
+    writeFileSync(
+      join(pagesRoot, 'd.json'),
+      JSON.stringify({ bodyPath: 'raw-pages/d.html' }),
+      'utf8',
+    );
+    // Neither a raw-pages nor a raw-assets body: classified into no manifest.
+    writeFileSync(
+      join(pagesRoot, 'e.json'),
+      JSON.stringify({ url: 'https://x/e', bodyPath: 'attachments/e.zip' }),
+      'utf8',
+    );
 
     const manifests = rebuildRawManifests(root);
     expect(manifests.pageManifest).toEqual({ 'https://x/a': 'a.html' });
@@ -162,7 +189,13 @@ describe('rewriteMirrorHtml', () => {
       notes: ['a note'],
     });
 
-    const out = rewriteMirrorHtml(html, 'https://www.pbinfo.ro/page', pageManifest, assetManifest, record);
+    const out = rewriteMirrorHtml(
+      html,
+      'https://www.pbinfo.ro/page',
+      pageManifest,
+      assetManifest,
+      record,
+    );
     expect(out).toContain('/_assets/site.css');
     expect(out).toContain('/_assets/app.js');
     expect(out).not.toContain('evil.com');
@@ -180,6 +213,21 @@ describe('rewriteMirrorHtml', () => {
     expect(out.match(/archive-coverage-strip/g)).toHaveLength(1);
   });
 
+  test('keeps same-origin unlisted assets and skips re-appending the strip style', () => {
+    const html = `<html><head>
+      <style data-archive-coverage-style>.archive-coverage-strip{}</style>
+      <link rel="stylesheet" href="https://www.pbinfo.ro/unlisted.css">
+    </head><body></body></html>`;
+    const record = makeCoverageRecord({ problemId: 9 });
+    const out = rewriteMirrorHtml(html, 'https://www.pbinfo.ro/p', {}, {}, record);
+    // The same-origin stylesheet is not in the asset manifest but shares the
+    // page origin, so it survives instead of being stripped.
+    expect(out).toContain('https://www.pbinfo.ro/unlisted.css');
+    // The strip style tag was already present, so exactly one remains.
+    expect(out.match(/data-archive-coverage-style/g)).toHaveLength(1);
+    expect(out).toContain('archive-coverage-strip');
+  });
+
   test('injects a strip for a blocked official source with archived user sources', () => {
     const record = makeCoverageRecord({
       problemId: 2,
@@ -189,7 +237,13 @@ describe('rewriteMirrorHtml', () => {
       newSinceBaseline: false,
       notes: [],
     });
-    const out = rewriteMirrorHtml('<html><body></body></html>', 'https://www.pbinfo.ro/p', {}, {}, record);
+    const out = rewriteMirrorHtml(
+      '<html><body></body></html>',
+      'https://www.pbinfo.ro/p',
+      {},
+      {},
+      record,
+    );
     expect(out).toContain('Official source blocked: editorial-hidden');
     expect(out).toContain('User sources archived');
   });
@@ -201,7 +255,13 @@ describe('rewriteMirrorHtml', () => {
       userSourceArchived: false,
       notes: ['needs work'],
     });
-    const out = rewriteMirrorHtml('<html><body></body></html>', 'https://www.pbinfo.ro/p', {}, {}, record);
+    const out = rewriteMirrorHtml(
+      '<html><body></body></html>',
+      'https://www.pbinfo.ro/p',
+      {},
+      {},
+      record,
+    );
     expect(out).toContain('Official source not archived');
     expect(out).toContain('User source not archived');
     expect(out).toContain('needs work');
@@ -248,6 +308,10 @@ describe('renderCoverageIndex', () => {
         delete (record as { notes?: string[] }).notes;
         return record;
       })(),
+      // Two further distinct grades (added after grade 9 above) exercise the
+      // numeric ordering of the grade filter list.
+      makeCoverageRecord({ problemId: 4, name: 'Delta', grade: 11 }),
+      makeCoverageRecord({ problemId: 5, name: 'Epsilon', grade: 10 }),
     ]);
     const html = renderCoverageIndex('SNAP', index);
     expect(html).toContain('#1 Alpha');
@@ -256,6 +320,15 @@ describe('renderCoverageIndex', () => {
     expect(html).toContain('Official source not archived');
     expect(html).toContain('best eval');
     expect(html).toContain('<option value="9">9</option>');
+    expect(html).toContain('<option value="10">10</option>');
+    expect(html).toContain('<option value="11">11</option>');
+    // Grade options render in ascending numeric order.
+    const nine = html.indexOf('<option value="9"');
+    const ten = html.indexOf('<option value="10"');
+    const eleven = html.indexOf('<option value="11"');
+    expect(nine).toBeGreaterThan(-1);
+    expect(ten).toBeGreaterThan(nine);
+    expect(eleven).toBeGreaterThan(ten);
   });
 });
 
@@ -264,15 +337,40 @@ describe('buildMirrorArtifacts route resolution', () => {
     const { workspaceRoot, rawPagesRoot, pagesRoot, routesRoot } = setupSnapshot();
     writeFileSync(join(rawPagesRoot, 'a.html'), '<html><body>a</body></html>', 'utf8');
     writeFileSync(join(rawPagesRoot, 'b.html'), '<html><body>b</body></html>', 'utf8');
-    writeJson(join(pagesRoot, 'a.json'), { url: 'https://www.pbinfo.ro/a', bodyPath: 'raw-pages/a.html' });
-    writeJson(join(pagesRoot, 'b.json'), { url: 'https://www.pbinfo.ro/b', bodyPath: 'raw-pages/b.html' });
+    writeJson(join(pagesRoot, 'a.json'), {
+      url: 'https://www.pbinfo.ro/a',
+      bodyPath: 'raw-pages/a.html',
+    });
+    writeJson(join(pagesRoot, 'b.json'), {
+      url: 'https://www.pbinfo.ro/b',
+      bodyPath: 'raw-pages/b.html',
+    });
     // e.html exists on disk but is not in the page manifest, so its source url
     // cannot be reverse-resolved and the rewriter falls back to a synthetic url.
     writeFileSync(join(rawPagesRoot, 'e.html'), '<html><body>e</body></html>', 'utf8');
-    writeJson(join(routesRoot, 'r-a.json'), { route: '/a', sourceUrl: 'https://www.pbinfo.ro/a', template: 'raw-page', entityKey: '/a' });
-    writeJson(join(routesRoot, 'r-b.json'), { route: '/b', sourceFile: 'b.html', template: 'raw-page', entityKey: '/b' });
-    writeJson(join(routesRoot, 'r-e.json'), { route: '/e', sourceFile: 'e.html', template: 'raw-page', entityKey: '/e' });
-    writeJson(join(routesRoot, 'r-empty.json'), { route: '/c', template: 'raw-page', entityKey: '/c' });
+    writeJson(join(routesRoot, 'r-a.json'), {
+      route: '/a',
+      sourceUrl: 'https://www.pbinfo.ro/a',
+      template: 'raw-page',
+      entityKey: '/a',
+    });
+    writeJson(join(routesRoot, 'r-b.json'), {
+      route: '/b',
+      sourceFile: 'b.html',
+      template: 'raw-page',
+      entityKey: '/b',
+    });
+    writeJson(join(routesRoot, 'r-e.json'), {
+      route: '/e',
+      sourceFile: 'e.html',
+      template: 'raw-page',
+      entityKey: '/e',
+    });
+    writeJson(join(routesRoot, 'r-empty.json'), {
+      route: '/c',
+      template: 'raw-page',
+      entityKey: '/c',
+    });
 
     const result = await buildMirrorArtifacts(workspaceRoot);
     expect(result.routesBuilt).toBe(4); // /a, /b, /e, coverage index
@@ -280,13 +378,23 @@ describe('buildMirrorArtifacts route resolution', () => {
 
   test('throws when a route record cannot resolve a source file', async () => {
     const { workspaceRoot, routesRoot } = setupSnapshot();
-    writeJson(join(routesRoot, 'r.json'), { route: '/x', sourceUrl: 'https://www.pbinfo.ro/missing', template: 'raw-page', entityKey: '/x' });
+    writeJson(join(routesRoot, 'r.json'), {
+      route: '/x',
+      sourceUrl: 'https://www.pbinfo.ro/missing',
+      template: 'raw-page',
+      entityKey: '/x',
+    });
     await expect(buildMirrorArtifacts(workspaceRoot)).rejects.toThrow(/missing a source file/);
   });
 
   test('throws when a route references a raw page that is absent on disk', async () => {
     const { workspaceRoot, routesRoot } = setupSnapshot();
-    writeJson(join(routesRoot, 'r.json'), { route: '/d', sourceFile: 'gone.html', template: 'raw-page', entityKey: '/d' });
+    writeJson(join(routesRoot, 'r.json'), {
+      route: '/d',
+      sourceFile: 'gone.html',
+      template: 'raw-page',
+      entityKey: '/d',
+    });
     await expect(buildMirrorArtifacts(workspaceRoot)).rejects.toThrow(/missing raw page/);
   });
 
@@ -300,7 +408,10 @@ describe('buildMirrorArtifacts route resolution', () => {
     ];
     for (const [index, entry] of entries.entries()) {
       writeFileSync(join(rawPagesRoot, entry.file), '<html><body>x</body></html>', 'utf8');
-      writeJson(join(pagesRoot, `p${index}.json`), { url: entry.url, bodyPath: `raw-pages/${entry.file}` });
+      writeJson(join(pagesRoot, `p${index}.json`), {
+        url: entry.url,
+        bodyPath: `raw-pages/${entry.file}`,
+      });
     }
     const result = await buildMirrorArtifacts(workspaceRoot);
     expect(result.routesBuilt).toBe(entries.length + 1);

@@ -92,17 +92,20 @@ export async function runProblemIdSweepWorkflow(
           { redirect: 'manual' },
           requestTimeoutMs,
         );
-        return parseProblemIdProbeResponse(
-          problemId,
-          response.status,
-          response.headers.get('location'),
-        ).probe === 'live';
+        return (
+          parseProblemIdProbeResponse(problemId, response.status, response.headers.get('location'))
+            .probe === 'live'
+        );
       };
 
-      const ceiling = maxId ?? (await detectProblemIdCeiling(liveProbe, {
-        startId: minId,
-        deadStreakThreshold,
-      })).ceiling;
+      const ceiling =
+        maxId ??
+        (
+          await detectProblemIdCeiling(liveProbe, {
+            startId: minId,
+            deadStreakThreshold,
+          })
+        ).ceiling;
       sweepStats.ceiling = ceiling;
 
       if (ceiling < minId) {
@@ -174,7 +177,12 @@ export async function runProblemIdSweepWorkflow(
     finalRecords.push(readIdSweepRecord(snapshot, problemId)!);
   }
 
-  const index = buildIdSweepIndex(result.snapshotId, finalRecords, sweepStats.ceiling, now.toISOString());
+  const index = buildIdSweepIndex(
+    result.snapshotId,
+    finalRecords,
+    sweepStats.ceiling,
+    now.toISOString(),
+  );
   writeIdSweepIndex(snapshot, index);
   sweepStats.liveCount = index.totals.liveCount;
   sweepStats.deadCount = index.totals.deadCount;

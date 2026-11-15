@@ -179,12 +179,7 @@ export interface MirrorRouteRecord {
   sourceUrl?: string;
   sourceFile?: string;
   rewrittenFile?: string;
-  template:
-    | 'problem'
-    | 'evaluation'
-    | 'user-profile'
-    | 'raw-page'
-    | 'coverage-index';
+  template: 'problem' | 'evaluation' | 'user-profile' | 'raw-page' | 'coverage-index';
   entityKey: string;
 }
 
@@ -229,10 +224,7 @@ export interface ProblemTestsRecord {
   effective: ProblemTestCaseRecord[];
 }
 
-export type ProblemTestsCoverageStatus =
-  | 'captured'
-  | 'not-available-upstream'
-  | 'not-captured-yet';
+export type ProblemTestsCoverageStatus = 'captured' | 'not-available-upstream' | 'not-captured-yet';
 
 export type ProblemOfficialSourceStatus =
   | 'archived'

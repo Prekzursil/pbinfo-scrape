@@ -46,7 +46,17 @@ describe('buildCli action wiring', () => {
     await run(h, [...WS, 'auth', 'import-cookies', '--source', 'cookies.json']);
     expect(h.authImportCookies).toHaveBeenCalledWith('/ws', 'cookies.json');
 
-    await run(h, [...WS, 'auth', 'import-browser', '--browser', 'edge', '--profile', 'Work', '--user-data-dir', 'D:/u']);
+    await run(h, [
+      ...WS,
+      'auth',
+      'import-browser',
+      '--browser',
+      'edge',
+      '--profile',
+      'Work',
+      '--user-data-dir',
+      'D:/u',
+    ]);
     expect(h.authImportBrowser).toHaveBeenCalledWith('/ws', 'edge', 'Work', 'D:/u');
 
     await run(h, [...WS, 'auth', 'bundle', '--recipient', 'age1xyz']);
@@ -62,7 +72,13 @@ describe('buildCli action wiring', () => {
     expect(h.crawl).toHaveBeenCalledWith('/ws', 'public', 's1', true, 'fresh');
 
     await run(h, ['crawl', 'user']);
-    expect(h.crawl).toHaveBeenLastCalledWith(process.cwd(), 'user', undefined, undefined, 'incremental');
+    expect(h.crawl).toHaveBeenLastCalledWith(
+      process.cwd(),
+      'user',
+      undefined,
+      undefined,
+      'incremental',
+    );
 
     await run(h, [...WS, 'crawl', 'all', '--mode', 'incremental']);
     expect(h.crawl).toHaveBeenLastCalledWith('/ws', 'all', undefined, undefined, 'incremental');
@@ -70,11 +86,31 @@ describe('buildCli action wiring', () => {
     await run(h, [...WS, 'crawl', 'official-sources', '--snapshot', 's2']);
     expect(h.crawlOfficialSources).toHaveBeenCalledWith('/ws', 's2');
 
-    await run(h, [...WS, 'crawl', 'sweep', '--min-id', '10', '--max-id', '20', '--snapshot', 's2b', '--acceptance', '--mode', 'fresh']);
+    await run(h, [
+      ...WS,
+      'crawl',
+      'sweep',
+      '--min-id',
+      '10',
+      '--max-id',
+      '20',
+      '--snapshot',
+      's2b',
+      '--acceptance',
+      '--mode',
+      'fresh',
+    ]);
     expect(h.crawlSweep).toHaveBeenCalledWith('/ws', 10, 20, 's2b', true, 'fresh');
 
     await run(h, [...WS, 'crawl', 'sweep']);
-    expect(h.crawlSweep).toHaveBeenLastCalledWith('/ws', undefined, undefined, undefined, undefined, 'incremental');
+    expect(h.crawlSweep).toHaveBeenLastCalledWith(
+      '/ws',
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      'incremental',
+    );
 
     await run(h, [...WS, 'crawl', 'status']);
     expect(h.crawlStatus).toHaveBeenCalledWith('/ws', undefined);
@@ -118,7 +154,16 @@ describe('buildCli action wiring', () => {
     await run(h, [...WS, 'resume', '--snapshot', 's']);
     expect(h.resume).toHaveBeenCalledWith('/ws', 's');
 
-    await run(h, [...WS, 'publish', '--snapshot', 's', '--release', '--tag', 'v1.0.0', '--upload-desktop-exe']);
+    await run(h, [
+      ...WS,
+      'publish',
+      '--snapshot',
+      's',
+      '--release',
+      '--tag',
+      'v1.0.0',
+      '--upload-desktop-exe',
+    ]);
     expect(h.publish).toHaveBeenCalledWith('/ws', 's', true, 'v1.0.0', true);
   });
 });

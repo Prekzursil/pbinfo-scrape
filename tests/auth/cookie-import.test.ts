@@ -1,7 +1,7 @@
 import { randomBytes, createCipheriv } from 'node:crypto';
 import { mkdtempSync, mkdirSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import { DatabaseSync } from 'node:sqlite';
 
 import { describe, expect, test, vi } from 'vitest';
@@ -72,20 +72,25 @@ describe('normalizeImportedCookies', () => {
     ]);
   });
 
+  // Platform-honest: the resolver maps %LOCALAPPDATA% through node:path
+  // resolve/join, so the expectations are derived with the same operations —
+  // on Windows that yields the Edge/Chrome layout under the env root, and on
+  // POSIX the same segments under node:path's own semantics. The test runs
+  // (and stays measured) on every platform the suite runs on.
   test('resolves the default Chromium profile paths for Edge and Chrome', () => {
-    const env = {
-      LOCALAPPDATA: 'C:\\Users\\Test\\AppData\\Local',
-    } as NodeJS.ProcessEnv;
+    const localAppData = 'C:\\Users\\Test\\AppData\\Local';
+    const env = { LOCALAPPDATA: localAppData } as NodeJS.ProcessEnv;
 
+    const edgeUserDataDir = resolve(join(localAppData, 'Microsoft', 'Edge', 'User Data'));
     expect(resolveChromiumProfile({ browser: 'edge' }, env)).toEqual({
       browser: 'edge',
       profileName: 'Default',
-      userDataDir: 'C:\\Users\\Test\\AppData\\Local\\Microsoft\\Edge\\User Data',
-      localStatePath: 'C:\\Users\\Test\\AppData\\Local\\Microsoft\\Edge\\User Data\\Local State',
-      cookiesDbPath:
-        'C:\\Users\\Test\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\Network\\Cookies',
+      userDataDir: edgeUserDataDir,
+      localStatePath: join(edgeUserDataDir, 'Local State'),
+      cookiesDbPath: join(edgeUserDataDir, 'Default', 'Network', 'Cookies'),
     });
 
+    const chromeUserDataDir = resolve(join(localAppData, 'Google', 'Chrome', 'User Data'));
     expect(
       resolveChromiumProfile(
         {
@@ -97,10 +102,9 @@ describe('normalizeImportedCookies', () => {
     ).toEqual({
       browser: 'chrome',
       profileName: 'Profile 2',
-      userDataDir: 'C:\\Users\\Test\\AppData\\Local\\Google\\Chrome\\User Data',
-      localStatePath: 'C:\\Users\\Test\\AppData\\Local\\Google\\Chrome\\User Data\\Local State',
-      cookiesDbPath:
-        'C:\\Users\\Test\\AppData\\Local\\Google\\Chrome\\User Data\\Profile 2\\Network\\Cookies',
+      userDataDir: chromeUserDataDir,
+      localStatePath: join(chromeUserDataDir, 'Local State'),
+      cookiesDbPath: join(chromeUserDataDir, 'Profile 2', 'Network', 'Cookies'),
     });
   });
 
@@ -159,8 +163,9 @@ describe('normalizeImportedCookies', () => {
         samesite INTEGER NOT NULL
       )
     `);
-    database.prepare(
-      `INSERT INTO cookies (
+    database
+      .prepare(
+        `INSERT INTO cookies (
         host_key,
         name,
         value,
@@ -171,19 +176,21 @@ describe('normalizeImportedCookies', () => {
         is_secure,
         samesite
       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-    ).run(
-      '.pbinfo.ro',
-      'PHPSESSID',
-      '',
-      encryptChromiumCookieValue(masterKey, 'secret-session'),
-      '/',
-      toChromiumEpochSeconds(1_893_456_000),
-      1,
-      1,
-      0,
-    );
-    database.prepare(
-      `INSERT INTO cookies (
+      )
+      .run(
+        '.pbinfo.ro',
+        'PHPSESSID',
+        '',
+        encryptChromiumCookieValue(masterKey, 'secret-session'),
+        '/',
+        toChromiumEpochSeconds(1_893_456_000),
+        1,
+        1,
+        0,
+      );
+    database
+      .prepare(
+        `INSERT INTO cookies (
         host_key,
         name,
         value,
@@ -194,17 +201,18 @@ describe('normalizeImportedCookies', () => {
         is_secure,
         samesite
       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-    ).run(
-      '.example.com',
-      'OTHER',
-      '',
-      encryptChromiumCookieValue(masterKey, 'ignore-me'),
-      '/',
-      0,
-      0,
-      0,
-      0,
-    );
+      )
+      .run(
+        '.example.com',
+        'OTHER',
+        '',
+        encryptChromiumCookieValue(masterKey, 'ignore-me'),
+        '/',
+        0,
+        0,
+        0,
+        0,
+      );
     database.close();
 
     const cookies = await importBrowserCookies({
@@ -291,8 +299,9 @@ describe('normalizeImportedCookies', () => {
         samesite INTEGER NOT NULL
       )
     `);
-    database.prepare(
-      `INSERT INTO cookies (
+    database
+      .prepare(
+        `INSERT INTO cookies (
         host_key,
         name,
         value,
@@ -303,17 +312,18 @@ describe('normalizeImportedCookies', () => {
         is_secure,
         samesite
       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-    ).run(
-      '.pbinfo.ro',
-      'FCCDCF',
-      '',
-      encryptChromiumCookieValue(Buffer.alloc(32, 7), 'cmp-consent-token'),
-      '/',
-      0,
-      1,
-      1,
-      0,
-    );
+      )
+      .run(
+        '.pbinfo.ro',
+        'FCCDCF',
+        '',
+        encryptChromiumCookieValue(Buffer.alloc(32, 7), 'cmp-consent-token'),
+        '/',
+        0,
+        1,
+        1,
+        0,
+      );
     database.close();
 
     await expect(

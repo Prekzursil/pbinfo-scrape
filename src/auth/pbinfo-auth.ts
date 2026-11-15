@@ -78,9 +78,7 @@ export class PbinfoAuthClient {
     this.cookieFetch = makeFetchCookie(fetch, this.jar);
   }
 
-  async loginWithCredentials(
-    input: CredentialLoginInput,
-  ): Promise<CredentialLoginResult> {
+  async loginWithCredentials(input: CredentialLoginInput): Promise<CredentialLoginResult> {
     const loginPage = await this.cookieFetch(this.baseUrl, {
       redirect: 'follow',
     });
@@ -106,15 +104,18 @@ export class PbinfoAuthClient {
     });
     const loginPayload = parseAjaxLoginResponse(await loginResponse.text());
     const loginAccepted = loginPayload.stare === 'success';
-    const redirectUrl = new URL(loginPayload.redirect ?? loginPayload.url ?? '/', this.baseUrl).toString();
+    const redirectUrl = new URL(
+      loginPayload.redirect ?? loginPayload.url ?? '/',
+      this.baseUrl,
+    ).toString();
 
     if (!loginAccepted) {
       return {
         success: false,
         redirectUrl,
         failureReason:
-          loginPayload.raspuns
-          ?? `PBInfo credential login failed with ajax state "${loginPayload.stare ?? 'unknown'}".`,
+          loginPayload.raspuns ??
+          `PBInfo credential login failed with ajax state "${loginPayload.stare ?? 'unknown'}".`,
         sessionCookies: await this.serializeCookies(),
       };
     }

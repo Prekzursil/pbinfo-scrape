@@ -31,7 +31,13 @@ function buildWorkspace(routes: unknown): string {
     currentSnapshotId: snapshotId,
     canonicalSnapshotId: snapshotId,
     snapshots: [
-      { snapshotId, createdAt: '2026-01-01T00:00:00Z', scope: 'all', status: 'completed', checkpoint: 'canonical' },
+      {
+        snapshotId,
+        createdAt: '2026-01-01T00:00:00Z',
+        scope: 'all',
+        status: 'completed',
+        checkpoint: 'canonical',
+      },
     ],
     artifactExports: [],
   });
@@ -43,7 +49,9 @@ function buildWorkspace(routes: unknown): string {
 describe('startMirrorServer', () => {
   test('throws when no mirror routes are built', async () => {
     const root = buildWorkspace([]);
-    await expect(startMirrorServer({ workspaceRoot: root, port: 0 })).rejects.toThrow(/requires a built mirror/);
+    await expect(startMirrorServer({ workspaceRoot: root, port: 0 })).rejects.toThrow(
+      /requires a built mirror/,
+    );
   });
 
   test('throws when the routes manifest file does not exist', async () => {
@@ -53,11 +61,19 @@ describe('startMirrorServer', () => {
       currentSnapshotId: 'S1',
       canonicalSnapshotId: 'S1',
       snapshots: [
-        { snapshotId: 'S1', createdAt: '2026-01-01T00:00:00Z', scope: 'all', status: 'completed', checkpoint: 'canonical' },
+        {
+          snapshotId: 'S1',
+          createdAt: '2026-01-01T00:00:00Z',
+          scope: 'all',
+          status: 'completed',
+          checkpoint: 'canonical',
+        },
       ],
       artifactExports: [],
     });
-    await expect(startMirrorServer({ workspaceRoot: root, port: 0 })).rejects.toThrow(/requires a built mirror/);
+    await expect(startMirrorServer({ workspaceRoot: root, port: 0 })).rejects.toThrow(
+      /requires a built mirror/,
+    );
   });
 
   test('serves mirror, raw, asset, 404 and 500 routes and closes', async () => {

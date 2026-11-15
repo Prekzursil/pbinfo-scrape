@@ -9,7 +9,14 @@ const authClientMock = vi.hoisted(() => ({
     success: true,
     redirectUrl: 'https://www.pbinfo.ro/profil/Prekzursil',
     sessionCookies: [
-      { key: 'PHPSESSID', value: 'cookie-value', domain: 'www.pbinfo.ro', path: '/', secure: true, httpOnly: true },
+      {
+        key: 'PHPSESSID',
+        value: 'cookie-value',
+        domain: 'www.pbinfo.ro',
+        path: '/',
+        secure: true,
+        httpOnly: true,
+      },
     ],
   })),
 }));
@@ -43,20 +50,37 @@ describe('desktop controller edge cases', () => {
   test('runs normalize, rank, and mirror-build jobs through injected workflows', async () => {
     const workspaceRoot = makeWorkspace();
     const controller = createDesktopController(workspaceRoot, {
-      runNormalizeSnapshotWorkflow: vi.fn(async () => ({ pagesNormalized: 3, snapshotId: 's' })) as never,
-      runRankingWorkflow: vi.fn(async () => ({ problemsRanked: 2, outputPath: '/out.json' })) as never,
-      buildMirrorArtifacts: vi.fn(async () => ({ routesBuilt: 5, snapshotId: 's', outputRoot: '/mirror' })) as never,
+      runNormalizeSnapshotWorkflow: vi.fn(async () => ({
+        pagesNormalized: 3,
+        snapshotId: 's',
+      })) as never,
+      runRankingWorkflow: vi.fn(async () => ({
+        problemsRanked: 2,
+        outputPath: '/out.json',
+      })) as never,
+      buildMirrorArtifacts: vi.fn(async () => ({
+        routesBuilt: 5,
+        snapshotId: 's',
+        outputRoot: '/mirror',
+      })) as never,
     });
 
-    expect((await controller.startJob({ kind: 'normalize', snapshotId: 's' })).status).toBe('completed');
+    expect((await controller.startJob({ kind: 'normalize', snapshotId: 's' })).status).toBe(
+      'completed',
+    );
     expect((await controller.startJob({ kind: 'rank', snapshotId: 's' })).status).toBe('completed');
-    expect((await controller.startJob({ kind: 'mirror-build', snapshotId: 's' })).status).toBe('completed');
+    expect((await controller.startJob({ kind: 'mirror-build', snapshotId: 's' })).status).toBe(
+      'completed',
+    );
   });
 
   test('exposes getJob and recoverInterruptedJobs', async () => {
     const workspaceRoot = makeWorkspace();
     const controller = createDesktopController(workspaceRoot, {
-      runNormalizeSnapshotWorkflow: vi.fn(async () => ({ pagesNormalized: 1, snapshotId: 's' })) as never,
+      runNormalizeSnapshotWorkflow: vi.fn(async () => ({
+        pagesNormalized: 1,
+        snapshotId: 's',
+      })) as never,
     });
     const job = await controller.startJob({ kind: 'normalize', snapshotId: 's' });
     expect(controller.getJob(job.jobId).jobId).toBe(job.jobId);
@@ -66,9 +90,14 @@ describe('desktop controller edge cases', () => {
   test('rejects finalize without a snapshot and refuses to resume non-crawl jobs', async () => {
     const workspaceRoot = makeWorkspace();
     const controller = createDesktopController(workspaceRoot, {
-      runNormalizeSnapshotWorkflow: vi.fn(async () => ({ pagesNormalized: 1, snapshotId: 's' })) as never,
+      runNormalizeSnapshotWorkflow: vi.fn(async () => ({
+        pagesNormalized: 1,
+        snapshotId: 's',
+      })) as never,
     });
-    await expect(controller.startJob({ kind: 'snapshot-finalize' })).rejects.toThrow(/require a snapshotId/);
+    await expect(controller.startJob({ kind: 'snapshot-finalize' })).rejects.toThrow(
+      /require a snapshotId/,
+    );
     const normalizeJob = await controller.startJob({ kind: 'normalize', snapshotId: 's' });
     await expect(controller.resumeJob(normalizeJob.jobId)).rejects.toThrow(/not resumable/);
   });
@@ -95,8 +124,14 @@ describe('desktop controller edge cases', () => {
     const notifications: Array<{ title: string }> = [];
     const controller = createDesktopController(workspaceRoot, {
       createAuthClient: () =>
-        ({ loginWithCredentials: async () => ({ success: false, failureReason: 'bad password' }) }) as never,
-      notificationService: { notify: async (m) => { notifications.push(m); } },
+        ({
+          loginWithCredentials: async () => ({ success: false, failureReason: 'bad password' }),
+        }) as never,
+      notificationService: {
+        notify: async (m) => {
+          notifications.push(m);
+        },
+      },
     });
     await expect(
       controller.loginProfile({ profileId: 'a', label: 'A', username: 'u', password: 'p' }),
@@ -111,7 +146,11 @@ describe('desktop controller edge cases', () => {
       importBrowserCookies: (async () => {
         throw new Error('no browser profile');
       }) as never,
-      notificationService: { notify: async (m) => { notifications.push(m); } },
+      notificationService: {
+        notify: async (m) => {
+          notifications.push(m);
+        },
+      },
     });
     await expect(
       controller.importBrowserProfile({ profileId: 'b', label: 'B', browser: 'edge' }),
@@ -153,7 +192,11 @@ describe('desktop controller edge cases', () => {
     const workspaceRoot = makeWorkspace();
     const controller = createDesktopController(workspaceRoot, {
       createAuthClient: () =>
-        ({ loginWithCredentials: async () => { throw 'string boom'; } }) as never,
+        ({
+          loginWithCredentials: async () => {
+            throw 'string boom';
+          },
+        }) as never,
       notificationService: { notify: async () => undefined },
     });
     await expect(
@@ -165,18 +208,33 @@ describe('desktop controller edge cases', () => {
     const workspaceRoot = makeWorkspace();
     const controller = createDesktopController(workspaceRoot, {
       importBrowserCookies: (async () => [
-        { name: 'PHPSESSID', value: 'c', domain: 'www.pbinfo.ro', path: '/', secure: true, httpOnly: true, sameSite: 'lax' },
+        {
+          name: 'PHPSESSID',
+          value: 'c',
+          domain: 'www.pbinfo.ro',
+          path: '/',
+          secure: true,
+          httpOnly: true,
+          sameSite: 'lax',
+        },
       ]) as never,
       notificationService: { notify: async () => undefined },
     });
-    const result = await controller.importBrowserProfile({ profileId: 'b', label: 'B', browser: 'edge' });
+    const result = await controller.importBrowserProfile({
+      profileId: 'b',
+      label: 'B',
+      browser: 'edge',
+    });
     expect(result.job.status).toBe('completed');
   });
 
   test('starts a mirror preview without a port and surfaces a non-Error server failure', async () => {
     const workspaceRoot = makeWorkspace();
     const ok = createDesktopController(workspaceRoot, {
-      startMirrorServer: (async () => ({ baseUrl: 'http://127.0.0.1:9999', close: async () => undefined })) as never,
+      startMirrorServer: (async () => ({
+        baseUrl: 'http://127.0.0.1:9999',
+        close: async () => undefined,
+      })) as never,
       notificationService: { notify: async () => undefined },
     });
     const preview = await ok.startMirrorPreview('s');
@@ -184,7 +242,9 @@ describe('desktop controller edge cases', () => {
     await ok.stopMirrorPreview(preview.job.jobId);
 
     const broken = createDesktopController(workspaceRoot, {
-      startMirrorServer: (async () => { throw 'server string failure'; }) as never,
+      startMirrorServer: (async () => {
+        throw 'server string failure';
+      }) as never,
       notificationService: { notify: async () => undefined },
     });
     await expect(broken.startMirrorPreview('s')).rejects.toBe('server string failure');
@@ -205,7 +265,11 @@ describe('desktop controller edge cases', () => {
         publishEligible: true,
         recentFailures: [{ key: 'k', url: 'https://x/', attemptCount: 2, lastError: 'boom' }],
       })) as never,
-      notificationService: { notify: async (m) => { events.push(m); } },
+      notificationService: {
+        notify: async (m) => {
+          events.push(m);
+        },
+      },
     });
     const job = await controller.startJob({ kind: 'crawl', snapshotId: 's' });
     expect(job.status).toBe('completed');
@@ -221,12 +285,14 @@ describe('desktop controller edge cases', () => {
       runProblemCoverageWorkflow,
       getCoverageExplorerSummary: (() => {
         seen.summary += 1;
-        if (seen.summary === 1) throw new Error('Problem coverage has not been generated for this snapshot.');
+        if (seen.summary === 1)
+          throw new Error('Problem coverage has not been generated for this snapshot.');
         return { snapshotId: 's', totalProblems: 0 };
       }) as never,
       listCoverageExplorerRecords: (() => {
         seen.list += 1;
-        if (seen.list === 1) throw new Error('Problem coverage has not been generated for this snapshot.');
+        if (seen.list === 1)
+          throw new Error('Problem coverage has not been generated for this snapshot.');
         return { snapshotId: 's', totalCount: 0, offset: 0, limit: 100, items: [] };
       }) as never,
     });

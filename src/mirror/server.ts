@@ -65,7 +65,9 @@ export async function startMirrorServer(
       return;
     }
 
-    const preferredPath = match.mirrorFile ? join(snapshot.mirrorRoot, match.mirrorFile) : undefined;
+    const preferredPath = match.mirrorFile
+      ? join(snapshot.mirrorRoot, match.mirrorFile)
+      : undefined;
     if (preferredPath && existsSync(preferredPath)) {
       response.sendFile(preferredPath);
       return;
@@ -76,9 +78,12 @@ export async function startMirrorServer(
       // Reflect only the trusted manifest route (match.route), never the raw
       // user-supplied URL, and force text/plain so the response can't be
       // interpreted as HTML (avoids reflected XSS).
-      response.status(500).type('text/plain').send(
-        `Archived source page is missing for route ${match.route}. Rebuild the mirror after relinking raw artifacts.`,
-      );
+      response
+        .status(500)
+        .type('text/plain')
+        .send(
+          `Archived source page is missing for route ${match.route}. Rebuild the mirror after relinking raw artifacts.`,
+        );
       return;
     }
 
