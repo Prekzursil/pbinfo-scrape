@@ -511,7 +511,7 @@ describe('desktop controller', () => {
     });
 
     expect(summary.normalizedRoot).toContain(
-      'archive\\snapshots\\acceptance-20260310b\\normalized',
+      join('archive', 'snapshots', 'acceptance-20260310b', 'normalized'),
     );
     expect(summary.datasets).toEqual(
       expect.arrayContaining([
@@ -760,7 +760,7 @@ describe('desktop controller', () => {
         missingTestsCaptureCount: 0,
         testsUnavailableUpstreamCount: 0,
         coverageRoot: expect.stringContaining(
-          'archive\\snapshots\\acceptance-20260310b\\normalized\\problem-coverage',
+          join('archive', 'snapshots', 'acceptance-20260310b', 'normalized', 'problem-coverage'),
         ),
       }),
     );

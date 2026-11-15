@@ -72,37 +72,43 @@ describe('normalizeImportedCookies', () => {
     ]);
   });
 
-  test('resolves the default Chromium profile paths for Edge and Chrome', () => {
-    const env = {
-      LOCALAPPDATA: 'C:\\Users\\Test\\AppData\\Local',
-    } as NodeJS.ProcessEnv;
+  // Windows-only by design: the resolver maps %LOCALAPPDATA% onto the Windows
+  // Edge/Chromium profile layout; on other platforms the same env resolves to
+  // a cwd-relative join instead, so the assertion encodes Windows semantics.
+  test.skipIf(process.platform !== 'win32')(
+    'resolves the default Chromium profile paths for Edge and Chrome',
+    () => {
+      const env = {
+        LOCALAPPDATA: 'C:\\Users\\Test\\AppData\\Local',
+      } as NodeJS.ProcessEnv;
 
-    expect(resolveChromiumProfile({ browser: 'edge' }, env)).toEqual({
-      browser: 'edge',
-      profileName: 'Default',
-      userDataDir: 'C:\\Users\\Test\\AppData\\Local\\Microsoft\\Edge\\User Data',
-      localStatePath: 'C:\\Users\\Test\\AppData\\Local\\Microsoft\\Edge\\User Data\\Local State',
-      cookiesDbPath:
-        'C:\\Users\\Test\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\Network\\Cookies',
-    });
+      expect(resolveChromiumProfile({ browser: 'edge' }, env)).toEqual({
+        browser: 'edge',
+        profileName: 'Default',
+        userDataDir: 'C:\\Users\\Test\\AppData\\Local\\Microsoft\\Edge\\User Data',
+        localStatePath: 'C:\\Users\\Test\\AppData\\Local\\Microsoft\\Edge\\User Data\\Local State',
+        cookiesDbPath:
+          'C:\\Users\\Test\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\Network\\Cookies',
+      });
 
-    expect(
-      resolveChromiumProfile(
-        {
-          browser: 'chrome',
-          profile: 'Profile 2',
-        },
-        env,
-      ),
-    ).toEqual({
-      browser: 'chrome',
-      profileName: 'Profile 2',
-      userDataDir: 'C:\\Users\\Test\\AppData\\Local\\Google\\Chrome\\User Data',
-      localStatePath: 'C:\\Users\\Test\\AppData\\Local\\Google\\Chrome\\User Data\\Local State',
-      cookiesDbPath:
-        'C:\\Users\\Test\\AppData\\Local\\Google\\Chrome\\User Data\\Profile 2\\Network\\Cookies',
-    });
-  });
+      expect(
+        resolveChromiumProfile(
+          {
+            browser: 'chrome',
+            profile: 'Profile 2',
+          },
+          env,
+        ),
+      ).toEqual({
+        browser: 'chrome',
+        profileName: 'Profile 2',
+        userDataDir: 'C:\\Users\\Test\\AppData\\Local\\Google\\Chrome\\User Data',
+        localStatePath: 'C:\\Users\\Test\\AppData\\Local\\Google\\Chrome\\User Data\\Local State',
+        cookiesDbPath:
+          'C:\\Users\\Test\\AppData\\Local\\Google\\Chrome\\User Data\\Profile 2\\Network\\Cookies',
+      });
+    },
+  );
 
   test('unwraps the Chromium master key from Local State via an injected DPAPI decryptor', async () => {
     const wrappedKey = Buffer.from('wrapped-master-key');
