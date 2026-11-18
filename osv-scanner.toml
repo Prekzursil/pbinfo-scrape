@@ -115,3 +115,21 @@ reason = "tinypool 1.1.1 is vitest 3's worker pool (dev scope only); its fixes s
 id = "GHSA-85c8-ppgw-ccpr"
 ignoreUntil = 2027-01-25
 reason = "tinypool 1.1.1 is vitest 3's worker pool (dev scope only); its fixes ship only in tinypool 2.x, delivered by the vitest 4 migration. Tracked separately; see osv-scanner.toml comments."
+
+# ---------------------------------------------------------------------------
+# 2026-11-18 RESIDUAL RISK (reasoned ignore) — GHSA-fc5q-39xc-vjpf, picomatch
+# ReDoS (CVSS v3 7.5 / v4 8.7, availability-only). Vulnerable range <= 4.0.7
+# and 4.0.7 IS the newest published release (measured 2026-11-18 via
+# `npm view picomatch versions`), so no fixed release exists to upgrade to.
+# Scope: dev toolchain (vite/vitest family) lockfiles only; never shipped.
+# RE-CHECK: retire the day a patched picomatch (> 4.0.7) publishes.
+[[IgnoredVulns]]
+id = "GHSA-fc5q-39xc-vjpf"
+ignoreUntil = 2027-02-18
+reason = """
+picomatch ReDoS; every published release is vulnerable (<= 4.0.7 = latest
+published, measured 2026-11-18), so no upgrade exists. Dev toolchain
+(vite/vitest) lockfiles only, never shipped; availability-only impact.
+Retire as soon as a patched picomatch publishes.
+"""
+
